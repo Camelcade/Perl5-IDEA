@@ -10,6 +10,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.lexer.PerlElementType;
 import com.perl5.lang.lexer.PerlLexer;
+import com.perl5.lang.lexer.PerlLexerPorted;
 import com.perl5.lang.parser.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
@@ -24,7 +25,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey KEY = createTextAttributesKey("SIMPLE_KEY", SyntaxHighlighterColors.KEYWORD);
 	public static final TextAttributesKey VALUE = createTextAttributesKey("SIMPLE_VALUE", SyntaxHighlighterColors.STRING);
 	public static final TextAttributesKey COMMENT = createTextAttributesKey("SIMPLE_COMMENT", SyntaxHighlighterColors.LINE_COMMENT);
-	public static final TextAttributesKey PERL_FUNCTION = createTextAttributesKey("PERL_FUNCTION", SyntaxHighlighterColors. ); //HighlightInfoType.METHOD_CALL.getAttributesKey()
+	public static final TextAttributesKey PERL_FUNCTION = createTextAttributesKey("PERL_FUNCTION", SyntaxHighlighterColors.STRING ); //HighlightInfoType.METHOD_CALL.getAttributesKey()
 
 	static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("SIMPLE_BAD_CHARACTER",
 			new TextAttributes(Color.RED, null, null, null, Font.BOLD));
@@ -40,7 +41,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
-		return new FlexAdapter(new PerlLexer((Reader) null));
+		return new FlexAdapter(new PerlLexerPorted((Reader) null));
 	}
 
 	@NotNull

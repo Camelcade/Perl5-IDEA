@@ -19,6 +19,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.PerlFileType;
 import com.perl5.PerlLanguage;
 import com.perl5.lang.lexer.PerlLexer;
+import com.perl5.lang.lexer.PerlLexerPorted;
 import com.perl5.lang.lexer.PerlTokenTypes;
 import com.perl5.lang.psi.PerlFile;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +37,7 @@ public class PerlParserDefinition implements ParserDefinition{
 	@NotNull
 	@Override
 	public Lexer createLexer(Project project) {
-		return new FlexAdapter(new PerlLexer((Reader) null));
+		return new FlexAdapter(new PerlLexerPorted((Reader) null));
 	}
 
 	@NotNull

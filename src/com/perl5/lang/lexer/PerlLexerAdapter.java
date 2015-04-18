@@ -9,6 +9,6 @@ import java.io.Reader;
 
 public class PerlLexerAdapter extends FlexAdapter {
 	public PerlLexerAdapter() {
-		super(new PerlLexer((Reader) null));
+		super(new PerlLexerPorted((Reader) null));
 	}
 }
