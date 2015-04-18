@@ -1,7 +1,8 @@
-package com.perl5.lang.lexer;
+package com.perl5.lang.lexer.ported;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.lexer.PerlTokenTypes;
 
 import java.io.IOException;
 
@@ -10,7 +11,7 @@ import java.io.IOException;
  * Attempt to port toke.c from perl 5.21.6
  * Cloned from JFlex generated PerlLexer
  */
-public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPortedLexicalStates, PerlLexerPortedKeywords
+public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 {
 	/* error messages for the codes above */
 	private static final String ZZ_ERROR_MSG[] = {
@@ -26,9 +27,6 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 	private static final char[] EMPTY_BUFFER = new char[0];
 	private static final int YYEOF = -1;
 
-	private int currentLexState = LEX_NORMAL;
-	private int deferredLexState = LEX_NORMAL;
-
 	private CharSequence sequenceBuffer = "";
 	private char[] charactersBuffer;
 
@@ -41,7 +39,10 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 	private int tokenEnd;	// char index of first char after token's end
 
 	private static java.io.Reader zzReader = null; // Fake
-	public PerlLexerPorted(java.io.Reader in)
+
+	private com.perl5.lang.lexer.ported.Parser PL_parser;	// in toke.c it seems local variable, current parser
+
+	public Toke(java.io.Reader in)
 	{
 		zzReader = in;
 	}
@@ -52,7 +53,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 	 *
 	 * @param   in  the java.io.Inputstream to read input from.
 	 */
-	public PerlLexerPorted(java.io.InputStream in) {
+	public Toke(java.io.InputStream in) {
 		this(new java.io.InputStreamReader(in));
 	}
 
@@ -60,13 +61,13 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 	@Override
 	public void yybegin(int state)
 	{
-		currentLexState = state;
+		PL_parser.lex_state = state;
 	}
 
 	@Override
 	public int yystate()
 	{
-		return currentLexState;
+		return PL_parser.lex_state;
 	}
 
 	@Override
@@ -200,100 +201,100 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 
 	public void stateCase()
 	{
-//		switch (currentLexState) {
+//		switch (PL_parser.lex_state) {
 //			case LEX_NORMAL:
 //			case LEX_INTERPNORMAL:
 //				break;
 //
 //    /* when we've already built the next token, just pull it out of the queue */
 //			case LEX_KNOWNEXT:
-//				PL_nexttoke--;
-//				pl_yylval = PL_nextval[PL_nexttoke];
-//				if (!PL_nexttoke) {
-//					currentLexState = deferredLexState;
-//					deferredLexState = LEX_NORMAL;
+//				PL_parser.nexttoke--;
+//				PL_parser.yylval = PL_parser.nextval[PL_parser.nexttoke];
+//				if (!PL_parser.nexttoke) {
+//					PL_parser.lex_state = PL_parser.lex_defer;
+//					PL_parser.lex_defer = LEX_NORMAL;
 //				}
 //			{
-//				I32 next_type;
-//				next_type = PL_nexttype[PL_nexttoke];
+//				private int next_type;
+//				next_type = PL_parser.nexttype[PL_parser.nexttoke];
 //				if (next_type & (7<<24)) {
 //					if (next_type & (1<<24)) {
-//						if (PL_lex_brackets > 100)
-//							Renew(PL_lex_brackstack, PL_lex_brackets + 10, char);
-//						PL_lex_brackstack[PL_lex_brackets++] =
+//						if (PL_parser.lex_brackets > 100)
+//							Renew(PL_parser.lex_brackstack, PL_parser.lex_brackets + 10, char);
+//						PL_parser.lex_brackstack[PL_parser.lex_brackets++] =
 //								(char) ((next_type >> 16) & 0xff);
 //					}
 //					if (next_type & (2<<24))
-//						PL_lex_allbrackets++;
+//						PL_parser.lex_allbrackets++;
 //					if (next_type & (4<<24))
-//						PL_lex_allbrackets--;
+//						PL_parser.lex_allbrackets--;
 //					next_type &= 0xffff;
 //				}
 //				return REPORT(next_type == 'p' ? pending_ident() : next_type);
 //			}
 //
 //    /* interpolated case modifiers like \L \U, including \Q and \E.
-//       when we get here, PL_bufptr is at the \
+//       when we get here, PL_parser.bufptr is at the \
 //    */
 //			case LEX_INTERPCASEMOD:
 //				#ifdef DEBUGGING
-//				if (PL_bufptr != PL_bufend && *PL_bufptr != '\\')
+//				if (PL_parser.bufptr != PL_parser.bufend && *PL_parser.bufptr != '\\')
 //				Perl_croak(aTHX_
 //						"panic: INTERPCASEMOD bufptr=%p, bufend=%p, *bufptr=%u",
-//						PL_bufptr, PL_bufend, *PL_bufptr);
+//						PL_parser.bufptr, PL_parser.bufend, *PL_parser.bufptr);
 //				#endif
 //	/* handle \E or end of string */
-//				if (PL_bufptr == PL_bufend || PL_bufptr[1] == 'E') {
+//				if (PL_parser.bufptr == PL_parser.bufend || PL_parser.bufptr[1] == 'E') {
 //	    /* if at a \E */
-//					if (PL_lex_casemods) {
-//						const char oldmod = PL_lex_casestack[--PL_lex_casemods];
-//						PL_lex_casestack[PL_lex_casemods] = '\0';
+//					if (PL_parser.lex_casemods) {
+//						const char oldmod = PL_parser.lex_casestack[--PL_parser.lex_casemods];
+//						PL_parser.lex_casestack[PL_parser.lex_casemods] = '\0';
 //
-//						if (PL_bufptr != PL_bufend
+//						if (PL_parser.bufptr != PL_parser.bufend
 //								&& (oldmod == 'L' || oldmod == 'U' || oldmod == 'Q'
 //								|| oldmod == 'F')) {
-//							PL_bufptr += 2;
-//							currentLexState = LEX_INTERPCONCAT;
+//							PL_parser.bufptr += 2;
+//							PL_parser.lex_state = LEX_INTERPCONCAT;
 //						}
-//						PL_lex_allbrackets--;
+//						PL_parser.lex_allbrackets--;
 //						return REPORT(')');
 //					}
-//					else if ( PL_bufptr != PL_bufend && PL_bufptr[1] == 'E' ) {
+//					else if ( PL_parser.bufptr != PL_parser.bufend && PL_parser.bufptr[1] == 'E' ) {
 //               /* Got an unpaired \E */
 //						Perl_ck_warner(aTHX_ packWARN(WARN_MISC),
 //								"Useless use of \\E");
 //					}
-//					if (PL_bufptr != PL_bufend)
-//						PL_bufptr += 2;
-//					currentLexState = LEX_INTERPCONCAT;
+//					if (PL_parser.bufptr != PL_parser.bufend)
+//						PL_parser.bufptr += 2;
+//					PL_parser.lex_state = LEX_INTERPCONCAT;
 //					return yylex();
 //				}
 //				else {
 //					DEBUG_T({ PerlIO_printf(Perl_debug_log,
 //							"### Saw case modifier\n"); });
-//					s = PL_bufptr + 1;
+//					s = PL_parser.bufptr + 1;
 //					if (s[1] == '\\' && s[2] == 'E') {
-//						PL_bufptr = s + 3;
-//						currentLexState = LEX_INTERPCONCAT;
+//						PL_parser.bufptr = s + 3;
+//						PL_parser.lex_state = LEX_INTERPCONCAT;
 //						return yylex();
 //					}
 //					else {
-//						I32 tmp;
+//						private int tmp;
 //						if (strnEQ(s, "L\\u", 3) || strnEQ(s, "U\\l", 3))
 //							tmp = *s, *s = s[2], s[2] = (char)tmp;	/* misordered... */
 //						if ((*s == 'L' || *s == 'U' || *s == 'F') &&
-//						(strchr(PL_lex_casestack, 'L')
-//								|| strchr(PL_lex_casestack, 'U')
-//								|| strchr(PL_lex_casestack, 'F'))) {
-//							PL_lex_casestack[--PL_lex_casemods] = '\0';
-//							PL_lex_allbrackets--;
+//						(strchr(PL_parser.lex_casestack, 'L')
+//								|| strchr(PL_parser.lex_casestack, 'U')
+//								|| strchr(PL_parser.lex_casestack, 'F'))) {
+//							PL_parser.lex_casestack[--PL_parser.lex_casemods] = '\0';
+//							PL_parser.lex_allbrackets--;
 //							return REPORT(')');
 //						}
-//						if (PL_lex_casemods > 10)
-//							Renew(PL_lex_casestack, PL_lex_casemods + 2, char);
-//						PL_lex_casestack[PL_lex_casemods++] = *s;
-//						PL_lex_casestack[PL_lex_casemods] = '\0';
-//						currentLexState = LEX_INTERPCONCAT;
+//						if (PL_parser.lex_casemods > 10)
+//							Renew(PL_parser.lex_casestack, PL_parser.lex_casemods + 2, char);
+//						PL_parser.lex_casestack[PL_parser.lex_casemods++] = *s;
+//						PL_parser.lex_casestack[PL_parser.lex_casemods] = '\0';
+//						PL_parser.lex_state = LEX_INTERPCONCAT;
 //						NEXTVAL_NEXTTOKE.ival = 0;
 //						force_next((2<<24)|'(');
 //						if (*s == 'l')
@@ -310,14 +311,14 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						NEXTVAL_NEXTTOKE.ival = OP_FC;
 //						else
 //						Perl_croak(aTHX_ "panic: yylex, *s=%u", *s);
-//						PL_bufptr = s + 1;
+//						PL_parser.bufptr = s + 1;
 //					}
 //					force_next(FUNC);
-//					if (PL_lex_starts) {
-//						s = PL_bufptr;
-//						PL_lex_starts = 0;
+//					if (PL_parser.lex_starts) {
+//						s = PL_parser.bufptr;
+//						PL_parser.lex_starts = 0;
 //		/* commas only at base level: /$a\Ub$c/ => ($a,uc(b.$c)) */
-//						if (PL_lex_casemods == 1 && PL_lex_inpat)
+//						if (PL_parser.lex_casemods == 1 && PL_parser.lex_inpat)
 //							TOKEN(',');
 //						else
 //							AopNOASSIGN(OP_CONCAT);
@@ -330,17 +331,17 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				return REPORT(sublex_push());
 //
 //			case LEX_INTERPSTART:
-//				if (PL_bufptr == PL_bufend)
+//				if (PL_parser.bufptr == PL_parser.bufend)
 //					return REPORT(sublex_done());
-//				DEBUG_T({ if(*PL_bufptr != '(') PerlIO_printf(Perl_debug_log,
+//				DEBUG_T({ if(*PL_parser.bufptr != '(') PerlIO_printf(Perl_debug_log,
 //					"### Interpolated variable\n"); });
-//				PL_expect = XTERM;
+//				PL_parser.expect = XTERM;
 //        /* for /@a/, we leave the joining for the regex engine to do
 //         * (unless we're within \Q etc) */
-//				PL_lex_dojoin = (*PL_bufptr == '@'
-//						&& (!PL_lex_inpat || PL_lex_casemods));
-//				currentLexState = LEX_INTERPNORMAL;
-//				if (PL_lex_dojoin) {
+//				PL_parser.lex_dojoin = (*PL_parser.bufptr == '@'
+//						&& (!PL_parser.lex_inpat || PL_parser.lex_casemods));
+//				PL_parser.lex_state = LEX_INTERPNORMAL;
+//				if (PL_parser.lex_dojoin) {
 //					NEXTVAL_NEXTTOKE.ival = 0;
 //					force_next(',');
 //					force_ident("\"", '$');
@@ -352,19 +353,19 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //					force_next(FUNC);
 //				}
 //	/* Convert (?{...}) and friends to 'do {...}' */
-//				if (PL_lex_inpat && *PL_bufptr == '(') {
-//				PL_parser->lex_shared->re_eval_start = PL_bufptr;
-//				PL_bufptr += 2;
-//				if (*PL_bufptr != '{')
-//				PL_bufptr++;
-//				PL_expect = XTERMBLOCK;
+//				if (PL_parser.lex_inpat && *PL_parser.bufptr == '(') {
+//				PL_parser.lex_shared->re_eval_start = PL_parser.bufptr;
+//				PL_parser.bufptr += 2;
+//				if (*PL_parser.bufptr != '{')
+//				PL_parser.bufptr++;
+//				PL_parser.expect = XTERMBLOCK;
 //				force_next(DO);
 //			}
 //
-//			if (PL_lex_starts++) {
-//				s = PL_bufptr;
+//			if (PL_parser.lex_starts++) {
+//				s = PL_parser.bufptr;
 //	    /* commas only at base level: /$a\Ub$c/ => ($a,uc(b.$c)) */
-//				if (!PL_lex_casemods && PL_lex_inpat)
+//				if (!PL_parser.lex_casemods && PL_parser.lex_inpat)
 //					TOKEN(',');
 //				else
 //					AopNOASSIGN(OP_CONCAT);
@@ -372,108 +373,108 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			return yylex();
 //
 //			case LEX_INTERPENDMAYBE:
-//				if (intuit_more(PL_bufptr)) {
-//					currentLexState = LEX_INTERPNORMAL;	/* false alarm, more expr */
+//				if (intuit_more(PL_parser.bufptr)) {
+//					PL_parser.lex_state = LEX_INTERPNORMAL;	/* false alarm, more expr */
 //					break;
 //				}
 //	/* FALLTHROUGH */
 //
 //			case LEX_INTERPEND:
-//				if (PL_lex_dojoin) {
-//					const U8 dojoin_was = PL_lex_dojoin;
-//					PL_lex_dojoin = FALSE;
-//					currentLexState = LEX_INTERPCONCAT;
-//					PL_lex_allbrackets--;
+//				if (PL_parser.lex_dojoin) {
+//					const private int dojoin_was = PL_parser.lex_dojoin;
+//					PL_parser.lex_dojoin = FALSE;
+//					PL_parser.lex_state = LEX_INTERPCONCAT;
+//					PL_parser.lex_allbrackets--;
 //					return REPORT(dojoin_was == 1 ? ')' : POSTJOIN);
 //				}
-//				if (PL_lex_inwhat == OP_SUBST && PL_linestr == PL_lex_repl
-//						&& SvEVALED(PL_lex_repl))
+//				if (PL_parser.lex_inwhat == OP_SUBST && PL_parser.linestr == PL_parser.lex_repl
+//						&& SvEVALED(PL_parser.lex_repl))
 //				{
-//					if (PL_bufptr != PL_bufend)
+//					if (PL_parser.bufptr != PL_parser.bufend)
 //						Perl_croak(aTHX_ "Bad evalled substitution pattern");
-//					PL_lex_repl = NULL;
+//					PL_parser.lex_repl = NULL;
 //				}
 //	/* Paranoia.  re_eval_start is adjusted when S_scan_heredoc sets
 //	   re_eval_str.  If the here-doc body’s length equals the previous
 //	   value of re_eval_start, re_eval_start will now be null.  So
 //	   check re_eval_str as well. */
-//				if (PL_parser->lex_shared->re_eval_start
-//						|| PL_parser->lex_shared->re_eval_str) {
+//				if (PL_parser.lex_shared->re_eval_start
+//						|| PL_parser.lex_shared->re_eval_str) {
 //					SV *sv;
-//					if (*PL_bufptr != ')')
+//					if (*PL_parser.bufptr != ')')
 //					Perl_croak(aTHX_ "Sequence (?{...}) not terminated with ')'");
-//					PL_bufptr++;
+//					PL_parser.bufptr++;
 //	    /* having compiled a (?{..}) expression, return the original
 //	     * text too, as a const */
-//					if (PL_parser->lex_shared->re_eval_str) {
-//						sv = PL_parser->lex_shared->re_eval_str;
-//						PL_parser->lex_shared->re_eval_str = NULL;
+//					if (PL_parser.lex_shared->re_eval_str) {
+//						sv = PL_parser.lex_shared->re_eval_str;
+//						PL_parser.lex_shared->re_eval_str = NULL;
 //						SvCUR_set(sv,
-//								PL_bufptr - PL_parser->lex_shared->re_eval_start);
+//								PL_parser.bufptr - PL_parser.lex_shared->re_eval_start);
 //						SvPV_shrink_to_cur(sv);
 //					}
-//					else sv = newSVpvn(PL_parser->lex_shared->re_eval_start,
-//							PL_bufptr - PL_parser->lex_shared->re_eval_start);
+//					else sv = newSVpvn(PL_parser.lex_shared->re_eval_start,
+//							PL_parser.bufptr - PL_parser.lex_shared->re_eval_start);
 //					NEXTVAL_NEXTTOKE.opval =
 //							(OP*)newSVOP(OP_CONST, 0,
 //							sv);
 //					force_next(THING);
-//					PL_parser->lex_shared->re_eval_start = NULL;
-//					PL_expect = XTERM;
+//					PL_parser.lex_shared->re_eval_start = NULL;
+//					PL_parser.expect = XTERM;
 //					return REPORT(',');
 //				}
 //
 //	/* FALLTHROUGH */
 //			case LEX_INTERPCONCAT:
 //				#ifdef DEBUGGING
-//				if (PL_lex_brackets)
+//				if (PL_parser.lex_brackets)
 //					Perl_croak(aTHX_ "panic: INTERPCONCAT, lex_brackets=%ld",
-//							(long) PL_lex_brackets);
+//							(long) PL_parser.lex_brackets);
 //				#endif
-//				if (PL_bufptr == PL_bufend)
+//				if (PL_parser.bufptr == PL_parser.bufend)
 //					return REPORT(sublex_done());
 //
 //	/* m'foo' still needs to be parsed for possible (?{...}) */
-//				if (SvIVX(PL_linestr) == '\'' && !PL_lex_inpat) {
-//					SV *sv = newSVsv(PL_linestr);
+//				if (SvIVX(PL_parser.linestr) == '\'' && !PL_parser.lex_inpat) {
+//					SV *sv = newSVsv(PL_parser.linestr);
 //					sv = tokeq(sv);
-//					pl_yylval.opval = (OP*)newSVOP(OP_CONST, 0, sv);
-//					s = PL_bufend;
+//					PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0, sv);
+//					s = PL_parser.bufend;
 //				}
 //				else {
-//					s = scan_const(PL_bufptr);
+//					s = scan_const(PL_parser.bufptr);
 //					if (*s == '\\')
-//					currentLexState = LEX_INTERPCASEMOD;
+//					PL_parser.lex_state = LEX_INTERPCASEMOD;
 //					else
-//					currentLexState = LEX_INTERPSTART;
+//					PL_parser.lex_state = LEX_INTERPSTART;
 //				}
 //
-//				if (s != PL_bufptr) {
-//					NEXTVAL_NEXTTOKE = pl_yylval;
-//					PL_expect = XTERM;
+//				if (s != PL_parser.bufptr) {
+//					NEXTVAL_NEXTTOKE = PL_parser.yylval;
+//					PL_parser.expect = XTERM;
 //					force_next(THING);
-//					if (PL_lex_starts++) {
+//					if (PL_parser.lex_starts++) {
 //		/* commas only at base level: /$a\Ub$c/ => ($a,uc(b.$c)) */
-//						if (!PL_lex_casemods && PL_lex_inpat)
+//						if (!PL_parser.lex_casemods && PL_parser.lex_inpat)
 //							TOKEN(',');
 //						else
 //							AopNOASSIGN(OP_CONCAT);
 //					}
 //					else {
-//						PL_bufptr = s;
+//						PL_parser.bufptr = s;
 //						return yylex();
 //					}
 //				}
 //
 //				return yylex();
 //			case LEX_FORMLINE:
-//				s = scan_formline(PL_bufptr);
-//				if (!PL_lex_formbrack)
+//				s = scan_formline(PL_parser.bufptr);
+//				if (!PL_parser.lex_formbrack)
 //				{
 //					formbrack = 1;
 //					goto rightbracket;
 //				}
-//				PL_bufptr = s;
+//				PL_parser.bufptr = s;
 //				return yylex();
 //		}
 		
@@ -485,7 +486,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		retry:
 //		switch (*s) {
 //		default:
-//			if (UTF ? isIDFIRST_utf8((U8*)s) : isALNUMC(*s))
+//			if (UTF ? isIDFIRST_utf8((private int*)s) : isALNUMC(*s))
 //			goto keylookup;
 //		{
 //			SV *dsv = newSVpvs_flags("", SVs_TEMP);
@@ -494,11 +495,11 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						SVs_TEMP | SVf_UTF8),
 //				10, UNI_DISPLAY_ISPRINT)
 //				: Perl_form(aTHX_ "\\x%02X", (unsigned char)*s);
-//			len = UTF ? Perl_utf8_length(aTHX_ (U8 *) PL_linestart, (U8 *) s) : (STRLEN) (s - PL_linestart);
+//			len = UTF ? Perl_utf8_length(aTHX_ (private int *) PL_parser.linestart, (private int *) s) : (STRLEN) (s - PL_parser.linestart);
 //			if (len > UNRECOGNIZED_PRECEDE_COUNT) {
-//				d = UTF ? (char *) utf8_hop((U8 *) s, -UNRECOGNIZED_PRECEDE_COUNT) : s - UNRECOGNIZED_PRECEDE_COUNT;
+//				d = UTF ? (char *) utf8_hop((private int *) s, -UNRECOGNIZED_PRECEDE_COUNT) : s - UNRECOGNIZED_PRECEDE_COUNT;
 //			} else {
-//				d = PL_linestart;
+//				d = PL_parser.linestart;
 //			}
 //			Perl_croak(aTHX_  "Unrecognized character %s; marked by <-- HERE after %"UTF8f"<-- HERE near column %d", c,
 //					UTF8fARG(UTF, (s - d), d),
@@ -508,13 +509,13 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		case 26:
 //			goto fake_eof;			// emulate EOF on ^D or ^Z
 //		case 0:
-//			if (!PL_rsfp && (!PL_parser->filtered || s+1 < PL_bufend)) {
-//				PL_last_uni = 0;
-//				PL_last_lop = 0;
-//				if (PL_lex_brackets &&
-//						PL_lex_brackstack[PL_lex_brackets-1] != XFAKEEOF) {
+//			if (!PL_parser.rsfp && (!PL_parser.filtered || s+1 < PL_parser.bufend)) {
+//				PL_parser.last_uni = 0;
+//				PL_parser.last_lop = 0;
+//				if (PL_parser.lex_brackets &&
+//						PL_parser.lex_brackstack[PL_parser.lex_brackets-1] != XFAKEEOF) {
 //					yyerror((const char *)
-//					(PL_lex_formbrack
+//					(PL_parser.lex_formbrack
 //							? "Format not terminated"
 //							: "Missing right curly or square bracket"));
 //				}
@@ -523,12 +524,12 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				} );
 //				TOKEN(0);
 //			}
-//			if (s++ < PL_bufend)
+//			if (s++ < PL_parser.bufend)
 //			goto retry;			/* ignore stray nulls */
-//			PL_last_uni = 0;
-//			PL_last_lop = 0;
-//			if (!PL_in_eval && !PL_preambled) {
-//				PL_preambled = TRUE;
+//			PL_parser.last_uni = 0;
+//			PL_parser.last_lop = 0;
+//			if (!PL_in_eval && !PL_parser.preambled) {
+//				PL_parser.preambled = TRUE;
 //				if (PL_perldb) {
 //		/* Generate a string of Perl code to load the debugger.
 //		 * If PERL5DB is set, it will return the contents of that,
@@ -537,121 +538,121 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //					const char * const pdb = PerlEnv_getenv("PERL5DB");
 //
 //					if (pdb) {
-//						sv_setpv(PL_linestr, pdb);
-//						sv_catpvs(PL_linestr,";");
+//						sv_setpv(PL_parser.linestr, pdb);
+//						sv_catpvs(PL_parser.linestr,";");
 //					} else {
 //						SETERRNO(0,SS_NORMAL);
-//						sv_setpvs(PL_linestr, "BEGIN { require 'perl5db.pl' };");
+//						sv_setpvs(PL_parser.linestr, "BEGIN { require 'perl5db.pl' };");
 //					}
-//					PL_parser->preambling = CopLINE(PL_curcop);
+//					PL_parser.preambling = CopLINE(PL_curcop);
 //				} else
-//					sv_setpvs(PL_linestr,"");
+//					sv_setpvs(PL_parser.linestr,"");
 //				if (PL_preambleav) {
 //					SV **svp = AvARRAY(PL_preambleav);
 //					SV **const end = svp + AvFILLp(PL_preambleav);
 //					while(svp <= end) {
-//						sv_catsv(PL_linestr, *svp);
+//						sv_catsv(PL_parser.linestr, *svp);
 //						++svp;
-//						sv_catpvs(PL_linestr, ";");
+//						sv_catpvs(PL_parser.linestr, ";");
 //					}
 //					sv_free(MUTABLE_SV(PL_preambleav));
 //					PL_preambleav = NULL;
 //				}
 //				if (PL_minus_E)
-//					sv_catpvs(PL_linestr,
+//					sv_catpvs(PL_parser.linestr,
 //							"use feature ':5." STRINGIFY(PERL_VERSION) "';");
 //				if (PL_minus_n || PL_minus_p) {
-//					sv_catpvs(PL_linestr, "LINE: while (<>) {"/*}*/);
+//					sv_catpvs(PL_parser.linestr, "LINE: while (<>) {"/*}*/);
 //					if (PL_minus_l)
-//						sv_catpvs(PL_linestr,"chomp;");
+//						sv_catpvs(PL_parser.linestr,"chomp;");
 //					if (PL_minus_a) {
 //						if (PL_minus_F) {
 //							if ((*PL_splitstr == '/' || *PL_splitstr == '\''
 //									|| *PL_splitstr == '"')
 //							&& strchr(PL_splitstr + 1, *PL_splitstr))
-//							Perl_sv_catpvf(aTHX_ PL_linestr, "our @F=split(%s);", PL_splitstr);
+//							Perl_sv_catpvf(aTHX_ PL_parser.linestr, "our @F=split(%s);", PL_splitstr);
 //							else {
 //			    /* "q\0${splitstr}\0" is legal perl. Yes, even NUL
 //			       bytes can be used as quoting characters.  :-) */
 //								const char *splits = PL_splitstr;
-//								sv_catpvs(PL_linestr, "our @F=split(q\0");
+//								sv_catpvs(PL_parser.linestr, "our @F=split(q\0");
 //								do {
 //				/* Need to \ \s  */
 //									if (*splits == '\\')
-//									sv_catpvn(PL_linestr, splits, 1);
-//									sv_catpvn(PL_linestr, splits, 1);
+//									sv_catpvn(PL_parser.linestr, splits, 1);
+//									sv_catpvn(PL_parser.linestr, splits, 1);
 //								} while (*splits++);
 //			    /* This loop will embed the trailing NUL of
-//			       PL_linestr as the last thing it does before
+//			       PL_parser.linestr as the last thing it does before
 //			       terminating.  */
-//								sv_catpvs(PL_linestr, ");");
+//								sv_catpvs(PL_parser.linestr, ");");
 //							}
 //						}
 //						else
-//							sv_catpvs(PL_linestr,"our @F=split(' ');");
+//							sv_catpvs(PL_parser.linestr,"our @F=split(' ');");
 //					}
 //				}
-//				sv_catpvs(PL_linestr, "\n");
-//				PL_oldoldbufptr = PL_oldbufptr = s = PL_linestart = SvPVX(PL_linestr);
-//				PL_bufend = SvPVX(PL_linestr) + SvCUR(PL_linestr);
-//				PL_last_lop = PL_last_uni = NULL;
+//				sv_catpvs(PL_parser.linestr, "\n");
+//				PL_parser.oldoldbufptr = PL_parser.oldbufptr = s = PL_parser.linestart = SvPVX(PL_parser.linestr);
+//				PL_parser.bufend = SvPVX(PL_parser.linestr) + SvCUR(PL_parser.linestr);
+//				PL_parser.last_lop = PL_parser.last_uni = NULL;
 //				if ((PERLDB_LINE || PERLDB_SAVESRC) && PL_curstash != PL_debstash)
-//					update_debugger_info(PL_linestr, NULL, 0);
+//					update_debugger_info(PL_parser.linestr, NULL, 0);
 //				goto retry;
 //			}
 //			do {
 //				fake_eof = 0;
-//				bof = PL_rsfp ? TRUE : FALSE;
+//				bof = PL_parser.rsfp ? TRUE : FALSE;
 //				if (0) {
 //					fake_eof:
 //					fake_eof = LEX_FAKE_EOF;
 //				}
-//				PL_bufptr = PL_bufend;
+//				PL_parser.bufptr = PL_parser.bufend;
 //				COPLINE_INC_WITH_HERELINES;
 //				if (!lex_next_chunk(fake_eof)) {
 //					CopLINE_dec(PL_curcop);
-//					s = PL_bufptr;
+//					s = PL_parser.bufptr;
 //					TOKEN(';');	/* not infinite loop because rsfp is NULL now */
 //				}
 //				CopLINE_dec(PL_curcop);
-//				s = PL_bufptr;
+//				s = PL_parser.bufptr;
 //	    /* If it looks like the start of a BOM or raw UTF-16,
 //	     * check if it in fact is. */
-//				if (bof && PL_rsfp &&
+//				if (bof && PL_parser.rsfp &&
 //						(*s == 0 ||
-//				*(U8*)s == BOM_UTF8_FIRST_BYTE ||
-//				*(U8*)s >= 0xFE ||
+//				*(private int*)s == BOM_UTF8_FIRST_BYTE ||
+//				*(private int*)s >= 0xFE ||
 //						s[1] == 0)) {
-//					Off_t offset = (IV)PerlIO_tell(PL_rsfp);
-//					bof = (offset == (Off_t)SvCUR(PL_linestr));
+//					Off_t offset = (IV)PerlIO_tell(PL_parser.rsfp);
+//					bof = (offset == (Off_t)SvCUR(PL_parser.linestr));
 //					#if defined(PERLIO_USING_CRLF) && defined(PERL_TEXTMODE_SCRIPTS)
 //		/* offset may include swallowed CR */
 //					if (!bof)
-//						bof = (offset == (Off_t)SvCUR(PL_linestr)+1);
+//						bof = (offset == (Off_t)SvCUR(PL_parser.linestr)+1);
 //					#endif
 //					if (bof) {
-//						PL_bufend = SvPVX(PL_linestr) + SvCUR(PL_linestr);
-//						s = swallow_bom((U8*)s);
+//						PL_parser.bufend = SvPVX(PL_parser.linestr) + SvCUR(PL_parser.linestr);
+//						s = swallow_bom((private int*)s);
 //					}
 //				}
-//				if (PL_parser->in_pod) {
+//				if (PL_parser.in_pod) {
 //		/* Incest with pod. */
 //					if (*s == '=' && strnEQ(s, "=cut", 4) && !isALPHA(s[4])) {
-//						sv_setpvs(PL_linestr, "");
-//						PL_oldoldbufptr = PL_oldbufptr = s = PL_linestart = SvPVX(PL_linestr);
-//						PL_bufend = SvPVX(PL_linestr) + SvCUR(PL_linestr);
-//						PL_last_lop = PL_last_uni = NULL;
-//						PL_parser->in_pod = 0;
+//						sv_setpvs(PL_parser.linestr, "");
+//						PL_parser.oldoldbufptr = PL_parser.oldbufptr = s = PL_parser.linestart = SvPVX(PL_parser.linestr);
+//						PL_parser.bufend = SvPVX(PL_parser.linestr) + SvCUR(PL_parser.linestr);
+//						PL_parser.last_lop = PL_parser.last_uni = NULL;
+//						PL_parser.in_pod = 0;
 //					}
 //				}
-//				if (PL_rsfp || PL_parser->filtered)
+//				if (PL_parser.rsfp || PL_parser.filtered)
 //					incline(s);
-//			} while (PL_parser->in_pod);
-//			PL_oldoldbufptr = PL_oldbufptr = PL_bufptr = PL_linestart = s;
-//			PL_bufend = SvPVX(PL_linestr) + SvCUR(PL_linestr);
-//			PL_last_lop = PL_last_uni = NULL;
+//			} while (PL_parser.in_pod);
+//			PL_parser.oldoldbufptr = PL_parser.oldbufptr = PL_parser.bufptr = PL_parser.linestart = s;
+//			PL_parser.bufend = SvPVX(PL_parser.linestr) + SvCUR(PL_parser.linestr);
+//			PL_parser.last_lop = PL_parser.last_uni = NULL;
 //			if (CopLINE(PL_curcop) == 1) {
-//				while (s < PL_bufend && isSPACE(*s))
+//				while (s < PL_parser.bufend && isSPACE(*s))
 //				s++;
 //				if (*s == ':' && s[1] != ':') /* for csh execing sh scripts */
 //				s++;
@@ -771,12 +772,12 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //						*ipathend = '\0';
 //						s = ipathend + 1;
-//						while (s < PL_bufend && isSPACE(*s))
+//						while (s < PL_parser.bufend && isSPACE(*s))
 //						s++;
-//						if (s < PL_bufend) {
+//						if (s < PL_parser.bufend) {
 //							Newx(newargv,PL_origargc+3,char*);
 //							newargv[1] = s;
-//							while (s < PL_bufend && !isSPACE(*s))
+//							while (s < PL_parser.bufend && !isSPACE(*s))
 //							s++;
 //							*s = '\0';
 //							Copy(PL_origargv+1, newargv+2, PL_origargc+1, char*);
@@ -796,14 +797,14 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						d++;
 //
 //						if (*d++ == '-') {
-//							const bool switches_done = PL_doswitches;
+//							const boolean switches_done = PL_doswitches;
 //							const U32 oldpdb = PL_perldb;
-//							const bool oldn = PL_minus_n;
-//							const bool oldp = PL_minus_p;
+//							const boolean oldn = PL_minus_n;
+//							const boolean oldp = PL_minus_p;
 //							const char *d1 = d;
 //
 //							do {
-//								bool baduni = FALSE;
+//								boolean baduni = FALSE;
 //								if (*d1 == 'C') {
 //									const char *d2 = d1 + 1;
 //									if (parse_unicode_opts((const char **)&d2)
@@ -832,11 +833,11 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			      /* if we have already added "LINE: while (<>) {",
 //			         we must not do it again */
 //							{
-//								sv_setpvs(PL_linestr, "");
-//								PL_oldoldbufptr = PL_oldbufptr = s = PL_linestart = SvPVX(PL_linestr);
-//								PL_bufend = SvPVX(PL_linestr) + SvCUR(PL_linestr);
-//								PL_last_lop = PL_last_uni = NULL;
-//								PL_preambled = FALSE;
+//								sv_setpvs(PL_parser.linestr, "");
+//								PL_parser.oldoldbufptr = PL_parser.oldbufptr = s = PL_parser.linestart = SvPVX(PL_parser.linestr);
+//								PL_parser.bufend = SvPVX(PL_parser.linestr) + SvCUR(PL_parser.linestr);
+//								PL_parser.last_lop = PL_parser.last_uni = NULL;
+//								PL_parser.preambled = FALSE;
 //								if (PERLDB_LINE || PERLDB_SAVESRC)
 //									(void)gv_fetchfile(PL_origfilename);
 //								goto retry;
@@ -845,8 +846,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //					}
 //				}
 //			}
-//			if (PL_lex_formbrack && PL_lex_brackets <= PL_lex_formbrack) {
-//				currentLexState = LEX_FORMLINE;
+//			if (PL_parser.lex_formbrack && PL_parser.lex_brackets <= PL_parser.lex_formbrack) {
+//				PL_parser.lex_state = LEX_FORMLINE;
 //				NEXTVAL_NEXTTOKE.ival = 0;
 //				force_next(FORMRBRACK);
 //				TOKEN(';');
@@ -863,66 +864,66 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			goto retry;
 //		case '#':
 //		case '\n':
-//			if (currentLexState != LEX_NORMAL ||
-//					(PL_in_eval && !PL_rsfp && !PL_parser->filtered)) {
-//			const bool in_comment = *s == '#';
-//			if (*s == '#' && s == PL_linestart && PL_in_eval
-//					&& !PL_rsfp && !PL_parser->filtered) {
+//			if (PL_parser.lex_state != LEX_NORMAL ||
+//					(PL_in_eval && !PL_parser.rsfp && !PL_parser.filtered)) {
+//			const boolean in_comment = *s == '#';
+//			if (*s == '#' && s == PL_parser.linestart && PL_in_eval
+//					&& !PL_parser.rsfp && !PL_parser.filtered) {
 //		/* handle eval qq[#line 1 "foo"\n ...] */
 //				CopLINE_dec(PL_curcop);
 //				incline(s);
 //			}
 //			d = s;
-//			while (d < PL_bufend && *d != '\n')
+//			while (d < PL_parser.bufend && *d != '\n')
 //			d++;
-//			if (d < PL_bufend)
+//			if (d < PL_parser.bufend)
 //				d++;
-//			else if (d > PL_bufend)
+//			else if (d > PL_parser.bufend)
 //                /* Found by Ilya: feed random input to Perl. */
 //				Perl_croak(aTHX_ "panic: input overflow, %p > %p",
-//						d, PL_bufend);
+//						d, PL_parser.bufend);
 //			s = d;
-//			if (in_comment && d == PL_bufend
-//					&& currentLexState == LEX_INTERPNORMAL
-//					&& PL_lex_inwhat == OP_SUBST && PL_lex_repl == PL_linestr
-//					&& SvEVALED(PL_lex_repl) && d[-1] == '}') s--;
+//			if (in_comment && d == PL_parser.bufend
+//					&& PL_parser.lex_state == LEX_INTERPNORMAL
+//					&& PL_parser.lex_inwhat == OP_SUBST && PL_parser.lex_repl == PL_parser.linestr
+//					&& SvEVALED(PL_parser.lex_repl) && d[-1] == '}') s--;
 //			else
 //				incline(s);
-//			if (PL_lex_formbrack && PL_lex_brackets <= PL_lex_formbrack) {
-//				currentLexState = LEX_FORMLINE;
+//			if (PL_parser.lex_formbrack && PL_parser.lex_brackets <= PL_parser.lex_formbrack) {
+//				PL_parser.lex_state = LEX_FORMLINE;
 //				NEXTVAL_NEXTTOKE.ival = 0;
 //				force_next(FORMRBRACK);
 //				TOKEN(';');
 //			}
 //		}
 //		else {
-//			while (s < PL_bufend && *s != '\n')
+//			while (s < PL_parser.bufend && *s != '\n')
 //			s++;
-//			if (s < PL_bufend)
+//			if (s < PL_parser.bufend)
 //			{
 //				s++;
-//				if (s < PL_bufend)
+//				if (s < PL_parser.bufend)
 //					incline(s);
 //			}
-//			else if (s > PL_bufend)
+//			else if (s > PL_parser.bufend)
 //                /* Found by Ilya: feed random input to Perl. */
 //				Perl_croak(aTHX_ "panic: input overflow");
 //		}
 //		goto retry;
 //		case '-':
 //			if (s[1] && isALPHA(s[1]) && !isWORDCHAR(s[2])) {
-//				I32 ftst = 0;
+//				private int ftst = 0;
 //				char tmp;
 //
 //				s++;
-//				PL_bufptr = s;
+//				PL_parser.bufptr = s;
 //				tmp = *s++;
 //
-//				while (s < PL_bufend && SPACE_OR_TAB(*s))
+//				while (s < PL_parser.bufend && SPACE_OR_TAB(*s))
 //				s++;
 //
 //				if (strnEQ(s,"=>",2)) {
-//					s = force_word(PL_bufptr,WORD,FALSE,FALSE);
+//					s = force_word(PL_parser.bufptr,WORD,FALSE,FALSE);
 //					DEBUG_T( { printbuf("### Saw unary minus before =>, forcing word %s\n", s); } );
 //					OPERATOR('-');		/* unary minus */
 //				}
@@ -964,8 +965,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						break;
 //				}
 //				if (ftst) {
-//					PL_last_uni = PL_oldbufptr;
-//					PL_last_lop_op = (OPCODE)ftst;
+//					PL_parser.last_uni = PL_parser.oldbufptr;
+//					PL_parser.last_lop_op = (OPCODE)ftst;
 //					DEBUG_T( { PerlIO_printf(Perl_debug_log,
 //							"### Saw file test %c\n", (int)tmp);
 //					} );
@@ -978,14 +979,14 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							"### '-%c' looked like a file test but was not\n",
 //							(int) tmp);
 //					} );
-//					s = --PL_bufptr;
+//					s = --PL_parser.bufptr;
 //				}
 //			}
 //		{
 //			const char tmp = *s++;
 //			if (*s == tmp) {
 //			s++;
-//			if (PL_expect == XOPERATOR)
+//			if (PL_parser.expect == XOPERATOR)
 //				TERM(POSTDEC);
 //			else
 //				OPERATOR(PREDEC);
@@ -1004,7 +1005,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						packWARN(WARN_EXPERIMENTAL__POSTDEREF),
 //						"Postfix dereference is experimental"
 //				);
-//				PL_expect = XPOSTDEREF;
+//				PL_parser.expect = XPOSTDEREF;
 //				TOKEN(ARROW);
 //			}
 //			if (isIDFIRST_lazy_if(s,UTF)) {
@@ -1016,16 +1017,16 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			else
 //			TERM(ARROW);
 //		}
-//			if (PL_expect == XOPERATOR) {
-//				if (*s == '=' && !PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//			if (PL_parser.expect == XOPERATOR) {
+//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s--;
 //					TOKEN(0);
 //				}
 //				Aop(OP_SUBTRACT);
 //			}
 //			else {
-//				if (isSPACE(*s) || !isSPACE(*PL_bufptr))
+//				if (isSPACE(*s) || !isSPACE(*PL_parser.bufptr))
 //				check_uni();
 //				OPERATOR('-');		/* unary minus */
 //			}
@@ -1036,100 +1037,100 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			const char tmp = *s++;
 //			if (*s == tmp) {
 //			s++;
-//			if (PL_expect == XOPERATOR)
+//			if (PL_parser.expect == XOPERATOR)
 //				TERM(POSTINC);
 //			else
 //				OPERATOR(PREINC);
 //		}
-//			if (PL_expect == XOPERATOR) {
-//				if (*s == '=' && !PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//			if (PL_parser.expect == XOPERATOR) {
+//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s--;
 //					TOKEN(0);
 //				}
 //				Aop(OP_ADD);
 //			}
 //			else {
-//				if (isSPACE(*s) || !isSPACE(*PL_bufptr))
+//				if (isSPACE(*s) || !isSPACE(*PL_parser.bufptr))
 //				check_uni();
 //				OPERATOR('+');
 //			}
 //		}
 //
 //		case '*':
-//			if (PL_expect == XPOSTDEREF) POSTDEREF('*');
-//			if (PL_expect != XOPERATOR) {
-//				s = scan_ident(s, PL_tokenbuf, sizeof PL_tokenbuf, TRUE);
-//				PL_expect = XOPERATOR;
-//				force_ident(PL_tokenbuf, '*');
-//				if (!*PL_tokenbuf)
+//			if (PL_parser.expect == XPOSTDEREF) POSTDEREF('*');
+//			if (PL_parser.expect != XOPERATOR) {
+//				s = scan_ident(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, TRUE);
+//				PL_parser.expect = XOPERATOR;
+//				force_ident(PL_parser.tokenbuf, '*');
+//				if (!*PL_parser.tokenbuf)
 //					PREREF('*');
 //				TERM('*');
 //			}
 //			s++;
 //			if (*s == '*') {
 //			s++;
-//			if (*s == '=' && !PL_lex_allbrackets &&
-//					PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//			if (*s == '=' && !PL_parser.lex_allbrackets &&
+//					PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //				s -= 2;
 //				TOKEN(0);
 //			}
 //			PWop(OP_POW);
 //		}
-//		if (*s == '=' && !PL_lex_allbrackets &&
-//				PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//		if (*s == '=' && !PL_parser.lex_allbrackets &&
+//				PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //			s--;
 //			TOKEN(0);
 //		}
-//		PL_parser->saw_infix_sigil = 1;
+//		PL_parser.saw_infix_sigil = 1;
 //		Mop(OP_MULTIPLY);
 //
 //		case '%':
 //		{
-//			if (PL_expect == XOPERATOR) {
-//				if (s[1] == '=' && !PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN)
+//			if (PL_parser.expect == XOPERATOR) {
+//				if (s[1] == '=' && !PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN)
 //					TOKEN(0);
 //				++s;
-//				PL_parser->saw_infix_sigil = 1;
+//				PL_parser.saw_infix_sigil = 1;
 //				Mop(OP_MODULO);
 //			}
-//			else if (PL_expect == XPOSTDEREF) POSTDEREF('%');
-//			PL_tokenbuf[0] = '%';
-//			s = scan_ident(s, PL_tokenbuf + 1,
-//					sizeof PL_tokenbuf - 1, FALSE);
-//			pl_yylval.ival = 0;
-//			if (!PL_tokenbuf[1]) {
+//			else if (PL_parser.expect == XPOSTDEREF) POSTDEREF('%');
+//			PL_parser.tokenbuf[0] = '%';
+//			s = scan_ident(s, PL_parser.tokenbuf + 1,
+//					sizeof PL_parser.tokenbuf - 1, FALSE);
+//			PL_parser.yylval.ival = 0;
+//			if (!PL_parser.tokenbuf[1]) {
 //				PREREF('%');
 //			}
-//			if ((PL_expect != XREF || PL_oldoldbufptr == PL_last_lop) && intuit_more(s)) {
+//			if ((PL_parser.expect != XREF || PL_parser.oldoldbufptr == PL_parser.last_lop) && intuit_more(s)) {
 //				if (*s == '[')
-//				PL_tokenbuf[0] = '@';
+//				PL_parser.tokenbuf[0] = '@';
 //			}
-//			PL_expect = XOPERATOR;
+//			PL_parser.expect = XOPERATOR;
 //			force_ident_maybe_lex('%');
 //			TERM('%');
 //		}
 //		case '^':
-//			if (!PL_lex_allbrackets && PL_lex_fakeeof >=
+//			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
 //					(s[1] == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_BITWISE))
 //				TOKEN(0);
 //			s++;
 //			BOop(OP_BIT_XOR);
 //		case '[':
-//			if (PL_lex_brackets > 100)
-//				Renew(PL_lex_brackstack, PL_lex_brackets + 10, char);
-//			PL_lex_brackstack[PL_lex_brackets++] = 0;
-//			PL_lex_allbrackets++;
+//			if (PL_parser.lex_brackets > 100)
+//				Renew(PL_parser.lex_brackstack, PL_parser.lex_brackets + 10, char);
+//			PL_parser.lex_brackstack[PL_parser.lex_brackets++] = 0;
+//			PL_parser.lex_allbrackets++;
 //		{
 //			const char tmp = *s++;
 //			OPERATOR(tmp);
 //		}
 //		case '~':
 //			if (s[1] == '~'
-//					&& (PL_expect == XOPERATOR || PL_expect == XTERMORDORDOR))
+//					&& (PL_parser.expect == XOPERATOR || PL_parser.expect == XTERMORDORDOR))
 //			{
-//				if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE)
+//				if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE)
 //					TOKEN(0);
 //				s += 2;
 //				Perl_ck_warner_d(aTHX_
@@ -1140,7 +1141,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			s++;
 //			OPERATOR('~');
 //		case ',':
-//			if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMMA)
+//			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMMA)
 //				TOKEN(0);
 //			s++;
 //			OPERATOR(',');
@@ -1153,29 +1154,29 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		{
 //			OP *attrs;
 //
-//			switch (PL_expect) {
+//			switch (PL_parser.expect) {
 //				case XOPERATOR:
-//					if (!PL_in_my || currentLexState != LEX_NORMAL)
+//					if (!PL_parser.in_my || PL_parser.lex_state != LEX_NORMAL)
 //						break;
-//					PL_bufptr = s;	/* update in case we back off */
+//					PL_parser.bufptr = s;	/* update in case we back off */
 //					if (*s == '=') {
 //					Perl_croak(aTHX_
 //							"Use of := for an empty attribute list is not allowed");
 //				}
 //				goto grabattrs;
 //				case XATTRBLOCK:
-//					PL_expect = XBLOCK;
+//					PL_parser.expect = XBLOCK;
 //					goto grabattrs;
 //				case XATTRTERM:
-//					PL_expect = XTERMBLOCK;
+//					PL_parser.expect = XTERMBLOCK;
 //					grabattrs:
 //					s = skipspace(s);
 //					attrs = NULL;
 //					while (isIDFIRST_lazy_if(s,UTF)) {
-//						I32 tmp;
+//						private int tmp;
 //						SV *sv;
-//						d = scan_word(s, PL_tokenbuf, sizeof PL_tokenbuf, FALSE, &len);
-//						if (isLOWER(*s) && (tmp = keyword(PL_tokenbuf, len, 0))) {
+//						d = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, FALSE, &len);
+//						if (isLOWER(*s) && (tmp = keyword(PL_parser.tokenbuf, len, 0))) {
 //							if (tmp < 0) tmp = -tmp;
 //							switch (tmp) {
 //								case KEY_or:
@@ -1199,7 +1200,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			/* MUST advance bufptr here to avoid bogus
 //			   "at end of line" context messages from yyerror().
 //			 */
-//								PL_bufptr = s + len;
+//								PL_parser.bufptr = s + len;
 //								yyerror("Unterminated attribute parameter in attribute list");
 //								if (attrs)
 //									op_free(attrs);
@@ -1207,17 +1208,17 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								return REPORT(0);	/* EOF indicator */
 //							}
 //						}
-//						if (PL_lex_stuff) {
-//							sv_catsv(sv, PL_lex_stuff);
+//						if (PL_parser.lex_stuff) {
+//							sv_catsv(sv, PL_parser.lex_stuff);
 //							attrs = op_append_elem(OP_LIST, attrs,
 //									newSVOP(OP_CONST, 0, sv));
-//							SvREFCNT_dec(PL_lex_stuff);
-//							PL_lex_stuff = NULL;
+//							SvREFCNT_dec(PL_parser.lex_stuff);
+//							PL_parser.lex_stuff = NULL;
 //						}
 //						else {
 //							if (len == 6 && strnEQ(SvPVX(sv), "unique", len)) {
 //								sv_free(sv);
-//								if (PL_in_my == KEY_our) {
+//								if (PL_parser.in_my == KEY_our) {
 //									deprecate(":unique");
 //								}
 //								else
@@ -1226,15 +1227,15 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //		    /* NOTE: any CV attrs applied here need to be part of
 //		       the CVf_BUILTIN_ATTRS define in cv.h! */
-//							else if (!PL_in_my && len == 6 && strnEQ(SvPVX(sv), "lvalue", len)) {
+//							else if (!PL_parser.in_my && len == 6 && strnEQ(SvPVX(sv), "lvalue", len)) {
 //								sv_free(sv);
 //								CvLVALUE_on(PL_compcv);
 //							}
-//							else if (!PL_in_my && len == 6 && strnEQ(SvPVX(sv), "locked", len)) {
+//							else if (!PL_parser.in_my && len == 6 && strnEQ(SvPVX(sv), "locked", len)) {
 //								sv_free(sv);
 //								deprecate(":locked");
 //							}
-//							else if (!PL_in_my && len == 6 && strnEQ(SvPVX(sv), "method", len)) {
+//							else if (!PL_parser.in_my && len == 6 && strnEQ(SvPVX(sv), "method", len)) {
 //								sv_free(sv);
 //								CvMETHOD_on(PL_compcv);
 //							}
@@ -1262,20 +1263,20 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //					}
 //				{
 //					if (*s != ';' && *s != '}' &&
-//						!(PL_expect == XOPERATOR
+//						!(PL_parser.expect == XOPERATOR
 //								? (*s == '=' ||  *s == ')')
 //					: (*s == '{' ||  *s == '('))) {
 //					const char q = ((*s == '\'') ? '"' : '\'');
 //		    /* If here for an expression, and parsed no attrs, back
 //		       off. */
-//					if (PL_expect == XOPERATOR && !attrs) {
-//						s = PL_bufptr;
+//					if (PL_parser.expect == XOPERATOR && !attrs) {
+//						s = PL_parser.bufptr;
 //						break;
 //					}
 //		    /* MUST advance bufptr here to avoid bogus "at end of line"
 //		       context messages from yyerror().
 //		    */
-//					PL_bufptr = s;
+//					PL_parser.bufptr = s;
 //					yyerror( (const char *)
 //					(*s
 //							? Perl_form(aTHX_ "Invalid separator character "
@@ -1294,85 +1295,85 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				TOKEN(COLONATTR);
 //			}
 //		}
-//		if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_CLOSING) {
+//		if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_CLOSING) {
 //			s--;
 //			TOKEN(0);
 //		}
-//		PL_lex_allbrackets--;
+//		PL_parser.lex_allbrackets--;
 //		OPERATOR(':');
 //		case '(':
 //			s++;
-//			if (PL_last_lop == PL_oldoldbufptr || PL_last_uni == PL_oldoldbufptr)
-//				PL_oldbufptr = PL_oldoldbufptr;		/* allow print(STDOUT 123) */
+//			if (PL_parser.last_lop == PL_parser.oldoldbufptr || PL_parser.last_uni == PL_parser.oldoldbufptr)
+//				PL_parser.oldbufptr = PL_parser.oldoldbufptr;		/* allow print(STDOUT 123) */
 //			else
-//				PL_expect = XTERM;
+//				PL_parser.expect = XTERM;
 //			s = skipspace(s);
-//			PL_lex_allbrackets++;
+//			PL_parser.lex_allbrackets++;
 //			TOKEN('(');
 //		case ';':
-//			if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_NONEXPR)
+//			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_NONEXPR)
 //				TOKEN(0);
 //			CLINE;
 //			s++;
-//			PL_expect = XSTATE;
+//			PL_parser.expect = XSTATE;
 //			TOKEN(';');
 //		case ')':
-//			if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_CLOSING)
+//			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_CLOSING)
 //				TOKEN(0);
 //			s++;
-//			PL_lex_allbrackets--;
+//			PL_parser.lex_allbrackets--;
 //			s = skipspace(s);
 //			if (*s == '{')
 //			PREBLOCK(')');
 //			TERM(')');
 //		case ']':
-//			if (PL_lex_brackets && PL_lex_brackstack[PL_lex_brackets-1] == XFAKEEOF)
+//			if (PL_parser.lex_brackets && PL_parser.lex_brackstack[PL_parser.lex_brackets-1] == XFAKEEOF)
 //				TOKEN(0);
 //			s++;
-//			if (PL_lex_brackets <= 0)
+//			if (PL_parser.lex_brackets <= 0)
 //	    /* diag_listed_as: Unmatched right %s bracket */
 //				yyerror("Unmatched right square bracket");
 //			else
-//				--PL_lex_brackets;
-//			PL_lex_allbrackets--;
-//			if (currentLexState == LEX_INTERPNORMAL) {
-//				if (PL_lex_brackets == 0) {
+//				--PL_parser.lex_brackets;
+//			PL_parser.lex_allbrackets--;
+//			if (PL_parser.lex_state == LEX_INTERPNORMAL) {
+//				if (PL_parser.lex_brackets == 0) {
 //					if (*s == '-' && s[1] == '>')
-//					currentLexState = LEX_INTERPENDMAYBE;
+//					PL_parser.lex_state = LEX_INTERPENDMAYBE;
 //					else if (*s != '[' && *s != '{')
-//					currentLexState = LEX_INTERPEND;
+//					PL_parser.lex_state = LEX_INTERPEND;
 //				}
 //			}
 //			TERM(']');
 //		case '{':
 //			s++;
 //			leftbracket:
-//			if (PL_lex_brackets > 100) {
-//				Renew(PL_lex_brackstack, PL_lex_brackets + 10, char);
+//			if (PL_parser.lex_brackets > 100) {
+//				Renew(PL_parser.lex_brackstack, PL_parser.lex_brackets + 10, char);
 //			}
-//			switch (PL_expect) {
+//			switch (PL_parser.expect) {
 //				case XTERM:
-//					PL_lex_brackstack[PL_lex_brackets++] = XOPERATOR;
-//					PL_lex_allbrackets++;
+//					PL_parser.lex_brackstack[PL_parser.lex_brackets++] = XOPERATOR;
+//					PL_parser.lex_allbrackets++;
 //					OPERATOR(HASHBRACK);
 //				case XOPERATOR:
-//					while (s < PL_bufend && SPACE_OR_TAB(*s))
+//					while (s < PL_parser.bufend && SPACE_OR_TAB(*s))
 //					s++;
 //					d = s;
-//					PL_tokenbuf[0] = '\0';
-//					if (d < PL_bufend && *d == '-') {
-//					PL_tokenbuf[0] = '-';
+//					PL_parser.tokenbuf[0] = '\0';
+//					if (d < PL_parser.bufend && *d == '-') {
+//					PL_parser.tokenbuf[0] = '-';
 //					d++;
-//					while (d < PL_bufend && SPACE_OR_TAB(*d))
+//					while (d < PL_parser.bufend && SPACE_OR_TAB(*d))
 //					d++;
 //				}
-//				if (d < PL_bufend && isIDFIRST_lazy_if(d,UTF)) {
-//					d = scan_word(d, PL_tokenbuf + 1, sizeof PL_tokenbuf - 1,
+//				if (d < PL_parser.bufend && isIDFIRST_lazy_if(d,UTF)) {
+//					d = scan_word(d, PL_parser.tokenbuf + 1, sizeof PL_parser.tokenbuf - 1,
 //							FALSE, &len);
-//					while (d < PL_bufend && SPACE_OR_TAB(*d))
+//					while (d < PL_parser.bufend && SPACE_OR_TAB(*d))
 //					d++;
 //					if (*d == '}') {
-//						const char minus = (PL_tokenbuf[0] == '-');
+//						const char minus = (PL_parser.tokenbuf[0] == '-');
 //						s = force_word(s + minus, WORD, FALSE, TRUE);
 //						if (minus)
 //							force_next('-');
@@ -1381,40 +1382,40 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //	    /* FALLTHROUGH */
 //				case XATTRTERM:
 //				case XTERMBLOCK:
-//					PL_lex_brackstack[PL_lex_brackets++] = XOPERATOR;
-//					PL_lex_allbrackets++;
-//					PL_expect = XSTATE;
+//					PL_parser.lex_brackstack[PL_parser.lex_brackets++] = XOPERATOR;
+//					PL_parser.lex_allbrackets++;
+//					PL_parser.expect = XSTATE;
 //					break;
 //				case XATTRBLOCK:
 //				case XBLOCK:
-//					PL_lex_brackstack[PL_lex_brackets++] = XSTATE;
-//					PL_lex_allbrackets++;
-//					PL_expect = XSTATE;
+//					PL_parser.lex_brackstack[PL_parser.lex_brackets++] = XSTATE;
+//					PL_parser.lex_allbrackets++;
+//					PL_parser.expect = XSTATE;
 //					break;
 //				case XBLOCKTERM:
-//					PL_lex_brackstack[PL_lex_brackets++] = XTERM;
-//					PL_lex_allbrackets++;
-//					PL_expect = XSTATE;
+//					PL_parser.lex_brackstack[PL_parser.lex_brackets++] = XTERM;
+//					PL_parser.lex_allbrackets++;
+//					PL_parser.expect = XSTATE;
 //					break;
 //				default: {
 //					const char *t;
-//					if (PL_oldoldbufptr == PL_last_lop)
-//						PL_lex_brackstack[PL_lex_brackets++] = XTERM;
+//					if (PL_parser.oldoldbufptr == PL_parser.last_lop)
+//						PL_parser.lex_brackstack[PL_parser.lex_brackets++] = XTERM;
 //					else
-//						PL_lex_brackstack[PL_lex_brackets++] = XOPERATOR;
-//					PL_lex_allbrackets++;
+//						PL_parser.lex_brackstack[PL_parser.lex_brackets++] = XOPERATOR;
+//					PL_parser.lex_allbrackets++;
 //					s = skipspace(s);
 //					if (*s == '}') {
-//						if (PL_expect == XREF && currentLexState == LEX_INTERPNORMAL) {
-//							PL_expect = XTERM;
+//						if (PL_parser.expect == XREF && PL_parser.lex_state == LEX_INTERPNORMAL) {
+//							PL_parser.expect = XTERM;
 //			/* This hack is to get the ${} in the message. */
-//							PL_bufptr = s+1;
+//							PL_parser.bufptr = s+1;
 //							yyerror("syntax error");
 //							break;
 //						}
 //						OPERATOR(HASHBRACK);
 //					}
-//					if (PL_expect == XREF && PL_oldoldbufptr != PL_last_lop) {
+//					if (PL_parser.expect == XREF && PL_parser.oldoldbufptr != PL_parser.last_lop) {
 //		    /* ${...} or @{...} etc., but not print {...}
 //		     * Skip the disambiguation and treat this as a block.
 //		     */
@@ -1438,26 +1439,26 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //					t = s;
 //					if (*s == '\'' || *s == '"' || *s == '`') {
 //		    /* common case: get past first string, handling escapes */
-//						for (t++; t < PL_bufend && *t != *s;)
+//						for (t++; t < PL_parser.bufend && *t != *s;)
 //						if (*t++ == '\\')
 //						t++;
 //						t++;
 //					}
 //					else if (*s == 'q') {
-//						if (++t < PL_bufend
+//						if (++t < PL_parser.bufend
 //								&& (!isWORDCHAR(*t)
-//								|| ((*t == 'q' || *t == 'x') && ++t < PL_bufend
+//								|| ((*t == 'q' || *t == 'x') && ++t < PL_parser.bufend
 //								&& !isWORDCHAR(*t))))
 //						{
 //			/* skip q//-like construct */
 //							const char *tmps;
 //							char open, close, term;
-//							I32 brackets = 1;
+//							private int brackets = 1;
 //
-//							while (t < PL_bufend && isSPACE(*t))
+//							while (t < PL_parser.bufend && isSPACE(*t))
 //							t++;
 //			/* check for q => */
-//							if (t+1 < PL_bufend && t[0] == '=' && t[1] == '>') {
+//							if (t+1 < PL_parser.bufend && t[0] == '=' && t[1] == '>') {
 //								OPERATOR(HASHBRACK);
 //							}
 //							term = *t;
@@ -1466,15 +1467,15 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								term = tmps[5];
 //							close = term;
 //							if (open == close)
-//								for (t++; t < PL_bufend; t++) {
-//									if (*t == '\\' && t+1 < PL_bufend && open != '\\')
+//								for (t++; t < PL_parser.bufend; t++) {
+//									if (*t == '\\' && t+1 < PL_parser.bufend && open != '\\')
 //									t++;
 //									else if (*t == open)
 //									break;
 //								}
 //							else {
-//								for (t++; t < PL_bufend; t++) {
-//									if (*t == '\\' && t+1 < PL_bufend)
+//								for (t++; t < PL_parser.bufend; t++) {
+//									if (*t == '\\' && t+1 < PL_parser.bufend)
 //									t++;
 //									else if (*t == close && --brackets <= 0)
 //									break;
@@ -1486,22 +1487,22 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						}
 //						else
 //			/* skip plain q word */
-//						while (t < PL_bufend && isWORDCHAR_lazy_if(t,UTF))
+//						while (t < PL_parser.bufend && isWORDCHAR_lazy_if(t,UTF))
 //							t += UTF8SKIP(t);
 //					}
 //					else if (isWORDCHAR_lazy_if(t,UTF)) {
 //						t += UTF8SKIP(t);
-//						while (t < PL_bufend && isWORDCHAR_lazy_if(t,UTF))
+//						while (t < PL_parser.bufend && isWORDCHAR_lazy_if(t,UTF))
 //							t += UTF8SKIP(t);
 //					}
-//					while (t < PL_bufend && isSPACE(*t))
+//					while (t < PL_parser.bufend && isSPACE(*t))
 //					t++;
 //		/* if comma follows first term, call it an anon hash */
 //		/* XXX it could be a comma expression with loop modifiers */
-//					if (t < PL_bufend && ((*t == ',' && (*s == 'q' || !isLOWER(*s)))
+//					if (t < PL_parser.bufend && ((*t == ',' && (*s == 'q' || !isLOWER(*s)))
 //					|| (*t == '=' && t[1] == '>')))
 //					OPERATOR(HASHBRACK);
-//					if (PL_expect == XREF)
+//					if (PL_parser.expect == XREF)
 //					{
 //						block_expectation:
 //		    /* If there is an opening brace or 'sub:', treat it
@@ -1511,60 +1512,60 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		     */
 //						s = skipspace(s);
 //						if (*s == '{') {
-//						PL_expect = XTERM;
+//						PL_parser.expect = XTERM;
 //						break;
 //					}
 //						if (strnEQ(s, "sub", 3)) {
 //							d = s + 3;
 //							d = skipspace(d);
 //							if (*d == ':') {
-//								PL_expect = XTERM;
+//								PL_parser.expect = XTERM;
 //								break;
 //							}
 //						}
-//						PL_expect = XSTATE;
+//						PL_parser.expect = XSTATE;
 //					}
 //					else {
-//						PL_lex_brackstack[PL_lex_brackets-1] = XSTATE;
-//						PL_expect = XSTATE;
+//						PL_parser.lex_brackstack[PL_parser.lex_brackets-1] = XSTATE;
+//						PL_parser.expect = XSTATE;
 //					}
 //				}
 //				break;
 //			}
-//			pl_yylval.ival = CopLINE(PL_curcop);
-//			PL_copline = NOLINE;   /* invalidate current command line number */
+//			PL_parser.yylval.ival = CopLINE(PL_curcop);
+//			PL_parser.copline = NOLINE;   /* invalidate current command line number */
 //			TOKEN(formbrack ? '=' : '{');
 //		case '}':
-//			if (PL_lex_brackets && PL_lex_brackstack[PL_lex_brackets-1] == XFAKEEOF)
+//			if (PL_parser.lex_brackets && PL_parser.lex_brackstack[PL_parser.lex_brackets-1] == XFAKEEOF)
 //				TOKEN(0);
 //			rightbracket:
 //			s++;
-//			if (PL_lex_brackets <= 0)
+//			if (PL_parser.lex_brackets <= 0)
 //	    /* diag_listed_as: Unmatched right %s bracket */
 //				yyerror("Unmatched right curly bracket");
 //			else
-//				PL_expect = (expectation)PL_lex_brackstack[--PL_lex_brackets];
-//			PL_lex_allbrackets--;
-//			if (currentLexState == LEX_INTERPNORMAL) {
-//				if (PL_lex_brackets == 0) {
-//					if (PL_expect & XFAKEBRACK) {
-//						PL_expect &= XENUMMASK;
-//						currentLexState = LEX_INTERPEND;
-//						PL_bufptr = s;
+//				PL_parser.expect = (expectation)PL_parser.lex_brackstack[--PL_parser.lex_brackets];
+//			PL_parser.lex_allbrackets--;
+//			if (PL_parser.lex_state == LEX_INTERPNORMAL) {
+//				if (PL_parser.lex_brackets == 0) {
+//					if (PL_parser.expect & XFAKEBRACK) {
+//						PL_parser.expect &= XENUMMASK;
+//						PL_parser.lex_state = LEX_INTERPEND;
+//						PL_parser.bufptr = s;
 //						return yylex();	/* ignore fake brackets */
 //					}
-//					if (PL_lex_inwhat == OP_SUBST && PL_lex_repl == PL_linestr
-//							&& SvEVALED(PL_lex_repl))
-//						currentLexState = LEX_INTERPEND;
+//					if (PL_parser.lex_inwhat == OP_SUBST && PL_parser.lex_repl == PL_parser.linestr
+//							&& SvEVALED(PL_parser.lex_repl))
+//						PL_parser.lex_state = LEX_INTERPEND;
 //					else if (*s == '-' && s[1] == '>')
-//					currentLexState = LEX_INTERPENDMAYBE;
+//					PL_parser.lex_state = LEX_INTERPENDMAYBE;
 //					else if (*s != '[' && *s != '{')
-//					currentLexState = LEX_INTERPEND;
+//					PL_parser.lex_state = LEX_INTERPEND;
 //				}
 //			}
-//			if (PL_expect & XFAKEBRACK) {
-//				PL_expect &= XENUMMASK;
-//				PL_bufptr = s;
+//			if (PL_parser.expect & XFAKEBRACK) {
+//				PL_parser.expect &= XENUMMASK;
+//				PL_parser.bufptr = s;
 //				return yylex();		/* ignore fake brackets */
 //			}
 //			force_next(formbrack ? '.' : '}');
@@ -1575,10 +1576,10 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			}
 //			TOKEN(';');
 //		case '&':
-//			if (PL_expect == XPOSTDEREF) POSTDEREF('&');
+//			if (PL_parser.expect == XPOSTDEREF) POSTDEREF('&');
 //			s++;
 //			if (*s++ == '&') {
-//			if (!PL_lex_allbrackets && PL_lex_fakeeof >=
+//			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
 //					(*s == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_LOGIC)) {
 //				s -= 2;
 //				TOKEN(0);
@@ -1586,39 +1587,39 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			AOPERATOR(ANDAND);
 //		}
 //		s--;
-//		if (PL_expect == XOPERATOR) {
-//			if (PL_bufptr == PL_linestart && ckWARN(WARN_SEMICOLON)
+//		if (PL_parser.expect == XOPERATOR) {
+//			if (PL_parser.bufptr == PL_parser.linestart && ckWARN(WARN_SEMICOLON)
 //					&& isIDFIRST_lazy_if(s,UTF))
 //			{
 //				CopLINE_dec(PL_curcop);
 //				Perl_warner(aTHX_ packWARN(WARN_SEMICOLON), "%s", PL_warn_nosemi);
 //				CopLINE_inc(PL_curcop);
 //			}
-//			if (!PL_lex_allbrackets && PL_lex_fakeeof >=
+//			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
 //					(*s == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_BITWISE)) {
 //				s--;
 //				TOKEN(0);
 //			}
-//			PL_parser->saw_infix_sigil = 1;
+//			PL_parser.saw_infix_sigil = 1;
 //			BAop(OP_BIT_AND);
 //		}
 //
-//		PL_tokenbuf[0] = '&';
-//		s = scan_ident(s - 1, PL_tokenbuf + 1,
-//				sizeof PL_tokenbuf - 1, TRUE);
-//		if (PL_tokenbuf[1]) {
-//			PL_expect = XOPERATOR;
+//		PL_parser.tokenbuf[0] = '&';
+//		s = scan_ident(s - 1, PL_parser.tokenbuf + 1,
+//				sizeof PL_parser.tokenbuf - 1, TRUE);
+//		if (PL_parser.tokenbuf[1]) {
+//			PL_parser.expect = XOPERATOR;
 //			force_ident_maybe_lex('&');
 //		}
 //		else
 //			PREREF('&');
-//		pl_yylval.ival = (OPpENTERSUB_AMPER<<8);
+//		PL_parser.yylval.ival = (OPpENTERSUB_AMPER<<8);
 //		TERM('&');
 //
 //		case '|':
 //			s++;
 //			if (*s++ == '|') {
-//			if (!PL_lex_allbrackets && PL_lex_fakeeof >=
+//			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
 //					(*s == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_LOGIC)) {
 //				s -= 2;
 //				TOKEN(0);
@@ -1626,7 +1627,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			AOPERATOR(OROR);
 //		}
 //		s--;
-//		if (!PL_lex_allbrackets && PL_lex_fakeeof >=
+//		if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
 //				(*s == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_BITWISE)) {
 //			s--;
 //			TOKEN(0);
@@ -1637,16 +1638,16 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		{
 //			const char tmp = *s++;
 //			if (tmp == '=') {
-//				if (!PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE) {
+//				if (!PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
 //					s -= 2;
 //					TOKEN(0);
 //				}
 //				Eop(OP_EQ);
 //			}
 //			if (tmp == '>') {
-//				if (!PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_COMMA) {
+//				if (!PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_COMMA) {
 //					s -= 2;
 //					TOKEN(0);
 //				}
@@ -1659,12 +1660,12 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			Perl_warner(aTHX_ packWARN(WARN_SYNTAX),
 //					"Reversed %c= operator",(int)tmp);
 //			s--;
-//			if (PL_expect == XSTATE && isALPHA(tmp) &&
-//					(s == PL_linestart+1 || s[-2] == '\n') )
+//			if (PL_parser.expect == XSTATE && isALPHA(tmp) &&
+//					(s == PL_parser.linestart+1 || s[-2] == '\n') )
 //			{
-//				if ((PL_in_eval && !PL_rsfp && !PL_parser->filtered)
-//				|| currentLexState != LEX_NORMAL) {
-//				d = PL_bufend;
+//				if ((PL_in_eval && !PL_parser.rsfp && !PL_parser.filtered)
+//				|| PL_parser.lex_state != LEX_NORMAL) {
+//				d = PL_parser.bufend;
 //				while (s < d) {
 //					if (*s++ == '\n') {
 //						incline(s);
@@ -1681,12 +1682,12 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				}
 //				goto retry;
 //			}
-//				s = PL_bufend;
-//				PL_parser->in_pod = 1;
+//				s = PL_parser.bufend;
+//				PL_parser.in_pod = 1;
 //				goto retry;
 //			}
 //		}
-//		if (PL_expect == XBLOCK) {
+//		if (PL_parser.expect == XBLOCK) {
 //			const char *t = s;
 //			#ifdef PERL_STRICT_CR
 //			while (SPACE_OR_TAB(*t))
@@ -1697,18 +1698,18 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			if (*t == '\n' || *t == '#') {
 //				formbrack = 1;
 //				ENTER;
-//				SAVEI8(PL_parser->form_lex_state);
-//				SAVEI32(PL_lex_formbrack);
-//				PL_parser->form_lex_state = currentLexState;
-//				PL_lex_formbrack = PL_lex_brackets + 1;
+//				SAVEI8(PL_parser.form_lex_state);
+//				SAVEprivate int(PL_parser.lex_formbrack);
+//				PL_parser.form_lex_state = PL_parser.lex_state;
+//				PL_parser.lex_formbrack = PL_parser.lex_brackets + 1;
 //				goto leftbracket;
 //			}
 //		}
-//		if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//		if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //			s--;
 //			TOKEN(0);
 //		}
-//		pl_yylval.ival = 0;
+//		PL_parser.yylval.ival = 0;
 //		OPERATOR(ASSIGNOP);
 //		case '!':
 //			s++;
@@ -1721,7 +1722,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				if (*s == '~' && ckWARN(WARN_SYNTAX)) {
 //					const char *t = s+1;
 //
-//					while (t < PL_bufend && isSPACE(*t))
+//					while (t < PL_parser.bufend && isSPACE(*t))
 //					++t;
 //
 //					if (*t == '/' || *t == '?' ||
@@ -1731,8 +1732,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //					Perl_warner(aTHX_ packWARN(WARN_SYNTAX),
 //							"!=~ should be !~");
 //				}
-//				if (!PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE) {
+//				if (!PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
 //					s -= 2;
 //					TOKEN(0);
 //				}
@@ -1744,22 +1745,22 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		s--;
 //		OPERATOR('!');
 //		case '<':
-//			if (PL_expect != XOPERATOR) {
+//			if (PL_parser.expect != XOPERATOR) {
 //				if (s[1] != '<' && !strchr(s,'>'))
 //					check_uni();
 //				if (s[1] == '<' && s[2] != '>')
 //					s = scan_heredoc(s);
 //				else
 //					s = scan_inputsymbol(s);
-//				PL_expect = XOPERATOR;
+//				PL_parser.expect = XOPERATOR;
 //				TOKEN(sublex_start());
 //			}
 //			s++;
 //		{
 //			char tmp = *s++;
 //			if (tmp == '<') {
-//				if (*s == '=' && !PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s -= 2;
 //					TOKEN(0);
 //				}
@@ -1768,16 +1769,16 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			if (tmp == '=') {
 //				tmp = *s++;
 //				if (tmp == '>') {
-//					if (!PL_lex_allbrackets &&
-//							PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE) {
+//					if (!PL_parser.lex_allbrackets &&
+//							PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
 //						s -= 3;
 //						TOKEN(0);
 //					}
 //					Eop(OP_NCMP);
 //				}
 //				s--;
-//				if (!PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE) {
+//				if (!PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
 //					s -= 2;
 //					TOKEN(0);
 //				}
@@ -1785,7 +1786,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			}
 //		}
 //		s--;
-//		if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE) {
+//		if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
 //			s--;
 //			TOKEN(0);
 //		}
@@ -1795,16 +1796,16 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		{
 //			const char tmp = *s++;
 //			if (tmp == '>') {
-//				if (*s == '=' && !PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s -= 2;
 //					TOKEN(0);
 //				}
 //				SHop(OP_RIGHT_SHIFT);
 //			}
 //			else if (tmp == '=') {
-//				if (!PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE) {
+//				if (!PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
 //					s -= 2;
 //					TOKEN(0);
 //				}
@@ -1812,7 +1813,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			}
 //		}
 //		s--;
-//		if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE) {
+//		if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
 //			s--;
 //			TOKEN(0);
 //		}
@@ -1821,12 +1822,12 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		case '$':
 //			CLINE;
 //
-//			if (PL_expect == XOPERATOR) {
-//				if (PL_lex_formbrack && PL_lex_brackets == PL_lex_formbrack) {
+//			if (PL_parser.expect == XOPERATOR) {
+//				if (PL_parser.lex_formbrack && PL_parser.lex_brackets == PL_parser.lex_formbrack) {
 //					return deprecate_commaless_var_list();
 //				}
 //			}
-//			else if (PL_expect == XPOSTDEREF) {
+//			else if (PL_parser.expect == XPOSTDEREF) {
 //				if (s[1] == '#') {
 //					s++;
 //					POSTDEREF(DOLSHARP);
@@ -1835,25 +1836,25 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			}
 //
 //			if (s[1] == '#' && (isIDFIRST_lazy_if(s+2,UTF) || strchr("{$:+-@", s[2]))) {
-//				PL_tokenbuf[0] = '@';
-//				s = scan_ident(s + 1, PL_tokenbuf + 1,
-//						sizeof PL_tokenbuf - 1, FALSE);
-//				if (PL_expect == XOPERATOR)
+//				PL_parser.tokenbuf[0] = '@';
+//				s = scan_ident(s + 1, PL_parser.tokenbuf + 1,
+//						sizeof PL_parser.tokenbuf - 1, FALSE);
+//				if (PL_parser.expect == XOPERATOR)
 //					no_op("Array length", s);
-//				if (!PL_tokenbuf[1])
+//				if (!PL_parser.tokenbuf[1])
 //					PREREF(DOLSHARP);
-//				PL_expect = XOPERATOR;
+//				PL_parser.expect = XOPERATOR;
 //				force_ident_maybe_lex('#');
 //				TOKEN(DOLSHARP);
 //			}
 //
-//			PL_tokenbuf[0] = '$';
-//			s = scan_ident(s, PL_tokenbuf + 1,
-//					sizeof PL_tokenbuf - 1, FALSE);
-//			if (PL_expect == XOPERATOR)
+//			PL_parser.tokenbuf[0] = '$';
+//			s = scan_ident(s, PL_parser.tokenbuf + 1,
+//					sizeof PL_parser.tokenbuf - 1, FALSE);
+//			if (PL_parser.expect == XOPERATOR)
 //				no_op("Scalar", s);
-//			if (!PL_tokenbuf[1]) {
-//				if (s == PL_bufend)
+//			if (!PL_parser.tokenbuf[1]) {
+//				if (s == PL_parser.bufend)
 //					yyerror("Final $ should be \\$ or $name");
 //				PREREF('$');
 //			}
@@ -1861,35 +1862,35 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			d = s;
 //		{
 //			const char tmp = *s;
-//			if (currentLexState == LEX_NORMAL || PL_lex_brackets)
+//			if (PL_parser.lex_state == LEX_NORMAL || PL_parser.lex_brackets)
 //				s = skipspace(s);
 //
-//			if ((PL_expect != XREF || PL_oldoldbufptr == PL_last_lop)
+//			if ((PL_parser.expect != XREF || PL_parser.oldoldbufptr == PL_parser.last_lop)
 //					&& intuit_more(s)) {
 //				if (*s == '[') {
-//					PL_tokenbuf[0] = '@';
+//					PL_parser.tokenbuf[0] = '@';
 //					if (ckWARN(WARN_SYNTAX)) {
 //						char *t = s+1;
 //
 //						while (isSPACE(*t) || isWORDCHAR_lazy_if(t,UTF) || *t == '$')
 //						t++;
 //						if (*t++ == ',') {
-//							PL_bufptr = skipspace(PL_bufptr); /* XXX can realloc */
-//							while (t < PL_bufend && *t != ']')
+//							PL_parser.bufptr = skipspace(PL_parser.bufptr); /* XXX can realloc */
+//							while (t < PL_parser.bufend && *t != ']')
 //							t++;
 //							Perl_warner(aTHX_ packWARN(WARN_SYNTAX),
 //									"Multidimensional syntax %.*s not supported",
-//									(int)((t - PL_bufptr) + 1), PL_bufptr);
+//									(int)((t - PL_parser.bufptr) + 1), PL_parser.bufptr);
 //						}
 //					}
 //				}
 //				else if (*s == '{') {
 //					char *t;
-//					PL_tokenbuf[0] = '%';
-//					if (strEQ(PL_tokenbuf+1, "SIG")  && ckWARN(WARN_SYNTAX)
+//					PL_parser.tokenbuf[0] = '%';
+//					if (strEQ(PL_parser.tokenbuf+1, "SIG")  && ckWARN(WARN_SYNTAX)
 //							&& (t = strchr(s, '}')) && (t = strchr(t, '=')))
 //					{
-//						char tmpbuf[sizeof PL_tokenbuf];
+//						char tmpbuf[sizeof PL_parser.tokenbuf];
 //						do {
 //							t++;
 //						} while (isSPACE(*t));
@@ -1909,17 +1910,17 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				}
 //			}
 //
-//			PL_expect = XOPERATOR;
-//			if (currentLexState == LEX_NORMAL && isSPACE((char)tmp)) {
-//				const bool islop = (PL_last_lop == PL_oldoldbufptr);
-//				if (!islop || PL_last_lop_op == OP_GREPSTART)
-//					PL_expect = XOPERATOR;
+//			PL_parser.expect = XOPERATOR;
+//			if (PL_parser.lex_state == LEX_NORMAL && isSPACE((char)tmp)) {
+//				const boolean islop = (PL_parser.last_lop == PL_parser.oldoldbufptr);
+//				if (!islop || PL_parser.last_lop_op == OP_GREPSTART)
+//					PL_parser.expect = XOPERATOR;
 //				else if (strchr("$@\"'`q", *s))
-//				PL_expect = XTERM;		/* e.g. print $fh "foo" */
+//				PL_parser.expect = XTERM;		/* e.g. print $fh "foo" */
 //				else if (strchr("&*<%", *s) && isIDFIRST_lazy_if(s+1,UTF))
-//				PL_expect = XTERM;		/* e.g. print $fh &sub */
+//				PL_parser.expect = XTERM;		/* e.g. print $fh &sub */
 //				else if (isIDFIRST_lazy_if(s,UTF)) {
-//					char tmpbuf[sizeof PL_tokenbuf];
+//					char tmpbuf[sizeof PL_parser.tokenbuf];
 //					int t2;
 //					scan_word(s, tmpbuf, sizeof tmpbuf, TRUE, &len);
 //					if ((t2 = keyword(tmpbuf, len, 0))) {
@@ -1935,49 +1936,49 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							case -KEY_cmp:
 //								break;
 //							default:
-//								PL_expect = XTERM;	/* e.g. print $fh length() */
+//								PL_parser.expect = XTERM;	/* e.g. print $fh length() */
 //								break;
 //						}
 //					}
 //					else {
-//						PL_expect = XTERM;	/* e.g. print $fh subr() */
+//						PL_parser.expect = XTERM;	/* e.g. print $fh subr() */
 //					}
 //				}
 //				else if (isDIGIT(*s))
-//				PL_expect = XTERM;		/* e.g. print $fh 3 */
+//				PL_parser.expect = XTERM;		/* e.g. print $fh 3 */
 //				else if (*s == '.' && isDIGIT(s[1]))
-//				PL_expect = XTERM;		/* e.g. print $fh .3 */
+//				PL_parser.expect = XTERM;		/* e.g. print $fh .3 */
 //				else if ((*s == '?' || *s == '-' || *s == '+')
 //				&& !isSPACE(s[1]) && s[1] != '=')
-//				PL_expect = XTERM;		/* e.g. print $fh -1 */
+//				PL_parser.expect = XTERM;		/* e.g. print $fh -1 */
 //				else if (*s == '/' && !isSPACE(s[1]) && s[1] != '='
 //						&& s[1] != '/')
-//				PL_expect = XTERM;		/* e.g. print $fh /.../
+//				PL_parser.expect = XTERM;		/* e.g. print $fh /.../
 //						   XXX except DORDOR operator
 //						*/
 //				else if (*s == '<' && s[1] == '<' && !isSPACE(s[2])
 //						&& s[2] != '=')
-//				PL_expect = XTERM;		/* print $fh <<"EOF" */
+//				PL_parser.expect = XTERM;		/* print $fh <<"EOF" */
 //			}
 //		}
 //		force_ident_maybe_lex('$');
 //		TOKEN('$');
 //
 //		case '@':
-//			if (PL_expect == XOPERATOR)
+//			if (PL_parser.expect == XOPERATOR)
 //				no_op("Array", s);
-//			else if (PL_expect == XPOSTDEREF) POSTDEREF('@');
-//			PL_tokenbuf[0] = '@';
-//			s = scan_ident(s, PL_tokenbuf + 1, sizeof PL_tokenbuf - 1, FALSE);
-//			pl_yylval.ival = 0;
-//			if (!PL_tokenbuf[1]) {
+//			else if (PL_parser.expect == XPOSTDEREF) POSTDEREF('@');
+//			PL_parser.tokenbuf[0] = '@';
+//			s = scan_ident(s, PL_parser.tokenbuf + 1, sizeof PL_parser.tokenbuf - 1, FALSE);
+//			PL_parser.yylval.ival = 0;
+//			if (!PL_parser.tokenbuf[1]) {
 //				PREREF('@');
 //			}
-//			if (currentLexState == LEX_NORMAL)
+//			if (PL_parser.lex_state == LEX_NORMAL)
 //				s = skipspace(s);
-//			if ((PL_expect != XREF || PL_oldoldbufptr == PL_last_lop) && intuit_more(s)) {
+//			if ((PL_parser.expect != XREF || PL_parser.oldoldbufptr == PL_parser.last_lop) && intuit_more(s)) {
 //				if (*s == '{')
-//				PL_tokenbuf[0] = '%';
+//				PL_parser.tokenbuf[0] = '%';
 //
 //	    /* Warn about @ where they meant $. */
 //				if (*s == '[' || *s == '{') {
@@ -1986,22 +1987,22 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //					}
 //				}
 //			}
-//			PL_expect = XOPERATOR;
+//			PL_parser.expect = XOPERATOR;
 //			force_ident_maybe_lex('@');
 //			TERM('@');
 //
 //		case '/':			/* may be division, defined-or, or pattern */
-//			if ((PL_expect == XOPERATOR || PL_expect == XTERMORDORDOR) && s[1] == '/') {
-//				if (!PL_lex_allbrackets && PL_lex_fakeeof >=
+//			if ((PL_parser.expect == XOPERATOR || PL_parser.expect == XTERMORDORDOR) && s[1] == '/') {
+//				if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
 //						(s[2] == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_LOGIC))
 //					TOKEN(0);
 //				s += 2;
 //				AOPERATOR(DORDOR);
 //			}
-//			else if (PL_expect == XOPERATOR) {
+//			else if (PL_parser.expect == XOPERATOR) {
 //				s++;
-//				if (*s == '=' && !PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s--;
 //					TOKEN(0);
 //				}
@@ -2009,10 +2010,10 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			}
 //			else {
 //	    /* Disable warning on "study /blah/" */
-//				if (PL_oldoldbufptr == PL_last_uni
-//						&& (*PL_last_uni != 's' || s - PL_last_uni < 5
-//						|| memNE(PL_last_uni, "study", 5)
-//						|| isWORDCHAR_lazy_if(PL_last_uni+5,UTF)
+//				if (PL_parser.oldoldbufptr == PL_parser.last_uni
+//						&& (*PL_parser.last_uni != 's' || s - PL_parser.last_uni < 5
+//						|| memNE(PL_parser.last_uni, "study", 5)
+//						|| isWORDCHAR_lazy_if(PL_parser.last_uni+5,UTF)
 //						))
 //				check_uni();
 //				s = scan_pat(s,OP_MATCH);
@@ -2021,50 +2022,50 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //		case '?':			/* conditional */
 //			s++;
-//			if (!PL_lex_allbrackets &&
-//					PL_lex_fakeeof >= LEX_FAKEEOF_IFELSE) {
+//			if (!PL_parser.lex_allbrackets &&
+//					PL_parser.lex_fakeof >= LEX_FAKEEOF_IFELSE) {
 //				s--;
 //				TOKEN(0);
 //			}
-//			PL_lex_allbrackets++;
+//			PL_parser.lex_allbrackets++;
 //			OPERATOR('?');
 //
 //		case '.':
-//			if (PL_lex_formbrack && PL_lex_brackets == PL_lex_formbrack
+//			if (PL_parser.lex_formbrack && PL_parser.lex_brackets == PL_parser.lex_formbrack
 //			#ifdef PERL_STRICT_CR
 //			&& s[1] == '\n'
 //			#else
 //			&& (s[1] == '\n' || (s[1] == '\r' && s[2] == '\n'))
 //			#endif
-//				&& (s == PL_linestart || s[-1] == '\n') )
+//				&& (s == PL_parser.linestart || s[-1] == '\n') )
 //		{
-//			PL_expect = XSTATE;
+//			PL_parser.expect = XSTATE;
 //			formbrack = 2; /* dot seen where arguments expected */
 //			goto rightbracket;
 //		}
-//		if (PL_expect == XSTATE && s[1] == '.' && s[2] == '.') {
+//		if (PL_parser.expect == XSTATE && s[1] == '.' && s[2] == '.') {
 //			s += 3;
 //			OPERATOR(YADAYADA);
 //		}
-//		if (PL_expect == XOPERATOR || !isDIGIT(s[1])) {
+//		if (PL_parser.expect == XOPERATOR || !isDIGIT(s[1])) {
 //			char tmp = *s++;
 //			if (*s == tmp) {
-//				if (!PL_lex_allbrackets &&
-//						PL_lex_fakeeof >= LEX_FAKEEOF_RANGE) {
+//				if (!PL_parser.lex_allbrackets &&
+//						PL_parser.lex_fakeof >= LEX_FAKEEOF_RANGE) {
 //					s--;
 //					TOKEN(0);
 //				}
 //				s++;
 //				if (*s == tmp) {
 //					s++;
-//					pl_yylval.ival = OPf_SPECIAL;
+//					PL_parser.yylval.ival = OPf_SPECIAL;
 //				}
 //				else
-//				pl_yylval.ival = 0;
+//				PL_parser.yylval.ival = 0;
 //				OPERATOR(DOTDOT);
 //			}
-//			if (*s == '=' && !PL_lex_allbrackets &&
-//					PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN) {
+//			if (*s == '=' && !PL_parser.lex_allbrackets &&
+//					PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //				s--;
 //				TOKEN(0);
 //			}
@@ -2073,9 +2074,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //	/* FALLTHROUGH */
 //		case '0': case '1': case '2': case '3': case '4':
 //		case '5': case '6': case '7': case '8': case '9':
-//			s = scan_num(s, &pl_yylval);
+//			s = scan_num(s, &PL_parser.yylval);
 //			DEBUG_T( { printbuf("### Saw number in %s\n", s); } );
-//			if (PL_expect == XOPERATOR)
+//			if (PL_parser.expect == XOPERATOR)
 //				no_op("Number",s);
 //			TERM(THING);
 //
@@ -2085,14 +2086,14 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				missingterm(NULL);
 //			COPLINE_SET_FROM_MULTI_END;
 //			DEBUG_T( { printbuf("### Saw string before %s\n", s); } );
-//			if (PL_expect == XOPERATOR) {
-//				if (PL_lex_formbrack && PL_lex_brackets == PL_lex_formbrack) {
+//			if (PL_parser.expect == XOPERATOR) {
+//				if (PL_parser.lex_formbrack && PL_parser.lex_brackets == PL_parser.lex_formbrack) {
 //					return deprecate_commaless_var_list();
 //				}
 //				else
 //					no_op("String",s);
 //			}
-//			pl_yylval.ival = OP_CONST;
+//			PL_parser.yylval.ival = OP_CONST;
 //			TERM(sublex_start());
 //
 //		case '"':
@@ -2104,8 +2105,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				PerlIO_printf(Perl_debug_log,
 //						"### Saw unterminated string\n");
 //			} );
-//			if (PL_expect == XOPERATOR) {
-//				if (PL_lex_formbrack && PL_lex_brackets == PL_lex_formbrack) {
+//			if (PL_parser.expect == XOPERATOR) {
+//				if (PL_parser.lex_formbrack && PL_parser.lex_brackets == PL_parser.lex_formbrack) {
 //					return deprecate_commaless_var_list();
 //				}
 //				else
@@ -2113,71 +2114,71 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //			}
 //			if (!s)
 //				missingterm(NULL);
-//			pl_yylval.ival = OP_CONST;
+//			PL_parser.yylval.ival = OP_CONST;
 //	/* FIXME. I think that this can be const if char *d is replaced by
 //	   more localised variables.  */
-//			for (d = SvPV(PL_lex_stuff, len); len; len--, d++) {
-//				if (*d == '$' || *d == '@' || *d == '\\' || !UTF8_IS_INVARIANT((U8)*d)) {
-//					pl_yylval.ival = OP_STRINGIFY;
+//			for (d = SvPV(PL_parser.lex_stuff, len); len; len--, d++) {
+//				if (*d == '$' || *d == '@' || *d == '\\' || !UTF8_IS_INVARIANT((private int)*d)) {
+//					PL_parser.yylval.ival = OP_STRINGIFY;
 //					break;
 //				}
 //			}
-//			if (pl_yylval.ival == OP_CONST)
+//			if (PL_parser.yylval.ival == OP_CONST)
 //				COPLINE_SET_FROM_MULTI_END;
 //			TERM(sublex_start());
 //
 //		case '`':
 //			s = scan_str(s,FALSE,FALSE,FALSE,NULL);
 //			DEBUG_T( { printbuf("### Saw backtick string before %s\n", s); } );
-//			if (PL_expect == XOPERATOR)
+//			if (PL_parser.expect == XOPERATOR)
 //				no_op("Backticks",s);
 //			if (!s)
 //				missingterm(NULL);
-//			pl_yylval.ival = OP_BACKTICK;
+//			PL_parser.yylval.ival = OP_BACKTICK;
 //			TERM(sublex_start());
 //
 //		case '\\':
 //			s++;
-//			if (PL_lex_inwhat == OP_SUBST && PL_lex_repl == PL_linestr
+//			if (PL_parser.lex_inwhat == OP_SUBST && PL_parser.lex_repl == PL_parser.linestr
 //					&& isDIGIT(*s))
 //			Perl_ck_warner(aTHX_ packWARN(WARN_SYNTAX),"Can't use \\%c to mean $%c in expression",
 //					*s, *s);
-//			if (PL_expect == XOPERATOR)
+//			if (PL_parser.expect == XOPERATOR)
 //				no_op("Backslash",s);
 //			OPERATOR(REFGEN);
 //
 //		case 'v':
-//			if (isDIGIT(s[1]) && PL_expect != XOPERATOR) {
+//			if (isDIGIT(s[1]) && PL_parser.expect != XOPERATOR) {
 //				char *start = s + 2;
 //				while (isDIGIT(*start) || *start == '_')
 //				start++;
 //				if (*start == '.' && isDIGIT(start[1])) {
-//					s = scan_num(s, &pl_yylval);
+//					s = scan_num(s, &PL_parser.yylval);
 //					TERM(THING);
 //				}
 //				else if ((*start == ':' && start[1] == ':')
-//				|| (PL_expect == XSTATE && *start == ':'))
+//				|| (PL_parser.expect == XSTATE && *start == ':'))
 //				goto keylookup;
-//				else if (PL_expect == XSTATE) {
+//				else if (PL_parser.expect == XSTATE) {
 //					d = start;
-//					while (d < PL_bufend && isSPACE(*d)) d++;
+//					while (d < PL_parser.bufend && isSPACE(*d)) d++;
 //					if (*d == ':') goto keylookup;
 //				}
 //	    /* avoid v123abc() or $h{v1}, allow C<print v10;> */
-//				if (!isALPHA(*start) && (PL_expect == XTERM
-//						|| PL_expect == XSTATE
-//						|| PL_expect == XTERMORDORDOR)) {
+//				if (!isALPHA(*start) && (PL_parser.expect == XTERM
+//						|| PL_parser.expect == XSTATE
+//						|| PL_parser.expect == XTERMORDORDOR)) {
 //					GV *const gv = gv_fetchpvn_flags(s, start - s,
 //							UTF ? SVf_UTF8 : 0, SVt_PVCV);
 //					if (!gv) {
-//						s = scan_num(s, &pl_yylval);
+//						s = scan_num(s, &PL_parser.yylval);
 //						TERM(THING);
 //					}
 //				}
 //			}
 //			goto keylookup;
 //		case 'x':
-//			if (isDIGIT(s[1]) && PL_expect == XOPERATOR) {
+//			if (isDIGIT(s[1]) && PL_parser.expect == XOPERATOR) {
 //				s++;
 //				Mop(OP_REPEAT);
 //			}
@@ -2212,9 +2213,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		case 'z': case 'Z':
 //
 //			keylookup: {
-//				bool anydelim;
-//				bool lex;
-//				I32 tmp;
+//				boolean anydelim;
+//				boolean lex;
+//				private int tmp;
 //				SV *sv;
 //				CV *cv;
 //				PADOFFSET off;
@@ -2229,30 +2230,30 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				gvp = NULL;
 //				rv2cv_op = NULL;
 //
-//				PL_bufptr = s;
-//				s = scan_word(s, PL_tokenbuf, sizeof PL_tokenbuf, FALSE, &len);
+//				PL_parser.bufptr = s;
+//				s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, FALSE, &len);
 //
 //	/* Some keywords can be followed by any delimiter, including ':' */
-//				anydelim = word_takes_any_delimeter(PL_tokenbuf, len);
+//				anydelim = word_takes_any_delimeter(PL_parser.tokenbuf, len);
 //
 //	/* x::* is just a word, unless x is "CORE" */
 //				if (!anydelim && *s == ':' && s[1] == ':') {
-//					if (strEQ(PL_tokenbuf, "CORE")) goto case_KEY_CORE;
+//					if (strEQ(PL_parser.tokenbuf, "CORE")) goto case_KEY_CORE;
 //					goto just_a_word;
 //				}
 //
 //				d = s;
-//				while (d < PL_bufend && isSPACE(*d))
+//				while (d < PL_parser.bufend && isSPACE(*d))
 //				d++;	/* no comments skipped here, or s### is misparsed */
 //
 //	/* Is this a word before a => operator? */
 //				if (*d == '=' && d[1] == '>') {
 //					fat_arrow:
 //					CLINE;
-//					pl_yylval.opval
+//					PL_parser.yylval.opval
 //							= (OP*)newSVOP(OP_CONST, 0,
-//							S_newSV_maybe_utf8(aTHX_ PL_tokenbuf, len));
-//					pl_yylval.opval->op_private = OPpCONST_BARE;
+//							S_newSV_maybe_utf8(aTHX_ PL_parser.tokenbuf, len));
+//					PL_parser.yylval.opval->op_private = OPpCONST_BARE;
 //					TERM(WORD);
 //				}
 //
@@ -2260,57 +2261,57 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				{
 //					OP *o;
 //					int result;
-//					char *saved_bufptr = PL_bufptr;
-//					PL_bufptr = s;
-//					result = PL_keyword_plugin(aTHX_ PL_tokenbuf, len, &o);
-//					s = PL_bufptr;
+//					char *saved_bufptr = PL_parser.bufptr;
+//					PL_parser.bufptr = s;
+//					result = PL_keyword_plugin(aTHX_ PL_parser.tokenbuf, len, &o);
+//					s = PL_parser.bufptr;
 //					if (result == KEYWORD_PLUGIN_DECLINE) {
 //		/* not a plugged-in keyword */
-//						PL_bufptr = saved_bufptr;
+//						PL_parser.bufptr = saved_bufptr;
 //					} else if (result == KEYWORD_PLUGIN_STMT) {
-//						pl_yylval.opval = o;
+//						PL_parser.yylval.opval = o;
 //						CLINE;
-//						if (!PL_nexttoke) PL_expect = XSTATE;
+//						if (!PL_parser.nexttoke) PL_parser.expect = XSTATE;
 //						return REPORT(PLUGSTMT);
 //					} else if (result == KEYWORD_PLUGIN_EXPR) {
-//						pl_yylval.opval = o;
+//						PL_parser.yylval.opval = o;
 //						CLINE;
-//						if (!PL_nexttoke) PL_expect = XOPERATOR;
+//						if (!PL_parser.nexttoke) PL_parser.expect = XOPERATOR;
 //						return REPORT(PLUGEXPR);
 //					} else {
 //						Perl_croak(aTHX_ "Bad plugin affecting keyword '%s'",
-//								PL_tokenbuf);
+//								PL_parser.tokenbuf);
 //					}
 //				}
 //
 //	/* Check for built-in keyword */
-//				tmp = keyword(PL_tokenbuf, len, 0);
+//				tmp = keyword(PL_parser.tokenbuf, len, 0);
 //
 //	/* Is this a label? */
-//				if (!anydelim && PL_expect == XSTATE
-//						&& d < PL_bufend && *d == ':' && *(d + 1) != ':') {
+//				if (!anydelim && PL_parser.expect == XSTATE
+//						&& d < PL_parser.bufend && *d == ':' && *(d + 1) != ':') {
 //					s = d + 1;
-//					pl_yylval.pval = savepvn(PL_tokenbuf, len+1);
-//					pl_yylval.pval[len] = '\0';
-//					pl_yylval.pval[len+1] = UTF ? 1 : 0;
+//					PL_parser.yylval.pval = savepvn(PL_parser.tokenbuf, len+1);
+//					PL_parser.yylval.pval[len] = '\0';
+//					PL_parser.yylval.pval[len+1] = UTF ? 1 : 0;
 //					CLINE;
 //					TOKEN(LABEL);
 //				}
 //
 //	/* Check for lexical sub */
-//				if (PL_expect != XOPERATOR) {
-//					char tmpbuf[sizeof PL_tokenbuf + 1];
+//				if (PL_parser.expect != XOPERATOR) {
+//					char tmpbuf[sizeof PL_parser.tokenbuf + 1];
 //					*tmpbuf = '&';
-//					Copy(PL_tokenbuf, tmpbuf+1, len, char);
+//					Copy(PL_parser.tokenbuf, tmpbuf+1, len, char);
 //					off = pad_findmy_pvn(tmpbuf, len+1, UTF ? SVf_UTF8 : 0);
 //					if (off != NOT_IN_PAD) {
-//						assert(off); /* we assume this is boolean-true below */
+//						assert(off); /* we assume this is booleanean-true below */
 //						if (PAD_COMPNAME_FLAGS_isOUR(off)) {
 //							HV *  const stash = PAD_COMPNAME_OURSTASH(off);
 //							HEK * const stashname = HvNAME_HEK(stash);
 //							sv = newSVhek(stashname);
 //							sv_catpvs(sv, "::");
-//							sv_catpvn_flags(sv, PL_tokenbuf, len,
+//							sv_catpvn_flags(sv, PL_parser.tokenbuf, len,
 //									(UTF ? SV_CATUTF8 : SV_CATBYTES));
 //							gv = gv_fetchsv(sv, GV_NOADD_NOINIT | SvUTF8(sv),
 //									SVt_PVCV);
@@ -2335,9 +2336,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //				if (tmp < 0) {			/* second-class keyword? */
 //					GV *ogv = NULL;	/* override (winner) */
 //					GV *hgv = NULL;	/* hidden (loser) */
-//					if (PL_expect != XOPERATOR && (*s != ':' || s[1] != ':')) {
+//					if (PL_parser.expect != XOPERATOR && (*s != ':' || s[1] != ':')) {
 //						CV *cv;
-//						if ((gv = gv_fetchpvn_flags(PL_tokenbuf, len,
+//						if ((gv = gv_fetchpvn_flags(PL_parser.tokenbuf, len,
 //								(UTF ? SVf_UTF8 : 0)|GV_NOTQUAL,
 //								SVt_PVCV)) &&
 //								(cv = GvCVu(gv)))
@@ -2348,13 +2349,13 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								hgv = gv;
 //						}
 //						if (!ogv &&
-//								(gvp = (GV**)hv_fetch(PL_globalstash, PL_tokenbuf,
+//								(gvp = (GV**)hv_fetch(PL_globalstash, PL_parser.tokenbuf,
 //								len, FALSE)) &&
 //						(gv = *gvp) && (
 //								isGV_with_GP(gv)
 //										? GvCVu(gv) && GvIMPORTED_CV(gv)
 //										:   SvPCS_IMPORTED(gv)
-//										&& (gv_init(gv, PL_globalstash, PL_tokenbuf,
+//										&& (gv_init(gv, PL_globalstash, PL_parser.tokenbuf,
 //										len, 0), 1)
 //						))
 //						{
@@ -2391,13 +2392,13 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						&& (!anydelim || *s != '#')) {
 //	    /* no override, and not s### either; skipspace is safe here
 //	     * check for => on following line */
-//					bool arrow;
-//					STRLEN bufoff = PL_bufptr - SvPVX(PL_linestr);
-//					STRLEN   soff = s         - SvPVX(PL_linestr);
+//					boolean arrow;
+//					STRLEN bufoff = PL_parser.bufptr - SvPVX(PL_parser.linestr);
+//					STRLEN   soff = s         - SvPVX(PL_parser.linestr);
 //					s = skipspace_flags(s, LEX_NO_INCLINE);
 //					arrow = *s == '=' && s[1] == '>';
-//					PL_bufptr = SvPVX(PL_linestr) + bufoff;
-//					s         = SvPVX(PL_linestr) +   soff;
+//					PL_parser.bufptr = SvPVX(PL_parser.linestr) + bufoff;
+//					s         = SvPVX(PL_parser.linestr) +   soff;
 //					if (arrow)
 //					goto fat_arrow;
 //				}
@@ -2423,26 +2424,26 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						}
 //						just_a_word: {
 //							int pkgname = 0;
-//							const char lastchar = (PL_bufptr == PL_oldoldbufptr ? 0 : PL_bufptr[-1]);
-//							bool safebw;
+//							const char lastchar = (PL_parser.bufptr == PL_parser.oldoldbufptr ? 0 : PL_parser.bufptr[-1]);
+//							boolean safebw;
 //
 //
 //		/* Get the rest if it looks like a package qualifier */
 //
 //							if (*s == '\'' || (*s == ':' && s[1] == ':')) {
 //								STRLEN morelen;
-//								s = scan_word(s, PL_tokenbuf + len, sizeof PL_tokenbuf - len,
+//								s = scan_word(s, PL_parser.tokenbuf + len, sizeof PL_parser.tokenbuf - len,
 //										TRUE, &morelen);
 //								if (!morelen)
 //									Perl_croak(aTHX_ "Bad name after %"UTF8f"%s",
-//											UTF8fARG(UTF, len, PL_tokenbuf),
+//											UTF8fARG(UTF, len, PL_parser.tokenbuf),
 //											*s == '\'' ? "'" : "::");
 //								len += morelen;
 //								pkgname = 1;
 //							}
 //
-//							if (PL_expect == XOPERATOR) {
-//								if (PL_bufptr == PL_linestart) {
+//							if (PL_parser.expect == XOPERATOR) {
+//								if (PL_parser.bufptr == PL_parser.linestart) {
 //									CopLINE_dec(PL_curcop);
 //									Perl_warner(aTHX_ packWARN(WARN_SEMICOLON), "%s", PL_warn_nosemi);
 //									CopLINE_inc(PL_curcop);
@@ -2456,15 +2457,15 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		   (and a package name). */
 //
 //							if (len > 2 &&
-//									PL_tokenbuf[len - 2] == ':' && PL_tokenbuf[len - 1] == ':')
+//									PL_parser.tokenbuf[len - 2] == ':' && PL_parser.tokenbuf[len - 1] == ':')
 //							{
 //								if (ckWARN(WARN_BAREWORD)
-//										&& ! gv_fetchpvn_flags(PL_tokenbuf, len, UTF ? SVf_UTF8 : 0, SVt_PVHV))
+//										&& ! gv_fetchpvn_flags(PL_parser.tokenbuf, len, UTF ? SVf_UTF8 : 0, SVt_PVHV))
 //									Perl_warner(aTHX_ packWARN(WARN_BAREWORD),
 //											"Bareword \"%"UTF8f"\" refers to nonexistent package",
-//											UTF8fARG(UTF, len, PL_tokenbuf));
+//											UTF8fARG(UTF, len, PL_parser.tokenbuf));
 //								len -= 2;
-//								PL_tokenbuf[len] = '\0';
+//								PL_parser.tokenbuf[len] = '\0';
 //								gv = NULL;
 //								gvp = 0;
 //								safebw = TRUE;
@@ -2476,7 +2477,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		/* if we saw a global override before, get the right name */
 //
 //							if (!sv)
-//								sv = S_newSV_maybe_utf8(aTHX_ PL_tokenbuf,
+//								sv = S_newSV_maybe_utf8(aTHX_ PL_parser.tokenbuf,
 //										len);
 //							if (gvp) {
 //								SV * const tmp_sv = sv;
@@ -2488,8 +2489,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //		/* Presume this is going to be a bareword of some sort. */
 //							CLINE;
-//							pl_yylval.opval = (OP*)newSVOP(OP_CONST, 0, sv);
-//							pl_yylval.opval->op_private = OPpCONST_BARE;
+//							PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0, sv);
+//							PL_parser.yylval.opval->op_private = OPpCONST_BARE;
 //
 //		/* And if "Foo::", then that's what it certainly is. */
 //							if (safebw)
@@ -2516,15 +2517,15 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //		/* See if it's the indirect object for a list operator. */
 //
-//							if (PL_oldoldbufptr &&
-//									PL_oldoldbufptr < PL_bufptr &&
-//									(PL_oldoldbufptr == PL_last_lop
-//											|| PL_oldoldbufptr == PL_last_uni) &&
+//							if (PL_parser.oldoldbufptr &&
+//									PL_parser.oldoldbufptr < PL_parser.bufptr &&
+//									(PL_parser.oldoldbufptr == PL_parser.last_lop
+//											|| PL_parser.oldoldbufptr == PL_parser.last_uni) &&
 //		    /* NO SKIPSPACE BEFORE HERE! */
-//									(PL_expect == XREF ||
-//											((PL_opargs[PL_last_lop_op] >> OASHIFT)& 7) == OA_FILEREF))
+//									(PL_parser.expect == XREF ||
+//											((PL_opargs[PL_parser.last_lop_op] >> OASHIFT)& 7) == OA_FILEREF))
 //							{
-//								bool immediate_paren = *s == '(';
+//								boolean immediate_paren = *s == '(';
 //
 //		    /* (Now we can afford to cross potential line boundary.) */
 //								s = skipspace(s);
@@ -2541,20 +2542,20 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		    /* Also, if "_" follows a filetest operator, it's a bareword */
 //
 //								if (
-//										( !immediate_paren && (PL_last_lop_op == OP_SORT ||
+//										( !immediate_paren && (PL_parser.last_lop_op == OP_SORT ||
 //												(!cv &&
-//														(PL_last_lop_op != OP_MAPSTART &&
-//																PL_last_lop_op != OP_GREPSTART))))
-//												|| (PL_tokenbuf[0] == '_' && PL_tokenbuf[1] == '\0'
-//												&& ((PL_opargs[PL_last_lop_op] & OA_CLASS_MASK) == OA_FILESTATOP))
+//														(PL_parser.last_lop_op != OP_MAPSTART &&
+//																PL_parser.last_lop_op != OP_GREPSTART))))
+//												|| (PL_parser.tokenbuf[0] == '_' && PL_parser.tokenbuf[1] == '\0'
+//												&& ((PL_opargs[PL_parser.last_lop_op] & OA_CLASS_MASK) == OA_FILESTATOP))
 //										)
 //								{
-//									PL_expect = (PL_last_lop == PL_oldoldbufptr) ? XTERM : XOPERATOR;
+//									PL_parser.expect = (PL_parser.last_lop == PL_parser.oldoldbufptr) ? XTERM : XOPERATOR;
 //									goto bareword;
 //								}
 //							}
 //
-//							PL_expect = XOPERATOR;
+//							PL_parser.expect = XOPERATOR;
 //							s = skipspace(s);
 //
 //		/* Is this a word before a => operator? */
@@ -2562,13 +2563,13 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								op_free(rv2cv_op);
 //								CLINE;
 //								if (gvp || (lex && !off)) {
-//									assert (cSVOPx(pl_yylval.opval)->op_sv == sv);
+//									assert (cSVOPx(PL_parser.yylval.opval)->op_sv == sv);
 //			/* This is our own scalar, created a few lines
 //			   above, so this is safe. */
 //									SvREADONLY_off(sv);
-//									sv_setpv(sv, PL_tokenbuf);
+//									sv_setpv(sv, PL_parser.tokenbuf);
 //									if (UTF && !IN_BYTES
-//											&& is_utf8_string((U8*)PL_tokenbuf, len))
+//											&& is_utf8_string((private int*)PL_parser.tokenbuf, len))
 //										SvUTF8_on(sv);
 //									SvREADONLY_on(sv);
 //								}
@@ -2588,11 +2589,11 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //									}
 //								}
 //								NEXTVAL_NEXTTOKE.opval =
-//										off ? rv2cv_op : pl_yylval.opval;
+//										off ? rv2cv_op : PL_parser.yylval.opval;
 //								if (off)
-//									op_free(pl_yylval.opval), force_next(PRIVATEREF);
+//									op_free(PL_parser.yylval.opval), force_next(PRIVATEREF);
 //								else op_free(rv2cv_op),	   force_next(WORD);
-//								pl_yylval.ival = 0;
+//								PL_parser.yylval.ival = 0;
 //								TOKEN('&');
 //							}
 //
@@ -2600,13 +2601,13 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //							if ((*s == '$' || *s == '{') && !cv) {
 //								op_free(rv2cv_op);
-//								PL_last_lop = PL_oldbufptr;
-//								PL_last_lop_op = OP_METHOD;
-//								if (!PL_lex_allbrackets &&
-//										PL_lex_fakeeof > LEX_FAKEEOF_LOWLOGIC)
-//									PL_lex_fakeeof = LEX_FAKEEOF_LOWLOGIC;
-//								PL_expect = XBLOCKTERM;
-//								PL_bufptr = s;
+//								PL_parser.last_lop = PL_parser.oldbufptr;
+//								PL_parser.last_lop_op = OP_METHOD;
+//								if (!PL_parser.lex_allbrackets &&
+//										PL_parser.lex_fakeof > LEX_FAKEEOF_LOWLOGIC)
+//									PL_parser.lex_fakeof = LEX_FAKEEOF_LOWLOGIC;
+//								PL_parser.expect = XBLOCKTERM;
+//								PL_parser.bufptr = s;
 //								return REPORT(METHOD);
 //							}
 //
@@ -2617,18 +2618,18 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							&& (tmp = intuit_method(s, lex ? NULL : sv, cv))) {
 //								method:
 //								if (lex && !off) {
-//									assert(cSVOPx(pl_yylval.opval)->op_sv == sv);
+//									assert(cSVOPx(PL_parser.yylval.opval)->op_sv == sv);
 //									SvREADONLY_off(sv);
-//									sv_setpvn(sv, PL_tokenbuf, len);
+//									sv_setpvn(sv, PL_parser.tokenbuf, len);
 //									if (UTF && !IN_BYTES
-//											&& is_utf8_string((U8*)PL_tokenbuf, len))
+//											&& is_utf8_string((private int*)PL_parser.tokenbuf, len))
 //										SvUTF8_on (sv);
 //									else SvUTF8_off(sv);
 //								}
 //								op_free(rv2cv_op);
-//								if (tmp == METHOD && !PL_lex_allbrackets &&
-//										PL_lex_fakeeof > LEX_FAKEEOF_LOWLOGIC)
-//									PL_lex_fakeeof = LEX_FAKEEOF_LOWLOGIC;
+//								if (tmp == METHOD && !PL_parser.lex_allbrackets &&
+//										PL_parser.lex_fakeof > LEX_FAKEEOF_LOWLOGIC)
+//									PL_parser.lex_fakeof = LEX_FAKEEOF_LOWLOGIC;
 //								return REPORT(tmp);
 //							}
 //
@@ -2639,32 +2640,32 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								if ((sv = cv_const_sv_or_av(cv))) {
 //									its_constant:
 //									op_free(rv2cv_op);
-//									SvREFCNT_dec(((SVOP*)pl_yylval.opval)->op_sv);
-//									((SVOP*)pl_yylval.opval)->op_sv = SvREFCNT_inc_simple(sv);
+//									SvREFCNT_dec(((SVOP*)PL_parser.yylval.opval)->op_sv);
+//									((SVOP*)PL_parser.yylval.opval)->op_sv = SvREFCNT_inc_simple(sv);
 //									if (SvTYPE(sv) == SVt_PVAV)
-//										pl_yylval.opval = newUNOP(OP_RV2AV, OPf_PARENS,
-//												pl_yylval.opval);
+//										PL_parser.yylval.opval = newUNOP(OP_RV2AV, OPf_PARENS,
+//												PL_parser.yylval.opval);
 //									else {
-//										pl_yylval.opval->op_private = 0;
-//										pl_yylval.opval->op_folded = 1;
-//										pl_yylval.opval->op_flags |= OPf_SPECIAL;
+//										PL_parser.yylval.opval->op_private = 0;
+//										PL_parser.yylval.opval->op_folded = 1;
+//										PL_parser.yylval.opval->op_flags |= OPf_SPECIAL;
 //									}
 //									TOKEN(WORD);
 //								}
 //
-//								op_free(pl_yylval.opval);
-//								pl_yylval.opval =
+//								op_free(PL_parser.yylval.opval);
+//								PL_parser.yylval.opval =
 //										off ? (OP *)newCVREF(0, rv2cv_op) : rv2cv_op;
-//								pl_yylval.opval->op_private |= OPpENTERSUB_NOPAREN;
-//								PL_last_lop = PL_oldbufptr;
-//								PL_last_lop_op = OP_ENTERSUB;
+//								PL_parser.yylval.opval->op_private |= OPpENTERSUB_NOPAREN;
+//								PL_parser.last_lop = PL_parser.oldbufptr;
+//								PL_parser.last_lop_op = OP_ENTERSUB;
 //		    /* Is there a prototype? */
 //								if (
 //										SvPOK(cv))
 //								{
 //									STRLEN protolen = CvPROTOLEN(cv);
 //									const char *proto = CvPROTO(cv);
-//									bool optional;
+//									boolean optional;
 //									proto = S_strip_spaces(aTHX_ proto, &protolen);
 //									if (!protolen)
 //										TERM(FUNC0SUB);
@@ -2697,25 +2698,25 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //										sv_setpvs(PL_subname, "__ANON__");
 //									else
 //										sv_setpvs(PL_subname, "__ANON__::__ANON__");
-//									if (!PL_lex_allbrackets &&
-//											PL_lex_fakeeof > LEX_FAKEEOF_LOWLOGIC)
-//										PL_lex_fakeeof = LEX_FAKEEOF_LOWLOGIC;
+//									if (!PL_parser.lex_allbrackets &&
+//											PL_parser.lex_fakeof > LEX_FAKEEOF_LOWLOGIC)
+//										PL_parser.lex_fakeof = LEX_FAKEEOF_LOWLOGIC;
 //									PREBLOCK(LSTOPSUB);
 //								}
 //								}
-//								NEXTVAL_NEXTTOKE.opval = pl_yylval.opval;
-//								PL_expect = XTERM;
+//								NEXTVAL_NEXTTOKE.opval = PL_parser.yylval.opval;
+//								PL_parser.expect = XTERM;
 //								force_next(off ? PRIVATEREF : WORD);
-//								if (!PL_lex_allbrackets &&
-//										PL_lex_fakeeof > LEX_FAKEEOF_LOWLOGIC)
-//									PL_lex_fakeeof = LEX_FAKEEOF_LOWLOGIC;
+//								if (!PL_parser.lex_allbrackets &&
+//										PL_parser.lex_fakeof > LEX_FAKEEOF_LOWLOGIC)
+//									PL_parser.lex_fakeof = LEX_FAKEEOF_LOWLOGIC;
 //								TOKEN(NOAMP);
 //							}
 //
 //		/* Call it a bare word */
 //
 //							if (PL_hints & HINT_STRICT_SUBS)
-//								pl_yylval.opval->op_private |= OPpCONST_STRICT;
+//								PL_parser.yylval.opval->op_private |= OPpCONST_STRICT;
 //							else {
 //								bareword:
 //		    /* after "print" and similar functions (corresponding to
@@ -2723,24 +2724,24 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		     * a filehandle should be subject to "strict subs".
 //		     * Likewise for the optional indirect-object argument to system
 //		     * or exec, which can't be a bareword */
-//								if ((PL_last_lop_op == OP_PRINT
-//										|| PL_last_lop_op == OP_PRTF
-//										|| PL_last_lop_op == OP_SAY
-//										|| PL_last_lop_op == OP_SYSTEM
-//										|| PL_last_lop_op == OP_EXEC)
+//								if ((PL_parser.last_lop_op == OP_PRINT
+//										|| PL_parser.last_lop_op == OP_PRTF
+//										|| PL_parser.last_lop_op == OP_SAY
+//										|| PL_parser.last_lop_op == OP_SYSTEM
+//										|| PL_parser.last_lop_op == OP_EXEC)
 //										&& (PL_hints & HINT_STRICT_SUBS))
-//									pl_yylval.opval->op_private |= OPpCONST_STRICT;
+//									PL_parser.yylval.opval->op_private |= OPpCONST_STRICT;
 //								if (lastchar != '-') {
 //									if (ckWARN(WARN_RESERVED)) {
-//										d = PL_tokenbuf;
+//										d = PL_parser.tokenbuf;
 //										while (isLOWER(*d))
 //										d++;
-//										if (!*d && !gv_stashpv(PL_tokenbuf, UTF ? SVf_UTF8 : 0))
+//										if (!*d && !gv_stashpv(PL_parser.tokenbuf, UTF ? SVf_UTF8 : 0))
 //										{
 //                                /* PL_warn_reserved is constant */
 //											GCC_DIAG_IGNORE(-Wformat-nonliteral);
 //											Perl_warner(aTHX_ packWARN(WARN_RESERVED), PL_warn_reserved,
-//													PL_tokenbuf);
+//													PL_parser.tokenbuf);
 //											GCC_DIAG_RESTORE;
 //										}
 //									}
@@ -2754,8 +2755,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								Perl_ck_warner_d(aTHX_ packWARN(WARN_AMBIGUOUS),
 //										"Operator or semicolon missing before %c%"UTF8f,
 //										lastchar,
-//										UTF8fARG(UTF, strlen(PL_tokenbuf),
-//												PL_tokenbuf));
+//										UTF8fARG(UTF, strlen(PL_parser.tokenbuf),
+//												PL_parser.tokenbuf));
 //								Perl_ck_warner_d(aTHX_ packWARN(WARN_AMBIGUOUS),
 //										"Ambiguous use of %c resolved as operator %c",
 //										lastchar, lastchar);
@@ -2785,8 +2786,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //					case KEY___DATA__:
 //					case KEY___END__: {
 //						GV *gv;
-//						if (PL_rsfp && (!PL_in_eval || PL_tokenbuf[2] == 'D')) {
-//							HV * const stash = PL_tokenbuf[2] == 'D' && PL_curstash
+//						if (PL_parser.rsfp && (!PL_in_eval || PL_parser.tokenbuf[2] == 'D')) {
+//							HV * const stash = PL_parser.tokenbuf[2] == 'D' && PL_curstash
 //									? PL_curstash
 //									: PL_defstash;
 //							gv = (GV *)*hv_fetchs(stash, "DATA", 1);
@@ -2795,16 +2796,16 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							GvMULTI_on(gv);
 //							if (!GvIO(gv))
 //								GvIOp(gv) = newIO();
-//							IoIFP(GvIOp(gv)) = PL_rsfp;
+//							IoIFP(GvIOp(gv)) = PL_parser.rsfp;
 //							#if defined(HAS_FCNTL) && defined(F_SETFD)
 //							{
-//								const int fd = PerlIO_fileno(PL_rsfp);
+//								const int fd = PerlIO_fileno(PL_parser.rsfp);
 //								fcntl(fd,F_SETFD,fd >= 3);
 //							}
 //							#endif
 //		/* Mark this internal pseudo-handle as clean */
 //							IoFLAGS(GvIOp(gv)) |= IOf_UNTAINT;
-//							if ((PerlIO*)PL_rsfp == PerlIO_stdin())
+//							if ((PerlIO*)PL_parser.rsfp == PerlIO_stdin())
 //							IoTYPE(GvIOp(gv)) = IoTYPE_STD;
 //							else
 //							IoTYPE(GvIOp(gv)) = IoTYPE_RDONLY;
@@ -2812,28 +2813,28 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //		/* if the script was opened in binmode, we need to revert
 //		 * it to text mode for compatibility; but only iff it has CRs
 //		 * XXX this is a questionable hack at best. */
-//							if (PL_bufend-PL_bufptr > 2
-//									&& PL_bufend[-1] == '\n' && PL_bufend[-2] == '\r')
+//							if (PL_parser.bufend-PL_parser.bufptr > 2
+//									&& PL_parser.bufend[-1] == '\n' && PL_parser.bufend[-2] == '\r')
 //							{
 //								Off_t loc = 0;
 //								if (IoTYPE(GvIOp(gv)) == IoTYPE_RDONLY) {
-//									loc = PerlIO_tell(PL_rsfp);
-//									(void)PerlIO_seek(PL_rsfp, 0L, 0);
+//									loc = PerlIO_tell(PL_parser.rsfp);
+//									(void)PerlIO_seek(PL_parser.rsfp, 0L, 0);
 //								}
 //								#ifdef NETWARE
-//								if (PerlLIO_setmode(PL_rsfp, O_TEXT) != -1) {
+//								if (PerlLIO_setmode(PL_parser.rsfp, O_TEXT) != -1) {
 //									#else
-//									if (PerlLIO_setmode(PerlIO_fileno(PL_rsfp), O_TEXT) != -1) {
+//									if (PerlLIO_setmode(PerlIO_fileno(PL_parser.rsfp), O_TEXT) != -1) {
 //										#endif	/* NETWARE */
 //										if (loc > 0)
-//											PerlIO_seek(PL_rsfp, loc, 0);
+//											PerlIO_seek(PL_parser.rsfp, loc, 0);
 //									}
 //								}
 //								#endif
 //								#ifdef PERLIO_LAYERS
 //								if (!IN_BYTES) {
 //									if (UTF)
-//										PerlIO_apply_layers(aTHX_ PL_rsfp, NULL, ":utf8");
+//										PerlIO_apply_layers(aTHX_ PL_parser.rsfp, NULL, ":utf8");
 //									else if (PL_encoding) {
 //										SV *name;
 //										dSP;
@@ -2846,7 +2847,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //										SPAGAIN;
 //										name = POPs;
 //										PUTBACK;
-//										PerlIO_apply_layers(aTHX_ PL_rsfp, NULL,
+//										PerlIO_apply_layers(aTHX_ PL_parser.rsfp, NULL,
 //												Perl_form(aTHX_ ":encoding(%"SVf")",
 //														SVfARG(name)));
 //										FREETMPS;
@@ -2854,7 +2855,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //									}
 //								}
 //								#endif
-//									PL_rsfp = NULL;
+//									PL_parser.rsfp = NULL;
 //							}
 //							goto fake_eof;
 //						}
@@ -2871,8 +2872,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						case KEY_CHECK:
 //						case KEY_INIT:
 //						case KEY_END:
-//							if (PL_expect == XSTATE) {
-//								s = PL_bufptr;
+//							if (PL_parser.expect == XSTATE) {
+//								s = PL_parser.bufptr;
 //								goto really_sub;
 //							}
 //							goto just_a_word;
@@ -2882,18 +2883,18 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								STRLEN olen = len;
 //								d = s;
 //								s += 2;
-//								s = scan_word(s, PL_tokenbuf, sizeof PL_tokenbuf, FALSE, &len);
+//								s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, FALSE, &len);
 //								if ((*s == ':' && s[1] == ':')
-//								|| (!(tmp = keyword(PL_tokenbuf, len, 1)) && *s == '\''))
+//								|| (!(tmp = keyword(PL_parser.tokenbuf, len, 1)) && *s == '\''))
 //								{
 //									s = d;
 //									len = olen;
-//									Copy(PL_bufptr, PL_tokenbuf, olen, char);
+//									Copy(PL_parser.bufptr, PL_parser.tokenbuf, olen, char);
 //									goto just_a_word;
 //								}
 //								if (!tmp)
 //									Perl_croak(aTHX_ "CORE::%"UTF8f" is not a keyword",
-//											UTF8fARG(UTF, len, PL_tokenbuf));
+//											UTF8fARG(UTF, len, PL_parser.tokenbuf));
 //								if (tmp < 0)
 //									tmp = -tmp;
 //								else if (tmp == KEY_require || tmp == KEY_do
@@ -2913,7 +2914,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							LOP(OP_ACCEPT,XTERM);
 //
 //						case KEY_and:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_LOWLOGIC)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_LOWLOGIC)
 //								return REPORT(0);
 //							OPERATOR(ANDOP);
 //
@@ -2959,7 +2960,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							UNI(OP_CLOSEDIR);
 //
 //						case KEY_cmp:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE)
 //								return REPORT(0);
 //							Eop(OP_SCMP);
 //
@@ -3001,11 +3002,11 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							if (*s == '{')
 //							PRETERMBLOCK(DO);
 //							if (*s != '\'') {
-//							*PL_tokenbuf = '&';
-//							d = scan_word(s, PL_tokenbuf + 1, sizeof PL_tokenbuf - 1,
+//							*PL_parser.tokenbuf = '&';
+//							d = scan_word(s, PL_parser.tokenbuf + 1, sizeof PL_parser.tokenbuf - 1,
 //									1, &len);
-//							if (len && (len != 4 || strNE(PL_tokenbuf+1, "CORE"))
-//									&& !keyword(PL_tokenbuf + 1, len, 0)) {
+//							if (len && (len != 4 || strNE(PL_parser.tokenbuf+1, "CORE"))
+//									&& !keyword(PL_parser.tokenbuf + 1, len, 0)) {
 //								d = skipspace(d);
 //								if (*d == '(') {
 //									force_ident_maybe_lex('&');
@@ -3015,10 +3016,10 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						}
 //						if (orig_keyword == KEY_do) {
 //							orig_keyword = 0;
-//							pl_yylval.ival = 1;
+//							PL_parser.yylval.ival = 1;
 //						}
 //						else
-//							pl_yylval.ival = 0;
+//							PL_parser.yylval.ival = 0;
 //						OPERATOR(DO);
 //
 //						case KEY_die:
@@ -3051,11 +3052,11 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							PREBLOCK(ELSE);
 //
 //						case KEY_elsif:
-//							pl_yylval.ival = CopLINE(PL_curcop);
+//							PL_parser.yylval.ival = CopLINE(PL_curcop);
 //							OPERATOR(ELSIF);
 //
 //						case KEY_eq:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE)
 //								return REPORT(0);
 //							Eop(OP_SEQ);
 //
@@ -3068,16 +3069,16 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						case KEY_eval:
 //							s = skipspace(s);
 //							if (*s == '{') { /* block eval */
-//							PL_expect = XTERMBLOCK;
+//							PL_parser.expect = XTERMBLOCK;
 //							UNIBRACK(OP_ENTERTRY);
 //						}
 //						else { /* string eval */
-//							PL_expect = XTERM;
+//							PL_parser.expect = XTERM;
 //							UNIBRACK(OP_ENTEREVAL);
 //						}
 //
 //						case KEY_evalbytes:
-//							PL_expect = XTERM;
+//							PL_parser.expect = XTERM;
 //							UNIBRACK(-OP_ENTEREVAL);
 //
 //						case KEY_eof:
@@ -3112,23 +3113,23 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //						case KEY_for:
 //						case KEY_foreach:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_NONEXPR)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_NONEXPR)
 //								return REPORT(0);
-//							pl_yylval.ival = CopLINE(PL_curcop);
+//							PL_parser.yylval.ival = CopLINE(PL_curcop);
 //							s = skipspace(s);
-//							if (PL_expect == XSTATE && isIDFIRST_lazy_if(s,UTF)) {
+//							if (PL_parser.expect == XSTATE && isIDFIRST_lazy_if(s,UTF)) {
 //								char *p = s;
 //
-//								if ((PL_bufend - p) >= 3 &&
+//								if ((PL_parser.bufend - p) >= 3 &&
 //										strnEQ(p, "my", 2) && isSPACE(*(p + 2)))
 //								p += 2;
-//								else if ((PL_bufend - p) >= 4 &&
+//								else if ((PL_parser.bufend - p) >= 4 &&
 //										strnEQ(p, "our", 3) && isSPACE(*(p + 3)))
 //								p += 3;
 //								p = skipspace(p);
 //                /* skip optional package name, as in "for my abc $x (..)" */
 //								if (isIDFIRST_lazy_if(p,UTF)) {
-//									p = scan_word(p, PL_tokenbuf, sizeof PL_tokenbuf, TRUE, &len);
+//									p = scan_word(p, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, TRUE, &len);
 //									p = skipspace(p);
 //								}
 //								if (*p != '$')
@@ -3155,12 +3156,12 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							LOP(OP_FLOCK,XTERM);
 //
 //						case KEY_gt:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE)
 //								return REPORT(0);
 //							Rop(OP_SGT);
 //
 //						case KEY_ge:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE)
 //								return REPORT(0);
 //							Rop(OP_SGE);
 //
@@ -3252,7 +3253,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							FUN0(OP_GETLOGIN);
 //
 //						case KEY_given:
-//							pl_yylval.ival = CopLINE(PL_curcop);
+//							PL_parser.yylval.ival = CopLINE(PL_curcop);
 //							Perl_ck_warner_d(aTHX_
 //									packWARN(WARN_EXPERIMENTAL__SMARTMATCH),
 //									"given is experimental");
@@ -3268,9 +3269,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							UNI(OP_HEX);
 //
 //						case KEY_if:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_NONEXPR)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_NONEXPR)
 //								return REPORT(0);
-//							pl_yylval.ival = CopLINE(PL_curcop);
+//							PL_parser.yylval.ival = CopLINE(PL_curcop);
 //							OPERATOR(IF);
 //
 //						case KEY_index:
@@ -3301,19 +3302,19 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							UNI(OP_LCFIRST);
 //
 //						case KEY_local:
-//							pl_yylval.ival = 0;
+//							PL_parser.yylval.ival = 0;
 //							OPERATOR(LOCAL);
 //
 //						case KEY_length:
 //							UNI(OP_LENGTH);
 //
 //						case KEY_lt:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE)
 //								return REPORT(0);
 //							Rop(OP_SLT);
 //
 //						case KEY_le:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE)
 //								return REPORT(0);
 //							Rop(OP_SLE);
 //
@@ -3360,11 +3361,11 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						case KEY_our:
 //						case KEY_my:
 //						case KEY_state:
-//							PL_in_my = (U16)tmp;
+//							PL_parser.in_my = (private int)tmp;
 //							s = skipspace(s);
 //							if (isIDFIRST_lazy_if(s,UTF)) {
-//								s = scan_word(s, PL_tokenbuf, sizeof PL_tokenbuf, TRUE, &len);
-//								if (len == 3 && strnEQ(PL_tokenbuf, "sub", 3))
+//								s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, TRUE, &len);
+//								if (len == 3 && strnEQ(PL_parser.tokenbuf, "sub", 3))
 //								{
 //									if (!FEATURE_LEXSUBS_IS_ENABLED)
 //										Perl_croak(aTHX_
@@ -3376,24 +3377,24 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //											"The lexical_subs feature is experimental");
 //									goto really_sub;
 //								}
-//								PL_in_my_stash = find_in_my_stash(PL_tokenbuf, len);
-//								if (!PL_in_my_stash) {
+//								PL_parser.in_my_stash = find_in_my_stash(PL_parser.tokenbuf, len);
+//								if (!PL_parser.in_my_stash) {
 //									char tmpbuf[1024];
 //									int len;
-//									PL_bufptr = s;
-//									len = my_snprintf(tmpbuf, sizeof(tmpbuf), "No such class %.1000s", PL_tokenbuf);
+//									PL_parser.bufptr = s;
+//									len = my_snprintf(tmpbuf, sizeof(tmpbuf), "No such class %.1000s", PL_parser.tokenbuf);
 //									PERL_MY_SNPRINTF_POST_GUARD(len, sizeof(tmpbuf));
 //									yyerror_pv(tmpbuf, UTF ? SVf_UTF8 : 0);
 //								}
 //							}
-//							pl_yylval.ival = 1;
+//							PL_parser.yylval.ival = 1;
 //							OPERATOR(MY);
 //
 //						case KEY_next:
 //							LOOPX(OP_NEXT);
 //
 //						case KEY_ne:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_COMPARE)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE)
 //								return REPORT(0);
 //							Eop(OP_SNE);
 //
@@ -3405,9 +3406,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							if (*s == '(' || (s = skipspace(s), *s == '('))
 //							FUN1(OP_NOT);
 //							else {
-//							if (!PL_lex_allbrackets &&
-//									PL_lex_fakeeof > LEX_FAKEEOF_LOWLOGIC)
-//								PL_lex_fakeeof = LEX_FAKEEOF_LOWLOGIC;
+//							if (!PL_parser.lex_allbrackets &&
+//									PL_parser.lex_fakeof > LEX_FAKEEOF_LOWLOGIC)
+//								PL_parser.lex_fakeof = LEX_FAKEEOF_LOWLOGIC;
 //							OPERATOR(NOTOP);
 //						}
 //
@@ -3415,7 +3416,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							s = skipspace(s);
 //							if (isIDFIRST_lazy_if(s,UTF)) {
 //								const char *t;
-//								d = scan_word(s, PL_tokenbuf, sizeof PL_tokenbuf, FALSE,
+//								d = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, FALSE,
 //										&len);
 //								for (t=d; isSPACE(*t);)
 //								t++;
@@ -3433,9 +3434,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							LOP(OP_OPEN,XTERM);
 //
 //						case KEY_or:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_LOWLOGIC)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_LOWLOGIC)
 //								return REPORT(0);
-//							pl_yylval.ival = OP_OR;
+//							PL_parser.yylval.ival = OP_OR;
 //							OPERATOR(OROP);
 //
 //						case KEY_ord:
@@ -3448,11 +3449,11 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							LOP(OP_OPEN_DIR,XTERM);
 //
 //						case KEY_print:
-//							checkcomma(s,PL_tokenbuf,"filehandle");
+//							checkcomma(s,PL_parser.tokenbuf,"filehandle");
 //							LOP(OP_PRINT,XREF);
 //
 //						case KEY_printf:
-//							checkcomma(s,PL_tokenbuf,"filehandle");
+//							checkcomma(s,PL_parser.tokenbuf,"filehandle");
 //							LOP(OP_PRTF,XREF);
 //
 //						case KEY_prototype:
@@ -3484,7 +3485,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							if (!s)
 //								missingterm(NULL);
 //							COPLINE_SET_FROM_MULTI_END;
-//							pl_yylval.ival = OP_CONST;
+//							PL_parser.yylval.ival = OP_CONST;
 //							TERM(sublex_start());
 //
 //						case KEY_quotemeta:
@@ -3496,11 +3497,11 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							if (!s)
 //								missingterm(NULL);
 //							COPLINE_SET_FROM_MULTI_END;
-//							PL_expect = XOPERATOR;
-//							if (SvCUR(PL_lex_stuff)) {
+//							PL_parser.expect = XOPERATOR;
+//							if (SvCUR(PL_parser.lex_stuff)) {
 //								int warned_comma = !ckWARN(WARN_QW);
 //								int warned_comment = warned_comma;
-//								d = SvPV_force(PL_lex_stuff, len);
+//								d = SvPV_force(PL_parser.lex_stuff, len);
 //								while (len) {
 //									for (; isSPACE(*d) && len; --len, ++d)
 //			/**/;
@@ -3525,7 +3526,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //											for (; !isSPACE(*d) && len; --len, ++d)
 //				/**/;
 //										}
-//										sv = newSVpvn_utf8(b, d-b, DO_UTF8(PL_lex_stuff));
+//										sv = newSVpvn_utf8(b, d-b, DO_UTF8(PL_parser.lex_stuff));
 //										words = op_append_elem(OP_LIST, words,
 //												newSVOP(OP_CONST, 0, tokeq(sv)));
 //									}
@@ -3533,12 +3534,12 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							}
 //							if (!words)
 //								words = newNULLLIST();
-//							if (PL_lex_stuff) {
-//								SvREFCNT_dec(PL_lex_stuff);
-//								PL_lex_stuff = NULL;
+//							if (PL_parser.lex_stuff) {
+//								SvREFCNT_dec(PL_parser.lex_stuff);
+//								PL_parser.lex_stuff = NULL;
 //							}
-//							PL_expect = XOPERATOR;
-//							pl_yylval.opval = sawparens(words);
+//							PL_parser.expect = XOPERATOR;
+//							PL_parser.yylval.opval = sawparens(words);
 //							TOKEN(QWLIST);
 //						}
 //
@@ -3546,9 +3547,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							s = scan_str(s,FALSE,FALSE,FALSE,NULL);
 //							if (!s)
 //								missingterm(NULL);
-//							pl_yylval.ival = OP_STRINGIFY;
-//							if (SvIVX(PL_lex_stuff) == '\'')
-//								SvIV_set(PL_lex_stuff, 0);	/* qq'$foo' should interpolate */
+//							PL_parser.yylval.ival = OP_STRINGIFY;
+//							if (SvIVX(PL_parser.lex_stuff) == '\'')
+//								SvIV_set(PL_parser.lex_stuff, 0);	/* qq'$foo' should interpolate */
 //							TERM(sublex_start());
 //
 //						case KEY_qr:
@@ -3559,7 +3560,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							s = scan_str(s,FALSE,FALSE,FALSE,NULL);
 //							if (!s)
 //								missingterm(NULL);
-//							pl_yylval.ival = OP_BACKTICK;
+//							PL_parser.yylval.ival = OP_BACKTICK;
 //							TERM(sublex_start());
 //
 //						case KEY_return:
@@ -3573,24 +3574,24 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						else if (*s != 'v' || !isDIGIT(s[1])
 //								|| (s = force_version(s, TRUE), *s == 'v'))
 //						{
-//							*PL_tokenbuf = '\0';
+//							*PL_parser.tokenbuf = '\0';
 //							s = force_word(s,WORD,TRUE,TRUE);
-//							if (isIDFIRST_lazy_if(PL_tokenbuf,UTF))
-//								gv_stashpvn(PL_tokenbuf, strlen(PL_tokenbuf),
+//							if (isIDFIRST_lazy_if(PL_parser.tokenbuf,UTF))
+//								gv_stashpvn(PL_parser.tokenbuf, strlen(PL_parser.tokenbuf),
 //										GV_ADD | (UTF ? SVf_UTF8 : 0));
 //							else if (*s == '<')
 //							yyerror("<> at require-statement should be quotes");
 //						}
 //						if (orig_keyword == KEY_require) {
 //							orig_keyword = 0;
-//							pl_yylval.ival = 1;
+//							PL_parser.yylval.ival = 1;
 //						}
 //						else
-//							pl_yylval.ival = 0;
-//						PL_expect = PL_nexttoke ? XOPERATOR : XTERM;
-//						PL_bufptr = s;
-//						PL_last_uni = PL_oldbufptr;
-//						PL_last_lop_op = OP_REQUIRE;
+//							PL_parser.yylval.ival = 0;
+//						PL_parser.expect = PL_parser.nexttoke ? XOPERATOR : XTERM;
+//						PL_parser.bufptr = s;
+//						PL_parser.last_uni = PL_parser.oldbufptr;
+//						PL_parser.last_lop_op = OP_REQUIRE;
 //						s = skipspace(s);
 //						return REPORT( (int)REQUIRE );
 //
@@ -3641,13 +3642,13 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //						case KEY_s:
 //							s = scan_subst(s);
-//							if (pl_yylval.opval)
+//							if (PL_parser.yylval.opval)
 //								TERM(sublex_start());
 //							else
 //								TOKEN(1);	/* force error */
 //
 //						case KEY_say:
-//							checkcomma(s,PL_tokenbuf,"filehandle");
+//							checkcomma(s,PL_parser.tokenbuf,"filehandle");
 //							LOP(OP_SAY,XREF);
 //
 //						case KEY_chomp:
@@ -3735,9 +3736,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							LOP(OP_SOCKPAIR,XTERM);
 //
 //						case KEY_sort:
-//							checkcomma(s,PL_tokenbuf,"subroutine name");
+//							checkcomma(s,PL_parser.tokenbuf,"subroutine name");
 //							s = skipspace(s);
-//							PL_expect = XTERM;
+//							PL_parser.expect = XTERM;
 //							s = force_word(s,WORD,TRUE,TRUE);
 //							LOP(OP_SORT,XREF);
 //
@@ -3769,9 +3770,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //						case KEY_sub:
 //							really_sub:
 //							{
-//								char * const tmpbuf = PL_tokenbuf + 1;
+//								char * const tmpbuf = PL_parser.tokenbuf + 1;
 //								expectation attrful;
-//								bool have_name, have_proto;
+//								boolean have_name, have_proto;
 //								const int key = tmp;
 //								SV *format_name = NULL;
 //
@@ -3782,16 +3783,16 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //									(*s == ':' && s[1] == ':'))
 //								{
 //
-//									PL_expect = XBLOCK;
+//									PL_parser.expect = XBLOCK;
 //									attrful = XATTRBLOCK;
-//									d = scan_word(s, tmpbuf, sizeof PL_tokenbuf - 1, TRUE,
+//									d = scan_word(s, tmpbuf, sizeof PL_parser.tokenbuf - 1, TRUE,
 //											&len);
 //									if (key == KEY_format)
 //										format_name = S_newSV_maybe_utf8(aTHX_ s, d - s);
-//									*PL_tokenbuf = '&';
+//									*PL_parser.tokenbuf = '&';
 //									if (memchr(tmpbuf, ':', len) || key != KEY_sub
 //											|| pad_findmy_pvn(
-//											PL_tokenbuf, len + 1, UTF ? SVf_UTF8 : 0
+//											PL_parser.tokenbuf, len + 1, UTF ? SVf_UTF8 : 0
 //									) != NOT_IN_PAD)
 //										sv_setpvn(PL_subname, tmpbuf, len);
 //									else {
@@ -3799,7 +3800,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //										sv_catpvs(PL_subname,"::");
 //										sv_catpvn(PL_subname,tmpbuf,len);
 //									}
-//									if (SvUTF8(PL_linestr))
+//									if (SvUTF8(PL_parser.linestr))
 //										SvUTF8_on(PL_subname);
 //									have_name = TRUE;
 //
@@ -3812,9 +3813,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //									*d = '\0';
 //			/* diag_listed_as: Missing name in "%s sub" */
 //									Perl_croak(aTHX_
-//											"Missing name in \"%s\"", PL_bufptr);
+//											"Missing name in \"%s\"", PL_parser.bufptr);
 //								}
-//								PL_expect = XTERMBLOCK;
+//								PL_parser.expect = XTERMBLOCK;
 //								attrful = XATTRTERM;
 //								sv_setpvs(PL_subname,"?");
 //								have_name = FALSE;
@@ -3836,7 +3837,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								COPLINE_SET_FROM_MULTI_END;
 //								if (!s)
 //									Perl_croak(aTHX_ "Prototype not terminated");
-//								(void)validate_proto(PL_subname, PL_lex_stuff, ckWARN(WARN_ILLEGALPROTO));
+//								(void)validate_proto(PL_subname, PL_parser.lex_stuff, ckWARN(WARN_ILLEGALPROTO));
 //								have_proto = TRUE;
 //
 //								s = skipspace(s);
@@ -3845,7 +3846,7 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //								have_proto = FALSE;
 //
 //								if (*s == ':' && s[1] != ':')
-//								PL_expect = attrful;
+//								PL_parser.expect = attrful;
 //								else if ((*s != '{' && *s != '(') && key == KEY_sub) {
 //								if (!have_name)
 //									Perl_croak(aTHX_ "Illegal declaration of anonymous subroutine");
@@ -3855,8 +3856,8 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //
 //								if (have_proto) {
 //									NEXTVAL_NEXTTOKE.opval =
-//											(OP*)newSVOP(OP_CONST, 0, PL_lex_stuff);
-//									PL_lex_stuff = NULL;
+//											(OP*)newSVOP(OP_CONST, 0, PL_parser.lex_stuff);
+//									PL_parser.lex_stuff = NULL;
 //									force_next(THING);
 //								}
 //								if (!have_name) {
@@ -3927,15 +3928,15 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							UNI(OP_UNTIE);
 //
 //						case KEY_until:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_NONEXPR)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_NONEXPR)
 //								return REPORT(0);
-//							pl_yylval.ival = CopLINE(PL_curcop);
+//							PL_parser.yylval.ival = CopLINE(PL_curcop);
 //							OPERATOR(UNTIL);
 //
 //						case KEY_unless:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_NONEXPR)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_NONEXPR)
 //								return REPORT(0);
-//							pl_yylval.ival = CopLINE(PL_curcop);
+//							PL_parser.yylval.ival = CopLINE(PL_curcop);
 //							OPERATOR(UNLESS);
 //
 //						case KEY_unlink:
@@ -3967,18 +3968,18 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							LOP(OP_VEC,XTERM);
 //
 //						case KEY_when:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_NONEXPR)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_NONEXPR)
 //								return REPORT(0);
-//							pl_yylval.ival = CopLINE(PL_curcop);
+//							PL_parser.yylval.ival = CopLINE(PL_curcop);
 //							Perl_ck_warner_d(aTHX_
 //									packWARN(WARN_EXPERIMENTAL__SMARTMATCH),
 //									"when is experimental");
 //							OPERATOR(WHEN);
 //
 //						case KEY_while:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_NONEXPR)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_NONEXPR)
 //								return REPORT(0);
-//							pl_yylval.ival = CopLINE(PL_curcop);
+//							PL_parser.yylval.ival = CopLINE(PL_curcop);
 //							OPERATOR(WHILE);
 //
 //						case KEY_warn:
@@ -4001,9 +4002,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							UNI(OP_ENTERWRITE);
 //
 //						case KEY_x:
-//							if (PL_expect == XOPERATOR) {
-//								if (*s == '=' && !PL_lex_allbrackets &&
-//										PL_lex_fakeeof >= LEX_FAKEEOF_ASSIGN)
+//							if (PL_parser.expect == XOPERATOR) {
+//								if (*s == '=' && !PL_parser.lex_allbrackets &&
+//										PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN)
 //								return REPORT(0);
 //								Mop(OP_REPEAT);
 //							}
@@ -4011,9 +4012,9 @@ public class PerlLexerPorted implements FlexLexer, PerlTokenTypes, PerlLexerPort
 //							goto just_a_word;
 //
 //						case KEY_xor:
-//							if (!PL_lex_allbrackets && PL_lex_fakeeof >= LEX_FAKEEOF_LOWLOGIC)
+//							if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_LOWLOGIC)
 //								return REPORT(0);
-//							pl_yylval.ival = OP_XOR;
+//							PL_parser.yylval.ival = OP_XOR;
 //							OPERATOR(OROP);
 //					}
 //				}}

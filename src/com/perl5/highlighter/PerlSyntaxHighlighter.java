@@ -8,12 +8,9 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.lexer.PerlElementType;
-import com.perl5.lang.lexer.PerlLexer;
-import com.perl5.lang.lexer.PerlLexerPorted;
+import com.perl5.lang.lexer.ported.Toke;
 import com.perl5.lang.parser.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
 
 import java.awt.*;
 import java.io.Reader;
@@ -41,7 +38,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
-		return new FlexAdapter(new PerlLexerPorted((Reader) null));
+		return new FlexAdapter(new Toke((Reader) null));
 	}
 
 	@NotNull

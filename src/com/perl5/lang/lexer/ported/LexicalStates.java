@@ -1,9 +1,9 @@
-package com.perl5.lang.lexer;
+package com.perl5.lang.lexer.ported;
 
 /**
  * Created by hurricup on 18.04.2015.
  */
-public interface PerlLexerPortedLexicalStates
+public interface LexicalStates
 {
 	/** lexical states */
 	public static final int LEX_NORMAL =		10; /* normal code (ie not within "...")     */

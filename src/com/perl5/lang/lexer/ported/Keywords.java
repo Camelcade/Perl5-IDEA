@@ -1,9 +1,9 @@
-package com.perl5.lang.lexer;
+package com.perl5.lang.lexer.ported;
 
 /**
  * Created by hurricup on 18.04.2015.
  */
-public interface PerlLexerPortedKeywords
+public interface Keywords
 {
 	static final int KEY_NULL = 0;
 	static final int KEY___FILE__ = 1;
