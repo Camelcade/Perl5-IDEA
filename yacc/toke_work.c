@@ -43,10 +43,7 @@ Individual members of C<PL_parser> have their own documentation.
 #define new_constant(a,b,c,d,e,f,g)	\
 	S_new_constant(aTHX_ a,b,STR_WITH_LEN(c),d,e,f, g)
 
-
 static const char* const ident_too_long = "Identifier too long";
-
-#  define NEXTVAL_NEXTTOKE PL_nextval[PL_nexttoke]
 
 #define XENUMMASK  0x3f
 #define XFAKEEOF   0x40
@@ -82,13 +79,6 @@ static const char* const ident_too_long = "Identifier too long";
 
 /* #define LEX_NOTPARSING		11 is done in perl.h. */
 
-
-
-#include "keywords.h"
-
-/* CLINE is a macro that ensures PL_copline has a sane value */
-
-#define CLINE (PL_copline = (CopLINE(PL_curcop) < PL_copline ? CopLINE(PL_curcop) : PL_copline))
 
 /*
  * Convenience functions to return different tokens and prime the

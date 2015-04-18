@@ -11,36 +11,18 @@ import java.io.IOException;
  * Attempt to port toke.c from perl 5.21.6
  * Cloned from JFlex generated PerlLexer
  */
-public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
+public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords, Handy, Perl
 {
-	/* error messages for the codes above */
-	private static final String ZZ_ERROR_MSG[] = {
-			"Unkown internal scanner error",
-			"Error: could not match input",
-			"Error: pushback value was too large"
-	};
-
-	/* error codes */
-	private static final int ZZ_UNKNOWN_ERROR = 0;
-	private static final int ZZ_NO_MATCH = 1;
-	private static final int ZZ_PUSHBACK_2BIG = 2;
-	private static final char[] EMPTY_BUFFER = new char[0];
-	private static final int YYEOF = -1;
+	public static final char XENUMMASK  = 0x3f;
+	public static final char XFAKEEOF   = 0x40;
+	public static final char XFAKEBRACK = 0x80;
 
 	private CharSequence sequenceBuffer = "";
-	private char[] charactersBuffer;
-
-	private int currentPosition;
-	private int lastPosition;
 
 //	private int markedPosition;
-
-	private int tokenStart;	// char index of first token's char
-	private int tokenEnd;	// char index of first char after token's end
-
 	private static java.io.Reader zzReader = null; // Fake
-
-	private com.perl5.lang.lexer.ported.Parser PL_parser;	// in toke.c it seems local variable, current parser
+	private yy_parser PL_parser;	// in toke.c it seems local variable, current parser
+	COP PL_curcop;
 
 	public Toke(java.io.Reader in)
 	{
@@ -73,21 +55,21 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 	@Override
 	public int getTokenStart()
 	{
-		return tokenStart;
+		return PL_parser.oldbufptr;
 	}
 
 	@Override
 	public int getTokenEnd()
 	{
-		return tokenEnd;
+		return PL_parser.bufptr;
 	}
 
 	/**
 	 * Returns the text matched by the current regular expression (current token).
 	 */
 	public final CharSequence yytext() {
-		System.err.printf("Requested yytext %u-%u\n", tokenStart, tokenEnd);
-		return sequenceBuffer.subSequence(tokenStart, tokenEnd);
+		System.err.printf("Requested yytext %u-%u\n", getTokenStart(), getTokenEnd());
+		return sequenceBuffer.subSequence(getTokenStart(), getTokenEnd());
 	}
 
 
@@ -104,9 +86,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 	 */
 	public final char yycharat(int pos) {
 		System.err.printf("Requested yycahrat %u\n", pos);
-		return charactersBuffer != null
-				? charactersBuffer[tokenStart+pos]
-				: sequenceBuffer.charAt(tokenStart+pos);
+		return PL_parser.linestr != null
+				? PL_parser.linestr[getTokenStart()+pos]
+				: sequenceBuffer.charAt(getTokenStart()+pos);
 	}
 
 
@@ -114,48 +96,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 	 * Returns the length of the matched text region.
 	 */
 	public final int yylength() {
-		return tokenEnd + 1 - tokenStart;
-	}
-
-	/**
-	 * Reports an error that occured while scanning.
-	 *
-	 * In a wellformed scanner (no or only correct usage of
-	 * yypushback(int) and a match-all fallback rule) this method
-	 * will only be called with things that "Can't Possibly Happen".
-	 * If this method is called, something is seriously wrong
-	 * (e.g. a JFlex bug producing a faulty scanner etc.).
-	 *
-	 * Usual syntax/scanner level error handling should be done
-	 * in error fallback rules.
-	 *
-	 * @param   errorCode  the code of the errormessage to display
-	 */
-	private void zzScanError(int errorCode) {
-		String message;
-		try {
-			message = ZZ_ERROR_MSG[errorCode];
-		}
-		catch (ArrayIndexOutOfBoundsException e) {
-			message = ZZ_ERROR_MSG[ZZ_UNKNOWN_ERROR];
-		}
-
-		throw new Error(message);
-	}
-
-	/**
-	 * Pushes the specified amount of characters back into the input stream.
-	 *
-	 * They will be read again by then next call of the scanning method
-	 *
-	 * @param number  the number of characters to be read again.
-	 *                This number must not be greater than yylength()!
-	 */
-	public void yypushback(int number)  {
-		if ( number > yylength() )
-			zzScanError(ZZ_PUSHBACK_2BIG);
-
-		currentPosition -= number;
+		return getTokenEnd() - getTokenStart();
 	}
 
 
@@ -166,11 +107,60 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 	public void reset(CharSequence buffer, int start, int end, int initialState)
 	{
 		System.err.printf("Reset lexer to %d %d %d\n", start, end, initialState);
-		sequenceBuffer = buffer;
-		charactersBuffer = com.intellij.util.text.CharArrayUtil.fromSequenceWithoutCopying(buffer);
 
-		currentPosition = tokenStart = tokenEnd = start;
-		lastPosition = end;
+		sequenceBuffer = buffer;
+
+/* START OF
+ void
+	Perl_lex_start(pTHX_ SV *line, PerlIO *rsfp, U32 flags)
+*/
+		yy_parser parser, oparser;
+
+//    const char *s = NULL;
+
+
+//     create and initialise a parser
+		parser = new yy_parser();
+
+		parser.old_parser = oparser = PL_parser;
+		PL_parser = parser;
+
+		parser.stack_size = 0;
+
+//    /* on scope exit, free this parser and restore any outer one
+		parser.saved_curcop = PL_curcop;
+
+//    /* initialise lexer state
+
+		parser.nexttoke = 0;
+		parser.error_count = oparser != null
+				? oparser.error_count
+				: 0;
+		parser.copline = parser.preambling = NOLINE;
+		parser.lex_state = LEX_NORMAL;
+		parser.expect = expectation.XSTATE;
+
+
+		//  Source filtering releted, not used
+//		parser.rsfp_filters =
+//				!(flags & LEX_START_SAME_FILTER) || !oparser
+//						? NULL
+//						: MUTABLE_AV(SvREFCNT_inc(
+//						oparser->rsfp_filters
+//								? oparser->rsfp_filters
+//								: (oparser->rsfp_filters = newAV())
+//				));
+
+
+		parser.lex_casestack[0] = '\0';
+		parser.linestr = com.intellij.util.text.CharArrayUtil.fromSequenceWithoutCopying(buffer);;
+		parser.oldoldbufptr = parser.oldbufptr = parser.bufptr = parser.linestart = 0;
+		parser.bufend = end;
+		parser.in_pod = parser.filtered = 0;
+/* END OF
+ void
+	Perl_lex_start(pTHX_ SV *line, PerlIO *rsfp, U32 flags)
+*/
 
 		yybegin(initialState);
 
@@ -186,16 +176,16 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 	@Override
 	public IElementType advance() throws IOException
 	{
-		System.err.printf("Invoked advance for %d of %d\n", currentPosition, lastPosition);
-		if (currentPosition == lastPosition)    // end of file
+		System.err.printf("Invoked advance for %d of %d\n", PL_parser.bufptr, PL_parser.bufend);
+		if (PL_parser.bufptr == PL_parser.bufend)    // end of file
 			return null;
 
 		stateCase();
 		charCase();
 
-		tokenStart = currentPosition;
-		tokenEnd = currentPosition;
-		currentPosition = tokenEnd + 1;
+		PL_parser.oldoldbufptr = PL_parser.oldbufptr;
+		PL_parser.oldbufptr = PL_parser.bufptr;
+		PL_parser.bufptr++;
 		return PERL_BAD_CHARACTER;
 	}
 
@@ -295,20 +285,20 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //						PL_parser.lex_casestack[PL_parser.lex_casemods++] = *s;
 //						PL_parser.lex_casestack[PL_parser.lex_casemods] = '\0';
 //						PL_parser.lex_state = LEX_INTERPCONCAT;
-//						NEXTVAL_NEXTTOKE.ival = 0;
+//						 PL_parser.nextval[PL_parser.nexttoke].ival = 0;
 //						force_next((2<<24)|'(');
 //						if (*s == 'l')
-//						NEXTVAL_NEXTTOKE.ival = OP_LCFIRST;
+//						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_LCFIRST;
 //						else if (*s == 'u')
-//						NEXTVAL_NEXTTOKE.ival = OP_UCFIRST;
+//						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_UCFIRST;
 //						else if (*s == 'L')
-//						NEXTVAL_NEXTTOKE.ival = OP_LC;
+//						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_LC;
 //						else if (*s == 'U')
-//						NEXTVAL_NEXTTOKE.ival = OP_UC;
+//						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_UC;
 //						else if (*s == 'Q')
-//						NEXTVAL_NEXTTOKE.ival = OP_QUOTEMETA;
+//						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_QUOTEMETA;
 //						else if (*s == 'F')
-//						NEXTVAL_NEXTTOKE.ival = OP_FC;
+//						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_FC;
 //						else
 //						Perl_croak(aTHX_ "panic: yylex, *s=%u", *s);
 //						PL_parser.bufptr = s + 1;
@@ -342,14 +332,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //						&& (!PL_parser.lex_inpat || PL_parser.lex_casemods));
 //				PL_parser.lex_state = LEX_INTERPNORMAL;
 //				if (PL_parser.lex_dojoin) {
-//					NEXTVAL_NEXTTOKE.ival = 0;
+//					 PL_parser.nextval[PL_parser.nexttoke].ival = 0;
 //					force_next(',');
 //					force_ident("\"", '$');
-//					NEXTVAL_NEXTTOKE.ival = 0;
+//					 PL_parser.nextval[PL_parser.nexttoke].ival = 0;
 //					force_next('$');
-//					NEXTVAL_NEXTTOKE.ival = 0;
+//					 PL_parser.nextval[PL_parser.nexttoke].ival = 0;
 //					force_next((2<<24)|'(');
-//					NEXTVAL_NEXTTOKE.ival = OP_JOIN;	/* emulate join($", ...) */
+//					 PL_parser.nextval[PL_parser.nexttoke].ival = OP_JOIN;	/* emulate join($", ...) */
 //					force_next(FUNC);
 //				}
 //	/* Convert (?{...}) and friends to 'do {...}' */
@@ -415,7 +405,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //					}
 //					else sv = newSVpvn(PL_parser.lex_shared->re_eval_start,
 //							PL_parser.bufptr - PL_parser.lex_shared->re_eval_start);
-//					NEXTVAL_NEXTTOKE.opval =
+//					 PL_parser.nextval[PL_parser.nexttoke].opval =
 //							(OP*)newSVOP(OP_CONST, 0,
 //							sv);
 //					force_next(THING);
@@ -450,7 +440,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //				}
 //
 //				if (s != PL_parser.bufptr) {
-//					NEXTVAL_NEXTTOKE = PL_parser.yylval;
+//					 PL_parser.nextval[PL_parser.nexttoke] = PL_parser.yylval;
 //					PL_parser.expect = XTERM;
 //					force_next(THING);
 //					if (PL_parser.lex_starts++) {
@@ -848,7 +838,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //			}
 //			if (PL_parser.lex_formbrack && PL_parser.lex_brackets <= PL_parser.lex_formbrack) {
 //				PL_parser.lex_state = LEX_FORMLINE;
-//				NEXTVAL_NEXTTOKE.ival = 0;
+//				 PL_parser.nextval[PL_parser.nexttoke].ival = 0;
 //				force_next(FORMRBRACK);
 //				TOKEN(';');
 //			}
@@ -891,7 +881,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //				incline(s);
 //			if (PL_parser.lex_formbrack && PL_parser.lex_brackets <= PL_parser.lex_formbrack) {
 //				PL_parser.lex_state = LEX_FORMLINE;
-//				NEXTVAL_NEXTTOKE.ival = 0;
+//				 PL_parser.nextval[PL_parser.nexttoke].ival = 0;
 //				force_next(FORMRBRACK);
 //				TOKEN(';');
 //			}
@@ -1289,7 +1279,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //				}
 //				got_attrs:
 //				if (attrs) {
-//					NEXTVAL_NEXTTOKE.opval = attrs;
+//					 PL_parser.nextval[PL_parser.nexttoke].opval = attrs;
 //					force_next(THING);
 //				}
 //				TOKEN(COLONATTR);
@@ -1313,7 +1303,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //		case ';':
 //			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >= LEX_FAKEEOF_NONEXPR)
 //				TOKEN(0);
-//			CLINE;
+//			PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //			s++;
 //			PL_parser.expect = XSTATE;
 //			TOKEN(';');
@@ -1820,7 +1810,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //		Rop(OP_GT);
 //
 //		case '$':
-//			CLINE;
+//			PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //
 //			if (PL_parser.expect == XOPERATOR) {
 //				if (PL_parser.lex_formbrack && PL_parser.lex_brackets == PL_parser.lex_formbrack) {
@@ -2249,7 +2239,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //	/* Is this a word before a => operator? */
 //				if (*d == '=' && d[1] == '>') {
 //					fat_arrow:
-//					CLINE;
+//					PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //					PL_parser.yylval.opval
 //							= (OP*)newSVOP(OP_CONST, 0,
 //							S_newSV_maybe_utf8(aTHX_ PL_parser.tokenbuf, len));
@@ -2265,17 +2255,17 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //					PL_parser.bufptr = s;
 //					result = PL_keyword_plugin(aTHX_ PL_parser.tokenbuf, len, &o);
 //					s = PL_parser.bufptr;
-//					if (result == KEYWORD_PLUGIN_DECLINE) {
+//					if (result == KEYWORD_PLUGIN_DEPL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline)) {
 //		/* not a plugged-in keyword */
 //						PL_parser.bufptr = saved_bufptr;
 //					} else if (result == KEYWORD_PLUGIN_STMT) {
 //						PL_parser.yylval.opval = o;
-//						CLINE;
+//						PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //						if (!PL_parser.nexttoke) PL_parser.expect = XSTATE;
 //						return REPORT(PLUGSTMT);
 //					} else if (result == KEYWORD_PLUGIN_EXPR) {
 //						PL_parser.yylval.opval = o;
-//						CLINE;
+//						PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //						if (!PL_parser.nexttoke) PL_parser.expect = XOPERATOR;
 //						return REPORT(PLUGEXPR);
 //					} else {
@@ -2294,7 +2284,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //					PL_parser.yylval.pval = savepvn(PL_parser.tokenbuf, len+1);
 //					PL_parser.yylval.pval[len] = '\0';
 //					PL_parser.yylval.pval[len+1] = UTF ? 1 : 0;
-//					CLINE;
+//					PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //					TOKEN(LABEL);
 //				}
 //
@@ -2395,7 +2385,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //					boolean arrow;
 //					STRLEN bufoff = PL_parser.bufptr - SvPVX(PL_parser.linestr);
 //					STRLEN   soff = s         - SvPVX(PL_parser.linestr);
-//					s = skipspace_flags(s, LEX_NO_INCLINE);
+//					s = skipspace_flags(s, LEX_NO_INPL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline));
 //					arrow = *s == '=' && s[1] == '>';
 //					PL_parser.bufptr = SvPVX(PL_parser.linestr) + bufoff;
 //					s         = SvPVX(PL_parser.linestr) +   soff;
@@ -2488,7 +2478,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //
 //
 //		/* Presume this is going to be a bareword of some sort. */
-//							CLINE;
+//							PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //							PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0, sv);
 //							PL_parser.yylval.opval->op_private = OPpCONST_BARE;
 //
@@ -2561,7 +2551,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //		/* Is this a word before a => operator? */
 //							if (*s == '=' && s[1] == '>' && !pkgname) {
 //								op_free(rv2cv_op);
-//								CLINE;
+//								PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //								if (gvp || (lex && !off)) {
 //									assert (cSVOPx(PL_parser.yylval.opval)->op_sv == sv);
 //			/* This is our own scalar, created a few lines
@@ -2578,7 +2568,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //
 //		/* If followed by a paren, it's certainly a subroutine. */
 //							if (*s == '(') {
-//								CLINE;
+//								PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //								if (cv) {
 //									d = s + 1;
 //									while (SPACE_OR_TAB(*d))
@@ -2588,7 +2578,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //										goto its_constant;
 //									}
 //								}
-//								NEXTVAL_NEXTTOKE.opval =
+//								 PL_parser.nextval[PL_parser.nexttoke].opval =
 //										off ? rv2cv_op : PL_parser.yylval.opval;
 //								if (off)
 //									op_free(PL_parser.yylval.opval), force_next(PRIVATEREF);
@@ -2704,7 +2694,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //									PREBLOCK(LSTOPSUB);
 //								}
 //								}
-//								NEXTVAL_NEXTTOKE.opval = PL_parser.yylval.opval;
+//								 PL_parser.nextval[PL_parser.nexttoke].opval = PL_parser.yylval.opval;
 //								PL_parser.expect = XTERM;
 //								force_next(off ? PRIVATEREF : WORD);
 //								if (!PL_parser.lex_allbrackets &&
@@ -3823,9 +3813,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //
 //								if (key == KEY_format) {
 //									if (format_name) {
-//										NEXTVAL_NEXTTOKE.opval
+//										 PL_parser.nextval[PL_parser.nexttoke].opval
 //												= (OP*)newSVOP(OP_CONST,0, format_name);
-//										NEXTVAL_NEXTTOKE.opval->op_private |= OPpCONST_BARE;
+//										 PL_parser.nextval[PL_parser.nexttoke].opval->op_private |= OPpCONST_BARE;
 //										force_next(WORD);
 //									}
 //									PREBLOCK(FORMAT);
@@ -3855,7 +3845,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords
 //							}
 //
 //								if (have_proto) {
-//									NEXTVAL_NEXTTOKE.opval =
+//									 PL_parser.nextval[PL_parser.nexttoke].opval =
 //											(OP*)newSVOP(OP_CONST, 0, PL_parser.lex_stuff);
 //									PL_parser.lex_stuff = NULL;
 //									force_next(THING);

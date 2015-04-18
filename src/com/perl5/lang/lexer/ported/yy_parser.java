@@ -4,11 +4,11 @@ package com.perl5.lang.lexer.ported;
  * Created by hurricup on 18.04.2015.
 	 parser.h
  */
-public class Parser
+public class yy_parser
 {
     /* parser state */
 
-	public Toke old_parser; /* previous value of PL_parser */
+	public yy_parser old_parser; /* previous value of PL_parser */
 	public YYSTYPE	    yylval;	/* value of lookahead symbol, set by yylex() */
 	public char	    yychar;	/* The lookahead symbol.  */
 
@@ -23,13 +23,13 @@ public class Parser
 	/* lexer state */
 	public int		lex_brackets;	/* square and curly bracket count */
 	public int		lex_casemods;	/* casemod count */
-	public char		lex_brackstack;/* what kind of brackets to pop */
-	public char		lex_casestack;	/* what kind of case mods in effect */
+	public char[]	lex_brackstack = new char[120]; /* what kind of brackets to pop */
+	public char[]	lex_casestack = new char[12];	/* what kind of case mods in effect */
 	public int		lex_defer;	/* state after determined token */
 	public int		lex_dojoin;	/* doing an array interpolation
 									1 = @{...}  2 = ->@ */
 	public int		lex_expect;	/* UNUSED */
-	public int		expect;		/* how to interpret ambiguous tokens */
+	public Perl.expectation		expect;		/* how to interpret ambiguous tokens */
 	public int		lex_formbrack;	/* bracket count at outer format level */
 	public OP		lex_inpat;	/* in pattern $) and $| are special */
 	public OP		lex_op;	/* extra info to pass back on op */
@@ -46,15 +46,19 @@ public class Parser
 	public boolean 	lex_re_reparsing; /* we're doing G_RE_REPARSING */
 	public int			lex_allbrackets;/* (), [], {}, ?: bracket count */
 	public SUBLEXINFO	sublex_info;
-	public LEXSHARED	lex_shared;
-	public SV			linestr;	/* current chunk of src text */
-	public char		bufptr;	/* carries the cursor (current parsing
+	public LEXSHARED	lex_shared = new LEXSHARED();
+
+	public char[]		linestr;			// current chunk of src text */ SV in toke.c
+	public int	bufptr;	/* carries the cursor (current parsing
 				   				position) from one invocation of yylex
-				   				to the next */
-	public char	oldbufptr;	/* in yylex, beginning of current token */
-	public char	oldoldbufptr;	/* in yylex, beginning of previous token */
-	public char	bufend;
-	public char	linestart;	/* beginning of most recently read line */
+				   				to the next
+							Pointer in Perl, offset in Java
+				   		*/
+	public int	oldbufptr;	/* in yylex, beginning of current token, Pointer in Perl, offset in Java */
+	public int	oldoldbufptr;	/* in yylex, beginning of previous token, Pointer in Perl, offset in Java */
+	public int	bufend; // Pointer in Perl, offset in Java
+	public int	linestart;	// beginning of most recently read line, Pointer in Perl, offset in Java
+
 	public char	last_uni;	/* position of last named-unary op */
 	public char	last_lop;	/* position of last list operator */
 	/* copline is used to pass a specific line number to newSTATEOP.  It
@@ -66,8 +70,8 @@ public class Parser
 	public int	lex_state;	/* next token is determined */
 	public int	error_count;	/* how many compile errors so far, max 10 */
 	HV			in_my_stash;	/* declared class of this "my" declaration */
-	PerlIO		rsfp;		/* current source file pointer */
-	AV			rsfp_filters;	/* holds chain of active source filters */
+//	PerlIO		rsfp;		/* current source file pointer */ 				Not used in Java implementation
+//	AV			rsfp_filters;	/* holds chain of active source filters */	Not used in Java implementation
 	public int	form_lex_state;	/* remember lex_state when parsing fmt */
 
 	YYSTYPE[]		nextval = new YYSTYPE[5];	/* value of next token, if any */
