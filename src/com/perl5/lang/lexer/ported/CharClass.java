@@ -7,6 +7,74 @@ package com.perl5.lang.lexer.ported;
  */
 public class CharClass
 {
+	// @todo make a proper validation in WE encoding
+	static boolean FITS_IN_8_BITS(char c)
+	{
+		return c < 0xFF;
+	}
+
+	static int _CC_mask(int classnum)
+	{
+		return (1 << classnum);
+	}
+
+
+	static boolean _generic_isCC(char c, int classnum)
+	{
+		return FITS_IN_8_BITS(c)
+			&& ((PL_charclass[c] & _CC_mask(classnum)) > 0);
+	}
+
+    /* The mask for the _A versions of the macros; it just adds in the bit for
+     * ASCII. */
+	static int _CC_mask_A(int classnum)
+	{
+		return (_CC_mask(classnum) | _CC_mask(_CC_ASCII));
+	}
+
+    /* For internal core Perl use only: the base macro for defining macros like
+     * isALPHA_A.  The foo_A version makes sure that both the desired bit and
+     * the ASCII bit are present */
+	static boolean _generic_isCC_A(char c, int classnum){
+		return (FITS_IN_8_BITS(c)
+			&& ((PL_charclass[c] & _CC_mask_A(classnum))
+				== _CC_mask_A(classnum)));
+	}
+
+	static boolean isALPHA_A(char c){ return  _generic_isCC_A(c, _CC_ALPHA);}
+	static boolean isALPHANUMERIC_A(char c){ return _generic_isCC_A(c, _CC_ALPHANUMERIC);}
+	static boolean isBLANK_A(char c){ return  _generic_isCC_A(c, _CC_BLANK);}
+	static boolean isCNTRL_A(char c){ return  _generic_isCC_A(c, _CC_CNTRL);}
+	static boolean isDIGIT_A(char c){ return  _generic_isCC(c, _CC_DIGIT);} /* No non-ASCII digits */
+	static boolean isGRAPH_A(char c){ return  _generic_isCC_A(c, _CC_GRAPH);}
+	static boolean isLOWER_A(char c){ return  _generic_isCC_A(c, _CC_LOWER);}
+	static boolean isPRINT_A(char c){ return  _generic_isCC_A(c, _CC_PRINT);}
+	static boolean isPSXSPC_A(char c){ return _generic_isCC_A(c, _CC_PSXSPC);}
+	static boolean isPUNCT_A(char c){ return  _generic_isCC_A(c, _CC_PUNCT);}
+	static boolean isSPACE_A(char c){ return  _generic_isCC_A(c, _CC_SPACE);}
+	static boolean isUPPER_A(char c){ return  _generic_isCC_A(c, _CC_UPPER);}
+	static boolean isWORDCHAR_A(char c){ return _generic_isCC_A(c, _CC_WORDCHAR);}
+	static boolean isXDIGIT_A(char c){ return  _generic_isCC(c, _CC_XDIGIT);} /* No non-ASCII xdigits */
+	static boolean isIDFIRST_A(char c){ return _generic_isCC_A(c, _CC_IDFIRST);}
+	static boolean isALPHA_L1(char c){ return  _generic_isCC(c, _CC_ALPHA);}
+	static boolean isALPHANUMERIC_L1(char c){ return _generic_isCC(c, _CC_ALPHANUMERIC);}
+	static boolean isBLANK_L1(char c){ return  _generic_isCC(c, _CC_BLANK);}
+
+/* continuation character for legal NAME in \N{NAME} */
+	static boolean isCHARNAME_CONT(char c){ return _generic_isCC(c, _CC_CHARNAME_CONT);}
+
+	static boolean isCNTRL_L1(char c){ return  _generic_isCC(c, _CC_CNTRL);}
+	static boolean isGRAPH_L1(char c){ return  _generic_isCC(c, _CC_GRAPH);}
+	static boolean isLOWER_L1(char c){ return  _generic_isCC(c, _CC_LOWER);}
+	static boolean isPRINT_L1(char c){ return  _generic_isCC(c, _CC_PRINT);}
+	static boolean isPSXSPC_L1(char c){ return _generic_isCC(c, _CC_PSXSPC);}
+	static boolean isPUNCT_L1(char c){ return  _generic_isCC(c, _CC_PUNCT);}
+	static boolean isSPACE_L1(char c){ return  _generic_isCC(c, _CC_SPACE);}
+	static boolean isUPPER_L1(char c){ return  _generic_isCC(c, _CC_UPPER);}
+	static boolean isWORDCHAR_L1(char c){ return _generic_isCC(c, _CC_WORDCHAR);}
+	static boolean isIDFIRST_L1(char c){ return _generic_isCC(c, _CC_IDFIRST);}
+
+
 	/* Character class numbers.  For internal core Perl use only.  The ones less
 	 * than 32 are used in PL_charclass[] and the ones up through the one that
 	 * corresponds to <_HIGHEST_REGCOMP_DOT_H_SYNC> are used by regcomp.h and
