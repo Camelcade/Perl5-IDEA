@@ -41,21 +41,21 @@ public class CharClass
 				== _CC_mask_A(classnum)));
 	}
 
-	static boolean isALPHA_A(char c){ return  _generic_isCC_A(c, _CC_ALPHA);}
-	static boolean isALPHANUMERIC_A(char c){ return _generic_isCC_A(c, _CC_ALPHANUMERIC);}
-	static boolean isBLANK_A(char c){ return  _generic_isCC_A(c, _CC_BLANK);}
-	static boolean isCNTRL_A(char c){ return  _generic_isCC_A(c, _CC_CNTRL);}
-	static boolean isDIGIT_A(char c){ return  _generic_isCC(c, _CC_DIGIT);} /* No non-ASCII digits */
-	static boolean isGRAPH_A(char c){ return  _generic_isCC_A(c, _CC_GRAPH);}
-	static boolean isLOWER_A(char c){ return  _generic_isCC_A(c, _CC_LOWER);}
-	static boolean isPRINT_A(char c){ return  _generic_isCC_A(c, _CC_PRINT);}
-	static boolean isPSXSPC_A(char c){ return _generic_isCC_A(c, _CC_PSXSPC);}
-	static boolean isPUNCT_A(char c){ return  _generic_isCC_A(c, _CC_PUNCT);}
-	static boolean isSPACE_A(char c){ return  _generic_isCC_A(c, _CC_SPACE);}
-	static boolean isUPPER_A(char c){ return  _generic_isCC_A(c, _CC_UPPER);}
-	static boolean isWORDCHAR_A(char c){ return _generic_isCC_A(c, _CC_WORDCHAR);}
-	static boolean isXDIGIT_A(char c){ return  _generic_isCC(c, _CC_XDIGIT);} /* No non-ASCII xdigits */
-	static boolean isIDFIRST_A(char c){ return _generic_isCC_A(c, _CC_IDFIRST);}
+	static boolean isALPHA(char c){ return  _generic_isCC_A(c, _CC_ALPHA);}
+	static boolean isALPHANUMERIC(char c){ return _generic_isCC_A(c, _CC_ALPHANUMERIC);}
+	static boolean isBLANK(char c){ return  _generic_isCC_A(c, _CC_BLANK);}
+	static boolean isCNTRL(char c){ return  _generic_isCC_A(c, _CC_CNTRL);}
+	static boolean isDIGIT(char c){ return  _generic_isCC(c, _CC_DIGIT);} /* No non-ASCII digits */
+	static boolean isGRAPH(char c){ return  _generic_isCC_A(c, _CC_GRAPH);}
+	static boolean isLOWER(char c){ return  _generic_isCC_A(c, _CC_LOWER);}
+	static boolean isPRINT(char c){ return  _generic_isCC_A(c, _CC_PRINT);}
+	static boolean isPSXSPC(char c){ return _generic_isCC_A(c, _CC_PSXSPC);}
+	static boolean isPUNCT(char c){ return  _generic_isCC_A(c, _CC_PUNCT);}
+	static boolean isSPACE(char c){ return  _generic_isCC_A(c, _CC_SPACE);}
+	static boolean isUPPER(char c){ return  _generic_isCC_A(c, _CC_UPPER);}
+	static boolean isWORDCHAR(char c){ return _generic_isCC_A(c, _CC_WORDCHAR);}
+	static boolean isXDIGIT(char c){ return  _generic_isCC(c, _CC_XDIGIT);} /* No non-ASCII xdigits */
+	static boolean isIDFIRST(char c){ return _generic_isCC_A(c, _CC_IDFIRST);}
 	static boolean isALPHA_L1(char c){ return  _generic_isCC(c, _CC_ALPHA);}
 	static boolean isALPHANUMERIC_L1(char c){ return _generic_isCC(c, _CC_ALPHANUMERIC);}
 	static boolean isBLANK_L1(char c){ return  _generic_isCC(c, _CC_BLANK);}

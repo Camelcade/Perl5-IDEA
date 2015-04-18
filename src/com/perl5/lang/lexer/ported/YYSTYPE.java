@@ -5,7 +5,7 @@ package com.perl5.lang.lexer.ported;
  */
 public class YYSTYPE
 {
-	public int ival;
+	public char ival;
 	public char pval;
 	public int opval;
 	public int gvval;

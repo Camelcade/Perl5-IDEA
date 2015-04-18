@@ -66,7 +66,7 @@ public class yy_parser
 	   NOLINE) after using it.  The purpose of this is to report line num-
 	   bers in multiline constructs using the number of the first line. */
 	public int	copline;
-	public int	in_my;		/* we're compiling a "my"/"our" declaration */
+	public int	in_my = 0;		/* we're compiling a "my"/"our" declaration */
 	public int	lex_state;	/* next token is determined */
 	public int	error_count;	/* how many compile errors so far, max 10 */
 	HV			in_my_stash;	/* declared class of this "my" declaration */
@@ -76,16 +76,16 @@ public class yy_parser
 
 	YYSTYPE[]		nextval = new YYSTYPE[5];	/* value of next token, if any */
 	public int[]	nexttype = new int[5];	/* type of next token */
-	public int	nexttoke;
+	public int		nexttoke;
 
-	COP			saved_curcop;	/* the previous PL_curcop */
-	char[]		tokenbuf = new char[256];
-	public int herelines;	/* number of lines in here-doc */
-	public int preambling;	/* line # when processing $ENV{PERL5DB} */
-	public int	lex_fakeeof;	/* precedence at which to fake EOF */
-	public int	lex_flags;
-	public int	in_pod;      /* lexer is within a =pod section */
-	public int	filtered;    /* source filters in evalbytes */
-	public int	saw_infix_sigil; /* saw & or * or % operator */
+	COP				saved_curcop;	/* the previous PL_curcop */
+	char[]			tokenbuf = new char[256];
+	public int 		herelines;	/* number of lines in here-doc */
+	public int 		preambling;	/* line # when processing $ENV{PERL5DB} */
+	public int		lex_fakeeof;	/* precedence at which to fake EOF */
+	public int		lex_flags;
+	public int		in_pod;      /* lexer is within a =pod section */
+	public int		filtered;    /* source filters in evalbytes */
+	public boolean	saw_infix_sigil = false; /* saw & or * or % operator */
 /*				end of parser.h     */
 }
