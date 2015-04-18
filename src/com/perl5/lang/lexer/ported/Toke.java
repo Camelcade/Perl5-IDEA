@@ -5,13 +5,16 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.lexer.PerlTokenTypes;
 
 import java.io.IOException;
+import java.util.Arrays;
+
+import static com.perl5.lang.lexer.ported.CharClass.isALPHA;
 
 /**
  * Created by hurricup on 18.04.2015.
  * Attempt to port toke.c from perl 5.21.6
  * Cloned from JFlex generated PerlLexer
  */
-public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords, Handy, Perl
+public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords, Handy, Perl, SV
 {
 	public static final char XENUMMASK  = 0x3f;
 	public static final char XFAKEEOF   = 0x40;
@@ -180,17 +183,47 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 		if (PL_parser.bufptr == PL_parser.bufend)    // end of file
 			return null;
 
-		stateCase();
-		charCase();
+		IElementType tokenType = stateSwitch();
 
-		PL_parser.oldoldbufptr = PL_parser.oldbufptr;
-		PL_parser.oldbufptr = PL_parser.bufptr;
-		PL_parser.bufptr++;
-		return PERL_BAD_CHARACTER;
+		if( tokenType == null )
+			charSwitch();
+
+		if( tokenType == null )
+		{
+			PL_parser.oldoldbufptr = PL_parser.oldbufptr;
+			PL_parser.oldbufptr = PL_parser.bufptr;
+			PL_parser.bufptr++;
+			tokenType = PERL_BAD_CHARACTER;
+		}
+
+		return tokenType;
 	}
 
-	public void stateCase()
+	public IElementType REPORT(IElementType elemntType)
 	{
+		// some debugging may be here
+		return elemntType;
+	}
+
+
+
+	public IElementType stateSwitch()
+	{
+		int s = PL_parser.bufptr; // current offset
+		int d; // ??
+		int len;
+		boolean bof = false;
+		final boolean saw_infix_sigil = PL_parser.saw_infix_sigil;
+		int formbrack = 0;
+		int fake_eof = 0;
+
+//    /* orig_keyword, gvp, and gv are initialized here because
+//     * jump to the label just_a_word_zero can bypass their
+//     * initialization later. */
+		int orig_keyword = 0;
+		GV gv;
+		GV gvp; // this is pointer to pointer, not supported in java
+
 //		switch (PL_parser.lex_state) {
 //			case LEX_NORMAL:
 //			case LEX_INTERPNORMAL:
@@ -200,29 +233,43 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			case LEX_KNOWNEXT:
 //				PL_parser.nexttoke--;
 //				PL_parser.yylval = PL_parser.nextval[PL_parser.nexttoke];
-//				if (!PL_parser.nexttoke) {
+//				if (PL_parser.nexttoke == 0 ) {
 //					PL_parser.lex_state = PL_parser.lex_defer;
 //					PL_parser.lex_defer = LEX_NORMAL;
 //				}
 //			{
-//				private int next_type;
+//				int next_type;
 //				next_type = PL_parser.nexttype[PL_parser.nexttoke];
-//				if (next_type & (7<<24)) {
-//					if (next_type & (1<<24)) {
+//				if ((next_type & (7<<24)) > 0) { // what the heck is this
+//					if ((next_type & (1<<24)) > 0) {
 //						if (PL_parser.lex_brackets > 100)
-//							Renew(PL_parser.lex_brackstack, PL_parser.lex_brackets + 10, char);
+//						{
+//							char[] new_lex_brackstack = new char[PL_parser.lex_brackets + 10];
+//							System.arraycopy(
+//									PL_parser.lex_brackstack,
+//								0,
+//									new_lex_brackstack,
+//								0,
+//								PL_parser.lex_brackstack.length
+//							);
+//							PL_parser.lex_brackstack = new_lex_brackstack;
+//						}
+//
 //						PL_parser.lex_brackstack[PL_parser.lex_brackets++] =
 //								(char) ((next_type >> 16) & 0xff);
 //					}
-//					if (next_type & (2<<24))
+//					if ((next_type & (2<<24)) > 0)
 //						PL_parser.lex_allbrackets++;
-//					if (next_type & (4<<24))
+//					if ((next_type & (4<<24))> 0)
 //						PL_parser.lex_allbrackets--;
 //					next_type &= 0xffff;
 //				}
-//				return REPORT(next_type == 'p' ? pending_ident() : next_type);
+//				return REPORT(next_type == 'p'
+//						? pending_ident()
+//						: next_type
+//				);
 //			}
-//
+
 //    /* interpolated case modifiers like \L \U, including \Q and \E.
 //       when we get here, PL_parser.bufptr is at the \
 //    */
@@ -257,7 +304,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					if (PL_parser.bufptr != PL_parser.bufend)
 //						PL_parser.bufptr += 2;
 //					PL_parser.lex_state = LEX_INTERPCONCAT;
-//					return yylex();
+//					return advance();
 //				}
 //				else {
 //					DEBUG_T({ PerlIO_printf(Perl_debug_log,
@@ -266,7 +313,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					if (s[1] == '\\' && s[2] == 'E') {
 //						PL_parser.bufptr = s + 3;
 //						PL_parser.lex_state = LEX_INTERPCONCAT;
-//						return yylex();
+//						return advance();
 //					}
 //					else {
 //						private int tmp;
@@ -314,7 +361,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							AopNOASSIGN(OP_CONCAT);
 //					}
 //					else
-//						return yylex();
+//						return advance();
 //				}
 //
 //			case LEX_INTERPPUSH:
@@ -360,7 +407,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				else
 //					AopNOASSIGN(OP_CONCAT);
 //			}
-//			return yylex();
+//			return advance();
 //
 //			case LEX_INTERPENDMAYBE:
 //				if (intuit_more(PL_parser.bufptr)) {
@@ -452,11 +499,11 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					}
 //					else {
 //						PL_parser.bufptr = s;
-//						return yylex();
+//						return advance();
 //					}
 //				}
 //
-//				return yylex();
+//				return advance();
 //			case LEX_FORMLINE:
 //				s = scan_formline(PL_parser.bufptr);
 //				if (!PL_parser.lex_formbrack)
@@ -465,12 +512,13 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					goto rightbracket;
 //				}
 //				PL_parser.bufptr = s;
-//				return yylex();
+//				return advance();
 //		}
-		
+
+		return null;
 	}
 
-	public void charCase()
+	public IElementType charSwitch()
 	{
 
 //		retry:
@@ -1072,7 +1120,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			s--;
 //			TOKEN(0);
 //		}
-//		PL_parser.saw_infix_sigil = 1;
+//		PL_parser.saw_infix_sigil = true;
 //		Mop(OP_MULTIPLY);
 //
 //		case '%':
@@ -1082,7 +1130,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN)
 //					TOKEN(0);
 //				++s;
-//				PL_parser.saw_infix_sigil = 1;
+//				PL_parser.saw_infix_sigil = true;
 //				Mop(OP_MODULO);
 //			}
 //			else if (PL_parser.expect == XPOSTDEREF) POSTDEREF('%');
@@ -1542,7 +1590,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						PL_parser.expect &= XENUMMASK;
 //						PL_parser.lex_state = LEX_INTERPEND;
 //						PL_parser.bufptr = s;
-//						return yylex();	/* ignore fake brackets */
+//						return advance();	/* ignore fake brackets */
 //					}
 //					if (PL_parser.lex_inwhat == OP_SUBST && PL_parser.lex_repl == PL_parser.linestr
 //							&& SvEVALED(PL_parser.lex_repl))
@@ -1556,7 +1604,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			if (PL_parser.expect & XFAKEBRACK) {
 //				PL_parser.expect &= XENUMMASK;
 //				PL_parser.bufptr = s;
-//				return yylex();		/* ignore fake brackets */
+//				return advance();		/* ignore fake brackets */
 //			}
 //			force_next(formbrack ? '.' : '}');
 //			if (formbrack) LEAVE;
@@ -1590,7 +1638,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				s--;
 //				TOKEN(0);
 //			}
-//			PL_parser.saw_infix_sigil = 1;
+//			PL_parser.saw_infix_sigil = true;
 //			BAop(OP_BIT_AND);
 //		}
 //
@@ -2105,7 +2153,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			if (!s)
 //				missingterm(NULL);
 //			PL_parser.yylval.ival = OP_CONST;
-//	/* FIXME. I think that this can be const if char *d is replaced by
+//	/*  FIXME. I think that this can be const if char *d is replaced by
 //	   more localised variables.  */
 //			for (d = SvPV(PL_parser.lex_stuff, len); len; len--, d++) {
 //				if (*d == '$' || *d == '@' || *d == '\\' || !UTF8_IS_INVARIANT((private int)*d)) {
@@ -2243,7 +2291,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					PL_parser.yylval.opval
 //							= (OP*)newSVOP(OP_CONST, 0,
 //							S_newSV_maybe_utf8(aTHX_ PL_parser.tokenbuf, len));
-//					PL_parser.yylval.opval->op_private = OPpCONST_BARE;
+//					PL_parser.yylval.opval.op_private = OPpCONST_BARE;
 //					TERM(WORD);
 //				}
 //
@@ -2480,7 +2528,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		/* Presume this is going to be a bareword of some sort. */
 //							PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //							PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0, sv);
-//							PL_parser.yylval.opval->op_private = OPpCONST_BARE;
+//							PL_parser.yylval.opval.op_private = OPpCONST_BARE;
 //
 //		/* And if "Foo::", then that's what it certainly is. */
 //							if (safebw)
@@ -2636,9 +2684,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //										PL_parser.yylval.opval = newUNOP(OP_RV2AV, OPf_PARENS,
 //												PL_parser.yylval.opval);
 //									else {
-//										PL_parser.yylval.opval->op_private = 0;
-//										PL_parser.yylval.opval->op_folded = 1;
-//										PL_parser.yylval.opval->op_flags |= OPf_SPECIAL;
+//										PL_parser.yylval.opval.op_private = 0;
+//										PL_parser.yylval.opval.op_folded = 1;
+//										PL_parser.yylval.opval.op_flags |= OPf_SPECIAL;
 //									}
 //									TOKEN(WORD);
 //								}
@@ -2646,7 +2694,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //								op_free(PL_parser.yylval.opval);
 //								PL_parser.yylval.opval =
 //										off ? (OP *)newCVREF(0, rv2cv_op) : rv2cv_op;
-//								PL_parser.yylval.opval->op_private |= OPpENTERSUB_NOPAREN;
+//								PL_parser.yylval.opval.op_private |= OPpENTERSUB_NOPAREN;
 //								PL_parser.last_lop = PL_parser.oldbufptr;
 //								PL_parser.last_lop_op = OP_ENTERSUB;
 //		    /* Is there a prototype? */
@@ -2706,7 +2754,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		/* Call it a bare word */
 //
 //							if (PL_hints & HINT_STRICT_SUBS)
-//								PL_parser.yylval.opval->op_private |= OPpCONST_STRICT;
+//								PL_parser.yylval.opval.op_private |= OPpCONST_STRICT;
 //							else {
 //								bareword:
 //		    /* after "print" and similar functions (corresponding to
@@ -2720,7 +2768,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //										|| PL_parser.last_lop_op == OP_SYSTEM
 //										|| PL_parser.last_lop_op == OP_EXEC)
 //										&& (PL_hints & HINT_STRICT_SUBS))
-//									PL_parser.yylval.opval->op_private |= OPpCONST_STRICT;
+//									PL_parser.yylval.opval.op_private |= OPpCONST_STRICT;
 //								if (lastchar != '-') {
 //									if (ckWARN(WARN_RESERVED)) {
 //										d = PL_parser.tokenbuf;
@@ -3815,7 +3863,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //									if (format_name) {
 //										 PL_parser.nextval[PL_parser.nexttoke].opval
 //												= (OP*)newSVOP(OP_CONST,0, format_name);
-//										 PL_parser.nextval[PL_parser.nexttoke].opval->op_private |= OPpCONST_BARE;
+//										 PL_parser.nextval[PL_parser.nexttoke].opval.op_private |= OPpCONST_BARE;
 //										force_next(WORD);
 //									}
 //									PREBLOCK(FORMAT);
@@ -4009,6 +4057,391 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					}
 //				}}
 //		*/
+		return null;
 	}
 
+	public void yywarn( final String s)
+	{
+//		PERL_ARGS_ASSERT_YYWARN;
+
+// 		PL_in_eval |= EVAL_WARNONLY; // embedvar.h #define PL_in_eval      (vTHX->Iin_eval)
+
+		yyerror_pv(s); // this will die
+	}
+
+	public void yyerror(final String s)
+	{
+//		PERL_ARGS_ASSERT_YYERROR;
+		yyerror_pvn(s);
+	}
+
+	public void yyerror_pv(final String s)
+	{
+//		PERL_ARGS_ASSERT_YYERROR_PV;
+		throw new Error(s);
+	}
+
+	// @todo dig this one
+	public void yyerror_pvn(final String s)
+	{
+		throw new Error(s);
+
+//		const char *context = NULL;
+//		int contlen = -1;
+//		SV *msg;
+//		SV * const where_sv = newSVpvs_flags("", SVs_TEMP);
+//		int yychar  = PL_parser->yychar;
+//
+//		PERL_ARGS_ASSERT_YYERROR_PVN;
+//
+//		if (!yychar || (yychar == ';' && !PL_rsfp))
+//			sv_catpvs(where_sv, "at EOF");
+//		else if (PL_oldoldbufptr && PL_bufptr > PL_oldoldbufptr &&
+//				PL_bufptr - PL_oldoldbufptr < 200 && PL_oldoldbufptr != PL_oldbufptr &&
+//				PL_oldbufptr != PL_bufptr) {
+//    /*
+//        Only for NetWare:
+//        The code below is removed for NetWare because it abends/crashes on NetWare
+//        when the script has error such as not having the closing quotes like:
+//            if ($var eq "value)
+//        Checking of white spaces is anyway done in NetWare code.
+//    */
+//			#ifndef NETWARE
+//			while (isSPACE(*PL_oldoldbufptr))
+//			PL_oldoldbufptr++;
+//			#endif
+//					context = PL_oldoldbufptr;
+//			contlen = PL_bufptr - PL_oldoldbufptr;
+//		}
+//		else if (PL_oldbufptr && PL_bufptr > PL_oldbufptr &&
+//				PL_bufptr - PL_oldbufptr < 200 && PL_oldbufptr != PL_bufptr) {
+//    /*
+//        Only for NetWare:
+//        The code below is removed for NetWare because it abends/crashes on NetWare
+//        when the script has error such as not having the closing quotes like:
+//            if ($var eq "value)
+//        Checking of white spaces is anyway done in NetWare code.
+//    */
+//			#ifndef NETWARE
+//			while (isSPACE(*PL_oldbufptr))
+//			PL_oldbufptr++;
+//			#endif
+//					context = PL_oldbufptr;
+//			contlen = PL_bufptr - PL_oldbufptr;
+//		}
+//		else if (yychar > 255)
+//			sv_catpvs(where_sv, "next token ???");
+//		else if (yychar == -2) { /* YYEMPTY */
+//			if (PL_lex_state == LEX_NORMAL ||
+//					(PL_lex_state == LEX_KNOWNEXT && PL_lex_defer == LEX_NORMAL))
+//				sv_catpvs(where_sv, "at end of line");
+//			else if (PL_lex_inpat)
+//				sv_catpvs(where_sv, "within pattern");
+//			else
+//				sv_catpvs(where_sv, "within string");
+//		}
+//		else {
+//			sv_catpvs(where_sv, "next char ");
+//			if (yychar < 32)
+//				Perl_sv_catpvf(aTHX_ where_sv, "^%c", toCTRL(yychar));
+//			else if (isPRINT_LC(yychar)) {
+//				const char string = yychar;
+//				sv_catpvn(where_sv, &string, 1);
+//			}
+//			else
+//				Perl_sv_catpvf(aTHX_ where_sv, "\\%03o", yychar & 255);
+//		}
+//		msg = newSVpvn_flags(s, len, (flags & SVf_UTF8) | SVs_TEMP);
+//		Perl_sv_catpvf(aTHX_ msg, " at %s line %"IVdf", ",
+//				OutCopFILE(PL_curcop),
+//				(IV)(PL_parser->preambling == NOLINE
+//						? CopLINE(PL_curcop)
+//						: PL_parser->preambling));
+//		if (context)
+//			Perl_sv_catpvf(aTHX_ msg, "near \"%"UTF8f"\"\n",
+//					UTF8fARG(UTF, contlen, context));
+//		else
+//			Perl_sv_catpvf(aTHX_ msg, "%"SVf"\n", SVfARG(where_sv));
+//		if (PL_multi_start < PL_multi_end && (U32)(CopLINE(PL_curcop) - PL_multi_end) <= 1) {
+//			Perl_sv_catpvf(aTHX_ msg,
+//					"  (Might be a runaway multi-line %c%c string starting on line %"IVdf")\n",
+//					(int)PL_multi_open,(int)PL_multi_close,(IV)PL_multi_start);
+//			PL_multi_end = 0;
+//		}
+//		if (PL_in_eval & EVAL_WARNONLY) {
+//			PL_in_eval &= ~EVAL_WARNONLY;
+//			Perl_ck_warner_d(aTHX_ packWARN(WARN_SYNTAX), "%"SVf, SVfARG(msg));
+//		}
+//		else
+//			qerror(msg);
+//		if (PL_error_count >= 10) {
+//			SV * errsv;
+//			if (PL_in_eval && ((errsv = ERRSV), SvCUR(errsv)))
+//			Perl_croak(aTHX_ "%"SVf"%s has too many errors.\n",
+//					SVfARG(errsv), OutCopFILE(PL_curcop));
+//			else
+//			Perl_croak(aTHX_ "%s has too many errors.\n",
+//					OutCopFILE(PL_curcop));
+//		}
+//		PL_in_my = 0;
+//		PL_in_my_stash = NULL;
+//		return 0;
+	}
+
+
+	public String Perl_form(String format, Object ... args )
+	{
+		return String.format(format, args);
+	}
+
+	// Perl_allocmy From op.c
+
+/* "register" allocation */
+
+	public int allocmy(final char[] name, final int len, final int flags)
+	{
+		int off = 0;
+		final boolean is_our = PL_parser.in_my == KEY_our;
+
+//		PERL_ARGS_ASSERT_ALLOCMY;
+
+    /* complain about "my $<special_var>" etc etc */
+//		if (len > 0 &&
+//				!(is_our
+//					|| isALPHA(name[1])
+//					||(
+//						(flags & SVf_UTF8)
+//							&& isIDFIRST_utf8((U8 *)name+1)
+//					) ||(name[1] == '_' && (*name == '$' || len > 2))))
+//		{
+//			if (!(flags & SVf_UTF8 && UTF8_IS_START(name[1]))
+//					&& (!isPRINT(name[1]) || strchr("\t\n\r\f", name[1]))) {
+//				yyerror(
+//					Perl_form(
+//						"Can't use global %c^%c%.*s in \"%s\""
+//						, name[0]
+//						, toCTRL(name[1])
+//						, (int)(len - 2)
+//						, name + 2
+//						, PL_parser.in_my == KEY_state ? "state" : "my"));
+//			} else {
+//				yyerror_pv(
+//					Perl_form(
+//						"Can't use global %.*s in \"%s\""
+//						, (int) len
+//						, name,
+//						PL_parser.in_my == KEY_state ? "state" : "my"
+//					)
+//				); // , flags & SVf_UTF8
+//			}
+//		}
+//		else if (len == 2 && name[1] == '_' && !is_our)
+//    /* diag_listed_as: Use of my $_ is experimental */
+//		Perl_ck_warner_d(packWARN(WARN_EXPERIMENTAL__LEXICAL_TOPIC),
+//				"Use of %s $_ is experimental",
+//				PL_parser.in_my == KEY_state
+//						? "state"
+//						: "my");
+//
+//    /* allocate a spare slot and store the name in that slot */
+//
+//		off = pad_add_name_pvn(name, len,
+//				(is_our ? padadd_OUR :
+//						PL_parser.in_my == KEY_state ? padadd_STATE : 0)
+//				| ( flags & SVf_UTF8 ? SVf_UTF8 : 0 ),
+//				PL_parser.in_my_stash,
+//				(is_our
+//                /* $_ is always in main::, even with our */
+//						? (PL_curstash && !memEQs(name,len,"$_")
+//						? PL_curstash
+//						: PL_defstash)
+//						: NULL
+//				)
+//		);
+//    /* anon sub prototypes contains state vars should always be cloned,
+//     * otherwise the state var would be shared between anon subs */
+//
+//		if (PL_parser.in_my == KEY_state && CvANON(PL_compcv))
+//			CvCLONE_on(PL_compcv);
+
+		return off;
+	}
+
+/* from op.c
+=for apidoc Am|OP *|newOP|I32 type|I32 flags
+
+Constructs, checks, and returns an op of any base type (any type that
+has no extra fields).  I<type> is the opcode.  I<flags> gives the
+eight bits of C<op_flags>, and, shifted up eight bits, the eight bits
+of C<op_private>.
+
+=cut
+*/
+
+//OP *
+//		newOP(int  type, int flags)
+//		{
+//		dVAR;
+//		OP *o;
+//
+//		if (type == -OP_ENTEREVAL) {
+//		type = OP_ENTEREVAL;
+//		flags |= OPpEVAL_BYTES<<8;
+//		}
+//
+//		assert((PL_opargs[type] & OA_CLASS_MASK) == OA_BASEOP
+//		|| (PL_opargs[type] & OA_CLASS_MASK) == OA_BASEOP_OR_UNOP
+//		|| (PL_opargs[type] & OA_CLASS_MASK) == OA_FILESTATOP
+//		|| (PL_opargs[type] & OA_CLASS_MASK) == OA_LOOPEXOP);
+//
+//		NewOp(1101, o, 1, OP);
+//		CHANGE_TYPE(o, type);
+//		o->op_flags = (U8)flags;
+//
+//		o->op_next = o;
+//		o->op_private = (U8)(0 | (flags >> 8));
+//		if (PL_opargs[type] & OA_RETSCALAR)
+//		scalar(o);
+//		if (PL_opargs[type] & OA_TARGET)
+//		o->op_targ = pad_alloc(type, SVs_PADTMP);
+//		return CHECKOP(type, o);
+//		}
+
+
+/*
+  S_pending_ident
+
+  Looks up an identifier in the pad or in a package
+
+  Returns:
+    PRIVATEREF if this is a lexical name.
+    WORD       if this belongs to a package.
+
+  Structure:
+      if we're in a my declaration
+	  croak if they tried to say my($foo::bar)
+	  build the ops for a my() declaration
+      if it's an access to a my() variable
+	  build ops for access to a my() variable
+      if in a dq string, and they've said @foo and we can't find @foo
+	  warn
+      build ops for a bareword
+*/
+
+
+	IElementType pending_ident()
+	{
+		int tmp = 0;
+		final char pit = PL_parser.yylval.ival; // ival is int
+		final int tokenbuf_len = PL_parser.tokenbuf.length;
+
+    /* All routes through this function want to know if there is a colon.  */
+		final boolean has_colon = Arrays.asList(PL_parser.tokenbuf).contains(':');
+
+    /* if we're in a my(), we can't allow dynamics here.
+       $foo'bar has already been turned into $foo::bar, so
+       just check for colons.
+
+       if it's a legal name, the OP is a PADANY.
+    */
+//		if (PL_parser.in_my > 0) {
+//			if (PL_parser.in_my == KEY_our) {	/* "our" is merely analogous to "my" */
+//				if (has_colon)
+//					yyerror_pv(
+//						Perl_form("No package name allowed for "
+//							"variable %s in \"our\"",
+//							PL_parser.tokenbuf)
+//					);
+//				tmp = allocmy(PL_parser.tokenbuf, tokenbuf_len, UTF ? SVf_UTF8 : 0);
+//			}
+//			else {
+//				if (has_colon) {
+//                /* "my" variable %s can't be in a package */
+//                /* PL_no_myglob is constant */
+//					yyerror_pv(Perl_form(PL_no_myglob,
+//									PL_parser.in_my == KEY_my ? "my" : "state",
+//									PL_parser.tokenbuf[0] == '&' ? "subroutin" : "variabl",
+//							PL_parser.tokenbuf)
+//							); // UTF ? SVf_UTF8 : 0
+//				}
+//
+//				PL_parser.yylval.opval = newOP(OP_PADANY, 0);
+//				PL_parser.yylval.opval.op_targ = allocmy(PL_parser.tokenbuf, tokenbuf_len,
+//						UTF ? SVf_UTF8 : 0);
+//				return PRIVATEREF;
+//			}
+//		}
+
+    /*
+       build the ops for accesses to a my() variable.
+    */
+
+//		if (!has_colon) {
+//			if (PL_parser.in_my == 0)
+//				tmp = pad_findmy_pvn(PL_parser.tokenbuf, tokenbuf_len,
+//						UTF ? SVf_UTF8 : 0);
+//			if (tmp != NOT_IN_PAD) {
+//            /* might be an "our" variable" */
+//				if (PAD_COMPNAME_FLAGS_isOUR(tmp)) {
+//                /* build ops for a bareword */
+//					HV *  const stash = PAD_COMPNAME_OURSTASH(tmp);
+//					HEK * const stashname = HvNAME_HEK(stash);
+//					SV *  const sym = newSVhek(stashname);
+//					sv_catpvs(sym, "::");
+//					sv_catpvn_flags(sym, PL_parser.tokenbuf+1, tokenbuf_len - 1, (UTF ? SV_CATUTF8 : SV_CATBYTES ));
+//					PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0, sym);
+//					PL_parser.yylval.opval.op_private = OPpCONST_ENTERED;
+//					if (pit != '&')
+//						gv_fetchsv(sym,
+//								GV_ADDMULTI,
+//								((PL_parser.tokenbuf[0] == '$') ? SVt_PV
+//										: (PL_parser.tokenbuf[0] == '@') ? SVt_PVAV
+//										: SVt_PVHV));
+//					return WORD;
+//				}
+//
+//				PL_parser.yylval.opval = newOP(OP_PADANY, 0);
+//				PL_parser.yylval.opval.op_targ = tmp;
+//				return PRIVATEREF;
+//			}
+//		}
+//
+//    /*
+//       Whine if they've said @foo in a doublequoted string,
+//       and @foo isn't a variable we can find in the symbol
+//       table.
+//    */
+//		if (ckWARN(WARN_AMBIGUOUS) &&
+//				pit == '@' && PL_lex_state != LEX_NORMAL && !PL_lex_brackets) {
+//			GV *const gv = gv_fetchpvn_flags(PL_parser.tokenbuf + 1, tokenbuf_len - 1,
+//					( UTF ? SVf_UTF8 : 0 ), SVt_PVAV);
+//			if ((!gv || ((PL_parser.tokenbuf[0] == '@') ? !GvAV(gv) : !GvHV(gv)))
+//		/* DO NOT warn for @- and @+ */
+//					&& !( PL_parser.tokenbuf[2] == '\0' &&
+//					( PL_parser.tokenbuf[1] == '-' || PL_parser.tokenbuf[1] == '+' ))
+//					)
+//			{
+//            /* Downgraded from fatal to warning 20000522 mjd */
+//				Perl_warner(aTHX_ packWARN(WARN_AMBIGUOUS),
+//						"Possible unintended interpolation of %"UTF8f
+//						" in string",
+//						UTF8fARG(UTF, tokenbuf_len, PL_parser.tokenbuf));
+//			}
+//		}
+//
+//    /* build ops for a bareword */
+//		PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0,
+//			newSVpvn_flags(PL_parser.tokenbuf + 1,
+//					tokenbuf_len - 1,
+//					UTF ? SVf_UTF8 : 0 ));
+//		PL_parser.yylval.opval.op_private = OPpCONST_ENTERED;
+//		if (pit != '&')
+//			gv_fetchpvn_flags(PL_parser.tokenbuf+1, tokenbuf_len - 1,
+//					(PL_in_eval ? GV_ADDMULTI : GV_ADD)
+//							| ( UTF ? SVf_UTF8 : 0 ),
+//					((PL_parser.tokenbuf[0] == '$') ? SVt_PV
+//							: (PL_parser.tokenbuf[0] == '@') ? SVt_PVAV
+//							: SVt_PVHV));
+		return WORD;
+	}
 }
