@@ -30,6 +30,11 @@
             <option name="FOREGROUND" value="808080"/>
         </value>
     </option>
+    <option name="PERL_COMMENT_MULTILINE">
+        <value>
+            <option name="FOREGROUND" value="808080"/>
+        </value>
+    </option>
     <option name="PERL_STRING">
         <value>
             <option name="FOREGROUND" value="808080"/>

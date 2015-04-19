@@ -32,6 +32,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("GLOB", PerlSyntaxHighlighter.PERL_GLOB),
 			new AttributesDescriptor("Single-quoted string", PerlSyntaxHighlighter.PERL_SQ_STRING),
 			new AttributesDescriptor("Double-quoted string", PerlSyntaxHighlighter.PERL_DQ_STRING),
+			new AttributesDescriptor("Number", PerlSyntaxHighlighter.PERL_NUMBER),
 			new AttributesDescriptor("Dereference", PerlSyntaxHighlighter.PERL_DEREFERENCE),
 			new AttributesDescriptor("Comma", PerlSyntaxHighlighter.PERL_COMMA),
 			new AttributesDescriptor("Semicolon", PerlSyntaxHighlighter.PERL_SEMICOLON),

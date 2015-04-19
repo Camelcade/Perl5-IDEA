@@ -35,7 +35,8 @@ CHAR_ANY        = .
 ALFANUM         = [a-zA-Z0-9_]
 DQ_STRING        = \"[^\"]*\"
 SQ_STRING        = \'[^\']*\'
-
+THE_END         = __END__
+FULL_LINE       = .*[\r\n]+
 
 DEPACKAGE = "::"
 
@@ -61,7 +62,14 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 %state YYINITIAL
 %state PACKAGE_STATIC_CALL
 %state PACKAGE_INSTANCE_CALL
+%state PERL_EOF
 %%
+
+<PERL_EOF>
+{
+    {FULL_LINE} { return PERL_COMMENT_MULTILINE; }
+}
+{THE_END}               {yybegin(PERL_EOF);return PERL_COMMENT_MULTILINE;}
 
 {END_OF_LINE_COMMENT}                           { return PERL_COMMENT; }
 {CHAR_SEMI}     {yybegin(YYINITIAL);return PERL_SEMI;}
@@ -105,7 +113,7 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 
 
 <FUNCTION_DEFINITION>{
-    {FUNCTION_NAME}    {return PERL_USER_FUNCTION;}
+    {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_USER_FUNCTION;}
 }
 
 <PACKAGE_STATIC_CALL>

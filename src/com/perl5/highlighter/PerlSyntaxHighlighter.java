@@ -20,6 +20,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+	public static final TextAttributesKey PERL_COMMENT_MULTILINE = createTextAttributesKey("PERL_COMMENT_MULTILINE", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
+
 	public static final TextAttributesKey PERL_INSTANCE_METHOD_CALL = createTextAttributesKey("PERL_INSTANCE_METHOD_CALL", DefaultLanguageHighlighterColors.INSTANCE_METHOD);
 	public static final TextAttributesKey PERL_STATIC_METHOD_CALL = createTextAttributesKey("PERL_STATIC_METHOD_CALL", DefaultLanguageHighlighterColors.STATIC_METHOD);
 	public static final TextAttributesKey PERL_FUNCTION = createTextAttributesKey("PERL_FUNCTION", DefaultLanguageHighlighterColors.KEYWORD);
@@ -39,7 +41,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey PERL_GLOB = createTextAttributesKey("PERL_GLOB", DefaultLanguageHighlighterColors.LOCAL_VARIABLE);
 	public static final TextAttributesKey PERL_DEREFERENCE = createTextAttributesKey("PERL_DEREFERENCE", DefaultLanguageHighlighterColors.CLASS_REFERENCE);
 
-	private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{PERL_COMMENT};
 	private static final TextAttributesKey[] STATIC_METHOD_CALL_KEYS = new TextAttributesKey[]{PERL_STATIC_METHOD_CALL};
 	private static final TextAttributesKey[] INSTANCE_METHOD_CALL_KEYS = new TextAttributesKey[]{PERL_INSTANCE_METHOD_CALL};
 	private static final TextAttributesKey[] FUNCTION_KEYS = new TextAttributesKey[]{PERL_FUNCTION};
@@ -54,10 +55,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	private static final TextAttributesKey[] PACKAGE_KEYS = new TextAttributesKey[]{PERL_PACKAGE};
 	private static final TextAttributesKey[] PERL_GLOB_KEYS = new TextAttributesKey[]{PERL_GLOB};
 	private static final TextAttributesKey[] PERL_DEREFERENCE_KEYS = new TextAttributesKey[]{PERL_DEREFERENCE};
-//	private static final TextAttributesKey[] PERL_SCALAR_BUILT_IN_KEYS = new TextAttributesKey[]{PERL_SCALAR, PERL_SYNTAX};
-//	private static final TextAttributesKey[] PERL_ARRAY_BUILT_IN_KEYS = new TextAttributesKey[]{PERL_ARRAY, PERL_SYNTAX};
-//	private static final TextAttributesKey[] PERL_HASH_BUILT_IN_KEYS = new TextAttributesKey[]{PERL_HASH, PERL_SYNTAX};
-//	private static final TextAttributesKey[] PERL_GLOB_BUILT_IN_KEYS = new TextAttributesKey[]{PERL_GLOB, PERL_SYNTAX};
 
 	@NotNull
 	@Override
@@ -71,8 +68,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		if( tokenType instanceof SelfStyled )
 		{
 			return ((SelfStyled)tokenType).getTextAttributesKey();
-		} else if (tokenType.equals(PerlElementTypes.PERL_COMMENT)) {
-			return COMMENT_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_PACKAGE)) {
 			return PACKAGE_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_FUNCTION)) {

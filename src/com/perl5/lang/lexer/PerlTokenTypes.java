@@ -98,7 +98,8 @@ public interface PerlTokenTypes
 
 	/* my experiments with Jlex 	*/
 	IElementType PERL_BAD_CHARACTER = new PerlElement("BAD_CHARACTER");
-	IElementType PERL_COMMENT = new PerlElement("COMMENT");
+	IElementType PERL_COMMENT = new PerlComment();
+	IElementType PERL_COMMENT_MULTILINE = new PerlCommentMultiline();
 	IElementType PERL_DQ_STRING = new PerlElement("DQ_STRING");
 	IElementType PERL_SQ_STRING = new PerlElement("SQ_STRING");
 	IElementType PERL_NUMBER = new PerlNumber();
