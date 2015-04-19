@@ -5,4 +5,15 @@ package com.perl5.lang.lexer.ported;
  */
 public class OP
 {
+	public int type;
+	public int flags;
+	public String sv;
+
+	public OP( int type, int flags, String sv )
+	{
+		this.type = type;
+		this.flags = flags;
+		this.sv = sv;
+	}
+
 }
