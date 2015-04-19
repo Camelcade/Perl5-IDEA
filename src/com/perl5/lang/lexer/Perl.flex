@@ -49,6 +49,7 @@ VAR_SCALAR = [$][$]*{ALFANUM}+
 VAR_ARRAY = [@][$]*{ALFANUM}+
 VAR_HASH = [%][$]*{ALFANUM}+
 VAR_GLOB = [*][$]*{ALFANUM}+
+NUMBER = "-"?[0-9_]+(\.[0-9_]+)?
 
 END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 
@@ -62,28 +63,7 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 %state PACKAGE_INSTANCE_CALL
 %%
 
-/*
-<STRING_DQ> {
-  \"                             { yybegin(YYINITIAL);
-                                   return symbol(PERL_STRING,
-                                   stringBuffer.toString()); }
-  [^\n\r\"\\]+                   { stringBuffer.append( yytext() ); }
-  \\t                            { stringBuffer.append('\t'); }
-  \\n                            { stringBuffer.append('\n'); }
-
-  \\r                            { stringBuffer.append('\r'); }
-  \\\"                           { stringBuffer.append('\"'); }
-  \\                             { stringBuffer.append('\\'); }
-}
-
-<STRING_SQ> {
-  \'                             { yybegin(YYINITIAL);
-                                   return symbol(PERL_STRING,
-                                   stringBuffer.toString()); }
-  \\\'                           { stringBuffer.append('\''); }
-  {CHAR_ANY}                     { stringBuffer.append( yytext() ); }
-}*/
-
+{END_OF_LINE_COMMENT}                           { return PERL_COMMENT; }
 {CHAR_SEMI}     {yybegin(YYINITIAL);return PERL_SEMI;}
 {WHITE_SPACE}   {return TokenType.WHITE_SPACE;}
 "{"             {return PERL_LBRACE;}
@@ -98,6 +78,7 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 {DEPACKAGE}			{return PERL_DEPACKAGE;}
 {DQ_STRING}     {return PERL_DQ_STRING;}
 {SQ_STRING}     {return PERL_SQ_STRING;}
+{NUMBER}        {return PERL_NUMBER;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 {VAR_SCALAR} {return checkBuiltInScalar();}
@@ -156,7 +137,6 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 //  \"                             { yybegin(STRING_DQ); stringBuffer.length(0); }
 //  \'                             { yybegin(STRING_SQ); stringBuffer.length(0); }
 
-  {END_OF_LINE_COMMENT}                           { yybegin(YYINITIAL); return PERL_COMMENT; }
 
 
 
@@ -446,37 +426,26 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 
 
 /////////////////////////////////////////// PERL MISC //////////////////////////////////////////////////////////////////
-    "%+"			{return PERL_MISC;}
     "EXTENDED_OS_ERROR"			{return PERL_MISC;}
     "PERL_DESTRUCT_LEVEL"			{return PERL_MISC;}
-    "%-"			{return PERL_MISC;}
     "fail"			{return PERL_MISC;}
     "PERL_DL_NONLAZY"			{return PERL_MISC;}
-    "1"			{return PERL_MISC;}
     "FETCH"			{return PERL_MISC;}
     "PERL_ENCODING"			{return PERL_MISC;}
-    "2"			{return PERL_MISC;}
     "FETCHSIZE"			{return PERL_MISC;}
     "PERL_HASH_SEED"			{return PERL_MISC;}
-    "3"			{return PERL_MISC;}
     "file_name_is_absolute"			{return PERL_MISC;}
     "PERL_HASH_SEED_DEBUG"			{return PERL_MISC;}
-    "4"			{return PERL_MISC;}
     "fileparse"			{return PERL_MISC;}
     "PERL_ROOT"			{return PERL_MISC;}
-    "5"			{return PERL_MISC;}
     "fileparse_set_fstype"			{return PERL_MISC;}
     "PERL_SIGNALS"			{return PERL_MISC;}
-    "6"			{return PERL_MISC;}
     "find"			{return PERL_MISC;}
     "PERL_UNICODE"			{return PERL_MISC;}
-    "7"			{return PERL_MISC;}
     "finddepth"			{return PERL_MISC;}
     "PERL_VERSION"			{return PERL_MISC;}
-    "8"			{return PERL_MISC;}
     "FIRSTKEY"			{return PERL_MISC;}
     "PERLDB"			{return PERL_MISC;}
-    "9"			{return PERL_MISC;}
     "FORMAT_FORMFEED"			{return PERL_MISC;}
     "PERLIO"			{return PERL_MISC;}
     ":bytes"			{return PERL_MISC;}

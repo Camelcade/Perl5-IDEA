@@ -10,6 +10,7 @@ import com.perl5.lang.lexer.elements.*;
 public interface PerlTokenTypes
 {
 	/* end import from perly.h */
+/*
 	IElementType GRAMPROG = new PerlElement("GRAMPROG");
 	IElementType GRAMEXPR = new PerlElement("GRAMEXPR");
 	IElementType GRAMBLOCK = new PerlElement("GRAMBLOCK");
@@ -90,7 +91,9 @@ public interface PerlTokenTypes
 	IElementType PREDEC = new PerlElement("PREDEC");
 	IElementType PREINC = new PerlElement("PREINC");
 	IElementType ARROW = new PerlElement("ARROW");
-	/* end of import from perly.h */
+	*/
+/* end of import from perly.h *//*
+
 
 
 	/* my experiments with Jlex 	*/
@@ -98,6 +101,7 @@ public interface PerlTokenTypes
 	IElementType PERL_COMMENT = new PerlElement("COMMENT");
 	IElementType PERL_DQ_STRING = new PerlElement("DQ_STRING");
 	IElementType PERL_SQ_STRING = new PerlElement("SQ_STRING");
+	IElementType PERL_NUMBER = new PerlNumber();
 
 	IElementType PERL_STATIC_METHOD_CALL = new PerlElement("PERL_STATIC_METHOD_CALL");
 	IElementType PERL_INSTANCE_METHOD_CALL = new PerlElement("PERL_INSTANCE_METHOD_CALL");
