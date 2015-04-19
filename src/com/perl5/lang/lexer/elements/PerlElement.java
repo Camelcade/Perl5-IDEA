@@ -1,4 +1,4 @@
-package com.perl5.lang.lexer;
+package com.perl5.lang.lexer.elements;
 
 /**
  * Created by hurricup on 12.04.2015.
@@ -9,11 +9,11 @@ import com.perl5.PerlFileType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlElementType extends IElementType
+public class PerlElement extends IElementType
 {
-	private String debugName = null;
+	protected String debugName = null;
 
-	public PerlElementType(@NotNull @NonNls String debugName) {
+	public PerlElement(@NotNull @NonNls String debugName) {
 		super(debugName, PerlFileType.PERL_LANGUAGE);
 		this.debugName = debugName;
 	}

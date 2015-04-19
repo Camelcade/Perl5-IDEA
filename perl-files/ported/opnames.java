@@ -4,7 +4,7 @@ package com.perl5.lang.lexer.ported;
  * Created by hurricup on 19.04.2015.
  * from opnames.h
  */
-public class opnames
+public interface opnames
 {
 	public static final int OP_NULL      = 0;
 	public static final int OP_STUB      = 1;

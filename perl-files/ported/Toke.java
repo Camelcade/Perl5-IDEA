@@ -7,14 +7,17 @@ import com.perl5.lang.lexer.PerlTokenTypes;
 import java.io.IOException;
 import java.util.Arrays;
 
+import static com.perl5.lang.lexer.ported.CharClass.isBLANK;
 import static com.perl5.lang.lexer.ported.CharClass.isALPHA;
+import static com.perl5.lang.lexer.ported.CharClass.isDIGIT;
+import static com.perl5.lang.lexer.ported.CharClass.isSPACE;
 
 /**
  * Created by hurricup on 18.04.2015.
  * Attempt to port toke.c from perl 5.21.6
  * Cloned from JFlex generated PerlLexer
  */
-public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords, Handy, Perl, SV
+public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords, Handy, Perl, SV, opnames
 {
 	public static final char XENUMMASK  = 0x3f;
 	public static final char XFAKEEOF   = 0x40;
@@ -119,7 +122,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 */
 		yy_parser parser, oparser;
 
-//    const char *s = NULL;
+//    const char PL_parser.linestr[s] = NULL;
 
 
 //     create and initialise a parser
@@ -199,12 +202,325 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 		return tokenType;
 	}
 
-	public IElementType REPORT(IElementType elemntType)
+	public IElementType REPORT(IElementType elementType)
 	{
 		// some debugging may be here
-		return elemntType;
+		return elementType;
 	}
 
+	private int memchr( int startOffset, char searchedChar, int maxChars)
+	{
+		for( int i = 0; i < maxChars; i++ )
+		{
+			if( PL_parser.linestr[i+startOffset] == searchedChar)
+			{
+				return startOffset + i;
+			}
+		}
+		return -1;
+	}
+
+	private String sv_catpvn(String currentString, int startOffset, int charsNumber)
+	{
+		return currentString.concat(new String(
+			Arrays.copyOfRange(PL_parser.linestr, startOffset, startOffset + charsNumber - 1)
+		));
+	}
+
+	/*
+	#define CopLINE(c)      ((c)->cop_line)
+		#define CopLINE_inc(c)      (++CopLINE(c))
+		#define CopLINE_dec(c)      (--CopLINE(c))
+		#define CopLINE_set(c,l)    (CopLINE(c) = (l))
+
+	void COPLINE_INC_WITH_HERELINES(){
+		CopLINE_inc(PL_curcop);
+		if (PL_parser.herelines > 0)
+			CopLINE(PL_curcop) += PL_parser.herelines,
+			PL_parser.herelines = 0;
+	}
+	*/
+
+/*
+ * S_incline
+ * This subroutine has nothing to do with tilting, whether at windmills
+ * or pinball tables.  Its name is short for "increment line".  It
+ * increments the current line number in CopLINE(PL_curcop) and checks
+ * to see whether the line starts with a comment of the form
+ *    # line 500 "foo.pm"
+ * If so, it sets the current line number and file to the values in the comment.
+ */
+
+//	void incline(int s)
+//	{
+//		int t;
+//		int n;
+//		int e;
+//		int line_num;
+//
+////		PERL_ARGS_ASSERT_INCLINE;
+//
+//		COPLINE_INC_WITH_HERELINES();
+//
+//		if (
+//			//!PL_rsfp
+//			// && !PL_parser.filtered
+//			PL_parser.lex_state == LEX_NORMAL
+//			&& s+1 == PL_parser.bufend
+//			&& PL_parser.linestr[s] == ';')
+//		{
+//		/* fake newline in string eval */
+//			CopLINE_dec(PL_curcop);
+//			return;
+//		}
+//		if (PL_parser.linestr[s]++ != '#')
+//			return;
+//		while (isBLANK(PL_parser.linestr[s]))
+//			s++;
+//		if (strnEQ(s, "line", 4))
+//			s += 4;
+//		else
+//			return;
+//		if (isBLANK(PL_parser.linestr[s]))
+//			s++;
+//		else
+//			return;
+//
+//		while (isBLANK(PL_parser.linestr[s]))
+//			s++;
+//		if (!isDIGIT(PL_parser.linestr[s]))
+//			return;
+//
+//		n = s;
+//		while (isDIGIT(PL_parser.linestr[s]))
+//			s++;
+//		if (!isBLANK(PL_parser.linestr[s]) && PL_parser.linestr[s] != '\r' && PL_parser.linestr[s] != '\n' && PL_parser.linestr[s] != '\0')
+//			return;
+//		while (isBLANK(PL_parser.linestr[s]))
+//			s++;
+//		if (PL_parser.linestr[s] == '"' && (t = strchr(s+1, '"')))
+//		{
+//			s++;
+//			e = t + 1;
+//		}
+//		else
+//		{
+//			t = s;
+//			while (!isSPACE(*t))
+//		t++;
+//		e = t;
+//	}
+//		while (isBLANK(*e) || *e == '\r' || *e == '\f')
+//		e++;
+//		if (*e != '\n' && *e != '\0')
+//		return;		/* false alarm */
+//
+//		line_num = grok_atou(n, &e) - 1;
+//
+//		if (t - s > 0) {
+//			int len = t - s;
+//
+//			if ( //!PL_rsfp &&
+//					PL_parser.filtered == 0
+//			) {
+//			/* must copy *{"::_<(eval N)[oldfilename:L]"}
+//			 * to *{"::_<newfilename"} */
+//			/* However, the long form of evals is only turned on by the
+//			   debugger - usually they're "(eval %lu)" */
+//				GV * const cfgv = CopFILEGV(PL_curcop);
+//				if (cfgv) {
+//					char smallbuf[128];
+//					STRLEN tmplen2 = len;
+//					char *tmpbuf2;
+//					GV *gv2;
+//
+//					if (tmplen2 + 2 <= sizeof smallbuf)
+//					tmpbuf2 = smallbuf;
+//					else
+//					Newx(tmpbuf2, tmplen2 + 2, char);
+//
+//					tmpbuf2[0] = '_';
+//					tmpbuf2[1] = '<';
+//
+//					memcpy(tmpbuf2 + 2, s, tmplen2);
+//					tmplen2 += 2;
+//
+//					gv2 = *(GV**)hv_fetch(PL_defstash, tmpbuf2, tmplen2, TRUE);
+//					if (!isGV(gv2)) {
+//						gv_init(gv2, PL_defstash, tmpbuf2, tmplen2, FALSE);
+//				/* adjust ${"::_<newfilename"} to store the new file name */
+//						GvSV(gv2) = newSVpvn(tmpbuf2 + 2, tmplen2 - 2);
+//				/* The line number may differ. If that is the case,
+//				   alias the saved lines that are in the array.
+//				   Otherwise alias the whole array. */
+//						if (CopLINE(PL_curcop) == line_num) {
+//							GvHV(gv2) = MUTABLE_HV(SvREFCNT_inc(GvHV(cfgv)));
+//							GvAV(gv2) = MUTABLE_AV(SvREFCNT_inc(GvAV(cfgv)));
+//						}
+//						else if (GvAV(cfgv)) {
+//							AV * const av = GvAV(cfgv);
+//							const I32 start = CopLINE(PL_curcop)+1;
+//							I32 items = AvFILLp(av) - start;
+//							if (items > 0) {
+//								AV * const av2 = GvAVn(gv2);
+//								SV *PL_parser.linestr[s]vp = AvARRAY(av) + start;
+//								I32 l = (I32)line_num+1;
+//								while (items--)
+//									av_store(av2, l++, SvREFCNT_inc(PL_parser.linestr[s]vp++));
+//							}
+//						}
+//					}
+//
+//					if (tmpbuf2 != smallbuf) Safefree(tmpbuf2);
+//				}
+//			}
+//			CopFILE_free(PL_curcop);
+//			CopFILE_setn(PL_curcop, s, len);
+//		}
+//		CopLINE_set(PL_curcop, line_num);
+//	}
+
+/*
+ * S_force_next
+ * When the lexer realizes it knows the next token (for instance,
+ * it is reordering tokens for the parser) then it can call S_force_next
+ * to know what token to return the next time the lexer is called.  Caller
+ * will need to set PL_nextval[] and possibly PL_expect to ensure
+ * the lexer handles the token correctly.
+ */
+
+	void force_next(IElementType nextType)
+{
+//	#ifdef DEBUGGING
+//	if (DEBUG_T_TEST) {
+//		PerlIO_printf(Perl_debug_log, "### forced token:\n");
+//		tokereport(type, &NEXTVAL_NEXTTOKE);
+//	}
+//	#endif
+	PL_parser.nexttype[PL_parser.nexttoke] = nextType;
+	PL_parser.nexttoke++;
+	if (PL_parser.lex_state != LEX_KNOWNEXT) {
+		PL_parser.lex_defer = PL_parser.lex_state;
+		PL_parser.lex_state = LEX_KNOWNEXT;
+	}
+}
+
+
+	/*
+		Originaly it takes and returns a pointer
+		 Here we work with offsets
+	 */
+	int scan_formline(int s)
+	{
+		int eol;
+		int t;
+		String stuff = "";
+		boolean needargs = false;
+		boolean eofmt = false;
+
+//		PERL_ARGS_ASSERT_SCAN_FORMLINE;
+
+		_enough:
+		while (!needargs) {
+			if (PL_parser.linestr[s] == '.') {
+				t = s+1;
+//				#ifdef PERL_STRICT_CR
+//					while (isBLANK(PL_parser.linestr[t]))
+//						t++;
+//				#else
+					while (isBLANK(PL_parser.linestr[t]) || PL_parser.linestr[t] == '\r')
+						t++;
+//				#endif
+				if (PL_parser.linestr[t] == '\n' || t == PL_parser.bufend) {
+					eofmt = true;
+					break;
+				}
+			}
+			eol = memchr(s,'\n',PL_parser.bufend-s);
+			if( eol == -1 ) // (!eol++)
+				eol = PL_parser.bufend;
+			else
+				eol++;
+
+			if (PL_parser.linestr[s] != '#') {
+				for (t = s; t < eol; t++) {
+					if (PL_parser.linestr[t] == '~' && PL_parser.linestr[t+1] == '~' && stuff.length() > 0) {
+						needargs = false;
+						break _enough;	/* ~~ must be first line in formline */
+					}
+					if (PL_parser.linestr[t] == '@' || PL_parser.linestr[t] == '^')
+					needargs = true;
+				}
+				if (eol > s) {
+					stuff = sv_catpvn(stuff, s, eol-s);
+//					#ifndef PERL_STRICT_CR
+//					if (eol-s > 1 && eol[-2] == '\r' && eol[-1] == '\n') {
+//						char *end = SvPVX(stuff) + SvCUR(stuff);
+//						end[-2] = '\n';
+//						end[-1] = '\0';
+//						SvCUR_set(stuff, SvCUR(stuff) - 1);
+//					}
+//					#endif
+				}
+				else
+					break;
+			}
+			s = eol;
+
+/*	We are not using rsfp
+			if ((PL_rsfp || PL_parser.filtered)
+				&& PL_parser.form_lex_state == LEX_NORMAL)
+			{
+				bool got_some;
+				PL_bufptr = PL_parser.bufend;
+				COPLINE_INC_WITH_HERELINES;
+				got_some = lex_next_chunk(0);
+				CopLINE_dec(PL_curcop);
+				s = PL_bufptr;
+				if (!got_some)
+					break;
+			}
+*/
+//			incline(s); // NYI
+		}
+
+		enough:
+
+		if (stuff.length() == 0|| needargs)
+			PL_parser.lex_state = PL_parser.form_lex_state;
+		if (stuff.length() > 0) {
+			PL_parser.expect = Perl.expectation.XSTATE;
+			if (needargs) {
+				int s2 = s;
+				while (PL_parser.linestr[s2] == '\r' || PL_parser.linestr[s2] == ' ' || PL_parser.linestr[s2] == '\t' || PL_parser.linestr[s2] == '\f'
+						|| PL_parser.linestr[s2] == 013)
+				s2++;
+				if (PL_parser.linestr[s2] == '{') {
+					PL_parser.expect = Perl.expectation.XTERMBLOCK;
+					PL_parser.nextval[PL_parser.nexttoke].ival = 0;
+					force_next(DO);
+				}
+				PL_parser.nextval[PL_parser.nexttoke].ival = 0;
+				force_next(FORMLBRACK);
+			}
+			/* No encoding staff here
+			if (!IN_BYTES) {
+				if (UTF && is_utf8_string((U8*)SvPVX_const(stuff), SvCUR(stuff)))
+					SvUTF8_on(stuff);
+				else if (PL_encoding)
+					sv_recode_to_utf8(stuff, PL_encoding);
+			}
+			*/
+			PL_parser.nextval[PL_parser.nexttoke].opval = new OP(OP_CONST, 0, stuff);
+			force_next(THING);
+		}
+		else {
+//			SvREFCNT_dec(stuff);
+			if (eofmt)
+				PL_parser.lex_formbrack = 0;
+		}
+		return s;
+	}
 
 
 	public IElementType stateSwitch()
@@ -224,23 +540,24 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 		GV gv;
 		GV gvp; // this is pointer to pointer, not supported in java
 
-//		switch (PL_parser.lex_state) {
-//			case LEX_NORMAL:
-//			case LEX_INTERPNORMAL:
-//				break;
-//
-//    /* when we've already built the next token, just pull it out of the queue */
-//			case LEX_KNOWNEXT:
-//				PL_parser.nexttoke--;
-//				PL_parser.yylval = PL_parser.nextval[PL_parser.nexttoke];
-//				if (PL_parser.nexttoke == 0 ) {
-//					PL_parser.lex_state = PL_parser.lex_defer;
-//					PL_parser.lex_defer = LEX_NORMAL;
-//				}
+		switch (PL_parser.lex_state) {
+			case LEX_NORMAL:
+			case LEX_INTERPNORMAL:
+				break;
+
+    /* when we've already built the next token, just pull it out of the queue */
+			case LEX_KNOWNEXT:
+				PL_parser.nexttoke--;
+				PL_parser.yylval = PL_parser.nextval[PL_parser.nexttoke];
+				if (PL_parser.nexttoke == 0 )
+				{
+					PL_parser.lex_state = PL_parser.lex_defer;
+					PL_parser.lex_defer = LEX_NORMAL;
+				}
 //			{
-//				int next_type;
+//				IElementType next_type;
 //				next_type = PL_parser.nexttype[PL_parser.nexttoke];
-//				if ((next_type & (7<<24)) > 0) { // what the heck is this
+//				if ((next_type & (7<<24)) > 0) { // what the heck is this? Token has small values
 //					if ((next_type & (1<<24)) > 0) {
 //						if (PL_parser.lex_brackets > 100)
 //						{
@@ -318,8 +635,8 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					else {
 //						private int tmp;
 //						if (strnEQ(s, "L\\u", 3) || strnEQ(s, "U\\l", 3))
-//							tmp = *s, *s = s[2], s[2] = (char)tmp;	/* misordered... */
-//						if ((*s == 'L' || *s == 'U' || *s == 'F') &&
+//							tmp = PL_parser.linestr[s], PL_parser.linestr[s] = s[2], s[2] = (char)tmp;	/* misordered... */
+//						if ((PL_parser.linestr[s] == 'L' || PL_parser.linestr[s] == 'U' || PL_parser.linestr[s] == 'F') &&
 //						(strchr(PL_parser.lex_casestack, 'L')
 //								|| strchr(PL_parser.lex_casestack, 'U')
 //								|| strchr(PL_parser.lex_casestack, 'F'))) {
@@ -329,25 +646,25 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						}
 //						if (PL_parser.lex_casemods > 10)
 //							Renew(PL_parser.lex_casestack, PL_parser.lex_casemods + 2, char);
-//						PL_parser.lex_casestack[PL_parser.lex_casemods++] = *s;
+//						PL_parser.lex_casestack[PL_parser.lex_casemods++] = PL_parser.linestr[s];
 //						PL_parser.lex_casestack[PL_parser.lex_casemods] = '\0';
 //						PL_parser.lex_state = LEX_INTERPCONCAT;
 //						 PL_parser.nextval[PL_parser.nexttoke].ival = 0;
 //						force_next((2<<24)|'(');
-//						if (*s == 'l')
+//						if (PL_parser.linestr[s] == 'l')
 //						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_LCFIRST;
-//						else if (*s == 'u')
+//						else if (PL_parser.linestr[s] == 'u')
 //						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_UCFIRST;
-//						else if (*s == 'L')
+//						else if (PL_parser.linestr[s] == 'L')
 //						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_LC;
-//						else if (*s == 'U')
+//						else if (PL_parser.linestr[s] == 'U')
 //						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_UC;
-//						else if (*s == 'Q')
+//						else if (PL_parser.linestr[s] == 'Q')
 //						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_QUOTEMETA;
-//						else if (*s == 'F')
+//						else if (PL_parser.linestr[s] == 'F')
 //						 PL_parser.nextval[PL_parser.nexttoke].ival = OP_FC;
 //						else
-//						Perl_croak(aTHX_ "panic: yylex, *s=%u", *s);
+//						Perl_croak(aTHX_ "panic: yylex, PL_parser.linestr[s]=%u", PL_parser.linestr[s]);
 //						PL_parser.bufptr = s + 1;
 //					}
 //					force_next(FUNC);
@@ -419,7 +736,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			case LEX_INTERPEND:
 //				if (PL_parser.lex_dojoin) {
 //					const private int dojoin_was = PL_parser.lex_dojoin;
-//					PL_parser.lex_dojoin = FALSE;
+//					PL_parser.lex_dojoin = false;
 //					PL_parser.lex_state = LEX_INTERPCONCAT;
 //					PL_parser.lex_allbrackets--;
 //					return REPORT(dojoin_was == 1 ? ')' : POSTJOIN);
@@ -437,7 +754,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //	   check re_eval_str as well. */
 //				if (PL_parser.lex_shared->re_eval_start
 //						|| PL_parser.lex_shared->re_eval_str) {
-//					SV *sv;
+//					SV PL_parser.linestr[s]v;
 //					if (*PL_parser.bufptr != ')')
 //					Perl_croak(aTHX_ "Sequence (?{...}) not terminated with ')'");
 //					PL_parser.bufptr++;
@@ -453,7 +770,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					else sv = newSVpvn(PL_parser.lex_shared->re_eval_start,
 //							PL_parser.bufptr - PL_parser.lex_shared->re_eval_start);
 //					 PL_parser.nextval[PL_parser.nexttoke].opval =
-//							(OP*)newSVOP(OP_CONST, 0,
+//							new OP(OP_CONST, 0,
 //							sv);
 //					force_next(THING);
 //					PL_parser.lex_shared->re_eval_start = NULL;
@@ -473,14 +790,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //	/* m'foo' still needs to be parsed for possible (?{...}) */
 //				if (SvIVX(PL_parser.linestr) == '\'' && !PL_parser.lex_inpat) {
-//					SV *sv = newSVsv(PL_parser.linestr);
+//					SV PL_parser.linestr[s]v = newSVsv(PL_parser.linestr);
 //					sv = tokeq(sv);
-//					PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0, sv);
+//					PL_parser.yylval.opval = new OP(OP_CONST, 0, sv);
 //					s = PL_parser.bufend;
 //				}
 //				else {
 //					s = scan_const(PL_parser.bufptr);
-//					if (*s == '\\')
+//					if (PL_parser.linestr[s] == '\\')
 //					PL_parser.lex_state = LEX_INTERPCASEMOD;
 //					else
 //					PL_parser.lex_state = LEX_INTERPSTART;
@@ -506,14 +823,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				return advance();
 //			case LEX_FORMLINE:
 //				s = scan_formline(PL_parser.bufptr);
-//				if (!PL_parser.lex_formbrack)
+//				if ( PL_parser.lex_formbrack == 0)
 //				{
 //					formbrack = 1;
 //					goto rightbracket;
 //				}
 //				PL_parser.bufptr = s;
 //				return advance();
-//		}
+		}
 
 		return null;
 	}
@@ -522,9 +839,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 	{
 
 //		retry:
-//		switch (*s) {
+//		switch (PL_parser.linestr[s]) {
 //		default:
-//			if (UTF ? isIDFIRST_utf8((private int*)s) : isALNUMC(*s))
+//			if (UTF ? isIDFIRST_utf8((private int*)s) : isALNUMC(PL_parser.linestr[s]))
 //			goto keylookup;
 //		{
 //			SV *dsv = newSVpvs_flags("", SVs_TEMP);
@@ -532,7 +849,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						UTF8SKIP(s),
 //						SVs_TEMP | SVf_UTF8),
 //				10, UNI_DISPLAY_ISPRINT)
-//				: Perl_form(aTHX_ "\\x%02X", (unsigned char)*s);
+//				: Perl_form(aTHX_ "\\x%02X", (unsigned char)PL_parser.linestr[s]);
 //			len = UTF ? Perl_utf8_length(aTHX_ (private int *) PL_parser.linestart, (private int *) s) : (STRLEN) (s - PL_parser.linestart);
 //			if (len > UNRECOGNIZED_PRECEDE_COUNT) {
 //				d = UTF ? (char *) utf8_hop((private int *) s, -UNRECOGNIZED_PRECEDE_COUNT) : s - UNRECOGNIZED_PRECEDE_COUNT;
@@ -567,7 +884,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			PL_parser.last_uni = 0;
 //			PL_parser.last_lop = 0;
 //			if (!PL_in_eval && !PL_parser.preambled) {
-//				PL_parser.preambled = TRUE;
+//				PL_parser.preambled = true;
 //				if (PL_perldb) {
 //		/* Generate a string of Perl code to load the debugger.
 //		 * If PERL5DB is set, it will return the contents of that,
@@ -586,10 +903,10 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				} else
 //					sv_setpvs(PL_parser.linestr,"");
 //				if (PL_preambleav) {
-//					SV **svp = AvARRAY(PL_preambleav);
+//					SV *PL_parser.linestr[s]vp = AvARRAY(PL_preambleav);
 //					SV **const end = svp + AvFILLp(PL_preambleav);
 //					while(svp <= end) {
-//						sv_catsv(PL_parser.linestr, *svp);
+//						sv_catsv(PL_parser.linestr, PL_parser.linestr[s]vp);
 //						++svp;
 //						sv_catpvs(PL_parser.linestr, ";");
 //					}
@@ -612,14 +929,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							else {
 //			    /* "q\0${splitstr}\0" is legal perl. Yes, even NUL
 //			       bytes can be used as quoting characters.  :-) */
-//								const char *splits = PL_splitstr;
+//								const char PL_parser.linestr[s]plits = PL_splitstr;
 //								sv_catpvs(PL_parser.linestr, "our @F=split(q\0");
 //								do {
 //				/* Need to \ \s  */
-//									if (*splits == '\\')
+//									if (PL_parser.linestr[s]plits == '\\')
 //									sv_catpvn(PL_parser.linestr, splits, 1);
 //									sv_catpvn(PL_parser.linestr, splits, 1);
-//								} while (*splits++);
+//								} while (PL_parser.linestr[s]plits++);
 //			    /* This loop will embed the trailing NUL of
 //			       PL_parser.linestr as the last thing it does before
 //			       terminating.  */
@@ -640,7 +957,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			}
 //			do {
 //				fake_eof = 0;
-//				bof = PL_parser.rsfp ? TRUE : FALSE;
+//				bof = PL_parser.rsfp ? true : false;
 //				if (0) {
 //					fake_eof:
 //					fake_eof = LEX_FAKE_EOF;
@@ -657,7 +974,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //	    /* If it looks like the start of a BOM or raw UTF-16,
 //	     * check if it in fact is. */
 //				if (bof && PL_parser.rsfp &&
-//						(*s == 0 ||
+//						(PL_parser.linestr[s] == 0 ||
 //				*(private int*)s == BOM_UTF8_FIRST_BYTE ||
 //				*(private int*)s >= 0xFE ||
 //						s[1] == 0)) {
@@ -675,7 +992,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				}
 //				if (PL_parser.in_pod) {
 //		/* Incest with pod. */
-//					if (*s == '=' && strnEQ(s, "=cut", 4) && !isALPHA(s[4])) {
+//					if (PL_parser.linestr[s] == '=' && strnEQ(s, "=cut", 4) && !isALPHA(s[4])) {
 //						sv_setpvs(PL_parser.linestr, "");
 //						PL_parser.oldoldbufptr = PL_parser.oldbufptr = s = PL_parser.linestart = SvPVX(PL_parser.linestr);
 //						PL_parser.bufend = SvPVX(PL_parser.linestr) + SvCUR(PL_parser.linestr);
@@ -690,18 +1007,18 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			PL_parser.bufend = SvPVX(PL_parser.linestr) + SvCUR(PL_parser.linestr);
 //			PL_parser.last_lop = PL_parser.last_uni = NULL;
 //			if (CopLINE(PL_curcop) == 1) {
-//				while (s < PL_parser.bufend && isSPACE(*s))
+//				while (s < PL_parser.bufend && isSPACE(PL_parser.linestr[s]))
 //				s++;
-//				if (*s == ':' && s[1] != ':') /* for csh execing sh scripts */
+//				if (PL_parser.linestr[s] == ':' && s[1] != ':') /* for csh execing sh scripts */
 //				s++;
 //				d = NULL;
 //				if (!PL_in_eval) {
-//					if (*s == '#' && *(s+1) == '!')
+//					if (PL_parser.linestr[s] == '#' && *(s+1) == '!')
 //					d = s + 2;
 //					#ifdef ALTERNATE_SHEBANG
 //					else {
 //						static char const as[] = ALTERNATE_SHEBANG;
-//						if (*s == as[0] && strnEQ(s, as, sizeof(as) - 1))
+//						if (PL_parser.linestr[s] == as[0] && strnEQ(s, as, sizeof(as) - 1))
 //						d = s + (sizeof(as) - 1);
 //					}
 //					#endif /* ALTERNATE_SHEBANG */
@@ -788,18 +1105,18 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		 * not in the first 'word' of the line, we assume the line
 //		 * contains the start of the Perl program.
 //		 */
-//					if (d && *s != '#') {
+//					if (d && PL_parser.linestr[s] != '#') {
 //						const char *c = ipath;
 //						while (*c && !strchr("; \t\r\n\f\v#", *c))
 //						c++;
 //						if (c < d)
 //							d = NULL;	/* "perl" not in first word; ignore */
 //						else
-//						*s = '#';	/* Don't try to parse shebang line */
+//						PL_parser.linestr[s] = '#';	/* Don't try to parse shebang line */
 //					}
 //					#endif /* ALTERNATE_SHEBANG */
 //					if (!d &&
-//					*s == '#' &&
+//					PL_parser.linestr[s] == '#' &&
 //							ipathend > ipath &&
 //							!PL_minus_c &&
 //							!instr(s,"indir") &&
@@ -810,14 +1127,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //						*ipathend = '\0';
 //						s = ipathend + 1;
-//						while (s < PL_parser.bufend && isSPACE(*s))
+//						while (s < PL_parser.bufend && isSPACE(PL_parser.linestr[s]))
 //						s++;
 //						if (s < PL_parser.bufend) {
 //							Newx(newargv,PL_origargc+3,char*);
 //							newargv[1] = s;
-//							while (s < PL_parser.bufend && !isSPACE(*s))
+//							while (s < PL_parser.bufend && !isSPACE(PL_parser.linestr[s]))
 //							s++;
-//							*s = '\0';
+//							PL_parser.linestr[s] = '\0';
 //							Copy(PL_origargv+1, newargv+2, PL_origargc+1, char*);
 //						}
 //						else
@@ -831,7 +1148,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					if (d) {
 //						while (*d && !isSPACE(*d))
 //						d++;
-//						while (SPACE_OR_TAB(*d))
+//						while (isBLANK(*d))
 //						d++;
 //
 //						if (*d++ == '-') {
@@ -842,18 +1159,18 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							const char *d1 = d;
 //
 //							do {
-//								boolean baduni = FALSE;
+//								boolean baduni = false;
 //								if (*d1 == 'C') {
 //									const char *d2 = d1 + 1;
 //									if (parse_unicode_opts((const char **)&d2)
 //									!= PL_unicode)
-//									baduni = TRUE;
+//									baduni = true;
 //								}
 //								if (baduni || isALPHA_FOLD_EQ(*d1, 'M')) {
 //									const char * const m = d1;
 //									while (*d1 && !isSPACE(*d1))
 //									d1++;
-//									Perl_croak(aTHX_ "Too late for \"-%.*s\" option",
+//									Perl_croak(aTHX_ "Too late for \"-%.PL_parser.linestr[s]\" option",
 //											(int)(d1 - m), m);
 //								}
 //								d1 = moreswitches(d1);
@@ -875,7 +1192,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //								PL_parser.oldoldbufptr = PL_parser.oldbufptr = s = PL_parser.linestart = SvPVX(PL_parser.linestr);
 //								PL_parser.bufend = SvPVX(PL_parser.linestr) + SvCUR(PL_parser.linestr);
 //								PL_parser.last_lop = PL_parser.last_uni = NULL;
-//								PL_parser.preambled = FALSE;
+//								PL_parser.preambled = false;
 //								if (PERLDB_LINE || PERLDB_SAVESRC)
 //									(void)gv_fetchfile(PL_origfilename);
 //								goto retry;
@@ -904,8 +1221,8 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		case '\n':
 //			if (PL_parser.lex_state != LEX_NORMAL ||
 //					(PL_in_eval && !PL_parser.rsfp && !PL_parser.filtered)) {
-//			const boolean in_comment = *s == '#';
-//			if (*s == '#' && s == PL_parser.linestart && PL_in_eval
+//			const boolean in_comment = PL_parser.linestr[s] == '#';
+//			if (PL_parser.linestr[s] == '#' && s == PL_parser.linestart && PL_in_eval
 //					&& !PL_parser.rsfp && !PL_parser.filtered) {
 //		/* handle eval qq[#line 1 "foo"\n ...] */
 //				CopLINE_dec(PL_curcop);
@@ -935,7 +1252,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			}
 //		}
 //		else {
-//			while (s < PL_parser.bufend && *s != '\n')
+//			while (s < PL_parser.bufend && PL_parser.linestr[s] != '\n')
 //			s++;
 //			if (s < PL_parser.bufend)
 //			{
@@ -955,13 +1272,13 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //				s++;
 //				PL_parser.bufptr = s;
-//				tmp = *s++;
+//				tmp = PL_parser.linestr[s]++;
 //
-//				while (s < PL_parser.bufend && SPACE_OR_TAB(*s))
+//				while (s < PL_parser.bufend && isBLANK(PL_parser.linestr[s]))
 //				s++;
 //
 //				if (strnEQ(s,"=>",2)) {
-//					s = force_word(PL_parser.bufptr,WORD,FALSE,FALSE);
+//					s = force_word(PL_parser.bufptr,WORD,false,false);
 //					DEBUG_T( { printbuf("### Saw unary minus before =>, forcing word %s\n", s); } );
 //					OPERATOR('-');		/* unary minus */
 //				}
@@ -1021,22 +1338,22 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				}
 //			}
 //		{
-//			const char tmp = *s++;
-//			if (*s == tmp) {
+//			const char tmp = PL_parser.linestr[s]++;
+//			if (PL_parser.linestr[s] == tmp) {
 //			s++;
 //			if (PL_parser.expect == XOPERATOR)
 //				TERM(POSTDEC);
 //			else
 //				OPERATOR(PREDEC);
 //		}
-//			else if (*s == '>') {
+//			else if (PL_parser.linestr[s] == '>') {
 //			s++;
 //			s = skipspace(s);
 //			if (FEATURE_POSTDEREF_IS_ENABLED && (
-//					((*s == '$' || *s == '&') && s[1] == '*')
-//			||(*s == '$' && s[1] == '#' && s[2] == '*')
-//			||((*s == '@' || *s == '%') && strchr("*[{", s[1]))
-//			||(*s == '*' && (s[1] == '*' || s[1] == '{'))
+//					((PL_parser.linestr[s] == '$' || PL_parser.linestr[s] == '&') && s[1] == '*')
+//			||(PL_parser.linestr[s] == '$' && s[1] == '#' && s[2] == '*')
+//			||((PL_parser.linestr[s] == '@' || PL_parser.linestr[s] == '%') && strchr("*[{", s[1]))
+//			||(PL_parser.linestr[s] == '*' && (s[1] == '*' || s[1] == '{'))
 //			))
 //			{
 //				Perl_ck_warner_d(aTHX_
@@ -1047,16 +1364,16 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				TOKEN(ARROW);
 //			}
 //			if (isIDFIRST_lazy_if(s,UTF)) {
-//				s = force_word(s,METHOD,FALSE,TRUE);
+//				s = force_word(s,METHOD,false,true);
 //				TOKEN(ARROW);
 //			}
-//			else if (*s == '$')
+//			else if (PL_parser.linestr[s] == '$')
 //			OPERATOR(ARROW);
 //			else
 //			TERM(ARROW);
 //		}
 //			if (PL_parser.expect == XOPERATOR) {
-//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//				if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s--;
 //					TOKEN(0);
@@ -1064,7 +1381,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				Aop(OP_SUBTRACT);
 //			}
 //			else {
-//				if (isSPACE(*s) || !isSPACE(*PL_parser.bufptr))
+//				if (isSPACE(PL_parser.linestr[s]) || !isSPACE(*PL_parser.bufptr))
 //				check_uni();
 //				OPERATOR('-');		/* unary minus */
 //			}
@@ -1072,8 +1389,8 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //		case '+':
 //		{
-//			const char tmp = *s++;
-//			if (*s == tmp) {
+//			const char tmp = PL_parser.linestr[s]++;
+//			if (PL_parser.linestr[s] == tmp) {
 //			s++;
 //			if (PL_parser.expect == XOPERATOR)
 //				TERM(POSTINC);
@@ -1081,7 +1398,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				OPERATOR(PREINC);
 //		}
 //			if (PL_parser.expect == XOPERATOR) {
-//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//				if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s--;
 //					TOKEN(0);
@@ -1089,7 +1406,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				Aop(OP_ADD);
 //			}
 //			else {
-//				if (isSPACE(*s) || !isSPACE(*PL_parser.bufptr))
+//				if (isSPACE(PL_parser.linestr[s]) || !isSPACE(*PL_parser.bufptr))
 //				check_uni();
 //				OPERATOR('+');
 //			}
@@ -1098,7 +1415,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		case '*':
 //			if (PL_parser.expect == XPOSTDEREF) POSTDEREF('*');
 //			if (PL_parser.expect != XOPERATOR) {
-//				s = scan_ident(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, TRUE);
+//				s = scan_ident(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, true);
 //				PL_parser.expect = XOPERATOR;
 //				force_ident(PL_parser.tokenbuf, '*');
 //				if (!*PL_parser.tokenbuf)
@@ -1106,16 +1423,16 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				TERM('*');
 //			}
 //			s++;
-//			if (*s == '*') {
+//			if (PL_parser.linestr[s] == '*') {
 //			s++;
-//			if (*s == '=' && !PL_parser.lex_allbrackets &&
+//			if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //					PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //				s -= 2;
 //				TOKEN(0);
 //			}
 //			PWop(OP_POW);
 //		}
-//		if (*s == '=' && !PL_parser.lex_allbrackets &&
+//		if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //				PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //			s--;
 //			TOKEN(0);
@@ -1136,13 +1453,13 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			else if (PL_parser.expect == XPOSTDEREF) POSTDEREF('%');
 //			PL_parser.tokenbuf[0] = '%';
 //			s = scan_ident(s, PL_parser.tokenbuf + 1,
-//					sizeof PL_parser.tokenbuf - 1, FALSE);
+//					sizeof PL_parser.tokenbuf - 1, false);
 //			PL_parser.yylval.ival = 0;
 //			if (!PL_parser.tokenbuf[1]) {
 //				PREREF('%');
 //			}
 //			if ((PL_parser.expect != XREF || PL_parser.oldoldbufptr == PL_parser.last_lop) && intuit_more(s)) {
-//				if (*s == '[')
+//				if (PL_parser.linestr[s] == '[')
 //				PL_parser.tokenbuf[0] = '@';
 //			}
 //			PL_parser.expect = XOPERATOR;
@@ -1161,7 +1478,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			PL_parser.lex_brackstack[PL_parser.lex_brackets++] = 0;
 //			PL_parser.lex_allbrackets++;
 //		{
-//			const char tmp = *s++;
+//			const char tmp = PL_parser.linestr[s]++;
 //			OPERATOR(tmp);
 //		}
 //		case '~':
@@ -1197,7 +1514,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					if (!PL_parser.in_my || PL_parser.lex_state != LEX_NORMAL)
 //						break;
 //					PL_parser.bufptr = s;	/* update in case we back off */
-//					if (*s == '=') {
+//					if (PL_parser.linestr[s] == '=') {
 //					Perl_croak(aTHX_
 //							"Use of := for an empty attribute list is not allowed");
 //				}
@@ -1212,9 +1529,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					attrs = NULL;
 //					while (isIDFIRST_lazy_if(s,UTF)) {
 //						private int tmp;
-//						SV *sv;
-//						d = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, FALSE, &len);
-//						if (isLOWER(*s) && (tmp = keyword(PL_parser.tokenbuf, len, 0))) {
+//						SV PL_parser.linestr[s]v;
+//						d = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, false, &len);
+//						if (isLOWER(PL_parser.linestr[s]) && (tmp = keyword(PL_parser.tokenbuf, len, 0))) {
 //							if (tmp < 0) tmp = -tmp;
 //							switch (tmp) {
 //								case KEY_or:
@@ -1232,7 +1549,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						}
 //						sv = newSVpvn_flags(s, len, UTF ? SVf_UTF8 : 0);
 //						if (*d == '(') {
-//							d = scan_str(d,TRUE,TRUE,FALSE,NULL);
+//							d = scan_str(d,true,true,false,NULL);
 //							COPLINE_SET_FROM_MULTI_END;
 //							if (!d) {
 //			/* MUST advance bufptr here to avoid bogus
@@ -1293,18 +1610,18 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //												sv));
 //						}
 //						s = skipspace(d);
-//						if (*s == ':' && s[1] != ':')
+//						if (PL_parser.linestr[s] == ':' && s[1] != ':')
 //						s = skipspace(s+1);
 //						else if (s == d)
 //							break;	/* require real whitespace or :'s */
 //		/* XXX losing whitespace on sequential attributes here */
 //					}
 //				{
-//					if (*s != ';' && *s != '}' &&
+//					if (PL_parser.linestr[s] != ';' && PL_parser.linestr[s] != '}' &&
 //						!(PL_parser.expect == XOPERATOR
-//								? (*s == '=' ||  *s == ')')
-//					: (*s == '{' ||  *s == '('))) {
-//					const char q = ((*s == '\'') ? '"' : '\'');
+//								? (PL_parser.linestr[s] == '=' ||  PL_parser.linestr[s] == ')')
+//					: (PL_parser.linestr[s] == '{' ||  PL_parser.linestr[s] == '('))) {
+//					const char q = ((PL_parser.linestr[s] == '\'') ? '"' : '\'');
 //		    /* If here for an expression, and parsed no attrs, back
 //		       off. */
 //					if (PL_parser.expect == XOPERATOR && !attrs) {
@@ -1316,9 +1633,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		    */
 //					PL_parser.bufptr = s;
 //					yyerror( (const char *)
-//					(*s
+//					(PL_parser.linestr[s]
 //							? Perl_form(aTHX_ "Invalid separator character "
-//							"%c%c%c in attribute list", q, *s, q)
+//							"%c%c%c in attribute list", q, PL_parser.linestr[s], q)
 //					: "Unterminated attribute list" ) );
 //					if (attrs)
 //						op_free(attrs);
@@ -1361,7 +1678,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			s++;
 //			PL_parser.lex_allbrackets--;
 //			s = skipspace(s);
-//			if (*s == '{')
+//			if (PL_parser.linestr[s] == '{')
 //			PREBLOCK(')');
 //			TERM(')');
 //		case ']':
@@ -1376,9 +1693,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			PL_parser.lex_allbrackets--;
 //			if (PL_parser.lex_state == LEX_INTERPNORMAL) {
 //				if (PL_parser.lex_brackets == 0) {
-//					if (*s == '-' && s[1] == '>')
+//					if (PL_parser.linestr[s] == '-' && s[1] == '>')
 //					PL_parser.lex_state = LEX_INTERPENDMAYBE;
-//					else if (*s != '[' && *s != '{')
+//					else if (PL_parser.linestr[s] != '[' && PL_parser.linestr[s] != '{')
 //					PL_parser.lex_state = LEX_INTERPEND;
 //				}
 //			}
@@ -1395,24 +1712,24 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					PL_parser.lex_allbrackets++;
 //					OPERATOR(HASHBRACK);
 //				case XOPERATOR:
-//					while (s < PL_parser.bufend && SPACE_OR_TAB(*s))
+//					while (s < PL_parser.bufend && isBLANK(PL_parser.linestr[s]))
 //					s++;
 //					d = s;
 //					PL_parser.tokenbuf[0] = '\0';
 //					if (d < PL_parser.bufend && *d == '-') {
 //					PL_parser.tokenbuf[0] = '-';
 //					d++;
-//					while (d < PL_parser.bufend && SPACE_OR_TAB(*d))
+//					while (d < PL_parser.bufend && isBLANK(*d))
 //					d++;
 //				}
 //				if (d < PL_parser.bufend && isIDFIRST_lazy_if(d,UTF)) {
 //					d = scan_word(d, PL_parser.tokenbuf + 1, sizeof PL_parser.tokenbuf - 1,
-//							FALSE, &len);
-//					while (d < PL_parser.bufend && SPACE_OR_TAB(*d))
+//							false, &len);
+//					while (d < PL_parser.bufend && isBLANK(*d))
 //					d++;
 //					if (*d == '}') {
 //						const char minus = (PL_parser.tokenbuf[0] == '-');
-//						s = force_word(s + minus, WORD, FALSE, TRUE);
+//						s = force_word(s + minus, WORD, false, true);
 //						if (minus)
 //							force_next('-');
 //					}
@@ -1443,7 +1760,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						PL_parser.lex_brackstack[PL_parser.lex_brackets++] = XOPERATOR;
 //					PL_parser.lex_allbrackets++;
 //					s = skipspace(s);
-//					if (*s == '}') {
+//					if (PL_parser.linestr[s] == '}') {
 //						if (PL_parser.expect == XREF && PL_parser.lex_state == LEX_INTERPNORMAL) {
 //							PL_parser.expect = XTERM;
 //			/* This hack is to get the ${} in the message. */
@@ -1475,25 +1792,25 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		 * GSAR 97-07-21
 //		 */
 //					t = s;
-//					if (*s == '\'' || *s == '"' || *s == '`') {
+//					if (PL_parser.linestr[s] == '\'' || PL_parser.linestr[s] == '"' || PL_parser.linestr[s] == '`') {
 //		    /* common case: get past first string, handling escapes */
-//						for (t++; t < PL_parser.bufend && *t != *s;)
+//						for (t++; t < PL_parser.bufend && PL_parser.linestr[t] != PL_parser.linestr[s];)
 //						if (*t++ == '\\')
 //						t++;
 //						t++;
 //					}
-//					else if (*s == 'q') {
+//					else if (PL_parser.linestr[s] == 'q') {
 //						if (++t < PL_parser.bufend
-//								&& (!isWORDCHAR(*t)
-//								|| ((*t == 'q' || *t == 'x') && ++t < PL_parser.bufend
-//								&& !isWORDCHAR(*t))))
+//								&& (!isWORDCHAR(PL_parser.linestr[t])
+//								|| ((PL_parser.linestr[t] == 'q' || PL_parser.linestr[t] == 'x') && ++t < PL_parser.bufend
+//								&& !isWORDCHAR(PL_parser.linestr[t]))))
 //						{
 //			/* skip q//-like construct */
 //							const char *tmps;
 //							char open, close, term;
 //							private int brackets = 1;
 //
-//							while (t < PL_parser.bufend && isSPACE(*t))
+//							while (t < PL_parser.bufend && isSPACE(PL_parser.linestr[t]))
 //							t++;
 //			/* check for q => */
 //							if (t+1 < PL_parser.bufend && t[0] == '=' && t[1] == '>') {
@@ -1506,18 +1823,18 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							close = term;
 //							if (open == close)
 //								for (t++; t < PL_parser.bufend; t++) {
-//									if (*t == '\\' && t+1 < PL_parser.bufend && open != '\\')
+//									if (PL_parser.linestr[t] == '\\' && t+1 < PL_parser.bufend && open != '\\')
 //									t++;
-//									else if (*t == open)
+//									else if (PL_parser.linestr[t] == open)
 //									break;
 //								}
 //							else {
 //								for (t++; t < PL_parser.bufend; t++) {
-//									if (*t == '\\' && t+1 < PL_parser.bufend)
+//									if (PL_parser.linestr[t] == '\\' && t+1 < PL_parser.bufend)
 //									t++;
-//									else if (*t == close && --brackets <= 0)
+//									else if (PL_parser.linestr[t] == close && --brackets <= 0)
 //									break;
-//									else if (*t == open)
+//									else if (PL_parser.linestr[t] == open)
 //									brackets++;
 //								}
 //							}
@@ -1533,12 +1850,12 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						while (t < PL_parser.bufend && isWORDCHAR_lazy_if(t,UTF))
 //							t += UTF8SKIP(t);
 //					}
-//					while (t < PL_parser.bufend && isSPACE(*t))
+//					while (t < PL_parser.bufend && isSPACE(PL_parser.linestr[t]))
 //					t++;
 //		/* if comma follows first term, call it an anon hash */
 //		/* XXX it could be a comma expression with loop modifiers */
-//					if (t < PL_parser.bufend && ((*t == ',' && (*s == 'q' || !isLOWER(*s)))
-//					|| (*t == '=' && t[1] == '>')))
+//					if (t < PL_parser.bufend && ((PL_parser.linestr[t] == ',' && (PL_parser.linestr[s] == 'q' || !isLOWER(PL_parser.linestr[s])))
+//					|| (PL_parser.linestr[t] == '=' && t[1] == '>')))
 //					OPERATOR(HASHBRACK);
 //					if (PL_parser.expect == XREF)
 //					{
@@ -1549,7 +1866,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		       map {no strict; ...} works.
 //		     */
 //						s = skipspace(s);
-//						if (*s == '{') {
+//						if (PL_parser.linestr[s] == '{') {
 //						PL_parser.expect = XTERM;
 //						break;
 //					}
@@ -1595,9 +1912,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					if (PL_parser.lex_inwhat == OP_SUBST && PL_parser.lex_repl == PL_parser.linestr
 //							&& SvEVALED(PL_parser.lex_repl))
 //						PL_parser.lex_state = LEX_INTERPEND;
-//					else if (*s == '-' && s[1] == '>')
+//					else if (PL_parser.linestr[s] == '-' && s[1] == '>')
 //					PL_parser.lex_state = LEX_INTERPENDMAYBE;
-//					else if (*s != '[' && *s != '{')
+//					else if (PL_parser.linestr[s] != '[' && PL_parser.linestr[s] != '{')
 //					PL_parser.lex_state = LEX_INTERPEND;
 //				}
 //			}
@@ -1616,9 +1933,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		case '&':
 //			if (PL_parser.expect == XPOSTDEREF) POSTDEREF('&');
 //			s++;
-//			if (*s++ == '&') {
+//			if (PL_parser.linestr[s]++ == '&') {
 //			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
-//					(*s == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_LOGIC)) {
+//					(PL_parser.linestr[s] == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_LOGIC)) {
 //				s -= 2;
 //				TOKEN(0);
 //			}
@@ -1634,7 +1951,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				CopLINE_inc(PL_curcop);
 //			}
 //			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
-//					(*s == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_BITWISE)) {
+//					(PL_parser.linestr[s] == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_BITWISE)) {
 //				s--;
 //				TOKEN(0);
 //			}
@@ -1644,7 +1961,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //		PL_parser.tokenbuf[0] = '&';
 //		s = scan_ident(s - 1, PL_parser.tokenbuf + 1,
-//				sizeof PL_parser.tokenbuf - 1, TRUE);
+//				sizeof PL_parser.tokenbuf - 1, true);
 //		if (PL_parser.tokenbuf[1]) {
 //			PL_parser.expect = XOPERATOR;
 //			force_ident_maybe_lex('&');
@@ -1656,9 +1973,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //		case '|':
 //			s++;
-//			if (*s++ == '|') {
+//			if (PL_parser.linestr[s]++ == '|') {
 //			if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
-//					(*s == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_LOGIC)) {
+//					(PL_parser.linestr[s] == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_LOGIC)) {
 //				s -= 2;
 //				TOKEN(0);
 //			}
@@ -1666,7 +1983,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		}
 //		s--;
 //		if (!PL_parser.lex_allbrackets && PL_parser.lex_fakeof >=
-//				(*s == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_BITWISE)) {
+//				(PL_parser.linestr[s] == '=' ? LEX_FAKEEOF_ASSIGN : LEX_FAKEEOF_BITWISE)) {
 //			s--;
 //			TOKEN(0);
 //		}
@@ -1674,7 +1991,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		case '=':
 //			s++;
 //		{
-//			const char tmp = *s++;
+//			const char tmp = PL_parser.linestr[s]++;
 //			if (tmp == '=') {
 //				if (!PL_parser.lex_allbrackets &&
 //						PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
@@ -1693,7 +2010,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			}
 //			if (tmp == '~')
 //				PMop(OP_MATCH);
-//			if (tmp && isSPACE(*s) && ckWARN(WARN_SYNTAX)
+//			if (tmp && isSPACE(PL_parser.linestr[s]) && ckWARN(WARN_SYNTAX)
 //				&& strchr("+-*/%.^&|<",tmp))
 //			Perl_warner(aTHX_ packWARN(WARN_SYNTAX),
 //					"Reversed %c= operator",(int)tmp);
@@ -1705,7 +2022,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				|| PL_parser.lex_state != LEX_NORMAL) {
 //				d = PL_parser.bufend;
 //				while (s < d) {
-//					if (*s++ == '\n') {
+//					if (PL_parser.linestr[s]++ == '\n') {
 //						incline(s);
 //						if (strnEQ(s,"=cut",4)) {
 //							s = strchr(s,'\n');
@@ -1726,14 +2043,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			}
 //		}
 //		if (PL_parser.expect == XBLOCK) {
-//			const char *t = s;
+//			const char PL_parser.linestr[t] = s;
 //			#ifdef PERL_STRICT_CR
-//			while (SPACE_OR_TAB(*t))
+//			while (isBLANK(PL_parser.linestr[t]))
 //			#else
-//			while (SPACE_OR_TAB(*t) || *t == '\r')
+//			while (isBLANK(PL_parser.linestr[t]) || PL_parser.linestr[t] == '\r')
 //			#endif
 //			t++;
-//			if (*t == '\n' || *t == '#') {
+//			if (PL_parser.linestr[t] == '\n' || PL_parser.linestr[t] == '#') {
 //				formbrack = 1;
 //				ENTER;
 //				SAVEI8(PL_parser.form_lex_state);
@@ -1752,21 +2069,21 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		case '!':
 //			s++;
 //		{
-//			const char tmp = *s++;
+//			const char tmp = PL_parser.linestr[s]++;
 //			if (tmp == '=') {
 //		/* was this !=~ where !~ was meant?
 //		 * warn on m:!=~\s+([/?]|[msy]\W|tr\W): */
 //
-//				if (*s == '~' && ckWARN(WARN_SYNTAX)) {
-//					const char *t = s+1;
+//				if (PL_parser.linestr[s] == '~' && ckWARN(WARN_SYNTAX)) {
+//					const char PL_parser.linestr[t] = s+1;
 //
-//					while (t < PL_parser.bufend && isSPACE(*t))
+//					while (t < PL_parser.bufend && isSPACE(PL_parser.linestr[t]))
 //					++t;
 //
-//					if (*t == '/' || *t == '?' ||
-//							((*t == 'm' || *t == 's' || *t == 'y')
+//					if (PL_parser.linestr[t] == '/' || PL_parser.linestr[t] == '?' ||
+//							((PL_parser.linestr[t] == 'm' || PL_parser.linestr[t] == 's' || PL_parser.linestr[t] == 'y')
 //					&& !isWORDCHAR(t[1])) ||
-//					(*t == 't' && t[1] == 'r' && !isWORDCHAR(t[2])))
+//					(PL_parser.linestr[t] == 't' && t[1] == 'r' && !isWORDCHAR(t[2])))
 //					Perl_warner(aTHX_ packWARN(WARN_SYNTAX),
 //							"!=~ should be !~");
 //				}
@@ -1795,9 +2112,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			}
 //			s++;
 //		{
-//			char tmp = *s++;
+//			char tmp = PL_parser.linestr[s]++;
 //			if (tmp == '<') {
-//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//				if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s -= 2;
 //					TOKEN(0);
@@ -1805,7 +2122,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				SHop(OP_LEFT_SHIFT);
 //			}
 //			if (tmp == '=') {
-//				tmp = *s++;
+//				tmp = PL_parser.linestr[s]++;
 //				if (tmp == '>') {
 //					if (!PL_parser.lex_allbrackets &&
 //							PL_parser.lex_fakeof >= LEX_FAKEEOF_COMPARE) {
@@ -1832,9 +2149,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		case '>':
 //			s++;
 //		{
-//			const char tmp = *s++;
+//			const char tmp = PL_parser.linestr[s]++;
 //			if (tmp == '>') {
-//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//				if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s -= 2;
 //					TOKEN(0);
@@ -1876,7 +2193,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			if (s[1] == '#' && (isIDFIRST_lazy_if(s+2,UTF) || strchr("{$:+-@", s[2]))) {
 //				PL_parser.tokenbuf[0] = '@';
 //				s = scan_ident(s + 1, PL_parser.tokenbuf + 1,
-//						sizeof PL_parser.tokenbuf - 1, FALSE);
+//						sizeof PL_parser.tokenbuf - 1, false);
 //				if (PL_parser.expect == XOPERATOR)
 //					no_op("Array length", s);
 //				if (!PL_parser.tokenbuf[1])
@@ -1888,7 +2205,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //			PL_parser.tokenbuf[0] = '$';
 //			s = scan_ident(s, PL_parser.tokenbuf + 1,
-//					sizeof PL_parser.tokenbuf - 1, FALSE);
+//					sizeof PL_parser.tokenbuf - 1, false);
 //			if (PL_parser.expect == XOPERATOR)
 //				no_op("Scalar", s);
 //			if (!PL_parser.tokenbuf[1]) {
@@ -1899,30 +2216,30 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //			d = s;
 //		{
-//			const char tmp = *s;
+//			const char tmp = PL_parser.linestr[s];
 //			if (PL_parser.lex_state == LEX_NORMAL || PL_parser.lex_brackets)
 //				s = skipspace(s);
 //
 //			if ((PL_parser.expect != XREF || PL_parser.oldoldbufptr == PL_parser.last_lop)
 //					&& intuit_more(s)) {
-//				if (*s == '[') {
+//				if (PL_parser.linestr[s] == '[') {
 //					PL_parser.tokenbuf[0] = '@';
 //					if (ckWARN(WARN_SYNTAX)) {
-//						char *t = s+1;
+//						char PL_parser.linestr[t] = s+1;
 //
-//						while (isSPACE(*t) || isWORDCHAR_lazy_if(t,UTF) || *t == '$')
+//						while (isSPACE(PL_parser.linestr[t]) || isWORDCHAR_lazy_if(t,UTF) || PL_parser.linestr[t] == '$')
 //						t++;
 //						if (*t++ == ',') {
 //							PL_parser.bufptr = skipspace(PL_parser.bufptr); /* XXX can realloc */
-//							while (t < PL_parser.bufend && *t != ']')
+//							while (t < PL_parser.bufend && PL_parser.linestr[t] != ']')
 //							t++;
 //							Perl_warner(aTHX_ packWARN(WARN_SYNTAX),
-//									"Multidimensional syntax %.*s not supported",
+//									"Multidimensional syntax %.PL_parser.linestr[s] not supported",
 //									(int)((t - PL_parser.bufptr) + 1), PL_parser.bufptr);
 //						}
 //					}
 //				}
-//				else if (*s == '{') {
+//				else if (PL_parser.linestr[s] == '{') {
 //					char *t;
 //					PL_parser.tokenbuf[0] = '%';
 //					if (strEQ(PL_parser.tokenbuf+1, "SIG")  && ckWARN(WARN_SYNTAX)
@@ -1931,14 +2248,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						char tmpbuf[sizeof PL_parser.tokenbuf];
 //						do {
 //							t++;
-//						} while (isSPACE(*t));
+//						} while (isSPACE(PL_parser.linestr[t]));
 //						if (isIDFIRST_lazy_if(t,UTF)) {
 //							STRLEN len;
-//							t = scan_word(t, tmpbuf, sizeof tmpbuf, TRUE,
+//							t = scan_word(t, tmpbuf, sizeof tmpbuf, true,
 //									&len);
-//							while (isSPACE(*t))
+//							while (isSPACE(PL_parser.linestr[t]))
 //							t++;
-//							if (*t == ';'
+//							if (PL_parser.linestr[t] == ';'
 //									&& get_cvn_flags(tmpbuf, len, UTF ? SVf_UTF8 : 0))
 //							Perl_warner(aTHX_ packWARN(WARN_SYNTAX),
 //									"You need to quote \"%"UTF8f"\"",
@@ -1953,14 +2270,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				const boolean islop = (PL_parser.last_lop == PL_parser.oldoldbufptr);
 //				if (!islop || PL_parser.last_lop_op == OP_GREPSTART)
 //					PL_parser.expect = XOPERATOR;
-//				else if (strchr("$@\"'`q", *s))
+//				else if (strchr("$@\"'`q", PL_parser.linestr[s]))
 //				PL_parser.expect = XTERM;		/* e.g. print $fh "foo" */
-//				else if (strchr("&*<%", *s) && isIDFIRST_lazy_if(s+1,UTF))
+//				else if (strchr("&*<%", PL_parser.linestr[s]) && isIDFIRST_lazy_if(s+1,UTF))
 //				PL_parser.expect = XTERM;		/* e.g. print $fh &sub */
 //				else if (isIDFIRST_lazy_if(s,UTF)) {
 //					char tmpbuf[sizeof PL_parser.tokenbuf];
 //					int t2;
-//					scan_word(s, tmpbuf, sizeof tmpbuf, TRUE, &len);
+//					scan_word(s, tmpbuf, sizeof tmpbuf, true, &len);
 //					if ((t2 = keyword(tmpbuf, len, 0))) {
 //			/* binary operators exclude handle interpretations */
 //						switch (t2) {
@@ -1982,19 +2299,19 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						PL_parser.expect = XTERM;	/* e.g. print $fh subr() */
 //					}
 //				}
-//				else if (isDIGIT(*s))
+//				else if (isDIGIT(PL_parser.linestr[s]))
 //				PL_parser.expect = XTERM;		/* e.g. print $fh 3 */
-//				else if (*s == '.' && isDIGIT(s[1]))
+//				else if (PL_parser.linestr[s] == '.' && isDIGIT(s[1]))
 //				PL_parser.expect = XTERM;		/* e.g. print $fh .3 */
-//				else if ((*s == '?' || *s == '-' || *s == '+')
+//				else if ((PL_parser.linestr[s] == '?' || PL_parser.linestr[s] == '-' || PL_parser.linestr[s] == '+')
 //				&& !isSPACE(s[1]) && s[1] != '=')
 //				PL_parser.expect = XTERM;		/* e.g. print $fh -1 */
-//				else if (*s == '/' && !isSPACE(s[1]) && s[1] != '='
+//				else if (PL_parser.linestr[s] == '/' && !isSPACE(s[1]) && s[1] != '='
 //						&& s[1] != '/')
 //				PL_parser.expect = XTERM;		/* e.g. print $fh /.../
 //						   XXX except DORDOR operator
 //						*/
-//				else if (*s == '<' && s[1] == '<' && !isSPACE(s[2])
+//				else if (PL_parser.linestr[s] == '<' && s[1] == '<' && !isSPACE(s[2])
 //						&& s[2] != '=')
 //				PL_parser.expect = XTERM;		/* print $fh <<"EOF" */
 //			}
@@ -2007,7 +2324,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				no_op("Array", s);
 //			else if (PL_parser.expect == XPOSTDEREF) POSTDEREF('@');
 //			PL_parser.tokenbuf[0] = '@';
-//			s = scan_ident(s, PL_parser.tokenbuf + 1, sizeof PL_parser.tokenbuf - 1, FALSE);
+//			s = scan_ident(s, PL_parser.tokenbuf + 1, sizeof PL_parser.tokenbuf - 1, false);
 //			PL_parser.yylval.ival = 0;
 //			if (!PL_parser.tokenbuf[1]) {
 //				PREREF('@');
@@ -2015,11 +2332,11 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			if (PL_parser.lex_state == LEX_NORMAL)
 //				s = skipspace(s);
 //			if ((PL_parser.expect != XREF || PL_parser.oldoldbufptr == PL_parser.last_lop) && intuit_more(s)) {
-//				if (*s == '{')
+//				if (PL_parser.linestr[s] == '{')
 //				PL_parser.tokenbuf[0] = '%';
 //
 //	    /* Warn about @ where they meant $. */
-//				if (*s == '[' || *s == '{') {
+//				if (PL_parser.linestr[s] == '[' || PL_parser.linestr[s] == '{') {
 //					if (ckWARN(WARN_SYNTAX)) {
 //						S_check_scalar_slice(aTHX_ s);
 //					}
@@ -2039,7 +2356,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			}
 //			else if (PL_parser.expect == XOPERATOR) {
 //				s++;
-//				if (*s == '=' && !PL_parser.lex_allbrackets &&
+//				if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //						PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //					s--;
 //					TOKEN(0);
@@ -2086,15 +2403,15 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			OPERATOR(YADAYADA);
 //		}
 //		if (PL_parser.expect == XOPERATOR || !isDIGIT(s[1])) {
-//			char tmp = *s++;
-//			if (*s == tmp) {
+//			char tmp = PL_parser.linestr[s]++;
+//			if (PL_parser.linestr[s] == tmp) {
 //				if (!PL_parser.lex_allbrackets &&
 //						PL_parser.lex_fakeof >= LEX_FAKEEOF_RANGE) {
 //					s--;
 //					TOKEN(0);
 //				}
 //				s++;
-//				if (*s == tmp) {
+//				if (PL_parser.linestr[s] == tmp) {
 //					s++;
 //					PL_parser.yylval.ival = OPf_SPECIAL;
 //				}
@@ -2102,7 +2419,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				PL_parser.yylval.ival = 0;
 //				OPERATOR(DOTDOT);
 //			}
-//			if (*s == '=' && !PL_parser.lex_allbrackets &&
+//			if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //					PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN) {
 //				s--;
 //				TOKEN(0);
@@ -2119,7 +2436,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			TERM(THING);
 //
 //		case '\'':
-//			s = scan_str(s,FALSE,FALSE,FALSE,NULL);
+//			s = scan_str(s,false,false,false,NULL);
 //			if (!s)
 //				missingterm(NULL);
 //			COPLINE_SET_FROM_MULTI_END;
@@ -2135,7 +2452,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			TERM(sublex_start());
 //
 //		case '"':
-//			s = scan_str(s,FALSE,FALSE,FALSE,NULL);
+//			s = scan_str(s,false,false,false,NULL);
 //			DEBUG_T( {
 //			if (s)
 //				printbuf("### Saw string before %s\n", s);
@@ -2166,7 +2483,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			TERM(sublex_start());
 //
 //		case '`':
-//			s = scan_str(s,FALSE,FALSE,FALSE,NULL);
+//			s = scan_str(s,false,false,false,NULL);
 //			DEBUG_T( { printbuf("### Saw backtick string before %s\n", s); } );
 //			if (PL_parser.expect == XOPERATOR)
 //				no_op("Backticks",s);
@@ -2178,24 +2495,24 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		case '\\':
 //			s++;
 //			if (PL_parser.lex_inwhat == OP_SUBST && PL_parser.lex_repl == PL_parser.linestr
-//					&& isDIGIT(*s))
+//					&& isDIGIT(PL_parser.linestr[s]))
 //			Perl_ck_warner(aTHX_ packWARN(WARN_SYNTAX),"Can't use \\%c to mean $%c in expression",
-//					*s, *s);
+//					PL_parser.linestr[s], PL_parser.linestr[s]);
 //			if (PL_parser.expect == XOPERATOR)
 //				no_op("Backslash",s);
 //			OPERATOR(REFGEN);
 //
 //		case 'v':
 //			if (isDIGIT(s[1]) && PL_parser.expect != XOPERATOR) {
-//				char *start = s + 2;
-//				while (isDIGIT(*start) || *start == '_')
+//				char PL_parser.linestr[s]tart = s + 2;
+//				while (isDIGIT(PL_parser.linestr[s]tart) || PL_parser.linestr[s]tart == '_')
 //				start++;
-//				if (*start == '.' && isDIGIT(start[1])) {
+//				if (PL_parser.linestr[s]tart == '.' && isDIGIT(start[1])) {
 //					s = scan_num(s, &PL_parser.yylval);
 //					TERM(THING);
 //				}
-//				else if ((*start == ':' && start[1] == ':')
-//				|| (PL_parser.expect == XSTATE && *start == ':'))
+//				else if ((PL_parser.linestr[s]tart == ':' && start[1] == ':')
+//				|| (PL_parser.expect == XSTATE && PL_parser.linestr[s]tart == ':'))
 //				goto keylookup;
 //				else if (PL_parser.expect == XSTATE) {
 //					d = start;
@@ -2203,7 +2520,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					if (*d == ':') goto keylookup;
 //				}
 //	    /* avoid v123abc() or $h{v1}, allow C<print v10;> */
-//				if (!isALPHA(*start) && (PL_parser.expect == XTERM
+//				if (!isALPHA(PL_parser.linestr[s]tart) && (PL_parser.expect == XTERM
 //						|| PL_parser.expect == XSTATE
 //						|| PL_parser.expect == XTERMORDORDOR)) {
 //					GV *const gv = gv_fetchpvn_flags(s, start - s,
@@ -2254,12 +2571,12 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				boolean anydelim;
 //				boolean lex;
 //				private int tmp;
-//				SV *sv;
+//				SV PL_parser.linestr[s]v;
 //				CV *cv;
 //				PADOFFSET off;
 //				OP *rv2cv_op;
 //
-//				lex = FALSE;
+//				lex = false;
 //				orig_keyword = 0;
 //				off = 0;
 //				sv = NULL;
@@ -2269,13 +2586,13 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				rv2cv_op = NULL;
 //
 //				PL_parser.bufptr = s;
-//				s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, FALSE, &len);
+//				s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, false, &len);
 //
 //	/* Some keywords can be followed by any delimiter, including ':' */
 //				anydelim = word_takes_any_delimeter(PL_parser.tokenbuf, len);
 //
 //	/* x::* is just a word, unless x is "CORE" */
-//				if (!anydelim && *s == ':' && s[1] == ':') {
+//				if (!anydelim && PL_parser.linestr[s] == ':' && s[1] == ':') {
 //					if (strEQ(PL_parser.tokenbuf, "CORE")) goto case_KEY_CORE;
 //					goto just_a_word;
 //				}
@@ -2289,7 +2606,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					fat_arrow:
 //					PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //					PL_parser.yylval.opval
-//							= (OP*)newSVOP(OP_CONST, 0,
+//							= new OP(OP_CONST, 0,
 //							S_newSV_maybe_utf8(aTHX_ PL_parser.tokenbuf, len));
 //					PL_parser.yylval.opval.op_private = OPpCONST_BARE;
 //					TERM(WORD);
@@ -2299,7 +2616,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				{
 //					OP *o;
 //					int result;
-//					char *saved_bufptr = PL_parser.bufptr;
+//					char PL_parser.linestr[s]aved_bufptr = PL_parser.bufptr;
 //					PL_parser.bufptr = s;
 //					result = PL_keyword_plugin(aTHX_ PL_parser.tokenbuf, len, &o);
 //					s = PL_parser.bufptr;
@@ -2365,7 +2682,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							rv2cv_op->op_targ = off;
 //							cv = find_lexical_cv(off);
 //						}
-//						lex = TRUE;
+//						lex = true;
 //						goto just_a_word;
 //					}
 //					off = 0;
@@ -2374,7 +2691,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				if (tmp < 0) {			/* second-class keyword? */
 //					GV *ogv = NULL;	/* override (winner) */
 //					GV *hgv = NULL;	/* hidden (loser) */
-//					if (PL_parser.expect != XOPERATOR && (*s != ':' || s[1] != ':')) {
+//					if (PL_parser.expect != XOPERATOR && (PL_parser.linestr[s] != ':' || s[1] != ':')) {
 //						CV *cv;
 //						if ((gv = gv_fetchpvn_flags(PL_parser.tokenbuf, len,
 //								(UTF ? SVf_UTF8 : 0)|GV_NOTQUAL,
@@ -2388,7 +2705,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						}
 //						if (!ogv &&
 //								(gvp = (GV**)hv_fetch(PL_globalstash, PL_parser.tokenbuf,
-//								len, FALSE)) &&
+//								len, false)) &&
 //						(gv = *gvp) && (
 //								isGV_with_GP(gv)
 //										? GvCVu(gv) && GvIMPORTED_CV(gv)
@@ -2427,14 +2744,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //				}
 //
 //				if (tmp && tmp != KEY___DATA__ && tmp != KEY___END__
-//						&& (!anydelim || *s != '#')) {
+//						&& (!anydelim || PL_parser.linestr[s] != '#')) {
 //	    /* no override, and not s### either; skipspace is safe here
 //	     * check for => on following line */
 //					boolean arrow;
 //					STRLEN bufoff = PL_parser.bufptr - SvPVX(PL_parser.linestr);
 //					STRLEN   soff = s         - SvPVX(PL_parser.linestr);
 //					s = skipspace_flags(s, LEX_NO_INPL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline));
-//					arrow = *s == '=' && s[1] == '>';
+//					arrow = PL_parser.linestr[s] == '=' && s[1] == '>';
 //					PL_parser.bufptr = SvPVX(PL_parser.linestr) + bufoff;
 //					s         = SvPVX(PL_parser.linestr) +   soff;
 //					if (arrow)
@@ -2468,14 +2785,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //		/* Get the rest if it looks like a package qualifier */
 //
-//							if (*s == '\'' || (*s == ':' && s[1] == ':')) {
+//							if (PL_parser.linestr[s] == '\'' || (PL_parser.linestr[s] == ':' && s[1] == ':')) {
 //								STRLEN morelen;
 //								s = scan_word(s, PL_parser.tokenbuf + len, sizeof PL_parser.tokenbuf - len,
-//										TRUE, &morelen);
+//										true, &morelen);
 //								if (!morelen)
 //									Perl_croak(aTHX_ "Bad name after %"UTF8f"%s",
 //											UTF8fARG(UTF, len, PL_parser.tokenbuf),
-//											*s == '\'' ? "'" : "::");
+//											PL_parser.linestr[s] == '\'' ? "'" : "::");
 //								len += morelen;
 //								pkgname = 1;
 //							}
@@ -2506,10 +2823,10 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //								PL_parser.tokenbuf[len] = '\0';
 //								gv = NULL;
 //								gvp = 0;
-//								safebw = TRUE;
+//								safebw = true;
 //							}
 //							else {
-//								safebw = FALSE;
+//								safebw = false;
 //							}
 //
 //		/* if we saw a global override before, get the right name */
@@ -2527,7 +2844,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //		/* Presume this is going to be a bareword of some sort. */
 //							PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
-//							PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0, sv);
+//							PL_parser.yylval.opval = new OP(OP_CONST, 0, sv);
 //							PL_parser.yylval.opval.op_private = OPpCONST_BARE;
 //
 //		/* And if "Foo::", then that's what it certainly is. */
@@ -2563,14 +2880,14 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //									(PL_parser.expect == XREF ||
 //											((PL_opargs[PL_parser.last_lop_op] >> OASHIFT)& 7) == OA_FILEREF))
 //							{
-//								boolean immediate_paren = *s == '(';
+//								boolean immediate_paren = PL_parser.linestr[s] == '(';
 //
 //		    /* (Now we can afford to cross potential line boundary.) */
 //								s = skipspace(s);
 //
 //		    /* Two barewords in a row may indicate method call. */
 //
-//								if ((isIDFIRST_lazy_if(s,UTF) || *s == '$') &&
+//								if ((isIDFIRST_lazy_if(s,UTF) || PL_parser.linestr[s] == '$') &&
 //								(tmp = intuit_method(s, lex ? NULL : sv, cv))) {
 //								goto method;
 //							}
@@ -2597,7 +2914,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							s = skipspace(s);
 //
 //		/* Is this a word before a => operator? */
-//							if (*s == '=' && s[1] == '>' && !pkgname) {
+//							if (PL_parser.linestr[s] == '=' && s[1] == '>' && !pkgname) {
 //								op_free(rv2cv_op);
 //								PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //								if (gvp || (lex && !off)) {
@@ -2615,11 +2932,11 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							}
 //
 //		/* If followed by a paren, it's certainly a subroutine. */
-//							if (*s == '(') {
+//							if (PL_parser.linestr[s] == '(') {
 //								PL_parser.copline = (CopLINE(PL_parser.curcop) < PL_parser.copline ? CopLINE(PL_parser.curcop) : PL_parser.copline);
 //								if (cv) {
 //									d = s + 1;
-//									while (SPACE_OR_TAB(*d))
+//									while (isBLANK(*d))
 //									d++;
 //									if (*d == ')' && (sv = cv_const_sv_or_av(cv))) {
 //										s = d + 1;
@@ -2637,7 +2954,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //		/* If followed by var or block, call it a method (unless sub) */
 //
-//							if ((*s == '$' || *s == '{') && !cv) {
+//							if ((PL_parser.linestr[s] == '$' || PL_parser.linestr[s] == '{') && !cv) {
 //								op_free(rv2cv_op);
 //								PL_parser.last_lop = PL_parser.oldbufptr;
 //								PL_parser.last_lop_op = OP_METHOD;
@@ -2652,7 +2969,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		/* If followed by a bareword, see if it looks like indir obj. */
 //
 //							if (tmp == 1 && !orig_keyword
-//									&& (isIDFIRST_lazy_if(s,UTF) || *s == '$')
+//									&& (isIDFIRST_lazy_if(s,UTF) || PL_parser.linestr[s] == '$')
 //							&& (tmp = intuit_method(s, lex ? NULL : sv, cv))) {
 //								method:
 //								if (lex && !off) {
@@ -2731,7 +3048,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //									if(*p == ']' && !p[1])
 //									UNIPROTO(UNIOPSUB,optional);
 //								}
-//									if (*proto == '&' && *s == '{') {
+//									if (*proto == '&' && PL_parser.linestr[s] == '{') {
 //									if (PL_curstash)
 //										sv_setpvs(PL_subname, "__ANON__");
 //									else
@@ -2804,18 +3121,18 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //					case KEY___FILE__:
 //						FUN0OP(
-//								(OP*)newSVOP(OP_CONST, 0, newSVpv(CopFILE(PL_curcop),0))
+//								new OP(OP_CONST, 0, newSVpv(CopFILE(PL_curcop),0))
 //						);
 //
 //					case KEY___LINE__:
 //						FUN0OP(
-//								(OP*)newSVOP(OP_CONST, 0,
+//								new OP(OP_CONST, 0,
 //										Perl_newSVpvf(aTHX_ "%"IVdf, (IV)CopLINE(PL_curcop)))
 //						);
 //
 //					case KEY___PACKAGE__:
 //						FUN0OP(
-//								(OP*)newSVOP(OP_CONST, 0,
+//								new OP(OP_CONST, 0,
 //										(PL_curstash
 //												? newSVhek(HvNAME_HEK(PL_curstash))
 //												: &PL_sv_undef))
@@ -2921,9 +3238,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //								STRLEN olen = len;
 //								d = s;
 //								s += 2;
-//								s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, FALSE, &len);
-//								if ((*s == ':' && s[1] == ':')
-//								|| (!(tmp = keyword(PL_parser.tokenbuf, len, 1)) && *s == '\''))
+//								s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, false, &len);
+//								if ((PL_parser.linestr[s] == ':' && s[1] == ':')
+//								|| (!(tmp = keyword(PL_parser.tokenbuf, len, 1)) && PL_parser.linestr[s] == '\''))
 //								{
 //									s = d;
 //									len = olen;
@@ -2981,7 +3298,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		      otherwise treat it as a control operator.
 //		     */
 //							s = skipspace(s);
-//							if (*s == '{')
+//							if (PL_parser.linestr[s] == '{')
 //							PREBLOCK(CONTINUE);
 //							else
 //							FUN0(OP_CONTINUE);
@@ -3008,7 +3325,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						case KEY_crypt:
 //							#ifdef FCRYPT
 //							if (!PL_cryptseen) {
-//								PL_cryptseen = TRUE;
+//								PL_cryptseen = true;
 //								init_des();
 //							}
 //							#endif
@@ -3037,9 +3354,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //						case KEY_do:
 //							s = skipspace(s);
-//							if (*s == '{')
+//							if (PL_parser.linestr[s] == '{')
 //							PRETERMBLOCK(DO);
-//							if (*s != '\'') {
+//							if (PL_parser.linestr[s] != '\'') {
 //							*PL_parser.tokenbuf = '&';
 //							d = scan_word(s, PL_parser.tokenbuf + 1, sizeof PL_parser.tokenbuf - 1,
 //									1, &len);
@@ -3106,7 +3423,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //						case KEY_eval:
 //							s = skipspace(s);
-//							if (*s == '{') { /* block eval */
+//							if (PL_parser.linestr[s] == '{') { /* block eval */
 //							PL_parser.expect = XTERMBLOCK;
 //							UNIBRACK(OP_ENTERTRY);
 //						}
@@ -3167,7 +3484,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //								p = skipspace(p);
 //                /* skip optional package name, as in "for my abc $x (..)" */
 //								if (isIDFIRST_lazy_if(p,UTF)) {
-//									p = scan_word(p, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, TRUE, &len);
+//									p = scan_word(p, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, true, &len);
 //									p = skipspace(p);
 //								}
 //								if (*p != '$')
@@ -3402,7 +3719,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							PL_parser.in_my = (private int)tmp;
 //							s = skipspace(s);
 //							if (isIDFIRST_lazy_if(s,UTF)) {
-//								s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, TRUE, &len);
+//								s = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, true, &len);
 //								if (len == 3 && strnEQ(PL_parser.tokenbuf, "sub", 3))
 //								{
 //									if (!FEATURE_LEXSUBS_IS_ENABLED)
@@ -3441,7 +3758,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							TOKEN(USE);
 //
 //						case KEY_not:
-//							if (*s == '(' || (s = skipspace(s), *s == '('))
+//							if (PL_parser.linestr[s] == '(' || (s = skipspace(s), PL_parser.linestr[s] == '('))
 //							FUN1(OP_NOT);
 //							else {
 //							if (!PL_parser.lex_allbrackets &&
@@ -3454,11 +3771,11 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							s = skipspace(s);
 //							if (isIDFIRST_lazy_if(s,UTF)) {
 //								const char *t;
-//								d = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, FALSE,
+//								d = scan_word(s, PL_parser.tokenbuf, sizeof PL_parser.tokenbuf, false,
 //										&len);
-//								for (t=d; isSPACE(*t);)
+//								for (t=d; isSPACE(PL_parser.linestr[t]);)
 //								t++;
-//								if ( *t && strchr("|&*+-=!?:.", *t) && ckWARN_d(WARN_PRECEDENCE)
+//								if ( PL_parser.linestr[t] && strchr("|&*+-=!?:.", *t) && ckWARN_d(WARN_PRECEDENCE)
 //		    /* [perl #16184] */
 //										&& !(t[0] == '=' && t[1] == '>')
 //										&& !(t[0] == ':' && t[1] == ':')
@@ -3510,7 +3827,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							LOP(OP_PACK,XTERM);
 //
 //						case KEY_package:
-//							s = force_word(s,WORD,FALSE,TRUE);
+//							s = force_word(s,WORD,false,true);
 //							s = skipspace(s);
 //							s = force_strict_version(s);
 //							PREBLOCK(PACKAGE);
@@ -3519,7 +3836,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							LOP(OP_PIPE_OP,XTERM);
 //
 //						case KEY_q:
-//							s = scan_str(s,FALSE,FALSE,FALSE,NULL);
+//							s = scan_str(s,false,false,false,NULL);
 //							if (!s)
 //								missingterm(NULL);
 //							COPLINE_SET_FROM_MULTI_END;
@@ -3531,7 +3848,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //						case KEY_qw: {
 //							OP *words = NULL;
-//							s = scan_str(s,FALSE,FALSE,FALSE,NULL);
+//							s = scan_str(s,false,false,false,NULL);
 //							if (!s)
 //								missingterm(NULL);
 //							COPLINE_SET_FROM_MULTI_END;
@@ -3544,7 +3861,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //									for (; isSPACE(*d) && len; --len, ++d)
 //			/**/;
 //									if (len) {
-//										SV *sv;
+//										SV PL_parser.linestr[s]v;
 //										const char *b = d;
 //										if (!warned_comma || !warned_comment) {
 //											for (; !isSPACE(*d) && len; --len, ++d) {
@@ -3582,7 +3899,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //						}
 //
 //						case KEY_qq:
-//							s = scan_str(s,FALSE,FALSE,FALSE,NULL);
+//							s = scan_str(s,false,false,false,NULL);
 //							if (!s)
 //								missingterm(NULL);
 //							PL_parser.yylval.ival = OP_STRINGIFY;
@@ -3595,7 +3912,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							TERM(sublex_start());
 //
 //						case KEY_qx:
-//							s = scan_str(s,FALSE,FALSE,FALSE,NULL);
+//							s = scan_str(s,false,false,false,NULL);
 //							if (!s)
 //								missingterm(NULL);
 //							PL_parser.yylval.ival = OP_BACKTICK;
@@ -3606,18 +3923,18 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //						case KEY_require:
 //							s = skipspace(s);
-//							if (isDIGIT(*s)) {
-//							s = force_version(s, FALSE);
+//							if (isDIGIT(PL_parser.linestr[s])) {
+//							s = force_version(s, false);
 //						}
-//						else if (*s != 'v' || !isDIGIT(s[1])
-//								|| (s = force_version(s, TRUE), *s == 'v'))
+//						else if (PL_parser.linestr[s] != 'v' || !isDIGIT(s[1])
+//								|| (s = force_version(s, true), PL_parser.linestr[s] == 'v'))
 //						{
 //							*PL_parser.tokenbuf = '\0';
-//							s = force_word(s,WORD,TRUE,TRUE);
+//							s = force_word(s,WORD,true,true);
 //							if (isIDFIRST_lazy_if(PL_parser.tokenbuf,UTF))
 //								gv_stashpvn(PL_parser.tokenbuf, strlen(PL_parser.tokenbuf),
 //										GV_ADD | (UTF ? SVf_UTF8 : 0));
-//							else if (*s == '<')
+//							else if (PL_parser.linestr[s] == '<')
 //							yyerror("<> at require-statement should be quotes");
 //						}
 //						if (orig_keyword == KEY_require) {
@@ -3777,7 +4094,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //							checkcomma(s,PL_parser.tokenbuf,"subroutine name");
 //							s = skipspace(s);
 //							PL_parser.expect = XTERM;
-//							s = force_word(s,WORD,TRUE,TRUE);
+//							s = force_word(s,WORD,true,true);
 //							LOP(OP_SORT,XREF);
 //
 //						case KEY_split:
@@ -3817,13 +4134,13 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //								d = s;
 //								s = skipspace(s);
 //
-//								if (isIDFIRST_lazy_if(s,UTF) || *s == '\'' ||
-//									(*s == ':' && s[1] == ':'))
+//								if (isIDFIRST_lazy_if(s,UTF) || PL_parser.linestr[s] == '\'' ||
+//									(PL_parser.linestr[s] == ':' && s[1] == ':'))
 //								{
 //
 //									PL_parser.expect = XBLOCK;
 //									attrful = XATTRBLOCK;
-//									d = scan_word(s, tmpbuf, sizeof PL_parser.tokenbuf - 1, TRUE,
+//									d = scan_word(s, tmpbuf, sizeof PL_parser.tokenbuf - 1, true,
 //											&len);
 //									if (key == KEY_format)
 //										format_name = S_newSV_maybe_utf8(aTHX_ s, d - s);
@@ -3840,7 +4157,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //									}
 //									if (SvUTF8(PL_parser.linestr))
 //										SvUTF8_on(PL_subname);
-//									have_name = TRUE;
+//									have_name = true;
 //
 //
 //									s = skipspace(d);
@@ -3856,13 +4173,13 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //								PL_parser.expect = XTERMBLOCK;
 //								attrful = XATTRTERM;
 //								sv_setpvs(PL_subname,"?");
-//								have_name = FALSE;
+//								have_name = false;
 //							}
 //
 //								if (key == KEY_format) {
 //									if (format_name) {
 //										 PL_parser.nextval[PL_parser.nexttoke].opval
-//												= (OP*)newSVOP(OP_CONST,0, format_name);
+//												= new OP(OP_CONST,0, format_name);
 //										 PL_parser.nextval[PL_parser.nexttoke].opval.op_private |= OPpCONST_BARE;
 //										force_next(WORD);
 //									}
@@ -3870,31 +4187,31 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //								}
 //
 //		/* Look for a prototype */
-//								if (*s == '(' && !FEATURE_SIGNATURES_IS_ENABLED) {
-//								s = scan_str(s,FALSE,FALSE,FALSE,NULL);
+//								if (PL_parser.linestr[s] == '(' && !FEATURE_SIGNATURES_IS_ENABLED) {
+//								s = scan_str(s,false,false,false,NULL);
 //								COPLINE_SET_FROM_MULTI_END;
 //								if (!s)
 //									Perl_croak(aTHX_ "Prototype not terminated");
 //								(void)validate_proto(PL_subname, PL_parser.lex_stuff, ckWARN(WARN_ILLEGALPROTO));
-//								have_proto = TRUE;
+//								have_proto = true;
 //
 //								s = skipspace(s);
 //							}
 //								else
-//								have_proto = FALSE;
+//								have_proto = false;
 //
-//								if (*s == ':' && s[1] != ':')
+//								if (PL_parser.linestr[s] == ':' && s[1] != ':')
 //								PL_parser.expect = attrful;
-//								else if ((*s != '{' && *s != '(') && key == KEY_sub) {
+//								else if ((PL_parser.linestr[s] != '{' && PL_parser.linestr[s] != '(') && key == KEY_sub) {
 //								if (!have_name)
 //									Perl_croak(aTHX_ "Illegal declaration of anonymous subroutine");
-//								else if (*s != ';' && *s != '}')
+//								else if (PL_parser.linestr[s] != ';' && PL_parser.linestr[s] != '}')
 //								Perl_croak(aTHX_ "Illegal declaration of subroutine %"SVf, SVfARG(PL_subname));
 //							}
 //
 //								if (have_proto) {
 //									 PL_parser.nextval[PL_parser.nexttoke].opval =
-//											(OP*)newSVOP(OP_CONST, 0, PL_parser.lex_stuff);
+//											new OP(OP_CONST, 0, PL_parser.lex_stuff);
 //									PL_parser.lex_stuff = NULL;
 //									force_next(THING);
 //								}
@@ -4041,7 +4358,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //
 //						case KEY_x:
 //							if (PL_parser.expect == XOPERATOR) {
-//								if (*s == '=' && !PL_parser.lex_allbrackets &&
+//								if (PL_parser.linestr[s] == '=' && !PL_parser.lex_allbrackets &&
 //										PL_parser.lex_fakeof >= LEX_FAKEEOF_ASSIGN)
 //								return REPORT(0);
 //								Mop(OP_REPEAT);
@@ -4090,7 +4407,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		int contlen = -1;
 //		SV *msg;
 //		SV * const where_sv = newSVpvs_flags("", SVs_TEMP);
-//		int yychar  = PL_parser->yychar;
+//		int yychar  = PL_parser.yychar;
 //
 //		PERL_ARGS_ASSERT_YYERROR_PVN;
 //
@@ -4154,9 +4471,9 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //		msg = newSVpvn_flags(s, len, (flags & SVf_UTF8) | SVs_TEMP);
 //		Perl_sv_catpvf(aTHX_ msg, " at %s line %"IVdf", ",
 //				OutCopFILE(PL_curcop),
-//				(IV)(PL_parser->preambling == NOLINE
+//				(IV)(PL_parser.preambling == NOLINE
 //						? CopLINE(PL_curcop)
-//						: PL_parser->preambling));
+//						: PL_parser.preambling));
 //		if (context)
 //			Perl_sv_catpvf(aTHX_ msg, "near \"%"UTF8f"\"\n",
 //					UTF8fARG(UTF, contlen, context));
@@ -4218,7 +4535,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //					&& (!isPRINT(name[1]) || strchr("\t\n\r\f", name[1]))) {
 //				yyerror(
 //					Perl_form(
-//						"Can't use global %c^%c%.*s in \"%s\""
+//						"Can't use global %c^%c%.PL_parser.linestr[s] in \"%s\""
 //						, name[0]
 //						, toCTRL(name[1])
 //						, (int)(len - 2)
@@ -4227,7 +4544,7 @@ public class Toke implements FlexLexer, PerlTokenTypes, LexicalStates, Keywords,
 //			} else {
 //				yyerror_pv(
 //					Perl_form(
-//						"Can't use global %.*s in \"%s\""
+//						"Can't use global %.PL_parser.linestr[s] in \"%s\""
 //						, (int) len
 //						, name,
 //						PL_parser.in_my == KEY_state ? "state" : "my"
@@ -4389,7 +4706,7 @@ of C<op_private>.
 //					SV *  const sym = newSVhek(stashname);
 //					sv_catpvs(sym, "::");
 //					sv_catpvn_flags(sym, PL_parser.tokenbuf+1, tokenbuf_len - 1, (UTF ? SV_CATUTF8 : SV_CATBYTES ));
-//					PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0, sym);
+//					PL_parser.yylval.opval = new OP(OP_CONST, 0, sym);
 //					PL_parser.yylval.opval.op_private = OPpCONST_ENTERED;
 //					if (pit != '&')
 //						gv_fetchsv(sym,
@@ -4430,7 +4747,7 @@ of C<op_private>.
 //		}
 //
 //    /* build ops for a bareword */
-//		PL_parser.yylval.opval = (OP*)newSVOP(OP_CONST, 0,
+//		PL_parser.yylval.opval = new OP(OP_CONST, 0,
 //			newSVpvn_flags(PL_parser.tokenbuf + 1,
 //					tokenbuf_len - 1,
 //					UTF ? SVf_UTF8 : 0 ));

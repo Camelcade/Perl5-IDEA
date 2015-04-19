@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 %%
 
 %class PerlLexer
+%extends PerlLexerProto
 %implements FlexLexer, PerlTokenTypes
 %unicode
 %public
@@ -31,32 +32,34 @@ LINE_TERMINATOR = [\r\n]+
 WHITE_SPACE     = [ \t\f\r\n]+
 CHAR_SEMI       = ;
 CHAR_ANY        = .
-ALFANUM         = [a-zA-Z0-9]
+ALFANUM         = [a-zA-Z0-9_]
+DQ_STRING        = \"[^\"]*\"
+SQ_STRING        = \'[^\']*\'
+
 
 DEPACKAGE = "::"
 
 PACKAGE_NAME = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)*
+
+PACKAGE_STATIC_CALL = ({ALFANUM}+{DEPACKAGE})+
+PACKAGE_INSTANCE_CALL = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)* "->"
+
 FUNCTION_NAME = {ALFANUM}+
-USER_VARIABLE = [$%*@]{ALFANUM}+
+VAR_SCALAR = [$][$]*{ALFANUM}+
+VAR_ARRAY = [@][$]*{ALFANUM}+
+VAR_HASH = [%][$]*{ALFANUM}+
+VAR_GLOB = [*][$]*{ALFANUM}+
 
 END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
-
-%{
-  StringBuffer stringBuffer = new StringBuffer();
-
- /* private IElementType element(int type, Object value) {
-    return new IElementType(type, value);
-  }*/
-%}
 
 //%state STRING
 %state PACKAGE_DEFINITION
 %state FUNCTION_DEFINITION
 %state PACKAGE_USE
+%state PACKAGE_USE_PARAMS
 %state YYINITIAL
-%state STRING_SQ
-%state STRING_DQ
-
+%state PACKAGE_STATIC_CALL
+%state PACKAGE_INSTANCE_CALL
 %%
 
 /*
@@ -83,160 +86,69 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 
 {CHAR_SEMI}     {yybegin(YYINITIAL);return PERL_SEMI;}
 {WHITE_SPACE}   {return TokenType.WHITE_SPACE;}
-"{"             {return PERL_LCURLY;}
-"}"             {return PERL_RCURLY;}
-"["             {return PERL_LSQUARE;}
-"]"             {return PERL_RSQUARE;}
-"("             {return PERL_LBRACKET;}
-")"             {return PERL_RBRACKET;}
+"{"             {return PERL_LBRACE;}
+"}"             {return PERL_RBRACE;}
+"["             {return PERL_LBRACK;}
+"]"             {return PERL_RBRACK;}
+"("             {return PERL_LPAREN;}
+")"             {return PERL_RPAREN;}
 ","			{return PERL_COMMA;}
 "=>"			{return PERL_COMMA;}
 "->"			{return PERL_DEREFERENCE;}
+{DEPACKAGE}			{return PERL_DEPACKAGE;}
+{DQ_STRING}     {return PERL_DQ_STRING;}
+{SQ_STRING}     {return PERL_SQ_STRING;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
-"$!"			{return PERL_VARIABLE;}
-"$^RE_TRIE_MAXBUF"			{return PERL_VARIABLE;}
-"$LAST_REGEXP_CODE_RESULT"			{return PERL_VARIABLE;}
-\$\"			{return PERL_VARIABLE;}
-"$^S"			{return PERL_VARIABLE;}
-"$LIST_SEPARATOR"			{return PERL_VARIABLE;}
-"$#"			{return PERL_VARIABLE;}
-"$^T"			{return PERL_VARIABLE;}
-"$MATCH"			{return PERL_VARIABLE;}
-"$$"			{return PERL_VARIABLE;}
-"$^TAINT"			{return PERL_VARIABLE;}
-"$MULTILINE_MATCHING"			{return PERL_VARIABLE;}
-"$%"			{return PERL_VARIABLE;}
-"$^UNICODE"			{return PERL_VARIABLE;}
-"$NR"			{return PERL_VARIABLE;}
-"$&"			{return PERL_VARIABLE;}
-"$^UTF8LOCALE"			{return PERL_VARIABLE;}
-"$OFMT"			{return PERL_VARIABLE;}
-"$'"			{return PERL_VARIABLE;}
-"$^V"			{return PERL_VARIABLE;}
-"$OFS"			{return PERL_VARIABLE;}
-"$("			{return PERL_VARIABLE;}
-"$^W"			{return PERL_VARIABLE;}
-"$ORS"			{return PERL_VARIABLE;}
-"$)"			{return PERL_VARIABLE;}
-"$^WARNING_BITS"			{return PERL_VARIABLE;}
-"$OS_ERROR"			{return PERL_VARIABLE;}
-"$*"			{return PERL_VARIABLE;}
-"$^WIDE_SYSTEM_CALLS"			{return PERL_VARIABLE;}
-"$OSNAME"			{return PERL_VARIABLE;}
-"$+"			{return PERL_VARIABLE;}
-"$^X"			{return PERL_VARIABLE;}
-"$OUTPUT_AUTO_FLUSH"			{return PERL_VARIABLE;}
-"$,"			{return PERL_VARIABLE;}
-"$_"			{return PERL_VARIABLE;}
-"$OUTPUT_FIELD_SEPARATOR"			{return PERL_VARIABLE;}
-"$-"			{return PERL_VARIABLE;}
-"$`"			{return PERL_VARIABLE;}
-"$OUTPUT_RECORD_SEPARATOR"			{return PERL_VARIABLE;}
-"$."			{return PERL_VARIABLE;}
-"$a"			{return PERL_VARIABLE;}
-"$PERL_VERSION"			{return PERL_VARIABLE;}
-"$/"			{return PERL_VARIABLE;}
-"$ACCUMULATOR"			{return PERL_VARIABLE;}
-"$PERLDB"			{return PERL_VARIABLE;}
-"$0"			{return PERL_VARIABLE;}
-"$ARG"			{return PERL_VARIABLE;}
-"$PID"			{return PERL_VARIABLE;}
-"$:"			{return PERL_VARIABLE;}
-"$ARGV"			{return PERL_VARIABLE;}
-"$POSTMATCH"			{return PERL_VARIABLE;}
-"$;"			{return PERL_VARIABLE;}
-"$b"			{return PERL_VARIABLE;}
-"$PREMATCH"			{return PERL_VARIABLE;}
-"$<"			{return PERL_VARIABLE;}
-"$BASETIME"			{return PERL_VARIABLE;}
-"$PROCESS_ID"			{return PERL_VARIABLE;}
-"$="			{return PERL_VARIABLE;}
-"$CHILD_ERROR"			{return PERL_VARIABLE;}
-"$PROGRAM_NAME"			{return PERL_VARIABLE;}
-"$>"			{return PERL_VARIABLE;}
-"$COMPILING"			{return PERL_VARIABLE;}
-"$REAL_GROUP_ID"			{return PERL_VARIABLE;}
-"$?"			{return PERL_VARIABLE;}
-"$DEBUGGING"			{return PERL_VARIABLE;}
-"$REAL_USER_ID"			{return PERL_VARIABLE;}
-"$@"			{return PERL_VARIABLE;}
-"$EFFECTIVE_GROUP_ID"			{return PERL_VARIABLE;}
-"$RS"			{return PERL_VARIABLE;}
-"$["			{return PERL_VARIABLE;}
-"$EFFECTIVE_USER_ID"			{return PERL_VARIABLE;}
-"$SUBSCRIPT_SEPARATOR"			{return PERL_VARIABLE;}
-\$\\			{return PERL_VARIABLE;}
-"$EGID"			{return PERL_VARIABLE;}
-"$SUBSEP"			{return PERL_VARIABLE;}
-"$]"			{return PERL_VARIABLE;}
-"$ERRNO"			{return PERL_VARIABLE;}
-"$SYSTEM_FD_MAX"			{return PERL_VARIABLE;}
-"$^"			{return PERL_VARIABLE;}
-"$EUID"			{return PERL_VARIABLE;}
-"$UID"			{return PERL_VARIABLE;}
-"$^A"			{return PERL_VARIABLE;}
-"$EVAL_ERROR"			{return PERL_VARIABLE;}
-"$WARNING"			{return PERL_VARIABLE;}
-"$^C"			{return PERL_VARIABLE;}
-"$EXCEPTIONS_BEING_CAUGHT"			{return PERL_VARIABLE;}
-"$|"			{return PERL_VARIABLE;}
-"$^CHILD_ERROR_NATIVE"			{return PERL_VARIABLE;}
-"$EXECUTABLE_NAME"			{return PERL_VARIABLE;}
-"$~"			{return PERL_VARIABLE;}
-"$^D"			{return PERL_VARIABLE;}
-"$EXTENDED_OS_ERROR"			{return PERL_VARIABLE;}
-"%!"			{return PERL_VARIABLE;}
-"$^E"			{return PERL_VARIABLE;}
-"$FORMAT_FORMFEED"			{return PERL_VARIABLE;}
-"%^H"			{return PERL_VARIABLE;}
-"$^ENCODING"			{return PERL_VARIABLE;}
-"$FORMAT_LINE_BREAK_CHARACTERS"			{return PERL_VARIABLE;}
-"%ENV"			{return PERL_VARIABLE;}
-"$^F"			{return PERL_VARIABLE;}
-"$FORMAT_LINES_LEFT"			{return PERL_VARIABLE;}
-"%INC"			{return PERL_VARIABLE;}
-"$^H"			{return PERL_VARIABLE;}
-"$FORMAT_LINES_PER_PAGE"			{return PERL_VARIABLE;}
-"%OVERLOAD"			{return PERL_VARIABLE;}
-"$^I"			{return PERL_VARIABLE;}
-"$FORMAT_NAME"			{return PERL_VARIABLE;}
-"%SIG"			{return PERL_VARIABLE;}
-"$^L"			{return PERL_VARIABLE;}
-"$FORMAT_PAGE_NUMBER"			{return PERL_VARIABLE;}
-"@+"			{return PERL_VARIABLE;}
-"$^M"			{return PERL_VARIABLE;}
-"$FORMAT_TOP_NAME"			{return PERL_VARIABLE;}
-"@-"			{return PERL_VARIABLE;}
-"$^N"			{return PERL_VARIABLE;}
-"$GID"			{return PERL_VARIABLE;}
-"@_"			{return PERL_VARIABLE;}
-"$^O"			{return PERL_VARIABLE;}
-"$INPLACE_EDIT"			{return PERL_VARIABLE;}
-"@ARGV"			{return PERL_VARIABLE;}
-"$^OPEN"			{return PERL_VARIABLE;}
-"$INPUT_LINE_NUMBER"			{return PERL_VARIABLE;}
-"@INC"			{return PERL_VARIABLE;}
-"$^P"			{return PERL_VARIABLE;}
-"$INPUT_RECORD_SEPARATOR"			{return PERL_VARIABLE;}
-"@LAST_MATCH_START"			{return PERL_VARIABLE;}
-"$^R"			{return PERL_VARIABLE;}
-"$LAST_MATCH_END"			{return PERL_VARIABLE;}
-"$^RE_DEBUG_FLAGS"			{return PERL_VARIABLE;}
-"$LAST_PAREN_MATCH"			{return PERL_VARIABLE;}
-{USER_VARIABLE} {return PERL_USER_VARIABLE;}
+{VAR_SCALAR} {return checkBuiltInScalar();}
+{VAR_HASH} {return checkBuiltInHash();}
+{VAR_ARRAY} {return checkBuiltInArray();}
+{VAR_GLOB} {return checkBuiltInGlob();}
+
+<PACKAGE_USE_PARAMS>
+{
+    {ALFANUM}+  {return PERL_SQ_STRING;}
+}
+
+<PACKAGE_USE>{
+    {PACKAGE_NAME}    {
+        yybegin(PACKAGE_USE_PARAMS);
+        return checkCorePackage();
+    }
+}
 
 <PACKAGE_DEFINITION>{
     {PACKAGE_NAME}    {return PERL_PACKAGE;}
 }
 
+
+
 <FUNCTION_DEFINITION>{
     {FUNCTION_NAME}    {return PERL_USER_FUNCTION;}
 }
 
-<PACKAGE_USE>{
-    {PACKAGE_NAME}    {yybegin(YYINITIAL);return PERL_PACKAGE;}
+<PACKAGE_STATIC_CALL>
+{
+    {ALFANUM}+ {return PERL_STATIC_METHOD_CALL;}
 }
+
+{PACKAGE_STATIC_CALL} {
+    yybegin(PACKAGE_STATIC_CALL);
+    yypushback(2);
+    return PERL_PACKAGE;
+}
+
+<PACKAGE_INSTANCE_CALL>
+{
+    {ALFANUM}+ {return PERL_INSTANCE_METHOD_CALL;}
+}
+
+{PACKAGE_INSTANCE_CALL} {
+    yybegin(PACKAGE_INSTANCE_CALL);
+    yypushback(2);
+    return PERL_PACKAGE;
+}
+
 
 <YYINITIAL> {
    /* comments */
@@ -491,6 +403,7 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
     "setnetent"			{return PERL_FUNCTION;}
 
 //////////////////////////// PERL SYNTAX ///////////////////////////////////////////////////////////////////////////////
+    "SUPER"             {return PERL_SYNTAX;}
     "__DATA__"			{return PERL_SYNTAX;}
     "else"			{return PERL_SYNTAX;}
     "lock"			{return PERL_SYNTAX;}

@@ -4,6 +4,8 @@ package com.perl5.lang.lexer.ported;
  * Created by hurricup on 18.04.2015.
 	 parser.h
  */
+import com.intellij.psi.tree.IElementType;
+
 public class yy_parser
 {
     /* parser state */
@@ -75,7 +77,7 @@ public class yy_parser
 	public int	form_lex_state;	/* remember lex_state when parsing fmt */
 
 	YYSTYPE[]		nextval = new YYSTYPE[5];	/* value of next token, if any */
-	public int[]	nexttype = new int[5];	/* type of next token */
+	public IElementType[]	nexttype = new IElementType[5];	/* type of next token */
 	public int		nexttoke;
 
 	COP				saved_curcop;	/* the previous PL_curcop */

@@ -7,6 +7,6 @@ public class YYSTYPE
 {
 	public char ival;
 	public char pval;
-	public int opval;
+	public OP opval;
 	public int gvval;
 }
