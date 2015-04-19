@@ -10,7 +10,8 @@ Simultaneously i've created same plugn for Perl6 and i'll try to keep both plugi
 
 #Current status
 
-* Implementing JFlex lexer
+* Implementing JFlex lexer, some highlightning already works:
+![Syntax highltning](http://dl2.joxi.net/drive/0004/3351/294167/150419/46fdd3eb65.jpg)
 
 #See also
 
