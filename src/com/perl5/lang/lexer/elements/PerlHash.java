@@ -6,6 +6,9 @@ import com.perl5.highlighter.SelfStyled;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by hurricup on 19.04.2015.
  */
@@ -22,4 +25,15 @@ public class PerlHash extends PerlVariable implements SelfStyled
 	{
 		return attributesKeys;
 	}
+
+	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
+			"%!",
+			"%+",
+			"%-",
+			"%^H",
+			"%ENV",
+			"%INC",
+			"%OVERLOAD",
+			"%SIG"
+	));
 }

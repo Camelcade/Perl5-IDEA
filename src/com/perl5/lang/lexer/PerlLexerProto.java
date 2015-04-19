@@ -2,11 +2,15 @@ package com.perl5.lang.lexer;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.lexer.elements.PerlArray;
+import com.perl5.lang.lexer.elements.PerlGlob;
+import com.perl5.lang.lexer.elements.PerlHash;
+import com.perl5.lang.lexer.elements.PerlScalar;
 
 /**
  * Created by hurricup on 19.04.2015.
  */
-public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes, PerlBuiltIns
+public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes
 {
 
 /*
@@ -20,28 +24,28 @@ public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes, PerlB
 
 	protected IElementType checkBuiltInScalar()
 	{
-		return PERL_BUILT_IN_SCALARS.contains(yytext().toString())
+		return PerlScalar.BUILT_IN.contains(yytext().toString())
 				? PERL_BUILTIN_VARIABLE_SCALAR
 				: PERL_VARIABLE_SCALAR;
 	}
 	protected IElementType checkBuiltInArray()
 	{
 		// here we need to check built-in scalars
-		return PERL_BUILT_IN_ARRAYS.contains(yytext().toString())
+		return PerlArray.BUILT_IN.contains(yytext().toString())
 				? PERL_BUILTIN_VARIABLE_ARRAY
 				: PERL_VARIABLE_ARRAY;
 	}
 	protected IElementType checkBuiltInHash()
 	{
 		// here we need to check built-in scalars
-		return PERL_BUILT_IN_HASHES.contains(yytext().toString())
+		return PerlHash.BUILT_IN.contains(yytext().toString())
 				? PERL_BUILTIN_VARIABLE_HASH
 				: PERL_VARIABLE_HASH;
 	}
 	protected IElementType checkBuiltInGlob()
 	{
 		// here we need to check built-in scalars
-		return PERL_BUILT_IN_GLOBS.contains(yytext().toString())
+		return PerlGlob.BUILT_IN.contains(yytext().toString())
 				? PERL_BUILTIN_VARIABLE_GLOB
 				: PERL_VARIABLE_GLOB;
 	}

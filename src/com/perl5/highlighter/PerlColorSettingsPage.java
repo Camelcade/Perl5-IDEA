@@ -20,11 +20,17 @@ import java.util.Map;
 public class PerlColorSettingsPage implements ColorSettingsPage
 {
 	private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-			new AttributesDescriptor("Comment", PerlSyntaxHighlighter.PERL_COMMENT),
-			new AttributesDescriptor("Function", PerlSyntaxHighlighter.PERL_FUNCTION),
+			new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
+			new AttributesDescriptor("Block comment", PerlSyntaxHighlighter.PERL_COMMENT_BLOCK),
+
+			new AttributesDescriptor("Built-in function", PerlSyntaxHighlighter.PERL_FUNCTION),
+			new AttributesDescriptor("User-defined function", PerlSyntaxHighlighter.PERL_FUNCTION_USER),
+			new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
+
 			new AttributesDescriptor("Static method call", PerlSyntaxHighlighter.PERL_STATIC_METHOD_CALL),
 			new AttributesDescriptor("Instance method call", PerlSyntaxHighlighter.PERL_INSTANCE_METHOD_CALL),
-			new AttributesDescriptor("Syntax", PerlSyntaxHighlighter.PERL_SYNTAX),
+
+
 			new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),
 			new AttributesDescriptor("Scalar", PerlSyntaxHighlighter.PERL_SCALAR),
 			new AttributesDescriptor("Array", PerlSyntaxHighlighter.PERL_ARRAY),

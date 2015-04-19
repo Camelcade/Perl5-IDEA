@@ -122,7 +122,7 @@ public interface PerlTokenTypes
 	IElementType PERL_BUILTIN_VARIABLE_GLOB = new PerlGlob(PerlScopes.PerlVariableScope.MY, true);
 
 	IElementType PERL_PACKAGE = new PerlElement("PERL_PACKAGE");
-	IElementType PERL_OPERATOR = new PerlElement("PERL_OPERATOR");
+	IElementType PERL_OPERATOR = new PerlFunctionOperator();
 
 	IElementType PERL_USER_FUNCTION = new PerlElement("PERL_USER_FUNCTION");
 

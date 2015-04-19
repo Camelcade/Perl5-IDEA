@@ -8,7 +8,7 @@ import com.perl5.highlighter.PerlSyntaxHighlighter;
  */
 public class PerlCommentMultiline extends PerlComment
 {
-	private static final TextAttributesKey[] attributesKeys = new TextAttributesKey[]{PerlSyntaxHighlighter.PERL_COMMENT_MULTILINE};
+	private static final TextAttributesKey[] attributesKeys = new TextAttributesKey[]{PerlSyntaxHighlighter.PERL_COMMENT_BLOCK};
 
 	@Override
 	public TextAttributesKey[] getTextAttributesKey()

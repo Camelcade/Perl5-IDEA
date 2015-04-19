@@ -20,17 +20,17 @@
             <option name="FOREGROUND" value="008000"/>
         </value>
     </option>
+    <option name="PERL_COMMENT_BLOCK">
+        <value>
+            <option name="FOREGROUND" value="808080"/>
+        </value>
+    </option>
     <option name="PERL_DQ_STRING">
         <value>
             <option name="FOREGROUND" value="808080"/>
         </value>
     </option>
     <option name="PERL_SQ_STRING">
-        <value>
-            <option name="FOREGROUND" value="808080"/>
-        </value>
-    </option>
-    <option name="PERL_COMMENT_MULTILINE">
         <value>
             <option name="FOREGROUND" value="808080"/>
         </value>
@@ -50,11 +50,6 @@
             <option name="FOREGROUND" value="000000"/>
         </value>
     </option>
-    <option name="PERL_OPERATOR">
-        <value>
-            <option name="FOREGROUND" value="000080"/>
-        </value>
-    </option>
     <option name="PERL_ERROR_CHARACTER">
         <value>
             <option name="FOREGROUND" value="FF80C0"/>
@@ -65,9 +60,19 @@
             <option name="FOREGROUND" value="0000FF"/>
         </value>
     </option>
-    <option name="PERL_SYNTAX">
+    <option name="PERL_FUNCTION_USER">
         <value>
-            <option name="FOREGROUND" value="0000FF"/>
+            <option name="FOREGROUND" value="ff1493"/>
+        </value>
+    </option>
+    <option name="PERL_OPERATOR">
+        <value>
+            <option name="FOREGROUND" value="000080"/>
+        </value>
+    </option>
+    <option name="PERL_PACKAGE">
+        <value>
+            <option name="FOREGROUND" value="800080"/>
         </value>
     </option>
 

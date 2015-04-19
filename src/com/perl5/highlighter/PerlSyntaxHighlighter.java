@@ -20,12 +20,15 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
-	public static final TextAttributesKey PERL_COMMENT_MULTILINE = createTextAttributesKey("PERL_COMMENT_MULTILINE", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
+	public static final TextAttributesKey PERL_COMMENT_BLOCK = createTextAttributesKey("PERL_COMMENT_BLOCK", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
 
-	public static final TextAttributesKey PERL_INSTANCE_METHOD_CALL = createTextAttributesKey("PERL_INSTANCE_METHOD_CALL", DefaultLanguageHighlighterColors.INSTANCE_METHOD);
-	public static final TextAttributesKey PERL_STATIC_METHOD_CALL = createTextAttributesKey("PERL_STATIC_METHOD_CALL", DefaultLanguageHighlighterColors.STATIC_METHOD);
+	public static final TextAttributesKey PERL_INSTANCE_METHOD_CALL = createTextAttributesKey("PERL_INSTANCE_METHOD_CALL", DefaultLanguageHighlighterColors.FUNCTION_CALL);
+	public static final TextAttributesKey PERL_STATIC_METHOD_CALL = createTextAttributesKey("PERL_STATIC_METHOD_CALL", DefaultLanguageHighlighterColors.FUNCTION_CALL);
+
 	public static final TextAttributesKey PERL_FUNCTION = createTextAttributesKey("PERL_FUNCTION", DefaultLanguageHighlighterColors.KEYWORD);
-	public static final TextAttributesKey PERL_SYNTAX = createTextAttributesKey("PERL_SYNTAX", DefaultLanguageHighlighterColors.KEYWORD);
+	public static final TextAttributesKey PERL_FUNCTION_USER = createTextAttributesKey("PERL_FUNCTION_USER", DefaultLanguageHighlighterColors.KEYWORD);
+	public static final TextAttributesKey PERL_OPERATOR = createTextAttributesKey("PERL_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
+
 	public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey PERL_NUMBER = createTextAttributesKey("PERL_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
@@ -35,16 +38,16 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey PERL_PAREN = createTextAttributesKey("PERL_PARENTESS", DefaultLanguageHighlighterColors.PARENTHESES);
 	public static final TextAttributesKey PERL_BRACK = createTextAttributesKey("PERL_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS);
 	public static final TextAttributesKey PERL_PACKAGE = createTextAttributesKey("PERL_PACKAGE", DefaultLanguageHighlighterColors.CLASS_NAME);
+
 	public static final TextAttributesKey PERL_SCALAR = createTextAttributesKey("PERL_SCALAR", DefaultLanguageHighlighterColors.LOCAL_VARIABLE);
 	public static final TextAttributesKey PERL_ARRAY = createTextAttributesKey("PERL_ARRAY", DefaultLanguageHighlighterColors.LOCAL_VARIABLE);
 	public static final TextAttributesKey PERL_HASH = createTextAttributesKey("PERL_HASH", DefaultLanguageHighlighterColors.LOCAL_VARIABLE);
 	public static final TextAttributesKey PERL_GLOB = createTextAttributesKey("PERL_GLOB", DefaultLanguageHighlighterColors.LOCAL_VARIABLE);
-	public static final TextAttributesKey PERL_DEREFERENCE = createTextAttributesKey("PERL_DEREFERENCE", DefaultLanguageHighlighterColors.CLASS_REFERENCE);
+
+	public static final TextAttributesKey PERL_DEREFERENCE = createTextAttributesKey("PERL_DEREFERENCE", DefaultLanguageHighlighterColors.DOT);
 
 	private static final TextAttributesKey[] STATIC_METHOD_CALL_KEYS = new TextAttributesKey[]{PERL_STATIC_METHOD_CALL};
 	private static final TextAttributesKey[] INSTANCE_METHOD_CALL_KEYS = new TextAttributesKey[]{PERL_INSTANCE_METHOD_CALL};
-	private static final TextAttributesKey[] FUNCTION_KEYS = new TextAttributesKey[]{PERL_FUNCTION};
-	private static final TextAttributesKey[] SYNTAX_KEYS = new TextAttributesKey[]{PERL_SYNTAX};
 	private static final TextAttributesKey[] SQ_STRING_KEYS = new TextAttributesKey[]{PERL_SQ_STRING};
 	private static final TextAttributesKey[] DQ_STRING_KEYS = new TextAttributesKey[]{PERL_DQ_STRING};
 	private static final TextAttributesKey[] COMMA_KEYS = new TextAttributesKey[]{PERL_COMMA};
@@ -70,14 +73,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 			return ((SelfStyled)tokenType).getTextAttributesKey();
 		} else if (tokenType.equals(PerlElementTypes.PERL_PACKAGE)) {
 			return PACKAGE_KEYS;
-		} else if (tokenType.equals(PerlElementTypes.PERL_FUNCTION)) {
-			return FUNCTION_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_STATIC_METHOD_CALL)) {
 			return STATIC_METHOD_CALL_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_INSTANCE_METHOD_CALL)) {
 			return INSTANCE_METHOD_CALL_KEYS;
-		} else if (tokenType.equals(PerlElementTypes.PERL_SYNTAX)) {
-			return SYNTAX_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_VARIABLE_GLOB)) {
 			return PERL_GLOB_KEYS;
 		} else if (
