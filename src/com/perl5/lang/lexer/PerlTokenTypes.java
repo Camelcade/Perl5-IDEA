@@ -106,10 +106,15 @@ public interface PerlTokenTypes
 	IElementType PERL_HANDLE = new PerlElement("PERL_HANDLE");
 	IElementType PERL_MISC = new PerlElement("PERL_MISC");
 
-	IElementType PERL_VARIABLE_SCALAR = new PerlScalar("PERL_VARIABLE_SCALAR");
-	IElementType PERL_VARIABLE_ARRAY = new PerlArray("PERL_VARIABLE_ARRAY");
-	IElementType PERL_VARIABLE_HASH = new PerlHash("PERL_VARIABLE_HASH");
-	IElementType PERL_VARIABLE_GLOB = new PerlGlob("PERL_VARIABLE_GLOB");
+	IElementType PERL_VARIABLE_SCALAR = new PerlScalar(PerlScopes.PerlVariableScope.MY, false);
+	IElementType PERL_VARIABLE_ARRAY = new PerlArray(PerlScopes.PerlVariableScope.MY, false);
+	IElementType PERL_VARIABLE_HASH = new PerlHash(PerlScopes.PerlVariableScope.MY, false);
+	IElementType PERL_VARIABLE_GLOB = new PerlGlob(PerlScopes.PerlVariableScope.MY, false);
+
+	IElementType PERL_BUILTIN_VARIABLE_SCALAR = new PerlScalar(PerlScopes.PerlVariableScope.MY, true);
+	IElementType PERL_BUILTIN_VARIABLE_ARRAY = new PerlArray(PerlScopes.PerlVariableScope.MY, true);
+	IElementType PERL_BUILTIN_VARIABLE_HASH = new PerlHash(PerlScopes.PerlVariableScope.MY, true);
+	IElementType PERL_BUILTIN_VARIABLE_GLOB = new PerlGlob(PerlScopes.PerlVariableScope.MY, true);
 
 	IElementType PERL_PACKAGE = new PerlElement("PERL_PACKAGE");
 	IElementType PERL_OPERATOR = new PerlElement("PERL_OPERATOR");

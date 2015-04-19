@@ -10,7 +10,7 @@ Simultaneously i've created same plugn for Perl6 and i'll try to keep both plugi
 
 #Current status
 
-* Implementing JFlex lexer 
+* Implementing JFlex lexer
 
 #See also
 

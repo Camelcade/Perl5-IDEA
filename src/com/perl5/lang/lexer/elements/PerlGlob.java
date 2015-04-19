@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlGlob extends PerlVariable
 {
-	public PerlGlob(@NotNull @NonNls String debugName) {
-		super(debugName);
+	public PerlGlob(PerlVariableScope scope, boolean isBuiltIn) {
+		super("PERL_GLOB", scope, isBuiltIn);
 	}
 }

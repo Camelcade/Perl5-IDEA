@@ -4,10 +4,12 @@ package com.perl5.lang.lexer.elements;
  * Created by hurricup on 12.04.2015.
  */
 
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.PerlFileType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import com.perl5.highlighter.PerlSyntaxHighlighter;
 
 public class PerlElement extends IElementType
 {
@@ -22,6 +24,7 @@ public class PerlElement extends IElementType
 		return "PerlTokenType " + super.toString();
 	}
 
+
 //	public static abstract class PsiCreator extends PerlElementType {
 //		protected PsiCreator(String debugName) {
 //			super(debugName);
@@ -30,3 +33,7 @@ public class PerlElement extends IElementType
 	//	public abstract PerlPsiElement createPsi(@NotNull ASTNode node);
 //	}
 }
+
+/*
+
+ */

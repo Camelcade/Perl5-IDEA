@@ -7,6 +7,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.lexer.PerlLexer;
+import com.perl5.lang.lexer.elements.PerlElement;
 import com.perl5.lang.parser.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +17,7 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
-	private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
+	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
 	public static final TextAttributesKey PERL_INSTANCE_METHOD_CALL = createTextAttributesKey("PERL_INSTANCE_METHOD_CALL", DefaultLanguageHighlighterColors.INSTANCE_METHOD);
@@ -50,9 +51,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	private static final TextAttributesKey[] PAREN_KEYS = new TextAttributesKey[]{PERL_PAREN};
 	private static final TextAttributesKey[] BRACK_KEYS = new TextAttributesKey[]{PERL_BRACK};
 	private static final TextAttributesKey[] PACKAGE_KEYS = new TextAttributesKey[]{PERL_PACKAGE};
-	private static final TextAttributesKey[] PERL_SCALAR_KEYS = new TextAttributesKey[]{PERL_SCALAR};
-	private static final TextAttributesKey[] PERL_ARRAY_KEYS = new TextAttributesKey[]{PERL_ARRAY};
-	private static final TextAttributesKey[] PERL_HASH_KEYS = new TextAttributesKey[]{PERL_HASH};
 	private static final TextAttributesKey[] PERL_GLOB_KEYS = new TextAttributesKey[]{PERL_GLOB};
 	private static final TextAttributesKey[] PERL_DEREFERENCE_KEYS = new TextAttributesKey[]{PERL_DEREFERENCE};
 //	private static final TextAttributesKey[] PERL_SCALAR_BUILT_IN_KEYS = new TextAttributesKey[]{PERL_SCALAR, PERL_SYNTAX};
@@ -69,7 +67,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	@NotNull
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-		if (tokenType.equals(PerlElementTypes.PERL_COMMENT)) {
+		if( tokenType instanceof SelfStyled )
+		{
+			return ((SelfStyled)tokenType).getTextAttributesKey();
+		} else if (tokenType.equals(PerlElementTypes.PERL_COMMENT)) {
 			return COMMENT_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_PACKAGE)) {
 			return PACKAGE_KEYS;
@@ -81,17 +82,11 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 			return INSTANCE_METHOD_CALL_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_SYNTAX)) {
 			return SYNTAX_KEYS;
-		} else if (tokenType.equals(PerlElementTypes.PERL_VARIABLE_SCALAR)) {
-			return PERL_SCALAR_KEYS;
-		} else if (tokenType.equals(PerlElementTypes.PERL_VARIABLE_ARRAY)) {
-			return PERL_ARRAY_KEYS;
-		} else if (tokenType.equals(PerlElementTypes.PERL_VARIABLE_HASH)) {
-			return PERL_HASH_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_VARIABLE_GLOB)) {
 			return PERL_GLOB_KEYS;
 		} else if (
 				tokenType.equals(PerlElementTypes.PERL_DEREFERENCE)
-				|| tokenType.equals(PerlElementTypes.PERL_DEPACKAGE)
+						|| tokenType.equals(PerlElementTypes.PERL_DEPACKAGE)
 				) {
 			return PERL_DEREFERENCE_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_SQ_STRING)) {
@@ -106,9 +101,12 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 			return BRACE_KEYS;
 		} else if (tokenType.equals(PerlElementTypes.PERL_LBRACK) || tokenType.equals(PerlElementTypes.PERL_RBRACK)) {
 			return BRACK_KEYS;
-		} else if (tokenType.equals(PerlElementTypes.PERL_LPAREN) || tokenType.equals(PerlElementTypes.PERL_RPAREN)) {
+		} else if (tokenType.equals(PerlElementTypes.PERL_LPAREN) || tokenType.equals(PerlElementTypes.PERL_RPAREN))
+		{
 			return PAREN_KEYS;
-		} else {
+		}
+		else
+		{
 			return EMPTY_KEYS;
 		}
 	}

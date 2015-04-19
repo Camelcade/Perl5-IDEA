@@ -445,13 +445,6 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
     "y"			{return PERL_SYNTAX;}
 
 
-/////////////////////////////////////////// PERL FILE HANDLES //////////////////////////////////////////////////////////
-    "ARGV"			{return PERL_HANDLE;}
-    "STDERR"			{return PERL_HANDLE;}
-    "STDOUT"			{return PERL_HANDLE;}
-    "ARGVOUT"			{return PERL_HANDLE;}
-    "STDIN"			{return PERL_HANDLE;}
-
 /////////////////////////////////////////// PERL MISC //////////////////////////////////////////////////////////////////
     "%+"			{return PERL_MISC;}
     "EXTENDED_OS_ERROR"			{return PERL_MISC;}
