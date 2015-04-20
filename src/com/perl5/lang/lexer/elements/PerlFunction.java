@@ -17,11 +17,14 @@ public class PerlFunction extends PerlElement
 		super(debugName);
 	}
 
+	private static final PerlFunctionBuiltIn perlFunctionBuiltIn = new PerlFunctionBuiltIn();
+	private static final PerlFunctionUser perlFunctionUser = new PerlFunctionUser();
+
 	public static IElementType getFunction(String token)
 	{
 		return BUILT_IN.contains(token)
-			? new PerlFunctionBuiltIn()
-			: new PerlFunctionUser();
+			? perlFunctionBuiltIn
+			: perlFunctionUser;
 	}
 
 	// @todo shouldn't we think about map search

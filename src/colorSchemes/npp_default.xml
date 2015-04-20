@@ -45,11 +45,6 @@
             <option name="FOREGROUND" value="FF0000"/>
         </value>
     </option>
-    <option name="PERL_POD">
-        <value>
-            <option name="FOREGROUND" value="000000"/>
-        </value>
-    </option>
     <option name="PERL_ERROR_CHARACTER">
         <value>
             <option name="FOREGROUND" value="FF80C0"/>
@@ -75,6 +70,11 @@
             <option name="FOREGROUND" value="800080"/>
         </value>
     </option>
+    <!--option name="PERL_POD"> Need some styling here
+        <value>
+            <option name="FOREGROUND" value="8080A0"/>
+        </value>
+    </option-->
 
 
 
@@ -86,7 +86,7 @@
     <WordsStyle name="SYMBOL TABLE" styleID="15" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" />
     <WordsStyle name="PUNCTUATION" styleID="8" fgColor="804000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
     <WordsStyle name="LONGQUOTE" styleID="19" fgColor="FF8000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="DATASECTION" styleID="21" fgColor="808080" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
+    <WordsStyle name="DATASECTION" styleID="21" fgColor="" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
     <WordsStyle name="REGSUBST" styleID="18" fgColor="8080C0" bgColor="FFEEEC" fontName="" fontStyle="0" fontSize="" />
     <WordsStyle name="BACKTICKS" styleID="20" fgColor="FFFF00" bgColor="808080" fontName="" fontStyle="1" fontSize="" />
 -->

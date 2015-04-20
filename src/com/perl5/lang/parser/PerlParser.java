@@ -28,8 +28,8 @@ public class PerlParser implements PsiParser
 		}
 		else {
 		*/
-			System.err.println("Root node type:");
-			System.err.println(root);
+		//	System.err.println("Root node type:");
+		//	System.err.println(root);
 //			assert root == PerlParserDefinition.PERL_FILE : root;
 
 			PsiBuilder.Marker rootMarker = builder.mark();

@@ -22,6 +22,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
 			new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
 			new AttributesDescriptor("Block comment", PerlSyntaxHighlighter.PERL_COMMENT_BLOCK),
+			new AttributesDescriptor("POD block", PerlSyntaxHighlighter.PERL_POD),
 
 			new AttributesDescriptor("Built-in function", PerlSyntaxHighlighter.PERL_FUNCTION),
 			new AttributesDescriptor("User-defined function", PerlSyntaxHighlighter.PERL_FUNCTION_USER),
@@ -67,6 +68,12 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 				"use parent 'DTL::Fast::Entity';\n" +
 				"\n" +
 				"use DTL::Fast::Template;\n" +
+				"\n" +
+				"=pod\n" +
+				"\n" +
+				"=head1 Some pod doc\n" +
+				"\n" +
+				"=cut\n" +
 				"\n" +
 				"# This is a test comment\n" +
 				"sub new\n" +

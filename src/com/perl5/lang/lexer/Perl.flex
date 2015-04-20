@@ -26,10 +26,20 @@ import com.perl5.lang.lexer.elements.PerlFunction;
 //%line
 //%column
 %{
+	protected int dataBlockStart = 0;
+
 	protected void StartDataBlock()
 	{
 		dataBlockStart = zzStartRead;
         yybegin(LEX_EOF);
+	}
+
+	protected int podBlockStart = 0;
+
+	protected void StartPodBlock()
+	{
+		podBlockStart = zzStartRead;
+        yybegin(LEX_POD);
 	}
 %}
 
@@ -47,7 +57,10 @@ DQ_STRING        = \"[^\"]*\"
 SQ_STRING        = \'[^\']*\'
 THE_END         = __END__
 THE_DATA         = __DATA__
-FULL_LINE       = .*[\r\n]+
+FULL_LINE       = .*{LINE_TERMINATOR}
+
+POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
+POD_CLOSE       = \="cut"{FULL_LINE}
 
 DEPACKAGE = "::"
 
@@ -74,13 +87,14 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 %state PACKAGE_USE_PARAMS
 %state PACKAGE_STATIC_CALL
 %state PACKAGE_INSTANCE_CALL
-%xstate LEX_EOF
+%xstate LEX_EOF, LEX_POD
 %state LEX_DEREFERENCE
 %%
 
 <YYINITIAL>{
     {THE_END}               {StartDataBlock(); break;}
     {THE_DATA}               {StartDataBlock(); break;}
+    {POD_OPEN}               {StartPodBlock();break;}
 }
 <LEX_EOF>
 {
@@ -93,6 +107,23 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
         break;
     }
 }
+<LEX_POD>
+{
+    {POD_CLOSE} {
+        zzCurrentPos = zzStartRead = podBlockStart;
+        yybegin(YYINITIAL);
+        return PERL_POD;
+    }
+    {FULL_LINE} {
+        if( zzMarkedPos == zzEndRead )
+        {
+            zzCurrentPos = zzStartRead = podBlockStart;
+            return PERL_POD;
+        }
+        break;
+    }
+}
+
 {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 {CHAR_SEMI}     {yybegin(YYINITIAL);return PERL_SEMI;}
 {WHITE_SPACE}   {return TokenType.WHITE_SPACE;}

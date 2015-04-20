@@ -13,8 +13,6 @@ import com.perl5.lang.lexer.elements.PerlScalar;
  */
 public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes
 {
-	protected int dataBlockStart = 0;
-
 	public abstract CharSequence yytext();
 
 	protected IElementType checkBuiltInScalar()
