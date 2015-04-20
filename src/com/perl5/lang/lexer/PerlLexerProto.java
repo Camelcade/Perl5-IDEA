@@ -1,5 +1,6 @@
 package com.perl5.lang.lexer;
 
+import com.intellij.lang.impl.PsiBuilderImpl;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.lexer.elements.PerlArray;
@@ -12,13 +13,7 @@ import com.perl5.lang.lexer.elements.PerlScalar;
  */
 public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes
 {
-
-/*
-  StringBuffer stringBuffer = new StringBuffer();
-*/
- /* private IElementType element(int type, Object value) {
-    return new IElementType(type, value);
-  }*/
+	protected int dataBlockStart = 0;
 
 	public abstract CharSequence yytext();
 
@@ -53,4 +48,5 @@ public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes
 	{
 		return PERL_PACKAGE;
 	}
+
 }

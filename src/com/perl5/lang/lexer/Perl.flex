@@ -25,6 +25,14 @@ import com.perl5.lang.lexer.elements.PerlFunction;
 
 //%line
 //%column
+%{
+	protected void StartDataBlock()
+	{
+		dataBlockStart = zzStartRead;
+        yybegin(LEX_EOF);
+	}
+%}
+
 
 /*
 //InputCharacter = [^\r\n]
@@ -66,17 +74,26 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 %state PACKAGE_USE_PARAMS
 %state PACKAGE_STATIC_CALL
 %state PACKAGE_INSTANCE_CALL
-%state LEX_EOF
+%xstate LEX_EOF
 %state LEX_DEREFERENCE
 %%
 
+<YYINITIAL>{
+    {THE_END}               {StartDataBlock(); break;}
+    {THE_DATA}               {StartDataBlock(); break;}
+}
 <LEX_EOF>
 {
-    {FULL_LINE} { return PERL_COMMENT_MULTILINE; }
+    {FULL_LINE} {
+        if( zzMarkedPos == zzEndRead )
+        {
+            zzCurrentPos = zzStartRead = dataBlockStart;
+            return PERL_COMMENT_MULTILINE;
+        }
+        break;
+    }
 }
-{THE_END}               {yybegin(LEX_EOF);return PERL_COMMENT_MULTILINE;}
-{THE_DATA}               {yybegin(LEX_EOF);return PERL_COMMENT_MULTILINE;}
-{END_OF_LINE_COMMENT}                           { return PERL_COMMENT; }
+{END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 {CHAR_SEMI}     {yybegin(YYINITIAL);return PERL_SEMI;}
 {WHITE_SPACE}   {return TokenType.WHITE_SPACE;}
 "{"             {return PERL_LBRACE;}
