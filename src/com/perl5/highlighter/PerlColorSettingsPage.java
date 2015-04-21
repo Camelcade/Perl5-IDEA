@@ -51,7 +51,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	@Nullable
 	@Override
 	public Icon getIcon() {
-		return PerlIcons.FILE;
+		return PerlIcons.PM_FILE;
 	}
 
 	@NotNull

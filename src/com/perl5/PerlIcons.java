@@ -8,5 +8,8 @@ import javax.swing.*;
 
 public class PerlIcons
 {
-    public static final Icon FILE = IconLoader.getIcon("/com/perl5/icons/perl5.png");
+	public static final Icon PM_FILE = IconLoader.getIcon("/com/perl5/icons/perl5.png");
+	public static final Icon POD_FILE = IconLoader.getIcon("/com/perl5/icons/podicon.png");
+	public static final Icon SCRIPT_FILE = IconLoader.getIcon("/com/perl5/icons/perl5classic.png");
+	public static final Icon XS_FILE = IconLoader.getIcon("/com/perl5/icons/xsicon.png");
 }

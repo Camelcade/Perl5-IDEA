@@ -6,9 +6,8 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.lexer.PerlLexer;
-import com.perl5.lang.lexer.elements.PerlElement;
-import com.perl5.lang.parser.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.parser.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
