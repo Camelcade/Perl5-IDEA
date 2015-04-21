@@ -1,8 +1,8 @@
 package com.perl5.lang.perl.lexer.elements;
 
 import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.perl5.highlighter.PerlSyntaxHighlighter;
-import com.perl5.highlighter.SelfStyled;
+import com.perl5.lang.perl.highlighter.PerlSyntaxHighlighter;
+import com.perl5.utils.SelfStyled;
 
 /**
  * Created by hurricup on 19.04.2015.

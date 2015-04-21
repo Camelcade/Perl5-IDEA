@@ -1,13 +1,14 @@
-package com.perl5.highlighter;
+package com.perl5.lang.perl.highlighter;
 
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlElementTypes;
+import com.perl5.utils.SelfStyled;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
@@ -63,13 +64,13 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
-		return new FlexAdapter(new PerlLexer((Reader) null));
+		return new PerlLexerAdapter();
 	}
 
 	@NotNull
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-		if( tokenType instanceof SelfStyled )
+		if( tokenType instanceof SelfStyled)
 		{
 			return ((SelfStyled)tokenType).getTextAttributesKey();
 		} else if (tokenType.equals(PerlElementTypes.PERL_PACKAGE)) {

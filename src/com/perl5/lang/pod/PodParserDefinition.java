@@ -1,13 +1,8 @@
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.pod;
 
-/**
- * Created by hurricup on 12.04.2015.
- */
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -15,28 +10,30 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlFileTypeScript;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.PerlTokenTypes;
-import com.perl5.lang.perl.psi.PerlFile;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.parser.PerlPsiCreator;
+import com.perl5.lang.perl.psi.PsiFilePerl;
+import com.perl5.lang.pod.lexer.PodLexerAdapter;
+import com.perl5.lang.pod.parser.PodParser;
+import com.perl5.lang.pod.psi.PsiFilePod;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.Reader;
+/**
+ * Created by hurricup on 21.04.2015.
+ */
+public class PodParserDefinition implements ParserDefinition, PodTokenTypes
+{
 
-public class PerlParserDefinition implements ParserDefinition{
 	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-	public static final TokenSet COMMENTS = TokenSet.create(PerlTokenTypes.PERL_COMMENT);
-	public static final IStubFileElementType PERL_FILE = new IStubFileElementType(PerlFileTypeScript.LANGUAGE);
 
-	public static final IFileElementType FILE = new IFileElementType(Language.<PerlLanguage>findInstance(PerlLanguage.class));
+	public static final IStubFileElementType POD_FILE = new IStubFileElementType("Plain old document", PodLanguage.INSTANCE);
+	public static final IFileElementType FILE = new IFileElementType("Plain old document", PodLanguage.INSTANCE);
 
 	@NotNull
 	@Override
 	public Lexer createLexer(Project project) {
-		return new FlexAdapter(new PerlLexer((Reader) null));
+		return new PodLexerAdapter();
 	}
 
 	@NotNull
@@ -46,7 +43,7 @@ public class PerlParserDefinition implements ParserDefinition{
 
 	@NotNull
 	public TokenSet getCommentTokens() {
-		return COMMENTS;
+		return TokenSet.EMPTY;
 	}
 
 	@NotNull
@@ -56,7 +53,7 @@ public class PerlParserDefinition implements ParserDefinition{
 
 	@NotNull
 	public PsiParser createParser(final Project project) {
-		return new PerlParser();
+		return new PodParser();
 	}
 
 	@Override
@@ -65,7 +62,7 @@ public class PerlParserDefinition implements ParserDefinition{
 	}
 
 	public PsiFile createFile(FileViewProvider viewProvider) {
-		return new PerlFile(viewProvider);
+		return new PsiFilePod(viewProvider);
 	}
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {

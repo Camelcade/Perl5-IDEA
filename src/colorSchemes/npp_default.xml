@@ -78,17 +78,17 @@
 
 
 
-<!-- from NPP
-    <WordsStyle name="PREPROCESSOR" styleID="9" fgColor="804000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="DEFAULT" styleID="0" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="CHARACTER" styleID="7" fgColor="808080" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="REGEX" styleID="17" fgColor="8080FF" bgColor="F8FEDE" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="SYMBOL TABLE" styleID="15" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" />
-    <WordsStyle name="PUNCTUATION" styleID="8" fgColor="804000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="LONGQUOTE" styleID="19" fgColor="FF8000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="DATASECTION" styleID="21" fgColor="" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="REGSUBST" styleID="18" fgColor="8080C0" bgColor="FFEEEC" fontName="" fontStyle="0" fontSize="" />
-    <WordsStyle name="BACKTICKS" styleID="20" fgColor="FFFF00" bgColor="808080" fontName="" fontStyle="1" fontSize="" />
--->
+    <!-- from NPP
+        <WordsStyle name="PREPROCESSOR" styleID="9" fgColor="804000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
+        <WordsStyle name="DEFAULT" styleID="0" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
+        <WordsStyle name="CHARACTER" styleID="7" fgColor="808080" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
+        <WordsStyle name="REGEX" styleID="17" fgColor="8080FF" bgColor="F8FEDE" fontName="" fontStyle="0" fontSize="" />
+        <WordsStyle name="SYMBOL TABLE" styleID="15" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" />
+        <WordsStyle name="PUNCTUATION" styleID="8" fgColor="804000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
+        <WordsStyle name="LONGQUOTE" styleID="19" fgColor="FF8000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
+        <WordsStyle name="DATASECTION" styleID="21" fgColor="" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
+        <WordsStyle name="REGSUBST" styleID="18" fgColor="8080C0" bgColor="FFEEEC" fontName="" fontStyle="0" fontSize="" />
+        <WordsStyle name="BACKTICKS" styleID="20" fgColor="FFFF00" bgColor="808080" fontName="" fontStyle="1" fontSize="" />
+    -->
 
 </list>

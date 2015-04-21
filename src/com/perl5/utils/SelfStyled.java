@@ -1,4 +1,4 @@
-package com.perl5.highlighter;
+package com.perl5.utils;
 
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 

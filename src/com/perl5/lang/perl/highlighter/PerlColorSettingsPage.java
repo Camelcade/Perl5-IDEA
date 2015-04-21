@@ -1,4 +1,4 @@
-package com.perl5.highlighter;
+package com.perl5.lang.perl.highlighter;
 
 import com.intellij.openapi.options.colors.ColorSettingsPage;
 

@@ -1,4 +1,4 @@
-package com.perl5.lang.lexer;
+package com.perl5.lang.perl.lexer;
 
 /*
     http://jflex.de/manual.html
@@ -10,7 +10,7 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
-import com.perl5.lang.lexer.elements.PerlFunction;
+import com.perl5.lang.perl.lexer.elements.PerlFunction;
 
 %%
 
@@ -79,7 +79,7 @@ NUMBER = "-"?[0-9_]+(\.[0-9_]+)?
 END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 
 //%state STRING
-%state YYINITIAL
+//%state YYINITIAL
 %state PACKAGE_DEFINITION
 %state FUNCTION_DEFINITION
 %state PACKAGE_USE

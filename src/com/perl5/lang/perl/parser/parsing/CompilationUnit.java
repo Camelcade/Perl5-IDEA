@@ -27,7 +27,8 @@ public class CompilationUnit implements PerlElementTypes
 //			if (builder.eof()) break;
 			if (!parser.parseStatement(builder, false)) {
 //				if (!parser.parseStatementWithImports(builder)) {
-				ParserUtils.wrapError(builder, PerlBundle.message("unexpected.symbol"));
+//				ParserUtils.wrapError(builder, PerlBundle.message("unexpected.symbol"));
+				throw new Error("unexpected symbol");
 		  }
 		}
 	}

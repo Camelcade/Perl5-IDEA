@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<list>
+    <option name="POD_MARKER">
+        <value>
+            <option name="FOREGROUND" value="808080"/>
+        </value>
+    </option>
+    <option name="POD_TAG">
+        <value>
+            <option name="FOREGROUND" value="0000A0"/>
+        </value>
+    </option>
+    <option name="POD_TEXT">
+        <value>
+            <option name="FOREGROUND" value="008000"/>
+        </value>
+    </option>
+    <option name="POD_CODE">
+        <value>
+            <option name="FOREGROUND" value="000000"/>
+            <option name="BACKGROUND" value="f0f0f0"/>
+        </value>
+    </option>
+
+</list>

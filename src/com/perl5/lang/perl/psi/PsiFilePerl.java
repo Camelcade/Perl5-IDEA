@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
-public class PerlFile extends PsiFileBase {
-	public PerlFile(@NotNull FileViewProvider viewProvider) {
+public class PsiFilePerl extends PsiFileBase {
+	public PsiFilePerl(@NotNull FileViewProvider viewProvider) {
 		super(viewProvider, PerlLanguage.INSTANCE);
 	}
 
