@@ -4,6 +4,7 @@ package com.perl5.lang.perl.highlighter;
  * Created by hurricup on 12.04.2015.
  */
 
+import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
@@ -19,6 +20,6 @@ public class PerlSyntaxHighlighterFactory extends SyntaxHighlighterFactory
 	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
 	{
 		return new PerlSyntaxHighlighter();
-
 	}
+
 }

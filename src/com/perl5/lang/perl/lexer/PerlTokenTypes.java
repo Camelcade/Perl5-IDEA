@@ -4,8 +4,23 @@ package com.perl5.lang.perl.lexer;
  * Created by hurricup on 12.04.2015.
  */
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiBuilderFactory;
+import com.intellij.lang.PsiParser;
+import com.intellij.lexer.FlexLexer;
+import com.intellij.lexer.Lexer;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.lexer.elements.*;
+import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.lexer.PodLexer;
+import com.perl5.lang.pod.lexer.PodLexerAdapter;
+import com.perl5.lang.pod.parser.PodParser;
+import org.jetbrains.annotations.Nullable;
 
 public interface PerlTokenTypes
 {
@@ -101,8 +116,9 @@ public interface PerlTokenTypes
 
 	IElementType PERL_COMMENT = new PerlComment();
 	IElementType PERL_COMMENT_MULTILINE = new PerlCommentMultiline();
-	IElementType PERL_POD = new PerlPod();
-
+//	IElementType PERL_POD = new PerlPod();
+	ILazyParseableElementType PERL_POD = new ILazyParseableElementType("Perl5 POD", PodLanguage.INSTANCE, true);
+ASTWrapperPsiElement
 	IElementType PERL_DQ_STRING = new PerlElement("DQ_STRING");
 	IElementType PERL_SQ_STRING = new PerlElement("SQ_STRING");
 	IElementType PERL_NUMBER = new PerlNumber();

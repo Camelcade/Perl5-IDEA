@@ -8,6 +8,8 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlElementTypes;
+import com.perl5.lang.pod.highlighter.PodSyntaxHighlighter;
+import com.perl5.lang.pod.lexer.elements.PodElement;
 import com.perl5.utils.SelfStyled;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,6 +18,8 @@ import java.io.Reader;
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
+
+	private static final PodSyntaxHighlighter podSyntaxHighlighter = new PodSyntaxHighlighter();
 
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
@@ -102,9 +106,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		{
 			return PAREN_KEYS;
 		}
-		else
-		{
-			return EMPTY_KEYS;
-		}
+		return EMPTY_KEYS;
 	}
 }
