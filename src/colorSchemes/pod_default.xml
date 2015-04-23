@@ -3,23 +3,25 @@
     <option name="POD_MARKER">
         <value>
             <option name="FOREGROUND" value="808080"/>
+            <!--<option name="BACKGROUND" value="fafafa"/>-->
         </value>
     </option>
     <option name="POD_TAG">
         <value>
             <option name="FOREGROUND" value="0000A0"/>
+            <!--<option name="BACKGROUND" value="fafafa"/>-->
         </value>
     </option>
     <option name="POD_TEXT">
         <value>
             <option name="FOREGROUND" value="008000"/>
+            <!--<option name="BACKGROUND" value="fafafa"/>-->
         </value>
     </option>
     <option name="POD_CODE">
         <value>
             <option name="FOREGROUND" value="000000"/>
-            <option name="BACKGROUND" value="f0f0f0"/>
+            <!--<option name="BACKGROUND" value="fafafa"/>-->
         </value>
     </option>
-
 </list>

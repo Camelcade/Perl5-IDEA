@@ -116,9 +116,8 @@ public interface PerlTokenTypes
 
 	IElementType PERL_COMMENT = new PerlComment();
 	IElementType PERL_COMMENT_MULTILINE = new PerlCommentMultiline();
-//	IElementType PERL_POD = new PerlPod();
-	ILazyParseableElementType PERL_POD = new ILazyParseableElementType("Perl5 POD", PodLanguage.INSTANCE, true);
-ASTWrapperPsiElement
+	IElementType PERL_POD = new PerlPod();
+
 	IElementType PERL_DQ_STRING = new PerlElement("DQ_STRING");
 	IElementType PERL_SQ_STRING = new PerlElement("SQ_STRING");
 	IElementType PERL_NUMBER = new PerlNumber();

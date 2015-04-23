@@ -1,5 +1,6 @@
 package com.perl5.lang.perl.highlighter;
 
+import com.intellij.lexer.LayeredLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -7,8 +8,10 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlTokenTypes;
 import com.perl5.lang.perl.parser.PerlElementTypes;
 import com.perl5.lang.pod.highlighter.PodSyntaxHighlighter;
+import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.lexer.elements.PodElement;
 import com.perl5.utils.SelfStyled;
 import org.jetbrains.annotations.NotNull;
@@ -68,7 +71,13 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
-		return new PerlLexerAdapter();
+		LayeredLexer layeredLexer = new LayeredLexer(new PerlLexerAdapter());
+		layeredLexer.registerSelfStoppingLayer(
+				new PodLexerAdapter(),
+				new IElementType[]{PerlTokenTypes.PERL_POD},
+				IElementType.EMPTY_ARRAY
+		);
+		return layeredLexer;
 	}
 
 	@NotNull

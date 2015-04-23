@@ -8,4 +8,5 @@ import com.perl5.lang.pod.PodTokenTypes;
  */
 public abstract class PodLexerProto implements FlexLexer, PodTokenTypes
 {
+
 }

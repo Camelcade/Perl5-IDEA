@@ -1,10 +1,15 @@
 package com.perl5.lang.pod.highlighter;
 
+import com.intellij.lexer.LayeredLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlTokenTypes;
+import com.perl5.lang.pod.PodTokenTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.utils.SelfStyled;
 import org.jetbrains.annotations.NotNull;
@@ -25,10 +30,18 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 	public static final TextAttributesKey POD_CODE = createTextAttributesKey("POD_CODE", DefaultLanguageHighlighterColors.KEYWORD);
 	public static final TextAttributesKey POD_TEXT = createTextAttributesKey("POD_TEXT", DefaultLanguageHighlighterColors.DOC_COMMENT);
 
+	public static final TextAttributesKey[] NEW_LINE = new TextAttributesKey[]{POD_TEXT};
+
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
-		return new PodLexerAdapter();
+		LayeredLexer layeredLexer = new LayeredLexer(new PodLexerAdapter());
+		layeredLexer.registerSelfStoppingLayer(
+				new PerlLexerAdapter(),
+				new IElementType[]{PodTokenTypes.POD_CODE},
+				IElementType.EMPTY_ARRAY
+		);
+		return layeredLexer;
 	}
 
 	@NotNull
@@ -37,6 +50,10 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 		if( tokenType instanceof SelfStyled)
 		{
 			return ((SelfStyled)tokenType).getTextAttributesKey();
+		}
+		else if (tokenType.equals(TokenType.NEW_LINE_INDENT))
+		{
+			return NEW_LINE;
 		}
 		return EMPTY_KEYS;
 	}
