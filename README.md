@@ -8,7 +8,9 @@ This project is currently in development, and if you want to participate - welco
 
 #Current status
 
-* Implementing JFlex lexer, some highlightning already works: [Syntax highltning](http://dl2.joxi.net/drive/0004/3351/294167/150419/46fdd3eb65.jpg)
+* Implementing JFlex lexer, some highlightning already works:
+  * [Perl syntax highlighting](http://dl2.joxi.net/drive/0004/3351/294167/150423/9f55fb5427.jpg)
+  * [POD syntax highlighting] (http://dl1.joxi.net/drive/0004/3351/294167/150423/40e1374dd6.jpg)
 
 #See also
 
