@@ -26,6 +26,14 @@ import com.perl5.lang.perl.lexer.elements.PerlFunction;
 //%line
 //%column
 %{
+    public void setTokenStart(int position){zzCurrentPos = zzStartRead = position;}
+    public int getNextTokenStart(){ return zzMarkedPos;}
+    public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
+
+    public void yybegin_LEX_MULTILINE(){yybegin(LEX_MULTILINE);}
+    public void yybegin_YYINITIAL(){yybegin(YYINITIAL);}
+    public void yybegin_LEX_MULTILINE_TOKEN(){yybegin(LEX_MULTILINE_TOKEN);}
+
 	protected int dataBlockStart = 0;
 
 	protected void StartDataBlock()
@@ -45,19 +53,25 @@ import com.perl5.lang.perl.lexer.elements.PerlFunction;
 
 
 /*
-//InputCharacter = [^\r\n]
+// Char classes
 */
-LINE_TERMINATOR = [\r\n]+
-WHITE_SPACE     = [ \t\f\r\n]+
+NEW_LINE = \r?\n
+WHITE_SPACE     = [ \t\f]
 CHAR_SEMI       = ;
-CHAR_ANY        = .
+//CHAR_ANY        = .
 ALFANUM         = [a-zA-Z0-9_]
 FUNCTION_NAME   = [a-zA-Z_]{ALFANUM}+
-DQ_STRING        = \"[^\"]*\"
-SQ_STRING        = \'[^\']*\'
 THE_END         = __END__
 THE_DATA         = __DATA__
-FULL_LINE       = .*{LINE_TERMINATOR}
+LINE            = .*
+FULL_LINE       = .*{NEW_LINE}?
+
+DQ_STRING        = \"[^\"\n\r]*\"
+SQ_STRING        = \'[^\'\n\r]*\'
+
+MULTILINE_MARKER = [^\"\'\s\n\r]+
+MULTILINE_MARKER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
+MULTILINE_MARKER_DQ = "<<"{WHITE_SPACE}*\"{MULTILINE_MARKER}\"
 
 POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
 POD_CLOSE       = \="cut"{FULL_LINE}
@@ -76,7 +90,7 @@ VAR_HASH = [%][$]*{ALFANUM}+
 VAR_GLOB = [*][$]*{ALFANUM}+
 NUMBER = "-"?[0-9_]+(\.[0-9_]+)?
 
-END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
+END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 //%state STRING
 //%state YYINITIAL
@@ -87,7 +101,7 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
 %state PACKAGE_USE_PARAMS
 %state PACKAGE_STATIC_CALL
 %state PACKAGE_INSTANCE_CALL
-%xstate LEX_EOF, LEX_POD
+%xstate LEX_EOF, LEX_POD, LEX_MULTILINE, LEX_MULTILINE_TOKEN
 %state LEX_DEREFERENCE
 %%
 
@@ -124,9 +138,41 @@ END_OF_LINE_COMMENT = "#" {CHAR_ANY}* {LINE_TERMINATOR}?
     }
 }
 
+{MULTILINE_MARKER_SQ}   {prepareForMultiline(PERL_SQ_STRING);return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_DQ}   {prepareForMultiline(PERL_DQ_STRING);return PERL_MULTILINE_MARKER;}
+
+{NEW_LINE}   {
+    if( isWaitingMultiLine() ) // this could be done using lexical state, like prepared or smth
+    {
+        startMultiLine();
+    }
+    return TokenType.NEW_LINE_INDENT;
+}
+
+<LEX_MULTILINE>{
+    {LINE}  {
+        if( isMultilineEnd() || isLastToken())
+        {
+            return endMultiline();
+        }
+        break;
+    }
+    {NEW_LINE}  {
+        if( isLastToken() )
+        {
+            return endMultiline();
+        }
+        break;
+    }
+}
+<LEX_MULTILINE_TOKEN>{
+    .*  {yybegin(YYINITIAL);return PERL_MULTILINE_MARKER;}
+}
+
+
 {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 {CHAR_SEMI}     {yybegin(YYINITIAL);return PERL_SEMI;}
-{WHITE_SPACE}   {return TokenType.WHITE_SPACE;}
+{WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
 "["             {return PERL_LBRACK;}

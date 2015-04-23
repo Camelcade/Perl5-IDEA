@@ -109,14 +109,18 @@ public interface PerlTokenTypes
 	*/
 /* end of import from perly.h *//*
 
-
-
 	/* my experiments with Jlex 	*/
 	IElementType PERL_BAD_CHARACTER = new PerlElement("BAD_CHARACTER");
 
 	IElementType PERL_COMMENT = new PerlComment();
 	IElementType PERL_COMMENT_MULTILINE = new PerlCommentMultiline();
+
 	IElementType PERL_POD = new PerlPod();
+
+	IElementType PERL_MULTILINE_MARKER = new PerlMultilineMarker();
+	IElementType PERL_MULTILINE_XML = new PerlElement("PERL_MULTILINE_XML");
+	IElementType PERL_MULTILINE_HTML = new PerlElement("PERL_MULTILINE_HTML");
+
 
 	IElementType PERL_DQ_STRING = new PerlElement("DQ_STRING");
 	IElementType PERL_SQ_STRING = new PerlElement("SQ_STRING");
@@ -125,9 +129,6 @@ public interface PerlTokenTypes
 	IElementType PERL_STATIC_METHOD_CALL = new PerlElement("PERL_STATIC_METHOD_CALL");
 	IElementType PERL_INSTANCE_METHOD_CALL = new PerlElement("PERL_INSTANCE_METHOD_CALL");
 	IElementType PERL_FUNCTION = new PerlElement("PERL_FUNCTION");
-	IElementType PERL_SYNTAX = new PerlElement("PERL_SYNTAX");
-	IElementType PERL_HANDLE = new PerlElement("PERL_HANDLE");
-	IElementType PERL_MISC = new PerlElement("PERL_MISC");
 
 	IElementType PERL_VARIABLE_SCALAR = new PerlScalar(PerlScopes.PerlVariableScope.MY, false);
 	IElementType PERL_VARIABLE_ARRAY = new PerlArray(PerlScopes.PerlVariableScope.MY, false);

@@ -1,7 +1,9 @@
 package com.perl5.lang.perl.highlighter;
 
+import com.intellij.lexer.HtmlHighlightingLexer;
 import com.intellij.lexer.LayeredLexer;
 import com.intellij.lexer.Lexer;
+import com.intellij.lexer.XmlHighlightingLexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
@@ -28,6 +30,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
 	public static final TextAttributesKey PERL_COMMENT_BLOCK = createTextAttributesKey("PERL_COMMENT_BLOCK", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
+
+	public static final TextAttributesKey PERL_MULTILINE_MARKER = createTextAttributesKey("PERL_MULTILINE_MARKER", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
 
 	public static final TextAttributesKey PERL_POD = createTextAttributesKey("PERL_POD", DefaultLanguageHighlighterColors.DOC_COMMENT);
 
@@ -75,6 +79,16 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		layeredLexer.registerSelfStoppingLayer(
 				new PodLexerAdapter(),
 				new IElementType[]{PerlTokenTypes.PERL_POD},
+				IElementType.EMPTY_ARRAY
+		);
+		layeredLexer.registerSelfStoppingLayer(
+				new HtmlHighlightingLexer(),
+				new IElementType[]{PerlTokenTypes.PERL_MULTILINE_HTML},
+				IElementType.EMPTY_ARRAY
+		);
+		layeredLexer.registerSelfStoppingLayer(
+				new XmlHighlightingLexer(),
+				new IElementType[]{PerlTokenTypes.PERL_MULTILINE_XML},
 				IElementType.EMPTY_ARRAY
 		);
 		return layeredLexer;
