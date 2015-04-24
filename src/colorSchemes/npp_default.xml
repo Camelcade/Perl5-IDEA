@@ -42,6 +42,11 @@
     </option>
     <option name="PERL_NUMBER">
         <value>
+            <option name="FOREGROUND" value="800000"/>
+        </value>
+    </option>
+    <option name="PERL_VERSION">
+        <value>
             <option name="FOREGROUND" value="FF0000"/>
         </value>
     </option>

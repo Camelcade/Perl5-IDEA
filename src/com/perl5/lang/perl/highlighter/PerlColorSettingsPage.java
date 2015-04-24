@@ -44,6 +44,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Single-quoted string", PerlSyntaxHighlighter.PERL_SQ_STRING),
 			new AttributesDescriptor("Double-quoted string", PerlSyntaxHighlighter.PERL_DQ_STRING),
+			new AttributesDescriptor("Version", PerlSyntaxHighlighter.PERL_VERSION),
 			new AttributesDescriptor("Number", PerlSyntaxHighlighter.PERL_NUMBER),
 			new AttributesDescriptor("Dereference", PerlSyntaxHighlighter.PERL_DEREFERENCE),
 			new AttributesDescriptor("Comma", PerlSyntaxHighlighter.PERL_COMMA),
@@ -68,7 +69,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	@NotNull
 	@Override
 	public String getDemoText() {
-		return "package DTL::Fast::Filter;\n" +
+		return "package DTL::Fast::Filter v1.100_00.10;\n" +
 				"use strict; use utf8; use warnings FATAL => 'all'; \n" +
 				"use parent 'DTL::Fast::Entity';\n" +
 				"use Module::Build::YAML;\n" +

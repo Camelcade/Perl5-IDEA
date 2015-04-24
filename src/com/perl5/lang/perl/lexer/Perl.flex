@@ -76,6 +76,8 @@ FULL_LINE       = .*{NEW_LINE}?
 DQ_STRING        = \"[^\"\n\r]*\"
 SQ_STRING        = \'[^\'\n\r]*\'
 
+PERL_OPERATORS = "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor"
+
 MULTILINE_MARKER = [^\"\'\s\n\r ]+
 MULTILINE_MARKER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
 MULTILINE_MARKER_DQ = "<<"{WHITE_SPACE}*\"{MULTILINE_MARKER}\"
@@ -106,6 +108,9 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 //%state STRING
 //%state YYINITIAL
 %xstate LEX_PACKAGE_DEFINITION, LEX_PACKAGE_DEFINITION_VERSION, LEX_PACKAGE_DEFINITION_BLOCK
+%xstate LEX_EOF
+%xstate LEX_POD
+%xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
 
 %state FUNCTION_DEFINITION
 %state PACKAGE_USE
@@ -113,7 +118,6 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 %state PACKAGE_USE_PARAMS
 %state PACKAGE_STATIC_CALL
 %state PACKAGE_INSTANCE_CALL
-%xstate LEX_EOF, LEX_POD, LEX_MULTILINE, LEX_MULTILINE_TOKEN
 %state LEX_DEREFERENCE
 %%
 
@@ -284,56 +288,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     "require"       {yybegin(LEX_REQUIRE);return PerlFunction.getFunctionType(yytext().toString());}
 }
 
-"++"			{return PERL_OPERATOR;}
-"--"			{return PERL_OPERATOR;}
-"**"			{return PERL_OPERATOR;}
-"!"			{return PERL_OPERATOR;}
-"~"			{return PERL_OPERATOR;}
-"\\"			{return PERL_OPERATOR;}
-"+"			{return PERL_OPERATOR;}
-"-"			{return PERL_OPERATOR;}
-"=~"			{return PERL_OPERATOR;}
-"!~"			{return PERL_OPERATOR;}
-"*"			{return PERL_OPERATOR;}
-"/"			{return PERL_OPERATOR;}
-"%"			{return PERL_OPERATOR;}
-"x"			{return PERL_OPERATOR;}
-"<<"			{return PERL_OPERATOR;}
-">>"			{return PERL_OPERATOR;}
-"<"			{return PERL_OPERATOR;}
-">"			{return PERL_OPERATOR;}
-"<="			{return PERL_OPERATOR;}
-">="			{return PERL_OPERATOR;}
-"lt"			{return PERL_OPERATOR;}
-"gt"			{return PERL_OPERATOR;}
-"le"			{return PERL_OPERATOR;}
-"ge"			{return PERL_OPERATOR;}
-"=="			{return PERL_OPERATOR;}
-"!="			{return PERL_OPERATOR;}
-"<=>"			{return PERL_OPERATOR;}
-"eq"			{return PERL_OPERATOR;}
-"ne"			{return PERL_OPERATOR;}
-"cmp"			{return PERL_OPERATOR;}
-"~~"			{return PERL_OPERATOR;}
-"&"			{return PERL_OPERATOR;}
-"|"			{return PERL_OPERATOR;}
-"^"			{return PERL_OPERATOR;}
-"&&"			{return PERL_OPERATOR;}
-"||"			{return PERL_OPERATOR;}
-"//"			{return PERL_OPERATOR;}
-".."			{return PERL_OPERATOR;}
-"..."			{return PERL_OPERATOR;}
-"?"			{return PERL_OPERATOR;}
-":"			{return PERL_OPERATOR;}
-"="			{return PERL_OPERATOR;}
-"+="			{return PERL_OPERATOR;}
-"-="			{return PERL_OPERATOR;}
-"*="			{return PERL_OPERATOR;}
-"not"			{return PERL_OPERATOR;}
-"and"			{return PERL_OPERATOR;}
-"or"			{return PERL_OPERATOR;}
-"xor"			{return PERL_OPERATOR;}
-
+{PERL_OPERATORS}    {return PERL_OPERATOR;}
 {FUNCTION_NAME} { return PerlFunction.getFunctionType(yytext().toString());}
 
 /* error fallback [^] */
