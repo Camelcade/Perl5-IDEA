@@ -131,6 +131,8 @@ public interface PerlTokenTypes
 
 	IElementType PERL_PACKAGE = new PerlTokenType("PERL_PACKAGE");
 	IElementType PERL_PACKAGE_BUILT_IN = new PerlTokenType("PERL_PACKAGE_BUILT_IN");
+	IElementType PERL_PACKAGE_BUILT_IN_PRAGMA = new PerlTokenType("PERL_PACKAGE_BUILT_IN_PRAGMA");
+	IElementType PERL_PACKAGE_BUILT_IN_DEPRECATED = new PerlTokenType("PERL_PACKAGE_BUILT_IN_DEPRECATED");
 
 	IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
 

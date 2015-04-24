@@ -21,6 +21,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
 	public static final TextAttributesKey PERL_BUILT_IN = createTextAttributesKey("PERL_BUILT_IN", DefaultLanguageHighlighterColors.KEYWORD);
+	public static final TextAttributesKey PERL_DEPRECATED = createTextAttributesKey("PERL_DEPRECATED", DefaultLanguageHighlighterColors.KEYWORD);
 
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
 	public static final TextAttributesKey PERL_COMMENT_BLOCK = createTextAttributesKey("PERL_COMMENT_BLOCK", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
@@ -37,6 +38,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	public static final TextAttributesKey PERL_OPERATOR = createTextAttributesKey("PERL_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
 	public static final TextAttributesKey PERL_PACKAGE = createTextAttributesKey("PERL_PACKAGE", DefaultLanguageHighlighterColors.CLASS_NAME);
+	public static final TextAttributesKey PERL_PACKAGE_PRAGMA = createTextAttributesKey("PERL_PACKAGE_PRAGMA", DefaultLanguageHighlighterColors.CLASS_NAME);
 
 	public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
@@ -80,6 +82,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
 		attributesMap.put(PerlTokenTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
 		attributesMap.put(PerlTokenTypes.PERL_PACKAGE_BUILT_IN, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN});
+		attributesMap.put(PerlTokenTypes.PERL_PACKAGE_BUILT_IN_PRAGMA, new TextAttributesKey[]{PERL_PACKAGE_PRAGMA, PERL_BUILT_IN});
+		attributesMap.put(PerlTokenTypes.PERL_PACKAGE_BUILT_IN_DEPRECATED, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN, PERL_DEPRECATED});
+
 		attributesMap.put(PerlTokenTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
 		attributesMap.put(PerlTokenTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
 		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_SCALAR, new TextAttributesKey[]{PERL_SCALAR});

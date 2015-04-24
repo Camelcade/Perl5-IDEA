@@ -41,6 +41,7 @@ public class PerlSyntaxHighlighterLexer extends LayeredLexer
 					IElementType.EMPTY_ARRAY
 			);
 		}
+/*
 		registerSelfStoppingLayer(
 				new FlexAdapter(new _HtmlLexer()),
 				new IElementType[]{PerlTokenTypes.PERL_MULTILINE_HTML},
@@ -51,6 +52,7 @@ public class PerlSyntaxHighlighterLexer extends LayeredLexer
 				new IElementType[]{PerlTokenTypes.PERL_MULTILINE_XML},
 				IElementType.EMPTY_ARRAY
 		);
+*/
 	}
 
 }

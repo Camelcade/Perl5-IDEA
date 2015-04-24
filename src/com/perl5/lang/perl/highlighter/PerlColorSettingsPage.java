@@ -25,12 +25,14 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("POD block", PerlSyntaxHighlighter.PERL_POD),
 
 			new AttributesDescriptor("Built-in decoration", PerlSyntaxHighlighter.PERL_BUILT_IN),
+			new AttributesDescriptor("Deprecation decoration", PerlSyntaxHighlighter.PERL_DEPRECATED),
 
 			new AttributesDescriptor("Funciton", PerlSyntaxHighlighter.PERL_FUNCTION),
 			new AttributesDescriptor("Built in function", PerlSyntaxHighlighter.PERL_FUNCTION_BUILT_IN),
 			new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
 
 			new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),
+			new AttributesDescriptor("Pragma", PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA),
 			new AttributesDescriptor("Scalar", PerlSyntaxHighlighter.PERL_SCALAR),
 			new AttributesDescriptor("Array", PerlSyntaxHighlighter.PERL_ARRAY),
 			new AttributesDescriptor("Hash", PerlSyntaxHighlighter.PERL_HASH),
@@ -69,6 +71,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 		return "package DTL::Fast::Filter;\n" +
 				"use strict; use utf8; use warnings FATAL => 'all'; \n" +
 				"use parent 'DTL::Fast::Entity';\n" +
+				"use Module::Build::YAML;\n" +
 				"\n" +
 				"use DTL::Fast::Template;\n" +
 				"\n" +
