@@ -6,7 +6,10 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.elements.PerlElement;
+import com.perl5.lang.perl.parser.PerlElementTypes;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -28,6 +31,8 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 
 	public static final HashMap<IElementType,TextAttributesKey[]> attributesMap = new HashMap<IElementType,TextAttributesKey[]>();
 
+	private static final PerlSyntaxHighlighter perlHilighter = new PerlSyntaxHighlighter();
+
 	static{
 		attributesMap.put(PodElementTypes.POD_TAG, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TAG});
 		attributesMap.put(PodElementTypes.POD_TEXT, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
@@ -38,25 +43,26 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
-		LayeredLexer layeredLexer = new LayeredLexer(new PodLexerAdapter());
-		layeredLexer.registerSelfStoppingLayer(
-				new PerlLexerAdapter(),
-				new IElementType[]{PodElementTypes.POD_CODE},
-				IElementType.EMPTY_ARRAY
-		);
-		return layeredLexer;
+		return new PodHighlightingLexer();
 	}
 
 	@NotNull
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
 
-		TextAttributesKey[] tokenAttributes = attributesMap.get(tokenType);
+		TextAttributesKey[] tokenAttributes;
 
-		if( tokenAttributes == null )
+		if( tokenType instanceof PerlElement )
 		{
-			tokenAttributes = EMPTY_KEYS;
+			tokenAttributes = perlHilighter.getTokenHighlights(tokenType);
 		}
-		return tokenAttributes;
+		else
+		{
+			tokenAttributes = attributesMap.get(tokenType);
+		}
+
+		return tokenAttributes == null
+				? EMPTY_KEYS
+				: tokenAttributes;
 	}
 }

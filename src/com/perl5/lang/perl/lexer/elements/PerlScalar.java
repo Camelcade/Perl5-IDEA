@@ -1,8 +1,7 @@
 package com.perl5.lang.perl.lexer.elements;
 
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.perl5.lang.perl.highlighter.PerlSyntaxHighlighter;
-import com.perl5.utils.SelfStyled;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlTokenTypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,17 +9,14 @@ import java.util.Arrays;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlScalar extends PerlVariable implements SelfStyled
+public class PerlScalar
 {
-	private static final TextAttributesKey[] attributesKeys = new TextAttributesKey[]{PerlSyntaxHighlighter.PERL_SCALAR};
-	@Override
-	public TextAttributesKey[] getTextAttributesKey()
+	// @todo shouldn't we think about map search
+	public static IElementType getScalarType(String scalar)
 	{
-		return attributesKeys;
-	}
-
-	public PerlScalar(PerlVariableScope scope, boolean isBuiltIn) {
-		super("PERL_SCALAR", scope, isBuiltIn);
+		return BUILT_IN.contains(scalar)
+				? PerlTokenTypes.PERL_VARIABLE_SCALAR_BUILT_IN
+				: PerlTokenTypes.PERL_VARIABLE_SCALAR;
 	}
 
 	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(

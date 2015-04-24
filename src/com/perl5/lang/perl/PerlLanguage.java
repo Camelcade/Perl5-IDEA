@@ -10,7 +10,6 @@ import com.perl5.lang.perl.highlighter.PerlSyntaxHighlighter;
 
 public class PerlLanguage extends Language
 {
-
 	public static final PerlLanguage INSTANCE = new PerlLanguage();
 
 	public PerlLanguage() {

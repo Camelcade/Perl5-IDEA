@@ -11,6 +11,11 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import com.perl5.lang.perl.lexer.elements.PerlFunction;
+import com.perl5.lang.perl.lexer.elements.PerlScalar;
+import com.perl5.lang.perl.lexer.elements.PerlHash;
+import com.perl5.lang.perl.lexer.elements.PerlGlob;
+import com.perl5.lang.perl.lexer.elements.PerlArray;
+import com.perl5.lang.perl.lexer.elements.PerlPackage;
 
 %%
 
@@ -116,7 +121,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
         if( zzMarkedPos == zzEndRead )
         {
             zzCurrentPos = zzStartRead = dataBlockStart;
-            return PERL_COMMENT_MULTILINE;
+            return PERL_COMMENT_BLOCK;
         }
         break;
     }
@@ -192,10 +197,10 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 {NUMBER}        {return PERL_NUMBER;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
-{VAR_SCALAR} {return checkBuiltInScalar();}
-{VAR_HASH} {return checkBuiltInHash();}
-{VAR_ARRAY} {return checkBuiltInArray();}
-{VAR_GLOB} {return checkBuiltInGlob();}
+{VAR_SCALAR} {return PerlScalar.getScalarType(yytext().toString());}
+{VAR_HASH} {return PerlHash.getHashType(yytext().toString());}
+{VAR_ARRAY} {return PerlArray.getArrayType(yytext().toString());}
+{VAR_GLOB} {return PerlGlob.getGlobType(yytext().toString());}
 
 <PACKAGE_USE_PARAMS>
 {
@@ -205,7 +210,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 <PACKAGE_USE>{
     {PACKAGE_NAME}    {
         yybegin(PACKAGE_USE_PARAMS);
-        return checkCorePackage();
+        return PerlPackage.getPackageType(yytext().toString()); // @todo wtf it's not being resolved without package?
     }
 }
 
@@ -214,7 +219,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 }
 
 <FUNCTION_DEFINITION>{
-    {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_USER_FUNCTION;}
+    {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_FUNCTION;}
 }
 
 <PACKAGE_STATIC_CALL>
@@ -245,12 +250,12 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 <YYINITIAL> {
   /* whitespace */
-    "use"			{yybegin(PACKAGE_USE);return PerlFunction.getFunction(yytext().toString());}
-    "no"			{yybegin(PACKAGE_USE); return PerlFunction.getFunction(yytext().toString());}
+    "use"			{yybegin(PACKAGE_USE);return PerlFunction.getFunctionType(yytext().toString());}
+    "no"			{yybegin(PACKAGE_USE); return PerlFunction.getFunctionType(yytext().toString());}
 
-    "sub"			{yybegin(FUNCTION_DEFINITION); return PerlFunction.getFunction(yytext().toString());}
-    "package"       {yybegin(PACKAGE_DEFINITION); return PerlFunction.getFunction(yytext().toString());}
-    "require"       {yybegin(LEX_REQUIRE);return PerlFunction.getFunction(yytext().toString());}
+    "sub"			{yybegin(FUNCTION_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
+    "package"       {yybegin(PACKAGE_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
+    "require"       {yybegin(LEX_REQUIRE);return PerlFunction.getFunctionType(yytext().toString());}
 }
 
 "++"			{return PERL_OPERATOR;}
@@ -303,7 +308,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 "or"			{return PERL_OPERATOR;}
 "xor"			{return PERL_OPERATOR;}
 
-{FUNCTION_NAME} { return PerlFunction.getFunction(yytext().toString());}
+{FUNCTION_NAME} { return PerlFunction.getFunctionType(yytext().toString());}
 
 /* error fallback */
 [^]    { return PERL_BAD_CHARACTER; }

@@ -112,38 +112,41 @@ public interface PerlTokenTypes
 	/* my experiments with Jlex 	*/
 	IElementType PERL_BAD_CHARACTER = new PerlElement("BAD_CHARACTER");
 
-	IElementType PERL_COMMENT = new PerlComment();
-	IElementType PERL_COMMENT_MULTILINE = new PerlCommentMultiline();
+	IElementType PERL_COMMENT = new PerlElement("PERL_COMMENT");
+	IElementType PERL_COMMENT_BLOCK = new PerlElement("PERL_COMMENT_BLOCK");
 
-	IElementType PERL_POD = new PerlPod();
+	IElementType PERL_POD = new PerlElement("PERL_POD");
 
-	IElementType PERL_MULTILINE_MARKER = new PerlMultilineMarker();
+	IElementType PERL_MULTILINE_MARKER = new PerlElement("PERL_MULTILINE_MARKER");
 	IElementType PERL_MULTILINE_XML = new PerlElement("PERL_MULTILINE_XML");
 	IElementType PERL_MULTILINE_HTML = new PerlElement("PERL_MULTILINE_HTML");
 
-
-	IElementType PERL_DQ_STRING = new PerlElement("DQ_STRING");
-	IElementType PERL_SQ_STRING = new PerlElement("SQ_STRING");
-	IElementType PERL_NUMBER = new PerlNumber();
+	IElementType PERL_DQ_STRING = new PerlElement("PERL_DQ_STRING");
+	IElementType PERL_SQ_STRING = new PerlElement("PERL_SQ_STRING");
+	IElementType PERL_NUMBER = new PerlElement("PERL_NUMBER");
 
 	IElementType PERL_STATIC_METHOD_CALL = new PerlElement("PERL_STATIC_METHOD_CALL");
 	IElementType PERL_INSTANCE_METHOD_CALL = new PerlElement("PERL_INSTANCE_METHOD_CALL");
-	IElementType PERL_FUNCTION = new PerlElement("PERL_FUNCTION");
 
-	IElementType PERL_VARIABLE_SCALAR = new PerlScalar(PerlScopes.PerlVariableScope.MY, false);
-	IElementType PERL_VARIABLE_ARRAY = new PerlArray(PerlScopes.PerlVariableScope.MY, false);
-	IElementType PERL_VARIABLE_HASH = new PerlHash(PerlScopes.PerlVariableScope.MY, false);
-	IElementType PERL_VARIABLE_GLOB = new PerlGlob(PerlScopes.PerlVariableScope.MY, false);
+	IElementType PERL_VARIABLE_SCALAR = new PerlElement("PERL_SCALAR");
+	IElementType PERL_VARIABLE_SCALAR_BUILT_IN = new PerlElement("PERL_SCALAR_BUILT_IN");
 
-	IElementType PERL_BUILTIN_VARIABLE_SCALAR = new PerlScalar(PerlScopes.PerlVariableScope.MY, true);
-	IElementType PERL_BUILTIN_VARIABLE_ARRAY = new PerlArray(PerlScopes.PerlVariableScope.MY, true);
-	IElementType PERL_BUILTIN_VARIABLE_HASH = new PerlHash(PerlScopes.PerlVariableScope.MY, true);
-	IElementType PERL_BUILTIN_VARIABLE_GLOB = new PerlGlob(PerlScopes.PerlVariableScope.MY, true);
+	IElementType PERL_VARIABLE_ARRAY = new PerlElement("PERL_ARRAY");
+	IElementType PERL_VARIABLE_ARRAY_BUILT_IN = new PerlElement("PERL_ARRAY_BUILT_IN");
+
+	IElementType PERL_VARIABLE_HASH = new PerlElement("PERL_HASH");
+	IElementType PERL_VARIABLE_HASH_BUILT_IN = new PerlElement("PERL_HASH_BUILT_IN");
+
+	IElementType PERL_VARIABLE_GLOB = new PerlElement("PERL_GLOB");
+	IElementType PERL_VARIABLE_GLOB_BUILT_IN = new PerlElement("PERL_GLOB_BUILT_IN");
+
+	IElementType PERL_FUNCTION = new PerlFunction("PERL_FUNCTION");
+	IElementType PERL_FUNCTION_BUILT_IN = new PerlFunction("PERL_FUNCTION_BUILT_IN");
 
 	IElementType PERL_PACKAGE = new PerlElement("PERL_PACKAGE");
-	IElementType PERL_OPERATOR = new PerlFunctionOperator();
+	IElementType PERL_PACKAGE_BUILT_IN = new PerlElement("PERL_PACKAGE_BUILT_IN");
 
-	IElementType PERL_USER_FUNCTION = new PerlElement("PERL_USER_FUNCTION");
+	IElementType PERL_OPERATOR = new PerlElement("PERL_OPERATOR");
 
 	IElementType PERL_DEREFERENCE = new PerlElement("DEREF");
 	IElementType PERL_DEPACKAGE = new PerlElement("DEPACKAGE");

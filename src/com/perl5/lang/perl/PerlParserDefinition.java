@@ -30,7 +30,7 @@ import java.io.Reader;
 public class PerlParserDefinition implements ParserDefinition, PerlTokenTypes{
 
 	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-	public static final TokenSet COMMENTS = TokenSet.create(PERL_COMMENT, PERL_COMMENT_MULTILINE);
+	public static final TokenSet COMMENTS = TokenSet.create(PERL_COMMENT, PERL_COMMENT_BLOCK);
 
 	public static final IStubFileElementType PERL_FILE = new IStubFileElementType("Perl5", PerlLanguage.INSTANCE);
 

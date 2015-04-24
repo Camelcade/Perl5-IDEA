@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
     {
         // return to the last real code line
         zzCurrentPos = zzStartRead = codeBlockStart;
-        yypushback(zzMarkedPos - lastCodeLineEnd + 1 );
+        yypushback(zzMarkedPos - lastCodeLineEnd );
         yybegin(YYINITIAL);
         return POD_CODE;
     }
@@ -54,7 +54,7 @@ WHITE_SPACE     = [ \t\f]+
 
 TEXT_ANY        = .*
 CODE_LINE       = {WHITE_SPACE}[^\ \t\f\n\r].*{LINE_TERMINATOR}
-EMPTY_LINE      = {WHITE_SPACE}{LINE_TERMINATOR}
+EMPTY_LINE      = {WHITE_SPACE}*{LINE_TERMINATOR}
 
 POD_TAG         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding)
 POD_CLOSE       = \="cut"
@@ -65,30 +65,30 @@ POD_CLOSE       = \="cut"
 <YYINITIAL>{
     {POD_TAG}  {yybegin(LEX_TAG_LINE);return POD_TAG;}
     {POD_CLOSE} {yybegin(LEX_LAST_LINE); return POD_TAG;}
-    {LINE_TERMINATOR} { return POD_NEWLINE;}
+    {EMPTY_LINE} { return POD_NEWLINE;}
     {CODE_LINE} {beginCodeBlock(); break;}
     .   {yypushback(1); yybegin(LEX_POD_LINE); break;}
 }
+
+<LEX_POD_LINE>{
+    {TEXT_ANY} {return POD_TEXT;}
+    {EMPTY_LINE} {yybegin(YYINITIAL); return POD_NEWLINE;}
+}
+
 
 <LEX_CODE>
 {
     {EMPTY_LINE} {break;}
     {CODE_LINE} {markLastCodeLine(); break;}
-    {LINE_TERMINATOR} {break;}
     .   {return endCodeBlock();}
 }
 
 <LEX_TAG_LINE>{
     .* {return POD_TEXT;}
-    {LINE_TERMINATOR} {yybegin(YYINITIAL); return POD_NEWLINE;}
-}
-
-<LEX_POD_LINE>{
-    {TEXT_ANY} {return POD_TEXT;}
-    {LINE_TERMINATOR} {yybegin(YYINITIAL); return POD_NEWLINE;}
+    {EMPTY_LINE} {yybegin(YYINITIAL); return POD_NEWLINE;}
 }
 
 <LEX_LAST_LINE>{
     {TEXT_ANY}  { return POD_TEXT;}
-    {LINE_TERMINATOR} {yybegin(YYINITIAL); return POD_NEWLINE;}
+    {EMPTY_LINE} {yybegin(YYINITIAL); return POD_NEWLINE;}
 }

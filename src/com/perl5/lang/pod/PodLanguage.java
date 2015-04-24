@@ -10,7 +10,6 @@ import com.perl5.lang.pod.highlighter.PodSyntaxHighlighter;
 public class PodLanguage extends Language
 {
 	public static final PodLanguage INSTANCE = new PodLanguage();
-	private PodSyntaxHighlighter syntaxHighlighter = new PodSyntaxHighlighter();
 
 	public PodLanguage() {
 		super("Perl5 POD");

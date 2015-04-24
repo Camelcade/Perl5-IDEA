@@ -20,7 +20,7 @@
     </option>
     <option name="POD_CODE">
         <value>
-            <option name="FOREGROUND" value="000000"/>
+            <option name="FOREGROUND" value="FF0000"/>
             <!--<option name="BACKGROUND" value="fafafa"/>-->
         </value>
     </option>

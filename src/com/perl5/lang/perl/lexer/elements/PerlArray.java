@@ -1,8 +1,7 @@
 package com.perl5.lang.perl.lexer.elements;
 
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.perl5.lang.perl.highlighter.PerlSyntaxHighlighter;
-import com.perl5.utils.SelfStyled;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlTokenTypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,18 +9,14 @@ import java.util.Arrays;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlArray extends PerlVariable implements SelfStyled
+public class PerlArray
 {
-	private static final TextAttributesKey[] attributesKeys = new TextAttributesKey[]{PerlSyntaxHighlighter.PERL_ARRAY};
-
-	public PerlArray(PerlVariableScope scope, boolean isBuiltIn) {
-		super("PERL_ARRAY", scope, isBuiltIn);
-	}
-
-	@Override
-	public TextAttributesKey[] getTextAttributesKey()
+	// @todo shouldn't we think about map search
+	public static IElementType getArrayType(String array)
 	{
-		return attributesKeys;
+		return BUILT_IN.contains(array)
+				? PerlTokenTypes.PERL_VARIABLE_ARRAY_BUILT_IN
+				: PerlTokenTypes.PERL_VARIABLE_ARRAY;
 	}
 
 	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(

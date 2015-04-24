@@ -7,23 +7,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Created by hurricup on 19.04.2015.
+ * Created by hurricup on 24.04.2015.
  */
-public class PerlGlob
+public class PerlPackage
 {
 	// @todo shouldn't we think about map search
-	public static IElementType getGlobType(String glob)
+	public static IElementType getPackageType(String packageName)
 	{
-		return BUILT_IN.contains(glob)
-				? PerlTokenTypes.PERL_VARIABLE_GLOB_BUILT_IN
-				: PerlTokenTypes.PERL_VARIABLE_GLOB;
+		return BUILT_IN.contains(packageName)
+				? PerlTokenTypes.PERL_PACKAGE_BUILT_IN
+				: PerlTokenTypes.PERL_PACKAGE;
 	}
 
 	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
-			"*ARGV",
-			"*STDERR",
-			"*STDOUT",
-			"*ARGVOUT",
-			"*STDIN"
+			"utf8",
+			"Scalar::Util"
 	));
 }

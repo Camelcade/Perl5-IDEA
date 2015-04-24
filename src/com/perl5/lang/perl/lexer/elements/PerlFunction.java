@@ -1,6 +1,7 @@
 package com.perl5.lang.perl.lexer.elements;
 
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlTokenTypes;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,24 +11,21 @@ import java.util.Arrays;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlFunction extends PerlElement
+public class PerlFunction extends PerlElement implements PerlTokenTypes
 {
 	public PerlFunction(@NotNull @NonNls String debugName) {
 		super(debugName);
 	}
 
-	private static final PerlFunctionBuiltIn perlFunctionBuiltIn = new PerlFunctionBuiltIn();
-	private static final PerlFunctionUser perlFunctionUser = new PerlFunctionUser();
-
-	public static IElementType getFunction(String token)
+	// @todo shouldn't we think about map search
+	public static IElementType getFunctionType(String function)
 	{
-		return BUILT_IN.contains(token)
-			? perlFunctionBuiltIn
-			: perlFunctionUser;
+		return BUILT_IN.contains(function)
+				? PERL_FUNCTION_BUILT_IN
+				: PERL_FUNCTION;
 	}
 
-	// @todo shouldn't we think about map search
-	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
+	private static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
 	// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
 			"chomp",
