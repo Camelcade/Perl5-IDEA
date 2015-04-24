@@ -2,8 +2,9 @@ package com.perl5.lang.perl.highlighter;
 
 import com.intellij.lexer.LayeredLexer;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
-import com.perl5.lang.perl.lexer.PerlTokenTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.highlighter.PodHighlightingLexer;
 
 /**
@@ -33,7 +34,7 @@ public class PerlHighlightningLexer extends LayeredLexer
 		{
 			registerSelfStoppingLayer(
 				new PodHighlightingLexer(),
-				new IElementType[]{PerlTokenTypes.PERL_POD},
+				new IElementType[]{PerlElementTypes.PERL_POD},
 				IElementType.EMPTY_ARRAY
 			);
 		}

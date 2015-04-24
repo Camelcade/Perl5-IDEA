@@ -21,7 +21,7 @@ import com.perl5.lang.perl.lexer.helpers.PerlPackage;
 
 %class PerlLexer
 %extends PerlLexerProto
-%implements FlexLexer, PerlTokenTypes
+%implements FlexLexer, PerlElementTypes
 %unicode
 %public
 

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes
+public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 {
 	// JFlex generated methods
 	public abstract CharSequence yytext();

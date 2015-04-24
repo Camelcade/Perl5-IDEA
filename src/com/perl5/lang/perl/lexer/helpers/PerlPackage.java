@@ -1,7 +1,7 @@
 package com.perl5.lang.perl.lexer.helpers;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlTokenTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,18 +10,18 @@ import java.util.Arrays;
  * Created by hurricup on 24.04.2015.
  */
 // @todo this class should be auto-generated from Module::CoreList and has same functionality, like version and deprication control
-public class PerlPackage
+public class PerlPackage implements PerlElementTypes
 {
 	// @todo shouldn't we think about map search
 	public static IElementType getPackageType(String packageName)
 	{
 		return BUILT_IN.contains(packageName)
-				? PerlTokenTypes.PERL_PACKAGE_BUILT_IN
+				? PERL_PACKAGE_BUILT_IN
 				: BUILT_IN_PRAGMA.contains(packageName)
-					? PerlTokenTypes.PERL_PACKAGE_BUILT_IN_PRAGMA
+					? PERL_PACKAGE_BUILT_IN_PRAGMA
 					: BUILT_IN_DEPRECATED.contains(packageName)
-						? PerlTokenTypes.PERL_PACKAGE_BUILT_IN_DEPRECATED
-						: PerlTokenTypes.PERL_PACKAGE;
+						? PERL_PACKAGE_BUILT_IN_DEPRECATED
+						: PERL_PACKAGE;
 	}
 
 	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(

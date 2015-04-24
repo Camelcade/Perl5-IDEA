@@ -5,7 +5,7 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlTokenTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodElementType;
 import com.perl5.lang.pod.highlighter.PodSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
@@ -59,44 +59,44 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	private static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<IElementType, TextAttributesKey[]>();
 
 	static{
-		attributesMap.put(PerlTokenTypes.PERL_COMMENT, new TextAttributesKey[]{PERL_COMMENT});
-		attributesMap.put(PerlTokenTypes.PERL_COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
+		attributesMap.put(PerlElementTypes.PERL_COMMENT, new TextAttributesKey[]{PERL_COMMENT});
+		attributesMap.put(PerlElementTypes.PERL_COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
-		attributesMap.put(PerlTokenTypes.PERL_STATIC_METHOD_CALL, new TextAttributesKey[]{PERL_STATIC_METHOD_CALL});
+		attributesMap.put(PerlElementTypes.PERL_STATIC_METHOD_CALL, new TextAttributesKey[]{PERL_STATIC_METHOD_CALL});
 
-		attributesMap.put(PerlTokenTypes.PERL_SQ_STRING, new TextAttributesKey[]{PERL_SQ_STRING});
-		attributesMap.put(PerlTokenTypes.PERL_DQ_STRING, new TextAttributesKey[]{PERL_DQ_STRING});
-		attributesMap.put(PerlTokenTypes.PERL_NUMBER, new TextAttributesKey[]{PERL_NUMBER});
-		attributesMap.put(PerlTokenTypes.PERL_MULTILINE_MARKER, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
+		attributesMap.put(PerlElementTypes.PERL_SQ_STRING, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.PERL_DQ_STRING, new TextAttributesKey[]{PERL_DQ_STRING});
+		attributesMap.put(PerlElementTypes.PERL_NUMBER, new TextAttributesKey[]{PERL_NUMBER});
+		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
 
-		attributesMap.put(PerlTokenTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
-		attributesMap.put(PerlTokenTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
-		attributesMap.put(PerlTokenTypes.PERL_LBRACE, new TextAttributesKey[]{PERL_BRACE});
-		attributesMap.put(PerlTokenTypes.PERL_RBRACE, new TextAttributesKey[]{PERL_BRACE});
-		attributesMap.put(PerlTokenTypes.PERL_LBRACK, new TextAttributesKey[]{PERL_BRACK});
-		attributesMap.put(PerlTokenTypes.PERL_RBRACK, new TextAttributesKey[]{PERL_BRACK});
-		attributesMap.put(PerlTokenTypes.PERL_LPAREN, new TextAttributesKey[]{PERL_PAREN});
-		attributesMap.put(PerlTokenTypes.PERL_RPAREN, new TextAttributesKey[]{PERL_PAREN});
+		attributesMap.put(PerlElementTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
+		attributesMap.put(PerlElementTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
+		attributesMap.put(PerlElementTypes.PERL_LBRACE, new TextAttributesKey[]{PERL_BRACE});
+		attributesMap.put(PerlElementTypes.PERL_RBRACE, new TextAttributesKey[]{PERL_BRACE});
+		attributesMap.put(PerlElementTypes.PERL_LBRACK, new TextAttributesKey[]{PERL_BRACK});
+		attributesMap.put(PerlElementTypes.PERL_RBRACK, new TextAttributesKey[]{PERL_BRACK});
+		attributesMap.put(PerlElementTypes.PERL_LPAREN, new TextAttributesKey[]{PERL_PAREN});
+		attributesMap.put(PerlElementTypes.PERL_RPAREN, new TextAttributesKey[]{PERL_PAREN});
 
-		attributesMap.put(PerlTokenTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 
-		attributesMap.put(PerlTokenTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
-		attributesMap.put(PerlTokenTypes.PERL_PACKAGE_BUILT_IN, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN});
-		attributesMap.put(PerlTokenTypes.PERL_PACKAGE_BUILT_IN_PRAGMA, new TextAttributesKey[]{PERL_PACKAGE_PRAGMA, PERL_BUILT_IN});
-		attributesMap.put(PerlTokenTypes.PERL_PACKAGE_BUILT_IN_DEPRECATED, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN, PERL_DEPRECATED});
+		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
+		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN_PRAGMA, new TextAttributesKey[]{PERL_PACKAGE_PRAGMA, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN_DEPRECATED, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN, PERL_DEPRECATED});
 
-		attributesMap.put(PerlTokenTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
-		attributesMap.put(PerlTokenTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
-		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
-		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_SCALAR_BUILT_IN, new TextAttributesKey[]{PERL_SCALAR, PERL_BUILT_IN});
-		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
-		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_ARRAY_BUILT_IN, new TextAttributesKey[]{PERL_ARRAY, PERL_BUILT_IN});
-		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_HASH, new TextAttributesKey[]{PERL_HASH});
-		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_HASH_BUILT_IN, new TextAttributesKey[]{PERL_HASH, PERL_BUILT_IN});
-		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_GLOB, new TextAttributesKey[]{PERL_GLOB});
-		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_GLOB_BUILT_IN, new TextAttributesKey[]{PERL_GLOB, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
+		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_VARIABLE_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+		attributesMap.put(PerlElementTypes.PERL_VARIABLE_SCALAR_BUILT_IN, new TextAttributesKey[]{PERL_SCALAR, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_VARIABLE_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
+		attributesMap.put(PerlElementTypes.PERL_VARIABLE_ARRAY_BUILT_IN, new TextAttributesKey[]{PERL_ARRAY, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_VARIABLE_HASH, new TextAttributesKey[]{PERL_HASH});
+		attributesMap.put(PerlElementTypes.PERL_VARIABLE_HASH_BUILT_IN, new TextAttributesKey[]{PERL_HASH, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_VARIABLE_GLOB, new TextAttributesKey[]{PERL_GLOB});
+		attributesMap.put(PerlElementTypes.PERL_VARIABLE_GLOB_BUILT_IN, new TextAttributesKey[]{PERL_GLOB, PERL_BUILT_IN});
 
-		attributesMap.put(PerlTokenTypes.PERL_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
+		attributesMap.put(PerlElementTypes.PERL_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
 	}
 
 	@NotNull

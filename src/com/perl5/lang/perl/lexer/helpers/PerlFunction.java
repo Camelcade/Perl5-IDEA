@@ -2,7 +2,7 @@ package com.perl5.lang.perl.lexer.helpers;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlTokenType;
-import com.perl5.lang.perl.lexer.PerlTokenTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,12 +12,8 @@ import java.util.Arrays;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlFunction extends PerlTokenType implements PerlTokenTypes
+public class PerlFunction implements PerlElementTypes
 {
-	public PerlFunction(@NotNull @NonNls String debugName) {
-		super(debugName);
-	}
-
 	// @todo shouldn't we think about map search
 	public static IElementType getFunctionType(String function)
 	{
