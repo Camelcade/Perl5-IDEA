@@ -5,8 +5,10 @@ package com.perl5.lang.perl.lexer;
  */
 
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.helpers.*;
+import com.perl5.lang.pod.PodLanguage;
 
 public interface PerlTokenTypes
 {
@@ -102,6 +104,7 @@ public interface PerlTokenTypes
 	IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
 
 	IElementType PERL_POD = new PerlTokenType("PERL_POD");
+//	IElementType PERL_POD = new ILazyParseableElementType("PERL_POD", PodLanguage.INSTANCE);
 
 	IElementType PERL_MULTILINE_MARKER = new PerlTokenType("PERL_MULTILINE_MARKER");
 	IElementType PERL_MULTILINE_XML = new PerlTokenType("PERL_MULTILINE_XML");

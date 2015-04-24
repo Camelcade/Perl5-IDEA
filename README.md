@@ -1,8 +1,6 @@
 #Perl5 plugin for IntellijIDEA - Camelcade
 
-This is my attempt to build aplugin for IDEA that will support Perl5 language.
-
-I used Groovy IDEA plugin as an example. 
+This is my attempt to build a plugin for IDEA that will support Perl5 language.
 
 This project is currently in development, and if you want to participate - welcome.
 

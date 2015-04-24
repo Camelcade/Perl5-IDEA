@@ -102,7 +102,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
-		return new PerlSyntaxHighlighterLexer();
+		return new PerlHighlightningLexer();
 	}
 
 	@NotNull

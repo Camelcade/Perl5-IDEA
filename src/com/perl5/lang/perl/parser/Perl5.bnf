@@ -1,24 +1,24 @@
 {
-  parserClass="com.perl5.lang.perl.parser.PerlBNFParser"
-
+  parserClass="com.perl5.lang.perl.parser.PerlParser"
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
   psiClassPrefix="Perl"
   psiImplClassSuffix="Impl"
   psiPackage="com.perl5.lang.perl.psi"
-//  psiImplPackage="com.perl5.lang.perl..psi.impl"
+  psiImplPackage="com.perl5.lang.perl.psi.impl"
 
-  elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlTokenTypes"
-  elementTypeClass="com.perl5.lang.perl.PerlTokenType"
+  elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlTokenTypesBNF"
+  elementTypeClass="com.perl5.lang.perl.PerlElementType"
   tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
+
+  tokens=[
+    PERL_COMMENT
+    PERL_COMMENT_BLOCK
+    PERL_CUSTOM
+  ]
+
 }
 
 perlFile ::= item_*
 
-item_ ::= (assignment)
-
-PERL_ASSIGNMENT ::= variable "=" variable PERL_SEMI
-
-variable ::= PERL_SCALAR|PERL_ARRAY|PERL_HASH|PERL_GLOB
-
-PERL_COMMENT ::= new
+private item_ ::= "something"

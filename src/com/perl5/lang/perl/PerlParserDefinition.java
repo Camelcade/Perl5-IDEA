@@ -16,11 +16,10 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlTokenTypes;
+import com.perl5.lang.perl.lexer.PerlTokenTypesBNF;
 import com.perl5.lang.perl.parser.PerlParser;
-import com.perl5.lang.perl.parser.PerlPsiCreator;
 import com.perl5.lang.perl.psi.PsiFilePerl;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.tree.IStubFileElementType;
@@ -77,6 +76,6 @@ public class PerlParserDefinition implements ParserDefinition, PerlTokenTypes{
 
 	@NotNull
 	public PsiElement createElement(ASTNode node) {
-		return PerlPsiCreator.createElement(node);
+		return PerlTokenTypesBNF.Factory.createElement(node);
 	}
 }

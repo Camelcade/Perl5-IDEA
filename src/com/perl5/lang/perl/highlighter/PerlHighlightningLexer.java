@@ -1,23 +1,19 @@
 package com.perl5.lang.perl.highlighter;
 
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.LayeredLexer;
-import com.intellij.lexer.XmlHighlightingLexer;
-import com.intellij.lexer._HtmlLexer;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlTokenTypes;
 import com.perl5.lang.pod.highlighter.PodHighlightingLexer;
-import com.perl5.lang.pod.lexer.PodLexerAdapter;
 
 /**
  * Created by hurricup on 24.04.2015.
  */
-public class PerlSyntaxHighlighterLexer extends LayeredLexer
+public class PerlHighlightningLexer extends LayeredLexer
 {
 	protected boolean hasNestedPodLexer = true;
 
-	public PerlSyntaxHighlighterLexer(boolean nestedPod)
+	public PerlHighlightningLexer(boolean nestedPod)
 	{
 		super(new PerlLexerAdapter());
 		hasNestedPodLexer = nestedPod;
@@ -25,10 +21,10 @@ public class PerlSyntaxHighlighterLexer extends LayeredLexer
 	}
 
 
-	public PerlSyntaxHighlighterLexer()
+	public PerlHighlightningLexer()
 	{
 		super(new PerlLexerAdapter());
-
+		registerSublexers();
 	}
 
 	protected void registerSublexers()
@@ -36,9 +32,9 @@ public class PerlSyntaxHighlighterLexer extends LayeredLexer
 		if( hasNestedPodLexer )
 		{
 			registerSelfStoppingLayer(
-					new PodHighlightingLexer(),
-					new IElementType[]{PerlTokenTypes.PERL_POD},
-					IElementType.EMPTY_ARRAY
+				new PodHighlightingLexer(),
+				new IElementType[]{PerlTokenTypes.PERL_POD},
+				IElementType.EMPTY_ARRAY
 			);
 		}
 /*
