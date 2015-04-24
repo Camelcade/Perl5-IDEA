@@ -1,17 +1,13 @@
 package com.perl5.lang.pod.highlighter;
 
-import com.intellij.lexer.LayeredLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.lexer.PerlLexerAdapter;
-import com.perl5.lang.perl.lexer.elements.PerlElement;
-import com.perl5.lang.perl.parser.PerlElementTypes;
+import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -52,7 +48,7 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 
 		TextAttributesKey[] tokenAttributes;
 
-		if( tokenType instanceof PerlElement )
+		if( tokenType instanceof PerlTokenType)
 		{
 			tokenAttributes = perlHilighter.getTokenHighlights(tokenType);
 		}

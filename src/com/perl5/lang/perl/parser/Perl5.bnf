@@ -9,8 +9,8 @@
 //  psiImplPackage="com.perl5.lang.perl..psi.impl"
 
   elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlTokenTypes"
-  elementTypeClass="com.perl5.lang.perl.lexer.elements.PerlElement"
-  tokenTypeClass="com.perl5.lang.perl.lexer.elements.PerlElement"
+  elementTypeClass="com.perl5.lang.perl.PerlTokenType"
+  tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
 }
 
 perlFile ::= item_*

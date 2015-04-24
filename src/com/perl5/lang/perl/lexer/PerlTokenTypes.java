@@ -4,23 +4,9 @@ package com.perl5.lang.perl.lexer;
  * Created by hurricup on 12.04.2015.
  */
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.FlexLexer;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.ILazyParseableElementType;
-import com.perl5.lang.perl.lexer.elements.*;
-import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.lexer.PodLexer;
-import com.perl5.lang.pod.lexer.PodLexerAdapter;
-import com.perl5.lang.pod.parser.PodParser;
-import org.jetbrains.annotations.Nullable;
+import com.perl5.lang.perl.PerlTokenType;
+import com.perl5.lang.perl.lexer.helpers.*;
 
 public interface PerlTokenTypes
 {
@@ -110,58 +96,58 @@ public interface PerlTokenTypes
 /* end of import from perly.h *//*
 
 	/* my experiments with Jlex 	*/
-	IElementType PERL_BAD_CHARACTER = new PerlElement("BAD_CHARACTER");
+	IElementType PERL_BAD_CHARACTER = new PerlTokenType("BAD_CHARACTER");
 
-	IElementType PERL_COMMENT = new PerlElement("PERL_COMMENT");
-	IElementType PERL_COMMENT_BLOCK = new PerlElement("PERL_COMMENT_BLOCK");
+	IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
+	IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
 
-	IElementType PERL_POD = new PerlElement("PERL_POD");
+	IElementType PERL_POD = new PerlTokenType("PERL_POD");
 
-	IElementType PERL_MULTILINE_MARKER = new PerlElement("PERL_MULTILINE_MARKER");
-	IElementType PERL_MULTILINE_XML = new PerlElement("PERL_MULTILINE_XML");
-	IElementType PERL_MULTILINE_HTML = new PerlElement("PERL_MULTILINE_HTML");
+	IElementType PERL_MULTILINE_MARKER = new PerlTokenType("PERL_MULTILINE_MARKER");
+	IElementType PERL_MULTILINE_XML = new PerlTokenType("PERL_MULTILINE_XML");
+	IElementType PERL_MULTILINE_HTML = new PerlTokenType("PERL_MULTILINE_HTML");
 
-	IElementType PERL_DQ_STRING = new PerlElement("PERL_DQ_STRING");
-	IElementType PERL_SQ_STRING = new PerlElement("PERL_SQ_STRING");
-	IElementType PERL_NUMBER = new PerlElement("PERL_NUMBER");
+	IElementType PERL_DQ_STRING = new PerlTokenType("PERL_DQ_STRING");
+	IElementType PERL_SQ_STRING = new PerlTokenType("PERL_SQ_STRING");
+	IElementType PERL_NUMBER = new PerlTokenType("PERL_NUMBER");
 
-	IElementType PERL_STATIC_METHOD_CALL = new PerlElement("PERL_STATIC_METHOD_CALL");
-	IElementType PERL_INSTANCE_METHOD_CALL = new PerlElement("PERL_INSTANCE_METHOD_CALL");
+	IElementType PERL_STATIC_METHOD_CALL = new PerlTokenType("PERL_STATIC_METHOD_CALL");
+	IElementType PERL_INSTANCE_METHOD_CALL = new PerlTokenType("PERL_INSTANCE_METHOD_CALL");
 
-	IElementType PERL_VARIABLE_SCALAR = new PerlElement("PERL_SCALAR");
-	IElementType PERL_VARIABLE_SCALAR_BUILT_IN = new PerlElement("PERL_SCALAR_BUILT_IN");
+	IElementType PERL_VARIABLE_SCALAR = new PerlTokenType("PERL_SCALAR");
+	IElementType PERL_VARIABLE_SCALAR_BUILT_IN = new PerlTokenType("PERL_SCALAR_BUILT_IN");
 
-	IElementType PERL_VARIABLE_ARRAY = new PerlElement("PERL_ARRAY");
-	IElementType PERL_VARIABLE_ARRAY_BUILT_IN = new PerlElement("PERL_ARRAY_BUILT_IN");
+	IElementType PERL_VARIABLE_ARRAY = new PerlTokenType("PERL_ARRAY");
+	IElementType PERL_VARIABLE_ARRAY_BUILT_IN = new PerlTokenType("PERL_ARRAY_BUILT_IN");
 
-	IElementType PERL_VARIABLE_HASH = new PerlElement("PERL_HASH");
-	IElementType PERL_VARIABLE_HASH_BUILT_IN = new PerlElement("PERL_HASH_BUILT_IN");
+	IElementType PERL_VARIABLE_HASH = new PerlTokenType("PERL_HASH");
+	IElementType PERL_VARIABLE_HASH_BUILT_IN = new PerlTokenType("PERL_HASH_BUILT_IN");
 
-	IElementType PERL_VARIABLE_GLOB = new PerlElement("PERL_GLOB");
-	IElementType PERL_VARIABLE_GLOB_BUILT_IN = new PerlElement("PERL_GLOB_BUILT_IN");
+	IElementType PERL_VARIABLE_GLOB = new PerlTokenType("PERL_GLOB");
+	IElementType PERL_VARIABLE_GLOB_BUILT_IN = new PerlTokenType("PERL_GLOB_BUILT_IN");
 
 	IElementType PERL_FUNCTION = new PerlFunction("PERL_FUNCTION");
 	IElementType PERL_FUNCTION_BUILT_IN = new PerlFunction("PERL_FUNCTION_BUILT_IN");
 
-	IElementType PERL_PACKAGE = new PerlElement("PERL_PACKAGE");
-	IElementType PERL_PACKAGE_BUILT_IN = new PerlElement("PERL_PACKAGE_BUILT_IN");
+	IElementType PERL_PACKAGE = new PerlTokenType("PERL_PACKAGE");
+	IElementType PERL_PACKAGE_BUILT_IN = new PerlTokenType("PERL_PACKAGE_BUILT_IN");
 
-	IElementType PERL_OPERATOR = new PerlElement("PERL_OPERATOR");
+	IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
 
-	IElementType PERL_DEREFERENCE = new PerlElement("DEREF");
-	IElementType PERL_DEPACKAGE = new PerlElement("DEPACKAGE");
+	IElementType PERL_DEREFERENCE = new PerlTokenType("DEREF");
+	IElementType PERL_DEPACKAGE = new PerlTokenType("DEPACKAGE");
 
-	IElementType PERL_COMMA = new PerlElement("COMMA");
-	IElementType PERL_LBRACE = new PerlElement("LBRACE"); 	// {}
-	IElementType PERL_RBRACE = new PerlElement("RBRACE");
-	IElementType PERL_LBRACK = new PerlElement("LBRACK");	// []
-	IElementType PERL_RBRACK = new PerlElement("RBRACK");
-	IElementType PERL_LPAREN = new PerlElement("LPAREN");	// ()
-	IElementType PERL_RPAREN = new PerlElement("RPAREN");
-	IElementType PERL_LCURLY = new PerlElement("BLOCK");
-	IElementType PERL_RCURLY = new PerlElement("ENDBLOCK");
-	IElementType PERL_SEMI = new PerlElement("SEMI");
+	IElementType PERL_COMMA = new PerlTokenType("COMMA");
+	IElementType PERL_LBRACE = new PerlTokenType("LBRACE"); 	// {}
+	IElementType PERL_RBRACE = new PerlTokenType("RBRACE");
+	IElementType PERL_LBRACK = new PerlTokenType("LBRACK");	// []
+	IElementType PERL_RBRACK = new PerlTokenType("RBRACK");
+	IElementType PERL_LPAREN = new PerlTokenType("LPAREN");	// ()
+	IElementType PERL_RPAREN = new PerlTokenType("RPAREN");
+	IElementType PERL_LCURLY = new PerlTokenType("BLOCK");
+	IElementType PERL_RCURLY = new PerlTokenType("ENDBLOCK");
+	IElementType PERL_SEMI = new PerlTokenType("SEMI");
 
-	IElementType PERL_NEWLINE = new PerlElement("NEW_LINE");
+	IElementType PERL_NEWLINE = new PerlTokenType("NEW_LINE");
 
 }

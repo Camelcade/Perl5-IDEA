@@ -6,8 +6,8 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlTokenTypes;
+import com.perl5.lang.pod.PodElementType;
 import com.perl5.lang.pod.highlighter.PodSyntaxHighlighter;
-import com.perl5.lang.pod.lexer.PodElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -32,6 +32,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey PERL_INSTANCE_METHOD_CALL = createTextAttributesKey("PERL_INSTANCE_METHOD_CALL", DefaultLanguageHighlighterColors.FUNCTION_CALL);
 	public static final TextAttributesKey PERL_STATIC_METHOD_CALL = createTextAttributesKey("PERL_STATIC_METHOD_CALL", DefaultLanguageHighlighterColors.FUNCTION_CALL);
 
+	public static final TextAttributesKey PERL_FUNCTION_BUILT_IN = createTextAttributesKey("PERL_FUNCTION_BUILT_IN", DefaultLanguageHighlighterColors.KEYWORD);
 	public static final TextAttributesKey PERL_FUNCTION = createTextAttributesKey("PERL_FUNCTION", DefaultLanguageHighlighterColors.KEYWORD);
 
 	public static final TextAttributesKey PERL_OPERATOR = createTextAttributesKey("PERL_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
@@ -65,7 +66,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		attributesMap.put(PerlTokenTypes.PERL_DQ_STRING, new TextAttributesKey[]{PERL_DQ_STRING});
 		attributesMap.put(PerlTokenTypes.PERL_NUMBER, new TextAttributesKey[]{PERL_NUMBER});
 		attributesMap.put(PerlTokenTypes.PERL_MULTILINE_MARKER, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
-		attributesMap.put(PerlTokenTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR});
 
 		attributesMap.put(PerlTokenTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
 		attributesMap.put(PerlTokenTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
@@ -75,10 +75,13 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		attributesMap.put(PerlTokenTypes.PERL_RBRACK, new TextAttributesKey[]{PERL_BRACK});
 		attributesMap.put(PerlTokenTypes.PERL_LPAREN, new TextAttributesKey[]{PERL_PAREN});
 		attributesMap.put(PerlTokenTypes.PERL_RPAREN, new TextAttributesKey[]{PERL_PAREN});
-		attributesMap.put(PerlTokenTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
 
+		attributesMap.put(PerlTokenTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
+
+		attributesMap.put(PerlTokenTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
+		attributesMap.put(PerlTokenTypes.PERL_PACKAGE_BUILT_IN, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN});
 		attributesMap.put(PerlTokenTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
-		attributesMap.put(PerlTokenTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION, PERL_BUILT_IN});
+		attributesMap.put(PerlTokenTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
 		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_SCALAR_BUILT_IN, new TextAttributesKey[]{PERL_SCALAR, PERL_BUILT_IN});
 		attributesMap.put(PerlTokenTypes.PERL_VARIABLE_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
@@ -103,7 +106,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
 		TextAttributesKey[] tokenAttributes;
 
-		if (tokenType instanceof PodElement )
+		if (tokenType instanceof PodElementType)
 		{
 			tokenAttributes = podSyntaxHighlighter.getTokenHighlights(tokenType);
 		}

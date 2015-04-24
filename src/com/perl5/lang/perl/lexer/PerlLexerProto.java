@@ -2,10 +2,6 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.elements.PerlArray;
-import com.perl5.lang.perl.lexer.elements.PerlGlob;
-import com.perl5.lang.perl.lexer.elements.PerlHash;
-import com.perl5.lang.perl.lexer.elements.PerlScalar;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

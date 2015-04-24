@@ -55,6 +55,11 @@
             <option name="FOREGROUND" value="0000FF"/>
         </value>
     </option>
+    <option name="PERL_BUILT_IN">
+        <value>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
     <option name="PERL_FUNCTION_USER">
         <value>
             <option name="FOREGROUND" value="ff1493"/>

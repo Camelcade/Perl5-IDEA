@@ -1,4 +1,4 @@
-package com.perl5.lang.perl.lexer.elements;
+package com.perl5.lang.perl.lexer.helpers;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlTokenTypes;
@@ -21,6 +21,9 @@ public class PerlPackage
 
 	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
 			"utf8",
-			"Scalar::Util"
+			"strict",
+			"Exporter",
+			"Scalar::Util",
+			"warnings"
 	));
 }

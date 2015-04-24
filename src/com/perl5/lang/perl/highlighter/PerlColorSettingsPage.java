@@ -27,12 +27,14 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Built-in decoration", PerlSyntaxHighlighter.PERL_BUILT_IN),
 
 			new AttributesDescriptor("Funciton", PerlSyntaxHighlighter.PERL_FUNCTION),
+			new AttributesDescriptor("Built in function", PerlSyntaxHighlighter.PERL_FUNCTION_BUILT_IN),
+			new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
+
 			new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),
 			new AttributesDescriptor("Scalar", PerlSyntaxHighlighter.PERL_SCALAR),
 			new AttributesDescriptor("Array", PerlSyntaxHighlighter.PERL_ARRAY),
 			new AttributesDescriptor("Hash", PerlSyntaxHighlighter.PERL_HASH),
 			new AttributesDescriptor("GLOB", PerlSyntaxHighlighter.PERL_GLOB),
-			new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
 
 			new AttributesDescriptor("Static method call", PerlSyntaxHighlighter.PERL_STATIC_METHOD_CALL),
 			new AttributesDescriptor("Instance method call", PerlSyntaxHighlighter.PERL_INSTANCE_METHOD_CALL),

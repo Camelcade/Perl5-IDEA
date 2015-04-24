@@ -10,12 +10,12 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
-import com.perl5.lang.perl.lexer.elements.PerlFunction;
-import com.perl5.lang.perl.lexer.elements.PerlScalar;
-import com.perl5.lang.perl.lexer.elements.PerlHash;
-import com.perl5.lang.perl.lexer.elements.PerlGlob;
-import com.perl5.lang.perl.lexer.elements.PerlArray;
-import com.perl5.lang.perl.lexer.elements.PerlPackage;
+import com.perl5.lang.perl.lexer.helpers.PerlFunction;
+import com.perl5.lang.perl.lexer.helpers.PerlScalar;
+import com.perl5.lang.perl.lexer.helpers.PerlHash;
+import com.perl5.lang.perl.lexer.helpers.PerlGlob;
+import com.perl5.lang.perl.lexer.helpers.PerlArray;
+import com.perl5.lang.perl.lexer.helpers.PerlPackage;
 
 %%
 

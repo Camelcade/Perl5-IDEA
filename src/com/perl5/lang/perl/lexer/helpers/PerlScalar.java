@@ -1,4 +1,4 @@
-package com.perl5.lang.perl.lexer.elements;
+package com.perl5.lang.perl.lexer.helpers;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlTokenTypes;

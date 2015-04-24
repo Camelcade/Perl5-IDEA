@@ -1,6 +1,7 @@
-package com.perl5.lang.perl.lexer.elements;
+package com.perl5.lang.perl.lexer.helpers;
 
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlTokenTypes;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -11,7 +12,7 @@ import java.util.Arrays;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlFunction extends PerlElement implements PerlTokenTypes
+public class PerlFunction extends PerlTokenType implements PerlTokenTypes
 {
 	public PerlFunction(@NotNull @NonNls String debugName) {
 		super(debugName);
