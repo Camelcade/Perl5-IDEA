@@ -8,22 +8,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by hurricup on 19.04.2015.
  */
 public class PerlFunction implements PerlElementTypes
 {
-	// @todo shouldn't we think about map search
-	public static IElementType getFunctionType(String function)
-	{
-		return BUILT_IN.contains(function)
-				? PERL_FUNCTION_BUILT_IN
-				: PERL_FUNCTION;
-	}
+	protected static final HashMap<String,IElementType> knownFunctions = new HashMap<String,IElementType>();
 
 	private static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
-	// http://perldoc.perl.org/perlfunc.html
+			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
 			"chomp",
 			"chop",
@@ -212,7 +207,7 @@ public class PerlFunction implements PerlElementTypes
 			"sub",
 			"__SUB__",
 			"wantarray",
-			
+
 //			Keywords related to scoping
 			"caller",
 			"import",
@@ -222,7 +217,7 @@ public class PerlFunction implements PerlElementTypes
 			"package",
 			"state",
 			"use",
-			
+
 //			Miscellaneous functions
 			"defined",
 			"formline",
@@ -231,7 +226,7 @@ public class PerlFunction implements PerlElementTypes
 			"reset",
 			"scalar",
 			"undef",
-			
+
 //			Functions for processes and process groups
 			"alarm",
 			"exec",
@@ -250,7 +245,7 @@ public class PerlFunction implements PerlElementTypes
 			"times",
 			"wait",
 			"waitpid",
-			
+
 //			Keywords related to Perl modules
 			"do",
 			"import",
@@ -258,7 +253,7 @@ public class PerlFunction implements PerlElementTypes
 			"package",
 			"require",
 			"use",
-			
+
 //			Keywords related to classes and object-orientation
 			"bless",
 			"dbmclose",
@@ -269,7 +264,7 @@ public class PerlFunction implements PerlElementTypes
 			"tied",
 			"untie",
 			"use",
-			
+
 //			Low-level socket functions
 			"accept",
 			"bind",
@@ -284,7 +279,7 @@ public class PerlFunction implements PerlElementTypes
 			"shutdown",
 			"socket",
 			"socketpair",
-			
+
 //			System V interprocess communication functions
 			"msgctl",
 			"msgget",
@@ -297,7 +292,7 @@ public class PerlFunction implements PerlElementTypes
 			"shmget",
 			"shmread",
 			"shmwrite",
-			
+
 //			Fetching user and group info
 			"endgrent",
 			"endhostent",
@@ -312,7 +307,7 @@ public class PerlFunction implements PerlElementTypes
 			"getpwuid",
 			"setgrent",
 			"setpwent",
-			
+
 //			Fetching network info
 			"endprotoent",
 			"endservent",
@@ -332,13 +327,13 @@ public class PerlFunction implements PerlElementTypes
 			"setnetent",
 			"setprotoent",
 			"setservent",
-			
+
 //			Time-related functions
 			"gmtime",
 			"localtime",
 			"time",
 			"times",
-			
+
 //			"Non-function keywords",
 			"AUTOLOAD",
 			"BEGIN",
@@ -362,20 +357,46 @@ public class PerlFunction implements PerlElementTypes
 			"until",
 			"when",
 			"while",
-			"x"
+			"x",
 
 			// Operators are being checked explicitly
-//			"and",
-//			"cmp",
-//			"eq",
-//			"ge",
-//			"gt",
-//			"le",
-//			"lt",
-//			"ne",
-//			"not",
-//			"or",
-//			"xor"
-));
+			"and",
+			"cmp",
+			"eq",
+			"ge",
+			"gt",
+			"le",
+			"lt",
+			"ne",
+			"not",
+			"or",
+			"xor"
+	));
+
+	static{
+		for( String functionName: BUILT_IN )
+		{
+			knownFunctions.put(functionName, PERL_FUNCTION_BUILT_IN);
+		}
+	}
+
+	public static IElementType getFunctionType(String function)
+	{
+		IElementType functionType;
+
+		if( function.equals("package"))
+		{
+			return PERL_FUNCTION_PACKAGE;
+		}
+		else
+		{
+			functionType = knownFunctions.get(function);
+		}
+
+		return functionType == null
+				? PERL_FUNCTION
+				: functionType;
+	}
+
 
 }

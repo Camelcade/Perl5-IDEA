@@ -62,6 +62,8 @@ import com.perl5.lang.perl.lexer.helpers.PerlPackage;
 */
 NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
+WHITE_SPACE_LINE = {WHITE_SPACE}*{NEW_LINE}?
+
 CHAR_SEMI       = ;
 //CHAR_ANY        = .
 ALFANUM         = [a-zA-Z0-9_]
@@ -74,7 +76,7 @@ FULL_LINE       = .*{NEW_LINE}?
 DQ_STRING        = \"[^\"\n\r]*\"
 SQ_STRING        = \'[^\'\n\r]*\'
 
-MULTILINE_MARKER = [^\"\'\s\n\r]+
+MULTILINE_MARKER = [^\"\'\s\n\r ]+
 MULTILINE_MARKER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
 MULTILINE_MARKER_DQ = "<<"{WHITE_SPACE}*\"{MULTILINE_MARKER}\"
 
@@ -93,13 +95,18 @@ VAR_SCALAR = [$][$]*{ALFANUM}+
 VAR_ARRAY = [@][$]*{ALFANUM}+
 VAR_HASH = [%][$]*{ALFANUM}+
 VAR_GLOB = [*][$]*{ALFANUM}+
+
+PERL_VERSION_CHUNK = [0-9][0-9_]*
+PERL_VERSION = "v"?{PERL_VERSION_CHUNK}(\.{PERL_VERSION_CHUNK})*
+
 NUMBER = "-"?[0-9_]+(\.[0-9_]+)?
 
 END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 //%state STRING
 //%state YYINITIAL
-%state PACKAGE_DEFINITION
+%xstate LEX_PACKAGE_DEFINITION, LEX_PACKAGE_DEFINITION_VERSION, LEX_PACKAGE_DEFINITION_BLOCK
+
 %state FUNCTION_DEFINITION
 %state PACKAGE_USE
 %state LEX_REQUIRE
@@ -143,8 +150,8 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     }
 }
 
-{MULTILINE_MARKER_SQ}   {prepareForMultiline(PERL_SQ_STRING);return PERL_MULTILINE_MARKER;}
-{MULTILINE_MARKER_DQ}   {prepareForMultiline(PERL_DQ_STRING);return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_SQ}   {prepareForMultiline(PERL_MULTILINE_SQ);return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_DQ}   {prepareForMultiline(PERL_MULTILINE_DQ);return PERL_MULTILINE_MARKER;}
 
 {NEW_LINE}   {
     if( isWaitingMultiLine() ) // this could be done using lexical state, like prepared or smth
@@ -172,6 +179,29 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 }
 <LEX_MULTILINE_TOKEN>{
     .*  {yybegin(YYINITIAL);return PERL_MULTILINE_MARKER;}
+}
+
+<LEX_PACKAGE_DEFINITION>{
+    {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
+    {PACKAGE_NAME}      {yybegin(LEX_PACKAGE_DEFINITION_VERSION); return PERL_PACKAGE;}
+    .   {yybegin(YYINITIAL);  return TokenType.BAD_CHARACTER;}
+}
+
+<LEX_PACKAGE_DEFINITION_VERSION>{
+    ";"              {yybegin(YYINITIAL);return PERL_SEMI;}
+    "{"              {yybegin(YYINITIAL); return PERL_LBRACE;}
+    {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
+    {PERL_VERSION}      {yybegin(LEX_PACKAGE_DEFINITION_BLOCK); return PERL_VERSION;}
+    .   {
+        yybegin(YYINITIAL);
+        return TokenType.BAD_CHARACTER;}
+}
+
+<LEX_PACKAGE_DEFINITION_BLOCK>{
+    ";"              {yybegin(YYINITIAL);return PERL_SEMI;}
+    {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
+    "{"      {yybegin(YYINITIAL); return PERL_LBRACE;}
+    .   {yybegin(YYINITIAL); return TokenType.BAD_CHARACTER;}
 }
 
 
@@ -214,10 +244,6 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     }
 }
 
-<PACKAGE_DEFINITION>{
-    {PACKAGE_NAME}    {return PERL_PACKAGE;}
-}
-
 <FUNCTION_DEFINITION>{
     {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_FUNCTION;}
 }
@@ -254,7 +280,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     "no"			{yybegin(PACKAGE_USE); return PerlFunction.getFunctionType(yytext().toString());}
 
     "sub"			{yybegin(FUNCTION_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
-    "package"       {yybegin(PACKAGE_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
+    "package"       {yybegin(LEX_PACKAGE_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
     "require"       {yybegin(LEX_REQUIRE);return PerlFunction.getFunctionType(yytext().toString());}
 }
 
@@ -310,5 +336,5 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 {FUNCTION_NAME} { return PerlFunction.getFunctionType(yytext().toString());}
 
-/* error fallback */
-[^]    { return PERL_BAD_CHARACTER; }
+/* error fallback [^] */
+.    { return TokenType.BAD_CHARACTER; }
