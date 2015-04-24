@@ -60,7 +60,7 @@
             <option name="FONT_TYPE" value="1"/>
         </value>
     </option>
-    <option name="DEPRECATED_ATTRIBUTES">
+    <option name="PERL_DEPRECATED">
         <value>
             <option name="EFFECT_COLOR" value="FF4040" />
             <option name="EFFECT_TYPE" value="3" />
@@ -81,10 +81,10 @@
             <option name="FOREGROUND" value="800080"/>
         </value>
     </option>
-    <option name="PERL_PACKAGE">
+    <option name="PERL_PACKAGE_PRAGMA">
         <value>
             <option name="FOREGROUND" value="800080"/>
-            <option name="FONT_TYPE" value="2" />
+            <option name="FONT_TYPE" value="3" />
         </value>
     </option>
     <option name="PERL_MULTILINE_MARKER">
