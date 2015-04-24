@@ -9,8 +9,8 @@ import com.perl5.lang.pod.lexer.elements.*;
 // @todo POD_CODE should be multiline and parsed using perl
 public interface PodTokenTypes
 {
-	IElementType POD_MARKER = new PodMarker();
-	IElementType POD_TAG = new PodTag();
-	IElementType POD_CODE = new PodCode();
-	IElementType POD_TEXT = new PodText();
+//	IElementType POD_MARKER = new PodMarker();
+//	IElementType POD_TAG = new PodTag();
+//	IElementType POD_CODE = new PodCode();
+//	IElementType POD_TEXT = new PodText();
 }

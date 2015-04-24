@@ -1,0 +1,32 @@
+{
+  parserClass="com.perl5.lang.pod.parser.PodParser"
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Pod"
+ // psiImplClassSuffix="Impl"
+  psiPackage="com.perl5.lang.pod.psi"
+//  psiImplPackage="com.perl5.lang.pod.psi.impl"
+
+  elementTypeHolderClass="com.perl5.lang.pod.lexer.PodElementTypes"
+  elementTypeClass="com.perl5.lang.pod.lexer.PodElement"
+  tokenTypeClass="com.perl5.lang.pod.lexer.PodElement"
+
+//  psiImplUtilClass="com.perl5.lang.pod.psi.impl.PodPsiImplUtil"
+
+    tokens=[
+        POD_NEWLINE
+        POD_TAG
+        POD_TEXT
+        POD_CODE
+    ]
+
+}
+
+
+pod_file ::= pod_item*
+
+private pod_item ::= (control_text | code_block | paragraph) POD_NEWLINE
+private control_text ::= POD_TAG paragraph
+private paragraph ::= (POD_TEXT POD_NEWLINE) *
+private code_block ::= POD_CODE POD_NEWLINE
+

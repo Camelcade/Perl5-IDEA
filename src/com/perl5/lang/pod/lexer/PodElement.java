@@ -1,4 +1,4 @@
-package com.perl5.lang.pod.lexer.elements;
+package com.perl5.lang.pod.lexer;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlFileTypeScript;

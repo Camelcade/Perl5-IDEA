@@ -5,17 +5,13 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlTokenTypes;
 import com.perl5.lang.perl.parser.PerlElementTypes;
 import com.perl5.lang.pod.highlighter.PodSyntaxHighlighter;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
-import com.perl5.lang.pod.lexer.elements.PodElement;
 import com.perl5.utils.SelfStyled;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.Reader;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 

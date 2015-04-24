@@ -9,14 +9,14 @@ package com.perl5.lang.pod.lexer;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.pod.PodTokenTypes;
+import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 %%
 
 %class PodLexer
 %extends PodLexerProto
-%implements FlexLexer, PodTokenTypes
+%implements FlexLexer, PodElementTypes
 %unicode
 %public
 
@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
     {
         // return to the last real code line
         zzCurrentPos = zzStartRead = codeBlockStart;
-        yypushback(zzMarkedPos - lastCodeLineEnd);
+        yypushback(zzMarkedPos - lastCodeLineEnd + 1 );
         yybegin(YYINITIAL);
         return POD_CODE;
     }
@@ -53,7 +53,8 @@ LINE_TERMINATOR = \r?\n
 WHITE_SPACE     = [ \t\f]+
 
 TEXT_ANY        = .*
-CODE_LINE       = {WHITE_SPACE}[^\ \t\f\n\r].+{LINE_TERMINATOR}
+CODE_LINE       = {WHITE_SPACE}[^\ \t\f\n\r].*{LINE_TERMINATOR}
+EMPTY_LINE      = {WHITE_SPACE}{LINE_TERMINATOR}
 
 POD_TAG         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding)
 POD_CLOSE       = \="cut"
@@ -64,14 +65,14 @@ POD_CLOSE       = \="cut"
 <YYINITIAL>{
     {POD_TAG}  {yybegin(LEX_TAG_LINE);return POD_TAG;}
     {POD_CLOSE} {yybegin(LEX_LAST_LINE); return POD_TAG;}
-    {LINE_TERMINATOR} { return TokenType.NEW_LINE_INDENT;}
+    {LINE_TERMINATOR} { return POD_NEWLINE;}
     {CODE_LINE} {beginCodeBlock(); break;}
     .   {yypushback(1); yybegin(LEX_POD_LINE); break;}
 }
 
 <LEX_CODE>
 {
-    {WHITE_SPACE}{LINE_TERMINATOR} {break;} // empty lines
+    {EMPTY_LINE} {break;}
     {CODE_LINE} {markLastCodeLine(); break;}
     {LINE_TERMINATOR} {break;}
     .   {return endCodeBlock();}
@@ -79,15 +80,15 @@ POD_CLOSE       = \="cut"
 
 <LEX_TAG_LINE>{
     .* {return POD_TEXT;}
-    {LINE_TERMINATOR} {yybegin(YYINITIAL); return TokenType.NEW_LINE_INDENT;}
+    {LINE_TERMINATOR} {yybegin(YYINITIAL); return POD_NEWLINE;}
 }
 
 <LEX_POD_LINE>{
     {TEXT_ANY} {return POD_TEXT;}
-    {LINE_TERMINATOR} {yybegin(YYINITIAL); return TokenType.NEW_LINE_INDENT;}
+    {LINE_TERMINATOR} {yybegin(YYINITIAL); return POD_NEWLINE;}
 }
 
 <LEX_LAST_LINE>{
     {TEXT_ANY}  { return POD_TEXT;}
-    {LINE_TERMINATOR} {yybegin(YYINITIAL); return TokenType.NEW_LINE_INDENT;}
+    {LINE_TERMINATOR} {yybegin(YYINITIAL); return POD_NEWLINE;}
 }
