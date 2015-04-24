@@ -1,9 +1,6 @@
 package com.perl5.lang.perl.highlighter;
 
-import com.intellij.lexer.HtmlHighlightingLexer;
-import com.intellij.lexer.LayeredLexer;
-import com.intellij.lexer.Lexer;
-import com.intellij.lexer.XmlHighlightingLexer;
+import com.intellij.lexer.*;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
@@ -81,10 +78,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 				new IElementType[]{PerlTokenTypes.PERL_POD},
 				IElementType.EMPTY_ARRAY
 		);
-		layeredLexer.registerSelfStoppingLayer(
-				new HtmlHighlightingLexer(),
-				new IElementType[]{PerlTokenTypes.PERL_MULTILINE_HTML},
-				IElementType.EMPTY_ARRAY
+		layeredLexer.registerLayer(
+				new FlexAdapter(new _HtmlLexer()),
+				PerlTokenTypes.PERL_MULTILINE_HTML
 		);
 		layeredLexer.registerSelfStoppingLayer(
 				new XmlHighlightingLexer(),

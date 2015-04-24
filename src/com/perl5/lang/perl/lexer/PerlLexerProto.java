@@ -60,7 +60,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes
 		if (m.matches())
 		{
 			multilineMarker = m.group(1);
-			System.out.printf("Got opening token: `%s`\n", multilineMarker);
+//			System.out.printf("Got opening token: `%s`\n", multilineMarker);
 		} else // shouldn't happen
 		{
 			throw new Error("Could not match opening multiline marker: " + openToken);
@@ -90,7 +90,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes
 		multiLineStart = getNextTokenStart();
 		yybegin_LEX_MULTILINE();
 		waitingMultiLine = false;
-		System.out.printf("Started multiline %s at %d\n", multilineMarker, multiLineStart);
+//		System.out.printf("Started multiline %s at %d\n", multilineMarker, multiLineStart);
 	}
 
 	/**
@@ -108,9 +108,17 @@ public abstract class PerlLexerProto implements FlexLexer, PerlTokenTypes
 	 */
 	protected IElementType endMultiline()
 	{
-		setTokenStart(multiLineStart);
-		yypushback(multilineMarker.length());
-		yybegin_LEX_MULTILINE_TOKEN();
+		if( yytext().toString().equals(multilineMarker)) // got marker
+		{
+			setTokenStart(multiLineStart);
+			yypushback(multilineMarker.length());
+			yybegin_LEX_MULTILINE_TOKEN();
+		}
+		else	// got eof without a marker
+		{
+			setTokenStart(multiLineStart);
+			yybegin_YYINITIAL();
+		}
 
 		return declaredMultiLineType;
 	}

@@ -159,6 +159,6 @@ public interface PerlTokenTypes
 	IElementType PERL_RCURLY = new PerlElement("ENDBLOCK");
 	IElementType PERL_SEMI = new PerlElement("SEMI");
 
-	IElementType PERL_NEWLINE = new PerlElement("new line");
+	IElementType PERL_NEWLINE = new PerlElement("NEW_LINE");
 
 }

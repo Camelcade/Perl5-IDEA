@@ -146,7 +146,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     {
         startMultiLine();
     }
-    return TokenType.NEW_LINE_INDENT;
+    return PERL_NEWLINE;
 }
 
 <LEX_MULTILINE>{
@@ -171,7 +171,11 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 
 {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
-{CHAR_SEMI}     {yybegin(YYINITIAL);return PERL_SEMI;}
+{CHAR_SEMI}     {
+//    if( !isWaitingMultiLine() )
+        yybegin(YYINITIAL);
+    return PERL_SEMI;
+}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
