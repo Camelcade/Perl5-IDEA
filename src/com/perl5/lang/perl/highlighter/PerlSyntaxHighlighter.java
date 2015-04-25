@@ -64,8 +64,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		attributesMap.put(PerlElementTypes.PERL_COMMENT, new TextAttributesKey[]{PERL_COMMENT});
 		attributesMap.put(PerlElementTypes.PERL_COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
-		attributesMap.put(PerlElementTypes.PERL_STATIC_METHOD_CALL, new TextAttributesKey[]{PERL_STATIC_METHOD_CALL});
-
 		attributesMap.put(PerlElementTypes.PERL_SQ_STRING, new TextAttributesKey[]{PERL_SQ_STRING});
 		attributesMap.put(PerlElementTypes.PERL_DQ_STRING, new TextAttributesKey[]{PERL_DQ_STRING});
 		attributesMap.put(PerlElementTypes.PERL_NUMBER, new TextAttributesKey[]{PERL_NUMBER});

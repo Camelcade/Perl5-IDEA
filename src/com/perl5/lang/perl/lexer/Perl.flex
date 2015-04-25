@@ -93,10 +93,12 @@ PACKAGE_STATIC_CALL = ({ALFANUM}+{DEPACKAGE})+
 PACKAGE_INSTANCE_CALL = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)* "->"
 
 FUNCTION_NAME = {ALFANUM}+
-VAR_SCALAR = [$][$]*{ALFANUM}+
-VAR_ARRAY = [@][$]*{ALFANUM}+
-VAR_HASH = [%][$]*{ALFANUM}+
-VAR_GLOB = [*][$]*{ALFANUM}+
+
+// @todo temp solution for package variables. need to implement smart lexing
+VAR_SCALAR = [$][$]*{PACKAGE_NAME}?{ALFANUM}+
+VAR_ARRAY = [@][$]*{PACKAGE_NAME}?{ALFANUM}+
+VAR_HASH = [%][$]*{PACKAGE_NAME}?{ALFANUM}+
+VAR_GLOB = [*][$]*{PACKAGE_NAME}?{ALFANUM}+
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}(\.{PERL_VERSION_CHUNK})*
@@ -116,8 +118,6 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 %state PACKAGE_USE
 %state LEX_REQUIRE
 %state PACKAGE_USE_PARAMS
-%state PACKAGE_STATIC_CALL
-%state PACKAGE_INSTANCE_CALL
 %state LEX_DEREFERENCE
 %%
 
@@ -255,24 +255,12 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_FUNCTION_USER;}
 }
 
-<PACKAGE_STATIC_CALL>
-{
-    {ALFANUM}+ {return PERL_STATIC_METHOD_CALL;}
-}
-
 {PACKAGE_STATIC_CALL} {
-    yybegin(PACKAGE_STATIC_CALL);
     yypushback(2);
     return PerlPackage.getPackageType(yytext().toString());
 }
 
-<PACKAGE_INSTANCE_CALL>
-{
-    {ALFANUM}+ {return PERL_INSTANCE_METHOD_CALL;}
-}
-
 {PACKAGE_INSTANCE_CALL} {
-    yybegin(PACKAGE_INSTANCE_CALL);
     yypushback(2);
     return PerlPackage.getPackageType(yytext().toString());
 }

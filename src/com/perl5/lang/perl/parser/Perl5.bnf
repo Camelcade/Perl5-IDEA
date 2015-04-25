@@ -33,8 +33,6 @@
     PERL_SQ_STRING
 
     PERL_NUMBER
-    PERL_STATIC_METHOD_CALL
-    PERL_INSTANCE_METHOD_CALL
     PERL_VARIABLE_SCALAR
     PERL_VARIABLE_ARRAY
     PERL_VARIABLE_HASH
@@ -79,23 +77,29 @@ perl_block ::= '{' block_item* '}'
 private block_item ::= package_namespace | package_item
 private package_item ::= function_definition | if_block | code_line  | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | perl_block
 
-private code_line_elements ::= method_call | function_call| perl_chars | perl_call | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
+private code_line_element ::= method_call | function_call| perl_function | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
+private code_line_elements ::= code_line_element +
 
 if_block ::= ('if' | 'unless') if_branch_conditional if_block_elsif * if_block_else ?
 if_block_elsif ::= 'elsif' if_branch_conditional
 if_block_else  ::= 'else' if_branch
 if_branch_conditional ::= '(' perl_expression ')' if_branch
 if_branch ::= (code_line | perl_block )
-perl_expression ::= code_line_elements +
+perl_expression ::= (code_line_elements | perl_subexpression) +
+perl_subexpression ::= '(' code_line_elements ')'
 
-method_call ::= static_call | object_call
+method_call ::= package_static_call | package_object_call | object_call
 object_call ::= perl_scalar_value_var '->' function_call
-static_call ::= perl_package '::' function_call
-function_call ::= perl_function perl_call_params ?
-perl_call_params ::= '(' perl_call_param ? (',' perl_call_param ) * ')'
+package_static_call ::= perl_package '::' function_call
+package_object_call ::= perl_package '->' function_call
+
+function_call ::= perl_function perl_call_params_any ?
+perl_call_params_any ::= perl_call_params_strict | perl_call_params
+perl_call_params_strict ::= '(' perl_call_params ')'
+perl_call_params ::= perl_call_param ? (',' perl_call_param ) *
 perl_call_param ::= perl_array_value | perl_scalar_value
 
-code_line ::= code_line_elements* ';' perl_multiline_string ?
+code_line ::= code_line_element* ';' perl_multiline_string ?
 
 perl_array_value ::= perl_array_value_item (',' (perl_array_value_item | perl_scalar_value  )) *
 private perl_array_value_item ::= perl_array_dereference | perl_array_slice | perl_hash_slice | perl_hash_value | perl_array
@@ -106,18 +110,18 @@ private perl_array_dereference ::= PERL_SIGIL_ARRAY '{' perl_scalar_value '}'
 perl_hash_value ::= perl_hash_dereference | perl_hash
 private perl_hash_dereference ::= PERL_SIGIL_HASH '{' perl_scalar_value '}'
 
-perl_scalar_value ::= perl_string | PERL_NUMBER | PERL_VERSION | perl_anon_array | perl_anon_hash | perl_scalar_value_var
-private perl_scalar_value_var ::= perl_scalar_dereference | perl_hash_element | perl_array_element | perl_scalar // dynamic scalar, may be a reference
-private perl_hash_element ::= perl_scalar '{' perl_scalar_value '}'
-private perl_array_element ::= perl_scalar '[' perl_scalar_value ']'
+perl_scalar_value ::= perl_string | PERL_NUMBER | PERL_VERSION | PERL_MULTILINE_MARKER| perl_scalar_anon_array | perl_scalar_anon_hash | perl_scalar_value_var
+private perl_scalar_value_var ::= perl_scalar_dereference | perl_scalar_hash_element | perl_scalar_array_element | perl_scalar | perl_scalar_function_result // dynamic scalar, may be a reference
+private perl_scalar_hash_element ::= perl_scalar '{' perl_scalar_value '}'
+private perl_scalar_array_element ::= perl_scalar '[' perl_scalar_value ']'
 private perl_scalar_dereference ::= PERL_SIGIL_SCALAR '{' perl_scalar_value '}'
-private perl_anon_array     ::= '[' perl_array_value ']'
-private perl_anon_hash      ::= '{' perl_array_value '}'
+private perl_scalar_anon_array     ::= '[' perl_array_value ']'
+private perl_scalar_anon_hash      ::= '{' perl_array_value '}'
+perl_scalar_function_result ::= function_call
 
 // Generalizations
 //private perl_controls ::= ',' | '[' | ']' | '(' | ')'
 //private perl_chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
-private perl_call ::= PERL_STATIC_METHOD_CALL | PERL_INSTANCE_METHOD_CALL
 private perl_string ::= PERL_DQ_STRING | PERL_SQ_STRING
 private perl_multiline_string ::= (PERL_MULTILINE_SQ | PERL_MULTILINE_DQ| PERL_MULTILINE_XML | PERL_MULTILINE_HTML) PERL_MULTILINE_MARKER
 private perl_package ::= PERL_PACKAGE_USER | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_PACKAGE_BUILT_IN_PRAGMA;

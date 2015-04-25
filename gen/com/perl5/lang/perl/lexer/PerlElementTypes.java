@@ -24,16 +24,20 @@ public interface PerlElementTypes {
   IElementType OBJECT_CALL = new PerlElementType("OBJECT_CALL");
   IElementType PACKAGE_DEFINITION = new PerlElementType("PACKAGE_DEFINITION");
   IElementType PACKAGE_NAMESPACE = new PerlElementType("PACKAGE_NAMESPACE");
+  IElementType PACKAGE_OBJECT_CALL = new PerlElementType("PACKAGE_OBJECT_CALL");
+  IElementType PACKAGE_STATIC_CALL = new PerlElementType("PACKAGE_STATIC_CALL");
   IElementType PERL_ARRAY_VALUE = new PerlElementType("PERL_ARRAY_VALUE");
   IElementType PERL_BLOCK = new PerlElementType("PERL_BLOCK");
   IElementType PERL_CALL_PARAM = new PerlElementType("PERL_CALL_PARAM");
   IElementType PERL_CALL_PARAMS = new PerlElementType("PERL_CALL_PARAMS");
+  IElementType PERL_CALL_PARAMS_ANY = new PerlElementType("PERL_CALL_PARAMS_ANY");
+  IElementType PERL_CALL_PARAMS_STRICT = new PerlElementType("PERL_CALL_PARAMS_STRICT");
   IElementType PERL_EXPRESSION = new PerlElementType("PERL_EXPRESSION");
   IElementType PERL_HASH_VALUE = new PerlElementType("PERL_HASH_VALUE");
+  IElementType PERL_SCALAR_FUNCTION_RESULT = new PerlElementType("PERL_SCALAR_FUNCTION_RESULT");
   IElementType PERL_SCALAR_VALUE = new PerlElementType("PERL_SCALAR_VALUE");
-  IElementType STATIC_CALL = new PerlElementType("STATIC_CALL");
+  IElementType PERL_SUBEXPRESSION = new PerlElementType("PERL_SUBEXPRESSION");
 
-  IElementType PERL_CHARS = new PerlTokenType("perl_chars");
   IElementType PERL_COMMA = new PerlTokenType(",");
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
@@ -42,7 +46,6 @@ public interface PerlElementTypes {
   IElementType PERL_DQ_STRING = new PerlTokenType("PERL_DQ_STRING");
   IElementType PERL_FUNCTION_BUILT_IN = new PerlTokenType("PERL_FUNCTION_BUILT_IN");
   IElementType PERL_FUNCTION_USER = new PerlTokenType("PERL_FUNCTION_USER");
-  IElementType PERL_INSTANCE_METHOD_CALL = new PerlTokenType("PERL_INSTANCE_METHOD_CALL");
   IElementType PERL_LBRACE = new PerlTokenType("{");
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
@@ -66,7 +69,6 @@ public interface PerlElementTypes {
   IElementType PERL_SIGIL_HASH = new PerlTokenType("PERL_SIGIL_HASH");
   IElementType PERL_SIGIL_SCALAR = new PerlTokenType("PERL_SIGIL_SCALAR");
   IElementType PERL_SQ_STRING = new PerlTokenType("PERL_SQ_STRING");
-  IElementType PERL_STATIC_METHOD_CALL = new PerlTokenType("PERL_STATIC_METHOD_CALL");
   IElementType PERL_VARIABLE_ARRAY = new PerlTokenType("PERL_VARIABLE_ARRAY");
   IElementType PERL_VARIABLE_ARRAY_BUILT_IN = new PerlTokenType("PERL_VARIABLE_ARRAY_BUILT_IN");
   IElementType PERL_VARIABLE_GLOB = new PerlTokenType("PERL_VARIABLE_GLOB");
@@ -122,6 +124,12 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_NAMESPACE) {
         return new PerlPackageNamespaceImpl(node);
       }
+      else if (type == PACKAGE_OBJECT_CALL) {
+        return new PerlPackageObjectCallImpl(node);
+      }
+      else if (type == PACKAGE_STATIC_CALL) {
+        return new PerlPackageStaticCallImpl(node);
+      }
       else if (type == PERL_ARRAY_VALUE) {
         return new PerlPerlArrayValueImpl(node);
       }
@@ -134,17 +142,26 @@ public interface PerlElementTypes {
       else if (type == PERL_CALL_PARAMS) {
         return new PerlPerlCallParamsImpl(node);
       }
+      else if (type == PERL_CALL_PARAMS_ANY) {
+        return new PerlPerlCallParamsAnyImpl(node);
+      }
+      else if (type == PERL_CALL_PARAMS_STRICT) {
+        return new PerlPerlCallParamsStrictImpl(node);
+      }
       else if (type == PERL_EXPRESSION) {
         return new PerlPerlExpressionImpl(node);
       }
       else if (type == PERL_HASH_VALUE) {
         return new PerlPerlHashValueImpl(node);
       }
+      else if (type == PERL_SCALAR_FUNCTION_RESULT) {
+        return new PerlPerlScalarFunctionResultImpl(node);
+      }
       else if (type == PERL_SCALAR_VALUE) {
         return new PerlPerlScalarValueImpl(node);
       }
-      else if (type == STATIC_CALL) {
-        return new PerlStaticCallImpl(node);
+      else if (type == PERL_SUBEXPRESSION) {
+        return new PerlPerlSubexpressionImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }
