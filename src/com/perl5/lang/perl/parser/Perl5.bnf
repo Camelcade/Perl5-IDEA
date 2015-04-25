@@ -35,9 +35,6 @@
     PERL_DQ_STRING
     PERL_SQ_STRING
 
-    PERL_FUNCTION_PACKAGE
-    PERL_FUNCTION_SUB
-
     PERL_NUMBER
     PERL_STATIC_METHOD_CALL
     PERL_INSTANCE_METHOD_CALL
@@ -75,16 +72,24 @@
 perlFile ::= block_item*
 
 function_definition ::= function_definition_named | function_definition_anon
-function_definition_named ::= PERL_FUNCTION_SUB perl_function perl_block ';' ?
-function_definition_anon ::= PERL_FUNCTION_SUB perl_block ';'
+function_definition_named ::= 'sub' perl_function perl_block ';' ?
+function_definition_anon ::= 'sub' perl_block ';'
 
 package_namespace ::= package_definition (perl_block | package_item * )
-package_definition ::= PERL_FUNCTION_PACKAGE package_bare PERL_VERSION ? ';' ?
+package_definition ::= 'package' package_bare PERL_VERSION ? ';' ?
 
 perl_block ::= '{' block_item* '}'
 
 private block_item ::= package_namespace | package_item
-private package_item ::= function_definition | code_line  | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | perl_block
+private package_item ::= function_definition | code_line  | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | if_block | perl_block
+
+if_block ::= ('if' | 'unless') if_branch_conditional if_block_elsif * if_block_else ?
+if_block_elsif ::= 'elsif' if_branch_conditional
+if_block_else  ::= 'else' if_branch
+if_branch_conditional ::= '(' perl_expression ')' if_branch
+if_branch ::= (code_line | perl_block )
+
+perl_expression ::= code_line_elements
 
 code_line ::= code_line_elements* ';' perl_multiline_string ?
 private code_line_elements ::= perl_controls | perl_chars | perl_call | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | package_bare | perl_function | PERL_MULTILINE_MARKER
