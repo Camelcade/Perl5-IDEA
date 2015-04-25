@@ -216,7 +216,6 @@ public class PerlFunction implements PerlElementTypes
 			"our",
 			"package",
 			"state",
-			"use",
 
 //			Miscellaneous functions
 			"defined",
@@ -249,10 +248,6 @@ public class PerlFunction implements PerlElementTypes
 //			Keywords related to Perl modules
 			"do",
 			"import",
-			"no",
-			"package",
-			"require",
-			"use",
 
 //			Keywords related to classes and object-orientation
 			"bless",
@@ -350,7 +345,6 @@ public class PerlFunction implements PerlElementTypes
 			"for",
 			"foreach",
 			"given",
-			"if",
 			"INIT",
 			"UNITCHECK",
 			"unless",
@@ -373,10 +367,23 @@ public class PerlFunction implements PerlElementTypes
 			"xor"
 	));
 
+	private static final ArrayList<String> IMPLEMENTED = new ArrayList<String>( Arrays.asList(
+			"if",
+			"package",
+			"require",
+			"no",
+			"use"
+	));
+
+
 	static{
 		for( String functionName: BUILT_IN )
 		{
 			knownFunctions.put(functionName, PERL_FUNCTION_BUILT_IN);
+		}
+		for( String functionName: IMPLEMENTED )
+		{
+			knownFunctions.put(functionName, PERL_FUNCTION_BUILT_IN_IMPLEMENTED);
 		}
 	}
 

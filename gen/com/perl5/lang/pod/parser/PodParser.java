@@ -22,7 +22,12 @@ public class PodParser implements PsiParser {
     boolean r;
     b = adapt_builder_(t, b, this, null);
     Marker m = enter_section_(b, 0, _COLLAPSE_, null);
-    r = parse_root_(t, b, 0);
+    if (t == PARAGRAPH) {
+      r = paragraph(b, 0);
+    }
+    else {
+      r = parse_root_(t, b, 0);
+    }
     exit_section_(b, 0, m, t, r, true, TRUE_CONDITION);
   }
 
@@ -56,7 +61,7 @@ public class PodParser implements PsiParser {
 
   /* ********************************************************** */
   // (POD_TEXT POD_NEWLINE) +
-  static boolean paragraph(PsiBuilder b, int l) {
+  public static boolean paragraph(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "paragraph")) return false;
     if (!nextTokenIs(b, POD_TEXT)) return false;
     boolean r;
@@ -68,7 +73,7 @@ public class PodParser implements PsiParser {
       if (!empty_element_parsed_guard_(b, "paragraph", c)) break;
       c = current_position_(b);
     }
-    exit_section_(b, m, null, r);
+    exit_section_(b, m, PARAGRAPH, r);
     return r;
   }
 

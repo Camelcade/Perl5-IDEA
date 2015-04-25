@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface PerlPackageNamespace extends PsiElement {
 
   @NotNull
-  List<PerlCodeLine> getCodeLineList();
+  List<PerlCodeLineValid> getCodeLineValidList();
 
   @NotNull
   List<PerlFunctionDefinition> getFunctionDefinitionList();

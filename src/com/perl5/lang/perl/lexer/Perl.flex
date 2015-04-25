@@ -114,18 +114,44 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 %xstate LEX_POD
 %xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
 
-%state FUNCTION_DEFINITION
-%state PACKAGE_USE
+%state LEX_PACKAGE_USE, LEX_PACKAGE_USE_PARAMS, LEX_PACKAGE_USE_VERSION
 %state LEX_REQUIRE
-%state PACKAGE_USE_PARAMS
+
+%state LEX_FUNCTION_DEFINITION
 %state LEX_DEREFERENCE
 %%
+
+// inclusive states
+{NEW_LINE}   {
+    if( isWaitingMultiLine() ) // this could be done using lexical state, like prepared or smth
+    {
+        startMultiLine();
+    }
+    return TokenType.NEW_LINE_INDENT;
+}
+{WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
+","			    {return PERL_COMMA;}
+"=>"			{return PERL_COMMA;}
+{CHAR_SEMI}     {
+    yybegin(YYINITIAL);
+    return PERL_SEMI;
+}
+{END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 
 <YYINITIAL>{
     {THE_END}               {StartDataBlock(); break;}
     {THE_DATA}               {StartDataBlock(); break;}
     {POD_OPEN}               {StartPodBlock();break;}
+
+    "use"			{yybegin(LEX_PACKAGE_USE);return PerlFunction.getFunctionType(yytext().toString());}
+    "no"			{yybegin(LEX_PACKAGE_USE); return PerlFunction.getFunctionType(yytext().toString());}
+    "require"	    {yybegin(LEX_REQUIRE); return PerlFunction.getFunctionType(yytext().toString());}
+
+    "sub"			{yybegin(LEX_FUNCTION_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
+    "package"       {yybegin(LEX_PACKAGE_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
 }
+
+
 <LEX_EOF>
 {
     {FULL_LINE} {
@@ -152,17 +178,6 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
         }
         break;
     }
-}
-
-{MULTILINE_MARKER_SQ}   {prepareForMultiline(PERL_MULTILINE_SQ);return PERL_MULTILINE_MARKER;}
-{MULTILINE_MARKER_DQ}   {prepareForMultiline(PERL_MULTILINE_DQ);return PERL_MULTILINE_MARKER;}
-
-{NEW_LINE}   {
-    if( isWaitingMultiLine() ) // this could be done using lexical state, like prepared or smth
-    {
-        startMultiLine();
-    }
-    return TokenType.NEW_LINE_INDENT;
 }
 
 <LEX_MULTILINE>{
@@ -208,22 +223,73 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     .   {yybegin(YYINITIAL); return TokenType.BAD_CHARACTER;}
 }
 
-
-{END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
-{CHAR_SEMI}     {
-//    if( !isWaitingMultiLine() )
-        yybegin(YYINITIAL);
-    return PERL_SEMI;
+/////////////////////////////////////////// USE/NO ... /////////////////////////////////////////////////////////////////
+<LEX_PACKAGE_USE,LEX_PACKAGE_USE_VERSION>{
+    {PERL_VERSION}  {
+        yybegin(LEX_PACKAGE_USE_PARAMS);
+        return PERL_VERSION;
+    }
 }
-{WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
+<LEX_PACKAGE_USE>{
+    {PACKAGE_NAME}    {
+        yybegin(LEX_PACKAGE_USE_VERSION);
+        return PerlPackage.getPackageType(yytext().toString());
+    }
+    .   {yypushback(1); yybegin(YYINITIAL); break;}
+}
+<LEX_PACKAGE_USE_VERSION>
+{
+    {ALFANUM}+  {
+        yybegin(LEX_PACKAGE_USE_PARAMS);
+        return PERL_SQ_STRING;
+    }
+}
+<LEX_PACKAGE_USE_PARAMS>
+{
+    {ALFANUM}+  {return PERL_SQ_STRING;}
+}
+/////////////////////////////////////////// REQUIRE ... ////////////////////////////////////////////////////////////////
+
+<LEX_REQUIRE>
+{
+    {PERL_VERSION}  {
+        yybegin(YYINITIAL);
+        return PERL_VERSION;
+    }
+    {PACKAGE_NAME}    {
+        yybegin(YYINITIAL);
+        return PerlPackage.getPackageType(yytext().toString());
+    }
+    {DQ_STRING}     {return PERL_DQ_STRING;}
+    {SQ_STRING}     {return PERL_SQ_STRING;}
+    .   {yypushback(1);yybegin(YYINITIAL);break;}
+}
+
+/////////////////////////////////////////////// sub ... ////////////////////////////////////////////////////////////////
+<LEX_FUNCTION_DEFINITION>{
+    {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_FUNCTION_USER;}
+}
+
+{PACKAGE_STATIC_CALL} {
+    yypushback(2);
+    return PerlPackage.getPackageType(yytext().toString());
+}
+
+{PACKAGE_INSTANCE_CALL} {
+    yypushback(2);
+    return PerlPackage.getPackageType(yytext().toString());
+}
+
+
+{MULTILINE_MARKER_SQ}   {prepareForMultiline(PERL_MULTILINE_SQ);return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_DQ}   {prepareForMultiline(PERL_MULTILINE_DQ);return PERL_MULTILINE_MARKER;}
+
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
 "["             {return PERL_LBRACK;}
 "]"             {return PERL_RBRACK;}
 "("             {return PERL_LPAREN;}
 ")"             {return PERL_RPAREN;}
-","			    {return PERL_COMMA;}
-"=>"			{return PERL_COMMA;}
 "->"			{yybegin(LEX_DEREFERENCE);return PERL_DEREFERENCE;}
 {DEPACKAGE}		{return PERL_DEPACKAGE;}
 {DQ_STRING}     {return PERL_DQ_STRING;}
@@ -239,48 +305,8 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 "%" {return PERL_SIGIL_HASH;}
 "$" {return PERL_SIGIL_SCALAR;}
 
-<PACKAGE_USE_PARAMS>
-{
-    {ALFANUM}+  {return PERL_SQ_STRING;}
-}
-
-<PACKAGE_USE>{
-    {PACKAGE_NAME}    {
-        yybegin(PACKAGE_USE_PARAMS);
-        return PerlPackage.getPackageType(yytext().toString()); // @todo wtf it's not being resolved without package?
-    }
-}
-
-<FUNCTION_DEFINITION>{
-    {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_FUNCTION_USER;}
-}
-
-{PACKAGE_STATIC_CALL} {
-    yypushback(2);
-    return PerlPackage.getPackageType(yytext().toString());
-}
-
-{PACKAGE_INSTANCE_CALL} {
-    yypushback(2);
-    return PerlPackage.getPackageType(yytext().toString());
-}
-
-<LEX_REQUIRE>{
-    {PACKAGE_NAME}    {return PerlPackage.getPackageType(yytext().toString());}
-}
-
-<YYINITIAL> {
-  /* whitespace */
-    "use"			{yybegin(PACKAGE_USE);return PerlFunction.getFunctionType(yytext().toString());}
-    "no"			{yybegin(PACKAGE_USE); return PerlFunction.getFunctionType(yytext().toString());}
-
-    "sub"			{yybegin(FUNCTION_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
-    "package"       {yybegin(LEX_PACKAGE_DEFINITION); return PerlFunction.getFunctionType(yytext().toString());}
-    "require"       {yybegin(LEX_REQUIRE);return PerlFunction.getFunctionType(yytext().toString());}
-}
-
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
 {FUNCTION_NAME} { return PerlFunction.getFunctionType(yytext().toString());}
 
 /* error fallback [^] */
-.    { return TokenType.BAD_CHARACTER; }
+[^]    { return TokenType.BAD_CHARACTER; }

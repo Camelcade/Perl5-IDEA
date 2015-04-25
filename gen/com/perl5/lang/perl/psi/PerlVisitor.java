@@ -11,6 +11,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCodeLineValid(@NotNull PerlCodeLineValid o) {
+    visitPsiElement(o);
+  }
+
   public void visitFunctionCall(@NotNull PerlFunctionCall o) {
     visitPsiElement(o);
   }
@@ -63,11 +67,27 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPackageNo(@NotNull PerlPackageNo o) {
+    visitPsiElement(o);
+  }
+
   public void visitPackageObjectCall(@NotNull PerlPackageObjectCall o) {
     visitPsiElement(o);
   }
 
+  public void visitPackageRequire(@NotNull PerlPackageRequire o) {
+    visitPsiElement(o);
+  }
+
   public void visitPackageStaticCall(@NotNull PerlPackageStaticCall o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPackageUse(@NotNull PerlPackageUse o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPackageUseArguments(@NotNull PerlPackageUseArguments o) {
     visitPsiElement(o);
   }
 

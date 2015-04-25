@@ -27,6 +27,6 @@ pod_file ::= pod_paragraph*
 
 private pod_paragraph ::= (control_text | POD_CODE | paragraph) POD_NEWLINE +
 private control_text ::= POD_TAG (paragraph | POD_NEWLINE)
-private paragraph ::= (POD_TEXT POD_NEWLINE) +
+paragraph ::= (POD_TEXT POD_NEWLINE) +
 
 

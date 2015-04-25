@@ -41,8 +41,11 @@
     PERL_VARIABLE_ARRAY_BUILT_IN
     PERL_VARIABLE_HASH_BUILT_IN
     PERL_VARIABLE_GLOB_BUILT_IN
+
     PERL_FUNCTION_USER
     PERL_FUNCTION_BUILT_IN
+    PERL_FUNCTION_BUILT_IN_IMPLEMENTED="PERL_FUNCTION_BUILT_IN_IMPLEMENTED"
+
     PERL_PACKAGE_USER
     PERL_PACKAGE_BUILT_IN
     PERL_PACKAGE_BUILT_IN_PRAGMA
@@ -75,10 +78,25 @@ package_definition ::= 'package' perl_package PERL_VERSION ? ';' ?
 perl_block ::= '{' block_item* '}'
 
 private block_item ::= package_namespace | package_item
-private package_item ::= function_definition | if_block | code_line  | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | perl_block
+private package_item ::= function_definition | if_block | code_line_valid | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | perl_block //| code_line_invalid
 
 private code_line_element ::= method_call | function_call| perl_function | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
 private code_line_elements ::= code_line_element +
+
+code_line_valid ::= package_use | package_no | package_require | code_line
+
+//code_line_invalid ::= PERL_FUNCTION_BUILT_IN_IMPLEMENTED code_line_invalid_element*';'
+//code_line_invalid_element ::= code_line_element | perl_package | PERL_VERSION | perl_controls | perl_chars;
+
+package_use ::= 'use' package_use_arguments ';'
+package_no ::= 'no' package_use_arguments ';'
+
+package_use_arguments ::=
+    perl_package PERL_VERSION perl_call_params ?
+    | perl_package perl_call_params ?
+    | PERL_VERSION;
+
+package_require ::= 'require' (perl_package | PERL_VERSION | perl_string) ';'
 
 if_block ::= ('if' | 'unless') if_branch_conditional if_block_elsif * if_block_else ?
 if_block_elsif ::= 'elsif' if_branch_conditional
@@ -120,11 +138,11 @@ private perl_scalar_anon_hash      ::= '{' perl_array_value '}'
 perl_scalar_function_result ::= function_call
 
 // Generalizations
-//private perl_controls ::= ',' | '[' | ']' | '(' | ')'
-//private perl_chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
+private perl_controls ::= ',' | '[' | ']' | '(' | ')'
+private perl_chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
 private perl_string ::= PERL_DQ_STRING | PERL_SQ_STRING
 private perl_multiline_string ::= (PERL_MULTILINE_SQ | PERL_MULTILINE_DQ| PERL_MULTILINE_XML | PERL_MULTILINE_HTML) PERL_MULTILINE_MARKER
-private perl_package ::= PERL_PACKAGE_USER | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_PACKAGE_BUILT_IN_PRAGMA;
+private perl_package ::= PERL_PACKAGE_USER | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_PACKAGE_BUILT_IN_PRAGMA
 private perl_function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER
 
 //private perl_variable ::= perl_scalar | perl_glob | perl_array | perl_hash

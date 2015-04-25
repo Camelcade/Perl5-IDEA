@@ -88,6 +88,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
 		attributesMap.put(PerlElementTypes.PERL_FUNCTION_USER, new TextAttributesKey[]{PERL_FUNCTION});
 		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN_IMPLEMENTED, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
+
 		attributesMap.put(PerlElementTypes.PERL_VARIABLE_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.PERL_VARIABLE_SCALAR_BUILT_IN, new TextAttributesKey[]{PERL_SCALAR, PERL_BUILT_IN});

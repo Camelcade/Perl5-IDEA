@@ -7,6 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public class PodVisitor extends PsiElementVisitor {
 
+  public void visitParagraph(@NotNull PodParagraph o) {
+    visitPsiElement(o);
+  }
+
   public void visitPsiElement(@NotNull PsiElement o) {
     visitElement(o);
   }

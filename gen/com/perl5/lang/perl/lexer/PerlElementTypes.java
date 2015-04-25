@@ -11,6 +11,7 @@ import com.perl5.lang.perl.psi.impl.*;
 public interface PerlElementTypes {
 
   IElementType CODE_LINE = new PerlElementType("CODE_LINE");
+  IElementType CODE_LINE_VALID = new PerlElementType("CODE_LINE_VALID");
   IElementType FUNCTION_CALL = new PerlElementType("FUNCTION_CALL");
   IElementType FUNCTION_DEFINITION = new PerlElementType("FUNCTION_DEFINITION");
   IElementType FUNCTION_DEFINITION_ANON = new PerlElementType("FUNCTION_DEFINITION_ANON");
@@ -24,8 +25,12 @@ public interface PerlElementTypes {
   IElementType OBJECT_CALL = new PerlElementType("OBJECT_CALL");
   IElementType PACKAGE_DEFINITION = new PerlElementType("PACKAGE_DEFINITION");
   IElementType PACKAGE_NAMESPACE = new PerlElementType("PACKAGE_NAMESPACE");
+  IElementType PACKAGE_NO = new PerlElementType("PACKAGE_NO");
   IElementType PACKAGE_OBJECT_CALL = new PerlElementType("PACKAGE_OBJECT_CALL");
+  IElementType PACKAGE_REQUIRE = new PerlElementType("PACKAGE_REQUIRE");
   IElementType PACKAGE_STATIC_CALL = new PerlElementType("PACKAGE_STATIC_CALL");
+  IElementType PACKAGE_USE = new PerlElementType("PACKAGE_USE");
+  IElementType PACKAGE_USE_ARGUMENTS = new PerlElementType("PACKAGE_USE_ARGUMENTS");
   IElementType PERL_ARRAY_VALUE = new PerlElementType("PERL_ARRAY_VALUE");
   IElementType PERL_BLOCK = new PerlElementType("PERL_BLOCK");
   IElementType PERL_CALL_PARAM = new PerlElementType("PERL_CALL_PARAM");
@@ -38,6 +43,7 @@ public interface PerlElementTypes {
   IElementType PERL_SCALAR_VALUE = new PerlElementType("PERL_SCALAR_VALUE");
   IElementType PERL_SUBEXPRESSION = new PerlElementType("PERL_SUBEXPRESSION");
 
+  IElementType PERL_BAD_CHARACTER = new PerlTokenType("PERL_BAD_CHARACTER");
   IElementType PERL_COMMA = new PerlTokenType(",");
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
@@ -45,6 +51,7 @@ public interface PerlElementTypes {
   IElementType PERL_DEREFERENCE = new PerlTokenType("->");
   IElementType PERL_DQ_STRING = new PerlTokenType("PERL_DQ_STRING");
   IElementType PERL_FUNCTION_BUILT_IN = new PerlTokenType("PERL_FUNCTION_BUILT_IN");
+  IElementType PERL_FUNCTION_BUILT_IN_IMPLEMENTED = new PerlTokenType("PERL_FUNCTION_BUILT_IN_IMPLEMENTED");
   IElementType PERL_FUNCTION_USER = new PerlTokenType("PERL_FUNCTION_USER");
   IElementType PERL_LBRACE = new PerlTokenType("{");
   IElementType PERL_LBRACK = new PerlTokenType("[");
@@ -54,6 +61,7 @@ public interface PerlElementTypes {
   IElementType PERL_MULTILINE_MARKER = new PerlTokenType("PERL_MULTILINE_MARKER");
   IElementType PERL_MULTILINE_SQ = new PerlTokenType("PERL_MULTILINE_SQ");
   IElementType PERL_MULTILINE_XML = new PerlTokenType("PERL_MULTILINE_XML");
+  IElementType PERL_NEWLINE = new PerlTokenType("PERL_NEWLINE");
   IElementType PERL_NUMBER = new PerlTokenType("PERL_NUMBER");
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
   IElementType PERL_PACKAGE_BUILT_IN = new PerlTokenType("PERL_PACKAGE_BUILT_IN");
@@ -84,6 +92,9 @@ public interface PerlElementTypes {
       IElementType type = node.getElementType();
        if (type == CODE_LINE) {
         return new PerlCodeLineImpl(node);
+      }
+      else if (type == CODE_LINE_VALID) {
+        return new PerlCodeLineValidImpl(node);
       }
       else if (type == FUNCTION_CALL) {
         return new PerlFunctionCallImpl(node);
@@ -124,11 +135,23 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_NAMESPACE) {
         return new PerlPackageNamespaceImpl(node);
       }
+      else if (type == PACKAGE_NO) {
+        return new PerlPackageNoImpl(node);
+      }
       else if (type == PACKAGE_OBJECT_CALL) {
         return new PerlPackageObjectCallImpl(node);
       }
+      else if (type == PACKAGE_REQUIRE) {
+        return new PerlPackageRequireImpl(node);
+      }
       else if (type == PACKAGE_STATIC_CALL) {
         return new PerlPackageStaticCallImpl(node);
+      }
+      else if (type == PACKAGE_USE) {
+        return new PerlPackageUseImpl(node);
+      }
+      else if (type == PACKAGE_USE_ARGUMENTS) {
+        return new PerlPackageUseArgumentsImpl(node);
       }
       else if (type == PERL_ARRAY_VALUE) {
         return new PerlPerlArrayValueImpl(node);

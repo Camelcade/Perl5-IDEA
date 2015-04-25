@@ -24,8 +24,8 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
 
   @Override
   @NotNull
-  public List<PerlCodeLine> getCodeLineList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCodeLine.class);
+  public List<PerlCodeLineValid> getCodeLineValidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCodeLineValid.class);
   }
 
   @Override
