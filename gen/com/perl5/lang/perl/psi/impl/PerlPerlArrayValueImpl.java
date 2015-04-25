@@ -24,6 +24,12 @@ public class PerlPerlArrayValueImpl extends ASTWrapperPsiElement implements Perl
 
   @Override
   @NotNull
+  public List<PerlPerlArray> getPerlArrayList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlArray.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlPerlArrayValue> getPerlArrayValueList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlArrayValue.class);
   }

@@ -486,22 +486,21 @@ public class PerlPackage implements PerlElementTypes
 	));
 
 	static{
-		for( String functionName: BUILT_IN )
+		for( String packageName: BUILT_IN )
 		{
-			knownPackages.put(functionName, PERL_PACKAGE_BUILT_IN);
+			knownPackages.put(packageName, PERL_PACKAGE_BUILT_IN);
 		}
-		for( String functionName: BUILT_IN_PRAGMA )
+		for( String packageName: BUILT_IN_PRAGMA )
 		{
-			knownPackages.put(functionName, PERL_PACKAGE_BUILT_IN_PRAGMA);
+			knownPackages.put(packageName, PERL_PACKAGE_BUILT_IN_PRAGMA);
 		}
-		for( String functionName: BUILT_IN_DEPRECATED )
+		for( String packageName: BUILT_IN_DEPRECATED )
 		{
-			knownPackages.put(functionName, PERL_PACKAGE_BUILT_IN_DEPRECATED);
+			knownPackages.put(packageName, PERL_PACKAGE_BUILT_IN_DEPRECATED);
 		}
 	}
 
 
-	// @todo shouldn't we think about map search
 	public static IElementType getPackageType(String packageName)
 	{
 		IElementType packageType = knownPackages.get(packageName);

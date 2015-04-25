@@ -11,6 +11,9 @@ public interface PerlObjectCall extends PsiElement {
   PerlFunctionCallAny getFunctionCallAny();
 
   @Nullable
+  PerlPerlScalar getPerlScalar();
+
+  @Nullable
   PerlPerlScalarFunctionResult getPerlScalarFunctionResult();
 
   @Nullable
@@ -18,11 +21,5 @@ public interface PerlObjectCall extends PsiElement {
 
   @Nullable
   PsiElement getPerlSigilScalar();
-
-  @Nullable
-  PsiElement getPerlVariableScalar();
-
-  @Nullable
-  PsiElement getPerlVariableScalarBuiltIn();
 
 }

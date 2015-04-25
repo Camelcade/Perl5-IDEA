@@ -29,15 +29,9 @@ public class PerlFunctionCallAnyImpl extends ASTWrapperPsiElement implements Per
   }
 
   @Override
-  @Nullable
-  public PsiElement getPerlFunctionBuiltIn() {
-    return findChildByType(PERL_FUNCTION_BUILT_IN);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlFunctionUser() {
-    return findChildByType(PERL_FUNCTION_USER);
+  @NotNull
+  public PerlPerlFunctionAll getPerlFunctionAll() {
+    return findNotNullChildByClass(PerlPerlFunctionAll.class);
   }
 
 }

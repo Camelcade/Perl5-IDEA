@@ -100,6 +100,9 @@ public class PerlParser implements PsiParser {
     else if (t == PACKAGE_USE_INVALID) {
       r = package_use_invalid(b, 0);
     }
+    else if (t == PERL_ARRAY) {
+      r = perl_array(b, 0);
+    }
     else if (t == PERL_ARRAY_VALUE) {
       r = perl_array_value(b, 0);
     }
@@ -127,8 +130,20 @@ public class PerlParser implements PsiParser {
     else if (t == PERL_EXPRESSION) {
       r = perl_expression(b, 0);
     }
+    else if (t == PERL_FUNCTION_ALL) {
+      r = perl_function_all(b, 0);
+    }
+    else if (t == PERL_GLOB) {
+      r = perl_glob(b, 0);
+    }
+    else if (t == PERL_HASH) {
+      r = perl_hash(b, 0);
+    }
     else if (t == PERL_HASH_VALUE) {
       r = perl_hash_value(b, 0);
+    }
+    else if (t == PERL_SCALAR) {
+      r = perl_scalar(b, 0);
     }
     else if (t == PERL_SCALAR_FUNCTION_RESULT) {
       r = perl_scalar_function_result(b, 0);
@@ -801,14 +816,14 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // PERL_VARIABLE_ARRAY | PERL_VARIABLE_ARRAY_BUILT_IN
-  static boolean perl_array(PsiBuilder b, int l) {
+  public static boolean perl_array(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_array")) return false;
-    if (!nextTokenIs(b, "", PERL_VARIABLE_ARRAY, PERL_VARIABLE_ARRAY_BUILT_IN)) return false;
+    if (!nextTokenIs(b, "<perl array>", PERL_VARIABLE_ARRAY, PERL_VARIABLE_ARRAY_BUILT_IN)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, "<perl array>");
     r = consumeToken(b, PERL_VARIABLE_ARRAY);
     if (!r) r = consumeToken(b, PERL_VARIABLE_ARRAY_BUILT_IN);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, PERL_ARRAY, r, false, null);
     return r;
   }
 
@@ -1140,39 +1155,39 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // perl_function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
-  static boolean perl_function_all(PsiBuilder b, int l) {
+  public static boolean perl_function_all(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_function_all")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, "<perl function all>");
     r = perl_function(b, l + 1);
     if (!r) r = consumeToken(b, PERL_FUNCTION_BUILT_IN_IMPLEMENTED);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, PERL_FUNCTION_ALL, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
   // PERL_VARIABLE_GLOB | PERL_VARIABLE_GLOB_BUILT_IN
-  static boolean perl_glob(PsiBuilder b, int l) {
+  public static boolean perl_glob(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_glob")) return false;
-    if (!nextTokenIs(b, "", PERL_VARIABLE_GLOB, PERL_VARIABLE_GLOB_BUILT_IN)) return false;
+    if (!nextTokenIs(b, "<perl glob>", PERL_VARIABLE_GLOB, PERL_VARIABLE_GLOB_BUILT_IN)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, "<perl glob>");
     r = consumeToken(b, PERL_VARIABLE_GLOB);
     if (!r) r = consumeToken(b, PERL_VARIABLE_GLOB_BUILT_IN);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, PERL_GLOB, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
   // PERL_VARIABLE_HASH | PERL_VARIABLE_HASH_BUILT_IN
-  static boolean perl_hash(PsiBuilder b, int l) {
+  public static boolean perl_hash(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_hash")) return false;
-    if (!nextTokenIs(b, "", PERL_VARIABLE_HASH, PERL_VARIABLE_HASH_BUILT_IN)) return false;
+    if (!nextTokenIs(b, "<perl hash>", PERL_VARIABLE_HASH, PERL_VARIABLE_HASH_BUILT_IN)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, "<perl hash>");
     r = consumeToken(b, PERL_VARIABLE_HASH);
     if (!r) r = consumeToken(b, PERL_VARIABLE_HASH_BUILT_IN);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, PERL_HASH, r, false, null);
     return r;
   }
 
@@ -1284,14 +1299,14 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // PERL_VARIABLE_SCALAR | PERL_VARIABLE_SCALAR_BUILT_IN
-  static boolean perl_scalar(PsiBuilder b, int l) {
+  public static boolean perl_scalar(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_scalar")) return false;
-    if (!nextTokenIs(b, "", PERL_VARIABLE_SCALAR, PERL_VARIABLE_SCALAR_BUILT_IN)) return false;
+    if (!nextTokenIs(b, "<perl scalar>", PERL_VARIABLE_SCALAR, PERL_VARIABLE_SCALAR_BUILT_IN)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, "<perl scalar>");
     r = consumeToken(b, PERL_VARIABLE_SCALAR);
     if (!r) r = consumeToken(b, PERL_VARIABLE_SCALAR_BUILT_IN);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, PERL_SCALAR, r, false, null);
     return r;
   }
 

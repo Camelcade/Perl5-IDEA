@@ -17,7 +17,7 @@ public class PerlFunction implements PerlElementTypes
 {
 	protected static final HashMap<String,IElementType> knownFunctions = new HashMap<String,IElementType>();
 
-	private static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
+	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
 			"chomp",
@@ -366,7 +366,7 @@ public class PerlFunction implements PerlElementTypes
 			"xor"
 	));
 
-	private static final ArrayList<String> IMPLEMENTED = new ArrayList<String>( Arrays.asList(
+	public static final ArrayList<String> IMPLEMENTED = new ArrayList<String>( Arrays.asList(
 			"eval",
 			"if",
 			"package",

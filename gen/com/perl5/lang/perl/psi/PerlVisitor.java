@@ -111,6 +111,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPerlArray(@NotNull PerlPerlArray o) {
+    visitPsiElement(o);
+  }
+
   public void visitPerlArrayValue(@NotNull PerlPerlArrayValue o) {
     visitPsiElement(o);
   }
@@ -147,7 +151,23 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPerlFunctionAll(@NotNull PerlPerlFunctionAll o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlGlob(@NotNull PerlPerlGlob o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlHash(@NotNull PerlPerlHash o) {
+    visitPsiElement(o);
+  }
+
   public void visitPerlHashValue(@NotNull PerlPerlHashValue o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlScalar(@NotNull PerlPerlScalar o) {
     visitPsiElement(o);
   }
 

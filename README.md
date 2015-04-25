@@ -9,6 +9,7 @@ This project is currently in development, and if you want to participate - welco
 * Implementing JFlex lexer, some highlightning already works:
   * [Perl syntax highlighting](http://joxi.ru/E2pvKY6F17ZOrY.png)
   * [Perl errors annotations] (http://joxi.ru/4Ak35VMCG0LyAq.png)
+  * Autocompletion [here](http://dl2.joxi.net/drive/0004/3351/294167/150425/f3b95c5607.png) and [here](http://dl2.joxi.net/drive/0004/3351/294167/150425/bd420e815f.png)
   * [POD syntax highlighting] (http://joxi.ru/xAeGbp7tBRjZmy.png)
 
 #See also

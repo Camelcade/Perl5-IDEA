@@ -11,33 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlPerlHashValueImpl extends ASTWrapperPsiElement implements PerlPerlHashValue {
+public class PerlPerlGlobImpl extends ASTWrapperPsiElement implements PerlPerlGlob {
 
-  public PerlPerlHashValueImpl(ASTNode node) {
+  public PerlPerlGlobImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitPerlHashValue(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitPerlGlob(this);
     else super.accept(visitor);
   }
 
   @Override
   @Nullable
-  public PerlPerlHash getPerlHash() {
-    return findChildByClass(PerlPerlHash.class);
+  public PsiElement getPerlVariableGlob() {
+    return findChildByType(PERL_VARIABLE_GLOB);
   }
 
   @Override
   @Nullable
-  public PerlPerlScalarValue getPerlScalarValue() {
-    return findChildByClass(PerlPerlScalarValue.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlSigilHash() {
-    return findChildByType(PERL_SIGIL_HASH);
+  public PsiElement getPerlVariableGlobBuiltIn() {
+    return findChildByType(PERL_VARIABLE_GLOB_BUILT_IN);
   }
 
 }

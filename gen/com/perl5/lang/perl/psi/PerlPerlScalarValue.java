@@ -11,6 +11,9 @@ public interface PerlPerlScalarValue extends PsiElement {
   PerlPerlArrayValue getPerlArrayValue();
 
   @Nullable
+  PerlPerlScalar getPerlScalar();
+
+  @Nullable
   PerlPerlScalarFunctionResult getPerlScalarFunctionResult();
 
   @Nullable
@@ -33,12 +36,6 @@ public interface PerlPerlScalarValue extends PsiElement {
 
   @Nullable
   PsiElement getPerlSqString();
-
-  @Nullable
-  PsiElement getPerlVariableScalar();
-
-  @Nullable
-  PsiElement getPerlVariableScalarBuiltIn();
 
   @Nullable
   PsiElement getPerlVersion();

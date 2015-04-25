@@ -17,6 +17,9 @@ public interface PerlCodeLineInvalidElement extends PsiElement {
   PerlPerlArrayValue getPerlArrayValue();
 
   @Nullable
+  PerlPerlGlob getPerlGlob();
+
+  @Nullable
   PerlPerlHashValue getPerlHashValue();
 
   @Nullable
@@ -60,12 +63,6 @@ public interface PerlCodeLineInvalidElement extends PsiElement {
 
   @Nullable
   PsiElement getPerlPackageUser();
-
-  @Nullable
-  PsiElement getPerlVariableGlob();
-
-  @Nullable
-  PsiElement getPerlVariableGlobBuiltIn();
 
   @Nullable
   PsiElement getPerlVersion();

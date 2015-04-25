@@ -175,12 +175,12 @@ private perl_package ::=
     | PERL_PACKAGE_BUILT_IN_DEPRECATED
     | PERL_PACKAGE_BUILT_IN_PRAGMA
 
-private perl_function_all ::= perl_function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
+perl_function_all ::= perl_function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
 private perl_function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER
 
 //private perl_variable ::= perl_scalar | perl_glob | perl_array | perl_hash
-private perl_glob ::= PERL_VARIABLE_GLOB | PERL_VARIABLE_GLOB_BUILT_IN
-private perl_array ::= PERL_VARIABLE_ARRAY | PERL_VARIABLE_ARRAY_BUILT_IN
-private perl_hash ::= PERL_VARIABLE_HASH | PERL_VARIABLE_HASH_BUILT_IN
-private perl_scalar ::= PERL_VARIABLE_SCALAR | PERL_VARIABLE_SCALAR_BUILT_IN
+perl_glob ::= PERL_VARIABLE_GLOB | PERL_VARIABLE_GLOB_BUILT_IN
+perl_array ::= PERL_VARIABLE_ARRAY | PERL_VARIABLE_ARRAY_BUILT_IN
+perl_hash ::= PERL_VARIABLE_HASH | PERL_VARIABLE_HASH_BUILT_IN
+perl_scalar ::= PERL_VARIABLE_SCALAR | PERL_VARIABLE_SCALAR_BUILT_IN
 

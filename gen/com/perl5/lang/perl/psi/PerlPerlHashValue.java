@@ -8,15 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface PerlPerlHashValue extends PsiElement {
 
   @Nullable
+  PerlPerlHash getPerlHash();
+
+  @Nullable
   PerlPerlScalarValue getPerlScalarValue();
 
   @Nullable
   PsiElement getPerlSigilHash();
-
-  @Nullable
-  PsiElement getPerlVariableHash();
-
-  @Nullable
-  PsiElement getPerlVariableHashBuiltIn();
 
 }

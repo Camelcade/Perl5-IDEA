@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlPerlArrayValue extends PsiElement {
 
   @NotNull
+  List<PerlPerlArray> getPerlArrayList();
+
+  @NotNull
   List<PerlPerlArrayValue> getPerlArrayValueList();
 
   @NotNull

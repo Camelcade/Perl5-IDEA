@@ -42,6 +42,12 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @Nullable
+  public PerlPerlGlob getPerlGlob() {
+    return findChildByClass(PerlPerlGlob.class);
+  }
+
+  @Override
+  @Nullable
   public PerlPerlHashValue getPerlHashValue() {
     return findChildByClass(PerlPerlHashValue.class);
   }
@@ -128,18 +134,6 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
   @Nullable
   public PsiElement getPerlPackageUser() {
     return findChildByType(PERL_PACKAGE_USER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableGlob() {
-    return findChildByType(PERL_VARIABLE_GLOB);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableGlobBuiltIn() {
-    return findChildByType(PERL_VARIABLE_GLOB_BUILT_IN);
   }
 
   @Override

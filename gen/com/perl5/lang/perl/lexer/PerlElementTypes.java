@@ -36,6 +36,7 @@ public interface PerlElementTypes {
   IElementType PACKAGE_USE = new PerlElementType("PACKAGE_USE");
   IElementType PACKAGE_USE_ARGUMENTS = new PerlElementType("PACKAGE_USE_ARGUMENTS");
   IElementType PACKAGE_USE_INVALID = new PerlElementType("PACKAGE_USE_INVALID");
+  IElementType PERL_ARRAY = new PerlElementType("PERL_ARRAY");
   IElementType PERL_ARRAY_VALUE = new PerlElementType("PERL_ARRAY_VALUE");
   IElementType PERL_BLOCK = new PerlElementType("PERL_BLOCK");
   IElementType PERL_CALL_PARAM = new PerlElementType("PERL_CALL_PARAM");
@@ -45,7 +46,11 @@ public interface PerlElementTypes {
   IElementType PERL_EVAL = new PerlElementType("PERL_EVAL");
   IElementType PERL_EVAL_INVALID = new PerlElementType("PERL_EVAL_INVALID");
   IElementType PERL_EXPRESSION = new PerlElementType("PERL_EXPRESSION");
+  IElementType PERL_FUNCTION_ALL = new PerlElementType("PERL_FUNCTION_ALL");
+  IElementType PERL_GLOB = new PerlElementType("PERL_GLOB");
+  IElementType PERL_HASH = new PerlElementType("PERL_HASH");
   IElementType PERL_HASH_VALUE = new PerlElementType("PERL_HASH_VALUE");
+  IElementType PERL_SCALAR = new PerlElementType("PERL_SCALAR");
   IElementType PERL_SCALAR_FUNCTION_RESULT = new PerlElementType("PERL_SCALAR_FUNCTION_RESULT");
   IElementType PERL_SCALAR_VALUE = new PerlElementType("PERL_SCALAR_VALUE");
   IElementType PERL_SUBEXPRESSION = new PerlElementType("PERL_SUBEXPRESSION");
@@ -177,6 +182,9 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_USE_INVALID) {
         return new PerlPackageUseInvalidImpl(node);
       }
+      else if (type == PERL_ARRAY) {
+        return new PerlPerlArrayImpl(node);
+      }
       else if (type == PERL_ARRAY_VALUE) {
         return new PerlPerlArrayValueImpl(node);
       }
@@ -204,8 +212,20 @@ public interface PerlElementTypes {
       else if (type == PERL_EXPRESSION) {
         return new PerlPerlExpressionImpl(node);
       }
+      else if (type == PERL_FUNCTION_ALL) {
+        return new PerlPerlFunctionAllImpl(node);
+      }
+      else if (type == PERL_GLOB) {
+        return new PerlPerlGlobImpl(node);
+      }
+      else if (type == PERL_HASH) {
+        return new PerlPerlHashImpl(node);
+      }
       else if (type == PERL_HASH_VALUE) {
         return new PerlPerlHashValueImpl(node);
+      }
+      else if (type == PERL_SCALAR) {
+        return new PerlPerlScalarImpl(node);
       }
       else if (type == PERL_SCALAR_FUNCTION_RESULT) {
         return new PerlPerlScalarFunctionResultImpl(node);

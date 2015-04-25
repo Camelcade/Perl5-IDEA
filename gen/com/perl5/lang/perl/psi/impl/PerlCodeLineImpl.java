@@ -42,6 +42,12 @@ public class PerlCodeLineImpl extends ASTWrapperPsiElement implements PerlCodeLi
 
   @Override
   @NotNull
+  public List<PerlPerlGlob> getPerlGlobList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlGlob.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlPerlHashValue> getPerlHashValueList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlHashValue.class);
   }

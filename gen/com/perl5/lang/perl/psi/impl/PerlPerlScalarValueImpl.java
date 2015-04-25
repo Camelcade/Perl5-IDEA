@@ -30,6 +30,12 @@ public class PerlPerlScalarValueImpl extends ASTWrapperPsiElement implements Per
 
   @Override
   @Nullable
+  public PerlPerlScalar getPerlScalar() {
+    return findChildByClass(PerlPerlScalar.class);
+  }
+
+  @Override
+  @Nullable
   public PerlPerlScalarFunctionResult getPerlScalarFunctionResult() {
     return findChildByClass(PerlPerlScalarFunctionResult.class);
   }
@@ -74,18 +80,6 @@ public class PerlPerlScalarValueImpl extends ASTWrapperPsiElement implements Per
   @Nullable
   public PsiElement getPerlSqString() {
     return findChildByType(PERL_SQ_STRING);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableScalar() {
-    return findChildByType(PERL_VARIABLE_SCALAR);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableScalarBuiltIn() {
-    return findChildByType(PERL_VARIABLE_SCALAR_BUILT_IN);
   }
 
   @Override

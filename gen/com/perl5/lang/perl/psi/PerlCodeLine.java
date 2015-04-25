@@ -17,6 +17,9 @@ public interface PerlCodeLine extends PsiElement {
   List<PerlPerlArrayValue> getPerlArrayValueList();
 
   @NotNull
+  List<PerlPerlGlob> getPerlGlobList();
+
+  @NotNull
   List<PerlPerlHashValue> getPerlHashValueList();
 
   @NotNull

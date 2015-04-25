@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlFunctionCallAny extends PsiElement {
-
-  @Nullable
-  PerlPerlCallParamsAny getPerlCallParamsAny();
+public interface PerlPerlEvalInvalid extends PsiElement {
 
   @NotNull
-  PerlPerlFunctionAll getPerlFunctionAll();
+  List<PerlCodeLineInvalidElement> getCodeLineInvalidElementList();
 
 }

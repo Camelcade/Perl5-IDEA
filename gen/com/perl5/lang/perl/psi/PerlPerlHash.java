@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlFunctionCallAny extends PsiElement {
+public interface PerlPerlHash extends PsiElement {
 
   @Nullable
-  PerlPerlCallParamsAny getPerlCallParamsAny();
+  PsiElement getPerlVariableHash();
 
-  @NotNull
-  PerlPerlFunctionAll getPerlFunctionAll();
+  @Nullable
+  PsiElement getPerlVariableHashBuiltIn();
 
 }
