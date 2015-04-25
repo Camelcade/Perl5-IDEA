@@ -76,7 +76,7 @@ FULL_LINE       = .*{NEW_LINE}?
 DQ_STRING        = \"[^\"\n\r]*\"
 SQ_STRING        = \'[^\'\n\r]*\'
 
-PERL_OPERATORS = "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor"
+PERL_OPERATORS = "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined"
 
 MULTILINE_MARKER = [^\"\'\s\n\r ]+
 MULTILINE_MARKER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
@@ -162,7 +162,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     {
         startMultiLine();
     }
-    return PERL_NEWLINE;
+    return TokenType.NEW_LINE_INDENT;
 }
 
 <LEX_MULTILINE>{
@@ -187,7 +187,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 <LEX_PACKAGE_DEFINITION>{
     {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
-    {PACKAGE_NAME}      {yybegin(LEX_PACKAGE_DEFINITION_VERSION); return PERL_PACKAGE;}
+    {PACKAGE_NAME}      {yybegin(LEX_PACKAGE_DEFINITION_VERSION); return PerlPackage.getPackageType(yytext().toString());}
     .   {yybegin(YYINITIAL);  return TokenType.BAD_CHARACTER;}
 }
 
@@ -263,7 +263,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 {PACKAGE_STATIC_CALL} {
     yybegin(PACKAGE_STATIC_CALL);
     yypushback(2);
-    return PERL_PACKAGE;
+    return PerlPackage.getPackageType(yytext().toString());
 }
 
 <PACKAGE_INSTANCE_CALL>
@@ -274,11 +274,11 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 {PACKAGE_INSTANCE_CALL} {
     yybegin(PACKAGE_INSTANCE_CALL);
     yypushback(2);
-    return PERL_PACKAGE;
+    return PerlPackage.getPackageType(yytext().toString());
 }
 
 <LEX_REQUIRE>{
-    {PACKAGE_NAME}    {return PERL_PACKAGE;}
+    {PACKAGE_NAME}    {return PerlPackage.getPackageType(yytext().toString());}
 }
 
 <YYINITIAL> {

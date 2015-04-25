@@ -507,7 +507,7 @@ public class PerlPackage implements PerlElementTypes
 		IElementType packageType = knownPackages.get(packageName);
 
 		return packageType == null
-				? PERL_PACKAGE
+				? PERL_PACKAGE_USER
 				: packageType;
 	}
 
