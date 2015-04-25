@@ -88,7 +88,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN_PRAGMA, new TextAttributesKey[]{PERL_PACKAGE_PRAGMA, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN_DEPRECATED, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN, PERL_DEPRECATED});
 
-		attributesMap.put(PerlElementTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
+		attributesMap.put(PerlElementTypes.PERL_FUNCTION_PACKAGE, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_FUNCTION_SUB, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
+
+		attributesMap.put(PerlElementTypes.PERL_FUNCTION_USER, new TextAttributesKey[]{PERL_FUNCTION});
 		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_VARIABLE_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.PERL_VARIABLE_SCALAR_BUILT_IN, new TextAttributesKey[]{PERL_SCALAR, PERL_BUILT_IN});

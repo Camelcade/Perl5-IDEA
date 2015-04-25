@@ -5,6 +5,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by hurricup on 24.04.2015.
@@ -12,17 +13,7 @@ import java.util.Arrays;
 // @todo this class should be auto-generated from Module::CoreList and has same functionality, like version and deprication control
 public class PerlPackage implements PerlElementTypes
 {
-	// @todo shouldn't we think about map search
-	public static IElementType getPackageType(String packageName)
-	{
-		return BUILT_IN.contains(packageName)
-				? PERL_PACKAGE_BUILT_IN
-				: BUILT_IN_PRAGMA.contains(packageName)
-					? PERL_PACKAGE_BUILT_IN_PRAGMA
-					: BUILT_IN_DEPRECATED.contains(packageName)
-						? PERL_PACKAGE_BUILT_IN_DEPRECATED
-						: PERL_PACKAGE;
-	}
+	protected static final HashMap<String,IElementType> knownPackages = new HashMap<String,IElementType>();
 
 	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
 			"AnyDBM_File",
@@ -487,11 +478,38 @@ public class PerlPackage implements PerlElementTypes
 	));
 
 	public static final ArrayList<String> BUILT_IN_DEPRECATED = new ArrayList<String>( Arrays.asList(
-		"Locale::Maketext::Guts",
-		"Locale::Maketext::GutsLoader",
-		"Module::Build::ModuleInfo",
-		"Module::Build::Version",
-		"Module::Build::YAML"
+			"Locale::Maketext::Guts",
+			"Locale::Maketext::GutsLoader",
+			"Module::Build::ModuleInfo",
+			"Module::Build::Version",
+			"Module::Build::YAML"
 	));
+
+	static{
+		for( String functionName: BUILT_IN )
+		{
+			knownPackages.put(functionName, PERL_PACKAGE_BUILT_IN);
+		}
+		for( String functionName: BUILT_IN_PRAGMA )
+		{
+			knownPackages.put(functionName, PERL_PACKAGE_BUILT_IN_PRAGMA);
+		}
+		for( String functionName: BUILT_IN_DEPRECATED )
+		{
+			knownPackages.put(functionName, PERL_PACKAGE_BUILT_IN_DEPRECATED);
+		}
+	}
+
+
+	// @todo shouldn't we think about map search
+	public static IElementType getPackageType(String packageName)
+	{
+		IElementType packageType = knownPackages.get(packageName);
+
+		return packageType == null
+				? PERL_PACKAGE
+				: packageType;
+	}
+
 
 }

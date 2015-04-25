@@ -204,7 +204,7 @@ public class PerlFunction implements PerlElementTypes
 			"__PACKAGE__",
 			"redo",
 			"return",
-			"sub",
+//			"sub",
 			"__SUB__",
 			"wantarray",
 
@@ -214,7 +214,7 @@ public class PerlFunction implements PerlElementTypes
 			"local",
 			"my",
 			"our",
-			"package",
+//			"package",
 			"state",
 			"use",
 
@@ -378,23 +378,18 @@ public class PerlFunction implements PerlElementTypes
 		{
 			knownFunctions.put(functionName, PERL_FUNCTION_BUILT_IN);
 		}
+		knownFunctions.put("package", PERL_FUNCTION_PACKAGE);
+		knownFunctions.put("sub", PERL_FUNCTION_SUB);
 	}
 
 	public static IElementType getFunctionType(String function)
 	{
 		IElementType functionType;
 
-		if( function.equals("package"))
-		{
-			return PERL_FUNCTION_PACKAGE;
-		}
-		else
-		{
-			functionType = knownFunctions.get(function);
-		}
+		functionType = knownFunctions.get(function);
 
 		return functionType == null
-				? PERL_FUNCTION
+				? PERL_FUNCTION_USER
 				: functionType;
 	}
 

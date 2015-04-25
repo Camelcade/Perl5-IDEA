@@ -32,6 +32,7 @@
     PERL_SQ_STRING
 
     PERL_FUNCTION_PACKAGE
+    PERL_FUNCTION_SUB
 
     PERL_NUMBER
     PERL_STATIC_METHOD_CALL
@@ -44,7 +45,7 @@
     PERL_VARIABLE_ARRAY_BUILT_IN
     PERL_VARIABLE_HASH_BUILT_IN
     PERL_VARIABLE_GLOB_BUILT_IN
-    PERL_FUNCTION
+    PERL_FUNCTION_USER
     PERL_FUNCTION_BUILT_IN
     PERL_PACKAGE
     PERL_PACKAGE_BUILT_IN
@@ -67,21 +68,34 @@
 
 }
 
-perlFile ::= item_*
+perlFile ::= block_item*
 
-private item_ ::= package_contents | package_namespace
+function_definition ::= function_definition_named | function_definition_anon
+function_definition_named ::= PERL_FUNCTION_SUB perl_function perl_block PERL_SEMI?
+function_definition_anon ::= PERL_FUNCTION_SUB perl_block PERL_SEMI
 
-package_namespace ::= package_definition (script_block | (PERL_SEMI package_contents * ))
-script_item ::= (script_block | any_item)* PERL_SEMI multiline ?
+package_namespace ::= package_definition (perl_block | package_item * )
+package_definition ::= PERL_FUNCTION_PACKAGE package_bare PERL_VERSION ? PERL_SEMI ?
 
-script_block ::= PERL_LBRACE package_contents* PERL_RBRACE
+perl_block ::= PERL_LBRACE block_item* PERL_RBRACE
+private block_item ::= package_namespace | package_item
+private package_item ::= function_definition | perl_block | code_line | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK
 
-private package_contents ::= PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | PERL_BAD_CHARACTER | script_item
+code_line ::= code_line_elements* PERL_SEMI perl_multiline_string ?
+private code_line_elements ::= perl_controls | perl_chars | perl_call | perl_variable | perl_string | perl_multiline_string | package_bare | perl_function | PERL_MULTILINE_MARKER |  PERL_NUMBER
 
-private any_item ::= script_block | multiline | perl_string | PERL_NEWLINE | PERL_MULTILINE_MARKER  |  PERL_NUMBER | PERL_STATIC_METHOD_CALL | PERL_INSTANCE_METHOD_CALL | PERL_VARIABLE_SCALAR | PERL_VARIABLE_ARRAY | PERL_VARIABLE_HASH | PERL_VARIABLE_GLOB | PERL_VARIABLE_SCALAR_BUILT_IN | PERL_VARIABLE_ARRAY_BUILT_IN | PERL_VARIABLE_HASH_BUILT_IN | PERL_VARIABLE_GLOB_BUILT_IN | PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_PRAGMA | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_OPERATOR | PERL_DEREFERENCE | PERL_DEPACKAGE | PERL_COMMA | PERL_LBRACK | PERL_RBRACK | PERL_LPAREN | PERL_RPAREN
-
+// Generalizations
+private perl_controls ::= PERL_OPERATOR | PERL_DEREFERENCE | PERL_DEPACKAGE | PERL_COMMA | PERL_LBRACK | PERL_RBRACK | PERL_LPAREN | PERL_RPAREN
+private perl_chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
+private perl_call ::= PERL_STATIC_METHOD_CALL | PERL_INSTANCE_METHOD_CALL
 private perl_string ::= PERL_DQ_STRING | PERL_SQ_STRING
-private multiline ::= (PERL_MULTILINE_SQ | PERL_MULTILINE_DQ| PERL_MULTILINE_XML | PERL_MULTILINE_HTML) PERL_MULTILINE_MARKER
+private perl_multiline_string ::= (PERL_MULTILINE_SQ | PERL_MULTILINE_DQ| PERL_MULTILINE_XML | PERL_MULTILINE_HTML) PERL_MULTILINE_MARKER
+private package_bare ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_PACKAGE_BUILT_IN_PRAGMA;
+private perl_function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER
 
-package_definition ::= PERL_FUNCTION_PACKAGE package_name_bare PERL_VERSION ?
-private package_name_bare ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_PACKAGE_BUILT_IN_PRAGMA;
+private perl_variable ::= perl_scalar | perl_glob | perl_array | perl_hash
+private perl_glob ::= PERL_VARIABLE_GLOB | PERL_VARIABLE_GLOB_BUILT_IN
+private perl_array ::= PERL_VARIABLE_ARRAY | PERL_VARIABLE_ARRAY_BUILT_IN
+private perl_hash ::= PERL_VARIABLE_HASH | PERL_VARIABLE_HASH_BUILT_IN
+private perl_scalar ::= PERL_VARIABLE_SCALAR | PERL_VARIABLE_SCALAR_BUILT_IN
+
