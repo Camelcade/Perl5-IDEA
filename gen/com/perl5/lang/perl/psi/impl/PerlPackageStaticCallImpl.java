@@ -24,8 +24,8 @@ public class PerlPackageStaticCallImpl extends ASTWrapperPsiElement implements P
 
   @Override
   @NotNull
-  public PerlFunctionCall getFunctionCall() {
-    return findNotNullChildByClass(PerlFunctionCall.class);
+  public PerlFunctionCallAny getFunctionCallAny() {
+    return findNotNullChildByClass(PerlFunctionCallAny.class);
   }
 
   @Override

@@ -42,14 +42,56 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
 
   @Override
   @NotNull
-  public PerlPackageDefinition getPackageDefinition() {
-    return findNotNullChildByClass(PerlPackageDefinition.class);
+  public List<PerlPackageNoInvalid> getPackageNoInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNoInvalid.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPackageRequireInvalid> getPackageRequireInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageRequireInvalid.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPackageUseInvalid> getPackageUseInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageUseInvalid.class);
   }
 
   @Override
   @NotNull
   public List<PerlPerlBlock> getPerlBlockList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getPerlPackageBuiltIn() {
+    return findChildByType(PERL_PACKAGE_BUILT_IN);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getPerlPackageBuiltInDeprecated() {
+    return findChildByType(PERL_PACKAGE_BUILT_IN_DEPRECATED);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getPerlPackageBuiltInPragma() {
+    return findChildByType(PERL_PACKAGE_BUILT_IN_PRAGMA);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getPerlPackageUser() {
+    return findChildByType(PERL_PACKAGE_USER);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getPerlVersion() {
+    return findChildByType(PERL_VERSION);
   }
 
 }

@@ -17,9 +17,30 @@ public interface PerlPackageNamespace extends PsiElement {
   List<PerlIfBlock> getIfBlockList();
 
   @NotNull
-  PerlPackageDefinition getPackageDefinition();
+  List<PerlPackageNoInvalid> getPackageNoInvalidList();
+
+  @NotNull
+  List<PerlPackageRequireInvalid> getPackageRequireInvalidList();
+
+  @NotNull
+  List<PerlPackageUseInvalid> getPackageUseInvalidList();
 
   @NotNull
   List<PerlPerlBlock> getPerlBlockList();
+
+  @Nullable
+  PsiElement getPerlPackageBuiltIn();
+
+  @Nullable
+  PsiElement getPerlPackageBuiltInDeprecated();
+
+  @Nullable
+  PsiElement getPerlPackageBuiltInPragma();
+
+  @Nullable
+  PsiElement getPerlPackageUser();
+
+  @Nullable
+  PsiElement getPerlVersion();
 
 }

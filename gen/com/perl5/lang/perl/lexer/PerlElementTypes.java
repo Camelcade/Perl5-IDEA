@@ -11,8 +11,10 @@ import com.perl5.lang.perl.psi.impl.*;
 public interface PerlElementTypes {
 
   IElementType CODE_LINE = new PerlElementType("CODE_LINE");
+  IElementType CODE_LINE_INVALID_ELEMENT = new PerlElementType("CODE_LINE_INVALID_ELEMENT");
   IElementType CODE_LINE_VALID = new PerlElementType("CODE_LINE_VALID");
   IElementType FUNCTION_CALL = new PerlElementType("FUNCTION_CALL");
+  IElementType FUNCTION_CALL_ANY = new PerlElementType("FUNCTION_CALL_ANY");
   IElementType FUNCTION_DEFINITION = new PerlElementType("FUNCTION_DEFINITION");
   IElementType FUNCTION_DEFINITION_ANON = new PerlElementType("FUNCTION_DEFINITION_ANON");
   IElementType FUNCTION_DEFINITION_NAMED = new PerlElementType("FUNCTION_DEFINITION_NAMED");
@@ -23,14 +25,17 @@ public interface PerlElementTypes {
   IElementType IF_BRANCH_CONDITIONAL = new PerlElementType("IF_BRANCH_CONDITIONAL");
   IElementType METHOD_CALL = new PerlElementType("METHOD_CALL");
   IElementType OBJECT_CALL = new PerlElementType("OBJECT_CALL");
-  IElementType PACKAGE_DEFINITION = new PerlElementType("PACKAGE_DEFINITION");
+  IElementType PACKAGE_DEFINITION_INVALID = new PerlElementType("PACKAGE_DEFINITION_INVALID");
   IElementType PACKAGE_NAMESPACE = new PerlElementType("PACKAGE_NAMESPACE");
   IElementType PACKAGE_NO = new PerlElementType("PACKAGE_NO");
+  IElementType PACKAGE_NO_INVALID = new PerlElementType("PACKAGE_NO_INVALID");
   IElementType PACKAGE_OBJECT_CALL = new PerlElementType("PACKAGE_OBJECT_CALL");
   IElementType PACKAGE_REQUIRE = new PerlElementType("PACKAGE_REQUIRE");
+  IElementType PACKAGE_REQUIRE_INVALID = new PerlElementType("PACKAGE_REQUIRE_INVALID");
   IElementType PACKAGE_STATIC_CALL = new PerlElementType("PACKAGE_STATIC_CALL");
   IElementType PACKAGE_USE = new PerlElementType("PACKAGE_USE");
   IElementType PACKAGE_USE_ARGUMENTS = new PerlElementType("PACKAGE_USE_ARGUMENTS");
+  IElementType PACKAGE_USE_INVALID = new PerlElementType("PACKAGE_USE_INVALID");
   IElementType PERL_ARRAY_VALUE = new PerlElementType("PERL_ARRAY_VALUE");
   IElementType PERL_BLOCK = new PerlElementType("PERL_BLOCK");
   IElementType PERL_CALL_PARAM = new PerlElementType("PERL_CALL_PARAM");
@@ -93,11 +98,17 @@ public interface PerlElementTypes {
        if (type == CODE_LINE) {
         return new PerlCodeLineImpl(node);
       }
+      else if (type == CODE_LINE_INVALID_ELEMENT) {
+        return new PerlCodeLineInvalidElementImpl(node);
+      }
       else if (type == CODE_LINE_VALID) {
         return new PerlCodeLineValidImpl(node);
       }
       else if (type == FUNCTION_CALL) {
         return new PerlFunctionCallImpl(node);
+      }
+      else if (type == FUNCTION_CALL_ANY) {
+        return new PerlFunctionCallAnyImpl(node);
       }
       else if (type == FUNCTION_DEFINITION) {
         return new PerlFunctionDefinitionImpl(node);
@@ -129,8 +140,8 @@ public interface PerlElementTypes {
       else if (type == OBJECT_CALL) {
         return new PerlObjectCallImpl(node);
       }
-      else if (type == PACKAGE_DEFINITION) {
-        return new PerlPackageDefinitionImpl(node);
+      else if (type == PACKAGE_DEFINITION_INVALID) {
+        return new PerlPackageDefinitionInvalidImpl(node);
       }
       else if (type == PACKAGE_NAMESPACE) {
         return new PerlPackageNamespaceImpl(node);
@@ -138,11 +149,17 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_NO) {
         return new PerlPackageNoImpl(node);
       }
+      else if (type == PACKAGE_NO_INVALID) {
+        return new PerlPackageNoInvalidImpl(node);
+      }
       else if (type == PACKAGE_OBJECT_CALL) {
         return new PerlPackageObjectCallImpl(node);
       }
       else if (type == PACKAGE_REQUIRE) {
         return new PerlPackageRequireImpl(node);
+      }
+      else if (type == PACKAGE_REQUIRE_INVALID) {
+        return new PerlPackageRequireInvalidImpl(node);
       }
       else if (type == PACKAGE_STATIC_CALL) {
         return new PerlPackageStaticCallImpl(node);
@@ -152,6 +169,9 @@ public interface PerlElementTypes {
       }
       else if (type == PACKAGE_USE_ARGUMENTS) {
         return new PerlPackageUseArgumentsImpl(node);
+      }
+      else if (type == PACKAGE_USE_INVALID) {
+        return new PerlPackageUseInvalidImpl(node);
       }
       else if (type == PERL_ARRAY_VALUE) {
         return new PerlPerlArrayValueImpl(node);

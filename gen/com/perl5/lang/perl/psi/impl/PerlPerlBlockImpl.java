@@ -42,8 +42,32 @@ public class PerlPerlBlockImpl extends ASTWrapperPsiElement implements PerlPerlB
 
   @Override
   @NotNull
+  public List<PerlPackageDefinitionInvalid> getPackageDefinitionInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageDefinitionInvalid.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlPackageNamespace> getPackageNamespaceList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNamespace.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPackageNoInvalid> getPackageNoInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNoInvalid.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPackageRequireInvalid> getPackageRequireInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageRequireInvalid.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPackageUseInvalid> getPackageUseInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageUseInvalid.class);
   }
 
   @Override

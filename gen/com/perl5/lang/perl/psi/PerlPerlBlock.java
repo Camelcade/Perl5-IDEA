@@ -17,7 +17,19 @@ public interface PerlPerlBlock extends PsiElement {
   List<PerlIfBlock> getIfBlockList();
 
   @NotNull
+  List<PerlPackageDefinitionInvalid> getPackageDefinitionInvalidList();
+
+  @NotNull
   List<PerlPackageNamespace> getPackageNamespaceList();
+
+  @NotNull
+  List<PerlPackageNoInvalid> getPackageNoInvalidList();
+
+  @NotNull
+  List<PerlPackageRequireInvalid> getPackageRequireInvalidList();
+
+  @NotNull
+  List<PerlPackageUseInvalid> getPackageUseInvalidList();
 
   @NotNull
   List<PerlPerlBlock> getPerlBlockList();

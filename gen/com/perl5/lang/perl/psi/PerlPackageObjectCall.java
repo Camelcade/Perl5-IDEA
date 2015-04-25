@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface PerlPackageObjectCall extends PsiElement {
 
   @NotNull
-  PerlFunctionCall getFunctionCall();
+  PerlFunctionCallAny getFunctionCallAny();
 
   @Nullable
   PsiElement getPerlPackageBuiltIn();

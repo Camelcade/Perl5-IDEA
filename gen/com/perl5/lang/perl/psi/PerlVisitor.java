@@ -11,11 +11,19 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCodeLineInvalidElement(@NotNull PerlCodeLineInvalidElement o) {
+    visitPsiElement(o);
+  }
+
   public void visitCodeLineValid(@NotNull PerlCodeLineValid o) {
     visitPsiElement(o);
   }
 
   public void visitFunctionCall(@NotNull PerlFunctionCall o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFunctionCallAny(@NotNull PerlFunctionCallAny o) {
     visitPsiElement(o);
   }
 
@@ -59,7 +67,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPackageDefinition(@NotNull PerlPackageDefinition o) {
+  public void visitPackageDefinitionInvalid(@NotNull PerlPackageDefinitionInvalid o) {
     visitPsiElement(o);
   }
 
@@ -71,11 +79,19 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPackageNoInvalid(@NotNull PerlPackageNoInvalid o) {
+    visitPsiElement(o);
+  }
+
   public void visitPackageObjectCall(@NotNull PerlPackageObjectCall o) {
     visitPsiElement(o);
   }
 
   public void visitPackageRequire(@NotNull PerlPackageRequire o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPackageRequireInvalid(@NotNull PerlPackageRequireInvalid o) {
     visitPsiElement(o);
   }
 
@@ -88,6 +104,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitPackageUseArguments(@NotNull PerlPackageUseArguments o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPackageUseInvalid(@NotNull PerlPackageUseInvalid o) {
     visitPsiElement(o);
   }
 

@@ -72,21 +72,29 @@ function_definition ::= function_definition_named | function_definition_anon
 function_definition_named ::= 'sub' perl_function perl_block ';' ?
 function_definition_anon ::= 'sub' perl_block ';'
 
-package_namespace ::= package_definition (perl_block | package_item * )
-package_definition ::= 'package' perl_package PERL_VERSION ? ';' ?
+package_namespace ::= 'package' perl_package PERL_VERSION ? (perl_block | ';' package_item * )
 
 perl_block ::= '{' block_item* '}'
 
-private block_item ::= package_namespace | package_item
-private package_item ::= function_definition | if_block | code_line_valid | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | perl_block //| code_line_invalid
+private block_item ::= package_namespace | package_item | package_definition_invalid
+private package_item ::= function_definition | if_block | code_line_valid | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | perl_block | code_line_invalid
 
 private code_line_element ::= method_call | function_call| perl_function | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
 private code_line_elements ::= code_line_element +
 
 code_line_valid ::= package_use | package_no | package_require | code_line
 
-//code_line_invalid ::= PERL_FUNCTION_BUILT_IN_IMPLEMENTED code_line_invalid_element*';'
-//code_line_invalid_element ::= code_line_element | perl_package | PERL_VERSION | perl_controls | perl_chars;
+private code_line_invalid ::=
+    package_use_invalid
+    | package_no_invalid
+    | package_require_invalid
+
+package_definition_invalid ::= 'package' code_line_invalid_element*';'
+package_use_invalid ::= 'use' code_line_invalid_element*';'
+package_no_invalid ::= 'no' code_line_invalid_element*';'
+package_require_invalid ::= 'require' code_line_invalid_element*';';
+
+code_line_invalid_element ::= code_line_element | perl_package | PERL_VERSION | perl_controls | perl_chars;
 
 package_use ::= 'use' package_use_arguments ';'
 package_no ::= 'no' package_use_arguments ';'
@@ -107,10 +115,11 @@ perl_expression ::= (code_line_elements | perl_subexpression) +
 perl_subexpression ::= '(' code_line_elements ')'
 
 method_call ::= package_static_call | package_object_call | object_call
-object_call ::= perl_scalar_value_var '->' function_call
-package_static_call ::= perl_package '::' function_call
-package_object_call ::= perl_package '->' function_call
+object_call ::= perl_scalar_value_var '->' function_call_any
+package_static_call ::= perl_package '::' function_call_any
+package_object_call ::= perl_package '->' function_call_any
 
+function_call_any ::= perl_function_all perl_call_params_any ?
 function_call ::= perl_function perl_call_params_any ?
 perl_call_params_any ::= perl_call_params_strict | perl_call_params
 perl_call_params_strict ::= '(' perl_call_params ')'
@@ -143,6 +152,8 @@ private perl_chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
 private perl_string ::= PERL_DQ_STRING | PERL_SQ_STRING
 private perl_multiline_string ::= (PERL_MULTILINE_SQ | PERL_MULTILINE_DQ| PERL_MULTILINE_XML | PERL_MULTILINE_HTML) PERL_MULTILINE_MARKER
 private perl_package ::= PERL_PACKAGE_USER | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_PACKAGE_BUILT_IN_PRAGMA
+
+private perl_function_all ::= perl_function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
 private perl_function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER
 
 //private perl_variable ::= perl_scalar | perl_glob | perl_array | perl_hash
