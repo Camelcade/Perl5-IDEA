@@ -65,6 +65,12 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
   }
 
   @Override
+  @NotNull
+  public List<PerlPerlEvalInvalid> getPerlEvalInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlEvalInvalid.class);
+  }
+
+  @Override
   @Nullable
   public PsiElement getPerlPackageBuiltIn() {
     return findChildByType(PERL_PACKAGE_BUILT_IN);

@@ -19,4 +19,7 @@ public interface PerlCodeLineValid extends PsiElement {
   @Nullable
   PerlPackageUse getPackageUse();
 
+  @Nullable
+  PerlPerlEval getPerlEval();
+
 }

@@ -34,4 +34,7 @@ public interface PerlPerlBlock extends PsiElement {
   @NotNull
   List<PerlPerlBlock> getPerlBlockList();
 
+  @NotNull
+  List<PerlPerlEvalInvalid> getPerlEvalInvalidList();
+
 }

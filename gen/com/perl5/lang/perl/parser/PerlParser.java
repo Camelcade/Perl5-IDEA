@@ -118,6 +118,12 @@ public class PerlParser implements PsiParser {
     else if (t == PERL_CALL_PARAMS_STRICT) {
       r = perl_call_params_strict(b, 0);
     }
+    else if (t == PERL_EVAL) {
+      r = perl_eval(b, 0);
+    }
+    else if (t == PERL_EVAL_INVALID) {
+      r = perl_eval_invalid(b, 0);
+    }
     else if (t == PERL_EXPRESSION) {
       r = perl_expression(b, 0);
     }
@@ -229,6 +235,7 @@ public class PerlParser implements PsiParser {
   // package_use_invalid
   //     | package_no_invalid
   //     | package_require_invalid
+  //     | perl_eval_invalid
   static boolean code_line_invalid(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "code_line_invalid")) return false;
     boolean r;
@@ -236,6 +243,7 @@ public class PerlParser implements PsiParser {
     r = package_use_invalid(b, l + 1);
     if (!r) r = package_no_invalid(b, l + 1);
     if (!r) r = package_require_invalid(b, l + 1);
+    if (!r) r = perl_eval_invalid(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -256,12 +264,13 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // package_use | package_no | package_require | code_line
+  // perl_eval | package_use | package_no | package_require | code_line
   public static boolean code_line_valid(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "code_line_valid")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<code line valid>");
-    r = package_use(b, l + 1);
+    r = perl_eval(b, l + 1);
+    if (!r) r = package_use(b, l + 1);
     if (!r) r = package_no(b, l + 1);
     if (!r) r = package_require(b, l + 1);
     if (!r) r = code_line(b, l + 1);
@@ -1040,6 +1049,55 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // 'eval' (perl_block | perl_scalar_value) ';'
+  public static boolean perl_eval(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_eval")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<perl eval>");
+    r = consumeToken(b, "eval");
+    r = r && perl_eval_1(b, l + 1);
+    r = r && consumeToken(b, PERL_SEMI);
+    exit_section_(b, l, m, PERL_EVAL, r, false, null);
+    return r;
+  }
+
+  // perl_block | perl_scalar_value
+  private static boolean perl_eval_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_eval_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = perl_block(b, l + 1);
+    if (!r) r = perl_scalar_value(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'eval' code_line_invalid_element * ';'
+  public static boolean perl_eval_invalid(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_eval_invalid")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<perl eval invalid>");
+    r = consumeToken(b, "eval");
+    r = r && perl_eval_invalid_1(b, l + 1);
+    r = r && consumeToken(b, PERL_SEMI);
+    exit_section_(b, l, m, PERL_EVAL_INVALID, r, false, null);
+    return r;
+  }
+
+  // code_line_invalid_element *
+  private static boolean perl_eval_invalid_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_eval_invalid_1")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!code_line_invalid_element(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "perl_eval_invalid_1", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
   // (code_line_elements | perl_subexpression) +
   public static boolean perl_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_expression")) return false;
@@ -1208,7 +1266,10 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // PERL_PACKAGE_USER | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_PACKAGE_BUILT_IN_PRAGMA
+  // PERL_PACKAGE_USER
+  //     | PERL_PACKAGE_BUILT_IN
+  //     | PERL_PACKAGE_BUILT_IN_DEPRECATED
+  //     | PERL_PACKAGE_BUILT_IN_PRAGMA
   static boolean perl_package(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_package")) return false;
     boolean r;
@@ -1352,7 +1413,9 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // PERL_DQ_STRING | PERL_SQ_STRING | PERL_DX_STRING
+  // PERL_DQ_STRING
+  //     | PERL_SQ_STRING
+  //     | PERL_DX_STRING
   static boolean perl_string(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_string")) return false;
     boolean r;

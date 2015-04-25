@@ -193,7 +193,6 @@ public class PerlFunction implements PerlElementTypes
 			"die",
 			"do",
 			"dump",
-			"eval",
 			"evalbytes",
 			"exit",
 			"__FILE__",
@@ -368,6 +367,7 @@ public class PerlFunction implements PerlElementTypes
 	));
 
 	private static final ArrayList<String> IMPLEMENTED = new ArrayList<String>( Arrays.asList(
+			"eval",
 			"if",
 			"package",
 			"require",

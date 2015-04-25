@@ -46,4 +46,10 @@ public class PerlCodeLineValidImpl extends ASTWrapperPsiElement implements PerlC
     return findChildByClass(PerlPackageUse.class);
   }
 
+  @Override
+  @Nullable
+  public PerlPerlEval getPerlEval() {
+    return findChildByClass(PerlPerlEval.class);
+  }
+
 }

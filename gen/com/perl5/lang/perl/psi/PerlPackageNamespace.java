@@ -28,6 +28,9 @@ public interface PerlPackageNamespace extends PsiElement {
   @NotNull
   List<PerlPerlBlock> getPerlBlockList();
 
+  @NotNull
+  List<PerlPerlEvalInvalid> getPerlEvalInvalidList();
+
   @Nullable
   PsiElement getPerlPackageBuiltIn();
 

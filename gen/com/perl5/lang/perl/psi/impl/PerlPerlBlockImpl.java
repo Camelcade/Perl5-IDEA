@@ -76,4 +76,10 @@ public class PerlPerlBlockImpl extends ASTWrapperPsiElement implements PerlPerlB
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlBlock.class);
   }
 
+  @Override
+  @NotNull
+  public List<PerlPerlEvalInvalid> getPerlEvalInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlEvalInvalid.class);
+  }
+
 }

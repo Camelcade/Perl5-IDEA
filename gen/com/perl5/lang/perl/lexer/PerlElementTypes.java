@@ -42,6 +42,8 @@ public interface PerlElementTypes {
   IElementType PERL_CALL_PARAMS = new PerlElementType("PERL_CALL_PARAMS");
   IElementType PERL_CALL_PARAMS_ANY = new PerlElementType("PERL_CALL_PARAMS_ANY");
   IElementType PERL_CALL_PARAMS_STRICT = new PerlElementType("PERL_CALL_PARAMS_STRICT");
+  IElementType PERL_EVAL = new PerlElementType("PERL_EVAL");
+  IElementType PERL_EVAL_INVALID = new PerlElementType("PERL_EVAL_INVALID");
   IElementType PERL_EXPRESSION = new PerlElementType("PERL_EXPRESSION");
   IElementType PERL_HASH_VALUE = new PerlElementType("PERL_HASH_VALUE");
   IElementType PERL_SCALAR_FUNCTION_RESULT = new PerlElementType("PERL_SCALAR_FUNCTION_RESULT");
@@ -192,6 +194,12 @@ public interface PerlElementTypes {
       }
       else if (type == PERL_CALL_PARAMS_STRICT) {
         return new PerlPerlCallParamsStrictImpl(node);
+      }
+      else if (type == PERL_EVAL) {
+        return new PerlPerlEvalImpl(node);
+      }
+      else if (type == PERL_EVAL_INVALID) {
+        return new PerlPerlEvalInvalidImpl(node);
       }
       else if (type == PERL_EXPRESSION) {
         return new PerlPerlExpressionImpl(node);

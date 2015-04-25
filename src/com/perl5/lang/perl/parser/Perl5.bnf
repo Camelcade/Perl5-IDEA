@@ -84,17 +84,19 @@ private package_item ::= function_definition | if_block | code_line_valid | PERL
 private code_line_element ::= method_call | function_call| perl_function | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
 private code_line_elements ::= code_line_element +
 
-code_line_valid ::= package_use | package_no | package_require | code_line
+code_line_valid ::= perl_eval | package_use | package_no | package_require | code_line
 
 private code_line_invalid ::=
     package_use_invalid
     | package_no_invalid
     | package_require_invalid
+    | perl_eval_invalid
 
 package_definition_invalid ::= 'package' code_line_invalid_element*';'
 package_use_invalid ::= 'use' code_line_invalid_element*';'
 package_no_invalid ::= 'no' code_line_invalid_element*';'
 package_require_invalid ::= 'require' code_line_invalid_element*';';
+perl_eval_invalid ::= 'eval' code_line_invalid_element * ';'
 
 code_line_invalid_element ::= code_line_element | perl_package | PERL_VERSION | perl_controls | perl_chars;
 
@@ -107,6 +109,8 @@ package_use_arguments ::=
     | PERL_VERSION;
 
 package_require ::= 'require' (perl_package | PERL_VERSION | perl_string) ';'
+
+perl_eval ::= 'eval' (perl_block | perl_scalar_value) ';'
 
 if_block ::= ('if' | 'unless') if_branch_conditional if_block_elsif * if_block_else ?
 if_block_elsif ::= 'elsif' if_branch_conditional

@@ -135,6 +135,14 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPerlEval(@NotNull PerlPerlEval o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlEvalInvalid(@NotNull PerlPerlEvalInvalid o) {
+    visitPsiElement(o);
+  }
+
   public void visitPerlExpression(@NotNull PerlPerlExpression o) {
     visitPsiElement(o);
   }
