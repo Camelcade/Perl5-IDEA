@@ -235,6 +235,9 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 {VAR_HASH} {return PerlHash.getHashType(yytext().toString());}
 {VAR_ARRAY} {return PerlArray.getArrayType(yytext().toString());}
 {VAR_GLOB} {return PerlGlob.getGlobType(yytext().toString());}
+"@" {return PERL_SIGIL_ARRAY;}
+"%" {return PERL_SIGIL_HASH;}
+"$" {return PERL_SIGIL_SCALAR;}
 
 <PACKAGE_USE_PARAMS>
 {

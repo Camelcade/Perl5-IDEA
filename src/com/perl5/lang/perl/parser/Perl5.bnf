@@ -17,6 +17,10 @@
     PERL_COMMENT_BLOCK
     PERL_POD
 
+    PERL_SIGIL_ARRAY
+    PERL_SIGIL_HASH
+    PERL_SIGIL_SCALAR
+
     PERL_NEWLINE
 
     PERL_VERSION
@@ -54,16 +58,16 @@
     PERL_OPERATOR
     PERL_DEREFERENCE
     PERL_DEPACKAGE
-    PERL_COMMA
-    PERL_LBRACK
-    PERL_RBRACK
-    PERL_LPAREN
-    PERL_RPAREN
-
-    PERL_LBRACE
-    PERL_RBRACE
-
-    PERL_SEMI
+    
+    PERL_COMMA=','
+    
+    PERL_LBRACK='['
+    PERL_RBRACK=']'
+    PERL_LPAREN='('
+    PERL_RPAREN=')'
+    PERL_LBRACE='{'
+    PERL_RBRACE='}'
+    PERL_SEMI='?';
   ]
 
 }
@@ -71,21 +75,38 @@
 perlFile ::= block_item*
 
 function_definition ::= function_definition_named | function_definition_anon
-function_definition_named ::= PERL_FUNCTION_SUB perl_function perl_block PERL_SEMI?
-function_definition_anon ::= PERL_FUNCTION_SUB perl_block PERL_SEMI
+function_definition_named ::= PERL_FUNCTION_SUB perl_function perl_block ';' ?
+function_definition_anon ::= PERL_FUNCTION_SUB perl_block ';'
 
 package_namespace ::= package_definition (perl_block | package_item * )
-package_definition ::= PERL_FUNCTION_PACKAGE package_bare PERL_VERSION ? PERL_SEMI ?
+package_definition ::= PERL_FUNCTION_PACKAGE package_bare PERL_VERSION ? ';' ?
 
-perl_block ::= PERL_LBRACE block_item* PERL_RBRACE
+perl_block ::= '{' block_item* '}'
+
 private block_item ::= package_namespace | package_item
-private package_item ::= function_definition | perl_block | code_line | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK
+private package_item ::= function_definition | code_line  | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | perl_block
 
-code_line ::= code_line_elements* PERL_SEMI perl_multiline_string ?
-private code_line_elements ::= perl_controls | perl_chars | perl_call | perl_variable | perl_string | perl_multiline_string | package_bare | perl_function | PERL_MULTILINE_MARKER |  PERL_NUMBER
+code_line ::= code_line_elements* ';' perl_multiline_string ?
+private code_line_elements ::= perl_controls | perl_chars | perl_call | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | package_bare | perl_function | PERL_MULTILINE_MARKER
+
+private perl_array_value ::= perl_array_value_item (',' (perl_array_value_item | perl_scalar_value  )) *
+private perl_array_value_item ::= perl_array_dereference | perl_array_slice | perl_hash_slice | perl_hash_value | perl_array
+private perl_array_slice ::= perl_array '[' (perl_array_value | perl_scalar_value) ']'
+private perl_hash_slice ::= perl_array '{' (perl_array_value | perl_scalar_value) '{'
+perl_array_dereference ::= PERL_SIGIL_ARRAY '{' perl_scalar_value '}'
+
+private perl_hash_value ::= perl_hash_dereference | perl_hash
+perl_hash_dereference ::= PERL_SIGIL_HASH '{' perl_scalar_value '}'
+
+private perl_scalar_value ::= perl_string | PERL_NUMBER | PERL_VERSION | perl_anon_array | perl_anon_hash | perl_scalar_dereference | perl_hash_element | perl_array_element | perl_scalar
+perl_hash_element ::= perl_scalar '{' perl_scalar_value '}'
+perl_array_element ::= perl_scalar '[' perl_scalar_value ']'
+perl_scalar_dereference ::= PERL_SIGIL_SCALAR '{' perl_scalar_value '}'
+perl_anon_array     ::= '[' perl_array_value ']'
+perl_anon_hash      ::= '{' perl_array_value '}'
 
 // Generalizations
-private perl_controls ::= PERL_OPERATOR | PERL_DEREFERENCE | PERL_DEPACKAGE | PERL_COMMA | PERL_LBRACK | PERL_RBRACK | PERL_LPAREN | PERL_RPAREN
+private perl_controls ::= PERL_OPERATOR | PERL_DEREFERENCE | PERL_DEPACKAGE | ',' | '[' | ']' | '(' | ')'
 private perl_chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
 private perl_call ::= PERL_STATIC_METHOD_CALL | PERL_INSTANCE_METHOD_CALL
 private perl_string ::= PERL_DQ_STRING | PERL_SQ_STRING
