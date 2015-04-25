@@ -28,6 +28,14 @@ import com.perl5.lang.perl.lexer.helpers.PerlPackage;
 %function advance
 %type IElementType
 
+/*
+http://perldoc.perl.org/perlop.html#Quote-Like-Operators
+q qq qw qx qr
+
+
+*/
+
+
 //%line
 //%column
 %{
@@ -73,6 +81,7 @@ THE_DATA         = __DATA__
 LINE            = .*
 FULL_LINE       = .*{NEW_LINE}?
 
+DX_STRING        = \`[^\`\n\r]*\`
 DQ_STRING        = \"[^\"\n\r]*\"
 SQ_STRING        = \'[^\'\n\r]*\'
 
@@ -81,6 +90,8 @@ PERL_OPERATORS = "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~"
 MULTILINE_MARKER = [^\"\'\s\n\r ]+
 MULTILINE_MARKER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
 MULTILINE_MARKER_DQ = "<<"{WHITE_SPACE}*\"{MULTILINE_MARKER}\"
+MULTILINE_MARKER_DQ_BARE = "<<"{WHITE_SPACE}*{ALFANUM}+
+MULTILINE_MARKER_DX = "<<"{WHITE_SPACE}*\`{MULTILINE_MARKER}\`
 
 POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
 POD_CLOSE       = \="cut"{FULL_LINE}
@@ -283,6 +294,8 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 {MULTILINE_MARKER_SQ}   {prepareForMultiline(PERL_MULTILINE_SQ);return PERL_MULTILINE_MARKER;}
 {MULTILINE_MARKER_DQ}   {prepareForMultiline(PERL_MULTILINE_DQ);return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_DQ_BARE}   {prepareForMultiline(PERL_MULTILINE_DQ);return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_DX}   {prepareForMultiline(PERL_MULTILINE_DX);return PERL_MULTILINE_MARKER;}
 
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
@@ -293,6 +306,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 "->"			{yybegin(LEX_DEREFERENCE);return PERL_DEREFERENCE;}
 {DEPACKAGE}		{return PERL_DEPACKAGE;}
 {DQ_STRING}     {return PERL_DQ_STRING;}
+{DX_STRING}     {return PERL_DX_STRING;}
 {SQ_STRING}     {return PERL_SQ_STRING;}
 {NUMBER}        {return PERL_NUMBER;}
 

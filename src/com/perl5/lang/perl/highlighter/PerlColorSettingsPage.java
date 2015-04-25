@@ -44,6 +44,8 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Single-quoted string", PerlSyntaxHighlighter.PERL_SQ_STRING),
 			new AttributesDescriptor("Double-quoted string", PerlSyntaxHighlighter.PERL_DQ_STRING),
+			new AttributesDescriptor("Backticked string", PerlSyntaxHighlighter.PERL_DX_STRING),
+
 			new AttributesDescriptor("Version", PerlSyntaxHighlighter.PERL_VERSION),
 			new AttributesDescriptor("Number", PerlSyntaxHighlighter.PERL_NUMBER),
 			new AttributesDescriptor("Dereference", PerlSyntaxHighlighter.PERL_DEREFERENCE),
@@ -75,6 +77,8 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 				"use Module::Build::YAML;\n" +
 				"\n" +
 				"use DTL::Fast::Template;\n" +
+				"\n" +
+				"my $date = `date`;\n" +
 				"\n" +
 				"=pod\n" +
 				"\n" +

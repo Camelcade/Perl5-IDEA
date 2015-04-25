@@ -1172,7 +1172,13 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // (PERL_MULTILINE_SQ | PERL_MULTILINE_DQ| PERL_MULTILINE_XML | PERL_MULTILINE_HTML) PERL_MULTILINE_MARKER
+  // (
+  //         PERL_MULTILINE_SQ
+  //         | PERL_MULTILINE_DQ
+  //         | PERL_MULTILINE_DX
+  //         | PERL_MULTILINE_XML
+  //         | PERL_MULTILINE_HTML
+  //     ) PERL_MULTILINE_MARKER
   static boolean perl_multiline_string(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_multiline_string")) return false;
     boolean r;
@@ -1183,13 +1189,18 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // PERL_MULTILINE_SQ | PERL_MULTILINE_DQ| PERL_MULTILINE_XML | PERL_MULTILINE_HTML
+  // PERL_MULTILINE_SQ
+  //         | PERL_MULTILINE_DQ
+  //         | PERL_MULTILINE_DX
+  //         | PERL_MULTILINE_XML
+  //         | PERL_MULTILINE_HTML
   private static boolean perl_multiline_string_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_multiline_string_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERL_MULTILINE_SQ);
     if (!r) r = consumeToken(b, PERL_MULTILINE_DQ);
+    if (!r) r = consumeToken(b, PERL_MULTILINE_DX);
     if (!r) r = consumeToken(b, PERL_MULTILINE_XML);
     if (!r) r = consumeToken(b, PERL_MULTILINE_HTML);
     exit_section_(b, m, null, r);
@@ -1341,14 +1352,14 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // PERL_DQ_STRING | PERL_SQ_STRING
+  // PERL_DQ_STRING | PERL_SQ_STRING | PERL_DX_STRING
   static boolean perl_string(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_string")) return false;
-    if (!nextTokenIs(b, "", PERL_DQ_STRING, PERL_SQ_STRING)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERL_DQ_STRING);
     if (!r) r = consumeToken(b, PERL_SQ_STRING);
+    if (!r) r = consumeToken(b, PERL_DX_STRING);
     exit_section_(b, m, null, r);
     return r;
   }

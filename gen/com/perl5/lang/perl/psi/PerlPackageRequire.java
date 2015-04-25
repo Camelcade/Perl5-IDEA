@@ -11,6 +11,9 @@ public interface PerlPackageRequire extends PsiElement {
   PsiElement getPerlDqString();
 
   @Nullable
+  PsiElement getPerlDxString();
+
+  @Nullable
   PsiElement getPerlPackageBuiltIn();
 
   @Nullable

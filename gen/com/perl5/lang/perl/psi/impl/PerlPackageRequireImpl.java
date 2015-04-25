@@ -30,6 +30,12 @@ public class PerlPackageRequireImpl extends ASTWrapperPsiElement implements Perl
 
   @Override
   @Nullable
+  public PsiElement getPerlDxString() {
+    return findChildByType(PERL_DX_STRING);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getPerlPackageBuiltIn() {
     return findChildByType(PERL_PACKAGE_BUILT_IN);
   }

@@ -44,6 +44,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
+	public static final TextAttributesKey PERL_DX_STRING = createTextAttributesKey("PERL_DX_STRING", DefaultLanguageHighlighterColors.STRING);
+
 	public static final TextAttributesKey PERL_NUMBER = createTextAttributesKey("PERL_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 	public static final TextAttributesKey PERL_COMMA = createTextAttributesKey("PERL_COMMA", DefaultLanguageHighlighterColors.COMMA);
 	public static final TextAttributesKey PERL_SEMICOLON = createTextAttributesKey("PERL_SEMICOLON", DefaultLanguageHighlighterColors.SEMICOLON);
@@ -66,8 +68,15 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
 		attributesMap.put(PerlElementTypes.PERL_SQ_STRING, new TextAttributesKey[]{PERL_SQ_STRING});
 		attributesMap.put(PerlElementTypes.PERL_DQ_STRING, new TextAttributesKey[]{PERL_DQ_STRING});
+		attributesMap.put(PerlElementTypes.PERL_DX_STRING, new TextAttributesKey[]{PERL_DX_STRING});
+
+		attributesMap.put(PerlElementTypes.PERL_MULTILINE_SQ, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.PERL_MULTILINE_DQ, new TextAttributesKey[]{PERL_DQ_STRING});
+		attributesMap.put(PerlElementTypes.PERL_MULTILINE_DX, new TextAttributesKey[]{PERL_DX_STRING});
+
 		attributesMap.put(PerlElementTypes.PERL_NUMBER, new TextAttributesKey[]{PERL_NUMBER});
 		attributesMap.put(PerlElementTypes.PERL_VERSION, new TextAttributesKey[]{PERL_VERSION});
+
 		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
 
 		attributesMap.put(PerlElementTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});

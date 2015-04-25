@@ -20,6 +20,9 @@ public interface PerlPerlScalarValue extends PsiElement {
   PsiElement getPerlDqString();
 
   @Nullable
+  PsiElement getPerlDxString();
+
+  @Nullable
   PsiElement getPerlMultilineMarker();
 
   @Nullable

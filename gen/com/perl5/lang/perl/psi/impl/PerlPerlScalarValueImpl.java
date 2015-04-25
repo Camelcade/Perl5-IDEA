@@ -48,6 +48,12 @@ public class PerlPerlScalarValueImpl extends ASTWrapperPsiElement implements Per
 
   @Override
   @Nullable
+  public PsiElement getPerlDxString() {
+    return findChildByType(PERL_DX_STRING);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getPerlMultilineMarker() {
     return findChildByType(PERL_MULTILINE_MARKER);
   }

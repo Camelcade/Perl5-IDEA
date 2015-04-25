@@ -26,10 +26,12 @@
 
     PERL_MULTILINE_SQ
     PERL_MULTILINE_DQ
+    PERL_MULTILINE_DX
     PERL_MULTILINE_XML
     PERL_MULTILINE_HTML
 
     PERL_DQ_STRING
+    PERL_DX_STRING
     PERL_SQ_STRING
 
     PERL_NUMBER
@@ -149,9 +151,25 @@ perl_scalar_function_result ::= function_call
 // Generalizations
 private perl_controls ::= ',' | '[' | ']' | '(' | ')'
 private perl_chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
-private perl_string ::= PERL_DQ_STRING | PERL_SQ_STRING
-private perl_multiline_string ::= (PERL_MULTILINE_SQ | PERL_MULTILINE_DQ| PERL_MULTILINE_XML | PERL_MULTILINE_HTML) PERL_MULTILINE_MARKER
-private perl_package ::= PERL_PACKAGE_USER | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_BUILT_IN_DEPRECATED | PERL_PACKAGE_BUILT_IN_PRAGMA
+private perl_string ::=
+    PERL_DQ_STRING
+    | PERL_SQ_STRING
+    | PERL_DX_STRING
+
+private perl_multiline_string ::=
+    (
+        PERL_MULTILINE_SQ
+        | PERL_MULTILINE_DQ
+        | PERL_MULTILINE_DX
+        | PERL_MULTILINE_XML
+        | PERL_MULTILINE_HTML
+    ) PERL_MULTILINE_MARKER
+
+private perl_package ::=
+    PERL_PACKAGE_USER
+    | PERL_PACKAGE_BUILT_IN
+    | PERL_PACKAGE_BUILT_IN_DEPRECATED
+    | PERL_PACKAGE_BUILT_IN_PRAGMA
 
 private perl_function_all ::= perl_function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
 private perl_function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER

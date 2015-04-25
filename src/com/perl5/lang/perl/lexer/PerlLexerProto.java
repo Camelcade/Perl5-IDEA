@@ -41,7 +41,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	/** contains marker for multiline end **/
 	protected String multilineMarker;
 
-	protected Pattern markerPattern = Pattern.compile("<<\\s*['\"]?([^\"\']+)['\"]?");
+	protected Pattern markerPattern = Pattern.compile("<<\\s*['\"`]?([^\"\'`]+)['\"`]?");
 
 	/**
 	 * Invoken on opening token, waiting for a newline
@@ -63,17 +63,20 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		}
 
 		// #@todo We should find a proper way to do this, can have format and be DQ/SQ
-		if (multilineMarker.equals("HTML"))
+		if( lineType != PERL_MULTILINE_DX )
 		{
-			lineType = PERL_MULTILINE_HTML;
-		}
-		else if (multilineMarker.equals("XML"))
-		{
-			lineType = PERL_MULTILINE_XML;
+/*			// not working somehow
+			if (multilineMarker.equals("HTML"))
+			{
+				lineType = PERL_MULTILINE_HTML;
+			} else if (multilineMarker.equals("XML"))
+			{
+				lineType = PERL_MULTILINE_XML;
+			}
+*/
 		}
 
 		declaredMultiLineType = lineType;
-
 	}
 
 	protected boolean isWaitingMultiLine(){return waitingMultiLine;}

@@ -72,6 +72,12 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @Nullable
+  public PsiElement getPerlMultilineDx() {
+    return findChildByType(PERL_MULTILINE_DX);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getPerlMultilineHtml() {
     return findChildByType(PERL_MULTILINE_HTML);
   }

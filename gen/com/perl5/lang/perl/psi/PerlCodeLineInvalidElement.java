@@ -32,6 +32,9 @@ public interface PerlCodeLineInvalidElement extends PsiElement {
   PsiElement getPerlMultilineDq();
 
   @Nullable
+  PsiElement getPerlMultilineDx();
+
+  @Nullable
   PsiElement getPerlMultilineHtml();
 
   @Nullable

@@ -55,6 +55,7 @@ public interface PerlElementTypes {
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
   IElementType PERL_DEREFERENCE = new PerlTokenType("->");
   IElementType PERL_DQ_STRING = new PerlTokenType("PERL_DQ_STRING");
+  IElementType PERL_DX_STRING = new PerlTokenType("PERL_DX_STRING");
   IElementType PERL_FUNCTION_BUILT_IN = new PerlTokenType("PERL_FUNCTION_BUILT_IN");
   IElementType PERL_FUNCTION_BUILT_IN_IMPLEMENTED = new PerlTokenType("PERL_FUNCTION_BUILT_IN_IMPLEMENTED");
   IElementType PERL_FUNCTION_USER = new PerlTokenType("PERL_FUNCTION_USER");
@@ -62,6 +63,7 @@ public interface PerlElementTypes {
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
   IElementType PERL_MULTILINE_DQ = new PerlTokenType("PERL_MULTILINE_DQ");
+  IElementType PERL_MULTILINE_DX = new PerlTokenType("PERL_MULTILINE_DX");
   IElementType PERL_MULTILINE_HTML = new PerlTokenType("PERL_MULTILINE_HTML");
   IElementType PERL_MULTILINE_MARKER = new PerlTokenType("PERL_MULTILINE_MARKER");
   IElementType PERL_MULTILINE_SQ = new PerlTokenType("PERL_MULTILINE_SQ");
