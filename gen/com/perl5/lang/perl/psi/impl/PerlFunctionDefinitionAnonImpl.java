@@ -24,8 +24,8 @@ public class PerlFunctionDefinitionAnonImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @NotNull
-  public PerlPerlBlock getPerlBlock() {
-    return findNotNullChildByClass(PerlPerlBlock.class);
+  public PerlBlock getBlock() {
+    return findNotNullChildByClass(PerlBlock.class);
   }
 
 }

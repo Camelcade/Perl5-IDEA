@@ -23,6 +23,12 @@ public class PerlObjectCallImpl extends ASTWrapperPsiElement implements PerlObje
   }
 
   @Override
+  @Nullable
+  public PerlFunctionCall getFunctionCall() {
+    return findChildByClass(PerlFunctionCall.class);
+  }
+
+  @Override
   @NotNull
   public PerlFunctionCallAny getFunctionCallAny() {
     return findNotNullChildByClass(PerlFunctionCallAny.class);
@@ -30,20 +36,14 @@ public class PerlObjectCallImpl extends ASTWrapperPsiElement implements PerlObje
 
   @Override
   @Nullable
-  public PerlPerlScalar getPerlScalar() {
-    return findChildByClass(PerlPerlScalar.class);
+  public PerlScalar getScalar() {
+    return findChildByClass(PerlScalar.class);
   }
 
   @Override
   @Nullable
-  public PerlPerlScalarFunctionResult getPerlScalarFunctionResult() {
-    return findChildByClass(PerlPerlScalarFunctionResult.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPerlScalarValue getPerlScalarValue() {
-    return findChildByClass(PerlPerlScalarValue.class);
+  public PerlScalarValue getScalarValue() {
+    return findChildByClass(PerlScalarValue.class);
   }
 
   @Override

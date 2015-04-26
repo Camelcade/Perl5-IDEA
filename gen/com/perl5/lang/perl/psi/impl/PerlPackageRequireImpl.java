@@ -24,6 +24,12 @@ public class PerlPackageRequireImpl extends ASTWrapperPsiElement implements Perl
 
   @Override
   @Nullable
+  public PerlPackageBare getPackageBare() {
+    return findChildByClass(PerlPackageBare.class);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getPerlDqString() {
     return findChildByType(PERL_DQ_STRING);
   }
@@ -32,30 +38,6 @@ public class PerlPackageRequireImpl extends ASTWrapperPsiElement implements Perl
   @Nullable
   public PsiElement getPerlDxString() {
     return findChildByType(PERL_DX_STRING);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltIn() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltInDeprecated() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN_DEPRECATED);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltInPragma() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN_PRAGMA);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageUser() {
-    return findChildByType(PERL_PACKAGE_USER);
   }
 
   @Override

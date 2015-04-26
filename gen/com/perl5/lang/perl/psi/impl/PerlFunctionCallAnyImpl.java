@@ -24,14 +24,14 @@ public class PerlFunctionCallAnyImpl extends ASTWrapperPsiElement implements Per
 
   @Override
   @Nullable
-  public PerlPerlCallParamsAny getPerlCallParamsAny() {
-    return findChildByClass(PerlPerlCallParamsAny.class);
+  public PerlCallParamsAny getCallParamsAny() {
+    return findChildByClass(PerlCallParamsAny.class);
   }
 
   @Override
   @NotNull
-  public PerlPerlFunctionAll getPerlFunctionAll() {
-    return findNotNullChildByClass(PerlPerlFunctionAll.class);
+  public PerlFunctionAny getFunctionAny() {
+    return findNotNullChildByClass(PerlFunctionAny.class);
   }
 
 }

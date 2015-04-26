@@ -8,22 +8,13 @@ import com.intellij.psi.PsiElement;
 public interface PerlPackageRequire extends PsiElement {
 
   @Nullable
+  PerlPackageBare getPackageBare();
+
+  @Nullable
   PsiElement getPerlDqString();
 
   @Nullable
   PsiElement getPerlDxString();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltIn();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInDeprecated();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInPragma();
-
-  @Nullable
-  PsiElement getPerlPackageUser();
 
   @Nullable
   PsiElement getPerlSqString();

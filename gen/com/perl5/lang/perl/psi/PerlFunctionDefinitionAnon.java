@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlFunctionDefinitionAnon extends PsiElement {
 
   @NotNull
-  PerlPerlBlock getPerlBlock();
+  PerlBlock getBlock();
 
 }

@@ -24,8 +24,26 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @Nullable
+  public PerlArrayValue getArrayValue() {
+    return findChildByClass(PerlArrayValue.class);
+  }
+
+  @Override
+  @Nullable
   public PerlFunctionCall getFunctionCall() {
     return findChildByClass(PerlFunctionCall.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlGlob getGlob() {
+    return findChildByClass(PerlGlob.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlHashValue getHashValue() {
+    return findChildByClass(PerlHashValue.class);
   }
 
   @Override
@@ -36,26 +54,14 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @Nullable
-  public PerlPerlArrayValue getPerlArrayValue() {
-    return findChildByClass(PerlPerlArrayValue.class);
+  public PerlPackageBare getPackageBare() {
+    return findChildByClass(PerlPackageBare.class);
   }
 
   @Override
   @Nullable
-  public PerlPerlGlob getPerlGlob() {
-    return findChildByClass(PerlPerlGlob.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPerlHashValue getPerlHashValue() {
-    return findChildByClass(PerlPerlHashValue.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPerlScalarValue getPerlScalarValue() {
-    return findChildByClass(PerlPerlScalarValue.class);
+  public PerlScalarValue getScalarValue() {
+    return findChildByClass(PerlScalarValue.class);
   }
 
   @Override
@@ -110,30 +116,6 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
   @Nullable
   public PsiElement getPerlOperator() {
     return findChildByType(PERL_OPERATOR);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltIn() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltInDeprecated() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN_DEPRECATED);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltInPragma() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN_PRAGMA);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageUser() {
-    return findChildByType(PERL_PACKAGE_USER);
   }
 
   @Override

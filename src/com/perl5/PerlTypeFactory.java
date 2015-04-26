@@ -2,8 +2,8 @@ package com.perl5;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
-import com.perl5.lang.perl.PerlFileTypePackage;
-import com.perl5.lang.perl.PerlFileTypeScript;
+import com.perl5.lang.perl.files.PerlFileTypePackage;
+import com.perl5.lang.perl.files.PerlFileTypeScript;
 import com.perl5.lang.pod.PodFileType;
 import com.perl5.lang.xs.XSFileType;
 import org.jetbrains.annotations.NotNull;

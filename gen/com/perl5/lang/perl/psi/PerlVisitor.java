@@ -7,11 +7,55 @@ import com.intellij.psi.PsiElement;
 
 public class PerlVisitor extends PsiElementVisitor {
 
+  public void visitArray(@NotNull PerlArray o) {
+    visitPsiElement(o);
+  }
+
+  public void visitArrayValue(@NotNull PerlArrayValue o) {
+    visitPsiElement(o);
+  }
+
+  public void visitBlock(@NotNull PerlBlock o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCallParam(@NotNull PerlCallParam o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCallParams(@NotNull PerlCallParams o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCallParamsAny(@NotNull PerlCallParamsAny o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCallParamsStrict(@NotNull PerlCallParamsStrict o) {
+    visitPsiElement(o);
+  }
+
   public void visitCodeLine(@NotNull PerlCodeLine o) {
     visitPsiElement(o);
   }
 
   public void visitCodeLineInvalidElement(@NotNull PerlCodeLineInvalidElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEval(@NotNull PerlEval o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEvalInvalid(@NotNull PerlEvalInvalid o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExpression(@NotNull PerlExpression o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFunctionAny(@NotNull PerlFunctionAny o) {
     visitPsiElement(o);
   }
 
@@ -28,6 +72,18 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitFunctionDefinitionNamed(@NotNull PerlFunctionDefinitionNamed o) {
+    visitPsiElement(o);
+  }
+
+  public void visitGlob(@NotNull PerlGlob o) {
+    visitPsiElement(o);
+  }
+
+  public void visitHash(@NotNull PerlHash o) {
+    visitPsiElement(o);
+  }
+
+  public void visitHashValue(@NotNull PerlHashValue o) {
     visitPsiElement(o);
   }
 
@@ -56,6 +112,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitObjectCall(@NotNull PerlObjectCall o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPackageBare(@NotNull PerlPackageBare o) {
     visitPsiElement(o);
   }
 
@@ -95,83 +155,19 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPackageUseArguments(@NotNull PerlPackageUseArguments o) {
-    visitPsiElement(o);
-  }
-
   public void visitPackageUseInvalid(@NotNull PerlPackageUseInvalid o) {
     visitPsiElement(o);
   }
 
-  public void visitPerlArray(@NotNull PerlPerlArray o) {
+  public void visitScalar(@NotNull PerlScalar o) {
     visitPsiElement(o);
   }
 
-  public void visitPerlArrayValue(@NotNull PerlPerlArrayValue o) {
+  public void visitScalarValue(@NotNull PerlScalarValue o) {
     visitPsiElement(o);
   }
 
-  public void visitPerlBlock(@NotNull PerlPerlBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlCallParam(@NotNull PerlPerlCallParam o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlCallParams(@NotNull PerlPerlCallParams o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlCallParamsAny(@NotNull PerlPerlCallParamsAny o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlCallParamsStrict(@NotNull PerlPerlCallParamsStrict o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlEval(@NotNull PerlPerlEval o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlEvalInvalid(@NotNull PerlPerlEvalInvalid o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlExpression(@NotNull PerlPerlExpression o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlFunctionAll(@NotNull PerlPerlFunctionAll o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlGlob(@NotNull PerlPerlGlob o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlHash(@NotNull PerlPerlHash o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlHashValue(@NotNull PerlPerlHashValue o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlScalar(@NotNull PerlPerlScalar o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlScalarFunctionResult(@NotNull PerlPerlScalarFunctionResult o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlScalarValue(@NotNull PerlPerlScalarValue o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlSubexpression(@NotNull PerlPerlSubexpression o) {
+  public void visitSubexpression(@NotNull PerlSubexpression o) {
     visitPsiElement(o);
   }
 

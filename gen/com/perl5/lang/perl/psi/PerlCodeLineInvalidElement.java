@@ -8,22 +8,25 @@ import com.intellij.psi.PsiElement;
 public interface PerlCodeLineInvalidElement extends PsiElement {
 
   @Nullable
+  PerlArrayValue getArrayValue();
+
+  @Nullable
   PerlFunctionCall getFunctionCall();
+
+  @Nullable
+  PerlGlob getGlob();
+
+  @Nullable
+  PerlHashValue getHashValue();
 
   @Nullable
   PerlMethodCall getMethodCall();
 
   @Nullable
-  PerlPerlArrayValue getPerlArrayValue();
+  PerlPackageBare getPackageBare();
 
   @Nullable
-  PerlPerlGlob getPerlGlob();
-
-  @Nullable
-  PerlPerlHashValue getPerlHashValue();
-
-  @Nullable
-  PerlPerlScalarValue getPerlScalarValue();
+  PerlScalarValue getScalarValue();
 
   @Nullable
   PsiElement getPerlFunctionBuiltIn();
@@ -51,18 +54,6 @@ public interface PerlCodeLineInvalidElement extends PsiElement {
 
   @Nullable
   PsiElement getPerlOperator();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltIn();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInDeprecated();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInPragma();
-
-  @Nullable
-  PsiElement getPerlPackageUser();
 
   @Nullable
   PsiElement getPerlVersion();

@@ -41,7 +41,7 @@ public class PerlAnnotator implements Annotator, PerlElementTypes
 					"use Module; " +
 					"use VERSION;");
 		}
-		else if( element instanceof PerlPerlEvalInvalidImpl)
+		else if( element instanceof PerlEvalInvalidImpl)
 		{
 			markError(element, holder, "Proper `eval` syntax: " +
 					"eval EXPR;\n" +

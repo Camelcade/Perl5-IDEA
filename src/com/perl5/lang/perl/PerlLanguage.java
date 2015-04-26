@@ -5,8 +5,7 @@ package com.perl5.lang.perl;
  */
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.perl5.lang.perl.highlighter.PerlSyntaxHighlighter;
+import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 
 public class PerlLanguage extends Language
 {

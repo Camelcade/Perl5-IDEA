@@ -66,102 +66,104 @@
     PERL_SEMI=';';
   ]
 
-    mixin("function_definition_named")="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
+    psiImplUtilClass="com.perl5.lang.perl.psi.impl.PerlPsiImpUtil"
 }
 
 perlFile ::= block_item*
 
 private function_definition ::= function_definition_named | function_definition_anon
-function_definition_named ::= 'sub' perl_function perl_block ';' ?
-function_definition_anon ::= 'sub' perl_block ';'
+function_definition_named ::= 'sub' function block ';' ? {
+    mixin="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
+}
+function_definition_anon ::= 'sub' block ';'
 
-package_namespace ::= 'package' perl_package PERL_VERSION ? (perl_block | ';' package_item * )
+package_namespace ::= 'package' package_bare PERL_VERSION ? (block | ';' package_item * )
 
-perl_block ::= '{' block_item* '}'
+block ::= '{' block_item* '}'
 
 private block_item ::= package_namespace | package_item | package_definition_invalid
-private package_item ::= function_definition | if_block | code_line_valid | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | perl_block | code_line_invalid
+private package_item ::= function_definition | if_block | code_line_valid | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | block | code_line_invalid
 
-private code_line_element ::= method_call | function_call| perl_function | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
+private code_line_element ::= method_call | function_call| function | array_value | hash_value | scalar_value | glob |  multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
 private code_line_elements ::= code_line_element +
 
-private code_line_valid ::= perl_eval | package_use | package_no | package_require | code_line
+private code_line_valid ::= eval | package_use | package_no | package_require | code_line
 
 private code_line_invalid ::=
     package_use_invalid
     | package_no_invalid
     | package_require_invalid
-    | perl_eval_invalid
+    | eval_invalid
 
 package_definition_invalid ::= 'package' code_line_invalid_element*';'
 package_use_invalid ::= 'use' code_line_invalid_element*';'
 package_no_invalid ::= 'no' code_line_invalid_element*';'
 package_require_invalid ::= 'require' code_line_invalid_element*';';
-perl_eval_invalid ::= 'eval' code_line_invalid_element * ';'
+eval_invalid ::= 'eval' code_line_invalid_element * ';'
 
-code_line_invalid_element ::= code_line_element | perl_package | PERL_VERSION | perl_controls | perl_chars;
+code_line_invalid_element ::= code_line_element | package_bare | PERL_VERSION | controls | chars;
 
 package_use ::= 'use' package_use_arguments ';'
 package_no ::= 'no' package_use_arguments ';'
 
-package_use_arguments ::=
-    perl_package PERL_VERSION perl_call_params ?
-    | perl_package perl_call_params ?
+private package_use_arguments ::=
+    package_bare PERL_VERSION call_params ?
+    | package_bare call_params ?
     | PERL_VERSION;
 
-package_require ::= 'require' (perl_package | PERL_VERSION | perl_string) ';'
+package_require ::= 'require' (package_bare | PERL_VERSION | string) ';'
 
-perl_eval ::= 'eval' (perl_block | perl_scalar_value) ';'
+eval ::= 'eval' (block | scalar_value) ';'
 
 if_block ::= ('if' | 'unless') if_branch_conditional if_block_elsif * if_block_else ?
 if_block_elsif ::= 'elsif' if_branch_conditional
 if_block_else  ::= 'else' if_branch
-if_branch_conditional ::= '(' perl_expression ')' if_branch
-if_branch ::= (code_line | perl_block )
-perl_expression ::= (code_line_elements | perl_subexpression) +
-perl_subexpression ::= '(' code_line_elements ')'
+if_branch_conditional ::= '(' expression ')' if_branch
+if_branch ::= (code_line | block )
+expression ::= (code_line_elements | subexpression) +
+subexpression ::= '(' code_line_elements ')'
 
 method_call ::= package_static_call | package_object_call | object_call
-object_call ::= perl_scalar_value_var '->' function_call_any
-package_static_call ::= perl_package '::' function_call_any
-package_object_call ::= perl_package '->' function_call_any
+object_call ::= scalar_value_var '->' function_call_any
+package_static_call ::= package_bare '::' function_call_any
+package_object_call ::= package_bare '->' function_call_any
 
-function_call_any ::= perl_function_all perl_call_params_any ?
-function_call ::= perl_function perl_call_params_any ?
-perl_call_params_any ::= perl_call_params_strict | perl_call_params
-perl_call_params_strict ::= '(' perl_call_params ')'
-perl_call_params ::= perl_call_param ? (',' perl_call_param ) *
-perl_call_param ::= perl_array_value | perl_scalar_value
+function_call_any ::= function_any call_params_any ?
+function_call ::= function call_params_any ?
+call_params_any ::= call_params_strict | call_params
+call_params_strict ::= '(' call_params ')'
+call_params ::= call_param ? (',' call_param ) *
+call_param ::= array_value | scalar_value
 
-code_line ::= code_line_element* ';' perl_multiline_string ?
+code_line ::= code_line_element* ';' multiline_string ?
 
-perl_array_value ::= perl_array_value_item (',' (perl_array_value_item | perl_scalar_value  )) *
-private perl_array_value_item ::= perl_array_dereference | perl_array_slice | perl_hash_slice | perl_hash_value | perl_array
-private perl_array_slice ::= perl_array '[' (perl_array_value | perl_scalar_value) ']'
-private perl_hash_slice ::= perl_array '{' (perl_array_value | perl_scalar_value) '{'
-private perl_array_dereference ::= PERL_SIGIL_ARRAY '{' perl_scalar_value '}'
+array_value ::= array_value_item (',' (array_value_item | scalar_value  )) *
+private array_value_item ::= array_dereference | array_slice | hash_slice | hash_value | array
+private array_slice ::= array '[' (array_value | scalar_value) ']'
+private hash_slice ::= array '{' (array_value | scalar_value) '{'
+private array_dereference ::= PERL_SIGIL_ARRAY '{' scalar_value '}'
 
-perl_hash_value ::= perl_hash_dereference | perl_hash
-private perl_hash_dereference ::= PERL_SIGIL_HASH '{' perl_scalar_value '}'
+hash_value ::= hash_dereference | hash
+private hash_dereference ::= PERL_SIGIL_HASH '{' scalar_value '}'
 
-perl_scalar_value ::= perl_string | PERL_NUMBER | PERL_VERSION | PERL_MULTILINE_MARKER| perl_scalar_anon_array | perl_scalar_anon_hash | perl_scalar_value_var
-private perl_scalar_value_var ::= perl_scalar_dereference | perl_scalar_hash_element | perl_scalar_array_element | perl_scalar | perl_scalar_function_result // dynamic scalar, may be a reference
-private perl_scalar_hash_element ::= perl_scalar '{' perl_scalar_value '}'
-private perl_scalar_array_element ::= perl_scalar '[' perl_scalar_value ']'
-private perl_scalar_dereference ::= PERL_SIGIL_SCALAR '{' perl_scalar_value '}'
-private perl_scalar_anon_array     ::= '[' perl_array_value ']'
-private perl_scalar_anon_hash      ::= '{' perl_array_value '}'
-perl_scalar_function_result ::= function_call
+scalar_value ::= string | PERL_NUMBER | PERL_VERSION | PERL_MULTILINE_MARKER| scalar_anon_array | scalar_anon_hash | scalar_value_var
+private scalar_value_var ::= scalar_dereference | scalar_hash_element | scalar_array_element | scalar | scalar_function_result // dynamic scalar, may be a reference
+private scalar_hash_element ::= scalar '{' scalar_value '}'
+private scalar_array_element ::= scalar '[' scalar_value ']'
+private scalar_dereference ::= PERL_SIGIL_SCALAR '{' scalar_value '}'
+private scalar_anon_array     ::= '[' array_value ']'
+private scalar_anon_hash      ::= '{' array_value '}'
+private scalar_function_result ::= function_call
 
 // Generalizations
-private perl_controls ::= ',' | '[' | ']' | '(' | ')'
-private perl_chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
-private perl_string ::=
+private controls ::= ',' | '[' | ']' | '(' | ')'
+private chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
+private string ::=
     PERL_DQ_STRING
     | PERL_SQ_STRING
     | PERL_DX_STRING
 
-private perl_multiline_string ::=
+private multiline_string ::=
     (
         PERL_MULTILINE_SQ
         | PERL_MULTILINE_DQ
@@ -170,18 +172,18 @@ private perl_multiline_string ::=
         | PERL_MULTILINE_HTML
     ) PERL_MULTILINE_MARKER
 
-private perl_package ::=
+package_bare ::=
     PERL_PACKAGE_USER
     | PERL_PACKAGE_BUILT_IN
     | PERL_PACKAGE_BUILT_IN_DEPRECATED
     | PERL_PACKAGE_BUILT_IN_PRAGMA
 
-perl_function_all ::= perl_function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
-private perl_function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER
+function_any ::= function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
+private function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER
 
 //private perl_variable ::= perl_scalar | perl_glob | perl_array | perl_hash
-perl_glob ::= PERL_VARIABLE_GLOB | PERL_VARIABLE_GLOB_BUILT_IN
-perl_array ::= PERL_VARIABLE_ARRAY | PERL_VARIABLE_ARRAY_BUILT_IN
-perl_hash ::= PERL_VARIABLE_HASH | PERL_VARIABLE_HASH_BUILT_IN
-perl_scalar ::= PERL_VARIABLE_SCALAR | PERL_VARIABLE_SCALAR_BUILT_IN
+glob ::= PERL_VARIABLE_GLOB | PERL_VARIABLE_GLOB_BUILT_IN
+array ::= PERL_VARIABLE_ARRAY | PERL_VARIABLE_ARRAY_BUILT_IN
+hash ::= PERL_VARIABLE_HASH | PERL_VARIABLE_HASH_BUILT_IN
+scalar ::= PERL_VARIABLE_SCALAR | PERL_VARIABLE_SCALAR_BUILT_IN
 

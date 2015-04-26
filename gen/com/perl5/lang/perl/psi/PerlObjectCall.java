@@ -7,17 +7,17 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlObjectCall extends PsiElement {
 
+  @Nullable
+  PerlFunctionCall getFunctionCall();
+
   @NotNull
   PerlFunctionCallAny getFunctionCallAny();
 
   @Nullable
-  PerlPerlScalar getPerlScalar();
+  PerlScalar getScalar();
 
   @Nullable
-  PerlPerlScalarFunctionResult getPerlScalarFunctionResult();
-
-  @Nullable
-  PerlPerlScalarValue getPerlScalarValue();
+  PerlScalarValue getScalarValue();
 
   @Nullable
   PsiElement getPerlSigilScalar();

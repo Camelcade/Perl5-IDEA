@@ -7,9 +7,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.helpers.*;
+import com.perl5.lang.perl.util.*;
 import com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedImpl;
-import com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -27,7 +26,7 @@ public class PerlCompletionContributor extends CompletionContributor
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
 
-						for( String arrayName: PerlArray.BUILT_IN )
+						for( String arrayName: PerlArrayUtil.BUILT_IN )
 						{
 							resultSet.addElement(LookupElementBuilder.create(arrayName));
 							System.err.println(arrayName);
@@ -44,7 +43,7 @@ public class PerlCompletionContributor extends CompletionContributor
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
 
-						for( String scalarName: PerlScalar.BUILT_IN )
+						for( String scalarName: PerlScalarUtil.BUILT_IN )
 						{
 							resultSet.addElement(LookupElementBuilder.create(scalarName));
 						}
@@ -60,16 +59,17 @@ public class PerlCompletionContributor extends CompletionContributor
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
 
-						for( String functionName: PerlFunction.BUILT_IN )
+						for( String functionName: PerlFunctionUtil.BUILT_IN )
 						{
 							resultSet.addElement(LookupElementBuilder.create(functionName));
 						}
-						for( String functionName: PerlFunction.IMPLEMENTED )
+						for( String functionName: PerlFunctionUtil.IMPLEMENTED )
 						{
 							resultSet.addElement(LookupElementBuilder.create(functionName));
 						}
 
-						// append prevoiusly defined functions
+						// append prevoiusly defined functions;
+						// @todo we should check all included files for the current package and check functions in there
 						PsiElement currentPosition = parameters.getPosition();
 
 						while( currentPosition != null )
@@ -102,7 +102,7 @@ public class PerlCompletionContributor extends CompletionContributor
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
 
-						for( String hashName: PerlHash.BUILT_IN )
+						for( String hashName: PerlHashUtil.BUILT_IN )
 						{
 							resultSet.addElement(LookupElementBuilder.create(hashName));
 						}
@@ -112,13 +112,13 @@ public class PerlCompletionContributor extends CompletionContributor
 		);
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_GLOB).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.GLOB).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
 
-						for( String globName: PerlGlob.BUILT_IN )
+						for( String globName: PerlGlobUtil.BUILT_IN )
 						{
 							resultSet.addElement(LookupElementBuilder.create(globName));
 						}
@@ -134,15 +134,15 @@ public class PerlCompletionContributor extends CompletionContributor
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
 
-						for( String packageName: PerlPackage.BUILT_IN )
+						for( String packageName: PerlPackageUtil.BUILT_IN )
 						{
 							resultSet.addElement(LookupElementBuilder.create(packageName));
 						}
-						for( String packageName: PerlPackage.BUILT_IN_PRAGMA )
+						for( String packageName: PerlPackageUtil.BUILT_IN_PRAGMA )
 						{
 							resultSet.addElement(LookupElementBuilder.create(packageName));
 						}
-						for( String packageName: PerlPackage.BUILT_IN_DEPRECATED )
+						for( String packageName: PerlPackageUtil.BUILT_IN_DEPRECATED )
 						{
 							resultSet.addElement(LookupElementBuilder.create(packageName));
 						}

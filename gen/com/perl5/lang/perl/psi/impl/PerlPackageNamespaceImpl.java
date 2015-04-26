@@ -24,8 +24,26 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
 
   @Override
   @NotNull
+  public List<PerlBlock> getBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlBlock.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlCodeLine> getCodeLineList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCodeLine.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlEval> getEvalList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlEval.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlEvalInvalid> getEvalInvalidList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlEvalInvalid.class);
   }
 
   @Override
@@ -44,6 +62,12 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
   @NotNull
   public List<PerlIfBlock> getIfBlockList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlIfBlock.class);
+  }
+
+  @Override
+  @NotNull
+  public PerlPackageBare getPackageBare() {
+    return findNotNullChildByClass(PerlPackageBare.class);
   }
 
   @Override
@@ -80,48 +104,6 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
   @NotNull
   public List<PerlPackageUseInvalid> getPackageUseInvalidList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageUseInvalid.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlPerlBlock> getPerlBlockList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlBlock.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlPerlEval> getPerlEvalList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlEval.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlPerlEvalInvalid> getPerlEvalInvalidList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlEvalInvalid.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltIn() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltInDeprecated() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN_DEPRECATED);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltInPragma() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN_PRAGMA);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageUser() {
-    return findChildByType(PERL_PACKAGE_USER);
   }
 
   @Override

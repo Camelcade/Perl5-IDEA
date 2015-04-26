@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlIfBranch extends PsiElement {
 
   @Nullable
-  PerlCodeLine getCodeLine();
+  PerlBlock getBlock();
 
   @Nullable
-  PerlPerlBlock getPerlBlock();
+  PerlCodeLine getCodeLine();
 
 }

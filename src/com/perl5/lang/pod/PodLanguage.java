@@ -1,8 +1,7 @@
 package com.perl5.lang.pod;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.perl5.lang.pod.highlighter.PodSyntaxHighlighter;
+import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 
 /**
  * Created by hurricup on 21.04.2015.

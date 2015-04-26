@@ -24,8 +24,26 @@ public class PerlCodeLineImpl extends ASTWrapperPsiElement implements PerlCodeLi
 
   @Override
   @NotNull
+  public List<PerlArrayValue> getArrayValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlArrayValue.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlFunctionCall> getFunctionCallList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFunctionCall.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlGlob> getGlobList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlGlob.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlHashValue> getHashValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlHashValue.class);
   }
 
   @Override
@@ -36,26 +54,8 @@ public class PerlCodeLineImpl extends ASTWrapperPsiElement implements PerlCodeLi
 
   @Override
   @NotNull
-  public List<PerlPerlArrayValue> getPerlArrayValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlArrayValue.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlPerlGlob> getPerlGlobList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlGlob.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlPerlHashValue> getPerlHashValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlHashValue.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlPerlScalarValue> getPerlScalarValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlScalarValue.class);
+  public List<PerlScalarValue> getScalarValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlScalarValue.class);
   }
 
 }

@@ -23,8 +23,8 @@ public class PerlFunctionDefinitionNamedImpl extends PerlFunctionDefinitionNamed
 
   @Override
   @NotNull
-  public PerlPerlBlock getPerlBlock() {
-    return findNotNullChildByClass(PerlPerlBlock.class);
+  public PerlBlock getBlock() {
+    return findNotNullChildByClass(PerlBlock.class);
   }
 
   @Override

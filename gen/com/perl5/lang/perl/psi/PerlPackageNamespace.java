@@ -8,7 +8,16 @@ import com.intellij.psi.PsiElement;
 public interface PerlPackageNamespace extends PsiElement {
 
   @NotNull
+  List<PerlBlock> getBlockList();
+
+  @NotNull
   List<PerlCodeLine> getCodeLineList();
+
+  @NotNull
+  List<PerlEval> getEvalList();
+
+  @NotNull
+  List<PerlEvalInvalid> getEvalInvalidList();
 
   @NotNull
   List<PerlFunctionDefinitionAnon> getFunctionDefinitionAnonList();
@@ -18,6 +27,9 @@ public interface PerlPackageNamespace extends PsiElement {
 
   @NotNull
   List<PerlIfBlock> getIfBlockList();
+
+  @NotNull
+  PerlPackageBare getPackageBare();
 
   @NotNull
   List<PerlPackageNo> getPackageNoList();
@@ -36,27 +48,6 @@ public interface PerlPackageNamespace extends PsiElement {
 
   @NotNull
   List<PerlPackageUseInvalid> getPackageUseInvalidList();
-
-  @NotNull
-  List<PerlPerlBlock> getPerlBlockList();
-
-  @NotNull
-  List<PerlPerlEval> getPerlEvalList();
-
-  @NotNull
-  List<PerlPerlEvalInvalid> getPerlEvalInvalidList();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltIn();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInDeprecated();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInPragma();
-
-  @Nullable
-  PsiElement getPerlPackageUser();
 
   @Nullable
   PsiElement getPerlVersion();

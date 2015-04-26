@@ -10,16 +10,7 @@ public interface PerlPackageStaticCall extends PsiElement {
   @NotNull
   PerlFunctionCallAny getFunctionCallAny();
 
-  @Nullable
-  PsiElement getPerlPackageBuiltIn();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInDeprecated();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInPragma();
-
-  @Nullable
-  PsiElement getPerlPackageUser();
+  @NotNull
+  PerlPackageBare getPackageBare();
 
 }

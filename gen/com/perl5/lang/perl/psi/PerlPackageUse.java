@@ -7,7 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlPackageUse extends PsiElement {
 
-  @NotNull
-  PerlPackageUseArguments getPackageUseArguments();
+  @Nullable
+  PerlCallParams getCallParams();
+
+  @Nullable
+  PerlPackageBare getPackageBare();
+
+  @Nullable
+  PsiElement getPerlVersion();
 
 }

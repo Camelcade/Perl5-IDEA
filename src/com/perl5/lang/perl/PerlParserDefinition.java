@@ -17,7 +17,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
-import com.perl5.lang.perl.psi.PsiFilePerl;
+import com.perl5.lang.perl.psi.PerlFilePackage;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.tree.IStubFileElementType;
 
@@ -65,7 +65,8 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	}
 
 	public PsiFile createFile(FileViewProvider viewProvider) {
-		return new PsiFilePerl(viewProvider);
+		// @todo should we decide what kind of file to create? script/package
+		return new PerlFilePackage(viewProvider);
 	}
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {

@@ -24,14 +24,14 @@ public class PerlIfBranchImpl extends ASTWrapperPsiElement implements PerlIfBran
 
   @Override
   @Nullable
-  public PerlCodeLine getCodeLine() {
-    return findChildByClass(PerlCodeLine.class);
+  public PerlBlock getBlock() {
+    return findChildByClass(PerlBlock.class);
   }
 
   @Override
   @Nullable
-  public PerlPerlBlock getPerlBlock() {
-    return findChildByClass(PerlPerlBlock.class);
+  public PerlCodeLine getCodeLine() {
+    return findChildByClass(PerlCodeLine.class);
   }
 
 }

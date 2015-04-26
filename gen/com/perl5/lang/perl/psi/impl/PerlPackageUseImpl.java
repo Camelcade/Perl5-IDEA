@@ -23,9 +23,21 @@ public class PerlPackageUseImpl extends ASTWrapperPsiElement implements PerlPack
   }
 
   @Override
-  @NotNull
-  public PerlPackageUseArguments getPackageUseArguments() {
-    return findNotNullChildByClass(PerlPackageUseArguments.class);
+  @Nullable
+  public PerlCallParams getCallParams() {
+    return findChildByClass(PerlCallParams.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPackageBare getPackageBare() {
+    return findChildByClass(PerlPackageBare.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getPerlVersion() {
+    return findChildByType(PERL_VERSION);
   }
 
 }

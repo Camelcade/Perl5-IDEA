@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface PerlFunctionDefinitionNamed extends PsiElement {
 
   @NotNull
-  PerlPerlBlock getPerlBlock();
+  PerlBlock getBlock();
 
   @Nullable
   PsiElement getPerlFunctionBuiltIn();
