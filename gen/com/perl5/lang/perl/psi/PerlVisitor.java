@@ -116,7 +116,7 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitPackageBare(@NotNull PerlPackageBare o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitPackageDefinitionInvalid(@NotNull PerlPackageDefinitionInvalid o) {
@@ -168,6 +168,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitSubexpression(@NotNull PerlSubexpression o) {
+    visitPsiElement(o);
+  }
+
+  public void visitNamedElement(@NotNull PerlNamedElement o) {
     visitPsiElement(o);
   }
 

@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlPackageBareImpl extends ASTWrapperPsiElement implements PerlPackageBare {
+public class PerlPackageBareImpl extends PerlNamedElementImpl implements PerlPackageBare {
 
   public PerlPackageBareImpl(ASTNode node) {
     super(node);
@@ -44,6 +43,18 @@ public class PerlPackageBareImpl extends ASTWrapperPsiElement implements PerlPac
   @Nullable
   public PsiElement getPerlPackageUser() {
     return findChildByType(PERL_PACKAGE_USER);
+  }
+
+  public String getName() {
+    return PerlPsiImpUtil.getName(this);
+  }
+
+  public PsiElement setName(String newName) {
+    return PerlPsiImpUtil.setName(this, newName);
+  }
+
+  public PsiElement getNameIdentifier() {
+    return PerlPsiImpUtil.getNameIdentifier(this);
   }
 
 }

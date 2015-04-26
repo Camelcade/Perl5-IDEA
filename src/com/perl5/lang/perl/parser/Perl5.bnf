@@ -1,5 +1,6 @@
 {
   parserClass="com.perl5.lang.perl.parser.PerlParser"
+
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
   psiClassPrefix="Perl"
@@ -177,6 +178,10 @@ package_bare ::=
     | PERL_PACKAGE_BUILT_IN
     | PERL_PACKAGE_BUILT_IN_DEPRECATED
     | PERL_PACKAGE_BUILT_IN_PRAGMA
+    {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
+        implements="com.perl5.lang.perl.psi.PerlNamedElement"
+        methods=[getName setName getNameIdentifier]
+    }
 
 function_any ::= function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
 private function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER

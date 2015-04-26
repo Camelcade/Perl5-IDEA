@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlPackageBare extends PsiElement {
+public interface PerlPackageBare extends PerlNamedElement {
 
   @Nullable
   PsiElement getPerlPackageBuiltIn();
@@ -18,5 +18,11 @@ public interface PerlPackageBare extends PsiElement {
 
   @Nullable
   PsiElement getPerlPackageUser();
+
+  String getName();
+
+  PsiElement setName(String newName);
+
+  PsiElement getNameIdentifier();
 
 }
