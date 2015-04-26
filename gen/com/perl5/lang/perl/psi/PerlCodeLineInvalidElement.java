@@ -11,6 +11,9 @@ public interface PerlCodeLineInvalidElement extends PsiElement {
   PerlArrayValue getArrayValue();
 
   @Nullable
+  PerlFunction getFunction();
+
+  @Nullable
   PerlFunctionCall getFunctionCall();
 
   @Nullable
@@ -27,35 +30,5 @@ public interface PerlCodeLineInvalidElement extends PsiElement {
 
   @Nullable
   PerlScalarValue getScalarValue();
-
-  @Nullable
-  PsiElement getPerlFunctionBuiltIn();
-
-  @Nullable
-  PsiElement getPerlFunctionUser();
-
-  @Nullable
-  PsiElement getPerlMultilineDq();
-
-  @Nullable
-  PsiElement getPerlMultilineDx();
-
-  @Nullable
-  PsiElement getPerlMultilineHtml();
-
-  @Nullable
-  PsiElement getPerlMultilineMarker();
-
-  @Nullable
-  PsiElement getPerlMultilineSq();
-
-  @Nullable
-  PsiElement getPerlMultilineXml();
-
-  @Nullable
-  PsiElement getPerlOperator();
-
-  @Nullable
-  PsiElement getPerlVersion();
 
 }

@@ -55,7 +55,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitFunctionAny(@NotNull PerlFunctionAny o) {
+  public void visitFunction(@NotNull PerlFunction o) {
     visitPsiElement(o);
   }
 
@@ -164,6 +164,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitScalarValue(@NotNull PerlScalarValue o) {
+    visitPsiElement(o);
+  }
+
+  public void visitString(@NotNull PerlString o) {
     visitPsiElement(o);
   }
 

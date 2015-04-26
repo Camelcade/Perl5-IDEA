@@ -11,17 +11,10 @@ import com.perl5.lang.perl.psi.PerlPackageNamespace;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlPsiImpUtil
+public class PerlPsiImpUtil implements PerlElementTypes
 {
-	public static final TokenSet PERL_PACKAGES = TokenSet.create(
-			PerlElementTypes.PERL_PACKAGE_USER
-			, PerlElementTypes.PERL_PACKAGE_BUILT_IN
-			, PerlElementTypes.PERL_PACKAGE_BUILT_IN_DEPRECATED
-			, PerlElementTypes.PERL_PACKAGE_BUILT_IN_PRAGMA
-	);
-
 	public static String getName(PerlPackageBare element) {
-		ASTNode keyNode = element.getNode().findChildByType(PERL_PACKAGES);
+		ASTNode keyNode = element.getNode().findChildByType(PERL_PACKAGE);
 		if (keyNode != null) {
 			return keyNode.getText();
 		} else {
@@ -30,7 +23,7 @@ public class PerlPsiImpUtil
 	}
 
 	public static PsiElement setName(PerlPackageBare element, String newName) {
-		ASTNode packageNode = element.getNode().findChildByType(PERL_PACKAGES);
+		ASTNode packageNode = element.getNode().findChildByType(PERL_PACKAGE);
 		if (packageNode != null) {
 			PerlPackageBare packageBare = PerlElementFactory.createPerlPackageBare(element.getProject(), newName);
 			ASTNode newPackageNode = packageBare.getFirstChild().getNode();
@@ -40,7 +33,7 @@ public class PerlPsiImpUtil
 	}
 
 	public static PsiElement getNameIdentifier(PerlPackageBare element) {
-		ASTNode packageNode = element.getNode().findChildByType(PERL_PACKAGES);
+		ASTNode packageNode = element.getNode().findChildByType(PERL_PACKAGE);
 		if (packageNode != null) {
 			return packageNode.getPsi();
 		} else {

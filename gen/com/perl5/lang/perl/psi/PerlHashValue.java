@@ -13,7 +13,4 @@ public interface PerlHashValue extends PsiElement {
   @Nullable
   PerlScalarValue getScalarValue();
 
-  @Nullable
-  PsiElement getPerlSigilHash();
-
 }

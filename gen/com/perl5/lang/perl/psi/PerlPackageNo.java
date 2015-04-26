@@ -13,7 +13,4 @@ public interface PerlPackageNo extends PsiElement {
   @Nullable
   PerlPackageBare getPackageBare();
 
-  @Nullable
-  PsiElement getPerlVersion();
-
 }

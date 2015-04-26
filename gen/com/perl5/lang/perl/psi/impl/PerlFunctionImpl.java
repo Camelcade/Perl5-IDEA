@@ -11,21 +11,15 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlFunctionCallAnyImpl extends ASTWrapperPsiElement implements PerlFunctionCallAny {
+public class PerlFunctionImpl extends ASTWrapperPsiElement implements PerlFunction {
 
-  public PerlFunctionCallAnyImpl(ASTNode node) {
+  public PerlFunctionImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitFunctionCallAny(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitFunction(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public PerlCallParamsAny getCallParamsAny() {
-    return findChildByClass(PerlCallParamsAny.class);
   }
 
 }

@@ -48,44 +48,8 @@ public class PerlScalarValueImpl extends ASTWrapperPsiElement implements PerlSca
 
   @Override
   @Nullable
-  public PsiElement getPerlDqString() {
-    return findChildByType(PERL_DQ_STRING);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlDxString() {
-    return findChildByType(PERL_DX_STRING);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlMultilineMarker() {
-    return findChildByType(PERL_MULTILINE_MARKER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlNumber() {
-    return findChildByType(PERL_NUMBER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlSigilScalar() {
-    return findChildByType(PERL_SIGIL_SCALAR);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlSqString() {
-    return findChildByType(PERL_SQ_STRING);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVersion() {
-    return findChildByType(PERL_VERSION);
+  public PerlString getString() {
+    return findChildByClass(PerlString.class);
   }
 
 }

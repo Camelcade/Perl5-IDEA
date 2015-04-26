@@ -49,7 +49,4 @@ public interface PerlPackageNamespace extends PsiElement {
   @NotNull
   List<PerlPackageUseInvalid> getPackageUseInvalidList();
 
-  @Nullable
-  PsiElement getPerlVersion();
-
 }

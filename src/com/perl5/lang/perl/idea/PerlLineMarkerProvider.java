@@ -29,11 +29,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 		{
 			IElementType elementType = ((LeafPsiElement) element).getElementType();
 
-			if( elementType == PERL_PACKAGE_USER
-					|| elementType == PERL_PACKAGE_BUILT_IN
-					|| elementType == PERL_PACKAGE_BUILT_IN_DEPRECATED
-					|| elementType == PERL_PACKAGE_BUILT_IN_PRAGMA
-					)
+			if( elementType == PERL_PACKAGE	)
 			{
 				Project project = element.getProject();
 

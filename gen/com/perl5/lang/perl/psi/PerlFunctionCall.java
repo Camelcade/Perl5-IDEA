@@ -10,10 +10,7 @@ public interface PerlFunctionCall extends PsiElement {
   @Nullable
   PerlCallParamsAny getCallParamsAny();
 
-  @Nullable
-  PsiElement getPerlFunctionBuiltIn();
-
-  @Nullable
-  PsiElement getPerlFunctionUser();
+  @NotNull
+  PerlFunction getFunction();
 
 }

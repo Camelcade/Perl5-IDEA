@@ -106,10 +106,4 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageUseInvalid.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlVersion() {
-    return findChildByType(PERL_VERSION);
-  }
-
 }

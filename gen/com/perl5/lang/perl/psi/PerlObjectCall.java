@@ -19,7 +19,4 @@ public interface PerlObjectCall extends PsiElement {
   @Nullable
   PerlScalarValue getScalarValue();
 
-  @Nullable
-  PsiElement getPerlSigilScalar();
-
 }

@@ -11,6 +11,9 @@ public interface PerlSubexpression extends PsiElement {
   List<PerlArrayValue> getArrayValueList();
 
   @NotNull
+  List<PerlFunction> getFunctionList();
+
+  @NotNull
   List<PerlFunctionCall> getFunctionCallList();
 
   @NotNull

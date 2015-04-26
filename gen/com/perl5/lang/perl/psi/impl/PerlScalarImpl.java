@@ -22,16 +22,4 @@ public class PerlScalarImpl extends ASTWrapperPsiElement implements PerlScalar {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableScalar() {
-    return findChildByType(PERL_VARIABLE_SCALAR);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableScalarBuiltIn() {
-    return findChildByType(PERL_VARIABLE_SCALAR_BUILT_IN);
-  }
-
 }

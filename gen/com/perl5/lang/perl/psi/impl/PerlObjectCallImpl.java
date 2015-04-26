@@ -46,10 +46,4 @@ public class PerlObjectCallImpl extends ASTWrapperPsiElement implements PerlObje
     return findChildByClass(PerlScalarValue.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlSigilScalar() {
-    return findChildByType(PERL_SIGIL_SCALAR);
-  }
-
 }

@@ -21,30 +21,6 @@ public class PerlPackageBareImpl extends PerlNamedElementImpl implements PerlPac
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltIn() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltInDeprecated() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN_DEPRECATED);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageBuiltInPragma() {
-    return findChildByType(PERL_PACKAGE_BUILT_IN_PRAGMA);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlPackageUser() {
-    return findChildByType(PERL_PACKAGE_USER);
-  }
-
   public String getName() {
     return PerlPsiImpUtil.getName(this);
   }

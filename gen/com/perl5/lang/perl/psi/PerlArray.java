@@ -7,10 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlArray extends PsiElement {
 
-  @Nullable
-  PsiElement getPerlVariableArray();
-
-  @Nullable
-  PsiElement getPerlVariableArrayBuiltIn();
-
 }

@@ -30,6 +30,12 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @Nullable
+  public PerlFunction getFunction() {
+    return findChildByClass(PerlFunction.class);
+  }
+
+  @Override
+  @Nullable
   public PerlFunctionCall getFunctionCall() {
     return findChildByClass(PerlFunctionCall.class);
   }
@@ -62,66 +68,6 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
   @Nullable
   public PerlScalarValue getScalarValue() {
     return findChildByClass(PerlScalarValue.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlFunctionBuiltIn() {
-    return findChildByType(PERL_FUNCTION_BUILT_IN);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlFunctionUser() {
-    return findChildByType(PERL_FUNCTION_USER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlMultilineDq() {
-    return findChildByType(PERL_MULTILINE_DQ);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlMultilineDx() {
-    return findChildByType(PERL_MULTILINE_DX);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlMultilineHtml() {
-    return findChildByType(PERL_MULTILINE_HTML);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlMultilineMarker() {
-    return findChildByType(PERL_MULTILINE_MARKER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlMultilineSq() {
-    return findChildByType(PERL_MULTILINE_SQ);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlMultilineXml() {
-    return findChildByType(PERL_MULTILINE_XML);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlOperator() {
-    return findChildByType(PERL_OPERATOR);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVersion() {
-    return findChildByType(PERL_VERSION);
   }
 
 }

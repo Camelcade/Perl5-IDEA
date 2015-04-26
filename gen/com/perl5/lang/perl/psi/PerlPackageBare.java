@@ -7,18 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlPackageBare extends PerlNamedElement {
 
-  @Nullable
-  PsiElement getPerlPackageBuiltIn();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInDeprecated();
-
-  @Nullable
-  PsiElement getPerlPackageBuiltInPragma();
-
-  @Nullable
-  PsiElement getPerlPackageUser();
-
   String getName();
 
   PsiElement setName(String newName);

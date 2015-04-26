@@ -13,47 +13,28 @@
   tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
 
   tokens=[
-    PERL_COMMENT
-    PERL_COMMENT_BLOCK
-    PERL_POD
+    PERL_COMMENT="PERL_COMMENT"
+    PERL_COMMENT_BLOCK="PERL_COMMENT_BLOCK"
+    PERL_POD="PERL_POD"
 
-    PERL_SIGIL_ARRAY
-    PERL_SIGIL_HASH
-    PERL_SIGIL_SCALAR
+    PERL_SIGIL_ARRAY="@"
+    PERL_SIGIL_HASH="%"
+    PERL_SIGIL_SCALAR="$"
 
-    PERL_VERSION
+    PERL_MULTILINE_MARKER="PERL_MULTILINE_MARKER"
+    PERL_STRING_MULTILINE="PERL_STRING_MULTILINE"
+    PERL_STRING="PERL_STRING"
 
-    PERL_MULTILINE_MARKER
+    PERL_VERSION="PERL_VERSION"
+    PERL_NUMBER="PERL_NUMBER"
+    PERL_SCALAR="PERL_SCALAR"
+    PERL_ARRAY="PERL_ARRAY"
+    PERL_HASH="PERL_HASH"
+    PERL_GLOB="PERL_GLOB"
 
-    PERL_MULTILINE_SQ
-    PERL_MULTILINE_DQ
-    PERL_MULTILINE_DX
-    PERL_MULTILINE_XML
-    PERL_MULTILINE_HTML
-
-    PERL_DQ_STRING
-    PERL_DX_STRING
-    PERL_SQ_STRING
-
-    PERL_NUMBER
-    PERL_VARIABLE_SCALAR
-    PERL_VARIABLE_ARRAY
-    PERL_VARIABLE_HASH
-    PERL_VARIABLE_GLOB
-    PERL_VARIABLE_SCALAR_BUILT_IN
-    PERL_VARIABLE_ARRAY_BUILT_IN
-    PERL_VARIABLE_HASH_BUILT_IN
-    PERL_VARIABLE_GLOB_BUILT_IN
-
-    PERL_FUNCTION_USER
-    PERL_FUNCTION_BUILT_IN
-    PERL_FUNCTION_BUILT_IN_IMPLEMENTED="PERL_FUNCTION_BUILT_IN_IMPLEMENTED"
-
-    PERL_PACKAGE_USER
-    PERL_PACKAGE_BUILT_IN
-    PERL_PACKAGE_BUILT_IN_PRAGMA
-    PERL_PACKAGE_BUILT_IN_DEPRECATED
-    PERL_OPERATOR
+    PERL_FUNCTION="PERL_FUNCTION"
+    PERL_PACKAGE="PERL_PACKAGE"
+    PERL_OPERATOR="PERL_OPERATOR"
 
     PERL_DEREFERENCE='->'
     PERL_DEPACKAGE='::'
@@ -129,7 +110,7 @@ object_call ::= scalar_value_var '->' function_call_any
 package_static_call ::= package_bare '::' function_call_any
 package_object_call ::= package_bare '->' function_call_any
 
-function_call_any ::= function_any call_params_any ?
+function_call_any ::= PERL_FUNCTION call_params_any ?
 function_call ::= function call_params_any ?
 call_params_any ::= call_params_strict | call_params
 call_params_strict ::= '(' call_params ')'
@@ -156,39 +137,21 @@ private scalar_anon_array     ::= '[' array_value ']'
 private scalar_anon_hash      ::= '{' array_value '}'
 private scalar_function_result ::= function_call
 
+// this just for wrapper, need to find other way
+function ::= PERL_FUNCTION
+glob ::= PERL_GLOB
+scalar ::= PERL_SCALAR
+array ::= PERL_ARRAY
+hash ::= PERL_HASH
+string ::= PERL_STRING
+
 // Generalizations
 private controls ::= ',' | '[' | ']' | '(' | ')'
-private chars ::= PERL_NEWLINE | PERL_BAD_CHARACTER
-private string ::=
-    PERL_DQ_STRING
-    | PERL_SQ_STRING
-    | PERL_DX_STRING
 
-private multiline_string ::=
-    (
-        PERL_MULTILINE_SQ
-        | PERL_MULTILINE_DQ
-        | PERL_MULTILINE_DX
-        | PERL_MULTILINE_XML
-        | PERL_MULTILINE_HTML
-    ) PERL_MULTILINE_MARKER
+private multiline_string ::= PERL_STRING_MULTILINE PERL_MULTILINE_MARKER
 
-package_bare ::=
-    PERL_PACKAGE_USER
-    | PERL_PACKAGE_BUILT_IN
-    | PERL_PACKAGE_BUILT_IN_DEPRECATED
-    | PERL_PACKAGE_BUILT_IN_PRAGMA
-    {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
+package_bare ::= PERL_PACKAGE  {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
         implements="com.perl5.lang.perl.psi.PerlNamedElement"
         methods=[getName setName getNameIdentifier]
     }
-
-function_any ::= function | PERL_FUNCTION_BUILT_IN_IMPLEMENTED
-private function ::= PERL_FUNCTION_BUILT_IN | PERL_FUNCTION_USER
-
-//private perl_variable ::= perl_scalar | perl_glob | perl_array | perl_hash
-glob ::= PERL_VARIABLE_GLOB | PERL_VARIABLE_GLOB_BUILT_IN
-array ::= PERL_VARIABLE_ARRAY | PERL_VARIABLE_ARRAY_BUILT_IN
-hash ::= PERL_VARIABLE_HASH | PERL_VARIABLE_HASH_BUILT_IN
-scalar ::= PERL_VARIABLE_SCALAR | PERL_VARIABLE_SCALAR_BUILT_IN
 

@@ -34,10 +34,4 @@ public class PerlHashValueImpl extends ASTWrapperPsiElement implements PerlHashV
     return findChildByClass(PerlScalarValue.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlSigilHash() {
-    return findChildByType(PERL_SIGIL_HASH);
-  }
-
 }

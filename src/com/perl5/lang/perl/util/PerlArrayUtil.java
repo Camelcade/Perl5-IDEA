@@ -11,12 +11,12 @@ import java.util.Arrays;
  */
 public class PerlArrayUtil implements PerlElementTypes
 {
-	// @todo shouldn't we think about map search
+	// @todo remake map
 	public static IElementType getArrayType(String array)
 	{
 		return BUILT_IN.contains(array)
-				? PERL_VARIABLE_ARRAY_BUILT_IN
-				: PERL_VARIABLE_ARRAY;
+				? PERL_ARRAY
+				: PERL_ARRAY;
 	}
 
 	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(

@@ -7,10 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlScalar extends PsiElement {
 
-  @Nullable
-  PsiElement getPerlVariableScalar();
-
-  @Nullable
-  PsiElement getPerlVariableScalarBuiltIn();
-
 }

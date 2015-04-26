@@ -8,8 +8,10 @@ import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
+import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +33,9 @@ public class PerlAnnotator implements Annotator, PerlElementTypes
 
 	@Override
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
+
+//		Annotation annotation = holder.createInfoAnnotation(element, "");
+//		annotation.setEnforcedTextAttributes(new TextAttributes(null, null, null, null, 3));
 
 		if( element instanceof PerlPackageUseInvalidImpl)
 		{

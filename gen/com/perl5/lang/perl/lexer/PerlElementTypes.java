@@ -22,7 +22,7 @@ public interface PerlElementTypes {
   IElementType EVAL = new PerlElementType("EVAL");
   IElementType EVAL_INVALID = new PerlElementType("EVAL_INVALID");
   IElementType EXPRESSION = new PerlElementType("EXPRESSION");
-  IElementType FUNCTION_ANY = new PerlElementType("FUNCTION_ANY");
+  IElementType FUNCTION = new PerlElementType("FUNCTION");
   IElementType FUNCTION_CALL = new PerlElementType("FUNCTION_CALL");
   IElementType FUNCTION_CALL_ANY = new PerlElementType("FUNCTION_CALL_ANY");
   IElementType FUNCTION_DEFINITION_ANON = new PerlElementType("FUNCTION_DEFINITION_ANON");
@@ -50,52 +50,37 @@ public interface PerlElementTypes {
   IElementType PACKAGE_USE_INVALID = new PerlElementType("PACKAGE_USE_INVALID");
   IElementType SCALAR = new PerlElementType("SCALAR");
   IElementType SCALAR_VALUE = new PerlElementType("SCALAR_VALUE");
+  IElementType STRING = new PerlElementType("STRING");
   IElementType SUBEXPRESSION = new PerlElementType("SUBEXPRESSION");
 
-  IElementType PERL_BAD_CHARACTER = new PerlTokenType("PERL_BAD_CHARACTER");
+  IElementType CHARS = new PerlTokenType("chars");
+  IElementType PERL_ARRAY = new PerlTokenType("PERL_ARRAY");
   IElementType PERL_COMMA = new PerlTokenType(",");
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
   IElementType PERL_DEREFERENCE = new PerlTokenType("->");
-  IElementType PERL_DQ_STRING = new PerlTokenType("PERL_DQ_STRING");
-  IElementType PERL_DX_STRING = new PerlTokenType("PERL_DX_STRING");
-  IElementType PERL_FUNCTION_BUILT_IN = new PerlTokenType("PERL_FUNCTION_BUILT_IN");
-  IElementType PERL_FUNCTION_BUILT_IN_IMPLEMENTED = new PerlTokenType("PERL_FUNCTION_BUILT_IN_IMPLEMENTED");
-  IElementType PERL_FUNCTION_USER = new PerlTokenType("PERL_FUNCTION_USER");
+  IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
+  IElementType PERL_GLOB = new PerlTokenType("PERL_GLOB");
+  IElementType PERL_HASH = new PerlTokenType("PERL_HASH");
   IElementType PERL_LBRACE = new PerlTokenType("{");
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
-  IElementType PERL_MULTILINE_DQ = new PerlTokenType("PERL_MULTILINE_DQ");
-  IElementType PERL_MULTILINE_DX = new PerlTokenType("PERL_MULTILINE_DX");
-  IElementType PERL_MULTILINE_HTML = new PerlTokenType("PERL_MULTILINE_HTML");
   IElementType PERL_MULTILINE_MARKER = new PerlTokenType("PERL_MULTILINE_MARKER");
-  IElementType PERL_MULTILINE_SQ = new PerlTokenType("PERL_MULTILINE_SQ");
-  IElementType PERL_MULTILINE_XML = new PerlTokenType("PERL_MULTILINE_XML");
-  IElementType PERL_NEWLINE = new PerlTokenType("PERL_NEWLINE");
   IElementType PERL_NUMBER = new PerlTokenType("PERL_NUMBER");
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
-  IElementType PERL_PACKAGE_BUILT_IN = new PerlTokenType("PERL_PACKAGE_BUILT_IN");
-  IElementType PERL_PACKAGE_BUILT_IN_DEPRECATED = new PerlTokenType("PERL_PACKAGE_BUILT_IN_DEPRECATED");
-  IElementType PERL_PACKAGE_BUILT_IN_PRAGMA = new PerlTokenType("PERL_PACKAGE_BUILT_IN_PRAGMA");
-  IElementType PERL_PACKAGE_USER = new PerlTokenType("PERL_PACKAGE_USER");
+  IElementType PERL_PACKAGE = new PerlTokenType("PERL_PACKAGE");
   IElementType PERL_POD = new PerlTokenType("PERL_POD");
   IElementType PERL_RBRACE = new PerlTokenType("}");
   IElementType PERL_RBRACK = new PerlTokenType("]");
   IElementType PERL_RPAREN = new PerlTokenType(")");
+  IElementType PERL_SCALAR = new PerlTokenType("PERL_SCALAR");
   IElementType PERL_SEMI = new PerlTokenType(";");
-  IElementType PERL_SIGIL_ARRAY = new PerlTokenType("PERL_SIGIL_ARRAY");
-  IElementType PERL_SIGIL_HASH = new PerlTokenType("PERL_SIGIL_HASH");
-  IElementType PERL_SIGIL_SCALAR = new PerlTokenType("PERL_SIGIL_SCALAR");
-  IElementType PERL_SQ_STRING = new PerlTokenType("PERL_SQ_STRING");
-  IElementType PERL_VARIABLE_ARRAY = new PerlTokenType("PERL_VARIABLE_ARRAY");
-  IElementType PERL_VARIABLE_ARRAY_BUILT_IN = new PerlTokenType("PERL_VARIABLE_ARRAY_BUILT_IN");
-  IElementType PERL_VARIABLE_GLOB = new PerlTokenType("PERL_VARIABLE_GLOB");
-  IElementType PERL_VARIABLE_GLOB_BUILT_IN = new PerlTokenType("PERL_VARIABLE_GLOB_BUILT_IN");
-  IElementType PERL_VARIABLE_HASH = new PerlTokenType("PERL_VARIABLE_HASH");
-  IElementType PERL_VARIABLE_HASH_BUILT_IN = new PerlTokenType("PERL_VARIABLE_HASH_BUILT_IN");
-  IElementType PERL_VARIABLE_SCALAR = new PerlTokenType("PERL_VARIABLE_SCALAR");
-  IElementType PERL_VARIABLE_SCALAR_BUILT_IN = new PerlTokenType("PERL_VARIABLE_SCALAR_BUILT_IN");
+  IElementType PERL_SIGIL_ARRAY = new PerlTokenType("@");
+  IElementType PERL_SIGIL_HASH = new PerlTokenType("%");
+  IElementType PERL_SIGIL_SCALAR = new PerlTokenType("$");
+  IElementType PERL_STRING = new PerlTokenType("PERL_STRING");
+  IElementType PERL_STRING_MULTILINE = new PerlTokenType("PERL_STRING_MULTILINE");
   IElementType PERL_VERSION = new PerlTokenType("PERL_VERSION");
 
   class Factory {
@@ -137,8 +122,8 @@ public interface PerlElementTypes {
       else if (type == EXPRESSION) {
         return new PerlExpressionImpl(node);
       }
-      else if (type == FUNCTION_ANY) {
-        return new PerlFunctionAnyImpl(node);
+      else if (type == FUNCTION) {
+        return new PerlFunctionImpl(node);
       }
       else if (type == FUNCTION_CALL) {
         return new PerlFunctionCallImpl(node);
@@ -220,6 +205,9 @@ public interface PerlElementTypes {
       }
       else if (type == SCALAR_VALUE) {
         return new PerlScalarValueImpl(node);
+      }
+      else if (type == STRING) {
+        return new PerlStringImpl(node);
       }
       else if (type == SUBEXPRESSION) {
         return new PerlSubexpressionImpl(node);

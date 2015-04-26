@@ -1,6 +1,7 @@
 package com.perl5.lang.perl.idea;
 
 import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.completion.impl.CamelHumpMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
@@ -20,7 +21,7 @@ public class PerlCompletionContributor extends CompletionContributor
 	public PerlCompletionContributor() {
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_ARRAY).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.PERL_ARRAY).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
@@ -31,13 +32,15 @@ public class PerlCompletionContributor extends CompletionContributor
 							resultSet.addElement(LookupElementBuilder.create(arrayName));
 							System.err.println(arrayName);
 						}
+						resultSet.withPrefixMatcher("@");
 
 					}
 				}
 		);
+		//CamelHumpMatcher
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_SCALAR).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.PERL_SCALAR).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
@@ -53,7 +56,7 @@ public class PerlCompletionContributor extends CompletionContributor
 		);
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION_USER).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
@@ -76,10 +79,9 @@ public class PerlCompletionContributor extends CompletionContributor
 						{
 							if( currentPosition instanceof PerlFunctionDefinitionNamedImpl)
 							{
-								PsiElement functionName = ((PerlFunctionDefinitionNamedImpl)currentPosition).getPerlFunctionUser();
+								PsiElement functionName = ((PerlFunctionDefinitionNamedImpl)currentPosition).getFunction();
 
-								if( functionName != null )
-									resultSet.addElement(LookupElementBuilder.create(functionName.getText()));
+								resultSet.addElement(LookupElementBuilder.create(functionName.getText()));
 							}
 
 
@@ -96,7 +98,7 @@ public class PerlCompletionContributor extends CompletionContributor
 		);
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_HASH).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.PERL_HASH).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
@@ -106,7 +108,7 @@ public class PerlCompletionContributor extends CompletionContributor
 						{
 							resultSet.addElement(LookupElementBuilder.create(hashName));
 						}
-
+						resultSet.withPrefixMatcher("%");
 					}
 				}
 		);
@@ -122,13 +124,14 @@ public class PerlCompletionContributor extends CompletionContributor
 						{
 							resultSet.addElement(LookupElementBuilder.create(globName));
 						}
+						resultSet.withPrefixMatcher("*");
 
 					}
 				}
 		);
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_PACKAGE_USER).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.PERL_PACKAGE).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,

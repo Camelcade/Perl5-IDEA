@@ -30,6 +30,12 @@ public class PerlExpressionImpl extends ASTWrapperPsiElement implements PerlExpr
 
   @Override
   @NotNull
+  public List<PerlFunction> getFunctionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFunction.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlFunctionCall> getFunctionCallList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFunctionCall.class);
   }

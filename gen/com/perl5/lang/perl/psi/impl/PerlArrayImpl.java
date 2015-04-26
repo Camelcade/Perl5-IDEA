@@ -22,16 +22,4 @@ public class PerlArrayImpl extends ASTWrapperPsiElement implements PerlArray {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableArray() {
-    return findChildByType(PERL_VARIABLE_ARRAY);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableArrayBuiltIn() {
-    return findChildByType(PERL_VARIABLE_ARRAY_BUILT_IN);
-  }
-
 }

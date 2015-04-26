@@ -1,22 +1,7 @@
 package com.perl5.lang.perl.util;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.search.FileTypeIndex;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.indexing.FileBasedIndex;
-import com.perl5.lang.perl.files.PerlFileType;
-import com.perl5.lang.perl.files.PerlFileTypePackage;
-import com.perl5.lang.perl.files.PerlFileTypeScript;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlPackageNamespace;
-import com.perl5.lang.perl.psi.PerlScalar;
-import com.perl5.lang.perl.psi.impl.PerlPackageNamespaceImpl;
-import com.perl5.lang.perl.psi.impl.PerlScalarImpl;
 
 import java.util.*;
 
@@ -157,7 +142,7 @@ public class PerlScalarUtil implements PerlElementTypes
 	static{
 		for( String builtIn: BUILT_IN )
 		{
-			BUILT_IN_MAP.put(builtIn, PERL_VARIABLE_SCALAR_BUILT_IN);
+			BUILT_IN_MAP.put(builtIn, PERL_SCALAR);
 		}
 	}
 
@@ -166,7 +151,7 @@ public class PerlScalarUtil implements PerlElementTypes
 		IElementType scalarType = BUILT_IN_MAP.get(scalar);
 
 		return scalarType == null
-				? PERL_VARIABLE_SCALAR
+				? PERL_SCALAR
 				: scalarType;
 	}
 

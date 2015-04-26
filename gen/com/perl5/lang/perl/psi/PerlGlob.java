@@ -7,10 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlGlob extends PsiElement {
 
-  @Nullable
-  PsiElement getPerlVariableGlob();
-
-  @Nullable
-  PsiElement getPerlVariableGlobBuiltIn();
-
 }

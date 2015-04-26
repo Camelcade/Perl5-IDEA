@@ -373,14 +373,15 @@ public class PerlFunctionUtil implements PerlElementTypes
 	));
 
 
+	// @todo remake map
 	static{
 		for( String functionName: BUILT_IN )
 		{
-			knownFunctions.put(functionName, PERL_FUNCTION_BUILT_IN);
+			knownFunctions.put(functionName, PERL_FUNCTION);
 		}
 		for( String functionName: IMPLEMENTED )
 		{
-			knownFunctions.put(functionName, PERL_FUNCTION_BUILT_IN_IMPLEMENTED);
+			knownFunctions.put(functionName, PERL_FUNCTION);
 		}
 	}
 
@@ -391,7 +392,7 @@ public class PerlFunctionUtil implements PerlElementTypes
 		functionType = knownFunctions.get(function);
 
 		return functionType == null
-				? PERL_FUNCTION_USER
+				? PERL_FUNCTION
 				: functionType;
 	}
 

@@ -14,8 +14,6 @@ import com.perl5.lang.perl.files.PerlFileTypeScript;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlPackageNamespace;
-import com.perl5.lang.perl.psi.PerlScalar;
-import com.perl5.lang.perl.psi.impl.PerlScalarImpl;
 
 import java.util.*;
 
@@ -27,18 +25,19 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	protected static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
 
 
+	// @todo remake map
 	static{
 		for( String packageName: BUILT_IN )
 		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_BUILT_IN);
+			BUILT_IN_MAP.put(packageName, PERL_PACKAGE);
 		}
 		for( String packageName: BUILT_IN_PRAGMA )
 		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_BUILT_IN_PRAGMA);
+			BUILT_IN_MAP.put(packageName, PERL_PACKAGE);
 		}
 		for( String packageName: BUILT_IN_DEPRECATED )
 		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_BUILT_IN_DEPRECATED);
+			BUILT_IN_MAP.put(packageName, PERL_PACKAGE);
 		}
 	}
 
@@ -52,7 +51,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		IElementType packageType = BUILT_IN_MAP.get(packageName);
 
 		return packageType == null
-				? PERL_PACKAGE_USER
+				? PERL_PACKAGE
 				: packageType;
 	}
 

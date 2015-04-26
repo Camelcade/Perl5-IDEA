@@ -45,9 +45,8 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 
 	/**
 	 * Invoken on opening token, waiting for a newline
-	 * @param lineType - future line type: single or double quoted
 	 */
-	protected void prepareForMultiline(IElementType lineType)
+	protected void prepareForMultiline()
 	{
 		waitingMultiLine = true;
 
@@ -56,27 +55,10 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		if (m.matches())
 		{
 			multilineMarker = m.group(1);
-//			System.out.printf("Got opening token: `%s`\n", multilineMarker);
 		} else // shouldn't happen
 		{
 			throw new Error("Could not match opening multiline marker: " + openToken);
 		}
-
-		// #@todo We should find a proper way to do this, can have format and be DQ/SQ
-		if( lineType != PERL_MULTILINE_DX )
-		{
-/*			// not working somehow
-			if (multilineMarker.equals("HTML"))
-			{
-				lineType = PERL_MULTILINE_HTML;
-			} else if (multilineMarker.equals("XML"))
-			{
-				lineType = PERL_MULTILINE_XML;
-			}
-*/
-		}
-
-		declaredMultiLineType = lineType;
 	}
 
 	protected boolean isWaitingMultiLine(){return waitingMultiLine;}
@@ -89,7 +71,6 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		multiLineStart = getNextTokenStart();
 		yybegin_LEX_MULTILINE();
 		waitingMultiLine = false;
-//		System.out.printf("Started multiline %s at %d\n", multilineMarker, multiLineStart);
 	}
 
 	/**
@@ -103,11 +84,11 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 
 	/**
 	 * Ends multiline, pushback marker
-	 * @return
+	 * @return - type of string (all the same)
 	 */
 	protected IElementType endMultiline()
 	{
-		if( yytext().toString().equals(multilineMarker)) // got marker
+		if( isMultilineEnd() ) // got marker
 		{
 			setTokenStart(multiLineStart);
 			yypushback(multilineMarker.length());
@@ -119,6 +100,6 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			yybegin_YYINITIAL();
 		}
 
-		return declaredMultiLineType;
+		return PERL_STRING_MULTILINE;
 	}
 }

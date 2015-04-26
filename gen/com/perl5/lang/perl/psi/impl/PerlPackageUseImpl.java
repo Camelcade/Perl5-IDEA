@@ -34,10 +34,4 @@ public class PerlPackageUseImpl extends ASTWrapperPsiElement implements PerlPack
     return findChildByClass(PerlPackageBare.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlVersion() {
-    return findChildByType(PERL_VERSION);
-  }
-
 }

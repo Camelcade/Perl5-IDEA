@@ -22,16 +22,4 @@ public class PerlHashImpl extends ASTWrapperPsiElement implements PerlHash {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableHash() {
-    return findChildByType(PERL_VARIABLE_HASH);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableHashBuiltIn() {
-    return findChildByType(PERL_VARIABLE_HASH_BUILT_IN);
-  }
-
 }

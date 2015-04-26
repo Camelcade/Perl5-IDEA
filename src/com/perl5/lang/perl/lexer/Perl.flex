@@ -98,11 +98,12 @@ POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|e
 POD_CLOSE       = \="cut"{FULL_LINE}
 
 DEPACKAGE = "::"
+DEREFERENCE = "->"
 
 PACKAGE_NAME = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)*
 
 PACKAGE_STATIC_CALL = ({ALFANUM}+{DEPACKAGE})+
-PACKAGE_INSTANCE_CALL = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)* "->"
+PACKAGE_INSTANCE_CALL = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)* {DEREFERENCE}
 
 FUNCTION_NAME = {ALFANUM}+
 
@@ -214,7 +215,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 <LEX_PACKAGE_DEFINITION>{
     {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
-    {PACKAGE_NAME}      {yybegin(LEX_PACKAGE_DEFINITION_VERSION); return PerlPackageUtil.getPackageType(yytext().toString());}
+    {PACKAGE_NAME}      {yybegin(LEX_PACKAGE_DEFINITION_VERSION); return PERL_PACKAGE;}
     .   {yybegin(YYINITIAL);  return TokenType.BAD_CHARACTER;}
 }
 
@@ -253,12 +254,12 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 {
     {ALFANUM}+  {
         yybegin(LEX_PACKAGE_USE_PARAMS);
-        return PERL_SQ_STRING;
+        return PERL_STRING;
     }
 }
 <LEX_PACKAGE_USE_PARAMS>
 {
-    {ALFANUM}+  {return PERL_SQ_STRING;}
+    {ALFANUM}+  {return PERL_STRING;}
 }
 /////////////////////////////////////////// REQUIRE ... ////////////////////////////////////////////////////////////////
 
@@ -272,14 +273,14 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
         yybegin(YYINITIAL);
         return PerlPackageUtil.getPackageType(yytext().toString());
     }
-    {DQ_STRING}     {return PERL_DQ_STRING;}
-    {SQ_STRING}     {return PERL_SQ_STRING;}
+    {DQ_STRING}     {return PERL_STRING;}
+    {SQ_STRING}     {return PERL_STRING;}
     .   {yypushback(1);yybegin(YYINITIAL);break;}
 }
 
 /////////////////////////////////////////////// sub ... ////////////////////////////////////////////////////////////////
 <LEX_FUNCTION_DEFINITION>{
-    {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_FUNCTION_USER;}
+    {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_FUNCTION;}
 }
 
 {PACKAGE_STATIC_CALL} {
@@ -289,14 +290,14 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 {PACKAGE_INSTANCE_CALL} {
     yypushback(2);
-    return PerlPackageUtil.getPackageType(yytext().toString());
+    return PERL_PACKAGE;
 }
 
 
-{MULTILINE_MARKER_SQ}   {prepareForMultiline(PERL_MULTILINE_SQ);return PERL_MULTILINE_MARKER;}
-{MULTILINE_MARKER_DQ}   {prepareForMultiline(PERL_MULTILINE_DQ);return PERL_MULTILINE_MARKER;}
-{MULTILINE_MARKER_DQ_BARE}   {prepareForMultiline(PERL_MULTILINE_DQ);return PERL_MULTILINE_MARKER;}
-{MULTILINE_MARKER_DX}   {prepareForMultiline(PERL_MULTILINE_DX);return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_SQ}   {prepareForMultiline();return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_DQ}   {prepareForMultiline();return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_DQ_BARE}   {prepareForMultiline();return PERL_MULTILINE_MARKER;}
+{MULTILINE_MARKER_DX}   {prepareForMultiline();return PERL_MULTILINE_MARKER;}
 
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
@@ -304,24 +305,24 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 "]"             {return PERL_RBRACK;}
 "("             {return PERL_LPAREN;}
 ")"             {return PERL_RPAREN;}
-"->"			{yybegin(LEX_DEREFERENCE);return PERL_DEREFERENCE;}
+{DEREFERENCE}	{yybegin(LEX_DEREFERENCE);return PERL_DEREFERENCE;}
 {DEPACKAGE}		{return PERL_DEPACKAGE;}
-{DQ_STRING}     {return PERL_DQ_STRING;}
-{DX_STRING}     {return PERL_DX_STRING;}
-{SQ_STRING}     {return PERL_SQ_STRING;}
+{DQ_STRING}     {return PERL_STRING;}
+{DX_STRING}     {return PERL_STRING;}
+{SQ_STRING}     {return PERL_STRING;}
 {NUMBER}        {return PERL_NUMBER;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
-{VAR_SCALAR} {return PerlScalarUtil.getScalarType(yytext().toString());}
-{VAR_HASH} {return PerlHashUtil.getHashType(yytext().toString());}
-{VAR_ARRAY} {return PerlArrayUtil.getArrayType(yytext().toString());}
-{VAR_GLOB} {return PerlGlobUtil.getGlobType(yytext().toString());}
+{VAR_SCALAR} {return PERL_SCALAR;}
+{VAR_HASH} {return PERL_HASH;}
+{VAR_ARRAY} {return PERL_ARRAY;}
+{VAR_GLOB} {return PERL_GLOB;}
 "@" {return PERL_SIGIL_ARRAY;}
 "%" {return PERL_SIGIL_HASH;}
 "$" {return PERL_SIGIL_SCALAR;}
 
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
-{FUNCTION_NAME} { return PerlFunctionUtil.getFunctionType(yytext().toString());}
+{FUNCTION_NAME} { return PERL_FUNCTION;}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

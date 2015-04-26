@@ -10,10 +10,7 @@ public interface PerlFunctionDefinitionNamed extends PsiElement {
   @NotNull
   PerlBlock getBlock();
 
-  @Nullable
-  PsiElement getPerlFunctionBuiltIn();
-
-  @Nullable
-  PsiElement getPerlFunctionUser();
+  @NotNull
+  PerlFunction getFunction();
 
 }

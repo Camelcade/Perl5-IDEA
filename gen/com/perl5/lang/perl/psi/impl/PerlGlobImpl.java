@@ -22,16 +22,4 @@ public class PerlGlobImpl extends ASTWrapperPsiElement implements PerlGlob {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableGlob() {
-    return findChildByType(PERL_VARIABLE_GLOB);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPerlVariableGlobBuiltIn() {
-    return findChildByType(PERL_VARIABLE_GLOB_BUILT_IN);
-  }
-
 }
