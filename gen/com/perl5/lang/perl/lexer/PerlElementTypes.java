@@ -12,10 +12,8 @@ public interface PerlElementTypes {
 
   IElementType CODE_LINE = new PerlElementType("CODE_LINE");
   IElementType CODE_LINE_INVALID_ELEMENT = new PerlElementType("CODE_LINE_INVALID_ELEMENT");
-  IElementType CODE_LINE_VALID = new PerlElementType("CODE_LINE_VALID");
   IElementType FUNCTION_CALL = new PerlElementType("FUNCTION_CALL");
   IElementType FUNCTION_CALL_ANY = new PerlElementType("FUNCTION_CALL_ANY");
-  IElementType FUNCTION_DEFINITION = new PerlElementType("FUNCTION_DEFINITION");
   IElementType FUNCTION_DEFINITION_ANON = new PerlElementType("FUNCTION_DEFINITION_ANON");
   IElementType FUNCTION_DEFINITION_NAMED = new PerlElementType("FUNCTION_DEFINITION_NAMED");
   IElementType IF_BLOCK = new PerlElementType("IF_BLOCK");
@@ -110,17 +108,11 @@ public interface PerlElementTypes {
       else if (type == CODE_LINE_INVALID_ELEMENT) {
         return new PerlCodeLineInvalidElementImpl(node);
       }
-      else if (type == CODE_LINE_VALID) {
-        return new PerlCodeLineValidImpl(node);
-      }
       else if (type == FUNCTION_CALL) {
         return new PerlFunctionCallImpl(node);
       }
       else if (type == FUNCTION_CALL_ANY) {
         return new PerlFunctionCallAnyImpl(node);
-      }
-      else if (type == FUNCTION_DEFINITION) {
-        return new PerlFunctionDefinitionImpl(node);
       }
       else if (type == FUNCTION_DEFINITION_ANON) {
         return new PerlFunctionDefinitionAnonImpl(node);

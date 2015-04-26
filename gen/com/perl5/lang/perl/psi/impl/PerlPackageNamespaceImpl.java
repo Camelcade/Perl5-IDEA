@@ -24,14 +24,20 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
 
   @Override
   @NotNull
-  public List<PerlCodeLineValid> getCodeLineValidList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCodeLineValid.class);
+  public List<PerlCodeLine> getCodeLineList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCodeLine.class);
   }
 
   @Override
   @NotNull
-  public List<PerlFunctionDefinition> getFunctionDefinitionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFunctionDefinition.class);
+  public List<PerlFunctionDefinitionAnon> getFunctionDefinitionAnonList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFunctionDefinitionAnon.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlFunctionDefinitionNamed> getFunctionDefinitionNamedList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFunctionDefinitionNamed.class);
   }
 
   @Override
@@ -42,14 +48,32 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
 
   @Override
   @NotNull
+  public List<PerlPackageNo> getPackageNoList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNo.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlPackageNoInvalid> getPackageNoInvalidList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNoInvalid.class);
   }
 
   @Override
   @NotNull
+  public List<PerlPackageRequire> getPackageRequireList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageRequire.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlPackageRequireInvalid> getPackageRequireInvalidList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageRequireInvalid.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPackageUse> getPackageUseList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageUse.class);
   }
 
   @Override
@@ -62,6 +86,12 @@ public class PerlPackageNamespaceImpl extends ASTWrapperPsiElement implements Pe
   @NotNull
   public List<PerlPerlBlock> getPerlBlockList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlBlock.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPerlEval> getPerlEvalList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlEval.class);
   }
 
   @Override

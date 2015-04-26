@@ -28,17 +28,11 @@ public class PerlParser implements PsiParser {
     else if (t == CODE_LINE_INVALID_ELEMENT) {
       r = code_line_invalid_element(b, 0);
     }
-    else if (t == CODE_LINE_VALID) {
-      r = code_line_valid(b, 0);
-    }
     else if (t == FUNCTION_CALL) {
       r = function_call(b, 0);
     }
     else if (t == FUNCTION_CALL_ANY) {
       r = function_call_any(b, 0);
-    }
-    else if (t == FUNCTION_DEFINITION) {
-      r = function_definition(b, 0);
     }
     else if (t == FUNCTION_DEFINITION_ANON) {
       r = function_definition_anon(b, 0);
@@ -280,16 +274,16 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // perl_eval | package_use | package_no | package_require | code_line
-  public static boolean code_line_valid(PsiBuilder b, int l) {
+  static boolean code_line_valid(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "code_line_valid")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<code line valid>");
+    Marker m = enter_section_(b);
     r = perl_eval(b, l + 1);
     if (!r) r = package_use(b, l + 1);
     if (!r) r = package_no(b, l + 1);
     if (!r) r = package_require(b, l + 1);
     if (!r) r = code_line(b, l + 1);
-    exit_section_(b, l, m, CODE_LINE_VALID, r, false, null);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -334,13 +328,13 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // function_definition_named | function_definition_anon
-  public static boolean function_definition(PsiBuilder b, int l) {
+  static boolean function_definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "function_definition")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<function definition>");
+    Marker m = enter_section_(b);
     r = function_definition_named(b, l + 1);
     if (!r) r = function_definition_anon(b, l + 1);
-    exit_section_(b, l, m, FUNCTION_DEFINITION, r, false, null);
+    exit_section_(b, m, null, r);
     return r;
   }
 

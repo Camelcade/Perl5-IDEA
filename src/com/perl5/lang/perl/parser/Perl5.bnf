@@ -66,11 +66,12 @@
     PERL_SEMI=';';
   ]
 
+    mixin("function_definition_named")="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
 }
 
 perlFile ::= block_item*
 
-function_definition ::= function_definition_named | function_definition_anon
+private function_definition ::= function_definition_named | function_definition_anon
 function_definition_named ::= 'sub' perl_function perl_block ';' ?
 function_definition_anon ::= 'sub' perl_block ';'
 
@@ -84,7 +85,7 @@ private package_item ::= function_definition | if_block | code_line_valid | PERL
 private code_line_element ::= method_call | function_call| perl_function | perl_array_value | perl_hash_value | perl_scalar_value | perl_glob |  perl_multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
 private code_line_elements ::= code_line_element +
 
-code_line_valid ::= perl_eval | package_use | package_no | package_require | code_line
+private code_line_valid ::= perl_eval | package_use | package_no | package_require | code_line
 
 private code_line_invalid ::=
     package_use_invalid

@@ -3,10 +3,13 @@ package com.perl5.lang.perl.idea;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.PlatformPatterns;
+import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.helpers.*;
+import com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedImpl;
+import com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -64,6 +67,28 @@ public class PerlCompletionContributor extends CompletionContributor
 						for( String functionName: PerlFunction.IMPLEMENTED )
 						{
 							resultSet.addElement(LookupElementBuilder.create(functionName));
+						}
+
+						// append prevoiusly defined functions
+						PsiElement currentPosition = parameters.getPosition();
+
+						while( currentPosition != null )
+						{
+							if( currentPosition instanceof PerlFunctionDefinitionNamedImpl)
+							{
+								PsiElement functionName = ((PerlFunctionDefinitionNamedImpl)currentPosition).getPerlFunctionUser();
+
+								if( functionName != null )
+									resultSet.addElement(LookupElementBuilder.create(functionName.getText()));
+							}
+
+
+							PsiElement prevPosition = currentPosition.getPrevSibling();
+							if( prevPosition == null )
+							{
+								prevPosition = currentPosition.getParent();
+							}
+							currentPosition = prevPosition;
 						}
 
 					}

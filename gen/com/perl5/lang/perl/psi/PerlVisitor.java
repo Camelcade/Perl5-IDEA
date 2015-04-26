@@ -15,19 +15,11 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitCodeLineValid(@NotNull PerlCodeLineValid o) {
-    visitPsiElement(o);
-  }
-
   public void visitFunctionCall(@NotNull PerlFunctionCall o) {
     visitPsiElement(o);
   }
 
   public void visitFunctionCallAny(@NotNull PerlFunctionCallAny o) {
-    visitPsiElement(o);
-  }
-
-  public void visitFunctionDefinition(@NotNull PerlFunctionDefinition o) {
     visitPsiElement(o);
   }
 

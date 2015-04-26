@@ -32,6 +32,8 @@ import com.perl5.lang.perl.lexer.helpers.PerlPackage;
 http://perldoc.perl.org/perlop.html#Quote-Like-Operators
 q qq qx qw m qr {}
 s tr y {}{}
+<>
+//
 */
 
 

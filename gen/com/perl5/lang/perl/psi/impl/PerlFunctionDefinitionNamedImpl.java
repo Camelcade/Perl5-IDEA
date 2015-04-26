@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlFunctionDefinitionNamedImpl extends ASTWrapperPsiElement implements PerlFunctionDefinitionNamed {
+public class PerlFunctionDefinitionNamedImpl extends PerlFunctionDefinitionNamedUtil implements PerlFunctionDefinitionNamed {
 
   public PerlFunctionDefinitionNamedImpl(ASTNode node) {
     super(node);
