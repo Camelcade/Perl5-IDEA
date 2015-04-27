@@ -44,9 +44,12 @@ s tr y {}{}
     public int getNextTokenStart(){ return zzMarkedPos;}
     public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
 
-    public void yybegin_LEX_MULTILINE(){yybegin(LEX_MULTILINE);}
     public void yybegin_YYINITIAL(){yybegin(YYINITIAL);}
+    public void yybegin_LEX_MULTILINE(){yybegin(LEX_MULTILINE);}
     public void yybegin_LEX_MULTILINE_TOKEN(){yybegin(LEX_MULTILINE_TOKEN);}
+    public void yybegin_LEX_MULTILINE_WAITING(){yybegin(LEX_MULTILINE_WAITING);}
+
+    public boolean yystate_LEX_MULTILINE_WAITING(){return yystate() == LEX_MULTILINE_WAITING;}
 
 	protected int dataBlockStart = 0;
 
@@ -89,10 +92,10 @@ SQ_STRING        = \'[^\'\n\r]*\'
 PERL_OPERATORS = "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined"
 
 MULTILINE_MARKER = [^\"\'\s\n\r ]+
-MULTILINE_MARKER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
-MULTILINE_MARKER_DQ = "<<"{WHITE_SPACE}*\"{MULTILINE_MARKER}\"
-MULTILINE_MARKER_DQ_BARE = "<<"{WHITE_SPACE}*{ALFANUM}+
-MULTILINE_MARKER_DX = "<<"{WHITE_SPACE}*\`{MULTILINE_MARKER}\`
+MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
+MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{MULTILINE_MARKER}\"
+MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{ALFANUM}+
+MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{MULTILINE_MARKER}\`
 
 POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
 POD_CLOSE       = \="cut"{FULL_LINE}
@@ -125,6 +128,8 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 %xstate LEX_PACKAGE_DEFINITION, LEX_PACKAGE_DEFINITION_VERSION, LEX_PACKAGE_DEFINITION_BLOCK
 %xstate LEX_EOF
 %xstate LEX_POD
+
+%state LEX_MULTILINE_WAITING
 %xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
 
 %state LEX_PACKAGE_USE, LEX_PACKAGE_USE_PARAMS, LEX_PACKAGE_USE_VERSION
@@ -135,20 +140,12 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 %%
 
 // inclusive states
-{NEW_LINE}   {
-    if( isWaitingMultiLine() ) // this could be done using lexical state, like prepared or smth
-    {
-        startMultiLine();
-    }
-    return TokenType.NEW_LINE_INDENT;
-}
+{NEW_LINE}   { return processNewLine();}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 ","			    {return PERL_COMMA;}
 "=>"			{return PERL_COMMA;}
-{CHAR_SEMI}     {
-    yybegin(YYINITIAL);
-    return PERL_SEMI;
-}
+{CHAR_SEMI}     {return processSemicolon();}
+
 {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 
 <YYINITIAL>{
@@ -220,7 +217,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 }
 
 <LEX_PACKAGE_DEFINITION_VERSION>{
-    ";"              {yybegin(YYINITIAL);return PERL_SEMI;}
+    ";"              {return processSemicolon();}
     "{"              {yybegin(YYINITIAL); return PERL_LBRACE;}
     {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
     {PERL_VERSION}      {yybegin(LEX_PACKAGE_DEFINITION_BLOCK); return PERL_VERSION;}
@@ -230,7 +227,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 }
 
 <LEX_PACKAGE_DEFINITION_BLOCK>{
-    ";"              {yybegin(YYINITIAL);return PERL_SEMI;}
+    ";"              {return processSemicolon();}
     {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
     "{"      {yybegin(YYINITIAL); return PERL_LBRACE;}
     .   {yybegin(YYINITIAL); return TokenType.BAD_CHARACTER;}
@@ -293,11 +290,10 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     return PERL_PACKAGE;
 }
 
-
-{MULTILINE_MARKER_SQ}   {prepareForMultiline();return PERL_MULTILINE_MARKER;}
-{MULTILINE_MARKER_DQ}   {prepareForMultiline();return PERL_MULTILINE_MARKER;}
-{MULTILINE_MARKER_DQ_BARE}   {prepareForMultiline();return PERL_MULTILINE_MARKER;}
-{MULTILINE_MARKER_DX}   {prepareForMultiline();return PERL_MULTILINE_MARKER;}
+{MULTILINE_OPENER_SQ}   {return processMultilineOpener();}
+{MULTILINE_OPENER_DQ}   {return processMultilineOpener();}
+{MULTILINE_OPENER_DQ_BARE}   {return processMultilineOpener();}
+{MULTILINE_OPENER_DX}   {return processMultilineOpener();}
 
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}

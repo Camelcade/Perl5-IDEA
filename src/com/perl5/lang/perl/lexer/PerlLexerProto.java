@@ -1,6 +1,7 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexLexer;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
 import java.util.regex.Matcher;
@@ -24,13 +25,26 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public abstract void yybegin_LEX_MULTILINE();
 	public abstract void yybegin_YYINITIAL();
 	public abstract void yybegin_LEX_MULTILINE_TOKEN();
+	public abstract void yybegin_LEX_MULTILINE_WAITING();
+	public abstract boolean yystate_LEX_MULTILINE_WAITING();
 
 	/**
 	 *  Multiline part <<'smth'
 	 **/
 
-	/** set if prepared for multiline beginning on newline **/
-	protected boolean waitingMultiLine = false;
+	public IElementType processSemicolon()
+	{
+		if( !yystate_LEX_MULTILINE_WAITING() )
+			yybegin_YYINITIAL();
+		return PERL_SEMI;
+	}
+
+	public IElementType processNewLine()
+	{
+		if( yystate_LEX_MULTILINE_WAITING() )
+			startMultiLine();
+		return TokenType.NEW_LINE_INDENT;
+	}
 
 	/** pre-set multiline type, depends on opener **/
 	protected IElementType declaredMultiLineType;
@@ -46,10 +60,8 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	/**
 	 * Invoken on opening token, waiting for a newline
 	 */
-	protected void prepareForMultiline()
+	protected IElementType processMultilineOpener()
 	{
-		waitingMultiLine = true;
-
 		String openToken = yytext().toString();
 		Matcher m = markerPattern.matcher(openToken);
 		if (m.matches())
@@ -59,9 +71,9 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		{
 			throw new Error("Could not match opening multiline marker: " + openToken);
 		}
+		yybegin_LEX_MULTILINE_WAITING();
+		return PERL_MULTILINE_MARKER;
 	}
-
-	protected boolean isWaitingMultiLine(){return waitingMultiLine;}
 
 	/**
 	 * Starts multiline reading
@@ -70,7 +82,6 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	{
 		multiLineStart = getNextTokenStart();
 		yybegin_LEX_MULTILINE();
-		waitingMultiLine = false;
 	}
 
 	/**
