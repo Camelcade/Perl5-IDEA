@@ -27,10 +27,10 @@ public class PerlCompletionContributor extends CompletionContributor
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
 
+						resultSet = resultSet.withPrefixMatcher("@"+resultSet.getPrefixMatcher().getPrefix());
 						for( String arrayName: PerlArrayUtil.BUILT_IN )
 						{
 							resultSet.addElement(LookupElementBuilder.create(arrayName));
-							System.err.println(arrayName);
 						}
 						resultSet.withPrefixMatcher("@");
 
@@ -104,28 +104,12 @@ public class PerlCompletionContributor extends CompletionContributor
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
 
+						resultSet = resultSet.withPrefixMatcher("%"+resultSet.getPrefixMatcher().getPrefix());
 						for( String hashName: PerlHashUtil.BUILT_IN )
 						{
 							resultSet.addElement(LookupElementBuilder.create(hashName));
 						}
 						resultSet.withPrefixMatcher("%");
-					}
-				}
-		);
-		extend(
-				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.GLOB).withLanguage(PerlLanguage.INSTANCE),
-				new CompletionProvider<CompletionParameters>() {
-					public void addCompletions(@NotNull CompletionParameters parameters,
-											   ProcessingContext context,
-											   @NotNull CompletionResultSet resultSet) {
-
-						for( String globName: PerlGlobUtil.BUILT_IN )
-						{
-							resultSet.addElement(LookupElementBuilder.create(globName));
-						}
-						resultSet.withPrefixMatcher("*");
-
 					}
 				}
 		);
