@@ -81,6 +81,9 @@ public interface PerlElementTypes {
   IElementType PERL_SIGIL_SCALAR = new PerlTokenType("$");
   IElementType PERL_STRING = new PerlTokenType("PERL_STRING");
   IElementType PERL_STRING_MULTILINE = new PerlTokenType("PERL_STRING_MULTILINE");
+  IElementType PERL_STRING_MULTILINE_HTML = new PerlTokenType("PERL_STRING_MULTILINE_HTML");
+  IElementType PERL_STRING_MULTILINE_XHTML = new PerlTokenType("PERL_STRING_MULTILINE_XHTML");
+  IElementType PERL_STRING_MULTILINE_XML = new PerlTokenType("PERL_STRING_MULTILINE_XML");
   IElementType PERL_VERSION = new PerlTokenType("PERL_VERSION");
 
   class Factory {

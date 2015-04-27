@@ -1,6 +1,6 @@
 package com.perl5.lang.perl.idea.highlighter;
 
-import com.intellij.lexer.LayeredLexer;
+import com.intellij.lexer.*;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -37,18 +37,26 @@ public class PerlHighlightningLexer extends LayeredLexer
 				IElementType.EMPTY_ARRAY
 			);
 		}
-/*
+
 		registerSelfStoppingLayer(
-				new FlexAdapter(new _HtmlLexer()),
-				new IElementType[]{PerlTokenTypes.PERL_MULTILINE_HTML},
+				new HtmlHighlightingLexer(),
+				new IElementType[]{PerlElementTypes.PERL_STRING_MULTILINE_HTML},
 				IElementType.EMPTY_ARRAY
 		);
+
+
 		registerSelfStoppingLayer(
 				new XmlHighlightingLexer(),
-				new IElementType[]{PerlTokenTypes.PERL_MULTILINE_XML},
+				new IElementType[]{PerlElementTypes.PERL_STRING_MULTILINE_XML},
 				IElementType.EMPTY_ARRAY
 		);
-*/
+
+		registerSelfStoppingLayer(
+				new XHtmlHighlightingLexer(),
+				new IElementType[]{PerlElementTypes.PERL_STRING_MULTILINE_XHTML},
+				IElementType.EMPTY_ARRAY
+		);
+
 	}
 
 }

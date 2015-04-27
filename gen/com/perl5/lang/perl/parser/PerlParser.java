@@ -884,13 +884,34 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // PERL_STRING_MULTILINE PERL_MULTILINE_MARKER
+  // (
+  //     PERL_STRING_MULTILINE
+  //     | PERL_STRING_MULTILINE_HTML
+  //     | PERL_STRING_MULTILINE_XHTML
+  //     | PERL_STRING_MULTILINE_XML
+  //         ) PERL_MULTILINE_MARKER
   static boolean multiline_string(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "multiline_string")) return false;
-    if (!nextTokenIs(b, PERL_STRING_MULTILINE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, PERL_STRING_MULTILINE, PERL_MULTILINE_MARKER);
+    r = multiline_string_0(b, l + 1);
+    r = r && consumeToken(b, PERL_MULTILINE_MARKER);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // PERL_STRING_MULTILINE
+  //     | PERL_STRING_MULTILINE_HTML
+  //     | PERL_STRING_MULTILINE_XHTML
+  //     | PERL_STRING_MULTILINE_XML
+  private static boolean multiline_string_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "multiline_string_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_STRING_MULTILINE);
+    if (!r) r = consumeToken(b, PERL_STRING_MULTILINE_HTML);
+    if (!r) r = consumeToken(b, PERL_STRING_MULTILINE_XHTML);
+    if (!r) r = consumeToken(b, PERL_STRING_MULTILINE_XML);
     exit_section_(b, m, null, r);
     return r;
   }

@@ -150,6 +150,15 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			yybegin_YYINITIAL();
 		}
 
-		return PERL_STRING_MULTILINE;
+		IElementType stringType = PERL_STRING_MULTILINE;
+
+		if( multilineMarker.equals("HTML"))
+			stringType = PERL_STRING_MULTILINE_HTML;
+		else if( multilineMarker.equals("XML"))
+			stringType = PERL_STRING_MULTILINE_XML;
+		else if( multilineMarker.equals("XHTML"))
+			stringType = PERL_STRING_MULTILINE_XHTML;
+
+		return stringType;
 	}
 }

@@ -22,7 +22,12 @@
     PERL_SIGIL_SCALAR="$"
 
     PERL_MULTILINE_MARKER="PERL_MULTILINE_MARKER"
+
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE"
+    PERL_STRING_MULTILINE_HTML="PERL_STRING_MULTILINE_HTML"
+    PERL_STRING_MULTILINE_XHTML="PERL_STRING_MULTILINE_XHTML"
+    PERL_STRING_MULTILINE_XML="PERL_STRING_MULTILINE_XML"
+
     PERL_STRING="PERL_STRING"
 
     PERL_VERSION="PERL_VERSION"
@@ -148,7 +153,12 @@ string ::= PERL_STRING
 // Generalizations
 private controls ::= ',' | '[' | ']' | '(' | ')'
 
-private multiline_string ::= PERL_STRING_MULTILINE PERL_MULTILINE_MARKER
+private multiline_string ::= (
+    PERL_STRING_MULTILINE
+    | PERL_STRING_MULTILINE_HTML
+    | PERL_STRING_MULTILINE_XHTML
+    | PERL_STRING_MULTILINE_XML
+        ) PERL_MULTILINE_MARKER
 
 package_bare ::= PERL_PACKAGE  {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
         implements="com.perl5.lang.perl.psi.PerlNamedElement"
