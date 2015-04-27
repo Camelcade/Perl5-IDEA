@@ -26,6 +26,9 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public abstract void yybegin_YYINITIAL();
 	public abstract void yybegin_LEX_MULTILINE_TOKEN();
 	public abstract void yybegin_LEX_MULTILINE_WAITING();
+	public abstract void yybegin_LEX_EOF();
+	public abstract void yybegin_LEX_POD();
+
 	public abstract boolean yystate_LEX_MULTILINE_WAITING();
 
 	/**
@@ -44,6 +47,42 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		if( yystate_LEX_MULTILINE_WAITING() )
 			startMultiLine();
 		return TokenType.NEW_LINE_INDENT;
+	}
+
+	/**
+	 *  Data block related code
+	 */
+	protected int dataBlockStart = 0;
+
+	protected void processDataOpener()
+	{
+		dataBlockStart = getTokenStart();
+		yybegin_LEX_EOF();
+	}
+
+	protected IElementType endDataBlock()
+	{
+		setTokenStart(dataBlockStart);
+		return PERL_COMMENT_BLOCK;
+	}
+
+	/**
+	 *  Pod block-related code
+	 */
+	protected int podBlockStart = 0;
+
+	protected void processPodOpener()
+	{
+		podBlockStart = getTokenStart();
+		yybegin_LEX_POD();
+	}
+
+	protected IElementType endPodBlock()
+	{
+		setTokenStart(podBlockStart);
+		if( !isLastToken())
+			yybegin_YYINITIAL();
+		return PERL_POD;
 	}
 
 	/** pre-set multiline type, depends on opener **/

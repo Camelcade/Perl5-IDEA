@@ -48,24 +48,11 @@ s tr y {}{}
     public void yybegin_LEX_MULTILINE(){yybegin(LEX_MULTILINE);}
     public void yybegin_LEX_MULTILINE_TOKEN(){yybegin(LEX_MULTILINE_TOKEN);}
     public void yybegin_LEX_MULTILINE_WAITING(){yybegin(LEX_MULTILINE_WAITING);}
+    public void yybegin_LEX_EOF(){yybegin(LEX_EOF);}
+    public void yybegin_LEX_POD(){yybegin(LEX_POD);}
 
     public boolean yystate_LEX_MULTILINE_WAITING(){return yystate() == LEX_MULTILINE_WAITING;}
 
-	protected int dataBlockStart = 0;
-
-	protected void StartDataBlock()
-	{
-		dataBlockStart = zzStartRead;
-        yybegin(LEX_EOF);
-	}
-
-	protected int podBlockStart = 0;
-
-	protected void StartPodBlock()
-	{
-		podBlockStart = zzStartRead;
-        yybegin(LEX_POD);
-	}
 %}
 
 
@@ -149,9 +136,9 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 
 <YYINITIAL>{
-    {THE_END}               {StartDataBlock(); break;}
-    {THE_DATA}               {StartDataBlock(); break;}
-    {POD_OPEN}               {StartPodBlock();break;}
+    {THE_END}               {processDataOpener(); break;}
+    {THE_DATA}               {processDataOpener(); break;}
+    {POD_OPEN}               {processPodOpener();break;}
 
     "use"			{yybegin(LEX_PACKAGE_USE);return PerlFunctionUtil.getFunctionType(yytext().toString());}
     "no"			{yybegin(LEX_PACKAGE_USE); return PerlFunctionUtil.getFunctionType(yytext().toString());}
@@ -165,26 +152,18 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 <LEX_EOF>
 {
     {FULL_LINE} {
-        if( zzMarkedPos == zzEndRead )
-        {
-            zzCurrentPos = zzStartRead = dataBlockStart;
-            return PERL_COMMENT_BLOCK;
-        }
+        if( isLastToken() )
+            return endDataBlock();
         break;
     }
 }
 <LEX_POD>
 {
-    {POD_CLOSE} {
-        zzCurrentPos = zzStartRead = podBlockStart;
-        yybegin(YYINITIAL);
-        return PERL_POD;
-    }
+    {POD_CLOSE} { return endPodBlock(); }
     {FULL_LINE} {
-        if( zzMarkedPos == zzEndRead )
+        if( isLastToken() )
         {
-            zzCurrentPos = zzStartRead = podBlockStart;
-            return PERL_POD;
+            endPodBlock();
         }
         break;
     }

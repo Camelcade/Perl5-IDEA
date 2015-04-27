@@ -819,72 +819,68 @@ public class PerlLexer extends PerlLexerProto implements FlexLexer, PerlElementT
           { yybegin(YYINITIAL);return PERL_FUNCTION;
           }
         case 60: break;
-        case 7: 
-          { return processMultiline();
-          }
-        case 61: break;
         case 36: 
           { yybegin(YYINITIAL);
         return PERL_VERSION;
           }
-        case 62: break;
+        case 61: break;
         case 52: 
           { zzCurrentPos = zzStartRead = podBlockStart;
         yybegin(YYINITIAL);
         return PERL_POD;
           }
-        case 63: break;
+        case 62: break;
         case 34: 
           { yybegin(LEX_PACKAGE_USE_PARAMS);
         return PERL_STRING;
           }
-        case 64: break;
+        case 63: break;
         case 11: 
           { return PERL_OPERATOR;
           }
-        case 65: break;
+        case 64: break;
         case 1: 
           { return TokenType.WHITE_SPACE;
           }
-        case 66: break;
+        case 65: break;
         case 41: 
           { return PERL_HASH;
           }
-        case 67: break;
+        case 66: break;
         case 16: 
           { return PERL_COMMA;
           }
-        case 68: break;
+        case 67: break;
         case 31: 
           { yybegin(LEX_PACKAGE_USE_PARAMS);
         return PERL_VERSION;
           }
-        case 69: break;
+        case 68: break;
         case 49: 
           { yybegin(LEX_FUNCTION_DEFINITION); return PerlFunctionUtil.getFunctionType(yytext().toString());
           }
-        case 70: break;
+        case 69: break;
         case 26: 
           { yybegin(LEX_PACKAGE_DEFINITION_BLOCK); return PERL_VERSION;
           }
-        case 71: break;
+        case 70: break;
         case 24: 
           { yybegin(LEX_PACKAGE_DEFINITION_VERSION); return PERL_PACKAGE;
           }
-        case 72: break;
+        case 71: break;
         case 54: 
           { yybegin(LEX_PACKAGE_DEFINITION); return PerlFunctionUtil.getFunctionType(yytext().toString());
           }
-        case 73: break;
+        case 72: break;
         case 47: 
           { yypushback(2);
     return PerlPackageUtil.getPackageType(yytext().toString());
           }
-        case 74: break;
+        case 73: break;
         case 8: 
           { return processSemicolon();
           }
-        case 75: break;
+        case 74: break;
         case 29: 
           { if( isLastToken() )
         {
@@ -892,39 +888,43 @@ public class PerlLexer extends PerlLexerProto implements FlexLexer, PerlElementT
         }
         break;
           }
-        case 76: break;
+        case 75: break;
         case 40: 
           { return PERL_GLOB;
           }
-        case 77: break;
+        case 76: break;
         case 43: 
           { return PERL_DEPACKAGE;
           }
-        case 78: break;
+        case 77: break;
         case 35: 
           { yypushback(1);yybegin(YYINITIAL);break;
           }
-        case 79: break;
+        case 78: break;
         case 51: 
           { StartPodBlock();break;
           }
-        case 80: break;
+        case 79: break;
         case 15: 
           { return PERL_COMMENT;
           }
-        case 81: break;
+        case 80: break;
         case 32: 
           { yybegin(LEX_PACKAGE_USE_VERSION);
         return PerlPackageUtil.getPackageType(yytext().toString());
           }
-        case 82: break;
+        case 81: break;
         case 48: 
           { return processMultilineOpener();
           }
-        case 83: break;
+        case 82: break;
         case 37: 
           { yybegin(YYINITIAL);
         return PerlPackageUtil.getPackageType(yytext().toString());
+          }
+        case 83: break;
+        case 7: 
+          { return processNewLine();
           }
         case 84: break;
         case 27: 
