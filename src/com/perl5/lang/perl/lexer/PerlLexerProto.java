@@ -111,7 +111,17 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			throw new Error("Could not match opening multiline marker: " + openToken);
 		}
 		yybegin_LEX_MULTILINE_WAITING();
-		return PERL_MULTILINE_MARKER;
+
+		IElementType markerType = PERL_MULTILINE_MARKER;
+
+		if( multilineMarker.equals("HTML"))
+			markerType = PERL_MULTILINE_MARKER_HTML;
+		else if( multilineMarker.equals("XML"))
+			markerType = PERL_MULTILINE_MARKER_XML;
+		else if( multilineMarker.equals("XHTML"))
+			markerType = PERL_MULTILINE_MARKER_XHTML;
+
+		return markerType;
 	}
 
 	/**
@@ -149,16 +159,6 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			setTokenStart(multiLineStart);
 			yybegin_YYINITIAL();
 		}
-
-		IElementType stringType = PERL_STRING_MULTILINE;
-
-		if( multilineMarker.equals("HTML"))
-			stringType = PERL_STRING_MULTILINE_HTML;
-		else if( multilineMarker.equals("XML"))
-			stringType = PERL_STRING_MULTILINE_XML;
-		else if( multilineMarker.equals("XHTML"))
-			stringType = PERL_STRING_MULTILINE_XHTML;
-
-		return stringType;
+		return PERL_STRING_MULTILINE;
 	}
 }

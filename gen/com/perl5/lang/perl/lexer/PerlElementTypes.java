@@ -67,6 +67,9 @@ public interface PerlElementTypes {
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
   IElementType PERL_MULTILINE_MARKER = new PerlTokenType("PERL_MULTILINE_MARKER");
+  IElementType PERL_MULTILINE_MARKER_HTML = new PerlTokenType("PERL_MULTILINE_MARKER_HTML");
+  IElementType PERL_MULTILINE_MARKER_XHTML = new PerlTokenType("PERL_MULTILINE_MARKER_XHTML");
+  IElementType PERL_MULTILINE_MARKER_XML = new PerlTokenType("PERL_MULTILINE_MARKER_XML");
   IElementType PERL_NUMBER = new PerlTokenType("PERL_NUMBER");
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
   IElementType PERL_PACKAGE = new PerlTokenType("PERL_PACKAGE");
@@ -81,9 +84,6 @@ public interface PerlElementTypes {
   IElementType PERL_SIGIL_SCALAR = new PerlTokenType("$");
   IElementType PERL_STRING = new PerlTokenType("PERL_STRING");
   IElementType PERL_STRING_MULTILINE = new PerlTokenType("PERL_STRING_MULTILINE");
-  IElementType PERL_STRING_MULTILINE_HTML = new PerlTokenType("PERL_STRING_MULTILINE_HTML");
-  IElementType PERL_STRING_MULTILINE_XHTML = new PerlTokenType("PERL_STRING_MULTILINE_XHTML");
-  IElementType PERL_STRING_MULTILINE_XML = new PerlTokenType("PERL_STRING_MULTILINE_XML");
   IElementType PERL_VERSION = new PerlTokenType("PERL_VERSION");
 
   class Factory {

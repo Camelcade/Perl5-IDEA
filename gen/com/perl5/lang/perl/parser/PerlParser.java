@@ -424,7 +424,7 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // method_call | function_call| function | array_value | hash_value | scalar_value | glob |  multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
+  // method_call | function_call| function | array_value | hash_value | scalar_value | glob |  multiline_string | multiline_marker | PERL_OPERATOR
   static boolean code_line_element(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "code_line_element")) return false;
     boolean r;
@@ -437,7 +437,7 @@ public class PerlParser implements PsiParser {
     if (!r) r = scalar_value(b, l + 1);
     if (!r) r = glob(b, l + 1);
     if (!r) r = multiline_string(b, l + 1);
-    if (!r) r = consumeToken(b, PERL_MULTILINE_MARKER);
+    if (!r) r = multiline_marker(b, l + 1);
     if (!r) r = consumeToken(b, PERL_OPERATOR);
     exit_section_(b, m, null, r);
     return r;
@@ -884,34 +884,30 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // (
-  //     PERL_STRING_MULTILINE
-  //     | PERL_STRING_MULTILINE_HTML
-  //     | PERL_STRING_MULTILINE_XHTML
-  //     | PERL_STRING_MULTILINE_XML
-  //         ) PERL_MULTILINE_MARKER
-  static boolean multiline_string(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "multiline_string")) return false;
+  // PERL_MULTILINE_MARKER
+  //     | PERL_MULTILINE_MARKER_HTML
+  //     | PERL_MULTILINE_MARKER_XHTML
+  //     | PERL_MULTILINE_MARKER_XML
+  static boolean multiline_marker(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "multiline_marker")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = multiline_string_0(b, l + 1);
-    r = r && consumeToken(b, PERL_MULTILINE_MARKER);
+    r = consumeToken(b, PERL_MULTILINE_MARKER);
+    if (!r) r = consumeToken(b, PERL_MULTILINE_MARKER_HTML);
+    if (!r) r = consumeToken(b, PERL_MULTILINE_MARKER_XHTML);
+    if (!r) r = consumeToken(b, PERL_MULTILINE_MARKER_XML);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // PERL_STRING_MULTILINE
-  //     | PERL_STRING_MULTILINE_HTML
-  //     | PERL_STRING_MULTILINE_XHTML
-  //     | PERL_STRING_MULTILINE_XML
-  private static boolean multiline_string_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "multiline_string_0")) return false;
+  /* ********************************************************** */
+  // PERL_STRING_MULTILINE PERL_MULTILINE_MARKER
+  static boolean multiline_string(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "multiline_string")) return false;
+    if (!nextTokenIs(b, PERL_STRING_MULTILINE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_STRING_MULTILINE);
-    if (!r) r = consumeToken(b, PERL_STRING_MULTILINE_HTML);
-    if (!r) r = consumeToken(b, PERL_STRING_MULTILINE_XHTML);
-    if (!r) r = consumeToken(b, PERL_STRING_MULTILINE_XML);
+    r = consumeTokens(b, 0, PERL_STRING_MULTILINE, PERL_MULTILINE_MARKER);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1351,7 +1347,7 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // string | PERL_NUMBER | PERL_VERSION | PERL_MULTILINE_MARKER| scalar_anon_array | scalar_anon_hash | scalar_value_var
+  // string | PERL_NUMBER | PERL_VERSION | multiline_marker| scalar_anon_array | scalar_anon_hash | scalar_value_var
   public static boolean scalar_value(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar_value")) return false;
     boolean r;
@@ -1359,7 +1355,7 @@ public class PerlParser implements PsiParser {
     r = string(b, l + 1);
     if (!r) r = consumeToken(b, PERL_NUMBER);
     if (!r) r = consumeToken(b, PERL_VERSION);
-    if (!r) r = consumeToken(b, PERL_MULTILINE_MARKER);
+    if (!r) r = multiline_marker(b, l + 1);
     if (!r) r = scalar_anon_array(b, l + 1);
     if (!r) r = scalar_anon_hash(b, l + 1);
     if (!r) r = scalar_value_var(b, l + 1);

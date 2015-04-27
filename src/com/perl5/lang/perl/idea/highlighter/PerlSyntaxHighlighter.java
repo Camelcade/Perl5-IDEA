@@ -11,18 +11,20 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodTokenType;
 import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
+import com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
-public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
+public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
@@ -84,6 +86,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		attributesMap.put(PerlElementTypes.PERL_VERSION, new TextAttributesKey[]{PERL_VERSION});
 
 		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
+		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_HTML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
+		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_XML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
+		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_XHTML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
 
 		attributesMap.put(PerlElementTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
 		attributesMap.put(PerlElementTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
@@ -122,7 +127,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		highlightersMap.put(PodLanguage.INSTANCE, new PodSyntaxHighlighter());
 		highlightersMap.put(HTMLLanguage.INSTANCE, new HtmlFileHighlighter());
 		highlightersMap.put(XHTMLLanguage.INSTANCE, new HtmlFileHighlighter());
-		highlightersMap.put(XMLLanguage.INSTANCE, new HtmlFileHighlighter());
+		highlightersMap.put(XMLLanguage.INSTANCE, new XmlFileHighlighter());
 	}
 
 	@NotNull
@@ -140,6 +145,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 		if( !( tokenType instanceof PerlTokenType))
 		{
 			SyntaxHighlighterBase subHighlighter = highlightersMap.get(tokenType.getLanguage());
+
 			if( subHighlighter!= null )
 				tokenAttributes = subHighlighter.getTokenHighlights(tokenType);
 		}

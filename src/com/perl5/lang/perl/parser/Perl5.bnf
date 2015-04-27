@@ -22,11 +22,11 @@
     PERL_SIGIL_SCALAR="$"
 
     PERL_MULTILINE_MARKER="PERL_MULTILINE_MARKER"
+    PERL_MULTILINE_MARKER_HTML="PERL_MULTILINE_MARKER_HTML"
+    PERL_MULTILINE_MARKER_XHTML="PERL_MULTILINE_MARKER_XHTML"
+    PERL_MULTILINE_MARKER_XML="PERL_MULTILINE_MARKER_XML"
 
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE"
-    PERL_STRING_MULTILINE_HTML="PERL_STRING_MULTILINE_HTML"
-    PERL_STRING_MULTILINE_XHTML="PERL_STRING_MULTILINE_XHTML"
-    PERL_STRING_MULTILINE_XML="PERL_STRING_MULTILINE_XML"
 
     PERL_STRING="PERL_STRING"
 
@@ -71,7 +71,7 @@ block ::= '{' block_item* '}'
 private block_item ::= package_namespace | package_item | package_definition_invalid
 private package_item ::= function_definition | if_block | code_line_valid | PERL_POD | PERL_COMMENT | PERL_COMMENT_BLOCK | block | code_line_invalid
 
-private code_line_element ::= method_call | function_call| function | array_value | hash_value | scalar_value | glob |  multiline_string | PERL_MULTILINE_MARKER | PERL_OPERATOR
+private code_line_element ::= method_call | function_call| function | array_value | hash_value | scalar_value | glob |  multiline_string | multiline_marker | PERL_OPERATOR
 private code_line_elements ::= code_line_element +
 
 private code_line_valid ::= eval | package_use | package_no | package_require | code_line
@@ -133,7 +133,7 @@ private array_dereference ::= PERL_SIGIL_ARRAY '{' scalar_value '}'
 hash_value ::= hash_dereference | hash
 private hash_dereference ::= PERL_SIGIL_HASH '{' scalar_value '}'
 
-scalar_value ::= string | PERL_NUMBER | PERL_VERSION | PERL_MULTILINE_MARKER| scalar_anon_array | scalar_anon_hash | scalar_value_var
+scalar_value ::= string | PERL_NUMBER | PERL_VERSION | multiline_marker| scalar_anon_array | scalar_anon_hash | scalar_value_var
 private scalar_value_var ::= scalar_dereference | scalar_hash_element | scalar_array_element | scalar | scalar_function_result // dynamic scalar, may be a reference
 private scalar_hash_element ::= scalar '{' scalar_value '}'
 private scalar_array_element ::= scalar '[' scalar_value ']'
@@ -153,12 +153,13 @@ string ::= PERL_STRING
 // Generalizations
 private controls ::= ',' | '[' | ']' | '(' | ')'
 
-private multiline_string ::= (
-    PERL_STRING_MULTILINE
-    | PERL_STRING_MULTILINE_HTML
-    | PERL_STRING_MULTILINE_XHTML
-    | PERL_STRING_MULTILINE_XML
-        ) PERL_MULTILINE_MARKER
+private multiline_string ::= PERL_STRING_MULTILINE PERL_MULTILINE_MARKER
+
+// opening marker
+private multiline_marker ::= PERL_MULTILINE_MARKER
+    | PERL_MULTILINE_MARKER_HTML
+    | PERL_MULTILINE_MARKER_XHTML
+    | PERL_MULTILINE_MARKER_XML
 
 package_bare ::= PERL_PACKAGE  {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
         implements="com.perl5.lang.perl.psi.PerlNamedElement"
