@@ -11,11 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlTokenType extends IElementType
 {
-	protected String debugName = null;
-
 	public PerlTokenType(@NotNull @NonNls String debugName) {
-		super(debugName, PerlFileTypeScript.LANGUAGE);
-		this.debugName = debugName;
+		super(debugName, PerlLanguage.INSTANCE);
 	}
 
 	public String toString() {

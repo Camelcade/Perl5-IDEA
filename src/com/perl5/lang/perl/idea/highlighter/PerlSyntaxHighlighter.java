@@ -7,6 +7,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodElementType;
+import com.perl5.lang.pod.PodTokenType;
 import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 
@@ -122,7 +123,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
 
 		TextAttributesKey[] tokenAttributes;
 
-		if (tokenType instanceof PodElementType)
+		if (tokenType instanceof PodTokenType)
 		{
 			tokenAttributes = podSyntaxHighlighter.getTokenHighlights(tokenType);
 		}

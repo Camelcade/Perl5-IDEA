@@ -8,13 +8,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.04.2015.
  */
-public class PerlElementType extends IElementType
+public class PerlElementType extends PerlTokenType
 {
-	protected String debugName = null;
-
 	public PerlElementType(@NotNull @NonNls String debugName) {
-		super(debugName, PerlFileTypeScript.LANGUAGE);
-		this.debugName = debugName;
+		super(debugName);
 	}
 
 	public String toString() {

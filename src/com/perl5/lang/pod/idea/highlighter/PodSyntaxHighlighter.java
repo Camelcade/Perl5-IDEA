@@ -5,6 +5,7 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
@@ -46,7 +47,7 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
 
-		TextAttributesKey[] tokenAttributes;
+		TextAttributesKey[] tokenAttributes = null;
 
 		if( tokenType instanceof PerlTokenType)
 		{

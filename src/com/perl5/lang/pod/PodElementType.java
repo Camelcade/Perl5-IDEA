@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.04.2015.
  */
-public class PodElementType extends IElementType
+public class PodElementType extends PodTokenType
 {
 	public PodElementType(@NotNull @NonNls String debugName) {
-		super(debugName, PodLanguage.INSTANCE);
+		super(debugName);
 	}
 
 	@Override
