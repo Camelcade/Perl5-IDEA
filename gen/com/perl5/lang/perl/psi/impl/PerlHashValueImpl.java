@@ -30,8 +30,8 @@ public class PerlHashValueImpl extends ASTWrapperPsiElement implements PerlHashV
 
   @Override
   @Nullable
-  public PerlScalarValue getScalarValue() {
-    return findChildByClass(PerlScalarValue.class);
+  public PerlHashDereference getHashDereference() {
+    return findChildByClass(PerlHashDereference.class);
   }
 
 }

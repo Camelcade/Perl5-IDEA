@@ -13,7 +13,7 @@ import com.perl5.lang.perl.files.PerlFileTypePackage;
 import com.perl5.lang.perl.files.PerlFileTypeScript;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlPackageNamespace;
+import com.perl5.lang.perl.psi.PerlPackageDefinition;
 
 import java.util.*;
 
@@ -73,9 +73,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		for (VirtualFile virtualFile : virtualFiles) {
 			PerlFile perlFile = (PerlFile) PsiManager.getInstance(project).findFile(virtualFile);
 			if (perlFile != null) {
-				PerlPackageNamespace[] definitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageNamespace.class);
+				PerlPackageDefinition[] definitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageDefinition.class);
 				if (definitions != null) {
-					for (PerlPackageNamespace definition: definitions) {
+					for (PerlPackageDefinition definition: definitions) {
 						if (packageName.equals(definition.getPackageBare().getText())) {
 							if (result == null) {
 								result = new ArrayList<PsiElement>();
@@ -106,9 +106,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		for (VirtualFile virtualFile : virtualFiles) {
 			PerlFile perlFile = (PerlFile) PsiManager.getInstance(project).findFile(virtualFile);
 			if (perlFile != null) {
-				PerlPackageNamespace[] definitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageNamespace.class);
+				PerlPackageDefinition[] definitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageDefinition.class);
 				if (definitions != null) {
-					for (PerlPackageNamespace definition: definitions) {
+					for (PerlPackageDefinition definition: definitions) {
 						if (result == null) {
 							result = new ArrayList<PsiElement>();
 						}

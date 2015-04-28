@@ -8,24 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlCodeLine extends PsiElement {
 
   @NotNull
-  List<PerlArrayValue> getArrayValueList();
+  List<PerlCodeLineElement> getCodeLineElementList();
 
-  @NotNull
-  List<PerlFunction> getFunctionList();
-
-  @NotNull
-  List<PerlFunctionCall> getFunctionCallList();
-
-  @NotNull
-  List<PerlGlob> getGlobList();
-
-  @NotNull
-  List<PerlHashValue> getHashValueList();
-
-  @NotNull
-  List<PerlMethodCall> getMethodCallList();
-
-  @NotNull
-  List<PerlScalarValue> getScalarValueList();
+  @Nullable
+  PerlMultilineString getMultilineString();
 
 }

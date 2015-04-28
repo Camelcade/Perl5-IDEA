@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlFunctionCall extends PsiElement {
 
   @Nullable
-  PerlCallParamsAny getCallParamsAny();
-
-  @NotNull
-  PerlFunction getFunction();
+  PerlArrayValue getArrayValue();
 
 }

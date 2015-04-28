@@ -8,25 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface PerlExpression extends PsiElement {
 
   @NotNull
-  List<PerlArrayValue> getArrayValueList();
-
-  @NotNull
-  List<PerlFunction> getFunctionList();
-
-  @NotNull
-  List<PerlFunctionCall> getFunctionCallList();
-
-  @NotNull
-  List<PerlGlob> getGlobList();
-
-  @NotNull
-  List<PerlHashValue> getHashValueList();
-
-  @NotNull
-  List<PerlMethodCall> getMethodCallList();
-
-  @NotNull
-  List<PerlScalarValue> getScalarValueList();
+  List<PerlCodeLineElements> getCodeLineElementsList();
 
   @NotNull
   List<PerlSubexpression> getSubexpressionList();

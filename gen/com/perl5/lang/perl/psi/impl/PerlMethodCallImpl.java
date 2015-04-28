@@ -24,20 +24,20 @@ public class PerlMethodCallImpl extends ASTWrapperPsiElement implements PerlMeth
 
   @Override
   @Nullable
-  public PerlObjectCall getObjectCall() {
-    return findChildByClass(PerlObjectCall.class);
+  public PerlObjectMethodCall getObjectMethodCall() {
+    return findChildByClass(PerlObjectMethodCall.class);
   }
 
   @Override
   @Nullable
-  public PerlPackageObjectCall getPackageObjectCall() {
-    return findChildByClass(PerlPackageObjectCall.class);
+  public PerlPackageFunctionCall getPackageFunctionCall() {
+    return findChildByClass(PerlPackageFunctionCall.class);
   }
 
   @Override
   @Nullable
-  public PerlPackageStaticCall getPackageStaticCall() {
-    return findChildByClass(PerlPackageStaticCall.class);
+  public PerlPackageMethodCall getPackageMethodCall() {
+    return findChildByClass(PerlPackageMethodCall.class);
   }
 
 }

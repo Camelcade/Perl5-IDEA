@@ -11,6 +11,22 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitArrayDereference(@NotNull PerlArrayDereference o) {
+    visitPsiElement(o);
+  }
+
+  public void visitArrayElement(@NotNull PerlArrayElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitArrayElements(@NotNull PerlArrayElements o) {
+    visitPsiElement(o);
+  }
+
+  public void visitArraySlice(@NotNull PerlArraySlice o) {
+    visitPsiElement(o);
+  }
+
   public void visitArrayValue(@NotNull PerlArrayValue o) {
     visitPsiElement(o);
   }
@@ -19,19 +35,15 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitCallParam(@NotNull PerlCallParam o) {
+  public void visitBlockItem(@NotNull PerlBlockItem o) {
     visitPsiElement(o);
   }
 
-  public void visitCallParams(@NotNull PerlCallParams o) {
+  public void visitCodeChunkInvalid(@NotNull PerlCodeChunkInvalid o) {
     visitPsiElement(o);
   }
 
-  public void visitCallParamsAny(@NotNull PerlCallParamsAny o) {
-    visitPsiElement(o);
-  }
-
-  public void visitCallParamsStrict(@NotNull PerlCallParamsStrict o) {
+  public void visitCodeChunkValid(@NotNull PerlCodeChunkValid o) {
     visitPsiElement(o);
   }
 
@@ -39,7 +51,19 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCodeLineElement(@NotNull PerlCodeLineElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCodeLineElements(@NotNull PerlCodeLineElements o) {
+    visitPsiElement(o);
+  }
+
   public void visitCodeLineInvalidElement(@NotNull PerlCodeLineInvalidElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitControls(@NotNull PerlControls o) {
     visitPsiElement(o);
   }
 
@@ -48,6 +72,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitEvalInvalid(@NotNull PerlEvalInvalid o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExpr(@NotNull PerlExpr o) {
     visitPsiElement(o);
   }
 
@@ -63,7 +91,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitFunctionCallAny(@NotNull PerlFunctionCallAny o) {
+  public void visitFunctionDefinition(@NotNull PerlFunctionDefinition o) {
     visitPsiElement(o);
   }
 
@@ -80,6 +108,14 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitHash(@NotNull PerlHash o) {
+    visitPsiElement(o);
+  }
+
+  public void visitHashDereference(@NotNull PerlHashDereference o) {
+    visitPsiElement(o);
+  }
+
+  public void visitHashSlice(@NotNull PerlHashSlice o) {
     visitPsiElement(o);
   }
 
@@ -107,11 +143,127 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLocalDefinition(@NotNull PerlLocalDefinition o) {
+    visitPsiElement(o);
+  }
+
   public void visitMethodCall(@NotNull PerlMethodCall o) {
     visitPsiElement(o);
   }
 
-  public void visitObjectCall(@NotNull PerlObjectCall o) {
+  public void visitMultilineMarker(@NotNull PerlMultilineMarker o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMultilineString(@NotNull PerlMultilineString o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMyDefinition(@NotNull PerlMyDefinition o) {
+    visitPsiElement(o);
+  }
+
+  public void visitObjectMethodCall(@NotNull PerlObjectMethodCall o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp10(@NotNull PerlOp10 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp11(@NotNull PerlOp11 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp12(@NotNull PerlOp12 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp13(@NotNull PerlOp13 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp14(@NotNull PerlOp14 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp15(@NotNull PerlOp15 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp16(@NotNull PerlOp16 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp17(@NotNull PerlOp17 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp18(@NotNull PerlOp18 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp19(@NotNull PerlOp19 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp20(@NotNull PerlOp20 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp21(@NotNull PerlOp21 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp22(@NotNull PerlOp22 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp23(@NotNull PerlOp23 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp24(@NotNull PerlOp24 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp3(@NotNull PerlOp3 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp4(@NotNull PerlOp4 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp5(@NotNull PerlOp5 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp6(@NotNull PerlOp6 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp7(@NotNull PerlOp7 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp8(@NotNull PerlOp8 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOp9(@NotNull PerlOp9 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOpRightArrayOperand(@NotNull PerlOpRightArrayOperand o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOpRightScalarOperand(@NotNull PerlOpRightScalarOperand o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOurDefinition(@NotNull PerlOurDefinition o) {
     visitPsiElement(o);
   }
 
@@ -119,11 +271,23 @@ public class PerlVisitor extends PsiElementVisitor {
     visitNamedElement(o);
   }
 
+  public void visitPackageDefinition(@NotNull PerlPackageDefinition o) {
+    visitPsiElement(o);
+  }
+
   public void visitPackageDefinitionInvalid(@NotNull PerlPackageDefinitionInvalid o) {
     visitPsiElement(o);
   }
 
-  public void visitPackageNamespace(@NotNull PerlPackageNamespace o) {
+  public void visitPackageFunctionCall(@NotNull PerlPackageFunctionCall o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPackageItem(@NotNull PerlPackageItem o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPackageMethodCall(@NotNull PerlPackageMethodCall o) {
     visitPsiElement(o);
   }
 
@@ -135,10 +299,6 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPackageObjectCall(@NotNull PerlPackageObjectCall o) {
-    visitPsiElement(o);
-  }
-
   public void visitPackageRequire(@NotNull PerlPackageRequire o) {
     visitPsiElement(o);
   }
@@ -147,11 +307,11 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPackageStaticCall(@NotNull PerlPackageStaticCall o) {
+  public void visitPackageUse(@NotNull PerlPackageUse o) {
     visitPsiElement(o);
   }
 
-  public void visitPackageUse(@NotNull PerlPackageUse o) {
+  public void visitPackageUseArguments(@NotNull PerlPackageUseArguments o) {
     visitPsiElement(o);
   }
 
@@ -163,7 +323,39 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitScalarAnonArray(@NotNull PerlScalarAnonArray o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarAnonHash(@NotNull PerlScalarAnonHash o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarArrayElement(@NotNull PerlScalarArrayElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarDereference(@NotNull PerlScalarDereference o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarFunctionResult(@NotNull PerlScalarFunctionResult o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarHashElement(@NotNull PerlScalarHashElement o) {
+    visitPsiElement(o);
+  }
+
   public void visitScalarValue(@NotNull PerlScalarValue o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarValueDetermined(@NotNull PerlScalarValueDetermined o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarValueMutable(@NotNull PerlScalarValueMutable o) {
     visitPsiElement(o);
   }
 
@@ -172,6 +364,22 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitSubexpression(@NotNull PerlSubexpression o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVariable(@NotNull PerlVariable o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVariableDefinition(@NotNull PerlVariableDefinition o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVariableDefinitionArguments(@NotNull PerlVariableDefinitionArguments o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVariables(@NotNull PerlVariables o) {
     visitPsiElement(o);
   }
 

@@ -24,26 +24,8 @@ public class PerlArrayValueImpl extends ASTWrapperPsiElement implements PerlArra
 
   @Override
   @NotNull
-  public List<PerlArray> getArrayList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlArray.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlArrayValue> getArrayValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlArrayValue.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlHashValue> getHashValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlHashValue.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlScalarValue> getScalarValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlScalarValue.class);
+  public List<PerlArrayElements> getArrayElementsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlArrayElements.class);
   }
 
 }

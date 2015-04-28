@@ -24,44 +24,8 @@ public class PerlExpressionImpl extends ASTWrapperPsiElement implements PerlExpr
 
   @Override
   @NotNull
-  public List<PerlArrayValue> getArrayValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlArrayValue.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlFunction> getFunctionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFunction.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlFunctionCall> getFunctionCallList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFunctionCall.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlGlob> getGlobList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlGlob.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlHashValue> getHashValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlHashValue.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlMethodCall> getMethodCallList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlMethodCall.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlScalarValue> getScalarValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlScalarValue.class);
+  public List<PerlCodeLineElements> getCodeLineElementsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCodeLineElements.class);
   }
 
   @Override

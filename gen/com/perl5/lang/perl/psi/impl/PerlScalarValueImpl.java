@@ -23,33 +23,9 @@ public class PerlScalarValueImpl extends ASTWrapperPsiElement implements PerlSca
   }
 
   @Override
-  @Nullable
-  public PerlArrayValue getArrayValue() {
-    return findChildByClass(PerlArrayValue.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlFunctionCall getFunctionCall() {
-    return findChildByClass(PerlFunctionCall.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlScalar getScalar() {
-    return findChildByClass(PerlScalar.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlScalarValue getScalarValue() {
-    return findChildByClass(PerlScalarValue.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlString getString() {
-    return findChildByClass(PerlString.class);
+  @NotNull
+  public PerlScalarValueDetermined getScalarValueDetermined() {
+    return findNotNullChildByClass(PerlScalarValueDetermined.class);
   }
 
 }

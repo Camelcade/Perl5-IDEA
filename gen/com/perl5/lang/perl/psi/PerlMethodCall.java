@@ -8,12 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface PerlMethodCall extends PsiElement {
 
   @Nullable
-  PerlObjectCall getObjectCall();
+  PerlObjectMethodCall getObjectMethodCall();
 
   @Nullable
-  PerlPackageObjectCall getPackageObjectCall();
+  PerlPackageFunctionCall getPackageFunctionCall();
 
   @Nullable
-  PerlPackageStaticCall getPackageStaticCall();
+  PerlPackageMethodCall getPackageMethodCall();
 
 }

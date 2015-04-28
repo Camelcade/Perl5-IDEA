@@ -24,50 +24,20 @@ public class PerlCodeLineInvalidElementImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @Nullable
-  public PerlArrayValue getArrayValue() {
-    return findChildByClass(PerlArrayValue.class);
+  public PerlCodeLineElement getCodeLineElement() {
+    return findChildByClass(PerlCodeLineElement.class);
   }
 
   @Override
   @Nullable
-  public PerlFunction getFunction() {
-    return findChildByClass(PerlFunction.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlFunctionCall getFunctionCall() {
-    return findChildByClass(PerlFunctionCall.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlGlob getGlob() {
-    return findChildByClass(PerlGlob.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlHashValue getHashValue() {
-    return findChildByClass(PerlHashValue.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlMethodCall getMethodCall() {
-    return findChildByClass(PerlMethodCall.class);
+  public PerlControls getControls() {
+    return findChildByClass(PerlControls.class);
   }
 
   @Override
   @Nullable
   public PerlPackageBare getPackageBare() {
     return findChildByClass(PerlPackageBare.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlScalarValue getScalarValue() {
-    return findChildByClass(PerlScalarValue.class);
   }
 
 }

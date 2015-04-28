@@ -8,27 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface PerlCodeLineInvalidElement extends PsiElement {
 
   @Nullable
-  PerlArrayValue getArrayValue();
+  PerlCodeLineElement getCodeLineElement();
 
   @Nullable
-  PerlFunction getFunction();
-
-  @Nullable
-  PerlFunctionCall getFunctionCall();
-
-  @Nullable
-  PerlGlob getGlob();
-
-  @Nullable
-  PerlHashValue getHashValue();
-
-  @Nullable
-  PerlMethodCall getMethodCall();
+  PerlControls getControls();
 
   @Nullable
   PerlPackageBare getPackageBare();
-
-  @Nullable
-  PerlScalarValue getScalarValue();
 
 }

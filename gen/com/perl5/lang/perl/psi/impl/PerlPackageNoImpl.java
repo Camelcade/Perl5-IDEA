@@ -23,15 +23,9 @@ public class PerlPackageNoImpl extends ASTWrapperPsiElement implements PerlPacka
   }
 
   @Override
-  @Nullable
-  public PerlCallParams getCallParams() {
-    return findChildByClass(PerlCallParams.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPackageBare getPackageBare() {
-    return findChildByClass(PerlPackageBare.class);
+  @NotNull
+  public PerlPackageUseArguments getPackageUseArguments() {
+    return findNotNullChildByClass(PerlPackageUseArguments.class);
   }
 
 }
