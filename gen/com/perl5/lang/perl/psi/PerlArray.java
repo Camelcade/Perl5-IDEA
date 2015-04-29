@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlArray extends PsiElement {
 
+  @NotNull
+  List<PerlExpr> getExprList();
+
 }

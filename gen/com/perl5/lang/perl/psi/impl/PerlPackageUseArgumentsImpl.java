@@ -24,8 +24,8 @@ public class PerlPackageUseArgumentsImpl extends ASTWrapperPsiElement implements
 
   @Override
   @Nullable
-  public PerlArrayValue getArrayValue() {
-    return findChildByClass(PerlArrayValue.class);
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
   @Override

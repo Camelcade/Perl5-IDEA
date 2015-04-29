@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface PerlPackageUseArguments extends PsiElement {
 
   @Nullable
-  PerlArrayValue getArrayValue();
+  PerlExpr getExpr();
 
   @Nullable
   PerlPackageBare getPackageBare();

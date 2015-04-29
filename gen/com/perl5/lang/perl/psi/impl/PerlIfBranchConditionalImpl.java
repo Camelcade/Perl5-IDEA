@@ -24,14 +24,14 @@ public class PerlIfBranchConditionalImpl extends ASTWrapperPsiElement implements
 
   @Override
   @NotNull
-  public PerlExpression getExpression() {
-    return findNotNullChildByClass(PerlExpression.class);
+  public PerlBlock getBlock() {
+    return findNotNullChildByClass(PerlBlock.class);
   }
 
   @Override
   @NotNull
-  public PerlIfBranch getIfBranch() {
-    return findNotNullChildByClass(PerlIfBranch.class);
+  public PerlExpr getExpr() {
+    return findNotNullChildByClass(PerlExpr.class);
   }
 
 }

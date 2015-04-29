@@ -22,4 +22,10 @@ public class PerlHashImpl extends ASTWrapperPsiElement implements PerlHash {
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
+  }
+
 }

@@ -30,12 +30,6 @@ public class PerlBlockItemImpl extends ASTWrapperPsiElement implements PerlBlock
 
   @Override
   @Nullable
-  public PerlPackageDefinitionInvalid getPackageDefinitionInvalid() {
-    return findChildByClass(PerlPackageDefinitionInvalid.class);
-  }
-
-  @Override
-  @Nullable
   public PerlPackageItem getPackageItem() {
     return findChildByClass(PerlPackageItem.class);
   }

@@ -27,10 +27,4 @@ public class PerlFunctionDefinitionNamedImpl extends PerlFunctionDefinitionNamed
     return findNotNullChildByClass(PerlBlock.class);
   }
 
-  @Override
-  @NotNull
-  public PerlFunction getFunction() {
-    return findNotNullChildByClass(PerlFunction.class);
-  }
-
 }

@@ -10,10 +10,4 @@ public interface PerlVariableDefinitionArguments extends PsiElement {
   @Nullable
   PerlPackageBare getPackageBare();
 
-  @Nullable
-  PerlVariable getVariable();
-
-  @Nullable
-  PerlVariables getVariables();
-
 }

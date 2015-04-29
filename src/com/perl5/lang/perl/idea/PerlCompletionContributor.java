@@ -73,6 +73,7 @@ public class PerlCompletionContributor extends CompletionContributor
 
 						// append prevoiusly defined functions;
 						// @todo we should check all included files for the current package and check functions in there
+/*
 						PsiElement currentPosition = parameters.getPosition();
 
 						while( currentPosition != null )
@@ -92,6 +93,7 @@ public class PerlCompletionContributor extends CompletionContributor
 							}
 							currentPosition = prevPosition;
 						}
+*/
 
 					}
 				}

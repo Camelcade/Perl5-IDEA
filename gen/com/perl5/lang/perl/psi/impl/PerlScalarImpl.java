@@ -22,4 +22,10 @@ public class PerlScalarImpl extends ASTWrapperPsiElement implements PerlScalar {
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  }
+
 }

@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlHash extends PsiElement {
 
+  @Nullable
+  PerlExpr getExpr();
+
 }

@@ -28,10 +28,4 @@ public class PerlPackageRequireImpl extends ASTWrapperPsiElement implements Perl
     return findChildByClass(PerlPackageBare.class);
   }
 
-  @Override
-  @Nullable
-  public PerlString getString() {
-    return findChildByClass(PerlString.class);
-  }
-
 }

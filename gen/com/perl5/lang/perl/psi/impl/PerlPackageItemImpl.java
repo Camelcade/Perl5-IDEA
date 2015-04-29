@@ -24,8 +24,50 @@ public class PerlPackageItemImpl extends ASTWrapperPsiElement implements PerlPac
 
   @Override
   @Nullable
-  public PerlCodeChunkValid getCodeChunkValid() {
-    return findChildByClass(PerlCodeChunkValid.class);
+  public PerlBlock getBlock() {
+    return findChildByClass(PerlBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlEval getEval() {
+    return findChildByClass(PerlEval.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlFunctionDefinition getFunctionDefinition() {
+    return findChildByClass(PerlFunctionDefinition.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlIfBlock getIfBlock() {
+    return findChildByClass(PerlIfBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPackageNo getPackageNo() {
+    return findChildByClass(PerlPackageNo.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPackageRequire getPackageRequire() {
+    return findChildByClass(PerlPackageRequire.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPackageUse getPackageUse() {
+    return findChildByClass(PerlPackageUse.class);
   }
 
 }

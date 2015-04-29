@@ -30,8 +30,8 @@ public class PerlEvalImpl extends ASTWrapperPsiElement implements PerlEval {
 
   @Override
   @Nullable
-  public PerlScalarValue getScalarValue() {
-    return findChildByClass(PerlScalarValue.class);
+  public PerlScalar getScalar() {
+    return findChildByClass(PerlScalar.class);
   }
 
 }

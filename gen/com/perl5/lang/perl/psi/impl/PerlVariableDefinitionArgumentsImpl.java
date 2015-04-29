@@ -28,16 +28,4 @@ public class PerlVariableDefinitionArgumentsImpl extends ASTWrapperPsiElement im
     return findChildByClass(PerlPackageBare.class);
   }
 
-  @Override
-  @Nullable
-  public PerlVariable getVariable() {
-    return findChildByClass(PerlVariable.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlVariables getVariables() {
-    return findChildByClass(PerlVariables.class);
-  }
-
 }

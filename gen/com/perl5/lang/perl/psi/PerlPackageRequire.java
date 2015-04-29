@@ -10,7 +10,4 @@ public interface PerlPackageRequire extends PsiElement {
   @Nullable
   PerlPackageBare getPackageBare();
 
-  @Nullable
-  PerlString getString();
-
 }

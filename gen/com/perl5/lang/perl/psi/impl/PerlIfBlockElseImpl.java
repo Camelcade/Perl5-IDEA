@@ -24,8 +24,8 @@ public class PerlIfBlockElseImpl extends ASTWrapperPsiElement implements PerlIfB
 
   @Override
   @NotNull
-  public PerlIfBranch getIfBranch() {
-    return findNotNullChildByClass(PerlIfBranch.class);
+  public PerlBlock getBlock() {
+    return findNotNullChildByClass(PerlBlock.class);
   }
 
 }

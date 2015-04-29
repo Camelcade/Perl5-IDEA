@@ -8,6 +8,27 @@ import com.intellij.psi.PsiElement;
 public interface PerlPackageItem extends PsiElement {
 
   @Nullable
-  PerlCodeChunkValid getCodeChunkValid();
+  PerlBlock getBlock();
+
+  @Nullable
+  PerlEval getEval();
+
+  @Nullable
+  PerlExpr getExpr();
+
+  @Nullable
+  PerlFunctionDefinition getFunctionDefinition();
+
+  @Nullable
+  PerlIfBlock getIfBlock();
+
+  @Nullable
+  PerlPackageNo getPackageNo();
+
+  @Nullable
+  PerlPackageRequire getPackageRequire();
+
+  @Nullable
+  PerlPackageUse getPackageUse();
 
 }

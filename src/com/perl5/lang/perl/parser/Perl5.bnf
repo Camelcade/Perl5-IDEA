@@ -59,15 +59,10 @@
 }
 
 perlFile ::= block_item*
-block_item ::= package_definition | package_item | package_definition_invalid
+
+block_item ::= package_definition | package_item
 
 package_item ::=
-     code_chunk_valid
-     | PERL_POD
-     | PERL_COMMENT
-     | PERL_COMMENT_BLOCK
-
-code_chunk_valid ::=
     eval
     | function_definition
     | package_use
@@ -75,33 +70,18 @@ code_chunk_valid ::=
     | package_require
     | if_block
     | block
-    | code_line
-
-
-code_line_elements ::= code_line_element +
-code_line_element ::=
-    variable_definition
-    | method_call
-    | function_call
-    | function
-    | array_value
-    | hash_value
-    | scalar_value
-    | glob
-    | multiline_string
-    | multiline_marker
-    | PERL_OPERATOR
-
-
-
-block ::= '{' block_item* '}'
+    | expr ';'
+    | PERL_POD
+    | PERL_COMMENT
+    | PERL_COMMENT_BLOCK
 
 // package
 package_definition ::= 'package' package_bare PERL_VERSION ? (block | ';' package_item * )
 
 // sub
 function_definition ::= function_definition_named | function_definition_anon
-function_definition_named ::= 'sub' function block ';' ? {
+
+function_definition_named ::= 'sub' PERL_FUNCTION block ';' ? {
     mixin="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
 }
 function_definition_anon ::= 'sub' block ';'
@@ -118,177 +98,149 @@ package_use ::= 'use' package_use_arguments ';'
 package_no ::= 'no' package_use_arguments ';'
 
 package_use_arguments ::=
-    package_bare PERL_VERSION array_value ?
-    | package_bare array_value ?
+    package_bare PERL_VERSION expr ?
+    | package_bare expr ?
     | PERL_VERSION;
 
 // require
-package_require ::= 'require' (package_bare | PERL_VERSION | string) ';'
+package_require ::= 'require' (package_bare | PERL_VERSION | string) ';' // multiline string is possible too
 
 // eval
-eval ::= 'eval' (block | scalar_value) ';'
+eval ::= 'eval' (block | scalar) ';'
 
 // if
 if_block ::= ('if' | 'unless') if_branch_conditional if_block_elsif * if_block_else ?
 if_block_elsif ::= 'elsif' if_branch_conditional
-if_block_else  ::= 'else' if_branch
-if_branch_conditional ::= '(' expression ')' if_branch
-if_branch ::= (code_line | block )
-expression ::= (code_line_elements | subexpression) +
-subexpression ::= '(' code_line_elements ')'
+if_block_else  ::= 'else' block
+if_branch_conditional ::= '(' expr ')' block
 
-// invalid constructions
-code_chunk_invalid ::=
-    package_use_invalid
-    | package_no_invalid
-    | package_require_invalid
-    | eval_invalid
+block ::= '{' code_lines ? '}';
+code_lines ::= expr (';' expr )*
 
-package_definition_invalid ::= 'package' code_line_invalid_element*';'
-package_use_invalid ::= 'use' code_line_invalid_element*';'
-package_no_invalid ::= 'no' code_line_invalid_element*';'
-package_require_invalid ::= 'require' code_line_invalid_element*';';
-eval_invalid ::= 'eval' code_line_invalid_element * ';'
-
-code_line_invalid_element ::= code_line_element | package_bare | PERL_VERSION | controls;
-
-// operators
-expr ::=
-    op_24
-    | op_23
-    | op_22
-    | op_21
-//    | op_20
-    | op_19
-    | op_18
-    | op_17
-    | op_16
-    | op_15
-    | op_14
-    | op_13
-    | op_12
-    | op_11
-    | op_10
-    | op_9
-    | op_8
-    | op_7
-    | op_6
-    | op_5
-    | op_4
-    | op_3
-//    | op_2
-//    | op_1
-    | scalar_value
-    | array_value
+//code_line ::= expr (';' multiline_string ?) ? // multiline needs special treatment
 
 
-//1     left	terms and list operators (leftward); function results in our case
-//2     left	->
-op_3 ::= (('++'|'--') expr) | ( expr ('++'|'--'))
-op_4 ::= expr ('**' expr)+ { rightAssociative=true }
-op_5 ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true }
-op_6 ::= expr ('=~'|'!~') expr
-op_7 ::= expr ('*'|'/'|'%'|'x') expr
-op_8 ::= expr ('+'|'-'|'.') expr
-op_9 ::= expr ('<<'|'>>') expr
-op_10 ::= ('not'|'defined'|'ref'|'exists') expr
-op_11 ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
-op_12 ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
-op_13 ::= expr '&' expr
-op_14 ::= expr ('|'|'^') expr
-op_15 ::= expr '&&' expr
-op_16 ::= expr ('||'|'//') expr
-op_17 ::= expr ('..'|'...') expr
-op_18 ::= expr '?' expr ':' expr { rightAssociative=true }
-op_19 ::= expr ('='|'+='|'-='|'*=') expr { rightAssociative=true }
-op_20 ::= expr	(',' | '=>') expr
-op_21 ::= ('scalar') expr
-op_22 ::= 'not' expr { rightAssociative=true }
-op_23 ::= expr 'and' expr ':' expr
-op_24 ::= expr ('or'|'xor') expr ':' expr
+// expression
+expr ::= op_24_expr
+    | op_23_expr
+    | op_22_expr
+    | op_21_expr
+    | op_20_expr
+    | op_19_expr
+    | op_18_expr
+    | op_17_expr
+    | op_16_expr
+    | op_15_expr
+    | op_14_expr
+    | op_13_expr
+    | op_12_expr
+    | op_11_expr
+    | op_10_expr
+    | op_9_expr
+    | op_8_expr
+    | op_7_expr
+    | op_6_expr
+    | op_5_expr
+    | op_4_expr
+    | op_3_expr
+    | op_2_expr
+    | op_1_expr
 
-op_right_scalar_operand ::= '(' scalar_value ')' | scalar_value
-op_right_array_operand ::= array_value
+op_1_expr ::= term | call_leftward | variable_definition // not sure about var definition
+op_2_expr ::= expr '->' expr
+private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
+op_3_pref_expr ::= ('++'|'--') expr
+op_3_suff_expr ::= expr ('++'|'--')
+op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
+op_5_expr ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true }
+op_6_expr ::= expr ('=~'|'!~') expr
+op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
+op_8_expr ::= expr ('+'|'-'|'.') expr
+op_9_expr ::= expr ('<<'|'>>') expr
+op_10_expr ::= ('not'|'defined'|'ref'|'exists') expr
+op_11_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
+op_12_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
+op_13_expr ::= expr '&' expr
+op_14_expr ::= expr ('|'|'^') expr
+op_15_expr ::= expr '&&' expr
+op_16_expr ::= expr ('||'|'//') expr
+op_17_expr ::= expr ('..'|'...') expr
+op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 
+op_19_expr ::= expr ('=' | '+='|'-='|'*=') expr { rightAssociative=true }
+//private op_19_expr ::= op_19_init_expr | op_19_am_expr
+//op_19_init_expr ::= variable_definition '=' expr { rightAssociative=true }
+//op_19_am_expr ::= expr ('=' | '+='|'-='|'*=') expr { rightAssociative=true }
 
-// general syntax
-method_call ::=
-    package_function_call
-    | package_method_call
-    | object_method_call
-object_method_call ::= scalar_value_mutable '->' function_call
-package_function_call ::= package_bare '::' function_call
-package_method_call ::= package_bare '->' function_call
+op_20_expr ::= expr	(',' | '=>') expr
+op_21_expr ::= call_rightward
+op_22_expr ::= 'not' expr { rightAssociative=true }
+op_23_expr ::= expr 'and' expr ':' expr
+op_24_expr ::= expr ('or'|'xor') expr ':' expr
 
-function_call ::= PERL_FUNCTION array_value ?
-code_line ::= code_line_element* ';' multiline_string ?
-
-array_value ::=
-    array_elements
-    | '(' array_elements* ')'
-
-array_elements ::= array_element (PERL_COMMA array_element )*
-array_element ::=
-    array_dereference
-    | array_slice
-    | hash_slice
-    | hash_value
+term ::=
+    '(' expr ')'
     | array
-    | scalar_value
-array_slice ::= array '[' (array_value | scalar_value) ']'
-hash_slice ::= array '{' (array_value | scalar_value) '{'
-array_dereference ::= PERL_SIGIL_ARRAY '{' scalar_value '}'
-
-hash_value ::= hash_dereference | hash
-hash_dereference ::= PERL_SIGIL_HASH '{' scalar_value '}'
-
-scalar_value ::=
-    scalar_value_determined
-
-scalar_value_determined ::=
-    string
-    | PERL_NUMBER
-    | multiline_marker
-    | scalar_anon_array
-    | scalar_anon_hash
-    | scalar_value_mutable
-
-scalar_value_mutable ::=
-    scalar_dereference
-    | scalar_hash_element
-    | scalar_array_element
+    | hash
     | scalar
-    | scalar_function_result // dynamic scalar, may be a reference
 
-scalar_hash_element ::= scalar '{' scalar_value '}'
-scalar_array_element ::= scalar '[' scalar_value ']'
-scalar_dereference ::= PERL_SIGIL_SCALAR '{' scalar_value '}'
-scalar_anon_array     ::= '[' array_value * ']'
-scalar_anon_hash      ::= '{' array_value * '}'
-scalar_function_result ::= function_call
+call_leftward ::=
+    calee '(' expr ? ')'
+    | scalar '(' expr ? ')'
+    | scalar '->' '(' expr ? ')'
+call_rightward ::= calee expr ?
 
-// this just for wrapper, need to find other way
-function ::= PERL_FUNCTION
-glob ::= PERL_GLOB
-scalar ::= PERL_SCALAR
-array ::= PERL_ARRAY
-hash ::= PERL_HASH
-string ::= PERL_STRING
+calee ::=
+    package_method
+    | package_function
+    | object_method
+    | PERL_FUNCTION
 
+package_method ::= package_bare '->' PERL_FUNCTION
+package_function ::= package_bare '::' PERL_FUNCTION
+object_method ::= scalar '->' PERL_FUNCTION
+
+array ::=
+    array_safe '[' expr ']'              // array slice
+    | array_safe '{' expr '}'              // hash slice
+    | array_safe
+    | '(' ')'                       // empty array
+
+private array_safe ::=
+    PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
+    | PERL_ARRAY                    // array as is
+
+
+hash ::=
+    PERL_SIGIL_HASH '{' expr '}'   // hash dereference
+    | PERL_HASH                    // hash as is
+
+scalar ::=
+    scalar_safe '->'? '[' expr ']'      // array element
+    | scalar_safe '->'? '{' expr '}'    // hash element
+    | scalar_safe                       // scalar or deref scalar
+    | '[' expr ']'                      // anonymous array
+    | '{' expr '}'                      // anonymous hash
+    |  multiline_marker                 // deferred string
+    | PERL_STRING                       // string
+    | PERL_NUMBER                       // raw number
+
+private scalar_safe ::=
+    PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference
+    | PERL_SCALAR                          // scalar as is
+
+// Multiline
 multiline_string ::= PERL_STRING_MULTILINE PERL_MULTILINE_MARKER
 
-// Generalizations
-controls ::= ',' | '[' | ']' | '(' | ')'
-
-variables ::= variable (PERL_COMMA variable)+
-variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH | PERL_GLOB
-
-// opening marker
-multiline_marker ::= PERL_MULTILINE_MARKER
+private multiline_marker ::= PERL_MULTILINE_MARKER
     | PERL_MULTILINE_MARKER_HTML
     | PERL_MULTILINE_MARKER_XHTML
     | PERL_MULTILINE_MARKER_XML
 
+private variables ::= variable (',' variable ) *
+private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH
+
+// assigning package
 package_bare ::= PERL_PACKAGE  {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
         implements="com.perl5.lang.perl.psi.PerlNamedElement"
         methods=[getName setName getNameIdentifier]

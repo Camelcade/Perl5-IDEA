@@ -11,97 +11,63 @@ import com.perl5.lang.perl.psi.impl.*;
 public interface PerlElementTypes {
 
   IElementType ARRAY = new PerlElementType("ARRAY");
-  IElementType ARRAY_DEREFERENCE = new PerlElementType("ARRAY_DEREFERENCE");
-  IElementType ARRAY_ELEMENT = new PerlElementType("ARRAY_ELEMENT");
-  IElementType ARRAY_ELEMENTS = new PerlElementType("ARRAY_ELEMENTS");
-  IElementType ARRAY_SLICE = new PerlElementType("ARRAY_SLICE");
-  IElementType ARRAY_VALUE = new PerlElementType("ARRAY_VALUE");
   IElementType BLOCK = new PerlElementType("BLOCK");
   IElementType BLOCK_ITEM = new PerlElementType("BLOCK_ITEM");
-  IElementType CODE_CHUNK_INVALID = new PerlElementType("CODE_CHUNK_INVALID");
-  IElementType CODE_CHUNK_VALID = new PerlElementType("CODE_CHUNK_VALID");
-  IElementType CODE_LINE = new PerlElementType("CODE_LINE");
-  IElementType CODE_LINE_ELEMENT = new PerlElementType("CODE_LINE_ELEMENT");
-  IElementType CODE_LINE_ELEMENTS = new PerlElementType("CODE_LINE_ELEMENTS");
-  IElementType CODE_LINE_INVALID_ELEMENT = new PerlElementType("CODE_LINE_INVALID_ELEMENT");
-  IElementType CONTROLS = new PerlElementType("CONTROLS");
+  IElementType CALEE = new PerlElementType("CALEE");
+  IElementType CALL_LEFTWARD = new PerlElementType("CALL_LEFTWARD");
+  IElementType CALL_RIGHTWARD = new PerlElementType("CALL_RIGHTWARD");
+  IElementType CODE_LINES = new PerlElementType("CODE_LINES");
   IElementType EVAL = new PerlElementType("EVAL");
-  IElementType EVAL_INVALID = new PerlElementType("EVAL_INVALID");
   IElementType EXPR = new PerlElementType("EXPR");
-  IElementType EXPRESSION = new PerlElementType("EXPRESSION");
-  IElementType FUNCTION = new PerlElementType("FUNCTION");
-  IElementType FUNCTION_CALL = new PerlElementType("FUNCTION_CALL");
   IElementType FUNCTION_DEFINITION = new PerlElementType("FUNCTION_DEFINITION");
   IElementType FUNCTION_DEFINITION_ANON = new PerlElementType("FUNCTION_DEFINITION_ANON");
   IElementType FUNCTION_DEFINITION_NAMED = new PerlElementType("FUNCTION_DEFINITION_NAMED");
-  IElementType GLOB = new PerlElementType("GLOB");
   IElementType HASH = new PerlElementType("HASH");
-  IElementType HASH_DEREFERENCE = new PerlElementType("HASH_DEREFERENCE");
-  IElementType HASH_SLICE = new PerlElementType("HASH_SLICE");
-  IElementType HASH_VALUE = new PerlElementType("HASH_VALUE");
   IElementType IF_BLOCK = new PerlElementType("IF_BLOCK");
   IElementType IF_BLOCK_ELSE = new PerlElementType("IF_BLOCK_ELSE");
   IElementType IF_BLOCK_ELSIF = new PerlElementType("IF_BLOCK_ELSIF");
-  IElementType IF_BRANCH = new PerlElementType("IF_BRANCH");
   IElementType IF_BRANCH_CONDITIONAL = new PerlElementType("IF_BRANCH_CONDITIONAL");
   IElementType LOCAL_DEFINITION = new PerlElementType("LOCAL_DEFINITION");
-  IElementType METHOD_CALL = new PerlElementType("METHOD_CALL");
-  IElementType MULTILINE_MARKER = new PerlElementType("MULTILINE_MARKER");
   IElementType MULTILINE_STRING = new PerlElementType("MULTILINE_STRING");
   IElementType MY_DEFINITION = new PerlElementType("MY_DEFINITION");
-  IElementType OBJECT_METHOD_CALL = new PerlElementType("OBJECT_METHOD_CALL");
-  IElementType OP_10 = new PerlElementType("OP_10");
-  IElementType OP_11 = new PerlElementType("OP_11");
-  IElementType OP_12 = new PerlElementType("OP_12");
-  IElementType OP_13 = new PerlElementType("OP_13");
-  IElementType OP_14 = new PerlElementType("OP_14");
-  IElementType OP_15 = new PerlElementType("OP_15");
-  IElementType OP_16 = new PerlElementType("OP_16");
-  IElementType OP_17 = new PerlElementType("OP_17");
-  IElementType OP_18 = new PerlElementType("OP_18");
-  IElementType OP_19 = new PerlElementType("OP_19");
-  IElementType OP_20 = new PerlElementType("OP_20");
-  IElementType OP_21 = new PerlElementType("OP_21");
-  IElementType OP_22 = new PerlElementType("OP_22");
-  IElementType OP_23 = new PerlElementType("OP_23");
-  IElementType OP_24 = new PerlElementType("OP_24");
-  IElementType OP_3 = new PerlElementType("OP_3");
-  IElementType OP_4 = new PerlElementType("OP_4");
-  IElementType OP_5 = new PerlElementType("OP_5");
-  IElementType OP_6 = new PerlElementType("OP_6");
-  IElementType OP_7 = new PerlElementType("OP_7");
-  IElementType OP_8 = new PerlElementType("OP_8");
-  IElementType OP_9 = new PerlElementType("OP_9");
-  IElementType OP_RIGHT_ARRAY_OPERAND = new PerlElementType("OP_RIGHT_ARRAY_OPERAND");
-  IElementType OP_RIGHT_SCALAR_OPERAND = new PerlElementType("OP_RIGHT_SCALAR_OPERAND");
+  IElementType OBJECT_METHOD = new PerlElementType("OBJECT_METHOD");
+  IElementType OP_10_EXPR = new PerlElementType("OP_10_EXPR");
+  IElementType OP_11_EXPR = new PerlElementType("OP_11_EXPR");
+  IElementType OP_12_EXPR = new PerlElementType("OP_12_EXPR");
+  IElementType OP_13_EXPR = new PerlElementType("OP_13_EXPR");
+  IElementType OP_14_EXPR = new PerlElementType("OP_14_EXPR");
+  IElementType OP_15_EXPR = new PerlElementType("OP_15_EXPR");
+  IElementType OP_16_EXPR = new PerlElementType("OP_16_EXPR");
+  IElementType OP_17_EXPR = new PerlElementType("OP_17_EXPR");
+  IElementType OP_18_EXPR = new PerlElementType("OP_18_EXPR");
+  IElementType OP_19_EXPR = new PerlElementType("OP_19_EXPR");
+  IElementType OP_1_EXPR = new PerlElementType("OP_1_EXPR");
+  IElementType OP_20_EXPR = new PerlElementType("OP_20_EXPR");
+  IElementType OP_21_EXPR = new PerlElementType("OP_21_EXPR");
+  IElementType OP_22_EXPR = new PerlElementType("OP_22_EXPR");
+  IElementType OP_23_EXPR = new PerlElementType("OP_23_EXPR");
+  IElementType OP_24_EXPR = new PerlElementType("OP_24_EXPR");
+  IElementType OP_2_EXPR = new PerlElementType("OP_2_EXPR");
+  IElementType OP_3_PREF_EXPR = new PerlElementType("OP_3_PREF_EXPR");
+  IElementType OP_3_SUFF_EXPR = new PerlElementType("OP_3_SUFF_EXPR");
+  IElementType OP_4_EXPR = new PerlElementType("OP_4_EXPR");
+  IElementType OP_5_EXPR = new PerlElementType("OP_5_EXPR");
+  IElementType OP_6_EXPR = new PerlElementType("OP_6_EXPR");
+  IElementType OP_7_EXPR = new PerlElementType("OP_7_EXPR");
+  IElementType OP_8_EXPR = new PerlElementType("OP_8_EXPR");
+  IElementType OP_9_EXPR = new PerlElementType("OP_9_EXPR");
   IElementType OUR_DEFINITION = new PerlElementType("OUR_DEFINITION");
   IElementType PACKAGE_BARE = new PerlElementType("PACKAGE_BARE");
   IElementType PACKAGE_DEFINITION = new PerlElementType("PACKAGE_DEFINITION");
-  IElementType PACKAGE_DEFINITION_INVALID = new PerlElementType("PACKAGE_DEFINITION_INVALID");
-  IElementType PACKAGE_FUNCTION_CALL = new PerlElementType("PACKAGE_FUNCTION_CALL");
+  IElementType PACKAGE_FUNCTION = new PerlElementType("PACKAGE_FUNCTION");
   IElementType PACKAGE_ITEM = new PerlElementType("PACKAGE_ITEM");
-  IElementType PACKAGE_METHOD_CALL = new PerlElementType("PACKAGE_METHOD_CALL");
+  IElementType PACKAGE_METHOD = new PerlElementType("PACKAGE_METHOD");
   IElementType PACKAGE_NO = new PerlElementType("PACKAGE_NO");
-  IElementType PACKAGE_NO_INVALID = new PerlElementType("PACKAGE_NO_INVALID");
   IElementType PACKAGE_REQUIRE = new PerlElementType("PACKAGE_REQUIRE");
-  IElementType PACKAGE_REQUIRE_INVALID = new PerlElementType("PACKAGE_REQUIRE_INVALID");
   IElementType PACKAGE_USE = new PerlElementType("PACKAGE_USE");
   IElementType PACKAGE_USE_ARGUMENTS = new PerlElementType("PACKAGE_USE_ARGUMENTS");
-  IElementType PACKAGE_USE_INVALID = new PerlElementType("PACKAGE_USE_INVALID");
   IElementType SCALAR = new PerlElementType("SCALAR");
-  IElementType SCALAR_ANON_ARRAY = new PerlElementType("SCALAR_ANON_ARRAY");
-  IElementType SCALAR_ANON_HASH = new PerlElementType("SCALAR_ANON_HASH");
-  IElementType SCALAR_ARRAY_ELEMENT = new PerlElementType("SCALAR_ARRAY_ELEMENT");
-  IElementType SCALAR_DEREFERENCE = new PerlElementType("SCALAR_DEREFERENCE");
-  IElementType SCALAR_FUNCTION_RESULT = new PerlElementType("SCALAR_FUNCTION_RESULT");
-  IElementType SCALAR_HASH_ELEMENT = new PerlElementType("SCALAR_HASH_ELEMENT");
-  IElementType SCALAR_VALUE = new PerlElementType("SCALAR_VALUE");
-  IElementType SCALAR_VALUE_DETERMINED = new PerlElementType("SCALAR_VALUE_DETERMINED");
-  IElementType SCALAR_VALUE_MUTABLE = new PerlElementType("SCALAR_VALUE_MUTABLE");
-  IElementType STRING = new PerlElementType("STRING");
-  IElementType SUBEXPRESSION = new PerlElementType("SUBEXPRESSION");
-  IElementType VARIABLE = new PerlElementType("VARIABLE");
-  IElementType VARIABLES = new PerlElementType("VARIABLES");
+  IElementType TERM = new PerlElementType("TERM");
   IElementType VARIABLE_DEFINITION = new PerlElementType("VARIABLE_DEFINITION");
   IElementType VARIABLE_DEFINITION_ARGUMENTS = new PerlElementType("VARIABLE_DEFINITION_ARGUMENTS");
 
@@ -136,6 +102,7 @@ public interface PerlElementTypes {
   IElementType PERL_STRING = new PerlTokenType("PERL_STRING");
   IElementType PERL_STRING_MULTILINE = new PerlTokenType("PERL_STRING_MULTILINE");
   IElementType PERL_VERSION = new PerlTokenType("PERL_VERSION");
+  IElementType STRING = new PerlTokenType("string");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -143,65 +110,29 @@ public interface PerlElementTypes {
        if (type == ARRAY) {
         return new PerlArrayImpl(node);
       }
-      else if (type == ARRAY_DEREFERENCE) {
-        return new PerlArrayDereferenceImpl(node);
-      }
-      else if (type == ARRAY_ELEMENT) {
-        return new PerlArrayElementImpl(node);
-      }
-      else if (type == ARRAY_ELEMENTS) {
-        return new PerlArrayElementsImpl(node);
-      }
-      else if (type == ARRAY_SLICE) {
-        return new PerlArraySliceImpl(node);
-      }
-      else if (type == ARRAY_VALUE) {
-        return new PerlArrayValueImpl(node);
-      }
       else if (type == BLOCK) {
         return new PerlBlockImpl(node);
       }
       else if (type == BLOCK_ITEM) {
         return new PerlBlockItemImpl(node);
       }
-      else if (type == CODE_CHUNK_INVALID) {
-        return new PerlCodeChunkInvalidImpl(node);
+      else if (type == CALEE) {
+        return new PerlCaleeImpl(node);
       }
-      else if (type == CODE_CHUNK_VALID) {
-        return new PerlCodeChunkValidImpl(node);
+      else if (type == CALL_LEFTWARD) {
+        return new PerlCallLeftwardImpl(node);
       }
-      else if (type == CODE_LINE) {
-        return new PerlCodeLineImpl(node);
+      else if (type == CALL_RIGHTWARD) {
+        return new PerlCallRightwardImpl(node);
       }
-      else if (type == CODE_LINE_ELEMENT) {
-        return new PerlCodeLineElementImpl(node);
-      }
-      else if (type == CODE_LINE_ELEMENTS) {
-        return new PerlCodeLineElementsImpl(node);
-      }
-      else if (type == CODE_LINE_INVALID_ELEMENT) {
-        return new PerlCodeLineInvalidElementImpl(node);
-      }
-      else if (type == CONTROLS) {
-        return new PerlControlsImpl(node);
+      else if (type == CODE_LINES) {
+        return new PerlCodeLinesImpl(node);
       }
       else if (type == EVAL) {
         return new PerlEvalImpl(node);
       }
-      else if (type == EVAL_INVALID) {
-        return new PerlEvalInvalidImpl(node);
-      }
       else if (type == EXPR) {
         return new PerlExprImpl(node);
-      }
-      else if (type == EXPRESSION) {
-        return new PerlExpressionImpl(node);
-      }
-      else if (type == FUNCTION) {
-        return new PerlFunctionImpl(node);
-      }
-      else if (type == FUNCTION_CALL) {
-        return new PerlFunctionCallImpl(node);
       }
       else if (type == FUNCTION_DEFINITION) {
         return new PerlFunctionDefinitionImpl(node);
@@ -212,20 +143,8 @@ public interface PerlElementTypes {
       else if (type == FUNCTION_DEFINITION_NAMED) {
         return new PerlFunctionDefinitionNamedImpl(node);
       }
-      else if (type == GLOB) {
-        return new PerlGlobImpl(node);
-      }
       else if (type == HASH) {
         return new PerlHashImpl(node);
-      }
-      else if (type == HASH_DEREFERENCE) {
-        return new PerlHashDereferenceImpl(node);
-      }
-      else if (type == HASH_SLICE) {
-        return new PerlHashSliceImpl(node);
-      }
-      else if (type == HASH_VALUE) {
-        return new PerlHashValueImpl(node);
       }
       else if (type == IF_BLOCK) {
         return new PerlIfBlockImpl(node);
@@ -236,20 +155,11 @@ public interface PerlElementTypes {
       else if (type == IF_BLOCK_ELSIF) {
         return new PerlIfBlockElsifImpl(node);
       }
-      else if (type == IF_BRANCH) {
-        return new PerlIfBranchImpl(node);
-      }
       else if (type == IF_BRANCH_CONDITIONAL) {
         return new PerlIfBranchConditionalImpl(node);
       }
       else if (type == LOCAL_DEFINITION) {
         return new PerlLocalDefinitionImpl(node);
-      }
-      else if (type == METHOD_CALL) {
-        return new PerlMethodCallImpl(node);
-      }
-      else if (type == MULTILINE_MARKER) {
-        return new PerlMultilineMarkerImpl(node);
       }
       else if (type == MULTILINE_STRING) {
         return new PerlMultilineStringImpl(node);
@@ -257,80 +167,83 @@ public interface PerlElementTypes {
       else if (type == MY_DEFINITION) {
         return new PerlMyDefinitionImpl(node);
       }
-      else if (type == OBJECT_METHOD_CALL) {
-        return new PerlObjectMethodCallImpl(node);
+      else if (type == OBJECT_METHOD) {
+        return new PerlObjectMethodImpl(node);
       }
-      else if (type == OP_10) {
-        return new PerlOp10Impl(node);
+      else if (type == OP_10_EXPR) {
+        return new PerlOp10ExprImpl(node);
       }
-      else if (type == OP_11) {
-        return new PerlOp11Impl(node);
+      else if (type == OP_11_EXPR) {
+        return new PerlOp11ExprImpl(node);
       }
-      else if (type == OP_12) {
-        return new PerlOp12Impl(node);
+      else if (type == OP_12_EXPR) {
+        return new PerlOp12ExprImpl(node);
       }
-      else if (type == OP_13) {
-        return new PerlOp13Impl(node);
+      else if (type == OP_13_EXPR) {
+        return new PerlOp13ExprImpl(node);
       }
-      else if (type == OP_14) {
-        return new PerlOp14Impl(node);
+      else if (type == OP_14_EXPR) {
+        return new PerlOp14ExprImpl(node);
       }
-      else if (type == OP_15) {
-        return new PerlOp15Impl(node);
+      else if (type == OP_15_EXPR) {
+        return new PerlOp15ExprImpl(node);
       }
-      else if (type == OP_16) {
-        return new PerlOp16Impl(node);
+      else if (type == OP_16_EXPR) {
+        return new PerlOp16ExprImpl(node);
       }
-      else if (type == OP_17) {
-        return new PerlOp17Impl(node);
+      else if (type == OP_17_EXPR) {
+        return new PerlOp17ExprImpl(node);
       }
-      else if (type == OP_18) {
-        return new PerlOp18Impl(node);
+      else if (type == OP_18_EXPR) {
+        return new PerlOp18ExprImpl(node);
       }
-      else if (type == OP_19) {
-        return new PerlOp19Impl(node);
+      else if (type == OP_19_EXPR) {
+        return new PerlOp19ExprImpl(node);
       }
-      else if (type == OP_20) {
-        return new PerlOp20Impl(node);
+      else if (type == OP_1_EXPR) {
+        return new PerlOp1ExprImpl(node);
       }
-      else if (type == OP_21) {
-        return new PerlOp21Impl(node);
+      else if (type == OP_20_EXPR) {
+        return new PerlOp20ExprImpl(node);
       }
-      else if (type == OP_22) {
-        return new PerlOp22Impl(node);
+      else if (type == OP_21_EXPR) {
+        return new PerlOp21ExprImpl(node);
       }
-      else if (type == OP_23) {
-        return new PerlOp23Impl(node);
+      else if (type == OP_22_EXPR) {
+        return new PerlOp22ExprImpl(node);
       }
-      else if (type == OP_24) {
-        return new PerlOp24Impl(node);
+      else if (type == OP_23_EXPR) {
+        return new PerlOp23ExprImpl(node);
       }
-      else if (type == OP_3) {
-        return new PerlOp3Impl(node);
+      else if (type == OP_24_EXPR) {
+        return new PerlOp24ExprImpl(node);
       }
-      else if (type == OP_4) {
-        return new PerlOp4Impl(node);
+      else if (type == OP_2_EXPR) {
+        return new PerlOp2ExprImpl(node);
       }
-      else if (type == OP_5) {
-        return new PerlOp5Impl(node);
+      else if (type == OP_3_PREF_EXPR) {
+        return new PerlOp3PrefExprImpl(node);
       }
-      else if (type == OP_6) {
-        return new PerlOp6Impl(node);
+      else if (type == OP_3_SUFF_EXPR) {
+        return new PerlOp3SuffExprImpl(node);
       }
-      else if (type == OP_7) {
-        return new PerlOp7Impl(node);
+      else if (type == OP_4_EXPR) {
+        return new PerlOp4ExprImpl(node);
       }
-      else if (type == OP_8) {
-        return new PerlOp8Impl(node);
+      else if (type == OP_5_EXPR) {
+        return new PerlOp5ExprImpl(node);
       }
-      else if (type == OP_9) {
-        return new PerlOp9Impl(node);
+      else if (type == OP_6_EXPR) {
+        return new PerlOp6ExprImpl(node);
       }
-      else if (type == OP_RIGHT_ARRAY_OPERAND) {
-        return new PerlOpRightArrayOperandImpl(node);
+      else if (type == OP_7_EXPR) {
+        return new PerlOp7ExprImpl(node);
       }
-      else if (type == OP_RIGHT_SCALAR_OPERAND) {
-        return new PerlOpRightScalarOperandImpl(node);
+      else if (type == OP_8_EXPR) {
+        return new PerlOp8ExprImpl(node);
+      }
+      else if (type == OP_9_EXPR) {
+        return new PerlOp9ExprImpl(node);
       }
       else if (type == OUR_DEFINITION) {
         return new PerlOurDefinitionImpl(node);
@@ -341,29 +254,20 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_DEFINITION) {
         return new PerlPackageDefinitionImpl(node);
       }
-      else if (type == PACKAGE_DEFINITION_INVALID) {
-        return new PerlPackageDefinitionInvalidImpl(node);
-      }
-      else if (type == PACKAGE_FUNCTION_CALL) {
-        return new PerlPackageFunctionCallImpl(node);
+      else if (type == PACKAGE_FUNCTION) {
+        return new PerlPackageFunctionImpl(node);
       }
       else if (type == PACKAGE_ITEM) {
         return new PerlPackageItemImpl(node);
       }
-      else if (type == PACKAGE_METHOD_CALL) {
-        return new PerlPackageMethodCallImpl(node);
+      else if (type == PACKAGE_METHOD) {
+        return new PerlPackageMethodImpl(node);
       }
       else if (type == PACKAGE_NO) {
         return new PerlPackageNoImpl(node);
       }
-      else if (type == PACKAGE_NO_INVALID) {
-        return new PerlPackageNoInvalidImpl(node);
-      }
       else if (type == PACKAGE_REQUIRE) {
         return new PerlPackageRequireImpl(node);
-      }
-      else if (type == PACKAGE_REQUIRE_INVALID) {
-        return new PerlPackageRequireInvalidImpl(node);
       }
       else if (type == PACKAGE_USE) {
         return new PerlPackageUseImpl(node);
@@ -371,50 +275,11 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_USE_ARGUMENTS) {
         return new PerlPackageUseArgumentsImpl(node);
       }
-      else if (type == PACKAGE_USE_INVALID) {
-        return new PerlPackageUseInvalidImpl(node);
-      }
       else if (type == SCALAR) {
         return new PerlScalarImpl(node);
       }
-      else if (type == SCALAR_ANON_ARRAY) {
-        return new PerlScalarAnonArrayImpl(node);
-      }
-      else if (type == SCALAR_ANON_HASH) {
-        return new PerlScalarAnonHashImpl(node);
-      }
-      else if (type == SCALAR_ARRAY_ELEMENT) {
-        return new PerlScalarArrayElementImpl(node);
-      }
-      else if (type == SCALAR_DEREFERENCE) {
-        return new PerlScalarDereferenceImpl(node);
-      }
-      else if (type == SCALAR_FUNCTION_RESULT) {
-        return new PerlScalarFunctionResultImpl(node);
-      }
-      else if (type == SCALAR_HASH_ELEMENT) {
-        return new PerlScalarHashElementImpl(node);
-      }
-      else if (type == SCALAR_VALUE) {
-        return new PerlScalarValueImpl(node);
-      }
-      else if (type == SCALAR_VALUE_DETERMINED) {
-        return new PerlScalarValueDeterminedImpl(node);
-      }
-      else if (type == SCALAR_VALUE_MUTABLE) {
-        return new PerlScalarValueMutableImpl(node);
-      }
-      else if (type == STRING) {
-        return new PerlStringImpl(node);
-      }
-      else if (type == SUBEXPRESSION) {
-        return new PerlSubexpressionImpl(node);
-      }
-      else if (type == VARIABLE) {
-        return new PerlVariableImpl(node);
-      }
-      else if (type == VARIABLES) {
-        return new PerlVariablesImpl(node);
+      else if (type == TERM) {
+        return new PerlTermImpl(node);
       }
       else if (type == VARIABLE_DEFINITION) {
         return new PerlVariableDefinitionImpl(node);

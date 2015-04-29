@@ -11,6 +11,6 @@ public interface PerlEval extends PsiElement {
   PerlBlock getBlock();
 
   @Nullable
-  PerlScalarValue getScalarValue();
+  PerlScalar getScalar();
 
 }

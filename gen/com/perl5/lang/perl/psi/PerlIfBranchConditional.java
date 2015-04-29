@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlIfBranchConditional extends PsiElement {
 
   @NotNull
-  PerlExpression getExpression();
+  PerlBlock getBlock();
 
   @NotNull
-  PerlIfBranch getIfBranch();
+  PerlExpr getExpr();
 
 }

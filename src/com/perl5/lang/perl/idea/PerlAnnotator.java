@@ -37,6 +37,7 @@ public class PerlAnnotator implements Annotator, PerlElementTypes
 //		Annotation annotation = holder.createInfoAnnotation(element, "");
 //		annotation.setEnforcedTextAttributes(new TextAttributes(null, null, null, null, 3));
 
+/*
 		if( element instanceof PerlPackageUseInvalidImpl)
 		{
 			markError(element, holder, "Proper `use` syntax: " +
@@ -76,6 +77,7 @@ public class PerlAnnotator implements Annotator, PerlElementTypes
 					"package NAMESPACE BLOCK" +
 					"package NAMESPACE VERSION BLOCK");
 		}
+*/
 
 /*
 		if (element instanceof PsiLiteralExpression) {

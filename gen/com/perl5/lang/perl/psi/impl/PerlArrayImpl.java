@@ -22,4 +22,10 @@ public class PerlArrayImpl extends ASTWrapperPsiElement implements PerlArray {
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  }
+
 }

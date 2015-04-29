@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlIfBlockElse extends PsiElement {
 
   @NotNull
-  PerlIfBranch getIfBranch();
+  PerlBlock getBlock();
 
 }

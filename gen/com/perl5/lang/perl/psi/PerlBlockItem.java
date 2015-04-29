@@ -11,9 +11,6 @@ public interface PerlBlockItem extends PsiElement {
   PerlPackageDefinition getPackageDefinition();
 
   @Nullable
-  PerlPackageDefinitionInvalid getPackageDefinitionInvalid();
-
-  @Nullable
   PerlPackageItem getPackageItem();
 
 }
