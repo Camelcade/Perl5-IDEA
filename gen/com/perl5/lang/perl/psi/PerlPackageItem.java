@@ -11,10 +11,10 @@ public interface PerlPackageItem extends PsiElement {
   PerlBlock getBlock();
 
   @Nullable
-  PerlEval getEval();
+  PerlCodeLine getCodeLine();
 
   @Nullable
-  PerlExpr getExpr();
+  PerlEval getEval();
 
   @Nullable
   PerlFunctionDefinition getFunctionDefinition();

@@ -11,21 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlCodeLinesImpl extends ASTWrapperPsiElement implements PerlCodeLines {
+public class PerlCodeLineImpl extends ASTWrapperPsiElement implements PerlCodeLine {
 
-  public PerlCodeLinesImpl(ASTNode node) {
+  public PerlCodeLineImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCodeLines(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCodeLine(this);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public List<PerlCodeLine> getCodeLineList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCodeLine.class);
+  public PerlExpr getExpr() {
+    return findNotNullChildByClass(PerlExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlIfPostfix getIfPostfix() {
+    return findChildByClass(PerlIfPostfix.class);
   }
 
 }

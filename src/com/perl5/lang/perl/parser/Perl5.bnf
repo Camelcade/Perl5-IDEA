@@ -70,7 +70,7 @@ package_item ::=
     | package_require
     | if_block
     | block
-    | expr ';'
+    | code_line ';'
     | PERL_POD
     | PERL_COMMENT
     | PERL_COMMENT_BLOCK
@@ -109,19 +109,23 @@ package_require ::= 'require' (package_bare | PERL_VERSION | string) ';' // mult
 eval ::= 'eval' (block | scalar) ';'
 
 // if
+if_postfix ::= ('if' | 'unless') expr
+
 if_block ::= ('if' | 'unless') if_branch_conditional if_block_elsif * if_block_else ?
 if_block_elsif ::= 'elsif' if_branch_conditional
 if_block_else  ::= 'else' block
 if_branch_conditional ::= '(' expr ')' block
 
 block ::= '{' code_lines ? '}';
-code_lines ::= expr (';' expr )*
+code_lines ::= code_line (';' code_line )*
+code_line ::= expr if_postfix ?
 
 //code_line ::= expr (';' multiline_string ?) ? // multiline needs special treatment
 
 
 // expression
-expr ::= op_24_expr
+expr ::=
+    op_24_expr
     | op_23_expr
     | op_22_expr
     | op_21_expr
@@ -157,7 +161,7 @@ op_6_expr ::= expr ('=~'|'!~') expr
 op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
 op_8_expr ::= expr ('+'|'-'|'.') expr
 op_9_expr ::= expr ('<<'|'>>') expr
-op_10_expr ::= ('not'|'defined'|'ref'|'exists') expr
+op_10_expr ::= ('not'|'defined'|'ref'|'exists'|'scalar') expr
 op_11_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
 op_12_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
 op_13_expr ::= expr '&' expr
@@ -166,17 +170,12 @@ op_15_expr ::= expr '&&' expr
 op_16_expr ::= expr ('||'|'//') expr
 op_17_expr ::= expr ('..'|'...') expr
 op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
-
-op_19_expr ::= expr ('=' | '+='|'-='|'*=') expr { rightAssociative=true }
-//private op_19_expr ::= op_19_init_expr | op_19_am_expr
-//op_19_init_expr ::= variable_definition '=' expr { rightAssociative=true }
-//op_19_am_expr ::= expr ('=' | '+='|'-='|'*=') expr { rightAssociative=true }
-
+op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 op_20_expr ::= expr	(',' | '=>') expr
 op_21_expr ::= call_rightward
 op_22_expr ::= 'not' expr { rightAssociative=true }
-op_23_expr ::= expr 'and' expr ':' expr
-op_24_expr ::= expr ('or'|'xor') expr ':' expr
+op_23_expr ::= expr 'and' expr
+op_24_expr ::= expr ('or'|'xor') expr
 
 term ::=
     '(' expr ')'

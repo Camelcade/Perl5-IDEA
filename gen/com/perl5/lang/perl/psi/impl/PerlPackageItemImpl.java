@@ -30,14 +30,14 @@ public class PerlPackageItemImpl extends ASTWrapperPsiElement implements PerlPac
 
   @Override
   @Nullable
-  public PerlEval getEval() {
-    return findChildByClass(PerlEval.class);
+  public PerlCodeLine getCodeLine() {
+    return findChildByClass(PerlCodeLine.class);
   }
 
   @Override
   @Nullable
-  public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+  public PerlEval getEval() {
+    return findChildByClass(PerlEval.class);
   }
 
   @Override

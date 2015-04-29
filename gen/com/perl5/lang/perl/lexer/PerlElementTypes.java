@@ -16,6 +16,7 @@ public interface PerlElementTypes {
   IElementType CALEE = new PerlElementType("CALEE");
   IElementType CALL_LEFTWARD = new PerlElementType("CALL_LEFTWARD");
   IElementType CALL_RIGHTWARD = new PerlElementType("CALL_RIGHTWARD");
+  IElementType CODE_LINE = new PerlElementType("CODE_LINE");
   IElementType CODE_LINES = new PerlElementType("CODE_LINES");
   IElementType EVAL = new PerlElementType("EVAL");
   IElementType EXPR = new PerlElementType("EXPR");
@@ -27,6 +28,7 @@ public interface PerlElementTypes {
   IElementType IF_BLOCK_ELSE = new PerlElementType("IF_BLOCK_ELSE");
   IElementType IF_BLOCK_ELSIF = new PerlElementType("IF_BLOCK_ELSIF");
   IElementType IF_BRANCH_CONDITIONAL = new PerlElementType("IF_BRANCH_CONDITIONAL");
+  IElementType IF_POSTFIX = new PerlElementType("IF_POSTFIX");
   IElementType LOCAL_DEFINITION = new PerlElementType("LOCAL_DEFINITION");
   IElementType MULTILINE_STRING = new PerlElementType("MULTILINE_STRING");
   IElementType MY_DEFINITION = new PerlElementType("MY_DEFINITION");
@@ -125,6 +127,9 @@ public interface PerlElementTypes {
       else if (type == CALL_RIGHTWARD) {
         return new PerlCallRightwardImpl(node);
       }
+      else if (type == CODE_LINE) {
+        return new PerlCodeLineImpl(node);
+      }
       else if (type == CODE_LINES) {
         return new PerlCodeLinesImpl(node);
       }
@@ -157,6 +162,9 @@ public interface PerlElementTypes {
       }
       else if (type == IF_BRANCH_CONDITIONAL) {
         return new PerlIfBranchConditionalImpl(node);
+      }
+      else if (type == IF_POSTFIX) {
+        return new PerlIfPostfixImpl(node);
       }
       else if (type == LOCAL_DEFINITION) {
         return new PerlLocalDefinitionImpl(node);

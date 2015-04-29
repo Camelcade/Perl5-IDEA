@@ -31,6 +31,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCodeLine(@NotNull PerlCodeLine o) {
+    visitPsiElement(o);
+  }
+
   public void visitCodeLines(@NotNull PerlCodeLines o) {
     visitPsiElement(o);
   }
@@ -72,6 +76,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitIfBranchConditional(@NotNull PerlIfBranchConditional o) {
+    visitPsiElement(o);
+  }
+
+  public void visitIfPostfix(@NotNull PerlIfPostfix o) {
     visitPsiElement(o);
   }
 
