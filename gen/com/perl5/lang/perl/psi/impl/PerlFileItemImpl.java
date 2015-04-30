@@ -11,27 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlArrayImpl extends ASTWrapperPsiElement implements PerlArray {
+public class PerlFileItemImpl extends ASTWrapperPsiElement implements PerlFileItem {
 
-  public PerlArrayImpl(ASTNode node) {
+  public PerlFileItemImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitArray(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitFileItem(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  @Nullable
+  public PerlPackageDefinition getPackageDefinition() {
+    return findChildByClass(PerlPackageDefinition.class);
   }
 
   @Override
   @Nullable
-  public PerlScalar getScalar() {
-    return findChildByClass(PerlScalar.class);
+  public PerlPackageItem getPackageItem() {
+    return findChildByClass(PerlPackageItem.class);
   }
 
 }

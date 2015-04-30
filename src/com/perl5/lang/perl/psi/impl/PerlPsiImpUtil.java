@@ -6,7 +6,6 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlPackageBare;
-import com.perl5.lang.perl.psi.PerlPackageNamespace;
 
 /**
  * Created by hurricup on 26.04.2015.

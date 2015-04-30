@@ -98,10 +98,14 @@ PACKAGE_INSTANCE_CALL = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)* {DEREFERENCE}
 FUNCTION_NAME = {ALFANUM}+
 
 // @todo temp solution for package variables. need to implement smart lexing
-VAR_SCALAR = [$][$]*{PACKAGE_NAME}?{ALFANUM}+
-VAR_ARRAY = [@][$]*{PACKAGE_NAME}?{ALFANUM}+
-VAR_HASH = [%][$]*{PACKAGE_NAME}?{ALFANUM}+
-VAR_GLOB = [*][$]*{PACKAGE_NAME}?{ALFANUM}+
+VAR_SCALAR = [$]{PACKAGE_NAME}?{ALFANUM}+
+VAR_ARRAY = [@]{PACKAGE_NAME}?{ALFANUM}+
+VAR_HASH = [%]{PACKAGE_NAME}?{ALFANUM}+
+VAR_GLOB = [*]{PACKAGE_NAME}?{ALFANUM}+
+
+VAR_SCALAR_SPECIAL = "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$^TAINT" | "$^UTF8LOCALE" | "$^RE_TRIE_MAXBUF" | "$^CHILD_ERROR_NATIVE" | "$^ENCODING" | "$^OPEN" | "$^RE_DEBUG_FLAGS" | "$^A" | "$^C" | "$^T" | "$^S" | "$^V" | "$^W" | "$^X" | "$^D" | "$^E" | "$^F" | "$^H" | "$^I" | "$^L" | "$^M" | "$^N" | "$^O" | "$^P" | "$^R" | "$^H" | "$!" | "$\"" | "$#" | "$$" | "$%" | "$&" | "$'" | "$(" | "$)" | "$*" | "$+" | "$," | "$_" | "$-" | "$`" | "$." | "$a" | "$/" | "$0" | "$:" | "$;" | "$<" | "$=" | "$>" | "$?" | "$@" | "$[" | "$\"" | "$]" | "$|" | "$^" | "$~" | "$+" | "$-" | "$_" | "$!" | "$+" | "$-"
+VAR_ARRAY_SPECIAL = "@_" | "@!" | "@+" | "@-" | "@^H"
+VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}(\.{PERL_VERSION_CHUNK})*
@@ -288,8 +292,11 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 {NUMBER}        {return PERL_NUMBER;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
+{VAR_SCALAR_SPECIAL} {return PERL_SCALAR;}
 {VAR_SCALAR} {return PERL_SCALAR;}
+{VAR_HASH_SPECIAL} {return PERL_HASH;}
 {VAR_HASH} {return PERL_HASH;}
+{VAR_ARRAY_SPECIAL} {return PERL_ARRAY;}
 {VAR_ARRAY} {return PERL_ARRAY;}
 {VAR_GLOB} {return PERL_GLOB;}
 "@" {return PERL_SIGIL_ARRAY;}

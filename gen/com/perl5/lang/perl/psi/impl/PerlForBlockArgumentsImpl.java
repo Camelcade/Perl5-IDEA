@@ -8,41 +8,36 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
+public class PerlForBlockArgumentsImpl extends ASTWrapperPsiElement implements PerlForBlockArguments {
 
-  public PerlOp1ExprImpl(ASTNode node) {
+  public PerlForBlockArgumentsImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOp1Expr(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitForBlockArguments(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public PerlCallLeftward getCallLeftward() {
-    return findChildByClass(PerlCallLeftward.class);
+  @NotNull
+  public List<PerlBlock> getBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlBlock.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
   @Override
   @Nullable
-  public PerlGrepOp getGrepOp() {
-    return findChildByClass(PerlGrepOp.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlSortOp getSortOp() {
-    return findChildByClass(PerlSortOp.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlTerm getTerm() {
-    return findChildByClass(PerlTerm.class);
+  public PerlList getList() {
+    return findChildByClass(PerlList.class);
   }
 
   @Override

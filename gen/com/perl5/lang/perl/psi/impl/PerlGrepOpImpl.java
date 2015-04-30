@@ -11,27 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlBlockItemImpl extends ASTWrapperPsiElement implements PerlBlockItem {
+public class PerlGrepOpImpl extends ASTWrapperPsiElement implements PerlGrepOp {
 
-  public PerlBlockItemImpl(ASTNode node) {
+  public PerlGrepOpImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitBlockItem(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitGrepOp(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public PerlPackageDefinition getPackageDefinition() {
-    return findChildByClass(PerlPackageDefinition.class);
+  @NotNull
+  public PerlBlock getBlock() {
+    return findNotNullChildByClass(PerlBlock.class);
   }
 
   @Override
-  @Nullable
-  public PerlPackageItem getPackageItem() {
-    return findChildByClass(PerlPackageItem.class);
+  @NotNull
+  public PerlList getList() {
+    return findNotNullChildByClass(PerlList.class);
   }
 
 }

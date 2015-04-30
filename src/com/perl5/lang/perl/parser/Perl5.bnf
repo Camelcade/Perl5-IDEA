@@ -58,9 +58,10 @@
     psiImplUtilClass="com.perl5.lang.perl.psi.impl.PerlPsiImpUtil"
 }
 
-perlFile ::= block_item*
+perlFile ::= file_item*
 
-block_item ::= package_definition | package_item
+block ::= '{' file_item* '}';
+file_item ::= package_definition | package_item
 
 package_item ::=
     eval
@@ -68,9 +69,12 @@ package_item ::=
     | package_use
     | package_no
     | package_require
+    | for_block
     | if_block
-    | block
-    | code_line ';'
+    | while_block
+    | given_block
+    | block_block
+    | code_line ';' multiline_marker?
     | PERL_POD
     | PERL_COMMENT
     | PERL_COMMENT_BLOCK
@@ -111,17 +115,34 @@ eval ::= 'eval' (block | scalar) ';'
 // if
 if_postfix ::= ('if' | 'unless') expr
 
-if_block ::= ('if' | 'unless') if_branch_conditional if_block_elsif * if_block_else ?
-if_block_elsif ::= 'elsif' if_branch_conditional
+if_block ::= ('if' | 'unless') block_conditional if_block_elsif * if_block_else ?
+if_block_elsif ::= 'elsif' block_conditional
 if_block_else  ::= 'else' block
-if_branch_conditional ::= '(' expr ')' block
 
-block ::= '{' code_lines ? '}';
-code_lines ::= code_line (';' code_line )*
+// for/foreach
+for_block ::= ('foreach' | 'for') for_block_arguments
+for_block_arguments ::=
+    '(' expr ? ';' expr ? ';' expr ? ')' block
+     | (variable_definition | variable ) '(' list ')' block ('continue' block ) ?
+
+given_block ::= 'given' block_conditional
+
+while_block ::= ('until' | 'while' ) block_conditional ('continue' block ) ?
+
+block_conditional ::= '(' expr ')' block
+block_block ::= block ('continue' block ) ?
+
+sort_op ::= 'sort' sort_op_args
+sort_op_args ::=
+    PERL_FUNCTION list
+    | block ? list
+
+
+grep_op ::= ('grep' | 'map' ) block list
+
 code_line ::= expr if_postfix ?
 
 //code_line ::= expr (';' multiline_string ?) ? // multiline needs special treatment
-
 
 // expression
 expr ::=
@@ -150,7 +171,7 @@ expr ::=
     | op_2_expr
     | op_1_expr
 
-op_1_expr ::= term | call_leftward | variable_definition // not sure about var definition
+op_1_expr ::= term | grep_op | sort_op | call_leftward | variable_definition // not sure about var definition
 op_2_expr ::= expr '->' expr
 private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
@@ -182,6 +203,7 @@ term ::=
     | array
     | hash
     | scalar
+    | '<' scalar? '>' // bareward should be here too
 
 call_leftward ::=
     calee '(' expr ? ')'
@@ -199,6 +221,8 @@ package_method ::= package_bare '->' PERL_FUNCTION
 package_function ::= package_bare '::' PERL_FUNCTION
 object_method ::= scalar '->' PERL_FUNCTION
 
+list ::= array | expr // actually it should be list expr, but we can't distinct them yet
+
 array ::=
     array_safe '[' expr ']'              // array slice
     | array_safe '{' expr '}'              // hash slice
@@ -207,22 +231,25 @@ array ::=
 
 private array_safe ::=
     PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
+    | PERL_SIGIL_ARRAY scalar       // scalar dereference
     | PERL_ARRAY                    // array as is
 
-
 hash ::=
-    PERL_SIGIL_HASH '{' expr '}'   // hash dereference
+    PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
+    | PERL_SIGIL_ARRAY scalar       // scalar dereference wo braces
     | PERL_HASH                    // hash as is
 
 scalar ::=
     scalar_safe '->'? '[' expr ']'      // array element
     | scalar_safe '->'? '{' expr '}'    // hash element
     | scalar_safe                       // scalar or deref scalar
-    | '[' expr ']'                      // anonymous array
-    | '{' expr '}'                      // anonymous hash
+    | '[' expr ? ']'                      // anonymous array
+    | '{' expr ? '}'                      // anonymous hash
     |  multiline_marker                 // deferred string
     | PERL_STRING                       // string
     | PERL_NUMBER                       // raw number
+
+
 
 private scalar_safe ::=
     PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference

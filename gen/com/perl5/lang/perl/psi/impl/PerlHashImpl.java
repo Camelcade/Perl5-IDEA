@@ -28,4 +28,10 @@ public class PerlHashImpl extends ASTWrapperPsiElement implements PerlHash {
     return findChildByClass(PerlExpr.class);
   }
 
+  @Override
+  @Nullable
+  public PerlScalar getScalar() {
+    return findChildByClass(PerlScalar.class);
+  }
+
 }

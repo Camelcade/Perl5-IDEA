@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlBlockItem extends PsiElement {
+public interface PerlBlockConditional extends PsiElement {
 
-  @Nullable
-  PerlPackageDefinition getPackageDefinition();
+  @NotNull
+  PerlBlock getBlock();
 
-  @Nullable
-  PerlPackageItem getPackageItem();
+  @NotNull
+  PerlExpr getExpr();
 
 }

@@ -7,13 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlIfBlock extends PsiElement {
 
+  @NotNull
+  PerlBlockConditional getBlockConditional();
+
   @Nullable
   PerlIfBlockElse getIfBlockElse();
 
   @NotNull
   List<PerlIfBlockElsif> getIfBlockElsifList();
-
-  @NotNull
-  PerlIfBranchConditional getIfBranchConditional();
 
 }

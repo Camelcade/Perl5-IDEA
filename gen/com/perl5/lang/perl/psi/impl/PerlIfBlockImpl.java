@@ -23,6 +23,12 @@ public class PerlIfBlockImpl extends ASTWrapperPsiElement implements PerlIfBlock
   }
 
   @Override
+  @NotNull
+  public PerlBlockConditional getBlockConditional() {
+    return findNotNullChildByClass(PerlBlockConditional.class);
+  }
+
+  @Override
   @Nullable
   public PerlIfBlockElse getIfBlockElse() {
     return findChildByClass(PerlIfBlockElse.class);
@@ -32,12 +38,6 @@ public class PerlIfBlockImpl extends ASTWrapperPsiElement implements PerlIfBlock
   @NotNull
   public List<PerlIfBlockElsif> getIfBlockElsifList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlIfBlockElsif.class);
-  }
-
-  @Override
-  @NotNull
-  public PerlIfBranchConditional getIfBranchConditional() {
-    return findNotNullChildByClass(PerlIfBranchConditional.class);
   }
 
 }

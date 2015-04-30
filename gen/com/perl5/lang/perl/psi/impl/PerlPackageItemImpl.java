@@ -24,8 +24,8 @@ public class PerlPackageItemImpl extends ASTWrapperPsiElement implements PerlPac
 
   @Override
   @Nullable
-  public PerlBlock getBlock() {
-    return findChildByClass(PerlBlock.class);
+  public PerlBlockBlock getBlockBlock() {
+    return findChildByClass(PerlBlockBlock.class);
   }
 
   @Override
@@ -42,8 +42,20 @@ public class PerlPackageItemImpl extends ASTWrapperPsiElement implements PerlPac
 
   @Override
   @Nullable
+  public PerlForBlock getForBlock() {
+    return findChildByClass(PerlForBlock.class);
+  }
+
+  @Override
+  @Nullable
   public PerlFunctionDefinition getFunctionDefinition() {
     return findChildByClass(PerlFunctionDefinition.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlGivenBlock getGivenBlock() {
+    return findChildByClass(PerlGivenBlock.class);
   }
 
   @Override
@@ -68,6 +80,12 @@ public class PerlPackageItemImpl extends ASTWrapperPsiElement implements PerlPac
   @Nullable
   public PerlPackageUse getPackageUse() {
     return findChildByClass(PerlPackageUse.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlWhileBlock getWhileBlock() {
+    return findChildByClass(PerlWhileBlock.class);
   }
 
 }

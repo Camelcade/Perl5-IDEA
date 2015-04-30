@@ -10,4 +10,7 @@ public interface PerlArray extends PsiElement {
   @NotNull
   List<PerlExpr> getExprList();
 
+  @Nullable
+  PerlScalar getScalar();
+
 }

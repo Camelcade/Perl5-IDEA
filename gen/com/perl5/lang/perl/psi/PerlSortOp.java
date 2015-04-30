@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlIfBranchConditional extends PsiElement {
+public interface PerlSortOp extends PsiElement {
 
   @NotNull
-  PerlBlock getBlock();
-
-  @NotNull
-  PerlExpr getExpr();
+  PerlSortOpArgs getSortOpArgs();
 
 }

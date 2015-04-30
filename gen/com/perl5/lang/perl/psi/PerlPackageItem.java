@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface PerlPackageItem extends PsiElement {
 
   @Nullable
-  PerlBlock getBlock();
+  PerlBlockBlock getBlockBlock();
 
   @Nullable
   PerlCodeLine getCodeLine();
@@ -17,7 +17,13 @@ public interface PerlPackageItem extends PsiElement {
   PerlEval getEval();
 
   @Nullable
+  PerlForBlock getForBlock();
+
+  @Nullable
   PerlFunctionDefinition getFunctionDefinition();
+
+  @Nullable
+  PerlGivenBlock getGivenBlock();
 
   @Nullable
   PerlIfBlock getIfBlock();
@@ -30,5 +36,8 @@ public interface PerlPackageItem extends PsiElement {
 
   @Nullable
   PerlPackageUse getPackageUse();
+
+  @Nullable
+  PerlWhileBlock getWhileBlock();
 
 }

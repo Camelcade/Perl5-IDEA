@@ -15,7 +15,11 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitBlockItem(@NotNull PerlBlockItem o) {
+  public void visitBlockBlock(@NotNull PerlBlockBlock o) {
+    visitPsiElement(o);
+  }
+
+  public void visitBlockConditional(@NotNull PerlBlockConditional o) {
     visitPsiElement(o);
   }
 
@@ -35,15 +39,23 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitCodeLines(@NotNull PerlCodeLines o) {
-    visitPsiElement(o);
-  }
-
   public void visitEval(@NotNull PerlEval o) {
     visitPsiElement(o);
   }
 
   public void visitExpr(@NotNull PerlExpr o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFileItem(@NotNull PerlFileItem o) {
+    visitPsiElement(o);
+  }
+
+  public void visitForBlock(@NotNull PerlForBlock o) {
+    visitPsiElement(o);
+  }
+
+  public void visitForBlockArguments(@NotNull PerlForBlockArguments o) {
     visitPsiElement(o);
   }
 
@@ -56,6 +68,14 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitFunctionDefinitionNamed(@NotNull PerlFunctionDefinitionNamed o) {
+    visitPsiElement(o);
+  }
+
+  public void visitGivenBlock(@NotNull PerlGivenBlock o) {
+    visitPsiElement(o);
+  }
+
+  public void visitGrepOp(@NotNull PerlGrepOp o) {
     visitPsiElement(o);
   }
 
@@ -75,11 +95,11 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitIfBranchConditional(@NotNull PerlIfBranchConditional o) {
+  public void visitIfPostfix(@NotNull PerlIfPostfix o) {
     visitPsiElement(o);
   }
 
-  public void visitIfPostfix(@NotNull PerlIfPostfix o) {
+  public void visitList(@NotNull PerlList o) {
     visitPsiElement(o);
   }
 
@@ -243,6 +263,14 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSortOp(@NotNull PerlSortOp o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSortOpArgs(@NotNull PerlSortOpArgs o) {
+    visitPsiElement(o);
+  }
+
   public void visitTerm(@NotNull PerlTerm o) {
     visitPsiElement(o);
   }
@@ -252,6 +280,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitVariableDefinitionArguments(@NotNull PerlVariableDefinitionArguments o) {
+    visitPsiElement(o);
+  }
+
+  public void visitWhileBlock(@NotNull PerlWhileBlock o) {
     visitPsiElement(o);
   }
 

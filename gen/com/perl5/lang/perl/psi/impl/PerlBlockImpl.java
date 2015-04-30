@@ -23,9 +23,9 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
   }
 
   @Override
-  @Nullable
-  public PerlCodeLines getCodeLines() {
-    return findChildByClass(PerlCodeLines.class);
+  @NotNull
+  public List<PerlFileItem> getFileItemList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlFileItem.class);
   }
 
 }

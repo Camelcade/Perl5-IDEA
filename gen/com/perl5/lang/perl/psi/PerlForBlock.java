@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlHash extends PsiElement {
+public interface PerlForBlock extends PsiElement {
 
-  @Nullable
-  PerlExpr getExpr();
-
-  @Nullable
-  PerlScalar getScalar();
+  @NotNull
+  PerlForBlockArguments getForBlockArguments();
 
 }

@@ -5,19 +5,16 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlOp1Expr extends PerlExpr {
+public interface PerlForBlockArguments extends PsiElement {
+
+  @NotNull
+  List<PerlBlock> getBlockList();
+
+  @NotNull
+  List<PerlExpr> getExprList();
 
   @Nullable
-  PerlCallLeftward getCallLeftward();
-
-  @Nullable
-  PerlGrepOp getGrepOp();
-
-  @Nullable
-  PerlSortOp getSortOp();
-
-  @Nullable
-  PerlTerm getTerm();
+  PerlList getList();
 
   @Nullable
   PerlVariableDefinition getVariableDefinition();

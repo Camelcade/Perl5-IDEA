@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlCodeLines extends PsiElement {
+public interface PerlFileItem extends PsiElement {
 
-  @NotNull
-  List<PerlCodeLine> getCodeLineList();
+  @Nullable
+  PerlPackageDefinition getPackageDefinition();
+
+  @Nullable
+  PerlPackageItem getPackageItem();
 
 }

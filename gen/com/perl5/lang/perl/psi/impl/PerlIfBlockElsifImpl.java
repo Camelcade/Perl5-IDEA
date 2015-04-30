@@ -24,8 +24,8 @@ public class PerlIfBlockElsifImpl extends ASTWrapperPsiElement implements PerlIf
 
   @Override
   @NotNull
-  public PerlIfBranchConditional getIfBranchConditional() {
-    return findNotNullChildByClass(PerlIfBranchConditional.class);
+  public PerlBlockConditional getBlockConditional() {
+    return findNotNullChildByClass(PerlBlockConditional.class);
   }
 
 }

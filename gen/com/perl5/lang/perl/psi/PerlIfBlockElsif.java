@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlIfBlockElsif extends PsiElement {
 
   @NotNull
-  PerlIfBranchConditional getIfBranchConditional();
+  PerlBlockConditional getBlockConditional();
 
 }
