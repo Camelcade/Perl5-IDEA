@@ -5,15 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlForBlockArguments extends PsiElement {
-
-  @NotNull
-  List<PerlBlock> getBlockList();
-
-  @NotNull
-  List<PerlExpr> getExprList();
+public interface PerlSubBlock extends PsiElement {
 
   @Nullable
-  PerlVariableDefinition getVariableDefinition();
+  PerlSubBlockAnon getSubBlockAnon();
+
+  @Nullable
+  PerlSubBlockNamed getSubBlockNamed();
 
 }

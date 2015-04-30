@@ -8,9 +8,39 @@ import com.intellij.psi.PsiElement;
 public interface PerlFileItem extends PsiElement {
 
   @Nullable
+  PerlBlockBlock getBlockBlock();
+
+  @Nullable
+  PerlCodeLine getCodeLine();
+
+  @Nullable
+  PerlEval getEval();
+
+  @Nullable
+  PerlForBlock getForBlock();
+
+  @Nullable
+  PerlGivenBlock getGivenBlock();
+
+  @Nullable
+  PerlIfBlock getIfBlock();
+
+  @Nullable
   PerlPackageDefinition getPackageDefinition();
 
   @Nullable
-  PerlPackageItem getPackageItem();
+  PerlPackageNo getPackageNo();
+
+  @Nullable
+  PerlPackageRequire getPackageRequire();
+
+  @Nullable
+  PerlPackageUse getPackageUse();
+
+  @Nullable
+  PerlSubBlockNamed getSubBlockNamed();
+
+  @Nullable
+  PerlWhileBlock getWhileBlock();
 
 }

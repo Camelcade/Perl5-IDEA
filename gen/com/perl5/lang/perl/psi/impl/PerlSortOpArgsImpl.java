@@ -30,8 +30,8 @@ public class PerlSortOpArgsImpl extends ASTWrapperPsiElement implements PerlSort
 
   @Override
   @NotNull
-  public PerlList getList() {
-    return findNotNullChildByClass(PerlList.class);
+  public PerlExpr getExpr() {
+    return findNotNullChildByClass(PerlExpr.class);
   }
 
 }

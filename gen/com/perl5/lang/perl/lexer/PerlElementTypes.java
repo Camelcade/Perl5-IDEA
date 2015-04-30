@@ -17,23 +17,23 @@ public interface PerlElementTypes {
   IElementType CALEE = new PerlElementType("CALEE");
   IElementType CALL_LEFTWARD = new PerlElementType("CALL_LEFTWARD");
   IElementType CALL_RIGHTWARD = new PerlElementType("CALL_RIGHTWARD");
+  IElementType CODE_LABEL = new PerlElementType("CODE_LABEL");
   IElementType CODE_LINE = new PerlElementType("CODE_LINE");
   IElementType EVAL = new PerlElementType("EVAL");
   IElementType EXPR = new PerlElementType("EXPR");
   IElementType FILE_ITEM = new PerlElementType("FILE_ITEM");
   IElementType FOR_BLOCK = new PerlElementType("FOR_BLOCK");
   IElementType FOR_BLOCK_ARGUMENTS = new PerlElementType("FOR_BLOCK_ARGUMENTS");
-  IElementType FUNCTION_DEFINITION = new PerlElementType("FUNCTION_DEFINITION");
-  IElementType FUNCTION_DEFINITION_ANON = new PerlElementType("FUNCTION_DEFINITION_ANON");
-  IElementType FUNCTION_DEFINITION_NAMED = new PerlElementType("FUNCTION_DEFINITION_NAMED");
   IElementType GIVEN_BLOCK = new PerlElementType("GIVEN_BLOCK");
-  IElementType GREP_OP = new PerlElementType("GREP_OP");
+  IElementType GREP_EXPR = new PerlElementType("GREP_EXPR");
   IElementType HASH = new PerlElementType("HASH");
   IElementType IF_BLOCK = new PerlElementType("IF_BLOCK");
   IElementType IF_BLOCK_ELSE = new PerlElementType("IF_BLOCK_ELSE");
   IElementType IF_BLOCK_ELSIF = new PerlElementType("IF_BLOCK_ELSIF");
   IElementType IF_POSTFIX = new PerlElementType("IF_POSTFIX");
-  IElementType LIST = new PerlElementType("LIST");
+  IElementType KEYS_ARGS = new PerlElementType("KEYS_ARGS");
+  IElementType KEYS_EXPR = new PerlElementType("KEYS_EXPR");
+  IElementType LIST_EXPR = new PerlElementType("LIST_EXPR");
   IElementType LOCAL_DEFINITION = new PerlElementType("LOCAL_DEFINITION");
   IElementType MULTILINE_STRING = new PerlElementType("MULTILINE_STRING");
   IElementType MY_DEFINITION = new PerlElementType("MY_DEFINITION");
@@ -67,15 +67,18 @@ public interface PerlElementTypes {
   IElementType PACKAGE_BARE = new PerlElementType("PACKAGE_BARE");
   IElementType PACKAGE_DEFINITION = new PerlElementType("PACKAGE_DEFINITION");
   IElementType PACKAGE_FUNCTION = new PerlElementType("PACKAGE_FUNCTION");
-  IElementType PACKAGE_ITEM = new PerlElementType("PACKAGE_ITEM");
   IElementType PACKAGE_METHOD = new PerlElementType("PACKAGE_METHOD");
   IElementType PACKAGE_NO = new PerlElementType("PACKAGE_NO");
   IElementType PACKAGE_REQUIRE = new PerlElementType("PACKAGE_REQUIRE");
   IElementType PACKAGE_USE = new PerlElementType("PACKAGE_USE");
   IElementType PACKAGE_USE_ARGUMENTS = new PerlElementType("PACKAGE_USE_ARGUMENTS");
   IElementType SCALAR = new PerlElementType("SCALAR");
-  IElementType SORT_OP = new PerlElementType("SORT_OP");
+  IElementType SCALAR_EXPR = new PerlElementType("SCALAR_EXPR");
+  IElementType SORT_EXPR = new PerlElementType("SORT_EXPR");
   IElementType SORT_OP_ARGS = new PerlElementType("SORT_OP_ARGS");
+  IElementType SUB_BLOCK = new PerlElementType("SUB_BLOCK");
+  IElementType SUB_BLOCK_ANON = new PerlElementType("SUB_BLOCK_ANON");
+  IElementType SUB_BLOCK_NAMED = new PerlElementType("SUB_BLOCK_NAMED");
   IElementType TERM = new PerlElementType("TERM");
   IElementType VARIABLE_DEFINITION = new PerlElementType("VARIABLE_DEFINITION");
   IElementType VARIABLE_DEFINITION_ARGUMENTS = new PerlElementType("VARIABLE_DEFINITION_ARGUMENTS");
@@ -90,10 +93,13 @@ public interface PerlElementTypes {
   IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
   IElementType PERL_GLOB = new PerlTokenType("PERL_GLOB");
   IElementType PERL_HASH = new PerlTokenType("PERL_HASH");
+  IElementType PERL_KEYWORD = new PerlTokenType("PERL_KEYWORD");
+  IElementType PERL_LABEL = new PerlTokenType("PERL_LABEL");
   IElementType PERL_LBRACE = new PerlTokenType("{");
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
   IElementType PERL_MULTILINE_MARKER = new PerlTokenType("PERL_MULTILINE_MARKER");
+  IElementType PERL_MULTILINE_MARKER_END = new PerlTokenType("PERL_MULTILINE_MARKER_END");
   IElementType PERL_MULTILINE_MARKER_HTML = new PerlTokenType("PERL_MULTILINE_MARKER_HTML");
   IElementType PERL_MULTILINE_MARKER_XHTML = new PerlTokenType("PERL_MULTILINE_MARKER_XHTML");
   IElementType PERL_MULTILINE_MARKER_XML = new PerlTokenType("PERL_MULTILINE_MARKER_XML");
@@ -138,6 +144,9 @@ public interface PerlElementTypes {
       else if (type == CALL_RIGHTWARD) {
         return new PerlCallRightwardImpl(node);
       }
+      else if (type == CODE_LABEL) {
+        return new PerlCodeLabelImpl(node);
+      }
       else if (type == CODE_LINE) {
         return new PerlCodeLineImpl(node);
       }
@@ -156,20 +165,11 @@ public interface PerlElementTypes {
       else if (type == FOR_BLOCK_ARGUMENTS) {
         return new PerlForBlockArgumentsImpl(node);
       }
-      else if (type == FUNCTION_DEFINITION) {
-        return new PerlFunctionDefinitionImpl(node);
-      }
-      else if (type == FUNCTION_DEFINITION_ANON) {
-        return new PerlFunctionDefinitionAnonImpl(node);
-      }
-      else if (type == FUNCTION_DEFINITION_NAMED) {
-        return new PerlFunctionDefinitionNamedImpl(node);
-      }
       else if (type == GIVEN_BLOCK) {
         return new PerlGivenBlockImpl(node);
       }
-      else if (type == GREP_OP) {
-        return new PerlGrepOpImpl(node);
+      else if (type == GREP_EXPR) {
+        return new PerlGrepExprImpl(node);
       }
       else if (type == HASH) {
         return new PerlHashImpl(node);
@@ -186,8 +186,14 @@ public interface PerlElementTypes {
       else if (type == IF_POSTFIX) {
         return new PerlIfPostfixImpl(node);
       }
-      else if (type == LIST) {
-        return new PerlListImpl(node);
+      else if (type == KEYS_ARGS) {
+        return new PerlKeysArgsImpl(node);
+      }
+      else if (type == KEYS_EXPR) {
+        return new PerlKeysExprImpl(node);
+      }
+      else if (type == LIST_EXPR) {
+        return new PerlListExprImpl(node);
       }
       else if (type == LOCAL_DEFINITION) {
         return new PerlLocalDefinitionImpl(node);
@@ -288,9 +294,6 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_FUNCTION) {
         return new PerlPackageFunctionImpl(node);
       }
-      else if (type == PACKAGE_ITEM) {
-        return new PerlPackageItemImpl(node);
-      }
       else if (type == PACKAGE_METHOD) {
         return new PerlPackageMethodImpl(node);
       }
@@ -309,11 +312,23 @@ public interface PerlElementTypes {
       else if (type == SCALAR) {
         return new PerlScalarImpl(node);
       }
-      else if (type == SORT_OP) {
-        return new PerlSortOpImpl(node);
+      else if (type == SCALAR_EXPR) {
+        return new PerlScalarExprImpl(node);
+      }
+      else if (type == SORT_EXPR) {
+        return new PerlSortExprImpl(node);
       }
       else if (type == SORT_OP_ARGS) {
         return new PerlSortOpArgsImpl(node);
+      }
+      else if (type == SUB_BLOCK) {
+        return new PerlSubBlockImpl(node);
+      }
+      else if (type == SUB_BLOCK_ANON) {
+        return new PerlSubBlockAnonImpl(node);
+      }
+      else if (type == SUB_BLOCK_NAMED) {
+        return new PerlSubBlockNamedImpl(node);
       }
       else if (type == TERM) {
         return new PerlTermImpl(node);

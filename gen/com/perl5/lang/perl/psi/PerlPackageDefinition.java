@@ -11,9 +11,39 @@ public interface PerlPackageDefinition extends PsiElement {
   PerlBlock getBlock();
 
   @NotNull
+  List<PerlBlockBlock> getBlockBlockList();
+
+  @NotNull
+  List<PerlCodeLine> getCodeLineList();
+
+  @NotNull
+  List<PerlEval> getEvalList();
+
+  @NotNull
+  List<PerlForBlock> getForBlockList();
+
+  @NotNull
+  List<PerlGivenBlock> getGivenBlockList();
+
+  @NotNull
+  List<PerlIfBlock> getIfBlockList();
+
+  @NotNull
   PerlPackageBare getPackageBare();
 
   @NotNull
-  List<PerlPackageItem> getPackageItemList();
+  List<PerlPackageNo> getPackageNoList();
+
+  @NotNull
+  List<PerlPackageRequire> getPackageRequireList();
+
+  @NotNull
+  List<PerlPackageUse> getPackageUseList();
+
+  @NotNull
+  List<PerlSubBlockNamed> getSubBlockNamedList();
+
+  @NotNull
+  List<PerlWhileBlock> getWhileBlockList();
 
 }

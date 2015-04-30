@@ -10,21 +10,33 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlFunctionDefinitionNamedImpl extends PerlFunctionDefinitionNamedUtil implements PerlFunctionDefinitionNamed {
+public class PerlListExprImpl extends PerlExprImpl implements PerlListExpr {
 
-  public PerlFunctionDefinitionNamedImpl(ASTNode node) {
+  public PerlListExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitFunctionDefinitionNamed(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitListExpr(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
-  public PerlBlock getBlock() {
-    return findNotNullChildByClass(PerlBlock.class);
+  @Nullable
+  public PerlArray getArray() {
+    return findChildByClass(PerlArray.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlHash getHash() {
+    return findChildByClass(PerlHash.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlScalar getScalar() {
+    return findChildByClass(PerlScalar.class);
   }
 
 }

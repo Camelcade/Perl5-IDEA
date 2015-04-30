@@ -8,18 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlTermImpl extends ASTWrapperPsiElement implements PerlTerm {
+public class PerlGrepExprImpl extends PerlExprImpl implements PerlGrepExpr {
 
-  public PerlTermImpl(ASTNode node) {
+  public PerlGrepExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitTerm(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitGrepExpr(this);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public PerlBlock getBlock() {
+    return findNotNullChildByClass(PerlBlock.class);
   }
 
   @Override

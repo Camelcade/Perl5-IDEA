@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlBlock extends PsiElement {
 
+  @Nullable
+  PerlExpr getExpr();
+
   @NotNull
   List<PerlFileItem> getFileItemList();
 

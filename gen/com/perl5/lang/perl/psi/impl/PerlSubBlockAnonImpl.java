@@ -11,21 +11,21 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlSortOpImpl extends ASTWrapperPsiElement implements PerlSortOp {
+public class PerlSubBlockAnonImpl extends ASTWrapperPsiElement implements PerlSubBlockAnon {
 
-  public PerlSortOpImpl(ASTNode node) {
+  public PerlSubBlockAnonImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSortOp(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubBlockAnon(this);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public PerlSortOpArgs getSortOpArgs() {
-    return findNotNullChildByClass(PerlSortOpArgs.class);
+  public PerlBlock getBlock() {
+    return findNotNullChildByClass(PerlBlock.class);
   }
 
 }

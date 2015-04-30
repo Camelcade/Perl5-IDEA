@@ -30,14 +30,74 @@ public class PerlPackageDefinitionImpl extends ASTWrapperPsiElement implements P
 
   @Override
   @NotNull
+  public List<PerlBlockBlock> getBlockBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlBlockBlock.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlCodeLine> getCodeLineList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCodeLine.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlEval> getEvalList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlEval.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlForBlock> getForBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlForBlock.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlGivenBlock> getGivenBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlGivenBlock.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlIfBlock> getIfBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlIfBlock.class);
+  }
+
+  @Override
+  @NotNull
   public PerlPackageBare getPackageBare() {
     return findNotNullChildByClass(PerlPackageBare.class);
   }
 
   @Override
   @NotNull
-  public List<PerlPackageItem> getPackageItemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageItem.class);
+  public List<PerlPackageNo> getPackageNoList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNo.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPackageRequire> getPackageRequireList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageRequire.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPackageUse> getPackageUseList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageUse.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlSubBlockNamed> getSubBlockNamedList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlSubBlockNamed.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlWhileBlock> getWhileBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlWhileBlock.class);
   }
 
 }

@@ -8,30 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlListImpl extends ASTWrapperPsiElement implements PerlList {
+public class PerlKeysExprImpl extends PerlExprImpl implements PerlKeysExpr {
 
-  public PerlListImpl(ASTNode node) {
+  public PerlKeysExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitList(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitKeysExpr(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public PerlArray getArray() {
-    return findChildByClass(PerlArray.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+  @NotNull
+  public PerlKeysArgs getKeysArgs() {
+    return findNotNullChildByClass(PerlKeysArgs.class);
   }
 
 }

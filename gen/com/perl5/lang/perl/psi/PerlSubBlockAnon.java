@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlGrepOp extends PsiElement {
+public interface PerlSubBlockAnon extends PsiElement {
 
   @NotNull
   PerlBlock getBlock();
-
-  @NotNull
-  PerlList getList();
 
 }

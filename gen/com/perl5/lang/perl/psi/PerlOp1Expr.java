@@ -11,12 +11,6 @@ public interface PerlOp1Expr extends PerlExpr {
   PerlCallLeftward getCallLeftward();
 
   @Nullable
-  PerlGrepOp getGrepOp();
-
-  @Nullable
-  PerlSortOp getSortOp();
-
-  @Nullable
   PerlTerm getTerm();
 
   @Nullable

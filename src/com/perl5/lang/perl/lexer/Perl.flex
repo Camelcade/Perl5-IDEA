@@ -107,6 +107,10 @@ VAR_SCALAR_SPECIAL = "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$
 VAR_ARRAY_SPECIAL = "@_" | "@!" | "@+" | "@-" | "@^H"
 VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
 
+FUNCTION_SPECIAL = "sort" | "grep" | "keys" | "values" | "map"
+
+PERL_LABEL = {ALFANUM}+ ':'
+
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}(\.{PERL_VERSION_CHUNK})*
 
@@ -190,7 +194,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     }
 }
 <LEX_MULTILINE_TOKEN>{
-    .*  {yybegin(YYINITIAL);return PERL_MULTILINE_MARKER;}
+    .*  {yybegin(YYINITIAL);return PERL_MULTILINE_MARKER_END;}
 }
 
 <LEX_PACKAGE_DEFINITION>{
@@ -304,6 +308,8 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 "$" {return PERL_SIGIL_SCALAR;}
 
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
+{FUNCTION_SPECIAL} {return PERL_KEYWORD;}
+{PERL_LABEL}    { yypushback(1); return PERL_LABEL;}
 {FUNCTION_NAME} { return PERL_FUNCTION;}
 
 /* error fallback [^] */

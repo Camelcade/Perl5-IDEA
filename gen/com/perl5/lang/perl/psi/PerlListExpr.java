@@ -5,12 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlFunctionDefinition extends PsiElement {
+public interface PerlListExpr extends PerlExpr {
 
   @Nullable
-  PerlFunctionDefinitionAnon getFunctionDefinitionAnon();
+  PerlArray getArray();
 
   @Nullable
-  PerlFunctionDefinitionNamed getFunctionDefinitionNamed();
+  PerlHash getHash();
+
+  @Nullable
+  PerlScalar getScalar();
 
 }

@@ -8,24 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlFunctionDefinitionAnonImpl extends ASTWrapperPsiElement implements PerlFunctionDefinitionAnon {
+public class PerlScalarExprImpl extends PerlExprImpl implements PerlScalarExpr {
 
-  public PerlFunctionDefinitionAnonImpl(ASTNode node) {
+  public PerlScalarExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitFunctionDefinitionAnon(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitScalarExpr(this);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public PerlBlock getBlock() {
-    return findNotNullChildByClass(PerlBlock.class);
+  public PerlScalar getScalar() {
+    return findNotNullChildByClass(PerlScalar.class);
   }
 
 }

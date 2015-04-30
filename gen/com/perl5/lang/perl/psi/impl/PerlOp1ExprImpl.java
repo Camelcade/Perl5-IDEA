@@ -29,18 +29,6 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
 
   @Override
   @Nullable
-  public PerlGrepOp getGrepOp() {
-    return findChildByClass(PerlGrepOp.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlSortOp getSortOp() {
-    return findChildByClass(PerlSortOp.class);
-  }
-
-  @Override
-  @Nullable
   public PerlTerm getTerm() {
     return findChildByClass(PerlTerm.class);
   }

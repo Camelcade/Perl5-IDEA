@@ -5,12 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlSortOpArgs extends PsiElement {
-
-  @Nullable
-  PerlBlock getBlock();
-
-  @NotNull
-  PerlExpr getExpr();
+public interface PerlCodeLabel extends PsiElement {
 
 }

@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlFunctionDefinitionAnon extends PsiElement {
+public interface PerlKeysArgs extends PsiElement {
 
-  @NotNull
-  PerlBlock getBlock();
+  @Nullable
+  PerlArray getArray();
+
+  @Nullable
+  PerlHash getHash();
 
 }

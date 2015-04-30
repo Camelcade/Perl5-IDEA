@@ -9,7 +9,6 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.util.*;
-import com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**

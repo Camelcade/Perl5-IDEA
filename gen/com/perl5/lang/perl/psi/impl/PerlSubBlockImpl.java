@@ -11,21 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlTermImpl extends ASTWrapperPsiElement implements PerlTerm {
+public class PerlSubBlockImpl extends ASTWrapperPsiElement implements PerlSubBlock {
 
-  public PerlTermImpl(ASTNode node) {
+  public PerlSubBlockImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitTerm(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubBlock(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
-  public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
+  @Nullable
+  public PerlSubBlockAnon getSubBlockAnon() {
+    return findChildByClass(PerlSubBlockAnon.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlSubBlockNamed getSubBlockNamed() {
+    return findChildByClass(PerlSubBlockNamed.class);
   }
 
 }

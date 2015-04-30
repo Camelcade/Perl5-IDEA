@@ -24,14 +24,74 @@ public class PerlFileItemImpl extends ASTWrapperPsiElement implements PerlFileIt
 
   @Override
   @Nullable
+  public PerlBlockBlock getBlockBlock() {
+    return findChildByClass(PerlBlockBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlCodeLine getCodeLine() {
+    return findChildByClass(PerlCodeLine.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlEval getEval() {
+    return findChildByClass(PerlEval.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlForBlock getForBlock() {
+    return findChildByClass(PerlForBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlGivenBlock getGivenBlock() {
+    return findChildByClass(PerlGivenBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlIfBlock getIfBlock() {
+    return findChildByClass(PerlIfBlock.class);
+  }
+
+  @Override
+  @Nullable
   public PerlPackageDefinition getPackageDefinition() {
     return findChildByClass(PerlPackageDefinition.class);
   }
 
   @Override
   @Nullable
-  public PerlPackageItem getPackageItem() {
-    return findChildByClass(PerlPackageItem.class);
+  public PerlPackageNo getPackageNo() {
+    return findChildByClass(PerlPackageNo.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPackageRequire getPackageRequire() {
+    return findChildByClass(PerlPackageRequire.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPackageUse getPackageUse() {
+    return findChildByClass(PerlPackageUse.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlSubBlockNamed getSubBlockNamed() {
+    return findChildByClass(PerlSubBlockNamed.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlWhileBlock getWhileBlock() {
+    return findChildByClass(PerlWhileBlock.class);
   }
 
 }

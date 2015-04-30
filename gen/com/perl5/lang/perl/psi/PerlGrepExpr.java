@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlList extends PsiElement {
+public interface PerlGrepExpr extends PerlExpr {
 
-  @Nullable
-  PerlArray getArray();
+  @NotNull
+  PerlBlock getBlock();
 
-  @Nullable
+  @NotNull
   PerlExpr getExpr();
 
 }

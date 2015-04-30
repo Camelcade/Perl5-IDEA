@@ -7,16 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlTerm extends PsiElement {
 
-  @Nullable
-  PerlArray getArray();
-
-  @Nullable
+  @NotNull
   PerlExpr getExpr();
-
-  @Nullable
-  PerlHash getHash();
-
-  @Nullable
-  PerlScalar getScalar();
 
 }

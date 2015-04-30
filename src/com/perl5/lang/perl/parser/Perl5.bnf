@@ -21,6 +21,7 @@
     PERL_SIGIL_HASH="%"
     PERL_SIGIL_SCALAR="$"
 
+    PERL_MULTILINE_MARKER_END="PERL_MULTILINE_MARKER_END"
     PERL_MULTILINE_MARKER="PERL_MULTILINE_MARKER"
     PERL_MULTILINE_MARKER_HTML="PERL_MULTILINE_MARKER_HTML"
     PERL_MULTILINE_MARKER_XHTML="PERL_MULTILINE_MARKER_XHTML"
@@ -28,6 +29,7 @@
 
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE"
 
+    PERL_LABEL="PERL_LABEL"
     PERL_STRING="PERL_STRING"
 
     PERL_VERSION="PERL_VERSION"
@@ -37,6 +39,7 @@
     PERL_HASH="PERL_HASH"
     PERL_GLOB="PERL_GLOB"
 
+    PERL_KEYWORD="PERL_KEYWORD"
     PERL_FUNCTION="PERL_FUNCTION"
     PERL_PACKAGE="PERL_PACKAGE"
     PERL_OPERATOR="PERL_OPERATOR"
@@ -60,35 +63,40 @@
 
 perlFile ::= file_item*
 
-block ::= '{' file_item* '}';
-file_item ::= package_definition | package_item
+block ::= '{' (file_item + | expr )? '}';
+file_item ::= package_definition | package_element
 
-package_item ::=
+private package_element ::=
+    block_element
+    | line_element
+
+private block_element ::=
     eval
-    | function_definition
-    | package_use
-    | package_no
-    | package_require
+    | sub_block_named
     | for_block
     | if_block
     | while_block
     | given_block
     | block_block
-    | code_line ';' multiline_marker?
     | PERL_POD
-    | PERL_COMMENT
-    | PERL_COMMENT_BLOCK
+
+private line_element ::=
+    package_use
+    | package_no
+    | package_require
+    | code_line
+
 
 // package
-package_definition ::= 'package' package_bare PERL_VERSION ? (block | ';' package_item * )
+package_definition ::= 'package' package_bare PERL_VERSION ? (block | ';' package_element * )
 
 // sub
-function_definition ::= function_definition_named | function_definition_anon
+sub_block ::= sub_block_named | sub_block_anon
 
-function_definition_named ::= 'sub' PERL_FUNCTION block ';' ? {
+sub_block_named ::= 'sub' PERL_FUNCTION block ';' ? {
     mixin="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
 }
-function_definition_anon ::= 'sub' block ';'
+sub_block_anon ::= 'sub' block ';'
 
 // variable definition
 variable_definition ::= my_definition | our_definition | local_definition
@@ -123,7 +131,7 @@ if_block_else  ::= 'else' block
 for_block ::= ('foreach' | 'for') for_block_arguments
 for_block_arguments ::=
     '(' expr ? ';' expr ? ';' expr ? ')' block
-     | (variable_definition | variable ) '(' list ')' block ('continue' block ) ?
+     | (variable_definition | variable ) '(' list_expr ')' block ('continue' block ) ?
 
 given_block ::= 'given' block_conditional
 
@@ -132,17 +140,7 @@ while_block ::= ('until' | 'while' ) block_conditional ('continue' block ) ?
 block_conditional ::= '(' expr ')' block
 block_block ::= block ('continue' block ) ?
 
-sort_op ::= 'sort' sort_op_args
-sort_op_args ::=
-    PERL_FUNCTION list
-    | block ? list
-
-
-grep_op ::= ('grep' | 'map' ) block list
-
-code_line ::= expr if_postfix ?
-
-//code_line ::= expr (';' multiline_string ?) ? // multiline needs special treatment
+code_line ::= expr if_postfix ? ';'
 
 // expression
 expr ::=
@@ -171,7 +169,7 @@ expr ::=
     | op_2_expr
     | op_1_expr
 
-op_1_expr ::= term | grep_op | sort_op | call_leftward | variable_definition // not sure about var definition
+op_1_expr ::= term | grep_expr | sort_expr | call_leftward | variable_definition // not sure about var definition
 op_2_expr ::= expr '->' expr
 private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
@@ -200,10 +198,8 @@ op_24_expr ::= expr ('or'|'xor') expr
 
 term ::=
     '(' expr ')'
-    | array
-    | hash
-    | scalar
-    | '<' scalar? '>' // bareward should be here too
+    | list_expr
+    | scalar_expr
 
 call_leftward ::=
     calee '(' expr ? ')'
@@ -221,7 +217,33 @@ package_method ::= package_bare '->' PERL_FUNCTION
 package_function ::= package_bare '::' PERL_FUNCTION
 object_method ::= scalar '->' PERL_FUNCTION
 
-list ::= array | expr // actually it should be list expr, but we can't distinct them yet
+scalar_expr ::=
+    scalar
+
+////////////////// list expressions ////////////////////////////
+list_expr ::=
+    sort_expr
+    | keys_expr
+    | grep_expr
+    | '<' scalar? '>' // bareword should be here too
+    | array
+    | hash
+
+// sort
+sort_expr ::= 'sort' sort_op_args
+sort_op_args ::=
+    PERL_FUNCTION list_expr
+    | block ? list_expr
+
+// keys && values
+keys_expr ::= ('keys' | 'values' ) keys_args
+keys_args ::=
+    '(' (hash | array) ')'
+    | (hash | array)
+
+// grep
+grep_expr ::= ('grep' | 'map' ) block list_expr
+
 
 array ::=
     array_safe '[' expr ']'              // array slice
@@ -254,6 +276,8 @@ scalar ::=
 private scalar_safe ::=
     PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference
     | PERL_SCALAR                          // scalar as is
+
+code_label ::= PERL_LABEL ':'
 
 // Multiline
 multiline_string ::= PERL_STRING_MULTILINE PERL_MULTILINE_MARKER

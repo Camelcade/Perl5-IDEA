@@ -35,6 +35,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCodeLabel(@NotNull PerlCodeLabel o) {
+    visitPsiElement(o);
+  }
+
   public void visitCodeLine(@NotNull PerlCodeLine o) {
     visitPsiElement(o);
   }
@@ -59,24 +63,12 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitFunctionDefinition(@NotNull PerlFunctionDefinition o) {
-    visitPsiElement(o);
-  }
-
-  public void visitFunctionDefinitionAnon(@NotNull PerlFunctionDefinitionAnon o) {
-    visitPsiElement(o);
-  }
-
-  public void visitFunctionDefinitionNamed(@NotNull PerlFunctionDefinitionNamed o) {
-    visitPsiElement(o);
-  }
-
   public void visitGivenBlock(@NotNull PerlGivenBlock o) {
     visitPsiElement(o);
   }
 
-  public void visitGrepOp(@NotNull PerlGrepOp o) {
-    visitPsiElement(o);
+  public void visitGrepExpr(@NotNull PerlGrepExpr o) {
+    visitExpr(o);
   }
 
   public void visitHash(@NotNull PerlHash o) {
@@ -99,8 +91,16 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitList(@NotNull PerlList o) {
+  public void visitKeysArgs(@NotNull PerlKeysArgs o) {
     visitPsiElement(o);
+  }
+
+  public void visitKeysExpr(@NotNull PerlKeysExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitListExpr(@NotNull PerlListExpr o) {
+    visitExpr(o);
   }
 
   public void visitLocalDefinition(@NotNull PerlLocalDefinition o) {
@@ -235,10 +235,6 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPackageItem(@NotNull PerlPackageItem o) {
-    visitPsiElement(o);
-  }
-
   public void visitPackageMethod(@NotNull PerlPackageMethod o) {
     visitPsiElement(o);
   }
@@ -263,11 +259,27 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitSortOp(@NotNull PerlSortOp o) {
-    visitPsiElement(o);
+  public void visitScalarExpr(@NotNull PerlScalarExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitSortExpr(@NotNull PerlSortExpr o) {
+    visitExpr(o);
   }
 
   public void visitSortOpArgs(@NotNull PerlSortOpArgs o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSubBlock(@NotNull PerlSubBlock o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSubBlockAnon(@NotNull PerlSubBlockAnon o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSubBlockNamed(@NotNull PerlSubBlockNamed o) {
     visitPsiElement(o);
   }
 

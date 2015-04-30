@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlSortOp extends PsiElement {
+public interface PerlKeysExpr extends PerlExpr {
 
   @NotNull
-  PerlSortOpArgs getSortOpArgs();
+  PerlKeysArgs getKeysArgs();
 
 }

@@ -8,30 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlGrepOpImpl extends ASTWrapperPsiElement implements PerlGrepOp {
+public class PerlSortExprImpl extends PerlExprImpl implements PerlSortExpr {
 
-  public PerlGrepOpImpl(ASTNode node) {
+  public PerlSortExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitGrepOp(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSortExpr(this);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public PerlBlock getBlock() {
-    return findNotNullChildByClass(PerlBlock.class);
-  }
-
-  @Override
-  @NotNull
-  public PerlList getList() {
-    return findNotNullChildByClass(PerlList.class);
+  public PerlSortOpArgs getSortOpArgs() {
+    return findNotNullChildByClass(PerlSortOpArgs.class);
   }
 
 }

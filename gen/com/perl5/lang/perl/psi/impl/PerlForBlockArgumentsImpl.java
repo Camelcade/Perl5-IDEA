@@ -36,12 +36,6 @@ public class PerlForBlockArgumentsImpl extends ASTWrapperPsiElement implements P
 
   @Override
   @Nullable
-  public PerlList getList() {
-    return findChildByClass(PerlList.class);
-  }
-
-  @Override
-  @Nullable
   public PerlVariableDefinition getVariableDefinition() {
     return findChildByClass(PerlVariableDefinition.class);
   }
