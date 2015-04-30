@@ -28,8 +28,90 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public abstract void yybegin_LEX_MULTILINE_WAITING();
 	public abstract void yybegin_LEX_EOF();
 	public abstract void yybegin_LEX_POD();
+	public abstract void yybegin_LEX_QUOTE_LIKE_OPENER();
 
 	public abstract boolean yystate_LEX_MULTILINE_WAITING();
+
+	/**
+	 *  Quote-like string procesors
+	 **/
+
+	protected boolean allowSharp = true;
+	protected char charOpener;
+	protected char charCloser;
+	protected int stringContentStart;
+
+	public IElementType processQuoteLikeStringOpener()
+	{
+		allowSharp = true;
+		yybegin_LEX_QUOTE_LIKE_OPENER();
+		return PERL_KEYWORD;
+	}
+
+	public IElementType processQuoteLikeStringSpace()
+	{
+		allowSharp = false;
+		return TokenType.WHITE_SPACE;
+	}
+
+	public abstract void yybegin_LEX_QUOTE_LIKE_CHARS();
+
+	public IElementType processQuoteLikeQuote()
+	{
+		charOpener = yytext().charAt(0);
+
+		if( charOpener == '#' && !allowSharp )
+		{
+			yypushback(1);
+			yybegin_YYINITIAL();
+			return null;
+		}
+		else if( charOpener == '<' )
+			charCloser = '>';
+		else if( charOpener == '{' )
+			charCloser = '}';
+		else if( charOpener == '(' )
+			charCloser = ')';
+		else if( charOpener == '[' )
+			charCloser = ']';
+		else
+			charCloser = charOpener;
+
+		yybegin_LEX_QUOTE_LIKE_CHARS();
+		stringContentStart = getTokenStart() + 1;
+
+		return PERL_QUOTE;
+	}
+
+
+	protected boolean isEscaped = false;
+	public abstract void yybegin_LEX_QUOTE_LIKE_CLOSER();
+
+	public IElementType processQuoteLikeChar()
+	{
+		char currentChar = yytext().charAt(0);
+
+		if( currentChar == charCloser && !isEscaped )
+		{
+			yypushback(1);
+			setTokenStart(stringContentStart);
+			yybegin_LEX_QUOTE_LIKE_CLOSER();
+			return PERL_STRING_CONTENT;
+		}
+		else if( isLastToken() )
+		{
+			setTokenStart(stringContentStart);
+			return PERL_STRING_CONTENT;
+		}
+		else
+			isEscaped = ( currentChar == '\\' && !isEscaped );
+
+		{
+		}
+
+		return null;
+	}
+
 
 	/**
 	 *  Multiline part <<'smth'

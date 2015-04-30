@@ -72,6 +72,7 @@ public interface PerlElementTypes {
   IElementType PACKAGE_REQUIRE = new PerlElementType("PACKAGE_REQUIRE");
   IElementType PACKAGE_USE = new PerlElementType("PACKAGE_USE");
   IElementType PACKAGE_USE_ARGUMENTS = new PerlElementType("PACKAGE_USE_ARGUMENTS");
+  IElementType QW_EXPR = new PerlElementType("QW_EXPR");
   IElementType SCALAR = new PerlElementType("SCALAR");
   IElementType SCALAR_EXPR = new PerlElementType("SCALAR_EXPR");
   IElementType SORT_EXPR = new PerlElementType("SORT_EXPR");
@@ -107,6 +108,7 @@ public interface PerlElementTypes {
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
   IElementType PERL_PACKAGE = new PerlTokenType("PERL_PACKAGE");
   IElementType PERL_POD = new PerlTokenType("PERL_POD");
+  IElementType PERL_QUOTE = new PerlTokenType("\"");
   IElementType PERL_RBRACE = new PerlTokenType("}");
   IElementType PERL_RBRACK = new PerlTokenType("]");
   IElementType PERL_RPAREN = new PerlTokenType(")");
@@ -116,9 +118,9 @@ public interface PerlElementTypes {
   IElementType PERL_SIGIL_HASH = new PerlTokenType("%");
   IElementType PERL_SIGIL_SCALAR = new PerlTokenType("$");
   IElementType PERL_STRING = new PerlTokenType("PERL_STRING");
+  IElementType PERL_STRING_CONTENT = new PerlTokenType("PERL_STRING_CONTENT");
   IElementType PERL_STRING_MULTILINE = new PerlTokenType("PERL_STRING_MULTILINE");
   IElementType PERL_VERSION = new PerlTokenType("PERL_VERSION");
-  IElementType STRING = new PerlTokenType("string");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -308,6 +310,9 @@ public interface PerlElementTypes {
       }
       else if (type == PACKAGE_USE_ARGUMENTS) {
         return new PerlPackageUseArgumentsImpl(node);
+      }
+      else if (type == QW_EXPR) {
+        return new PerlQwExprImpl(node);
       }
       else if (type == SCALAR) {
         return new PerlScalarImpl(node);

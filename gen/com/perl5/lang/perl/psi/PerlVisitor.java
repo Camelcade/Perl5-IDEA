@@ -255,6 +255,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitQwExpr(@NotNull PerlQwExpr o) {
+    visitExpr(o);
+  }
+
   public void visitScalar(@NotNull PerlScalar o) {
     visitPsiElement(o);
   }

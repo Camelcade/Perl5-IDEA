@@ -30,7 +30,10 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 
 /*
 http://perldoc.perl.org/perlop.html#Quote-Like-Operators
-q qq qx qw m qr {}
+q qq qx
+qw
+// regexp
+m qr {}
 s tr y {}{}
 <>
 //
@@ -62,19 +65,16 @@ s tr y {}{}
 NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
 WHITE_SPACE_LINE = {WHITE_SPACE}*{NEW_LINE}?
+EMPTY_SPACE = [ \t\f\r\n]
 
 CHAR_SEMI       = ;
-//CHAR_ANY        = .
+CHAR_ANY        = .|{NEW_LINE}
 ALFANUM         = [a-zA-Z0-9_]
 FUNCTION_NAME   = [a-zA-Z_]{ALFANUM}+
 THE_END         = __END__
 THE_DATA         = __DATA__
 LINE            = .*
 FULL_LINE       = .*{NEW_LINE}?
-
-DX_STRING        = \`[^\`\n\r]*\`
-DQ_STRING        = \"[^\"\n\r]*\"
-SQ_STRING        = \'[^\'\n\r]*\'
 
 PERL_OPERATORS = "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists"
 
@@ -107,7 +107,12 @@ VAR_SCALAR_SPECIAL = "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$
 VAR_ARRAY_SPECIAL = "@_" | "@!" | "@+" | "@-" | "@^H"
 VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
 
-FUNCTION_SPECIAL = "sort" | "grep" | "keys" | "values" | "map"
+DX_STRING        = \`[^\`\n\r]*\`
+DQ_STRING        = \"[^\"\n\r]*\"
+SQ_STRING        = \'[^\'\n\r]*\'
+QUOTE_LIKE_STRING = "qq" | "qx" | "q"
+
+FUNCTION_SPECIAL = "sort" | "grep" | "keys" | "values" | "map" | "qw" | {QUOTE_LIKE_STRING}
 
 PERL_LABEL = {ALFANUM}+ ':'
 
@@ -129,6 +134,13 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 %state LEX_PACKAGE_USE, LEX_PACKAGE_USE_PARAMS, LEX_PACKAGE_USE_VERSION
 %state LEX_REQUIRE
+
+%xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
+%{
+    public void yybegin_LEX_QUOTE_LIKE_CHARS(){yybegin(LEX_QUOTE_LIKE_CHARS);}
+    public void yybegin_LEX_QUOTE_LIKE_OPENER(){yybegin(LEX_QUOTE_LIKE_OPENER);}
+    public void yybegin_LEX_QUOTE_LIKE_CLOSER(){yybegin(LEX_QUOTE_LIKE_CLOSER);}
+%}
 
 %state LEX_FUNCTION_DEFINITION
 %state LEX_DEREFERENCE
@@ -156,6 +168,28 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     "package"       {yybegin(LEX_PACKAGE_DEFINITION); return PerlFunctionUtil.getFunctionType(yytext().toString());}
 }
 
+<LEX_QUOTE_LIKE_OPENER>{
+    {EMPTY_SPACE}+  {return processQuoteLikeStringSpace();}
+    .   {
+            IElementType type = processQuoteLikeQuote();
+            if( type == null ) // disallowed sharp
+                break;
+            return type;
+        }
+}
+
+<LEX_QUOTE_LIKE_CHARS>{
+    {CHAR_ANY}   {
+          IElementType tokenType = processQuoteLikeChar();
+          if( tokenType != null )
+                return tokenType;
+          break;
+        }
+}
+
+<LEX_QUOTE_LIKE_CLOSER>{
+    .   { yybegin(YYINITIAL); return PERL_QUOTE; }
+}
 
 <LEX_EOF>
 {
@@ -290,6 +324,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 ")"             {return PERL_RPAREN;}
 {DEREFERENCE}	{yybegin(LEX_DEREFERENCE);return PERL_DEREFERENCE;}
 {DEPACKAGE}		{return PERL_DEPACKAGE;}
+
 {DQ_STRING}     {return PERL_STRING;}
 {DX_STRING}     {return PERL_STRING;}
 {SQ_STRING}     {return PERL_STRING;}
@@ -307,6 +342,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 "%" {return PERL_SIGIL_HASH;}
 "$" {return PERL_SIGIL_SCALAR;}
 
+{QUOTE_LIKE_STRING} {return processQuoteLikeStringOpener();}
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 {PERL_LABEL}    { yypushback(1); return PERL_LABEL;}

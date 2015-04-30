@@ -27,10 +27,9 @@
     PERL_MULTILINE_MARKER_XHTML="PERL_MULTILINE_MARKER_XHTML"
     PERL_MULTILINE_MARKER_XML="PERL_MULTILINE_MARKER_XML"
 
-    PERL_STRING_MULTILINE="PERL_STRING_MULTILINE"
+    PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
 
     PERL_LABEL="PERL_LABEL"
-    PERL_STRING="PERL_STRING"
 
     PERL_VERSION="PERL_VERSION"
     PERL_NUMBER="PERL_NUMBER"
@@ -44,6 +43,9 @@
     PERL_PACKAGE="PERL_PACKAGE"
     PERL_OPERATOR="PERL_OPERATOR"
 
+    PERL_STRING="PERL_STRING"
+    PERL_STRING_CONTENT="PERL_STRING_CONTENT"
+
     PERL_DEREFERENCE='->'
     PERL_DEPACKAGE='::'
     PERL_COMMA=','
@@ -54,6 +56,7 @@
     PERL_LBRACE='{'
     PERL_RBRACE='}'
     PERL_SEMI=';';
+    PERL_QUOTE="\""
   ]
 
     extends(".*expr")=expr
@@ -225,9 +228,12 @@ list_expr ::=
     sort_expr
     | keys_expr
     | grep_expr
+    | qw_expr
     | '<' scalar? '>' // bareword should be here too
     | array
     | hash
+
+qw_expr ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
 // sort
 sort_expr ::= 'sort' sort_op_args
@@ -265,13 +271,15 @@ scalar ::=
     scalar_safe '->'? '[' expr ']'      // array element
     | scalar_safe '->'? '{' expr '}'    // hash element
     | scalar_safe                       // scalar or deref scalar
-    | '[' expr ? ']'                      // anonymous array
-    | '{' expr ? '}'                      // anonymous hash
-    |  multiline_marker                 // deferred string
-    | PERL_STRING                       // string
+    | '[' expr ? ']'                    // anonymous array
+    | '{' expr ? '}'                    // anonymous hash
+    | multiline_marker                  // deferred string
+    | string                            // string
     | PERL_NUMBER                       // raw number
 
 
+private string ::= PERL_STRING | string_quoted
+private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE  // bareword string should be here
 
 private scalar_safe ::=
     PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference
