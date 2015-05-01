@@ -233,7 +233,6 @@ calee ::=
     | perl_function
     | object_method_object
 
-
 // @todo regexps
 // @todo $proto->SUPER::smth
 // @todo \& reference
@@ -312,6 +311,11 @@ private scalar_safe ::=
     | PERL_TAG
     | sub_block_anon
     | PERL_GLOB
+    | '&' referencable_method
+
+private referencable_method ::=
+    perl_package_function
+    | perl_function
 
 perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
 

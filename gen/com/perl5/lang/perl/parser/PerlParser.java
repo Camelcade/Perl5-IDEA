@@ -1530,6 +1530,19 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // perl_package_function
+  //     | perl_function
+  static boolean referencable_method(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "referencable_method")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = perl_package_function(b, l + 1);
+    if (!r) r = perl_function(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // ('return' | 'exit') expr ?
   public static boolean return_expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "return_expr")) return false;
@@ -1691,6 +1704,7 @@ public class PerlParser implements PsiParser {
   //     | PERL_TAG
   //     | sub_block_anon
   //     | PERL_GLOB
+  //     | '&' referencable_method
   static boolean scalar_safe(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar_safe")) return false;
     boolean r;
@@ -1703,6 +1717,7 @@ public class PerlParser implements PsiParser {
     if (!r) r = consumeToken(b, PERL_TAG);
     if (!r) r = sub_block_anon(b, l + 1);
     if (!r) r = consumeToken(b, PERL_GLOB);
+    if (!r) r = scalar_safe_8(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1716,6 +1731,17 @@ public class PerlParser implements PsiParser {
     r = r && consumeToken(b, PERL_LBRACE);
     r = r && expr(b, l + 1, -1);
     r = r && consumeToken(b, PERL_RBRACE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '&' referencable_method
+  private static boolean scalar_safe_8(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scalar_safe_8")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "&");
+    r = r && referencable_method(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

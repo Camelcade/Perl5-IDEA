@@ -5,6 +5,11 @@
             <option name="FOREGROUND" value="FF8000"/>
         </value>
     </option>
+    <option name="PERL_GLOB">
+        <value>
+            <option name="FOREGROUND" value="FF0000"/>
+        </value>
+    </option>
     <option name="PERL_ARRAY">
         <value>
             <option name="FOREGROUND" value="CF34CF"/>
