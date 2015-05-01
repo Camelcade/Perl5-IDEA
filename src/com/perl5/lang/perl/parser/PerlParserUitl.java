@@ -63,11 +63,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean parsePackageFunctionCallSpaced(PsiBuilder b, int l ) {
+	public static boolean parsePackageMethodSuper(PsiBuilder b, int l ) {
 
 		return
-			b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) == PERL_BAREWORD
-			&& parseBarewordFunction(b,l) && parseBarewordPackage(b,l);
+			"SUPER".equals(b.getTokenText()) && b.lookAhead(1) == PERL_DEPACKAGE
+			&& parsePackageFunctionCall(b,l);
 	}
 
 	public static boolean parsePackageFunctionCall(PsiBuilder b, int l ) {

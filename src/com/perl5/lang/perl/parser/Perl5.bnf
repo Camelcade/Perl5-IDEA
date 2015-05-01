@@ -224,9 +224,10 @@ call_rightward ::= calee expr ?
 
 calee ::=
     package_method
+    | perl_method_parent
     | object_method
     | perl_package_function
-    | perl_package_method_spaced
+    | (perl_function perl_package)
     | perl_function
     | object_method_object
 
@@ -320,7 +321,7 @@ private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH
 private perl_package ::= <<parseBarewordPackage>>
 private perl_function ::= <<parseBarewordFunction>>
 private perl_package_function ::= <<parsePackageFunctionCall>>
-private perl_package_method_spaced ::= <<parsePackageFunctionCallSpaced>>
+private perl_method_parent ::= scalar '->' <<parsePackageMethodSuper>>
 
 //private package_bare ::= PERL_BAREWORD ( '::' PERL_BAREWORD ) *
 // {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"

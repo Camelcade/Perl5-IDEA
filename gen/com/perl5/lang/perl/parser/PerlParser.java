@@ -478,9 +478,10 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // package_method
+  //     | perl_method_parent
   //     | object_method
   //     | perl_package_function
-  //     | perl_package_method_spaced
+  //     | (perl_function perl_package)
   //     | perl_function
   //     | object_method_object
   public static boolean calee(PsiBuilder b, int l) {
@@ -488,12 +489,24 @@ public class PerlParser implements PsiParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<calee>");
     r = package_method(b, l + 1);
+    if (!r) r = perl_method_parent(b, l + 1);
     if (!r) r = object_method(b, l + 1);
     if (!r) r = perl_package_function(b, l + 1);
-    if (!r) r = perl_package_method_spaced(b, l + 1);
+    if (!r) r = calee_4(b, l + 1);
     if (!r) r = perl_function(b, l + 1);
     if (!r) r = object_method_object(b, l + 1);
     exit_section_(b, l, m, CALEE, r, false, null);
+    return r;
+  }
+
+  // perl_function perl_package
+  private static boolean calee_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "calee_4")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = perl_function(b, l + 1);
+    r = r && perl_package(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -1410,6 +1423,19 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // scalar '->' <<parsePackageMethodSuper>>
+  static boolean perl_method_parent(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_method_parent")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = scalar(b, l + 1);
+    r = r && consumeToken(b, "->");
+    r = r && parsePackageMethodSuper(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // <<parseBarewordPackage>>
   static boolean perl_package(PsiBuilder b, int l) {
     return parseBarewordPackage(b, l + 1);
@@ -1419,12 +1445,6 @@ public class PerlParser implements PsiParser {
   // <<parsePackageFunctionCall>>
   static boolean perl_package_function(PsiBuilder b, int l) {
     return parsePackageFunctionCall(b, l + 1);
-  }
-
-  /* ********************************************************** */
-  // <<parsePackageFunctionCallSpaced>>
-  static boolean perl_package_method_spaced(PsiBuilder b, int l) {
-    return parsePackageFunctionCallSpaced(b, l + 1);
   }
 
   /* ********************************************************** */
