@@ -28,7 +28,6 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Deprecation decoration", PerlSyntaxHighlighter.PERL_DEPRECATED),
 
 			new AttributesDescriptor("Funciton", PerlSyntaxHighlighter.PERL_FUNCTION),
-			new AttributesDescriptor("Built in function", PerlSyntaxHighlighter.PERL_FUNCTION_BUILT_IN),
 			new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
 
 			new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),

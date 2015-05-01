@@ -28,9 +28,25 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public abstract void yybegin_LEX_MULTILINE_WAITING();
 	public abstract void yybegin_LEX_EOF();
 	public abstract void yybegin_LEX_POD();
-	public abstract void yybegin_LEX_QUOTE_LIKE_OPENER();
 
 	public abstract boolean yystate_LEX_MULTILINE_WAITING();
+
+	/**
+	 *  Quote-like common part
+	 */
+	protected char getQuoteCloseChar(char charOpener)
+	{
+		if( charOpener == '<' )
+			return '>';
+		else if( charOpener == '{' )
+			return '}';
+		else if( charOpener == '(' )
+			return ')';
+		else if( charOpener == '[' )
+			return ']';
+		else
+			return charOpener;
+	}
 
 	/**
 	 *  Quote-like string procesors
@@ -40,6 +56,11 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	protected char charOpener;
 	protected char charCloser;
 	protected int stringContentStart;
+	protected boolean isEscaped = false;
+
+	public abstract void yybegin_LEX_QUOTE_LIKE_CLOSER();
+	public abstract void yybegin_LEX_QUOTE_LIKE_OPENER();
+	public abstract void yybegin_LEX_QUOTE_LIKE_CHARS();
 
 	public IElementType processQuoteLikeStringOpener()
 	{
@@ -54,8 +75,6 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		return TokenType.WHITE_SPACE;
 	}
 
-	public abstract void yybegin_LEX_QUOTE_LIKE_CHARS();
-
 	public IElementType processQuoteLikeQuote()
 	{
 		charOpener = yytext().charAt(0);
@@ -66,26 +85,13 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			yybegin_YYINITIAL();
 			return null;
 		}
-		else if( charOpener == '<' )
-			charCloser = '>';
-		else if( charOpener == '{' )
-			charCloser = '}';
-		else if( charOpener == '(' )
-			charCloser = ')';
-		else if( charOpener == '[' )
-			charCloser = ']';
-		else
-			charCloser = charOpener;
+		else charCloser = getQuoteCloseChar(charOpener);
 
 		yybegin_LEX_QUOTE_LIKE_CHARS();
 		stringContentStart = getTokenStart() + 1;
 
 		return PERL_QUOTE;
 	}
-
-
-	protected boolean isEscaped = false;
-	public abstract void yybegin_LEX_QUOTE_LIKE_CLOSER();
 
 	public IElementType processQuoteLikeChar()
 	{
@@ -112,6 +118,61 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		return null;
 	}
 
+	/**
+	 *  Quote-like list procesors
+	 **/
+
+	public abstract void yybegin_LEX_QUOTE_LIKE_WORDS();
+	public abstract void yybegin_LEX_QUOTE_LIKE_LIST_OPENER();
+	public abstract void yybegin_LEX_QUOTE_LIKE_LIST_CLOSER();
+
+	public IElementType processQuoteLikeListOpener()
+	{
+		allowSharp = true;
+		yybegin_LEX_QUOTE_LIKE_LIST_OPENER();
+		return PERL_KEYWORD;
+	}
+
+	public IElementType processQuoteLikeListSpace()
+	{
+		allowSharp = false;
+		return TokenType.WHITE_SPACE;
+	}
+
+	public IElementType processQuoteLikeListQuote()
+	{
+		charOpener = yytext().charAt(0);
+
+		if( charOpener == '#' && !allowSharp )
+		{
+			yypushback(1);
+			yybegin_YYINITIAL();
+			return null;
+		}
+		else charCloser = getQuoteCloseChar(charOpener);
+
+		yybegin_LEX_QUOTE_LIKE_WORDS();
+
+		return PERL_QUOTE;
+	}
+
+
+	public IElementType processQuoteLikeWord()
+	{
+		CharSequence currentToken = yytext();
+
+		for( int i = 0; i < currentToken.length(); i++ )
+		{
+			if( currentToken.charAt(i) == charCloser )
+			{
+				yypushback(currentToken.length() - i);
+				yybegin_LEX_QUOTE_LIKE_LIST_CLOSER();
+
+				return i == 0 ? null: PERL_STRING_CONTENT;
+			}
+		}
+		return PERL_STRING_CONTENT;
+	}
 
 	/**
 	 *  Multiline part <<'smth'

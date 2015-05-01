@@ -30,13 +30,9 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 
 /*
 http://perldoc.perl.org/perlop.html#Quote-Like-Operators
-q qq qx
-qw
 // regexp
 m qr {}
 s tr y {}{}
-<>
-//
 */
 
 
@@ -66,6 +62,7 @@ NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
 WHITE_SPACE_LINE = {WHITE_SPACE}*{NEW_LINE}?
 EMPTY_SPACE = [ \t\f\r\n]
+WORD = [^ \t\f\r\n]+
 
 CHAR_SEMI       = ;
 CHAR_ANY        = .|{NEW_LINE}
@@ -110,9 +107,10 @@ VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
 DX_STRING        = \`[^\`\n\r]*\`
 DQ_STRING        = \"[^\"\n\r]*\"
 SQ_STRING        = \'[^\'\n\r]*\'
-QUOTE_LIKE_STRING = "qq" | "qx" | "q"
 
-FUNCTION_SPECIAL = "sort" | "grep" | "keys" | "values" | "map" | "qw" | {QUOTE_LIKE_STRING}
+QUOTE_LIKE_STRING = "qq" | "qx" | "q"
+QUOTE_LIKE_LIST = "qw"
+FUNCTION_SPECIAL = "sort" | "grep" | "keys" | "values" | "map" | "qw" | {QUOTE_LIKE_STRING}| {QUOTE_LIKE_LIST}
 
 PERL_LABEL = {ALFANUM}+ ':'
 
@@ -132,7 +130,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 %state LEX_MULTILINE_WAITING
 %xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
 
-%state LEX_PACKAGE_USE, LEX_PACKAGE_USE_PARAMS, LEX_PACKAGE_USE_VERSION
+%state LEX_PACKAGE_USE, LEX_PACKAGE_USE_VERSION
 %state LEX_REQUIRE
 
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
@@ -140,6 +138,13 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     public void yybegin_LEX_QUOTE_LIKE_CHARS(){yybegin(LEX_QUOTE_LIKE_CHARS);}
     public void yybegin_LEX_QUOTE_LIKE_OPENER(){yybegin(LEX_QUOTE_LIKE_OPENER);}
     public void yybegin_LEX_QUOTE_LIKE_CLOSER(){yybegin(LEX_QUOTE_LIKE_CLOSER);}
+%}
+
+%xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS, LEX_QUOTE_LIKE_LIST_CLOSER
+%{
+    public void yybegin_LEX_QUOTE_LIKE_WORDS(){yybegin(LEX_QUOTE_LIKE_WORDS);}
+    public void yybegin_LEX_QUOTE_LIKE_LIST_OPENER(){yybegin(LEX_QUOTE_LIKE_LIST_OPENER);}
+    public void yybegin_LEX_QUOTE_LIKE_LIST_CLOSER(){yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);}
 %}
 
 %state LEX_FUNCTION_DEFINITION
@@ -168,6 +173,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     "package"       {yybegin(LEX_PACKAGE_DEFINITION); return PerlFunctionUtil.getFunctionType(yytext().toString());}
 }
 
+// qq qx q
 <LEX_QUOTE_LIKE_OPENER>{
     {EMPTY_SPACE}+  {return processQuoteLikeStringSpace();}
     .   {
@@ -188,6 +194,31 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 }
 
 <LEX_QUOTE_LIKE_CLOSER>{
+    .   { yybegin(YYINITIAL); return PERL_QUOTE; }
+}
+
+// qw ()
+<LEX_QUOTE_LIKE_LIST_OPENER>{
+    {EMPTY_SPACE}+  {return processQuoteLikeListSpace();}
+    .   {
+            IElementType type = processQuoteLikeListQuote();
+            if( type == null ) // disallowed sharp
+                break;
+            return type;
+        }
+}
+
+<LEX_QUOTE_LIKE_WORDS>{
+    {EMPTY_SPACE}+ {return processQuoteLikeListSpace(); }
+    {WORD}   {
+          IElementType tokenType = processQuoteLikeWord();
+          if( tokenType != null )
+                return tokenType;
+          break;
+        }
+}
+
+<LEX_QUOTE_LIKE_LIST_CLOSER>{
     .   { yybegin(YYINITIAL); return PERL_QUOTE; }
 }
 
@@ -231,6 +262,8 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     .*  {yybegin(YYINITIAL);return PERL_MULTILINE_MARKER_END;}
 }
 
+///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
+
 <LEX_PACKAGE_DEFINITION>{
     {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
     {PACKAGE_NAME}      {yybegin(LEX_PACKAGE_DEFINITION_VERSION); return PERL_PACKAGE;}
@@ -257,7 +290,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 /////////////////////////////////////////// USE/NO ... /////////////////////////////////////////////////////////////////
 <LEX_PACKAGE_USE,LEX_PACKAGE_USE_VERSION>{
     {PERL_VERSION}  {
-        yybegin(LEX_PACKAGE_USE_PARAMS);
+        yybegin(YYINITIAL);
         return PERL_VERSION;
     }
 }
@@ -270,14 +303,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 }
 <LEX_PACKAGE_USE_VERSION>
 {
-    {ALFANUM}+  {
-        yybegin(LEX_PACKAGE_USE_PARAMS);
-        return PERL_STRING;
-    }
-}
-<LEX_PACKAGE_USE_PARAMS>
-{
-    {ALFANUM}+  {return PERL_STRING;}
+    .   {yypushback(1); yybegin(YYINITIAL); break;}
 }
 /////////////////////////////////////////// REQUIRE ... ////////////////////////////////////////////////////////////////
 
@@ -343,10 +369,11 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 "$" {return PERL_SIGIL_SCALAR;}
 
 {QUOTE_LIKE_STRING} {return processQuoteLikeStringOpener();}
+{QUOTE_LIKE_LIST} {return processQuoteLikeListOpener();}
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 {PERL_LABEL}    { yypushback(1); return PERL_LABEL;}
-{FUNCTION_NAME} { return PERL_FUNCTION;}
+{FUNCTION_NAME} { return PERL_FUNCTION;}    // actually this is a bareword, but i guess we disallow them
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }
