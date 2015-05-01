@@ -42,11 +42,11 @@ s tr y {}{}
     public void setTokenStart(int position){zzCurrentPos = zzStartRead = position;}
     public int getNextTokenStart(){ return zzMarkedPos;}
     public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
+    public void setState(int newState){ zzLexicalState = newState; }
 
     public void yybegin_YYINITIAL(){yybegin(YYINITIAL);}
-    public void yybegin_LEX_MULTILINE(){yybegin(LEX_MULTILINE);}
-    public void yybegin_LEX_MULTILINE_TOKEN(){yybegin(LEX_MULTILINE_TOKEN);}
-    public void yybegin_LEX_MULTILINE_WAITING(){yybegin(LEX_MULTILINE_WAITING);}
+
+
     public void yybegin_LEX_EOF(){yybegin(LEX_EOF);}
     public void yybegin_LEX_POD(){yybegin(LEX_POD);}
 
@@ -60,72 +60,53 @@ s tr y {}{}
 */
 NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
-WHITE_SPACE_LINE = {WHITE_SPACE}*{NEW_LINE}?
+//EMPTY_LINE = {WHITE_SPACE}*{NEW_LINE}?
 EMPTY_SPACE = [ \t\f\r\n]
-WORD = [^ \t\f\r\n]+
+BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
+ANYWORD = [^ \t\f\r\n]
 
-CHAR_SEMI       = ;
 CHAR_ANY        = .|{NEW_LINE}
-ALFANUM         = [a-zA-Z0-9_]
-BAREWORD        = [a-zA-Z_]{ALFANUM}+
-THE_END         = __END__
-THE_DATA        = __DATA__
 LINE            = .*
 FULL_LINE       = .*{NEW_LINE}?
-COMMA           = "," | "=>"
 QUOTE           = "\"" | "'" | "`"
+END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
-PERL_OPERATORS = "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists"
+PERL_VERSION_CHUNK = [0-9][0-9_]*
+PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
+NUMBER = [0-9_]+( "." [0-9_]+ )?
 
-MULTILINE_MARKER = [^\"\'\s\n\r ]+
-MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
-MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{MULTILINE_MARKER}\"
+THE_END         = __END__
+THE_DATA        = __DATA__
+
+PERL_OPERATORS = "," | "->" | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists"
+
+MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{BAREWORD}\'
+MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{BAREWORD}\"
+MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{BAREWORD}\`
 MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{BAREWORD}
-MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{MULTILINE_MARKER}\`
 
 POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
 POD_CLOSE       = \="cut"{FULL_LINE}
-
-DEPACKAGE = "::"
-DEREFERENCE = "->"
-
-PACKAGE_NAME = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)*
-
-PACKAGE_STATIC_CALL = ({ALFANUM}+{DEPACKAGE})+
-PACKAGE_INSTANCE_CALL = {ALFANUM}+ ({DEPACKAGE}{ALFANUM}+)* {DEREFERENCE}
-
-FUNCTION_NAME = {ALFANUM}+
-
-// @todo temp solution for package variables. need to implement smart lexing
-VAR_SCALAR = [$]{PACKAGE_NAME}?{ALFANUM}+
-VAR_ARRAY = [@]{PACKAGE_NAME}?{ALFANUM}+
-VAR_HASH = [%]{PACKAGE_NAME}?{ALFANUM}+
-VAR_GLOB = [*]{PACKAGE_NAME}?{ALFANUM}+
 
 VAR_SCALAR_SPECIAL = "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$^TAINT" | "$^UTF8LOCALE" | "$^RE_TRIE_MAXBUF" | "$^CHILD_ERROR_NATIVE" | "$^ENCODING" | "$^OPEN" | "$^RE_DEBUG_FLAGS" | "$^A" | "$^C" | "$^T" | "$^S" | "$^V" | "$^W" | "$^X" | "$^D" | "$^E" | "$^F" | "$^H" | "$^I" | "$^L" | "$^M" | "$^N" | "$^O" | "$^P" | "$^R" | "$^H" | "$!" | "$\"" | "$#" | "$$" | "$%" | "$&" | "$'" | "$(" | "$)" | "$*" | "$+" | "$," | "$_" | "$-" | "$`" | "$." | "$a" | "$/" | "$0" | "$:" | "$;" | "$<" | "$=" | "$>" | "$?" | "$@" | "$[" | "$\"" | "$]" | "$|" | "$^" | "$~" | "$+" | "$-" | "$_" | "$!" | "$+" | "$-"
 VAR_ARRAY_SPECIAL = "@_" | "@!" | "@+" | "@-" | "@^H"
 VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
 
-DX_STRING        = \`[^\`\n\r]*\`
-DQ_STRING        = \"[^\"\n\r]*\"
-SQ_STRING        = \'[^\'\n\r]*\'
+VAR_SCALAR = "$"{BAREWORD}("::"{BAREWORD})*
+VAR_HASH = "%"{BAREWORD}("::"{BAREWORD})*
+VAR_ARRAY = "@"{BAREWORD}("::"{BAREWORD})*
+VAR_GLOB = "*"{BAREWORD}("::"{BAREWORD})*
 
-QUOTE_LIKE_STRING = "qq" | "qx" | "q"
-QUOTE_LIKE_LIST = "qw"
-FUNCTION_SPECIAL = "sort" | "grep" | "keys" | "values" | "map" | "qw" | {QUOTE_LIKE_STRING}| {QUOTE_LIKE_LIST}
+QUOTE_FUNCTIONS = "qq" | "qx" | "q"
+QUOTE_LIST_FUNCTIONS = "qw"
+LIST_FUNCTIONS = "sort" | "grep" | "keys" | "values" | "map" | {QUOTE_LIST_FUNCTIONS}
+CONTROL_FUNCTIONS = "for" | "foreach" | "do" | "while" | "break" | "continule" | "redo" | "last" | "next" | "exit" | "return"
+CONDITION_FUNCTIONS = "if" | "elsif" | "else" | "until"
+DEFINITION_FUNCTIONS = "my" | "local" | "our" | "sub" | "package"
+INCLUDE_FUNCTIONS = "use" | "require" | "do" | "eval"
+FUNCTION_SPECIAL = {INCLUDE_FUNCTIONS} | {DEFINITION_FUNCTIONS} | {CONTROL_FUNCTIONS} | {CONDITION_FUNCTIONS} | {LIST_FUNCTIONS} | {QUOTE_FUNCTIONS}
 
-PERL_LABEL = {ALFANUM}+ ':'
 
-PERL_VERSION_CHUNK = [0-9][0-9_]*
-PERL_VERSION = "v"?{PERL_VERSION_CHUNK}(\.{PERL_VERSION_CHUNK})*
-
-NUMBER = "-"?[0-9_]+(\.[0-9_]+)?
-
-END_OF_LINE_COMMENT = "#" {FULL_LINE}
-
-//%state STRING
-//%state YYINITIAL
-%xstate LEX_PACKAGE_DEFINITION, LEX_PACKAGE_DEFINITION_VERSION, LEX_PACKAGE_DEFINITION_BLOCK
 %xstate LEX_EOF
 %xstate LEX_POD
 
@@ -133,9 +114,11 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 %state LEX_MULTILINE_WAITING
 %xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
-
-%state LEX_PACKAGE_USE, LEX_PACKAGE_USE_VERSION
-%state LEX_REQUIRE
+%{
+    public void yybegin_LEX_MULTILINE(){yybegin(LEX_MULTILINE);}
+    public void yybegin_LEX_MULTILINE_TOKEN(){yybegin(LEX_MULTILINE_TOKEN);}
+    public void yybegin_LEX_MULTILINE_WAITING(){yybegin(LEX_MULTILINE_WAITING);}
+%}
 
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
 %{
@@ -151,15 +134,12 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     public void yybegin_LEX_QUOTE_LIKE_LIST_CLOSER(){yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);}
 %}
 
-%state LEX_FUNCTION_DEFINITION
-%state LEX_DEREFERENCE
 %%
 
 // inclusive states
 {NEW_LINE}   { return processNewLine();}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
-{COMMA}			 {return PERL_COMMA;}
-{CHAR_SEMI}     {return processSemicolon();}
+";"     {return processSemicolon();}
 
 {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 
@@ -167,16 +147,11 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     {THE_END}               {processDataOpener(); break;}
     {THE_DATA}               {processDataOpener(); break;}
     {POD_OPEN}               {processPodOpener();break;}
-
-    "use"			{yybegin(LEX_PACKAGE_USE);return PerlFunctionUtil.getFunctionType(yytext().toString());}
-    "no"			{yybegin(LEX_PACKAGE_USE); return PerlFunctionUtil.getFunctionType(yytext().toString());}
-    "require"	    {yybegin(LEX_REQUIRE); return PerlFunctionUtil.getFunctionType(yytext().toString());}
-
-    "sub"			{yybegin(LEX_FUNCTION_DEFINITION); return PerlFunctionUtil.getFunctionType(yytext().toString());}
-    "package"       {yybegin(LEX_PACKAGE_DEFINITION); return PerlFunctionUtil.getFunctionType(yytext().toString());}
 }
 
-// qq qx q
+/**
+    qq qx q
+**/
 <LEX_QUOTE_LIKE_OPENER>{
     {EMPTY_SPACE}+  {return processQuoteLikeStringSpace();}
     .   {
@@ -197,10 +172,12 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 }
 
 <LEX_QUOTE_LIKE_CLOSER>{
-    .   { yybegin(YYINITIAL); return PERL_QUOTE; }
+    .   { popState(); return PERL_QUOTE; }
 }
 
-// qw ()
+/**
+    qw ()
+**/
 <LEX_QUOTE_LIKE_LIST_OPENER>{
     {EMPTY_SPACE}+  {return processQuoteLikeListSpace();}
     .   {
@@ -213,7 +190,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 <LEX_QUOTE_LIKE_WORDS>{
     {EMPTY_SPACE}+ {return processQuoteLikeListSpace(); }
-    {WORD}   {
+    {ANYWORD}   {
           IElementType tokenType = processQuoteLikeWord();
           if( tokenType != null )
                 return tokenType;
@@ -222,9 +199,12 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 }
 
 <LEX_QUOTE_LIKE_LIST_CLOSER>{
-    .   { yybegin(YYINITIAL); return PERL_QUOTE; }
+    .   { popState(); return PERL_QUOTE; }
 }
 
+/**
+    __DATA__ and __END__ eof seeker
+**/
 <LEX_EOF>
 {
     {FULL_LINE} {
@@ -233,6 +213,10 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
         break;
     }
 }
+
+/**
+    pod section
+**/
 <LEX_POD>
 {
     {POD_CLOSE} { return endPodBlock(); }
@@ -244,6 +228,10 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
         break;
     }
 }
+
+/**
+    Multiline string
+**/
 
 <LEX_MULTILINE>{
     {LINE}  {
@@ -262,102 +250,30 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
     }
 }
 <LEX_MULTILINE_TOKEN>{
-    .*  {yybegin(YYINITIAL);return PERL_MULTILINE_MARKER_END;}
+    .*  {yybegin(YYINITIAL);return PERL_STRING_MULTILINE_END;}
 }
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
-
-<LEX_PACKAGE_DEFINITION>{
-    {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
-    {PACKAGE_NAME}      {yybegin(LEX_PACKAGE_DEFINITION_VERSION); return PERL_PACKAGE;}
-    .   {yybegin(YYINITIAL);  return TokenType.BAD_CHARACTER;}
-}
-
-<LEX_PACKAGE_DEFINITION_VERSION>{
-    ";"              {return processSemicolon();}
-    "{"              {yybegin(YYINITIAL); return PERL_LBRACE;}
-    {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
-    {PERL_VERSION}      {yybegin(LEX_PACKAGE_DEFINITION_BLOCK); return PERL_VERSION;}
-    .   {
-        yybegin(YYINITIAL);
-        return TokenType.BAD_CHARACTER;}
-}
-
-<LEX_PACKAGE_DEFINITION_BLOCK>{
-    ";"              {return processSemicolon();}
-    {WHITE_SPACE_LINE}  {return TokenType.WHITE_SPACE;}
-    "{"      {yybegin(YYINITIAL); return PERL_LBRACE;}
-    .   {yybegin(YYINITIAL); return TokenType.BAD_CHARACTER;}
-}
-
-/////////////////////////////////////////// USE/NO ... /////////////////////////////////////////////////////////////////
-<LEX_PACKAGE_USE,LEX_PACKAGE_USE_VERSION>{
-    {PERL_VERSION}  {
-        yybegin(YYINITIAL);
-        return PERL_VERSION;
-    }
-}
-<LEX_PACKAGE_USE>{
-    {PACKAGE_NAME}    {
-        yybegin(LEX_PACKAGE_USE_VERSION);
-        return PerlPackageUtil.getPackageType(yytext().toString());
-    }
-    .   {yypushback(1); yybegin(YYINITIAL); break;}
-}
-<LEX_PACKAGE_USE_VERSION>
-{
-    .   {yypushback(1); yybegin(YYINITIAL); break;}
-}
-/////////////////////////////////////////// REQUIRE ... ////////////////////////////////////////////////////////////////
-
-<LEX_REQUIRE>
-{
-    {PERL_VERSION}  {
-        yybegin(YYINITIAL);
-        return PERL_VERSION;
-    }
-    {PACKAGE_NAME}    {
-        yybegin(YYINITIAL);
-        return PerlPackageUtil.getPackageType(yytext().toString());
-    }
-    {DQ_STRING}     {return PERL_STRING;}
-    {SQ_STRING}     {return PERL_STRING;}
-    .   {yypushback(1);yybegin(YYINITIAL);break;}
-}
-
-/////////////////////////////////////////////// sub ... ////////////////////////////////////////////////////////////////
-<LEX_FUNCTION_DEFINITION>{
-    {FUNCTION_NAME}    {yybegin(YYINITIAL);return PERL_FUNCTION;}
-}
-
-{PACKAGE_STATIC_CALL} {
-    yypushback(2);
-    return PerlPackageUtil.getPackageType(yytext().toString());
-}
-
-{PACKAGE_INSTANCE_CALL} {
-    yypushback(2);
-    return PERL_PACKAGE;
-}
 
 {MULTILINE_OPENER_SQ}   {return processMultilineOpener();}
 {MULTILINE_OPENER_DQ}   {return processMultilineOpener();}
 {MULTILINE_OPENER_DQ_BARE}   {return processMultilineOpener();}
 {MULTILINE_OPENER_DX}   {return processMultilineOpener();}
 
+{QUOTE}         {return processStringOpener();}
+
+"::"            {return PERL_DEPACKAGE;}
+"=>"            {return PERL_ARROW_COMMA; }
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
 "["             {return PERL_LBRACK;}
 "]"             {return PERL_RBRACK;}
 "("             {return PERL_LPAREN;}
 ")"             {return PERL_RPAREN;}
-{DEREFERENCE}	{yybegin(LEX_DEREFERENCE);return PERL_DEREFERENCE;}
-{DEPACKAGE}		{return PERL_DEPACKAGE;}
 
-{DQ_STRING}     {return PERL_STRING;}
-{DX_STRING}     {return PERL_STRING;}
-{SQ_STRING}     {return PERL_STRING;}
+
 {NUMBER}        {return PERL_NUMBER;}
+{PERL_VERSION}  {return PERL_NUMBER_VERSION;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 {VAR_SCALAR_SPECIAL} {return PERL_SCALAR;}
@@ -371,20 +287,17 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 "%" {return PERL_SIGIL_HASH;}
 "$" {return PERL_SIGIL_SCALAR;}
 
-{QUOTE_LIKE_STRING} {return processQuoteLikeStringOpener();}
-{QUOTE_LIKE_LIST} {return processQuoteLikeListOpener();}
+{QUOTE_FUNCTIONS} {return processQuoteLikeStringOpener();}
+{QUOTE_LIST_FUNCTIONS} {return processQuoteLikeListOpener();}
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
-{PERL_LABEL}    { yypushback(1); return PERL_LABEL;}
-
-
 
 <LEX_BAREWORD_STRING>
 {
-    {BAREWORD} { return LEX_STRING_CONTENT;}
+    {BAREWORD} { yybegin(YYINITIAL); return PERL_STRING_CONTENT;}
 }
 
-{BAREWORD} { return PERL_FUNCTION;}    // actually this is a bareword, but i guess we disallow them
+{BAREWORD} { return PERL_BAREWORD;}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

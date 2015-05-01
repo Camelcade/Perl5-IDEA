@@ -17,6 +17,9 @@ public interface PerlFileItem extends PsiElement {
   PerlEval getEval();
 
   @Nullable
+  PerlExpr getExpr();
+
+  @Nullable
   PerlForBlock getForBlock();
 
   @Nullable

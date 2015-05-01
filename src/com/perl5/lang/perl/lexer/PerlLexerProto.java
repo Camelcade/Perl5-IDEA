@@ -4,6 +4,7 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +16,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	// JFlex generated methods
 	public abstract CharSequence yytext();
 	public abstract void yypushback(int number);
+	public abstract void setState(int newstate);
 
 	// My JFlex upgrades
 	public abstract int getNextTokenStart();
@@ -30,6 +32,21 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public abstract void yybegin_LEX_POD();
 
 	public abstract boolean yystate_LEX_MULTILINE_WAITING();
+
+	/**
+	 *  States stack
+ 	 **/
+	private final Stack<Integer> stateStack = new Stack<Integer>();
+
+	protected void pushState()
+	{
+		stateStack.push(yystate());
+	}
+
+	protected void popState()
+	{
+		setState(stateStack.pop());
+	}
 
 	/**
 	 *  Quote-like common part
@@ -65,6 +82,8 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public IElementType processQuoteLikeStringOpener()
 	{
 		allowSharp = true;
+		isEscaped = false;
+		pushState();
 		yybegin_LEX_QUOTE_LIKE_OPENER();
 		return PERL_KEYWORD;
 	}
@@ -119,6 +138,19 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	}
 
 	/**
+	 *  Strings handler
+	 */
+	protected IElementType processStringOpener()
+	{
+		isEscaped = false;
+		charOpener = charCloser = yytext().charAt(0);
+		stringContentStart = getTokenStart() + 1;
+		pushState();
+		yybegin_LEX_QUOTE_LIKE_CHARS();
+		return PERL_QUOTE;
+	}
+
+	/**
 	 *  Quote-like list procesors
 	 **/
 
@@ -129,6 +161,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public IElementType processQuoteLikeListOpener()
 	{
 		allowSharp = true;
+		pushState();
 		yybegin_LEX_QUOTE_LIKE_LIST_OPENER();
 		return PERL_KEYWORD;
 	}
@@ -209,6 +242,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		return PERL_COMMENT_BLOCK;
 	}
 
+
 	/**
 	 *  Pod block-related code
 	 */
@@ -249,22 +283,12 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		if (m.matches())
 		{
 			multilineMarker = m.group(1);
-		} else // shouldn't happen
-		{
-			throw new Error("Could not match opening multiline marker: " + openToken);
 		}
+
 		yybegin_LEX_MULTILINE_WAITING();
+		yypushback(openToken.length() - 2);
 
-		IElementType markerType = PERL_MULTILINE_MARKER;
-
-		if( multilineMarker.equals("HTML"))
-			markerType = PERL_MULTILINE_MARKER_HTML;
-		else if( multilineMarker.equals("XML"))
-			markerType = PERL_MULTILINE_MARKER_XML;
-		else if( multilineMarker.equals("XHTML"))
-			markerType = PERL_MULTILINE_MARKER_XHTML;
-
-		return markerType;
+		return PERL_OPERATOR;
 	}
 
 	/**

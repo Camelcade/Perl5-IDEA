@@ -22,10 +22,4 @@ public class PerlVariableDefinitionArgumentsImpl extends ASTWrapperPsiElement im
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PerlPackageBare getPackageBare() {
-    return findChildByClass(PerlPackageBare.class);
-  }
-
 }

@@ -10,27 +10,21 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlPackageBareImpl extends PerlNamedElementImpl implements PerlPackageBare {
+public class PerlLastExprImpl extends PerlExprImpl implements PerlLastExpr {
 
-  public PerlPackageBareImpl(ASTNode node) {
+  public PerlLastExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitPackageBare(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitLastExpr(this);
     else super.accept(visitor);
   }
 
-  public String getName() {
-    return PerlPsiImpUtil.getName(this);
-  }
-
-  public PsiElement setName(String newName) {
-    return PerlPsiImpUtil.setName(this, newName);
-  }
-
-  public PsiElement getNameIdentifier() {
-    return PerlPsiImpUtil.getNameIdentifier(this);
+  @Override
+  @Nullable
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
 }

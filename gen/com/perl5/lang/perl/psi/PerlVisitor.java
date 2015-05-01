@@ -35,10 +35,6 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitCodeLabel(@NotNull PerlCodeLabel o) {
-    visitPsiElement(o);
-  }
-
   public void visitCodeLine(@NotNull PerlCodeLine o) {
     visitPsiElement(o);
   }
@@ -96,6 +92,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitKeysExpr(@NotNull PerlKeysExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitLastExpr(@NotNull PerlLastExpr o) {
     visitExpr(o);
   }
 
@@ -223,15 +223,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPackageBare(@NotNull PerlPackageBare o) {
-    visitNamedElement(o);
-  }
-
   public void visitPackageDefinition(@NotNull PerlPackageDefinition o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPackageFunction(@NotNull PerlPackageFunction o) {
     visitPsiElement(o);
   }
 
@@ -255,7 +247,19 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPerlFunction(@NotNull PerlPerlFunction o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlVersion(@NotNull PerlPerlVersion o) {
+    visitPsiElement(o);
+  }
+
   public void visitQwExpr(@NotNull PerlQwExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitReturnExpr(@NotNull PerlReturnExpr o) {
     visitExpr(o);
   }
 
@@ -272,10 +276,6 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitSortOpArgs(@NotNull PerlSortOpArgs o) {
-    visitPsiElement(o);
-  }
-
-  public void visitSubBlock(@NotNull PerlSubBlock o) {
     visitPsiElement(o);
   }
 
@@ -300,10 +300,6 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitWhileBlock(@NotNull PerlWhileBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitNamedElement(@NotNull PerlNamedElement o) {
     visitPsiElement(o);
   }
 

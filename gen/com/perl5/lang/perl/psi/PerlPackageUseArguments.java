@@ -11,6 +11,6 @@ public interface PerlPackageUseArguments extends PsiElement {
   PerlExpr getExpr();
 
   @Nullable
-  PerlPackageBare getPackageBare();
+  PerlPerlVersion getPerlVersion();
 
 }

@@ -20,6 +20,9 @@ public interface PerlPackageDefinition extends PsiElement {
   List<PerlEval> getEvalList();
 
   @NotNull
+  List<PerlExpr> getExprList();
+
+  @NotNull
   List<PerlForBlock> getForBlockList();
 
   @NotNull
@@ -29,9 +32,6 @@ public interface PerlPackageDefinition extends PsiElement {
   List<PerlIfBlock> getIfBlockList();
 
   @NotNull
-  PerlPackageBare getPackageBare();
-
-  @NotNull
   List<PerlPackageNo> getPackageNoList();
 
   @NotNull
@@ -39,6 +39,9 @@ public interface PerlPackageDefinition extends PsiElement {
 
   @NotNull
   List<PerlPackageUse> getPackageUseList();
+
+  @Nullable
+  PerlPerlVersion getPerlVersion();
 
   @NotNull
   List<PerlSubBlockNamed> getSubBlockNamedList();

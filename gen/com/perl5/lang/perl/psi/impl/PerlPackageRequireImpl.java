@@ -24,8 +24,8 @@ public class PerlPackageRequireImpl extends ASTWrapperPsiElement implements Perl
 
   @Override
   @Nullable
-  public PerlPackageBare getPackageBare() {
-    return findChildByClass(PerlPackageBare.class);
+  public PerlPerlVersion getPerlVersion() {
+    return findChildByClass(PerlPerlVersion.class);
   }
 
 }

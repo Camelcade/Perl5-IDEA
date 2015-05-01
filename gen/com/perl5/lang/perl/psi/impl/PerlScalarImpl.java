@@ -28,4 +28,10 @@ public class PerlScalarImpl extends ASTWrapperPsiElement implements PerlScalar {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
+  @Override
+  @Nullable
+  public PerlSubBlockAnon getSubBlockAnon() {
+    return findChildByClass(PerlSubBlockAnon.class);
+  }
+
 }

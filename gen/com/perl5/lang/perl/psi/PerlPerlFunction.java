@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlPackageFunction extends PsiElement {
-
-  @NotNull
-  PerlPackageBare getPackageBare();
+public interface PerlPerlFunction extends PsiElement {
 
 }

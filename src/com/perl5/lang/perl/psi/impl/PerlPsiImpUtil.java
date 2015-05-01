@@ -5,13 +5,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlPackageBare;
 
 /**
  * Created by hurricup on 26.04.2015.
  */
 public class PerlPsiImpUtil implements PerlElementTypes
 {
+/*
 	public static String getName(PerlPackageBare element) {
 		ASTNode keyNode = element.getNode().findChildByType(PERL_PACKAGE);
 		if (keyNode != null) {
@@ -39,4 +39,5 @@ public class PerlPsiImpUtil implements PerlElementTypes
 			return null;
 		}
 	}
+*/
 }

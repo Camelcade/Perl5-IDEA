@@ -30,8 +30,8 @@ public class PerlPackageUseArgumentsImpl extends ASTWrapperPsiElement implements
 
   @Override
   @Nullable
-  public PerlPackageBare getPackageBare() {
-    return findChildByClass(PerlPackageBare.class);
+  public PerlPerlVersion getPerlVersion() {
+    return findChildByClass(PerlPerlVersion.class);
   }
 
 }

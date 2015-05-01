@@ -11,14 +11,14 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlCodeLabelImpl extends ASTWrapperPsiElement implements PerlCodeLabel {
+public class PerlPerlVersionImpl extends ASTWrapperPsiElement implements PerlPerlVersion {
 
-  public PerlCodeLabelImpl(ASTNode node) {
+  public PerlPerlVersionImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCodeLabel(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitPerlVersion(this);
     else super.accept(visitor);
   }
 

@@ -8,9 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlSubBlockNamedImpl extends PerlFunctionDefinitionNamedUtil implements PerlSubBlockNamed {
+public class PerlSubBlockNamedImpl extends ASTWrapperPsiElement implements PerlSubBlockNamed {
 
   public PerlSubBlockNamedImpl(ASTNode node) {
     super(node);
@@ -25,6 +26,12 @@ public class PerlSubBlockNamedImpl extends PerlFunctionDefinitionNamedUtil imple
   @NotNull
   public PerlBlock getBlock() {
     return findNotNullChildByClass(PerlBlock.class);
+  }
+
+  @Override
+  @NotNull
+  public PerlPerlFunction getPerlFunction() {
+    return findNotNullChildByClass(PerlPerlFunction.class);
   }
 
 }

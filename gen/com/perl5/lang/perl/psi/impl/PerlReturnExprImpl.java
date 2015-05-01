@@ -8,30 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlSubBlockImpl extends ASTWrapperPsiElement implements PerlSubBlock {
+public class PerlReturnExprImpl extends PerlExprImpl implements PerlReturnExpr {
 
-  public PerlSubBlockImpl(ASTNode node) {
+  public PerlReturnExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubBlock(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitReturnExpr(this);
     else super.accept(visitor);
   }
 
   @Override
   @Nullable
-  public PerlSubBlockAnon getSubBlockAnon() {
-    return findChildByClass(PerlSubBlockAnon.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlSubBlockNamed getSubBlockNamed() {
-    return findChildByClass(PerlSubBlockNamed.class);
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
 }

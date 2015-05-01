@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlObjectMethod extends PsiElement {
 
   @NotNull
+  PerlPerlFunction getPerlFunction();
+
+  @NotNull
   PerlScalar getScalar();
 
 }

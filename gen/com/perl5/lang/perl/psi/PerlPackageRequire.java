@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlPackageRequire extends PsiElement {
 
   @Nullable
-  PerlPackageBare getPackageBare();
+  PerlPerlVersion getPerlVersion();
 
 }

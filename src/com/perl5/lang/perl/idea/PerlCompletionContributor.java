@@ -114,6 +114,7 @@ public class PerlCompletionContributor extends CompletionContributor
 					}
 				}
 		);
+/*
 		extend(
 				CompletionType.BASIC,
 				PlatformPatterns.psiElement(PerlElementTypes.PERL_PACKAGE).withLanguage(PerlLanguage.INSTANCE),
@@ -137,6 +138,7 @@ public class PerlCompletionContributor extends CompletionContributor
 					}
 				}
 		);
+*/
 	}
 
 	@Override

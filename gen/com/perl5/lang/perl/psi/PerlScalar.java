@@ -10,4 +10,7 @@ public interface PerlScalar extends PsiElement {
   @NotNull
   List<PerlExpr> getExprList();
 
+  @Nullable
+  PerlSubBlockAnon getSubBlockAnon();
+
 }

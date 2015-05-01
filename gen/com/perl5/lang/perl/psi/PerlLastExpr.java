@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlPackageBare extends PerlNamedElement {
+public interface PerlLastExpr extends PerlExpr {
 
-  String getName();
-
-  PsiElement setName(String newName);
-
-  PsiElement getNameIdentifier();
+  @Nullable
+  PerlExpr getExpr();
 
 }

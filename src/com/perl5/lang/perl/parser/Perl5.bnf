@@ -3,6 +3,8 @@
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
+//  generate=[tokens="yes" psi="yes" tokenAccessors="yes"]
+
   psiClassPrefix="Perl"
   psiImplClassSuffix="Impl"
   psiPackage="com.perl5.lang.perl.psi"
@@ -11,6 +13,12 @@
   elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlElementTypes"
   elementTypeClass="com.perl5.lang.perl.PerlElementType"
   tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
+
+  parserUtilClass="com.perl5.lang.perl.parser.PerlParserUitl"
+  psiImplUtilClass="com.perl5.lang.perl.psi.impl.PerlPsiImpUtil"
+
+  //elementTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
+//  tokenTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
 
   tokens=[
     PERL_COMMENT="PERL_COMMENT"
@@ -21,34 +29,30 @@
     PERL_SIGIL_HASH="%"
     PERL_SIGIL_SCALAR="$"
 
-    PERL_MULTILINE_MARKER_END="PERL_MULTILINE_MARKER_END"
-    PERL_MULTILINE_MARKER="PERL_MULTILINE_MARKER"
-    PERL_MULTILINE_MARKER_HTML="PERL_MULTILINE_MARKER_HTML"
-    PERL_MULTILINE_MARKER_XHTML="PERL_MULTILINE_MARKER_XHTML"
-    PERL_MULTILINE_MARKER_XML="PERL_MULTILINE_MARKER_XML"
-
-    PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
-
-    PERL_LABEL="PERL_LABEL"
-
-    PERL_VERSION="PERL_VERSION"
-    PERL_NUMBER="PERL_NUMBER"
     PERL_SCALAR="PERL_SCALAR"
     PERL_ARRAY="PERL_ARRAY"
     PERL_HASH="PERL_HASH"
     PERL_GLOB="PERL_GLOB"
 
+    PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
+    PERL_STRING_MULTILINE_END="PERL_STRING_MULTILINE_END"
+
+    PERL_NUMBER_VERSION="PERL_NUMBER_VERSION"
+    PERL_NUMBER="PERL_NUMBER"
+
+    PERL_PACKAGE_BARE="PACKAGE_BARE"
+
     PERL_KEYWORD="PERL_KEYWORD"
-    PERL_FUNCTION="PERL_FUNCTION"
-    PERL_PACKAGE="PERL_PACKAGE"
     PERL_OPERATOR="PERL_OPERATOR"
 
     PERL_STRING="PERL_STRING"
     PERL_STRING_CONTENT="PERL_STRING_CONTENT"
 
-    PERL_DEREFERENCE='->'
+    PERL_PACKAGE="PERL_PACKAGE"
+    PERL_BAREWORD="PERL_BAREWORD"
+
+    PERL_ARROW_COMMA='=>'
     PERL_DEPACKAGE='::'
-    PERL_COMMA=','
     PERL_LBRACK='['
     PERL_RBRACK=']'
     PERL_LPAREN='('
@@ -60,9 +64,7 @@
   ]
 
     extends(".*expr")=expr
-
-    psiImplUtilClass="com.perl5.lang.perl.psi.impl.PerlPsiImpUtil"
-}
+ }
 
 perlFile ::= file_item*
 
@@ -70,8 +72,8 @@ block ::= '{' (file_item + | expr )? '}';
 file_item ::= package_definition | package_element
 
 private package_element ::=
-    block_element
-    | line_element
+    block_element PERL_SEMI ?
+    | line_element PERL_SEMI
 
 private block_element ::=
     eval
@@ -87,41 +89,47 @@ private line_element ::=
     package_use
     | package_no
     | package_require
+    | return_expr
+    | last_expr
     | code_line
 
-
 // package
-package_definition ::= 'package' package_bare PERL_VERSION ? (block | ';' package_element * )
+package_definition ::= 'package' perl_known_package perl_version ? (block | PERL_SEMI package_element * )
 
-// sub
-sub_block ::= sub_block_named | sub_block_anon
 
-sub_block_named ::= 'sub' PERL_FUNCTION block ';' ? {
-    mixin="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
-}
-sub_block_anon ::= 'sub' block ';'
+sub_block_named ::= 'sub' perl_function block
+//{
+//    mixin="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
+//}
+sub_block_anon ::= 'sub' block
 
 // variable definition
 variable_definition ::= my_definition | our_definition | local_definition
 my_definition ::= 'my' variable_definition_arguments
 our_definition ::= 'our' variable_definition_arguments
 local_definition ::= 'local' variable_definition_arguments
-variable_definition_arguments ::= ( package_bare ? variable | '(' variables ')' )
+variable_definition_arguments ::= ( perl_known_package ? variable | '(' variables ')' )
 
 // use and no
-package_use ::= 'use' package_use_arguments ';'
-package_no ::= 'no' package_use_arguments ';'
+package_use ::= 'use' package_use_arguments
+package_no ::= 'no' package_use_arguments
 
 package_use_arguments ::=
-    package_bare PERL_VERSION expr ?
-    | package_bare expr ?
-    | PERL_VERSION;
+    perl_known_package perl_version expr ?
+    | perl_known_package expr ?
+    | perl_version;
+
+// return && exit
+return_expr ::= ('return' | 'exit') expr ?
+
+// last && next
+last_expr ::= ('last' | 'next' | 'redo') expr ? // @todo labels
 
 // require
-package_require ::= 'require' (package_bare | PERL_VERSION | string) ';' // multiline string is possible too
+package_require ::= 'require' (perl_known_package | perl_version | string) // multiline string is possible too
 
 // eval
-eval ::= 'eval' (block | scalar) ';'
+eval ::= 'eval' (block | scalar)
 
 // if
 if_postfix ::= ('if' | 'unless') expr
@@ -133,7 +141,7 @@ if_block_else  ::= 'else' block
 // for/foreach
 for_block ::= ('foreach' | 'for') for_block_arguments
 for_block_arguments ::=
-    '(' expr ? ';' expr ? ';' expr ? ')' block
+    '(' expr ? PERL_SEMI expr ? PERL_SEMI expr ? ')' block
      | (variable_definition | variable ) '(' list_expr ')' block ('continue' block ) ?
 
 given_block ::= 'given' block_conditional
@@ -143,7 +151,9 @@ while_block ::= ('until' | 'while' ) block_conditional ('continue' block ) ?
 block_conditional ::= '(' expr ')' block
 block_block ::= block ('continue' block ) ?
 
-code_line ::= expr if_postfix ? ';'
+code_line ::= expr if_postfix ? //{recoverWhile="code_line_recover"}
+
+//code_line_recover ::= !(PERL_RBRACE | PERL_SEMI)
 
 // expression
 expr ::=
@@ -212,13 +222,12 @@ call_rightward ::= calee expr ?
 
 calee ::=
     package_method
-    | package_function
     | object_method
-    | PERL_FUNCTION
+    | perl_package_function
+    | perl_function
 
-package_method ::= package_bare '->' PERL_FUNCTION
-package_function ::= package_bare '::' PERL_FUNCTION
-object_method ::= scalar '->' PERL_FUNCTION
+package_method ::= perl_known_package '->' perl_function
+object_method ::= scalar '->' perl_function
 
 scalar_expr ::=
     scalar
@@ -238,7 +247,7 @@ qw_expr ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 // sort
 sort_expr ::= 'sort' sort_op_args
 sort_op_args ::=
-    PERL_FUNCTION list_expr
+    perl_function list_expr
     | block ? list_expr
 
 // keys && values
@@ -270,37 +279,44 @@ hash ::=
 scalar ::=
     scalar_safe '->'? '[' expr ']'      // array element
     | scalar_safe '->'? '{' expr '}'    // hash element
-    | scalar_safe                       // scalar or deref scalar
     | '[' expr ? ']'                    // anonymous array
     | '{' expr ? '}'                    // anonymous hash
-    | multiline_marker                  // deferred string
-    | string                            // string
-    | PERL_NUMBER                       // raw number
+    | scalar_safe                       // scalar or deref scalar
 
 
-private string ::= PERL_STRING | string_quoted
+private string ::= string_quoted | string_unquoted | PERL_STRING_CONTENT | <<parseBarewordString>>
 private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE  // bareword string should be here
+private string_unquoted ::= PERL_STRING_CONTENT
 
 private scalar_safe ::=
+//    PERL_SIGIL_SCALAR '{' PERL_BAREWORD '}'       // scalar dereference
     PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference
     | PERL_SCALAR                          // scalar as is
+    | multiline_marker                  // deferred string
+    | PERL_NUMBER                       // raw number
+    | string                            // string
+    | sub_block_anon
 
-code_label ::= PERL_LABEL ':'
 
 // Multiline
-multiline_string ::= PERL_STRING_MULTILINE PERL_MULTILINE_MARKER
+multiline_string ::= PERL_STRING_MULTILINE PERL_BAREWORD
 
-private multiline_marker ::= PERL_MULTILINE_MARKER
-    | PERL_MULTILINE_MARKER_HTML
-    | PERL_MULTILINE_MARKER_XHTML
-    | PERL_MULTILINE_MARKER_XML
+perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
+
+private multiline_marker ::= '<<' (string | PERL_BAREWORD)
 
 private variables ::= variable (',' variable ) *
 private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH
 
-// assigning package
-package_bare ::= PERL_PACKAGE  {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
-        implements="com.perl5.lang.perl.psi.PerlNamedElement"
-        methods=[getName setName getNameIdentifier]
-    }
+// custom parsings
+private perl_known_package ::= PERL_PACKAGE_BARE | <<collapsedPackageToken>>
+
+perl_function ::= <<parseBarewordFunction>>
+private perl_package_function ::= <<parsePackageFunctionCall>>
+
+//private package_bare ::= PERL_BAREWORD ( '::' PERL_BAREWORD ) *
+// {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
+//        implements="com.perl5.lang.perl.psi.PerlNamedElement"
+//        methods=[getName setName getNameIdentifier]
+//    }
 

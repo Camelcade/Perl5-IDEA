@@ -11,9 +11,9 @@ public interface PerlCalee extends PsiElement {
   PerlObjectMethod getObjectMethod();
 
   @Nullable
-  PerlPackageFunction getPackageFunction();
+  PerlPackageMethod getPackageMethod();
 
   @Nullable
-  PerlPackageMethod getPackageMethod();
+  PerlPerlFunction getPerlFunction();
 
 }

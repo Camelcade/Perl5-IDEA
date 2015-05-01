@@ -48,6 +48,12 @@ public class PerlPackageDefinitionImpl extends ASTWrapperPsiElement implements P
 
   @Override
   @NotNull
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlForBlock> getForBlockList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlForBlock.class);
   }
@@ -66,12 +72,6 @@ public class PerlPackageDefinitionImpl extends ASTWrapperPsiElement implements P
 
   @Override
   @NotNull
-  public PerlPackageBare getPackageBare() {
-    return findNotNullChildByClass(PerlPackageBare.class);
-  }
-
-  @Override
-  @NotNull
   public List<PerlPackageNo> getPackageNoList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNo.class);
   }
@@ -86,6 +86,12 @@ public class PerlPackageDefinitionImpl extends ASTWrapperPsiElement implements P
   @NotNull
   public List<PerlPackageUse> getPackageUseList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageUse.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPerlVersion getPerlVersion() {
+    return findChildByClass(PerlPerlVersion.class);
   }
 
   @Override

@@ -10,4 +10,7 @@ public interface PerlSubBlockNamed extends PsiElement {
   @NotNull
   PerlBlock getBlock();
 
+  @NotNull
+  PerlPerlFunction getPerlFunction();
+
 }

@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlSubBlock extends PsiElement {
+public interface PerlReturnExpr extends PerlExpr {
 
   @Nullable
-  PerlSubBlockAnon getSubBlockAnon();
-
-  @Nullable
-  PerlSubBlockNamed getSubBlockNamed();
+  PerlExpr getExpr();
 
 }

@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlVariableDefinitionArguments extends PsiElement {
 
-  @Nullable
-  PerlPackageBare getPackageBare();
-
 }

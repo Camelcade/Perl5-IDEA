@@ -46,12 +46,12 @@ public class PerlHighlightningLexer extends LayeredLexerAdaptive implements Perl
 		 * This is logic of choosing lexer for later tokens, could be in other method
 		 */
 		// @todo should be done using map
-		if( tokenType == PERL_MULTILINE_MARKER_HTML)
-			nextMultilineLexer = htmlLexer;
-		else if( tokenType == PERL_MULTILINE_MARKER_XHTML)
-			nextMultilineLexer = xhtmlLexer;
-		else if( tokenType == PERL_MULTILINE_MARKER_XML)
-			nextMultilineLexer = xmlLexer;
+//		if( tokenType == PERL_MULTILINE_MARKER_HTML)
+//			nextMultilineLexer = htmlLexer;
+//		else if( tokenType == PERL_MULTILINE_MARKER_XHTML)
+//			nextMultilineLexer = xhtmlLexer;
+//		else if( tokenType == PERL_MULTILINE_MARKER_XML)
+//			nextMultilineLexer = xmlLexer;
 
 		/**
 		 *  Here we choose lexer

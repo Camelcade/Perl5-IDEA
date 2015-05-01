@@ -83,12 +83,12 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 		attributesMap.put(PerlElementTypes.PERL_NUMBER, new TextAttributesKey[]{PERL_NUMBER});
 		attributesMap.put(PerlElementTypes.PERL_VERSION, new TextAttributesKey[]{PERL_VERSION});
 
-		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
-		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_HTML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
-		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_XML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
-		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_XHTML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
+//		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
+//		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_HTML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
+//		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_XML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
+//		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_XHTML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
 
-		attributesMap.put(PerlElementTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
+//		attributesMap.put(PerlElementTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
 		attributesMap.put(PerlElementTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
 		attributesMap.put(PerlElementTypes.PERL_LBRACE, new TextAttributesKey[]{PERL_BRACE});
 		attributesMap.put(PerlElementTypes.PERL_RBRACE, new TextAttributesKey[]{PERL_BRACE});
@@ -100,7 +100,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_KEYWORD, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 
-		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
+//		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
 //		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN});
 //		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN_PRAGMA, new TextAttributesKey[]{PERL_PACKAGE_PRAGMA, PERL_BUILT_IN});
 //		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN_DEPRECATED, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN, PERL_DEPRECATED});
@@ -117,7 +117,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_HASH, new TextAttributesKey[]{PERL_HASH});
 		attributesMap.put(PerlElementTypes.PERL_GLOB, new TextAttributesKey[]{PERL_GLOB});
 
-		attributesMap.put(PerlElementTypes.PERL_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
+//		attributesMap.put(PerlElementTypes.PERL_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
 	}
 
 	private static final HashMap<Language, SyntaxHighlighterBase> highlightersMap = new HashMap<Language, SyntaxHighlighterBase>();

@@ -13,7 +13,6 @@ import com.perl5.lang.perl.files.PerlFileTypePackage;
 import com.perl5.lang.perl.files.PerlFileTypeScript;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlPackageDefinition;
 
 import java.util.*;
 
@@ -27,6 +26,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	// @todo remake map
 	static{
+/*
 		for( String packageName: BUILT_IN )
 		{
 			BUILT_IN_MAP.put(packageName, PERL_PACKAGE);
@@ -39,6 +39,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		{
 			BUILT_IN_MAP.put(packageName, PERL_PACKAGE);
 		}
+*/
 	}
 
 	/**
@@ -50,9 +51,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		IElementType packageType = BUILT_IN_MAP.get(packageName);
 
-		return packageType == null
-				? PERL_PACKAGE
-				: packageType;
+		return null;
+//		return packageType == null
+//				? PERL_PACKAGE
+//				: packageType;
+//
 	}
 
 	/**
@@ -70,22 +73,22 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		virtualFiles.addAll(FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, PerlFileTypeScript.INSTANCE,
 				GlobalSearchScope.allScope(project)));
 
-		for (VirtualFile virtualFile : virtualFiles) {
-			PerlFile perlFile = (PerlFile) PsiManager.getInstance(project).findFile(virtualFile);
-			if (perlFile != null) {
-				PerlPackageDefinition[] definitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageDefinition.class);
-				if (definitions != null) {
-					for (PerlPackageDefinition definition: definitions) {
-						if (packageName.equals(definition.getPackageBare().getText())) {
-							if (result == null) {
-								result = new ArrayList<PsiElement>();
-							}
-							result.add(definition.getPackageBare());
-						}
-					}
-				}
-			}
-		}
+//		for (VirtualFile virtualFile : virtualFiles) {
+//			PerlFile perlFile = (PerlFile) PsiManager.getInstance(project).findFile(virtualFile);
+//			if (perlFile != null) {
+//				PerlPackageDefinition[] definitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageDefinition.class);
+//				if (definitions != null) {
+//					for (PerlPackageDefinition definition: definitions) {
+//						if (packageName.equals(definition.getPackageBare().getText())) {
+//							if (result == null) {
+//								result = new ArrayList<PsiElement>();
+//							}
+//							result.add(definition.getPackageBare());
+//						}
+//					}
+//				}
+//			}
+//		}
 		return result != null ? result : Collections.<PsiElement>emptyList();
 	}
 
@@ -103,6 +106,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		virtualFiles.addAll(FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, PerlFileTypeScript.INSTANCE,
 				GlobalSearchScope.allScope(project)));
 
+/*
 		for (VirtualFile virtualFile : virtualFiles) {
 			PerlFile perlFile = (PerlFile) PsiManager.getInstance(project).findFile(virtualFile);
 			if (perlFile != null) {
@@ -117,6 +121,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 				}
 			}
 		}
+*/
 		return result != null ? result : Collections.<PsiElement>emptyList();
 	}
 }

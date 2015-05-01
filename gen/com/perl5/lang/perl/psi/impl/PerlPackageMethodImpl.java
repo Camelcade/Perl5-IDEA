@@ -24,8 +24,8 @@ public class PerlPackageMethodImpl extends ASTWrapperPsiElement implements PerlP
 
   @Override
   @NotNull
-  public PerlPackageBare getPackageBare() {
-    return findNotNullChildByClass(PerlPackageBare.class);
+  public PerlPerlFunction getPerlFunction() {
+    return findNotNullChildByClass(PerlPerlFunction.class);
   }
 
 }

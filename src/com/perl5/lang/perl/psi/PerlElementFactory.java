@@ -9,11 +9,13 @@ import com.perl5.lang.perl.files.PerlFileTypePackage;
  */
 public class PerlElementFactory
 {
+/*
 	public static PerlPackageBare createPerlPackageBare(Project project, String name)
 	{
 		final PerlFile file = createFile(project, name);
 		return (PerlPackageBare) file.getFirstChild();
 	}
+*/
 
 	public static PerlFile createFile(Project project, String text)
 	{

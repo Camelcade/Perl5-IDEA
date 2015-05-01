@@ -29,6 +29,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 		{
 			IElementType elementType = ((LeafPsiElement) element).getElementType();
 
+/*
 			if( elementType == PERL_PACKAGE	)
 			{
 				Project project = element.getProject();
@@ -44,6 +45,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 					result.add(builder.createLineMarkerInfo(element));
 				}
 			}
+*/
 		}
 
 	}

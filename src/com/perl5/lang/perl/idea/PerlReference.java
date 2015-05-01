@@ -7,7 +7,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlNamedElement;
-import com.perl5.lang.perl.psi.PerlPackageBare;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
