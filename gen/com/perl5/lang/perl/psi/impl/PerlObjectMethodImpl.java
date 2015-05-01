@@ -24,12 +24,6 @@ public class PerlObjectMethodImpl extends ASTWrapperPsiElement implements PerlOb
 
   @Override
   @NotNull
-  public PerlPerlFunction getPerlFunction() {
-    return findNotNullChildByClass(PerlPerlFunction.class);
-  }
-
-  @Override
-  @NotNull
   public PerlScalar getScalar() {
     return findNotNullChildByClass(PerlScalar.class);
   }

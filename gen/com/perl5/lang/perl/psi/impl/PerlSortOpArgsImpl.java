@@ -34,10 +34,4 @@ public class PerlSortOpArgsImpl extends ASTWrapperPsiElement implements PerlSort
     return findNotNullChildByClass(PerlExpr.class);
   }
 
-  @Override
-  @Nullable
-  public PerlPerlFunction getPerlFunction() {
-    return findChildByClass(PerlPerlFunction.class);
-  }
-
 }

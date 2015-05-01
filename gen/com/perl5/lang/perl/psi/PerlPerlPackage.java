@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlObjectMethod extends PsiElement {
-
-  @NotNull
-  PerlScalar getScalar();
+public interface PerlPerlPackage extends PsiElement {
 
 }

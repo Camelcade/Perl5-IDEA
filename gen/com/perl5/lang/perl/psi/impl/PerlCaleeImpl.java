@@ -34,10 +34,4 @@ public class PerlCaleeImpl extends ASTWrapperPsiElement implements PerlCalee {
     return findChildByClass(PerlPackageMethod.class);
   }
 
-  @Override
-  @Nullable
-  public PerlPerlFunction getPerlFunction() {
-    return findChildByClass(PerlPerlFunction.class);
-  }
-
 }

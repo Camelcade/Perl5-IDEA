@@ -13,7 +13,4 @@ public interface PerlSortOpArgs extends PsiElement {
   @NotNull
   PerlExpr getExpr();
 
-  @Nullable
-  PerlPerlFunction getPerlFunction();
-
 }

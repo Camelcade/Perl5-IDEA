@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlPackageMethod extends PsiElement {
 
-  @NotNull
-  PerlPerlFunction getPerlFunction();
-
 }

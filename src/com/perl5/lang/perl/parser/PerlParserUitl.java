@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.mapper.CGLIBMapper;
  */
 public class PerlParserUitl extends GeneratedParserUtilBase implements PerlElementTypes
 {
-	public static boolean collapsedPackageToken(PsiBuilder b, int l ) {
+	public static boolean parseBarewordPackage(PsiBuilder b, int l ) {
 
 		if(b.getTokenType() == PERL_BAREWORD )
 		{
@@ -23,7 +23,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				b.advanceLexer();
 			}
 			b.advanceLexer();
-			m.collapse(PERL_PACKAGE_BARE);
+			m.collapse(PERL_PACKAGE);
 			return true;
 		}
 
@@ -40,7 +40,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			{
 				PsiBuilder.Marker m = b.mark();
 				b.advanceLexer();
-				m.done(PERL_STRING);
+				m.collapse(PERL_STRING);
 			}
 
 			return true;
@@ -56,7 +56,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.done(PERL_FUNCTION);
+			m.collapse(PERL_FUNCTION);
 
 			return true;
 		}
@@ -81,7 +81,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer(); // package rest
 			b.advanceLexer(); // depackage
 
-			m.collapse(PERL_PACKAGE_BARE);
+			m.collapse(PERL_PACKAGE);
 
 			m = b.mark();
 			b.advanceLexer();

@@ -106,6 +106,7 @@ DEFINITION_FUNCTIONS = "my" | "local" | "our" | "sub" | "package"
 INCLUDE_FUNCTIONS = "use" | "require" | "do" | "eval"
 FUNCTION_SPECIAL = {INCLUDE_FUNCTIONS} | {DEFINITION_FUNCTIONS} | {CONTROL_FUNCTIONS} | {CONDITION_FUNCTIONS} | {LIST_FUNCTIONS} | {QUOTE_FUNCTIONS}
 
+PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
 %xstate LEX_EOF
 %xstate LEX_POD
@@ -289,6 +290,7 @@ FUNCTION_SPECIAL = {INCLUDE_FUNCTIONS} | {DEFINITION_FUNCTIONS} | {CONTROL_FUNCT
 
 {QUOTE_FUNCTIONS} {return processQuoteLikeStringOpener();}
 {QUOTE_LIST_FUNCTIONS} {return processQuoteLikeListOpener();}
+{PERL_TAGS}    {return PERL_TAG;}
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 

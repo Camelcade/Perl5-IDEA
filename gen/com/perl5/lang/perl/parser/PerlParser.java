@@ -202,9 +202,6 @@ public class PerlParser implements PsiParser {
     else if (t == PACKAGE_USE_ARGUMENTS) {
       r = package_use_arguments(b, 0);
     }
-    else if (t == PERL_FUNCTION) {
-      r = perl_function(b, 0);
-    }
     else if (t == PERL_VERSION) {
       r = perl_version(b, 0);
     }
@@ -1178,13 +1175,13 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'package' perl_known_package perl_version ? (block | PERL_SEMI package_element * )
+  // 'package' perl_package perl_version ? (block | PERL_SEMI package_element * )
   public static boolean package_definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_definition")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<package definition>");
     r = consumeToken(b, "package");
-    r = r && perl_known_package(b, l + 1);
+    r = r && perl_package(b, l + 1);
     r = r && package_definition_2(b, l + 1);
     r = r && package_definition_3(b, l + 1);
     exit_section_(b, l, m, PACKAGE_DEFINITION, r, false, null);
@@ -1275,12 +1272,12 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // perl_known_package '->' perl_function
+  // perl_package '->' perl_function
   public static boolean package_method(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_method")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<package method>");
-    r = perl_known_package(b, l + 1);
+    r = perl_package(b, l + 1);
     r = r && consumeToken(b, "->");
     r = r && perl_function(b, l + 1);
     exit_section_(b, l, m, PACKAGE_METHOD, r, false, null);
@@ -1300,7 +1297,7 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'require' (perl_known_package | perl_version | string)
+  // 'require' (perl_package | perl_version | string)
   public static boolean package_require(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_require")) return false;
     boolean r;
@@ -1311,12 +1308,12 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // perl_known_package | perl_version | string
+  // perl_package | perl_version | string
   private static boolean package_require_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_require_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = perl_known_package(b, l + 1);
+    r = perl_package(b, l + 1);
     if (!r) r = perl_version(b, l + 1);
     if (!r) r = string(b, l + 1);
     exit_section_(b, m, null, r);
@@ -1336,8 +1333,8 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // perl_known_package perl_version expr ?
-  //     | perl_known_package expr ?
+  // perl_package perl_version expr ?
+  //     | perl_package expr ?
   //     | perl_version
   public static boolean package_use_arguments(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_use_arguments")) return false;
@@ -1350,12 +1347,12 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // perl_known_package perl_version expr ?
+  // perl_package perl_version expr ?
   private static boolean package_use_arguments_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_use_arguments_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = perl_known_package(b, l + 1);
+    r = perl_package(b, l + 1);
     r = r && perl_version(b, l + 1);
     r = r && package_use_arguments_0_2(b, l + 1);
     exit_section_(b, m, null, r);
@@ -1369,12 +1366,12 @@ public class PerlParser implements PsiParser {
     return true;
   }
 
-  // perl_known_package expr ?
+  // perl_package expr ?
   private static boolean package_use_arguments_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_use_arguments_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = perl_known_package(b, l + 1);
+    r = perl_package(b, l + 1);
     r = r && package_use_arguments_1_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -1402,25 +1399,14 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // <<parseBarewordFunction>>
-  public static boolean perl_function(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "perl_function")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<perl function>");
-    r = parseBarewordFunction(b, l + 1);
-    exit_section_(b, l, m, PERL_FUNCTION, r, false, null);
-    return r;
+  static boolean perl_function(PsiBuilder b, int l) {
+    return parseBarewordFunction(b, l + 1);
   }
 
   /* ********************************************************** */
-  // PERL_PACKAGE_BARE | <<collapsedPackageToken>>
-  static boolean perl_known_package(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "perl_known_package")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_PACKAGE_BARE);
-    if (!r) r = collapsedPackageToken(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+  // <<parseBarewordPackage>>
+  static boolean perl_package(PsiBuilder b, int l) {
+    return parseBarewordPackage(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -1614,6 +1600,7 @@ public class PerlParser implements PsiParser {
   //     | multiline_marker                  // deferred string
   //     | PERL_NUMBER                       // raw number
   //     | string                            // string
+  //     | PERL_TAG
   //     | sub_block_anon
   static boolean scalar_safe(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar_safe")) return false;
@@ -1624,6 +1611,7 @@ public class PerlParser implements PsiParser {
     if (!r) r = multiline_marker(b, l + 1);
     if (!r) r = consumeToken(b, PERL_NUMBER);
     if (!r) r = string(b, l + 1);
+    if (!r) r = consumeToken(b, PERL_TAG);
     if (!r) r = sub_block_anon(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -1826,7 +1814,7 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // perl_known_package ? variable | '(' variables ')'
+  // perl_package ? variable | '(' variables ')'
   public static boolean variable_definition_arguments(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "variable_definition_arguments")) return false;
     boolean r;
@@ -1837,7 +1825,7 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // perl_known_package ? variable
+  // perl_package ? variable
   private static boolean variable_definition_arguments_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "variable_definition_arguments_0")) return false;
     boolean r;
@@ -1848,10 +1836,10 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // perl_known_package ?
+  // perl_package ?
   private static boolean variable_definition_arguments_0_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "variable_definition_arguments_0_0")) return false;
-    perl_known_package(b, l + 1);
+    perl_package(b, l + 1);
     return true;
   }
 

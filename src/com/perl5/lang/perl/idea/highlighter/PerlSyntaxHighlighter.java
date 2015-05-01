@@ -99,6 +99,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_KEYWORD, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_TAG, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 
 //		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
 //		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN});

@@ -247,10 +247,6 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPerlFunction(@NotNull PerlPerlFunction o) {
-    visitPsiElement(o);
-  }
-
   public void visitPerlVersion(@NotNull PerlPerlVersion o) {
     visitPsiElement(o);
   }

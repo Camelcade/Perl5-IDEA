@@ -40,16 +40,14 @@
     PERL_NUMBER_VERSION="PERL_NUMBER_VERSION"
     PERL_NUMBER="PERL_NUMBER"
 
-    PERL_PACKAGE_BARE="PACKAGE_BARE"
-
     PERL_KEYWORD="PERL_KEYWORD"
     PERL_OPERATOR="PERL_OPERATOR"
 
     PERL_STRING="PERL_STRING"
     PERL_STRING_CONTENT="PERL_STRING_CONTENT"
 
-    PERL_PACKAGE="PERL_PACKAGE"
     PERL_BAREWORD="PERL_BAREWORD"
+    PERL_TAG="PERL_TAG"
 
     PERL_ARROW_COMMA='=>'
     PERL_DEPACKAGE='::'
@@ -61,6 +59,10 @@
     PERL_RBRACE='}'
     PERL_SEMI=';';
     PERL_QUOTE="\""
+
+    // custom tokens
+    PERL_PACKAGE="PERL_PACKAGE"
+    PERL_FUNCTION="PERL_FUNCTION"
   ]
 
     extends(".*expr")=expr
@@ -94,7 +96,7 @@ private line_element ::=
     | code_line
 
 // package
-package_definition ::= 'package' perl_known_package perl_version ? (block | PERL_SEMI package_element * )
+package_definition ::= 'package' perl_package perl_version ? (block | PERL_SEMI package_element * )
 
 
 sub_block_named ::= 'sub' perl_function block
@@ -108,15 +110,15 @@ variable_definition ::= my_definition | our_definition | local_definition
 my_definition ::= 'my' variable_definition_arguments
 our_definition ::= 'our' variable_definition_arguments
 local_definition ::= 'local' variable_definition_arguments
-variable_definition_arguments ::= ( perl_known_package ? variable | '(' variables ')' )
+variable_definition_arguments ::= ( perl_package ? variable | '(' variables ')' )
 
 // use and no
 package_use ::= 'use' package_use_arguments
 package_no ::= 'no' package_use_arguments
 
 package_use_arguments ::=
-    perl_known_package perl_version expr ?
-    | perl_known_package expr ?
+    perl_package perl_version expr ?
+    | perl_package expr ?
     | perl_version;
 
 // return && exit
@@ -126,7 +128,7 @@ return_expr ::= ('return' | 'exit') expr ?
 last_expr ::= ('last' | 'next' | 'redo') expr ? // @todo labels
 
 // require
-package_require ::= 'require' (perl_known_package | perl_version | string) // multiline string is possible too
+package_require ::= 'require' (perl_package | perl_version | string) // multiline string is possible too
 
 // eval
 eval ::= 'eval' (block | scalar)
@@ -226,7 +228,7 @@ calee ::=
     | perl_package_function
     | perl_function
 
-package_method ::= perl_known_package '->' perl_function
+package_method ::= perl_package '->' perl_function
 object_method ::= scalar '->' perl_function
 
 scalar_expr ::=
@@ -295,6 +297,7 @@ private scalar_safe ::=
     | multiline_marker                  // deferred string
     | PERL_NUMBER                       // raw number
     | string                            // string
+    | PERL_TAG
     | sub_block_anon
 
 
@@ -309,9 +312,8 @@ private variables ::= variable (',' variable ) *
 private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH
 
 // custom parsings
-private perl_known_package ::= PERL_PACKAGE_BARE | <<collapsedPackageToken>>
-
-perl_function ::= <<parseBarewordFunction>>
+private perl_package ::= <<parseBarewordPackage>>
+private perl_function ::= <<parseBarewordFunction>>
 private perl_package_function ::= <<parsePackageFunctionCall>>
 
 //private package_bare ::= PERL_BAREWORD ( '::' PERL_BAREWORD ) *

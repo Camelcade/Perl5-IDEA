@@ -28,10 +28,4 @@ public class PerlSubBlockNamedImpl extends ASTWrapperPsiElement implements PerlS
     return findNotNullChildByClass(PerlBlock.class);
   }
 
-  @Override
-  @NotNull
-  public PerlPerlFunction getPerlFunction() {
-    return findNotNullChildByClass(PerlPerlFunction.class);
-  }
-
 }

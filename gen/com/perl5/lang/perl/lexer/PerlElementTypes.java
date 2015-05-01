@@ -70,7 +70,6 @@ public interface PerlElementTypes {
   IElementType PACKAGE_REQUIRE = new PerlElementType("PACKAGE_REQUIRE");
   IElementType PACKAGE_USE = new PerlElementType("PACKAGE_USE");
   IElementType PACKAGE_USE_ARGUMENTS = new PerlElementType("PACKAGE_USE_ARGUMENTS");
-  IElementType PERL_FUNCTION = new PerlElementType("PERL_FUNCTION");
   IElementType PERL_VERSION = new PerlElementType("PERL_VERSION");
   IElementType QW_EXPR = new PerlElementType("QW_EXPR");
   IElementType RETURN_EXPR = new PerlElementType("RETURN_EXPR");
@@ -91,6 +90,7 @@ public interface PerlElementTypes {
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
+  IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
   IElementType PERL_GLOB = new PerlTokenType("PERL_GLOB");
   IElementType PERL_HASH = new PerlTokenType("PERL_HASH");
   IElementType PERL_KEYWORD = new PerlTokenType("PERL_KEYWORD");
@@ -101,7 +101,6 @@ public interface PerlElementTypes {
   IElementType PERL_NUMBER_VERSION = new PerlTokenType("PERL_NUMBER_VERSION");
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
   IElementType PERL_PACKAGE = new PerlTokenType("PERL_PACKAGE");
-  IElementType PERL_PACKAGE_BARE = new PerlTokenType("PACKAGE_BARE");
   IElementType PERL_POD = new PerlTokenType("PERL_POD");
   IElementType PERL_QUOTE = new PerlTokenType("\"");
   IElementType PERL_RBRACE = new PerlTokenType("}");
@@ -116,6 +115,7 @@ public interface PerlElementTypes {
   IElementType PERL_STRING_CONTENT = new PerlTokenType("PERL_STRING_CONTENT");
   IElementType PERL_STRING_MULTILINE = new PerlTokenType("PERL_STRING_MULTILINE");
   IElementType PERL_STRING_MULTILINE_END = new PerlTokenType("PERL_STRING_MULTILINE_END");
+  IElementType PERL_TAG = new PerlTokenType("PERL_TAG");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -299,9 +299,6 @@ public interface PerlElementTypes {
       }
       else if (type == PACKAGE_USE_ARGUMENTS) {
         return new PerlPackageUseArgumentsImpl(node);
-      }
-      else if (type == PERL_FUNCTION) {
-        return new PerlPerlFunctionImpl(node);
       }
       else if (type == PERL_VERSION) {
         return new PerlPerlVersionImpl(node);

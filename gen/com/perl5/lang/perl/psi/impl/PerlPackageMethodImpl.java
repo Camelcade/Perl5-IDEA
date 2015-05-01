@@ -22,10 +22,4 @@ public class PerlPackageMethodImpl extends ASTWrapperPsiElement implements PerlP
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PerlPerlFunction getPerlFunction() {
-    return findNotNullChildByClass(PerlPerlFunction.class);
-  }
-
 }

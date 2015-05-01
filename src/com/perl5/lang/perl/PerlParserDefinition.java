@@ -12,12 +12,16 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.psi.PerlFilePackage;
+import com.perl5.lang.perl.psi.impl.PerlArrayImpl;
+import com.perl5.lang.perl.psi.impl.PerlFunctionImpl;
+import com.perl5.lang.perl.psi.impl.PerlPackageImpl;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.tree.IStubFileElementType;
 
@@ -76,6 +80,14 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 
 	@NotNull
 	public PsiElement createElement(ASTNode node) {
-		return PerlElementTypes.Factory.createElement(node);
+		IElementType type = node.getElementType();
+		if (type == PERL_FUNCTION) {
+			return new PerlFunctionImpl(node);
+		}
+		else if (type == PERL_PACKAGE) {
+			return new PerlPackageImpl(node);
+		}
+		else
+			return PerlElementTypes.Factory.createElement(node);
 	}
 }
