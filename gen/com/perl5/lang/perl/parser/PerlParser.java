@@ -1255,8 +1255,8 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // block_element PERL_SEMI ?
-  //     | line_element if_postfix ? PERL_SEMI
+  // block_element (PERL_SEMI | <<eof>>) ?
+  //     | line_element if_postfix ? (PERL_SEMI | <<eof>>) ?
   static boolean package_element(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_element")) return false;
     boolean r;
@@ -1267,7 +1267,7 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // block_element PERL_SEMI ?
+  // block_element (PERL_SEMI | <<eof>>) ?
   private static boolean package_element_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_element_0")) return false;
     boolean r;
@@ -1278,21 +1278,32 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // PERL_SEMI ?
+  // (PERL_SEMI | <<eof>>) ?
   private static boolean package_element_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_element_0_1")) return false;
-    consumeToken(b, PERL_SEMI);
+    package_element_0_1_0(b, l + 1);
     return true;
   }
 
-  // line_element if_postfix ? PERL_SEMI
+  // PERL_SEMI | <<eof>>
+  private static boolean package_element_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "package_element_0_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_SEMI);
+    if (!r) r = eof(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // line_element if_postfix ? (PERL_SEMI | <<eof>>) ?
   private static boolean package_element_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_element_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = line_element(b, l + 1);
     r = r && package_element_1_1(b, l + 1);
-    r = r && consumeToken(b, PERL_SEMI);
+    r = r && package_element_1_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1302,6 +1313,24 @@ public class PerlParser implements PsiParser {
     if (!recursion_guard_(b, l, "package_element_1_1")) return false;
     if_postfix(b, l + 1);
     return true;
+  }
+
+  // (PERL_SEMI | <<eof>>) ?
+  private static boolean package_element_1_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "package_element_1_2")) return false;
+    package_element_1_2_0(b, l + 1);
+    return true;
+  }
+
+  // PERL_SEMI | <<eof>>
+  private static boolean package_element_1_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "package_element_1_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_SEMI);
+    if (!r) r = eof(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -1723,36 +1752,12 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // list_expr | expr
-  static boolean shift_expr_arg(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "shift_expr_arg")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = list_expr(b, l + 1);
-    if (!r) r = expr(b, l + 1, -1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // '(' shift_expr_arg ')' | shift_expr_arg
   static boolean shift_expr_args(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "shift_expr_args")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = shift_expr_args_0(b, l + 1);
-    if (!r) r = shift_expr_arg(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // '(' shift_expr_arg ')'
-  private static boolean shift_expr_args_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "shift_expr_args_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_LPAREN);
-    r = r && shift_expr_arg(b, l + 1);
-    r = r && consumeToken(b, PERL_RPAREN);
+    r = list_expr(b, l + 1);
+    if (!r) r = expr(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }

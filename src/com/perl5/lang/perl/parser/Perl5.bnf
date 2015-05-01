@@ -74,8 +74,8 @@ block ::= '{' (file_item + | expr )? '}';
 file_item ::= package_definition | package_element
 
 private package_element ::=
-    block_element PERL_SEMI ?
-    | line_element if_postfix ? PERL_SEMI
+    block_element (PERL_SEMI | <<eof>>) ?
+    | line_element if_postfix ? (PERL_SEMI | <<eof>>) ?
 
 private block_element ::=
     eval
@@ -254,8 +254,7 @@ list_expr ::=
 qw_expr ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
 shift_expr ::= ('shift' | 'pop') shift_expr_args ?
-private shift_expr_args ::= '(' shift_expr_arg ')' | shift_expr_arg
-private shift_expr_arg ::= list_expr | expr
+private shift_expr_args ::= list_expr | expr
 
 // sort
 sort_expr ::= 'sort' sort_op_args
