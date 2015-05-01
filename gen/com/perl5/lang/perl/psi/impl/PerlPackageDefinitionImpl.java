@@ -72,6 +72,12 @@ public class PerlPackageDefinitionImpl extends ASTWrapperPsiElement implements P
 
   @Override
   @NotNull
+  public List<PerlIfPostfix> getIfPostfixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlIfPostfix.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlPackageNo> getPackageNoList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNo.class);
   }

@@ -32,6 +32,9 @@ public interface PerlPackageDefinition extends PsiElement {
   List<PerlIfBlock> getIfBlockList();
 
   @NotNull
+  List<PerlIfPostfix> getIfPostfixList();
+
+  @NotNull
   List<PerlPackageNo> getPackageNoList();
 
   @NotNull

@@ -35,9 +35,9 @@ public interface PerlElementTypes {
   IElementType LAST_EXPR = new PerlElementType("LAST_EXPR");
   IElementType LIST_EXPR = new PerlElementType("LIST_EXPR");
   IElementType LOCAL_DEFINITION = new PerlElementType("LOCAL_DEFINITION");
-  IElementType MULTILINE_STRING = new PerlElementType("MULTILINE_STRING");
   IElementType MY_DEFINITION = new PerlElementType("MY_DEFINITION");
   IElementType OBJECT_METHOD = new PerlElementType("OBJECT_METHOD");
+  IElementType OBJECT_METHOD_OBJECT = new PerlElementType("OBJECT_METHOD_OBJECT");
   IElementType OP_10_EXPR = new PerlElementType("OP_10_EXPR");
   IElementType OP_11_EXPR = new PerlElementType("OP_11_EXPR");
   IElementType OP_12_EXPR = new PerlElementType("OP_12_EXPR");
@@ -195,14 +195,14 @@ public interface PerlElementTypes {
       else if (type == LOCAL_DEFINITION) {
         return new PerlLocalDefinitionImpl(node);
       }
-      else if (type == MULTILINE_STRING) {
-        return new PerlMultilineStringImpl(node);
-      }
       else if (type == MY_DEFINITION) {
         return new PerlMyDefinitionImpl(node);
       }
       else if (type == OBJECT_METHOD) {
         return new PerlObjectMethodImpl(node);
+      }
+      else if (type == OBJECT_METHOD_OBJECT) {
+        return new PerlObjectMethodObjectImpl(node);
       }
       else if (type == OP_10_EXPR) {
         return new PerlOp10ExprImpl(node);

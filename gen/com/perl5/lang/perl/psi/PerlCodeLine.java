@@ -10,7 +10,4 @@ public interface PerlCodeLine extends PsiElement {
   @NotNull
   PerlExpr getExpr();
 
-  @Nullable
-  PerlIfPostfix getIfPostfix();
-
 }

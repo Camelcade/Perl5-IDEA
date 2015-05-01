@@ -50,9 +50,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	public static boolean parseBarewordFunction(PsiBuilder b, int l ) {
-		IElementType tokenType = b.getTokenType();
 
-		if( tokenType == PERL_BAREWORD )
+		if( b.getTokenType() == PERL_BAREWORD )
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
@@ -62,6 +61,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		}
 
 		return false;
+	}
+
+	public static boolean parsePackageFunctionCallSpaced(PsiBuilder b, int l ) {
+
+		return
+			b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) == PERL_BAREWORD
+			&& parseBarewordFunction(b,l) && parseBarewordPackage(b,l);
 	}
 
 	public static boolean parsePackageFunctionCall(PsiBuilder b, int l ) {

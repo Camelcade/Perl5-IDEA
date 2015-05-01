@@ -28,10 +28,4 @@ public class PerlCodeLineImpl extends ASTWrapperPsiElement implements PerlCodeLi
     return findNotNullChildByClass(PerlExpr.class);
   }
 
-  @Override
-  @Nullable
-  public PerlIfPostfix getIfPostfix() {
-    return findChildByClass(PerlIfPostfix.class);
-  }
-
 }

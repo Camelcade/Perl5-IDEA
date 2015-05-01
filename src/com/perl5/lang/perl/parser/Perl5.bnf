@@ -75,7 +75,7 @@ file_item ::= package_definition | package_element
 
 private package_element ::=
     block_element PERL_SEMI ?
-    | line_element PERL_SEMI
+    | line_element if_postfix ? PERL_SEMI
 
 private block_element ::=
     eval
@@ -153,7 +153,7 @@ while_block ::= ('until' | 'while' ) block_conditional ('continue' block ) ?
 block_conditional ::= '(' expr ')' block
 block_block ::= block ('continue' block ) ?
 
-code_line ::= expr if_postfix ? //{recoverWhile="code_line_recover"}
+code_line ::= expr
 
 //code_line_recover ::= !(PERL_RBRACE | PERL_SEMI)
 
@@ -226,10 +226,17 @@ calee ::=
     package_method
     | object_method
     | perl_package_function
+    | perl_package_method_spaced
     | perl_function
+    | object_method_object
 
+
+// @todo regexps
+// @todo $proto->SUPER::smth
+// @todo \& reference
 package_method ::= perl_package '->' perl_function
 object_method ::= scalar '->' perl_function
+object_method_object ::= scalar '->' scalar
 
 scalar_expr ::=
     scalar
@@ -275,7 +282,7 @@ private array_safe ::=
 
 hash ::=
     PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
-    | PERL_SIGIL_ARRAY scalar       // scalar dereference wo braces
+    | PERL_SIGIL_HASH scalar       // scalar dereference wo braces
     | PERL_HASH                    // hash as is
 
 scalar ::=
@@ -283,6 +290,7 @@ scalar ::=
     | scalar_safe '->'? '{' expr '}'    // hash element
     | '[' expr ? ']'                    // anonymous array
     | '{' expr ? '}'                    // anonymous hash
+    | '(' expr ')'[expr]                // generated array element
     | scalar_safe                       // scalar or deref scalar
 
 
@@ -299,10 +307,7 @@ private scalar_safe ::=
     | string                            // string
     | PERL_TAG
     | sub_block_anon
-
-
-// Multiline
-multiline_string ::= PERL_STRING_MULTILINE PERL_BAREWORD
+    | PERL_GLOB
 
 perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
 
@@ -315,6 +320,7 @@ private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH
 private perl_package ::= <<parseBarewordPackage>>
 private perl_function ::= <<parseBarewordFunction>>
 private perl_package_function ::= <<parsePackageFunctionCall>>
+private perl_package_method_spaced ::= <<parsePackageFunctionCallSpaced>>
 
 //private package_bare ::= PERL_BAREWORD ( '::' PERL_BAREWORD ) *
 // {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"

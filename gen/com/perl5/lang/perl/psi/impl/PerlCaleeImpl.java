@@ -30,6 +30,12 @@ public class PerlCaleeImpl extends ASTWrapperPsiElement implements PerlCalee {
 
   @Override
   @Nullable
+  public PerlObjectMethodObject getObjectMethodObject() {
+    return findChildByClass(PerlObjectMethodObject.class);
+  }
+
+  @Override
+  @Nullable
   public PerlPackageMethod getPackageMethod() {
     return findChildByClass(PerlPackageMethod.class);
   }

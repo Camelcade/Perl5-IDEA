@@ -107,15 +107,15 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitMultilineString(@NotNull PerlMultilineString o) {
-    visitPsiElement(o);
-  }
-
   public void visitMyDefinition(@NotNull PerlMyDefinition o) {
     visitPsiElement(o);
   }
 
   public void visitObjectMethod(@NotNull PerlObjectMethod o) {
+    visitPsiElement(o);
+  }
+
+  public void visitObjectMethodObject(@NotNull PerlObjectMethodObject o) {
     visitPsiElement(o);
   }
 

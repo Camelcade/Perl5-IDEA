@@ -11,15 +11,21 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlMultilineStringImpl extends ASTWrapperPsiElement implements PerlMultilineString {
+public class PerlObjectMethodObjectImpl extends ASTWrapperPsiElement implements PerlObjectMethodObject {
 
-  public PerlMultilineStringImpl(ASTNode node) {
+  public PerlObjectMethodObjectImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitMultilineString(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitObjectMethodObject(this);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlScalar> getScalarList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlScalar.class);
   }
 
 }

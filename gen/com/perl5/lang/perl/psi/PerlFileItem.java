@@ -29,6 +29,9 @@ public interface PerlFileItem extends PsiElement {
   PerlIfBlock getIfBlock();
 
   @Nullable
+  PerlIfPostfix getIfPostfix();
+
+  @Nullable
   PerlPackageDefinition getPackageDefinition();
 
   @Nullable

@@ -66,6 +66,12 @@ public class PerlFileItemImpl extends ASTWrapperPsiElement implements PerlFileIt
 
   @Override
   @Nullable
+  public PerlIfPostfix getIfPostfix() {
+    return findChildByClass(PerlIfPostfix.class);
+  }
+
+  @Override
+  @Nullable
   public PerlPackageDefinition getPackageDefinition() {
     return findChildByClass(PerlPackageDefinition.class);
   }
