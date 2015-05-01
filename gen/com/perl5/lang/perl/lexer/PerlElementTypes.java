@@ -15,6 +15,7 @@ public interface PerlElementTypes {
   IElementType BLOCK_BLOCK = new PerlElementType("BLOCK_BLOCK");
   IElementType BLOCK_CONDITIONAL = new PerlElementType("BLOCK_CONDITIONAL");
   IElementType CALEE = new PerlElementType("CALEE");
+  IElementType CALL_ARGUMENTS = new PerlElementType("CALL_ARGUMENTS");
   IElementType CALL_LEFTWARD = new PerlElementType("CALL_LEFTWARD");
   IElementType CALL_RIGHTWARD = new PerlElementType("CALL_RIGHTWARD");
   IElementType CODE_LINE = new PerlElementType("CODE_LINE");
@@ -74,7 +75,7 @@ public interface PerlElementTypes {
   IElementType QW_EXPR = new PerlElementType("QW_EXPR");
   IElementType RETURN_EXPR = new PerlElementType("RETURN_EXPR");
   IElementType SCALAR = new PerlElementType("SCALAR");
-  IElementType SCALAR_EXPR = new PerlElementType("SCALAR_EXPR");
+  IElementType SHIFT_EXPR = new PerlElementType("SHIFT_EXPR");
   IElementType SORT_EXPR = new PerlElementType("SORT_EXPR");
   IElementType SORT_OP_ARGS = new PerlElementType("SORT_OP_ARGS");
   IElementType SUB_BLOCK_ANON = new PerlElementType("SUB_BLOCK_ANON");
@@ -134,6 +135,9 @@ public interface PerlElementTypes {
       }
       else if (type == CALEE) {
         return new PerlCaleeImpl(node);
+      }
+      else if (type == CALL_ARGUMENTS) {
+        return new PerlCallArgumentsImpl(node);
       }
       else if (type == CALL_LEFTWARD) {
         return new PerlCallLeftwardImpl(node);
@@ -312,8 +316,8 @@ public interface PerlElementTypes {
       else if (type == SCALAR) {
         return new PerlScalarImpl(node);
       }
-      else if (type == SCALAR_EXPR) {
-        return new PerlScalarExprImpl(node);
+      else if (type == SHIFT_EXPR) {
+        return new PerlShiftExprImpl(node);
       }
       else if (type == SORT_EXPR) {
         return new PerlSortExprImpl(node);

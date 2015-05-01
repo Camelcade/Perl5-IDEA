@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlTerm extends PsiElement {
 
-  @NotNull
+  @Nullable
   PerlExpr getExpr();
+
+  @Nullable
+  PerlScalar getScalar();
 
 }

@@ -99,7 +99,7 @@ VAR_GLOB = "*"{BAREWORD}("::"{BAREWORD})*
 
 QUOTE_FUNCTIONS = "qq" | "qx" | "q"
 QUOTE_LIST_FUNCTIONS = "qw"
-LIST_FUNCTIONS = "sort" | "grep" | "keys" | "values" | "map" | {QUOTE_LIST_FUNCTIONS}
+LIST_FUNCTIONS = "shift" | "pop" | "sort" | "grep" | "keys" | "values" | "map" | {QUOTE_LIST_FUNCTIONS}
 CONTROL_FUNCTIONS = "for" | "foreach" | "do" | "while" | "break" | "continule" | "redo" | "last" | "next" | "exit" | "return"
 CONDITION_FUNCTIONS = "if" | "elsif" | "else" | "until"
 DEFINITION_FUNCTIONS = "my" | "local" | "our" | "sub" | "package"

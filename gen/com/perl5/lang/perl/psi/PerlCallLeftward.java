@@ -11,7 +11,7 @@ public interface PerlCallLeftward extends PsiElement {
   PerlCalee getCalee();
 
   @Nullable
-  PerlExpr getExpr();
+  PerlCallArguments getCallArguments();
 
   @Nullable
   PerlScalar getScalar();

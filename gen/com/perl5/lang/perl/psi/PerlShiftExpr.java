@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlCallRightward extends PsiElement {
-
-  @NotNull
-  PerlCalee getCalee();
+public interface PerlShiftExpr extends PerlExpr {
 
   @Nullable
-  PerlCallArguments getCallArguments();
+  PerlExpr getExpr();
 
 }

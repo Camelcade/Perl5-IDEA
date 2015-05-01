@@ -30,8 +30,8 @@ public class PerlCallLeftwardImpl extends ASTWrapperPsiElement implements PerlCa
 
   @Override
   @Nullable
-  public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+  public PerlCallArguments getCallArguments() {
+    return findChildByClass(PerlCallArguments.class);
   }
 
   @Override

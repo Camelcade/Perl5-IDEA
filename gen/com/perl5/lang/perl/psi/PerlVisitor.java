@@ -27,6 +27,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCallArguments(@NotNull PerlCallArguments o) {
+    visitPsiElement(o);
+  }
+
   public void visitCallLeftward(@NotNull PerlCallLeftward o) {
     visitPsiElement(o);
   }
@@ -263,7 +267,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitScalarExpr(@NotNull PerlScalarExpr o) {
+  public void visitShiftExpr(@NotNull PerlShiftExpr o) {
     visitExpr(o);
   }
 

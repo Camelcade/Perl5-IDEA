@@ -37,6 +37,9 @@ public class PerlParser implements PsiParser {
     else if (t == CALEE) {
       r = calee(b, 0);
     }
+    else if (t == CALL_ARGUMENTS) {
+      r = call_arguments(b, 0);
+    }
     else if (t == CALL_LEFTWARD) {
       r = call_leftward(b, 0);
     }
@@ -214,8 +217,8 @@ public class PerlParser implements PsiParser {
     else if (t == SCALAR) {
       r = scalar(b, 0);
     }
-    else if (t == SCALAR_EXPR) {
-      r = scalar_expr(b, 0);
+    else if (t == SHIFT_EXPR) {
+      r = shift_expr(b, 0);
     }
     else if (t == SORT_EXPR) {
       r = sort_expr(b, 0);
@@ -260,7 +263,7 @@ public class PerlParser implements PsiParser {
       OP_24_EXPR, OP_2_EXPR, OP_3_PREF_EXPR, OP_3_SUFF_EXPR,
       OP_4_EXPR, OP_5_EXPR, OP_6_EXPR, OP_7_EXPR,
       OP_8_EXPR, OP_9_EXPR, QW_EXPR, RETURN_EXPR,
-      SCALAR_EXPR, SORT_EXPR),
+      SHIFT_EXPR, SORT_EXPR),
   };
 
   /* ********************************************************** */
@@ -511,9 +514,20 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // calee '(' expr ? ')'
-  //     | scalar '(' expr ? ')'
-  //     | scalar '->' '(' expr ? ')'
+  // expr
+  public static boolean call_arguments(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "call_arguments")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<call arguments>");
+    r = expr(b, l + 1, -1);
+    exit_section_(b, l, m, CALL_ARGUMENTS, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // calee '(' call_arguments ? ')'
+  //     | scalar '(' call_arguments ? ')'
+  //     | scalar '->' '(' call_arguments ? ')'
   public static boolean call_leftward(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_leftward")) return false;
     boolean r;
@@ -525,7 +539,7 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // calee '(' expr ? ')'
+  // calee '(' call_arguments ? ')'
   private static boolean call_leftward_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_leftward_0")) return false;
     boolean r;
@@ -538,14 +552,14 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // expr ?
+  // call_arguments ?
   private static boolean call_leftward_0_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_leftward_0_2")) return false;
-    expr(b, l + 1, -1);
+    call_arguments(b, l + 1);
     return true;
   }
 
-  // scalar '(' expr ? ')'
+  // scalar '(' call_arguments ? ')'
   private static boolean call_leftward_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_leftward_1")) return false;
     boolean r;
@@ -558,14 +572,14 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // expr ?
+  // call_arguments ?
   private static boolean call_leftward_1_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_leftward_1_2")) return false;
-    expr(b, l + 1, -1);
+    call_arguments(b, l + 1);
     return true;
   }
 
-  // scalar '->' '(' expr ? ')'
+  // scalar '->' '(' call_arguments ? ')'
   private static boolean call_leftward_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_leftward_2")) return false;
     boolean r;
@@ -579,15 +593,15 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // expr ?
+  // call_arguments ?
   private static boolean call_leftward_2_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_leftward_2_3")) return false;
-    expr(b, l + 1, -1);
+    call_arguments(b, l + 1);
     return true;
   }
 
   /* ********************************************************** */
-  // calee expr ?
+  // calee call_arguments ?
   public static boolean call_rightward(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_rightward")) return false;
     boolean r;
@@ -598,10 +612,10 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // expr ?
+  // call_arguments ?
   private static boolean call_rightward_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_rightward_1")) return false;
-    expr(b, l + 1, -1);
+    call_arguments(b, l + 1);
     return true;
   }
 
@@ -1517,7 +1531,8 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // scalar_safe '->'? '[' expr ']'      // array element
+  // shift_expr                        // shift expression
+  //     | scalar_safe '->'? '[' expr ']'      // array element
   //     | scalar_safe '->'? '{' expr '}'    // hash element
   //     | '[' expr ? ']'                    // anonymous array
   //     | '{' expr ? '}'                    // anonymous hash
@@ -1527,47 +1542,27 @@ public class PerlParser implements PsiParser {
     if (!recursion_guard_(b, l, "scalar")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<scalar>");
-    r = scalar_0(b, l + 1);
+    r = shift_expr(b, l + 1);
     if (!r) r = scalar_1(b, l + 1);
     if (!r) r = scalar_2(b, l + 1);
     if (!r) r = scalar_3(b, l + 1);
     if (!r) r = scalar_4(b, l + 1);
+    if (!r) r = scalar_5(b, l + 1);
     if (!r) r = scalar_safe(b, l + 1);
     exit_section_(b, l, m, SCALAR, r, false, null);
     return r;
   }
 
   // scalar_safe '->'? '[' expr ']'
-  private static boolean scalar_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "scalar_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = scalar_safe(b, l + 1);
-    r = r && scalar_0_1(b, l + 1);
-    r = r && consumeToken(b, PERL_LBRACK);
-    r = r && expr(b, l + 1, -1);
-    r = r && consumeToken(b, PERL_RBRACK);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // '->'?
-  private static boolean scalar_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "scalar_0_1")) return false;
-    consumeToken(b, "->");
-    return true;
-  }
-
-  // scalar_safe '->'? '{' expr '}'
   private static boolean scalar_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = scalar_safe(b, l + 1);
     r = r && scalar_1_1(b, l + 1);
-    r = r && consumeToken(b, PERL_LBRACE);
+    r = r && consumeToken(b, PERL_LBRACK);
     r = r && expr(b, l + 1, -1);
-    r = r && consumeToken(b, PERL_RBRACE);
+    r = r && consumeToken(b, PERL_RBRACK);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1579,33 +1574,35 @@ public class PerlParser implements PsiParser {
     return true;
   }
 
-  // '[' expr ? ']'
+  // scalar_safe '->'? '{' expr '}'
   private static boolean scalar_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar_2")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_LBRACK);
+    r = scalar_safe(b, l + 1);
     r = r && scalar_2_1(b, l + 1);
-    r = r && consumeToken(b, PERL_RBRACK);
+    r = r && consumeToken(b, PERL_LBRACE);
+    r = r && expr(b, l + 1, -1);
+    r = r && consumeToken(b, PERL_RBRACE);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // expr ?
+  // '->'?
   private static boolean scalar_2_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar_2_1")) return false;
-    expr(b, l + 1, -1);
+    consumeToken(b, "->");
     return true;
   }
 
-  // '{' expr ? '}'
+  // '[' expr ? ']'
   private static boolean scalar_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar_3")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_LBRACE);
+    r = consumeToken(b, PERL_LBRACK);
     r = r && scalar_3_1(b, l + 1);
-    r = r && consumeToken(b, PERL_RBRACE);
+    r = r && consumeToken(b, PERL_RBRACK);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1617,35 +1614,43 @@ public class PerlParser implements PsiParser {
     return true;
   }
 
-  // '(' expr ')'[expr]
+  // '{' expr ? '}'
   private static boolean scalar_4(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar_4")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_LBRACE);
+    r = r && scalar_4_1(b, l + 1);
+    r = r && consumeToken(b, PERL_RBRACE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // expr ?
+  private static boolean scalar_4_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scalar_4_1")) return false;
+    expr(b, l + 1, -1);
+    return true;
+  }
+
+  // '(' expr ')'[expr]
+  private static boolean scalar_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scalar_5")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERL_LPAREN);
     r = r && expr(b, l + 1, -1);
     r = r && consumeToken(b, PERL_RPAREN);
-    r = r && scalar_4_3(b, l + 1);
+    r = r && scalar_5_3(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // [expr]
-  private static boolean scalar_4_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "scalar_4_3")) return false;
+  private static boolean scalar_5_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scalar_5_3")) return false;
     expr(b, l + 1, -1);
     return true;
-  }
-
-  /* ********************************************************** */
-  // scalar
-  public static boolean scalar_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "scalar_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<scalar expr>");
-    r = scalar(b, l + 1);
-    exit_section_(b, l, m, SCALAR_EXPR, r, false, null);
-    return r;
   }
 
   /* ********************************************************** */
@@ -1682,6 +1687,72 @@ public class PerlParser implements PsiParser {
     r = r && consumeToken(b, PERL_LBRACE);
     r = r && expr(b, l + 1, -1);
     r = r && consumeToken(b, PERL_RBRACE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ('shift' | 'pop') shift_expr_args ?
+  public static boolean shift_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_expr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<shift expr>");
+    r = shift_expr_0(b, l + 1);
+    r = r && shift_expr_1(b, l + 1);
+    exit_section_(b, l, m, SHIFT_EXPR, r, false, null);
+    return r;
+  }
+
+  // 'shift' | 'pop'
+  private static boolean shift_expr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_expr_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "shift");
+    if (!r) r = consumeToken(b, "pop");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // shift_expr_args ?
+  private static boolean shift_expr_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_expr_1")) return false;
+    shift_expr_args(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // list_expr | expr
+  static boolean shift_expr_arg(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_expr_arg")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = list_expr(b, l + 1);
+    if (!r) r = expr(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '(' shift_expr_arg ')' | shift_expr_arg
+  static boolean shift_expr_args(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_expr_args")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = shift_expr_args_0(b, l + 1);
+    if (!r) r = shift_expr_arg(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '(' shift_expr_arg ')'
+  private static boolean shift_expr_args_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_expr_args_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_LPAREN);
+    r = r && shift_expr_arg(b, l + 1);
+    r = r && consumeToken(b, PERL_RPAREN);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1819,14 +1890,14 @@ public class PerlParser implements PsiParser {
   /* ********************************************************** */
   // '(' expr ')'
   //     | list_expr
-  //     | scalar_expr
+  //     | scalar
   public static boolean term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<term>");
     r = term_0(b, l + 1);
     if (!r) r = list_expr(b, l + 1);
-    if (!r) r = scalar_expr(b, l + 1);
+    if (!r) r = scalar(b, l + 1);
     exit_section_(b, l, m, TERM, r, false, null);
     return r;
   }

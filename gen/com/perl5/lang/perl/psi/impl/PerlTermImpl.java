@@ -23,9 +23,15 @@ public class PerlTermImpl extends ASTWrapperPsiElement implements PerlTerm {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
+    return findChildByClass(PerlExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlScalar getScalar() {
+    return findChildByClass(PerlScalar.class);
   }
 
 }

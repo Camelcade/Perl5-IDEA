@@ -8,30 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlCallRightwardImpl extends ASTWrapperPsiElement implements PerlCallRightward {
+public class PerlShiftExprImpl extends PerlExprImpl implements PerlShiftExpr {
 
-  public PerlCallRightwardImpl(ASTNode node) {
+  public PerlShiftExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCallRightward(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitShiftExpr(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
-  public PerlCalee getCalee() {
-    return findNotNullChildByClass(PerlCalee.class);
-  }
-
-  @Override
   @Nullable
-  public PerlCallArguments getCallArguments() {
-    return findChildByClass(PerlCallArguments.class);
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
 }
