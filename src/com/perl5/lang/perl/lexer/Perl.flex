@@ -67,18 +67,20 @@ WORD = [^ \t\f\r\n]+
 CHAR_SEMI       = ;
 CHAR_ANY        = .|{NEW_LINE}
 ALFANUM         = [a-zA-Z0-9_]
-FUNCTION_NAME   = [a-zA-Z_]{ALFANUM}+
+BAREWORD        = [a-zA-Z_]{ALFANUM}+
 THE_END         = __END__
-THE_DATA         = __DATA__
+THE_DATA        = __DATA__
 LINE            = .*
 FULL_LINE       = .*{NEW_LINE}?
+COMMA           = "," | "=>"
+QUOTE           = "\"" | "'" | "`"
 
 PERL_OPERATORS = "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists"
 
 MULTILINE_MARKER = [^\"\'\s\n\r ]+
 MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{MULTILINE_MARKER}\'
 MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{MULTILINE_MARKER}\"
-MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{ALFANUM}+
+MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{BAREWORD}
 MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{MULTILINE_MARKER}\`
 
 POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
@@ -127,6 +129,8 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 %xstate LEX_EOF
 %xstate LEX_POD
 
+%state LEX_BAREWORD_STRING
+
 %state LEX_MULTILINE_WAITING
 %xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
 
@@ -154,8 +158,7 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 // inclusive states
 {NEW_LINE}   { return processNewLine();}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
-","			    {return PERL_COMMA;}
-"=>"			{return PERL_COMMA;}
+{COMMA}			 {return PERL_COMMA;}
 {CHAR_SEMI}     {return processSemicolon();}
 
 {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
@@ -373,7 +376,15 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 {PERL_LABEL}    { yypushback(1); return PERL_LABEL;}
-{FUNCTION_NAME} { return PERL_FUNCTION;}    // actually this is a bareword, but i guess we disallow them
+
+
+
+<LEX_BAREWORD_STRING>
+{
+    {BAREWORD} { return LEX_STRING_CONTENT;}
+}
+
+{BAREWORD} { return PERL_FUNCTION;}    // actually this is a bareword, but i guess we disallow them
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }
