@@ -4,6 +4,7 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
+import java.util.LinkedList;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +22,10 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	// My JFlex upgrades
 	public abstract int getNextTokenStart();
 	public abstract void setTokenStart(int position);
+	public abstract void setTokenEnd(int position);
+	public abstract CharSequence getBuffer();
+	public abstract char[] getBufferArray();
+	public abstract int getBufferEnd();
 	public abstract boolean isLastToken();
 
 	// Lexer state changes (we don't know LEX constants in advance
@@ -59,6 +64,11 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 
 	protected int sectionNumber = 0;	// needs for regexps replaces and tr
 
+	/**
+	 * Choosing closing character by opening one
+	 * @param charOpener - char with wich sequence started
+	 * @return - ending char
+	 */
 	protected char getQuoteCloseChar(char charOpener)
 	{
 		if( charOpener == '<' )
@@ -73,10 +83,80 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			return charOpener;
 	}
 
+	protected final LinkedList<CustomToken> tokensList = new LinkedList<CustomToken>();
+
+	private IElementType restoreToken( CustomToken token)
+	{
+		setTokenStart(token.getTokenStart());
+		setTokenEnd(token.getTokenEnd());
+		return token.getTokenType();
+	}
+
+	/**
+	 * Disallows sharp delimiter on space occurance for quote-like operations
+	 * @return whitespace token type
+	 */
 	public IElementType processOpenerWhiteSpace()
 	{
 		allowSharp = false;
 		return TokenType.WHITE_SPACE;
+	}
+
+	/**
+	 *  Reading tokens from parsed queue, setting start and end and returns them one by one
+	 * @return token type or null if queue is empty
+	 */
+	public IElementType getParsedToken()
+	{
+		if(tokensList.size() == 0 )
+		{
+			popState();
+			yypushback(1); // no tokens in this lex state, push back
+			return null;
+		}
+		else
+		{
+			return restoreToken(tokensList.removeFirst());
+		}
+	}
+
+	/**
+	 *	Regex processor qr{} m{} s{}{}
+	 **/
+	public abstract void yybegin_LEX_REGEX_OPENER();
+	public abstract void yybegin_LEX_REGEX_ITEMS();
+
+	/**
+	 * Extended regex flags, special treatment for spaces and comments
+	 */
+	private boolean isExtended = false;
+
+	/**
+	 * Sets up regex parser
+	 * @return command keyword
+	 */
+	public IElementType processRegexOpener()
+	{
+		allowSharp = true;
+		isExtended = false;
+		isEscaped = false;
+		pushState();
+		yybegin_LEX_REGEX_OPENER();
+		sectionNumber = 0;
+		return PERL_KEYWORD;
+	}
+
+	/**
+	 *  Parses regexp from the current position (opening delimiter) and preserves tokens in tokensList
+	 *  REGEX_MODIFIERS = [msixpodualgcer]
+	 */
+	public void parseRegex()
+	{
+		tokensList.clear();
+		int currentPosition = getTokenStart();
+
+		yypushback(1);
+		yybegin_LEX_REGEX_ITEMS();
 	}
 
 
@@ -93,8 +173,8 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		allowSharp = true;
 		isEscaped = false;
 		pushState();
-		yybegin_LEX_TRANS_OPENER();
 		sectionNumber = 0;
+		yybegin_LEX_TRANS_OPENER();
 		return PERL_KEYWORD;
 	}
 

@@ -7,4 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlTrExpr extends PerlExpr {
 
+  @Nullable
+  PerlTrModifiers getTrModifiers();
+
+  @NotNull
+  PerlTrReplacementlist getTrReplacementlist();
+
+  @NotNull
+  PerlTrSearchlist getTrSearchlist();
+
 }

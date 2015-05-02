@@ -32,7 +32,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 http://perldoc.perl.org/perlop.html#Quote-Like-Operators
 // regexp
 m qr {}
-s tr y {}{}
+s // //
 */
 
 
@@ -40,12 +40,15 @@ s tr y {}{}
 //%column
 %{
     public void setTokenStart(int position){zzCurrentPos = zzStartRead = position;}
+    public void setTokenEnd(int position){zzMarkedPos = position;}
+    public CharSequence getBuffer(){ return zzBuffer;}
+    public char[] getBufferArray(){ return zzBufferArray;}
+    public int getBufferEnd() {return zzEndRead;}
     public int getNextTokenStart(){ return zzMarkedPos;}
     public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
     public void setState(int newState){ zzLexicalState = newState; }
 
     public void yybegin_YYINITIAL(){yybegin(YYINITIAL);}
-
 
     public void yybegin_LEX_EOF(){yybegin(LEX_EOF);}
     public void yybegin_LEX_POD(){yybegin(LEX_POD);}
@@ -100,6 +103,7 @@ VAR_GLOB = "*"{BAREWORD}("::"{BAREWORD})*
 QUOTE_FUNCTIONS = "qq" | "qx" | "q"
 QUOTE_LIST_FUNCTIONS = "qw"
 TRANS_FUNCTIONS = "tr" | "y"
+REGEX_FUNCTIONS = "s" | "qr" | "m"
 LIST_FUNCTIONS = "shift" | "pop" | "sort" | "grep" | "keys" | "values" | "map" | {QUOTE_LIST_FUNCTIONS}
 CONTROL_FUNCTIONS = "for" | "foreach" | "do" | "while" | "break" | "continule" | "redo" | "last" | "next" | "exit" | "return"
 CONDITION_FUNCTIONS = "if" | "elsif" | "else" | "until"
@@ -116,12 +120,14 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
 %state LEX_MULTILINE_WAITING
 %xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
+// @todo we should scan next chars ourselves and re-set lexer position
 %{
     public void yybegin_LEX_MULTILINE(){yybegin(LEX_MULTILINE);}
     public void yybegin_LEX_MULTILINE_TOKEN(){yybegin(LEX_MULTILINE_TOKEN);}
     public void yybegin_LEX_MULTILINE_WAITING(){yybegin(LEX_MULTILINE_WAITING);}
 %}
 
+// @todo we should scan next chars ourselves and re-set lexer position
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
 %{
     public void yybegin_LEX_QUOTE_LIKE_CHARS(){yybegin(LEX_QUOTE_LIKE_CHARS);}
@@ -129,6 +135,7 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
     public void yybegin_LEX_QUOTE_LIKE_CLOSER(){yybegin(LEX_QUOTE_LIKE_CLOSER);}
 %}
 
+// @todo we should scan next chars ourselves and re-set lexer position
 %xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS, LEX_QUOTE_LIKE_LIST_CLOSER
 %{
     public void yybegin_LEX_QUOTE_LIKE_WORDS(){yybegin(LEX_QUOTE_LIKE_WORDS);}
@@ -136,6 +143,7 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
     public void yybegin_LEX_QUOTE_LIKE_LIST_CLOSER(){yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);}
 %}
 
+// @todo we should scan next chars ourselves and re-set lexer position
 TRANS_MODIFIERS = [cdsr]
 %xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
 %{
@@ -143,6 +151,12 @@ TRANS_MODIFIERS = [cdsr]
     public void yybegin_LEX_TRANS_CHARS(){yybegin(LEX_TRANS_CHARS);}
     public void yybegin_LEX_TRANS_CLOSER(){yybegin(LEX_TRANS_CLOSER);}
     public void yybegin_LEX_TRANS_MODIFIERS(){yybegin(LEX_TRANS_MODIFIERS);}
+%}
+
+%xstate LEX_REGEX_OPENER, LEX_REGEX_ITEMS
+%{
+    public void yybegin_LEX_REGEX_OPENER(){yybegin(LEX_REGEX_OPENER);}
+    public void yybegin_LEX_REGEX_ITEMS(){yybegin(LEX_REGEX_ITEMS);}
 %}
 
 %%
@@ -158,6 +172,22 @@ TRANS_MODIFIERS = [cdsr]
     {THE_END}               {processDataOpener(); break;}
     {THE_DATA}               {processDataOpener(); break;}
     {POD_OPEN}               {processPodOpener();break;}
+}
+
+/**
+**/
+<LEX_REGEX_OPENER>{
+    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
+    .   { parseRegex(); break;}
+}
+
+<LEX_REGEX_ITEMS>{
+    {CHAR_ANY}   {
+        IElementType nextTokenType = getParsedToken();
+        if( nextTokenType == null )
+            break;
+        return nextTokenType;
+    }
 }
 
 /**
@@ -187,7 +217,7 @@ TRANS_MODIFIERS = [cdsr]
 }
 
 <LEX_TRANS_MODIFIERS>{
-    {TRANS_MODIFIERS} {return PERL_MODIFIER;}
+    {TRANS_MODIFIERS} {return PERL_REGEX_MODIFIER;}
     {CHAR_ANY}   { popState(); yypushback(1); break; }
 }
 
@@ -329,6 +359,7 @@ TRANS_MODIFIERS = [cdsr]
 "%" {return PERL_SIGIL_HASH;}
 "$" {return PERL_SIGIL_SCALAR;}
 
+{REGEX_FUNCTIONS} {return processRegexOpener();}
 {TRANS_FUNCTIONS} {return processTransOpener();}
 {QUOTE_FUNCTIONS} {return processQuoteLikeStringOpener();}
 {QUOTE_LIST_FUNCTIONS} {return processQuoteLikeListOpener();}

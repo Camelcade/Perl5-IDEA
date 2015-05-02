@@ -82,6 +82,9 @@ public interface PerlElementTypes {
   IElementType SUB_BLOCK_NAMED = new PerlElementType("SUB_BLOCK_NAMED");
   IElementType TERM = new PerlElementType("TERM");
   IElementType TR_EXPR = new PerlElementType("TR_EXPR");
+  IElementType TR_MODIFIERS = new PerlElementType("TR_MODIFIERS");
+  IElementType TR_REPLACEMENTLIST = new PerlElementType("TR_REPLACEMENTLIST");
+  IElementType TR_SEARCHLIST = new PerlElementType("TR_SEARCHLIST");
   IElementType VARIABLE_DEFINITION = new PerlElementType("VARIABLE_DEFINITION");
   IElementType VARIABLE_DEFINITION_ARGUMENTS = new PerlElementType("VARIABLE_DEFINITION_ARGUMENTS");
   IElementType WHILE_BLOCK = new PerlElementType("WHILE_BLOCK");
@@ -99,7 +102,6 @@ public interface PerlElementTypes {
   IElementType PERL_LBRACE = new PerlTokenType("{");
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
-  IElementType PERL_MODIFIER = new PerlTokenType("PERL_MODIFIER");
   IElementType PERL_NUMBER = new PerlTokenType("PERL_NUMBER");
   IElementType PERL_NUMBER_VERSION = new PerlTokenType("PERL_NUMBER_VERSION");
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
@@ -110,6 +112,8 @@ public interface PerlElementTypes {
   IElementType PERL_RBRACK = new PerlTokenType("]");
   IElementType PERL_REGEX = new PerlTokenType("PERL_REGEX");
   IElementType PERL_REGEX_CONTENT = new PerlTokenType("PERL_REGEX_CONTENT");
+  IElementType PERL_REGEX_MODIFIER = new PerlTokenType("PERL_REGEX_MODIFIER");
+  IElementType PERL_REGEX_QUOTE = new PerlTokenType("PERL_REGEX_QUOTE");
   IElementType PERL_RPAREN = new PerlTokenType(")");
   IElementType PERL_SCALAR = new PerlTokenType("PERL_SCALAR");
   IElementType PERL_SEMI = new PerlTokenType(";");
@@ -340,6 +344,15 @@ public interface PerlElementTypes {
       }
       else if (type == TR_EXPR) {
         return new PerlTrExprImpl(node);
+      }
+      else if (type == TR_MODIFIERS) {
+        return new PerlTrModifiersImpl(node);
+      }
+      else if (type == TR_REPLACEMENTLIST) {
+        return new PerlTrReplacementlistImpl(node);
+      }
+      else if (type == TR_SEARCHLIST) {
+        return new PerlTrSearchlistImpl(node);
       }
       else if (type == VARIABLE_DEFINITION) {
         return new PerlVariableDefinitionImpl(node);

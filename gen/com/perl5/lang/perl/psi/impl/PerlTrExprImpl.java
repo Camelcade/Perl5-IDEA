@@ -21,4 +21,22 @@ public class PerlTrExprImpl extends PerlExprImpl implements PerlTrExpr {
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PerlTrModifiers getTrModifiers() {
+    return findChildByClass(PerlTrModifiers.class);
+  }
+
+  @Override
+  @NotNull
+  public PerlTrReplacementlist getTrReplacementlist() {
+    return findNotNullChildByClass(PerlTrReplacementlist.class);
+  }
+
+  @Override
+  @NotNull
+  public PerlTrSearchlist getTrSearchlist() {
+    return findNotNullChildByClass(PerlTrSearchlist.class);
+  }
+
 }

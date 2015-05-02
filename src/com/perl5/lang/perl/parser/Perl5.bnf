@@ -43,8 +43,9 @@
     PERL_KEYWORD="PERL_KEYWORD"
     PERL_OPERATOR="PERL_OPERATOR"
 
-    PERL_MODIFIER="PERL_MODIFIER"
     PERL_REGEX="PERL_REGEX"
+    PERL_REGEX_QUOTE="PERL_REGEX_QUOTE"
+    PERL_REGEX_MODIFIER="PERL_REGEX_MODIFIER"
     PERL_REGEX_CONTENT="PERL_REGEX_CONTENT"
 
     PERL_STRING="PERL_STRING"
@@ -259,7 +260,10 @@ qw_expr ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 shift_expr ::= ('shift' | 'pop') shift_expr_args ?
 private shift_expr_args ::= list_expr | expr
 
-tr_expr ::= ('tr'|'y') PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE PERL_QUOTE ? PERL_STRING_CONTENT PERL_QUOTE PERL_MODIFIER *
+tr_expr ::= ('tr'|'y')  tr_searchlist tr_replacementlist tr_modifiers ?
+tr_searchlist ::= PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
+tr_replacementlist ::= PERL_QUOTE ? PERL_STRING_CONTENT PERL_QUOTE
+tr_modifiers ::= PERL_REGEX_MODIFIER +
 
 // sort
 sort_expr ::= 'sort' sort_op_args

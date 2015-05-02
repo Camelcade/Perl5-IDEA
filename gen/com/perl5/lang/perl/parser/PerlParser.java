@@ -238,6 +238,15 @@ public class PerlParser implements PsiParser {
     else if (t == TR_EXPR) {
       r = tr_expr(b, 0);
     }
+    else if (t == TR_MODIFIERS) {
+      r = tr_modifiers(b, 0);
+    }
+    else if (t == TR_REPLACEMENTLIST) {
+      r = tr_replacementlist(b, 0);
+    }
+    else if (t == TR_SEARCHLIST) {
+      r = tr_searchlist(b, 0);
+    }
     else if (t == VARIABLE_DEFINITION) {
       r = variable_definition(b, 0);
     }
@@ -1951,16 +1960,15 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // ('tr'|'y') PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE PERL_QUOTE ? PERL_STRING_CONTENT PERL_QUOTE PERL_MODIFIER *
+  // ('tr'|'y')  tr_searchlist tr_replacementlist tr_modifiers ?
   public static boolean tr_expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "tr_expr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<tr expr>");
     r = tr_expr_0(b, l + 1);
-    r = r && consumeTokens(b, 0, PERL_QUOTE, PERL_STRING_CONTENT, PERL_QUOTE);
-    r = r && tr_expr_4(b, l + 1);
-    r = r && consumeTokens(b, 0, PERL_STRING_CONTENT, PERL_QUOTE);
-    r = r && tr_expr_7(b, l + 1);
+    r = r && tr_searchlist(b, l + 1);
+    r = r && tr_replacementlist(b, l + 1);
+    r = r && tr_expr_3(b, l + 1);
     exit_section_(b, l, m, TR_EXPR, r, false, null);
     return r;
   }
@@ -1976,23 +1984,61 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
+  // tr_modifiers ?
+  private static boolean tr_expr_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_expr_3")) return false;
+    tr_modifiers(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // PERL_REGEX_MODIFIER +
+  public static boolean tr_modifiers(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_modifiers")) return false;
+    if (!nextTokenIs(b, PERL_REGEX_MODIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_REGEX_MODIFIER);
+    int c = current_position_(b);
+    while (r) {
+      if (!consumeToken(b, PERL_REGEX_MODIFIER)) break;
+      if (!empty_element_parsed_guard_(b, "tr_modifiers", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, TR_MODIFIERS, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // PERL_QUOTE ? PERL_STRING_CONTENT PERL_QUOTE
+  public static boolean tr_replacementlist(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_replacementlist")) return false;
+    if (!nextTokenIs(b, "<tr replacementlist>", PERL_QUOTE, PERL_STRING_CONTENT)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<tr replacementlist>");
+    r = tr_replacementlist_0(b, l + 1);
+    r = r && consumeTokens(b, 0, PERL_STRING_CONTENT, PERL_QUOTE);
+    exit_section_(b, l, m, TR_REPLACEMENTLIST, r, false, null);
+    return r;
+  }
+
   // PERL_QUOTE ?
-  private static boolean tr_expr_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "tr_expr_4")) return false;
+  private static boolean tr_replacementlist_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_replacementlist_0")) return false;
     consumeToken(b, PERL_QUOTE);
     return true;
   }
 
-  // PERL_MODIFIER *
-  private static boolean tr_expr_7(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "tr_expr_7")) return false;
-    int c = current_position_(b);
-    while (true) {
-      if (!consumeToken(b, PERL_MODIFIER)) break;
-      if (!empty_element_parsed_guard_(b, "tr_expr_7", c)) break;
-      c = current_position_(b);
-    }
-    return true;
+  /* ********************************************************** */
+  // PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
+  public static boolean tr_searchlist(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_searchlist")) return false;
+    if (!nextTokenIs(b, PERL_QUOTE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, PERL_QUOTE, PERL_STRING_CONTENT, PERL_QUOTE);
+    exit_section_(b, m, TR_SEARCHLIST, r);
+    return r;
   }
 
   /* ********************************************************** */
