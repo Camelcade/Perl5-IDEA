@@ -62,26 +62,8 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	protected int stringContentStart;
 	protected boolean isEscaped = false;
 
-	protected int sectionNumber = 0;	// needs for regexps replaces and tr
-
-	/**
-	 * Choosing closing character by opening one
-	 * @param charOpener - char with wich sequence started
-	 * @return - ending char
-	 */
-	protected char getQuoteCloseChar(char charOpener)
-	{
-		if( charOpener == '<' )
-			return '>';
-		else if( charOpener == '{' )
-			return '}';
-		else if( charOpener == '(' )
-			return ')';
-		else if( charOpener == '[' )
-			return ']';
-		else
-			return charOpener;
-	}
+	protected int currentSectionNumber = 0;	// needs for regexps replaces and tr
+	protected int sectionsNumber = 0; 	// number of sections one or two
 
 	protected final LinkedList<CustomToken> tokensList = new LinkedList<CustomToken>();
 
@@ -140,9 +122,15 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		allowSharp = true;
 		isExtended = false;
 		isEscaped = false;
+
+		if( "s".equals(yytext()) )	// two sections s
+			sectionsNumber = 2;
+		else						// one section qr m
+			sectionsNumber = 1;
+
+		currentSectionNumber = 0;
 		pushState();
 		yybegin_LEX_REGEX_OPENER();
-		sectionNumber = 0;
 		return PERL_KEYWORD;
 	}
 
@@ -154,6 +142,19 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	{
 		tokensList.clear();
 		int currentPosition = getTokenStart();
+		int endPosition = getBufferEnd();
+
+		// find block 1
+
+		// find block 2
+
+		// check modifiers for x
+
+		// parse block 1
+
+		// parse block 2
+
+		// parse modifiers
 
 		yypushback(1);
 		yybegin_LEX_REGEX_ITEMS();
@@ -173,7 +174,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		allowSharp = true;
 		isEscaped = false;
 		pushState();
-		sectionNumber = 0;
+		currentSectionNumber = 0;
 		yybegin_LEX_TRANS_OPENER();
 		return PERL_KEYWORD;
 	}
@@ -188,7 +189,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			popState();
 			return null;
 		}
-		else charCloser = getQuoteCloseChar(charOpener);
+		else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
 		yybegin_LEX_TRANS_CHARS();
 		stringContentStart = getTokenStart() + 1;
@@ -220,9 +221,9 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 
 	public IElementType processTransCloser()
 	{
-		if( sectionNumber == 0 ) // first section
+		if( currentSectionNumber == 0 ) // first section
 		{
-			sectionNumber++;
+			currentSectionNumber++;
 			if( charCloser == charOpener ) // next is replacements block
 			{
 				yybegin_LEX_TRANS_CHARS();
@@ -268,7 +269,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			yybegin_YYINITIAL();
 			return null;
 		}
-		else charCloser = getQuoteCloseChar(charOpener);
+		else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
 		yybegin_LEX_QUOTE_LIKE_CHARS();
 		stringContentStart = getTokenStart() + 1;
@@ -340,7 +341,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			yybegin_YYINITIAL();
 			return null;
 		}
-		else charCloser = getQuoteCloseChar(charOpener);
+		else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
 		yybegin_LEX_QUOTE_LIKE_WORDS();
 
