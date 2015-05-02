@@ -291,6 +291,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitTrExpr(@NotNull PerlTrExpr o) {
+    visitExpr(o);
+  }
+
   public void visitVariableDefinition(@NotNull PerlVariableDefinition o) {
     visitPsiElement(o);
   }

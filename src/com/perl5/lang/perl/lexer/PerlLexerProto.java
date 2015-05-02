@@ -49,8 +49,16 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	}
 
 	/**
-	 *  Quote-like common part
+	 *  Quote-like, transliteration and regexps common part
 	 */
+	protected boolean allowSharp = true;
+	protected char charOpener;
+	protected char charCloser;
+	protected int stringContentStart;
+	protected boolean isEscaped = false;
+
+	protected int sectionNumber = 0;	// needs for regexps replaces and tr
+
 	protected char getQuoteCloseChar(char charOpener)
 	{
 		if( charOpener == '<' )
@@ -65,16 +73,98 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			return charOpener;
 	}
 
+	public IElementType processOpenerWhiteSpace()
+	{
+		allowSharp = false;
+		return TokenType.WHITE_SPACE;
+	}
+
+
+	/**
+	 *	Transliteration processors tr y
+	 **/
+	public abstract void yybegin_LEX_TRANS_OPENER();
+	public abstract void yybegin_LEX_TRANS_CHARS();
+	public abstract void yybegin_LEX_TRANS_CLOSER();
+	public abstract void yybegin_LEX_TRANS_MODIFIERS();
+
+	public IElementType processTransOpener()
+	{
+		allowSharp = true;
+		isEscaped = false;
+		pushState();
+		yybegin_LEX_TRANS_OPENER();
+		sectionNumber = 0;
+		return PERL_KEYWORD;
+	}
+
+	public IElementType processTransQuote()
+	{
+		charOpener = yytext().charAt(0);
+
+		if( charOpener == '#' && !allowSharp )
+		{
+			yypushback(1);
+			popState();
+			return null;
+		}
+		else charCloser = getQuoteCloseChar(charOpener);
+
+		yybegin_LEX_TRANS_CHARS();
+		stringContentStart = getTokenStart() + 1;
+
+		return PERL_QUOTE;
+	}
+
+	public IElementType processTransChar()
+	{
+		char currentChar = yytext().charAt(0);
+
+		if( currentChar == charCloser && !isEscaped )
+		{
+			yypushback(1);
+			setTokenStart(stringContentStart);
+			yybegin_LEX_TRANS_CLOSER();
+			return PERL_STRING_CONTENT;
+		}
+		else if( isLastToken() )
+		{
+			setTokenStart(stringContentStart);
+			return PERL_STRING_CONTENT;
+		}
+		else
+			isEscaped = ( currentChar == '\\' && !isEscaped );
+
+		return null;
+	}
+
+	public IElementType processTransCloser()
+	{
+		if( sectionNumber == 0 ) // first section
+		{
+			sectionNumber++;
+			if( charCloser == charOpener ) // next is replacements block
+			{
+				yybegin_LEX_TRANS_CHARS();
+				stringContentStart = getTokenStart() + 1;
+			}
+			else	// next is new opener, possibly other
+			{
+				yybegin_LEX_TRANS_OPENER();
+			}
+		}
+		else // last section
+		{
+			yybegin_LEX_TRANS_MODIFIERS();
+		}
+		return PERL_QUOTE;
+	}
+
+
+
 	/**
 	 *  Quote-like string procesors
 	 **/
-
-	protected boolean allowSharp = true;
-	protected char charOpener;
-	protected char charCloser;
-	protected int stringContentStart;
-	protected boolean isEscaped = false;
-
 	public abstract void yybegin_LEX_QUOTE_LIKE_CLOSER();
 	public abstract void yybegin_LEX_QUOTE_LIKE_OPENER();
 	public abstract void yybegin_LEX_QUOTE_LIKE_CHARS();
@@ -86,12 +176,6 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		pushState();
 		yybegin_LEX_QUOTE_LIKE_OPENER();
 		return PERL_KEYWORD;
-	}
-
-	public IElementType processQuoteLikeStringSpace()
-	{
-		allowSharp = false;
-		return TokenType.WHITE_SPACE;
 	}
 
 	public IElementType processQuoteLikeQuote()
@@ -164,12 +248,6 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		pushState();
 		yybegin_LEX_QUOTE_LIKE_LIST_OPENER();
 		return PERL_KEYWORD;
-	}
-
-	public IElementType processQuoteLikeListSpace()
-	{
-		allowSharp = false;
-		return TokenType.WHITE_SPACE;
 	}
 
 	public IElementType processQuoteLikeListQuote()

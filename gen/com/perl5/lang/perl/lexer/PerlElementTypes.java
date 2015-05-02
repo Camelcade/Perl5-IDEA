@@ -81,6 +81,7 @@ public interface PerlElementTypes {
   IElementType SUB_BLOCK_ANON = new PerlElementType("SUB_BLOCK_ANON");
   IElementType SUB_BLOCK_NAMED = new PerlElementType("SUB_BLOCK_NAMED");
   IElementType TERM = new PerlElementType("TERM");
+  IElementType TR_EXPR = new PerlElementType("TR_EXPR");
   IElementType VARIABLE_DEFINITION = new PerlElementType("VARIABLE_DEFINITION");
   IElementType VARIABLE_DEFINITION_ARGUMENTS = new PerlElementType("VARIABLE_DEFINITION_ARGUMENTS");
   IElementType WHILE_BLOCK = new PerlElementType("WHILE_BLOCK");
@@ -98,6 +99,7 @@ public interface PerlElementTypes {
   IElementType PERL_LBRACE = new PerlTokenType("{");
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
+  IElementType PERL_MODIFIER = new PerlTokenType("PERL_MODIFIER");
   IElementType PERL_NUMBER = new PerlTokenType("PERL_NUMBER");
   IElementType PERL_NUMBER_VERSION = new PerlTokenType("PERL_NUMBER_VERSION");
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
@@ -106,6 +108,8 @@ public interface PerlElementTypes {
   IElementType PERL_QUOTE = new PerlTokenType("\"");
   IElementType PERL_RBRACE = new PerlTokenType("}");
   IElementType PERL_RBRACK = new PerlTokenType("]");
+  IElementType PERL_REGEX = new PerlTokenType("PERL_REGEX");
+  IElementType PERL_REGEX_CONTENT = new PerlTokenType("PERL_REGEX_CONTENT");
   IElementType PERL_RPAREN = new PerlTokenType(")");
   IElementType PERL_SCALAR = new PerlTokenType("PERL_SCALAR");
   IElementType PERL_SEMI = new PerlTokenType(";");
@@ -333,6 +337,9 @@ public interface PerlElementTypes {
       }
       else if (type == TERM) {
         return new PerlTermImpl(node);
+      }
+      else if (type == TR_EXPR) {
+        return new PerlTrExprImpl(node);
       }
       else if (type == VARIABLE_DEFINITION) {
         return new PerlVariableDefinitionImpl(node);

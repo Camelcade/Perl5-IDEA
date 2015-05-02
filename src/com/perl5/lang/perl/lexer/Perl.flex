@@ -99,12 +99,13 @@ VAR_GLOB = "*"{BAREWORD}("::"{BAREWORD})*
 
 QUOTE_FUNCTIONS = "qq" | "qx" | "q"
 QUOTE_LIST_FUNCTIONS = "qw"
+TRANS_FUNCTIONS = "tr" | "y"
 LIST_FUNCTIONS = "shift" | "pop" | "sort" | "grep" | "keys" | "values" | "map" | {QUOTE_LIST_FUNCTIONS}
 CONTROL_FUNCTIONS = "for" | "foreach" | "do" | "while" | "break" | "continule" | "redo" | "last" | "next" | "exit" | "return"
 CONDITION_FUNCTIONS = "if" | "elsif" | "else" | "until"
 DEFINITION_FUNCTIONS = "my" | "local" | "our" | "sub" | "package"
 INCLUDE_FUNCTIONS = "use" | "require" | "do" | "eval"
-FUNCTION_SPECIAL = {INCLUDE_FUNCTIONS} | {DEFINITION_FUNCTIONS} | {CONTROL_FUNCTIONS} | {CONDITION_FUNCTIONS} | {LIST_FUNCTIONS} | {QUOTE_FUNCTIONS}
+FUNCTION_SPECIAL = {INCLUDE_FUNCTIONS} | {DEFINITION_FUNCTIONS} | {CONTROL_FUNCTIONS} | {CONDITION_FUNCTIONS} | {LIST_FUNCTIONS} | {QUOTE_FUNCTIONS} {TRANS_FUNCTIONS}
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
@@ -135,6 +136,15 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
     public void yybegin_LEX_QUOTE_LIKE_LIST_CLOSER(){yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);}
 %}
 
+TRANS_MODIFIERS = [cdsr]
+%xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
+%{
+    public void yybegin_LEX_TRANS_OPENER(){yybegin(LEX_TRANS_OPENER);}
+    public void yybegin_LEX_TRANS_CHARS(){yybegin(LEX_TRANS_CHARS);}
+    public void yybegin_LEX_TRANS_CLOSER(){yybegin(LEX_TRANS_CLOSER);}
+    public void yybegin_LEX_TRANS_MODIFIERS(){yybegin(LEX_TRANS_MODIFIERS);}
+%}
+
 %%
 
 // inclusive states
@@ -151,10 +161,41 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 }
 
 /**
+    tr y
+**/
+<LEX_TRANS_OPENER>{
+    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
+    .   {
+            IElementType type = processTransQuote();
+            if( type == null ) // disallowed sharp
+                break;
+            return type;
+        }
+}
+
+<LEX_TRANS_CHARS>{
+    {CHAR_ANY}   {
+          IElementType tokenType = processTransChar();
+          if( tokenType != null )
+                return tokenType;
+          break;
+        }
+}
+
+<LEX_TRANS_CLOSER>{
+    .   { return processTransCloser(); }
+}
+
+<LEX_TRANS_MODIFIERS>{
+    {TRANS_MODIFIERS} {return PERL_MODIFIER;}
+    {CHAR_ANY}   { popState(); yypushback(1); break; }
+}
+
+/**
     qq qx q
 **/
 <LEX_QUOTE_LIKE_OPENER>{
-    {EMPTY_SPACE}+  {return processQuoteLikeStringSpace();}
+    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
     .   {
             IElementType type = processQuoteLikeQuote();
             if( type == null ) // disallowed sharp
@@ -180,7 +221,7 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
     qw ()
 **/
 <LEX_QUOTE_LIKE_LIST_OPENER>{
-    {EMPTY_SPACE}+  {return processQuoteLikeListSpace();}
+    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
     .   {
             IElementType type = processQuoteLikeListQuote();
             if( type == null ) // disallowed sharp
@@ -190,7 +231,7 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 }
 
 <LEX_QUOTE_LIKE_WORDS>{
-    {EMPTY_SPACE}+ {return processQuoteLikeListSpace(); }
+    {EMPTY_SPACE}+ {return processOpenerWhiteSpace(); }
     {ANYWORD}   {
           IElementType tokenType = processQuoteLikeWord();
           if( tokenType != null )
@@ -288,6 +329,7 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 "%" {return PERL_SIGIL_HASH;}
 "$" {return PERL_SIGIL_SCALAR;}
 
+{TRANS_FUNCTIONS} {return processTransOpener();}
 {QUOTE_FUNCTIONS} {return processQuoteLikeStringOpener();}
 {QUOTE_LIST_FUNCTIONS} {return processQuoteLikeListOpener();}
 {PERL_TAGS}    {return PERL_TAG;}
