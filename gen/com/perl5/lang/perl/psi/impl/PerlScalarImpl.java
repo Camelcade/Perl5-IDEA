@@ -30,6 +30,12 @@ public class PerlScalarImpl extends ASTWrapperPsiElement implements PerlScalar {
 
   @Override
   @Nullable
+  public PerlPackageRequire getPackageRequire() {
+    return findChildByClass(PerlPackageRequire.class);
+  }
+
+  @Override
+  @Nullable
   public PerlRegex getRegex() {
     return findChildByClass(PerlRegex.class);
   }

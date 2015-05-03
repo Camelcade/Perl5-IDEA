@@ -81,6 +81,8 @@ public interface PerlElementTypes {
   IElementType SHIFT_EXPR = new PerlElementType("SHIFT_EXPR");
   IElementType SORT_EXPR = new PerlElementType("SORT_EXPR");
   IElementType SORT_OP_ARGS = new PerlElementType("SORT_OP_ARGS");
+  IElementType SPLIT_ARGS = new PerlElementType("SPLIT_ARGS");
+  IElementType SPLIT_EXPR = new PerlElementType("SPLIT_EXPR");
   IElementType SUB_BLOCK_ANON = new PerlElementType("SUB_BLOCK_ANON");
   IElementType SUB_BLOCK_NAMED = new PerlElementType("SUB_BLOCK_NAMED");
   IElementType TERM = new PerlElementType("TERM");
@@ -343,6 +345,12 @@ public interface PerlElementTypes {
       }
       else if (type == SORT_OP_ARGS) {
         return new PerlSortOpArgsImpl(node);
+      }
+      else if (type == SPLIT_ARGS) {
+        return new PerlSplitArgsImpl(node);
+      }
+      else if (type == SPLIT_EXPR) {
+        return new PerlSplitExprImpl(node);
       }
       else if (type == SUB_BLOCK_ANON) {
         return new PerlSubBlockAnonImpl(node);

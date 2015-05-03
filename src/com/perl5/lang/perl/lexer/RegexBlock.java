@@ -39,6 +39,8 @@ public class RegexBlock implements PerlElementTypes
 
 		boolean isEscaped = false;
 		boolean isCharGroup = false;
+		boolean isBraced = false;
+		int parenLevel = 0;
 
 		RegexBlock newBlock = null;
 		int currentOffset = startOffset;
@@ -50,7 +52,7 @@ public class RegexBlock implements PerlElementTypes
 
 			char currentChar = buffer.charAt(currentOffset);
 
-			if( !isCharGroup && !isEscaped && closingChar == currentChar )
+			if( !isBraced && !isCharGroup && !isEscaped && parenLevel == 0 && closingChar == currentChar )
 			{
 				newBlock = new RegexBlock(buffer, startOffset, currentOffset + 1, openingChar, closingChar);
 				break;
@@ -60,6 +62,17 @@ public class RegexBlock implements PerlElementTypes
 				isCharGroup = true;
 			else if( !isEscaped && isCharGroup && currentChar == ']')
 				isCharGroup = false;
+
+			if( !isEscaped && !isCharGroup && !isBraced && currentChar == '{')
+				isBraced = true;
+			else if( !isEscaped && !isCharGroup && isBraced && currentChar == '}')
+				isBraced = false;
+
+			if( !isEscaped && !isCharGroup && !isBraced && currentChar == '(')
+				parenLevel++;
+			else if( !isEscaped && !isCharGroup && !isBraced && parenLevel > 0 && currentChar == ')')
+				parenLevel--;
+
 
 			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
 

@@ -291,6 +291,14 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSplitArgs(@NotNull PerlSplitArgs o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSplitExpr(@NotNull PerlSplitExpr o) {
+    visitExpr(o);
+  }
+
   public void visitSubBlockAnon(@NotNull PerlSubBlockAnon o) {
     visitPsiElement(o);
   }

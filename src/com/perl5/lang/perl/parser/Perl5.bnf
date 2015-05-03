@@ -276,10 +276,17 @@ list_expr ::=
     sort_expr
     | keys_expr
     | grep_expr
+    | split_expr
     | qw_expr
     | '<' scalar? '>' // bareword should be here too
     | array
     | hash
+
+split_expr ::= 'split' split_arguments
+private split_arguments ::=
+    "(" split_args ")"
+    | split_args
+split_args ::= (scalar | regex ) "," scalar
 
 qw_expr ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
@@ -299,7 +306,7 @@ keys_args ::=
     | (hash | array)
 
 // grep
-grep_expr ::= ('grep' | 'map' ) block list_expr
+grep_expr ::= ('grep' | 'map' ) (block list_expr | expr)
 
 
 array ::=
@@ -320,6 +327,8 @@ hash ::=
 
 scalar ::=
     shift_expr                        // shift expression
+    | package_require
+    | return_expr
     | regex
     | scalar_safe '->'? '[' expr ']'      // array element
     | scalar_safe '->'? '{' expr '}'    // hash element

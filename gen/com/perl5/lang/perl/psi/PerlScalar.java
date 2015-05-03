@@ -11,6 +11,9 @@ public interface PerlScalar extends PsiElement {
   PerlExpr getExpr();
 
   @Nullable
+  PerlPackageRequire getPackageRequire();
+
+  @Nullable
   PerlRegex getRegex();
 
   @Nullable

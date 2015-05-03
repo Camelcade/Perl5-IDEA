@@ -133,6 +133,8 @@ public class PerlLexer extends PerlLexerGenerated{
 			|| lastSignificantTokenType == PERL_LPAREN
 			|| lastSignificantTokenType == PERL_SEMI
 			|| lastSignificantToken.equals("split")
+			|| lastSignificantToken.equals("if")
+			|| lastSignificantToken.equals("unless")
 		)
 		{
 			allowSharp = true;
@@ -148,7 +150,15 @@ public class PerlLexer extends PerlLexerGenerated{
 		}
 		else
 		{
-			return PERL_OPERATOR;
+			if( !isLastToken() && getBuffer().charAt(getNextTokenStart()) == '/')
+			{
+				setTokenEnd(getNextTokenStart()+1);
+				return PERL_OPERATOR;
+			}
+			else
+			{
+				return PERL_OPERATOR;
+			}
 		}
 	}
 

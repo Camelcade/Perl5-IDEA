@@ -65,7 +65,8 @@ NUMBER = [0-9_]+( "." [0-9_]+ )?
 THE_END         = __END__
 THE_DATA        = __DATA__
 
-PERL_OPERATORS = "," | "->" | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists"
+PERL_OPERATORS = "," | "->" | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*="
+PERL_OPERATORS_NAMED = "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
 
 MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{BAREWORD}\'
 MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{BAREWORD}\"
@@ -80,7 +81,7 @@ VAR_SCALAR_SPECIAL = "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$
 VAR_ARRAY_SPECIAL = "@_" | "@!" | "@+" | "@-" | "@^H"
 VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
 
-VAR_SCALAR = "$"{BAREWORD}("::"{BAREWORD})*
+VAR_SCALAR = "$"("#"? "$"*)?{BAREWORD}("::"{BAREWORD})*
 VAR_HASH = "%"{BAREWORD}("::"{BAREWORD})*
 VAR_ARRAY = "@"{BAREWORD}("::"{BAREWORD})*
 VAR_GLOB = "*"{BAREWORD}("::"{BAREWORD})*
@@ -325,6 +326,7 @@ TRANS_MODIFIERS = [cdsr]
     return tokenType;
 }
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
+{PERL_OPERATORS_NAMED}    {return PERL_BAREWORD;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 
 <LEX_BAREWORD_STRING>

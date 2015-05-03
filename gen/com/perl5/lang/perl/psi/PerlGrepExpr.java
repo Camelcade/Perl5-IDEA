@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlGrepExpr extends PerlExpr {
 
-  @NotNull
+  @Nullable
   PerlBlock getBlock();
 
   @NotNull

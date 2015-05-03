@@ -22,9 +22,9 @@ public class PerlGrepExprImpl extends PerlExprImpl implements PerlGrepExpr {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PerlBlock getBlock() {
-    return findNotNullChildByClass(PerlBlock.class);
+    return findChildByClass(PerlBlock.class);
   }
 
   @Override
