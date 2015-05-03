@@ -25,43 +25,15 @@ public class RegexBlock implements PerlElementTypes
 		return whiteSpaces.contains(character);
 	}
 
-
-	/**
-	 * Parses character stream for one regex block with opening and closing quote
-	 * @param buffer	character stream
-	 * @param startOffset	parsing start offset
-	 * @param bufferSize	buffer size
-	 * @return	RegexBlock object
-	 */
-	public static RegexBlock parseBlock(CharSequence buffer, int startOffset, int bufferSize)
-	{
-		return parseBlock(buffer, startOffset, bufferSize, startOffset+1, buffer.charAt(startOffset), startOffset);
-
-	}
-
-	/**
-	 * Parses character stream for one regex block with opening and closing quote
-	 * @param buffer	character stream
-	 * @param startOffset	parsing start offset
-	 * @param bufferSize	buffer size
-	 * @return	RegexBlock object
-	 */
-	public static RegexBlock parseBlock(CharSequence buffer, int startOffset, int bufferSize, char openingChar)
-	{
-		return parseBlock(buffer, startOffset, bufferSize, startOffset, openingChar, null);
-	}
-
 	/**
 	 * Parses guaranteed opened regex block
 	 * @param buffer               	Input characters stream
-	 * @param startOffset          	Buffer start offset
+	 * @param startOffset          	Start parsing offset
 	 * @param bufferSize			Buffer last offset
-	 * @param currentOffset			Current parsing offset
 	 * @param openingChar			Opener character
-	 * @param openingCharOffset		Offset of the opening character
 	 * @return						Parsed regex block or null if failed
 	 */
-	protected static RegexBlock parseBlock(CharSequence buffer, int startOffset, int bufferSize, int currentOffset, char openingChar, Integer openingCharOffset)
+	public static RegexBlock parseBlock(CharSequence buffer, int startOffset, int bufferSize, char openingChar)
 	{
 		char closingChar = getQuoteCloseChar(openingChar);
 
@@ -69,6 +41,7 @@ public class RegexBlock implements PerlElementTypes
 		boolean isCharGroup = false;
 
 		RegexBlock newBlock = null;
+		int currentOffset = startOffset;
 
 		while(true)
 		{
@@ -79,7 +52,7 @@ public class RegexBlock implements PerlElementTypes
 
 			if( !isCharGroup && !isEscaped && closingChar == currentChar )
 			{
-				newBlock = new RegexBlock(buffer, startOffset, currentOffset + 1, openingCharOffset, currentOffset);
+				newBlock = new RegexBlock(buffer, startOffset, currentOffset + 1, openingChar, closingChar);
 				break;
 			}
 
@@ -93,9 +66,7 @@ public class RegexBlock implements PerlElementTypes
 
 			currentOffset++;
 		}
-
 		return newBlock;
-
 	}
 
 	/**
@@ -130,37 +101,31 @@ public class RegexBlock implements PerlElementTypes
 	protected int startOffset;
 	protected int endOffset;
 	protected CharSequence buffer;
-	protected Integer openingCharOffset;
-	protected Integer closingCharOffset;
+	protected char charOpener;
+	protected char charCloser;
 
-	protected RegexBlock(CharSequence buffer, int startOffset, int endOffset, Integer openingCharOffset, Integer closingCharOffset)
+	protected RegexBlock(CharSequence buffer, int startOffset, int endOffset, char charOpener, char charCloser)
 	{
 		this.startOffset = startOffset;
 		this.endOffset = endOffset;
 		this.buffer = buffer;
-		this.openingCharOffset = openingCharOffset;
-		this.closingCharOffset = closingCharOffset;
+		this.charOpener = charOpener;
+		this.charCloser = charCloser;
 	}
 
 	public Character getOpeningQuote()
 	{
-		return openingCharOffset == null
-				? null
-				: buffer.charAt(openingCharOffset);
+		return charOpener;
 	}
 
 	public Character getClosingQuote()
 	{
-		return closingCharOffset == null
-				? null
-				: buffer.charAt(closingCharOffset);
+		return charCloser;
 	}
 
 	public boolean hasSameQuotes()
 	{
-		return
-			openingCharOffset == null	// no opening char
-			|| getOpeningQuote().equals(getClosingQuote()); // open and close are equal
+		return charOpener == charCloser;
 	}
 
 
@@ -185,12 +150,6 @@ public class RegexBlock implements PerlElementTypes
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
 
 		int currentOffset = startOffset;
-		if( openingCharOffset != null ) // got opening quote
-		{
-			tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE));
-			currentOffset++;
-		}
-
 		boolean isEscaped = false;
 		boolean isCharGroup = false;
 		int regexEndOffset = endOffset - 1; // one for quote
@@ -234,7 +193,7 @@ public class RegexBlock implements PerlElementTypes
 			isEscaped = !isEscaped && currentChar == '\\';
 		}
 
-		tokens.add(new CustomToken(closingCharOffset, closingCharOffset + 1, PERL_REGEX_QUOTE));
+		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE));
 
 		return tokens;
 	}
@@ -248,11 +207,6 @@ public class RegexBlock implements PerlElementTypes
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
 
 		int currentOffset = startOffset;
-		if( openingCharOffset != null ) // got opening quote
-		{
-			tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE));
-			currentOffset++;
-		}
 
 		boolean isEscaped = false;
 		boolean isCharGroup = false;
@@ -288,7 +242,7 @@ public class RegexBlock implements PerlElementTypes
 			currentOffset++;
 		}
 
-		tokens.add(new CustomToken(closingCharOffset, closingCharOffset + 1, PERL_REGEX_QUOTE));
+		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE));
 
 		return tokens;
 	}

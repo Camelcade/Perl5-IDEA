@@ -65,7 +65,7 @@ NUMBER = [0-9_]+( "." [0-9_]+ )?
 THE_END         = __END__
 THE_DATA        = __DATA__
 
-PERL_OPERATORS = "," | "->" | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "/" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists"
+PERL_OPERATORS = "," | "->" | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%" | "x" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "lt" | "gt" | "le" | "ge" | "==" | "!=" | "<=>" | "eq" | "ne" | "cmp" | "~~" | "&" | "|" | "^" | "&&" | "||" | "//" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*=" | "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists"
 
 MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{BAREWORD}\'
 MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{BAREWORD}\"
@@ -75,6 +75,7 @@ MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{BAREWORD}
 POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
 POD_CLOSE       = \="cut"{FULL_LINE}
 
+VAR_SCALAR_REGEXP = "$"[1-9][0-9]*
 VAR_SCALAR_SPECIAL = "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$^TAINT" | "$^UTF8LOCALE" | "$^RE_TRIE_MAXBUF" | "$^CHILD_ERROR_NATIVE" | "$^ENCODING" | "$^OPEN" | "$^RE_DEBUG_FLAGS" | "$^A" | "$^C" | "$^T" | "$^S" | "$^V" | "$^W" | "$^X" | "$^D" | "$^E" | "$^F" | "$^H" | "$^I" | "$^L" | "$^M" | "$^N" | "$^O" | "$^P" | "$^R" | "$^H" | "$!" | "$\"" | "$#" | "$$" | "$%" | "$&" | "$'" | "$(" | "$)" | "$*" | "$+" | "$," | "$_" | "$-" | "$`" | "$." | "$a" | "$/" | "$0" | "$:" | "$;" | "$<" | "$=" | "$>" | "$?" | "$@" | "$[" | "$\"" | "$]" | "$|" | "$^" | "$~" | "$+" | "$-" | "$_" | "$!" | "$+" | "$-"
 VAR_ARRAY_SPECIAL = "@_" | "@!" | "@+" | "@-" | "@^H"
 VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
@@ -101,6 +102,7 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 %xstate LEX_POD
 
 %state LEX_BAREWORD_STRING
+%state LEX_CODE
 
 %state LEX_MULTILINE_WAITING
 %xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
@@ -129,7 +131,7 @@ TRANS_MODIFIERS = [cdsr]
 **/
 <LEX_REGEX_OPENER>{
     {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
-    .   { parseRegex(); break;}
+    .   { return parseRegex(); }
 }
 
 <LEX_REGEX_ITEMS>{
@@ -300,6 +302,7 @@ TRANS_MODIFIERS = [cdsr]
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 {VAR_SCALAR_SPECIAL} {return PERL_SCALAR;}
+{VAR_SCALAR_REGEXP} {return PERL_SCALAR;}
 {VAR_SCALAR} {return PERL_SCALAR;}
 {VAR_HASH_SPECIAL} {return PERL_HASH;}
 {VAR_HASH} {return PERL_HASH;}
@@ -315,6 +318,12 @@ TRANS_MODIFIERS = [cdsr]
 {QUOTE_FUNCTIONS} {return processQuoteLikeStringOpener();}
 {QUOTE_LIST_FUNCTIONS} {return processQuoteLikeListOpener();}
 {PERL_TAGS}    {return PERL_TAG;}
+"/"   {   // regexp or div
+    IElementType tokenType = processDiv();
+    if( tokenType == null )
+        break;
+    return tokenType;
+}
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 

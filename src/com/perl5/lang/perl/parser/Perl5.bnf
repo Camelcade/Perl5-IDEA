@@ -79,8 +79,8 @@ block ::= '{' (file_item + | expr )? '}';
 file_item ::= package_definition | package_element
 
 private package_element ::=
-    block_element (PERL_SEMI | <<eof>>) ?
-    | line_element if_postfix ? (PERL_SEMI | <<eof>>) ?
+    block_element (PERL_SEMI + | <<eof>>) ?
+    | line_element if_postfix ? (PERL_SEMI + | <<eof>>) ?
 
 private block_element ::=
     eval
@@ -226,7 +226,10 @@ regex ::=
 private m_regex ::= 'm' match_regex
 private qr_regex ::= 'qr' match_regex
 private match_regex ::= PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE perl_regex_modifiers ?
-private s_regex ::= 's' PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE PERL_REGEX_QUOTE ? perl_regex ? PERL_REGEX_QUOTE perl_regex_modifiers ?
+private s_regex ::= 's' PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE s_regex_replacement perl_regex_modifiers ?
+private s_regex_replacement ::=
+    PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE
+    | perl_regex ? PERL_REGEX_QUOTE
 
 perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
 perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick

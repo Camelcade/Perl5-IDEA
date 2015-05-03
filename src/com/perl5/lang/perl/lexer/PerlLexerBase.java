@@ -11,7 +11,8 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	// @todo should be parseString
 	public abstract IElementType processStringOpener();
 
-	public abstract void parseRegex();
+	public abstract IElementType processDiv();
+	public abstract IElementType parseRegex();
 	public abstract IElementType getParsedToken();
 
 	public abstract void popState();

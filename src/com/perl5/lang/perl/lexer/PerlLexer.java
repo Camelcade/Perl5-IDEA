@@ -16,19 +16,43 @@ import java.util.regex.Pattern;
 
 public class PerlLexer extends PerlLexerGenerated{
 
+	protected IElementType lastSignificantTokenType;
+	protected String lastSignificantToken;
+	protected IElementType lastTokenType;
+
 	public PerlLexer(java.io.Reader in) {
 		super(in);
 	}
 
 	public IElementType advance() throws IOException{
-		System.out.printf("Advances from %d %d\n", getTokenStart(), yystate());
-		return super.advance();
+//		System.out.printf("Advances from %d %d\n", getTokenStart(), yystate());
+		IElementType tokenType = super.advance();
+
+		lastTokenType = tokenType;
+		if( tokenType != TokenType.NEW_LINE_INDENT
+			&& tokenType != TokenType.WHITE_SPACE
+			&& tokenType != PERL_COMMENT
+			&& tokenType != PERL_COMMENT_BLOCK
+			&& tokenType != PERL_POD
+		)
+		{
+			lastSignificantTokenType = tokenType;
+			lastSignificantToken = yytext().toString();
+
+			if( yystate() == 0 && tokenType != PERL_SEMI) // to enshure proper highlighting reparsing
+				yybegin(LEX_CODE);
+		}
+
+		return tokenType;
 	}
 
 	public void reset(CharSequence buf, int start, int end, int initialState)
 	{
-		System.out.printf("Reset to %d %d %d\n", start, end, initialState);
+//		if(end > 0)
+//			System.out.printf("Reset to %d %d %d `%c`\n", start, end, initialState, buf.charAt(start));
 		super.reset(buf,start,end,initialState);
+		lastTokenType = null;
+		lastSignificantTokenType = null;
 	}
 
 
@@ -101,6 +125,34 @@ public class PerlLexer extends PerlLexerGenerated{
 	 **/
 	String regexCommand = null;
 
+	// guess if this is a division or started regex
+	public IElementType processDiv()
+	{
+		if(	// seems regex
+			lastSignificantTokenType == PERL_OPERATOR
+			|| lastSignificantTokenType == PERL_LPAREN
+			|| lastSignificantTokenType == PERL_SEMI
+			|| lastSignificantToken.equals("split")
+		)
+		{
+			allowSharp = true;
+			isEscaped = false;
+			regexCommand = "m";
+			sectionsNumber = 1;
+
+			pushState();
+			yypushback(1);
+			yybegin(LEX_REGEX_OPENER);
+
+			return null;
+		}
+		else
+		{
+			return PERL_OPERATOR;
+		}
+	}
+
+
 	/**
 	 * Sets up regex parser
 	 * @return command keyword
@@ -124,32 +176,32 @@ public class PerlLexer extends PerlLexerGenerated{
 	/**
 	 *  Parses regexp from the current position (opening delimiter) and preserves tokens in tokensList
 	 *  REGEX_MODIFIERS = [msixpodualgcer]
+	 *  @return opening delimiter type
 	 */
-	public void parseRegex()
+	public IElementType parseRegex()
 	{
 		tokensList.clear();
-		yypushback(1);
 
 		CharSequence buffer = getBuffer();
 		int bufferEnd = getBufferEnd();
 
 		// find block 1
-		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, getTokenStart(), bufferEnd);
+		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, getTokenStart() + 1, bufferEnd, yytext().charAt(0));
 
 		if( firstBlock == null )
 		{
 //			System.err.println("Stop after first block");
 			yybegin(YYINITIAL);
-			return;
+			return PERL_REGEX_QUOTE;
 		}
 		int currentOffset = firstBlock.getEndOffset();
-
 
 		// find block 2
 		ArrayList<CustomToken> betweenBlocks = new ArrayList<CustomToken>();
 		RegexBlock secondBLock = null;
+		CustomToken secondBlockOpener = null;
 
-		if( sectionsNumber == 2 )
+		if( sectionsNumber == 2 && currentOffset < bufferEnd )
 		{
 			if(firstBlock.hasSameQuotes())
 			{
@@ -178,14 +230,15 @@ public class PerlLexer extends PerlLexerGenerated{
 				}
 
 				// read block
-				secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd);
+				secondBlockOpener = new CustomToken(currentOffset, currentOffset+1, PERL_REGEX_QUOTE);
+				secondBLock = RegexBlock.parseBlock(buffer, currentOffset + 1, bufferEnd, buffer.charAt(currentOffset));
 			}
 
 			if( secondBLock == null )
 			{
 //				System.err.println("Stop after second block");
 				yybegin(YYINITIAL);
-				return;
+				return PERL_REGEX_QUOTE;
 			}
 			currentOffset = secondBLock.getEndOffset();
 		}
@@ -218,6 +271,9 @@ public class PerlLexer extends PerlLexerGenerated{
 			// parse spaces
 			tokensList.addAll(betweenBlocks);
 
+			if( secondBlockOpener != null)
+				tokensList.add(secondBlockOpener);
+
 			// parse block 2
 			tokensList.addAll(secondBLock.tokenize(isExtended));
 		}
@@ -226,6 +282,8 @@ public class PerlLexer extends PerlLexerGenerated{
 		tokensList.addAll(modifierTokens);
 
 		yybegin(LEX_REGEX_ITEMS);
+
+		return PERL_REGEX_QUOTE;
 	}
 
 
