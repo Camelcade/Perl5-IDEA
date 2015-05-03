@@ -154,20 +154,54 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 
 
 		// find block 2
+		ArrayList<CustomToken> betweenBlocks = new ArrayList<CustomToken>();
 		RegexBlock secondBLock = null;
 
 		if( sectionsNumber == 2 )
 		{
-			// spaces between if {}
+			if(firstBlock.hasSameQuotes())
+			{
+				secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd, firstBlock.getOpeningQuote());
+			}
+			else
+			{
+				// spaces and comments between if {}, fill betweenBlock
+				while( true )
+				{
+					char currentChar = buffer.charAt(currentOffset);
+					if( RegexBlock.isWhiteSpace(currentChar) )	// white spaces
+					{
+						int whiteSpaceStart = currentOffset;
+						while( RegexBlock.isWhiteSpace(buffer.charAt(currentOffset))){currentOffset++;}
+						betweenBlocks.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
+					}
+					else if( currentChar == '#' )	// line comment
+					{
+						int commentStart = currentOffset;
+						while(buffer.charAt(currentOffset) != '\n'){currentOffset++;}
+						betweenBlocks.add(new CustomToken(commentStart, currentOffset, PERL_COMMENT));
+					}
+					else
+						break;
+				}
 
-			// read block
+				// read block
+				secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd);
+			}
+
+			if( secondBLock == null )
+			{
+				System.err.println("Stop after second block");
+				yybegin_YYINITIAL();
+				return;
+			}
+			currentOffset = secondBLock.getEndOffset() + 1;
 		}
 
 		// check modifiers for x
 		boolean isExtended = false;
 		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand);
-		int modifiersStart, modifiersEnd;
-		modifiersStart = modifiersEnd = currentOffset;
+		int modifiersEnd = currentOffset;
 		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
 
 		while(true)
@@ -185,11 +219,18 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		}
 
 		// parse block 1
-		tokensList.addAll(isExtended ? firstBlock.tokenizeExtended(): firstBlock.tokenize());
+		tokensList.addAll(firstBlock.tokenize(isExtended));
 
-		// parse spaces
+		if( secondBLock != null )
+		{
+			// parse spaces
+			tokensList.addAll(betweenBlocks);
 
-		// parse block 2
+			// parse block 2
+			tokensList.addAll(secondBLock.tokenize(isExtended));
+		}
+
+		// parse modifiers
 		tokensList.addAll(modifierTokens);
 
 		yybegin_LEX_REGEX_ITEMS();
