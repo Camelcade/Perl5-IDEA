@@ -65,6 +65,7 @@ public class RegexBlock implements PerlElementTypes
 		char closingChar = getQuoteCloseChar(openingChar);
 
 		boolean isEscaped = false;
+		boolean isCharGroup = false;
 
 		RegexBlock newBlock = null;
 
@@ -75,13 +76,19 @@ public class RegexBlock implements PerlElementTypes
 
 			char currentChar = buffer.charAt(currentOffset);
 
-			if( !isEscaped && closingChar == currentChar )
+			if( !isCharGroup && !isEscaped && closingChar == currentChar )
 			{
-				newBlock = new RegexBlock(buffer, startOffset, currentOffset, openingCharOffset, currentOffset);
+				newBlock = new RegexBlock(buffer, startOffset, currentOffset + 1, openingCharOffset, currentOffset);
 				break;
 			}
-			else
-				isEscaped = !isEscaped && currentChar == '\\';
+
+			if( !isEscaped && !isCharGroup && currentChar == '[')
+				isCharGroup = true;
+			else if( !isEscaped && isCharGroup && currentChar == ']')
+				isCharGroup = false;
+
+			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
+
 
 			currentOffset++;
 		}
@@ -192,13 +199,41 @@ public class RegexBlock implements PerlElementTypes
 			currentOffset++;
 		}
 
-		while( currentOffset < endOffset )
+		boolean isEscaped = false;
+		boolean isCharGroup = false;
+		int regexEndOffset = endOffset - 1; // one for quote
+
+		while( currentOffset < regexEndOffset )
 		{
-			tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_TOKEN));
+			char currentChar = buffer.charAt(currentOffset);
+			int charsLeft = regexEndOffset - currentOffset;
+
+			if( charsLeft > 3 && "(?#".equals(buffer.subSequence(currentOffset, currentOffset + 3).toString()))
+			{
+				int commentStart = currentOffset;
+				currentOffset += 2;
+				while( currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')'){currentOffset++;}
+				if(currentOffset == regexEndOffset)
+					tokens.add(new CustomToken(commentStart, currentOffset, PERL_COMMENT));
+				else
+					tokens.add(new CustomToken(commentStart, currentOffset+1, PERL_COMMENT));
+			}
+			else
+			{
+				tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_TOKEN));
+			}
+
+			if( !isEscaped && !isCharGroup && currentChar == '[')
+				isCharGroup = true;
+			else if( !isEscaped && isCharGroup && currentChar == ']')
+				isCharGroup = false;
+
+			isEscaped = !isEscaped && currentChar == '\\';
+
 			currentOffset++;
 		}
 
-		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE));
+		tokens.add(new CustomToken(closingCharOffset, closingCharOffset + 1, PERL_REGEX_QUOTE));
 
 		return tokens;
 	}

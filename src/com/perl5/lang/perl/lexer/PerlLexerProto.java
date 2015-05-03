@@ -150,7 +150,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 			yybegin_YYINITIAL();
 			return;
 		}
-		int currentOffset = firstBlock.getEndOffset() + 1;
+		int currentOffset = firstBlock.getEndOffset();
 
 
 		// find block 2
@@ -195,7 +195,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 				yybegin_YYINITIAL();
 				return;
 			}
-			currentOffset = secondBLock.getEndOffset() + 1;
+			currentOffset = secondBLock.getEndOffset();
 		}
 
 		// check modifiers for x
