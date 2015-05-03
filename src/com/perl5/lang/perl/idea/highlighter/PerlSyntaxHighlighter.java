@@ -49,6 +49,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 	public static final TextAttributesKey PERL_PACKAGE_PRAGMA = createTextAttributesKey("PERL_PACKAGE_PRAGMA", DefaultLanguageHighlighterColors.CLASS_NAME);
 
 	public static final TextAttributesKey PERL_REGEX_QUOTE = createTextAttributesKey("PERL_REGEX_QUOTE", DefaultLanguageHighlighterColors.BRACKETS);
+	public static final TextAttributesKey PERL_REGEX_TOKEN = createTextAttributesKey("PERL_REGEX_TOKEN", DefaultLanguageHighlighterColors.STRING);
 
 	public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
@@ -91,7 +92,11 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 //		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_XHTML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
 
 //		attributesMap.put(PerlElementTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
+
 		attributesMap.put(PerlElementTypes.PERL_REGEX_QUOTE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		attributesMap.put(PerlElementTypes.PERL_REGEX_TOKEN, new TextAttributesKey[]{PERL_REGEX_TOKEN});
+		attributesMap.put(PerlElementTypes.PERL_REGEX_MODIFIER, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
+
 		attributesMap.put(PerlElementTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
 		attributesMap.put(PerlElementTypes.PERL_LBRACE, new TextAttributesKey[]{PERL_BRACE});
 		attributesMap.put(PerlElementTypes.PERL_RBRACE, new TextAttributesKey[]{PERL_BRACE});
@@ -100,7 +105,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 		attributesMap.put(PerlElementTypes.PERL_LPAREN, new TextAttributesKey[]{PERL_PAREN});
 		attributesMap.put(PerlElementTypes.PERL_RPAREN, new TextAttributesKey[]{PERL_PAREN});
 
-		attributesMap.put(PerlElementTypes.PERL_REGEX_MODIFIER, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_KEYWORD, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_TAG, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});

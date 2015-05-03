@@ -1,6 +1,7 @@
 package com.perl5.lang.perl.lexer;
 
 import com.google.common.primitives.Chars;
+import com.intellij.psi.TokenType;
 
 import java.util.*;
 
@@ -181,7 +182,61 @@ public class RegexBlock implements PerlElementTypes
 	 */
 	protected Collection<CustomToken> tokenizeExtended()
 	{
-		return tokenizeRegular();
+		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
+
+		int currentOffset = startOffset;
+		if( openingCharOffset != null ) // got opening quote
+		{
+			tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE));
+			currentOffset++;
+		}
+
+		boolean isEscaped = false;
+		boolean isCharGroup = false;
+		int regexEndOffset = endOffset - 1; // one for quote
+
+		while( currentOffset < regexEndOffset )
+		{
+			char currentChar = buffer.charAt(currentOffset);
+			int charsLeft = regexEndOffset - currentOffset;
+
+			if( charsLeft > 3 && "(?#".equals(buffer.subSequence(currentOffset, currentOffset + 3).toString()))
+			{
+				int commentStart = currentOffset;
+				currentOffset += 2;
+				while( currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')'){currentOffset++;};
+				if( currentOffset < regexEndOffset )
+					currentOffset++;
+				tokens.add(new CustomToken(commentStart, currentOffset, PERL_COMMENT));
+			}
+			else if(!isEscaped && !isCharGroup && isWhiteSpace(currentChar)) // whitespace here
+			{
+				int whiteSpaceStart = currentOffset;
+				while( currentOffset < regexEndOffset && isWhiteSpace(buffer.charAt(currentOffset))){currentOffset++;}
+				tokens.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
+			}
+			else if(!isEscaped && !isCharGroup && currentChar == '#') // comment here
+			{
+				int commentStart = currentOffset;
+				while(currentOffset < regexEndOffset && buffer.charAt(currentOffset) != '\n'){currentOffset++;}
+				tokens.add(new CustomToken(commentStart, currentOffset, PERL_COMMENT));
+			}
+			else
+			{
+				tokens.add(new CustomToken(currentOffset, ++currentOffset, PERL_REGEX_TOKEN));
+			}
+
+			if( !isEscaped && !isCharGroup && currentChar == '[')
+				isCharGroup = true;
+			else if( !isEscaped && isCharGroup && currentChar == ']')
+				isCharGroup = false;
+
+			isEscaped = !isEscaped && currentChar == '\\';
+		}
+
+		tokens.add(new CustomToken(closingCharOffset, closingCharOffset + 1, PERL_REGEX_QUOTE));
+
+		return tokens;
 	}
 
 	/**

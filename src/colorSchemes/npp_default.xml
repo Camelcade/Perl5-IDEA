@@ -108,7 +108,7 @@
             <option name="FOREGROUND" value="E00000"/>
         </value>
     </option>
-    <option name="PERL_REGEX_QUOTE">
+    <option name="PERL_REGEX_TOKEN">
         <value>
             <option name="BACKGROUND" value="F8F8F8"/>
         </value>

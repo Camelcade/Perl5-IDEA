@@ -146,7 +146,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 
 		if( firstBlock == null )
 		{
-			System.err.println("Stop after first block");
+//			System.err.println("Stop after first block");
 			yybegin_YYINITIAL();
 			return;
 		}
@@ -191,7 +191,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 
 			if( secondBLock == null )
 			{
-				System.err.println("Stop after second block");
+//				System.err.println("Stop after second block");
 				yybegin_YYINITIAL();
 				return;
 			}
