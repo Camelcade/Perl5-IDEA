@@ -8,29 +8,30 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlOp6ExprImpl extends PerlExprImpl implements PerlOp6Expr {
+public class PerlRegexImpl extends ASTWrapperPsiElement implements PerlRegex {
 
-  public PerlOp6ExprImpl(ASTNode node) {
+  public PerlRegexImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOp6Expr(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitRegex(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
-  public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
+  @Nullable
+  public PerlPerlRegexModifiers getPerlRegexModifiers() {
+    return findChildByClass(PerlPerlRegexModifiers.class);
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PerlRegex getRegex() {
-    return findNotNullChildByClass(PerlRegex.class);
+    return findChildByClass(PerlRegex.class);
   }
 
 }

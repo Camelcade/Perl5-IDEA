@@ -251,12 +251,24 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPerlRegex(@NotNull PerlPerlRegex o) {
+    visitRegex(o);
+  }
+
+  public void visitPerlRegexModifiers(@NotNull PerlPerlRegexModifiers o) {
+    visitPsiElement(o);
+  }
+
   public void visitPerlVersion(@NotNull PerlPerlVersion o) {
     visitPsiElement(o);
   }
 
   public void visitQwExpr(@NotNull PerlQwExpr o) {
     visitExpr(o);
+  }
+
+  public void visitRegex(@NotNull PerlRegex o) {
+    visitPsiElement(o);
   }
 
   public void visitReturnExpr(@NotNull PerlReturnExpr o) {
@@ -291,12 +303,12 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitTrExpr(@NotNull PerlTrExpr o) {
-    visitExpr(o);
-  }
-
   public void visitTrModifiers(@NotNull PerlTrModifiers o) {
     visitPsiElement(o);
+  }
+
+  public void visitTrRegex(@NotNull PerlTrRegex o) {
+    visitRegex(o);
   }
 
   public void visitTrReplacementlist(@NotNull PerlTrReplacementlist o) {

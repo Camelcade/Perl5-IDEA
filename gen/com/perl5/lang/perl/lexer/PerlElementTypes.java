@@ -71,8 +71,11 @@ public interface PerlElementTypes {
   IElementType PACKAGE_REQUIRE = new PerlElementType("PACKAGE_REQUIRE");
   IElementType PACKAGE_USE = new PerlElementType("PACKAGE_USE");
   IElementType PACKAGE_USE_ARGUMENTS = new PerlElementType("PACKAGE_USE_ARGUMENTS");
+  IElementType PERL_REGEX = new PerlElementType("PERL_REGEX");
+  IElementType PERL_REGEX_MODIFIERS = new PerlElementType("PERL_REGEX_MODIFIERS");
   IElementType PERL_VERSION = new PerlElementType("PERL_VERSION");
   IElementType QW_EXPR = new PerlElementType("QW_EXPR");
+  IElementType REGEX = new PerlElementType("REGEX");
   IElementType RETURN_EXPR = new PerlElementType("RETURN_EXPR");
   IElementType SCALAR = new PerlElementType("SCALAR");
   IElementType SHIFT_EXPR = new PerlElementType("SHIFT_EXPR");
@@ -81,8 +84,8 @@ public interface PerlElementTypes {
   IElementType SUB_BLOCK_ANON = new PerlElementType("SUB_BLOCK_ANON");
   IElementType SUB_BLOCK_NAMED = new PerlElementType("SUB_BLOCK_NAMED");
   IElementType TERM = new PerlElementType("TERM");
-  IElementType TR_EXPR = new PerlElementType("TR_EXPR");
   IElementType TR_MODIFIERS = new PerlElementType("TR_MODIFIERS");
+  IElementType TR_REGEX = new PerlElementType("TR_REGEX");
   IElementType TR_REPLACEMENTLIST = new PerlElementType("TR_REPLACEMENTLIST");
   IElementType TR_SEARCHLIST = new PerlElementType("TR_SEARCHLIST");
   IElementType VARIABLE_DEFINITION = new PerlElementType("VARIABLE_DEFINITION");
@@ -110,10 +113,9 @@ public interface PerlElementTypes {
   IElementType PERL_QUOTE = new PerlTokenType("\"");
   IElementType PERL_RBRACE = new PerlTokenType("}");
   IElementType PERL_RBRACK = new PerlTokenType("]");
-  IElementType PERL_REGEX = new PerlTokenType("PERL_REGEX");
-  IElementType PERL_REGEX_CONTENT = new PerlTokenType("PERL_REGEX_CONTENT");
   IElementType PERL_REGEX_MODIFIER = new PerlTokenType("PERL_REGEX_MODIFIER");
   IElementType PERL_REGEX_QUOTE = new PerlTokenType("PERL_REGEX_QUOTE");
+  IElementType PERL_REGEX_TOKEN = new PerlTokenType("PERL_REGEX_TOKEN");
   IElementType PERL_RPAREN = new PerlTokenType(")");
   IElementType PERL_SCALAR = new PerlTokenType("PERL_SCALAR");
   IElementType PERL_SEMI = new PerlTokenType(";");
@@ -312,11 +314,20 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_USE_ARGUMENTS) {
         return new PerlPackageUseArgumentsImpl(node);
       }
+      else if (type == PERL_REGEX) {
+        return new PerlPerlRegexImpl(node);
+      }
+      else if (type == PERL_REGEX_MODIFIERS) {
+        return new PerlPerlRegexModifiersImpl(node);
+      }
       else if (type == PERL_VERSION) {
         return new PerlPerlVersionImpl(node);
       }
       else if (type == QW_EXPR) {
         return new PerlQwExprImpl(node);
+      }
+      else if (type == REGEX) {
+        return new PerlRegexImpl(node);
       }
       else if (type == RETURN_EXPR) {
         return new PerlReturnExprImpl(node);
@@ -342,11 +353,11 @@ public interface PerlElementTypes {
       else if (type == TERM) {
         return new PerlTermImpl(node);
       }
-      else if (type == TR_EXPR) {
-        return new PerlTrExprImpl(node);
-      }
       else if (type == TR_MODIFIERS) {
         return new PerlTrModifiersImpl(node);
+      }
+      else if (type == TR_REGEX) {
+        return new PerlTrRegexImpl(node);
       }
       else if (type == TR_REPLACEMENTLIST) {
         return new PerlTrReplacementlistImpl(node);

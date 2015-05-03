@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlTrExprImpl extends PerlExprImpl implements PerlTrExpr {
+public class PerlTrRegexImpl extends PerlRegexImpl implements PerlTrRegex {
 
-  public PerlTrExprImpl(ASTNode node) {
+  public PerlTrRegexImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitTrExpr(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitTrRegex(this);
     else super.accept(visitor);
   }
 

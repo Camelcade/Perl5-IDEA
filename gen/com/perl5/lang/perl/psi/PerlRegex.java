@@ -5,15 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlTrExpr extends PerlExpr {
+public interface PerlRegex extends PsiElement {
 
   @Nullable
-  PerlTrModifiers getTrModifiers();
+  PerlPerlRegexModifiers getPerlRegexModifiers();
 
-  @NotNull
-  PerlTrReplacementlist getTrReplacementlist();
-
-  @NotNull
-  PerlTrSearchlist getTrSearchlist();
+  @Nullable
+  PerlRegex getRegex();
 
 }

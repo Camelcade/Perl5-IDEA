@@ -7,8 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlScalar extends PsiElement {
 
-  @NotNull
-  List<PerlExpr> getExprList();
+  @Nullable
+  PerlExpr getExpr();
+
+  @Nullable
+  PerlRegex getRegex();
 
   @Nullable
   PerlSubBlockAnon getSubBlockAnon();

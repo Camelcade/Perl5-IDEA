@@ -43,10 +43,9 @@
     PERL_KEYWORD="PERL_KEYWORD"
     PERL_OPERATOR="PERL_OPERATOR"
 
-    PERL_REGEX="PERL_REGEX"
     PERL_REGEX_QUOTE="PERL_REGEX_QUOTE"
     PERL_REGEX_MODIFIER="PERL_REGEX_MODIFIER"
-    PERL_REGEX_CONTENT="PERL_REGEX_CONTENT"
+    PERL_REGEX_TOKEN="PERL_REGEX_TOKEN"
 
     PERL_STRING="PERL_STRING"
     PERL_STRING_CONTENT="PERL_STRING_CONTENT"
@@ -71,6 +70,7 @@
   ]
 
     extends(".*expr")=expr
+    extends(".*regex")=regex
  }
 
 perlFile ::= file_item*
@@ -196,7 +196,7 @@ op_3_pref_expr ::= ('++'|'--') expr
 op_3_suff_expr ::= expr ('++'|'--')
 op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
 op_5_expr ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true }
-op_6_expr ::= expr ('=~'|'!~') expr
+op_6_expr ::= expr ('=~'|'!~') regex
 op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
 op_8_expr ::= expr ('+'|'-'|'.') expr
 op_9_expr ::= expr ('<<'|'>>') expr
@@ -215,6 +215,29 @@ op_21_expr ::= call_rightward
 op_22_expr ::= 'not' expr { rightAssociative=true }
 op_23_expr ::= expr 'and' expr
 op_24_expr ::= expr ('or'|'xor') expr
+
+regex ::=
+    m_regex
+    | qr_regex
+    | s_regex
+    | tr_regex
+    | match_regex
+
+private m_regex ::= 'm' match_regex
+private qr_regex ::= 'qr' match_regex
+private match_regex ::= PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE perl_regex_modifiers ?
+private s_regex ::= 's' PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE PERL_REGEX_QUOTE ? perl_regex ? PERL_REGEX_QUOTE perl_regex_modifiers ?
+
+perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
+perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick
+
+tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE PERL_REGEX_QUOTE ? tr_replacementlist PERL_REGEX_QUOTE tr_modifiers ?
+tr_searchlist ::= PERL_STRING_CONTENT
+tr_replacementlist ::= PERL_STRING_CONTENT
+
+tr_modifiers ::= PERL_REGEX_MODIFIER +
+
+
 
 term ::=
     '(' expr ')'
@@ -260,11 +283,6 @@ qw_expr ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 shift_expr ::= ('shift' | 'pop') shift_expr_args ?
 private shift_expr_args ::= list_expr | expr
 
-tr_expr ::= ('tr'|'y')  tr_searchlist tr_replacementlist tr_modifiers ?
-tr_searchlist ::= PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
-tr_replacementlist ::= PERL_QUOTE ? PERL_STRING_CONTENT PERL_QUOTE
-tr_modifiers ::= PERL_REGEX_MODIFIER +
-
 // sort
 sort_expr ::= 'sort' sort_op_args
 sort_op_args ::=
@@ -299,7 +317,7 @@ hash ::=
 
 scalar ::=
     shift_expr                        // shift expression
-    | tr_expr
+    | regex
     | scalar_safe '->'? '[' expr ']'      // array element
     | scalar_safe '->'? '{' expr '}'    // hash element
     | '[' expr ? ']'                    // anonymous array

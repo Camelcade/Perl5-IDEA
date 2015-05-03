@@ -10,27 +10,15 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlOp6ExprImpl extends PerlExprImpl implements PerlOp6Expr {
+public class PerlPerlRegexImpl extends PerlRegexImpl implements PerlPerlRegex {
 
-  public PerlOp6ExprImpl(ASTNode node) {
+  public PerlPerlRegexImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOp6Expr(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitPerlRegex(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public PerlRegex getRegex() {
-    return findNotNullChildByClass(PerlRegex.class);
   }
 
 }

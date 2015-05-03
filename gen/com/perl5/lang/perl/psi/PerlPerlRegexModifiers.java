@@ -5,15 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlPerlReference extends PsiElement {
-
-  @Nullable
-  PerlArray getArray();
-
-  @Nullable
-  PerlHash getHash();
-
-  @Nullable
-  PerlScalar getScalar();
+public interface PerlPerlRegexModifiers extends PsiElement {
 
 }

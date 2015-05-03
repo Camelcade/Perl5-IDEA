@@ -48,6 +48,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 	public static final TextAttributesKey PERL_OPERATOR = createTextAttributesKey("PERL_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
 	public static final TextAttributesKey PERL_PACKAGE_PRAGMA = createTextAttributesKey("PERL_PACKAGE_PRAGMA", DefaultLanguageHighlighterColors.CLASS_NAME);
 
+	public static final TextAttributesKey PERL_REGEX_QUOTE = createTextAttributesKey("PERL_REGEX_QUOTE", DefaultLanguageHighlighterColors.BRACKETS);
+
 	public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey PERL_DX_STRING = createTextAttributesKey("PERL_DX_STRING", DefaultLanguageHighlighterColors.STRING);
@@ -89,6 +91,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 //		attributesMap.put(PerlElementTypes.PERL_MULTILINE_MARKER_XHTML, new TextAttributesKey[]{PERL_MULTILINE_MARKER});
 
 //		attributesMap.put(PerlElementTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
+		attributesMap.put(PerlElementTypes.PERL_REGEX_QUOTE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		attributesMap.put(PerlElementTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
 		attributesMap.put(PerlElementTypes.PERL_LBRACE, new TextAttributesKey[]{PERL_BRACE});
 		attributesMap.put(PerlElementTypes.PERL_RBRACE, new TextAttributesKey[]{PERL_BRACE});

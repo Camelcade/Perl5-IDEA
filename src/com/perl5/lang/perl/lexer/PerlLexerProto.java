@@ -4,8 +4,7 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,8 +61,8 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	protected int stringContentStart;
 	protected boolean isEscaped = false;
 
-	protected int currentSectionNumber = 0;	// needs for regexps replaces and tr
 	protected int sectionsNumber = 0; 	// number of sections one or two
+	protected int currentSectionNumber = 0; // current section
 
 	protected final LinkedList<CustomToken> tokensList = new LinkedList<CustomToken>();
 
@@ -108,10 +107,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public abstract void yybegin_LEX_REGEX_OPENER();
 	public abstract void yybegin_LEX_REGEX_ITEMS();
 
-	/**
-	 * Extended regex flags, special treatment for spaces and comments
-	 */
-	private boolean isExtended = false;
+	String regexCommand = null;
 
 	/**
 	 * Sets up regex parser
@@ -120,15 +116,14 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public IElementType processRegexOpener()
 	{
 		allowSharp = true;
-		isExtended = false;
 		isEscaped = false;
+		regexCommand = yytext().toString();
 
-		if( "s".equals(yytext()) )	// two sections s
+		if( "s".equals(regexCommand) )	// two sections s
 			sectionsNumber = 2;
 		else						// one section qr m
 			sectionsNumber = 1;
 
-		currentSectionNumber = 0;
 		pushState();
 		yybegin_LEX_REGEX_OPENER();
 		return PERL_KEYWORD;
@@ -141,22 +136,62 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	public void parseRegex()
 	{
 		tokensList.clear();
-		int currentPosition = getTokenStart();
-		int endPosition = getBufferEnd();
+		yypushback(1);
+
+		CharSequence buffer = getBuffer();
+		int bufferEnd = getBufferEnd();
 
 		// find block 1
+		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, getTokenStart(), bufferEnd);
+
+		if( firstBlock == null )
+		{
+			System.err.println("Stop after first block");
+			yybegin_YYINITIAL();
+			return;
+		}
+		int currentOffset = firstBlock.getEndOffset() + 1;
+
 
 		// find block 2
+		RegexBlock secondBLock = null;
+
+		if( sectionsNumber == 2 )
+		{
+			// spaces between if {}
+
+			// read block
+		}
 
 		// check modifiers for x
+		boolean isExtended = false;
+		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand);
+		int modifiersStart, modifiersEnd;
+		modifiersStart = modifiersEnd = currentOffset;
+		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
+
+		while(true)
+		{
+			if( modifiersEnd == bufferEnd)	// eof
+				break;
+			else if( !allowedModifiers.contains(buffer.charAt(modifiersEnd)))	// unknown modifier
+				break;
+			else if( buffer.charAt(modifiersEnd) == 'x')	// mark as extended
+				isExtended = true;
+
+			modifierTokens.add(new CustomToken(modifiersEnd, modifiersEnd + 1, PERL_REGEX_MODIFIER));
+
+			modifiersEnd++;
+		}
 
 		// parse block 1
+		tokensList.addAll(isExtended ? firstBlock.tokenizeExtended(): firstBlock.tokenize());
+
+		// parse spaces
 
 		// parse block 2
+		tokensList.addAll(modifierTokens);
 
-		// parse modifiers
-
-		yypushback(1);
 		yybegin_LEX_REGEX_ITEMS();
 	}
 
@@ -173,8 +208,8 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 	{
 		allowSharp = true;
 		isEscaped = false;
-		pushState();
 		currentSectionNumber = 0;
+		pushState();
 		yybegin_LEX_TRANS_OPENER();
 		return PERL_KEYWORD;
 	}
@@ -194,7 +229,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		yybegin_LEX_TRANS_CHARS();
 		stringContentStart = getTokenStart() + 1;
 
-		return PERL_QUOTE;
+		return PERL_REGEX_QUOTE;
 	}
 
 	public IElementType processTransChar()
@@ -238,7 +273,7 @@ public abstract class PerlLexerProto implements FlexLexer, PerlElementTypes
 		{
 			yybegin_LEX_TRANS_MODIFIERS();
 		}
-		return PERL_QUOTE;
+		return PERL_REGEX_QUOTE;
 	}
 
 

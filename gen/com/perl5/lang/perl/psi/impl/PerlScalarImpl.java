@@ -23,9 +23,15 @@ public class PerlScalarImpl extends ASTWrapperPsiElement implements PerlScalar {
   }
 
   @Override
-  @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  @Nullable
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlRegex getRegex() {
+    return findChildByClass(PerlRegex.class);
   }
 
   @Override
