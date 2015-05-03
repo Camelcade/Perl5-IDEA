@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlLocalDefinition extends PsiElement {
+public interface PerlSplitExpr extends PerlExpr {
 
   @NotNull
-  PerlLocalVariableDefinitionArguments getLocalVariableDefinitionArguments();
+  PerlSplitArgs getSplitArgs();
 
 }

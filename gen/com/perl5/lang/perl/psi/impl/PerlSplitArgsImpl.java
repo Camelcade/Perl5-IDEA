@@ -11,14 +11,14 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlObjectMethodObjectImpl extends ASTWrapperPsiElement implements PerlObjectMethodObject {
+public class PerlSplitArgsImpl extends ASTWrapperPsiElement implements PerlSplitArgs {
 
-  public PerlObjectMethodObjectImpl(ASTNode node) {
+  public PerlSplitArgsImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitObjectMethodObject(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSplitArgs(this);
     else super.accept(visitor);
   }
 

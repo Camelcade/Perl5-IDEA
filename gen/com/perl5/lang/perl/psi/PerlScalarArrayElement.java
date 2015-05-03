@@ -5,16 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlCallLeftward extends PsiElement {
+public interface PerlScalarArrayElement extends PsiElement {
 
-  @Nullable
-  PerlCalee getCalee();
-
-  @Nullable
-  PerlCallArguments getCallArguments();
-
-  @Nullable
-  PerlExpr getExpr();
+  @NotNull
+  List<PerlExpr> getExprList();
 
   @Nullable
   PerlPackageRequire getPackageRequire();

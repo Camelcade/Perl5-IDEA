@@ -19,7 +19,7 @@ public interface PerlElementTypes {
   IElementType CALL_LEFTWARD = new PerlElementType("CALL_LEFTWARD");
   IElementType CALL_RIGHTWARD = new PerlElementType("CALL_RIGHTWARD");
   IElementType CODE_LINE = new PerlElementType("CODE_LINE");
-  IElementType EVAL = new PerlElementType("EVAL");
+  IElementType EVAL_EXPR = new PerlElementType("EVAL_EXPR");
   IElementType EXPR = new PerlElementType("EXPR");
   IElementType FILE_ITEM = new PerlElementType("FILE_ITEM");
   IElementType FOR_BLOCK = new PerlElementType("FOR_BLOCK");
@@ -36,6 +36,7 @@ public interface PerlElementTypes {
   IElementType LAST_EXPR = new PerlElementType("LAST_EXPR");
   IElementType LIST_EXPR = new PerlElementType("LIST_EXPR");
   IElementType LOCAL_DEFINITION = new PerlElementType("LOCAL_DEFINITION");
+  IElementType LOCAL_VARIABLE_DEFINITION_ARGUMENTS = new PerlElementType("LOCAL_VARIABLE_DEFINITION_ARGUMENTS");
   IElementType MY_DEFINITION = new PerlElementType("MY_DEFINITION");
   IElementType OBJECT_METHOD = new PerlElementType("OBJECT_METHOD");
   IElementType OBJECT_METHOD_OBJECT = new PerlElementType("OBJECT_METHOD_OBJECT");
@@ -77,7 +78,11 @@ public interface PerlElementTypes {
   IElementType QW_EXPR = new PerlElementType("QW_EXPR");
   IElementType REGEX = new PerlElementType("REGEX");
   IElementType RETURN_EXPR = new PerlElementType("RETURN_EXPR");
-  IElementType SCALAR = new PerlElementType("SCALAR");
+  IElementType SCALAR_ANON_ARRAY = new PerlElementType("SCALAR_ANON_ARRAY");
+  IElementType SCALAR_ANON_HASH = new PerlElementType("SCALAR_ANON_HASH");
+  IElementType SCALAR_ARRAY_ELEMENT = new PerlElementType("SCALAR_ARRAY_ELEMENT");
+  IElementType SCALAR_GENERATED_LIST_ITEM = new PerlElementType("SCALAR_GENERATED_LIST_ITEM");
+  IElementType SCALAR_HASH_ELEMENT = new PerlElementType("SCALAR_HASH_ELEMENT");
   IElementType SHIFT_EXPR = new PerlElementType("SHIFT_EXPR");
   IElementType SORT_EXPR = new PerlElementType("SORT_EXPR");
   IElementType SORT_OP_ARGS = new PerlElementType("SORT_OP_ARGS");
@@ -97,6 +102,7 @@ public interface PerlElementTypes {
   IElementType PERL_ARRAY = new PerlTokenType("PERL_ARRAY");
   IElementType PERL_ARROW_COMMA = new PerlTokenType("=>");
   IElementType PERL_BAREWORD = new PerlTokenType("PERL_BAREWORD");
+  IElementType PERL_COMMA = new PerlTokenType(",");
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
@@ -160,8 +166,8 @@ public interface PerlElementTypes {
       else if (type == CODE_LINE) {
         return new PerlCodeLineImpl(node);
       }
-      else if (type == EVAL) {
-        return new PerlEvalImpl(node);
+      else if (type == EVAL_EXPR) {
+        return new PerlEvalExprImpl(node);
       }
       else if (type == EXPR) {
         return new PerlExprImpl(node);
@@ -210,6 +216,9 @@ public interface PerlElementTypes {
       }
       else if (type == LOCAL_DEFINITION) {
         return new PerlLocalDefinitionImpl(node);
+      }
+      else if (type == LOCAL_VARIABLE_DEFINITION_ARGUMENTS) {
+        return new PerlLocalVariableDefinitionArgumentsImpl(node);
       }
       else if (type == MY_DEFINITION) {
         return new PerlMyDefinitionImpl(node);
@@ -334,8 +343,20 @@ public interface PerlElementTypes {
       else if (type == RETURN_EXPR) {
         return new PerlReturnExprImpl(node);
       }
-      else if (type == SCALAR) {
-        return new PerlScalarImpl(node);
+      else if (type == SCALAR_ANON_ARRAY) {
+        return new PerlScalarAnonArrayImpl(node);
+      }
+      else if (type == SCALAR_ANON_HASH) {
+        return new PerlScalarAnonHashImpl(node);
+      }
+      else if (type == SCALAR_ARRAY_ELEMENT) {
+        return new PerlScalarArrayElementImpl(node);
+      }
+      else if (type == SCALAR_GENERATED_LIST_ITEM) {
+        return new PerlScalarGeneratedListItemImpl(node);
+      }
+      else if (type == SCALAR_HASH_ELEMENT) {
+        return new PerlScalarHashElementImpl(node);
       }
       else if (type == SHIFT_EXPR) {
         return new PerlShiftExprImpl(node);

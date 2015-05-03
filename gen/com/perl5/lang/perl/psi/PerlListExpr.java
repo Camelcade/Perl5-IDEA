@@ -11,9 +11,33 @@ public interface PerlListExpr extends PerlExpr {
   PerlArray getArray();
 
   @Nullable
+  PerlExpr getExpr();
+
+  @Nullable
   PerlHash getHash();
 
   @Nullable
-  PerlScalar getScalar();
+  PerlPackageRequire getPackageRequire();
+
+  @Nullable
+  PerlRegex getRegex();
+
+  @Nullable
+  PerlScalarAnonArray getScalarAnonArray();
+
+  @Nullable
+  PerlScalarAnonHash getScalarAnonHash();
+
+  @Nullable
+  PerlScalarArrayElement getScalarArrayElement();
+
+  @Nullable
+  PerlScalarGeneratedListItem getScalarGeneratedListItem();
+
+  @Nullable
+  PerlScalarHashElement getScalarHashElement();
+
+  @Nullable
+  PerlSubBlockAnon getSubBlockAnon();
 
 }

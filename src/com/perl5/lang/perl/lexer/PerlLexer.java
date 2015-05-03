@@ -131,6 +131,8 @@ public class PerlLexer extends PerlLexerGenerated{
 		if(	// seems regex
 			lastSignificantTokenType == PERL_OPERATOR
 			|| lastSignificantTokenType == PERL_LPAREN
+			|| lastSignificantTokenType == PERL_LBRACE
+			|| lastSignificantTokenType == PERL_LBRACK
 			|| lastSignificantTokenType == PERL_SEMI
 			|| lastSignificantToken.equals("split")
 			|| lastSignificantToken.equals("if")
@@ -477,15 +479,19 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		CharSequence currentToken = yytext();
 
+		isEscaped = false;
+
 		for( int i = 0; i < currentToken.length(); i++ )
 		{
-			if( currentToken.charAt(i) == charCloser )
+			if( !isEscaped && currentToken.charAt(i) == charCloser )
 			{
 				yypushback(currentToken.length() - i);
 				yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);
 
 				return i == 0 ? null: PERL_STRING_CONTENT;
 			}
+
+			isEscaped = !isEscaped && currentToken.charAt(i) == '\\';
 		}
 		return PERL_STRING_CONTENT;
 	}

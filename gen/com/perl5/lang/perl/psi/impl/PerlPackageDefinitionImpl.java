@@ -42,12 +42,6 @@ public class PerlPackageDefinitionImpl extends ASTWrapperPsiElement implements P
 
   @Override
   @NotNull
-  public List<PerlEval> getEvalList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlEval.class);
-  }
-
-  @Override
-  @NotNull
   public List<PerlExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }

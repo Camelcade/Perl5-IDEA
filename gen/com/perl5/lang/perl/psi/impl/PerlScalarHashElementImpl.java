@@ -11,33 +11,21 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlCallLeftwardImpl extends ASTWrapperPsiElement implements PerlCallLeftward {
+public class PerlScalarHashElementImpl extends ASTWrapperPsiElement implements PerlScalarHashElement {
 
-  public PerlCallLeftwardImpl(ASTNode node) {
+  public PerlScalarHashElementImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCallLeftward(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitScalarHashElement(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public PerlCalee getCalee() {
-    return findChildByClass(PerlCalee.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlCallArguments getCallArguments() {
-    return findChildByClass(PerlCallArguments.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+  @NotNull
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
   @Override

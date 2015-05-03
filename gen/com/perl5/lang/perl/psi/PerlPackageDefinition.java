@@ -17,9 +17,6 @@ public interface PerlPackageDefinition extends PsiElement {
   List<PerlCodeLine> getCodeLineList();
 
   @NotNull
-  List<PerlEval> getEvalList();
-
-  @NotNull
   List<PerlExpr> getExprList();
 
   @NotNull

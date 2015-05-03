@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlCalee extends PsiElement {
 
   @Nullable
+  PerlExpr getExpr();
+
+  @Nullable
   PerlObjectMethod getObjectMethod();
 
   @Nullable
@@ -17,6 +20,27 @@ public interface PerlCalee extends PsiElement {
   PerlPackageMethod getPackageMethod();
 
   @Nullable
-  PerlScalar getScalar();
+  PerlPackageRequire getPackageRequire();
+
+  @Nullable
+  PerlRegex getRegex();
+
+  @Nullable
+  PerlScalarAnonArray getScalarAnonArray();
+
+  @Nullable
+  PerlScalarAnonHash getScalarAnonHash();
+
+  @Nullable
+  PerlScalarArrayElement getScalarArrayElement();
+
+  @Nullable
+  PerlScalarGeneratedListItem getScalarGeneratedListItem();
+
+  @Nullable
+  PerlScalarHashElement getScalarHashElement();
+
+  @Nullable
+  PerlSubBlockAnon getSubBlockAnon();
 
 }

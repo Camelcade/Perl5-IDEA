@@ -36,12 +36,6 @@ public class PerlFileItemImpl extends ASTWrapperPsiElement implements PerlFileIt
 
   @Override
   @Nullable
-  public PerlEval getEval() {
-    return findChildByClass(PerlEval.class);
-  }
-
-  @Override
-  @Nullable
   public PerlExpr getExpr() {
     return findChildByClass(PerlExpr.class);
   }

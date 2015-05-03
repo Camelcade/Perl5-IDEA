@@ -17,6 +17,9 @@ public interface PerlScalar extends PsiElement {
   PerlRegex getRegex();
 
   @Nullable
+  PerlScalar getScalar();
+
+  @Nullable
   PerlSubBlockAnon getSubBlockAnon();
 
 }

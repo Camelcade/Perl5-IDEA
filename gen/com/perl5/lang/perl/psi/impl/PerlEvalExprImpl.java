@@ -8,24 +8,29 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlLocalDefinitionImpl extends ASTWrapperPsiElement implements PerlLocalDefinition {
+public class PerlEvalExprImpl extends PerlExprImpl implements PerlEvalExpr {
 
-  public PerlLocalDefinitionImpl(ASTNode node) {
+  public PerlEvalExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitLocalDefinition(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitEvalExpr(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
-  public PerlLocalVariableDefinitionArguments getLocalVariableDefinitionArguments() {
-    return findNotNullChildByClass(PerlLocalVariableDefinitionArguments.class);
+  @Nullable
+  public PerlBlock getBlock() {
+    return findChildByClass(PerlBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
 }

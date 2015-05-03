@@ -11,6 +11,27 @@ public interface PerlTerm extends PsiElement {
   PerlExpr getExpr();
 
   @Nullable
-  PerlScalar getScalar();
+  PerlPackageRequire getPackageRequire();
+
+  @Nullable
+  PerlRegex getRegex();
+
+  @Nullable
+  PerlScalarAnonArray getScalarAnonArray();
+
+  @Nullable
+  PerlScalarAnonHash getScalarAnonHash();
+
+  @Nullable
+  PerlScalarArrayElement getScalarArrayElement();
+
+  @Nullable
+  PerlScalarGeneratedListItem getScalarGeneratedListItem();
+
+  @Nullable
+  PerlScalarHashElement getScalarHashElement();
+
+  @Nullable
+  PerlSubBlockAnon getSubBlockAnon();
 
 }

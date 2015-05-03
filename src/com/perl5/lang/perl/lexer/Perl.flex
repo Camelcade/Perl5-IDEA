@@ -122,7 +122,7 @@ TRANS_MODIFIERS = [cdsr]
 
 {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 
-<YYINITIAL>{
+<YYINITIAL, LEX_CODE>{
     {THE_END}               {processDataOpener(); break;}
     {THE_DATA}               {processDataOpener(); break;}
     {POD_OPEN}               {processPodOpener();break;}
@@ -216,7 +216,7 @@ TRANS_MODIFIERS = [cdsr]
 
 <LEX_QUOTE_LIKE_WORDS>{
     {EMPTY_SPACE}+ {return processOpenerWhiteSpace(); }
-    {ANYWORD}   {
+    {ANYWORD}+   {
           IElementType tokenType = processQuoteLikeWord();
           if( tokenType != null )
                 return tokenType;
@@ -289,7 +289,8 @@ TRANS_MODIFIERS = [cdsr]
 {QUOTE}         {return processStringOpener();}
 
 "::"            {return PERL_DEPACKAGE;}
-"=>"            {return PERL_ARROW_COMMA; }
+"=>"            {return PERL_ARROW_COMMA; } // for barewords in array
+","            {return PERL_COMMA; }
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
 "["             {return PERL_LBRACK;}

@@ -8,30 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlEvalImpl extends ASTWrapperPsiElement implements PerlEval {
+public class PerlSplitExprImpl extends PerlExprImpl implements PerlSplitExpr {
 
-  public PerlEvalImpl(ASTNode node) {
+  public PerlSplitExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitEval(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSplitExpr(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public PerlBlock getBlock() {
-    return findChildByClass(PerlBlock.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlScalar getScalar() {
-    return findChildByClass(PerlScalar.class);
+  @NotNull
+  public PerlSplitArgs getSplitArgs() {
+    return findNotNullChildByClass(PerlSplitArgs.class);
   }
 
 }

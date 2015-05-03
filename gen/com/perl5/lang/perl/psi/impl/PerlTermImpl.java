@@ -30,8 +30,50 @@ public class PerlTermImpl extends ASTWrapperPsiElement implements PerlTerm {
 
   @Override
   @Nullable
-  public PerlScalar getScalar() {
-    return findChildByClass(PerlScalar.class);
+  public PerlPackageRequire getPackageRequire() {
+    return findChildByClass(PerlPackageRequire.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlRegex getRegex() {
+    return findChildByClass(PerlRegex.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlScalarAnonArray getScalarAnonArray() {
+    return findChildByClass(PerlScalarAnonArray.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlScalarAnonHash getScalarAnonHash() {
+    return findChildByClass(PerlScalarAnonHash.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlScalarArrayElement getScalarArrayElement() {
+    return findChildByClass(PerlScalarArrayElement.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlScalarGeneratedListItem getScalarGeneratedListItem() {
+    return findChildByClass(PerlScalarGeneratedListItem.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlScalarHashElement getScalarHashElement() {
+    return findChildByClass(PerlScalarHashElement.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlSubBlockAnon getSubBlockAnon() {
+    return findChildByClass(PerlSubBlockAnon.class);
   }
 
 }

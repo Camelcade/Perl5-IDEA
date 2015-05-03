@@ -53,6 +53,7 @@
     PERL_BAREWORD="PERL_BAREWORD"
     PERL_TAG="PERL_TAG"
 
+    PERL_COMMA=','
     PERL_ARROW_COMMA='=>'
     PERL_DEPACKAGE='::'
     PERL_LBRACK='['
@@ -75,7 +76,7 @@
 
 perlFile ::= file_item*
 
-block ::= '{' (file_item + | expr )? '}';
+block ::= label ? '{' (file_item + | expr )? '}';
 file_item ::= package_definition | package_element
 
 private package_element ::=
@@ -83,7 +84,7 @@ private package_element ::=
     | line_element if_postfix ? (PERL_SEMI + | <<eof>>) ?
 
 private block_element ::=
-    eval
+    eval_expr
     | sub_block_named
     | for_block
     | if_block
@@ -104,17 +105,20 @@ private line_element ::=
 package_definition ::= 'package' perl_package perl_version ? (block | PERL_SEMI package_element * )
 
 
-sub_block_named ::= 'sub' perl_function block
+sub_block_named ::= 'sub' perl_function perl_function_proto ? block
+private perl_function_proto ::= '(' perl_function_proto_sigil ? ')'
+private perl_function_proto_sigil ::= '$'|'%'|'@'|';' +
 //{
 //    mixin="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
 //}
-sub_block_anon ::= 'sub' block
+sub_block_anon ::= 'sub' perl_function_proto ?  block
 
 // variable definition
 variable_definition ::= my_definition | our_definition | local_definition
 my_definition ::= 'my' variable_definition_arguments
 our_definition ::= 'our' variable_definition_arguments
-local_definition ::= 'local' variable_definition_arguments
+local_definition ::= 'local' local_variable_definition_arguments
+local_variable_definition_arguments ::= ( perl_package ? local_variable | '(' local_variables ')' )
 variable_definition_arguments ::= ( perl_package ? variable | '(' variables ')' )
 
 // use and no
@@ -135,8 +139,8 @@ last_expr ::= ('last' | 'next' | 'redo') expr ? // @todo labels
 // require
 package_require ::= 'require' (perl_package | perl_version | string) // multiline string is possible too
 
-// eval
-eval ::= 'eval' (block | scalar)
+// eval/do
+eval_expr ::= ('eval'|'do' ) (block | expr)
 
 // if
 if_postfix ::= ('if' | 'unless') expr
@@ -149,7 +153,7 @@ if_block_else  ::= 'else' block
 for_block ::= ('foreach' | 'for') for_block_arguments
 for_block_arguments ::=
     '(' expr ? PERL_SEMI expr ? PERL_SEMI expr ? ')' block
-     | (variable_definition | variable ) '(' list_expr ')' block ('continue' block ) ?
+     | (variable_definition | variable ) ? '(' expr ')' block ('continue' block ) ? // @todo param should be a list expression
 
 given_block ::= 'given' block_conditional
 
@@ -253,7 +257,7 @@ call_leftward ::=
     | scalar '->' '(' call_arguments ? ')'
 call_rightward ::= calee call_arguments ?
 
-call_arguments ::= expr
+call_arguments ::= <<parseCallArguments>> expr | expr
 
 calee ::=
     package_method
@@ -263,10 +267,8 @@ calee ::=
     | (perl_function perl_package)
     | perl_function
     | object_method_object
+    | referencable_method
 
-// @todo regexps
-// @todo $proto->SUPER::smth
-// @todo \& reference
 package_method ::= perl_package '->' perl_function
 object_method ::= scalar '->' perl_function
 object_method_object ::= scalar '->' scalar
@@ -279,6 +281,7 @@ list_expr ::=
     | split_expr
     | qw_expr
     | '<' scalar? '>' // bareword should be here too
+    | '<' PERL_BAREWORD '>' // bareword should be here too
     | array
     | hash
 
@@ -325,18 +328,25 @@ hash ::=
     | PERL_SIGIL_HASH scalar       // scalar dereference wo braces
     | PERL_HASH                    // hash as is
 
-scalar ::=
+private scalar ::=
     shift_expr                        // shift expression
     | package_require
     | return_expr
+    | eval_expr
     | regex
-    | scalar_safe '->'? '[' expr ']'      // array element
-    | scalar_safe '->'? '{' expr '}'    // hash element
-    | '[' expr ? ']'                    // anonymous array
-    | '{' expr ? '}'                    // anonymous hash
-    | '(' expr ')'[expr]                // generated array element
+    | scalar_array_element
+    | scalar_hash_element
+    | scalar_anon_array
+    | scalar_anon_hash
+//    | '(' expr ')'          // not sure it should be here
+    | scalar_generated_list_item
     | scalar_safe                       // scalar or deref scalar
 
+scalar_array_element ::= scalar_safe '->'? '[' expr ']'      // array element
+scalar_hash_element ::= scalar_safe '->'? '{' ( expr | PERL_BAREWORD) '}'    // hash element
+scalar_anon_hash ::= '{' expr ? '}'   // anonymous hash
+scalar_anon_array ::= '[' expr ? ']'  // anonymous array
+scalar_generated_list_item ::= '(' expr ')'[expr]                // generated array element
 
 private string ::= string_quoted | string_unquoted | PERL_STRING_CONTENT | <<parseBarewordString>>
 private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE  // bareword string should be here
@@ -352,18 +362,28 @@ private scalar_safe ::=
     | PERL_TAG
     | sub_block_anon
     | PERL_GLOB
-    | '&' referencable_method
+    | referencable_method
+    | 'undef'
 
-private referencable_method ::=
-    perl_package_function
-    | perl_function
+
+private referencable_method ::= '&'
+    (
+        perl_package_function
+        | perl_function
+        | {scalar}
+        | scalar
+    )
 
 perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
 
 private multiline_marker ::= '<<' (string | PERL_BAREWORD)
 
+private local_variables ::= local_variable (',' local_variables ) *
+private local_variable ::= scalar_hash_element | variable
+
 private variables ::= variable (',' variable ) *
-private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH
+private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH | PERL_GLOB | "undef"
+private label ::= PERL_BAREWORD ":"
 
 // custom parsings
 private perl_package ::= <<parseBarewordPackage>>

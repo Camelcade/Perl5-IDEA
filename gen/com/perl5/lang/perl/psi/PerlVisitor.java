@@ -43,8 +43,8 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitEval(@NotNull PerlEval o) {
-    visitPsiElement(o);
+  public void visitEvalExpr(@NotNull PerlEvalExpr o) {
+    visitExpr(o);
   }
 
   public void visitExpr(@NotNull PerlExpr o) {
@@ -108,6 +108,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitLocalDefinition(@NotNull PerlLocalDefinition o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLocalVariableDefinitionArguments(@NotNull PerlLocalVariableDefinitionArguments o) {
     visitPsiElement(o);
   }
 
@@ -275,7 +279,23 @@ public class PerlVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitScalar(@NotNull PerlScalar o) {
+  public void visitScalarAnonArray(@NotNull PerlScalarAnonArray o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarAnonHash(@NotNull PerlScalarAnonHash o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarArrayElement(@NotNull PerlScalarArrayElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarGeneratedListItem(@NotNull PerlScalarGeneratedListItem o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarHashElement(@NotNull PerlScalarHashElement o) {
     visitPsiElement(o);
   }
 

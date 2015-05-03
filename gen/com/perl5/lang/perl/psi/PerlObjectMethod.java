@@ -7,7 +7,31 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlObjectMethod extends PsiElement {
 
-  @NotNull
-  PerlScalar getScalar();
+  @Nullable
+  PerlExpr getExpr();
+
+  @Nullable
+  PerlPackageRequire getPackageRequire();
+
+  @Nullable
+  PerlRegex getRegex();
+
+  @Nullable
+  PerlScalarAnonArray getScalarAnonArray();
+
+  @Nullable
+  PerlScalarAnonHash getScalarAnonHash();
+
+  @Nullable
+  PerlScalarArrayElement getScalarArrayElement();
+
+  @Nullable
+  PerlScalarGeneratedListItem getScalarGeneratedListItem();
+
+  @Nullable
+  PerlScalarHashElement getScalarHashElement();
+
+  @Nullable
+  PerlSubBlockAnon getSubBlockAnon();
 
 }

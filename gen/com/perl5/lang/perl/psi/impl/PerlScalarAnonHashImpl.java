@@ -11,14 +11,14 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlScalarImpl extends ASTWrapperPsiElement implements PerlScalar {
+public class PerlScalarAnonHashImpl extends ASTWrapperPsiElement implements PerlScalarAnonHash {
 
-  public PerlScalarImpl(ASTNode node) {
+  public PerlScalarAnonHashImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitScalar(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitScalarAnonHash(this);
     else super.accept(visitor);
   }
 
@@ -26,24 +26,6 @@ public class PerlScalarImpl extends ASTWrapperPsiElement implements PerlScalar {
   @Nullable
   public PerlExpr getExpr() {
     return findChildByClass(PerlExpr.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPackageRequire getPackageRequire() {
-    return findChildByClass(PerlPackageRequire.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlRegex getRegex() {
-    return findChildByClass(PerlRegex.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlSubBlockAnon getSubBlockAnon() {
-    return findChildByClass(PerlSubBlockAnon.class);
   }
 
 }

@@ -11,6 +11,27 @@ public interface PerlArray extends PsiElement {
   List<PerlExpr> getExprList();
 
   @Nullable
-  PerlScalar getScalar();
+  PerlPackageRequire getPackageRequire();
+
+  @Nullable
+  PerlRegex getRegex();
+
+  @Nullable
+  PerlScalarAnonArray getScalarAnonArray();
+
+  @Nullable
+  PerlScalarAnonHash getScalarAnonHash();
+
+  @Nullable
+  PerlScalarArrayElement getScalarArrayElement();
+
+  @Nullable
+  PerlScalarGeneratedListItem getScalarGeneratedListItem();
+
+  @Nullable
+  PerlScalarHashElement getScalarHashElement();
+
+  @Nullable
+  PerlSubBlockAnon getSubBlockAnon();
 
 }

@@ -3,6 +3,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.thoughtworks.xstream.mapper.CGLIBMapper;
 
@@ -11,6 +12,38 @@ import com.thoughtworks.xstream.mapper.CGLIBMapper;
  */
 public class PerlParserUitl extends GeneratedParserUtilBase implements PerlElementTypes
 {
+	public static boolean parseCallArguments(PsiBuilder b, int l)
+	{
+		if( b.getTokenType() == PERL_LBRACE )
+		{
+			PsiBuilder.Marker m = b.mark();
+			boolean r = PerlParser.block(b, l);
+			if( r )
+			{
+				IElementType nextTokenType = b.getTokenType(); // @todo actually this depends on signature, check in annotator
+				if(
+					nextTokenType == PERL_SEMI
+					|| nextTokenType == PERL_COMMA
+				)
+				{
+					m.rollbackTo();
+				}
+				else
+				{
+					m.drop();
+					return true;
+				}
+			}
+			else
+			{
+				m.rollbackTo();
+			}
+
+		}
+		return false;
+	}
+
+
 	public static boolean parseBarewordPackage(PsiBuilder b, int l ) {
 
 		if(b.getTokenType() == PERL_BAREWORD )
