@@ -74,17 +74,34 @@
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
-perlFile ::= file_item*
-private file_item ::= declaration | statement
+private perlFile ::= <<parseFile>> <<eof>>
 
+private file_items ::= file_item*   // injected by parseFile
+
+private block_parsed ::= <<parseBlock>>
+private code_block ::= block_parsed PERL_SEMI ?
+block ::= label ?  "{" file_items "}"    // injected by parseBlock
+
+private file_item ::= package_namespace | package_namespace_item
+private package_namespace_item ::= declaration PERL_SEMI ? | statement PERL_SEMI
+
+// package keyword
+package_namespace ::= 'package' perl_package perl_version ? package_namespace_content
+private package_namespace_content ::= block_parsed | PERL_SEMI <<parsePackageContents>>
+private package_plain ::= package_namespace_item * // injected and wrapped by parsePackageContents
+
+// declarations
 private declaration ::=
     sub_definition_or_declaration
+    | code_block
 
+// sub declaration or definition
 private sub_definition_or_declaration ::= 'sub' PERL_BAREWORD sub_definition_or_declaration_parameters
 private sub_definition_or_declaration_parameters ::=
-    sub_definition_parameters ? block PERL_SEMI ?
+    sub_definition_parameters ? block_parsed PERL_SEMI ?
     | sub_declaration_parameters ? PERL_SEMI
 
+// @todo actually, prototypes and signatures depends on feature in current block; We should do this in parse time
 private sub_declaration_parameters ::=
     sub_prototype sub_attributes ?
     | sub_attributes
@@ -93,19 +110,47 @@ private sub_definition_parameters ::=
     sub_attributes ? sub_signature
     | sub_declaration_parameters
 
-private sub_prototype ::= sub_prototype_element * (";" sub_prototype_element *) ?
+private sub_prototype ::= "(" sub_prototype_element * (";" sub_prototype_element *) ? ")"
 private sub_prototype_element ::=
         "\\" ( "[" sub_prototype_char + "]" | sub_prototype_char )
         | sub_prototype_char
 
 private sub_prototype_char ::= "$" | "@" | "+" | "*" | "&"
 
-private sub_attributes ::=
+private sub_attributes ::= 'NYI'
 
 // @todo this requires use feature 'signatures' and no warnings 'experimental:signatures';
-private sub_signature ::=
+private sub_signature ::= 'NYI'
 
+private  statement ::=
+    use_statement
+    | no_statement
+    | scalar_primitive
 
+use_statement ::= 'use' package_use_arguments <<processUseStatement>> {pin=1}
+no_statement ::= 'no' package_use_arguments <<processNoStatement>> {pin=1}
+
+private statement_recover ::= !(PERL_SEMI | PERL_RBRACE)
+
+// here we need to catch pragmas
+private package_use_arguments ::=
+    perl_package perl_version expr ?
+    | perl_package expr ?
+    | perl_version
+    {recoverWhile=statement_recover}
+
+// primitives
+inner scalar_primitive ::=
+    PERL_NUMBER
+    | string
+
+private string ::= string_quoted | string_unquoted | PERL_STRING_CONTENT | <<parseBarewordString>>
+private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
+private string_unquoted ::= PERL_STRING_CONTENT
+
+label ::= PERL_BAREWORD ":" // do we need to change tokentype?
+private perl_package ::= <<parseBarewordPackage>>
+inner perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER // shouldn't we collapse this to PERL_VERSION ?
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -135,7 +180,6 @@ private sub_signature ::=
 //    | code_line
 //
 //// package
-//package_definition ::= 'package' perl_package perl_version ? (block | PERL_SEMI package_element * )
 //
 //
 //sub_block_named ::= 'sub' perl_function perl_function_proto ? block
@@ -147,13 +191,6 @@ private sub_signature ::=
 //sub_block_anon ::= 'sub' perl_function_proto ?  block
 //
 //// use and no
-//package_use ::= 'use' package_use_arguments
-//package_no ::= 'no' package_use_arguments
-//
-//package_use_arguments ::=
-//    perl_package perl_version expr ?
-//    | perl_package expr ?
-//    | perl_version;
 //
 //// if
 //if_postfix ::= ('if' | 'unless') expr
@@ -380,9 +417,6 @@ private sub_signature ::=
 //
 //scalar_nested_element ::= scalar structure_element+
 //
-//private string ::= string_quoted | string_unquoted | PERL_STRING_CONTENT | <<parseBarewordString>>
-//private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE  // bareword string should be here
-//private string_unquoted ::= PERL_STRING_CONTENT
 //
 //private scalar ::=
 //    PERL_SIGIL_SCALAR '{' PERL_BAREWORD '}'       // scalar dereference
@@ -417,7 +451,6 @@ private sub_signature ::=
 //        | scalar_expr
 //    )
 //
-//inner perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
 //
 //private multiline_marker ::= '<<' (string | PERL_BAREWORD)
 //
@@ -426,10 +459,8 @@ private sub_signature ::=
 //
 //private variables ::= variable (',' variable ) *
 //private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH | PERL_GLOB | "undef"
-//private label ::= PERL_BAREWORD ":"
 //
 //// custom parsings
-//private perl_package ::= <<parseBarewordPackage>>
 //private perl_function ::= <<parseBarewordFunction>>
 //private perl_package_function ::= <<parsePackageFunctionCall>>
 //private perl_method_parent ::= scalar_expr '->' <<parsePackageMethodSuper>>

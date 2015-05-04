@@ -19,7 +19,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.psi.PerlFilePackage;
-import com.perl5.lang.perl.psi.impl.PerlArrayImpl;
 import com.perl5.lang.perl.psi.impl.PerlFunctionImpl;
 import com.perl5.lang.perl.psi.impl.PerlPackageImpl;
 import org.jetbrains.annotations.NotNull;
