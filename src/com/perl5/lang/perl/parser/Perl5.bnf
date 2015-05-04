@@ -37,6 +37,7 @@
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
     PERL_STRING_MULTILINE_END="PERL_STRING_MULTILINE_END"
 
+    PERL_VERSION="PERL_VERSION"
     PERL_NUMBER_VERSION="PERL_NUMBER_VERSION"
     PERL_NUMBER="PERL_NUMBER"
 
@@ -76,17 +77,17 @@
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 private perlFile ::= <<parseFile>> <<eof>>
 
-private file_items ::= file_item*   // injected by parseFile
+private file_items ::= file_item*   {recoverWhile=recover_block}
 
 private block_parsed ::= <<parseBlock>>
 private code_block ::= block_parsed PERL_SEMI ?
-block ::= label ?  "{" file_items "}"    // injected by parseBlock
+block ::= label ?  "{" file_items "}" {pin=2}
 
 private file_item ::= package_namespace | package_namespace_item
 private package_namespace_item ::= declaration PERL_SEMI ? | statement PERL_SEMI
 
 // package keyword
-package_namespace ::= 'package' perl_package perl_version ? package_namespace_content
+package_namespace ::= 'package' perl_package perl_version ? package_namespace_content {pin=1}
 private package_namespace_content ::= block_parsed | PERL_SEMI <<parsePackageContents>>
 private package_plain ::= package_namespace_item * // injected and wrapped by parsePackageContents
 
@@ -125,32 +126,99 @@ private sub_signature ::= 'NYI'
 private  statement ::=
     use_statement
     | no_statement
-    | scalar_primitive
+    | expr
+    {recoverWhile=recover_statement}
 
-use_statement ::= 'use' package_use_arguments <<processUseStatement>> {pin=1}
-no_statement ::= 'no' package_use_arguments <<processNoStatement>> {pin=1}
+use_statement ::= 'use' <<captureStrings>> package_use_arguments <<processUseStatement>> {pin=1}
+no_statement ::= 'no' <<captureStrings>> package_use_arguments <<processNoStatement>> {pin=1}
 
-private statement_recover ::= !(PERL_SEMI | PERL_RBRACE)
+private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | <<eof>>)
+private recover_block ::= !(PERL_RBRACE | <<eof>>)
 
 // here we need to catch pragmas
 private package_use_arguments ::=
     perl_package perl_version expr ?
     | perl_package expr ?
     | perl_version
-    {recoverWhile=statement_recover}
+
+// expression
+expr ::=
+    op_24_expr
+    | op_23_expr
+    | op_22_expr
+    | op_21_expr
+    | op_20_expr
+    | op_19_expr
+    | op_18_expr
+    | op_17_expr
+    | op_16_expr
+    | op_15_expr
+    | op_14_expr
+    | op_13_expr
+    | op_12_expr
+    | op_11_expr
+    | op_10_expr
+    | op_9_expr
+    | op_8_expr
+    | op_7_expr
+    | op_6_expr
+    | op_5_expr
+    | op_4_expr
+    | op_3_expr
+    | op_2_expr
+    | op_1_expr
+    {recoverWhile=recover_statement}
+
+op_1_expr ::= term
+op_2_expr ::= expr '->' nested_element
+private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
+op_3_pref_expr ::= ('++'|'--') expr
+op_3_suff_expr ::= expr ('++'|'--')
+op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
+op_5_expr ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true }
+op_6_expr ::= expr ('=~'|'!~') expr
+op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
+op_8_expr ::= expr ('+'|'-'|'.') expr
+op_9_expr ::= expr ('<<'|'>>') expr
+op_10_expr ::= ('not'|'defined'|'ref'|'exists'|'scalar') expr
+op_11_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
+op_12_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
+op_13_expr ::= expr '&' expr
+op_14_expr ::= expr ('|'|'^') expr
+op_15_expr ::= expr '&&' expr
+op_16_expr ::= expr ('||'|'//') expr
+op_17_expr ::= expr ('..'|'...') expr
+op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
+op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
+
+op_20_expr ::= expr	(',' | '=>') expr
+
+op_21_expr ::= call_rightward
+op_22_expr ::= 'not' expr { rightAssociative=true }
+op_23_expr ::= expr 'and' expr
+op_24_expr ::= expr ('or'|'xor') expr
+
+private term ::=
+    PERL_ARRAY
+    | PERL_HASH
+    | PERL_GLOB
+    | PERL_SCALAR
+    | scalar_primitive
 
 // primitives
 inner scalar_primitive ::=
     PERL_NUMBER
     | string
+    | string_list
 
-private string ::= string_quoted | string_unquoted | PERL_STRING_CONTENT | <<parseBarewordString>>
-private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
-private string_unquoted ::= PERL_STRING_CONTENT
+private string ::= string_quoted | string_unquoted | <<parseStringContent>> | <<parseBarewordString>>
+private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE <<parseStringContent>> PERL_QUOTE
+private string_list ::= 'qw' PERL_QUOTE <<parseStringContent>> * PERL_QUOTE
+private string_unquoted ::= <<parseStringContent>>
 
 label ::= PERL_BAREWORD ":" // do we need to change tokentype?
 private perl_package ::= <<parseBarewordPackage>>
-inner perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER // shouldn't we collapse this to PERL_VERSION ?
+private perl_version ::= <<parseVersion>>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -216,61 +284,6 @@ inner perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER // shouldn't we collaps
 //
 ////code_line_recover ::= !(PERL_RBRACE | PERL_SEMI)
 //
-//// expression
-//expr ::=
-//    op_24_expr
-//    | op_23_expr
-//    | op_22_expr
-//    | op_21_expr
-//    | op_20_expr
-//    | op_19_expr
-//    | op_18_expr
-//    | op_17_expr
-//    | op_16_expr
-//    | op_15_expr
-//    | op_14_expr
-//    | op_13_expr
-//    | op_12_expr
-//    | op_11_expr
-//    | op_10_expr
-//    | op_9_expr
-//    | op_8_expr
-//    | op_7_expr
-//    | op_6_expr
-//    | op_5_expr
-//    | op_4_expr
-//    | op_3_expr
-//    | op_2_expr
-//    | op_1_expr
-//
-//op_1_expr ::= term | call_leftward | variable_definition // not sure about var definition
-//op_2_expr ::= expr '->' nested_element
-//private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
-//op_3_pref_expr ::= ('++'|'--') expr
-//op_3_suff_expr ::= expr ('++'|'--')
-//op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
-//op_5_expr ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true }
-//op_6_expr ::= expr ('=~'|'!~') expr
-//op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
-//op_8_expr ::= expr ('+'|'-'|'.') expr
-//op_9_expr ::= expr ('<<'|'>>') expr
-//op_10_expr ::= ('not'|'defined'|'ref'|'exists'|'scalar') expr
-//op_11_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
-//op_12_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr   // smartmatch can accept diff shit
-//op_13_expr ::= expr '&' expr
-//op_14_expr ::= expr ('|'|'^') expr
-//op_15_expr ::= expr '&&' expr
-//op_16_expr ::= expr ('||'|'//') expr
-//op_17_expr ::= expr ('..'|'...') expr
-//op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
-//op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
-//
-//op_20_expr ::= expr	(',' | '=>') expr
-//
-//op_21_expr ::= call_rightward
-//op_22_expr ::= 'not' expr { rightAssociative=true }
-//op_23_expr ::= expr 'and' scalar_expr
-//op_24_expr ::= expr ('or'|'xor') scalar_expr
 //
 //regex_expr ::=
 //    m_regex
@@ -377,7 +390,6 @@ inner perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER // shouldn't we collaps
 //    | split_args
 //split_args ::= (scalar_expr | regex_expr ) "," scalar_expr
 //
-//qw_expr ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 //
 //shift_expr ::= ('shift' | 'pop') shift_expr_args ?
 //private shift_expr_args ::= list_expr | expr

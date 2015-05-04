@@ -142,9 +142,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		if(b.getTokenType() == PERL_BAREWORD )
 		{
 			if(
-				b.lookAhead(1) == PERL_ARROW_COMMA // BARE =>
-			)
+					b.lookAhead(1) == PERL_ARROW_COMMA // BARE =>
+					)
 			{
+				assert b instanceof PerlBuilder;
+
+				((PerlBuilder) b).captureString(b.getTokenText());
+
 				PsiBuilder.Marker m = b.mark();
 				b.advanceLexer();
 				m.collapse(PERL_STRING);
@@ -156,10 +160,46 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	public static boolean parseStringContent(PsiBuilder b, int l )
+	{
+		if( b.getTokenType() == PERL_STRING_CONTENT)
+		{
+			assert b instanceof PerlBuilder;
+			((PerlBuilder) b).captureString(b.getTokenText());
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(PERL_STRING);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Trying to parse:  version and replace token type
+	 * @param b	PerlBuilder
+	 * @param l level
+	 * @return	result
+	 */
+	public static boolean parseVersion(PsiBuilder b, int l ) {
+		// here is the logic when we allows to use barewords as strings
+		IElementType tokenType = b.getTokenType();
+
+		if(tokenType == PERL_NUMBER_VERSION || tokenType == PERL_NUMBER)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(PERL_VERSION);
+
+			return true;
+		}
+
+		return false;
+	}
 
 	public static boolean processUseStatement(PsiBuilder b, int l ) {
 
 		assert b instanceof PerlBuilder;
+		((PerlBuilder) b).stopCaptureStrings();
 		String packageName = ((PerlBuilder) b).getLastParsedPackage();
 		System.out.printf("Processing use of %s\n", packageName);
 
@@ -173,11 +213,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		String packageName = ((PerlBuilder) b).getLastParsedPackage();
 		System.out.printf("Processing no of %s\n", packageName);
 
-
-
 		return false;
 	}
 
+	public static boolean captureStrings(PsiBuilder b, int l ) {
+		assert b instanceof PerlBuilder;
+		((PerlBuilder) b).startCaptureStrings();
+		return true;
+	}
 
 
 	///////////////////////// old thing

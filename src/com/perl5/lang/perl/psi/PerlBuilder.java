@@ -9,6 +9,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.util.containers.Stack;
 import com.perl5.lang.perl.parser.PerlCodeBlockState;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,8 +19,11 @@ import java.util.HashMap;
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
 	protected final Stack<PerlCodeBlockState> blockState = new Stack<PerlCodeBlockState>();
-
 	protected String lastParsedPackage = "";
+
+	// capture buffer for strings
+	protected boolean captureStrings = false;
+	protected final ArrayList<String> capturedStrings = new ArrayList<String>();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
@@ -64,5 +68,27 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		this.lastParsedPackage = lastParsedPackage;
 	}
 
+
+	public void startCaptureStrings()
+	{
+		captureStrings = true;
+		capturedStrings.clear();
+	}
+
+	public void stopCaptureStrings()
+	{
+		captureStrings = false;
+	}
+
+	public ArrayList<String> getCapturedStrings()
+	{
+		return capturedStrings;
+	}
+
+	public void captureString(String string)
+	{
+		if( captureStrings)
+			capturedStrings.add(string);
+	}
 
 }
