@@ -95,6 +95,11 @@ CONTROL_FUNCTIONS = "for" | "foreach" | "do" | "while" | "break" | "continule" |
 CONDITION_FUNCTIONS = "if" | "elsif" | "else" | "until"
 DEFINITION_FUNCTIONS = "my" | "local" | "our" | "sub" | "package"
 INCLUDE_FUNCTIONS = "use" | "require" | "do" | "eval"
+
+PERL_SYN_DECLARATION = "my" | "our" | "local" | "state"
+PERL_SYN_BLOCK_OP = "sub" | "do" | "eval"
+PERL_SYN_OTHER = "elsif" | "else"
+PERL_SYN_STATE_MODIFIER = "if" | "unless" | "while" | "untile" | "for" | "foreach" | "when"
 FUNCTION_SPECIAL = {INCLUDE_FUNCTIONS} | {DEFINITION_FUNCTIONS} | {CONTROL_FUNCTIONS} | {CONDITION_FUNCTIONS} | {LIST_FUNCTIONS} | {QUOTE_FUNCTIONS} {TRANS_FUNCTIONS}
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"

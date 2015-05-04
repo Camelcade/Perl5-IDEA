@@ -57,7 +57,8 @@ public interface PerlElementTypes {
   IElementType OP_23_EXPR = new PerlElementType("OP_23_EXPR");
   IElementType OP_24_EXPR = new PerlElementType("OP_24_EXPR");
   IElementType OP_2_EXPR = new PerlElementType("OP_2_EXPR");
-  IElementType OP_3_EXPR = new PerlElementType("OP_3_EXPR");
+  IElementType OP_3_PREF_EXPR = new PerlElementType("OP_3_PREF_EXPR");
+  IElementType OP_3_SUFF_EXPR = new PerlElementType("OP_3_SUFF_EXPR");
   IElementType OP_4_EXPR = new PerlElementType("OP_4_EXPR");
   IElementType OP_5_EXPR = new PerlElementType("OP_5_EXPR");
   IElementType OP_6_EXPR = new PerlElementType("OP_6_EXPR");
@@ -277,8 +278,11 @@ public interface PerlElementTypes {
       else if (type == OP_2_EXPR) {
         return new PerlOp2ExprImpl(node);
       }
-      else if (type == OP_3_EXPR) {
-        return new PerlOp3ExprImpl(node);
+      else if (type == OP_3_PREF_EXPR) {
+        return new PerlOp3PrefExprImpl(node);
+      }
+      else if (type == OP_3_SUFF_EXPR) {
+        return new PerlOp3SuffExprImpl(node);
       }
       else if (type == OP_4_EXPR) {
         return new PerlOp4ExprImpl(node);

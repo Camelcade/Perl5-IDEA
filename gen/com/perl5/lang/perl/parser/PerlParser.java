@@ -163,8 +163,11 @@ public class PerlParser implements PsiParser {
     else if (t == OP_2_EXPR) {
       r = expr(b, 0, 21);
     }
-    else if (t == OP_3_EXPR) {
-      r = op_3_expr(b, 0);
+    else if (t == OP_3_PREF_EXPR) {
+      r = op_3_pref_expr(b, 0);
+    }
+    else if (t == OP_3_SUFF_EXPR) {
+      r = expr(b, 0, 20);
     }
     else if (t == OP_4_EXPR) {
       r = expr(b, 0, 19);
@@ -290,11 +293,11 @@ public class PerlParser implements PsiParser {
       OP_12_EXPR, OP_13_EXPR, OP_14_EXPR, OP_15_EXPR,
       OP_16_EXPR, OP_17_EXPR, OP_18_EXPR, OP_19_EXPR,
       OP_1_EXPR, OP_20_EXPR, OP_21_EXPR, OP_22_EXPR,
-      OP_23_EXPR, OP_24_EXPR, OP_2_EXPR, OP_3_EXPR,
-      OP_4_EXPR, OP_5_EXPR, OP_6_EXPR, OP_7_EXPR,
-      OP_8_EXPR, OP_9_EXPR, QW_EXPR, REGEX_EXPR,
-      RETURN_EXPR, SCALAR_EXPR, SHIFT_EXPR, SORT_EXPR,
-      SPLIT_EXPR),
+      OP_23_EXPR, OP_24_EXPR, OP_2_EXPR, OP_3_PREF_EXPR,
+      OP_3_SUFF_EXPR, OP_4_EXPR, OP_5_EXPR, OP_6_EXPR,
+      OP_7_EXPR, OP_8_EXPR, OP_9_EXPR, QW_EXPR,
+      REGEX_EXPR, RETURN_EXPR, SCALAR_EXPR, SHIFT_EXPR,
+      SORT_EXPR, SPLIT_EXPR),
   };
 
   /* ********************************************************** */
@@ -675,20 +678,31 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // calee call_arguments ?
+  // calee !"(" call_arguments ?
   public static boolean call_rightward(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_rightward")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<call rightward>");
     r = calee(b, l + 1);
     r = r && call_rightward_1(b, l + 1);
+    r = r && call_rightward_2(b, l + 1);
     exit_section_(b, l, m, CALL_RIGHTWARD, r, false, null);
     return r;
   }
 
-  // call_arguments ?
+  // !"("
   private static boolean call_rightward_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "call_rightward_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_, null);
+    r = !consumeToken(b, PERL_LPAREN);
+    exit_section_(b, l, m, null, r, false, null);
+    return r;
+  }
+
+  // call_arguments ?
+  private static boolean call_rightward_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "call_rightward_2")) return false;
     call_arguments(b, l + 1);
     return true;
   }
@@ -1488,52 +1502,6 @@ public class PerlParser implements PsiParser {
     r = r && consumeToken(b, "->");
     r = r && scalar_expr(b, l + 1);
     exit_section_(b, l, m, OBJECT_METHOD_OBJECT, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // ('++'|'--') scalar_expr
-  static boolean op_3_pref_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "op_3_pref_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = op_3_pref_expr_0(b, l + 1);
-    r = r && scalar_expr(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // '++'|'--'
-  private static boolean op_3_pref_expr_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "op_3_pref_expr_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, "++");
-    if (!r) r = consumeToken(b, "--");
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // scalar_expr ('++'|'--')
-  static boolean op_3_suff_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "op_3_suff_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = scalar_expr(b, l + 1);
-    r = r && op_3_suff_expr_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // '++'|'--'
-  private static boolean op_3_suff_expr_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "op_3_suff_expr_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, "++");
-    if (!r) r = consumeToken(b, "--");
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -2906,7 +2874,7 @@ public class PerlParser implements PsiParser {
   // 18: BINARY(op_6_expr)
   // 19: PREFIX(op_5_expr)
   // 20: N_ARY(op_4_expr)
-  // 21: ATOM(op_3_expr)
+  // 21: PREFIX(op_3_pref_expr) POSTFIX(op_3_suff_expr)
   // 22: BINARY(op_2_expr)
   // 23: ATOM(op_1_expr)
   public static boolean expr(PsiBuilder b, int l, int g) {
@@ -2918,7 +2886,7 @@ public class PerlParser implements PsiParser {
     if (!r) r = op_21_expr(b, l + 1);
     if (!r) r = op_10_expr(b, l + 1);
     if (!r) r = op_5_expr(b, l + 1);
-    if (!r) r = op_3_expr(b, l + 1);
+    if (!r) r = op_3_pref_expr(b, l + 1);
     if (!r) r = op_1_expr(b, l + 1);
     p = r;
     r = r && expr_0(b, l + 1, g);
@@ -2931,11 +2899,11 @@ public class PerlParser implements PsiParser {
     boolean r = true;
     while (true) {
       Marker m = enter_section_(b, l, _LEFT_, null);
-      if (g < 0 && leftMarkerIs(b, SCALAR_EXPR) && op_24_expr_0(b, l + 1)) {
+      if (g < 0 && op_24_expr_0(b, l + 1)) {
         r = expr(b, l, 0);
         exit_section_(b, l, m, OP_24_EXPR, r, true, null);
       }
-      else if (g < 1 && leftMarkerIs(b, SCALAR_EXPR) && consumeTokenSmart(b, "and")) {
+      else if (g < 1 && consumeTokenSmart(b, "and")) {
         r = expr(b, l, 1);
         exit_section_(b, l, m, OP_23_EXPR, r, true, null);
       }
@@ -2943,67 +2911,71 @@ public class PerlParser implements PsiParser {
         r = expr(b, l, 4);
         exit_section_(b, l, m, OP_20_EXPR, r, true, null);
       }
-      else if (g < 5 && leftMarkerIs(b, SCALAR_EXPR) && op_19_expr_0(b, l + 1)) {
+      else if (g < 5 && op_19_expr_0(b, l + 1)) {
         r = expr(b, l, 4);
         exit_section_(b, l, m, OP_19_EXPR, r, true, null);
       }
-      else if (g < 6 && leftMarkerIs(b, SCALAR_EXPR) && consumeTokenSmart(b, "?")) {
+      else if (g < 6 && consumeTokenSmart(b, "?")) {
         r = report_error_(b, expr(b, l, 5));
         r = op_18_expr_1(b, l + 1) && r;
         exit_section_(b, l, m, OP_18_EXPR, r, true, null);
       }
-      else if (g < 7 && leftMarkerIs(b, SCALAR_EXPR) && op_17_expr_0(b, l + 1)) {
+      else if (g < 7 && op_17_expr_0(b, l + 1)) {
         r = expr(b, l, 7);
         exit_section_(b, l, m, OP_17_EXPR, r, true, null);
       }
-      else if (g < 8 && leftMarkerIs(b, SCALAR_EXPR) && op_16_expr_0(b, l + 1)) {
+      else if (g < 8 && op_16_expr_0(b, l + 1)) {
         r = expr(b, l, 8);
         exit_section_(b, l, m, OP_16_EXPR, r, true, null);
       }
-      else if (g < 9 && leftMarkerIs(b, SCALAR_EXPR) && consumeTokenSmart(b, "&&")) {
+      else if (g < 9 && consumeTokenSmart(b, "&&")) {
         r = expr(b, l, 9);
         exit_section_(b, l, m, OP_15_EXPR, r, true, null);
       }
-      else if (g < 10 && leftMarkerIs(b, SCALAR_EXPR) && op_14_expr_0(b, l + 1)) {
+      else if (g < 10 && op_14_expr_0(b, l + 1)) {
         r = expr(b, l, 10);
         exit_section_(b, l, m, OP_14_EXPR, r, true, null);
       }
-      else if (g < 11 && leftMarkerIs(b, SCALAR_EXPR) && consumeTokenSmart(b, "&")) {
+      else if (g < 11 && consumeTokenSmart(b, "&")) {
         r = expr(b, l, 11);
         exit_section_(b, l, m, OP_13_EXPR, r, true, null);
       }
-      else if (g < 12 && leftMarkerIs(b, SCALAR_EXPR) && op_12_expr_0(b, l + 1)) {
+      else if (g < 12 && op_12_expr_0(b, l + 1)) {
         r = expr(b, l, 12);
         exit_section_(b, l, m, OP_12_EXPR, r, true, null);
       }
-      else if (g < 13 && leftMarkerIs(b, SCALAR_EXPR) && op_11_expr_0(b, l + 1)) {
+      else if (g < 13 && op_11_expr_0(b, l + 1)) {
         r = expr(b, l, 13);
         exit_section_(b, l, m, OP_11_EXPR, r, true, null);
       }
-      else if (g < 15 && leftMarkerIs(b, SCALAR_EXPR) && op_9_expr_0(b, l + 1)) {
+      else if (g < 15 && op_9_expr_0(b, l + 1)) {
         r = expr(b, l, 15);
         exit_section_(b, l, m, OP_9_EXPR, r, true, null);
       }
-      else if (g < 16 && leftMarkerIs(b, SCALAR_EXPR) && op_8_expr_0(b, l + 1)) {
+      else if (g < 16 && op_8_expr_0(b, l + 1)) {
         r = expr(b, l, 16);
         exit_section_(b, l, m, OP_8_EXPR, r, true, null);
       }
-      else if (g < 17 && leftMarkerIs(b, SCALAR_EXPR) && op_7_expr_0(b, l + 1)) {
+      else if (g < 17 && op_7_expr_0(b, l + 1)) {
         r = expr(b, l, 17);
         exit_section_(b, l, m, OP_7_EXPR, r, true, null);
       }
-      else if (g < 18 && leftMarkerIs(b, SCALAR_EXPR) && op_6_expr_0(b, l + 1)) {
+      else if (g < 18 && op_6_expr_0(b, l + 1)) {
         r = expr(b, l, 18);
         exit_section_(b, l, m, OP_6_EXPR, r, true, null);
       }
-      else if (g < 20 && leftMarkerIs(b, SCALAR_EXPR) && consumeTokenSmart(b, "**")) {
+      else if (g < 20 && consumeTokenSmart(b, "**")) {
         while (true) {
           r = report_error_(b, expr(b, l, 20));
           if (!consumeTokenSmart(b, "**")) break;
         }
         exit_section_(b, l, m, OP_4_EXPR, r, true, null);
       }
-      else if (g < 22 && leftMarkerIs(b, SCALAR_EXPR) && consumeTokenSmart(b, "->")) {
+      else if (g < 21 && op_3_suff_expr_0(b, l + 1)) {
+        r = true;
+        exit_section_(b, l, m, OP_3_SUFF_EXPR, r, true, null);
+      }
+      else if (g < 22 && consumeTokenSmart(b, "->")) {
         r = expr(b, l, 22);
         exit_section_(b, l, m, OP_2_EXPR, r, true, null);
       }
@@ -3084,13 +3056,13 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // ':' scalar_expr
+  // ':' expr
   private static boolean op_18_expr_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op_18_expr_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ":");
-    r = r && scalar_expr(b, l + 1);
+    r = r && expr(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -3258,14 +3230,36 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // op_3_pref_expr | op_3_suff_expr
-  public static boolean op_3_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "op_3_expr")) return false;
+  public static boolean op_3_pref_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_3_pref_expr")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = op_3_pref_expr_0(b, l + 1);
+    p = r;
+    r = p && expr(b, l, 21);
+    exit_section_(b, l, m, OP_3_PREF_EXPR, r, p, null);
+    return r || p;
+  }
+
+  // '++'|'--'
+  private static boolean op_3_pref_expr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_3_pref_expr_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, "<op 3 expr>");
-    r = op_3_pref_expr(b, l + 1);
-    if (!r) r = op_3_suff_expr(b, l + 1);
-    exit_section_(b, l, m, OP_3_EXPR, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeTokenSmart(b, "++");
+    if (!r) r = consumeTokenSmart(b, "--");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '++'|'--'
+  private static boolean op_3_suff_expr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_3_suff_expr_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokenSmart(b, "++");
+    if (!r) r = consumeTokenSmart(b, "--");
+    exit_section_(b, m, null, r);
     return r;
   }
 
