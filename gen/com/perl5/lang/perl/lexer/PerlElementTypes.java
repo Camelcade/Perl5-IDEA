@@ -57,8 +57,7 @@ public interface PerlElementTypes {
   IElementType OP_23_EXPR = new PerlElementType("OP_23_EXPR");
   IElementType OP_24_EXPR = new PerlElementType("OP_24_EXPR");
   IElementType OP_2_EXPR = new PerlElementType("OP_2_EXPR");
-  IElementType OP_3_PREF_EXPR = new PerlElementType("OP_3_PREF_EXPR");
-  IElementType OP_3_SUFF_EXPR = new PerlElementType("OP_3_SUFF_EXPR");
+  IElementType OP_3_EXPR = new PerlElementType("OP_3_EXPR");
   IElementType OP_4_EXPR = new PerlElementType("OP_4_EXPR");
   IElementType OP_5_EXPR = new PerlElementType("OP_5_EXPR");
   IElementType OP_6_EXPR = new PerlElementType("OP_6_EXPR");
@@ -76,13 +75,10 @@ public interface PerlElementTypes {
   IElementType PERL_REGEX_MODIFIERS = new PerlElementType("PERL_REGEX_MODIFIERS");
   IElementType PERL_VERSION = new PerlElementType("PERL_VERSION");
   IElementType QW_EXPR = new PerlElementType("QW_EXPR");
-  IElementType REGEX = new PerlElementType("REGEX");
+  IElementType REGEX_EXPR = new PerlElementType("REGEX_EXPR");
   IElementType RETURN_EXPR = new PerlElementType("RETURN_EXPR");
-  IElementType SCALAR_ANON_ARRAY = new PerlElementType("SCALAR_ANON_ARRAY");
-  IElementType SCALAR_ANON_HASH = new PerlElementType("SCALAR_ANON_HASH");
-  IElementType SCALAR_ARRAY_ELEMENT = new PerlElementType("SCALAR_ARRAY_ELEMENT");
-  IElementType SCALAR_GENERATED_LIST_ITEM = new PerlElementType("SCALAR_GENERATED_LIST_ITEM");
-  IElementType SCALAR_HASH_ELEMENT = new PerlElementType("SCALAR_HASH_ELEMENT");
+  IElementType SCALAR_EXPR = new PerlElementType("SCALAR_EXPR");
+  IElementType SCALAR_NESTED_ELEMENT = new PerlElementType("SCALAR_NESTED_ELEMENT");
   IElementType SHIFT_EXPR = new PerlElementType("SHIFT_EXPR");
   IElementType SORT_EXPR = new PerlElementType("SORT_EXPR");
   IElementType SORT_OP_ARGS = new PerlElementType("SORT_OP_ARGS");
@@ -135,6 +131,7 @@ public interface PerlElementTypes {
   IElementType PERL_STRING_MULTILINE = new PerlTokenType("PERL_STRING_MULTILINE");
   IElementType PERL_STRING_MULTILINE_END = new PerlTokenType("PERL_STRING_MULTILINE_END");
   IElementType PERL_TAG = new PerlTokenType("PERL_TAG");
+  IElementType SCALAR_HASH_ELEMENT = new PerlTokenType("scalar_hash_element");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -280,11 +277,8 @@ public interface PerlElementTypes {
       else if (type == OP_2_EXPR) {
         return new PerlOp2ExprImpl(node);
       }
-      else if (type == OP_3_PREF_EXPR) {
-        return new PerlOp3PrefExprImpl(node);
-      }
-      else if (type == OP_3_SUFF_EXPR) {
-        return new PerlOp3SuffExprImpl(node);
+      else if (type == OP_3_EXPR) {
+        return new PerlOp3ExprImpl(node);
       }
       else if (type == OP_4_EXPR) {
         return new PerlOp4ExprImpl(node);
@@ -337,26 +331,17 @@ public interface PerlElementTypes {
       else if (type == QW_EXPR) {
         return new PerlQwExprImpl(node);
       }
-      else if (type == REGEX) {
-        return new PerlRegexImpl(node);
+      else if (type == REGEX_EXPR) {
+        return new PerlRegexExprImpl(node);
       }
       else if (type == RETURN_EXPR) {
         return new PerlReturnExprImpl(node);
       }
-      else if (type == SCALAR_ANON_ARRAY) {
-        return new PerlScalarAnonArrayImpl(node);
+      else if (type == SCALAR_EXPR) {
+        return new PerlScalarExprImpl(node);
       }
-      else if (type == SCALAR_ANON_HASH) {
-        return new PerlScalarAnonHashImpl(node);
-      }
-      else if (type == SCALAR_ARRAY_ELEMENT) {
-        return new PerlScalarArrayElementImpl(node);
-      }
-      else if (type == SCALAR_GENERATED_LIST_ITEM) {
-        return new PerlScalarGeneratedListItemImpl(node);
-      }
-      else if (type == SCALAR_HASH_ELEMENT) {
-        return new PerlScalarHashElementImpl(node);
+      else if (type == SCALAR_NESTED_ELEMENT) {
+        return new PerlScalarNestedElementImpl(node);
       }
       else if (type == SHIFT_EXPR) {
         return new PerlShiftExprImpl(node);

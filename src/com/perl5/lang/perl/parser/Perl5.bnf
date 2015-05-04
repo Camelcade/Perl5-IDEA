@@ -71,9 +71,9 @@
   ]
 
     extends(".*expr")=expr
-    extends(".*regex")=regex
  }
 
+///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 perlFile ::= file_item*
 
 block ::= label ? '{' (file_item + | expr )? '}';
@@ -113,14 +113,6 @@ private perl_function_proto_sigil ::= '$'|'%'|'@'|';' +
 //}
 sub_block_anon ::= 'sub' perl_function_proto ?  block
 
-// variable definition
-variable_definition ::= my_definition | our_definition | local_definition
-my_definition ::= 'my' variable_definition_arguments
-our_definition ::= 'our' variable_definition_arguments
-local_definition ::= 'local' local_variable_definition_arguments
-local_variable_definition_arguments ::= ( perl_package ? local_variable | '(' local_variables ')' )
-variable_definition_arguments ::= ( perl_package ? variable | '(' variables ')' )
-
 // use and no
 package_use ::= 'use' package_use_arguments
 package_no ::= 'no' package_use_arguments
@@ -129,18 +121,6 @@ package_use_arguments ::=
     perl_package perl_version expr ?
     | perl_package expr ?
     | perl_version;
-
-// return && exit
-return_expr ::= ('return' | 'exit') expr ?
-
-// last && next
-last_expr ::= ('last' | 'next' | 'redo') expr ? // @todo labels
-
-// require
-package_require ::= 'require' (perl_package | perl_version | string) // multiline string is possible too
-
-// eval/do
-eval_expr ::= ('eval'|'do' ) (block | expr)
 
 // if
 if_postfix ::= ('if' | 'unless') expr
@@ -193,39 +173,83 @@ expr ::=
     | op_2_expr
     | op_1_expr
 
-op_1_expr ::= term | grep_expr | sort_expr | call_leftward | variable_definition // not sure about var definition
-op_2_expr ::= expr '->' expr
-private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
-op_3_pref_expr ::= ('++'|'--') expr
-op_3_suff_expr ::= expr ('++'|'--')
-op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
-op_5_expr ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true }
-op_6_expr ::= expr ('=~'|'!~') regex
-op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
-op_8_expr ::= expr ('+'|'-'|'.') expr
-op_9_expr ::= expr ('<<'|'>>') expr
-op_10_expr ::= ('not'|'defined'|'ref'|'exists'|'scalar') expr
-op_11_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
-op_12_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
-op_13_expr ::= expr '&' expr
-op_14_expr ::= expr ('|'|'^') expr
-op_15_expr ::= expr '&&' expr
-op_16_expr ::= expr ('||'|'//') expr
-op_17_expr ::= expr ('..'|'...') expr
-op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
-op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
-op_20_expr ::= expr	(',' | '=>') expr
-op_21_expr ::= call_rightward
-op_22_expr ::= 'not' expr { rightAssociative=true }
-op_23_expr ::= expr 'and' expr
-op_24_expr ::= expr ('or'|'xor') expr
+op_1_expr ::= term | call_leftward | variable_definition // not sure about var definition
+op_2_expr ::= scalar_expr '->' expr
+op_3_expr ::= op_3_pref_expr | op_3_suff_expr
+private op_3_pref_expr ::= ('++'|'--') scalar_expr
+private op_3_suff_expr ::= scalar_expr ('++'|'--')
+op_4_expr ::= scalar_expr ('**' scalar_expr)+ { rightAssociative=true }
+op_5_expr ::= ('\' | '~'| '!'| '+' | '-') scalar_expr { rightAssociative=true }
+op_6_expr ::= scalar_expr ('=~'|'!~') regex_expr
+op_7_expr ::= scalar_expr ('*'|'/'|'%'|'x') scalar_expr
+op_8_expr ::= scalar_expr ('+'|'-'|'.') scalar_expr
+op_9_expr ::= scalar_expr ('<<'|'>>') scalar_expr
+op_10_expr ::= ('not'|'defined'|'ref'|'exists'|'scalar') scalar_expr
+op_11_expr ::= scalar_expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') scalar_expr
+op_12_expr ::= scalar_expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') scalar_expr   // smartmatch can accept diff shit
+op_13_expr ::= scalar_expr '&' scalar_expr
+op_14_expr ::= scalar_expr ('|'|'^') scalar_expr
+op_15_expr ::= scalar_expr '&&' scalar_expr
+op_16_expr ::= scalar_expr ('||'|'//') scalar_expr
+op_17_expr ::= scalar_expr ('..'|'...') scalar_expr
+op_18_expr ::= scalar_expr '?' scalar_expr ':' scalar_expr { rightAssociative=true }
+op_19_expr ::= scalar_expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') scalar_expr { rightAssociative=true }
 
-regex ::=
+op_20_expr ::= expr	(',' | '=>') expr
+
+op_21_expr ::= call_rightward
+op_22_expr ::= 'not' scalar_expr { rightAssociative=true }
+op_23_expr ::= scalar_expr 'and' scalar_expr
+op_24_expr ::= scalar_expr ('or'|'xor') scalar_expr
+
+regex_expr ::=
     m_regex
     | qr_regex
     | s_regex
     | tr_regex
     | match_regex
+
+list_expr ::=
+    sort_expr
+    | keys_expr
+    | grep_expr
+    | split_expr
+    | qw_expr
+    | '<' scalar_expr? '>' // bareword should be here too
+    | '<' PERL_BAREWORD '>' // bareword should be here too
+    | array
+    | hash
+
+scalar_expr ::=
+    shift_expr
+    | package_require
+    | return_expr
+    | eval_expr
+    | regex_expr
+    | scalar_nested_element
+    | scalar
+
+
+// variable definition @todo refactor for context
+variable_definition ::= my_definition | our_definition | local_definition
+my_definition ::= 'my' variable_definition_arguments
+our_definition ::= 'our' variable_definition_arguments
+local_definition ::= 'local' local_variable_definition_arguments
+local_variable_definition_arguments ::= ( perl_package ? local_variable | '(' local_variables ')' )
+variable_definition_arguments ::= ( perl_package ? variable | '(' variables ')' )
+
+
+// return && exit
+return_expr ::= ('return' | 'exit') expr ?
+
+// last && next
+last_expr ::= ('last' | 'next' | 'redo') expr ? // @todo labels
+
+// require
+package_require ::= 'require' (perl_package | perl_version | string) // multiline string is possible too
+
+// eval/do
+eval_expr ::= ('eval'|'do' ) (block | expr)
 
 private m_regex ::= 'm' match_regex
 private qr_regex ::= 'qr' match_regex
@@ -244,17 +268,15 @@ tr_replacementlist ::= PERL_STRING_CONTENT
 
 tr_modifiers ::= PERL_REGEX_MODIFIER +
 
-
-
 term ::=
     '(' expr ')'
     | list_expr
-    | scalar
+    | scalar_expr
 
 call_leftward ::=
     calee '(' call_arguments ? ')'
-    | scalar '(' call_arguments ? ')'
-    | scalar '->' '(' call_arguments ? ')'
+    | scalar_expr '(' call_arguments ? ')'
+    | scalar_expr '->' '(' call_arguments ? ')'
 call_rightward ::= calee call_arguments ?
 
 call_arguments ::= <<parseCallArguments>> expr | expr
@@ -270,26 +292,16 @@ calee ::=
     | referencable_method
 
 package_method ::= perl_package '->' perl_function
-object_method ::= scalar '->' perl_function
-object_method_object ::= scalar '->' scalar
+object_method ::= scalar_expr '->' perl_function
+object_method_object ::= scalar_expr '->' scalar_expr
 
 ////////////////// list expressions ////////////////////////////
-list_expr ::=
-    sort_expr
-    | keys_expr
-    | grep_expr
-    | split_expr
-    | qw_expr
-    | '<' scalar? '>' // bareword should be here too
-    | '<' PERL_BAREWORD '>' // bareword should be here too
-    | array
-    | hash
 
 split_expr ::= 'split' split_arguments
 private split_arguments ::=
     "(" split_args ")"
     | split_args
-split_args ::= (scalar | regex ) "," scalar
+split_args ::= (scalar_expr | regex_expr ) "," scalar_expr
 
 qw_expr ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
@@ -320,61 +332,55 @@ array ::=
 
 private array_safe ::=
     PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
-    | PERL_SIGIL_ARRAY scalar       // scalar dereference
+    | PERL_SIGIL_ARRAY scalar_expr       // scalar dereference
     | PERL_ARRAY                    // array as is
 
 hash ::=
     PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
-    | PERL_SIGIL_HASH scalar       // scalar dereference wo braces
+    | PERL_SIGIL_HASH scalar_expr       // scalar dereference wo braces
     | PERL_HASH                    // hash as is
 
-private scalar ::=
-    shift_expr                        // shift expression
-    | package_require
-    | return_expr
-    | eval_expr
-    | regex
-    | scalar_array_element
-    | scalar_hash_element
-    | scalar_anon_array
-    | scalar_anon_hash
-//    | '(' expr ')'          // not sure it should be here
-    | scalar_generated_list_item
-    | scalar_safe                       // scalar or deref scalar
 
-scalar_array_element ::= scalar_safe '->'? '[' expr ']'      // array element
-scalar_hash_element ::= scalar_safe '->'? '{' ( expr | PERL_BAREWORD) '}'    // hash element
-scalar_anon_hash ::= '{' expr ? '}'   // anonymous hash
-scalar_anon_array ::= '[' expr ? ']'  // anonymous array
-scalar_generated_list_item ::= '(' expr ')'[expr]                // generated array element
+scalar_nested_element ::= scalar structure_element+
 
 private string ::= string_quoted | string_unquoted | PERL_STRING_CONTENT | <<parseBarewordString>>
 private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE  // bareword string should be here
 private string_unquoted ::= PERL_STRING_CONTENT
 
-private scalar_safe ::=
-//    PERL_SIGIL_SCALAR '{' PERL_BAREWORD '}'       // scalar dereference
-    PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference
+private scalar ::=
+    PERL_SIGIL_SCALAR '{' PERL_BAREWORD '}'       // scalar dereference
+    | PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference
     | PERL_SCALAR                          // scalar as is
-    | multiline_marker                  // deferred string
     | PERL_NUMBER                       // raw number
-    | string                            // string
     | PERL_TAG
-    | sub_block_anon
     | PERL_GLOB
+    | scalar_anon_array
+    | scalar_anon_hash
+    | scalar_generated_list_item
+    | multiline_marker                  // deferred string
+    | string                            // string
+    | sub_block_anon
     | referencable_method
     | 'undef'
 
+private structure_element ::= array_element | hash_element
+private array_element ::= '->'? '[' expr ']'
+private hash_element ::= '->'? '{' ( expr | PERL_BAREWORD) '}'
+
+private scalar_anon_hash ::= '{' expr ? '}'   // anonymous hash
+private scalar_anon_array ::= '[' expr ? ']'  // anonymous array
+
+private scalar_generated_list_item ::= '(' expr ')'[expr]                // generated array element
 
 private referencable_method ::= '&'
     (
         perl_package_function
         | perl_function
-        | {scalar}
-        | scalar
+        | {scalar_expr}
+        | scalar_expr
     )
 
-perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
+inner perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
 
 private multiline_marker ::= '<<' (string | PERL_BAREWORD)
 
@@ -389,7 +395,7 @@ private label ::= PERL_BAREWORD ":"
 private perl_package ::= <<parseBarewordPackage>>
 private perl_function ::= <<parseBarewordFunction>>
 private perl_package_function ::= <<parsePackageFunctionCall>>
-private perl_method_parent ::= scalar '->' <<parsePackageMethodSuper>>
+private perl_method_parent ::= scalar_expr '->' <<parsePackageMethodSuper>>
 
 //private package_bare ::= PERL_BAREWORD ( '::' PERL_BAREWORD ) *
 // {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
