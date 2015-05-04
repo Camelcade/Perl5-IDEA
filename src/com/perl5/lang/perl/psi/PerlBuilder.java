@@ -19,11 +19,6 @@ import java.util.HashMap;
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
 	protected final Stack<PerlCodeBlockState> blockState = new Stack<PerlCodeBlockState>();
-	protected String lastParsedPackage = "";
-
-	// capture buffer for strings
-	protected boolean captureStrings = false;
-	protected final ArrayList<String> capturedStrings = new ArrayList<String>();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
@@ -56,39 +51,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		int stackSize = blockState.size();
 		assert stackSize > 0;
 		return blockState.get(stackSize - 1);
-	}
-
-	public String getLastParsedPackage()
-	{
-		return lastParsedPackage;
-	}
-
-	public void setLastParsedPackage(String lastParsedPackage)
-	{
-		this.lastParsedPackage = lastParsedPackage;
-	}
-
-
-	public void startCaptureStrings()
-	{
-		captureStrings = true;
-		capturedStrings.clear();
-	}
-
-	public void stopCaptureStrings()
-	{
-		captureStrings = false;
-	}
-
-	public ArrayList<String> getCapturedStrings()
-	{
-		return capturedStrings;
-	}
-
-	public void captureString(String string)
-	{
-		if( captureStrings)
-			capturedStrings.add(string);
 	}
 
 }

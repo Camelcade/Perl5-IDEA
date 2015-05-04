@@ -129,17 +129,11 @@ private  statement ::=
     | expr
     {recoverWhile=recover_statement}
 
-use_statement ::= 'use' <<captureStrings>> package_use_arguments <<processUseStatement>> {pin=1}
-no_statement ::= 'no' <<captureStrings>> package_use_arguments <<processNoStatement>> {pin=1}
+use_statement ::= 'use' <<parseUseStatement>> {pin=1}
+no_statement ::= 'no' <<parseNoStatement>> {pin=1}
 
 private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | <<eof>>)
 private recover_block ::= !(PERL_RBRACE | <<eof>>)
-
-// here we need to catch pragmas
-private package_use_arguments ::=
-    perl_package perl_version expr ?
-    | perl_package expr ?
-    | perl_version
 
 // expression
 expr ::=
@@ -202,19 +196,26 @@ private term ::=
     PERL_ARRAY
     | PERL_HASH
     | PERL_GLOB
-    | PERL_SCALAR
+    | scalar
     | scalar_primitive
+    | list_primitive
+
+private scalar ::=
+    PERL_SCALAR
+    | PERL_SIGIL_SCALAR "{" PERL_BAREWORD "}"
 
 // primitives
-inner scalar_primitive ::=
+private list_primitive ::=
+    string_list
+
+private scalar_primitive ::=
     PERL_NUMBER
     | string
-    | string_list
 
-private string ::= string_quoted | string_unquoted | <<parseStringContent>> | <<parseBarewordString>>
-private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE <<parseStringContent>> PERL_QUOTE
-private string_list ::= 'qw' PERL_QUOTE <<parseStringContent>> * PERL_QUOTE
-private string_unquoted ::= <<parseStringContent>>
+private string ::= string_quoted | string_unquoted | <<parseBarewordString>>
+private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
+private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
+private string_unquoted ::= <<parseBarewordString>>
 
 label ::= PERL_BAREWORD ":" // do we need to change tokentype?
 private perl_package ::= <<parseBarewordPackage>>

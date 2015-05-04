@@ -1,6 +1,6 @@
 package com.perl5.lang.perl.parser;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -9,6 +9,10 @@ import java.util.HashMap;
 public class PerlCodeBlockState implements Cloneable
 {
 	protected HashMap<String,Boolean> features;
+
+	protected final PerlSyntaxTrap stringsTrap = new PerlSyntaxTrap();
+	protected final PerlSyntaxTrap packagesTrap = new PerlSyntaxTrap();
+	protected final PerlSyntaxTrap versionsTrap = new PerlSyntaxTrap();
 
 	public PerlCodeBlockState()
 	{
@@ -42,4 +46,39 @@ public class PerlCodeBlockState implements Cloneable
 		return features.get(featureName) != null;
 	}
 
+
+	public void use(PerlCodeBlockStateChange c)
+	{
+//		System.out.println("Changing state use: ");
+//		System.out.println("Perl version: " + c.perlVersion);
+//		System.out.println("Package: " + c.packageName);
+//		System.out.println("Package version: " + c.packageVersion);
+//		if( c.packageParams != null )
+//			System.out.println("Package params: " + c.packageParams.toString());
+	}
+
+	public void no(PerlCodeBlockStateChange c)
+	{
+//		System.out.println("Changing state no:");
+//		System.out.println("Perl version: " + c.perlVersion);
+//		System.out.println("Package: " + c.packageName);
+//		System.out.println("Package version: " + c.packageVersion);
+//		if( c.packageParams != null )
+//			System.out.println("Package params: " + c.packageParams.toString());
+	}
+
+	public PerlSyntaxTrap getStringsTrap()
+	{
+		return stringsTrap;
+	}
+
+	public PerlSyntaxTrap getPackagesTrap()
+	{
+		return packagesTrap;
+	}
+
+	public PerlSyntaxTrap getVersionsTrap()
+	{
+		return versionsTrap;
+	}
 }

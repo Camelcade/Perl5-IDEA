@@ -40,7 +40,6 @@ public interface PerlElementTypes {
   IElementType OP_8_EXPR = new PerlElementType("OP_8_EXPR");
   IElementType OP_9_EXPR = new PerlElementType("OP_9_EXPR");
   IElementType PACKAGE_NAMESPACE = new PerlElementType("PACKAGE_NAMESPACE");
-  IElementType SCALAR_PRIMITIVE = new PerlElementType("SCALAR_PRIMITIVE");
   IElementType USE_STATEMENT = new PerlElementType("USE_STATEMENT");
 
   IElementType CALL_RIGHTWARD = new PerlTokenType("call_rightward");
@@ -175,9 +174,6 @@ public interface PerlElementTypes {
       }
       else if (type == PACKAGE_NAMESPACE) {
         return new PerlPackageNamespaceImpl(node);
-      }
-      else if (type == SCALAR_PRIMITIVE) {
-        return new PerlScalarPrimitiveImpl(node);
       }
       else if (type == USE_STATEMENT) {
         return new PerlUseStatementImpl(node);

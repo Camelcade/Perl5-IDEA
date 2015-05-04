@@ -121,7 +121,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			}
 
 			assert b instanceof PerlBuilder;
-			((PerlBuilder) b).setLastParsedPackage(packageName.toString());
+			getPackagesTrap(b).capture(packageName.toString());
 
 			b.advanceLexer();
 			m.collapse(PERL_PACKAGE);
@@ -139,40 +139,117 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseBarewordString(PsiBuilder b, int l ) {
 		// here is the logic when we allows to use barewords as strings
-		if(b.getTokenType() == PERL_BAREWORD )
-		{
-			if(
-					b.lookAhead(1) == PERL_ARROW_COMMA // BARE =>
-					)
-			{
-				assert b instanceof PerlBuilder;
-
-				((PerlBuilder) b).captureString(b.getTokenText());
-
-				PsiBuilder.Marker m = b.mark();
-				b.advanceLexer();
-				m.collapse(PERL_STRING);
-			}
-
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean parseStringContent(PsiBuilder b, int l )
-	{
-		if( b.getTokenType() == PERL_STRING_CONTENT)
+		IElementType tokenType = b.getTokenType();
+		if(
+			tokenType == PERL_BAREWORD && b.lookAhead(1) == PERL_ARROW_COMMA // BARE =>
+			|| tokenType == PERL_STRING_CONTENT
+		)
 		{
 			assert b instanceof PerlBuilder;
-			((PerlBuilder) b).captureString(b.getTokenText());
+
+			getStringsTrap(b).capture(b.getTokenText());
+
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.collapse(PERL_STRING);
+
 			return true;
 		}
+
 		return false;
 	}
+
+	public static boolean parseUseStatement(PsiBuilder b, int l )
+	{
+		PerlCodeBlockStateChange c = parseUseParameters(b,l);
+		if( c == null )
+			return false;
+
+		getCurrentBlockState(b).use(c);
+		return true;
+	}
+
+	public static boolean parseNoStatement(PsiBuilder b, int l )
+	{
+		PerlCodeBlockStateChange c = parseUseParameters(b,l);
+		if( c == null )
+			return false;
+
+		getCurrentBlockState(b).no(c);
+		return true;
+	}
+
+	protected static PerlCodeBlockStateChange parseUseParameters(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+		PsiBuilder.Marker m = b.mark();
+		PerlCodeBlockStateChange c = null;
+
+		PerlSyntaxTrap vt = getVersionsTrap(b);
+		vt.start();
+		boolean r = parseVersion(b,l);
+		vt.stop();
+
+		if( r ) // use VERSION
+		{
+			if( b.getTokenType() == PERL_SEMI )
+			{
+				c = new PerlCodeBlockStateChange();
+				c.perlVersion = vt.getFistCapture();
+				m.drop();
+			}
+			else
+				m.rollbackTo();
+		}
+		else
+		{
+			PerlSyntaxTrap t = getPackagesTrap(b);
+			t.start();
+			r = parseBarewordPackage(b,l);
+			t.stop();
+
+			if( r ) // use MODULE
+			{
+				c = new PerlCodeBlockStateChange();
+				c.packageName = t.getFistCapture();
+
+				vt.start();
+				r = parseVersion(b,l);
+				vt.stop();
+
+				if( r ) // use MODULE VERSION
+				{
+					c.packageVersion = vt.getFistCapture();
+				}
+
+				t = getStringsTrap(b);
+				t.start();
+				r = PerlParser.expr(b,l,-1);
+				t.stop();
+
+				if( r ) // use MODULE VERSION ? LIST
+				{
+					c.packageParams = t.getCaptures();
+				}
+
+				if( b.getTokenType() == PERL_SEMI )
+					m.drop();
+				else
+				{
+					c = null;
+					m.rollbackTo();
+				}
+			}
+			else
+			{
+				m.rollbackTo();
+			}
+		}
+
+		return c;
+	}
+
 
 	/**
 	 * Trying to parse:  version and replace token type
@@ -186,6 +263,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		if(tokenType == PERL_NUMBER_VERSION || tokenType == PERL_NUMBER)
 		{
+			assert b instanceof PerlBuilder;
+			getVersionsTrap(b).capture(b.getTokenText());
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.collapse(PERL_VERSION);
@@ -196,30 +275,55 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean processUseStatement(PsiBuilder b, int l ) {
-
+	public static boolean captureStrings(PsiBuilder b, int l, boolean state ) {
 		assert b instanceof PerlBuilder;
-		((PerlBuilder) b).stopCaptureStrings();
-		String packageName = ((PerlBuilder) b).getLastParsedPackage();
-		System.out.printf("Processing use of %s\n", packageName);
-
-
-
+		PerlSyntaxTrap t = getStringsTrap(b);
+		if( state )
+			t.start();
+		else
+			t.stop();
 		return true;
 	}
 
-	public static boolean processNoStatement(PsiBuilder b, int l ) {
+	public static boolean capturePackages(PsiBuilder b, int l, boolean state ) {
 		assert b instanceof PerlBuilder;
-		String packageName = ((PerlBuilder) b).getLastParsedPackage();
-		System.out.printf("Processing no of %s\n", packageName);
-
-		return false;
+		PerlSyntaxTrap t = getPackagesTrap(b);
+		if( state )
+			t.start();
+		else
+			t.stop();
+		return true;
 	}
 
-	public static boolean captureStrings(PsiBuilder b, int l ) {
+	public static boolean captureVersions(PsiBuilder b, int l, boolean state ) {
 		assert b instanceof PerlBuilder;
-		((PerlBuilder) b).startCaptureStrings();
+		PerlSyntaxTrap t = getVersionsTrap(b);
+		if( state )
+			t.start();
+		else
+			t.stop();
 		return true;
+	}
+
+	protected static PerlCodeBlockState getCurrentBlockState(PsiBuilder b)
+	{
+		assert b instanceof PerlBuilder;
+		return ((PerlBuilder) b).getCurrentBlockState();
+	}
+
+	protected static PerlSyntaxTrap getVersionsTrap(PsiBuilder b)
+	{
+		return getCurrentBlockState(b).getVersionsTrap();
+	}
+
+	protected static PerlSyntaxTrap getPackagesTrap(PsiBuilder b)
+	{
+		return getCurrentBlockState(b).getPackagesTrap();
+	}
+
+	protected static PerlSyntaxTrap getStringsTrap(PsiBuilder b)
+	{
+		return getCurrentBlockState(b).getStringsTrap();
 	}
 
 
