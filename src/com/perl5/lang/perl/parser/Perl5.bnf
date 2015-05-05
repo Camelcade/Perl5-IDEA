@@ -80,7 +80,7 @@ private perlFile ::= <<parseFile>> <<eof>>
 private file_items ::= file_item*
 
 private block_safe ::= <<parseBlock>>
-block ::= label ?  "{" file_items "}" {pin=2} // should not be used anywhere, injected by block_safe
+block ::= label_declaration ?  "{" file_items "}" {pin=2} // should not be used anywhere, injected by block_safe
 
 
 private file_item ::= package_namespace | package_namespace_item
@@ -112,8 +112,8 @@ private compound_conditional_block ::= '(' expr ')' block_safe
 
 given_compound ::= 'given' compound_conditional_block
 
-while_compound ::= label ? 'while' compound_conditional_block compound_continue_block ?
-until_compound ::= label ? 'until' compound_conditional_block compound_continue_block ?
+while_compound ::= label_declaration ? 'while' compound_conditional_block compound_continue_block ?
+until_compound ::= label_declaration ? 'until' compound_conditional_block compound_continue_block ?
 
 private compound_continue_block ::= 'continue' block_safe
 
@@ -139,8 +139,7 @@ private for_compound_arguments_list ::=
 sub_definition ::= 'sub' PERL_BAREWORD <<parseSubDefinitionParameters>> ? block_safe PERL_SEMI ?
 sub_declaration_statement ::= 'sub' PERL_BAREWORD <<parseSubDeclarationParameters>> ?
 
-// @todo last semi in the block MUST be optional
-statement ::= statement_variation statement_modifier ? PERL_SEMI //{recoverWhile=recover_statement}
+statement ::= statement_variation statement_modifier ? (<<statementSemi>>|<<eof>>) //{recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
@@ -307,7 +306,8 @@ private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE <<parseBarewordString
 private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
 private string_unquoted ::= <<parseBarewordString>>
 
-label ::= PERL_BAREWORD ":" // do we need to change tokentype?
+label_declaration ::= label ":" // do we need to change tokentype?
+label ::= PERL_BAREWORD
 private perl_package ::= <<parseBarewordPackage>>
 private perl_version ::= <<parseVersion>>
 

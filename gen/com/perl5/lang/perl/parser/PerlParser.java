@@ -1007,14 +1007,14 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // statement_variation statement_modifier ? PERL_SEMI
+  // statement_variation statement_modifier ? <<statementSemi>>
   public static boolean statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<statement>");
     r = statement_variation(b, l + 1);
     r = r && statement_1(b, l + 1);
-    r = r && consumeToken(b, PERL_SEMI);
+    r = r && statementSemi(b, l + 1);
     exit_section_(b, l, m, STATEMENT, r, false, null);
     return r;
   }
