@@ -11,7 +11,12 @@ import com.perl5.lang.perl.psi.impl.*;
 public interface PerlElementTypes {
 
   IElementType BLOCK = new PerlElementType("BLOCK");
+  IElementType DO_TERM = new PerlElementType("DO_TERM");
+  IElementType EVAL_TERM = new PerlElementType("EVAL_TERM");
   IElementType EXPR = new PerlElementType("EXPR");
+  IElementType FOREACH_STATEMENT_MODIFIER = new PerlElementType("FOREACH_STATEMENT_MODIFIER");
+  IElementType FOR_STATEMENT_MODIFIER = new PerlElementType("FOR_STATEMENT_MODIFIER");
+  IElementType IF_STATEMENT_MODIFIER = new PerlElementType("IF_STATEMENT_MODIFIER");
   IElementType LABEL = new PerlElementType("LABEL");
   IElementType NO_STATEMENT = new PerlElementType("NO_STATEMENT");
   IElementType OP_10_EXPR = new PerlElementType("OP_10_EXPR");
@@ -40,10 +45,17 @@ public interface PerlElementTypes {
   IElementType OP_8_EXPR = new PerlElementType("OP_8_EXPR");
   IElementType OP_9_EXPR = new PerlElementType("OP_9_EXPR");
   IElementType PACKAGE_NAMESPACE = new PerlElementType("PACKAGE_NAMESPACE");
+  IElementType STATEMENT = new PerlElementType("STATEMENT");
+  IElementType SUB_DECLARATION_STATEMENT = new PerlElementType("SUB_DECLARATION_STATEMENT");
   IElementType SUB_DEFINITION = new PerlElementType("SUB_DEFINITION");
+  IElementType SUB_TERM = new PerlElementType("SUB_TERM");
+  IElementType UNDEF_STATEMENT = new PerlElementType("UNDEF_STATEMENT");
+  IElementType UNLESS_STATEMENT_MODIFIER = new PerlElementType("UNLESS_STATEMENT_MODIFIER");
+  IElementType UNTIL_STATEMENT_MODIFIER = new PerlElementType("UNTIL_STATEMENT_MODIFIER");
   IElementType USE_STATEMENT = new PerlElementType("USE_STATEMENT");
+  IElementType WHEN_STATEMENT_MODIFIER = new PerlElementType("WHEN_STATEMENT_MODIFIER");
+  IElementType WHILE_STATEMENT_MODIFIER = new PerlElementType("WHILE_STATEMENT_MODIFIER");
 
-  IElementType CALL_RIGHTWARD = new PerlTokenType("call_rightward");
   IElementType NESTED_ELEMENT = new PerlTokenType("nested_element");
   IElementType PERL_ARRAY = new PerlTokenType("PERL_ARRAY");
   IElementType PERL_ARROW_COMMA = new PerlTokenType("=>");
@@ -89,8 +101,23 @@ public interface PerlElementTypes {
        if (type == BLOCK) {
         return new PerlBlockImpl(node);
       }
+      else if (type == DO_TERM) {
+        return new PerlDoTermImpl(node);
+      }
+      else if (type == EVAL_TERM) {
+        return new PerlEvalTermImpl(node);
+      }
       else if (type == EXPR) {
         return new PerlExprImpl(node);
+      }
+      else if (type == FOREACH_STATEMENT_MODIFIER) {
+        return new PerlForeachStatementModifierImpl(node);
+      }
+      else if (type == FOR_STATEMENT_MODIFIER) {
+        return new PerlForStatementModifierImpl(node);
+      }
+      else if (type == IF_STATEMENT_MODIFIER) {
+        return new PerlIfStatementModifierImpl(node);
       }
       else if (type == LABEL) {
         return new PerlLabelImpl(node);
@@ -176,11 +203,35 @@ public interface PerlElementTypes {
       else if (type == PACKAGE_NAMESPACE) {
         return new PerlPackageNamespaceImpl(node);
       }
+      else if (type == STATEMENT) {
+        return new PerlStatementImpl(node);
+      }
+      else if (type == SUB_DECLARATION_STATEMENT) {
+        return new PerlSubDeclarationStatementImpl(node);
+      }
       else if (type == SUB_DEFINITION) {
         return new PerlSubDefinitionImpl(node);
       }
+      else if (type == SUB_TERM) {
+        return new PerlSubTermImpl(node);
+      }
+      else if (type == UNDEF_STATEMENT) {
+        return new PerlUndefStatementImpl(node);
+      }
+      else if (type == UNLESS_STATEMENT_MODIFIER) {
+        return new PerlUnlessStatementModifierImpl(node);
+      }
+      else if (type == UNTIL_STATEMENT_MODIFIER) {
+        return new PerlUntilStatementModifierImpl(node);
+      }
       else if (type == USE_STATEMENT) {
         return new PerlUseStatementImpl(node);
+      }
+      else if (type == WHEN_STATEMENT_MODIFIER) {
+        return new PerlWhenStatementModifierImpl(node);
+      }
+      else if (type == WHILE_STATEMENT_MODIFIER) {
+        return new PerlWhileStatementModifierImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

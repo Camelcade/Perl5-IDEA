@@ -7,22 +7,16 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlBlock extends PsiElement {
 
-  @NotNull
-  List<PerlExpr> getExprList();
-
   @Nullable
   PerlLabel getLabel();
-
-  @NotNull
-  List<PerlNoStatement> getNoStatementList();
 
   @NotNull
   List<PerlPackageNamespace> getPackageNamespaceList();
 
   @NotNull
-  List<PerlSubDefinition> getSubDefinitionList();
+  List<PerlStatement> getStatementList();
 
   @NotNull
-  List<PerlUseStatement> getUseStatementList();
+  List<PerlSubDefinition> getSubDefinitionList();
 
 }

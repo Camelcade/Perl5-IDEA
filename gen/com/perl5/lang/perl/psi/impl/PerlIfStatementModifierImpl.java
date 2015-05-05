@@ -8,41 +8,24 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
+public class PerlIfStatementModifierImpl extends ASTWrapperPsiElement implements PerlIfStatementModifier {
 
-  public PerlOp1ExprImpl(ASTNode node) {
+  public PerlIfStatementModifierImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOp1Expr(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitIfStatementModifier(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public PerlDoTerm getDoTerm() {
-    return findChildByClass(PerlDoTerm.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlEvalTerm getEvalTerm() {
-    return findChildByClass(PerlEvalTerm.class);
   }
 
   @Override
   @Nullable
   public PerlExpr getExpr() {
     return findChildByClass(PerlExpr.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlSubTerm getSubTerm() {
-    return findChildByClass(PerlSubTerm.class);
   }
 
 }

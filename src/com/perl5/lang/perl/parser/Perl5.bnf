@@ -77,14 +77,14 @@
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 private perlFile ::= <<parseFile>> <<eof>>
 
-private file_items ::= file_item*   {recoverWhile=recover_block}
+private file_items ::= file_item*
 
 private block_parsed ::= <<parseBlock>>
 private code_block ::= block_parsed PERL_SEMI ?
 block ::= label ?  "{" file_items "}" {pin=2}
 
 private file_item ::= package_namespace | package_namespace_item
-private package_namespace_item ::= compound_statement PERL_SEMI ? | statement PERL_SEMI
+private package_namespace_item ::= compound_statement PERL_SEMI ? | statement
 
 // package keyword
 package_namespace ::= 'package' perl_package perl_version ? package_namespace_content {pin=1}
@@ -98,20 +98,42 @@ private compound_statement ::=
 
 // sub declaration or definition
 sub_definition ::= 'sub' PERL_BAREWORD <<parseSubDefinitionParameters>> ? block_parsed PERL_SEMI ?
-private sub_declaration_statement ::= 'sub' PERL_BAREWORD <<parseSubDeclarationParameters>> ?
+sub_declaration_statement ::= 'sub' PERL_BAREWORD <<parseSubDeclarationParameters>> ?
 
-private  statement ::=
+statement ::= statement_variation statement_modifier ? PERL_SEMI //{recoverWhile=recover_statement}
+
+private statement_variation ::=
     use_statement
     | sub_declaration_statement
     | no_statement
+    | undef_statement
     | expr
-    {recoverWhile=recover_statement}
+
+private statement_modifier ::=
+    if_statement_modifier
+    | unless_statement_modifier
+    | while_statement_modifier
+    | until_statement_modifier
+    | for_statement_modifier
+    | foreach_statement_modifier
+    | when_statement_modifier
+
+if_statement_modifier ::= 'if' expr {pin=1}
+unless_statement_modifier ::=  'unless' expr {pin=1}
+while_statement_modifier ::=  'while' expr {pin=1}
+until_statement_modifier ::=  'until' expr {pin=1}
+for_statement_modifier ::=  'for' expr  {pin=1}   // actually @LIST
+foreach_statement_modifier ::=  'foreach' {pin=1} expr // actually @LIST
+when_statement_modifier ::= 'when' expr {pin=1}
+
 
 use_statement ::= 'use' <<parseUseStatement>> {pin=1}
 no_statement ::= 'no' <<parseNoStatement>> {pin=1}
 
+undef_statement ::= "undef" perl_variable {pin=1}
+
 private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | <<eof>>)
-private recover_block ::= !(PERL_RBRACE | <<eof>>)
+//private recover_block ::= !(PERL_RBRACE | <<eof>>)
 
 // expression
 expr ::=
@@ -139,7 +161,6 @@ expr ::=
     | op_3_expr
     | op_2_expr
     | op_1_expr
-    {recoverWhile=recover_statement}
 
 op_1_expr ::= term
 op_2_expr ::= expr '->' nested_element
@@ -165,18 +186,27 @@ op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<=
 
 op_20_expr ::= expr	(',' | '=>') expr
 
-op_21_expr ::= call_rightward
+op_21_expr ::= PERL_BAREWORD !"(" <<parseRightCallArguments>>  // calee should be instead of bareword
 op_22_expr ::= 'not' expr { rightAssociative=true }
 op_23_expr ::= expr 'and' expr
 op_24_expr ::= expr ('or'|'xor') expr
 
 private term ::=
-    PERL_ARRAY
-    | PERL_HASH
-    | PERL_GLOB
-    | scalar
+    perl_variable
+    | "undef"
+    | PERL_BAREWORD "(" expr ? ")" // calee should be instead of bareword
+    | "(" expr ? ")"
     | scalar_primitive
     | list_primitive
+    | sub_term
+    | do_term
+    | eval_term
+
+sub_term ::= "sub" block
+do_term ::= "do" block
+eval_term ::= "eval" block
+
+private perl_variable ::= scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
 
 private scalar ::=
     PERL_SCALAR
@@ -311,9 +341,6 @@ private perl_version ::= <<parseVersion>>
 //
 //// require
 //package_require ::= 'require' (perl_package | perl_version | string) // multiline string is possible too
-//
-//// eval/do
-//eval_expr ::= ('eval'|'do' ) (block | expr)
 //
 //private m_regex ::= 'm' match_regex
 //private qr_regex ::= 'qr' match_regex

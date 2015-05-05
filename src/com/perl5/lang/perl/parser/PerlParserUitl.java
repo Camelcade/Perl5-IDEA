@@ -169,6 +169,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
+	public static boolean parseRightCallArguments(PsiBuilder b, int l )
+	{
+		PerlParser.expr(b,l,3); // optional. Standart generator makes it with -1 level
+		return true;
+	}
+
 	/*
 // @todo actually, prototypes and signatures depends on feature in current block; We should do this in parse time
 //private sub_declaration_parameters ::=
@@ -198,6 +204,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
 		return false;
 	}
+
 
 	public static boolean parseSubDeclarationParameters(PsiBuilder b, int l )
 	{

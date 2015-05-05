@@ -11,7 +11,27 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDoTerm(@NotNull PerlDoTerm o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEvalTerm(@NotNull PerlEvalTerm o) {
+    visitPsiElement(o);
+  }
+
   public void visitExpr(@NotNull PerlExpr o) {
+    visitPsiElement(o);
+  }
+
+  public void visitForStatementModifier(@NotNull PerlForStatementModifier o) {
+    visitPsiElement(o);
+  }
+
+  public void visitForeachStatementModifier(@NotNull PerlForeachStatementModifier o) {
+    visitPsiElement(o);
+  }
+
+  public void visitIfStatementModifier(@NotNull PerlIfStatementModifier o) {
     visitPsiElement(o);
   }
 
@@ -127,11 +147,43 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitStatement(@NotNull PerlStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSubDeclarationStatement(@NotNull PerlSubDeclarationStatement o) {
+    visitPsiElement(o);
+  }
+
   public void visitSubDefinition(@NotNull PerlSubDefinition o) {
     visitPsiElement(o);
   }
 
+  public void visitSubTerm(@NotNull PerlSubTerm o) {
+    visitPsiElement(o);
+  }
+
+  public void visitUndefStatement(@NotNull PerlUndefStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitUnlessStatementModifier(@NotNull PerlUnlessStatementModifier o) {
+    visitPsiElement(o);
+  }
+
+  public void visitUntilStatementModifier(@NotNull PerlUntilStatementModifier o) {
+    visitPsiElement(o);
+  }
+
   public void visitUseStatement(@NotNull PerlUseStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitWhenStatementModifier(@NotNull PerlWhenStatementModifier o) {
+    visitPsiElement(o);
+  }
+
+  public void visitWhileStatementModifier(@NotNull PerlWhileStatementModifier o) {
     visitPsiElement(o);
   }
 

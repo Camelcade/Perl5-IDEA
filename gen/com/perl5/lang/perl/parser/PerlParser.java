@@ -25,8 +25,23 @@ public class PerlParser implements PsiParser {
     if (t == BLOCK) {
       r = block(b, 0);
     }
+    else if (t == DO_TERM) {
+      r = do_term(b, 0);
+    }
+    else if (t == EVAL_TERM) {
+      r = eval_term(b, 0);
+    }
     else if (t == EXPR) {
       r = expr(b, 0, -1);
+    }
+    else if (t == FOR_STATEMENT_MODIFIER) {
+      r = for_statement_modifier(b, 0);
+    }
+    else if (t == FOREACH_STATEMENT_MODIFIER) {
+      r = foreach_statement_modifier(b, 0);
+    }
+    else if (t == IF_STATEMENT_MODIFIER) {
+      r = if_statement_modifier(b, 0);
     }
     else if (t == LABEL) {
       r = label(b, 0);
@@ -112,11 +127,35 @@ public class PerlParser implements PsiParser {
     else if (t == PACKAGE_NAMESPACE) {
       r = package_namespace(b, 0);
     }
+    else if (t == STATEMENT) {
+      r = statement(b, 0);
+    }
+    else if (t == SUB_DECLARATION_STATEMENT) {
+      r = sub_declaration_statement(b, 0);
+    }
     else if (t == SUB_DEFINITION) {
       r = sub_definition(b, 0);
     }
+    else if (t == SUB_TERM) {
+      r = sub_term(b, 0);
+    }
+    else if (t == UNDEF_STATEMENT) {
+      r = undef_statement(b, 0);
+    }
+    else if (t == UNLESS_STATEMENT_MODIFIER) {
+      r = unless_statement_modifier(b, 0);
+    }
+    else if (t == UNTIL_STATEMENT_MODIFIER) {
+      r = until_statement_modifier(b, 0);
+    }
     else if (t == USE_STATEMENT) {
       r = use_statement(b, 0);
+    }
+    else if (t == WHEN_STATEMENT_MODIFIER) {
+      r = when_statement_modifier(b, 0);
+    }
+    else if (t == WHILE_STATEMENT_MODIFIER) {
+      r = while_statement_modifier(b, 0);
     }
     else {
       r = parse_root_(t, b, 0);
@@ -200,6 +239,30 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // "do" block
+  public static boolean do_term(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "do_term")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<do term>");
+    r = consumeToken(b, "do");
+    r = r && block(b, l + 1);
+    exit_section_(b, l, m, DO_TERM, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // "eval" block
+  public static boolean eval_term(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "eval_term")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<eval term>");
+    r = consumeToken(b, "eval");
+    r = r && block(b, l + 1);
+    exit_section_(b, l, m, EVAL_TERM, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // package_namespace | package_namespace_item
   static boolean file_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "file_item")) return false;
@@ -215,15 +278,50 @@ public class PerlParser implements PsiParser {
   // file_item*
   static boolean file_items(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "file_items")) return false;
-    Marker m = enter_section_(b, l, _NONE_, null);
     int c = current_position_(b);
     while (true) {
       if (!file_item(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "file_items", c)) break;
       c = current_position_(b);
     }
-    exit_section_(b, l, m, null, true, false, recover_block_parser_);
     return true;
+  }
+
+  /* ********************************************************** */
+  // 'for' expr
+  public static boolean for_statement_modifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_statement_modifier")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<for statement modifier>");
+    r = consumeToken(b, "for");
+    p = r; // pin = 1
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, FOR_STATEMENT_MODIFIER, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'foreach'
+  public static boolean foreach_statement_modifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "foreach_statement_modifier")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<foreach statement modifier>");
+    r = consumeToken(b, "foreach");
+    exit_section_(b, l, m, FOREACH_STATEMENT_MODIFIER, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'if' expr
+  public static boolean if_statement_modifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if_statement_modifier")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<if statement modifier>");
+    r = consumeToken(b, "if");
+    p = r; // pin = 1
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, IF_STATEMENT_MODIFIER, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
@@ -304,13 +402,13 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // compound_statement PERL_SEMI ? | statement PERL_SEMI
+  // compound_statement PERL_SEMI ? | statement
   static boolean package_namespace_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_namespace_item")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = package_namespace_item_0(b, l + 1);
-    if (!r) r = package_namespace_item_1(b, l + 1);
+    if (!r) r = statement(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -331,17 +429,6 @@ public class PerlParser implements PsiParser {
     if (!recursion_guard_(b, l, "package_namespace_item_0_1")) return false;
     consumeToken(b, PERL_SEMI);
     return true;
-  }
-
-  // statement PERL_SEMI
-  private static boolean package_namespace_item_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "package_namespace_item_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = statement(b, l + 1);
-    r = r && consumeToken(b, PERL_SEMI);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */
@@ -376,31 +463,23 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // <<parseVersion>>
-  static boolean perl_version(PsiBuilder b, int l) {
-    return parseVersion(b, l + 1);
+  // scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
+  static boolean perl_variable(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_variable")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = scalar(b, l + 1);
+    if (!r) r = consumeToken(b, PERL_ARRAY);
+    if (!r) r = consumeToken(b, PERL_HASH);
+    if (!r) r = consumeToken(b, PERL_GLOB);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */
-  // !(PERL_RBRACE | <<eof>>)
-  static boolean recover_block(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "recover_block")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_, null);
-    r = !recover_block_0(b, l + 1);
-    exit_section_(b, l, m, null, r, false, null);
-    return r;
-  }
-
-  // PERL_RBRACE | <<eof>>
-  private static boolean recover_block_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "recover_block_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_RBRACE);
-    if (!r) r = eof(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+  // <<parseVersion>>
+  static boolean perl_version(PsiBuilder b, int l) {
+    return parseVersion(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -467,19 +546,64 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // statement_variation statement_modifier ? PERL_SEMI
+  public static boolean statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<statement>");
+    r = statement_variation(b, l + 1);
+    r = r && statement_1(b, l + 1);
+    r = r && consumeToken(b, PERL_SEMI);
+    exit_section_(b, l, m, STATEMENT, r, false, null);
+    return r;
+  }
+
+  // statement_modifier ?
+  private static boolean statement_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_1")) return false;
+    statement_modifier(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // if_statement_modifier
+  //     | unless_statement_modifier
+  //     | while_statement_modifier
+  //     | until_statement_modifier
+  //     | for_statement_modifier
+  //     | foreach_statement_modifier
+  //     | when_statement_modifier
+  static boolean statement_modifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_modifier")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = if_statement_modifier(b, l + 1);
+    if (!r) r = unless_statement_modifier(b, l + 1);
+    if (!r) r = while_statement_modifier(b, l + 1);
+    if (!r) r = until_statement_modifier(b, l + 1);
+    if (!r) r = for_statement_modifier(b, l + 1);
+    if (!r) r = foreach_statement_modifier(b, l + 1);
+    if (!r) r = when_statement_modifier(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // use_statement
   //     | sub_declaration_statement
   //     | no_statement
+  //     | undef_statement
   //     | expr
-  static boolean statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "statement")) return false;
+  static boolean statement_variation(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_variation")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null);
+    Marker m = enter_section_(b);
     r = use_statement(b, l + 1);
     if (!r) r = sub_declaration_statement(b, l + 1);
     if (!r) r = no_statement(b, l + 1);
+    if (!r) r = undef_statement(b, l + 1);
     if (!r) r = expr(b, l + 1, -1);
-    exit_section_(b, l, m, null, r, false, recover_statement_parser_);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -563,14 +687,14 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // 'sub' PERL_BAREWORD <<parseSubDeclarationParameters>> ?
-  static boolean sub_declaration_statement(PsiBuilder b, int l) {
+  public static boolean sub_declaration_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sub_declaration_statement")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, "<sub declaration statement>");
     r = consumeToken(b, "sub");
     r = r && consumeToken(b, PERL_BAREWORD);
     r = r && sub_declaration_statement_2(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, SUB_DECLARATION_STATEMENT, r, false, null);
     return r;
   }
 
@@ -611,24 +735,120 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // PERL_ARRAY
-  //     | PERL_HASH
-  //     | PERL_GLOB
-  //     | scalar
+  // "sub" block
+  public static boolean sub_term(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "sub_term")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<sub term>");
+    r = consumeToken(b, "sub");
+    r = r && block(b, l + 1);
+    exit_section_(b, l, m, SUB_TERM, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // perl_variable
+  //     | "undef"
+  //     | PERL_BAREWORD "(" expr ? ")" // calee should be instead of bareword
+  //     | "(" expr ? ")"
   //     | scalar_primitive
   //     | list_primitive
+  //     | sub_term
+  //     | do_term
+  //     | eval_term
   static boolean term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_ARRAY);
-    if (!r) r = consumeToken(b, PERL_HASH);
-    if (!r) r = consumeToken(b, PERL_GLOB);
-    if (!r) r = scalar(b, l + 1);
+    r = perl_variable(b, l + 1);
+    if (!r) r = consumeToken(b, "undef");
+    if (!r) r = term_2(b, l + 1);
+    if (!r) r = term_3(b, l + 1);
     if (!r) r = scalar_primitive(b, l + 1);
     if (!r) r = list_primitive(b, l + 1);
+    if (!r) r = sub_term(b, l + 1);
+    if (!r) r = do_term(b, l + 1);
+    if (!r) r = eval_term(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // PERL_BAREWORD "(" expr ? ")"
+  private static boolean term_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "term_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_BAREWORD);
+    r = r && consumeToken(b, PERL_LPAREN);
+    r = r && term_2_2(b, l + 1);
+    r = r && consumeToken(b, PERL_RPAREN);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // expr ?
+  private static boolean term_2_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "term_2_2")) return false;
+    expr(b, l + 1, -1);
+    return true;
+  }
+
+  // "(" expr ? ")"
+  private static boolean term_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "term_3")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_LPAREN);
+    r = r && term_3_1(b, l + 1);
+    r = r && consumeToken(b, PERL_RPAREN);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // expr ?
+  private static boolean term_3_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "term_3_1")) return false;
+    expr(b, l + 1, -1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // "undef" perl_variable
+  public static boolean undef_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "undef_statement")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<undef statement>");
+    r = consumeToken(b, "undef");
+    p = r; // pin = 1
+    r = r && perl_variable(b, l + 1);
+    exit_section_(b, l, m, UNDEF_STATEMENT, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'unless' expr
+  public static boolean unless_statement_modifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unless_statement_modifier")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<unless statement modifier>");
+    r = consumeToken(b, "unless");
+    p = r; // pin = 1
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, UNLESS_STATEMENT_MODIFIER, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'until' expr
+  public static boolean until_statement_modifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "until_statement_modifier")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<until statement modifier>");
+    r = consumeToken(b, "until");
+    p = r; // pin = 1
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, UNTIL_STATEMENT_MODIFIER, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
@@ -641,6 +861,32 @@ public class PerlParser implements PsiParser {
     p = r; // pin = 1
     r = r && parseUseStatement(b, l + 1);
     exit_section_(b, l, m, USE_STATEMENT, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'when' expr
+  public static boolean when_statement_modifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "when_statement_modifier")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<when statement modifier>");
+    r = consumeToken(b, "when");
+    p = r; // pin = 1
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, WHEN_STATEMENT_MODIFIER, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'while' expr
+  public static boolean while_statement_modifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "while_statement_modifier")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<while statement modifier>");
+    r = consumeToken(b, "while");
+    p = r; // pin = 1
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, WHILE_STATEMENT_MODIFIER, r, p, null);
     return r || p;
   }
 
@@ -803,14 +1049,26 @@ public class PerlParser implements PsiParser {
     return r || p;
   }
 
-  // call_rightward
+  // PERL_BAREWORD !"(" <<parseRightCallArguments>>
   public static boolean op_21_expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op_21_expr")) return false;
-    if (!nextTokenIsFast(b, CALL_RIGHTWARD)) return false;
+    if (!nextTokenIsFast(b, PERL_BAREWORD)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokenSmart(b, CALL_RIGHTWARD);
+    r = consumeTokenSmart(b, PERL_BAREWORD);
+    r = r && op_21_expr_1(b, l + 1);
+    r = r && parseRightCallArguments(b, l + 1);
     exit_section_(b, m, OP_21_EXPR, r);
+    return r;
+  }
+
+  // !"("
+  private static boolean op_21_expr_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_21_expr_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_, null);
+    r = !consumeTokenSmart(b, PERL_LPAREN);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -1079,14 +1337,4 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  final static Parser recover_block_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return recover_block(b, l + 1);
-    }
-  };
-  final static Parser recover_statement_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return recover_statement(b, l + 1);
-    }
-  };
 }

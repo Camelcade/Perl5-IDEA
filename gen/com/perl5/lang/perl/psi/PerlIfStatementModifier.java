@@ -5,18 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlOp1Expr extends PerlExpr {
-
-  @Nullable
-  PerlDoTerm getDoTerm();
-
-  @Nullable
-  PerlEvalTerm getEvalTerm();
+public interface PerlIfStatementModifier extends PsiElement {
 
   @Nullable
   PerlExpr getExpr();
-
-  @Nullable
-  PerlSubTerm getSubTerm();
 
 }
