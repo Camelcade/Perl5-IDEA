@@ -20,7 +20,16 @@ public interface PerlStatement extends PsiElement {
   PerlIfStatementModifier getIfStatementModifier();
 
   @Nullable
+  PerlLastStatement getLastStatement();
+
+  @Nullable
+  PerlNextStatement getNextStatement();
+
+  @Nullable
   PerlNoStatement getNoStatement();
+
+  @Nullable
+  PerlRedoStatement getRedoStatement();
 
   @Nullable
   PerlSubDeclarationStatement getSubDeclarationStatement();

@@ -47,6 +47,12 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
 
   @Override
   @Nullable
+  public PerlFileReadTerm getFileReadTerm() {
+    return findChildByClass(PerlFileReadTerm.class);
+  }
+
+  @Override
+  @Nullable
   public PerlMatchRegex getMatchRegex() {
     return findChildByClass(PerlMatchRegex.class);
   }

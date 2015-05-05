@@ -94,9 +94,11 @@ PERL_SYN_QUOTE_LIKE = {QUOTE_LIST_FUNCTIONS} | {QUOTE_FUNCTIONS} | {TRANS_FUNCTI
 
 PERL_SYN_INCLUDE = "use" | "require" | "no"
 PERL_SYN_BLOCK_OP = "sub" | "do" | "eval"
+PERL_SYN_FLOW_CONTROL = "redo" | "next" | "last"
 PERL_SYN_DECLARE = "package" | "sub" | "my" | "our" | "local" | "state"
 PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
-FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} {PERL_SYN_DECLARE} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE}
+PERL_SYN_OTHER = "undef"
+FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} | {PERL_SYN_DECLARE} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER}
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 

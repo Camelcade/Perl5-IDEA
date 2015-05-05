@@ -63,6 +63,7 @@ public class RegexBlock implements PerlElementTypes
 			else if( !isEscaped && isCharGroup && currentChar == ']')
 				isCharGroup = false;
 
+			// @todo this is buggy, sometimes bare is allowed. See example from `redo` doc
 			if( !isEscaped && !isCharGroup && !isBraced && currentChar == '{')
 				isBraced = true;
 			else if( !isEscaped && !isCharGroup && isBraced && currentChar == '}')

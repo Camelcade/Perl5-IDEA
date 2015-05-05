@@ -16,6 +16,7 @@ public interface PerlElementTypes {
   IElementType DO_TERM = new PerlElementType("DO_TERM");
   IElementType EVAL_TERM = new PerlElementType("EVAL_TERM");
   IElementType EXPR = new PerlElementType("EXPR");
+  IElementType FILE_READ_TERM = new PerlElementType("FILE_READ_TERM");
   IElementType FOREACH_COMPOUND = new PerlElementType("FOREACH_COMPOUND");
   IElementType FOREACH_STATEMENT_MODIFIER = new PerlElementType("FOREACH_STATEMENT_MODIFIER");
   IElementType FOR_COMPOUND = new PerlElementType("FOR_COMPOUND");
@@ -24,7 +25,10 @@ public interface PerlElementTypes {
   IElementType IF_COMPOUND = new PerlElementType("IF_COMPOUND");
   IElementType IF_STATEMENT_MODIFIER = new PerlElementType("IF_STATEMENT_MODIFIER");
   IElementType LABEL = new PerlElementType("LABEL");
+  IElementType LABEL_DECLARATION = new PerlElementType("LABEL_DECLARATION");
+  IElementType LAST_STATEMENT = new PerlElementType("LAST_STATEMENT");
   IElementType MATCH_REGEX = new PerlElementType("MATCH_REGEX");
+  IElementType NEXT_STATEMENT = new PerlElementType("NEXT_STATEMENT");
   IElementType NO_STATEMENT = new PerlElementType("NO_STATEMENT");
   IElementType OP_10_EXPR = new PerlElementType("OP_10_EXPR");
   IElementType OP_11_EXPR = new PerlElementType("OP_11_EXPR");
@@ -54,6 +58,7 @@ public interface PerlElementTypes {
   IElementType PACKAGE_NAMESPACE = new PerlElementType("PACKAGE_NAMESPACE");
   IElementType PERL_REGEX = new PerlElementType("PERL_REGEX");
   IElementType PERL_REGEX_MODIFIERS = new PerlElementType("PERL_REGEX_MODIFIERS");
+  IElementType REDO_STATEMENT = new PerlElementType("REDO_STATEMENT");
   IElementType REPLACEMENT_REGEX = new PerlElementType("REPLACEMENT_REGEX");
   IElementType STATEMENT = new PerlElementType("STATEMENT");
   IElementType SUB_DECLARATION_STATEMENT = new PerlElementType("SUB_DECLARATION_STATEMENT");
@@ -136,6 +141,9 @@ public interface PerlElementTypes {
       else if (type == EXPR) {
         return new PerlExprImpl(node);
       }
+      else if (type == FILE_READ_TERM) {
+        return new PerlFileReadTermImpl(node);
+      }
       else if (type == FOREACH_COMPOUND) {
         return new PerlForeachCompoundImpl(node);
       }
@@ -160,8 +168,17 @@ public interface PerlElementTypes {
       else if (type == LABEL) {
         return new PerlLabelImpl(node);
       }
+      else if (type == LABEL_DECLARATION) {
+        return new PerlLabelDeclarationImpl(node);
+      }
+      else if (type == LAST_STATEMENT) {
+        return new PerlLastStatementImpl(node);
+      }
       else if (type == MATCH_REGEX) {
         return new PerlMatchRegexImpl(node);
+      }
+      else if (type == NEXT_STATEMENT) {
+        return new PerlNextStatementImpl(node);
       }
       else if (type == NO_STATEMENT) {
         return new PerlNoStatementImpl(node);
@@ -249,6 +266,9 @@ public interface PerlElementTypes {
       }
       else if (type == PERL_REGEX_MODIFIERS) {
         return new PerlPerlRegexModifiersImpl(node);
+      }
+      else if (type == REDO_STATEMENT) {
+        return new PerlRedoStatementImpl(node);
       }
       else if (type == REPLACEMENT_REGEX) {
         return new PerlReplacementRegexImpl(node);

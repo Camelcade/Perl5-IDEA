@@ -23,7 +23,7 @@ public interface PerlBlock extends PsiElement {
   List<PerlIfCompound> getIfCompoundList();
 
   @Nullable
-  PerlLabel getLabel();
+  PerlLabelDeclaration getLabelDeclaration();
 
   @NotNull
   List<PerlPackageNamespace> getPackageNamespaceList();

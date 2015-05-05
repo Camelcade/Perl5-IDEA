@@ -146,7 +146,16 @@ private statement_variation ::=
     | sub_declaration_statement
     | no_statement
     | undef_statement
+    | last_statement
+    | next_statement
+    | redo_statement
     | expr
+
+last_statement ::= 'last' lnr_param ?
+next_statement ::= 'next' lnr_param ?
+redo_statement ::= 'redo' lnr_param ?
+private lnr_param ::= label | expr
+
 
 private statement_modifier ::=
     if_statement_modifier
@@ -202,7 +211,7 @@ expr ::=
     | op_1_expr
 
 op_1_expr ::= term
-op_2_expr ::= expr '->' nested_element
+op_2_expr ::= expr '->' ? nested_element
 private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
 op_3_suff_expr ::= expr ('++'|'--')
@@ -232,7 +241,6 @@ op_24_expr ::= expr ('or'|'xor') expr
 
 private term ::=
     variable
-    | "undef"
     | PERL_BAREWORD "(" expr ? ")" // calee should be instead of bareword
     | "(" expr ? ")"
     | scalar_primitive
@@ -241,6 +249,9 @@ private term ::=
     | do_term
     | eval_term
     | regex_term
+    | file_read_term
+
+file_read_term ::= '<' (PERL_BAREWORD | expr )? '>'
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -292,6 +303,7 @@ private variable ::= scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
 private scalar ::=
     PERL_SCALAR
     | PERL_SIGIL_SCALAR "{" PERL_BAREWORD "}"
+    | 'undef'
 
 // primitives
 private list_primitive ::=
@@ -307,46 +319,12 @@ private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
 private string_unquoted ::= <<parseBarewordString>>
 
 label_declaration ::= label ":" // do we need to change tokentype?
-label ::= PERL_BAREWORD
+label ::= !PERL_KEYWORD PERL_BAREWORD
 private perl_package ::= <<parseBarewordPackage>>
 private perl_version ::= <<parseVersion>>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//list_expr ::=
-//    sort_expr
-//    | keys_expr
-//    | grep_expr
-//    | split_expr
-//    | qw_expr
-//    | '<' scalar_expr? '>' // bareword should be here too
-//    | '<' PERL_BAREWORD '>' // bareword should be here too
-//    | array
-//    | hash
-//
-//
-//
-//scalar_expr ::=
-//    shift_expr
-//    | package_require
-//    | return_expr
-//    | eval_expr
-//    | regex_expr
-//    | scalar_nested_element
-//    | scalar
-//
-//
-//// variable definition @todo refactor for context
-//local_variable_definition_arguments ::= ( perl_package ? local_variable | '(' local_variables ')' )
-//variable_definition_arguments ::= ( perl_package ? variable | '(' variables ')' )
-//
-//
-//// return && exit
-//return_expr ::= ('return' | 'exit') expr ?
-//
 //// last && next
-//last_expr ::= ('last' | 'next' | 'redo') expr ? // @todo labels
 //
 //// require
 //package_require ::= 'require' (perl_package | perl_version | string) // multiline string is possible too

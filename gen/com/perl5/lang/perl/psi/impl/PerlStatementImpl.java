@@ -48,8 +48,26 @@ public class PerlStatementImpl extends ASTWrapperPsiElement implements PerlState
 
   @Override
   @Nullable
+  public PerlLastStatement getLastStatement() {
+    return findChildByClass(PerlLastStatement.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlNextStatement getNextStatement() {
+    return findChildByClass(PerlNextStatement.class);
+  }
+
+  @Override
+  @Nullable
   public PerlNoStatement getNoStatement() {
     return findChildByClass(PerlNoStatement.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlRedoStatement getRedoStatement() {
+    return findChildByClass(PerlRedoStatement.class);
   }
 
   @Override

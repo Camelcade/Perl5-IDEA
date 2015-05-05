@@ -31,6 +31,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitFileReadTerm(@NotNull PerlFileReadTerm o) {
+    visitPsiElement(o);
+  }
+
   public void visitForCompound(@NotNull PerlForCompound o) {
     visitPsiElement(o);
   }
@@ -63,7 +67,19 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLabelDeclaration(@NotNull PerlLabelDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLastStatement(@NotNull PerlLastStatement o) {
+    visitPsiElement(o);
+  }
+
   public void visitMatchRegex(@NotNull PerlMatchRegex o) {
+    visitPsiElement(o);
+  }
+
+  public void visitNextStatement(@NotNull PerlNextStatement o) {
     visitPsiElement(o);
   }
 
@@ -180,6 +196,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitPerlRegexModifiers(@NotNull PerlPerlRegexModifiers o) {
+    visitPsiElement(o);
+  }
+
+  public void visitRedoStatement(@NotNull PerlRedoStatement o) {
     visitPsiElement(o);
   }
 

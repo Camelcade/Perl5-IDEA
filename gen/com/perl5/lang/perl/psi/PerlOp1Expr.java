@@ -20,6 +20,9 @@ public interface PerlOp1Expr extends PerlExpr {
   PerlExpr getExpr();
 
   @Nullable
+  PerlFileReadTerm getFileReadTerm();
+
+  @Nullable
   PerlMatchRegex getMatchRegex();
 
   @Nullable

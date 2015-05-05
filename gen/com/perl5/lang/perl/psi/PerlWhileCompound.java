@@ -11,6 +11,6 @@ public interface PerlWhileCompound extends PsiElement {
   PerlExpr getExpr();
 
   @Nullable
-  PerlLabel getLabel();
+  PerlLabelDeclaration getLabelDeclaration();
 
 }

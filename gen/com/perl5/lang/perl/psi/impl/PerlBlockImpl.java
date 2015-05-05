@@ -54,8 +54,8 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @Nullable
-  public PerlLabel getLabel() {
-    return findChildByClass(PerlLabel.class);
+  public PerlLabelDeclaration getLabelDeclaration() {
+    return findChildByClass(PerlLabelDeclaration.class);
   }
 
   @Override
