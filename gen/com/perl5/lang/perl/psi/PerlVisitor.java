@@ -11,6 +11,14 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitBlockCompound(@NotNull PerlBlockCompound o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCompileRegex(@NotNull PerlCompileRegex o) {
+    visitPsiElement(o);
+  }
+
   public void visitDoTerm(@NotNull PerlDoTerm o) {
     visitPsiElement(o);
   }
@@ -23,11 +31,27 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitForCompound(@NotNull PerlForCompound o) {
+    visitPsiElement(o);
+  }
+
   public void visitForStatementModifier(@NotNull PerlForStatementModifier o) {
     visitPsiElement(o);
   }
 
+  public void visitForeachCompound(@NotNull PerlForeachCompound o) {
+    visitPsiElement(o);
+  }
+
   public void visitForeachStatementModifier(@NotNull PerlForeachStatementModifier o) {
+    visitPsiElement(o);
+  }
+
+  public void visitGivenCompound(@NotNull PerlGivenCompound o) {
+    visitPsiElement(o);
+  }
+
+  public void visitIfCompound(@NotNull PerlIfCompound o) {
     visitPsiElement(o);
   }
 
@@ -36,6 +60,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitLabel(@NotNull PerlLabel o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMatchRegex(@NotNull PerlMatchRegex o) {
     visitPsiElement(o);
   }
 
@@ -147,6 +175,18 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPerlRegex(@NotNull PerlPerlRegex o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlRegexModifiers(@NotNull PerlPerlRegexModifiers o) {
+    visitPsiElement(o);
+  }
+
+  public void visitReplacementRegex(@NotNull PerlReplacementRegex o) {
+    visitPsiElement(o);
+  }
+
   public void visitStatement(@NotNull PerlStatement o) {
     visitPsiElement(o);
   }
@@ -163,11 +203,35 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitTrModifiers(@NotNull PerlTrModifiers o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTrRegex(@NotNull PerlTrRegex o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTrReplacementlist(@NotNull PerlTrReplacementlist o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTrSearchlist(@NotNull PerlTrSearchlist o) {
+    visitPsiElement(o);
+  }
+
   public void visitUndefStatement(@NotNull PerlUndefStatement o) {
     visitPsiElement(o);
   }
 
+  public void visitUnlessCompound(@NotNull PerlUnlessCompound o) {
+    visitPsiElement(o);
+  }
+
   public void visitUnlessStatementModifier(@NotNull PerlUnlessStatementModifier o) {
+    visitPsiElement(o);
+  }
+
+  public void visitUntilCompound(@NotNull PerlUntilCompound o) {
     visitPsiElement(o);
   }
 
@@ -179,7 +243,23 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitVariableDefinitionGlobal(@NotNull PerlVariableDefinitionGlobal o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVariableDefinitionLexical(@NotNull PerlVariableDefinitionLexical o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVariableDefinitionLocal(@NotNull PerlVariableDefinitionLocal o) {
+    visitPsiElement(o);
+  }
+
   public void visitWhenStatementModifier(@NotNull PerlWhenStatementModifier o) {
+    visitPsiElement(o);
+  }
+
+  public void visitWhileCompound(@NotNull PerlWhileCompound o) {
     visitPsiElement(o);
   }
 

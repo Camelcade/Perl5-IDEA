@@ -79,27 +79,67 @@ private perlFile ::= <<parseFile>> <<eof>>
 
 private file_items ::= file_item*
 
-private block_parsed ::= <<parseBlock>>
-private code_block ::= block_parsed PERL_SEMI ?
-block ::= label ?  "{" file_items "}" {pin=2}
+private block_safe ::= <<parseBlock>>
+block ::= label ?  "{" file_items "}" {pin=2} // should not be used anywhere, injected by block_safe
+
 
 private file_item ::= package_namespace | package_namespace_item
 private package_namespace_item ::= compound_statement PERL_SEMI ? | statement
 
 // package keyword
 package_namespace ::= 'package' perl_package perl_version ? package_namespace_content {pin=1}
-private package_namespace_content ::= block_parsed | PERL_SEMI <<parsePackageContents>>
+private package_namespace_content ::= block_safe | PERL_SEMI <<parsePackageContents>>
 private package_plain ::= package_namespace_item * // injected and wrapped by parsePackageContents
 
 // declarations
 private compound_statement ::=
     sub_definition
-    | code_block
+    | block_compound
+    | if_compound
+    | unless_compound
+    | given_compound
+    | while_compound
+    | until_compound
+    | for_compound
+    | foreach_compound
+
+if_compound ::= 'if' compound_conditional_block if_compound_elsif * if_compound_else ?
+unless_compound ::= 'unless' compound_conditional_block if_compound_elsif * if_compound_else ?
+private if_compound_elsif ::= 'elsif' compound_conditional_block
+private if_compound_else  ::= 'else' block_safe
+
+private compound_conditional_block ::= '(' expr ')' block_safe
+
+given_compound ::= 'given' compound_conditional_block
+
+while_compound ::= label ? 'while' compound_conditional_block compound_continue_block ?
+until_compound ::= label ? 'until' compound_conditional_block compound_continue_block ?
+
+private compound_continue_block ::= 'continue' block_safe
+
+block_compound ::= block_safe compound_continue_block ?
+
+
+// for/foreach
+for_compound ::= 'for' for_compound_arguments
+foreach_compound ::= 'foreach' for_compound_arguments
+private for_compound_arguments ::= for_compound_arguments_iteration | for_compound_arguments_list
+
+private for_compound_arguments_iteration ::= '(' expr ? PERL_SEMI expr ? PERL_SEMI expr ? ')' block_safe
+
+// @todo only single variable or variable definition may be here
+private for_compound_arguments_list ::=
+    (variable_definition | variable ) ? '(' expr ')' block_compound
+
+
+
+
 
 // sub declaration or definition
-sub_definition ::= 'sub' PERL_BAREWORD <<parseSubDefinitionParameters>> ? block_parsed PERL_SEMI ?
+sub_definition ::= 'sub' PERL_BAREWORD <<parseSubDefinitionParameters>> ? block_safe PERL_SEMI ?
 sub_declaration_statement ::= 'sub' PERL_BAREWORD <<parseSubDeclarationParameters>> ?
 
+// @todo last semi in the block MUST be optional
 statement ::= statement_variation statement_modifier ? PERL_SEMI //{recoverWhile=recover_statement}
 
 private statement_variation ::=
@@ -123,14 +163,14 @@ unless_statement_modifier ::=  'unless' expr {pin=1}
 while_statement_modifier ::=  'while' expr {pin=1}
 until_statement_modifier ::=  'until' expr {pin=1}
 for_statement_modifier ::=  'for' expr  {pin=1}   // actually @LIST
-foreach_statement_modifier ::=  'foreach' {pin=1} expr // actually @LIST
+foreach_statement_modifier ::=  'foreach' expr {pin=1} // actually @LIST
 when_statement_modifier ::= 'when' expr {pin=1}
 
 
 use_statement ::= 'use' <<parseUseStatement>> {pin=1}
 no_statement ::= 'no' <<parseNoStatement>> {pin=1}
 
-undef_statement ::= "undef" perl_variable {pin=1}
+undef_statement ::= "undef" variable {pin=1}
 
 private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | <<eof>>)
 //private recover_block ::= !(PERL_RBRACE | <<eof>>)
@@ -192,7 +232,7 @@ op_23_expr ::= expr 'and' expr
 op_24_expr ::= expr ('or'|'xor') expr
 
 private term ::=
-    perl_variable
+    variable
     | "undef"
     | PERL_BAREWORD "(" expr ? ")" // calee should be instead of bareword
     | "(" expr ? ")"
@@ -201,12 +241,54 @@ private term ::=
     | sub_term
     | do_term
     | eval_term
+    | regex_term
 
-sub_term ::= "sub" block
-do_term ::= "do" block
-eval_term ::= "eval" block
+////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
+private regex_term ::=
+    compile_regex
+    | replacement_regex
+    | tr_regex
+    | match_regex
 
-private perl_variable ::= scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
+compile_regex ::= 'qr' match_regex_body
+match_regex ::= 'm'? match_regex_body
+private match_regex_body ::= PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE perl_regex_modifiers ?
+replacement_regex ::= 's' PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE regex_replacement perl_regex_modifiers ?
+
+private regex_replacement ::=
+    PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE
+    | perl_regex ? PERL_REGEX_QUOTE
+
+perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
+perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick
+
+tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE PERL_REGEX_QUOTE ? tr_replacementlist PERL_REGEX_QUOTE tr_modifiers ?
+tr_searchlist ::= PERL_STRING_CONTENT
+tr_replacementlist ::= PERL_STRING_CONTENT
+
+tr_modifiers ::= PERL_REGEX_MODIFIER +
+////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
+
+sub_term ::= "sub" block_safe
+do_term ::= "do" block_safe
+eval_term ::= "eval" block_safe
+
+private variable_definition ::=
+    variable_definition_global
+    | variable_definition_lexical
+    | variable_definition_local
+
+// @todo attributes support
+// @todo local variables supports hash/aray elements
+variable_definition_local ::= 'local' perl_package ?  variable_definition_variation
+variable_definition_lexical ::= ('my' | 'state') perl_package ? variable_definition_variation
+variable_definition_global ::= 'our' perl_package ? variable_definition_variation
+
+private variable_definition_variation ::=
+    '(' variable (',' variable ) + ')'
+    | variable
+
+private variable ::= scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
 
 private scalar ::=
     PERL_SCALAR
@@ -231,75 +313,6 @@ private perl_version ::= <<parseVersion>>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//block ::= label ? '{' (file_item + | expr )? '}';
-//file_item ::= package_definition | package_element
-//
-//private package_element ::=
-//    block_element (PERL_SEMI + | <<eof>>) ?
-//    | line_element if_postfix ? (PERL_SEMI + | <<eof>>) ?
-//
-//private block_element ::=
-//    eval_expr
-//    | sub_block_named
-//    | for_block
-//    | if_block
-//    | while_block
-//    | given_block
-//    | block_block
-//    | PERL_POD
-//
-//private line_element ::=
-//    package_use
-//    | package_no
-//    | package_require
-//    | return_expr
-//    | last_expr
-//    | code_line
-//
-//// package
-//
-//
-//sub_block_named ::= 'sub' perl_function perl_function_proto ? block
-//private perl_function_proto ::= '(' perl_function_proto_sigil ? ')'
-//private perl_function_proto_sigil ::= '$'|'%'|'@'|';' +
-////{
-////    mixin="com.perl5.lang.perl.psi.impl.PerlFunctionDefinitionNamedUtil"
-////}
-//sub_block_anon ::= 'sub' perl_function_proto ?  block
-//
-//// use and no
-//
-//// if
-//if_postfix ::= ('if' | 'unless') expr
-//
-//if_block ::= ('if' | 'unless') block_conditional if_block_elsif * if_block_else ?
-//if_block_elsif ::= 'elsif' block_conditional
-//if_block_else  ::= 'else' block
-//
-//// for/foreach
-//for_block ::= ('foreach' | 'for') for_block_arguments
-//for_block_arguments ::=
-//    '(' expr ? PERL_SEMI expr ? PERL_SEMI expr ? ')' block
-//     | (variable_definition | variable ) ? '(' expr ')' block ('continue' block ) ? // @todo param should be a list expression
-//
-//given_block ::= 'given' block_conditional
-//
-//while_block ::= ('until' | 'while' ) block_conditional ('continue' block ) ?
-//
-//block_conditional ::= '(' expr ')' block
-//block_block ::= block ('continue' block ) ?
-//
-//code_line ::= expr
-//
-////code_line_recover ::= !(PERL_RBRACE | PERL_SEMI)
-//
-//
-//regex_expr ::=
-//    m_regex
-//    | qr_regex
-//    | s_regex
-//    | tr_regex
-//    | match_regex
 //
 //list_expr ::=
 //    sort_expr
@@ -325,10 +338,6 @@ private perl_version ::= <<parseVersion>>
 //
 //
 //// variable definition @todo refactor for context
-//variable_definition ::= my_definition | our_definition | local_definition
-//my_definition ::= 'my' variable_definition_arguments
-//our_definition ::= 'our' variable_definition_arguments
-//local_definition ::= 'local' local_variable_definition_arguments
 //local_variable_definition_arguments ::= ( perl_package ? local_variable | '(' local_variables ')' )
 //variable_definition_arguments ::= ( perl_package ? variable | '(' variables ')' )
 //
@@ -342,22 +351,6 @@ private perl_version ::= <<parseVersion>>
 //// require
 //package_require ::= 'require' (perl_package | perl_version | string) // multiline string is possible too
 //
-//private m_regex ::= 'm' match_regex
-//private qr_regex ::= 'qr' match_regex
-//private match_regex ::= PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE perl_regex_modifiers ?
-//private s_regex ::= 's' PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE s_regex_replacement perl_regex_modifiers ?
-//private s_regex_replacement ::=
-//    PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE
-//    | perl_regex ? PERL_REGEX_QUOTE
-//
-//perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
-//perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick
-//
-//tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE PERL_REGEX_QUOTE ? tr_replacementlist PERL_REGEX_QUOTE tr_modifiers ?
-//tr_searchlist ::= PERL_STRING_CONTENT
-//tr_replacementlist ::= PERL_STRING_CONTENT
-//
-//tr_modifiers ::= PERL_REGEX_MODIFIER +
 //
 //term ::=
 //    '(' expr ')'

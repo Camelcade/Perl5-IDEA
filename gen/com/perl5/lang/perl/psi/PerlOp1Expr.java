@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlOp1Expr extends PerlExpr {
 
   @Nullable
+  PerlCompileRegex getCompileRegex();
+
+  @Nullable
   PerlDoTerm getDoTerm();
 
   @Nullable
@@ -17,6 +20,15 @@ public interface PerlOp1Expr extends PerlExpr {
   PerlExpr getExpr();
 
   @Nullable
+  PerlMatchRegex getMatchRegex();
+
+  @Nullable
+  PerlReplacementRegex getReplacementRegex();
+
+  @Nullable
   PerlSubTerm getSubTerm();
+
+  @Nullable
+  PerlTrRegex getTrRegex();
 
 }

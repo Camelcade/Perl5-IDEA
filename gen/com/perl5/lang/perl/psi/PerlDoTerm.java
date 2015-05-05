@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlDoTerm extends PsiElement {
 
-  @NotNull
-  PerlBlock getBlock();
-
 }

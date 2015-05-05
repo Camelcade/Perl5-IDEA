@@ -22,10 +22,4 @@ public class PerlDoTermImpl extends ASTWrapperPsiElement implements PerlDoTerm {
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PerlBlock getBlock() {
-    return findNotNullChildByClass(PerlBlock.class);
-  }
-
 }

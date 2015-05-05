@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlEvalTerm extends PsiElement {
+public interface PerlIfCompound extends PsiElement {
+
+  @NotNull
+  List<PerlExpr> getExprList();
 
 }

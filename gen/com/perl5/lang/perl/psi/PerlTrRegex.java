@@ -5,9 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlForeachStatementModifier extends PsiElement {
+public interface PerlTrRegex extends PsiElement {
 
   @Nullable
-  PerlExpr getExpr();
+  PerlTrModifiers getTrModifiers();
+
+  @NotNull
+  PerlTrReplacementlist getTrReplacementlist();
+
+  @NotNull
+  PerlTrSearchlist getTrSearchlist();
 
 }

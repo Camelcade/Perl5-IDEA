@@ -86,21 +86,17 @@ VAR_HASH = "%"{BAREWORD}("::"{BAREWORD})*
 VAR_ARRAY = "@"{BAREWORD}("::"{BAREWORD})*
 VAR_GLOB = "*"{BAREWORD}("::"{BAREWORD})*
 
-QUOTE_FUNCTIONS = "qq" | "qx" | "q"
 QUOTE_LIST_FUNCTIONS = "qw"
+QUOTE_FUNCTIONS = "qq" | "qx" | "q"
 TRANS_FUNCTIONS = "tr" | "y"
 REGEX_FUNCTIONS = "s" | "qr" | "m"
-LIST_FUNCTIONS = "shift" | "pop" | "sort" | "grep" | "keys" | "values" | "map" | {QUOTE_LIST_FUNCTIONS}
-CONTROL_FUNCTIONS = "for" | "foreach" | "do" | "while" | "break" | "continule" | "redo" | "last" | "next" | "exit" | "return"
-CONDITION_FUNCTIONS = "if" | "elsif" | "else" | "until"
-DEFINITION_FUNCTIONS = "my" | "local" | "our" | "sub" | "package"
-INCLUDE_FUNCTIONS = "use" | "require" | "do" | "eval"
+PERL_SYN_QUOTE_LIKE = {QUOTE_LIST_FUNCTIONS} | {QUOTE_FUNCTIONS} | {TRANS_FUNCTIONS} | {REGEX_FUNCTIONS}
 
-PERL_SYN_DECLARATION = "my" | "our" | "local" | "state"
+PERL_SYN_INCLUDE = "use" | "require" | "no"
 PERL_SYN_BLOCK_OP = "sub" | "do" | "eval"
-PERL_SYN_OTHER = "elsif" | "else"
-PERL_SYN_STATE_MODIFIER = "if" | "unless" | "while" | "untile" | "for" | "foreach" | "when"
-FUNCTION_SPECIAL = {INCLUDE_FUNCTIONS} | {DEFINITION_FUNCTIONS} | {CONTROL_FUNCTIONS} | {CONDITION_FUNCTIONS} | {LIST_FUNCTIONS} | {QUOTE_FUNCTIONS} {TRANS_FUNCTIONS}
+PERL_SYN_DECLARE = "package" | "sub" | "my" | "our" | "local" | "state"
+PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
+FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} {PERL_SYN_DECLARE} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE}
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 

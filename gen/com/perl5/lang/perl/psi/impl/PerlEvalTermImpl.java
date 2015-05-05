@@ -22,10 +22,4 @@ public class PerlEvalTermImpl extends ASTWrapperPsiElement implements PerlEvalTe
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PerlBlock getBlock() {
-    return findNotNullChildByClass(PerlBlock.class);
-  }
-
 }

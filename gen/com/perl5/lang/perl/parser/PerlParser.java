@@ -25,6 +25,12 @@ public class PerlParser implements PsiParser {
     if (t == BLOCK) {
       r = block(b, 0);
     }
+    else if (t == BLOCK_COMPOUND) {
+      r = block_compound(b, 0);
+    }
+    else if (t == COMPILE_REGEX) {
+      r = compile_regex(b, 0);
+    }
     else if (t == DO_TERM) {
       r = do_term(b, 0);
     }
@@ -34,17 +40,32 @@ public class PerlParser implements PsiParser {
     else if (t == EXPR) {
       r = expr(b, 0, -1);
     }
+    else if (t == FOR_COMPOUND) {
+      r = for_compound(b, 0);
+    }
     else if (t == FOR_STATEMENT_MODIFIER) {
       r = for_statement_modifier(b, 0);
     }
+    else if (t == FOREACH_COMPOUND) {
+      r = foreach_compound(b, 0);
+    }
     else if (t == FOREACH_STATEMENT_MODIFIER) {
       r = foreach_statement_modifier(b, 0);
+    }
+    else if (t == GIVEN_COMPOUND) {
+      r = given_compound(b, 0);
+    }
+    else if (t == IF_COMPOUND) {
+      r = if_compound(b, 0);
     }
     else if (t == IF_STATEMENT_MODIFIER) {
       r = if_statement_modifier(b, 0);
     }
     else if (t == LABEL) {
       r = label(b, 0);
+    }
+    else if (t == MATCH_REGEX) {
+      r = match_regex(b, 0);
     }
     else if (t == NO_STATEMENT) {
       r = no_statement(b, 0);
@@ -127,6 +148,15 @@ public class PerlParser implements PsiParser {
     else if (t == PACKAGE_NAMESPACE) {
       r = package_namespace(b, 0);
     }
+    else if (t == PERL_REGEX) {
+      r = perl_regex(b, 0);
+    }
+    else if (t == PERL_REGEX_MODIFIERS) {
+      r = perl_regex_modifiers(b, 0);
+    }
+    else if (t == REPLACEMENT_REGEX) {
+      r = replacement_regex(b, 0);
+    }
     else if (t == STATEMENT) {
       r = statement(b, 0);
     }
@@ -139,11 +169,29 @@ public class PerlParser implements PsiParser {
     else if (t == SUB_TERM) {
       r = sub_term(b, 0);
     }
+    else if (t == TR_MODIFIERS) {
+      r = tr_modifiers(b, 0);
+    }
+    else if (t == TR_REGEX) {
+      r = tr_regex(b, 0);
+    }
+    else if (t == TR_REPLACEMENTLIST) {
+      r = tr_replacementlist(b, 0);
+    }
+    else if (t == TR_SEARCHLIST) {
+      r = tr_searchlist(b, 0);
+    }
     else if (t == UNDEF_STATEMENT) {
       r = undef_statement(b, 0);
     }
+    else if (t == UNLESS_COMPOUND) {
+      r = unless_compound(b, 0);
+    }
     else if (t == UNLESS_STATEMENT_MODIFIER) {
       r = unless_statement_modifier(b, 0);
+    }
+    else if (t == UNTIL_COMPOUND) {
+      r = until_compound(b, 0);
     }
     else if (t == UNTIL_STATEMENT_MODIFIER) {
       r = until_statement_modifier(b, 0);
@@ -151,8 +199,20 @@ public class PerlParser implements PsiParser {
     else if (t == USE_STATEMENT) {
       r = use_statement(b, 0);
     }
+    else if (t == VARIABLE_DEFINITION_GLOBAL) {
+      r = variable_definition_global(b, 0);
+    }
+    else if (t == VARIABLE_DEFINITION_LEXICAL) {
+      r = variable_definition_lexical(b, 0);
+    }
+    else if (t == VARIABLE_DEFINITION_LOCAL) {
+      r = variable_definition_local(b, 0);
+    }
     else if (t == WHEN_STATEMENT_MODIFIER) {
       r = when_statement_modifier(b, 0);
+    }
+    else if (t == WHILE_COMPOUND) {
+      r = while_compound(b, 0);
     }
     else if (t == WHILE_STATEMENT_MODIFIER) {
       r = while_statement_modifier(b, 0);
@@ -201,63 +261,116 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // <<parseBlock>>
-  static boolean block_parsed(PsiBuilder b, int l) {
-    return parseBlock(b, l + 1);
-  }
-
-  /* ********************************************************** */
-  // block_parsed PERL_SEMI ?
-  static boolean code_block(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "code_block")) return false;
+  // block_safe compound_continue_block ?
+  public static boolean block_compound(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "block_compound")) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = block_parsed(b, l + 1);
-    r = r && code_block_1(b, l + 1);
-    exit_section_(b, m, null, r);
+    Marker m = enter_section_(b, l, _NONE_, "<block compound>");
+    r = block_safe(b, l + 1);
+    r = r && block_compound_1(b, l + 1);
+    exit_section_(b, l, m, BLOCK_COMPOUND, r, false, null);
     return r;
   }
 
-  // PERL_SEMI ?
-  private static boolean code_block_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "code_block_1")) return false;
-    consumeToken(b, PERL_SEMI);
+  // compound_continue_block ?
+  private static boolean block_compound_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "block_compound_1")) return false;
+    compound_continue_block(b, l + 1);
     return true;
   }
 
   /* ********************************************************** */
+  // <<parseBlock>>
+  static boolean block_safe(PsiBuilder b, int l) {
+    return parseBlock(b, l + 1);
+  }
+
+  /* ********************************************************** */
+  // 'qr' match_regex_body
+  public static boolean compile_regex(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "compile_regex")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<compile regex>");
+    r = consumeToken(b, "qr");
+    r = r && match_regex_body(b, l + 1);
+    exit_section_(b, l, m, COMPILE_REGEX, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '(' expr ')' block_safe
+  static boolean compound_conditional_block(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "compound_conditional_block")) return false;
+    if (!nextTokenIs(b, PERL_LPAREN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_LPAREN);
+    r = r && expr(b, l + 1, -1);
+    r = r && consumeToken(b, PERL_RPAREN);
+    r = r && block_safe(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'continue' block_safe
+  static boolean compound_continue_block(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "compound_continue_block")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "continue");
+    r = r && block_safe(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // sub_definition
-  //     | code_block
+  //     | block_compound
+  //     | if_compound
+  //     | unless_compound
+  //     | given_compound
+  //     | while_compound
+  //     | until_compound
+  //     | for_compound
+  //     | foreach_compound
   static boolean compound_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "compound_statement")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = sub_definition(b, l + 1);
-    if (!r) r = code_block(b, l + 1);
+    if (!r) r = block_compound(b, l + 1);
+    if (!r) r = if_compound(b, l + 1);
+    if (!r) r = unless_compound(b, l + 1);
+    if (!r) r = given_compound(b, l + 1);
+    if (!r) r = while_compound(b, l + 1);
+    if (!r) r = until_compound(b, l + 1);
+    if (!r) r = for_compound(b, l + 1);
+    if (!r) r = foreach_compound(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // "do" block
+  // "do" block_safe
   public static boolean do_term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "do_term")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<do term>");
     r = consumeToken(b, "do");
-    r = r && block(b, l + 1);
+    r = r && block_safe(b, l + 1);
     exit_section_(b, l, m, DO_TERM, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // "eval" block
+  // "eval" block_safe
   public static boolean eval_term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eval_term")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<eval term>");
     r = consumeToken(b, "eval");
-    r = r && block(b, l + 1);
+    r = r && block_safe(b, l + 1);
     exit_section_(b, l, m, EVAL_TERM, r, false, null);
     return r;
   }
@@ -288,6 +401,103 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // 'for' for_compound_arguments
+  public static boolean for_compound(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<for compound>");
+    r = consumeToken(b, "for");
+    r = r && for_compound_arguments(b, l + 1);
+    exit_section_(b, l, m, FOR_COMPOUND, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // for_compound_arguments_iteration | for_compound_arguments_list
+  static boolean for_compound_arguments(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound_arguments")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = for_compound_arguments_iteration(b, l + 1);
+    if (!r) r = for_compound_arguments_list(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '(' expr ? PERL_SEMI expr ? PERL_SEMI expr ? ')' block_safe
+  static boolean for_compound_arguments_iteration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound_arguments_iteration")) return false;
+    if (!nextTokenIs(b, PERL_LPAREN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_LPAREN);
+    r = r && for_compound_arguments_iteration_1(b, l + 1);
+    r = r && consumeToken(b, PERL_SEMI);
+    r = r && for_compound_arguments_iteration_3(b, l + 1);
+    r = r && consumeToken(b, PERL_SEMI);
+    r = r && for_compound_arguments_iteration_5(b, l + 1);
+    r = r && consumeToken(b, PERL_RPAREN);
+    r = r && block_safe(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // expr ?
+  private static boolean for_compound_arguments_iteration_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound_arguments_iteration_1")) return false;
+    expr(b, l + 1, -1);
+    return true;
+  }
+
+  // expr ?
+  private static boolean for_compound_arguments_iteration_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound_arguments_iteration_3")) return false;
+    expr(b, l + 1, -1);
+    return true;
+  }
+
+  // expr ?
+  private static boolean for_compound_arguments_iteration_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound_arguments_iteration_5")) return false;
+    expr(b, l + 1, -1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // (variable_definition | variable ) ? '(' expr ')' block_compound
+  static boolean for_compound_arguments_list(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound_arguments_list")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = for_compound_arguments_list_0(b, l + 1);
+    r = r && consumeToken(b, PERL_LPAREN);
+    r = r && expr(b, l + 1, -1);
+    r = r && consumeToken(b, PERL_RPAREN);
+    r = r && block_compound(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (variable_definition | variable ) ?
+  private static boolean for_compound_arguments_list_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound_arguments_list_0")) return false;
+    for_compound_arguments_list_0_0(b, l + 1);
+    return true;
+  }
+
+  // variable_definition | variable
+  private static boolean for_compound_arguments_list_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_compound_arguments_list_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = variable_definition(b, l + 1);
+    if (!r) r = variable(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // 'for' expr
   public static boolean for_statement_modifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "for_statement_modifier")) return false;
@@ -301,13 +511,96 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'foreach'
+  // 'foreach' for_compound_arguments
+  public static boolean foreach_compound(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "foreach_compound")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<foreach compound>");
+    r = consumeToken(b, "foreach");
+    r = r && for_compound_arguments(b, l + 1);
+    exit_section_(b, l, m, FOREACH_COMPOUND, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'foreach' expr
   public static boolean foreach_statement_modifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "foreach_statement_modifier")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<foreach statement modifier>");
     r = consumeToken(b, "foreach");
-    exit_section_(b, l, m, FOREACH_STATEMENT_MODIFIER, r, false, null);
+    p = r; // pin = 1
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, FOREACH_STATEMENT_MODIFIER, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'given' compound_conditional_block
+  public static boolean given_compound(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "given_compound")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<given compound>");
+    r = consumeToken(b, "given");
+    r = r && compound_conditional_block(b, l + 1);
+    exit_section_(b, l, m, GIVEN_COMPOUND, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'if' compound_conditional_block if_compound_elsif * if_compound_else ?
+  public static boolean if_compound(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if_compound")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<if compound>");
+    r = consumeToken(b, "if");
+    r = r && compound_conditional_block(b, l + 1);
+    r = r && if_compound_2(b, l + 1);
+    r = r && if_compound_3(b, l + 1);
+    exit_section_(b, l, m, IF_COMPOUND, r, false, null);
+    return r;
+  }
+
+  // if_compound_elsif *
+  private static boolean if_compound_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if_compound_2")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!if_compound_elsif(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "if_compound_2", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // if_compound_else ?
+  private static boolean if_compound_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if_compound_3")) return false;
+    if_compound_else(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // 'else' block_safe
+  static boolean if_compound_else(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if_compound_else")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "else");
+    r = r && block_safe(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'elsif' compound_conditional_block
+  static boolean if_compound_elsif(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if_compound_elsif")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "elsif");
+    r = r && compound_conditional_block(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -341,6 +634,54 @@ public class PerlParser implements PsiParser {
   // string_list
   static boolean list_primitive(PsiBuilder b, int l) {
     return string_list(b, l + 1);
+  }
+
+  /* ********************************************************** */
+  // 'm'? match_regex_body
+  public static boolean match_regex(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "match_regex")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<match regex>");
+    r = match_regex_0(b, l + 1);
+    r = r && match_regex_body(b, l + 1);
+    exit_section_(b, l, m, MATCH_REGEX, r, false, null);
+    return r;
+  }
+
+  // 'm'?
+  private static boolean match_regex_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "match_regex_0")) return false;
+    consumeToken(b, "m");
+    return true;
+  }
+
+  /* ********************************************************** */
+  // PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE perl_regex_modifiers ?
+  static boolean match_regex_body(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "match_regex_body")) return false;
+    if (!nextTokenIs(b, PERL_REGEX_QUOTE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_REGEX_QUOTE);
+    r = r && match_regex_body_1(b, l + 1);
+    r = r && consumeToken(b, PERL_REGEX_QUOTE);
+    r = r && match_regex_body_3(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // perl_regex ?
+  private static boolean match_regex_body_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "match_regex_body_1")) return false;
+    perl_regex(b, l + 1);
+    return true;
+  }
+
+  // perl_regex_modifiers ?
+  private static boolean match_regex_body_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "match_regex_body_3")) return false;
+    perl_regex_modifiers(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -379,12 +720,12 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // block_parsed | PERL_SEMI <<parsePackageContents>>
+  // block_safe | PERL_SEMI <<parsePackageContents>>
   static boolean package_namespace_content(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_namespace_content")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = block_parsed(b, l + 1);
+    r = block_safe(b, l + 1);
     if (!r) r = package_namespace_content_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -463,16 +804,38 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
-  static boolean perl_variable(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "perl_variable")) return false;
+  // PERL_REGEX_TOKEN +
+  public static boolean perl_regex(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_regex")) return false;
+    if (!nextTokenIs(b, PERL_REGEX_TOKEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = scalar(b, l + 1);
-    if (!r) r = consumeToken(b, PERL_ARRAY);
-    if (!r) r = consumeToken(b, PERL_HASH);
-    if (!r) r = consumeToken(b, PERL_GLOB);
-    exit_section_(b, m, null, r);
+    r = consumeToken(b, PERL_REGEX_TOKEN);
+    int c = current_position_(b);
+    while (r) {
+      if (!consumeToken(b, PERL_REGEX_TOKEN)) break;
+      if (!empty_element_parsed_guard_(b, "perl_regex", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, PERL_REGEX, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // PERL_REGEX_MODIFIER +
+  public static boolean perl_regex_modifiers(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_regex_modifiers")) return false;
+    if (!nextTokenIs(b, PERL_REGEX_MODIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_REGEX_MODIFIER);
+    int c = current_position_(b);
+    while (r) {
+      if (!consumeToken(b, PERL_REGEX_MODIFIER)) break;
+      if (!empty_element_parsed_guard_(b, "perl_regex_modifiers", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, PERL_REGEX_MODIFIERS, r);
     return r;
   }
 
@@ -503,6 +866,104 @@ public class PerlParser implements PsiParser {
     if (!r) r = eof(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  /* ********************************************************** */
+  // PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE
+  //     | perl_regex ? PERL_REGEX_QUOTE
+  static boolean regex_replacement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "regex_replacement")) return false;
+    if (!nextTokenIs(b, "", PERL_REGEX_QUOTE, PERL_REGEX_TOKEN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = regex_replacement_0(b, l + 1);
+    if (!r) r = regex_replacement_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE
+  private static boolean regex_replacement_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "regex_replacement_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_REGEX_QUOTE);
+    r = r && regex_replacement_0_1(b, l + 1);
+    r = r && consumeToken(b, PERL_REGEX_QUOTE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // perl_regex ?
+  private static boolean regex_replacement_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "regex_replacement_0_1")) return false;
+    perl_regex(b, l + 1);
+    return true;
+  }
+
+  // perl_regex ? PERL_REGEX_QUOTE
+  private static boolean regex_replacement_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "regex_replacement_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = regex_replacement_1_0(b, l + 1);
+    r = r && consumeToken(b, PERL_REGEX_QUOTE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // perl_regex ?
+  private static boolean regex_replacement_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "regex_replacement_1_0")) return false;
+    perl_regex(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // compile_regex
+  //     | replacement_regex
+  //     | tr_regex
+  //     | match_regex
+  static boolean regex_term(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "regex_term")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = compile_regex(b, l + 1);
+    if (!r) r = replacement_regex(b, l + 1);
+    if (!r) r = tr_regex(b, l + 1);
+    if (!r) r = match_regex(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 's' PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE regex_replacement perl_regex_modifiers ?
+  public static boolean replacement_regex(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "replacement_regex")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<replacement regex>");
+    r = consumeToken(b, "s");
+    r = r && consumeToken(b, PERL_REGEX_QUOTE);
+    r = r && replacement_regex_2(b, l + 1);
+    r = r && consumeToken(b, PERL_REGEX_QUOTE);
+    r = r && regex_replacement(b, l + 1);
+    r = r && replacement_regex_5(b, l + 1);
+    exit_section_(b, l, m, REPLACEMENT_REGEX, r, false, null);
+    return r;
+  }
+
+  // perl_regex ?
+  private static boolean replacement_regex_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "replacement_regex_2")) return false;
+    perl_regex(b, l + 1);
+    return true;
+  }
+
+  // perl_regex_modifiers ?
+  private static boolean replacement_regex_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "replacement_regex_5")) return false;
+    perl_regex_modifiers(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -706,7 +1167,7 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'sub' PERL_BAREWORD <<parseSubDefinitionParameters>> ? block_parsed PERL_SEMI ?
+  // 'sub' PERL_BAREWORD <<parseSubDefinitionParameters>> ? block_safe PERL_SEMI ?
   public static boolean sub_definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sub_definition")) return false;
     boolean r;
@@ -714,7 +1175,7 @@ public class PerlParser implements PsiParser {
     r = consumeToken(b, "sub");
     r = r && consumeToken(b, PERL_BAREWORD);
     r = r && sub_definition_2(b, l + 1);
-    r = r && block_parsed(b, l + 1);
+    r = r && block_safe(b, l + 1);
     r = r && sub_definition_4(b, l + 1);
     exit_section_(b, l, m, SUB_DEFINITION, r, false, null);
     return r;
@@ -735,19 +1196,19 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // "sub" block
+  // "sub" block_safe
   public static boolean sub_term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sub_term")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<sub term>");
     r = consumeToken(b, "sub");
-    r = r && block(b, l + 1);
+    r = r && block_safe(b, l + 1);
     exit_section_(b, l, m, SUB_TERM, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // perl_variable
+  // variable
   //     | "undef"
   //     | PERL_BAREWORD "(" expr ? ")" // calee should be instead of bareword
   //     | "(" expr ? ")"
@@ -756,11 +1217,12 @@ public class PerlParser implements PsiParser {
   //     | sub_term
   //     | do_term
   //     | eval_term
+  //     | regex_term
   static boolean term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = perl_variable(b, l + 1);
+    r = variable(b, l + 1);
     if (!r) r = consumeToken(b, "undef");
     if (!r) r = term_2(b, l + 1);
     if (!r) r = term_3(b, l + 1);
@@ -769,6 +1231,7 @@ public class PerlParser implements PsiParser {
     if (!r) r = sub_term(b, l + 1);
     if (!r) r = do_term(b, l + 1);
     if (!r) r = eval_term(b, l + 1);
+    if (!r) r = regex_term(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -813,16 +1276,134 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // "undef" perl_variable
+  // PERL_REGEX_MODIFIER +
+  public static boolean tr_modifiers(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_modifiers")) return false;
+    if (!nextTokenIs(b, PERL_REGEX_MODIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_REGEX_MODIFIER);
+    int c = current_position_(b);
+    while (r) {
+      if (!consumeToken(b, PERL_REGEX_MODIFIER)) break;
+      if (!empty_element_parsed_guard_(b, "tr_modifiers", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, TR_MODIFIERS, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE PERL_REGEX_QUOTE ? tr_replacementlist PERL_REGEX_QUOTE tr_modifiers ?
+  public static boolean tr_regex(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_regex")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<tr regex>");
+    r = tr_regex_0(b, l + 1);
+    r = r && consumeToken(b, PERL_REGEX_QUOTE);
+    r = r && tr_searchlist(b, l + 1);
+    r = r && consumeToken(b, PERL_REGEX_QUOTE);
+    r = r && tr_regex_4(b, l + 1);
+    r = r && tr_replacementlist(b, l + 1);
+    r = r && consumeToken(b, PERL_REGEX_QUOTE);
+    r = r && tr_regex_7(b, l + 1);
+    exit_section_(b, l, m, TR_REGEX, r, false, null);
+    return r;
+  }
+
+  // 'tr'|'y'
+  private static boolean tr_regex_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_regex_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "tr");
+    if (!r) r = consumeToken(b, "y");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // PERL_REGEX_QUOTE ?
+  private static boolean tr_regex_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_regex_4")) return false;
+    consumeToken(b, PERL_REGEX_QUOTE);
+    return true;
+  }
+
+  // tr_modifiers ?
+  private static boolean tr_regex_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_regex_7")) return false;
+    tr_modifiers(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // PERL_STRING_CONTENT
+  public static boolean tr_replacementlist(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_replacementlist")) return false;
+    if (!nextTokenIs(b, PERL_STRING_CONTENT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_STRING_CONTENT);
+    exit_section_(b, m, TR_REPLACEMENTLIST, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // PERL_STRING_CONTENT
+  public static boolean tr_searchlist(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tr_searchlist")) return false;
+    if (!nextTokenIs(b, PERL_STRING_CONTENT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_STRING_CONTENT);
+    exit_section_(b, m, TR_SEARCHLIST, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // "undef" variable
   public static boolean undef_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "undef_statement")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<undef statement>");
     r = consumeToken(b, "undef");
     p = r; // pin = 1
-    r = r && perl_variable(b, l + 1);
+    r = r && variable(b, l + 1);
     exit_section_(b, l, m, UNDEF_STATEMENT, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'unless' compound_conditional_block if_compound_elsif * if_compound_else ?
+  public static boolean unless_compound(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unless_compound")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<unless compound>");
+    r = consumeToken(b, "unless");
+    r = r && compound_conditional_block(b, l + 1);
+    r = r && unless_compound_2(b, l + 1);
+    r = r && unless_compound_3(b, l + 1);
+    exit_section_(b, l, m, UNLESS_COMPOUND, r, false, null);
+    return r;
+  }
+
+  // if_compound_elsif *
+  private static boolean unless_compound_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unless_compound_2")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!if_compound_elsif(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "unless_compound_2", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // if_compound_else ?
+  private static boolean unless_compound_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unless_compound_3")) return false;
+    if_compound_else(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -836,6 +1417,34 @@ public class PerlParser implements PsiParser {
     r = r && expr(b, l + 1, -1);
     exit_section_(b, l, m, UNLESS_STATEMENT_MODIFIER, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // label ? 'until' compound_conditional_block compound_continue_block ?
+  public static boolean until_compound(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "until_compound")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<until compound>");
+    r = until_compound_0(b, l + 1);
+    r = r && consumeToken(b, "until");
+    r = r && compound_conditional_block(b, l + 1);
+    r = r && until_compound_3(b, l + 1);
+    exit_section_(b, l, m, UNTIL_COMPOUND, r, false, null);
+    return r;
+  }
+
+  // label ?
+  private static boolean until_compound_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "until_compound_0")) return false;
+    label(b, l + 1);
+    return true;
+  }
+
+  // compound_continue_block ?
+  private static boolean until_compound_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "until_compound_3")) return false;
+    compound_continue_block(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -865,6 +1474,159 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
+  static boolean variable(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = scalar(b, l + 1);
+    if (!r) r = consumeToken(b, PERL_ARRAY);
+    if (!r) r = consumeToken(b, PERL_HASH);
+    if (!r) r = consumeToken(b, PERL_GLOB);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // variable_definition_global
+  //     | variable_definition_lexical
+  //     | variable_definition_local
+  static boolean variable_definition(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = variable_definition_global(b, l + 1);
+    if (!r) r = variable_definition_lexical(b, l + 1);
+    if (!r) r = variable_definition_local(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'our' perl_package ? variable_definition_variation
+  public static boolean variable_definition_global(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_global")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<variable definition global>");
+    r = consumeToken(b, "our");
+    r = r && variable_definition_global_1(b, l + 1);
+    r = r && variable_definition_variation(b, l + 1);
+    exit_section_(b, l, m, VARIABLE_DEFINITION_GLOBAL, r, false, null);
+    return r;
+  }
+
+  // perl_package ?
+  private static boolean variable_definition_global_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_global_1")) return false;
+    perl_package(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // ('my' | 'state') perl_package ? variable_definition_variation
+  public static boolean variable_definition_lexical(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_lexical")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<variable definition lexical>");
+    r = variable_definition_lexical_0(b, l + 1);
+    r = r && variable_definition_lexical_1(b, l + 1);
+    r = r && variable_definition_variation(b, l + 1);
+    exit_section_(b, l, m, VARIABLE_DEFINITION_LEXICAL, r, false, null);
+    return r;
+  }
+
+  // 'my' | 'state'
+  private static boolean variable_definition_lexical_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_lexical_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "my");
+    if (!r) r = consumeToken(b, "state");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // perl_package ?
+  private static boolean variable_definition_lexical_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_lexical_1")) return false;
+    perl_package(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // 'local' perl_package ?  variable_definition_variation
+  public static boolean variable_definition_local(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_local")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<variable definition local>");
+    r = consumeToken(b, "local");
+    r = r && variable_definition_local_1(b, l + 1);
+    r = r && variable_definition_variation(b, l + 1);
+    exit_section_(b, l, m, VARIABLE_DEFINITION_LOCAL, r, false, null);
+    return r;
+  }
+
+  // perl_package ?
+  private static boolean variable_definition_local_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_local_1")) return false;
+    perl_package(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // '(' variable (',' variable ) + ')'
+  //     | variable
+  static boolean variable_definition_variation(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_variation")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = variable_definition_variation_0(b, l + 1);
+    if (!r) r = variable(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '(' variable (',' variable ) + ')'
+  private static boolean variable_definition_variation_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_variation_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_LPAREN);
+    r = r && variable(b, l + 1);
+    r = r && variable_definition_variation_0_2(b, l + 1);
+    r = r && consumeToken(b, PERL_RPAREN);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (',' variable ) +
+  private static boolean variable_definition_variation_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_variation_0_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = variable_definition_variation_0_2_0(b, l + 1);
+    int c = current_position_(b);
+    while (r) {
+      if (!variable_definition_variation_0_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "variable_definition_variation_0_2", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ',' variable
+  private static boolean variable_definition_variation_0_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_definition_variation_0_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_COMMA);
+    r = r && variable(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // 'when' expr
   public static boolean when_statement_modifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "when_statement_modifier")) return false;
@@ -875,6 +1637,34 @@ public class PerlParser implements PsiParser {
     r = r && expr(b, l + 1, -1);
     exit_section_(b, l, m, WHEN_STATEMENT_MODIFIER, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // label ? 'while' compound_conditional_block compound_continue_block ?
+  public static boolean while_compound(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "while_compound")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<while compound>");
+    r = while_compound_0(b, l + 1);
+    r = r && consumeToken(b, "while");
+    r = r && compound_conditional_block(b, l + 1);
+    r = r && while_compound_3(b, l + 1);
+    exit_section_(b, l, m, WHILE_COMPOUND, r, false, null);
+    return r;
+  }
+
+  // label ?
+  private static boolean while_compound_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "while_compound_0")) return false;
+    label(b, l + 1);
+    return true;
+  }
+
+  // compound_continue_block ?
+  private static boolean while_compound_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "while_compound_3")) return false;
+    compound_continue_block(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

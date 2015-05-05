@@ -11,21 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlForeachStatementModifierImpl extends ASTWrapperPsiElement implements PerlForeachStatementModifier {
+public class PerlCompileRegexImpl extends ASTWrapperPsiElement implements PerlCompileRegex {
 
-  public PerlForeachStatementModifierImpl(ASTNode node) {
+  public PerlCompileRegexImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitForeachStatementModifier(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCompileRegex(this);
     else super.accept(visitor);
   }
 
   @Override
   @Nullable
-  public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+  public PerlPerlRegex getPerlRegex() {
+    return findChildByClass(PerlPerlRegex.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPerlRegexModifiers getPerlRegexModifiers() {
+    return findChildByClass(PerlPerlRegexModifiers.class);
   }
 
 }

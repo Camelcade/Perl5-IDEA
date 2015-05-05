@@ -23,6 +23,12 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
 
   @Override
   @Nullable
+  public PerlCompileRegex getCompileRegex() {
+    return findChildByClass(PerlCompileRegex.class);
+  }
+
+  @Override
+  @Nullable
   public PerlDoTerm getDoTerm() {
     return findChildByClass(PerlDoTerm.class);
   }
@@ -41,8 +47,26 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
 
   @Override
   @Nullable
+  public PerlMatchRegex getMatchRegex() {
+    return findChildByClass(PerlMatchRegex.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlReplacementRegex getReplacementRegex() {
+    return findChildByClass(PerlReplacementRegex.class);
+  }
+
+  @Override
+  @Nullable
   public PerlSubTerm getSubTerm() {
     return findChildByClass(PerlSubTerm.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlTrRegex getTrRegex() {
+    return findChildByClass(PerlTrRegex.class);
   }
 
 }
