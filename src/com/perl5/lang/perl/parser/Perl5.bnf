@@ -84,7 +84,7 @@ private code_block ::= block_parsed PERL_SEMI ?
 block ::= label ?  "{" file_items "}" {pin=2}
 
 private file_item ::= package_namespace | package_namespace_item
-private package_namespace_item ::= declaration PERL_SEMI ? | statement PERL_SEMI
+private package_namespace_item ::= compound_statement PERL_SEMI ? | statement PERL_SEMI
 
 // package keyword
 package_namespace ::= 'package' perl_package perl_version ? package_namespace_content {pin=1}
@@ -92,39 +92,17 @@ private package_namespace_content ::= block_parsed | PERL_SEMI <<parsePackageCon
 private package_plain ::= package_namespace_item * // injected and wrapped by parsePackageContents
 
 // declarations
-private declaration ::=
-    sub_definition_or_declaration
+private compound_statement ::=
+    sub_definition
     | code_block
 
 // sub declaration or definition
-private sub_definition_or_declaration ::= 'sub' PERL_BAREWORD sub_definition_or_declaration_parameters
-private sub_definition_or_declaration_parameters ::=
-    sub_definition_parameters ? block_parsed PERL_SEMI ?
-    | sub_declaration_parameters ? PERL_SEMI
-
-// @todo actually, prototypes and signatures depends on feature in current block; We should do this in parse time
-private sub_declaration_parameters ::=
-    sub_prototype sub_attributes ?
-    | sub_attributes
-
-private sub_definition_parameters ::=
-    sub_attributes ? sub_signature
-    | sub_declaration_parameters
-
-private sub_prototype ::= "(" sub_prototype_element * (";" sub_prototype_element *) ? ")"
-private sub_prototype_element ::=
-        "\\" ( "[" sub_prototype_char + "]" | sub_prototype_char )
-        | sub_prototype_char
-
-private sub_prototype_char ::= "$" | "@" | "+" | "*" | "&"
-
-private sub_attributes ::= 'NYI'
-
-// @todo this requires use feature 'signatures' and no warnings 'experimental:signatures';
-private sub_signature ::= 'NYI'
+sub_definition ::= 'sub' PERL_BAREWORD <<parseSubDefinitionParameters>> ? block_parsed PERL_SEMI ?
+private sub_declaration_statement ::= 'sub' PERL_BAREWORD <<parseSubDeclarationParameters>> ?
 
 private  statement ::=
     use_statement
+    | sub_declaration_statement
     | no_statement
     | expr
     {recoverWhile=recover_statement}

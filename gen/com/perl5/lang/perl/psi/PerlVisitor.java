@@ -127,6 +127,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSubDefinition(@NotNull PerlSubDefinition o) {
+    visitPsiElement(o);
+  }
+
   public void visitUseStatement(@NotNull PerlUseStatement o) {
     visitPsiElement(o);
   }

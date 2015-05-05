@@ -20,6 +20,9 @@ public interface PerlBlock extends PsiElement {
   List<PerlPackageNamespace> getPackageNamespaceList();
 
   @NotNull
+  List<PerlSubDefinition> getSubDefinitionList();
+
+  @NotNull
   List<PerlUseStatement> getUseStatementList();
 
 }

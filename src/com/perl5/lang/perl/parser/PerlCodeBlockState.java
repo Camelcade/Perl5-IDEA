@@ -36,7 +36,7 @@ public class PerlCodeBlockState implements Cloneable
 		features = new HashMap<String, Boolean>(original.features);
 	}
 
-	public boolean isFeatureEnabled(String featureName)
+	protected boolean isFeatureEnabled(String featureName)
 	{
 		return isFeatureValid(featureName) && features.get(featureName);
 	}
@@ -46,9 +46,18 @@ public class PerlCodeBlockState implements Cloneable
 		return features.get(featureName) != null;
 	}
 
+	public boolean isSignaturesEnabled(){return isFeatureEnabled("signatures");}
 
 	public void use(PerlCodeBlockStateChange c)
 	{
+		if( "feature".equals(c.packageName))
+		{
+			for( String featureName: c.packageParams)
+			{
+				if( isFeatureValid(featureName))
+					features.put(featureName, true);
+			}
+		}
 //		System.out.println("Changing state use: ");
 //		System.out.println("Perl version: " + c.perlVersion);
 //		System.out.println("Package: " + c.packageName);
@@ -59,6 +68,14 @@ public class PerlCodeBlockState implements Cloneable
 
 	public void no(PerlCodeBlockStateChange c)
 	{
+		if( "feature".equals(c.packageName))
+		{
+			for( String featureName: c.packageParams)
+			{
+				if( isFeatureValid(featureName))
+					features.put(featureName, false);
+			}
+		}
 //		System.out.println("Changing state no:");
 //		System.out.println("Perl version: " + c.perlVersion);
 //		System.out.println("Package: " + c.packageName);

@@ -169,6 +169,43 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
+	/*
+// @todo actually, prototypes and signatures depends on feature in current block; We should do this in parse time
+//private sub_declaration_parameters ::=
+//    sub_prototype sub_attributes ?
+//    | sub_attributes
+//
+//private sub_definition_parameters ::=
+//    sub_attributes ? sub_signature
+//    | sub_declaration_parameters
+//
+//private sub_prototype ::= "(" sub_prototype_element * (";" sub_prototype_element *) ? ")"
+//private sub_prototype_element ::=
+//        "\\" ( "[" sub_prototype_char + "]" | sub_prototype_char )
+//        | sub_prototype_char
+//
+//private sub_prototype_char ::= "$" | "@" | "+" | "*" | "&"
+//
+//private sub_attributes ::= 'NYI'
+//
+//// @todo this requires use feature 'signatures' and no warnings 'experimental:signatures';
+//private sub_signature ::= 'NYI'
+	* */
+
+	public static boolean parseSubDefinitionParameters(PsiBuilder b, int l )
+	{
+		boolean isSignatureEnabled  = getCurrentBlockState(b).isSignaturesEnabled();
+//		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
+		return false;
+	}
+
+	public static boolean parseSubDeclarationParameters(PsiBuilder b, int l )
+	{
+		boolean isSignatureEnabled  = getCurrentBlockState(b).isSignaturesEnabled();
+//		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
+		return false;
+	}
+
 	public static boolean parseNoStatement(PsiBuilder b, int l )
 	{
 		PerlCodeBlockStateChange c = parseUseParameters(b,l);
