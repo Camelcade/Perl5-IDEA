@@ -65,8 +65,11 @@ NUMBER = [0-9_]+( "." [0-9_]+ )?
 THE_END         = __END__
 THE_DATA        = __DATA__
 
-PERL_OPERATORS = "," | "->" | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*="
-PERL_OPERATORS_NAMED = "not" | "and" | "or" | "xor" | "defined" | "ref" | "scalar" | "exists" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
+PERL_OPERATORS = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp" | "," | "->" | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*="
+
+// atm making the same, but seems unary are different
+PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
+PERL_OPERATORS_UNARY = "defined" | "ref" | "exists" | "scalar"
 
 MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{BAREWORD}\'
 MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{BAREWORD}\"
@@ -330,7 +333,9 @@ TRANS_MODIFIERS = [cdsr]
     return tokenType;
 }
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
-{PERL_OPERATORS_NAMED}    {return PERL_BAREWORD;}
+{PERL_OPERATORS_FILETEST} {return PERL_OPERATOR_FILETEST;}
+{PERL_OPERATORS_UNARY} {return PERL_OPERATOR_UNARY;}
+
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 
 <LEX_BAREWORD_STRING>

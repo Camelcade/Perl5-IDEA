@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlUndefStatement extends PsiElement {
 
+  @Nullable
+  PerlExpr getExpr();
+
 }

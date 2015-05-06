@@ -81,7 +81,6 @@ public interface PerlElementTypes {
   IElementType WHILE_COMPOUND = new PerlElementType("WHILE_COMPOUND");
   IElementType WHILE_STATEMENT_MODIFIER = new PerlElementType("WHILE_STATEMENT_MODIFIER");
 
-  IElementType NESTED_ELEMENT = new PerlTokenType("nested_element");
   IElementType PERL_ARRAY = new PerlTokenType("PERL_ARRAY");
   IElementType PERL_ARROW_COMMA = new PerlTokenType("=>");
   IElementType PERL_BAREWORD = new PerlTokenType("PERL_BAREWORD");
@@ -99,6 +98,8 @@ public interface PerlElementTypes {
   IElementType PERL_NUMBER = new PerlTokenType("PERL_NUMBER");
   IElementType PERL_NUMBER_VERSION = new PerlTokenType("PERL_NUMBER_VERSION");
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
+  IElementType PERL_OPERATOR_FILETEST = new PerlTokenType("PERL_OPERATOR_FILETEST");
+  IElementType PERL_OPERATOR_UNARY = new PerlTokenType("PERL_OPERATOR_UNARY");
   IElementType PERL_PACKAGE = new PerlTokenType("PERL_PACKAGE");
   IElementType PERL_POD = new PerlTokenType("PERL_POD");
   IElementType PERL_QUOTE = new PerlTokenType("\"");

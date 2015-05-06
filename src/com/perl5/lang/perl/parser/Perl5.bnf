@@ -42,7 +42,10 @@
     PERL_NUMBER="PERL_NUMBER"
 
     PERL_KEYWORD="PERL_KEYWORD"
+
     PERL_OPERATOR="PERL_OPERATOR"
+    PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
+    PERL_OPERATOR_FILETEST="PERL_OPERATOR_FILETEST"
 
     PERL_REGEX_QUOTE="PERL_REGEX_QUOTE"
     PERL_REGEX_MODIFIER="PERL_REGEX_MODIFIER"
@@ -211,7 +214,7 @@ expr ::=
     | op_1_expr
 
 op_1_expr ::= term
-op_2_expr ::= expr '->' ? nested_element
+op_2_expr ::= expr '->' ? nested_element    //  @todo this arrow should be optional only after } or ]
 private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
 op_3_suff_expr ::= expr ('++'|'--')
@@ -221,7 +224,8 @@ op_6_expr ::= expr ('=~'|'!~') expr
 op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
 op_8_expr ::= expr ('+'|'-'|'.') expr
 op_9_expr ::= expr ('<<'|'>>') expr
-op_10_expr ::= ('not'|'defined'|'ref'|'exists'|'scalar') expr
+// @todo filetest operators should be handled separately with diff options
+op_10_expr ::= (PERL_OPERATOR_UNARY !"(" | PERL_OPERATOR_FILETEST ) expr
 op_11_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
 op_12_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
 op_13_expr ::= expr '&' expr
@@ -242,6 +246,7 @@ op_24_expr ::= expr ('or'|'xor') expr
 private term ::=
     variable
     | PERL_BAREWORD "(" expr ? ")" // calee should be instead of bareword
+    | PERL_OPERATOR_UNARY "(" expr ? ")" // named operators as functions
     | "(" expr ? ")"
     | scalar_primitive
     | list_primitive
@@ -301,9 +306,12 @@ private variable_definition_variation ::=
 private variable ::= scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
 
 private scalar ::=
-    PERL_SCALAR
+    PERL_SCALAR nested_element    // hash or array item
+    | PERL_SCALAR
     | PERL_SIGIL_SCALAR "{" PERL_BAREWORD "}"
     | 'undef'
+
+private nested_element ::= "{" (PERL_BAREWORD | expr ) "}"
 
 // primitives
 private list_primitive ::=

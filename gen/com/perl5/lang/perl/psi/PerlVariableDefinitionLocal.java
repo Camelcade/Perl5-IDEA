@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlVariableDefinitionLocal extends PsiElement {
 
+  @NotNull
+  List<PerlExpr> getExprList();
+
 }

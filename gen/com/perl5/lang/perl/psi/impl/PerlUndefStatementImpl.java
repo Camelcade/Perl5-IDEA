@@ -22,4 +22,10 @@ public class PerlUndefStatementImpl extends ASTWrapperPsiElement implements Perl
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
+  }
+
 }
