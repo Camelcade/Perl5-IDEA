@@ -91,10 +91,12 @@ public interface PerlElementTypes {
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
+  IElementType PERL_FILEHANDLE = new PerlTokenType("PERL_FILEHANDLE");
   IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
   IElementType PERL_GLOB = new PerlTokenType("PERL_GLOB");
   IElementType PERL_HASH = new PerlTokenType("PERL_HASH");
   IElementType PERL_KEYWORD = new PerlTokenType("PERL_KEYWORD");
+  IElementType PERL_LANGLE = new PerlTokenType("<");
   IElementType PERL_LBRACE = new PerlTokenType("{");
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
@@ -106,6 +108,7 @@ public interface PerlElementTypes {
   IElementType PERL_PACKAGE = new PerlTokenType("PERL_PACKAGE");
   IElementType PERL_POD = new PerlTokenType("PERL_POD");
   IElementType PERL_QUOTE = new PerlTokenType("\"");
+  IElementType PERL_RANGLE = new PerlTokenType(">");
   IElementType PERL_RBRACE = new PerlTokenType("}");
   IElementType PERL_RBRACK = new PerlTokenType("]");
   IElementType PERL_REGEX_MODIFIER = new PerlTokenType("PERL_REGEX_MODIFIER");

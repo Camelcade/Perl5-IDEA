@@ -3,6 +3,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -109,16 +110,82 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		if(b.getTokenType() == PERL_BAREWORD )
 		{
+			assert b instanceof PerlBuilder;
+
+			IElementType nextRawTokenType = b.rawLookup(1);
+			PerlTokenData nextToken = ((PerlBuilder) b).getAheadToken(1);
+			PerlTokenData nextNextToken = ((PerlBuilder) b).getAheadToken(2);
+
+			PerlTokenData prevToken = ((PerlBuilder) b).getBehindToken(1);
+
 			PsiBuilder.Marker m = b.mark();
 
+			// hash element like {BAREWORD}
+			if (nextToken != null && prevToken != null && nextToken.getTokenType() == PERL_RBRACE && prevToken.getTokenType() == PERL_LBRACE)
+			{
+				b.advanceLexer();
+				m.collapse(PERL_STRING_CONTENT);
+				return true;
+			}
+			// filehandle <BAREWORD>
+			else if (nextToken != null && prevToken != null && nextToken.getTokenType() == PERL_RANGLE && prevToken.getTokenType() == PERL_LANGLE)
+			{
+				b.advanceLexer();
+				m.collapse(PERL_FILEHANDLE);
+				return true;
+			}
+			// method package() invocation
+			else if (nextToken != null && nextToken.getTokenType() == PERL_BAREWORD && nextRawTokenType == TokenType.WHITE_SPACE)
+			{
+				PsiBuilder.Marker markFunction = b.mark();
+				b.advanceLexer();
+				markFunction.collapse(PERL_FUNCTION);
 
+				boolean r = parseBarewordPackage(b, l);
+
+				if (r)
+				{
+					m.drop();    // we may collapse/done here to some kind of calee
+					return true;
+				} else
+				{
+					m.rollbackTo();
+				}
+			}
+			// package->method
+			// pac::age->method
+			// method->method
+			// pack::age::method
+			else if (
+					nextToken != null
+					&& nextNextToken != null
+					&& "->".equals(nextToken.getTokenText())
+					&& nextNextToken.getTokenType() == PERL_BAREWORD
+			)
+			{
+				boolean r = parseBarewordPackage(b, l);
+
+				if (r)
+				{
+					m.drop();    // we may collapse/done here to some kind of calee
+					return true;
+				} else
+				{
+					m.rollbackTo();
+				}
+			}
+
+			// couldn't guess
+			b.advanceLexer();
+			m.error("Could'n t guess a bareword");
+			return true;
 		}
 
 		return false;
 	}
 
 	/**
-	 * Making a PERL_PACKAGE item, collapsing barewords with ::
+	 * Making a PERL_PACKAGE item, collapsing barewords with :: @see guessBareword for more intelligence method
 	 * Sets last parsed package for parsing use/no constructs
 	 * @param b PerlBuilder
 	 * @param l	level
@@ -282,7 +349,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		{
 			PerlSyntaxTrap t = getPackagesTrap(b);
 			t.start();
-			r = parseBarewordPackage(b,l);
+			r = parseBarewordPackage(b, l);
 			t.stop();
 
 			if( r ) // use MODULE
@@ -402,6 +469,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return getCurrentBlockState(b).getStringsTrap();
 	}
 
+/*
 	public static boolean parseBarewordFunction(PsiBuilder b, int l ) {
 
 		if( b.getTokenType() == PERL_BAREWORD )
@@ -446,7 +514,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	///////////////////////// old thing
-/*
+
 	public static boolean parseCallArguments(PsiBuilder b, int l)
 	{
 		if( b.getTokenType() == PERL_LBRACE )

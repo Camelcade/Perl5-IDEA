@@ -49,7 +49,7 @@ NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
 //EMPTY_LINE = {WHITE_SPACE}*{NEW_LINE}?
 EMPTY_SPACE = [ \t\f\r\n]
-BAREWORD = [a-zA-Z_-][a-zA-Z0-9_-]*
+BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
 ANYWORD = [^ \t\f\r\n]
 
 CHAR_ANY        = .|{NEW_LINE}
@@ -303,6 +303,8 @@ TRANS_MODIFIERS = [cdsr]
 "]"             {return PERL_RBRACK;}
 "("             {return PERL_LPAREN;}
 ")"             {return PERL_RPAREN;}
+"<"             {return PERL_LANGLE;}
+">"             {return PERL_RANGLE;}
 
 
 {NUMBER}        {return PERL_NUMBER;}

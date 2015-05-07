@@ -42,6 +42,7 @@
     PERL_NUMBER="PERL_NUMBER"
 
     PERL_KEYWORD="PERL_KEYWORD"
+    PERL_FILEHANDLE="PERL_FILEHANDLE"
 
     PERL_OPERATOR="PERL_OPERATOR"
     PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
@@ -66,6 +67,8 @@
     PERL_RPAREN=')'
     PERL_LBRACE='{'
     PERL_RBRACE='}'
+    PERL_LANGLE='<'
+    PERL_RANGLE='>'
     PERL_SEMI=';';
     PERL_QUOTE="\""
 
@@ -223,10 +226,10 @@ private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
 op_3_suff_expr ::= expr ('++'|'--')
 op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
-op_5_expr ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true }
+op_5_expr ::= ('\' | '~'| '!'| '+' | '-') !PERL_BAREWORD expr { rightAssociative=true }
 op_6_expr ::= expr ('=~'|'!~') expr
 op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
-op_8_expr ::= expr ('+'|'-'|'.') expr
+op_8_expr ::= expr ('+'|'-'|'.') !PERL_BAREWORD expr
 op_9_expr ::= expr ('<<'|'>>') expr
 // @todo filetest operators should be handled separately with diff options
 op_10_expr ::= (PERL_OPERATOR_UNARY !"(" | PERL_OPERATOR_FILETEST ) expr
@@ -263,7 +266,7 @@ private term ::=
 
 private function_call ::= callable "(" expr ? ")"
 
-file_read_term ::= '<' (PERL_BAREWORD | expr )? '>'
+file_read_term ::= '<' (<<guessBareword>> | expr )? '>'
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -339,11 +342,11 @@ private variable ::= scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
 private scalar ::=
     PERL_SCALAR nested_element    // hash or array item
     | PERL_SCALAR
-    | PERL_SIGIL_SCALAR "{" PERL_BAREWORD "}"
+    | PERL_SIGIL_SCALAR "{" <<guessBareword>> "}"
     | 'undef'
 
 private nested_element ::=
-    "{" (PERL_BAREWORD | expr ) "}"
+    "{" (<<guessBareword>> | expr ) "}"
     | "[" (PERL_NUMBER | expr ) "]"
     | function_call     // @todo this should be handled differently, left token should be a package if it's bareword
 
@@ -351,14 +354,11 @@ private nested_element ::=
 
 callable ::=
     referencable_method
-    | perl_package_function
-    | (perl_function perl_package)
-    | perl_function
+    | <<guessBareword>>
 
 private referencable_method ::= '&'
     (
-        perl_package_function
-        | perl_function
+        <<guessBareword>>
         | {expr}
         | scalar
     )
@@ -374,17 +374,15 @@ private scalar_primitive ::=
     PERL_NUMBER
     | string
 
-private string ::= string_quoted | string_unquoted | <<parseBarewordString>>
+private string ::= string_quoted // | string_unquoted
 private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
 private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
-private string_unquoted ::= <<parseBarewordString>>
+//private string_unquoted ::= <<parseBarewordString>>
 
 label_declaration ::= label ":" // do we need to change tokentype?
-label ::= !PERL_KEYWORD PERL_BAREWORD
-private perl_package ::= <<parseBarewordPackage>>
+label ::= <<guessBareword>>
 private perl_version ::= <<parseVersion>>
-private perl_function ::= <<parseBarewordFunction>>
-private perl_package_function ::= <<parsePackageFunctionCall>>
+private perl_package ::= <<parseBarewordPackage>>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //

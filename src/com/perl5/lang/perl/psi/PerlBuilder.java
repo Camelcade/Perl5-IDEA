@@ -6,8 +6,12 @@ import com.intellij.lang.impl.PsiBuilderAdapter;
 import com.intellij.lang.impl.PsiBuilderImpl;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.lexer.Lexer;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
+import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.parser.PerlCodeBlockState;
+import com.perl5.lang.perl.parser.PerlTokenData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,5 +56,66 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		assert stackSize > 0;
 		return blockState.get(stackSize - 1);
 	}
+
+	/**
+	 * Like lookAhead, but looks behind, without whitespaces and comments
+	 * @param steps number of steps behind (positive)
+	 * @return token data: type and text
+	 */
+	public PerlTokenData getBehindToken(int steps)
+	{
+		assert steps > 0;
+		int step = 0;
+		IElementType rawTokenType = null;
+
+		while( steps > 0 )
+		{
+			step--;
+
+			rawTokenType = rawLookup(step);
+
+			// reached beginning
+			if( rawTokenType == null )
+				return null;
+
+			if( !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(rawTokenType))
+			{
+				steps--;
+			}
+		}
+
+		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(step), rawTokenTypeStart(step+1)).toString());
+	}
+
+	/**
+	 * Return token ahead of current, skips spaces and comments (@todo same as look behind, need to merge)
+	 * @param steps
+	 * @return
+	 */
+	public PerlTokenData getAheadToken(int steps)
+	{
+		assert steps > 0;
+		int step = 0;
+		IElementType rawTokenType = null;
+
+		while( steps > 0 )
+		{
+			step++;
+			rawTokenType = rawLookup(step);
+
+			// reached end
+			if( rawTokenType == null )
+				return null;
+
+			if( !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(rawTokenType))
+			{
+				steps--;
+			}
+		}
+
+		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(step), rawTokenTypeStart(step+1)).toString());
+	}
+
+
 
 }
