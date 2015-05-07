@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlOp2Expr extends PerlExpr {
 
+  @Nullable
+  PerlCallable getCallable();
+
   @NotNull
   List<PerlExpr> getExprList();
 

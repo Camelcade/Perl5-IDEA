@@ -22,6 +22,12 @@ public class PerlOp2ExprImpl extends PerlExprImpl implements PerlOp2Expr {
   }
 
   @Override
+  @Nullable
+  public PerlCallable getCallable() {
+    return findChildByClass(PerlCallable.class);
+  }
+
+  @Override
   @NotNull
   public List<PerlExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);

@@ -98,6 +98,25 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
+
+	/**
+	 * Bareword parser. From context we are trying to decide what is the current and (possibly next) bareword is
+	 * @param b	PerlBuilder
+	 * @param l	Level
+	 * @return	Result
+	 */
+	public static boolean guessBareword(PsiBuilder b, int l )
+	{
+		if(b.getTokenType() == PERL_BAREWORD )
+		{
+			PsiBuilder.Marker m = b.mark();
+
+
+		}
+
+		return false;
+	}
+
 	/**
 	 * Making a PERL_PACKAGE item, collapsing barewords with ::
 	 * Sets last parsed package for parsing use/no constructs
@@ -383,6 +402,48 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return getCurrentBlockState(b).getStringsTrap();
 	}
 
+	public static boolean parseBarewordFunction(PsiBuilder b, int l ) {
+
+		if( b.getTokenType() == PERL_BAREWORD )
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(PERL_FUNCTION);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean parsePackageFunctionCall(PsiBuilder b, int l ) {
+
+		if(b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) == PERL_DEPACKAGE && b.lookAhead(2) == PERL_BAREWORD )
+		{
+			PsiBuilder.Marker m = b.mark();
+
+			while(
+					b.lookAhead(3) == PERL_DEPACKAGE && b.lookAhead(4) == PERL_BAREWORD
+					)
+			{
+				b.advanceLexer();
+				b.advanceLexer();
+			}
+
+			b.advanceLexer(); // package rest
+			b.advanceLexer(); // depackage
+
+			m.collapse(PERL_PACKAGE);
+
+			m = b.mark();
+			b.advanceLexer();
+			m.collapse(PERL_FUNCTION);
+
+			return true;
+		}
+
+		return false;
+	}
 
 	///////////////////////// old thing
 /*
@@ -417,55 +478,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean parseBarewordFunction(PsiBuilder b, int l ) {
-
-		if( b.getTokenType() == PERL_BAREWORD )
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(PERL_FUNCTION);
-
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean parsePackageMethodSuper(PsiBuilder b, int l ) {
-
-		return
-			"SUPER".equals(b.getTokenText()) && b.lookAhead(1) == PERL_DEPACKAGE
-			&& parsePackageFunctionCall(b,l);
-	}
-
-	public static boolean parsePackageFunctionCall(PsiBuilder b, int l ) {
-
-		if(b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) == PERL_DEPACKAGE && b.lookAhead(2) == PERL_BAREWORD )
-		{
-			PsiBuilder.Marker m = b.mark();
-
-			while(
-					b.lookAhead(3) == PERL_DEPACKAGE && b.lookAhead(4) == PERL_BAREWORD
-			)
-			{
-				b.advanceLexer();
-				b.advanceLexer();
-			}
-
-			b.advanceLexer(); // package rest
-			b.advanceLexer(); // depackage
-
-			m.collapse(PERL_PACKAGE);
-
-			m = b.mark();
-			b.advanceLexer();
-			m.collapse(PERL_FUNCTION);
-
-			return true;
-		}
-
-		return false;
-	}
 */
 
 }

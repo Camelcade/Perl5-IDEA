@@ -21,4 +21,10 @@ public class PerlOp21ExprImpl extends PerlExprImpl implements PerlOp21Expr {
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public PerlCallable getCallable() {
+    return findNotNullChildByClass(PerlCallable.class);
+  }
+
 }

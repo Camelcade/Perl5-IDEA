@@ -11,21 +11,15 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlUndefStatementImpl extends ASTWrapperPsiElement implements PerlUndefStatement {
+public class PerlReferenceValueImpl extends ASTWrapperPsiElement implements PerlReferenceValue {
 
-  public PerlUndefStatementImpl(ASTNode node) {
+  public PerlReferenceValueImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitUndefStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitReferenceValue(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public PerlCallable getCallable() {
-    return findChildByClass(PerlCallable.class);
   }
 
   @Override

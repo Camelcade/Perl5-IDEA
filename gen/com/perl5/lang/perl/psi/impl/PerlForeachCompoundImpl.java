@@ -29,6 +29,12 @@ public class PerlForeachCompoundImpl extends ASTWrapperPsiElement implements Per
   }
 
   @Override
+  @Nullable
+  public PerlCallable getCallable() {
+    return findChildByClass(PerlCallable.class);
+  }
+
+  @Override
   @NotNull
   public List<PerlExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
@@ -36,20 +42,20 @@ public class PerlForeachCompoundImpl extends ASTWrapperPsiElement implements Per
 
   @Override
   @Nullable
-  public PerlVariableDefinitionGlobal getVariableDefinitionGlobal() {
-    return findChildByClass(PerlVariableDefinitionGlobal.class);
+  public PerlVariableDeclarationGlobal getVariableDeclarationGlobal() {
+    return findChildByClass(PerlVariableDeclarationGlobal.class);
   }
 
   @Override
   @Nullable
-  public PerlVariableDefinitionLexical getVariableDefinitionLexical() {
-    return findChildByClass(PerlVariableDefinitionLexical.class);
+  public PerlVariableDeclarationLexical getVariableDeclarationLexical() {
+    return findChildByClass(PerlVariableDeclarationLexical.class);
   }
 
   @Override
   @Nullable
-  public PerlVariableDefinitionLocal getVariableDefinitionLocal() {
-    return findChildByClass(PerlVariableDefinitionLocal.class);
+  public PerlVariableDeclarationLocal getVariableDeclarationLocal() {
+    return findChildByClass(PerlVariableDeclarationLocal.class);
   }
 
 }

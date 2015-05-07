@@ -28,10 +28,4 @@ public class PerlUntilCompoundImpl extends ASTWrapperPsiElement implements PerlU
     return findNotNullChildByClass(PerlExpr.class);
   }
 
-  @Override
-  @Nullable
-  public PerlLabelDeclaration getLabelDeclaration() {
-    return findChildByClass(PerlLabelDeclaration.class);
-  }
-
 }

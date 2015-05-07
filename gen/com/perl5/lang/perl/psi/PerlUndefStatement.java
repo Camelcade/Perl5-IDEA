@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlUndefStatement extends PsiElement {
 
   @Nullable
+  PerlCallable getCallable();
+
+  @Nullable
   PerlExpr getExpr();
 
 }

@@ -10,16 +10,19 @@ public interface PerlForCompound extends PsiElement {
   @Nullable
   PerlBlockCompound getBlockCompound();
 
+  @Nullable
+  PerlCallable getCallable();
+
   @NotNull
   List<PerlExpr> getExprList();
 
   @Nullable
-  PerlVariableDefinitionGlobal getVariableDefinitionGlobal();
+  PerlVariableDeclarationGlobal getVariableDeclarationGlobal();
 
   @Nullable
-  PerlVariableDefinitionLexical getVariableDefinitionLexical();
+  PerlVariableDeclarationLexical getVariableDeclarationLexical();
 
   @Nullable
-  PerlVariableDefinitionLocal getVariableDefinitionLocal();
+  PerlVariableDeclarationLocal getVariableDeclarationLocal();
 
 }

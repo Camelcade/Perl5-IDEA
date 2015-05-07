@@ -12,7 +12,9 @@ public interface PerlElementTypes {
 
   IElementType BLOCK = new PerlElementType("BLOCK");
   IElementType BLOCK_COMPOUND = new PerlElementType("BLOCK_COMPOUND");
+  IElementType CALLABLE = new PerlElementType("CALLABLE");
   IElementType COMPILE_REGEX = new PerlElementType("COMPILE_REGEX");
+  IElementType COMPOUND_STATEMENT = new PerlElementType("COMPOUND_STATEMENT");
   IElementType DO_TERM = new PerlElementType("DO_TERM");
   IElementType EVAL_TERM = new PerlElementType("EVAL_TERM");
   IElementType EXPR = new PerlElementType("EXPR");
@@ -59,11 +61,12 @@ public interface PerlElementTypes {
   IElementType PERL_REGEX = new PerlElementType("PERL_REGEX");
   IElementType PERL_REGEX_MODIFIERS = new PerlElementType("PERL_REGEX_MODIFIERS");
   IElementType REDO_STATEMENT = new PerlElementType("REDO_STATEMENT");
+  IElementType REFERENCE_VALUE = new PerlElementType("REFERENCE_VALUE");
   IElementType REPLACEMENT_REGEX = new PerlElementType("REPLACEMENT_REGEX");
+  IElementType REQUIRE_STATEMENT = new PerlElementType("REQUIRE_STATEMENT");
   IElementType STATEMENT = new PerlElementType("STATEMENT");
   IElementType SUB_DECLARATION_STATEMENT = new PerlElementType("SUB_DECLARATION_STATEMENT");
   IElementType SUB_DEFINITION = new PerlElementType("SUB_DEFINITION");
-  IElementType SUB_TERM = new PerlElementType("SUB_TERM");
   IElementType TR_MODIFIERS = new PerlElementType("TR_MODIFIERS");
   IElementType TR_REGEX = new PerlElementType("TR_REGEX");
   IElementType TR_REPLACEMENTLIST = new PerlElementType("TR_REPLACEMENTLIST");
@@ -74,9 +77,9 @@ public interface PerlElementTypes {
   IElementType UNTIL_COMPOUND = new PerlElementType("UNTIL_COMPOUND");
   IElementType UNTIL_STATEMENT_MODIFIER = new PerlElementType("UNTIL_STATEMENT_MODIFIER");
   IElementType USE_STATEMENT = new PerlElementType("USE_STATEMENT");
-  IElementType VARIABLE_DEFINITION_GLOBAL = new PerlElementType("VARIABLE_DEFINITION_GLOBAL");
-  IElementType VARIABLE_DEFINITION_LEXICAL = new PerlElementType("VARIABLE_DEFINITION_LEXICAL");
-  IElementType VARIABLE_DEFINITION_LOCAL = new PerlElementType("VARIABLE_DEFINITION_LOCAL");
+  IElementType VARIABLE_DECLARATION_GLOBAL = new PerlElementType("VARIABLE_DECLARATION_GLOBAL");
+  IElementType VARIABLE_DECLARATION_LEXICAL = new PerlElementType("VARIABLE_DECLARATION_LEXICAL");
+  IElementType VARIABLE_DECLARATION_LOCAL = new PerlElementType("VARIABLE_DECLARATION_LOCAL");
   IElementType WHEN_STATEMENT_MODIFIER = new PerlElementType("WHEN_STATEMENT_MODIFIER");
   IElementType WHILE_COMPOUND = new PerlElementType("WHILE_COMPOUND");
   IElementType WHILE_STATEMENT_MODIFIER = new PerlElementType("WHILE_STATEMENT_MODIFIER");
@@ -130,8 +133,14 @@ public interface PerlElementTypes {
       else if (type == BLOCK_COMPOUND) {
         return new PerlBlockCompoundImpl(node);
       }
+      else if (type == CALLABLE) {
+        return new PerlCallableImpl(node);
+      }
       else if (type == COMPILE_REGEX) {
         return new PerlCompileRegexImpl(node);
+      }
+      else if (type == COMPOUND_STATEMENT) {
+        return new PerlCompoundStatementImpl(node);
       }
       else if (type == DO_TERM) {
         return new PerlDoTermImpl(node);
@@ -271,8 +280,14 @@ public interface PerlElementTypes {
       else if (type == REDO_STATEMENT) {
         return new PerlRedoStatementImpl(node);
       }
+      else if (type == REFERENCE_VALUE) {
+        return new PerlReferenceValueImpl(node);
+      }
       else if (type == REPLACEMENT_REGEX) {
         return new PerlReplacementRegexImpl(node);
+      }
+      else if (type == REQUIRE_STATEMENT) {
+        return new PerlRequireStatementImpl(node);
       }
       else if (type == STATEMENT) {
         return new PerlStatementImpl(node);
@@ -282,9 +297,6 @@ public interface PerlElementTypes {
       }
       else if (type == SUB_DEFINITION) {
         return new PerlSubDefinitionImpl(node);
-      }
-      else if (type == SUB_TERM) {
-        return new PerlSubTermImpl(node);
       }
       else if (type == TR_MODIFIERS) {
         return new PerlTrModifiersImpl(node);
@@ -316,14 +328,14 @@ public interface PerlElementTypes {
       else if (type == USE_STATEMENT) {
         return new PerlUseStatementImpl(node);
       }
-      else if (type == VARIABLE_DEFINITION_GLOBAL) {
-        return new PerlVariableDefinitionGlobalImpl(node);
+      else if (type == VARIABLE_DECLARATION_GLOBAL) {
+        return new PerlVariableDeclarationGlobalImpl(node);
       }
-      else if (type == VARIABLE_DEFINITION_LEXICAL) {
-        return new PerlVariableDefinitionLexicalImpl(node);
+      else if (type == VARIABLE_DECLARATION_LEXICAL) {
+        return new PerlVariableDeclarationLexicalImpl(node);
       }
-      else if (type == VARIABLE_DEFINITION_LOCAL) {
-        return new PerlVariableDefinitionLocalImpl(node);
+      else if (type == VARIABLE_DECLARATION_LOCAL) {
+        return new PerlVariableDeclarationLocalImpl(node);
       }
       else if (type == WHEN_STATEMENT_MODIFIER) {
         return new PerlWhenStatementModifierImpl(node);

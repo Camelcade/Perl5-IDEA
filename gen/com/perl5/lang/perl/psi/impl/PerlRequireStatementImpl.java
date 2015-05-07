@@ -11,21 +11,15 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlVariableDefinitionLocalImpl extends ASTWrapperPsiElement implements PerlVariableDefinitionLocal {
+public class PerlRequireStatementImpl extends ASTWrapperPsiElement implements PerlRequireStatement {
 
-  public PerlVariableDefinitionLocalImpl(ASTNode node) {
+  public PerlRequireStatementImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitVariableDefinitionLocal(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitRequireStatement(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
 }

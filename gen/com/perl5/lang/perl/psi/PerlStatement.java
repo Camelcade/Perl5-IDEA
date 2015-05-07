@@ -32,6 +32,9 @@ public interface PerlStatement extends PsiElement {
   PerlRedoStatement getRedoStatement();
 
   @Nullable
+  PerlRequireStatement getRequireStatement();
+
+  @Nullable
   PerlSubDeclarationStatement getSubDeclarationStatement();
 
   @Nullable

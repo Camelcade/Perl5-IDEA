@@ -5,6 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlSubTerm extends PsiElement {
+public interface PerlNextStatement extends PsiElement {
+
+  @Nullable
+  PerlExpr getExpr();
+
+  @Nullable
+  PerlLabel getLabel();
 
 }

@@ -11,27 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlUndefStatementImpl extends ASTWrapperPsiElement implements PerlUndefStatement {
+public class PerlRedoStatementImpl extends ASTWrapperPsiElement implements PerlRedoStatement {
 
-  public PerlUndefStatementImpl(ASTNode node) {
+  public PerlRedoStatementImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitUndefStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitRedoStatement(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public PerlCallable getCallable() {
-    return findChildByClass(PerlCallable.class);
   }
 
   @Override
   @Nullable
   public PerlExpr getExpr() {
     return findChildByClass(PerlExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlLabel getLabel() {
+    return findChildByClass(PerlLabel.class);
   }
 
 }

@@ -10,7 +10,4 @@ public interface PerlUntilCompound extends PsiElement {
   @NotNull
   PerlExpr getExpr();
 
-  @Nullable
-  PerlLabelDeclaration getLabelDeclaration();
-
 }

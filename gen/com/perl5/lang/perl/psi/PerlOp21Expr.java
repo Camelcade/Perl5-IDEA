@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlOp21Expr extends PerlExpr {
 
+  @NotNull
+  PerlCallable getCallable();
+
 }

@@ -11,27 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlUndefStatementImpl extends ASTWrapperPsiElement implements PerlUndefStatement {
+public class PerlVariableDeclarationLexicalImpl extends ASTWrapperPsiElement implements PerlVariableDeclarationLexical {
 
-  public PerlUndefStatementImpl(ASTNode node) {
+  public PerlVariableDeclarationLexicalImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitUndefStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitVariableDeclarationLexical(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public PerlCallable getCallable() {
-    return findChildByClass(PerlCallable.class);
+  @NotNull
+  public List<PerlCallable> getCallableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCallable.class);
   }
 
   @Override
-  @Nullable
-  public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+  @NotNull
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
 }

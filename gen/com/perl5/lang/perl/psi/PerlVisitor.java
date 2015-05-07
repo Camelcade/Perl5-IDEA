@@ -15,7 +15,15 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCallable(@NotNull PerlCallable o) {
+    visitPsiElement(o);
+  }
+
   public void visitCompileRegex(@NotNull PerlCompileRegex o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCompoundStatement(@NotNull PerlCompoundStatement o) {
     visitPsiElement(o);
   }
 
@@ -203,7 +211,15 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitReferenceValue(@NotNull PerlReferenceValue o) {
+    visitPsiElement(o);
+  }
+
   public void visitReplacementRegex(@NotNull PerlReplacementRegex o) {
+    visitPsiElement(o);
+  }
+
+  public void visitRequireStatement(@NotNull PerlRequireStatement o) {
     visitPsiElement(o);
   }
 
@@ -216,10 +232,6 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitSubDefinition(@NotNull PerlSubDefinition o) {
-    visitPsiElement(o);
-  }
-
-  public void visitSubTerm(@NotNull PerlSubTerm o) {
     visitPsiElement(o);
   }
 
@@ -263,15 +275,15 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitVariableDefinitionGlobal(@NotNull PerlVariableDefinitionGlobal o) {
+  public void visitVariableDeclarationGlobal(@NotNull PerlVariableDeclarationGlobal o) {
     visitPsiElement(o);
   }
 
-  public void visitVariableDefinitionLexical(@NotNull PerlVariableDefinitionLexical o) {
+  public void visitVariableDeclarationLexical(@NotNull PerlVariableDeclarationLexical o) {
     visitPsiElement(o);
   }
 
-  public void visitVariableDefinitionLocal(@NotNull PerlVariableDefinitionLocal o) {
+  public void visitVariableDeclarationLocal(@NotNull PerlVariableDeclarationLocal o) {
     visitPsiElement(o);
   }
 

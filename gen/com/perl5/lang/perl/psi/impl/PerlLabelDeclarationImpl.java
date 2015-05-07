@@ -11,21 +11,21 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlVariableDefinitionLexicalImpl extends ASTWrapperPsiElement implements PerlVariableDefinitionLexical {
+public class PerlLabelDeclarationImpl extends ASTWrapperPsiElement implements PerlLabelDeclaration {
 
-  public PerlVariableDefinitionLexicalImpl(ASTNode node) {
+  public PerlLabelDeclarationImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitVariableDefinitionLexical(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitLabelDeclaration(this);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  public PerlLabel getLabel() {
+    return findNotNullChildByClass(PerlLabel.class);
   }
 
 }

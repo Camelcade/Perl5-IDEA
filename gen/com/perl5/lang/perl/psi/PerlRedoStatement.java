@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlWhileCompound extends PsiElement {
+public interface PerlRedoStatement extends PsiElement {
 
-  @NotNull
+  @Nullable
   PerlExpr getExpr();
+
+  @Nullable
+  PerlLabel getLabel();
 
 }

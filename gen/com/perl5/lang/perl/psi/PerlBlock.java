@@ -8,22 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface PerlBlock extends PsiElement {
 
   @NotNull
-  List<PerlBlockCompound> getBlockCompoundList();
-
-  @NotNull
-  List<PerlForCompound> getForCompoundList();
-
-  @NotNull
-  List<PerlForeachCompound> getForeachCompoundList();
-
-  @NotNull
-  List<PerlGivenCompound> getGivenCompoundList();
-
-  @NotNull
-  List<PerlIfCompound> getIfCompoundList();
-
-  @Nullable
-  PerlLabelDeclaration getLabelDeclaration();
+  List<PerlCompoundStatement> getCompoundStatementList();
 
   @NotNull
   List<PerlPackageNamespace> getPackageNamespaceList();
@@ -33,14 +18,5 @@ public interface PerlBlock extends PsiElement {
 
   @NotNull
   List<PerlSubDefinition> getSubDefinitionList();
-
-  @NotNull
-  List<PerlUnlessCompound> getUnlessCompoundList();
-
-  @NotNull
-  List<PerlUntilCompound> getUntilCompoundList();
-
-  @NotNull
-  List<PerlWhileCompound> getWhileCompoundList();
 
 }

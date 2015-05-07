@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlVariableDefinitionGlobal extends PsiElement {
+public interface PerlLastStatement extends PsiElement {
 
-  @NotNull
-  List<PerlExpr> getExprList();
+  @Nullable
+  PerlExpr getExpr();
+
+  @Nullable
+  PerlLabel getLabel();
 
 }

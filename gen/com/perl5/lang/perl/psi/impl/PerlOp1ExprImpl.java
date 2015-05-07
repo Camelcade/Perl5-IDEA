@@ -23,6 +23,12 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
 
   @Override
   @Nullable
+  public PerlCallable getCallable() {
+    return findChildByClass(PerlCallable.class);
+  }
+
+  @Override
+  @Nullable
   public PerlCompileRegex getCompileRegex() {
     return findChildByClass(PerlCompileRegex.class);
   }
@@ -59,20 +65,38 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
 
   @Override
   @Nullable
+  public PerlReferenceValue getReferenceValue() {
+    return findChildByClass(PerlReferenceValue.class);
+  }
+
+  @Override
+  @Nullable
   public PerlReplacementRegex getReplacementRegex() {
     return findChildByClass(PerlReplacementRegex.class);
   }
 
   @Override
   @Nullable
-  public PerlSubTerm getSubTerm() {
-    return findChildByClass(PerlSubTerm.class);
+  public PerlTrRegex getTrRegex() {
+    return findChildByClass(PerlTrRegex.class);
   }
 
   @Override
   @Nullable
-  public PerlTrRegex getTrRegex() {
-    return findChildByClass(PerlTrRegex.class);
+  public PerlVariableDeclarationGlobal getVariableDeclarationGlobal() {
+    return findChildByClass(PerlVariableDeclarationGlobal.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlVariableDeclarationLexical getVariableDeclarationLexical() {
+    return findChildByClass(PerlVariableDeclarationLexical.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlVariableDeclarationLocal getVariableDeclarationLocal() {
+    return findChildByClass(PerlVariableDeclarationLocal.class);
   }
 
 }
