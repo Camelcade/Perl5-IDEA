@@ -64,8 +64,7 @@ public interface PerlElementTypes {
   IElementType REFERENCE_VALUE = new PerlElementType("REFERENCE_VALUE");
   IElementType REPLACEMENT_REGEX = new PerlElementType("REPLACEMENT_REGEX");
   IElementType REQUIRE_STATEMENT = new PerlElementType("REQUIRE_STATEMENT");
-  IElementType STATEMENT = new PerlElementType("STATEMENT");
-  IElementType SUB_DECLARATION_STATEMENT = new PerlElementType("SUB_DECLARATION_STATEMENT");
+  IElementType SUB_DECLARATION = new PerlElementType("SUB_DECLARATION");
   IElementType SUB_DEFINITION = new PerlElementType("SUB_DEFINITION");
   IElementType TR_MODIFIERS = new PerlElementType("TR_MODIFIERS");
   IElementType TR_REGEX = new PerlElementType("TR_REGEX");
@@ -87,6 +86,7 @@ public interface PerlElementTypes {
   IElementType PERL_ARRAY = new PerlTokenType("PERL_ARRAY");
   IElementType PERL_ARROW_COMMA = new PerlTokenType("=>");
   IElementType PERL_BAREWORD = new PerlTokenType("PERL_BAREWORD");
+  IElementType PERL_COLON = new PerlTokenType(":");
   IElementType PERL_COMMA = new PerlTokenType(",");
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
@@ -293,11 +293,8 @@ public interface PerlElementTypes {
       else if (type == REQUIRE_STATEMENT) {
         return new PerlRequireStatementImpl(node);
       }
-      else if (type == STATEMENT) {
-        return new PerlStatementImpl(node);
-      }
-      else if (type == SUB_DECLARATION_STATEMENT) {
-        return new PerlSubDeclarationStatementImpl(node);
+      else if (type == SUB_DECLARATION) {
+        return new PerlSubDeclarationImpl(node);
       }
       else if (type == SUB_DEFINITION) {
         return new PerlSubDefinitionImpl(node);

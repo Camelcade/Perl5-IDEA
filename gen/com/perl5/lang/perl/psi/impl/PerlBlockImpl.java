@@ -30,20 +30,110 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlForStatementModifier> getForStatementModifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlForStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlForeachStatementModifier> getForeachStatementModifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlForeachStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlIfStatementModifier> getIfStatementModifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlIfStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlLastStatement> getLastStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlLastStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlNextStatement> getNextStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNextStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlNoStatement> getNoStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNoStatement.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlPackageNamespace> getPackageNamespaceList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNamespace.class);
   }
 
   @Override
   @NotNull
-  public List<PerlStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlStatement.class);
+  public List<PerlRedoStatement> getRedoStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlRedoStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlRequireStatement> getRequireStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlRequireStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlSubDeclaration> getSubDeclarationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlSubDeclaration.class);
   }
 
   @Override
   @NotNull
   public List<PerlSubDefinition> getSubDefinitionList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlSubDefinition.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlUndefStatement> getUndefStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUndefStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlUnlessStatementModifier> getUnlessStatementModifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUnlessStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlUntilStatementModifier> getUntilStatementModifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUntilStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlUseStatement> getUseStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUseStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlWhenStatementModifier> getWhenStatementModifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlWhenStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlWhileStatementModifier> getWhileStatementModifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlWhileStatementModifier.class);
   }
 
 }

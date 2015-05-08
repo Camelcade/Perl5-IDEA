@@ -223,11 +223,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitStatement(@NotNull PerlStatement o) {
-    visitPsiElement(o);
-  }
-
-  public void visitSubDeclarationStatement(@NotNull PerlSubDeclarationStatement o) {
+  public void visitSubDeclaration(@NotNull PerlSubDeclaration o) {
     visitPsiElement(o);
   }
 

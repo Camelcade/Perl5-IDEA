@@ -62,6 +62,7 @@
     PERL_ARROW_COMMA='=>'
     PERL_DEREFERENCE='->'
     PERL_DEPACKAGE='::'
+    PERL_COLON=":"
     PERL_LBRACK='['
     PERL_RBRACK=']'
     PERL_LPAREN='('
@@ -91,7 +92,7 @@ block ::= "{" file_items "}" {pin=1} // should not be used anywhere, injected by
 
 
 private file_item ::= package_namespace | package_namespace_item
-private package_namespace_item ::= sub_definition PERL_SEMI ? | compound_statement PERL_SEMI ? | statement
+private package_namespace_item ::= sub_definition | compound_statement PERL_SEMI ? | statement
 
 // package keyword
 package_namespace ::= 'package' perl_package perl_version ? package_namespace_content {pin=1}
@@ -140,25 +141,33 @@ private for_compound_arguments_list ::=
     (variable_declaration | variable ) ? '(' expr ')' block_compound
 
 
-
-
-
-// sub declaration or definition
-sub_definition ::= 'sub' PERL_BAREWORD <<parseSubDefinitionParameters>> ? block_safe PERL_SEMI ?
-sub_declaration_statement ::= 'sub' PERL_BAREWORD <<parseSubDeclarationParameters>> ?
-
-statement ::= statement_variation statement_modifier ? (<<statementSemi>>|<<eof>>) //{recoverWhile=recover_statement}
+private statement ::= statement_variation statement_modifier ? (<<statementSemi>>|<<eof>>) //{recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
-    | sub_declaration_statement
     | no_statement
     | undef_statement
     | last_statement
     | next_statement
     | redo_statement
     | require_statement
+    | sub_declaration
     | expr
+
+sub_definition ::= 'sub' <<parseSubDefinition>>
+
+private sub_definition_parameters ::=
+    sub_prototype sub_attributes ?
+    | sub_attributes sub_signature ?
+    | sub_signature
+
+sub_declaration ::= 'sub' <<parseSubDeclaration>>
+private sub_declaration_parameters ::=  sub_prototype ? sub_attributes ?
+
+private sub_prototype ::= "(" <<parseSubPrototype>> ")"
+private sub_signature ::= "(" <<parseSubSignature>> ")"
+private sub_attributes ::= ":" <<parseSubAttributes>>
+
 
 last_statement ::= 'last' lnr_param ?
 next_statement ::= 'next' lnr_param ?

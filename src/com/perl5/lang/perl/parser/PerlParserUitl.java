@@ -28,6 +28,113 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return new PerlBuilder(builder, state, parser);
 	}
 
+	/**
+	 * Parses sub definition, marks error areas
+	 * @param b	PerlBuilder
+	 * @param l	parsing level
+	 * @return	parsing result
+	 */
+	public static boolean parseSubDefinition(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+		if( b.getTokenType() == PERL_BAREWORD)
+		{
+			PsiBuilder.Marker mainMarker = b.mark();
+
+			// sub name
+			PsiBuilder.Marker m = b.mark();
+			((PerlBuilder) b).beginSubDefinition(b.getTokenText());
+			b.advanceLexer();
+			m.collapse(PERL_FUNCTION);
+
+			// params
+			PerlParser.sub_definition_parameters(b,l);
+
+			PsiBuilder.Marker bodyMarker = b.mark();
+			// function body
+			if( parseBlock(b, l) )
+			{
+				try{
+					((PerlBuilder) b).commitSubDefinition();
+				}
+				catch(Exception e)
+				{
+					mainMarker.errorBefore("Something bad happened", bodyMarker);
+				}
+				finally
+				{
+					bodyMarker.drop();
+					mainMarker.drop();
+				}
+
+				return true;
+			}
+			else
+			{
+				mainMarker.rollbackTo();
+				return false;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Parses sub definition, marks error areas
+	 * @param b	PerlBuilder
+	 * @param l	parsing level
+	 * @return	parsing result
+	 */
+	public static boolean parseSubDeclaration(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+		if( b.getTokenType() == PERL_BAREWORD)
+		{
+			PsiBuilder.Marker mainMarker = b.mark();
+
+			// sub name
+			PsiBuilder.Marker m = b.mark();
+			((PerlBuilder) b).beginSubDefinition(b.getTokenText());
+			b.advanceLexer();
+			m.collapse(PERL_FUNCTION);
+
+			// params
+			PerlParser.sub_declaration_parameters(b,l);
+
+			if( b.getTokenType() == PERL_SEMI)
+			{
+				try{
+					((PerlBuilder) b).commitSubDeclaration();
+				}
+				catch(Exception e)
+				{
+					mainMarker.error("Something bad happened");
+				}
+				finally
+				{
+					mainMarker.drop();
+				}
+
+				return true;
+			}
+			else
+			{
+				mainMarker.rollbackTo();
+				return false;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Parsing file entry point. Inits codeblock states, makes code
+	 * @param b	PerlBuilder
+	 * @param l	parsing level
+	 * @return	parsing result
+	 */
 	public static boolean parseFile(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
@@ -62,7 +169,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 
 		((PerlBuilder) b).pushCodeBlockState("Entering block"); // push default
-		boolean r = PerlParser.block(b, l);
+		boolean r = PerlParser.block(b, l + 1);
 		((PerlBuilder) b).popCodeBlockState(b.getTokenText());
 
 		return r;
@@ -126,6 +233,17 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				b.advanceLexer();
 				m.collapse(PERL_FUNCTION);
 				return true;
+
+			}
+			else if( nextToken != null && nextToken.getTokenType() == PERL_DEPACKAGE )
+			{
+				/* ok, it's a package all right. Can be:
+					package
+					package::method
+					method package::
+					package->
+					 package
+				 */
 
 			}
 			// check for built ins
@@ -280,7 +398,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //private sub_signature ::= 'NYI'
 	* */
 
-	public static boolean parseSubDefinitionParameters(PsiBuilder b, int l )
+	public static boolean parseSubPrototype(PsiBuilder b, int l )
 	{
 		boolean isSignatureEnabled  = getCurrentBlockState(b).isSignaturesEnabled();
 //		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
@@ -288,7 +406,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 
-	public static boolean parseSubDeclarationParameters(PsiBuilder b, int l )
+	public static boolean parseSubAttributes(PsiBuilder b, int l )
+	{
+		boolean isSignatureEnabled  = getCurrentBlockState(b).isSignaturesEnabled();
+//		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
+		return false;
+	}
+
+	public static boolean parseSubSignature(PsiBuilder b, int l )
 	{
 		boolean isSignatureEnabled  = getCurrentBlockState(b).isSignaturesEnabled();
 //		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);

@@ -11,12 +11,57 @@ public interface PerlBlock extends PsiElement {
   List<PerlCompoundStatement> getCompoundStatementList();
 
   @NotNull
+  List<PerlExpr> getExprList();
+
+  @NotNull
+  List<PerlForStatementModifier> getForStatementModifierList();
+
+  @NotNull
+  List<PerlForeachStatementModifier> getForeachStatementModifierList();
+
+  @NotNull
+  List<PerlIfStatementModifier> getIfStatementModifierList();
+
+  @NotNull
+  List<PerlLastStatement> getLastStatementList();
+
+  @NotNull
+  List<PerlNextStatement> getNextStatementList();
+
+  @NotNull
+  List<PerlNoStatement> getNoStatementList();
+
+  @NotNull
   List<PerlPackageNamespace> getPackageNamespaceList();
 
   @NotNull
-  List<PerlStatement> getStatementList();
+  List<PerlRedoStatement> getRedoStatementList();
+
+  @NotNull
+  List<PerlRequireStatement> getRequireStatementList();
+
+  @NotNull
+  List<PerlSubDeclaration> getSubDeclarationList();
 
   @NotNull
   List<PerlSubDefinition> getSubDefinitionList();
+
+  @NotNull
+  List<PerlUndefStatement> getUndefStatementList();
+
+  @NotNull
+  List<PerlUnlessStatementModifier> getUnlessStatementModifierList();
+
+  @NotNull
+  List<PerlUntilStatementModifier> getUntilStatementModifierList();
+
+  @NotNull
+  List<PerlUseStatement> getUseStatementList();
+
+  @NotNull
+  List<PerlWhenStatementModifier> getWhenStatementModifierList();
+
+  @NotNull
+  List<PerlWhileStatementModifier> getWhileStatementModifierList();
 
 }

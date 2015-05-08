@@ -10,6 +10,9 @@ public class PerlCodeBlockState implements Cloneable
 {
 	protected HashMap<String,Boolean> features;
 
+	protected PerlSub subDefinition;
+	protected PerlSub subDeclaration;
+
 	protected final PerlSyntaxTrap stringsTrap = new PerlSyntaxTrap();
 	protected final PerlSyntaxTrap packagesTrap = new PerlSyntaxTrap();
 	protected final PerlSyntaxTrap versionsTrap = new PerlSyntaxTrap();
@@ -36,18 +39,36 @@ public class PerlCodeBlockState implements Cloneable
 		features = new HashMap<String, Boolean>(original.features);
 	}
 
+	/**
+	 * Check if feature enabled by it's name
+	 * @param featureName	feature name
+	 * @return	status
+	 */
 	protected boolean isFeatureEnabled(String featureName)
 	{
 		return isFeatureValid(featureName) && features.get(featureName);
 	}
 
+	/**
+	 * Checks if feature name valid @todo mark invalid features
+	 * @param featureName	feature name
+	 * @return	status
+	 */
 	public boolean isFeatureValid(String featureName)
 	{
 		return features.get(featureName) != null;
 	}
 
+	/**
+	 * Checks if signatures enabled in current scope
+	 * @return	status
+	 */
 	public boolean isSignaturesEnabled(){return isFeatureEnabled("signatures");}
 
+	/**
+	 * Applying positive change to current state: use ...
+	 * @param c state change object
+	 */
 	public void use(PerlCodeBlockStateChange c)
 	{
 		if( "feature".equals(c.packageName))
@@ -58,14 +79,12 @@ public class PerlCodeBlockState implements Cloneable
 					features.put(featureName, true);
 			}
 		}
-//		System.out.println("Changing state use: ");
-//		System.out.println("Perl version: " + c.perlVersion);
-//		System.out.println("Package: " + c.packageName);
-//		System.out.println("Package version: " + c.packageVersion);
-//		if( c.packageParams != null )
-//			System.out.println("Package params: " + c.packageParams.toString());
 	}
 
+	/**
+	 * Applying negative change to the current state: no ...
+	 * @param c state change object
+	 */
 	public void no(PerlCodeBlockStateChange c)
 	{
 		if( "feature".equals(c.packageName))
@@ -76,14 +95,9 @@ public class PerlCodeBlockState implements Cloneable
 					features.put(featureName, false);
 			}
 		}
-//		System.out.println("Changing state no:");
-//		System.out.println("Perl version: " + c.perlVersion);
-//		System.out.println("Package: " + c.packageName);
-//		System.out.println("Package version: " + c.packageVersion);
-//		if( c.packageParams != null )
-//			System.out.println("Package params: " + c.packageParams.toString());
 	}
 
+	// getters and setters
 	public PerlSyntaxTrap getStringsTrap()
 	{
 		return stringsTrap;
@@ -97,5 +111,25 @@ public class PerlCodeBlockState implements Cloneable
 	public PerlSyntaxTrap getVersionsTrap()
 	{
 		return versionsTrap;
+	}
+
+	public PerlSub getSubDefinition()
+	{
+		return subDefinition;
+	}
+
+	public PerlSub getSubDeclaration()
+	{
+		return subDeclaration;
+	}
+
+	public void setSubDefinition(PerlSub subDefinition)
+	{
+		this.subDefinition = subDefinition;
+	}
+
+	public void setSubDeclaration(PerlSub subDeclaration)
+	{
+		this.subDeclaration = subDeclaration;
 	}
 }

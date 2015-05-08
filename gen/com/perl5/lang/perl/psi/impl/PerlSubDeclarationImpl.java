@@ -11,14 +11,14 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlSubDeclarationStatementImpl extends ASTWrapperPsiElement implements PerlSubDeclarationStatement {
+public class PerlSubDeclarationImpl extends ASTWrapperPsiElement implements PerlSubDeclaration {
 
-  public PerlSubDeclarationStatementImpl(ASTNode node) {
+  public PerlSubDeclarationImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubDeclarationStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubDeclaration(this);
     else super.accept(visitor);
   }
 

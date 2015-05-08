@@ -65,7 +65,7 @@ NUMBER = [0-9_]+( "." [0-9_]+ )?
 THE_END         = __END__
 THE_DATA        = __DATA__
 
-PERL_OPERATORS = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp" | ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | ":" | "=" | "+=" | "-=" | "*="
+PERL_OPERATORS = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp" | ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
 
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
@@ -294,6 +294,7 @@ TRANS_MODIFIERS = [cdsr]
 
 {QUOTE}         {return processStringOpener();}
 
+":"             {return PERL_COLON;}
 "::"            {return PERL_DEPACKAGE;}
 "->"            {return PERL_DEREFERENCE;}
 "=>"            {return PERL_ARROW_COMMA; } // for barewords in array
