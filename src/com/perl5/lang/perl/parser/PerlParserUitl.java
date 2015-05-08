@@ -6,6 +6,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlBuilder;
 
@@ -57,15 +58,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			{
 				try{
 					((PerlBuilder) b).commitSubDefinition();
-				}
-				catch(Exception e)
-				{
-					mainMarker.errorBefore("Something bad happened", bodyMarker);
-				}
-				finally
-				{
 					bodyMarker.drop();
 					mainMarker.drop();
+				}
+				catch(PerlParsingException e)
+				{
+					mainMarker.errorBefore(e.getMessage(), bodyMarker);
 				}
 
 				return true;
@@ -96,25 +94,22 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			// sub name
 			PsiBuilder.Marker m = b.mark();
-			((PerlBuilder) b).beginSubDefinition(b.getTokenText());
+			((PerlBuilder) b).beginSubDeclaration(b.getTokenText());
 			b.advanceLexer();
 			m.collapse(PERL_FUNCTION);
 
 			// params
-			PerlParser.sub_declaration_parameters(b,l);
+			PerlParser.sub_declaration_parameters(b, l);
 
 			if( b.getTokenType() == PERL_SEMI)
 			{
 				try{
 					((PerlBuilder) b).commitSubDeclaration();
-				}
-				catch(Exception e)
-				{
-					mainMarker.error("Something bad happened");
-				}
-				finally
-				{
 					mainMarker.drop();
+				}
+				catch(PerlParsingException e)
+				{
+					mainMarker.error(e.getMessage());
 				}
 
 				return true;
@@ -631,39 +626,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 
-		return false;
-	}
-
-	///////////////////////// old thing
-
-	public static boolean parseCallArguments(PsiBuilder b, int l)
-	{
-		if( b.getTokenType() == PERL_LBRACE )
-		{
-			PsiBuilder.Marker m = b.mark();
-			boolean r = PerlParser.block(b, l);
-			if( r )
-			{
-				IElementType nextTokenType = b.getTokenType(); // @todo actually this depends on signature, check in annotator
-				if(
-					nextTokenType == PERL_SEMI
-					|| nextTokenType == PERL_COMMA
-				)
-				{
-					m.rollbackTo();
-				}
-				else
-				{
-					m.drop();
-					return true;
-				}
-			}
-			else
-			{
-				m.rollbackTo();
-			}
-
-		}
 		return false;
 	}
 

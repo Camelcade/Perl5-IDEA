@@ -2,19 +2,18 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
-import com.intellij.lang.impl.PsiBuilderAdapter;
-import com.intellij.lang.impl.PsiBuilderImpl;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.lexer.Lexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.PerlTokenType;
+import com.perl5.lang.perl.exceptions.PerlParsingException;
+import com.perl5.lang.perl.exceptions.SubDeclaredException;
+import com.perl5.lang.perl.exceptions.SubDefinedException;
+import com.perl5.lang.perl.exceptions.SubDefinitionDiffersDeclarationException;
 import com.perl5.lang.perl.parser.PerlCodeBlockState;
 import com.perl5.lang.perl.parser.PerlSub;
 import com.perl5.lang.perl.parser.PerlTokenData;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -45,19 +44,19 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	/**
 	 * Commiting sub definition, checking if not already defined, if consistent with earlier declaration
 	 */
-	public void commitSubDefinition() throws Exception
+	public void commitSubDefinition() throws PerlParsingException
 	{
 		PerlSub sub = getCurrentBlockState().getSubDefinition();
-		if( sub == null )
-		{
-			throw new Exception("No subs defined on commit");
-		}
+		assert sub != null;
+
 		getCurrentBlockState().setSubDefinition(null);
 
-		// @todo check with declarations, exception
-		// @todo check with already defined, exception
+		if( definedSubs.get(sub.getName()) != null )
+			throw new SubDefinedException("Sub %s already defined in current lexical scope", sub.getName());
 
-//		System.out.printf("Commiting sub definition: %s", sub.getName());
+		if( declaredSubs.get(sub.getName()) != null && !sub.lookAlike(declaredSubs.get(sub.getName())))
+			throw new SubDefinitionDiffersDeclarationException("Sub %s differs from it's declaration", sub.getName());
+
 		definedSubs.put(sub.getName(), sub);
 	}
 
@@ -74,19 +73,19 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	 * Commiting sub declaration
 	 * @throws Exception
 	 */
-	public void commitSubDeclaration() throws Exception
+	public void commitSubDeclaration() throws PerlParsingException
 	{
 		PerlSub sub = getCurrentBlockState().getSubDeclaration();
-		if( sub == null )
-		{
-			throw new Exception("No subs declared on commit");
-		}
+		assert sub != null;
+
 		getCurrentBlockState().setSubDeclaration(null);
 
-		// @todo check with already declared, exception
-		// @todo check with already defined, exception
+		if( definedSubs.get(sub.getName()) != null )
+			throw new SubDefinedException("Sub %s already defined in the current lexical scope", sub.getName());
 
-//		System.out.printf("Commiting sub declaration: %s", sub.getName());
+		if( declaredSubs.get(sub.getName()) != null )
+			throw new SubDeclaredException("Sub %s already declared in the current lexical scope", sub.getName());
+
 		declaredSubs.put(sub.getName(), sub);
 	}
 

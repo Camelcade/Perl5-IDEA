@@ -50,7 +50,7 @@ public class PerlCodeBlockState implements Cloneable
 	}
 
 	/**
-	 * Checks if feature name valid @todo mark invalid features
+	 * Checks if feature name valid
 	 * @param featureName	feature name
 	 * @return	status
 	 */
