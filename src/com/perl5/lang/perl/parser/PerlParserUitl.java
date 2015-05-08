@@ -116,25 +116,21 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			PerlTokenData nextToken = ((PerlBuilder) b).getAheadToken(1);
 			PerlTokenData nextNextToken = ((PerlBuilder) b).getAheadToken(2);
 
-			PerlTokenData prevToken = ((PerlBuilder) b).getBehindToken(1);
+			PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
 
 			PsiBuilder.Marker m = b.mark();
 
-			// hash element like {BAREWORD}
-			if (nextToken != null && prevToken != null && nextToken.getTokenType() == PERL_RBRACE && prevToken.getTokenType() == PERL_LBRACE)
+			// bareword ( - function call for sure
+			if( nextToken != null && nextToken.getTokenType() == PERL_LPAREN )
 			{
 				b.advanceLexer();
-				m.collapse(PERL_STRING_CONTENT);
+				m.collapse(PERL_FUNCTION);
 				return true;
+
 			}
-			// filehandle <BAREWORD>
-			else if (nextToken != null && prevToken != null && nextToken.getTokenType() == PERL_RANGLE && prevToken.getTokenType() == PERL_LANGLE)
-			{
-				b.advanceLexer();
-				m.collapse(PERL_FILEHANDLE);
-				return true;
-			}
+			// check for built ins
 			// method package() invocation
+			// we should check if methods are defined if strict is enabled, so we need methods in blockstate
 			else if (nextToken != null && nextToken.getTokenType() == PERL_BAREWORD && nextRawTokenType == TokenType.WHITE_SPACE)
 			{
 				PsiBuilder.Marker markFunction = b.mark();
@@ -152,10 +148,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 					m.rollbackTo();
 				}
 			}
+			// pac::age->method	-
+			// pack::age::method - how to distinct metod from package part?
 			// package->method
-			// pac::age->method
-			// method->method
-			// pack::age::method
+			// method->method	- in first occurance, how to distinct method from package?
 			else if (
 					nextToken != null
 					&& nextNextToken != null

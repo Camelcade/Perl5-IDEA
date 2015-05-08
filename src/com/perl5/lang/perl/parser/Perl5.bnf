@@ -60,6 +60,7 @@
 
     PERL_COMMA=','
     PERL_ARROW_COMMA='=>'
+    PERL_DEREFERENCE='->'
     PERL_DEPACKAGE='::'
     PERL_LBRACK='['
     PERL_RBRACK=']'
@@ -266,7 +267,7 @@ private term ::=
 
 private function_call ::= callable "(" expr ? ")"
 
-file_read_term ::= '<' (<<guessBareword>> | expr )? '>'
+file_read_term ::= '<' (PERL_BAREWORD | expr )? '>'
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -342,11 +343,11 @@ private variable ::= scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
 private scalar ::=
     PERL_SCALAR nested_element    // hash or array item
     | PERL_SCALAR
-    | PERL_SIGIL_SCALAR "{" <<guessBareword>> "}"
+    | PERL_SIGIL_SCALAR "{" PERL_BAREWORD "}"
     | 'undef'
 
 private nested_element ::=
-    "{" (<<guessBareword>> | expr ) "}"
+    "{" (PERL_BAREWORD | expr ) "}"
     | "[" (PERL_NUMBER | expr ) "]"
     | function_call     // @todo this should be handled differently, left token should be a package if it's bareword
 
@@ -380,7 +381,7 @@ private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
 //private string_unquoted ::= <<parseBarewordString>>
 
 label_declaration ::= label ":" // do we need to change tokentype?
-label ::= <<guessBareword>>
+label ::= PERL_BAREWORD
 private perl_version ::= <<parseVersion>>
 private perl_package ::= <<parseBarewordPackage>>
 

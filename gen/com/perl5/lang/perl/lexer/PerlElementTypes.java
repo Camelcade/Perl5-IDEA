@@ -91,6 +91,7 @@ public interface PerlElementTypes {
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
+  IElementType PERL_DEREFERENCE = new PerlTokenType("->");
   IElementType PERL_FILEHANDLE = new PerlTokenType("PERL_FILEHANDLE");
   IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
   IElementType PERL_GLOB = new PerlTokenType("PERL_GLOB");
