@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlOp20Expr extends PerlExpr {
 
   @NotNull
-  List<PerlExpr> getExprList();
+  PerlExpr getExpr();
 
 }

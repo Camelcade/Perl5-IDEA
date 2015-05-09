@@ -250,10 +250,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			}
 			else if (nextToken != null && nextToken.getTokenType() == PERL_BAREWORD && nextRawTokenType == TokenType.WHITE_SPACE)
 			{
-				// print filehandle
-				// say filehandle THIS IS ALL WRONG, can be print gettext;
-				// @todo this should be checked with internal handlers list
-				if( "print".equals(currentTokenText) || "say".equals(currentTokenText))
+				//
+				if( ((PerlBuilder) b).isKnownHandle(nextToken.getTokenText()))
 				{
 					parseBarewordFunction(b,l);
 					parseBarewordHandle(b, l);
@@ -263,7 +261,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				// function1 ...
 				else if( isKnownFunction(b, currentTokenText))
 				{
-					parseBarewordFunction(b,l);
+					parseBarewordFunction(b, l);
 					m.drop();
 					return true;
 				}
@@ -382,9 +380,20 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		if( b.getTokenType() == PERL_BAREWORD )
 		{
+			assert b instanceof PerlBuilder;
+
+			String handle = b.getTokenText();
+			((PerlBuilder) b).setLastParsedHandle(handle);
+
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(PERL_FILEHANDLE);
+
+			if(((PerlBuilder) b).isKnownHandle(handle))
+				m.collapse(PERL_FILEHANDLE);
+			else
+			{
+				m.error(String.format("Unknown file handle %s", handle));
+			}
 
 			return true;
 		}
@@ -475,7 +484,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		PerlPackage namespace = state.getNamespace();
 
-		PerlPackageFile perlPackageFile = ((PerlBuilder) b).loadPackage(packageName);
+		PerlPackageFile perlPackageFile = ((PerlBuilder) b).getPackageFile(packageName);
 
 		if( !perlPackageFile.isLoaded())
 			m.error(String.format("Can't find package file %s in the %%INC path: %s", perlPackageFile.getFilename(), PerlLanguage.INSTANCE.getLibPaths().toString()));
@@ -490,10 +499,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
-	public static boolean parseRightCallArguments(PsiBuilder b, int l )
+	public static boolean parseExpressionLevel(PsiBuilder b, int l, int g )
 	{
-		PerlParser.expr(b,l,3); // optional. Standart generator makes it with -1 level
-		return true;
+		return PerlParser.expr(b,l,g);
 	}
 
 	/*

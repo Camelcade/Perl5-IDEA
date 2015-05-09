@@ -3,10 +3,6 @@ package com.perl5.lang.perl.psi;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileUrlChangeAdapter;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
 import com.perl5.lang.perl.PerlLanguage;
@@ -26,10 +22,13 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
 	protected final Stack<PerlCodeBlockState> blockState = new Stack<PerlCodeBlockState>();
 	protected final HashMap<String,PerlPackage> nameSpaces = new HashMap<String, PerlPackage>();
+
 	protected final HashMap<String,PerlPackageFile> loadedPackageFiles = new HashMap<String, PerlPackageFile>();
+	protected final ArrayList<String> knownFileHandles = new ArrayList<String>(Arrays.asList("STDERR","STDIN","STDOUT"));
 
 	protected String lastParsedPackage;
 	protected String lastParsedVersion;
+	protected String lastParsedHandle;
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
@@ -200,7 +199,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	}
 
 	// @todo here we need to get parsed package
-	public PerlPackageFile loadPackage(String packageName)
+	public PerlPackageFile getPackageFile(String packageName)
 	{
 		PerlPackageFile file = loadedPackageFiles.get(packageName);
 
@@ -214,5 +213,26 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		}
 
 		return file;
+	}
+
+	public boolean isKnownHandle(String name)
+	{
+		return knownFileHandles.contains(name);
+	}
+
+	public void registerFileHandle(String name)
+	{
+		if( !isKnownHandle(name))
+			knownFileHandles.add(name);
+	}
+
+	public String getLastParsedHandle()
+	{
+		return lastParsedHandle;
+	}
+
+	public void setLastParsedHandle(String lastParsedHandle)
+	{
+		this.lastParsedHandle = lastParsedHandle;
 	}
 }

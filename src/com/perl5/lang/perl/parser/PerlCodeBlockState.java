@@ -25,7 +25,12 @@ public class PerlCodeBlockState
 	{
 		namespace = original.getNamespace();
 		for( PerlPackagePragma pragma: original.getPragmas().values())
-			pragmas.put(pragma.getName(), new PerlPackagePragma(pragma));
+		{
+			if( pragma instanceof PerlPackagePragmaFeatures )
+				pragmas.put(pragma.getName(), new PerlPackagePragmaFeatures((PerlPackagePragmaFeatures)pragma));
+			else
+				pragmas.put(pragma.getName(), new PerlPackagePragma(pragma));
+		}
 	}
 
 

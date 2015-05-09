@@ -198,7 +198,7 @@ no_statement ::= 'no' <<parseNoStatement>> {pin=1}
 
 undef_statement ::= "undef" variable {pin=1}
 
-require_statement ::= 'require' (perl_package | perl_version | string) // multiline string is possible too
+require_statement ::= 'require' (perl_package | perl_version | string)  {pin=1} // multiline string is possible too
 
 //private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | <<eof>>)
 //private recover_block ::= !(PERL_RBRACE | <<eof>>)
@@ -236,7 +236,7 @@ private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
 op_3_suff_expr ::= expr ('++'|'--')
 op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
-op_5_expr ::= ('\' | '~'| '!'| '+' | '-') !PERL_BAREWORD expr { rightAssociative=true }
+op_5_expr ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true } // !PERL_BAREWORD - removed cause !function
 op_6_expr ::= expr ('=~'|'!~') expr
 op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
 op_8_expr ::= expr ('+'|'-'|'.') !PERL_BAREWORD expr
@@ -253,9 +253,9 @@ op_17_expr ::= expr ('..'|'...') expr
 op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
-op_20_expr ::= expr	(',' | '=>') expr ? // last comma in the list
+op_20_expr ::= expr (','|'=>') <<parseExpressionLevel 4>> ?
 
-op_21_expr ::= callable !"(" <<parseRightCallArguments>>
+op_21_expr ::= callable !"(" <<parseExpressionLevel 3>> ?
 op_22_expr ::= 'not' expr { rightAssociative=true }
 op_23_expr ::= expr 'and' expr
 op_24_expr ::= expr ('or'|'xor') expr
@@ -263,7 +263,6 @@ op_24_expr ::= expr ('or'|'xor') expr
 private term ::=
     variable
     | variable_declaration
-    | function_call
     | PERL_OPERATOR_UNARY "(" expr ? ")" // named operators as functions
     | "(" expr ? ")"
     | scalar_primitive
@@ -273,10 +272,15 @@ private term ::=
     | regex_term
     | file_read_term
     | reference_value
+    | print_term
+    | function_call
+
+private print_term ::= ("print"|"say") ( "(" print_arguments ? ")" | print_arguments ? ) {pin=1}
+private print_arguments ::= perl_handle expr | expr
 
 private function_call ::= callable "(" expr ? ")"
 
-file_read_term ::= '<' (PERL_BAREWORD | expr )? '>'
+file_read_term ::= '<' perl_handle ? '>'
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -393,6 +397,7 @@ label_declaration ::= label ":" // do we need to change tokentype?
 label ::= PERL_BAREWORD
 private perl_version ::= <<parseVersion>>
 private perl_package ::= <<parseBarewordPackage>>
+private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR | "{" expr "}"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //

@@ -23,8 +23,8 @@ public class PerlOp20ExprImpl extends PerlExprImpl implements PerlOp20Expr {
 
   @Override
   @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  public PerlExpr getExpr() {
+    return findNotNullChildByClass(PerlExpr.class);
   }
 
 }
