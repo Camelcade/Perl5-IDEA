@@ -217,12 +217,53 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			IElementType nextRawTokenType = b.rawLookup(1);
 			PerlTokenData nextToken = ((PerlBuilder) b).getAheadToken(1);
 			PerlTokenData nextNextToken = ((PerlBuilder) b).getAheadToken(2);
+			String currentTokenText = b.getTokenText();
 
 			PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
 
 			PsiBuilder.Marker m = b.mark();
 
-			// bareword ( - function call for sure
+
+			// it's a parent package method call like $self->SUPER::method
+			if( "SUPER".equals(currentTokenText) )
+			{
+				if( parsePackageFunctionCall(b,l))
+				{
+					m.drop();
+					return true;
+				}
+
+			}
+			// bareword bareword
+			// method package
+			else if (nextToken != null && nextToken.getTokenType() == PERL_BAREWORD && nextRawTokenType == TokenType.WHITE_SPACE)
+			{
+				// print filehandle
+				// say filehandle
+				// @todo this should be checked with internal handlers list
+				if( "print".equals(currentTokenText) || "say".equals(currentTokenText))
+				{
+					parseBarewordFunction(b,l);
+					parseBarewordHandle(b, l);
+					m.drop();
+					return true;
+				}
+				// function1 ...
+				else if( ((PerlBuilder) b).isKnownFunction(currentTokenText))
+				{
+					parseBarewordFunction(b,l);
+					m.drop();
+					return true;
+				}
+			}
+			// just known function
+			else if( ((PerlBuilder) b).isKnownFunction(currentTokenText))
+			{
+				parseBarewordFunction(b,l);
+				m.drop();
+				return true;
+			}
+/*
 			if( nextToken != null && nextToken.getTokenType() == PERL_LPAREN )
 			{
 				b.advanceLexer();
@@ -232,13 +273,15 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			}
 			else if( nextToken != null && nextToken.getTokenType() == PERL_DEPACKAGE )
 			{
-				/* ok, it's a package all right. Can be:
+				*/
+/* ok, it's a package all right. Can be:
 					package
 					package::method
 					method package::
 					package->
 					 package
-				 */
+				 *//*
+
 
 			}
 			// check for built ins
@@ -283,10 +326,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 					m.rollbackTo();
 				}
 			}
-
+*/
 			// couldn't guess
 			b.advanceLexer();
 			m.error("Could'n t guess a bareword");
+
 			return true;
 		}
 
@@ -325,6 +369,82 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		return false;
 	}
+
+	/**
+	 * Function marks current bareword as a function
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
+	public static boolean parseBarewordFunction(PsiBuilder b, int l ) {
+
+		if( b.getTokenType() == PERL_BAREWORD )
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(PERL_FUNCTION);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Function marks current bareword as a filehandle
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
+	public static boolean parseBarewordHandle(PsiBuilder b, int l ) {
+
+		if( b.getTokenType() == PERL_BAREWORD )
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(PERL_FILEHANDLE);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Function parses construct like package::method
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parsePackageFunctionCall(PsiBuilder b, int l ) {
+
+		if(b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) == PERL_DEPACKAGE && b.lookAhead(2) == PERL_BAREWORD )
+		{
+			PsiBuilder.Marker m = b.mark();
+
+			while(
+					b.lookAhead(3) == PERL_DEPACKAGE && b.lookAhead(4) == PERL_BAREWORD
+					)
+			{
+				b.advanceLexer();
+				b.advanceLexer();
+			}
+
+			b.advanceLexer(); // package rest
+			b.advanceLexer(); // depackage
+
+			m.collapse(PERL_PACKAGE);
+
+			m = b.mark();
+			b.advanceLexer();
+			m.collapse(PERL_FUNCTION);
+
+			return true;
+		}
+
+		return false;
+	}
+
 
 	/**
 	 * Trying to parse:  bare => 'smth' construction
@@ -585,50 +705,5 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return getCurrentBlockState(b).getStringsTrap();
 	}
 
-/*
-	public static boolean parseBarewordFunction(PsiBuilder b, int l ) {
-
-		if( b.getTokenType() == PERL_BAREWORD )
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(PERL_FUNCTION);
-
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean parsePackageFunctionCall(PsiBuilder b, int l ) {
-
-		if(b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) == PERL_DEPACKAGE && b.lookAhead(2) == PERL_BAREWORD )
-		{
-			PsiBuilder.Marker m = b.mark();
-
-			while(
-					b.lookAhead(3) == PERL_DEPACKAGE && b.lookAhead(4) == PERL_BAREWORD
-					)
-			{
-				b.advanceLexer();
-				b.advanceLexer();
-			}
-
-			b.advanceLexer(); // package rest
-			b.advanceLexer(); // depackage
-
-			m.collapse(PERL_PACKAGE);
-
-			m = b.mark();
-			b.advanceLexer();
-			m.collapse(PERL_FUNCTION);
-
-			return true;
-		}
-
-		return false;
-	}
-
-*/
 
 }

@@ -65,10 +65,6 @@ public class PerlCompletionContributor extends CompletionContributor
 						{
 							resultSet.addElement(LookupElementBuilder.create(functionName));
 						}
-						for( String functionName: PerlFunctionUtil.IMPLEMENTED )
-						{
-							resultSet.addElement(LookupElementBuilder.create(functionName));
-						}
 
 						// append prevoiusly defined functions;
 						// @todo we should check all included files for the current package and check functions in there

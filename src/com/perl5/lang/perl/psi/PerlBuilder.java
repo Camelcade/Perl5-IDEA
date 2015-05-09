@@ -13,6 +13,7 @@ import com.perl5.lang.perl.exceptions.SubDefinitionDiffersDeclarationException;
 import com.perl5.lang.perl.parser.PerlCodeBlockState;
 import com.perl5.lang.perl.parser.PerlSub;
 import com.perl5.lang.perl.parser.PerlTokenData;
+import com.perl5.lang.perl.util.PerlFunctionUtil;
 
 import java.util.HashMap;
 
@@ -30,6 +31,19 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
 	}
+
+
+	/**
+	 * Method checks barewrod with defined and built-in functions
+	 * @param name bareword value
+	 * @return	true if known function, false if not
+	 * @todo we should check imported functions here
+	 */
+	public boolean isKnownFunction(String name)
+	{
+		return declaredSubs.containsKey(name) || definedSubs.containsKey(name) || PerlFunctionUtil.isBuiltIn(name);
+	}
+
 
 	/**
 	 * Stores sub definition name for current parsing level

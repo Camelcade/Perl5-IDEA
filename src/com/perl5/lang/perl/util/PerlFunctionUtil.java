@@ -360,10 +360,9 @@ public class PerlFunctionUtil implements PerlElementTypes
 			"ne",
 			"not",
 			"or",
-			"xor"
-	));
+			"xor",
 
-	public static final ArrayList<String> IMPLEMENTED = new ArrayList<String>( Arrays.asList(
+			// were in implemented
 			"eval",
 			"if",
 			"package",
@@ -372,29 +371,17 @@ public class PerlFunctionUtil implements PerlElementTypes
 			"use"
 	));
 
-
 	// @todo remake map
 	static{
 		for( String functionName: BUILT_IN )
 		{
 			knownFunctions.put(functionName, PERL_FUNCTION);
 		}
-		for( String functionName: IMPLEMENTED )
-		{
-			knownFunctions.put(functionName, PERL_FUNCTION);
-		}
 	}
 
-	public static IElementType getFunctionType(String function)
+	public static boolean isBuiltIn(String function)
 	{
-		IElementType functionType;
-
-		functionType = knownFunctions.get(function);
-
-		return functionType == null
-				? PERL_FUNCTION
-				: functionType;
+		return BUILT_IN.contains(function);
 	}
-
 
 }

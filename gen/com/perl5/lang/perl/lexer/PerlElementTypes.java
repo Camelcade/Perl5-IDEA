@@ -95,6 +95,7 @@ public interface PerlElementTypes {
   IElementType PERL_FILEHANDLE = new PerlTokenType("PERL_FILEHANDLE");
   IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
   IElementType PERL_GLOB = new PerlTokenType("PERL_GLOB");
+  IElementType PERL_HADLE = new PerlTokenType("PERL_HANDLE");
   IElementType PERL_HASH = new PerlTokenType("PERL_HASH");
   IElementType PERL_KEYWORD = new PerlTokenType("PERL_KEYWORD");
   IElementType PERL_LANGLE = new PerlTokenType("<");
