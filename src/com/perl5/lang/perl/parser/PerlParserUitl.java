@@ -125,7 +125,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Parsing file entry point. Inits codeblock states, makes code
+	 * Parsing file entry point. Inits codeblock states, default namespace
 	 * @param b	PerlBuilder
 	 * @param l	parsing level
 	 * @return	parsing result
@@ -134,7 +134,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 
-		((PerlBuilder) b).initCodeBlockStateStack(); // push default
+		((PerlBuilder) b).initCodeBlockStateStack(); // init states stack
+		getCurrentBlockState(b).setNamespace(((PerlBuilder) b).getNamespace("main")); // switch to main namespace
 
 		PsiBuilder.Marker m = b.mark();
 		boolean r = PerlParser.file_items(b, l);
@@ -170,36 +171,48 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
-
 	/**
-	 * Parser for package contents with states handling
-	 * @param b PerlBuilder
-	 * @param l level
-	 * @return	result of parsing package_plainp
+	 * Parses perl package definition, creates namespace in builder, procesing content in scope
+	 * @param b	PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
 	 */
-	public static boolean parsePackageContents(PsiBuilder b, int l)
+
+	public static boolean parsePerlPackage(PsiBuilder b, int l)
 	{
-		assert b instanceof PerlBuilder;
-
-		((PerlBuilder) b).pushCodeBlockState(b.getTokenText());
-
-		PsiBuilder.Marker m = b.mark();
-
-		boolean r = PerlParser.package_plain(b, l);
-
-		if(r)
+		if( b.getTokenType() == PERL_BAREWORD )
 		{
-			m.done(BLOCK);
-		}
-		else
-		{
-			m.drop();
+			if( parseBarewordPackage(b,l))
+			{
+				assert b instanceof PerlBuilder;
+
+				// package name
+				PerlPackage namespace = ((PerlBuilder) b).getNamespace(((PerlBuilder) b).getLastParsedPackage());
+
+				// package version
+				if( parseVersion(b,l))
+				{
+					namespace.setVersion(new PerlVersion(((PerlBuilder) b).getLastParsedVersion()));
+				}
+
+				// set namespace for following code
+				((PerlBuilder) b).pushCodeBlockState(b.getTokenText());
+				getCurrentBlockState(b).setNamespace(namespace);
+
+				// package content
+				boolean r = consumeToken(b, PERL_SEMI) && PerlParser.package_plain(b, l)
+						|| PerlParser.block(b,l);
+
+				// @todo we should read vars from here
+				// @todo if something bad happened, we must be able to rollback; so we need to be able to merge namespaces
+				((PerlBuilder) b).popCodeBlockState(b.getTokenText());
+				return r;
+			}
 		}
 
-		((PerlBuilder) b).popCodeBlockState(b.getTokenText());
-
-		return r;
+		return false;
 	}
+
 
 
 	/**
@@ -227,19 +240,17 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// it's a parent package method call like $self->SUPER::method
 			if( "SUPER".equals(currentTokenText) )
 			{
-				if( parsePackageFunctionCall(b,l))
+				if( parseBarewordPackageFunctionCall(b, l))
 				{
 					m.drop();
 					return true;
 				}
 
 			}
-			// bareword bareword
-			// method package
 			else if (nextToken != null && nextToken.getTokenType() == PERL_BAREWORD && nextRawTokenType == TokenType.WHITE_SPACE)
 			{
 				// print filehandle
-				// say filehandle
+				// say filehandle THIS IS ALL WRONG, can be print gettext;
 				// @todo this should be checked with internal handlers list
 				if( "print".equals(currentTokenText) || "say".equals(currentTokenText))
 				{
@@ -249,84 +260,54 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 					return true;
 				}
 				// function1 ...
-				else if( ((PerlBuilder) b).isKnownFunction(currentTokenText))
+				else if( isKnownFunction(b, currentTokenText))
 				{
 					parseBarewordFunction(b,l);
 					m.drop();
 					return true;
 				}
+				// here we thinks it's a method package call
+				else
+				{
+					parseBarewordFunction(b,l);
+					parseBarewordPackage(b,l);
+					m.drop();
+					return true;
+				}
 			}
+			// bareword::bareword construction
+			// can be a package or package::method
+			else if(nextToken != null && nextToken.getTokenType() == PERL_DEPACKAGE )
+			{
+				// parsed package and next token is ->, so it's a package (actually it's not, could be package::method->method)
+				if( parseBarewordPackage(b,l) && b.lookAhead(1) == PERL_DEREFERENCE)
+				{
+					m.drop();
+					return true;
+				}
+
+				m.rollbackTo();
+
+				m = b.mark();
+				parseBarewordPackageFunctionCall(b,l);
+				m.drop();
+				return true;
+			}
+			// bareword->bareword construction
+			// can be a package->method
+			// or chained method->method
+//			else if(nextToken != null && nextToken.getTokenType() == PERL_DEREFERENCE )
+//			{
+//
+//			}
 			// just known function
-			else if( ((PerlBuilder) b).isKnownFunction(currentTokenText))
+			else if( isKnownFunction(b, currentTokenText))
 			{
 				parseBarewordFunction(b,l);
 				m.drop();
 				return true;
 			}
-/*
-			if( nextToken != null && nextToken.getTokenType() == PERL_LPAREN )
-			{
-				b.advanceLexer();
-				m.collapse(PERL_FUNCTION);
-				return true;
 
-			}
-			else if( nextToken != null && nextToken.getTokenType() == PERL_DEPACKAGE )
-			{
-				*/
-/* ok, it's a package all right. Can be:
-					package
-					package::method
-					method package::
-					package->
-					 package
-				 *//*
-
-
-			}
-			// check for built ins
-			// method package() invocation
-			// we should check if methods are defined if strict is enabled, so we need methods in blockstate
-			else if (nextToken != null && nextToken.getTokenType() == PERL_BAREWORD && nextRawTokenType == TokenType.WHITE_SPACE)
-			{
-				PsiBuilder.Marker markFunction = b.mark();
-				b.advanceLexer();
-				markFunction.collapse(PERL_FUNCTION);
-
-				boolean r = parseBarewordPackage(b, l);
-
-				if (r)
-				{
-					m.drop();    // we may collapse/done here to some kind of calee
-					return true;
-				} else
-				{
-					m.rollbackTo();
-				}
-			}
-			// pac::age->method	-
-			// pack::age::method - how to distinct metod from package part?
-			// package->method
-			// method->method	- in first occurance, how to distinct method from package?
-			else if (
-					nextToken != null
-					&& nextNextToken != null
-					&& "->".equals(nextToken.getTokenText())
-					&& nextNextToken.getTokenType() == PERL_BAREWORD
-			)
-			{
-				boolean r = parseBarewordPackage(b, l);
-
-				if (r)
-				{
-					m.drop();    // we may collapse/done here to some kind of calee
-					return true;
-				} else
-				{
-					m.rollbackTo();
-				}
-			}
-*/
 			// couldn't guess
 			b.advanceLexer();
 			m.error("Could'n t guess a bareword");
@@ -360,7 +341,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			}
 
 			assert b instanceof PerlBuilder;
-			getPackagesTrap(b).capture(packageName.toString());
+			((PerlBuilder) b).setLastParsedPackage(packageName.toString());
 
 			b.advanceLexer();
 			m.collapse(PERL_PACKAGE);
@@ -416,7 +397,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean parsePackageFunctionCall(PsiBuilder b, int l ) {
+	public static boolean parseBarewordPackageFunctionCall(PsiBuilder b, int l) {
 
 		if(b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) == PERL_DEPACKAGE && b.lookAhead(2) == PERL_BAREWORD )
 		{
@@ -476,11 +457,27 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parseUseStatement(PsiBuilder b, int l )
 	{
+		PsiBuilder.Marker m = b.mark();
+
 		PerlCodeBlockStateChange c = parseUseParameters(b,l);
 		if( c == null )
+		{
+			m.rollbackTo();
 			return false;
+		}
 
 		getCurrentBlockState(b).use(c);
+
+		PerlPackage namespace = getCurrentBlockState(b).getNamespace();
+
+		if( namespace.isUsing(c.packageName))
+			m.error(String.format("Package %s is already being used in the namespace %s", c.packageName, namespace.getName()));
+		else
+		{
+			namespace.use(c.packageName);
+			m.drop();
+		}
+
 		return true;
 	}
 
@@ -515,7 +512,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parseSubPrototype(PsiBuilder b, int l )
 	{
-		boolean isSignatureEnabled  = getCurrentBlockState(b).isSignaturesEnabled();
+		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
 //		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
 		return false;
 	}
@@ -523,14 +520,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parseSubAttributes(PsiBuilder b, int l )
 	{
-		boolean isSignatureEnabled  = getCurrentBlockState(b).isSignaturesEnabled();
+		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
 //		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
 		return false;
 	}
 
 	public static boolean parseSubSignature(PsiBuilder b, int l )
 	{
-		boolean isSignatureEnabled  = getCurrentBlockState(b).isSignaturesEnabled();
+		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
 //		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
 		return false;
 	}
@@ -565,17 +562,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		PsiBuilder.Marker m = b.mark();
 		PerlCodeBlockStateChange c = null;
 
-		PerlSyntaxTrap vt = getVersionsTrap(b);
-		vt.start();
 		boolean r = parseVersion(b,l);
-		vt.stop();
 
 		if( r ) // use VERSION
 		{
 			if( b.getTokenType() == PERL_SEMI )
 			{
 				c = new PerlCodeBlockStateChange();
-				c.perlVersion = vt.getFistCapture();
+				c.perlVersion = ((PerlBuilder) b).getLastParsedVersion();
 				m.drop();
 			}
 			else
@@ -583,26 +577,21 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		}
 		else
 		{
-			PerlSyntaxTrap t = getPackagesTrap(b);
-			t.start();
 			r = parseBarewordPackage(b, l);
-			t.stop();
 
 			if( r ) // use MODULE
 			{
 				c = new PerlCodeBlockStateChange();
-				c.packageName = t.getFistCapture();
+				c.packageName = ((PerlBuilder) b).getLastParsedPackage();
 
-				vt.start();
 				r = parseVersion(b,l);
-				vt.stop();
 
 				if( r ) // use MODULE VERSION
 				{
-					c.packageVersion = vt.getFistCapture();
+					c.packageVersion = ((PerlBuilder) b).getLastParsedVersion();
 				}
 
-				t = getStringsTrap(b);
+				PerlSyntaxTrap t = getStringsTrap(b);
 				t.start();
 				r = PerlParser.expr(b,l,-1);
 				t.stop();
@@ -643,7 +632,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		if(tokenType == PERL_NUMBER_VERSION || tokenType == PERL_NUMBER)
 		{
 			assert b instanceof PerlBuilder;
-			getVersionsTrap(b).capture(b.getTokenText());
+			((PerlBuilder) b).setLastParsedVersion(b.getTokenText());
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.collapse(PERL_VERSION);
@@ -664,44 +653,21 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
-	public static boolean capturePackages(PsiBuilder b, int l, boolean state ) {
-		assert b instanceof PerlBuilder;
-		PerlSyntaxTrap t = getPackagesTrap(b);
-		if( state )
-			t.start();
-		else
-			t.stop();
-		return true;
-	}
-
-	public static boolean captureVersions(PsiBuilder b, int l, boolean state ) {
-		assert b instanceof PerlBuilder;
-		PerlSyntaxTrap t = getVersionsTrap(b);
-		if( state )
-			t.start();
-		else
-			t.stop();
-		return true;
-	}
-
 	protected static PerlCodeBlockState getCurrentBlockState(PsiBuilder b)
 	{
 		assert b instanceof PerlBuilder;
 		return ((PerlBuilder) b).getCurrentBlockState();
 	}
 
-	protected static PerlSyntaxTrap getVersionsTrap(PsiBuilder b)
+	protected static boolean isKnownFunction(PsiBuilder b, String name)
 	{
-		return getCurrentBlockState(b).getVersionsTrap();
-	}
-
-	protected static PerlSyntaxTrap getPackagesTrap(PsiBuilder b)
-	{
-		return getCurrentBlockState(b).getPackagesTrap();
+		assert b instanceof PerlBuilder;
+		return getCurrentBlockState(b).getNamespace().isKnownFunction(name);
 	}
 
 	protected static PerlSyntaxTrap getStringsTrap(PsiBuilder b)
 	{
+		assert b instanceof PerlBuilder;
 		return getCurrentBlockState(b).getStringsTrap();
 	}
 

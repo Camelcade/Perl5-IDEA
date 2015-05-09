@@ -1021,48 +1021,16 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'package' perl_package perl_version ? package_namespace_content
+  // 'package' <<parsePerlPackage>>
   public static boolean package_namespace(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_namespace")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<package namespace>");
     r = consumeToken(b, "package");
     p = r; // pin = 1
-    r = r && report_error_(b, perl_package(b, l + 1));
-    r = p && report_error_(b, package_namespace_2(b, l + 1)) && r;
-    r = p && package_namespace_content(b, l + 1) && r;
+    r = r && parsePerlPackage(b, l + 1);
     exit_section_(b, l, m, PACKAGE_NAMESPACE, r, p, null);
     return r || p;
-  }
-
-  // perl_version ?
-  private static boolean package_namespace_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "package_namespace_2")) return false;
-    perl_version(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // block_safe | PERL_SEMI <<parsePackageContents>>
-  static boolean package_namespace_content(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "package_namespace_content")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = block_safe(b, l + 1);
-    if (!r) r = package_namespace_content_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // PERL_SEMI <<parsePackageContents>>
-  private static boolean package_namespace_content_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "package_namespace_content_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_SEMI);
-    r = r && parsePackageContents(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */

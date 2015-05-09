@@ -11,6 +11,7 @@ import com.perl5.lang.perl.exceptions.SubDeclaredException;
 import com.perl5.lang.perl.exceptions.SubDefinedException;
 import com.perl5.lang.perl.exceptions.SubDefinitionDiffersDeclarationException;
 import com.perl5.lang.perl.parser.PerlCodeBlockState;
+import com.perl5.lang.perl.parser.PerlPackage;
 import com.perl5.lang.perl.parser.PerlSub;
 import com.perl5.lang.perl.parser.PerlTokenData;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
@@ -24,24 +25,27 @@ import java.util.HashMap;
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
 	protected final Stack<PerlCodeBlockState> blockState = new Stack<PerlCodeBlockState>();
+	protected final HashMap<String,PerlPackage> nameSpaces = new HashMap<String, PerlPackage>();
 
-	protected final HashMap<String,PerlSub> definedSubs = new HashMap<String, PerlSub>();
-	protected final HashMap<String,PerlSub> declaredSubs = new HashMap<String, PerlSub>();
+	protected String lastParsedPackage;
+	protected String lastParsedVersion;
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
 	}
 
-
-	/**
-	 * Method checks barewrod with defined and built-in functions
-	 * @param name bareword value
-	 * @return	true if known function, false if not
-	 * @todo we should check imported functions here
-	 */
-	public boolean isKnownFunction(String name)
+	public PerlPackage getNamespace(String name)
 	{
-		return declaredSubs.containsKey(name) || definedSubs.containsKey(name) || PerlFunctionUtil.isBuiltIn(name);
+		assert name != null;
+		assert !name.equals("");
+
+		PerlPackage nameSpace = nameSpaces.get(name);
+		if( nameSpace == null )
+		{
+			nameSpaces.put(name, new PerlPackage(name));
+			return getNamespace(name);
+		}
+		return nameSpace;
 	}
 
 
@@ -60,18 +64,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	 */
 	public void commitSubDefinition() throws PerlParsingException
 	{
-		PerlSub sub = getCurrentBlockState().getSubDefinition();
+		PerlCodeBlockState state = getCurrentBlockState();
+		assert state != null;
+
+		PerlSub sub = state.getSubDefinition();
 		assert sub != null;
 
-		getCurrentBlockState().setSubDefinition(null);
+		PerlPackage namespace = state.getNamespace();
+		assert namespace != null;
 
-		if( definedSubs.get(sub.getName()) != null )
-			throw new SubDefinedException("Sub %s already defined in current lexical scope", sub.getName());
-
-		if( declaredSubs.get(sub.getName()) != null && !sub.lookAlike(declaredSubs.get(sub.getName())))
-			throw new SubDefinitionDiffersDeclarationException("Sub %s differs from it's declaration", sub.getName());
-
-		definedSubs.put(sub.getName(), sub);
+		state.setSubDefinition(null);
+		namespace.defineSub(sub);
 	}
 
 	/**
@@ -89,18 +92,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	 */
 	public void commitSubDeclaration() throws PerlParsingException
 	{
-		PerlSub sub = getCurrentBlockState().getSubDeclaration();
+		PerlCodeBlockState state = getCurrentBlockState();
+		assert state != null;
+
+		PerlSub sub = state.getSubDeclaration();
 		assert sub != null;
 
-		getCurrentBlockState().setSubDeclaration(null);
+		PerlPackage namespace = state.getNamespace();
+		assert namespace != null;
 
-		if( definedSubs.get(sub.getName()) != null )
-			throw new SubDefinedException("Sub %s already defined in the current lexical scope", sub.getName());
-
-		if( declaredSubs.get(sub.getName()) != null )
-			throw new SubDeclaredException("Sub %s already declared in the current lexical scope", sub.getName());
-
-		declaredSubs.put(sub.getName(), sub);
+		state.setSubDeclaration(null);
+		namespace.declareSub(sub);
 	}
 
 	/**
@@ -176,6 +178,23 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep+1)).toString());
 	}
 
+	public String getLastParsedPackage()
+	{
+		return lastParsedPackage;
+	}
 
+	public void setLastParsedPackage(String lastParsedPackage)
+	{
+		this.lastParsedPackage = lastParsedPackage;
+	}
 
+	public String getLastParsedVersion()
+	{
+		return lastParsedVersion;
+	}
+
+	public void setLastParsedVersion(String lastParsedVersion)
+	{
+		this.lastParsedVersion = lastParsedVersion;
+	}
 }

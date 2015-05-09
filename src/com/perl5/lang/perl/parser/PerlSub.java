@@ -8,10 +8,10 @@ import java.util.ArrayList;
  */
 public class PerlSub
 {
-	protected String name;
-	protected PerlSubPrototype prototype;
-	protected PerlSubAttributes attributes;
-	protected PerlSubSignature signature;
+	private String name;
+	private PerlSubPrototype prototype;
+	private PerlSubAttributes attributes;
+	private PerlSubSignature signature;
 
 	public PerlSub(String name)
 	{

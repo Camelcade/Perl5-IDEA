@@ -96,8 +96,7 @@ private file_item ::= package_namespace | package_namespace_item
 private package_namespace_item ::= sub_definition | compound_statement PERL_SEMI ? | statement
 
 // package keyword
-package_namespace ::= 'package' perl_package perl_version ? package_namespace_content {pin=1}
-private package_namespace_content ::= block_safe | PERL_SEMI <<parsePackageContents>>
+package_namespace ::= 'package' <<parsePerlPackage>> {pin=1}
 private package_plain ::= package_namespace_item * // injected and wrapped by parsePackageContents
 
 // declarations
