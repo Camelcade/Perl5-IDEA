@@ -35,7 +35,7 @@ public class PerlCodeBlockState
 	 */
 	public void use(PerlCodeBlockStateChange c)
 	{
-		if( "feature".equals(c.packageName))
+		if( "feature".equals(c.getPackageName()))
 		{
 			getFeatures().use(c);
 		}
@@ -47,7 +47,7 @@ public class PerlCodeBlockState
 	 */
 	public void no(PerlCodeBlockStateChange c)
 	{
-		if( "feature".equals(c.packageName))
+		if( "feature".equals(c.getPackageName()))
 		{
 			getFeatures().no(c);
 		}

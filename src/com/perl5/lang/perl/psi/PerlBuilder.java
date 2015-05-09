@@ -3,19 +3,19 @@ package com.perl5.lang.perl.psi;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileUrlChangeAdapter;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.exceptions.PerlParsingException;
-import com.perl5.lang.perl.exceptions.SubDeclaredException;
-import com.perl5.lang.perl.exceptions.SubDefinedException;
-import com.perl5.lang.perl.exceptions.SubDefinitionDiffersDeclarationException;
-import com.perl5.lang.perl.parser.PerlCodeBlockState;
-import com.perl5.lang.perl.parser.PerlPackage;
-import com.perl5.lang.perl.parser.PerlSub;
-import com.perl5.lang.perl.parser.PerlTokenData;
-import com.perl5.lang.perl.util.PerlFunctionUtil;
+import com.perl5.lang.perl.parser.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -26,6 +26,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
 	protected final Stack<PerlCodeBlockState> blockState = new Stack<PerlCodeBlockState>();
 	protected final HashMap<String,PerlPackage> nameSpaces = new HashMap<String, PerlPackage>();
+	protected final HashMap<String,PerlPackageFile> loadedPackageFiles = new HashMap<String, PerlPackageFile>();
 
 	protected String lastParsedPackage;
 	protected String lastParsedVersion;
@@ -196,5 +197,22 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	public void setLastParsedVersion(String lastParsedVersion)
 	{
 		this.lastParsedVersion = lastParsedVersion;
+	}
+
+	// @todo here we need to get parsed package
+	public PerlPackageFile loadPackage(String packageName)
+	{
+		PerlPackageFile file = loadedPackageFiles.get(packageName);
+
+		if( file == null )
+		{
+			file = new PerlPackageFile(packageName);
+
+
+			file.setPsiFile(PerlLanguage.INSTANCE.getPackagePsiFile(getProject(), file));
+			loadedPackageFiles.put(packageName,file);
+		}
+
+		return file;
 	}
 }

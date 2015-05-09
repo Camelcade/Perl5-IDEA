@@ -39,7 +39,7 @@ public class PerlPackagePragmaFeatures extends PerlPackagePragma
 	 */
 	public void use(PerlCodeBlockStateChange c)
 	{
-		for (String featureName : c.packageParams)
+		for (String featureName : c.getPackageParams())
 		{
 			if (isFeatureValid(featureName))
 				features.put(featureName, true);
@@ -52,7 +52,7 @@ public class PerlPackagePragmaFeatures extends PerlPackagePragma
 	 */
 	public void no(PerlCodeBlockStateChange c)
 	{
-		for (String featureName : c.packageParams)
+		for (String featureName : c.getPackageParams())
 		{
 			if (isFeatureValid(featureName))
 				features.put(featureName, false);

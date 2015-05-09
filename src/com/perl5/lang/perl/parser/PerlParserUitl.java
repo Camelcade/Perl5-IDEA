@@ -6,6 +6,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlBuilder;
@@ -335,9 +336,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			while(b.lookAhead(1) == PERL_DEPACKAGE && b.lookAhead(2) == PERL_BAREWORD)
 			{
 				b.advanceLexer();
-				packageName.append(b.getTokenType());
+				packageName.append(b.getTokenText());
 				b.advanceLexer();
-				packageName.append(b.getTokenType());
+				packageName.append(b.getTokenText());
 			}
 
 			assert b instanceof PerlBuilder;
@@ -457,6 +458,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parseUseStatement(PsiBuilder b, int l )
 	{
+		assert b instanceof PerlBuilder;
 		PsiBuilder.Marker m = b.mark();
 
 		PerlCodeBlockStateChange c = parseUseParameters(b,l);
@@ -466,15 +468,22 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return false;
 		}
 
-		getCurrentBlockState(b).use(c);
+		PerlCodeBlockState state = getCurrentBlockState(b);
+		String packageName = c.getPackageName();
 
-		PerlPackage namespace = getCurrentBlockState(b).getNamespace();
+		state.use(c);
 
-		if( namespace.isUsing(c.packageName))
-			m.error(String.format("Package %s is already being used in the namespace %s", c.packageName, namespace.getName()));
+		PerlPackage namespace = state.getNamespace();
+
+		PerlPackageFile perlPackageFile = ((PerlBuilder) b).loadPackage(packageName);
+
+		if( !perlPackageFile.isLoaded())
+			m.error(String.format("Can't find package file %s in the %%INC path: %s", perlPackageFile.getFilename(), PerlLanguage.INSTANCE.getLibPaths().toString()));
+		else if( namespace.isImported(packageName))
+			m.error(String.format("Package %s is already imported in the namespace %s", packageName, namespace.getName()));
 		else
 		{
-			namespace.use(c.packageName);
+			namespace.importPackage(packageName);
 			m.drop();
 		}
 
@@ -569,7 +578,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			if( b.getTokenType() == PERL_SEMI )
 			{
 				c = new PerlCodeBlockStateChange();
-				c.perlVersion = ((PerlBuilder) b).getLastParsedVersion();
+				c.setPackageVersion(((PerlBuilder) b).getLastParsedVersion());
 				m.drop();
 			}
 			else
@@ -582,13 +591,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			if( r ) // use MODULE
 			{
 				c = new PerlCodeBlockStateChange();
-				c.packageName = ((PerlBuilder) b).getLastParsedPackage();
+				c.setPackageName(((PerlBuilder) b).getLastParsedPackage());
 
 				r = parseVersion(b,l);
 
 				if( r ) // use MODULE VERSION
 				{
-					c.packageVersion = ((PerlBuilder) b).getLastParsedVersion();
+					c.setPackageVersion(((PerlBuilder) b).getLastParsedVersion());
 				}
 
 				PerlSyntaxTrap t = getStringsTrap(b);
@@ -598,7 +607,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 				if( r ) // use MODULE VERSION ? LIST
 				{
-					c.packageParams = t.getCaptures();
+					c.setPackageParams(t.getCaptures());
 				}
 
 				if( b.getTokenType() == PERL_SEMI )

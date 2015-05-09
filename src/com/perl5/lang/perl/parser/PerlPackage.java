@@ -5,8 +5,6 @@ import com.perl5.lang.perl.exceptions.SubDeclaredException;
 import com.perl5.lang.perl.exceptions.SubDefinedException;
 import com.perl5.lang.perl.exceptions.SubDefinitionDiffersDeclarationException;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
-import org.apache.commons.lang.ArrayUtils;
-import org.codehaus.groovy.runtime.ArrayUtil;
 
 import java.util.HashMap;
 
@@ -18,7 +16,7 @@ public class PerlPackage
 {
 	protected String name;
 	protected PerlVersion version;
-	protected HashMap<String,String> usedPackages = new HashMap<String, String>();
+	protected HashMap<String,String> importedPackages = new HashMap<String, String>();
 	protected final HashMap<String,PerlSub> definedSubs = new HashMap<String, PerlSub>();
 	protected final HashMap<String,PerlSub> declaredSubs = new HashMap<String, PerlSub>();
 
@@ -48,14 +46,14 @@ public class PerlPackage
 		this.version = version;
 	}
 
-	public boolean isUsing(String packageName)
+	public boolean isImported(String packageName)
 	{
-		return usedPackages.get(packageName) != null;
+		return importedPackages.get(packageName) != null;
 	}
 
-	public void use(String packageName)
+	public void importPackage(String packageName)
 	{
-		usedPackages.put(packageName,packageName);
+		importedPackages.put(packageName, packageName);
 	}
 
 	/**
