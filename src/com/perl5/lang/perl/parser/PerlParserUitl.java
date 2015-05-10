@@ -233,23 +233,30 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l	Level
 	 * @return	Result
 	 */
-	public static boolean guessBareword(PsiBuilder b, int l )
+	public static boolean guessBarewordCallable(PsiBuilder b, int l )
 	{
-		if(b.getTokenType() == PERL_BAREWORD )
+		assert b instanceof PerlBuilder;
+
+		IElementType tokenType = b.getTokenType();
+
+		PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
+		IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
+		String prevTokenText = prevToken == null ? null : prevToken.getTokenText();
+
+		// ->bareword construction, method
+		if( prevTokenType == PERL_DEREFERENCE && !"SUPER".equals(b.getTokenText()) && (tokenType == PERL_BAREWORD || tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY ))
 		{
-			assert b instanceof PerlBuilder;
-
-			IElementType nextRawTokenType = b.rawLookup(1);
-
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.done(PERL_FUNCTION);
+			return true;
+		}
+		else if(tokenType == PERL_BAREWORD )
+		{
 			PerlTokenData nextToken = ((PerlBuilder) b).getAheadToken(1);
 			IElementType nextTokenType = nextToken == null ? null : nextToken.getTokenType();
 			String nextTokenText = nextToken == null ? null : nextToken.getTokenText();
 
-			PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
-			IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
-			String prevTokenText = prevToken == null ? null : prevToken.getTokenText();
-
-			IElementType tokenType = b.getTokenType();
 			String tokenText = b.getTokenText();
 
 			PsiBuilder.Marker m = b.mark();
@@ -264,19 +271,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				}
 
 			}
-			// ->bareword construction, method
-			else if( prevTokenType == PERL_DEREFERENCE )
-			{
-				parseBarewordFunction(b,l);
-				m.drop();
-				return true;
-			}
-			// bareword =>
+			// bareword => - not callable, it's a string
 			else if (nextTokenType == PERL_ARROW_COMMA)
 			{
-				parseBarewordString(b,l);
-				m.drop();
-				return true;
+				m.rollbackTo();
+				return false;
 			}
 			// &bareword
 			// can be
@@ -530,7 +529,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType tokenType = b.getTokenType();
 		assert b instanceof PerlBuilder;
 
-		if(	tokenType == PERL_BAREWORD || tokenType == PERL_STRING_CONTENT )
+		if(	tokenType == PERL_STRING_CONTENT
+			|| tokenType == PERL_BAREWORD && b.lookAhead(1) == PERL_ARROW_COMMA
+				) //
 		{
 			getStringsTrap(b).capture(b.getTokenText());
 
@@ -540,15 +541,15 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			return true;
 		}
-//		// it's a bareword like -param =>
-		else if( "-".equals(b.getTokenText()) && b.lookAhead(1) == PERL_BAREWORD )
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			getStringsTrap(b).capture("-" + b.getTokenText());
-			b.advanceLexer();
-			m.collapse(PERL_STRING);
-		}
+////		// it's a bareword like -param =>
+//		else if( "-".equals(b.getTokenText()) && b.lookAhead(1) == PERL_BAREWORD )
+//		{
+//			PsiBuilder.Marker m = b.mark();
+//			b.advanceLexer();
+//			getStringsTrap(b).capture("-" + b.getTokenText());
+//			b.advanceLexer();
+//			m.collapse(PERL_STRING);
+//		}
 
 		return false;
 	}

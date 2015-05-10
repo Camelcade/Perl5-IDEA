@@ -84,12 +84,6 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
-  public List<PerlRequireStatement> getRequireStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlRequireStatement.class);
-  }
-
-  @Override
-  @NotNull
   public List<PerlSubDeclaration> getSubDeclarationList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlSubDeclaration.class);
   }

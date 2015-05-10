@@ -235,7 +235,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitRequireStatement(@NotNull PerlRequireStatement o) {
+  public void visitRequireTerm(@NotNull PerlRequireTerm o) {
     visitPsiElement(o);
   }
 

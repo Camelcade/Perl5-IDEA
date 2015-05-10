@@ -38,9 +38,6 @@ public interface PerlBlock extends PsiElement {
   List<PerlRedoStatement> getRedoStatementList();
 
   @NotNull
-  List<PerlRequireStatement> getRequireStatementList();
-
-  @NotNull
   List<PerlSubDeclaration> getSubDeclarationList();
 
   @NotNull

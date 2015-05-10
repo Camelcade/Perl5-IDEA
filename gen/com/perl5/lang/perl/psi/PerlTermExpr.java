@@ -53,6 +53,9 @@ public interface PerlTermExpr extends PerlExpr {
   PerlReplacementRegex getReplacementRegex();
 
   @Nullable
+  PerlRequireTerm getRequireTerm();
+
+  @Nullable
   PerlSortTerm getSortTerm();
 
   @Nullable

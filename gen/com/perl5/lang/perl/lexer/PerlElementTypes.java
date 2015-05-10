@@ -67,7 +67,7 @@ public interface PerlElementTypes {
   IElementType REF_EXPR = new PerlElementType("REF_EXPR");
   IElementType REGEX_EXPR = new PerlElementType("REGEX_EXPR");
   IElementType REPLACEMENT_REGEX = new PerlElementType("REPLACEMENT_REGEX");
-  IElementType REQUIRE_STATEMENT = new PerlElementType("REQUIRE_STATEMENT");
+  IElementType REQUIRE_TERM = new PerlElementType("REQUIRE_TERM");
   IElementType RIGHTWARD_CALL_EXPR = new PerlElementType("RIGHTWARD_CALL_EXPR");
   IElementType SCALAR_CALL = new PerlElementType("SCALAR_CALL");
   IElementType SHIFT_EXPR = new PerlElementType("SHIFT_EXPR");
@@ -314,8 +314,8 @@ public interface PerlElementTypes {
       else if (type == REPLACEMENT_REGEX) {
         return new PerlReplacementRegexImpl(node);
       }
-      else if (type == REQUIRE_STATEMENT) {
-        return new PerlRequireStatementImpl(node);
+      else if (type == REQUIRE_TERM) {
+        return new PerlRequireTermImpl(node);
       }
       else if (type == RIGHTWARD_CALL_EXPR) {
         return new PerlRightwardCallExprImpl(node);

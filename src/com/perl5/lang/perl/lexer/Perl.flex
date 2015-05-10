@@ -50,6 +50,7 @@ WHITE_SPACE     = [ \t\f]
 //EMPTY_LINE = {WHITE_SPACE}*{NEW_LINE}?
 EMPTY_SPACE = [ \t\f\r\n]
 BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
+BAREWORD_STRING = "-" {BAREWORD}
 ANYWORD = [^ \t\f\r\n]
 
 CHAR_ANY        = .|{NEW_LINE}
@@ -65,11 +66,10 @@ NUMBER = [0-9_]+( "." [0-9_]+ )?
 THE_END         = __END__
 THE_DATA        = __DATA__
 
-PERL_OPERATORS = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp" | ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
+PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
 
 // atm making the same, but seems unary are different
-PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
-PERL_OPERATORS_UNARY = "defined" | "ref" | "exists" | "scalar"
+PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC] [^a-zA-Z0-9_]
 
 MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{BAREWORD}\'
 MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{BAREWORD}\"
@@ -101,7 +101,9 @@ PERL_SYN_FLOW_CONTROL = "redo" | "next" | "last"
 PERL_SYN_DECLARE = "package" | "sub" | "my" | "our" | "local" | "state"
 PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
 PERL_SYN_OTHER = "undef" | "print" | "say" | "open" | "grep" | "sort" | "map"
-FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} | {PERL_SYN_DECLARE} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER}
+PERL_SYN_BINARY = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
+PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
+FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} | {PERL_SYN_DECLARE} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER} | {PERL_SYN_BINARY}
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
@@ -337,8 +339,8 @@ TRANS_MODIFIERS = [cdsr]
     return tokenType;
 }
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
-{PERL_OPERATORS_FILETEST} {return PERL_OPERATOR_FILETEST;}
-{PERL_OPERATORS_UNARY} {return PERL_OPERATOR_UNARY;}
+{PERL_OPERATORS_FILETEST} {yypushback(1);return PERL_OPERATOR_FILETEST;}
+{PERL_SYN_UNARY} {return PERL_OPERATOR_UNARY;}
 
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 
@@ -348,6 +350,7 @@ TRANS_MODIFIERS = [cdsr]
 }
 
 {BAREWORD} { return PERL_BAREWORD;}
+{BAREWORD_STRING} { return PERL_STRING_CONTENT;}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

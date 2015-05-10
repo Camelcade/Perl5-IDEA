@@ -113,6 +113,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlRequireTerm getRequireTerm() {
+    return findChildByClass(PerlRequireTerm.class);
+  }
+
+  @Override
+  @Nullable
   public PerlSortTerm getSortTerm() {
     return findChildByClass(PerlSortTerm.class);
   }

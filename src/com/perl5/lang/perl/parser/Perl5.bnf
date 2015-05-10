@@ -93,7 +93,7 @@ block ::= "{" file_items "}" {pin=1} // should not be used anywhere, injected by
 
 
 private file_item ::= namespace | namespace_element
-private namespace_element ::= sub_definition | compound_statement [PERL_SEMI] | statement
+private namespace_element ::= (sub_definition | compound_statement | statement ) PERL_SEMI*
 
 // package keyword
 namespace ::= 'package' <<parsePerlPackage>> {pin=1}
@@ -149,7 +149,6 @@ private statement_variation ::=
     | last_statement
     | next_statement
     | redo_statement
-    | require_statement
     | sub_declaration
     | expr
 
@@ -197,7 +196,7 @@ no_statement ::= 'no' <<parseNoStatement>> {pin=1}
 
 undef_statement ::= "undef" variable {pin=1}
 
-require_statement ::= 'require' (perl_package | perl_version | string)  {pin=1} // multiline string is possible too
+require_term ::= 'require' (perl_package | perl_version | string)  {pin=1} // multiline string is possible too
 
 //private recover_statement ::= !(PERL_SEMI  | <<eof>>)
 //private recover_block ::= !(PERL_RBRACE | <<eof>>)
@@ -245,6 +244,7 @@ term_expr ::=
     | grep_term
     | sort_term
     | map_term
+    | require_term
     | function_call
 
 deref_expr ::= expr <<parseArrowSmart>> nested_element_expr
@@ -262,7 +262,7 @@ prefix_unary_expr ::= ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
 regex_expr ::= expr ('=~'|'!~') expr
 mul_expr ::= expr ('*'|'/'|'%'|'x') expr
-add_expr ::= expr ('+'|'-'|'.') !PERL_BAREWORD expr
+add_expr ::= expr ('+'|'-'|'.') expr
 shift_expr ::= expr ('<<'|'>>') expr
 
 private op_10_expr ::= named_unary_expr | filetest_expr
@@ -434,11 +434,11 @@ scalar_call ::= PERL_SCALAR "(" [expr] ")"
 
 callable ::=
     referencable_method
-    | <<guessBareword>>
+    | <<guessBarewordCallable>>
 
 private referencable_method ::= '&'
     (
-        <<guessBareword>>
+        <<guessBarewordCallable>>
         | {expr}
         | scalar
     )
@@ -458,7 +458,7 @@ private array_primitive ::=
     | PERL_SIGIL_ARRAY scalar_expr       // scalar dereference
     | PERL_ARRAY                    // array as is
 
-private string ::= string_quoted | multiline_marker
+private string ::= string_quoted | multiline_marker | <<parseBarewordString>>
 private string_quoted ::= ['qq' | 'qx' | 'q'] PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
 private multiline_marker ::= '<<' (string | <<parseBarewordString>>)
 
@@ -469,72 +469,3 @@ label ::= PERL_BAREWORD
 private perl_version ::= <<parseVersion>>
 private perl_package ::= <<parseBarewordPackage>>
 private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR !PERL_OPERATOR | "{" scalar "}"
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//////////////////// list expressions ////////////////////////////
-//
-//split_expr ::= 'split' split_arguments
-//private split_arguments ::=
-//    "(" split_args ")"
-//    | split_args
-//split_args ::= (scalar_expr | regex_expr ) "," scalar_expr
-//
-//
-//shift_expr ::= ('shift' | 'pop') shift_expr_args ?
-//private shift_expr_args ::= list_expr | expr
-//
-//
-//// keys && values
-//keys_expr ::= ('keys' | 'values' ) keys_args
-//keys_args ::=
-//    '(' (hash | array) ')'
-//    | (hash | array)
-//
-//// grep
-//
-//
-//
-//
-//scalar_nested_element ::= scalar structure_element+
-//
-//
-//private scalar ::=
-//    PERL_SIGIL_SCALAR '{' PERL_BAREWORD '}'       // scalar dereference
-//    | PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference
-//    | PERL_SCALAR                          // scalar as is
-//    | PERL_NUMBER                       // raw number
-//    | PERL_GLOB
-//    | scalar_anon_array
-//    | scalar_anon_hash
-//    | scalar_generated_list_item
-//    | multiline_marker                  // deferred string
-//    | string                            // string
-//    | sub_block_anon
-//    | referencable_method
-//    | 'undef'
-//
-//private nested_element ::= array_element | hash_element
-//private array_element ::= '[' expr ']'
-//private hash_element ::= '{' ( expr | PERL_BAREWORD) '}'
-//
-//
-//private scalar_generated_list_item ::= '(' expr ')'[expr]                // generated array element
-//
-//
-//
-//private local_variables ::= local_variable (',' local_variables ) *
-//private local_variable ::= expr | variable
-//
-//private variables ::= variable (',' variable ) *
-//private variable ::= PERL_SCALAR | PERL_ARRAY | PERL_HASH | PERL_GLOB | "undef"
-//
-//// custom parsings
-//
-////private package_bare ::= PERL_BAREWORD ( '::' PERL_BAREWORD ) *
-//// {   mixin="com.perl5.lang.perl.psi.impl.PerlNamedElementImpl"
-////        implements="com.perl5.lang.perl.psi.PerlNamedElement"
-////        methods=[getName setName getNameIdentifier]
-////    }
-//
