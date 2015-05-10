@@ -58,9 +58,6 @@ public class PerlParser implements PsiParser {
     else if (t == COMPILE_REGEX) {
       r = compile_regex(b, 0);
     }
-    else if (t == COMPOUND_STATEMENT) {
-      r = compound_statement(b, 0);
-    }
     else if (t == DEREF_EXPR) {
       r = expr(b, 0, 21);
     }
@@ -135,6 +132,9 @@ public class PerlParser implements PsiParser {
     }
     else if (t == MUL_EXPR) {
       r = expr(b, 0, 16);
+    }
+    else if (t == NAMED_BLOCK) {
+      r = named_block(b, 0);
     }
     else if (t == NAMED_UNARY_EXPR) {
       r = named_unary_expr(b, 0);
@@ -531,13 +531,13 @@ public class PerlParser implements PsiParser {
   //         | for_compound
   //         | foreach_compound
   //      )
-  public static boolean compound_statement(PsiBuilder b, int l) {
+  static boolean compound_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "compound_statement")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<compound statement>");
+    Marker m = enter_section_(b);
     r = compound_statement_0(b, l + 1);
     r = r && compound_statement_1(b, l + 1);
-    exit_section_(b, l, m, COMPOUND_STATEMENT, r, false, null);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -1176,6 +1176,19 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // PERL_BLOCK_NAME block_safe
+  public static boolean named_block(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "named_block")) return false;
+    if (!nextTokenIs(b, PERL_BLOCK_NAME)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_BLOCK_NAME);
+    r = r && block_safe(b, l + 1);
+    exit_section_(b, m, NAMED_BLOCK, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // 'package' <<parsePerlPackage>>
   public static boolean namespace(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespace")) return false;
@@ -1202,7 +1215,7 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // (sub_definition | compound_statement | statement ) PERL_SEMI*
+  // (sub_definition | named_block | compound_statement | statement ) PERL_SEMI*
   static boolean namespace_element(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespace_element")) return false;
     boolean r;
@@ -1213,12 +1226,13 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // sub_definition | compound_statement | statement
+  // sub_definition | named_block | compound_statement | statement
   private static boolean namespace_element_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespace_element_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = sub_definition(b, l + 1);
+    if (!r) r = named_block(b, l + 1);
     if (!r) r = compound_statement(b, l + 1);
     if (!r) r = statement(b, l + 1);
     exit_section_(b, m, null, r);

@@ -22,7 +22,6 @@ public interface PerlElementTypes {
   IElementType COMMA_EXPR = new PerlElementType("COMMA_EXPR");
   IElementType COMPARE_EXPR = new PerlElementType("COMPARE_EXPR");
   IElementType COMPILE_REGEX = new PerlElementType("COMPILE_REGEX");
-  IElementType COMPOUND_STATEMENT = new PerlElementType("COMPOUND_STATEMENT");
   IElementType DEREF_EXPR = new PerlElementType("DEREF_EXPR");
   IElementType DO_TERM = new PerlElementType("DO_TERM");
   IElementType EQUAL_EXPR = new PerlElementType("EQUAL_EXPR");
@@ -48,6 +47,7 @@ public interface PerlElementTypes {
   IElementType MAP_TERM = new PerlElementType("MAP_TERM");
   IElementType MATCH_REGEX = new PerlElementType("MATCH_REGEX");
   IElementType MUL_EXPR = new PerlElementType("MUL_EXPR");
+  IElementType NAMED_BLOCK = new PerlElementType("NAMED_BLOCK");
   IElementType NAMED_UNARY_EXPR = new PerlElementType("NAMED_UNARY_EXPR");
   IElementType NAMESPACE = new PerlElementType("NAMESPACE");
   IElementType NEXT_STATEMENT = new PerlElementType("NEXT_STATEMENT");
@@ -97,16 +97,16 @@ public interface PerlElementTypes {
   IElementType PERL_ARRAY = new PerlTokenType("PERL_ARRAY");
   IElementType PERL_ARROW_COMMA = new PerlTokenType("=>");
   IElementType PERL_BAREWORD = new PerlTokenType("PERL_BAREWORD");
+  IElementType PERL_BLOCK_NAME = new PerlTokenType("PERL_BLOCK_NAME");
   IElementType PERL_COLON = new PerlTokenType(":");
   IElementType PERL_COMMA = new PerlTokenType(",");
   IElementType PERL_COMMENT = new PerlTokenType("PERL_COMMENT");
   IElementType PERL_COMMENT_BLOCK = new PerlTokenType("PERL_COMMENT_BLOCK");
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
   IElementType PERL_DEREFERENCE = new PerlTokenType("->");
-  IElementType PERL_FILEHANDLE = new PerlTokenType("PERL_FILEHANDLE");
   IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
   IElementType PERL_GLOB = new PerlTokenType("PERL_GLOB");
-  IElementType PERL_HADLE = new PerlTokenType("PERL_HANDLE");
+  IElementType PERL_HANDLE = new PerlTokenType("PERL_HANDLE");
   IElementType PERL_HASH = new PerlTokenType("PERL_HASH");
   IElementType PERL_KEYWORD = new PerlTokenType("PERL_KEYWORD");
   IElementType PERL_LANGLE = new PerlTokenType("<");
@@ -178,9 +178,6 @@ public interface PerlElementTypes {
       }
       else if (type == COMPILE_REGEX) {
         return new PerlCompileRegexImpl(node);
-      }
-      else if (type == COMPOUND_STATEMENT) {
-        return new PerlCompoundStatementImpl(node);
       }
       else if (type == DEREF_EXPR) {
         return new PerlDerefExprImpl(node);
@@ -256,6 +253,9 @@ public interface PerlElementTypes {
       }
       else if (type == MUL_EXPR) {
         return new PerlMulExprImpl(node);
+      }
+      else if (type == NAMED_BLOCK) {
+        return new PerlNamedBlockImpl(node);
       }
       else if (type == NAMED_UNARY_EXPR) {
         return new PerlNamedUnaryExprImpl(node);

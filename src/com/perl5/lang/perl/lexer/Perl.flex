@@ -66,6 +66,8 @@ NUMBER = [0-9_]+( "." [0-9_]+ )?
 THE_END         = __END__
 THE_DATA        = __DATA__
 
+BLOCK_NAMES = "BEGIN" | "UNITCHECK" | "CHECK" | "INIT" | "END"
+
 PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
 
 // atm making the same, but seems unary are different
@@ -343,6 +345,7 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_SYN_UNARY} {return PERL_OPERATOR_UNARY;}
 
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
+{BLOCK_NAMES} {return PERL_BLOCK_NAME;}
 
 <LEX_BAREWORD_STRING>
 {

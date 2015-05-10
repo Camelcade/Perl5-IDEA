@@ -24,8 +24,8 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
-  public List<PerlCompoundStatement> getCompoundStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCompoundStatement.class);
+  public List<PerlBlockCompound> getBlockCompoundList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlBlockCompound.class);
   }
 
   @Override
@@ -36,8 +36,20 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
+  public List<PerlForCompound> getForCompoundList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlForCompound.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlForStatementModifier> getForStatementModifierList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlForStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlForeachCompound> getForeachCompoundList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlForeachCompound.class);
   }
 
   @Override
@@ -48,14 +60,38 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
+  public List<PerlGivenCompound> getGivenCompoundList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlGivenCompound.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlIfCompound> getIfCompoundList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlIfCompound.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlIfStatementModifier> getIfStatementModifierList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlIfStatementModifier.class);
   }
 
   @Override
   @NotNull
+  public List<PerlLabelDeclaration> getLabelDeclarationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlLabelDeclaration.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlLastStatement> getLastStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlLastStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlNamedBlock> getNamedBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNamedBlock.class);
   }
 
   @Override
@@ -102,8 +138,20 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
+  public List<PerlUnlessCompound> getUnlessCompoundList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUnlessCompound.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlUnlessStatementModifier> getUnlessStatementModifierList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUnlessStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlUntilCompound> getUntilCompoundList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUntilCompound.class);
   }
 
   @Override
@@ -122,6 +170,12 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
   @NotNull
   public List<PerlWhenStatementModifier> getWhenStatementModifierList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlWhenStatementModifier.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlWhileCompound> getWhileCompoundList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlWhileCompound.class);
   }
 
   @Override

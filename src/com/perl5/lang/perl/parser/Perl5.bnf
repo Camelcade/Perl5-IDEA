@@ -42,7 +42,6 @@
     PERL_NUMBER="PERL_NUMBER"
 
     PERL_KEYWORD="PERL_KEYWORD"
-    PERL_FILEHANDLE="PERL_FILEHANDLE"
 
     PERL_OPERATOR="PERL_OPERATOR"
     PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
@@ -77,7 +76,8 @@
     // custom tokens
     PERL_PACKAGE="PERL_PACKAGE"
     PERL_FUNCTION="PERL_FUNCTION"
-    PERL_HADLE="PERL_HANDLE"
+    PERL_HANDLE="PERL_HANDLE"
+    PERL_BLOCK_NAME="PERL_BLOCK_NAME"
   ]
 
     extends(".*expr")=expr
@@ -91,16 +91,17 @@ private file_items ::= file_item*
 private block_safe ::= <<parseBlock>>
 block ::= "{" file_items "}" {pin=1} // should not be used anywhere, injected by block_safe
 
-
 private file_item ::= namespace | namespace_element
-private namespace_element ::= (sub_definition | compound_statement | statement ) PERL_SEMI*
+private namespace_element ::= (sub_definition | named_block | compound_statement | statement ) PERL_SEMI*
 
 // package keyword
 namespace ::= 'package' <<parsePerlPackage>> {pin=1}
 private namespace_content ::= namespace_element * // injected and wrapped by parsePackageContents
 
+named_block ::= PERL_BLOCK_NAME block_safe
+
 // declarations
-compound_statement ::=
+private compound_statement ::=
     [label_declaration] (
         block_compound
         | if_compound

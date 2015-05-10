@@ -55,10 +55,6 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitCompoundStatement(@NotNull PerlCompoundStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitDerefExpr(@NotNull PerlDerefExpr o) {
     visitExpr(o);
   }
@@ -157,6 +153,10 @@ public class PerlVisitor extends PsiElementVisitor {
 
   public void visitMulExpr(@NotNull PerlMulExpr o) {
     visitExpr(o);
+  }
+
+  public void visitNamedBlock(@NotNull PerlNamedBlock o) {
+    visitPsiElement(o);
   }
 
   public void visitNamedUnaryExpr(@NotNull PerlNamedUnaryExpr o) {

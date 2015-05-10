@@ -474,7 +474,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //			{
 //				m.error(String.format("Unknown file handle %s", handle));
 //			}
-			m.collapse(PERL_FILEHANDLE);
+			m.collapse(PERL_HANDLE);
 
 			return true;
 		}
