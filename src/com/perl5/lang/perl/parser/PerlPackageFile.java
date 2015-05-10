@@ -14,6 +14,7 @@ public class PerlPackageFile
 
 	public PerlPackageFile( String packageName )
 	{
+		assert packageName != null;
 		name = packageName;
 	}
 

@@ -65,6 +65,30 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
 
   @Override
   @Nullable
+  public PerlOpenFile getOpenFile() {
+    return findChildByClass(PerlOpenFile.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlOpenHandle getOpenHandle() {
+    return findChildByClass(PerlOpenHandle.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlOpenMode getOpenMode() {
+    return findChildByClass(PerlOpenMode.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlOpenRef getOpenRef() {
+    return findChildByClass(PerlOpenRef.class);
+  }
+
+  @Override
+  @Nullable
   public PerlReferenceValue getReferenceValue() {
     return findChildByClass(PerlReferenceValue.class);
   }

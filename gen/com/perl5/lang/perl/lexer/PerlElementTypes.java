@@ -32,6 +32,10 @@ public interface PerlElementTypes {
   IElementType MATCH_REGEX = new PerlElementType("MATCH_REGEX");
   IElementType NEXT_STATEMENT = new PerlElementType("NEXT_STATEMENT");
   IElementType NO_STATEMENT = new PerlElementType("NO_STATEMENT");
+  IElementType OPEN_FILE = new PerlElementType("OPEN_FILE");
+  IElementType OPEN_HANDLE = new PerlElementType("OPEN_HANDLE");
+  IElementType OPEN_MODE = new PerlElementType("OPEN_MODE");
+  IElementType OPEN_REF = new PerlElementType("OPEN_REF");
   IElementType OP_10_EXPR = new PerlElementType("OP_10_EXPR");
   IElementType OP_11_EXPR = new PerlElementType("OP_11_EXPR");
   IElementType OP_12_EXPR = new PerlElementType("OP_12_EXPR");
@@ -52,7 +56,8 @@ public interface PerlElementTypes {
   IElementType OP_3_PREF_EXPR = new PerlElementType("OP_3_PREF_EXPR");
   IElementType OP_3_SUFF_EXPR = new PerlElementType("OP_3_SUFF_EXPR");
   IElementType OP_4_EXPR = new PerlElementType("OP_4_EXPR");
-  IElementType OP_5_EXPR = new PerlElementType("OP_5_EXPR");
+  IElementType OP_5_OTHER_EXPR = new PerlElementType("OP_5_OTHER_EXPR");
+  IElementType OP_5_REF_EXPR = new PerlElementType("OP_5_REF_EXPR");
   IElementType OP_6_EXPR = new PerlElementType("OP_6_EXPR");
   IElementType OP_7_EXPR = new PerlElementType("OP_7_EXPR");
   IElementType OP_8_EXPR = new PerlElementType("OP_8_EXPR");
@@ -198,6 +203,18 @@ public interface PerlElementTypes {
       else if (type == NO_STATEMENT) {
         return new PerlNoStatementImpl(node);
       }
+      else if (type == OPEN_FILE) {
+        return new PerlOpenFileImpl(node);
+      }
+      else if (type == OPEN_HANDLE) {
+        return new PerlOpenHandleImpl(node);
+      }
+      else if (type == OPEN_MODE) {
+        return new PerlOpenModeImpl(node);
+      }
+      else if (type == OPEN_REF) {
+        return new PerlOpenRefImpl(node);
+      }
       else if (type == OP_10_EXPR) {
         return new PerlOp10ExprImpl(node);
       }
@@ -258,8 +275,11 @@ public interface PerlElementTypes {
       else if (type == OP_4_EXPR) {
         return new PerlOp4ExprImpl(node);
       }
-      else if (type == OP_5_EXPR) {
-        return new PerlOp5ExprImpl(node);
+      else if (type == OP_5_OTHER_EXPR) {
+        return new PerlOp5OtherExprImpl(node);
+      }
+      else if (type == OP_5_REF_EXPR) {
+        return new PerlOp5RefExprImpl(node);
       }
       else if (type == OP_6_EXPR) {
         return new PerlOp6ExprImpl(node);

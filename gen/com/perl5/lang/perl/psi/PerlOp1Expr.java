@@ -29,6 +29,18 @@ public interface PerlOp1Expr extends PerlExpr {
   PerlMatchRegex getMatchRegex();
 
   @Nullable
+  PerlOpenFile getOpenFile();
+
+  @Nullable
+  PerlOpenHandle getOpenHandle();
+
+  @Nullable
+  PerlOpenMode getOpenMode();
+
+  @Nullable
+  PerlOpenRef getOpenRef();
+
+  @Nullable
   PerlReferenceValue getReferenceValue();
 
   @Nullable

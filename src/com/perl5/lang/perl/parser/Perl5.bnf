@@ -232,11 +232,17 @@ expr ::=
 
 op_1_expr ::= term
 op_2_expr ::= expr '->' ? nested_element    //  @todo this arrow should be optional only after } or ], need function to parse this, too may variants
+
 private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
 op_3_suff_expr ::= expr ('++'|'--')
+
 op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
-op_5_expr ::= ('\' | '~'| '!'| '+' | '-') expr { rightAssociative=true } // !PERL_BAREWORD - removed cause !function
+
+private op_5_expr ::= op_5_ref_expr | op_5_other_expr // !PERL_BAREWORD - removed cause !function
+op_5_ref_expr ::= '\' expr { rightAssociative=true }
+op_5_other_expr ::= ('~'| '!'| '+' | '-') expr { rightAssociative=true }
+
 op_6_expr ::= expr ('=~'|'!~') expr
 op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
 op_8_expr ::= expr ('+'|'-'|'.') !PERL_BAREWORD expr
@@ -256,12 +262,14 @@ op_17_expr ::= expr ('..'|'...') expr
 op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
-op_20_expr ::= expr (','|'=>') <<parseExpressionLevel 4>> ?
+op_20_expr ::= expr (','|'=>') scalar_expr ?
 
 op_21_expr ::= callable !"(" <<parseExpressionLevel 3>> ?
 op_22_expr ::= 'not' expr { rightAssociative=true }
 op_23_expr ::= expr 'and' expr
 op_24_expr ::= expr ('or'|'xor') expr
+
+private scalar_expr ::= <<parseExpressionLevel 4>>
 
 private term ::=
     variable
@@ -276,11 +284,29 @@ private term ::=
     | file_read_term
     | reference_value
     | print_term
+    | open_term
     | function_call
 
 
 private print_term ::= ("print"|"say") ( "(" print_arguments ? ")" | print_arguments ? ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
+
+private open_term ::= ("open") ( "(" open_arguments ")" | open_arguments ) {pin=1}
+private open_arguments ::=
+    open_handle [                       // open FILEHANDLE
+        "," (
+            open_mode "," (
+                open_ref                // open FILEHANDLE,MODE,REFERENCE
+                | open_file ["," expr]  // open FILEHANDLE,MODE,EXPR,LIST ?
+            )
+            | open_file                 // open FILEHANDLE,EXPR
+        )
+    ]
+open_handle ::= variable_declaration | perl_handle
+open_mode ::= scalar_expr
+open_ref ::= op_5_ref_expr
+open_file ::= perl_handle | scalar_expr
+
 
 private function_call ::= callable "(" expr ? ")"
 

@@ -2,6 +2,7 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
+import com.intellij.lang.impl.PsiBuilderImpl;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
@@ -229,17 +230,22 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			assert b instanceof PerlBuilder;
 
 			IElementType nextRawTokenType = b.rawLookup(1);
+
 			PerlTokenData nextToken = ((PerlBuilder) b).getAheadToken(1);
-			PerlTokenData nextNextToken = ((PerlBuilder) b).getAheadToken(2);
-			String currentTokenText = b.getTokenText();
+			IElementType nextTokenType = nextToken == null ? null : nextToken.getTokenType();
+			String nextTokenText = nextToken == null ? null : nextToken.getTokenText();
 
 			PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
+			IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
+			String prevTokenText = prevToken == null ? null : prevToken.getTokenText();
+
+			IElementType tokenType = b.getTokenType();
+			String tokenText = b.getTokenText();
 
 			PsiBuilder.Marker m = b.mark();
 
-
 			// it's a parent package method call like $self->SUPER::method
-			if( "SUPER".equals(currentTokenText) )
+			if( "SUPER".equals(tokenText) )
 			{
 				if( parseBarewordPackageFunctionCall(b, l))
 				{
@@ -249,7 +255,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			}
 			// bareword =>
-			else if (nextToken != null && nextToken.getTokenType() == PERL_ARROW_COMMA)
+			else if (nextTokenType == PERL_ARROW_COMMA)
 			{
 				parseBarewordString(b,l);
 				m.drop();
@@ -259,9 +265,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// can be
 			// &method
 			// &package::method
-			else if( prevToken != null && "&".equals(prevToken.getTokenText()))
+			else if( "&".equals(prevTokenText))
 			{
-				if( b.lookAhead(1) == PERL_DEPACKAGE)
+				if( nextTokenType == PERL_DEPACKAGE)
 				{
 					parseBarewordPackageFunctionCall(b,l);
 				}
@@ -272,17 +278,17 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				m.drop();
 				return true;
 			}
-			// bareword space bareword
-			else if (nextToken != null && nextToken.getTokenType() == PERL_BAREWORD && nextRawTokenType == TokenType.WHITE_SPACE)
+			// bareword bareword
+			else if (nextTokenType == PERL_BAREWORD )
 			{
 				// known filehandle
-				if( ((PerlBuilder) b).isKnownHandle(nextToken.getTokenText()))
+				if( ((PerlBuilder) b).isKnownHandle(nextTokenText))
 				{
 					parseBarewordFunction(b,l);
 					parseBarewordHandle(b, l);
 				}
 				// known function
-				else if( isKnownFunction(b, currentTokenText))
+				else if( isKnownFunction(b, tokenText))
 				{
 					parseBarewordFunction(b, l);
 				}
@@ -297,10 +303,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			}
 			// bareword::bareword construction
 			// can be a package or package::method
-			else if(nextToken != null && nextToken.getTokenType() == PERL_DEPACKAGE )
+			else if(nextTokenType == PERL_DEPACKAGE )
 			{
 				// parsed package and next token is ->, so it's a package (actually it's not, could be package::method->method)
-				if( parseBarewordPackage(b,l) && b.lookAhead(1) == PERL_DEREFERENCE)
+				if( parseBarewordPackage(b,l) && nextTokenType == PERL_DEREFERENCE)
 				{
 					m.drop();
 					return true;
@@ -316,18 +322,20 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// bareword->bareword construction
 			// can be a package->method
 			// or chained method->method
-			else if(nextToken != null && nextToken.getTokenType() == PERL_DEREFERENCE )
+			else if(nextTokenType == PERL_DEREFERENCE )
 			{
 				// ->bareword->
-				if( prevToken != null && prevToken.getTokenType() == PERL_DEREFERENCE )
+				if( prevTokenType == PERL_DEREFERENCE )
 				{
 					parseBarewordFunction(b, l);
 				}
+				// known filehandle
 				else if( isKnownHandle(b,b.getTokenText()))
 				{
 					parseBarewordHandle(b,l);
 				}
-				else // consider this package->method
+				// consider this package->method
+				else
 				{
 					parseBarewordPackage(b,l);
 				}
@@ -339,10 +347,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// function(
 			// function package(
 			// ::function(
-			else if( nextToken != null && nextToken.getTokenType() == PERL_LPAREN)
+			else if( nextTokenType == PERL_LPAREN)
 			{
 				// function package(
-				if(prevToken != null && prevToken.getTokenType() == PERL_BAREWORD)
+				if(prevTokenType == PERL_BAREWORD)
 				{
 					parseBarewordPackage(b,l);
 				}
@@ -355,7 +363,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				return true;
 			}
 			// just known function
-			else if( isKnownFunction(b, currentTokenText))
+			else if( isKnownFunction(b, tokenText))
 			{
 				parseBarewordFunction(b,l);
 				m.drop();
@@ -443,12 +451,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 
-			if(((PerlBuilder) b).isKnownHandle(handle))
-				m.collapse(PERL_FILEHANDLE);
-			else
-			{
-				m.error(String.format("Unknown file handle %s", handle));
-			}
+			// this is a helper, all syntax checking should be in annotator
+//			if(((PerlBuilder) b).isKnownHandle(handle))
+//				m.collapse(PERL_FILEHANDLE);
+//			else
+//			{
+//				m.error(String.format("Unknown file handle %s", handle));
+//			}
+			m.collapse(PERL_FILEHANDLE);
 
 			return true;
 		}
@@ -536,25 +546,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		PerlPackage namespace = state.getNamespace();
 
-		PerlPackageFile perlPackageFile = ((PerlBuilder) b).getPackageFile(packageName);
-
-		if (!state.isPragma(packageName))
+		if( packageName != null ) // got package, not only verison
 		{
-			if (!perlPackageFile.isLoaded())
-				m.error(String.format("Can't find package file %s in the %%INC path: %s", perlPackageFile.getFilename(), PerlLanguage.INSTANCE.getLibPaths().toString()));
-			else if (namespace.isImported(packageName))
-				m.error(String.format("Package %s is already imported in the namespace %s", packageName, namespace.getName()));
-			else
+			PerlPackageFile perlPackageFile = ((PerlBuilder) b).getPackageFile(packageName);
+
+			if (!state.isPragma(packageName))
 			{
 				namespace.importPackage(packageName);
-				m.drop();
 			}
 		}
-		else
-		{
-			m.drop();
-		}
-
+		m.drop();
 		return true;
 	}
 
