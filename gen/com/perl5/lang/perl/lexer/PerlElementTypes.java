@@ -77,6 +77,7 @@ public interface PerlElementTypes {
   IElementType SORT_TERM = new PerlElementType("SORT_TERM");
   IElementType SUB_DECLARATION = new PerlElementType("SUB_DECLARATION");
   IElementType SUB_DEFINITION = new PerlElementType("SUB_DEFINITION");
+  IElementType SUB_TERM = new PerlElementType("SUB_TERM");
   IElementType SUFF_PP_EXPR = new PerlElementType("SUFF_PP_EXPR");
   IElementType TERM_EXPR = new PerlElementType("TERM_EXPR");
   IElementType TRENAR_EXPR = new PerlElementType("TRENAR_EXPR");
@@ -346,6 +347,9 @@ public interface PerlElementTypes {
       }
       else if (type == SUB_DEFINITION) {
         return new PerlSubDefinitionImpl(node);
+      }
+      else if (type == SUB_TERM) {
+        return new PerlSubTermImpl(node);
       }
       else if (type == SUFF_PP_EXPR) {
         return new PerlSuffPpExprImpl(node);

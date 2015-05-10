@@ -119,6 +119,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlSubTerm getSubTerm() {
+    return findChildByClass(PerlSubTerm.class);
+  }
+
+  @Override
+  @Nullable
   public PerlTrRegex getTrRegex() {
     return findChildByClass(PerlTrRegex.class);
   }

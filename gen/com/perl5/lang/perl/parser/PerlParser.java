@@ -223,6 +223,9 @@ public class PerlParser implements PsiParser {
     else if (t == SUB_DEFINITION) {
       r = sub_definition(b, 0);
     }
+    else if (t == SUB_TERM) {
+      r = sub_term(b, 0);
+    }
     else if (t == SUFF_PP_EXPR) {
       r = expr(b, 0, 20);
     }
@@ -2478,6 +2481,19 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // 'sub' sub_definition_parameters block_safe
+  public static boolean sub_term(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "sub_term")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<sub term>");
+    r = consumeToken(b, "sub");
+    r = r && sub_definition_parameters(b, l + 1);
+    r = r && block_safe(b, l + 1);
+    exit_section_(b, l, m, SUB_TERM, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // PERL_REGEX_MODIFIER +
   public static boolean tr_modifiers(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "tr_modifiers")) return false;
@@ -3383,6 +3399,7 @@ public class PerlParser implements PsiParser {
   //     | "(" [expr] ")"
   //     | scalar_primitive
   //     | do_term
+  //     | sub_term
   //     | eval_term
   //     | regex_term
   //     | file_read_term
@@ -3405,6 +3422,7 @@ public class PerlParser implements PsiParser {
     if (!r) r = term_expr_3(b, l + 1);
     if (!r) r = scalar_primitive(b, l + 1);
     if (!r) r = do_term(b, l + 1);
+    if (!r) r = sub_term(b, l + 1);
     if (!r) r = eval_term(b, l + 1);
     if (!r) r = regex_term(b, l + 1);
     if (!r) r = file_read_term(b, l + 1);

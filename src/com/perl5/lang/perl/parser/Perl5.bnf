@@ -236,6 +236,7 @@ term_expr ::=
     | "(" [expr] ")"
     | scalar_primitive
     | do_term
+    | sub_term
     | eval_term
     | regex_term
     | file_read_term
@@ -317,6 +318,8 @@ private sort_op_arguments ::=
     <<parseBarewordFunction>> expr
     | block_safe expr
     | expr
+
+sub_term ::= 'sub' sub_definition_parameters block_safe
 
 grep_term ::= 'grep' grep_map_arguments
 map_term ::= 'map' grep_map_arguments

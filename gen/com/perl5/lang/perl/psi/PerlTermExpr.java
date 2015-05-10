@@ -56,6 +56,9 @@ public interface PerlTermExpr extends PerlExpr {
   PerlSortTerm getSortTerm();
 
   @Nullable
+  PerlSubTerm getSubTerm();
+
+  @Nullable
   PerlTrRegex getTrRegex();
 
   @Nullable
