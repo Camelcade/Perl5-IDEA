@@ -24,7 +24,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	protected final HashMap<String,PerlPackage> nameSpaces = new HashMap<String, PerlPackage>();
 
 	protected final HashMap<String,PerlPackageFile> loadedPackageFiles = new HashMap<String, PerlPackageFile>();
-	protected final ArrayList<String> knownFileHandles = new ArrayList<String>(Arrays.asList("STDERR","STDIN","STDOUT"));
+	protected final ArrayList<String> knownFileHandles = new ArrayList<String>(Arrays.asList("STDERR","STDIN","STDOUT","ARGV"));
 
 	protected String lastParsedPackage;
 	protected String lastParsedVersion;

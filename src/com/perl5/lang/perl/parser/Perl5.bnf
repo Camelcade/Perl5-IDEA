@@ -241,8 +241,11 @@ op_6_expr ::= expr ('=~'|'!~') expr
 op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
 op_8_expr ::= expr ('+'|'-'|'.') !PERL_BAREWORD expr
 op_9_expr ::= expr ('<<'|'>>') expr
-// @todo filetest operators should be handled separately with diff options
-op_10_expr ::= (PERL_OPERATOR_UNARY !"(" | PERL_OPERATOR_FILETEST ) expr
+
+op_10_expr ::= op_10_expr_unary | op_10_expr_filetest
+private op_10_expr_unary ::= PERL_OPERATOR_UNARY !"(" expr
+private op_10_expr_filetest ::= PERL_OPERATOR_FILETEST (<<parseBarewordHandle>> | expr )
+
 op_11_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
 op_12_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
 op_13_expr ::= expr '&' expr
@@ -274,6 +277,7 @@ private term ::=
     | reference_value
     | print_term
     | function_call
+
 
 private print_term ::= ("print"|"say") ( "(" print_arguments ? ")" | print_arguments ? ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
@@ -388,16 +392,15 @@ private scalar_primitive ::=
     PERL_NUMBER
     | string
 
-private string ::= string_quoted // | string_unquoted
+private string ::= string_quoted
 private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
 private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
-//private string_unquoted ::= <<parseBarewordString>>
 
 label_declaration ::= label ":" // do we need to change tokentype?
 label ::= PERL_BAREWORD
 private perl_version ::= <<parseVersion>>
 private perl_package ::= <<parseBarewordPackage>>
-private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR | "{" expr "}"
+private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR !PERL_OPERATOR | "{" scalar "}"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //

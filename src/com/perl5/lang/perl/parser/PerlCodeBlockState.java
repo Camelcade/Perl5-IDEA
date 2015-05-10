@@ -94,9 +94,9 @@ public class PerlCodeBlockState
 		return (PerlPackagePragmaFeatures)getPragmas().get("feature");
 	}
 
-	public void setPragmas(HashMap<String, PerlPackagePragma> pragmas)
+	public boolean isPragma(String name)
 	{
-		this.pragmas = pragmas;
+		return pragmas.get(name) != null;
 	}
 
 	public PerlPackage getNamespace()

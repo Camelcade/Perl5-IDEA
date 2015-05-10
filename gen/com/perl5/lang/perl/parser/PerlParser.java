@@ -1010,6 +1010,54 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // PERL_OPERATOR_FILETEST (<<parseBarewordHandle>> | expr )
+  static boolean op_10_expr_filetest(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_10_expr_filetest")) return false;
+    if (!nextTokenIs(b, PERL_OPERATOR_FILETEST)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_OPERATOR_FILETEST);
+    r = r && op_10_expr_filetest_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // <<parseBarewordHandle>> | expr
+  private static boolean op_10_expr_filetest_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_10_expr_filetest_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = parseBarewordHandle(b, l + 1);
+    if (!r) r = expr(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // PERL_OPERATOR_UNARY !"(" expr
+  static boolean op_10_expr_unary(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_10_expr_unary")) return false;
+    if (!nextTokenIs(b, PERL_OPERATOR_UNARY)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_OPERATOR_UNARY);
+    r = r && op_10_expr_unary_1(b, l + 1);
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // !"("
+  private static boolean op_10_expr_unary_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_10_expr_unary_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_, null);
+    r = !consumeToken(b, PERL_LPAREN);
+    exit_section_(b, l, m, null, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // 'package' <<parsePerlPackage>>
   public static boolean package_namespace(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_namespace")) return false;
@@ -1079,25 +1127,46 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // <<parseBarewordHandle>> | PERL_SCALAR | "{" expr "}"
+  // <<parseBarewordHandle>> | PERL_SCALAR !PERL_OPERATOR | "{" scalar "}"
   static boolean perl_handle(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_handle")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = parseBarewordHandle(b, l + 1);
-    if (!r) r = consumeToken(b, PERL_SCALAR);
+    if (!r) r = perl_handle_1(b, l + 1);
     if (!r) r = perl_handle_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // "{" expr "}"
+  // PERL_SCALAR !PERL_OPERATOR
+  private static boolean perl_handle_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_handle_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_SCALAR);
+    r = r && perl_handle_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // !PERL_OPERATOR
+  private static boolean perl_handle_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_handle_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_, null);
+    r = !consumeToken(b, PERL_OPERATOR);
+    exit_section_(b, l, m, null, r, false, null);
+    return r;
+  }
+
+  // "{" scalar "}"
   private static boolean perl_handle_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_handle_2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERL_LBRACE);
-    r = r && expr(b, l + 1, -1);
+    r = r && scalar(b, l + 1);
     r = r && consumeToken(b, PERL_RBRACE);
     exit_section_(b, m, null, r);
     return r;
@@ -2258,7 +2327,7 @@ public class PerlParser implements PsiParser {
   // 11: BINARY(op_13_expr)
   // 12: BINARY(op_12_expr)
   // 13: BINARY(op_11_expr)
-  // 14: PREFIX(op_10_expr)
+  // 14: ATOM(op_10_expr)
   // 15: BINARY(op_9_expr)
   // 16: BINARY(op_8_expr)
   // 17: BINARY(op_7_expr)
@@ -2561,47 +2630,15 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
+  // op_10_expr_unary | op_10_expr_filetest
   public static boolean op_10_expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op_10_expr")) return false;
     if (!nextTokenIsFast(b, PERL_OPERATOR_FILETEST, PERL_OPERATOR_UNARY)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, null);
-    r = op_10_expr_0(b, l + 1);
-    p = r;
-    r = p && expr(b, l, 14);
-    exit_section_(b, l, m, OP_10_EXPR, r, p, null);
-    return r || p;
-  }
-
-  // PERL_OPERATOR_UNARY !"(" | PERL_OPERATOR_FILETEST
-  private static boolean op_10_expr_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "op_10_expr_0")) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = op_10_expr_0_0(b, l + 1);
-    if (!r) r = consumeTokenSmart(b, PERL_OPERATOR_FILETEST);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // PERL_OPERATOR_UNARY !"("
-  private static boolean op_10_expr_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "op_10_expr_0_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokenSmart(b, PERL_OPERATOR_UNARY);
-    r = r && op_10_expr_0_0_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // !"("
-  private static boolean op_10_expr_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "op_10_expr_0_0_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_, null);
-    r = !consumeTokenSmart(b, PERL_LPAREN);
-    exit_section_(b, l, m, null, r, false, null);
+    Marker m = enter_section_(b, l, _NONE_, "<op 10 expr>");
+    r = op_10_expr_unary(b, l + 1);
+    if (!r) r = op_10_expr_filetest(b, l + 1);
+    exit_section_(b, l, m, OP_10_EXPR, r, false, null);
     return r;
   }
 

@@ -248,31 +248,52 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				}
 
 			}
+			// bareword =>
+			else if (nextToken != null && nextToken.getTokenType() == PERL_ARROW_COMMA)
+			{
+				parseBarewordString(b,l);
+				m.drop();
+				return true;
+			}
+			// &bareword
+			// can be
+			// &method
+			// &package::method
+			else if( prevToken != null && "&".equals(prevToken.getTokenText()))
+			{
+				if( b.lookAhead(1) == PERL_DEPACKAGE)
+				{
+					parseBarewordPackageFunctionCall(b,l);
+				}
+				else
+				{
+					parseBarewordFunction(b,l);
+				}
+				m.drop();
+				return true;
+			}
+			// bareword space bareword
 			else if (nextToken != null && nextToken.getTokenType() == PERL_BAREWORD && nextRawTokenType == TokenType.WHITE_SPACE)
 			{
-				//
+				// known filehandle
 				if( ((PerlBuilder) b).isKnownHandle(nextToken.getTokenText()))
 				{
 					parseBarewordFunction(b,l);
 					parseBarewordHandle(b, l);
-					m.drop();
-					return true;
 				}
-				// function1 ...
+				// known function
 				else if( isKnownFunction(b, currentTokenText))
 				{
 					parseBarewordFunction(b, l);
-					m.drop();
-					return true;
 				}
 				// here we thinks it's a method package call
 				else
 				{
 					parseBarewordFunction(b,l);
 					parseBarewordPackage(b,l);
-					m.drop();
-					return true;
 				}
+				m.drop();
+				return true;
 			}
 			// bareword::bareword construction
 			// can be a package or package::method
@@ -288,17 +309,51 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				m.rollbackTo();
 
 				m = b.mark();
-				parseBarewordPackageFunctionCall(b,l);
+				parseBarewordPackageFunctionCall(b, l);
 				m.drop();
 				return true;
 			}
 			// bareword->bareword construction
 			// can be a package->method
 			// or chained method->method
-//			else if(nextToken != null && nextToken.getTokenType() == PERL_DEREFERENCE )
-//			{
-//
-//			}
+			else if(nextToken != null && nextToken.getTokenType() == PERL_DEREFERENCE )
+			{
+				// ->bareword->
+				if( prevToken != null && prevToken.getTokenType() == PERL_DEREFERENCE )
+				{
+					parseBarewordFunction(b, l);
+				}
+				else if( isKnownHandle(b,b.getTokenText()))
+				{
+					parseBarewordHandle(b,l);
+				}
+				else // consider this package->method
+				{
+					parseBarewordPackage(b,l);
+				}
+				m.drop();
+				return true;
+			}
+			// bareword (
+			// can be
+			// function(
+			// function package(
+			// ::function(
+			else if( nextToken != null && nextToken.getTokenType() == PERL_LPAREN)
+			{
+				// function package(
+				if(prevToken != null && prevToken.getTokenType() == PERL_BAREWORD)
+				{
+					parseBarewordPackage(b,l);
+				}
+				else
+				{
+					parseBarewordFunction(b,l);
+				}
+
+				m.drop();
+				return true;
+			}
 			// just known function
 			else if( isKnownFunction(b, currentTokenText))
 			{
@@ -438,7 +493,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 
 	/**
-	 * Trying to parse:  bare => 'smth' construction
+	 * Parsing string content
 	 * @param b	PerlBuilder
 	 * @param l level
 	 * @return	result
@@ -446,10 +501,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseBarewordString(PsiBuilder b, int l ) {
 		// here is the logic when we allows to use barewords as strings
 		IElementType tokenType = b.getTokenType();
-		if(
-			tokenType == PERL_BAREWORD && b.lookAhead(1) == PERL_ARROW_COMMA // BARE =>
-			|| tokenType == PERL_STRING_CONTENT
-		)
+		if(	tokenType == PERL_BAREWORD || tokenType == PERL_STRING_CONTENT )
 		{
 			assert b instanceof PerlBuilder;
 
@@ -470,8 +522,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 		PsiBuilder.Marker m = b.mark();
 
-		PerlCodeBlockStateChange c = parseUseParameters(b,l);
-		if( c == null )
+		PerlCodeBlockStateChange c = parseUseParameters(b, l);
+		if (c == null)
 		{
 			m.rollbackTo();
 			return false;
@@ -486,13 +538,20 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		PerlPackageFile perlPackageFile = ((PerlBuilder) b).getPackageFile(packageName);
 
-		if( !perlPackageFile.isLoaded())
-			m.error(String.format("Can't find package file %s in the %%INC path: %s", perlPackageFile.getFilename(), PerlLanguage.INSTANCE.getLibPaths().toString()));
-		else if( namespace.isImported(packageName))
-			m.error(String.format("Package %s is already imported in the namespace %s", packageName, namespace.getName()));
+		if (!state.isPragma(packageName))
+		{
+			if (!perlPackageFile.isLoaded())
+				m.error(String.format("Can't find package file %s in the %%INC path: %s", perlPackageFile.getFilename(), PerlLanguage.INSTANCE.getLibPaths().toString()));
+			else if (namespace.isImported(packageName))
+				m.error(String.format("Package %s is already imported in the namespace %s", packageName, namespace.getName()));
+			else
+			{
+				namespace.importPackage(packageName);
+				m.drop();
+			}
+		}
 		else
 		{
-			namespace.importPackage(packageName);
 			m.drop();
 		}
 
@@ -680,6 +739,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 		return getCurrentBlockState(b).getNamespace().isKnownFunction(name);
+	}
+
+	protected static boolean isKnownHandle(PsiBuilder b, String name)
+	{
+		assert b instanceof PerlBuilder;
+		return ((PerlBuilder) b).isKnownHandle(name);
 	}
 
 	protected static PerlSyntaxTrap getStringsTrap(PsiBuilder b)
