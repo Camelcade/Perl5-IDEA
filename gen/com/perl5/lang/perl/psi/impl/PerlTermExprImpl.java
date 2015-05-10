@@ -29,6 +29,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlCloseTerm getCloseTerm() {
+    return findChildByClass(PerlCloseTerm.class);
+  }
+
+  @Override
+  @Nullable
   public PerlCompileRegex getCompileRegex() {
     return findChildByClass(PerlCompileRegex.class);
   }
@@ -77,26 +83,14 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
-  public PerlOpenFile getOpenFile() {
-    return findChildByClass(PerlOpenFile.class);
+  public PerlOpenTerm getOpenTerm() {
+    return findChildByClass(PerlOpenTerm.class);
   }
 
   @Override
   @Nullable
-  public PerlOpenHandle getOpenHandle() {
-    return findChildByClass(PerlOpenHandle.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlOpenMode getOpenMode() {
-    return findChildByClass(PerlOpenMode.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlOpenRef getOpenRef() {
-    return findChildByClass(PerlOpenRef.class);
+  public PerlPrintTerm getPrintTerm() {
+    return findChildByClass(PerlPrintTerm.class);
   }
 
   @Override

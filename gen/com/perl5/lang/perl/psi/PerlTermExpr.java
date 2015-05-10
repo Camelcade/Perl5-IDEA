@@ -11,6 +11,9 @@ public interface PerlTermExpr extends PerlExpr {
   PerlCallable getCallable();
 
   @Nullable
+  PerlCloseTerm getCloseTerm();
+
+  @Nullable
   PerlCompileRegex getCompileRegex();
 
   @Nullable
@@ -35,16 +38,10 @@ public interface PerlTermExpr extends PerlExpr {
   PerlMatchRegex getMatchRegex();
 
   @Nullable
-  PerlOpenFile getOpenFile();
+  PerlOpenTerm getOpenTerm();
 
   @Nullable
-  PerlOpenHandle getOpenHandle();
-
-  @Nullable
-  PerlOpenMode getOpenMode();
-
-  @Nullable
-  PerlOpenRef getOpenRef();
+  PerlPrintTerm getPrintTerm();
 
   @Nullable
   PerlReferenceValue getReferenceValue();

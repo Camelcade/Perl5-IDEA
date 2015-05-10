@@ -49,6 +49,9 @@ public class PerlParser implements PsiParser {
     else if (t == CALLABLE) {
       r = callable(b, 0);
     }
+    else if (t == CLOSE_TERM) {
+      r = close_term(b, 0);
+    }
     else if (t == COMMA_EXPR) {
       r = expr(b, 0, 3);
     }
@@ -160,6 +163,9 @@ public class PerlParser implements PsiParser {
     else if (t == OPEN_REF) {
       r = open_ref(b, 0);
     }
+    else if (t == OPEN_TERM) {
+      r = open_term(b, 0);
+    }
     else if (t == OR_EXPR) {
       r = expr(b, 0, 7);
     }
@@ -177,6 +183,9 @@ public class PerlParser implements PsiParser {
     }
     else if (t == PREFIX_UNARY_EXPR) {
       r = prefix_unary_expr(b, 0);
+    }
+    else if (t == PRINT_TERM) {
+      r = print_term(b, 0);
     }
     else if (t == REDO_STATEMENT) {
       r = redo_statement(b, 0);
@@ -466,6 +475,48 @@ public class PerlParser implements PsiParser {
     r = referencable_method(b, l + 1);
     if (!r) r = guessBarewordCallable(b, l + 1);
     exit_section_(b, l, m, CALLABLE, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // perl_handle
+  static boolean close_arguments(PsiBuilder b, int l) {
+    return perl_handle(b, l + 1);
+  }
+
+  /* ********************************************************** */
+  // "close" ( "(" close_arguments ")" | close_arguments )
+  public static boolean close_term(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "close_term")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<close term>");
+    r = consumeToken(b, "close");
+    p = r; // pin = 1
+    r = r && close_term_1(b, l + 1);
+    exit_section_(b, l, m, CLOSE_TERM, r, p, null);
+    return r || p;
+  }
+
+  // "(" close_arguments ")" | close_arguments
+  private static boolean close_term_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "close_term_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = close_term_1_0(b, l + 1);
+    if (!r) r = close_arguments(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // "(" close_arguments ")"
+  private static boolean close_term_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "close_term_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_LPAREN);
+    r = r && close_arguments(b, l + 1);
+    r = r && consumeToken(b, PERL_RPAREN);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -1544,26 +1595,16 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // ("open") ( "(" open_arguments ")" | open_arguments )
-  static boolean open_term(PsiBuilder b, int l) {
+  // "open" ( "(" open_arguments ")" | open_arguments )
+  public static boolean open_term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "open_term")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, null);
-    r = open_term_0(b, l + 1);
+    Marker m = enter_section_(b, l, _NONE_, "<open term>");
+    r = consumeToken(b, "open");
     p = r; // pin = 1
     r = r && open_term_1(b, l + 1);
-    exit_section_(b, l, m, null, r, p, null);
+    exit_section_(b, l, m, OPEN_TERM, r, p, null);
     return r || p;
-  }
-
-  // ("open")
-  private static boolean open_term_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "open_term_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, "open");
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   // "(" open_arguments ")" | open_arguments
@@ -1720,14 +1761,14 @@ public class PerlParser implements PsiParser {
 
   /* ********************************************************** */
   // ("print"|"say") ( "(" [print_arguments] ")" | [print_arguments] )
-  static boolean print_term(PsiBuilder b, int l) {
+  public static boolean print_term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "print_term")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, null);
+    Marker m = enter_section_(b, l, _NONE_, "<print term>");
     r = print_term_0(b, l + 1);
     p = r; // pin = 1
     r = r && print_term_1(b, l + 1);
-    exit_section_(b, l, m, null, r, p, null);
+    exit_section_(b, l, m, PRINT_TERM, r, p, null);
     return r || p;
   }
 
@@ -2395,31 +2436,45 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // "(" <<parseSubPrototype>> ")"
+  // "(" [<<parseSubPrototype>>] ")"
   static boolean sub_prototype(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sub_prototype")) return false;
     if (!nextTokenIs(b, PERL_LPAREN)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERL_LPAREN);
-    r = r && parseSubPrototype(b, l + 1);
+    r = r && sub_prototype_1(b, l + 1);
     r = r && consumeToken(b, PERL_RPAREN);
     exit_section_(b, m, null, r);
     return r;
   }
 
+  // [<<parseSubPrototype>>]
+  private static boolean sub_prototype_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "sub_prototype_1")) return false;
+    parseSubPrototype(b, l + 1);
+    return true;
+  }
+
   /* ********************************************************** */
-  // "(" <<parseSubSignature>> ")"
+  // "(" [<<parseSubSignature>>] ")"
   static boolean sub_signature(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sub_signature")) return false;
     if (!nextTokenIs(b, PERL_LPAREN)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERL_LPAREN);
-    r = r && parseSubSignature(b, l + 1);
+    r = r && sub_signature_1(b, l + 1);
     r = r && consumeToken(b, PERL_RPAREN);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // [<<parseSubSignature>>]
+  private static boolean sub_signature_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "sub_signature_1")) return false;
+    parseSubSignature(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -3334,6 +3389,7 @@ public class PerlParser implements PsiParser {
   //     | reference_value
   //     | print_term
   //     | open_term
+  //     | close_term
   //     | grep_term
   //     | sort_term
   //     | map_term
@@ -3355,6 +3411,7 @@ public class PerlParser implements PsiParser {
     if (!r) r = reference_value(b, l + 1);
     if (!r) r = print_term(b, l + 1);
     if (!r) r = open_term(b, l + 1);
+    if (!r) r = close_term(b, l + 1);
     if (!r) r = grep_term(b, l + 1);
     if (!r) r = sort_term(b, l + 1);
     if (!r) r = map_term(b, l + 1);

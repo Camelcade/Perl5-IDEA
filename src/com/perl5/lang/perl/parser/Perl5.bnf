@@ -163,8 +163,8 @@ private sub_definition_parameters ::=
 sub_declaration ::= 'sub' <<parseSubDeclaration>>
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
-private sub_prototype ::= "(" <<parseSubPrototype>> ")"
-private sub_signature ::= "(" <<parseSubSignature>> ")"
+private sub_prototype ::= "(" [<<parseSubPrototype>>] ")"
+private sub_signature ::= "(" [<<parseSubSignature>>] ")"
 private sub_attributes ::= ":" <<parseSubAttributes>>
 
 
@@ -242,6 +242,7 @@ term_expr ::=
     | reference_value
     | print_term
     | open_term
+    | close_term
     | grep_term
     | sort_term
     | map_term
@@ -289,10 +290,10 @@ lp_or_xor_expr ::= expr ('or'|'xor') expr
 
 private scalar_expr ::= <<parseExpressionLevel 4>>
 
-private print_term ::= ("print"|"say") ( "(" [print_arguments] ")" | [print_arguments] ) {pin=1}
+print_term ::= ("print"|"say") ( "(" [print_arguments] ")" | [print_arguments] ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-private open_term ::= ("open") ( "(" open_arguments ")" | open_arguments ) {pin=1}
+open_term ::= "open" ( "(" open_arguments ")" | open_arguments ) {pin=1}
 private open_arguments ::=
     open_handle [                       // open FILEHANDLE
         "," (
@@ -307,6 +308,9 @@ open_handle ::= variable_declaration | perl_handle
 open_mode ::= scalar_expr
 open_ref ::= ref_expr
 open_file ::= perl_handle | scalar_expr
+
+close_term ::= "close" ( "(" close_arguments ")" | close_arguments ) {pin=1}
+private close_arguments ::= perl_handle
 
 sort_term ::= 'sort' sort_op_arguments
 private sort_op_arguments ::=

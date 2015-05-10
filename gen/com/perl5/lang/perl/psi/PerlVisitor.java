@@ -43,6 +43,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCloseTerm(@NotNull PerlCloseTerm o) {
+    visitPsiElement(o);
+  }
+
   public void visitCommaExpr(@NotNull PerlCommaExpr o) {
     visitExpr(o);
   }
@@ -191,6 +195,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitOpenTerm(@NotNull PerlOpenTerm o) {
+    visitPsiElement(o);
+  }
+
   public void visitOrExpr(@NotNull PerlOrExpr o) {
     visitExpr(o);
   }
@@ -213,6 +221,10 @@ public class PerlVisitor extends PsiElementVisitor {
 
   public void visitPrefixUnaryExpr(@NotNull PerlPrefixUnaryExpr o) {
     visitExpr(o);
+  }
+
+  public void visitPrintTerm(@NotNull PerlPrintTerm o) {
+    visitPsiElement(o);
   }
 
   public void visitRedoStatement(@NotNull PerlRedoStatement o) {

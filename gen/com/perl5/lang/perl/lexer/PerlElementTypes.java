@@ -19,6 +19,7 @@ public interface PerlElementTypes {
   IElementType BLOCK = new PerlElementType("BLOCK");
   IElementType BLOCK_COMPOUND = new PerlElementType("BLOCK_COMPOUND");
   IElementType CALLABLE = new PerlElementType("CALLABLE");
+  IElementType CLOSE_TERM = new PerlElementType("CLOSE_TERM");
   IElementType COMMA_EXPR = new PerlElementType("COMMA_EXPR");
   IElementType COMPARE_EXPR = new PerlElementType("COMPARE_EXPR");
   IElementType COMPILE_REGEX = new PerlElementType("COMPILE_REGEX");
@@ -56,12 +57,14 @@ public interface PerlElementTypes {
   IElementType OPEN_HANDLE = new PerlElementType("OPEN_HANDLE");
   IElementType OPEN_MODE = new PerlElementType("OPEN_MODE");
   IElementType OPEN_REF = new PerlElementType("OPEN_REF");
+  IElementType OPEN_TERM = new PerlElementType("OPEN_TERM");
   IElementType OR_EXPR = new PerlElementType("OR_EXPR");
   IElementType PERL_REGEX = new PerlElementType("PERL_REGEX");
   IElementType PERL_REGEX_MODIFIERS = new PerlElementType("PERL_REGEX_MODIFIERS");
   IElementType POW_EXPR = new PerlElementType("POW_EXPR");
   IElementType PREFIX_UNARY_EXPR = new PerlElementType("PREFIX_UNARY_EXPR");
   IElementType PREF_PP_EXPR = new PerlElementType("PREF_PP_EXPR");
+  IElementType PRINT_TERM = new PerlElementType("PRINT_TERM");
   IElementType REDO_STATEMENT = new PerlElementType("REDO_STATEMENT");
   IElementType REFERENCE_VALUE = new PerlElementType("REFERENCE_VALUE");
   IElementType REF_EXPR = new PerlElementType("REF_EXPR");
@@ -169,6 +172,9 @@ public interface PerlElementTypes {
       }
       else if (type == CALLABLE) {
         return new PerlCallableImpl(node);
+      }
+      else if (type == CLOSE_TERM) {
+        return new PerlCloseTermImpl(node);
       }
       else if (type == COMMA_EXPR) {
         return new PerlCommaExprImpl(node);
@@ -281,6 +287,9 @@ public interface PerlElementTypes {
       else if (type == OPEN_REF) {
         return new PerlOpenRefImpl(node);
       }
+      else if (type == OPEN_TERM) {
+        return new PerlOpenTermImpl(node);
+      }
       else if (type == OR_EXPR) {
         return new PerlOrExprImpl(node);
       }
@@ -298,6 +307,9 @@ public interface PerlElementTypes {
       }
       else if (type == PREF_PP_EXPR) {
         return new PerlPrefPpExprImpl(node);
+      }
+      else if (type == PRINT_TERM) {
+        return new PerlPrintTermImpl(node);
       }
       else if (type == REDO_STATEMENT) {
         return new PerlRedoStatementImpl(node);

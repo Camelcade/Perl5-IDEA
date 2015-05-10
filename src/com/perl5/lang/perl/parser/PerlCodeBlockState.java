@@ -86,6 +86,7 @@ public class PerlCodeBlockState
 
 	public HashMap<String, PerlPackagePragma> getPragmas()
 	{
+		assert pragmas != null;
 		return pragmas;
 	}
 
