@@ -549,6 +549,28 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	/**
+	 * This function parses situations like -bareword =>
+	 * @param b
+	 * @param l
+	 * @return
+	 */
+	public static boolean parseBarewordStringMinus(PsiBuilder b, int l ) {
+		IElementType tokenType = b.getTokenType();
+		assert b instanceof PerlBuilder;
+
+		if( "-".equals(b.getTokenText()) && b.lookAhead(1) == PERL_BAREWORD )
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			getStringsTrap(b).capture("-" + b.getTokenText());
+			b.advanceLexer();
+			m.collapse(PERL_STRING);
+		}
+
+		return false;
+	}
+
 	public static boolean parseArrowSmart(PsiBuilder b, int l )
 	{
 		IElementType tokenType = b.getTokenType();

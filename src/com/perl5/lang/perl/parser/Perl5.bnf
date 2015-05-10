@@ -140,7 +140,6 @@ private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_S
 private for_compound_arguments_list ::=
     [ variable_declaration | variable ] '(' expr ')' block_compound
 
-
 private statement ::= statement_variation [statement_modifier] (<<statementSemi>>|<<eof>>) //{recoverWhile=recover_statement}
 
 private statement_variation ::=
@@ -154,14 +153,14 @@ private statement_variation ::=
     | sub_declaration
     | expr
 
-sub_definition ::= 'sub' <<parseSubDefinition>>
+sub_definition ::= 'sub' <<parseSubDefinition>> {pin=1}
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= 'sub' <<parseSubDeclaration>>
+sub_declaration ::= 'sub' <<parseSubDeclaration>> {pin=1}
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= "(" <<parseSubPrototype>> ")"
@@ -169,9 +168,9 @@ private sub_signature ::= "(" <<parseSubSignature>> ")"
 private sub_attributes ::= ":" <<parseSubAttributes>>
 
 
-last_statement ::= 'last' [lnr_param]
-next_statement ::= 'next' [lnr_param]
-redo_statement ::= 'redo' [lnr_param]
+last_statement ::= 'last' [lnr_param] {pin=1}
+next_statement ::= 'next' [lnr_param] {pin=1}
+redo_statement ::= 'redo' [lnr_param] {pin=1}
 private lnr_param ::= label | expr
 
 
@@ -200,7 +199,7 @@ undef_statement ::= "undef" variable {pin=1}
 
 require_statement ::= 'require' (perl_package | perl_version | string)  {pin=1} // multiline string is possible too
 
-//private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | <<eof>>)
+private recover_statement ::= !(PERL_SEMI  | <<eof>>)
 //private recover_block ::= !(PERL_RBRACE | <<eof>>)
 
 // expression
@@ -231,7 +230,7 @@ expr ::=
     | op_1_expr
 
 op_1_expr ::= term
-op_2_expr ::= expr <<parseArrowSmart>> nested_element
+op_2_expr ::= expr ['->'] nested_element // <<parseArrowSmart>>
 
 private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
@@ -239,9 +238,9 @@ op_3_suff_expr ::= expr ('++'|'--')
 
 op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
 
-private op_5_expr ::= op_5_ref_expr | op_5_bareword_expr| op_5_other_expr // !PERL_BAREWORD - removed cause !function
+private op_5_expr ::= op_5_ref_expr | op_5_bareword_expr| op_5_other_expr
 op_5_ref_expr ::= '\' expr { rightAssociative=true }
-op_5_bareword_expr ::= <<parseBarewordString>>
+op_5_bareword_expr ::= <<parseBarewordStringMinus>>
 op_5_other_expr ::= ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
 op_6_expr ::= expr ('=~'|'!~') expr
@@ -418,7 +417,7 @@ private nested_element ::=
     | "{" expr  "}"
     | "[" PERL_NUMBER  "]"
     | "[" expr "]"
-    | "(" [expr] ")"    // function call like $var->()
+//    | "(" [expr] ")"    // function call like $var->()
     | function_call     // @todo this should be handled differently, left token should be a package if it's bareword
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
