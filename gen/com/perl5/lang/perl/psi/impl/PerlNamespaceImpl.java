@@ -8,23 +8,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlOp20ExprImpl extends PerlExprImpl implements PerlOp20Expr {
+public class PerlNamespaceImpl extends ASTWrapperPsiElement implements PerlNamespace {
 
-  public PerlOp20ExprImpl(ASTNode node) {
+  public PerlNamespaceImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOp20Expr(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitNamespace(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
   }
 
 }

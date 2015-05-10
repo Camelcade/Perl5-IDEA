@@ -24,12 +24,6 @@ public class PerlFileReadTermImpl extends ASTWrapperPsiElement implements PerlFi
 
   @Override
   @Nullable
-  public PerlCallable getCallable() {
-    return findChildByClass(PerlCallable.class);
-  }
-
-  @Override
-  @Nullable
   public PerlExpr getExpr() {
     return findChildByClass(PerlExpr.class);
   }

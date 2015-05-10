@@ -8,24 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlUndefStatementImpl extends ASTWrapperPsiElement implements PerlUndefStatement {
+public class PerlCommaExprImpl extends PerlExprImpl implements PerlCommaExpr {
 
-  public PerlUndefStatementImpl(ASTNode node) {
+  public PerlCommaExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitUndefStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCommaExpr(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
+  @NotNull
   public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+    return findNotNullChildByClass(PerlExpr.class);
   }
 
 }

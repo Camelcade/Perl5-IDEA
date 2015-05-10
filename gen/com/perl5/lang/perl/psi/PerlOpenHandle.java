@@ -5,13 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlForeachCompound extends PsiElement {
+public interface PerlOpenHandle extends PsiElement {
 
   @Nullable
-  PerlBlockCompound getBlockCompound();
-
-  @NotNull
-  List<PerlExpr> getExprList();
+  PerlExpr getExpr();
 
   @Nullable
   PerlVariableDeclarationGlobal getVariableDeclarationGlobal();

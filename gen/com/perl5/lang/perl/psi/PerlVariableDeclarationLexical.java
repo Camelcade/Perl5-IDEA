@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlVariableDeclarationLexical extends PsiElement {
 
   @NotNull
-  List<PerlCallable> getCallableList();
-
-  @NotNull
   List<PerlExpr> getExprList();
 
 }

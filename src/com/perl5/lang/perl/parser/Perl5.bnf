@@ -153,14 +153,14 @@ private statement_variation ::=
     | sub_declaration
     | expr
 
-sub_definition ::= 'sub' <<parseSubDefinition>> {pin=1}
+sub_definition ::= 'sub' <<parseSubDefinition>>
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= 'sub' <<parseSubDeclaration>> {pin=1}
+sub_declaration ::= 'sub' <<parseSubDeclaration>>
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= "(" <<parseSubPrototype>> ")"
@@ -199,16 +199,16 @@ undef_statement ::= "undef" variable {pin=1}
 
 require_statement ::= 'require' (perl_package | perl_version | string)  {pin=1} // multiline string is possible too
 
-private recover_statement ::= !(PERL_SEMI  | <<eof>>)
+//private recover_statement ::= !(PERL_SEMI  | <<eof>>)
 //private recover_block ::= !(PERL_RBRACE | <<eof>>)
 
 // expression
 expr ::=
-    op_24_expr
-    | op_23_expr
-    | op_22_expr
-    | op_21_expr
-    | op_20_expr
+    lp_or_xor_expr
+    | lp_and_expr
+    | lp_not_expr
+    | rightward_call_expr
+    | comma_expr
     | op_19_expr
     | op_18_expr
     | op_17_expr
@@ -230,7 +230,7 @@ expr ::=
     | op_1_expr
 
 op_1_expr ::= term
-op_2_expr ::= expr ['->'] nested_element // <<parseArrowSmart>>
+op_2_expr ::= expr <<parseArrowSmart>> nested_element_expr
 
 private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
@@ -262,12 +262,12 @@ op_17_expr ::= expr ('..'|'...') expr
 op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
-op_20_expr ::= expr (','|'=>') [scalar_expr]
+comma_expr ::= expr (','|'=>') [scalar_expr]
 
-op_21_expr ::= callable !"(" [<<parseExpressionLevel 3>>]
-op_22_expr ::= 'not' expr { rightAssociative=true }
-op_23_expr ::= expr 'and' expr
-op_24_expr ::= expr ('or'|'xor') expr
+rightward_call_expr ::= callable !"(" [<<parseExpressionLevel 3>>]
+lp_not_expr ::= 'not' expr { rightAssociative=true }
+lp_and_expr ::= expr 'and' expr
+lp_or_xor_expr ::= expr ('or'|'xor') expr
 
 private scalar_expr ::= <<parseExpressionLevel 4>>
 
@@ -316,10 +316,14 @@ private sort_op_arguments ::=
     | expr
 
 grep_term ::= 'grep' grep_map_arguments
-map_term ::= 'map'grep_map_arguments
+map_term ::= 'map' grep_map_arguments
 private grep_map_arguments ::=
+    "(" grep_map_arguments_variations ")"
+    | grep_map_arguments_variations
+
+private grep_map_arguments_variations ::=
     block_safe expr
-    | scalar_expr expr
+    | scalar_expr "," expr
 
 private function_call ::= callable "(" [expr] ")"
 
@@ -415,10 +419,15 @@ private scalar ::=
 private nested_element ::=
     "{" PERL_BAREWORD  "}"
     | "{" expr  "}"
-    | "[" PERL_NUMBER  "]"
+//    | "[" PERL_NUMBER  "]"
     | "[" expr "]"
-//    | "(" [expr] ")"    // function call like $var->()
-    | function_call     // @todo this should be handled differently, left token should be a package if it's bareword
+
+// extended nested element for using in ()
+private nested_element_expr ::=
+    nested_element
+    | "(" [expr] ")"    // function call like $var->()
+    | function_call
+    | rightward_call_expr
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 

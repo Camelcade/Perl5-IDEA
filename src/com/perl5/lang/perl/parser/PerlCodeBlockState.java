@@ -38,7 +38,7 @@ public class PerlCodeBlockState
 	 * Applying positive change to current state: use ...
 	 * @param c state change object
 	 */
-	public void use(PerlCodeBlockStateChange c)
+	public void use(PerlUseParameters c)
 	{
 		if( "feature".equals(c.getPackageName()))
 		{
@@ -50,7 +50,7 @@ public class PerlCodeBlockState
 	 * Applying negative change to the current state: no ...
 	 * @param c state change object
 	 */
-	public void no(PerlCodeBlockStateChange c)
+	public void no(PerlUseParameters c)
 	{
 		if( "feature".equals(c.getPackageName()))
 		{

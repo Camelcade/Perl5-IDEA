@@ -11,27 +11,21 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlForeachCompoundImpl extends ASTWrapperPsiElement implements PerlForeachCompound {
+public class PerlOpenHandleImpl extends ASTWrapperPsiElement implements PerlOpenHandle {
 
-  public PerlForeachCompoundImpl(ASTNode node) {
+  public PerlOpenHandleImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitForeachCompound(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOpenHandle(this);
     else super.accept(visitor);
   }
 
   @Override
   @Nullable
-  public PerlBlockCompound getBlockCompound() {
-    return findChildByClass(PerlBlockCompound.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
   @Override

@@ -24,12 +24,6 @@ public class PerlVariableDeclarationLexicalImpl extends ASTWrapperPsiElement imp
 
   @Override
   @NotNull
-  public List<PerlCallable> getCallableList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCallable.class);
-  }
-
-  @Override
-  @NotNull
   public List<PerlExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }

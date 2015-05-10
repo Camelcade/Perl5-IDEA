@@ -8,24 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlUndefStatementImpl extends ASTWrapperPsiElement implements PerlUndefStatement {
+public class PerlRightwardCallExprImpl extends PerlExprImpl implements PerlRightwardCallExpr {
 
-  public PerlUndefStatementImpl(ASTNode node) {
+  public PerlRightwardCallExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitUndefStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitRightwardCallExpr(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+  @NotNull
+  public PerlCallable getCallable() {
+    return findNotNullChildByClass(PerlCallable.class);
   }
 
 }

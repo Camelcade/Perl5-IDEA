@@ -37,7 +37,7 @@ public class PerlPackagePragmaFeatures extends PerlPackagePragma
 	 * Apply positive change to the current pragma object
 	 * @param c state change
 	 */
-	public void use(PerlCodeBlockStateChange c)
+	public void use(PerlUseParameters c)
 	{
 		for (String featureName : c.getPackageParams())
 		{
@@ -50,7 +50,7 @@ public class PerlPackagePragmaFeatures extends PerlPackagePragma
 	 * Apply positive change to the current pragma object
 	 * @param c state change
 	 */
-	public void no(PerlCodeBlockStateChange c)
+	public void no(PerlUseParameters c)
 	{
 		for (String featureName : c.getPackageParams())
 		{

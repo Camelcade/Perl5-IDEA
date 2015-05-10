@@ -19,6 +19,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCommaExpr(@NotNull PerlCommaExpr o) {
+    visitExpr(o);
+  }
+
   public void visitCompileRegex(@NotNull PerlCompileRegex o) {
     visitPsiElement(o);
   }
@@ -87,6 +91,18 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLpAndExpr(@NotNull PerlLpAndExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitLpNotExpr(@NotNull PerlLpNotExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitLpOrXorExpr(@NotNull PerlLpOrXorExpr o) {
+    visitExpr(o);
+  }
+
   public void visitMapTerm(@NotNull PerlMapTerm o) {
     visitPsiElement(o);
   }
@@ -148,26 +164,6 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitOp1Expr(@NotNull PerlOp1Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp20Expr(@NotNull PerlOp20Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp21Expr(@NotNull PerlOp21Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp22Expr(@NotNull PerlOp22Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp23Expr(@NotNull PerlOp23Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp24Expr(@NotNull PerlOp24Expr o) {
     visitExpr(o);
   }
 
@@ -253,6 +249,10 @@ public class PerlVisitor extends PsiElementVisitor {
 
   public void visitRequireStatement(@NotNull PerlRequireStatement o) {
     visitPsiElement(o);
+  }
+
+  public void visitRightwardCallExpr(@NotNull PerlRightwardCallExpr o) {
+    visitExpr(o);
   }
 
   public void visitSortTerm(@NotNull PerlSortTerm o) {

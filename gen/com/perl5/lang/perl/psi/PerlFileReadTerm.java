@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlFileReadTerm extends PsiElement {
 
   @Nullable
-  PerlCallable getCallable();
-
-  @Nullable
   PerlExpr getExpr();
 
 }

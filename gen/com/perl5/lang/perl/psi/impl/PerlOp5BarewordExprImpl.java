@@ -10,21 +10,15 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlOp24ExprImpl extends PerlExprImpl implements PerlOp24Expr {
+public class PerlOp5BarewordExprImpl extends PerlExprImpl implements PerlOp5BarewordExpr {
 
-  public PerlOp24ExprImpl(ASTNode node) {
+  public PerlOp5BarewordExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOp24Expr(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOp5BarewordExpr(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
 }

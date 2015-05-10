@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlOp22ExprImpl extends PerlExprImpl implements PerlOp22Expr {
+public class PerlLpNotExprImpl extends PerlExprImpl implements PerlLpNotExpr {
 
-  public PerlOp22ExprImpl(ASTNode node) {
+  public PerlLpNotExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOp22Expr(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitLpNotExpr(this);
     else super.accept(visitor);
   }
 

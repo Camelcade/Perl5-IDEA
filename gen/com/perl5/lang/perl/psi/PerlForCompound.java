@@ -10,9 +10,6 @@ public interface PerlForCompound extends PsiElement {
   @Nullable
   PerlBlockCompound getBlockCompound();
 
-  @Nullable
-  PerlCallable getCallable();
-
   @NotNull
   List<PerlExpr> getExprList();
 

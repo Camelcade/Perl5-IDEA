@@ -207,7 +207,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		{
 			file = new PerlPackageFile(packageName);
 
-
 			file.setPsiFile(PerlLanguage.INSTANCE.getPackagePsiFile(getProject(), file));
 			loadedPackageFiles.put(packageName,file);
 		}

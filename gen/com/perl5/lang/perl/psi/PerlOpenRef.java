@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlVariableDeclarationLocal extends PsiElement {
+public interface PerlOpenRef extends PsiElement {
 
   @NotNull
-  List<PerlExpr> getExprList();
+  PerlOp5RefExpr getOp5RefExpr();
 
 }

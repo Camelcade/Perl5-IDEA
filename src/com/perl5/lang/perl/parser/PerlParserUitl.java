@@ -2,12 +2,9 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
-import com.intellij.lang.impl.PsiBuilderImpl;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlBuilder;
@@ -571,12 +568,18 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	/**
+	 * Smart parser for ->, makes }->[ optional
+	 * @param b
+	 * @param l
+	 * @return
+	 */
 	public static boolean parseArrowSmart(PsiBuilder b, int l )
 	{
 		IElementType tokenType = b.getTokenType();
-		if( b.getTokenType() == PERL_ARROW_COMMA )
+		if( b.getTokenType() == PERL_DEREFERENCE )
 		{
-			return consumeToken(b, PERL_ARROW_COMMA);
+			return consumeToken(b, PERL_DEREFERENCE);
 		}
 		else
 		{
@@ -601,29 +604,28 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 		PsiBuilder.Marker m = b.mark();
 
-		PerlCodeBlockStateChange c = parseUseParameters(b, l);
-		if (c == null)
+		PerlUseParameters parameters = parseUseParameters(b, l);
+		if (parameters == null)
 		{
 			m.rollbackTo();
 			return false;
 		}
 
 		PerlCodeBlockState state = getCurrentBlockState(b);
-		String packageName = c.getPackageName();
+		String packageName = parameters.getPackageName();
 
-		state.use(c);
-
-		PerlPackage namespace = state.getNamespace();
-
-		if( packageName != null ) // got package, not only verison
+		if( packageName != null )
 		{
-			PerlPackageFile perlPackageFile = ((PerlBuilder) b).getPackageFile(packageName);
-
-			if (!state.isPragma(packageName))
+			if( state.isPragma(packageName))
+				state.use(parameters);
+			else	// regular package load and import
 			{
-				namespace.importPackage(packageName);
+				parameters.setPackageFile(((PerlBuilder) b).getPackageFile(packageName));
+				state.getNamespace().importPackage(parameters);
 			}
 		}
+		// @todo find out what to do with use version
+
 		m.drop();
 		return true;
 	}
@@ -680,7 +682,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parseNoStatement(PsiBuilder b, int l )
 	{
-		PerlCodeBlockStateChange c = parseUseParameters(b,l);
+		PerlUseParameters c = parseUseParameters(b,l);
 		if( c == null )
 			return false;
 
@@ -701,12 +703,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	protected static PerlCodeBlockStateChange parseUseParameters(PsiBuilder b, int l)
+	protected static PerlUseParameters parseUseParameters(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
 
 		PsiBuilder.Marker m = b.mark();
-		PerlCodeBlockStateChange c = null;
+		PerlUseParameters c = null;
 
 		boolean r = parseVersion(b,l);
 
@@ -714,7 +716,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		{
 			if( b.getTokenType() == PERL_SEMI )
 			{
-				c = new PerlCodeBlockStateChange();
+				c = new PerlUseParameters();
 				c.setPackageVersion(((PerlBuilder) b).getLastParsedVersion());
 				m.drop();
 			}
@@ -727,7 +729,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			if( r ) // use MODULE
 			{
-				c = new PerlCodeBlockStateChange();
+				c = new PerlUseParameters();
 				c.setPackageName(((PerlBuilder) b).getLastParsedPackage());
 
 				r = parseVersion(b,l);

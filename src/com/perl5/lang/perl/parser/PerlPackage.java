@@ -4,8 +4,10 @@ import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.exceptions.SubDeclaredException;
 import com.perl5.lang.perl.exceptions.SubDefinedException;
 import com.perl5.lang.perl.exceptions.SubDefinitionDiffersDeclarationException;
+import com.perl5.lang.perl.psi.PerlBuilder;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -16,7 +18,7 @@ public class PerlPackage
 {
 	protected String name;
 	protected PerlVersion version;
-	protected HashMap<String,String> importedPackages = new HashMap<String, String>();
+	protected HashMap<String,PerlUseParameters> importedPackages = new HashMap<String, PerlUseParameters>();
 	protected final HashMap<String,PerlSub> definedSubs = new HashMap<String, PerlSub>();
 	protected final HashMap<String,PerlSub> declaredSubs = new HashMap<String, PerlSub>();
 
@@ -51,9 +53,9 @@ public class PerlPackage
 		return importedPackages.get(packageName) != null;
 	}
 
-	public void importPackage(String packageName)
+	public void importPackage(PerlUseParameters parameters)
 	{
-		importedPackages.put(packageName, packageName);
+		importedPackages.put(parameters.getPackageName(), parameters);
 	}
 
 	/**
@@ -64,7 +66,17 @@ public class PerlPackage
 	 */
 	public boolean isKnownFunction(String name)
 	{
-		return isSubDeclared(name) || isSubDefined(name) || PerlFunctionUtil.isBuiltIn(name);
+		boolean r = isSubDeclared(name) || isSubDefined(name) || PerlFunctionUtil.isBuiltIn(name);
+		if( !r )
+		{
+			for(PerlUseParameters importedPackage: importedPackages.values())
+			{
+				ArrayList<String> imports =  importedPackage.getPackageParams(); // we asuume that all qw are imports
+				if( r = (imports != null && imports.contains(name)) )
+					break;
+			}
+		}
+		return r;
 	}
 
 	public boolean isSubDefined(String name)
