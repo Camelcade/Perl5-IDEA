@@ -32,6 +32,7 @@ public interface PerlElementTypes {
   IElementType LAST_STATEMENT = new PerlElementType("LAST_STATEMENT");
   IElementType MAP_TERM = new PerlElementType("MAP_TERM");
   IElementType MATCH_REGEX = new PerlElementType("MATCH_REGEX");
+  IElementType NAMESPACE = new PerlElementType("NAMESPACE");
   IElementType NEXT_STATEMENT = new PerlElementType("NEXT_STATEMENT");
   IElementType NO_STATEMENT = new PerlElementType("NO_STATEMENT");
   IElementType OPEN_FILE = new PerlElementType("OPEN_FILE");
@@ -58,13 +59,13 @@ public interface PerlElementTypes {
   IElementType OP_3_PREF_EXPR = new PerlElementType("OP_3_PREF_EXPR");
   IElementType OP_3_SUFF_EXPR = new PerlElementType("OP_3_SUFF_EXPR");
   IElementType OP_4_EXPR = new PerlElementType("OP_4_EXPR");
+  IElementType OP_5_BAREWORD_EXPR = new PerlElementType("OP_5_BAREWORD_EXPR");
   IElementType OP_5_OTHER_EXPR = new PerlElementType("OP_5_OTHER_EXPR");
   IElementType OP_5_REF_EXPR = new PerlElementType("OP_5_REF_EXPR");
   IElementType OP_6_EXPR = new PerlElementType("OP_6_EXPR");
   IElementType OP_7_EXPR = new PerlElementType("OP_7_EXPR");
   IElementType OP_8_EXPR = new PerlElementType("OP_8_EXPR");
   IElementType OP_9_EXPR = new PerlElementType("OP_9_EXPR");
-  IElementType PACKAGE_NAMESPACE = new PerlElementType("PACKAGE_NAMESPACE");
   IElementType PERL_REGEX = new PerlElementType("PERL_REGEX");
   IElementType PERL_REGEX_MODIFIERS = new PerlElementType("PERL_REGEX_MODIFIERS");
   IElementType REDO_STATEMENT = new PerlElementType("REDO_STATEMENT");
@@ -206,6 +207,9 @@ public interface PerlElementTypes {
       else if (type == MATCH_REGEX) {
         return new PerlMatchRegexImpl(node);
       }
+      else if (type == NAMESPACE) {
+        return new PerlNamespaceImpl(node);
+      }
       else if (type == NEXT_STATEMENT) {
         return new PerlNextStatementImpl(node);
       }
@@ -284,6 +288,9 @@ public interface PerlElementTypes {
       else if (type == OP_4_EXPR) {
         return new PerlOp4ExprImpl(node);
       }
+      else if (type == OP_5_BAREWORD_EXPR) {
+        return new PerlOp5BarewordExprImpl(node);
+      }
       else if (type == OP_5_OTHER_EXPR) {
         return new PerlOp5OtherExprImpl(node);
       }
@@ -301,9 +308,6 @@ public interface PerlElementTypes {
       }
       else if (type == OP_9_EXPR) {
         return new PerlOp9ExprImpl(node);
-      }
-      else if (type == PACKAGE_NAMESPACE) {
-        return new PerlPackageNamespaceImpl(node);
       }
       else if (type == PERL_REGEX) {
         return new PerlPerlRegexImpl(node);

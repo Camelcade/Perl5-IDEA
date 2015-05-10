@@ -95,6 +95,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitNamespace(@NotNull PerlNamespace o) {
+    visitPsiElement(o);
+  }
+
   public void visitNextStatement(@NotNull PerlNextStatement o) {
     visitPsiElement(o);
   }
@@ -183,6 +187,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitOp5BarewordExpr(@NotNull PerlOp5BarewordExpr o) {
+    visitExpr(o);
+  }
+
   public void visitOp5OtherExpr(@NotNull PerlOp5OtherExpr o) {
     visitExpr(o);
   }
@@ -220,10 +228,6 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitOpenRef(@NotNull PerlOpenRef o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPackageNamespace(@NotNull PerlPackageNamespace o) {
     visitPsiElement(o);
   }
 

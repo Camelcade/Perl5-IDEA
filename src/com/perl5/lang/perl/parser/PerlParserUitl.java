@@ -201,9 +201,22 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				((PerlBuilder) b).pushCodeBlockState(b.getTokenText());
 				getCurrentBlockState(b).setNamespace(namespace);
 
+				boolean r = false;
+
 				// package content
-				boolean r = consumeToken(b, PERL_SEMI) && PerlParser.package_plain(b, l)
-						|| PerlParser.block(b,l);
+				if( b.getTokenType() == PERL_SEMI )
+				{
+					consumeToken(b, PERL_SEMI);
+					PsiBuilder.Marker m = b.mark();
+					r = PerlParser.namespace_content(b, l);
+					if( r )
+						m.done(BLOCK);
+					else
+						m.rollbackTo();
+
+				}
+				else
+					r = PerlParser.block(b,l);
 
 				// @todo we should read vars from here
 				// @todo if something bad happened, we must be able to rollback; so we need to be able to merge namespaces
@@ -511,10 +524,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseBarewordString(PsiBuilder b, int l ) {
 		// here is the logic when we allows to use barewords as strings
 		IElementType tokenType = b.getTokenType();
+		assert b instanceof PerlBuilder;
+
 		if(	tokenType == PERL_BAREWORD || tokenType == PERL_STRING_CONTENT )
 		{
-			assert b instanceof PerlBuilder;
-
 			getStringsTrap(b).capture(b.getTokenText());
 
 			PsiBuilder.Marker m = b.mark();
@@ -523,9 +536,43 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			return true;
 		}
+//		// it's a bareword like -param =>
+		else if( "-".equals(b.getTokenText()) && b.lookAhead(1) == PERL_BAREWORD )
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			getStringsTrap(b).capture("-" + b.getTokenText());
+			b.advanceLexer();
+			m.collapse(PERL_STRING);
+		}
 
 		return false;
 	}
+
+	public static boolean parseArrowSmart(PsiBuilder b, int l )
+	{
+		IElementType tokenType = b.getTokenType();
+		if( b.getTokenType() == PERL_ARROW_COMMA )
+		{
+			return consumeToken(b, PERL_ARROW_COMMA);
+		}
+		else
+		{
+			assert b instanceof PerlBuilder;
+			PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
+			IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
+
+			// optional }->[ or ]->{
+			if(
+				( prevTokenType == PERL_RBRACE || prevTokenType == PERL_RBRACK )
+				&& ( tokenType == PERL_LBRACE || tokenType == PERL_LBRACK )
+					)
+				return true;
+		}
+
+		return false;
+	}
+
 
 	public static boolean parseUseStatement(PsiBuilder b, int l )
 	{

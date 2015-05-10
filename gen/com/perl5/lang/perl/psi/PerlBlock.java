@@ -26,13 +26,13 @@ public interface PerlBlock extends PsiElement {
   List<PerlLastStatement> getLastStatementList();
 
   @NotNull
+  List<PerlNamespace> getNamespaceList();
+
+  @NotNull
   List<PerlNextStatement> getNextStatementList();
 
   @NotNull
   List<PerlNoStatement> getNoStatementList();
-
-  @NotNull
-  List<PerlPackageNamespace> getPackageNamespaceList();
 
   @NotNull
   List<PerlRedoStatement> getRedoStatementList();

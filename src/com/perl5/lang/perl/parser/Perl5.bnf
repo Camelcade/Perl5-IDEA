@@ -92,16 +92,16 @@ private block_safe ::= <<parseBlock>>
 block ::= "{" file_items "}" {pin=1} // should not be used anywhere, injected by block_safe
 
 
-private file_item ::= package_namespace | package_namespace_item
-private package_namespace_item ::= sub_definition | compound_statement PERL_SEMI ? | statement
+private file_item ::= namespace | namespace_element
+private namespace_element ::= sub_definition | compound_statement [PERL_SEMI] | statement
 
 // package keyword
-package_namespace ::= 'package' <<parsePerlPackage>> {pin=1}
-private package_plain ::= package_namespace_item * // injected and wrapped by parsePackageContents
+namespace ::= 'package' <<parsePerlPackage>> {pin=1}
+private namespace_content ::= namespace_element * // injected and wrapped by parsePackageContents
 
 // declarations
 compound_statement ::=
-    label_declaration ? (
+    [label_declaration] (
         block_compound
         | if_compound
         | unless_compound
@@ -112,8 +112,8 @@ compound_statement ::=
         | foreach_compound
      )
 
-if_compound ::= 'if' compound_conditional_block if_compound_elsif * if_compound_else ?
-unless_compound ::= 'unless' compound_conditional_block if_compound_elsif * if_compound_else ?
+if_compound ::= 'if' compound_conditional_block if_compound_elsif * [if_compound_else]
+unless_compound ::= 'unless' compound_conditional_block if_compound_elsif * [if_compound_else]
 private if_compound_elsif ::= 'elsif' compound_conditional_block
 private if_compound_else  ::= 'else' block_safe
 
@@ -121,12 +121,12 @@ private compound_conditional_block ::= '(' expr ')' block_safe
 
 given_compound ::= 'given' compound_conditional_block
 
-while_compound ::= 'while' compound_conditional_block compound_continue_block ?
-until_compound ::= 'until' compound_conditional_block compound_continue_block ?
+while_compound ::= 'while' compound_conditional_block [compound_continue_block]
+until_compound ::= 'until' compound_conditional_block [compound_continue_block]
 
 private compound_continue_block ::= 'continue' block_safe
 
-block_compound ::= block_safe compound_continue_block ?
+block_compound ::= block_safe [compound_continue_block]
 
 
 // for/foreach
@@ -134,14 +134,14 @@ for_compound ::= 'for' for_compound_arguments
 foreach_compound ::= 'foreach' for_compound_arguments
 private for_compound_arguments ::= for_compound_arguments_iteration | for_compound_arguments_list
 
-private for_compound_arguments_iteration ::= '(' expr ? PERL_SEMI expr ? PERL_SEMI expr ? ')' block_safe
+private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_SEMI [expr] ')' block_safe
 
 // @todo only single variable or variable definition may be here
 private for_compound_arguments_list ::=
-    (variable_declaration | variable ) ? '(' expr ')' block_compound
+    [ variable_declaration | variable ] '(' expr ')' block_compound
 
 
-private statement ::= statement_variation statement_modifier ? (<<statementSemi>>|<<eof>>) //{recoverWhile=recover_statement}
+private statement ::= statement_variation [statement_modifier] (<<statementSemi>>|<<eof>>) //{recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
@@ -157,21 +157,21 @@ private statement_variation ::=
 sub_definition ::= 'sub' <<parseSubDefinition>>
 
 private sub_definition_parameters ::=
-    sub_prototype sub_attributes ?
-    | sub_attributes sub_signature ?
+    sub_prototype [sub_attributes]
+    | sub_attributes [sub_signature]
     | sub_signature
 
 sub_declaration ::= 'sub' <<parseSubDeclaration>>
-private sub_declaration_parameters ::=  sub_prototype ? sub_attributes ?
+private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= "(" <<parseSubPrototype>> ")"
 private sub_signature ::= "(" <<parseSubSignature>> ")"
 private sub_attributes ::= ":" <<parseSubAttributes>>
 
 
-last_statement ::= 'last' lnr_param ?
-next_statement ::= 'next' lnr_param ?
-redo_statement ::= 'redo' lnr_param ?
+last_statement ::= 'last' [lnr_param]
+next_statement ::= 'next' [lnr_param]
+redo_statement ::= 'redo' [lnr_param]
 private lnr_param ::= label | expr
 
 
@@ -231,7 +231,7 @@ expr ::=
     | op_1_expr
 
 op_1_expr ::= term
-op_2_expr ::= expr '->' ? nested_element    //  @todo this arrow should be optional only after } or ], need function to parse this, too may variants
+op_2_expr ::= expr <<parseArrowSmart>> nested_element
 
 private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
 op_3_pref_expr ::= ('++'|'--') expr
@@ -239,8 +239,9 @@ op_3_suff_expr ::= expr ('++'|'--')
 
 op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
 
-private op_5_expr ::= op_5_ref_expr | op_5_other_expr // !PERL_BAREWORD - removed cause !function
+private op_5_expr ::= op_5_ref_expr | op_5_bareword_expr| op_5_other_expr // !PERL_BAREWORD - removed cause !function
 op_5_ref_expr ::= '\' expr { rightAssociative=true }
+op_5_bareword_expr ::= <<parseBarewordString>>
 op_5_other_expr ::= ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
 op_6_expr ::= expr ('=~'|'!~') expr
@@ -262,9 +263,9 @@ op_17_expr ::= expr ('..'|'...') expr
 op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
-op_20_expr ::= expr (','|'=>') scalar_expr ?
+op_20_expr ::= expr (','|'=>') [scalar_expr]
 
-op_21_expr ::= callable !"(" <<parseExpressionLevel 3>> ?
+op_21_expr ::= callable !"(" [<<parseExpressionLevel 3>>]
 op_22_expr ::= 'not' expr { rightAssociative=true }
 op_23_expr ::= expr 'and' expr
 op_24_expr ::= expr ('or'|'xor') expr
@@ -274,8 +275,8 @@ private scalar_expr ::= <<parseExpressionLevel 4>>
 private term ::=
     variable
     | variable_declaration
-    | PERL_OPERATOR_UNARY "(" expr ? ")" // named operators as functions
-    | "(" expr ? ")"
+    | PERL_OPERATOR_UNARY "(" [expr] ")" // named operators as functions
+    | "(" [expr] ")"
     | scalar_primitive
     | do_term
     | eval_term
@@ -290,7 +291,7 @@ private term ::=
     | function_call
 
 
-private print_term ::= ("print"|"say") ( "(" print_arguments ? ")" | print_arguments ? ) {pin=1}
+private print_term ::= ("print"|"say") ( "(" [print_arguments] ")" | [print_arguments] ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
 private open_term ::= ("open") ( "(" open_arguments ")" | open_arguments ) {pin=1}
@@ -321,9 +322,9 @@ private grep_map_arguments ::=
     block_safe expr
     | scalar_expr expr
 
-private function_call ::= callable "(" expr ? ")"
+private function_call ::= callable "(" [expr] ")"
 
-file_read_term ::= '<' perl_handle ? '>'
+file_read_term ::= '<' [perl_handle] '>'
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -333,18 +334,18 @@ private regex_term ::=
     | match_regex
 
 compile_regex ::= 'qr' match_regex_body
-match_regex ::= 'm'? match_regex_body
-private match_regex_body ::= PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE perl_regex_modifiers ?
-replacement_regex ::= 's' PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE regex_replacement perl_regex_modifiers ?
+match_regex ::= ['m'] match_regex_body
+private match_regex_body ::= PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE [perl_regex_modifiers]
+replacement_regex ::= 's' PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE regex_replacement [perl_regex_modifiers]
 
 private regex_replacement ::=
-    PERL_REGEX_QUOTE perl_regex ? PERL_REGEX_QUOTE
-    | perl_regex ? PERL_REGEX_QUOTE
+    PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE
+    | [perl_regex] PERL_REGEX_QUOTE
 
 perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
 perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick
 
-tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE PERL_REGEX_QUOTE ? tr_replacementlist PERL_REGEX_QUOTE tr_modifiers ?
+tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE [PERL_REGEX_QUOTE] tr_replacementlist PERL_REGEX_QUOTE [tr_modifiers]
 tr_searchlist ::= PERL_STRING_CONTENT
 tr_replacementlist ::= PERL_STRING_CONTENT
 
@@ -361,9 +362,9 @@ private variable_declaration ::=
 
 // @todo attributes support
 // @todo local variables supports hash/aray elements
-variable_declaration_local ::= 'local' perl_package ?  variable_definition_variation
-variable_declaration_lexical ::= ('my' | 'state') perl_package ? variable_definition_variation
-variable_declaration_global ::= 'our' perl_package ? variable_definition_variation
+variable_declaration_local ::= 'local' [perl_package]  variable_definition_variation
+variable_declaration_lexical ::= ('my' | 'state') [perl_package] variable_definition_variation
+variable_declaration_global ::= 'our' [perl_package] variable_definition_variation
 
 private variable_definition_variation ::=
     '(' variable (',' variable ) * ')'
@@ -377,8 +378,8 @@ reference_value ::=
     | code_ref
     | glob_item_ref
 
-private anon_array_ref ::= '[' expr ? ']'
-private anon_hash_ref ::= '{' expr ? '}'
+private anon_array_ref ::= '[' [expr] ']'
+private anon_hash_ref ::= '{' [expr] '}'
 private code_ref ::= "sub" block_safe
 private glob_item_ref ::= PERL_GLOB "{" glob_item_ref_variant "}"
 private glob_item_ref_variant ::=
@@ -417,6 +418,7 @@ private nested_element ::=
     | "{" expr  "}"
     | "[" PERL_NUMBER  "]"
     | "[" expr "]"
+    | "(" [expr] ")"    // function call like $var->()
     | function_call     // @todo this should be handled differently, left token should be a package if it's bareword
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
@@ -448,7 +450,7 @@ private array_primitive ::=
     | PERL_ARRAY                    // array as is
 
 private string ::= string_quoted | multiline_marker
-private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
+private string_quoted ::= ['qq' | 'qx' | 'q'] PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
 private multiline_marker ::= '<<' (string | <<parseBarewordString>>)
 
 private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE

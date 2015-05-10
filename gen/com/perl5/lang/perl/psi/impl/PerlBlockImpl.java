@@ -60,6 +60,12 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
+  public List<PerlNamespace> getNamespaceList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNamespace.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlNextStatement> getNextStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNextStatement.class);
   }
@@ -68,12 +74,6 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
   @NotNull
   public List<PerlNoStatement> getNoStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNoStatement.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlPackageNamespace> getPackageNamespaceList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPackageNamespace.class);
   }
 
   @Override
