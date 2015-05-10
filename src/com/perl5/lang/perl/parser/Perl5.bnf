@@ -209,69 +209,27 @@ expr ::=
     | lp_not_expr
     | rightward_call_expr
     | comma_expr
-    | op_19_expr
-    | op_18_expr
-    | op_17_expr
-    | op_16_expr
-    | op_15_expr
-    | op_14_expr
-    | op_13_expr
-    | op_12_expr
-    | op_11_expr
+    | assign_expr
+    | trenar_expr
+    | flipflop_expr
+    | or_expr
+    | and_expr
+    | bitwise_or_xor_expr
+    | bitwise_and_expr
+    | equal_expr
+    | compare_expr
     | op_10_expr
-    | op_9_expr
-    | op_8_expr
-    | op_7_expr
-    | op_6_expr
+    | shift_expr
+    | add_expr
+    | mul_expr
+    | regex_expr
     | op_5_expr
-    | op_4_expr
+    | pow_expr
     | op_3_expr
-    | op_2_expr
-    | op_1_expr
+    | deref_expr
+    | term_expr
 
-op_1_expr ::= term
-op_2_expr ::= expr <<parseArrowSmart>> nested_element_expr
-
-private op_3_expr ::= op_3_pref_expr | op_3_suff_expr
-op_3_pref_expr ::= ('++'|'--') expr
-op_3_suff_expr ::= expr ('++'|'--')
-
-op_4_expr ::= expr ('**' expr)+ { rightAssociative=true }
-
-private op_5_expr ::= op_5_ref_expr | op_5_bareword_expr| op_5_other_expr
-op_5_ref_expr ::= '\' expr { rightAssociative=true }
-op_5_bareword_expr ::= <<parseBarewordStringMinus>>
-op_5_other_expr ::= ('~'| '!'| '+' | '-') expr { rightAssociative=true }
-
-op_6_expr ::= expr ('=~'|'!~') expr
-op_7_expr ::= expr ('*'|'/'|'%'|'x') expr
-op_8_expr ::= expr ('+'|'-'|'.') !PERL_BAREWORD expr
-op_9_expr ::= expr ('<<'|'>>') expr
-
-op_10_expr ::= op_10_expr_unary | op_10_expr_filetest
-private op_10_expr_unary ::= PERL_OPERATOR_UNARY !"(" expr
-private op_10_expr_filetest ::= PERL_OPERATOR_FILETEST (<<parseBarewordHandle>> | expr )
-
-op_11_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
-op_12_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
-op_13_expr ::= expr '&' expr
-op_14_expr ::= expr ('|'|'^') expr
-op_15_expr ::= expr '&&' expr
-op_16_expr ::= expr ('||'|'//') expr
-op_17_expr ::= expr ('..'|'...') expr
-op_18_expr ::= expr '?' expr ':' expr { rightAssociative=true }
-op_19_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
-
-comma_expr ::= expr (','|'=>') [scalar_expr]
-
-rightward_call_expr ::= callable !"(" [<<parseExpressionLevel 3>>]
-lp_not_expr ::= 'not' expr { rightAssociative=true }
-lp_and_expr ::= expr 'and' expr
-lp_or_xor_expr ::= expr ('or'|'xor') expr
-
-private scalar_expr ::= <<parseExpressionLevel 4>>
-
-private term ::=
+term_expr ::=
     variable
     | variable_declaration
     | PERL_OPERATOR_UNARY "(" [expr] ")" // named operators as functions
@@ -289,6 +247,46 @@ private term ::=
     | map_term
     | function_call
 
+deref_expr ::= expr <<parseArrowSmart>> nested_element_expr
+
+private op_3_expr ::= pref_pp_expr | suff_pp_expr
+pref_pp_expr ::= ('++'|'--') expr
+suff_pp_expr ::= expr ('++'|'--')
+
+pow_expr ::= expr ('**' expr)+ { rightAssociative=true }
+
+private op_5_expr ::= ref_expr | bareword_expr| prefix_unary_expr
+ref_expr ::= '\' expr { rightAssociative=true }
+bareword_expr ::= <<parseBarewordStringMinus>>
+prefix_unary_expr ::= ('~'| '!'| '+' | '-') expr { rightAssociative=true }
+
+regex_expr ::= expr ('=~'|'!~') expr
+mul_expr ::= expr ('*'|'/'|'%'|'x') expr
+add_expr ::= expr ('+'|'-'|'.') !PERL_BAREWORD expr
+shift_expr ::= expr ('<<'|'>>') expr
+
+private op_10_expr ::= named_unary_expr | filetest_expr
+named_unary_expr ::= PERL_OPERATOR_UNARY !"(" expr
+filetest_expr ::= PERL_OPERATOR_FILETEST (<<parseBarewordHandle>> | expr )
+
+compare_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
+equal_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
+bitwise_and_expr ::= expr '&' expr
+bitwise_or_xor_expr ::= expr ('|'|'^') expr
+and_expr ::= expr '&&' expr
+or_expr ::= expr ('||'|'//') expr
+flipflop_expr ::= expr ('..'|'...') expr
+trenar_expr ::= expr '?' expr ':' expr { rightAssociative=true }
+assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
+
+comma_expr ::= expr (','|'=>') [scalar_expr]
+
+rightward_call_expr ::= callable !"(" [<<parseExpressionLevel 3>>]
+lp_not_expr ::= 'not' expr { rightAssociative=true }
+lp_and_expr ::= expr 'and' expr
+lp_or_xor_expr ::= expr ('or'|'xor') expr
+
+private scalar_expr ::= <<parseExpressionLevel 4>>
 
 private print_term ::= ("print"|"say") ( "(" [print_arguments] ")" | [print_arguments] ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
@@ -306,7 +304,7 @@ private open_arguments ::=
     ]
 open_handle ::= variable_declaration | perl_handle
 open_mode ::= scalar_expr
-open_ref ::= op_5_ref_expr
+open_ref ::= ref_expr
 open_file ::= perl_handle | scalar_expr
 
 sort_term ::= 'sort' sort_op_arguments
@@ -414,20 +412,23 @@ private scalar ::=
     PERL_SCALAR nested_element    // hash or array item
     | PERL_SCALAR
     | PERL_SIGIL_SCALAR "{" PERL_BAREWORD "}"
+    | "(" expr ")" nested_element
     | 'undef'
 
 private nested_element ::=
     "{" PERL_BAREWORD  "}"
     | "{" expr  "}"
-//    | "[" PERL_NUMBER  "]"
     | "[" expr "]"
 
 // extended nested element for using in ()
 private nested_element_expr ::=
     nested_element
     | "(" [expr] ")"    // function call like $var->()
+    | scalar_call
     | function_call
     | rightward_call_expr
+
+scalar_call ::= PERL_SCALAR "(" [expr] ")"
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 

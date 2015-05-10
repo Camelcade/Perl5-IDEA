@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlOpenRef extends PsiElement {
-
-  @NotNull
-  PerlRefExpr getRefExpr();
+public interface PerlBarewordExpr extends PerlExpr {
 
 }

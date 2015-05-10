@@ -254,7 +254,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			PsiBuilder.Marker m = b.mark();
 
-			// it's a parent package method call like $self->SUPER::method
+			// it's a parent package method call like SUPER::method
 			if( "SUPER".equals(tokenText) )
 			{
 				if( parseBarewordPackageFunctionCall(b, l))
@@ -263,6 +263,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 					return true;
 				}
 
+			}
+			// ->bareword construction, method
+			else if( prevTokenType == PERL_DEREFERENCE )
+			{
+				parseBarewordFunction(b,l);
+				m.drop();
+				return true;
 			}
 			// bareword =>
 			else if (nextTokenType == PERL_ARROW_COMMA)
@@ -311,7 +318,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				m.drop();
 				return true;
 			}
-			// bareword::bareword construction
+			// bareword:: construction
 			// can be a package or package::method
 			else if(nextTokenType == PERL_DEPACKAGE )
 			{
@@ -329,7 +336,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				m.drop();
 				return true;
 			}
-			// bareword->bareword construction
+			// bareword-> construction
 			// can be a package->method
 			// or chained method->method
 			else if(nextTokenType == PERL_DEREFERENCE )

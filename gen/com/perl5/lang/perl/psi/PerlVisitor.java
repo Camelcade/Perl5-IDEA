@@ -7,6 +7,30 @@ import com.intellij.psi.PsiElement;
 
 public class PerlVisitor extends PsiElementVisitor {
 
+  public void visitAddExpr(@NotNull PerlAddExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitAndExpr(@NotNull PerlAndExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitAssignExpr(@NotNull PerlAssignExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitBarewordExpr(@NotNull PerlBarewordExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitBitwiseAndExpr(@NotNull PerlBitwiseAndExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitBitwiseOrXorExpr(@NotNull PerlBitwiseOrXorExpr o) {
+    visitExpr(o);
+  }
+
   public void visitBlock(@NotNull PerlBlock o) {
     visitPsiElement(o);
   }
@@ -23,6 +47,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitCompareExpr(@NotNull PerlCompareExpr o) {
+    visitExpr(o);
+  }
+
   public void visitCompileRegex(@NotNull PerlCompileRegex o) {
     visitPsiElement(o);
   }
@@ -31,8 +59,16 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDerefExpr(@NotNull PerlDerefExpr o) {
+    visitExpr(o);
+  }
+
   public void visitDoTerm(@NotNull PerlDoTerm o) {
     visitPsiElement(o);
+  }
+
+  public void visitEqualExpr(@NotNull PerlEqualExpr o) {
+    visitExpr(o);
   }
 
   public void visitEvalTerm(@NotNull PerlEvalTerm o) {
@@ -45,6 +81,14 @@ public class PerlVisitor extends PsiElementVisitor {
 
   public void visitFileReadTerm(@NotNull PerlFileReadTerm o) {
     visitPsiElement(o);
+  }
+
+  public void visitFiletestExpr(@NotNull PerlFiletestExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitFlipflopExpr(@NotNull PerlFlipflopExpr o) {
+    visitExpr(o);
   }
 
   public void visitForCompound(@NotNull PerlForCompound o) {
@@ -111,6 +155,14 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitMulExpr(@NotNull PerlMulExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitNamedUnaryExpr(@NotNull PerlNamedUnaryExpr o) {
+    visitExpr(o);
+  }
+
   public void visitNamespace(@NotNull PerlNamespace o) {
     visitPsiElement(o);
   }
@@ -121,94 +173,6 @@ public class PerlVisitor extends PsiElementVisitor {
 
   public void visitNoStatement(@NotNull PerlNoStatement o) {
     visitPsiElement(o);
-  }
-
-  public void visitOp10Expr(@NotNull PerlOp10Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp11Expr(@NotNull PerlOp11Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp12Expr(@NotNull PerlOp12Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp13Expr(@NotNull PerlOp13Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp14Expr(@NotNull PerlOp14Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp15Expr(@NotNull PerlOp15Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp16Expr(@NotNull PerlOp16Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp17Expr(@NotNull PerlOp17Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp18Expr(@NotNull PerlOp18Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp19Expr(@NotNull PerlOp19Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp1Expr(@NotNull PerlOp1Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp2Expr(@NotNull PerlOp2Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp3PrefExpr(@NotNull PerlOp3PrefExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp3SuffExpr(@NotNull PerlOp3SuffExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp4Expr(@NotNull PerlOp4Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp5BarewordExpr(@NotNull PerlOp5BarewordExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp5OtherExpr(@NotNull PerlOp5OtherExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp5RefExpr(@NotNull PerlOp5RefExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp6Expr(@NotNull PerlOp6Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp7Expr(@NotNull PerlOp7Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp8Expr(@NotNull PerlOp8Expr o) {
-    visitExpr(o);
-  }
-
-  public void visitOp9Expr(@NotNull PerlOp9Expr o) {
-    visitExpr(o);
   }
 
   public void visitOpenFile(@NotNull PerlOpenFile o) {
@@ -227,6 +191,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitOrExpr(@NotNull PerlOrExpr o) {
+    visitExpr(o);
+  }
+
   public void visitPerlRegex(@NotNull PerlPerlRegex o) {
     visitPsiElement(o);
   }
@@ -235,12 +203,32 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPowExpr(@NotNull PerlPowExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitPrefPpExpr(@NotNull PerlPrefPpExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitPrefixUnaryExpr(@NotNull PerlPrefixUnaryExpr o) {
+    visitExpr(o);
+  }
+
   public void visitRedoStatement(@NotNull PerlRedoStatement o) {
     visitPsiElement(o);
   }
 
+  public void visitRefExpr(@NotNull PerlRefExpr o) {
+    visitExpr(o);
+  }
+
   public void visitReferenceValue(@NotNull PerlReferenceValue o) {
     visitPsiElement(o);
+  }
+
+  public void visitRegexExpr(@NotNull PerlRegexExpr o) {
+    visitExpr(o);
   }
 
   public void visitReplacementRegex(@NotNull PerlReplacementRegex o) {
@@ -255,6 +243,14 @@ public class PerlVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitScalarCall(@NotNull PerlScalarCall o) {
+    visitPsiElement(o);
+  }
+
+  public void visitShiftExpr(@NotNull PerlShiftExpr o) {
+    visitExpr(o);
+  }
+
   public void visitSortTerm(@NotNull PerlSortTerm o) {
     visitPsiElement(o);
   }
@@ -265,6 +261,14 @@ public class PerlVisitor extends PsiElementVisitor {
 
   public void visitSubDefinition(@NotNull PerlSubDefinition o) {
     visitPsiElement(o);
+  }
+
+  public void visitSuffPpExpr(@NotNull PerlSuffPpExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitTermExpr(@NotNull PerlTermExpr o) {
+    visitExpr(o);
   }
 
   public void visitTrModifiers(@NotNull PerlTrModifiers o) {
@@ -281,6 +285,10 @@ public class PerlVisitor extends PsiElementVisitor {
 
   public void visitTrSearchlist(@NotNull PerlTrSearchlist o) {
     visitPsiElement(o);
+  }
+
+  public void visitTrenarExpr(@NotNull PerlTrenarExpr o) {
+    visitExpr(o);
   }
 
   public void visitUndefStatement(@NotNull PerlUndefStatement o) {

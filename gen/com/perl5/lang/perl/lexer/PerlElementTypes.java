@@ -10,16 +10,27 @@ import com.perl5.lang.perl.psi.impl.*;
 
 public interface PerlElementTypes {
 
+  IElementType ADD_EXPR = new PerlElementType("ADD_EXPR");
+  IElementType AND_EXPR = new PerlElementType("AND_EXPR");
+  IElementType ASSIGN_EXPR = new PerlElementType("ASSIGN_EXPR");
+  IElementType BAREWORD_EXPR = new PerlElementType("BAREWORD_EXPR");
+  IElementType BITWISE_AND_EXPR = new PerlElementType("BITWISE_AND_EXPR");
+  IElementType BITWISE_OR_XOR_EXPR = new PerlElementType("BITWISE_OR_XOR_EXPR");
   IElementType BLOCK = new PerlElementType("BLOCK");
   IElementType BLOCK_COMPOUND = new PerlElementType("BLOCK_COMPOUND");
   IElementType CALLABLE = new PerlElementType("CALLABLE");
   IElementType COMMA_EXPR = new PerlElementType("COMMA_EXPR");
+  IElementType COMPARE_EXPR = new PerlElementType("COMPARE_EXPR");
   IElementType COMPILE_REGEX = new PerlElementType("COMPILE_REGEX");
   IElementType COMPOUND_STATEMENT = new PerlElementType("COMPOUND_STATEMENT");
+  IElementType DEREF_EXPR = new PerlElementType("DEREF_EXPR");
   IElementType DO_TERM = new PerlElementType("DO_TERM");
+  IElementType EQUAL_EXPR = new PerlElementType("EQUAL_EXPR");
   IElementType EVAL_TERM = new PerlElementType("EVAL_TERM");
   IElementType EXPR = new PerlElementType("EXPR");
+  IElementType FILETEST_EXPR = new PerlElementType("FILETEST_EXPR");
   IElementType FILE_READ_TERM = new PerlElementType("FILE_READ_TERM");
+  IElementType FLIPFLOP_EXPR = new PerlElementType("FLIPFLOP_EXPR");
   IElementType FOREACH_COMPOUND = new PerlElementType("FOREACH_COMPOUND");
   IElementType FOREACH_STATEMENT_MODIFIER = new PerlElementType("FOREACH_STATEMENT_MODIFIER");
   IElementType FOR_COMPOUND = new PerlElementType("FOR_COMPOUND");
@@ -36,6 +47,8 @@ public interface PerlElementTypes {
   IElementType LP_OR_XOR_EXPR = new PerlElementType("LP_OR_XOR_EXPR");
   IElementType MAP_TERM = new PerlElementType("MAP_TERM");
   IElementType MATCH_REGEX = new PerlElementType("MATCH_REGEX");
+  IElementType MUL_EXPR = new PerlElementType("MUL_EXPR");
+  IElementType NAMED_UNARY_EXPR = new PerlElementType("NAMED_UNARY_EXPR");
   IElementType NAMESPACE = new PerlElementType("NAMESPACE");
   IElementType NEXT_STATEMENT = new PerlElementType("NEXT_STATEMENT");
   IElementType NO_STATEMENT = new PerlElementType("NO_STATEMENT");
@@ -43,38 +56,27 @@ public interface PerlElementTypes {
   IElementType OPEN_HANDLE = new PerlElementType("OPEN_HANDLE");
   IElementType OPEN_MODE = new PerlElementType("OPEN_MODE");
   IElementType OPEN_REF = new PerlElementType("OPEN_REF");
-  IElementType OP_10_EXPR = new PerlElementType("OP_10_EXPR");
-  IElementType OP_11_EXPR = new PerlElementType("OP_11_EXPR");
-  IElementType OP_12_EXPR = new PerlElementType("OP_12_EXPR");
-  IElementType OP_13_EXPR = new PerlElementType("OP_13_EXPR");
-  IElementType OP_14_EXPR = new PerlElementType("OP_14_EXPR");
-  IElementType OP_15_EXPR = new PerlElementType("OP_15_EXPR");
-  IElementType OP_16_EXPR = new PerlElementType("OP_16_EXPR");
-  IElementType OP_17_EXPR = new PerlElementType("OP_17_EXPR");
-  IElementType OP_18_EXPR = new PerlElementType("OP_18_EXPR");
-  IElementType OP_19_EXPR = new PerlElementType("OP_19_EXPR");
-  IElementType OP_1_EXPR = new PerlElementType("OP_1_EXPR");
-  IElementType OP_2_EXPR = new PerlElementType("OP_2_EXPR");
-  IElementType OP_3_PREF_EXPR = new PerlElementType("OP_3_PREF_EXPR");
-  IElementType OP_3_SUFF_EXPR = new PerlElementType("OP_3_SUFF_EXPR");
-  IElementType OP_4_EXPR = new PerlElementType("OP_4_EXPR");
-  IElementType OP_5_BAREWORD_EXPR = new PerlElementType("OP_5_BAREWORD_EXPR");
-  IElementType OP_5_OTHER_EXPR = new PerlElementType("OP_5_OTHER_EXPR");
-  IElementType OP_5_REF_EXPR = new PerlElementType("OP_5_REF_EXPR");
-  IElementType OP_6_EXPR = new PerlElementType("OP_6_EXPR");
-  IElementType OP_7_EXPR = new PerlElementType("OP_7_EXPR");
-  IElementType OP_8_EXPR = new PerlElementType("OP_8_EXPR");
-  IElementType OP_9_EXPR = new PerlElementType("OP_9_EXPR");
+  IElementType OR_EXPR = new PerlElementType("OR_EXPR");
   IElementType PERL_REGEX = new PerlElementType("PERL_REGEX");
   IElementType PERL_REGEX_MODIFIERS = new PerlElementType("PERL_REGEX_MODIFIERS");
+  IElementType POW_EXPR = new PerlElementType("POW_EXPR");
+  IElementType PREFIX_UNARY_EXPR = new PerlElementType("PREFIX_UNARY_EXPR");
+  IElementType PREF_PP_EXPR = new PerlElementType("PREF_PP_EXPR");
   IElementType REDO_STATEMENT = new PerlElementType("REDO_STATEMENT");
   IElementType REFERENCE_VALUE = new PerlElementType("REFERENCE_VALUE");
+  IElementType REF_EXPR = new PerlElementType("REF_EXPR");
+  IElementType REGEX_EXPR = new PerlElementType("REGEX_EXPR");
   IElementType REPLACEMENT_REGEX = new PerlElementType("REPLACEMENT_REGEX");
   IElementType REQUIRE_STATEMENT = new PerlElementType("REQUIRE_STATEMENT");
   IElementType RIGHTWARD_CALL_EXPR = new PerlElementType("RIGHTWARD_CALL_EXPR");
+  IElementType SCALAR_CALL = new PerlElementType("SCALAR_CALL");
+  IElementType SHIFT_EXPR = new PerlElementType("SHIFT_EXPR");
   IElementType SORT_TERM = new PerlElementType("SORT_TERM");
   IElementType SUB_DECLARATION = new PerlElementType("SUB_DECLARATION");
   IElementType SUB_DEFINITION = new PerlElementType("SUB_DEFINITION");
+  IElementType SUFF_PP_EXPR = new PerlElementType("SUFF_PP_EXPR");
+  IElementType TERM_EXPR = new PerlElementType("TERM_EXPR");
+  IElementType TRENAR_EXPR = new PerlElementType("TRENAR_EXPR");
   IElementType TR_MODIFIERS = new PerlElementType("TR_MODIFIERS");
   IElementType TR_REGEX = new PerlElementType("TR_REGEX");
   IElementType TR_REPLACEMENTLIST = new PerlElementType("TR_REPLACEMENTLIST");
@@ -141,7 +143,25 @@ public interface PerlElementTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-       if (type == BLOCK) {
+       if (type == ADD_EXPR) {
+        return new PerlAddExprImpl(node);
+      }
+      else if (type == AND_EXPR) {
+        return new PerlAndExprImpl(node);
+      }
+      else if (type == ASSIGN_EXPR) {
+        return new PerlAssignExprImpl(node);
+      }
+      else if (type == BAREWORD_EXPR) {
+        return new PerlBarewordExprImpl(node);
+      }
+      else if (type == BITWISE_AND_EXPR) {
+        return new PerlBitwiseAndExprImpl(node);
+      }
+      else if (type == BITWISE_OR_XOR_EXPR) {
+        return new PerlBitwiseOrXorExprImpl(node);
+      }
+      else if (type == BLOCK) {
         return new PerlBlockImpl(node);
       }
       else if (type == BLOCK_COMPOUND) {
@@ -153,14 +173,23 @@ public interface PerlElementTypes {
       else if (type == COMMA_EXPR) {
         return new PerlCommaExprImpl(node);
       }
+      else if (type == COMPARE_EXPR) {
+        return new PerlCompareExprImpl(node);
+      }
       else if (type == COMPILE_REGEX) {
         return new PerlCompileRegexImpl(node);
       }
       else if (type == COMPOUND_STATEMENT) {
         return new PerlCompoundStatementImpl(node);
       }
+      else if (type == DEREF_EXPR) {
+        return new PerlDerefExprImpl(node);
+      }
       else if (type == DO_TERM) {
         return new PerlDoTermImpl(node);
+      }
+      else if (type == EQUAL_EXPR) {
+        return new PerlEqualExprImpl(node);
       }
       else if (type == EVAL_TERM) {
         return new PerlEvalTermImpl(node);
@@ -168,8 +197,14 @@ public interface PerlElementTypes {
       else if (type == EXPR) {
         return new PerlExprImpl(node);
       }
+      else if (type == FILETEST_EXPR) {
+        return new PerlFiletestExprImpl(node);
+      }
       else if (type == FILE_READ_TERM) {
         return new PerlFileReadTermImpl(node);
+      }
+      else if (type == FLIPFLOP_EXPR) {
+        return new PerlFlipflopExprImpl(node);
       }
       else if (type == FOREACH_COMPOUND) {
         return new PerlForeachCompoundImpl(node);
@@ -219,6 +254,12 @@ public interface PerlElementTypes {
       else if (type == MATCH_REGEX) {
         return new PerlMatchRegexImpl(node);
       }
+      else if (type == MUL_EXPR) {
+        return new PerlMulExprImpl(node);
+      }
+      else if (type == NAMED_UNARY_EXPR) {
+        return new PerlNamedUnaryExprImpl(node);
+      }
       else if (type == NAMESPACE) {
         return new PerlNamespaceImpl(node);
       }
@@ -240,71 +281,8 @@ public interface PerlElementTypes {
       else if (type == OPEN_REF) {
         return new PerlOpenRefImpl(node);
       }
-      else if (type == OP_10_EXPR) {
-        return new PerlOp10ExprImpl(node);
-      }
-      else if (type == OP_11_EXPR) {
-        return new PerlOp11ExprImpl(node);
-      }
-      else if (type == OP_12_EXPR) {
-        return new PerlOp12ExprImpl(node);
-      }
-      else if (type == OP_13_EXPR) {
-        return new PerlOp13ExprImpl(node);
-      }
-      else if (type == OP_14_EXPR) {
-        return new PerlOp14ExprImpl(node);
-      }
-      else if (type == OP_15_EXPR) {
-        return new PerlOp15ExprImpl(node);
-      }
-      else if (type == OP_16_EXPR) {
-        return new PerlOp16ExprImpl(node);
-      }
-      else if (type == OP_17_EXPR) {
-        return new PerlOp17ExprImpl(node);
-      }
-      else if (type == OP_18_EXPR) {
-        return new PerlOp18ExprImpl(node);
-      }
-      else if (type == OP_19_EXPR) {
-        return new PerlOp19ExprImpl(node);
-      }
-      else if (type == OP_1_EXPR) {
-        return new PerlOp1ExprImpl(node);
-      }
-      else if (type == OP_2_EXPR) {
-        return new PerlOp2ExprImpl(node);
-      }
-      else if (type == OP_3_PREF_EXPR) {
-        return new PerlOp3PrefExprImpl(node);
-      }
-      else if (type == OP_3_SUFF_EXPR) {
-        return new PerlOp3SuffExprImpl(node);
-      }
-      else if (type == OP_4_EXPR) {
-        return new PerlOp4ExprImpl(node);
-      }
-      else if (type == OP_5_BAREWORD_EXPR) {
-        return new PerlOp5BarewordExprImpl(node);
-      }
-      else if (type == OP_5_OTHER_EXPR) {
-        return new PerlOp5OtherExprImpl(node);
-      }
-      else if (type == OP_5_REF_EXPR) {
-        return new PerlOp5RefExprImpl(node);
-      }
-      else if (type == OP_6_EXPR) {
-        return new PerlOp6ExprImpl(node);
-      }
-      else if (type == OP_7_EXPR) {
-        return new PerlOp7ExprImpl(node);
-      }
-      else if (type == OP_8_EXPR) {
-        return new PerlOp8ExprImpl(node);
-      }
-      else if (type == OP_9_EXPR) {
-        return new PerlOp9ExprImpl(node);
+      else if (type == OR_EXPR) {
+        return new PerlOrExprImpl(node);
       }
       else if (type == PERL_REGEX) {
         return new PerlPerlRegexImpl(node);
@@ -312,11 +290,26 @@ public interface PerlElementTypes {
       else if (type == PERL_REGEX_MODIFIERS) {
         return new PerlPerlRegexModifiersImpl(node);
       }
+      else if (type == POW_EXPR) {
+        return new PerlPowExprImpl(node);
+      }
+      else if (type == PREFIX_UNARY_EXPR) {
+        return new PerlPrefixUnaryExprImpl(node);
+      }
+      else if (type == PREF_PP_EXPR) {
+        return new PerlPrefPpExprImpl(node);
+      }
       else if (type == REDO_STATEMENT) {
         return new PerlRedoStatementImpl(node);
       }
       else if (type == REFERENCE_VALUE) {
         return new PerlReferenceValueImpl(node);
+      }
+      else if (type == REF_EXPR) {
+        return new PerlRefExprImpl(node);
+      }
+      else if (type == REGEX_EXPR) {
+        return new PerlRegexExprImpl(node);
       }
       else if (type == REPLACEMENT_REGEX) {
         return new PerlReplacementRegexImpl(node);
@@ -327,6 +320,12 @@ public interface PerlElementTypes {
       else if (type == RIGHTWARD_CALL_EXPR) {
         return new PerlRightwardCallExprImpl(node);
       }
+      else if (type == SCALAR_CALL) {
+        return new PerlScalarCallImpl(node);
+      }
+      else if (type == SHIFT_EXPR) {
+        return new PerlShiftExprImpl(node);
+      }
       else if (type == SORT_TERM) {
         return new PerlSortTermImpl(node);
       }
@@ -335,6 +334,15 @@ public interface PerlElementTypes {
       }
       else if (type == SUB_DEFINITION) {
         return new PerlSubDefinitionImpl(node);
+      }
+      else if (type == SUFF_PP_EXPR) {
+        return new PerlSuffPpExprImpl(node);
+      }
+      else if (type == TERM_EXPR) {
+        return new PerlTermExprImpl(node);
+      }
+      else if (type == TRENAR_EXPR) {
+        return new PerlTrenarExprImpl(node);
       }
       else if (type == TR_MODIFIERS) {
         return new PerlTrModifiersImpl(node);

@@ -8,24 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlOpenRefImpl extends ASTWrapperPsiElement implements PerlOpenRef {
+public class PerlBitwiseAndExprImpl extends PerlExprImpl implements PerlBitwiseAndExpr {
 
-  public PerlOpenRefImpl(ASTNode node) {
+  public PerlBitwiseAndExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitOpenRef(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitBitwiseAndExpr(this);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public PerlRefExpr getRefExpr() {
-    return findNotNullChildByClass(PerlRefExpr.class);
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
 }
