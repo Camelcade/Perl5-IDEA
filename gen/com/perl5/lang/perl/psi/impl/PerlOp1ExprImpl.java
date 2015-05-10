@@ -59,6 +59,18 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
 
   @Override
   @Nullable
+  public PerlGrepTerm getGrepTerm() {
+    return findChildByClass(PerlGrepTerm.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlMapTerm getMapTerm() {
+    return findChildByClass(PerlMapTerm.class);
+  }
+
+  @Override
+  @Nullable
   public PerlMatchRegex getMatchRegex() {
     return findChildByClass(PerlMatchRegex.class);
   }
@@ -97,6 +109,12 @@ public class PerlOp1ExprImpl extends PerlExprImpl implements PerlOp1Expr {
   @Nullable
   public PerlReplacementRegex getReplacementRegex() {
     return findChildByClass(PerlReplacementRegex.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlSortTerm getSortTerm() {
+    return findChildByClass(PerlSortTerm.class);
   }
 
   @Override

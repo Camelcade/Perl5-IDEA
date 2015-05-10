@@ -24,11 +24,13 @@ public interface PerlElementTypes {
   IElementType FOR_COMPOUND = new PerlElementType("FOR_COMPOUND");
   IElementType FOR_STATEMENT_MODIFIER = new PerlElementType("FOR_STATEMENT_MODIFIER");
   IElementType GIVEN_COMPOUND = new PerlElementType("GIVEN_COMPOUND");
+  IElementType GREP_TERM = new PerlElementType("GREP_TERM");
   IElementType IF_COMPOUND = new PerlElementType("IF_COMPOUND");
   IElementType IF_STATEMENT_MODIFIER = new PerlElementType("IF_STATEMENT_MODIFIER");
   IElementType LABEL = new PerlElementType("LABEL");
   IElementType LABEL_DECLARATION = new PerlElementType("LABEL_DECLARATION");
   IElementType LAST_STATEMENT = new PerlElementType("LAST_STATEMENT");
+  IElementType MAP_TERM = new PerlElementType("MAP_TERM");
   IElementType MATCH_REGEX = new PerlElementType("MATCH_REGEX");
   IElementType NEXT_STATEMENT = new PerlElementType("NEXT_STATEMENT");
   IElementType NO_STATEMENT = new PerlElementType("NO_STATEMENT");
@@ -69,6 +71,7 @@ public interface PerlElementTypes {
   IElementType REFERENCE_VALUE = new PerlElementType("REFERENCE_VALUE");
   IElementType REPLACEMENT_REGEX = new PerlElementType("REPLACEMENT_REGEX");
   IElementType REQUIRE_STATEMENT = new PerlElementType("REQUIRE_STATEMENT");
+  IElementType SORT_TERM = new PerlElementType("SORT_TERM");
   IElementType SUB_DECLARATION = new PerlElementType("SUB_DECLARATION");
   IElementType SUB_DEFINITION = new PerlElementType("SUB_DEFINITION");
   IElementType TR_MODIFIERS = new PerlElementType("TR_MODIFIERS");
@@ -179,6 +182,9 @@ public interface PerlElementTypes {
       else if (type == GIVEN_COMPOUND) {
         return new PerlGivenCompoundImpl(node);
       }
+      else if (type == GREP_TERM) {
+        return new PerlGrepTermImpl(node);
+      }
       else if (type == IF_COMPOUND) {
         return new PerlIfCompoundImpl(node);
       }
@@ -193,6 +199,9 @@ public interface PerlElementTypes {
       }
       else if (type == LAST_STATEMENT) {
         return new PerlLastStatementImpl(node);
+      }
+      else if (type == MAP_TERM) {
+        return new PerlMapTermImpl(node);
       }
       else if (type == MATCH_REGEX) {
         return new PerlMatchRegexImpl(node);
@@ -313,6 +322,9 @@ public interface PerlElementTypes {
       }
       else if (type == REQUIRE_STATEMENT) {
         return new PerlRequireStatementImpl(node);
+      }
+      else if (type == SORT_TERM) {
+        return new PerlSortTermImpl(node);
       }
       else if (type == SUB_DECLARATION) {
         return new PerlSubDeclarationImpl(node);

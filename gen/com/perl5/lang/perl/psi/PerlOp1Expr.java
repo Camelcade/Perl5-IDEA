@@ -26,6 +26,12 @@ public interface PerlOp1Expr extends PerlExpr {
   PerlFileReadTerm getFileReadTerm();
 
   @Nullable
+  PerlGrepTerm getGrepTerm();
+
+  @Nullable
+  PerlMapTerm getMapTerm();
+
+  @Nullable
   PerlMatchRegex getMatchRegex();
 
   @Nullable
@@ -45,6 +51,9 @@ public interface PerlOp1Expr extends PerlExpr {
 
   @Nullable
   PerlReplacementRegex getReplacementRegex();
+
+  @Nullable
+  PerlSortTerm getSortTerm();
 
   @Nullable
   PerlTrRegex getTrRegex();

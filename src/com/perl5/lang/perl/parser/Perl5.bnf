@@ -277,7 +277,6 @@ private term ::=
     | PERL_OPERATOR_UNARY "(" expr ? ")" // named operators as functions
     | "(" expr ? ")"
     | scalar_primitive
-    | list_primitive
     | do_term
     | eval_term
     | regex_term
@@ -285,6 +284,9 @@ private term ::=
     | reference_value
     | print_term
     | open_term
+    | grep_term
+    | sort_term
+    | map_term
     | function_call
 
 
@@ -307,6 +309,17 @@ open_mode ::= scalar_expr
 open_ref ::= op_5_ref_expr
 open_file ::= perl_handle | scalar_expr
 
+sort_term ::= 'sort' sort_op_arguments
+private sort_op_arguments ::=
+    <<parseBarewordFunction>> expr
+    | block_safe expr
+    | expr
+
+grep_term ::= 'grep' grep_map_arguments
+map_term ::= 'map'grep_map_arguments
+private grep_map_arguments ::=
+    block_safe expr
+    | scalar_expr expr
 
 private function_call ::= callable "(" expr ? ")"
 
@@ -353,7 +366,7 @@ variable_declaration_lexical ::= ('my' | 'state') perl_package ? variable_defini
 variable_declaration_global ::= 'our' perl_package ? variable_definition_variation
 
 private variable_definition_variation ::=
-    '(' variable (',' variable ) + ')'
+    '(' variable (',' variable ) * ')'
     | variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
@@ -381,7 +394,17 @@ private glob_item_ref_variant ::=
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
-private variable ::= scalar | PERL_ARRAY | PERL_HASH | PERL_GLOB
+private variable ::= scalar | array | hash | PERL_GLOB
+
+private array ::=
+    array_primitive '[' expr ']'              // array slice
+    | array_primitive '{' expr '}'              // hash slice
+    | array_primitive
+
+private hash ::=
+    PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
+    | PERL_SIGIL_HASH scalar_expr       // scalar dereference wo braces
+    | PERL_HASH                    // hash as is
 
 private scalar ::=
     PERL_SCALAR nested_element    // hash or array item
@@ -390,8 +413,10 @@ private scalar ::=
     | 'undef'
 
 private nested_element ::=
-    "{" (PERL_BAREWORD | expr ) "}"
-    | "[" (PERL_NUMBER | expr ) "]"
+    "{" PERL_BAREWORD  "}"
+    | "{" expr  "}"
+    | "[" PERL_NUMBER  "]"
+    | "[" expr "]"
     | function_call     // @todo this should be handled differently, left token should be a package if it's bareword
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
@@ -411,15 +436,21 @@ private referencable_method ::= '&'
 
 
 // primitives
-private list_primitive ::=
-    string_list
-
 private scalar_primitive ::=
     PERL_NUMBER
+    | PERL_TAG  // __PACKAGE__ etc.
     | string
 
-private string ::= string_quoted
+private array_primitive ::=
+    string_list
+    | PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
+    | PERL_SIGIL_ARRAY scalar_expr       // scalar dereference
+    | PERL_ARRAY                    // array as is
+
+private string ::= string_quoted | multiline_marker
 private string_quoted ::= ('qq' | 'qx' | 'q') ? PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
+private multiline_marker ::= '<<' (string | <<parseBarewordString>>)
+
 private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
 
 label_declaration ::= label ":" // do we need to change tokentype?
@@ -443,11 +474,6 @@ private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR !PERL_OPERATOR | "
 //shift_expr ::= ('shift' | 'pop') shift_expr_args ?
 //private shift_expr_args ::= list_expr | expr
 //
-//// sort
-//sort_expr ::= 'sort' sort_op_args
-//sort_op_args ::=
-//    perl_function list_expr
-//    | block ? list_expr
 //
 //// keys && values
 //keys_expr ::= ('keys' | 'values' ) keys_args
@@ -456,24 +482,8 @@ private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR !PERL_OPERATOR | "
 //    | (hash | array)
 //
 //// grep
-//grep_expr ::= ('grep' | 'map' ) (block list_expr | expr)
 //
 //
-//array ::=
-//    array_safe '[' expr ']'              // array slice
-//    | array_safe '{' expr '}'              // hash slice
-//    | array_safe
-//    | '(' ')'                       // empty array
-//
-//private array_safe ::=
-//    PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
-//    | PERL_SIGIL_ARRAY scalar_expr       // scalar dereference
-//    | PERL_ARRAY                    // array as is
-//
-//hash ::=
-//    PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
-//    | PERL_SIGIL_HASH scalar_expr       // scalar dereference wo braces
-//    | PERL_HASH                    // hash as is
 //
 //
 //scalar_nested_element ::= scalar structure_element+
@@ -484,7 +494,6 @@ private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR !PERL_OPERATOR | "
 //    | PERL_SIGIL_SCALAR '{' expr '}'       // scalar dereference
 //    | PERL_SCALAR                          // scalar as is
 //    | PERL_NUMBER                       // raw number
-//    | PERL_TAG
 //    | PERL_GLOB
 //    | scalar_anon_array
 //    | scalar_anon_hash
@@ -503,7 +512,6 @@ private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR !PERL_OPERATOR | "
 //private scalar_generated_list_item ::= '(' expr ')'[expr]                // generated array element
 //
 //
-//private multiline_marker ::= '<<' (string | PERL_BAREWORD)
 //
 //private local_variables ::= local_variable (',' local_variables ) *
 //private local_variable ::= expr | variable

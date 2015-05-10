@@ -63,6 +63,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitGrepTerm(@NotNull PerlGrepTerm o) {
+    visitPsiElement(o);
+  }
+
   public void visitIfCompound(@NotNull PerlIfCompound o) {
     visitPsiElement(o);
   }
@@ -80,6 +84,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitLastStatement(@NotNull PerlLastStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMapTerm(@NotNull PerlMapTerm o) {
     visitPsiElement(o);
   }
 
@@ -240,6 +248,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitRequireStatement(@NotNull PerlRequireStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSortTerm(@NotNull PerlSortTerm o) {
     visitPsiElement(o);
   }
 
