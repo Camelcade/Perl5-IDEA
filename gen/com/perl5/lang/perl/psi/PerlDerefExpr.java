@@ -7,13 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlDerefExpr extends PerlExpr {
 
-  @Nullable
-  PerlCallable getCallable();
+  @NotNull
+  List<PerlCallable> getCallableList();
 
   @NotNull
   List<PerlExpr> getExprList();
 
-  @Nullable
-  PerlScalarCall getScalarCall();
+  @NotNull
+  List<PerlScalarCall> getScalarCallList();
 
 }

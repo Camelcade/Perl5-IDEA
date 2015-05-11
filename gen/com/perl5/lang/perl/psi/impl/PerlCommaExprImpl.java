@@ -23,8 +23,8 @@ public class PerlCommaExprImpl extends PerlExprImpl implements PerlCommaExpr {
 
   @Override
   @NotNull
-  public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
+  public List<PerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
 }

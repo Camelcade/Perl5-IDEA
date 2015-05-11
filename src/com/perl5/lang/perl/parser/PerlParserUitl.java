@@ -737,9 +737,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parseSubPrototype(PsiBuilder b, int l )
 	{
-//		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
+		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
+
 //		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
-		return false;
+
+		while( !b.eof() && b.getTokenType() != PERL_RPAREN )
+			consumeToken(b, b.getTokenType());
+
+		return true;
 	}
 
 

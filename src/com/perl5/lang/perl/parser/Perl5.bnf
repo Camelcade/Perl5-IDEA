@@ -252,7 +252,7 @@ term_expr ::=
     | redo_term
     | function_call
 
-deref_expr ::= expr <<parseArrowSmart>> nested_element_expr
+deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
 
 private op_3_expr ::= pref_pp_expr | suff_pp_expr
 pref_pp_expr ::= ('++'|'--') expr
@@ -284,7 +284,7 @@ flipflop_expr ::= expr ('..'|'...') expr
 trenar_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
-comma_expr ::= expr (','|'=>') [scalar_expr]
+comma_expr ::= expr ((','|'=>') (expr | &PERL_RBRACE | &PERL_RBRACK | &PERL_RPAREN)) +
 
 rightward_call_expr ::= callable <<parseRightwardCallParameters>>
 lp_not_expr ::= 'not' expr { rightAssociative=true }

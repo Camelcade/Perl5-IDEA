@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlCommaExpr extends PerlExpr {
 
   @NotNull
-  PerlExpr getExpr();
+  List<PerlExpr> getExprList();
 
 }

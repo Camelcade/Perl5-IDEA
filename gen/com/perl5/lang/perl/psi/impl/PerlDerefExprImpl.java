@@ -22,9 +22,9 @@ public class PerlDerefExprImpl extends PerlExprImpl implements PerlDerefExpr {
   }
 
   @Override
-  @Nullable
-  public PerlCallable getCallable() {
-    return findChildByClass(PerlCallable.class);
+  @NotNull
+  public List<PerlCallable> getCallableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCallable.class);
   }
 
   @Override
@@ -34,9 +34,9 @@ public class PerlDerefExprImpl extends PerlExprImpl implements PerlDerefExpr {
   }
 
   @Override
-  @Nullable
-  public PerlScalarCall getScalarCall() {
-    return findChildByClass(PerlScalarCall.class);
+  @NotNull
+  public List<PerlScalarCall> getScalarCallList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlScalarCall.class);
   }
 
 }

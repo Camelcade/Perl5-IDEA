@@ -68,6 +68,7 @@ PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
 // heading _ removed to avoid @_ parsing as sigil-number
 NUMBER = [0-9][0-9_]*( "." [0-9_]+ )?
+NUMBER_HEX = "0x" [0-9a-fA-F]+
 
 THE_END         = __END__
 THE_DATA        = __DATA__
@@ -309,6 +310,7 @@ TRANS_MODIFIERS = [cdsr]
 ">"             {return PERL_RANGLE;}
 
 
+{NUMBER_HEX}        {return PERL_NUMBER;}
 {NUMBER}        {return PERL_NUMBER;}
 {PERL_VERSION}  {return PERL_NUMBER_VERSION;}
 

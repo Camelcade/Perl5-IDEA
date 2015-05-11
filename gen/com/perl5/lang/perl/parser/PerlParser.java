@@ -3295,20 +3295,36 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // (','|'=>') [scalar_expr]
+  // ((','|'=>') (expr | &PERL_RBRACE | &PERL_RBRACK | &PERL_RPAREN)) +
   private static boolean comma_expr_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "comma_expr_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = comma_expr_0_0(b, l + 1);
-    r = r && comma_expr_0_1(b, l + 1);
+    int c = current_position_(b);
+    while (r) {
+      if (!comma_expr_0_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "comma_expr_0", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (','|'=>') (expr | &PERL_RBRACE | &PERL_RBRACK | &PERL_RPAREN)
+  private static boolean comma_expr_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comma_expr_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = comma_expr_0_0_0(b, l + 1);
+    r = r && comma_expr_0_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ','|'=>'
-  private static boolean comma_expr_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "comma_expr_0_0")) return false;
+  private static boolean comma_expr_0_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comma_expr_0_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeTokenSmart(b, PERL_COMMA);
@@ -3317,11 +3333,47 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // [scalar_expr]
-  private static boolean comma_expr_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "comma_expr_0_1")) return false;
-    scalar_expr(b, l + 1);
-    return true;
+  // expr | &PERL_RBRACE | &PERL_RBRACK | &PERL_RPAREN
+  private static boolean comma_expr_0_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comma_expr_0_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1, -1);
+    if (!r) r = comma_expr_0_0_1_1(b, l + 1);
+    if (!r) r = comma_expr_0_0_1_2(b, l + 1);
+    if (!r) r = comma_expr_0_0_1_3(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // &PERL_RBRACE
+  private static boolean comma_expr_0_0_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comma_expr_0_0_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_, null);
+    r = consumeTokenSmart(b, PERL_RBRACE);
+    exit_section_(b, l, m, null, r, false, null);
+    return r;
+  }
+
+  // &PERL_RBRACK
+  private static boolean comma_expr_0_0_1_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comma_expr_0_0_1_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_, null);
+    r = consumeTokenSmart(b, PERL_RBRACK);
+    exit_section_(b, l, m, null, r, false, null);
+    return r;
+  }
+
+  // &PERL_RPAREN
+  private static boolean comma_expr_0_0_1_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comma_expr_0_0_1_3")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_, null);
+    r = consumeTokenSmart(b, PERL_RPAREN);
+    exit_section_(b, l, m, null, r, false, null);
+    return r;
   }
 
   // '=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//='
@@ -3608,9 +3660,25 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // <<parseArrowSmart>> nested_element_expr
+  // (<<parseArrowSmart>> nested_element_expr) +
   private static boolean deref_expr_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "deref_expr_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = deref_expr_0_0(b, l + 1);
+    int c = current_position_(b);
+    while (r) {
+      if (!deref_expr_0_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "deref_expr_0", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // <<parseArrowSmart>> nested_element_expr
+  private static boolean deref_expr_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "deref_expr_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = parseArrowSmart(b, l + 1);
