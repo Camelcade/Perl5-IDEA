@@ -14,6 +14,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 	@Override
 	public void registerReferenceProviders(PsiReferenceRegistrar registrar)
 	{
+/*
 		registrar.registerReferenceProvider(
 				PlatformPatterns.psiElement(),
 				new PsiReferenceProvider()
@@ -30,5 +31,6 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 						return new PsiReference[0];					}
 				}
 		);
+*/
 	}
 }

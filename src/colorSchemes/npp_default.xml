@@ -78,6 +78,7 @@
     </option>
     <option name="PERL_DEPRECATED">
         <value>
+            <option name="FOREGROUND" value="808080" />
             <option name="EFFECT_COLOR" value="FF4040" />
             <option name="EFFECT_TYPE" value="3" />
         </value>

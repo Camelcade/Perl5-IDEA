@@ -61,7 +61,8 @@ END_OF_LINE_COMMENT = "#" {FULL_LINE}
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
-NUMBER = [0-9_]+( "." [0-9_]+ )?
+// heading _ removed to avoid @_ parsing as sigil-number
+NUMBER = [0-9][0-9_]*( "." [0-9_]+ )?
 
 THE_END         = __END__
 THE_DATA        = __DATA__
