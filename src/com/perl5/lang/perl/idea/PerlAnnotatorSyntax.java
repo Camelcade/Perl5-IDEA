@@ -100,10 +100,11 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		}
 		else if( elementType == PERL_FUNCTION)
 		{
+			boolean isBuiltIn = PerlFunctionUtil.isBuiltIn(element.getText());
 			colorize(
 					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_FUNCTION,
-					PerlFunctionUtil.isBuiltIn(element.getText()),
+					isBuiltIn ? PerlSyntaxHighlighter.PERL_OPERATOR :PerlSyntaxHighlighter.PERL_FUNCTION,
+					isBuiltIn,
 					false);
 		}
 	}
