@@ -1920,66 +1920,69 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // perl_scalar_built_in
-  //     | PERL_SIGIL_SCALAR ["#"] PERL_SIGIL_SCALAR * PERL_BAREWORD ("::" PERL_BAREWORD) *
+  // (PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR) PERL_SIGIL_SCALAR * PERL_BAREWORD ("::" PERL_BAREWORD) *
+  //     | perl_scalar_built_in
   public static boolean perl_scalar(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "perl_scalar")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<perl scalar>");
-    r = perl_scalar_built_in(b, l + 1);
-    if (!r) r = perl_scalar_1(b, l + 1);
+    r = perl_scalar_0(b, l + 1);
+    if (!r) r = perl_scalar_built_in(b, l + 1);
     exit_section_(b, l, m, PERL_SCALAR, r, false, null);
     return r;
   }
 
-  // PERL_SIGIL_SCALAR ["#"] PERL_SIGIL_SCALAR * PERL_BAREWORD ("::" PERL_BAREWORD) *
-  private static boolean perl_scalar_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "perl_scalar_1")) return false;
+  // (PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR) PERL_SIGIL_SCALAR * PERL_BAREWORD ("::" PERL_BAREWORD) *
+  private static boolean perl_scalar_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_scalar_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PERL_SIGIL_SCALAR);
-    r = r && perl_scalar_1_1(b, l + 1);
-    r = r && perl_scalar_1_2(b, l + 1);
+    r = perl_scalar_0_0(b, l + 1);
+    r = r && perl_scalar_0_1(b, l + 1);
     r = r && consumeToken(b, PERL_BAREWORD);
-    r = r && perl_scalar_1_4(b, l + 1);
+    r = r && perl_scalar_0_3(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // ["#"]
-  private static boolean perl_scalar_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "perl_scalar_1_1")) return false;
-    consumeToken(b, "#");
-    return true;
+  // PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR
+  private static boolean perl_scalar_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_scalar_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_SIGIL_SCALAR_INDEX);
+    if (!r) r = consumeToken(b, PERL_SIGIL_SCALAR);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   // PERL_SIGIL_SCALAR *
-  private static boolean perl_scalar_1_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "perl_scalar_1_2")) return false;
+  private static boolean perl_scalar_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_scalar_0_1")) return false;
     int c = current_position_(b);
     while (true) {
       if (!consumeToken(b, PERL_SIGIL_SCALAR)) break;
-      if (!empty_element_parsed_guard_(b, "perl_scalar_1_2", c)) break;
+      if (!empty_element_parsed_guard_(b, "perl_scalar_0_1", c)) break;
       c = current_position_(b);
     }
     return true;
   }
 
   // ("::" PERL_BAREWORD) *
-  private static boolean perl_scalar_1_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "perl_scalar_1_4")) return false;
+  private static boolean perl_scalar_0_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_scalar_0_3")) return false;
     int c = current_position_(b);
     while (true) {
-      if (!perl_scalar_1_4_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "perl_scalar_1_4", c)) break;
+      if (!perl_scalar_0_3_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "perl_scalar_0_3", c)) break;
       c = current_position_(b);
     }
     return true;
   }
 
   // "::" PERL_BAREWORD
-  private static boolean perl_scalar_1_4_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "perl_scalar_1_4_0")) return false;
+  private static boolean perl_scalar_0_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "perl_scalar_0_3_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERL_DEPACKAGE);
@@ -2026,7 +2029,7 @@ public class PerlParser implements PsiParser {
     if (!r) r = consumeToken(b, "$^H");
     if (!r) r = consumeToken(b, "$!");
     if (!r) r = consumeToken(b, "$\"");
-    if (!r) r = consumeToken(b, "$#");
+    if (!r) r = consumeToken(b, PERL_SIGIL_SCALAR_INDEX);
     if (!r) r = consumeToken(b, "$$");
     if (!r) r = consumeToken(b, "$%");
     if (!r) r = consumeToken(b, "$&");

@@ -138,6 +138,7 @@ public interface PerlElementTypes {
   IElementType PERL_SIGIL_ARRAY = new PerlTokenType("@");
   IElementType PERL_SIGIL_HASH = new PerlTokenType("%");
   IElementType PERL_SIGIL_SCALAR = new PerlTokenType("$");
+  IElementType PERL_SIGIL_SCALAR_INDEX = new PerlTokenType("$#");
   IElementType PERL_STRING = new PerlTokenType("PERL_STRING");
   IElementType PERL_STRING_CONTENT = new PerlTokenType("PERL_STRING_CONTENT");
   IElementType PERL_STRING_MULTILINE = new PerlTokenType("PERL_STRING_MULTILINE");

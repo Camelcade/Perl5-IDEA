@@ -28,11 +28,7 @@
     PERL_SIGIL_ARRAY="@"
     PERL_SIGIL_HASH="%"
     PERL_SIGIL_SCALAR="$"
-
-//    PERL_SCALAR="PERL_SCALAR"
-//    PERL_ARRAY="PERL_ARRAY"
-//    PERL_HASH="PERL_HASH"
-//    PERL_GLOB="PERL_GLOB"
+    PERL_SIGIL_SCALAR_INDEX="$#"
 
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
     PERL_STRING_MULTILINE_END="PERL_STRING_MULTILINE_END"
@@ -482,8 +478,9 @@ private perl_handle ::= <<parseBarewordHandle>> | perl_scalar !PERL_OPERATOR | "
 
 // this is pretty raw
 perl_scalar ::=
-    perl_scalar_built_in
-    | PERL_SIGIL_SCALAR ["#"] PERL_SIGIL_SCALAR * PERL_BAREWORD ("::" PERL_BAREWORD) *
+    (PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR) PERL_SIGIL_SCALAR * PERL_BAREWORD ("::" PERL_BAREWORD) *
+    | perl_scalar_built_in
+
 
 private perl_scalar_built_in ::=
     "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$^TAINT" | "$^UTF8LOCALE" | "$^RE_TRIE_MAXBUF" | "$^CHILD_ERROR_NATIVE" | "$^ENCODING" | "$^OPEN" | "$^RE_DEBUG_FLAGS" | "$^A" | "$^C" | "$^T" | "$^S" | "$^V" | "$^W" | "$^X" | "$^D" | "$^E" | "$^F" | "$^H" | "$^I" | "$^L" | "$^M" | "$^N" | "$^O" | "$^P" | "$^R" | "$^H" | "$!" | "$\"" | "$#" | "$$" | "$%" | "$&" | "$'" | "$(" | "$)" | "$*" | "$+" | "$," | "$_" | "$-" | "$`" | "$." | "$a" | "$/" | "$0" | "$:" | "$;" | "$<" | "$=" | "$>" | "$?" | "$@" | "$[" | "$]" | "$|" | "$^" | "$~"
