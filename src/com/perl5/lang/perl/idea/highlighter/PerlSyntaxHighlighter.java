@@ -121,13 +121,13 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 //		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
 //		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN_IMPLEMENTED, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
 
-//		attributesMap.put(PerlElementTypes.PERL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+		attributesMap.put(PerlElementTypes.PERL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
-		//attributesMap.put(PerlElementTypes.PERL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
+		attributesMap.put(PerlElementTypes.PERL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
-//		attributesMap.put(PerlElementTypes.PERL_HASH, new TextAttributesKey[]{PERL_HASH});
+		attributesMap.put(PerlElementTypes.PERL_HASH, new TextAttributesKey[]{PERL_HASH});
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_HASH, new TextAttributesKey[]{PERL_HASH});
-//		attributesMap.put(PerlElementTypes.PERL_GLOB, new TextAttributesKey[]{PERL_GLOB});
+		attributesMap.put(PerlElementTypes.PERL_GLOB, new TextAttributesKey[]{PERL_GLOB});
 
 //		attributesMap.put(PerlElementTypes.PERL_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
 	}

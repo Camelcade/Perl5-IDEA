@@ -87,17 +87,17 @@
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 private perlFile ::= <<parseFile>> <<eof>>
 
-private file_items ::= file_item*
+private file_items ::= file_item* {recoverWhile=recover_block}
+private file_item ::= namespace | namespace_element
 
 private block_safe ::= <<parseBlock>>
 block ::= "{" file_items "}"  // should not be used anywhere, injected by block_safe
 
-private file_item ::= namespace | namespace_element
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) PERL_SEMI*
 
 // package keyword
 namespace ::= 'package' <<parsePerlPackage>>
-private namespace_content ::= namespace_element * // injected and wrapped by parsePackageContents
+private namespace_content ::= namespace_element *  {recoverWhile=recover_namespace}     // injected and wrapped by parsePackageContents
 
 named_block ::= PERL_BLOCK_NAME block_safe
 
@@ -142,7 +142,7 @@ private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_S
 private for_compound_arguments_list ::=
     [ variable_declaration | variable ] '(' expr ')' block_compound
 
-private statement ::= statement_variation [statement_modifier] //{recoverWhile=recover_statement}
+private statement ::= statement_variation [statement_modifier] {recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
@@ -196,8 +196,9 @@ undef_term ::= "undef" variable
 
 require_term ::= 'require' (perl_package | perl_version | string)  // multiline string is possible too
 
-private recover_statement ::= !(PERL_SEMI  | <<eof>>)
-//private recover_block ::= !(PERL_RBRACE | <<eof>>)
+private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | PERL_KEYWORD | <<eof>>)
+private recover_block ::= !(PERL_RBRACE | <<eof>>)
+private recover_namespace ::= !("package" | PERL_RBRACE | <<eof>>)
 
 // expression
 expr ::=
@@ -391,7 +392,7 @@ reference_value ::=
 private anon_array_ref ::= '[' [expr] ']'
 private anon_hash_ref ::= '{' [expr] '}'
 private code_ref ::= "sub" block_safe
-private glob_item_ref ::= glob_variable "{" glob_item_ref_variant "}"
+private glob_item_ref ::= glob "{" glob_item_ref_variant "}"
 private glob_item_ref_variant ::=
     "SCALAR"
     | "ARRAY"

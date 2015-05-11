@@ -102,7 +102,6 @@ public interface PerlElementTypes {
   IElementType WHILE_COMPOUND = new PerlElementType("WHILE_COMPOUND");
   IElementType WHILE_STATEMENT_MODIFIER = new PerlElementType("WHILE_STATEMENT_MODIFIER");
 
-  IElementType GLOB_VARIABLE = new PerlTokenType("glob_variable");
   IElementType PERL_ARRAY = new PerlTokenType("ARRAY");
   IElementType PERL_ARROW_COMMA = new PerlTokenType("=>");
   IElementType PERL_BAREWORD = new PerlTokenType("PERL_BAREWORD");
