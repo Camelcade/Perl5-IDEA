@@ -30,6 +30,9 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	protected String lastParsedVersion;
 	protected String lastParsedHandle;
 
+	protected String lastCallablePackage;
+	protected String lastCallableMethod;
+
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
 	}
@@ -233,5 +236,25 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	public void setLastParsedHandle(String lastParsedHandle)
 	{
 		this.lastParsedHandle = lastParsedHandle;
+	}
+
+	public String getLastCallableMethod()
+	{
+		return lastCallableMethod;
+	}
+
+	public void setLastCallableMethod(String lastCallableMethod)
+	{
+		this.lastCallableMethod = lastCallableMethod;
+	}
+
+	public String getLastCallablePackage()
+	{
+		return lastCallablePackage;
+	}
+
+	public void setLastCallablePackage(String lastCallablePackage)
+	{
+		this.lastCallablePackage = lastCallablePackage;
 	}
 }

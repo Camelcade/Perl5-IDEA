@@ -3040,33 +3040,15 @@ public class PerlParser implements PsiParser {
     return r || p;
   }
 
-  // callable !"(" [<<parseExpressionLevel 3>>]
+  // callable <<parseRightwardCallParameters>>
   public static boolean rightward_call_expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "rightward_call_expr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<rightward call expr>");
     r = callable(b, l + 1);
-    r = r && rightward_call_expr_1(b, l + 1);
-    r = r && rightward_call_expr_2(b, l + 1);
+    r = r && parseRightwardCallParameters(b, l + 1);
     exit_section_(b, l, m, RIGHTWARD_CALL_EXPR, r, false, null);
     return r;
-  }
-
-  // !"("
-  private static boolean rightward_call_expr_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rightward_call_expr_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_, null);
-    r = !consumeTokenSmart(b, PERL_LPAREN);
-    exit_section_(b, l, m, null, r, false, null);
-    return r;
-  }
-
-  // [<<parseExpressionLevel 3>>]
-  private static boolean rightward_call_expr_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rightward_call_expr_2")) return false;
-    parseExpressionLevel(b, l + 1, 3);
-    return true;
   }
 
   // (','|'=>') [scalar_expr]

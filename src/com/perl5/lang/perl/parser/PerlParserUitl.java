@@ -124,6 +124,56 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
+	 * Parsing rightward call parameters, using the prototype
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseRightwardCallParameters(PsiBuilder b, int l)
+	{
+		if( b.getTokenType() != PERL_LPAREN)
+		{
+			return parseCallParameters(b,l);
+		}
+		return false;
+	}
+
+	private static boolean parseCallParameters(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+ 		String methodName = ((PerlBuilder) b).getLastCallableMethod();
+		String packageName = ((PerlBuilder) b).getLastCallablePackage();
+
+		if( methodName == null)
+			// can't happen
+			throw new Error("No method captured, smth is wrong");
+		else if(packageName == null) // method from unknown package
+		{
+			parseExpressionLevel(b,l,3);
+		}
+		else // method and package are known
+		{
+			parseExpressionLevel(b,l,3);
+		}
+		return true;
+	}
+
+	/**
+	 * Resets last callable in biulder for later parsing
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return always true
+	 */
+	public static boolean resetLastCallable(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+		((PerlBuilder) b).setLastCallableMethod(null);
+		((PerlBuilder) b).setLastCallablePackage(null);
+		return true;
+	}
+
+	/**
 	 * Parsing file entry point. Inits codeblock states, default namespace
 	 * @param b	PerlBuilder
 	 * @param l	parsing level
@@ -247,6 +297,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		if( prevTokenType == PERL_DEREFERENCE && !"SUPER".equals(b.getTokenText()) && (tokenType == PERL_BAREWORD || tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY ))
 		{
 			PsiBuilder.Marker m = b.mark();
+			((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
+			((PerlBuilder) b).setLastCallablePackage("SUPER");
 			b.advanceLexer();
 			m.done(PERL_FUNCTION);
 			return true;
@@ -300,8 +352,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				// known filehandle
 				if( ((PerlBuilder) b).isKnownHandle(nextTokenText))
 				{
-					parseBarewordFunction(b,l);
-					parseBarewordHandle(b, l);
+					parseBarewordFunction(b, l);
 				}
 				// known function
 				else if( isKnownFunction(b, tokenText))
@@ -420,6 +471,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			assert b instanceof PerlBuilder;
 			((PerlBuilder) b).setLastParsedPackage(packageName.toString());
+			((PerlBuilder) b).setLastCallablePackage(packageName.toString());
 
 			b.advanceLexer();
 			m.collapse(PERL_PACKAGE);
@@ -439,6 +491,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		if( b.getTokenType() == PERL_BAREWORD )
 		{
+			assert b instanceof PerlBuilder;
+			((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.collapse(PERL_FUNCTION);
@@ -490,22 +544,30 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseBarewordPackageFunctionCall(PsiBuilder b, int l) {
 
+		assert b instanceof PerlBuilder;
 		if(b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) == PERL_DEPACKAGE && b.lookAhead(2) == PERL_BAREWORD )
 		{
 			PsiBuilder.Marker m = b.mark();
+			StringBuilder packageName = new StringBuilder("");
 
 			while(
 					b.lookAhead(3) == PERL_DEPACKAGE && b.lookAhead(4) == PERL_BAREWORD
 					)
 			{
+				packageName.append(b.getTokenText());
 				b.advanceLexer();
+				packageName.append(b.getTokenText());
 				b.advanceLexer();
 			}
 
+			packageName.append(b.getTokenText());
 			b.advanceLexer(); // package rest
 			b.advanceLexer(); // depackage
 
 			m.collapse(PERL_PACKAGE);
+
+			((PerlBuilder) b).setLastCallablePackage(packageName.toString());
+			((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
 
 			m = b.mark();
 			b.advanceLexer();

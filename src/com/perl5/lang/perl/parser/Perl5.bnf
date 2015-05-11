@@ -284,7 +284,7 @@ assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<
 
 comma_expr ::= expr (','|'=>') [scalar_expr]
 
-rightward_call_expr ::= callable !"(" [<<parseExpressionLevel 3>>]
+rightward_call_expr ::= callable <<parseRightwardCallParameters>>
 lp_not_expr ::= 'not' expr { rightAssociative=true }
 lp_and_expr ::= expr 'and' expr
 lp_or_xor_expr ::= expr ('or'|'xor') expr
@@ -440,9 +440,10 @@ scalar_call ::= PERL_SCALAR "(" [expr] ")"
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
-callable ::=
+callable ::= <<resetLastCallable>> (
     referencable_method
     | <<guessBarewordCallable>>
+)
 
 private referencable_method ::= '&'
     (
