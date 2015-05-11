@@ -20,7 +20,7 @@ public class PerlCompletionContributor extends CompletionContributor
 	public PerlCompletionContributor() {
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_ARRAY).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.ARRAY_VARIABLE).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
@@ -39,7 +39,7 @@ public class PerlCompletionContributor extends CompletionContributor
 		//CamelHumpMatcher
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_SCALAR).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.SCALAR_VARIABLE).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
@@ -95,7 +95,7 @@ public class PerlCompletionContributor extends CompletionContributor
 		);
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_HASH).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.HASH_VARIABLE).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,

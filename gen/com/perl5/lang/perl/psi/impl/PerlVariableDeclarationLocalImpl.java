@@ -24,32 +24,32 @@ public class PerlVariableDeclarationLocalImpl extends ASTWrapperPsiElement imple
 
   @Override
   @NotNull
+  public List<PerlArrayVariable> getArrayVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlArrayVariable.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
   @Override
   @NotNull
-  public List<PerlPerlArray> getPerlArrayList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlArray.class);
+  public List<PerlHashVariable> getHashVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlHashVariable.class);
   }
 
   @Override
   @NotNull
-  public List<PerlPerlGlob> getPerlGlobList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlGlob.class);
+  public List<PerlScalarVariable> getScalarVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlScalarVariable.class);
   }
 
   @Override
   @NotNull
-  public List<PerlPerlHash> getPerlHashList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlHash.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlPerlScalar> getPerlScalarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlScalar.class);
+  public List<PerlString> getStringList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlString.class);
   }
 
 }

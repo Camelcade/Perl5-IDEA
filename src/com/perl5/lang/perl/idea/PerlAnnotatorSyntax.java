@@ -34,7 +34,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
 		IElementType elementType = element.getNode().getElementType();
-		if( elementType == PERL_SCALAR )
+		if( elementType == SCALAR_VARIABLE )
 		{
 			colorize(
 					holder.createInfoAnnotation(element, null),
@@ -42,7 +42,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					PerlScalarUtil.isBuiltIn(element.getText()),
 					false);
 		}
-		else if( elementType == PERL_HASH )
+		else if( elementType == HASH_VARIABLE )
 		{
 			colorize(
 					holder.createInfoAnnotation(element, null),
@@ -50,7 +50,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					PerlHashUtil.isBuiltIn(element.getText()),
 					false);
 		}
-		else if( elementType == PERL_ARRAY )
+		else if( elementType == ARRAY_VARIABLE )
 		{
 			colorize(
 					holder.createInfoAnnotation(element, null),

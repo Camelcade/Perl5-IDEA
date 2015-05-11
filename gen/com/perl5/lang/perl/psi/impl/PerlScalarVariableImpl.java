@@ -11,14 +11,14 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlPerlArrayImpl extends ASTWrapperPsiElement implements PerlPerlArray {
+public class PerlScalarVariableImpl extends ASTWrapperPsiElement implements PerlScalarVariable {
 
-  public PerlPerlArrayImpl(ASTNode node) {
+  public PerlScalarVariableImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitPerlArray(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitScalarVariable(this);
     else super.accept(visitor);
   }
 

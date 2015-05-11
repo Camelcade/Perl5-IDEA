@@ -30,6 +30,11 @@
     PERL_SIGIL_SCALAR="$"
     PERL_SIGIL_SCALAR_INDEX="$#"
 
+    PERL_ARRAY="ARRAY"
+    PERL_HASH="HASH"
+    PERL_SCALAR="SCALAR"
+    PERL_GLOB="GLOB"
+
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
     PERL_STRING_MULTILINE_END="PERL_STRING_MULTILINE_END"
 
@@ -226,7 +231,7 @@ term_expr ::=
     | variable_declaration
     | PERL_OPERATOR_UNARY "(" [expr] ")" // named operators as functions
     | "(" [expr] ")"
-    | scalar_primitive
+    | scalar_constant
     | do_term
     | sub_term
     | eval_term
@@ -386,7 +391,7 @@ reference_value ::=
 private anon_array_ref ::= '[' [expr] ']'
 private anon_hash_ref ::= '{' [expr] '}'
 private code_ref ::= "sub" block_safe
-private glob_item_ref ::= perl_glob "{" glob_item_ref_variant "}"
+private glob_item_ref ::= glob_variable "{" glob_item_ref_variant "}"
 private glob_item_ref_variant ::=
     "SCALAR"
     | "ARRAY"
@@ -400,24 +405,32 @@ private glob_item_ref_variant ::=
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
-private variable ::= scalar | array | hash | perl_glob
+private variable ::= scalar | array | hash | glob
 
 private array ::=
-    array_primitive '[' expr ']'              // array slice
-    | array_primitive '{' expr '}'              // hash slice
-    | array_primitive
+    PERL_SIGIL_ARRAY scalar       // scalar dereference
+    | array_variable '[' expr ']'              // array slice
+    | array_variable '{' expr '}'              // hash slice
+    | array_variable
+    | array_constant
+    | PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
 
 private hash ::=
-    PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
-    | PERL_SIGIL_HASH scalar_expr       // scalar dereference wo braces
-    | perl_hash                    // hash as is
+    PERL_SIGIL_HASH scalar       // scalar dereference wo braces
+    | hash_variable                    // hash as is
+    | PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
 
 private scalar ::=
-    perl_scalar nested_element    // hash or array item
-    | perl_scalar
-    | PERL_SIGIL_SCALAR "{" PERL_BAREWORD "}"
+    PERL_SIGIL_SCALAR + scalar_variable
+    | scalar_variable nested_element    // hash or array item
+    | scalar_variable
+    | scalar_constant
     | "(" expr ")" nested_element
     | 'undef'
+
+private glob ::=
+    "*" scalar       // scalar dereference wo braces
+    | PERL_GLOB                    // hash as is
 
 private nested_element ::=
     "{" PERL_BAREWORD  "}"
@@ -432,7 +445,7 @@ private nested_element_expr ::=
     | function_call
     | rightward_call_expr
 
-scalar_call ::= perl_scalar "(" [expr] ")"
+scalar_call ::= scalar_variable "(" [expr] ")"
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
@@ -450,19 +463,22 @@ private referencable_method ::= '&'
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
+label_declaration ::= label ":" // do we need to change tokentype?
+label ::= PERL_BAREWORD
+private perl_version ::= <<parseVersion>>
+private perl_package ::= <<parseBarewordPackage>>
+private perl_handle ::= <<parseBarewordHandle>> | scalar_variable !PERL_OPERATOR | "{" scalar "}"
 
-// primitives
-private scalar_primitive ::=
+//////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
+
+private scalar_constant ::=
     PERL_NUMBER
     | PERL_TAG  // __PACKAGE__ etc.
     | string
+    | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * scalar_variable // array elements number, not sure it's a constant
 
-
-private array_primitive ::=
+private array_constant ::=
     string_list
-    | PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
-    | PERL_SIGIL_ARRAY scalar_expr       // scalar dereference
-    | perl_array                    // array as is
 
 string ::= string_quoted | multiline_marker | <<parseBarewordString>>
 private string_quoted ::= ['qq' | 'qx' | 'q'] PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
@@ -470,32 +486,22 @@ private multiline_marker ::= '<<' (string | <<parseBarewordString>>)
 
 private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
 
-label_declaration ::= label ":" // do we need to change tokentype?
-label ::= PERL_BAREWORD
-private perl_version ::= <<parseVersion>>
-private perl_package ::= <<parseBarewordPackage>>
-private perl_handle ::= <<parseBarewordHandle>> | perl_scalar !PERL_OPERATOR | "{" scalar "}"
+///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
+scalar_variable ::=
+    PERL_SCALAR
+    | PERL_SIGIL_SCALAR + "{" bareword_any "}"
+    | PERL_SIGIL_SCALAR PERL_NUMBER // regexp results
+    | <<checkBuiltInScalar>>
 
-// this is pretty raw
-perl_scalar ::=
-    (PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR) PERL_SIGIL_SCALAR * PERL_BAREWORD ("::" PERL_BAREWORD) *
-    | perl_scalar_built_in
+array_variable ::=
+    PERL_ARRAY
+    | PERL_SIGIL_ARRAY "{" bareword_any "}"
+    | <<checkBuiltInArray>>
 
+hash_variable ::=
+    PERL_HASH
+    | PERL_SIGIL_HASH "{" bareword_any "}"
+    | <<checkBuiltInHash>>
 
-private perl_scalar_built_in ::=
-    "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$^TAINT" | "$^UTF8LOCALE" | "$^RE_TRIE_MAXBUF" | "$^CHILD_ERROR_NATIVE" | "$^ENCODING" | "$^OPEN" | "$^RE_DEBUG_FLAGS" | "$^A" | "$^C" | "$^T" | "$^S" | "$^V" | "$^W" | "$^X" | "$^D" | "$^E" | "$^F" | "$^H" | "$^I" | "$^L" | "$^M" | "$^N" | "$^O" | "$^P" | "$^R" | "$^H" | "$!" | "$\"" | "$#" | "$$" | "$%" | "$&" | "$'" | "$(" | "$)" | "$*" | "$+" | "$," | "$_" | "$-" | "$`" | "$." | "$a" | "$/" | "$0" | "$:" | "$;" | "$<" | "$=" | "$>" | "$?" | "$@" | "$[" | "$]" | "$|" | "$^" | "$~"
-    | PERL_SIGIL_SCALAR PERL_NUMBER
+private bareword_any ::= PERL_BAREWORD | PERL_KEYWORD
 
-inner perl_array ::=
-    perl_array_built_in
-    | PERL_SIGIL_ARRAY PERL_BAREWORD ("::" PERL_BAREWORD) *
-
-private perl_array_built_in ::= "@_" | "@!" | "@+" | "@-" | "@^H"
-
-inner perl_hash ::=
-    perl_hash_built_in
-    | PERL_SIGIL_HASH PERL_BAREWORD ("::" PERL_BAREWORD) *
-
-private perl_hash_built_in ::= "%!" | "%+" | "%-" | "%^H"
-
-perl_glob ::= "*" PERL_BAREWORD ("::" PERL_BAREWORD) *

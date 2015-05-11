@@ -30,8 +30,8 @@ public class PerlScalarCallImpl extends ASTWrapperPsiElement implements PerlScal
 
   @Override
   @NotNull
-  public PerlPerlScalar getPerlScalar() {
-    return findNotNullChildByClass(PerlPerlScalar.class);
+  public PerlScalarVariable getScalarVariable() {
+    return findNotNullChildByClass(PerlScalarVariable.class);
   }
 
 }

@@ -8,6 +8,11 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlBuilder;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlScalarUtil;
+
+import java.util.ArrayList;
 
 /**
  * Created by hurricup on 01.05.2015.
@@ -133,7 +138,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		if( b.getTokenType() != PERL_LPAREN)
 		{
-			return parseCallParameters(b,l);
+			parseCallParameters(b,l);
+			return true;
 		}
 		return false;
 	}
@@ -896,5 +902,28 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return getCurrentBlockState(b).getStringsTrap();
 	}
 
+	public static boolean checkBuiltInHash(PsiBuilder b, int l)
+	{
+		return b.getTokenType() == PERL_SIGIL_HASH && checkTextByList(b, PerlHashUtil.BUILT_IN);
+	}
+
+	public static boolean checkBuiltInArray(PsiBuilder b, int l)
+	{
+		return b.getTokenType() == PERL_SIGIL_ARRAY && checkTextByList(b, PerlArrayUtil.BUILT_IN);
+	}
+
+	public static boolean checkBuiltInScalar(PsiBuilder b, int l)
+	{
+		return b.getTokenType() == PERL_SIGIL_SCALAR && checkTextByList(b, PerlScalarUtil.BUILT_IN);
+	}
+
+	public static boolean checkTextByList(PsiBuilder b, ArrayList<String> list)
+	{
+		for(String item: list)
+			if( consumeToken(b,item))
+				return true;
+
+		return false;
+	}
 
 }

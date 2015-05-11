@@ -23,6 +23,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlArrayVariable getArrayVariable() {
+    return findChildByClass(PerlArrayVariable.class);
+  }
+
+  @Override
+  @Nullable
   public PerlCallable getCallable() {
     return findChildByClass(PerlCallable.class);
   }
@@ -71,6 +77,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlHashVariable getHashVariable() {
+    return findChildByClass(PerlHashVariable.class);
+  }
+
+  @Override
+  @Nullable
   public PerlLastTerm getLastTerm() {
     return findChildByClass(PerlLastTerm.class);
   }
@@ -101,30 +113,6 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
-  public PerlPerlArray getPerlArray() {
-    return findChildByClass(PerlPerlArray.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPerlGlob getPerlGlob() {
-    return findChildByClass(PerlPerlGlob.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPerlHash getPerlHash() {
-    return findChildByClass(PerlPerlHash.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPerlScalar getPerlScalar() {
-    return findChildByClass(PerlPerlScalar.class);
-  }
-
-  @Override
-  @Nullable
   public PerlPrintTerm getPrintTerm() {
     return findChildByClass(PerlPrintTerm.class);
   }
@@ -151,6 +139,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
   @Nullable
   public PerlRequireTerm getRequireTerm() {
     return findChildByClass(PerlRequireTerm.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlScalarVariable getScalarVariable() {
+    return findChildByClass(PerlScalarVariable.class);
   }
 
   @Override

@@ -8,18 +8,18 @@ import com.intellij.psi.PsiElement;
 public interface PerlUndefTerm extends PsiElement {
 
   @Nullable
+  PerlArrayVariable getArrayVariable();
+
+  @Nullable
   PerlExpr getExpr();
 
   @Nullable
-  PerlPerlArray getPerlArray();
+  PerlHashVariable getHashVariable();
 
   @Nullable
-  PerlPerlGlob getPerlGlob();
+  PerlScalarVariable getScalarVariable();
 
   @Nullable
-  PerlPerlHash getPerlHash();
-
-  @Nullable
-  PerlPerlScalar getPerlScalar();
+  PerlString getString();
 
 }

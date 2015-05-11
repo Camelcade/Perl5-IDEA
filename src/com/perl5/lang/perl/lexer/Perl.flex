@@ -53,6 +53,11 @@ BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
 BAREWORD_STRING = "-" {BAREWORD}
 ANYWORD = [^ \t\f\r\n]
 
+PERL_SCALAR = "$" {BAREWORD}("::" {BAREWORD})*
+PERL_HASH = "%" {BAREWORD}("::" {BAREWORD})*
+PERL_ARRAY = "@" {BAREWORD}("::" {BAREWORD})*
+PERL_GLOB = "*" {BAREWORD}("::" {BAREWORD})*
+
 CHAR_ANY        = .|{NEW_LINE}
 LINE            = .*
 FULL_LINE       = .*{NEW_LINE}?
@@ -308,6 +313,10 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_VERSION}  {return PERL_NUMBER_VERSION;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
+{PERL_SCALAR} {return PERL_SCALAR;}
+{PERL_ARRAY} {return PERL_ARRAY;}
+{PERL_HASH} {return PERL_HASH;}
+{PERL_GLOB} {return PERL_GLOB;}
 "@" {return PERL_SIGIL_ARRAY;}
 "%" {return PERL_SIGIL_HASH;}
 "$#" {return PERL_SIGIL_SCALAR_INDEX;}

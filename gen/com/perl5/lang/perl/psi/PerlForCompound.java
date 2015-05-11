@@ -8,22 +8,22 @@ import com.intellij.psi.PsiElement;
 public interface PerlForCompound extends PsiElement {
 
   @Nullable
+  PerlArrayVariable getArrayVariable();
+
+  @Nullable
   PerlBlockCompound getBlockCompound();
 
   @NotNull
   List<PerlExpr> getExprList();
 
   @Nullable
-  PerlPerlArray getPerlArray();
+  PerlHashVariable getHashVariable();
 
   @Nullable
-  PerlPerlGlob getPerlGlob();
+  PerlScalarVariable getScalarVariable();
 
   @Nullable
-  PerlPerlHash getPerlHash();
-
-  @Nullable
-  PerlPerlScalar getPerlScalar();
+  PerlString getString();
 
   @Nullable
   PerlVariableDeclarationGlobal getVariableDeclarationGlobal();

@@ -24,6 +24,12 @@ public class PerlForeachCompoundImpl extends ASTWrapperPsiElement implements Per
 
   @Override
   @Nullable
+  public PerlArrayVariable getArrayVariable() {
+    return findChildByClass(PerlArrayVariable.class);
+  }
+
+  @Override
+  @Nullable
   public PerlBlockCompound getBlockCompound() {
     return findChildByClass(PerlBlockCompound.class);
   }
@@ -36,26 +42,20 @@ public class PerlForeachCompoundImpl extends ASTWrapperPsiElement implements Per
 
   @Override
   @Nullable
-  public PerlPerlArray getPerlArray() {
-    return findChildByClass(PerlPerlArray.class);
+  public PerlHashVariable getHashVariable() {
+    return findChildByClass(PerlHashVariable.class);
   }
 
   @Override
   @Nullable
-  public PerlPerlGlob getPerlGlob() {
-    return findChildByClass(PerlPerlGlob.class);
+  public PerlScalarVariable getScalarVariable() {
+    return findChildByClass(PerlScalarVariable.class);
   }
 
   @Override
   @Nullable
-  public PerlPerlHash getPerlHash() {
-    return findChildByClass(PerlPerlHash.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlPerlScalar getPerlScalar() {
-    return findChildByClass(PerlPerlScalar.class);
+  public PerlString getString() {
+    return findChildByClass(PerlString.class);
   }
 
   @Override

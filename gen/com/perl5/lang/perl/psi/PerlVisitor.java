@@ -15,6 +15,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitArrayVariable(@NotNull PerlArrayVariable o) {
+    visitPsiElement(o);
+  }
+
   public void visitAssignExpr(@NotNull PerlAssignExpr o) {
     visitExpr(o);
   }
@@ -115,6 +119,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitHashVariable(@NotNull PerlHashVariable o) {
+    visitPsiElement(o);
+  }
+
   public void visitIfCompound(@NotNull PerlIfCompound o) {
     visitPsiElement(o);
   }
@@ -203,27 +211,11 @@ public class PerlVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitPerlArray(@NotNull PerlPerlArray o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlGlob(@NotNull PerlPerlGlob o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlHash(@NotNull PerlPerlHash o) {
-    visitPsiElement(o);
-  }
-
   public void visitPerlRegex(@NotNull PerlPerlRegex o) {
     visitPsiElement(o);
   }
 
   public void visitPerlRegexModifiers(@NotNull PerlPerlRegexModifiers o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPerlScalar(@NotNull PerlPerlScalar o) {
     visitPsiElement(o);
   }
 
@@ -272,6 +264,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitScalarCall(@NotNull PerlScalarCall o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScalarVariable(@NotNull PerlScalarVariable o) {
     visitPsiElement(o);
   }
 

@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PerlTermExpr extends PerlExpr {
 
   @Nullable
+  PerlArrayVariable getArrayVariable();
+
+  @Nullable
   PerlCallable getCallable();
 
   @Nullable
@@ -32,6 +35,9 @@ public interface PerlTermExpr extends PerlExpr {
   PerlGrepTerm getGrepTerm();
 
   @Nullable
+  PerlHashVariable getHashVariable();
+
+  @Nullable
   PerlLastTerm getLastTerm();
 
   @Nullable
@@ -47,18 +53,6 @@ public interface PerlTermExpr extends PerlExpr {
   PerlOpenTerm getOpenTerm();
 
   @Nullable
-  PerlPerlArray getPerlArray();
-
-  @Nullable
-  PerlPerlGlob getPerlGlob();
-
-  @Nullable
-  PerlPerlHash getPerlHash();
-
-  @Nullable
-  PerlPerlScalar getPerlScalar();
-
-  @Nullable
   PerlPrintTerm getPrintTerm();
 
   @Nullable
@@ -72,6 +66,9 @@ public interface PerlTermExpr extends PerlExpr {
 
   @Nullable
   PerlRequireTerm getRequireTerm();
+
+  @Nullable
+  PerlScalarVariable getScalarVariable();
 
   @Nullable
   PerlSortTerm getSortTerm();

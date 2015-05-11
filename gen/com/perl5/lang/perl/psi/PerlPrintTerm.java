@@ -11,6 +11,9 @@ public interface PerlPrintTerm extends PsiElement {
   List<PerlExpr> getExprList();
 
   @Nullable
-  PerlPerlScalar getPerlScalar();
+  PerlScalarVariable getScalarVariable();
+
+  @Nullable
+  PerlString getString();
 
 }

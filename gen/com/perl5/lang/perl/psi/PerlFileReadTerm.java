@@ -11,6 +11,9 @@ public interface PerlFileReadTerm extends PsiElement {
   PerlExpr getExpr();
 
   @Nullable
-  PerlPerlScalar getPerlScalar();
+  PerlScalarVariable getScalarVariable();
+
+  @Nullable
+  PerlString getString();
 
 }

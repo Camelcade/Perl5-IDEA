@@ -30,8 +30,14 @@ public class PerlOpenFileImpl extends ASTWrapperPsiElement implements PerlOpenFi
 
   @Override
   @Nullable
-  public PerlPerlScalar getPerlScalar() {
-    return findChildByClass(PerlPerlScalar.class);
+  public PerlScalarVariable getScalarVariable() {
+    return findChildByClass(PerlScalarVariable.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlString getString() {
+    return findChildByClass(PerlString.class);
   }
 
 }

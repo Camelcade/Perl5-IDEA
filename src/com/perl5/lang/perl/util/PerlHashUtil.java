@@ -30,7 +30,7 @@ public class PerlHashUtil implements PerlElementTypes
 	static{
 		for( String builtIn: BUILT_IN )
 		{
-			BUILT_IN_MAP.put(builtIn, PERL_SCALAR);
+			BUILT_IN_MAP.put(builtIn, HASH_VARIABLE);
 		}
 	}
 
