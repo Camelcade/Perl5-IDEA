@@ -41,7 +41,7 @@ public interface PerlElementTypes {
   IElementType IF_STATEMENT_MODIFIER = new PerlElementType("IF_STATEMENT_MODIFIER");
   IElementType LABEL = new PerlElementType("LABEL");
   IElementType LABEL_DECLARATION = new PerlElementType("LABEL_DECLARATION");
-  IElementType LAST_STATEMENT = new PerlElementType("LAST_STATEMENT");
+  IElementType LAST_TERM = new PerlElementType("LAST_TERM");
   IElementType LP_AND_EXPR = new PerlElementType("LP_AND_EXPR");
   IElementType LP_NOT_EXPR = new PerlElementType("LP_NOT_EXPR");
   IElementType LP_OR_XOR_EXPR = new PerlElementType("LP_OR_XOR_EXPR");
@@ -51,7 +51,7 @@ public interface PerlElementTypes {
   IElementType NAMED_BLOCK = new PerlElementType("NAMED_BLOCK");
   IElementType NAMED_UNARY_EXPR = new PerlElementType("NAMED_UNARY_EXPR");
   IElementType NAMESPACE = new PerlElementType("NAMESPACE");
-  IElementType NEXT_STATEMENT = new PerlElementType("NEXT_STATEMENT");
+  IElementType NEXT_TERM = new PerlElementType("NEXT_TERM");
   IElementType NO_STATEMENT = new PerlElementType("NO_STATEMENT");
   IElementType OPEN_FILE = new PerlElementType("OPEN_FILE");
   IElementType OPEN_HANDLE = new PerlElementType("OPEN_HANDLE");
@@ -69,7 +69,7 @@ public interface PerlElementTypes {
   IElementType PREFIX_UNARY_EXPR = new PerlElementType("PREFIX_UNARY_EXPR");
   IElementType PREF_PP_EXPR = new PerlElementType("PREF_PP_EXPR");
   IElementType PRINT_TERM = new PerlElementType("PRINT_TERM");
-  IElementType REDO_STATEMENT = new PerlElementType("REDO_STATEMENT");
+  IElementType REDO_TERM = new PerlElementType("REDO_TERM");
   IElementType REFERENCE_VALUE = new PerlElementType("REFERENCE_VALUE");
   IElementType REF_EXPR = new PerlElementType("REF_EXPR");
   IElementType REGEX_EXPR = new PerlElementType("REGEX_EXPR");
@@ -90,7 +90,7 @@ public interface PerlElementTypes {
   IElementType TR_REGEX = new PerlElementType("TR_REGEX");
   IElementType TR_REPLACEMENTLIST = new PerlElementType("TR_REPLACEMENTLIST");
   IElementType TR_SEARCHLIST = new PerlElementType("TR_SEARCHLIST");
-  IElementType UNDEF_STATEMENT = new PerlElementType("UNDEF_STATEMENT");
+  IElementType UNDEF_TERM = new PerlElementType("UNDEF_TERM");
   IElementType UNLESS_COMPOUND = new PerlElementType("UNLESS_COMPOUND");
   IElementType UNLESS_STATEMENT_MODIFIER = new PerlElementType("UNLESS_STATEMENT_MODIFIER");
   IElementType UNTIL_COMPOUND = new PerlElementType("UNTIL_COMPOUND");
@@ -242,8 +242,8 @@ public interface PerlElementTypes {
       else if (type == LABEL_DECLARATION) {
         return new PerlLabelDeclarationImpl(node);
       }
-      else if (type == LAST_STATEMENT) {
-        return new PerlLastStatementImpl(node);
+      else if (type == LAST_TERM) {
+        return new PerlLastTermImpl(node);
       }
       else if (type == LP_AND_EXPR) {
         return new PerlLpAndExprImpl(node);
@@ -272,8 +272,8 @@ public interface PerlElementTypes {
       else if (type == NAMESPACE) {
         return new PerlNamespaceImpl(node);
       }
-      else if (type == NEXT_STATEMENT) {
-        return new PerlNextStatementImpl(node);
+      else if (type == NEXT_TERM) {
+        return new PerlNextTermImpl(node);
       }
       else if (type == NO_STATEMENT) {
         return new PerlNoStatementImpl(node);
@@ -326,8 +326,8 @@ public interface PerlElementTypes {
       else if (type == PRINT_TERM) {
         return new PerlPrintTermImpl(node);
       }
-      else if (type == REDO_STATEMENT) {
-        return new PerlRedoStatementImpl(node);
+      else if (type == REDO_TERM) {
+        return new PerlRedoTermImpl(node);
       }
       else if (type == REFERENCE_VALUE) {
         return new PerlReferenceValueImpl(node);
@@ -389,8 +389,8 @@ public interface PerlElementTypes {
       else if (type == TR_SEARCHLIST) {
         return new PerlTrSearchlistImpl(node);
       }
-      else if (type == UNDEF_STATEMENT) {
-        return new PerlUndefStatementImpl(node);
+      else if (type == UNDEF_TERM) {
+        return new PerlUndefTermImpl(node);
       }
       else if (type == UNLESS_COMPOUND) {
         return new PerlUnlessCompoundImpl(node);

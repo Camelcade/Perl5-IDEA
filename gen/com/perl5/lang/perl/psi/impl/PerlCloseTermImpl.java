@@ -11,14 +11,14 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlLastStatementImpl extends ASTWrapperPsiElement implements PerlLastStatement {
+public class PerlCloseTermImpl extends ASTWrapperPsiElement implements PerlCloseTerm {
 
-  public PerlLastStatementImpl(ASTNode node) {
+  public PerlCloseTermImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitLastStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCloseTerm(this);
     else super.accept(visitor);
   }
 
@@ -30,8 +30,8 @@ public class PerlLastStatementImpl extends ASTWrapperPsiElement implements PerlL
 
   @Override
   @Nullable
-  public PerlLabel getLabel() {
-    return findChildByClass(PerlLabel.class);
+  public PerlPerlScalar getPerlScalar() {
+    return findChildByClass(PerlPerlScalar.class);
   }
 
 }

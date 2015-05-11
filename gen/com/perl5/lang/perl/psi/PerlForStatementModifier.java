@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlForStatementModifier extends PsiElement {
 
-  @Nullable
+  @NotNull
   PerlExpr getExpr();
 
 }

@@ -71,6 +71,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlLastTerm getLastTerm() {
+    return findChildByClass(PerlLastTerm.class);
+  }
+
+  @Override
+  @Nullable
   public PerlMapTerm getMapTerm() {
     return findChildByClass(PerlMapTerm.class);
   }
@@ -79,6 +85,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
   @Nullable
   public PerlMatchRegex getMatchRegex() {
     return findChildByClass(PerlMatchRegex.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlNextTerm getNextTerm() {
+    return findChildByClass(PerlNextTerm.class);
   }
 
   @Override
@@ -115,6 +127,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
   @Nullable
   public PerlPrintTerm getPrintTerm() {
     return findChildByClass(PerlPrintTerm.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlRedoTerm getRedoTerm() {
+    return findChildByClass(PerlRedoTerm.class);
   }
 
   @Override
@@ -157,6 +175,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
   @Nullable
   public PerlTrRegex getTrRegex() {
     return findChildByClass(PerlTrRegex.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
   }
 
   @Override

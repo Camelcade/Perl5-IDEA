@@ -11,27 +11,15 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlNextStatementImpl extends ASTWrapperPsiElement implements PerlNextStatement {
+public class PerlPerlArrayImpl extends ASTWrapperPsiElement implements PerlPerlArray {
 
-  public PerlNextStatementImpl(ASTNode node) {
+  public PerlPerlArrayImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitNextStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitPerlArray(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlLabel getLabel() {
-    return findChildByClass(PerlLabel.class);
   }
 
 }

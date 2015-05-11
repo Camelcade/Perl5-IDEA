@@ -11,14 +11,14 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlUndefStatementImpl extends ASTWrapperPsiElement implements PerlUndefStatement {
+public class PerlUndefTermImpl extends ASTWrapperPsiElement implements PerlUndefTerm {
 
-  public PerlUndefStatementImpl(ASTNode node) {
+  public PerlUndefTermImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitUndefStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitUndefTerm(this);
     else super.accept(visitor);
   }
 

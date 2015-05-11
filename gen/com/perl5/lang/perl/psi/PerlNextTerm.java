@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlLastStatement extends PsiElement {
+public interface PerlNextTerm extends PsiElement {
 
   @Nullable
   PerlExpr getExpr();

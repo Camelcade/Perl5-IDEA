@@ -23,9 +23,9 @@ public class PerlUntilStatementModifierImpl extends ASTWrapperPsiElement impleme
   }
 
   @Override
-  @Nullable
+  @NotNull
   public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+    return findNotNullChildByClass(PerlExpr.class);
   }
 
 }

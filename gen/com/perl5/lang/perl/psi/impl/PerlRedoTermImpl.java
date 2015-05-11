@@ -11,14 +11,14 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlRedoStatementImpl extends ASTWrapperPsiElement implements PerlRedoStatement {
+public class PerlRedoTermImpl extends ASTWrapperPsiElement implements PerlRedoTerm {
 
-  public PerlRedoStatementImpl(ASTNode node) {
+  public PerlRedoTermImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitRedoStatement(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitRedoTerm(this);
     else super.accept(visitor);
   }
 

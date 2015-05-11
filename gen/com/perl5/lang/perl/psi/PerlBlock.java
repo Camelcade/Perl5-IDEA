@@ -38,31 +38,19 @@ public interface PerlBlock extends PsiElement {
   List<PerlLabelDeclaration> getLabelDeclarationList();
 
   @NotNull
-  List<PerlLastStatement> getLastStatementList();
-
-  @NotNull
   List<PerlNamedBlock> getNamedBlockList();
 
   @NotNull
   List<PerlNamespace> getNamespaceList();
 
   @NotNull
-  List<PerlNextStatement> getNextStatementList();
-
-  @NotNull
   List<PerlNoStatement> getNoStatementList();
-
-  @NotNull
-  List<PerlRedoStatement> getRedoStatementList();
 
   @NotNull
   List<PerlSubDeclaration> getSubDeclarationList();
 
   @NotNull
   List<PerlSubDefinition> getSubDefinitionList();
-
-  @NotNull
-  List<PerlUndefStatement> getUndefStatementList();
 
   @NotNull
   List<PerlUnlessCompound> getUnlessCompoundList();

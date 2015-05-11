@@ -84,12 +84,6 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
-  public List<PerlLastStatement> getLastStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlLastStatement.class);
-  }
-
-  @Override
-  @NotNull
   public List<PerlNamedBlock> getNamedBlockList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNamedBlock.class);
   }
@@ -102,20 +96,8 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
 
   @Override
   @NotNull
-  public List<PerlNextStatement> getNextStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNextStatement.class);
-  }
-
-  @Override
-  @NotNull
   public List<PerlNoStatement> getNoStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlNoStatement.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlRedoStatement> getRedoStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlRedoStatement.class);
   }
 
   @Override
@@ -128,12 +110,6 @@ public class PerlBlockImpl extends ASTWrapperPsiElement implements PerlBlock {
   @NotNull
   public List<PerlSubDefinition> getSubDefinitionList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlSubDefinition.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlUndefStatement> getUndefStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUndefStatement.class);
   }
 
   @Override

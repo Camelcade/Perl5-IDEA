@@ -5,21 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlUndefStatement extends PsiElement {
+public interface PerlLastTerm extends PsiElement {
 
   @Nullable
   PerlExpr getExpr();
 
   @Nullable
-  PerlPerlArray getPerlArray();
-
-  @Nullable
-  PerlPerlGlob getPerlGlob();
-
-  @Nullable
-  PerlPerlHash getPerlHash();
-
-  @Nullable
-  PerlPerlScalar getPerlScalar();
+  PerlLabel getLabel();
 
 }

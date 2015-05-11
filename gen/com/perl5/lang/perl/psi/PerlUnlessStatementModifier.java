@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlUnlessStatementModifier extends PsiElement {
 
-  @Nullable
+  @NotNull
   PerlExpr getExpr();
 
 }

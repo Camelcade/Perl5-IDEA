@@ -32,10 +32,16 @@ public interface PerlTermExpr extends PerlExpr {
   PerlGrepTerm getGrepTerm();
 
   @Nullable
+  PerlLastTerm getLastTerm();
+
+  @Nullable
   PerlMapTerm getMapTerm();
 
   @Nullable
   PerlMatchRegex getMatchRegex();
+
+  @Nullable
+  PerlNextTerm getNextTerm();
 
   @Nullable
   PerlOpenTerm getOpenTerm();
@@ -54,6 +60,9 @@ public interface PerlTermExpr extends PerlExpr {
 
   @Nullable
   PerlPrintTerm getPrintTerm();
+
+  @Nullable
+  PerlRedoTerm getRedoTerm();
 
   @Nullable
   PerlReferenceValue getReferenceValue();
@@ -75,6 +84,9 @@ public interface PerlTermExpr extends PerlExpr {
 
   @Nullable
   PerlTrRegex getTrRegex();
+
+  @Nullable
+  PerlUndefTerm getUndefTerm();
 
   @Nullable
   PerlVariableDeclarationGlobal getVariableDeclarationGlobal();

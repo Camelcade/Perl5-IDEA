@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PerlForeachStatementModifier extends PsiElement {
+public interface PerlRedoTerm extends PsiElement {
 
-  @NotNull
+  @Nullable
   PerlExpr getExpr();
+
+  @Nullable
+  PerlLabel getLabel();
 
 }

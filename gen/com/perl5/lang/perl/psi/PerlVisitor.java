@@ -131,7 +131,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitLastStatement(@NotNull PerlLastStatement o) {
+  public void visitLastTerm(@NotNull PerlLastTerm o) {
     visitPsiElement(o);
   }
 
@@ -171,7 +171,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitNextStatement(@NotNull PerlNextStatement o) {
+  public void visitNextTerm(@NotNull PerlNextTerm o) {
     visitPsiElement(o);
   }
 
@@ -243,7 +243,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitRedoStatement(@NotNull PerlRedoStatement o) {
+  public void visitRedoTerm(@NotNull PerlRedoTerm o) {
     visitPsiElement(o);
   }
 
@@ -327,7 +327,7 @@ public class PerlVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitUndefStatement(@NotNull PerlUndefStatement o) {
+  public void visitUndefTerm(@NotNull PerlUndefTerm o) {
     visitPsiElement(o);
   }
 

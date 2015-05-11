@@ -11,21 +11,27 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlForeachStatementModifierImpl extends ASTWrapperPsiElement implements PerlForeachStatementModifier {
+public class PerlLastTermImpl extends ASTWrapperPsiElement implements PerlLastTerm {
 
-  public PerlForeachStatementModifierImpl(ASTNode node) {
+  public PerlLastTermImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitForeachStatementModifier(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitLastTerm(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
+    return findChildByClass(PerlExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlLabel getLabel() {
+    return findChildByClass(PerlLabel.class);
   }
 
 }
