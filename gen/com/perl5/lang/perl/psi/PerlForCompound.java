@@ -14,6 +14,18 @@ public interface PerlForCompound extends PsiElement {
   List<PerlExpr> getExprList();
 
   @Nullable
+  PerlPerlArray getPerlArray();
+
+  @Nullable
+  PerlPerlGlob getPerlGlob();
+
+  @Nullable
+  PerlPerlHash getPerlHash();
+
+  @Nullable
+  PerlPerlScalar getPerlScalar();
+
+  @Nullable
   PerlVariableDeclarationGlobal getVariableDeclarationGlobal();
 
   @Nullable

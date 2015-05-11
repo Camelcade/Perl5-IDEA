@@ -28,4 +28,10 @@ public class PerlReferenceValueImpl extends ASTWrapperPsiElement implements Perl
     return findChildByClass(PerlExpr.class);
   }
 
+  @Override
+  @Nullable
+  public PerlPerlGlob getPerlGlob() {
+    return findChildByClass(PerlPerlGlob.class);
+  }
+
 }

@@ -30,6 +30,12 @@ public class PerlOpenHandleImpl extends ASTWrapperPsiElement implements PerlOpen
 
   @Override
   @Nullable
+  public PerlPerlScalar getPerlScalar() {
+    return findChildByClass(PerlPerlScalar.class);
+  }
+
+  @Override
+  @Nullable
   public PerlVariableDeclarationGlobal getVariableDeclarationGlobal() {
     return findChildByClass(PerlVariableDeclarationGlobal.class);
   }

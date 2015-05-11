@@ -29,10 +29,10 @@
     PERL_SIGIL_HASH="%"
     PERL_SIGIL_SCALAR="$"
 
-    PERL_SCALAR="PERL_SCALAR"
-    PERL_ARRAY="PERL_ARRAY"
-    PERL_HASH="PERL_HASH"
-    PERL_GLOB="PERL_GLOB"
+//    PERL_SCALAR="PERL_SCALAR"
+//    PERL_ARRAY="PERL_ARRAY"
+//    PERL_HASH="PERL_HASH"
+//    PERL_GLOB="PERL_GLOB"
 
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
     PERL_STRING_MULTILINE_END="PERL_STRING_MULTILINE_END"
@@ -390,7 +390,7 @@ reference_value ::=
 private anon_array_ref ::= '[' [expr] ']'
 private anon_hash_ref ::= '{' [expr] '}'
 private code_ref ::= "sub" block_safe
-private glob_item_ref ::= PERL_GLOB "{" glob_item_ref_variant "}"
+private glob_item_ref ::= perl_glob "{" glob_item_ref_variant "}"
 private glob_item_ref_variant ::=
     "SCALAR"
     | "ARRAY"
@@ -404,7 +404,7 @@ private glob_item_ref_variant ::=
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
-private variable ::= scalar | array | hash | PERL_GLOB
+private variable ::= scalar | array | hash | perl_glob
 
 private array ::=
     array_primitive '[' expr ']'              // array slice
@@ -414,11 +414,11 @@ private array ::=
 private hash ::=
     PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
     | PERL_SIGIL_HASH scalar_expr       // scalar dereference wo braces
-    | PERL_HASH                    // hash as is
+    | perl_hash                    // hash as is
 
 private scalar ::=
-    PERL_SCALAR nested_element    // hash or array item
-    | PERL_SCALAR
+    perl_scalar nested_element    // hash or array item
+    | perl_scalar
     | PERL_SIGIL_SCALAR "{" PERL_BAREWORD "}"
     | "(" expr ")" nested_element
     | 'undef'
@@ -436,7 +436,7 @@ private nested_element_expr ::=
     | function_call
     | rightward_call_expr
 
-scalar_call ::= PERL_SCALAR "(" [expr] ")"
+scalar_call ::= perl_scalar "(" [expr] ")"
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
@@ -461,13 +461,14 @@ private scalar_primitive ::=
     | PERL_TAG  // __PACKAGE__ etc.
     | string
 
+
 private array_primitive ::=
     string_list
     | PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
     | PERL_SIGIL_ARRAY scalar_expr       // scalar dereference
-    | PERL_ARRAY                    // array as is
+    | perl_array                    // array as is
 
-private string ::= string_quoted | multiline_marker | <<parseBarewordString>>
+string ::= string_quoted | multiline_marker | <<parseBarewordString>>
 private string_quoted ::= ['qq' | 'qx' | 'q'] PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
 private multiline_marker ::= '<<' (string | <<parseBarewordString>>)
 
@@ -477,4 +478,27 @@ label_declaration ::= label ":" // do we need to change tokentype?
 label ::= PERL_BAREWORD
 private perl_version ::= <<parseVersion>>
 private perl_package ::= <<parseBarewordPackage>>
-private perl_handle ::= <<parseBarewordHandle>> | PERL_SCALAR !PERL_OPERATOR | "{" scalar "}"
+private perl_handle ::= <<parseBarewordHandle>> | perl_scalar !PERL_OPERATOR | "{" scalar "}"
+
+// this is pretty raw
+perl_scalar ::=
+    perl_scalar_built_in
+    | PERL_SIGIL_SCALAR ["#"] PERL_SIGIL_SCALAR * PERL_BAREWORD ("::" PERL_BAREWORD) *
+
+private perl_scalar_built_in ::=
+    "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$^TAINT" | "$^UTF8LOCALE" | "$^RE_TRIE_MAXBUF" | "$^CHILD_ERROR_NATIVE" | "$^ENCODING" | "$^OPEN" | "$^RE_DEBUG_FLAGS" | "$^A" | "$^C" | "$^T" | "$^S" | "$^V" | "$^W" | "$^X" | "$^D" | "$^E" | "$^F" | "$^H" | "$^I" | "$^L" | "$^M" | "$^N" | "$^O" | "$^P" | "$^R" | "$^H" | "$!" | "$\"" | "$#" | "$$" | "$%" | "$&" | "$'" | "$(" | "$)" | "$*" | "$+" | "$," | "$_" | "$-" | "$`" | "$." | "$a" | "$/" | "$0" | "$:" | "$;" | "$<" | "$=" | "$>" | "$?" | "$@" | "$[" | "$]" | "$|" | "$^" | "$~"
+    | PERL_SIGIL_SCALAR PERL_NUMBER
+
+inner perl_array ::=
+    perl_array_built_in
+    | PERL_SIGIL_ARRAY PERL_BAREWORD ("::" PERL_BAREWORD) *
+
+private perl_array_built_in ::= "@_" | "@!" | "@+" | "@-" | "@^H"
+
+inner perl_hash ::=
+    perl_hash_built_in
+    | PERL_SIGIL_HASH PERL_BAREWORD ("::" PERL_BAREWORD) *
+
+private perl_hash_built_in ::= "%!" | "%+" | "%-" | "%^H"
+
+perl_glob ::= "*" PERL_BAREWORD ("::" PERL_BAREWORD) *

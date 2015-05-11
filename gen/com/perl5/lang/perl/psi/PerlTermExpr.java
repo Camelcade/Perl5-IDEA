@@ -41,6 +41,18 @@ public interface PerlTermExpr extends PerlExpr {
   PerlOpenTerm getOpenTerm();
 
   @Nullable
+  PerlPerlArray getPerlArray();
+
+  @Nullable
+  PerlPerlGlob getPerlGlob();
+
+  @Nullable
+  PerlPerlHash getPerlHash();
+
+  @Nullable
+  PerlPerlScalar getPerlScalar();
+
+  @Nullable
   PerlPrintTerm getPrintTerm();
 
   @Nullable
@@ -54,6 +66,9 @@ public interface PerlTermExpr extends PerlExpr {
 
   @Nullable
   PerlSortTerm getSortTerm();
+
+  @Nullable
+  PerlString getString();
 
   @Nullable
   PerlSubTerm getSubTerm();

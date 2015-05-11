@@ -10,4 +10,16 @@ public interface PerlVariableDeclarationGlobal extends PsiElement {
   @NotNull
   List<PerlExpr> getExprList();
 
+  @NotNull
+  List<PerlPerlArray> getPerlArrayList();
+
+  @NotNull
+  List<PerlPerlGlob> getPerlGlobList();
+
+  @NotNull
+  List<PerlPerlHash> getPerlHashList();
+
+  @NotNull
+  List<PerlPerlScalar> getPerlScalarList();
+
 }

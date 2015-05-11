@@ -89,6 +89,30 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlPerlArray getPerlArray() {
+    return findChildByClass(PerlPerlArray.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPerlGlob getPerlGlob() {
+    return findChildByClass(PerlPerlGlob.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPerlHash getPerlHash() {
+    return findChildByClass(PerlPerlHash.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPerlScalar getPerlScalar() {
+    return findChildByClass(PerlPerlScalar.class);
+  }
+
+  @Override
+  @Nullable
   public PerlPrintTerm getPrintTerm() {
     return findChildByClass(PerlPrintTerm.class);
   }
@@ -115,6 +139,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
   @Nullable
   public PerlSortTerm getSortTerm() {
     return findChildByClass(PerlSortTerm.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlString getString() {
+    return findChildByClass(PerlString.class);
   }
 
   @Override

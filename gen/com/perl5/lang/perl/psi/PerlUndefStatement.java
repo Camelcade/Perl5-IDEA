@@ -10,4 +10,16 @@ public interface PerlUndefStatement extends PsiElement {
   @Nullable
   PerlExpr getExpr();
 
+  @Nullable
+  PerlPerlArray getPerlArray();
+
+  @Nullable
+  PerlPerlGlob getPerlGlob();
+
+  @Nullable
+  PerlPerlHash getPerlHash();
+
+  @Nullable
+  PerlPerlScalar getPerlScalar();
+
 }

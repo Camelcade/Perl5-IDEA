@@ -59,8 +59,12 @@ public interface PerlElementTypes {
   IElementType OPEN_REF = new PerlElementType("OPEN_REF");
   IElementType OPEN_TERM = new PerlElementType("OPEN_TERM");
   IElementType OR_EXPR = new PerlElementType("OR_EXPR");
+  IElementType PERL_ARRAY = new PerlElementType("PERL_ARRAY");
+  IElementType PERL_GLOB = new PerlElementType("PERL_GLOB");
+  IElementType PERL_HASH = new PerlElementType("PERL_HASH");
   IElementType PERL_REGEX = new PerlElementType("PERL_REGEX");
   IElementType PERL_REGEX_MODIFIERS = new PerlElementType("PERL_REGEX_MODIFIERS");
+  IElementType PERL_SCALAR = new PerlElementType("PERL_SCALAR");
   IElementType POW_EXPR = new PerlElementType("POW_EXPR");
   IElementType PREFIX_UNARY_EXPR = new PerlElementType("PREFIX_UNARY_EXPR");
   IElementType PREF_PP_EXPR = new PerlElementType("PREF_PP_EXPR");
@@ -75,6 +79,7 @@ public interface PerlElementTypes {
   IElementType SCALAR_CALL = new PerlElementType("SCALAR_CALL");
   IElementType SHIFT_EXPR = new PerlElementType("SHIFT_EXPR");
   IElementType SORT_TERM = new PerlElementType("SORT_TERM");
+  IElementType STRING = new PerlElementType("STRING");
   IElementType SUB_DECLARATION = new PerlElementType("SUB_DECLARATION");
   IElementType SUB_DEFINITION = new PerlElementType("SUB_DEFINITION");
   IElementType SUB_TERM = new PerlElementType("SUB_TERM");
@@ -98,7 +103,6 @@ public interface PerlElementTypes {
   IElementType WHILE_COMPOUND = new PerlElementType("WHILE_COMPOUND");
   IElementType WHILE_STATEMENT_MODIFIER = new PerlElementType("WHILE_STATEMENT_MODIFIER");
 
-  IElementType PERL_ARRAY = new PerlTokenType("PERL_ARRAY");
   IElementType PERL_ARROW_COMMA = new PerlTokenType("=>");
   IElementType PERL_BAREWORD = new PerlTokenType("PERL_BAREWORD");
   IElementType PERL_BLOCK_NAME = new PerlTokenType("PERL_BLOCK_NAME");
@@ -109,9 +113,7 @@ public interface PerlElementTypes {
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
   IElementType PERL_DEREFERENCE = new PerlTokenType("->");
   IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
-  IElementType PERL_GLOB = new PerlTokenType("PERL_GLOB");
   IElementType PERL_HANDLE = new PerlTokenType("PERL_HANDLE");
-  IElementType PERL_HASH = new PerlTokenType("PERL_HASH");
   IElementType PERL_KEYWORD = new PerlTokenType("PERL_KEYWORD");
   IElementType PERL_LANGLE = new PerlTokenType("<");
   IElementType PERL_LBRACE = new PerlTokenType("{");
@@ -132,7 +134,6 @@ public interface PerlElementTypes {
   IElementType PERL_REGEX_QUOTE = new PerlTokenType("PERL_REGEX_QUOTE");
   IElementType PERL_REGEX_TOKEN = new PerlTokenType("PERL_REGEX_TOKEN");
   IElementType PERL_RPAREN = new PerlTokenType(")");
-  IElementType PERL_SCALAR = new PerlTokenType("PERL_SCALAR");
   IElementType PERL_SEMI = new PerlTokenType(";");
   IElementType PERL_SIGIL_ARRAY = new PerlTokenType("@");
   IElementType PERL_SIGIL_HASH = new PerlTokenType("%");
@@ -294,11 +295,23 @@ public interface PerlElementTypes {
       else if (type == OR_EXPR) {
         return new PerlOrExprImpl(node);
       }
+      else if (type == PERL_ARRAY) {
+        return new PerlPerlArrayImpl(node);
+      }
+      else if (type == PERL_GLOB) {
+        return new PerlPerlGlobImpl(node);
+      }
+      else if (type == PERL_HASH) {
+        return new PerlPerlHashImpl(node);
+      }
       else if (type == PERL_REGEX) {
         return new PerlPerlRegexImpl(node);
       }
       else if (type == PERL_REGEX_MODIFIERS) {
         return new PerlPerlRegexModifiersImpl(node);
+      }
+      else if (type == PERL_SCALAR) {
+        return new PerlPerlScalarImpl(node);
       }
       else if (type == POW_EXPR) {
         return new PerlPowExprImpl(node);
@@ -341,6 +354,9 @@ public interface PerlElementTypes {
       }
       else if (type == SORT_TERM) {
         return new PerlSortTermImpl(node);
+      }
+      else if (type == STRING) {
+        return new PerlStringImpl(node);
       }
       else if (type == SUB_DECLARATION) {
         return new PerlSubDeclarationImpl(node);

@@ -158,13 +158,9 @@ public class PerlScalarUtil implements PerlElementTypes
 		}
 	}
 
-	public static IElementType getScalarType(String scalar)
+	public static boolean isBuiltIn(String variable)
 	{
-		IElementType scalarType = BUILT_IN_MAP.get(scalar);
-
-		return scalarType == null
-				? PERL_SCALAR
-				: scalarType;
+		return BUILT_IN_MAP.containsKey(variable);
 	}
 
 /*

@@ -11,6 +11,9 @@ public interface PerlOpenHandle extends PsiElement {
   PerlExpr getExpr();
 
   @Nullable
+  PerlPerlScalar getPerlScalar();
+
+  @Nullable
   PerlVariableDeclarationGlobal getVariableDeclarationGlobal();
 
   @Nullable

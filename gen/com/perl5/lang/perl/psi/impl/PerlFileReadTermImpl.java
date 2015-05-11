@@ -28,4 +28,10 @@ public class PerlFileReadTermImpl extends ASTWrapperPsiElement implements PerlFi
     return findChildByClass(PerlExpr.class);
   }
 
+  @Override
+  @Nullable
+  public PerlPerlScalar getPerlScalar() {
+    return findChildByClass(PerlPerlScalar.class);
+  }
+
 }

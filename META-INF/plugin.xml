@@ -27,7 +27,7 @@
 
       <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
       <lang.syntaxHighlighterFactory key="Perl5" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
-      <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotator"/>
+      <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
       <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
       <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
       <codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>

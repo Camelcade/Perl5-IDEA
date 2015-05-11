@@ -10,4 +10,7 @@ public interface PerlScalarCall extends PsiElement {
   @Nullable
   PerlExpr getExpr();
 
+  @NotNull
+  PerlPerlScalar getPerlScalar();
+
 }

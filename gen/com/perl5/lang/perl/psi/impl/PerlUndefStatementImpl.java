@@ -28,4 +28,28 @@ public class PerlUndefStatementImpl extends ASTWrapperPsiElement implements Perl
     return findChildByClass(PerlExpr.class);
   }
 
+  @Override
+  @Nullable
+  public PerlPerlArray getPerlArray() {
+    return findChildByClass(PerlPerlArray.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPerlGlob getPerlGlob() {
+    return findChildByClass(PerlPerlGlob.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPerlHash getPerlHash() {
+    return findChildByClass(PerlPerlHash.class);
+  }
+
+  @Override
+  @Nullable
+  public PerlPerlScalar getPerlScalar() {
+    return findChildByClass(PerlPerlScalar.class);
+  }
+
 }

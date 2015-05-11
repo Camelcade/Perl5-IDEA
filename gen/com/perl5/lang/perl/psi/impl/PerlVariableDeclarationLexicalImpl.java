@@ -28,4 +28,28 @@ public class PerlVariableDeclarationLexicalImpl extends ASTWrapperPsiElement imp
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
   }
 
+  @Override
+  @NotNull
+  public List<PerlPerlArray> getPerlArrayList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlArray.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPerlGlob> getPerlGlobList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlGlob.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPerlHash> getPerlHashList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlHash.class);
+  }
+
+  @Override
+  @NotNull
+  public List<PerlPerlScalar> getPerlScalarList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlPerlScalar.class);
+  }
+
 }

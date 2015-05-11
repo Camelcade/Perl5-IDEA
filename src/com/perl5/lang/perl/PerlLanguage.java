@@ -24,7 +24,7 @@ public class PerlLanguage extends Language
 {
 	public static final PerlLanguage INSTANCE = new PerlLanguage();
 
-	protected ArrayList<VirtualFile> libPaths = null;
+	protected volatile ArrayList<VirtualFile> libPaths = null;
 
 	public PerlLanguage() {
 		super("Perl5");

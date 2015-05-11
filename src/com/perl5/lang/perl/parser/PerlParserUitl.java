@@ -147,7 +147,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		if( methodName == null)
 			// can't happen
-			throw new Error("No method captured, smth is wrong");
+			return false;
+//			throw new Error("No method captured, smth is wrong");
 		else if(packageName == null) // method from unknown package
 		{
 			parseExpressionLevel(b,l,3);

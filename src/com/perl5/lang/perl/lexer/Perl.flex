@@ -81,15 +81,15 @@ MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{BAREWORD}
 POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
 POD_CLOSE       = \="cut"{FULL_LINE}
 
-VAR_SCALAR_REGEXP = "$"[1-9][0-9]*
-VAR_SCALAR_SPECIAL = "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$^TAINT" | "$^UTF8LOCALE" | "$^RE_TRIE_MAXBUF" | "$^CHILD_ERROR_NATIVE" | "$^ENCODING" | "$^OPEN" | "$^RE_DEBUG_FLAGS" | "$^A" | "$^C" | "$^T" | "$^S" | "$^V" | "$^W" | "$^X" | "$^D" | "$^E" | "$^F" | "$^H" | "$^I" | "$^L" | "$^M" | "$^N" | "$^O" | "$^P" | "$^R" | "$^H" | "$!" | "$\"" | "$#" | "$$" | "$%" | "$&" | "$'" | "$(" | "$)" | "$*" | "$+" | "$," | "$_" | "$-" | "$`" | "$." | "$a" | "$/" | "$0" | "$:" | "$;" | "$<" | "$=" | "$>" | "$?" | "$@" | "$[" | "$\"" | "$]" | "$|" | "$^" | "$~" | "$+" | "$-" | "$_" | "$!" | "$+" | "$-"
-VAR_ARRAY_SPECIAL = "@_" | "@!" | "@+" | "@-" | "@^H"
-VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
+//VAR_SCALAR_REGEXP = "$"[1-9][0-9]*
+//VAR_SCALAR_SPECIAL = "$^WARNING_BITS" | "$^WIDE_SYSTEM_CALLS" | "$^UNICODE" | "$^TAINT" | "$^UTF8LOCALE" | "$^RE_TRIE_MAXBUF" | "$^CHILD_ERROR_NATIVE" | "$^ENCODING" | "$^OPEN" | "$^RE_DEBUG_FLAGS" | "$^A" | "$^C" | "$^T" | "$^S" | "$^V" | "$^W" | "$^X" | "$^D" | "$^E" | "$^F" | "$^H" | "$^I" | "$^L" | "$^M" | "$^N" | "$^O" | "$^P" | "$^R" | "$^H" | "$!" | "$\"" | "$#" | "$$" | "$%" | "$&" | "$'" | "$(" | "$)" | "$*" | "$+" | "$," | "$_" | "$-" | "$`" | "$." | "$a" | "$/" | "$0" | "$:" | "$;" | "$<" | "$=" | "$>" | "$?" | "$@" | "$[" | "$\"" | "$]" | "$|" | "$^" | "$~" | "$+" | "$-" | "$_" | "$!" | "$+" | "$-"
+//VAR_ARRAY_SPECIAL = "@_" | "@!" | "@+" | "@-" | "@^H"
+//VAR_HASH_SPECIAL = "%!" | "%+" | "%-" | "%^H"
 
-VAR_SCALAR = "$"("#"? "$"*)?{BAREWORD}("::"{BAREWORD})*
-VAR_HASH = "%"{BAREWORD}("::"{BAREWORD})*
-VAR_ARRAY = "@"{BAREWORD}("::"{BAREWORD})*
-VAR_GLOB = "*"{BAREWORD}("::"{BAREWORD})*
+//VAR_SCALAR = "$"("#"? "$"*)?{BAREWORD}("::"{BAREWORD})*
+//VAR_HASH = "%"{BAREWORD}("::"{BAREWORD})*
+//VAR_ARRAY = "@"{BAREWORD}("::"{BAREWORD})*
+//VAR_GLOB = "*"{BAREWORD}("::"{BAREWORD})*
 
 QUOTE_LIST_FUNCTIONS = "qw"
 QUOTE_FUNCTIONS = "qq" | "qx" | "q"
@@ -317,14 +317,14 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_VERSION}  {return PERL_NUMBER_VERSION;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
-{VAR_SCALAR_SPECIAL} {return PERL_SCALAR;}
-{VAR_SCALAR_REGEXP} {return PERL_SCALAR;}
-{VAR_SCALAR} {return PERL_SCALAR;}
-{VAR_HASH_SPECIAL} {return PERL_HASH;}
-{VAR_HASH} {return PERL_HASH;}
-{VAR_ARRAY_SPECIAL} {return PERL_ARRAY;}
-{VAR_ARRAY} {return PERL_ARRAY;}
-{VAR_GLOB} {return PERL_GLOB;}
+//{VAR_SCALAR_SPECIAL} {return PERL_SCALAR;}
+//{VAR_SCALAR_REGEXP} {return PERL_SCALAR;}
+//{VAR_SCALAR} {return PERL_SCALAR;}
+//{VAR_HASH_SPECIAL} {return PERL_HASH;}
+//{VAR_HASH} {return PERL_HASH;}
+//{VAR_ARRAY_SPECIAL} {return PERL_ARRAY;}
+//{VAR_ARRAY} {return PERL_ARRAY;}
+//{VAR_GLOB} {return PERL_GLOB;}
 "@" {return PERL_SIGIL_ARRAY;}
 "%" {return PERL_SIGIL_HASH;}
 "$" {return PERL_SIGIL_SCALAR;}

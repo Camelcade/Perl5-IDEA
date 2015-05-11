@@ -203,11 +203,27 @@ public class PerlVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitPerlArray(@NotNull PerlPerlArray o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlGlob(@NotNull PerlPerlGlob o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlHash(@NotNull PerlPerlHash o) {
+    visitPsiElement(o);
+  }
+
   public void visitPerlRegex(@NotNull PerlPerlRegex o) {
     visitPsiElement(o);
   }
 
   public void visitPerlRegexModifiers(@NotNull PerlPerlRegexModifiers o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPerlScalar(@NotNull PerlPerlScalar o) {
     visitPsiElement(o);
   }
 
@@ -264,6 +280,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitSortTerm(@NotNull PerlSortTerm o) {
+    visitPsiElement(o);
+  }
+
+  public void visitString(@NotNull PerlString o) {
     visitPsiElement(o);
   }
 

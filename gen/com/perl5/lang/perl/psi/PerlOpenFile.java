@@ -10,4 +10,7 @@ public interface PerlOpenFile extends PsiElement {
   @Nullable
   PerlExpr getExpr();
 
+  @Nullable
+  PerlPerlScalar getPerlScalar();
+
 }
