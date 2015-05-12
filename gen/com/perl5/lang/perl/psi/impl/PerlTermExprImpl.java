@@ -143,6 +143,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlRightwardCall getRightwardCall() {
+    return findChildByClass(PerlRightwardCall.class);
+  }
+
+  @Override
+  @Nullable
   public PerlScalarVariable getScalarVariable() {
     return findChildByClass(PerlScalarVariable.class);
   }

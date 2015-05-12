@@ -157,11 +157,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //			throw new Error("No method captured, smth is wrong");
 		else if(packageName == null) // method from unknown package
 		{
-			parseExpressionLevel(b,l,3);
+			parseExpressionLevel(b,l,2);
 		}
 		else // method and package are known
 		{
-			parseExpressionLevel(b,l,3);
+			parseExpressionLevel(b,l,2);
 		}
 		return true;
 	}
@@ -300,17 +300,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
 		String prevTokenText = prevToken == null ? null : prevToken.getTokenText();
 
-		// ->bareword construction, method
-		if( prevTokenType == PERL_DEREFERENCE && !"SUPER".equals(b.getTokenText()) && (tokenType == PERL_BAREWORD || tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY ))
-		{
-			PsiBuilder.Marker m = b.mark();
-			((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
-			((PerlBuilder) b).setLastCallablePackage("SUPER");
-			b.advanceLexer();
-			m.done(PERL_FUNCTION);
-			return true;
-		}
-		else if(tokenType == PERL_BAREWORD )
+		if(isBareword(tokenType))
 		{
 			PerlTokenData nextToken = ((PerlBuilder) b).getAheadToken(1);
 			IElementType nextTokenType = nextToken == null ? null : nextToken.getTokenType();
@@ -329,6 +319,15 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 					return true;
 				}
 
+			}
+			// ->bareword construction, method
+			else if( prevTokenType == PERL_DEREFERENCE  )
+			{
+				((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
+				((PerlBuilder) b).setLastCallablePackage("SUPER");
+				b.advanceLexer();
+				m.done(PERL_FUNCTION);
+				return true;
 			}
 			// bareword => - not callable, it's a string
 			else if (nextTokenType == PERL_ARROW_COMMA)
@@ -931,6 +930,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				return true;
 
 		return false;
+	}
+
+	public static boolean isBareword(IElementType tokenType)
+	{
+		return tokenType == PERL_BAREWORD || tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY;
 	}
 
 }

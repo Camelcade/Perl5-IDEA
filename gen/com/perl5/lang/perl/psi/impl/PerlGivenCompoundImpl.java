@@ -23,9 +23,9 @@ public class PerlGivenCompoundImpl extends ASTWrapperPsiElement implements PerlG
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
+    return findChildByClass(PerlExpr.class);
   }
 
 }

@@ -259,8 +259,8 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitRightwardCallExpr(@NotNull PerlRightwardCallExpr o) {
-    visitExpr(o);
+  public void visitRightwardCall(@NotNull PerlRightwardCall o) {
+    visitPsiElement(o);
   }
 
   public void visitScalarCall(@NotNull PerlScalarCall o) {

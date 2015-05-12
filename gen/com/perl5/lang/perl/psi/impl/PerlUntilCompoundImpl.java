@@ -23,9 +23,9 @@ public class PerlUntilCompoundImpl extends ASTWrapperPsiElement implements PerlU
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PerlExpr getExpr() {
-    return findNotNullChildByClass(PerlExpr.class);
+    return findChildByClass(PerlExpr.class);
   }
 
 }

@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlGivenCompound extends PsiElement {
 
-  @NotNull
+  @Nullable
   PerlExpr getExpr();
 
 }

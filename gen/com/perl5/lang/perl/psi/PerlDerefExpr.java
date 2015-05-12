@@ -14,6 +14,9 @@ public interface PerlDerefExpr extends PerlExpr {
   List<PerlExpr> getExprList();
 
   @NotNull
+  List<PerlRightwardCall> getRightwardCallList();
+
+  @NotNull
   List<PerlScalarCall> getScalarCallList();
 
 }

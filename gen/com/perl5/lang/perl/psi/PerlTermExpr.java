@@ -68,6 +68,9 @@ public interface PerlTermExpr extends PerlExpr {
   PerlRequireTerm getRequireTerm();
 
   @Nullable
+  PerlRightwardCall getRightwardCall();
+
+  @Nullable
   PerlScalarVariable getScalarVariable();
 
   @Nullable

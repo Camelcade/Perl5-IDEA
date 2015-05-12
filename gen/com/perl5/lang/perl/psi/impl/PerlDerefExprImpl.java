@@ -35,6 +35,12 @@ public class PerlDerefExprImpl extends PerlExprImpl implements PerlDerefExpr {
 
   @Override
   @NotNull
+  public List<PerlRightwardCall> getRightwardCallList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlRightwardCall.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlScalarCall> getScalarCallList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlScalarCall.class);
   }

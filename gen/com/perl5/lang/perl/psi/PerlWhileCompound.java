@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlWhileCompound extends PsiElement {
 
-  @NotNull
+  @Nullable
   PerlExpr getExpr();
 
 }
