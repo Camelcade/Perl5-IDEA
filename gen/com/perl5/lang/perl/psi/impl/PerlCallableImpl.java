@@ -40,4 +40,10 @@ public class PerlCallableImpl extends ASTWrapperPsiElement implements PerlCallab
     return findChildByClass(PerlString.class);
   }
 
+  @Override
+  @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
+  }
+
 }

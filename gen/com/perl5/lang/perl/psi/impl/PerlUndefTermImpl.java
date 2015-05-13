@@ -52,4 +52,10 @@ public class PerlUndefTermImpl extends ASTWrapperPsiElement implements PerlUndef
     return findChildByClass(PerlString.class);
   }
 
+  @Override
+  @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
+  }
+
 }

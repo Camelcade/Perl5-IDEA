@@ -52,4 +52,10 @@ public class PerlVariableDeclarationLexicalImpl extends ASTWrapperPsiElement imp
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlString.class);
   }
 
+  @Override
+  @NotNull
+  public List<PerlUndefTerm> getUndefTermList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUndefTerm.class);
+  }
+
 }

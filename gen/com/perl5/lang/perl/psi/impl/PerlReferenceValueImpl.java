@@ -40,4 +40,10 @@ public class PerlReferenceValueImpl extends ASTWrapperPsiElement implements Perl
     return findChildByClass(PerlString.class);
   }
 
+  @Override
+  @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
+  }
+
 }

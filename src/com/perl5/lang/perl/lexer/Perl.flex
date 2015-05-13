@@ -53,10 +53,10 @@ BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
 BAREWORD_STRING = "-" {BAREWORD}
 ANYWORD = [^ \t\f\r\n]
 
-PERL_SCALAR = "$" {BAREWORD}("::" {BAREWORD})*
-PERL_HASH = "%" {BAREWORD}("::" {BAREWORD})*
-PERL_ARRAY = "@" {BAREWORD}("::" {BAREWORD})*
-PERL_GLOB = "*" {BAREWORD}("::" {BAREWORD})*
+PERL_SCALAR = "$" "::" ? {BAREWORD}("::" {BAREWORD})*
+PERL_HASH = "%" "::" ? {BAREWORD}("::" {BAREWORD})*
+PERL_ARRAY = "@" "::" ? {BAREWORD}("::" {BAREWORD})*
+PERL_GLOB = "*" "::" ? {BAREWORD}("::" {BAREWORD})*
 
 CHAR_ANY        = .|{NEW_LINE}
 LINE            = .*

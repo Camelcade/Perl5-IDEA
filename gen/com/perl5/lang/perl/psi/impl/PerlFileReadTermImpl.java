@@ -40,4 +40,10 @@ public class PerlFileReadTermImpl extends ASTWrapperPsiElement implements PerlFi
     return findChildByClass(PerlString.class);
   }
 
+  @Override
+  @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
+  }
+
 }

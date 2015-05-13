@@ -40,4 +40,10 @@ public class PerlPrintTermImpl extends ASTWrapperPsiElement implements PerlPrint
     return findChildByClass(PerlString.class);
   }
 
+  @Override
+  @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
+  }
+
 }

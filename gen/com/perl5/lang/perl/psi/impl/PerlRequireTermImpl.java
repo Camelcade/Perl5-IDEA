@@ -24,8 +24,8 @@ public class PerlRequireTermImpl extends ASTWrapperPsiElement implements PerlReq
 
   @Override
   @Nullable
-  public PerlString getString() {
-    return findChildByClass(PerlString.class);
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
 }

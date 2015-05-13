@@ -16,4 +16,7 @@ public interface PerlCallable extends PsiElement {
   @Nullable
   PerlString getString();
 
+  @Nullable
+  PerlUndefTerm getUndefTerm();
+
 }

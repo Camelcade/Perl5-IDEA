@@ -16,4 +16,7 @@ public interface PerlCloseTerm extends PsiElement {
   @Nullable
   PerlString getString();
 
+  @Nullable
+  PerlUndefTerm getUndefTerm();
+
 }

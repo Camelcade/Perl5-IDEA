@@ -22,4 +22,10 @@ public class PerlEvalTermImpl extends ASTWrapperPsiElement implements PerlEvalTe
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PerlString getString() {
+    return findChildByClass(PerlString.class);
+  }
+
 }

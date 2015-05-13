@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlRequireTerm extends PsiElement {
 
   @Nullable
-  PerlString getString();
+  PerlExpr getExpr();
 
 }

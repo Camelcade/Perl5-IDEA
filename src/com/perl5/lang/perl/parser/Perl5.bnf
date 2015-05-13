@@ -142,7 +142,7 @@ private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_S
 private for_compound_arguments_list ::=
     [ variable_declaration | variable ] '(' expr ')' block_compound
 
-private statement ::= statement_variation [statement_modifier] {recoverWhile=recover_statement}
+private statement ::= statement_variation [statement_modifier] //{recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
@@ -192,9 +192,9 @@ when_statement_modifier ::= 'when' expr
 use_statement ::= 'use' <<parseUseStatement>>
 no_statement ::= 'no' <<parseNoStatement>>
 
-undef_term ::= "undef" variable
+undef_term ::= "undef" variable ?
 
-require_term ::= 'require' (perl_package | perl_version | string)  // multiline string is possible too
+require_term ::= 'require' (perl_package | perl_version | expr)  // multiline string is possible too
 
 private recover_statement ::= !(PERL_SEMI | PERL_RBRACE )
 private recover_block ::= !(PERL_RBRACE | <<eof>>)
@@ -273,7 +273,10 @@ add_expr ::= expr ('+'|'-'|'.') expr
 shift_expr ::= expr ('<<'|'>>') expr
 
 private op_10_expr ::= named_unary_expr | filetest_expr
-named_unary_expr ::= PERL_OPERATOR_UNARY !"(" expr
+named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
+private named_undry_expr_defined ::= 'defined' !"(" [expr]
+private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" expr
+
 filetest_expr ::= PERL_OPERATOR_FILETEST (<<parseBarewordHandle>> | expr )
 
 compare_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
@@ -366,7 +369,7 @@ tr_modifiers ::= PERL_REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
 do_term ::= "do" block_safe
-eval_term ::= "eval" block_safe
+eval_term ::= "eval" (string | block_safe)
 
 private variable_declaration ::=
     variable_declaration_global
@@ -424,12 +427,13 @@ private hash ::=
     | PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
 
 private scalar ::=
-    PERL_SIGIL_SCALAR + scalar_variable
-    | scalar_variable nested_element    // hash or array item
-    | scalar_variable
+    PERL_SIGIL_SCALAR * scalar_variable nested_element ?
+    | scalar_variable nested_element ?
+//    | scalar_variable
     | scalar_constant
     | "(" expr ")" nested_element
-    | 'undef'
+    | undef_term
+    | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
 
 private glob ::=
     "*" scalar       // scalar dereference wo braces
@@ -478,7 +482,6 @@ private scalar_constant ::=
     PERL_NUMBER
     | PERL_TAG  // __PACKAGE__ etc.
     | string
-    | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * scalar_variable // array elements number, not sure it's a constant
 
 private array_constant ::=
     string_list

@@ -40,4 +40,10 @@ public class PerlCloseTermImpl extends ASTWrapperPsiElement implements PerlClose
     return findChildByClass(PerlString.class);
   }
 
+  @Override
+  @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
+  }
+
 }

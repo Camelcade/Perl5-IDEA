@@ -60,6 +60,12 @@ public class PerlForCompoundImpl extends ASTWrapperPsiElement implements PerlFor
 
   @Override
   @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
+  }
+
+  @Override
+  @Nullable
   public PerlVariableDeclarationGlobal getVariableDeclarationGlobal() {
     return findChildByClass(PerlVariableDeclarationGlobal.class);
   }

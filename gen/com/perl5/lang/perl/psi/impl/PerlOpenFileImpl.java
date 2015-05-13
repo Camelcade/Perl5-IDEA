@@ -40,4 +40,10 @@ public class PerlOpenFileImpl extends ASTWrapperPsiElement implements PerlOpenFi
     return findChildByClass(PerlString.class);
   }
 
+  @Override
+  @Nullable
+  public PerlUndefTerm getUndefTerm() {
+    return findChildByClass(PerlUndefTerm.class);
+  }
+
 }

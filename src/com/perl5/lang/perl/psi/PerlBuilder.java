@@ -3,6 +3,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
 import com.perl5.lang.perl.PerlLanguage;
@@ -204,6 +205,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	// @todo here we need to get parsed package
 	public PerlPackageFile getPackageFile(String packageName)
 	{
+		packageName = packageName.replaceFirst("::$", "");
 		PerlPackageFile file = loadedPackageFiles.get(packageName);
 
 		if( file == null )
@@ -216,6 +218,25 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 
 		return file;
 	}
+
+	public boolean isKnownNamespace(String packageName)
+	{
+		String namespaceName = packageName.replaceFirst("::$", "");
+
+		// check in local namespaces
+		if( nameSpaces.containsKey(namespaceName))
+			return true;
+
+		// iterating loaded packages
+//		for( PerlPackageFile packageFile: loadedPackageFiles.values() )
+//		{
+//			PsiFile packagePsiFile = packageFile.getPsiFile();
+//
+//		}
+
+		return false;
+	}
+
 
 	public boolean isKnownHandle(String name)
 	{

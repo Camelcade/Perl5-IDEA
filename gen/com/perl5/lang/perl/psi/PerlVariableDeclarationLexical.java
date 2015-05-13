@@ -22,4 +22,7 @@ public interface PerlVariableDeclarationLexical extends PsiElement {
   @NotNull
   List<PerlString> getStringList();
 
+  @NotNull
+  List<PerlUndefTerm> getUndefTermList();
+
 }

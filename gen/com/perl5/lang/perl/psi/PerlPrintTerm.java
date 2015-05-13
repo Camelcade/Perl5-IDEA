@@ -16,4 +16,7 @@ public interface PerlPrintTerm extends PsiElement {
   @Nullable
   PerlString getString();
 
+  @Nullable
+  PerlUndefTerm getUndefTerm();
+
 }

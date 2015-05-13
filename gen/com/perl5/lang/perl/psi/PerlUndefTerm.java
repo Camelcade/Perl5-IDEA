@@ -22,4 +22,7 @@ public interface PerlUndefTerm extends PsiElement {
   @Nullable
   PerlString getString();
 
+  @Nullable
+  PerlUndefTerm getUndefTerm();
+
 }

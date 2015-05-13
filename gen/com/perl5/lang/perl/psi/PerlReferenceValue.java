@@ -16,4 +16,7 @@ public interface PerlReferenceValue extends PsiElement {
   @Nullable
   PerlString getString();
 
+  @Nullable
+  PerlUndefTerm getUndefTerm();
+
 }

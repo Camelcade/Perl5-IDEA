@@ -26,6 +26,9 @@ public interface PerlForCompound extends PsiElement {
   PerlString getString();
 
   @Nullable
+  PerlUndefTerm getUndefTerm();
+
+  @Nullable
   PerlVariableDeclarationGlobal getVariableDeclarationGlobal();
 
   @Nullable
