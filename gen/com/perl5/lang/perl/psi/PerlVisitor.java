@@ -187,10 +187,6 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitOpenFile(@NotNull PerlOpenFile o) {
-    visitPsiElement(o);
-  }
-
   public void visitOpenHandle(@NotNull PerlOpenHandle o) {
     visitPsiElement(o);
   }

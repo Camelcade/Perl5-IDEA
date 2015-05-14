@@ -3,14 +3,14 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlBuilder;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.*;
 
 import java.util.ArrayList;
 
@@ -43,12 +43,28 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 
-		if( b.getTokenType() == PERL_BAREWORD)
+		if( isBareword(b.getTokenType()))
 		{
 			PsiBuilder.Marker mainMarker = b.mark();
 
-			// sub name
 			PsiBuilder.Marker m = b.mark();
+
+			// @todo not DRY with subDeclaration
+			boolean hasPackage = false;
+			while( b.lookAhead(1) == PERL_DEPACKAGE)
+			{
+				b.advanceLexer();
+				b.advanceLexer();
+				hasPackage = true;
+			}
+
+			if( hasPackage )
+			{
+				m.collapse(PERL_PACKAGE);
+				m = b.mark();
+			}
+
+			// sub name
 			((PerlBuilder) b).beginSubDefinition(b.getTokenText());
 			b.advanceLexer();
 			m.collapse(PERL_FUNCTION);
@@ -92,13 +108,27 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 
-		if( b.getTokenType() == PERL_BAREWORD)
+		if( isBareword(b.getTokenType()))
 		{
 			PsiBuilder.Marker mainMarker = b.mark();
 
 			// sub name
-            // @todo overriding package functions does'nt work. like sub Data::Dumper::qquote
 			PsiBuilder.Marker m = b.mark();
+
+			boolean hasPackage = false;
+			while( b.lookAhead(1) == PERL_DEPACKAGE)
+			{
+				b.advanceLexer();
+				b.advanceLexer();
+				hasPackage = true;
+			}
+
+			if( hasPackage )
+			{
+				m.collapse(PERL_PACKAGE);
+				m = b.mark();
+			}
+
 			((PerlBuilder) b).beginSubDeclaration(b.getTokenText());
 			b.advanceLexer();
 			m.collapse(PERL_FUNCTION);
@@ -301,7 +331,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.done(PERL_PACKAGE);
-			return parseBarewordFunction(b,l);
+			return parseBarewordFunction(b,l, PERL_METHOD);
 		}
 
 		PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
@@ -310,19 +340,20 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType nextTokenType = b.lookAhead(1);
 		IElementType tokenType = b.getTokenType();
 
+
 		// ->method
-		if( prevTokenType == PERL_DEREFERENCE && isBareword(tokenType) && parseBarewordFunction(b,l))
+		if( prevTokenType == PERL_DEREFERENCE && isBareword(tokenType) && parseBarewordFunction(b,l,PERL_METHOD))
 		{
 			return true;
 		}
 		else if( tokenType == PERL_BAREWORD )
 		{
-			if (nextTokenType == PERL_ARROW_COMMA) // string
+			if (nextTokenType == PERL_ARROW_COMMA) // string =>
 				return false;
 			else  if( "SUPER".equals(b.getTokenText()) && parseBarewordPackageFunctionCall(b,l) )
 				return true;
-			else if(nextTokenType == PERL_BAREWORD && b.lookAhead(2) == PERL_DEPACKAGE)
-				return parseBarewordFunction(b,l) && parseBarewordPackage(b,l);
+			else if(nextTokenType == PERL_BAREWORD && b.lookAhead(2) == PERL_DEPACKAGE && !PerlFunctionUtil.isBuiltIn(b.getTokenText()))
+				return parseBarewordFunction(b, l, PERL_METHOD) && parseBarewordPackage(b, l);
 			else if(nextTokenType == PERL_DEPACKAGE )
 			{
 				PsiBuilder.Marker m = b.mark();
@@ -338,12 +369,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			}
 			else
-				return parseBarewordFunction(b,l);
+				return parseBarewordFunction(b,l, PERL_FUNCTION);
 		}
 
 		return false;
 	}
 
+	public static boolean noSpaceCheck(PsiBuilder b, int l )
+	{
+		return b.getTokenType() == PERL_LPAREN && b.rawLookup(-1) != TokenType.WHITE_SPACE;
+	}
 
 	/**
 	 * Making a PERL_PACKAGE item, collapsing barewords with :: @see guessBareword for more intelligence method
@@ -354,12 +389,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseBarewordPackage(PsiBuilder b, int l ) {
 
-		if(b.getTokenType() == PERL_BAREWORD )
+		if(isBareword(b.getTokenType())  )
 		{
 			PsiBuilder.Marker m = b.mark();
 			StringBuilder packageName = new StringBuilder(b.getTokenText());
 
-			while(b.lookAhead(1) == PERL_DEPACKAGE && b.lookAhead(2) == PERL_BAREWORD)
+			while(b.lookAhead(1) == PERL_DEPACKAGE && isBareword(b.lookAhead(2)))
 			{
 				b.advanceLexer();
 				packageName.append(b.getTokenText());
@@ -385,7 +420,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return result
 	 */
-	public static boolean parseBarewordFunction(PsiBuilder b, int l ) {
+	public static boolean parseBarewordFunction(PsiBuilder b, int l, IElementType collapseTokenType) {
 
 		if( isBareword(b.getTokenType()) )
 		{
@@ -393,7 +428,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(PERL_FUNCTION);
+			m.collapse(collapseTokenType);
 
 			return true;
 		}
@@ -463,7 +498,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			m = b.mark();
 			b.advanceLexer();
-			m.collapse(PERL_FUNCTION);
+			m.collapse(PERL_METHOD);
 
 			return true;
 		}
@@ -506,16 +541,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 * @return
 	 */
 	public static boolean parseBarewordStringMinus(PsiBuilder b, int l ) {
-		IElementType tokenType = b.getTokenType();
 		assert b instanceof PerlBuilder;
 
-		if( "-".equals(b.getTokenText()) && b.lookAhead(1) == PERL_BAREWORD )
+		if( "-".equals(b.getTokenText()) && isBareword(b.lookAhead(1)) && b.lookAhead(2) == PERL_ARROW_COMMA )
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			getStringsTrap(b).capture("-" + b.getTokenText());
 			b.advanceLexer();
 			m.collapse(PERL_STRING);
+			return true;
 		}
 
 		return false;
@@ -613,7 +648,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parseSubPrototype(PsiBuilder b, int l )
 	{
-		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
+//		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
 
 //		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
 
@@ -623,12 +658,20 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
-
+	// @todo this is really raw
 	public static boolean parseSubAttributes(PsiBuilder b, int l )
 	{
 //		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
 //		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
-		return false;
+
+		while( b.getTokenType() != PERL_LBRACE )
+		{
+			PerlBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(PERL_FUNCTION_ATTRIBUTE);
+		}
+
+		return true;
 	}
 
 	public static boolean parseSubSignature(PsiBuilder b, int l )
@@ -811,7 +854,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean isBareword(IElementType tokenType)
 	{
-		return tokenType == PERL_BAREWORD || tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY;
+		return tokenType == PERL_BAREWORD || tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY || tokenType == PERL_BLOCK_NAME;
 	}
 
 }

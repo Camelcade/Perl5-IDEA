@@ -55,7 +55,6 @@ public interface PerlElementTypes {
   IElementType NAMESPACE = new PerlElementType("NAMESPACE");
   IElementType NEXT_TERM = new PerlElementType("NEXT_TERM");
   IElementType NO_STATEMENT = new PerlElementType("NO_STATEMENT");
-  IElementType OPEN_FILE = new PerlElementType("OPEN_FILE");
   IElementType OPEN_HANDLE = new PerlElementType("OPEN_HANDLE");
   IElementType OPEN_MODE = new PerlElementType("OPEN_MODE");
   IElementType OPEN_REF = new PerlElementType("OPEN_REF");
@@ -113,6 +112,7 @@ public interface PerlElementTypes {
   IElementType PERL_DEPACKAGE = new PerlTokenType("::");
   IElementType PERL_DEREFERENCE = new PerlTokenType("->");
   IElementType PERL_FUNCTION = new PerlTokenType("PERL_FUNCTION");
+  IElementType PERL_FUNCTION_ATTRIBUTE = new PerlTokenType("PERL_FUNCTION_ATTRIBUTE");
   IElementType PERL_GLOB = new PerlTokenType("GLOB");
   IElementType PERL_HANDLE = new PerlTokenType("PERL_HANDLE");
   IElementType PERL_HASH = new PerlTokenType("HASH");
@@ -121,6 +121,7 @@ public interface PerlElementTypes {
   IElementType PERL_LBRACE = new PerlTokenType("{");
   IElementType PERL_LBRACK = new PerlTokenType("[");
   IElementType PERL_LPAREN = new PerlTokenType("(");
+  IElementType PERL_METHOD = new PerlTokenType("PERL_METHOD");
   IElementType PERL_NUMBER = new PerlTokenType("PERL_NUMBER");
   IElementType PERL_NUMBER_VERSION = new PerlTokenType("PERL_NUMBER_VERSION");
   IElementType PERL_OPERATOR = new PerlTokenType("PERL_OPERATOR");
@@ -287,9 +288,6 @@ public interface PerlElementTypes {
       }
       else if (type == NO_STATEMENT) {
         return new PerlNoStatementImpl(node);
-      }
-      else if (type == OPEN_FILE) {
-        return new PerlOpenFileImpl(node);
       }
       else if (type == OPEN_HANDLE) {
         return new PerlOpenHandleImpl(node);

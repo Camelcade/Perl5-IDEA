@@ -8,18 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlOpenHandle extends PsiElement {
 
   @Nullable
-  PerlExpr getExpr();
-
-  @Nullable
-  PerlScalarVariable getScalarVariable();
-
-  @Nullable
-  PerlString getString();
-
-  @Nullable
-  PerlUndefTerm getUndefTerm();
-
-  @Nullable
   PerlVariableDeclarationGlobal getVariableDeclarationGlobal();
 
   @Nullable

@@ -107,5 +107,13 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					isBuiltIn,
 					false);
 		}
+		else if( elementType == PERL_METHOD)
+		{
+			colorize(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_FUNCTION,
+					false,
+					false);
+		}
 	}
 }

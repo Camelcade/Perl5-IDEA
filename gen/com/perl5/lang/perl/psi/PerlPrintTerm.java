@@ -7,16 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlPrintTerm extends PsiElement {
 
-  @NotNull
-  List<PerlExpr> getExprList();
-
   @Nullable
-  PerlScalarVariable getScalarVariable();
-
-  @Nullable
-  PerlString getString();
-
-  @Nullable
-  PerlUndefTerm getUndefTerm();
+  PerlExpr getExpr();
 
 }

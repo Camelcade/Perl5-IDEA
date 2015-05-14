@@ -23,9 +23,9 @@ public class PerlWhileCompoundImpl extends ASTWrapperPsiElement implements PerlW
   }
 
   @Override
-  @Nullable
+  @NotNull
   public PerlExpr getExpr() {
-    return findChildByClass(PerlExpr.class);
+    return findNotNullChildByClass(PerlExpr.class);
   }
 
 }

@@ -76,7 +76,9 @@
     PERL_QUOTE="\""
 
     // custom tokens
+    PERL_FUNCTION_ATTRIBUTE="PERL_FUNCTION_ATTRIBUTE"
     PERL_PACKAGE="PERL_PACKAGE"
+    PERL_METHOD="PERL_METHOD"
     PERL_FUNCTION="PERL_FUNCTION"
     PERL_HANDLE="PERL_HANDLE"
     PERL_BLOCK_NAME="PERL_BLOCK_NAME"
@@ -92,7 +94,7 @@ private file_items ::= file_item *   //{recoverWhile=recover_block}
 private file_item ::= namespace | namespace_element
 
 private block_safe ::= <<parseBlock>>
-block ::= "{" file_items "}" {pin=1} // should not be used anywhere, injected by block_safe
+block ::= "{" file_items "}" //{pin=1} // should not be used anywhere, injected by block_safe
 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) PERL_SEMI*
 
@@ -115,17 +117,17 @@ private compound_statement ::=
         | foreach_compound
      )
 
-if_compound ::= 'if' compound_conditional_block if_compound_elsif * [if_compound_else] {pin=1}
-unless_compound ::= 'unless' compound_conditional_block if_compound_elsif * [if_compound_else] {pin=1}
-private if_compound_elsif ::= 'elsif' compound_conditional_block {pin=1}
-private if_compound_else  ::= 'else' block_safe {pin=1}
+if_compound ::= 'if' compound_conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
+unless_compound ::= 'unless' compound_conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
+private if_compound_elsif ::= 'elsif' compound_conditional_block  // {pin=1}
+private if_compound_else  ::= 'else' block_safe // {pin=1}
 
 private compound_conditional_block ::= '(' expr ')' block_safe
 
-given_compound ::= 'given' compound_conditional_block {pin=1}
+given_compound ::= 'given' compound_conditional_block // {pin=1}
 
-while_compound ::= 'while' compound_conditional_block [compound_continue_block] {pin=1}
-until_compound ::= 'until' compound_conditional_block [compound_continue_block] {pin=1}
+while_compound ::= 'while' compound_conditional_block [compound_continue_block] // {pin=1}
+until_compound ::= 'until' compound_conditional_block [compound_continue_block] // {pin=1}
 
 private compound_continue_block ::= 'continue' block_safe
 
@@ -133,8 +135,8 @@ block_compound ::= block_safe [compound_continue_block]
 
 
 // for/foreach
-for_compound ::= 'for' for_compound_arguments {pin=1}
-foreach_compound ::= 'foreach' for_compound_arguments {pin=1}
+for_compound ::= 'for' for_compound_arguments // {pin=1}
+foreach_compound ::= 'foreach' for_compound_arguments // {pin=1}
 private for_compound_arguments ::= for_compound_arguments_iteration | for_compound_arguments_list
 
 private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_SEMI [expr] ')' block_safe
@@ -143,7 +145,7 @@ private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_S
 private for_compound_arguments_list ::=
     [ variable_declaration | variable ] '(' expr ')' block_compound
 
-private statement ::= statement_variation [statement_modifier] //{recoverWhile=recover_statement}
+private statement ::= statement_variation [statement_modifier] // {recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
@@ -230,8 +232,8 @@ expr ::=
 term_expr ::=
     variable
     | variable_declaration
-    | PERL_OPERATOR_UNARY "(" [expr] ")" // named operators as functions
-    | "(" [expr] ")"
+    | PERL_OPERATOR_UNARY <<noSpaceCheck>> "(" [expr] ")" // named operators as functions
+    | "(" [expr] ")" ["[" expr "]"]
     | scalar_constant
     | do_term
     | sub_term
@@ -263,12 +265,14 @@ suff_pp_expr ::= expr ('++'|'--')
 
 pow_expr ::= expr ('**' expr)+ { rightAssociative=true }
 
-private op_5_expr ::= ref_expr | bareword_expr| prefix_unary_expr
+private op_5_expr ::= ref_expr  | bareword_expr| prefix_unary_expr
 ref_expr ::= '\' expr { rightAssociative=true }
 bareword_expr ::= <<parseBarewordStringMinus>>
-prefix_unary_expr ::= ('~'| '!'| '+' | '-') expr { rightAssociative=true }
+prefix_unary_expr ::=  ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
 regex_expr ::= expr ('=~'|'!~') expr
+
+// @todo 'x' is not parsed correctly with joined x40
 mul_expr ::= expr ('*'|'/'|'%'|'x') expr
 add_expr ::= expr ('+'|'-'|'.') expr
 shift_expr ::= expr ('<<'|'>>') expr
@@ -290,7 +294,7 @@ flipflop_expr ::= expr ('..'|'...') expr
 trenar_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
-comma_expr ::= expr ((','|'=>') (expr | &PERL_RBRACE | &PERL_RBRACK | &PERL_RPAREN)) +
+comma_expr ::= expr ((','|'=>')+ (expr | &PERL_RBRACE | &PERL_RBRACK | &PERL_RPAREN)) +
 
 
 lp_not_expr ::= 'not' expr { rightAssociative=true }
@@ -299,31 +303,25 @@ lp_or_xor_expr ::= expr ('or'|'xor') expr
 
 private scalar_expr ::= <<parseExpressionLevel 3>>
 
-print_term ::= ("print"|"say") ( "(" [print_arguments] ")" | [print_arguments] )
+print_term ::= ("print"|"printf"|"say") ( <<noSpaceCheck>> "(" [print_arguments] ")" | [print_arguments] ) // {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-open_term ::= "open" ( "(" open_arguments ")" | open_arguments )
+open_term ::= "open" ( <<noSpaceCheck>> "(" open_arguments ")" | open_arguments )
 private open_arguments ::=
-    open_handle [                       // open FILEHANDLE
-        "," (
-            open_mode "," (
-                open_ref                // open FILEHANDLE,MODE,REFERENCE
-                | open_file ["," expr]  // open FILEHANDLE,MODE,EXPR,LIST ?
-            )
-            | open_file                 // open FILEHANDLE,EXPR
-        )
-    ]
+    open_handle "," open_mode "," open_ref  // open FILEHANDLE,MODE,REFERENCE
+    | open_handle "," open_mode "," expr    // open FILEHANDLE,MODE,EXPR,LIST ?
+    | open_handle ["," expr]                // open FILEHANDLE, EXPR ?
+
 open_handle ::= variable_declaration | perl_handle
 open_mode ::= scalar_expr
 open_ref ::= ref_expr
-open_file ::= perl_handle | scalar_expr
 
-close_term ::= "close" ( "(" close_arguments ")" | close_arguments )
+close_term ::= "close" ( <<noSpaceCheck>> "(" close_arguments ")" | close_arguments )
 private close_arguments ::= perl_handle
 
 sort_term ::= 'sort' sort_op_arguments
 private sort_op_arguments ::=
-    <<parseBarewordFunction>> expr
+    <<parseBarewordFunction PERL_FUNCTION>> expr
     | block_safe expr
     | expr
 
@@ -339,7 +337,7 @@ private grep_map_arguments_variations ::=
     block_safe expr
     | scalar_expr "," expr
 
-private function_call ::= callable "(" [expr] ")"
+private function_call ::= callable <<noSpaceCheck>> "(" [expr] ")"
 
 file_read_term ::= '<' [perl_handle] '>'
 
@@ -425,12 +423,12 @@ private array ::=
 private hash ::=
     PERL_SIGIL_HASH scalar       // scalar dereference wo braces
     | hash_variable                    // hash as is
-    | PERL_SIGIL_HASH '{' expr '}'   // hash dereference w braces
+    | PERL_SIGIL_HASH '{' expr '}'      // hash dereference w braces
 
 private scalar ::=
     PERL_SIGIL_SCALAR * scalar_variable nested_element ?
-    | scalar_variable nested_element ?
-//    | scalar_variable
+    | PERL_SIGIL_SCALAR + "{" expr "}"
+    | scalar_variable nested_element ? // some special variables are started from sigil
     | scalar_constant
     | "(" expr ")" nested_element
     | undef_term
@@ -439,6 +437,7 @@ private scalar ::=
 
 private glob ::=
     "*" scalar       // scalar dereference wo braces
+    | "*"{expr}     // @todo we need to colorize this as glob
     | PERL_GLOB                    // hash as is
 
 private nested_element ::=
@@ -476,7 +475,7 @@ label_declaration ::= label ":" // do we need to change tokentype?
 label ::= PERL_BAREWORD
 private perl_version ::= <<parseVersion>>
 private perl_package ::= <<parseBarewordPackage>>
-private perl_handle ::= <<parseBarewordHandle>> | scalar_variable !PERL_OPERATOR | "{" scalar "}"
+private perl_handle ::= <<parseBarewordHandle>> | "{" scalar_expr "}" | <<parseExpressionLevel 21>>
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 
@@ -498,8 +497,8 @@ private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
 scalar_variable ::=
     PERL_SCALAR
     | PERL_SIGIL_SCALAR + "{" bareword_any "}"
-    | PERL_SIGIL_SCALAR PERL_NUMBER // regexp results
     | <<checkBuiltInScalar>>
+//    | PERL_SIGIL_SCALAR PERL_NUMBER // regexp results
 
 array_variable ::=
     PERL_ARRAY

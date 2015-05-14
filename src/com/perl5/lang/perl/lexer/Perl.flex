@@ -52,11 +52,12 @@ EMPTY_SPACE = [ \t\f\r\n]
 BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
 
 // bad solution, $scalar -function eats it
-BAREWORD_STRING = "-" {BAREWORD}
 ANYWORD = [^ \t\f\r\n]
 
 PERL_SCALAR_INDEX = "$#" "::" ? {BAREWORD}("::" {BAREWORD})*
+PERL_SCALAR_REGEXP = "$" [1-9][0-9]*
 PERL_SCALAR = "$" "::" ? {BAREWORD}("::" {BAREWORD})*
+
 PERL_HASH = "%" "::" ? {BAREWORD}("::" {BAREWORD})*
 PERL_ARRAY = "@" "::" ? {BAREWORD}("::" {BAREWORD})*
 PERL_GLOB = "*" "::" ? {BAREWORD}("::" {BAREWORD})*
@@ -319,6 +320,7 @@ TRANS_MODIFIERS = [cdsr]
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 {PERL_SCALAR_INDEX} {return PERL_SCALAR_INDEX;}
+{PERL_SCALAR_REGEXP} {return PERL_SCALAR;}
 {PERL_SCALAR} {return PERL_SCALAR;}
 {PERL_ARRAY} {return PERL_ARRAY;}
 {PERL_HASH} {return PERL_HASH;}
@@ -352,7 +354,6 @@ TRANS_MODIFIERS = [cdsr]
 }
 
 {BAREWORD} { return PERL_BAREWORD;}
-{BAREWORD_STRING} { return PERL_STRING_CONTENT;}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

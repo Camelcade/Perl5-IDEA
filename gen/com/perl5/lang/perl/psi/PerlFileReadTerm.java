@@ -7,16 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface PerlFileReadTerm extends PsiElement {
 
-  @Nullable
-  PerlExpr getExpr();
-
-  @Nullable
-  PerlScalarVariable getScalarVariable();
-
-  @Nullable
-  PerlString getString();
-
-  @Nullable
-  PerlUndefTerm getUndefTerm();
-
 }

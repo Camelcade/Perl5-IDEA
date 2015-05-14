@@ -11,15 +11,21 @@ import static com.perl5.lang.perl.lexer.PerlElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.perl5.lang.perl.psi.*;
 
-public class PerlCloseTermImpl extends ASTWrapperPsiElement implements PerlCloseTerm {
+public class PerlRightwardCallImpl extends ASTWrapperPsiElement implements PerlRightwardCall {
 
-  public PerlCloseTermImpl(ASTNode node) {
+  public PerlRightwardCallImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitCloseTerm(this);
+    if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitRightwardCall(this);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public PerlCallable getCallable() {
+    return findNotNullChildByClass(PerlCallable.class);
   }
 
 }

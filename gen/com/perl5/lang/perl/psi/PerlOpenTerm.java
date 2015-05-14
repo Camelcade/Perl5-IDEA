@@ -10,9 +10,6 @@ public interface PerlOpenTerm extends PsiElement {
   @Nullable
   PerlExpr getExpr();
 
-  @Nullable
-  PerlOpenFile getOpenFile();
-
   @NotNull
   PerlOpenHandle getOpenHandle();
 

@@ -29,12 +29,6 @@ public class PerlOpenTermImpl extends ASTWrapperPsiElement implements PerlOpenTe
   }
 
   @Override
-  @Nullable
-  public PerlOpenFile getOpenFile() {
-    return findChildByClass(PerlOpenFile.class);
-  }
-
-  @Override
   @NotNull
   public PerlOpenHandle getOpenHandle() {
     return findNotNullChildByClass(PerlOpenHandle.class);

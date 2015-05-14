@@ -23,27 +23,9 @@ public class PerlPrintTermImpl extends ASTWrapperPsiElement implements PerlPrint
   }
 
   @Override
-  @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
-  }
-
-  @Override
   @Nullable
-  public PerlScalarVariable getScalarVariable() {
-    return findChildByClass(PerlScalarVariable.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlString getString() {
-    return findChildByClass(PerlString.class);
-  }
-
-  @Override
-  @Nullable
-  public PerlUndefTerm getUndefTerm() {
-    return findChildByClass(PerlUndefTerm.class);
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
 }
