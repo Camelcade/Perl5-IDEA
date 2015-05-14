@@ -699,7 +699,7 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // "eval" (string | block_safe)
+  // "eval" ('('expr')' | block_safe | expr )
   public static boolean eval_term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eval_term")) return false;
     boolean r;
@@ -710,13 +710,26 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // string | block_safe
+  // '('expr')' | block_safe | expr
   private static boolean eval_term_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eval_term_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = string(b, l + 1);
+    r = eval_term_1_0(b, l + 1);
     if (!r) r = block_safe(b, l + 1);
+    if (!r) r = expr(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '('expr')'
+  private static boolean eval_term_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "eval_term_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PERL_LPAREN);
+    r = r && expr(b, l + 1, -1);
+    r = r && consumeToken(b, PERL_RPAREN);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2264,10 +2277,11 @@ public class PerlParser implements PsiParser {
   /* ********************************************************** */
   // PERL_SIGIL_SCALAR * scalar_variable nested_element ?
   //     | scalar_variable nested_element ?
-  //     | scalar_variable
+  // //    | scalar_variable
   //     | scalar_constant
   //     | "(" expr ")" nested_element
   //     | undef_term
+  //     | PERL_SCALAR_INDEX
   //     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
   static boolean scalar(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scalar")) return false;
@@ -2275,10 +2289,10 @@ public class PerlParser implements PsiParser {
     Marker m = enter_section_(b);
     r = scalar_0(b, l + 1);
     if (!r) r = scalar_1(b, l + 1);
-    if (!r) r = scalar_variable(b, l + 1);
     if (!r) r = scalar_constant(b, l + 1);
-    if (!r) r = scalar_4(b, l + 1);
+    if (!r) r = scalar_3(b, l + 1);
     if (!r) r = undef_term(b, l + 1);
+    if (!r) r = consumeToken(b, PERL_SCALAR_INDEX);
     if (!r) r = scalar_6(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -2334,8 +2348,8 @@ public class PerlParser implements PsiParser {
   }
 
   // "(" expr ")" nested_element
-  private static boolean scalar_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "scalar_4")) return false;
+  private static boolean scalar_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scalar_3")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERL_LPAREN);

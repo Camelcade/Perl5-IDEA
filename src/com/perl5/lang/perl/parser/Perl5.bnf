@@ -33,6 +33,7 @@
     PERL_ARRAY="ARRAY"
     PERL_HASH="HASH"
     PERL_SCALAR="SCALAR"
+    PERL_SCALAR_INDEX="SCALAR_INDEX"
     PERL_GLOB="GLOB"
 
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
@@ -369,7 +370,7 @@ tr_modifiers ::= PERL_REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
 do_term ::= "do" block_safe
-eval_term ::= "eval" (string | block_safe)
+eval_term ::= "eval" ('('expr')' | block_safe | expr )
 
 private variable_declaration ::=
     variable_declaration_global
@@ -433,6 +434,7 @@ private scalar ::=
     | scalar_constant
     | "(" expr ")" nested_element
     | undef_term
+    | PERL_SCALAR_INDEX
     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
 
 private glob ::=

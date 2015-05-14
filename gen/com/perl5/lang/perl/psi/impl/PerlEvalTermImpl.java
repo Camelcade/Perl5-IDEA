@@ -24,8 +24,8 @@ public class PerlEvalTermImpl extends ASTWrapperPsiElement implements PerlEvalTe
 
   @Override
   @Nullable
-  public PerlString getString() {
-    return findChildByClass(PerlString.class);
+  public PerlExpr getExpr() {
+    return findChildByClass(PerlExpr.class);
   }
 
 }

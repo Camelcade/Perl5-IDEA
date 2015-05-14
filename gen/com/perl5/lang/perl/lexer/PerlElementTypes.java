@@ -137,6 +137,7 @@ public interface PerlElementTypes {
   IElementType PERL_REGEX_TOKEN = new PerlTokenType("PERL_REGEX_TOKEN");
   IElementType PERL_RPAREN = new PerlTokenType(")");
   IElementType PERL_SCALAR = new PerlTokenType("SCALAR");
+  IElementType PERL_SCALAR_INDEX = new PerlTokenType("SCALAR_INDEX");
   IElementType PERL_SEMI = new PerlTokenType(";");
   IElementType PERL_SIGIL_ARRAY = new PerlTokenType("@");
   IElementType PERL_SIGIL_HASH = new PerlTokenType("%");

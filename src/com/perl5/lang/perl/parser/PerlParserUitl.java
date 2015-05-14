@@ -97,6 +97,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker mainMarker = b.mark();
 
 			// sub name
+            // @todo overriding package functions does'nt work. like sub Data::Dumper::qquote
 			PsiBuilder.Marker m = b.mark();
 			((PerlBuilder) b).beginSubDeclaration(b.getTokenText());
 			b.advanceLexer();

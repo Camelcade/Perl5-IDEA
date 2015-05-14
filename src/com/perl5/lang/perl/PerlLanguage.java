@@ -35,7 +35,8 @@ public class PerlLanguage extends Language
 		return true;
 	}
 
-	public void initLibPaths(Project project)
+    // @todo this should be in app component
+	public synchronized void initLibPaths(Project project)
 	{
 		libPaths = new ArrayList<VirtualFile>();
 
@@ -76,7 +77,7 @@ public class PerlLanguage extends Language
 		}
 	}
 
-	public PsiFile getPackagePsiFile(Project project, PerlPackageFile file)
+	public synchronized PsiFile getPackagePsiFile(Project project, PerlPackageFile file)
 	{
 		if( libPaths == null )
 			initLibPaths(project);

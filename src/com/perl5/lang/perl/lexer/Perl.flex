@@ -50,9 +50,12 @@ WHITE_SPACE     = [ \t\f]
 //EMPTY_LINE = {WHITE_SPACE}*{NEW_LINE}?
 EMPTY_SPACE = [ \t\f\r\n]
 BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
+
+// bad solution, $scalar -function eats it
 BAREWORD_STRING = "-" {BAREWORD}
 ANYWORD = [^ \t\f\r\n]
 
+PERL_SCALAR_INDEX = "$#" "::" ? {BAREWORD}("::" {BAREWORD})*
 PERL_SCALAR = "$" "::" ? {BAREWORD}("::" {BAREWORD})*
 PERL_HASH = "%" "::" ? {BAREWORD}("::" {BAREWORD})*
 PERL_ARRAY = "@" "::" ? {BAREWORD}("::" {BAREWORD})*
@@ -315,6 +318,7 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_VERSION}  {return PERL_NUMBER_VERSION;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
+{PERL_SCALAR_INDEX} {return PERL_SCALAR_INDEX;}
 {PERL_SCALAR} {return PERL_SCALAR;}
 {PERL_ARRAY} {return PERL_ARRAY;}
 {PERL_HASH} {return PERL_HASH;}

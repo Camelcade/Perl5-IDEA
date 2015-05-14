@@ -11,13 +11,10 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.PodTokenType;
 import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
-import com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -121,8 +118,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 //		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
 //		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN_IMPLEMENTED, new TextAttributesKey[]{PERL_FUNCTION_BUILT_IN});
 
-		attributesMap.put(PerlElementTypes.PERL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
-		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+        attributesMap.put(PerlElementTypes.PERL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
+        attributesMap.put(PerlElementTypes.PERL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+        attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+        attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.PERL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
 		attributesMap.put(PerlElementTypes.PERL_HASH, new TextAttributesKey[]{PERL_HASH});
