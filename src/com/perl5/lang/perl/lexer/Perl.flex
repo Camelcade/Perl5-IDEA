@@ -74,6 +74,8 @@ PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
 NUMBER = [0-9][0-9_]*( "." [0-9_]+ )?
 NUMBER_HEX = "0x" [0-9a-fA-F]+
 
+X_OP_STICKED = "x"[0-9]+[^a-zA-Z]*
+
 THE_END         = __END__
 THE_DATA        = __DATA__
 
@@ -353,6 +355,7 @@ TRANS_MODIFIERS = [cdsr]
     {BAREWORD} { yybegin(YYINITIAL); return PERL_STRING_CONTENT;}
 }
 
+{X_OP_STICKED} {yypushback(yylength()-1);return PERL_OPERATOR;}
 {BAREWORD} { return PERL_BAREWORD;}
 
 /* error fallback [^] */

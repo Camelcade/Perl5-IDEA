@@ -375,11 +375,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean noSpaceCheck(PsiBuilder b, int l )
-	{
-		return b.getTokenType() == PERL_LPAREN && b.rawLookup(-1) != TokenType.WHITE_SPACE;
-	}
-
 	/**
 	 * Making a PERL_PACKAGE item, collapsing barewords with :: @see guessBareword for more intelligence method
 	 * Sets last parsed package for parsing use/no constructs

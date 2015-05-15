@@ -232,7 +232,7 @@ expr ::=
 term_expr ::=
     variable
     | variable_declaration
-    | PERL_OPERATOR_UNARY <<noSpaceCheck>> "(" [expr] ")" // named operators as functions
+    | PERL_OPERATOR_UNARY "(" [expr] ")"   // named operators as functions
     | "(" [expr] ")" ["[" expr "]"]
     | scalar_constant
     | do_term
@@ -303,10 +303,10 @@ lp_or_xor_expr ::= expr ('or'|'xor') expr
 
 private scalar_expr ::= <<parseExpressionLevel 3>>
 
-print_term ::= ("print"|"printf"|"say") ( <<noSpaceCheck>> "(" [print_arguments] ")" | [print_arguments] ) // {pin=1}
+print_term ::= ("print"|"printf"|"say") ( "(" [print_arguments] ")" | [print_arguments] ) // {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-open_term ::= "open" ( <<noSpaceCheck>> "(" open_arguments ")" | open_arguments )
+open_term ::= "open" ( "(" open_arguments ")" | open_arguments )
 private open_arguments ::=
     open_handle "," open_mode "," open_ref  // open FILEHANDLE,MODE,REFERENCE
     | open_handle "," open_mode "," expr    // open FILEHANDLE,MODE,EXPR,LIST ?
@@ -316,7 +316,7 @@ open_handle ::= variable_declaration | perl_handle
 open_mode ::= scalar_expr
 open_ref ::= ref_expr
 
-close_term ::= "close" ( <<noSpaceCheck>> "(" close_arguments ")" | close_arguments )
+close_term ::= "close" ( "(" close_arguments ")" | close_arguments )
 private close_arguments ::= perl_handle
 
 sort_term ::= 'sort' sort_op_arguments
@@ -337,7 +337,7 @@ private grep_map_arguments_variations ::=
     block_safe expr
     | scalar_expr "," expr
 
-private function_call ::= callable <<noSpaceCheck>> "(" [expr] ")"
+private function_call ::= callable "(" [expr] ")"
 
 file_read_term ::= '<' [perl_handle] '>'
 
