@@ -98,7 +98,7 @@
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 private perlFile ::= <<parseFile>> <<eof>>
 
-private file_items ::= file_item *   //{recoverWhile=recover_block}
+private file_items ::= PERL_SEMI * file_item *   //{recoverWhile=recover_block}
 private file_item ::= namespace | namespace_element
 
 private block_safe ::= <<parseBlock>>
