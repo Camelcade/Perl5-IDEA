@@ -14,6 +14,9 @@ public interface PerlVariableDeclarationLocal extends PsiElement {
   List<PerlExpr> getExprList();
 
   @NotNull
+  List<PerlGlobVariable> getGlobVariableList();
+
+  @NotNull
   List<PerlHashVariable> getHashVariableList();
 
   @NotNull

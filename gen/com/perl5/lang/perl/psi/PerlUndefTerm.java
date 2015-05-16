@@ -14,6 +14,9 @@ public interface PerlUndefTerm extends PsiElement {
   PerlExpr getExpr();
 
   @Nullable
+  PerlGlobVariable getGlobVariable();
+
+  @Nullable
   PerlHashVariable getHashVariable();
 
   @Nullable

@@ -819,30 +819,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return getCurrentBlockState(b).getStringsTrap();
 	}
 
-	public static boolean checkBuiltInHash(PsiBuilder b, int l)
-	{
-		return b.getTokenType() == PERL_SIGIL_HASH && checkTextByList(b, PerlHashUtil.BUILT_IN);
-	}
-
-	public static boolean checkBuiltInArray(PsiBuilder b, int l)
-	{
-		return b.getTokenType() == PERL_SIGIL_ARRAY && checkTextByList(b, PerlArrayUtil.BUILT_IN);
-	}
-
-	public static boolean checkBuiltInScalar(PsiBuilder b, int l)
-	{
-		return b.getTokenType() == PERL_SIGIL_SCALAR && checkTextByList(b, PerlScalarUtil.BUILT_IN);
-	}
-
-	public static boolean checkTextByList(PsiBuilder b, ArrayList<String> list)
-	{
-		for(String item: list)
-			if( consumeToken(b,item))
-				return true;
-
-		return false;
-	}
-
 	public static boolean isBareword(IElementType tokenType)
 	{
 		return tokenType == PERL_BAREWORD || tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY || tokenType == PERL_BLOCK_NAME;

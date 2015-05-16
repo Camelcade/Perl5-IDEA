@@ -42,6 +42,12 @@ public class PerlForCompoundImpl extends ASTWrapperPsiElement implements PerlFor
 
   @Override
   @Nullable
+  public PerlGlobVariable getGlobVariable() {
+    return findChildByClass(PerlGlobVariable.class);
+  }
+
+  @Override
+  @Nullable
   public PerlHashVariable getHashVariable() {
     return findChildByClass(PerlHashVariable.class);
   }

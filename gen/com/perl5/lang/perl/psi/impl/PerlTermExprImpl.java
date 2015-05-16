@@ -71,6 +71,12 @@ public class PerlTermExprImpl extends PerlExprImpl implements PerlTermExpr {
 
   @Override
   @Nullable
+  public PerlGlobVariable getGlobVariable() {
+    return findChildByClass(PerlGlobVariable.class);
+  }
+
+  @Override
+  @Nullable
   public PerlGrepTerm getGrepTerm() {
     return findChildByClass(PerlGrepTerm.class);
   }

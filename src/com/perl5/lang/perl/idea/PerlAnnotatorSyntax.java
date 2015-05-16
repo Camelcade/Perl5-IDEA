@@ -34,31 +34,31 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
 		IElementType elementType = element.getNode().getElementType();
-		if( elementType == SCALAR_VARIABLE )
-		{
-			colorize(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_SCALAR,
-					PerlScalarUtil.isBuiltIn(element.getText()),
-					false);
-		}
-		else if( elementType == HASH_VARIABLE )
-		{
-			colorize(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_HASH,
-					PerlHashUtil.isBuiltIn(element.getText()),
-					false);
-		}
-		else if( elementType == ARRAY_VARIABLE )
-		{
-			colorize(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_ARRAY,
-					PerlArrayUtil.isBuiltIn(element.getText()),
-					false);
-		}
-		else if( elementType == PERL_PACKAGE )
+//		if( elementType == SCALAR_VARIABLE )
+//		{
+//			colorize(
+//					holder.createInfoAnnotation(element, null),
+//					PerlSyntaxHighlighter.PERL_SCALAR,
+//					PerlScalarUtil.isBuiltIn(element.getText()),
+//					false);
+//		}
+//		else if( elementType == HASH_VARIABLE )
+//		{
+//			colorize(
+//					holder.createInfoAnnotation(element, null),
+//					PerlSyntaxHighlighter.PERL_HASH,
+//					PerlHashUtil.isBuiltIn(element.getText()),
+//					false);
+//		}
+//		else if( elementType == ARRAY_VARIABLE )
+//		{
+//			colorize(
+//					holder.createInfoAnnotation(element, null),
+//					PerlSyntaxHighlighter.PERL_ARRAY,
+//					PerlArrayUtil.isBuiltIn(element.getText()),
+//					false);
+//		}
+		if( elementType == PERL_PACKAGE )
 		{
 			String packageName = element.getText();
 			PerlPackageUtil.PACKAGE_TYPE packageType = PerlPackageUtil.getPackageType(packageName);

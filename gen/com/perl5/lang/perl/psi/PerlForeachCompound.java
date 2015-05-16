@@ -17,6 +17,9 @@ public interface PerlForeachCompound extends PsiElement {
   List<PerlExpr> getExprList();
 
   @Nullable
+  PerlGlobVariable getGlobVariable();
+
+  @Nullable
   PerlHashVariable getHashVariable();
 
   @Nullable

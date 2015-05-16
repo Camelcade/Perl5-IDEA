@@ -1,0 +1,5 @@
+            "*ARGV",
+            "*STDERR",
+            "*STDOUT",
+            "*ARGVOUT",
+            "*STDIN"

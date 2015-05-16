@@ -115,6 +115,10 @@ public class PerlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitGlobVariable(@NotNull PerlGlobVariable o) {
+    visitPsiElement(o);
+  }
+
   public void visitGrepTerm(@NotNull PerlGrepTerm o) {
     visitPsiElement(o);
   }
@@ -140,6 +144,10 @@ public class PerlVisitor extends PsiElementVisitor {
   }
 
   public void visitLastTerm(@NotNull PerlLastTerm o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLexicalVariable(@NotNull PerlLexicalVariable o) {
     visitPsiElement(o);
   }
 

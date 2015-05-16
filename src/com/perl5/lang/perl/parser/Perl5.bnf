@@ -25,6 +25,8 @@
     PERL_COMMENT_BLOCK="PERL_COMMENT_BLOCK"
     PERL_POD="PERL_POD"
 
+    PERL_SUB_PROTOTYPE_TOKEN="PERL_SUB_PROTOTYPE_TOKEN"
+
     PERL_SIGIL_ARRAY="@"
     PERL_SIGIL_HASH="%"
     PERL_SIGIL_SCALAR="$"
@@ -33,8 +35,14 @@
     PERL_ARRAY="ARRAY"
     PERL_HASH="HASH"
     PERL_SCALAR="SCALAR"
-    PERL_SCALAR_INDEX="SCALAR_INDEX"
     PERL_GLOB="GLOB"
+
+    PERL_ARRAY_BUILT_IN="ARRAY_BUILT_IN"
+    PERL_HASH_BUILT_IN="HASH_BUILT_IN"
+    PERL_SCALAR_BUILT_IN="SCALAR_BUILT_IN"
+    PERL_GLOB_BUILT_IN="GLOB_BUILT_IN"
+
+    PERL_SCALAR_INDEX="SCALAR_INDEX"
 
     PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
     PERL_STRING_MULTILINE_END="PERL_STRING_MULTILINE_END"
@@ -376,14 +384,19 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-// @todo local variables supports hash/aray elements
-variable_declaration_local ::= 'local' [perl_package]  variable_definition_variation
+variable_declaration_local ::= 'local' [perl_package]  local_variable_definition_variation
 variable_declaration_lexical ::= ('my' | 'state') [perl_package] variable_definition_variation
 variable_declaration_global ::= 'our' [perl_package] variable_definition_variation
 
-private variable_definition_variation ::=
+private local_variable_definition_variation ::=
     '(' variable (',' variable ) * ')'
     | variable
+
+private variable_definition_variation ::=
+    '(' lexical_variable_definition_argument (',' lexical_variable_definition_argument ) * ')'
+    | lexical_variable_definition_argument
+
+private lexical_variable_definition_argument ::= lexical_variable | "undef"
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 // most of the references created by \ operator, but some - don't
@@ -438,7 +451,7 @@ private scalar ::=
 private glob ::=
     "*" scalar       // scalar dereference wo braces
     | "*"{expr}     // @todo we need to colorize this as glob
-    | PERL_GLOB                    // hash as is
+    | glob_variable                    // hash as is
 
 private nested_element ::=
     "{" PERL_BAREWORD  "}"
@@ -494,21 +507,22 @@ private multiline_marker ::= '<<' (string | <<parseBarewordString>>)
 private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
+lexical_variable ::= scalar_variable | array_variable | hash_variable
+
 scalar_variable ::=
     PERL_SCALAR
-    | PERL_SIGIL_SCALAR + "{" bareword_any "}"
-    | <<checkBuiltInScalar>>
-//    | PERL_SIGIL_SCALAR PERL_NUMBER // regexp results
+    | PERL_SCALAR_BUILT_IN
 
 array_variable ::=
     PERL_ARRAY
-    | PERL_SIGIL_ARRAY "{" bareword_any "}"
-    | <<checkBuiltInArray>>
+    | PERL_ARRAY_BUILT_IN
 
 hash_variable ::=
     PERL_HASH
-    | PERL_SIGIL_HASH "{" bareword_any "}"
-    | <<checkBuiltInHash>>
+    | PERL_HASH_BUILT_IN
 
-private bareword_any ::= PERL_BAREWORD | PERL_KEYWORD
+glob_variable ::=
+    PERL_GLOB
+    | PERL_GLOB_BUILT_IN
+
 

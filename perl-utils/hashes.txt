@@ -1,0 +1,9 @@
+            "%!",
+            "%+",
+            "%-",
+            "%^H",
+            "%ENV",
+            "%INC",
+            "%OVERLOAD",
+            "%SIG",
+            "%EXPORT_TAGS"

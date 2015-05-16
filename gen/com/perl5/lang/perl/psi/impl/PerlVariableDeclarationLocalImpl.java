@@ -36,6 +36,12 @@ public class PerlVariableDeclarationLocalImpl extends ASTWrapperPsiElement imple
 
   @Override
   @NotNull
+  public List<PerlGlobVariable> getGlobVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlGlobVariable.class);
+  }
+
+  @Override
+  @NotNull
   public List<PerlHashVariable> getHashVariableList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlHashVariable.class);
   }

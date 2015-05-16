@@ -36,6 +36,12 @@ public class PerlUndefTermImpl extends ASTWrapperPsiElement implements PerlUndef
 
   @Override
   @Nullable
+  public PerlGlobVariable getGlobVariable() {
+    return findChildByClass(PerlGlobVariable.class);
+  }
+
+  @Override
+  @Nullable
   public PerlHashVariable getHashVariable() {
     return findChildByClass(PerlHashVariable.class);
   }

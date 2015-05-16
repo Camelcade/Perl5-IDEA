@@ -8,21 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PerlVariableDeclarationGlobal extends PsiElement {
 
   @NotNull
-  List<PerlArrayVariable> getArrayVariableList();
-
-  @NotNull
-  List<PerlExpr> getExprList();
-
-  @NotNull
-  List<PerlHashVariable> getHashVariableList();
-
-  @NotNull
-  List<PerlScalarVariable> getScalarVariableList();
-
-  @NotNull
-  List<PerlString> getStringList();
-
-  @NotNull
-  List<PerlUndefTerm> getUndefTermList();
+  List<PerlLexicalVariable> getLexicalVariableList();
 
 }

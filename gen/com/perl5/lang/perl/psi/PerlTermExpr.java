@@ -32,6 +32,9 @@ public interface PerlTermExpr extends PerlExpr {
   PerlFileReadTerm getFileReadTerm();
 
   @Nullable
+  PerlGlobVariable getGlobVariable();
+
+  @Nullable
   PerlGrepTerm getGrepTerm();
 
   @Nullable

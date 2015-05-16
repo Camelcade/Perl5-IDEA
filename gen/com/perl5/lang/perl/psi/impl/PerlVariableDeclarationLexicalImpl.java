@@ -24,38 +24,8 @@ public class PerlVariableDeclarationLexicalImpl extends ASTWrapperPsiElement imp
 
   @Override
   @NotNull
-  public List<PerlArrayVariable> getArrayVariableList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlArrayVariable.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlHashVariable> getHashVariableList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlHashVariable.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlScalarVariable> getScalarVariableList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlScalarVariable.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlString> getStringList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlString.class);
-  }
-
-  @Override
-  @NotNull
-  public List<PerlUndefTerm> getUndefTermList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlUndefTerm.class);
+  public List<PerlLexicalVariable> getLexicalVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlLexicalVariable.class);
   }
 
 }

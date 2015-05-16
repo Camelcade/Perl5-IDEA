@@ -91,7 +91,6 @@ public class PerlScalarUtil implements PerlElementTypes
 			"$]",
 			"$ERRNO",
 			"$SYSTEM_FD_MAX",
-			"$^",
 			"$EUID",
 			"$UID",
 			"$^A",
@@ -148,7 +147,8 @@ public class PerlScalarUtil implements PerlElementTypes
 			"$ENV",
 			"$INC",
 			"$OVERLOAD",
-			"$SIG"
+			"$SIG",
+			"$^"
 	));
 
 	static{

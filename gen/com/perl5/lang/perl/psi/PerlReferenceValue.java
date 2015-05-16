@@ -11,6 +11,9 @@ public interface PerlReferenceValue extends PsiElement {
   PerlExpr getExpr();
 
   @Nullable
+  PerlGlobVariable getGlobVariable();
+
+  @Nullable
   PerlScalarVariable getScalarVariable();
 
   @Nullable

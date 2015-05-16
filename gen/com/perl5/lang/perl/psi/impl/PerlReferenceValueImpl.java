@@ -30,6 +30,12 @@ public class PerlReferenceValueImpl extends ASTWrapperPsiElement implements Perl
 
   @Override
   @Nullable
+  public PerlGlobVariable getGlobVariable() {
+    return findChildByClass(PerlGlobVariable.class);
+  }
+
+  @Override
+  @Nullable
   public PerlScalarVariable getScalarVariable() {
     return findChildByClass(PerlScalarVariable.class);
   }
