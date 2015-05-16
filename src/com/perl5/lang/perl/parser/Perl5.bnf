@@ -393,11 +393,11 @@ variable_declaration_lexical ::= ('my' | 'state') [perl_package] variable_defini
 variable_declaration_global ::= 'our' [perl_package] variable_definition_variation
 
 private local_variable_definition_variation ::=
-    '(' variable (comma variable ) * ')'
+    '(' variable (comma + variable ) * comma * ')'
     | variable
 
 private variable_definition_variation ::=
-    '(' lexical_variable_definition_argument (comma lexical_variable_definition_argument ) * ')'
+    '(' lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* ')'
     | lexical_variable_definition_argument
 
 private lexical_variable_definition_argument ::= lexical_variable | "undef"
@@ -447,7 +447,7 @@ private scalar ::=
     | PERL_SIGIL_SCALAR + "{" expr "}"
     | scalar_variable nested_element ? // some special variables are started from sigil
     | scalar_constant
-    | "(" expr ")" nested_element
+    | "(" expr ")" "["expr"]"
     | undef_term
     | PERL_SCALAR_INDEX
     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
