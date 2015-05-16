@@ -470,7 +470,7 @@ private nested_element_expr ::=
     | function_call
     | rightward_call
 
-scalar_call ::= scalar_variable "(" [expr] ")"
+scalar_call ::= scalar_variable ["(" [expr] ")"]
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
