@@ -287,8 +287,8 @@ shift_expr ::= expr ('<<'|'>>') expr
 
 private op_10_expr ::= named_unary_expr | filetest_expr
 named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
-private named_undry_expr_defined ::= 'defined' !"(" [expr]
-private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" expr
+private named_undry_expr_defined ::= 'defined' !"(" [scalar_expr]
+private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" scalar_expr
 
 filetest_expr ::= PERL_OPERATOR_FILETEST (<<parseBarewordHandle>> | expr )
 
@@ -329,7 +329,7 @@ open_ref ::= ref_expr
 close_term ::= "close" ( "(" close_arguments ")" | close_arguments )
 private close_arguments ::= perl_handle
 
-sort_term ::= 'sort' sort_op_arguments
+sort_term ::= 'sort' ( '(' sort_op_arguments ')'| sort_op_arguments )
 private sort_op_arguments ::=
     <<parseBarewordFunction PERL_FUNCTION>> expr
     | block_safe expr
@@ -378,8 +378,9 @@ tr_replacementlist ::= PERL_STRING_CONTENT
 tr_modifiers ::= PERL_REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
-do_term ::= "do" block_safe
-eval_term ::= "eval" ('('expr')' | block_safe | expr )
+do_term ::= "do" eval_argument
+eval_term ::= "eval" eval_argument
+private eval_argument ::= '('expr')' | block_safe | expr
 
 private variable_declaration ::=
     variable_declaration_global
