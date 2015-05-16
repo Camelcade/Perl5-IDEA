@@ -176,12 +176,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //		}
 		else // method and package are known
 		{
-//			PsiBuilder.Marker m = b.mark();
-//			boolean r = PerlParser.block(b,l);
-//			if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
-//				m.rollbackTo();
-//			else
-//				m.drop();
+			PsiBuilder.Marker m = b.mark();
+			boolean r = PerlParser.block(b,l);
+			if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
+				m.rollbackTo();
+			else
+				m.drop();
 
 			parseExpressionLevel(b,l,2); // nothing below comma
 		}
@@ -352,7 +352,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				if( parseBarewordPackage(b,l) && b.getTokenType() == PERL_DEREFERENCE )
 				{
 					m.drop();
-					return true;
+					consumeToken(b,PERL_DEREFERENCE);
+					return parseBarewordFunction(b,l,PERL_METHOD);
 				}
 
 				m.rollbackTo();

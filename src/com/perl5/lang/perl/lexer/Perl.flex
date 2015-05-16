@@ -113,7 +113,7 @@ MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{ANYWORD}+\"
 MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{ANYWORD}+\`
 MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{BAREWORD}
 
-POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
+POD_OPEN         = \={BAREWORD}{FULL_LINE}
 POD_CLOSE       = \="cut"{FULL_LINE}
 
 QUOTE_LIST_FUNCTIONS = "qw"

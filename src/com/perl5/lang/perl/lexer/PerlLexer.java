@@ -128,15 +128,18 @@ public class PerlLexer extends PerlLexerGenerated{
 	// guess if this is a division or started regex
 	public IElementType processDiv()
 	{
-		if(	// seems regex
+		if(	// seems regex, @todo map types and words
 			lastSignificantTokenType == PERL_OPERATOR
 			|| lastSignificantTokenType == PERL_LPAREN
 			|| lastSignificantTokenType == PERL_LBRACE
 			|| lastSignificantTokenType == PERL_LBRACK
 			|| lastSignificantTokenType == PERL_SEMI
+			|| lastSignificantToken.equals("return")
 			|| lastSignificantToken.equals("split")
 			|| lastSignificantToken.equals("if")
 			|| lastSignificantToken.equals("unless")
+			|| lastSignificantToken.equals("grep")
+			|| lastSignificantToken.equals("map")
 		)
 		{
 			allowSharp = true;
