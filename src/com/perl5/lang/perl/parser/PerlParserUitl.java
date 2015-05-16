@@ -431,7 +431,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseBarewordHandle(PsiBuilder b, int l ) {
 
-		if( b.getTokenType() == PERL_BAREWORD )
+		if( b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) != PERL_LPAREN)
 		{
 			assert b instanceof PerlBuilder;
 

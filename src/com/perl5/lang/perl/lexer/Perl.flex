@@ -114,7 +114,6 @@ MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{ANYWORD}+\`
 MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{BAREWORD}
 
 POD_OPEN         = \={BAREWORD}{FULL_LINE}
-POD_CLOSE       = \="cut"{FULL_LINE}
 
 QUOTE_LIST_FUNCTIONS = "qw"
 QUOTE_FUNCTIONS = "qq" | "qx" | "q"
@@ -135,7 +134,6 @@ FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} | {PERL_SYN_DECLARE} | {PERL_SYN_BLOCK_OP
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
 %xstate LEX_EOF
-%xstate LEX_POD
 
 %state LEX_BAREWORD_STRING
 %state LEX_CODE
@@ -193,7 +191,13 @@ TRANS_MODIFIERS = [cdsr]
 <YYINITIAL, LEX_CODE>{
     {THE_END}               {processDataOpener(); break;}
     {THE_DATA}               {processDataOpener(); break;}
-    {POD_OPEN}               {processPodOpener();break;}
+    {POD_OPEN}
+    {
+        IElementType tokenType = capturePodBlock();
+        if( tokenType == null)
+            break;
+        return tokenType;
+    }
 }
 
 /**
@@ -308,20 +312,6 @@ TRANS_MODIFIERS = [cdsr]
     }
 }
 
-/**
-    pod section
-**/
-<LEX_POD>
-{
-    {POD_CLOSE} { return endPodBlock(); }
-    {FULL_LINE} {
-        if( isLastToken() )
-        {
-            endPodBlock();
-        }
-        break;
-    }
-}
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 

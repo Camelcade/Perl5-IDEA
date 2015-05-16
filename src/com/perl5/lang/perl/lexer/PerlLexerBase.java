@@ -21,8 +21,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType processSemicolon();
 	public abstract IElementType processNewLine();
 
-	public abstract void processPodOpener();
-	public abstract IElementType endPodBlock();
+	public abstract IElementType capturePodBlock();
 
 	public abstract void processDataOpener();
 	public abstract IElementType endDataBlock();

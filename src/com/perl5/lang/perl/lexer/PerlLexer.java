@@ -521,20 +521,45 @@ public class PerlLexer extends PerlLexerGenerated{
 	/**
 	 *  Pod block-related code
 	 */
-	public int podBlockStart = 0;
-
-	public void processPodOpener()
+	public IElementType capturePodBlock()
 	{
-		podBlockStart = getTokenStart();
-		yybegin(LEX_POD);
-	}
+		int podBlockStart = getTokenStart();
+		CharSequence buffer = getBuffer();
 
-	public IElementType endPodBlock()
-	{
-		setTokenStart(podBlockStart);
-		if( !isLastToken())
-			yybegin(YYINITIAL);
-		return PERL_POD;
+		if( podBlockStart == 0 || buffer.charAt(podBlockStart-1) == '\n' || buffer.charAt(podBlockStart-1) == '\r' )
+		{
+			// pod block
+			pushState();
+			tokensList.clear();
+
+			int bufferEnd = buffer.length();
+
+			int currentPosition = podBlockStart;
+			int linePos = currentPosition;
+
+			while( true )
+			{
+				while(linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
+
+				int textEnd = linePos;
+
+				while(linePos < bufferEnd && (buffer.charAt(linePos) == '\n' || buffer.charAt(linePos) == '\r')){linePos++;}
+
+				String line = buffer.subSequence(currentPosition, textEnd).toString();
+
+				currentPosition = linePos;
+
+				if( linePos == bufferEnd || line.startsWith("=cut"))
+				{
+					tokensList.add(new CustomToken(podBlockStart, linePos, PERL_POD));
+					yybegin(LEX_PREPARSED_ITEMS);
+					return null;
+				}
+			}
+		}
+
+		yypushback(yylength() - 1);
+		return PERL_OPERATOR;
 	}
 
 	/** contains marker for multiline end **/
@@ -584,18 +609,18 @@ public class PerlLexer extends PerlLexerGenerated{
 		int stringStart = currentPosition;
 
 		CharSequence buffer = getBuffer();
-		int bufferLenght = buffer.length();
+		int bufferEnd = buffer.length();
 
 		while( true )
 		{
 			int lineStart = currentPosition;
 			int linePos = currentPosition;
 
-			while(linePos < bufferLenght && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
+			while(linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
 
 			int textEnd = linePos;
 
-			while(linePos < bufferLenght && (buffer.charAt(linePos) == '\n' || buffer.charAt(linePos) == '\r')){linePos++;}
+			while(linePos < bufferEnd && (buffer.charAt(linePos) == '\n' || buffer.charAt(linePos) == '\r')){linePos++;}
 
 			int lineEnd = linePos;
 
@@ -609,7 +634,7 @@ public class PerlLexer extends PerlLexerGenerated{
 				yypushback(1);
 				break;
 			}
-			else if(lineEnd == bufferLenght)
+			else if(lineEnd == bufferEnd)
 			{
 				tokensList.add(new CustomToken(stringStart, lineEnd, PERL_STRING_MULTILINE));
 				yybegin(LEX_PREPARSED_ITEMS);
