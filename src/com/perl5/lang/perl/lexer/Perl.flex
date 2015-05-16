@@ -68,13 +68,13 @@ PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
 BUILT_IN_GLOB_NAME = "ARGVOUT"|"STDERR"|"STDOUT"|"STDIN"|"ARGV"
 PERL_GLOB_BUILT_IN = "*" ("{" {BUILT_IN_GLOB_NAME} "}" | {BUILT_IN_GLOB_NAME} )
 
-PERL_SCALAR = "$"+ "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
+PERL_SCALAR = "$"+ {EMPTY_SPACE}* "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
 PERL_SCALAR_BRACES = "$"+ "{" {BAREWORD} "}"
 
-PERL_HASH = "%" "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
+PERL_HASH = "%" {EMPTY_SPACE}* "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
 PERL_HASH_BRACES = "%{" {BAREWORD} "}"
 
-PERL_ARRAY = "@" "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
+PERL_ARRAY = "@" {EMPTY_SPACE}* "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
 PERL_ARRAY_BRACES = "@{" {BAREWORD} "}"
 
 PERL_GLOB = "*" "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
