@@ -207,8 +207,8 @@ undef_term ::= "undef" variable ?
 
 require_term ::= 'require' (perl_package | perl_version | expr)  // multiline string is possible too
 
-private recover_statement ::= !(PERL_SEMI | PERL_RBRACE )
-private recover_block ::= !(PERL_RBRACE | <<eof>>)
+//private recover_statement ::= !(PERL_SEMI | PERL_RBRACE )
+//private recover_block ::= !(PERL_RBRACE | <<eof>>)
 //private recover_namespace ::= !("package" | PERL_RBRACE | <<eof>>)
 
 // expression
@@ -263,7 +263,7 @@ term_expr ::=
     | function_call
     | rightward_call
 
-rightward_call ::= callable <<parseRightwardCallParameters>>
+rightward_call ::= callable <<parseCallParameters>> // <<parseRightwardCallParameters>>
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
 
@@ -302,8 +302,10 @@ flipflop_expr ::= expr ('..'|'...') expr
 trenar_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
-comma_expr ::= expr ((','|'=>')+ (expr | &PERL_RBRACE | &PERL_RBRACK | &PERL_RPAREN)) +
-
+private comma_expr ::= comma_sequence_expr | comma_last_expr
+comma_last_expr ::= expr (','|'=>')
+comma_sequence_expr ::= expr (comma_any expr) +
+private comma_any ::= (','|'=>') + !(")"|"]"|"}")
 
 lp_not_expr ::= 'not' expr { rightAssociative=true }
 lp_and_expr ::= expr 'and' expr
@@ -331,6 +333,7 @@ sort_term ::= 'sort' sort_op_arguments
 private sort_op_arguments ::=
     <<parseBarewordFunction PERL_FUNCTION>> expr
     | block_safe expr
+    | scalar_expr expr
     | expr
 
 sub_term ::= 'sub' sub_definition_parameters block_safe
@@ -427,16 +430,16 @@ private variable ::= scalar | array | hash | glob
 
 private array ::=
     PERL_SIGIL_ARRAY scalar       // scalar dereference
+    | PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
     | array_variable '[' expr ']'              // array slice
     | array_variable '{' expr '}'              // hash slice
     | array_variable
     | array_constant
-    | PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
 
 private hash ::=
     PERL_SIGIL_HASH scalar       // scalar dereference wo braces
-    | hash_variable                    // hash as is
     | PERL_SIGIL_HASH '{' expr '}'      // hash dereference w braces
+    | hash_variable                    // hash as is
 
 private scalar ::=
     PERL_SIGIL_SCALAR * scalar_variable nested_element ?
@@ -455,7 +458,7 @@ private glob ::=
 
 private nested_element ::=
     "{" PERL_BAREWORD  "}"
-    | "{" expr  "}"
+    | "{" expr "}"
     | "[" expr "]"
 
 // extended nested element for using in ()

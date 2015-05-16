@@ -159,19 +159,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	/**
-	 * Parsing rightward call parameters, using the prototype
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseRightwardCallParameters(PsiBuilder b, int l)
-	{
-		parseCallParameters(b,l);
-		return true;
-	}
-
-	private static boolean parseCallParameters(PsiBuilder b, int l)
+	public static boolean parseCallParameters(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
 
@@ -182,13 +170,20 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// can't happen
 			return false;
 //			throw new Error("No method captured, smth is wrong");
-		else if(packageName == null) // method from unknown package
-		{
-			parseExpressionLevel(b,l,2);
-		}
+//		else if(packageName == null) // method from unknown package
+//		{
+//			parseExpressionLevel(b,l,2);
+//		}
 		else // method and package are known
 		{
-			parseExpressionLevel(b,l,2);
+//			PsiBuilder.Marker m = b.mark();
+//			boolean r = PerlParser.block(b,l);
+//			if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
+//				m.rollbackTo();
+//			else
+//				m.drop();
+
+			parseExpressionLevel(b,l,2); // nothing below comma
 		}
 		return true;
 	}
@@ -576,7 +571,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		return false;
 	}
-
 
 	public static boolean parseUseStatement(PsiBuilder b, int l )
 	{
