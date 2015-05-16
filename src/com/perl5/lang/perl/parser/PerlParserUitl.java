@@ -84,12 +84,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				catch(PerlParsingException e)
 				{
 					mainMarker.errorBefore(e.getMessage(), bodyMarker);
+					bodyMarker.drop();
 				}
 
 				return true;
 			}
 			else
 			{
+				bodyMarker.drop();
 				mainMarker.rollbackTo();
 				return false;
 			}
@@ -197,6 +199,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean resetLastCallable(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
+
+		// this is a hack to break a namespace
+		if( "package".equals(b.getTokenText()))
+			return false;
+
 		((PerlBuilder) b).setLastCallableMethod(null);
 		((PerlBuilder) b).setLastCallablePackage(null);
 		return true;
@@ -258,7 +265,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parsePerlPackage(PsiBuilder b, int l)
 	{
-		if( b.getTokenType() == PERL_BAREWORD )
+		if( isBareword(b.getTokenType()) )
 		{
 			if( parseBarewordPackage(b,l))
 			{
@@ -431,7 +438,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseBarewordHandle(PsiBuilder b, int l ) {
 
-		if( b.getTokenType() == PERL_BAREWORD && b.lookAhead(1) != PERL_LPAREN)
+		if( isBareword(b.getTokenType()) && b.lookAhead(1) != PERL_LPAREN)
 		{
 			assert b instanceof PerlBuilder;
 
@@ -506,7 +513,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 
 		if(	tokenType == PERL_STRING_CONTENT
-			|| tokenType == PERL_BAREWORD && b.lookAhead(1) == PERL_ARROW_COMMA
+			|| isBareword(tokenType) && b.lookAhead(1) == PERL_ARROW_COMMA
 				) //
 		{
 			getStringsTrap(b).capture(b.getTokenText());
