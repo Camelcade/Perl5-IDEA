@@ -337,13 +337,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		{
 			return true;
 		}
-		else if( tokenType == PERL_BAREWORD )
+		else if( isBareword(tokenType) )
 		{
 			if (nextTokenType == PERL_ARROW_COMMA) // string =>
 				return false;
 			else  if( "SUPER".equals(b.getTokenText()) && parseBarewordPackageFunctionCall(b,l) )
 				return true;
-			else if(nextTokenType == PERL_BAREWORD && b.lookAhead(2) == PERL_DEPACKAGE && !PerlFunctionUtil.isBuiltIn(b.getTokenText()))
+			else if(isBareword(nextTokenType) && b.lookAhead(2) == PERL_DEPACKAGE && !PerlFunctionUtil.isBuiltIn(b.getTokenText()))
 				return parseBarewordFunction(b, l, PERL_METHOD) && parseBarewordPackage(b, l);
 			else if(nextTokenType == PERL_DEPACKAGE )
 			{

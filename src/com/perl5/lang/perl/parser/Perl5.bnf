@@ -274,7 +274,7 @@ suff_pp_expr ::= expr ('++'|'--')
 pow_expr ::= expr ('**' expr)+ { rightAssociative=true }
 
 private op_5_expr ::= ref_expr  | bareword_expr| prefix_unary_expr
-ref_expr ::= '\' expr { rightAssociative=true }
+ref_expr ::= '\' referencable_expr { rightAssociative=true }
 bareword_expr ::= <<parseBarewordStringMinus>>
 prefix_unary_expr ::=  ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
@@ -478,6 +478,8 @@ callable ::= <<resetLastCallable>> (
     referencable_method
     | <<guessBarewordCallable>>
 )
+
+private referencable_expr ::= referencable_method | scalar_expr
 
 private referencable_method ::= '&'
     (
