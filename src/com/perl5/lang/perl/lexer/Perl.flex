@@ -88,8 +88,13 @@ END_OF_LINE_COMMENT = "#" [^\r\n] *
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
 // heading _ removed to avoid @_ parsing as sigil-number
-NUMBER = [0-9][0-9_]*( "." [0-9_]+ )?
+
+NUMBER_EXP = [eE][+-]?[0-9_]+
+NUMBER_FLOAT = "." [0-9_]+
+NUMBER_INT = [0-9][0-9_]{NUMBER_FLOAT}?{NUMBER_EXP}?
 NUMBER_HEX = "0x" [0-9a-fA-F]+
+NUMBER_BIN = "0b"[01]+
+NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT}
 
 X_OP_STICKED = "x"[0-9]+[^a-zA-Z]*
 
