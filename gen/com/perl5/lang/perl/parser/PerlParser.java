@@ -910,7 +910,7 @@ public class PerlParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // callable "(" [expr] ")"
+  // callable "(" [expr] ")" !"["
   static boolean function_call(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "function_call")) return false;
     boolean r;
@@ -919,6 +919,7 @@ public class PerlParser implements PsiParser {
     r = r && consumeToken(b, PERL_LPAREN);
     r = r && function_call_2(b, l + 1);
     r = r && consumeToken(b, PERL_RPAREN);
+    r = r && function_call_4(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -928,6 +929,16 @@ public class PerlParser implements PsiParser {
     if (!recursion_guard_(b, l, "function_call_2")) return false;
     expr(b, l + 1, -1);
     return true;
+  }
+
+  // !"["
+  private static boolean function_call_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "function_call_4")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_, null);
+    r = !consumeToken(b, PERL_LBRACK);
+    exit_section_(b, l, m, null, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
@@ -3737,7 +3748,7 @@ public class PerlParser implements PsiParser {
 
   // variable
   //     | variable_declaration
-  //     | PERL_OPERATOR_UNARY "(" [expr] ")"   // named operators as functions
+  //     | PERL_OPERATOR_UNARY "(" [expr] ")" !"["   // named operators as functions
   //     | "(" [expr] ")" ["[" expr "]"]
   //     | scalar_constant
   //     | do_term
@@ -3791,7 +3802,7 @@ public class PerlParser implements PsiParser {
     return r;
   }
 
-  // PERL_OPERATOR_UNARY "(" [expr] ")"
+  // PERL_OPERATOR_UNARY "(" [expr] ")" !"["
   private static boolean term_expr_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term_expr_2")) return false;
     boolean r;
@@ -3800,6 +3811,7 @@ public class PerlParser implements PsiParser {
     r = r && consumeToken(b, PERL_LPAREN);
     r = r && term_expr_2_2(b, l + 1);
     r = r && consumeToken(b, PERL_RPAREN);
+    r = r && term_expr_2_4(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -3809,6 +3821,16 @@ public class PerlParser implements PsiParser {
     if (!recursion_guard_(b, l, "term_expr_2_2")) return false;
     expr(b, l + 1, -1);
     return true;
+  }
+
+  // !"["
+  private static boolean term_expr_2_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "term_expr_2_4")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_, null);
+    r = !consumeTokenSmart(b, PERL_LBRACK);
+    exit_section_(b, l, m, null, r, false, null);
+    return r;
   }
 
   // "(" [expr] ")" ["[" expr "]"]

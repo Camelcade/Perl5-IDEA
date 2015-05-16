@@ -63,10 +63,9 @@ PERL_ARRAY = "@" "::" ? {BAREWORD}("::" {BAREWORD})*
 PERL_GLOB = "*" "::" ? {BAREWORD}("::" {BAREWORD})*
 
 CHAR_ANY        = .|{NEW_LINE}
-LINE            = .*
 FULL_LINE       = .*{NEW_LINE}?
 QUOTE           = "\"" | "'" | "`"
-END_OF_LINE_COMMENT = "#" {FULL_LINE}
+END_OF_LINE_COMMENT = "#" [^\r\n] *
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
@@ -86,9 +85,9 @@ PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC] [^a-zA-Z0-9_]
 
-MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{BAREWORD}\'
-MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{BAREWORD}\"
-MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{BAREWORD}\`
+MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{ANYWORD}+\'
+MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{ANYWORD}+\"
+MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{ANYWORD}+\`
 MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{BAREWORD}
 
 POD_OPEN         = \=(pod|head1|head2|head3|head4|over|item|back|begin|end|for|encoding){FULL_LINE}
@@ -119,17 +118,23 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 %state LEX_CODE
 
 %state LEX_MULTILINE_WAITING
-%xstate LEX_MULTILINE, LEX_MULTILINE_TOKEN
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
 %xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS, LEX_QUOTE_LIKE_LIST_CLOSER
 TRANS_MODIFIERS = [cdsr]
 %xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
-%xstate LEX_REGEX_OPENER, LEX_REGEX_ITEMS
+%xstate LEX_REGEX_OPENER
+%xstate LEX_PREPARSED_ITEMS
 
 %%
 
 // inclusive states
-{NEW_LINE}   { return processNewLine();}
+{NEW_LINE}   {
+    IElementType tokenType = processNewLine();
+    if( tokenType != null )
+       return tokenType;
+    break;
+}
+
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 ";"     {return processSemicolon();}
 
@@ -148,7 +153,7 @@ TRANS_MODIFIERS = [cdsr]
     .   { return parseRegex(); }
 }
 
-<LEX_REGEX_ITEMS>{
+<LEX_PREPARSED_ITEMS>{
     {CHAR_ANY}   {
         IElementType nextTokenType = getParsedToken();
         if( nextTokenType == null )
@@ -266,30 +271,6 @@ TRANS_MODIFIERS = [cdsr]
         }
         break;
     }
-}
-
-/**
-    Multiline string
-**/
-
-<LEX_MULTILINE>{
-    {LINE}  {
-        if( isMultilineEnd() || isLastToken())
-        {
-            return endMultiline();
-        }
-        break;
-    }
-    {NEW_LINE}  {
-        if( isLastToken() )
-        {
-            return endMultiline();
-        }
-        break;
-    }
-}
-<LEX_MULTILINE_TOKEN>{
-    .*  {yybegin(YYINITIAL);return PERL_STRING_MULTILINE_END;}
 }
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////

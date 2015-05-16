@@ -293,7 +293,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		// parse modifiers
 		tokensList.addAll(modifierTokens);
 
-		yybegin(LEX_REGEX_ITEMS);
+		yybegin(LEX_PREPARSED_ITEMS);
 
 		return PERL_REGEX_QUOTE;
 	}
@@ -496,25 +496,6 @@ public class PerlLexer extends PerlLexerGenerated{
 		return PERL_STRING_CONTENT;
 	}
 
-	/**
-	 *  Multiline part <<'smth'
-	 **/
-
-	public boolean waitingMultiline(){return yystate() == LEX_MULTILINE_WAITING;}
-
-	public IElementType processSemicolon()
-	{
-		if( !waitingMultiline() )
-			yybegin(YYINITIAL);
-		return PERL_SEMI;
-	}
-
-	public IElementType processNewLine()
-	{
-		if( waitingMultiline() )
-			startMultiLine();
-		return TokenType.NEW_LINE_INDENT;
-	}
 
 	/**
 	 *  Data block related code
@@ -553,14 +534,8 @@ public class PerlLexer extends PerlLexerGenerated{
 		return PERL_POD;
 	}
 
-	/** pre-set multiline type, depends on opener **/
-	public IElementType declaredMultiLineType;
-
-	/** stored multiline start position **/
-	public int multiLineStart;
-
 	/** contains marker for multiline end **/
-	public String multilineMarker;
+	public String heredocMarker;
 
 	public Pattern markerPattern = Pattern.compile("<<\\s*['\"`]?([^\"\'`]+)['\"`]?");
 
@@ -573,50 +548,82 @@ public class PerlLexer extends PerlLexerGenerated{
 		Matcher m = markerPattern.matcher(openToken);
 		if (m.matches())
 		{
-			multilineMarker = m.group(1);
+			heredocMarker = m.group(1);
 		}
 
+		pushState();
 		yybegin(LEX_MULTILINE_WAITING);
 		yypushback(openToken.length() - 2);
 
 		return PERL_OPERATOR;
 	}
 
-	/**
-	 * Starts multiline reading
-	 */
-	public void startMultiLine()
-	{
-		multiLineStart = getNextTokenStart();
-		yybegin(LEX_MULTILINE);
-	}
+	public boolean waitingMultiline(){return yystate() == LEX_MULTILINE_WAITING;}
 
-	/**
-	 * Checks if current token is multiline marker, therefore multiline ended
-	 * @return
-	 */
-	public boolean isMultilineEnd()
+	public IElementType processSemicolon()
 	{
-		return multilineMarker.equals(yytext().toString());
-	}
-
-	/**
-	 * Ends multiline, pushback marker
-	 * @return - type of string (all the same)
-	 */
-	public IElementType endMultiline()
-	{
-		if( isMultilineEnd() ) // got marker
-		{
-			setTokenStart(multiLineStart);
-			yypushback(multilineMarker.length());
-			yybegin(LEX_MULTILINE_TOKEN);
-		}
-		else	// got eof without a marker
-		{
-			setTokenStart(multiLineStart);
+		if( !waitingMultiline() )
 			yybegin(YYINITIAL);
+		else
+		{
+			stateStack.pop();
+			stateStack.push(YYINITIAL);
 		}
-		return PERL_STRING_MULTILINE;
+		return PERL_SEMI;
 	}
+
+	public void captureMultiline()
+	{
+		tokensList.clear();
+		tokensList.add(new CustomToken(getTokenStart(), getTokenEnd(), TokenType.NEW_LINE_INDENT));
+
+		int currentPosition = getTokenEnd();
+		int stringStart = currentPosition;
+
+		CharSequence buffer = getBuffer();
+		int bufferLenght = buffer.length();
+
+		while( true )
+		{
+			int lineStart = currentPosition;
+			int linePos = currentPosition;
+
+			while(linePos < bufferLenght && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
+
+			int textEnd = linePos;
+
+			while(linePos < bufferLenght && (buffer.charAt(linePos) == '\n' || buffer.charAt(linePos) == '\r')){linePos++;}
+
+			int lineEnd = linePos;
+
+			String line = buffer.subSequence(lineStart, textEnd).toString();
+
+			if( heredocMarker.equals(line))
+			{
+				tokensList.add(new CustomToken(stringStart, lineStart, PERL_STRING_MULTILINE));
+				tokensList.add(new CustomToken(lineStart, textEnd, PERL_STRING_MULTILINE_END));
+				yybegin(LEX_PREPARSED_ITEMS);
+				yypushback(1);
+				break;
+			}
+			else if(lineEnd == bufferLenght)
+			{
+				tokensList.add(new CustomToken(stringStart, lineEnd, PERL_STRING_MULTILINE));
+				yybegin(LEX_PREPARSED_ITEMS);
+				yypushback(1);
+				break;
+			}
+			else
+				currentPosition = lineEnd;
+		}
+
+	}
+
+	public IElementType processNewLine()
+	{
+		if( waitingMultiline() )
+			captureMultiline();
+		return TokenType.NEW_LINE_INDENT;
+	}
+
 }

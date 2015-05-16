@@ -167,12 +167,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseRightwardCallParameters(PsiBuilder b, int l)
 	{
-		if( b.getTokenType() != PERL_LPAREN)
-		{
-			parseCallParameters(b,l);
-			return true;
-		}
-		return false;
+		parseCallParameters(b,l);
+		return true;
 	}
 
 	private static boolean parseCallParameters(PsiBuilder b, int l)

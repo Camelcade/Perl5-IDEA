@@ -232,7 +232,7 @@ expr ::=
 term_expr ::=
     variable
     | variable_declaration
-    | PERL_OPERATOR_UNARY "(" [expr] ")"   // named operators as functions
+    | PERL_OPERATOR_UNARY "(" [expr] ")" !"["   // named operators as functions
     | "(" [expr] ")" ["[" expr "]"]
     | scalar_constant
     | do_term
@@ -337,7 +337,7 @@ private grep_map_arguments_variations ::=
     block_safe expr
     | scalar_expr "," expr
 
-private function_call ::= callable "(" [expr] ")"
+private function_call ::= callable "(" [expr] ")" !"["  // avoiding ()[]
 
 file_read_term ::= '<' [perl_handle] '>'
 

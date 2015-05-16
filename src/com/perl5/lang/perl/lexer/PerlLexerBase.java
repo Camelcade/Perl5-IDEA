@@ -26,9 +26,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract void processDataOpener();
 	public abstract IElementType endDataBlock();
 
-	public abstract boolean isMultilineEnd();
 	public abstract IElementType processMultilineOpener();
-	public abstract IElementType endMultiline();
 
 	public abstract IElementType processOpenerWhiteSpace();
 
