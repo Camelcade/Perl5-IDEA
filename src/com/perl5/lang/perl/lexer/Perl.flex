@@ -50,6 +50,7 @@ WHITE_SPACE     = [ \t\f]
 //EMPTY_LINE = {WHITE_SPACE}*{NEW_LINE}?
 EMPTY_SPACE = [ \t\f\r\n]
 BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
+BAREWORD_BRACED = "{"{WHITE_SPACE}*{BAREWORD}{WHITE_SPACE}*"}"
 
 // bad solution, $scalar -function eats it
 ANYWORD = [^ \t\f\r\n]
@@ -151,7 +152,23 @@ TRANS_MODIFIERS = [cdsr]
 %state LEX_SUB_DEFINITION
 %xstate LEX_SUB_PROTOTYPE
 
+%xstate LEX_BAREWORD_BRACED
+
 %%
+
+// exclusive
+<LEX_BAREWORD_BRACED>
+{
+    "}" {popState();return PERL_RBRACE;}
+    {NEW_LINE}   {
+        IElementType tokenType = processNewLine();
+        if( tokenType != null )
+           return tokenType;
+        break;
+    }
+    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    {BAREWORD}   {return PERL_BAREWORD; }
+}
 
 // inclusive
 <LEX_SUB_DEFINITION>
@@ -328,6 +345,7 @@ TRANS_MODIFIERS = [cdsr]
 "->"            {return PERL_DEREFERENCE;}
 "=>"            {return PERL_ARROW_COMMA; } // for barewords in array
 ","            {return PERL_COMMA; }
+{BAREWORD_BRACED} {yypushback(yylength()-1);pushState();yybegin(LEX_BAREWORD_BRACED);return PERL_LBRACE;}   // disambiguates things like $var{m}
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
 "["             {return PERL_LBRACK;}
