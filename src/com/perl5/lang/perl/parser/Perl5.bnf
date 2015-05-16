@@ -303,9 +303,9 @@ trenar_expr ::= expr '?' expr ':' expr { rightAssociative=true }
 assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
 private comma_expr ::= comma_sequence_expr | comma_last_expr
-comma_last_expr ::= expr (','|'=>')
+comma_last_expr ::= expr comma
 comma_sequence_expr ::= expr (comma_any expr) +
-private comma_any ::= (','|'=>') + !(")"|"]"|"}")
+private comma_any ::= comma + !(")"|"]"|"}")
 
 lp_not_expr ::= 'not' expr { rightAssociative=true }
 lp_and_expr ::= expr 'and' expr
@@ -318,9 +318,9 @@ private print_arguments ::= perl_handle expr | expr
 
 open_term ::= "open" ( "(" open_arguments ")" | open_arguments )
 private open_arguments ::=
-    open_handle "," open_mode "," open_ref  // open FILEHANDLE,MODE,REFERENCE
-    | open_handle "," open_mode "," expr    // open FILEHANDLE,MODE,EXPR,LIST ?
-    | open_handle ["," expr]                // open FILEHANDLE, EXPR ?
+    open_handle comma open_mode comma open_ref  // open FILEHANDLE,MODE,REFERENCE
+    | open_handle comma open_mode comma expr    // open FILEHANDLE,MODE,EXPR,LIST ?
+    | open_handle [comma expr]                // open FILEHANDLE, EXPR ?
 
 open_handle ::= variable_declaration | perl_handle
 open_mode ::= scalar_expr
@@ -346,7 +346,7 @@ private grep_map_arguments ::=
 
 private grep_map_arguments_variations ::=
     block_safe expr
-    | scalar_expr "," expr
+    | scalar_expr comma expr
 
 private function_call ::= callable "(" [expr] ")" !"["  // avoiding ()[]
 
@@ -392,11 +392,11 @@ variable_declaration_lexical ::= ('my' | 'state') [perl_package] variable_defini
 variable_declaration_global ::= 'our' [perl_package] variable_definition_variation
 
 private local_variable_definition_variation ::=
-    '(' variable (',' variable ) * ')'
+    '(' variable (comma variable ) * ')'
     | variable
 
 private variable_definition_variation ::=
-    '(' lexical_variable_definition_argument (',' lexical_variable_definition_argument ) * ')'
+    '(' lexical_variable_definition_argument (comma lexical_variable_definition_argument ) * ')'
     | lexical_variable_definition_argument
 
 private lexical_variable_definition_argument ::= lexical_variable | "undef"
@@ -529,3 +529,4 @@ glob_variable ::=
     | PERL_GLOB_BUILT_IN
 
 
+private comma ::= PERL_COMMA | PERL_ARROW_COMMA
