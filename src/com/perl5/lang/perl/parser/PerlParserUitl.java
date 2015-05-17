@@ -5,10 +5,8 @@ import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlBuilder;
-import com.perl5.lang.perl.util.*;
 
 /**
  * Created by hurricup on 01.05.2015.
@@ -73,7 +71,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		else
 		{
 			assert b instanceof PerlBuilder;
-			PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
+			PerlTokenData prevToken = ((PerlBuilder) b).lookupToken(-1);
 			IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
 
 			// optional }->[ or ]->{
