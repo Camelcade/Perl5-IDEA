@@ -64,7 +64,6 @@
 //    PERL_STRING="PERL_STRING"
     PERL_STRING_CONTENT="PERL_STRING_CONTENT"
 
-    PERL_BAREWORD="PERL_BAREWORD"
     PERL_TAG="PERL_TAG"
 
     PERL_COMMA=','
@@ -93,8 +92,10 @@
 
     PERL_METHOD="PERL_METHOD"
     PERL_FUNCTION="PERL_FUNCTION"
+    PERL_FUNCTION_BUILT_IN="PERL_FUNCTION_BUILT_IN"
     PERL_HANDLE="PERL_HANDLE"
     PERL_BLOCK_NAME="PERL_BLOCK_NAME"
+    PERL_LABEL="PERL_LABEL"
   ]
 
     extends(".*expr")=expr
@@ -106,17 +107,16 @@ private perlFile ::= <<parseFile>> <<eof>>
 private file_items ::= PERL_SEMI * file_item *   //{recoverWhile=recover_block}
 private file_item ::= namespace | namespace_element
 
-private block_safe ::= <<parseBlock>>
-block ::= "{" file_items "}" //{pin=1} // should not be used anywhere, injected by block_safe
+block ::= "{" file_items "}" //<<parseBlock>>
+//block ::= "{" file_items "}" //{pin=1} // should not be used anywhere, injected by block_safe
 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) PERL_SEMI*
 
 // package keyword
-namespace ::= "package" perl_package [perl_version] (block_safe | PERL_SEMI <<packagePseudoBlock>>)
-
+namespace ::= "package" perl_package [perl_version] (block | PERL_SEMI namespace_content)
 private namespace_content ::= namespace_element *  //{recoverWhile=recover_namespace}     // injected and wrapped by parsePackageContents
 
-named_block ::= PERL_BLOCK_NAME block_safe
+named_block ::= PERL_BLOCK_NAME block
 
 // declarations
 private compound_statement ::=
@@ -134,18 +134,18 @@ private compound_statement ::=
 if_compound ::= 'if' compound_conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
 unless_compound ::= 'unless' compound_conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
 private if_compound_elsif ::= 'elsif' compound_conditional_block  // {pin=1}
-private if_compound_else  ::= 'else' block_safe // {pin=1}
+private if_compound_else  ::= 'else' block // {pin=1}
 
-private compound_conditional_block ::= '(' expr ')' block_safe
+private compound_conditional_block ::= '(' expr ')' block
 
 given_compound ::= 'given' compound_conditional_block // {pin=1}
 
 while_compound ::= 'while' compound_conditional_block [compound_continue_block] // {pin=1}
 until_compound ::= 'until' compound_conditional_block [compound_continue_block] // {pin=1}
 
-private compound_continue_block ::= 'continue' block_safe
+private compound_continue_block ::= 'continue' block
 
-block_compound ::= block_safe [compound_continue_block]
+block_compound ::= block [compound_continue_block]
 
 
 // for/foreach
@@ -153,7 +153,7 @@ for_compound ::= 'for' for_compound_arguments // {pin=1}
 foreach_compound ::= 'foreach' for_compound_arguments // {pin=1}
 private for_compound_arguments ::= for_compound_arguments_iteration | for_compound_arguments_list
 
-private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_SEMI [expr] ')' block_safe
+private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_SEMI [expr] ')' block
 
 // @todo only single variable or variable definition may be here
 private for_compound_arguments_list ::=
@@ -167,7 +167,7 @@ private statement_variation ::=
     | sub_declaration
     | expr
 
-sub_definition ::= "sub" perl_method sub_definition_parameters ? block_safe
+sub_definition ::= "sub" perl_method sub_definition_parameters ? block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
@@ -185,7 +185,7 @@ private sub_attributes ::= ":" <<parseSubAttributes>>
 last_term ::= 'last' [lnr_param]
 next_term ::= 'next' [lnr_param]
 redo_term ::= 'redo' [lnr_param]
-private lnr_param ::= label | expr
+private lnr_param ::= PERL_LABEL | expr
 
 
 private statement_modifier ::=
@@ -340,12 +340,12 @@ private close_arguments ::= perl_handle
 
 sort_term ::= 'sort' ( '(' sort_op_arguments ')'| sort_op_arguments )
 private sort_op_arguments ::=
-    perl_function expr
-    | block_safe expr
+    PERL_FUNCTION expr
+    | block expr
     | scalar_expr expr
     | expr
 
-sub_term ::= 'sub' sub_definition_parameters block_safe
+sub_term ::= 'sub' sub_definition_parameters block
 
 grep_term ::= 'grep' grep_map_arguments
 map_term ::= 'map' grep_map_arguments
@@ -354,7 +354,7 @@ private grep_map_arguments ::=
     | grep_map_arguments_variations
 
 private grep_map_arguments_variations ::=
-    block_safe expr
+    block expr
     | scalar_expr comma expr
 
 private function_call ::= callable "(" [expr] ")" !"["  // avoiding ()[]
@@ -389,7 +389,7 @@ tr_modifiers ::= PERL_REGEX_MODIFIER +
 
 do_term ::= "do" eval_argument
 eval_term ::= "eval" eval_argument
-private eval_argument ::= '('expr')' | block_safe | expr
+private eval_argument ::= '('expr')' | block | expr
 
 private variable_declaration ::=
     variable_declaration_global
@@ -402,8 +402,8 @@ variable_declaration_lexical ::= ('my' | 'state') [perl_package] variable_defini
 variable_declaration_global ::= 'our' [perl_package] variable_definition_variation
 
 private local_variable_definition_variation ::=
-    '(' variable (comma + variable ) * comma * ')'
-    | variable
+    '(' scalar_expr (comma + scalar_expr ) * comma * ')'
+    | scalar_expr
 
 private variable_definition_variation ::=
     '(' lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* ')'
@@ -421,7 +421,7 @@ reference_value ::=
 
 private anon_array_ref ::= '[' [expr] ']'
 private anon_hash_ref ::= '{' [expr] '}'
-private code_ref ::= "sub" block_safe
+private code_ref ::= "sub" block
 private glob_item_ref ::= glob "{" glob_item_ref_variant "}"
 private glob_item_ref_variant ::=
     "SCALAR"
@@ -467,7 +467,7 @@ private glob ::=
     | glob_variable                    // hash as is
 
 private nested_element ::=
-    "{" bareword_any  "}"
+    braced_string
     | "{" expr "}"
     | "[" expr "]"
 
@@ -500,8 +500,7 @@ private referencable_method ::= '&'
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
-label_declaration ::= label ":" // do we need to change tokentype?
-label ::= PERL_BAREWORD
+label_declaration ::= PERL_LABEL ":" // do we need to change tokentype?
 private perl_version ::= <<parseVersion>>
 private perl_handle ::= <<parseBarewordHandle>> | "{" scalar_expr "}" | <<parseExpressionLevel 21>>
 
@@ -511,6 +510,8 @@ private scalar_constant ::=
     PERL_NUMBER
     | PERL_TAG  // __PACKAGE__ etc.
     | string
+
+braced_string ::= "{" PERL_STRING_CONTENT "}"
 
 private array_constant ::=
     string_list
@@ -557,7 +558,5 @@ glob_variable ::=
 
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
-private bareword_any ::= PERL_BAREWORD | PERL_KEYWORD
 private perl_package ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
-private perl_function ::= PERL_FUNCTION
-private perl_method ::= [perl_package ['->']] perl_function
+private perl_method ::= [perl_package ['->']] PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_KEYWORD

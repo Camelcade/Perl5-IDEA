@@ -29,140 +29,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return new PerlBuilder(builder, state, parser);
 	}
 
-	/**
-	 * Parses sub definition, marks error areas
-	 * @param b	PerlBuilder
-	 * @param l	parsing level
-	 * @return	parsing result
-	 */
-	public static boolean parseSubDefinition(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
 
-		if( isBareword(b.getTokenType()))
-		{
-			PsiBuilder.Marker mainMarker = b.mark();
-
-			PsiBuilder.Marker m = b.mark();
-
-			// @todo not DRY with subDeclaration
-			boolean hasPackage = false;
-			while( b.lookAhead(1) == PERL_DEPACKAGE)
-			{
-				b.advanceLexer();
-				b.advanceLexer();
-				hasPackage = true;
-			}
-
-			if( hasPackage )
-			{
-				m.collapse(PERL_PACKAGE);
-				m = b.mark();
-			}
-
-			// sub name
-			((PerlBuilder) b).beginSubDefinition(b.getTokenText());
-			b.advanceLexer();
-			m.collapse(PERL_FUNCTION);
-
-			// params
-			PerlParser.sub_definition_parameters(b,l);
-
-			PsiBuilder.Marker bodyMarker = b.mark();
-			// function body
-			if( parseBlock(b, l) )
-			{
-				try{
-					((PerlBuilder) b).commitSubDefinition();
-					bodyMarker.drop();
-					mainMarker.drop();
-				}
-				catch(PerlParsingException e)
-				{
-					mainMarker.errorBefore(e.getMessage(), bodyMarker);
-					bodyMarker.drop();
-				}
-
-				return true;
-			}
-			else
-			{
-				bodyMarker.drop();
-				mainMarker.rollbackTo();
-				return false;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Parses sub definition, marks error areas
-	 * @param b	PerlBuilder
-	 * @param l	parsing level
-	 * @return	parsing result
-	 */
-	public static boolean parseSubDeclaration(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		if( isBareword(b.getTokenType()))
-		{
-			PsiBuilder.Marker mainMarker = b.mark();
-
-			// sub name
-			PsiBuilder.Marker m = b.mark();
-
-			boolean hasPackage = false;
-			while( b.lookAhead(1) == PERL_DEPACKAGE)
-			{
-				b.advanceLexer();
-				b.advanceLexer();
-				hasPackage = true;
-			}
-
-			if( hasPackage )
-			{
-				m.collapse(PERL_PACKAGE);
-				m = b.mark();
-			}
-
-			((PerlBuilder) b).beginSubDeclaration(b.getTokenText());
-			b.advanceLexer();
-			m.collapse(PERL_FUNCTION);
-
-			// params
-			PerlParser.sub_declaration_parameters(b, l);
-
-			if( b.getTokenType() == PERL_SEMI)
-			{
-				try{
-					((PerlBuilder) b).commitSubDeclaration();
-					mainMarker.drop();
-				}
-				catch(PerlParsingException e)
-				{
-					mainMarker.error(e.getMessage());
-				}
-
-				return true;
-			}
-			else
-			{
-				mainMarker.rollbackTo();
-				return false;
-			}
-		}
-
-		return false;
-	}
 
 	public static boolean parseCallParameters(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
-
- 		String methodName = ((PerlBuilder) b).getLastCallableMethod();
-		String packageName = ((PerlBuilder) b).getLastCallablePackage();
 
 //		if( methodName == null) // not working on scalar calling, we s
 			// can't happen
@@ -186,24 +57,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
-	/**
-	 * Resets last callable in biulder for later parsing
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return always true
-	 */
-	public static boolean resetLastCallable(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		// this is a hack to break a namespace
-		if( "package".equals(b.getTokenText()))
-			return false;
-
-		((PerlBuilder) b).setLastCallableMethod(null);
-		((PerlBuilder) b).setLastCallablePackage(null);
-		return true;
-	}
 
 	/**
 	 * Parsing file entry point. Inits codeblock states, default namespace
@@ -235,200 +88,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
-	/**
-	 * Parsing blocks
-	 * @param b	PerlBuilder
-	 * @param l Parser level
-	 * @return	Parsing results
-	 */
-	public static boolean parseBlock(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		((PerlBuilder) b).pushCodeBlockState("Entering block"); // push default
-		boolean r = PerlParser.block(b, l + 1);
-		((PerlBuilder) b).popCodeBlockState(b.getTokenText());
-
-		return r;
-	}
-
-	public static boolean packagePseudoBlock(PsiBuilder b, int l)
-	{
-		((PerlBuilder) b).pushCodeBlockState(null);
-		PerlParser.namespace_content(b, l);
-		((PerlBuilder) b).popCodeBlockState(null);
-		return true;
-	}
-
-	/**
-	 * Parses perl package definition, creates namespace in builder, procesing content in scope
-	 * @param b	PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-
-	public static boolean parsePerlPackage(PsiBuilder b, int l)
-	{
-		if( isBareword(b.getTokenType()) )
-		{
-			if( parseBarewordPackage(b,l))
-			{
-				assert b instanceof PerlBuilder;
-
-				// package name
-				PerlPackage namespace = ((PerlBuilder) b).getNamespace(((PerlBuilder) b).getLastParsedPackage());
-
-				// package version
-				if( parseVersion(b,l))
-				{
-					namespace.setVersion(new PerlVersion(((PerlBuilder) b).getLastParsedVersion()));
-				}
-
-				// set namespace for following code
-				((PerlBuilder) b).pushCodeBlockState(b.getTokenText());
-				getCurrentBlockState(b).setNamespace(namespace);
-
-				boolean r;
-
-				// package content
-				if( b.getTokenType() == PERL_SEMI )
-				{
-					consumeToken(b, PERL_SEMI);
-					PsiBuilder.Marker m = b.mark();
-					r = PerlParser.namespace_content(b, l);
-					if( r )
-						m.done(BLOCK);
-					else
-						m.rollbackTo();
-
-				}
-				else
-					r = PerlParser.block(b,l);
-
-				// @todo we should read vars from here
-				// @todo if something bad happened, we must be able to rollback; so we need to be able to merge namespaces
-				((PerlBuilder) b).popCodeBlockState(b.getTokenText());
-				return r;
-			}
-		}
-
-		return false;
-	}
-
-
-
-	/**
-	 * Bareword parser. From context we are trying to decide what is the current and (possibly next) bareword is
-	 * @param b	PerlBuilder
-	 * @param l	Level
-	 * @return	Result
-	 */
-	public static boolean guessBarewordCallable(PsiBuilder b, int l )
-	{
-		assert b instanceof PerlBuilder;
-
-		// it seems ::method call from main
-		if( b.getTokenType() == PERL_DEPACKAGE && isBareword(b.lookAhead(1)))
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.done(PERL_PACKAGE);
-			return parseBarewordFunction(b,l, PERL_METHOD);
-		}
-
-		PerlTokenData prevToken = ((PerlBuilder) b).getAheadToken(-1);
-		IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
-
-		IElementType nextTokenType = b.lookAhead(1);
-		IElementType tokenType = b.getTokenType();
-
-
-		// ->method
-		if( prevTokenType == PERL_DEREFERENCE && isBareword(tokenType) && parseBarewordPackageFunction(b,l))
-		{
-			return true;
-		}
-		else if( isBareword(tokenType) )
-		{
-			if(isBareword(nextTokenType) && b.lookAhead(2) == PERL_DEPACKAGE && !PerlFunctionUtil.isBuiltIn(b.getTokenText()))
-				return parseBarewordFunction(b, l, PERL_METHOD) && parseBarewordPackage(b, l);
-			else if(nextTokenType == PERL_DEPACKAGE )
-			{
-				PsiBuilder.Marker m = b.mark();
-
-				if( parseBarewordPackage(b,l) && b.getTokenType() == PERL_DEREFERENCE )
-				{
-					m.drop();
-					consumeToken(b,PERL_DEREFERENCE);
-					return parseBarewordFunction(b,l,PERL_METHOD) || PerlParser.scalar_variable(b,l);
-				}
-
-				m.rollbackTo();
-				return parseBarewordPackageFunction(b, l);
-
-			}
-			else
-				return parseBarewordFunction(b,l, PERL_FUNCTION);
-		}
-
-		return false;
-	}
-
-	/**
-	 * Making a PERL_PACKAGE item, collapsing barewords with :: @see guessBareword for more intelligence method
-	 * Sets last parsed package for parsing use/no constructs
-	 * @param b PerlBuilder
-	 * @param l	level
-	 * @return	parsing result
-	 */
-	public static boolean parseBarewordPackage(PsiBuilder b, int l ) {
-
-		if(isBareword(b.getTokenType())  )
-		{
-			PsiBuilder.Marker m = b.mark();
-			StringBuilder packageName = new StringBuilder(b.getTokenText());
-
-			while(b.lookAhead(1) == PERL_DEPACKAGE && isBareword(b.lookAhead(2)))
-			{
-				b.advanceLexer();
-				packageName.append(b.getTokenText());
-				b.advanceLexer();
-				packageName.append(b.getTokenText());
-			}
-
-			assert b instanceof PerlBuilder;
-			((PerlBuilder) b).setLastParsedPackage(packageName.toString());
-			((PerlBuilder) b).setLastCallablePackage(packageName.toString());
-
-			b.advanceLexer();
-			m.collapse(PERL_PACKAGE);
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Function marks current bareword as a function
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return result
-	 */
-	public static boolean parseBarewordFunction(PsiBuilder b, int l, IElementType collapseTokenType) {
-
-		if( isBareword(b.getTokenType()) )
-		{
-			assert b instanceof PerlBuilder;
-			((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(collapseTokenType);
-
-			return true;
-		}
-
-		return false;
-	}
 
 	/**
 	 * Function marks current bareword as a filehandle
@@ -449,47 +108,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer();
 
 			m.collapse(PERL_HANDLE);
-
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Function parses construct like package::method
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseBarewordPackageFunction(PsiBuilder b, int l) {
-
-		assert b instanceof PerlBuilder;
-		if(isBareword(b.getTokenType()))
-		{
-			if(  b.lookAhead(1) == PERL_DEPACKAGE ) // got package
-			{
-				PsiBuilder.Marker m = b.mark();
-				StringBuilder packageName = new StringBuilder("");
-
-				while (	b.lookAhead(1) == PERL_DEPACKAGE )
-				{
-					packageName.append(b.getTokenText());
-					b.advanceLexer();
-					packageName.append(b.getTokenText());
-					b.advanceLexer();
-				}
-
-				m.collapse(PERL_PACKAGE);
-
-				((PerlBuilder) b).setLastCallablePackage(packageName.toString());
-			}
-
-			((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
-
-			PsiBuilder.Marker m = b.mark();	// @todo here can be not only bareword, but scalar expression
-			b.advanceLexer();
-			m.collapse(PERL_METHOD);
 
 			return true;
 		}
@@ -528,36 +146,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean parseUseStatement(PsiBuilder b, int l )
-	{
-		assert b instanceof PerlBuilder;
-		PsiBuilder.Marker m = b.mark();
-
-		PerlUseParameters parameters = parseUseParameters(b, l);
-		if (parameters == null)
-		{
-			m.rollbackTo();
-			return false;
-		}
-
-		PerlCodeBlockState state = getCurrentBlockState(b);
-		String packageName = parameters.getPackageName();
-
-		if( packageName != null )
-		{
-			if( state.isPragma(packageName))
-				state.use(parameters);
-			else	// regular package load and import
-			{
-				parameters.setPackageFile(((PerlBuilder) b).getPackageFile(packageName));
-				state.getNamespace().importPackage(parameters);
-			}
-		}
-		// @todo find out what to do with use version
-
-		m.drop();
-		return true;
-	}
 
 	public static boolean parseExpressionLevel(PsiBuilder b, int l, int g )
 	{
@@ -622,16 +210,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean parseNoStatement(PsiBuilder b, int l )
-	{
-		PerlUseParameters c = parseUseParameters(b,l);
-		if( c == null )
-			return false;
-
-		getCurrentBlockState(b).no(c);
-		return true;
-	}
-
 	public static boolean statementSemi(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
@@ -646,70 +224,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		// @todo think what to do here. Currently any statement being finished, even incorrect one
 		return false;
 	}
-
-	protected static PerlUseParameters parseUseParameters(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		PsiBuilder.Marker m = b.mark();
-		PerlUseParameters c = null;
-
-		boolean r = parseVersion(b,l);
-
-		if( r ) // use VERSION
-		{
-			if( b.getTokenType() == PERL_SEMI )
-			{
-				c = new PerlUseParameters();
-				c.setPackageVersion(((PerlBuilder) b).getLastParsedVersion());
-				m.drop();
-			}
-			else
-				m.rollbackTo();
-		}
-		else
-		{
-			r = parseBarewordPackage(b, l);
-
-			if( r ) // use MODULE
-			{
-				c = new PerlUseParameters();
-				c.setPackageName(((PerlBuilder) b).getLastParsedPackage());
-
-				r = parseVersion(b,l);
-
-				if( r ) // use MODULE VERSION
-				{
-					c.setPackageVersion(((PerlBuilder) b).getLastParsedVersion());
-				}
-
-				PerlSyntaxTrap t = getStringsTrap(b);
-				t.start();
-				r = PerlParser.expr(b,l,-1);
-				t.stop();
-
-				if( r ) // use MODULE VERSION ? LIST
-				{
-					c.setPackageParams(t.getCaptures());
-				}
-
-				if( b.getTokenType() == PERL_SEMI )
-					m.drop();
-				else
-				{
-					c = null;
-					m.rollbackTo();
-				}
-			}
-			else
-			{
-				m.rollbackTo();
-			}
-		}
-
-		return c;
-	}
-
 
 	/**
 	 * Trying to parse:  version and replace token type
@@ -735,43 +249,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean captureStrings(PsiBuilder b, int l, boolean state ) {
-		assert b instanceof PerlBuilder;
-		PerlSyntaxTrap t = getStringsTrap(b);
-		if( state )
-			t.start();
-		else
-			t.stop();
-		return true;
-	}
-
 	protected static PerlCodeBlockState getCurrentBlockState(PsiBuilder b)
 	{
 		assert b instanceof PerlBuilder;
 		return ((PerlBuilder) b).getCurrentBlockState();
 	}
 
-	protected static boolean isKnownFunction(PsiBuilder b, String name)
-	{
-		assert b instanceof PerlBuilder;
-		return getCurrentBlockState(b).getNamespace().isKnownFunction(name);
-	}
-
-	protected static boolean isKnownHandle(PsiBuilder b, String name)
-	{
-		assert b instanceof PerlBuilder;
-		return ((PerlBuilder) b).isKnownHandle(name);
-	}
-
-	protected static PerlSyntaxTrap getStringsTrap(PsiBuilder b)
-	{
-		assert b instanceof PerlBuilder;
-		return getCurrentBlockState(b).getStringsTrap();
-	}
 
 	public static boolean isBareword(IElementType tokenType)
 	{
-		return tokenType == PERL_BAREWORD || tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY || tokenType == PERL_BLOCK_NAME;
+		return tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY || tokenType == PERL_BLOCK_NAME;
 	}
 
 }

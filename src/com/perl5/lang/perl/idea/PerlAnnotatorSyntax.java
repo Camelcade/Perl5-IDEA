@@ -81,11 +81,11 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 
 			Annotation annotation = holder.createInfoAnnotation(element, null);
 
-			if( parentType == STRING_SQ) // bareword string, single quoted string
+			if( parentType == STRING_SQ ||  parentType == STRING_LIST || parentType == BRACED_STRING) // bareword string, single quoted string
 			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
 			}
-			else if(  parentType == STRING_DQ ||  parentType == STRING_LIST) // interpolated
+			else if(  parentType == STRING_DQ ) // interpolated
 			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
 			}
@@ -98,22 +98,22 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		//		throw new Error("Unable to detect string type");
 			}
 		}
-		else if( elementType == PERL_FUNCTION)
-		{
-			boolean isBuiltIn = PerlFunctionUtil.isBuiltIn(element.getText());
-			colorize(
-					holder.createInfoAnnotation(element, null),
-					isBuiltIn ? PerlSyntaxHighlighter.PERL_OPERATOR :PerlSyntaxHighlighter.PERL_FUNCTION,
-					isBuiltIn,
-					false);
-		}
-		else if( elementType == PERL_METHOD)
-		{
-			colorize(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_FUNCTION,
-					false,
-					false);
-		}
+//		else if( elementType == PERL_FUNCTION)
+//		{
+//			boolean isBuiltIn = PerlFunctionUtil.isBuiltIn(element.getText());
+//			colorize(
+//					holder.createInfoAnnotation(element, null),
+//					isBuiltIn ? PerlSyntaxHighlighter.PERL_OPERATOR :PerlSyntaxHighlighter.PERL_FUNCTION,
+//					isBuiltIn,
+//					false);
+//		}
+//		else if( elementType == PERL_METHOD)
+//		{
+//			colorize(
+//					holder.createInfoAnnotation(element, null),
+//					PerlSyntaxHighlighter.PERL_FUNCTION,
+//					false,
+//					false);
+//		}
 	}
 }

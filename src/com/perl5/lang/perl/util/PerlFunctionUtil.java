@@ -23,7 +23,12 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 
 	public static boolean isBuiltIn(String function)
 	{
-		return BUILT_IN.contains(function);
+		return knownFunctions.containsKey(function);
+	}
+
+	public static IElementType getFunctionType(String function)
+	{
+		return isBuiltIn(function) ? PERL_FUNCTION_BUILT_IN : PERL_FUNCTION;
 	}
 
 }
