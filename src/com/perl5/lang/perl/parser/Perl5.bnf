@@ -273,9 +273,8 @@ suff_pp_expr ::= expr ('++'|'--')
 
 pow_expr ::= expr ('**' expr)+ { rightAssociative=true }
 
-private op_5_expr ::= ref_expr  | bareword_expr| prefix_unary_expr
+private op_5_expr ::= ref_expr  | prefix_unary_expr
 ref_expr ::= '\' referencable_expr { rightAssociative=true }
-bareword_expr ::= <<parseBarewordStringMinus>>
 prefix_unary_expr ::=  ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
 regex_expr ::= expr ('=~'|'!~') expr
@@ -506,11 +505,11 @@ private scalar_constant ::=
 private array_constant ::=
     string_list
 
-string ::= string_quoted | multiline_marker | <<parseBarewordString>>
-private string_quoted ::= ['qq' | 'qx' | 'q'] PERL_QUOTE <<parseBarewordString>> PERL_QUOTE
-private multiline_marker ::= '<<' (string | <<parseBarewordString>>)
+string ::= string_quoted | multiline_marker | PERL_STRING_CONTENT
+private string_quoted ::= ['qq' | 'qx' | 'q'] PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
+private multiline_marker ::= '<<' (string | PERL_STRING_CONTENT)
 
-private string_list ::= 'qw' PERL_QUOTE <<parseBarewordString>> * PERL_QUOTE
+private string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 lexical_variable ::= scalar_variable | array_variable | hash_variable

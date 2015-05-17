@@ -493,56 +493,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 
 	/**
-	 * Parsing string content
-	 * @param b	PerlBuilder
-	 * @param l level
-	 * @return	result
-	 */
-	public static boolean parseBarewordString(PsiBuilder b, int l ) {
-		// here is the logic when we allows to use barewords as strings
-		IElementType tokenType = b.getTokenType();
-		assert b instanceof PerlBuilder;
-
-		if(	tokenType == PERL_STRING_CONTENT
-			|| isBareword(tokenType) && b.lookAhead(1) == PERL_ARROW_COMMA
-				) //
-		{
-			getStringsTrap(b).capture(b.getTokenText());
-
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(PERL_STRING_CONTENT);
-
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * This function parses situations like -bareword =>
-	 * @param b
-	 * @param l
-	 * @return
-	 * @todo this should be done in lexer
-	 */
-	public static boolean parseBarewordStringMinus(PsiBuilder b, int l ) {
-		assert b instanceof PerlBuilder;
-
-		if( "-".equals(b.getTokenText()) && isBareword(b.lookAhead(1)) && b.lookAhead(2) == PERL_ARROW_COMMA )
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			getStringsTrap(b).capture("-" + b.getTokenText());
-			b.advanceLexer();
-			m.collapse(PERL_STRING_CONTENT);
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Smart parser for ->, makes }->[ optional
 	 * @param b
 	 * @param l

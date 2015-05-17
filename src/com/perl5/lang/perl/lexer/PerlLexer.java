@@ -55,6 +55,25 @@ public class PerlLexer extends PerlLexerGenerated{
 		lastSignificantTokenType = null;
 	}
 
+	/**
+	 * Forces push back and reparsing
+	 * @param newState exclusive state for re-parsing specific constructions
+	 */
+	public void startCustomBlock(int newState)
+	{
+		yypushback(yylength());
+		pushState();
+		yybegin(newState);
+	}
+
+	/**
+	 * Ends custom block parsing
+	 */
+	public void endCustomBlock()
+	{
+		popState();
+	}
+
 
 	/**
 	 *  States stack

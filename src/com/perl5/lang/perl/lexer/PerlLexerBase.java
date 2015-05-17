@@ -8,6 +8,9 @@ import com.intellij.psi.tree.IElementType;
  */
 public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 {
+	public abstract void startCustomBlock(int newState);
+	public abstract void endCustomBlock();
+
 	// @todo should be parseString
 	public abstract IElementType processStringOpener();
 
