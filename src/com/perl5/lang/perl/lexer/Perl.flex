@@ -96,6 +96,16 @@ CAPTURE_REQUIRE_PACKAGE = "require"{EMPTY_SPACE}+{PERL_PACKAGE_SURE}{EMPTY_SPACE
 PERL_PACKAGE_CANONICAL = ({BAREWORD} "::")+
 PERL_PACKAGE_METHOD = {PERL_PACKAGE_CANONICAL} {BAREWORD}
 
+CAPTURE_HANDLE_READ = "<"{BAREWORD}">"
+
+DIR_HANDLE_PREFIX = "opendir" | "chdir" | "telldir" | "seekdir" | "rewinddir" | "readdir" | "closedir"
+FILE_HANDLE_PREFIX_SYS = "sysopen" | "syswrite" | "sysseek" | "sysread"
+FILE_HANDLE_PREFIX = "open" | "close" | "read" | "write" | "say" | "print" | "printf" | "stat" | "ioctl" | "fcntl" | "lstat" | "truncate" | "tell" | "select" | "seek" | "getc" | "flock" | "fileno" | "eof" | "binmode"
+HANDLE_PREFIX = {DIR_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX_SYS}
+
+CAPTURE_HANDLE = {HANDLE_PREFIX} {EMPTY_SPACE}* "(" ? {EMPTY_SPACE}* {BAREWORD} [^(:-]
+CAPTURE_HANDLE_FILETEST = {FILETEST} {EMPTY_SPACE}+ {BAREWORD} [^(:-]
+
 CAPTURE_MAIN_CALL = "::"{BAREWORD}
 CAPTURE_METHOD_CALL = "->"{BAREWORD}
 CAPTURE_SUPER_METHOD_CALL = "->"{EMPTY_SPACE}*"SUPER::"
@@ -134,7 +144,8 @@ BLOCK_NAMES = "BEGIN" | "UNITCHECK" | "CHECK" | "INIT" | "END"
 PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
 
 // atm making the same, but seems unary are different
-PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC] [^a-zA-Z0-9_]
+FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
+PERL_OPERATORS_FILETEST = {FILETEST} [^a-zA-Z0-9_]
 
 MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{ANYWORD}+\'
 MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{ANYWORD}+\"
@@ -154,7 +165,8 @@ PERL_SYN_BLOCK_OP = "do" | "eval"
 PERL_SYN_FLOW_CONTROL = "redo" | "next" | "last"
 PERL_SYN_DECLARE = "package" | "sub" | "my" | "our" | "local" | "state"
 PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
-PERL_SYN_OTHER = "undef" | "print" | "say" | "open" | "grep" | "sort" | "map" | "close"
+// "print" | "say" | "open"
+PERL_SYN_OTHER = "undef" | "grep" | "sort" | "map" | "close"
 PERL_SYN_BINARY = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
 PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
 FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} | {PERL_SYN_DECLARE} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER} | {PERL_SYN_BINARY}
@@ -189,8 +201,42 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_LABEL_DEFINITION
 %xstate LEX_METHOD_CALL
 %xstate LEX_PACKAGE_FUNCTION_CALL
+%xstate LEX_HANDLE_READ
+%xstate LEX_HANDLE, LEX_HANDLE_HANDLE
+%xstate LEX_HANDLE_FILETEST
 %%
 
+
+// exclusive
+<LEX_HANDLE_HANDLE>
+{
+    "(" {return PERL_LPAREN;}
+    {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
+    {NEW_LINE}   {return processNewLine();}
+    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+}
+
+// exclusive
+<LEX_HANDLE>
+{
+    {BAREWORD} {yybegin(LEX_HANDLE_HANDLE);return PERL_FUNCTION_BUILT_IN;}
+}
+
+// exclusive
+<LEX_HANDLE_FILETEST>
+{
+    {PERL_OPERATORS_FILETEST} {yypushback(1);return PERL_OPERATOR_FILETEST;}
+    {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
+    {NEW_LINE}   {return processNewLine();}
+    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+}
+
+// exclusive
+<LEX_HANDLE_READ>
+{
+    {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
+    "<" {return PERL_LANGLE;}
+}
 
 // exclusive
 <LEX_PACKAGE_FUNCTION_CALL>
@@ -547,6 +593,10 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_PACKAGE_METHOD} {startCustomBlock(LEX_PACKAGE_FUNCTION_CALL);break;}
 
 {PERL_PACKAGE_CANONICAL} {return PerlPackageUtil.getPackageType(yytext().toString());}
+{BUILT_IN_GLOB_NAME} {return PERL_HANDLE_BUILT_IN;}
+{CAPTURE_HANDLE_READ} {startCustomBlock(LEX_HANDLE_READ);break;}
+{CAPTURE_HANDLE_FILETEST} {startCustomBlock(LEX_HANDLE_FILETEST);break;}
+{CAPTURE_HANDLE} {startCustomBlock(LEX_HANDLE);break;}
 {BAREWORD} { return PerlFunctionUtil.getFunctionType(yytext().toString());}
 
 /* error fallback [^] */

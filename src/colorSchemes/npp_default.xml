@@ -15,6 +15,11 @@
             <option name="FOREGROUND" value="CF34CF"/>
         </value>
     </option>
+    <option name="PERL_HANDLE">
+        <value>
+            <option name="FOREGROUND" value="FF007F"/>
+        </value>
+    </option>
     <option name="PERL_HASH">
         <value>
             <option name="FOREGROUND" value="8080C0"/>

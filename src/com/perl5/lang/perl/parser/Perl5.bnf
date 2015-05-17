@@ -94,6 +94,7 @@
     PERL_FUNCTION="PERL_FUNCTION"
     PERL_FUNCTION_BUILT_IN="PERL_FUNCTION_BUILT_IN"
     PERL_HANDLE="PERL_HANDLE"
+    PERL_HANDLE_BUILT_IN="PERL_HANDLE_BUILT_IN"
     PERL_BLOCK_NAME="PERL_BLOCK_NAME"
     PERL_LABEL="PERL_LABEL"
   ]
@@ -102,13 +103,12 @@
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
-private perlFile ::= <<parseFile>> <<eof>>
+private perlFile ::= file_items <<eof>>
 
 private file_items ::= PERL_SEMI * file_item *   //{recoverWhile=recover_block}
 private file_item ::= namespace | namespace_element
 
-block ::= "{" file_items "}" //<<parseBlock>>
-//block ::= "{" file_items "}" //{pin=1} // should not be used anywhere, injected by block_safe
+block ::= "{" file_items "}"
 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) PERL_SEMI*
 
@@ -299,7 +299,7 @@ named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
 private named_undry_expr_defined ::= 'defined' !"(" [scalar_expr]
 private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" scalar_expr
 
-filetest_expr ::= PERL_OPERATOR_FILETEST [(<<parseBarewordHandle>> | expr )]
+filetest_expr ::= PERL_OPERATOR_FILETEST [(perl_handle | expr )]
 
 compare_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
 equal_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
@@ -501,8 +501,8 @@ private referencable_method ::= '&'
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
 label_declaration ::= PERL_LABEL ":" // do we need to change tokentype?
-private perl_version ::= <<parseVersion>>
-private perl_handle ::= <<parseBarewordHandle>> | "{" scalar_expr "}" | <<parseExpressionLevel 21>>
+private perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
+private perl_handle ::= PERL_HANDLE | PERL_HANDLE_BUILT_IN | "{" scalar_expr "}" | <<parseExpressionLevel 21>>
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 

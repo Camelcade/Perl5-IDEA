@@ -57,65 +57,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
-
-	/**
-	 * Parsing file entry point. Inits codeblock states, default namespace
-	 * @param b	PerlBuilder
-	 * @param l	parsing level
-	 * @return	parsing result
-	 */
-	public static boolean parseFile(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		((PerlBuilder) b).initCodeBlockStateStack(); // init states stack
-		getCurrentBlockState(b).setNamespace(((PerlBuilder) b).getNamespace("main")); // switch to main namespace
-
-		PsiBuilder.Marker m = b.mark();
-		boolean r = PerlParser.file_items(b, l);
-
-		if(r)
-		{
-			m.done(BLOCK);
-		}
-		else
-		{
-			m.drop();
-		}
-
-		((PerlBuilder) b).popCodeBlockState(b.getTokenText());
-
-		return r;
-	}
-
-
-	/**
-	 * Function marks current bareword as a filehandle
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return result
-	 */
-	public static boolean parseBarewordHandle(PsiBuilder b, int l ) {
-
-		if( isBareword(b.getTokenType()) && b.lookAhead(1) != PERL_LPAREN)
-		{
-			assert b instanceof PerlBuilder;
-
-			String handle = b.getTokenText();
-			((PerlBuilder) b).setLastParsedHandle(handle);
-
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-
-			m.collapse(PERL_HANDLE);
-
-			return true;
-		}
-
-		return false;
-	}
-
-
 	/**
 	 * Smart parser for ->, makes }->[ optional
 	 * @param b
@@ -223,42 +164,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		// @todo think what to do here. Currently any statement being finished, even incorrect one
 		return false;
-	}
-
-	/**
-	 * Trying to parse:  version and replace token type
-	 * @param b	PerlBuilder
-	 * @param l level
-	 * @return	result
-	 */
-	public static boolean parseVersion(PsiBuilder b, int l ) {
-		// here is the logic when we allows to use barewords as strings
-		IElementType tokenType = b.getTokenType();
-
-		if(tokenType == PERL_NUMBER_VERSION || tokenType == PERL_NUMBER)
-		{
-			assert b instanceof PerlBuilder;
-			((PerlBuilder) b).setLastParsedVersion(b.getTokenText());
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(PERL_VERSION);
-
-			return true;
-		}
-
-		return false;
-	}
-
-	protected static PerlCodeBlockState getCurrentBlockState(PsiBuilder b)
-	{
-		assert b instanceof PerlBuilder;
-		return ((PerlBuilder) b).getCurrentBlockState();
-	}
-
-
-	public static boolean isBareword(IElementType tokenType)
-	{
-		return tokenType == PERL_KEYWORD || tokenType == PERL_OPERATOR_UNARY || tokenType == PERL_BLOCK_NAME;
 	}
 
 }
