@@ -58,44 +58,44 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 //					PerlArrayUtil.isBuiltIn(element.getText()),
 //					false);
 //		}
-		if( elementType == PERL_PACKAGE )
+//		if( elementType == PERL_PACKAGE )
+//		{
+//			String packageName = element.getText();
+//			PerlPackageUtil.PACKAGE_TYPE packageType = PerlPackageUtil.getPackageType(packageName);
+//
+//			String message = packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED ?
+//					"Package "+packageName+" is marked as deprecated and may be removed in future perl versions"
+//					: null;
+//
+//			colorize(
+//					holder.createInfoAnnotation(element, message),
+//					packageType == PerlPackageUtil.PACKAGE_TYPE.PRAGMA ? PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA: PerlSyntaxHighlighter.PERL_PACKAGE,
+//					packageType != null,
+//					packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED);
+//
+//		}
+		//else
+		if( elementType == PERL_STRING_CONTENT)
 		{
-			String packageName = element.getText();
-			PerlPackageUtil.PACKAGE_TYPE packageType = PerlPackageUtil.getPackageType(packageName);
-
-			String message = packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED ?
-					"Package "+packageName+" is marked as deprecated and may be removed in future perl versions"
-					: null;
-
-			colorize(
-					holder.createInfoAnnotation(element, message),
-					packageType == PerlPackageUtil.PACKAGE_TYPE.PRAGMA ? PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA: PerlSyntaxHighlighter.PERL_PACKAGE,
-					packageType != null,
-					packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED);
-
-		}
-		else if( elementType == PERL_STRING_CONTENT)
-		{
-			PsiElement quoteElement = element.getParent().getFirstChild();
-			String quoteElementText = quoteElement.getText();
+			IElementType parentType = element.getParent().getNode().getElementType();
 
 			Annotation annotation = holder.createInfoAnnotation(element, null);
 
-			if( quoteElement == element || "'".equals(quoteElementText) || "q".equals(quoteElementText) || "qw".equals(quoteElementText)) // bareword string, single quoted string
+			if( parentType == STRING_SQ) // bareword string, single quoted string
 			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
 			}
-			else if( "\"".equals(quoteElementText) || "qq".equals(quoteElementText)) // interpolated
+			else if(  parentType == STRING_DQ ||  parentType == STRING_LIST) // interpolated
 			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
 			}
-			else if( "`".equals(quoteElementText) || "qx".equals(quoteElementText)) // executable
+			else if(  parentType == STRING_XQ ) // executable
 			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
 			}
 			else
 			{
-				throw new Error("Unable to detect string type");
+		//		throw new Error("Unable to detect string type");
 			}
 		}
 		else if( elementType == PERL_FUNCTION)

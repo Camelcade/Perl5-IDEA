@@ -5,6 +5,7 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,7 +74,6 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		popState();
 	}
-
 
 	/**
 	 *  States stack

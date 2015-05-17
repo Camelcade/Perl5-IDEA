@@ -85,7 +85,12 @@
 
     // custom tokens
     PERL_FUNCTION_ATTRIBUTE="PERL_FUNCTION_ATTRIBUTE"
+
     PERL_PACKAGE="PERL_PACKAGE"
+    PERL_PACKAGE_BUILT_IN="PERL_PACKAGE_BUILT_IN"
+    PERL_PACKAGE_DEPRECATED="PERL_PACKAGE_DEPRECATED"
+    PERL_PACKAGE_PRAGMA="PERL_PACKAGE_PRAGMA"
+
     PERL_METHOD="PERL_METHOD"
     PERL_FUNCTION="PERL_FUNCTION"
     PERL_HANDLE="PERL_HANDLE"
@@ -107,7 +112,8 @@ block ::= "{" file_items "}" //{pin=1} // should not be used anywhere, injected 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) PERL_SEMI*
 
 // package keyword
-namespace ::= 'package' <<parsePerlPackage>>
+namespace ::= "package" perl_package [perl_version] (block_safe | PERL_SEMI <<packagePseudoBlock>>)
+
 private namespace_content ::= namespace_element *  //{recoverWhile=recover_namespace}     // injected and wrapped by parsePackageContents
 
 named_block ::= PERL_BLOCK_NAME block_safe
@@ -161,14 +167,14 @@ private statement_variation ::=
     | sub_declaration
     | expr
 
-sub_definition ::= 'sub' <<parseSubDefinition>>
+sub_definition ::= "sub" perl_method sub_definition_parameters ? block_safe
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= 'sub' <<parseSubDeclaration>>
+sub_declaration ::= "sub" perl_method sub_declaration_parameters
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= "(" [<<parseSubPrototype>>] ")"
@@ -200,8 +206,12 @@ foreach_statement_modifier ::=  'foreach' expr  // actually @LIST
 when_statement_modifier ::= 'when' expr
 
 
-use_statement ::= 'use' <<parseUseStatement>>
-no_statement ::= 'no' <<parseNoStatement>>
+use_statement ::= 'use' use_no_parameters
+no_statement ::= 'no' use_no_parameters
+private use_no_parameters ::= use_module_parameters | use_version_parameters
+use_module_parameters ::= perl_package [perl_version] [expr];
+use_version_parameters ::= perl_version;
+
 
 undef_term ::= "undef" variable ?
 
@@ -263,7 +273,7 @@ term_expr ::=
     | function_call
     | rightward_call
 
-rightward_call ::= callable <<parseCallParameters>> // <<parseRightwardCallParameters>>
+rightward_call ::= callable <<parseCallParameters>>
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
 
@@ -330,7 +340,7 @@ private close_arguments ::= perl_handle
 
 sort_term ::= 'sort' ( '(' sort_op_arguments ')'| sort_op_arguments )
 private sort_op_arguments ::=
-    <<parseBarewordFunction PERL_FUNCTION>> expr
+    perl_function expr
     | block_safe expr
     | scalar_expr expr
     | expr
@@ -473,16 +483,17 @@ scalar_call ::= scalar_variable ["(" [expr] ")"]
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
-callable ::= <<resetLastCallable>> (
-    referencable_method
-    | <<guessBarewordCallable>>
-)
+callable ::= perl_method | referencable_method
+//<<resetLastCallable>> (
+//
+//    |
+//)
 
 private referencable_expr ::= referencable_method | scalar_expr
 private referencable_method ::= '&'
     (
-        <<parseBarewordPackageFunction>>
-        | "{"<<parseBarewordPackageFunction>>"}"
+        perl_method
+        | "{"perl_method"}"
         | "{"expr"}"
         | scalar
     )
@@ -492,7 +503,6 @@ private referencable_method ::= '&'
 label_declaration ::= label ":" // do we need to change tokentype?
 label ::= PERL_BAREWORD
 private perl_version ::= <<parseVersion>>
-private perl_package ::= <<parseBarewordPackage>>
 private perl_handle ::= <<parseBarewordHandle>> | "{" scalar_expr "}" | <<parseExpressionLevel 21>>
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
@@ -505,11 +515,26 @@ private scalar_constant ::=
 private array_constant ::=
     string_list
 
-string ::= string_quoted | multiline_marker | PERL_STRING_CONTENT
-private string_quoted ::= ['qq' | 'qx' | 'q'] PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
-private multiline_marker ::= '<<' (string | PERL_STRING_CONTENT)
+private string ::= string_sq | string_dq | string_xq
 
-private string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
+private string_quoted ::= PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
+string_dq ::=
+    "\"" PERL_STRING_CONTENT "\""
+     | "qq" string_quoted
+     | '<<' string_dq
+
+string_sq ::=
+    "'" PERL_STRING_CONTENT "'"
+    | "q" string_quoted
+    | PERL_STRING_CONTENT
+     | '<<' string_sq
+
+string_xq ::=
+    "`" PERL_STRING_CONTENT "`"
+    | "qx" string_quoted
+    | '<<' string_xq
+
+string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 lexical_variable ::= scalar_variable | array_variable | hash_variable
@@ -532,5 +557,7 @@ glob_variable ::=
 
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
-
 private bareword_any ::= PERL_BAREWORD | PERL_KEYWORD
+private perl_package ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+private perl_function ::= PERL_FUNCTION
+private perl_method ::= [perl_package ['->']] perl_function

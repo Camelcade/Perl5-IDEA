@@ -252,6 +252,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
+	public static boolean packagePseudoBlock(PsiBuilder b, int l)
+	{
+		((PerlBuilder) b).pushCodeBlockState(null);
+		PerlParser.namespace_content(b, l);
+		((PerlBuilder) b).popCodeBlockState(null);
+		return true;
+	}
+
 	/**
 	 * Parses perl package definition, creates namespace in builder, procesing content in scope
 	 * @param b	PerlBuilder

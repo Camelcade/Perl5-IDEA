@@ -1,5 +1,6 @@
 package com.perl5.lang.perl.util;
 
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 import java.util.*;
@@ -9,27 +10,20 @@ import java.util.*;
  */
 public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 {
-	public enum PACKAGE_TYPE
-	{
-		NORMAL,
-		PRAGMA,
-		DEPRECATED
-	}
-
-	protected static final HashMap<String,PACKAGE_TYPE> BUILT_IN_MAP = new HashMap<String,PACKAGE_TYPE>();
+	protected static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
 
 	static{
 		for( String packageName: BUILT_IN )
 		{
-			BUILT_IN_MAP.put(packageName, PACKAGE_TYPE.NORMAL);
+			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_BUILT_IN);
 		}
 		for( String packageName: BUILT_IN_PRAGMA )
 		{
-			BUILT_IN_MAP.put(packageName, PACKAGE_TYPE.PRAGMA);
+			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_PRAGMA);
 		}
 		for( String packageName: BUILT_IN_DEPRECATED )
 		{
-			BUILT_IN_MAP.put(packageName, PACKAGE_TYPE.DEPRECATED);
+			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_DEPRECATED);
 		}
 	}
 
@@ -38,9 +32,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return BUILT_IN_MAP.containsKey(variable.replaceFirst("::$", ""));
 	}
 
-	public static PACKAGE_TYPE getPackageType(String variable)
+	public static IElementType getPackageType(String variable)
 	{
-		return BUILT_IN_MAP.get(variable.replaceFirst("::$", ""));
+		IElementType packageType = BUILT_IN_MAP.get(variable.replaceFirst("::$", ""));
+		return packageType == null ? PERL_PACKAGE : packageType;
 	}
 
 //
