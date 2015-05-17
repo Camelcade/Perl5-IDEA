@@ -226,7 +226,18 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_LABEL_DEFINITION>
 {
-    {BAREWORD} {endCustomBlock(); return trenarCounter > 0 ? PerlFunctionUtil.getFunctionType(yytext().toString()) : PERL_LABEL;}
+    {BAREWORD} {
+        if( trenarCounter > 0 )
+        {
+            endCustomBlock();
+            return PerlFunctionUtil.getFunctionType(yytext().toString());
+        }
+        else
+            return PERL_LABEL;
+    }
+    ":" {endCustomBlock(); return PERL_COLON;}
+    {NEW_LINE}   {return processNewLine();}
+    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
 }
 
 // exclusive
