@@ -74,7 +74,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED);
 
 		}
-		else if( elementType == PERL_STRING)
+		else if( elementType == PERL_STRING_CONTENT)
 		{
 			PsiElement quoteElement = element.getParent().getFirstChild();
 			String quoteElementText = quoteElement.getText();

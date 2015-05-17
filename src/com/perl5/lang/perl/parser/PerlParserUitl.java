@@ -3,16 +3,12 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlBuilder;
 import com.perl5.lang.perl.util.*;
-
-import java.util.ArrayList;
 
 /**
  * Created by hurricup on 01.05.2015.
@@ -168,16 +164,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
  		String methodName = ((PerlBuilder) b).getLastCallableMethod();
 		String packageName = ((PerlBuilder) b).getLastCallablePackage();
 
-		if( methodName == null)
+//		if( methodName == null) // not working on scalar calling, we s
 			// can't happen
-			return false;
+//			return false;
 //			throw new Error("No method captured, smth is wrong");
 //		else if(packageName == null) // method from unknown package
 //		{
 //			parseExpressionLevel(b,l,2);
 //		}
-		else // method and package are known
-		{
+//		else // method and package are known
+//		{
 			PsiBuilder.Marker m = b.mark();
 			boolean r = PerlParser.block(b,l);
 			if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
@@ -186,7 +182,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				m.drop();
 
 			parseExpressionLevel(b,l,2); // nothing below comma
-		}
+//		}
 		return true;
 	}
 
@@ -340,7 +336,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 
 		// ->method
-		if( prevTokenType == PERL_DEREFERENCE && isBareword(tokenType) && parseBarewordFunction(b,l,PERL_METHOD))
+		if( prevTokenType == PERL_DEREFERENCE && isBareword(tokenType) && parseBarewordPackageFunction(b,l))
 		{
 			return true;
 		}
@@ -348,8 +344,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		{
 			if (nextTokenType == PERL_ARROW_COMMA) // string =>
 				return false;
-			else  if( "SUPER".equals(b.getTokenText()) && parseBarewordPackageFunctionCall(b,l) )
-				return true;
 			else if(isBareword(nextTokenType) && b.lookAhead(2) == PERL_DEPACKAGE && !PerlFunctionUtil.isBuiltIn(b.getTokenText()))
 				return parseBarewordFunction(b, l, PERL_METHOD) && parseBarewordPackage(b, l);
 			else if(nextTokenType == PERL_DEPACKAGE )
@@ -360,11 +354,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				{
 					m.drop();
 					consumeToken(b,PERL_DEREFERENCE);
-					return parseBarewordFunction(b,l,PERL_METHOD);
+					return parseBarewordFunction(b,l,PERL_METHOD) || PerlParser.scalar_variable(b,l);
 				}
 
 				m.rollbackTo();
-				return parseBarewordPackageFunctionCall(b,l);
+				return parseBarewordPackageFunction(b, l);
 
 			}
 			else
@@ -462,35 +456,32 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean parseBarewordPackageFunctionCall(PsiBuilder b, int l) {
+	public static boolean parseBarewordPackageFunction(PsiBuilder b, int l) {
 
 		assert b instanceof PerlBuilder;
-		if(isBareword(b.getTokenType()) && b.lookAhead(1) == PERL_DEPACKAGE && isBareword(b.lookAhead(2)))
+		if(isBareword(b.getTokenType()))
 		{
-			PsiBuilder.Marker m = b.mark();
-			StringBuilder packageName = new StringBuilder("");
-
-			while(
-					b.lookAhead(3) == PERL_DEPACKAGE && isBareword(b.lookAhead(4))
-					)
+			if(  b.lookAhead(1) == PERL_DEPACKAGE ) // got package
 			{
-				packageName.append(b.getTokenText());
-				b.advanceLexer();
-				packageName.append(b.getTokenText());
-				b.advanceLexer();
+				PsiBuilder.Marker m = b.mark();
+				StringBuilder packageName = new StringBuilder("");
+
+				while (	b.lookAhead(1) == PERL_DEPACKAGE )
+				{
+					packageName.append(b.getTokenText());
+					b.advanceLexer();
+					packageName.append(b.getTokenText());
+					b.advanceLexer();
+				}
+
+				m.collapse(PERL_PACKAGE);
+
+				((PerlBuilder) b).setLastCallablePackage(packageName.toString());
 			}
 
-			packageName.append(b.getTokenText());
-
-			b.advanceLexer(); // package rest
-			b.advanceLexer(); // depackage
-
-			m.collapse(PERL_PACKAGE);
-
-			((PerlBuilder) b).setLastCallablePackage(packageName.toString());
 			((PerlBuilder) b).setLastCallableMethod(b.getTokenText());
 
-			m = b.mark();
+			PsiBuilder.Marker m = b.mark();	// @todo here can be not only bareword, but scalar expression
 			b.advanceLexer();
 			m.collapse(PERL_METHOD);
 
@@ -520,7 +511,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(PERL_STRING);
+			m.collapse(PERL_STRING_CONTENT);
 
 			return true;
 		}
@@ -533,6 +524,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 * @param b
 	 * @param l
 	 * @return
+	 * @todo this should be done in lexer
 	 */
 	public static boolean parseBarewordStringMinus(PsiBuilder b, int l ) {
 		assert b instanceof PerlBuilder;
@@ -543,7 +535,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer();
 			getStringsTrap(b).capture("-" + b.getTokenText());
 			b.advanceLexer();
-			m.collapse(PERL_STRING);
+			m.collapse(PERL_STRING_CONTENT);
 			return true;
 		}
 

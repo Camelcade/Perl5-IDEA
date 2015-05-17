@@ -61,7 +61,7 @@
     PERL_REGEX_MODIFIER="PERL_REGEX_MODIFIER"
     PERL_REGEX_TOKEN="PERL_REGEX_TOKEN"
 
-    PERL_STRING="PERL_STRING"
+//    PERL_STRING="PERL_STRING"
     PERL_STRING_CONTENT="PERL_STRING_CONTENT"
 
     PERL_BAREWORD="PERL_BAREWORD"
@@ -290,7 +290,7 @@ named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
 private named_undry_expr_defined ::= 'defined' !"(" [scalar_expr]
 private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" scalar_expr
 
-filetest_expr ::= PERL_OPERATOR_FILETEST (<<parseBarewordHandle>> | expr )
+filetest_expr ::= PERL_OPERATOR_FILETEST [(<<parseBarewordHandle>> | expr )]
 
 compare_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
 equal_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
@@ -458,7 +458,7 @@ private glob ::=
     | glob_variable                    // hash as is
 
 private nested_element ::=
-    "{" PERL_BAREWORD  "}"
+    "{" bareword_any  "}"
     | "{" expr "}"
     | "[" expr "]"
 
@@ -480,11 +480,11 @@ callable ::= <<resetLastCallable>> (
 )
 
 private referencable_expr ::= referencable_method | scalar_expr
-
 private referencable_method ::= '&'
     (
-        <<guessBarewordCallable>>
-        | {expr}
+        <<parseBarewordPackageFunction>>
+        | "{"<<parseBarewordPackageFunction>>"}"
+        | "{"expr"}"
         | scalar
     )
 
@@ -533,3 +533,5 @@ glob_variable ::=
 
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
+
+private bareword_any ::= PERL_BAREWORD | PERL_KEYWORD

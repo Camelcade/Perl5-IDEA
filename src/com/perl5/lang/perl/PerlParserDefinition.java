@@ -34,7 +34,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	public static final TokenSet COMMENTS = TokenSet.create(PERL_COMMENT, PERL_COMMENT_BLOCK, PERL_POD, PERL_STRING_MULTILINE,PERL_STRING_MULTILINE_END);
 	public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES,COMMENTS);
 
-	public static final TokenSet LITERALS = TokenSet.create(PERL_STRING);
+	public static final TokenSet LITERALS = TokenSet.create(PERL_STRING_CONTENT);
 
 	public static final IStubFileElementType PERL_FILE = new IStubFileElementType("Perl5", PerlLanguage.INSTANCE);
 
