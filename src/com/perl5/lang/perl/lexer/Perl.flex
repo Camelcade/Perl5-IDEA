@@ -194,7 +194,7 @@ TRANS_MODIFIERS = [cdsr]
 
 %xstate LEX_BAREWORD_BRACED
 %xstate LEX_BAREWORD_STRING_COMMA
-%xstate LEX_SURE_PACKAGE
+%xstate LEX_SURE_PACKAGE, LEX_SURE_PACKAGE_PACKAGE
 %xstate LEX_PACKAGE_METHOD_CALL
 %xstate LEX_SUPER_METHOD_CALL
 %xstate LEX_MAIN_FUNCTION_CALL
@@ -316,15 +316,20 @@ TRANS_MODIFIERS = [cdsr]
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
 }
 
+<LEX_SURE_PACKAGE_PACKAGE>
+{
+   {PERL_PACKAGE_SURE} {endCustomBlock();return PerlPackageUtil.getPackageType(yytext().toString());}
+
+   {NEW_LINE}   {return processNewLine();}
+   {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+}
+
+
 // exclusive
 <LEX_SURE_PACKAGE>
 {
-    {PRE_PACKAGE_SURE}|"require"    {return PERL_KEYWORD;}
-    {PERL_PACKAGE_SURE} {endCustomBlock();return PerlPackageUtil.getPackageType(yytext().toString());}
-
-    {NEW_LINE}   {return processNewLine();}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-}
+    {PRE_PACKAGE_SURE}|"require"    {yybegin(LEX_SURE_PACKAGE_PACKAGE);return PERL_KEYWORD;}
+ }
 
 // exclusive
 <LEX_BAREWORD_STRING_COMMA>
