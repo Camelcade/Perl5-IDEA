@@ -438,7 +438,7 @@ private glob_item_ref_variant ::=
 
 private variable ::= scalar | array | hash | glob
 
-private array ::=
+array ::=
     PERL_SIGIL_ARRAY scalar       // scalar dereference
     | PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
     | array_variable '[' expr ']'              // array slice
@@ -446,12 +446,12 @@ private array ::=
     | array_variable
     | array_constant
 
-private hash ::=
+hash ::=
     PERL_SIGIL_HASH scalar       // scalar dereference wo braces
     | PERL_SIGIL_HASH '{' expr '}'      // hash dereference w braces
     | hash_variable                    // hash as is
 
-private scalar ::=
+scalar ::=
     PERL_SIGIL_SCALAR * scalar_variable nested_element ?
     | PERL_SIGIL_SCALAR + "{" expr "}"
     | scalar_variable nested_element ? // some special variables are started from sigil
@@ -461,7 +461,7 @@ private scalar ::=
     | PERL_SCALAR_INDEX
     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
 
-private glob ::=
+glob ::=
     "*" scalar       // scalar dereference wo braces
     | "*"{expr}     // @todo we need to colorize this as glob
     | glob_variable                    // hash as is
@@ -538,21 +538,21 @@ string_xq ::=
 string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
-lexical_variable ::= scalar_variable | array_variable | hash_variable
+private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-scalar_variable ::=
+private scalar_variable ::=
     PERL_SCALAR
     | PERL_SCALAR_BUILT_IN
 
-array_variable ::=
+private array_variable ::=
     PERL_ARRAY
     | PERL_ARRAY_BUILT_IN
 
-hash_variable ::=
+private hash_variable ::=
     PERL_HASH
     | PERL_HASH_BUILT_IN
 
-glob_variable ::=
+private glob_variable ::=
     PERL_GLOB
     | PERL_GLOB_BUILT_IN
 

@@ -38,7 +38,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	static{
 		for( String builtIn: BUILT_IN )
 		{
-			BUILT_IN_MAP.put(builtIn, ARRAY_VARIABLE);
+			BUILT_IN_MAP.put(builtIn, PERL_ARRAY_BUILT_IN);
 		}
 	}
 

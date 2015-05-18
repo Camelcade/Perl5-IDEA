@@ -12,7 +12,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
@@ -34,30 +33,38 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
 		IElementType elementType = element.getNode().getElementType();
-//		if( elementType == SCALAR_VARIABLE )
+//		if( elementType == SCALAR )
 //		{
 //			colorize(
 //					holder.createInfoAnnotation(element, null),
 //					PerlSyntaxHighlighter.PERL_SCALAR,
-//					PerlScalarUtil.isBuiltIn(element.getText()),
+//                    false,
 //					false);
 //		}
-//		else if( elementType == HASH_VARIABLE )
+//		else if( elementType == HASH )
 //		{
 //			colorize(
 //					holder.createInfoAnnotation(element, null),
 //					PerlSyntaxHighlighter.PERL_HASH,
-//					PerlHashUtil.isBuiltIn(element.getText()),
+//                    false,
 //					false);
 //		}
-//		else if( elementType == ARRAY_VARIABLE )
-//		{
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					PerlSyntaxHighlighter.PERL_ARRAY,
-//					PerlArrayUtil.isBuiltIn(element.getText()),
-//					false);
-//		}
+//        else if( elementType == ARRAY )
+//        {
+//            colorize(
+//                    holder.createInfoAnnotation(element, null),
+//                    PerlSyntaxHighlighter.PERL_ARRAY,
+//                    false,
+//                    false);
+//        }
+//        else if( elementType == GLOB )
+//        {
+//            colorize(
+//                    holder.createInfoAnnotation(element, null),
+//                    PerlSyntaxHighlighter.PERL_GLOB,
+//                    false,
+//                    false);
+//        }
 //		if( elementType == PERL_PACKAGE )
 //		{
 //			String packageName = element.getText();
