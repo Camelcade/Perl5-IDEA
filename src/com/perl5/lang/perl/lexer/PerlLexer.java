@@ -589,7 +589,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	/**
 	 * Invoken on opening token, waiting for a newline
 	 */
-	public IElementType processMultilineOpener()
+	public IElementType processHeredocOpener()
 	{
 		String openToken = yytext().toString();
 		Matcher m = markerPattern.matcher(openToken);
@@ -599,13 +599,13 @@ public class PerlLexer extends PerlLexerGenerated{
 		}
 
 		pushState();
-		yybegin(LEX_MULTILINE_WAITING);
+		yybegin(LEX_HEREDOC_WAITING);
 		yypushback(openToken.length() - 2);
 
 		return PERL_OPERATOR;
 	}
 
-	public boolean waitingMultiline(){return yystate() == LEX_MULTILINE_WAITING;}
+	public boolean waitingMultiline(){return yystate() == LEX_HEREDOC_WAITING;}
 
 	public IElementType processSemicolon()
 	{

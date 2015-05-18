@@ -148,10 +148,8 @@ PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~
 FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
 PERL_OPERATORS_FILETEST = {FILETEST} [^a-zA-Z0-9_]
 
-MULTILINE_OPENER_SQ = "<<"{WHITE_SPACE}*\'{ANYWORD}+\'
-MULTILINE_OPENER_DQ = "<<"{WHITE_SPACE}*\"{ANYWORD}+\"
-MULTILINE_OPENER_DX = "<<"{WHITE_SPACE}*\`{ANYWORD}+\`
-MULTILINE_OPENER_DQ_BARE = "<<"{WHITE_SPACE}*{BAREWORD}
+HEREDOC_MARKER = [a-zA-Z0-9_]+
+HEREDOC_OPENER = "<<"{WHITE_SPACE}* (\'{HEREDOC_MARKER}\' | \"{HEREDOC_MARKER}\" | \`{HEREDOC_MARKER}\` {HEREDOC_MARKER})
 
 POD_OPEN         = \={BAREWORD}{FULL_LINE}
 
@@ -179,7 +177,7 @@ PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 %state LEX_BAREWORD_STRING
 %state LEX_CODE
 
-%state LEX_MULTILINE_WAITING
+%state LEX_HEREDOC_WAITING
 
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
 %xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS, LEX_QUOTE_LIKE_LIST_CLOSER
@@ -223,6 +221,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_HANDLE>
 {
     {BAREWORD} {yybegin(LEX_HANDLE_HANDLE);return PERL_FUNCTION_BUILT_IN;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -232,6 +231,7 @@ TRANS_MODIFIERS = [cdsr]
     {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -239,6 +239,7 @@ TRANS_MODIFIERS = [cdsr]
 {
     {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
     "<" {return PERL_LANGLE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -249,6 +250,7 @@ TRANS_MODIFIERS = [cdsr]
 
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -259,6 +261,7 @@ TRANS_MODIFIERS = [cdsr]
 
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -270,6 +273,7 @@ TRANS_MODIFIERS = [cdsr]
 
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -287,6 +291,7 @@ TRANS_MODIFIERS = [cdsr]
     ":" {endCustomBlock(); return PERL_COLON;}
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -294,6 +299,7 @@ TRANS_MODIFIERS = [cdsr]
 {
     "::" {return PERL_PACKAGE_BUILT_IN;}
     {BAREWORD} {endCustomBlock(); return PERL_FUNCTION;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -304,6 +310,7 @@ TRANS_MODIFIERS = [cdsr]
     {BAREWORD} {endCustomBlock();return PERL_FUNCTION;}
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -314,7 +321,9 @@ TRANS_MODIFIERS = [cdsr]
     {PERL_PACKAGE_SURE} {return PerlPackageUtil.getPackageType(yytext().toString()); }
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
+
 
 <LEX_SURE_PACKAGE_PACKAGE>
 {
@@ -322,6 +331,7 @@ TRANS_MODIFIERS = [cdsr]
 
    {NEW_LINE}   {return processNewLine();}
    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 
@@ -329,12 +339,14 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_SURE_PACKAGE>
 {
     {PRE_PACKAGE_SURE}|"require"    {yybegin(LEX_SURE_PACKAGE_PACKAGE);return PERL_KEYWORD;}
- }
+    . {yypushback(1);endCustomBlock();break;}
+}
 
 // exclusive
 <LEX_BAREWORD_STRING_COMMA>
 {
     {BAREWORD_MINUS}   {endCustomBlock(); return PERL_STRING_CONTENT; }
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 
@@ -345,6 +357,7 @@ TRANS_MODIFIERS = [cdsr]
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     {BAREWORD}   {endCustomBlock();return PERL_STRING_CONTENT; }
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -510,10 +523,7 @@ TRANS_MODIFIERS = [cdsr]
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 
-{MULTILINE_OPENER_SQ}   {return processMultilineOpener();}
-{MULTILINE_OPENER_DQ}   {return processMultilineOpener();}
-{MULTILINE_OPENER_DQ_BARE}   {return processMultilineOpener();}
-{MULTILINE_OPENER_DX}   {return processMultilineOpener();}
+{HEREDOC_OPENER}   {return processHeredocOpener();}
 
 {QUOTE}         {return processStringOpener();}
 
