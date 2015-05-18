@@ -104,7 +104,7 @@ FILE_HANDLE_PREFIX_SYS = "sysopen" | "syswrite" | "sysseek" | "sysread"
 FILE_HANDLE_PREFIX = "open" | "close" | "read" | "write" | "say" | "print" | "printf" | "stat" | "ioctl" | "fcntl" | "lstat" | "truncate" | "tell" | "select" | "seek" | "getc" | "flock" | "fileno" | "eof" | "binmode"
 HANDLE_PREFIX = {DIR_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX_SYS}
 
-CAPTURE_HANDLE = {HANDLE_PREFIX} {EMPTY_SPACE}* "(" ? {EMPTY_SPACE}* {BAREWORD} [^\(:\-a-zA-Z0-9_]
+CAPTURE_HANDLE = {HANDLE_PREFIX} ({EMPTY_SPACE}+ | {EMPTY_SPACE}* "(" {EMPTY_SPACE}*) {BAREWORD} [^\(:\-a-zA-Z0-9_]
 CAPTURE_HANDLE_FILETEST = {FILETEST} {EMPTY_SPACE}+ {BAREWORD} [^\(:\-a-zA-Z0-9_]
 
 CAPTURE_MAIN_CALL = "::"{BAREWORD}
