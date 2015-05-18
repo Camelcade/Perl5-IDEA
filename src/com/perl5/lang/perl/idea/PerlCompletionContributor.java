@@ -6,7 +6,9 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -16,30 +18,31 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlCompletionContributor extends CompletionContributor
 {
+
 	// @todo implement some tree running for defined methods
 	public PerlCompletionContributor() {
-		extend(
-				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.ARRAY_VARIABLE).withLanguage(PerlLanguage.INSTANCE),
-				new CompletionProvider<CompletionParameters>() {
-					public void addCompletions(@NotNull CompletionParameters parameters,
-											   ProcessingContext context,
-											   @NotNull CompletionResultSet resultSet) {
+        extend(
+                CompletionType.BASIC,
+                PlatformPatterns.psiElement(PerlElementTypes.PERL_ARRAY).withLanguage(PerlLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull CompletionParameters parameters,
+                                               ProcessingContext context,
+                                               @NotNull CompletionResultSet resultSet) {
 
-						resultSet = resultSet.withPrefixMatcher("@"+resultSet.getPrefixMatcher().getPrefix());
-						for( String arrayName: PerlArrayUtil.BUILT_IN )
-						{
-							resultSet.addElement(LookupElementBuilder.create(arrayName));
-						}
-						resultSet.withPrefixMatcher("@");
+                        resultSet = resultSet.withPrefixMatcher("@"+resultSet.getPrefixMatcher().getPrefix());
+                        for( String arrayName: PerlArrayUtil.BUILT_IN )
+                        {
+                            resultSet.addElement(LookupElementBuilder.create(arrayName));
+                        }
+                        resultSet.withPrefixMatcher("@");
 
-					}
-				}
-		);
+                    }
+                }
+        );
 		//CamelHumpMatcher
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.SCALAR_VARIABLE).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.PERL_SCALAR).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
@@ -95,7 +98,7 @@ public class PerlCompletionContributor extends CompletionContributor
 		);
 		extend(
 				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.HASH_VARIABLE).withLanguage(PerlLanguage.INSTANCE),
+				PlatformPatterns.psiElement(PerlElementTypes.PERL_HASH).withLanguage(PerlLanguage.INSTANCE),
 				new CompletionProvider<CompletionParameters>() {
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
