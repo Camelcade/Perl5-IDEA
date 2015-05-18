@@ -14,7 +14,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 %%
 
 %class EmbeddedPerlLexer
-%abstract
+%implements EmbeddedPerlElementTypes, FlexLexer
 %unicode
 %public
 
@@ -23,23 +23,38 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 
 PERL_START = "<?"
 PERL_END = "?>"
-
-HTML_CODE = [^]*{PERL_START}
-PERL_CODE = [^]*{PERL_END}
+HTML_CODE = ~{PERL_START}
+PERL_CODE = ~{PERL_END}
 
 %state LEX_PERL_CODE
+%state LEX_OPEN_TOKEN
+%state LEX_CLOSE_TOKEN
+%xstate LEX_NO_OPENER
 
 %%
 
 <YYINITIAL>{
-    {PERL_END} {return DATA_TOKEN_CLOSE;}
-    {HTML_CODE} {yypushback(2);yybegin(LEX_PERL_CODE);return DATA_HTML;}
+    {HTML_CODE} {yypushback(2);yybegin(LEX_OPEN_TOKEN);return DATA_HTML;}
+    [^] {yybegin(LEX_NO_OPENER);yypushback(1);break;}
+}
+
+<LEX_NO_OPENER>
+{
+    [^]* {return DATA_HTML;}
+}
+
+<LEX_OPEN_TOKEN>
+{
+    {PERL_START} {yybegin(LEX_PERL_CODE);return DATA_TOKEN_OPEN;}
 }
 
 <LEX_PERL_CODE>{
-    {PERL_START} {return DATA_TOKEN_OPEN;}
-    {PERL_CODE} {yypushback(2);yybegin(YYINITIAL);return DATA_PERL;}
+    {PERL_CODE} {yypushback(2);yybegin(LEX_CLOSE_TOKEN);return DATA_PERL;}
 }
 
+<LEX_CLOSE_TOKEN>
+{
+    {PERL_END} {yybegin(YYINITIAL);return DATA_TOKEN_CLOSE;}
+}
 
 [^] {return TokenType.BAD_CHARACTER;}
