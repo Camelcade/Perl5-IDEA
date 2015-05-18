@@ -1,0 +1,29 @@
+{
+  parserClass="com.perl5.lang.eperl.parser.EmbeddedPerlParser"
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="EmbeddedPerl"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.perl5.lang.eperl.psi"
+//  psiImplPackage="com.perl5.lang.eperl.psi.impl"
+
+  elementTypeHolderClass="com.perl5.lang.eperl.lexer.EmbeddedPerlElementTypes"
+  elementTypeClass="com.perl5.lang.eperl.EmbeddedPerlElementType"
+  tokenTypeClass="com.perl5.lang.eperl.EmbeddedPerlTokenType"
+
+//  parserUtilClass="com.perl5.lang.eperl.parser.PerlParserUitl"
+//  psiImplUtilClass="com.perl5.lang.perl.psi.impl.PerlPsiImpUtil"
+
+  //elementTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
+//  tokenTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
+
+    tokens=[
+        DATA_TOKEN_OPEN="<?"
+        DATA_TOKEN_CLOSE="?>"
+        DATA_PERL="PERL"
+        DATA_HTML="HTML"
+    ]
+
+}
+
+private file ::= [DATA_HTML] (DATA_TOKEN_OPEN DATA_PERL DATA_TOKEN_CLOSE [DATA_HTML])*

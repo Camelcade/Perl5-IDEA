@@ -24,7 +24,7 @@ public class PerlLanguage extends Language
 {
 	public static final PerlLanguage INSTANCE = new PerlLanguage();
 
-	protected volatile ArrayList<VirtualFile> libPaths = null;
+//	protected volatile ArrayList<VirtualFile> libPaths = null;
 
 	public PerlLanguage() {
 		super("Perl5");
@@ -35,72 +35,72 @@ public class PerlLanguage extends Language
 		return true;
 	}
 
-    // @todo this should be in app component
-	public synchronized void initLibPaths(Project project)
-	{
-		libPaths = new ArrayList<VirtualFile>();
-
-		for( VirtualFile file : ProjectRootManager.getInstance(project).getContentRoots())
-		{
-			VirtualFile libFile = file.findFileByRelativePath("lib");
-			if(libFile != null)
-				libPaths.add(libFile);
-			else
-				libPaths.add(file);
-		}
-
-
-		try
-		{
-			Process p = Runtime.getRuntime().exec("perl");
-			BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-
-			out.write("print join \"\\n\", @INC\n");
-			out.write(4);
-			out.write("\n");
-			out.flush();
-
-			String line;
-			while( (line = in.readLine()) != null )
-			{
-				if( !".".equals(line) )
-					libPaths.add(LocalFileSystem.getInstance().findFileByPath(line));
-			}
-
-			out.close();
-			in.close();
-		}
-		catch( Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public synchronized PsiFile getPackagePsiFile(Project project, PerlPackageFile file)
-	{
-		if( libPaths == null )
-			initLibPaths(project);
-
-		String relPath = file.getFilename();
-		VirtualFile packageFile = null;
-
-		for( VirtualFile dir: libPaths)
-		{
-			packageFile = dir.findFileByRelativePath(relPath);
-			if( packageFile != null )
-				break;
-		}
-
-		if( packageFile == null)
-			return null;
-
-		return PsiManager.getInstance(project).findFile(packageFile);
-	}
-
-	public ArrayList<VirtualFile> getLibPaths()
-	{
-		return libPaths;
-	}
+//    // @todo this should be in app component
+//	public synchronized void initLibPaths(Project project)
+//	{
+//		libPaths = new ArrayList<VirtualFile>();
+//
+//		for( VirtualFile file : ProjectRootManager.getInstance(project).getContentRoots())
+//		{
+//			VirtualFile libFile = file.findFileByRelativePath("lib");
+//			if(libFile != null)
+//				libPaths.add(libFile);
+//			else
+//				libPaths.add(file);
+//		}
+//
+//
+//		try
+//		{
+//			Process p = Runtime.getRuntime().exec("perl");
+//			BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+//
+//			out.write("print join \"\\n\", @INC\n");
+//			out.write(4);
+//			out.write("\n");
+//			out.flush();
+//
+//			String line;
+//			while( (line = in.readLine()) != null )
+//			{
+//				if( !".".equals(line) )
+//					libPaths.add(LocalFileSystem.getInstance().findFileByPath(line));
+//			}
+//
+//			out.close();
+//			in.close();
+//		}
+//		catch( Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	public synchronized PsiFile getPackagePsiFile(Project project, PerlPackageFile file)
+//	{
+//		if( libPaths == null )
+//			initLibPaths(project);
+//
+//		String relPath = file.getFilename();
+//		VirtualFile packageFile = null;
+//
+//		for( VirtualFile dir: libPaths)
+//		{
+//			packageFile = dir.findFileByRelativePath(relPath);
+//			if( packageFile != null )
+//				break;
+//		}
+//
+//		if( packageFile == null)
+//			return null;
+//
+//		return PsiManager.getInstance(project).findFile(packageFile);
+//	}
+//
+//	public ArrayList<VirtualFile> getLibPaths()
+//	{
+//		return libPaths;
+//	}
 }
 
