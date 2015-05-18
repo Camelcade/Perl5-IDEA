@@ -88,10 +88,11 @@ PERL_ARRAY_BRACES = "@{" {BAREWORD} "}"
 PERL_GLOB = "*" {PERL_VARIABLE_NAME}
 PERL_GLOB_BRACES = "*{" {BAREWORD} "}"
 
-PRE_PACKAGE_SURE = "use" | "no" | "package" | "my" | "state" | "our" | "local"
+VARIABLE_DECLARATOR = "my" | "state" | "our" | "local"
+PRE_PACKAGE_SURE = "use" | "no" | "package" | {VARIABLE_DECLARATOR}
 PERL_PACKAGE_SURE = {BAREWORD} ("::" {BAREWORD}) *
 CAPTURE_SURE_PACKAGE = {PRE_PACKAGE_SURE}{EMPTY_SPACE}+{PERL_PACKAGE_SURE}
-CAPTURE_REQUIRE_PACKAGE = "require"{EMPTY_SPACE}+{PERL_PACKAGE_SURE}{EMPTY_SPACE}*[^(]
+CAPTURE_REQUIRE_PACKAGE = "require"{EMPTY_SPACE}+{PERL_PACKAGE_SURE}{EMPTY_SPACE}*[^\(:\-a-zA-Z0-9_]
 
 PERL_PACKAGE_CANONICAL = ({BAREWORD} "::")+
 PERL_PACKAGE_METHOD = {PERL_PACKAGE_CANONICAL} {BAREWORD}
@@ -103,8 +104,8 @@ FILE_HANDLE_PREFIX_SYS = "sysopen" | "syswrite" | "sysseek" | "sysread"
 FILE_HANDLE_PREFIX = "open" | "close" | "read" | "write" | "say" | "print" | "printf" | "stat" | "ioctl" | "fcntl" | "lstat" | "truncate" | "tell" | "select" | "seek" | "getc" | "flock" | "fileno" | "eof" | "binmode"
 HANDLE_PREFIX = {DIR_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX_SYS}
 
-CAPTURE_HANDLE = {HANDLE_PREFIX} {EMPTY_SPACE}* "(" ? {EMPTY_SPACE}* {BAREWORD} [^(:-]
-CAPTURE_HANDLE_FILETEST = {FILETEST} {EMPTY_SPACE}+ {BAREWORD} [^(:-]
+CAPTURE_HANDLE = {HANDLE_PREFIX} {EMPTY_SPACE}* "(" ? {EMPTY_SPACE}* {BAREWORD} [^\(:\-a-zA-Z0-9_]
+CAPTURE_HANDLE_FILETEST = {FILETEST} {EMPTY_SPACE}+ {BAREWORD} [^\(:\-a-zA-Z0-9_]
 
 CAPTURE_MAIN_CALL = "::"{BAREWORD}
 CAPTURE_METHOD_CALL = "->"{BAREWORD}
@@ -163,7 +164,7 @@ PERL_SYN_QUOTE_LIKE = {QUOTE_LIST_FUNCTIONS} | {QUOTE_FUNCTIONS} | {TRANS_FUNCTI
 PERL_SYN_INCLUDE = "use" | "require" | "no"
 PERL_SYN_BLOCK_OP = "do" | "eval"
 PERL_SYN_FLOW_CONTROL = "redo" | "next" | "last"
-PERL_SYN_DECLARE = "package" | "sub" | "my" | "our" | "local" | "state"
+PERL_SYN_DECLARE = "package" | "sub" | {VARIABLE_DECLARATOR}
 PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
 // "print" | "say" | "open"
 PERL_SYN_OTHER = "undef" | "grep" | "sort" | "map" | "close"
@@ -211,9 +212,11 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_HANDLE_HANDLE>
 {
     "(" {return PERL_LPAREN;}
+    {VARIABLE_DECLARATOR} {endCustomBlock();return PERL_KEYWORD;}
     {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
     {NEW_LINE}   {return processNewLine();}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
