@@ -17,7 +17,7 @@ public class EmbeddedPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterF
 	@NotNull
 	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
 	{
-		return new EmbeddedPerlHighlighter(project,virtualFile);
+		return new EmbeddedPerlSyntaxHighlighter();
 	}
 
 }

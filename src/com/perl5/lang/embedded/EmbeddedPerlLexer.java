@@ -31,7 +31,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
 
-		if( yystate() == LEX_HTML_BLOCK )
+		if( tokenStart < buffer.length() && yystate() == LEX_HTML_BLOCK )
 		{
 			setTokenStart(tokenStart);
 			if(tokenStart < buffer.length() - 1 && buffer.charAt(tokenStart) == '<' && buffer.charAt(tokenStart+1) == '?') // finishing html block

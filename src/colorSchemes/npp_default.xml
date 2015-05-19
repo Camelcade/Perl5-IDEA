@@ -42,18 +42,18 @@
     </option>
     <option name="PERL_DQ_STRING">
         <value>
-            <option name="FOREGROUND" value="A04040"/>
+            <option name="FOREGROUND" value="008000"/>
         </value>
     </option>
     <option name="PERL_DX_STRING">
         <value>
-            <option name="FOREGROUND" value="A04040"/>
+            <option name="FOREGROUND" value="008000"/>
             <option name="BACKGROUND" value="f0f0f0"/>
         </value>
     </option>
     <option name="PERL_SQ_STRING">
         <value>
-            <option name="FOREGROUND" value="808080"/>
+            <option name="FOREGROUND" value="008080"/>
         </value>
     </option>
     <option name="PERL_STRING">
