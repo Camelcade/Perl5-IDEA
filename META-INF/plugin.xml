@@ -41,6 +41,10 @@
 
       <lang.parserDefinition language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
       <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
+      <lang.fileViewProviderFactory language="Embedded Perl"
+                                    implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
+
+
 
       <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
       <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
