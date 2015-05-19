@@ -11,6 +11,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.perl5.PerlIcons;
+import com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +23,8 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
 			new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
 			new AttributesDescriptor("Block comment", PerlSyntaxHighlighter.PERL_COMMENT_BLOCK),
-			new AttributesDescriptor("POD block", PerlSyntaxHighlighter.PERL_POD),
+
+			new AttributesDescriptor("Embedding marker <? / ?>", EmbeddedPerlSyntaxHighlighter.EMBED_MARKER),
 
 			new AttributesDescriptor("Built-in decoration", PerlSyntaxHighlighter.PERL_BUILT_IN),
 			new AttributesDescriptor("Deprecation decoration", PerlSyntaxHighlighter.PERL_DEPRECATED),

@@ -98,9 +98,10 @@
     PERL_BLOCK_NAME="PERL_BLOCK_NAME"
     PERL_LABEL="PERL_LABEL"
 
-    // inline HTML
+    // inline HTML support
     TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
     TEMPLATE_BLOCK_SQL="TEMPLATE_BLOCK_SQL"
+    EMBED_MARKER="EMBED_MARKER"
   ]
 
     extends(".*expr")=expr
