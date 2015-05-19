@@ -31,10 +31,10 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 {
 
 	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT);
-	public static final TokenSet COMMENTS = TokenSet.create(PERL_COMMENT, PERL_COMMENT_BLOCK, PERL_POD, PERL_STRING_MULTILINE,PERL_STRING_MULTILINE_END);
+	public static final TokenSet COMMENTS = TokenSet.create(PERL_COMMENT, PERL_COMMENT_BLOCK, PERL_POD, PERL_STRING_MULTILINE,PERL_STRING_MULTILINE_END,BLOCK_HTML);
 	public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES,COMMENTS);
 
-	public static final TokenSet LITERALS = TokenSet.create(PERL_STRING_CONTENT);
+	public static final TokenSet LITERALS = TokenSet.create(PERL_STRING_CONTENT,PERL_STRING_MULTILINE);
 
 	public static final IStubFileElementType PERL_FILE = new IStubFileElementType("Perl5", PerlLanguage.INSTANCE);
 

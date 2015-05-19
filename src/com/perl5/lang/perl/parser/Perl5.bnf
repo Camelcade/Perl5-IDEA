@@ -98,8 +98,8 @@
     PERL_BLOCK_NAME="PERL_BLOCK_NAME"
     PERL_LABEL="PERL_LABEL"
 
-    // this is for embedded perl
-    PERL_TEMPLATE_DATA="PERL_TEMPLATE_DATA"
+    // inline HTML
+    BLOCK_HTML="BLOCK_HTML"
   ]
 
     extends(".*expr")=expr
