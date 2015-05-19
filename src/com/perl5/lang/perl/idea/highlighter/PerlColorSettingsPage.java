@@ -29,7 +29,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Built-in decoration", PerlSyntaxHighlighter.PERL_BUILT_IN),
 			new AttributesDescriptor("Deprecation decoration", PerlSyntaxHighlighter.PERL_DEPRECATED),
 
-			new AttributesDescriptor("Funciton", PerlSyntaxHighlighter.PERL_FUNCTION),
+			new AttributesDescriptor("Function", PerlSyntaxHighlighter.PERL_FUNCTION),
 			new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
 
 			new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),
@@ -80,12 +80,6 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 				"use DTL::Fast::Template;\n" +
 				"\n" +
 				"my $date = `date`;\n" +
-				"\n" +
-				"=pod\n" +
-				"\n" +
-				"=head1 Some pod doc\n" +
-				"\n" +
-				"=cut\n" +
 				"\n" +
 				"# This is a test comment\n" +
 				"sub new\n" +
