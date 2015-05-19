@@ -1,11 +1,8 @@
-package com.perl5.lang.eperl;
+package com.perl5.lang.embedded;
 
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.files.PerlFileTypePackage;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -22,12 +19,12 @@ public class EmbeddedPerlPsiFile extends PsiFileBase
 	@NotNull
 	@Override
 	public FileType getFileType() {
-		return PerlFileTypePackage.INSTANCE;
+		return EmbeddedPerlFileType.INSTANCE;
 	}
 
 	@Override
 	public String toString() {
-		return "Perl Package File";
+		return "Embedded Perl file";
 	}
 
 	@Override

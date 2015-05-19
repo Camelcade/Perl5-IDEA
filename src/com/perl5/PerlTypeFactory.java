@@ -2,7 +2,7 @@ package com.perl5;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
-import com.perl5.lang.eperl.EmbeddedPerlFileType;
+import com.perl5.lang.embedded.EmbeddedPerlFileType;
 import com.perl5.lang.perl.files.PerlFileTypePackage;
 import com.perl5.lang.perl.files.PerlFileTypeScript;
 import com.perl5.lang.pod.PodFileType;
@@ -20,5 +20,6 @@ public class PerlTypeFactory extends FileTypeFactory
 		fileTypeConsumer.consume(PodFileType.INSTANCE, "pod");
 		fileTypeConsumer.consume(XSFileType.INSTANCE, "xs");
 		fileTypeConsumer.consume(EmbeddedPerlFileType.INSTANCE, "thtml");
+		fileTypeConsumer.consume(EmbeddedPerlFileType.INSTANCE, "phtml");
 	}
 }

@@ -99,7 +99,8 @@
     PERL_LABEL="PERL_LABEL"
 
     // inline HTML
-    BLOCK_HTML="BLOCK_HTML"
+    TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
+    TEMPLATE_BLOCK_SQL="TEMPLATE_BLOCK_SQL"
   ]
 
     extends(".*expr")=expr

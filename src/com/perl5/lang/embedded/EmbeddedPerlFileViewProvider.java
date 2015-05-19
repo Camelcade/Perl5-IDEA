@@ -1,4 +1,4 @@
-package com.perl5.lang.eperl;
+package com.perl5.lang.embedded;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
@@ -9,7 +9,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +24,7 @@ public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFil
 {
 
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, PerlLanguage.INSTANCE, EmbeddedPerlLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, EmbeddedPerlLanguage.INSTANCE));
 
 
 	public EmbeddedPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical) {
@@ -51,7 +50,7 @@ public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFil
 			// final PsiFileImpl file = (PsiFileImpl)LanguageParserDefinitions.INSTANCE.forLanguage(lang).createFile(this);
 
 			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(PerlElementTypes.PERL_TEMPLATE_DATA);
+			file.setContentElementType(PerlElementTypes.TEMPLATE_BLOCK_HTML);
 			return file;
 		}
 

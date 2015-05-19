@@ -39,7 +39,8 @@
       <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
       <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
 
-      <lang.parserDefinition language="Embedded Perl" implementationClass="com.perl5.lang.eperl.EmbeddedPerlParserDefinition"/>
+      <lang.parserDefinition language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
+      <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
 
       <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
       <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>

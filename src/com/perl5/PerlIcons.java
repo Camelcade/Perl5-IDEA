@@ -12,4 +12,5 @@ public class PerlIcons
 	public static final Icon POD_FILE = IconLoader.getIcon("/com/perl5/icons/podicon.png");
 	public static final Icon SCRIPT_FILE = IconLoader.getIcon("/com/perl5/icons/perl5classic.png");
 	public static final Icon XS_FILE = IconLoader.getIcon("/com/perl5/icons/xsicon.png");
+	public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/com/perl5/icons/embeddedperl.png");
 }

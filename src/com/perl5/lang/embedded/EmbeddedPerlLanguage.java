@@ -1,9 +1,7 @@
-package com.perl5.lang.eperl;
+package com.perl5.lang.embedded;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
-import com.perl5.lang.perl.PerlLanguage;
-import org.apache.batik.svggen.ImageCacher;
 
 /**
  * Created by hurricup on 18.05.2015.

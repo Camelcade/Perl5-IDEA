@@ -1,4 +1,4 @@
-package com.perl5.lang.eperl;
+package com.perl5.lang.embedded;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
@@ -41,7 +41,7 @@ public class EmbeddedPerlFileType extends LanguageFileType
 	@Nullable
 	@Override
 	public Icon getIcon() {
-		return PerlIcons.PM_FILE;
+		return PerlIcons.EMBEDDED_PERL_FILE;
 	}
 
 }

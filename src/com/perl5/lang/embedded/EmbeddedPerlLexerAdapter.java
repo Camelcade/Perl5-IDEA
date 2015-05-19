@@ -1,8 +1,6 @@
-package com.perl5.lang.eperl;
+package com.perl5.lang.embedded;
 
 import com.intellij.lexer.FlexAdapter;
-import com.perl5.lang.eperl.lexer.EmbeddedPerlLexer;
-import com.perl5.lang.perl.lexer.PerlLexer;
 
 import java.io.Reader;
 
