@@ -97,6 +97,9 @@
     PERL_HANDLE_BUILT_IN="PERL_HANDLE_BUILT_IN"
     PERL_BLOCK_NAME="PERL_BLOCK_NAME"
     PERL_LABEL="PERL_LABEL"
+
+    // inline HTML
+    BLOCK_HTML="BLOCK_HTML"
   ]
 
     extends(".*expr")=expr
