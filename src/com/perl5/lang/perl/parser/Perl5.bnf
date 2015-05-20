@@ -44,8 +44,8 @@
 
     PERL_SCALAR_INDEX="SCALAR_INDEX"
 
-    PERL_STRING_MULTILINE="PERL_STRING_MULTILINE" // should be string content too
-    PERL_STRING_MULTILINE_END="PERL_STRING_MULTILINE_END"
+    PERL_HEREDOC="PERL_HEREDOC" // should be string content too
+    PERL_HEREDOC_END="PERL_HEREDOC_END"
 
     PERL_VERSION="PERL_VERSION"
     PERL_NUMBER_VERSION="PERL_NUMBER_VERSION"
@@ -256,7 +256,8 @@ term_expr ::=
     variable
     | variable_declaration
     | PERL_OPERATOR_UNARY "(" [expr] ")" !"["   // named operators as functions
-    | "(" [expr] ")" ["[" expr "]"]
+    | parenthesised_expr "[" expr "]"
+    | parenthesised_expr
     | scalar_constant
     | do_term
     | sub_term
@@ -277,6 +278,8 @@ term_expr ::=
     | redo_term
     | function_call
     | rightward_call
+
+parenthesised_expr ::= '(' [expr] ')'
 
 rightward_call ::= callable <<parseCallParameters>>
 
@@ -418,16 +421,16 @@ private lexical_variable_definition_argument ::= lexical_variable | "undef"
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 // most of the references created by \ operator, but some - don't
-reference_value ::=
-    anon_array_ref
-    | anon_hash_ref
+private reference_value ::=
+    anon_array
+    | anon_hash
     | code_ref
     | glob_item_ref
 
-private anon_array_ref ::= '[' [expr] ']'
-private anon_hash_ref ::= '{' [expr] '}'
-private code_ref ::= "sub" block
-private glob_item_ref ::= glob "{" glob_item_ref_variant "}"
+anon_array ::= '[' [expr] ']'
+anon_hash ::= '{' [expr] '}'
+code_ref ::= "sub" block
+glob_item_ref ::= glob "{" glob_item_ref_variant "}"
 private glob_item_ref_variant ::=
     "SCALAR"
     | "ARRAY"

@@ -28,10 +28,12 @@
       <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
       <lang.syntaxHighlighterFactory key="Perl5" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
       <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
-      <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
       <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
+      <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+
+      <!--lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
       <codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>
-      <!--psi.referenceContributor implementation="com.perl5.lang.perl.idea.PerlReferenceContributor"/-->
+      <psi.referenceContributor implementation="com.perl5.lang.perl.idea.PerlReferenceContributor"/-->
 
       <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
       <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>

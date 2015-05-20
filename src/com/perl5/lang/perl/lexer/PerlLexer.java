@@ -647,15 +647,15 @@ public class PerlLexer extends PerlLexerGenerated{
 
 			if( heredocMarker.equals(line))
 			{
-				tokensList.add(new CustomToken(stringStart, lineStart, PERL_STRING_MULTILINE));
-				tokensList.add(new CustomToken(lineStart, textEnd, PERL_STRING_MULTILINE_END));
+				tokensList.add(new CustomToken(stringStart, lineStart, PERL_HEREDOC));
+				tokensList.add(new CustomToken(lineStart, textEnd, PERL_HEREDOC_END));
 				yybegin(LEX_PREPARSED_ITEMS);
 				yypushback(1);
 				break;
 			}
 			else if(lineEnd == bufferEnd)
 			{
-				tokensList.add(new CustomToken(stringStart, lineEnd, PERL_STRING_MULTILINE));
+				tokensList.add(new CustomToken(stringStart, lineEnd, PERL_HEREDOC));
 				yybegin(LEX_PREPARSED_ITEMS);
 				yypushback(1);
 				break;

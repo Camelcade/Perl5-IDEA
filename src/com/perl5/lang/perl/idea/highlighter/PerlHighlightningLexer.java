@@ -56,7 +56,7 @@ public class PerlHighlightningLexer extends LayeredLexerAdaptive implements Perl
 		/**
 		 *  Here we choose lexer
 		 */
-		if( tokenType == PERL_STRING_MULTILINE)
+		if( tokenType == PERL_HEREDOC)
 		{
 			lexer = nextMultilineLexer;
 			nextMultilineLexer = null;
