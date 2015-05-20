@@ -4,7 +4,7 @@ This is my attempt to build a plugin for IDEA that will support Perl5 language.
 
 This project is currently in development, and if you want to participate - welcome.
 
-#Current status
+#Current status - "NP++ in IDEA"
 
 * Implemented JFlex lexer and Grammar-kit for Perl and POD. They still have some bugs, see issue tracker.
 * Implemented support for php-style perl <? ... ?>
