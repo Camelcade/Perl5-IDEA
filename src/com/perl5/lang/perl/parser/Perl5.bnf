@@ -15,7 +15,7 @@
   tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
 
   parserUtilClass="com.perl5.lang.perl.parser.PerlParserUitl"
-  psiImplUtilClass="com.perl5.lang.perl.psi.impl.PerlPsiImpUtil"
+  psiImplUtilClass="com.perl5.lang.perl.psi.impl.PerlPsiImplUtil"
 
   //elementTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
 //  tokenTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
@@ -90,7 +90,6 @@
     PERL_PACKAGE_DEPRECATED="PERL_PACKAGE_DEPRECATED"
     PERL_PACKAGE_PRAGMA="PERL_PACKAGE_PRAGMA"
 
-    PERL_METHOD="PERL_METHOD"
     PERL_FUNCTION="PERL_FUNCTION"
     PERL_FUNCTION_BUILT_IN="PERL_FUNCTION_BUILT_IN"
     PERL_HANDLE="PERL_HANDLE"
@@ -105,6 +104,8 @@
   ]
 
     extends(".*expr")=expr
+    mixin("callable")="com.perl5.lang.perl.psi.impl.PerlCallableImplMixin"
+
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////

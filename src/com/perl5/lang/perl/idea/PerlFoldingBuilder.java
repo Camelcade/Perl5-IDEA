@@ -91,6 +91,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return "<< heredoc >>";
 		else if ( elementType == PerlElementTypes.PERL_POD)
 			return "= POD block =";
+		else if ( elementType == PerlElementTypes.TEMPLATE_BLOCK_HTML)
+			return " HTML block ";
 		else
 			return "unknown entity";
 	}

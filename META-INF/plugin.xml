@@ -35,21 +35,24 @@
       <codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>
       <psi.referenceContributor implementation="com.perl5.lang.perl.idea.PerlReferenceContributor"/-->
 
-      <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
-      <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
-
-      <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
-      <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
-
       <lang.parserDefinition language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
-      <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
       <lang.fileViewProviderFactory language="Embedded Perl"
                                     implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
+      <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
+      <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+      <annotator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
+      <completion.contributor language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
 
+      <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
+      <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 
 
       <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
       <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
+
+      <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
+      <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
+
   </extensions>
 
   <application-components>

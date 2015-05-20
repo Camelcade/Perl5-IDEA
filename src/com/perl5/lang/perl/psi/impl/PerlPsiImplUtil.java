@@ -9,8 +9,9 @@ import com.perl5.lang.perl.psi.PerlElementFactory;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlPsiImpUtil implements PerlElementTypes
+public class PerlPsiImplUtil implements PerlElementTypes
 {
+
 /*
 	public static String getName(PerlPackageBare element) {
 		ASTNode keyNode = element.getNode().findChildByType(PERL_PACKAGE);

@@ -5,11 +5,13 @@ import com.intellij.codeInsight.completion.impl.CamelHumpMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.impl.PerlCallableImpl;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,6 +65,11 @@ public class PerlCompletionContributor extends CompletionContributor
 					public void addCompletions(@NotNull CompletionParameters parameters,
 											   ProcessingContext context,
 											   @NotNull CompletionResultSet resultSet) {
+
+//						PsiElement callable = parameters.getPosition().getParent();
+//						assert callable instanceof PerlCallableImpl;
+
+//						((PerlCallableImpl) callable).getPrevTokenType();
 
 						for( String functionName: PerlFunctionUtil.BUILT_IN )
 						{
