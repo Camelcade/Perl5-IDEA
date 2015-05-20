@@ -11,6 +11,7 @@ This project is currently in development, and if you want to participate - welco
 * Implemented syntax highlighting for Perl and POD
 * Implemented file types for Perl scripts and packages, POD files, XS files.
 * Implemented autocompletion for built-in functions, packages and variables.
+* Implemented basic code-folding for blocks, hashes, arrays, PODs and heredocs.
 * Current, let's say, stable version you may find in the camelcade.jar (ready for installation)
 
 #See also

@@ -39,6 +39,10 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	@Override
 	public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick)
 	{
+		// @todo handle this
+		if( root instanceof OuterLanguageElementImpl )
+			return FoldingDescriptor.EMPTY;
+
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
 		descriptors.addAll(getDescriptorsFor(root, document, PerlBlockImpl.class));
@@ -63,7 +67,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			int startLine = document.getLineNumber(startOffset);
 			int endLine = document.getLineNumber(endOffset);
 
-			if( endLine - startLine > 3 )
+			if( endLine - startLine > 0 )
 				descriptors.add(new FoldingDescriptor(block.getNode(),new TextRange(startOffset, endOffset)));
 		}
 		return descriptors;
@@ -82,7 +86,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		else if ( elementType == PerlElementTypes.ANON_HASH)
 			return "hash";
 		else if ( elementType == PerlElementTypes.PARENTHESISED_EXPR)
-			return "array or expression";
+			return "list expression";
 		else if ( elementType == PerlElementTypes.PERL_HEREDOC)
 			return "<< heredoc >>";
 		else if ( elementType == PerlElementTypes.PERL_POD)
