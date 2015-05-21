@@ -152,8 +152,6 @@ PERL_OPERATORS_FILETEST = {FILETEST} [^a-zA-Z0-9_]
 HEREDOC_MARKER = [a-zA-Z0-9_]+
 HEREDOC_OPENER = "<<"{WHITE_SPACE}* (\'{HEREDOC_MARKER}\' | \"{HEREDOC_MARKER}\" | \`{HEREDOC_MARKER}\` | {HEREDOC_MARKER})
 
-POD_OPEN         = \={BAREWORD}{FULL_LINE}
-
 QUOTE_LIST_FUNCTIONS = "qw"
 QUOTE_FUNCTIONS = "qq" | "qx" | "q"
 TRANS_FUNCTIONS = "tr" | "y"
@@ -408,13 +406,6 @@ TRANS_MODIFIERS = [cdsr]
 <YYINITIAL, LEX_CODE>{
     {THE_END}               {processDataOpener(); break;}
     {THE_DATA}               {processDataOpener(); break;}
-    {POD_OPEN}
-    {
-        IElementType tokenType = capturePodBlock();
-        if( tokenType == null)
-            break;
-        return tokenType;
-    }
 }
 
 /**

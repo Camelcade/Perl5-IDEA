@@ -26,7 +26,19 @@ public class PerlLexer extends PerlLexerGenerated{
 	}
 
 	public IElementType advance() throws IOException{
-//		System.out.printf("Advances from %d %d\n", getTokenStart(), yystate());
+
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenEnd();
+
+		if( buffer.length() > 0 )
+		{
+			// capture pod
+			if( buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart-1) =='\n'))
+			{
+				return capturePodBlock();
+			}
+		}
+
 		IElementType tokenType = super.advance();
 
 		lastTokenType = tokenType;
@@ -34,7 +46,6 @@ public class PerlLexer extends PerlLexerGenerated{
 			&& tokenType != TokenType.WHITE_SPACE
 			&& tokenType != PERL_COMMENT
 			&& tokenType != PERL_COMMENT_BLOCK
-			&& tokenType != PERL_POD
 		)
 		{
 			lastSignificantTokenType = tokenType;
@@ -46,6 +57,38 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		return tokenType;
 	}
+
+	/**
+	 * Captures pod block from current position
+	 * @return PERL_POD token type
+	 */
+	public IElementType capturePodBlock()
+	{
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenEnd();
+		setTokenStart(tokenStart);
+		int bufferEnd = buffer.length();
+
+		int currentPosition = tokenStart;
+		int linePos = currentPosition;
+
+		while( true )
+		{
+			while(linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
+			while(linePos < bufferEnd && (buffer.charAt(linePos) == '\n' || buffer.charAt(linePos) == '\r')){linePos++;}
+			String line = buffer.subSequence(currentPosition, linePos).toString();
+			currentPosition = linePos;
+
+			if( linePos == bufferEnd || line.startsWith("=cut"))
+			{
+				setTokenEnd(linePos);
+				break;
+			}
+		}
+
+		return PERL_POD;
+	}
+
 
 	public void reset(CharSequence buf, int start, int end, int initialState)
 	{
@@ -534,51 +577,6 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		setTokenStart(dataBlockStart);
 		return PERL_COMMENT_BLOCK;
-	}
-
-
-	/**
-	 *  Pod block-related code
-	 */
-	public IElementType capturePodBlock()
-	{
-		int podBlockStart = getTokenStart();
-		CharSequence buffer = getBuffer();
-
-		if( podBlockStart == 0 || buffer.charAt(podBlockStart-1) == '\n' || buffer.charAt(podBlockStart-1) == '\r' )
-		{
-			// pod block
-			pushState();
-			tokensList.clear();
-
-			int bufferEnd = buffer.length();
-
-			int currentPosition = podBlockStart;
-			int linePos = currentPosition;
-
-			while( true )
-			{
-				while(linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
-
-				int textEnd = linePos;
-
-				while(linePos < bufferEnd && (buffer.charAt(linePos) == '\n' || buffer.charAt(linePos) == '\r')){linePos++;}
-
-				String line = buffer.subSequence(currentPosition, textEnd).toString();
-
-				currentPosition = linePos;
-
-				if( linePos == bufferEnd || line.startsWith("=cut"))
-				{
-					tokensList.add(new CustomToken(podBlockStart, linePos, PERL_POD));
-					yybegin(LEX_PREPARSED_ITEMS);
-					return null;
-				}
-			}
-		}
-
-		yypushback(yylength() - 1);
-		return PERL_OPERATOR;
 	}
 
 	/** contains marker for multiline end **/
