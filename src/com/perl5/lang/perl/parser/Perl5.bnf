@@ -540,7 +540,8 @@ string_sq ::=
     "'" PERL_STRING_CONTENT "'"
     | "q" string_quoted
     | PERL_STRING_CONTENT
-     | '<<' string_sq
+    | '<<' string_sq
+    | '<<' PERL_STRING_CONTENT
 
 string_xq ::=
     "`" PERL_STRING_CONTENT "`"

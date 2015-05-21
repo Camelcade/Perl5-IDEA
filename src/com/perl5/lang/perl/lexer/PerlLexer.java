@@ -5,7 +5,7 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.intellij.lang.regexp.psi.RegExpPattern;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,11 +29,21 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
+		int bufferEnd = buffer.length();
 
-		if( buffer.length() > 0 )
+		if( bufferEnd > 0 && tokenStart < bufferEnd )
 		{
+			int currentState = yystate();
+
+			// capture heredoc
+			if( currentState == LEX_HEREDOC_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart-1) =='\n'))
+			{
+				IElementType tokenType = captureHereDoc();
+				if( tokenType != null )	// got something
+					return tokenType;
+			}
 			// capture pod
-			if( buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart-1) =='\n'))
+			else if( buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart-1) =='\n'))
 			{
 				return capturePodBlock();
 			}
@@ -89,6 +99,96 @@ public class PerlLexer extends PerlLexerGenerated{
 		return PERL_POD;
 	}
 
+	/**
+	 * HEREDOC proceccing section
+	 */
+
+	// last captured heredoc marker
+	public String heredocMarker;
+
+	// pattern for getting marker
+	public Pattern markerPattern = Pattern.compile("<<\\s*['\"`]?([^\"\'`]+)['\"`]?");
+
+	/**
+	 * Processing captured heredoc opener. Stores marker and switches to proper lexical state
+	 * @return PERL_OPERATOR  for << operator
+	 */
+	public IElementType processHeredocOpener()
+	{
+		String openToken = yytext().toString();
+		Matcher m = markerPattern.matcher(openToken);
+		if (m.matches())
+		{
+			heredocMarker = m.group(1);
+		}
+
+		pushState();
+		yybegin(LEX_HEREDOC_WAITING);
+		pushState();
+		yybegin(LEX_HEREDOC_OPENER);
+		yypushback(openToken.length() - 2);
+
+		return PERL_OPERATOR;
+	}
+
+	/**
+	 * Captures HereDoc document and returns appropriate token type
+	 * @return Heredoc token type
+	 */
+	public IElementType captureHereDoc()
+	{
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenEnd();
+		setTokenStart(tokenStart);
+		int bufferEnd = buffer.length();
+
+		int currentPosition = tokenStart;
+		int linePos = currentPosition;
+
+		String endPattern = "^" + heredocMarker + "[\r\n]+";
+
+		while( true )
+		{
+			while(linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
+			if(linePos < bufferEnd && buffer.charAt(linePos) == '\r')
+				linePos++;
+			if(linePos < bufferEnd && buffer.charAt(linePos) == '\n' )
+				linePos++;
+
+			// reached the end of heredoc and got end marker
+			if( Pattern.matches(endPattern, buffer.subSequence(currentPosition, linePos)))
+			{
+				yybegin(LEX_HEREDOC_MARKER);
+
+				// non-empty heredoc and got the end
+				if( currentPosition > tokenStart )
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(currentPosition);
+					return PERL_HEREDOC;
+				}
+				// empty heredoc and got the end
+				else
+					return null;
+			}
+			// reached the end of file
+			else if( linePos == bufferEnd)
+			{
+				popState();
+				// non-empty heredoc and got the end of file
+				if( currentPosition > tokenStart )
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(currentPosition);
+					return PERL_HEREDOC;
+				}
+				// empty heredoc and got the end of file
+				else
+					return null;
+			}
+			currentPosition = linePos;
+		}
+	}
 
 	public void reset(CharSequence buf, int start, int end, int initialState)
 	{
@@ -579,35 +679,12 @@ public class PerlLexer extends PerlLexerGenerated{
 		return PERL_COMMENT_BLOCK;
 	}
 
-	/** contains marker for multiline end **/
-	public String heredocMarker;
 
-	public Pattern markerPattern = Pattern.compile("<<\\s*['\"`]?([^\"\'`]+)['\"`]?");
-
-	/**
-	 * Invoken on opening token, waiting for a newline
-	 */
-	public IElementType processHeredocOpener()
-	{
-		String openToken = yytext().toString();
-		Matcher m = markerPattern.matcher(openToken);
-		if (m.matches())
-		{
-			heredocMarker = m.group(1);
-		}
-
-		pushState();
-		yybegin(LEX_HEREDOC_WAITING);
-		yypushback(openToken.length() - 2);
-
-		return PERL_OPERATOR;
-	}
-
-	public boolean waitingMultiline(){return yystate() == LEX_HEREDOC_WAITING;}
+	public boolean waitingHereDoc(){return yystate() == LEX_HEREDOC_WAITING;}
 
 	public IElementType processSemicolon()
 	{
-		if( !waitingMultiline() )
+		if( !waitingHereDoc() )
 			yybegin(YYINITIAL);
 		else
 		{
@@ -616,59 +693,4 @@ public class PerlLexer extends PerlLexerGenerated{
 		}
 		return PERL_SEMI;
 	}
-
-	public void captureMultiline()
-	{
-		tokensList.clear();
-		tokensList.add(new CustomToken(getTokenStart(), getTokenEnd(), TokenType.NEW_LINE_INDENT));
-
-		int currentPosition = getTokenEnd();
-		int stringStart = currentPosition;
-
-		CharSequence buffer = getBuffer();
-		int bufferEnd = buffer.length();
-
-		while( true )
-		{
-			int lineStart = currentPosition;
-			int linePos = currentPosition;
-
-			while(linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
-
-			int textEnd = linePos;
-
-			while(linePos < bufferEnd && (buffer.charAt(linePos) == '\n' || buffer.charAt(linePos) == '\r')){linePos++;}
-
-			int lineEnd = linePos;
-
-			String line = buffer.subSequence(lineStart, textEnd).toString();
-
-			if( heredocMarker.equals(line))
-			{
-				tokensList.add(new CustomToken(stringStart, lineStart, PERL_HEREDOC));
-				tokensList.add(new CustomToken(lineStart, textEnd, PERL_HEREDOC_END));
-				yybegin(LEX_PREPARSED_ITEMS);
-				yypushback(1);
-				break;
-			}
-			else if(lineEnd == bufferEnd)
-			{
-				tokensList.add(new CustomToken(stringStart, lineEnd, PERL_HEREDOC));
-				yybegin(LEX_PREPARSED_ITEMS);
-				yypushback(1);
-				break;
-			}
-			else
-				currentPosition = lineEnd;
-		}
-
-	}
-
-	public IElementType processNewLine()
-	{
-		if( waitingMultiline() )
-			captureMultiline();
-		return TokenType.NEW_LINE_INDENT;
-	}
-
 }
