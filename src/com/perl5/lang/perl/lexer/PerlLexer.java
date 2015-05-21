@@ -5,6 +5,7 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlTokenType;
 import org.intellij.lang.regexp.psi.RegExpPattern;
 
 import java.io.IOException;
@@ -145,6 +146,13 @@ public class PerlLexer extends PerlLexerGenerated{
 		int currentPosition = tokenStart;
 		int linePos = currentPosition;
 
+		IElementType blockType;
+
+//		if( "SQL".equals(heredocMarker))
+//			blockType = PerlTokenType.HEREDOC_SQL;
+//		else
+			blockType = PERL_HEREDOC;
+
 		String endPattern = "^" + heredocMarker + "[\r\n]+";
 
 		while( true )
@@ -165,7 +173,7 @@ public class PerlLexer extends PerlLexerGenerated{
 				{
 					setTokenStart(tokenStart);
 					setTokenEnd(currentPosition);
-					return PERL_HEREDOC;
+					return blockType;
 				}
 				// empty heredoc and got the end
 				else
@@ -180,7 +188,7 @@ public class PerlLexer extends PerlLexerGenerated{
 				{
 					setTokenStart(tokenStart);
 					setTokenEnd(currentPosition);
-					return PERL_HEREDOC;
+					return blockType;
 				}
 				// empty heredoc and got the end of file
 				else
