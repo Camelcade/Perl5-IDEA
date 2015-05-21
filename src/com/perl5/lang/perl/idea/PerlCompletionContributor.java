@@ -248,13 +248,21 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                             public void run() {
                                 PsiFile file = parameters.getOriginalFile();
 
-                                for( PerlUseStatementImpl use : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementImpl.class))
-                                {
-                                    PerlNamespace namespace = use.getNamespace();
+								for( PerlUseStatementImpl use : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementImpl.class))
+								{
+									PerlNamespace namespace = use.getNamespace();
 
-                                    if( namespace != null)
-                                        resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
-                                }
+									if( namespace != null)
+										resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
+								}
+
+								for( PerlRequireTermImpl use : PsiTreeUtil.findChildrenOfType(file, PerlRequireTermImpl.class))
+								{
+									PerlNamespace namespace = use.getNamespace();
+
+									if( namespace != null)
+										resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
+								}
                             }
                         });
                     }
