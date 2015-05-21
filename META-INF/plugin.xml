@@ -30,9 +30,9 @@
       <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
       <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
       <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+      <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
 
-      <!--lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
-      <codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>
+      <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>
       <psi.referenceContributor implementation="com.perl5.lang.perl.idea.PerlReferenceContributor"/-->
 
       <lang.parserDefinition language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
@@ -42,6 +42,7 @@
       <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
       <annotator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
       <completion.contributor language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
+      <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
 
       <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
       <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
