@@ -215,8 +215,8 @@ when_statement_modifier ::= 'when' expr
 use_statement ::= 'use' use_no_parameters
 no_statement ::= 'no' use_no_parameters
 private use_no_parameters ::= use_module_parameters | use_version_parameters
-use_module_parameters ::= namespace [perl_version] [expr];
-use_version_parameters ::= perl_version;
+private use_module_parameters ::= namespace [perl_version] [expr];
+private use_version_parameters ::= perl_version;
 
 
 undef_term ::= "undef" variable ?
@@ -567,5 +567,5 @@ private glob_variable ::=
 
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
-private namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
 method ::= [namespace ['->']] PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_KEYWORD

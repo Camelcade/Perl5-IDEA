@@ -12,10 +12,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.impl.PerlSubDeclarationImpl;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
+import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,7 +45,8 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                     }
                 }
         );
-		//CamelHumpMatcher
+
+        // built in scalars
 		extend(
 				CompletionType.BASIC,
 				PlatformPatterns.psiElement(PerlElementTypes.PERL_SCALAR).withLanguage(PerlLanguage.INSTANCE),
@@ -90,10 +89,33 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                 }
                             }
                         });
+                    }
+                }
+        );
 
-                        // append prevoiusly defined functions;
-                        // @todo we should check all included files for the current package and check functions in there
+        // used packages
+        extend(
+                CompletionType.BASIC,
+                PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull final CompletionParameters parameters,
+                                               ProcessingContext context,
+                                               @NotNull final CompletionResultSet resultSet) {
 
+                        ApplicationManager.getApplication().runReadAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                PsiFile file = parameters.getOriginalFile();
+
+                                for( PerlUseStatementImpl use : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementImpl.class))
+                                {
+                                    PerlNamespace namespace = use.getNamespace();
+
+                                    if( namespace != null)
+                                        resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
+                                }
+                            }
+                        });
                     }
                 }
         );
