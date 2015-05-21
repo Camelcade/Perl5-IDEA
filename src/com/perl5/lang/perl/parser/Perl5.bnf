@@ -475,8 +475,7 @@ scalar ::=
     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
 
 glob ::=
-    "*" scalar       // scalar dereference wo braces
-    | "*"{expr}     // @todo we need to colorize this as glob
+    "*"{expr}     // @todo we need to colorize this as glob
     | glob_variable                    // hash as is
 
 private nested_element ::=
