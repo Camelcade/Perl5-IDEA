@@ -572,4 +572,8 @@ private glob_variable ::=
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
 namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
-method ::= [namespace ['->']] PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_KEYWORD
+method ::=
+    namespace '->' scalar_variable      // i belive here could be more
+    | [namespace ['->']] PERL_FUNCTION  // -> or :: call
+    | PERL_FUNCTION_BUILT_IN
+    | PERL_KEYWORD
