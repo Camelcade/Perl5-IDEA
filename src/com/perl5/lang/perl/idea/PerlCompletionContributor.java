@@ -1,24 +1,30 @@
 package com.perl5.lang.perl.idea;
 
 import com.intellij.codeInsight.completion.*;
-import com.intellij.codeInsight.completion.impl.CamelHumpMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.patterns.PlatformPatterns;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.impl.PerlCallableImpl;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.impl.PerlSubDeclarationImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
 
 /**
  * Created by hurricup on 25.04.2015.
  */
-public class PerlCompletionContributor extends CompletionContributor
+public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes
 {
 
 	// @todo implement some tree running for defined methods
@@ -58,51 +64,56 @@ public class PerlCompletionContributor extends CompletionContributor
 					}
 				}
 		);
-		extend(
-				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
-				new CompletionProvider<CompletionParameters>() {
-					public void addCompletions(@NotNull CompletionParameters parameters,
-											   ProcessingContext context,
-											   @NotNull CompletionResultSet resultSet) {
 
-//						PsiElement callable = parameters.getPosition().getParent();
-//						assert callable instanceof PerlCallableImpl;
+        // current file
+        extend(
+                CompletionType.BASIC,
+                PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull final CompletionParameters parameters,
+                                               ProcessingContext context,
+                                               @NotNull final CompletionResultSet resultSet) {
 
-//						((PerlCallableImpl) callable).getPrevTokenType();
+                        ApplicationManager.getApplication().runReadAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                PsiFile file = parameters.getOriginalFile();
 
-						for( String functionName: PerlFunctionUtil.BUILT_IN )
-						{
-							resultSet.addElement(LookupElementBuilder.create(functionName));
-						}
+                                for( PerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDeclarationImpl.class))
+                                {
+                                    resultSet.addElement(LookupElementBuilder.create(sub.getMethod().getText()));
+                                }
 
-						// append prevoiusly defined functions;
-						// @todo we should check all included files for the current package and check functions in there
-/*
-						PsiElement currentPosition = parameters.getPosition();
+                                for( PerlSubDefinitionImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDefinitionImpl.class))
+                                {
+                                    resultSet.addElement(LookupElementBuilder.create(sub.getMethod().getText()));
+                                }
+                            }
+                        });
 
-						while( currentPosition != null )
-						{
-							if( currentPosition instanceof PerlFunctionDefinitionNamedImpl)
-							{
-								PsiElement functionName = ((PerlFunctionDefinitionNamedImpl)currentPosition).getFunction();
+                        // append prevoiusly defined functions;
+                        // @todo we should check all included files for the current package and check functions in there
 
-								resultSet.addElement(LookupElementBuilder.create(functionName.getText()));
-							}
+                    }
+                }
+        );
 
+        // built in
+        extend(
+                CompletionType.BASIC,
+                PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull CompletionParameters parameters,
+                                               ProcessingContext context,
+                                               @NotNull CompletionResultSet resultSet) {
 
-							PsiElement prevPosition = currentPosition.getPrevSibling();
-							if( prevPosition == null )
-							{
-								prevPosition = currentPosition.getParent();
-							}
-							currentPosition = prevPosition;
-						}
-*/
-
-					}
-				}
-		);
+                        for( String functionName: PerlFunctionUtil.BUILT_IN )
+                        {
+                                resultSet.addElement(LookupElementBuilder.create(functionName));
+                        }
+                    }
+                }
+        );
 		extend(
 				CompletionType.BASIC,
 				PlatformPatterns.psiElement(PerlElementTypes.PERL_HASH).withLanguage(PerlLanguage.INSTANCE),

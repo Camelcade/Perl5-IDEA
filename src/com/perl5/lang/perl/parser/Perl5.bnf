@@ -112,14 +112,14 @@
 private perlFile ::= file_items <<eof>>
 
 private file_items ::= PERL_SEMI * file_item *   //{recoverWhile=recover_block}
-private file_item ::= namespace | namespace_element
+private file_item ::= namespace_definition | namespace_element
 
 block ::= "{" file_items "}"
 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) PERL_SEMI*
 
 // package keyword
-namespace ::= "package" perl_package [perl_version] (block | PERL_SEMI namespace_content)
+namespace_definition ::= "package" namespace [perl_version] (block | PERL_SEMI namespace_content)
 private namespace_content ::= namespace_element *  //{recoverWhile=recover_namespace}     // injected and wrapped by parsePackageContents
 
 named_block ::= PERL_BLOCK_NAME block
@@ -173,14 +173,14 @@ private statement_variation ::=
     | sub_declaration
     | expr
 
-sub_definition ::= "sub" perl_method sub_definition_parameters ? block
+sub_definition ::= "sub" method sub_definition_parameters ? block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= "sub" perl_method sub_declaration_parameters
+sub_declaration ::= "sub" method sub_declaration_parameters
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= "(" [<<parseSubPrototype>>] ")"
@@ -215,13 +215,13 @@ when_statement_modifier ::= 'when' expr
 use_statement ::= 'use' use_no_parameters
 no_statement ::= 'no' use_no_parameters
 private use_no_parameters ::= use_module_parameters | use_version_parameters
-use_module_parameters ::= perl_package [perl_version] [expr];
+use_module_parameters ::= namespace [perl_version] [expr];
 use_version_parameters ::= perl_version;
 
 
 undef_term ::= "undef" variable ?
 
-require_term ::= 'require' (perl_package | perl_version | expr)  // multiline string is possible too
+require_term ::= 'require' (namespace | perl_version | expr)  // multiline string is possible too
 
 //private recover_statement ::= !(PERL_SEMI | PERL_RBRACE )
 //private recover_block ::= !(PERL_RBRACE | <<eof>>)
@@ -406,9 +406,9 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::= 'local' [perl_package]  local_variable_definition_variation
-variable_declaration_lexical ::= ('my' | 'state') [perl_package] variable_definition_variation
-variable_declaration_global ::= 'our' [perl_package] variable_definition_variation
+variable_declaration_local ::= 'local' [namespace]  local_variable_definition_variation
+variable_declaration_lexical ::= ('my' | 'state') [namespace] variable_definition_variation
+variable_declaration_global ::= 'our' [namespace] variable_definition_variation
 
 private local_variable_definition_variation ::=
     '(' scalar_expr (comma + scalar_expr ) * comma * ')'
@@ -492,7 +492,7 @@ scalar_call ::= scalar_variable ["(" [expr] ")"]
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
-callable ::= perl_method | referencable_method
+callable ::= method | referencable_method
 //<<resetLastCallable>> (
 //
 //    |
@@ -501,8 +501,8 @@ callable ::= perl_method | referencable_method
 private referencable_expr ::= referencable_method | scalar_expr
 private referencable_method ::= '&'
     (
-        perl_method
-        | "{"perl_method"}"
+        method
+        | "{"method"}"
         | "{"expr"}"
         | scalar
     )
@@ -567,5 +567,5 @@ private glob_variable ::=
 
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
-private perl_package ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
-private perl_method ::= [perl_package ['->']] PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_KEYWORD
+private namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+method ::= [namespace ['->']] PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_KEYWORD
