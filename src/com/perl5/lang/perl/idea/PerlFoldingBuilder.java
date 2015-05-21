@@ -68,7 +68,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			int startLine = document.getLineNumber(startOffset);
 			int endLine = document.getLineNumber(endOffset);
 
-			if( endLine - startLine > 0 )
+			if( endLine - startLine > 2 )
 				descriptors.add(new FoldingDescriptor(block.getNode(),new TextRange(startOffset, endOffset)));
 		}
 		return descriptors;
