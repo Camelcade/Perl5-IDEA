@@ -475,6 +475,7 @@ scalar ::=
     | undef_term
     | PERL_SCALAR_INDEX
     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
+    | perl_handle_basic
 
 glob ::=
     "*"{expr}     // @todo we need to colorize this as glob
@@ -516,7 +517,8 @@ private referencable_method ::= '&'
 
 label_declaration ::= PERL_LABEL ":" // do we need to change tokentype?
 private perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
-private perl_handle ::= PERL_HANDLE | PERL_HANDLE_BUILT_IN | "{" scalar_expr "}" | <<parseExpressionLevel 21>>
+private perl_handle ::=  perl_handle_basic | "{" scalar_expr "}" | <<parseExpressionLevel 21>>
+private perl_handle_basic ::= PERL_HANDLE | PERL_HANDLE_BUILT_IN
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 
