@@ -322,7 +322,7 @@ bitwise_or_xor_expr ::= expr ('|'|'^') expr
 and_expr ::= expr '&&' expr
 or_expr ::= expr ('||'|'//') expr
 flipflop_expr ::= expr ('..'|'...') expr
-trenar_expr ::= expr '?' expr ':' expr { rightAssociative=true }
+trenar_expr ::= expr '?' scalar_expr ':' scalar_expr { rightAssociative=true }
 assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
 
 private comma_expr ::= comma_sequence_expr | comma_last_expr

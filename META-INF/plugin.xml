@@ -9,6 +9,11 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>0.13 beta</p>
+      <ul>
+        <li>Trenar expression operands are now scalar expressions, not any expressions</li>
+      </ul>
+
       <p>0.12 beta</p>
       <ul>
         <li>Fixed bugs with heredoc and pod lexing exceptions on editing openers</li>
