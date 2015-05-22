@@ -157,7 +157,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			consumeToken(b, PERL_SEMI);
 			return true;
 		}
-		else if( tokenType == PERL_RBRACE)
+		else if( tokenType == PERL_RBRACE ||  tokenType == PERL_RESERVED)
 			return true;
 
 		// @todo think what to do here. Currently any statement being finished, even incorrect one

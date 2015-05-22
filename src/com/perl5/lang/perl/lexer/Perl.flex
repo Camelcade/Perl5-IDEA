@@ -182,7 +182,8 @@ PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "for
 PERL_SYN_OTHER = "undef" | "grep" | "sort" | "map" | "close"
 PERL_SYN_BINARY = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
 PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
-FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER} | {PERL_SYN_BINARY}
+FUNCTION_SPECIAL = {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER} | {PERL_SYN_BINARY}
+
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
@@ -305,6 +306,7 @@ TRANS_MODIFIERS = [cdsr]
 {
     {PERL_LABEL_PREFIX} {return PERL_KEYWORD;}
     {FUNCTION_SPECIAL} {endCustomBlock();return PERL_KEYWORD;}
+    {PERL_SYN_COMPOUND} {endCustomBlock();return PERL_RESERVED;}
     {BAREWORD} {endCustomBlock(); return PERL_LABEL;}
 
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
@@ -630,8 +632,9 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_OPERATORS_FILETEST} {yypushback(1);return PERL_OPERATOR_FILETEST;}
 {PERL_SYN_UNARY} {return PERL_OPERATOR_UNARY;}
 
-{FUNCTION_SPECIAL} {return PERL_KEYWORD;}
+{PERL_SYN_COMPOUND} {return PERL_RESERVED;}
 {PERL_SYN_DECLARE} {return PERL_RESERVED;}
+{FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 {BLOCK_NAMES} {return PERL_BLOCK_NAME;}
 
 <LEX_BAREWORD_STRING>
