@@ -103,10 +103,13 @@ CAPTURE_HANDLE_READ = "<"{BAREWORD}">"
 
 DIR_HANDLE_PREFIX = "opendir" | "chdir" | "telldir" | "seekdir" | "rewinddir" | "readdir" | "closedir"
 FILE_HANDLE_PREFIX_SYS = "sysopen" | "syswrite" | "sysseek" | "sysread"
-FILE_HANDLE_PREFIX = "open" | "close" | "read" | "write" | "say" | "print" | "printf" | "stat" | "ioctl" | "fcntl" | "lstat" | "truncate" | "tell" | "select" | "seek" | "getc" | "flock" | "fileno" | "eof" | "binmode"
+FILE_HANDLE_PREFIX = "open" | "close" | "read" | "write" | "stat" | "ioctl" | "fcntl" | "lstat" | "truncate" | "tell" | "select" | "seek" | "getc" | "flock" | "fileno" | "eof" | "binmode"
 HANDLE_PREFIX = {DIR_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX_SYS}
+HANDLE_PRINT_PREFIX = "say" | "print" | "printf"
 
-CAPTURE_HANDLE = {HANDLE_PREFIX} ({EMPTY_SPACE}+ | {EMPTY_SPACE}* "(" {EMPTY_SPACE}*) {BAREWORD} [^\(:\-a-zA-Z0-9_]
+
+CAPTURE_HANDLE_PRINT = {HANDLE_PRINT_PREFIX} ({EMPTY_SPACE}+ | {EMPTY_SPACE}* "(" {EMPTY_SPACE}*) {BAREWORD} {EMPTY_SPACE}+ [^{(:,\-\t\n\r\f ]
+CAPTURE_HANDLE = {HANDLE_PREFIX} ({EMPTY_SPACE}+ | {EMPTY_SPACE}* "(" {EMPTY_SPACE}*) {BAREWORD} {EMPTY_SPACE}* [,)]
 CAPTURE_HANDLE_FILETEST = {FILETEST} {EMPTY_SPACE}+ {BAREWORD} [^\(:\-a-zA-Z0-9_]
 
 // ::main_func
@@ -175,10 +178,11 @@ PERL_SYN_FLOW_CONTROL = "redo" | "next" | "last"
 PERL_SYN_DECLARE = "package" | "sub" | {VARIABLE_DECLARATOR}
 PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
 // "print" | "say" | "open"
+
 PERL_SYN_OTHER = "undef" | "grep" | "sort" | "map" | "close"
 PERL_SYN_BINARY = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
 PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
-FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} | {PERL_SYN_DECLARE} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER} | {PERL_SYN_BINARY}
+FUNCTION_SPECIAL = {PERL_SYN_COMPOUND} | {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER} | {PERL_SYN_BINARY}
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
@@ -242,7 +246,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_HANDLE_HANDLE>
 {
     "(" {return PERL_LPAREN;}
-    {VARIABLE_DECLARATOR} {endCustomBlock();return PERL_KEYWORD;}
+    {VARIABLE_DECLARATOR} {endCustomBlock();return PERL_FUNCTION_BUILT_IN;}
     {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -376,7 +380,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_SURE_PACKAGE>
 {
-    {PRE_PACKAGE_SURE}|"require"    {yybegin(LEX_SURE_PACKAGE_PACKAGE);return PERL_KEYWORD;}
+    {PRE_PACKAGE_SURE}|"require"    {yybegin(LEX_SURE_PACKAGE_PACKAGE);return PERL_RESERVED;}
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -627,6 +631,7 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_SYN_UNARY} {return PERL_OPERATOR_UNARY;}
 
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
+{PERL_SYN_DECLARE} {return PERL_RESERVED;}
 {BLOCK_NAMES} {return PERL_BLOCK_NAME;}
 
 <LEX_BAREWORD_STRING>
@@ -646,6 +651,7 @@ TRANS_MODIFIERS = [cdsr]
 {BUILT_IN_GLOB_NAME} {return PERL_HANDLE_BUILT_IN;}
 {CAPTURE_HANDLE_READ} {startCustomBlock(LEX_HANDLE_READ);break;}
 {CAPTURE_HANDLE_FILETEST} {startCustomBlock(LEX_HANDLE_FILETEST);break;}
+{CAPTURE_HANDLE_PRINT} {startCustomBlock(LEX_HANDLE);break;}
 {CAPTURE_HANDLE} {startCustomBlock(LEX_HANDLE);break;}
 {BAREWORD} { return PerlFunctionUtil.getFunctionType(yytext().toString());}
 

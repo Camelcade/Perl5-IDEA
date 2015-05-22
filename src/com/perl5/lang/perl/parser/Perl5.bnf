@@ -52,6 +52,7 @@
     PERL_NUMBER="PERL_NUMBER"
 
     PERL_KEYWORD="PERL_KEYWORD"
+    PERL_RESERVED="PERL_RESERVED"
 
     PERL_OPERATOR="PERL_OPERATOR"
     PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
@@ -118,10 +119,10 @@ private file_item ::= namespace_definition | namespace_element
 
 block ::= "{" file_items "}" {pin=1}
 
-private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) PERL_SEMI*
+private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) [PERL_SEMI+]
 
 // package keyword
-namespace_definition ::= "package" namespace [perl_version] (block | PERL_SEMI namespace_content) {pin=2}
+namespace_definition ::= "package" namespace [perl_version] (block | PERL_SEMI namespace_content) {pin=1}
 private namespace_content ::= namespace_element *  {recoverWhile=recover_namespace}
 
 named_block ::= PERL_BLOCK_NAME block
@@ -227,7 +228,7 @@ require_term ::= 'require' (namespace | perl_version | expr)  // multiline strin
 
 private recover_statement ::= !(PERL_SEMI|PERL_RBRACE)
 private recover_block ::= !(PERL_RBRACE | <<eof>>)
-private recover_namespace ::= !( "package" | <<eof>>)
+private recover_namespace ::= !( "package" | '}' | <<eof>>)
 
 // expression
 expr ::=
