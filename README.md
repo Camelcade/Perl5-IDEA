@@ -2,9 +2,9 @@
 
 This is my attempt to build a plugin for IDEA that will support Perl5 language.
 
-This project is currently in development, and if you want to participate - welcome.
+This project is currently in development, and if you want to participate - you may fork or contact me via skype: hurricup
 
-#Current status - "NP++ in IDEA"
+#Current status - beta testing and develpment
 
 * Implemented JFlex lexer and Grammar-kit for Perl and POD. They still have some bugs, see issue tracker.
 * Implemented support for php-style perl <? ... ?>
@@ -13,7 +13,7 @@ This project is currently in development, and if you want to participate - welco
 * Implemented autocompletion for built-in functions, packages and variables.
 * Implemented basic code-folding for blocks, hashes, arrays, PODs and heredocs.
 * Implemented crude defined subs, used packages and defined variables autocompletion.
-* Current, let's say, stable version you may find in the camelcade.jar (ready for installation)
+* Current, let's say, stable version, you may find in the camelcade.jar (ready for installation)
 
 #See also
 
