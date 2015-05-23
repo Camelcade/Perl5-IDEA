@@ -223,7 +223,7 @@ private use_module_parameters ::= namespace [perl_version] [expr];
 private use_version_parameters ::= perl_version;
 
 
-undef_term ::= "undef" variable ?
+undef_term ::= "undef" (variable | "(" variable ")") ?
 
 require_term ::= 'require' (namespace | perl_version | expr)  // multiline string is possible too
 
@@ -375,6 +375,7 @@ private grep_map_arguments_variations ::=
     | scalar_expr comma expr
 
 private function_call ::= callable "(" [expr] ")" !"["  // avoiding ()[]
+
 
 file_read_term ::= '<' [perl_handle] '>'
 

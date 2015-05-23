@@ -118,8 +118,13 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		String openToken = yytext().toString();
 		Matcher m = markerPattern.matcher(openToken);
+
+		yypushback(openToken.length() - 2);
+
 		if (m.matches())
 		{
+			if( m.group(1).matches("\\d+") )	// check if it's numeric shift
+				return PERL_OPERATOR;
 			heredocMarker = m.group(1);
 		}
 
@@ -127,7 +132,6 @@ public class PerlLexer extends PerlLexerGenerated{
 		yybegin(LEX_HEREDOC_WAITING);
 		pushState();
 		yybegin(LEX_HEREDOC_OPENER);
-		yypushback(openToken.length() - 2);
 
 		return PERL_OPERATOR;
 	}

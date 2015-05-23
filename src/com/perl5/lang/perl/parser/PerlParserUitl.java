@@ -77,7 +77,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// optional }->[ or ]->{
 			if(
 				( prevTokenType == PERL_RBRACE || prevTokenType == PERL_RBRACK )
-				&& ( tokenType == PERL_LBRACE || tokenType == PERL_LBRACK )
+				&& ( tokenType == PERL_LBRACE || tokenType == PERL_LBRACK || tokenType == PERL_LPAREN )
 					)
 				return true;
 		}
