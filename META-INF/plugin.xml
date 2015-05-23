@@ -40,6 +40,9 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
+
+      <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
+
       <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
 
       <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
