@@ -107,8 +107,9 @@
   ]
 
     extends(".*expr")=expr
-    mixin("callable")="com.perl5.lang.perl.psi.impl.PerlCallableImplMixin"
 
+    mixin("callable")="com.perl5.lang.perl.psi.impl.PerlCallableImplMixin"
+    mixin("heredoc_opener")="com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImplMixin"
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
@@ -168,7 +169,7 @@ private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_S
 private for_compound_arguments_list ::=
     [ variable_declaration | variable ] '(' expr ')' block_compound
 
-private statement ::= statement_variation [statement_modifier] {recoverWhile=recover_statement}
+private statement ::= [label_declaration] statement_variation [statement_modifier] {recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
@@ -533,25 +534,23 @@ braced_string ::= "{" PERL_STRING_CONTENT "}"
 private array_constant ::=
     string_list
 
-private string ::= string_sq | string_dq | string_xq
+private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
 private string_quoted ::= PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
 string_dq ::=
     "\"" PERL_STRING_CONTENT "\""
      | "qq" string_quoted
-     | '<<' string_dq
 
 string_sq ::=
     "'" PERL_STRING_CONTENT "'"
     | "q" string_quoted
     | PERL_STRING_CONTENT
-    | '<<' string_sq
-    | '<<' PERL_STRING_CONTENT
 
 string_xq ::=
     "`" PERL_STRING_CONTENT "`"
     | "qx" string_quoted
-    | '<<' string_xq
+
+heredoc_opener ::= '<<' ( string_xq | string_dq | string_sq | PERL_STRING_CONTENT )
 
 string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 

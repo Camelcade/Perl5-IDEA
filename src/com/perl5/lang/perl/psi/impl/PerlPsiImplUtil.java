@@ -4,13 +4,18 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.PerlSub;
 import com.perl5.lang.perl.psi.PerlElementFactory;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 26.04.2015.
  */
 public class PerlPsiImplUtil implements PerlElementTypes
 {
+//	public static List<PerlSub>
+
 
 /*
 	public static String getName(PerlPackageBare element) {
