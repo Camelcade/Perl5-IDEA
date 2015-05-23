@@ -68,6 +68,7 @@
       <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
       <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
       <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlBraceMatcher"/>
+      <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.impl.PerlASTFactory"/>
 
       <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>
       <psi.referenceContributor implementation="com.perl5.lang.perl.idea.PerlReferenceContributor"/-->
