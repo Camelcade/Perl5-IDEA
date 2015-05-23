@@ -18,6 +18,8 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -50,6 +52,7 @@ public class PerlHeredocOpenerImplMixin extends PerlNamedElementImpl implements 
 	@Override
 	public PsiElement getNameIdentifier()
 	{
+
 		return PsiTreeUtil.findChildOfType(this, PerlStringContentImpl.class);
 	}
 

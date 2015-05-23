@@ -22,6 +22,7 @@ import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,12 +49,16 @@ public class PerlHeredocReference extends PsiReferenceBase<PsiElement>
 	public PsiElement resolve()
 	{
 		PsiElement result = null;
-		for( PerlHeredocTerminatorImpl terminator: PsiTreeUtil.findChildrenOfType(myElement.getContainingFile(), PerlHeredocTerminatorImpl.class))
+		for( PerlHeredocOpenerImpl opener: PsiTreeUtil.findChildrenOfType(myElement.getContainingFile(), PerlHeredocOpenerImpl.class))
 		{
-			if( terminator.getTextOffset() > myElement.getTextOffset() && marker.equals(terminator.getName()))
+			if( marker.equals(opener.getName()))
 			{
-				result = terminator;
-				break;
+				if (opener.getTextOffset() < myElement.getTextOffset())
+				{
+					result = opener;
+				}
+				else
+					break;
 			}
 		}
 		return result;

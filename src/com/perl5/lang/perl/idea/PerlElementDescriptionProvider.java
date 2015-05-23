@@ -23,7 +23,6 @@ import com.intellij.usageView.UsageViewLongNameLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
 import com.perl5.lang.perl.psi.PerlNamedElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,9 +38,7 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 			else
 				return null;
 		else if(element instanceof PerlHeredocOpenerImpl)
-			return "heredoc marker";
-		else if(element instanceof PerlHeredocTerminatorImpl)
-			return "heredoc terminator";
+			return "Heredoc marker";
 		else
 			return null;
 	}

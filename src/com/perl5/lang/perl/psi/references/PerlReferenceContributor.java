@@ -21,30 +21,25 @@ import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
+import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentImpl;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 26.04.2015.
- */
 public class PerlReferenceContributor extends PsiReferenceContributor
 {
 	@Override
 	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
 	{
 		registrar.registerReferenceProvider(
-				PlatformPatterns.psiElement(PerlHeredocOpenerImpl.class),
+				PlatformPatterns.psiElement(PerlHeredocTerminatorImpl.class),
 				new PsiReferenceProvider()
 				{
 					@NotNull
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlHeredocOpenerImpl;
-						PsiElement name = ((PerlHeredocOpenerImpl) element).getNameIdentifier();
-						assert name instanceof PerlStringContentImpl;
-						int startOffset = name.getTextOffset() - element.getTextOffset();
-						return new PsiReference[]{new PerlHeredocReference(element, new TextRange(startOffset, startOffset + name.getTextLength()))};
+						assert element instanceof PerlHeredocTerminatorImpl;
+						return new PsiReference[]{new PerlHeredocReference(element, new TextRange(0, element.getTextLength()))};
 					}
 				}
 		);

@@ -19,6 +19,8 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.perl5.lang.perl.psi.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,4 +40,10 @@ public abstract class PerlNamedElementImpl extends ASTWrapperPsiElement implemen
 		return nameElement == null ? null : nameElement.getText();
 	}
 
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+	}
 }
