@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.references;
+package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
+import com.perl5.lang.perl.psi.impl.PerlStringContentImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlReferenceContributor extends PsiReferenceContributor
 {
 	@Override
-	public void registerReferenceProviders(PsiReferenceRegistrar registrar)
+	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
 	{
 		registrar.registerReferenceProvider(
 				PlatformPatterns.psiElement(PerlHeredocOpenerImpl.class),
@@ -40,14 +40,11 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-//						PsiTreeUtil.collectElements()
-//						PsiLiteralExpression literalExpression = (PsiLiteralExpression) element;
-//						String text = (String) literalExpression.getValue();
-//						if (text != null ) {
-//							return new PsiReference[]{new PerlReference(element, new TextRange(1, text.length() + 1))};
-//						}
-//						return new PsiReference[0];					}
-						return null;
+						assert element instanceof PerlHeredocOpenerImpl;
+						PsiElement name = ((PerlHeredocOpenerImpl) element).getNameIdentifier();
+						assert name instanceof PerlStringContentImpl;
+						int startOffset = name.getTextOffset() - element.getTextOffset();
+						return new PsiReference[]{new PerlHeredocReference(element, new TextRange(startOffset, startOffset + name.getTextLength()))};
 					}
 				}
 		);
