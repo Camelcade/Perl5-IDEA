@@ -20,6 +20,7 @@ import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.05.2015.
@@ -29,7 +30,7 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 {
 	// todo RenameInputValidator
 	@Override
-	public boolean isInplaceRenameAvailable(PsiElement element, PsiElement context)
+	public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
 	{
 		if( element instanceof PerlHeredocTerminatorImpl )
 			return true;
@@ -37,5 +38,17 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 			return true;
 		else
 			return super.isInplaceRenameAvailable(element, context);
+	}
+
+	@Override
+	public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isSafeDeleteAvailable(@NotNull PsiElement element)
+	{
+		return true;
 	}
 }
