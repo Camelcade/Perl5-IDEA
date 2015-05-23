@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.13 beta</version>
+    <version>0.14 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
   <description><![CDATA[
@@ -9,6 +9,11 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>0.14 beta</p>
+      <ul>
+        <li>Implemented basic brace matcher</li>
+      </ul>
+
       <p>0.13 beta</p>
       <ul>
         <li>Trenar expression operands are now scalar expressions, not any expressions</li>
@@ -43,6 +48,7 @@
       <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
       <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
       <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
+      <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlBraceMatcher"/>
 
       <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>
       <psi.referenceContributor implementation="com.perl5.lang.perl.idea.PerlReferenceContributor"/-->
