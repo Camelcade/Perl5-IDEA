@@ -18,10 +18,10 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.DefaultASTFactoryImpl;
 import com.intellij.psi.impl.source.tree.LeafElement;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElementTypes
 {
@@ -34,8 +34,13 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 			return super.createComment(type, text);
 	}
 
-	public static class PerlHeredocTerminatorImpl extends PsiCommentImpl
+	@NotNull
+	@Override
+	public LeafElement createLeaf(@NotNull IElementType type, CharSequence text)
 	{
-		public PerlHeredocTerminatorImpl(IElementType type, CharSequence text){ super(type, text);}
+		if( type == PERL_STRING_CONTENT )
+			return new PerlStringContentImpl(type, text);
+		else
+			return super.createLeaf(type, text);
 	}
 }

@@ -16,26 +16,17 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlNamedElement;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 23.05.2015.
  */
-public abstract class PerlNamedElementImpl extends ASTWrapperPsiElement implements PerlNamedElement
+public class PerlStringContentImpl extends LeafPsiElement
 {
-	public PerlNamedElementImpl(@NotNull ASTNode node){
-		super(node);
+	public PerlStringContentImpl(@NotNull IElementType type, CharSequence text) {
+		super(type, text);
 	}
-
-	@Override
-	public String getName()
-	{
-		PsiElement nameElement = getNameIdentifier();
-		return nameElement == null ? null : nameElement.getText();
-	}
-
 }

@@ -18,31 +18,23 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.impl.source.tree.PsiCommentImpl;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlElementFactory;
-import org.jetbrains.annotations.NonNls;
+import com.perl5.lang.perl.psi.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlHeredocOpenerImplMixin extends PerlNamedElementImpl implements PerlElementTypes
+public class PerlHeredocTerminatorImpl extends PsiCommentImpl implements PerlNamedElement, PerlElementTypes
 {
-	public PerlHeredocOpenerImplMixin(@NotNull ASTNode node){
-		super(node);
-	}
+	public PerlHeredocTerminatorImpl(IElementType type, CharSequence text){ super(type, text);}
 
 	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if( nameIdentifier != null )
-		{
-			PerlStringContentImpl newName = PerlElementFactory.createStringContent(getProject(), name);
-			if( newName != null )
-				nameIdentifier.replace(newName);
-
-		}
+		replace(PerlElementFactory.createHereDocTerminator(getProject(), name));
 		return this;
 	}
 
@@ -50,7 +42,14 @@ public class PerlHeredocOpenerImplMixin extends PerlNamedElementImpl implements 
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return PsiTreeUtil.findChildOfType(this, PerlStringContentImpl.class);
+		return getPsi();
 	}
 
+	// todo we should move this to some superclass
+	@Override
+	public String getName()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+		return nameIdentifier == null ? null: nameIdentifier.getText();
+	}
 }

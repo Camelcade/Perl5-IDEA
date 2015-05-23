@@ -17,25 +17,32 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.files.PerlFileTypePackage;
+import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
+import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
+import com.perl5.lang.perl.psi.impl.PerlStringContentImpl;
+import com.perl5.lang.perl.psi.impl.PerlStringSqImpl;
 
-/**
- * Created by hurricup on 26.04.2015.
- */
 public class PerlElementFactory
 {
-/*
-	public static PerlPackageBare createPerlPackageBare(Project project, String name)
+	public static PerlHeredocTerminatorImpl createHereDocTerminator(Project project, String name)
 	{
-		final PerlFile file = createFile(project, name);
-		return (PerlPackageBare) file.getFirstChild();
+		PerlFile file = createFile(project, "<<'" + name + "';\n"+name+"\n");
+		return (PerlHeredocTerminatorImpl)file.getChildren()[3];
 	}
-*/
+
+	public static PerlStringContentImpl createStringContent(Project project, String name)
+	{
+		PerlFile file = createFile(project, "'"+name+"';");
+		return (PerlStringContentImpl)file.getFirstChild().getFirstChild().getFirstChild().getFirstChild().getNextSibling();
+	}
 
 	public static PerlFile createFile(Project project, String text)
 	{
-		String fileName = "package.dummy";
+		String fileName = "file.dummy";
 		return (PerlFile) PsiFileFactory.getInstance(project).
 				createFileFromText(fileName, PerlFileTypePackage.INSTANCE, text);
 	}
