@@ -27,26 +27,17 @@ import com.perl5.lang.perl.psi.impl.PerlSubDeclarationImpl;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
 import com.perl5.lang.perl.psi.impl.PerlUserFunctionImpl;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlUserFunctionReference extends PerlReferencePoly
+/**
+ * Created by hurricup on 24.05.2015.
+ */
+public class PerlUserFunctionDeclarationReference extends PerlUserFunctionReference
 {
-	String functionName;
-
-	public PerlUserFunctionReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlUserFunctionDeclarationReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
-		assert element instanceof PerlUserFunctionImpl;
-		functionName = ((PerlUserFunctionImpl) element).getName();
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
 	}
 
 	@NotNull
@@ -57,8 +48,8 @@ public class PerlUserFunctionReference extends PerlReferencePoly
 		PsiFile file = myElement.getContainingFile();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		// definitions
-		for( PerlSubDefinitionImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDefinitionImpl.class))
+		// declarations
+		for( PerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDeclarationImpl.class))
 		{
 			if( functionName.equals(sub.getUserFunction().getText()))
 				result.add(new PsiElementResolveResult(sub.getUserFunction()));
@@ -69,13 +60,5 @@ public class PerlUserFunctionReference extends PerlReferencePoly
 		// search in used packages (poly reference)
 
 		return result.toArray(new ResolveResult[result.size()]);
-	}
-
-	@Nullable
-	@Override
-	public PsiElement resolve()
-	{
-		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
 	}
 }

@@ -50,7 +50,17 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
 						assert element instanceof PerlUserFunctionImpl;
-						return new PsiReference[]{new PerlUserFunctionReference(element, new TextRange(0, element.getTextLength()))};
+
+						if( element.getParent() instanceof PerlSubDefinitionImpl)
+							return new PsiReference[]{new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
+						else
+						{
+							PsiReference reference = new PerlUserFunctionReference(element, new TextRange(0, element.getTextLength()));
+							if( ((PerlUserFunctionReference)reference).multiResolve(false).length == 0 )
+								reference = new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()));
+
+							return new PsiReference[]{reference};
+						}
 					}
 				}
 		);
