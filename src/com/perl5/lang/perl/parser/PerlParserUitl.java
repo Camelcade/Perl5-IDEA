@@ -175,6 +175,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		}
 		else if( tokenType == PERL_RBRACE ||  tokenType == PERL_RESERVED)
 			return true;
+		else if(b.eof()) // eof
+			return true;
 
 		// @todo think what to do here. Currently any statement being finished, even incorrect one
 		return false;

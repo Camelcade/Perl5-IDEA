@@ -16,32 +16,31 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.lang.DefaultASTFactoryImpl;
-import com.intellij.psi.impl.source.tree.LeafElement;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElementTypes
+/**
+ * Created by hurricup on 24.05.2015.
+ */
+public abstract class PerlScalarImplMixin extends PerlNamedElementImpl implements PerlElementTypes
 {
-	@Override
-	public LeafElement createComment( @NotNull IElementType type, CharSequence text)
-	{
-		if( type == PERL_HEREDOC_END )
-			return new PerlHeredocTerminatorImpl(type, text);
-		else
-			return super.createComment(type, text);
+	public PerlScalarImplMixin(ASTNode node) {
+		super(node);
 	}
 
-	@NotNull
 	@Override
-	public LeafElement createLeaf(@NotNull IElementType type, CharSequence text)
+	public PsiElement setName(String name) throws IncorrectOperationException
 	{
-		if( type == PERL_STRING_CONTENT )
-			return new PerlStringContentImpl(type, text);
-		else
-			return super.createLeaf(type, text);
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return findChildByType(PERL_VARIABLE_NAME);
 	}
 }

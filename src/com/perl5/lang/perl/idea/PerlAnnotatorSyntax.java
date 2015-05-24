@@ -49,38 +49,38 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
 		IElementType elementType = element.getNode().getElementType();
-//		if( elementType == SCALAR )
-//		{
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					PerlSyntaxHighlighter.PERL_SCALAR,
-//                    false,
-//					false);
-//		}
-//		else if( elementType == HASH )
-//		{
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					PerlSyntaxHighlighter.PERL_HASH,
-//                    false,
-//					false);
-//		}
-//        else if( elementType == ARRAY )
-//        {
-//            colorize(
-//                    holder.createInfoAnnotation(element, null),
-//                    PerlSyntaxHighlighter.PERL_ARRAY,
-//                    false,
-//                    false);
-//        }
-//        else if( elementType == GLOB )
-//        {
-//            colorize(
-//                    holder.createInfoAnnotation(element, null),
-//                    PerlSyntaxHighlighter.PERL_GLOB,
-//                    false,
-//                    false);
-//        }
+		if( elementType == PERL_SCALAR )
+		{
+			colorize(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_SCALAR,
+                    false,
+					false);
+		}
+		else if( elementType == PERL_HASH )
+		{
+			colorize(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_HASH,
+                    false,
+					false);
+		}
+        else if( elementType == PERL_ARRAY )
+        {
+            colorize(
+                    holder.createInfoAnnotation(element, null),
+                    PerlSyntaxHighlighter.PERL_ARRAY,
+                    false,
+                    false);
+        }
+        else if( elementType == PERL_GLOB )
+        {
+            colorize(
+                    holder.createInfoAnnotation(element, null),
+                    PerlSyntaxHighlighter.PERL_GLOB,
+                    false,
+                    false);
+        }
 //		if( elementType == PERL_PACKAGE )
 //		{
 //			String packageName = element.getText();
