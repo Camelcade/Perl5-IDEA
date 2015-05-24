@@ -27,6 +27,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlHash;
 import com.perl5.lang.perl.psi.PerlLexicalVariable;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.impl.*;
@@ -41,23 +42,73 @@ import java.util.Collection;
 public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes
 {
 
-	// built in arrays
+    private void fillScalarCompletions(@NotNull CompletionParameters parameters,
+                                       ProcessingContext context,
+                                       @NotNull CompletionResultSet resultSet)
+    {
+        for( String scalarName: PerlScalarUtil.BUILT_IN )
+        {
+            resultSet.addElement(LookupElementBuilder.create(scalarName.substring(1)));
+        }
+
+    }
+    private void fillArrayCompletions(@NotNull CompletionParameters parameters,
+                                       ProcessingContext context,
+                                       @NotNull CompletionResultSet resultSet)
+    {
+        // built in arrays
+        for( String arrayName: PerlArrayUtil.BUILT_IN )
+        {
+            resultSet.addElement(LookupElementBuilder.create(arrayName.substring(1)));
+        }
+
+    }
+    private void fillHashCompletions(@NotNull CompletionParameters parameters,
+                                       ProcessingContext context,
+                                       @NotNull CompletionResultSet resultSet)
+    {
+        // built-in hashes
+        for( String hashName: PerlHashUtil.BUILT_IN )
+        {
+            resultSet.addElement(LookupElementBuilder.create(hashName.substring(1)));
+        }
+
+    }
+    private void fillGlobCompletions(@NotNull CompletionParameters parameters,
+                                       ProcessingContext context,
+                                       @NotNull CompletionResultSet resultSet)
+    {
+        // built-in globs
+        for( String globName: PerlGlobUtil.BUILT_IN )
+        {
+            resultSet.addElement(LookupElementBuilder.create(globName.substring(1)));
+        }
+    }
+
+
 	public PerlCompletionContributor() {
+
+        // router
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_ARRAY).withLanguage(PerlLanguage.INSTANCE),
+                PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_NAME).withLanguage(PerlLanguage.INSTANCE),
                 new CompletionProvider<CompletionParameters>() {
                     public void addCompletions(@NotNull CompletionParameters parameters,
                                                ProcessingContext context,
                                                @NotNull CompletionResultSet resultSet) {
 
-                        resultSet = resultSet.withPrefixMatcher("@"+resultSet.getPrefixMatcher().getPrefix());
-                        for( String arrayName: PerlArrayUtil.BUILT_IN )
-                        {
-                            resultSet.addElement(LookupElementBuilder.create(arrayName));
-                        }
-                        resultSet.withPrefixMatcher("@");
+                        PsiElement position = parameters.getOriginalPosition();
+                        assert position != null;
+                        PsiElement parent = position.getParent();
 
+                        if( parent instanceof PerlPerlScalarImpl )
+                            fillScalarCompletions(parameters, context, resultSet);
+                        else if( parent instanceof PerlPerlArrayImpl )
+                            fillArrayCompletions(parameters, context, resultSet);
+                        else if( parent instanceof PerlPerlHashImpl)
+                            fillHashCompletions(parameters, context, resultSet);
+                        else  if( parent instanceof PerlPerlGlobImpl )
+                            fillGlobCompletions(parameters, context, resultSet);
                     }
                 }
         );
@@ -139,25 +190,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                     }
                 }
         );
-
-
-        // built in scalars
-		extend(
-				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_SCALAR).withLanguage(PerlLanguage.INSTANCE),
-				new CompletionProvider<CompletionParameters>() {
-					public void addCompletions(@NotNull CompletionParameters parameters,
-											   ProcessingContext context,
-											   @NotNull CompletionResultSet resultSet) {
-
-						for( String scalarName: PerlScalarUtil.BUILT_IN )
-						{
-							resultSet.addElement(LookupElementBuilder.create(scalarName));
-						}
-
-					}
-				}
-		);
 
         // current file defined scalars
         extend(
@@ -296,24 +328,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                     }
                 }
         );
-
-        // built-in hashes
-		extend(
-				CompletionType.BASIC,
-				PlatformPatterns.psiElement(PerlElementTypes.PERL_HASH).withLanguage(PerlLanguage.INSTANCE),
-				new CompletionProvider<CompletionParameters>() {
-					public void addCompletions(@NotNull CompletionParameters parameters,
-											   ProcessingContext context,
-											   @NotNull CompletionResultSet resultSet) {
-
-                        resultSet = resultSet.withPrefixMatcher("%"+resultSet.getPrefixMatcher().getPrefix());
-						for( String hashName: PerlHashUtil.BUILT_IN )
-						{
-							resultSet.addElement(LookupElementBuilder.create(hashName));
-						}
-					}
-				}
-		);
 
         // current file defined hashes
         extend(

@@ -136,7 +136,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 		attributesMap.put(PerlElementTypes.PERL_HASH_BUILT_IN, new TextAttributesKey[]{PERL_HASH, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_GLOB_BUILT_IN, new TextAttributesKey[]{PERL_GLOB, PERL_BUILT_IN});
 
-        attributesMap.put(PerlElementTypes.PERL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
         attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
         attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
