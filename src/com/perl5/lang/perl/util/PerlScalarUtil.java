@@ -145,26 +145,7 @@ public class PerlScalarUtil implements PerlElementTypes
 			"$^R",
 			"$LAST_MATCH_END",
 			"$^RE_DEBUG_FLAGS",
-			"$LAST_PAREN_MATCH",
-
-			// array elements
-			"$+",
-			"$-",
-			"$_",
-			"$ARGV",
-			"$INC",
-			"$LAST_MATCH_START",
-
-			// hashes elements
-			"$!",
-			"$+",
-			"$-",
-			"$^H",
-			"$ENV",
-			"$INC",
-			"$OVERLOAD",
-			"$SIG",
-			"$^"
+			"$LAST_PAREN_MATCH"
 	));
 
 	static{
@@ -179,34 +160,5 @@ public class PerlScalarUtil implements PerlElementTypes
 		return BUILT_IN_MAP.containsKey(variable);
 	}
 
-/*
-	public static List<PerlScalar> findScalars(Project project, String key) {
-		List<PerlScalar> result = null;
-
-		Collection<VirtualFile> virtualFiles = FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, PerlFileTypePackage.INSTANCE,
-				GlobalSearchScope.allScope(project));
-
-		virtualFiles.addAll(FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, PerlFileTypeScript.INSTANCE,
-				GlobalSearchScope.allScope(project)));
-
-		for (VirtualFile virtualFile : virtualFiles) {
-			PerlFile perlFile = (PerlFile) PsiManager.getInstance(project).findFile(virtualFile);
-			if (perlFile != null) {
-				PerlPackageNamespace[] packageDefinitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageNamespace.class );
-				if (packageDefinitions != null) {
-					for (PerlPackageNamespace packageDefinition: packageDefinitions) {
-						if (key.equals(packageDefinition.getPackageBare().getText())) {
-							if (result == null) {
-								result = new ArrayList<PerlScalar>();
-							}
-							result.add(scalar);
-						}
-					}
-				}
-			}
-		}
-		return result != null ? result : Collections.<PerlScalar>emptyList();
-	}
-*/
 
 }

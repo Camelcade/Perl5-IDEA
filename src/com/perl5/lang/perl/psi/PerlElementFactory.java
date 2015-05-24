@@ -41,7 +41,7 @@ public class PerlElementFactory
 	public static PerlStringContentImpl createStringContent(Project project, String name)
 	{
 		PerlFile file = createFile(project, "'"+name+"';");
-		return (PerlStringContentImpl)file.getFirstChild().getFirstChild().getFirstChild().getFirstChild().getNextSibling();
+		return (PerlStringContentImpl)file.getFirstChild().getFirstChild().getFirstChild().getNextSibling();
 	}
 
 	public static PerlFile createFile(Project project, String text)

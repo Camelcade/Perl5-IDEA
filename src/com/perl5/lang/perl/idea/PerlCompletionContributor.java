@@ -22,14 +22,11 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlHash;
-import com.perl5.lang.perl.psi.PerlLexicalVariable;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -46,20 +43,32 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                        ProcessingContext context,
                                        @NotNull CompletionResultSet resultSet)
     {
-        for( String scalarName: PerlScalarUtil.BUILT_IN )
-        {
-            resultSet.addElement(LookupElementBuilder.create(scalarName.substring(1)));
-        }
 
+        for( String name: PerlScalarUtil.BUILT_IN )
+        {
+            resultSet.addElement(LookupElementBuilder.create(name.substring(1)));
+        }
+        for( String name: PerlArrayUtil.BUILT_IN )
+        {
+            resultSet.addElement(LookupElementBuilder.create(name.substring(1) + "[]"));
+        }
+        for( String name: PerlHashUtil.BUILT_IN )
+        {
+            resultSet.addElement(LookupElementBuilder.create(name.substring(1) + "{}"));
+        }
     }
     private void fillArrayCompletions(@NotNull CompletionParameters parameters,
                                        ProcessingContext context,
                                        @NotNull CompletionResultSet resultSet)
     {
         // built in arrays
-        for( String arrayName: PerlArrayUtil.BUILT_IN )
+        for( String name: PerlArrayUtil.BUILT_IN )
         {
-            resultSet.addElement(LookupElementBuilder.create(arrayName.substring(1)));
+            resultSet.addElement(LookupElementBuilder.create(name.substring(1)));
+        }
+        for( String name: PerlHashUtil.BUILT_IN )
+        {
+            resultSet.addElement(LookupElementBuilder.create(name.substring(1) + "{}"));
         }
 
     }
@@ -68,9 +77,9 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                        @NotNull CompletionResultSet resultSet)
     {
         // built-in hashes
-        for( String hashName: PerlHashUtil.BUILT_IN )
+        for( String name: PerlHashUtil.BUILT_IN )
         {
-            resultSet.addElement(LookupElementBuilder.create(hashName.substring(1)));
+            resultSet.addElement(LookupElementBuilder.create(name.substring(1)));
         }
 
     }
@@ -79,170 +88,218 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                        @NotNull CompletionResultSet resultSet)
     {
         // built-in globs
-        for( String globName: PerlGlobUtil.BUILT_IN )
+        for( String name: PerlGlobUtil.BUILT_IN )
         {
-            resultSet.addElement(LookupElementBuilder.create(globName.substring(1)));
+            resultSet.addElement(LookupElementBuilder.create(name.substring(1)));
         }
     }
 
 
-	public PerlCompletionContributor() {
+	public PerlCompletionContributor()
+    {
 
-        // router
+        // router built-in
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_NAME).withLanguage(PerlLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
+                new CompletionProvider<CompletionParameters>()
+                {
                     public void addCompletions(@NotNull CompletionParameters parameters,
                                                ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet) {
+                                               @NotNull CompletionResultSet resultSet)
+                    {
 
                         PsiElement position = parameters.getOriginalPosition();
                         assert position != null;
                         PsiElement parent = position.getParent();
 
-                        if( parent instanceof PerlPerlScalarImpl )
+                        if (parent instanceof PerlPerlScalarImpl)
                             fillScalarCompletions(parameters, context, resultSet);
-                        else if( parent instanceof PerlPerlArrayImpl )
+                        else if (parent instanceof PerlPerlArrayImpl)
                             fillArrayCompletions(parameters, context, resultSet);
-                        else if( parent instanceof PerlPerlHashImpl)
+                        else if (parent instanceof PerlPerlHashImpl)
                             fillHashCompletions(parameters, context, resultSet);
-                        else  if( parent instanceof PerlPerlGlobImpl )
+                        else if (parent instanceof PerlPerlGlobImpl)
                             fillGlobCompletions(parameters, context, resultSet);
                     }
                 }
         );
 
-        // current file defined hashes
+        // router defined
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_ARRAY).withLanguage(PerlLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
+                PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_NAME).withLanguage(PerlLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>()
+                {
                     public void addCompletions(@NotNull final CompletionParameters parameters,
                                                ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet) {
+                                               @NotNull final CompletionResultSet resultSet)
+                    {
 
-                        resultSet = resultSet.withPrefixMatcher("@"+resultSet.getPrefixMatcher().getPrefix());
+                        final PsiFile file = parameters.getOriginalFile();
+                        final PsiElement position = parameters.getOriginalPosition();
+                        assert position != null;
+                        final PsiElement parent = position.getParent();
 
-                        final CompletionResultSet finalResultSet = resultSet;
-
-                        ApplicationManager.getApplication().runReadAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                PsiFile file = parameters.getOriginalFile();
-                                PsiElement position = parameters.getOriginalPosition();
-                                assert position != null;
-                                String currentText = parameters.getOriginalPosition().getText();
-
-                                Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                for( PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
+                        if (parent instanceof PerlPerlScalarImpl)
+                            ApplicationManager.getApplication().runReadAction(new Runnable()
+                            {
+                                @Override
+                                public void run()
                                 {
-                                    for( PerlLexicalVariable variable: decl.getLexicalVariableList())
-                                    {
-                                        IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                        if( variableType == PERL_ARRAY )
-                                            finalResultSet.addElement(LookupElementBuilder.create(variable.getText()));
-                                        else if( variableType == PERL_HASH) // hash slice
-                                            finalResultSet.addElement(LookupElementBuilder.create("@"+variable.getText().substring(1)+"{}"));
-                                    }
-                                }
+                                    String currentText = position.getText();
 
-                                Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
+                                    Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
 
-                                for( PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
-                                {
-                                    for( PerlLexicalVariable variable: decl.getLexicalVariableList())
+                                    for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
                                     {
-                                        IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                        if( variableType == PERL_ARRAY )
-                                            finalResultSet.addElement(LookupElementBuilder.create(variable.getText()));
-                                        else if( variableType == PERL_HASH) // hash slice
-                                            finalResultSet.addElement(LookupElementBuilder.create("@"+variable.getText().substring(1)+"{}"));
-                                    }
-                                }
-
-                                // it's dereference
-                                if( currentText.contains("$"))
-                                {
-                                    for( PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
-                                    {
-                                        for( PerlLexicalVariable variable: decl.getLexicalVariableList())
+                                        for (PerlPerlScalar variable : decl.getPerlScalarList())
                                         {
-                                            IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                            if( variableType == PERL_SCALAR )
-                                                finalResultSet.addElement(LookupElementBuilder.create("@" + variable.getText()));
+                                            assert variable instanceof PerlPerlScalarImpl;
+                                            String variableName = ((PerlPerlScalarImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName));
+                                        }
+                                        for (PerlPerlArray variable : decl.getPerlArrayList())
+                                        {
+                                            assert variable instanceof PerlPerlArrayImpl;
+                                            String variableName = ((PerlPerlArrayImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
+                                        }
+                                        for (PerlPerlHash variable : decl.getPerlHashList())
+                                        {
+                                            assert variable instanceof PerlPerlHashImpl;
+                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
                                         }
                                     }
 
-                                    for( PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
+                                    Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
+
+                                    for (PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
                                     {
-                                        for( PerlLexicalVariable variable: decl.getLexicalVariableList())
+                                        for (PerlPerlScalar variable : decl.getPerlScalarList())
                                         {
-                                            IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                            if( variableType == PERL_SCALAR )
-                                                finalResultSet.addElement(LookupElementBuilder.create("@" + variable.getText()));
+                                            assert variable instanceof PerlPerlScalarImpl;
+                                            String variableName = ((PerlPerlScalarImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName));
+                                        }
+                                        for (PerlPerlArray variable : decl.getPerlArrayList())
+                                        {
+                                            assert variable instanceof PerlPerlArrayImpl;
+                                            String variableName = ((PerlPerlArrayImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
+                                        }
+                                        for (PerlPerlHash variable : decl.getPerlHashList())
+                                        {
+                                            assert variable instanceof PerlPerlHashImpl;
+                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
                                         }
                                     }
                                 }
-                            }
-                        });
-                    }
-                }
-        );
-
-        // current file defined scalars
-        extend(
-                CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_SCALAR).withLanguage(PerlLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
-                    public void addCompletions(@NotNull final CompletionParameters parameters,
-                                               ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet) {
-
-                        final CompletionResultSet finalResultSet = resultSet;
-
-                        ApplicationManager.getApplication().runReadAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                PsiFile file = parameters.getOriginalFile();
-                                PsiElement position = parameters.getOriginalPosition();
-                                assert position != null;
-                                String currentText = parameters.getOriginalPosition().getText();
-
-                                Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                for( PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
+                            });
+                        else if (parent instanceof PerlPerlArrayImpl)
+                            ApplicationManager.getApplication().runReadAction(new Runnable()
+                            {
+                                @Override
+                                public void run()
                                 {
-                                    for( PerlLexicalVariable variable: decl.getLexicalVariableList())
+                                    String currentText = position.getText();
+
+                                    Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
+
+                                    for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
                                     {
-                                        IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                        if( variableType == PERL_SCALAR )
-                                            finalResultSet.addElement(LookupElementBuilder.create(variable.getText()));
-                                        else if( variableType == PERL_ARRAY) // array element
-                                            finalResultSet.addElement(LookupElementBuilder.create("$"+variable.getText().substring(1)+"[]"));
-                                        else if( variableType == PERL_HASH) // hash element
-                                            finalResultSet.addElement(LookupElementBuilder.create("$"+variable.getText().substring(1)+"{}"));
+                                        for (PerlPerlArray variable : decl.getPerlArrayList())
+                                        {
+                                            assert variable instanceof PerlPerlArrayImpl;
+                                            String variableName = ((PerlPerlArrayImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName));
+                                        }
+                                        for (PerlPerlHash variable : decl.getPerlHashList())
+                                        {
+                                            assert variable instanceof PerlPerlHashImpl;
+                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                        }
+                                    }
+
+                                    Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
+
+                                    for (PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
+                                    {
+                                        for (PerlPerlArray variable : decl.getPerlArrayList())
+                                        {
+                                            assert variable instanceof PerlPerlArrayImpl;
+                                            String variableName = ((PerlPerlArrayImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName));
+                                        }
+                                        for (PerlPerlHash variable : decl.getPerlHashList())
+                                        {
+                                            assert variable instanceof PerlPerlHashImpl;
+                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                        }
+                                    }
+
+                                    // it's dereference
+                                    if (parent.getText().contains("$"))
+                                    {
+                                        populateScalars(globalDeclarations, lexicalDeclarations, resultSet);
                                     }
                                 }
-
-                                Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
-
-                                for( PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
+                            });
+                        else if (parent instanceof PerlPerlHashImpl)
+                            ApplicationManager.getApplication().runReadAction(new Runnable()
+                            {
+                                @Override
+                                public void run()
                                 {
-                                    for( PerlLexicalVariable variable: decl.getLexicalVariableList())
+                                    String currentText = position.getText();
+
+                                    Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
+
+                                    for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
                                     {
-                                        IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                        if( variableType == PERL_SCALAR )
-                                            finalResultSet.addElement(LookupElementBuilder.create(variable.getText()));
-                                        else if( variableType == PERL_ARRAY) // array element
-                                            finalResultSet.addElement(LookupElementBuilder.create("$"+variable.getText().substring(1)+"[]"));
-                                        else if( variableType == PERL_HASH) // hash element
-                                            finalResultSet.addElement(LookupElementBuilder.create("$"+variable.getText().substring(1)+"{}"));
+                                        for (PerlPerlHash variable : decl.getPerlHashList())
+                                        {
+                                            assert variable instanceof PerlPerlHashImpl;
+                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                        }
+                                    }
+
+                                    Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
+
+                                    for (PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
+                                    {
+                                        for (PerlPerlHash variable : decl.getPerlHashList())
+                                        {
+                                            assert variable instanceof PerlPerlHashImpl;
+                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            if (variableName != null)
+                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                        }
+                                    }
+
+                                    // it's dereference
+                                    if (parent.getText().contains("$"))
+                                    {
+                                        populateScalars(globalDeclarations, lexicalDeclarations, resultSet);
                                     }
                                 }
-                            }
-                        });
+                            });
                     }
                 }
         );
@@ -252,22 +309,26 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
+                new CompletionProvider<CompletionParameters>()
+                {
                     public void addCompletions(@NotNull final CompletionParameters parameters,
                                                ProcessingContext context,
-                                               @NotNull final CompletionResultSet resultSet) {
+                                               @NotNull final CompletionResultSet resultSet)
+                    {
 
-                        ApplicationManager.getApplication().runReadAction(new Runnable() {
+                        ApplicationManager.getApplication().runReadAction(new Runnable()
+                        {
                             @Override
-                            public void run() {
+                            public void run()
+                            {
                                 PsiFile file = parameters.getOriginalFile();
 
-                                for( PerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDeclarationImpl.class))
+                                for (PerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDeclarationImpl.class))
                                 {
                                     resultSet.addElement(LookupElementBuilder.create(sub.getUserFunction().getText()));
                                 }
 
-                                for( PerlSubDefinitionImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDefinitionImpl.class))
+                                for (PerlSubDefinitionImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDefinitionImpl.class))
                                 {
                                     resultSet.addElement(LookupElementBuilder.create(sub.getUserFunction().getText()));
                                 }
@@ -281,31 +342,35 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
+                new CompletionProvider<CompletionParameters>()
+                {
                     public void addCompletions(@NotNull final CompletionParameters parameters,
                                                ProcessingContext context,
-                                               @NotNull final CompletionResultSet resultSet) {
+                                               @NotNull final CompletionResultSet resultSet)
+                    {
 
-                        ApplicationManager.getApplication().runReadAction(new Runnable() {
+                        ApplicationManager.getApplication().runReadAction(new Runnable()
+                        {
                             @Override
-                            public void run() {
+                            public void run()
+                            {
                                 PsiFile file = parameters.getOriginalFile();
 
-								for( PerlUseStatementImpl use : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementImpl.class))
-								{
-									PerlNamespace namespace = use.getNamespace();
+                                for (PerlUseStatementImpl use : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementImpl.class))
+                                {
+                                    PerlNamespace namespace = use.getNamespace();
 
-									if( namespace != null)
-										resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
-								}
+                                    if (namespace != null)
+                                        resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
+                                }
 
-								for( PerlRequireTermImpl use : PsiTreeUtil.findChildrenOfType(file, PerlRequireTermImpl.class))
-								{
-									PerlNamespace namespace = use.getNamespace();
+                                for (PerlRequireTermImpl use : PsiTreeUtil.findChildrenOfType(file, PerlRequireTermImpl.class))
+                                {
+                                    PerlNamespace namespace = use.getNamespace();
 
-									if( namespace != null)
-										resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
-								}
+                                    if (namespace != null)
+                                        resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
+                                }
                             }
                         });
                     }
@@ -316,94 +381,52 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
+                new CompletionProvider<CompletionParameters>()
+                {
                     public void addCompletions(@NotNull CompletionParameters parameters,
                                                ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet) {
+                                               @NotNull CompletionResultSet resultSet)
+                    {
 
-                        for( String functionName: PerlFunctionUtil.BUILT_IN )
+                        for (String functionName : PerlFunctionUtil.BUILT_IN)
                         {
-                                resultSet.addElement(LookupElementBuilder.create(functionName));
+                            resultSet.addElement(LookupElementBuilder.create(functionName));
                         }
                     }
                 }
         );
-
-        // current file defined hashes
-        extend(
-                CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_HASH).withLanguage(PerlLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
-                    public void addCompletions(@NotNull final CompletionParameters parameters,
-                                               ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet) {
-
-                        resultSet = resultSet.withPrefixMatcher("%"+resultSet.getPrefixMatcher().getPrefix());
-
-                        final CompletionResultSet finalResultSet = resultSet;
-
-                        ApplicationManager.getApplication().runReadAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                PsiFile file = parameters.getOriginalFile();
-                                PsiElement position = parameters.getOriginalPosition();
-                                assert position != null;
-                                String currentText = parameters.getOriginalPosition().getText();
-
-                                Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                for( PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
-                                {
-                                    for( PerlLexicalVariable variable: decl.getLexicalVariableList())
-                                    {
-                                        IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                        if( variableType == PERL_HASH )
-                                            finalResultSet.addElement(LookupElementBuilder.create(variable.getText()));
-                                    }
-                                }
-
-                                Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
-
-                                for( PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
-                                {
-                                    for( PerlLexicalVariable variable: decl.getLexicalVariableList())
-                                    {
-                                        IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                        if( variableType == PERL_HASH )
-                                            finalResultSet.addElement(LookupElementBuilder.create(variable.getText()));
-                                    }
-                                }
-
-                                // it's dereference
-                                if( currentText.contains("$"))
-                                {
-                                    for( PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
-                                    {
-                                        for( PerlLexicalVariable variable: decl.getLexicalVariableList())
-                                        {
-                                            IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                            if( variableType == PERL_SCALAR )
-                                                finalResultSet.addElement(LookupElementBuilder.create("%" + variable.getText()));
-                                        }
-                                    }
-
-                                    for( PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
-                                    {
-                                        for( PerlLexicalVariable variable: decl.getLexicalVariableList())
-                                        {
-                                            IElementType variableType = variable.getFirstChild().getNode().getElementType();
-                                            if( variableType == PERL_SCALAR )
-                                                finalResultSet.addElement(LookupElementBuilder.create("%" + variable.getText()));
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
-        );
-
     }
+
+
+    private void populateScalars(
+                @NotNull Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations,
+                @NotNull Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations,
+                @NotNull CompletionResultSet resultSet
+    )
+    {
+        for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
+        {
+            for (PerlPerlScalar variable : decl.getPerlScalarList())
+            {
+                assert variable instanceof PerlPerlScalarImpl;
+                String variableName = ((PerlPerlScalarImpl) variable).getName();
+                if( variableName != null)
+                    resultSet.addElement(LookupElementBuilder.create(variableName));
+            }
+        }
+
+        for (PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
+        {
+            for (PerlPerlScalar variable : decl.getPerlScalarList())
+            {
+                assert variable instanceof PerlPerlScalarImpl;
+                String variableName = ((PerlPerlScalarImpl) variable).getName();
+                if( variableName != null)
+                    resultSet.addElement(LookupElementBuilder.create(variableName));
+            }
+        }
+    }
+
 
 	@Override
 	public void fillCompletionVariants(CompletionParameters parameters, CompletionResultSet result)

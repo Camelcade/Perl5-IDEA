@@ -25,9 +25,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlScalarImplMixin extends PerlNamedElementImpl implements PerlElementTypes
+public abstract class PerlVariableImpleMixin extends PerlNamedElementImpl implements PerlElementTypes
 {
-	public PerlScalarImplMixin(ASTNode node) {
+	public PerlVariableImpleMixin(ASTNode node) {
 		super(node);
 	}
 

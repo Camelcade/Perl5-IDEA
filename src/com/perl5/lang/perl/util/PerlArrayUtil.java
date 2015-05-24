@@ -40,15 +40,7 @@ public class PerlArrayUtil implements PerlElementTypes
 			"@EXPORT",
 			"@ISA",
 			"@EXPORT_OK",
-			"@EXPORT_TAGS",
-
-			// hash slices
-			"@!",
-			"@^H",
-			"@ENV",
-			"@INC",
-			"@OVERLOAD",
-			"@SIG"
+			"@EXPORT_TAGS"
 	));
 
 	static{
