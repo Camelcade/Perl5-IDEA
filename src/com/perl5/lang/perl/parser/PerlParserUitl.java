@@ -49,25 +49,19 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 
-//		if( methodName == null) // not working on scalar calling, we s
-			// can't happen
-//			return false;
-//			throw new Error("No method captured, smth is wrong");
-//		else if(packageName == null) // method from unknown package
-//		{
-//			parseExpressionLevel(b,l,2);
-//		}
-//		else // method and package are known
-//		{
-			PsiBuilder.Marker m = b.mark();
-			boolean r = PerlParser.block(b,l);
-			if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
-				m.rollbackTo();
-			else
-				m.drop();
+		PsiBuilder.Marker mainMarker = b.mark();
 
-			parseExpressionLevel(b,l,2); // nothing below comma
-//		}
+		PsiBuilder.Marker m = b.mark();
+		boolean r = PerlParser.block(b,l);
+		if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
+			m.rollbackTo();
+		else
+			m.drop();
+
+		parseExpressionLevel(b,l,2); // nothing below comma
+
+		mainMarker.done(CALL_ARGUMENTS);
+
 		return true;
 	}
 

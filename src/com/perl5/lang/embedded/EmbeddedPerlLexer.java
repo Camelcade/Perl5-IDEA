@@ -80,7 +80,8 @@ public class EmbeddedPerlLexer extends PerlLexer
 			setTokenEnd(tokenStart + 2);
 			return EMBED_MARKER;
 		}
-		else if( tokenStart < bufferEnd && buffer.charAt(tokenStart)=='#')
+		// todo remove LEX_QUOTE_LIKE_CHARS after refactoring sctrings capture
+		else if( tokenStart < bufferEnd && buffer.charAt(tokenStart)=='#' && yystate() != LEX_QUOTE_LIKE_CHARS)
 		{
 			// comment may end on newline or ?>
 			int currentPosition = tokenStart;

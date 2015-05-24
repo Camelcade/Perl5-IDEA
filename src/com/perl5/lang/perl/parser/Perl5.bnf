@@ -140,7 +140,6 @@ limitations under the License.
     mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixin";
     mixin("object")="com.perl5.lang.perl.psi.impl.PerlObjectImplMixin"
     mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
-    mixin("callable")="com.perl5.lang.perl.psi.impl.PerlCallableImplMixin"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImplMixin"
  }
 
@@ -152,7 +151,7 @@ private file_item ::= namespace_definition | namespace_element
 
 block ::= "{" file_items "}" {pin=1}
 
-private namespace_element ::= (sub_definition | named_block | compound_statement | statement ) [PERL_SEMI+]
+private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI )
 
 // package keyword
 namespace_definition ::= "package" namespace [perl_version] (block | PERL_SEMI namespace_content) {pin=1}
@@ -264,6 +263,7 @@ private recover_statement ::= !(
     | PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
     | PERL_RBRACE | PERL_LBRACE
     | PERL_LBRACK | PERL_RBRACK
+    | PERL_SEMI
     | PERL_SCALAR_BUILT_IN | PERL_ARRAY_BUILT_IN| PERL_HASH_BUILT_IN| PERL_GLOB_BUILT_IN
     | PERL_HANDLE | PERL_HANDLE_BUILT_IN
     | PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR | PERL_SIGIL_ARRAY | PERL_SIGIL_GLOB | PERL_SIGIL_HASH
@@ -333,8 +333,6 @@ term_expr ::=
 parenthesised_expr ::= '(' [expr] ')'
 
 return_term ::= "return" [list_expr]
-
-rightward_call ::= callable <<parseCallParameters>>
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
 
@@ -419,8 +417,10 @@ private grep_map_arguments_variations ::=
     block expr
     | scalar_expr comma expr
 
-private function_call ::= callable "(" [expr] ")" !"["  // avoiding ()[]
+function_call ::= callable "(" call_arguments ")" !"["  // avoiding ()[]
+call_arguments ::= [expr]
 
+rightward_call ::= callable <<parseCallParameters>>
 
 file_read_term ::= '<' [perl_handle] '>'
 
@@ -543,7 +543,7 @@ scalar_call ::= scalar_variable ["(" [expr] ")"]
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
-callable ::= method | referencable_method
+private callable ::= method | referencable_method
 //<<resetLastCallable>> (
 //
 //    |
