@@ -266,8 +266,8 @@ TRANS_MODIFIERS = [cdsr]
     "$"    {return PERL_SIGIL_SCALAR;}
     "@"    {return PERL_SIGIL_ARRAY;}
     "%"    {return PERL_SIGIL_HASH;}
-    "*"    {return PERL_SIGIL_GLOB;}
-//    "&"    {return PERL_SIGIL_CODE;}
+    "*"    {return PERL_OPERATOR;}
+    "&"    {return PERL_OPERATOR;}
     "{"     {return PERL_LBRACE;}
     "}"     {return PERL_RBRACE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}

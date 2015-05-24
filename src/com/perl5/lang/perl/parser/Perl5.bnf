@@ -45,8 +45,7 @@ limitations under the License.
     PERL_SIGIL_ARRAY="@"
     PERL_SIGIL_HASH="%"
     PERL_SIGIL_SCALAR="$"
-//    PERL_SIGIL_CODE="&"
-    PERL_SIGIL_GLOB="*"
+
     PERL_SIGIL_SCALAR_INDEX="$#"
     PERL_VARIABLE_NAME="PERL_VARIABLE_NAME"
 
