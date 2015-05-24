@@ -232,12 +232,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                 for( PerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDeclarationImpl.class))
                                 {
-                                    resultSet.addElement(LookupElementBuilder.create(sub.getMethod().getText()));
+                                    resultSet.addElement(LookupElementBuilder.create(sub.getUserFunction().getText()));
                                 }
 
                                 for( PerlSubDefinitionImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDefinitionImpl.class))
                                 {
-                                    resultSet.addElement(LookupElementBuilder.create(sub.getMethod().getText()));
+                                    resultSet.addElement(LookupElementBuilder.create(sub.getUserFunction().getText()));
                                 }
                             }
                         });

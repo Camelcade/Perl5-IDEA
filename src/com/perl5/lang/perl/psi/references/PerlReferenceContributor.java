@@ -20,9 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
-import com.perl5.lang.perl.psi.impl.PerlStringContentImpl;
+import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlReferenceContributor extends PsiReferenceContributor
@@ -40,6 +38,19 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 					{
 						assert element instanceof PerlHeredocTerminatorImpl;
 						return new PsiReference[]{new PerlHeredocReference(element, new TextRange(0, element.getTextLength()))};
+					}
+				}
+		);
+		registrar.registerReferenceProvider(
+				PlatformPatterns.psiElement(PerlUserFunctionImpl.class),
+				new PsiReferenceProvider()
+				{
+					@NotNull
+					@Override
+					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+					{
+						assert element instanceof PerlUserFunctionImpl;
+						return new PsiReference[]{new PerlUserFunctionReference(element, new TextRange(0, element.getTextLength()))};
 					}
 				}
 		);

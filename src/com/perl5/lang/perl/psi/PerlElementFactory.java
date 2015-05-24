@@ -21,13 +21,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.files.PerlFileTypePackage;
-import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
-import com.perl5.lang.perl.psi.impl.PerlStringContentImpl;
-import com.perl5.lang.perl.psi.impl.PerlStringSqImpl;
+import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
+	public static PerlUserFunctionImpl createUserFunction(Project project, String name)
+	{
+		PerlFile file = createFile(project, "sub " + name + ";");
+		return PsiTreeUtil.findChildOfType(file, PerlUserFunctionImpl.class);
+	}
+
+
 	public static PerlHeredocTerminatorImpl createHereDocTerminator(Project project, String name)
 	{
 		PerlFile file = createFile(project, "<<'" + name + "';\n"+name+"\n");

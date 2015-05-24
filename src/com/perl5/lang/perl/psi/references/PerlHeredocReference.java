@@ -27,7 +27,7 @@ import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlHeredocReference extends PsiReferenceBase<PsiElement>
+public class PerlHeredocReference extends PerlReference
 {
 	private String marker;
 
@@ -62,13 +62,5 @@ public class PerlHeredocReference extends PsiReferenceBase<PsiElement>
 			}
 		}
 		return result;
-	}
-
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		PsiElement element = getElement();
-		assert element instanceof PsiNamedElement;
-		return ((PsiNamedElement) element).setName(newElementName);
 	}
 }

@@ -14,34 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.references;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.PsiReferenceBase;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.05.2015.
+ * Created by hurricup on 24.05.2015.
  */
-public class PerlCallableImplMixin extends PerlNamedElementImpl
+public abstract class PerlReference extends PsiReferenceBase<PsiElement>
 {
-	PerlCallableImplMixin(@NotNull final ASTNode node){super(node);}
-
-	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	public PerlReference(@NotNull PsiElement element, TextRange textRange)
 	{
-		return null;
+		super(element,textRange);
 	}
 
-	@Nullable
 	@Override
-	public PsiElement getNameIdentifier()
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
-		return null;
+		PsiElement element = getElement();
+		assert element instanceof PsiNamedElement;
+		return ((PsiNamedElement) element).setName(newElementName);
 	}
+
 }

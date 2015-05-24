@@ -16,32 +16,37 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NonNls;
+import com.perl5.lang.perl.psi.PerlElementFactory;
+import com.perl5.lang.perl.psi.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.05.2015.
+ * Created by hurricup on 24.05.2015.
  */
-public class PerlCallableImplMixin extends PerlNamedElementImpl
+public class PerlUserFunctionImplMixin extends PerlNamedElementImpl
 {
-	PerlCallableImplMixin(@NotNull final ASTNode node){super(node);}
+	public PerlUserFunctionImplMixin(@NotNull ASTNode node){
+		super(node);
+	}
 
 	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	public PsiElement setName(String name) throws IncorrectOperationException
 	{
-		return null;
+		PerlUserFunctionImpl newFunction = PerlElementFactory.createUserFunction(getProject(), name);
+		if( newFunction != null )
+			replace(newFunction);
+		return this;
 	}
 
 	@Nullable
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return null;
+		return this;
 	}
+
 }

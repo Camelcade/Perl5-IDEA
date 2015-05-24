@@ -123,6 +123,7 @@ limitations under the License.
 
     extends(".*expr")=expr
 
+    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
     mixin("callable")="com.perl5.lang.perl.psi.impl.PerlCallableImplMixin"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImplMixin"
  }
@@ -192,14 +193,14 @@ private statement_variation ::=
     | sub_declaration
     | expr
 
-sub_definition ::= "sub" method sub_definition_parameters ? block
+sub_definition ::= "sub" namespace_method_static sub_definition_parameters ? block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= "sub" method sub_declaration_parameters
+sub_declaration ::= "sub" namespace_method_static sub_declaration_parameters
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= "(" [<<parseSubPrototype>>] ")"
@@ -591,9 +592,15 @@ private glob_variable ::=
 
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
-namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
 method ::=
     namespace '->' scalar_variable      // i belive here could be more
-    | [namespace ['->']] PERL_FUNCTION  // -> or :: call
+    | namespace_method_static   // package::method
+    | namespace_method          // package->method
     | PERL_FUNCTION_BUILT_IN
     | PERL_KEYWORD
+
+private namespace_method_static ::= [namespace] user_function
+private namespace_method ::= [namespace '->'] user_function
+
+namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+user_function ::= PERL_FUNCTION

@@ -36,7 +36,6 @@ import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.psi.PerlFilePackage;
 import com.perl5.lang.perl.psi.impl.PerlFunctionAttributeImpl;
-import com.perl5.lang.perl.psi.impl.PerlFunctionImpl;
 import com.perl5.lang.perl.psi.impl.PerlPackageImpl;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.tree.IStubFileElementType;
@@ -99,10 +98,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@NotNull
 	public PsiElement createElement(ASTNode node) {
 		IElementType type = node.getElementType();
-		if (type == PERL_FUNCTION) {
-			return new PerlFunctionImpl(node);
-		}
-		else if (type == PERL_PACKAGE) {
+		if (type == PERL_PACKAGE) {
 			return new PerlPackageImpl(node);
 		}
 		else if (type == PERL_FUNCTION_ATTRIBUTE)
