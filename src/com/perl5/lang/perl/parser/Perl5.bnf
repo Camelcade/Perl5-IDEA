@@ -45,7 +45,7 @@ limitations under the License.
     PERL_SIGIL_ARRAY="@"
     PERL_SIGIL_HASH="%"
     PERL_SIGIL_SCALAR="$"
-    PERL_SIGIL_CODE="&"
+//    PERL_SIGIL_CODE="&"
     PERL_SIGIL_GLOB="*"
     PERL_SIGIL_SCALAR_INDEX="$#"
     PERL_VARIABLE_NAME="PERL_VARIABLE_NAME"
@@ -267,6 +267,9 @@ private recover_statement ::= !(
     | PERL_SCALAR_BUILT_IN | PERL_ARRAY_BUILT_IN| PERL_HASH_BUILT_IN| PERL_GLOB_BUILT_IN
     | PERL_HANDLE | PERL_HANDLE_BUILT_IN
     | PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR | PERL_SIGIL_ARRAY | PERL_SIGIL_GLOB | PERL_SIGIL_HASH
+    | PERL_NUMBER | '&'
+    | PERL_LABEL
+    | PERL_BLOCK_NAME
     )
 private recover_block ::= !(PERL_RBRACE | <<eof>>)
 private recover_namespace ::= !( "package" | '}' | <<eof>>)

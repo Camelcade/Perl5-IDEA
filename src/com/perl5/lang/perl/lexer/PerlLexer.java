@@ -579,7 +579,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		isEscaped = false;
 		pushState();
 		yybegin(LEX_QUOTE_LIKE_OPENER);
-		return PERL_KEYWORD;
+		return PERL_RESERVED;
 	}
 
 	public IElementType processQuoteLikeQuote()
@@ -647,7 +647,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		allowSharp = true;
 		pushState();
 		yybegin(LEX_QUOTE_LIKE_LIST_OPENER);
-		return PERL_KEYWORD;
+		return PERL_RESERVED;
 	}
 
 	public IElementType processQuoteLikeListQuote()

@@ -33,11 +33,12 @@ public abstract class PerlNamedElementImpl extends ASTWrapperPsiElement implemen
 		super(node);
 	}
 
+	@NotNull
 	@Override
 	public String getName()
 	{
 		PsiElement nameElement = getNameIdentifier();
-		return nameElement == null ? null : nameElement.getText();
+		return nameElement == null ? "UNKNOWN" : nameElement.getText();
 	}
 
 	@NotNull
