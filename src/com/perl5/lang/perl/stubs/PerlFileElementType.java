@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.stubs;
 
+import com.intellij.lang.Language;
 import com.intellij.psi.tree.IStubFileElementType;
 import com.perl5.lang.perl.PerlLanguage;
 
@@ -26,9 +27,9 @@ public class PerlFileElementType extends IStubFileElementType
 {
 	private static final int VERSION = 1;
 
-	public PerlFileElementType()
+	public PerlFileElementType(String debugName, Language language)
 	{
-		super("PERL5_FILE", PerlLanguage.INSTANCE);
+		super(debugName, language);
 	}
 
 	@Override

@@ -36,6 +36,7 @@ import java.util.List;
 
 /**
  * Created by hurricup on 25.04.2015.
+ *
  */
 public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes
 {

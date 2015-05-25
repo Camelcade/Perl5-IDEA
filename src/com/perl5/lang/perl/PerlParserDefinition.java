@@ -55,9 +55,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			PERL_VARIABLE_NAME
 	);
 
-	public static final IStubFileElementType PERL_FILE = new IStubFileElementType("Perl5", PerlLanguage.INSTANCE);
-
-	public static final IFileElementType FILE = new PerlFileElementType();
+	public static final IFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);
 
 	@NotNull
 	@Override

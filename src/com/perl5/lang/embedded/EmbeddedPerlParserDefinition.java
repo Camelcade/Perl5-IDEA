@@ -22,6 +22,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class EmbeddedPerlParserDefinition extends PerlParserDefinition
 {
-	public static final IFileElementType FILE = new IFileElementType("Embedded perl", EmbeddedPerlLanguage.INSTANCE);
+	public static final IFileElementType FILE = new PerlFileElementType("Embedded Perl5", EmbeddedPerlLanguage.INSTANCE);
 
 	@NotNull
 	@Override
