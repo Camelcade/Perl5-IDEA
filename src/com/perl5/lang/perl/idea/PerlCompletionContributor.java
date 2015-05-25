@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -315,31 +316,40 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 {
                     public void addCompletions(@NotNull final CompletionParameters parameters,
                                                ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet)
+                                               @NotNull final CompletionResultSet resultSet)
                     {
 
-                        final String prefix = resultSet.getPrefixMatcher().getPrefix();
-                        final CompletionResultSet finalResultSet = resultSet;// = resultSet.withPrefixMatcher("");
                         String packageName = null;
-
                         PsiElement parent = parameters.getPosition().getParent();
                         if( parent != null && parent instanceof PerlElementInContext )
                             packageName = ((PerlElementInContext) parent).getPackageName();
 
                         final String finalPackageName = packageName == null ? null: packageName + "::";
 
+                        final Project project = parameters.getPosition().getProject();
+
                         ApplicationManager.getApplication().runReadAction(new Runnable()
                         {
                             @Override
                             public void run()
                             {
-                                List<String> definedSubs = PerlFunctionUtil.getDefinedSubsNames(parameters.getPosition().getProject());
+                                List<String> definedSubs = PerlFunctionUtil.getDefinedSubsNames(project);
+                                definedSubs.addAll(PerlGlobUtil.getDefinedGlobsNames(project));
 
                                 for (String subname : definedSubs )
                                 {
                                     if( finalPackageName != null && subname.startsWith(finalPackageName) )
                                         subname = subname.substring(finalPackageName.length());
-                                    finalResultSet.addElement(LookupElementBuilder.create(subname));
+                                    LookupElementBuilder elementBuilder = LookupElementBuilder.create(subname);
+
+                                    if( subname.contains("::"))
+                                    {
+                                        resultSet.addElement(elementBuilder.withLookupString(subname.substring(subname.lastIndexOf("::")+2)));
+                                    }
+                                    else
+                                    {
+                                        resultSet.addElement(elementBuilder);
+                                    }
 
                                 }
                             }

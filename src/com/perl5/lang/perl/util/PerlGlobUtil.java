@@ -67,7 +67,7 @@ public class PerlGlobUtil implements PerlElementTypes
 	 */
 	public static List<String> getDefinedGlobsNames(Project project)
 	{
-		return new ArrayList<String>(StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project));
+		return new ArrayList<String>(StubIndex.getInstance().getAllKeys(PerlGlobsStubIndex.KEY, project));
 	}
 
 }
