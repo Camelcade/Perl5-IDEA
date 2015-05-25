@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs;
+package com.perl5.lang.perl.stubs.globs;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlGlob;
+import com.perl5.lang.perl.psi.PerlPerlGlob;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubIndex extends StringStubIndexExtension<PerlSubDefinition>
+public class PerlGlobsStubIndex extends StringStubIndexExtension<PerlPerlGlob>
 {
 	public static final int VERSION = 0;
-	public static final StubIndexKey<String,PerlSubDefinition> SUB_DEFINITION = StubIndexKey.createIndexKey("perl.sub.definition");
+	public static final StubIndexKey<String,PerlPerlGlob> KEY = StubIndexKey.createIndexKey("perl.glob");
 
 	@Override
 	public int getVersion()
@@ -37,9 +39,8 @@ public class PerlSubDefinitionStubIndex extends StringStubIndexExtension<PerlSub
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlSubDefinition> getKey()
+	public StubIndexKey<String, PerlPerlGlob> getKey()
 	{
-		return SUB_DEFINITION;
+		return KEY;
 	}
-
 }

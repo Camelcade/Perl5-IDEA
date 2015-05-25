@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs;
+package com.perl5.lang.perl.stubs.globs;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlPerlGlob;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStub;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinition> implements PerlSubDefinitionStub
+public class PerlGlobStubImpl extends StubBase<PerlPerlGlob> implements PerlGlobStub
 {
 	private final String packageName;
-	private final String functionName;
+	private final String globName;
 
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String functionName)
+	public PerlGlobStubImpl(final StubElement parent, final String packageName, final String globName)
 	{
-		super(parent, PerlStubElementTypes.SUB_DEFINITION);
+		super(parent, PerlStubElementTypes.PERL_GLOB);
 		this.packageName = packageName;
-		this.functionName = functionName;
+		this.globName = globName;
 	}
 
 	@Override
@@ -42,8 +45,8 @@ public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinition> imple
 	}
 
 	@Override
-	public String getFunctionName()
+	public String getGlobName()
 	{
-		return functionName;
+		return globName;
 	}
 }

@@ -21,9 +21,11 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
+import com.perl5.lang.perl.psi.PerlPerlGlob;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlUserFunction;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
+import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,12 +60,16 @@ public class PerlUserFunctionReference extends PerlReferencePoly
 		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		List<PerlSubDefinition> definitions = PerlFunctionUtil.findSubDefinitions(project, canonicalName);
-
-		// definitions
-		for( PerlSubDefinition sub : definitions)
+		// subs definitions
+		for( PerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, canonicalName))
 		{
 			result.add(new PsiElementResolveResult(sub.getUserFunction()));
+		}
+
+		// globs definitions
+		for( PerlPerlGlob glob : PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
+		{
+			result.add(new PsiElementResolveResult(glob.getVariableName()));
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);

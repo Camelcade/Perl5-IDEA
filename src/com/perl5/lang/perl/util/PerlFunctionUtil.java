@@ -22,9 +22,8 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
-import com.perl5.lang.perl.stubs.PerlSubDefinitionStub;
-import com.perl5.lang.perl.stubs.PerlSubDefinitionStubIndex;
+import com.perl5.lang.perl.stubs.globs.PerlGlobsStubIndex;
+import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
 
 import java.util.*;
 
@@ -72,15 +71,19 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 	{
 		assert canonicalName != null;
 
-		Collection<PerlSubDefinition> result = StubIndex.getElements(PerlSubDefinitionStubIndex.SUB_DEFINITION, canonicalName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
+		Collection<PerlSubDefinition> result = StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
 
 		return new ArrayList<PerlSubDefinition>(result);
 	}
 
+	/**
+	 * Returns list of defined subs names
+	 * @param project project to search in
+	 * @return list of sub names
+	 */
 	public static List<String> getDefinedSubsNames(Project project)
 	{
-		return new ArrayList<String>(StubIndex.getInstance().getAllKeys(PerlSubDefinitionStubIndex.SUB_DEFINITION, project));
+		return new ArrayList<String>(StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project));
 	}
-
 
 }

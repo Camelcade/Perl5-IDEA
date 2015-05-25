@@ -73,7 +73,10 @@
       <psi.referenceContributor implementation="com.perl5.lang.perl.psi.references.PerlReferenceContributor"/>
       <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
       <lang.refactoringSupport language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
-      <stubIndex implementation="com.perl5.lang.perl.stubs.PerlSubDefinitionStubIndex"/>
+
+      <stubIndex implementation="com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionsStubIndex"/>
+      <stubIndex implementation="com.perl5.lang.perl.stubs.globs.PerlGlobsStubIndex"/>
+
       <stubElementTypeHolder class="com.perl5.lang.perl.stubs.PerlStubElementTypes"/>
 
       <!--lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/-->

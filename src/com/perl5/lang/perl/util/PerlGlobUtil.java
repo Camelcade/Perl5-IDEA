@@ -16,11 +16,20 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlPerlGlob;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.stubs.globs.PerlGlobsStubIndex;
+import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -34,4 +43,31 @@ public class PerlGlobUtil implements PerlElementTypes
 			"*ARGVOUT",
 			"*STDIN"
 	));
+
+	/**
+	 * Searching project files for sub definitions by specific package and function name
+	 * @param project	project to search in
+	 * @param canonicalName	canonical function name package::name
+	 * @return	ArrayList of found definitions
+	 */
+	public static List<PerlPerlGlob> findGlobsDefinitions(Project project, String canonicalName)
+	{
+		assert canonicalName != null;
+
+		Collection<PerlPerlGlob> result = StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlPerlGlob.class);
+
+		return new ArrayList<PerlPerlGlob>(result);
+	}
+
+
+	/**
+	 * Returns list of known stubbed globs
+	 * @param project project to search in
+	 * @return list of globs
+	 */
+	public static List<String> getDefinedGlobsNames(Project project)
+	{
+		return new ArrayList<String>(StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project));
+	}
+
 }

@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs;
+package com.perl5.lang.perl.stubs.subs.definitions;
 
-import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.stubs.globs.PerlGlobStubElementType;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStubElementType;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlStubElementTypes
+public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinition>
 {
-	IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
-	IStubElementType PERL_GLOB = new PerlGlobStubElementType("PERL_GLOB");
+	public String getPackageName();
 
+	public String getFunctionName();
 }

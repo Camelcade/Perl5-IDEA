@@ -14,26 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.stubs.subs.definitions;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.stubs.PerlStubElementTypes;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlElementTypeFactory
+public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PerlSubDefinition>
 {
-	private PerlElementTypeFactory(){}
+	public static final int VERSION = 0;
+	public static final StubIndexKey<String,PerlSubDefinition> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
 
-	public static IElementType factory(@NotNull String name)
+	@Override
+	public int getVersion()
 	{
-		if( name.equals("SUB_DEFINITION"))
-			return PerlStubElementTypes.SUB_DEFINITION;
-		else if( name.equals("PERL_GLOB"))
-			return PerlStubElementTypes.PERL_GLOB;
+		return super.getVersion() + VERSION;
+	}
 
-		throw new RuntimeException("Unknown element type "+name);
+	@NotNull
+	@Override
+	public StubIndexKey<String, PerlSubDefinition> getKey()
+	{
+		return KEY;
 	}
 }

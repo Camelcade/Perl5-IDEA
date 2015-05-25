@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinition>
+public interface IPerlPerlGlobMixin extends PsiElement
 {
-	public String getPackageName();
-
-	public String getFunctionName();
+	String getGlobName();
 }

@@ -131,18 +131,25 @@ limitations under the License.
 
     extends(".*expr")=expr
 
-    mixin("perl_scalar|perl_array|perl_hash|perl_glob")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
+    mixin("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
+    elementTypeFactory("sub_definition|perl_glob")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
+    stubClass("sub_definition")="com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixin"
-    stubClass("sub_definition")="com.perl5.lang.perl.stubs.PerlSubDefinitionStub"
     implements("sub_definition")="com.perl5.lang.perl.psi.PerlElementInContext"
-    elementTypeFactory("sub_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
-    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
-    implements("user_function")="com.perl5.lang.perl.psi.PerlElementInContext,com.perl5.lang.perl.psi.PerlNamedElement"
+    stubClass("perl_glob")="com.perl5.lang.perl.stubs.globs.PerlGlobStub"
+    mixin("perl_glob")="com.perl5.lang.perl.psi.impl.PerlPerlGlobImplMixin"
+    implements("perl_glob")="com.perl5.lang.perl.psi.PerlElementInContext,com.perl5.lang.perl.psi.IPerlPerlGlobMixin"
+
+    mixin("variable_name")="com.perl5.lang.perl.psi.impl.PerlVariableNameImplMixin"
+    implements("variable_name")="com.perl5.lang.perl.psi.PerlNamedElement"
 
     mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
     implements("namespace")="com.perl5.lang.perl.psi.PerlNamedElement"
+
+    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
+    implements("user_function")="com.perl5.lang.perl.psi.PerlElementInContext,com.perl5.lang.perl.psi.PerlNamedElement"
 
     mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixin";
     mixin("object")="com.perl5.lang.perl.psi.impl.PerlObjectImplMixin"
@@ -620,8 +627,9 @@ private glob_variable ::= PERL_GLOB_BUILT_IN | perl_glob
 perl_glob ::= '*' variable_body
 
 private variable_body ::=
-    PERL_LBRACE [namespace] PERL_VARIABLE_NAME PERL_RBRACE
-    | [namespace] PERL_VARIABLE_NAME
+    PERL_LBRACE [namespace] variable_name PERL_RBRACE
+    | [namespace] variable_name
+variable_name ::= PERL_VARIABLE_NAME
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
 method ::=
