@@ -136,6 +136,8 @@ limitations under the License.
     mixin("perl_hash")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
     mixin("perl_glob")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
 
+    mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixIn"
+    mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
     mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixin";
     mixin("object")="com.perl5.lang.perl.psi.impl.PerlObjectImplMixin"
     mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
@@ -265,8 +267,8 @@ private recover_statement ::= !(
     | PERL_SEMI
     | PERL_SCALAR_BUILT_IN | PERL_ARRAY_BUILT_IN| PERL_HASH_BUILT_IN| PERL_GLOB_BUILT_IN
     | PERL_HANDLE | PERL_HANDLE_BUILT_IN
-    | PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR | PERL_SIGIL_ARRAY | PERL_SIGIL_GLOB | PERL_SIGIL_HASH
-    | PERL_NUMBER | '&'
+    | PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR | PERL_SIGIL_ARRAY | PERL_SIGIL_HASH
+    | PERL_NUMBER | PERL_OPERATOR
     | PERL_LABEL
     | PERL_BLOCK_NAME
     )
@@ -609,7 +611,7 @@ private hash_variable ::= PERL_HASH_BUILT_IN | perl_hash
 perl_hash ::= PERL_SIGIL_HASH [PERL_SIGIL_SCALAR+] variable_body
 
 private glob_variable ::= PERL_GLOB_BUILT_IN | perl_glob
-perl_glob ::= PERL_SIGIL_GLOB variable_body
+perl_glob ::= '*' variable_body
 
 private variable_body ::=
     PERL_LBRACE [namespace] PERL_VARIABLE_NAME PERL_RBRACE
