@@ -18,7 +18,7 @@ package com.perl5.lang.perl.stubs;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlSubDefinitionIn;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub,PerlSubDefinitionIn>
+public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub,PerlSubDefinition>
 {
 
 	public PerlSubDefinitionStubElementType(String name)
@@ -36,13 +36,13 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	}
 
 	@Override
-	public PerlSubDefinitionIn createPsi(@NotNull PerlSubDefinitionStub stub)
+	public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
 		return new PerlSubDefinitionImpl(stub,this);
 	}
 
 	@Override
-	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionIn psi, StubElement parentStub)
+	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub)
 	{
 		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getUserFunction().getName());
 	}

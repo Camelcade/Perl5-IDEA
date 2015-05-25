@@ -26,16 +26,16 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public class PerlUserFunctionImplMixinIn extends PerlElementInContextImpl
+public class PerlUserFunctionImplMixin extends PerlElementInContextImpl
 {
-	public PerlUserFunctionImplMixinIn(@NotNull ASTNode node){
+	public PerlUserFunctionImplMixin(@NotNull ASTNode node){
 		super(node);
 	}
 
 	@Override
 	public PsiElement setName(String name) throws IncorrectOperationException
 	{
-		PerlUserFunctionImplIn newFunction = PerlElementFactory.createUserFunction(getProject(), name);
+		PerlUserFunctionImpl newFunction = PerlElementFactory.createUserFunction(getProject(), name);
 		if( newFunction != null )
 			replace(newFunction);
 		return this;

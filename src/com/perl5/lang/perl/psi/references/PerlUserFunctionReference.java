@@ -22,9 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlUserFunction;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
-import com.perl5.lang.perl.psi.impl.PerlUserFunctionImplIn;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,10 +59,10 @@ public class PerlUserFunctionReference extends PerlReferencePoly
 		PsiFile file = myElement.getContainingFile();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		List<PerlSubDefinitionImpl> definitions = PerlFunctionUtil.findSubDefinitions(project, packageName, functionName);
+		List<PerlSubDefinition> definitions = PerlFunctionUtil.findSubDefinitions(project, packageName, functionName);
 
 		// definitions
-		for( PerlSubDefinitionImpl sub : definitions)
+		for( PerlSubDefinition sub : definitions)
 		{
 			result.add(new PsiElementResolveResult(sub.getUserFunction()));
 		}

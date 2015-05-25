@@ -20,7 +20,7 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlSubDefinitionIn;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlUserFunction;
 import com.perl5.lang.perl.stubs.PerlSubDefinitionStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -29,13 +29,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlSubDefinitionImplMixInIn extends StubBasedPsiElementBase<PerlSubDefinitionStub> implements PerlSubDefinitionIn
+public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase<PerlSubDefinitionStub> implements PerlSubDefinition
 {
-	public PerlSubDefinitionImplMixInIn(@NotNull ASTNode node){
+	public PerlSubDefinitionImplMixin(@NotNull ASTNode node){
 		super(node);
 	}
 
-	public PerlSubDefinitionImplMixInIn(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+	public PerlSubDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
 		super(stub,nodeType);
 	}
 

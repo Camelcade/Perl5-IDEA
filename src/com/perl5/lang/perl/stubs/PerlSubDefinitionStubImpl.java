@@ -18,12 +18,12 @@ package com.perl5.lang.perl.stubs;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionIn;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinitionIn> implements PerlSubDefinitionStub
+public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinition> implements PerlSubDefinitionStub
 {
 	private final String packageName;
 	private final String functionName;

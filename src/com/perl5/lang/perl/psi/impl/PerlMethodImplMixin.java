@@ -24,9 +24,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlMethodImplMixinIn extends PerlElementInContextImpl implements PerlMethod
+public abstract class PerlMethodImplMixin extends PerlElementInContextImpl implements PerlMethod
 {
-	public PerlMethodImplMixinIn(@NotNull ASTNode node){
+	public PerlMethodImplMixin(@NotNull ASTNode node){
 		super(node);
 	}
 

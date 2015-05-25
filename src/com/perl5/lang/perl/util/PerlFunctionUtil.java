@@ -17,16 +17,11 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.indexing.FileBasedIndex;
-import com.perl5.lang.perl.PerlFileType;
-import com.perl5.lang.perl.PerlFileTypePackage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlSubDefinitionIn;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
 import com.perl5.lang.perl.stubs.PerlSubDefinitionStub;
 import com.perl5.lang.perl.stubs.PerlSubDefinitionStubIndex;
@@ -74,17 +69,17 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 	 * @param subName	function name
 	 * @return	ArrayList of found definitions
 	 */
-	public static List<PerlSubDefinitionImpl> findSubDefinitions(Project project, String packageName, String subName)
+	public static List<PerlSubDefinition> findSubDefinitions(Project project, String packageName, String subName)
 	{
 		assert packageName != null;
 		assert subName != null;
 
 		String fullName = packageName + "::" + subName;
-		Collection<PerlSubDefinitionIn> result = StubIndex.getElements(PerlSubDefinitionStubIndex.SUB_DEFINITION, fullName, project, GlobalSearchScope.projectScope(project), PerlSubDefinitionIn.class);
+//		Collection<String> subnames = StubIndex.getInstance().getAllKeys(PerlSubDefinitionStubIndex.SUB_DEFINITION, project);
+		Collection<PerlSubDefinition> result = StubIndex.getElements(PerlSubDefinitionStubIndex.SUB_DEFINITION, fullName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
 
-		Collection<String> subnames = StubIndex.getInstance().getAllKeys(PerlSubDefinitionStubIndex.SUB_DEFINITION, project);
 
-		return null;
+		return new ArrayList<PerlSubDefinition>(result);
 	}
 
 

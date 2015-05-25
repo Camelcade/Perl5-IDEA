@@ -133,18 +133,18 @@ limitations under the License.
 
     mixin("perl_scalar|perl_array|perl_hash|perl_glob")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
 
-    mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixInIn"
+    mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixin"
     stubClass("sub_definition")="com.perl5.lang.perl.stubs.PerlSubDefinitionStub"
     implements("sub_definition")="com.perl5.lang.perl.psi.PerlElementInContext"
     elementTypeFactory("sub_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
-    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixinIn"
+    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
     implements("user_function")="com.perl5.lang.perl.psi.PerlElementInContext,com.perl5.lang.perl.psi.PerlNamedElement"
 
     mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
     implements("namespace")="com.perl5.lang.perl.psi.PerlNamedElement"
 
-    mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixinIn";
+    mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixin";
     mixin("object")="com.perl5.lang.perl.psi.impl.PerlObjectImplMixin"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImplMixin"
  }

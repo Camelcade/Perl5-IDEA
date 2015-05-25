@@ -25,10 +25,10 @@ import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
-	public static PerlUserFunctionImplIn createUserFunction(Project project, String name)
+	public static PerlUserFunctionImpl createUserFunction(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "sub " + name + ";");
-		return PsiTreeUtil.findChildOfType(file, PerlUserFunctionImplIn.class);
+		return PsiTreeUtil.findChildOfType(file, PerlUserFunctionImpl.class);
 	}
 
 

@@ -17,12 +17,12 @@
 package com.perl5.lang.perl.stubs;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionIn;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinitionIn>
+public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinition>
 {
 	public String getPackageName();
 
