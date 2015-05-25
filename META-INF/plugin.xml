@@ -28,6 +28,7 @@
       <p>0.14 beta</p>
       <ul>
         <li>Implemented basic brace matcher</li>
+        <li>Implemented jump to function declaration by click (works with package calls)</li>
       </ul>
 
       <p>0.13 beta</p>

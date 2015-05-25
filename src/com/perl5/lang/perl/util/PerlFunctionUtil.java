@@ -65,21 +65,21 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 	/**
 	 * Searching project files for sub definitions by specific package and function name
 	 * @param project	project to search in
-	 * @param packageName	package name
-	 * @param subName	function name
+	 * @param canonicalName	canonical function name package::name
 	 * @return	ArrayList of found definitions
 	 */
-	public static List<PerlSubDefinition> findSubDefinitions(Project project, String packageName, String subName)
+	public static List<PerlSubDefinition> findSubDefinitions(Project project, String canonicalName)
 	{
-		assert packageName != null;
-		assert subName != null;
+		assert canonicalName != null;
 
-		String fullName = packageName + "::" + subName;
-//		Collection<String> subnames = StubIndex.getInstance().getAllKeys(PerlSubDefinitionStubIndex.SUB_DEFINITION, project);
-		Collection<PerlSubDefinition> result = StubIndex.getElements(PerlSubDefinitionStubIndex.SUB_DEFINITION, fullName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
-
+		Collection<PerlSubDefinition> result = StubIndex.getElements(PerlSubDefinitionStubIndex.SUB_DEFINITION, canonicalName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
 
 		return new ArrayList<PerlSubDefinition>(result);
+	}
+
+	public static List<String> getDefinedSubsNames(Project project)
+	{
+		return new ArrayList<String>(StubIndex.getInstance().getAllKeys(PerlSubDefinitionStubIndex.SUB_DEFINITION, project));
 	}
 
 

@@ -20,11 +20,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlUserFunction;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,12 +34,14 @@ public class PerlUserFunctionReference extends PerlReferencePoly
 {
 	String functionName;
 	String packageName;
+	String canonicalName;
 
 	public PerlUserFunctionReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 		assert element instanceof PerlUserFunction;
 		functionName = ((PerlUserFunction) element).getName();
 		packageName = ((PerlUserFunction) element).getPackageName();
+		canonicalName = packageName + "::" + functionName;
 	}
 
 	@NotNull
@@ -56,10 +56,9 @@ public class PerlUserFunctionReference extends PerlReferencePoly
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		Project project = myElement.getProject();
-		PsiFile file = myElement.getContainingFile();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		List<PerlSubDefinition> definitions = PerlFunctionUtil.findSubDefinitions(project, packageName, functionName);
+		List<PerlSubDefinition> definitions = PerlFunctionUtil.findSubDefinitions(project, canonicalName);
 
 		// definitions
 		for( PerlSubDefinition sub : definitions)

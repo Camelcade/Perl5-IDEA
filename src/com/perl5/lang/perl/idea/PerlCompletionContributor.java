@@ -32,6 +32,7 @@ import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 25.04.2015.
@@ -313,24 +314,32 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 {
                     public void addCompletions(@NotNull final CompletionParameters parameters,
                                                ProcessingContext context,
-                                               @NotNull final CompletionResultSet resultSet)
+                                               @NotNull CompletionResultSet resultSet)
                     {
+
+                        final String prefix = resultSet.getPrefixMatcher().getPrefix();
+                        final CompletionResultSet finalResultSet = resultSet;// = resultSet.withPrefixMatcher("");
+                        String packageName = null;
+
+                        PsiElement parent = parameters.getPosition().getParent();
+                        if( parent != null && parent instanceof PerlElementInContext )
+                            packageName = ((PerlElementInContext) parent).getPackageName();
+
+                        final String finalPackageName = packageName == null ? null: packageName + "::";
 
                         ApplicationManager.getApplication().runReadAction(new Runnable()
                         {
                             @Override
                             public void run()
                             {
-                                PsiFile file = parameters.getOriginalFile();
+                                List<String> definedSubs = PerlFunctionUtil.getDefinedSubsNames(parameters.getPosition().getProject());
 
-                                for (PerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDeclarationImpl.class))
+                                for (String subname : definedSubs )
                                 {
-                                    resultSet.addElement(LookupElementBuilder.create(sub.getUserFunction().getText()));
-                                }
+                                    if( finalPackageName != null && subname.startsWith(finalPackageName) )
+                                        subname = subname.substring(finalPackageName.length());
+                                    finalResultSet.addElement(LookupElementBuilder.create(subname));
 
-                                for (PerlSubDefinitionImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDefinitionImpl.class))
-                                {
-                                    resultSet.addElement(LookupElementBuilder.create(sub.getUserFunction().getText()));
                                 }
                             }
                         });
