@@ -31,6 +31,11 @@ public class PerlElementFactory
 		return PsiTreeUtil.findChildOfType(file, PerlUserFunctionImpl.class);
 	}
 
+	public static PerlVariableName createVariableName(Project project, String name)
+	{
+		PerlFileImpl file = createFile(project, "$" + name + ";");
+		return PsiTreeUtil.findChildOfType(file, PerlVariableName.class);
+	}
 
 	public static PerlHeredocTerminatorImpl createHereDocTerminator(Project project, String name)
 	{

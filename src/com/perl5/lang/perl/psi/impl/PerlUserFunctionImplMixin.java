@@ -25,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
+ *
  */
 public class PerlUserFunctionImplMixin extends PerlElementInContextImpl
 {
@@ -33,7 +34,7 @@ public class PerlUserFunctionImplMixin extends PerlElementInContextImpl
 	}
 
 	@Override
-	public PsiElement setName(String name) throws IncorrectOperationException
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		PerlUserFunctionImpl newFunction = PerlElementFactory.createUserFunction(getProject(), name);
 		if( newFunction != null )

@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlVariableName;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,8 +36,10 @@ public class PerlVariableNameImplMixin extends PerlNamedElementImpl implements P
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		// todo: implement
-		return super.setName(name);
+		PerlVariableName newName = PerlElementFactory.createVariableName(getProject(), name);
+		if( newName != null )
+			replace(newName);
+		return this;
 	}
 
 	@Nullable
