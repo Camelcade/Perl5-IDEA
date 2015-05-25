@@ -22,10 +22,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.impl.PerlSubDeclarationImpl;
+import com.perl5.lang.perl.psi.PerlUserFunction;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
-import com.perl5.lang.perl.psi.impl.PerlUserFunctionImpl;
+import com.perl5.lang.perl.psi.impl.PerlUserFunctionImplIn;
+import com.perl5.lang.perl.util.PerlFunctionUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,11 +35,13 @@ import java.util.List;
 public class PerlUserFunctionReference extends PerlReferencePoly
 {
 	String functionName;
+	String packageName;
 
 	public PerlUserFunctionReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
-		assert element instanceof PerlUserFunctionImpl;
-		functionName = ((PerlUserFunctionImpl) element).getName();
+		assert element instanceof PerlUserFunction;
+		functionName = ((PerlUserFunction) element).getName();
+		packageName = ((PerlUserFunction) element).getPackageName();
 	}
 
 	@NotNull
@@ -57,16 +59,13 @@ public class PerlUserFunctionReference extends PerlReferencePoly
 		PsiFile file = myElement.getContainingFile();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		// definitions
-		for( PerlSubDefinitionImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDefinitionImpl.class))
-		{
-			if( functionName.equals(sub.getUserFunction().getText()))
-				result.add(new PsiElementResolveResult(sub.getUserFunction()));
-		}
+		List<PerlSubDefinitionImpl> definitions = PerlFunctionUtil.findSubDefinitions(project, packageName, functionName);
 
-		// search in $self ierarchy - first occurance
-		// search in package with full qualified name
-		// search in used packages (poly reference)
+		// definitions
+		for( PerlSubDefinitionImpl sub : definitions)
+		{
+			result.add(new PsiElementResolveResult(sub.getUserFunction()));
+		}
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}

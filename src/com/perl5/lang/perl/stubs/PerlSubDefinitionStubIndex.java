@@ -14,38 +14,32 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.stubs;
 
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.perl.files.PerlFileTypePackage;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlSubDefinitionIn;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public class PerlFilePackage extends PerlFile
+public class PerlSubDefinitionStubIndex extends StringStubIndexExtension<PerlSubDefinitionIn>
 {
-	public PerlFilePackage(@NotNull FileViewProvider viewProvider) {
-		super(viewProvider);
+	public static final int VERSION = 0;
+	public static final StubIndexKey<String,PerlSubDefinitionIn> SUB_DEFINITION = StubIndexKey.createIndexKey("perl.sub.definition");
+
+	@Override
+	public int getVersion()
+	{
+		return super.getVersion() + VERSION;
 	}
 
 	@NotNull
 	@Override
-	public FileType getFileType() {
-		return PerlFileTypePackage.INSTANCE;
-	}
-
-	@Override
-	public String toString() {
-		return "Perl Package File";
-	}
-
-	@Override
-	public Icon getIcon(int flags) {
-		return super.getIcon(flags);
+	public StubIndexKey<String, PerlSubDefinitionIn> getKey()
+	{
+		return SUB_DEFINITION;
 	}
 
 }

@@ -16,12 +16,22 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.search.FileTypeIndex;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.util.indexing.FileBasedIndex;
+import com.perl5.lang.perl.PerlFileType;
+import com.perl5.lang.perl.PerlFileTypePackage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlSubDefinitionIn;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
+import com.perl5.lang.perl.stubs.PerlSubDefinitionStub;
+import com.perl5.lang.perl.stubs.PerlSubDefinitionStubIndex;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -37,14 +47,45 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 		}
 	}
 
+	/**
+	 * Checks if provided function is built in
+	 * @param function function name
+	 * @return checking result
+	 */
 	public static boolean isBuiltIn(String function)
 	{
 		return knownFunctions.containsKey(function);
 	}
 
+	/**
+	 * Returns token type for specific function name
+	 * @param function function name
+	 * @return token type
+	 */
 	public static IElementType getFunctionType(String function)
 	{
 		return isBuiltIn(function) ? PERL_FUNCTION_BUILT_IN : PERL_FUNCTION;
 	}
+
+	/**
+	 * Searching project files for sub definitions by specific package and function name
+	 * @param project	project to search in
+	 * @param packageName	package name
+	 * @param subName	function name
+	 * @return	ArrayList of found definitions
+	 */
+	public static List<PerlSubDefinitionImpl> findSubDefinitions(Project project, String packageName, String subName)
+	{
+		assert packageName != null;
+		assert subName != null;
+
+		String fullName = packageName + "::" + subName;
+		Collection<PerlSubDefinitionIn> result = StubIndex.getElements(PerlSubDefinitionStubIndex.SUB_DEFINITION, fullName, project, GlobalSearchScope.projectScope(project), PerlSubDefinitionIn.class);
+
+		Collection<String> subnames = StubIndex.getInstance().getAllKeys(PerlSubDefinitionStubIndex.SUB_DEFINITION, project);
+
+		return null;
+	}
+
 
 }

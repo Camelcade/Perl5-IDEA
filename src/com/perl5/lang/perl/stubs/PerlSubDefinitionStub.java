@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.files;
+package com.perl5.lang.perl.stubs;
 
-import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionIn;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlFileType extends LanguageFileType
+public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinitionIn>
 {
+	public String getPackageName();
 
-	public PerlFileType(){super(PerlLanguage.INSTANCE);}
-
+	public String getFunctionName();
 }

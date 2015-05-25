@@ -19,36 +19,23 @@ package com.perl5.lang.perl;
 /**
  * Created by hurricup on 12.04.2015.
  */
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
-import com.perl5.lang.perl.psi.PerlFilePackage;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlFunctionAttributeImpl;
-import com.perl5.lang.perl.psi.impl.PerlPackageImpl;
+import com.perl5.lang.perl.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.tree.IStubFileElementType;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.io.Reader;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 {
@@ -70,7 +57,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 
 	public static final IStubFileElementType PERL_FILE = new IStubFileElementType("Perl5", PerlLanguage.INSTANCE);
 
-	public static final IFileElementType FILE = new IFileElementType("Perl5", PerlLanguage.INSTANCE);
+	public static final IFileElementType FILE = new PerlFileElementType();
 
 	@NotNull
 	@Override
@@ -104,8 +91,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	}
 
 	public PsiFile createFile(FileViewProvider viewProvider) {
-		// @todo should we decide what kind of file to create? script/package
-		return new PerlFilePackage(viewProvider);
+		return new PerlFileImpl(viewProvider);
 	}
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
@@ -115,10 +101,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@NotNull
 	public PsiElement createElement(ASTNode node) {
 		IElementType type = node.getElementType();
-		if (type == PERL_PACKAGE) {
-			return new PerlPackageImpl(node);
-		}
-		else if (type == PERL_FUNCTION_ATTRIBUTE)
+		if (type == PERL_FUNCTION_ATTRIBUTE)
 		{
 			return new PerlFunctionAttributeImpl(node);
 		}

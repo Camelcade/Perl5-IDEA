@@ -20,6 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.psi.PerlUserFunction;
 import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,20 +43,20 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 				}
 		);
 		registrar.registerReferenceProvider(
-				PlatformPatterns.psiElement(PerlUserFunctionImpl.class),
+				PlatformPatterns.psiElement(PerlUserFunction.class),
 				new PsiReferenceProvider()
 				{
 					@NotNull
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlUserFunctionImpl;
+						assert element instanceof PerlUserFunction;
 
 						if( element.getParent() instanceof PerlSubDefinitionImpl)
 							return new PsiReference[]{new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
 						else
 						{
-							PsiReference reference = new PerlUserFunctionReference(element, new TextRange(0, element.getTextLength()));
+							PsiReference reference = new PerlUserFunctionReference((PerlUserFunction)element, new TextRange(0, element.getTextLength()));
 							if( ((PerlUserFunctionReference)reference).multiResolve(false).length == 0 )
 								reference = new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()));
 

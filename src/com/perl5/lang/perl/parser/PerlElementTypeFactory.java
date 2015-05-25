@@ -14,14 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.parser;
 
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.stubs.PerlSubDefinitionStubElementType;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public class PerlPsiImplUtil implements PerlElementTypes
+public class PerlElementTypeFactory
 {
+	private PerlElementTypeFactory(){}
 
+	public static IElementType factory(@NotNull String name)
+	{
+		if( name.equals("SUB_DEFINITION"))
+			return PerlStubElementTypes.SUB_DEFINITION;
+
+		throw new RuntimeException("Unknown element type "+name);
+	}
 }

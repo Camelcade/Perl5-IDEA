@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.files.PerlFileTypeScript;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 

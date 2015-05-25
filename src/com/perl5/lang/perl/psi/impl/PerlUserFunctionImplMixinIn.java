@@ -20,23 +20,22 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
  */
-public class PerlUserFunctionImplMixin extends PerlNamedElementImpl
+public class PerlUserFunctionImplMixinIn extends PerlElementInContextImpl
 {
-	public PerlUserFunctionImplMixin(@NotNull ASTNode node){
+	public PerlUserFunctionImplMixinIn(@NotNull ASTNode node){
 		super(node);
 	}
 
 	@Override
 	public PsiElement setName(String name) throws IncorrectOperationException
 	{
-		PerlUserFunctionImpl newFunction = PerlElementFactory.createUserFunction(getProject(), name);
+		PerlUserFunctionImplIn newFunction = PerlElementFactory.createUserFunction(getProject(), name);
 		if( newFunction != null )
 			replace(newFunction);
 		return this;
@@ -49,4 +48,13 @@ public class PerlUserFunctionImplMixin extends PerlNamedElementImpl
 		return this;
 	}
 
+	@Override
+	public String getExplicitPackageName()
+	{
+		PsiElement parent = getParent();
+		if( parent != null && parent instanceof PerlElementInContextImpl)
+			return ((PerlElementInContextImpl) parent).getExplicitPackageName();
+		else
+			return null;
+	}
 }

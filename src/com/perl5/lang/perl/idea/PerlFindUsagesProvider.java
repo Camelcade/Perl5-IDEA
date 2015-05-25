@@ -22,15 +22,12 @@ import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlPackage;
 import com.perl5.lang.perl.psi.PerlUserFunction;
 import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlUserFunctionImpl;
-import com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

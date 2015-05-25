@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.stubs;
 
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.intellij.psi.stubs.IStubElementType;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public class PerlPsiImplUtil implements PerlElementTypes
+public interface PerlStubElementTypes
 {
+	IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
 
 }

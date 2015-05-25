@@ -14,39 +14,36 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.perl.files.PerlFileTypePackage;
-import com.perl5.lang.perl.files.PerlFileTypeScript;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public class PerlFileScript extends PerlFile
+public class PerlNamespaceImplMixin extends PerlNamedElementImpl
 {
-	public PerlFileScript(@NotNull FileViewProvider viewProvider) {
-		super(viewProvider);
+	public PerlNamespaceImplMixin(@NotNull ASTNode node){
+		super(node);
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return getFirstChild();
 	}
 
 	@NotNull
 	@Override
-	public FileType getFileType() {
-		return PerlFileTypeScript.INSTANCE;
+	public String getName()
+	{
+		assert getNameIdentifier() != null;
+		return PerlPackageUtil.canonicalPackageName(getNameIdentifier().getText());
 	}
-
-	@Override
-	public String toString() {
-		return "Perl Script File";
-	}
-
-	@Override
-	public Icon getIcon(int flags) {
-		return super.getIcon(flags);
-	}
-
 }

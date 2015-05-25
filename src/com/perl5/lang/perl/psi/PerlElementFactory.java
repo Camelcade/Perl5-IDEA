@@ -17,37 +17,37 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.files.PerlFileTypePackage;
+import com.perl5.lang.perl.PerlFileTypePackage;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
-	public static PerlUserFunctionImpl createUserFunction(Project project, String name)
+	public static PerlUserFunctionImplIn createUserFunction(Project project, String name)
 	{
-		PerlFile file = createFile(project, "sub " + name + ";");
-		return PsiTreeUtil.findChildOfType(file, PerlUserFunctionImpl.class);
+		PerlFileImpl file = createFile(project, "sub " + name + ";");
+		return PsiTreeUtil.findChildOfType(file, PerlUserFunctionImplIn.class);
 	}
 
 
 	public static PerlHeredocTerminatorImpl createHereDocTerminator(Project project, String name)
 	{
-		PerlFile file = createFile(project, "<<'" + name + "';\n"+name+"\n");
+		PerlFileImpl file = createFile(project, "<<'" + name + "';\n"+name+"\n");
 		return (PerlHeredocTerminatorImpl)file.getChildren()[3];
 	}
 
 	public static PerlStringContentImpl createStringContent(Project project, String name)
 	{
-		PerlFile file = createFile(project, "'"+name+"';");
+		PerlFileImpl file = createFile(project, "'"+name+"';");
 		return (PerlStringContentImpl)file.getFirstChild().getFirstChild().getFirstChild().getNextSibling();
 	}
 
-	public static PerlFile createFile(Project project, String text)
+	public static PerlFileImpl createFile(Project project, String text)
 	{
 		String fileName = "file.dummy";
-		return (PerlFile) PsiFileFactory.getInstance(project).
+		return (PerlFileImpl) PsiFileFactory.getInstance(project).
 				createFileFromText(fileName, PerlFileTypePackage.INSTANCE, text);
 	}
 

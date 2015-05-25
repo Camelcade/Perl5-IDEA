@@ -24,8 +24,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.impl.PerlSubDeclarationImpl;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
-import com.perl5.lang.perl.psi.impl.PerlUserFunctionImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

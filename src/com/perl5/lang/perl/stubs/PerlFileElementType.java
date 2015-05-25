@@ -14,24 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.util;
+package com.perl5.lang.perl.stubs;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.search.FileTypeIndex;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.indexing.FileBasedIndex;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import com.intellij.psi.tree.IStubFileElementType;
+import com.perl5.lang.perl.PerlLanguage;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public class PerlUtil
+public class PerlFileElementType extends IStubFileElementType
 {
+	private static final int VERSION = 1;
+
+	public PerlFileElementType()
+	{
+		super("PERL5_FILE", PerlLanguage.INSTANCE);
+	}
+
+	@Override
+	public int getStubVersion()
+	{
+		return VERSION;
+	}
 }

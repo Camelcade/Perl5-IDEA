@@ -21,8 +21,10 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.04.2015.
@@ -31,6 +33,19 @@ public abstract class PerlNamedElementImpl extends ASTWrapperPsiElement implemen
 {
 	public PerlNamedElementImpl(@NotNull ASTNode node){
 		super(node);
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return null;
 	}
 
 	@NotNull

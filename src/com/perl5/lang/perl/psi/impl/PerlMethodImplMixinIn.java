@@ -14,19 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlFile extends PsiFileBase
+public abstract class PerlMethodImplMixinIn extends PerlElementInContextImpl implements PerlMethod
 {
-	public PerlFile(@NotNull FileViewProvider viewProvider) {
-		super(viewProvider, PerlLanguage.INSTANCE);
+	public PerlMethodImplMixinIn(@NotNull ASTNode node){
+		super(node);
+	}
+
+	@Override
+	public String getExplicitPackageName()
+	{
+		PerlNamespace namespace = getNamespace();
+		// todo: detecting from object
+		// todo: detecting from scalar
+		if( namespace != null )
+			return ((PerlNamespaceImpl)namespace).getName();
+		else
+			return null;
 	}
 }

@@ -16,8 +16,13 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImpl;
+import com.perl5.lang.perl.psi.impl.PerlNamespaceImpl;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -43,82 +48,48 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
+	/**
+	 * Checks if package is built in
+	 * @param variable package name
+	 * @return result
+	 */
 	public static boolean isBuiltIn(String variable)
 	{
-		return BUILT_IN_MAP.containsKey(variable.replaceFirst("::$", ""));
+		return BUILT_IN_MAP.containsKey(canonicalPackageName(variable));
 	}
 
+	/**
+	 * Returns token type depending on package name
+	 * @param variable package name
+	 * @return token type
+	 */
 	public static IElementType getPackageType(String variable)
 	{
-		IElementType packageType = BUILT_IN_MAP.get(variable.replaceFirst("::$", ""));
+		IElementType packageType = BUILT_IN_MAP.get(canonicalPackageName(variable));
 		return packageType == null ? PERL_PACKAGE : packageType;
 	}
 
-//
-//	/**
-//	 * Looks for specific package definitions in all project files
-//	 * @param project	project to look in
-//	 * @param packageName	exact package name
-//	 * @return a list of Psi elements
-//	 */
-//	public static List<PsiElement> findPackageDefinitions(Project project, String packageName) {
-//		List<PsiElement> result = null;
-//
-//		Collection<VirtualFile> virtualFiles = FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, PerlFileTypePackage.INSTANCE,
-//				GlobalSearchScope.allScope(project));
-//
-//		virtualFiles.addAll(FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, PerlFileTypeScript.INSTANCE,
-//				GlobalSearchScope.allScope(project)));
-//
-////		for (VirtualFile virtualFile : virtualFiles) {
-////			PerlFile perlFile = (PerlFile) PsiManager.getInstance(project).findFile(virtualFile);
-////			if (perlFile != null) {
-////				PerlPackageDefinition[] definitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageDefinition.class);
-////				if (definitions != null) {
-////					for (PerlPackageDefinition definition: definitions) {
-////						if (packageName.equals(definition.getPackageBare().getText())) {
-////							if (result == null) {
-////								result = new ArrayList<PsiElement>();
-////							}
-////							result.add(definition.getPackageBare());
-////						}
-////					}
-////				}
-////			}
-////		}
-//		return result != null ? result : Collections.<PsiElement>emptyList();
-//	}
-//
-//	/**
-//	 * Looks for all package definitions in all project files
-//	 * @param project project to look in
-//	 * @return list of psi elements
-//	 */
-//	public static List<PsiElement> findPackageDefinitions(Project project) {
-//		List<PsiElement> result = null;
-//
-//		Collection<VirtualFile> virtualFiles = FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, PerlFileTypePackage.INSTANCE,
-//				GlobalSearchScope.allScope(project));
-//
-//		virtualFiles.addAll(FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, PerlFileTypeScript.INSTANCE,
-//				GlobalSearchScope.allScope(project)));
-//
-///*
-//		for (VirtualFile virtualFile : virtualFiles) {
-//			PerlFile perlFile = (PerlFile) PsiManager.getInstance(project).findFile(virtualFile);
-//			if (perlFile != null) {
-//				PerlPackageDefinition[] definitions = PsiTreeUtil.getChildrenOfType(perlFile, PerlPackageDefinition.class);
-//				if (definitions != null) {
-//					for (PerlPackageDefinition definition: definitions) {
-//						if (result == null) {
-//							result = new ArrayList<PsiElement>();
-//						}
-//						result.add(definition.getPackageBare());
-//					}
-//				}
-//			}
-//		}
-//*/
-//		return result != null ? result : Collections.<PsiElement>emptyList();
-//	}
+	/**
+	 * Make canonical package name, atm crude, jut chop off :: from end and begining
+	 * @param name package name
+	 * @return canonical package name
+	 */
+	public static String canonicalPackageName(String name)
+	{
+		if( "::".equals(name))
+			return "main";
+		else
+			return name.replaceFirst("::$", "").replaceFirst("^::", "");
+	}
+
+	@NotNull
+	public static String getElementPackageName(PsiElement element)
+	{
+		PerlNamespaceDefinitionImpl namespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionImpl.class);
+		if (namespace != null && namespace.getNamespace() != null)
+			return ((PerlNamespaceImpl) namespace.getNamespace()).getName();
+		else
+			return "main";
+
+	}
 }

@@ -16,12 +16,27 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.tree.IStubFileElementType;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.PerlFileType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlPsiImplUtil implements PerlElementTypes
+public class PerlFileImpl extends PsiFileBase
 {
+	public PerlFileImpl(@NotNull FileViewProvider viewProvider) {
+		super(viewProvider, PerlLanguage.INSTANCE);
+	}
 
+	@NotNull
+	@Override
+	public FileType getFileType()
+	{
+		return PerlFileType.INSTANCE;
+	}
 }
