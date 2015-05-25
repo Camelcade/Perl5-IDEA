@@ -28,7 +28,9 @@
       <p>0.14 beta</p>
       <ul>
         <li>Implemented basic brace matcher</li>
-        <li>Implemented jump to function declaration by click (works with package calls)</li>
+        <li>Implemented jump to function declaration by click (works with obvious calls for now: package::method and package->method)</li>
+        <li>Implemented methods re-factoring (same as above)</li>
+        <li>Lexing and parsing bugfixes</li>
       </ul>
 
       <p>0.13 beta</p>
