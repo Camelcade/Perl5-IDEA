@@ -658,7 +658,7 @@ TRANS_MODIFIERS = [cdsr]
 "$" {return PERL_SIGIL_SCALAR;}
 {CAPUTRE_PERL_VARIABLE} {startCustomBlock(LEX_VARIABLE);break;}
 
-"sub" {pushState();yybegin(LEX_SUB_NAME);return PERL_KEYWORD;}
+"sub" {pushState();yybegin(LEX_SUB_NAME);return PERL_RESERVED;}
 {CAPTURE_PACKAGE_METHOD_CALL} {startCustomBlock(LEX_PACKAGE_METHOD_CALL);break;}
 {CAPTURE_PACKAGE_METHOD_CALL_VAR} {startCustomBlock(LEX_PACKAGE_METHOD_CALL_VAR);break;}
 {CAPTURE_SUPER_METHOD_CALL} {startCustomBlock(LEX_SUPER_METHOD_CALL);break;}
