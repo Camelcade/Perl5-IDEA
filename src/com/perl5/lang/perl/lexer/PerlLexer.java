@@ -21,8 +21,6 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlTokenType;
-import org.intellij.lang.regexp.psi.RegExpPattern;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,6 +62,30 @@ public class PerlLexer extends PerlLexerGenerated{
 			{
 				return capturePodBlock();
 			}
+			// capture line comment
+			else if(
+					buffer.charAt(tokenStart)=='#'
+							&& currentState != LEX_QUOTE_LIKE_CHARS
+							&& (currentState != LEX_QUOTE_LIKE_OPENER || !allowSharpQuote)
+			)
+			{
+				// comment may end on newline or ?>
+				int currentPosition = tokenStart;
+				setTokenStart(tokenStart);
+
+				while( currentPosition < bufferEnd )
+				{
+					if( isCommentEnd(currentPosition))
+					{
+						currentPosition++;
+						break;
+					}
+					currentPosition++;
+				}
+				setTokenEnd(currentPosition);
+				return PERL_COMMENT;
+			}
+
 		}
 
 		IElementType tokenType = super.advance();
@@ -84,6 +106,17 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		return tokenType;
 	}
+
+	/**
+	 * Checking if comment is ended. Implemented for overriding in {@link com.perl5.lang.embedded.EmbeddedPerlLexer#isCommentEnd(int)} }
+	 * @param currentPosition current position to check
+	 * @return checking result
+	 */
+	public boolean isCommentEnd(int currentPosition)
+	{
+		return getBuffer().charAt(currentPosition) == '\n';
+	}
+
 
 	/**
 	 * Captures pod block from current position
@@ -265,7 +298,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	/**
 	 *  Quote-like, transliteration and regexps common part
 	 */
-	public boolean allowSharp = true;
+	public boolean allowSharpQuote = true;
 	public char charOpener;
 	public char charCloser;
 	public int stringContentStart;
@@ -289,7 +322,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	 */
 	public IElementType processOpenerWhiteSpace()
 	{
-		allowSharp = false;
+		allowSharpQuote = false;
 		return TokenType.WHITE_SPACE;
 	}
 
@@ -333,7 +366,7 @@ public class PerlLexer extends PerlLexerGenerated{
 			|| lastSignificantToken.equals("map")
 		)
 		{
-			allowSharp = true;
+			allowSharpQuote = true;
 			isEscaped = false;
 			regexCommand = "m";
 			sectionsNumber = 1;
@@ -365,7 +398,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	 */
 	public IElementType processRegexOpener()
 	{
-		allowSharp = true;
+		allowSharpQuote = true;
 		isEscaped = false;
 		regexCommand = yytext().toString();
 
@@ -499,7 +532,7 @@ public class PerlLexer extends PerlLexerGenerated{
 
 	public IElementType processTransOpener()
 	{
-		allowSharp = true;
+		allowSharpQuote = true;
 		isEscaped = false;
 		currentSectionNumber = 0;
 		pushState();
@@ -511,7 +544,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		charOpener = yytext().charAt(0);
 
-		if( charOpener == '#' && !allowSharp )
+		if( charOpener == '#' && !allowSharpQuote)
 		{
 			yypushback(1);
 			popState();
@@ -576,7 +609,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	 **/
 	public IElementType processQuoteLikeStringOpener()
 	{
-		allowSharp = true;
+		allowSharpQuote = true;
 		isEscaped = false;
 		pushState();
 		yybegin(LEX_QUOTE_LIKE_OPENER);
@@ -587,7 +620,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		charOpener = yytext().charAt(0);
 
-		if( charOpener == '#' && !allowSharp )
+		if( charOpener == '#' && !allowSharpQuote)
 		{
 			yypushback(1);
 			yybegin(YYINITIAL);
@@ -645,7 +678,7 @@ public class PerlLexer extends PerlLexerGenerated{
 
 	public IElementType processQuoteLikeListOpener()
 	{
-		allowSharp = true;
+		allowSharpQuote = true;
 		pushState();
 		yybegin(LEX_QUOTE_LIKE_LIST_OPENER);
 		return PERL_RESERVED;
@@ -655,7 +688,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		charOpener = yytext().charAt(0);
 
-		if( charOpener == '#' && !allowSharp )
+		if( charOpener == '#' && !allowSharpQuote)
 		{
 			yypushback(1);
 			yybegin(YYINITIAL);

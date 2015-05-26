@@ -24,6 +24,7 @@ import java.io.IOException;
 
 /**
  * Created by hurricup on 19.05.2015.
+ *
  */
 public class EmbeddedPerlLexer extends PerlLexer
 {
@@ -47,61 +48,52 @@ public class EmbeddedPerlLexer extends PerlLexer
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
 		int bufferEnd = buffer.length();
+		int currentState = yystate();
 
-		if( tokenStart < bufferEnd && yystate() == LEX_HTML_BLOCK )
+		if( tokenStart < bufferEnd )
 		{
-			setTokenStart(tokenStart);
-			if(tokenStart < bufferEnd - 1 && buffer.charAt(tokenStart) == '<' && buffer.charAt(tokenStart+1) == '?') // finishing html block
+			if (currentState == LEX_HTML_BLOCK)
 			{
-				setState(preHTMLState);
+				setTokenStart(tokenStart);
+				if (tokenStart < bufferEnd - 1 && buffer.charAt(tokenStart) == '<' && buffer.charAt(tokenStart + 1) == '?') // finishing html block
+				{
+					setState(preHTMLState);
+					setTokenEnd(tokenStart + 2);
+					return EMBED_MARKER;
+				} else
+				{
+					for (int offset = tokenStart; offset < bufferEnd - 3; offset++)
+					{
+						if (buffer.charAt(offset + 1) == '<' && buffer.charAt(offset + 2) == '?')
+						{
+							setTokenEnd(offset + 1);
+							return TEMPLATE_BLOCK_HTML;
+						}
+					}
+					setState(preHTMLState);
+					setTokenEnd(bufferEnd);
+					return TEMPLATE_BLOCK_HTML;
+				}
+			} else if (tokenStart < bufferEnd - 2 && buffer.charAt(tokenStart) == '?' && buffer.charAt(tokenStart + 1) == '>')
+			{
+				preHTMLState = currentState;
+				yybegin(LEX_HTML_BLOCK);
+				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 2);
 				return EMBED_MARKER;
 			}
-			else
-			{
-				for (int offset = tokenStart; offset < bufferEnd - 3; offset++)
-				{
-					if (buffer.charAt(offset + 1) == '<' && buffer.charAt(offset + 2) == '?')
-					{
-						setTokenEnd(offset + 1);
-						return TEMPLATE_BLOCK_HTML;
-					}
-				}
-				setState(preHTMLState);
-				setTokenEnd(bufferEnd);
-				return TEMPLATE_BLOCK_HTML;
-			}
-		}
-		else if( tokenStart < bufferEnd - 2 && buffer.charAt(tokenStart)=='?' && buffer.charAt(tokenStart+1)=='>')
-		{
-			preHTMLState = yystate();
-			yybegin(LEX_HTML_BLOCK);
-			setTokenStart(tokenStart);
-			setTokenEnd(tokenStart + 2);
-			return EMBED_MARKER;
-		}
-		// todo remove LEX_QUOTE_LIKE_CHARS after refactoring sctrings capture
-		else if( tokenStart < bufferEnd && buffer.charAt(tokenStart)=='#' && yystate() != LEX_QUOTE_LIKE_CHARS)
-		{
-			// comment may end on newline or ?>
-			int currentPosition = tokenStart;
-			setTokenStart(tokenStart);
-
-			while( currentPosition < bufferEnd )
-			{
-				if( buffer.charAt(currentPosition) == '\n'
-						|| ( currentPosition < bufferEnd - 3 && buffer.charAt(currentPosition + 1)=='?' && buffer.charAt(currentPosition+2)=='>')
-				)
-				{
-					currentPosition++;
-					break;
-				}
-				currentPosition++;
-			}
-			setTokenEnd(currentPosition);
-			return PERL_COMMENT;
 		}
 
 		return super.advance();
 	}
+
+	@Override
+	public boolean isCommentEnd(int currentPosition)
+	{
+		CharSequence buffer = getBuffer();
+		return buffer.charAt(currentPosition) == '\n'
+				|| (currentPosition < buffer.length() - 2 && buffer.charAt(currentPosition + 1) == '?' && buffer.charAt(currentPosition + 2) == '>');
+	}
+
+
 }

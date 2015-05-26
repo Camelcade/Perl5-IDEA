@@ -21,6 +21,7 @@ import com.intellij.openapi.fileTypes.FileTypeFactory;
 import com.perl5.lang.embedded.EmbeddedPerlFileType;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlFileTypePackage;
+import com.perl5.lang.perl.PerlFileTypeTest;
 import com.perl5.lang.pod.PodFileType;
 import com.perl5.lang.xs.XSFileType;
 import org.jetbrains.annotations.NotNull;
@@ -33,8 +34,13 @@ public class PerlTypeFactory extends FileTypeFactory
 		fileTypeConsumer.consume(PerlFileType.INSTANCE, "cgi");
 		fileTypeConsumer.consume(PerlFileType.INSTANCE, "pl");
 		fileTypeConsumer.consume(PerlFileType.INSTANCE, "ph");
+
+		fileTypeConsumer.consume(PerlFileTypeTest.INSTANCE, "t");
+
 		fileTypeConsumer.consume(PodFileType.INSTANCE, "pod");
+
 		fileTypeConsumer.consume(XSFileType.INSTANCE, "xs");
+
 		fileTypeConsumer.consume(EmbeddedPerlFileType.INSTANCE, "thtml");
 		fileTypeConsumer.consume(EmbeddedPerlFileType.INSTANCE, "phtml");
 	}

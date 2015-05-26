@@ -423,7 +423,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_SURE_PACKAGE_PACKAGE>
 {
    {PERL_PACKAGE_SURE} {endCustomBlock();return PerlPackageUtil.getPackageType(yytext().toString());}
-   {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
+//   {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     . {yypushback(1);endCustomBlock();break;}
@@ -489,7 +489,7 @@ TRANS_MODIFIERS = [cdsr]
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 ";"     {return processSemicolon();}
 
-{END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
+//{END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 
 <YYINITIAL, LEX_CODE>{
     {THE_END}               {processDataOpener(); break;}
