@@ -374,7 +374,7 @@ shift_expr ::= expr ('<<'|'>>') expr
 
 private op_10_expr ::= named_unary_expr | filetest_expr
 named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
-private named_undry_expr_defined ::= 'defined' !"(" unary_expr
+private named_undry_expr_defined ::= 'defined' !"(" [unary_expr]
 private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" unary_expr
 
 private unary_expr ::= <<parseExpressionLevel 13>>
