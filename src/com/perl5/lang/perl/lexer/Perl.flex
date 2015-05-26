@@ -160,7 +160,7 @@ CAPTURE_PACKAGE_METHOD_CALL_VAR = {PERL_PACKAGE_METHOD}{EMPTY_SPACE}*"->"{EMPTY_
 CHAR_ANY        = .|{NEW_LINE}
 FULL_LINE       = .*{NEW_LINE}?
 QUOTE           = "\"" | "'" | "`"
-END_OF_LINE_COMMENT = "#" [^\r\n] *
+END_OF_LINE_COMMENT = "#" [^\n] * [\n] ?
 
 PERL_LABEL_PREFIX = "goto" | "next" | "last" | "redo"
 // here can be parentesis
