@@ -39,9 +39,6 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 
 	public abstract IElementType processSemicolon();
 
-	public abstract void processDataOpener();
-	public abstract IElementType endDataBlock();
-
 	public abstract IElementType processHeredocOpener();
 
 	public abstract IElementType processOpenerWhiteSpace();
@@ -57,7 +54,6 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType processQuoteLikeListOpener();
 
 	public abstract IElementType processQuoteLikeStringOpener();
-	public abstract IElementType processQuoteLikeChar();
 
 	public abstract IElementType processQuoteLikeQuote();
 	public abstract IElementType processQuoteLikeWord();

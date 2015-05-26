@@ -183,9 +183,6 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
 X_OP_STICKED = "x"[0-9]+[^a-zA-Z]*
 
-THE_END         = __END__
-THE_DATA        = __DATA__
-
 BLOCK_NAMES = "BEGIN" | "UNITCHECK" | "CHECK" | "INIT" | "END"
 
 PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
@@ -217,14 +214,6 @@ FUNCTION_SPECIAL = {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LI
 
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
-
-//PERL_OPENER = "<?"
-//PERL_CLOSER = "?>"
-//HTML_BLOCK_START = ~{PERL_OPENER}
-//HTML_BLOCK_MID = {PERL_CLOSER}~{PERL_OPENER}
-//HTML_BLOCK_END = {PERL_CLOSER}~<<eof>>
-
-%xstate LEX_EOF
 
 %state LEX_BAREWORD_STRING
 %state LEX_CODE
@@ -491,11 +480,6 @@ TRANS_MODIFIERS = [cdsr]
 
 //{END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 
-<YYINITIAL, LEX_CODE>{
-    {THE_END}               {processDataOpener(); break;}
-    {THE_DATA}               {processDataOpener(); break;}
-}
-
 /**
 **/
 <LEX_REGEX_OPENER>{
@@ -555,20 +539,6 @@ TRANS_MODIFIERS = [cdsr]
             return type;
         }
 }
-
-<LEX_QUOTE_LIKE_CHARS>{
-    {CHAR_ANY}   {
-          IElementType tokenType = processQuoteLikeChar();
-          if( tokenType != null )
-                return tokenType;
-          break;
-        }
-}
-
-<LEX_QUOTE_LIKE_CLOSER>{
-    .   { popState(); return PERL_QUOTE; }
-}
-
 /**
     qw ()
 **/
@@ -594,18 +564,6 @@ TRANS_MODIFIERS = [cdsr]
 
 <LEX_QUOTE_LIKE_LIST_CLOSER>{
     .   { popState(); return PERL_QUOTE; }
-}
-
-/**
-    __DATA__ and __END__ eof seeker
-**/
-<LEX_EOF>
-{
-    {FULL_LINE} {
-        if( isLastToken() )
-            return endDataBlock();
-        break;
-    }
 }
 
 

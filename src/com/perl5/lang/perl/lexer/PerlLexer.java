@@ -62,10 +62,68 @@ public class PerlLexer extends PerlLexerGenerated{
 			{
 				return capturePodBlock();
 			}
+			// capture string content from "" '' `` q qq qx
+			else if( currentState == LEX_QUOTE_LIKE_CHARS)
+			{
+				int currentPosition = tokenStart;
+
+				boolean isEscaped = false;
+				boolean quotesDiffer = charOpener != charCloser;
+				int quotesDepth = 0;	// for using with different quotes
+
+				while(currentPosition < bufferEnd )
+				{
+					char currentChar = buffer.charAt(currentPosition);
+
+					if( !isEscaped && quotesDepth == 0 && currentChar == charCloser)
+						break;
+
+					if( !isEscaped && quotesDiffer )
+					{
+						if( currentChar == charOpener)
+							quotesDepth++;
+						else if( currentChar == charCloser)
+							quotesDepth--;
+					}
+
+					isEscaped = !isEscaped && currentChar == '\\';
+
+					currentPosition++;
+				}
+
+				if( currentPosition == bufferEnd )
+					// forces to exit lex state
+					popState();
+				else
+					// switch to closer lex state
+					yybegin(LEX_QUOTE_LIKE_CLOSER);
+
+				if( currentPosition > tokenStart )
+				{
+					// found string
+					setTokenStart(tokenStart);
+					setTokenEnd(currentPosition);
+					return PERL_STRING_CONTENT;
+				}
+				else
+					// empty string
+					return quoteLikeCloser(tokenStart);
+			}
+			// closing quote of string
+			else if (currentState == LEX_QUOTE_LIKE_CLOSER)
+				return quoteLikeCloser(tokenStart);
+			// capture __DATA__ __END__
+			else if( ((tokenStart < bufferEnd - 8 ) && "__DATA__".equals(buffer.subSequence(tokenStart, tokenStart + 8).toString()))
+				|| ((tokenStart < bufferEnd - 7 ) && "__END__".equals(buffer.subSequence(tokenStart, tokenStart + 7).toString()))
+			)
+			{
+				setTokenStart(tokenStart);
+				setTokenEnd(bufferEnd);
+				return PERL_COMMENT_BLOCK;
+			}
 			// capture line comment
 			else if(
 					buffer.charAt(tokenStart)=='#'
-							&& currentState != LEX_QUOTE_LIKE_CHARS
 							&& (currentState != LEX_QUOTE_LIKE_OPENER || !allowSharpQuote)
 			)
 			{
@@ -106,6 +164,20 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		return tokenType;
 	}
+
+	/**
+	 * Processes quote closer token
+	 * @param tokenStart	offset of current token start
+	 * @return	quote element type
+	 */
+	IElementType quoteLikeCloser(int tokenStart)
+	{
+		popState();
+		setTokenStart(tokenStart);
+		setTokenEnd(tokenStart+1);
+		return PERL_QUOTE;
+	}
+
 
 	/**
 	 * Checking if comment is ended. Implemented for overriding in {@link com.perl5.lang.embedded.EmbeddedPerlLexer#isCommentEnd(int)} }
@@ -628,35 +700,10 @@ public class PerlLexer extends PerlLexerGenerated{
 		}
 		else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
-		yybegin(LEX_QUOTE_LIKE_CHARS);
-		stringContentStart = getTokenStart() + 1;
+		if( !isLastToken() )
+			yybegin(LEX_QUOTE_LIKE_CHARS);
 
 		return PERL_QUOTE;
-	}
-
-	public IElementType processQuoteLikeChar()
-	{
-		char currentChar = yytext().charAt(0);
-
-		if( currentChar == charCloser && !isEscaped )
-		{
-			yypushback(1);
-			setTokenStart(stringContentStart);
-			yybegin(LEX_QUOTE_LIKE_CLOSER);
-			return PERL_STRING_CONTENT;
-		}
-		else if( isLastToken() )
-		{
-			setTokenStart(stringContentStart);
-			return PERL_STRING_CONTENT;
-		}
-		else
-			isEscaped = ( currentChar == '\\' && !isEscaped );
-
-		{
-		}
-
-		return null;
 	}
 
 	/**
@@ -666,9 +713,9 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		isEscaped = false;
 		charOpener = charCloser = yytext().charAt(0);
-		stringContentStart = getTokenStart() + 1;
 		pushState();
-		yybegin(LEX_QUOTE_LIKE_CHARS);
+		if( !isLastToken() )
+			yybegin(LEX_QUOTE_LIKE_CHARS);
 		return PERL_QUOTE;
 	}
 
@@ -721,24 +768,6 @@ public class PerlLexer extends PerlLexerGenerated{
 			isEscaped = !isEscaped && currentToken.charAt(i) == '\\';
 		}
 		return PERL_STRING_CONTENT;
-	}
-
-
-	/**
-	 *  Data block related code
-	 */
-	public int dataBlockStart = 0;
-
-	public void processDataOpener()
-	{
-		dataBlockStart = getTokenStart();
-		yybegin(LEX_EOF);
-	}
-
-	public IElementType endDataBlock()
-	{
-		setTokenStart(dataBlockStart);
-		return PERL_COMMENT_BLOCK;
 	}
 
 
