@@ -508,22 +508,10 @@ private reference_value ::=
     anon_array
     | anon_hash
     | code_ref
-    | glob_item_ref
 
 anon_array ::= '[' [expr] ']'
 anon_hash ::= '{' [expr] '}'
 code_ref ::= "sub" block
-glob_item_ref ::= glob "{" glob_item_ref_variant "}"
-private glob_item_ref_variant ::=
-    "SCALAR"
-    | "ARRAY"
-    | "HASH"
-    | "CODE"
-    | "IO"
-    | "GLOB"
-    | "FORMAT"
-    | "NAME"
-    | "PACKAGE"
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
@@ -551,7 +539,7 @@ scalar ::=
     | perl_handle_basic
 
 glob ::=
-    "*"{expr}     // @todo we need to colorize this as glob
+    "*" "{" expr "}"     // @todo we need to colorize this as glob
     | glob_variable                    // hash as is
 
 private nested_element ::=
@@ -641,7 +629,18 @@ private hash_variable ::= PERL_HASH_BUILT_IN | perl_hash
 perl_hash ::= PERL_SIGIL_HASH [PERL_SIGIL_SCALAR+] variable_body
 
 private glob_variable ::= PERL_GLOB_BUILT_IN | perl_glob
-perl_glob ::= '*' variable_body
+perl_glob ::= '*' variable_body ["{" glob_slot "}"]
+glob_slot ::=
+    "SCALAR"
+    | "ARRAY"
+    | "HASH"
+    | "CODE"
+    | "IO"
+    | "GLOB"
+    | "FORMAT"
+    | "NAME"
+    | "PACKAGE"
+
 
 private variable_body ::=
     PERL_LBRACE [namespace] variable_name PERL_RBRACE
