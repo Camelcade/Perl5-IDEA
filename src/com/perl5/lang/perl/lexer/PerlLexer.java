@@ -437,6 +437,7 @@ public class PerlLexer extends PerlLexerGenerated{
 			|| lastSignificantTokenType == PERL_LBRACE
 			|| lastSignificantTokenType == PERL_LBRACK
 			|| lastSignificantTokenType == PERL_SEMI
+			|| lastSignificantToken.equals("x")
 			|| lastSignificantToken.equals("return")
 			|| lastSignificantToken.equals("split")
 			|| lastSignificantToken.equals("if")

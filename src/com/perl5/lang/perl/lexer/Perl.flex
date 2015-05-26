@@ -571,6 +571,7 @@ TRANS_MODIFIERS = [cdsr]
 "->"            {return PERL_DEREFERENCE;}
 "=>"            {return PERL_ARROW_COMMA; } // for barewords in array
 ","            {return PERL_COMMA; }
+// todo issue #92
 {BAREWORD_BRACED} {startCustomBlock(LEX_BAREWORD_BRACED);}   // disambiguates things like $var{m}
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
