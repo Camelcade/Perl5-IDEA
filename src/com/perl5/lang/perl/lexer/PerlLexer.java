@@ -101,8 +101,9 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		while( true )
 		{
-			while(linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r'){linePos++;}
-			while(linePos < bufferEnd && (buffer.charAt(linePos) == '\n' || buffer.charAt(linePos) == '\r')){linePos++;}
+			while(linePos < bufferEnd && buffer.charAt(linePos) != '\n'){linePos++;}
+			if( linePos < bufferEnd && buffer.charAt(linePos) == '\n' )
+				linePos++;
 			String line = buffer.subSequence(currentPosition, linePos).toString();
 			currentPosition = linePos;
 

@@ -62,16 +62,18 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		descriptors.addAll(getDescriptorsFor(root, document, PerlBlockImpl.class));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonHashImpl.class));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonArrayImpl.class));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlParenthesisedExprImpl.class));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlBlockImpl.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonHashImpl.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonArrayImpl.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlParenthesisedExprImpl.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 0));
+
+		// sequential blocks
 
 		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
 	}
 
-	private <T extends PsiElement> List<FoldingDescriptor> getDescriptorsFor(@NotNull PsiElement root, @NotNull Document document, Class<? extends T> c)
+	private <T extends PsiElement> List<FoldingDescriptor> getDescriptorsFor(@NotNull PsiElement root, @NotNull Document document, Class<? extends T> c, int startMargin, int endMargin)
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
@@ -79,8 +81,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		for (final T block : PsiTreeUtil.findChildrenOfType(root, c))
 		{
 			TextRange range = block.getTextRange();
-			int startOffset = range.getStartOffset() + 1;
-			int endOffset = range.getEndOffset() - 1;
+			int startOffset = range.getStartOffset()+startMargin;
+			int endOffset = range.getEndOffset()-endMargin;
 			int startLine = document.getLineNumber(startOffset);
 			int endLine = document.getLineNumber(endOffset);
 
@@ -97,19 +99,21 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		IElementType elementType = node.getElementType();
 
 		if( elementType == PerlElementTypes.BLOCK)
-			return "code block";
+			return "{code block}";
 		else if ( elementType == PerlElementTypes.ANON_ARRAY)
-			return "array";
+			return "[array]";
 		else if ( elementType == PerlElementTypes.ANON_HASH)
-			return "hash";
+			return "{hash}";
 		else if ( elementType == PerlElementTypes.PARENTHESISED_EXPR)
-			return "list expression";
+			return "(list expression)";
 		else if ( elementType == PerlElementTypes.PERL_HEREDOC)
 			return "<< heredoc >>";
 		else if ( elementType == PerlElementTypes.PERL_POD)
 			return "= POD block =";
 		else if ( elementType == PerlElementTypes.TEMPLATE_BLOCK_HTML)
-			return " HTML block ";
+			return ">? HTML block <?";
+		else if ( elementType == PerlElementTypes.PERL_COMMENT_BLOCK)
+			return "# Block comment #";
 		else
 			return "unknown entity";
 	}
@@ -117,6 +121,12 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	@Override
 	public boolean isCollapsedByDefault(@NotNull ASTNode node)
 	{
-		return false;
+		IElementType elementType = node.getElementType();
+		if ( elementType == PerlElementTypes.PERL_COMMENT_BLOCK)
+			return true;
+		else if ( elementType == PerlElementTypes.PERL_POD)
+			return true;
+		else
+			return false;
 	}
 }
