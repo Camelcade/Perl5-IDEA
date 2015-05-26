@@ -17,7 +17,7 @@ This project is currently in development, and if you want to participate - you m
 * Implemented basic brace matcher
 * Implemented jump to function declaration by click (works with obvious calls for now: package::method and package->method)
 * Implemented methods re-factoring (same as above, use with CARE with VCS and extensive testing)
-* Current, let's say, stable version, you may find in the camelcade.jar (ready for installation)
+* Current, dev build you may find here: http://evstigneev.com/camelcade.jar
 
 #See also
 
