@@ -29,7 +29,9 @@
       <ul>
         <li>Implemented basic brace matcher</li>
         <li>Implemented jump to function declaration by click (works with obvious calls for now: package::method and package->method)</li>
-        <li>Implemented methods re-factoring (same as above)</li>
+        <li>Implemented methods re-factoring (same as above, use with CARE with VCS and extensive testing)</li>
+        <li>Implemented code folding for sequential comments and imports</li>
+        <li>Implemented functions auto-completion with stubs</li>
         <li>Lexing and parsing bugfixes</li>
       </ul>
 
