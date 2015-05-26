@@ -20,12 +20,14 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.parser.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +41,12 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
+	}
+
+	@NotNull
+	private TreeElement createLeaf(@NotNull IElementType type, final int start, final int end)
+	{
+		throw new RuntimeException("Gotcha");
 	}
 
 	/**

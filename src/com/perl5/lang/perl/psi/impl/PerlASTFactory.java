@@ -17,15 +17,22 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.DefaultASTFactoryImpl;
+import com.intellij.psi.TokenType;
+import com.intellij.psi.impl.source.CharTableImpl;
+import com.intellij.psi.impl.source.codeStyle.CodeEditUtil;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.util.CharTable;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElementTypes
 {
+	private static final CharTable WHITESPACES = new CharTableImpl();
+
 	@Override
 	public LeafElement createComment( @NotNull IElementType type, CharSequence text)
 	{
@@ -44,4 +51,5 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 		else
 			return super.createLeaf(type, text);
 	}
+
 }

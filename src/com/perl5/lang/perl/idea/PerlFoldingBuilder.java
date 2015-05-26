@@ -20,19 +20,12 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.FoldingGroup;
-import com.intellij.openapi.project.DumbAware;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
-import com.intellij.psi.impl.source.tree.java.PsiBlockStatementImpl;
 import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlAnonArray;
-import com.perl5.lang.perl.psi.PerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlAnonArrayImpl;
 import com.perl5.lang.perl.psi.impl.PerlAnonHashImpl;
 import com.perl5.lang.perl.psi.impl.PerlBlockImpl;
@@ -63,51 +56,81 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonHashImpl.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonArrayImpl.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PerlParenthesisedExprImpl.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 1));
 
-		descriptors.addAll(getSequentialDescriptorsFor(root, document, PsiComment.class, PerlElementTypes.PERL_COMMENT, 0, 0));
+		descriptors.addAll(getCommentsDescriptors(root, document));
 
 		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
 	}
 
-	private <T extends PsiElement> List<FoldingDescriptor> getSequentialDescriptorsFor(@NotNull PsiElement root, @NotNull Document document, Class<? extends T> c, IElementType elementTypeFilter, int startMargin, int endMargin)
+	private List<FoldingDescriptor> getCommentsDescriptors(@NotNull PsiElement root, @NotNull Document document)
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		Collection<T> comments = PsiTreeUtil.findChildrenOfType(root,c);
+		Collection<PsiComment> comments = PsiTreeUtil.findChildrenOfType(root,PsiComment.class);
 
 		int currentOffset = 0;
 
-		for( T comment: comments)
+		for( PsiComment comment: comments)
 		{
 			if( currentOffset < comment.getTextOffset() )
 			{
-				int blockStart = comment.getTextOffset();
-				int blockEnd = blockStart;
-				ASTNode blockNode = comment.getNode();
-				PsiElement currentComment = comment;
-				int commentsNumber = 0;
+				boolean isCollapsable = false;
+				PsiElement prev = comment;
 
-				while( currentComment.getNextSibling() != null )
+				while(true )
 				{
-					if( currentComment.getNode().getElementType() == PerlElementTypes.PERL_COMMENT )
-					{
-						blockEnd = currentComment.getTextOffset() + currentComment.getTextLength() - 1;
-						commentsNumber++;
-					}
+					prev = prev.getPrevSibling();
 
-					IElementType nextType = currentComment.getNextSibling().getNode().getElementType();
-					if( nextType != PerlElementTypes.PERL_COMMENT && nextType != TokenType.WHITE_SPACE && nextType != TokenType.NEW_LINE_INDENT)
+					// first element in block or after comment/pod, which eat newline
+					if( prev == null || prev instanceof PsiComment)
 					{
-						if( blockEnd != blockStart && commentsNumber > 1)
-						{
-							currentOffset = blockEnd;
-							descriptors.add(new FoldingDescriptor(blockNode, new TextRange(blockStart, blockEnd)));
-						}
+						isCollapsable = true;
 						break;
 					}
+					else if( prev instanceof PsiWhiteSpace )
+					{
+						// whitespace with newline
+						if(prev.getText().equals("\n"))
+						{
+							isCollapsable = true;
+							break;
+						}
+					}
+					// non-whitespace block
+					else
+						break;
+				}
 
-					currentComment = currentComment.getNextSibling();
+				if( isCollapsable )
+				{
+					int blockStart = comment.getTextOffset();
+					int blockEnd = blockStart;
+					ASTNode blockNode = comment.getNode();
+					PsiElement currentComment = comment;
+					int commentsNumber = 0;
+
+					while (currentComment.getNextSibling() != null)
+					{
+						if (currentComment.getNode().getElementType() == PerlElementTypes.PERL_COMMENT)
+						{
+							blockEnd = currentComment.getTextOffset() + currentComment.getTextLength() - 1;
+							commentsNumber++;
+						}
+
+						IElementType nextType = currentComment.getNextSibling().getNode().getElementType();
+						if (nextType != PerlElementTypes.PERL_COMMENT && nextType != TokenType.WHITE_SPACE && nextType != TokenType.NEW_LINE_INDENT)
+						{
+							if (blockEnd != blockStart && commentsNumber > 1)
+							{
+								currentOffset = blockEnd;
+								descriptors.add(new FoldingDescriptor(blockNode, new TextRange(blockStart, blockEnd)));
+							}
+							break;
+						}
+
+						currentComment = currentComment.getNextSibling();
+					}
 				}
 			}
 		}
