@@ -25,7 +25,7 @@
     ]]></description>
 
   <change-notes><![CDATA[
-      <p>0.14 beta</p>
+      <p>0.14.1 beta</p>
       <ul>
         <li>Implemented basic brace matcher</li>
         <li>Implemented jump to function declaration by click (works with obvious calls for now: package::method and package->method)</li>
