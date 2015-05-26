@@ -344,6 +344,7 @@ term_expr ::=
     | function_call
     | rightward_call
     | reference_value
+    | perl_array_index
     | variable
 
 
@@ -620,8 +621,10 @@ string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
+perl_array_index ::= PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * variable_body
+
 private scalar_variable ::= PERL_SCALAR_BUILT_IN | perl_scalar
-perl_scalar ::= [PERL_SIGIL_SCALAR_INDEX] PERL_SIGIL_SCALAR + variable_body
+perl_scalar ::= PERL_SIGIL_SCALAR + variable_body
 
 private array_variable ::= PERL_ARRAY_BUILT_IN | perl_array
 perl_array ::= PERL_SIGIL_ARRAY [PERL_SIGIL_SCALAR+] variable_body

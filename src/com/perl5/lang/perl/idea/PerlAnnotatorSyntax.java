@@ -49,7 +49,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
 		IElementType elementType = element.getNode().getElementType();
-		if( elementType == PERL_SCALAR )
+		if( elementType == PERL_SCALAR || elementType == PERL_ARRAY_INDEX )
 		{
 			colorize(
 					holder.createInfoAnnotation(element, null),
