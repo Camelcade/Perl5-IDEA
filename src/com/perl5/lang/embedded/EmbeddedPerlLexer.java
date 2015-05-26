@@ -55,7 +55,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 			if (currentState == LEX_HTML_BLOCK)
 			{
 				setTokenStart(tokenStart);
-				if (tokenStart < bufferEnd - 1 && buffer.charAt(tokenStart) == '<' && buffer.charAt(tokenStart + 1) == '?') // finishing html block
+				if (tokenStart <= bufferEnd - 2 && buffer.charAt(tokenStart) == '<' && buffer.charAt(tokenStart + 1) == '?') // finishing html block
 				{
 					setState(preHTMLState);
 					setTokenEnd(tokenStart + 2);
@@ -74,7 +74,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 					setTokenEnd(bufferEnd);
 					return TEMPLATE_BLOCK_HTML;
 				}
-			} else if (tokenStart < bufferEnd - 2 && buffer.charAt(tokenStart) == '?' && buffer.charAt(tokenStart + 1) == '>')
+			} else if (tokenStart <= bufferEnd - 2 && buffer.charAt(tokenStart) == '?' && buffer.charAt(tokenStart + 1) == '>')
 			{
 				preHTMLState = currentState;
 				yybegin(LEX_HTML_BLOCK);
