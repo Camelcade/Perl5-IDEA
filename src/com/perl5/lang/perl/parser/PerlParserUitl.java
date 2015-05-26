@@ -43,28 +43,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return new PerlBuilder(builder, state, parser);
 	}
 
-
-
-	public static boolean parseCallParameters(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		PsiBuilder.Marker mainMarker = b.mark();
-
-		PsiBuilder.Marker m = b.mark();
-		boolean r = PerlParser.block(b,l);
-		if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
-			m.rollbackTo();
-		else
-			m.drop();
-
-		parseExpressionLevel(b,l,2); // nothing below comma
-
-		mainMarker.done(CALL_ARGUMENTS);
-
-		return true;
-	}
-
 	/**
 	 * Smart parser for ->, makes }->[ optional
 	 * @param b

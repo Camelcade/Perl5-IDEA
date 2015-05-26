@@ -441,10 +441,13 @@ private grep_map_arguments_variations ::=
     block expr
     | scalar_expr comma expr
 
-function_call ::= callable "(" call_arguments ")" !"["  // avoiding ()[]
-call_arguments ::= [expr]
+function_call ::= callable "(" [call_arguments] ")" !"["  // avoiding ()[]
+rightward_call ::= callable [call_arguments]
 
-rightward_call ::= callable <<parseCallParameters>>
+call_arguments ::=
+    anon_hash [comma list_expr]
+    | block [[comma] list_expr]
+    | list_expr
 
 file_read_term ::= '<' [perl_handle] '>'
 
