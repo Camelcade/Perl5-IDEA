@@ -50,6 +50,14 @@ public class PerlLexer extends PerlLexerGenerated{
 		{
 			int currentState = yystate();
 
+			// higest priority, pre-parsed tokens
+			if( currentState == LEX_PREPARSED_ITEMS )
+			{
+				IElementType nextTokenType = getParsedToken();
+				if( nextTokenType != null )
+					return nextTokenType;
+			}
+
 			// capture heredoc
 			if( currentState == LEX_HEREDOC_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart-1) =='\n'))
 			{
@@ -407,7 +415,6 @@ public class PerlLexer extends PerlLexerGenerated{
 		if(tokensList.size() == 0 )
 		{
 			popState();
-			yypushback(1); // no tokens in this lex state, push back
 			return null;
 		}
 		else

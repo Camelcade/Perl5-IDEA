@@ -603,18 +603,18 @@ private array_constant ::=
 
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
-private string_quoted ::= PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
+private string_quoted ::= PERL_QUOTE [PERL_STRING_CONTENT] PERL_QUOTE
 string_dq ::=
-    "\"" PERL_STRING_CONTENT "\""
+    "\"" [PERL_STRING_CONTENT] "\""
      | "qq" string_quoted
 
 string_sq ::=
-    "'" PERL_STRING_CONTENT "'"
+    "'" [PERL_STRING_CONTENT] "'"
     | "q" string_quoted
     | PERL_STRING_CONTENT
 
 string_xq ::=
-    "`" PERL_STRING_CONTENT "`"
+    "`" [PERL_STRING_CONTENT] "`"
     | "qx" string_quoted
 
 heredoc_opener ::= '<<' ( string_xq | string_dq | string_sq | PERL_STRING_CONTENT )

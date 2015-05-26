@@ -487,14 +487,6 @@ TRANS_MODIFIERS = [cdsr]
     .   { return parseRegex(); }
 }
 
-<LEX_PREPARSED_ITEMS>{
-    {CHAR_ANY}   {
-        IElementType nextTokenType = getParsedToken();
-        if( nextTokenType == null )
-            break;
-        return nextTokenType;
-    }
-}
 
 /**
     tr y
