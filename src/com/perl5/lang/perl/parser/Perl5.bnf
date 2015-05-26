@@ -639,6 +639,7 @@ perl_glob ::= '*' variable_body
 private variable_body ::=
     PERL_LBRACE [namespace] variable_name PERL_RBRACE
     | [namespace] variable_name
+    | namespace
 variable_name ::= PERL_VARIABLE_NAME
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
