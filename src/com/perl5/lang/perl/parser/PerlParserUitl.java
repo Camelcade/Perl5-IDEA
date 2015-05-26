@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Alexandr Evstigneev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
@@ -33,25 +49,19 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 
-//		if( methodName == null) // not working on scalar calling, we s
-			// can't happen
-//			return false;
-//			throw new Error("No method captured, smth is wrong");
-//		else if(packageName == null) // method from unknown package
-//		{
-//			parseExpressionLevel(b,l,2);
-//		}
-//		else // method and package are known
-//		{
-			PsiBuilder.Marker m = b.mark();
-			boolean r = PerlParser.block(b,l);
-			if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
-				m.rollbackTo();
-			else
-				m.drop();
+		PsiBuilder.Marker mainMarker = b.mark();
 
-			parseExpressionLevel(b,l,2); // nothing below comma
-//		}
+		PsiBuilder.Marker m = b.mark();
+		boolean r = PerlParser.block(b,l);
+		if( !r || nextTokenIs(b, "", PERL_COMMA, PERL_ARROW_COMMA))
+			m.rollbackTo();
+		else
+			m.drop();
+
+		parseExpressionLevel(b,l,2); // nothing below comma
+
+		mainMarker.done(CALL_ARGUMENTS);
+
 		return true;
 	}
 
@@ -77,7 +87,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// optional }->[ or ]->{
 			if(
 				( prevTokenType == PERL_RBRACE || prevTokenType == PERL_RBRACK )
-				&& ( tokenType == PERL_LBRACE || tokenType == PERL_LBRACK )
+				&& ( tokenType == PERL_LBRACE || tokenType == PERL_LBRACK || tokenType == PERL_LPAREN )
 					)
 				return true;
 		}
@@ -158,6 +168,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 		else if( tokenType == PERL_RBRACE ||  tokenType == PERL_RESERVED)
+			return true;
+		else if(b.eof()) // eof
 			return true;
 
 		// @todo think what to do here. Currently any statement being finished, even incorrect one

@@ -1,7 +1,23 @@
+<!--
+  ~ Copyright 2015 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.13 beta</version>
+    <version>0.14 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
   <description><![CDATA[
@@ -9,6 +25,16 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>0.14 beta</p>
+      <ul>
+        <li>Implemented basic brace matcher</li>
+        <li>Implemented jump to function declaration by click (works with obvious calls for now: package::method and package->method)</li>
+        <li>Implemented methods re-factoring (same as above, use with CARE with VCS and extensive testing)</li>
+        <li>Implemented code folding for sequential comments and imports</li>
+        <li>Implemented functions auto-completion with stubs</li>
+        <li>Lexing and parsing bugfixes</li>
+      </ul>
+
       <p>0.13 beta</p>
       <ul>
         <li>Trenar expression operands are now scalar expressions, not any expressions</li>
@@ -35,6 +61,9 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
+
+      <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
+
       <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
 
       <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
@@ -43,9 +72,20 @@
       <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
       <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
       <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
+      <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlBraceMatcher"/>
+      <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.impl.PerlASTFactory"/>
+      <psi.referenceContributor implementation="com.perl5.lang.perl.psi.references.PerlReferenceContributor"/>
+      <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
+      <lang.refactoringSupport language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
 
-      <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>
-      <psi.referenceContributor implementation="com.perl5.lang.perl.idea.PerlReferenceContributor"/-->
+      <stubIndex implementation="com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionsStubIndex"/>
+      <stubIndex implementation="com.perl5.lang.perl.stubs.globs.PerlGlobsStubIndex"/>
+
+      <stubElementTypeHolder class="com.perl5.lang.perl.stubs.PerlStubElementTypes"/>
+
+      <!--lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/-->
+      <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/-->
+
 
       <lang.parserDefinition language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
       <lang.fileViewProviderFactory language="Embedded Perl"
@@ -55,6 +95,8 @@
       <annotator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
       <completion.contributor language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
       <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
+
+      <!--lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/-->
 
       <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
       <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>

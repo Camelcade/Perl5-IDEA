@@ -1,10 +1,19 @@
-package com.perl5.lang.perl.lexer;
-
 /*
-    http://jflex.de/manual.html
-    http://www2.cs.tum.edu/projects/cup
+    Copyright 2015 Alexandr Evstigneev
 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 */
+package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.TokenType;
@@ -72,31 +81,52 @@ PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
 BUILT_IN_GLOB_NAME = "ARGVOUT"|"STDERR"|"STDOUT"|"STDIN"|"ARGV"
 PERL_GLOB_BUILT_IN = "*" ("{" {BUILT_IN_GLOB_NAME} "}" | {BUILT_IN_GLOB_NAME} )
 
-PERL_VARIABLE_NAME = "$" * "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
-PERL_GLOB_VARIABLE_NAME = "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
+// http://perldoc.perl.org/perldata.html#Identifier-parsing
+//PERL_XIDS = [\w && \p{XID_Start}]
+//PERL_XIDC = [\w && \p{XID_Continue}]
+PERL_XIDS = [_a-zA-Z]
+PERL_XIDC = [_a-zA-Z0-9]
 
-PERL_SCALAR_INDEX = "$#" {PERL_VARIABLE_NAME}
 
-// @todo think about this staff
-PERL_SCALAR = "$"+ {EMPTY_SPACE}* {PERL_VARIABLE_NAME}
-PERL_SCALAR_BRACES = "$"+ "{" {BAREWORD} "}"
+PERL_BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
+PERL_PACKAGE_CANONICAL = "::"* ({PERL_BASIC_IDENTIFIER} "::" +) + | "::"
+PERL_IDENTIFIER = {PERL_PACKAGE_CANONICAL} * {PERL_BASIC_IDENTIFIER} | {PERL_PACKAGE_CANONICAL} {PERL_BASIC_IDENTIFIER} *
+PERL_IDENTIFIER_VARIATION = "{" {EMPTY_SPACE}* {PERL_IDENTIFIER} {EMPTY_SPACE}* "}" | {PERL_IDENTIFIER}
+// | "&"
+PERL_SIGIL = ("$#" | "$" | "@" | "%" | "*" ) "$" *
+CAPUTRE_PERL_VARIABLE = {PERL_SIGIL} {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
 
-PERL_HASH = "%" {PERL_VARIABLE_NAME}
-PERL_HASH_BRACES = "%{" {BAREWORD} "}"
+//CAPTURE_PERL_SCALAR = "$" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
+//CAPTURE_PERL_SCALAR_INDEX = "$#" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
+//CAPTURE_PERL_ARRAY = "@" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
+//CAPTURE_PERL_HASH = "%" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
+//CAPTURE_PERL_GLOB = "*" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
+//CAPTURE_PERL_CODE = "&" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
 
-PERL_ARRAY = "@" {PERL_VARIABLE_NAME}
-PERL_ARRAY_BRACES = "@{" {BAREWORD} "}"
-
-PERL_GLOB = "*" {PERL_GLOB_VARIABLE_NAME}
-PERL_GLOB_BRACES = "*{" {BAREWORD} "}"
+//PERL_VARIABLE_NAME = "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
+//PERL_GLOB_VARIABLE_NAME = "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
+//
+//PERL_SCALAR_INDEX = "$#" {PERL_VARIABLE_NAME}
+//
+//// @todo think about this staff
+//PERL_SCALAR = "$" {EMPTY_SPACE}* {PERL_VARIABLE_NAME}
+//PERL_SCALAR_BRACES = "$" "{" {BAREWORD} "}"
+//
+//PERL_HASH = "%" {PERL_VARIABLE_NAME}
+//PERL_HASH_BRACES = "%{" {BAREWORD} "}"
+//
+//PERL_ARRAY = "@" {PERL_VARIABLE_NAME}
+//PERL_ARRAY_BRACES = "@{" {BAREWORD} "}"
+//
+//PERL_GLOB = "*" {PERL_GLOB_VARIABLE_NAME}
+//PERL_GLOB_BRACES = "*{" {BAREWORD} "}"
 
 VARIABLE_DECLARATOR = "my" | "state" | "our" | "local"
 PRE_PACKAGE_SURE = "use" | "no" | "package" | {VARIABLE_DECLARATOR}
-PERL_PACKAGE_SURE = {BAREWORD} ("::" {BAREWORD}) *
+PERL_PACKAGE_SURE = "::" * {PERL_BASIC_IDENTIFIER} ("::" * {PERL_BASIC_IDENTIFIER}) *
 CAPTURE_SURE_PACKAGE = {PRE_PACKAGE_SURE}{EMPTY_SPACE}+{PERL_PACKAGE_SURE}[^\.a-zA-Z0-9_]
 CAPTURE_REQUIRE_PACKAGE = "require"{EMPTY_SPACE}+{PERL_PACKAGE_SURE}{EMPTY_SPACE}*[^\(:\-a-zA-Z0-9_]
 
-PERL_PACKAGE_CANONICAL = ({BAREWORD} "::")+
 PERL_PACKAGE_METHOD = {PERL_PACKAGE_CANONICAL} {BAREWORD}
 
 CAPTURE_HANDLE_READ = "<"{BAREWORD}">"
@@ -130,7 +160,7 @@ CAPTURE_PACKAGE_METHOD_CALL_VAR = {PERL_PACKAGE_METHOD}{EMPTY_SPACE}*"->"{EMPTY_
 CHAR_ANY        = .|{NEW_LINE}
 FULL_LINE       = .*{NEW_LINE}?
 QUOTE           = "\"" | "'" | "`"
-END_OF_LINE_COMMENT = "#" [^\r\n] *
+END_OF_LINE_COMMENT = "#" [^\n] * [\n] ?
 
 PERL_LABEL_PREFIX = "goto" | "next" | "last" | "redo"
 // here can be parentesis
@@ -225,9 +255,29 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_HANDLE_READ
 %xstate LEX_HANDLE, LEX_HANDLE_HANDLE
 %xstate LEX_HANDLE_FILETEST
-
+%xstate LEX_VARIABLE
 %state LEX_HTML_BLOCK
 %%
+
+//exclusive
+<LEX_VARIABLE>
+{
+    "$#"    {return PERL_SIGIL_SCALAR_INDEX;}
+    "$"    {return PERL_SIGIL_SCALAR;}
+    "@"    {return PERL_SIGIL_ARRAY;}
+    "%"    {return PERL_SIGIL_HASH;}
+    "*"    {return PERL_OPERATOR;}
+    "&"    {return PERL_OPERATOR;}
+    "{"     {return PERL_LBRACE;}
+    "}"     {return PERL_RBRACE;}
+    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
+
+    // we should control, where whitespace is allowed
+    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    {PERL_PACKAGE_CANONICAL} {return PerlPackageUtil.getPackageType(yytext().toString());}
+    {PERL_BASIC_IDENTIFIER} {endCustomBlock();return PERL_VARIABLE_NAME;}
+    [^] {yypushback(1);endCustomBlock();break;}
+}
 
 //exclusive
 <LEX_HEREDOC_OPENER>
@@ -585,29 +635,30 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_VERSION}  {return PERL_NUMBER_VERSION;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
-{PERL_SCALAR_INDEX} {return PERL_SCALAR_INDEX;}
+//{PERL_SCALAR_INDEX} {return PERL_SCALAR_INDEX;}
 
 {PERL_SCALAR_BUILT_IN} {return PERL_SCALAR_BUILT_IN;}
 {PERL_ARRAY_BUILT_IN} {return PERL_ARRAY_BUILT_IN;}
 {PERL_HASH_BUILT_IN} {return PERL_HASH_BUILT_IN;}
 {PERL_GLOB_BUILT_IN} {return PERL_GLOB_BUILT_IN;}
 
-{PERL_SCALAR} {return PERL_SCALAR;}
-{PERL_ARRAY} {return PERL_ARRAY;}
-{PERL_HASH} {return PERL_HASH;}
-{PERL_GLOB} {return PERL_GLOB;}
-
-{PERL_SCALAR_BRACES} {return PERL_SCALAR;}
-{PERL_ARRAY_BRACES} {return PERL_ARRAY;}
-{PERL_HASH_BRACES} {return PERL_HASH;}
-{PERL_GLOB_BRACES} {return PERL_GLOB;}
+//{PERL_SCALAR} {return PERL_SCALAR;}
+//{PERL_ARRAY} {return PERL_ARRAY;}
+//{PERL_HASH} {return PERL_HASH;}
+//{PERL_GLOB} {return PERL_GLOB;}
+//
+//{PERL_SCALAR_BRACES} {return PERL_SCALAR;}
+//{PERL_ARRAY_BRACES} {return PERL_ARRAY;}
+//{PERL_HASH_BRACES} {return PERL_HASH;}
+//{PERL_GLOB_BRACES} {return PERL_GLOB;}
 
 "@" {return PERL_SIGIL_ARRAY;}
 "%" {return PERL_SIGIL_HASH;}
 "$#" {return PERL_SIGIL_SCALAR_INDEX;}
 "$" {return PERL_SIGIL_SCALAR;}
+{CAPUTRE_PERL_VARIABLE} {startCustomBlock(LEX_VARIABLE);break;}
 
-"sub" {pushState();yybegin(LEX_SUB_NAME);return PERL_KEYWORD;}
+"sub" {pushState();yybegin(LEX_SUB_NAME);return PERL_RESERVED;}
 {CAPTURE_PACKAGE_METHOD_CALL} {startCustomBlock(LEX_PACKAGE_METHOD_CALL);break;}
 {CAPTURE_PACKAGE_METHOD_CALL_VAR} {startCustomBlock(LEX_PACKAGE_METHOD_CALL_VAR);break;}
 {CAPTURE_SUPER_METHOD_CALL} {startCustomBlock(LEX_SUPER_METHOD_CALL);break;}

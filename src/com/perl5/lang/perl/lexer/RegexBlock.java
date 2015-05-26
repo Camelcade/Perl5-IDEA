@@ -1,23 +1,36 @@
+/*
+ * Copyright 2015 Alexandr Evstigneev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.perl5.lang.perl.lexer;
 
-import com.google.common.primitives.Chars;
 import com.intellij.psi.TokenType;
+import org.apache.commons.lang.ArrayUtils;
 
 import java.util.*;
 
-/**
- * Created by hurricup on 02.05.2015.
- */
 public class RegexBlock implements PerlElementTypes
 {
 	public static final HashMap<String, List<Character>> allowedModifiers = new HashMap<String, List<Character>>();
-	public static final List<Character> whiteSpaces = Chars.asList(' ', '\n', '\t', '\f', '\r');
+	public static final List<Character> whiteSpaces = Arrays.asList(' ', '\n', '\t', '\f', '\r');
 
 	static
 	{
-		allowedModifiers.put("s", Chars.asList("msixpodualgcer".toCharArray()));
-		allowedModifiers.put("m", Chars.asList("msixpodualgc".toCharArray()));
-		allowedModifiers.put("qr", Chars.asList("msixpodual".toCharArray()));
+		allowedModifiers.put("s", Arrays.asList(ArrayUtils.toObject("msixpodualgcer".toCharArray())));
+		allowedModifiers.put("m", Arrays.asList(ArrayUtils.toObject("msixpodualgc".toCharArray())));
+		allowedModifiers.put("qr", Arrays.asList(ArrayUtils.toObject("msixpodual".toCharArray())));
 	}
 
 	public static boolean isWhiteSpace(char character)

@@ -1,3 +1,18 @@
+/*
+Copyright 2015 Alexandr Evstigneev
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 {
   parserClass="com.perl5.lang.perl.parser.PerlParser"
 
@@ -30,19 +45,27 @@
     PERL_SIGIL_ARRAY="@"
     PERL_SIGIL_HASH="%"
     PERL_SIGIL_SCALAR="$"
-    PERL_SIGIL_SCALAR_INDEX="$#"
 
-    PERL_ARRAY="ARRAY"
-    PERL_HASH="HASH"
-    PERL_SCALAR="SCALAR"
-    PERL_GLOB="GLOB"
+    PERL_SIGIL_SCALAR_INDEX="$#"
+    PERL_VARIABLE_NAME="PERL_VARIABLE_NAME"
+
+//    PERL_SCALAR_NAME="SCALAR_NAME"
+//    PERL_ARRAY_NAME="ARRAY_NAME"
+//    PERL_HASH_NAME="HASH_NAME"
+
+//    PERL_ARRAY="ARRAY"
+//    PERL_HASH="HASH"
+//    PERL_SCALAR="SCALAR"
+//    PERL_GLOB="GLOB"
+//     PERL_SIGIL="SIGIL"
+
 
     PERL_ARRAY_BUILT_IN="ARRAY_BUILT_IN"
     PERL_HASH_BUILT_IN="HASH_BUILT_IN"
     PERL_SCALAR_BUILT_IN="SCALAR_BUILT_IN"
     PERL_GLOB_BUILT_IN="GLOB_BUILT_IN"
 
-    PERL_SCALAR_INDEX="SCALAR_INDEX"
+//    PERL_SCALAR_INDEX="SCALAR_INDEX"
 
     PERL_HEREDOC="PERL_HEREDOC" // should be string content too
     PERL_HEREDOC_END="PERL_HEREDOC_END"
@@ -107,8 +130,30 @@
   ]
 
     extends(".*expr")=expr
-    mixin("callable")="com.perl5.lang.perl.psi.impl.PerlCallableImplMixin"
 
+    mixin("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
+    elementTypeFactory("sub_definition|perl_glob")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
+
+    stubClass("sub_definition")="com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStub"
+    mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixin"
+    implements("sub_definition")="com.perl5.lang.perl.psi.PerlElementInContext"
+
+    stubClass("perl_glob")="com.perl5.lang.perl.stubs.globs.PerlGlobStub"
+    mixin("perl_glob")="com.perl5.lang.perl.psi.impl.PerlPerlGlobImplMixin"
+    implements("perl_glob")="com.perl5.lang.perl.psi.PerlElementInContext,com.perl5.lang.perl.psi.IPerlPerlGlobMixin"
+
+    mixin("variable_name")="com.perl5.lang.perl.psi.impl.PerlVariableNameImplMixin"
+    implements("variable_name")="com.perl5.lang.perl.psi.PerlNamedElement"
+
+    mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
+    implements("namespace")="com.perl5.lang.perl.psi.PerlNamedElement"
+
+    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
+    implements("user_function")="com.perl5.lang.perl.psi.PerlElementInContext,com.perl5.lang.perl.psi.PerlNamedElement"
+
+    mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixin";
+    mixin("object")="com.perl5.lang.perl.psi.impl.PerlObjectImplMixin"
+    mixin("heredoc_opener")="com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImplMixin"
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
@@ -119,7 +164,7 @@ private file_item ::= namespace_definition | namespace_element
 
 block ::= "{" file_items "}" {pin=1}
 
-private namespace_element ::= (sub_definition | named_block | compound_statement | statement <<statementSemi>> ) [PERL_SEMI+]
+private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI )
 
 // package keyword
 namespace_definition ::= "package" namespace [perl_version] (block | PERL_SEMI namespace_content) {pin=1}
@@ -168,22 +213,25 @@ private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_S
 private for_compound_arguments_list ::=
     [ variable_declaration | variable ] '(' expr ')' block_compound
 
-private statement ::= statement_variation [statement_modifier] {recoverWhile=recover_statement}
+private statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2 recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
     | no_statement
+    | require_statement
     | sub_declaration
     | expr
 
-sub_definition ::= "sub" method sub_definition_parameters ? block
+require_statement ::= require_term &(PERL_RESERVED | ';' | '}')
+
+sub_definition ::= "sub" namespace_method_static sub_definition_parameters ? block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= "sub" method sub_declaration_parameters
+sub_declaration ::= "sub" namespace_method_static sub_declaration_parameters
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= "(" [<<parseSubPrototype>>] ")"
@@ -197,7 +245,7 @@ redo_term ::= 'redo' [lnr_param]
 private lnr_param ::= PERL_LABEL | expr
 
 
-private statement_modifier ::=
+statement_modifier ::=
     if_statement_modifier
     | unless_statement_modifier
     | while_statement_modifier
@@ -222,11 +270,24 @@ private use_module_parameters ::= namespace [perl_version] [expr];
 private use_version_parameters ::= perl_version;
 
 
-undef_term ::= "undef" variable ?
+undef_term ::= "undef" (variable | "(" variable ")") ?
 
-require_term ::= 'require' (namespace | perl_version | expr)  // multiline string is possible too
+require_term ::= 'require' (namespace | perl_version | unary_expr)  // multiline string is possible too
 
-private recover_statement ::= !(PERL_SEMI|PERL_RBRACE | PERL_RESERVED )
+private recover_statement ::= !(
+    PERL_RESERVED | PERL_KEYWORD | PERL_FUNCTION | PERL_FUNCTION_BUILT_IN
+    | PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+    | PERL_RBRACE | PERL_LBRACE
+    | PERL_LBRACK
+    | PERL_LPAREN
+    | PERL_SEMI
+    | PERL_SCALAR_BUILT_IN | PERL_ARRAY_BUILT_IN| PERL_HASH_BUILT_IN| PERL_GLOB_BUILT_IN
+    | PERL_HANDLE | PERL_HANDLE_BUILT_IN
+    | PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR | PERL_SIGIL_ARRAY | PERL_SIGIL_HASH
+    | PERL_NUMBER | PERL_OPERATOR
+    | PERL_LABEL
+    | PERL_BLOCK_NAME
+    )
 private recover_block ::= !(PERL_RBRACE | <<eof>>)
 private recover_namespace ::= !( "package" | '}' | <<eof>>)
 
@@ -256,10 +317,9 @@ expr ::=
     | deref_expr
     | term_expr
 
+
 term_expr ::=
-    variable
-    | variable_declaration
-    | PERL_OPERATOR_UNARY "(" [expr] ")" !"["   // named operators as functions
+    variable_declaration
     | parenthesised_expr "[" expr "]"
     | parenthesised_expr
     | scalar_constant
@@ -268,7 +328,6 @@ term_expr ::=
     | eval_term
     | regex_term
     | file_read_term
-    | reference_value
     | print_term
     | open_term
     | close_term
@@ -281,14 +340,16 @@ term_expr ::=
     | next_term
     | return_term
     | redo_term
+    | PERL_OPERATOR_UNARY "(" [expr] ")" !"["   // named operators as functions
     | function_call
     | rightward_call
+    | reference_value
+    | variable
+
 
 parenthesised_expr ::= '(' [expr] ')'
 
 return_term ::= "return" [list_expr]
-
-rightward_call ::= callable <<parseCallParameters>>
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
 
@@ -311,8 +372,11 @@ shift_expr ::= expr ('<<'|'>>') expr
 
 private op_10_expr ::= named_unary_expr | filetest_expr
 named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
-private named_undry_expr_defined ::= 'defined' !"(" [scalar_expr]
-private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" scalar_expr
+private named_undry_expr_defined ::= 'defined' !"(" unary_expr
+private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" unary_expr
+
+private unary_expr ::= <<parseExpressionLevel 13>>
+
 
 filetest_expr ::= PERL_OPERATOR_FILETEST [(perl_handle | expr )]
 
@@ -373,7 +437,10 @@ private grep_map_arguments_variations ::=
     block expr
     | scalar_expr comma expr
 
-private function_call ::= callable "(" [expr] ")" !"["  // avoiding ()[]
+function_call ::= callable "(" call_arguments ")" !"["  // avoiding ()[]
+call_arguments ::= [expr]
+
+rightward_call ::= callable <<parseCallParameters>>
 
 file_read_term ::= '<' [perl_handle] '>'
 
@@ -455,26 +522,23 @@ private glob_item_ref_variant ::=
 private variable ::= scalar | array | hash | glob
 
 array ::=
-    PERL_SIGIL_ARRAY scalar       // scalar dereference
-    | PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
+    PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
     | array_variable '[' expr ']'              // array slice
     | array_variable '{' expr '}'              // hash slice
     | array_variable
     | array_constant
 
 hash ::=
-    PERL_SIGIL_HASH scalar       // scalar dereference wo braces
-    | PERL_SIGIL_HASH '{' expr '}'      // hash dereference w braces
+    PERL_SIGIL_HASH '{' expr '}'      // hash dereference w braces
     | hash_variable                    // hash as is
 
 scalar ::=
-    PERL_SIGIL_SCALAR * scalar_variable nested_element ?
-    | PERL_SIGIL_SCALAR + "{" expr "}"
+    PERL_SIGIL_SCALAR + "{" expr "}"
     | scalar_variable nested_element ? // some special variables are started from sigil
     | scalar_constant
     | "(" expr ")" "["expr"]"
     | undef_term
-    | PERL_SCALAR_INDEX
+//    | PERL_SCALAR_INDEX
     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
     | perl_handle_basic
 
@@ -499,7 +563,7 @@ scalar_call ::= scalar_variable ["(" [expr] ")"]
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
-callable ::= method | referencable_method
+private callable ::= method | referencable_method
 //<<resetLastCallable>> (
 //
 //    |
@@ -533,52 +597,59 @@ braced_string ::= "{" PERL_STRING_CONTENT "}"
 private array_constant ::=
     string_list
 
-private string ::= string_sq | string_dq | string_xq
+private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
 private string_quoted ::= PERL_QUOTE PERL_STRING_CONTENT PERL_QUOTE
 string_dq ::=
     "\"" PERL_STRING_CONTENT "\""
      | "qq" string_quoted
-     | '<<' string_dq
 
 string_sq ::=
     "'" PERL_STRING_CONTENT "'"
     | "q" string_quoted
     | PERL_STRING_CONTENT
-    | '<<' string_sq
-    | '<<' PERL_STRING_CONTENT
 
 string_xq ::=
     "`" PERL_STRING_CONTENT "`"
     | "qx" string_quoted
-    | '<<' string_xq
+
+heredoc_opener ::= '<<' ( string_xq | string_dq | string_sq | PERL_STRING_CONTENT )
 
 string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
-lexical_variable ::= scalar_variable | array_variable | hash_variable
+private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-private scalar_variable ::=
-    PERL_SCALAR
-    | PERL_SCALAR_BUILT_IN
+private scalar_variable ::= PERL_SCALAR_BUILT_IN | perl_scalar
+perl_scalar ::= [PERL_SIGIL_SCALAR_INDEX] PERL_SIGIL_SCALAR + variable_body
 
-private array_variable ::=
-    PERL_ARRAY
-    | PERL_ARRAY_BUILT_IN
+private array_variable ::= PERL_ARRAY_BUILT_IN | perl_array
+perl_array ::= PERL_SIGIL_ARRAY [PERL_SIGIL_SCALAR+] variable_body
 
-private hash_variable ::=
-    PERL_HASH
-    | PERL_HASH_BUILT_IN
+private hash_variable ::= PERL_HASH_BUILT_IN | perl_hash
+perl_hash ::= PERL_SIGIL_HASH [PERL_SIGIL_SCALAR+] variable_body
 
-private glob_variable ::=
-    PERL_GLOB
-    | PERL_GLOB_BUILT_IN
+private glob_variable ::= PERL_GLOB_BUILT_IN | perl_glob
+perl_glob ::= '*' variable_body
 
+private variable_body ::=
+    PERL_LBRACE [namespace] variable_name PERL_RBRACE
+    | [namespace] variable_name
+variable_name ::= PERL_VARIABLE_NAME
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
-namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
 method ::=
     namespace '->' scalar_variable      // i belive here could be more
-    | [namespace ['->']] PERL_FUNCTION  // -> or :: call
+    | namespace_method_static   // package::method
+    | namespace_method          // package->method
+    | object_method             // $object->method actuall it can be not scalar, but scalar expression, but enough for now
     | PERL_FUNCTION_BUILT_IN
     | PERL_KEYWORD
+
+private namespace_method_static ::= [namespace] user_function
+private namespace_method ::= [namespace '->'] user_function
+private object_method ::= object '->' user_function
+object ::= scalar_variable
+
+namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+user_function ::= PERL_FUNCTION

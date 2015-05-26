@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Alexandr Evstigneev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.perl5.lang.perl.idea;
 
 /**
@@ -33,38 +49,38 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
 		IElementType elementType = element.getNode().getElementType();
-//		if( elementType == SCALAR )
-//		{
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					PerlSyntaxHighlighter.PERL_SCALAR,
-//                    false,
-//					false);
-//		}
-//		else if( elementType == HASH )
-//		{
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					PerlSyntaxHighlighter.PERL_HASH,
-//                    false,
-//					false);
-//		}
-//        else if( elementType == ARRAY )
-//        {
-//            colorize(
-//                    holder.createInfoAnnotation(element, null),
-//                    PerlSyntaxHighlighter.PERL_ARRAY,
-//                    false,
-//                    false);
-//        }
-//        else if( elementType == GLOB )
-//        {
-//            colorize(
-//                    holder.createInfoAnnotation(element, null),
-//                    PerlSyntaxHighlighter.PERL_GLOB,
-//                    false,
-//                    false);
-//        }
+		if( elementType == PERL_SCALAR )
+		{
+			colorize(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_SCALAR,
+                    false,
+					false);
+		}
+		else if( elementType == PERL_HASH )
+		{
+			colorize(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_HASH,
+                    false,
+					false);
+		}
+        else if( elementType == PERL_ARRAY )
+        {
+            colorize(
+                    holder.createInfoAnnotation(element, null),
+                    PerlSyntaxHighlighter.PERL_ARRAY,
+                    false,
+                    false);
+        }
+        else if( elementType == PERL_GLOB )
+        {
+            colorize(
+                    holder.createInfoAnnotation(element, null),
+                    PerlSyntaxHighlighter.PERL_GLOB,
+                    false,
+                    false);
+        }
 //		if( elementType == PERL_PACKAGE )
 //		{
 //			String packageName = element.getText();
