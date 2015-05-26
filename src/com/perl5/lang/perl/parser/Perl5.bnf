@@ -78,6 +78,7 @@ limitations under the License.
     PERL_RESERVED="PERL_RESERVED"
 
     PERL_OPERATOR="PERL_OPERATOR"
+    PERL_OPERATOR_NOT="not"
     PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
     PERL_OPERATOR_FILETEST="PERL_OPERATOR_FILETEST"
 
@@ -398,7 +399,7 @@ comma_last_expr ::= expr comma
 comma_sequence_expr ::= expr (comma_any expr) +
 private comma_any ::= comma + !(")"|"]"|"}")
 
-lp_not_expr ::= 'not' expr { rightAssociative=true }
+lp_not_expr ::= PERL_OPERATOR_NOT expr { rightAssociative=true }
 lp_and_expr ::= expr 'and' expr
 lp_or_xor_expr ::= expr ('or'|'xor') expr
 

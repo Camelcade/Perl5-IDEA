@@ -159,7 +159,6 @@ CAPTURE_PACKAGE_METHOD_CALL = {PERL_PACKAGE_METHOD}{EMPTY_SPACE}*"->"{EMPTY_SPAC
 CAPTURE_PACKAGE_METHOD_CALL_VAR = {PERL_PACKAGE_METHOD}{EMPTY_SPACE}*"->"{EMPTY_SPACE}*"$"
 
 CHAR_ANY        = .|{NEW_LINE}
-FULL_LINE       = .*{NEW_LINE}?
 QUOTE           = "\"" | "'" | "`"
 END_OF_LINE_COMMENT = "#" [^\n] * [\n] ?
 
@@ -208,7 +207,9 @@ PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "for
 // "print" | "say" | "open"
 
 PERL_SYN_OTHER = "undef" | "grep" | "sort" | "map" | "close"
-PERL_SYN_BINARY = "not" | "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
+PERL_SYN_BINARY_NOT = "not"
+
+PERL_SYN_BINARY = "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
 PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
 FUNCTION_SPECIAL = {PERL_SYN_BLOCK_OP} | {PERL_SYN_INCLUDE} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER} | {PERL_SYN_BINARY}
 
@@ -636,6 +637,7 @@ TRANS_MODIFIERS = [cdsr]
 
 {PERL_SYN_COMPOUND} {return PERL_RESERVED;}
 {PERL_SYN_DECLARE} {return PERL_RESERVED;}
+{PERL_SYN_BINARY_NOT} {return PERL_OPERATOR_NOT;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 {BLOCK_NAMES} {return PERL_BLOCK_NAME;}
 
