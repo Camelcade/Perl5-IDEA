@@ -16,37 +16,24 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.PsiElementFactoryImpl;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlLexicalScope;
 import com.perl5.lang.perl.psi.PerlLexicalScopeElement;
-import com.perl5.lang.perl.psi.PerlVariable;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 24.05.2015.
+ * Created by hurricup on 27.05.2015.
+ * Mixin for scope elements
  */
-public abstract class PerlVariableImpleMixin extends PerlNamedElementImpl implements PerlElementTypes, PerlVariable
+public abstract class PerlLexicalScopeElementMixin extends ASTWrapperPsiElement implements PerlLexicalScopeElement
 {
-	public PerlVariableImpleMixin(ASTNode node) {
+	public PerlLexicalScopeElementMixin(ASTNode node) {
 		super(node);
 	}
 
-	@Override
-	public PsiElement setName(String name) throws IncorrectOperationException
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return findChildByType(VARIABLE_NAME);
-	}
 
 	@Override
 	public PerlLexicalScope getLexicalScope()

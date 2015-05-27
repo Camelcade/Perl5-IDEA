@@ -18,9 +18,11 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.PerlStatement;
+import com.perl5.lang.perl.psi.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,27 +36,46 @@ public class PerlUtil
 	 * @param currentElement current Psi element to traverse from
 	 * @return ArrayList of variables in declarations
 	 */
-	List<PsiElement> findLexicalDeclarations(PsiElement currentElement)
+	public static Collection<PsiElement> findLexicalVariableDeclarations(PsiElement currentElement)
 	{
-		ArrayList<PsiElement> result = new ArrayList<PsiElement>();
+		HashMap<String,PsiElement> declarationsHash = new HashMap<>();
 
-		PsiElement currentStatement = PsiTreeUtil.getParentOfType(currentElement, PerlStatement.class);
-		while( currentStatement != null )
+		assert currentElement instanceof PerlLexicalScopeElement;
+
+		PerlLexicalScope currentScope = ((PerlLexicalScopeElement) currentElement).getLexicalScope();
+
+		Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), PerlVariableDeclaration.class);
+
+		for(PerlVariableDeclaration declaration: declarations)
 		{
-
-			if( currentStatement.getPrevSibling() == null )
+			if( declaration.getTextOffset() < currentElement.getTextOffset())
 			{
-				// moving up
-				currentStatement = currentStatement.getParent();
-			}
-			else
-			{
-				currentStatement = currentStatement.getPrevSibling();
+				// lexically ok
+				PerlLexicalScope declarationScope = declaration.getLexicalScope();
+				if( declarationScope == null 	// file level
+					|| currentScope != null && PsiTreeUtil.isAncestor(declarationScope, currentScope, false)	// declaration is an ancestor
+						)
+				{
+					for(PsiElement var: declaration.getPerlScalarList())
+					{
+						declarationsHash.put(var.getText(),var);
+					}
+					for(PsiElement var: declaration.getPerlArrayList())
+					{
+						declarationsHash.put(var.getText(),var);
+					}
+					for(PsiElement var: declaration.getPerlHashList())
+					{
+						declarationsHash.put(var.getText(),var);
+					}
+				}
 			}
 		}
 
-		return result;
+		return declarationsHash.values();
 	}
+
+
 
 
 }

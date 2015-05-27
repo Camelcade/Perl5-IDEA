@@ -20,8 +20,8 @@ import com.intellij.psi.PsiElement;
 
 /**
  * Created by hurricup on 27.05.2015.
- * This interface marks that PsiElement has it's own scope
  */
-public interface PerlScopeBlock extends PsiElement
+public interface PerlLexicalScopeElement extends PsiElement
 {
+	PerlLexicalScope getLexicalScope();
 }

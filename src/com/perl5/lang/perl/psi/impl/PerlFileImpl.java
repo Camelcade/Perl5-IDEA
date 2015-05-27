@@ -22,12 +22,13 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.tree.IStubFileElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlFileType;
+import com.perl5.lang.perl.psi.PerlLexicalScope;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlFileImpl extends PsiFileBase
+public class PerlFileImpl extends PsiFileBase implements PerlLexicalScope
 {
 	public PerlFileImpl(@NotNull FileViewProvider viewProvider) {
 		super(viewProvider, PerlLanguage.INSTANCE);
@@ -38,5 +39,11 @@ public class PerlFileImpl extends PsiFileBase
 	public FileType getFileType()
 	{
 		return PerlFileType.INSTANCE;
+	}
+
+	@Override
+	public PerlLexicalScope getLexicalScope()
+	{
+		return null;
 	}
 }

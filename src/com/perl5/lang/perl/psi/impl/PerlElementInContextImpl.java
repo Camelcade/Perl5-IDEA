@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlElementInContext;
+import com.perl5.lang.perl.psi.PerlPackagedElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 25.05.2015.
  * This is an element with context, like variable, function
  */
-public abstract class PerlElementInContextImpl extends PerlNamedElementImpl implements PerlElementInContext
+public abstract class PerlElementInContextImpl extends PerlNamedElementImpl implements PerlPackagedElement
 {
 	public PerlElementInContextImpl(@NotNull ASTNode node){
 		super(node);

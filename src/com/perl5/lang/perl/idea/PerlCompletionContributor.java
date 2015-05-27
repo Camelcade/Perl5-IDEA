@@ -112,17 +112,17 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                                @NotNull CompletionResultSet resultSet)
                     {
 
-                        PsiElement position = parameters.getOriginalPosition();
-                        assert position != null;
-                        PsiElement parent = position.getParent();
+                        PsiElement variableName = parameters.getPosition().getParent();
+                        assert variableName != null;
+                        PsiElement variable = variableName.getParent();
 
-                        if (parent instanceof PerlPerlScalarImpl)
+                        if (variable instanceof PerlPerlScalar)
                             fillScalarCompletions(parameters, context, resultSet);
-                        else if (parent instanceof PerlPerlArrayImpl)
+                        else if (variable instanceof PerlPerlArray)
                             fillArrayCompletions(parameters, context, resultSet);
-                        else if (parent instanceof PerlPerlHashImpl)
+                        else if (variable instanceof PerlPerlHash)
                             fillHashCompletions(parameters, context, resultSet);
-                        else if (parent instanceof PerlPerlGlobImpl)
+                        else if (variable instanceof PerlPerlGlob)
                             fillGlobCompletions(parameters, context, resultSet);
                     }
                 }
@@ -140,17 +140,19 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                     {
 
                         final PsiFile file = parameters.getOriginalFile();
-                        final PsiElement position = parameters.getOriginalPosition();
-                        assert position != null;
-                        final PsiElement parent = position.getParent();
+                        final PsiElement variableName = parameters.getPosition().getParent();
+                        assert variableName != null;
+                        assert variableName instanceof PerlVariableName;
 
-                        if (parent instanceof PerlPerlScalarImpl)
+                        final PsiElement perlVariable = variableName.getParent();
+
+                        if (perlVariable instanceof PerlPerlScalar)
                             ApplicationManager.getApplication().runReadAction(new Runnable()
                             {
                                 @Override
                                 public void run()
                                 {
-                                    String currentText = position.getText();
+                                    String currentText = variableName.getText();
 
                                     Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
 
@@ -179,41 +181,42 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                         }
                                     }
 
-                                    Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
+                                    Collection<PsiElement> declaredVariables =  PerlUtil.findLexicalVariableDeclarations(perlVariable);
 
-                                    for (PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
+                                    for (PsiElement variable : declaredVariables)
                                     {
-                                        for (PerlPerlScalar variable : decl.getPerlScalarList())
-                                        {
-                                            assert variable instanceof PerlPerlScalarImpl;
-                                            String variableName = ((PerlPerlScalarImpl) variable).getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName));
-                                        }
-                                        for (PerlPerlArray variable : decl.getPerlArrayList())
-                                        {
-                                            assert variable instanceof PerlPerlArrayImpl;
-                                            String variableName = ((PerlPerlArrayImpl) variable).getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
-                                        }
-                                        for (PerlPerlHash variable : decl.getPerlHashList())
-                                        {
-                                            assert variable instanceof PerlPerlHashImpl;
-                                            String variableName = ((PerlPerlHashImpl) variable).getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
-                                        }
+										assert variable instanceof PerlVariable;
+
+										if( variable instanceof PerlPerlScalar)
+										{
+											String variableName = ((PerlVariable)variable).getName();
+											if (variableName != null)
+												resultSet.addElement(LookupElementBuilder.create(variableName));
+										}
+										else if( variable instanceof PerlPerlArray)
+										{
+											String variableName = ((PerlVariable)variable).getName();
+											if (variableName != null)
+												resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
+
+										}
+										else if( variable instanceof PerlPerlHash)
+										{
+											String variableName = ((PerlVariable)variable).getName();
+											if (variableName != null)
+												resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+
+										}
                                     }
                                 }
                             });
-                        else if (parent instanceof PerlPerlArrayImpl)
+                        else if (perlVariable instanceof PerlPerlArray)
                             ApplicationManager.getApplication().runReadAction(new Runnable()
                             {
                                 @Override
                                 public void run()
                                 {
-                                    String currentText = position.getText();
+                                    String currentText = variableName.getText();
 
                                     Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
 
@@ -256,19 +259,19 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                     }
 
                                     // it's dereference
-                                    if (parent.getText().contains("$"))
+                                    if (perlVariable.getText().contains("$"))
                                     {
                                         populateScalars(globalDeclarations, lexicalDeclarations, resultSet);
                                     }
                                 }
                             });
-                        else if (parent instanceof PerlPerlHashImpl)
+                        else if (perlVariable instanceof PerlPerlHash)
                             ApplicationManager.getApplication().runReadAction(new Runnable()
                             {
                                 @Override
                                 public void run()
                                 {
-                                    String currentText = position.getText();
+                                    String currentText = variableName.getText();
 
                                     Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
 
@@ -297,7 +300,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                     }
 
                                     // it's dereference
-                                    if (parent.getText().contains("$"))
+                                    if (perlVariable.getText().contains("$"))
                                     {
                                         populateScalars(globalDeclarations, lexicalDeclarations, resultSet);
                                     }
@@ -321,8 +324,8 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                         String packageName = null;
                         PsiElement parent = parameters.getPosition().getParent();
-                        if( parent != null && parent instanceof PerlElementInContext )
-                            packageName = ((PerlElementInContext) parent).getPackageName();
+                        if( parent != null && parent instanceof PerlPackagedElement)
+                            packageName = ((PerlPackagedElement) parent).getPackageName();
 
                         final String finalPackageName = packageName == null ? null: packageName + "::";
 

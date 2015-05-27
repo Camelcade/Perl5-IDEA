@@ -14,28 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.tree.IStubFileElementType;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlLexicalScope;
+import com.intellij.psi.PsiElement;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 27.05.2015.
  */
-public class PerlFileElementType extends IStubFileElementType
+public interface PerlVariable extends PerlLexicalScopeElement, PsiElement, PerlNamedElement
 {
-	private static final int VERSION = 1;
-
-	public PerlFileElementType(String debugName, Language language)
-	{
-		super(debugName, language);
-	}
-
-	@Override
-	public int getStubVersion()
-	{
-		return VERSION;
-	}
 }
