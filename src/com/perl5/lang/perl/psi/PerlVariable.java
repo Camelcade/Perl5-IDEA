@@ -17,10 +17,17 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 27.05.2015.
  */
 public interface PerlVariable extends PerlLexicalScopeElement, PsiElement, PerlNamedElement
 {
+	@Nullable
+	PerlNamespace getNamespace();
+
+	@Nullable
+	PerlVariableName getVariableName();
+
 }

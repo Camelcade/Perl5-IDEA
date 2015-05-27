@@ -535,10 +535,13 @@ private variable ::= scalar | array | hash | glob
 
 private array ::=
     PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
-    | array_variable '[' expr ']'              // array slice
-    | array_variable '{' expr '}'              // hash slice
+    | array_array_slice              // array slice
+    | array_hash_slice              // hash slice
     | array_variable
     | array_constant
+
+array_array_slice ::= array_variable '[' expr ']'
+array_hash_slice ::= array_variable '{' expr '}'
 
 private hash ::=
     PERL_SIGIL_HASH '{' expr '}'      // hash dereference w braces
@@ -546,13 +549,20 @@ private hash ::=
 
 private scalar ::=
     PERL_SIGIL_SCALAR + "{" expr "}"
-    | scalar_variable nested_element ? // some special variables are started from sigil
+    | scalar_array_element
+    | scalar_hash_element
+    | scalar_variable
+    | scalar_array_index
     | scalar_constant
-    | "(" expr ")" "["expr"]"
+    | scalar_anon_array_element
     | undef_term
-//    | PERL_SCALAR_INDEX
     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
     | perl_handle_basic
+
+scalar_array_index ::= PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * scalar_variable
+scalar_array_element ::= scalar_variable "[" expr "]"
+scalar_hash_element ::= scalar_variable ( "{" expr "}" | braced_string )
+scalar_anon_array_element ::= "(" expr ")" "["expr"]"
 
 private glob ::=
     "*" "{" expr "}"     // @todo we need to colorize this as glob

@@ -17,6 +17,7 @@ to write tests (mostly for lexer and parser at the moment).
 * Implemented autocompletion for built-in functions, packages and variables.
 * Implemented autocompletion for lexical variables.
 * Implemented project functions auto-completion 
+* Implemented lexical variables referencing and refactoring
 * Implemented basic code-folding for blocks, hashes, arrays, PODs, heredocs and sequential comments and imports.
 * Implemented crude defined subs, used packages and defined variables autocompletion.
 * Implemented basic brace matcher

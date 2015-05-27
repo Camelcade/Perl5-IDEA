@@ -21,6 +21,7 @@ import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.psi.PerlUserFunction;
+import com.perl5.lang.perl.psi.PerlVariableName;
 import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,6 +63,21 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 
 							return new PsiReference[]{reference};
 						}
+					}
+				}
+		);
+		registrar.registerReferenceProvider(
+				PlatformPatterns.psiElement(PerlVariableName.class),
+				new PsiReferenceProvider()
+				{
+					@NotNull
+					@Override
+					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+					{
+						assert element instanceof PerlVariableName;
+
+						return new PsiReference[]{new PerlLexicalVariableReference(element, new TextRange(0, element.getTextLength()))};
+
 					}
 				}
 		);

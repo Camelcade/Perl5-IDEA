@@ -29,6 +29,7 @@
       <ul>
         <li>Find usages provider is now online</li>
         <li>Implemented lexical variables autocompletion</li>
+        <li>Implemented lexical variables referencing and refactoring</li>
         <li>Bugfixes</li>
       </ul>
 
