@@ -216,7 +216,7 @@ private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_S
 private for_compound_arguments_list ::=
     [ variable_declaration | variable ] '(' expr ')' block_compound
 
-private statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2 recoverWhile=recover_statement}
+statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2 recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement

@@ -28,12 +28,10 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlRequireStatement;
 import com.perl5.lang.perl.psi.PerlRequireTerm;
+import com.perl5.lang.perl.psi.PerlStatement;
 import com.perl5.lang.perl.psi.PerlStatementModifier;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import com.perl5.lang.perl.psi.impl.PerlAnonArrayImpl;
-import com.perl5.lang.perl.psi.impl.PerlAnonHashImpl;
-import com.perl5.lang.perl.psi.impl.PerlBlockImpl;
-import com.perl5.lang.perl.psi.impl.PerlParenthesisedExprImpl;
+import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -169,24 +167,24 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 				int blockStart = perlImport.getTextOffset();
 				int blockEnd = blockStart;
 				ASTNode blockNode = perlImport.getNode();
-				PsiElement currentImport = perlImport;
+
+				PsiElement currentStatement = PsiTreeUtil.getParentOfType(perlImport, PerlStatement.class);
 
 				int importsNumber = 0;
 
-				while (currentImport != null)
+				while (currentStatement != null )
 				{
-					if (currentImport instanceof PerlUseStatement || currentImport instanceof PerlStatementModifier || currentImport instanceof PerlRequireStatement)
+					PsiElement firstChild = currentStatement.getFirstChild();
+
+					if(  firstChild != null && (firstChild instanceof PerlUseStatement || firstChild instanceof PerlRequireStatement))
 					{
-						blockEnd = currentImport.getTextOffset() + currentImport.getTextLength() - 1;
-						if( !(currentImport instanceof PerlStatementModifier) )
-							importsNumber++;
+						blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
+						importsNumber++;
 					}
-					else if( currentImport.getNode().getElementType() == PerlElementTypes.PERL_SEMI )
-						blockEnd = currentImport.getTextOffset() + 1;
-					else if( !(currentImport instanceof PsiComment || currentImport instanceof PsiWhiteSpace ) )
+					else if( !(currentStatement instanceof PsiComment || currentStatement instanceof PsiWhiteSpace ) )
 						break;
 
-					currentImport = currentImport.getNextSibling();
+					currentStatement = currentStatement.getNextSibling();
 				}
 
 				if (blockEnd != blockStart && importsNumber > 1)
@@ -253,7 +251,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return "# Block comment";
 		else if ( elementType == PerlElementTypes.PERL_COMMENT)
 			return "# comments...";
-		else if ( elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_STATEMENT)
+		else if ( elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_TERM)
 			return "imports...";
 		else
 			return "unknown entity";
@@ -269,7 +267,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return true;
 		else if ( elementType == PerlElementTypes.PERL_COMMENT)
 			return true;
-		else if ( elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_STATEMENT)
+		else if ( elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_TERM)
 			return true;
 		else
 			return false;
