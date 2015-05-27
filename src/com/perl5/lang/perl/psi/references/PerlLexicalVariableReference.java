@@ -82,12 +82,6 @@ public class PerlLexicalVariableReference extends PerlReference
 				|| variable instanceof PerlPerlArray
 			)
 				return resolveArrayName(declaredVariables);
-			else
-				System.err.println(String.format("Unable to detect type for %s in %s", variable.getClass(), variableContainer.getClass()));
-		}
-		else
-		{
-			System.err.println(String.format("Attempt to find a reference for %s - %s", variable.getClass(), myElement.getText()));
 		}
 
 		return null;
