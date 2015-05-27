@@ -65,23 +65,27 @@ public class PerlLexicalVariableReference extends PerlReference
 
 			Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 
+			boolean forceScalar = ((PerlVariable) variable).getScalarSigils() != null;
+
 			if(
 				variableContainer instanceof PerlScalarHashElement
 				|| variableContainer instanceof PerlArrayHashSlice
-				|| variable instanceof PerlPerlHash
+				|| ( variable instanceof PerlPerlHash && !forceScalar)
 			)
 				return resolveHashName(declaredVariables);
 			else if(
+					variableContainer instanceof PerlArrayArraySlice
+					|| variableContainer instanceof PerlScalarArrayElement
+					|| ( variable instanceof PerlPerlArrayIndex && !forceScalar)
+					|| (variable instanceof PerlPerlArray && !forceScalar)
+					)
+				return resolveArrayName(declaredVariables);
+			else if(
 				variableContainer instanceof PerlDerefExpr
 				|| variable instanceof PerlPerlScalar
+				|| forceScalar
 			)
 				return resolveScalarName(declaredVariables);
-			else if(
-					variableContainer instanceof PerlArrayArraySlice
-				|| variableContainer instanceof PerlScalarArrayElement
-				|| variable instanceof PerlPerlArray
-			)
-				return resolveArrayName(declaredVariables);
 		}
 
 		return null;

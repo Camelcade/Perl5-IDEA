@@ -30,4 +30,7 @@ public interface PerlVariable extends PerlLexicalScopeElement, PsiElement, PerlN
 	@Nullable
 	PerlVariableName getVariableName();
 
+	@Nullable
+	PerlScalarSigils getScalarSigils();
+
 }
