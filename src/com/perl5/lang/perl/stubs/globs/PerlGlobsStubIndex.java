@@ -18,9 +18,7 @@ package com.perl5.lang.perl.stubs.globs;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlGlob;
 import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
