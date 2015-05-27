@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.PerlStatement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,20 @@ public class PerlUtil
 	{
 		ArrayList<PsiElement> result = new ArrayList<PsiElement>();
 
+		PsiElement currentStatement = PsiTreeUtil.getParentOfType(currentElement, PerlStatement.class);
+		while( currentStatement != null )
+		{
 
+			if( currentStatement.getPrevSibling() == null )
+			{
+				// moving up
+				currentStatement = currentStatement.getParent();
+			}
+			else
+			{
+				currentStatement = currentStatement.getPrevSibling();
+			}
+		}
 
 		return result;
 	}

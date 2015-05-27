@@ -134,12 +134,14 @@ limitations under the License.
 
     extends(".*expr")=expr
 
+    implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_definition")="com.perl5.lang.perl.psi.PerlScopeBlock";
+
     mixin("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
     elementTypeFactory("sub_definition|perl_glob")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
     stubClass("sub_definition")="com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixin"
-    implements("sub_definition")="com.perl5.lang.perl.psi.PerlElementInContext"
+    implements("sub_definition")="com.perl5.lang.perl.psi.PerlElementInContext,com.perl5.lang.perl.psi.PerlScopeBlock"
 
     stubClass("perl_glob")="com.perl5.lang.perl.stubs.globs.PerlGlobStub"
     mixin("perl_glob")="com.perl5.lang.perl.psi.impl.PerlPerlGlobImplMixin"
@@ -188,33 +190,37 @@ private compound_statement ::=
         | foreach_compound
      )
 
-if_compound ::= 'if' compound_conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
-unless_compound ::= 'unless' compound_conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
-private if_compound_elsif ::= 'elsif' compound_conditional_block  // {pin=1}
-private if_compound_else  ::= 'else' block // {pin=1}
+if_compound ::= 'if' conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
+unless_compound ::= 'unless' conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
+private if_compound_elsif ::= 'elsif' conditional_block  // {pin=1}
+private if_compound_else  ::= 'else' unconditional_block // {pin=1}
+unconditional_block ::= block
 
-private compound_conditional_block ::= '(' expr ')' block
+conditional_block ::= condition block
+condition ::= '(' expr ')'
 
-given_compound ::= 'given' compound_conditional_block // {pin=1}
+given_compound ::= 'given' conditional_block // {pin=1}
 
-while_compound ::= 'while' compound_conditional_block [compound_continue_block] // {pin=1}
-until_compound ::= 'until' compound_conditional_block [compound_continue_block] // {pin=1}
+while_compound ::= 'while' conditional_block [compound_continue_block] // {pin=1}
+until_compound ::= 'until' conditional_block [compound_continue_block] // {pin=1}
 
 private compound_continue_block ::= 'continue' block
 
-block_compound ::= block [compound_continue_block]
+private block_compound ::= block [compound_continue_block]
 
 
 // for/foreach
-for_compound ::= 'for' for_compound_arguments // {pin=1}
-foreach_compound ::= 'foreach' for_compound_arguments // {pin=1}
-private for_compound_arguments ::= for_compound_arguments_iteration | for_compound_arguments_list
+for_compound ::= 'for' for_arguments // {pin=1}
+foreach_compound ::= 'foreach' for_arguments // {pin=1}
+private for_arguments ::=
+    for_iterator block
+    | for_list block_compound
 
-private for_compound_arguments_iteration ::= '(' [expr]  PERL_SEMI [expr] PERL_SEMI [expr] ')' block
+for_iterator ::= '(' [expr]  PERL_SEMI [expr] PERL_SEMI [expr] ')'
 
 // @todo only single variable or variable definition may be here
-private for_compound_arguments_list ::=
-    [ variable_declaration | variable ] '(' expr ')' block_compound
+for_list ::=
+    [ variable_declaration | variable ] '(' expr ')'
 
 statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2 recoverWhile=recover_statement}
 
