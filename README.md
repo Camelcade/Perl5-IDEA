@@ -4,7 +4,11 @@ This is my attempt to build a plugin for IDEA that will support Perl5 language.
 
 This project is currently in development, and if you want to participate - you may fork or contact me via skype: hurricup
 
-#Current status - beta testing and development (0.15 beta)
+#Need testers
+There is tremendous amount of work to do in development and projects really need testers. Not only users-testers, but someone
+to write tests (mostly for lexer and parser at the moment).
+
+#Current status - development (0.15 beta)
 
 * Implemented JFlex lexer and Grammar-kit for Perl and POD. They still have some bugs, see issue tracker.
 * Implemented support for php-style perl <? ... ?>

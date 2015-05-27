@@ -38,17 +38,9 @@ import java.io.Reader;
  */
 public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTypes
 {
-//	private static final DefaultWordsScanner WORDS_SCANNER =
-//			new DefaultWordsScanner(new FlexAdapter(new PerlLexer((Reader) null)),
-//					PerlParserDefinition.IDENTIFIERS,
-//					PerlParserDefinition.COMMENTS,
-//					PerlParserDefinition.LITERALS
-//			);
-
 	@Nullable
 	@Override
 	public WordsScanner getWordsScanner() {
-//		return WORDS_SCANNER; todo solve the concurrency problem
 		return new DefaultWordsScanner(new FlexAdapter(new PerlLexer((Reader) null)),
 				PerlParserDefinition.IDENTIFIERS,
 				PerlParserDefinition.COMMENTS,

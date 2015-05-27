@@ -207,7 +207,9 @@ PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "for
 // "print" | "say" | "open"
 
 PERL_SYN_OTHER = "undef" | "grep" | "sort" | "map" | "close"
+
 PERL_SYN_BINARY_NOT = "not"
+PERL_SYN_BINARY_X = "x"
 
 PERL_SYN_BINARY = "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
 PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
@@ -639,6 +641,7 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_SYN_COMPOUND} {return PERL_RESERVED;}
 {PERL_SYN_DECLARE} {return PERL_RESERVED;}
 {PERL_SYN_BINARY_NOT} {return PERL_OPERATOR_NOT;}
+{PERL_SYN_BINARY_X} {return PERL_OPERATOR_X;}
 {FUNCTION_SPECIAL} {return PERL_KEYWORD;}
 {BLOCK_NAMES} {return PERL_BLOCK_NAME;}
 
@@ -647,7 +650,7 @@ TRANS_MODIFIERS = [cdsr]
     {BAREWORD} { yybegin(YYINITIAL); return PERL_STRING_CONTENT;}
 }
 
-{X_OP_STICKED} {yypushback(yylength()-1);return PERL_OPERATOR;}
+{X_OP_STICKED} {yypushback(yylength()-1);return PERL_OPERATOR_X;}
 
 {CAPTURE_MAIN_CALL} {startCustomBlock(LEX_MAIN_FUNCTION_CALL);break;}
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}

@@ -79,6 +79,8 @@ limitations under the License.
 
     PERL_OPERATOR="PERL_OPERATOR"
     PERL_OPERATOR_NOT="not"
+    PERL_OPERATOR_X="x"
+
     PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
     PERL_OPERATOR_FILETEST="PERL_OPERATOR_FILETEST"
 
@@ -370,8 +372,7 @@ prefix_unary_expr ::=  ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
 regex_expr ::= expr ('=~'|'!~') expr
 
-// @todo 'x' is not parsed correctly with joined x40
-mul_expr ::= expr ('*'|'/'|'%'|'x') expr
+mul_expr ::= expr ('*'|'/'|'%'|PERL_OPERATOR_X) expr
 add_expr ::= expr ('+'|'-'|'.') expr
 shift_expr ::= expr ('<<'|'>>') expr
 

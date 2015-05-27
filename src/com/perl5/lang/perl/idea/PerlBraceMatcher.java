@@ -32,7 +32,7 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 	private static final BracePair[] PAIRS = new BracePair[]{
 			new BracePair(PERL_LPAREN, PERL_RPAREN, false),
 			new BracePair(PERL_LBRACK, PERL_RBRACK, false),
-			new BracePair(PERL_LBRACE, PERL_LBRACE, false),
+			new BracePair(PERL_LBRACE, PERL_LBRACE, true),
 //			new BracePair(PERL_LANGLE, PERL_RANGLE, false),
 	};
 

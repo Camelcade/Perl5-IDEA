@@ -432,12 +432,12 @@ public class PerlLexer extends PerlLexerGenerated{
 	public IElementType processDiv()
 	{
 		if(	// seems regex, @todo map types and words
-			lastSignificantTokenType == PERL_OPERATOR
+				lastSignificantTokenType == PERL_OPERATOR
+			|| lastSignificantTokenType == PERL_OPERATOR_X
 			|| lastSignificantTokenType == PERL_LPAREN
 			|| lastSignificantTokenType == PERL_LBRACE
 			|| lastSignificantTokenType == PERL_LBRACK
 			|| lastSignificantTokenType == PERL_SEMI
-			|| lastSignificantToken.equals("x")
 			|| lastSignificantToken.equals("return")
 			|| lastSignificantToken.equals("split")
 			|| lastSignificantToken.equals("if")

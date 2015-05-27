@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.15 beta</version>
+    <version>0.16 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
   <description><![CDATA[
@@ -25,8 +25,9 @@
     ]]></description>
 
   <change-notes><![CDATA[
-      <p>0.15 beta</p>
+      <p>0.16 beta</p>
       <ul>
+        <li>Find usages provider is now online</li>
         <li>Bugfixes</li>
       </ul>
 
@@ -87,8 +88,8 @@
       <stubIndex implementation="com.perl5.lang.perl.stubs.globs.PerlGlobsStubIndex"/>
 
       <stubElementTypeHolder class="com.perl5.lang.perl.stubs.PerlStubElementTypes"/>
+      <lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/>
 
-      <!--lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/-->
       <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/-->
 
 
@@ -100,8 +101,7 @@
       <annotator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
       <completion.contributor language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
       <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
-
-      <!--lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/-->
+      <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
 
       <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
       <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
