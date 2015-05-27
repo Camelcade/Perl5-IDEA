@@ -99,8 +99,6 @@
                                     implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
       <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
       <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-      <annotator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
-      <completion.contributor language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
       <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
       <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
 

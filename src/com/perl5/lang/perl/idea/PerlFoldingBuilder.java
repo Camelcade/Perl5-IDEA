@@ -27,11 +27,7 @@ import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlRequireStatement;
-import com.perl5.lang.perl.psi.PerlRequireTerm;
-import com.perl5.lang.perl.psi.PerlStatement;
-import com.perl5.lang.perl.psi.PerlStatementModifier;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,10 +51,10 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		descriptors.addAll(getDescriptorsFor(root, document, PerlBlockImpl.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonHashImpl.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonArrayImpl.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlParenthesisedExprImpl.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlBlock.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonHash.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonArray.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlParenthesisedExpr.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 1));
 
 		descriptors.addAll(getCommentsDescriptors(root, document));
@@ -252,10 +248,10 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return "# Block comment";
 		else if ( elementType == PerlElementTypes.PERL_COMMENT)
 			return "# comments...";
-		else if ( elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_TERM)
+		else if ( elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_STATEMENT)
 			return "imports...";
 		else
-			return "unknown entity";
+			return "unknown entity [report to devs with example]";
 	}
 
 	@Override
