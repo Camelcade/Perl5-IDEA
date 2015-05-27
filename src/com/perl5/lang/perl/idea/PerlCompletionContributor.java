@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.patterns.PlatformPatterns;
@@ -154,60 +155,56 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                 {
                                     String currentText = variableName.getText();
 
+									// todo this should work with stubs
                                     Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
 
                                     for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
                                     {
                                         for (PerlPerlScalar variable : decl.getPerlScalarList())
                                         {
-                                            assert variable instanceof PerlPerlScalarImpl;
-                                            String variableName = ((PerlPerlScalarImpl) variable).getName();
+                                            String variableName = variable.getName();
                                             if (variableName != null)
                                                 resultSet.addElement(LookupElementBuilder.create(variableName));
                                         }
                                         for (PerlPerlArray variable : decl.getPerlArrayList())
                                         {
-                                            assert variable instanceof PerlPerlArrayImpl;
-                                            String variableName = ((PerlPerlArrayImpl) variable).getName();
+                                            String variableName = variable.getName();
                                             if (variableName != null)
                                                 resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
                                         }
                                         for (PerlPerlHash variable : decl.getPerlHashList())
                                         {
-                                            assert variable instanceof PerlPerlHashImpl;
-                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            String variableName = variable.getName();
                                             if (variableName != null)
                                                 resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
                                         }
                                     }
 
-                                    Collection<PsiElement> declaredVariables =  PerlUtil.findLexicalVariableDeclarations(perlVariable);
+									Collection<PerlVariable> declaredVariables =  PerlUtil.findDeclaredLexicalVariables(perlVariable);
 
-                                    for (PsiElement variable : declaredVariables)
-                                    {
-										assert variable instanceof PerlVariable;
-
+									for (PerlVariable variable : declaredVariables)
+									{
 										if( variable instanceof PerlPerlScalar)
 										{
-											String variableName = ((PerlVariable)variable).getName();
+											String variableName = variable.getName();
 											if (variableName != null)
 												resultSet.addElement(LookupElementBuilder.create(variableName));
 										}
 										else if( variable instanceof PerlPerlArray)
 										{
-											String variableName = ((PerlVariable)variable).getName();
+											String variableName = variable.getName();
 											if (variableName != null)
 												resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
 
 										}
 										else if( variable instanceof PerlPerlHash)
 										{
-											String variableName = ((PerlVariable)variable).getName();
+											String variableName = variable.getName();
 											if (variableName != null)
 												resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
 
 										}
-                                    }
+									}
                                 }
                             });
                         else if (perlVariable instanceof PerlPerlArray)
@@ -225,44 +222,51 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                         for (PerlPerlArray variable : decl.getPerlArrayList())
                                         {
                                             assert variable instanceof PerlPerlArrayImpl;
-                                            String variableName = ((PerlPerlArrayImpl) variable).getName();
+                                            String variableName = variable.getName();
                                             if (variableName != null)
                                                 resultSet.addElement(LookupElementBuilder.create(variableName));
                                         }
                                         for (PerlPerlHash variable : decl.getPerlHashList())
                                         {
                                             assert variable instanceof PerlPerlHashImpl;
-                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            String variableName = variable.getName();
                                             if (variableName != null)
                                                 resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
                                         }
                                     }
 
-                                    Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
+									Collection<PerlVariable> declaredVariables =  PerlUtil.findDeclaredLexicalVariables(perlVariable);
+									boolean useScalars = perlVariable.getText().contains("$");
 
-                                    for (PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
-                                    {
-                                        for (PerlPerlArray variable : decl.getPerlArrayList())
-                                        {
-                                            assert variable instanceof PerlPerlArrayImpl;
-                                            String variableName = ((PerlPerlArrayImpl) variable).getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName));
-                                        }
-                                        for (PerlPerlHash variable : decl.getPerlHashList())
-                                        {
-                                            assert variable instanceof PerlPerlHashImpl;
-                                            String variableName = ((PerlPerlHashImpl) variable).getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
-                                        }
-                                    }
+									for (PerlVariable variable : declaredVariables)
+									{
+										if( variable instanceof PerlPerlScalar && useScalars)
+										{
+											String variableName = variable.getName();
+											if (variableName != null)
+												resultSet.addElement(LookupElementBuilder.create(variableName));
+										}
+										else if( variable instanceof PerlPerlArray)
+										{
+											String variableName = variable.getName();
+											if (variableName != null)
+												resultSet.addElement(LookupElementBuilder.create(variableName));
 
-                                    // it's dereference
-                                    if (perlVariable.getText().contains("$"))
-                                    {
-                                        populateScalars(globalDeclarations, lexicalDeclarations, resultSet);
-                                    }
+										}
+										else if( variable instanceof PerlPerlHash)
+										{
+											String variableName = variable.getName();
+											if (variableName != null)
+												resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+
+										}
+									}
+
+									// todo remove after re-factoring globals
+									if( useScalars )
+									{
+										populateScalars(globalDeclarations, resultSet);
+									}
                                 }
                             });
                         else if (perlVariable instanceof PerlPerlHash)
@@ -286,30 +290,36 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                         }
                                     }
 
-                                    Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationLexicalImpl.class);
+									Collection<PerlVariable> declaredVariables =  PerlUtil.findDeclaredLexicalVariables(perlVariable);
+									boolean useScalars = perlVariable.getText().contains("$");
 
-                                    for (PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
-                                    {
-                                        for (PerlPerlHash variable : decl.getPerlHashList())
-                                        {
-                                            assert variable instanceof PerlPerlHashImpl;
-                                            String variableName = ((PerlPerlHashImpl) variable).getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
-                                        }
-                                    }
+									for (PerlVariable variable : declaredVariables)
+									{
+										if( variable instanceof PerlPerlScalar && useScalars)
+										{
+											String variableName = variable.getName();
+											if (variableName != null)
+												resultSet.addElement(LookupElementBuilder.create(variableName));
+										}
+										else if( variable instanceof PerlPerlHash)
+										{
+											String variableName = variable.getName();
+											if (variableName != null)
+												resultSet.addElement(LookupElementBuilder.create(variableName));
 
-                                    // it's dereference
-                                    if (perlVariable.getText().contains("$"))
-                                    {
-                                        populateScalars(globalDeclarations, lexicalDeclarations, resultSet);
-                                    }
+										}
+									}
+
+									// todo remove after re-factoring globals
+									if( useScalars )
+									{
+										populateScalars(globalDeclarations, resultSet);
+									}
                                 }
                             });
                     }
                 }
         );
-
 
         // current file defined subs
         extend(
@@ -423,7 +433,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
     private void populateScalars(
                 @NotNull Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations,
-                @NotNull Collection<PerlVariableDeclarationLexicalImpl> lexicalDeclarations,
                 @NotNull CompletionResultSet resultSet
     )
     {
@@ -431,19 +440,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         {
             for (PerlPerlScalar variable : decl.getPerlScalarList())
             {
-                assert variable instanceof PerlPerlScalarImpl;
-                String variableName = ((PerlPerlScalarImpl) variable).getName();
-                if( variableName != null)
-                    resultSet.addElement(LookupElementBuilder.create(variableName));
-            }
-        }
-
-        for (PerlVariableDeclarationLexicalImpl decl : lexicalDeclarations)
-        {
-            for (PerlPerlScalar variable : decl.getPerlScalarList())
-            {
-                assert variable instanceof PerlPerlScalarImpl;
-                String variableName = ((PerlPerlScalarImpl) variable).getName();
+                String variableName = variable.getName();
                 if( variableName != null)
                     resultSet.addElement(LookupElementBuilder.create(variableName));
             }

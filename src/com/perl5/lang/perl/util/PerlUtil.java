@@ -36,9 +36,9 @@ public class PerlUtil
 	 * @param currentElement current Psi element to traverse from
 	 * @return ArrayList of variables in declarations
 	 */
-	public static Collection<PsiElement> findLexicalVariableDeclarations(PsiElement currentElement)
+	public static Collection<PerlVariable> findDeclaredLexicalVariables(PsiElement currentElement)
 	{
-		HashMap<String,PsiElement> declarationsHash = new HashMap<>();
+		HashMap<String,PerlVariable> declarationsHash = new HashMap<>();
 
 		assert currentElement instanceof PerlLexicalScopeElement;
 
@@ -58,15 +58,18 @@ public class PerlUtil
 				{
 					for(PsiElement var: declaration.getPerlScalarList())
 					{
-						declarationsHash.put(var.getText(),var);
+						assert var instanceof PerlVariable;
+						declarationsHash.put(var.getText(),(PerlVariable)var);
 					}
 					for(PsiElement var: declaration.getPerlArrayList())
 					{
-						declarationsHash.put(var.getText(),var);
+						assert var instanceof PerlVariable;
+						declarationsHash.put(var.getText(),(PerlVariable)var);
 					}
 					for(PsiElement var: declaration.getPerlHashList())
 					{
-						declarationsHash.put(var.getText(),var);
+						assert var instanceof PerlVariable;
+						declarationsHash.put(var.getText(),(PerlVariable)var);
 					}
 				}
 			}
