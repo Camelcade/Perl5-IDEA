@@ -236,7 +236,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                     }
 
 									Collection<PerlVariable> declaredVariables =  PerlUtil.findDeclaredLexicalVariables(perlVariable);
-									boolean useScalars = perlVariable.getText().contains("$");
+                                    boolean useScalars = ((PerlPerlArray) perlVariable).getScalarSigils() != null;
 
 									for (PerlVariable variable : declaredVariables)
 									{
@@ -283,15 +283,14 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                     {
                                         for (PerlPerlHash variable : decl.getPerlHashList())
                                         {
-                                            assert variable instanceof PerlPerlHashImpl;
-                                            String variableName = ((PerlPerlHashImpl) variable).getName();
+                                            String variableName = variable.getName();
                                             if (variableName != null)
                                                 resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
                                         }
                                     }
 
 									Collection<PerlVariable> declaredVariables =  PerlUtil.findDeclaredLexicalVariables(perlVariable);
-									boolean useScalars = perlVariable.getText().contains("$");
+                                    boolean useScalars = ((PerlPerlHash) perlVariable).getScalarSigils() != null;
 
 									for (PerlVariable variable : declaredVariables)
 									{
