@@ -173,7 +173,7 @@ private perlFile ::= file_items <<eof>>
 private file_items ::= PERL_SEMI * file_item * {recoverWhile=recover_block}
 private file_item ::= namespace_definition | namespace_element
 
-block ::= "{" file_items "}" {pin=1}
+block ::= "{" file_items "}" //{pin=1} fixme we shoud be able to distinct from anon hash
 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI )
 
@@ -195,20 +195,21 @@ private compound_statement ::=
         | for_compound
         | foreach_compound
      )
+     {recoverWhile=recover_statement}
 
-if_compound ::= 'if' conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
-unless_compound ::= 'unless' conditional_block if_compound_elsif * [if_compound_else] // {pin=1}
-private if_compound_elsif ::= 'elsif' conditional_block  // {pin=1}
-private if_compound_else  ::= 'else' unconditional_block // {pin=1}
+if_compound ::= 'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
+unless_compound ::= 'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
+private if_compound_elsif ::= 'elsif' conditional_block  {pin=1}
+private if_compound_else  ::= 'else' unconditional_block {pin=1}
 unconditional_block ::= block
 
-conditional_block ::= condition block
-condition ::= '(' expr ')'
+conditional_block ::= condition block { recoverWhile=recover_statement}
+condition ::= '(' expr ')' {pin=1}
 
-given_compound ::= 'given' conditional_block // {pin=1}
+given_compound ::= 'given' conditional_block  {pin=1}
 
-while_compound ::= 'while' conditional_block [compound_continue_block] // {pin=1}
-until_compound ::= 'until' conditional_block [compound_continue_block] // {pin=1}
+while_compound ::= 'while' conditional_block [compound_continue_block]  {pin=1}
+until_compound ::= 'until' conditional_block [compound_continue_block]  {pin=1}
 
 private compound_continue_block ::= 'continue' block
 
@@ -239,7 +240,7 @@ private statement_variation ::=
 
 require_statement ::= require_term &(PERL_RESERVED | ';' | '}')
 
-sub_definition ::= "sub" namespace_method_static sub_definition_parameters ? block
+sub_definition ::= "sub" namespace_method_static sub_definition_parameters ? block {pin=2 recoverWhile=recover_statement}
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
@@ -269,17 +270,17 @@ statement_modifier ::=
     | foreach_statement_modifier
     | when_statement_modifier
 
-if_statement_modifier ::= 'if' expr
-unless_statement_modifier ::=  'unless' expr
-while_statement_modifier ::=  'while' expr
-until_statement_modifier ::=  'until' expr
-for_statement_modifier ::=  'for' expr     // actually @LIST
-foreach_statement_modifier ::=  'foreach' expr  // actually @LIST
-when_statement_modifier ::= 'when' expr
+if_statement_modifier ::= 'if' expr {pin=1}
+unless_statement_modifier ::=  'unless' expr {pin=1}
+while_statement_modifier ::=  'while' expr {pin=1}
+until_statement_modifier ::=  'until' expr {pin=1}
+for_statement_modifier ::=  'for' expr  {pin=1}
+foreach_statement_modifier ::=  'foreach' expr {pin=1}
+when_statement_modifier ::= 'when' expr {pin=1}
 
 
-use_statement ::= 'use' use_no_parameters
-no_statement ::= 'no' use_no_parameters
+use_statement ::= 'use' use_no_parameters {pin=1}
+no_statement ::= 'no' use_no_parameters {pin=1}
 private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= namespace [perl_version] [expr];
 private use_version_parameters ::= perl_version;
@@ -472,10 +473,10 @@ private regex_term ::=
     | tr_regex
     | match_regex
 
-compile_regex ::= 'qr' match_regex_body
+compile_regex ::= 'qr' match_regex_body {pin=1}
 match_regex ::= ['m'] match_regex_body
-private match_regex_body ::= PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE [perl_regex_modifiers]
-replacement_regex ::= 's' PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE regex_replacement [perl_regex_modifiers]
+private match_regex_body ::= PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE [perl_regex_modifiers] {pin=1}
+replacement_regex ::= 's' PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE regex_replacement [perl_regex_modifiers] {pin=1}
 
 private regex_replacement ::=
     PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE
@@ -484,15 +485,15 @@ private regex_replacement ::=
 perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
 perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick
 
-tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE [PERL_REGEX_QUOTE] tr_replacementlist PERL_REGEX_QUOTE [tr_modifiers]
+tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE [PERL_REGEX_QUOTE] tr_replacementlist PERL_REGEX_QUOTE [tr_modifiers] {pin=1}
 tr_searchlist ::= PERL_STRING_CONTENT
 tr_replacementlist ::= PERL_STRING_CONTENT
 
 tr_modifiers ::= PERL_REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
-do_term ::= "do" eval_argument
-eval_term ::= "eval" eval_argument
+do_term ::= "do" eval_argument {pin=1}
+eval_term ::= "eval" eval_argument {pin=1}
 private eval_argument ::= '('expr')' | block | expr
 
 private variable_declaration ::=
@@ -501,9 +502,9 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::= 'local' [namespace]  local_variable_declaration_variation
-variable_declaration_lexical ::= ('my' | 'state') [namespace] variable_declaration_variation
-variable_declaration_global ::= 'our' [namespace] variable_declaration_variation
+variable_declaration_local ::= 'local' [namespace]  local_variable_declaration_variation {pin=1}
+variable_declaration_lexical ::= ('my' | 'state') [namespace] variable_declaration_variation {pin=1}
+variable_declaration_global ::= 'our' [namespace] variable_declaration_variation {pin=1}
 
 private local_variable_declaration_variation ::=
     '(' local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * ')'
@@ -524,8 +525,8 @@ private reference_value ::=
     | anon_hash
     | code_ref
 
-anon_array ::= '[' [expr] ']'
-anon_hash ::= '{' [expr] '}'
+anon_array ::= '[' [expr] ']' {pin=1}
+anon_hash ::= '{' [expr] '}' // fixme pin here after solving problem with code block and prototypes
 code_ref ::= "sub" block
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
