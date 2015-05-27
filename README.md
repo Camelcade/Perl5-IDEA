@@ -5,7 +5,7 @@ This is my attempt to build a plugin for IDEA that will support Perl5 language.
 This project is currently in development, and if you want to participate - you may fork or contact me via skype: hurricup
 
 #Need testers
-There is tremendous amount of work to do in development and projects really need testers. Not only users-testers, but someone
+There is tremendous amount of work to do in development and project really need testers. Not only users-testers, but someone
 to write tests (mostly for lexer and parser at the moment).
 
 #Current status - development (0.15 beta)
@@ -21,6 +21,7 @@ to write tests (mostly for lexer and parser at the moment).
 * Implemented basic brace matcher
 * Implemented jump to function declaration by click (works with obvious calls for now: package::method and package->method)
 * Implemented methods re-factoring (same as above, use with CARE with VCS and extensive testing)
+* Implemented find usages. 
 * Current, dev build you may find here: http://evstigneev.com/camelcade.jar
 
 #See also
