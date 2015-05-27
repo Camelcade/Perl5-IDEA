@@ -28,6 +28,7 @@
       <p>0.16 beta</p>
       <ul>
         <li>Find usages provider is now online</li>
+        <li>Implemented lexical variables autocompletion</li>
         <li>Bugfixes</li>
       </ul>
 

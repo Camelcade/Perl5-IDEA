@@ -15,6 +15,7 @@ to write tests (mostly for lexer and parser at the moment).
 * Implemented syntax highlighting for Perl and POD
 * Implemented file types for Perl scripts and packages, POD files, XS files.
 * Implemented autocompletion for built-in functions, packages and variables.
+* Implemented autocompletion for lexical variables.
 * Implemented project functions auto-completion 
 * Implemented basic code-folding for blocks, hashes, arrays, PODs, heredocs and sequential comments and imports.
 * Implemented crude defined subs, used packages and defined variables autocompletion.
