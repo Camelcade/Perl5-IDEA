@@ -16,12 +16,19 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceImpl;
+import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubIndex;
+import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -86,10 +93,38 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static String getElementPackageName(PsiElement element)
 	{
 		PerlNamespaceDefinitionImpl namespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionImpl.class);
-		if (namespace != null && namespace.getNamespace() != null)
-			return ((PerlNamespaceImpl) namespace.getNamespace()).getName();
+		if (namespace != null)
+		{
+			String name = namespace.getNamespace().getName();
+			assert name != null;
+			return name;
+		}
 		else
 			return "main";
 
 	}
+
+	/**
+	 * Searching project files for namespace definitions by specific package name
+	 * @param project	project to search in
+	 * @param packageName	canonical package name (without tailing ::)
+	 * @return	collection of found definitions
+	 */
+	public static Collection<PerlNamespaceDefinition> findNamespaceDefinitions(Project project, String packageName)
+	{
+		assert packageName != null;
+
+		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, GlobalSearchScope.projectScope(project), PerlNamespaceDefinition.class);
+	}
+
+	/**
+	 * Returns list of defined package names
+	 * @param project project to search in
+	 * @return collection of package names
+	 */
+	public static Collection<String> getDefinedPackageNames(Project project)
+	{
+		return StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project);
+	}
+
 }

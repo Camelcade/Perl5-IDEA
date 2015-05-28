@@ -22,7 +22,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.stubs.PerlFileElementType;
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**

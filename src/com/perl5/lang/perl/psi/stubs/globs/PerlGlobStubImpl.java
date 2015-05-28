@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs.globs;
+package com.perl5.lang.perl.psi.stubs.globs;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.stubs.PerlStubElementTypes;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
 /**
  * Created by hurricup on 25.05.2015.

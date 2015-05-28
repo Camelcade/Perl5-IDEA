@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs;
+package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.stubs.globs.PerlGlobStubElementType;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStubElementType;
+import com.intellij.psi.tree.IStubFileElementType;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubElementType;
+import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubElementType;
+import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionStubElementType;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -27,5 +29,6 @@ public interface PerlStubElementTypes
 {
 	IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
 	IStubElementType PERL_GLOB = new PerlGlobStubElementType("PERL_GLOB");
+	IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("PERL_NAMESPACE");
 
 }

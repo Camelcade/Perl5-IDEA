@@ -14,37 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs.subs.definitions;
+package com.perl5.lang.perl.psi.stubs.subs.definitions;
 
-import com.intellij.psi.stubs.StubBase;
-import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.stubs.PerlStubElementTypes;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinition> implements PerlSubDefinitionStub
+public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PerlSubDefinition>
 {
-	private final String packageName;
-	private final String functionName;
-
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String functionName)
-	{
-		super(parent, PerlStubElementTypes.SUB_DEFINITION);
-		this.packageName = packageName;
-		this.functionName = functionName;
-	}
+	public static final int VERSION = 0;
+	public static final StubIndexKey<String,PerlSubDefinition> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
 
 	@Override
-	public String getPackageName()
+	public int getVersion()
 	{
-		return packageName;
+		return super.getVersion() + VERSION;
 	}
 
+	@NotNull
 	@Override
-	public String getFunctionName()
+	public StubIndexKey<String, PerlSubDefinition> getKey()
 	{
-		return functionName;
+		return KEY;
 	}
 }

@@ -19,12 +19,9 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.stubs.globs.PerlGlobsStubIndex;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,26 +45,23 @@ public class PerlGlobUtil implements PerlElementTypes
 	 * Searching project files for sub definitions by specific package and function name
 	 * @param project	project to search in
 	 * @param canonicalName	canonical function name package::name
-	 * @return	ArrayList of found definitions
+	 * @return collection of found definitions
 	 */
-	public static List<PerlPerlGlob> findGlobsDefinitions(Project project, String canonicalName)
+	public static Collection<PerlPerlGlob> findGlobsDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
 
-		Collection<PerlPerlGlob> result = StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlPerlGlob.class);
-
-		return new ArrayList<PerlPerlGlob>(result);
+		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlPerlGlob.class);
 	}
-
 
 	/**
 	 * Returns list of known stubbed globs
 	 * @param project project to search in
-	 * @return list of globs
+	 * @return collection of globs names
 	 */
-	public static List<String> getDefinedGlobsNames(Project project)
+	public static Collection<String> getDefinedGlobsNames(Project project)
 	{
-		return new ArrayList<String>(StubIndex.getInstance().getAllKeys(PerlGlobsStubIndex.KEY, project));
+		return StubIndex.getInstance().getAllKeys(PerlGlobsStubIndex.KEY, project);
 	}
 
 }

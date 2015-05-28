@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs.subs.definitions;
+package com.perl5.lang.perl.psi.stubs.subs.definitions;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;

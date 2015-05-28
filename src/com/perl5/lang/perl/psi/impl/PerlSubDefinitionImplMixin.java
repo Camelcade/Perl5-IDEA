@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.PerlLexicalScope;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlUserFunction;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 

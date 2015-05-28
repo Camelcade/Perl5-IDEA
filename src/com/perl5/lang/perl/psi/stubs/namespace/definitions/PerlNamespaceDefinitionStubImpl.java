@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.psi.stubs.namespace.definitions;
 
-import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.stubs.StubBase;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
-import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 28.05.2015.
  */
-public class PerlElementTypeFactory
+public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefinition> implements PerlNamespaceDefinitionStub
 {
-	private PerlElementTypeFactory(){}
+	private final String packageName;
 
-	public static IElementType factory(@NotNull String name)
+	public PerlNamespaceDefinitionStubImpl(final StubElement parent, final String packageName)
 	{
-		if( name.equals("SUB_DEFINITION"))
-			return PerlStubElementTypes.SUB_DEFINITION;
-		else if( name.equals("PERL_GLOB"))
-			return PerlStubElementTypes.PERL_GLOB;
-		else if( name.equals("NAMESPACE_DEFINITION"))
-			return PerlStubElementTypes.PERL_NAMESPACE;
+		super(parent, PerlStubElementTypes.PERL_NAMESPACE);
+		this.packageName = packageName;
+	}
 
-		throw new RuntimeException("Unknown element type "+name);
+	public String getPackageName()
+	{
+		return packageName;
 	}
 }

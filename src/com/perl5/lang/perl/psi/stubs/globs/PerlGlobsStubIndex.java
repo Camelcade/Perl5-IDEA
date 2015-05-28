@@ -14,28 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs;
+package com.perl5.lang.perl.psi.stubs.globs;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.tree.IStubFileElementType;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlLexicalScope;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlPerlGlob;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlFileElementType extends IStubFileElementType
+public class PerlGlobsStubIndex extends StringStubIndexExtension<PerlPerlGlob>
 {
-	private static final int VERSION = 1;
-
-	public PerlFileElementType(String debugName, Language language)
-	{
-		super(debugName, language);
-	}
+	public static final int VERSION = 0;
+	public static final StubIndexKey<String,PerlPerlGlob> KEY = StubIndexKey.createIndexKey("perl.glob");
 
 	@Override
-	public int getStubVersion()
+	public int getVersion()
 	{
-		return VERSION;
+		return super.getVersion() + VERSION;
+	}
+
+	@NotNull
+	@Override
+	public StubIndexKey<String, PerlPerlGlob> getKey()
+	{
+		return KEY;
 	}
 }

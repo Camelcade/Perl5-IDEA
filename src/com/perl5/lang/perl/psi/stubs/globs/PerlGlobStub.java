@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs.globs;
+package com.perl5.lang.perl.psi.stubs.globs;
 
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlPerlGlob;

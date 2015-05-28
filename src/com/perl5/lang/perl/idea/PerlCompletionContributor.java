@@ -345,7 +345,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                             @Override
                             public void run()
                             {
-                                List<String> definedSubs = PerlFunctionUtil.getDefinedSubsNames(project);
+                                Collection<String> definedSubs = PerlFunctionUtil.getDefinedSubsNames(project);
                                 definedSubs.addAll(PerlGlobUtil.getDefinedGlobsNames(project));
 
                                 for (String subname : definedSubs )

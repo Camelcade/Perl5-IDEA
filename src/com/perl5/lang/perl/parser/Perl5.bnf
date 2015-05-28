@@ -134,21 +134,24 @@ limitations under the License.
 
     extends(".*expr")=expr
 
-    implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_definition")="com.perl5.lang.perl.psi.PerlLexicalScope";
+    implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.PerlLexicalScope";
 
     implements("variable_declaration_lexical|variable_declaration_local")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
-    mixin("variable_declaration_lexical|variable_declaration_local|conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_definition")="com.perl5.lang.perl.psi.impl.PerlLexicalScopeElementMixin"
+    mixin("variable_declaration_lexical|variable_declaration_local|conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.impl.PerlLexicalScopeElementMixin"
 
     mixin("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
     implements("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.PerlVariable"
 
-    elementTypeFactory("sub_definition|perl_glob")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
+    elementTypeFactory("sub_definition|perl_glob|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
-    stubClass("sub_definition")="com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStub"
+    stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStub"
+    mixin("namespace_definition")="com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImplMixin"
+
+    stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixin"
     implements("sub_definition")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.PerlLexicalScope"
 
-    stubClass("perl_glob")="com.perl5.lang.perl.stubs.globs.PerlGlobStub"
+    stubClass("perl_glob")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
     mixin("perl_glob")="com.perl5.lang.perl.psi.impl.PerlPerlGlobImplMixin"
     implements("perl_glob")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.IPerlPerlGlobMixin"
 
@@ -170,14 +173,15 @@ limitations under the License.
 private perlFile ::= file_items <<eof>>
 
 private file_items ::= PERL_SEMI * file_item * {recoverWhile=recover_block}
-private file_item ::= namespace_definition | namespace_element
+private file_item ::= namespace_block | namespace_element
 
 block ::= "{" file_items "}" //{pin=1} fixme we shoud be able to distinct from anon hash
 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI )
 
 // package keyword
-namespace_definition ::= "package" namespace [perl_version] (block | PERL_SEMI namespace_content) {pin=1}
+namespace_block ::= "package"  namespace_definition (block | PERL_SEMI namespace_content) {pin=1}
+namespace_definition ::= namespace [perl_version]
 private namespace_content ::= namespace_element *  {recoverWhile=recover_namespace}
 
 named_block ::= PERL_BLOCK_NAME block

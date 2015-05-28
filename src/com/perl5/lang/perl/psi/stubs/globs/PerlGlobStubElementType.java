@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.stubs.globs;
+package com.perl5.lang.perl.psi.stubs.globs;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlPerlGlobImpl;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionStubImpl;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

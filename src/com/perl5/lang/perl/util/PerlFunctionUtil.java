@@ -22,8 +22,9 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.stubs.globs.PerlGlobsStubIndex;
-import com.perl5.lang.perl.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubIndex;
+import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
 
 import java.util.*;
 
@@ -65,25 +66,23 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 	 * Searching project files for sub definitions by specific package and function name
 	 * @param project	project to search in
 	 * @param canonicalName	canonical function name package::name
-	 * @return	ArrayList of found definitions
+	 * @return	Collection of found definitions
 	 */
-	public static List<PerlSubDefinition> findSubDefinitions(Project project, String canonicalName)
+	public static Collection<PerlSubDefinition> findSubDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
 
-		Collection<PerlSubDefinition> result = StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
-
-		return new ArrayList<PerlSubDefinition>(result);
+		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
 	}
 
 	/**
 	 * Returns list of defined subs names
 	 * @param project project to search in
-	 * @return list of sub names
+	 * @return collection of sub names
 	 */
-	public static List<String> getDefinedSubsNames(Project project)
+	public static Collection<String> getDefinedSubsNames(Project project)
 	{
-		return new ArrayList<String>(StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project));
+		return StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project);
 	}
 
 }
