@@ -55,7 +55,6 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 	@Override
 	public int getCodeConstructStart(PsiFile file, int openingBraceOffset)
 	{
-/*
 		PsiElement element = file.findElementAt(openingBraceOffset);
 		if (element == null || element instanceof PsiFile) return openingBraceOffset;
 
@@ -87,7 +86,6 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 				}
 			}
 		}
-*/
 
 		return openingBraceOffset;
 	}
