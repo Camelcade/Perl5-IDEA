@@ -40,6 +40,7 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		String currentName = getText();
+
 		if( currentName != null)
 		{
 			boolean currentTail = currentName.endsWith("::");
@@ -53,7 +54,9 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 
 		PerlNamespace newName = PerlElementFactory.createPackageName(getProject(), name);
 		if( newName != null )
+		{
 			replace(newName);
+		}
 		return this;
 	}
 

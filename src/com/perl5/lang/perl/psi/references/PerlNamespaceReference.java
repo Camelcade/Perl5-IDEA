@@ -42,10 +42,8 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		super(element, textRange);
 		assert element instanceof PerlNamespace;
 		canonicalPackageName = ((PerlNamespace) element).getName();
-		if(canonicalPackageName != null && element.getText().endsWith("::"))
-		{
-			setRangeInElement(new TextRange(0, textRange.getEndOffset()-2));
-		}
+		if( element.getText().endsWith("::"))
+			setRangeInElement(new TextRange(0, element.getTextLength()-2));
 	}
 
 	@NotNull
@@ -60,7 +58,7 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		Project project = myElement.getProject();
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
+		List<ResolveResult> result = new ArrayList<>();
 
 		for (PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
 		{

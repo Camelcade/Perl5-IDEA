@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.PsiPolyVariantReferenceBase;
 import com.intellij.psi.PsiReferenceBase;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
@@ -40,5 +41,4 @@ public abstract class PerlReference extends PsiReferenceBase<PsiElement>
 		assert element instanceof PsiNamedElement;
 		return ((PsiNamedElement) element).setName(newElementName);
 	}
-
 }

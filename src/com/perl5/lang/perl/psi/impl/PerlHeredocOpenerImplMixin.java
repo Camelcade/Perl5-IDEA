@@ -52,7 +52,6 @@ public class PerlHeredocOpenerImplMixin extends PerlNamedElementImpl implements 
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-
 		return PsiTreeUtil.findChildOfType(this, PerlStringContentImpl.class);
 	}
 
