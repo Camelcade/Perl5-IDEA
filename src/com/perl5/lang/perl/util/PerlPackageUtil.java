@@ -31,6 +31,7 @@ import com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceImpl;
 import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -100,17 +101,15 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		{
 			PerlNamespaceDefinition namespaceDefinition = namespaceBlock.getNamespaceDefinition();
 
-			if( namespaceDefinition != null )
+			if( namespaceDefinition != null ) // checking that definition is valid and got namespace
 			{
 				String name = namespaceDefinition.getNamespace().getName();
 				assert name != null;
 				return name;
 			}
-			throw new RuntimeException("Namespace block without definition.");
 		}
-		else
-			return "main";
-
+		// default value
+		return "main";
 	}
 
 	/**
@@ -136,4 +135,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project);
 	}
 
+	/**
+	 * Builds package path from packageName Foo::Bar => Foo/Bar.pm
+	 * @param packageName canonical package name
+	 * @return package path
+	 */
+	public static String getPackagePathName(String packageName)
+	{
+		return StringUtils.join(packageName.split(":+"), "/") + ".pm";
+	}
 }

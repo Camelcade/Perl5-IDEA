@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
@@ -62,10 +63,27 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		// defined namespaces
-		for( PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project,packageName))
+		PsiElement parent = myElement.getParent();
+
+		if( parent instanceof PerlNamespaceDefinition )
 		{
-			result.add(new PsiElementResolveResult(ns.getNamespace()));
+			// resolves to a psi file
+			assert myElement instanceof PerlNamespace;
+			String properPath = PerlPackageUtil.getPackagePathName(((PerlNamespace) myElement).getName());
+			PsiFile file = myElement.getContainingFile();
+
+			if( file.getVirtualFile().getPath().endsWith(properPath))
+			{
+				result.add(new PsiElementResolveResult(file));
+			}
+		}
+		else
+		{
+			// defined namespaces
+			for (PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
+			{
+				result.add(new PsiElementResolveResult(ns.getNamespace()));
+			}
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);
