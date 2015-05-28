@@ -22,7 +22,10 @@ import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
+import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class PerlReferenceContributor extends PsiReferenceContributor
 {
@@ -90,13 +93,16 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 					{
 						PsiElement nameSpaceContainer = element.getParent();
 
+						ArrayList<PsiReference> result = new ArrayList<>();
+
+						result.add(new PerlNamespaceReference(element, new TextRange(0, element.getTextLength())));
+
 						if( nameSpaceContainer instanceof PerlUseStatement
 								|| nameSpaceContainer instanceof PerlRequireTerm
 								)
-							return new PsiReference[]{new PerlNamespaceFileReference(element, new TextRange(0, element.getTextLength()))};
-						else
-							return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
+							result.add(new PerlNamespaceFileReference(element, new TextRange(0, element.getTextLength())));
 
+						return result.toArray(new PsiReference[result.size()]);
 					}
 				}
 		);
