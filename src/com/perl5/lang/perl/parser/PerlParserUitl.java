@@ -137,6 +137,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	public static boolean noRegexQuote(PsiBuilder b, int l )
+	{
+		return b.getTokenType() != PERL_REGEX_QUOTE;
+	}
+
 	public static boolean statementSemi(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
@@ -153,5 +158,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		// @todo think what to do here. Currently any statement being finished, even incorrect one
 		return false;
 	}
+
+
 
 }

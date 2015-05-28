@@ -466,7 +466,7 @@ public class PerlLexer extends PerlLexerGenerated{
 			}
 			else
 			{
-				return PERL_OPERATOR;
+				return PERL_OPERATOR_DIV;
 			}
 		}
 	}
@@ -489,7 +489,7 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		pushState();
 		yybegin(LEX_REGEX_OPENER);
-		return PERL_KEYWORD;
+		return PERL_RESERVED;
 	}
 
 	/**
@@ -623,7 +623,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		currentSectionNumber = 0;
 		pushState();
 		yybegin(LEX_TRANS_OPENER);
-		return PERL_KEYWORD;
+		return PERL_RESERVED;
 	}
 
 	public IElementType processTransQuote()
