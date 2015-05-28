@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public interface PerlVariable extends PerlLexicalScopeElement, PsiElement, PerlNamedElement
+public interface PerlVariable extends PerlLexicalScopeElement, PsiElement
 {
 	@Nullable
 	PerlNamespace getNamespace();

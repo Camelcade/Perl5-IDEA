@@ -164,21 +164,21 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                         {
                                             for (PerlPerlScalar variable : decl.getPerlScalarList())
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
                                             }
                                             for (PerlPerlArray variable : decl.getPerlArrayList())
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "[]"));
                                             }
                                             for (PerlPerlHash variable : decl.getPerlHashList())
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
                                             }
                                         }
 
@@ -188,20 +188,20 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                         {
                                             if (variable instanceof PerlPerlScalar)
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
                                             } else if (variable instanceof PerlPerlArray)
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "[]"));
 
                                             } else if (variable instanceof PerlPerlHash)
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
 
                                             }
                                         }
@@ -222,16 +222,16 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                             for (PerlPerlArray variable : decl.getPerlArrayList())
                                             {
                                                 assert variable instanceof PerlPerlArrayImpl;
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
                                             }
                                             for (PerlPerlHash variable : decl.getPerlHashList())
                                             {
                                                 assert variable instanceof PerlPerlHashImpl;
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
                                             }
                                         }
 
@@ -242,20 +242,20 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                         {
                                             if (variable instanceof PerlPerlScalar && useScalars)
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
                                             } else if (variable instanceof PerlPerlArray)
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
 
                                             } else if (variable instanceof PerlPerlHash)
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
 
                                             }
                                         }
@@ -281,9 +281,9 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                         {
                                             for (PerlPerlHash variable : decl.getPerlHashList())
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
                                             }
                                         }
 
@@ -294,14 +294,14 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                         {
                                             if (variable instanceof PerlPerlScalar && useScalars)
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
                                             } else if (variable instanceof PerlPerlHash)
                                             {
-                                                String variableName = variable.getName();
-                                                if (variableName != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                                PerlVariableName variableName = variable.getVariableName();
+                                                if (variableName != null && variableName.getName() != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
 
                                             }
                                         }
@@ -437,9 +437,9 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         {
             for (PerlPerlScalar variable : decl.getPerlScalarList())
             {
-                String variableName = variable.getName();
-                if( variableName != null)
-                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                PerlVariableName variableName = variable.getVariableName();
+                if (variableName != null && variableName.getName() != null)
+                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
             }
         }
     }

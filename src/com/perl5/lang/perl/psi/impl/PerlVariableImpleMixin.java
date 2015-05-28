@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -29,23 +30,10 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlVariableImpleMixin extends PerlNamedElementImpl implements PerlElementTypes, PerlVariable
+public abstract class PerlVariableImpleMixin extends ASTWrapperPsiElement implements PerlElementTypes, PerlVariable
 {
 	public PerlVariableImpleMixin(ASTNode node) {
 		super(node);
-	}
-
-	@Override
-	public PsiElement setName(String name) throws IncorrectOperationException
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return findChildByType(VARIABLE_NAME);
 	}
 
 	@Override
