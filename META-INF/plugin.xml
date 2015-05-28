@@ -27,6 +27,9 @@
   <change-notes><![CDATA[
       <p>0.17 beta</p>
       <ul>
+        <li>Fixed problems with parenthesised expressions parsing in some situations</li>
+        <li>Implemented navigation and refactoring for packages</li>
+        <li>Implemented lexing and parsing of /e regexps</li>
         <li>Bugfixes</li>
       </ul>
 

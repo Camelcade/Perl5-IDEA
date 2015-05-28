@@ -15,15 +15,14 @@ to write tests (mostly for lexer and parser at the moment).
 * Implemented syntax highlighting for Perl and POD
 * Implemented file types for Perl scripts and packages, POD files, XS files.
 * Implemented autocompletion for built-in functions, packages and variables.
-* Implemented autocompletion for lexical variables.
-* Implemented project functions auto-completion 
-* Implemented lexical variables referencing and refactoring
+* Implemented autocompletion, navigation and refactoring for lexical variables.
+* Implemented project functions auto-completion (pretty dumb for now). 
+* Implemented basic function navigation and refactoring (works with obvious calls for now: package::method and package->method)
+* Implemented lexical variables navigation and refactoring.
+* Implemented packages navigation and refactoring.
 * Implemented basic code-folding for blocks, hashes, arrays, PODs, heredocs and sequential comments and imports.
-* Implemented crude defined subs, used packages and defined variables autocompletion.
-* Implemented basic brace matcher
-* Implemented jump to function declaration by click (works with obvious calls for now: package::method and package->method)
-* Implemented methods re-factoring (same as above, use with CARE with VCS and extensive testing)
-* Implemented find usages. 
+* Implemented basic brace matcher.
+* Implemented find usage. 
 * Current, dev build you may find here: http://evstigneev.com/camelcade.jar
 
 #See also
