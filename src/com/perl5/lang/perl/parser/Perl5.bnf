@@ -176,7 +176,7 @@ private perlFile ::= file_items <<eof>>
 private file_items ::= PERL_SEMI * file_item * {recoverWhile=recover_block}
 private file_item ::= namespace_block | namespace_element
 
-block ::= "{" file_items "}" {pin=1}  //fixme we shoud be able to distinct from anon hash
+block ::= "{" file_items "}" //{pin=1}  //fixme we shoud be able to distinct from anon hash
 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI )
 
@@ -244,7 +244,7 @@ private statement_variation ::=
 
 require_statement ::= require_term &(PERL_RESERVED | ';' | '}')
 
-sub_definition ::= "sub" namespace_method_static sub_definition_parameters ? block {pin=2 recoverWhile=recover_statement}
+sub_definition ::= "sub" namespace_method_static sub_definition_parameters ? block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
@@ -298,7 +298,7 @@ require_term ::= 'require' (namespace | perl_version | unary_expr)  // multiline
 private recover_statement ::= !(
     PERL_RESERVED | PERL_KEYWORD | PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_OPERATOR_UNARY | PERL_TAG | PERL_OPERATOR_NOT
     | PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
-    | PERL_RBRACE | PERL_LBRACE | PERL_LANGLE
+    | PERL_RBRACE | PERL_LBRACE | PERL_LANGLE | PERL_REGEX_QUOTE
     | PERL_LBRACK
     | PERL_LPAREN
     | PERL_SEMI

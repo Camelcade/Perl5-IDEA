@@ -432,18 +432,19 @@ public class PerlLexer extends PerlLexerGenerated{
 	public IElementType processDiv()
 	{
 		if(	// seems regex, @todo map types and words
-				lastSignificantTokenType == PERL_OPERATOR
+				lastSignificantTokenType == null
+			||	lastSignificantTokenType == PERL_OPERATOR
 			|| lastSignificantTokenType == PERL_OPERATOR_X
 			|| lastSignificantTokenType == PERL_LPAREN
 			|| lastSignificantTokenType == PERL_LBRACE
 			|| lastSignificantTokenType == PERL_LBRACK
 			|| lastSignificantTokenType == PERL_SEMI
-			|| lastSignificantToken.equals("return")
-			|| lastSignificantToken.equals("split")
-			|| lastSignificantToken.equals("if")
-			|| lastSignificantToken.equals("unless")
-			|| lastSignificantToken.equals("grep")
-			|| lastSignificantToken.equals("map")
+			|| "return".equals(lastSignificantToken)
+			|| "split".equals(lastSignificantToken)
+			|| "if".equals(lastSignificantToken)
+			|| "unless".equals(lastSignificantToken)
+			|| "grep".equals(lastSignificantToken)
+			|| "map".equals(lastSignificantToken)
 		)
 		{
 			allowSharpQuote = true;
