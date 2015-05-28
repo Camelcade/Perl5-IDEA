@@ -77,6 +77,7 @@
   <extensions defaultExtensionNs="com.intellij">
 
       <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
+      <!--moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/-->
 
       <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
 

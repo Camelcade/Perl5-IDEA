@@ -100,8 +100,8 @@ limitations under the License.
     PERL_COLON=":"
     PERL_LBRACK='['
     PERL_RBRACK=']'
-    PERL_LPAREN='('
-    PERL_RPAREN=')'
+    PERL_LPAREN="("
+    PERL_RPAREN=")"
     PERL_LBRACE='{'
     PERL_RBRACE='}'
     PERL_LANGLE='<'
@@ -175,7 +175,7 @@ private perlFile ::= file_items <<eof>>
 private file_items ::= PERL_SEMI * file_item * {recoverWhile=recover_block}
 private file_item ::= namespace_block | namespace_element
 
-block ::= "{" file_items "}" //{pin=1} fixme we shoud be able to distinct from anon hash
+block ::= "{" file_items "}" {pin=1}  //fixme we shoud be able to distinct from anon hash
 
 private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI )
 
@@ -207,7 +207,7 @@ private if_compound_else  ::= 'else' unconditional_block {pin=1}
 unconditional_block ::= block
 
 conditional_block ::= condition block { recoverWhile=recover_statement}
-condition ::= '(' expr ')' {pin=1}
+condition ::= parenthesised_expr // annotator should check that condition is not empty
 
 given_compound ::= 'given' conditional_block  {pin=1}
 
@@ -226,11 +226,11 @@ private for_arguments ::=
     for_iterator block
     | for_list block_compound
 
-for_iterator ::= '(' [expr]  PERL_SEMI [expr] PERL_SEMI [expr] ')'
+for_iterator ::= PERL_LPAREN [expr]  PERL_SEMI [expr] PERL_SEMI [expr] PERL_RPAREN
 
 // @todo only single variable or variable definition may be here
 for_list ::=
-    [ variable_declaration | variable ] '(' expr ')'
+    [ variable_declaration | variable ] parenthesised_expr
 
 statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2 recoverWhile=recover_statement}
 
@@ -253,8 +253,8 @@ private sub_definition_parameters ::=
 sub_declaration ::= "sub" namespace_method_static sub_declaration_parameters
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
-private sub_prototype ::= "(" [<<parseSubPrototype>>] ")"
-private sub_signature ::= "(" [<<parseSubSignature>>] ")"
+private sub_prototype ::= PERL_LPAREN [<<parseSubPrototype>>] PERL_RPAREN
+private sub_signature ::= PERL_LPAREN [<<parseSubSignature>>] PERL_RPAREN
 private sub_attributes ::= ":" <<parseSubAttributes>>
 
 
@@ -289,13 +289,13 @@ private use_module_parameters ::= namespace [perl_version] [expr];
 private use_version_parameters ::= perl_version;
 
 
-undef_term ::= "undef" (variable | "(" variable ")") ?
+undef_term ::= "undef" (variable | PERL_LPAREN variable PERL_RPAREN) ?
 
 require_term ::= 'require' (namespace | perl_version | unary_expr)  // multiline string is possible too
 
 // it looks meaningless now, eats nothing
 private recover_statement ::= !(
-    PERL_RESERVED | PERL_KEYWORD | PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_OPERATOR_UNARY | PERL_TAG
+    PERL_RESERVED | PERL_KEYWORD | PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_OPERATOR_UNARY | PERL_TAG | PERL_OPERATOR_NOT
     | PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
     | PERL_RBRACE | PERL_LBRACE | PERL_LANGLE
     | PERL_LBRACK
@@ -341,8 +341,8 @@ expr ::=
 
 term_expr ::=
     variable_declaration
-    | parenthesised_expr "[" expr "]"
-    | parenthesised_expr
+    | parenthesised_expr ["[" expr "]"]
+//    | parenthesised_expr  // this causes unknown errors in parenthesised grep
     | scalar_constant
     | do_term
     | sub_term
@@ -361,7 +361,7 @@ term_expr ::=
     | next_term
     | return_term
     | redo_term
-    | PERL_OPERATOR_UNARY "(" [expr] ")" !"["   // named operators as functions
+    | PERL_OPERATOR_UNARY parenthesised_expr !"["   // named operators as functions
     | function_call
     | rightward_call
     | reference_value
@@ -370,7 +370,7 @@ term_expr ::=
     | namespace
 
 
-parenthesised_expr ::= '(' [expr] ')'
+parenthesised_expr ::= PERL_LPAREN [expr] PERL_RPAREN {pin=1}
 
 return_term ::= "return" [list_expr]
 
@@ -394,8 +394,8 @@ shift_expr ::= expr ('<<'|'>>') expr
 
 private op_10_expr ::= named_unary_expr | filetest_expr
 named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
-private named_undry_expr_defined ::= 'defined' !"(" [unary_expr]
-private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !"(" unary_expr
+private named_undry_expr_defined ::= 'defined' !PERL_LPAREN [unary_expr]
+private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !PERL_LPAREN unary_expr
 
 private unary_expr ::= <<parseExpressionLevel 13>>
 
@@ -415,7 +415,7 @@ assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<
 private comma_expr ::= comma_sequence_expr | comma_last_expr
 comma_last_expr ::= expr comma
 comma_sequence_expr ::= expr (comma_any expr) +
-private comma_any ::= comma + !(")"|"]"|"}")
+private comma_any ::= comma + !(PERL_RPAREN|"]"|"}")
 
 lp_not_expr ::= PERL_OPERATOR_NOT expr { rightAssociative=true }
 lp_and_expr ::= expr 'and' expr
@@ -424,10 +424,10 @@ lp_or_xor_expr ::= expr ('or'|'xor') expr
 private scalar_expr ::= <<parseExpressionLevel 3>>
 private list_expr ::= <<parseExpressionLevel 2>>
 
-print_term ::= ("print"|"printf"|"say") ( "(" [print_arguments] ")" | [print_arguments] ) // {pin=1}
+print_term ::= ("print"|"printf"|"say") ( PERL_LPAREN [print_arguments] PERL_RPAREN | [print_arguments] ) // {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-open_term ::= "open" ( "(" open_arguments ")" | open_arguments )
+open_term ::= "open" ( PERL_LPAREN open_arguments PERL_RPAREN | open_arguments )
 private open_arguments ::=
     open_handle comma open_mode comma open_ref  // open FILEHANDLE,MODE,REFERENCE
     | open_handle comma open_mode comma expr    // open FILEHANDLE,MODE,EXPR,LIST ?
@@ -437,10 +437,10 @@ open_handle ::= variable_declaration | perl_handle
 open_mode ::= scalar_expr
 open_ref ::= ref_expr
 
-close_term ::= "close" ( "(" close_arguments ")" | close_arguments )
+close_term ::= "close" ( PERL_LPAREN close_arguments PERL_RPAREN | close_arguments )
 private close_arguments ::= perl_handle
 
-sort_term ::= 'sort' ( '(' sort_op_arguments ')'| sort_op_arguments )
+sort_term ::= 'sort' ( PERL_LPAREN sort_op_arguments PERL_RPAREN| sort_op_arguments )
 private sort_op_arguments ::=
     PERL_FUNCTION expr
     | block expr
@@ -449,17 +449,17 @@ private sort_op_arguments ::=
 
 sub_term ::= 'sub' sub_definition_parameters block
 
-grep_term ::= 'grep' grep_map_arguments
-map_term ::= 'map' grep_map_arguments
+grep_term ::= 'grep' grep_map_arguments {pin=1}
+map_term ::= 'map' grep_map_arguments {pin=1}
 private grep_map_arguments ::=
-    "(" grep_map_arguments_variations ")"
+    PERL_LPAREN grep_map_arguments_variations PERL_RPAREN
     | grep_map_arguments_variations
 
 private grep_map_arguments_variations ::=
     block expr
     | scalar_expr comma expr
 
-function_call ::= callable "(" [call_arguments] ")" !"["  // avoiding ()[]
+function_call ::= callable PERL_LPAREN [call_arguments] PERL_RPAREN !"["  // avoiding ()[]
 rightward_call ::= callable [call_arguments]
 
 call_arguments ::=
@@ -497,7 +497,7 @@ tr_modifiers ::= PERL_REGEX_MODIFIER +
 
 do_term ::= "do" eval_argument {pin=1}
 eval_term ::= "eval" eval_argument {pin=1}
-private eval_argument ::= '('expr')' | block | expr
+private eval_argument ::= parenthesised_expr | block | expr
 
 private variable_declaration ::=
     variable_declaration_global
@@ -510,13 +510,13 @@ variable_declaration_lexical ::= ('my' | 'state') [namespace] variable_declarati
 variable_declaration_global ::= 'our' [namespace] variable_declaration_variation {pin=1}
 
 private local_variable_declaration_variation ::=
-    '(' local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * ')'
+    PERL_LPAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * PERL_RPAREN
     | local_variable_declaration_argument
 
 private local_variable_declaration_argument ::= lexical_variable_definition_argument | scalar_expr
 
 private variable_declaration_variation ::=
-    '(' lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* ')'
+    PERL_LPAREN lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* PERL_RPAREN
     | lexical_variable_definition_argument
 
 private lexical_variable_definition_argument ::= lexical_variable | "undef"
@@ -528,7 +528,7 @@ private reference_value ::=
     | anon_hash
     | code_ref
 
-anon_array ::= '[' [expr] ']' {pin=1}
+anon_array ::= '[' [expr] ']' //{pin=1}
 anon_hash ::= '{' [expr] '}' // fixme pin here after solving problem with code block and prototypes
 code_ref ::= "sub" block
 
@@ -566,7 +566,7 @@ private scalar ::=
 scalar_array_index ::= PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * scalar_variable
 scalar_array_element ::= scalar_variable "[" expr "]"
 scalar_hash_element ::= scalar_variable ( "{" expr "}" | braced_string )
-scalar_anon_array_element ::= "(" expr ")" "["expr"]"
+scalar_anon_array_element ::= PERL_LPAREN expr PERL_RPAREN "["expr"]"
 
 private glob ::=
     "*" "{" expr "}"     // @todo we need to colorize this as glob
@@ -580,13 +580,14 @@ private nested_element ::=
 // extended nested element for using in ()
 private nested_element_expr ::=
     nested_element
-    | "(" [expr] ")"    // function call like $var->()
+    | parenthesised_expr    // function call like $var->()
     | scalar_call
     | function_call
     | rightward_call
     | scalar
 
-scalar_call ::= scalar_variable ["(" [expr] ")"]
+scalar_call ::= scalar_variable [parenthesised_expr]
+
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 

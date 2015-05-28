@@ -34,6 +34,7 @@ import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubInde
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -142,6 +143,17 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static String getPackagePathName(String packageName)
 	{
-		return StringUtils.join(packageName.split(":+"), "/") + ".pm";
+		return StringUtils.join(packageName.split(":+"), File.separator) + ".pm";
+	}
+
+	/**
+	 * Returns package filename Foo::Bar => Bar.pm
+	 * @param packageName canonical package name
+	 * @return package filename
+	 */
+	public static String getPackageFileName(String packageName)
+	{
+		String[] nameTokens = packageName.split(":+");
+		return nameTokens[nameTokens.length-1] + ".pm";
 	}
 }

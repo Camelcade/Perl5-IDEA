@@ -20,14 +20,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.util.PerlFunctionUtil;
-import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -65,26 +60,26 @@ public class PerlNamespaceReference extends PerlReferencePoly
 
 		PsiElement parent = myElement.getParent();
 
-		if( parent instanceof PerlNamespaceDefinition )
+//		if( parent instanceof PerlNamespaceDefinition )
+//		{
+//			// resolves to a psi file
+//			assert myElement instanceof PerlNamespace;
+//			String properPath = PerlPackageUtil.getPackagePathName(((PerlNamespace) myElement).getName());
+//			PsiFile file = myElement.getContainingFile();
+//
+//			if( file.getVirtualFile().getPath().endsWith(properPath))
+//			{
+//				result.add(new PsiElementResolveResult(file));
+//			}
+//		}
+//		else
+//		{
+		// defined namespaces
+		for (PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
 		{
-			// resolves to a psi file
-			assert myElement instanceof PerlNamespace;
-			String properPath = PerlPackageUtil.getPackagePathName(((PerlNamespace) myElement).getName());
-			PsiFile file = myElement.getContainingFile();
-
-			if( file.getVirtualFile().getPath().endsWith(properPath))
-			{
-				result.add(new PsiElementResolveResult(file));
-			}
+			result.add(new PsiElementResolveResult(ns.getNamespace()));
 		}
-		else
-		{
-			// defined namespaces
-			for (PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
-			{
-				result.add(new PsiElementResolveResult(ns.getNamespace()));
-			}
-		}
+//		}
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}

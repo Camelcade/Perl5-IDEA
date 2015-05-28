@@ -143,179 +143,177 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                         final PsiFile file = parameters.getOriginalFile();
                         final PsiElement variableName = parameters.getPosition().getParent();
                         assert variableName != null;
-                        assert variableName instanceof PerlVariableName;
 
-                        final PsiElement perlVariable = variableName.getParent();
+                        if( variableName instanceof PerlVariableName )
+                        {
 
-                        if (perlVariable instanceof PerlPerlScalar)
-                            ApplicationManager.getApplication().runReadAction(new Runnable()
-                            {
-                                @Override
-                                public void run()
+                            final PsiElement perlVariable = variableName.getParent();
+
+                            if (perlVariable instanceof PerlPerlScalar)
+                                ApplicationManager.getApplication().runReadAction(new Runnable()
                                 {
-                                    String currentText = variableName.getText();
-
-									// todo this should work with stubs
-                                    Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                    for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
+                                    @Override
+                                    public void run()
                                     {
-                                        for (PerlPerlScalar variable : decl.getPerlScalarList())
+                                        String currentText = variableName.getText();
+
+                                        // todo this should work with stubs
+                                        Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
+
+                                        for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
                                         {
-                                            String variableName = variable.getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName));
+                                            for (PerlPerlScalar variable : decl.getPerlScalarList())
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                            }
+                                            for (PerlPerlArray variable : decl.getPerlArrayList())
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
+                                            }
+                                            for (PerlPerlHash variable : decl.getPerlHashList())
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                            }
                                         }
-                                        for (PerlPerlArray variable : decl.getPerlArrayList())
+
+                                        Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
+
+                                        for (PerlVariable variable : declaredVariables)
                                         {
-                                            String variableName = variable.getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
-                                        }
-                                        for (PerlPerlHash variable : decl.getPerlHashList())
-                                        {
-                                            String variableName = variable.getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                            if (variable instanceof PerlPerlScalar)
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                            } else if (variable instanceof PerlPerlArray)
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
+
+                                            } else if (variable instanceof PerlPerlHash)
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+
+                                            }
                                         }
                                     }
-
-									Collection<PerlVariable> declaredVariables =  PerlUtil.findDeclaredLexicalVariables(perlVariable);
-
-									for (PerlVariable variable : declaredVariables)
-									{
-										if( variable instanceof PerlPerlScalar)
-										{
-											String variableName = variable.getName();
-											if (variableName != null)
-												resultSet.addElement(LookupElementBuilder.create(variableName));
-										}
-										else if( variable instanceof PerlPerlArray)
-										{
-											String variableName = variable.getName();
-											if (variableName != null)
-												resultSet.addElement(LookupElementBuilder.create(variableName + "[]"));
-
-										}
-										else if( variable instanceof PerlPerlHash)
-										{
-											String variableName = variable.getName();
-											if (variableName != null)
-												resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
-
-										}
-									}
-                                }
-                            });
-                        else if (perlVariable instanceof PerlPerlArray)
-                            ApplicationManager.getApplication().runReadAction(new Runnable()
-                            {
-                                @Override
-                                public void run()
+                                });
+                            else if (perlVariable instanceof PerlPerlArray)
+                                ApplicationManager.getApplication().runReadAction(new Runnable()
                                 {
-                                    String currentText = variableName.getText();
-
-                                    Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                    for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
+                                    @Override
+                                    public void run()
                                     {
-                                        for (PerlPerlArray variable : decl.getPerlArrayList())
+                                        String currentText = variableName.getText();
+
+                                        Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
+
+                                        for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
                                         {
-                                            assert variable instanceof PerlPerlArrayImpl;
-                                            String variableName = variable.getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName));
+                                            for (PerlPerlArray variable : decl.getPerlArrayList())
+                                            {
+                                                assert variable instanceof PerlPerlArrayImpl;
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                            }
+                                            for (PerlPerlHash variable : decl.getPerlHashList())
+                                            {
+                                                assert variable instanceof PerlPerlHashImpl;
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                            }
                                         }
-                                        for (PerlPerlHash variable : decl.getPerlHashList())
+
+                                        Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
+                                        boolean useScalars = ((PerlPerlArray) perlVariable).getScalarSigils() != null;
+
+                                        for (PerlVariable variable : declaredVariables)
                                         {
-                                            assert variable instanceof PerlPerlHashImpl;
-                                            String variableName = variable.getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                            if (variable instanceof PerlPerlScalar && useScalars)
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                            } else if (variable instanceof PerlPerlArray)
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+
+                                            } else if (variable instanceof PerlPerlHash)
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+
+                                            }
+                                        }
+
+                                        // todo remove after re-factoring globals
+                                        if (useScalars)
+                                        {
+                                            populateScalars(globalDeclarations, resultSet);
                                         }
                                     }
-
-									Collection<PerlVariable> declaredVariables =  PerlUtil.findDeclaredLexicalVariables(perlVariable);
-                                    boolean useScalars = ((PerlPerlArray) perlVariable).getScalarSigils() != null;
-
-									for (PerlVariable variable : declaredVariables)
-									{
-										if( variable instanceof PerlPerlScalar && useScalars)
-										{
-											String variableName = variable.getName();
-											if (variableName != null)
-												resultSet.addElement(LookupElementBuilder.create(variableName));
-										}
-										else if( variable instanceof PerlPerlArray)
-										{
-											String variableName = variable.getName();
-											if (variableName != null)
-												resultSet.addElement(LookupElementBuilder.create(variableName));
-
-										}
-										else if( variable instanceof PerlPerlHash)
-										{
-											String variableName = variable.getName();
-											if (variableName != null)
-												resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
-
-										}
-									}
-
-									// todo remove after re-factoring globals
-									if( useScalars )
-									{
-										populateScalars(globalDeclarations, resultSet);
-									}
-                                }
-                            });
-                        else if (perlVariable instanceof PerlPerlHash)
-                            ApplicationManager.getApplication().runReadAction(new Runnable()
-                            {
-                                @Override
-                                public void run()
+                                });
+                            else if (perlVariable instanceof PerlPerlHash)
+                                ApplicationManager.getApplication().runReadAction(new Runnable()
                                 {
-                                    String currentText = variableName.getText();
-
-                                    Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                    for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
+                                    @Override
+                                    public void run()
                                     {
-                                        for (PerlPerlHash variable : decl.getPerlHashList())
+                                        String currentText = variableName.getText();
+
+                                        Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
+
+                                        for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
                                         {
-                                            String variableName = variable.getName();
-                                            if (variableName != null)
-                                                resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                            for (PerlPerlHash variable : decl.getPerlHashList())
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName + "{}"));
+                                            }
+                                        }
+
+                                        Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
+                                        boolean useScalars = ((PerlPerlHash) perlVariable).getScalarSigils() != null;
+
+                                        for (PerlVariable variable : declaredVariables)
+                                        {
+                                            if (variable instanceof PerlPerlScalar && useScalars)
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+                                            } else if (variable instanceof PerlPerlHash)
+                                            {
+                                                String variableName = variable.getName();
+                                                if (variableName != null)
+                                                    resultSet.addElement(LookupElementBuilder.create(variableName));
+
+                                            }
+                                        }
+
+                                        // todo remove after re-factoring globals
+                                        if (useScalars)
+                                        {
+                                            populateScalars(globalDeclarations, resultSet);
                                         }
                                     }
-
-									Collection<PerlVariable> declaredVariables =  PerlUtil.findDeclaredLexicalVariables(perlVariable);
-                                    boolean useScalars = ((PerlPerlHash) perlVariable).getScalarSigils() != null;
-
-									for (PerlVariable variable : declaredVariables)
-									{
-										if( variable instanceof PerlPerlScalar && useScalars)
-										{
-											String variableName = variable.getName();
-											if (variableName != null)
-												resultSet.addElement(LookupElementBuilder.create(variableName));
-										}
-										else if( variable instanceof PerlPerlHash)
-										{
-											String variableName = variable.getName();
-											if (variableName != null)
-												resultSet.addElement(LookupElementBuilder.create(variableName));
-
-										}
-									}
-
-									// todo remove after re-factoring globals
-									if( useScalars )
-									{
-										populateScalars(globalDeclarations, resultSet);
-									}
-                                }
-                            });
+                                });
+                        }
                     }
                 }
         );
