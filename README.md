@@ -13,11 +13,10 @@ to write tests (mostly for lexer and parser at the moment).
 * Implemented JFlex lexer and Grammar-kit for Perl and POD. They still have some bugs, see issue tracker.
 * Implemented support for php-style perl <? ... ?>
 * Implemented syntax highlighting for Perl and POD
-* Implemented file types for Perl scripts and packages, POD files, XS files.
 * Implemented autocompletion for built-in functions, packages and variables.
 * Implemented autocompletion, navigation and refactoring for lexical variables.
 * Implemented project functions auto-completion (pretty dumb for now). 
-* Implemented basic function navigation and refactoring (works with obvious calls for now: package::method and package->method)
+* Implemented basic project functions navigation and refactoring (works with obvious calls for now: package::method and package->method)
 * Implemented lexical variables navigation and refactoring.
 * Implemented packages navigation and refactoring.
 * Implemented basic code-folding for blocks, hashes, arrays, PODs, heredocs and sequential comments and imports.
