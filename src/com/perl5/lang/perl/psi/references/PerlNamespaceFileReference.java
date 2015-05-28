@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.ResolveResult;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.*;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -33,11 +33,11 @@ import java.util.List;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceReference extends PerlReferencePoly
+public class PerlNamespaceFileReference extends PerlReferencePoly
 {
 	private final String packageName;
 
-	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlNamespaceFileReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 		assert element instanceof PerlNamespace;
@@ -55,12 +55,22 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		for (PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
+		// resolves to a psi file
+		String properPath = PerlPackageUtil.getPackagePathName(packageName);
+		Project project = myElement.getProject();
+
+		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(myElement.getProject()).getContentSourceRoots())
 		{
-			result.add(new PsiElementResolveResult(ns.getNamespace()));
+			VirtualFile packageFile = sourceRoot.findFileByRelativePath(properPath);
+			if( packageFile != null)
+			{
+				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
+				if( packagePsiFile != null)
+					result.add(new PsiElementResolveResult(packagePsiFile));
+			}
+
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);

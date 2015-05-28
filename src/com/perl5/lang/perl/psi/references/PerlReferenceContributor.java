@@ -20,9 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlUserFunction;
-import com.perl5.lang.perl.psi.PerlVariableName;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -90,7 +88,14 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
+						PsiElement nameSpaceContainer = element.getParent();
+
+						if( nameSpaceContainer instanceof PerlUseStatement
+								|| nameSpaceContainer instanceof PerlRequireTerm
+								)
+							return new PsiReference[]{new PerlNamespaceFileReference(element, new TextRange(0, element.getTextLength()))};
+						else
+							return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
 
 					}
 				}
