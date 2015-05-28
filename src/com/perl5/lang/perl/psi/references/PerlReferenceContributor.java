@@ -20,6 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlUserFunction;
 import com.perl5.lang.perl.psi.PerlVariableName;
 import com.perl5.lang.perl.psi.impl.*;
@@ -57,7 +58,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 							return new PsiReference[]{new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
 						else
 						{
-							PsiReference reference = new PerlUserFunctionReference((PerlUserFunction)element, new TextRange(0, element.getTextLength()));
+							PsiReference reference = new PerlUserFunctionReference(element, new TextRange(0, element.getTextLength()));
 							if( ((PerlUserFunctionReference)reference).multiResolve(false).length == 0 )
 								reference = new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()));
 
@@ -77,6 +78,19 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 						assert element instanceof PerlVariableName;
 
 						return new PsiReference[]{new PerlLexicalVariableReference(element, new TextRange(0, element.getTextLength()))};
+
+					}
+				}
+		);
+		registrar.registerReferenceProvider(
+				PlatformPatterns.psiElement(PerlNamespace.class),
+				new PsiReferenceProvider()
+				{
+					@NotNull
+					@Override
+					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+					{
+						return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
 
 					}
 				}

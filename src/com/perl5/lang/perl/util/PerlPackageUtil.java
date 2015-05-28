@@ -23,6 +23,8 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlNamespaceBlock;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImpl;
@@ -92,12 +94,19 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	@NotNull
 	public static String getElementPackageName(PsiElement element)
 	{
-		PerlNamespaceDefinitionImpl namespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionImpl.class);
-		if (namespace != null)
+		PerlNamespaceBlock namespaceBlock = PsiTreeUtil.getParentOfType(element, PerlNamespaceBlock.class);
+
+		if (namespaceBlock != null)
 		{
-			String name = namespace.getNamespace().getName();
-			assert name != null;
-			return name;
+			PerlNamespaceDefinition namespaceDefinition = namespaceBlock.getNamespaceDefinition();
+
+			if( namespaceDefinition != null )
+			{
+				String name = namespaceDefinition.getNamespace().getName();
+				assert name != null;
+				return name;
+			}
+			throw new RuntimeException("Namespace block without definition.");
 		}
 		else
 			return "main";
