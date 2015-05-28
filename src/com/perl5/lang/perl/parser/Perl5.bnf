@@ -482,8 +482,8 @@ private match_regex_body ::= PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE [per
 replacement_regex ::= 's' PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE regex_replacement [perl_regex_modifiers] {pin=1}
 
 private regex_replacement ::=
-    PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE
-    | [perl_regex] PERL_REGEX_QUOTE
+    PERL_REGEX_QUOTE [perl_regex | expr] PERL_REGEX_QUOTE
+    | [perl_regex | expr] PERL_REGEX_QUOTE
 
 perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
 perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.util.*;
@@ -52,7 +53,8 @@ public class RegexBlock implements PerlElementTypes
 
 		boolean isEscaped = false;
 		boolean isCharGroup = false;
-		boolean isBraced = false;
+
+		int braceLevel = 0;
 		int parenLevel = 0;
 
 		RegexBlock newBlock = null;
@@ -65,7 +67,7 @@ public class RegexBlock implements PerlElementTypes
 
 			char currentChar = buffer.charAt(currentOffset);
 
-			if( !isBraced && !isCharGroup && !isEscaped && parenLevel == 0 && closingChar == currentChar )
+			if( braceLevel == 0 && !isCharGroup && !isEscaped && parenLevel == 0 && closingChar == currentChar )
 			{
 				newBlock = new RegexBlock(buffer, startOffset, currentOffset + 1, openingChar, closingChar);
 				break;
@@ -77,14 +79,14 @@ public class RegexBlock implements PerlElementTypes
 				isCharGroup = false;
 
 			// @todo this is buggy, sometimes bare is allowed. See example from `redo` doc
-			if( !isEscaped && !isCharGroup && !isBraced && currentChar == '{')
-				isBraced = true;
-			else if( !isEscaped && !isCharGroup && isBraced && currentChar == '}')
-				isBraced = false;
+			if( !isEscaped && !isCharGroup && currentChar == '{')
+				braceLevel++;
+			else if( !isEscaped && !isCharGroup && braceLevel > 0 && currentChar == '}')
+				braceLevel--;
 
-			if( !isEscaped && !isCharGroup && !isBraced && currentChar == '(')
+			if( !isEscaped && !isCharGroup && currentChar == '(')
 				parenLevel++;
-			else if( !isEscaped && !isCharGroup && !isBraced && parenLevel > 0 && currentChar == ')')
+			else if( !isEscaped && !isCharGroup && parenLevel > 0 && currentChar == ')')
 				parenLevel--;
 
 
@@ -153,6 +155,23 @@ public class RegexBlock implements PerlElementTypes
 	public boolean hasSameQuotes()
 	{
 		return charOpener == charCloser;
+	}
+
+
+	Collection<CustomToken> parseEval()
+	{
+		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
+		PerlLexerAdapter subLexer = new PerlLexerAdapter();
+		subLexer.start(buffer,startOffset,endOffset-1);
+		while( subLexer.getTokenType() != null )
+		{
+			tokens.add(new CustomToken(subLexer.getTokenStart(),subLexer.getTokenEnd(),subLexer.getTokenType()));
+			subLexer.advance();
+		}
+
+		tokens.add(new CustomToken(endOffset - 1, endOffset, PERL_REGEX_QUOTE));
+
+		return tokens;
 	}
 
 

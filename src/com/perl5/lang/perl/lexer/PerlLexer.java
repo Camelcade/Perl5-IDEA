@@ -564,6 +564,7 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		// check modifiers for x
 		boolean isExtended = false;
+		boolean isEvaluated = false;
 		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand);
 		int modifiersEnd = currentOffset;
 		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
@@ -576,6 +577,8 @@ public class PerlLexer extends PerlLexerGenerated{
 				break;
 			else if( buffer.charAt(modifiersEnd) == 'x')	// mark as extended
 				isExtended = true;
+			else if( buffer.charAt(modifiersEnd) == 'e')	// mark as evaluated
+				isEvaluated = true;
 
 			modifierTokens.add(new CustomToken(modifiersEnd, modifiersEnd + 1, PERL_REGEX_MODIFIER));
 
@@ -594,7 +597,10 @@ public class PerlLexer extends PerlLexerGenerated{
 				tokensList.add(secondBlockOpener);
 
 			// parse block 2
-			tokensList.addAll(secondBLock.tokenize(isExtended));
+			if( isEvaluated )
+				tokensList.addAll(secondBLock.parseEval());
+			else
+				tokensList.addAll(secondBLock.tokenize(isExtended));
 		}
 
 		// parse modifiers
