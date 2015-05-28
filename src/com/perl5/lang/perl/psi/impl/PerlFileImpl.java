@@ -19,7 +19,11 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReference;
+import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReferenceHelper;
 import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.psi.PerlLexicalScope;
@@ -45,5 +49,17 @@ public class PerlFileImpl extends PsiFileBase implements PerlLexicalScope
 	public PerlLexicalScope getLexicalScope()
 	{
 		return null;
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		return super.setName(name);
+	}
+
+	@Override
+	public void checkSetName(String name) throws IncorrectOperationException
+	{
+		super.checkSetName(name);
 	}
 }

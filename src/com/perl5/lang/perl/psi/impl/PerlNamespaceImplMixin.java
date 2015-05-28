@@ -19,13 +19,16 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlVariableName;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.
+ *
  */
 public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements PerlNamespace
 {
@@ -36,8 +39,22 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		// todo implement
-		return super.setName(name);
+		String currentName = getText();
+		if( currentName != null)
+		{
+			boolean currentTail = currentName.endsWith("::");
+			boolean newTail = name.endsWith("::");
+
+			if (newTail && !currentTail)
+				name = name.replaceAll(":+$", "");
+			else if (!newTail && currentTail)
+				name = name + "::";
+		}
+
+		PerlNamespace newName = PerlElementFactory.createPackageName(getProject(), name);
+		if( newName != null )
+			replace(newName);
+		return this;
 	}
 
 	@Nullable
@@ -46,6 +63,7 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 	{
 		return getFirstChild();
 	}
+
 
 	@NotNull
 	@Override

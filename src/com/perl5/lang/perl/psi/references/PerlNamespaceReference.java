@@ -35,13 +35,17 @@ import java.util.List;
  */
 public class PerlNamespaceReference extends PerlReferencePoly
 {
-	private final String packageName;
+	private final String canonicalPackageName;
 
 	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 		assert element instanceof PerlNamespace;
-		packageName = ((PerlNamespace) element).getName();
+		canonicalPackageName = ((PerlNamespace) element).getName();
+		if(canonicalPackageName != null && element.getText().endsWith("::"))
+		{
+			setRangeInElement(new TextRange(0, textRange.getEndOffset()-2));
+		}
 	}
 
 	@NotNull
@@ -58,7 +62,7 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		for (PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
+		for (PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
 		{
 			result.add(new PsiElementResolveResult(ns.getNamespace()));
 		}
@@ -73,4 +77,5 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		ResolveResult[] resolveResults = multiResolve(false);
 		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
 	}
+
 }

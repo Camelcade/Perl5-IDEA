@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.*;
+import com.intellij.util.xml.Resolve;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -29,5 +29,20 @@ public abstract class PerlReferencePoly extends PerlReference implements PsiPoly
 	public PerlReferencePoly(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element,textRange);
+	}
+
+	@Override
+	public boolean isReferenceTo(PsiElement element)
+	{
+		ResolveResult[] results = multiResolve(false);
+		PsiManager psiManager = getElement().getManager();
+
+		for(ResolveResult result : results)
+		{
+			if( psiManager.areElementsEquivalent(result.getElement(), element) )
+				return true;
+		}
+
+		return false;
 	}
 }

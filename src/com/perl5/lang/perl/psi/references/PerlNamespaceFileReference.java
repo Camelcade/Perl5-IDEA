@@ -21,6 +21,7 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReference;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -33,7 +34,8 @@ import java.util.List;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceFileReference extends PerlReferencePoly
+public class PerlNamespaceFileReference extends PerlReferencePoly implements PsiFileReference
+
 {
 	private final String packageName;
 

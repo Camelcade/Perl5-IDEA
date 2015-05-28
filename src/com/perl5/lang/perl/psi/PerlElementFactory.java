@@ -25,6 +25,12 @@ import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
+	public static PerlNamespace createPackageName(Project project, String name)
+	{
+		PerlFileImpl file = createFile(project, "package " + name + ";");
+		return PsiTreeUtil.findChildOfType(file, PerlNamespace.class);
+	}
+
 	public static PerlUserFunctionImpl createUserFunction(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "sub " + name + ";");
