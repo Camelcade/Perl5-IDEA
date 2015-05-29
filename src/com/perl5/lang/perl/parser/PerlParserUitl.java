@@ -120,7 +120,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
 //		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
 
-		while( b.getTokenType() != PERL_LBRACE )
+		while( !b.eof() && b.getTokenType() != PERL_LBRACE )
 		{
 			PerlBuilder.Marker m = b.mark();
 			b.advanceLexer();
