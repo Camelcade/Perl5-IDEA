@@ -20,7 +20,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.*;
+import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -38,27 +40,38 @@ public class PerlFileListener implements VirtualFileListener
 	}
 
 	@Override
-	public void propertyChanged(VirtualFilePropertyEvent event)
+	public void propertyChanged(@NotNull VirtualFilePropertyEvent event)
 	{
+		VirtualFile virtualFile = event.getFile();
+		if( myProjectFileIndex.isInSource(virtualFile) )
+		{
+			if( "name".equals(event.getPropertyName()) && virtualFile.isDirectory())
+			{
+				String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString()+"$", event.getOldValue().toString());
+				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
+				PerlPackageUtil.handlePackagePathChange(queue,virtualFile,oldPath);
+				queue.run();
+			}
+		}
+	}
+
+	@Override
+	public void contentsChanged(@NotNull VirtualFileEvent event)
+	{
+//		System.out.println("contentsChanged " + event);
 
 	}
 
 	@Override
-	public void contentsChanged(VirtualFileEvent event)
+	public void fileCreated(@NotNull VirtualFileEvent event)
 	{
-
+//		System.out.println("fileCreated " + event);
 	}
 
 	@Override
-	public void fileCreated(VirtualFileEvent event)
+	public void fileDeleted(@NotNull VirtualFileEvent event)
 	{
-
-	}
-
-	@Override
-	public void fileDeleted(VirtualFileEvent event)
-	{
-
+//		System.out.println("fileDeleted " + event);
 	}
 
 	@Override
@@ -70,37 +83,40 @@ public class PerlFileListener implements VirtualFileListener
 
 			if( "pm".equals(movedFile.getExtension()) )
 			{
-				PerlPackageUtil.adjustMovedFileNamespaces(myProject, event);
+				VirtualFile file = event.getFile();
+				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
+				PerlPackageUtil.adjustMovedFileNamespaces(queue, file, event.getOldParent().getPath() + '/' + file.getName());
+				queue.run();
 			}
 		}
 	}
 
 	@Override
-	public void fileCopied(VirtualFileCopyEvent event)
+	public void fileCopied(@NotNull VirtualFileCopyEvent event)
+	{
+//		System.out.println("fileCopied " + event);
+	}
+
+	@Override
+	public void beforePropertyChange(@NotNull VirtualFilePropertyEvent event)
 	{
 
 	}
 
 	@Override
-	public void beforePropertyChange(VirtualFilePropertyEvent event)
+	public void beforeContentsChange(@NotNull VirtualFileEvent event)
 	{
 
 	}
 
 	@Override
-	public void beforeContentsChange(VirtualFileEvent event)
+	public void beforeFileDeletion(@NotNull VirtualFileEvent event)
 	{
 
 	}
 
 	@Override
-	public void beforeFileDeletion(VirtualFileEvent event)
-	{
-
-	}
-
-	@Override
-	public void beforeFileMovement(VirtualFileMoveEvent event)
+	public void beforeFileMovement(@NotNull VirtualFileMoveEvent event)
 	{
 
 	}

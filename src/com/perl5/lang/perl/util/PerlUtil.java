@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -96,6 +97,31 @@ public class PerlUtil
 		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(project).getContentSourceRoots())
 		{
 			if (VfsUtil.isAncestor(sourceRoot, file, true))
+			{
+				if (innerMostRoot == null || VfsUtil.isAncestor(innerMostRoot, sourceRoot, true))
+					innerMostRoot = sourceRoot;
+			}
+		}
+
+		return innerMostRoot;
+	}
+
+	/**
+	 * Searches for innermost source root for a file by it's absolute path
+	 * @param project project to search in
+	 * @param filePath	containing filename
+	 * @return	innermost root
+	 */
+	public static VirtualFile findInnermostSourceRoot(Project project, String filePath)
+	{
+		VirtualFile innerMostRoot = null;
+		File file = new File(filePath);
+
+		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(project).getContentSourceRoots())
+		{
+			File sourceRootFile = new File(sourceRoot.getPath());
+
+			if (VfsUtil.isAncestor(sourceRootFile, file, true))
 			{
 				if (innerMostRoot == null || VfsUtil.isAncestor(innerMostRoot, sourceRoot, true))
 					innerMostRoot = sourceRoot;

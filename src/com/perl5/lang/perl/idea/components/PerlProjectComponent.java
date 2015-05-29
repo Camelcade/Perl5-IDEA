@@ -41,7 +41,7 @@ public class PerlProjectComponent implements ProjectComponent
 	public void initComponent()
 	{
 		// TODO: insert component initialization logic here
-		System.out.println("Registered listener");
+//		System.out.println("Registered listener");
 		if( myChangeListener == null )
 		{
 			myChangeListener = new PerlFileListener(myProject);
@@ -52,7 +52,7 @@ public class PerlProjectComponent implements ProjectComponent
 	public void disposeComponent()
 	{
 		// TODO: insert component disposal logic here
-		System.out.println("Unregistered listener");
+//		System.out.println("Unregistered listener");
 		VirtualFileManager.getInstance().removeVirtualFileListener(myChangeListener);
 	}
 
