@@ -16,6 +16,11 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.icons.AllIcons;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
@@ -78,7 +83,26 @@ public class PerlUtil
 		return declarationsHash.values();
 	}
 
+	/**
+	 * Searches for innermost source root for a file
+	 * @param project project to search in
+	 * @param file	containing file
+	 * @return	innermost root
+	 */
+	public static VirtualFile findInnermostSourceRoot(Project project, VirtualFile file)
+	{
+		VirtualFile innerMostRoot = null;
 
+		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(project).getContentSourceRoots())
+		{
+			if (VfsUtil.isAncestor(sourceRoot, file, true))
+			{
+				if (innerMostRoot == null || VfsUtil.isAncestor(innerMostRoot, sourceRoot, true))
+					innerMostRoot = sourceRoot;
+			}
+		}
 
+		return innerMostRoot;
+	}
 
 }

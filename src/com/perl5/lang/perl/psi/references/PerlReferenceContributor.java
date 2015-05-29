@@ -95,12 +95,12 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 
 						ArrayList<PsiReference> result = new ArrayList<>();
 
-						result.add(new PerlNamespaceReference(element, new TextRange(0, element.getTextLength())));
-
 						if( nameSpaceContainer instanceof PerlUseStatement
 								|| nameSpaceContainer instanceof PerlRequireTerm
 								)
 							result.add(new PerlNamespaceFileReference(element, new TextRange(0, element.getTextLength())));
+						else
+							result.add(new PerlNamespaceReference(element, new TextRange(0, element.getTextLength())));
 
 						return result.toArray(new PsiReference[result.size()]);
 					}

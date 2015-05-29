@@ -17,7 +17,12 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.vfs.VirtualFileListener;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiTreeChangeListener;
+import com.intellij.refactoring.RefactoringFactory;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespace;

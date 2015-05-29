@@ -17,11 +17,12 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.PsiPolyVariantReferenceBase;
-import com.intellij.psi.PsiReferenceBase;
+import com.intellij.psi.*;
+import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.refactoring.RefactoringFactory;
+import com.intellij.refactoring.RenameRefactoring;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -38,7 +39,7 @@ public abstract class PerlReference extends PsiReferenceBase<PsiElement>
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
 		PsiElement element = getElement();
-		assert element instanceof PsiNamedElement;
-		return ((PsiNamedElement) element).setName(newElementName);
+		assert element instanceof PerlNamedElement;
+		return ((PerlNamedElement) element).setName(newElementName);
 	}
 }

@@ -17,6 +17,9 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
@@ -141,9 +144,49 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param packageName canonical package name
 	 * @return package path
 	 */
-	public static String getPackagePathName(String packageName)
+	public static String getPackagePathByName(String packageName)
 	{
 		return StringUtils.join(packageName.split(":+"), '/') + ".pm";
 	}
 
+	/**
+	 * Translates package relative name to the package name Foo/Bar.pm => Foo::Bar
+	 * @param packagePath
+	 * @return
+	 */
+	public static String getPackageNameByPath(String packagePath)
+	{
+		return StringUtils.join(packagePath.replaceFirst("\\.pm$", "").split("/"), "::");
+	}
+
+	/**
+	 * Adjusting namespaces according to the new file location
+	 * @param event
+	 */
+	public static void adjustMovedFileNamespaces(@NotNull Project project, @NotNull VirtualFileMoveEvent event)
+	{
+		VirtualFile innermostRoot = PerlUtil.findInnermostSourceRoot(project, event.getFile());
+
+		if (innermostRoot != null)
+		{
+			String relativePath = VfsUtil.getRelativePath(event.getFile(), innermostRoot);
+
+			assert relativePath != null;
+
+//			for (PerlNamespaceDefinition namespaceDefinition :
+//					PsiTreeUtil.findChildrenOfType(this, PerlNamespaceDefinition.class))
+//			{
+//				PerlNamespace namespace = namespaceDefinition.getNamespace();
+//				String fileName = PerlPackageUtil.getPackagePathByName(namespace.getName());
+//
+//				if (relativePath.equals(fileName))
+//				{
+//					System.out.println("Created file " + getVirtualFile() + " with namespace definition " + namespace.getName());
+//					myChangeListener = new PerlNamespaceFileListener(this);
+//					VirtualFileManager.getInstance().addVirtualFileListener(myChangeListener);
+//				}
+//			}
+		}
+
+	}
 }

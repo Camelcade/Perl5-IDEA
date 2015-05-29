@@ -19,12 +19,15 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReference;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlUtil;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,6 +47,8 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		super(element, textRange);
 		assert element instanceof PerlNamespace;
 		packageName = ((PerlNamespace) element).getName();
+		if( element.getText().endsWith("::"))
+			setRangeInElement(new TextRange(0, element.getTextLength()-2));
 	}
 
 	@NotNull
@@ -60,7 +65,7 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
 		// resolves to a psi file
-		String properPath = PerlPackageUtil.getPackagePathName(packageName);
+		String properPath = PerlPackageUtil.getPackagePathByName(packageName);
 		Project project = myElement.getProject();
 
 		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(myElement.getProject()).getContentSourceRoots())
@@ -84,5 +89,53 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
 		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
+	}
+
+	@Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
+	{
+		assert myElement instanceof PerlNamespace;
+		String currentName = ((PerlNamespace) myElement).getName();
+		if( currentName != null && newElementName.endsWith(".pm") )
+		{
+			String[] nameChunks = currentName.split("::");
+			nameChunks[nameChunks.length-1] = newElementName.replaceFirst("\\.pm$", "");
+			newElementName = StringUtils.join(nameChunks, "::");
+
+			return super.handleElementRename(newElementName);
+
+		}
+
+		throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
+	}
+
+	@Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	{
+		VirtualFile newFile = element.getContainingFile().getVirtualFile();
+
+		if( "pm".equals(newFile.getExtension()))
+		{
+			VirtualFile innerMostRoot = PerlUtil.findInnermostSourceRoot(myElement.getProject(), newFile);
+
+			if (innerMostRoot != null)
+			{
+				String newPath = VfsUtil.getRelativePath(newFile, innerMostRoot);
+				return super.handleElementRename(PerlPackageUtil.getPackageNameByPath(newPath));
+			}
+			// todo this is not being handled on rename
+//			else
+//			{
+//				throw new IncorrectOperationException("Failed attempt to move package file outside of the one of the source roots: " + newFile.getPath());
+//			}
+			return null;
+		}
+		throw new IncorrectOperationException("Unable to rebind package use/require to a non-pm file " + newFile.getName());
+	}
+
+	@Override
+	public TextRange getRangeInElement()
+	{
+		return super.getRangeInElement();
 	}
 }

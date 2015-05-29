@@ -18,9 +18,8 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
+import com.intellij.refactoring.actions.RenameElementAction;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -28,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -60,9 +60,10 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<>();
 
-		for (PerlNamespaceDefinition ns : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
+		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
 		{
-			result.add(new PsiElementResolveResult(ns.getNamespace()));
+			PerlNamespace namespace = namespaceDefinition.getNamespace();
+			result.add(new PsiElementResolveResult(namespace));
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);
