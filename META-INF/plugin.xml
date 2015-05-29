@@ -25,6 +25,11 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>0.18 beta</p>
+      <ul>
+        <li>Bugfixes</li>
+      </ul>
+
       <p>0.17 beta</p>
       <ul>
         <li>Fixed problems with parenthesised expressions parsing in some situations</li>
