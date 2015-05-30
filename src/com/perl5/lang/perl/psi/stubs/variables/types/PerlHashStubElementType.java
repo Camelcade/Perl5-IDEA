@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.stubs.variables.types;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.impl.PerlPerlHashImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubIndexKeys;
@@ -37,7 +38,7 @@ public class PerlHashStubElementType extends PerlVariableStubElementType
 	@Override
 	public PerlVariable createPsi(@NotNull PerlVariableStub stub)
 	{
-		return null;//new PerlPerlHashImpl(stub,this);
+		return new PerlPerlHashImpl(stub,this);
 	}
 
 	@Override
