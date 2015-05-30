@@ -16,11 +16,19 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubIndexKeys;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -55,5 +63,27 @@ public class PerlArrayUtil implements PerlElementTypes
 		return BUILT_IN_MAP.containsKey(variable);
 	}
 
+
+	/**
+	 * Searching project files for global array definitions by specific package and variable name
+	 * @param project	project to search in
+	 * @param canonicalName	canonical variable name package::name
+	 * @return	Collection of found definitions
+	 */
+	public static Collection<PerlVariable> findGlobalArrayDefinitions(Project project, String canonicalName)
+	{
+		assert canonicalName != null;
+		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_ARRAY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlVariable.class);
+	}
+
+	/**
+	 * Returns list of defined global arrays
+	 * @param project project to search in
+	 * @return collection of variable canonical names
+	 */
+	public static Collection<String> listDefinedGlobalArrays(Project project)
+	{
+		return StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_ARRAY, project);
+	}
 
 }

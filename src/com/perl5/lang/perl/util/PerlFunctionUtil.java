@@ -70,11 +70,6 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 	public static Collection<PerlSubDefinition> findSubDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-
-//		Collection<String> globalScalars = StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_SCALAR, project);
-//		Collection<String> globalArrays = StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_ARRAY, project);
-//		Collection<String> globalHashes = StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_HASH, project);
-
 		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
 	}
 
