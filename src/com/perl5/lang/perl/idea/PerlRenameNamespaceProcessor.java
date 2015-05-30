@@ -21,7 +21,9 @@ import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 /**
  * Created by hurricup on 29.05.2015.
@@ -37,19 +39,25 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 	@Override
 	public void renameElement(PsiElement element, String newName, UsageInfo[] usages, RefactoringElementListener listener) throws IncorrectOperationException
 	{
-		// code from erlang plugin
-//		boolean variableNameIsInvalid;
-//		try {
-//			PsiElement qVarFromText = ErlangElementFactory.createQVarFromText(element.getProject(), newName);
-//			//noinspection ConstantConditions
-//			variableNameIsInvalid = qVarFromText == null;
-//		} catch (Exception any) {
-//			variableNameIsInvalid = true;
-//		}
-//		if (variableNameIsInvalid) {
-//			throw new IncorrectOperationException("Invalid variable name");
-//		}
-//		super.renameElement(element, newName, usages, listener);
+		boolean packageNameInvalid;
+
+		if( !"".equals(newName))
+		{
+			try
+			{
+				String canonicalName = PerlPackageUtil.canonicalPackageName(newName);
+				PerlNamespace newNamespace = PerlElementFactory.createPackageName(element.getProject(), canonicalName);
+				packageNameInvalid = (newNamespace == null || !canonicalName.equals(newNamespace.getName()));
+			} catch (Exception any)	{
+				packageNameInvalid = true;
+			}
+		}
+		else
+			throw new IncorrectOperationException("It's not allowed to rename to the empty/main package");
+
+		if (packageNameInvalid) {
+			throw new IncorrectOperationException("Invalid package name: "+newName);
+		}
 
 		super.renameElement(element, newName, usages, listener);
 	}

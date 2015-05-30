@@ -49,6 +49,6 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 	@Override
 	public boolean isSafeDeleteAvailable(@NotNull PsiElement element)
 	{
-		return true;
+		return false;
 	}
 }

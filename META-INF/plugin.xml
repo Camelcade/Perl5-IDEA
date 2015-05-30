@@ -101,9 +101,10 @@
       <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
       <lang.refactoringSupport language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
 
-      <!--<lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>-->
+      <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+      <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.PerlRenameNamespaceProcessor"/>
       <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
-      <!--<renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.PerlRenameNamespaceProcessor"/>-->
+
 
       <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex"/>
       <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>

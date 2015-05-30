@@ -27,12 +27,13 @@ public class PerlNamesValidator implements NamesValidator
 	@Override
 	public boolean isKeyword(String name, Project project)
 	{
+		// @todo add some keywords here?
 		return false;
 	}
 
 	@Override
 	public boolean isIdentifier(String name, Project project)
 	{
-		return false;
+		return true;
 	}
 }
