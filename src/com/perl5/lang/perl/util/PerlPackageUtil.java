@@ -231,7 +231,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 	/**
-	 * Searches for all pm files in directory to be renamed, searches for references to those packages and add them to renaming queue
+	 * Searches for all pm files in directory to be renamed/moved, searches for references to those packages and add them to the renaming queue
 	 * @param queue RenameRefactoringQueue object
 	 * @param directory VirtualFile of renamed directory
 	 * @param newPath new directory path

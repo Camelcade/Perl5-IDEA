@@ -32,6 +32,7 @@ public class PerlFileListener implements VirtualFileListener
 	Project myProject;
 	ProjectFileIndex myProjectFileIndex;
 	RenameRefactoringQueue directoryRenameQueue;
+	RenameRefactoringQueue directoryMoveQueue;
 
 	public PerlFileListener(Project project)
 	{
@@ -67,7 +68,6 @@ public class PerlFileListener implements VirtualFileListener
 	public void contentsChanged(@NotNull VirtualFileEvent event)
 	{
 //		System.out.println("contentsChanged " + event);
-
 	}
 
 	@Override
@@ -88,13 +88,19 @@ public class PerlFileListener implements VirtualFileListener
 		if( myProjectFileIndex.isInSource(event.getNewParent()) )
 		{
 			VirtualFile movedFile = event.getFile();
+			String oldPath = event.getOldParent().getPath() + '/' + movedFile.getName();
 
-			if( "pm".equals(movedFile.getExtension()) )
+			if( movedFile.isDirectory() )
+			{
+				// one of the dirs been moved to other one
+				PerlPackageUtil.handlePackagePathChange(directoryMoveQueue,movedFile,oldPath);
+				directoryMoveQueue.run();
+			}
+			if( !movedFile.isDirectory() && "pm".equals(movedFile.getExtension()) )
 			{
 				// package file moved
-				VirtualFile file = event.getFile();
 				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
-				PerlPackageUtil.handleMovedPackageNamespaces(queue, file, event.getOldParent().getPath() + '/' + file.getName());
+				PerlPackageUtil.handleMovedPackageNamespaces(queue, movedFile, oldPath);
 				queue.run();
 			}
 		}
@@ -137,6 +143,16 @@ public class PerlFileListener implements VirtualFileListener
 	@Override
 	public void beforeFileMovement(@NotNull VirtualFileMoveEvent event)
 	{
-
+		VirtualFile virtualFile = event.getFile();
+		if( myProjectFileIndex.isInSource(virtualFile) )
+		{
+			if ( virtualFile.isDirectory())
+			{
+				// package path change, preprocessing
+				directoryMoveQueue = new RenameRefactoringQueue(myProject);
+				String newPath = event.getNewParent().getPath()+ '/' + virtualFile.getName();
+				PerlPackageUtil.handlePackagePathChangeReferences(directoryMoveQueue, virtualFile, newPath);
+			}
+		}
 	}
 }
