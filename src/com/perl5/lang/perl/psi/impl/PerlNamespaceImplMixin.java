@@ -24,7 +24,12 @@ import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.refactoring.MoveInnerRefactoring;
+import com.intellij.refactoring.MoveMembersRefactoring;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
@@ -58,7 +63,7 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 		if( parent instanceof PerlNamespaceDefinition)
 		{
 			// namespace definition,
-			PsiFile psiFile = getContainingFile();
+			final PsiFile psiFile = getContainingFile();
 			if( psiFile instanceof PerlFileImpl )
 			{
 				final String packageName = ((PerlFileImpl) psiFile).getFilePackageName();
@@ -75,9 +80,7 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 						@Override
 						public void run()
 						{
-							VirtualFile innermostRoot = PerlUtil.findInnermostSourceRoot(project, virtualFile);
-							String newFileRelativePath = PerlPackageUtil.getPackagePathByName(canonicalPackageName);
-							VirtualFile newParent = innermostRoot;
+							VirtualFile newParent = PerlUtil.findInnermostSourceRoot(project, virtualFile);
 
 							List<String> packageDirs = Arrays.asList(canonicalPackageName.split(":+"));
 							String newFileName = packageDirs.get(packageDirs.size()-1) + ".pm";
@@ -95,12 +98,22 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 								{
 									throw new IncorrectOperationException("Could not create subdirectory: " + newParent.getPath() + "/" + dir);
 								}
+
+							}
+
+							RenameRefactoringQueue queue = new RenameRefactoringQueue(project);
+
+							for(PsiReference inboundReference: ReferencesSearch.search(psiFile))
+							{
+								if( inboundReference.getElement() instanceof PerlNamespace )
+									queue.addElement(inboundReference.getElement(), canonicalPackageName);
 							}
 
 							try
 							{
 								if (!newParent.getPath().equals(virtualFile.getParent().getPath()))
 								{
+									// we need to handle references ourselves
 									virtualFile.move(requestor, newParent);
 								}
 
@@ -110,6 +123,8 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 							{
 								throw new IncorrectOperationException("Could not rename or move package file: " + e.getMessage());
 							}
+
+							queue.run();
 						}
 					};
 				}

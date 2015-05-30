@@ -27,6 +27,7 @@
   <change-notes><![CDATA[
       <p>0.18 beta</p>
       <ul>
+        <li>Implemented packages refactoring</li>
         <li>Bugfixes</li>
       </ul>
 

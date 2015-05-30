@@ -18,7 +18,7 @@ to write tests (mostly for lexer and parser at the moment).
 * Implemented project functions auto-completion (pretty dumb for now). 
 * Implemented basic project functions navigation and refactoring (works with obvious calls for now: package::method and package->method)
 * Implemented lexical variables navigation and refactoring.
-* Implemented packages navigation (refactoring not working and buggy). For navigation to package files, your lib root -I must be explicitly marked as one of the source roots.
+* Implemented packages navigation and refactoring. For navigation to package files and refactoring, your lib root -I must be explicitly marked as one of the source roots.
 * Implemented basic code-folding for blocks, hashes, arrays, PODs, heredocs and sequential comments and imports.
 * Implemented basic brace matcher.
 * Implemented find usage. 
