@@ -19,34 +19,25 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.refactoring.RefactoringBundle;
-import com.intellij.refactoring.RefactoringFactory;
-import com.intellij.refactoring.RenameRefactoring;
-import com.intellij.refactoring.listeners.impl.RefactoringTransaction;
-import com.intellij.refactoring.listeners.impl.impl.RefactoringTransactionImpl;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.PerlPackage;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceBlock;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImpl;
-import com.perl5.lang.perl.psi.impl.PerlNamespaceImpl;
 import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -172,11 +163,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 	/**
-	 * Adjusting namespaces according to the new file location
+	 * Adds to queue netsted namespaces, which names should be adjusted to the new package name/path
+	 * @param queue - RenameRefactoringQueue
 	 * @param file - file has been moved
 	 * @param oldPath - previous filename
 	 */
-	public static void adjustMovedFileNamespaces(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath )
+	public static void handleMovedPackageNamespaces(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath)
 	{
 		Project project = queue.getProject();
 		VirtualFile newInnermostRoot = PerlUtil.findInnermostSourceRoot(project, file);
@@ -212,6 +204,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
+	/**
+	 * Searches for all pm files and add renaming of nested package definitions to the queue. Invoked after renaming
+	 * @param queue	RenameRefactoringQueue object
+	 * @param directory	VirtualFile of renamed directory
+	 * @param oldPath old directory path
+	 */
 	public static void handlePackagePathChange(RenameRefactoringQueue queue, VirtualFile directory, String oldPath)
 	{
 		Project project = queue.getProject();
@@ -223,9 +221,47 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			{
 				if( !file.isDirectory() && "pm".equals(file.getExtension()) && directorySourceRoot.equals(PerlUtil.findInnermostSourceRoot(project, file)) )
 				{
+					// todo find references to file and rename them too!!!
 					String relativePath = VfsUtil.getRelativePath(file, directory);
 					String oldFilePath = oldPath + "/" + relativePath;
-					adjustMovedFileNamespaces(queue, file, oldFilePath);
+					handleMovedPackageNamespaces(queue, file, oldFilePath);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Searches for all pm files in directory to be renamed, searches for references to those packages and add them to renaming queue
+	 * @param queue RenameRefactoringQueue object
+	 * @param directory VirtualFile of renamed directory
+	 * @param newPath new directory path
+	 */
+	public static void handlePackagePathChangeReferences(RenameRefactoringQueue queue, VirtualFile directory, String newPath)
+	{
+		Project project = queue.getProject();
+		VirtualFile oldDirectorySourceRoot = PerlUtil.findInnermostSourceRoot(project, directory);
+		PsiManager psiManager = PsiManager.getInstance(project);
+
+		if (oldDirectorySourceRoot != null)
+		{
+			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
+			{
+				if( !file.isDirectory() && "pm".equals(file.getExtension()) && oldDirectorySourceRoot.equals(PerlUtil.findInnermostSourceRoot(project, file)) )
+				{
+					PsiFile psiFile = psiManager.findFile(file);
+
+					if( psiFile != null )
+					{
+						for( PsiReference inboundReference: ReferencesSearch.search(psiFile) )
+						{
+							String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
+							VirtualFile newInnermostRoot = PerlUtil.findInnermostSourceRoot(project, newPackagePath);
+							String newRelativePath = Paths.get(newInnermostRoot.getPath()).relativize(Paths.get(newPackagePath)).toString();
+							String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
+
+							queue.addElement(inboundReference.getElement(), newPackageName);
+						}
+					}
 				}
 			}
 		}

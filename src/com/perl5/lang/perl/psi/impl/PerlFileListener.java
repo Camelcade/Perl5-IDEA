@@ -22,7 +22,6 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.*;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,6 +31,7 @@ public class PerlFileListener implements VirtualFileListener
 {
 	Project myProject;
 	ProjectFileIndex myProjectFileIndex;
+	RenameRefactoringQueue directoryMoveQueue;
 
 	public PerlFileListener(Project project)
 	{
@@ -48,9 +48,9 @@ public class PerlFileListener implements VirtualFileListener
 			if( "name".equals(event.getPropertyName()) && virtualFile.isDirectory())
 			{
 				String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString()+"$", event.getOldValue().toString());
-				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
-				PerlPackageUtil.handlePackagePathChange(queue,virtualFile,oldPath);
-				queue.run();
+				PerlPackageUtil.handlePackagePathChange(directoryMoveQueue,virtualFile,oldPath);
+				directoryMoveQueue.run();
+				directoryMoveQueue = null;
 			}
 		}
 	}
@@ -85,7 +85,7 @@ public class PerlFileListener implements VirtualFileListener
 			{
 				VirtualFile file = event.getFile();
 				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
-				PerlPackageUtil.adjustMovedFileNamespaces(queue, file, event.getOldParent().getPath() + '/' + file.getName());
+				PerlPackageUtil.handleMovedPackageNamespaces(queue, file, event.getOldParent().getPath() + '/' + file.getName());
 				queue.run();
 			}
 		}
@@ -100,7 +100,16 @@ public class PerlFileListener implements VirtualFileListener
 	@Override
 	public void beforePropertyChange(@NotNull VirtualFilePropertyEvent event)
 	{
-
+		VirtualFile virtualFile = event.getFile();
+		if( myProjectFileIndex.isInSource(virtualFile) )
+		{
+			if ("name".equals(event.getPropertyName()) && virtualFile.isDirectory())
+			{
+				directoryMoveQueue = new RenameRefactoringQueue(myProject);
+				String newPath = virtualFile.getPath().replaceFirst(event.getOldValue().toString()+"$", event.getNewValue().toString());
+				PerlPackageUtil.handlePackagePathChangeReferences(directoryMoveQueue, virtualFile, newPath);
+			}
+		}
 	}
 
 	@Override
