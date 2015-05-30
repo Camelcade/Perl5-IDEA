@@ -166,7 +166,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * Adds to queue netsted namespaces, which names should be adjusted to the new package name/path
 	 * @param queue - RenameRefactoringQueue
 	 * @param file - file has been moved
-	 * @param oldPath - previous filename
+	 * @param oldPath - previous filepath
 	 */
 	public static void handleMovedPackageNamespaces(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath)
 	{

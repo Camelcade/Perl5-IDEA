@@ -31,7 +31,7 @@ public class PerlFileListener implements VirtualFileListener
 {
 	Project myProject;
 	ProjectFileIndex myProjectFileIndex;
-	RenameRefactoringQueue directoryMoveQueue;
+	RenameRefactoringQueue directoryRenameQueue;
 
 	public PerlFileListener(Project project)
 	{
@@ -45,12 +45,20 @@ public class PerlFileListener implements VirtualFileListener
 		VirtualFile virtualFile = event.getFile();
 		if( myProjectFileIndex.isInSource(virtualFile) )
 		{
+			String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString()+"$", event.getOldValue().toString());
+
 			if( "name".equals(event.getPropertyName()) && virtualFile.isDirectory())
 			{
-				String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString()+"$", event.getOldValue().toString());
-				PerlPackageUtil.handlePackagePathChange(directoryMoveQueue,virtualFile,oldPath);
-				directoryMoveQueue.run();
-				directoryMoveQueue = null;
+				// package path change
+				PerlPackageUtil.handlePackagePathChange(directoryRenameQueue,virtualFile,oldPath);
+				directoryRenameQueue.run();
+			}
+			else if(!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()))
+			{
+				// package file renamed
+				RenameRefactoringQueue fileQueue = new RenameRefactoringQueue(myProject);
+				PerlPackageUtil.handleMovedPackageNamespaces(fileQueue,virtualFile,oldPath);
+				fileQueue.run();
 			}
 		}
 	}
@@ -83,6 +91,7 @@ public class PerlFileListener implements VirtualFileListener
 
 			if( "pm".equals(movedFile.getExtension()) )
 			{
+				// package file moved
 				VirtualFile file = event.getFile();
 				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
 				PerlPackageUtil.handleMovedPackageNamespaces(queue, file, event.getOldParent().getPath() + '/' + file.getName());
@@ -105,9 +114,10 @@ public class PerlFileListener implements VirtualFileListener
 		{
 			if ("name".equals(event.getPropertyName()) && virtualFile.isDirectory())
 			{
-				directoryMoveQueue = new RenameRefactoringQueue(myProject);
+				// package path change, preprocessing
+				directoryRenameQueue = new RenameRefactoringQueue(myProject);
 				String newPath = virtualFile.getPath().replaceFirst(event.getOldValue().toString()+"$", event.getNewValue().toString());
-				PerlPackageUtil.handlePackagePathChangeReferences(directoryMoveQueue, virtualFile, newPath);
+				PerlPackageUtil.handlePackagePathChangeReferences(directoryRenameQueue, virtualFile, newPath);
 			}
 		}
 	}
