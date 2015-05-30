@@ -31,7 +31,7 @@ import java.util.Collection;
  */
 public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlVariable> implements PerlVariableStubIndexKeys
 {
-	public static final int VERSION = 0;
+	public static final int VERSION = 1;
 
 	@Override
 	public int getVersion()

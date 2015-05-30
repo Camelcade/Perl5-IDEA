@@ -37,6 +37,8 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract void popState();
 	public abstract void pushState();
 
+	public abstract IElementType getBracedBarewordTokenType();
+
 	public abstract IElementType processSemicolon();
 
 	public abstract IElementType processHeredocOpener();

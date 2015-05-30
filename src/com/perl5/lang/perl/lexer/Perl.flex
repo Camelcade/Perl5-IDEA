@@ -443,7 +443,7 @@ TRANS_MODIFIERS = [cdsr]
     "{" {return PERL_LBRACE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {BAREWORD}   {endCustomBlock();return PERL_STRING_CONTENT; }
+    {BAREWORD}   {endCustomBlock();return getBracedBarewordTokenType(); }
     . {yypushback(1);endCustomBlock();break;}
 }
 

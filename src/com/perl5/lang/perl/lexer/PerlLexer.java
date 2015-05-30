@@ -799,4 +799,13 @@ public class PerlLexer extends PerlLexerGenerated{
 		}
 		return PERL_SEMI;
 	}
+
+	@Override
+	public IElementType getBracedBarewordTokenType()
+	{
+		if( "defined".equals(yytext().toString()))
+			return PERL_OPERATOR_UNARY;
+
+		return PERL_STRING_CONTENT;
+	}
 }

@@ -25,6 +25,11 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>0.19 beta</p>
+      <ul>
+        <li>Implemented global variables navigation, autocompletion and refactoring</li>
+      </ul>
+
       <p>0.18 beta</p>
       <ul>
         <li>Implemented packages refactoring</li>
@@ -107,9 +112,9 @@
       <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
 
 
-      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex"/>
+      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex"/>
       <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
-      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubIndex"/>
+      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
 
       <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
       <lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/>
