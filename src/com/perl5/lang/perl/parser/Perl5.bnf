@@ -140,15 +140,17 @@ limitations under the License.
     implements("variable_declaration_lexical|variable_declaration_local")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.impl.PerlLexicalScopeElementMixin"
 
-    mixin("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.impl.PerlVariableImpleMixin"
+    elementTypeFactory("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
+    stubClass("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
+    mixin("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.impl.PerlVariableImplMixin"
     implements("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.PerlVariable"
 
     elementTypeFactory("sub_definition|perl_glob|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
-    stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStub"
+    stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImplMixin"
 
-    stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionStub"
+    stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixin"
     implements("sub_definition")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.PerlLexicalScope"
 
@@ -509,7 +511,7 @@ private variable_declaration ::=
 // @todo attributes support
 variable_declaration_local ::= 'local' [namespace]  local_variable_declaration_variation {pin=1}
 variable_declaration_lexical ::= ('my' | 'state') [namespace] variable_declaration_variation {pin=1}
-variable_declaration_global ::= 'our' [namespace] variable_declaration_variation {pin=1}
+variable_declaration_global ::= 'our' [namespace] variable_declaration_variation  {pin=1}
 
 private local_variable_declaration_variation ::=
     PERL_LPAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * PERL_RPAREN

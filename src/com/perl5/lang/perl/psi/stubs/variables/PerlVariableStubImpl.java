@@ -14,28 +14,39 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.namespace.definitions;
+package com.perl5.lang.perl.psi.stubs.variables;
 
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlGlobalVariable;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 30.05.2015.
  */
-public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefinition> implements PerlNamespaceDefinitionStub
+public class PerlVariableStubImpl extends StubBase<PerlVariable> implements PerlVariableStub
 {
-	private final String packageName;
+	private final String myPackageName;
+	private final String myVariableName;
 
-	public PerlNamespaceDefinitionStubImpl(final StubElement parent, final String packageName)
+	public PerlVariableStubImpl(StubElement parent, IStubElementType elementType, String myPackageName, String myVariableName)
 	{
-		super(parent, PerlStubElementTypes.PERL_NAMESPACE);
-		this.packageName = packageName;
+		super(parent, elementType);
+		this.myPackageName = myPackageName;
+		this.myVariableName = myVariableName;
 	}
 
+	@Override
 	public String getPackageName()
 	{
-		return packageName;
+		return myPackageName;
+	}
+
+	@Override
+	public String getVariableName()
+	{
+		return myVariableName;
 	}
 }

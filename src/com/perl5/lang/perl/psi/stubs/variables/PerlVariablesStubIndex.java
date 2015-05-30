@@ -14,31 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs.definitions;
+package com.perl5.lang.perl.psi.stubs.variables;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlGlobalVariable;
+import com.perl5.lang.perl.psi.PerlPerlGlob;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 30.05.2015.
  */
-public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PerlSubDefinition>
+public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlGlobalVariable> implements PerlVariableStubIndexKeys
 {
 	public static final int VERSION = 0;
-	public static final StubIndexKey<String,PerlSubDefinition> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
 
 	@Override
 	public int getVersion()
 	{
 		return super.getVersion() + VERSION;
-	}
-
-	@NotNull
-	@Override
-	public StubIndexKey<String, PerlSubDefinition> getKey()
-	{
-		return KEY;
 	}
 }

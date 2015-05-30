@@ -14,37 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs.definitions;
+package com.perl5.lang.perl.psi.stubs.namespaces;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 28.05.2015.
  */
-public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinition> implements PerlSubDefinitionStub
+public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefinition> implements PerlNamespaceDefinitionStub
 {
 	private final String packageName;
-	private final String functionName;
 
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String functionName)
+	public PerlNamespaceDefinitionStubImpl(final StubElement parent, final String packageName)
 	{
-		super(parent, PerlStubElementTypes.SUB_DEFINITION);
+		super(parent, PerlStubElementTypes.PERL_NAMESPACE);
 		this.packageName = packageName;
-		this.functionName = functionName;
 	}
 
-	@Override
 	public String getPackageName()
 	{
 		return packageName;
-	}
-
-	@Override
-	public String getFunctionName()
-	{
-		return functionName;
 	}
 }

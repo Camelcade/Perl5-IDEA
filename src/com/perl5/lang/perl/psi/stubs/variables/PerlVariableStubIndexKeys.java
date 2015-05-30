@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.namespace.definitions;
+package com.perl5.lang.perl.psi.stubs.variables;
 
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlGlobalVariable;
 
 /**
- * Created by hurricup on 28.05.2015.
- *
+ * Created by hurricup on 30.05.2015.
  */
-public interface PerlNamespaceDefinitionStub extends StubElement<PerlNamespaceDefinition>
+public interface PerlVariableStubIndexKeys
 {
-	public String getPackageName();
+	public static final StubIndexKey<String,PerlGlobalVariable> KEY_SCALAR = StubIndexKey.createIndexKey("perl.global.scalar");
+	public static final StubIndexKey<String,PerlGlobalVariable> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
+	public static final StubIndexKey<String,PerlGlobalVariable> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
+
 }

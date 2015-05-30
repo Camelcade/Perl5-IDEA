@@ -27,6 +27,7 @@
   <change-notes><![CDATA[
       <p>0.19 beta</p>
       <ul>
+        <li>Global variables stubs and navigation</li>
       </ul>
 
       <p>0.18 beta</p>
@@ -110,10 +111,13 @@
       <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.PerlRenameNamespaceProcessor"/>
       <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
 
+      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
+      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>
+      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlHashesStubIndex"/>
 
-      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex"/>
       <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
-      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubIndex"/>
+      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex"/>
+      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
 
       <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
       <lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/>

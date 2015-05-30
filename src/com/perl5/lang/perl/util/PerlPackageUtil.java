@@ -19,10 +19,7 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiReference;
+import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
@@ -33,8 +30,8 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceBlock;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubIndex;
-import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
+import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -152,8 +149,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Translates package relative name to the package name Foo/Bar.pm => Foo::Bar
-	 * @param packagePath
-	 * @return
+	 * @param packagePath package relative path
+	 * @return canonical package name
 	 */
 	public static String getPackageNameByPath(String packagePath)
 	{

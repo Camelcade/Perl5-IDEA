@@ -157,31 +157,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                     {
                                         String currentText = variableName.getText();
 
-                                        // todo this should work with stubs
-                                        Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                        for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
-                                        {
-                                            for (PerlPerlScalar variable : decl.getPerlScalarList())
-                                            {
-                                                PerlVariableName variableName = variable.getVariableName();
-                                                if (variableName != null && variableName.getName() != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
-                                            }
-                                            for (PerlPerlArray variable : decl.getPerlArrayList())
-                                            {
-                                                PerlVariableName variableName = variable.getVariableName();
-                                                if (variableName != null && variableName.getName() != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "[]"));
-                                            }
-                                            for (PerlPerlHash variable : decl.getPerlHashList())
-                                            {
-                                                PerlVariableName variableName = variable.getVariableName();
-                                                if (variableName != null && variableName.getName() != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
-                                            }
-                                        }
-
                                         Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
 
                                         for (PerlVariable variable : declaredVariables)
@@ -215,26 +190,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                     {
                                         String currentText = variableName.getText();
 
-                                        Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                        for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
-                                        {
-                                            for (PerlPerlArray variable : decl.getPerlArrayList())
-                                            {
-                                                assert variable instanceof PerlPerlArrayImpl;
-                                                PerlVariableName variableName = variable.getVariableName();
-                                                if (variableName != null && variableName.getName() != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
-                                            }
-                                            for (PerlPerlHash variable : decl.getPerlHashList())
-                                            {
-                                                assert variable instanceof PerlPerlHashImpl;
-                                                PerlVariableName variableName = variable.getVariableName();
-                                                if (variableName != null && variableName.getName() != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
-                                            }
-                                        }
-
                                         Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
                                         boolean useScalars = ((PerlPerlArray) perlVariable).getScalarSigils() != null;
 
@@ -259,12 +214,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                             }
                                         }
-
-                                        // todo remove after re-factoring globals
-                                        if (useScalars)
-                                        {
-                                            populateScalars(globalDeclarations, resultSet);
-                                        }
                                     }
                                 });
                             else if (perlVariable instanceof PerlPerlHash)
@@ -274,18 +223,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                     public void run()
                                     {
                                         String currentText = variableName.getText();
-
-                                        Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations = PsiTreeUtil.findChildrenOfType(file, PerlVariableDeclarationGlobalImpl.class);
-
-                                        for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
-                                        {
-                                            for (PerlPerlHash variable : decl.getPerlHashList())
-                                            {
-                                                PerlVariableName variableName = variable.getVariableName();
-                                                if (variableName != null && variableName.getName() != null)
-                                                    resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
-                                            }
-                                        }
 
                                         Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
                                         boolean useScalars = ((PerlPerlHash) perlVariable).getScalarSigils() != null;
@@ -304,12 +241,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                                     resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
 
                                             }
-                                        }
-
-                                        // todo remove after re-factoring globals
-                                        if (useScalars)
-                                        {
-                                            populateScalars(globalDeclarations, resultSet);
                                         }
                                     }
                                 });
@@ -425,23 +356,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                     }
                 }
         );
-    }
-
-
-    private void populateScalars(
-                @NotNull Collection<PerlVariableDeclarationGlobalImpl> globalDeclarations,
-                @NotNull CompletionResultSet resultSet
-    )
-    {
-        for (PerlVariableDeclarationGlobalImpl decl : globalDeclarations)
-        {
-            for (PerlPerlScalar variable : decl.getPerlScalarList())
-            {
-                PerlVariableName variableName = variable.getVariableName();
-                if (variableName != null && variableName.getName() != null)
-                    resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
-            }
-        }
     }
 
 
