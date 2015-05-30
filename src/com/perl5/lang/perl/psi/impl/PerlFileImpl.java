@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -27,6 +28,8 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.psi.PerlLexicalScope;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -50,6 +53,23 @@ public class PerlFileImpl extends PsiFileBase implements PerlLexicalScope
 	@Override
 	public PerlLexicalScope getLexicalScope()
 	{
+		return null;
+	}
+
+	/**
+	 * Returns package name for this psi file. Name built from filename and innermost root.
+	 * @return canonical package name or null if it's not pm file or it's not in source root
+	 */
+	public String getFilePackageName()
+	{
+		VirtualFile containingFile = getVirtualFile();
+
+		if( "pm".equals(containingFile.getExtension()))
+		{
+			VirtualFile innermostSourceRoot = PerlUtil.findInnermostSourceRoot(getProject(), containingFile);
+			String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
+			return PerlPackageUtil.getPackageNameByPath(relativePath);
+		}
 		return null;
 	}
 

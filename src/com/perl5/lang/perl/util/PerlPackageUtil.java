@@ -70,7 +70,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static boolean isBuiltIn(String variable)
 	{
-		return BUILT_IN_MAP.containsKey(canonicalPackageName(variable));
+		return BUILT_IN_MAP.containsKey(getCanonicalPackageName(variable));
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static IElementType getPackageType(String variable)
 	{
-		IElementType packageType = BUILT_IN_MAP.get(canonicalPackageName(variable));
+		IElementType packageType = BUILT_IN_MAP.get(getCanonicalPackageName(variable));
 		return packageType == null ? PERL_PACKAGE : packageType;
 	}
 
@@ -89,7 +89,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param name package name
 	 * @return canonical package name
 	 */
-	public static String canonicalPackageName(String name)
+	public static String getCanonicalPackageName(String name)
 	{
 		if( "::".equals(name))
 			return "main";

@@ -17,19 +17,27 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.vfs.VirtualFileListener;
-import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtilCore;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiTreeChangeListener;
-import com.intellij.refactoring.RefactoringFactory;
+import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlVariableName;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -44,6 +52,70 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
+		Runnable newProcess = null;
+
+		PsiElement parent = getParent();
+		if( parent instanceof PerlNamespaceDefinition)
+		{
+			// namespace definition,
+			PsiFile psiFile = getContainingFile();
+			if( psiFile instanceof PerlFileImpl )
+			{
+				final String packageName = ((PerlFileImpl) psiFile).getFilePackageName();
+				if( packageName != null && packageName.equals(getName()))
+				{
+					// ok, it's package with same name
+					final VirtualFile virtualFile = psiFile.getVirtualFile();
+					final Project project = getProject();
+					final String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(name);
+					final PsiElement requestor = this;
+
+					newProcess = new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							VirtualFile innermostRoot = PerlUtil.findInnermostSourceRoot(project, virtualFile);
+							String newFileRelativePath = PerlPackageUtil.getPackagePathByName(canonicalPackageName);
+							VirtualFile newParent = innermostRoot;
+
+							List<String> packageDirs = Arrays.asList(canonicalPackageName.split(":+"));
+							String newFileName = packageDirs.get(packageDirs.size()-1) + ".pm";
+
+							for( int i = 0; i < packageDirs.size()-1; i++)
+							{
+								String dir = packageDirs.get(i);
+
+								VirtualFile subDir = newParent.findChild(dir);
+								try
+								{
+									newParent = (subDir != null) ? subDir : newParent.createChildDirectory(null, dir);
+								}
+								catch (IOException e)
+								{
+									throw new IncorrectOperationException("Could not create subdirectory: " + newParent.getPath() + "/" + dir);
+								}
+							}
+
+							try
+							{
+								if (!newParent.getPath().equals(virtualFile.getParent().getPath()))
+								{
+									virtualFile.move(requestor, newParent);
+								}
+
+								virtualFile.rename(requestor, newFileName);
+							}
+							catch(IOException e)
+							{
+								throw new IncorrectOperationException("Could not rename or move package file: " + e.getMessage());
+							}
+						}
+					};
+				}
+			}
+		}
+
 		String currentName = getText();
 
 		if( currentName != null)
@@ -62,6 +134,10 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 		{
 			replace(newName);
 		}
+
+		if(newProcess != null )
+			newProcess.run();
+
 		return this;
 	}
 
@@ -78,6 +154,6 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 	public String getName()
 	{
 		assert getNameIdentifier() != null;
-		return PerlPackageUtil.canonicalPackageName(getNameIdentifier().getText());
+		return PerlPackageUtil.getCanonicalPackageName(getNameIdentifier().getText());
 	}
 }

@@ -41,11 +41,11 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 	{
 		boolean packageNameInvalid;
 
-		if( !"".equals(newName))
+		if( !"".equals(newName) && !"main".equals(newName))
 		{
 			try
 			{
-				String canonicalName = PerlPackageUtil.canonicalPackageName(newName);
+				String canonicalName = PerlPackageUtil.getCanonicalPackageName(newName);
 				PerlNamespace newNamespace = PerlElementFactory.createPackageName(element.getProject(), canonicalName);
 				packageNameInvalid = (newNamespace == null || !canonicalName.equals(newNamespace.getName()));
 			} catch (Exception any)	{
