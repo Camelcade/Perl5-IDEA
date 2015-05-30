@@ -35,6 +35,12 @@ public class PerlElementTypeFactory
 			return PerlStubElementTypes.PERL_GLOB;
 		else if( name.equals("NAMESPACE_DEFINITION"))
 			return PerlStubElementTypes.PERL_NAMESPACE;
+		else if( name.equals("PERL_SCALAR"))
+			return PerlStubElementTypes.PERL_SCALAR;
+		else if( name.equals("PERL_ARRAY"))
+			return PerlStubElementTypes.PERL_ARRAY;
+		else if( name.equals("PERL_HASH"))
+			return PerlStubElementTypes.PERL_HASH;
 
 		throw new RuntimeException("Unknown element type "+name);
 	}

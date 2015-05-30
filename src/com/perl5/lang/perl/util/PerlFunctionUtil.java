@@ -22,9 +22,8 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStubIndex;
-import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubIndexKeys;
 
 import java.util.*;
 
@@ -71,7 +70,6 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 	public static Collection<PerlSubDefinition> findSubDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-
 		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
 	}
 

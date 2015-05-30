@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs.definitions;
+package com.perl5.lang.perl.psi.stubs.variables;
 
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlGlobalVariable;
+import com.perl5.lang.perl.psi.PerlVariable;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 30.05.2015.
  */
-public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinition>
+public class PerlArraysStubIndex extends PerlVariablesStubIndex
 {
-	public String getPackageName();
-
-	public String getFunctionName();
+	@NotNull
+	@Override
+	public StubIndexKey<String, PerlVariable> getKey()
+	{
+		return KEY_ARRAY;
+	}
 }

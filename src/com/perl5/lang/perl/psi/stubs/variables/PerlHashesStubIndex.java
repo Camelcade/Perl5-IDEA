@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.stubs.variables;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlGlobalVariable;
+import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 27.05.2015.
+ * Created by hurricup on 30.05.2015.
  */
-public interface PerlVariable extends PerlLexicalScopeElement, PerlPackagedElement, PsiElement
+public class PerlHashesStubIndex extends PerlVariablesStubIndex
 {
-	@Nullable
-	PerlNamespace getNamespace();
-
-	@Nullable
-	PerlVariableName getVariableName();
-
-	@Nullable
-	PerlScalarSigils getScalarSigils();
+	@NotNull
+	@Override
+	public StubIndexKey<String, PerlVariable> getKey()
+	{
+		return KEY_HASH;
+	}
 }

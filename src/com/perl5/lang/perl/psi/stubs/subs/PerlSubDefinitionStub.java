@@ -14,23 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.stubs.subs;
 
-import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 
 /**
- * Created by hurricup on 27.05.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public interface PerlVariable extends PerlLexicalScopeElement, PerlPackagedElement, PsiElement
+public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinition>
 {
-	@Nullable
-	PerlNamespace getNamespace();
+	public String getPackageName();
 
-	@Nullable
-	PerlVariableName getVariableName();
-
-	@Nullable
-	PerlScalarSigils getScalarSigils();
+	public String getFunctionName();
 }

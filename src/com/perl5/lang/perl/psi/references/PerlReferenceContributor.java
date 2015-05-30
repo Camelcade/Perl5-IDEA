@@ -22,7 +22,6 @@ import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
-import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 					{
 						assert element instanceof PerlVariableName;
 
-						return new PsiReference[]{new PerlLexicalVariableReference(element, new TextRange(0, element.getTextLength()))};
+						return new PsiReference[]{new PerlVariableReference(element, new TextRange(0, element.getTextLength()))};
 
 					}
 				}

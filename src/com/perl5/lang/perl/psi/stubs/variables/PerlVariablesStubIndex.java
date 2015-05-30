@@ -14,23 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.stubs.variables;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlGlobalVariable;
+import com.perl5.lang.perl.psi.PerlPerlGlob;
+import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
 
 /**
- * Created by hurricup on 27.05.2015.
+ * Created by hurricup on 30.05.2015.
  */
-public interface PerlVariable extends PerlLexicalScopeElement, PerlPackagedElement, PsiElement
+public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlVariable> implements PerlVariableStubIndexKeys
 {
-	@Nullable
-	PerlNamespace getNamespace();
+	public static final int VERSION = 0;
 
-	@Nullable
-	PerlVariableName getVariableName();
-
-	@Nullable
-	PerlScalarSigils getScalarSigils();
+	@Override
+	public int getVersion()
+	{
+		return super.getVersion() + VERSION;
+	}
 }

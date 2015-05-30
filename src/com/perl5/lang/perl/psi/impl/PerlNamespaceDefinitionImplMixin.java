@@ -20,8 +20,7 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.stubs.namespace.definitions.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.subs.definitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
 /**

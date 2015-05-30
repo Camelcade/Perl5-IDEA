@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.psi.stubs.globs;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlPerlGlob;
