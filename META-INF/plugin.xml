@@ -20,14 +20,14 @@
     <version>0.19 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
-  <description><![CDATA[
+    <description><![CDATA[
       Perl5 support for Intellij IDEA
     ]]></description>
 
-  <change-notes><![CDATA[
+    <change-notes><![CDATA[
       <p>0.19 beta</p>
       <ul>
-        <li>Implemented global variables navigation, autocompletion and refactoring</li>
+        <li>Implemented global variables autocompletion, navigation and refactoring</li>
       </ul>
 
       <p>0.18 beta</p>
@@ -77,83 +77,86 @@
         <li>Implemented correct lexing and parsing for package->$method call</li>
       </ul>
     ]]>
-  </change-notes>
+    </change-notes>
 
-  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="131"/>
+    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="131"/>
 
-  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
+    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
 
-  <extensions defaultExtensionNs="com.intellij">
+    <extensions defaultExtensionNs="com.intellij">
 
-      <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
-      <!--moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/-->
+        <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
+        <!--moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/-->
 
-      <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
+        <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
 
-      <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
-      <lang.syntaxHighlighterFactory key="Perl5" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
-      <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
-      <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
-      <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-      <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
-      <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlBraceMatcher"/>
-      <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.impl.PerlASTFactory"/>
-      <psi.referenceContributor implementation="com.perl5.lang.perl.psi.references.PerlReferenceContributor"/>
-      <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
-      <lang.refactoringSupport language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
+        <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
+        <lang.syntaxHighlighterFactory key="Perl5" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
+        <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
+        <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
+        <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+        <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
+        <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlBraceMatcher"/>
+        <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.impl.PerlASTFactory"/>
+        <psi.referenceContributor implementation="com.perl5.lang.perl.psi.references.PerlReferenceContributor"/>
+        <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
+        <lang.refactoringSupport language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
 
-      <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-      <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.PerlRenameNamespaceProcessor"/>
-      <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
+        <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.PerlRenameNamespaceProcessor"/>
+        <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
+
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlHashesStubIndex"/>
+
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
+
+        <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
+        <lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/>
+
+        <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/-->
+
+        <lang.parserDefinition language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
+        <lang.fileViewProviderFactory language="Embedded Perl"
+                                      implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
+        <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
+        <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+        <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
+        <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
+        <!--<lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>-->
+
+        <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
+        <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 
 
-      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex"/>
-      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
-      <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
+        <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
+        <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
 
-      <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
-      <lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/>
+        <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
+        <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
 
-      <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/-->
+    </extensions>
 
-      <lang.parserDefinition language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
-      <lang.fileViewProviderFactory language="Embedded Perl"
-                                    implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
-      <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
-      <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-      <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
-      <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
-      <!--<lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>-->
+    <application-components>
+    </application-components>
 
-      <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
-      <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
+    <project-components>
+        <!-- Add your project components here -->
+        <component>
+            <implementation-class>com.perl5.lang.perl.idea.components.PerlProjectComponent</implementation-class>
+        </component>
+    </project-components>
 
-
-      <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
-      <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
-
-      <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
-      <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
-
-  </extensions>
-
-  <application-components>
-  </application-components>
-
-  <project-components>
-    <!-- Add your project components here -->
-      <component>
-          <implementation-class>com.perl5.lang.perl.idea.components.PerlProjectComponent</implementation-class>
-      </component>
-  </project-components>
-
-  <actions>
-    <!-- Add your actions here -->
-  </actions>
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
 
 </idea-plugin>
