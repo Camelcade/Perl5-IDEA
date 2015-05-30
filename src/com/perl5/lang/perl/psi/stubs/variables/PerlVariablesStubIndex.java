@@ -21,6 +21,7 @@ import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlGlobalVariable;
 import com.perl5.lang.perl.psi.PerlPerlGlob;
+import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -28,7 +29,7 @@ import java.util.Collection;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlGlobalVariable> implements PerlVariableStubIndexKeys
+public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlVariable> implements PerlVariableStubIndexKeys
 {
 	public static final int VERSION = 0;
 

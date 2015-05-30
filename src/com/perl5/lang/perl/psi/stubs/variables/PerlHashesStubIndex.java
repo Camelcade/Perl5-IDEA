@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.stubs.variables;
 
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlGlobalVariable;
+import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -27,7 +28,7 @@ public class PerlHashesStubIndex extends PerlVariablesStubIndex
 {
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlGlobalVariable> getKey()
+	public StubIndexKey<String, PerlVariable> getKey()
 	{
 		return KEY_HASH;
 	}

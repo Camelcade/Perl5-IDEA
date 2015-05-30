@@ -129,7 +129,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 }
         );
 
-        // router defined
+        // Variables
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_NAME).withLanguage(PerlLanguage.INSTANCE),
@@ -140,7 +140,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                                @NotNull final CompletionResultSet resultSet)
                     {
 
-                        final PsiFile file = parameters.getOriginalFile();
                         final PsiElement variableName = parameters.getPosition().getParent();
                         assert variableName != null;
 
@@ -159,6 +158,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                         Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
 
+                                        // locals, todo we should limit with lexicaly visible
                                         for (PerlVariable variable : declaredVariables)
                                         {
                                             if (variable instanceof PerlPerlScalar)
@@ -180,6 +180,23 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                             }
                                         }
+
+                                        // global scalars
+                                        for( String name: PerlScalarUtil.listDefinedGlobalScalars(variableName.getProject()))
+                                        {
+                                            resultSet.addElement(LookupElementBuilder.create(name));
+                                        }
+                                        // global arrays
+                                        for( String name: PerlArrayUtil.listDefinedGlobalArrays(variableName.getProject()))
+                                        {
+                                            resultSet.addElement(LookupElementBuilder.create(name + "[]"));
+                                        }
+                                        // global hashes
+                                        for( String name: PerlHashUtil.listDefinedGlobalHahses(variableName.getProject()))
+                                        {
+                                            resultSet.addElement(LookupElementBuilder.create(name + "{}"));
+                                        }
+
                                     }
                                 });
                             else if (perlVariable instanceof PerlPerlArray)
@@ -211,8 +228,25 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                                                 PerlVariableName variableName = variable.getVariableName();
                                                 if (variableName != null && variableName.getName() != null)
                                                     resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
-
                                             }
+                                        }
+                                        // global scalars
+                                        if( useScalars )
+                                        {
+                                            for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableName.getProject()))
+                                            {
+                                                resultSet.addElement(LookupElementBuilder.create(name));
+                                            }
+                                        }
+                                        // global arrays
+                                        for( String name: PerlArrayUtil.listDefinedGlobalArrays(variableName.getProject()))
+                                        {
+                                            resultSet.addElement(LookupElementBuilder.create(name));
+                                        }
+                                        // global hashes
+                                        for( String name: PerlHashUtil.listDefinedGlobalHahses(variableName.getProject()))
+                                        {
+                                            resultSet.addElement(LookupElementBuilder.create(name + "{}"));
                                         }
                                     }
                                 });
@@ -242,6 +276,21 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                             }
                                         }
+
+                                        // global scalars
+                                        if( useScalars )
+                                        {
+                                            for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableName.getProject()))
+                                            {
+                                                resultSet.addElement(LookupElementBuilder.create(name));
+                                            }
+                                        }
+                                        // global hashes
+                                        for( String name: PerlHashUtil.listDefinedGlobalHahses(variableName.getProject()))
+                                        {
+                                            resultSet.addElement(LookupElementBuilder.create(name));
+                                        }
+
                                     }
                                 });
                         }
@@ -249,7 +298,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 }
         );
 
-        // current file defined subs
+        // project subs
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
@@ -338,7 +387,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 }
         );
 
-        // built in
+        // built in functions
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
