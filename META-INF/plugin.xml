@@ -27,7 +27,7 @@
   <change-notes><![CDATA[
       <p>0.19 beta</p>
       <ul>
-        <li>Global variables stubs and navigation</li>
+        <li>Implemented global variables autocompletion, navigation and refactoring</li>
       </ul>
 
       <p>0.18 beta</p>
