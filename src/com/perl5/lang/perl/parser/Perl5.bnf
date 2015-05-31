@@ -246,14 +246,17 @@ private statement_variation ::=
 
 require_statement ::= require_term &(PERL_RESERVED | ';' | '}')
 
-sub_definition ::= "sub" namespace_method_static sub_definition_parameters ? block
+sub_definition ::= "sub" canonical_sub_name sub_definition_parameters ? block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= "sub" namespace_method_static sub_declaration_parameters
+sub_declaration ::= "sub" canonical_sub_name sub_declaration_parameters
+
+private canonical_sub_name ::= [namespace] user_function
+
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= PERL_LPAREN [<<parseSubPrototype>>] PERL_RPAREN
@@ -687,16 +690,13 @@ variable_name ::= PERL_VARIABLE_NAME
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
 method ::=
-    namespace '->' scalar_variable      // i belive here could be more
-    | namespace_method_static   // package::method
-    | namespace_method          // package->method
-    | object_method             // $object->method actuall it can be not scalar, but scalar expression, but enough for now
+    namespace '->' (scalar_variable | user_function)
+    | namespace user_function         // package::method
+    | object '->' user_function       // $object->method actuall it can be not scalar, but scalar expression, but enough for now
+    | user_function [namespace]       // method package
     | PERL_FUNCTION_BUILT_IN
     | PERL_KEYWORD
 
-private namespace_method_static ::= [namespace] user_function
-private namespace_method ::= [namespace '->'] user_function
-private object_method ::= object '->' user_function
 object ::= scalar_variable
 
 namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
