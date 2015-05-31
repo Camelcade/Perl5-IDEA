@@ -16,15 +16,8 @@
 
 package com.perl5.lang.perl.psi.stubs.variables;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.stubs.StringStubIndexExtension;
-import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlGlobalVariable;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
 import com.perl5.lang.perl.psi.PerlVariable;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
 
 /**
  * Created by hurricup on 30.05.2015.
