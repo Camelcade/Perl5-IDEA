@@ -17,30 +17,25 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.refactoring.MoveInnerRefactoring;
-import com.intellij.refactoring.MoveMembersRefactoring;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
+import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
 import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,10 +43,10 @@ import java.util.List;
  * Created by hurricup on 25.05.2015.
  *
  */
-public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements PerlNamespace
+public class PerlNamespaceImpl extends LeafPsiElement implements IPerlNamespaceMixin
 {
-	public PerlNamespaceImplMixin(@NotNull ASTNode node){
-		super(node);
+	public PerlNamespaceImpl(@NotNull IElementType type, CharSequence text) {
+		super(type, text);
 	}
 
 	@Override
@@ -105,7 +100,7 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 
 							for(PsiReference inboundReference: ReferencesSearch.search(psiFile))
 							{
-								if( inboundReference.getElement() instanceof PerlNamespace )
+								if( inboundReference.getElement() instanceof IPerlNamespaceMixin)
 									queue.addElement(inboundReference.getElement(), canonicalPackageName);
 							}
 
@@ -144,7 +139,7 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 				name = name + "::";
 		}
 
-		PerlNamespace newName = PerlElementFactory.createPackageName(getProject(), name);
+		IPerlNamespaceMixin newName = PerlElementFactory.createPackageName(getProject(), name);
 		if( newName != null )
 		{
 			replace(newName);
@@ -160,7 +155,7 @@ public class PerlNamespaceImplMixin extends PerlNamedElementImpl implements Perl
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return getFirstChild();
+		return this;
 	}
 
 

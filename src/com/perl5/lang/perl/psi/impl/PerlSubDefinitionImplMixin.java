@@ -21,7 +21,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlLexicalScope;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlUserFunction;
 import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub;
@@ -74,7 +74,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespace();
+		IPerlNamespaceMixin namespace = getNamespace();
 		return namespace != null ? namespace.getName(): null;
 	}
 
@@ -85,4 +85,11 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		assert scope != null;
 		return scope;
 	}
+
+	@Override
+	public IPerlNamespaceMixin getNamespace()
+	{
+		return findChildByClass(IPerlNamespaceMixin.class);
+	}
+
 }

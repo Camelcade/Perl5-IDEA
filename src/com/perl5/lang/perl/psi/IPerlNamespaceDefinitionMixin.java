@@ -14,23 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.variables;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
-import com.perl5.lang.perl.psi.PerlVariable;
-
-import java.util.Collection;
+import com.intellij.psi.PsiElement;
 
 /**
- * Created by hurricup on 30.05.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlVariable> implements PerlVariableStubIndexKeys
+public interface IPerlNamespaceDefinitionMixin extends PsiElement, PerlNamespaceContainer
 {
-	public static final int VERSION = 1;
-
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
 }

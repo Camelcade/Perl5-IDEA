@@ -48,6 +48,8 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	{
 		if( type == PERL_STRING_CONTENT )
 			return new PerlStringContentImpl(type, text);
+		else if( type == PERL_PACKAGE || type == PERL_PACKAGE_BUILT_IN || type == PERL_PACKAGE_DEPRECATED  || type == PERL_PACKAGE_PRAGMA )
+			return new PerlNamespaceImpl(type, text);
 		else
 			return super.createLeaf(type, text);
 	}

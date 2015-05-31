@@ -20,12 +20,11 @@ import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
@@ -38,7 +37,7 @@ import java.util.Collection;
  * Created by hurricup on 25.04.2015.
  *
  */
-public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes
+public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes, PerlElementPatterns
 {
 
     private void fillScalarCompletions(@NotNull CompletionParameters parameters,
@@ -103,7 +102,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         // router built-in
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_NAME).withLanguage(PerlLanguage.INSTANCE),
+                VARIABLE_NAME_PATTERN,
                 new CompletionProvider<CompletionParameters>()
                 {
                     public void addCompletions(@NotNull CompletionParameters parameters,
@@ -130,7 +129,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         // Variables
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_VARIABLE_NAME).withLanguage(PerlLanguage.INSTANCE),
+                VARIABLE_NAME_PATTERN,
                 new CompletionProvider<CompletionParameters>()
                 {
                     public void addCompletions(@NotNull final CompletionParameters parameters,
@@ -299,7 +298,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         // project subs
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
+                FUNCTION_PATTERN,
                 new CompletionProvider<CompletionParameters>()
                 {
                     public void addCompletions(@NotNull final CompletionParameters parameters,
@@ -349,7 +348,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         // functions
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
+                FUNCTION_PATTERN,
                 new CompletionProvider<CompletionParameters>()
                 {
                     public void addCompletions(@NotNull final CompletionParameters parameters,
@@ -366,7 +365,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                 for (PerlUseStatementImpl use : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementImpl.class))
                                 {
-                                    PerlNamespace namespace = use.getNamespace();
+                                    IPerlNamespaceMixin namespace = use.getNamespace();
 
                                     if (namespace != null)
                                         resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
@@ -374,7 +373,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                 for (PerlRequireTermImpl use : PsiTreeUtil.findChildrenOfType(file, PerlRequireTermImpl.class))
                                 {
-                                    PerlNamespace namespace = use.getNamespace();
+                                    IPerlNamespaceMixin namespace = use.getNamespace();
 
                                     if (namespace != null)
                                         resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
@@ -388,7 +387,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         // built in functions
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
+                FUNCTION_PATTERN,
                 new CompletionProvider<CompletionParameters>()
                 {
                     public void addCompletions(@NotNull CompletionParameters parameters,
@@ -407,24 +406,23 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         // built in package
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_PACKAGE).withLanguage(PerlLanguage.INSTANCE),
+                NAMESPACE_NAME_PATTERN,
                 new PerlPackageCompletionProvider()
         );
 
         // project package
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_PACKAGE).withLanguage(PerlLanguage.INSTANCE),
+                NAMESPACE_NAME_PATTERN,
                 new PerlBuiltInPackageCompletionProvider()
         );
 
         // string in use statement
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement(PerlElementTypes.PERL_STRING_CONTENT).withLanguage(PerlLanguage.INSTANCE).inside(PlatformPatterns.psiElement(PerlUseStatement.class)),
+                STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN),
                 new PerlUseParametersCompletionProvider()
         );
-
     }
 
 	@Override

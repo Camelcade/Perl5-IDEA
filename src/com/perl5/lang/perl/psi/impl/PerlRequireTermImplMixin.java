@@ -16,30 +16,19 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.PerlRequireTerm;
 
 /**
- * Created by hurricup on 24.05.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlMethodImplMixin extends PerlElementInContextImpl implements PerlMethod
+public abstract class PerlRequireTermImplMixin extends ASTWrapperPsiElement implements PerlRequireTerm
 {
-	public PerlMethodImplMixin(@NotNull ASTNode node){
-		super(node);
-	}
-
-	@Override
-	public String getExplicitPackageName()
+	public PerlRequireTermImplMixin(ASTNode node)
 	{
-		IPerlNamespaceMixin namespace = getNamespace();
-		// todo: detecting from object
-		// todo: detecting from scalar
-		if( namespace != null )
-			return ((PerlNamespaceImpl)namespace).getName();
-		else
-			return null;
+		super(node);
 	}
 
 	@Override

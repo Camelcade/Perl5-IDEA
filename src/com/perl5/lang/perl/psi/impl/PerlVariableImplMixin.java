@@ -16,16 +16,14 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlLexicalScope;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
@@ -75,8 +73,14 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespace();
+		IPerlNamespaceMixin namespace = getNamespace();
 		return namespace != null ? namespace.getName(): null;
+	}
+
+	@Override
+	public IPerlNamespaceMixin getNamespace()
+	{
+		return findChildByClass(IPerlNamespaceMixin.class);
 	}
 
 }

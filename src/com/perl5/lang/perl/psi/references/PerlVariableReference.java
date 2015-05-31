@@ -28,7 +28,6 @@ import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -44,7 +43,7 @@ public class PerlVariableReference extends PerlReferencePoly
 		HASH
 	};
 
-	private PerlNamespace myNamespace;
+	private IPerlNamespaceMixin myNamespace;
 	private String myVariableName;
 	private VariableType actualType;
 	private PerlVariable myVariable;

@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -26,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 public interface PerlVariable extends PerlLexicalScopeElement, PerlPackagedElement, PsiElement
 {
 	@Nullable
-	PerlNamespace getNamespace();
+	IPerlNamespaceMixin getNamespace();
 
 	@Nullable
 	PerlVariableName getVariableName();

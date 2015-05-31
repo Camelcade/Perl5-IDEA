@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface IPerlPerlGlobMixin extends PsiElement
+public interface IPerlPerlGlobMixin extends PsiElement, PerlPackagedElement, PerlNamespaceContainer
 {
 	String getGlobName();
 }

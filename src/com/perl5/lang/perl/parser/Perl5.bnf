@@ -140,7 +140,7 @@ limitations under the License.
 
     implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.PerlLexicalScope";
 
-    implements("variable_declaration_lexical|variable_declaration_local")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
+    implements("variable_declaration_lexical|variable_declaration_local")="com.perl5.lang.perl.psi.IPerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.impl.PerlLexicalScopeElementMixin"
 
     elementTypeFactory("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
@@ -152,25 +152,32 @@ limitations under the License.
 
     stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImplMixin"
+    implements("namespace_definition")="com.perl5.lang.perl.psi.IPerlNamespaceDefinitionMixin"
 
     stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixin"
-    implements("sub_definition")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.PerlLexicalScope"
+    implements("sub_definition")="com.perl5.lang.perl.psi.IPerlSubDefinitionMixin"
 
     stubClass("perl_glob")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
     mixin("perl_glob")="com.perl5.lang.perl.psi.impl.PerlPerlGlobImplMixin"
-    implements("perl_glob")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.IPerlPerlGlobMixin"
+    implements("perl_glob")="com.perl5.lang.perl.psi.IPerlPerlGlobMixin"
 
     mixin("variable_name")="com.perl5.lang.perl.psi.impl.PerlVariableNameImplMixin"
     implements("variable_name")="com.perl5.lang.perl.psi.PerlNamedElement"
 
-    mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
-    implements("namespace")="com.perl5.lang.perl.psi.PerlNamedElement"
+//    mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
+//    implements("namespace")="com.perl5.lang.perl.psi.PerlNamedElement"
+
 
     mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
-    implements("user_function")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.PerlNamedElement"
+    implements("user_function")="com.perl5.lang.perl.psi.IPerlUserFunctionMixin"
+
+    mixin("require_term")="com.perl5.lang.perl.psi.impl.PerlRequireTermImplMixin"
+    implements("require_term")="com.perl5.lang.perl.psi.IPerlRequireTermImplMixin"
 
     mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixin";
+    implements("method")="com.perl5.lang.perl.psi.PerlNamespaceContainer";
+
     mixin("object")="com.perl5.lang.perl.psi.impl.PerlObjectImplMixin"
  }
 
@@ -699,5 +706,5 @@ method ::=
 
 object ::= scalar_variable
 
-namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+private namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
 user_function ::= PERL_FUNCTION

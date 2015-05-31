@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 
 /**
@@ -46,9 +46,16 @@ public abstract class PerlUseStatementImplMixin extends ASTWrapperPsiElement imp
 	@Override
 	public String getPackageName()
 	{
-		PerlNamespace ns = getNamespace();
+		IPerlNamespaceMixin ns = getNamespace();
 		if( ns != null )
 			return ns.getName();
 		return null;
 	}
+
+	@Override
+	public IPerlNamespaceMixin getNamespace()
+	{
+		return findChildByClass(IPerlNamespaceMixin.class);
+	}
+
 }

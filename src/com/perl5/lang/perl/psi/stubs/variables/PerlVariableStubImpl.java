@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.stubs.variables;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlGlobalVariable;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
