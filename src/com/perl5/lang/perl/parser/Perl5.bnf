@@ -180,7 +180,7 @@ private file_item ::= namespace_block | namespace_element
 
 block ::= "{" file_items "}" //{pin=1}  //fixme we shoud be able to distinct from anon hash
 
-private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI )
+private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI ) {recoverWhile=recover_statement}
 
 // package keyword
 namespace_block ::= "package"  namespace_definition (block | PERL_SEMI namespace_content) {pin=1}
@@ -201,7 +201,6 @@ private compound_statement ::=
         | for_compound
         | foreach_compound
      )
-     {recoverWhile=recover_statement}
 
 if_compound ::= 'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 unless_compound ::= 'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
@@ -223,8 +222,8 @@ private block_compound ::= block [compound_continue_block]
 
 
 // for/foreach
-for_compound ::= 'for' for_arguments // {pin=1}
-foreach_compound ::= 'foreach' for_arguments // {pin=1}
+for_compound ::= 'for' for_arguments  {pin=1}
+foreach_compound ::= 'foreach' for_arguments  {pin=1}
 private for_arguments ::=
     for_iterator block
     | for_list block_compound
@@ -235,7 +234,7 @@ for_iterator ::= PERL_LPAREN [expr]  PERL_SEMI [expr] PERL_SEMI [expr] PERL_RPAR
 for_list ::=
     [ variable_declaration | variable ] parenthesised_expr
 
-statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2 recoverWhile=recover_statement}
+statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2}
 
 private statement_variation ::=
     use_statement
@@ -246,7 +245,7 @@ private statement_variation ::=
 
 require_statement ::= require_term &(PERL_RESERVED | ';' | '}')
 
-sub_definition ::= "sub" canonical_sub_name sub_definition_parameters ? block
+sub_definition ::= "sub" canonical_sub_name [sub_definition_parameters] block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
