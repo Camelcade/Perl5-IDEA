@@ -16,29 +16,35 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlFunction;
 import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlVariableName;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 24.05.2015.
+ *
  */
-public class PerlVariableNameImplMixin extends PerlNamedElementImpl implements PerlVariableName
+public class PerlFunctionImpl extends LeafPsiElement implements PerlFunction
 {
-	public PerlVariableNameImplMixin(@NotNull ASTNode node){
-		super(node);
+	public PerlFunctionImpl(@NotNull IElementType type, CharSequence text) {
+		super(type, text);
 	}
 
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PerlVariableName newName = PerlElementFactory.createVariableName(getProject(), name);
-		if( newName != null )
-			replace(newName);
+		PerlFunctionImpl newFunction = PerlElementFactory.createUserFunction(getProject(), name);
+		if( newFunction != null )
+			replace(newFunction);
+		else
+			throw new IncorrectOperationException("Unable to create function from: "+ name);
 		return this;
 	}
 
@@ -46,7 +52,20 @@ public class PerlVariableNameImplMixin extends PerlNamedElementImpl implements P
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return getFirstChild();
+		return this;
+	}
+
+	@Override
+	public String getName()
+	{
+		return this.getText();
+	}
+
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
 	}
 
 }

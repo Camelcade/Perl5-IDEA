@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.idea;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.*;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +55,7 @@ public class PerlFileListener implements VirtualFileListener
 				PerlPackageUtil.handlePackagePathChange(directoryRenameQueue,virtualFile,oldPath);
 				directoryRenameQueue.run();
 			}
-			else if(!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()) && !(event.getSource() instanceof IPerlNamespaceMixin))
+			else if(!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()) && !(event.getSource() instanceof PerlNamespace))
 			{
 				// package file renamed
 				RenameRefactoringQueue fileQueue = new RenameRefactoringQueue(myProject);
@@ -97,7 +97,7 @@ public class PerlFileListener implements VirtualFileListener
 				PerlPackageUtil.handlePackagePathChange(directoryMoveQueue,movedFile,oldPath);
 				directoryMoveQueue.run();
 			}
-			if( !movedFile.isDirectory() && "pm".equals(movedFile.getExtension()) && !(event.getSource() instanceof IPerlNamespaceMixin) )
+			if( !movedFile.isDirectory() && "pm".equals(movedFile.getExtension()) && !(event.getSource() instanceof PerlNamespace) )
 			{
 				// package file moved
 				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);

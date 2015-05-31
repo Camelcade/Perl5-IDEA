@@ -14,37 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
+import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlFunction;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PerlPerlGlob
+public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement implements PerlSubDeclaration
 {
-	public PerlPerlGlobImplMixin(@NotNull ASTNode node){
+	public PerlSubDeclarationImplMixin(@NotNull ASTNode node){
 		super(node);
 	}
 
-	public PerlPerlGlobImplMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
-		super(stub,nodeType);
-	}
-
-	@Override
 	public String getPackageName()
 	{
-		PerlGlobStub stub = getStub();
-		if( stub != null)
-			return stub.getPackageName();
-
 		String namespace = getExplicitPackageName();
 
 		if( namespace == null )
@@ -53,33 +43,37 @@ public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<Perl
 		return namespace;
 	}
 
-	@Override
-	public String getGlobName()
+	public String getFunctionName()
 	{
-		PerlGlobStub stub = getStub();
-		if( stub != null)
-			return stub.getGlobName();
-
-		return getVariableName().getName();
+		PerlFunction function = getUserFunction();
+		return function.getName();
 	}
 
 	@Override
 	public String getContextPackageName()
 	{
-		return PerlPackageUtil.getElementPackageName(this);
+		return PerlPackageUtil.getContextPackageName(this);
 	}
 
 	@Override
 	public String getExplicitPackageName()
 	{
-		IPerlNamespaceMixin namespace = getNamespace();
+		PerlNamespace namespace = getNamespace();
 		return namespace != null ? namespace.getName(): null;
 	}
 
 	@Override
-	public IPerlNamespaceMixin getNamespace()
+	public PerlNamespace getNamespace()
 	{
-		return findChildByClass(IPerlNamespaceMixin.class);
+		return findChildByClass(PerlNamespace.class);
 	}
+
+
+	@Override
+	public PerlFunction getUserFunction()
+	{
+		return findChildByClass(PerlFunction.class);
+	}
+
 
 }

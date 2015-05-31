@@ -14,26 +14,48 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
-import com.perl5.lang.perl.psi.PerlRequireTerm;
+import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlRequireTermImplMixin extends ASTWrapperPsiElement implements PerlRequireTerm
+public abstract class PerlUseStatementImplMixin extends ASTWrapperPsiElement implements PerlUseStatement
 {
-	public PerlRequireTermImplMixin(ASTNode node)
+	public PerlUseStatementImplMixin(ASTNode node)
 	{
 		super(node);
 	}
 
 	@Override
-	public IPerlNamespaceMixin getNamespace()
+	public boolean isUseParent()
 	{
-		return findChildByClass(IPerlNamespaceMixin.class);
+		return "parent".equals(getPackageName());
 	}
+
+	@Override
+	public boolean isUseBase()
+	{
+		return "base".equals(getPackageName());
+	}
+
+	@Override
+	public String getPackageName()
+	{
+		PerlNamespace ns = getNamespace();
+		if( ns != null )
+			return ns.getName();
+		return null;
+	}
+
+	@Override
+	public PerlNamespace getNamespace()
+	{
+		return findChildByClass(PerlNamespace.class);
+	}
+
 }

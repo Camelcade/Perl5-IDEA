@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi;
 
 import com.intellij.lang.DefaultASTFactoryImpl;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.impl.source.CharTableImpl;
-import com.intellij.psi.impl.source.codeStyle.CodeEditUtil;
 import com.intellij.psi.impl.source.tree.LeafElement;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.CharTable;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElementTypes
 {
@@ -48,6 +44,10 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	{
 		if( type == PERL_STRING_CONTENT )
 			return new PerlStringContentImpl(type, text);
+		else if( type == PERL_VARIABLE_NAME )
+			return new PerlVariableNameImpl(type, text);
+		else if( type == PERL_FUNCTION )
+			return new PerlFunctionImpl(type, text);
 		else if( type == PERL_PACKAGE || type == PERL_PACKAGE_BUILT_IN || type == PERL_PACKAGE_DEPRECATED  || type == PERL_PACKAGE_PRAGMA )
 			return new PerlNamespaceImpl(type, text);
 		else

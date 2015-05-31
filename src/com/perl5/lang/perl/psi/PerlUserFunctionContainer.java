@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface IPerlNamespaceMixin extends PerlNamedElement
+public interface PerlUserFunctionContainer
 {
-
+	PerlFunction getUserFunction();
 }

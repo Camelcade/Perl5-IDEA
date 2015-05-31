@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlMethod;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
+import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlFunction;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlMethodImplMixin extends PerlElementInContextImpl implements PerlMethod
+public abstract class PerlMethodImplMixin extends PerlPackageElementMixin implements PerlMethod
 {
 	public PerlMethodImplMixin(@NotNull ASTNode node){
 		super(node);
@@ -33,18 +34,24 @@ public abstract class PerlMethodImplMixin extends PerlElementInContextImpl imple
 	@Override
 	public String getExplicitPackageName()
 	{
-		IPerlNamespaceMixin namespace = getNamespace();
+		PerlNamespace namespace = getNamespace();
 		// todo: detecting from object
 		// todo: detecting from scalar
 		if( namespace != null )
-			return ((PerlNamespaceImpl)namespace).getName();
+			return namespace.getName();
 		else
 			return null;
 	}
 
 	@Override
-	public IPerlNamespaceMixin getNamespace()
+	public PerlNamespace getNamespace()
 	{
-		return findChildByClass(IPerlNamespaceMixin.class);
+		return findChildByClass(PerlNamespace.class);
+	}
+
+	@Override
+	public PerlFunction getUserFunction()
+	{
+		return findChildByClass(PerlFunction.class);
 	}
 }

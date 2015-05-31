@@ -23,5 +23,5 @@ import com.intellij.psi.PsiElement;
  */
 public interface PerlNamespaceContainer extends PsiElement
 {
-	public IPerlNamespaceMixin getNamespace();
+	public PerlNamespace getNamespace();
 }

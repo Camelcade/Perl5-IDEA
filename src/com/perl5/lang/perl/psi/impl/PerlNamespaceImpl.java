@@ -16,18 +16,18 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -43,7 +43,7 @@ import java.util.List;
  * Created by hurricup on 25.05.2015.
  *
  */
-public class PerlNamespaceImpl extends LeafPsiElement implements IPerlNamespaceMixin
+public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 {
 	public PerlNamespaceImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
@@ -100,7 +100,7 @@ public class PerlNamespaceImpl extends LeafPsiElement implements IPerlNamespaceM
 
 							for(PsiReference inboundReference: ReferencesSearch.search(psiFile))
 							{
-								if( inboundReference.getElement() instanceof IPerlNamespaceMixin)
+								if( inboundReference.getElement() instanceof PerlNamespace)
 									queue.addElement(inboundReference.getElement(), canonicalPackageName);
 							}
 
@@ -139,7 +139,7 @@ public class PerlNamespaceImpl extends LeafPsiElement implements IPerlNamespaceM
 				name = name + "::";
 		}
 
-		IPerlNamespaceMixin newName = PerlElementFactory.createPackageName(getProject(), name);
+		PerlNamespace newName = PerlElementFactory.createPackageName(getProject(), name);
 		if( newName != null )
 		{
 			replace(newName);
@@ -163,7 +163,14 @@ public class PerlNamespaceImpl extends LeafPsiElement implements IPerlNamespaceM
 	@Override
 	public String getName()
 	{
-		assert getNameIdentifier() != null;
-		return PerlPackageUtil.getCanonicalPackageName(getNameIdentifier().getText());
+		return PerlPackageUtil.getCanonicalPackageName(this.getText());
 	}
+
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+	}
+
 }

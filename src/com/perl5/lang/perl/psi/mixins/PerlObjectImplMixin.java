@@ -14,37 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlPackagedElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.PerlObject;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 25.05.2015.
- * This is an element with context, like variable, function
+ * Created by hurricup on 24.05.2015.
+ * This class represents an object, which method being invoked; At the moment it may be represented with scalar variable only
  */
-public abstract class PerlElementInContextImpl extends PerlNamedElementImpl implements PerlPackagedElement
+public abstract class PerlObjectImplMixin extends ASTWrapperPsiElement implements PerlObject
 {
-	public PerlElementInContextImpl(@NotNull ASTNode node){
+	public PerlObjectImplMixin(@NotNull ASTNode node){
 		super(node);
 	}
 
-	@Override
-	public String getContextPackageName()
+	public String getNamespaceName()
 	{
-		return PerlPackageUtil.getElementPackageName(this);
+		// got object and trying to guess namespace from it
+		if( "$self".equals(getText()))
+		{
+			// Assume that $self is being used in the current package
+		}
+		return null;
 	}
 
-	@Override
-	public String getPackageName()
-	{
-		String namespace = getExplicitPackageName();
-
-		if( namespace == null )
-			namespace = getContextPackageName();
-
-		return namespace;
-	}
 }

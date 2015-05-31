@@ -24,7 +24,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReference;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.apache.commons.lang.StringUtils;
@@ -45,8 +45,8 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	public PerlNamespaceFileReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		assert element instanceof IPerlNamespaceMixin;
-		packageName = ((IPerlNamespaceMixin) element).getName();
+		assert element instanceof PerlNamespace;
+		packageName = ((PerlNamespace) element).getName();
 		if( element.getText().endsWith("::"))
 			setRangeInElement(new TextRange(0, element.getTextLength()-2));
 	}
@@ -94,8 +94,8 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
-		assert myElement instanceof IPerlNamespaceMixin;
-		String currentName = ((IPerlNamespaceMixin) myElement).getName();
+		assert myElement instanceof PerlNamespace;
+		String currentName = ((PerlNamespace) myElement).getName();
 		if( currentName != null && newElementName.endsWith(".pm") )
 		{
 			String[] nameChunks = currentName.split("::");

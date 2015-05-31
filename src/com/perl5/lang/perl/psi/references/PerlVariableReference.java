@@ -43,7 +43,7 @@ public class PerlVariableReference extends PerlReferencePoly
 		HASH
 	};
 
-	private IPerlNamespaceMixin myNamespace;
+	private PerlNamespace myNamespace;
 	private String myVariableName;
 	private VariableType actualType;
 	private PerlVariable myVariable;

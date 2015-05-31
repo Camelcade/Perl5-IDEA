@@ -14,31 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlObject;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlRequireTerm;
 
 /**
- * Created by hurricup on 24.05.2015.
- * This class represents an object, which method being invoked; At the moment it may be represented with scalar variable only
+ * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlObjectImplMixin extends ASTWrapperPsiElement implements PerlObject
+public abstract class PerlRequireTermImplMixin extends ASTWrapperPsiElement implements PerlRequireTerm
 {
-	public PerlObjectImplMixin(@NotNull ASTNode node){
+	public PerlRequireTermImplMixin(ASTNode node)
+	{
 		super(node);
 	}
 
-	public String getNamespaceName()
+	@Override
+	public PerlNamespace getNamespace()
 	{
-		// got object and trying to guess namespace from it
-		if( "$self".equals(getText()))
-		{
-			// Assume that $self is being used in the current package
-		}
-		return null;
+		return findChildByClass(PerlNamespace.class);
 	}
-
 }

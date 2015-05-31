@@ -25,16 +25,16 @@ import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
-	public static IPerlNamespaceMixin createPackageName(Project project, String name)
+	public static PerlNamespace createPackageName(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "package " + name + ";");
-		return PsiTreeUtil.findChildOfType(file, IPerlNamespaceMixin.class);
+		return PsiTreeUtil.findChildOfType(file, PerlNamespace.class);
 	}
 
-	public static PerlUserFunctionImpl createUserFunction(Project project, String name)
+	public static PerlFunctionImpl createUserFunction(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "sub " + name + ";");
-		return PsiTreeUtil.findChildOfType(file, PerlUserFunctionImpl.class);
+		return PsiTreeUtil.findChildOfType(file, PerlFunctionImpl.class);
 	}
 
 	public static PerlVariableName createVariableName(Project project, String name)

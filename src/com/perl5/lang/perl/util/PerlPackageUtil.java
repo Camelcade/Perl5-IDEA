@@ -27,7 +27,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceBlock;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
@@ -114,7 +114,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 	@NotNull
-	public static String getElementPackageName(PsiElement element)
+	public static String getContextPackageName(PsiElement element)
 	{
 		PerlNamespaceBlock namespaceBlock = PsiTreeUtil.getParentOfType(element, PerlNamespaceBlock.class);
 
@@ -208,7 +208,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 					{
 						for( PerlNamespaceDefinition namespaceDefinition: PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class) )
 						{
-							IPerlNamespaceMixin namespace = namespaceDefinition.getNamespace();
+							PerlNamespace namespace = namespaceDefinition.getNamespace();
 							if( oldPackageName.equals(namespace.getName()))
 							{
 								queue.addElement(namespace,newPackageName);

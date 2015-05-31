@@ -308,8 +308,8 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                         String packageName = null;
                         PsiElement parent = parameters.getPosition().getParent();
-                        if( parent != null && parent instanceof PerlPackagedElement)
-                            packageName = ((PerlPackagedElement) parent).getPackageName();
+                        if( parent != null && parent instanceof PerlPackageElement)
+                            packageName = ((PerlPackageElement) parent).getPackageName();
 
                         final String finalPackageName = packageName == null ? null: packageName + "::";
 
@@ -365,7 +365,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                 for (PerlUseStatementImpl use : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementImpl.class))
                                 {
-                                    IPerlNamespaceMixin namespace = use.getNamespace();
+                                    PerlNamespace namespace = use.getNamespace();
 
                                     if (namespace != null)
                                         resultSet.addElement(LookupElementBuilder.create(namespace.getText()));
@@ -373,7 +373,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
                                 for (PerlRequireTermImpl use : PsiTreeUtil.findChildrenOfType(file, PerlRequireTermImpl.class))
                                 {
-                                    IPerlNamespaceMixin namespace = use.getNamespace();
+                                    PerlNamespace namespace = use.getNamespace();
 
                                     if (namespace != null)
                                         resultSet.addElement(LookupElementBuilder.create(namespace.getText()));

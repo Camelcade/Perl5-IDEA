@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlVariableName;
 import com.perl5.lang.perl.psi.PerlLexicalScope;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -67,20 +69,26 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getContextPackageName()
 	{
-		return PerlPackageUtil.getElementPackageName(this);
+		return PerlPackageUtil.getContextPackageName(this);
 	}
 
 	@Override
 	public String getExplicitPackageName()
 	{
-		IPerlNamespaceMixin namespace = getNamespace();
+		PerlNamespace namespace = getNamespace();
 		return namespace != null ? namespace.getName(): null;
 	}
 
 	@Override
-	public IPerlNamespaceMixin getNamespace()
+	public PerlNamespace getNamespace()
 	{
-		return findChildByClass(IPerlNamespaceMixin.class);
+		return findChildByClass(PerlNamespace.class);
 	}
 
+	@Nullable
+	@Override
+	public PerlVariableName getVariableName()
+	{
+		return findChildByClass(PerlVariableName.class);
+	}
 }

@@ -21,11 +21,10 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.PerlUserFunction;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,14 +34,27 @@ import java.util.List;
 public class PerlUserFunctionReference extends PerlReferencePoly
 {
 	String functionName;
-	String packageName;
+	String packageName = null;
 	String canonicalName;
 
 	public PerlUserFunctionReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
-		assert element instanceof PerlUserFunction;
-		functionName = ((PerlUserFunction) element).getName();
-		packageName = ((PerlUserFunction) element).getPackageName();
+		assert element instanceof PerlFunction;
+		functionName = ((PerlFunction) element).getName();
+
+		PsiElement parent = element.getParent();
+
+
+		if( parent instanceof PerlNamespaceContainer )
+		{
+			PerlNamespace ns = ((PerlNamespaceContainer) parent).getNamespace();
+			if( ns != null )
+				packageName = ns.getName();
+		}
+
+		if( packageName == null )
+			packageName = PerlPackageUtil.getContextPackageName(element);
+
 		canonicalName = packageName + "::" + functionName;
 	}
 

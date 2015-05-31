@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.IPerlNamespaceMixin;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import org.jetbrains.annotations.NotNull;
@@ -38,9 +38,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	}
 
 	@Override
-	public IPerlNamespaceMixin getNamespace()
+	public PerlNamespace getNamespace()
 	{
-		return findChildByClass(IPerlNamespaceMixin.class);
+		return findChildByClass(PerlNamespace.class);
 	}
 
 }

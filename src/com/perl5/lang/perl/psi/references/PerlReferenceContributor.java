@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
@@ -53,7 +52,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlUserFunction;
+						assert element instanceof PerlFunction;
 
 						if( element.getParent() instanceof PerlSubDefinitionImpl)
 							return new PsiReference[]{new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};

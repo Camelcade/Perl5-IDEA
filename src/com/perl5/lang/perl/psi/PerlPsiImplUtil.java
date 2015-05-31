@@ -16,20 +16,12 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nullable;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
- * Created by hurricup on 27.05.2015.
+ * Created by hurricup on 26.04.2015.
  */
-public interface PerlVariable extends PerlLexicalScopeElement, PerlPackageElement, PsiElement
+public class PerlPsiImplUtil implements PerlElementTypes
 {
-	@Nullable
-	PerlNamespace getNamespace();
 
-	@Nullable
-	PerlVariableName getVariableName();
-
-	@Nullable
-	PerlScalarSigils getScalarSigils();
 }
