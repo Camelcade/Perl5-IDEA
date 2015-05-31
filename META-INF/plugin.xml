@@ -103,7 +103,7 @@
         <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
         <lang.syntaxHighlighterFactory key="Perl5" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
-        <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
+        <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.completion.PerlCompletionContributor"/>
         <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
         <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
         <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlBraceMatcher"/>

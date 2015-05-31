@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.completion;
 
 import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.completion.actions.CodeCompletionAction;
+import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.testFramework.fixtures.CompletionAutoPopupTester;
 import com.intellij.util.ProcessingContext;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -33,6 +38,7 @@ import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -348,7 +354,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 }
         );
 
-        // used packages
+        // functions
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns.psiElement(PerlElementTypes.PERL_FUNCTION).withLanguage(PerlLanguage.INSTANCE),
@@ -405,8 +411,22 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                     }
                 }
         );
-    }
 
+        // built in package
+        extend(
+                CompletionType.BASIC,
+                PlatformPatterns.psiElement(PerlElementTypes.PERL_PACKAGE).withLanguage(PerlLanguage.INSTANCE),
+                new PerlPackageCompletionProvider()
+        );
+
+        // project package
+        extend(
+                CompletionType.BASIC,
+                PlatformPatterns.psiElement(PerlElementTypes.PERL_PACKAGE).withLanguage(PerlLanguage.INSTANCE),
+                new PerlBuiltInPackageCompletionProvider()
+        );
+
+    }
 
 	@Override
 	public void fillCompletionVariants(@NotNull CompletionParameters parameters, @NotNull CompletionResultSet result)
