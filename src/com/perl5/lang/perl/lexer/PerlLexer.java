@@ -831,6 +831,10 @@ public class PerlLexer extends PerlLexerGenerated{
 		return knownPackages.get(packageName);
 	}
 
+	/**
+	 * Guessing bareword as function or package, if it has been used before
+	 * @return token type
+	 */
 	@Override
 	public IElementType getBarewordTokenType()
 	{
@@ -839,5 +843,16 @@ public class PerlLexer extends PerlLexerGenerated{
 			return knownPackages.get(bareword);
 
 		return PerlFunctionUtil.getFunctionType(yytext().toString());
+	}
+
+	/**
+	 * Checks if package has been used or is built in
+	 * @return true if it's package, false otherwise
+	 */
+	@Override
+	public boolean isKnownPackage()
+	{
+		String packageName = yytext().toString();
+		return  knownPackages.containsKey(packageName) || PerlPackageUtil.isBuiltIn(packageName);
 	}
 }
