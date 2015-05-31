@@ -21,12 +21,11 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.util.PerlFunctionUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,11 +34,17 @@ public class PerlLexer extends PerlLexerGenerated{
 	protected IElementType lastSignificantTokenType;
 	protected String lastSignificantToken;
 	protected IElementType lastTokenType;
+	protected HashMap<String,IElementType> knownPackages = new HashMap<>();
 
 	public PerlLexer(java.io.Reader in) {
 		super(in);
 	}
 
+	/**
+	 * Lexers advance method. Parses some thing here, or just invoking generated flex parser
+	 * @return next token type
+	 * @throws IOException
+	 */
 	public IElementType advance() throws IOException{
 
 		CharSequence buffer = getBuffer();
@@ -800,6 +805,10 @@ public class PerlLexer extends PerlLexerGenerated{
 		return PERL_SEMI;
 	}
 
+	/**
+	 * Logic for choosing type of braced bareword, like {defined}
+	 * @return token type
+	 */
 	@Override
 	public IElementType getBracedBarewordTokenType()
 	{
@@ -807,5 +816,28 @@ public class PerlLexer extends PerlLexerGenerated{
 			return PERL_OPERATOR_UNARY;
 
 		return PERL_STRING_CONTENT;
+	}
+
+	/**
+	 * Detecting package type (built-in or regular). Register package in the internal hashmap
+	 * @return token type
+	 */
+	@Override
+	public IElementType getPackageType()
+	{
+		String packageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
+		if( !knownPackages.containsKey(packageName))
+			knownPackages.put(packageName,PerlPackageUtil.getPackageType(packageName));
+		return knownPackages.get(packageName);
+	}
+
+	@Override
+	public IElementType getBarewordTokenType()
+	{
+		String bareword = yytext().toString();
+		if( knownPackages.containsKey(bareword) )
+			return knownPackages.get(bareword);
+
+		return PerlFunctionUtil.getFunctionType(yytext().toString());
 	}
 }

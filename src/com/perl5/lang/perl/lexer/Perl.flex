@@ -154,9 +154,11 @@ CAPTURE_METHOD_CALL = "->"{BAREWORD}
 CAPTURE_SUPER_METHOD_CALL = "->"{EMPTY_SPACE}*"SUPER::"
 
 // package->method
+// fixme should be meaningless space and comments handling
 CAPTURE_PACKAGE_METHOD_CALL = {PERL_PACKAGE_METHOD}{EMPTY_SPACE}*"->"{EMPTY_SPACE}*{BAREWORD}
 
 // package->$method
+// fixme should be meaningless space and comments handling
 CAPTURE_PACKAGE_METHOD_CALL_VAR = {PERL_PACKAGE_METHOD}{EMPTY_SPACE}*"->"{EMPTY_SPACE}*"$"
 
 CHAR_ANY        = .|{NEW_LINE}
@@ -414,7 +416,7 @@ TRANS_MODIFIERS = [cdsr]
 
 <LEX_SURE_PACKAGE_PACKAGE>
 {
-   {PERL_PACKAGE_SURE} {endCustomBlock();return PerlPackageUtil.getPackageType(yytext().toString());}
+   {PERL_PACKAGE_SURE} {endCustomBlock();return getPackageType();}
 //   {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -666,7 +668,7 @@ TRANS_MODIFIERS = [cdsr]
 {CAPTURE_HANDLE_FILETEST} {startCustomBlock(LEX_HANDLE_FILETEST);break;}
 {CAPTURE_HANDLE_PRINT} {startCustomBlock(LEX_HANDLE);break;}
 {CAPTURE_HANDLE} {startCustomBlock(LEX_HANDLE);break;}
-{BAREWORD} { return PerlFunctionUtil.getFunctionType(yytext().toString());}
+{BAREWORD} { return getBarewordTokenType();}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }
