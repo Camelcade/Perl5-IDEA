@@ -54,6 +54,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					{
 						assert element instanceof PerlFunction;
 
+						// fixme this should be done using patterns
 						if( element.getParent() instanceof PerlSubDefinitionImpl)
 							return new PsiReference[]{new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
 						else
@@ -94,6 +95,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 
 						ArrayList<PsiReference> result = new ArrayList<>();
 
+						// fixme this should be done using patterns
 						if( nameSpaceContainer instanceof PerlUseStatement
 								|| nameSpaceContainer instanceof PerlRequireTerm
 								)
@@ -111,7 +113,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 			@Override
 			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 			{
-				return new PsiReference[0];
+				return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
 			}
 		});
 	}

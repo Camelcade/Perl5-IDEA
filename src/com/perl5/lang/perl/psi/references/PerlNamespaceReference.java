@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
+import com.perl5.lang.perl.psi.PerlNamedElement;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -38,8 +39,8 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		assert element instanceof PerlNamespace;
-		canonicalPackageName = ((PerlNamespace) element).getName();
+		assert element instanceof PerlNamedElement;
+		canonicalPackageName = ((PerlNamedElement) element).getName();
 		if( element.getText().endsWith("::"))
 			setRangeInElement(new TextRange(0, element.getTextLength()-2));
 	}
@@ -61,7 +62,8 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
 		{
 			PerlNamespace namespace = namespaceDefinition.getNamespace();
-			result.add(new PsiElementResolveResult(namespace));
+			if( namespace != null )
+				result.add(new PsiElementResolveResult(namespace));
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);
