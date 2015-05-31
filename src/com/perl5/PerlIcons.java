@@ -30,4 +30,7 @@ public class PerlIcons
 	public static final Icon SCRIPT_FILE = IconLoader.getIcon("/com/perl5/icons/perl5classic.png");
 	public static final Icon XS_FILE = IconLoader.getIcon("/com/perl5/icons/xsicon.png");
 	public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/com/perl5/icons/embeddedperl.png");
+	public static final Icon PACKAGE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/package_gutter_icon.png");
+	public static final Icon SUBROUTINE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/subroutine_gutter_icon.png");
+	public static final Icon VARIABLE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/variable_gutter_icon.png");
 }
