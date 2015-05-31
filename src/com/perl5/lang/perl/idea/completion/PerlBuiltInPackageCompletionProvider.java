@@ -22,11 +22,15 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlStatement;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +43,7 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 	public static final InsertHandler<LookupElement> PARENT_PRAGMA_INSERT_HANDLER = new ParentPragmaInsertHandler();
 
 	@Override
-	protected void addCompletions(@NotNull final CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet resultSet)
+	protected void addCompletions(@NotNull final CompletionParameters parameters, final ProcessingContext context, @NotNull final CompletionResultSet resultSet)
 	{
 		ApplicationManager.getApplication().runReadAction(new Runnable()
 		{
@@ -47,6 +51,8 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 			public void run()
 			{
 				// built in packages
+				PerlUseStatement useStatement = PsiTreeUtil.getParentOfType(parameters.getOriginalPosition(), PerlUseStatement.class, true, PerlStatement.class);
+
 				for (String packageName : PerlPackageUtil.BUILT_IN_MAP.keySet())
 				{
 					IElementType packageType = PerlPackageUtil.BUILT_IN_MAP.get(packageName);
@@ -56,11 +62,14 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 
 					if (packageType == PerlElementTypes.PERL_PACKAGE_DEPRECATED)
 						newElement = newElement.withStrikeoutness(true);
-						// todo need icon here
 					else if (packageType == PerlElementTypes.PERL_PACKAGE_PRAGMA)
 					{
-						if (packageName.equals("parent"))
-							insertHandler = PARENT_PRAGMA_INSERT_HANDLER;
+						if ( useStatement != null )
+						{
+							// additional arguments
+							if( packageName.equals("parent") || packageName.equals("base"))
+								insertHandler = PARENT_PRAGMA_INSERT_HANDLER;
+						}
 					}
 
 					if (insertHandler == null)
