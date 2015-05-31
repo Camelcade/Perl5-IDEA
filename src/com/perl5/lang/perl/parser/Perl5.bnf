@@ -172,7 +172,6 @@ limitations under the License.
 
     mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixin";
     mixin("object")="com.perl5.lang.perl.psi.impl.PerlObjectImplMixin"
-    mixin("heredoc_opener")="com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImplMixin"
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////

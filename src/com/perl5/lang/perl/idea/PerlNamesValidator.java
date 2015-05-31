@@ -34,6 +34,6 @@ public class PerlNamesValidator implements NamesValidator
 	@Override
 	public boolean isIdentifier(String name, Project project)
 	{
-		return true;
+		return !"".equals(name);
 	}
 }
