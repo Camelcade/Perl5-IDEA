@@ -177,13 +177,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			consumeToken(b, PERL_SEMI);
 			return true;
 		}
-		else if( tokenType == PERL_RBRACE ||  tokenType == PERL_RESERVED || tokenType == PERL_REGEX_QUOTE_CLOSE)
+		else if( tokenType == PERL_RBRACE  || tokenType == PERL_REGEX_QUOTE_CLOSE)
 			return true;
 		else if(b.eof()) // eof
 			return true;
 
-		// @todo think what to do here. Currently any statement being finished, even incorrect one
-		return false;
+		b.mark().error("Semicolon expected");
+
+		return true;
 	}
 
 	/**
