@@ -16,9 +16,29 @@
 
 package com.perl5.lang.perl.psi;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * Created by hurricup on 31.05.2015.
  */
 public interface IPerlSubDefinitionMixin extends PerlPackageElement, PerlLexicalScope, PerlNamespaceContainer, PerlUserFunctionContainer
 {
+	/**
+	 * Returns package name for current function
+	 * @return canonical package name from declaration or context
+	 */
+	public String getPackageName();
+
+	/**
+	 * Returns function name for current function definition
+	 * @return function name or null
+	 */
+	public String getFunctionName();
+
+	/**
+	 * Returns list of accepted arguments
+	 * @return list of accepted arguments
+	 */
+	public List<PerlSubArgument> getArgumentsList();
 }
