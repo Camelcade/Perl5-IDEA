@@ -137,7 +137,10 @@ public class PerlLexer extends PerlLexerGenerated{
 			// capture line comment
 			else if(
 					buffer.charAt(tokenStart)=='#'
-							&& (currentState != LEX_QUOTE_LIKE_OPENER || !allowSharpQuote)
+					&& (currentState != LEX_QUOTE_LIKE_OPENER || !allowSharpQuote)
+					&& (currentState != LEX_TRANS_OPENER && currentState != LEX_TRANS_CLOSER || !allowSharpQuote)
+					&& (currentState != LEX_TRANS_CHARS)
+					&& (currentState != LEX_REGEX_OPENER)
 			)
 			{
 				// comment may end on newline or ?>
@@ -517,7 +520,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		{
 //			System.err.println("Stop after first block");
 			yybegin(YYINITIAL);
-			return PERL_REGEX_QUOTE;
+			return PERL_REGEX_QUOTE_OPEN;
 		}
 		int currentOffset = firstBlock.getEndOffset();
 
@@ -555,7 +558,7 @@ public class PerlLexer extends PerlLexerGenerated{
 				}
 
 				// read block
-				secondBlockOpener = new CustomToken(currentOffset, currentOffset+1, PERL_REGEX_QUOTE);
+				secondBlockOpener = new CustomToken(currentOffset, currentOffset+1, PERL_REGEX_QUOTE_OPEN);
 				secondBLock = RegexBlock.parseBlock(buffer, currentOffset + 1, bufferEnd, buffer.charAt(currentOffset));
 			}
 
@@ -563,7 +566,7 @@ public class PerlLexer extends PerlLexerGenerated{
 			{
 //				System.err.println("Stop after second block");
 				yybegin(YYINITIAL);
-				return PERL_REGEX_QUOTE;
+				return PERL_REGEX_QUOTE_OPEN;
 			}
 			currentOffset = secondBLock.getEndOffset();
 		}
@@ -614,7 +617,7 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		yybegin(LEX_PREPARSED_ITEMS);
 
-		return PERL_REGEX_QUOTE;
+		return PERL_REGEX_QUOTE_OPEN;
 	}
 
 
@@ -647,7 +650,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		yybegin(LEX_TRANS_CHARS);
 		stringContentStart = getTokenStart() + 1;
 
-		return PERL_REGEX_QUOTE;
+		return PERL_REGEX_QUOTE_OPEN;
 	}
 
 	public IElementType processTransChar()
@@ -691,7 +694,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		{
 			yybegin(LEX_TRANS_MODIFIERS);
 		}
-		return PERL_REGEX_QUOTE;
+		return PERL_REGEX_QUOTE_CLOSE;
 	}
 
 

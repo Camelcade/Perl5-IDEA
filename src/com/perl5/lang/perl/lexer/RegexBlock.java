@@ -169,7 +169,7 @@ public class RegexBlock implements PerlElementTypes
 			subLexer.advance();
 		}
 
-		tokens.add(new CustomToken(endOffset - 1, endOffset, PERL_REGEX_QUOTE));
+		tokens.add(new CustomToken(endOffset - 1, endOffset, PERL_REGEX_QUOTE_CLOSE));
 
 		return tokens;
 	}
@@ -239,7 +239,7 @@ public class RegexBlock implements PerlElementTypes
 			isEscaped = !isEscaped && currentChar == '\\';
 		}
 
-		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE));
+		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE_CLOSE));
 
 		return tokens;
 	}
@@ -288,7 +288,7 @@ public class RegexBlock implements PerlElementTypes
 			currentOffset++;
 		}
 
-		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE));
+		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE_CLOSE));
 
 		return tokens;
 	}

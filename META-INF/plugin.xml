@@ -27,7 +27,8 @@
     <change-notes><![CDATA[
       <p>0.20 beta</p>
       <ul>
-        <li></li>
+        <li>Fancy use parent autocompletion</li>
+        <li>Tons of bugfixes and optimizations</li>
       </ul>
 
       <p>0.19 beta</p>
