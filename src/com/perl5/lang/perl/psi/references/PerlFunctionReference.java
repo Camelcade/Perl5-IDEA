@@ -31,27 +31,23 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlUserFunctionReference extends PerlReferencePoly
+public class PerlFunctionReference extends PerlReferencePoly
 {
 	String functionName;
 	String packageName = null;
 	String canonicalName;
 
-	public PerlUserFunctionReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlFunctionReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 		assert element instanceof PerlFunction;
 		functionName = ((PerlFunction) element).getName();
 
 		PsiElement parent = element.getParent();
 
+		if( packageName == null && parent instanceof PerlMethod)
+			packageName = ((PerlMethod) parent).getPackageName();
 
-		if( parent instanceof PerlNamespaceContainer )
-		{
-			PerlNamespace ns = ((PerlNamespaceContainer) parent).getNamespace();
-			if( ns != null )
-				packageName = ns.getName();
-		}
-
+		// this is currently available in subs
 		if( packageName == null )
 			packageName = PerlPackageUtil.getContextPackageName(element);
 

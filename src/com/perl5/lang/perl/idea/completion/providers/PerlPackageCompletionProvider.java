@@ -20,10 +20,12 @@ import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
+import com.perl5.lang.perl.psi.IPerlVariableDeclaration;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,18 +47,20 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 			public void run()
 			{
 				PsiFile file = parameters.getOriginalFile();
+				PsiElement element = parameters.getPosition();
+				PsiElement parent = element.getParent();
 
 				// fixme actually, we should fill files here, not packages, or make a diff provider
 				for (String packageName : PerlPackageUtil.listDefinedPackageNames(file.getProject()))
 				{
-					InsertHandler<LookupElement> insertHandler = null;
-
 					LookupElementBuilder newElement = LookupElementBuilder.create(packageName).withIcon(PerlIcons.PM_FILE);
 
-					if (insertHandler == null)
-						insertHandler = PerlInsertHandlers.SEMI_NEWLINE_INSERT_HANDLER;
+					if( !(parent instanceof IPerlVariableDeclaration))
+						newElement = newElement.withInsertHandler(PerlInsertHandlers.SEMI_NEWLINE_INSERT_HANDLER);
+					else
+						newElement = newElement.withInsertHandler(PerlInsertHandlers.SPACE_INSERT_HANDLER);
 
-					resultSet.addElement(newElement.withInsertHandler(insertHandler));
+					resultSet.addElement(newElement);
 
 				}
 			}

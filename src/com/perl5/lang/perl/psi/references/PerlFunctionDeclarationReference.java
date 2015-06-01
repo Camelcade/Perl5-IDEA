@@ -32,9 +32,9 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public class PerlUserFunctionDeclarationReference extends PerlUserFunctionReference
+public class PerlFunctionDeclarationReference extends PerlFunctionReference
 {
-	public PerlUserFunctionDeclarationReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlFunctionDeclarationReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 	}
 
