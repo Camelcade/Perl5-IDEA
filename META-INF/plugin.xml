@@ -28,6 +28,7 @@
       <p>0.21 beta</p>
       <ul>
         <li>Lexer and parser improvements</li>
+        <li>Smarter functions and packages autocompletion</li>
       </ul>
 
       <p>0.20 beta</p>
