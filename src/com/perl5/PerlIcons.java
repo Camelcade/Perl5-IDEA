@@ -33,5 +33,8 @@ public class PerlIcons
 	public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/com/perl5/icons/embeddedperl.png");
 	public static final Icon PACKAGE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/package_gutter_icon.png");
 	public static final Icon SUBROUTINE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/subroutine_gutter_icon.png");
-	public static final Icon VARIABLE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/variable_gutter_icon.png");
+	public static final Icon SCALAR_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/scalar_gutter_icon.png");
+	public static final Icon ARRAY_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/array_gutter_icon.png");
+	public static final Icon HASH_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/hash_gutter_icon.png");
+	public static final Icon GLOB_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/glob_gutter_icon.png");
 }
