@@ -42,6 +42,8 @@ import java.util.*;
  */
 public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 {
+    public static final String PACKAGE_SEPARATOR = "::";
+
 	public static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
 
 	static{
@@ -59,7 +61,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
-	/**
+    /**
 	 * Checks if package is built in
 	 * @param variable package name
 	 * @return result
@@ -107,7 +109,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static String getCanonicalPackageName(String name)
 	{
-		if( "::".equals(name))
+		if( PACKAGE_SEPARATOR.equals(name))
 			return "main";
 		else
 			return name.replaceFirst("::$", "").replaceFirst("^::", "");
@@ -180,7 +182,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		packagePath = packagePath.replaceAll("\\\\", "/");
 
-		return StringUtils.join(packagePath.replaceFirst("\\.pm$", "").split("/"), "::");
+		return StringUtils.join(packagePath.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR);
 	}
 
 	/**
