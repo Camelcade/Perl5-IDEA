@@ -18,22 +18,34 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlVariableName;
-import com.perl5.lang.perl.psi.PerlLexicalScope;
-import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by hurricup on 24.05.2015.
+ *
  */
 public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable //
 {
+	public final static Set<String> THIS_NAMES = new HashSet<>();
+	static{
+		THIS_NAMES.add("this");
+		THIS_NAMES.add("self");
+		THIS_NAMES.add("proto");
+	}
+
 	public PerlVariableImplMixin(PerlVariableStub stub, IStubElementType nodeType)
 	{
 		super(stub, nodeType);
@@ -90,5 +102,47 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	public PerlVariableName getVariableName()
 	{
 		return findChildByClass(PerlVariableName.class);
+	}
+
+	@Nullable
+	@Override
+	public String guessVariableType()
+	{
+		PerlVariableName variableNameObject = getVariableName();
+
+		if( variableNameObject != null )
+		{
+			String variableName = variableNameObject.getName();
+
+			if( this instanceof PerlPerlScalar && THIS_NAMES.contains(variableName))
+				return PerlPackageUtil.getContextPackageName(this);
+
+			// find declaration and check type
+			PsiReference[] references = variableNameObject.getReferences();
+
+			for( PsiReference reference: references)
+			{
+				assert reference instanceof PerlVariableNameReference;
+				ResolveResult[] results = ((PerlVariableNameReference) reference).multiResolve(false);
+
+				for( ResolveResult result: results)
+				{
+					PsiElement decalarationVariableName = result.getElement();
+					IPerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(decalarationVariableName, IPerlVariableDeclaration.class);
+					if( declaration != null )
+					{
+						PerlNamespace declarationNamespace = declaration.getNamespace();
+						if( declarationNamespace != null )
+						{
+							return declarationNamespace.getName();
+						}
+					}
+				}
+			}
+
+			// todo check assignment expression with this variable in the left and guess from there (constructors, other vars that can have known type
+		}
+
+		return null;
 	}
 }

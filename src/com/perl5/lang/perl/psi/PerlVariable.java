@@ -24,12 +24,30 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface PerlVariable extends PerlLexicalScopeElement, PerlPackageElement, PsiElement
 {
+	/**
+	 * Getter for namespace object
+	 * @return namespace element if any
+	 */
 	@Nullable
 	PerlNamespace getNamespace();
 
+	/**
+	 * Getter for VariableName object
+	 * @return variable name element if any
+	 */
 	@Nullable
 	PerlVariableName getVariableName();
 
+	/**
+	 * Dumb getter for scalar sigils part, shows if it's pure type or some dereferences like @$$$var
+	 * @return scalar sigils if any
+	 */
 	@Nullable
 	PerlScalarSigils getScalarSigils();
+
+	/**
+	 * Guesses variable type from definition or context
+	 * @return Package name if found
+	 */
+	@Nullable String guessVariableType();
 }

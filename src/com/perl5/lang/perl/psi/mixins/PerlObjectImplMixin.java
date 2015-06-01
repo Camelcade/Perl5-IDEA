@@ -18,18 +18,10 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.PerlObject;
+import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -37,14 +29,9 @@ import java.util.Set;
  */
 public abstract class PerlObjectImplMixin extends ASTWrapperPsiElement implements PerlObject
 {
-	public final static Set<String> THIS_NAMES = new HashSet<>();
-	static{
-		THIS_NAMES.add("this");
-		THIS_NAMES.add("self");
-		THIS_NAMES.add("proto");
-	}
 
-	public PerlObjectImplMixin(@NotNull ASTNode node){
+	public PerlObjectImplMixin(@NotNull ASTNode node)
+	{
 		super(node);
 	}
 
@@ -56,41 +43,8 @@ public abstract class PerlObjectImplMixin extends ASTWrapperPsiElement implement
 		// at the moment object is only wrapper for scalar variable, nothing else
 		PerlVariable scalar = getPerlScalar();
 
-		if( scalar != null )
-		{
-			PerlVariableName variableNameObject = scalar.getVariableName();
-
-			if( variableNameObject != null )
-			{
-				String variableName = variableNameObject.getName();
-
-				if( THIS_NAMES.contains(variableName))
-					return PerlPackageUtil.getContextPackageName(this);
-
-				// find declaration and check type
-				PsiReference[] references = variableNameObject.getReferences();
-
-				for( PsiReference reference: references)
-				{
-					assert reference instanceof PerlVariableNameReference;
-					ResolveResult[] results = ((PerlVariableNameReference) reference).multiResolve(false);
-
-					for( ResolveResult result: results)
-					{
-						PsiElement decalarationVariableName = result.getElement();
-						IPerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(decalarationVariableName, IPerlVariableDeclaration.class);
-						if( declaration != null )
-						{
-							PerlNamespace declarationNamespace = declaration.getNamespace();
-							if( declarationNamespace != null )
-							{
-								return declarationNamespace.getName();
-							}
-						}
-					}
-				}
-			}
-		}
+		if (scalar != null)
+			return scalar.guessVariableType();
 
 		return null;
 	}
