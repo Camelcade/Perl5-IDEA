@@ -137,7 +137,7 @@ public class PerlVariableReference extends PerlReferencePoly
 			for (PerlVariable variable : variables)
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if (variable instanceof PerlPerlScalar && variableName != null && myVariableName.equals(variableName.getName()))
+				if (variable instanceof PerlPerlScalar && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
 					break;
@@ -153,7 +153,7 @@ public class PerlVariableReference extends PerlReferencePoly
 			for( PerlVariable variable: PerlScalarUtil.findGlobalScalarDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if( variableName != null)
+				if( variableName != null && variableName != myElement)
 					result.add(new PsiElementResolveResult(variableName));
 			}
 		}
@@ -177,7 +177,7 @@ public class PerlVariableReference extends PerlReferencePoly
 			for (PerlVariable variable : variables)
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if (variable instanceof PerlPerlArray && variableName != null && myVariableName.equals(variableName.getName()))
+				if (variable instanceof PerlPerlArray && variableName != null && variableName != myElement&& myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
 					break;
@@ -193,7 +193,7 @@ public class PerlVariableReference extends PerlReferencePoly
 			for( PerlVariable variable: PerlArrayUtil.findGlobalArrayDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if( variableName != null)
+				if( variableName != null && variableName != myElement)
 					result.add(new PsiElementResolveResult(variableName));
 			}
 		}
@@ -216,7 +216,7 @@ public class PerlVariableReference extends PerlReferencePoly
 			for (PerlVariable variable : variables)
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if (variable instanceof PerlPerlHash && variableName != null && myVariableName.equals(variableName.getName()))
+				if (variable instanceof PerlPerlHash && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
 					break;
@@ -232,7 +232,7 @@ public class PerlVariableReference extends PerlReferencePoly
 			for( PerlVariable variable: PerlHashUtil.findGlobalHashDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if( variableName != null)
+				if( variableName != null && variableName != myElement)
 					result.add(new PsiElementResolveResult(variableName));
 			}
 		}

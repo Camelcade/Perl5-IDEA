@@ -842,7 +842,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		if( knownPackages.containsKey(bareword) )
 			return knownPackages.get(bareword);
 
-		return PerlFunctionUtil.getFunctionType(yytext().toString());
+		return PerlFunctionUtil.getFunctionType(bareword);
 	}
 
 	/**

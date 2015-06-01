@@ -54,9 +54,9 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getPackageName()
 	{
-//		PerlVariableStub stub = getStub();
-//		if( stub != null)
-//			return stub.getPackageName();
+		PerlVariableStub stub = getStub();
+		if( stub != null)
+			return stub.getPackageName();
 
 		String namespace = getExplicitPackageName();
 

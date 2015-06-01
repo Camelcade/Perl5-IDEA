@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -32,6 +33,7 @@ import com.perl5.lang.perl.psi.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
+import javafx.application.Application;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,6 +57,8 @@ public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 		Runnable newProcess = null;
 
 		PsiElement parent = getParent();
+		assert parent != null;
+
 		if( parent instanceof PerlNamespaceDefinition)
 		{
 			// namespace definition,
@@ -68,7 +72,7 @@ public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 					final VirtualFile virtualFile = psiFile.getVirtualFile();
 					final Project project = getProject();
 					final String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(name);
-					final PsiElement requestor = this;
+//					final PsiElement requestor = this.getParent();
 
 					newProcess = new Runnable()
 					{
@@ -109,10 +113,10 @@ public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 								if (!newParent.getPath().equals(virtualFile.getParent().getPath()))
 								{
 									// we need to handle references ourselves
-									virtualFile.move(requestor, newParent);
+									virtualFile.move(null, newParent);
 								}
 
-								virtualFile.rename(requestor, newFileName);
+								virtualFile.rename(null, newFileName);
 							}
 							catch(IOException e)
 							{
@@ -139,7 +143,8 @@ public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 				name = name + "::";
 		}
 
-		PerlNamespace newName = PerlElementFactory.createPackageName(getProject(), name);
+		PerlNamespaceImpl newName = PerlElementFactory.createPackageName(getProject(), name);
+
 		if( newName != null )
 		{
 			replace(newName);

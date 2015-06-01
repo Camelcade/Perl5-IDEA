@@ -75,7 +75,10 @@ public class PerlUserFunctionReference extends PerlReferencePoly
 		// subs definitions
 		for( PerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, canonicalName))
 		{
-			result.add(new PsiElementResolveResult(sub.getUserFunction()));
+			PerlFunction perlFunction = sub.getUserFunction();
+
+			if( perlFunction != null && perlFunction != myElement)
+				result.add(new PsiElementResolveResult(perlFunction));
 		}
 
 		// globs definitions

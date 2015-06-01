@@ -45,9 +45,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	/**
 	 * Smart parser for ->, makes }->[ optional
-	 * @param b
-	 * @param l
-	 * @return
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
 	 */
 	public static boolean parseArrowSmart(PsiBuilder b, int l )
 	{
@@ -73,6 +73,33 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	// flag of regexp supression for regex nested code
+	private static boolean regexSuppressed = false;
+
+	/**
+	 * Supresses regex opener and parses expression
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parsePerlInRegex(PsiBuilder b, int l )
+	{
+		regexSuppressed = true;
+		boolean r = PerlParser.statement(b,l);
+		regexSuppressed = false;
+		return r;
+	}
+
+	/**
+	 * Checks if regex opener been suppressed (we are in //e block)
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean regexNotSuppressed(PsiBuilder b, int l)
+	{
+		return !regexSuppressed;
+	}
 
 	public static boolean parseExpressionLevel(PsiBuilder b, int l, int g )
 	{
@@ -150,7 +177,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			consumeToken(b, PERL_SEMI);
 			return true;
 		}
-		else if( tokenType == PERL_RBRACE ||  tokenType == PERL_RESERVED)
+		else if( tokenType == PERL_RBRACE ||  tokenType == PERL_RESERVED || tokenType == PERL_REGEX_QUOTE)
 			return true;
 		else if(b.eof()) // eof
 			return true;

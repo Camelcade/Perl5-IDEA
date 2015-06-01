@@ -69,7 +69,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 				}
 		);
 		registrar.registerReferenceProvider(
-				VARIABLE_NAME_PATTERN,
+				VARIABLE_NAME_PATTERN.inside(VARIABLE_PATTERN),
 				new PsiReferenceProvider()
 				{
 					@NotNull
@@ -77,8 +77,12 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
 						assert element instanceof PerlVariableName;
+						PsiElement container = element.getParent();
 
-						return new PsiReference[]{new PerlVariableReference(element, new TextRange(0, element.getTextLength()))};
+						if( container instanceof PerlPerlGlob )
+							return new PsiReference[0];
+						else
+							return new PsiReference[]{new PerlVariableReference(element, new TextRange(0, element.getTextLength()))};
 
 					}
 				}

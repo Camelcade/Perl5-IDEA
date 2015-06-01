@@ -62,7 +62,7 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
 		{
 			PerlNamespace namespace = namespaceDefinition.getNamespace();
-			if( namespace != null )
+			if( namespace != null && namespace != myElement )
 				result.add(new PsiElementResolveResult(namespace));
 		}
 

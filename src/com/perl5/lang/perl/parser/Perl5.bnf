@@ -495,12 +495,15 @@ private regex_term ::=
 // pinning quotes leads to bug with replacement block
 compile_regex ::= 'qr' match_regex_body
 match_regex ::= ['m'] match_regex_body
-private match_regex_body ::= PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE [perl_regex_modifiers]
+private match_regex_body ::= <<regexNotSuppressed>> PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE [perl_regex_modifiers]
 replacement_regex ::= "s" PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE regex_replacement [perl_regex_modifiers]
 
 private regex_replacement ::=
-    PERL_REGEX_QUOTE [perl_regex | expr] PERL_REGEX_QUOTE
-    |  [perl_regex | expr] PERL_REGEX_QUOTE
+    PERL_REGEX_QUOTE PERL_REGEX_QUOTE
+    | PERL_REGEX_QUOTE regex_replacement_body PERL_REGEX_QUOTE
+    |  [ regex_replacement_body ] PERL_REGEX_QUOTE
+private regex_replacement_body ::= perl_regex | <<parsePerlInRegex>>
+
 
 perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
 perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick

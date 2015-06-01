@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
@@ -40,7 +41,7 @@ public class PerlFunctionImpl extends LeafPsiElement implements PerlFunction
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PerlFunctionImpl newFunction = PerlElementFactory.createUserFunction(getProject(), name);
+		PerlFunction newFunction = PerlElementFactory.createUserFunction(getProject(), name);
 		if( newFunction != null )
 			replace(newFunction);
 		else
@@ -67,5 +68,6 @@ public class PerlFunctionImpl extends LeafPsiElement implements PerlFunction
 	{
 		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
 	}
+
 
 }

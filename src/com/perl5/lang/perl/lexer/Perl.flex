@@ -412,7 +412,12 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_PACKAGE_METHOD_CALL_FANCY>
 {
     // here are should be keywords and resreved words
-    {BAREWORD} {return PERL_FUNCTION;}
+    {BAREWORD} {
+        IElementType tokenType = getBarewordTokenType();
+        if( tokenType != PERL_FUNCTION )
+            endCustomBlock();
+        return tokenType;
+    }
     {PERL_PACKAGE_METHOD} {
         endCustomBlock();
         if( isKnownPackage() )
