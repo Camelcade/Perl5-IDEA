@@ -18,8 +18,11 @@ package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlSubArgument;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -28,12 +31,16 @@ public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinition> imple
 {
 	private final String packageName;
 	private final String functionName;
+	private final List<PerlSubArgument> myArguments;
+	private final boolean isMethod;
 
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String functionName)
+	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String functionName, List<PerlSubArgument> arguments, boolean isMethod)
 	{
 		super(parent, PerlStubElementTypes.SUB_DEFINITION);
 		this.packageName = packageName;
 		this.functionName = functionName;
+		myArguments = arguments;
+		this.isMethod = isMethod;
 	}
 
 	@Override
@@ -46,5 +53,17 @@ public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinition> imple
 	public String getFunctionName()
 	{
 		return functionName;
+	}
+
+	@Override
+	public List<PerlSubArgument> getArgumentsList()
+	{
+		return myArguments;
+	}
+
+	@Override
+	public boolean isMethod()
+	{
+		return isMethod;
 	}
 }

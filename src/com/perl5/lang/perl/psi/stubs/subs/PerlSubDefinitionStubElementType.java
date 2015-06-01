@@ -18,14 +18,19 @@ package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.PerlSubArgument;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlVariableType;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
+ *
  */
 public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub,PerlSubDefinition>
 {
@@ -44,7 +49,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub)
 	{
-		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getUserFunction().getName());
+		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getUserFunction().getName(), psi.getArgumentsList(), psi.isMethod());
 	}
 
 	@NotNull
@@ -66,12 +71,40 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	{
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getFunctionName());
+
+		List<PerlSubArgument> arguments = stub.getArgumentsList();
+		dataStream.writeInt(arguments.size());
+		for( PerlSubArgument argument: arguments )
+		{
+			dataStream.writeName(argument.getArgumentType().toString());
+			dataStream.writeName(argument.getArgumentName());
+			dataStream.writeName(argument.getVariableClass());
+			dataStream.writeBoolean(argument.isOptional());
+		}
+		dataStream.writeBoolean(stub.isMethod());
 	}
 
 	@NotNull
 	@Override
 	public PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlSubDefinitionStubImpl(parentStub,dataStream.readName().getString(),dataStream.readName().getString());
+		String packageName = dataStream.readName().toString();
+		String functionName = dataStream.readName().toString();
+		int argumentsNumber = dataStream.readInt();
+
+		List<PerlSubArgument> arguments = new ArrayList<>(argumentsNumber);
+
+		for( int i = 0; i < argumentsNumber; i++ )
+		{
+			PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
+			String argumentName = dataStream.readName().toString();
+			String variableClass = dataStream.readName().toString();
+			boolean isOptional = dataStream.readBoolean();
+			arguments.add(new PerlSubArgument(argumentType,argumentName,variableClass,isOptional));
+		}
+
+		boolean isMethod = dataStream.readBoolean();
+
+		return new PerlSubDefinitionStubImpl(parentStub,packageName,functionName,arguments,isMethod);
 	}
 }

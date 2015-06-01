@@ -41,4 +41,10 @@ public interface IPerlSubDefinitionMixin extends PerlPackageElement, PerlLexical
 	 * @return list of accepted arguments
 	 */
 	public List<PerlSubArgument> getArgumentsList();
+
+	/**
+	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
+	 * @return result
+	 */
+	public boolean isMethod();
 }

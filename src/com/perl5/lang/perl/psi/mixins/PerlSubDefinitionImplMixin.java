@@ -33,9 +33,12 @@ import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
+ *
  */
 public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase<PerlSubDefinitionStub> implements PerlSubDefinition
 {
+	private List<PerlSubArgument> myArguments = null;
+
 	public PerlSubDefinitionImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -108,9 +111,33 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		return findChildByClass(PerlFunction.class);
 	}
 
+
+	@Override
+	public boolean isMethod()
+	{
+		PerlSubDefinitionStub stub = getStub();
+		if( stub != null )
+			return stub.isMethod();
+
+		List<PerlSubArgument> arguments = getArgumentsList();
+		if (arguments.size() == 0)
+			return false;
+
+		PerlSubArgument firstArgument = arguments.get(0);
+
+		return firstArgument.getArgumentType() == PerlVariableType.SCALAR && PerlThisNames.NAMES_SET.contains(firstArgument.getArgumentName());
+	}
+
 	@Override
 	public List<PerlSubArgument> getArgumentsList()
 	{
+		if (myArguments != null)
+			return myArguments;
+
+		PerlSubDefinitionStub stub = getStub();
+		if( stub != null )
+			return stub.getArgumentsList();
+
 		List<PerlSubArgument> arguments = new ArrayList<>();
 
 		// todo add stubs reading here
@@ -138,7 +165,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 
 						if ("@_".equals(rightTerm.getText()))
 						{
-							for( PerlVariable variable: PsiTreeUtil.findChildrenOfType(declaration, PerlVariable.class))
+							for (PerlVariable variable : PsiTreeUtil.findChildrenOfType(declaration, PerlVariable.class))
 							{
 								PerlVariableName variableName = variable.getVariableName();
 
@@ -166,9 +193,11 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 					// todo dunno how to handle this yet like my $scalar = my $something = shift;
 					break;
 			} else
+				// not an assignment here
 				break;
 		}
 
-		return arguments;
+		myArguments = arguments;
+		return myArguments;
 	}
 }

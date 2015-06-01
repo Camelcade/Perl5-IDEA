@@ -30,28 +30,16 @@ import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by hurricup on 24.05.2015.
  *
  */
 public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable //
 {
-
-	public final static Set<String> THIS_NAMES = new HashSet<>();
-	static{
-		THIS_NAMES.add("this");
-		THIS_NAMES.add("self");
-		THIS_NAMES.add("proto");
-	}
-
 	public PerlVariableImplMixin(PerlVariableStub stub, IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}
-
 
 	public PerlVariableImplMixin(ASTNode node)
 	{
@@ -115,7 +103,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		{
 			String variableName = variableNameObject.getName();
 
-			if( this instanceof PerlPerlScalar && THIS_NAMES.contains(variableName))
+			if( this instanceof PerlPerlScalar && PerlThisNames.NAMES_SET.contains(variableName))
 				return PerlPackageUtil.getContextPackageName(this);
 
 			// find declaration and check type

@@ -28,7 +28,7 @@ public class PerlSubArgument
 		return argumentName;
 	}
 
-	public Boolean getIsOptional()
+	public Boolean isOptional()
 	{
 		return isOptional;
 	}

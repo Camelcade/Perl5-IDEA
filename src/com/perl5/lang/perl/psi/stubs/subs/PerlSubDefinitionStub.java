@@ -17,14 +17,37 @@
 package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlSubArgument;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
 public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinition>
 {
+	/**
+	 * Returns package name for current function
+	 * @return canonical package name from declaration or context
+	 */
 	public String getPackageName();
 
+	/**
+	 * Returns function name for current function definition
+	 * @return function name or null
+	 */
 	public String getFunctionName();
+
+	/**
+	 * Returns list of accepted arguments
+	 * @return list of accepted arguments
+	 */
+	public List<PerlSubArgument> getArgumentsList();
+
+	/**
+	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
+	 * @return result
+	 */
+	public boolean isMethod();
 }
