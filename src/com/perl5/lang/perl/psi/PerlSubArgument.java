@@ -37,4 +37,10 @@ public class PerlSubArgument
 	{
 		return variableClass;
 	}
+
+	public String toStringShort()
+	{
+		return argumentType.getSigil() + argumentName;
+	}
+
 }

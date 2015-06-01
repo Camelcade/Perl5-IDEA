@@ -57,7 +57,9 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 					IElementType packageType = PerlPackageUtil.BUILT_IN_MAP.get(packageName);
 					InsertHandler<LookupElement> insertHandler = null;
 
-					LookupElementBuilder newElement = LookupElementBuilder.create(packageName).withIcon(PerlIcons.PM_FILE).withBoldness(true);
+					LookupElementBuilder newElement = LookupElementBuilder.create(packageName)
+							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
+							.withBoldness(true);
 
 					if (packageType == PerlElementTypes.PERL_PACKAGE_DEPRECATED)
 						newElement = newElement.withStrikeoutness(true);

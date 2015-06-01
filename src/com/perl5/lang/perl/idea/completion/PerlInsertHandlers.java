@@ -29,6 +29,8 @@ public class PerlInsertHandlers
 {
 	public static final InsertHandler<LookupElement> SEMI_NEWLINE_INSERT_HANDLER = new SemiNewlineInsertHandler();
 	public static final InsertHandler<LookupElement> SPACE_INSERT_HANDLER = new SpaceAndParensInsertHandler();
+	public static final InsertHandler<LookupElement> ARRAY_ELEMENT_INSERT_HANDLER = new ArrayElementInsertHandler();
+	public static final InsertHandler<LookupElement> HASH_ELEMENT_INSERT_HANDLER = new HashElementInsertHandler();
 
 	/**
 	 * Semicolon and newline insert handler
@@ -56,4 +58,31 @@ public class PerlInsertHandlers
 		}
 	}
 
+	/**
+	 * Array element/slice insert handler
+	 */
+	static class ArrayElementInsertHandler implements InsertHandler<LookupElement>
+	{
+		@Override
+		public void handleInsert(final InsertionContext context, LookupElement item)
+		{
+			final Editor editor = context.getEditor();
+			EditorModificationUtil.insertStringAtCaret(editor, "[]");
+			editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
+		}
+	}
+
+	/**
+	 * Hash element/slice insert handler
+	 */
+	static class HashElementInsertHandler implements InsertHandler<LookupElement>
+	{
+		@Override
+		public void handleInsert(final InsertionContext context, LookupElement item)
+		{
+			final Editor editor = context.getEditor();
+			EditorModificationUtil.insertStringAtCaret(editor, "{}");
+			editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
+		}
+	}
 }

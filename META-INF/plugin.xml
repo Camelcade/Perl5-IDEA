@@ -27,7 +27,9 @@
     <change-notes><![CDATA[
       <p>0.22 beta</p>
       <ul>
-        <li></li>
+        <li>Implemented goto contributor</li>
+        <li>Implemented function parameters parsing from @_ and shift, shown in autocomplete</li>
+        <li>Some new icons for variables, packages and subs</li>
       </ul>
 
       <p>0.21 beta</p>

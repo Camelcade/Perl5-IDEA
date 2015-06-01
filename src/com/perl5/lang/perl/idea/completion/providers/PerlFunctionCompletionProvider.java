@@ -10,13 +10,20 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.parser.PerlSub;
 import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PerlSubArgument;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 01.06.2015.
@@ -62,13 +69,41 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 						String subName = canonicalSubName.substring(packagePrefix.length());
 
 						if (!subName.contains("::"))
-							resultSet.addElement(
-									LookupElementBuilder
-											.create(subName)
-											.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-											.withPresentableText(subName)
-											.withInsertHandler(SUB_SELECTION_HANDLER)
-							);
+						{
+							Collection<PerlSubDefinition> subDefinitions = PerlFunctionUtil.findSubDefinitions(project,canonicalSubName);
+
+							for(PerlSubDefinition subDefinition: subDefinitions )
+							{
+								// todo set method icon if isMethod is true
+								// todo omit first argument is isMethod is true
+								Collection<PerlSubArgument> arguments = subDefinition.getArgumentsList();
+								int argumentsNumber = arguments.size();
+
+								List<String> argumentsList = new ArrayList<String>();
+								for( PerlSubArgument argument: arguments)
+								{
+									// todo we can mark optional arguments after prototypes implementation
+									argumentsList.add(argument.toStringShort());
+
+									int compiledListSize = argumentsList.size();
+									if( compiledListSize > 4 && argumentsNumber > compiledListSize )
+									{
+										argumentsList.add("...");
+										break;
+									}
+								}
+
+								String argsString = "(" + StringUtils.join(argumentsList, ", ") + ")";
+
+								resultSet.addElement(
+										LookupElementBuilder
+												.create(subName)
+												.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+												.withPresentableText(subName + argsString)
+												.withInsertHandler(SUB_SELECTION_HANDLER)
+								);
+							}
+						}
 					}
 				}
 

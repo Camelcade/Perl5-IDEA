@@ -6,5 +6,17 @@ package com.perl5.lang.perl.psi;
 public enum PerlVariableType{
 	SCALAR,
 	ARRAY,
-	HASH
+	HASH;
+
+	public char getSigil()
+	{
+		if( this == SCALAR)
+			return '$';
+		else if( this == ARRAY )
+			return '@';
+		else if( this == HASH )
+			return '%';
+		return ' ';
+	}
+
 };

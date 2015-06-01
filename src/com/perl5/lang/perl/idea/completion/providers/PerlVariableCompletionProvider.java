@@ -8,6 +8,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -49,36 +50,62 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
-								resultSet.addElement(LookupElementBuilder.create(variableName.getName()));
+								resultSet.addElement(LookupElementBuilder
+										.create(variableName.getName())
+										.withIcon(PerlIcons.SCALAR_GUTTER_ICON));
 						} else if (variable instanceof PerlPerlArray)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
-								resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "[]"));
-
+							{
+								String varName = variableName.getName();
+								resultSet.addElement(LookupElementBuilder
+												.create(varName)
+												.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
+												.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
+												.withPresentableText(varName + "[]")
+								);
+							}
 						} else if (variable instanceof PerlPerlHash)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
-								resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}"));
-
+							{
+								String varName = variableName.getName();
+								resultSet.addElement(LookupElementBuilder
+												.create(varName)
+												.withIcon(PerlIcons.HASH_GUTTER_ICON)
+												.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
+												.withPresentableText(varName + "{}")
+								);
+							}
 						}
 					}
 
 					// global scalars
 					for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableName.getProject()))
 					{
-						resultSet.addElement(LookupElementBuilder.create(name));
+						resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.SCALAR_GUTTER_ICON));
 					}
 					// global arrays
 					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableName.getProject()))
 					{
-						resultSet.addElement(LookupElementBuilder.create(name + "[]"));
+						resultSet.addElement(LookupElementBuilder
+										.create(name)
+										.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
+										.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
+										.withPresentableText(name + "[]")
+						);
 					}
 					// global hashes
 					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableName.getProject()))
 					{
-						resultSet.addElement(LookupElementBuilder.create(name + "{}"));
+						resultSet.addElement(LookupElementBuilder
+										.create(name)
+										.withIcon(PerlIcons.HASH_GUTTER_ICON)
+										.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
+										.withPresentableText(name + "{}")
+						);
 					}
 
 				}
@@ -111,7 +138,15 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
-								resultSet.addElement(LookupElementBuilder.create(variableName.getName() + "{}").withIcon(PerlIcons.HASH_GUTTER_ICON));
+							{
+								String varName = variableName.getName();
+								resultSet.addElement(LookupElementBuilder
+												.create(varName)
+												.withIcon(PerlIcons.HASH_GUTTER_ICON)
+												.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
+												.withPresentableText(varName + "{}")
+								);
+							}
 						}
 					}
 					// global scalars
@@ -130,7 +165,12 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 					// global hashes
 					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableName.getProject()))
 					{
-						resultSet.addElement(LookupElementBuilder.create(name + "{}").withIcon(PerlIcons.HASH_GUTTER_ICON));
+						resultSet.addElement(LookupElementBuilder
+										.create(name)
+										.withIcon(PerlIcons.HASH_GUTTER_ICON)
+										.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
+										.withPresentableText(name + "{}")
+						);
 					}
 				}
 			});
