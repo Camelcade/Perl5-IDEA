@@ -50,4 +50,10 @@ public interface PerlVariable extends PerlLexicalScopeElement, PerlPackageElemen
 	 * @return Package name if found
 	 */
 	@Nullable String guessVariableType();
+
+	/**
+	 * Guessing actual variable type from context
+	 * @return variable type
+	 */
+	PerlVariableType getActualType();
 }

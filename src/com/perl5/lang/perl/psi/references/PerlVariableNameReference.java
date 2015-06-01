@@ -37,15 +37,10 @@ import java.util.List;
  */
 public class PerlVariableNameReference extends PerlReferencePoly
 {
-	public static enum VariableType{
-		SCALAR,
-		ARRAY,
-		HASH
-	};
 
 	private PerlNamespace myNamespace;
 	private String myVariableName;
-	private VariableType actualType;
+	private PerlVariableType actualType;
 	private PerlVariable myVariable;
 
 	public PerlVariableNameReference(@NotNull PsiElement element, TextRange textRange) {
@@ -53,40 +48,14 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		assert element instanceof PerlVariableName;
 		myVariableName = ((PerlVariableName) element).getName();
 
-		boolean isScalar;
-
 		if( element.getParent() instanceof PerlVariable )
 		{
 			myVariable = (PerlVariable) element.getParent();
 			myNamespace = myVariable.getNamespace();
-			isScalar = myVariable.getScalarSigils() != null;
+			actualType = myVariable.getActualType();
 		}
 		else
 			throw new RuntimeException("Can't be: got myVariable name without a myVariable");
-
-		PsiElement variableContainer = myVariable.getParent();
-		if(
-				variableContainer instanceof PerlScalarHashElement
-						|| variableContainer instanceof PerlArrayHashSlice
-						|| (myVariable instanceof PerlPerlHash && !isScalar)
-				)
-			actualType = VariableType.HASH;
-		else if(
-				variableContainer instanceof PerlArrayArraySlice
-						|| variableContainer instanceof PerlScalarArrayElement
-						|| (myVariable instanceof PerlPerlArrayIndex && !isScalar)
-						|| (myVariable instanceof PerlPerlArray && !isScalar)
-				)
-			actualType = VariableType.ARRAY;
-		else if(
-				variableContainer instanceof PerlDerefExpr
-						|| myVariable instanceof PerlPerlScalar
-						|| isScalar
-				)
-			actualType = VariableType.SCALAR;
-		else
-			throw new RuntimeException("Can't be: could not detect actual type of myVariable: " + myVariable.getText());
-
 	}
 
 	@NotNull
@@ -102,11 +71,11 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	{
 		List<ResolveResult> result;
 
-		if( actualType == VariableType.SCALAR)
+		if( actualType == PerlVariableType.SCALAR)
 			result = resolveScalarName();
-		else if( actualType == VariableType.ARRAY)
+		else if( actualType == PerlVariableType.ARRAY)
 			result = resolveArrayName();
-		else if( actualType == VariableType.HASH)
+		else if( actualType == PerlVariableType.HASH)
 			result = resolveHashName();
 		else
 			throw new RuntimeException("Can't be: resolving variable of unknown type");

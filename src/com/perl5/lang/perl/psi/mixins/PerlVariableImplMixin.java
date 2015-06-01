@@ -39,6 +39,7 @@ import java.util.Set;
  */
 public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable //
 {
+
 	public final static Set<String> THIS_NAMES = new HashSet<>();
 	static{
 		THIS_NAMES.add("this");
@@ -145,4 +146,35 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 
 		return null;
 	}
+
+	@Override
+	public PerlVariableType getActualType()
+	{
+		PsiElement variableContainer = this.getParent();
+		boolean gotScalarSigils = this.getScalarSigils() != null;
+
+		if(
+				variableContainer instanceof PerlScalarHashElement
+						|| variableContainer instanceof PerlArrayHashSlice
+						|| (this instanceof PerlPerlHash && !gotScalarSigils)
+				)
+			return PerlVariableType.HASH;
+		else if(
+				variableContainer instanceof PerlArrayArraySlice
+						|| variableContainer instanceof PerlScalarArrayElement
+						|| (this instanceof PerlPerlArrayIndex && !gotScalarSigils)
+						|| (this instanceof PerlPerlArray && !gotScalarSigils)
+				)
+			return PerlVariableType.ARRAY;
+		else if(
+				variableContainer instanceof PerlDerefExpr
+						|| this instanceof PerlPerlScalar
+						|| gotScalarSigils
+				)
+			return PerlVariableType.SCALAR;
+		else
+			throw new RuntimeException("Can't be: could not detect actual type of myVariable: " + getText());
+
+	}
+
 }
