@@ -140,9 +140,10 @@ limitations under the License.
     implements("use_statement")="com.perl5.lang.perl.psi.IPerlUseStatement"
 
     implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.PerlLexicalScope";
+    mixin("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeElementMixin"
 
-    implements("variable_declaration_lexical|variable_declaration_local")="com.perl5.lang.perl.psi.IPerlVariableDeclaration"
-    mixin("variable_declaration_lexical|variable_declaration_local|conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeElementMixin"
+    implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.IPerlVariableDeclaration"
+    mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
     elementTypeFactory("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
     stubClass("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
@@ -173,6 +174,7 @@ limitations under the License.
     implements("method")="com.perl5.lang.perl.psi.IPerlMethodMixin";
 
     mixin("object")="com.perl5.lang.perl.psi.mixins.PerlObjectImplMixin"
+    implements("object")="com.perl5.lang.perl.psi.IPerlObjectMixin"
 
 //    mixin("variable_name")="com.perl5.lang.perl.psi.impl.PerlVariableNameImplMixin"
 //    implements("variable_name")="com.perl5.lang.perl.psi.PerlNamedElement"

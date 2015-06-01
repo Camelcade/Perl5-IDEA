@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public class PerlVariableReference extends PerlReferencePoly
+public class PerlVariableNameReference extends PerlReferencePoly
 {
 	public static enum VariableType{
 		SCALAR,
@@ -48,7 +48,7 @@ public class PerlVariableReference extends PerlReferencePoly
 	private VariableType actualType;
 	private PerlVariable myVariable;
 
-	public PerlVariableReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlVariableNameReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 		assert element instanceof PerlVariableName;
 		myVariableName = ((PerlVariableName) element).getName();

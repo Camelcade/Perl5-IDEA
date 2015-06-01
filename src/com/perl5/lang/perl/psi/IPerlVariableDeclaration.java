@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ import java.util.List;
  * Created by hurricup on 27.05.2015.
  * Declarations marker
  */
-public interface IPerlVariableDeclaration extends PerlLexicalScopeElement
+public interface IPerlVariableDeclaration extends PsiElement, PerlNamespaceContainer, PerlLexicalScopeElement
 {
 	@NotNull
 	List<PerlPerlArray> getPerlArrayList();

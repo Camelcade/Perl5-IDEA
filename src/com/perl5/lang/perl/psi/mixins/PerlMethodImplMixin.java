@@ -42,9 +42,8 @@ public abstract class PerlMethodImplMixin extends PerlPackageElementMixin implem
 		else
 		{
 			PerlObject object = getObject();
-			// todo: detecting from object
 			if( object != null )
-				return null;
+				return object.guessNamespace();
 		}
 
 		return null;

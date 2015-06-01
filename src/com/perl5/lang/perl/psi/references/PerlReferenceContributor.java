@@ -82,7 +82,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 						if( container instanceof PerlPerlGlob )
 							return new PsiReference[0];
 						else
-							return new PsiReference[]{new PerlVariableReference(element, new TextRange(0, element.getTextLength()))};
+							return new PsiReference[]{new PerlVariableNameReference(element, new TextRange(0, element.getTextLength()))};
 
 					}
 				}

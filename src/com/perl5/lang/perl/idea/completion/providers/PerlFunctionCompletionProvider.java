@@ -11,9 +11,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlMethod;
-import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlObject;
-import com.perl5.lang.perl.psi.PerlPackageElement;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -57,6 +54,7 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 				Collection<String> definedSubs = PerlFunctionUtil.getDefinedSubsNames(project);
 				definedSubs.addAll(PerlGlobUtil.getDefinedGlobsNames(project));
 
+				// todo take SUPER into account, search in superclasses
 				for (String canonicalSubName : definedSubs)
 				{
 					if (canonicalSubName.startsWith(packagePrefix))
@@ -77,6 +75,7 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 				// subs for incomplete ns and inital enter
 				Collection<String> knownNamespaces = PerlPackageUtil.listDefinedPackageNames(project);
 
+				// todo take SUPER into account
 				if (!hasExplicitNamespace)
 					packagePrefix = resultSet.getPrefixMatcher().getPrefix();
 
@@ -106,6 +105,7 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 		public void handleInsert(final InsertionContext context, LookupElement item)
 		{
 			final Editor editor = context.getEditor();
+
 			EditorModificationUtil.insertStringAtCaret(editor, "::");
 
 			context.setLaterRunnable(new Runnable()
@@ -126,8 +126,10 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 		{
 			final Editor editor = context.getEditor();
 
+			// todo why autocompletion is not auto-opening after -> or :: ?
+			// todo if prefix is :: and target function is a method (got self/this/proto) replace :: with ->
 			// todo here we could check a method prototype and position caret accordingly
-			// todo we need hint with prototype here
+			// todo we need hint with prototype here, but prototypes handling NYI
 			EditorModificationUtil.insertStringAtCaret(editor, "()");
 			editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
 		}

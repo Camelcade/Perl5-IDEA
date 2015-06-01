@@ -113,6 +113,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			return name.replaceFirst("::$", "").replaceFirst("^::", "");
 	}
 
+	/**
+	 * Searching of namespace element is in. If no explicit namespaces defined, main is returned
+	 * @param element psi element to find definition for
+	 * @return canonical package name
+	 */
 	@NotNull
 	public static String getContextPackageName(PsiElement element)
 	{
