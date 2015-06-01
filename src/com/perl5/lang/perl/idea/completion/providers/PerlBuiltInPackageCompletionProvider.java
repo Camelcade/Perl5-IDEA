@@ -26,7 +26,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.PerlInsertHandlers2;
+import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlStatement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
@@ -72,7 +72,7 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 					}
 
 					if (insertHandler == null)
-						insertHandler = PerlInsertHandlers2.SEMI_NEWLINE_INSERT_HANDLER;
+						insertHandler = PerlInsertHandlers.SEMI_NEWLINE_INSERT_HANDLER;
 
 					resultSet.addElement(newElement.withInsertHandler(insertHandler));
 				}

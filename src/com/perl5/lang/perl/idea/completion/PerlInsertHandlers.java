@@ -25,7 +25,7 @@ import com.intellij.openapi.editor.EditorModificationUtil;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public class PerlInsertHandlers2
+public class PerlInsertHandlers
 {
 	public static final InsertHandler<LookupElement> SEMI_NEWLINE_INSERT_HANDLER = new SemiNewlineInsertHandler();
 	public static final InsertHandler<LookupElement> SPACE_INSERT_HANDLER = new SpaceAndParensInsertHandler();
