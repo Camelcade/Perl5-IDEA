@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlFunction;
+import com.perl5.lang.perl.psi.PerlObject;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,12 +36,18 @@ public abstract class PerlMethodImplMixin extends PerlPackageElementMixin implem
 	public String getExplicitPackageName()
 	{
 		PerlNamespace namespace = getNamespace();
-		// todo: detecting from object
-		// todo: detecting from scalar
+
 		if( namespace != null )
 			return namespace.getName();
 		else
-			return null;
+		{
+			PerlObject object = getObject();
+			// todo: detecting from object
+			if( object != null )
+				return null;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -53,5 +60,11 @@ public abstract class PerlMethodImplMixin extends PerlPackageElementMixin implem
 	public PerlFunction getUserFunction()
 	{
 		return findChildByClass(PerlFunction.class);
+	}
+
+	@Override
+	public boolean hasExplicitNamespace()
+	{
+		return getNamespace() != null || getObject() != null;
 	}
 }

@@ -21,4 +21,5 @@ package com.perl5.lang.perl.psi;
  */
 public interface IPerlMethodMixin extends PerlNamespaceContainer, PerlUserFunctionContainer, PerlPackageElement
 {
+	public boolean hasExplicitNamespace();
 }

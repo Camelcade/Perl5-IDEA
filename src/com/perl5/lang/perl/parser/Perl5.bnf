@@ -706,7 +706,7 @@ method ::=
     namespace '->' (scalar_variable | user_function)
     | namespace user_function         // package::method
     | object '->' user_function       // $object->method actuall it can be not scalar, but scalar expression, but enough for now
-    | user_function [namespace]       // method package
+    | user_function [namespace &PERL_LPAREN]       // method package
     | PERL_FUNCTION_BUILT_IN
     | PERL_KEYWORD
 

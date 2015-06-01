@@ -33,6 +33,7 @@ public interface PerlElementPatterns
 	public static final PsiElementPattern.Capture<PerlUseStatement> USE_STATEMENT_PATTERN = PlatformPatterns.psiElement(PerlUseStatement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlRequireTerm> REQUIRE_TERM_PATTERN = PlatformPatterns.psiElement(PerlRequireTerm.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlFunction> FUNCTION_PATTERN = PlatformPatterns.psiElement(PerlFunction.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlMethod> METHOD_PATTERN = PlatformPatterns.psiElement(PerlMethod.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = PlatformPatterns.psiElement(PerlVariable.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlVariableName> VARIABLE_NAME_PATTERN = PlatformPatterns.psiElement(PerlVariableName.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlHeredocTerminatorImpl> HEREDOC_TERMINATOR_PATTERN = PlatformPatterns.psiElement(PerlHeredocTerminatorImpl.class).withLanguage(PerlLanguage.INSTANCE);
