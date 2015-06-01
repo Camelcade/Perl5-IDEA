@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
@@ -28,7 +27,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlStatement;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,7 +58,7 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 					// fixme we should only add packages that has classes inside of them
 					for (String packageName : PerlPackageUtil.listDefinedPackageNames(file.getProject()))
 					{
-						resultSet.addElement(LookupElementBuilder.create(packageName).withIcon(PerlIcons.PM_FILE));
+						resultSet.addElement(LookupElementBuilder.create(packageName).withIcon(PerlIcons.PACKAGE_GUTTER_ICON));
 					}
 
 					if( useStatement.isUseParent())

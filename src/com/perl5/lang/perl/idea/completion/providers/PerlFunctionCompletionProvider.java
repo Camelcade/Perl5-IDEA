@@ -90,7 +90,7 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 						resultSet.addElement(
 								LookupElementBuilder
 										.create(replacement)
-										.withIcon(PerlIcons.PM_FILE)
+										.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
 										.withPresentableText(namespaceName + "...")
 										.withInsertHandler(NAMESPACE_SELECTION_HANLDER));
 					}

@@ -54,7 +54,7 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 				// fixme actually, we should fill files here, not packages, or make a diff provider
 				for (String packageName : PerlPackageUtil.listDefinedPackageNames(file.getProject()))
 				{
-					LookupElementBuilder newElement = LookupElementBuilder.create(packageName).withIcon(PerlIcons.PM_FILE);
+					LookupElementBuilder newElement = LookupElementBuilder.create(packageName).withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
 
 					if( !(parent instanceof IPerlVariableDeclaration))
 						newElement = newElement.withInsertHandler(PerlInsertHandlers.SEMI_NEWLINE_INSERT_HANDLER);
