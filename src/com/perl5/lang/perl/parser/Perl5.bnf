@@ -479,7 +479,7 @@ function_call ::= callable PERL_LPAREN [call_arguments] PERL_RPAREN !"["  // avo
 rightward_call ::= callable [call_arguments]
 
 call_arguments ::=
-    anon_hash [comma list_expr]
+    anon_hash comma list_expr
     | block [[comma] list_expr]
     | list_expr
 
@@ -525,9 +525,9 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::= 'local' [namespace]  local_variable_declaration_variation {pin=1}
-variable_declaration_lexical ::= ('my' | 'state') [namespace] variable_declaration_variation {pin=1}
-variable_declaration_global ::= 'our' [namespace] variable_declaration_variation  {pin=1}
+variable_declaration_local ::= <<checkTokenType PERL_RESERVED>> 'local' [namespace]  local_variable_declaration_variation {pin=2}
+variable_declaration_lexical ::= <<checkTokenType PERL_RESERVED>> ('my' | 'state') [namespace] variable_declaration_variation {pin=2}
+variable_declaration_global ::= <<checkTokenType PERL_RESERVED>> 'our' [namespace] variable_declaration_variation  {pin=2}
 
 private local_variable_declaration_variation ::=
     PERL_LPAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * PERL_RPAREN

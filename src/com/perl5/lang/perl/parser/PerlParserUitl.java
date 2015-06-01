@@ -85,7 +85,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parsePerlInRegex(PsiBuilder b, int l )
 	{
 		regexSuppressed = true;
-		boolean r = PerlParser.statement(b,l);
+		boolean r = PerlParser.statement(b, l);
 		regexSuppressed = false;
 		return r;
 	}
@@ -164,11 +164,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean noRegexQuote(PsiBuilder b, int l )
-	{
-		return b.getTokenType() != PERL_REGEX_QUOTE;
-	}
-
+	/**
+	 * Smart semi checker decides if we need semi here
+	 * @param b Perl builder
+	 * @param l Parsing level
+	 * @return checking result
+	 */
 	public static boolean statementSemi(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
@@ -186,6 +187,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-
-
+	/**
+	 * fixme this is a bad solution. Lexser must return appropriate tokens for keywords, this will speed up things
+	 * Checks current token type for parsing by names, when we need to check token type and token name
+	 * @param b Perl builder
+	 * @param l parsing level
+	 * @param tokenType tokentype to check
+	 * @return parsing results
+	 */
+	public static boolean checkTokenType(PsiBuilder b, int l, IElementType tokenType)
+	{
+		return b.getTokenType() == tokenType;
+	}
 }
