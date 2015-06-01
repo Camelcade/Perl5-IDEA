@@ -25,22 +25,28 @@ import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
-	public static PerlNamespace createPackageName(Project project, String name)
+	public static PerlNamespaceImpl createPackageName(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "package " + name + ";");
-		return PsiTreeUtil.findChildOfType(file, PerlNamespace.class);
+		PerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinition.class);
+		assert def != null;
+		return (PerlNamespaceImpl)def.getNamespace();
 	}
 
-	public static PerlUserFunctionImpl createUserFunction(Project project, String name)
+	public static PerlFunction createUserFunction(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "sub " + name + ";");
-		return PsiTreeUtil.findChildOfType(file, PerlUserFunctionImpl.class);
+		PerlSubDeclaration decl = PsiTreeUtil.findChildOfType(file, PerlSubDeclaration.class);
+		assert decl != null;
+		return decl.getUserFunction();
 	}
 
 	public static PerlVariableName createVariableName(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "$" + name + ";");
-		return PsiTreeUtil.findChildOfType(file, PerlVariableName.class);
+		PerlPerlScalar scalar = PsiTreeUtil.findChildOfType(file, PerlPerlScalar.class);
+		assert scalar != null;
+		return scalar.getVariableName();
 	}
 
 	public static PerlHeredocTerminatorImpl createHereDocTerminator(Project project, String name)
@@ -52,8 +58,9 @@ public class PerlElementFactory
 	public static PerlStringContentImpl createStringContent(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "'"+name+"';");
-
-		return (PerlStringContentImpl)file.getFirstChild().getFirstChild().getFirstChild().getFirstChild().getNextSibling();
+		PerlStringSq string = PsiTreeUtil.findChildOfType(file, PerlStringSq.class);
+		assert string != null;
+		return (PerlStringContentImpl) string.getFirstChild().getNextSibling();
 	}
 
 	public static PerlFileImpl createFile(Project project, String text)

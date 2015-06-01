@@ -30,7 +30,7 @@ limitations under the License.
   tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
 
   parserUtilClass="com.perl5.lang.perl.parser.PerlParserUitl"
-  psiImplUtilClass="com.perl5.lang.perl.psi.impl.PerlPsiImplUtil"
+  psiImplUtilClass="com.perl5.lang.perl.psi.PerlPsiImplUtil"
 
   //elementTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
 //  tokenTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
@@ -85,7 +85,8 @@ limitations under the License.
     PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
     PERL_OPERATOR_FILETEST="PERL_OPERATOR_FILETEST"
 
-    PERL_REGEX_QUOTE="PERL_REGEX_QUOTE"
+    PERL_REGEX_QUOTE_OPEN="PERL_REGEX_QUOTE_OPEN"
+    PERL_REGEX_QUOTE_CLOSE="PERL_REGEX_QUOTE_CLOSE"
     PERL_REGEX_MODIFIER="PERL_REGEX_MODIFIER"
     PERL_REGEX_TOKEN="PERL_REGEX_TOKEN"
 
@@ -135,41 +136,53 @@ limitations under the License.
 
     extends(".*expr")=expr
 
+    mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
+    implements("use_statement")="com.perl5.lang.perl.psi.IPerlUseStatement"
+
     implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.PerlLexicalScope";
 
-    implements("variable_declaration_lexical|variable_declaration_local")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
-    mixin("variable_declaration_lexical|variable_declaration_local|conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.impl.PerlLexicalScopeElementMixin"
+    implements("variable_declaration_lexical|variable_declaration_local")="com.perl5.lang.perl.psi.IPerlVariableDeclaration"
+    mixin("variable_declaration_lexical|variable_declaration_local|conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeElementMixin"
 
     elementTypeFactory("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
     stubClass("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
-    mixin("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.impl.PerlVariableImplMixin"
+    mixin("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.PerlVariable"
 
     elementTypeFactory("sub_definition|perl_glob|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
     stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
-    mixin("namespace_definition")="com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImplMixin"
+    mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
+    implements("namespace_definition")="com.perl5.lang.perl.psi.IPerlNamespaceDefinitionMixin"
 
     stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub"
-    mixin("sub_definition")="com.perl5.lang.perl.psi.impl.PerlSubDefinitionImplMixin"
-    implements("sub_definition")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.PerlLexicalScope"
+    mixin("sub_definition")="com.perl5.lang.perl.psi.mixins.PerlSubDefinitionImplMixin"
+    implements("sub_definition")="com.perl5.lang.perl.psi.IPerlSubDefinitionMixin"
+
+    mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationImplMixin"
+    implements("sub_declaration")="com.perl5.lang.perl.psi.IPerlSubDeclarationMixin"
 
     stubClass("perl_glob")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
-    mixin("perl_glob")="com.perl5.lang.perl.psi.impl.PerlPerlGlobImplMixin"
-    implements("perl_glob")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.IPerlPerlGlobMixin"
+    mixin("perl_glob")="com.perl5.lang.perl.psi.mixins.PerlPerlGlobImplMixin"
+    implements("perl_glob")="com.perl5.lang.perl.psi.IPerlPerlGlobMixin"
 
-    mixin("variable_name")="com.perl5.lang.perl.psi.impl.PerlVariableNameImplMixin"
-    implements("variable_name")="com.perl5.lang.perl.psi.PerlNamedElement"
+    mixin("require_term")="com.perl5.lang.perl.psi.mixins.PerlRequireTermImplMixin"
+    implements("require_term")="com.perl5.lang.perl.psi.IPerlRequireTermImplMixin"
 
-    mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
-    implements("namespace")="com.perl5.lang.perl.psi.PerlNamedElement"
+    mixin("method")="com.perl5.lang.perl.psi.mixins.PerlMethodImplMixin";
+    implements("method")="com.perl5.lang.perl.psi.IPerlMethodMixin";
 
-    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
-    implements("user_function")="com.perl5.lang.perl.psi.PerlPackagedElement,com.perl5.lang.perl.psi.PerlNamedElement"
+    mixin("object")="com.perl5.lang.perl.psi.mixins.PerlObjectImplMixin"
 
-    mixin("method")="com.perl5.lang.perl.psi.impl.PerlMethodImplMixin";
-    mixin("object")="com.perl5.lang.perl.psi.impl.PerlObjectImplMixin"
-    mixin("heredoc_opener")="com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImplMixin"
+//    mixin("variable_name")="com.perl5.lang.perl.psi.impl.PerlVariableNameImplMixin"
+//    implements("variable_name")="com.perl5.lang.perl.psi.PerlNamedElement"
+
+//    mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
+//    implements("namespace")="com.perl5.lang.perl.psi.PerlNamedElement"
+
+//    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
+//    implements("user_function")="com.perl5.lang.perl.psi.IPerlUserFunctionMixin"
+
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
@@ -180,7 +193,7 @@ private file_item ::= namespace_block | namespace_element
 
 block ::= "{" file_items "}" //{pin=1}  //fixme we shoud be able to distinct from anon hash
 
-private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI )
+private namespace_element ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI ) {recoverWhile=recover_statement}
 
 // package keyword
 namespace_block ::= "package"  namespace_definition (block | PERL_SEMI namespace_content) {pin=1}
@@ -201,7 +214,6 @@ private compound_statement ::=
         | for_compound
         | foreach_compound
      )
-     {recoverWhile=recover_statement}
 
 if_compound ::= 'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 unless_compound ::= 'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
@@ -223,8 +235,8 @@ private block_compound ::= block [compound_continue_block]
 
 
 // for/foreach
-for_compound ::= 'for' for_arguments // {pin=1}
-foreach_compound ::= 'foreach' for_arguments // {pin=1}
+for_compound ::= 'for' for_arguments  {pin=1}
+foreach_compound ::= 'foreach' for_arguments  {pin=1}
 private for_arguments ::=
     for_iterator block
     | for_list block_compound
@@ -235,7 +247,8 @@ for_iterator ::= PERL_LPAREN [expr]  PERL_SEMI [expr] PERL_SEMI [expr] PERL_RPAR
 for_list ::=
     [ variable_declaration | variable ] parenthesised_expr
 
-statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2 recoverWhile=recover_statement}
+private statements ::= (statement | PERL_SEMI )+
+statement ::= [label_declaration] statement_variation [statement_modifier] <<statementSemi>> {pin=2}
 
 private statement_variation ::=
     use_statement
@@ -246,14 +259,17 @@ private statement_variation ::=
 
 require_statement ::= require_term &(PERL_RESERVED | ';' | '}')
 
-sub_definition ::= "sub" namespace_method_static sub_definition_parameters ? block
+sub_definition ::= "sub" canonical_sub_name [sub_definition_parameters] block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= "sub" namespace_method_static sub_declaration_parameters
+sub_declaration ::= "sub" canonical_sub_name sub_declaration_parameters
+
+private canonical_sub_name ::= [namespace] user_function
+
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 private sub_prototype ::= PERL_LPAREN [<<parseSubPrototype>>] PERL_RPAREN
@@ -284,7 +300,6 @@ for_statement_modifier ::=  'for' expr  {pin=1}
 foreach_statement_modifier ::=  'foreach' expr {pin=1}
 when_statement_modifier ::= 'when' expr {pin=1}
 
-
 use_statement ::= 'use' use_no_parameters {pin=1}
 no_statement ::= 'no' use_no_parameters {pin=1}
 private use_no_parameters ::= use_module_parameters | use_version_parameters
@@ -300,7 +315,7 @@ require_term ::= 'require' (namespace | perl_version | unary_expr)  // multiline
 private recover_statement ::= !(
     PERL_RESERVED | PERL_KEYWORD | PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_OPERATOR_UNARY | PERL_TAG | PERL_OPERATOR_NOT
     | PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
-    | PERL_RBRACE | PERL_LBRACE | PERL_LANGLE | PERL_REGEX_QUOTE
+    | PERL_RBRACE | PERL_LBRACE | PERL_LANGLE | PERL_REGEX_QUOTE_OPEN
     | PERL_LBRACK
     | PERL_LPAREN
     | PERL_SEMI
@@ -378,6 +393,7 @@ parenthesised_expr ::= PERL_LPAREN [expr] PERL_RPAREN {pin=1}
 return_term ::= "return" [list_expr]
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
+private immutable_expression ::= <<parseExpressionLevel 20>>
 
 private op_3_expr ::= pref_pp_expr | suff_pp_expr
 pref_pp_expr ::= ('++'|'--') expr
@@ -401,7 +417,6 @@ private named_undry_expr_defined ::= 'defined' !PERL_LPAREN [unary_expr]
 private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !PERL_LPAREN unary_expr
 
 private unary_expr ::= <<parseExpressionLevel 13>>
-
 
 filetest_expr ::= PERL_OPERATOR_FILETEST [(perl_handle | expr )]
 
@@ -466,7 +481,7 @@ function_call ::= callable PERL_LPAREN [call_arguments] PERL_RPAREN !"["  // avo
 rightward_call ::= callable [call_arguments]
 
 call_arguments ::=
-    anon_hash [comma list_expr]
+    anon_hash comma list_expr
     | block [[comma] list_expr]
     | list_expr
 
@@ -482,17 +497,14 @@ private regex_term ::=
 // pinning quotes leads to bug with replacement block
 compile_regex ::= 'qr' match_regex_body
 match_regex ::= ['m'] match_regex_body
-private match_regex_body ::= PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE [perl_regex_modifiers]
-replacement_regex ::= "s" PERL_REGEX_QUOTE [perl_regex] PERL_REGEX_QUOTE regex_replacement [perl_regex_modifiers]
+private match_regex_body ::= PERL_REGEX_QUOTE_OPEN [perl_regex] PERL_REGEX_QUOTE_CLOSE [perl_regex_modifiers]
+replacement_regex ::= "s" PERL_REGEX_QUOTE_OPEN [perl_regex] PERL_REGEX_QUOTE_CLOSE [PERL_REGEX_QUOTE_OPEN] [perl_regex | statements] PERL_REGEX_QUOTE_CLOSE [perl_regex_modifiers]
 
-private regex_replacement ::=
-    PERL_REGEX_QUOTE [perl_regex | expr] PERL_REGEX_QUOTE
-    |  [perl_regex | expr] PERL_REGEX_QUOTE
 
 perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
 perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick
 
-tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE tr_searchlist PERL_REGEX_QUOTE [PERL_REGEX_QUOTE] tr_replacementlist PERL_REGEX_QUOTE [tr_modifiers] {pin=1}
+tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE_OPEN tr_searchlist PERL_REGEX_QUOTE_CLOSE [PERL_REGEX_QUOTE_OPEN] tr_replacementlist PERL_REGEX_QUOTE_CLOSE [tr_modifiers] {pin=1}
 tr_searchlist ::= PERL_STRING_CONTENT
 tr_replacementlist ::= PERL_STRING_CONTENT
 
@@ -509,15 +521,15 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::= 'local' [namespace]  local_variable_declaration_variation {pin=1}
-variable_declaration_lexical ::= ('my' | 'state') [namespace] variable_declaration_variation {pin=1}
-variable_declaration_global ::= 'our' [namespace] variable_declaration_variation  {pin=1}
+variable_declaration_local ::= <<checkTokenType PERL_RESERVED>> 'local' [namespace]  local_variable_declaration_variation {pin=2}
+variable_declaration_lexical ::= <<checkTokenType PERL_RESERVED>> ('my' | 'state') [namespace] variable_declaration_variation {pin=2}
+variable_declaration_global ::= <<checkTokenType PERL_RESERVED>> 'our' [namespace] variable_declaration_variation  {pin=2}
 
 private local_variable_declaration_variation ::=
     PERL_LPAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * PERL_RPAREN
     | local_variable_declaration_argument
 
-private local_variable_declaration_argument ::= lexical_variable_definition_argument | scalar_expr
+private local_variable_declaration_argument ::= immutable_expression | lexical_variable_definition_argument
 
 private variable_declaration_variation ::=
     PERL_LPAREN lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* PERL_RPAREN
@@ -683,21 +695,18 @@ private variable_body ::=
     PERL_LBRACE [namespace] variable_name PERL_RBRACE
     | [namespace] variable_name
     | namespace
-variable_name ::= PERL_VARIABLE_NAME
+private variable_name ::= PERL_VARIABLE_NAME
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
 method ::=
-    namespace '->' scalar_variable      // i belive here could be more
-    | namespace_method_static   // package::method
-    | namespace_method          // package->method
-    | object_method             // $object->method actuall it can be not scalar, but scalar expression, but enough for now
+    namespace '->' (scalar_variable | user_function)
+    | namespace user_function         // package::method
+    | object '->' user_function       // $object->method actuall it can be not scalar, but scalar expression, but enough for now
+    | user_function [namespace]       // method package
     | PERL_FUNCTION_BUILT_IN
     | PERL_KEYWORD
 
-private namespace_method_static ::= [namespace] user_function
-private namespace_method ::= [namespace '->'] user_function
-private object_method ::= object '->' user_function
 object ::= scalar_variable
 
-namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
-user_function ::= PERL_FUNCTION
+private namespace ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+private user_function ::= PERL_FUNCTION

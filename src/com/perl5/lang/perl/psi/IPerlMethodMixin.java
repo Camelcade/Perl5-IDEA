@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
-
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+package com.perl5.lang.perl.psi;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public class PerlPsiImplUtil implements PerlElementTypes
+public interface IPerlMethodMixin extends PerlNamespaceContainer, PerlUserFunctionContainer, PerlPackageElement
 {
-
 }

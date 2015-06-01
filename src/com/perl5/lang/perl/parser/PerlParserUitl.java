@@ -45,9 +45,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	/**
 	 * Smart parser for ->, makes }->[ optional
-	 * @param b
-	 * @param l
-	 * @return
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
 	 */
 	public static boolean parseArrowSmart(PsiBuilder b, int l )
 	{
@@ -73,6 +73,32 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	/**
+	 * Supresses regex opener and parses expression
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parsePerlInRegex(PsiBuilder b, int l )
+	{
+		assert b instanceof PerlBuilder;
+		((PerlBuilder) b).setRegexOpenerSuppressed(true);
+		boolean r = PerlParser.statements(b, l);
+		((PerlBuilder) b).setRegexOpenerSuppressed(false);
+		return r;
+	}
+
+	/**
+	 * Checks if regex opener been suppressed (we are in //e block)
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean regexNotSuppressed(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+		return !((PerlBuilder) b).isRegexOpenerSuppressed();
+	}
 
 	public static boolean parseExpressionLevel(PsiBuilder b, int l, int g )
 	{
@@ -137,11 +163,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean noRegexQuote(PsiBuilder b, int l )
-	{
-		return b.getTokenType() != PERL_REGEX_QUOTE;
-	}
-
+	/**
+	 * Smart semi checker decides if we need semi here
+	 * @param b Perl builder
+	 * @param l Parsing level
+	 * @return checking result
+	 */
 	public static boolean statementSemi(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
@@ -150,7 +177,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			consumeToken(b, PERL_SEMI);
 			return true;
 		}
-		else if( tokenType == PERL_RBRACE ||  tokenType == PERL_RESERVED)
+		else if( tokenType == PERL_RBRACE ||  tokenType == PERL_RESERVED || tokenType == PERL_REGEX_QUOTE_CLOSE)
 			return true;
 		else if(b.eof()) // eof
 			return true;
@@ -159,6 +186,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-
-
+	/**
+	 * fixme this is a bad solution. Lexser must return appropriate tokens for keywords, this will speed up things
+	 * Checks current token type for parsing by names, when we need to check token type and token name
+	 * @param b Perl builder
+	 * @param l parsing level
+	 * @param tokenType tokentype to check
+	 * @return parsing results
+	 */
+	public static boolean checkTokenType(PsiBuilder b, int l, IElementType tokenType)
+	{
+		return b.getTokenType() == tokenType;
+	}
 }

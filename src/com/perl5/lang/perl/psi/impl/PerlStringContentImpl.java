@@ -17,16 +17,57 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlElementFactory;
+import com.perl5.lang.perl.psi.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 23.05.2015.
  */
-public class PerlStringContentImpl extends LeafPsiElement
+public class PerlStringContentImpl extends LeafPsiElement implements PerlNamedElement
 {
 	public PerlStringContentImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
 	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return this;
+	}
+
+	@Override
+	public String getName()
+	{
+		return getText();
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		if( name.equals(""))
+			throw new IncorrectOperationException("You can't rename a string to the empty one");
+
+		PerlStringContentImpl newName = PerlElementFactory.createStringContent(getProject(), name);
+		if( newName != null )
+			replace(newName);
+		else
+			throw new IncorrectOperationException("Unable to create string from: "+ name);
+		return this;
+	}
+
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+	}
+
 }

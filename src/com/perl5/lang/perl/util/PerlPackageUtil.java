@@ -31,7 +31,6 @@ import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceBlock;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
-import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +42,7 @@ import java.util.*;
  */
 public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 {
-	protected static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
+	public static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
 
 	static{
 		for( String packageName: BUILT_IN )
@@ -71,6 +70,26 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 	/**
+	 * Check if package is deprecated
+	 * @param packageName package name
+	 * @return result
+	 */
+	public static boolean isDeprecated(String packageName)
+	{
+		return BUILT_IN_DEPRECATED.contains(packageName);
+	}
+
+	/**
+	 * Check if package is pragma
+	 * @param packageName package name
+	 * @return checking result
+	 */
+	public static boolean isPragma(String packageName)
+	{
+		return BUILT_IN_PRAGMA.contains(packageName);
+	}
+
+	/**
 	 * Returns token type depending on package name
 	 * @param variable package name
 	 * @return token type
@@ -95,7 +114,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 	@NotNull
-	public static String getElementPackageName(PsiElement element)
+	public static String getContextPackageName(PsiElement element)
 	{
 		PerlNamespaceBlock namespaceBlock = PsiTreeUtil.getParentOfType(element, PerlNamespaceBlock.class);
 
@@ -132,9 +151,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param project project to search in
 	 * @return collection of package names
 	 */
-	public static Collection<String> getDefinedPackageNames(Project project)
+	public static Collection<String> listDefinedPackageNames(Project project)
 	{
-		return StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project);
+		return StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
 	}
 
 	/**

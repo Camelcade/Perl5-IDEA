@@ -14,39 +14,38 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlVariableName;
+import com.perl5.lang.perl.psi.PerlPackageElement;
+import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.
+ * This is an element with context, like variable, function
  */
-public class PerlVariableNameImplMixin extends PerlNamedElementImpl implements PerlVariableName
+public abstract class PerlPackageElementMixin extends PerlNamedElementImpl implements PerlPackageElement
 {
-	public PerlVariableNameImplMixin(@NotNull ASTNode node){
+	public PerlPackageElementMixin(@NotNull ASTNode node){
 		super(node);
 	}
 
 	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	public String getContextPackageName()
 	{
-		PerlVariableName newName = PerlElementFactory.createVariableName(getProject(), name);
-		if( newName != null )
-			replace(newName);
-		return this;
+		return PerlPackageUtil.getContextPackageName(this);
 	}
 
-	@Nullable
 	@Override
-	public PsiElement getNameIdentifier()
+	public String getPackageName()
 	{
-		return getFirstChild();
-	}
+		String namespace = getExplicitPackageName();
 
+		if( namespace == null )
+			namespace = getContextPackageName();
+
+		return namespace;
+	}
 }

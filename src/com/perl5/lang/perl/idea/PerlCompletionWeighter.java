@@ -14,31 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.idea;
 
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlMethod;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.intellij.codeInsight.completion.CompletionLocation;
+import com.intellij.codeInsight.completion.CompletionWeigher;
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 24.05.2015.
+ * Created by hurricup on 01.06.2015.
+ *
  */
-public abstract class PerlMethodImplMixin extends PerlElementInContextImpl implements PerlMethod
+public class PerlCompletionWeighter extends CompletionWeigher
 {
-	public PerlMethodImplMixin(@NotNull ASTNode node){
-		super(node);
-	}
-
 	@Override
-	public String getExplicitPackageName()
+	public Comparable weigh(@NotNull LookupElement element, @NotNull CompletionLocation location)
 	{
-		PerlNamespace namespace = getNamespace();
-		// todo: detecting from object
-		// todo: detecting from scalar
-		if( namespace != null )
-			return ((PerlNamespaceImpl)namespace).getName();
-		else
-			return null;
+		if (!PsiUtilCore.findLanguageFromElement(location.getCompletionParameters().getPosition()).isKindOf(PerlLanguage.INSTANCE)) {
+			return 0;
+		}
+
+		return 0;
 	}
 }

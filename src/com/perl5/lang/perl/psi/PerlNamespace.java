@@ -14,26 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
-
-import com.intellij.lang.refactoring.NamesValidator;
-import com.intellij.openapi.project.Project;
+package com.perl5.lang.perl.psi;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public class PerlNamesValidator implements NamesValidator
+public interface PerlNamespace extends PerlNamedElement
 {
-	@Override
-	public boolean isKeyword(String name, Project project)
-	{
-		// @todo add some keywords here?
-		return false;
-	}
 
-	@Override
-	public boolean isIdentifier(String name, Project project)
-	{
-		return !"".equals(name);
-	}
 }

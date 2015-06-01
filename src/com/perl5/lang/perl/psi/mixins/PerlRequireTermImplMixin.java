@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.lang.refactoring.NamesValidator;
-import com.intellij.openapi.project.Project;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlRequireTerm;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public class PerlNamesValidator implements NamesValidator
+public abstract class PerlRequireTermImplMixin extends ASTWrapperPsiElement implements PerlRequireTerm
 {
-	@Override
-	public boolean isKeyword(String name, Project project)
+	public PerlRequireTermImplMixin(ASTNode node)
 	{
-		// @todo add some keywords here?
-		return false;
+		super(node);
 	}
 
 	@Override
-	public boolean isIdentifier(String name, Project project)
+	public PerlNamespace getNamespace()
 	{
-		return !"".equals(name);
+		return findChildByClass(PerlNamespace.class);
 	}
 }

@@ -34,6 +34,9 @@ public class PerlHeredocTerminatorImpl extends PsiCommentImpl implements PerlNam
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
+		if( name.equals(""))
+			throw new IncorrectOperationException("You can't set heredoc terminator to the empty one");
+
 		replace(PerlElementFactory.createHereDocTerminator(getProject(), name));
 		return this;
 	}

@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlPerlGlob;
+import com.perl5.lang.perl.psi.PerlVariableName;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -66,7 +67,7 @@ public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getContextPackageName()
 	{
-		return PerlPackageUtil.getElementPackageName(this);
+		return PerlPackageUtil.getContextPackageName(this);
 	}
 
 	@Override
@@ -76,4 +77,15 @@ public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<Perl
 		return namespace != null ? namespace.getName(): null;
 	}
 
+	@Override
+	public PerlNamespace getNamespace()
+	{
+		return findChildByClass(PerlNamespace.class);
+	}
+
+	@Override
+	public PerlVariableName getVariableName()
+	{
+		return findChildByClass(PerlVariableName.class);
+	}
 }

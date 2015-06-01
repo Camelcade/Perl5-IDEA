@@ -18,10 +18,9 @@ package com.perl5.lang.perl.idea.components;
 
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.perl5.lang.perl.psi.impl.PerlFileListener;
+import com.perl5.lang.perl.idea.PerlFileListener;
 import org.jetbrains.annotations.NotNull;
 
 /**

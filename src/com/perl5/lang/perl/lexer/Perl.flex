@@ -151,13 +151,16 @@ CAPTURE_MAIN_CALL = "::"{BAREWORD}
 CAPTURE_METHOD_CALL = "->"{BAREWORD}
 
 // ->SUPER::method
-CAPTURE_SUPER_METHOD_CALL = "->"{EMPTY_SPACE}*"SUPER::"
+CAPTURE_SUPER_METHOD_CALL = "->"{MEANINGLESS_SPACE}*"SUPER::"
 
 // package->method
-CAPTURE_PACKAGE_METHOD_CALL = {PERL_PACKAGE_METHOD}{EMPTY_SPACE}*"->"{EMPTY_SPACE}*{BAREWORD}
+CAPTURE_PACKAGE_METHOD_CALL = {PERL_PACKAGE_METHOD}{MEANINGLESS_SPACE}*"->"{MEANINGLESS_SPACE}*{BAREWORD}
+
+// method package
+CAPTURE_PACKAGE_METHOD_CALL_FANCY = {BAREWORD}{MEANINGLESS_SPACE}+{PERL_PACKAGE_METHOD}{MEANINGLESS_SPACE}*"("
 
 // package->$method
-CAPTURE_PACKAGE_METHOD_CALL_VAR = {PERL_PACKAGE_METHOD}{EMPTY_SPACE}*"->"{EMPTY_SPACE}*"$"
+CAPTURE_PACKAGE_METHOD_CALL_VAR = {PERL_PACKAGE_METHOD}{MEANINGLESS_SPACE}*"->"{MEANINGLESS_SPACE}*"$"
 
 CHAR_ANY        = .|{NEW_LINE}
 QUOTE           = "\"" | "'" | "`"
@@ -238,7 +241,7 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_BAREWORD_BRACED
 %xstate LEX_BAREWORD_STRING_COMMA
 %xstate LEX_SURE_PACKAGE, LEX_SURE_PACKAGE_PACKAGE
-%xstate LEX_PACKAGE_METHOD_CALL, LEX_PACKAGE_METHOD_CALL_VAR
+%xstate LEX_PACKAGE_METHOD_CALL, LEX_PACKAGE_METHOD_CALL_VAR, LEX_PACKAGE_METHOD_CALL_FANCY
 %xstate LEX_SUPER_METHOD_CALL
 %xstate LEX_MAIN_FUNCTION_CALL
 %xstate LEX_LABEL
@@ -267,7 +270,7 @@ TRANS_MODIFIERS = [cdsr]
 
     // we should control, where whitespace is allowed
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {PERL_PACKAGE_CANONICAL} {return PerlPackageUtil.getPackageType(yytext().toString());}
+    {PERL_PACKAGE_CANONICAL} {return getPackageType();}
     {PERL_BASIC_IDENTIFIER} {endCustomBlock();return PERL_VARIABLE_NAME;}
     [^] {yypushback(1);endCustomBlock();break;}
 }
@@ -326,7 +329,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_PACKAGE_FUNCTION_CALL>
 {
     {BAREWORD} {endCustomBlock();return PERL_FUNCTION;}
-    {PERL_PACKAGE_CANONICAL} {return PerlPackageUtil.getPackageType(yytext().toString());}
+    {PERL_PACKAGE_CANONICAL} {return getPackageType();}
 
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -399,7 +402,30 @@ TRANS_MODIFIERS = [cdsr]
 {
     "->" {return PERL_DEREFERENCE;}
     {BAREWORD} {endCustomBlock();return PERL_FUNCTION;}
-    {PERL_PACKAGE_SURE} {return PerlPackageUtil.getPackageType(yytext().toString()); }
+    {PERL_PACKAGE_SURE} {return getPackageType(); }
+    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
+    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    . {yypushback(1);endCustomBlock();break;}
+}
+
+// exclusive
+<LEX_PACKAGE_METHOD_CALL_FANCY>
+{
+    // here are should be keywords and resreved words
+    {BAREWORD} {
+        IElementType tokenType = getBarewordTokenType();
+        if( tokenType != PERL_FUNCTION )
+            endCustomBlock();
+        return tokenType;
+    }
+    {PERL_PACKAGE_METHOD} {
+        endCustomBlock();
+        if( isKnownPackage() )
+            return getPackageType();
+
+        yypushback(yylength());
+        break;
+    }
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     . {yypushback(1);endCustomBlock();break;}
@@ -408,13 +434,13 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_PACKAGE_METHOD_CALL_VAR>
 {
-    {PERL_PACKAGE_SURE} {endCustomBlock();return PerlPackageUtil.getPackageType(yytext().toString()); }
+    {PERL_PACKAGE_SURE} {endCustomBlock();return getPackageType(); }
 }
 
 
 <LEX_SURE_PACKAGE_PACKAGE>
 {
-   {PERL_PACKAGE_SURE} {endCustomBlock();return PerlPackageUtil.getPackageType(yytext().toString());}
+   {PERL_PACKAGE_SURE} {endCustomBlock();return getPackageType();}
 //   {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -443,6 +469,7 @@ TRANS_MODIFIERS = [cdsr]
     "{" {return PERL_LBRACE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    {PERL_TAGS} {return PERL_TAG;}
     {BAREWORD}   {endCustomBlock();return getBracedBarewordTokenType(); }
     . {yypushback(1);endCustomBlock();break;}
 }
@@ -450,7 +477,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_SUB_NAME>
 {
-    {PERL_PACKAGE_CANONICAL} {return PerlPackageUtil.getPackageType(yytext().toString());}
+    {PERL_PACKAGE_CANONICAL} {return getPackageType();}
     {BAREWORD} {yybegin(LEX_SUB_DEFINITION);return PERL_FUNCTION;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -615,6 +642,7 @@ TRANS_MODIFIERS = [cdsr]
 
 "sub" {pushState();yybegin(LEX_SUB_NAME);return PERL_RESERVED;}
 {CAPTURE_PACKAGE_METHOD_CALL} {startCustomBlock(LEX_PACKAGE_METHOD_CALL);break;}
+{CAPTURE_PACKAGE_METHOD_CALL_FANCY} {startCustomBlock(LEX_PACKAGE_METHOD_CALL_FANCY);break;}
 {CAPTURE_PACKAGE_METHOD_CALL_VAR} {startCustomBlock(LEX_PACKAGE_METHOD_CALL_VAR);break;}
 {CAPTURE_SUPER_METHOD_CALL} {startCustomBlock(LEX_SUPER_METHOD_CALL);break;}
 {CAPTURE_SURE_PACKAGE} {startCustomBlock(LEX_SURE_PACKAGE);break;}
@@ -660,13 +688,13 @@ TRANS_MODIFIERS = [cdsr]
 {CAPTURE_METHOD_CALL} {startCustomBlock(LEX_METHOD_CALL);break;}
 {PERL_PACKAGE_METHOD} {startCustomBlock(LEX_PACKAGE_FUNCTION_CALL);break;}
 
-{PERL_PACKAGE_CANONICAL} {return PerlPackageUtil.getPackageType(yytext().toString());}
+{PERL_PACKAGE_CANONICAL} {return getPackageType();}
 {BUILT_IN_GLOB_NAME} {return PERL_HANDLE_BUILT_IN;}
 {CAPTURE_HANDLE_READ} {startCustomBlock(LEX_HANDLE_READ);break;}
 {CAPTURE_HANDLE_FILETEST} {startCustomBlock(LEX_HANDLE_FILETEST);break;}
 {CAPTURE_HANDLE_PRINT} {startCustomBlock(LEX_HANDLE);break;}
 {CAPTURE_HANDLE} {startCustomBlock(LEX_HANDLE);break;}
-{BAREWORD} { return PerlFunctionUtil.getFunctionType(yytext().toString());}
+{BAREWORD} { return getBarewordTokenType();}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

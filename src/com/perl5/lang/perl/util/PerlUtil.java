@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -26,10 +25,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -50,9 +47,9 @@ public class PerlUtil
 
 		PerlLexicalScope currentScope = ((PerlLexicalScopeElement) currentElement).getLexicalScope();
 
-		Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), PerlVariableDeclaration.class);
+		Collection<IPerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), IPerlVariableDeclaration.class);
 
-		for(PerlVariableDeclaration declaration: declarations)
+		for(IPerlVariableDeclaration declaration: declarations)
 		{
 			if( declaration.getTextOffset() < currentElement.getTextOffset())
 			{

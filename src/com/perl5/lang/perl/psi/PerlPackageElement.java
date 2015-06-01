@@ -17,19 +17,31 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
- * Created by hurricup on 27.05.2015.
+ * Created by hurricup on 25.05.2015.
+ *
  */
-public interface PerlVariable extends PerlLexicalScopeElement, PerlPackageElement, PsiElement
+public interface PerlPackageElement extends PsiElement
 {
-	@Nullable
-	PerlNamespace getNamespace();
+	/**
+	 * Method for checking explicit package name for current element
+	 * @return package name or null if n/a
+	 */
+	public String getExplicitPackageName();
 
-	@Nullable
-	PerlVariableName getVariableName();
+	/**
+	 * Trying to detect package name by traversing parents
+	 * @return package name or main if not found
+	 */
+	public String getContextPackageName();
 
-	@Nullable
-	PerlScalarSigils getScalarSigils();
+	/**
+	 * Trying to get the package name from explicit specification or by traversing
+	 * @return package name for current element
+	 */
+	public String getPackageName();
+
 }

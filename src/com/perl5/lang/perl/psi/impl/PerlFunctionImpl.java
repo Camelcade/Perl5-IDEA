@@ -16,35 +16,36 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlFunction;
 import com.perl5.lang.perl.psi.PerlElementFactory;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlHeredocOpenerImplMixin extends PerlNamedElementImpl implements PerlElementTypes
+/**
+ * Created by hurricup on 24.05.2015.
+ *
+ */
+public class PerlFunctionImpl extends LeafPsiElement implements PerlFunction
 {
-	public PerlHeredocOpenerImplMixin(@NotNull ASTNode node){
-		super(node);
+	public PerlFunctionImpl(@NotNull IElementType type, CharSequence text) {
+		super(type, text);
 	}
 
 	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if( nameIdentifier != null )
-		{
-			PerlStringContentImpl newName = PerlElementFactory.createStringContent(getProject(), name);
-			if( newName != null )
-				nameIdentifier.replace(newName);
-
-		}
+		PerlFunction newFunction = PerlElementFactory.createUserFunction(getProject(), name);
+		if( newFunction != null )
+			replace(newFunction);
+		else
+			throw new IncorrectOperationException("Unable to create function from: "+ name);
 		return this;
 	}
 
@@ -52,7 +53,21 @@ public class PerlHeredocOpenerImplMixin extends PerlNamedElementImpl implements 
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return PsiTreeUtil.findChildOfType(this, PerlStringContentImpl.class);
+		return this;
 	}
+
+	@Override
+	public String getName()
+	{
+		return this.getText();
+	}
+
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+	}
+
 
 }

@@ -14,50 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlLexicalScope;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
-import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlFunction;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 24.05.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable //
+public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement implements PerlSubDeclaration
 {
-	public PerlVariableImplMixin(PerlVariableStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
-
-
-	public PerlVariableImplMixin(ASTNode node)
-	{
+	public PerlSubDeclarationImplMixin(@NotNull ASTNode node){
 		super(node);
 	}
 
-	@Override
-	public PerlLexicalScope getLexicalScope()
-	{
-		return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
-	}
-
-	@Override
 	public String getPackageName()
 	{
-//		PerlVariableStub stub = getStub();
-//		if( stub != null)
-//			return stub.getPackageName();
-
 		String namespace = getExplicitPackageName();
 
 		if( namespace == null )
@@ -66,10 +43,16 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		return namespace;
 	}
 
+	public String getFunctionName()
+	{
+		PerlFunction function = getUserFunction();
+		return function.getName();
+	}
+
 	@Override
 	public String getContextPackageName()
 	{
-		return PerlPackageUtil.getElementPackageName(this);
+		return PerlPackageUtil.getContextPackageName(this);
 	}
 
 	@Override
@@ -78,5 +61,19 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		PerlNamespace namespace = getNamespace();
 		return namespace != null ? namespace.getName(): null;
 	}
+
+	@Override
+	public PerlNamespace getNamespace()
+	{
+		return findChildByClass(PerlNamespace.class);
+	}
+
+
+	@Override
+	public PerlFunction getUserFunction()
+	{
+		return findChildByClass(PerlFunction.class);
+	}
+
 
 }

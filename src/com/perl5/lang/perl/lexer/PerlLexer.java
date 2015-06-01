@@ -21,12 +21,11 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.util.PerlFunctionUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,11 +34,17 @@ public class PerlLexer extends PerlLexerGenerated{
 	protected IElementType lastSignificantTokenType;
 	protected String lastSignificantToken;
 	protected IElementType lastTokenType;
+	protected HashMap<String,IElementType> knownPackages = new HashMap<>();
 
 	public PerlLexer(java.io.Reader in) {
 		super(in);
 	}
 
+	/**
+	 * Lexers advance method. Parses some thing here, or just invoking generated flex parser
+	 * @return next token type
+	 * @throws IOException
+	 */
 	public IElementType advance() throws IOException{
 
 		CharSequence buffer = getBuffer();
@@ -132,7 +137,10 @@ public class PerlLexer extends PerlLexerGenerated{
 			// capture line comment
 			else if(
 					buffer.charAt(tokenStart)=='#'
-							&& (currentState != LEX_QUOTE_LIKE_OPENER || !allowSharpQuote)
+					&& (currentState != LEX_QUOTE_LIKE_OPENER || !allowSharpQuote)
+					&& (currentState != LEX_TRANS_OPENER && currentState != LEX_TRANS_CLOSER || !allowSharpQuote)
+					&& (currentState != LEX_TRANS_CHARS)
+					&& (currentState != LEX_REGEX_OPENER)
 			)
 			{
 				// comment may end on newline or ?>
@@ -512,7 +520,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		{
 //			System.err.println("Stop after first block");
 			yybegin(YYINITIAL);
-			return PERL_REGEX_QUOTE;
+			return PERL_REGEX_QUOTE_OPEN;
 		}
 		int currentOffset = firstBlock.getEndOffset();
 
@@ -550,7 +558,7 @@ public class PerlLexer extends PerlLexerGenerated{
 				}
 
 				// read block
-				secondBlockOpener = new CustomToken(currentOffset, currentOffset+1, PERL_REGEX_QUOTE);
+				secondBlockOpener = new CustomToken(currentOffset, currentOffset+1, PERL_REGEX_QUOTE_OPEN);
 				secondBLock = RegexBlock.parseBlock(buffer, currentOffset + 1, bufferEnd, buffer.charAt(currentOffset));
 			}
 
@@ -558,7 +566,7 @@ public class PerlLexer extends PerlLexerGenerated{
 			{
 //				System.err.println("Stop after second block");
 				yybegin(YYINITIAL);
-				return PERL_REGEX_QUOTE;
+				return PERL_REGEX_QUOTE_OPEN;
 			}
 			currentOffset = secondBLock.getEndOffset();
 		}
@@ -609,7 +617,7 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		yybegin(LEX_PREPARSED_ITEMS);
 
-		return PERL_REGEX_QUOTE;
+		return PERL_REGEX_QUOTE_OPEN;
 	}
 
 
@@ -642,7 +650,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		yybegin(LEX_TRANS_CHARS);
 		stringContentStart = getTokenStart() + 1;
 
-		return PERL_REGEX_QUOTE;
+		return PERL_REGEX_QUOTE_OPEN;
 	}
 
 	public IElementType processTransChar()
@@ -686,7 +694,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		{
 			yybegin(LEX_TRANS_MODIFIERS);
 		}
-		return PERL_REGEX_QUOTE;
+		return PERL_REGEX_QUOTE_CLOSE;
 	}
 
 
@@ -800,6 +808,10 @@ public class PerlLexer extends PerlLexerGenerated{
 		return PERL_SEMI;
 	}
 
+	/**
+	 * Logic for choosing type of braced bareword, like {defined}
+	 * @return token type
+	 */
 	@Override
 	public IElementType getBracedBarewordTokenType()
 	{
@@ -807,5 +819,43 @@ public class PerlLexer extends PerlLexerGenerated{
 			return PERL_OPERATOR_UNARY;
 
 		return PERL_STRING_CONTENT;
+	}
+
+	/**
+	 * Detecting package type (built-in or regular). Register package in the internal hashmap
+	 * @return token type
+	 */
+	@Override
+	public IElementType getPackageType()
+	{
+		String packageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
+		if( !knownPackages.containsKey(packageName))
+			knownPackages.put(packageName,PerlPackageUtil.getPackageType(packageName));
+		return knownPackages.get(packageName);
+	}
+
+	/**
+	 * Guessing bareword as function or package, if it has been used before
+	 * @return token type
+	 */
+	@Override
+	public IElementType getBarewordTokenType()
+	{
+		String bareword = yytext().toString();
+		if( knownPackages.containsKey(bareword) )
+			return knownPackages.get(bareword);
+
+		return PerlFunctionUtil.getFunctionType(bareword);
+	}
+
+	/**
+	 * Checks if package has been used or is built in
+	 * @return true if it's package, false otherwise
+	 */
+	@Override
+	public boolean isKnownPackage()
+	{
+		String packageName = yytext().toString();
+		return  knownPackages.containsKey(packageName) || PerlPackageUtil.isBuiltIn(packageName);
 	}
 }

@@ -17,22 +17,22 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class PerlReferenceContributor extends PsiReferenceContributor
+public class PerlReferenceContributor extends PsiReferenceContributor implements PerlElementPatterns
 {
 	@Override
 	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
 	{
 		registrar.registerReferenceProvider(
-				PlatformPatterns.psiElement(PerlHeredocTerminatorImpl.class),
+				HEREDOC_TERMINATOR_PATTERN,
 				new PsiReferenceProvider()
 				{
 					@NotNull
@@ -45,15 +45,16 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 				}
 		);
 		registrar.registerReferenceProvider(
-				PlatformPatterns.psiElement(PerlUserFunction.class),
+				FUNCTION_PATTERN,
 				new PsiReferenceProvider()
 				{
 					@NotNull
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlUserFunction;
+						assert element instanceof PerlFunction;
 
+						// fixme this should be done using patterns
 						if( element.getParent() instanceof PerlSubDefinitionImpl)
 							return new PsiReference[]{new PerlUserFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
 						else
@@ -68,7 +69,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 				}
 		);
 		registrar.registerReferenceProvider(
-				PlatformPatterns.psiElement(PerlVariableName.class),
+				VARIABLE_NAME_PATTERN.inside(VARIABLE_PATTERN),
 				new PsiReferenceProvider()
 				{
 					@NotNull
@@ -76,14 +77,18 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
 						assert element instanceof PerlVariableName;
+						PsiElement container = element.getParent();
 
-						return new PsiReference[]{new PerlVariableReference(element, new TextRange(0, element.getTextLength()))};
+						if( container instanceof PerlPerlGlob )
+							return new PsiReference[0];
+						else
+							return new PsiReference[]{new PerlVariableReference(element, new TextRange(0, element.getTextLength()))};
 
 					}
 				}
 		);
 		registrar.registerReferenceProvider(
-				PlatformPatterns.psiElement(PerlNamespace.class),
+				NAMESPACE_NAME_PATTERN,
 				new PsiReferenceProvider()
 				{
 					@NotNull
@@ -94,6 +99,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 
 						ArrayList<PsiReference> result = new ArrayList<>();
 
+						// fixme this should be done using patterns
 						if( nameSpaceContainer instanceof PerlUseStatement
 								|| nameSpaceContainer instanceof PerlRequireTerm
 								)
@@ -105,5 +111,14 @@ public class PerlReferenceContributor extends PsiReferenceContributor
 					}
 				}
 		);
+		registrar.registerReferenceProvider(STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN), new PsiReferenceProvider()
+		{
+			@NotNull
+			@Override
+			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+			{
+				return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
+			}
+		});
 	}
 }

@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.19 beta</version>
+    <version>0.20 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -25,6 +25,12 @@
     ]]></description>
 
     <change-notes><![CDATA[
+      <p>0.20 beta</p>
+      <ul>
+        <li>Fancy use parent autocompletion</li>
+        <li>Tons of bugfixes and optimizations</li>
+      </ul>
+
       <p>0.19 beta</p>
       <ul>
         <li>Implemented global variables autocompletion, navigation and refactoring</li>
@@ -98,14 +104,16 @@
         <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
         <lang.syntaxHighlighterFactory key="Perl5" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
-        <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCompletionContributor"/>
+        <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.completion.PerlCompletionContributor"/>
         <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
         <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
         <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlBraceMatcher"/>
-        <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.impl.PerlASTFactory"/>
+        <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.PerlASTFactory"/>
         <psi.referenceContributor implementation="com.perl5.lang.perl.psi.references.PerlReferenceContributor"/>
         <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
         <lang.refactoringSupport language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
+
+        <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
 
         <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.PerlRenameNamespaceProcessor"/>

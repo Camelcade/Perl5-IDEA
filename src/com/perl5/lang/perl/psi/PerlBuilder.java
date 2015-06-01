@@ -39,6 +39,8 @@ import java.util.HashMap;
  */
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
+	private boolean myRegexOpenerSuppressed = false;
+
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
 	}
@@ -78,5 +80,15 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		}
 
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep+1)).toString());
+	}
+
+	public boolean isRegexOpenerSuppressed()
+	{
+		return myRegexOpenerSuppressed;
+	}
+
+	public void setRegexOpenerSuppressed(boolean myRegexOpenerSuppressed)
+	{
+		this.myRegexOpenerSuppressed = myRegexOpenerSuppressed;
 	}
 }
