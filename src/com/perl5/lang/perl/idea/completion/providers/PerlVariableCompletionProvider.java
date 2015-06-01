@@ -43,7 +43,6 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 
 					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
 
-					// locals, todo we should limit with lexicaly visible
 					for (PerlVariable variable : declaredVariables)
 					{
 						if (variable instanceof PerlPerlScalar)
