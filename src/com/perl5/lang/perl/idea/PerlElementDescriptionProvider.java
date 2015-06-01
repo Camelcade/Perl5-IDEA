@@ -24,6 +24,7 @@ import com.intellij.usageView.UsageViewShortNameLocation;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlNamedElement;
 import com.perl5.lang.perl.psi.PerlFunction;
+import com.perl5.lang.perl.psi.PerlNamespace;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

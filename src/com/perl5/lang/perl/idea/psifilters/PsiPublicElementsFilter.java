@@ -6,6 +6,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
  * creates a filter that returns only psi elements that have a public declaration (like subroutines,variables)
+ * fixme unused atm
  */
 public class PsiPublicElementsFilter implements PsiElementFilter {
 
@@ -28,7 +29,7 @@ public class PsiPublicElementsFilter implements PsiElementFilter {
     private boolean isElementFunction(PsiElement psiElement) {
         return psiElement != null
                 && psiElement.getNode() != null
-                && (psiElement.getNode().getElementType().equals(PerlElementTypes.USER_FUNCTION) || psiElement.getNode().getElementType().equals(PerlElementTypes.PERL_FUNCTION));
+                && (psiElement.getNode().getElementType().equals(PerlElementTypes.PERL_FUNCTION) || psiElement.getNode().getElementType().equals(PerlElementTypes.PERL_FUNCTION));
     }
 
     private boolean checkSubToken(PsiElement psiElement) {
