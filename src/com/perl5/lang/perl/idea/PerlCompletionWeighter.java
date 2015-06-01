@@ -21,6 +21,7 @@ import com.intellij.codeInsight.completion.CompletionWeigher;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 01.06.2015.
@@ -29,7 +30,7 @@ import com.perl5.lang.perl.PerlLanguage;
 public class PerlCompletionWeighter extends CompletionWeigher
 {
 	@Override
-	public Comparable weigh(LookupElement element, CompletionLocation location)
+	public Comparable weigh(@NotNull LookupElement element, @NotNull CompletionLocation location)
 	{
 		if (!PsiUtilCore.findLanguageFromElement(location.getCompletionParameters().getPosition()).isKindOf(PerlLanguage.INSTANCE)) {
 			return 0;
