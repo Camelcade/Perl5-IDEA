@@ -329,7 +329,7 @@ private recover_statement ::= !(
     )
 private stop_on_var ::=
     (PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR | PERL_SIGIL_ARRAY | PERL_SIGIL_HASH)
-    PERL_SIGIL_SCALAR*
+    [ PERL_SIGIL_SCALAR + ]
     (PERL_LBRACE | namespace | PERL_VARIABLE_NAME )
 private recover_block ::= !(PERL_RBRACE | <<eof>>)
 private recover_namespace ::= !( "package" | '}' | <<eof>>)

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.completion;
+package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -23,6 +23,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 

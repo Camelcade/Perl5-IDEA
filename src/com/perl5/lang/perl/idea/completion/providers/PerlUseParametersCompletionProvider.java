@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.completion;
+package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElement;
