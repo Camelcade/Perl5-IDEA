@@ -1,4 +1,4 @@
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.gotosearch;
 
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.GotoClassContributor;

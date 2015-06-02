@@ -130,8 +130,7 @@
         <psi.referenceContributor implementation="com.perl5.lang.perl.psi.references.PerlReferenceContributor"/>
         <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
         <lang.refactoringSupport language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
-        <gotoClassContributor implementation="com.perl5.lang.perl.idea.PerlGoToClassContributor" />
-
+        <gotoClassContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToClassContributor" />
         <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
 
         <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>

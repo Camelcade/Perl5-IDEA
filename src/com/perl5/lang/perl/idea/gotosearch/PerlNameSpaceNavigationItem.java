@@ -1,4 +1,4 @@
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.gotosearch;
 
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
