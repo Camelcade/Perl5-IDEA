@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public class PerlFunctionDeclarationReference extends PerlFunctionReference
+public class PerlFunctionDeclarationReference extends PerlFunctionDefinitionReference
 {
 	public PerlFunctionDeclarationReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
@@ -49,7 +49,7 @@ public class PerlFunctionDeclarationReference extends PerlFunctionReference
 		// declarations
 		for( PsiPerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PsiPerlSubDeclarationImpl.class))
 		{
-			if( functionName.equals(sub.getSubNameElement().getText()))
+			if( myFunctionName.equals(sub.getSubNameElement().getText()))
 				result.add(new PsiElementResolveResult(sub.getSubNameElement()));
 		}
 

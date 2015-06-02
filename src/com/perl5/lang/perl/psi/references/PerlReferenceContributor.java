@@ -59,8 +59,8 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 							return new PsiReference[]{new PerlFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
 						else
 						{
-							PsiReference reference = new PerlFunctionReference(element, new TextRange(0, element.getTextLength()));
-							if( ((PerlFunctionReference)reference).multiResolve(false).length == 0 )
+							PsiReference reference = new PerlFunctionDefinitionReference(element, new TextRange(0, element.getTextLength()));
+							if( ((PerlFunctionDefinitionReference)reference).multiResolve(false).length == 0 )
 								reference = new PerlFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()));
 
 							return new PsiReference[]{reference};

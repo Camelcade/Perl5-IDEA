@@ -31,27 +31,28 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlFunctionReference extends PerlReferencePoly
+public class PerlFunctionDefinitionReference extends PerlReferencePoly
 {
-	String functionName;
-	String packageName = null;
-	String canonicalName;
+	String myFunctionName;
+	String myPackageName = null;
+	String myCanonicalName;
 
-	public PerlFunctionReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlFunctionDefinitionReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 		assert element instanceof PerlSubNameElement;
-		functionName = ((PerlSubNameElement) element).getName();
+		myFunctionName = ((PerlSubNameElement) element).getName();
 
 		PsiElement parent = element.getParent();
 
-		if( packageName == null && parent instanceof PsiPerlMethod)
-			packageName = ((PsiPerlMethod) parent).getPackageName();
+		if( parent instanceof PsiPerlMethod)
+			if( ((PsiPerlMethod) parent).hasExplicitNamespace())
+				myPackageName = ((PsiPerlMethod) parent).getPackageName();
+			else
+				myPackageName = PerlPackageUtil.getContextPackageName(element);
 
 		// this is currently available in subs
-		if( packageName == null )
-			packageName = PerlPackageUtil.getContextPackageName(element);
-
-		canonicalName = packageName + "::" + functionName;
+		if( myPackageName != null )
+			myCanonicalName = myPackageName + "::" + myFunctionName;
 	}
 
 	@NotNull
@@ -65,11 +66,14 @@ public class PerlFunctionReference extends PerlReferencePoly
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
+		if( myPackageName == null)
+			return new ResolveResult[0];
+
 		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
 		// subs definitions
-		for( PsiPerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, canonicalName))
+		for( PsiPerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, myCanonicalName))
 		{
 			PerlSubNameElement perlSubNameElement = sub.getSubNameElement();
 
@@ -78,7 +82,7 @@ public class PerlFunctionReference extends PerlReferencePoly
 		}
 
 		// globs definitions
-		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
+		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, myCanonicalName))
 		{
 			result.add(new PsiElementResolveResult(glob.getVariableNameElement()));
 		}
