@@ -8,7 +8,7 @@ This project is currently in development, and if you want to participate - you m
 There is tremendous amount of work to do in development and project really need testers. Not only users-testers, but someone
 to write tests (mostly for lexer and parser at the moment).
 
-#Current status - development (0.22 beta)
+#Current status - development (0.23 beta)
 
 * Implemented support for Perl5, POD and php-style perl <? ... ?>
 * Implemented syntax highlighting.
