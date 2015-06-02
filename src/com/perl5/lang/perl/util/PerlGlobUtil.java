@@ -20,7 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PsiPerlPerlGlob;
+import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
 
 import java.util.ArrayList;
@@ -46,11 +46,11 @@ public class PerlGlobUtil implements PerlElementTypes
 	 * @param canonicalName	canonical function name package::name
 	 * @return collection of found definitions
 	 */
-	public static Collection<PsiPerlPerlGlob> findGlobsDefinitions(Project project, String canonicalName)
+	public static Collection<PsiPerlGlobVariable> findGlobsDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
 
-		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PsiPerlPerlGlob.class);
+		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PsiPerlGlobVariable.class);
 	}
 
 	/**

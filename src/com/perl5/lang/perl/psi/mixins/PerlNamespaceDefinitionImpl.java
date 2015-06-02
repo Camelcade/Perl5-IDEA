@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import org.jetbrains.annotations.NotNull;
@@ -38,9 +38,9 @@ public abstract class PerlNamespaceDefinitionImpl extends StubBasedPsiElementBas
 	}
 
 	@Override
-	public PerlNamespace getNamespaceElement()
+	public PerlNamespaceElement getNamespaceElement()
 	{
-		return findChildByClass(PerlNamespace.class);
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 }

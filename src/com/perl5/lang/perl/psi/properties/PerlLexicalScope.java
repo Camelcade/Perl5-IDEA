@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 27.05.2015.
+ * This interface marks that PsiElement has it's own scope
  */
-public interface PerlNamespaceContainer extends PsiElement
+public interface PerlLexicalScope extends PerlLexicalScopeMember, PsiElement
 {
-	public PerlNamespace getNamespaceElement();
 }

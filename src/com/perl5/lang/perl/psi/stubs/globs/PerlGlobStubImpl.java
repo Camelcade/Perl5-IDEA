@@ -18,13 +18,13 @@ package com.perl5.lang.perl.psi.stubs.globs;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PsiPerlPerlGlob;
+import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlGlobStubImpl extends StubBase<PsiPerlPerlGlob> implements PerlGlobStub
+public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements PerlGlobStub
 {
 	private final String packageName;
 	private final String globName;

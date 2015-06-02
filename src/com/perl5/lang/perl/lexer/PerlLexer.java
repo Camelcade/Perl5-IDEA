@@ -858,4 +858,77 @@ public class PerlLexer extends PerlLexerGenerated{
 		String packageName = yytext().toString();
 		return  knownPackages.containsKey(packageName) || PerlPackageUtil.isBuiltIn(packageName);
 	}
+
+	/**
+	 * Parses token as built-in variable
+	 */
+	public static Pattern variablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)(.+)$");
+	public static Pattern bracedVariablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)\\{(.+)\\}$");
+
+	@Override
+	public IElementType parseBuiltInVariable()
+	{
+		String tokenText = yytext().toString();
+		int tokenStart = getTokenStart();
+		pushState();
+		yybegin(LEX_PREPARSED_ITEMS);
+
+		tokensList.clear();
+
+		Matcher m = variablePattern.matcher(tokenText);
+		if( m.matches())
+		{
+			String sigil = m.group(1);
+			String name = m.group(2);
+
+			tokenStart += sigil.length();
+			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), PERL_VARIABLE_NAME));
+
+			yypushback(tokenText.length()-sigil.length());
+			return getSigilTokenType(sigil);
+		}
+
+		m = bracedVariablePattern.matcher(tokenText);
+		if( m.matches())
+		{
+			String sigil = m.group(1);
+			String name = m.group(2);
+
+			tokenStart += sigil.length();
+			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, PERL_LBRACE));
+			tokenStart++;
+			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), PERL_VARIABLE_NAME));
+			tokenStart += name.length();
+			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, PERL_RBRACE));
+
+			yypushback(tokenText.length()-sigil.length());
+			return getSigilTokenType(sigil);
+		}
+
+		throw new RuntimeException("Unable to parse built-in variable: " + tokenText);
+	}
+
+	/**
+	 * Returns token type for sigil
+	 * @param sigil sigli text
+	 * @return elementType
+	 */
+	public IElementType getSigilTokenType(String sigil)
+	{
+		if( "$#".equals(sigil))
+			return PERL_SIGIL_SCALAR_INDEX;
+		else if( "$".equals(sigil))
+			return PERL_SIGIL_SCALAR;
+		else if( "@".equals(sigil))
+			return PERL_SIGIL_ARRAY;
+		else if( "%".equals(sigil))
+			return PERL_SIGIL_HASH;
+		else if( "*".equals(sigil))
+			return PERL_OPERATOR;
+		else if( "&".equals(sigil))
+			return PERL_OPERATOR;
+		else
+			throw new RuntimeException("Unknown sigil: " + sigil);
+	}
+
 }

@@ -18,11 +18,8 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.refactoring.RefactoringFactory;
-import com.intellij.refactoring.RenameRefactoring;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 
 /**

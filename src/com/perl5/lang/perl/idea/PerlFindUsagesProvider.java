@@ -26,7 +26,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlPackage;
-import com.perl5.lang.perl.psi.PerlSubName;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -63,7 +63,7 @@ public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTy
 	@NotNull
 	@Override
 	public String getType(@NotNull PsiElement element) {
-		if (element instanceof PerlSubName) {
+		if (element instanceof PerlSubNameElement) {
 			return "function";
 		} else if (element instanceof PerlPackage) {
 			return "package";

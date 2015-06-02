@@ -18,9 +18,9 @@ package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlSubArgument;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.psi.PerlVariableType;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 

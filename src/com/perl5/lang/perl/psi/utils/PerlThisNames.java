@@ -1,4 +1,4 @@
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.utils;
 
 import java.util.HashSet;
 import java.util.Set;

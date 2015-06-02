@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.stubs.variables.types;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.impl.PsiPerlPerlScalarImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlScalarVariableImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubIndexKeys;
@@ -38,7 +38,7 @@ public class PerlScalarStubElementType extends PerlVariableStubElementType
 	@Override
 	public PerlVariable createPsi(@NotNull PerlVariableStub stub)
 	{
-		return new PsiPerlPerlScalarImpl(stub,this);
+		return new PsiPerlScalarVariableImpl(stub,this);
 	}
 
 	@Override

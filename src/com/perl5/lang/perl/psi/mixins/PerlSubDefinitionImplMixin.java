@@ -23,7 +23,11 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.SmartList;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.psi.utils.PerlThisNames;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -74,7 +78,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		if (stub != null)
 			return stub.getFunctionName();
 
-		PerlSubName function = getSubNameElement();
+		PerlSubNameElement function = getSubNameElement();
 		return function.getName();
 	}
 
@@ -87,7 +91,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespaceElement();
+		PerlNamespaceElement namespace = getNamespaceElement();
 		return namespace != null ? namespace.getName() : null;
 	}
 
@@ -100,15 +104,15 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	}
 
 	@Override
-	public PerlNamespace getNamespaceElement()
+	public PerlNamespaceElement getNamespaceElement()
 	{
-		return findChildByClass(PerlNamespace.class);
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 	@Override
-	public PerlSubName getSubNameElement()
+	public PerlSubNameElement getSubNameElement()
 	{
-		return findChildByClass(PerlSubName.class);
+		return findChildByClass(PerlSubNameElement.class);
 	}
 
 
@@ -158,7 +162,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 					PsiPerlVariableDeclarationLexical declaration = PsiTreeUtil.findChildOfType(leftTerm, PsiPerlVariableDeclarationLexical.class);
 					if (declaration != null)
 					{
-						PerlNamespace variableClass = declaration.getNamespaceElement();
+						PerlNamespaceElement variableClass = declaration.getNamespaceElement();
 						String definitionClassName = "";
 						if (variableClass != null)
 							definitionClassName = variableClass.getName();
@@ -167,7 +171,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 						{
 							for (PerlVariable variable : PsiTreeUtil.findChildrenOfType(declaration, PerlVariable.class))
 							{
-								PerlVariableName variableName = variable.getVariableName();
+								PerlVariableNameElement variableName = variable.getVariableName();
 
 								if (variableName != null)
 									arguments.add(new PerlSubArgument(variable.getActualType(), variableName.getName(), definitionClassName, true));
@@ -180,7 +184,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 
 							if (variable != null)
 							{
-								PerlVariableName variableName = variable.getVariableName();
+								PerlVariableNameElement variableName = variable.getVariableName();
 
 								if (variableName != null)
 									arguments.add(new PerlSubArgument(variable.getActualType(), variableName.getName(), definitionClassName, true));

@@ -16,12 +16,18 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+
 import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, PerlNamespaceContainer, PerlUserFunctionContainer
+public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, PerlNamespaceElementContainer, PerlSubNameElementContainer
 {
 	/**
 	 * Returns package name for current function

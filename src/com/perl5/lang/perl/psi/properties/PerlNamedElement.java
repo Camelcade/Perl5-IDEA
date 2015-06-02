@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.util.IncorrectOperationException;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 27.05.2015.
+ * Created by hurricup on 26.04.2015.
  */
-public interface PerlLexicalScopeElement extends PsiElement
+public interface PerlNamedElement extends PsiNameIdentifierOwner
 {
-	PerlLexicalScope getLexicalScope();
 }

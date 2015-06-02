@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public interface PerlPerlGlob extends PsiElement, PerlPackageMember, PerlNamespaceContainer
+public interface PerlNamespaceElementContainer extends PsiElement
 {
-	String getGlobName();
-	PerlVariableName getVariableName();
+	public PerlNamespaceElement getNamespaceElement();
 }

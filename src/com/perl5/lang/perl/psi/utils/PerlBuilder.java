@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;

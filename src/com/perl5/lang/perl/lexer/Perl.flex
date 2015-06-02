@@ -74,6 +74,7 @@ PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NA
 
 BUILT_IN_ARRAY_NAME = "LAST_MATCH_START"|"EXPORT_TAGS"|"EXPORT_OK"|"OVERLOAD"|"EXPORT"|"ARGV"|"ENV"|"INC"|"ISA"|"SIG"|"^H"|"!"|"+"|"-"|"_"
 PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
+PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
 
 BUILT_IN_HASH_NAME = "EXPORT_TAGS"|"OVERLOAD"|"ENV"|"INC"|"SIG"|"^H"|"!"|"+"|"-"
 PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
@@ -619,10 +620,11 @@ TRANS_MODIFIERS = [cdsr]
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 //{PERL_SCALAR_INDEX} {return PERL_SCALAR_INDEX;}
 
-{PERL_SCALAR_BUILT_IN} {return PERL_SCALAR_BUILT_IN;}
-{PERL_ARRAY_BUILT_IN} {return PERL_ARRAY_BUILT_IN;}
-{PERL_HASH_BUILT_IN} {return PERL_HASH_BUILT_IN;}
-{PERL_GLOB_BUILT_IN} {return PERL_GLOB_BUILT_IN;}
+{PERL_SCALAR_BUILT_IN}      {return parseBuiltInVariable();}
+{PERL_ARRAY_BUILT_IN}       {return parseBuiltInVariable();}
+{PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}
+{PERL_HASH_BUILT_IN}        {return parseBuiltInVariable();}
+{PERL_GLOB_BUILT_IN}        {return parseBuiltInVariable();}
 
 //{PERL_SCALAR} {return PERL_SCALAR;}
 //{PERL_ARRAY} {return PERL_ARRAY;}

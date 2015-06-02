@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.properties;
+
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespace extends PerlNamedElement
+public interface PerlSubNameElementContainer
 {
-
+	PerlSubNameElement getSubNameElement();
 }

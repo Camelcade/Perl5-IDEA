@@ -30,7 +30,7 @@ limitations under the License.
   tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
 
   parserUtilClass="com.perl5.lang.perl.parser.PerlParserUitl"
-  psiImplUtilClass="com.perl5.lang.perl.psi.PerlPsiImplUtil"
+  psiImplUtilClass="com.perl5.lang.perl.psi.utils.PerlPsiImplUtil"
 
   //elementTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
 //  tokenTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
@@ -42,30 +42,17 @@ limitations under the License.
 
     PERL_SUB_PROTOTYPE_TOKEN="PERL_SUB_PROTOTYPE_TOKEN"
 
-    PERL_SIGIL_ARRAY="@"
-    PERL_SIGIL_HASH="%"
-    PERL_SIGIL_SCALAR="$"
+    PERL_SIGIL_ARRAY="SIGIL_ARRAY"
+    PERL_SIGIL_HASH="SIGIL_HASH"
+    PERL_SIGIL_SCALAR="SIGIL_SCALAR"
+    PERL_SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
 
-    PERL_SIGIL_SCALAR_INDEX="$#"
+    // these being detected in parser
+//    PERL_SIGIL_GLOB = "SIGIL_GLOB"
+//    PERL_SIGIL_CODE = "SIGIL_CODE"
+
     PERL_VARIABLE_NAME="PERL_VARIABLE_NAME"
 
-//    PERL_SCALAR_NAME="SCALAR_NAME"
-//    PERL_ARRAY_NAME="ARRAY_NAME"
-//    PERL_HASH_NAME="HASH_NAME"
-
-//    PERL_ARRAY="ARRAY"
-//    PERL_HASH="HASH"
-//    PERL_SCALAR="SCALAR"
-//    PERL_GLOB="GLOB"
-//     PERL_SIGIL="SIGIL"
-
-
-    PERL_ARRAY_BUILT_IN="ARRAY_BUILT_IN"
-    PERL_HASH_BUILT_IN="HASH_BUILT_IN"
-    PERL_SCALAR_BUILT_IN="SCALAR_BUILT_IN"
-    PERL_GLOB_BUILT_IN="GLOB_BUILT_IN"
-
-//    PERL_SCALAR_INDEX="SCALAR_INDEX"
 
     PERL_HEREDOC="PERL_HEREDOC" // should be string content too
     PERL_HEREDOC_END="PERL_HEREDOC_END"
@@ -139,16 +126,17 @@ limitations under the License.
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
 
-    implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.PerlLexicalScope";
-    mixin("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeElementMixin"
+    implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
+    mixin("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
-    elementTypeFactory("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
-    stubClass("perl_scalar|perl_array|perl_hash")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
-    mixin("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
-    implements("perl_scalar|perl_array|perl_hash|perl_array_index")="com.perl5.lang.perl.psi.PerlVariable"
+    elementTypeFactory("scalar_variable|array_variable|hash_variable|glob_variable")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
+    
+    stubClass("scalar_variable|array_variable|hash_variable")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
+    mixin("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
+    implements("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
     elementTypeFactory("sub_definition|perl_glob|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
@@ -163,9 +151,9 @@ limitations under the License.
     mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationImplMixin"
     implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubDeclaration"
 
-    stubClass("perl_glob")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
-    mixin("perl_glob")="com.perl5.lang.perl.psi.mixins.PerlPerlGlobImplMixin"
-    implements("perl_glob")="com.perl5.lang.perl.psi.PerlPerlGlob"
+    stubClass("glob_variable")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
+    mixin("glob_variable")="com.perl5.lang.perl.psi.mixins.PerlGlobVariableImplMixin"
+    implements("glob_variable")="com.perl5.lang.perl.psi.PerlGlobVariable"
 
     mixin("require_term")="com.perl5.lang.perl.psi.mixins.PerlRequireTermImplMixin"
     implements("require_term")="com.perl5.lang.perl.psi.PerlRequireTerm"
@@ -322,7 +310,6 @@ private recover_statement ::= !(
     | PERL_LPAREN
     | PERL_SEMI
     | PERL_QUOTE
-    | PERL_SCALAR_BUILT_IN | PERL_ARRAY_BUILT_IN| PERL_HASH_BUILT_IN| PERL_GLOB_BUILT_IN
     | PERL_HANDLE | PERL_HANDLE_BUILT_IN
     | stop_on_var
     | PERL_NUMBER | PERL_OPERATOR| PERL_OPERATOR_FILETEST
@@ -389,7 +376,7 @@ term_expr ::=
     | function_call
     | rightward_call
     | reference_value
-    | perl_array_index
+    | array_index
     | variable
     | namespace_element
 
@@ -670,21 +657,17 @@ string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-perl_array_index ::= PERL_SIGIL_SCALAR_INDEX [scalar_sigils] variable_body
+array_index ::= PERL_SIGIL_SCALAR_INDEX [scalar_sigils] variable_body
 
-private scalar_variable ::= PERL_SCALAR_BUILT_IN | perl_scalar
-perl_scalar ::= PERL_SIGIL_SCALAR [scalar_sigils] variable_body
+scalar_variable ::= PERL_SIGIL_SCALAR [scalar_sigils] variable_body
 
-private array_variable ::= PERL_ARRAY_BUILT_IN | perl_array
-perl_array ::= PERL_SIGIL_ARRAY [scalar_sigils] variable_body
+array_variable ::= PERL_SIGIL_ARRAY [scalar_sigils] variable_body
 
-private hash_variable ::= PERL_HASH_BUILT_IN | perl_hash
-perl_hash ::= PERL_SIGIL_HASH [scalar_sigils] variable_body
+hash_variable ::= PERL_SIGIL_HASH [scalar_sigils] variable_body
 
 scalar_sigils ::= PERL_SIGIL_SCALAR+
 
-private glob_variable ::= PERL_GLOB_BUILT_IN | perl_glob
-perl_glob ::= '*' variable_body ["{" glob_slot "}"]
+glob_variable ::= "*" variable_body ["{" glob_slot "}"]
 glob_slot ::=
     "SCALAR"
     | "ARRAY"

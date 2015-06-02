@@ -2,13 +2,13 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 01.06.2015.
  */
-public abstract class PerlVariableDeclarationMixin extends  PerlLexicalScopeElementMixin implements PerlVariableDeclaration
+public abstract class PerlVariableDeclarationMixin extends PerlLexicalScopeMemberMixin implements PerlVariableDeclaration
 {
 	public PerlVariableDeclarationMixin(ASTNode node)
 	{
@@ -17,8 +17,8 @@ public abstract class PerlVariableDeclarationMixin extends  PerlLexicalScopeElem
 
 	@Nullable
 	@Override
-	public PerlNamespace getNamespaceElement()
+	public PerlNamespaceElement getNamespaceElement()
 	{
-		return findChildByClass(PerlNamespace.class);
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 }

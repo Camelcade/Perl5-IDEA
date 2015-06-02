@@ -31,15 +31,15 @@ public class PerlElementTypeFactory
 	{
 		if( name.equals("SUB_DEFINITION"))
 			return PerlStubElementTypes.SUB_DEFINITION;
-		else if( name.equals("PERL_GLOB"))
+		else if( name.equals("GLOB_VARIABLE"))
 			return PerlStubElementTypes.PERL_GLOB;
 		else if( name.equals("NAMESPACE_DEFINITION"))
 			return PerlStubElementTypes.PERL_NAMESPACE;
-		else if( name.equals("PERL_SCALAR"))
+		else if( name.equals("SCALAR_VARIABLE"))
 			return PerlStubElementTypes.PERL_SCALAR;
-		else if( name.equals("PERL_ARRAY"))
+		else if( name.equals("ARRAY_VARIABLE"))
 			return PerlStubElementTypes.PERL_ARRAY;
-		else if( name.equals("PERL_HASH"))
+		else if( name.equals("HASH_VARIABLE"))
 			return PerlStubElementTypes.PERL_HASH;
 
 		throw new RuntimeException("Unknown element type "+name);

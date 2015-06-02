@@ -14,17 +14,34 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.globs;
+package com.perl5.lang.perl.psi.properties;
 
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by hurricup on 25.05.2015.
+ *
  */
-public interface PerlGlobStub extends StubElement<PsiPerlGlobVariable>
+public interface PerlPackageMember extends PsiElement
 {
+	/**
+	 * Method for checking explicit package name for current element
+	 * @return package name or null if n/a
+	 */
+	public String getExplicitPackageName();
+
+	/**
+	 * Trying to detect package name by traversing parents
+	 * @return package name or main if not found
+	 */
+	public String getContextPackageName();
+
+	/**
+	 * Trying to get the package name from explicit specification or by traversing
+	 * @return package name for current element
+	 */
 	public String getPackageName();
 
-	public String getGlobName();
 }

@@ -39,7 +39,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlHeredocTerminatorImpl;
+						assert element instanceof PerlHeredocTerminatorElementImpl;
 						return new PsiReference[]{new PerlHeredocReference(element, new TextRange(0, element.getTextLength()))};
 					}
 				}
@@ -52,7 +52,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlSubName;
+						assert element instanceof PerlSubNameElement;
 
 						// fixme this should be done using patterns
 						if( element.getParent() instanceof PsiPerlSubDefinitionImpl)
@@ -76,10 +76,10 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlVariableName;
+						assert element instanceof PerlVariableNameElement;
 						PsiElement container = element.getParent();
 
-						if( container instanceof PsiPerlPerlGlob)
+						if( container instanceof PsiPerlGlobVariable)
 							return new PsiReference[0];
 						else
 							return new PsiReference[]{new PerlVariableNameReference(element, new TextRange(0, element.getTextLength()))};

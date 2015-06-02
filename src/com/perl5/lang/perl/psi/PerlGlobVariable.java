@@ -17,10 +17,14 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public interface PerlVariableName extends PsiElement, PerlNamedElement
+public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlNamespaceElementContainer
 {
+	String getGlobName();
+	PerlVariableNameElement getVariableName();
 }

@@ -25,14 +25,16 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
+import com.perl5.lang.perl.psi.utils.PerlThisNames;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
- *
  */
 public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable //
 {
@@ -56,12 +58,12 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	public String getPackageName()
 	{
 		PerlVariableStub stub = getStub();
-		if( stub != null)
+		if (stub != null)
 			return stub.getPackageName();
 
 		String namespace = getExplicitPackageName();
 
-		if( namespace == null )
+		if (namespace == null)
 			namespace = getContextPackageName();
 
 		return namespace;
@@ -76,52 +78,52 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespace();
-		return namespace != null ? namespace.getName(): null;
+		PerlNamespaceElement namespace = getNamespace();
+		return namespace != null ? namespace.getName() : null;
 	}
 
 	@Override
-	public PerlNamespace getNamespace()
+	public PerlNamespaceElement getNamespace()
 	{
-		return findChildByClass(PerlNamespace.class);
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 	@Nullable
 	@Override
-	public PerlVariableName getVariableName()
+	public PerlVariableNameElement getVariableName()
 	{
-		return findChildByClass(PerlVariableName.class);
+		return findChildByClass(PerlVariableNameElement.class);
 	}
 
 	@Nullable
 	@Override
 	public String guessVariableType()
 	{
-		PerlVariableName variableNameObject = getVariableName();
+		PerlVariableNameElement variableNameObject = getVariableName();
 
-		if( variableNameObject != null )
+		if (variableNameObject != null)
 		{
 			String variableName = variableNameObject.getName();
 
-			if( this instanceof PsiPerlPerlScalar && PerlThisNames.NAMES_SET.contains(variableName))
+			if (this instanceof PsiPerlScalarVariable && PerlThisNames.NAMES_SET.contains(variableName))
 				return PerlPackageUtil.getContextPackageName(this);
 
 			// find declaration and check type
 			PsiReference[] references = variableNameObject.getReferences();
 
-			for( PsiReference reference: references)
+			for (PsiReference reference : references)
 			{
 				assert reference instanceof PerlVariableNameReference;
 				ResolveResult[] results = ((PerlVariableNameReference) reference).multiResolve(false);
 
-				for( ResolveResult result: results)
+				for (ResolveResult result : results)
 				{
 					PsiElement decalarationVariableName = result.getElement();
 					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(decalarationVariableName, PerlVariableDeclaration.class);
-					if( declaration != null )
+					if (declaration != null)
 					{
-						PerlNamespace declarationNamespace = declaration.getNamespaceElement();
-						if( declarationNamespace != null )
+						PerlNamespaceElement declarationNamespace = declaration.getNamespaceElement();
+						if (declarationNamespace != null)
 						{
 							return declarationNamespace.getName();
 						}
@@ -141,22 +143,22 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		PsiElement variableContainer = this.getParent();
 		boolean gotScalarSigils = this.getScalarSigils() != null;
 
-		if(
+		if (
 				variableContainer instanceof PsiPerlScalarHashElement
 						|| variableContainer instanceof PsiPerlArrayHashSlice
-						|| (this instanceof PsiPerlPerlHash && !gotScalarSigils)
+						|| (this instanceof PsiPerlHashVariable && !gotScalarSigils)
 				)
 			return PerlVariableType.HASH;
-		else if(
+		else if (
 				variableContainer instanceof PsiPerlArrayArraySlice
 						|| variableContainer instanceof PsiPerlScalarArrayElement
-						|| (this instanceof PsiPerlPerlArrayIndex && !gotScalarSigils)
-						|| (this instanceof PsiPerlPerlArray && !gotScalarSigils)
+						|| (this instanceof PsiPerlArrayIndex && !gotScalarSigils)
+						|| (this instanceof PsiPerlArrayVariable && !gotScalarSigils)
 				)
 			return PerlVariableType.ARRAY;
-		else if(
+		else if (
 				variableContainer instanceof PsiPerlDerefExpr
-						|| this instanceof PsiPerlPerlScalar
+						|| this instanceof PsiPerlScalarVariable
 						|| gotScalarSigils
 				)
 			return PerlVariableType.SCALAR;

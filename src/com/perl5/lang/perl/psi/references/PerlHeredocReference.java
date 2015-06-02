@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
-import com.perl5.lang.perl.psi.impl.PerlStringContentImpl;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,7 +49,7 @@ public class PerlHeredocReference extends PerlReference
 		PsiElement result = null;
 		for( PsiPerlHeredocOpener opener: PsiTreeUtil.findChildrenOfType(myElement.getContainingFile(), PsiPerlHeredocOpener.class))
 		{
-			PerlStringContentImpl stringContent = PsiTreeUtil.findChildOfType(opener, PerlStringContentImpl.class);
+			PerlStringContentElementImpl stringContent = PsiTreeUtil.findChildOfType(opener, PerlStringContentElementImpl.class);
 
 			if( stringContent != null && marker.equals(stringContent.getName()))
 			{

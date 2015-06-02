@@ -22,29 +22,29 @@ import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlSubName;
-import com.perl5.lang.perl.psi.PerlElementFactory;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 24.05.2015.
- *
+ * Created by hurricup on 25.05.2015.
  */
-public class PerlSubNameImpl extends LeafPsiElement implements PerlSubName
+public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlVariableNameElement
 {
-	public PerlSubNameImpl(@NotNull IElementType type, CharSequence text) {
+	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
 	}
 
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PerlSubName newFunction = PerlElementFactory.createUserFunction(getProject(), name);
-		if( newFunction != null )
-			replace(newFunction);
+		PerlVariableNameElement newName = PerlElementFactory.createVariableName(getProject(), name);
+		if( newName != null )
+			replace(newName);
 		else
-			throw new IncorrectOperationException("Unable to create function from: "+ name);
+			throw new IncorrectOperationException("Unable to create new variable name from: " + name);
 		return this;
 	}
 
@@ -55,10 +55,11 @@ public class PerlSubNameImpl extends LeafPsiElement implements PerlSubName
 		return this;
 	}
 
+	@NotNull
 	@Override
 	public String getName()
 	{
-		return this.getText();
+		return PerlPackageUtil.getCanonicalPackageName(this.getText());
 	}
 
 	@NotNull
@@ -67,6 +68,5 @@ public class PerlSubNameImpl extends LeafPsiElement implements PerlSubName
 	{
 		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
 	}
-
 
 }

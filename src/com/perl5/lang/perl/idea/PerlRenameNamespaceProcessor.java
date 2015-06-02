@@ -21,8 +21,8 @@ import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
 /**
@@ -33,7 +33,7 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 	@Override
 	public boolean canProcessElement(PsiElement element)
 	{
-		return element instanceof PerlNamespace;
+		return element instanceof PerlNamespaceElement;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 			try
 			{
 				String canonicalName = PerlPackageUtil.getCanonicalPackageName(newName);
-				PerlNamespace newNamespace = PerlElementFactory.createPackageName(element.getProject(), canonicalName);
+				PerlNamespaceElement newNamespace = PerlElementFactory.createPackageName(element.getProject(), canonicalName);
 				packageNameInvalid = (newNamespace == null || !canonicalName.equals(newNamespace.getName()));
 			} catch (Exception any)	{
 				packageNameInvalid = true;

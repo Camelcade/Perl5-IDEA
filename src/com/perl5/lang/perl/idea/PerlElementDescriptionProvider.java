@@ -22,9 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.usageView.UsageViewLongNameLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
 import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
-import com.perl5.lang.perl.psi.PerlNamedElement;
-import com.perl5.lang.perl.psi.PerlSubName;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,9 +41,9 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 				return null;
 		else if(element instanceof PsiPerlHeredocOpener)
 			return "Heredoc marker";
-		else if(element instanceof PerlSubName)
+		else if(element instanceof PerlSubNameElement)
 			return "User function";
-        else if(element instanceof PerlNamespace)
+        else if(element instanceof PerlNamespaceElement)
 			return "Namespace";
 		else
 			return null;

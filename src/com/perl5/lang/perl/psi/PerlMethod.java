@@ -16,10 +16,14 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
+
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlMethod extends PerlNamespaceContainer, PerlUserFunctionContainer, PerlPackageMember
+public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlPackageMember
 {
 	public boolean hasExplicitNamespace();
 }

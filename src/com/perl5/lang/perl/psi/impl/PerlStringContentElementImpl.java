@@ -22,17 +22,17 @@ import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlNamedElement;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 23.05.2015.
  */
-public class PerlStringContentImpl extends LeafPsiElement implements PerlNamedElement
+public class PerlStringContentElementImpl extends LeafPsiElement implements PerlNamedElement
 {
-	public PerlStringContentImpl(@NotNull IElementType type, CharSequence text) {
+	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
 	}
 
@@ -55,7 +55,7 @@ public class PerlStringContentImpl extends LeafPsiElement implements PerlNamedEl
 		if( name.equals(""))
 			throw new IncorrectOperationException("You can't rename a string to the empty one");
 
-		PerlStringContentImpl newName = PerlElementFactory.createStringContent(getProject(), name);
+		PerlStringContentElementImpl newName = PerlElementFactory.createStringContent(getProject(), name);
 		if( newName != null )
 			replace(newName);
 		else

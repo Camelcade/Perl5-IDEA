@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlSubArgument;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 
 import java.util.List;

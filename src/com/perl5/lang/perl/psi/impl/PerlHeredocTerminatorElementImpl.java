@@ -17,34 +17,26 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlVariableName;
-import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 25.05.2015.
- */
-public class PerlVariableNameImpl extends LeafPsiElement implements PerlVariableName
+public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlNamedElement, PerlElementTypes
 {
-	public PerlVariableNameImpl(@NotNull IElementType type, CharSequence text) {
-		super(type, text);
-	}
+	public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text){ super(type, text);}
 
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PerlVariableName newName = PerlElementFactory.createVariableName(getProject(), name);
-		if( newName != null )
-			replace(newName);
-		else
-			throw new IncorrectOperationException("Unable to create new variable name from: " + name);
+		if( name.equals(""))
+			throw new IncorrectOperationException("You can't set heredoc terminator to the empty one");
+
+		replace(PerlElementFactory.createHereDocTerminator(getProject(), name));
 		return this;
 	}
 
@@ -52,21 +44,14 @@ public class PerlVariableNameImpl extends LeafPsiElement implements PerlVariable
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return this;
+		return getPsi();
 	}
 
-	@NotNull
+	// todo we should move this to some superclass
 	@Override
 	public String getName()
 	{
-		return PerlPackageUtil.getCanonicalPackageName(this.getText());
+		PsiElement nameIdentifier = getNameIdentifier();
+		return nameIdentifier == null ? null: nameIdentifier.getText();
 	}
-
-	@NotNull
-	@Override
-	public PsiReference[] getReferences()
-	{
-		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
-	}
-
 }

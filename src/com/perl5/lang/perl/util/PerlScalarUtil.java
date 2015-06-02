@@ -31,16 +31,6 @@ import java.util.*;
  */
 public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 {
-	protected static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
-
-
-	static{
-		for( String builtIn: BUILT_IN )
-		{
-			BUILT_IN_MAP.put(builtIn, PERL_SCALAR_BUILT_IN);
-		}
-	}
-
 	/**
 	 * Checks if variable is built in
 	 * @param variable variable name
@@ -48,7 +38,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 */
 	public static boolean isBuiltIn(String variable)
 	{
-		return BUILT_IN_MAP.containsKey(variable);
+		return BUILT_IN.contains(variable);
 	}
 
 	/**

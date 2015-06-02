@@ -23,6 +23,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 
 import java.io.File;
 import java.util.Collection;
@@ -43,9 +45,9 @@ public class PerlUtil
 	{
 		HashMap<String,PerlVariable> declarationsHash = new HashMap<>();
 
-		assert currentElement instanceof PerlLexicalScopeElement;
+		assert currentElement instanceof PerlLexicalScopeMember;
 
-		PerlLexicalScope currentScope = ((PerlLexicalScopeElement) currentElement).getLexicalScope();
+		PerlLexicalScope currentScope = ((PerlLexicalScopeMember) currentElement).getLexicalScope();
 
 		Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), PerlVariableDeclaration.class);
 
@@ -59,17 +61,17 @@ public class PerlUtil
 					|| currentScope != null && PsiTreeUtil.isAncestor(declarationScope, currentScope, false)	// declaration is an ancestor
 						)
 				{
-					for(PsiElement var: declaration.getPerlScalarList())
+					for(PsiElement var: declaration.getScalarVariableList())
 					{
 						assert var instanceof PerlVariable;
 						declarationsHash.put(var.getText(),(PerlVariable)var);
 					}
-					for(PsiElement var: declaration.getPerlArrayList())
+					for(PsiElement var: declaration.getArrayVariableList())
 					{
 						assert var instanceof PerlVariable;
 						declarationsHash.put(var.getText(),(PerlVariable)var);
 					}
-					for(PsiElement var: declaration.getPerlHashList())
+					for(PsiElement var: declaration.getHashVariableList())
 					{
 						assert var instanceof PerlVariable;
 						declarationsHash.put(var.getText(),(PerlVariable)var);

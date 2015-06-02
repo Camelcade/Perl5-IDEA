@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.lang.DefaultASTFactoryImpl;
 import com.intellij.psi.impl.source.CharTableImpl;
@@ -33,7 +33,7 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	public LeafElement createComment( @NotNull IElementType type, CharSequence text)
 	{
 		if( type == PERL_HEREDOC_END )
-			return new PerlHeredocTerminatorImpl(type, text);
+			return new PerlHeredocTerminatorElementImpl(type, text);
 		else
 			return super.createComment(type, text);
 	}
@@ -43,13 +43,13 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	public LeafElement createLeaf(@NotNull IElementType type, CharSequence text)
 	{
 		if( type == PERL_STRING_CONTENT )
-			return new PerlStringContentImpl(type, text);
+			return new PerlStringContentElementImpl(type, text);
 		else if( type == PERL_VARIABLE_NAME )
-			return new PerlVariableNameImpl(type, text);
+			return new PerlVariableNameElementImpl(type, text);
 		else if( type == PERL_FUNCTION )
-			return new PerlSubNameImpl(type, text);
+			return new PerlSubNameElementImpl(type, text);
 		else if( type == PERL_PACKAGE || type == PERL_PACKAGE_BUILT_IN || type == PERL_PACKAGE_DEPRECATED  || type == PERL_PACKAGE_PRAGMA )
-			return new PerlNamespaceImpl(type, text);
+			return new PerlNamespaceElementImpl(type, text);
 		else
 			return super.createLeaf(type, text);
 	}

@@ -17,26 +17,29 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 27.05.2015.
  */
-public interface PerlVariable extends PerlLexicalScopeElement, PerlPackageMember, PsiElement
+public interface PerlVariable extends PerlLexicalScopeMember, PerlPackageMember, PsiElement
 {
 	/**
 	 * Getter for namespace object
 	 * @return namespace element if any
 	 */
 	@Nullable
-	PerlNamespace getNamespace();
+	PerlNamespaceElement getNamespace();
 
 	/**
 	 * Getter for VariableName object
 	 * @return variable name element if any
 	 */
 	@Nullable
-	PerlVariableName getVariableName();
+	PerlVariableNameElement getVariableName();
 
 	/**
 	 * Dumb getter for scalar sigils part, shows if it's pure type or some dereferences like @$$$var

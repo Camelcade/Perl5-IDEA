@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -25,14 +27,14 @@ import java.util.List;
  * Created by hurricup on 27.05.2015.
  * Declarations marker
  */
-public interface PerlVariableDeclaration extends PsiElement, PerlNamespaceContainer, PerlLexicalScopeElement
+public interface PerlVariableDeclaration extends PsiElement, PerlNamespaceElementContainer, PerlLexicalScopeMember
 {
 	@NotNull
-	List<PsiPerlPerlArray> getPerlArrayList();
+	List<PsiPerlArrayVariable> getArrayVariableList();
 
 	@NotNull
-	List<PsiPerlPerlHash> getPerlHashList();
+	List<PsiPerlHashVariable> getHashVariableList();
 
 	@NotNull
-	List<PsiPerlPerlScalar> getPerlScalarList();
+	List<PsiPerlScalarVariable> getScalarVariableList();
 }

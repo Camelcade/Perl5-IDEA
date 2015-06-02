@@ -16,28 +16,35 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlNamedElement;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlHeredocTerminatorImpl extends PsiCommentImpl implements PerlNamedElement, PerlElementTypes
+/**
+ * Created by hurricup on 24.05.2015.
+ *
+ */
+public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNameElement
 {
-	public PerlHeredocTerminatorImpl(IElementType type, CharSequence text){ super(type, text);}
+	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text) {
+		super(type, text);
+	}
 
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		if( name.equals(""))
-			throw new IncorrectOperationException("You can't set heredoc terminator to the empty one");
-
-		replace(PerlElementFactory.createHereDocTerminator(getProject(), name));
+		PerlSubNameElement newFunction = PerlElementFactory.createUserFunction(getProject(), name);
+		if( newFunction != null )
+			replace(newFunction);
+		else
+			throw new IncorrectOperationException("Unable to create function from: "+ name);
 		return this;
 	}
 
@@ -45,14 +52,21 @@ public class PerlHeredocTerminatorImpl extends PsiCommentImpl implements PerlNam
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return getPsi();
+		return this;
 	}
 
-	// todo we should move this to some superclass
 	@Override
 	public String getName()
 	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null: nameIdentifier.getText();
+		return this.getText();
 	}
+
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+	}
+
+
 }

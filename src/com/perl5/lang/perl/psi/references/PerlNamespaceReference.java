@@ -19,8 +19,8 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.perl5.lang.perl.psi.PerlNamedElement;
-import com.perl5.lang.perl.psi.PerlNamespace;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -61,7 +61,7 @@ public class PerlNamespaceReference extends PerlReferencePoly
 
 		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
 		{
-			PerlNamespace namespace = namespaceDefinition.getNamespaceElement();
+			PerlNamespaceElement namespace = namespaceDefinition.getNamespaceElement();
 			if( namespace != null && namespace != myElement )
 				result.add(new PsiElementResolveResult(namespace));
 		}

@@ -1,4 +1,4 @@
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.utils;
 
 /**
  * Created by hurricup on 01.06.2015.

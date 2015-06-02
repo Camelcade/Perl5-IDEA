@@ -16,14 +16,11 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNameIdentifierOwner;
-import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamedElement extends PsiNameIdentifierOwner
+public interface PerlSubNameElement extends PerlNamedElement
 {
 }

@@ -31,8 +31,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.impl.PerlFunctionAttributeImpl;
+import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlFunctionAttributeElementImpl;
 import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -88,7 +88,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	}
 
 	public PsiFile createFile(FileViewProvider viewProvider) {
-		return new PerlFileImpl(viewProvider);
+		return new PerlFileElementImpl(viewProvider);
 	}
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
@@ -100,7 +100,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 		IElementType type = node.getElementType();
 		if (type == PERL_FUNCTION_ATTRIBUTE)
 		{
-			return new PerlFunctionAttributeImpl(node);
+			return new PerlFunctionAttributeElementImpl(node);
 		}
 		else
 			return PerlElementTypes.Factory.createElement(node);

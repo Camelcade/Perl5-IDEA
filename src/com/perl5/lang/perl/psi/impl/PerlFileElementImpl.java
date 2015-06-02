@@ -21,13 +21,10 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileListener;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlFileType;
-import com.perl5.lang.perl.psi.PerlLexicalScope;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
@@ -35,11 +32,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlFileImpl extends PsiFileBase implements PerlLexicalScope
+public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 {
 	VirtualFileListener myChangeListener;
 
-	public PerlFileImpl(@NotNull FileViewProvider viewProvider) {
+	public PerlFileElementImpl(@NotNull FileViewProvider viewProvider) {
 		super(viewProvider, PerlLanguage.INSTANCE);
 	}
 

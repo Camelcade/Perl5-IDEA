@@ -24,41 +24,29 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubIndexKeys;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by hurricup on 19.04.2015.
  */
 public class PerlHashUtil implements PerlElementTypes
 {
-	protected static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
-
-	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
-			"%!",
-			"%+",
-			"%-",
-			"%^H",
-			"%ENV",
-			"%INC",
-			"%OVERLOAD",
-			"%SIG",
-			"%EXPORT_TAGS"
+	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
+			"!",
+			"+",
+			"-",
+			"^H",
+			"ENV",
+			"INC",
+			"OVERLOAD",
+			"SIG",
+			"EXPORT_TAGS"
 
 	));
 
-	static{
-		for( String builtIn: BUILT_IN )
-		{
-			BUILT_IN_MAP.put(builtIn, PERL_HASH_BUILT_IN);
-		}
-	}
-
 	public static boolean isBuiltIn(String variable)
 	{
-		return BUILT_IN_MAP.containsKey(variable);
+		return BUILT_IN.contains(variable);
 	}
 
 	/**

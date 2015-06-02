@@ -46,6 +46,12 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 
 	public abstract IElementType processHeredocOpener();
 
+	/**
+	 * Parses current token as a variable
+	 * @return sigil's token type
+	 */
+	public abstract IElementType parseBuiltInVariable();
+
 	public abstract IElementType processOpenerWhiteSpace();
 
 	public abstract IElementType processTransOpener();

@@ -39,8 +39,8 @@ public class PerlFunctionReference extends PerlReferencePoly
 
 	public PerlFunctionReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
-		assert element instanceof PerlSubName;
-		functionName = ((PerlSubName) element).getName();
+		assert element instanceof PerlSubNameElement;
+		functionName = ((PerlSubNameElement) element).getName();
 
 		PsiElement parent = element.getParent();
 
@@ -71,14 +71,14 @@ public class PerlFunctionReference extends PerlReferencePoly
 		// subs definitions
 		for( PsiPerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, canonicalName))
 		{
-			PerlSubName perlSubName = sub.getSubNameElement();
+			PerlSubNameElement perlSubNameElement = sub.getSubNameElement();
 
-			if( perlSubName != null && perlSubName != myElement)
-				result.add(new PsiElementResolveResult(perlSubName));
+			if( perlSubNameElement != null && perlSubNameElement != myElement)
+				result.add(new PsiElementResolveResult(perlSubNameElement));
 		}
 
 		// globs definitions
-		for( PsiPerlPerlGlob glob : PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
+		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
 		{
 			result.add(new PsiElementResolveResult(glob.getVariableName()));
 		}

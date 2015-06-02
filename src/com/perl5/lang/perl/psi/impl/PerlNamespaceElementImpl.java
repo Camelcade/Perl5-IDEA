@@ -27,8 +27,8 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
-import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlElementFactory;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
@@ -43,9 +43,9 @@ import java.util.List;
  * Created by hurricup on 25.05.2015.
  *
  */
-public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
+public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlNamespaceElement
 {
-	public PerlNamespaceImpl(@NotNull IElementType type, CharSequence text) {
+	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
 	}
 
@@ -61,9 +61,9 @@ public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 		{
 			// namespace definition,
 			final PsiFile psiFile = getContainingFile();
-			if( psiFile instanceof PerlFileImpl )
+			if( psiFile instanceof PerlFileElementImpl)
 			{
-				final String packageName = ((PerlFileImpl) psiFile).getFilePackageName();
+				final String packageName = ((PerlFileElementImpl) psiFile).getFilePackageName();
 				if( packageName != null && packageName.equals(getName()))
 				{
 					// ok, it's package with same name
@@ -102,7 +102,7 @@ public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 
 							for(PsiReference inboundReference: ReferencesSearch.search(psiFile))
 							{
-								if( inboundReference.getElement() instanceof PerlNamespace)
+								if( inboundReference.getElement() instanceof PerlNamespaceElement)
 									queue.addElement(inboundReference.getElement(), canonicalPackageName);
 							}
 
@@ -141,7 +141,7 @@ public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 				name = name + "::";
 		}
 
-		PerlNamespaceImpl newName = PerlElementFactory.createPackageName(getProject(), name);
+		PerlNamespaceElementImpl newName = PerlElementFactory.createPackageName(getProject(), name);
 
 		if( newName != null )
 		{

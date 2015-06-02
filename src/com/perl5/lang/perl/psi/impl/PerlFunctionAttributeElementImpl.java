@@ -14,14 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
 
 /**
- * Created by hurricup on 27.05.2015.
- * This interface marks that PsiElement has it's own scope
+ * Created by hurricup on 14.05.2015.
  */
-public interface PerlLexicalScope extends PerlLexicalScopeElement, PsiElement
+public class PerlFunctionAttributeElementImpl extends ASTWrapperPsiElement
 {
+		public PerlFunctionAttributeElementImpl(ASTNode node) {
+			super(node);
+		}
+
+		// @todo what for?
+//	public void accept(@NotNull PsiElementVisitor visitor) {
+//		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitBlock(this);
+//		else super.accept(visitor);
+//	}
+
 }

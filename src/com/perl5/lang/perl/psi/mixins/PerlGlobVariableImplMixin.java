@@ -19,9 +19,9 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PsiPerlPerlGlob;
-import com.perl5.lang.perl.psi.PerlVariableName;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -29,13 +29,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PsiPerlPerlGlob
+public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PsiPerlGlobVariable
 {
-	public PerlPerlGlobImplMixin(@NotNull ASTNode node){
+	public PerlGlobVariableImplMixin(@NotNull ASTNode node){
 		super(node);
 	}
 
-	public PerlPerlGlobImplMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
+	public PerlGlobVariableImplMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
 		super(stub,nodeType);
 	}
 
@@ -73,19 +73,19 @@ public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespaceElement();
+		PerlNamespaceElement namespace = getNamespaceElement();
 		return namespace != null ? namespace.getName(): null;
 	}
 
 	@Override
-	public PerlNamespace getNamespaceElement()
+	public PerlNamespaceElement getNamespaceElement()
 	{
-		return findChildByClass(PerlNamespace.class);
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 	@Override
-	public PerlVariableName getVariableName()
+	public PerlVariableNameElement getVariableName()
 	{
-		return findChildByClass(PerlVariableName.class);
+		return findChildByClass(PerlVariableNameElement.class);
 	}
 }

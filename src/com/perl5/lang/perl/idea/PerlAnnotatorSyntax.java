@@ -25,9 +25,10 @@ import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
@@ -48,8 +49,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	@Override
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
-		IElementType elementType = element.getNode().getElementType();
-		if( elementType == PERL_SCALAR || elementType == PERL_ARRAY_INDEX )
+		if( element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndex)
 		{
 			colorize(
 					holder.createInfoAnnotation(element, null),
@@ -57,7 +57,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
                     false,
 					false);
 		}
-		else if( elementType == PERL_HASH )
+		else if( element instanceof PsiPerlHashVariable)
 		{
 			colorize(
 					holder.createInfoAnnotation(element, null),
@@ -65,7 +65,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
                     false,
 					false);
 		}
-        else if( elementType == PERL_ARRAY )
+        else if( element instanceof PsiPerlArrayVariable)
         {
             colorize(
                     holder.createInfoAnnotation(element, null),
@@ -73,7 +73,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
                     false,
                     false);
         }
-        else if( elementType == PERL_GLOB )
+        else if( element instanceof PsiPerlGlobVariable)
         {
             colorize(
                     holder.createInfoAnnotation(element, null),
@@ -98,27 +98,23 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 //
 //		}
 		//else
-		if( elementType == PERL_STRING_CONTENT)
+		if( element instanceof PerlStringContentElementImpl)
 		{
-			IElementType parentType = element.getParent().getNode().getElementType();
+			PsiElement parent = element.getParent();
 
 			Annotation annotation = holder.createInfoAnnotation(element, null);
 
-			if( parentType == STRING_SQ ||  parentType == STRING_LIST || parentType == BRACED_STRING) // bareword string, single quoted string
-			{
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
-			}
-			else if(  parentType == STRING_DQ ) // interpolated
+			if(  parent instanceof PsiPerlStringDq ) // interpolated
 			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
 			}
-			else if(  parentType == STRING_XQ ) // executable
+			else if(  parent instanceof PsiPerlStringXq ) // executable
 			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
 			}
 			else
 			{
-		//		throw new Error("Unable to detect string type");
+				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
 			}
 		}
 //		else if( elementType == PERL_FUNCTION)

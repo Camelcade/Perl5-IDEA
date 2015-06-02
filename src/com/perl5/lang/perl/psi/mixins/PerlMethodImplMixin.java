@@ -18,8 +18,8 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlSubName;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PsiPerlObjectElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +35,7 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespaceElement();
+		PerlNamespaceElement namespace = getNamespaceElement();
 
 		if( namespace != null )
 			return namespace.getName();
@@ -50,15 +50,15 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	}
 
 	@Override
-	public PerlNamespace getNamespaceElement()
+	public PerlNamespaceElement getNamespaceElement()
 	{
-		return findChildByClass(PerlNamespace.class);
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 	@Override
-	public PerlSubName getSubNameElement()
+	public PerlSubNameElement getSubNameElement()
 	{
-		return findChildByClass(PerlSubName.class);
+		return findChildByClass(PerlSubNameElement.class);
 	}
 
 	@Override

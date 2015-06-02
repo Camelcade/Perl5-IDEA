@@ -20,7 +20,6 @@ import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.exceptions.SubDeclaredException;
 import com.perl5.lang.perl.exceptions.SubDefinedException;
 import com.perl5.lang.perl.exceptions.SubDefinitionDiffersDeclarationException;
-import com.perl5.lang.perl.psi.PerlBuilder;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 
 import java.util.ArrayList;

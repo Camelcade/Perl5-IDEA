@@ -41,11 +41,6 @@ public abstract class PerlObjectElementImplMixin extends ASTWrapperPsiElement im
 	public String guessNamespace()
 	{
 		// at the moment object is only wrapper for scalar variable, nothing else
-		PerlVariable scalar = getPerlScalar();
-
-		if (scalar != null)
-			return scalar.guessVariableType();
-
-		return null;
+		return getScalarVariable().guessVariableType();
 	}
 }
