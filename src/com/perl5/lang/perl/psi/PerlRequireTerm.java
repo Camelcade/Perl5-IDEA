@@ -21,6 +21,6 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface IPerlSubDeclarationMixin extends PsiElement, PerlNamespaceContainer, PerlUserFunctionContainer, PerlPackageElement
+public interface PerlRequireTerm extends PsiElement, PerlNamespaceContainer
 {
 }

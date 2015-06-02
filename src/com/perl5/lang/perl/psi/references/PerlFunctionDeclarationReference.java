@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.impl.PerlSubDeclarationImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -47,10 +47,10 @@ public class PerlFunctionDeclarationReference extends PerlFunctionReference
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
 		// declarations
-		for( PerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PerlSubDeclarationImpl.class))
+		for( PsiPerlSubDeclarationImpl sub : PsiTreeUtil.findChildrenOfType(file, PsiPerlSubDeclarationImpl.class))
 		{
-			if( functionName.equals(sub.getUserFunction().getText()))
-				result.add(new PsiElementResolveResult(sub.getUserFunction()));
+			if( functionName.equals(sub.getSubNameElement().getText()))
+				result.add(new PsiElementResolveResult(sub.getSubNameElement()));
 		}
 
 		// search in $self ierarchy - first occurance

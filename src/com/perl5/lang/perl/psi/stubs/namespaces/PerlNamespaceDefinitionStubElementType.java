@@ -18,8 +18,8 @@ package com.perl5.lang.perl.psi.stubs.namespaces;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.impl.PerlNamespaceDefinitionImpl;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub,PerlNamespaceDefinition>
+public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub,PsiPerlNamespaceDefinition>
 {
 	public PerlNamespaceDefinitionStubElementType(String name)
 	{
@@ -35,15 +35,15 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	}
 
 	@Override
-	public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub)
+	public PsiPerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub)
 	{
-		return new PerlNamespaceDefinitionImpl(stub,this);
+		return new PsiPerlNamespaceDefinitionImpl(stub,this);
 	}
 
 	@Override
-	public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinition psi, StubElement parentStub)
+	public PerlNamespaceDefinitionStub createStub(@NotNull PsiPerlNamespaceDefinition psi, StubElement parentStub)
 	{
-		return new PerlNamespaceDefinitionStubImpl(parentStub, psi.getNamespace().getName());
+		return new PerlNamespaceDefinitionStubImpl(parentStub, psi.getNamespaceElement().getName());
 	}
 
 	@NotNull

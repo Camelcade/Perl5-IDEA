@@ -5,7 +5,7 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.project.Project;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -15,9 +15,9 @@ import javax.swing.*;
  */
 public class PerlNameSpaceNavigationItem implements NavigationItem {
     private final Project project;
-    private final PerlNamespaceDefinition nameSpace;
+    private final PsiPerlNamespaceDefinition nameSpace;
 
-    public PerlNameSpaceNavigationItem(Project project, PerlNamespaceDefinition nameSpace) {
+    public PerlNameSpaceNavigationItem(Project project, PsiPerlNamespaceDefinition nameSpace) {
         this.project = project;
         this.nameSpace = nameSpace;
     }

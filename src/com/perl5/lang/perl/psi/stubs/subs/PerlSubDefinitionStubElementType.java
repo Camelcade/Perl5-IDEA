@@ -19,9 +19,9 @@ package com.perl5.lang.perl.psi.stubs.subs;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlSubArgument;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlVariableType;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ import java.util.List;
  * Created by hurricup on 25.05.2015.
  *
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub,PerlSubDefinition>
+public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub,PsiPerlSubDefinition>
 {
 
 	public PerlSubDefinitionStubElementType(String name)
@@ -41,15 +41,15 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	}
 
 	@Override
-	public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub)
+	public PsiPerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
-		return new PerlSubDefinitionImpl(stub,this);
+		return new PsiPerlSubDefinitionImpl(stub,this);
 	}
 
 	@Override
-	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub)
+	public PerlSubDefinitionStub createStub(@NotNull PsiPerlSubDefinition psi, StubElement parentStub)
 	{
-		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getUserFunction().getName(), psi.getArgumentsList(), psi.isMethod());
+		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getArgumentsList(), psi.isMethod());
 	}
 
 	@NotNull

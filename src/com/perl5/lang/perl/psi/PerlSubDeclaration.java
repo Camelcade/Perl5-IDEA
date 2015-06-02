@@ -17,31 +17,10 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNameIdentifierOwner;
-import com.intellij.psi.util.PsiTreeUtil;
 
 /**
- * Created by hurricup on 25.05.2015.
- *
+ * Created by hurricup on 31.05.2015.
  */
-public interface PerlPackageElement extends PsiElement
+public interface PerlSubDeclaration extends PsiElement, PerlNamespaceContainer, PerlUserFunctionContainer, PerlPackageMember
 {
-	/**
-	 * Method for checking explicit package name for current element
-	 * @return package name or null if n/a
-	 */
-	public String getExplicitPackageName();
-
-	/**
-	 * Trying to detect package name by traversing parents
-	 * @return package name or main if not found
-	 */
-	public String getContextPackageName();
-
-	/**
-	 * Trying to get the package name from explicit specification or by traversing
-	 * @return package name for current element
-	 */
-	public String getPackageName();
-
 }

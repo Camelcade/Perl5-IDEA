@@ -17,13 +17,13 @@
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 
 /**
  * Created by hurricup on 28.05.2015.
  *
  */
-public interface PerlNamespaceDefinitionStub extends StubElement<PerlNamespaceDefinition>
+public interface PerlNamespaceDefinitionStub extends StubElement<PsiPerlNamespaceDefinition>
 {
 	public String getPackageName();
 }

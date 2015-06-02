@@ -17,12 +17,22 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 27.05.2015.
+ * Declarations marker
  */
-public interface IPerlPerlGlobMixin extends PsiElement, PerlPackageElement, PerlNamespaceContainer
+public interface PerlVariableDeclaration extends PsiElement, PerlNamespaceContainer, PerlLexicalScopeElement
 {
-	String getGlobName();
-	PerlVariableName getVariableName();
+	@NotNull
+	List<PsiPerlPerlArray> getPerlArrayList();
+
+	@NotNull
+	List<PsiPerlPerlHash> getPerlHashList();
+
+	@NotNull
+	List<PsiPerlPerlScalar> getPerlScalarList();
 }

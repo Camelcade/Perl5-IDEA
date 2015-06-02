@@ -17,13 +17,12 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlFunction;
+import com.perl5.lang.perl.psi.PerlSubName;
 import com.perl5.lang.perl.psi.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,16 +31,16 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 24.05.2015.
  *
  */
-public class PerlFunctionImpl extends LeafPsiElement implements PerlFunction
+public class PerlSubNameImpl extends LeafPsiElement implements PerlSubName
 {
-	public PerlFunctionImpl(@NotNull IElementType type, CharSequence text) {
+	public PerlSubNameImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
 	}
 
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PerlFunction newFunction = PerlElementFactory.createUserFunction(getProject(), name);
+		PerlSubName newFunction = PerlElementFactory.createUserFunction(getProject(), name);
 		if( newFunction != null )
 			replace(newFunction);
 		else

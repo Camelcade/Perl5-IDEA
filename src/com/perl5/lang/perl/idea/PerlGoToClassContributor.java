@@ -4,7 +4,7 @@ import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.GotoClassContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,10 +34,10 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
     @NotNull
     @Override
     public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean b) {
-        PerlNamespaceDefinition[] nameSpaces = PerlPackageUtil.findNamespaceDefinitions(project, packageName).toArray(new PerlNamespaceDefinition[]{});
+        PsiPerlNamespaceDefinition[] nameSpaces = PerlPackageUtil.findNamespaceDefinitions(project, packageName).toArray(new PsiPerlNamespaceDefinition[]{});
         NavigationItem[] navigationItems = new NavigationItem[nameSpaces.length];
         for (int i = 0; i < nameSpaces.length; i++) {
-            PerlNamespaceDefinition nameSpace = nameSpaces[i];
+            PsiPerlNamespaceDefinition nameSpace = nameSpaces[i];
             navigationItems[i] = new PerlNameSpaceNavigationItem(project,nameSpace);
         }
 

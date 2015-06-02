@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public interface PerlVariable extends PerlLexicalScopeElement, PerlPackageElement, PsiElement
+public interface PerlVariable extends PerlLexicalScopeElement, PerlPackageMember, PsiElement
 {
 	/**
 	 * Getter for namespace object
@@ -43,7 +43,7 @@ public interface PerlVariable extends PerlLexicalScopeElement, PerlPackageElemen
 	 * @return scalar sigils if any
 	 */
 	@Nullable
-	PerlScalarSigils getScalarSigils();
+	PsiPerlScalarSigils getScalarSigils();
 
 	/**
 	 * Guesses variable type from definition or context

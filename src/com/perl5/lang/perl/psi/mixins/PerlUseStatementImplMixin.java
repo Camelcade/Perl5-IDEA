@@ -19,12 +19,12 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlUseStatementImplMixin extends ASTWrapperPsiElement implements PerlUseStatement
+public abstract class PerlUseStatementImplMixin extends ASTWrapperPsiElement implements PsiPerlUseStatement
 {
 	public PerlUseStatementImplMixin(ASTNode node)
 	{
@@ -46,14 +46,14 @@ public abstract class PerlUseStatementImplMixin extends ASTWrapperPsiElement imp
 	@Override
 	public String getPackageName()
 	{
-		PerlNamespace ns = getNamespace();
+		PerlNamespace ns = getNamespaceElement();
 		if( ns != null )
 			return ns.getName();
 		return null;
 	}
 
 	@Override
-	public PerlNamespace getNamespace()
+	public PerlNamespace getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespace.class);
 	}

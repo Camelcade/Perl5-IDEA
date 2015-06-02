@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea;
 
-import com.intellij.codeInsight.highlighting.PairedBraceMatcherAdapter;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
@@ -28,7 +27,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,10 +49,10 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		descriptors.addAll(getDescriptorsFor(root, document, PerlBlock.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonHash.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlAnonArray.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlParenthesisedExpr.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlBlock.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonHash.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonArray.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlParenthesisedExpr.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 1));
 
 		descriptors.addAll(getCommentsDescriptors(root, document));
@@ -153,7 +151,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		Collection<PsiElement> imports = PsiTreeUtil.findChildrenOfAnyType(root, PerlUseStatement.class, PerlRequireStatement.class);
+		Collection<PsiElement> imports = PsiTreeUtil.findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireStatement.class);
 
 		int currentOffset = 0;
 
@@ -165,7 +163,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 				int blockEnd = blockStart;
 				ASTNode blockNode = perlImport.getNode();
 
-				PsiElement currentStatement = PsiTreeUtil.getParentOfType(perlImport, PerlStatement.class);
+				PsiElement currentStatement = PsiTreeUtil.getParentOfType(perlImport, PsiPerlStatement.class);
 
 				int importsNumber = 0;
 
@@ -173,7 +171,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 				{
 					PsiElement firstChild = currentStatement.getFirstChild();
 
-					if(  firstChild != null && (firstChild instanceof PerlUseStatement || firstChild instanceof PerlRequireStatement))
+					if(  firstChild != null && (firstChild instanceof PsiPerlUseStatement || firstChild instanceof PsiPerlRequireStatement))
 					{
 						blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
 						importsNumber++;

@@ -17,12 +17,12 @@
 package com.perl5.lang.perl.psi.stubs.globs;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
+import com.perl5.lang.perl.psi.PsiPerlPerlGlob;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlGlobStub extends StubElement<PerlPerlGlob>
+public interface PerlGlobStub extends StubElement<PsiPerlPerlGlob>
 {
 	public String getPackageName();
 

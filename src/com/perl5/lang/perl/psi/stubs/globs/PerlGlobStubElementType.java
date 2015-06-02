@@ -16,12 +16,10 @@
 
 package com.perl5.lang.perl.psi.stubs.globs;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.impl.PerlPerlGlobImpl;
+import com.perl5.lang.perl.psi.PsiPerlPerlGlob;
+import com.perl5.lang.perl.psi.impl.PsiPerlPerlGlobImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -29,7 +27,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PerlPerlGlob>
+public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPerlPerlGlob>
 {
 
 	public PerlGlobStubElementType(String name)
@@ -38,13 +36,13 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PerlP
 	}
 
 	@Override
-	public PerlPerlGlob createPsi(@NotNull PerlGlobStub stub)
+	public PsiPerlPerlGlob createPsi(@NotNull PerlGlobStub stub)
 	{
-		return new PerlPerlGlobImpl(stub,this);
+		return new PsiPerlPerlGlobImpl(stub,this);
 	}
 
 	@Override
-	public PerlGlobStub createStub(@NotNull PerlPerlGlob psi, StubElement parentStub)
+	public PerlGlobStub createStub(@NotNull PsiPerlPerlGlob psi, StubElement parentStub)
 	{
 		return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getGlobName());
 	}

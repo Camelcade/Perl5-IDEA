@@ -17,16 +17,16 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlFunction;
-import com.perl5.lang.perl.psi.PerlObject;
+import com.perl5.lang.perl.psi.PerlSubName;
+import com.perl5.lang.perl.psi.PsiPerlObjectElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlMethodImplMixin extends PerlPackageElementMixin implements PerlMethod
+public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin implements PsiPerlMethod
 {
 	public PerlMethodImplMixin(@NotNull ASTNode node){
 		super(node);
@@ -35,13 +35,13 @@ public abstract class PerlMethodImplMixin extends PerlPackageElementMixin implem
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespace();
+		PerlNamespace namespace = getNamespaceElement();
 
 		if( namespace != null )
 			return namespace.getName();
 		else
 		{
-			PerlObject object = getObject();
+			PsiPerlObjectElement object = getObjectElement();
 			if( object != null )
 				return object.guessNamespace();
 		}
@@ -50,20 +50,20 @@ public abstract class PerlMethodImplMixin extends PerlPackageElementMixin implem
 	}
 
 	@Override
-	public PerlNamespace getNamespace()
+	public PerlNamespace getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespace.class);
 	}
 
 	@Override
-	public PerlFunction getUserFunction()
+	public PerlSubName getSubNameElement()
 	{
-		return findChildByClass(PerlFunction.class);
+		return findChildByClass(PerlSubName.class);
 	}
 
 	@Override
 	public boolean hasExplicitNamespace()
 	{
-		return getNamespace() != null || getObject() != null;
+		return getNamespaceElement() != null || getObjectElement() != null;
 	}
 }

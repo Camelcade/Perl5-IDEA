@@ -28,23 +28,23 @@ public class PerlElementFactory
 	public static PerlNamespaceImpl createPackageName(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "package " + name + ";");
-		PerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinition.class);
+		PsiPerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PsiPerlNamespaceDefinition.class);
 		assert def != null;
-		return (PerlNamespaceImpl)def.getNamespace();
+		return (PerlNamespaceImpl)def.getNamespaceElement();
 	}
 
-	public static PerlFunction createUserFunction(Project project, String name)
+	public static PerlSubName createUserFunction(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "sub " + name + ";");
-		PerlSubDeclaration decl = PsiTreeUtil.findChildOfType(file, PerlSubDeclaration.class);
+		PsiPerlSubDeclaration decl = PsiTreeUtil.findChildOfType(file, PsiPerlSubDeclaration.class);
 		assert decl != null;
-		return decl.getUserFunction();
+		return decl.getSubNameElement();
 	}
 
 	public static PerlVariableName createVariableName(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "$" + name + ";");
-		PerlPerlScalar scalar = PsiTreeUtil.findChildOfType(file, PerlPerlScalar.class);
+		PsiPerlPerlScalar scalar = PsiTreeUtil.findChildOfType(file, PsiPerlPerlScalar.class);
 		assert scalar != null;
 		return scalar.getVariableName();
 	}
@@ -58,7 +58,7 @@ public class PerlElementFactory
 	public static PerlStringContentImpl createStringContent(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "'"+name+"';");
-		PerlStringSq string = PsiTreeUtil.findChildOfType(file, PerlStringSq.class);
+		PsiPerlStringSq string = PsiTreeUtil.findChildOfType(file, PsiPerlStringSq.class);
 		assert string != null;
 		return (PerlStringContentImpl) string.getFirstChild().getNextSibling();
 	}

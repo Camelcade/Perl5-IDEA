@@ -21,5 +21,5 @@ package com.perl5.lang.perl.psi;
  */
 public interface PerlUserFunctionContainer
 {
-	PerlFunction getUserFunction();
+	PerlSubName getSubNameElement();
 }

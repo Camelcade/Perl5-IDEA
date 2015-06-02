@@ -27,8 +27,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.psi.PerlStatement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +50,7 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 				PsiFile file = parameters.getOriginalFile();
 				PsiElement stringContentElement = parameters.getPosition();
 
-				PerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PerlUseStatement.class, true, PerlStatement.class);
+				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
 				if( useStatement != null && (useStatement.isUseParent() || useStatement.isUseBase()) )
 				{

@@ -103,7 +103,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		{
 			String variableName = variableNameObject.getName();
 
-			if( this instanceof PerlPerlScalar && PerlThisNames.NAMES_SET.contains(variableName))
+			if( this instanceof PsiPerlPerlScalar && PerlThisNames.NAMES_SET.contains(variableName))
 				return PerlPackageUtil.getContextPackageName(this);
 
 			// find declaration and check type
@@ -117,10 +117,10 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 				for( ResolveResult result: results)
 				{
 					PsiElement decalarationVariableName = result.getElement();
-					IPerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(decalarationVariableName, IPerlVariableDeclaration.class);
+					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(decalarationVariableName, PerlVariableDeclaration.class);
 					if( declaration != null )
 					{
-						PerlNamespace declarationNamespace = declaration.getNamespace();
+						PerlNamespace declarationNamespace = declaration.getNamespaceElement();
 						if( declarationNamespace != null )
 						{
 							return declarationNamespace.getName();
@@ -142,21 +142,21 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		boolean gotScalarSigils = this.getScalarSigils() != null;
 
 		if(
-				variableContainer instanceof PerlScalarHashElement
-						|| variableContainer instanceof PerlArrayHashSlice
-						|| (this instanceof PerlPerlHash && !gotScalarSigils)
+				variableContainer instanceof PsiPerlScalarHashElement
+						|| variableContainer instanceof PsiPerlArrayHashSlice
+						|| (this instanceof PsiPerlPerlHash && !gotScalarSigils)
 				)
 			return PerlVariableType.HASH;
 		else if(
-				variableContainer instanceof PerlArrayArraySlice
-						|| variableContainer instanceof PerlScalarArrayElement
-						|| (this instanceof PerlPerlArrayIndex && !gotScalarSigils)
-						|| (this instanceof PerlPerlArray && !gotScalarSigils)
+				variableContainer instanceof PsiPerlArrayArraySlice
+						|| variableContainer instanceof PsiPerlScalarArrayElement
+						|| (this instanceof PsiPerlPerlArrayIndex && !gotScalarSigils)
+						|| (this instanceof PsiPerlPerlArray && !gotScalarSigils)
 				)
 			return PerlVariableType.ARRAY;
 		else if(
-				variableContainer instanceof PerlDerefExpr
-						|| this instanceof PerlPerlScalar
+				variableContainer instanceof PsiPerlDerefExpr
+						|| this instanceof PsiPerlPerlScalar
 						|| gotScalarSigils
 				)
 			return PerlVariableType.SCALAR;

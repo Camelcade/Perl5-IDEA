@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlObject;
+import com.perl5.lang.perl.psi.PsiPerlObjectElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,10 +27,10 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 24.05.2015.
  * This class represents an object, which method being invoked; At the moment it may be represented with scalar variable only
  */
-public abstract class PerlObjectImplMixin extends ASTWrapperPsiElement implements PerlObject
+public abstract class PerlObjectElementImplMixin extends ASTWrapperPsiElement implements PsiPerlObjectElement
 {
 
-	public PerlObjectImplMixin(@NotNull ASTNode node)
+	public PerlObjectElementImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
 	}

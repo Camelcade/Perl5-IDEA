@@ -26,7 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
-import com.perl5.lang.perl.psi.IPerlVariableDeclaration;
+import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +56,7 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 				{
 					LookupElementBuilder newElement = LookupElementBuilder.create(packageName).withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
 
-					if( !(parent instanceof IPerlVariableDeclaration))
+					if( !(parent instanceof PerlVariableDeclaration))
 						newElement = newElement.withInsertHandler(PerlInsertHandlers.SEMI_NEWLINE_INSERT_HANDLER);
 					else
 						newElement = newElement.withInsertHandler(PerlInsertHandlers.SPACE_INSERT_HANDLER);

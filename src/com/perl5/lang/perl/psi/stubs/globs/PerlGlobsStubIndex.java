@@ -18,16 +18,16 @@ package com.perl5.lang.perl.psi.stubs.globs;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
+import com.perl5.lang.perl.psi.PsiPerlPerlGlob;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlGlobsStubIndex extends StringStubIndexExtension<PerlPerlGlob>
+public class PerlGlobsStubIndex extends StringStubIndexExtension<PsiPerlPerlGlob>
 {
 	public static final int VERSION = 0;
-	public static final StubIndexKey<String,PerlPerlGlob> KEY = StubIndexKey.createIndexKey("perl.glob");
+	public static final StubIndexKey<String,PsiPerlPerlGlob> KEY = StubIndexKey.createIndexKey("perl.glob");
 
 	@Override
 	public int getVersion()
@@ -37,7 +37,7 @@ public class PerlGlobsStubIndex extends StringStubIndexExtension<PerlPerlGlob>
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlPerlGlob> getKey()
+	public StubIndexKey<String, PsiPerlPerlGlob> getKey()
 	{
 		return KEY;
 	}

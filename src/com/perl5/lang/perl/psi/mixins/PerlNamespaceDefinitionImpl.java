@@ -20,25 +20,25 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
-public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub>  implements PerlNamespaceDefinition
+public abstract class PerlNamespaceDefinitionImpl extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub>  implements PsiPerlNamespaceDefinition
 {
-	public PerlNamespaceDefinitionImplMixin(@NotNull ASTNode node){
+	public PerlNamespaceDefinitionImpl(@NotNull ASTNode node){
 		super(node);
 	}
 
-	public PerlNamespaceDefinitionImplMixin(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IStubElementType nodeType) {
+	public PerlNamespaceDefinitionImpl(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IStubElementType nodeType) {
 		super(stub,nodeType);
 	}
 
 	@Override
-	public PerlNamespace getNamespace()
+	public PerlNamespace getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespace.class);
 	}

@@ -35,7 +35,7 @@ import java.util.List;
  * Created by hurricup on 25.05.2015.
  *
  */
-public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase<PerlSubDefinitionStub> implements PerlSubDefinition
+public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase<PerlSubDefinitionStub> implements PsiPerlSubDefinition
 {
 	private List<PerlSubArgument> myArguments = null;
 
@@ -74,7 +74,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		if (stub != null)
 			return stub.getFunctionName();
 
-		PerlFunction function = getUserFunction();
+		PerlSubName function = getSubNameElement();
 		return function.getName();
 	}
 
@@ -87,7 +87,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespace();
+		PerlNamespace namespace = getNamespaceElement();
 		return namespace != null ? namespace.getName() : null;
 	}
 
@@ -100,15 +100,15 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	}
 
 	@Override
-	public PerlNamespace getNamespace()
+	public PerlNamespace getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespace.class);
 	}
 
 	@Override
-	public PerlFunction getUserFunction()
+	public PerlSubName getSubNameElement()
 	{
-		return findChildByClass(PerlFunction.class);
+		return findChildByClass(PerlSubName.class);
 	}
 
 
@@ -142,23 +142,23 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 
 		// todo add stubs reading here
 
-		PerlBlock subBlock = getBlock();
+		PsiPerlBlock subBlock = getBlock();
 		for (PsiElement statement : subBlock.getChildren())
 		{
-			PerlAssignExpr assignExpression = PsiTreeUtil.findChildOfType(statement, PerlAssignExpr.class);
+			PsiPerlAssignExpr assignExpression = PsiTreeUtil.findChildOfType(statement, PsiPerlAssignExpr.class);
 			if (assignExpression != null)
 			{
-				Collection<PerlExpr> assignTerms = assignExpression.getExprList();
+				Collection<PsiPerlExpr> assignTerms = assignExpression.getExprList();
 				assert assignTerms instanceof SmartList;
 				if (assignTerms.size() == 2)
 				{
-					PerlExpr leftTerm = (PerlExpr) ((SmartList) assignTerms).get(0);
-					PerlExpr rightTerm = (PerlExpr) ((SmartList) assignTerms).get(1);
+					PsiPerlExpr leftTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(0);
+					PsiPerlExpr rightTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(1);
 
-					PerlVariableDeclarationLexical declaration = PsiTreeUtil.findChildOfType(leftTerm, PerlVariableDeclarationLexical.class);
+					PsiPerlVariableDeclarationLexical declaration = PsiTreeUtil.findChildOfType(leftTerm, PsiPerlVariableDeclarationLexical.class);
 					if (declaration != null)
 					{
-						PerlNamespace variableClass = declaration.getNamespace();
+						PerlNamespace variableClass = declaration.getNamespaceElement();
 						String definitionClassName = "";
 						if (variableClass != null)
 							definitionClassName = variableClass.getName();

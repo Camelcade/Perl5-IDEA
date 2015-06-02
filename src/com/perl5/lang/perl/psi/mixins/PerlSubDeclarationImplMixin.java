@@ -19,15 +19,15 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlFunction;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubName;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement implements PerlSubDeclaration
+public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement implements PsiPerlSubDeclaration
 {
 	public PerlSubDeclarationImplMixin(@NotNull ASTNode node){
 		super(node);
@@ -45,7 +45,7 @@ public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement i
 
 	public String getFunctionName()
 	{
-		PerlFunction function = getUserFunction();
+		PerlSubName function = getSubNameElement();
 		return function.getName();
 	}
 
@@ -58,21 +58,21 @@ public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement i
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespace();
+		PerlNamespace namespace = getNamespaceElement();
 		return namespace != null ? namespace.getName(): null;
 	}
 
 	@Override
-	public PerlNamespace getNamespace()
+	public PerlNamespace getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespace.class);
 	}
 
 
 	@Override
-	public PerlFunction getUserFunction()
+	public PerlSubName getSubNameElement()
 	{
-		return findChildByClass(PerlFunction.class);
+		return findChildByClass(PerlSubName.class);
 	}
 
 

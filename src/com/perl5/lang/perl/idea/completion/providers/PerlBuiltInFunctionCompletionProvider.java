@@ -6,7 +6,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,9 +20,9 @@ public class PerlBuiltInFunctionCompletionProvider extends CompletionProvider<Co
 							   @NotNull CompletionResultSet resultSet)
 	{
 		PsiElement method = parameters.getPosition().getParent();
-		assert method instanceof PerlMethod;
+		assert method instanceof PsiPerlMethod;
 
-		if( !((PerlMethod) method).hasExplicitNamespace())
+		if( !((PsiPerlMethod) method).hasExplicitNamespace())
 		{
 			for (String functionName : PerlFunctionUtil.BUILT_IN)
 			{

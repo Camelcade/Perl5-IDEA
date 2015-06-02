@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public interface IPerlObjectMixin extends PsiElement
+public interface PerlObject extends PsiElement
 {
 	// trying to guess namespace for this object. Returns null if can't
 	@Nullable

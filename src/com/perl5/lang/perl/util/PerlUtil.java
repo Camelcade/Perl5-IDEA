@@ -47,9 +47,9 @@ public class PerlUtil
 
 		PerlLexicalScope currentScope = ((PerlLexicalScopeElement) currentElement).getLexicalScope();
 
-		Collection<IPerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), IPerlVariableDeclaration.class);
+		Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), PerlVariableDeclaration.class);
 
-		for(IPerlVariableDeclaration declaration: declarations)
+		for(PerlVariableDeclaration declaration: declarations)
 		{
 			if( declaration.getTextOffset() < currentElement.getTextOffset())
 			{

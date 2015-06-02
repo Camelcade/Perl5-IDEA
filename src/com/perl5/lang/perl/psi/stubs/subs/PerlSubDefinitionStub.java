@@ -18,14 +18,14 @@ package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlSubArgument;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 
 import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlSubDefinitionStub extends StubElement<PerlSubDefinition>
+public interface PerlSubDefinitionStub extends StubElement<PsiPerlSubDefinition>
 {
 	/**
 	 * Returns package name for current function

@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface IPerlUseStatement extends PsiElement, PerlNamespaceContainer
+public interface PerlUseStatement extends PsiElement, PerlNamespaceContainer
 {
 	public String getPackageName();
 	public boolean isUseParent();

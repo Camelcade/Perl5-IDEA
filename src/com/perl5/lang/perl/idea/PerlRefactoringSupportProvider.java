@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlHeredocOpenerImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +34,7 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 	{
 		if( element instanceof PerlHeredocTerminatorImpl )
 			return true;
-		else if( element instanceof PerlHeredocOpenerImpl)
+		else if( element instanceof PsiPerlHeredocOpenerImpl)
 			return true;
 		else
 			return super.isInplaceRenameAvailable(element, context);

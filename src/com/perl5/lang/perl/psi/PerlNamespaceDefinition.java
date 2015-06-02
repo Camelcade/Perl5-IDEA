@@ -16,10 +16,11 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
+
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface IPerlMethodMixin extends PerlNamespaceContainer, PerlUserFunctionContainer, PerlPackageElement
+public interface PerlNamespaceDefinition extends PsiElement, PerlNamespaceContainer
 {
-	public boolean hasExplicitNamespace();
 }

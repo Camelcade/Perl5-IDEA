@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -30,10 +29,9 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.psi.PerlNamespace;
 import com.perl5.lang.perl.psi.PerlElementFactory;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
-import javafx.application.Application;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,7 +57,7 @@ public class PerlNamespaceImpl extends LeafPsiElement implements PerlNamespace
 		PsiElement parent = getParent();
 		assert parent != null;
 
-		if( parent instanceof PerlNamespaceDefinition)
+		if( parent instanceof PsiPerlNamespaceDefinition)
 		{
 			// namespace definition,
 			final PsiFile psiFile = getContainingFile();

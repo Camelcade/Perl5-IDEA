@@ -16,9 +16,13 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
+
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public interface PerlFunction extends PerlNamedElement
+public interface PerlPerlGlob extends PsiElement, PerlPackageMember, PerlNamespaceContainer
 {
+	String getGlobName();
+	PerlVariableName getVariableName();
 }

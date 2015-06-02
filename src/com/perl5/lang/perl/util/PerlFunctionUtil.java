@@ -21,9 +21,8 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex;
-import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubIndexKeys;
 
 import java.util.*;
 
@@ -67,10 +66,10 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 	 * @param canonicalName	canonical function name package::name
 	 * @return	Collection of found definitions
 	 */
-	public static Collection<PerlSubDefinition> findSubDefinitions(Project project, String canonicalName)
+	public static Collection<PsiPerlSubDefinition> findSubDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlSubDefinition.class);
+		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PsiPerlSubDefinition.class);
 	}
 
 	/**

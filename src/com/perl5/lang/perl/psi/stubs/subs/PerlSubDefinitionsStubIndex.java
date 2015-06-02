@@ -18,16 +18,16 @@ package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PerlSubDefinition>
+public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PsiPerlSubDefinition>
 {
 	public static final int VERSION = 1;
-	public static final StubIndexKey<String,PerlSubDefinition> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
+	public static final StubIndexKey<String,PsiPerlSubDefinition> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
 
 	@Override
 	public int getVersion()
@@ -37,7 +37,7 @@ public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PerlSu
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlSubDefinition> getKey()
+	public StubIndexKey<String, PsiPerlSubDefinition> getKey()
 	{
 		return KEY;
 	}

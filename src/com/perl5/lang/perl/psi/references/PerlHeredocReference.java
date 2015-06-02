@@ -19,12 +19,8 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.impl.PerlHeredocOpenerImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorImpl;
+import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
 import com.perl5.lang.perl.psi.impl.PerlStringContentImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,7 +47,7 @@ public class PerlHeredocReference extends PerlReference
 	public PsiElement resolve()
 	{
 		PsiElement result = null;
-		for( PerlHeredocOpener opener: PsiTreeUtil.findChildrenOfType(myElement.getContainingFile(), PerlHeredocOpener.class))
+		for( PsiPerlHeredocOpener opener: PsiTreeUtil.findChildrenOfType(myElement.getContainingFile(), PsiPerlHeredocOpener.class))
 		{
 			PerlStringContentImpl stringContent = PsiTreeUtil.findChildOfType(opener, PerlStringContentImpl.class);
 

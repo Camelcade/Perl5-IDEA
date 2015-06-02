@@ -28,8 +28,8 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlStatement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +50,7 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 			public void run()
 			{
 				// built in packages
-				PerlUseStatement useStatement = PsiTreeUtil.getParentOfType(parameters.getOriginalPosition(), PerlUseStatement.class, true, PerlStatement.class);
+				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(parameters.getOriginalPosition(), PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
 				for (String packageName : PerlPackageUtil.BUILT_IN_MAP.keySet())
 				{

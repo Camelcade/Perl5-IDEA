@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
-import com.perl5.lang.perl.psi.PerlPerlArray;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
-import com.perl5.lang.perl.psi.PerlPerlHash;
-import com.perl5.lang.perl.psi.PerlPerlScalar;
+import com.perl5.lang.perl.psi.PsiPerlPerlArray;
+import com.perl5.lang.perl.psi.PsiPerlPerlGlob;
+import com.perl5.lang.perl.psi.PsiPerlPerlHash;
+import com.perl5.lang.perl.psi.PsiPerlPerlScalar;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -31,13 +31,13 @@ public class PerlBuiltInVariableCompletionProvider extends CompletionProvider<Co
 		PsiElement variableName = parameters.getPosition();
 		PsiElement variable = variableName.getParent();
 
-		if (variable instanceof PerlPerlScalar)
+		if (variable instanceof PsiPerlPerlScalar)
 			fillScalarCompletions(parameters, context, resultSet);
-		else if (variable instanceof PerlPerlArray)
+		else if (variable instanceof PsiPerlPerlArray)
 			fillArrayCompletions(parameters, context, resultSet);
-		else if (variable instanceof PerlPerlHash)
+		else if (variable instanceof PsiPerlPerlHash)
 			fillHashCompletions(parameters, context, resultSet);
-		else if (variable instanceof PerlPerlGlob)
+		else if (variable instanceof PsiPerlPerlGlob)
 			fillGlobCompletions(parameters, context, resultSet);
 	}
 

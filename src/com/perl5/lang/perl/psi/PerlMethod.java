@@ -16,24 +16,10 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-
 /**
- * Created by hurricup on 27.05.2015.
- * Declarations marker
+ * Created by hurricup on 31.05.2015.
  */
-public interface IPerlVariableDeclaration extends PsiElement, PerlNamespaceContainer, PerlLexicalScopeElement
+public interface PerlMethod extends PerlNamespaceContainer, PerlUserFunctionContainer, PerlPackageMember
 {
-	@NotNull
-	List<PerlPerlArray> getPerlArrayList();
-
-	@NotNull
-	List<PerlPerlHash> getPerlHashList();
-
-	@NotNull
-	List<PerlPerlScalar> getPerlScalarList();
+	public boolean hasExplicitNamespace();
 }

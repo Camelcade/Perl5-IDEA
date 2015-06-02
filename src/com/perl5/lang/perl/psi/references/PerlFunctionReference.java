@@ -39,13 +39,13 @@ public class PerlFunctionReference extends PerlReferencePoly
 
 	public PerlFunctionReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
-		assert element instanceof PerlFunction;
-		functionName = ((PerlFunction) element).getName();
+		assert element instanceof PerlSubName;
+		functionName = ((PerlSubName) element).getName();
 
 		PsiElement parent = element.getParent();
 
-		if( packageName == null && parent instanceof PerlMethod)
-			packageName = ((PerlMethod) parent).getPackageName();
+		if( packageName == null && parent instanceof PsiPerlMethod)
+			packageName = ((PsiPerlMethod) parent).getPackageName();
 
 		// this is currently available in subs
 		if( packageName == null )
@@ -69,16 +69,16 @@ public class PerlFunctionReference extends PerlReferencePoly
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
 		// subs definitions
-		for( PerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, canonicalName))
+		for( PsiPerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, canonicalName))
 		{
-			PerlFunction perlFunction = sub.getUserFunction();
+			PerlSubName perlSubName = sub.getSubNameElement();
 
-			if( perlFunction != null && perlFunction != myElement)
-				result.add(new PsiElementResolveResult(perlFunction));
+			if( perlSubName != null && perlSubName != myElement)
+				result.add(new PsiElementResolveResult(perlSubName));
 		}
 
 		// globs definitions
-		for( PerlPerlGlob glob : PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
+		for( PsiPerlPerlGlob glob : PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
 		{
 			result.add(new PsiElementResolveResult(glob.getVariableName()));
 		}

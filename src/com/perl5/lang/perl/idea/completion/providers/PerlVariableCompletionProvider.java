@@ -33,7 +33,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 		final PsiElement perlVariable;
 		perlVariable = variableName.getParent();
 
-		if (perlVariable instanceof PerlPerlScalar)
+		if (perlVariable instanceof PsiPerlPerlScalar)
 			ApplicationManager.getApplication().runReadAction(new Runnable()
 			{
 				@Override
@@ -45,14 +45,14 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 
 					for (PerlVariable variable : declaredVariables)
 					{
-						if (variable instanceof PerlPerlScalar)
+						if (variable instanceof PsiPerlPerlScalar)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
 								resultSet.addElement(LookupElementBuilder
 										.create(variableName.getName())
 										.withIcon(PerlIcons.SCALAR_GUTTER_ICON));
-						} else if (variable instanceof PerlPerlArray)
+						} else if (variable instanceof PsiPerlPerlArray)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
@@ -65,7 +65,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 												.withPresentableText(varName + "[]")
 								);
 							}
-						} else if (variable instanceof PerlPerlHash)
+						} else if (variable instanceof PsiPerlPerlHash)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
@@ -109,7 +109,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 
 				}
 			});
-		else if (perlVariable instanceof PerlPerlArray)
+		else if (perlVariable instanceof PsiPerlPerlArray)
 			ApplicationManager.getApplication().runReadAction(new Runnable()
 			{
 				@Override
@@ -118,22 +118,22 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 					String currentText = variableName.getText();
 
 					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
-					boolean useScalars = ((PerlPerlArray) perlVariable).getScalarSigils() != null;
+					boolean useScalars = ((PsiPerlPerlArray) perlVariable).getScalarSigils() != null;
 
 					for (PerlVariable variable : declaredVariables)
 					{
-						if (variable instanceof PerlPerlScalar && useScalars)
+						if (variable instanceof PsiPerlPerlScalar && useScalars)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
 								resultSet.addElement(LookupElementBuilder.create(variableName.getName()).withIcon(PerlIcons.SCALAR_GUTTER_ICON));
-						} else if (variable instanceof PerlPerlArray)
+						} else if (variable instanceof PsiPerlPerlArray)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
 								resultSet.addElement(LookupElementBuilder.create(variableName.getName()).withIcon(PerlIcons.ARRAY_GUTTER_ICON));
 
-						} else if (variable instanceof PerlPerlHash)
+						} else if (variable instanceof PsiPerlPerlHash)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
@@ -173,7 +173,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 					}
 				}
 			});
-		else if (perlVariable instanceof PerlPerlHash)
+		else if (perlVariable instanceof PsiPerlPerlHash)
 			ApplicationManager.getApplication().runReadAction(new Runnable()
 			{
 				@Override
@@ -182,16 +182,16 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 					String currentText = variableName.getText();
 
 					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
-					boolean useScalars = ((PerlPerlHash) perlVariable).getScalarSigils() != null;
+					boolean useScalars = ((PsiPerlPerlHash) perlVariable).getScalarSigils() != null;
 
 					for (PerlVariable variable : declaredVariables)
 					{
-						if (variable instanceof PerlPerlScalar && useScalars)
+						if (variable instanceof PsiPerlPerlScalar && useScalars)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)
 								resultSet.addElement(LookupElementBuilder.create(variableName.getName()).withIcon(PerlIcons.SCALAR_GUTTER_ICON));
-						} else if (variable instanceof PerlPerlHash)
+						} else if (variable instanceof PsiPerlPerlHash)
 						{
 							PerlVariableName variableName = variable.getVariableName();
 							if (variableName != null && variableName.getName() != null)

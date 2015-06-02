@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlPackageElement;
+import com.perl5.lang.perl.psi.PerlPackageMember;
 import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -26,9 +26,9 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 25.05.2015.
  * This is an element with context, like variable, function
  */
-public abstract class PerlPackageElementMixin extends PerlNamedElementImpl implements PerlPackageElement
+public abstract class PerlPackageMemberMixin extends PerlNamedElementImpl implements PerlPackageMember
 {
-	public PerlPackageElementMixin(@NotNull ASTNode node){
+	public PerlPackageMemberMixin(@NotNull ASTNode node){
 		super(node);
 	}
 

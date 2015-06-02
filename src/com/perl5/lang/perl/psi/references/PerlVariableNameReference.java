@@ -106,7 +106,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 			for (PerlVariable variable : variables)
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if (variable instanceof PerlPerlScalar && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
+				if (variable instanceof PsiPerlPerlScalar && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
 					break;
@@ -146,7 +146,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 			for (PerlVariable variable : variables)
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if (variable instanceof PerlPerlArray && variableName != null && variableName != myElement&& myVariableName.equals(variableName.getName()))
+				if (variable instanceof PsiPerlPerlArray && variableName != null && variableName != myElement&& myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
 					break;
@@ -185,7 +185,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 			for (PerlVariable variable : variables)
 			{
 				PerlVariableName variableName = variable.getVariableName();
-				if (variable instanceof PerlPerlHash && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
+				if (variable instanceof PsiPerlPerlHash && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
 					break;

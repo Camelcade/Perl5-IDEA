@@ -20,7 +20,7 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlNamespace;
-import com.perl5.lang.perl.psi.PerlPerlGlob;
+import com.perl5.lang.perl.psi.PsiPerlPerlGlob;
 import com.perl5.lang.perl.psi.PerlVariableName;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PerlPerlGlob
+public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PsiPerlPerlGlob
 {
 	public PerlPerlGlobImplMixin(@NotNull ASTNode node){
 		super(node);
@@ -73,12 +73,12 @@ public abstract class PerlPerlGlobImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespace namespace = getNamespace();
+		PerlNamespace namespace = getNamespaceElement();
 		return namespace != null ? namespace.getName(): null;
 	}
 
 	@Override
-	public PerlNamespace getNamespace()
+	public PerlNamespace getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespace.class);
 	}

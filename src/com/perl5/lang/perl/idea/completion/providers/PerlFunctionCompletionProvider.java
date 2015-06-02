@@ -10,11 +10,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.parser.PerlSub;
-import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.PerlSubArgument;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -47,14 +45,14 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 			public void run()
 			{
 				PsiElement method = parameters.getPosition().getParent();
-				assert method instanceof PerlMethod;
+				assert method instanceof PsiPerlMethod;
 
-				String packageName = ((PerlMethod) method).getPackageName();
+				String packageName = ((PsiPerlMethod) method).getPackageName();
 				assert packageName != null;
 
 				String packagePrefix = packageName + "::";
 
-				boolean hasExplicitNamespace = ((PerlMethod) method).hasExplicitNamespace();
+				boolean hasExplicitNamespace = ((PsiPerlMethod) method).hasExplicitNamespace();
 				Project project = parameters.getPosition().getProject();
 
 				// todo we should show declared and not defined subs too for XS extensions
@@ -70,9 +68,9 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 
 						if (!subName.contains("::"))
 						{
-							Collection<PerlSubDefinition> subDefinitions = PerlFunctionUtil.findSubDefinitions(project,canonicalSubName);
+							Collection<PsiPerlSubDefinition> subDefinitions = PerlFunctionUtil.findSubDefinitions(project,canonicalSubName);
 
-							for(PerlSubDefinition subDefinition: subDefinitions )
+							for(PsiPerlSubDefinition subDefinition: subDefinitions )
 							{
 								// todo set method icon if isMethod is true
 								// todo omit first argument is isMethod is true

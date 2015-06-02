@@ -16,13 +16,12 @@
 
 package com.perl5.lang.perl.psi;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface IPerlSubDefinitionMixin extends PerlPackageElement, PerlLexicalScope, PerlNamespaceContainer, PerlUserFunctionContainer
+public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, PerlNamespaceContainer, PerlUserFunctionContainer
 {
 	/**
 	 * Returns package name for current function

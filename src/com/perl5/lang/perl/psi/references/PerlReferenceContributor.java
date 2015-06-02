@@ -52,10 +52,10 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlFunction;
+						assert element instanceof PerlSubName;
 
 						// fixme this should be done using patterns
-						if( element.getParent() instanceof PerlSubDefinitionImpl)
+						if( element.getParent() instanceof PsiPerlSubDefinitionImpl)
 							return new PsiReference[]{new PerlFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
 						else
 						{
@@ -79,7 +79,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 						assert element instanceof PerlVariableName;
 						PsiElement container = element.getParent();
 
-						if( container instanceof PerlPerlGlob )
+						if( container instanceof PsiPerlPerlGlob)
 							return new PsiReference[0];
 						else
 							return new PsiReference[]{new PerlVariableNameReference(element, new TextRange(0, element.getTextLength()))};
@@ -100,8 +100,8 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 						ArrayList<PsiReference> result = new ArrayList<>();
 
 						// fixme this should be done using patterns
-						if( nameSpaceContainer instanceof PerlUseStatement
-								|| nameSpaceContainer instanceof PerlRequireTerm
+						if( nameSpaceContainer instanceof PsiPerlUseStatement
+								|| nameSpaceContainer instanceof PsiPerlRequireTerm
 								)
 							result.add(new PerlNamespaceFileReference(element, new TextRange(0, element.getTextLength())));
 						else
