@@ -29,6 +29,7 @@ import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
@@ -49,12 +50,12 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	@Override
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
-		if( element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndex)
+		if( element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
 		{
 			colorize(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_SCALAR,
-                    false,
+					((PerlVariableNameElementContainer)element).isBuiltIn(),
 					false);
 		}
 		else if( element instanceof PsiPerlHashVariable)
@@ -62,7 +63,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			colorize(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_HASH,
-                    false,
+					((PerlVariableNameElementContainer)element).isBuiltIn(),
 					false);
 		}
         else if( element instanceof PsiPerlArrayVariable)
@@ -70,7 +71,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
             colorize(
                     holder.createInfoAnnotation(element, null),
                     PerlSyntaxHighlighter.PERL_ARRAY,
-                    false,
+					((PerlVariableNameElementContainer)element).isBuiltIn(),
                     false);
         }
         else if( element instanceof PsiPerlGlobVariable)
@@ -78,7 +79,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
             colorize(
                     holder.createInfoAnnotation(element, null),
                     PerlSyntaxHighlighter.PERL_GLOB,
-                    false,
+					((PerlVariableNameElementContainer)element).isBuiltIn(),
                     false);
         }
 //		if( elementType == PERL_PACKAGE )

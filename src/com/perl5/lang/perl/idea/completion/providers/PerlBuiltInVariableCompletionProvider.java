@@ -49,31 +49,29 @@ public class PerlBuiltInVariableCompletionProvider extends CompletionProvider<Co
 		for (String name : PerlScalarUtil.BUILT_IN)
 		{
 			resultSet.addElement(LookupElementBuilder
-							.create(name.substring(1))
+							.create(name)
 							.withIcon(PerlIcons.SCALAR_GUTTER_ICON)
 							.withBoldness(true)
 			);
 		}
 		for (String name : PerlArrayUtil.BUILT_IN)
 		{
-			String varName = name.substring(1);
 			resultSet.addElement(LookupElementBuilder
-							.create(name.substring(1))
+							.create(name)
 							.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
 							.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-							.withPresentableText(varName + "[]")
+							.withPresentableText(name + "[]")
 							.withBoldness(true)
 			);
 		}
 		for (String name : PerlHashUtil.BUILT_IN)
 		{
-			String varName = name.substring(1);
 			resultSet.addElement(LookupElementBuilder
-							.create(varName)
+							.create(name)
 							.withIcon(PerlIcons.HASH_GUTTER_ICON)
 							.withBoldness(true)
 							.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-							.withPresentableText(varName + "{}")
+							.withPresentableText(name + "{}")
 			);
 		}
 	}
@@ -85,17 +83,16 @@ public class PerlBuiltInVariableCompletionProvider extends CompletionProvider<Co
 		// built in arrays
 		for (String name : PerlArrayUtil.BUILT_IN)
 		{
-			resultSet.addElement(LookupElementBuilder.create(name.substring(1)).withIcon(PerlIcons.ARRAY_GUTTER_ICON));
+			resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.ARRAY_GUTTER_ICON));
 		}
 		for (String name : PerlHashUtil.BUILT_IN)
 		{
-			String varName = name.substring(1);
 			resultSet.addElement(LookupElementBuilder
-							.create(varName)
+							.create(name)
 							.withIcon(PerlIcons.HASH_GUTTER_ICON)
 							.withBoldness(true)
 							.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-							.withPresentableText(varName + "{}")
+							.withPresentableText(name + "{}")
 			);
 		}
 
@@ -109,7 +106,7 @@ public class PerlBuiltInVariableCompletionProvider extends CompletionProvider<Co
 		for (String name : PerlHashUtil.BUILT_IN)
 		{
 			resultSet.addElement(LookupElementBuilder
-							.create(name.substring(1))
+							.create(name)
 							.withIcon(PerlIcons.HASH_GUTTER_ICON)
 							.withBoldness(true)
 			);
@@ -125,7 +122,7 @@ public class PerlBuiltInVariableCompletionProvider extends CompletionProvider<Co
 		for (String name : PerlGlobUtil.BUILT_IN)
 		{
 			resultSet.addElement(LookupElementBuilder
-							.create(name.substring(1))
+							.create(name)
 							.withIcon(PerlIcons.GLOB_GUTTER_ICON)
 							.withBoldness(true)
 			);

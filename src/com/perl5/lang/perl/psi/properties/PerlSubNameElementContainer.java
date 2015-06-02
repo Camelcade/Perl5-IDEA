@@ -20,8 +20,13 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 
 /**
  * Created by hurricup on 31.05.2015.
+ * Interface for objets, containing SubNameElement
  */
 public interface PerlSubNameElementContainer
 {
+	/**
+	 * Trying to find nested PerlSubName element
+	 * @return psi element or null
+	 */
 	PerlSubNameElement getSubNameElement();
 }

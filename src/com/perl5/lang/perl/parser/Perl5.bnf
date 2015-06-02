@@ -132,9 +132,9 @@ limitations under the License.
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
-    elementTypeFactory("scalar_variable|array_variable|hash_variable|glob_variable")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
-    
-    stubClass("scalar_variable|array_variable|hash_variable")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
+    elementTypeFactory("scalar_variable|array_variable|hash_variable|glob_variable|array_index_variable")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
+    stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
+
     mixin("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
@@ -163,16 +163,6 @@ limitations under the License.
 
     mixin("object_element")="com.perl5.lang.perl.psi.mixins.PerlObjectElementImplMixin"
     implements("object_element")="com.perl5.lang.perl.psi.PerlObject"
-
-//    mixin("variable_name")="com.perl5.lang.perl.psi.impl.PerlVariableNameImplMixin"
-//    implements("variable_name")="com.perl5.lang.perl.psi.PerlNamedElement"
-
-//    mixin("namespace")="com.perl5.lang.perl.psi.impl.PerlNamespaceImplMixin";
-//    implements("namespace")="com.perl5.lang.perl.psi.PerlNamedElement"
-
-//    mixin("user_function")="com.perl5.lang.perl.psi.impl.PerlUserFunctionImplMixin"
-//    implements("user_function")="com.perl5.lang.perl.psi.IPerlUserFunctionMixin"
-
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
@@ -376,7 +366,7 @@ term_expr ::=
     | function_call
     | rightward_call
     | reference_value
-    | array_index
+    | array_index_variable
     | variable
     | namespace_element
 
@@ -657,7 +647,7 @@ string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-array_index ::= PERL_SIGIL_SCALAR_INDEX [scalar_sigils] variable_body
+array_index_variable ::= PERL_SIGIL_SCALAR_INDEX [scalar_sigils] variable_body
 
 scalar_variable ::= PERL_SIGIL_SCALAR [scalar_sigils] variable_body
 

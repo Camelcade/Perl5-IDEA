@@ -80,7 +80,7 @@ public class PerlFunctionReference extends PerlReferencePoly
 		// globs definitions
 		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
 		{
-			result.add(new PsiElementResolveResult(glob.getVariableName()));
+			result.add(new PsiElementResolveResult(glob.getVariableNameElement()));
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);

@@ -37,5 +37,6 @@ public interface PerlStubElementTypes
 	IStubElementType PERL_SCALAR = new PerlScalarStubElementType("$");
 	IStubElementType PERL_HASH = new PerlHashStubElementType("%");
 	IStubElementType PERL_ARRAY = new PerlArrayStubElementType("@");
+	IStubElementType PERL_ARRAY_INDEX = new PerlArrayStubElementType("$#");
 
 }

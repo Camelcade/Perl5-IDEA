@@ -39,6 +39,8 @@ public class PerlElementTypeFactory
 			return PerlStubElementTypes.PERL_SCALAR;
 		else if( name.equals("ARRAY_VARIABLE"))
 			return PerlStubElementTypes.PERL_ARRAY;
+		else if( name.equals("ARRAY_INDEX_VARIABLE"))
+			return PerlStubElementTypes.PERL_ARRAY_INDEX;
 		else if( name.equals("HASH_VARIABLE"))
 			return PerlStubElementTypes.PERL_HASH;
 

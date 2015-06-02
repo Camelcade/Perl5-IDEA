@@ -23,11 +23,13 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
+import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
+ *
  */
 public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PsiPerlGlobVariable
 {
@@ -61,7 +63,7 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 		if( stub != null)
 			return stub.getGlobName();
 
-		return getVariableName().getName();
+		return getVariableNameElement().getName();
 	}
 
 	@Override
@@ -73,8 +75,8 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespaceElement namespace = getNamespaceElement();
-		return namespace != null ? namespace.getName(): null;
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		return namespaceElement != null ? namespaceElement.getName(): null;
 	}
 
 	@Override
@@ -84,8 +86,21 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	}
 
 	@Override
-	public PerlVariableNameElement getVariableName()
+	public PerlVariableNameElement getVariableNameElement()
 	{
 		return findChildByClass(PerlVariableNameElement.class);
+	}
+
+	@Override
+	public boolean isBuiltIn()
+	{
+		if( getNamespaceElement() != null )
+			return false;
+
+		String globName = getGlobName();
+		if( globName == null )
+			return false;
+
+		return PerlGlobUtil.BUILT_IN.contains(globName);
 	}
 }

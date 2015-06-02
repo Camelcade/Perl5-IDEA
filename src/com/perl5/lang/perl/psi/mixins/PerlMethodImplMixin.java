@@ -35,15 +35,15 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespaceElement namespace = getNamespaceElement();
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
 
-		if( namespace != null )
-			return namespace.getName();
+		if( namespaceElement != null )
+			return namespaceElement.getName();
 		else
 		{
-			PsiPerlObjectElement object = getObjectElement();
-			if( object != null )
-				return object.guessNamespace();
+			PsiPerlObjectElement objectElement = getObjectElement();
+			if( objectElement != null )
+				return objectElement.guessNamespace();
 		}
 
 		return null;

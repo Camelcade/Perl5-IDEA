@@ -30,7 +30,7 @@ import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -78,19 +78,19 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespaceElement namespace = getNamespace();
-		return namespace != null ? namespace.getName() : null;
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		return namespaceElement != null ? namespaceElement.getName() : null;
 	}
 
 	@Override
-	public PerlNamespaceElement getNamespace()
+	public PerlNamespaceElement getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 	@Nullable
 	@Override
-	public PerlVariableNameElement getVariableName()
+	public PerlVariableNameElement getVariableNameElement()
 	{
 		return findChildByClass(PerlVariableNameElement.class);
 	}
@@ -99,7 +99,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String guessVariableType()
 	{
-		PerlVariableNameElement variableNameObject = getVariableName();
+		PerlVariableNameElement variableNameObject = getVariableNameElement();
 
 		if (variableNameObject != null)
 		{
@@ -122,10 +122,10 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(decalarationVariableName, PerlVariableDeclaration.class);
 					if (declaration != null)
 					{
-						PerlNamespaceElement declarationNamespace = declaration.getNamespaceElement();
-						if (declarationNamespace != null)
+						PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
+						if (declarationNamespaceElelement != null)
 						{
-							return declarationNamespace.getName();
+							return declarationNamespaceElelement.getName();
 						}
 					}
 				}
@@ -150,9 +150,9 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 				)
 			return PerlVariableType.HASH;
 		else if (
-				variableContainer instanceof PsiPerlArrayArraySlice
+						variableContainer instanceof PsiPerlArrayArraySlice
 						|| variableContainer instanceof PsiPerlScalarArrayElement
-						|| (this instanceof PsiPerlArrayIndex && !gotScalarSigils)
+						|| (this instanceof PsiPerlArrayIndexVariable && !gotScalarSigils)
 						|| (this instanceof PsiPerlArrayVariable && !gotScalarSigils)
 				)
 			return PerlVariableType.ARRAY;
@@ -167,4 +167,25 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 
 	}
 
+	@Override
+	public boolean isBuiltIn()
+	{
+		if (getNamespaceElement() != null)
+			return false;
+
+		if (getVariableNameElement() == null)
+			return false;
+
+		PerlVariableType variableType = getActualType();
+
+		// tood make getter for this
+		String variableName = getVariableNameElement().getName();
+
+		if (variableType == PerlVariableType.SCALAR)
+			return PerlScalarUtil.BUILT_IN.contains(variableName);
+		if (variableType == PerlVariableType.ARRAY)
+			return PerlArrayUtil.BUILT_IN.contains(variableName);
+
+		return variableType == PerlVariableType.HASH && PerlHashUtil.BUILT_IN.contains(variableName);
+	}
 }

@@ -24,5 +24,9 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
  */
 public interface PerlNamespaceElementContainer extends PsiElement
 {
+	/**
+	 * Trying to search for netsted NamespaceElement
+	 * @return psi element or null
+	 */
 	public PerlNamespaceElement getNamespaceElement();
 }

@@ -50,4 +50,5 @@ public class PerlArrayStubElementType extends PerlVariableStubElementType
 	protected StubIndexKey getStubIndexKey()
 	{
 		return PerlVariableStubIndexKeys.KEY_ARRAY;
-	}}
+	}
+}

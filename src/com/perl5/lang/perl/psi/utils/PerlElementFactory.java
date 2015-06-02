@@ -47,7 +47,7 @@ public class PerlElementFactory
 		PerlFileElementImpl file = createFile(project, "$" + name + ";");
 		PsiPerlScalarVariable scalar = PsiTreeUtil.findChildOfType(file, PsiPerlScalarVariable.class);
 		assert scalar != null;
-		return scalar.getVariableName();
+		return scalar.getVariableNameElement();
 	}
 
 	public static PerlHeredocTerminatorElementImpl createHereDocTerminator(Project project, String name)

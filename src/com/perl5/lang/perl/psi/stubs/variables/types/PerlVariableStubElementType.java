@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.stubs.variables.types;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -46,14 +45,17 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 	@Override
 	public PerlVariableStub createStub(@NotNull PerlVariable psi, StubElement parentStub)
 	{
-		assert psi.getVariableName() != null;
-		return new PerlVariableStubImpl(parentStub,getStubElementType(),psi.getPackageName(),psi.getVariableName().getName());
+		assert psi.getVariableNameElement() != null;
+		return new PerlVariableStubImpl(parentStub,getStubElementType(),psi.getPackageName(),psi.getVariableNameElement().getName());
 	}
 
 
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
+		if( node.getElementType() == ARRAY_INDEX_VARIABLE )
+			return false;
+
 		ASTNode parent = node.getTreeParent();
 		if( parent != null )
 		{

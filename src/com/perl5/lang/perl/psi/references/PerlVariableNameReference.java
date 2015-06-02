@@ -35,11 +35,12 @@ import java.util.List;
 
 /**
  * Created by hurricup on 27.05.2015.
+ *
  */
 public class PerlVariableNameReference extends PerlReferencePoly
 {
 
-	private PerlNamespaceElement myNamespace;
+	private PerlNamespaceElement myNamespaceElement;
 	private String myVariableName;
 	private PerlVariableType actualType;
 	private PerlVariable myVariable;
@@ -52,7 +53,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		if( element.getParent() instanceof PerlVariable )
 		{
 			myVariable = (PerlVariable) element.getParent();
-			myNamespace = myVariable.getNamespace();
+			myNamespaceElement = myVariable.getNamespaceElement();
 			actualType = myVariable.getActualType();
 		}
 		else
@@ -101,12 +102,12 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		List<ResolveResult> result = new ArrayList<>();
 		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 
-		if( myNamespace == null )
+		if( myNamespaceElement == null )
 		{
 			// trying to find lexical variable
 			for (PerlVariable variable : variables)
 			{
-				PerlVariableNameElement variableName = variable.getVariableName();
+				PerlVariableNameElement variableName = variable.getVariableNameElement();
 				if (variable instanceof PsiPerlScalarVariable && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
@@ -122,7 +123,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 
 			for( PerlVariable variable: PerlScalarUtil.findGlobalScalarDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
 			{
-				PerlVariableNameElement variableName = variable.getVariableName();
+				PerlVariableNameElement variableName = variable.getVariableNameElement();
 				if( variableName != null && variableName != myElement)
 					result.add(new PsiElementResolveResult(variableName));
 			}
@@ -141,12 +142,12 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 
 
-		if( myNamespace == null )
+		if( myNamespaceElement == null )
 		{
 			// trying to find lexical variable
 			for (PerlVariable variable : variables)
 			{
-				PerlVariableNameElement variableName = variable.getVariableName();
+				PerlVariableNameElement variableName = variable.getVariableNameElement();
 				if (variable instanceof PsiPerlArrayVariable && variableName != null && variableName != myElement&& myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
@@ -162,7 +163,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 
 			for( PerlVariable variable: PerlArrayUtil.findGlobalArrayDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
 			{
-				PerlVariableNameElement variableName = variable.getVariableName();
+				PerlVariableNameElement variableName = variable.getVariableNameElement();
 				if( variableName != null && variableName != myElement)
 					result.add(new PsiElementResolveResult(variableName));
 			}
@@ -180,12 +181,12 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		List<ResolveResult> result = new ArrayList<>();
 		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 
-		if( myNamespace == null )
+		if( myNamespaceElement == null )
 		{
 			// trying to find lexical variable
 			for (PerlVariable variable : variables)
 			{
-				PerlVariableNameElement variableName = variable.getVariableName();
+				PerlVariableNameElement variableName = variable.getVariableNameElement();
 				if (variable instanceof PsiPerlHashVariable && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
 				{
 					result.add(new PsiElementResolveResult(variableName));
@@ -201,7 +202,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 
 			for( PerlVariable variable: PerlHashUtil.findGlobalHashDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
 			{
-				PerlVariableNameElement variableName = variable.getVariableName();
+				PerlVariableNameElement variableName = variable.getVariableNameElement();
 				if( variableName != null && variableName != myElement)
 					result.add(new PsiElementResolveResult(variableName));
 			}

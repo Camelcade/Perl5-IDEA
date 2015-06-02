@@ -78,8 +78,8 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		if (stub != null)
 			return stub.getFunctionName();
 
-		PerlSubNameElement function = getSubNameElement();
-		return function.getName();
+		PerlSubNameElement subNameElement = getSubNameElement();
+		return subNameElement.getName();
 	}
 
 	@Override
@@ -91,8 +91,8 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespaceElement namespace = getNamespaceElement();
-		return namespace != null ? namespace.getName() : null;
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		return namespaceElement != null ? namespaceElement.getName() : null;
 	}
 
 	@Override
@@ -171,10 +171,10 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 						{
 							for (PerlVariable variable : PsiTreeUtil.findChildrenOfType(declaration, PerlVariable.class))
 							{
-								PerlVariableNameElement variableName = variable.getVariableName();
+								PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
-								if (variableName != null)
-									arguments.add(new PerlSubArgument(variable.getActualType(), variableName.getName(), definitionClassName, true));
+								if (variableNameElement != null)
+									arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
 							}
 							break;
 
@@ -184,10 +184,10 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 
 							if (variable != null)
 							{
-								PerlVariableNameElement variableName = variable.getVariableName();
+								PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
-								if (variableName != null)
-									arguments.add(new PerlSubArgument(variable.getActualType(), variableName.getName(), definitionClassName, true));
+								if (variableNameElement != null)
+									arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
 							}
 						}
 					} else

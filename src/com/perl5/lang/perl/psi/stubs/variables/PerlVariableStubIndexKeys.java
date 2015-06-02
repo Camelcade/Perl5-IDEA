@@ -26,6 +26,7 @@ public interface PerlVariableStubIndexKeys
 {
 	public static final StubIndexKey<String,PerlVariable> KEY_SCALAR = StubIndexKey.createIndexKey("perl.global.scalar");
 	public static final StubIndexKey<String,PerlVariable> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
+	public static final StubIndexKey<String,PerlVariable> KEY_ARRAY_INDEX = StubIndexKey.createIndexKey("perl.global.array.index");
 	public static final StubIndexKey<String,PerlVariable> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
 
 }
