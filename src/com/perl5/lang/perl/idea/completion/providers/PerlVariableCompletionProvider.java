@@ -20,6 +20,7 @@ import java.util.Collection;
 
 /**
  * Created by hurricup on 01.06.2015.
+ *
  */
 public class PerlVariableCompletionProvider extends CompletionProvider<CompletionParameters>
 {
@@ -31,13 +32,12 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 		final PsiElement variableNameElement = parameters.getPosition();
 		final PsiElement perlVariable = variableNameElement.getParent();
 
-		if (perlVariable instanceof PsiPerlScalarVariable )
+		if (perlVariable instanceof PsiPerlScalarVariable)
 			ApplicationManager.getApplication().runReadAction(new Runnable()
 			{
 				@Override
 				public void run()
 				{
-					String currentText = variableNameElement.getText();
 
 					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
 
@@ -107,13 +107,12 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 
 				}
 			});
-		else if (perlVariable instanceof PsiPerlArrayVariable )
+		else if (perlVariable instanceof PsiPerlArrayVariable)
 			ApplicationManager.getApplication().runReadAction(new Runnable()
 			{
 				@Override
 				public void run()
 				{
-					String currentText = variableNameElement.getText();
 
 					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
 					boolean useScalars = ((PsiPerlArrayVariable) perlVariable).getScalarSigils() != null;
@@ -171,14 +170,12 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 					}
 				}
 			});
-		else if (perlVariable instanceof PsiPerlArrayIndexVariable )
+		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 			ApplicationManager.getApplication().runReadAction(new Runnable()
 			{
 				@Override
 				public void run()
 				{
-					String currentText = variableNameElement.getText();
-
 					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
 					boolean useScalars = ((PsiPerlArrayIndexVariable) perlVariable).getScalarSigils() != null;
 
@@ -218,7 +215,6 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				@Override
 				public void run()
 				{
-					String currentText = variableNameElement.getText();
 
 					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
 					boolean useScalars = ((PsiPerlHashVariable) perlVariable).getScalarSigils() != null;
