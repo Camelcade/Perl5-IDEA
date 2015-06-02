@@ -74,4 +74,8 @@
         <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
         <context><option name="Perl" value="true"/></context>
     </template>
+    <template name="sql" value="my $sql = &lt;&lt;'SQL';&#10;$END$&#10;SQL&#10;$dbh-&gt;do($sql);" description="sql query and handler call..." toReformat="false" toShortenFQNames="true">
+        <context><option name="Perl" value="true"/></context>
+    </template>
+
 </templateSet>
