@@ -47,6 +47,10 @@ limitations under the License.
     PERL_SIGIL_SCALAR="SIGIL_SCALAR"
     PERL_SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
 
+    ANNOTATION="ANNOTATION"
+    ANNOTATION_RETURNS="ANNOTATION_RETURNS"
+    ANNOTATION_OVERRIDE="ANNOTATION_OVERRIDE"
+
     // these being detected in parser
 //    PERL_SIGIL_GLOB = "SIGIL_GLOB"
 //    PERL_SIGIL_CODE = "SIGIL_CODE"
@@ -678,9 +682,9 @@ private variable_name_element ::= PERL_VARIABLE_NAME
 
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
 method ::=
-    namespace_element '->' (scalar_variable | sub_name_element)
-    | namespace_element sub_name_element         // package::method
-    | object_element '->' sub_name_element       // $object->method actuall it can be not scalar, but scalar expression, but enough for now
+    namespace_element sub_name_element         // package::method
+//    | namespace_element '->' (scalar_variable | sub_name_element)
+//    | object_element '->' sub_name_element       // $object->method actuall it can be not scalar, but scalar expression, but enough for now
     | sub_name_element [namespace_element &PERL_LPAREN]       // method package
     | PERL_FUNCTION_BUILT_IN
     | PERL_KEYWORD

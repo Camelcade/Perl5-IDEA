@@ -156,6 +156,15 @@ public class PerlLexer extends PerlLexerGenerated{
 					}
 					currentPosition++;
 				}
+
+				// catching annotations #@
+				if( tokenStart+1 < bufferEnd && buffer.charAt(tokenStart+1) == '@')
+				{
+
+				}
+
+
+
 				setTokenEnd(currentPosition);
 				return PERL_COMMENT;
 			}
