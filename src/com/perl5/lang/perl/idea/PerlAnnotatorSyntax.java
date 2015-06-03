@@ -22,6 +22,7 @@ package com.perl5.lang.perl.idea;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
@@ -134,9 +135,14 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		{
 			PsiElement parent = element.getParent();
 
+			if( parent instanceof GeneratedParserUtilBase.DummyBlock)
+				return;
+
 			if( !(parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration ))
 			{
 				List<PsiElement> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
+
+
 
 				if( subDefinitions.size() == 0)
 					holder.createWarningAnnotation(element, "Unable to find sub definition");
@@ -148,7 +154,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 
 					if( subDefinition instanceof PerlSubDefinition)
 					{
-						PerlSubAnnotations subAnnotations = ((PerlSubDefinition) subDefinition).getAnnotations();
+						PerlSubAnnotations subAnnotations = ((PerlSubDefinition) subDefinition).getSubAnnotations();
 
 						if (subAnnotations.isDeprecated())
 						{

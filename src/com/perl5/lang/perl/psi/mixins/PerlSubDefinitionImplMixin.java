@@ -18,13 +18,11 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.SmartList;
-import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
@@ -32,6 +30,7 @@ import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,8 +42,6 @@ import java.util.List;
  */
 public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase<PerlSubDefinitionStub> implements PsiPerlSubDefinition
 {
-	private List<PerlSubArgument> myArguments = null;
-
 	public PerlSubDefinitionImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -58,7 +55,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	@Override
 	public String getPackageName()
 	{
-		getArgumentsList();
+		getSubArgumentsList();
 
 		PerlSubDefinitionStub stub = getStub();
 		if (stub != null)
@@ -73,12 +70,40 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		return namespace;
 	}
 
+	@Nullable
 	@Override
-	public String getFunctionName()
+	public PsiElement getNameIdentifier()
+	{
+		return getSubNameElement();
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		PerlSubNameElement subNameElement = getSubNameElement();
+		if( subNameElement != null)
+			subNameElement.setName(name);
+		return this;
+	}
+
+	@Override
+	public String getName()
+	{
+		return getSubName();
+	}
+
+	@Override
+	public String getCanonicalName()
+	{
+		return getPackageName() + "::" + getSubName();
+	}
+
+	@Override
+	public String getSubName()
 	{
 		PerlSubDefinitionStub stub = getStub();
 		if (stub != null)
-			return stub.getFunctionName();
+			return stub.getSubName();
 
 		PerlSubNameElement subNameElement = getSubNameElement();
 		return subNameElement.getName();
@@ -105,6 +130,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		return scope;
 	}
 
+
 	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{
@@ -126,7 +152,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		if( stub != null )
 			return stub.isMethod();
 
-		List<PerlSubArgument> arguments = getArgumentsList();
+		List<PerlSubArgument> arguments = getSubArgumentsList();
 		if (arguments.size() == 0)
 			return false;
 
@@ -136,14 +162,11 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	}
 
 	@Override
-	public List<PerlSubArgument> getArgumentsList()
+	public List<PerlSubArgument> getSubArgumentsList()
 	{
-		if (myArguments != null)
-			return myArguments;
-
 		PerlSubDefinitionStub stub = getStub();
 		if( stub != null )
-			return stub.getArgumentsList();
+			return stub.getSubArgumentsList();
 
 		List<PerlSubArgument> arguments = new ArrayList<>();
 
@@ -204,16 +227,15 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 				break;
 		}
 
-		myArguments = arguments;
-		return myArguments;
+		return arguments;
 	}
 
 	@Override
-	public PerlSubAnnotations getAnnotations()
+	public PerlSubAnnotations getSubAnnotations()
 	{
 		PerlSubDefinitionStub stub = getStub();
 		if( stub != null )
-			return stub.getAnnotations();
+			return stub.getSubAnnotations();
 
 		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
 

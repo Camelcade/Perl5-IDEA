@@ -47,13 +47,13 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         extend(
                 CompletionType.BASIC,
                 FUNCTION_PATTERN.inside(METHOD_PATTERN),
-                new PerlFunctionCompletionProvider()
+                new PerlSubCompletionProvider()
         );
 
         extend(
                 CompletionType.BASIC,
                 FUNCTION_PATTERN.inside(METHOD_PATTERN),
-                new PerlBuiltInFunctionCompletionProvider()
+                new PerlBuiltInSubCompletionProvider()
         );
 
         extend(

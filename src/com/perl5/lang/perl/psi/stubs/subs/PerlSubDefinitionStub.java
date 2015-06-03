@@ -39,13 +39,13 @@ public interface PerlSubDefinitionStub extends StubElement<PsiPerlSubDefinition>
 	 * Returns function name for current function definition
 	 * @return function name or null
 	 */
-	public String getFunctionName();
+	public String getSubName();
 
 	/**
 	 * Returns list of accepted arguments
 	 * @return list of accepted arguments
 	 */
-	public List<PerlSubArgument> getArgumentsList();
+	public List<PerlSubArgument> getSubArgumentsList();
 
 	/**
 	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
@@ -57,5 +57,11 @@ public interface PerlSubDefinitionStub extends StubElement<PsiPerlSubDefinition>
 	 * Checks PSI tree before a sub definition for annotations and builds annotations object
 	 * @return PerlSubAnnotation object
 	 */
-	public PerlSubAnnotations getAnnotations();
+	public PerlSubAnnotations getSubAnnotations();
+
+	/**
+	 * Returns canonical name PackageName::SubName
+	 * @return name
+	 */
+	public String getCanonicalName();
 }

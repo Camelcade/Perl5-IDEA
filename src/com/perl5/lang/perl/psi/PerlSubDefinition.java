@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
-import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
+import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
+import com.perl5.lang.perl.psi.properties.*;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
@@ -28,7 +26,7 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, PerlNamespaceElementContainer, PerlSubNameElementContainer
+public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlNamedElement
 {
 	/**
 	 * Returns package name for current function
@@ -40,13 +38,13 @@ public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, 
 	 * Returns function name for current function definition
 	 * @return function name or null
 	 */
-	public String getFunctionName();
+	public String getSubName();
 
 	/**
 	 * Returns list of accepted arguments
 	 * @return list of accepted arguments
 	 */
-	public List<PerlSubArgument> getArgumentsList();
+	public List<PerlSubArgument> getSubArgumentsList();
 
 	/**
 	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
@@ -58,5 +56,12 @@ public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, 
 	 * Checks PSI tree before a sub definition for annotations and builds annotations object
 	 * @return PerlSubAnnotation object
 	 */
-	public PerlSubAnnotations getAnnotations();
+	public PerlSubAnnotations getSubAnnotations();
+
+	/**
+	 * Returns canonical name PackageName::SubName
+	 * @return name
+	 */
+	public String getCanonicalName();
+
 }

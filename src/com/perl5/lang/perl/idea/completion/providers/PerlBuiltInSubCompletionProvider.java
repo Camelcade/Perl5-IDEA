@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public class PerlBuiltInFunctionCompletionProvider extends CompletionProvider<CompletionParameters>
+public class PerlBuiltInSubCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,

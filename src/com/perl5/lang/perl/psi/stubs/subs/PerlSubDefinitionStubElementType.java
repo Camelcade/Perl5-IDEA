@@ -21,7 +21,6 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +49,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public PerlSubDefinitionStub createStub(@NotNull PsiPerlSubDefinition psi, StubElement parentStub)
 	{
-		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getArgumentsList(), psi.isMethod(), psi.getAnnotations());
+		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getSubArgumentsList(), psi.isMethod(), psi.getSubAnnotations());
 	}
 
 	@NotNull
@@ -63,7 +62,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
 	{
-		String name = stub.getPackageName() + "::" + stub.getFunctionName();
+		String name = stub.getPackageName() + "::" + stub.getSubName();
 		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, name);
 	}
 
@@ -71,14 +70,14 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public void serialize(@NotNull PerlSubDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException
 	{
 		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getFunctionName());
+		dataStream.writeName(stub.getSubName());
 
-		List<PerlSubArgument> arguments = stub.getArgumentsList();
+		List<PerlSubArgument> arguments = stub.getSubArgumentsList();
 		dataStream.writeInt(arguments.size());
 		for( PerlSubArgument argument: arguments )
 			argument.serialize(dataStream);
 
-		stub.getAnnotations().serialize(dataStream);
+		stub.getSubAnnotations().serialize(dataStream);
 
 		dataStream.writeBoolean(stub.isMethod());
 	}

@@ -73,19 +73,12 @@ public class PerlFunctionDefinitionReference extends PerlReferencePoly
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
 		// subs definitions todo fix to work with stubs
-		for( PsiPerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, myCanonicalName))
-		{
-			PerlSubNameElement perlSubNameElement = sub.getSubNameElement();
-
-			if( perlSubNameElement != null && perlSubNameElement != myElement)
-				result.add(new PsiElementResolveResult(perlSubNameElement));
-		}
+		for( PsiPerlSubDefinition subDefinition : PerlFunctionUtil.findSubDefinitions(project, myCanonicalName))
+			result.add(new PsiElementResolveResult(subDefinition));
 
 		// globs definitions
 		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, myCanonicalName))
-		{
-			result.add(new PsiElementResolveResult(glob.getVariableNameElement()));
-		}
+			result.add(new PsiElementResolveResult(glob));
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}

@@ -54,13 +54,13 @@ public class PerlSubDefinitionStubImpl extends StubBase<PsiPerlSubDefinition> im
 	}
 
 	@Override
-	public String getFunctionName()
+	public String getSubName()
 	{
 		return functionName;
 	}
 
 	@Override
-	public List<PerlSubArgument> getArgumentsList()
+	public List<PerlSubArgument> getSubArgumentsList()
 	{
 		return myArguments;
 	}
@@ -72,8 +72,14 @@ public class PerlSubDefinitionStubImpl extends StubBase<PsiPerlSubDefinition> im
 	}
 
 	@Override
-	public PerlSubAnnotations getAnnotations()
+	public PerlSubAnnotations getSubAnnotations()
 	{
 		return myAnnotations;
+	}
+
+	@Override
+	public String getCanonicalName()
+	{
+		return getPackageName() + "::" + getSubName();
 	}
 }
