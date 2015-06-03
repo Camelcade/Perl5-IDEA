@@ -25,6 +25,7 @@ import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -56,7 +57,8 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
-		return new PodHighlightingLexer();
+		return new PodLexerAdapter();
+//		return new PodHighlightingLexer();
 	}
 
 	@NotNull

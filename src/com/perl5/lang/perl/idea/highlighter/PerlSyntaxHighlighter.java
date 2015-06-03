@@ -30,6 +30,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
@@ -151,6 +152,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 	@Override
 	public Lexer getHighlightingLexer() {
 		return new PerlHighlightningLexer();
+
 	}
 
 	@NotNull
