@@ -74,14 +74,22 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					((PerlVariableNameElementContainer)element).isBuiltIn(),
                     false);
         }
-        else if( element instanceof PsiPerlGlobVariable)
-        {
-            colorize(
-                    holder.createInfoAnnotation(element, null),
-                    PerlSyntaxHighlighter.PERL_GLOB,
+		else if( element instanceof PsiPerlGlobVariable)
+		{
+			colorize(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_GLOB,
 					((PerlVariableNameElementContainer)element).isBuiltIn(),
-                    false);
-        }
+					false);
+		}
+		else if( element instanceof PsiPerlAnnotation)
+		{
+			colorize(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_ANNOTATION,
+					false,
+					false);
+		}
 //		if( elementType == PERL_PACKAGE )
 //		{
 //			String packageName = element.getText();

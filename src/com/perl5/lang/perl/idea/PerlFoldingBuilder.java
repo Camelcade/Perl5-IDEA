@@ -262,7 +262,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return true;
 		else if ( elementType == PerlElementTypes.PERL_COMMENT)
 			return true;
-		else if ( elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_TERM)
+		else if ( elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_EXPR)
 			return true;
 		else
 			return false;

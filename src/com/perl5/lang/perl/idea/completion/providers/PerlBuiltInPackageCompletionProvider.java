@@ -22,11 +22,13 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
+import com.perl5.lang.perl.idea.completion.inserthandlers.PackageInsertHandler;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
@@ -39,8 +41,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<CompletionParameters>
 {
-	public static final InsertHandler<LookupElement> PARENT_PRAGMA_INSERT_HANDLER = new ParentPragmaInsertHandler();
-
 	@Override
 	protected void addCompletions(@NotNull final CompletionParameters parameters, final ProcessingContext context, @NotNull final CompletionResultSet resultSet)
 	{
@@ -50,59 +50,25 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 			public void run()
 			{
 				// built in packages
-				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(parameters.getOriginalPosition(), PsiPerlUseStatement.class, true, PsiPerlStatement.class);
+				PsiElement element = parameters.getPosition();
+				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(element, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
 				for (String packageName : PerlPackageUtil.BUILT_IN_MAP.keySet())
 				{
 					IElementType packageType = PerlPackageUtil.BUILT_IN_MAP.get(packageName);
-					InsertHandler<LookupElement> insertHandler = null;
 
-					LookupElementBuilder newElement = LookupElementBuilder.create(packageName)
+					LookupElementBuilder newElement = LookupElementBuilder
+							.create(element, packageName)
 							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-							.withBoldness(true);
+							.withBoldness(true)
+							.withInsertHandler(PackageInsertHandler.INSTANCE);
 
 					if (packageType == PerlElementTypes.PERL_PACKAGE_DEPRECATED)
 						newElement = newElement.withStrikeoutness(true);
-					else if (packageType == PerlElementTypes.PERL_PACKAGE_PRAGMA)
-					{
-						if ( useStatement != null )
-						{
-							// additional arguments
-							if( packageName.equals("parent") || packageName.equals("base"))
-								insertHandler = PARENT_PRAGMA_INSERT_HANDLER;
-						}
-					}
 
-					if (insertHandler == null)
-						insertHandler = PerlInsertHandlers.SEMI_NEWLINE_INSERT_HANDLER;
-
-					resultSet.addElement(newElement.withInsertHandler(insertHandler));
+					resultSet.addElement(newElement);
 				}
 			}
 		});
 	}
-
-	/**
-	 * Parent pragma additional insert
-	 */
-	static class ParentPragmaInsertHandler implements InsertHandler<LookupElement>
-	{
-		@Override
-		public void handleInsert(final InsertionContext context, LookupElement item)
-		{
-			final Editor editor = context.getEditor();
-			EditorModificationUtil.insertStringAtCaret(editor, " qw//;");
-			editor.getCaretModel().moveCaretRelatively(-2, 0, false, false, true);
-
-			context.setLaterRunnable(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor);
-				}
-			});
-		}
-	}
-
 }

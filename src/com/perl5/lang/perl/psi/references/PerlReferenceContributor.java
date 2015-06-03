@@ -101,7 +101,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 
 						// fixme this should be done using patterns
 						if( nameSpaceContainer instanceof PsiPerlUseStatement
-								|| nameSpaceContainer instanceof PsiPerlRequireTerm
+								|| nameSpaceContainer instanceof PsiPerlRequireExpr
 								)
 							result.add(new PerlNamespaceFileReference(element, new TextRange(0, element.getTextLength())));
 						else

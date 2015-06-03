@@ -16,17 +16,14 @@
 
 package com.perl5.lang.perl.idea.completion.providers;
 
-import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
-import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
-import com.perl5.lang.perl.psi.PerlVariableDeclaration;
+import com.perl5.lang.perl.idea.completion.inserthandlers.PackageInsertHandler;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,18 +51,13 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 				// fixme actually, we should fill files here, not packages, or make a diff provider
 				for (String packageName : PerlPackageUtil.listDefinedPackageNames(file.getProject()))
 				{
-					LookupElementBuilder newElement = LookupElementBuilder.create(packageName).withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
-
-					if( !(parent instanceof PerlVariableDeclaration))
-						newElement = newElement.withInsertHandler(PerlInsertHandlers.SEMI_NEWLINE_INSERT_HANDLER);
-					else
-						newElement = newElement.withInsertHandler(PerlInsertHandlers.SPACE_INSERT_HANDLER);
-
-					resultSet.addElement(newElement);
-
+					resultSet.addElement(LookupElementBuilder
+							.create(element, packageName)
+							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
+							.withInsertHandler(PackageInsertHandler.INSTANCE)
+					);
 				}
 			}
 		});
 	}
-
 }

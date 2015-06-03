@@ -73,6 +73,11 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN),
                 new PerlUseParametersCompletionProvider()
         );
+        extend(
+                CompletionType.BASIC,
+                UNKNOWN_ANNOTATION_PATTERN,
+                new PerlAnnotationCompletionProvider()
+        );
     }
 
 	@Override

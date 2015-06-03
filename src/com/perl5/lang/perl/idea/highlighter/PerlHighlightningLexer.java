@@ -25,6 +25,7 @@ import com.perl5.lang.pod.idea.highlighter.PodHighlightingLexer;
 
 /**
  * Created by hurricup on 24.04.2015.
+ *
  */
 public class PerlHighlightningLexer extends LayeredLexerAdaptive implements PerlElementTypes
 {

@@ -147,23 +147,17 @@ public class PerlLexer extends PerlLexerGenerated{
 				int currentPosition = tokenStart;
 				setTokenStart(tokenStart);
 
-				while( currentPosition < bufferEnd )
-				{
-					if( isCommentEnd(currentPosition))
-					{
-						currentPosition++;
-						break;
-					}
-					currentPosition++;
-				}
+				while( currentPosition < bufferEnd && !isCommentEnd(currentPosition) ){currentPosition++;}
 
 				// catching annotations #@
 				if( tokenStart+1 < bufferEnd && buffer.charAt(tokenStart+1) == '@')
 				{
+					if( currentPosition > tokenStart + 2)
+						parseAnnotation(buffer.subSequence(tokenStart + 2, currentPosition), tokenStart+2);
 
+					setTokenEnd(tokenStart+2);
+					return ANNOTATION_PREFIX;
 				}
-
-
 
 				setTokenEnd(currentPosition);
 				return PERL_COMMENT;
@@ -189,6 +183,74 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		return tokenType;
 	}
+
+
+	public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
+
+	public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
+
+	/**
+	 * Parses annotation line and puts result into the pre-parsed buffer
+	 * @param annotationLine - string with annotation after marker
+	 */
+	void parseAnnotation(CharSequence annotationLine, int baseOffset)
+	{
+		Matcher m = annotationPattern.matcher(annotationLine);
+		tokensList.clear();
+		CharSequence tailComment = null;
+
+		if( m.matches())
+		{
+			String annotationKey = m.group(1);
+			IElementType tokenType = PerlAnnotations.TOKEN_TYPES.get(m.group(1));
+
+			if( tokenType == null )
+				tokenType = ANNOTATION_UNKNOWN_KEY;
+
+			tokensList.add(new CustomToken(baseOffset, baseOffset +m.group(1).length(), tokenType));
+			baseOffset += m.group(1).length();
+
+			if( m.group(2) != null)
+			{
+				tokensList.add(new CustomToken(baseOffset, baseOffset +m.group(2).length(), TokenType.WHITE_SPACE));
+				baseOffset += m.group(2).length();
+			}
+
+			if( tokenType == ANNOTATION_RETURNS_KEY && m.group(3) != null)
+			{
+				// additional parsing
+				String annotationRest = m.group(3);
+				Matcher pm = annotationPatternPackage.matcher(annotationRest);
+
+				if( pm.matches())
+				{
+					if( pm.group(1) != null && pm.group(1).length() > 0)
+					{
+						tokensList.add(new CustomToken(baseOffset, baseOffset + pm.group(1).length(), PERL_PACKAGE));
+						baseOffset += pm.group(1).length();
+					}
+
+					tailComment = pm.group(2);
+				}
+				else
+					tailComment = m.group(3);
+			}
+			else
+				tailComment = m.group(3);
+		}
+		else
+			tailComment = annotationLine;
+
+		if( tailComment != null && tailComment.length() > 0 )
+			tokensList.add(new CustomToken(baseOffset, baseOffset+tailComment.length(), PERL_COMMENT));
+
+		if( tokensList.size() > 0 )
+		{
+			pushState();
+			yybegin(LEX_PREPARSED_ITEMS);
+		}
+	}
+
 
 	/**
 	 * Processes quote closer token

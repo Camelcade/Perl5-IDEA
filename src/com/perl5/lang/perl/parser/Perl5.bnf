@@ -47,9 +47,14 @@ limitations under the License.
     PERL_SIGIL_SCALAR="SIGIL_SCALAR"
     PERL_SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
 
-    ANNOTATION="ANNOTATION"
-    ANNOTATION_RETURNS="ANNOTATION_RETURNS"
-    ANNOTATION_OVERRIDE="ANNOTATION_OVERRIDE"
+    ANNOTATION_PREFIX="ANNOTATION_PREFIX"
+
+    ANNOTATION_UNKNOWN_KEY="ANNOTATION_UNKNOWN"
+    ANNOTATION_DEPRECATED_KEY="ANNOTATION_DEPRECATED"
+    ANNOTATION_RETURNS_KEY="ANNOTATION_RETURNS"
+    ANNOTATION_OVERRIDE_KEY="ANNOTATION_OVERRIDE"
+    ANNOTATION_METHOD_KEY="ANNOTATION_METHOD"
+    ANNOTATION_ABSTRACT_KEY="ANNOTATION_ABSTRACT"
 
     // these being detected in parser
 //    PERL_SIGIL_GLOB = "SIGIL_GLOB"
@@ -126,6 +131,8 @@ limitations under the License.
   ]
 
     extends(".*expr")=expr
+    extends("annotation_.*")=annotation
+
 
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
@@ -159,8 +166,8 @@ limitations under the License.
     mixin("glob_variable")="com.perl5.lang.perl.psi.mixins.PerlGlobVariableImplMixin"
     implements("glob_variable")="com.perl5.lang.perl.psi.PerlGlobVariable"
 
-    mixin("require_term")="com.perl5.lang.perl.psi.mixins.PerlRequireTermImplMixin"
-    implements("require_term")="com.perl5.lang.perl.psi.PerlRequireTerm"
+    mixin("require_expr")="com.perl5.lang.perl.psi.mixins.PerlRequireExprImplMixin"
+    implements("require_expr")="com.perl5.lang.perl.psi.PerlRequireExpr"
 
     mixin("method")="com.perl5.lang.perl.psi.mixins.PerlMethodImplMixin";
     implements("method")="com.perl5.lang.perl.psi.PerlMethod";
@@ -177,7 +184,7 @@ private file_item ::= namespace_block | namespace_item
 
 block ::= "{" file_items "}" //{pin=1}  //fixme we shoud be able to distinct from anon hash
 
-private namespace_item ::= (sub_definition | named_block | compound_statement | statement | PERL_SEMI ) {recoverWhile=recover_statement}
+private namespace_item ::= (sub_definition | named_block | compound_statement | statement | annotation | PERL_SEMI ) {recoverWhile=recover_statement}
 
 // package keyword
 namespace_block ::= "package"  namespace_definition (block | PERL_SEMI namespace_content) {pin=1}
@@ -241,7 +248,7 @@ private statement_variation ::=
     | sub_declaration
     | expr
 
-require_statement ::= require_term &(PERL_RESERVED | ';' | '}')
+require_statement ::= require_expr &(PERL_RESERVED | ';' | '}')
 
 sub_definition ::= "sub" canonical_sub_name [sub_definition_parameters] block
 
@@ -261,9 +268,9 @@ private sub_signature ::= PERL_LPAREN [<<parseSubSignature>>] PERL_RPAREN
 private sub_attributes ::= ":" <<parseSubAttributes>>
 
 
-last_term ::= 'last' [lnr_param]
-next_term ::= 'next' [lnr_param]
-redo_term ::= 'redo' [lnr_param]
+last_expr ::= 'last' [lnr_param]
+next_expr ::= 'next' [lnr_param]
+redo_expr ::= 'redo' [lnr_param]
 private lnr_param ::= PERL_LABEL | expr
 
 
@@ -291,9 +298,9 @@ private use_module_parameters ::= namespace_element [perl_version] [expr];
 private use_version_parameters ::= perl_version;
 
 
-undef_term ::= "undef" (variable | PERL_LPAREN variable PERL_RPAREN) ?
+undef_expr ::= "undef" (variable | PERL_LPAREN variable PERL_RPAREN) ?
 
-require_term ::= 'require' (namespace_element | perl_version | unary_expr)  // multiline string is possible too
+require_expr ::= 'require' (namespace_element | perl_version | unary_expr)  // multiline string is possible too
 
 // it looks meaningless now, eats nothing
 private recover_statement ::= !(
@@ -309,6 +316,7 @@ private recover_statement ::= !(
     | PERL_NUMBER | PERL_OPERATOR| PERL_OPERATOR_FILETEST
     | PERL_LABEL
     | PERL_BLOCK_NAME
+    | ANNOTATION_PREFIX
     )
 private stop_on_var ::=
     (PERL_SIGIL_SCALAR_INDEX | PERL_SIGIL_SCALAR | PERL_SIGIL_ARRAY | PERL_SIGIL_HASH)
@@ -349,27 +357,27 @@ term_expr ::=
     | parenthesised_expr ["[" expr "]"]
 //    | parenthesised_expr  // this causes unknown errors in parenthesised grep
     | scalar_constant
-    | do_term
-    | sub_term
-    | eval_term
+    | do_expr
+    | sub_expr
+    | eval_expr
     | regex_term
-    | file_read_term
-    | print_term
-    | open_term
-    | close_term
-    | grep_term
-    | sort_term
-    | map_term
-    | require_term
-    | undef_term
-    | last_term
-    | next_term
-    | return_term
-    | redo_term
+    | file_read_expr
+    | print_expr
+    | open_expr
+    | close_expr
+    | grep_expr
+    | sort_expr
+    | map_expr
+    | require_expr
+    | undef_expr
+    | last_expr
+    | next_expr
+    | return_expr
+    | redo_expr
     | PERL_OPERATOR_UNARY parenthesised_expr !"["   // named operators as functions
-    | function_call
-    | rightward_call
-    | reference_value
+    | function_call_expr
+    | rightward_call_expr
+    | reference_value_expr
     | array_index_variable
     | variable
     | namespace_element
@@ -377,7 +385,7 @@ term_expr ::=
 
 parenthesised_expr ::= PERL_LPAREN [expr] PERL_RPAREN {pin=1}
 
-return_term ::= "return" [list_expr]
+return_expr ::= "return" [list_expr]
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
 private immutable_expression ::= <<parseExpressionLevel 20>>
@@ -429,10 +437,10 @@ lp_or_xor_expr ::= expr ('or'|'xor') expr
 private scalar_expr ::= <<parseExpressionLevel 3>>
 private list_expr ::= <<parseExpressionLevel 2>>
 
-print_term ::= ("print"|"printf"|"say") ( PERL_LPAREN [print_arguments] PERL_RPAREN | [print_arguments] ) // {pin=1}
+print_expr ::= ("print"|"printf"|"say") ( PERL_LPAREN [print_arguments] PERL_RPAREN | [print_arguments] ) // {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-open_term ::= "open" ( PERL_LPAREN open_arguments PERL_RPAREN | open_arguments )
+open_expr ::= "open" ( PERL_LPAREN open_arguments PERL_RPAREN | open_arguments )
 private open_arguments ::=
     open_handle comma open_mode comma open_ref  // open FILEHANDLE,MODE,REFERENCE
     | open_handle comma open_mode comma expr    // open FILEHANDLE,MODE,EXPR,LIST ?
@@ -442,20 +450,20 @@ open_handle ::= variable_declaration | perl_handle
 open_mode ::= scalar_expr
 open_ref ::= ref_expr
 
-close_term ::= "close" ( PERL_LPAREN close_arguments PERL_RPAREN | close_arguments )
+close_expr ::= "close" ( PERL_LPAREN close_arguments PERL_RPAREN | close_arguments )
 private close_arguments ::= perl_handle
 
-sort_term ::= 'sort' ( PERL_LPAREN sort_op_arguments PERL_RPAREN| sort_op_arguments )
+sort_expr ::= 'sort' ( PERL_LPAREN sort_op_arguments PERL_RPAREN| sort_op_arguments )
 private sort_op_arguments ::=
     PERL_FUNCTION expr
     | block expr
     | scalar_expr expr
     | expr
 
-sub_term ::= 'sub' sub_definition_parameters block
+sub_expr ::= 'sub' sub_definition_parameters block
 
-grep_term ::= 'grep' grep_map_arguments {pin=1}
-map_term ::= 'map' grep_map_arguments {pin=1}
+grep_expr ::= 'grep' grep_map_arguments {pin=1}
+map_expr ::= 'map' grep_map_arguments {pin=1}
 private grep_map_arguments ::=
     PERL_LPAREN grep_map_arguments_variations PERL_RPAREN
     | grep_map_arguments_variations
@@ -464,15 +472,15 @@ private grep_map_arguments_variations ::=
     block expr
     | scalar_expr comma expr
 
-function_call ::= callable PERL_LPAREN [call_arguments] PERL_RPAREN !"["  // avoiding ()[]
-rightward_call ::= callable [call_arguments]
+function_call_expr ::= callable PERL_LPAREN [call_arguments] PERL_RPAREN !"["  // avoiding ()[]
+rightward_call_expr ::= callable [call_arguments]
 
 call_arguments ::=
     anon_hash comma list_expr
     | block [[comma] list_expr]
     | list_expr
 
-file_read_term ::= '<' [perl_handle] '>'
+file_read_expr ::= '<' [perl_handle] '>'
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -498,8 +506,8 @@ tr_replacementlist ::= PERL_STRING_CONTENT
 tr_modifiers ::= PERL_REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
-do_term ::= "do" eval_argument {pin=1}
-eval_term ::= "eval" eval_argument {pin=1}
+do_expr ::= "do" eval_argument {pin=1}
+eval_expr ::= "eval" eval_argument {pin=1}
 private eval_argument ::= parenthesised_expr | block | expr
 
 private variable_declaration ::=
@@ -526,7 +534,7 @@ private lexical_variable_definition_argument ::= lexical_variable | "undef"
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 // most of the references created by \ operator, but some - don't
-private reference_value ::=
+private reference_value_expr ::=
     anon_array
     | anon_hash
     | code_ref
@@ -562,7 +570,7 @@ private scalar ::=
     | scalar_array_index
     | scalar_constant
     | scalar_anon_array_element
-    | undef_term
+    | undef_expr
     | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
     | perl_handle_basic
 
@@ -585,8 +593,8 @@ private nested_element_expr ::=
     nested_element
     | parenthesised_expr    // function call like $var->()
     | scalar_call
-    | function_call
-    | rightward_call
+    | function_call_expr
+    | rightward_call_expr
     | scalar
 
 scalar_call ::= scalar_variable [parenthesised_expr]
@@ -691,5 +699,34 @@ method ::=
 
 object_element ::= scalar_variable
 
-private namespace_element ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
 private sub_name_element ::= PERL_FUNCTION
+
+/************************ PERL SUBS ANNOTATIONS ************************/
+annotation ::=
+    annotation_unknown
+    | annotation_abstract
+    | annotation_deprectaed
+    | annotation_method
+    | annotation_returns
+    | annotation_override
+    | annotation_incomplete
+
+annotation_unknown ::= ANNOTATION_PREFIX ANNOTATION_UNKNOWN_KEY
+annotation_abstract ::= ANNOTATION_PREFIX ANNOTATION_ABSTRACT_KEY
+annotation_deprectaed ::= ANNOTATION_PREFIX ANNOTATION_DEPRECATED_KEY
+annotation_method ::= ANNOTATION_PREFIX ANNOTATION_METHOD_KEY
+annotation_override ::= ANNOTATION_PREFIX ANNOTATION_OVERRIDE_KEY
+annotation_returns ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY annotation_returns_argument
+annotation_incomplete ::= ANNOTATION_PREFIX
+
+private annotation_returns_argument ::=
+    namespace_element
+    | namespace_element_bracketed
+    | namespace_element_braced
+
+/** basics **/
+private namespace_element_bracketed ::= PERL_LBRACK namespace_element PERL_RBRACK {name="[Package::Name]"}
+private namespace_element_braced ::= PERL_LBRACE namespace_element PERL_RBRACE {name="{Package::Name}"}
+
+// todo all packages should be lexed the same
+private namespace_element ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA {name="Package::Name"}

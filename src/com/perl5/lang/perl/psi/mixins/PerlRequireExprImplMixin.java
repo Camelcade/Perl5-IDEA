@@ -19,14 +19,14 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PsiPerlRequireTerm;
+import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlRequireTermImplMixin extends ASTWrapperPsiElement implements PsiPerlRequireTerm
+public abstract class PerlRequireExprImplMixin extends ASTWrapperPsiElement implements PsiPerlRequireExpr
 {
-	public PerlRequireTermImplMixin(ASTNode node)
+	public PerlRequireExprImplMixin(ASTNode node)
 	{
 		super(node);
 	}
