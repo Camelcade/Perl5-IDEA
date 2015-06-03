@@ -2,47 +2,47 @@
 <templateSet group="Perl5">
 
     <!-- loops -->
-    <template name="foreach" value="foreach $i ( $LIST$ ){&#10;$END$&#10;}" description="for each loop..." toReformat="false" toShortenFQNames="true">
-        <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true" />
+    <template name="foreach" value="foreach $i ( $LIST$ ){&#10;   $END$&#10;}" description="for each loop..." toReformat="false" toShortenFQNames="true">
+        <variable name="LIST" expression="closestVariable()" defaultValue="&quot;@list&quot;" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
-    <template name="for" value="for ( $INIT$;$CONDITION$;$INCREMENT$ ){&#10;$END$&#10;}" description="for loop..." toReformat="false" toShortenFQNames="true">
+    <template name="for" value="for ( $INIT$;$CONDITION$;$INCREMENT$ ){&#10;   $END$&#10;}" description="for loop..." toReformat="false" toShortenFQNames="true">
         <variable name="INIT" expression="" defaultValue="" alwaysStopAt="true" />
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <variable name="INCREMENT" expression="" defaultValue="" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
-    <template name="while" value="while ( $CONDITION$ ){&#10;$END$&#10;}" description="while loop..." toReformat="false" toShortenFQNames="true">
-        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <template name="while" value="while ( $CONDITION$ ){&#10;   $END$&#10;}" description="while loop..." toReformat="false" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="&quot;@list&quot;" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
-    <template name="until" value="until ( $CONDITION$ ){&#10;$END$&#10;}" description="until loop..." toReformat="false" toShortenFQNames="true">
-        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <template name="until" value="until ( $CONDITION$ ){&#10;   $END$&#10;}" description="until loop..." toReformat="false" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="&quot;@list&quot;" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
-    <template name="do" value="do{&#10;$END$&#10;}( $CONDITION$ )" description="do while loop..." toReformat="false" toShortenFQNames="true">
-        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <template name="do" value="do{&#10;   $END$&#10;}while( $CONDITION$ )" description="do while loop..." toReformat="false" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="&quot;@list&quot;" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
     <template name="map" value="map {$END$} $LIST$" description="map loop..." toReformat="false" toShortenFQNames="true">
-        <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="LIST" expression="closestVariable()" defaultValue="&quot;@list&quot;" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
 
     <!-- conditionals statements -->
-    <template name="if" value="if ( $CONDITION$ ){&#10;$END$&#10;}" description="if statement..." toReformat="false" toShortenFQNames="true">
+    <template name="if" value="if ( $CONDITION$ ){&#10;   $END$&#10;}" description="if statement..." toReformat="false" toShortenFQNames="true">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
-    <template name="ifelse" value="if ( $CONDITION$ ){&#10;$END$&#10;}else{&#10;}" description="if else statement..." toReformat="false" toShortenFQNames="true">
+    <template name="ifelse" value="if ( $CONDITION$ ){&#10;   $END$&#10;}else{&#10;}" description="if else statement..." toReformat="false" toShortenFQNames="true">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
-    <template name="unless" value="unless ( $CONDITION$ ){&#10;$END$&#10;}" description="unless statement..." toReformat="false" toShortenFQNames="true">
+    <template name="unless" value="unless ( $CONDITION$ ){&#10;   $END$&#10;}" description="unless statement..." toReformat="false" toShortenFQNames="true">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
-    <template name="unlesselse" value="unless ( $CONDITION$ ){&#10;$END$&#10;}else{&#10;}" description="unless else statement..." toReformat="false" toShortenFQNames="true">
+    <template name="unlesselse" value="unless ( $CONDITION$ ){&#10;   $END$&#10;}else{&#10;}" description="unless else statement..." toReformat="false" toShortenFQNames="true">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
@@ -58,7 +58,7 @@
     </template>
 
     <!-- general templates -->
-    <template name="sub" value="sub $NAME$ {&#10;$END$&#10;}" description="sub block..." toReformat="false" toShortenFQNames="true">
+    <template name="sub" value="sub $NAME$ {&#10;   $END$&#10;}" description="sub block..." toReformat="false" toShortenFQNames="true">
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
@@ -74,7 +74,7 @@
         <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
         <context><option name="Perl5" value="true"/></context>
     </template>
-    <template name="sql" value="my $sql = &lt;&lt;'SQL';&#10;$END$&#10;SQL&#10;$dbh-&gt;do($sql);" description="sql query and handler call..." toReformat="false" toShortenFQNames="true">
+    <template name="sql" value="my $sql = &lt;&lt;'SQL';&#10;   $END$&#10;SQL&#10;$dbh-&gt;do($sql);" description="sql query and handler call..." toReformat="false" toShortenFQNames="true">
         <context><option name="Perl5" value="true"/></context>
     </template>
 
