@@ -10,7 +10,7 @@ import com.perl5.lang.perl.PerlFileType;
 public class PerlTemplateContext extends TemplateContextType {
 
     protected PerlTemplateContext() {
-        super("Perl", "Perl");
+        super("Perl5", "Perl 5");
     }
 
     @Override
