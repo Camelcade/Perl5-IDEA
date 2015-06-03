@@ -17,18 +17,14 @@
 package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.*;
-import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
-import com.perl5.lang.perl.idea.completion.inserthandlers.PackageInsertHandler;
+import com.perl5.lang.perl.idea.completion.inserthandlers.PerlPackageInsertHandler;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
@@ -61,7 +57,7 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 							.create(element, packageName)
 							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
 							.withBoldness(true)
-							.withInsertHandler(PackageInsertHandler.INSTANCE);
+							.withInsertHandler(PerlPackageInsertHandler.INSTANCE);
 
 					if (packageType == PerlElementTypes.PERL_PACKAGE_DEPRECATED)
 						newElement = newElement.withStrikeoutness(true);

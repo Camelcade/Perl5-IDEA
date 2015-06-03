@@ -15,9 +15,9 @@ import com.perl5.lang.perl.psi.PsiPerlAnnotation;
  * Created by hurricup on 03.06.2015.
  * Handles afterwork for packages autocompletion
  */
-public class PackageInsertHandler implements InsertHandler<LookupElement>
+public class PerlPackageInsertHandler implements InsertHandler<LookupElement>
 {
-	public static final InsertHandler<LookupElement> INSTANCE = new PackageInsertHandler();
+	public static final InsertHandler<LookupElement> INSTANCE = new PerlPackageInsertHandler();
 
 	@Override
 	public void handleInsert(final InsertionContext context, LookupElement item)

@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.inserthandlers.PackageInsertHandler;
+import com.perl5.lang.perl.idea.completion.inserthandlers.PerlPackageInsertHandler;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,7 +54,7 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 					resultSet.addElement(LookupElementBuilder
 							.create(element, packageName)
 							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-							.withInsertHandler(PackageInsertHandler.INSTANCE)
+							.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
 					);
 				}
 			}
