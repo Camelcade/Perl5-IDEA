@@ -75,12 +75,8 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		List<PerlSubArgument> arguments = stub.getArgumentsList();
 		dataStream.writeInt(arguments.size());
 		for( PerlSubArgument argument: arguments )
-		{
-			dataStream.writeName(argument.getArgumentType().toString());
-			dataStream.writeName(argument.getArgumentName());
-			dataStream.writeName(argument.getVariableClass());
-			dataStream.writeBoolean(argument.isOptional());
-		}
+			argument.serialize(dataStream);
+
 		dataStream.writeBoolean(stub.isMethod());
 	}
 
@@ -95,13 +91,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		List<PerlSubArgument> arguments = new ArrayList<>(argumentsNumber);
 
 		for( int i = 0; i < argumentsNumber; i++ )
-		{
-			PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
-			String argumentName = dataStream.readName().toString();
-			String variableClass = dataStream.readName().toString();
-			boolean isOptional = dataStream.readBoolean();
-			arguments.add(new PerlSubArgument(argumentType,argumentName,variableClass,isOptional));
-		}
+			arguments.add(PerlSubArgument.deserialize(dataStream));
 
 		boolean isMethod = dataStream.readBoolean();
 
