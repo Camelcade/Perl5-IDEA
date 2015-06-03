@@ -131,8 +131,10 @@ limitations under the License.
   ]
 
     extends(".*expr")=expr
-    extends("annotation_.*")=annotation
 
+    extends("annotation_.*")=annotation
+    implements("annotation_returns.*")="com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer"
+    methods("annotation_returns.*")=[getNamespaceElement]
 
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
@@ -250,14 +252,14 @@ private statement_variation ::=
 
 require_statement ::= require_expr &(PERL_RESERVED | ';' | '}')
 
-sub_definition ::= "sub" canonical_sub_name [sub_definition_parameters] block
+sub_definition ::= [annotations] "sub" canonical_sub_name [sub_definition_parameters] block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= "sub" canonical_sub_name sub_declaration_parameters
+sub_declaration ::= [annotations] "sub" canonical_sub_name sub_declaration_parameters
 
 private canonical_sub_name ::= [namespace_element] sub_name_element
 
@@ -701,13 +703,16 @@ object_element ::= scalar_variable
 
 private sub_name_element ::= PERL_FUNCTION
 
-/************************ PERL SUBS ANNOTATIONS ************************/
+/******************************************** PERL SUBS ANNOTATIONS ***************************************************/
+private annotations ::= annotation+
 annotation ::=
     annotation_unknown
     | annotation_abstract
     | annotation_deprectaed
     | annotation_method
-    | annotation_returns
+    | annotation_returns_ref
+    | annotation_returns_arrayref
+    | annotation_returns_hashref
     | annotation_override
     | annotation_incomplete
 
@@ -716,17 +721,14 @@ annotation_abstract ::= ANNOTATION_PREFIX ANNOTATION_ABSTRACT_KEY
 annotation_deprectaed ::= ANNOTATION_PREFIX ANNOTATION_DEPRECATED_KEY
 annotation_method ::= ANNOTATION_PREFIX ANNOTATION_METHOD_KEY
 annotation_override ::= ANNOTATION_PREFIX ANNOTATION_OVERRIDE_KEY
-annotation_returns ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY annotation_returns_argument
+annotation_returns_ref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element
+annotation_returns_arrayref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_bracketed
+annotation_returns_hashref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_braced
 annotation_incomplete ::= ANNOTATION_PREFIX
 
-private annotation_returns_argument ::=
-    namespace_element
-    | namespace_element_bracketed
-    | namespace_element_braced
-
-/** basics **/
 private namespace_element_bracketed ::= PERL_LBRACK namespace_element PERL_RBRACK {name="[Package::Name]"}
 private namespace_element_braced ::= PERL_LBRACE namespace_element PERL_RBRACE {name="{Package::Name}"}
 
+/******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 // todo all packages should be lexed the same
 private namespace_element ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA {name="Package::Name"}

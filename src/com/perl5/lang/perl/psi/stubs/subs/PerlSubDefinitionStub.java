@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 
@@ -50,4 +52,10 @@ public interface PerlSubDefinitionStub extends StubElement<PsiPerlSubDefinition>
 	 * @return result
 	 */
 	public boolean isMethod();
+
+	/**
+	 * Checks PSI tree before a sub definition for annotations and builds annotations object
+	 * @return PerlSubAnnotation object
+	 */
+	public PerlSubAnnotations getAnnotations();
 }

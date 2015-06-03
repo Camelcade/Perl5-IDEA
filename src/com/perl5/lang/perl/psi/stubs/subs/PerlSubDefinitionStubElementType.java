@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -49,7 +50,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public PerlSubDefinitionStub createStub(@NotNull PsiPerlSubDefinition psi, StubElement parentStub)
 	{
-		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getArgumentsList(), psi.isMethod());
+		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getArgumentsList(), psi.isMethod(), psi.getAnnotations());
 	}
 
 	@NotNull
@@ -77,6 +78,8 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		for( PerlSubArgument argument: arguments )
 			argument.serialize(dataStream);
 
+		stub.getAnnotations().serialize(dataStream);
+
 		dataStream.writeBoolean(stub.isMethod());
 	}
 
@@ -93,8 +96,10 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		for( int i = 0; i < argumentsNumber; i++ )
 			arguments.add(PerlSubArgument.deserialize(dataStream));
 
+		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
+
 		boolean isMethod = dataStream.readBoolean();
 
-		return new PerlSubDefinitionStubImpl(parentStub,packageName,functionName,arguments,isMethod);
+		return new PerlSubDefinitionStubImpl(parentStub,packageName,functionName,arguments,isMethod, annotations);
 	}
 }

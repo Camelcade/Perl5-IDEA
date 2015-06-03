@@ -2,6 +2,7 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.util.io.StringRef;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -9,22 +10,24 @@ import java.io.IOException;
 /**
  * Created by hurricup on 03.06.2015.
  */
-public class PerlSubAnnotation
+public class PerlSubAnnotations
 {
 	boolean isMethod = false;
 	boolean isDeprecated = false;
 	boolean isAbstract = false;
 	boolean isOverride = false;
+	PerlReturnType returnType = PerlReturnType.VALUE;
 	String returns = null;
 
-	public static PerlSubAnnotation deserialize(@NotNull StubInputStream dataStream) throws IOException
+	public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
 	{
-		return new PerlSubAnnotation(
+		return new PerlSubAnnotations(
 				dataStream.readBoolean(),
 				dataStream.readBoolean(),
 				dataStream.readBoolean(),
 				dataStream.readBoolean(),
-				dataStream.readName().toString()
+				dataStream.readName(),
+				PerlReturnType.valueOf(dataStream.readName().toString())
 		);
 	}
 
@@ -35,15 +38,26 @@ public class PerlSubAnnotation
 		dataStream.writeBoolean(isAbstract);
 		dataStream.writeBoolean(isOverride);
 		dataStream.writeName(returns);
+		dataStream.writeName(returnType.toString());
 	}
 
-	public PerlSubAnnotation(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, String returns)
+	public PerlSubAnnotations()
+	{
+	}
+
+	public PerlSubAnnotations(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, String returns, PerlReturnType returnType)
 	{
 		this.isMethod = isMethod;
 		this.isDeprecated = isDeprecated;
 		this.isAbstract = isAbstract;
 		this.isOverride = isOverride;
 		this.returns = returns;
+		this.returnType = returnType;
+	}
+
+	public PerlSubAnnotations(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, StringRef returns, PerlReturnType returnType)
+	{
+		this(isMethod,isDeprecated,isAbstract,isOverride,returns == null ? null: returns.toString(),returnType);
 	}
 
 	public boolean isMethod()
@@ -94,5 +108,15 @@ public class PerlSubAnnotation
 	public void setReturns(String returns)
 	{
 		this.returns = returns;
+	}
+
+	public PerlReturnType getReturnType()
+	{
+		return returnType;
+	}
+
+	public void setReturnType(PerlReturnType returnType)
+	{
+		this.returnType = returnType;
 	}
 }

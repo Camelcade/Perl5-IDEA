@@ -10,7 +10,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.util.PerlFunctionUtil;
@@ -74,13 +76,16 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 							{
 								// todo set method icon if isMethod is true
 								// todo omit first argument is isMethod is true
-								Collection<PerlSubArgument> arguments = subDefinition.getArgumentsList();
-								int argumentsNumber = arguments.size();
+								// todo think about decorations for other annotations
+								Collection<PerlSubArgument> subArguments = subDefinition.getArgumentsList();
+								PerlSubAnnotations subAnnotations = subDefinition.getAnnotations();
+
+								int argumentsNumber = subArguments.size();
 
 								List<String> argumentsList = new ArrayList<String>();
-								for( PerlSubArgument argument: arguments)
+								for( PerlSubArgument argument: subArguments)
 								{
-									// todo we can mark optional arguments after prototypes implementation
+									// todo we can mark optional subArguments after prototypes implementation
 									argumentsList.add(argument.toStringShort());
 
 									int compiledListSize = argumentsList.size();
@@ -93,12 +98,12 @@ public class PerlFunctionCompletionProvider extends CompletionProvider<Completio
 
 								String argsString = "(" + StringUtils.join(argumentsList, ", ") + ")";
 
-								resultSet.addElement(
-										LookupElementBuilder
-												.create(subName)
-												.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-												.withPresentableText(subName + argsString)
-												.withInsertHandler(SUB_SELECTION_HANDLER)
+								resultSet.addElement(LookupElementBuilder
+										.create(subName)
+										.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+										.withPresentableText(subName + argsString)
+										.withInsertHandler(SUB_SELECTION_HANDLER)
+										.withStrikeoutness(subAnnotations.isDeprecated())
 								);
 							}
 						}

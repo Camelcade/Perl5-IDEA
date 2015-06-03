@@ -20,6 +20,7 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
 import java.util.List;
@@ -52,4 +53,10 @@ public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, 
 	 * @return result
 	 */
 	public boolean isMethod();
+
+	/**
+	 * Checks PSI tree before a sub definition for annotations and builds annotations object
+	 * @return PerlSubAnnotation object
+	 */
+	public PerlSubAnnotations getAnnotations();
 }

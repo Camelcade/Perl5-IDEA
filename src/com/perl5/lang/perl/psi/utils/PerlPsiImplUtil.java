@@ -16,12 +16,26 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.PsiElementBase;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 
 /**
  * Created by hurricup on 26.04.2015.
+ *
  */
 public class PerlPsiImplUtil implements PerlElementTypes
 {
 
+	public static PerlNamespaceElement getNamespaceElement(PerlNamespaceElementContainer container)
+	{
+		for (PsiElement cur = container.getFirstChild(); cur != null; cur = cur.getNextSibling()) {
+			if (cur instanceof PerlNamespaceElement)
+				return (PerlNamespaceElement)cur;
+		}
+		return null;
+	}
 }

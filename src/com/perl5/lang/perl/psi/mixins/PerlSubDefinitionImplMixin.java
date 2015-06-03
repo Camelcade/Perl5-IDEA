@@ -18,16 +18,18 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.SmartList;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.psi.utils.PerlThisNames;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.psi.utils.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -119,6 +121,7 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	@Override
 	public boolean isMethod()
 	{
+		// todo check annotation for method
 		PerlSubDefinitionStub stub = getStub();
 		if( stub != null )
 			return stub.isMethod();
@@ -203,5 +206,39 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 
 		myArguments = arguments;
 		return myArguments;
+	}
+
+	@Override
+	public PerlSubAnnotations getAnnotations()
+	{
+		PerlSubDefinitionStub stub = getStub();
+		if( stub != null )
+			return stub.getAnnotations();
+
+		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
+
+		for(PsiPerlAnnotation annotation: getAnnotationList())
+		{
+			if (annotation instanceof PsiPerlAnnotationAbstract)
+				myAnnotations.setIsAbstract(true);
+			else if (annotation instanceof PsiPerlAnnotationDeprectaed)
+				myAnnotations.setIsDeprecated(true);
+			else if (annotation instanceof PsiPerlAnnotationMethod)
+				myAnnotations.setIsMethod(true);
+			else if (annotation instanceof PsiPerlAnnotationOverride)
+				myAnnotations.setIsOverride(true);
+			else if (annotation instanceof PerlNamespaceElementContainer) // returns
+			{
+				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
+				if( ns != null)
+				{
+					myAnnotations.setReturns(ns.getName());
+					myAnnotations.setReturnType(PerlReturnType.REF);
+					// todo implement brackets and braces
+				}
+			}
+		}
+
+		return myAnnotations;
 	}
 }

@@ -18,6 +18,8 @@ package com.perl5.lang.perl.psi.stubs.subs;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
@@ -33,14 +35,16 @@ public class PerlSubDefinitionStubImpl extends StubBase<PsiPerlSubDefinition> im
 	private final String functionName;
 	private final List<PerlSubArgument> myArguments;
 	private final boolean isMethod;
+	private final PerlSubAnnotations myAnnotations;
 
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String functionName, List<PerlSubArgument> arguments, boolean isMethod)
+	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String functionName, List<PerlSubArgument> arguments, boolean isMethod, PerlSubAnnotations annotations)
 	{
 		super(parent, PerlStubElementTypes.SUB_DEFINITION);
 		this.packageName = packageName;
 		this.functionName = functionName;
 		myArguments = arguments;
 		this.isMethod = isMethod;
+		myAnnotations = annotations;
 	}
 
 	@Override
@@ -65,5 +69,11 @@ public class PerlSubDefinitionStubImpl extends StubBase<PsiPerlSubDefinition> im
 	public boolean isMethod()
 	{
 		return isMethod;
+	}
+
+	@Override
+	public PerlSubAnnotations getAnnotations()
+	{
+		return myAnnotations;
 	}
 }
