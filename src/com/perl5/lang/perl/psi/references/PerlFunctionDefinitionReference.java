@@ -72,7 +72,7 @@ public class PerlFunctionDefinitionReference extends PerlReferencePoly
 		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		// subs definitions
+		// subs definitions todo fix to work with stubs
 		for( PsiPerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, myCanonicalName))
 		{
 			PerlSubNameElement perlSubNameElement = sub.getSubNameElement();

@@ -18,14 +18,25 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlVariableDeclaration;
+import com.perl5.lang.perl.psi.references.PerlFunctionDeclarationReference;
+import com.perl5.lang.perl.psi.references.PerlFunctionDefinitionReference;
+import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -68,5 +79,32 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
 	}
 
+	@Override
+	public List<PsiElement> getSubDefinitions()
+	{
+		List<PsiElement> subDefinitions = new ArrayList<>();
 
+		PsiReference[] references = getReferences();
+
+		for (PsiReference reference : references)
+		{
+			// todo implement declaration handling here
+			if( reference instanceof PerlFunctionDefinitionReference )
+			{
+				ResolveResult[] results = ((PerlFunctionDefinitionReference) reference).multiResolve(false);
+
+				for (ResolveResult result : results)
+				{
+					PsiElement targetElement = result.getElement();
+					assert targetElement != null;
+
+					PsiElement parent = targetElement.getParent();
+
+					if( parent instanceof PerlSubDefinition )
+						subDefinitions.add(parent);
+				}
+			}
+		}
+		return subDefinitions;
+	}
 }

@@ -22,6 +22,7 @@ package com.perl5.lang.perl.idea;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
@@ -30,7 +31,10 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 {
@@ -41,7 +45,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		if( builtin )
 			attributes = TextAttributes.merge(attributes, PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes());
 		if( deprecated )
-			attributes = TextAttributes.merge(attributes, PerlSyntaxHighlighter.PERL_DEPRECATED.getDefaultAttributes());
+			attributes = TextAttributes.merge(attributes, CodeInsightColors.DEPRECATED_ATTRIBUTES.getDefaultAttributes());
 
 		annotation.setEnforcedTextAttributes(attributes);
 	}
@@ -126,15 +130,31 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
 			}
 		}
-//		else if( elementType == PERL_FUNCTION)
-//		{
-//			boolean isBuiltIn = PerlFunctionUtil.isBuiltIn(element.getText());
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					isBuiltIn ? PerlSyntaxHighlighter.PERL_OPERATOR :PerlSyntaxHighlighter.PERL_FUNCTION,
-//					isBuiltIn,
-//					false);
-//		}
+		else if( element instanceof PerlSubNameElement)
+		{
+			List<PsiElement> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
+
+			if( subDefinitions.size() == 0)
+				holder.createInfoAnnotation(element, "Unable to find sub definition");
+			else if( subDefinitions.size() > 1)
+				holder.createInfoAnnotation(element, "Multiple sub definitions found");
+			else
+			{
+				PsiElement subDefinition = subDefinitions.get(0);
+
+				if( subDefinition instanceof PerlSubDefinition)
+				{
+					PerlSubAnnotations subAnnotations = ((PerlSubDefinition) subDefinition).getAnnotations();
+
+					if (subAnnotations.isDeprecated())
+					{
+						Annotation annotation = holder.createInfoAnnotation(element, "This sub is marked as deprecated");
+						annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
+					}
+				}
+			}
+
+		}
 //		else if( elementType == PERL_METHOD)
 //		{
 //			colorize(

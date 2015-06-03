@@ -16,11 +16,19 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
 public interface PerlSubNameElement extends PerlNamedElement
 {
+	/**
+	 * Attempts to find sub definition
+	 * @return sub definition element
+	 */
+	public List<PsiElement> getSubDefinitions();
 }
