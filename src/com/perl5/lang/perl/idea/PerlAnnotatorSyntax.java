@@ -132,24 +132,29 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		}
 		else if( element instanceof PerlSubNameElement)
 		{
-			List<PsiElement> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
+			PsiElement parent = element.getParent();
 
-			if( subDefinitions.size() == 0)
-				holder.createInfoAnnotation(element, "Unable to find sub definition");
-			else if( subDefinitions.size() > 1)
-				holder.createInfoAnnotation(element, "Multiple sub definitions found");
-			else
+			if( !(parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration ))
 			{
-				PsiElement subDefinition = subDefinitions.get(0);
+				List<PsiElement> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
 
-				if( subDefinition instanceof PerlSubDefinition)
+				if( subDefinitions.size() == 0)
+					holder.createWarningAnnotation(element, "Unable to find sub definition");
+				else if( subDefinitions.size() > 1)
+					holder.createWarningAnnotation(element, "Multiple sub definitions found");
+				else
 				{
-					PerlSubAnnotations subAnnotations = ((PerlSubDefinition) subDefinition).getAnnotations();
+					PsiElement subDefinition = subDefinitions.get(0);
 
-					if (subAnnotations.isDeprecated())
+					if( subDefinition instanceof PerlSubDefinition)
 					{
-						Annotation annotation = holder.createInfoAnnotation(element, "This sub is marked as deprecated");
-						annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
+						PerlSubAnnotations subAnnotations = ((PerlSubDefinition) subDefinition).getAnnotations();
+
+						if (subAnnotations.isDeprecated())
+						{
+							Annotation annotation = holder.createWarningAnnotation(element, "This sub is marked as deprecated");
+							annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
+						}
 					}
 				}
 			}

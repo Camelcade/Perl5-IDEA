@@ -98,10 +98,10 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 					PsiElement targetElement = result.getElement();
 					assert targetElement != null;
 
+					// todo references should lead to definitions, because they are stabbed!!! moron!
 					PsiElement parent = targetElement.getParent();
 
-					if( parent instanceof PerlSubDefinition )
-						subDefinitions.add(parent);
+					subDefinitions.add(parent);
 				}
 			}
 		}
