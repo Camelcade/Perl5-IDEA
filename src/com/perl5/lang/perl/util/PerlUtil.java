@@ -22,9 +22,9 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 
 import java.io.File;
 import java.util.Collection;
@@ -45,10 +45,10 @@ public class PerlUtil
 	{
 		HashMap<String,PerlVariable> declarationsHash = new HashMap<>();
 
-		assert currentElement instanceof PerlLexicalScopeMember;
+//		assert currentElement instanceof PerlLexicalScopeMember;
 
-		PerlLexicalScope currentScope = ((PerlLexicalScopeMember) currentElement).getLexicalScope();
-
+//		PerlLexicalScope currentScope = ((PerlLexicalScopeMember) currentElement).getLexicalScope();
+        PerlLexicalScope currentScope = PsiTreeUtil.getParentOfType(currentElement, PerlLexicalScope.class);
 		Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), PerlVariableDeclaration.class);
 
 		for(PerlVariableDeclaration declaration: declarations)
