@@ -64,6 +64,13 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		else
 		{
 			// not built-in variable
+			Annotation annotation = holder.createInfoAnnotation(element, null);
+			annotation.setEnforcedTextAttributes(baseKey.getDefaultAttributes());
+
+//			List<PerlNamespaceDefinition> namespaceDefinitions = ((PerlNamespaceElement) element).getNamespaceDefinitions();
+//
+//			if( namespaceDefinitions.size() == 0)
+//				holder.createWarningAnnotation(element, "Unable to find namespace definition [if this is a module installed from CPAN, it's ok, just NYI]");
 
 		}
 	}

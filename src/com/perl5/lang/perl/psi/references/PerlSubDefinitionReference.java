@@ -96,7 +96,7 @@ public class PerlSubDefinitionReference extends PerlReferencePoly
 	{
 		PsiElement parent = element.getParent();
 		if( parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration || parent instanceof PerlGlobVariable)
-			return super.isReferenceTo(element) || super.isReferenceTo(parent);
+			return super.isReferenceTo(parent) || super.isReferenceTo(element);
 		return super.isReferenceTo(element);
 	}
 }

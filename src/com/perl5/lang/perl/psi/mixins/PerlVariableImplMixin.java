@@ -23,6 +23,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -31,6 +32,7 @@ import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -137,6 +139,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		return null;
 	}
 
+
 	@Override
 	public PerlVariableType getActualType()
 	{
@@ -194,4 +197,37 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	{
 		return false;
 	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return getVariableNameElement();
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if( variableNameElement != null)
+			variableNameElement.setName(name);
+
+		return this;
+	}
+
+	@Override
+	public String getName()
+	{
+		PerlVariableStub stub = getStub();
+		if( stub != null )
+			return stub.getVariableName();
+
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if( variableNameElement != null)
+			return variableNameElement.getName();
+
+		return super.getName();
+	}
+
+
 }

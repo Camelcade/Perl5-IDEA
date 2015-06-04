@@ -20,12 +20,11 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
-import com.perl5.lang.perl.util.PerlUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,11 +72,18 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	{
 		List<ResolveResult> result;
 
-		if( actualType == PerlVariableType.SCALAR)
+		PsiElement variableContainer = myVariable.getParent();
+
+		if( variableContainer instanceof PsiPerlVariableDeclarationLexical || variableContainer instanceof PsiPerlVariableDeclarationGlobal )
+			return new ResolveResult[0];
+
+
+		// todo need to be able to resolve variable to globs
+		if (actualType == PerlVariableType.SCALAR)
 			result = resolveScalarName();
-		else if( actualType == PerlVariableType.ARRAY)
+		else if (actualType == PerlVariableType.ARRAY)
 			result = resolveArrayName();
-		else if( actualType == PerlVariableType.HASH)
+		else if (actualType == PerlVariableType.HASH)
 			result = resolveHashName();
 		else
 			throw new RuntimeException("Can't be: resolving variable of unknown type");
@@ -100,17 +106,16 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	List<ResolveResult> resolveScalarName()
 	{
 		List<ResolveResult> result = new ArrayList<>();
-		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 
 		if( myNamespaceElement == null )
 		{
+			Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 			// trying to find lexical variable
 			for (PerlVariable variable : variables)
 			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variable instanceof PsiPerlScalarVariable && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
+				if( variable instanceof PsiPerlScalarVariable && myVariableName.equals(variable.getName()) )
 				{
-					result.add(new PsiElementResolveResult(variableName));
+					result.add(new PsiElementResolveResult(variable));
 					break;
 				}
 			}
@@ -120,13 +125,15 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		{
 			// not found, trying to find global variables
 			String packageName = myVariable.getPackageName();
+			String canonicalName = packageName + "::" + myVariableName;
 
-			for( PerlVariable variable: PerlScalarUtil.findGlobalScalarDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if( variableName != null && variableName != myElement)
-					result.add(new PsiElementResolveResult(variableName));
-			}
+			for( PerlVariable variable: PerlScalarUtil.findGlobalScalarDefinitions(myElement.getProject(), canonicalName))
+				result.add(new PsiElementResolveResult(variable));
+
+			// globs definitions
+			// todo here we should validate glob if it's wildcard or {SCALAR}
+			for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(myElement.getProject(), canonicalName))
+				result.add(new PsiElementResolveResult(glob));
 		}
 
 		return result;
@@ -139,18 +146,16 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	List<ResolveResult> resolveArrayName()
 	{
 		List<ResolveResult> result = new ArrayList<>();
-		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
-
 
 		if( myNamespaceElement == null )
 		{
+			Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 			// trying to find lexical variable
 			for (PerlVariable variable : variables)
 			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variable instanceof PsiPerlArrayVariable && variableName != null && variableName != myElement&& myVariableName.equals(variableName.getName()))
+				if( variable instanceof PsiPerlArrayVariable && myVariableName.equals(variable.getName()) )
 				{
-					result.add(new PsiElementResolveResult(variableName));
+					result.add(new PsiElementResolveResult(variable));
 					break;
 				}
 			}
@@ -160,13 +165,15 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		{
 			// not found, trying to find global variables
 			String packageName = myVariable.getPackageName();
+			String canonicalName = packageName + "::" + myVariableName;
 
-			for( PerlVariable variable: PerlArrayUtil.findGlobalArrayDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if( variableName != null && variableName != myElement)
-					result.add(new PsiElementResolveResult(variableName));
-			}
+			for( PerlVariable variable: PerlArrayUtil.findGlobalArrayDefinitions(myElement.getProject(), canonicalName))
+				result.add(new PsiElementResolveResult(variable));
+
+			// globs definitions
+			// todo here we should validate glob if it's wildcard or {ARRAY}
+			for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(myElement.getProject(), canonicalName))
+				result.add(new PsiElementResolveResult(glob));
 		}
 
 		return result;
@@ -179,17 +186,16 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	List<ResolveResult> resolveHashName()
 	{
 		List<ResolveResult> result = new ArrayList<>();
-		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 
 		if( myNamespaceElement == null )
 		{
+			Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
 			// trying to find lexical variable
 			for (PerlVariable variable : variables)
 			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variable instanceof PsiPerlHashVariable && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
+				if( variable instanceof PsiPerlHashVariable && myVariableName.equals(variable.getName()) )
 				{
-					result.add(new PsiElementResolveResult(variableName));
+					result.add(new PsiElementResolveResult(variable));
 					break;
 				}
 			}
@@ -200,14 +206,28 @@ public class PerlVariableNameReference extends PerlReferencePoly
 			// not found, trying to find global variables
 			String packageName = myVariable.getPackageName();
 
-			for( PerlVariable variable: PerlHashUtil.findGlobalHashDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if( variableName != null && variableName != myElement)
-					result.add(new PsiElementResolveResult(variableName));
-			}
+			String canonicalName = packageName + "::" + myVariableName;
+
+			for( PerlVariable variable: PerlHashUtil.findGlobalHashDefinitions(myElement.getProject(), canonicalName))
+				result.add(new PsiElementResolveResult(variable));
+
+			// globs definitions
+			// todo here we should validate glob if it's wildcard or {HASH}
+			for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(myElement.getProject(), canonicalName))
+				result.add(new PsiElementResolveResult(glob));
+
 		}
 
 		return result;
+	}
+
+	@Override
+	public boolean isReferenceTo(PsiElement element)
+	{
+		PsiElement parent = element.getParent();
+		if( parent instanceof PerlVariable || parent instanceof PerlGlobVariable)
+			return super.isReferenceTo(parent) || super.isReferenceTo(element);
+
+		return super.isReferenceTo(element);
 	}
 }

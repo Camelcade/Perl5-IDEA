@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -250,5 +251,16 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 			}
 		}
 		return namespaceFiles;
+	}
+
+	@Override
+	public TextRange getTextRange()
+	{
+		if( getText().endsWith("::"))
+		{
+			int start = getStartOffset();
+			return new TextRange(start, start + getTextLength()-2);
+		}
+		return super.getTextRange();
 	}
 }
