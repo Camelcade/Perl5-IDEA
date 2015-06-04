@@ -18,7 +18,9 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
@@ -26,6 +28,7 @@ import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -57,11 +60,11 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	}
 
 	@Override
-	public String getGlobName()
+	public String getName()
 	{
 		PerlGlobStub stub = getStub();
 		if( stub != null)
-			return stub.getGlobName();
+			return stub.getName();
 
 		return getVariableNameElement().getName();
 	}
@@ -97,10 +100,30 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 		if( getNamespaceElement() != null )
 			return false;
 
-		String globName = getGlobName();
+		String globName = getName();
 		if( globName == null )
 			return false;
 
 		return PerlGlobUtil.BUILT_IN.contains(globName);
 	}
+
+	@Override
+	public boolean isDeprecated()
+	{
+		return false;
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return getVariableNameElement();
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		return getVariableNameElement().setName(name);
+	}
+
 }

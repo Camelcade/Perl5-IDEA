@@ -73,7 +73,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	 */
 	private List<FoldingDescriptor> getCommentsDescriptors(@NotNull PsiElement root, @NotNull Document document)
 	{
-		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
+		List<FoldingDescriptor> descriptors = new ArrayList<>();
 
 		Collection<PsiComment> comments = PsiTreeUtil.findChildrenOfType(root, PsiComment.class);
 

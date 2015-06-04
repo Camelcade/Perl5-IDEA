@@ -40,7 +40,7 @@ import java.util.List;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 {
-	private void colorize(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
+	private void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
 	{
 		TextAttributes attributes = key.getDefaultAttributes();
 
@@ -53,49 +53,43 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	}
 
 
+	private void annotateVariable(PerlVariable element, AnnotationHolder holder, TextAttributesKey baseKey)
+	{
+		if( element.isBuiltIn() )
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					baseKey,
+					true,
+					element.isDeprecated());
+		else
+		{
+			// not built-in variable
+
+		}
+	}
+
+
 	@Override
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 
 		if( element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
-		{
-			colorize(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_SCALAR,
-					((PerlVariableNameElementContainer)element).isBuiltIn(),
-					false);
-		}
+			annotateVariable((PerlVariable)element, holder, PerlSyntaxHighlighter.PERL_SCALAR);
 		else if( element instanceof PsiPerlHashVariable)
-		{
-			colorize(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_HASH,
-					((PerlVariableNameElementContainer)element).isBuiltIn(),
-					false);
-		}
+			annotateVariable((PerlVariable)element, holder, PerlSyntaxHighlighter.PERL_HASH);
         else if( element instanceof PsiPerlArrayVariable)
-        {
-            colorize(
-                    holder.createInfoAnnotation(element, null),
-                    PerlSyntaxHighlighter.PERL_ARRAY,
-					((PerlVariableNameElementContainer)element).isBuiltIn(),
-                    false);
-        }
+			annotateVariable((PerlVariable)element, holder, PerlSyntaxHighlighter.PERL_ARRAY);
 		else if( element instanceof PsiPerlGlobVariable)
-		{
-			colorize(
+			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_GLOB,
-					((PerlVariableNameElementContainer)element).isBuiltIn(),
+					((PerlVariableNameElementContainer) element).isBuiltIn(),
 					false);
-		}
 		else if( element instanceof PsiPerlAnnotation)
-		{
-			colorize(
+			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_ANNOTATION,
 					false,
 					false);
-		}
 		else if( element instanceof PerlNamespaceElement )
 		{
 			PsiElement parent = element.getParent();

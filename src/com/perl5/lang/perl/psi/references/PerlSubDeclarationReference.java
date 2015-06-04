@@ -53,9 +53,9 @@ public class PerlSubDeclarationReference extends PerlSubDefinitionReference
 				result.add(new PsiElementResolveResult(sub.getSubNameElement()));
 		}
 
-		// search in $self ierarchy - first occurance
-		// search in package with full qualified name
-		// search in used packages (poly reference)
+		// todo search in $self ierarchy - first occurance
+		// todo search in package with full qualified name
+		// todo search in used packages (poly reference)
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}

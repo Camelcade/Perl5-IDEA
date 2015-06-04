@@ -15,8 +15,14 @@ public interface PerlVariableNameElementContainer
 
 	/**
 	 * Checks if variable is built in
-	 * @return checking result
+	 * @return result
 	 */
-	boolean isBuiltIn();
+	public boolean isBuiltIn();
+
+	/**
+	 * Checks if variable is deprecated
+	 * @return result
+	 */
+	public boolean isDeprecated();
 
 }

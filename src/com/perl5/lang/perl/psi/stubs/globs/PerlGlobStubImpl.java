@@ -27,13 +27,13 @@ import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements PerlGlobStub
 {
 	private final String packageName;
-	private final String globName;
+	private final String variableName;
 
-	public PerlGlobStubImpl(final StubElement parent, final String packageName, final String globName)
+	public PerlGlobStubImpl(final StubElement parent, final String packageName, final String variableName)
 	{
 		super(parent, PerlStubElementTypes.PERL_GLOB);
 		this.packageName = packageName;
-		this.globName = globName;
+		this.variableName = variableName;
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements P
 	}
 
 	@Override
-	public String getGlobName()
+	public String getName()
 	{
-		return globName;
+		return variableName;
 	}
 }

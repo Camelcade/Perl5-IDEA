@@ -47,5 +47,4 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 	 * @return variable type
 	 */
 	PerlVariableType getActualType();
-
 }

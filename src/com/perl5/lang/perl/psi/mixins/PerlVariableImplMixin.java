@@ -188,4 +188,10 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 
 		return variableType == PerlVariableType.HASH && PerlHashUtil.BUILT_IN.contains(variableName);
 	}
+
+	@Override
+	public boolean isDeprecated()
+	{
+		return false;
+	}
 }

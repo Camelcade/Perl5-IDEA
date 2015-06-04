@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="database-openapi">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/DatabaseTools/lib/database-openapi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

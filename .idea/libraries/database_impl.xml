@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="database-impl">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/DatabaseTools/lib/database-impl.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
