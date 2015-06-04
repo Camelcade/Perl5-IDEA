@@ -111,9 +111,6 @@ limitations under the License.
     PERL_FUNCTION_ATTRIBUTE="PERL_FUNCTION_ATTRIBUTE"
 
     PERL_PACKAGE="PERL_PACKAGE"
-    PERL_PACKAGE_BUILT_IN="PERL_PACKAGE_BUILT_IN"
-    PERL_PACKAGE_DEPRECATED="PERL_PACKAGE_DEPRECATED"
-    PERL_PACKAGE_PRAGMA="PERL_PACKAGE_PRAGMA"
 
     PERL_FUNCTION="PERL_FUNCTION"
     PERL_FUNCTION_BUILT_IN="PERL_FUNCTION_BUILT_IN"
@@ -306,8 +303,13 @@ require_expr ::= 'require' (namespace_element | perl_version | unary_expr)  // m
 
 // it looks meaningless now, eats nothing
 private recover_statement ::= !(
-    PERL_RESERVED | PERL_KEYWORD | PERL_FUNCTION | PERL_FUNCTION_BUILT_IN | PERL_OPERATOR_UNARY | PERL_TAG | PERL_OPERATOR_NOT
-    | PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA
+    // fixme what the difference?
+    PERL_RESERVED | PERL_KEYWORD
+    // fixme should be lexed the same
+    | PERL_FUNCTION | PERL_FUNCTION_BUILT_IN
+    | PERL_OPERATOR_UNARY | PERL_TAG
+    | PERL_OPERATOR_NOT
+    | PERL_PACKAGE
     | PERL_RBRACE | PERL_LBRACE | PERL_LANGLE | PERL_REGEX_QUOTE_OPEN
     | PERL_LBRACK
     | PERL_LPAREN
@@ -730,5 +732,4 @@ private namespace_element_bracketed ::= PERL_LBRACK namespace_element PERL_RBRAC
 private namespace_element_braced ::= PERL_LBRACE namespace_element PERL_RBRACE {name="{Package::Name}"}
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
-// todo all packages should be lexed the same
-private namespace_element ::= PERL_PACKAGE | PERL_PACKAGE_BUILT_IN | PERL_PACKAGE_DEPRECATED | PERL_PACKAGE_PRAGMA {name="Package::Name"}
+private namespace_element ::= PERL_PACKAGE {name="Package::Name"}

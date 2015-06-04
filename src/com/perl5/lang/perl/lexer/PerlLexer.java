@@ -901,7 +901,7 @@ public class PerlLexer extends PerlLexerGenerated{
 	{
 		String packageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
 		if( !knownPackages.containsKey(packageName))
-			knownPackages.put(packageName,PerlPackageUtil.getPackageType(packageName));
+			knownPackages.put(packageName,PERL_PACKAGE);
 		return knownPackages.get(packageName);
 	}
 

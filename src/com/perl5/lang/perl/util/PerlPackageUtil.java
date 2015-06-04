@@ -44,31 +44,15 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 {
     public static final String PACKAGE_SEPARATOR = "::";
 
-	public static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
-
-	static{
-		for( String packageName: BUILT_IN )
-		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_BUILT_IN);
-		}
-		for( String packageName: BUILT_IN_PRAGMA )
-		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_PRAGMA);
-		}
-		for( String packageName: BUILT_IN_DEPRECATED )
-		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_DEPRECATED);
-		}
-	}
-
     /**
 	 * Checks if package is built in
-	 * @param variable package name
+	 * @param pacakgeName package name
 	 * @return result
 	 */
-	public static boolean isBuiltIn(String variable)
+	public static boolean isBuiltIn(String pacakgeName)
 	{
-		return BUILT_IN_MAP.containsKey(getCanonicalPackageName(variable));
+		String canonicalPcakageName = getCanonicalPackageName(pacakgeName);
+		return BUILT_IN.contains(canonicalPcakageName) || BUILT_IN_DEPRECATED.contains(canonicalPcakageName) || BUILT_IN_PRAGMA.contains(canonicalPcakageName);
 	}
 
 	/**
@@ -89,17 +73,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static boolean isPragma(String packageName)
 	{
 		return BUILT_IN_PRAGMA.contains(packageName);
-	}
-
-	/**
-	 * Returns token type depending on package name
-	 * @param variable package name
-	 * @return token type
-	 */
-	public static IElementType getPackageType(String variable)
-	{
-		IElementType packageType = BUILT_IN_MAP.get(getCanonicalPackageName(variable));
-		return packageType == null ? PERL_PACKAGE : packageType;
 	}
 
 	/**

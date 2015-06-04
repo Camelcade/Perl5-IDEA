@@ -26,16 +26,20 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.PerlPackageInsertHandler;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.PerlPackage;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hurricup on 31.05.2015.
  *
  */
-public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<CompletionParameters>
+public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	@Override
 	protected void addCompletions(@NotNull final CompletionParameters parameters, final ProcessingContext context, @NotNull final CompletionResultSet resultSet)
@@ -47,23 +51,39 @@ public class PerlBuiltInPackageCompletionProvider  extends CompletionProvider<Co
 			{
 				// built in packages
 				PsiElement element = parameters.getPosition();
-				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(element, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
-				for (String packageName : PerlPackageUtil.BUILT_IN_MAP.keySet())
+				for (String packageName : PerlPackageUtil.BUILT_IN)
 				{
-					IElementType packageType = PerlPackageUtil.BUILT_IN_MAP.get(packageName);
+					resultSet.addElement(LookupElementBuilder
+									.create(element, packageName)
+									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
+									.withBoldness(true)
+									.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
+					);
+				}
 
-					LookupElementBuilder newElement = LookupElementBuilder
+				// todo some decoration for pragma
+				for (String packageName : PerlPackageUtil.BUILT_IN_PRAGMA)
+				{
+					resultSet.addElement(LookupElementBuilder
 							.create(element, packageName)
 							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
 							.withBoldness(true)
-							.withInsertHandler(PerlPackageInsertHandler.INSTANCE);
-
-					if (packageType == PerlElementTypes.PERL_PACKAGE_DEPRECATED)
-						newElement = newElement.withStrikeoutness(true);
-
-					resultSet.addElement(newElement);
+							.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
+					);
 				}
+
+				for (String packageName : PerlPackageUtil.BUILT_IN_DEPRECATED)
+				{
+					resultSet.addElement(LookupElementBuilder
+							.create(element, packageName)
+							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
+							.withBoldness(true)
+							.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
+							.withStrikeoutness(true)
+					);
+				}
+
 			}
 		});
 	}
