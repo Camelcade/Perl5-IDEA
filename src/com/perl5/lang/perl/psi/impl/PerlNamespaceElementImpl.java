@@ -21,13 +21,18 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
+import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
+import com.perl5.lang.perl.psi.references.PerlSubDefinitionReference;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -36,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -161,7 +167,6 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 		return this;
 	}
 
-
 	@NotNull
 	@Override
 	public String getName()
@@ -176,4 +181,74 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
 	}
 
+	@Override
+	public boolean isBuiltin()
+	{
+		return PerlPackageUtil.isBuiltIn(getName());
+	}
+
+	@Override
+	public boolean isPragma()
+	{
+		return PerlPackageUtil.BUILT_IN_PRAGMA.contains(getName());
+	}
+
+	// todo implement deprecation support for user packages and take it into account
+	@Override
+	public boolean isDeprecated()
+	{
+		return PerlPackageUtil.BUILT_IN_DEPRECATED.contains(getName());
+	}
+
+	@Override
+	public List<PerlNamespaceDefinition> getNamespaceDefinitions()
+	{
+		List<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<>();
+
+		PsiReference[] references = getReferences();
+
+		for (PsiReference reference : references)
+		{
+			if( reference instanceof PerlNamespaceReference)
+			{
+				ResolveResult[] results = ((PerlNamespaceReference) reference).multiResolve(false);
+
+				for (ResolveResult result : results)
+				{
+					PsiElement targetElement = result.getElement();
+					assert targetElement != null;
+					assert targetElement instanceof PerlNamespaceDefinition;
+
+					namespaceDefinitions.add((PerlNamespaceDefinition)targetElement);
+				}
+			}
+		}
+		return namespaceDefinitions;
+	}
+
+	@Override
+	public List<PerlFileElementImpl> getNamespaceFiles()
+	{
+		List<PerlFileElementImpl> namespaceFiles = new ArrayList<>();
+
+		PsiReference[] references = getReferences();
+
+		for (PsiReference reference : references)
+		{
+			if( reference instanceof PerlNamespaceFileReference)
+			{
+				ResolveResult[] results = ((PerlNamespaceFileReference) reference).multiResolve(false);
+
+				for (ResolveResult result : results)
+				{
+					PsiElement targetElement = result.getElement();
+					assert targetElement != null;
+					assert targetElement instanceof PerlFileElementImpl;
+
+					namespaceFiles.add((PerlFileElementImpl) targetElement);
+				}
+			}
+		}
+		return namespaceFiles;
+	}
 }

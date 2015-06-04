@@ -56,26 +56,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 	/**
-	 * Check if package is deprecated
-	 * @param packageName package name
-	 * @return result
-	 */
-	public static boolean isDeprecated(String packageName)
-	{
-		return BUILT_IN_DEPRECATED.contains(packageName);
-	}
-
-	/**
-	 * Check if package is pragma
-	 * @param packageName package name
-	 * @return checking result
-	 */
-	public static boolean isPragma(String packageName)
-	{
-		return BUILT_IN_PRAGMA.contains(packageName);
-	}
-
-	/**
 	 * Make canonical package name, atm crude, jut chop off :: from end and begining
 	 * @param name package name
 	 * @return canonical package name

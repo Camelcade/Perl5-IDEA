@@ -22,9 +22,9 @@ import com.intellij.lang.ASTNode;
 /**
  * Created by hurricup on 14.05.2015.
  */
-public class PerlFunctionAttributeElementImpl extends ASTWrapperPsiElement
+public class PerlSubAttributeElementImpl extends ASTWrapperPsiElement
 {
-		public PerlFunctionAttributeElementImpl(ASTNode node) {
+		public PerlSubAttributeElementImpl(ASTNode node) {
 			super(node);
 		}
 

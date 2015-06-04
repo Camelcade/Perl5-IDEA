@@ -30,6 +30,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -95,24 +96,54 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					false,
 					false);
 		}
-//		if( elementType == PERL_PACKAGE )
-//		{
-//			String packageName = element.getText();
-//			PerlPackageUtil.PACKAGE_TYPE packageType = PerlPackageUtil.getPackageType(packageName);
-//
-//			String message = packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED ?
-//					"Package "+packageName+" is marked as deprecated and may be removed in future perl versions"
-//					: null;
-//
-//			colorize(
-//					holder.createInfoAnnotation(element, message),
-//					packageType == PerlPackageUtil.PACKAGE_TYPE.PRAGMA ? PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA: PerlSyntaxHighlighter.PERL_PACKAGE,
-//					packageType != null,
-//					packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED);
-//
-//		}
-		//else
-		if( element instanceof PerlStringContentElementImpl)
+		else if( element instanceof PerlNamespaceElement )
+		{
+			PsiElement parent = element.getParent();
+
+			if( parent instanceof GeneratedParserUtilBase.DummyBlock || parent instanceof PerlNamespaceDefinition )
+				return;
+
+			if( ((PerlNamespaceElement) element).isDeprecated())
+			{
+				Annotation annotation = holder.createWarningAnnotation(element, "This sub is marked as deprecated");
+				annotation.setEnforcedTextAttributes(
+						TextAttributes.merge(
+								PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes(),
+								CodeInsightColors.DEPRECATED_ATTRIBUTES.getDefaultAttributes())
+				);
+			}
+			else if( ((PerlNamespaceElement) element).isPragma())
+			{
+				Annotation annotation = holder.createInfoAnnotation(element, null);
+				annotation.setEnforcedTextAttributes(
+						TextAttributes.merge(
+								PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes(),
+								PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA.getDefaultAttributes())
+				);
+			}
+			else if( ((PerlNamespaceElement) element).isBuiltin())
+			{
+				Annotation annotation = holder.createInfoAnnotation(element, null);
+				annotation.setEnforcedTextAttributes(
+						PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes()
+				);
+			}
+			else if( parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
+			{
+				List<PerlFileElementImpl> namespaceFiles = ((PerlNamespaceElement) element).getNamespaceFiles();
+
+				if( namespaceFiles.size() == 0)
+					holder.createWarningAnnotation(element, "Unable to find package file");
+			}
+			else
+			{
+				List<PerlNamespaceDefinition> namespaceDefinitions = ((PerlNamespaceElement) element).getNamespaceDefinitions();
+
+				if( namespaceDefinitions.size() == 0)
+					holder.createWarningAnnotation(element, "Unable to find namespace definition");
+			}
+		}
+		else if( element instanceof PerlStringContentElementImpl)
 		{
 			PsiElement parent = element.getParent();
 
@@ -135,44 +166,48 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		{
 			PsiElement parent = element.getParent();
 
-			if( parent instanceof GeneratedParserUtilBase.DummyBlock)
+			if( parent instanceof GeneratedParserUtilBase.DummyBlock || parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration)
 				return;
 
-			if( !(parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration ))
+			PerlNamespaceElement methodNamespaceElement = null;
+			if( parent instanceof PerlMethod)
+				methodNamespaceElement = ((PerlMethod) parent).getNamespaceElement();
+
+			if( methodNamespaceElement != null && methodNamespaceElement.isBuiltin())
+			{
+				// todo after implementinting and scanning sdk we may remove this. Atm no control for built-in packages methods
+			}
+			else
 			{
 				List<PsiElement> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
 
-
-
-				if( subDefinitions.size() == 0)
+				if (subDefinitions.size() == 0)
 					holder.createWarningAnnotation(element, "Unable to find sub definition");
-				else if( subDefinitions.size() > 1)
-					holder.createWarningAnnotation(element, "Multiple sub definitions found");
+//				else if (subDefinitions.size() > 1)
+//					holder.createWarningAnnotation(element, "Multiple sub definitions found");
 				else
 				{
-					PsiElement subDefinition = subDefinitions.get(0);
-
-					if( subDefinition instanceof PerlSubDefinition)
+					for( PsiElement subDefinition: subDefinitions )
 					{
-						PerlSubAnnotations subAnnotations = ((PerlSubDefinition) subDefinition).getSubAnnotations();
-
-						if (subAnnotations.isDeprecated())
+						if (subDefinition instanceof PerlSubDefinition)
 						{
-							Annotation annotation = holder.createWarningAnnotation(element, "This sub is marked as deprecated");
-							annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
+							PerlSubAnnotations subAnnotations = ((PerlSubDefinition) subDefinition).getSubAnnotations();
+
+							if (subAnnotations.isDeprecated())
+							{
+								Annotation annotation = holder.createWarningAnnotation(element, "This sub is marked as deprecated");
+								annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
+								break;
+							}
 						}
+						// todo globs handling here
+						// todo check that annotations are the same on multiple definitions
+						// todo check that parameters are the same on multiple definitions
+						// todo check that attributes are the same on multiple definitions
+						// todo check that prototypes are the same on multiple definitions
 					}
 				}
 			}
-
 		}
-//		else if( elementType == PERL_METHOD)
-//		{
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					PerlSyntaxHighlighter.PERL_FUNCTION,
-//					false,
-//					false);
-//		}
 	}
 }

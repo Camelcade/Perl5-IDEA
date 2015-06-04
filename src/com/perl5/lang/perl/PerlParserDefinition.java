@@ -32,7 +32,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlFunctionAttributeElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubAttributeElementImpl;
 import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -100,7 +100,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 		IElementType type = node.getElementType();
 		if (type == PERL_FUNCTION_ATTRIBUTE)
 		{
-			return new PerlFunctionAttributeElementImpl(node);
+			return new PerlSubAttributeElementImpl(node);
 		}
 		else
 			return PerlElementTypes.Factory.createElement(node);
