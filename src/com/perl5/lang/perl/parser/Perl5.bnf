@@ -154,7 +154,7 @@ limitations under the License.
     elementTypeFactory("sub_definition|perl_glob|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
     stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
-    mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImpl"
+    mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
     implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinition"
 
     stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub"

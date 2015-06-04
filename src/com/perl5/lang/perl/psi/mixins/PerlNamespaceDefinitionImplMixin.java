@@ -18,23 +18,32 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
-public abstract class PerlNamespaceDefinitionImpl extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub>  implements PsiPerlNamespaceDefinition
+public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub>  implements PsiPerlNamespaceDefinition
 {
-	public PerlNamespaceDefinitionImpl(@NotNull ASTNode node){
+	public PerlNamespaceDefinitionImplMixin(@NotNull ASTNode node){
 		super(node);
 	}
 
-	public PerlNamespaceDefinitionImpl(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IStubElementType nodeType) {
+	public PerlNamespaceDefinitionImplMixin(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IStubElementType nodeType) {
 		super(stub,nodeType);
+	}
+
+	@Override
+	public String getName()
+	{
+		return getPackageName();
 	}
 
 	@Override
@@ -43,4 +52,33 @@ public abstract class PerlNamespaceDefinitionImpl extends StubBasedPsiElementBas
 		return findChildByClass(PerlNamespaceElement.class);
 	}
 
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return getNamespaceElement();
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		if( namespaceElement != null)
+			namespaceElement.setName(name);
+		return this;
+	}
+
+	@Override
+	public String getPackageName()
+	{
+		PerlNamespaceDefinitionStub stub = getStub();
+		if( stub != null)
+			return stub.getPackageName();
+
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		if( namespaceElement != null)
+			return namespaceElement.getName();
+
+		return null;
+	}
 }

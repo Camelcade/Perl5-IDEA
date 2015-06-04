@@ -215,10 +215,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 					{
 						for( PsiPerlNamespaceDefinition namespaceDefinition: PsiTreeUtil.findChildrenOfType(psiFile, PsiPerlNamespaceDefinition.class) )
 						{
-							PerlNamespaceElement namespace = namespaceDefinition.getNamespaceElement();
-							if( oldPackageName.equals(namespace.getName()))
+							if( oldPackageName.equals(namespaceDefinition.getPackageName()))
 							{
-								queue.addElement(namespace,newPackageName);
+								queue.addElement(namespaceDefinition,newPackageName);
 							}
 						}
 					}

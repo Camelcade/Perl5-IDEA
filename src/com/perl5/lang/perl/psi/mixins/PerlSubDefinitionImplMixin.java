@@ -66,7 +66,6 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		if (namespace == null)
 			namespace = getContextPackageName();
 
-
 		return namespace;
 	}
 
@@ -106,7 +105,10 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 			return stub.getSubName();
 
 		PerlSubNameElement subNameElement = getSubNameElement();
-		return subNameElement.getName();
+		if( subNameElement != null )
+			return subNameElement.getName();
+
+		return null;
 	}
 
 	@Override

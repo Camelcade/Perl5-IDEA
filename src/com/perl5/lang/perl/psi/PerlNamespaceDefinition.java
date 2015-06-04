@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespaceDefinition extends PsiElement, PerlNamespaceElementContainer
+public interface PerlNamespaceDefinition extends PsiElement, PerlNamespaceElementContainer, PerlNamedElement
 {
+	String getPackageName();
 }

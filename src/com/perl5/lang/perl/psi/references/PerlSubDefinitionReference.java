@@ -31,13 +31,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlFunctionDefinitionReference extends PerlReferencePoly
+public class PerlSubDefinitionReference extends PerlReferencePoly
 {
 	String myFunctionName;
 	String myPackageName = null;
 	String myCanonicalName;
 
-	public PerlFunctionDefinitionReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlSubDefinitionReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 		assert element instanceof PerlSubNameElement;
 		myFunctionName = ((PerlSubNameElement) element).getName();
@@ -89,5 +89,14 @@ public class PerlFunctionDefinitionReference extends PerlReferencePoly
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
 		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
+	}
+
+	@Override
+	public boolean isReferenceTo(PsiElement element)
+	{
+		PsiElement parent = element.getParent();
+		if( parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration)
+			return super.isReferenceTo(element) || super.isReferenceTo(parent);;
+		return super.isReferenceTo(element);
 	}
 }

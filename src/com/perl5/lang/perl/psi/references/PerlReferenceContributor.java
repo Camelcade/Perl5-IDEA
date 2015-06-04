@@ -56,12 +56,12 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 
 						// fixme this should be done using patterns
 						if( element.getParent() instanceof PsiPerlSubDefinitionImpl)
-							return new PsiReference[]{new PerlFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
+							return new PsiReference[]{new PerlSubDeclarationReference(element, new TextRange(0, element.getTextLength()))};
 						else
 						{
-							PsiReference reference = new PerlFunctionDefinitionReference(element, new TextRange(0, element.getTextLength()));
-							if( ((PerlFunctionDefinitionReference)reference).multiResolve(false).length == 0 )
-								reference = new PerlFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()));
+							PsiReference reference = new PerlSubDefinitionReference(element, new TextRange(0, element.getTextLength()));
+							if( ((PerlSubDefinitionReference)reference).multiResolve(false).length == 0 )
+								reference = new PerlSubDeclarationReference(element, new TextRange(0, element.getTextLength()));
 
 							return new PsiReference[]{reference};
 						}

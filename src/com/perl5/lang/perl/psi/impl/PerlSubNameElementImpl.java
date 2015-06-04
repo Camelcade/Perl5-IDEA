@@ -22,15 +22,9 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclaration;
-import com.perl5.lang.perl.psi.references.PerlFunctionDeclarationReference;
-import com.perl5.lang.perl.psi.references.PerlFunctionDefinitionReference;
-import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
+import com.perl5.lang.perl.psi.references.PerlSubDefinitionReference;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -89,9 +83,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		for (PsiReference reference : references)
 		{
 			// todo implement declaration handling here
-			if( reference instanceof PerlFunctionDefinitionReference )
+			if( reference instanceof PerlSubDefinitionReference)
 			{
-				ResolveResult[] results = ((PerlFunctionDefinitionReference) reference).multiResolve(false);
+				ResolveResult[] results = ((PerlSubDefinitionReference) reference).multiResolve(false);
 
 				for (ResolveResult result : results)
 				{
@@ -104,4 +98,8 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		}
 		return subDefinitions;
 	}
+
+
 }
+
+
