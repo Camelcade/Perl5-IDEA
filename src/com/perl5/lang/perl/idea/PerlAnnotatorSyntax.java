@@ -133,14 +133,14 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 				List<PerlFileElementImpl> namespaceFiles = ((PerlNamespaceElement) element).getNamespaceFiles();
 
 				if( namespaceFiles.size() == 0)
-					holder.createWarningAnnotation(element, "Unable to find package file");
+					holder.createWarningAnnotation(element, "Unable to find package file [if this is a module installed from CPAN, it's ok, just NYI]");
 			}
 			else
 			{
 				List<PerlNamespaceDefinition> namespaceDefinitions = ((PerlNamespaceElement) element).getNamespaceDefinitions();
 
 				if( namespaceDefinitions.size() == 0)
-					holder.createWarningAnnotation(element, "Unable to find namespace definition");
+					holder.createWarningAnnotation(element, "Unable to find namespace definition [if this is a module installed from CPAN, it's ok, just NYI]");
 			}
 		}
 		else if( element instanceof PerlStringContentElementImpl)
@@ -182,7 +182,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 				List<PsiElement> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
 
 				if (subDefinitions.size() == 0)
-					holder.createWarningAnnotation(element, "Unable to find sub definition");
+					holder.createWarningAnnotation(element, "Unable to find sub definition [if this is a sub from module installed from CPAN, imported sub, inherited sub or chained invocation, it's ok, just NYI]");
 //				else if (subDefinitions.size() > 1)
 //					holder.createWarningAnnotation(element, "Multiple sub definitions found");
 				else
@@ -205,6 +205,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 						// todo check that parameters are the same on multiple definitions
 						// todo check that attributes are the same on multiple definitions
 						// todo check that prototypes are the same on multiple definitions
+						// todo check that arguments number suits prototype
 					}
 				}
 			}
