@@ -59,104 +59,20 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		Runnable newProcess = null;
-
-		PsiElement parent = getParent();
-		assert parent != null;
-
-		if( parent instanceof PsiPerlNamespaceDefinition)
-		{
-			// namespace definition,
-			final PsiFile psiFile = getContainingFile();
-			if( psiFile instanceof PerlFileElementImpl)
-			{
-				final String packageName = ((PerlFileElementImpl) psiFile).getFilePackageName();
-				if( packageName != null && packageName.equals(getName()))
-				{
-					// ok, it's package with same name
-					final VirtualFile virtualFile = psiFile.getVirtualFile();
-					final Project project = getProject();
-					final String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(name);
-//					final PsiElement requestor = this.getParent();
-
-					newProcess = new Runnable()
-					{
-						@Override
-						public void run()
-						{
-							VirtualFile newParent = PerlUtil.findInnermostSourceRoot(project, virtualFile);
-
-							List<String> packageDirs = Arrays.asList(canonicalPackageName.split(":+"));
-							String newFileName = packageDirs.get(packageDirs.size()-1) + ".pm";
-
-							for( int i = 0; i < packageDirs.size()-1; i++)
-							{
-								String dir = packageDirs.get(i);
-
-								VirtualFile subDir = newParent.findChild(dir);
-								try
-								{
-									newParent = (subDir != null) ? subDir : newParent.createChildDirectory(null, dir);
-								}
-								catch (IOException e)
-								{
-									throw new IncorrectOperationException("Could not create subdirectory: " + newParent.getPath() + "/" + dir);
-								}
-
-							}
-
-							RenameRefactoringQueue queue = new RenameRefactoringQueue(project);
-
-							for(PsiReference inboundReference: ReferencesSearch.search(psiFile))
-							{
-								if( inboundReference.getElement() instanceof PerlNamespaceElement)
-									queue.addElement(inboundReference.getElement(), canonicalPackageName);
-							}
-
-							try
-							{
-								if (!newParent.getPath().equals(virtualFile.getParent().getPath()))
-								{
-									// we need to handle references ourselves
-									virtualFile.move(null, newParent);
-								}
-
-								virtualFile.rename(null, newFileName);
-							}
-							catch(IOException e)
-							{
-								throw new IncorrectOperationException("Could not rename or move package file: " + e.getMessage());
-							}
-
-							queue.run();
-						}
-					};
-				}
-			}
-		}
-
 		String currentName = getText();
 
-		if( currentName != null)
-		{
-			boolean currentTail = currentName.endsWith("::");
-			boolean newTail = name.endsWith("::");
+		boolean currentTail = currentName.endsWith("::");
+		boolean newTail = name.endsWith("::");
 
-			if (newTail && !currentTail)
-				name = name.replaceAll(":+$", "");
-			else if (!newTail && currentTail)
-				name = name + "::";
-		}
+		if (newTail && !currentTail)
+			name = name.replaceAll(":+$", "");
+		else if (!newTail && currentTail)
+			name = name + "::";
 
 		PerlNamespaceElementImpl newName = PerlElementFactory.createPackageName(getProject(), name);
 
 		if( newName != null )
-		{
 			replace(newName);
-		}
-
-		if(newProcess != null )
-			newProcess.run();
 
 		return this;
 	}
@@ -263,4 +179,6 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 		}
 		return super.getTextRange();
 	}
+
+
 }
