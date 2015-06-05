@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
@@ -24,6 +24,8 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 29.05.2015.
@@ -31,7 +33,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 {
 	@Override
-	public boolean canProcessElement(PsiElement element)
+	public boolean canProcessElement(@NotNull PsiElement element)
 	{
 		return element instanceof PerlNamespaceElement;
 	}
@@ -61,4 +63,5 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 
 		super.renameElement(element, newName, usages, listener);
 	}
+
 }
