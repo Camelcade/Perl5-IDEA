@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs;
+package com.perl5.lang.perl.psi.stubs.subsdeclarations;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.lexer.PerlAnnotations;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-
-import java.util.List;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubDefinitionStub extends StubElement<PsiPerlSubDefinition>
+public interface PerlSubDeclarationStub extends StubElement<PsiPerlSubDeclaration>
 {
 	/**
 	 * Returns package name for current function
@@ -40,12 +36,6 @@ public interface PerlSubDefinitionStub extends StubElement<PsiPerlSubDefinition>
 	 * @return function name or null
 	 */
 	public String getSubName();
-
-	/**
-	 * Returns list of accepted arguments
-	 * @return list of accepted arguments
-	 */
-	public List<PerlSubArgument> getSubArgumentsList();
 
 	/**
 	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)

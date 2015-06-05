@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs;
+package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
@@ -32,16 +31,16 @@ import java.util.List;
 public class PerlSubDefinitionStubImpl extends StubBase<PsiPerlSubDefinition> implements PerlSubDefinitionStub
 {
 	private final String packageName;
-	private final String functionName;
+	private final String subName;
 	private final List<PerlSubArgument> myArguments;
 	private final boolean isMethod;
 	private final PerlSubAnnotations myAnnotations;
 
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String functionName, List<PerlSubArgument> arguments, boolean isMethod, PerlSubAnnotations annotations)
+	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String subName, List<PerlSubArgument> arguments, boolean isMethod, PerlSubAnnotations annotations)
 	{
 		super(parent, PerlStubElementTypes.SUB_DEFINITION);
 		this.packageName = packageName;
-		this.functionName = functionName;
+		this.subName = subName;
 		myArguments = arguments;
 		this.isMethod = isMethod;
 		myAnnotations = annotations;
@@ -56,7 +55,7 @@ public class PerlSubDefinitionStubImpl extends StubBase<PsiPerlSubDefinition> im
 	@Override
 	public String getSubName()
 	{
-		return functionName;
+		return subName;
 	}
 
 	@Override

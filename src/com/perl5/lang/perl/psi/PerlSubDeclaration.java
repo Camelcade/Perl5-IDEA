@@ -16,14 +16,13 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
-import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
+import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDeclaration extends PsiElement, PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlPackageMember
+public interface PerlSubDeclaration extends StubBasedPsiElement<PerlSubDeclarationStub>, PerlSubBase
 {
+
 }

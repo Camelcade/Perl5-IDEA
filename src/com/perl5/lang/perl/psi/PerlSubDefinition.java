@@ -16,9 +16,10 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
-import com.perl5.lang.perl.psi.properties.*;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
 import java.util.List;
@@ -26,42 +27,14 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlNamedElement
+public interface PerlSubDefinition extends StubBasedPsiElement<PerlSubDefinitionStub>, PerlSubBase, PerlLexicalScope
 {
-	/**
-	 * Returns package name for current function
-	 * @return canonical package name from declaration or context
-	 */
-	public String getPackageName();
-
-	/**
-	 * Returns function name for current function definition
-	 * @return function name or null
-	 */
-	public String getSubName();
 
 	/**
 	 * Returns list of accepted arguments
+	 *
 	 * @return list of accepted arguments
 	 */
 	public List<PerlSubArgument> getSubArgumentsList();
-
-	/**
-	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
-	 * @return result
-	 */
-	public boolean isMethod();
-
-	/**
-	 * Checks PSI tree before a sub definition for annotations and builds annotations object
-	 * @return PerlSubAnnotation object
-	 */
-	public PerlSubAnnotations getSubAnnotations();
-
-	/**
-	 * Returns canonical name PackageName::SubName
-	 * @return name
-	 */
-	public String getCanonicalName();
 
 }

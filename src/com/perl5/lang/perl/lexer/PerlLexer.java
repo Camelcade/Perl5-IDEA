@@ -21,7 +21,7 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.util.PerlFunctionUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.io.IOException;
@@ -916,7 +916,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		if( knownPackages.containsKey(bareword) )
 			return knownPackages.get(bareword);
 
-		return PerlFunctionUtil.getFunctionType(bareword);
+		return PerlSubUtil.getFunctionType(bareword);
 	}
 
 	/**

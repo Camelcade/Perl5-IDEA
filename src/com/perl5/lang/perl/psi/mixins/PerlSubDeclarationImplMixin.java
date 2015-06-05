@@ -17,36 +17,84 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
+import com.perl5.lang.perl.psi.utils.PerlReturnType;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement implements PsiPerlSubDeclaration
+public abstract class PerlSubDeclarationImplMixin extends StubBasedPsiElementBase<PerlSubDeclarationStub> implements PsiPerlSubDeclaration
 {
-	public PerlSubDeclarationImplMixin(@NotNull ASTNode node){
+	public PerlSubDeclarationImplMixin(@NotNull ASTNode node)
+	{
 		super(node);
 	}
 
+	public PerlSubDeclarationImplMixin(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
+
+	@Override
 	public String getPackageName()
 	{
-		String namespace = getExplicitPackageName();
+		PerlSubDeclarationStub stub = getStub();
+		if (stub != null)
+			return stub.getPackageName();
 
-		if( namespace == null )
+		String namespace = getExplicitPackageName();
+		if (namespace == null)
 			namespace = getContextPackageName();
 
 		return namespace;
 	}
 
-	public String getFunctionName()
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
 	{
-		PerlSubNameElement function = getSubNameElement();
-		return function.getName();
+		return getSubNameElement();
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		PerlSubNameElement subNameElement = getSubNameElement();
+		if (subNameElement != null)
+			subNameElement.setName(name);
+		return this;
+	}
+
+	@Override
+	public String getSubName()
+	{
+		PerlSubDeclarationStub stub = getStub();
+		if (stub != null)
+			return stub.getSubName();
+
+		PerlSubNameElement subNameElement = getSubNameElement();
+
+		if (subNameElement != null)
+			return subNameElement.getName();
+
+		return null;
+	}
+
+	@Override
+	public String getName()
+	{
+		return getSubName();
 	}
 
 	@Override
@@ -59,7 +107,7 @@ public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement i
 	public String getExplicitPackageName()
 	{
 		PerlNamespaceElement namespace = getNamespaceElement();
-		return namespace != null ? namespace.getName(): null;
+		return namespace != null ? namespace.getName() : null;
 	}
 
 	@Override
@@ -75,5 +123,50 @@ public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement i
 		return findChildByClass(PerlSubNameElement.class);
 	}
 
+	@Override
+	public boolean isMethod()
+	{
+		return getSubAnnotations().isMethod();
+	}
+
+	@Override
+	public String getCanonicalName()
+	{
+		return getPackageName() + "::" + getSubName();
+	}
+
+	@Override
+	public PerlSubAnnotations getSubAnnotations()
+	{
+		PerlSubDeclarationStub stub = getStub();
+		if( stub != null )
+			return stub.getSubAnnotations();
+
+		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
+
+		for (PsiPerlAnnotation annotation : getAnnotationList())
+		{
+			if (annotation instanceof PsiPerlAnnotationAbstract)
+				myAnnotations.setIsAbstract(true);
+			else if (annotation instanceof PsiPerlAnnotationDeprectaed)
+				myAnnotations.setIsDeprecated(true);
+			else if (annotation instanceof PsiPerlAnnotationMethod)
+				myAnnotations.setIsMethod(true);
+			else if (annotation instanceof PsiPerlAnnotationOverride)
+				myAnnotations.setIsOverride(true);
+			else if (annotation instanceof PerlNamespaceElementContainer) // returns
+			{
+				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
+				if (ns != null)
+				{
+					myAnnotations.setReturns(ns.getName());
+					myAnnotations.setReturnType(PerlReturnType.REF);
+					// todo implement brackets and braces
+				}
+			}
+		}
+
+		return myAnnotations;
+	}
 
 }

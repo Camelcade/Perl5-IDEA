@@ -17,12 +17,13 @@
 package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
 import com.perl5.lang.perl.psi.stubs.variables.types.PerlArrayStubElementType;
 import com.perl5.lang.perl.psi.stubs.variables.types.PerlHashStubElementType;
 import com.perl5.lang.perl.psi.stubs.variables.types.PerlScalarStubElementType;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
-import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStubElementType;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -30,6 +31,8 @@ import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStubElementType;
 public interface PerlStubElementTypes
 {
 	IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
+	IStubElementType SUB_DECLARATION = new PerlSubDeclarationStubElementType("SUB_DECLARATION");
+
 	IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("PERL_NAMESPACE");
 
 	IStubElementType PERL_GLOB = new PerlGlobStubElementType("*");

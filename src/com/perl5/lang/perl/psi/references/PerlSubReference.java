@@ -22,7 +22,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.util.PerlFunctionUtil;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -44,11 +45,10 @@ public class PerlSubReference extends PerlReferencePoly
 
 		PsiElement parent = element.getParent();
 
-		if( parent instanceof PsiPerlMethod)
-			if( ((PsiPerlMethod) parent).hasExplicitNamespace())
-				myPackageName = ((PsiPerlMethod) parent).getPackageName();
-			else
-				myPackageName = PerlPackageUtil.getContextPackageName(element);
+		if( parent instanceof PerlPackageMember)
+			myPackageName = ((PerlPackageMember) parent).getPackageName();
+		else
+			myPackageName = PerlPackageUtil.getContextPackageName(element);
 
 		// this is currently available in subs
 		if( myPackageName != null )
@@ -73,8 +73,7 @@ public class PerlSubReference extends PerlReferencePoly
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 		PsiElement parent = myElement.getParent();
 
-		// subs definitions todo fix to work with stubs
-		for( PsiPerlSubDefinition subDefinition : PerlFunctionUtil.findSubDefinitions(project, myCanonicalName))
+		for( PsiPerlSubDefinition subDefinition : PerlSubUtil.findSubDefinitions(project, myCanonicalName))
 		{
 			if( !subDefinition.isEquivalentTo(parent))
 				result.add(new PsiElementResolveResult(subDefinition));

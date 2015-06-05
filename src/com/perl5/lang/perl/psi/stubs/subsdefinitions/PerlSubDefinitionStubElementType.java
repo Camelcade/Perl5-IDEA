@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs;
+package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
@@ -62,8 +62,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
 	{
-		String name = stub.getPackageName() + "::" + stub.getSubName();
-		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, name);
+		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, stub.getCanonicalName());
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import java.util.Arrays;
 /**
  * Created by hurricup on 11.05.2015.
  */
-public interface PerlFunctionUtilBuiltIn
+public interface PerlSubUtilBuiltIn
 {
 	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html

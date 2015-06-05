@@ -20,7 +20,7 @@ import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.exceptions.SubDeclaredException;
 import com.perl5.lang.perl.exceptions.SubDefinedException;
 import com.perl5.lang.perl.exceptions.SubDefinitionDiffersDeclarationException;
-import com.perl5.lang.perl.util.PerlFunctionUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +81,7 @@ public class PerlPackage
 	 */
 	public boolean isKnownFunction(String name)
 	{
-		boolean r = isSubDeclared(name) || isSubDefined(name) || PerlFunctionUtil.isBuiltIn(name);
+		boolean r = isSubDeclared(name) || isSubDefined(name) || PerlSubUtil.isBuiltIn(name);
 		if( !r )
 		{
 			for(PerlUseParameters importedPackage: importedPackages.values())

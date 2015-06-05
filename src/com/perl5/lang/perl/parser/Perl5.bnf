@@ -148,16 +148,17 @@ limitations under the License.
     mixin("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
-    elementTypeFactory("sub_definition|perl_glob|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
+    elementTypeFactory("sub_declaration|sub_definition|perl_glob|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
     stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
     implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinition"
 
-    stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub"
+    stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.mixins.PerlSubDefinitionImplMixin"
     implements("sub_definition")="com.perl5.lang.perl.psi.PerlSubDefinition"
 
+    stubClass("sub_declaration")="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub"
     mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationImplMixin"
     implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubDeclaration"
 

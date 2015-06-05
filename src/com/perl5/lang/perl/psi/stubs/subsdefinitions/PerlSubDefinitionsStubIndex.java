@@ -14,26 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs;
+package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlFileElementType extends IStubFileElementType
+public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PsiPerlSubDefinition>
 {
-	private static final int VERSION = 2;
-
-	public PerlFileElementType(String debugName, Language language)
-	{
-		super(debugName, language);
-	}
+	public static final int VERSION = 2;
+	public static final StubIndexKey<String,PsiPerlSubDefinition> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
 
 	@Override
-	public int getStubVersion()
+	public int getVersion()
 	{
-		return VERSION;
+		return super.getVersion() + VERSION;
+	}
+
+	@NotNull
+	@Override
+	public StubIndexKey<String, PsiPerlSubDefinition> getKey()
+	{
+		return KEY;
 	}
 }
