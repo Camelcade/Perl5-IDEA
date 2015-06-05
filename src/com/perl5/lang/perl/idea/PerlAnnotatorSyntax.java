@@ -151,17 +151,11 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			Annotation annotation = holder.createInfoAnnotation(element, null);
 
 			if(  parent instanceof PsiPerlStringDq ) // interpolated
-			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
-			}
 			else if(  parent instanceof PsiPerlStringXq ) // executable
-			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
-			}
 			else
-			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
-			}
 		}
 		else if( element instanceof PerlSubNameElement)
 		{
@@ -180,6 +174,8 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			}
 			else
 			{
+				// todo check for declarations and globs aliasing
+				// todo globs aliasing must be resolved
 				List<PsiElement> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
 
 				if (subDefinitions.size() == 0)

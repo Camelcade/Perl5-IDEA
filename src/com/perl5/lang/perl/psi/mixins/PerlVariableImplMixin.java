@@ -18,12 +18,16 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -34,6 +38,8 @@ import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -234,4 +240,91 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	{
 		return getPackageName() + "::" + getName();
 	}
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new VariablePresentation(this);
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon(int flags)
+	{
+		PerlVariableType actualType = getActualType();
+
+		if( actualType == PerlVariableType.ARRAY)
+			return PerlIcons.ARRAY_GUTTER_ICON;
+		if( actualType == PerlVariableType.HASH)
+			return PerlIcons.HASH_GUTTER_ICON;
+		if( actualType == PerlVariableType.SCALAR)
+			return PerlIcons.SCALAR_GUTTER_ICON;
+
+		return super.getIcon(flags);
+	}
+
+	public static class VariablePresentation implements ItemPresentation
+	{
+		PerlVariable myVariable;
+		PerlVariableType myVariableType;
+
+		public VariablePresentation(@NotNull PerlVariable element)
+		{
+			myVariable = element;
+			myVariableType = element.getActualType();
+		}
+
+		@Nullable
+		@Override
+		public String getPresentableText()
+		{
+			// default getName || getText
+			PerlVariableType actualType = myVariable.getActualType();
+
+			String variableText = null;
+			if( actualType == PerlVariableType.ARRAY)
+				variableText = "array";
+			else if( actualType == PerlVariableType.HASH)
+				variableText = "hash";
+			else if( actualType == PerlVariableType.SCALAR)
+				variableText = "scalar";
+
+			if( variableText != null )
+			{
+				String contextText = null;
+				PsiElement parent = myVariable.getParent();
+
+				if( parent instanceof PsiPerlVariableDeclarationLexical )
+					contextText = "Lexical %s variable declaration";
+				else if( parent instanceof PsiPerlVariableDeclarationGlobal )
+					contextText = "Global %s variable declaration";
+				else
+					contextText = "%s variable in unknown context";
+
+				return String.format(contextText, variableText);
+			}
+
+			return null;
+		}
+
+		@Nullable
+		@Override
+		public String getLocationString()
+		{
+			PsiFile file = myVariable.getContainingFile();
+			if (file != null) {
+				VirtualFile virtualFile = file.getVirtualFile();
+				if (virtualFile != null) return virtualFile.getPath();
+			}
+			return null;
+		}
+
+		@Nullable
+		@Override
+		public Icon getIcon(boolean unused)
+		{
+			return myVariable.getIcon(0);
+		}
+	}
+
 }
