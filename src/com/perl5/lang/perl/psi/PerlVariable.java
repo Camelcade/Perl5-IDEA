@@ -64,4 +64,13 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 	 * @return list of globs
 	 */
 	List<PerlGlobVariable> getRelatedGlobs();
+
+	/**
+	 * Returns line number of element in the document
+	 * @return list of globs
+	 */
+	int getLineNumber();
+
+
+
 }

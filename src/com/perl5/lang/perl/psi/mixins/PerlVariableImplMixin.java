@@ -19,11 +19,14 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.editor.Document;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlVariablePresentation;
@@ -317,5 +320,12 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 			result.add(glob);
 
 		return result;
+	}
+
+	@Override
+	public int getLineNumber()
+	{
+		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
+		return document == null ? 0 : document.getLineNumber(getTextOffset());
 	}
 }
