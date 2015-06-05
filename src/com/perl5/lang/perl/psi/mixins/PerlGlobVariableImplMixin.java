@@ -18,18 +18,21 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.PerlIcons;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -135,6 +138,55 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	public String getCanonicalName()
 	{
 		return getPackageName() + "::" + getName();
+	}
+
+
+	@Nullable
+	@Override
+	public Icon getIcon(int flags)
+	{
+		return PerlIcons.GLOB_GUTTER_ICON;
+	}
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new GlobPresentation(this);
+	}
+
+	public static class GlobPresentation implements ItemPresentation
+	{
+		PerlGlobVariable myGlob;
+		public GlobPresentation(PerlGlobVariable element)
+		{
+			myGlob = element;
+		}
+
+		@Nullable
+		@Override
+		public String getPresentableText()
+		{
+			return "Typeglob assignment";
+		}
+
+		@Nullable
+		@Override
+		public String getLocationString()
+		{
+			PsiFile file = myGlob.getContainingFile();
+			if (file != null) {
+				VirtualFile virtualFile = file.getVirtualFile();
+				if (virtualFile != null) return virtualFile.getPath();
+			}
+			return null;
+		}
+
+		@Nullable
+		@Override
+		public Icon getIcon(boolean unused)
+		{
+			return myGlob.getIcon(0);
+		}
 	}
 
 }
