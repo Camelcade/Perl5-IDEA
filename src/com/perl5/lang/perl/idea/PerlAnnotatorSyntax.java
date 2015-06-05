@@ -161,7 +161,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		{
 			PsiElement parent = element.getParent();
 
-			if( parent instanceof GeneratedParserUtilBase.DummyBlock || parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration)
+			if( parent instanceof GeneratedParserUtilBase.DummyBlock )
 				return;
 
 			PerlNamespaceElement methodNamespaceElement = null;
@@ -174,36 +174,45 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			}
 			else
 			{
-				// todo check for declarations and globs aliasing
 				// todo globs aliasing must be resolved
-				List<PsiElement> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
+				List<PerlSubDefinition> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
+				List<PerlSubDeclaration> subDeclarations = ((PerlSubNameElement) element).getSubDeclarations();
+				List<PerlGlobVariable> relatedGlobs = ((PerlSubNameElement) element).getRelatedGlobs();
 
-				if (subDefinitions.size() == 0)
-					holder.createWarningAnnotation(element, "Unable to find sub definition [if this is a sub from module installed from CPAN, imported sub, inherited sub or chained invocation, it's ok, just NYI]");
-//				else if (subDefinitions.size() > 1)
-//					holder.createWarningAnnotation(element, "Multiple sub definitions found");
+				boolean isDeclaration = parent instanceof PerlSubDeclaration;
+				boolean isDefinition = parent instanceof PerlSubDefinition;
+
+
+				if (subDefinitions.size() == 0 && subDeclarations.size() == 0 && relatedGlobs.size() == 0 && !isDeclaration && !isDefinition )
+					holder.createWarningAnnotation(element, "Unable to find sub definition, declaration or glob aliasing [if this is a sub from module installed from CPAN, imported sub, inherited sub or chained invocation, it's ok, just NYI]");
+				else if (subDefinitions.size() > 1 || (subDefinitions.size() > 0 && isDefinition))
+					holder.createWarningAnnotation(element, "Multiple sub definitions found");
+				else if (subDeclarations.size() > 1 || (subDeclarations.size() > 0 && isDeclaration))
+					holder.createWarningAnnotation(element, "Multiple sub declarations found");
+				else if (relatedGlobs.size() > 1 )
+					holder.createWarningAnnotation(element, "Multiple typeglob aliases found");
+				else if ( (isDeclaration || isDefinition)  && relatedGlobs.size() > 0 )
+					holder.createWarningAnnotation(element, "Typeglob assignment may override current definition or declaration");
 				else
 				{
-					for( PsiElement subDefinition: subDefinitions )
-					{
-						if (subDefinition instanceof PerlSubDefinition)
-						{
-							PerlSubAnnotations subAnnotations = ((PerlSubDefinition) subDefinition).getSubAnnotations();
+					PerlSubAnnotations subAnnotations = subDefinitions.size() > 0
+							? subDefinitions.get(0).getSubAnnotations()
+							: subDeclarations.size() > 0 ? subDeclarations.get(0).getSubAnnotations() : null;
 
-							if (subAnnotations.isDeprecated())
-							{
-								Annotation annotation = holder.createWarningAnnotation(element, "This sub is marked as deprecated");
-								annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
-								break;
-							}
+					if( subAnnotations != null )
+					{
+						if (subAnnotations.isDeprecated())
+						{
+							Annotation annotation = holder.createWarningAnnotation(element, "This sub is marked as deprecated");
+							annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
 						}
-						// todo globs handling here
-						// todo check that annotations are the same on multiple definitions
-						// todo check that parameters are the same on multiple definitions
-						// todo check that attributes are the same on multiple definitions
-						// todo check that prototypes are the same on multiple definitions
-						// todo check that arguments number suits prototype
 					}
+
+					// todo check that annotations are the same on definition and declaration
+					// todo check that attributes are the same on definition and declaration
+					// todo check that prototypes are the same on definition and declaration
+					// todo check that arguments number suits prototype
+					// todo check for override
 				}
 			}
 		}

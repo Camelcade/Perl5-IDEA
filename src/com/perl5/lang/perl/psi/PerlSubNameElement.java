@@ -28,7 +28,32 @@ public interface PerlSubNameElement extends PerlNamedElement
 {
 	/**
 	 * Attempts to find sub definition
-	 * @return sub definition element
+	 * @return sub definition elements list
 	 */
-	public List<PsiElement> getSubDefinitions();
+	public List<PerlSubDefinition> getSubDefinitions();
+	/**
+	 * Attempts to find sub declarations
+	 * @return sub declarations elements list
+	 */
+	public List<PerlSubDeclaration> getSubDeclarations();
+
+	/**
+	 * Searching for related globs
+	 * @return related globs
+	 */
+	public List<PerlGlobVariable> getRelatedGlobs();
+
+	/**
+	 * Trying to get the package name from explicit specification or by traversing
+	 * @return package name for current element
+	 */
+	public String getPackageName();
+
+	/**
+	 * Returns fullname package::element
+	 * @return name
+	 */
+	public String getCanonicalName();
+
+
 }

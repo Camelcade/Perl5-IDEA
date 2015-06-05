@@ -34,53 +34,26 @@ import java.util.List;
 
 public class PerlSubReference extends PerlReferencePoly
 {
-	String myFunctionName;
-	String myPackageName = null;
-	String myCanonicalName;
-
+	PerlSubNameElement mySubNameElement;
 	public PerlSubReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 		assert element instanceof PerlSubNameElement;
-		myFunctionName = ((PerlSubNameElement) element).getName();
-
-		PsiElement parent = element.getParent();
-
-		if( parent instanceof PerlPackageMember)
-			myPackageName = ((PerlPackageMember) parent).getPackageName();
-		else
-			myPackageName = PerlPackageUtil.getContextPackageName(element);
-
-		// this is currently available in subs
-		if( myPackageName != null )
-			myCanonicalName = myPackageName + "::" + myFunctionName;
+		mySubNameElement = (PerlSubNameElement)element;
 	}
 
 	@NotNull
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		if( myPackageName == null)
-			return new ResolveResult[0];
+		List<PsiElement> relatedItems = new ArrayList<>();
+		relatedItems.addAll(mySubNameElement.getSubDeclarations());
+		relatedItems.addAll(mySubNameElement.getSubDefinitions());
+		relatedItems.addAll(mySubNameElement.getRelatedGlobs());
 
-		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
-		PsiElement parent = myElement.getParent();
 
-		for( PsiPerlSubDefinition subDefinition : PerlSubUtil.findSubDefinitions(project, myCanonicalName))
-		{
-			if( !subDefinition.isEquivalentTo(parent))
-				result.add(new PsiElementResolveResult(subDefinition));
-		}
-
-		for( PerlSubDeclaration subDeclaration : PerlSubUtil.findSubDeclarations(project, myCanonicalName))
-		{
-			if( !subDeclaration.isEquivalentTo(parent))
-				result.add(new PsiElementResolveResult(subDeclaration));
-		}
-
-		// globs definitions todo check if it's suitable for code
-		for( PsiPerlGlobVariable globVariable : PerlGlobUtil.findGlobsDefinitions(project, myCanonicalName))
-			result.add(new PsiElementResolveResult(globVariable));
+		for( PsiElement element: relatedItems)
+			result.add(new PsiElementResolveResult(element));
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
