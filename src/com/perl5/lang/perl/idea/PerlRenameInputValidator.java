@@ -31,6 +31,7 @@ public class PerlRenameInputValidator implements RenameInputValidator
 	public ElementPattern<? extends PsiElement> getPattern()
 	{
 
+		// invoked from rename dialog
 		return new ElementPattern<PsiElement>()
 		{
 			@Override

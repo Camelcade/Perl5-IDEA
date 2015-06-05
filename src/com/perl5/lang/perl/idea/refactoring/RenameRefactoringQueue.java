@@ -38,6 +38,8 @@ public class RenameRefactoringQueue
 
 	public void addElement(PsiElement element, String newName)
 	{
+
+
 		if( element instanceof PsiNamedElement )
 		{
 			if (myRefactoring == null)

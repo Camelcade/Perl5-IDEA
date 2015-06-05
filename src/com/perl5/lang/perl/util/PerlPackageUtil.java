@@ -165,15 +165,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 				{
 					PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
 					if( psiFile != null)
-					{
 						for( PsiPerlNamespaceDefinition namespaceDefinition: PsiTreeUtil.findChildrenOfType(psiFile, PsiPerlNamespaceDefinition.class) )
-						{
 							if( oldPackageName.equals(namespaceDefinition.getPackageName()))
-							{
 								queue.addElement(namespaceDefinition,newPackageName);
-							}
-						}
-					}
 				}
 			}
 		}
@@ -191,18 +185,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		VirtualFile directorySourceRoot = PerlUtil.findInnermostSourceRoot(project, directory);
 
 		if (directorySourceRoot != null)
-		{
 			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
-			{
 				if( !file.isDirectory() && "pm".equals(file.getExtension()) && directorySourceRoot.equals(PerlUtil.findInnermostSourceRoot(project, file)) )
 				{
-					// todo find references to file and rename them too!!!
 					String relativePath = VfsUtil.getRelativePath(file, directory);
 					String oldFilePath = oldPath + "/" + relativePath;
 					handleMovedPackageNamespaces(queue, file, oldFilePath);
 				}
-			}
-		}
 	}
 
 	/**
@@ -220,13 +209,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		if (oldDirectorySourceRoot != null)
 		{
 			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
-			{
 				if( !file.isDirectory() && "pm".equals(file.getExtension()) && oldDirectorySourceRoot.equals(PerlUtil.findInnermostSourceRoot(project, file)) )
 				{
 					PsiFile psiFile = psiManager.findFile(file);
 
 					if( psiFile != null )
-					{
 						for( PsiReference inboundReference: ReferencesSearch.search(psiFile) )
 						{
 							String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
@@ -236,9 +223,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 							queue.addElement(inboundReference.getElement(), newPackageName);
 						}
-					}
 				}
-			}
 		}
 	}
 }

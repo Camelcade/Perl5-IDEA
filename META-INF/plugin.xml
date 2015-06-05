@@ -135,8 +135,8 @@
         <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
         <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
+        <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
-        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceDefinitionProcessor"/>
 
         <defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContext"/>
@@ -162,7 +162,7 @@
         <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
         <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
         <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
-        <!--<lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>-->
+        <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
         <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
