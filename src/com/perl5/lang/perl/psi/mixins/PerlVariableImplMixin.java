@@ -34,19 +34,18 @@ import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable //
+public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable
 {
 	public PerlVariableImplMixin(PerlVariableStub stub, IStubElementType nodeType)
 	{
@@ -265,4 +264,58 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		return super.getIcon(flags);
 	}
 
+	@Override
+	public PerlVariable getLexicalDeclaration()
+	{
+		if (getNamespaceElement() != null)
+			return null;
+
+		String myName = getName();
+		PerlVariableType myType = getActualType();
+
+		// trying to find lexical variable
+		if (myName != null && myType != null)
+			for (PerlVariable variable : PerlUtil.findDeclaredLexicalVariables(this, myType))
+				if (!variable.equals(this) && getName().equals(variable.getName()))
+					return variable;
+
+		return null;
+	}
+
+	@Override
+	public List<PerlVariable> getGlobalDeclarations()
+	{
+		List<PerlVariable> result = new ArrayList<>();
+		PerlVariableType myType = getActualType();
+
+		if (myType == PerlVariableType.SCALAR)
+		{
+			for (PerlVariable variable : PerlScalarUtil.findGlobalScalarDefinitions(getProject(), getCanonicalName()))
+				if (!variable.equals(this))
+					result.add(variable);
+		} else if (myType == PerlVariableType.ARRAY)
+		{
+			for (PerlVariable variable : PerlArrayUtil.findGlobalArrayDefinitions(getProject(), getCanonicalName()))
+				if (!variable.equals(this))
+					result.add(variable);
+		} else if (myType == PerlVariableType.HASH)
+		{
+			for (PerlVariable variable : PerlHashUtil.findGlobalHashDefinitions(getProject(), getCanonicalName()))
+				if (!variable.equals(this))
+					result.add(variable);
+		}
+
+		return result;
+	}
+
+	@Override
+	public List<PerlGlobVariable> getRelatedGlobs()
+	{
+		List<PerlGlobVariable> result = new ArrayList<>();
+
+		for (PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(getProject(), getCanonicalName()))
+			result.add(glob);
+
+		return result;
+	}
 }

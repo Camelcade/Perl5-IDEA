@@ -21,6 +21,8 @@ import com.perl5.lang.perl.psi.properties.*;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 /**
  * Created by hurricup on 27.05.2015.
  */
@@ -44,4 +46,22 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 	 * @return variable type
 	 */
 	PerlVariableType getActualType();
+
+	/**
+	 * Looking for lexical declaration of variable
+	 * @return declare variable or null
+	 */
+	PerlVariable getLexicalDeclaration();
+
+	/**
+	 * Looking for global variable declarations sutable for current variable
+	 * @return list of global declarations
+	 */
+	List<PerlVariable> getGlobalDeclarations();
+
+	/**
+	 * Looking for globs, sutable for current variable
+	 * @return list of globs
+	 */
+	List<PerlGlobVariable> getRelatedGlobs();
 }

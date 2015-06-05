@@ -25,6 +25,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.Collection;
@@ -39,9 +42,10 @@ public class PerlUtil
 	/**
 	 * Traverses PSI tree up from current element and finds all lexical variables definition (state, my)
 	 * @param currentElement current Psi element to traverse from
+	 * @param variableType optional variable type filter
 	 * @return ArrayList of variables in declarations
 	 */
-	public static Collection<PerlVariable> findDeclaredLexicalVariables(PsiElement currentElement)
+	public static Collection<PerlVariable> findDeclaredLexicalVariables(@NotNull PsiElement currentElement, @Nullable PerlVariableType variableType)
 	{
 		HashMap<String,PerlVariable> declarationsHash = new HashMap<>();
 
@@ -61,21 +65,15 @@ public class PerlUtil
 					|| currentScope != null && PsiTreeUtil.isAncestor(declarationScope, currentScope, false)	// declaration is an ancestor
 						)
 				{
-					for(PsiElement var: declaration.getScalarVariableList())
-					{
-						assert var instanceof PerlVariable;
-						declarationsHash.put(var.getText(),(PerlVariable)var);
-					}
-					for(PsiElement var: declaration.getArrayVariableList())
-					{
-						assert var instanceof PerlVariable;
-						declarationsHash.put(var.getText(),(PerlVariable)var);
-					}
-					for(PsiElement var: declaration.getHashVariableList())
-					{
-						assert var instanceof PerlVariable;
-						declarationsHash.put(var.getText(),(PerlVariable)var);
-					}
+					if( variableType == null || variableType == PerlVariableType.SCALAR)
+						for(PsiElement var: declaration.getScalarVariableList())
+							declarationsHash.put(var.getText(),(PerlVariable)var);
+					if( variableType == null || variableType == PerlVariableType.ARRAY)
+						for(PsiElement var: declaration.getArrayVariableList())
+							declarationsHash.put(var.getText(),(PerlVariable)var);
+					if( variableType == null || variableType == PerlVariableType.HASH)
+						for(PsiElement var: declaration.getHashVariableList())
+							declarationsHash.put(var.getText(),(PerlVariable)var);
 				}
 			}
 		}

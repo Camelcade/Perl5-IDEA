@@ -69,4 +69,5 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
 	}
 
+
 }

@@ -55,7 +55,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				public void run()
 				{
 
-					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
+					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable, null);
 
 					for (PerlVariable variable : declaredVariables)
 					{
@@ -130,7 +130,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				public void run()
 				{
 
-					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
+					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable, null);
 					boolean useScalars = ((PsiPerlArrayVariable) perlVariable).getScalarSigils() != null;
 
 					for (PerlVariable variable : declaredVariables)
@@ -192,7 +192,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				@Override
 				public void run()
 				{
-					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
+					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable, null);
 					boolean useScalars = ((PsiPerlArrayIndexVariable) perlVariable).getScalarSigils() != null;
 
 					for (PerlVariable variable : declaredVariables)
@@ -232,7 +232,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				public void run()
 				{
 
-					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable);
+					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable, null);
 					boolean useScalars = ((PsiPerlHashVariable) perlVariable).getScalarSigils() != null;
 
 					for (PerlVariable variable : declaredVariables)
