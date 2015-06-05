@@ -54,13 +54,7 @@ public class PerlFileListener implements VirtualFileListener
 			{
 				// package path change
 				PerlPackageUtil.handlePackagePathChange(directoryRenameQueue, virtualFile, oldPath);
-//				directoryRenameQueue.run();
-			} else if (!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()) && !(event.getSource() instanceof PerlNamespaceElement))
-			{
-				// package file renamed
-				RenameRefactoringQueue fileQueue = new RenameRefactoringQueue(myProject);
-				PerlPackageUtil.handleMovedPackageNamespaces(fileQueue, virtualFile, oldPath);
-//				fileQueue.run();
+				directoryRenameQueue.run();
 			}
 		}
 	}
