@@ -35,6 +35,7 @@ import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -90,6 +91,10 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			}
 			else
 			{
+				// fixme temporary solution, till we can't access CPAN files
+				if(namespaceElement.isBuiltin())
+					return;
+
 				List<PerlVariable> globalDeclarations = element.getGlobalDeclarations();
 				List<PerlGlobVariable> relatedGlobs = element.getRelatedGlobs();
 
@@ -97,6 +102,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					holder.createWarningAnnotation(element, "Unable to find global variable declaration or typeglob aliasing for variable. It's not a error, but you should declare it using our() or typeglob alias to make refactoring work properly.");
 				else if( globalDeclarations.size() > 0 && relatedGlobs.size() > 0 )
 					holder.createWarningAnnotation(element, "Both global declaration and typeglob aliasing found for variable. It's not a error, but we are not recommend such practice to avoid mistakes.");
+				// fixme not sure it's good idea, at least, should be optional
 				else if( relatedGlobs.size() > 1  )
 					holder.createWarningAnnotation(element, "Multiple typeglob aliasing found. It's not a error, but we are not recommend such practice to avoid mistakes.");
 			}
