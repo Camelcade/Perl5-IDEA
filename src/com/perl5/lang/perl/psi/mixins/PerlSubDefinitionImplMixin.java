@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase<PerlSubDefinitionStub> implements PsiPerlSubDefinition
+public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSubDefinitionStub> implements PsiPerlSubDefinition
 {
 	public PerlSubDefinitionImplMixin(@NotNull ASTNode node)
 	{
@@ -52,94 +52,11 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	}
 
 	@Override
-	public String getPackageName()
-	{
-		PerlSubDefinitionStub stub = getStub();
-		if (stub != null)
-			return stub.getPackageName();
-
-		String namespace = getExplicitPackageName();
-
-		if (namespace == null)
-			namespace = getContextPackageName();
-
-		return namespace;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getSubNameElement();
-	}
-
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		PerlSubNameElement subNameElement = getSubNameElement();
-		if (subNameElement != null)
-			subNameElement.setName(name);
-		return this;
-	}
-
-	@Override
-	public String getName()
-	{
-		return getSubName();
-	}
-
-	@Override
-	public String getCanonicalName()
-	{
-		return getPackageName() + "::" + getSubName();
-	}
-
-	@Override
-	public String getSubName()
-	{
-		PerlSubDefinitionStub stub = getStub();
-		if (stub != null)
-			return stub.getSubName();
-
-		PerlSubNameElement subNameElement = getSubNameElement();
-		if (subNameElement != null)
-			return subNameElement.getName();
-
-		return null;
-	}
-
-	@Override
-	public String getContextPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
-
-	@Override
-	public String getExplicitPackageName()
-	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getName() : null;
-	}
-
-	@Override
 	public PerlLexicalScope getLexicalScope()
 	{
 		PerlLexicalScope scope = PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
 		assert scope != null;
 		return scope;
-	}
-
-
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
-
-	@Override
-	public PerlSubNameElement getSubNameElement()
-	{
-		return findChildByClass(PerlSubNameElement.class);
 	}
 
 
@@ -231,37 +148,4 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		return arguments;
 	}
 
-	@Override
-	public PerlSubAnnotations getSubAnnotations()
-	{
-		PerlSubDefinitionStub stub = getStub();
-		if (stub != null)
-			return stub.getSubAnnotations();
-
-		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
-
-		for (PsiPerlAnnotation annotation : getAnnotationList())
-		{
-			if (annotation instanceof PsiPerlAnnotationAbstract)
-				myAnnotations.setIsAbstract(true);
-			else if (annotation instanceof PsiPerlAnnotationDeprectaed)
-				myAnnotations.setIsDeprecated(true);
-			else if (annotation instanceof PsiPerlAnnotationMethod)
-				myAnnotations.setIsMethod(true);
-			else if (annotation instanceof PsiPerlAnnotationOverride)
-				myAnnotations.setIsOverride(true);
-			else if (annotation instanceof PerlNamespaceElementContainer) // returns
-			{
-				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
-				if (ns != null)
-				{
-					myAnnotations.setReturns(ns.getName());
-					myAnnotations.setReturnType(PerlReturnType.REF);
-					// todo implement brackets and braces
-				}
-			}
-		}
-
-		return myAnnotations;
-	}
 }

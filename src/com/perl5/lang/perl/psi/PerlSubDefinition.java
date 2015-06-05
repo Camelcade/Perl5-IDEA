@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDefinition extends StubBasedPsiElement<PerlSubDefinitionStub>, PerlSubBase, PerlLexicalScope
+public interface PerlSubDefinition extends PerlSubBase<PerlSubDefinitionStub>, PerlLexicalScope
 {
 
 	/**

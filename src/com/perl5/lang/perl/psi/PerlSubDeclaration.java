@@ -22,7 +22,7 @@ import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDeclaration extends StubBasedPsiElement<PerlSubDeclarationStub>, PerlSubBase
+public interface PerlSubDeclaration extends PerlSubBase<PerlSubDeclarationStub>
 {
 
 }
