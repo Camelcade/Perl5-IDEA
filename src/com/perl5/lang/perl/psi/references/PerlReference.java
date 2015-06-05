@@ -39,4 +39,12 @@ public abstract class PerlReference extends PsiReferenceBase<PsiElement>
 		assert element instanceof PerlNamedElement;
 		return ((PerlNamedElement) element).setName(newElementName);
 	}
+
+	@NotNull
+	@Override
+	public Object[] getVariants()
+	{
+		return new Object[0];
+	}
+
 }

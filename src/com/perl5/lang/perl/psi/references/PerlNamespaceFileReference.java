@@ -86,14 +86,6 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		return result.toArray(new ResolveResult[result.size()]);
 	}
 
-	@Nullable
-	@Override
-	public PsiElement resolve()
-	{
-		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
-	}
-
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{

@@ -57,13 +57,6 @@ public class PerlSubReference extends PerlReferencePoly
 
 	@NotNull
 	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
-	}
-
-	@NotNull
-	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		if( myPackageName == null)
@@ -85,20 +78,13 @@ public class PerlSubReference extends PerlReferencePoly
 				result.add(new PsiElementResolveResult(subDeclaration));
 		}
 
-		// globs definitions todo check if it's code
-		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, myCanonicalName))
-			result.add(new PsiElementResolveResult(glob));
+		// globs definitions todo check if it's suitable for code
+		for( PsiPerlGlobVariable globVariable : PerlGlobUtil.findGlobsDefinitions(project, myCanonicalName))
+			result.add(new PsiElementResolveResult(globVariable));
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
 
-	@Nullable
-	@Override
-	public PsiElement resolve()
-	{
-		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
-	}
 
 	@Override
 	public boolean isReferenceTo(PsiElement element)
@@ -109,5 +95,20 @@ public class PerlSubReference extends PerlReferencePoly
 		return super.isReferenceTo(element);
 	}
 
+
+	@Nullable
+	@Override
+	public PsiElement resolve()
+	{
+		ResolveResult[] resolveResults = multiResolve(false);
+		if( resolveResults.length == 0)
+			return null;
+
+		for( ResolveResult resolveResult: resolveResults)
+			if( resolveResult.getElement() instanceof PerlGlobVariable)
+				return resolveResult.getElement();
+
+		return resolveResults[0].getElement();
+	}
 
 }

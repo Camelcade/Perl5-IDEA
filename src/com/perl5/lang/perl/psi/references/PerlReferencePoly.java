@@ -20,6 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.util.xml.Resolve;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -45,4 +46,13 @@ public abstract class PerlReferencePoly extends PerlReference implements PsiPoly
 
 		return false;
 	}
+
+	@Nullable
+	@Override
+	public PsiElement resolve()
+	{
+		ResolveResult[] resolveResults = multiResolve(false);
+		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
+	}
+
 }

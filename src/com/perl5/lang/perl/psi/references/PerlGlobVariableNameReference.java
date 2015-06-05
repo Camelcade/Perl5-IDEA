@@ -18,10 +18,13 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.ResolveResult;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,54 +32,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 05.06.2015.
  */
-public class PerlNamespaceReference extends PerlReferencePoly
+public class PerlGlobVariableNameReference extends PerlReferencePoly
 {
-	private final String canonicalPackageName;
+	PerlGlobVariable myVariable;
 
-	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlGlobVariableNameReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		assert element instanceof PerlNamedElement;
-		canonicalPackageName = ((PerlNamedElement) element).getName();
-		if( element.getText().endsWith("::"))
-			setRangeInElement(new TextRange(0, element.getTextLength()-2));
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
+		PsiElement parent = element.getParent();
+		assert parent instanceof PerlGlobVariable;
+		myVariable = (PerlGlobVariable)parent;
 	}
 
 	@NotNull
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<>();
 
-		PsiElement parent = myElement.getParent();
+		String canonicalName = myVariable.getCanonicalName();
+		Project project = myVariable.getProject();
 
-		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
-		{
-			if( !parent.isEquivalentTo(namespaceDefinition) )
-				result.add(new PsiElementResolveResult(namespaceDefinition));
-		}
+		// resolve to other globs
+		for(PerlGlobVariable glob: PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
+			if( !glob.equals(myVariable))
+				result.add(new PsiElementResolveResult(glob));
+
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
-
 
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
 		PsiElement parent = element.getParent();
-		if( parent instanceof PerlNamespaceDefinition)
-			return super.isReferenceTo(element) || super.isReferenceTo(parent);;
+		if( parent instanceof PerlVariable || parent instanceof PerlGlobVariable || parent instanceof PerlSubBase)
+			return super.isReferenceTo(parent) || super.isReferenceTo(element);
+
 		return super.isReferenceTo(element);
 	}
+
 
 }

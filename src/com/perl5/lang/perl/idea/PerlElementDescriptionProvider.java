@@ -21,11 +21,10 @@ import com.intellij.psi.*;
 import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
 import com.intellij.usageView.UsageViewTypeLocation;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,6 +52,18 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 				return "perl file";
 			else if (element instanceof PsiPackage)
 				return "directory";
+			else if (element instanceof PerlGlobVariable)
+				return "Typeglob";
+			else if (element instanceof PerlVariable)
+			{
+				PerlVariableType actualType = ((PerlVariable) element).getActualType();
+				if( actualType == PerlVariableType.ARRAY)
+					return "Array variable";
+				else if( actualType == PerlVariableType.HASH)
+					return "Hash variable";
+				else if( actualType == PerlVariableType.SCALAR)
+					return "Scalar variable";
+			}
 			return null;
 		}
 		// file renaming

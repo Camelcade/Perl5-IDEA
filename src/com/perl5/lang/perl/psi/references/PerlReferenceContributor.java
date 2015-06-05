@@ -65,13 +65,22 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
 						assert element instanceof PerlVariableNameElement;
-						PsiElement container = element.getParent();
+						assert !(element.getParent() instanceof PerlGlobVariable);
 
-						if (container instanceof PsiPerlGlobVariable)
-							return new PsiReference[0];
-						else
-							return new PsiReference[]{new PerlVariableNameReference(element, new TextRange(0, element.getTextLength()))};
-
+						return new PsiReference[]{new PerlVariableNameReference(element, new TextRange(0, element.getTextLength()))};
+					}
+				}
+		);
+		registrar.registerReferenceProvider(
+				VARIABLE_NAME_PATTERN.inside(GLOB_PATTERN),
+				new PsiReferenceProvider()
+				{
+					@NotNull
+					@Override
+					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+					{
+						assert element instanceof PerlVariableNameElement;
+						return new PsiReference[]{new PerlGlobVariableNameReference(element, new TextRange(0, element.getTextLength()))};
 					}
 				}
 		);

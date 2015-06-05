@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
@@ -66,7 +67,11 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 		if( stub != null)
 			return stub.getName();
 
-		return getVariableNameElement().getName();
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if( variableNameElement != null )
+			return variableNameElement.getName();
+
+		return null;
 	}
 
 	@Override

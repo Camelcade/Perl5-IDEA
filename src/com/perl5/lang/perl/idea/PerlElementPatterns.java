@@ -37,6 +37,7 @@ public interface PerlElementPatterns
 	public static final PsiElementPattern.Capture<PerlSubNameElement> FUNCTION_PATTERN = PlatformPatterns.psiElement(PerlSubNameElement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = PlatformPatterns.psiElement(PsiPerlMethod.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = PlatformPatterns.psiElement(PerlVariable.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlGlobVariable> GLOB_PATTERN = PlatformPatterns.psiElement(PerlGlobVariable.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = PlatformPatterns.psiElement(PerlVariableNameElement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlHeredocTerminatorElementImpl> HEREDOC_TERMINATOR_PATTERN = PlatformPatterns.psiElement(PerlHeredocTerminatorElementImpl.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = PlatformPatterns.psiElement(PerlElementTypes.ANNOTATION_UNKNOWN_KEY).withLanguage(PerlLanguage.INSTANCE);
