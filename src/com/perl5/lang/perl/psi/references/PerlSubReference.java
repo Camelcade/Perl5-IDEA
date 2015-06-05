@@ -79,7 +79,11 @@ public class PerlSubReference extends PerlReferencePoly
 				result.add(new PsiElementResolveResult(subDefinition));
 		}
 
-		// todo find declarations
+		for( PerlSubDeclaration subDeclaration : PerlSubUtil.findSubDeclarations(project, myCanonicalName))
+		{
+			if( !subDeclaration.isEquivalentTo(parent))
+				result.add(new PsiElementResolveResult(subDeclaration));
+		}
 
 		// globs definitions todo check if it's code
 		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, myCanonicalName))
@@ -104,4 +108,6 @@ public class PerlSubReference extends PerlReferencePoly
 			return super.isReferenceTo(parent) || super.isReferenceTo(element);
 		return super.isReferenceTo(element);
 	}
+
+
 }

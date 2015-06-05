@@ -16,15 +16,19 @@
 
 package com.perl5.lang.perl.idea;
 
+import com.intellij.codeInsight.highlighting.HighlightUsagesDescriptionLocation;
 import com.intellij.psi.ElementDescriptionLocation;
 import com.intellij.psi.ElementDescriptionProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNamedElement;
 import com.intellij.usageView.UsageViewLongNameLocation;
+import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
-import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
+import com.intellij.usageView.UsageViewTypeLocation;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,18 +38,33 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 	@Override
 	public String getElementDescription( @NotNull PsiElement element, @NotNull ElementDescriptionLocation location)
 	{
-		if (location == UsageViewShortNameLocation.INSTANCE || location == UsageViewLongNameLocation.INSTANCE)
-			if( element instanceof PerlNamedElement )
-				return ((PerlNamedElement) element).getName();
-			else
-				return null;
-		else if(element instanceof PsiPerlHeredocOpener)
-			return "Heredoc marker";
-		else if(element instanceof PerlSubNameElement)
-			return "User function";
-        else if(element instanceof PerlNamespaceElement)
-			return "Namespace";
-		else
-			return null;
+		PsiElement parent = element.getParent();
+
+		if( location == HighlightUsagesDescriptionLocation.INSTANCE 	// ???
+				|| location == UsageViewNodeTextLocation.INSTANCE 		// child element of find usages
+				)
+			return getElementDescription(element, UsageViewShortNameLocation.INSTANCE);
+		else if( location == UsageViewTypeLocation.INSTANCE )
+		{
+			if( element instanceof PerlSubDeclaration || parent instanceof PerlSubDeclaration)
+				return "Sub declaration";
+			else if( element instanceof PerlSubDefinition || parent instanceof PerlSubDefinition)
+				return "Sub definition";
+			else if( element instanceof PerlNamespaceDefinition || parent instanceof PerlNamespaceDefinition)
+				return "Namespace definition";
+			else if( element instanceof PerlFileElementImpl)
+				return "Perl file";
+			else return "Undefined type for class: " + element.getClass();
+		}
+		// file renaming
+		else if( location == UsageViewShortNameLocation.INSTANCE)
+		{
+			if( element instanceof PerlPackageMember)
+				return ((PerlPackageMember) element).getCanonicalName();
+			else if( element instanceof PsiNamedElement)
+				return ((PsiNamedElement) element).getName();
+		}
+
+		return "Unhandled description of "+ element.getClass() + " in " + location.getClass();
 	}
 }

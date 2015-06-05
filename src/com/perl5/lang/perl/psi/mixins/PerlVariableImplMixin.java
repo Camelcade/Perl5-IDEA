@@ -229,5 +229,9 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		return super.getName();
 	}
 
-
+	@Override
+	public String getCanonicalName()
+	{
+		return getPackageName() + "::" + getName();
+	}
 }

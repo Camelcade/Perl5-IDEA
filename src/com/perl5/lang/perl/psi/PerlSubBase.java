@@ -62,13 +62,6 @@ public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiEleme
 	public PerlSubAnnotations getSubAnnotations();
 
 	/**
-	 * Returns canonical name PackageName::SubName
-	 *
-	 * @return name
-	 */
-	public String getCanonicalName();
-
-	/**
 	 * Returns list of sub annotations elements
 	 * @return list
 	 */

@@ -53,5 +53,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 	public String getActionText(DataContext context)
 	{
 		return null;
+
 	}
+
 }
