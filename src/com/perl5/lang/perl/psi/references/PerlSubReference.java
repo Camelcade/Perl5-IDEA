@@ -31,13 +31,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlSubDefinitionReference extends PerlReferencePoly
+public class PerlSubReference extends PerlReferencePoly
 {
 	String myFunctionName;
 	String myPackageName = null;
 	String myCanonicalName;
 
-	public PerlSubDefinitionReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlSubReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 		assert element instanceof PerlSubNameElement;
 		myFunctionName = ((PerlSubNameElement) element).getName();
@@ -71,12 +71,18 @@ public class PerlSubDefinitionReference extends PerlReferencePoly
 
 		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
+		PsiElement parent = myElement.getParent();
 
 		// subs definitions todo fix to work with stubs
 		for( PsiPerlSubDefinition subDefinition : PerlFunctionUtil.findSubDefinitions(project, myCanonicalName))
-			result.add(new PsiElementResolveResult(subDefinition));
+		{
+			if( !subDefinition.isEquivalentTo(parent))
+				result.add(new PsiElementResolveResult(subDefinition));
+		}
 
-		// globs definitions
+		// todo find declarations
+
+		// globs definitions todo check if it's code
 		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, myCanonicalName))
 			result.add(new PsiElementResolveResult(glob));
 
@@ -88,7 +94,7 @@ public class PerlSubDefinitionReference extends PerlReferencePoly
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
+		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
 	}
 
 	@Override

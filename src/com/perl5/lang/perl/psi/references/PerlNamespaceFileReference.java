@@ -75,7 +75,10 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 			{
 				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
 				if( packagePsiFile != null)
+				{
 					result.add(new PsiElementResolveResult(packagePsiFile));
+					break;
+				}
 			}
 
 		}
@@ -88,7 +91,7 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
+		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
 	}
 
 	@Override

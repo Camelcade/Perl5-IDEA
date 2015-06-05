@@ -60,12 +60,10 @@ public class PerlNamespaceReference extends PerlReferencePoly
 
 		PsiElement parent = myElement.getParent();
 
-		if( !(parent instanceof PerlNamespaceDefinition))
+		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
 		{
-			for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
-			{
+			if( !parent.isEquivalentTo(namespaceDefinition) )
 				result.add(new PsiElementResolveResult(namespaceDefinition));
-			}
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);
@@ -76,7 +74,7 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
+		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
 	}
 
 	@Override

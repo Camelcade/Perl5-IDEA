@@ -24,7 +24,7 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.references.PerlSubDefinitionReference;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -83,9 +83,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		for (PsiReference reference : references)
 		{
 			// todo implement declaration handling here
-			if( reference instanceof PerlSubDefinitionReference)
+			if( reference instanceof PerlSubReference)
 			{
-				ResolveResult[] results = ((PerlSubDefinitionReference) reference).multiResolve(false);
+				ResolveResult[] results = ((PerlSubReference) reference).multiResolve(false);
 
 				for (ResolveResult result : results)
 				{
