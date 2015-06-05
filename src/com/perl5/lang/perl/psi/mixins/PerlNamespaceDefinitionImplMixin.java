@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -26,6 +27,8 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
@@ -36,6 +39,7 @@ import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -95,5 +99,18 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return namespaceElement.getName();
 
 		return null;
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon(int flags)
+	{
+		return PerlIcons.PACKAGE_GUTTER_ICON;
+	}
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new PerlItemPresentationSimple(this, "Namespace definition");
 	}
 }

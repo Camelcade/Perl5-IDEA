@@ -19,15 +19,14 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.presentations.PerlVariablePresentation;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -35,7 +34,10 @@ import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.*;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -159,7 +161,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 				)
 			return PerlVariableType.HASH;
 		else if (
-						variableContainer instanceof PsiPerlArrayArraySlice
+				variableContainer instanceof PsiPerlArrayArraySlice
 						|| variableContainer instanceof PsiPerlScalarArrayElement
 						|| (this instanceof PsiPerlArrayIndexVariable && !gotScalarSigils)
 						|| (this instanceof PsiPerlArrayVariable && !gotScalarSigils)
@@ -215,7 +217,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		PerlVariableNameElement variableNameElement = getVariableNameElement();
-		if( variableNameElement != null)
+		if (variableNameElement != null)
 			variableNameElement.setName(name);
 
 		return this;
@@ -225,11 +227,11 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	public String getName()
 	{
 		PerlVariableStub stub = getStub();
-		if( stub != null )
+		if (stub != null)
 			return stub.getVariableName();
 
 		PerlVariableNameElement variableNameElement = getVariableNameElement();
-		if( variableNameElement != null)
+		if (variableNameElement != null)
 			return variableNameElement.getName();
 
 		return super.getName();
@@ -244,7 +246,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public ItemPresentation getPresentation()
 	{
-		return new VariablePresentation(this);
+		return new PerlVariablePresentation(this);
 	}
 
 	@Nullable
@@ -253,78 +255,14 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	{
 		PerlVariableType actualType = getActualType();
 
-		if( actualType == PerlVariableType.ARRAY)
+		if (actualType == PerlVariableType.ARRAY)
 			return PerlIcons.ARRAY_GUTTER_ICON;
-		if( actualType == PerlVariableType.HASH)
+		if (actualType == PerlVariableType.HASH)
 			return PerlIcons.HASH_GUTTER_ICON;
-		if( actualType == PerlVariableType.SCALAR)
+		if (actualType == PerlVariableType.SCALAR)
 			return PerlIcons.SCALAR_GUTTER_ICON;
 
 		return super.getIcon(flags);
-	}
-
-	public static class VariablePresentation implements ItemPresentation
-	{
-		PerlVariable myVariable;
-		PerlVariableType myVariableType;
-
-		public VariablePresentation(@NotNull PerlVariable element)
-		{
-			myVariable = element;
-			myVariableType = element.getActualType();
-		}
-
-		@Nullable
-		@Override
-		public String getPresentableText()
-		{
-			// default getName || getText
-			PerlVariableType actualType = myVariable.getActualType();
-
-			String variableText = null;
-			if( actualType == PerlVariableType.ARRAY)
-				variableText = "array";
-			else if( actualType == PerlVariableType.HASH)
-				variableText = "hash";
-			else if( actualType == PerlVariableType.SCALAR)
-				variableText = "scalar";
-
-			if( variableText != null )
-			{
-				String contextText = null;
-				PsiElement parent = myVariable.getParent();
-
-				if( parent instanceof PsiPerlVariableDeclarationLexical )
-					contextText = "Lexical %s variable declaration";
-				else if( parent instanceof PsiPerlVariableDeclarationGlobal )
-					contextText = "Global %s variable declaration";
-				else
-					contextText = "%s variable in unknown context";
-
-				return String.format(contextText, variableText);
-			}
-
-			return null;
-		}
-
-		@Nullable
-		@Override
-		public String getLocationString()
-		{
-			PsiFile file = myVariable.getContainingFile();
-			if (file != null) {
-				VirtualFile virtualFile = file.getVirtualFile();
-				if (virtualFile != null) return virtualFile.getPath();
-			}
-			return null;
-		}
-
-		@Nullable
-		@Override
-		public Icon getIcon(boolean unused)
-		{
-			return myVariable.getIcon(0);
-		}
 	}
 
 }

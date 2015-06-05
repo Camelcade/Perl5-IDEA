@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.stubs.PerlSubBaseStub;
@@ -32,6 +33,8 @@ import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -163,4 +166,10 @@ public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends Stu
 		return myAnnotations;
 	}
 
+	@Nullable
+	@Override
+	public Icon getIcon(int flags)
+	{
+		return PerlIcons.SUBROUTINE_GUTTER_ICON;
+	}
 }

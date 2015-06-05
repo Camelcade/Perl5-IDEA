@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
 import org.jetbrains.annotations.NotNull;
@@ -42,4 +44,11 @@ public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseMixin<PerlS
 	{
 		return getSubAnnotations().isMethod();
 	}
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new PerlItemPresentationSimple(this, "Sub declaration");
+	}
+
 }
