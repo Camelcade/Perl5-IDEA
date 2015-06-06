@@ -136,6 +136,8 @@ limitations under the License.
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
 
+    extends("no_statement|require_statement|condition_statement|for_list_statement|for_iterator_statement")=statement
+
     implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
     mixin("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
@@ -212,8 +214,8 @@ private if_compound_elsif ::= 'elsif' conditional_block  {pin=1}
 private if_compound_else  ::= 'else' unconditional_block {pin=1}
 unconditional_block ::= block
 
-conditional_block ::= condition block { recoverWhile=recover_statement}
-condition ::= parenthesised_expr // annotator should check that condition is not empty
+conditional_block ::= condition_statement block { recoverWhile=recover_statement}
+condition_statement ::= parenthesised_expr // annotator should check that condition is not empty
 
 given_compound ::= 'given' conditional_block  {pin=1}
 
@@ -230,12 +232,13 @@ for_compound ::= 'for' for_arguments  {pin=1}
 foreach_compound ::= 'foreach' for_arguments  {pin=1}
 private for_arguments ::=
     for_iterator block
-    | for_list block_compound
+    | for_list_statement block_compound
 
-for_iterator ::= PERL_LPAREN [expr]  PERL_SEMI [expr] PERL_SEMI [expr] PERL_RPAREN
+for_iterator ::= PERL_LPAREN [for_iterator_statement]  PERL_SEMI [for_iterator_statement] PERL_SEMI [for_iterator_statement] PERL_RPAREN
+for_iterator_statement ::= expr
 
 // @todo only single variable or variable definition may be here
-for_list ::=
+for_list_statement ::=
     [ variable_declaration | variable ] parenthesised_expr
 
 private statements ::= (statement | PERL_SEMI )+

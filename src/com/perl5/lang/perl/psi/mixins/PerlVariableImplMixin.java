@@ -326,6 +326,6 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	public int getLineNumber()
 	{
 		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
-		return document == null ? 0 : document.getLineNumber(getTextOffset());
+		return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
 	}
 }

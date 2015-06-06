@@ -52,12 +52,18 @@ public class PerlUtil
 		assert currentElement instanceof PerlLexicalScopeMember;
 
 		PerlLexicalScope currentScope = ((PerlLexicalScopeMember) currentElement).getLexicalScope();
+		PsiPerlStatement currentStatement = PsiTreeUtil.getParentOfType(currentElement, PsiPerlStatement.class);
+
+		if( currentStatement == null )
+			throw new RuntimeException("Unable to find current statement");
+
+		int currentStatementOffset = currentStatement.getTextOffset();
 
 		Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), PerlVariableDeclaration.class);
 
 		for(PerlVariableDeclaration declaration: declarations)
 		{
-			if( declaration.getTextOffset() < currentElement.getTextOffset())
+			if( declaration.getTextOffset() < currentStatementOffset)
 			{
 				// lexically ok
 				PerlLexicalScope declarationScope = declaration.getLexicalScope();
