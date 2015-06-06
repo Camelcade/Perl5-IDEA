@@ -1,6 +1,9 @@
 package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.openapi.projectRoots.*;
+import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -26,21 +29,52 @@ public class PerlSdkType extends SdkType
 
 	public PerlSdkType()
 	{
-		super("Perl5");
+		super("Perl5 SDK");
 	}
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Perl5";
-	}
 
 	@Override
 	public void saveAdditionalData(@NotNull SdkAdditionalData sdkAdditionalData, @NotNull Element element)
 	{
 
 	}
+
+
+	@Override
+	public void setupSdkPaths(@NotNull Sdk sdk)
+	{
+		SdkModificator sdkModificator = sdk.getSdkModificator();
+
+		List<String> perlLibPaths = readFromProgram("perl -le \"print $_ for @INC\"");
+
+		for( String perlLibPath: perlLibPaths)
+		{
+			if( !".".equals(perlLibPath))
+			{
+				File libDir = new File(perlLibPath);
+
+				if( libDir.exists() && libDir.isDirectory())
+				{
+					VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
+					if (virtualDir != null)
+					{
+						sdkModificator.addRoot(virtualDir, OrderRootType.SOURCES);
+						sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
+					}
+				}
+			}
+		}
+
+		sdkModificator.commitChanges();
+	}
+
+	@Nullable
+	@Override
+	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator)
+	{
+		return null;
+	}
+
 
 	@Override
 	public String getPresentableName()
@@ -69,12 +103,6 @@ public class PerlSdkType extends SdkType
 		return "Perl " + getPerlVersionString();
 	}
 
-	@Nullable
-	@Override
-	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator)
-	{
-		return null;
-	}
 
 	@Override
 	public boolean isValidSdkHome(String sdkHome)
