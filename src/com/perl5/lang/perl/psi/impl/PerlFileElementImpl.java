@@ -291,7 +291,6 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 		{
 			rescan = true;
 		}
-
 	}
 
 }

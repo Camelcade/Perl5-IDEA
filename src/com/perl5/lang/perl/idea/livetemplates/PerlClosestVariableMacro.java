@@ -5,7 +5,10 @@ import com.intellij.codeInsight.template.ExpressionContext;
 import com.intellij.codeInsight.template.Result;
 import com.intellij.codeInsight.template.TextResult;
 import com.intellij.codeInsight.template.macro.MacroBase;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,20 +27,32 @@ public class PerlClosestVariableMacro extends MacroBase {
     protected Result calculateResult(@NotNull Expression[] params, ExpressionContext context, boolean quick) {
 
         //find all vars in scope
-        Collection<PerlVariable> perlVars = PerlUtil.findDeclaredLexicalVariables(context.getPsiElementAtStartOffset());
-        int position = context.getStartOffset();
-        int closestDistance = -1;
+        PsiElement currentElement =  context.getPsiElementAtStartOffset();
         String result = "";
 
-        //find the closest variable and return it's text
-        for (PerlVariable perlVar : perlVars) {
-            int currentDistance = position - perlVar.getTextOffset();
-            if (currentDistance < closestDistance || closestDistance == -1) {
-                result = perlVar.getText();
-                closestDistance = currentDistance;
+        if(currentElement != null )
+        {
+            PsiFile currentFile = currentElement.getContainingFile();
+
+            if( currentFile instanceof PerlFileElementImpl)
+            {
+                Collection<PerlVariable> variablesCollection = ((PerlFileElementImpl) currentFile).getVisibleLexicalVariables(currentElement);
+
+                int position = context.getStartOffset();
+                int closestDistance = -1;
+
+                //find the closest variable and return it's text
+                for (PerlVariable perlVariable : variablesCollection)
+                {
+                    int currentDistance = position - perlVariable.getTextOffset();
+                    if (currentDistance < closestDistance || closestDistance == -1)
+                    {
+                        result = perlVariable.getText();
+                        closestDistance = currentDistance;
+                    }
+                }
             }
         }
-
         return new TextResult(result);
     }
 }

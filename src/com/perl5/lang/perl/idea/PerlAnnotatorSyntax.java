@@ -75,6 +75,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			boolean isGlobalDeclaration = parent instanceof PsiPerlVariableDeclarationGlobal;
 			boolean isLexicalDeclaration = parent instanceof PsiPerlVariableDeclarationLexical;
 			PerlNamespaceElement namespaceElement = element.getNamespaceElement();
+			PerlVariableNameElement variableNameElement = element.getVariableNameElement();
 			boolean hasExplicitNamespace =  namespaceElement != null;
 
 			// todo we should annotate only variable name
@@ -83,11 +84,11 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			{
 				// todo shadowing detection doesn't work
 				if (isLexicalDeclaration && lexicalDeclaration != null)
-					holder.createWarningAnnotation(element, "Current lexical variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");
+					holder.createWarningAnnotation(variableNameElement, "Current lexical variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");
 				else if (isGlobalDeclaration && lexicalDeclaration != null)
-					holder.createWarningAnnotation(element, "Current global variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");
+					holder.createWarningAnnotation(variableNameElement, "Current global variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");
 				else if (lexicalDeclaration == null && !isGlobalDeclaration && !isLexicalDeclaration)
-					holder.createWarningAnnotation(element, "Unable to find variable declaration in the current file. Forgot to use our for package variable in the current file?");
+					holder.createWarningAnnotation(variableNameElement, "Unable to find variable declaration in the current file. Forgot to use our for package variable in the current file?");
 			}
 			else
 			{
@@ -99,9 +100,9 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 				List<PerlGlobVariable> relatedGlobs = element.getRelatedGlobs();
 
 				if( globalDeclarations.size() == 0 && relatedGlobs.size() == 0 )
-					holder.createWarningAnnotation(element.getVariableNameElement(), "Unable to find global variable declaration or typeglob aliasing for variable. It's not a error, but you should declare it using our() or typeglob alias to make refactoring work properly.");
+					holder.createWarningAnnotation(variableNameElement, "Unable to find global variable declaration or typeglob aliasing for variable. It's not a error, but you should declare it using our() or typeglob alias to make refactoring work properly.");
 				else if( globalDeclarations.size() > 0 && relatedGlobs.size() > 0 )
-					holder.createWarningAnnotation(element.getVariableNameElement(), "Both global declaration and typeglob aliasing found for variable. It's not a error, but we are not recommend such practice to avoid mistakes.");
+					holder.createWarningAnnotation(variableNameElement, "Both global declaration and typeglob aliasing found for variable. It's not a error, but we are not recommend such practice to avoid mistakes.");
 				// fixme not sure it's good idea, at least, should be optional
 //				else if( relatedGlobs.size() > 1  )
 //					holder.createWarningAnnotation(element, "Multiple typeglob aliasing found. It's not a error, but we are not recommend such practice to avoid mistakes.");

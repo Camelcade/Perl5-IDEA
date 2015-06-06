@@ -15,16 +15,11 @@
 */
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.lexer.FlexLexer;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
-import com.perl5.lang.perl.util.PerlFunctionUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+
 
 %%
 
@@ -368,7 +363,7 @@ TRANS_MODIFIERS = [cdsr]
         if( trenarCounter > 0 )
         {
             endCustomBlock();
-            return PerlFunctionUtil.getFunctionType(yytext().toString());
+            return PerlSubUtil.getFunctionType(yytext().toString());
         }
         else
             return PERL_LABEL;
