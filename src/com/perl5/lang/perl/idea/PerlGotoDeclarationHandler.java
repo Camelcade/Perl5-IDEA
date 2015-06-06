@@ -19,14 +19,12 @@ package com.perl5.lang.perl.idea;
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationGlobal;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLexical;
+import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,9 +57,11 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 			if (variable instanceof PerlVariable)
 			{
 				PsiElement variableContainer = sourceElement.getParent().getParent();
-				if (variableContainer instanceof PsiPerlVariableDeclarationLexical || variableContainer instanceof PsiPerlVariableDeclarationGlobal)
+				PsiFile myFile = sourceElement.getContainingFile();
+
+				if (myFile instanceof PerlFileElementImpl && (variableContainer instanceof PsiPerlVariableDeclarationLexical || variableContainer instanceof PsiPerlVariableDeclarationGlobal))
 				{
-					PerlVariable shadowedVariable = PerlUtil.findVariableDeclaration((PerlVariable) variable);
+					PerlVariable shadowedVariable = ((PerlFileElementImpl) myFile).getLexicalDeclaration((PerlVariable)variable);
 					if (shadowedVariable != null)
 						result.add(shadowedVariable);
 				}
