@@ -41,54 +41,6 @@ public class PerlUtil
 {
 
 	/**
-	 * Traverses PSI tree up from current element and finds all lexical variables definition (state, my) visible to the current element
-	 * @param currentElement current Psi element to traverse from
-	 * @param variableType optional variable type filter
-	 * @return ArrayList of variables in declarations
-	 */
-	public static Collection<PerlVariable> findDeclaredLexicalVariables(@NotNull PsiElement currentElement, @Nullable PerlVariableType variableType)
-	{
-		HashMap<String,PerlVariable> declarationsHash = new HashMap<>();
-
-		assert currentElement instanceof PerlLexicalScopeMember;
-
-		PerlLexicalScope currentScope = ((PerlLexicalScopeMember) currentElement).getLexicalScope();
-		PsiPerlStatement currentStatement = PsiTreeUtil.getParentOfType(currentElement, PsiPerlStatement.class);
-
-		if( currentStatement == null )
-			throw new RuntimeException("Unable to find current statement");
-
-		int currentStatementOffset = currentStatement.getTextOffset();
-
-		Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), PerlVariableDeclaration.class);
-
-		for(PerlVariableDeclaration declaration: declarations)
-		{
-			if( declaration.getTextOffset() < currentStatementOffset)
-			{
-				// lexically ok
-				PerlLexicalScope declarationScope = declaration.getLexicalScope();
-				if( declarationScope == null 	// file level
-						|| currentScope != null && PsiTreeUtil.isAncestor(declarationScope, currentScope, false)	// declaration is an ancestor
-						)
-				{
-					if( variableType == null || variableType == PerlVariableType.SCALAR)
-						for(PsiElement var: declaration.getScalarVariableList())
-							declarationsHash.put(var.getText(),(PerlVariable)var);
-					if( variableType == null || variableType == PerlVariableType.ARRAY)
-						for(PsiElement var: declaration.getArrayVariableList())
-							declarationsHash.put(var.getText(),(PerlVariable)var);
-					if( variableType == null || variableType == PerlVariableType.HASH)
-						for(PsiElement var: declaration.getHashVariableList())
-							declarationsHash.put(var.getText(),(PerlVariable)var);
-				}
-			}
-		}
-
-		return declarationsHash.values();
-	}
-
-	/**
 	 * Searches for innermost source root for a file
 	 * @param project project to search in
 	 * @param file	containing file

@@ -35,10 +35,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * Created by hurricup on 26.04.2015.
@@ -155,6 +152,46 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 		}
 
 		return null;
+	}
+
+	/**
+	 * Searches for lexically visible variables declarations relatively to the current element
+	 * @return list of visible variables
+	 */
+	public Collection<PerlVariable> getVisibleLexicalVariables(PsiElement currentElement)
+	{
+		if (lexicalCacheInvalid)
+			rescanLexicalVariables();
+
+		HashMap<String,PerlVariable> declarationsHash = new HashMap<>();
+
+		PerlLexicalScope currentScope = PsiTreeUtil.getParentOfType(currentElement, PerlLexicalScope.class);
+		assert currentScope != null;
+
+		PsiPerlStatement currentStatement = PsiTreeUtil.getParentOfType(currentElement, PsiPerlStatement.class);
+
+		if (currentStatement == null)
+			throw new RuntimeException("Unable to find current element statement");
+
+		int currentStatementOffset = currentStatement.getTextOffset();
+
+		ListIterator<PerlLexicalDeclaration> iterator = declaredVariables.listIterator(declaredVariables.size());
+		while (iterator.hasPrevious())
+		{
+			PerlLexicalDeclaration declaration = iterator.previous();
+			if (declaration.getTextOffset() < currentStatementOffset )
+			{
+				// todo actually, we should use variable as a key or canonical variable name WITHOUT package and possible braces
+				String variableName = declaration.getVariable().getText();
+
+				if( declarationsHash.get(variableName) == null
+					&& PsiTreeUtil.isAncestor(declaration.getScope(), currentScope, false))
+					declarationsHash.put(variableName, declaration.getVariable());
+			}
+		}
+
+		return declarationsHash.values();
+
 	}
 
 	/**

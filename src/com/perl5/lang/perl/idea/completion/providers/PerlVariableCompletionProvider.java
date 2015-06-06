@@ -22,10 +22,12 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
 import com.perl5.lang.perl.util.PerlScalarUtil;
@@ -47,6 +49,8 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 
 		final PsiElement variableNameElement = parameters.getPosition();
 		final PsiElement perlVariable = variableNameElement.getParent();
+		final PsiFile perlFile = variableNameElement.getContainingFile();
+		assert perlFile instanceof PerlFileElementImpl;
 
 		if (perlVariable instanceof PsiPerlScalarVariable)
 			ApplicationManager.getApplication().runReadAction(new Runnable()
@@ -55,7 +59,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				public void run()
 				{
 
-					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable, null);
+					Collection<PerlVariable> declaredVariables = ((PerlFileElementImpl) perlFile).getVisibleLexicalVariables(perlVariable);
 
 					for (PerlVariable variable : declaredVariables)
 					{
@@ -130,7 +134,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				public void run()
 				{
 
-					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable, null);
+					Collection<PerlVariable> declaredVariables = ((PerlFileElementImpl) perlFile).getVisibleLexicalVariables(perlVariable);
 					boolean useScalars = ((PsiPerlArrayVariable) perlVariable).getScalarSigils() != null;
 
 					for (PerlVariable variable : declaredVariables)
@@ -192,7 +196,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				@Override
 				public void run()
 				{
-					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable, null);
+					Collection<PerlVariable> declaredVariables = ((PerlFileElementImpl) perlFile).getVisibleLexicalVariables(perlVariable);
 					boolean useScalars = ((PsiPerlArrayIndexVariable) perlVariable).getScalarSigils() != null;
 
 					for (PerlVariable variable : declaredVariables)
@@ -232,7 +236,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 				public void run()
 				{
 
-					Collection<PerlVariable> declaredVariables = PerlUtil.findDeclaredLexicalVariables(perlVariable, null);
+					Collection<PerlVariable> declaredVariables = ((PerlFileElementImpl) perlFile).getVisibleLexicalVariables(perlVariable);
 					boolean useScalars = ((PsiPerlHashVariable) perlVariable).getScalarSigils() != null;
 
 					for (PerlVariable variable : declaredVariables)
