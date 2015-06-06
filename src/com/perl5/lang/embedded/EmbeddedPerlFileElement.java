@@ -16,19 +16,17 @@
 
 package com.perl5.lang.embedded;
 
-import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlPsiFile extends PsiFileBase
+public class EmbeddedPerlFileElement extends PerlFileElement
 {
-	public EmbeddedPerlPsiFile (@NotNull FileViewProvider viewProvider) {
+	public EmbeddedPerlFileElement(@NotNull FileViewProvider viewProvider) {
 		super(viewProvider, EmbeddedPerlLanguage.INSTANCE);
 	}
 
@@ -41,11 +39,6 @@ public class EmbeddedPerlPsiFile extends PsiFileBase
 	@Override
 	public String toString() {
 		return "Embedded Perl file";
-	}
-
-	@Override
-	public Icon getIcon(int flags) {
-		return super.getIcon(flags);
 	}
 
 }

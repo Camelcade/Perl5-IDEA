@@ -23,13 +23,12 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlVariablePresentation;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
@@ -275,8 +274,8 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 			return null;
 
 		PsiFile myFile = getContainingFile();
-		if( myFile instanceof PerlFileElementImpl)
-			return ((PerlFileElementImpl) myFile).getLexicalDeclaration(this);
+		if( myFile instanceof PerlFileElement)
+			return ((PerlFileElement) myFile).getLexicalDeclaration(this);
 
 		return null;
 	}

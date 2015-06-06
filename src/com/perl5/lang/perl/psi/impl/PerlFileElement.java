@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -40,7 +41,7 @@ import java.util.*;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
+public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 {
 	List<PerlLexicalDeclaration> declaredScalars;
 	List<PerlLexicalDeclaration> declaredArrays;
@@ -50,7 +51,11 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 	boolean lexicalCacheInvalid = true;
 	LexicalDeclarationsScanner currentLexicalDeclarationsScanner = null;
 
-	public PerlFileElementImpl(@NotNull FileViewProvider viewProvider)
+	public PerlFileElement(@NotNull FileViewProvider viewProvider, Language language)
+	{
+		super(viewProvider, language);
+	}
+	public PerlFileElement(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, PerlLanguage.INSTANCE);
 	}
@@ -220,10 +225,10 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 	 */
 	private static class LexicalDeclarationsScanner implements Runnable
 	{
-		PerlFileElementImpl myFile;
+		PerlFileElement myFile;
 		private boolean rescan = false;
 
-		public LexicalDeclarationsScanner(PerlFileElementImpl perlFile)
+		public LexicalDeclarationsScanner(PerlFileElement perlFile)
 		{
 			myFile = perlFile;
 		}
@@ -292,5 +297,4 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 			rescan = true;
 		}
 	}
-
 }

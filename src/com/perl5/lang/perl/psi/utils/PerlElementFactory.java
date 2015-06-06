@@ -21,14 +21,14 @@ import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
 	public static PerlNamespaceElementImpl createPackageName(Project project, String name)
 	{
-		PerlFileElementImpl file = createFile(project, "package " + name + ";");
+		PerlFileElement file = createFile(project, "package " + name + ";");
 		PsiPerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PsiPerlNamespaceDefinition.class);
 		assert def != null;
 		return (PerlNamespaceElementImpl)def.getNamespaceElement();
@@ -36,7 +36,7 @@ public class PerlElementFactory
 
 	public static PerlSubNameElement createUserFunction(Project project, String name)
 	{
-		PerlFileElementImpl file = createFile(project, "sub " + name + ";");
+		PerlFileElement file = createFile(project, "sub " + name + ";");
 		PsiPerlSubDeclaration decl = PsiTreeUtil.findChildOfType(file, PsiPerlSubDeclaration.class);
 		assert decl != null;
 		return decl.getSubNameElement();
@@ -44,7 +44,7 @@ public class PerlElementFactory
 
 	public static PerlVariableNameElement createVariableName(Project project, String name)
 	{
-		PerlFileElementImpl file = createFile(project, "$" + name + ";");
+		PerlFileElement file = createFile(project, "$" + name + ";");
 		PsiPerlScalarVariable scalar = PsiTreeUtil.findChildOfType(file, PsiPerlScalarVariable.class);
 		assert scalar != null;
 		return scalar.getVariableNameElement();
@@ -52,22 +52,22 @@ public class PerlElementFactory
 
 	public static PerlHeredocTerminatorElementImpl createHereDocTerminator(Project project, String name)
 	{
-		PerlFileElementImpl file = createFile(project, "<<'" + name + "';\n"+name+"\n");
+		PerlFileElement file = createFile(project, "<<'" + name + "';\n"+name+"\n");
 		return PsiTreeUtil.findChildOfType(file, PerlHeredocTerminatorElementImpl.class);
 	}
 
 	public static PerlStringContentElementImpl createStringContent(Project project, String name)
 	{
-		PerlFileElementImpl file = createFile(project, "'"+name+"';");
+		PerlFileElement file = createFile(project, "'"+name+"';");
 		PsiPerlStringSq string = PsiTreeUtil.findChildOfType(file, PsiPerlStringSq.class);
 		assert string != null;
 		return (PerlStringContentElementImpl) string.getFirstChild().getNextSibling();
 	}
 
-	public static PerlFileElementImpl createFile(Project project, String text)
+	public static PerlFileElement createFile(Project project, String text)
 	{
 		String fileName = "file.dummy";
-		return (PerlFileElementImpl) PsiFileFactory.getInstance(project).
+		return (PerlFileElement) PsiFileFactory.getInstance(project).
 				createFileFromText(fileName, PerlFileTypePackage.INSTANCE, text);
 	}
 

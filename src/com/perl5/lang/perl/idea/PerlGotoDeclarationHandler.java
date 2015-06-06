@@ -24,12 +24,10 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationGlobal;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLexical;
-import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
-import com.perl5.lang.perl.util.PerlUtil;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -59,9 +57,9 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 				PsiElement variableContainer = sourceElement.getParent().getParent();
 				PsiFile myFile = sourceElement.getContainingFile();
 
-				if (myFile instanceof PerlFileElementImpl && (variableContainer instanceof PsiPerlVariableDeclarationLexical || variableContainer instanceof PsiPerlVariableDeclarationGlobal))
+				if (myFile instanceof PerlFileElement && (variableContainer instanceof PsiPerlVariableDeclarationLexical || variableContainer instanceof PsiPerlVariableDeclarationGlobal))
 				{
-					PerlVariable shadowedVariable = ((PerlFileElementImpl) myFile).getLexicalDeclaration((PerlVariable)variable);
+					PerlVariable shadowedVariable = ((PerlFileElement) myFile).getLexicalDeclaration((PerlVariable)variable);
 					if (shadowedVariable != null)
 						result.add(shadowedVariable);
 				}

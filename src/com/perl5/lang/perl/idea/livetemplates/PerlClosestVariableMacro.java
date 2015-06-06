@@ -8,8 +8,7 @@ import com.intellij.codeInsight.template.macro.MacroBase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
-import com.perl5.lang.perl.util.PerlUtil;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -34,9 +33,9 @@ public class PerlClosestVariableMacro extends MacroBase {
         {
             PsiFile currentFile = currentElement.getContainingFile();
 
-            if( currentFile instanceof PerlFileElementImpl)
+            if( currentFile instanceof PerlFileElement)
             {
-                Collection<PerlVariable> variablesCollection = ((PerlFileElementImpl) currentFile).getVisibleLexicalVariables(currentElement);
+                Collection<PerlVariable> variablesCollection = ((PerlFileElement) currentFile).getVisibleLexicalVariables(currentElement);
 
                 int position = context.getStartOffset();
                 int closestDistance = -1;

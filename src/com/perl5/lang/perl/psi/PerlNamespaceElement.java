@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 
 import java.util.List;
@@ -54,5 +54,5 @@ public interface PerlNamespaceElement extends PerlNamedElement
 	 * Returns list of files suitable for this namespace, works only if namespace is in use or require statement
 	 * @return list of PerlNameSpaceDefitions
 	 */
-	public List<PerlFileElementImpl> getNamespaceFiles();
+	public List<PerlFileElement> getNamespaceFiles();
 }

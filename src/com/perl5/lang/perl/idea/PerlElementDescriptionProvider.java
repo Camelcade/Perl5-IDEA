@@ -22,7 +22,7 @@ import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
 import com.intellij.usageView.UsageViewTypeLocation;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +48,7 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 				return "sub definition";
 			else if (element instanceof PerlNamespaceDefinition || parent instanceof PerlNamespaceDefinition)
 				return "namespace definition";
-			else if (element instanceof PerlFileElementImpl)
+			else if (element instanceof PerlFileElement)
 				return "perl file";
 			else if (element instanceof PsiPackage)
 				return "directory";

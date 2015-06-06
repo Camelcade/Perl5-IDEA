@@ -29,7 +29,6 @@ public class PerlAnnotations implements PerlElementTypes
 
 	static{
 		TOKEN_TYPES.put("deprecated", ANNOTATION_DEPRECATED_KEY);
-		TOKEN_TYPES.put("abstract", ANNOTATION_ABSTRACT_KEY);
 		TOKEN_TYPES.put("override", ANNOTATION_OVERRIDE_KEY);
 		TOKEN_TYPES.put("method", ANNOTATION_METHOD_KEY);
 		TOKEN_TYPES.put("returns", ANNOTATION_RETURNS_KEY);

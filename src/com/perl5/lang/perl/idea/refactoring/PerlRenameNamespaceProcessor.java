@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.refactoring;
 
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -28,7 +27,7 @@ import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
@@ -91,9 +90,9 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 			String currentPackageName = ((PerlNamedElement) element).getName();
 			final String newPackageName = PerlPackageUtil.getCanonicalPackageName(newName);
 
-			if (psiFile instanceof PerlFileElementImpl )
+			if (psiFile instanceof PerlFileElement)
 			{
-				final String currentFilePackageName = ((PerlFileElementImpl) psiFile).getFilePackageName();
+				final String currentFilePackageName = ((PerlFileElement) psiFile).getFilePackageName();
 
 				if (currentFilePackageName != null && currentFilePackageName.equals(currentPackageName) && !newPackageName.equals(currentPackageName))
 				{
