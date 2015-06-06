@@ -41,7 +41,7 @@ public class PerlUtil
 {
 
 	/**
-	 * Traverses PSI tree up from current element and finds all lexical variables definition (state, my)
+	 * Traverses PSI tree up from current element and finds all lexical variables definition (state, my) visible to the current element
 	 * @param currentElement current Psi element to traverse from
 	 * @param variableType optional variable type filter
 	 * @return ArrayList of variables in declarations

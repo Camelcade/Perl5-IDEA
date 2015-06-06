@@ -96,6 +96,9 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 		lexicalCacheInvalid = true;
 	}
 
+	/**
+	 * Creates new lexicalVariables scanner or notifies it to restart scanning
+	 */
 	private synchronized void rescanLexicalVariables()
 	{
 		if (currentLexicalDeclarationsScanner == null)
@@ -107,6 +110,11 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 
 	}
 
+	/**
+	 * Searching for most recent lexically visible variable declaration
+	 * @param currentVariable variable to search declaration for
+	 * @return variable in declaration term or null if there is no such one
+	 */
 	public PerlVariable getLexicalDeclaration(PerlVariable currentVariable)
 	{
 		if (lexicalCacheInvalid)
@@ -149,6 +157,14 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 		return null;
 	}
 
+	/**
+	 * Accepts data from lexical variables scanner and updates it if scanner is actual
+	 * @param updater	LexicalScanner object
+	 * @param declaredScalars	found scalars
+	 * @param declaredArrays	found arrays
+	 * @param declaredHashes	found hashes
+	 * @param declaredVariables	full variables list
+	 */
 	public synchronized void updateVariablesCache(LexicalDeclarationsScanner updater, List<PerlLexicalDeclaration> declaredScalars, List<PerlLexicalDeclaration> declaredArrays, List<PerlLexicalDeclaration> declaredHashes, List<PerlLexicalDeclaration> declaredVariables)
 	{
 		if (updater == currentLexicalDeclarationsScanner)
@@ -175,6 +191,9 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 			myFile = perlFile;
 		}
 
+		/**
+		 * Scans current file for lexical variables declarations. Recursively restarts if rescan been invoked.
+		 */
 		@Override
 		public void run()
 		{
@@ -228,6 +247,9 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 			myFile.updateVariablesCache(this, declaredScalars, declaredArrays, declaredHashes, declaredVariables);
 		}
 
+		/**
+		 * Notifies lexical scanner to recursively restart search
+		 */
 		public void rescan()
 		{
 			rescan = true;
