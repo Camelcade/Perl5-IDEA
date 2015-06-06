@@ -20,10 +20,7 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtil;
@@ -32,6 +29,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlVariablePresentation;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
@@ -276,14 +274,9 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		if (getNamespaceElement() != null)
 			return null;
 
-		String myName = getName();
-		PerlVariableType myType = getActualType();
-
-		// trying to find lexical variable
-		if (myName != null && myType != null)
-			for (PerlVariable variable : PerlUtil.findDeclaredLexicalVariables(this, myType))
-				if (!variable.equals(this) && getName().equals(variable.getName()))
-					return variable;
+		PsiFile myFile = getContainingFile();
+		if( myFile instanceof PerlFileElementImpl)
+			return ((PerlFileElementImpl) myFile).getLexicalDeclaration(this);
 
 		return null;
 	}

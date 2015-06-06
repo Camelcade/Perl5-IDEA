@@ -80,7 +80,7 @@ public class PerlUtil
 				// lexically ok
 				PerlLexicalScope declarationScope = declaration.getLexicalScope();
 				if( declarationScope == null 	// file level
-					|| currentScope != null && PsiTreeUtil.isAncestor(declarationScope, currentScope, false)	// declaration is an ancestor
+						|| currentScope != null && PsiTreeUtil.isAncestor(declarationScope, currentScope, false)	// declaration is an ancestor
 						)
 				{
 					if( variableType == null || variableType == PerlVariableType.SCALAR)
