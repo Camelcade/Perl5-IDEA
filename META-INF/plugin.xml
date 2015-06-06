@@ -32,7 +32,7 @@
         <li>Implemented IDEA wranings for currenlty unresolveble methods and packages.</li>
         <li>Implemented #@annotations for Perl subs. Implemented: #@deprecated, #@method, #@override and #@returns. Only deprecated currently doing anything.</li>
         <li>Implemented basic livetemplates</li>
-        <li>Implemented Perl SDK type</li>
+        <li>Implemented Perl SDK support, Perl modules support</li>
       </ul>
 
       <p>0.23 beta</p>
