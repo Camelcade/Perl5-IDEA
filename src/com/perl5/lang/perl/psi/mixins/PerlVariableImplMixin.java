@@ -180,6 +180,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 
 	}
 
+
 	@Override
 	public boolean isBuiltIn()
 	{
@@ -193,9 +194,11 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 
 		// tood make getter for this
 		String variableName = getVariableNameElement().getName();
+		if( variableName == null )
+			return false;
 
 		if (variableType == PerlVariableType.SCALAR)
-			return PerlScalarUtil.BUILT_IN.contains(variableName);
+			return variableName.matches("^\\d+$") || PerlScalarUtil.BUILT_IN.contains(variableName);
 		if (variableType == PerlVariableType.ARRAY)
 			return PerlArrayUtil.BUILT_IN.contains(variableName);
 
