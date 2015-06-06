@@ -31,6 +31,7 @@
         <li>Implemented IDEA warnings for variables: undeclared, shadowed, muliti-declared</li>
         <li>Implemented IDEA wranings for currenlty unresolveble methods and packages.</li>
         <li>Implemented #@annotations for Perl subs. Implemented: #@deprecated, #@method, #@override and #@returns. Only deprecated currently doing anything.</li>
+        <li>Implemented basic livetemplates</li>
         <li>Implemented Perl SDK type</li>
       </ul>
 
