@@ -120,7 +120,9 @@
     <extensions defaultExtensionNs="com.intellij">
 
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
-        <!--moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/-->
+        <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
+        <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
+        <moduleConfigurationEditorProvider implementation="com.perl5.lang.perl.idea.modules.PerlModuleConfigurationEditorProvider" order="first"/>
 
         <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
 
@@ -144,7 +146,6 @@
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
 
-        <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
         <liveTemplateMacro implementation="com.perl5.lang.perl.idea.livetemplates.PerlClosestVariableMacro"/>
         <defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>

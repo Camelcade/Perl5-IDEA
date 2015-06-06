@@ -2,6 +2,7 @@ package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
@@ -32,6 +33,12 @@ public class PerlSdkType extends SdkType
 		super("Perl5 SDK");
 	}
 
+	@NotNull
+	public static PerlSdkType getInstance() {
+		PerlSdkType instance = SdkType.findInstance(PerlSdkType.class);
+		assert instance != null : "Make sure PerlSdkType is registered in plugin.xml";
+		return instance;
+	}
 
 	@Override
 	public void saveAdditionalData(@NotNull SdkAdditionalData sdkAdditionalData, @NotNull Element element)
@@ -90,7 +97,7 @@ public class PerlSdkType extends SdkType
 		if( perlPath != null )
 			return perlPath;
 
-		if (OSUtil.isLinux() || OSUtil.isLinux())
+		if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD )
 		{
 			return "/usr/";
 		}
@@ -108,34 +115,26 @@ public class PerlSdkType extends SdkType
 	public boolean isValidSdkHome(String sdkHome)
 	{
 		if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\")))
-		{
 			sdkHome += File.separator;
-		}
-		if (OSUtil.isKnown())
+
+		try
 		{
-			try
-			{
-				File f = new File(executablePath(sdkHome));
-				this.perlExecutablePath = f.getCanonicalPath();
-				return f.exists();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			File f = new File(executablePath(sdkHome));
+			this.perlExecutablePath = f.getCanonicalPath();
+			return f.exists();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	private String executablePath(String sdkHome)
 	{
-		if (OSUtil.isLinux() || OSUtil.isMacOS())
-		{
-			return sdkHome + "bin/perl";
-		} else if (OSUtil.isWindows())
-		{
+		if (SystemInfo.isWindows)
 			return sdkHome + "bin/perl.exe";
-		}
-		throw new RuntimeException("Unknown OS");
+		else
+			return sdkHome + "bin/perl";
 	}
 
 	@Override

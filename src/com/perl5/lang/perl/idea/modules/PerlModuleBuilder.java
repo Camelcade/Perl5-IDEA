@@ -20,12 +20,16 @@ import com.intellij.ide.util.projectWizard.JavaModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleBuilderListener;
 import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.util.Pair;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NonNls;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,33 +39,21 @@ import java.util.List;
  */
 public class PerlModuleBuilder extends JavaModuleBuilder
 {
-	private List<Pair<String, String>> mySourcePaths = new ArrayList<>();
+	@Override
+	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException
+	{
+		super.setupRootModel(rootModel);
+	}
 
 	@Override
 	public ModuleType getModuleType()
 	{
-		return PerlModuleType.INSTANCE;
+		return PerlModuleType.getInstance();
 	}
 
-//	@Override
-//	public List<Pair<String, String>> getSourcePaths()
-//	{
-//		return mySourcePaths;
-//	}
-//
-//	@Override
-//	public void setSourcePaths(List<Pair<String, String>> sourcePaths)
-//	{
-//		mySourcePaths = sourcePaths != null ? new ArrayList<>(sourcePaths) : null;
-//	}
-//
-//	@Override
-//	public void addSourcePath(Pair<String, String> sourcePathInfo)
-//	{
-//		if (mySourcePaths == null) {
-//			mySourcePaths = new ArrayList<>();
-//		}
-//		mySourcePaths.add(sourcePathInfo);
-//	}
-
+	@Override
+	public boolean isSuitableSdkType(SdkTypeId sdkType)
+	{
+		return sdkType == PerlSdkType.getInstance();
+	}
 }
