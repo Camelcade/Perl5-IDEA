@@ -39,6 +39,18 @@ import java.util.HashMap;
  */
 public class PerlUtil
 {
+
+	public static PerlVariable findVariableDeclaration(@NotNull PerlVariable currentVariable)
+	{
+		String currentVariableName = currentVariable.getName();
+
+		if( currentVariableName != null )
+			for( PerlVariable variable: findDeclaredLexicalVariables(currentVariable, currentVariable.getActualType()))
+				if( currentVariableName.equals(variable.getName()))
+					return variable;
+		return null;
+	}
+
 	/**
 	 * Traverses PSI tree up from current element and finds all lexical variables definition (state, my)
 	 * @param currentElement current Psi element to traverse from

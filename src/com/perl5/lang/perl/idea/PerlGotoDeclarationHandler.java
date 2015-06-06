@@ -23,9 +23,15 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationGlobal;
+import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLexical;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -44,6 +50,23 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 						result.add(resolveResult.getElement());
 				else
 					result.add(reference.resolve());
+
+		// add shadowed variables declaration
+		if (sourceElement instanceof PerlVariableNameElement)
+		{
+			PsiElement variable = sourceElement.getParent();
+
+			if (variable instanceof PerlVariable)
+			{
+				PsiElement variableContainer = sourceElement.getParent().getParent();
+				if (variableContainer instanceof PsiPerlVariableDeclarationLexical || variableContainer instanceof PsiPerlVariableDeclarationGlobal)
+				{
+					PerlVariable shadowedVariable = PerlUtil.findVariableDeclaration((PerlVariable) variable);
+					if (shadowedVariable != null)
+						result.add(shadowedVariable);
+				}
+			}
+		}
 
 		return result.toArray(new PsiElement[result.size()]);
 	}
