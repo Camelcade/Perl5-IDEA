@@ -234,7 +234,7 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 		@Override
 		public void run()
 		{
-			System.out.println("Starting in thread: " + Thread.currentThread());
+//			System.out.println("Starting in thread: " + Thread.currentThread());
 			List<PerlLexicalDeclaration> declaredScalars = new ArrayList<>();
 			List<PerlLexicalDeclaration> declaredArrays = new ArrayList<>();
 			List<PerlLexicalDeclaration> declaredHashes = new ArrayList<>();
@@ -249,7 +249,7 @@ public class PerlFileElementImpl extends PsiFileBase implements PerlLexicalScope
 				{
 					rescan = false;
 					// todo make sure than run works in the same thread
-					System.out.println("Restarting scanner");
+//					System.out.println("Restarting scanner");
 					run();
 					return;
 				}
