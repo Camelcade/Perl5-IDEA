@@ -43,7 +43,6 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Embedding marker <? / ?>", EmbeddedPerlSyntaxHighlighter.EMBED_MARKER),
 
 			new AttributesDescriptor("Built-in decoration", PerlSyntaxHighlighter.PERL_BUILT_IN),
-			new AttributesDescriptor("Deprecation decoration", PerlSyntaxHighlighter.PERL_DEPRECATED),
 
 			new AttributesDescriptor("Function", PerlSyntaxHighlighter.PERL_FUNCTION),
 			new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),

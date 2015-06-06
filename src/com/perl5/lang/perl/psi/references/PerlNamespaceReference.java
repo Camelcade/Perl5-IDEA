@@ -19,9 +19,8 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,22 +58,25 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		Project project = myElement.getProject();
 		List<ResolveResult> result = new ArrayList<>();
 
+		PsiElement parent = myElement.getParent();
+
 		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
 		{
-			PerlNamespaceElement namespace = namespaceDefinition.getNamespaceElement();
-			if( namespace != null && namespace != myElement )
-				result.add(new PsiElementResolveResult(namespace));
+			if( !parent.isEquivalentTo(namespaceDefinition) )
+				result.add(new PsiElementResolveResult(namespaceDefinition));
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
 
-	@Nullable
+
 	@Override
-	public PsiElement resolve()
+	public boolean isReferenceTo(PsiElement element)
 	{
-		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
+		PsiElement parent = element.getParent();
+		if( parent instanceof PerlNamespaceDefinition)
+			return super.isReferenceTo(element) || super.isReferenceTo(parent);;
+		return super.isReferenceTo(element);
 	}
 
 }

@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.mixins;
+package com.perl5.lang.perl.idea.presentations;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PsiPerlRequireTerm;
+import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlRequireTermImplMixin extends ASTWrapperPsiElement implements PsiPerlRequireTerm
+public class PerlItemPresentationSimple extends PerlItemPresentationBase
 {
-	public PerlRequireTermImplMixin(ASTNode node)
+	String myPresentableText;
+
+	public PerlItemPresentationSimple(PsiElement element, String presentatbleText)
 	{
-		super(node);
+		super(element);
+		myPresentableText = presentatbleText;
 	}
 
+	@Nullable
 	@Override
-	public PerlNamespaceElement getNamespaceElement()
+	public String getPresentableText()
 	{
-		return findChildByClass(PerlNamespaceElement.class);
+		return myPresentableText;
 	}
 }

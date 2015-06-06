@@ -52,19 +52,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					@Override
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
-						assert element instanceof PerlSubNameElement;
-
-						// fixme this should be done using patterns
-						if( element.getParent() instanceof PsiPerlSubDefinitionImpl)
-							return new PsiReference[]{new PerlFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()))};
-						else
-						{
-							PsiReference reference = new PerlFunctionReference(element, new TextRange(0, element.getTextLength()));
-							if( ((PerlFunctionReference)reference).multiResolve(false).length == 0 )
-								reference = new PerlFunctionDeclarationReference(element, new TextRange(0, element.getTextLength()));
-
-							return new PsiReference[]{reference};
-						}
+						return new PsiReference[]{new PerlSubReference(element, new TextRange(0, element.getTextLength()))};
 					}
 				}
 		);
@@ -77,13 +65,22 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
 						assert element instanceof PerlVariableNameElement;
-						PsiElement container = element.getParent();
+						assert !(element.getParent() instanceof PerlGlobVariable);
 
-						if( container instanceof PsiPerlGlobVariable)
-							return new PsiReference[0];
-						else
-							return new PsiReference[]{new PerlVariableNameReference(element, new TextRange(0, element.getTextLength()))};
-
+						return new PsiReference[]{new PerlVariableNameReference(element, new TextRange(0, element.getTextLength()))};
+					}
+				}
+		);
+		registrar.registerReferenceProvider(
+				VARIABLE_NAME_PATTERN.inside(GLOB_PATTERN),
+				new PsiReferenceProvider()
+				{
+					@NotNull
+					@Override
+					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+					{
+						assert element instanceof PerlVariableNameElement;
+						return new PsiReference[]{new PerlGlobVariableNameReference(element, new TextRange(0, element.getTextLength()))};
 					}
 				}
 		);
@@ -100,8 +97,8 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 						ArrayList<PsiReference> result = new ArrayList<>();
 
 						// fixme this should be done using patterns
-						if( nameSpaceContainer instanceof PsiPerlUseStatement
-								|| nameSpaceContainer instanceof PsiPerlRequireTerm
+						if (nameSpaceContainer instanceof PsiPerlUseStatement
+								|| nameSpaceContainer instanceof PsiPerlRequireExpr
 								)
 							result.add(new PerlNamespaceFileReference(element, new TextRange(0, element.getTextLength())));
 						else

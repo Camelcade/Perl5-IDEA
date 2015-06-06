@@ -48,4 +48,10 @@ public abstract class PerlPackageMemberMixin extends PerlNamedElementImpl implem
 
 		return namespace;
 	}
+
+	@Override
+	public String getCanonicalName()
+	{
+		return getPackageName() + "::" + getName();
+	}
 }

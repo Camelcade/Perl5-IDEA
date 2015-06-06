@@ -16,25 +16,19 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlNamespaceDefinitionImpl extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub>  implements PsiPerlNamespaceDefinition
+public abstract class PerlRequireExprImplMixin extends ASTWrapperPsiElement implements PsiPerlRequireExpr
 {
-	public PerlNamespaceDefinitionImpl(@NotNull ASTNode node){
+	public PerlRequireExprImplMixin(ASTNode node)
+	{
 		super(node);
-	}
-
-	public PerlNamespaceDefinitionImpl(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IStubElementType nodeType) {
-		super(stub,nodeType);
 	}
 
 	@Override
@@ -42,5 +36,4 @@ public abstract class PerlNamespaceDefinitionImpl extends StubBasedPsiElementBas
 	{
 		return findChildByClass(PerlNamespaceElement.class);
 	}
-
 }

@@ -21,15 +21,17 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 
 import java.util.*;
 
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuiltIn
+public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 {
 	protected static final HashMap<String,IElementType> knownFunctions = new HashMap<String,IElementType>();
 
@@ -80,6 +82,29 @@ public class PerlFunctionUtil implements PerlElementTypes, PerlFunctionUtilBuilt
 	public static Collection<String> getDefinedSubsNames(Project project)
 	{
 		return StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project);
+	}
+
+
+	/**
+	 * Searching project files for sub declarations by specific package and function name
+	 * @param project	project to search in
+	 * @param canonicalName	canonical function name package::name
+	 * @return	Collection of found definitions
+	 */
+	public static Collection<PsiPerlSubDeclaration> findSubDeclarations(Project project, String canonicalName)
+	{
+		assert canonicalName != null;
+		return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PsiPerlSubDeclaration.class);
+	}
+
+	/**
+	 * Returns list of declared subs names
+	 * @param project project to search in
+	 * @return collection of sub names
+	 */
+	public static Collection<String> getDeclaredSubsNames(Project project)
+	{
+		return StubIndex.getInstance().getAllKeys(PerlSubDeclarationStubIndex.KEY, project);
 	}
 
 }

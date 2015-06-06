@@ -21,6 +21,7 @@ import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.*;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -45,22 +46,15 @@ public class PerlFileListener implements VirtualFileListener
 	public void propertyChanged(@NotNull VirtualFilePropertyEvent event)
 	{
 		VirtualFile virtualFile = event.getFile();
-		if( myProjectFileIndex.isInSource(virtualFile) )
+		if (myProjectFileIndex.isInSource(virtualFile))
 		{
-			String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString()+"$", event.getOldValue().toString());
+			String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString() + "$", event.getOldValue().toString());
 
-			if( "name".equals(event.getPropertyName()) && virtualFile.isDirectory())
+			if ("name".equals(event.getPropertyName()) && virtualFile.isDirectory())
 			{
 				// package path change
-				PerlPackageUtil.handlePackagePathChange(directoryRenameQueue,virtualFile,oldPath);
+				PerlPackageUtil.handlePackagePathChange(directoryRenameQueue, virtualFile, oldPath);
 				directoryRenameQueue.run();
-			}
-			else if(!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()) && !(event.getSource() instanceof PerlNamespaceElement))
-			{
-				// package file renamed
-				RenameRefactoringQueue fileQueue = new RenameRefactoringQueue(myProject);
-				PerlPackageUtil.handleMovedPackageNamespaces(fileQueue,virtualFile,oldPath);
-				fileQueue.run();
 			}
 		}
 	}
@@ -86,23 +80,19 @@ public class PerlFileListener implements VirtualFileListener
 	@Override
 	public void fileMoved(@NotNull VirtualFileMoveEvent event)
 	{
-		if( myProjectFileIndex.isInSource(event.getNewParent()) )
+		if (!(event.getRequestor() instanceof PerlNamespaceDefinition))
 		{
-			VirtualFile movedFile = event.getFile();
-			String oldPath = event.getOldParent().getPath() + '/' + movedFile.getName();
+			if (myProjectFileIndex.isInSource(event.getNewParent()))
+			{
+				VirtualFile movedFile = event.getFile();
+				String oldPath = event.getOldParent().getPath() + '/' + movedFile.getName();
 
-			if( movedFile.isDirectory() )
-			{
-				// one of the dirs been moved to other one
-				PerlPackageUtil.handlePackagePathChange(directoryMoveQueue,movedFile,oldPath);
-				directoryMoveQueue.run();
-			}
-			if( !movedFile.isDirectory() && "pm".equals(movedFile.getExtension()) && !(event.getSource() instanceof PerlNamespaceElement) )
-			{
-				// package file moved
-				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
-				PerlPackageUtil.handleMovedPackageNamespaces(queue, movedFile, oldPath);
-				queue.run();
+				if (movedFile.isDirectory())
+				{
+					// one of the dirs been moved to other one
+					PerlPackageUtil.handlePackagePathChange(directoryMoveQueue, movedFile, oldPath);
+					directoryMoveQueue.run();
+				}
 			}
 		}
 	}
@@ -117,13 +107,13 @@ public class PerlFileListener implements VirtualFileListener
 	public void beforePropertyChange(@NotNull VirtualFilePropertyEvent event)
 	{
 		VirtualFile virtualFile = event.getFile();
-		if( myProjectFileIndex.isInSource(virtualFile) )
+		if (myProjectFileIndex.isInSource(virtualFile))
 		{
 			if ("name".equals(event.getPropertyName()) && virtualFile.isDirectory())
 			{
 				// package path change, preprocessing
 				directoryRenameQueue = new RenameRefactoringQueue(myProject);
-				String newPath = virtualFile.getPath().replaceFirst(event.getOldValue().toString()+"$", event.getNewValue().toString());
+				String newPath = virtualFile.getPath().replaceFirst(event.getOldValue().toString() + "$", event.getNewValue().toString());
 				PerlPackageUtil.handlePackagePathChangeReferences(directoryRenameQueue, virtualFile, newPath);
 			}
 		}
@@ -145,13 +135,13 @@ public class PerlFileListener implements VirtualFileListener
 	public void beforeFileMovement(@NotNull VirtualFileMoveEvent event)
 	{
 		VirtualFile virtualFile = event.getFile();
-		if( myProjectFileIndex.isInSource(virtualFile) )
+		if (myProjectFileIndex.isInSource(virtualFile))
 		{
-			if ( virtualFile.isDirectory())
+			if (virtualFile.isDirectory())
 			{
 				// package path change, preprocessing
 				directoryMoveQueue = new RenameRefactoringQueue(myProject);
-				String newPath = event.getNewParent().getPath()+ '/' + virtualFile.getName();
+				String newPath = event.getNewParent().getPath() + '/' + virtualFile.getName();
 				PerlPackageUtil.handlePackagePathChangeReferences(directoryMoveQueue, virtualFile, newPath);
 			}
 		}

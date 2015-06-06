@@ -26,6 +26,7 @@ import java.io.IOException;
 
 /**
  * Created by hurricup on 25.05.2015.
+ *
  */
 public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPerlGlobVariable>
 {
@@ -44,7 +45,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPe
 	@Override
 	public PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub)
 	{
-		return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getGlobName());
+		return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getName());
 	}
 
 	@NotNull
@@ -57,7 +58,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPe
 	@Override
 	public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink)
 	{
-		String name = stub.getPackageName() + "::" + stub.getGlobName();
+		String name = stub.getPackageName() + "::" + stub.getName();
 		sink.occurrence(PerlGlobsStubIndex.KEY, name);
 	}
 
@@ -65,7 +66,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPe
 	public void serialize(@NotNull PerlGlobStub stub, @NotNull StubOutputStream dataStream) throws IOException
 	{
 		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getGlobName());
+		dataStream.writeName(stub.getName());
 	}
 
 	@NotNull

@@ -382,7 +382,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_MAIN_FUNCTION_CALL>
 {
-    "::" {return PERL_PACKAGE_BUILT_IN;}
+    "::" {return PERL_PACKAGE;}
     {BAREWORD} {endCustomBlock(); return PERL_FUNCTION;}
     . {yypushback(1);endCustomBlock();break;}
 }

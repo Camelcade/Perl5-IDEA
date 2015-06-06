@@ -14,31 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.lexer;
-
-import com.intellij.lexer.LexerPosition;
+package com.perl5.lang.perl.psi.utils;
 
 /**
- * Created by hurricup on 27.04.2015.
- * This is modified clone of LexerPositionImpl
+ * Created by hurricup on 03.06.2015.
  */
-class AdaptiveLexerPositionImpl implements LexerPosition
+public enum PerlReturnType
 {
-	private final int myOffset;
-	private final int myState;
-
-	public AdaptiveLexerPositionImpl(final int offset, final int state) {
-		myOffset = offset;
-		myState = state;
-	}
-
-	@Override
-	public int getOffset() {
-		return myOffset;
-	}
-
-	@Override
-	public int getState() {
-		return myState;
-	}
+	VALUE,		// default
+	REF,		// Package::Name	NYI
+	ARRAY,		// @Package::Name	NYI
+	HASH,		// %Package::Name	NYI
+	ARRAY_REF,	// [Package::Name]
+	HASH_REF,	// {Package::Name}
+	CODE_REF	// &				NYI
 }

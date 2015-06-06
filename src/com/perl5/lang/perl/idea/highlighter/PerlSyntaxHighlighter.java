@@ -22,8 +22,9 @@ import com.intellij.lang.Language;
 import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.lang.xhtml.XHTMLLanguage;
 import com.intellij.lang.xml.XMLLanguage;
-import com.intellij.lexer.*;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
@@ -37,21 +38,17 @@ import java.util.HashMap;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
-public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
+public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
+{
 
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
 	public static final TextAttributesKey PERL_BUILT_IN = createTextAttributesKey("PERL_BUILT_IN", DefaultLanguageHighlighterColors.KEYWORD);
-	public static final TextAttributesKey PERL_DEPRECATED = createTextAttributesKey("PERL_DEPRECATED", DefaultLanguageHighlighterColors.KEYWORD);
 
 	public static final TextAttributesKey PERL_VERSION = createTextAttributesKey("PERL_VERSION", DefaultLanguageHighlighterColors.NUMBER);
 
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
 	public static final TextAttributesKey PERL_COMMENT_BLOCK = createTextAttributesKey("PERL_COMMENT_BLOCK", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
-
-	public static final TextAttributesKey PERL_MULTILINE_MARKER = createTextAttributesKey("PERL_MULTILINE_MARKER", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
-
-	public static final TextAttributesKey PERL_POD = createTextAttributesKey("PERL_POD", DefaultLanguageHighlighterColors.DOC_COMMENT);
 
 	public static final TextAttributesKey PERL_INSTANCE_METHOD_CALL = createTextAttributesKey("PERL_INSTANCE_METHOD_CALL", DefaultLanguageHighlighterColors.FUNCTION_CALL);
 	public static final TextAttributesKey PERL_STATIC_METHOD_CALL = createTextAttributesKey("PERL_STATIC_METHOD_CALL", DefaultLanguageHighlighterColors.FUNCTION_CALL);
@@ -65,6 +62,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 
 	public static final TextAttributesKey PERL_REGEX_QUOTE = createTextAttributesKey("PERL_REGEX_QUOTE", DefaultLanguageHighlighterColors.BRACKETS);
 	public static final TextAttributesKey PERL_REGEX_TOKEN = createTextAttributesKey("PERL_REGEX_TOKEN", DefaultLanguageHighlighterColors.STRING);
+
+	public static final TextAttributesKey PERL_ANNOTATION = createTextAttributesKey("PERL_ANNOTATION", CodeInsightColors.ANNOTATION_NAME_ATTRIBUTES);
 
 	public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
@@ -86,21 +85,22 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 
 	private static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<IElementType, TextAttributesKey[]>();
 
-	static{
+	static
+	{
 		attributesMap.put(PerlElementTypes.PERL_COMMENT, new TextAttributesKey[]{PERL_COMMENT});
 		attributesMap.put(PerlElementTypes.PERL_COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 		attributesMap.put(PerlElementTypes.TEMPLATE_BLOCK_HTML, new TextAttributesKey[]{PERL_COMMENT});
 		attributesMap.put(PerlElementTypes.PERL_HEREDOC_END, new TextAttributesKey[]{PERL_SQ_STRING});
 
-        attributesMap.put(PerlElementTypes.PERL_STRING_CONTENT, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.PERL_STRING_CONTENT, new TextAttributesKey[]{PERL_SQ_STRING});
 
 		attributesMap.put(PerlElementTypes.PERL_REGEX_QUOTE_CLOSE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		attributesMap.put(PerlElementTypes.PERL_REGEX_QUOTE_OPEN, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		attributesMap.put(PerlElementTypes.PERL_REGEX_TOKEN, new TextAttributesKey[]{PERL_REGEX_TOKEN});
 		attributesMap.put(PerlElementTypes.PERL_REGEX_MODIFIER, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 
-        attributesMap.put(PerlElementTypes.PERL_QUOTE, new TextAttributesKey[]{PERL_SQ_STRING});
-        attributesMap.put(PerlElementTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
+		attributesMap.put(PerlElementTypes.PERL_QUOTE, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
 		attributesMap.put(PerlElementTypes.PERL_LBRACE, new TextAttributesKey[]{PERL_BRACE});
 		attributesMap.put(PerlElementTypes.PERL_RBRACE, new TextAttributesKey[]{PERL_BRACE});
 		attributesMap.put(PerlElementTypes.PERL_LBRACK, new TextAttributesKey[]{PERL_BRACK});
@@ -114,23 +114,20 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_UNARY, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_FILETEST, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 
-        attributesMap.put(PerlElementTypes.PERL_RESERVED, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
-        attributesMap.put(PerlElementTypes.PERL_KEYWORD, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_RESERVED, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_KEYWORD, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 		attributesMap.put(PerlElementTypes.PERL_TAG, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 
 		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
-		attributesMap.put(PerlElementTypes.PERL_PACKAGE_BUILT_IN, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN});
-		attributesMap.put(PerlElementTypes.PERL_PACKAGE_PRAGMA, new TextAttributesKey[]{PERL_PACKAGE_PRAGMA, PERL_BUILT_IN});
-		attributesMap.put(PerlElementTypes.PERL_PACKAGE_DEPRECATED, new TextAttributesKey[]{PERL_PACKAGE, PERL_BUILT_IN, PERL_DEPRECATED});
 
 		attributesMap.put(PerlElementTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
-		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_OPERATOR,PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_OPERATOR, PERL_BUILT_IN});
 
 		attributesMap.put(PerlElementTypes.PERL_HANDLE, new TextAttributesKey[]{PERL_HANDLE});
-		attributesMap.put(PerlElementTypes.PERL_HANDLE_BUILT_IN, new TextAttributesKey[]{PERL_HANDLE,PERL_BUILT_IN});
+		attributesMap.put(PerlElementTypes.PERL_HANDLE_BUILT_IN, new TextAttributesKey[]{PERL_HANDLE, PERL_BUILT_IN});
 
-        attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
-        attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
+		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_HASH, new TextAttributesKey[]{PERL_HASH});
 
@@ -138,7 +135,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 
 	private static final HashMap<Language, SyntaxHighlighterBase> highlightersMap = new HashMap<Language, SyntaxHighlighterBase>();
 
-	static{
+	static
+	{
 		highlightersMap.put(PodLanguage.INSTANCE, new PodSyntaxHighlighter());
 		highlightersMap.put(HTMLLanguage.INSTANCE, new HtmlFileHighlighter());
 		highlightersMap.put(XHTMLLanguage.INSTANCE, new HtmlFileHighlighter());
@@ -147,24 +145,26 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase{
 
 	@NotNull
 	@Override
-	public Lexer getHighlightingLexer() {
+	public Lexer getHighlightingLexer()
+	{
 		return new PerlHighlightningLexer();
+
 	}
 
 	@NotNull
 	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
+	{
 
 		TextAttributesKey[] tokenAttributes = null;
 
-		if( !( tokenType instanceof PerlTokenType))
+		if (!(tokenType instanceof PerlTokenType))
 		{
 			SyntaxHighlighterBase subHighlighter = highlightersMap.get(tokenType.getLanguage());
 
-			if( subHighlighter!= null )
+			if (subHighlighter != null)
 				tokenAttributes = subHighlighter.getTokenHighlights(tokenType);
-		}
-		else
+		} else
 		{
 			tokenAttributes = attributesMap.get(tokenType);
 		}

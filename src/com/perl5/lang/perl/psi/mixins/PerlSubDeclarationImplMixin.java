@@ -16,64 +16,39 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlSubDeclarationImplMixin extends ASTWrapperPsiElement implements PsiPerlSubDeclaration
+public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseMixin<PerlSubDeclarationStub> implements PsiPerlSubDeclaration
 {
-	public PerlSubDeclarationImplMixin(@NotNull ASTNode node){
+	public PerlSubDeclarationImplMixin(@NotNull ASTNode node)
+	{
 		super(node);
 	}
 
-	public String getPackageName()
+	public PerlSubDeclarationImplMixin(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType)
 	{
-		String namespace = getExplicitPackageName();
-
-		if( namespace == null )
-			namespace = getContextPackageName();
-
-		return namespace;
-	}
-
-	public String getFunctionName()
-	{
-		PerlSubNameElement function = getSubNameElement();
-		return function.getName();
+		super(stub, nodeType);
 	}
 
 	@Override
-	public String getContextPackageName()
+	public boolean isMethod()
 	{
-		return PerlPackageUtil.getContextPackageName(this);
+		return getSubAnnotations().isMethod();
 	}
 
 	@Override
-	public String getExplicitPackageName()
+	public ItemPresentation getPresentation()
 	{
-		PerlNamespaceElement namespace = getNamespaceElement();
-		return namespace != null ? namespace.getName(): null;
+		return new PerlItemPresentationSimple(this, "Sub declaration");
 	}
-
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
-
-
-	@Override
-	public PerlSubNameElement getSubNameElement()
-	{
-		return findChildByClass(PerlSubNameElement.class);
-	}
-
 
 }

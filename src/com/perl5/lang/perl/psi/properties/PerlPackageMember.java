@@ -44,4 +44,10 @@ public interface PerlPackageMember extends PsiElement
 	 */
 	public String getPackageName();
 
+	/**
+	 * Returns fullname package::element
+	 * @return name
+	 */
+	public String getCanonicalName();
+
 }

@@ -44,62 +44,15 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 {
     public static final String PACKAGE_SEPARATOR = "::";
 
-	public static final HashMap<String,IElementType> BUILT_IN_MAP = new HashMap<String,IElementType>();
-
-	static{
-		for( String packageName: BUILT_IN )
-		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_BUILT_IN);
-		}
-		for( String packageName: BUILT_IN_PRAGMA )
-		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_PRAGMA);
-		}
-		for( String packageName: BUILT_IN_DEPRECATED )
-		{
-			BUILT_IN_MAP.put(packageName, PERL_PACKAGE_DEPRECATED);
-		}
-	}
-
     /**
 	 * Checks if package is built in
-	 * @param variable package name
+	 * @param pacakgeName package name
 	 * @return result
 	 */
-	public static boolean isBuiltIn(String variable)
+	public static boolean isBuiltIn(String pacakgeName)
 	{
-		return BUILT_IN_MAP.containsKey(getCanonicalPackageName(variable));
-	}
-
-	/**
-	 * Check if package is deprecated
-	 * @param packageName package name
-	 * @return result
-	 */
-	public static boolean isDeprecated(String packageName)
-	{
-		return BUILT_IN_DEPRECATED.contains(packageName);
-	}
-
-	/**
-	 * Check if package is pragma
-	 * @param packageName package name
-	 * @return checking result
-	 */
-	public static boolean isPragma(String packageName)
-	{
-		return BUILT_IN_PRAGMA.contains(packageName);
-	}
-
-	/**
-	 * Returns token type depending on package name
-	 * @param variable package name
-	 * @return token type
-	 */
-	public static IElementType getPackageType(String variable)
-	{
-		IElementType packageType = BUILT_IN_MAP.get(getCanonicalPackageName(variable));
-		return packageType == null ? PERL_PACKAGE : packageType;
+		String canonicalPcakageName = getCanonicalPackageName(pacakgeName);
+		return BUILT_IN.contains(canonicalPcakageName) || BUILT_IN_DEPRECATED.contains(canonicalPcakageName) || BUILT_IN_PRAGMA.contains(canonicalPcakageName);
 	}
 
 	/**
@@ -212,16 +165,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 				{
 					PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
 					if( psiFile != null)
-					{
 						for( PsiPerlNamespaceDefinition namespaceDefinition: PsiTreeUtil.findChildrenOfType(psiFile, PsiPerlNamespaceDefinition.class) )
-						{
-							PerlNamespaceElement namespace = namespaceDefinition.getNamespaceElement();
-							if( oldPackageName.equals(namespace.getName()))
-							{
-								queue.addElement(namespace,newPackageName);
-							}
-						}
-					}
+							if( oldPackageName.equals(namespaceDefinition.getPackageName()))
+								queue.addElement(namespaceDefinition,newPackageName);
 				}
 			}
 		}
@@ -239,18 +185,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		VirtualFile directorySourceRoot = PerlUtil.findInnermostSourceRoot(project, directory);
 
 		if (directorySourceRoot != null)
-		{
 			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
-			{
 				if( !file.isDirectory() && "pm".equals(file.getExtension()) && directorySourceRoot.equals(PerlUtil.findInnermostSourceRoot(project, file)) )
 				{
-					// todo find references to file and rename them too!!!
 					String relativePath = VfsUtil.getRelativePath(file, directory);
 					String oldFilePath = oldPath + "/" + relativePath;
 					handleMovedPackageNamespaces(queue, file, oldFilePath);
 				}
-			}
-		}
 	}
 
 	/**
@@ -268,13 +209,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		if (oldDirectorySourceRoot != null)
 		{
 			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
-			{
 				if( !file.isDirectory() && "pm".equals(file.getExtension()) && oldDirectorySourceRoot.equals(PerlUtil.findInnermostSourceRoot(project, file)) )
 				{
 					PsiFile psiFile = psiManager.findFile(file);
 
 					if( psiFile != null )
-					{
 						for( PsiReference inboundReference: ReferencesSearch.search(psiFile) )
 						{
 							String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
@@ -284,9 +223,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 							queue.addElement(inboundReference.getElement(), newPackageName);
 						}
-					}
 				}
-			}
 		}
 	}
 }

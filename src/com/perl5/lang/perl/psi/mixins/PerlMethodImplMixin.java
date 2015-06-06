@@ -39,12 +39,6 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 
 		if( namespaceElement != null )
 			return namespaceElement.getName();
-		else
-		{
-			PsiPerlObjectElement objectElement = getObjectElement();
-			if( objectElement != null )
-				return objectElement.guessNamespace();
-		}
 
 		return null;
 	}
@@ -64,6 +58,6 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	@Override
 	public boolean hasExplicitNamespace()
 	{
-		return getNamespaceElement() != null || getObjectElement() != null;
+		return getNamespaceElement() != null;
 	}
 }

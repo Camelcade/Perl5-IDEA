@@ -24,7 +24,7 @@ import com.intellij.psi.tree.IStubFileElementType;
  */
 public class PerlFileElementType extends IStubFileElementType
 {
-	private static final int VERSION = 1;
+	private static final int VERSION = 2;
 
 	public PerlFileElementType(String debugName, Language language)
 	{

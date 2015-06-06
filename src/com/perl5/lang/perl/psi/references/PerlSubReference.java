@@ -22,7 +22,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.util.PerlFunctionUtil;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -31,66 +32,56 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlFunctionReference extends PerlReferencePoly
+public class PerlSubReference extends PerlReferencePoly
 {
-	String functionName;
-	String packageName = null;
-	String canonicalName;
-
-	public PerlFunctionReference(@NotNull PsiElement element, TextRange textRange) {
+	PerlSubNameElement mySubNameElement;
+	public PerlSubReference(@NotNull PsiElement element, TextRange textRange) {
 		super(element, textRange);
 		assert element instanceof PerlSubNameElement;
-		functionName = ((PerlSubNameElement) element).getName();
-
-		PsiElement parent = element.getParent();
-
-		if( packageName == null && parent instanceof PsiPerlMethod)
-			packageName = ((PsiPerlMethod) parent).getPackageName();
-
-		// this is currently available in subs
-		if( packageName == null )
-			packageName = PerlPackageUtil.getContextPackageName(element);
-
-		canonicalName = packageName + "::" + functionName;
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
+		mySubNameElement = (PerlSubNameElement)element;
 	}
 
 	@NotNull
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		Project project = myElement.getProject();
+		List<PsiElement> relatedItems = new ArrayList<>();
+		relatedItems.addAll(mySubNameElement.getSubDeclarations());
+		relatedItems.addAll(mySubNameElement.getSubDefinitions());
+		relatedItems.addAll(mySubNameElement.getRelatedGlobs());
+
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		// subs definitions
-		for( PsiPerlSubDefinition sub : PerlFunctionUtil.findSubDefinitions(project, canonicalName))
-		{
-			PerlSubNameElement perlSubNameElement = sub.getSubNameElement();
-
-			if( perlSubNameElement != null && perlSubNameElement != myElement)
-				result.add(new PsiElementResolveResult(perlSubNameElement));
-		}
-
-		// globs definitions
-		for( PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
-		{
-			result.add(new PsiElementResolveResult(glob.getVariableNameElement()));
-		}
+		for( PsiElement element: relatedItems)
+			result.add(new PsiElementResolveResult(element));
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
+
+
+	@Override
+	public boolean isReferenceTo(PsiElement element)
+	{
+		PsiElement parent = element.getParent();
+		if( parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration || parent instanceof PerlGlobVariable)
+			return super.isReferenceTo(parent) || super.isReferenceTo(element);
+		return super.isReferenceTo(element);
+	}
+
 
 	@Nullable
 	@Override
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
+		if( resolveResults.length == 0)
+			return null;
+
+		for( ResolveResult resolveResult: resolveResults)
+			if( resolveResult.getElement() instanceof PerlGlobVariable)
+				return resolveResult.getElement();
+
+		return resolveResults[0].getElement();
 	}
+
 }

@@ -26,7 +26,7 @@ import com.intellij.refactoring.RenameRefactoring;
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class RenameRefactoringQueue
+public class RenameRefactoringQueue	implements Runnable
 {
 	private Project myProject;
 	private RenameRefactoring myRefactoring;
@@ -38,6 +38,8 @@ public class RenameRefactoringQueue
 
 	public void addElement(PsiElement element, String newName)
 	{
+
+
 		if( element instanceof PsiNamedElement )
 		{
 			if (myRefactoring == null)

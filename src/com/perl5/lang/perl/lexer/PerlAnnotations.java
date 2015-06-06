@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.lexer;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.IElementType;
+
+import java.util.HashMap;
 
 /**
- * Created by hurricup on 14.05.2015.
+ * Created by hurricup on 03.06.2015.
  */
-public class PerlFunctionAttributeElementImpl extends ASTWrapperPsiElement
+public class PerlAnnotations implements PerlElementTypes
 {
-		public PerlFunctionAttributeElementImpl(ASTNode node) {
-			super(node);
-		}
+	public static final HashMap<String,IElementType> TOKEN_TYPES = new HashMap<>();
 
-		// @todo what for?
-//	public void accept(@NotNull PsiElementVisitor visitor) {
-//		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitBlock(this);
-//		else super.accept(visitor);
-//	}
-
+	static{
+		TOKEN_TYPES.put("deprecated", ANNOTATION_DEPRECATED_KEY);
+		TOKEN_TYPES.put("abstract", ANNOTATION_ABSTRACT_KEY);
+		TOKEN_TYPES.put("override", ANNOTATION_OVERRIDE_KEY);
+		TOKEN_TYPES.put("method", ANNOTATION_METHOD_KEY);
+		TOKEN_TYPES.put("returns", ANNOTATION_RETURNS_KEY);
+	}
 }

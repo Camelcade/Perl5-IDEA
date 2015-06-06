@@ -47,13 +47,13 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         extend(
                 CompletionType.BASIC,
                 FUNCTION_PATTERN.inside(METHOD_PATTERN),
-                new PerlFunctionCompletionProvider()
+                new PerlSubCompletionProvider()
         );
 
         extend(
                 CompletionType.BASIC,
                 FUNCTION_PATTERN.inside(METHOD_PATTERN),
-                new PerlBuiltInFunctionCompletionProvider()
+                new PerlBuiltInSubCompletionProvider()
         );
 
         extend(
@@ -72,6 +72,11 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 CompletionType.BASIC,
                 STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN),
                 new PerlUseParametersCompletionProvider()
+        );
+        extend(
+                CompletionType.BASIC,
+                UNKNOWN_ANNOTATION_PATTERN,
+                new PerlAnnotationCompletionProvider()
         );
     }
 

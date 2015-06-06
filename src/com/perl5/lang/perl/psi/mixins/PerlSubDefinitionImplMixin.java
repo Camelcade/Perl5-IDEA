@@ -16,19 +16,19 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.SmartList;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -37,12 +37,9 @@ import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
- *
  */
-public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase<PerlSubDefinitionStub> implements PsiPerlSubDefinition
+public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSubDefinitionStub> implements PsiPerlSubDefinition
 {
-	private List<PerlSubArgument> myArguments = null;
-
 	public PerlSubDefinitionImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -54,48 +51,6 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	}
 
 	@Override
-	public String getPackageName()
-	{
-		getArgumentsList();
-
-		PerlSubDefinitionStub stub = getStub();
-		if (stub != null)
-			return stub.getPackageName();
-
-		String namespace = getExplicitPackageName();
-
-		if (namespace == null)
-			namespace = getContextPackageName();
-
-
-		return namespace;
-	}
-
-	@Override
-	public String getFunctionName()
-	{
-		PerlSubDefinitionStub stub = getStub();
-		if (stub != null)
-			return stub.getFunctionName();
-
-		PerlSubNameElement subNameElement = getSubNameElement();
-		return subNameElement.getName();
-	}
-
-	@Override
-	public String getContextPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
-
-	@Override
-	public String getExplicitPackageName()
-	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getName() : null;
-	}
-
-	@Override
 	public PerlLexicalScope getLexicalScope()
 	{
 		PerlLexicalScope scope = PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
@@ -103,27 +58,18 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 		return scope;
 	}
 
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
-
-	@Override
-	public PerlSubNameElement getSubNameElement()
-	{
-		return findChildByClass(PerlSubNameElement.class);
-	}
-
 
 	@Override
 	public boolean isMethod()
 	{
 		PerlSubDefinitionStub stub = getStub();
-		if( stub != null )
+		if (stub != null)
 			return stub.isMethod();
 
-		List<PerlSubArgument> arguments = getArgumentsList();
+		if (getSubAnnotations().isMethod())
+			return true;
+
+		List<PerlSubArgument> arguments = getSubArgumentsList();
 		if (arguments.size() == 0)
 			return false;
 
@@ -133,14 +79,11 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 	}
 
 	@Override
-	public List<PerlSubArgument> getArgumentsList()
+	public List<PerlSubArgument> getSubArgumentsList()
 	{
-		if (myArguments != null)
-			return myArguments;
-
 		PerlSubDefinitionStub stub = getStub();
-		if( stub != null )
-			return stub.getArgumentsList();
+		if (stub != null)
+			return stub.getSubArgumentsList();
 
 		List<PerlSubArgument> arguments = new ArrayList<>();
 
@@ -201,7 +144,13 @@ public abstract class PerlSubDefinitionImplMixin extends StubBasedPsiElementBase
 				break;
 		}
 
-		myArguments = arguments;
-		return myArguments;
+		return arguments;
 	}
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new PerlItemPresentationSimple(this, "Sub definition");
+	}
+
 }

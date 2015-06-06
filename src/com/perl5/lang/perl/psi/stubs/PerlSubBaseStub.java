@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs;
+package com.perl5.lang.perl.psi.stubs;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-
-import java.util.List;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubDefinitionStub extends StubElement<PsiPerlSubDefinition>
+public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<Stub>
 {
 	/**
 	 * Returns package name for current function
@@ -37,17 +35,23 @@ public interface PerlSubDefinitionStub extends StubElement<PsiPerlSubDefinition>
 	 * Returns function name for current function definition
 	 * @return function name or null
 	 */
-	public String getFunctionName();
-
-	/**
-	 * Returns list of accepted arguments
-	 * @return list of accepted arguments
-	 */
-	public List<PerlSubArgument> getArgumentsList();
+	public String getSubName();
 
 	/**
 	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
 	 * @return result
 	 */
 	public boolean isMethod();
+
+	/**
+	 * Checks PSI tree before a sub definition for annotations and builds annotations object
+	 * @return PerlSubAnnotation object
+	 */
+	public PerlSubAnnotations getSubAnnotations();
+
+	/**
+	 * Returns canonical name PackageName::SubName
+	 * @return name
+	 */
+	public String getCanonicalName();
 }

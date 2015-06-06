@@ -25,6 +25,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.Collection;
@@ -36,52 +39,6 @@ import java.util.HashMap;
  */
 public class PerlUtil
 {
-	/**
-	 * Traverses PSI tree up from current element and finds all lexical variables definition (state, my)
-	 * @param currentElement current Psi element to traverse from
-	 * @return ArrayList of variables in declarations
-	 */
-	public static Collection<PerlVariable> findDeclaredLexicalVariables(PsiElement currentElement)
-	{
-		HashMap<String,PerlVariable> declarationsHash = new HashMap<>();
-
-//		assert currentElement instanceof PerlLexicalScopeMember;
-
-//		PerlLexicalScope currentScope = ((PerlLexicalScopeMember) currentElement).getLexicalScope();
-        PerlLexicalScope currentScope = PsiTreeUtil.getParentOfType(currentElement, PerlLexicalScope.class);
-		Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(currentElement.getContainingFile(), PerlVariableDeclaration.class);
-
-		for(PerlVariableDeclaration declaration: declarations)
-		{
-			if( declaration.getTextOffset() < currentElement.getTextOffset())
-			{
-				// lexically ok
-				PerlLexicalScope declarationScope = declaration.getLexicalScope();
-				if( declarationScope == null 	// file level
-					|| currentScope != null && PsiTreeUtil.isAncestor(declarationScope, currentScope, false)	// declaration is an ancestor
-						)
-				{
-					for(PsiElement var: declaration.getScalarVariableList())
-					{
-						assert var instanceof PerlVariable;
-						declarationsHash.put(var.getText(),(PerlVariable)var);
-					}
-					for(PsiElement var: declaration.getArrayVariableList())
-					{
-						assert var instanceof PerlVariable;
-						declarationsHash.put(var.getText(),(PerlVariable)var);
-					}
-					for(PsiElement var: declaration.getHashVariableList())
-					{
-						assert var instanceof PerlVariable;
-						declarationsHash.put(var.getText(),(PerlVariable)var);
-					}
-				}
-			}
-		}
-
-		return declarationsHash.values();
-	}
 
 	/**
 	 * Searches for innermost source root for a file

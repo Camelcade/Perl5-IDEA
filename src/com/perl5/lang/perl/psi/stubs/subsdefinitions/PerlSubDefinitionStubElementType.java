@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs;
+package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +49,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public PerlSubDefinitionStub createStub(@NotNull PsiPerlSubDefinition psi, StubElement parentStub)
 	{
-		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getArgumentsList(), psi.isMethod());
+		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getSubArgumentsList(), psi.isMethod(), psi.getSubAnnotations());
 	}
 
 	@NotNull
@@ -62,25 +62,22 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
 	{
-		String name = stub.getPackageName() + "::" + stub.getFunctionName();
-		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, name);
+		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, stub.getCanonicalName());
 	}
 
 	@Override
 	public void serialize(@NotNull PerlSubDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException
 	{
 		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getFunctionName());
+		dataStream.writeName(stub.getSubName());
 
-		List<PerlSubArgument> arguments = stub.getArgumentsList();
+		List<PerlSubArgument> arguments = stub.getSubArgumentsList();
 		dataStream.writeInt(arguments.size());
 		for( PerlSubArgument argument: arguments )
-		{
-			dataStream.writeName(argument.getArgumentType().toString());
-			dataStream.writeName(argument.getArgumentName());
-			dataStream.writeName(argument.getVariableClass());
-			dataStream.writeBoolean(argument.isOptional());
-		}
+			argument.serialize(dataStream);
+
+		stub.getSubAnnotations().serialize(dataStream);
+
 		dataStream.writeBoolean(stub.isMethod());
 	}
 
@@ -95,16 +92,12 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		List<PerlSubArgument> arguments = new ArrayList<>(argumentsNumber);
 
 		for( int i = 0; i < argumentsNumber; i++ )
-		{
-			PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
-			String argumentName = dataStream.readName().toString();
-			String variableClass = dataStream.readName().toString();
-			boolean isOptional = dataStream.readBoolean();
-			arguments.add(new PerlSubArgument(argumentType,argumentName,variableClass,isOptional));
-		}
+			arguments.add(PerlSubArgument.deserialize(dataStream));
+
+		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
 
 		boolean isMethod = dataStream.readBoolean();
 
-		return new PerlSubDefinitionStubImpl(parentStub,packageName,functionName,arguments,isMethod);
+		return new PerlSubDefinitionStubImpl(parentStub,packageName,functionName,arguments,isMethod, annotations);
 	}
 }

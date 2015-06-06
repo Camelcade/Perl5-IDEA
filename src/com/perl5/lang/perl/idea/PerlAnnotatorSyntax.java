@@ -19,121 +19,231 @@ package com.perl5.lang.perl.idea;
 /**
  * Created by hurricup on 25.04.2015.
  */
+
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 {
-	private void colorize(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
+	private void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
 	{
 		TextAttributes attributes = key.getDefaultAttributes();
 
-		if( builtin )
+		if (builtin)
 			attributes = TextAttributes.merge(attributes, PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes());
-		if( deprecated )
-			attributes = TextAttributes.merge(attributes, PerlSyntaxHighlighter.PERL_DEPRECATED.getDefaultAttributes());
+		if (deprecated)
+			attributes = TextAttributes.merge(attributes, CodeInsightColors.DEPRECATED_ATTRIBUTES.getDefaultAttributes());
 
 		annotation.setEnforcedTextAttributes(attributes);
 	}
 
 
-	@Override
-	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
+	private void annotateVariable(PerlVariable element, AnnotationHolder holder, TextAttributesKey baseKey)
+	{
+		if (element.isBuiltIn())
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					baseKey,
+					true,
+					element.isDeprecated());
+		else
+		{
+			// not built-in variable
+			Annotation annotation = holder.createInfoAnnotation(element, null);
+			annotation.setEnforcedTextAttributes(baseKey.getDefaultAttributes());
+			PsiElement parent = element.getParent();
 
-		if( element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
-		{
-			colorize(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_SCALAR,
-					((PerlVariableNameElementContainer)element).isBuiltIn(),
-					false);
+			PerlVariable lexicalDeclaration = element.getLexicalDeclaration();
+
+			boolean isGlobalDeclaration = parent instanceof PsiPerlVariableDeclarationGlobal;
+			boolean isLexicalDeclaration = parent instanceof PsiPerlVariableDeclarationLexical;
+			PerlNamespaceElement namespaceElement = element.getNamespaceElement();
+			boolean hasExplicitNamespace =  namespaceElement != null;
+
+			// todo we should annotate only variable name
+
+ 			if( !hasExplicitNamespace )
+			{
+				// todo shadowing detection doesn't work
+				if (isLexicalDeclaration && lexicalDeclaration != null)
+					holder.createWarningAnnotation(element, "Current lexical variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");
+				else if (isGlobalDeclaration && lexicalDeclaration != null)
+					holder.createWarningAnnotation(element, "Current global variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");
+				else if (lexicalDeclaration == null && !isGlobalDeclaration && !isLexicalDeclaration)
+					holder.createWarningAnnotation(element, "Unable to find variable declaration in the current file. Forgot to use our for package variable in the current file?");
+			}
+			else
+			{
+				// fixme temporary solution, till we can't access CPAN files
+				if(namespaceElement.isBuiltin())
+					return;
+
+				List<PerlVariable> globalDeclarations = element.getGlobalDeclarations();
+				List<PerlGlobVariable> relatedGlobs = element.getRelatedGlobs();
+
+				if( globalDeclarations.size() == 0 && relatedGlobs.size() == 0 )
+					holder.createWarningAnnotation(element.getVariableNameElement(), "Unable to find global variable declaration or typeglob aliasing for variable. It's not a error, but you should declare it using our() or typeglob alias to make refactoring work properly.");
+				else if( globalDeclarations.size() > 0 && relatedGlobs.size() > 0 )
+					holder.createWarningAnnotation(element.getVariableNameElement(), "Both global declaration and typeglob aliasing found for variable. It's not a error, but we are not recommend such practice to avoid mistakes.");
+				// fixme not sure it's good idea, at least, should be optional
+//				else if( relatedGlobs.size() > 1  )
+//					holder.createWarningAnnotation(element, "Multiple typeglob aliasing found. It's not a error, but we are not recommend such practice to avoid mistakes.");
+			}
+
 		}
-		else if( element instanceof PsiPerlHashVariable)
-		{
-			colorize(
+	}
+
+
+	@Override
+	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder)
+	{
+
+		if (element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
+			annotateVariable((PerlVariable) element, holder, PerlSyntaxHighlighter.PERL_SCALAR);
+		else if (element instanceof PsiPerlHashVariable)
+			annotateVariable((PerlVariable) element, holder, PerlSyntaxHighlighter.PERL_HASH);
+		else if (element instanceof PsiPerlArrayVariable)
+			annotateVariable((PerlVariable) element, holder, PerlSyntaxHighlighter.PERL_ARRAY);
+		else if (element instanceof PsiPerlGlobVariable)
+			decorateElement(
 					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_HASH,
-					((PerlVariableNameElementContainer)element).isBuiltIn(),
+					PerlSyntaxHighlighter.PERL_GLOB,
+					((PerlVariableNameElementContainer) element).isBuiltIn(),
 					false);
-		}
-        else if( element instanceof PsiPerlArrayVariable)
-        {
-            colorize(
-                    holder.createInfoAnnotation(element, null),
-                    PerlSyntaxHighlighter.PERL_ARRAY,
-					((PerlVariableNameElementContainer)element).isBuiltIn(),
-                    false);
-        }
-        else if( element instanceof PsiPerlGlobVariable)
-        {
-            colorize(
-                    holder.createInfoAnnotation(element, null),
-                    PerlSyntaxHighlighter.PERL_GLOB,
-					((PerlVariableNameElementContainer)element).isBuiltIn(),
-                    false);
-        }
-//		if( elementType == PERL_PACKAGE )
-//		{
-//			String packageName = element.getText();
-//			PerlPackageUtil.PACKAGE_TYPE packageType = PerlPackageUtil.getPackageType(packageName);
-//
-//			String message = packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED ?
-//					"Package "+packageName+" is marked as deprecated and may be removed in future perl versions"
-//					: null;
-//
-//			colorize(
-//					holder.createInfoAnnotation(element, message),
-//					packageType == PerlPackageUtil.PACKAGE_TYPE.PRAGMA ? PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA: PerlSyntaxHighlighter.PERL_PACKAGE,
-//					packageType != null,
-//					packageType == PerlPackageUtil.PACKAGE_TYPE.DEPRECATED);
-//
-//		}
-		//else
-		if( element instanceof PerlStringContentElementImpl)
+		else if (element instanceof PsiPerlAnnotation)
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_ANNOTATION,
+					false,
+					false);
+		else if (element instanceof PerlNamespaceElement)
+		{
+			PsiElement parent = element.getParent();
+
+			if (parent instanceof GeneratedParserUtilBase.DummyBlock || parent instanceof PerlNamespaceDefinition)
+				return;
+
+			if (((PerlNamespaceElement) element).isDeprecated())
+			{
+				Annotation annotation = holder.createWarningAnnotation(element, "This sub is marked as deprecated");
+				annotation.setEnforcedTextAttributes(
+						TextAttributes.merge(
+								PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes(),
+								CodeInsightColors.DEPRECATED_ATTRIBUTES.getDefaultAttributes())
+				);
+			} else if (((PerlNamespaceElement) element).isPragma())
+			{
+				Annotation annotation = holder.createInfoAnnotation(element, null);
+				annotation.setEnforcedTextAttributes(
+						TextAttributes.merge(
+								PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes(),
+								PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA.getDefaultAttributes())
+				);
+			} else if (((PerlNamespaceElement) element).isBuiltin())
+			{
+				Annotation annotation = holder.createInfoAnnotation(element, null);
+				annotation.setEnforcedTextAttributes(
+						PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes()
+				);
+			} else if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
+			{
+				List<PerlFileElementImpl> namespaceFiles = ((PerlNamespaceElement) element).getNamespaceFiles();
+
+				if (namespaceFiles.size() == 0)
+					holder.createWarningAnnotation(element, "Unable to find package file [if this is a module installed from CPAN, it's ok, just NYI]");
+			} else
+			{
+				List<PerlNamespaceDefinition> namespaceDefinitions = ((PerlNamespaceElement) element).getNamespaceDefinitions();
+
+				if (namespaceDefinitions.size() == 0)
+					holder.createWarningAnnotation(element, "Unable to find namespace definition [if this is a module installed from CPAN, it's ok, just NYI]");
+			}
+		} else if (element instanceof PerlStringContentElementImpl)
 		{
 			PsiElement parent = element.getParent();
 
 			Annotation annotation = holder.createInfoAnnotation(element, null);
 
-			if(  parent instanceof PsiPerlStringDq ) // interpolated
-			{
+			if (parent instanceof PsiPerlStringDq) // interpolated
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
-			}
-			else if(  parent instanceof PsiPerlStringXq ) // executable
-			{
+			else if (parent instanceof PsiPerlStringXq) // executable
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
-			}
 			else
-			{
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+		} else if (element instanceof PerlSubNameElement)
+		{
+			PsiElement parent = element.getParent();
+
+			if (parent instanceof GeneratedParserUtilBase.DummyBlock)
+				return;
+
+			PerlNamespaceElement methodNamespaceElement = null;
+			if (parent instanceof PerlMethod)
+				methodNamespaceElement = ((PerlMethod) parent).getNamespaceElement();
+
+			if (methodNamespaceElement != null && methodNamespaceElement.isBuiltin())
+			{
+				// todo after implementinting and scanning sdk we may remove this. Atm no control for built-in packages methods
+			} else
+			{
+				// todo globs aliasing must be resolved
+				List<PerlSubDefinition> subDefinitions = ((PerlSubNameElement) element).getSubDefinitions();
+				List<PerlSubDeclaration> subDeclarations = ((PerlSubNameElement) element).getSubDeclarations();
+				List<PerlGlobVariable> relatedGlobs = ((PerlSubNameElement) element).getRelatedGlobs();
+
+				boolean isDeclaration = parent instanceof PerlSubDeclaration;
+				boolean isDefinition = parent instanceof PerlSubDefinition;
+
+
+				if (subDefinitions.size() == 0 && subDeclarations.size() == 0 && relatedGlobs.size() == 0 && !isDeclaration && !isDefinition)
+					holder.createWarningAnnotation(element, "Unable to find sub definition, declaration or glob aliasing [if this is a sub from module installed from CPAN, imported sub, inherited sub or chained invocation, it's ok, just NYI]");
+				else if (subDefinitions.size() > 1 || (subDefinitions.size() > 0 && isDefinition))
+					holder.createWarningAnnotation(element, "Multiple sub definitions found");
+				else if (subDeclarations.size() > 1 || (subDeclarations.size() > 0 && isDeclaration))
+					holder.createWarningAnnotation(element, "Multiple sub declarations found");
+//				else if (relatedGlobs.size() > 1)
+//					holder.createWarningAnnotation(element, "Multiple typeglob aliases found");
+				else if ((isDeclaration || isDefinition) && relatedGlobs.size() > 0)
+					holder.createWarningAnnotation(element, "Typeglob assignment may override current definition or declaration");
+				else
+				{
+					PerlSubAnnotations subAnnotations = subDefinitions.size() > 0
+							? subDefinitions.get(0).getSubAnnotations()
+							: subDeclarations.size() > 0 ? subDeclarations.get(0).getSubAnnotations() : null;
+
+					if (subAnnotations != null)
+					{
+						if (subAnnotations.isDeprecated())
+						{
+							Annotation annotation = holder.createWarningAnnotation(element, "This sub is marked as deprecated");
+							annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
+						}
+					}
+
+					// todo check that annotations are the same on definition and declaration
+					// todo check that attributes are the same on definition and declaration
+					// todo check that prototypes are the same on definition and declaration
+					// todo check that arguments number suits prototype
+					// todo check for override
+				}
 			}
 		}
-//		else if( elementType == PERL_FUNCTION)
-//		{
-//			boolean isBuiltIn = PerlFunctionUtil.isBuiltIn(element.getText());
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					isBuiltIn ? PerlSyntaxHighlighter.PERL_OPERATOR :PerlSyntaxHighlighter.PERL_FUNCTION,
-//					isBuiltIn,
-//					false);
-//		}
-//		else if( elementType == PERL_METHOD)
-//		{
-//			colorize(
-//					holder.createInfoAnnotation(element, null),
-//					PerlSyntaxHighlighter.PERL_FUNCTION,
-//					false,
-//					false);
-//		}
 	}
 }

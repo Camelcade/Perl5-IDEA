@@ -131,9 +131,14 @@
         <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
         <lang.refactoringSupport language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
         <gotoClassContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToClassContributor" />
+        <gotoDeclarationHandler implementation="com.perl5.lang.perl.idea.PerlGotoDeclarationHandler" />
         <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
         <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.PerlRenameNamespaceProcessor"/>
+
+        <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
+        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
+        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
+
         <!--<sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>-->
 
         <liveTemplateMacro implementation="com.perl5.lang.perl.idea.livetemplates.PerlClosestVariableMacro"/>
@@ -141,12 +146,15 @@
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContext"/>
         <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
 
+        <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
+
         <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlHashesStubIndex"/>
 
         <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subs.PerlSubDefinitionsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
 
         <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
@@ -161,7 +169,7 @@
         <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
         <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
         <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
-        <!--<lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>-->
+        <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
         <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>

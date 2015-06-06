@@ -16,16 +16,14 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
-import com.perl5.lang.perl.util.PerlUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,54 +33,63 @@ import java.util.List;
 
 /**
  * Created by hurricup on 27.05.2015.
- *
  */
 public class PerlVariableNameReference extends PerlReferencePoly
 {
 
-	private PerlNamespaceElement myNamespaceElement;
-	private String myVariableName;
-	private PerlVariableType actualType;
 	private PerlVariable myVariable;
 
-	public PerlVariableNameReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlVariableNameReference(@NotNull PsiElement element, TextRange textRange)
+	{
 		super(element, textRange);
 		assert element instanceof PerlVariableNameElement;
-		myVariableName = ((PerlVariableNameElement) element).getName();
 
-		if( element.getParent() instanceof PerlVariable )
-		{
+		if (element.getParent() instanceof PerlVariable)
 			myVariable = (PerlVariable) element.getParent();
-			myNamespaceElement = myVariable.getNamespaceElement();
-			actualType = myVariable.getActualType();
-		}
 		else
 			throw new RuntimeException("Can't be: got myVariable name without a myVariable");
 	}
 
 	@NotNull
 	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
-	}
-
-	@NotNull
-	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		List<ResolveResult> result;
+		List<ResolveResult> result = new ArrayList<>();;
 
-		if( actualType == PerlVariableType.SCALAR)
-			result = resolveScalarName();
-		else if( actualType == PerlVariableType.ARRAY)
-			result = resolveArrayName();
-		else if( actualType == PerlVariableType.HASH)
-			result = resolveHashName();
+		PsiElement variableContainer = myVariable.getParent();
+		PerlVariable lexicalDeclaration = null;
+
+		if (variableContainer instanceof PsiPerlVariableDeclarationLexical)
+			return new ResolveResult[0];
+		else if (!(variableContainer instanceof PsiPerlVariableDeclarationGlobal))
+			lexicalDeclaration = myVariable.getLexicalDeclaration();
+
+		if( lexicalDeclaration == null || lexicalDeclaration.getParent() instanceof PsiPerlVariableDeclarationGlobal)
+		{
+			// not found lexical declaration or our is closes to us
+
+			// our variable declaration
+			for( PerlGlobVariable glob: myVariable.getRelatedGlobs())
+				result.add(new PsiElementResolveResult(glob));
+
+			// globs
+			for(PerlVariable globalDeclaration: myVariable.getGlobalDeclarations())
+				result.add(new PsiElementResolveResult(globalDeclaration));
+		}
 		else
-			throw new RuntimeException("Can't be: resolving variable of unknown type");
+			result.add(new PsiElementResolveResult(lexicalDeclaration));
 
 		return result.toArray(new ResolveResult[result.size()]);
+	}
+
+	@Override
+	public boolean isReferenceTo(PsiElement element)
+	{
+		PsiElement parent = element.getParent();
+		if (parent instanceof PerlVariable || parent instanceof PerlGlobVariable)
+			return super.isReferenceTo(parent) || super.isReferenceTo(element);
+
+		return super.isReferenceTo(element);
 	}
 
 	@Nullable
@@ -90,124 +97,13 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
-	}
+		if( resolveResults.length == 0)
+			return null;
 
-	/**
-	 * Resolving names for scalars, array elements and hash elements
-	 * @return declared variable name
-	 */
-	List<ResolveResult> resolveScalarName()
-	{
-		List<ResolveResult> result = new ArrayList<>();
-		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
+		for( ResolveResult resolveResult: resolveResults)
+			if( resolveResult.getElement() instanceof PerlGlobVariable)
+				return resolveResult.getElement();
 
-		if( myNamespaceElement == null )
-		{
-			// trying to find lexical variable
-			for (PerlVariable variable : variables)
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variable instanceof PsiPerlScalarVariable && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
-				{
-					result.add(new PsiElementResolveResult(variableName));
-					break;
-				}
-			}
-		}
-
-		if( result.size() == 0 )
-		{
-			// not found, trying to find global variables
-			String packageName = myVariable.getPackageName();
-
-			for( PerlVariable variable: PerlScalarUtil.findGlobalScalarDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if( variableName != null && variableName != myElement)
-					result.add(new PsiElementResolveResult(variableName));
-			}
-		}
-
-		return result;
-	}
-
-	/**
-	 * Resolving names for arrays, hash slices and scalar dereference to array
-	 * @return declared variable name
-	 */
-	List<ResolveResult> resolveArrayName()
-	{
-		List<ResolveResult> result = new ArrayList<>();
-		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
-
-
-		if( myNamespaceElement == null )
-		{
-			// trying to find lexical variable
-			for (PerlVariable variable : variables)
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variable instanceof PsiPerlArrayVariable && variableName != null && variableName != myElement&& myVariableName.equals(variableName.getName()))
-				{
-					result.add(new PsiElementResolveResult(variableName));
-					break;
-				}
-			}
-		}
-
-		if( result.size() == 0 )
-		{
-			// not found, trying to find global variables
-			String packageName = myVariable.getPackageName();
-
-			for( PerlVariable variable: PerlArrayUtil.findGlobalArrayDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if( variableName != null && variableName != myElement)
-					result.add(new PsiElementResolveResult(variableName));
-			}
-		}
-
-		return result;
-	}
-
-	/**
-	 * Resolving names for hashes and scalar dereference to hash
-	 * @return declared variable name
-	 */
-	List<ResolveResult> resolveHashName()
-	{
-		List<ResolveResult> result = new ArrayList<>();
-		Collection<PerlVariable> variables = PerlUtil.findDeclaredLexicalVariables(myElement.getParent());
-
-		if( myNamespaceElement == null )
-		{
-			// trying to find lexical variable
-			for (PerlVariable variable : variables)
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variable instanceof PsiPerlHashVariable && variableName != null && variableName != myElement && myVariableName.equals(variableName.getName()))
-				{
-					result.add(new PsiElementResolveResult(variableName));
-					break;
-				}
-			}
-		}
-
-		if( result.size() == 0 )
-		{
-			// not found, trying to find global variables
-			String packageName = myVariable.getPackageName();
-
-			for( PerlVariable variable: PerlHashUtil.findGlobalHashDefinitions(myElement.getProject(), packageName + "::" + myVariableName))
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if( variableName != null && variableName != myElement)
-					result.add(new PsiElementResolveResult(variableName));
-			}
-		}
-
-		return result;
+		return resolveResults[0].getElement();
 	}
 }

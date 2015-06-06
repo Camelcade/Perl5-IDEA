@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subs;
+package com.perl5.lang.perl.psi.stubs.subsdeclarations;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PsiPerlSubDefinition>
+public class PerlSubDeclarationStubIndex extends StringStubIndexExtension<PsiPerlSubDeclaration>
 {
-	public static final int VERSION = 1;
-	public static final StubIndexKey<String,PsiPerlSubDefinition> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
+	public static final int VERSION = 2;
+	public static final StubIndexKey<String, PsiPerlSubDeclaration> KEY = StubIndexKey.createIndexKey("perl.sub.declaration");
 
 	@Override
 	public int getVersion()
@@ -37,7 +37,7 @@ public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PsiPer
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PsiPerlSubDefinition> getKey()
+	public StubIndexKey<String, PsiPerlSubDeclaration> getKey()
 	{
 		return KEY;
 	}

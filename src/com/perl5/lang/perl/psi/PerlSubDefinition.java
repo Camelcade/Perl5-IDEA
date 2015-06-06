@@ -16,10 +16,10 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
-import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
 import java.util.List;
@@ -27,29 +27,14 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDefinition extends PerlPackageMember, PerlLexicalScope, PerlNamespaceElementContainer, PerlSubNameElementContainer
+public interface PerlSubDefinition extends PerlSubBase<PerlSubDefinitionStub>, PerlLexicalScope
 {
-	/**
-	 * Returns package name for current function
-	 * @return canonical package name from declaration or context
-	 */
-	public String getPackageName();
-
-	/**
-	 * Returns function name for current function definition
-	 * @return function name or null
-	 */
-	public String getFunctionName();
 
 	/**
 	 * Returns list of accepted arguments
+	 *
 	 * @return list of accepted arguments
 	 */
-	public List<PerlSubArgument> getArgumentsList();
+	public List<PerlSubArgument> getSubArgumentsList();
 
-	/**
-	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
-	 * @return result
-	 */
-	public boolean isMethod();
 }

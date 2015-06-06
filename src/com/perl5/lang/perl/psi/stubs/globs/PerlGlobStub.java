@@ -26,5 +26,5 @@ public interface PerlGlobStub extends StubElement<PsiPerlGlobVariable>
 {
 	public String getPackageName();
 
-	public String getGlobName();
+	public String getName();
 }

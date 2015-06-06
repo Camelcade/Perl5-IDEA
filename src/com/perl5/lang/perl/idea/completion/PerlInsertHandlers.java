@@ -28,7 +28,6 @@ import com.intellij.openapi.editor.EditorModificationUtil;
 public class PerlInsertHandlers
 {
 	public static final InsertHandler<LookupElement> SEMI_NEWLINE_INSERT_HANDLER = new SemiNewlineInsertHandler();
-	public static final InsertHandler<LookupElement> SPACE_INSERT_HANDLER = new SpaceAndParensInsertHandler();
 	public static final InsertHandler<LookupElement> ARRAY_ELEMENT_INSERT_HANDLER = new ArrayElementInsertHandler();
 	public static final InsertHandler<LookupElement> HASH_ELEMENT_INSERT_HANDLER = new HashElementInsertHandler();
 
@@ -42,19 +41,6 @@ public class PerlInsertHandlers
 		{
 			final Editor editor = context.getEditor();
 			EditorModificationUtil.insertStringAtCaret(editor, ";\n");
-		}
-	}
-
-	/**
-	 * Space insert handler
-	 */
-	static class SpaceAndParensInsertHandler implements InsertHandler<LookupElement>
-	{
-		@Override
-		public void handleInsert(final InsertionContext context, LookupElement item)
-		{
-			final Editor editor = context.getEditor();
-			EditorModificationUtil.insertStringAtCaret(editor, " ");
 		}
 	}
 
