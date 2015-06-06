@@ -31,6 +31,7 @@
         <li>Implemented IDEA warnings for variables: undeclared, shadowed, muliti-declared</li>
         <li>Implemented IDEA wranings for currenlty unresolveble methods and packages.</li>
         <li>Implemented #@annotations for Perl subs. Implemented: #@deprecated, #@method, #@override and #@returns. Only deprecated currently doing anything.</li>
+        <li>Implemented Perl SDK type</li>
       </ul>
 
       <p>0.23 beta</p>
@@ -142,7 +143,7 @@
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
 
-        <!--<sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>-->
+        <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
         <liveTemplateMacro implementation="com.perl5.lang.perl.idea.livetemplates.PerlClosestVariableMacro"/>
         <defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
