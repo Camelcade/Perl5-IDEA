@@ -10,16 +10,17 @@ to write tests (mostly for lexer and parser at the moment).
 
 #Current status - development (0.23 beta)
 
+* Implemented Perl SDK type, Perl5 module type.
 * Implemented support for Perl5, POD and php-style perl <? ... ?>
-* Implemented syntax highlighting.
-* Implemented basic brace matcher.
-* Implemented find usages. 
+* Implemented syntax highlighting, basic brace matcher, find usages. 
 * Implemented basic code-folding for blocks, hashes, arrays, PODs, heredocs and sequential comments and imports.
-* Implemented autocompletion for built-in functions, packages and variables.
+* Implemented autocompletion for built-in functions, installed packages, namespaces and variables.
 * Implemented autocompletion, navigation and refactoring for lexical variables.
 * Implemented autocompletion, navigation and refactoring for global variables.
 * Implemented basic project functions auto-completion, navigation and refactoring (works with obvious calls for now: package::method and package->method, auto-complete is pretty stupid)
-* Implemented packages navigation and refactoring. For navigation to package files and refactoring, your lib root -I must be explicitly marked as one of the source roots.
+* Implemented packages navigation and refactoring. For navigation to package files and refactoring, your lib root -I must be added to classroot.
+* Implemented subs annotations: #@deprecated, #@returns, #@method and #@override. Annotations helps IDEA to understand your code properly and give you useful hints.
+* Implemented warning annotations for variables shadowing previous declarations, undeclared variables, undefined and undeclared subs, not installed packages. 
 * Lexer and parser still have some bugs, see issue tracker and don't hesitate to report.
 * Current, dev build you may find here: http://evstigneev.com/camelcade.jar
 

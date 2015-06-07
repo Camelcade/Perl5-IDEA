@@ -67,6 +67,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			// not built-in variable
 			Annotation annotation = holder.createInfoAnnotation(element, null);
 			annotation.setEnforcedTextAttributes(baseKey.getDefaultAttributes());
+
 			PsiElement parent = element.getParent();
 
 			PerlVariable lexicalDeclaration = element.getLexicalDeclaration();
@@ -105,7 +106,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 //					holder.createWarningAnnotation(element, "Multiple typeglob aliasing found. It's not a error, but we are not recommend such practice to avoid mistakes.");
 			}
 
-			// todo annotate found variable. wtf?
+			// todo annotate found variables here, not in the beginnig
 
 		}
 	}

@@ -146,9 +146,11 @@
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
 
 
-        <liveTemplateMacro implementation="com.perl5.lang.perl.idea.livetemplates.PerlClosestVariableMacro"/>
-        <defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
-        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContext"/>
+        <!--<liveTemplateMacro implementation="com.perl5.lang.perl.idea.livetemplates.PerlClosestVariableMacro"/>-->
+        <!--<defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>-->
+        <!--<liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContext"/>-->
+
+
         <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
 
         <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
