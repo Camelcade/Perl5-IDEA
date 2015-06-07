@@ -51,7 +51,7 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 {
 	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state)
 	{
-		super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE);
+		super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE); 
 	}
 
 	@Override

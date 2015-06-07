@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -68,25 +69,34 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		String properPath = PerlPackageUtil.getPackagePathByName(packageName);
 		Project project = myElement.getProject();
 
-		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(myElement.getProject()).getContentSourceRoots())
+		Module module = ModuleUtil.findModuleForPsiElement(myElement);
+		if( module != null )
 		{
-			VirtualFile packageFile = sourceRoot.findFileByRelativePath(properPath);
-			if (packageFile != null)
+			for (VirtualFile sourceRoot : ModuleRootManager.getInstance(module).orderEntries().classes().getRoots())
 			{
-				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
-				if (packagePsiFile != null)
-					return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
+				VirtualFile packageFile = sourceRoot.findFileByRelativePath(properPath);
+				if (packageFile != null)
+				{
+					PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
+					if (packagePsiFile != null)
+						return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
+				}
 			}
-		}
 
-		for( VirtualFile libraryRoot: ProjectRootManager.getInstance(myElement.getProject()).orderEntries().getClassesRoots())
+			// todo search relatively to current directory
+		}
+		else
 		{
-			VirtualFile packageFile = libraryRoot.findFileByRelativePath(properPath);
-			if (packageFile != null)
+			// search in project classroots
+			for (VirtualFile libraryRoot : ProjectRootManager.getInstance(myElement.getProject()).orderEntries().getClassesRoots())
 			{
-				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
-				if (packagePsiFile != null)
-					return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
+				VirtualFile packageFile = libraryRoot.findFileByRelativePath(properPath);
+				if (packageFile != null)
+				{
+					PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
+					if (packagePsiFile != null)
+						return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
+				}
 			}
 		}
 

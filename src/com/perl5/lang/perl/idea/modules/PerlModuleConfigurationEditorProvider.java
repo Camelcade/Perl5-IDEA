@@ -32,11 +32,12 @@ public class PerlModuleConfigurationEditorProvider implements ModuleConfiguratio
 		Module module = state.getRootModel().getModule();
 		if (ModuleType.get(module) instanceof PerlModuleType) {
 			return new ModuleConfigurationEditor[]{
-					new PerlContentEntriesEditor(module.getName(), state)
-//					new JavaContentEntriesEditor(module.getName(), state),
-//					new CommonContentEntriesEditor(module.getName(), state)
+					new PerlContentEntriesEditor(module.getName(), state),
+					new ClasspathEditor(state)
 			};
 		}
 		return ModuleConfigurationEditor.EMPTY;
 	}
+
+
 }

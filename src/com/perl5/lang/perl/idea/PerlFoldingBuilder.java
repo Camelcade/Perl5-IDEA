@@ -158,7 +158,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		Collection<PsiElement> imports = PsiTreeUtil.findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireStatement.class);
+		Collection<PsiPerlStatement> imports = PsiTreeUtil.findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireStatement.class);
 
 		int currentOffset = 0;
 
@@ -166,19 +166,17 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		{
 			if (currentOffset < perlImport.getTextOffset())
 			{
+				PsiElement currentStatement = perlImport;
+
 				int blockStart = perlImport.getTextOffset();
 				int blockEnd = blockStart;
 				ASTNode blockNode = perlImport.getNode();
-
-				PsiElement currentStatement = PsiTreeUtil.getParentOfType(perlImport, PsiPerlStatement.class);
 
 				int importsNumber = 0;
 
 				while (currentStatement != null)
 				{
-					PsiElement firstChild = currentStatement.getFirstChild();
-
-					if (firstChild != null && (firstChild instanceof PsiPerlUseStatement || firstChild instanceof PsiPerlRequireStatement))
+					if (currentStatement instanceof PsiPerlUseStatement || currentStatement instanceof PsiPerlRequireStatement)
 					{
 						blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
 						importsNumber++;
