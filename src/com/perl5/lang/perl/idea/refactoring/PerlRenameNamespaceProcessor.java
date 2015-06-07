@@ -115,7 +115,7 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 						public void run()
 						{
 							// looking/creating new path for a file
-							VirtualFile newParent = PerlUtil.findInnermostSourceRoot(project, virtualFile);
+							VirtualFile newParent = PerlUtil.getFileClassRoot(project, virtualFile);
 							VirtualFile currentParent = virtualFile.getParent();
 
 							List<String> packageDirs = Arrays.asList(newPackageName.split(":+"));

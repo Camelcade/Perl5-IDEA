@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -33,9 +32,6 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hurricup on 28.05.2015.
@@ -128,7 +124,7 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 
 		if ("pm".equals(newFile.getExtension()))
 		{
-			VirtualFile innerMostRoot = PerlUtil.findInnermostSourceRoot(myElement.getProject(), newFile);
+			VirtualFile innerMostRoot = PerlUtil.getFileClassRoot(myElement.getProject(), newFile);
 
 			if (innerMostRoot != null)
 			{

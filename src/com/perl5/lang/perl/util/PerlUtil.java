@@ -16,12 +16,16 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -42,49 +46,48 @@ public class PerlUtil
 
 	/**
 	 * Searches for innermost source root for a file
+	 *
 	 * @param project project to search in
-	 * @param file	containing file
-	 * @return	innermost root
+	 * @param file    containing file
+	 * @return innermost root
 	 */
-	public static VirtualFile findInnermostSourceRoot(Project project, VirtualFile file)
+	public static VirtualFile getFileClassRoot(Project project, VirtualFile file)
 	{
-		VirtualFile innerMostRoot = null;
+		Module module = ModuleUtil.findModuleForFile(file, project);
 
-		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(project).getContentSourceRoots())
+		if (module != null)
 		{
-			if (VfsUtil.isAncestor(sourceRoot, file, true))
-			{
-				if (innerMostRoot == null || VfsUtil.isAncestor(innerMostRoot, sourceRoot, true))
-					innerMostRoot = sourceRoot;
-			}
-		}
+			for (VirtualFile classRoot : ModuleRootManager.getInstance(module).orderEntries().classes().getRoots())
+				if (VfsUtil.isAncestor(classRoot, file, true))
+					return classRoot;
+		} else
+			throw new IncorrectOperationException("Unable to find class root for file outside of the modules");
 
-		return innerMostRoot;
+		return null;
 	}
 
 	/**
 	 * Searches for innermost source root for a file by it's absolute path
-	 * @param project project to search in
-	 * @param filePath	containing filename
-	 * @return	innermost root
+	 *
+	 * @param module module to search in
+	 * @param filePath containing filename
+	 * @return innermost root
 	 */
-	public static VirtualFile findInnermostSourceRoot(Project project, String filePath)
+	public static VirtualFile getFileClassRoot(Module module, String filePath)
 	{
-		VirtualFile innerMostRoot = null;
-		File file = new File(filePath);
-
-		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(project).getContentSourceRoots())
+		if( module != null )
 		{
-			File sourceRootFile = new File(sourceRoot.getPath());
+			File file = new File(filePath);
 
-			if (VfsUtil.isAncestor(sourceRootFile, file, true))
+			for (VirtualFile classRoot : ModuleRootManager.getInstance(module).orderEntries().classes().getRoots())
 			{
-				if (innerMostRoot == null || VfsUtil.isAncestor(innerMostRoot, sourceRoot, true))
-					innerMostRoot = sourceRoot;
+				File sourceRootFile = new File(classRoot.getPath());
+				if (VfsUtil.isAncestor(sourceRootFile, file, true))
+					return classRoot;
 			}
 		}
 
-		return innerMostRoot;
+		return null;
 	}
 
 }

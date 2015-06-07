@@ -75,7 +75,7 @@ public class PerlMoveFileHandler extends MoveFileHandler
 		String originalPackageName = file.getUserData(ORIGINAL_PACKAGE_NAME);
 		Project project = file.getProject();
 		VirtualFile virtualFile = file.getVirtualFile();
-		VirtualFile newInnermostRoot = PerlUtil.findInnermostSourceRoot(project, virtualFile);
+		VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(project, virtualFile);
 
 		if (newInnermostRoot != null && originalPackageName != null)
 		{

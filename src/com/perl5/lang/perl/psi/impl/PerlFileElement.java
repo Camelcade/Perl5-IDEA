@@ -84,7 +84,7 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 
 		if ("pm".equals(containingFile.getExtension()))
 		{
-			VirtualFile innermostSourceRoot = PerlUtil.findInnermostSourceRoot(getProject(), containingFile);
+			VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(getProject(), containingFile);
 			String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
 			return PerlPackageUtil.getPackageNameByPath(relativePath);
 		}

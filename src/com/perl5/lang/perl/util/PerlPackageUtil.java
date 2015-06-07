@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -145,14 +146,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static void handleMovedPackageNamespaces(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath)
 	{
 		Project project = queue.getProject();
-		VirtualFile newInnermostRoot = PerlUtil.findInnermostSourceRoot(project, file);
+		VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(project, file);
 
 		if (newInnermostRoot != null)
 		{
 			String newRelativePath = VfsUtil.getRelativePath(file, newInnermostRoot);
 			String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
-			VirtualFile oldInnermostRoot = PerlUtil.findInnermostSourceRoot(project, oldPath);
+			VirtualFile oldInnermostRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForFile(file, project), oldPath);
 
 			if( oldInnermostRoot != null )
 			{
@@ -180,11 +181,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static void handlePackagePathChange(RenameRefactoringQueue queue, VirtualFile directory, String oldPath)
 	{
 		Project project = queue.getProject();
-		VirtualFile directorySourceRoot = PerlUtil.findInnermostSourceRoot(project, directory);
+		VirtualFile directorySourceRoot = PerlUtil.getFileClassRoot(project, directory);
 
 		if (directorySourceRoot != null)
 			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
-				if( !file.isDirectory() && "pm".equals(file.getExtension()) && directorySourceRoot.equals(PerlUtil.findInnermostSourceRoot(project, file)) )
+				if( !file.isDirectory() && "pm".equals(file.getExtension()) && directorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)) )
 				{
 					String relativePath = VfsUtil.getRelativePath(file, directory);
 					String oldFilePath = oldPath + "/" + relativePath;
@@ -195,19 +196,19 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	/**
 	 * Searches for all pm files in directory to be renamed/moved, searches for references to those packages and add them to the renaming queue
 	 * @param queue RenameRefactoringQueue object
-	 * @param directory VirtualFile of renamed directory
+	 * @param directory VirtualFile of directory to be renamed
 	 * @param newPath new directory path
 	 */
 	public static void handlePackagePathChangeReferences(RenameRefactoringQueue queue, VirtualFile directory, String newPath)
 	{
 		Project project = queue.getProject();
-		VirtualFile oldDirectorySourceRoot = PerlUtil.findInnermostSourceRoot(project, directory);
+		VirtualFile oldDirectorySourceRoot = PerlUtil.getFileClassRoot(project, directory);
 		PsiManager psiManager = PsiManager.getInstance(project);
 
 		if (oldDirectorySourceRoot != null)
 		{
 			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
-				if( !file.isDirectory() && "pm".equals(file.getExtension()) && oldDirectorySourceRoot.equals(PerlUtil.findInnermostSourceRoot(project, file)) )
+				if( !file.isDirectory() && "pm".equals(file.getExtension()) && oldDirectorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)) )
 				{
 					PsiFile psiFile = psiManager.findFile(file);
 
@@ -215,7 +216,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 						for( PsiReference inboundReference: ReferencesSearch.search(psiFile) )
 						{
 							String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
-							VirtualFile newInnermostRoot = PerlUtil.findInnermostSourceRoot(project, newPackagePath);
+							VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForPsiElement(psiFile), newPackagePath);
 							String newRelativePath = Paths.get(newInnermostRoot.getPath()).relativize(Paths.get(newPackagePath)).toString();
 							String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
