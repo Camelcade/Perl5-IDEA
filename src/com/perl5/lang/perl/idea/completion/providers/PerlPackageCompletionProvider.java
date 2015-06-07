@@ -54,9 +54,6 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 				PsiElement element = parameters.getPosition();
 				PsiElement parent = element.getParent();
 
-//				Module module = ModuleUtilCore.findModuleForFile(file.getVirtualFile(), file.getProject());
-//				VirtualFile[]  classesRoots = ProjectRootManager.getInstance(file.getProject()).orderEntries().getClassesRoots();
-
 				// fixme actually, we should fill files here, not packages, or make a diff provider
 				for (String packageName : PerlPackageUtil.listDefinedPackageNames(file.getProject()))
 				{

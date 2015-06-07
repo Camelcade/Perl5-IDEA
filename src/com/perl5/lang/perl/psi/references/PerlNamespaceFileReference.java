@@ -16,7 +16,10 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -61,8 +64,6 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-
 		// resolves to a psi file
 		String properPath = PerlPackageUtil.getPackagePathByName(packageName);
 		Project project = myElement.getProject();
@@ -74,15 +75,22 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 			{
 				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
 				if (packagePsiFile != null)
-				{
-					result.add(new PsiElementResolveResult(packagePsiFile));
-					break;
-				}
+					return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
 			}
-
 		}
 
-		return result.toArray(new ResolveResult[result.size()]);
+		for( VirtualFile libraryRoot: ProjectRootManager.getInstance(myElement.getProject()).orderEntries().getClassesRoots())
+		{
+			VirtualFile packageFile = libraryRoot.findFileByRelativePath(properPath);
+			if (packageFile != null)
+			{
+				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
+				if (packagePsiFile != null)
+					return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
+			}
+		}
+
+		return new ResolveResult[0];
 	}
 
 	@Override
