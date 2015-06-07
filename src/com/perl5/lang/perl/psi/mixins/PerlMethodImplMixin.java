@@ -17,10 +17,8 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PsiPerlObjectElement;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,6 +37,12 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 
 		if( namespaceElement != null )
 			return namespaceElement.getName();
+
+		PsiElement parent = getParent();
+		PsiElement grandParent = parent == null ? null : parent.getParent();
+
+		if( grandParent instanceof PsiPerlDerefExpr )
+			return ((PsiPerlDerefExpr) grandParent).getPackageNameForElement(parent);
 
 		return null;
 	}

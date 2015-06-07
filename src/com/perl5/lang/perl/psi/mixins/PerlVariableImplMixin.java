@@ -108,38 +108,29 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String guessVariableType()
 	{
-		PerlVariableNameElement variableNameObject = getVariableNameElement();
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
 
-		if (variableNameObject != null)
+		if (variableNameElement != null)
 		{
-			String variableName = variableNameObject.getName();
+			String variableName = variableNameElement.getName();
 
 			if (this instanceof PsiPerlScalarVariable && PerlThisNames.NAMES_SET.contains(variableName))
 				return PerlPackageUtil.getContextPackageName(this);
 
-			// find declaration and check type
-			PsiReference[] references = variableNameObject.getReferences();
-
-			for (PsiReference reference : references)
+			// find lexicaly visible declaration and check type
+			PerlVariable declaredVariable = getLexicalDeclaration();
+			if( declaredVariable != null )
 			{
-				assert reference instanceof PerlVariableNameReference;
-				ResolveResult[] results = ((PerlVariableNameReference) reference).multiResolve(false);
-
-				for (ResolveResult result : results)
+				PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declaredVariable, PerlVariableDeclaration.class);
+				if (declaration != null)
 				{
-					PsiElement decalarationVariableName = result.getElement();
-					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(decalarationVariableName, PerlVariableDeclaration.class);
-					if (declaration != null)
-					{
-						PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
-						if (declarationNamespaceElelement != null)
-						{
-							return declarationNamespaceElelement.getName();
-						}
-					}
+					PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
+					if (declarationNamespaceElelement != null)
+						return declarationNamespaceElelement.getName();
 				}
 			}
 
+			// todo check global declarations
 			// todo check assignment expression with this variable in the left and guess from there (constructors, other vars that can have known type
 		}
 

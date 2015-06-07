@@ -141,6 +141,9 @@ limitations under the License.
     implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
     mixin("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
+    implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
+    mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
+
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
@@ -388,8 +391,9 @@ term_expr ::=
     | reference_value_expr
     | array_index_variable
     | variable
-    | namespace_element
+    | namespace_expr
 
+namespace_expr ::= namespace_element
 
 parenthesised_expr ::= PERL_LPAREN [expr] PERL_RPAREN {pin=1}
 

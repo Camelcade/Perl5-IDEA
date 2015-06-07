@@ -104,6 +104,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		List<PerlSubDefinition> result = new ArrayList<>();
 		PsiElement parent = getParent();
 
+		// todo handle inheritance search
 		for( PsiPerlSubDefinition subDefinition : PerlSubUtil.findSubDefinitions(getProject(), getCanonicalName()))
 			if( !subDefinition.isEquivalentTo(parent))
 				result.add(subDefinition);
@@ -117,6 +118,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		List<PerlSubDeclaration> result = new ArrayList<>();
 		PsiElement parent = getParent();
 
+		// todo handle inheritance search
 		for( PsiPerlSubDeclaration subDeclaration: PerlSubUtil.findSubDeclarations(getProject(), getCanonicalName()))
 			if( !subDeclaration.isEquivalentTo(parent))
 				result.add(subDeclaration);
