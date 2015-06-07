@@ -27,6 +27,7 @@
     <change-notes><![CDATA[
       <p>0.23 beta</p>
       <ul>
+        <li>IMPORTANT: from this build you must have Perl5 module and configured Perl SDK</li>
         <li>A lot of refactorings and performance optimizations</li>
         <li>Implemented IDEA warnings for variables: undeclared, shadowed, muliti-declared</li>
         <li>Implemented IDEA wranings for currenlty unresolveble methods and packages.</li>
