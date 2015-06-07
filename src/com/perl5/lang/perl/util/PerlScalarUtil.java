@@ -19,10 +19,9 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubIndexKeys;
+import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 
 import java.util.*;
 

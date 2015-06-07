@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 /**

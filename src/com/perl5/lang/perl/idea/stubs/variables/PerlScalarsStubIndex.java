@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.idea.stubs.variables;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlVariable;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 30.05.2015.
  */
-public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement
+public class PerlScalarsStubIndex extends PerlVariablesStubIndex
 {
-	String getPackageName();
+	@NotNull
+	@Override
+	public StubIndexKey<String, PerlVariable> getKey()
+	{
+		return KEY_SCALAR;
+	}
 }

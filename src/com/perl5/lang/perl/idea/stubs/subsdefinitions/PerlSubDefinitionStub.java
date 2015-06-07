@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
+
+import java.util.List;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement
+public interface PerlSubDefinitionStub extends PerlSubBaseStub<PsiPerlSubDefinition>
 {
-	String getPackageName();
+	/**
+	 * Returns list of accepted arguments
+	 * @return list of accepted arguments
+	 */
+	public List<PerlSubArgument> getSubArgumentsList();
 }

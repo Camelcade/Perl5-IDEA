@@ -14,17 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.idea.stubs;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.intellij.lang.Language;
+import com.intellij.psi.tree.IStubFileElementType;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 25.05.2015.
  */
-public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement
+public class PerlFileElementType extends IStubFileElementType
 {
-	String getPackageName();
+	private static final int VERSION = 2;
+
+	public PerlFileElementType(String debugName, Language language)
+	{
+		super(debugName, language);
+	}
+
+	@Override
+	public int getStubVersion()
+	{
+		return VERSION;
+	}
 }

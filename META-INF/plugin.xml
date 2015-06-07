@@ -152,18 +152,18 @@
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContext"/>
         <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
 
-        <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
+        <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
 
-        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlHashesStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlScalarsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlArraysStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlHashesStubIndex"/>
 
-        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
 
-        <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
+        <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
         <lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/>
 
         <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/-->

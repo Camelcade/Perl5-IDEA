@@ -19,6 +19,12 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.OrderEnumerator;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
@@ -47,6 +53,9 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 				PsiFile file = parameters.getOriginalFile();
 				PsiElement element = parameters.getPosition();
 				PsiElement parent = element.getParent();
+
+//				Module module = ModuleUtilCore.findModuleForFile(file.getVirtualFile(), file.getProject());
+//				VirtualFile[]  classesRoots = ProjectRootManager.getInstance(file.getProject()).orderEntries().getClassesRoots();
 
 				// fixme actually, we should fill files here, not packages, or make a diff provider
 				for (String packageName : PerlPackageUtil.listDefinedPackageNames(file.getProject()))

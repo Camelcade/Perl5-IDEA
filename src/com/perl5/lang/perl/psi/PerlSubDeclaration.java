@@ -16,8 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
+import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
 
 /**
  * Created by hurricup on 31.05.2015.

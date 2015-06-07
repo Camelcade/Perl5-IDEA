@@ -1,0 +1,80 @@
+/*
+ * Copyright 2015 Alexandr Evstigneev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.perl5.lang.perl.idea.stubs.subsdeclarations;
+
+import com.intellij.psi.stubs.*;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
+/**
+ * Created by hurricup on 05.06.2015.
+ */
+public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclaration>
+{
+	public PerlSubDeclarationStubElementType(String name)
+	{
+		super(name, PerlLanguage.INSTANCE);
+	}
+
+	@Override
+	public PerlSubDeclaration createPsi(@NotNull PerlSubDeclarationStub stub)
+	{
+		return new PsiPerlSubDeclarationImpl(stub, this);
+	}
+
+	@Override
+	public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub)
+	{
+		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubAnnotations());
+	}
+
+	@NotNull
+	@Override
+	public String getExternalId()
+	{
+		return "perl." + super.toString();
+	}
+
+	@Override
+	public void serialize(@NotNull PerlSubDeclarationStub stub, @NotNull StubOutputStream dataStream) throws IOException
+	{
+		dataStream.writeName(stub.getPackageName());
+		dataStream.writeName(stub.getSubName());
+		stub.getSubAnnotations().serialize(dataStream);
+	}
+
+	@NotNull
+	@Override
+	public PerlSubDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
+	{
+		String packageName = dataStream.readName().toString();
+		String subName = dataStream.readName().toString();
+		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
+		return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations);
+	}
+
+	@Override
+	public void indexStub(@NotNull PerlSubDeclarationStub stub, @NotNull IndexSink sink)
+	{
+		sink.occurrence(PerlSubDeclarationStubIndex.KEY, stub.getCanonicalName());
+	}
+}

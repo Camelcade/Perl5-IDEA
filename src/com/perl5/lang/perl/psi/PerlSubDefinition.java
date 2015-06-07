@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
 import java.util.List;

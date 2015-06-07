@@ -23,8 +23,8 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 
 import java.util.*;
 

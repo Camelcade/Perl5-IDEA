@@ -145,26 +145,26 @@ limitations under the License.
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
     elementTypeFactory("scalar_variable|array_variable|hash_variable|glob_variable|array_index_variable")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
-    stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
+    stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
 
     mixin("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
     elementTypeFactory("sub_declaration|sub_definition|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
-    stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
+    stubClass("namespace_definition")="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
     implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinition"
 
-    stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
+    stubClass("sub_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.mixins.PerlSubDefinitionImplMixin"
     implements("sub_definition")="com.perl5.lang.perl.psi.PerlSubDefinition"
 
-    stubClass("sub_declaration")="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub"
+    stubClass("sub_declaration")="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub"
     mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationImplMixin"
     implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubDeclaration"
 
-    stubClass("glob_variable")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
+    stubClass("glob_variable")="com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub"
     mixin("glob_variable")="com.perl5.lang.perl.psi.mixins.PerlGlobVariableImplMixin"
     implements("glob_variable")="com.perl5.lang.perl.psi.PerlGlobVariable"
 

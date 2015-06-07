@@ -33,7 +33,7 @@ import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.impl.PerlSubAttributeElementImpl;
-import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
+import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
