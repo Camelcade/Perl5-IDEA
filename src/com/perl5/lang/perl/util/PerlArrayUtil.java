@@ -59,7 +59,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	public static Collection<PerlVariable> findGlobalArrayDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_ARRAY, canonicalName, project, GlobalSearchScope.projectScope(project), PerlVariable.class);
+		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_ARRAY, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariable.class);
 	}
 
 	/**

@@ -103,7 +103,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		assert packageName != null;
 
-		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, GlobalSearchScope.projectScope(project), PsiPerlNamespaceDefinition.class);
+		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, GlobalSearchScope.allScope(project), PsiPerlNamespaceDefinition.class);
 	}
 
 	/**

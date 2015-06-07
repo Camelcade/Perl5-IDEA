@@ -150,7 +150,7 @@ limitations under the License.
     mixin("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
-    elementTypeFactory("sub_declaration|sub_definition|perl_glob|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
+    elementTypeFactory("sub_declaration|sub_definition|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
     stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
@@ -636,6 +636,7 @@ private perl_handle_basic ::= PERL_HANDLE | PERL_HANDLE_BUILT_IN
 
 private scalar_constant ::=
     PERL_NUMBER
+    | PERL_NUMBER_VERSION
     | PERL_TAG  // __PACKAGE__ etc.
     | string
 
@@ -677,7 +678,8 @@ hash_variable ::= PERL_SIGIL_HASH [scalar_sigils] variable_body
 
 scalar_sigils ::= PERL_SIGIL_SCALAR+
 
-glob_variable ::= "*" variable_body ["{" glob_slot "}"]
+glob_variable ::= "*" glob_name [PERL_LBRACE glob_slot PERL_RBRACE]
+private glob_name ::= variable_body | scalar_variable
 glob_slot ::=
     "SCALAR"
     | "ARRAY"
@@ -688,6 +690,7 @@ glob_slot ::=
     | "FORMAT"
     | "NAME"
     | "PACKAGE"
+    | expr
 
 
 private variable_body ::=

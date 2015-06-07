@@ -29,7 +29,6 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +46,8 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		super(element, textRange);
 		assert element instanceof PerlNamespaceElement;
 		packageName = ((PerlNamespaceElement) element).getName();
-		if( element.getText().endsWith("::"))
-			setRangeInElement(new TextRange(0, element.getTextLength()-2));
+		if (element.getText().endsWith("::"))
+			setRangeInElement(new TextRange(0, element.getTextLength() - 2));
 	}
 
 	@NotNull
@@ -71,10 +70,10 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		for (VirtualFile sourceRoot : ProjectRootManager.getInstance(myElement.getProject()).getContentSourceRoots())
 		{
 			VirtualFile packageFile = sourceRoot.findFileByRelativePath(properPath);
-			if( packageFile != null)
+			if (packageFile != null)
 			{
 				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
-				if( packagePsiFile != null)
+				if (packagePsiFile != null)
 				{
 					result.add(new PsiElementResolveResult(packagePsiFile));
 					break;
@@ -91,10 +90,10 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	{
 		assert myElement instanceof PerlNamespaceElement;
 		String currentName = ((PerlNamespaceElement) myElement).getName();
-		if( currentName != null && newElementName.endsWith(".pm") )
+		if (currentName != null && newElementName.endsWith(".pm"))
 		{
 			String[] nameChunks = currentName.split("::");
-			nameChunks[nameChunks.length-1] = newElementName.replaceFirst("\\.pm$", "");
+			nameChunks[nameChunks.length - 1] = newElementName.replaceFirst("\\.pm$", "");
 			newElementName = StringUtils.join(nameChunks, "::");
 
 			return super.handleElementRename(newElementName);
@@ -109,7 +108,7 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	{
 		VirtualFile newFile = element.getContainingFile().getVirtualFile();
 
-		if( "pm".equals(newFile.getExtension()))
+		if ("pm".equals(newFile.getExtension()))
 		{
 			VirtualFile innerMostRoot = PerlUtil.findInnermostSourceRoot(myElement.getProject(), newFile);
 

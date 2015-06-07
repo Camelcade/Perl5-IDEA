@@ -50,7 +50,7 @@ public class PerlGlobUtil implements PerlElementTypes
 	{
 		assert canonicalName != null;
 
-		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, GlobalSearchScope.projectScope(project), PsiPerlGlobVariable.class);
+		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PsiPerlGlobVariable.class);
 	}
 
 	/**

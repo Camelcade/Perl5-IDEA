@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.psi.stubs.globs;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.impl.PsiPerlGlobVariableImpl;
 import org.jetbrains.annotations.NotNull;
@@ -74,5 +76,12 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPe
 	public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
 		return new PerlGlobStubImpl(parentStub,dataStream.readName().getString(),dataStream.readName().getString());
+	}
+
+	@Override
+	public boolean shouldCreateStub(ASTNode node)
+	{
+		// todo control assignment expressions, should be on left side
+		return node.findChildByType(PerlElementTypes.PERL_VARIABLE_NAME)  != null;
 	}
 }

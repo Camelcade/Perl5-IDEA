@@ -58,7 +58,7 @@ public class PerlHashUtil implements PerlElementTypes
 	public static Collection<PerlVariable> findGlobalHashDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_HASH, canonicalName, project, GlobalSearchScope.projectScope(project), PerlVariable.class);
+		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_HASH, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariable.class);
 	}
 
 	/**

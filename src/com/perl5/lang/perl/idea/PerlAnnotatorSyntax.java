@@ -75,6 +75,10 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			boolean isLexicalDeclaration = parent instanceof PsiPerlVariableDeclarationLexical;
 			PerlNamespaceElement namespaceElement = element.getNamespaceElement();
 			PerlVariableNameElement variableNameElement = element.getVariableNameElement();
+
+			if( variableNameElement == null )
+				return;
+
 			boolean hasExplicitNamespace =  namespaceElement != null;
 
 			// todo we should annotate only variable name
