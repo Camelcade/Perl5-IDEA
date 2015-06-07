@@ -20,10 +20,13 @@ import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -31,6 +34,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.PerlPackageInsertHandler;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -52,16 +56,32 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 			{
 				PsiFile file = parameters.getOriginalFile();
 				PsiElement element = parameters.getPosition();
-				PsiElement parent = element.getParent();
 
-				// fixme actually, we should fill files here, not packages, or make a diff provider
-				for (String packageName : PerlPackageUtil.listDefinedPackageNames(file.getProject()))
+				// we need to cache here
+
+				Module module = ModuleUtil.findModuleForPsiElement(element);
+				VirtualFile[] classRoots;
+
+				if (module != null)
+					classRoots = ModuleRootManager.getInstance(module).orderEntries().classes().getRoots();
+				else
+					classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
+
+				// todo add some caching here
+				for (VirtualFile classRoot : classRoots)
 				{
-					resultSet.addElement(LookupElementBuilder
-							.create(element, packageName)
-							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-							.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
-					);
+					for (VirtualFile virtualFile : VfsUtil.collectChildrenRecursively(classRoot))
+						if (!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()))
+						{
+							String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
+							String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
+
+							resultSet.addElement(LookupElementBuilder
+									.create(element, packageName)
+									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
+									.withInsertHandler(PerlPackageInsertHandler.INSTANCE));
+
+						}
 				}
 			}
 		});

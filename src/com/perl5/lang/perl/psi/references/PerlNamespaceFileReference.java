@@ -66,35 +66,25 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		Project project = myElement.getProject();
 
 		Module module = ModuleUtil.findModuleForPsiElement(myElement);
-		if( module != null )
-		{
-			for (VirtualFile sourceRoot : ModuleRootManager.getInstance(module).orderEntries().classes().getRoots())
-			{
-				VirtualFile packageFile = sourceRoot.findFileByRelativePath(properPath);
-				if (packageFile != null)
-				{
-					PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
-					if (packagePsiFile != null)
-						return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
-				}
-			}
+		VirtualFile[] classRoots;
 
-			// todo search relatively to current directory
-		}
+		if( module != null )
+			classRoots = ModuleRootManager.getInstance(module).orderEntries().classes().getRoots();
 		else
+			classRoots = ProjectRootManager.getInstance(myElement.getProject()).orderEntries().getClassesRoots();
+
+		for (VirtualFile classRoot : classRoots)
 		{
-			// search in project classroots
-			for (VirtualFile libraryRoot : ProjectRootManager.getInstance(myElement.getProject()).orderEntries().getClassesRoots())
+			VirtualFile packageFile = classRoot.findFileByRelativePath(properPath);
+			if (packageFile != null)
 			{
-				VirtualFile packageFile = libraryRoot.findFileByRelativePath(properPath);
-				if (packageFile != null)
-				{
-					PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
-					if (packagePsiFile != null)
-						return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
-				}
+				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
+				if (packagePsiFile != null)
+					return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
 			}
 		}
+
+		// todo search relatively to current directory
 
 		return new ResolveResult[0];
 	}
