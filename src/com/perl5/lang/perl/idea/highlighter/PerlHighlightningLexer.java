@@ -16,18 +16,14 @@
 
 package com.perl5.lang.perl.idea.highlighter;
 
-import com.intellij.lang.StdLanguages;
 import com.intellij.lexer.LayeredLexer;
-import com.intellij.lexer.Lexer;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.sql.dialects.mysql.MysqlLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.pod.idea.highlighter.PodHighlightingLexer;
 
 /**
  * Created by hurricup on 24.04.2015.
- *
  */
 public class PerlHighlightningLexer extends LayeredLexer
 {

@@ -10,8 +10,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="guava-17.0" level="project" />
-    <orderEntry type="library" name="database-openapi" level="project" />
-    <orderEntry type="library" name="database-impl" level="project" />
   </component>
 </module>
