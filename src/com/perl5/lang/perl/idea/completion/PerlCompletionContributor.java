@@ -35,13 +35,19 @@ public class PerlCompletionContributor extends CompletionContributor implements 
         extend(
                 CompletionType.BASIC,
                 VARIABLE_NAME_PATTERN,
-                new PerlBuiltInVariableCompletionProvider()
+                new PerlVariableBuiltInCompletionProvider()
         );
 
         extend(
                 CompletionType.BASIC,
                 VARIABLE_NAME_PATTERN.inside(VARIABLE_PATTERN),
-                new PerlVariableCompletionProvider()
+                new PerlVariableGlobalCompletionProvider()
+        );
+
+        extend(
+                CompletionType.BASIC,
+                VARIABLE_NAME_PATTERN.inside(VARIABLE_PATTERN),
+                new PerlVariableLexicalCompletionProvider()
         );
 
         extend(

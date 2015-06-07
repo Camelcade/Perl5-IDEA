@@ -36,10 +36,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 
 /**
- * Created by hurricup on 01.06.2015.
- *
+ * Created by hurricup on 07.06.2015.
  */
-public class PerlVariableCompletionProvider extends CompletionProvider<CompletionParameters>
+public class PerlVariableLexicalCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	public void addCompletions(@NotNull final CompletionParameters parameters,
 							   ProcessingContext context,
@@ -97,33 +96,6 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 							}
 						}
 					}
-
-					// global scalars
-					for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-					{
-						resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.SCALAR_GUTTER_ICON));
-					}
-					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
-					{
-						resultSet.addElement(LookupElementBuilder
-										.create(name)
-										.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
-										.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-										.withPresentableText(name + "[]")
-						);
-					}
-					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
-					{
-						resultSet.addElement(LookupElementBuilder
-										.create(name)
-										.withIcon(PerlIcons.HASH_GUTTER_ICON)
-										.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-										.withPresentableText(name + "{}")
-						);
-					}
-
 				}
 			});
 		else if (perlVariable instanceof PsiPerlArrayVariable)
@@ -164,29 +136,6 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 							}
 						}
 					}
-					// global scalars
-					if (useScalars)
-					{
-						for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-						{
-							resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.SCALAR_GUTTER_ICON));
-						}
-					}
-					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
-					{
-						resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.ARRAY_GUTTER_ICON));
-					}
-					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
-					{
-						resultSet.addElement(LookupElementBuilder
-										.create(name)
-										.withIcon(PerlIcons.HASH_GUTTER_ICON)
-										.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-										.withPresentableText(name + "{}")
-						);
-					}
 				}
 			});
 		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
@@ -212,19 +161,6 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 								resultSet.addElement(LookupElementBuilder.create(variableName.getName()).withIcon(PerlIcons.ARRAY_GUTTER_ICON));
 
 						}
-					}
-					// global scalars
-					if (useScalars)
-					{
-						for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-						{
-							resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.SCALAR_GUTTER_ICON));
-						}
-					}
-					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
-					{
-						resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.ARRAY_GUTTER_ICON));
 					}
 				}
 			});
@@ -253,21 +189,6 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
 
 						}
 					}
-
-					// global scalars
-					if (useScalars)
-					{
-						for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-						{
-							resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.SCALAR_GUTTER_ICON));
-						}
-					}
-					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
-					{
-						resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.HASH_GUTTER_ICON));
-					}
-
 				}
 			});
 	}

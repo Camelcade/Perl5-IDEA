@@ -12,7 +12,7 @@ to write tests (mostly for lexer and parser at the moment).
 
 * Implemented Perl SDK type, Perl5 module type.
 * Implemented support for Perl5, POD and php-style perl <? ... ?>
-* Implemented syntax highlighting, basic brace matcher, find usages. 
+* Implemented syntax highlighting, basic brace matcher, find usages, livetemplates. 
 * Implemented basic code-folding for blocks, hashes, arrays, PODs, heredocs and sequential comments and imports.
 * Implemented autocompletion for built-in functions, installed packages, namespaces and variables.
 * Implemented autocompletion, navigation and refactoring for lexical variables.

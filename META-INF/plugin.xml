@@ -30,6 +30,7 @@
         <li>A lot of refactorings and performance optimizations</li>
         <li>Implemented IDEA warnings for variables: undeclared, shadowed, muliti-declared</li>
         <li>Implemented IDEA wranings for currenlty unresolveble methods and packages.</li>
+        <li>Implemented livetemplates.</li>
         <li>Implemented #@annotations for Perl subs. Implemented: #@deprecated, #@method, #@override and #@returns. Only deprecated currently doing anything.</li>
         <li>Implemented Perl SDK support, Perl modules support, Perl modules configuration support</li>
         <li>In order to make your module libs work, you must add them as a library with classes into module dependencies. NB: relative use NYI (not looking in . dir).</li>
@@ -147,8 +148,8 @@
 
 
         <!--<liveTemplateMacro implementation="com.perl5.lang.perl.idea.livetemplates.PerlClosestVariableMacro"/>-->
-        <!--<defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>-->
-        <!--<liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContext"/>-->
+        <defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
+        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContext"/>
 
 
         <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->

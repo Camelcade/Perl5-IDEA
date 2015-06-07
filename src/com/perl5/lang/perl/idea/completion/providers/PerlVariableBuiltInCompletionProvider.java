@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public class PerlBuiltInVariableCompletionProvider extends CompletionProvider<CompletionParameters>
+public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
