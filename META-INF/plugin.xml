@@ -28,8 +28,8 @@
       <p>0.24 beta</p>
       <ul>
       <li>Bugfixes for 0.23 beta:<ul>
-      <li>Fixed bug with classpath detection for Perl SDK</li>
-      <li></li>
+      <li>Fixed bug with classpath detection for Perl5 SDK, issue #111</li>
+      <li>Perl5 SDK renamed to Perl5 Interpreter</li>
       <li></li>
       <li></li>
       <li></li>
@@ -38,13 +38,13 @@
 
       <p>0.24 beta</p>
       <ul>
-        <li>IMPORTANT: from this build you must have Perl5 module and configured Perl SDK</li>
+        <li>IMPORTANT: from this build you must have Perl5 module and configured Perl Interpreter</li>
         <li>A lot of refactorings and performance optimizations</li>
         <li>Implemented IDEA annotation warnings for variables: undeclared, shadowed, muliti-declared</li>
         <li>Implemented IDEA annotation warnings for currenlty unresolveble methods and packages.</li>
         <li>Implemented livetemplates.</li>
         <li>Implemented #@annotations for Perl subs. Implemented: #@deprecated, #@method, #@override and #@returns. Only deprecated currently doing anything.</li>
-        <li>Implemented Perl SDK support, Perl modules support, Perl modules configuration support</li>
+        <li>Implemented Perl interpreter support, Perl modules support, Perl modules configuration support</li>
         <li>In order to make your module libs work, you must add them as a library with classes into module dependencies. NB: relative use NYI (not looking in . dir).</li>
       </ul>
 

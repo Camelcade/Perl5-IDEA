@@ -30,7 +30,7 @@ public class PerlSdkType extends SdkType
 
 	public PerlSdkType()
 	{
-		super("Perl5 SDK");
+		super("Perl5 Interpreter");
 	}
 
 	@NotNull
@@ -86,7 +86,7 @@ public class PerlSdkType extends SdkType
 	@Override
 	public String getPresentableName()
 	{
-		return "Perl5 SDK";
+		return "Perl5 Interpreter";
 	}
 
 	@Nullable
@@ -99,7 +99,7 @@ public class PerlSdkType extends SdkType
 
 		if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD )
 		{
-			return "/usr/";
+			return "/usr/bin/";
 		}
 		return System.getenv("PERL_HOME");
 	}
@@ -132,9 +132,9 @@ public class PerlSdkType extends SdkType
 	private String executablePath(String sdkHome)
 	{
 		if (SystemInfo.isWindows)
-			return sdkHome + "bin/perl.exe";
+			return sdkHome + "perl.exe";
 		else
-			return sdkHome + "bin/perl";
+			return sdkHome + "perl";
 	}
 
 	@Override
@@ -177,9 +177,9 @@ public class PerlSdkType extends SdkType
 
 		if( perlPathLines.size() == 1)
 		{
-			int binIndex = perlPathLines.get(0).lastIndexOf("bin");
-			if( binIndex > 0 )
-				return perlPathLines.get(0).substring(0, binIndex);
+			int perlIndex = perlPathLines.get(0).lastIndexOf("perl");
+			if( perlIndex > 0 )
+				return perlPathLines.get(0).substring(0, perlIndex);
 
 		}
 		return null;
