@@ -52,7 +52,7 @@ public class PerlSdkType extends SdkType
 	{
 		SdkModificator sdkModificator = sdk.getSdkModificator();
 
-		List<String> perlLibPaths = readFromProgram("perl -le \"print $_ for @INC\"");
+		List<String> perlLibPaths = readFromProgram("perl -le \"print for @INC\"");
 
 		for( String perlLibPath: perlLibPaths)
 		{

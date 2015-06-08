@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.23 beta</version>
+    <version>0.24 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -25,12 +25,23 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.23 beta</p>
+      <p>0.24 beta</p>
+      <ul>
+      <li>Bugfixes for 0.23 beta:<ul>
+      <li>Fixed bug with classpath detection for Perl SDK</li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      </ul></li>
+      </ul>
+
+      <p>0.24 beta</p>
       <ul>
         <li>IMPORTANT: from this build you must have Perl5 module and configured Perl SDK</li>
         <li>A lot of refactorings and performance optimizations</li>
-        <li>Implemented IDEA warnings for variables: undeclared, shadowed, muliti-declared</li>
-        <li>Implemented IDEA wranings for currenlty unresolveble methods and packages.</li>
+        <li>Implemented IDEA annotation warnings for variables: undeclared, shadowed, muliti-declared</li>
+        <li>Implemented IDEA annotation warnings for currenlty unresolveble methods and packages.</li>
         <li>Implemented livetemplates.</li>
         <li>Implemented #@annotations for Perl subs. Implemented: #@deprecated, #@method, #@override and #@returns. Only deprecated currently doing anything.</li>
         <li>Implemented Perl SDK support, Perl modules support, Perl modules configuration support</li>
