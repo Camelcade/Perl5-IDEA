@@ -43,10 +43,10 @@ import java.util.*;
  */
 public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 {
-	List<PerlLexicalDeclaration> declaredScalars;
-	List<PerlLexicalDeclaration> declaredArrays;
-	List<PerlLexicalDeclaration> declaredHashes;
-	List<PerlLexicalDeclaration> declaredVariables;
+	List<PerlLexicalDeclaration> declaredScalars = new ArrayList<>();
+	List<PerlLexicalDeclaration> declaredArrays = new ArrayList<>();
+	List<PerlLexicalDeclaration> declaredHashes = new ArrayList<>();
+	List<PerlLexicalDeclaration> declaredVariables = new ArrayList<>();
 
 	boolean lexicalCacheInvalid = true;
 	LexicalDeclarationsScanner currentLexicalDeclarationsScanner = null;
@@ -55,6 +55,7 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 	{
 		super(viewProvider, language);
 	}
+
 	public PerlFileElement(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, PerlLanguage.INSTANCE);
@@ -114,6 +115,7 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 
 	/**
 	 * Searching for most recent lexically visible variable declaration
+	 *
 	 * @param currentVariable variable to search declaration for
 	 * @return variable in declaration term or null if there is no such one
 	 */
@@ -161,6 +163,7 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 
 	/**
 	 * Searches for lexically visible variables declarations relatively to the current element
+	 *
 	 * @return list of visible variables
 	 */
 	public Collection<PerlVariable> getVisibleLexicalVariables(PsiElement currentElement)
@@ -168,7 +171,7 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 		if (lexicalCacheInvalid)
 			rescanLexicalVariables();
 
-		HashMap<String,PerlVariable> declarationsHash = new HashMap<>();
+		HashMap<String, PerlVariable> declarationsHash = new HashMap<>();
 
 		PerlLexicalScope currentScope = PsiTreeUtil.getParentOfType(currentElement, PerlLexicalScope.class);
 		assert currentScope != null;
@@ -184,13 +187,13 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 		while (iterator.hasPrevious())
 		{
 			PerlLexicalDeclaration declaration = iterator.previous();
-			if (declaration.getTextOffset() < currentStatementOffset )
+			if (declaration.getTextOffset() < currentStatementOffset)
 			{
 				// todo actually, we should use variable as a key or canonical variable name WITHOUT package and possible braces
 				String variableName = declaration.getVariable().getText();
 
-				if( declarationsHash.get(variableName) == null
-					&& PsiTreeUtil.isAncestor(declaration.getScope(), currentScope, false))
+				if (declarationsHash.get(variableName) == null
+						&& PsiTreeUtil.isAncestor(declaration.getScope(), currentScope, false))
 					declarationsHash.put(variableName, declaration.getVariable());
 			}
 		}
@@ -201,11 +204,12 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 
 	/**
 	 * Accepts data from lexical variables scanner and updates it if scanner is actual
-	 * @param updater	LexicalScanner object
-	 * @param declaredScalars	found scalars
-	 * @param declaredArrays	found arrays
-	 * @param declaredHashes	found hashes
-	 * @param declaredVariables	full variables list
+	 *
+	 * @param updater           LexicalScanner object
+	 * @param declaredScalars   found scalars
+	 * @param declaredArrays    found arrays
+	 * @param declaredHashes    found hashes
+	 * @param declaredVariables full variables list
 	 */
 	public synchronized void updateVariablesCache(LexicalDeclarationsScanner updater, List<PerlLexicalDeclaration> declaredScalars, List<PerlLexicalDeclaration> declaredArrays, List<PerlLexicalDeclaration> declaredHashes, List<PerlLexicalDeclaration> declaredVariables)
 	{

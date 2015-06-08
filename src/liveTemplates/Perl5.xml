@@ -16,79 +16,224 @@
   -->
 
 <templateSet group="Perl5">
-    <template name="foreach" value="foreach my $ELEMENT$ ($LIST$){&#10;   $END$&#10;}" description="for each loop..." toReformat="false" toShortenFQNames="true">
+    <template name="if" value="if ($CONDITION$)&#10;{&#10;    $END$&#10;}" description="if block" toReformat="true" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_PREFIX" value="true" />
+        </context>
+    </template>
+    <template name="sub" value="sub $NAME$ &#10;{&#10;    my ($ARGUMENTS$) = @_;&#10;    $END$&#10;}" description="new sub" toReformat="true" toShortenFQNames="true">
+        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="ARGUMENTS" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_PREFIX" value="true" />
+        </context>
+    </template>
+    <template name="str" value="use strict; use warnings FATAL =&gt; 'all';&#10;$END$&#10;" description="strict header" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="false" />
+            <option name="PERL5_PREFIX" value="true" />
+        </context>
+    </template>
+    <template name="pif" value="if ($CONDITION$);&#10;$END$" description="postfix if" toReformat="true" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_POSTFIX" value="true" />
+        </context>
+    </template>
+    <template name="fe" value="foreach my $ELEMENT$ ($LIST$)&#10;{&#10;    $END$&#10;}" description="for each block" toReformat="true" toShortenFQNames="true">
         <variable name="ELEMENT" expression="" defaultValue="$element" alwaysStopAt="true" />
         <variable name="LIST" expression="" defaultValue="@list" alwaysStopAt="true" />
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5_PREFIX" value="true" />
         </context>
     </template>
-    <template name="do" value="do{&#10;   $END$&#10;} " description="do block" toReformat="false" toShortenFQNames="true">
+    <template name="do" value="do&#10;{&#10;    $END$&#10;} " description="do block" toReformat="true" toShortenFQNames="true">
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5_PREFIX" value="true" />
         </context>
     </template>
-    <template name="map" value="map {$END$} $LIST$" description="map expression" toReformat="false" toShortenFQNames="true">
+    <template name="ma" value="map {$END$} $LIST$" description="map expression" toReformat="false" toShortenFQNames="true">
         <variable name="LIST" expression="" defaultValue="&quot;@list&quot;" alwaysStopAt="true" />
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5" value="true" />
         </context>
     </template>
-    <template name="query" value="my $query = &lt;&lt;'SQL';&#10;   $END$&#10;SQL&#10;" description="query" toReformat="false" toShortenFQNames="true">
+    <template name="sql" value="my $query = &lt;&lt;'SQL';&#10;    $END$&#10;SQL&#10;" description="query" toReformat="true" toShortenFQNames="true">
         <context>
             <option name="SQL" value="false" />
-            <option name="Perl5" value="true" />
+            <option name="PERL5_PREFIX" value="true" />
         </context>
     </template>
-    <template name="for" value="for(my $INIT$; $CONDITION$; $INCREMENT$){&#10;   $END$&#10;}" description="for loop..." toReformat="false" toShortenFQNames="true">
+    <template name="fo" value="for(my $INIT$; $CONDITION$; $INCREMENT$)&#10;{&#10;    $END$&#10;}" description="for block" toReformat="true" toShortenFQNames="true">
         <variable name="INIT" expression="" defaultValue="" alwaysStopAt="true" />
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <variable name="INCREMENT" expression="" defaultValue="" alwaysStopAt="true" />
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5_PREFIX" value="true" />
         </context>
     </template>
-    <template name="sub" value="sub $NAME$ {&#10;   my ($ARGUMENTS$) = @_;&#10;   $ENDS$&#10;}" description="new sub" toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
-        <variable name="ARGUMENTS" expression="" defaultValue="" alwaysStopAt="true" />
-        <variable name="ENDS" expression="" defaultValue="" alwaysStopAt="true" />
+    <template name="el" value="else&#10;{&#10;    $END$&#10;}" description="else block" toReformat="true" toShortenFQNames="true">
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5" value="true" />
         </context>
     </template>
-    <template name="else" value="else{&#10;    $END$&#10;}" description="else block" toReformat="false" toShortenFQNames="true">
-        <context>
-            <option name="Perl5" value="true" />
-        </context>
-    </template>
-    <template name="elsif" value="elsif($CONDITION$){&#10;    $END$&#10;}" description="elsif block" toReformat="false" toShortenFQNames="true">
+    <template name="eli" value="elsif($CONDITION$)&#10;{&#10;    $END$&#10;}" description="elsif block" toReformat="true" toShortenFQNames="true">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5" value="true" />
         </context>
     </template>
-    <template name="grep" value="grep {$PROCESSOR$} $LIST$" description="grep expression" toReformat="false" toShortenFQNames="true">
-        <variable name="PROCESSOR" expression="" defaultValue="$_" alwaysStopAt="true" />
+    <template name="gr" value="grep {$END$} $LIST$" description="grep expression" toReformat="true" toShortenFQNames="true">
         <variable name="LIST" expression="" defaultValue="@list" alwaysStopAt="true" />
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5" value="true" />
         </context>
     </template>
-    <template name="strict" value="use strict; use warnings FATAL =&gt; 'all';&#10;$END$&#10;" description="strict header" toReformat="false" toShortenFQNames="true">
+    <template name="pa" value="use parent qw/$PACKAGE$/;&#10;$END$" description="inheritance header" toReformat="true" toShortenFQNames="true">
+        <variable name="PACKAGE" expression="" defaultValue="" alwaysStopAt="true" />
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5_PREFIX" value="true" />
         </context>
     </template>
-    <template name="if" value="if($CONDITION$){&#10;    $END$&#10;}" description="if compound" toReformat="false" toShortenFQNames="true">
+    <template name="punl" value="unless ($CONDITION$);&#10;$END$" description="postfix unless" toReformat="true" toShortenFQNames="true">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5_POSTFIX" value="true" />
         </context>
     </template>
-    <template name="parent" value="use parent qw/$ENDS$/;" description="inheritance header" toReformat="false" toShortenFQNames="true">
-        <variable name="ENDS" expression="" defaultValue="" alwaysStopAt="true" />
+    <template name="pwh" value="while ($CONDITION$);&#10;$END$" description="postfix while" toReformat="true" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
         <context>
-            <option name="Perl5" value="true" />
+            <option name="PERL5_POSTFIX" value="true" />
+        </context>
+    </template>
+    <template name="punt" value="until ($CONDITION$);&#10;$END$" description="postfix until" toReformat="true" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_POSTFIX" value="true" />
+        </context>
+    </template>
+    <template name="pfo" value="for ($LIST$);&#10;$END$" description="postfix for" toReformat="true" toShortenFQNames="true">
+        <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_POSTFIX" value="true" />
+        </context>
+    </template>
+    <template name="pfe" value="foreach ($LIST$);&#10;$END$&#10;" description="postfix foreach" toReformat="true" toShortenFQNames="true">
+        <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_POSTFIX" value="true" />
+        </context>
+    </template>
+    <template name="unl" value="unless ($EXPRESSION$)&#10;{&#10;    $END$&#10;}" description="unless block" toReformat="true" toShortenFQNames="true">
+        <variable name="EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_PREFIX" value="true" />
+        </context>
+    </template>
+    <template name="bl" value="{&#10;    $END$&#10;}" description="code block" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="gi" value="given ($EXPRESSION$)&#10;{&#10;    $END$&#10;}" description="given block" toReformat="false" toShortenFQNames="true">
+        <variable name="EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_PREFIX" value="true" />
+        </context>
+    </template>
+    <template name="wh" value="while ($EXPR$)&#10;{&#10;    $END$&#10;}" description="while block" toReformat="true" toShortenFQNames="true">
+        <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_PREFIX" value="true" />
+        </context>
+    </template>
+    <template name="co" value="continue&#10;{&#10;    $END$&#10;}" description="continue block" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="block wrapper" value="{&#10;    $SELECTION$&#10;}" description="wrap with block" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="eval wrapper" value="eval&#10;{&#10;    $SELECTION$&#10;};" description="wrap with eval block" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="for wrapper" value="for (my $INIT$; $CONDITION$; $INCREMENT$)&#10;{&#10;    $SELECTION$&#10;}" description="wrap in for block" toReformat="true" toShortenFQNames="true">
+        <variable name="INIT" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="INCREMENT" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="foreach wrapper" value="foreach my $ELEMENT$ ($LIST$)&#10;{&#10;    $SELECTION$&#10;}" description="wrap with foreach block" toReformat="true" toShortenFQNames="true">
+        <variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="unless wrapper" value="unless ($EXPRESSION$)&#10;{&#10;    $SELECTION$&#10;}" description="wrap with unless block" toReformat="true" toShortenFQNames="true">
+        <variable name="EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="elsif wrapper" value="elsif ($CONDITION$)&#10;{&#10;    $SELECTION$&#10;}" description="wrap with elsif block" toReformat="true" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="else wrapper" value="else&#10;{&#10;    $SELECTION$&#10;}" description="wrap with else block" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="continue wrapper" value="continue&#10;{&#10;    $SELECTION$&#10;}" description="wrap with continue block" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="do wrapper" value="do&#10;{&#10;    $SELECTION$&#10;} " description="wrap with do block" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="given wrapper" value="given ($EXPR$)&#10;{&#10;    $SELECTION$&#10;}" description="wrap with given block" toReformat="true" toShortenFQNames="true">
+        <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="while wrapper" value="while ($EXPR$)&#10;{&#10;    $SELECTION$&#10;}" description="wrap in while block" toReformat="true" toShortenFQNames="true">
+        <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="unt" value="until ($EXR$)&#10;{&#10;    $END$&#10;}" description="until block" toReformat="true" toShortenFQNames="true">
+        <variable name="EXR" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5_PREFIX" value="true" />
+        </context>
+    </template>
+    <template name="until wrapper" value="until ($EXR$)&#10;{&#10;    $SELECTION$&#10;}" description="wrap with until block" toReformat="true" toShortenFQNames="true">
+        <variable name="EXR" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="if wrapper" value="if ($CONDITION$)&#10;{&#10;    $SELECTION$&#10;}" description="wrap with if block" toReformat="true" toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
         </context>
     </template>
 </templateSet>

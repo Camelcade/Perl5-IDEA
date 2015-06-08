@@ -30,7 +30,7 @@
       <li>Bugfixes for 0.23 beta:<ul>
       <li>Fixed bug with classpath detection for Perl5 SDK, issue #111</li>
       <li>Perl5 SDK renamed to Perl5 Interpreter</li>
-      <li></li>
+      <li>Fixed default functions color to common FUNCTION_CALL, issue #105</li>
       <li></li>
       <li></li>
       </ul></li>
@@ -158,10 +158,10 @@
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
 
-
-        <!--<liveTemplateMacro implementation="com.perl5.lang.perl.idea.livetemplates.PerlClosestVariableMacro"/>-->
         <defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
-        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContext"/>
+        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
+        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
+        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
 
 
         <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
