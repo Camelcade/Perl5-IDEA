@@ -54,10 +54,6 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Hash", PerlSyntaxHighlighter.PERL_HASH),
 			new AttributesDescriptor("GLOB", PerlSyntaxHighlighter.PERL_GLOB),
 
-			new AttributesDescriptor("Static method call", PerlSyntaxHighlighter.PERL_STATIC_METHOD_CALL),
-			new AttributesDescriptor("Instance method call", PerlSyntaxHighlighter.PERL_INSTANCE_METHOD_CALL),
-
-
 			new AttributesDescriptor("Single-quoted string", PerlSyntaxHighlighter.PERL_SQ_STRING),
 			new AttributesDescriptor("Double-quoted string", PerlSyntaxHighlighter.PERL_DQ_STRING),
 			new AttributesDescriptor("Backticked string", PerlSyntaxHighlighter.PERL_DX_STRING),
