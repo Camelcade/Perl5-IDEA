@@ -27,16 +27,15 @@
     <change-notes><![CDATA[
       <p>0.24 beta</p>
       <ul>
-      <li>Bugfixes for 0.23 beta:<ul>
       <li>Fixed bug with classpath detection for Perl5 SDK, issue #111</li>
       <li>Perl5 SDK renamed to Perl5 Interpreter</li>
       <li>Fixed default functions color to common FUNCTION_CALL, issue #105</li>
-      <li></li>
-      <li></li>
-      </ul></li>
+      <li>Probably fixed bug with annotator starts to show strange things, like variables shadows themselves</li>
+      <li>Implemented prefix and postfix live templates contexts</li>
+      <li>Implemented live templates for all compound and postfix statements, including surrounding templates for compound statements.</li>
       </ul>
 
-      <p>0.24 beta</p>
+      <p>0.23 beta</p>
       <ul>
         <li>IMPORTANT: from this build you must have Perl5 module and configured Perl Interpreter</li>
         <li>A lot of refactorings and performance optimizations</li>
@@ -48,7 +47,7 @@
         <li>In order to make your module libs work, you must add them as a library with classes into module dependencies. NB: relative use NYI (not looking in . dir).</li>
       </ul>
 
-      <p>0.23 beta</p>
+      <p>0.22 beta</p>
       <ul>
         <li>Implemented goto contributor</li>
         <li>Implemented function parameters parsing from @_ and shift, shown in autocomplete</li>

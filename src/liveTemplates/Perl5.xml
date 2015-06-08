@@ -236,4 +236,10 @@
             <option name="PERL5" value="true" />
         </context>
     </template>
+    <template name="doc" value="=head3 $SUBNAME$&#10;&#10;$END$&#10;&#10;=cut&#10;" description="quick pod template" toReformat="true" toShortenFQNames="true">
+        <variable name="SUBNAME" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
 </templateSet>
