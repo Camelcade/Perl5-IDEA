@@ -46,16 +46,6 @@
             <option name="FOREGROUND" value="FF0000"/>
         </value>
     </option>
-    <option name="PERL_COMMENT">
-        <value>
-            <option name="FOREGROUND" value="808080"/>
-        </value>
-    </option>
-    <option name="PERL_COMMENT_BLOCK">
-        <value>
-            <option name="FOREGROUND" value="808080"/>
-        </value>
-    </option>
     <option name="PERL_DQ_STRING">
         <value>
             <option name="FOREGROUND" value="008000"/>
@@ -72,14 +62,9 @@
             <option name="FOREGROUND" value="008080"/>
         </value>
     </option>
-    <option name="PERL_STRING">
-        <value>
-            <option name="FOREGROUND" value="808080"/>
-        </value>
-    </option>
     <option name="PERL_NUMBER">
         <value>
-            <option name="FOREGROUND" value="800000"/>
+            <option name="FOREGROUND" value="000060"/>
         </value>
     </option>
     <option name="PERL_VERSION">
@@ -87,52 +72,19 @@
             <option name="FOREGROUND" value="FF0000"/>
         </value>
     </option>
-    <option name="PERL_ERROR_CHARACTER">
-        <value>
-            <option name="FOREGROUND" value="FF80C0"/>
-        </value>
-    </option>
-    <option name="PERL_FUNCTION">
+    <option name="PERL_SUB">
         <value>
             <option name="FOREGROUND" value="0000FF"/>
         </value>
     </option>
-    <option name="PERL_BUILT_IN">
+    <option name="PERL_SUB_DEFINITION">
         <value>
-            <option name="FONT_TYPE" value="1"/>
-        </value>
-    </option>
-    <option name="PERL_DEPRECATED">
-        <value>
-            <option name="FOREGROUND" value="808080" />
-            <option name="EFFECT_COLOR" value="FF4040" />
-            <option name="EFFECT_TYPE" value="3" />
-        </value>
-    </option>
-    <option name="PERL_FUNCTION_USER">
-        <value>
-            <option name="FOREGROUND" value="ff1493"/>
-        </value>
-    </option>
-    <option name="PERL_OPERATOR">
-        <value>
-            <option name="FOREGROUND" value="000080"/>
+            <option name="FOREGROUND" value="0000FF"/>
         </value>
     </option>
     <option name="PERL_PACKAGE">
         <value>
             <option name="FOREGROUND" value="800080"/>
-        </value>
-    </option>
-    <option name="PERL_PACKAGE_PRAGMA">
-        <value>
-            <option name="FOREGROUND" value="800080"/>
-            <option name="FONT_TYPE" value="3" />
-        </value>
-    </option>
-    <option name="PERL_MULTILINE_MARKER">
-        <value>
-            <option name="FOREGROUND" value="E00000"/>
         </value>
     </option>
     <option name="PERL_REGEX_TOKEN">

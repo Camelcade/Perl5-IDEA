@@ -33,9 +33,9 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
  */
 public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighter implements PerlElementTypes
 {
-	public static final TextAttributesKey EMBED_MARKER = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.METADATA);
+	public static final TextAttributesKey EMBED_MARKER = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
 
-	TextAttributesKey[]	EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER,PERL_BUILT_IN};
+	TextAttributesKey[]	EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER};
 
 	@NotNull
 	@Override

@@ -94,7 +94,6 @@ limitations under the License.
     PERL_COMMA=','
     PERL_ARROW_COMMA='=>'
     PERL_DEREFERENCE='->'
-    PERL_DEPACKAGE='::'
     PERL_COLON=":"
     PERL_LBRACK='['
     PERL_RBRACK=']'
@@ -123,7 +122,6 @@ limitations under the License.
     TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
     EMBED_MARKER="EMBED_MARKER"
 
-    HEREDOC_SQL="HEREDOC_SQL"
 //    TEMPLATE_BLOCK_SQL="TEMPLATE_BLOCK_SQL"
   ]
 

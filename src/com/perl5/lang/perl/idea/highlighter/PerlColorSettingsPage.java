@@ -37,18 +37,34 @@ import java.util.Map;
 public class PerlColorSettingsPage implements ColorSettingsPage
 {
 	private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
+			new AttributesDescriptor("Version", PerlSyntaxHighlighter.PERL_VERSION),
+			new AttributesDescriptor("Number", PerlSyntaxHighlighter.PERL_NUMBER),
+
 			new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
 			new AttributesDescriptor("Block comment", PerlSyntaxHighlighter.PERL_COMMENT_BLOCK),
 
 			new AttributesDescriptor("Embedding marker <? / ?>", EmbeddedPerlSyntaxHighlighter.EMBED_MARKER),
 
-			new AttributesDescriptor("Built-in decoration", PerlSyntaxHighlighter.PERL_BUILT_IN),
+			new AttributesDescriptor("Handle", PerlSyntaxHighlighter.PERL_HANDLE),
+			new AttributesDescriptor("Label", PerlSyntaxHighlighter.PERL_LABEL),
+			new AttributesDescriptor("Block name", PerlSyntaxHighlighter.PERL_BLOCK_NAME),
+			new AttributesDescriptor("Typeglob slot", PerlSyntaxHighlighter.PERL_TAG),
 
-			new AttributesDescriptor("Function", PerlSyntaxHighlighter.PERL_FUNCTION),
 			new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
+			new AttributesDescriptor("Keyword", PerlSyntaxHighlighter.PERL_KEYWORD),
+			new AttributesDescriptor("Dereference", PerlSyntaxHighlighter.PERL_DEREFERENCE),
+
+			new AttributesDescriptor("Annotation", PerlSyntaxHighlighter.PERL_ANNOTATION),
+
+			new AttributesDescriptor("Sub call", PerlSyntaxHighlighter.PERL_FUNCTION),
+			new AttributesDescriptor("Sub definition", PerlSyntaxHighlighter.PERL_FUNCTION_DEFINITION),
+			new AttributesDescriptor("Sub declaration", PerlSyntaxHighlighter.PERL_FUNCTION_DECLARATION),
+			new AttributesDescriptor("Sub attribute", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE),
+			new AttributesDescriptor("Sub prototype", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN),
 
 			new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),
-			new AttributesDescriptor("Pragma", PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA),
+			new AttributesDescriptor("Package definition", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION),
+
 			new AttributesDescriptor("Scalar", PerlSyntaxHighlighter.PERL_SCALAR),
 			new AttributesDescriptor("Array", PerlSyntaxHighlighter.PERL_ARRAY),
 			new AttributesDescriptor("Hash", PerlSyntaxHighlighter.PERL_HASH),
@@ -58,31 +74,35 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Double-quoted string", PerlSyntaxHighlighter.PERL_DQ_STRING),
 			new AttributesDescriptor("Backticked string", PerlSyntaxHighlighter.PERL_DX_STRING),
 
-			new AttributesDescriptor("Version", PerlSyntaxHighlighter.PERL_VERSION),
-			new AttributesDescriptor("Number", PerlSyntaxHighlighter.PERL_NUMBER),
-			new AttributesDescriptor("Dereference", PerlSyntaxHighlighter.PERL_DEREFERENCE),
+			new AttributesDescriptor("Regex quote", PerlSyntaxHighlighter.PERL_REGEX_QUOTE),
+			new AttributesDescriptor("Regex element", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
+
 			new AttributesDescriptor("Comma", PerlSyntaxHighlighter.PERL_COMMA),
 			new AttributesDescriptor("Semicolon", PerlSyntaxHighlighter.PERL_SEMICOLON),
 			new AttributesDescriptor("Braces", PerlSyntaxHighlighter.PERL_BRACE),
 			new AttributesDescriptor("Parentheses", PerlSyntaxHighlighter.PERL_PAREN),
-			new AttributesDescriptor("Brackets", PerlSyntaxHighlighter.PERL_BRACK)
+			new AttributesDescriptor("Brackets", PerlSyntaxHighlighter.PERL_BRACK),
+			new AttributesDescriptor("Angles", PerlSyntaxHighlighter.PERL_ANGLE)
 	};
 
 	@Nullable
 	@Override
-	public Icon getIcon() {
+	public Icon getIcon()
+	{
 		return PerlIcons.PM_FILE;
 	}
 
 	@NotNull
 	@Override
-	public SyntaxHighlighter getHighlighter() {
+	public SyntaxHighlighter getHighlighter()
+	{
 		return new PerlSyntaxHighlighter();
 	}
 
 	@NotNull
 	@Override
-	public String getDemoText() {
+	public String getDemoText()
+	{
 		return "package DTL::Fast::Filter v1.100_00.10;\n" +
 				"use strict; use utf8; use warnings FATAL => 'all'; \n" +
 				"use parent 'DTL::Fast::Entity';\n" +
@@ -122,25 +142,29 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 	@Nullable
 	@Override
-	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
+	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap()
+	{
 		return null;
 	}
 
 	@NotNull
 	@Override
-	public AttributesDescriptor[] getAttributeDescriptors() {
+	public AttributesDescriptor[] getAttributeDescriptors()
+	{
 		return DESCRIPTORS;
 	}
 
 	@NotNull
 	@Override
-	public ColorDescriptor[] getColorDescriptors() {
+	public ColorDescriptor[] getColorDescriptors()
+	{
 		return ColorDescriptor.EMPTY_ARRAY;
 	}
 
 	@NotNull
 	@Override
-	public String getDisplayName() {
+	public String getDisplayName()
+	{
 		return "Perl5";
 	}
 }

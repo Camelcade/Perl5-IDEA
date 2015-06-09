@@ -25,32 +25,33 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 {
+	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
+
+
 	private void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
 	{
-		TextAttributes attributes = key.getDefaultAttributes();
+		TextAttributes attrs = currentScheme.getAttributes(key);
 
 		if (builtin)
-			attributes = TextAttributes.merge(attributes, PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes());
+			attrs = TextAttributes.merge(attrs, PerlSyntaxHighlighter.BOLD);
 		if (deprecated)
-			attributes = TextAttributes.merge(attributes, CodeInsightColors.DEPRECATED_ATTRIBUTES.getDefaultAttributes());
+			attrs = TextAttributes.merge(attrs, PerlSyntaxHighlighter.STROKE);
 
-		annotation.setEnforcedTextAttributes(attributes);
+		annotation.setEnforcedTextAttributes(attrs);
 	}
 
 
@@ -65,9 +66,9 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		else
 		{
 			// not built-in variable
-			Annotation annotation = holder.createInfoAnnotation(element, null);
-			annotation.setEnforcedTextAttributes(baseKey.getDefaultAttributes());
+			holder.createInfoAnnotation(element, null).setTextAttributes(baseKey);
 
+/*			These are for code insight
 			PsiElement parent = element.getParent();
 
 			PerlVariable lexicalDeclaration = element.getLexicalDeclaration();
@@ -107,6 +108,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			}
 
 			// todo annotate found variables here, not in the beginnig
+*/
 
 		}
 	}
@@ -115,32 +117,25 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	{
 		PsiElement parent = namespaceElement.getParent();
 
-		if (parent instanceof GeneratedParserUtilBase.DummyBlock || parent instanceof PerlNamespaceDefinition)
-			return;
+		if (!(parent instanceof GeneratedParserUtilBase.DummyBlock))
+			if (parent instanceof PerlNamespaceDefinition)
+				holder.createInfoAnnotation(namespaceElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION);
+			else if (namespaceElement.isPragma())
+			{
+				Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
+				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE);
+				annotation.setEnforcedTextAttributes(PerlSyntaxHighlighter.BOLD_ITALIC);
+			} else if( !(parent instanceof PerlVariable))
+				decorateElement(
+						holder.createInfoAnnotation(namespaceElement, null),
+						PerlSyntaxHighlighter.PERL_PACKAGE,
+						namespaceElement.isBuiltin(),
+						namespaceElement.isDeprecated()
+				);
 
-		if (namespaceElement.isDeprecated())
-		{
-			Annotation annotation = holder.createWarningAnnotation(namespaceElement, "This sub is marked as deprecated");
-			annotation.setEnforcedTextAttributes(
-					TextAttributes.merge(
-							PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes(),
-							CodeInsightColors.DEPRECATED_ATTRIBUTES.getDefaultAttributes())
-			);
-		} else if (namespaceElement.isPragma())
-		{
-			Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
-			annotation.setEnforcedTextAttributes(
-					TextAttributes.merge(
-							PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes(),
-							PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA.getDefaultAttributes())
-			);
-		} else if (namespaceElement.isBuiltin())
-		{
-			Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
-			annotation.setEnforcedTextAttributes(
-					PerlSyntaxHighlighter.PERL_BUILT_IN.getDefaultAttributes()
-			);
-		} else if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
+
+/* Codeinsight part
+		if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
 		{
 			List<PerlFileElement> namespaceFiles = namespaceElement.getNamespaceFiles();
 
@@ -153,15 +148,20 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			if (namespaceDefinitions.size() == 0)
 				holder.createWarningAnnotation(namespaceElement, "Unable to find namespace definition [if this is a module installed from CPAN, it's ok, just NYI]");
 		}
+*/
 	}
 
 	private void annotateSubNameElement(PerlSubNameElement perlSubNameElement, AnnotationHolder holder)
 	{
 		PsiElement parent = perlSubNameElement.getParent();
 
-		if (parent instanceof GeneratedParserUtilBase.DummyBlock)
-			return;
+		if (!(parent instanceof GeneratedParserUtilBase.DummyBlock))
+			if (parent instanceof PsiPerlSubDeclaration)
+				holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_FUNCTION_DECLARATION);
+			else if (parent instanceof PsiPerlSubDefinition)
+				holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_FUNCTION_DEFINITION);
 
+/*
 		PerlNamespaceElement methodNamespaceElement = null;
 		if (parent instanceof PerlMethod)
 			methodNamespaceElement = ((PerlMethod) parent).getNamespaceElement();
@@ -206,6 +206,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			// todo check that arguments number suits prototype
 			// todo check for override
 		}
+*/
 	}
 
 	private void annotateStringContent(PerlStringContentElementImpl element, AnnotationHolder holder)
