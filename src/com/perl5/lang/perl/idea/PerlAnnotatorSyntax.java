@@ -33,9 +33,13 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 {
@@ -68,7 +72,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			// not built-in variable
 			holder.createInfoAnnotation(element, null).setTextAttributes(baseKey);
 
-/*			These are for code insight
+			// todo move to inspections
 			PsiElement parent = element.getParent();
 
 			PerlVariable lexicalDeclaration = element.getLexicalDeclaration();
@@ -82,8 +86,6 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 				return;
 
 			boolean hasExplicitNamespace = namespaceElement != null;
-
-			// todo we should annotate only variable name
 
 			if (!hasExplicitNamespace)
 			{
@@ -108,7 +110,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			}
 
 			// todo annotate found variables here, not in the beginnig
-*/
+
 
 		}
 	}
@@ -118,14 +120,19 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		PsiElement parent = namespaceElement.getParent();
 
 		if (!(parent instanceof GeneratedParserUtilBase.DummyBlock))
+		{
 			if (parent instanceof PerlNamespaceDefinition)
+			{
 				holder.createInfoAnnotation(namespaceElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION);
+				return;
+			}
 			else if (namespaceElement.isPragma())
 			{
 				Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE);
 				annotation.setEnforcedTextAttributes(PerlSyntaxHighlighter.BOLD_ITALIC);
-			} else if( !(parent instanceof PerlVariable))
+				return;
+			} else if (!(parent instanceof PerlVariable))
 				decorateElement(
 						holder.createInfoAnnotation(namespaceElement, null),
 						PerlSyntaxHighlighter.PERL_PACKAGE,
@@ -133,22 +140,21 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 						namespaceElement.isDeprecated()
 				);
 
+			// todo move to inspection
+			if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
+			{
+				List<PerlFileElement> namespaceFiles = namespaceElement.getNamespaceFiles();
 
-/* Codeinsight part
-		if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
-		{
-			List<PerlFileElement> namespaceFiles = namespaceElement.getNamespaceFiles();
+				if (namespaceFiles.size() == 0)
+					holder.createWarningAnnotation(namespaceElement, "Unable to find package file");
+			} else
+			{
+				List<PerlNamespaceDefinition> namespaceDefinitions = namespaceElement.getNamespaceDefinitions();
 
-			if (namespaceFiles.size() == 0)
-				holder.createWarningAnnotation(namespaceElement, "Unable to find package file [if this is a module installed from CPAN, it's ok, just NYI]");
-		} else
-		{
-			List<PerlNamespaceDefinition> namespaceDefinitions = namespaceElement.getNamespaceDefinitions();
-
-			if (namespaceDefinitions.size() == 0)
-				holder.createWarningAnnotation(namespaceElement, "Unable to find namespace definition [if this is a module installed from CPAN, it's ok, just NYI]");
+				if (namespaceDefinitions.size() == 0)
+					holder.createWarningAnnotation(namespaceElement, "Unable to find namespace definition");
+			}
 		}
-*/
 	}
 
 	private void annotateSubNameElement(PerlSubNameElement perlSubNameElement, AnnotationHolder holder)
@@ -161,7 +167,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			else if (parent instanceof PsiPerlSubDefinition)
 				holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_FUNCTION_DEFINITION);
 
-/*
+		// todo move to inspections
 		PerlNamespaceElement methodNamespaceElement = null;
 		if (parent instanceof PerlMethod)
 			methodNamespaceElement = ((PerlMethod) parent).getNamespaceElement();
@@ -206,7 +212,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			// todo check that arguments number suits prototype
 			// todo check for override
 		}
-*/
+
 	}
 
 	private void annotateStringContent(PerlStringContentElementImpl element, AnnotationHolder holder)
