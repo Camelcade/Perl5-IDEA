@@ -33,13 +33,13 @@ public class PerlCommenter implements Commenter
     @Nullable
     @Override
     public String getBlockCommentPrefix() {
-        return null;
+        return "=pod";
     }
 
     @Nullable
     @Override
     public String getBlockCommentSuffix() {
-        return null;
+        return "=cut";
     }
 
     @Nullable

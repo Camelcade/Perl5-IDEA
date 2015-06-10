@@ -16,12 +16,6 @@
   -->
 
 <list>
-    <option name="POD_MARKER">
-        <value>
-            <option name="FOREGROUND" value="808080"/>
-            <option name="FONT_TYPE" value="1"/>
-        </value>
-    </option>
     <option name="POD_TAG">
         <value>
             <option name="FOREGROUND" value="0000A0"/>
@@ -36,7 +30,7 @@
     </option>
     <option name="POD_CODE">
         <value>
-            <option name="FOREGROUND" value="FF0000"/>
+            <option name="FOREGROUND" value="4F69FF"/>
             <!--<option name="BACKGROUND" value="fafafa"/>-->
         </value>
     </option>
