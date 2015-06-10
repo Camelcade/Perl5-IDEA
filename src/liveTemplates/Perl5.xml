@@ -242,4 +242,49 @@
             <option name="PERL5" value="true" />
         </context>
     </template>
+    <template name="q" value="q{$END$}" description="single quote" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="qw" value="qw{$END$}" description="Quoted list" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="qq" value="qq{$END$}" description="Double quote" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="tr" value="tr{$FROM$}{$TO$}$END$" description="Transliteration" toReformat="true" toShortenFQNames="true">
+        <variable name="FROM" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="TO" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="qx" value="qx{$END$}" description="Executable quote" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="qr" value="qr{$END$}x" description="Compile regexp" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="s" value="s{$PATTERN$}{$REPLACEMENT$}x$END$" description="Substitute regexp" toReformat="true" toShortenFQNames="true">
+        <variable name="PATTERN" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="REPLACEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="m" value="m{$PATTERN$}x$END$" description="Match regexp" toReformat="true" toShortenFQNames="true">
+        <variable name="PATTERN" expression="" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
 </templateSet>

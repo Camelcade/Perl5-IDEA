@@ -31,6 +31,7 @@
       <li>Implemented IntelliLang editing support for heredoc blocks.</li>
       <li>Fixed confusing highlighting for perl-in-pod-in-perl.</li>
       <li>Added block commenting with pod.</li>
+      <li>Implemented livetemplates for tr, regex and quote-like operations.</li>
       </ul>
 
     ]]>
