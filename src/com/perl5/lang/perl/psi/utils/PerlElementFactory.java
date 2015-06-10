@@ -56,6 +56,14 @@ public class PerlElementFactory
 		return PsiTreeUtil.findChildOfType(file, PerlHeredocTerminatorElementImpl.class);
 	}
 
+	public static PerlHeredocElementImpl createHereDoc(Project project, String text)
+	{
+		long randomNumber = (long)(Math.random() * Long.MAX_VALUE);
+		String marker = "TEXT" + randomNumber;
+		PerlFileElement file = createFile(project, "<<'"+marker+"';\n"+ text +"\n"+marker+"\n");
+		return PsiTreeUtil.findChildOfType(file, PerlHeredocElementImpl.class);
+	}
+
 	public static PerlStringContentElementImpl createStringContent(Project project, String name)
 	{
 		PerlFileElement file = createFile(project, "'"+name+"';");

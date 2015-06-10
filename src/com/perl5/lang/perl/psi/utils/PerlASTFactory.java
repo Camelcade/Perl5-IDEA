@@ -34,6 +34,8 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	{
 		if( type == PERL_HEREDOC_END )
 			return new PerlHeredocTerminatorElementImpl(type, text);
+		else if( type == PERL_HEREDOC )
+			return new PerlHeredocElementImpl(type, text);
 		else
 			return super.createComment(type, text);
 	}

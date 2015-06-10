@@ -65,6 +65,7 @@
         <gotoDeclarationHandler implementation="com.perl5.lang.perl.idea.PerlGotoDeclarationHandler" />
         <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
         <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first" implementationClass="com.perl5.lang.perl.idea.editor.PerlPsiHeredocManipulator"/>
 
         <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
