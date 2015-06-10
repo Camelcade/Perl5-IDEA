@@ -31,7 +31,8 @@
       <li>Implemented IntelliLang editing support for heredoc blocks.</li>
       <li>Fixed confusing highlighting for perl-in-pod-in-perl.</li>
       <li>Added block commenting with pod.</li>
-      <li>Implemented livetemplates for tr, regex and quote-like operations.</li>
+      <li>Added livetemplates for tr, regex and quote-like operations.</li>
+      <li>Implemented simple quote handler.</li>
       </ul>
 
     ]]>
@@ -69,6 +70,11 @@
         <gotoDeclarationHandler implementation="com.perl5.lang.perl.idea.PerlGotoDeclarationHandler" />
         <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
         <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+
+
+        <quoteHandler fileType="Perl5 script" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+
+
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first" implementationClass="com.perl5.lang.perl.idea.editor.PerlPsiHeredocManipulator"/>
 
         <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
@@ -108,6 +114,7 @@
         <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
         <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
         <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+
 
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
         <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
