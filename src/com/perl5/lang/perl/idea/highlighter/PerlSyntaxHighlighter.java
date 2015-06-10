@@ -95,7 +95,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey PERL_HASH = createTextAttributesKey("PERL_HASH", DefaultLanguageHighlighterColors.IDENTIFIER);
 	public static final TextAttributesKey PERL_GLOB = createTextAttributesKey("PERL_GLOB", DefaultLanguageHighlighterColors.IDENTIFIER);
 
-	private static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<IElementType, TextAttributesKey[]>();
+	private static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<>();
 
 	static
 	{
@@ -150,18 +150,19 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.PERL_NUMBER_VERSION, new TextAttributesKey[]{PERL_VERSION});
 
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR});
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_NOT, new TextAttributesKey[]{PERL_OPERATOR});
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_DIV, new TextAttributesKey[]{PERL_OPERATOR});
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_X, new TextAttributesKey[]{PERL_OPERATOR});
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_UNARY, new TextAttributesKey[]{PERL_OPERATOR});
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_FILETEST, new TextAttributesKey[]{PERL_OPERATOR});
 
+		attributesMap.put(PerlElementTypes.PERL_OPERATOR_NOT, new TextAttributesKey[]{PERL_KEYWORD});
+		attributesMap.put(PerlElementTypes.PERL_OPERATOR_UNARY, new TextAttributesKey[]{PERL_KEYWORD});
 		attributesMap.put(PerlElementTypes.PERL_RESERVED, new TextAttributesKey[]{PERL_KEYWORD});
 		attributesMap.put(PerlElementTypes.PERL_KEYWORD, new TextAttributesKey[]{PERL_KEYWORD});
 		attributesMap.put(PerlElementTypes.PERL_TAG, new TextAttributesKey[]{PERL_TAG});
 
 		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
 		attributesMap.put(PerlElementTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
+		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_KEYWORD});
 		attributesMap.put(PerlElementTypes.PERL_HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
@@ -171,7 +172,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.PERL_VARIABLE_NAME, new TextAttributesKey[]{DefaultLanguageHighlighterColors.IDENTIFIER});
 	}
 
-	private static final HashMap<Language, SyntaxHighlighterBase> highlightersMap = new HashMap<Language, SyntaxHighlighterBase>();
+	private static final HashMap<Language, SyntaxHighlighterBase> highlightersMap = new HashMap<>();
 
 	static
 	{
