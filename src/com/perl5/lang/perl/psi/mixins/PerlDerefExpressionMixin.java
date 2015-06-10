@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.PerlPackage;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -43,19 +42,18 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 		int step = 0;
 
 		// todo add some caching here
-		for( PsiElement nextElement: chainElements)
+		for (PsiElement nextElement : chainElements)
 		{
-			if( nextElement == methodElement )
+			if (nextElement == methodElement)
 				return currentPackageName;
-			else if( nextElement instanceof PsiPerlNamespaceExpr)
-				currentPackageName = ((PerlNamespaceElement)nextElement.getFirstChild()).getName();
-			else if( step == 0 && nextElement instanceof PsiPerlTermExpr && nextElement.getFirstChild() instanceof PerlVariable )
+			else if (nextElement instanceof PsiPerlNamespaceExpr)
+				currentPackageName = ((PerlNamespaceElement) nextElement.getFirstChild()).getName();
+			else if (step == 0 && nextElement instanceof PsiPerlTermExpr && nextElement.getFirstChild() instanceof PerlVariable)
 			{
 				currentPackageName = ((PerlVariable) nextElement.getFirstChild()).guessVariableType();
-				if( currentPackageName == null )
+				if (currentPackageName == null)
 					return null;
-			}
-			else if( nextElement.getNode().getElementType() != PerlElementTypes.PERL_DEREFERENCE)
+			} else if (nextElement.getNode().getElementType() != PerlElementTypes.PERL_DEREFERENCE)
 			{
 //				System.out.println("Stopped traversing at: " + nextElement.getText() + " " + nextElement.getClass());
 				break;

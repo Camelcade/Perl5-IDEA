@@ -16,28 +16,20 @@
 
 package com.perl5.lang.perl.idea.completion.providers;
 
-import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionProvider;
+import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.PerlPackageInsertHandler;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.PerlPackage;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
-import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by hurricup on 31.05.2015.
- *
  */
 public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<CompletionParameters>
 {
@@ -66,21 +58,21 @@ public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<Com
 				for (String packageName : PerlPackageUtil.BUILT_IN_PRAGMA)
 				{
 					resultSet.addElement(LookupElementBuilder
-							.create(element, packageName)
-							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-							.withBoldness(true)
-							.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
+									.create(element, packageName)
+									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
+									.withBoldness(true)
+									.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
 					);
 				}
 
 				for (String packageName : PerlPackageUtil.BUILT_IN_DEPRECATED)
 				{
 					resultSet.addElement(LookupElementBuilder
-							.create(element, packageName)
-							.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-							.withBoldness(true)
-							.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
-							.withStrikeoutness(true)
+									.create(element, packageName)
+									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
+									.withBoldness(true)
+									.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
+									.withStrikeoutness(true)
 					);
 				}
 

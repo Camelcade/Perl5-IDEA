@@ -27,12 +27,14 @@
     <change-notes><![CDATA[
       <p>0.26 beta</p>
       <ul>
-      <li>Lexical scanner made dumber to prevent thread hanging.</li>
+      <li>Lexical variables scanner made dumber to prevent thread hanging.</li>
       <li>Implemented IntelliLang editing support for heredoc blocks.</li>
       <li>Fixed confusing highlighting for perl-in-pod-in-perl.</li>
       <li>Added block commenting with pod.</li>
-      <li>Added livetemplates for tr, regex and quote-like operations.</li>
+      <li>Added live templates for tr, regex and quote-like operations.</li>
       <li>Implemented simple quote handler.</li>
+      <li>Implemented "Create perl file" action</li>
+      <li>Implemented basic file templates for scripts, packages and embedded perl files.</li>
       </ul>
 
     ]]>
@@ -47,6 +49,12 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+
+        <internalFileTemplate name="Perl5 package"/>
+        <internalFileTemplate name="Perl5 script"/>
+        <internalFileTemplate name="Perl5 embedded"/>
+
+        <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
 
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
         <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
@@ -139,7 +147,10 @@
     </project-components>
 
     <actions>
-        <!-- Add your actions here -->
+        <action id="Perl5.NewPerlFile" class="com.perl5.lang.perl.idea.actions.CreatePerlFileAction"
+                text="Perl5 File" description="Create new Perl5 file">
+            <add-to-group group-id="NewGroup" anchor="first" relative-to-action="NewFile"/>
+        </action>
     </actions>
 
 </idea-plugin>

@@ -58,7 +58,7 @@ public class PerlUtil
 		if (module != null)
 		{
 			for (VirtualFile classRoot : ModuleRootManager.getInstance(module).orderEntries().classes().getRoots())
-				if (VfsUtil.isAncestor(classRoot, file, true))
+				if (VfsUtil.isAncestor(classRoot, file, false))
 					return classRoot;
 		} else
 			throw new IncorrectOperationException("Unable to find class root for file outside of the modules");
@@ -82,7 +82,7 @@ public class PerlUtil
 			for (VirtualFile classRoot : ModuleRootManager.getInstance(module).orderEntries().classes().getRoots())
 			{
 				File sourceRootFile = new File(classRoot.getPath());
-				if (VfsUtil.isAncestor(sourceRootFile, file, true))
+				if (VfsUtil.isAncestor(sourceRootFile, file, false))
 					return classRoot;
 			}
 		}
