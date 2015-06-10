@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.25 beta</version>
+    <version>0.26 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -25,103 +25,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.25 beta</p>
+      <p>0.26 beta</p>
       <ul>
-      <li>Re-worked syntax highlighter and color palette. </li>
+      <li>Lexical scanner made dumber to prevent thread hanging. </li>
       </ul>
 
-      <p>0.24 beta</p>
-      <ul>
-      <li>Fixed bug with classpath detection for Perl5 SDK, issue #111</li>
-      <li>Perl5 SDK renamed to Perl5 Interpreter</li>
-      <li>Fixed default functions color to common FUNCTION_CALL, issue #105</li>
-      <li>Probably fixed bug with annotator starts to show strange things, like variables shadows themselves</li>
-      <li>Implemented prefix and postfix live templates contexts</li>
-      <li>Implemented live templates for all compound and postfix statements, including surrounding templates for compound statements.</li>
-      </ul>
-
-      <p>0.23 beta</p>
-      <ul>
-        <li>IMPORTANT: from this build you must have Perl5 module and configured Perl Interpreter</li>
-        <li>A lot of refactorings and performance optimizations</li>
-        <li>Implemented IDEA annotation warnings for variables: undeclared, shadowed, muliti-declared</li>
-        <li>Implemented IDEA annotation warnings for currenlty unresolveble methods and packages.</li>
-        <li>Implemented livetemplates.</li>
-        <li>Implemented #@annotations for Perl subs. Implemented: #@deprecated, #@method, #@override and #@returns. Only deprecated currently doing anything.</li>
-        <li>Implemented Perl interpreter support, Perl modules support, Perl modules configuration support</li>
-        <li>In order to make your module libs work, you must add them as a library with classes into module dependencies. NB: relative use NYI (not looking in . dir).</li>
-      </ul>
-
-      <p>0.22 beta</p>
-      <ul>
-        <li>Implemented goto contributor</li>
-        <li>Implemented function parameters parsing from @_ and shift, shown in autocomplete</li>
-        <li>Some new icons for variables, packages and subs</li>
-      </ul>
-
-      <p>0.21 beta</p>
-      <ul>
-        <li>Lexer and parser improvements</li>
-        <li>Smarter functions and packages autocompletion</li>
-      </ul>
-
-      <p>0.20 beta</p>
-      <ul>
-        <li>Fancy use parent autocompletion</li>
-        <li>Tons of bugfixes and optimizations</li>
-      </ul>
-
-      <p>0.19 beta</p>
-      <ul>
-        <li>Implemented global variables autocompletion, navigation and refactoring</li>
-      </ul>
-
-      <p>0.18 beta</p>
-      <ul>
-        <li>Implemented packages refactoring</li>
-        <li>Bugfixes</li>
-      </ul>
-
-      <p>0.17 beta</p>
-      <ul>
-        <li>Fixed problems with parenthesised expressions parsing in some situations</li>
-        <li>Implemented navigation for packages (re-factoring not work and buggy). For navigation to package files, your lib root -I must be explicitly marked as one of the source roots.</li>
-        <li>Implemented lexing and parsing of /e regexps</li>
-        <li>Bugfixes</li>
-      </ul>
-
-      <p>0.16 beta</p>
-      <ul>
-        <li>Find usages provider is now online</li>
-        <li>Implemented lexical variables autocompletion</li>
-        <li>Implemented lexical variables referencing and refactoring</li>
-        <li>Error localization improved</li>
-        <li>Bugfixes</li>
-      </ul>
-
-      <p>0.14.1 beta</p>
-      <ul>
-        <li>Implemented basic brace matcher</li>
-        <li>Implemented jump to function declaration by click (works with obvious calls for now: package::method and package->method)</li>
-        <li>Implemented methods re-factoring (same as above, use with CARE with VCS and extensive testing)</li>
-        <li>Implemented code folding for sequential comments and imports</li>
-        <li>Implemented functions auto-completion with stubs</li>
-        <li>Lexing and parsing bugfixes</li>
-      </ul>
-
-      <p>0.13 beta</p>
-      <ul>
-        <li>Trenar expression operands are now scalar expressions, not any expressions</li>
-        <li>Bareword file handle now can be a normal function argument</li>
-        <li>print map expression is not treating map as a filehandle anymore</li>
-      </ul>
-
-      <p>0.12 beta</p>
-      <ul>
-        <li>Fixed bugs with heredoc and pod lexing exceptions on editing openers</li>
-        <li>Added required bareword packages to autocomplete</li>
-        <li>Implemented correct lexing and parsing for package->$method call</li>
-      </ul>
     ]]>
     </change-notes>
 
