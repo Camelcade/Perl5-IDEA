@@ -28,6 +28,7 @@
       <p>0.26 beta</p>
       <ul>
       <li>Lexical scanner made dumber to prevent thread hanging. </li>
+      <li>Implemented IntelliLang editing support for heredoc blocks. </li>
       </ul>
 
     ]]>
