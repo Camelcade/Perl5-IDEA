@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.26 beta</version>
+    <version>0.27 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -25,16 +25,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.26 beta</p>
+      <p>0.27 beta</p>
       <ul>
-      <li>Lexical variables scanner made dumber to prevent thread hanging.</li>
-      <li>Implemented IntelliLang editing support for heredoc blocks.</li>
-      <li>Fixed confusing highlighting for perl-in-pod-in-perl.</li>
-      <li>Added block commenting with pod.</li>
-      <li>Added live templates for tr, regex and quote-like operations.</li>
-      <li>Implemented simple quote handler.</li>
-      <li>Implemented "Create perl file" action</li>
-      <li>Implemented basic file templates for scripts, packages and embedded perl files.</li>
+      <li></li>
       </ul>
 
     ]]>
