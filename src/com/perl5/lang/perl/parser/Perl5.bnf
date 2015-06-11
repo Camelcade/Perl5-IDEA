@@ -198,18 +198,27 @@ private block_content ::= file_item * {recoverWhile=recover_block}
 private recover_block ::= !(PERL_RBRACE)
 
 private namespace_item ::=
-    sub_definition
-    | named_block
-    | compound_statement
+    compound_statement
     | statement <<statementSemi>>
     | annotation
 
-
+private compound_statement ::=
+    sub_definition
+    | named_block
+    | labelable_compound_statment
 
 named_block ::= PERL_BLOCK_NAME block
 
-// declarations
-private compound_statement ::=
+// fixme we can't pin this because we need to distinct declaration and definition
+sub_definition ::= [annotations] "sub" canonical_sub_name [sub_definition_parameters] block
+
+private sub_definition_parameters ::=
+    sub_prototype [sub_attributes]
+    | sub_attributes [sub_signature]
+    | sub_signature
+
+
+private labelable_compound_statment ::=
     [label_declaration] (
         block_compound
         | if_compound
@@ -227,17 +236,19 @@ private if_compound_elsif ::= 'elsif' conditional_block  {pin=1}
 private if_compound_else  ::= 'else' unconditional_block {pin=1}
 unconditional_block ::= block
 
-conditional_block ::= condition_statement_expr block {name="Conditional block"}
-condition_statement_expr ::= parenthesised_expr // annotator should check that condition is not empty
+conditional_block ::= condition_statement block {pin=1 name="Conditional block"}
+condition_statement ::= PERL_LPAREN condition PERL_RPAREN {pin=1}
+private condition ::= expr {recoverWhile=recover_parenthesised}
+private recover_parenthesised ::= !(PERL_RPAREN)
 
 given_compound ::= 'given' conditional_block  {pin=1}
 
-while_compound ::= 'while' conditional_block [compound_continue_block]  {pin=1}
-until_compound ::= 'until' conditional_block [compound_continue_block]  {pin=1}
+while_compound ::= 'while' conditional_block [continue_block]  {pin=1}
+until_compound ::= 'until' conditional_block [continue_block]  {pin=1}
 
-private compound_continue_block ::= 'continue' block
+continue_block ::= 'continue' block {pin=1}
 
-private block_compound ::= block [compound_continue_block]
+private block_compound ::= block [continue_block]
 
 
 // for/foreach
@@ -255,7 +266,7 @@ for_list_statement ::=
     [ variable_declaration | variable ] parenthesised_expr
 
 private statements ::= (statement | PERL_SEMI )+
-statement ::= [label_declaration] statement_variation [statement_modifier] {recoverWhile=recover_statement} {pin=2}
+statement ::= [label_declaration] statement_variation [statement_modifier] {pin=2 recoverWhile=recover_statement}
 
 private statement_variation ::=
     use_statement
@@ -266,12 +277,6 @@ private statement_variation ::=
 
 require_statement ::= require_expr &(PERL_RESERVED | ';' | '}')
 
-sub_definition ::= [annotations] "sub" canonical_sub_name [sub_definition_parameters] block
-
-private sub_definition_parameters ::=
-    sub_prototype [sub_attributes]
-    | sub_attributes [sub_signature]
-    | sub_signature
 
 sub_declaration ::= [annotations] "sub" canonical_sub_name sub_declaration_parameters
 

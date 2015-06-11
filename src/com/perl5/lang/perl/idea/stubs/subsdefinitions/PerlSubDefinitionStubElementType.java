@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
@@ -50,6 +52,12 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public PerlSubDefinitionStub createStub(@NotNull PsiPerlSubDefinition psi, StubElement parentStub)
 	{
 		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getSubArgumentsList(), psi.isMethod(), psi.getSubAnnotations());
+	}
+
+	@Override
+	public boolean shouldCreateStub(ASTNode node)
+	{
+		return node.findChildByType(PerlElementTypes.PERL_FUNCTION) != null;
 	}
 
 	@NotNull
