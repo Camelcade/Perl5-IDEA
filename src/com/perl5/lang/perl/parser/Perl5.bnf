@@ -188,7 +188,7 @@ private file_item ::= !<<eof>> {PERL_SEMI | namespace_block | namespace_item} //
 namespace_block ::= namespace_definition (block | PERL_SEMI namespace_content)
 namespace_definition ::= "package" namespace_element [perl_version] {pin=1 recoverWhile=recover_namespace_definition}
 private recover_namespace_definition ::= !(PERL_SEMI | PERL_LBRACE)
-private namespace_content ::= namespace_item *  {recoverWhile=recover_namespace}
+namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
 
 // todo make package as token
 private recover_namespace ::= !( "package" )
