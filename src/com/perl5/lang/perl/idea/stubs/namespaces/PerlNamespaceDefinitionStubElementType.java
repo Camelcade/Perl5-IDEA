@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.idea.stubs.namespaces;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
@@ -74,4 +76,9 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		return new PerlNamespaceDefinitionStubImpl(parentStub,dataStream.readName().getString());
 	}
 
+	@Override
+	public boolean shouldCreateStub(ASTNode node)
+	{
+		return node.findChildByType(PerlElementTypes.PERL_PACKAGE) != null;
+	}
 }

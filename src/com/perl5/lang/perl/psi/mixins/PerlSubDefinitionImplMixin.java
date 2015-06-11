@@ -90,58 +90,63 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 		// todo add stubs reading here
 
 		PsiPerlBlock subBlock = getBlock();
-		for (PsiElement statement : subBlock.getChildren())
+
+		if( subBlock != null )
 		{
-			PsiPerlAssignExpr assignExpression = PsiTreeUtil.findChildOfType(statement, PsiPerlAssignExpr.class);
-			if (assignExpression != null)
+
+			for (PsiElement statement : subBlock.getChildren())
 			{
-				Collection<PsiPerlExpr> assignTerms = assignExpression.getExprList();
-				assert assignTerms instanceof SmartList;
-				if (assignTerms.size() == 2)
+				PsiPerlAssignExpr assignExpression = PsiTreeUtil.findChildOfType(statement, PsiPerlAssignExpr.class);
+				if (assignExpression != null)
 				{
-					PsiPerlExpr leftTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(0);
-					PsiPerlExpr rightTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(1);
-
-					PsiPerlVariableDeclarationLexical declaration = PsiTreeUtil.findChildOfType(leftTerm, PsiPerlVariableDeclarationLexical.class);
-					if (declaration != null)
+					Collection<PsiPerlExpr> assignTerms = assignExpression.getExprList();
+					assert assignTerms instanceof SmartList;
+					if (assignTerms.size() == 2)
 					{
-						PerlNamespaceElement variableClass = declaration.getNamespaceElement();
-						String definitionClassName = "";
-						if (variableClass != null)
-							definitionClassName = variableClass.getName();
+						PsiPerlExpr leftTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(0);
+						PsiPerlExpr rightTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(1);
 
-						if ("@_".equals(rightTerm.getText()))
+						PsiPerlVariableDeclarationLexical declaration = PsiTreeUtil.findChildOfType(leftTerm, PsiPerlVariableDeclarationLexical.class);
+						if (declaration != null)
 						{
-							for (PerlVariable variable : PsiTreeUtil.findChildrenOfType(declaration, PerlVariable.class))
-							{
-								PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
+							PerlNamespaceElement variableClass = declaration.getNamespaceElement();
+							String definitionClassName = "";
+							if (variableClass != null)
+								definitionClassName = variableClass.getName();
 
-								if (variableNameElement != null)
-									arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
+							if ("@_".equals(rightTerm.getText()))
+							{
+								for (PerlVariable variable : PsiTreeUtil.findChildrenOfType(declaration, PerlVariable.class))
+								{
+									PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
+
+									if (variableNameElement != null)
+										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
+								}
+								break;
+
+							} else if ("shift".equals(rightTerm.getText()))
+							{
+								PerlVariable variable = PsiTreeUtil.findChildOfType(declaration, PerlVariable.class);
+
+								if (variable != null)
+								{
+									PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
+
+									if (variableNameElement != null)
+										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
+								}
 							}
+						} else
+							// todo dunno what can else be here
 							break;
-
-						} else if ("shift".equals(rightTerm.getText()))
-						{
-							PerlVariable variable = PsiTreeUtil.findChildOfType(declaration, PerlVariable.class);
-
-							if (variable != null)
-							{
-								PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
-
-								if (variableNameElement != null)
-									arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
-							}
-						}
 					} else
-						// todo dunno what can else be here
+						// todo dunno how to handle this yet like my $scalar = my $something = shift;
 						break;
 				} else
-					// todo dunno how to handle this yet like my $scalar = my $something = shift;
+					// not an assignment here
 					break;
-			} else
-				// not an assignment here
-				break;
+			}
 		}
 
 		return arguments;
