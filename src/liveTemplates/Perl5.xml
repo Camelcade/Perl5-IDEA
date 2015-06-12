@@ -154,7 +154,17 @@
             <option name="PERL5" value="true" />
         </context>
     </template>
-    <template name="block wrapper" value="{&#10;    $SELECTION$&#10;}" description="wrap with block" toReformat="true" toShortenFQNames="true">
+    <template name="block wrapper" value="{&#10;    $SELECTION$&#10;}" description="wrap with braces" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="array wrapper" value="[&#10;    $SELECTION$&#10;]" description="wrap with brackets" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true" />
+        </context>
+    </template>
+    <template name="list wrapper" value="(&#10;    $SELECTION$&#10;)" description="wrap with parentheses" toReformat="true" toShortenFQNames="true">
         <context>
             <option name="PERL5" value="true" />
         </context>
