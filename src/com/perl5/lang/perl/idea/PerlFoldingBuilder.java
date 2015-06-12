@@ -30,6 +30,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -158,7 +159,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		Collection<PsiPerlStatement> imports = PsiTreeUtil.findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireStatement.class);
+		Collection<PerlNamespaceElementContainer> imports = PsiTreeUtil.findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireExpr.class);
 
 		int currentOffset = 0;
 
@@ -168,28 +169,34 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			{
 				PsiElement currentStatement = perlImport;
 
-				int blockStart = perlImport.getTextOffset();
-				int blockEnd = blockStart;
-				ASTNode blockNode = perlImport.getNode();
+				if( currentStatement instanceof PerlRequireExpr)
+					currentStatement = currentStatement.getParent();
 
-				int importsNumber = 0;
-
-				while (currentStatement != null)
+				if( currentStatement instanceof PerlUseStatement || currentStatement.getFirstChild() instanceof PerlRequireExpr)
 				{
-					if (currentStatement instanceof PsiPerlUseStatement || currentStatement instanceof PsiPerlRequireStatement)
+					int blockStart = currentStatement.getTextOffset();
+					int blockEnd = blockStart;
+					ASTNode blockNode = perlImport.getNode();
+
+					int importsNumber = 0;
+
+					while (currentStatement != null)
 					{
-						blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
-						importsNumber++;
-					} else if (!(currentStatement instanceof PsiComment || currentStatement instanceof PsiWhiteSpace))
-						break;
+						if (currentStatement instanceof PsiPerlUseStatement || currentStatement.getFirstChild() instanceof PerlRequireExpr)
+						{
+							blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
+							importsNumber++;
+						} else if (!(currentStatement instanceof PsiComment || currentStatement instanceof PsiWhiteSpace))
+							break;
 
-					currentStatement = currentStatement.getNextSibling();
-				}
+						currentStatement = currentStatement.getNextSibling();
+					}
 
-				if (blockEnd != blockStart && importsNumber > 1)
-				{
-					currentOffset = blockEnd;
-					descriptors.add(new FoldingDescriptor(blockNode, new TextRange(blockStart, blockEnd)));
+					if (blockEnd != blockStart && importsNumber > 1)
+					{
+						currentOffset = blockEnd;
+						descriptors.add(new FoldingDescriptor(blockNode, new TextRange(blockStart, blockEnd)));
+					}
 				}
 			}
 		}
@@ -213,8 +220,13 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
 		// Anon arrays
-		for (final T block : PsiTreeUtil.findChildrenOfType(root, c))
+		for (PsiElement block : PsiTreeUtil.findChildrenOfType(root, c))
 		{
+			if( block instanceof PsiPerlNamespaceContent)
+				block = block.getParent();
+			else if( block instanceof PsiPerlBlock && block.getParent() instanceof PerlSubDefinition)
+				block = block.getParent();
+
 			TextRange range = block.getTextRange();
 			int startOffset = range.getStartOffset() + startMargin;
 			int endOffset = range.getEndOffset() - endMargin;
@@ -251,9 +263,11 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return "# Block comment";
 		else if (elementType == PerlElementTypes.PERL_COMMENT)
 			return "# comments...";
-		else if (elementType == PerlElementTypes.NAMESPACE_CONTENT)
-			return "package contents...";
-		else if (elementType == PerlElementTypes.USE_STATEMENT ) // || elementType == PerlElementTypes.REQUIRE_STATEMENT
+		else if (elementType == PerlElementTypes.NAMESPACE_BLOCK)
+			return node.getFirstChildNode().getText() + "...";
+		else if (elementType == PerlElementTypes.SUB_DEFINITION)
+			return node.getText().substring(0,node.getTextLength() - node.getLastChildNode().getTextLength()) + "{...}";
+		else if (elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_EXPR)
 			return "imports...";
 		else
 			return "unknown entity " + elementType;

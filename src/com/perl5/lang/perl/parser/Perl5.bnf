@@ -199,7 +199,7 @@ private recover_block ::= !(PERL_RBRACE)
 
 private namespace_item ::=
     compound_statement [PERL_SEMI+]
-    | statement <<statementSemi>>
+    | statement
     | annotation
 
 private compound_statement ::=
@@ -269,7 +269,8 @@ for_list_epxr ::= PERL_LPAREN for_list_expr_content PERL_RPAREN {pin=1}
 private for_list_expr_content ::= list_expr {recoverWhile=recover_parenthesised}
 
 
-statement ::=
+statement ::= statement_body <<statementSemi>>
+private statement_body ::=
     use_statement
     | no_statement
     | sub_declaration
