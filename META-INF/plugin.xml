@@ -35,6 +35,16 @@
       <li>Improved subs content folding</li>
       <li>Live templates postfix context should work ok now</li>
       <li>Disabled automatic src dir creation on new module creation</li>
+      <li>Implemented IntelliLang integration for heredoc. Heredoc marker text now defines what language is inside the
+        heredoc. In order to make this work, your IDEA should support necessary language directly or via plugin.
+        Currently recognized markers:
+        <ul>
+        <li>JavaScript: JS, JS15, JS16, JS17, JS18, APPLEJS</li>
+        <li>Database: SQL, MYSQL, PGSQL, TSQL, OSQLP, DB2, SQL92, SQLITE, SYBASE, HSQLDB, GSQL, OSQL (Both Database navigator and JetBrains Database tools are supported)</li>
+        <li>Web-related: JSON, CSS, DTD, XHTML, XML, HTML</li>
+        <li>Misc: JAVA, YAML, MANIFEST, PHP, PYTHON</li>
+        </ul>
+        </li>
       </ul>
 
     ]]>
@@ -53,6 +63,8 @@
         <internalFileTemplate name="Perl5 package"/>
         <internalFileTemplate name="Perl5 script"/>
         <internalFileTemplate name="Perl5 embedded"/>
+
+        <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
 
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
 
