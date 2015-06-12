@@ -33,6 +33,7 @@
       <li>Implemented wrapping templates for list and anon array</li>
       <li>Implemented package contents folding</li>
       <li>Improved subs content folding</li>
+      <li>Live templates postfix context should work ok now</li>
       </ul>
 
     ]]>
