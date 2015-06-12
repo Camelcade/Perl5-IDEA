@@ -27,7 +27,9 @@
     <change-notes><![CDATA[
       <p>0.27 beta</p>
       <ul>
-      <li></li>
+      <li>Parser re-factoring. Improved errors recovery and performance.</li>
+      <li>Disabled variables auto-completion in variables declaration (my, our, state). Local declarations still ok.</li>
+      <li>Removed new-line and semi auto inserting in few cases (live templates works better).</li>
       </ul>
 
     ]]>
