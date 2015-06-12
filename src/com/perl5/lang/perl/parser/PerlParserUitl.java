@@ -73,32 +73,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	/**
-	 * Supresses regex opener and parses expression
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parsePerlInRegex(PsiBuilder b, int l )
-	{
-		assert b instanceof PerlBuilder;
-		((PerlBuilder) b).setRegexOpenerSuppressed(true);
-		boolean r = PerlParser.statements(b, l);
-		((PerlBuilder) b).setRegexOpenerSuppressed(false);
-		return r;
-	}
-
-	/**
-	 * Checks if regex opener been suppressed (we are in //e block)
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean regexNotSuppressed(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-		return !((PerlBuilder) b).isRegexOpenerSuppressed();
-	}
 
 	public static boolean parseExpressionLevel(PsiBuilder b, int l, int g )
 	{

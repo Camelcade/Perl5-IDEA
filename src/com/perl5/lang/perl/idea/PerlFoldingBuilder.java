@@ -251,7 +251,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return "# Block comment";
 		else if (elementType == PerlElementTypes.PERL_COMMENT)
 			return "# comments...";
-		else if (elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_STATEMENT)
+		else if (elementType == PerlElementTypes.USE_STATEMENT ) // || elementType == PerlElementTypes.REQUIRE_STATEMENT
 			return "imports...";
 		else
 			return "unknown entity [report to devs with example]";
