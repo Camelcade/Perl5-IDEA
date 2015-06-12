@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea;
 
-import com.intellij.patterns.PlatformPatterns;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.PerlLanguage;
@@ -25,20 +24,30 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 
+import static com.intellij.patterns.PlatformPatterns.psiElement;
+
 /**
  * Created by hurricup on 31.05.2015.
  */
 public interface PerlElementPatterns
 {
-	public static final PsiElementPattern.Capture<PerlStringContentElementImpl> STRING_CONENT_PATTERN = PlatformPatterns.psiElement(PerlStringContentElementImpl.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = PlatformPatterns.psiElement(PerlNamespaceElement.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PsiPerlUseStatement> USE_STATEMENT_PATTERN = PlatformPatterns.psiElement(PsiPerlUseStatement.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_TERM_PATTERN = PlatformPatterns.psiElement(PsiPerlRequireExpr.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PerlSubNameElement> FUNCTION_PATTERN = PlatformPatterns.psiElement(PerlSubNameElement.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = PlatformPatterns.psiElement(PsiPerlMethod.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = PlatformPatterns.psiElement(PerlVariable.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PerlGlobVariable> GLOB_PATTERN = PlatformPatterns.psiElement(PerlGlobVariable.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = PlatformPatterns.psiElement(PerlVariableNameElement.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PerlHeredocTerminatorElementImpl> HEREDOC_TERMINATOR_PATTERN = PlatformPatterns.psiElement(PerlHeredocTerminatorElementImpl.class).withLanguage(PerlLanguage.INSTANCE);
-	public static final PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = PlatformPatterns.psiElement(PerlElementTypes.ANNOTATION_UNKNOWN_KEY).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlStringContentElementImpl> STRING_CONENT_PATTERN = psiElement(PerlStringContentElementImpl.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = psiElement(PerlNamespaceElement.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PsiPerlUseStatement> USE_STATEMENT_PATTERN = psiElement(PsiPerlUseStatement.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_TERM_PATTERN = psiElement(PsiPerlRequireExpr.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlSubNameElement> FUNCTION_PATTERN = psiElement(PerlSubNameElement.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlGlobVariable> GLOB_PATTERN = psiElement(PerlGlobVariable.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PerlHeredocTerminatorElementImpl> HEREDOC_TERMINATOR_PATTERN = psiElement(PerlHeredocTerminatorElementImpl.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(PerlElementTypes.ANNOTATION_UNKNOWN_KEY).withLanguage(PerlLanguage.INSTANCE);
+
+	public static final PsiElementPattern.Capture INSIDE_LEXICAL_DECLARATION = psiElement().inside(PsiPerlVariableDeclarationLexical.class);
+	public static final PsiElementPattern.Capture INSIDE_GLOBAL_DECLARATION = psiElement().inside(PsiPerlVariableDeclarationGlobal.class);
+	public static final PsiElementPattern.Capture INSIDE_LOCAL_DECLARATION = psiElement().inside(PsiPerlVariableDeclarationLocal.class);
+
+	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN = VARIABLE_NAME_PATTERN.inside(VARIABLE_PATTERN.andNot(INSIDE_GLOBAL_DECLARATION).andNot(INSIDE_LEXICAL_DECLARATION));
+
+
 }

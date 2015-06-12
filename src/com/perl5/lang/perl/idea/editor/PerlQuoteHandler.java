@@ -17,6 +17,9 @@
 package com.perl5.lang.perl.idea.editor;
 
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
+import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
