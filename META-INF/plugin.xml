@@ -34,6 +34,7 @@
       <li>Implemented package contents folding</li>
       <li>Improved subs content folding</li>
       <li>Live templates postfix context should work ok now</li>
+      <li>Disabled automatic src dir creation on new module creation</li>
       </ul>
 
     ]]>
@@ -92,7 +93,6 @@
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
-
 
         <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
 

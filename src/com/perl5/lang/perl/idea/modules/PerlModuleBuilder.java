@@ -39,6 +39,8 @@ import java.util.List;
  */
 public class PerlModuleBuilder extends JavaModuleBuilder
 {
+	private List<Pair<String,String>> mySourcePaths;
+
 	@Override
 	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException
 	{
@@ -55,5 +57,28 @@ public class PerlModuleBuilder extends JavaModuleBuilder
 	public boolean isSuitableSdkType(SdkTypeId sdkType)
 	{
 		return sdkType == PerlSdkType.getInstance();
+	}
+
+	@Override
+	public List<Pair<String,String>> getSourcePaths() {
+		if (mySourcePaths == null) {
+			final List<Pair<String, String>> paths = new ArrayList<Pair<String, String>>();
+			paths.add(Pair.create(getContentEntryPath(), ""));
+			return paths;
+		}
+		return mySourcePaths;
+	}
+
+	@Override
+	public void setSourcePaths(List<Pair<String,String>> sourcePaths) {
+		mySourcePaths = sourcePaths != null? new ArrayList<Pair<String, String>>(sourcePaths) : null;
+	}
+
+	@Override
+	public void addSourcePath(Pair<String,String> sourcePathInfo) {
+		if (mySourcePaths == null) {
+			mySourcePaths = new ArrayList<Pair<String, String>>();
+		}
+		mySourcePaths.add(sourcePathInfo);
 	}
 }
