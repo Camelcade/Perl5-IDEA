@@ -21,6 +21,11 @@ to write tests (mostly for lexer and parser at the moment).
 * Implemented packages navigation and refactoring. For navigation to package files and refactoring, your lib root -I must be added to classroot.
 * Implemented subs annotations: #@deprecated, #@returns, #@method and #@override. Annotations helps IDEA to understand your code properly and give you useful hints.
 * Implemented warning annotations for variables shadowing previous declarations, undeclared variables, undefined and undeclared subs, not installed packages. 
+* Implemented IntelliLang integration for heredoc. Heredoc marker text now defines what language is inside the heredoc. In order to make this work, your IDEA should support necessary language directly or via plugin. Currently recognized markers:
+  * JavaScript: JS, JS15, JS16, JS17, JS18, APPLEJS
+  * Database: SQL, MYSQL, PGSQL, TSQL, OSQLP, DB2, SQL92, SQLITE, SYBASE, HSQLDB, GSQL, OSQL (Both Database navigator and JetBrains Database tools are supported)
+  * Web-related: JSON, CSS, DTD, XHTML, XML, HTML
+  * Misc: JAVA, YAML, MANIFEST, PHP, PYTHON
 * Lexer and parser still have some bugs, see issue tracker and don't hesitate to report.
 * Current, dev build you may find here: http://evstigneev.com/camelcade.jar
 
