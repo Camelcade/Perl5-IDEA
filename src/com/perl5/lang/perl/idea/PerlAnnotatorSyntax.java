@@ -132,7 +132,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE);
 				annotation.setEnforcedTextAttributes(PerlSyntaxHighlighter.BOLD_ITALIC);
 				return;
-			} else if (!(parent instanceof PerlVariable))
+			} else if (!(parent instanceof PerlVariable || parent instanceof PerlGlobVariable))
 				decorateElement(
 						holder.createInfoAnnotation(namespaceElement, null),
 						PerlSyntaxHighlighter.PERL_PACKAGE,

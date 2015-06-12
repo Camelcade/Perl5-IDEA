@@ -18,23 +18,17 @@ package com.perl5.lang.perl.idea.livetemplates;
 
 import com.intellij.codeInsight.template.EverywhereContextType;
 import com.intellij.codeInsight.template.TemplateContextType;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import static com.intellij.patterns.PlatformPatterns.psiElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.embedded.EmbeddedPerlFileType;
-import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by ELI-HOME on 01-Jun-15.
- *
  */
 public abstract class PerlTemplateContextType extends TemplateContextType
 {
@@ -46,14 +40,15 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 	@Override
 	public boolean isInContext(@NotNull PsiFile psiFile, int fileOffset)
 	{
-		if( PsiUtilCore.getLanguageAtOffset(psiFile,fileOffset).isKindOf(PerlLanguage.INSTANCE) )
+		if (PsiUtilCore.getLanguageAtOffset(psiFile, fileOffset).isKindOf(PerlLanguage.INSTANCE))
 		{
 			PsiElement element = psiFile.findElementAt(fileOffset);
 
-			if( element == null )
-				element = psiFile.findElementAt(fileOffset-1);
+			if (element == null)
+				element = psiFile.findElementAt(fileOffset - 1);
 
-			if (element instanceof PsiWhiteSpace) {
+			if (element instanceof PsiWhiteSpace)
+			{
 				return false;
 			}
 			return element != null && isInContext(element);
@@ -91,7 +86,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 
 			return statement != null
 					&& statement.getTextOffset() < element.getTextOffset()
-					&& statement.getTextRange().getEndOffset() == element.getTextRange().getEndOffset();
+					;
 		}
 	}
 
