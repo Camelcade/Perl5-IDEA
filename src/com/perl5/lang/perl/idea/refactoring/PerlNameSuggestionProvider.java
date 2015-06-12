@@ -18,9 +18,12 @@ package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.SuggestedNameInfo;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.NameSuggestionProvider;
 import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
+import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -34,7 +37,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider
 	@Override
 	public SuggestedNameInfo getSuggestedNames(PsiElement element, PsiElement nameSuggestionContext, Set<String> result)
 	{
-		if( nameSuggestionContext instanceof PerlHeredocTerminatorElementImpl)
+		if (nameSuggestionContext instanceof PerlHeredocTerminatorElementImpl
+				|| (element instanceof PerlStringContentElementImpl && PsiTreeUtil.getParentOfType(element, PsiPerlHeredocOpener.class) != null))
 			result.addAll(PerlLanguageInjector.LANGUAGE_MAP.keySet());
 
 		// todo play with this
