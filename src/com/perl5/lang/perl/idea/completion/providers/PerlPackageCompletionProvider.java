@@ -16,30 +16,26 @@
 
 package com.perl5.lang.perl.idea.completion.providers;
 
-import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionProvider;
+import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.inserthandlers.PerlPackageInsertHandler;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 31.05.2015.
- *
  */
 public class PerlPackageCompletionProvider extends CompletionProvider<CompletionParameters>
 {
@@ -77,9 +73,10 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 							String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
 
 							resultSet.addElement(LookupElementBuilder
-									.create(element, packageName)
-									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-									.withInsertHandler(PerlPackageInsertHandler.INSTANCE));
+											.create(element, packageName)
+											.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
+							)
+							;
 
 						}
 				}

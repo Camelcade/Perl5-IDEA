@@ -24,7 +24,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.inserthandlers.PerlPackageInsertHandler;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +49,6 @@ public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<Com
 									.create(element, packageName)
 									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
 									.withBoldness(true)
-									.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
 					);
 				}
 
@@ -61,7 +59,6 @@ public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<Com
 									.create(element, packageName)
 									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
 									.withBoldness(true)
-									.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
 					);
 				}
 
@@ -71,7 +68,6 @@ public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<Com
 									.create(element, packageName)
 									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
 									.withBoldness(true)
-									.withInsertHandler(PerlPackageInsertHandler.INSTANCE)
 									.withStrikeoutness(true)
 					);
 				}

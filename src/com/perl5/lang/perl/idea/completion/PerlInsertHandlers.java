@@ -27,22 +27,8 @@ import com.intellij.openapi.editor.EditorModificationUtil;
  */
 public class PerlInsertHandlers
 {
-	public static final InsertHandler<LookupElement> SEMI_NEWLINE_INSERT_HANDLER = new SemiNewlineInsertHandler();
 	public static final InsertHandler<LookupElement> ARRAY_ELEMENT_INSERT_HANDLER = new ArrayElementInsertHandler();
 	public static final InsertHandler<LookupElement> HASH_ELEMENT_INSERT_HANDLER = new HashElementInsertHandler();
-
-	/**
-	 * Semicolon and newline insert handler
-	 */
-	static class SemiNewlineInsertHandler implements InsertHandler<LookupElement>
-	{
-		@Override
-		public void handleInsert(final InsertionContext context, LookupElement item)
-		{
-			final Editor editor = context.getEditor();
-			EditorModificationUtil.insertStringAtCaret(editor, ";\n");
-		}
-	}
 
 	/**
 	 * Array element/slice insert handler
