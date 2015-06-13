@@ -146,6 +146,10 @@
         <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
         <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
 
+        <localInspection language="Perl5"
+                         shortName="PerlVariable" displayName="Variable declaration and shadowing" groupName="Perl5" enabledByDefault="true" level="WARNING"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUndefinedVariableInspection" />
+
     </extensions>
 
     <application-components>
