@@ -28,14 +28,10 @@ import java.util.List;
 
 /**
  * Created by hurricup on 13.06.2015.
+ *
  */
 public class PerlUndefinedVariableInspection extends LocalInspectionTool
 {
-	public PerlUndefinedVariableInspection()
-	{
-		System.out.println("Inspection created");
-	}
-
 	@NotNull
 	@Override
 	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
