@@ -211,8 +211,10 @@ PERL_SYN_BINARY_NOT = "not"
 PERL_SYN_BINARY_X = "x"
 
 PERL_SYN_BINARY = "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
+
+
 PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
-FUNCTION_SPECIAL = {PERL_SYN_BLOCK_OP} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER} | {PERL_SYN_BINARY}
+FUNCTION_SPECIAL = {PERL_SYN_BLOCK_OP} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER}
 
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
@@ -289,7 +291,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_HANDLE_HANDLE>
 {
     "(" {return PERL_LPAREN;}
-    {VARIABLE_DECLARATOR} {endCustomBlock();return PERL_FUNCTION_BUILT_IN;}
+    {VARIABLE_DECLARATOR} {endCustomBlock();return PERL_RESERVED;}
     {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -299,7 +301,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_HANDLE>
 {
-    {BAREWORD} {yybegin(LEX_HANDLE_HANDLE);return PERL_FUNCTION_BUILT_IN;}
+    {BAREWORD} {yybegin(LEX_HANDLE_HANDLE);return PERL_SUB;}
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -324,7 +326,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_PACKAGE_FUNCTION_CALL>
 {
-    {BAREWORD} {endCustomBlock();return PERL_FUNCTION;}
+    {BAREWORD} {endCustomBlock();return PERL_SUB;}
     {PERL_PACKAGE_CANONICAL} {return getPackageType();}
 
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
@@ -336,7 +338,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_METHOD_CALL>
 {
     "->" {return PERL_DEREFERENCE;}
-    {BAREWORD} {endCustomBlock();return PERL_FUNCTION;}
+    {BAREWORD} {endCustomBlock();return PERL_SUB;}
 
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -346,8 +348,8 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_LABEL>
 {
-    {PERL_LABEL_PREFIX} {return PERL_KEYWORD;}
-    {FUNCTION_SPECIAL} {endCustomBlock();return PERL_KEYWORD;}
+    {PERL_LABEL_PREFIX} {return PERL_RESERVED;}
+    {FUNCTION_SPECIAL} {endCustomBlock();return PERL_SUB;}
     {PERL_SYN_COMPOUND} {endCustomBlock();return PERL_RESERVED;}
     {BAREWORD} {endCustomBlock(); return PERL_LABEL;}
 
@@ -363,7 +365,7 @@ TRANS_MODIFIERS = [cdsr]
         if( trenarCounter > 0 )
         {
             endCustomBlock();
-            return PerlSubUtil.getFunctionType(yytext().toString());
+            return PERL_SUB;
         }
         else
             return PERL_LABEL;
@@ -378,7 +380,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_MAIN_FUNCTION_CALL>
 {
     "::" {return PERL_PACKAGE;}
-    {BAREWORD} {endCustomBlock(); return PERL_FUNCTION;}
+    {BAREWORD} {endCustomBlock(); return PERL_SUB;}
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -387,7 +389,7 @@ TRANS_MODIFIERS = [cdsr]
 {
     "->" {return PERL_DEREFERENCE;}
     "SUPER::" {return PERL_PACKAGE;}
-    {BAREWORD} {endCustomBlock();return PERL_FUNCTION;}
+    {BAREWORD} {endCustomBlock();return PERL_SUB;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     . {yypushback(1);endCustomBlock();break;}
@@ -397,7 +399,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_PACKAGE_METHOD_CALL>
 {
     "->" {return PERL_DEREFERENCE;}
-    {BAREWORD} {endCustomBlock();return PERL_FUNCTION;}
+    {BAREWORD} {endCustomBlock();return PERL_SUB;}
     {PERL_PACKAGE_SURE} {return getPackageType(); }
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -410,7 +412,7 @@ TRANS_MODIFIERS = [cdsr]
     // here are should be keywords and resreved words
     {BAREWORD} {
         IElementType tokenType = getBarewordTokenType();
-        if( tokenType != PERL_FUNCTION )
+        if( tokenType != PERL_SUB )
             endCustomBlock();
         return tokenType;
     }
@@ -474,7 +476,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_SUB_NAME>
 {
     {PERL_PACKAGE_CANONICAL} {return getPackageType();}
-    {BAREWORD} {yybegin(LEX_SUB_DEFINITION);return PERL_FUNCTION;}
+    {BAREWORD} {yybegin(LEX_SUB_DEFINITION);return PERL_SUB;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     .   {yypushback(1);yybegin(LEX_SUB_DEFINITION);break;}
@@ -668,9 +670,12 @@ TRANS_MODIFIERS = [cdsr]
 {PRE_PACKAGE_SURE} {return PERL_RESERVED;}
 "require" {return PERL_RESERVED;}
 {PERL_SYN_DECLARE} {return PERL_RESERVED;}
+
 {PERL_SYN_BINARY_NOT} {return PERL_OPERATOR_NOT;}
 {PERL_SYN_BINARY_X} {return PERL_OPERATOR_X;}
-{FUNCTION_SPECIAL} {return PERL_KEYWORD;}
+{PERL_SYN_BINARY} {return PERL_OPERATOR;}
+
+{FUNCTION_SPECIAL} {return PERL_SUB;}
 {BLOCK_NAMES} {return PERL_BLOCK_NAME;}
 
 <LEX_BAREWORD_STRING>

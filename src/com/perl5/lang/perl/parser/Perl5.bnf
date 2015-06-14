@@ -70,7 +70,6 @@ limitations under the License.
     PERL_NUMBER_VERSION="PERL_NUMBER_VERSION"
     PERL_NUMBER="PERL_NUMBER"
 
-    PERL_KEYWORD="PERL_KEYWORD"
     PERL_RESERVED="PERL_RESERVED"
 
     PERL_OPERATOR="PERL_OPERATOR"
@@ -107,12 +106,11 @@ limitations under the License.
     PERL_QUOTE="\""
 
     // custom tokens
-    PERL_FUNCTION_ATTRIBUTE="PERL_FUNCTION_ATTRIBUTE"
+    PERL_SUB="PERL_SUB"
+    PERL_SUB_ATTRIBUTE="PERL_SUB_ATTRIBUTE"
 
     PERL_PACKAGE="PERL_PACKAGE"
 
-    PERL_FUNCTION="PERL_FUNCTION"
-    PERL_FUNCTION_BUILT_IN="PERL_FUNCTION_BUILT_IN"
     PERL_HANDLE="PERL_HANDLE"
     PERL_HANDLE_BUILT_IN="PERL_HANDLE_BUILT_IN"
     PERL_BLOCK_NAME="PERL_BLOCK_NAME"
@@ -175,9 +173,6 @@ limitations under the License.
 
     mixin("method")="com.perl5.lang.perl.psi.mixins.PerlMethodImplMixin";
     implements("method")="com.perl5.lang.perl.psi.PerlMethod";
-
-    mixin("object_element")="com.perl5.lang.perl.psi.mixins.PerlObjectElementImplMixin"
-    implements("object_element")="com.perl5.lang.perl.psi.PerlObject"
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
@@ -465,7 +460,7 @@ private close_arguments ::= perl_handle
 
 sort_expr ::= 'sort' ( PERL_LPAREN sort_op_arguments PERL_RPAREN| sort_op_arguments ) {pin=1}
 private sort_op_arguments ::=
-    PERL_FUNCTION expr
+    sub_name_element expr
     | block expr
     | scalar_expr expr
     | expr
@@ -616,10 +611,6 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
 private callable ::= method | referencable_method
-//<<resetLastCallable>> (
-//
-//    |
-//)
 
 private referencable_expr ::= referencable_method | scalar_expr
 private referencable_method ::= '&'
@@ -715,15 +706,9 @@ private variable_name_element ::= PERL_VARIABLE_NAME
 private comma ::= PERL_COMMA | PERL_ARROW_COMMA
 method ::=
     namespace_element sub_name_element         // package::method
-//    | namespace_element '->' (scalar_variable | sub_name_element)
-//    | object_element '->' sub_name_element       // $object->method actuall it can be not scalar, but scalar expression, but enough for now
     | sub_name_element [namespace_element &PERL_LPAREN]       // method package
-    | PERL_FUNCTION_BUILT_IN
-    | PERL_KEYWORD
 
-object_element ::= scalar_variable
-
-private sub_name_element ::= PERL_FUNCTION
+private sub_name_element ::= PERL_SUB
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private annotations ::= annotation+

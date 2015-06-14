@@ -916,7 +916,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		if( knownPackages.containsKey(bareword) )
 			return knownPackages.get(bareword);
 
-		return PerlSubUtil.getFunctionType(bareword);
+		return PERL_SUB;
 	}
 
 	/**

@@ -60,7 +60,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 				if (myFile instanceof PerlFileElement && (variableContainer instanceof PsiPerlVariableDeclarationLexical || variableContainer instanceof PsiPerlVariableDeclarationGlobal))
 				{
 					PerlVariable shadowedVariable = ((PerlFileElement) myFile).getLexicalDeclaration((PerlVariable)variable);
-					if (shadowedVariable != null)
+					if (shadowedVariable != null && !result.contains(shadowedVariable))
 						result.add(shadowedVariable);
 				}
 			}

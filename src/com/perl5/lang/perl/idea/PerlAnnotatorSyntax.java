@@ -23,7 +23,6 @@ package com.perl5.lang.perl.idea;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
-import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
@@ -33,7 +32,6 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -83,58 +81,30 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	{
 		PsiElement parent = perlSubNameElement.getParent();
 
-		if (!(parent instanceof GeneratedParserUtilBase.DummyBlock))
-			if (parent instanceof PsiPerlSubDeclaration)
-				holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_FUNCTION_DECLARATION);
-			else if (parent instanceof PsiPerlSubDefinition)
-				holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_FUNCTION_DEFINITION);
-
-		// todo move to inspections
-		PerlNamespaceElement methodNamespaceElement = null;
-		if (parent instanceof PerlMethod)
-			methodNamespaceElement = ((PerlMethod) parent).getNamespaceElement();
-
-		// todo globs aliasing must be resolved
-		List<PerlSubDefinition> subDefinitions = perlSubNameElement.getSubDefinitions();
-		List<PerlSubDeclaration> subDeclarations = perlSubNameElement.getSubDeclarations();
-		List<PerlGlobVariable> relatedGlobs = perlSubNameElement.getRelatedGlobs();
-
-		boolean isDeclaration = parent instanceof PerlSubDeclaration;
-		boolean isDefinition = parent instanceof PerlSubDefinition;
-
-
-		if (subDefinitions.size() == 0 && subDeclarations.size() == 0 && relatedGlobs.size() == 0 && !isDeclaration && !isDefinition)
-			holder.createWarningAnnotation(perlSubNameElement, "Unable to find sub definition, declaration or glob aliasing [if this is a sub from module installed from CPAN, imported sub, inherited sub or chained invocation, it's ok, just NYI]");
-		else if (subDefinitions.size() > 1 || (subDefinitions.size() > 0 && isDefinition))
-			holder.createWarningAnnotation(perlSubNameElement, "Multiple sub definitions found");
-		else if (subDeclarations.size() > 1 || (subDeclarations.size() > 0 && isDeclaration))
-			holder.createWarningAnnotation(perlSubNameElement, "Multiple sub declarations found");
-//				else if (relatedGlobs.size() > 1)
-//					holder.createWarningAnnotation(element, "Multiple typeglob aliases found");
-		else if ((isDeclaration || isDefinition) && relatedGlobs.size() > 0)
-			holder.createWarningAnnotation(perlSubNameElement, "Typeglob assignment may override current definition or declaration");
-		else
+		if (parent instanceof PsiPerlSubDeclaration)
+			holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
+		else if (parent instanceof PsiPerlSubDefinition)
+			holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+		else if( parent instanceof PsiPerlExpr ) // fixme temporary solution for pre-defined expressions, suppose only built-ins
+			decorateElement(
+					holder.createInfoAnnotation(perlSubNameElement, null),
+					PerlSyntaxHighlighter.PERL_SUB,
+					true,
+					false
+			);
+		else if( parent instanceof PerlMethod )
 		{
-			PerlSubAnnotations subAnnotations = subDefinitions.size() > 0
-					? subDefinitions.get(0).getSubAnnotations()
-					: subDeclarations.size() > 0 ? subDeclarations.get(0).getSubAnnotations() : null;
+			PerlNamespaceElement namespaceElement = ((PerlMethod) parent).getNamespaceElement();
+			boolean hasExplicitNamespace = namespaceElement != null && !"CORE".equals(namespaceElement.getName());
 
-			if (subAnnotations != null)
-			{
-				if (subAnnotations.isDeprecated())
-				{
-					Annotation annotation = holder.createWarningAnnotation(perlSubNameElement, "This sub is marked as deprecated");
-					annotation.setTextAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES);
-				}
-			}
-
-			// todo check that annotations are the same on definition and declaration
-			// todo check that attributes are the same on definition and declaration
-			// todo check that prototypes are the same on definition and declaration
-			// todo check that arguments number suits prototype
-			// todo check for override
+			if (!hasExplicitNamespace)
+				decorateElement(
+						holder.createInfoAnnotation(perlSubNameElement, null),
+						PerlSyntaxHighlighter.PERL_SUB,
+						perlSubNameElement.isBuiltIn(),
+						false
+				);
 		}
-
 	}
 
 	private void annotateStringContent(PerlStringContentElementImpl element, AnnotationHolder holder)

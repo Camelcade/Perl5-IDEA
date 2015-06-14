@@ -444,7 +444,8 @@ public interface PerlPackageUtilBuiltIn
 			"User::grent",
 			"User::pwent",
 			"XSLoader",
-			"main"
+			"main",
+			"CORE"
 	));
 
 	public static final HashSet<String> BUILT_IN_PRAGMA = new HashSet<>( Arrays.asList(

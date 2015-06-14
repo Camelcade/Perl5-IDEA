@@ -141,6 +141,12 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 
 		return result;
 	}
+
+	@Override
+	public boolean isBuiltIn()
+	{
+		return PerlSubUtil.isBuiltIn(getText());
+	}
 }
 
 

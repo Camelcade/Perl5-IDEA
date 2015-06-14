@@ -19,29 +19,31 @@ package com.perl5.lang.perl;
 /**
  * Created by hurricup on 12.04.2015.
  */
+
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.*;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.psi.impl.PerlFileElement;
-import com.perl5.lang.perl.psi.impl.PerlSubAttributeElementImpl;
-import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 {
 
 	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT);
-	public static final TokenSet COMMENTS = TokenSet.create(PERL_COMMENT, PERL_COMMENT_BLOCK, PERL_POD, PERL_HEREDOC,PERL_HEREDOC_END,EMBED_MARKER,TEMPLATE_BLOCK_HTML);
-	public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES,COMMENTS);
+	public static final TokenSet COMMENTS = TokenSet.create(PERL_COMMENT, PERL_COMMENT_BLOCK, PERL_POD, PERL_HEREDOC, PERL_HEREDOC_END, EMBED_MARKER, TEMPLATE_BLOCK_HTML);
+	public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);
 	public static final TokenSet LITERALS = TokenSet.create(
 			PERL_NUMBER,
 			PERL_NUMBER_VERSION,
@@ -49,7 +51,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			PERL_HEREDOC
 	);
 	public static final TokenSet IDENTIFIERS = TokenSet.create(
-			PERL_FUNCTION,
+			PERL_SUB,
 			PERL_PACKAGE,
 			PERL_VARIABLE_NAME
 	);
@@ -58,51 +60,54 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 
 	@NotNull
 	@Override
-	public Lexer createLexer(Project project) {
+	public Lexer createLexer(Project project)
+	{
 		return new PerlLexerAdapter();
 	}
 
 	@NotNull
-	public TokenSet getWhitespaceTokens() {
+	public TokenSet getWhitespaceTokens()
+	{
 		return WHITE_SPACES;
 	}
 
 	@NotNull
-	public TokenSet getCommentTokens() {
+	public TokenSet getCommentTokens()
+	{
 		return COMMENTS;
 	}
 
 	@NotNull
-	public TokenSet getStringLiteralElements() {
+	public TokenSet getStringLiteralElements()
+	{
 		return LITERALS;
 	}
 
 	@NotNull
-	public PsiParser createParser(final Project project) {
+	public PsiParser createParser(final Project project)
+	{
 		return new PerlParser();
 	}
 
 	@Override
-	public IFileElementType getFileNodeType() {
+	public IFileElementType getFileNodeType()
+	{
 		return FILE;
 	}
 
-	public PsiFile createFile(FileViewProvider viewProvider) {
+	public PsiFile createFile(FileViewProvider viewProvider)
+	{
 		return new PerlFileElement(viewProvider);
 	}
 
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
+	{
 		return SpaceRequirements.MAY;
 	}
 
 	@NotNull
-	public PsiElement createElement(ASTNode node) {
-		IElementType type = node.getElementType();
-		if (type == PERL_FUNCTION_ATTRIBUTE)
-		{
-			return new PerlSubAttributeElementImpl(node);
-		}
-		else
-			return PerlElementTypes.Factory.createElement(node);
+	public PsiElement createElement(ASTNode node)
+	{
+		return PerlElementTypes.Factory.createElement(node);
 	}
 }

@@ -124,7 +124,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		{
 			PerlBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(PERL_FUNCTION_ATTRIBUTE);
+			m.collapse(PERL_SUB_ATTRIBUTE);
 		}
 
 		return true;

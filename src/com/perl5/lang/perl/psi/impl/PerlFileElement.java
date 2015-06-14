@@ -102,10 +102,19 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 	/**
 	 * Creates new lexicalVariables scanner or notifies it to restart scanning
 	 */
-	private void rescanLexicalVariables()
+	private synchronized void rescanLexicalVariables()
 	{
-		currentLexicalDeclarationsScanner = new LexicalDeclarationsScanner(this);
-		currentLexicalDeclarationsScanner.run();
+		if( currentLexicalDeclarationsScanner == null )
+		{
+			currentLexicalDeclarationsScanner = new LexicalDeclarationsScanner(this);
+			currentLexicalDeclarationsScanner.run();
+		}
+
+		try
+		{
+			currentLexicalDeclarationsScanner.wait();
+		}
+		catch (Exception e){}
 	}
 
 	/**
@@ -206,7 +215,7 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 	 * @param declaredHashes    found hashes
 	 * @param declaredVariables full variables list
 	 */
-	public void updateVariablesCache(LexicalDeclarationsScanner updater, List<PerlLexicalDeclaration> declaredScalars, List<PerlLexicalDeclaration> declaredArrays, List<PerlLexicalDeclaration> declaredHashes, List<PerlLexicalDeclaration> declaredVariables)
+	public synchronized void updateVariablesCache(LexicalDeclarationsScanner updater, List<PerlLexicalDeclaration> declaredScalars, List<PerlLexicalDeclaration> declaredArrays, List<PerlLexicalDeclaration> declaredHashes, List<PerlLexicalDeclaration> declaredVariables)
 	{
 		if (updater == currentLexicalDeclarationsScanner)
 		{

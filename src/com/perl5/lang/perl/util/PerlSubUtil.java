@@ -38,7 +38,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	static{
 		for( String functionName: BUILT_IN )
 		{
-			knownFunctions.put(functionName, PERL_FUNCTION);
+			knownFunctions.put(functionName, PERL_SUB);
 		}
 	}
 
@@ -52,15 +52,6 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		return knownFunctions.containsKey(function);
 	}
 
-	/**
-	 * Returns token type for specific function name
-	 * @param function function name
-	 * @return token type
-	 */
-	public static IElementType getFunctionType(String function)
-	{
-		return isBuiltIn(function) ? PERL_FUNCTION_BUILT_IN : PERL_FUNCTION;
-	}
 
 	/**
 	 * Searching project files for sub definitions by specific package and function name

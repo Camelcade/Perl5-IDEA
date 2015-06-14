@@ -27,11 +27,13 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.EffectType;
 import com.intellij.openapi.editor.markup.TextAttributes;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.PodTokenType;
 import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 
@@ -60,9 +62,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey PERL_PACKAGE = createTextAttributesKey("PERL_PACKAGE", DefaultLanguageHighlighterColors.CLASS_NAME);
 	public static final TextAttributesKey PERL_PACKAGE_DEFINITION = createTextAttributesKey("PERL_PACKAGE_DEFINITION", PERL_PACKAGE);
 
-	public static final TextAttributesKey PERL_FUNCTION = createTextAttributesKey("PERL_SUB", DefaultLanguageHighlighterColors.FUNCTION_CALL);
-	public static final TextAttributesKey PERL_FUNCTION_DEFINITION = createTextAttributesKey("PERL_SUB_DEFINITION", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
-	public static final TextAttributesKey PERL_FUNCTION_DECLARATION = createTextAttributesKey("PERL_SUB_DECLARATION", PERL_FUNCTION_DEFINITION);
+	public static final TextAttributesKey PERL_SUB = createTextAttributesKey("PERL_SUB", DefaultLanguageHighlighterColors.FUNCTION_CALL);
+	public static final TextAttributesKey PERL_SUB_DEFINITION = createTextAttributesKey("PERL_SUB_DEFINITION", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
+	public static final TextAttributesKey PERL_SUB_DECLARATION = createTextAttributesKey("PERL_SUB_DECLARATION", PERL_SUB_DEFINITION);
 
 	public static final TextAttributesKey PERL_LABEL = createTextAttributesKey("PERL_LABEL", DefaultLanguageHighlighterColors.LABEL);
 	public static final TextAttributesKey PERL_BLOCK_NAME = createTextAttributesKey("PERL_BLOCK_NAME", DefaultLanguageHighlighterColors.PREDEFINED_SYMBOL);
@@ -119,9 +121,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 		attributesMap.put(PerlElementTypes.PERL_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
 
-		attributesMap.put(PerlElementTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
+		attributesMap.put(PerlElementTypes.PERL_SUB, new TextAttributesKey[]{PERL_SUB});
 		attributesMap.put(PerlElementTypes.PERL_SUB_PROTOTYPE_TOKEN, new TextAttributesKey[]{PERL_SUB_PROTOTYPE_TOKEN});
-		attributesMap.put(PerlElementTypes.PERL_FUNCTION_ATTRIBUTE, new TextAttributesKey[]{PERL_SUB_ATTRIBUTE});
+		attributesMap.put(PerlElementTypes.PERL_SUB_ATTRIBUTE, new TextAttributesKey[]{PERL_SUB_ATTRIBUTE});
 
 		attributesMap.put(PerlElementTypes.PERL_HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 
@@ -153,16 +155,13 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_DIV, new TextAttributesKey[]{PERL_OPERATOR});
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_X, new TextAttributesKey[]{PERL_OPERATOR});
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_FILETEST, new TextAttributesKey[]{PERL_OPERATOR});
+		attributesMap.put(PerlElementTypes.PERL_OPERATOR_NOT, new TextAttributesKey[]{PERL_OPERATOR});
+		attributesMap.put(PerlElementTypes.PERL_OPERATOR_UNARY, new TextAttributesKey[]{PERL_OPERATOR});
 
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_NOT, new TextAttributesKey[]{PERL_KEYWORD});
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_UNARY, new TextAttributesKey[]{PERL_KEYWORD});
 		attributesMap.put(PerlElementTypes.PERL_RESERVED, new TextAttributesKey[]{PERL_KEYWORD});
-		attributesMap.put(PerlElementTypes.PERL_KEYWORD, new TextAttributesKey[]{PERL_KEYWORD});
 		attributesMap.put(PerlElementTypes.PERL_TAG, new TextAttributesKey[]{PERL_TAG});
 
 		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
-		attributesMap.put(PerlElementTypes.PERL_FUNCTION, new TextAttributesKey[]{PERL_FUNCTION});
-		attributesMap.put(PerlElementTypes.PERL_FUNCTION_BUILT_IN, new TextAttributesKey[]{PERL_KEYWORD});
 		attributesMap.put(PerlElementTypes.PERL_HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 
 		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
@@ -172,15 +171,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.PERL_VARIABLE_NAME, new TextAttributesKey[]{DefaultLanguageHighlighterColors.IDENTIFIER});
 	}
 
-	private static final HashMap<Language, SyntaxHighlighterBase> highlightersMap = new HashMap<>();
 
-	static
-	{
-		highlightersMap.put(PodLanguage.INSTANCE, new PodSyntaxHighlighter());
-		highlightersMap.put(HTMLLanguage.INSTANCE, new HtmlFileHighlighter());
-		highlightersMap.put(XHTMLLanguage.INSTANCE, new HtmlFileHighlighter());
-		highlightersMap.put(XMLLanguage.INSTANCE, new XmlFileHighlighter());
-	}
+	private static final SyntaxHighlighter POD_SYNTAX_HIGHLIGHTER = new PodSyntaxHighlighter();
 
 	@NotNull
 	@Override
@@ -195,21 +187,15 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
 
-		TextAttributesKey[] tokenAttributes = null;
+		TextAttributesKey[] attributesKeys;
 
-		if (!(tokenType instanceof PerlTokenType))
-		{
-			SyntaxHighlighterBase subHighlighter = highlightersMap.get(tokenType.getLanguage());
+		if( tokenType instanceof PodTokenType)
+			attributesKeys = POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
+		else
+			attributesKeys = attributesMap.get(tokenType);
 
-			if (subHighlighter != null)
-				tokenAttributes = subHighlighter.getTokenHighlights(tokenType);
-		} else
-		{
-			tokenAttributes = attributesMap.get(tokenType);
-		}
-
-		return tokenAttributes == null
+		return attributesKeys == null
 				? EMPTY_KEYS
-				: tokenAttributes;
+				: attributesKeys;
 	}
 }

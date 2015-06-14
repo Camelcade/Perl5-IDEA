@@ -142,6 +142,7 @@ public interface PerlScalarUtilBuiltIn
 			"^R",
 			"LAST_MATCH_END",
 			"^RE_DEBUG_FLAGS",
-			"LAST_PAREN_MATCH"
+			"LAST_PAREN_MATCH",
+			"VERSION"
 	));
 }

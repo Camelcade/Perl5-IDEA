@@ -18,7 +18,10 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,7 +29,7 @@ import java.util.List;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public abstract class PerlVariableDeclarationInspection extends PerlInspection
+public class PerlSubMultipleDeclarationsInspection extends PerlInspection
 {
 	@NotNull
 	@Override
@@ -35,26 +38,12 @@ public abstract class PerlVariableDeclarationInspection extends PerlInspection
 		return new PerlVisitor()
 		{
 			@Override
-			public void visitVariableDeclarationLexical(@NotNull PsiPerlVariableDeclarationLexical o)
+			public void visitSubNameElement(@NotNull PerlSubNameElement o)
 			{
-				checkDeclaration(holder, o);
-			}
-
-			@Override
-			public void visitVariableDeclarationGlobal(@NotNull PsiPerlVariableDeclarationGlobal o)
-			{
-				checkDeclaration(holder, o);
+				List<PerlSubDeclaration> subDeclarations = o.getSubDeclarations();
+				if ( subDeclarations.size() > 1 || subDeclarations.size()> 0 && o.getParent() instanceof PerlSubDeclaration)
+					registerProblem(holder, o, "Multiple sub declarations found");
 			}
 		};
 	}
-
-	public <T extends PerlVariableDeclaration> void checkDeclaration(ProblemsHolder holder, T declaration)
-	{
-		checkVariables(holder, declaration.getArrayVariableList());
-		checkVariables(holder, declaration.getScalarVariableList());
-		checkVariables(holder, declaration.getHashVariableList());
-	}
-
-	public abstract <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList);
-
 }

@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by hurricup on 13.06.2015.
  */
-public class PerlVariableInspection extends PerlInspection
+public class PerlVariableUnresolvableInspection extends PerlInspection
 {
 	@NotNull
 	@Override
@@ -66,7 +66,7 @@ public class PerlVariableInspection extends PerlInspection
 					List<PerlGlobVariable> relatedGlobs = element.getRelatedGlobs();
 
 					if (globalDeclarations.size() == 0 && relatedGlobs.size() == 0)
-						registerProblem(holder, variableNameElement, "Unable to find global variable declaration or typeglob aliasing for variable. ");
+						registerProblem(holder, variableNameElement, "Unable to find global variable declaration or typeglob aliasing for variable.");
 				}
 			}
 		};

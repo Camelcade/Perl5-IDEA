@@ -23,8 +23,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlTokenType extends IElementType
 {
-	public static final ILazyParseableElementType HEREDOC_SQL = new ILazyParseableElementType("HEREDOC_SQL", PerlLanguage.INSTANCE);
-
 	public PerlTokenType(@NotNull @NonNls String debugName) {
 		super(debugName, PerlLanguage.INSTANCE);
 	}

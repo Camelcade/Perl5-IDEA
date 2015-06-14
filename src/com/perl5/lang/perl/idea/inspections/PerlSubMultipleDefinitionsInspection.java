@@ -18,11 +18,7 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
-import com.perl5.lang.perl.psi.PsiPerlUseStatement;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -30,7 +26,7 @@ import java.util.List;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlPackageFileInspection extends PerlInspection
+public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 {
 	@NotNull
 	@Override
@@ -38,28 +34,19 @@ public class PerlPackageFileInspection extends PerlInspection
 	{
 		return new PerlVisitor()
 		{
-
 			@Override
-			public void visitUseStatement(@NotNull PsiPerlUseStatement o)
+			public void visitSubNameElement(@NotNull PerlSubNameElement o)
 			{
-				if (o.getNamespaceElement() != null)
-					checkPackageFile(o.getNamespaceElement());
-			}
+				List<PerlSubDefinition> definitionList = o.getSubDefinitions();
+				List<PerlGlobVariable> relatedGlobs = o.getRelatedGlobs();
+				boolean isDefinition = o.getParent() instanceof PerlSubDefinition;
 
-			@Override
-			public void visitRequireExpr(@NotNull PsiPerlRequireExpr o)
-			{
-				if (o.getNamespaceElement() != null)
-					checkPackageFile(o.getNamespaceElement());
-			}
-
-			public void checkPackageFile(PerlNamespaceElement o)
-			{
-				List<PerlFileElement> namespaceFiles = o.getNamespaceFiles();
-
-				if (namespaceFiles.size() == 0)
-					registerProblem(holder, o, "Unable to find package file");
+				if (definitionList.size() > 1 || definitionList.size() > 0 && isDefinition )
+					registerProblem(holder, o, "Multiple sub definitions found");
+				else if( relatedGlobs.size() > 0 && ( definitionList.size() > 0 || isDefinition ))
+					registerProblem(holder, o, "Sub definition and typeglob aliasing found");
 			}
 		};
 	}
+
 }

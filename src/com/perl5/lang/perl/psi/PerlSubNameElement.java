@@ -56,4 +56,11 @@ public interface PerlSubNameElement extends PerlNamedElement
 	public String getCanonicalName();
 
 
+	/**
+	 * Checks if this sub name is built in
+	 * @return checking result
+	 */
+	public boolean isBuiltIn();
+
+
 }

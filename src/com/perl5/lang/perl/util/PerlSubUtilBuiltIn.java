@@ -18,13 +18,15 @@ package com.perl5.lang.perl.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hurricup on 11.05.2015.
  */
 public interface PerlSubUtilBuiltIn
 {
-	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
+	public static final Set<String> BUILT_IN = new HashSet<>( Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
 			"chomp",

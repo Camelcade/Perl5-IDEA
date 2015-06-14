@@ -48,7 +48,7 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 			return new PerlStringContentElementImpl(type, text);
 		else if( type == PERL_VARIABLE_NAME )
 			return new PerlVariableNameElementImpl(type, text);
-		else if( type == PERL_FUNCTION )
+		else if( type == PERL_SUB )
 			return new PerlSubNameElementImpl(type, text);
 		else if( type == PERL_PACKAGE  )
 			return new PerlNamespaceElementImpl(type, text);

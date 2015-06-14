@@ -21,7 +21,6 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
@@ -34,6 +33,7 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 /**
  * Created by hurricup on 21.04.2015.
+ *
  */
 public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 {
@@ -45,7 +45,7 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 
 	public static final HashMap<IElementType,TextAttributesKey[]> attributesMap = new HashMap<IElementType,TextAttributesKey[]>();
 
-	private static final PerlSyntaxHighlighter perlHilighter = new PerlSyntaxHighlighter();
+	private static final PerlSyntaxHighlighter PERL_SYNTAX_HIGHLIGHTER = new PerlSyntaxHighlighter();
 
 	static{
 		attributesMap.put(PodElementTypes.POD_TAG, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TAG});
@@ -58,26 +58,19 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 	@Override
 	public Lexer getHighlightingLexer() {
 		return new PodLexerAdapter();
-//		return new PodHighlightingLexer();
 	}
 
 	@NotNull
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
 
-		TextAttributesKey[] tokenAttributes = null;
+		TextAttributesKey[] attributesKeys;
 
 		if( tokenType instanceof PerlTokenType)
-		{
-			tokenAttributes = perlHilighter.getTokenHighlights(tokenType);
-		}
+			attributesKeys = PERL_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
 		else
-		{
-			tokenAttributes = attributesMap.get(tokenType);
-		}
+			attributesKeys = attributesMap.get(tokenType);
 
-		return tokenAttributes == null
-				? EMPTY_KEYS
-				: tokenAttributes;
+		return attributesKeys == null ? EMPTY_KEYS: attributesKeys;
 	}
 }

@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.idea.inspections;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
+import com.intellij.codeInspection.ProblemsHolder;
+import com.perl5.lang.perl.psi.PerlVariable;
+
+import java.util.List;
 
 /**
- * Created by hurricup on 14.05.2015.
+ * Created by hurricup on 14.06.2015.
  */
-public class PerlSubAttributeElementImpl extends ASTWrapperPsiElement
+public class PerlVariableBuiltinRedeclarationInspection extends PerlVariableDeclarationInspection
 {
-		public PerlSubAttributeElementImpl(ASTNode node) {
-			super(node);
-		}
-
-		// @todo what for?
-//	public void accept(@NotNull PsiElementVisitor visitor) {
-//		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitBlock(this);
-//		else super.accept(visitor);
-//	}
-
+	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList)
+	{
+		for (PerlVariable variable : variableList)
+			if (variable.isBuiltIn())
+				registerProblem(holder, variable, "It's a very bad practice to declare built-in variable as our/my/state");
+	}
 }

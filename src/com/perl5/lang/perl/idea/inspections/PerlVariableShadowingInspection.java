@@ -16,26 +16,27 @@
 
 package com.perl5.lang.perl.idea.inspections;
 
-import com.intellij.codeInspection.LocalInspectionTool;
-import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.perl5.lang.perl.psi.*;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 14.06.2015.
  */
-public abstract class PerlInspection extends LocalInspectionTool
+public class PerlVariableShadowingInspection extends PerlVariableDeclarationInspection
 {
-	protected void registerProblem(ProblemsHolder holder, PsiElement element, String message)
+	@Override
+	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList)
 	{
-		holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
-	}
-	protected void registerError(ProblemsHolder holder, PsiElement element, String message)
-	{
-		holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR);
-	}
-	protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message)
-	{
-		holder.registerProblem(element, message, ProblemHighlightType.LIKE_DEPRECATED);
+		for( PerlVariable variable: variableList)
+		{
+			PerlVariable lexicalDeclaration = variable.getLexicalDeclaration();
+			if( lexicalDeclaration != null )
+				registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber());
+		}
 	}
 }
