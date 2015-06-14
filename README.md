@@ -20,7 +20,7 @@ to write tests (mostly for lexer and parser at the moment).
 * Implemented basic project functions auto-completion, navigation and refactoring (works with obvious calls for now: package::method and package->method, auto-complete is pretty stupid)
 * Implemented packages navigation and refactoring. For navigation to package files and refactoring, your lib root -I must be added to classroot.
 * Implemented subs annotations: #@deprecated, #@returns, #@method and #@override. Annotations helps IDEA to understand your code properly and give you useful hints.
-* Implemented warning annotations for variables shadowing previous declarations, undeclared variables, undefined and undeclared subs, not installed packages. 
+* Implemented basic code inspections. 
 * Implemented IntelliLang integration for heredoc. Heredoc marker text now defines what language is inside the heredoc. In order to make this work, your IDEA should support necessary language directly or via plugin. Currently recognized markers:
   * JavaScript: JS, JS15, JS16, JS17, JS18, APPLEJS
   * Database: SQL, MYSQL, PGSQL, TSQL, OSQLP, DB2, SQL92, SQLITE, SYBASE, HSQLDB, GSQL, OSQL (Both Database navigator and JetBrains Database tools are supported)
