@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
@@ -45,6 +42,12 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 {
 	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubNameElement(this);
+		else super.accept(visitor);
 	}
 
 	@Override

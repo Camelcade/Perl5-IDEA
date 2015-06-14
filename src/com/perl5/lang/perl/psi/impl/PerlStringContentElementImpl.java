@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +36,12 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 {
 	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitStringContentElement(this);
+		else super.accept(visitor);
 	}
 
 	@Nullable

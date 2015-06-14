@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.idea.inspections;
 
-import com.intellij.codeInspection.LocalInspectionTool;
-import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -28,15 +26,15 @@ import java.util.List;
 
 /**
  * Created by hurricup on 13.06.2015.
- *
  */
-public class PerlUndeclaredVariableInspection extends PerlInspection
+public class PerlVariableInspection extends PerlInspection
 {
 	@NotNull
 	@Override
 	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
 	{
-		return new PsiPerlVisitor(){
+		return new PerlVisitor()
+		{
 			@Override
 			public void visitPerlVariable(@NotNull PerlVariable element)
 			{
@@ -45,7 +43,7 @@ public class PerlUndeclaredVariableInspection extends PerlInspection
 				boolean isGlobalDeclaration = parent instanceof PsiPerlVariableDeclarationGlobal;
 				boolean isLexicalDeclaration = parent instanceof PsiPerlVariableDeclarationLexical;
 
-				if( isGlobalDeclaration || isLexicalDeclaration)
+				if (isGlobalDeclaration || isLexicalDeclaration)
 					return;
 
 				PerlNamespaceElement namespaceElement = element.getNamespaceElement();
@@ -60,7 +58,7 @@ public class PerlUndeclaredVariableInspection extends PerlInspection
 
 				if (!hasExplicitNamespace)
 				{
-					if (lexicalDeclaration == null )
+					if (lexicalDeclaration == null)
 						registerProblem(holder, variableNameElement, "Unable to find lexically visible variable declaration.");
 				} else
 				{

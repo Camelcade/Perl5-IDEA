@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
@@ -26,6 +27,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -44,6 +46,12 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 {
 	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitNamespaceElement(this);
+		else super.accept(visitor);
 	}
 
 	@Override

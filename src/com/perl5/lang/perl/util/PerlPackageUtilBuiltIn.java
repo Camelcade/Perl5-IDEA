@@ -443,7 +443,8 @@ public interface PerlPackageUtilBuiltIn
 			"UNIVERSAL",
 			"User::grent",
 			"User::pwent",
-			"XSLoader"
+			"XSLoader",
+			"main"
 	));
 
 	public static final HashSet<String> BUILT_IN_PRAGMA = new HashSet<>( Arrays.asList(

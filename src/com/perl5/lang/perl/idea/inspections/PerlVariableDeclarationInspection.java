@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.inspections;
 
-import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -34,7 +33,8 @@ public class PerlVariableDeclarationInspection extends PerlInspection
 	@Override
 	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
 	{
-		return new PsiPerlVisitor(){
+		return new PerlVisitor()
+		{
 			@Override
 			public void visitPerlVariable(@NotNull PerlVariable element)
 			{
@@ -44,11 +44,11 @@ public class PerlVariableDeclarationInspection extends PerlInspection
 				boolean isLexicalDeclaration = parent instanceof PsiPerlVariableDeclarationLexical;
 				boolean isLocalDeclaration = parent instanceof PsiPerlVariableDeclarationLocal;
 
-				if( !isGlobalDeclaration && !isLexicalDeclaration && !isLocalDeclaration)
+				if (!isGlobalDeclaration && !isLexicalDeclaration && !isLocalDeclaration)
 					return;
 
 				PerlVariableNameElement variableNameElement = element.getVariableNameElement();
-				if (variableNameElement == null )
+				if (variableNameElement == null)
 					return;
 
 				PerlVariable lexicalDeclaration = element.getLexicalDeclaration();
@@ -58,7 +58,7 @@ public class PerlVariableDeclarationInspection extends PerlInspection
 
 				if (!hasExplicitNamespace)
 				{
-					if( !isLocalDeclaration && element.isBuiltIn())
+					if (!isLocalDeclaration && element.isBuiltIn())
 						registerProblem(holder, variableNameElement, "It's not allowed to declare built-in variable as our/my/state");
 					else if (isLexicalDeclaration && lexicalDeclaration != null)
 						registerProblem(holder, variableNameElement, "Current lexical variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");

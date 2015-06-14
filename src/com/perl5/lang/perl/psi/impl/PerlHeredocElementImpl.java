@@ -16,14 +16,23 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.06.2015.
  */
 public class PerlHeredocElementImpl extends PsiCommentImpl
 {
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitHeredocElement(this);
+		else super.accept(visitor);
+	}
+
 	public PerlHeredocElementImpl(IElementType type, CharSequence text)
 	{
 		super(type, text);

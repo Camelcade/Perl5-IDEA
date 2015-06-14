@@ -17,23 +17,35 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlNamedElement, PerlElementTypes
 {
-	public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text){ super(type, text);}
+	public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text)
+	{
+		super(type, text);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocTeminator(this);
+		else super.accept(visitor);
+	}
 
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		if( name.equals(""))
+		if (name.equals(""))
 			throw new IncorrectOperationException("You can't set heredoc terminator to the empty one");
 
 		replace(PerlElementFactory.createHereDocTerminator(getProject(), name));
@@ -52,6 +64,6 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 	public String getName()
 	{
 		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null: nameIdentifier.getText();
+		return nameIdentifier == null ? null : nameIdentifier.getText();
 	}
 }

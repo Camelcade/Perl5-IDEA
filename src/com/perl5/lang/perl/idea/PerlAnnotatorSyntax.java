@@ -58,59 +58,25 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		annotation.setEnforcedTextAttributes(attrs);
 	}
 
-
-	private void annotateVariable(PerlVariable element, AnnotationHolder holder, TextAttributesKey baseKey)
-	{
-		if (element.isBuiltIn())
-			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					baseKey,
-					true,
-					element.isDeprecated());
-		else
-			holder.createInfoAnnotation(element, null).setTextAttributes(baseKey);
-	}
-
 	private void annotateNamespaceElement(PerlNamespaceElement namespaceElement, AnnotationHolder holder)
 	{
 		PsiElement parent = namespaceElement.getParent();
 
-		if (!(parent instanceof GeneratedParserUtilBase.DummyBlock))
+		if (parent instanceof PerlNamespaceDefinition)
 		{
-			if (parent instanceof PerlNamespaceDefinition)
-			{
-				holder.createInfoAnnotation(namespaceElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION);
-				return;
-			}
-			else if (namespaceElement.isPragma())
-			{
-				Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE);
-				annotation.setEnforcedTextAttributes(PerlSyntaxHighlighter.BOLD_ITALIC);
-				return;
-			} else if (!(parent instanceof PerlVariable || parent instanceof PerlGlobVariable))
-				decorateElement(
-						holder.createInfoAnnotation(namespaceElement, null),
-						PerlSyntaxHighlighter.PERL_PACKAGE,
-						namespaceElement.isBuiltin(),
-						namespaceElement.isDeprecated()
-				);
-
-			// todo move to inspection
-			if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
-			{
-				List<PerlFileElement> namespaceFiles = namespaceElement.getNamespaceFiles();
-
-				if (namespaceFiles.size() == 0)
-					holder.createWarningAnnotation(namespaceElement, "Unable to find package file");
-			} else
-			{
-				List<PerlNamespaceDefinition> namespaceDefinitions = namespaceElement.getNamespaceDefinitions();
-
-				if (namespaceDefinitions.size() == 0)
-					holder.createWarningAnnotation(namespaceElement, "Unable to find namespace definition");
-			}
-		}
+			holder.createInfoAnnotation(namespaceElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION);
+		} else if (namespaceElement.isPragma())
+		{
+			Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
+			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE);
+			annotation.setEnforcedTextAttributes(PerlSyntaxHighlighter.BOLD_ITALIC);
+		} else if (!(parent instanceof PerlVariable || parent instanceof PerlGlobVariable))
+			decorateElement(
+					holder.createInfoAnnotation(namespaceElement, null),
+					PerlSyntaxHighlighter.PERL_PACKAGE,
+					namespaceElement.isBuiltin(),
+					namespaceElement.isDeprecated()
+			);
 	}
 
 	private void annotateSubNameElement(PerlSubNameElement perlSubNameElement, AnnotationHolder holder)
@@ -191,11 +157,26 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	{
 
 		if (element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
-			annotateVariable((PerlVariable) element, holder, PerlSyntaxHighlighter.PERL_SCALAR);
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_SCALAR,
+					((PerlVariable) element).isBuiltIn(),
+					((PerlVariable) element).isDeprecated()
+			);
 		else if (element instanceof PsiPerlHashVariable)
-			annotateVariable((PerlVariable) element, holder, PerlSyntaxHighlighter.PERL_HASH);
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_HASH,
+					((PerlVariable) element).isBuiltIn(),
+					((PerlVariable) element).isDeprecated()
+			);
 		else if (element instanceof PsiPerlArrayVariable)
-			annotateVariable((PerlVariable) element, holder, PerlSyntaxHighlighter.PERL_ARRAY);
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_ARRAY,
+					((PerlVariable) element).isBuiltIn(),
+					((PerlVariable) element).isDeprecated()
+			);
 		else if (element instanceof PsiPerlGlobVariable)
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
