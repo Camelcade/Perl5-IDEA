@@ -119,7 +119,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 
 			// find lexicaly visible declaration and check type
 			PerlVariable declaredVariable = getLexicalDeclaration();
-			if( declaredVariable != null )
+			if (declaredVariable != null)
 			{
 				PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declaredVariable, PerlVariableDeclaration.class);
 				if (declaration != null)
@@ -145,16 +145,22 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		boolean gotScalarSigils = this.getScalarSigils() != null;
 
 		if (
-				variableContainer instanceof PsiPerlScalarHashElement
-						|| variableContainer instanceof PsiPerlArrayHashSlice
-						|| (this instanceof PsiPerlHashVariable && !gotScalarSigils)
+				!gotScalarSigils
+						&& (
+						variableContainer instanceof PsiPerlScalarHashElement
+								|| variableContainer instanceof PsiPerlArrayHashSlice
+								|| this instanceof PsiPerlHashVariable
+				)
 				)
 			return PerlVariableType.HASH;
 		else if (
-				variableContainer instanceof PsiPerlArrayArraySlice
-						|| variableContainer instanceof PsiPerlScalarArrayElement
-						|| (this instanceof PsiPerlArrayIndexVariable && !gotScalarSigils)
-						|| (this instanceof PsiPerlArrayVariable && !gotScalarSigils)
+				!gotScalarSigils
+						&& (
+						variableContainer instanceof PsiPerlArrayArraySlice
+								|| variableContainer instanceof PsiPerlScalarArrayElement
+								|| this instanceof PsiPerlArrayIndexVariable
+								|| this instanceof PsiPerlArrayVariable
+				)
 				)
 			return PerlVariableType.ARRAY;
 		else if (
@@ -182,7 +188,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 
 		// tood make getter for this
 		String variableName = getVariableNameElement().getName();
-		if( variableName == null )
+		if (variableName == null)
 			return false;
 
 		if (variableType == PerlVariableType.SCALAR)
@@ -265,7 +271,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 			return null;
 
 		PsiFile myFile = getContainingFile();
-		if( myFile instanceof PerlFileElement)
+		if (myFile instanceof PerlFileElement)
 			return ((PerlFileElement) myFile).getLexicalDeclaration(this);
 
 		return null;
