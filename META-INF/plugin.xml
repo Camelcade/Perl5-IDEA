@@ -147,7 +147,7 @@
         <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
 
         <localInspection language="Perl5"
-                         shortName="PerlPackageFile" displayName="Missing package" groupName="Perl5" enabledByDefault="true" level="ERROR"
+                         shortName="PerlPackageFile" displayName="Missing package file" groupName="Perl5" enabledByDefault="true" level="ERROR"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlPackageFileInspection" />
         <localInspection language="Perl5"
                          shortName="PerlPackageNamespace" displayName="Undefined namespace" groupName="Perl5" enabledByDefault="true" level="ERROR"
@@ -161,7 +161,7 @@
                          shortName="PerlVariableDeclaration" displayName="Variables shadowing" groupName="Perl5" enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableDeclarationInspection" />
         <localInspection language="Perl5"
-                         shortName="PerlNamespaceDefinition" displayName="Namespace definition validation" groupName="Perl5" enabledByDefault="true" level="WARNING"
+                         shortName="PerlNamespaceDefinition" displayName="Namespace definition" groupName="Perl5" enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceDefinitionInspection" />
 
     </extensions>
