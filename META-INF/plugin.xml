@@ -147,8 +147,11 @@
         <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
 
         <localInspection language="Perl5"
-                         shortName="PerlUndefinedVariable" displayName="Variable declaration and shadowing" groupName="Perl5" enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUndefinedVariableInspection" />
+                         shortName="PerlUndeclaredVariable" displayName="Undeclared variables" groupName="Perl5" enabledByDefault="true" level="WARNING"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUndeclaredVariableInspection" />
+        <localInspection language="Perl5"
+                         shortName="PerlVariableDeclaration" displayName="Variables declarations" groupName="Perl5" enabledByDefault="true" level="WARNING"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableDeclarationInspection" />
 
     </extensions>
 

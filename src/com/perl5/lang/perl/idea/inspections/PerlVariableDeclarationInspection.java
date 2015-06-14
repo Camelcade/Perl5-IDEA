@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.LocalInspectionTool;
-import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -27,10 +26,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * Created by hurricup on 13.06.2015.
- *
+ * Created by hurricup on 14.06.2015.
  */
-public class PerlUndefinedVariableInspection extends LocalInspectionTool
+public class PerlVariableDeclarationInspection extends PerlInspection
 {
 	@NotNull
 	@Override
@@ -38,74 +36,45 @@ public class PerlUndefinedVariableInspection extends LocalInspectionTool
 	{
 		return new PsiPerlVisitor(){
 			@Override
-			public void visitScalarVariable(@NotNull PsiPerlScalarVariable o)
+			public void visitPerlVariable(@NotNull PerlVariable element)
 			{
-				visitVariable(o);
-			}
-
-			@Override
-			public void visitArrayIndexVariable(@NotNull PsiPerlArrayIndexVariable o)
-			{
-				visitVariable(o);
-			}
-
-			@Override
-			public void visitArrayVariable(@NotNull PsiPerlArrayVariable o)
-			{
-				visitVariable(o);
-			}
-
-			@Override
-			public void visitHashVariable(@NotNull PsiPerlHashVariable o)
-			{
-				visitVariable(o);
-			}
-
-			private void visitVariable(PerlVariable element)
-			{
-				// todo move to inspections
 				PsiElement parent = element.getParent();
-
-				PerlVariable lexicalDeclaration = element.getLexicalDeclaration();
 
 				boolean isGlobalDeclaration = parent instanceof PsiPerlVariableDeclarationGlobal;
 				boolean isLexicalDeclaration = parent instanceof PsiPerlVariableDeclarationLexical;
-				PerlNamespaceElement namespaceElement = element.getNamespaceElement();
-				PerlVariableNameElement variableNameElement = element.getVariableNameElement();
+				boolean isLocalDeclaration = parent instanceof PsiPerlVariableDeclarationLocal;
 
-				if (variableNameElement == null || element.isBuiltIn())
+				if( !isGlobalDeclaration && !isLexicalDeclaration && !isLocalDeclaration)
 					return;
+
+				PerlVariableNameElement variableNameElement = element.getVariableNameElement();
+				if (variableNameElement == null )
+					return;
+
+				PerlVariable lexicalDeclaration = element.getLexicalDeclaration();
+				PerlNamespaceElement namespaceElement = element.getNamespaceElement();
 
 				boolean hasExplicitNamespace = namespaceElement != null;
 
 				if (!hasExplicitNamespace)
 				{
-					if (isLexicalDeclaration && lexicalDeclaration != null)
+					if( !isLocalDeclaration && element.isBuiltIn())
+						registerProblem(holder, variableNameElement, "It's not allowed to declare built-in variable as our/my/state");
+					else if (isLexicalDeclaration && lexicalDeclaration != null)
 						registerProblem(holder, variableNameElement, "Current lexical variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");
 					else if (isGlobalDeclaration && lexicalDeclaration != null)
 						registerProblem(holder, variableNameElement, "Current global variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber() + ". It's not a error, but not recommended.");
-					else if (lexicalDeclaration == null && !isGlobalDeclaration && !isLexicalDeclaration)
-						registerProblem(holder, variableNameElement, "Unable to find variable declaration in the current file. Forgot to use our for package variable in the current file?");
 				} else
 				{
 					List<PerlVariable> globalDeclarations = element.getGlobalDeclarations();
 					List<PerlGlobVariable> relatedGlobs = element.getRelatedGlobs();
 
-					if (globalDeclarations.size() == 0 && relatedGlobs.size() == 0)
-						registerProblem(holder, variableNameElement, "Unable to find global variable declaration or typeglob aliasing for variable. It's not a error, but you should declare it using our() or typeglob alias to make refactoring work properly.");
-					else if (globalDeclarations.size() > 0 && relatedGlobs.size() > 0)
+					if (globalDeclarations.size() > 0 && relatedGlobs.size() > 0)
 						registerProblem(holder, variableNameElement, "Both global declaration and typeglob aliasing found for variable. It's not a error, but we are not recommend such practice to avoid mistakes.");
 					// fixme not sure it's good idea, at least, should be optional
-//				else if( relatedGlobs.size() > 1  )
-//					holder.createWarningAnnotation(element, "Multiple typeglob aliasing found. It's not a error, but we are not recommend such practice to avoid mistakes.");
+//					else if( relatedGlobs.size() > 1  )
+//						registerProblem(holder, variableNameElement, "Multiple typeglob aliasing found. It's not a error, but we are not recommend such practice to avoid mistakes.");
 				}
-
-				// todo annotate found variables here, not in the beginnig
-			}
-
-			protected void registerProblem(ProblemsHolder holder, PsiElement element, String message)
-			{
-				holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
 			}
 		};
 	}

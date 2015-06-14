@@ -47,7 +47,7 @@ public abstract class PerlItemPresentationBase implements ItemPresentation
 
 		if (document != null) {
 
-			int lineNumber = document.getLineNumber(myElement.getTextOffset());
+			int lineNumber = document.getLineNumber(myElement.getTextOffset()) + 1;
 			VirtualFile virtualFile = file.getVirtualFile();
 			if (virtualFile != null) return "; line " + lineNumber + "; " + virtualFile.getPath();
 		}
