@@ -16,16 +16,14 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
-import com.perl5.lang.perl.util.PerlSubUtil;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,10 +33,12 @@ import java.util.List;
 public class PerlSubReference extends PerlReferencePoly
 {
 	PerlSubNameElement mySubNameElement;
-	public PerlSubReference(@NotNull PsiElement element, TextRange textRange) {
+
+	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
+	{
 		super(element, textRange);
 		assert element instanceof PerlSubNameElement;
-		mySubNameElement = (PerlSubNameElement)element;
+		mySubNameElement = (PerlSubNameElement) element;
 	}
 
 	@NotNull
@@ -52,7 +52,7 @@ public class PerlSubReference extends PerlReferencePoly
 
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		for( PsiElement element: relatedItems)
+		for (PsiElement element : relatedItems)
 			result.add(new PsiElementResolveResult(element));
 
 		return result.toArray(new ResolveResult[result.size()]);
@@ -63,7 +63,7 @@ public class PerlSubReference extends PerlReferencePoly
 	public boolean isReferenceTo(PsiElement element)
 	{
 		PsiElement parent = element.getParent();
-		if( parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration || parent instanceof PerlGlobVariable)
+		if (parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration || parent instanceof PerlGlobVariable)
 			return super.isReferenceTo(parent) || super.isReferenceTo(element);
 		return super.isReferenceTo(element);
 	}
@@ -74,11 +74,11 @@ public class PerlSubReference extends PerlReferencePoly
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-		if( resolveResults.length == 0)
+		if (resolveResults.length == 0)
 			return null;
 
-		for( ResolveResult resolveResult: resolveResults)
-			if( resolveResult.getElement() instanceof PerlGlobVariable)
+		for (ResolveResult resolveResult : resolveResults)
+			if (resolveResult.getElement() instanceof PerlGlobVariable)
 				return resolveResult.getElement();
 
 		return resolveResults[0].getElement();

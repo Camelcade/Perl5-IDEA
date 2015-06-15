@@ -85,7 +85,8 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 		if ("pm".equals(containingFile.getExtension()))
 		{
 			VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(getProject(), containingFile);
-			if( innermostSourceRoot != null ) {
+			if (innermostSourceRoot != null)
+			{
 				String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
 				return PerlPackageUtil.getPackageNameByPath(relativePath);
 			}
@@ -105,7 +106,7 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 	 */
 	private synchronized void rescanLexicalVariables()
 	{
-		if( lexicalCacheInvalid )
+		if (lexicalCacheInvalid)
 		{
 			List<PerlLexicalDeclaration> declaredScalars = new ArrayList<>();
 			List<PerlLexicalDeclaration> declaredArrays = new ArrayList<>();
