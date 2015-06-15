@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.28 beta</version>
+    <version>0.29 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -25,11 +25,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.28 beta</p>
+      <p>0.29 beta</p>
       <ul>
-      <li>Removed lexical scanner from thread.</li>
-      <li>SUPER:: is not being annotated as unresolvable.</li>
-      <li>Disabled packages folding.</li>
+      <li>MRO time...</li>
       </ul>
 
     ]]>
