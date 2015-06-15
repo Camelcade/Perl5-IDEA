@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.27 beta</version>
+    <version>0.28 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -25,27 +25,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.27 beta</p>
+      <p>0.28 beta</p>
       <ul>
-      <li>Parser re-factoring. Improved errors recovery and performance.</li>
-      <li>Disabled variables auto-completion in variables declaration (my, our, state). Local declarations still ok.</li>
-      <li>Removed new-line and semi auto inserting in few cases (live templates works better).</li>
-      <li>Implemented wrapping templates for list and anon array</li>
-      <li>Implemented package contents folding</li>
-      <li>Improved subs content folding</li>
-      <li>Live templates postfix context should work ok now</li>
-      <li>Disabled automatic src dir creation on new module creation</li>
-      <li>Implemented IntelliLang integration for heredoc. Heredoc marker text now defines what language is inside the
-        heredoc. In order to make this work, your IDEA should support necessary language directly or via plugin.
-        Currently recognized markers:
-        <ul>
-        <li>JavaScript: JS, JS15, JS16, JS17, JS18, APPLEJS</li>
-        <li>Database: SQL, MYSQL, PGSQL, TSQL, OSQLP, DB2, SQL92, SQLITE, SYBASE, HSQLDB, GSQL, OSQL (Both Database navigator and JetBrains Database tools are supported)</li>
-        <li>Web-related: JSON, CSS, DTD, XHTML, XML, HTML</li>
-        <li>Misc: JAVA, YAML, MANIFEST, PHP, PYTHON</li>
-        </ul>
-        </li>
-       <li>Implemented 11 code inspections, see Settings: Inspections</li>
+      <li>Removed lexical scanner from thread.</li>
       </ul>
 
     ]]>

@@ -49,7 +49,6 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 	List<PerlLexicalDeclaration> declaredVariables = new ArrayList<>();
 
 	boolean lexicalCacheInvalid = true;
-	LexicalDeclarationsScanner currentLexicalDeclarationsScanner = null;
 
 	public PerlFileElement(@NotNull FileViewProvider viewProvider, Language language)
 	{
@@ -86,8 +85,10 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 		if ("pm".equals(containingFile.getExtension()))
 		{
 			VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(getProject(), containingFile);
-			String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
-			return PerlPackageUtil.getPackageNameByPath(relativePath);
+			if( innermostSourceRoot != null ) {
+				String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
+				return PerlPackageUtil.getPackageNameByPath(relativePath);
+			}
 		}
 		return null;
 	}
@@ -104,17 +105,50 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 	 */
 	private synchronized void rescanLexicalVariables()
 	{
-		if( currentLexicalDeclarationsScanner == null )
+		if( lexicalCacheInvalid )
 		{
-			currentLexicalDeclarationsScanner = new LexicalDeclarationsScanner(this);
-			currentLexicalDeclarationsScanner.run();
-		}
+			List<PerlLexicalDeclaration> declaredScalars = new ArrayList<>();
+			List<PerlLexicalDeclaration> declaredArrays = new ArrayList<>();
+			List<PerlLexicalDeclaration> declaredHashes = new ArrayList<>();
+			List<PerlLexicalDeclaration> declaredVariables = new ArrayList<>();
 
-		try
-		{
-			currentLexicalDeclarationsScanner.wait();
+			Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(this, PerlVariableDeclaration.class);
+
+			for (PerlVariableDeclaration declaration : declarations)
+			{
+				// lexically ok
+				PerlLexicalScope declarationScope = declaration.getLexicalScope();
+				assert declarationScope != null;
+
+				for (PsiElement var : declaration.getScalarVariableList())
+				{
+					assert var instanceof PerlVariable;
+					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
+					declaredScalars.add(variableDeclaration);
+					declaredVariables.add(variableDeclaration);
+				}
+				for (PsiElement var : declaration.getArrayVariableList())
+				{
+					assert var instanceof PerlVariable;
+					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
+					declaredArrays.add(variableDeclaration);
+					declaredVariables.add(variableDeclaration);
+				}
+				for (PsiElement var : declaration.getHashVariableList())
+				{
+					assert var instanceof PerlVariable;
+					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
+					declaredHashes.add(variableDeclaration);
+					declaredVariables.add(variableDeclaration);
+				}
+			}
+
+			this.declaredScalars = declaredScalars;
+			this.declaredArrays = declaredArrays;
+			this.declaredHashes = declaredHashes;
+			this.declaredVariables = declaredVariables;
+			lexicalCacheInvalid = false;
 		}
-		catch (Exception e){}
 	}
 
 	/**
@@ -203,95 +237,6 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 		}
 
 		return declarationsHash.values();
-
-	}
-
-	/**
-	 * Accepts data from lexical variables scanner and updates it if scanner is actual
-	 *
-	 * @param updater           LexicalScanner object
-	 * @param declaredScalars   found scalars
-	 * @param declaredArrays    found arrays
-	 * @param declaredHashes    found hashes
-	 * @param declaredVariables full variables list
-	 */
-	public synchronized void updateVariablesCache(LexicalDeclarationsScanner updater, List<PerlLexicalDeclaration> declaredScalars, List<PerlLexicalDeclaration> declaredArrays, List<PerlLexicalDeclaration> declaredHashes, List<PerlLexicalDeclaration> declaredVariables)
-	{
-		if (updater == currentLexicalDeclarationsScanner)
-		{
-			this.declaredScalars = declaredScalars;
-			this.declaredArrays = declaredArrays;
-			this.declaredHashes = declaredHashes;
-			this.declaredVariables = declaredVariables;
-			currentLexicalDeclarationsScanner = null;
-			lexicalCacheInvalid = false;
-		}
-	}
-
-	public LexicalDeclarationsScanner getCurrentLexicalDeclarationsScanner()
-	{
-		return currentLexicalDeclarationsScanner;
-	}
-
-	/**
-	 * Class scans current PSI file and gathers lexical variables declarations; Checks if current scanner been chaned
-	 */
-	private static class LexicalDeclarationsScanner implements Runnable
-	{
-		PerlFileElement myFile;
-		public LexicalDeclarationsScanner(PerlFileElement perlFile)
-		{
-			myFile = perlFile;
-		}
-
-		/**
-		 * Scans current file for lexical variables declarations. Recursively restarts if rescan been invoked.
-		 */
-		@Override
-		public void run()
-		{
-//			System.out.println("Starting in thread: " + Thread.currentThread());
-			List<PerlLexicalDeclaration> declaredScalars = new ArrayList<>();
-			List<PerlLexicalDeclaration> declaredArrays = new ArrayList<>();
-			List<PerlLexicalDeclaration> declaredHashes = new ArrayList<>();
-			List<PerlLexicalDeclaration> declaredVariables = new ArrayList<>();
-
-			Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(myFile, PerlVariableDeclaration.class);
-
-			for (PerlVariableDeclaration declaration : declarations)
-			{
-				if( myFile.getCurrentLexicalDeclarationsScanner() != this)
-					return;
-
-				// lexically ok
-				PerlLexicalScope declarationScope = declaration.getLexicalScope();
-				assert declarationScope != null;
-
-				for (PsiElement var : declaration.getScalarVariableList())
-				{
-					assert var instanceof PerlVariable;
-					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
-					declaredScalars.add(variableDeclaration);
-					declaredVariables.add(variableDeclaration);
-				}
-				for (PsiElement var : declaration.getArrayVariableList())
-				{
-					assert var instanceof PerlVariable;
-					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
-					declaredArrays.add(variableDeclaration);
-					declaredVariables.add(variableDeclaration);
-				}
-				for (PsiElement var : declaration.getHashVariableList())
-				{
-					assert var instanceof PerlVariable;
-					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
-					declaredHashes.add(variableDeclaration);
-					declaredVariables.add(variableDeclaration);
-				}
-			}
-
-			myFile.updateVariablesCache(this, declaredScalars, declaredArrays, declaredHashes, declaredVariables);
-		}
 
 	}
 }
