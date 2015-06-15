@@ -26,6 +26,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlDerefExpression;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -36,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -89,5 +92,21 @@ public class PerlUtil
 
 		return null;
 	}
+
+	/**
+	 * Returns previous element in dereference chain
+	 * @param currentElement current chain element
+	 * @return previous element or null if it's a first one
+	 */
+	public static PsiElement getPrevDereferenceElement(PsiElement currentElement)
+	{
+		PsiElement prevElement = currentElement.getPrevSibling();
+
+		if( prevElement != null && prevElement.getNode().getElementType() == PerlElementTypes.PERL_DEREFERENCE)
+			prevElement = prevElement.getPrevSibling();
+
+		return prevElement;
+	}
+
 
 }

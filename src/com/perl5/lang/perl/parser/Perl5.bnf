@@ -126,6 +126,8 @@ limitations under the License.
     extends(".*expr")=expr
     name(".*expr")="expression"
 
+    extends("string_sq|string_dq|string_xq|heredoc_opener")=term_expr
+
     extends("annotation_.*")=annotation
     implements("annotation_returns.*")="com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer"
     methods("annotation_returns.*")=[getNamespaceElement]
@@ -380,12 +382,11 @@ term_expr ::=
     | function_call_expr
     | rightward_call_expr
     | reference_value_expr
-    | array_index_variable
-    | variable
+    | variable_expr
     | namespace_expr
 
+variable_expr ::= array_index_variable | variable
 namespace_expr ::= namespace_element
-
 parenthesised_expr ::= PERL_LPAREN [parenthesised_expr_content] PERL_RPAREN {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(PERL_RPAREN | PERL_LBRACE | PERL_RBRACE | PERL_SEMI )
