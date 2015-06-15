@@ -29,6 +29,7 @@
       <ul>
       <li>Removed lexical scanner from thread.</li>
       <li>SUPER:: is not being annotated as unresolvable.</li>
+      <li>Disabled packages folding.</li>
       </ul>
 
     ]]>
