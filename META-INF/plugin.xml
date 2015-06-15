@@ -28,6 +28,7 @@
       <p>0.28 beta</p>
       <ul>
       <li>Removed lexical scanner from thread.</li>
+      <li>SUPER:: is not being annotated as unresolvable.</li>
       </ul>
 
     ]]>

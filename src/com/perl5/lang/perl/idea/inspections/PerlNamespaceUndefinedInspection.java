@@ -44,6 +44,10 @@ public class PerlNamespaceUndefinedInspection extends PerlInspection
 				if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement || parent instanceof PerlNamespaceDefinition)
 					return;
 
+				// fixme should depend on parent resolving
+				if( "SUPER".equals(o.getName()))
+					return;
+
 				if (o.isBuiltin())
 					return;
 
