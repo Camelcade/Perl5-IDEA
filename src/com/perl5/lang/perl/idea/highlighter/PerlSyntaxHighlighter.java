@@ -16,12 +16,6 @@
 
 package com.perl5.lang.perl.idea.highlighter;
 
-import com.intellij.ide.highlighter.HtmlFileHighlighter;
-import com.intellij.ide.highlighter.XmlFileHighlighter;
-import com.intellij.lang.Language;
-import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.lang.xhtml.XHTMLLanguage;
-import com.intellij.lang.xml.XMLLanguage;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -31,11 +25,8 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlElementType;
-import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodTokenType;
 import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
@@ -191,7 +182,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public Lexer getHighlightingLexer()
 	{
 		return new PerlHighlightningLexer();
-
 	}
 
 	@NotNull
@@ -201,11 +191,11 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 		TextAttributesKey[] attributesKeys;
 
-		if( tokenType instanceof PodTokenType)
+		if (tokenType instanceof PodTokenType)
 			attributesKeys = POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
-		else if(RESERVED_SET.contains(tokenType))
+		else if (RESERVED_SET.contains(tokenType))
 			attributesKeys = attributesMap.get(PerlElementTypes.PERL_RESERVED);
-		else if(OPERATORS_SET.contains(tokenType))
+		else if (OPERATORS_SET.contains(tokenType))
 			attributesKeys = attributesMap.get(PerlElementTypes.PERL_OPERATOR);
 		else
 			attributesKeys = attributesMap.get(tokenType);

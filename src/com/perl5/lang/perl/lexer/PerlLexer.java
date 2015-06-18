@@ -60,6 +60,19 @@ public class PerlLexer extends PerlLexerGenerated
 	protected HashSet<String> knownPackages = new HashSet<>();
 	protected HashSet<String> knownHandles = new HashSet<>();
 	protected HashSet<String> knownSubs = new HashSet<>();
+	protected HashSet<String> knownLabels = new HashSet<>();
+
+	protected static final HashMap<String, IElementType> SIGIL_TOKENS_MAP = new HashMap<>();
+
+	static
+	{
+		SIGIL_TOKENS_MAP.put("$#", PERL_SIGIL_SCALAR_INDEX);
+		SIGIL_TOKENS_MAP.put("$", PERL_SIGIL_SCALAR);
+		SIGIL_TOKENS_MAP.put("@", PERL_SIGIL_ARRAY);
+		SIGIL_TOKENS_MAP.put("%", PERL_SIGIL_HASH);
+		SIGIL_TOKENS_MAP.put("*", PERL_SIGIL_GLOB);
+		SIGIL_TOKENS_MAP.put("&", PERL_SIGIL_CODE);
+	}
 
 	// pre-variable name tokens
 	protected static final TokenSet SIGILS_TOKENS = TokenSet.create(
@@ -68,6 +81,15 @@ public class PerlLexer extends PerlLexerGenerated
 			PERL_SIGIL_SCALAR,
 			PERL_SIGIL_SCALAR_INDEX,
 			PERL_SIGIL_GLOB
+	);
+
+
+	// tokens which preceeds labels
+	public static final TokenSet preLabelTokenTypes = TokenSet.create(
+			RESERVED_NEXT,
+			RESERVED_LAST,
+			RESERVED_REDO,
+			RESERVED_GOTO
 	);
 
 	// tokens which preceeds 100% package bareword
@@ -225,11 +247,15 @@ public class PerlLexer extends PerlLexerGenerated
 
 		reservedTokenTypes.put("do", RESERVED_DO);
 		reservedTokenTypes.put("eval", RESERVED_EVAL);
+
+		reservedTokenTypes.put("goto", RESERVED_GOTO);
 		reservedTokenTypes.put("redo", RESERVED_REDO);
 		reservedTokenTypes.put("next", RESERVED_NEXT);
 		reservedTokenTypes.put("last", RESERVED_LAST);
 	}
 
+	// todo implement constructor with project parameter, use it to build packages and subs set
+	// todo if project was not passed (highlighter, for example) use all opened projects or nothing ?
 	public PerlLexer(java.io.Reader in)
 	{
 		super(in);
@@ -811,14 +837,15 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType guessAmp()
 	{
 		Character nextChar = getNextCharacter();
-
-		if (lastSignificantTokenType == null ||
-				(nextChar != null && (
-						nextChar == '{'                            // &{...
-								|| nextChar == '_'                        // &_...
-								|| nextChar == '$'                // &$...
-								|| Character.isLetter(nextChar)    // &[a-z]...
-				)))
+		// todo works bad
+		if (lastSignificantTokenType == null
+				|| lastSignificantToken.equals("\\")
+				|| (nextChar != null && (
+				nextChar == '{'                            // &{...
+						|| nextChar == '_'                        // &_...
+//						|| nextChar == '$'                // &$... fixme this triggers in wrong places
+						|| Character.isLetter(nextChar)    // &[a-z]...
+		)))
 			return PERL_SIGIL_CODE;
 
 		return PERL_OPERATOR_AMP;
@@ -1224,18 +1251,10 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType getSigilTokenType(String sigil)
 	{
-		if ("$#".equals(sigil))
-			return PERL_SIGIL_SCALAR_INDEX;
-		else if ("$".equals(sigil))
-			return PERL_SIGIL_SCALAR;
-		else if ("@".equals(sigil))
-			return PERL_SIGIL_ARRAY;
-		else if ("%".equals(sigil))
-			return PERL_SIGIL_HASH;
-		else if ("*".equals(sigil))
-			return PERL_OPERATOR;
-		else if ("&".equals(sigil))
-			return PERL_OPERATOR;
+		IElementType tokenType;
+
+		if ((tokenType = SIGIL_TOKENS_MAP.get(sigil)) != null)
+			return tokenType;
 		else
 			throw new RuntimeException("Unknown sigil: " + sigil);
 	}
@@ -1349,9 +1368,7 @@ public class PerlLexer extends PerlLexerGenerated
 		String bareword = yytext().toString();
 		IElementType tokenType = null;
 
-		// todo check built in handles
-		// todo check opened handles
-		// todo check previous token
+		// todo check for defined labels
 
 //		Character nextCharacter = getNextCharacter();
 		Character nextSignificantCharacter = getNextSignificantCharacter();
@@ -1396,6 +1413,9 @@ public class PerlLexer extends PerlLexerGenerated
 
 			return tokenType;
 		}
+		// next/redo/last/goto bareword
+		else if (preLabelTokenTypes.contains(lastUnparenTokenType))
+			return PERL_LABEL;
 		// previously confirmed handles
 		else if (knownHandles.contains(bareword))
 			return PERL_HANDLE;
@@ -1408,6 +1428,7 @@ public class PerlLexer extends PerlLexerGenerated
 			// open/binmode/etc with filehandle
 		else if (preHandleTokens.contains(lastUnparenToken) && preHandleProperSuffix.contains(nextSignificantCharacter))
 			return getHandleTokenType();
+			// print/say/printf HANDLE
 		else if (preHandleTokenTypesPrint.contains(lastUnparenTokenType) && !printHandleNegativeChars.contains(nextSignificantCharacter))
 			return getHandleTokenType();
 			// built in packages (large list)

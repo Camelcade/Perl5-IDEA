@@ -113,6 +113,8 @@ limitations under the License.
 
     RESERVED_DO="do"
     RESERVED_EVAL="eval"
+
+    RESERVED_GOTO="goto"
     RESERVED_REDO="redo"
     RESERVED_NEXT="next"
     RESERVED_LAST="last"
@@ -347,7 +349,9 @@ recover_sub_attributes ::= !(PERL_LPAREN| PERL_SEMI| PERL_LBRACE)
 last_expr ::= RESERVED_LAST [lnr_param] {pin=1}
 next_expr ::= RESERVED_NEXT [lnr_param] {pin=1}
 redo_expr ::= RESERVED_REDO [lnr_param] {pin=1}
-private lnr_param ::= PERL_LABEL | expr
+goto_expr ::= RESERVED_GOTO [goto_param] {pin=1}
+private lnr_param ::= PERL_LABEL | expr // fixme scalar_expr ?
+private goto_param ::= PERL_LABEL | PERL_SIGIL_CODE PERL_SUB | expr // fixme same, scalar expr?
 
 private statement_modifier ::=
     if_statement_modifier
@@ -424,6 +428,7 @@ term_expr ::=
     | undef_expr
     | last_expr
     | next_expr
+    | goto_expr
     | return_expr
     | redo_expr
     | PERL_OPERATOR_UNARY parenthesised_expr !"["   // named operators as functions
