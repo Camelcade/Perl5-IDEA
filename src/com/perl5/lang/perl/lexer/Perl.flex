@@ -74,9 +74,6 @@ PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRA
 BUILT_IN_HASH_NAME = "EXPORT_TAGS"|"OVERLOAD"|"ENV"|"INC"|"SIG"|"^H"|"!"|"+"|"-"
 PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
 
-BUILT_IN_GLOB_NAME = "ARGVOUT"|"STDERR"|"STDOUT"|"STDIN"|"ARGV"
-PERL_GLOB_BUILT_IN = "*" ("{" {BUILT_IN_GLOB_NAME} "}" | {BUILT_IN_GLOB_NAME} )
-
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 //PERL_XIDS = [\w && \p{XID_Start}]
 //PERL_XIDC = [\w && \p{XID_Continue}]
@@ -86,85 +83,13 @@ PERL_XIDC = [_a-zA-Z0-9]
 
 PERL_BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 PERL_PACKAGE_CANONICAL = "::"* ({PERL_BASIC_IDENTIFIER} "::" +) + | "::"
-PERL_IDENTIFIER = {PERL_PACKAGE_CANONICAL} * {PERL_BASIC_IDENTIFIER} | {PERL_PACKAGE_CANONICAL} {PERL_BASIC_IDENTIFIER} *
-PERL_IDENTIFIER_VARIATION = "{" {EMPTY_SPACE}* {PERL_IDENTIFIER} {EMPTY_SPACE}* "}" | {PERL_IDENTIFIER}
-// | "&"
-PERL_SIGIL = ("$#" | "$" | "@" | "%" | "*" ) "$" *
-// fixme disabled space between sigil and variable name because of % scalar(@array) bad practice anyway
-CAPUTRE_PERL_VARIABLE = {PERL_SIGIL} {PERL_IDENTIFIER_VARIATION}
-
-//CAPTURE_PERL_SCALAR = "$" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
-//CAPTURE_PERL_SCALAR_INDEX = "$#" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
-//CAPTURE_PERL_ARRAY = "@" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
-//CAPTURE_PERL_HASH = "%" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
-//CAPTURE_PERL_GLOB = "*" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
-//CAPTURE_PERL_CODE = "&" {EMPTY_SPACE}* {PERL_IDENTIFIER_VARIATION}
-
-//PERL_VARIABLE_NAME = "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
-//PERL_GLOB_VARIABLE_NAME = "::" ? {BAREWORD}("::" {BAREWORD})* "::" ?
-//
-//PERL_SCALAR_INDEX = "$#" {PERL_VARIABLE_NAME}
-//
-//// @todo think about this staff
-//PERL_SCALAR = "$" {EMPTY_SPACE}* {PERL_VARIABLE_NAME}
-//PERL_SCALAR_BRACES = "$" "{" {BAREWORD} "}"
-//
-//PERL_HASH = "%" {PERL_VARIABLE_NAME}
-//PERL_HASH_BRACES = "%{" {BAREWORD} "}"
-//
-//PERL_ARRAY = "@" {PERL_VARIABLE_NAME}
-//PERL_ARRAY_BRACES = "@{" {BAREWORD} "}"
-//
-//PERL_GLOB = "*" {PERL_GLOB_VARIABLE_NAME}
-//PERL_GLOB_BRACES = "*{" {BAREWORD} "}"
-
-VARIABLE_DECLARATOR = "my" | "state" | "our" | "local"
-PRE_PACKAGE_SURE = "use" | "no" | "package" | {VARIABLE_DECLARATOR}
-PERL_PACKAGE_SURE = "::" * {PERL_BASIC_IDENTIFIER} ("::" * {PERL_BASIC_IDENTIFIER}) * "::" *
-MEANINGLESS_SPACE = {EMPTY_SPACE}+ | {END_OF_LINE_COMMENT}
-CAPTURE_SURE_PACKAGE = {PRE_PACKAGE_SURE}{MEANINGLESS_SPACE}+{PERL_PACKAGE_SURE}{MEANINGLESS_SPACE}*[^\.a-zA-Z0-9_]
-CAPTURE_REQUIRE_PACKAGE = "require"{MEANINGLESS_SPACE}+{PERL_PACKAGE_SURE}{MEANINGLESS_SPACE}*[^\(:\-a-zA-Z0-9_]
-
-PERL_PACKAGE_METHOD = {PERL_PACKAGE_CANONICAL} {BAREWORD}
+PERL_PACKAGE_AMBIGUOUS = "::"* {PERL_BASIC_IDENTIFIER} ("::"+ {PERL_BASIC_IDENTIFIER})+
 
 CAPTURE_HANDLE_READ = "<"{BAREWORD}">"
 
-DIR_HANDLE_PREFIX = "opendir" | "chdir" | "telldir" | "seekdir" | "rewinddir" | "readdir" | "closedir"
-FILE_HANDLE_PREFIX_SYS = "sysopen" | "syswrite" | "sysseek" | "sysread"
-FILE_HANDLE_PREFIX = "open" | "close" | "read" | "write" | "stat" | "ioctl" | "fcntl" | "lstat" | "truncate" | "tell" | "select" | "seek" | "getc" | "flock" | "fileno" | "eof" | "binmode"
-HANDLE_PREFIX = {DIR_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX} | {FILE_HANDLE_PREFIX_SYS}
-HANDLE_PRINT_PREFIX = "say" | "print" | "printf"
-
-
-CAPTURE_HANDLE_PRINT = {HANDLE_PRINT_PREFIX} ({EMPTY_SPACE}+ | {EMPTY_SPACE}* "(" {EMPTY_SPACE}*) {BAREWORD} {EMPTY_SPACE}+ [^{(:,\-\t\n\r\f ]
-CAPTURE_HANDLE = {HANDLE_PREFIX} ({EMPTY_SPACE}+ | {EMPTY_SPACE}* "(" {EMPTY_SPACE}*) {BAREWORD} {EMPTY_SPACE}* [,)]
-CAPTURE_HANDLE_FILETEST = {FILETEST} {EMPTY_SPACE}+ {BAREWORD} [^\(:\-a-zA-Z0-9_]
-
-// ::main_func
-CAPTURE_MAIN_CALL = "::"{BAREWORD}
-
-// ->method
-CAPTURE_METHOD_CALL = "->"{BAREWORD}
-
-// ->SUPER::method
-CAPTURE_SUPER_METHOD_CALL = "->"{MEANINGLESS_SPACE}*"SUPER::"
-
-// package->method
-CAPTURE_PACKAGE_METHOD_CALL = {PERL_PACKAGE_METHOD}{MEANINGLESS_SPACE}*"->"{MEANINGLESS_SPACE}*{BAREWORD}
-
-// method package
-CAPTURE_PACKAGE_METHOD_CALL_FANCY = {BAREWORD}{MEANINGLESS_SPACE}+{PERL_PACKAGE_METHOD}{MEANINGLESS_SPACE}*"("
-
-// package->$method
-CAPTURE_PACKAGE_METHOD_CALL_VAR = {PERL_PACKAGE_METHOD}{MEANINGLESS_SPACE}*"->"{MEANINGLESS_SPACE}*"$"
 
 CHAR_ANY        = .|{NEW_LINE}
 QUOTE           = "\"" | "'" | "`"
-END_OF_LINE_COMMENT = "#" [^\n] * [\n] ?
-
-PERL_LABEL_PREFIX = "goto" | "next" | "last" | "redo"
-// here can be parentesis
-CAPTURE_LABEL = {PERL_LABEL_PREFIX}{EMPTY_SPACE}+{BAREWORD}
 
 CAPTURE_LABEL_DEFINITION = {BAREWORD}{EMPTY_SPACE}*":"[^:]
 
@@ -182,13 +107,10 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
 X_OP_STICKED = "x"[0-9]+[^a-zA-Z]*
 
-BLOCK_NAMES = "BEGIN" | "UNITCHECK" | "CHECK" | "INIT" | "END"
-
 PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
 
 // atm making the same, but seems unary are different
-FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
-PERL_OPERATORS_FILETEST = {FILETEST} [^a-zA-Z0-9_]
+PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
 
 HEREDOC_MARKER = [a-zA-Z0-9_]+
 HEREDOC_OPENER = "<<"{WHITE_SPACE}* (\'{HEREDOC_MARKER}\' | \"{HEREDOC_MARKER}\" | \`{HEREDOC_MARKER}\` | {HEREDOC_MARKER})
@@ -197,25 +119,6 @@ QUOTE_LIST_FUNCTIONS = "qw"
 QUOTE_FUNCTIONS = "qq" | "qx" | "q"
 TRANS_FUNCTIONS = "tr" | "y"
 REGEX_FUNCTIONS = "s" | "qr" | "m"
-
-PERL_SYN_OTHER = "grep" | "sort" | "map" | "close"
-
-PERL_SYN_BINARY_NOT = "not"
-PERL_SYN_BINARY_X = "x"
-
-PERL_SYN_BINARY = "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" | "ne" | "cmp"
-
-
-PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
-FUNCTION_SPECIAL = {PERL_SYN_OTHER}
-
-PERL_SYN_BLOCK_OP = "do" | "eval"
-PERL_SYN_FLOW_CONTROL = "redo" | "next" | "last"
-PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
-
-FUNCTION_RESERVED = {PERL_SYN_BLOCK_OP} | {PERL_SYN_FLOW_CONTROL} | {PRE_PACKAGE_SURE} | {PERL_SYN_COMPOUND} | "require"
-
-PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
 %state LEX_BAREWORD_STRING
 %state LEX_CODE
@@ -236,7 +139,6 @@ TRANS_MODIFIERS = [cdsr]
 
 %xstate LEX_BAREWORD_BRACED
 %xstate LEX_BAREWORD_STRING_COMMA
-%xstate LEX_SURE_PACKAGE, LEX_SURE_PACKAGE_PACKAGE
 %xstate LEX_PACKAGE_METHOD_CALL, LEX_PACKAGE_METHOD_CALL_VAR, LEX_PACKAGE_METHOD_CALL_FANCY
 %xstate LEX_SUPER_METHOD_CALL
 %xstate LEX_MAIN_FUNCTION_CALL
@@ -250,26 +152,6 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_VARIABLE
 %state LEX_HTML_BLOCK
 %%
-
-//exclusive
-<LEX_VARIABLE>
-{
-    "$#"    {return PERL_SIGIL_SCALAR_INDEX;}
-    "$"    {return PERL_SIGIL_SCALAR;}
-    "@"    {return PERL_SIGIL_ARRAY;}
-    "%"    {return PERL_SIGIL_HASH;}
-    "*"    {return PERL_OPERATOR;}
-    "&"    {return PERL_OPERATOR;}
-    "{"     {return PERL_LBRACE;}
-    "}"     {return PERL_RBRACE;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-
-    // we should control, where whitespace is allowed
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {PERL_PACKAGE_CANONICAL} {return getPackageType();}
-    {PERL_BASIC_IDENTIFIER} {endCustomBlock();return PERL_VARIABLE_NAME;}
-    [^] {yypushback(1);endCustomBlock();break;}
-}
 
 //exclusive
 <LEX_HEREDOC_OPENER>
@@ -286,74 +168,10 @@ TRANS_MODIFIERS = [cdsr]
 }
 
 // exclusive
-<LEX_HANDLE_HANDLE>
-{
-    "(" {return PERL_LPAREN;}
-    {VARIABLE_DECLARATOR} {endCustomBlock();return getReservedTokenType();}
-    {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_HANDLE>
-{
-    {BAREWORD} {yybegin(LEX_HANDLE_HANDLE);return PERL_SUB;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_HANDLE_FILETEST>
-{
-    {PERL_OPERATORS_FILETEST} {yypushback(1);return PERL_OPERATOR_FILETEST;}
-    {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
 <LEX_HANDLE_READ>
 {
-    {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
+    {BAREWORD} {endCustomBlock();return getHandleTokenType();}
     "<" {return PERL_LANGLE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_PACKAGE_FUNCTION_CALL>
-{
-    {BAREWORD} {endCustomBlock();return PERL_SUB;}
-    {PERL_PACKAGE_CANONICAL} {return getPackageType();}
-
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_METHOD_CALL>
-{
-    "->" {return PERL_DEREFERENCE;}
-    {BAREWORD} {endCustomBlock();return PERL_SUB;}
-
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_LABEL>
-{
-    {PERL_LABEL_PREFIX} {return getReservedTokenType();}
-    {FUNCTION_SPECIAL} {endCustomBlock();return PERL_SUB;}
-    "undef" {endCustomBlock();return RESERVED_UNDEF;}
-    {FUNCTION_RESERVED} {endCustomBlock();return getReservedTokenType();}
-    {BAREWORD} {endCustomBlock(); return PERL_LABEL;}
-
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -376,82 +194,6 @@ TRANS_MODIFIERS = [cdsr]
 }
 
 // exclusive
-<LEX_MAIN_FUNCTION_CALL>
-{
-    "::" {return PERL_PACKAGE;}
-    {BAREWORD} {endCustomBlock(); return PERL_SUB;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_SUPER_METHOD_CALL>
-{
-    "->" {return PERL_DEREFERENCE;}
-    "SUPER::" {return PERL_PACKAGE;}
-    {BAREWORD} {endCustomBlock();return PERL_SUB;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_PACKAGE_METHOD_CALL>
-{
-    "->" {return PERL_DEREFERENCE;}
-    {BAREWORD} {endCustomBlock();return PERL_SUB;}
-    {PERL_PACKAGE_SURE} {return getPackageType(); }
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_PACKAGE_METHOD_CALL_FANCY>
-{
-    {BAREWORD} {
-        IElementType tokenType = getBarewordTokenType();
-        if( tokenType != PERL_SUB )
-            endCustomBlock();
-        return tokenType;
-    }
-    {PERL_PACKAGE_METHOD} {
-        endCustomBlock();
-        if( isKnownPackage() )
-            return getPackageType();
-
-        yypushback(yylength());
-        break;
-    }
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
-<LEX_PACKAGE_METHOD_CALL_VAR>
-{
-    {PERL_PACKAGE_SURE} {endCustomBlock();return getPackageType(); }
-}
-
-
-<LEX_SURE_PACKAGE_PACKAGE>
-{
-   {PERL_PACKAGE_SURE} {endCustomBlock();return getPackageType();}
-//   {END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
-   {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-   {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-
-// exclusive
-<LEX_SURE_PACKAGE>
-{
-    {PRE_PACKAGE_SURE}|"require"    {yybegin(LEX_SURE_PACKAGE_PACKAGE);return getReservedTokenType();}
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
 <LEX_BAREWORD_STRING_COMMA>
 {
     {BAREWORD_MINUS}   {endCustomBlock(); return PERL_STRING_CONTENT; }
@@ -465,7 +207,6 @@ TRANS_MODIFIERS = [cdsr]
     "{" {return PERL_LBRACE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {PERL_TAGS} {return PERL_TAG;}
     {BAREWORD}   {endCustomBlock();return getBracedBarewordTokenType(); }
     . {yypushback(1);endCustomBlock();break;}
 }
@@ -473,8 +214,8 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_SUB_NAME>
 {
-    {PERL_PACKAGE_CANONICAL} {return getPackageType();}
-    {BAREWORD} {yybegin(LEX_SUB_DEFINITION);return PERL_SUB;}
+    {PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}
+    {BAREWORD} {yybegin(LEX_SUB_DEFINITION);return getSubTokenType();}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     .   {yypushback(1);yybegin(LEX_SUB_DEFINITION);break;}
@@ -503,8 +244,6 @@ TRANS_MODIFIERS = [cdsr]
 
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 ";"     {return processSemicolon();}
-
-//{END_OF_LINE_COMMENT}  { return PERL_COMMENT; }
 
 /**
 **/
@@ -613,44 +352,24 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_VERSION}  {return PERL_NUMBER_VERSION;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
-//{PERL_SCALAR_INDEX} {return PERL_SCALAR_INDEX;}
 
 {PERL_SCALAR_BUILT_IN}      {return parseBuiltInVariable();}
 {PERL_ARRAY_BUILT_IN}       {return parseBuiltInVariable();}
 {PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}
 {PERL_HASH_BUILT_IN}        {return parseBuiltInVariable();}
-{PERL_GLOB_BUILT_IN}        {return parseBuiltInVariable();}
-
-//{PERL_SCALAR} {return PERL_SCALAR;}
-//{PERL_ARRAY} {return PERL_ARRAY;}
-//{PERL_HASH} {return PERL_HASH;}
-//{PERL_GLOB} {return PERL_GLOB;}
-//
-//{PERL_SCALAR_BRACES} {return PERL_SCALAR;}
-//{PERL_ARRAY_BRACES} {return PERL_ARRAY;}
-//{PERL_HASH_BRACES} {return PERL_HASH;}
-//{PERL_GLOB_BRACES} {return PERL_GLOB;}
 
 "@" {return PERL_SIGIL_ARRAY;}
 "%" {return PERL_SIGIL_HASH;}
 "$#" {return PERL_SIGIL_SCALAR_INDEX;}
 "$" {return PERL_SIGIL_SCALAR;}
-{CAPUTRE_PERL_VARIABLE} {startCustomBlock(LEX_VARIABLE);break;}
 
 "sub" {pushState();yybegin(LEX_SUB_NAME);return getReservedTokenType();}
-{CAPTURE_SURE_PACKAGE} {startCustomBlock(LEX_SURE_PACKAGE);break;}
-{CAPTURE_REQUIRE_PACKAGE} {startCustomBlock(LEX_SURE_PACKAGE);break;}
-
-{CAPTURE_PACKAGE_METHOD_CALL} {startCustomBlock(LEX_PACKAGE_METHOD_CALL);break;}
-{CAPTURE_PACKAGE_METHOD_CALL_FANCY} {startCustomBlock(LEX_PACKAGE_METHOD_CALL_FANCY);break;}
-{CAPTURE_PACKAGE_METHOD_CALL_VAR} {startCustomBlock(LEX_PACKAGE_METHOD_CALL_VAR);break;}
-{CAPTURE_SUPER_METHOD_CALL} {startCustomBlock(LEX_SUPER_METHOD_CALL);break;}
 
 {REGEX_FUNCTIONS} {return processRegexOpener();}
 {TRANS_FUNCTIONS} {return processTransOpener();}
 {QUOTE_FUNCTIONS} {return processQuoteLikeStringOpener();}
 {QUOTE_LIST_FUNCTIONS} {return processQuoteLikeListOpener();}
-{PERL_TAGS}    {return PERL_TAG;}
+
 "/"   {   // regexp or div
     IElementType tokenType = processDiv();
     if( tokenType == null )
@@ -661,41 +380,22 @@ TRANS_MODIFIERS = [cdsr]
 {BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
 
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
-{PERL_OPERATORS_FILETEST} {yypushback(1);return PERL_OPERATOR_FILETEST;}
-{PERL_SYN_UNARY} {return PERL_OPERATOR_UNARY;}
-
-{FUNCTION_RESERVED} {return getReservedTokenType();}
-{PRE_PACKAGE_SURE} {return getReservedTokenType();}
-"require" {return getReservedTokenType();}
-
-{PERL_SYN_BINARY_NOT} {return PERL_OPERATOR_NOT;}
-{PERL_SYN_BINARY_X} {return PERL_OPERATOR_X;}
-{PERL_SYN_BINARY} {return PERL_OPERATOR;}
-
-"undef" {return RESERVED_UNDEF;}
-{FUNCTION_SPECIAL} {return PERL_SUB;}
-{BLOCK_NAMES} {return PERL_BLOCK_NAME;}
-
-<LEX_BAREWORD_STRING>
-{
-    {BAREWORD} { yybegin(YYINITIAL); return PERL_STRING_CONTENT;}
-}
+{PERL_OPERATORS_FILETEST} {return PERL_OPERATOR_FILETEST;}
 
 {X_OP_STICKED} {yypushback(yylength()-1);return PERL_OPERATOR_X;}
 
-{CAPTURE_MAIN_CALL} {startCustomBlock(LEX_MAIN_FUNCTION_CALL);break;}
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
-{CAPTURE_LABEL} {startCustomBlock(LEX_LABEL);break;}
-{CAPTURE_METHOD_CALL} {startCustomBlock(LEX_METHOD_CALL);break;}
-{PERL_PACKAGE_METHOD} {startCustomBlock(LEX_PACKAGE_FUNCTION_CALL);break;}
 
-{PERL_PACKAGE_CANONICAL} {return getPackageType();}
-{BUILT_IN_GLOB_NAME} {return PERL_HANDLE_BUILT_IN;}
 {CAPTURE_HANDLE_READ} {startCustomBlock(LEX_HANDLE_READ);break;}
-{CAPTURE_HANDLE_FILETEST} {startCustomBlock(LEX_HANDLE_FILETEST);break;}
-{CAPTURE_HANDLE_PRINT} {startCustomBlock(LEX_HANDLE);break;}
-{CAPTURE_HANDLE} {startCustomBlock(LEX_HANDLE);break;}
+
+{PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}
 {BAREWORD} { return getBarewordTokenType();}
+{PERL_PACKAGE_AMBIGUOUS} {
+    IElementType tokenType = parsePackageName();
+    if( tokenType != null )
+        return  tokenType;
+    break;
+}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

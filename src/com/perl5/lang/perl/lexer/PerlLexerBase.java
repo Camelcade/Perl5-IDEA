@@ -38,10 +38,11 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract void pushState();
 
 	public abstract IElementType getBracedBarewordTokenType();
-	public abstract IElementType getPackageType();
+	public abstract IElementType getPackageTokenType();
 	public abstract IElementType getBarewordTokenType();
 	public abstract IElementType getReservedTokenType();
-	public abstract boolean isKnownPackage();
+	public abstract IElementType getHandleTokenType();
+	public abstract IElementType getSubTokenType();
 
 	public abstract IElementType processSemicolon();
 

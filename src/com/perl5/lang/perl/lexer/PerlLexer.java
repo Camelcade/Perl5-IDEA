@@ -35,12 +35,108 @@ public class PerlLexer extends PerlLexerGenerated{
 	protected IElementType lastSignificantTokenType;
 	protected String lastSignificantToken;
 	protected IElementType lastTokenType;
-	protected HashMap<String,IElementType> knownPackages = new HashMap<>();
+
+	protected HashSet<String> knownPackages = new HashSet<>();
+	protected HashSet<String> knownHandles = new HashSet<>();
+	protected HashSet<String> knownSubs = new HashSet<>();
+
+	// tokens which preceeds 100% package bareword
+	public static final HashSet<IElementType> prePackageTokenTypes = new HashSet<>( Arrays.asList(
+			RESERVED_MY,
+			RESERVED_OUR,
+			RESERVED_STATE,
+			RESERVED_LOCAL,
+
+			RESERVED_PACKAGE,
+			RESERVED_USE,
+			RESERVED_NO,
+			RESERVED_REQUIRE
+	));
+
+	// tokens which preceeds filehandle bareword
+	public static final HashSet<IElementType> preHandleTokenTypes = new HashSet<>(Arrays.asList(
+			PERL_OPERATOR_FILETEST
+	));
+	public static final HashSet<String> preHandleTokens = new HashSet<>(Arrays.asList(
+			"opendir",
+			"chdir",
+			"telldir",
+			"seekdir",
+			"rewinddir",
+			"readdir",
+			"closedir",
+
+			"sysopen",
+			"syswrite",
+			"sysseek",
+			"sysread",
+
+			"open",
+			"close",
+			"read",
+			"write",
+			"stat",
+			"ioctl",
+			"fcntl",
+			"lstat",
+			"truncate",
+			"tell",
+			"select",
+			"seek",
+			"getc",
+			"flock",
+			"fileno",
+			"eof",
+			"eof",
+			"binmode",
+
+			"say",
+			"print",
+			"printf"
+	));
+
 
 	public static final HashMap<String,IElementType> reservedTokenTypes = new HashMap<>();
+	public static final HashMap<String,IElementType> namedOperators = new HashMap<>();
+	public static final HashMap<String,IElementType> blockNames = new HashMap<>();
+	public static final HashMap<String,IElementType> tagNames = new HashMap<>();
 
 	static
 	{
+		// named operators
+		namedOperators.put("not", PERL_OPERATOR_NOT);
+		namedOperators.put("x", PERL_OPERATOR_X);
+
+		namedOperators.put("and", PERL_OPERATOR);
+		namedOperators.put("or", PERL_OPERATOR);
+		namedOperators.put("xor", PERL_OPERATOR);
+		namedOperators.put("lt", PERL_OPERATOR);
+		namedOperators.put("gt", PERL_OPERATOR);
+		namedOperators.put("le", PERL_OPERATOR);
+		namedOperators.put("ge", PERL_OPERATOR);
+		namedOperators.put("eq", PERL_OPERATOR);
+		namedOperators.put("ne", PERL_OPERATOR);
+		namedOperators.put("cmp", PERL_OPERATOR);
+
+		namedOperators.put("dfined", PERL_OPERATOR_UNARY);
+		namedOperators.put("ref", PERL_OPERATOR_UNARY);
+		namedOperators.put("exists", PERL_OPERATOR_UNARY);
+		namedOperators.put("scalar", PERL_OPERATOR_UNARY);
+
+		// block names
+		blockNames.put("BEGIN", PERL_BLOCK_NAME);
+		blockNames.put("UNITCHECK", PERL_BLOCK_NAME);
+		blockNames.put("CHECK", PERL_BLOCK_NAME);
+		blockNames.put("INIT", PERL_BLOCK_NAME);
+		blockNames.put("END", PERL_BLOCK_NAME);
+
+		// tags
+		tagNames.put("__FILE__", PERL_TAG);
+		tagNames.put("__LINE__", PERL_TAG);
+		tagNames.put("__PACKAGE__", PERL_TAG);
+		tagNames.put("__SUB__", PERL_TAG);
+
+		// reserved
 		reservedTokenTypes.put("if", RESERVED_IF);
 		reservedTokenTypes.put("unless", RESERVED_UNLESS);
 		reservedTokenTypes.put("elsif", RESERVED_ELSIF);
@@ -567,10 +663,10 @@ public class PerlLexer extends PerlLexerGenerated{
 			|| lastSignificantTokenType == PERL_LBRACE
 			|| lastSignificantTokenType == PERL_LBRACK
 			|| lastSignificantTokenType == PERL_SEMI
+			|| lastSignificantTokenType == RESERVED_IF
+			|| lastSignificantTokenType == RESERVED_UNLESS
 			|| "return".equals(lastSignificantToken)
 			|| "split".equals(lastSignificantToken)
-			|| "if".equals(lastSignificantToken)
-			|| "unless".equals(lastSignificantToken)
 			|| "grep".equals(lastSignificantToken)
 			|| "map".equals(lastSignificantToken)
 		)
@@ -929,61 +1025,6 @@ public class PerlLexer extends PerlLexerGenerated{
 	}
 
 	/**
-	 * Logic for choosing type of braced bareword, like {defined}
-	 * @return token type
-	 */
-	@Override
-	public IElementType getBracedBarewordTokenType()
-	{
-		if( "defined".equals(yytext().toString()))
-			return PERL_OPERATOR_UNARY;
-
-		return PERL_STRING_CONTENT;
-	}
-
-	/**
-	 * Detecting package type (built-in or regular). Register package in the internal hashmap
-	 * @return token type
-	 */
-	@Override
-	public IElementType getPackageType()
-	{
-		String packageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
-		if( !knownPackages.containsKey(packageName))
-			knownPackages.put(packageName,PERL_PACKAGE);
-		return knownPackages.get(packageName);
-	}
-
-	/**
-	 * Guessing bareword as function or package, if it has been used before
-	 * @return token type
-	 */
-	@Override
-	public IElementType getBarewordTokenType()
-	{
-		String bareword = yytext().toString();
-		IElementType tokenType = null;
-
-		if( (tokenType = reservedTokenTypes.get(bareword)) != null)
-			return tokenType;
-		else if( (tokenType = knownPackages.get(bareword)) != null  )
-			return tokenType;
-
-		return PERL_SUB;
-	}
-
-	/**
-	 * Checks if package has been used or is built in
-	 * @return true if it's package, false otherwise
-	 */
-	@Override
-	public boolean isKnownPackage()
-	{
-		String packageName = yytext().toString();
-		return  knownPackages.containsKey(packageName) || PerlPackageUtil.isBuiltIn(packageName);
-	}
-
-	/**
 	 * Parses token as built-in variable
 	 */
 	public static Pattern variablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)(.+)$");
@@ -1065,4 +1106,75 @@ public class PerlLexer extends PerlLexerGenerated{
 			throw new RuntimeException("Unknwon token type for " + yytext().toString());
 	}
 
+	@Override
+	public IElementType getHandleTokenType()
+	{
+		String handleName = yytext().toString();
+		if( !knownHandles.contains(handleName))
+			knownHandles.add(handleName);
+		return PERL_HANDLE;
+	}
+
+	/**
+	 * Guessing bareword as function or package, if it has been used before
+	 * @return token type
+	 */
+	@Override
+	public IElementType getBarewordTokenType()
+	{
+		String bareword = yytext().toString();
+		IElementType tokenType = null;
+
+		// todo check reserved
+		// todo check block name
+		// todo check tag
+		// todo check built in handles
+		// todo check opened handles
+		// todo check previous token
+
+		if( (tokenType = reservedTokenTypes.get(bareword)) != null)
+			return tokenType;
+		else if( knownPackages.contains(bareword) )
+			return PERL_PACKAGE;
+
+		return PERL_SUB;
+	}
+
+	/**
+	 * Logic for choosing type of braced bareword, like {defined}
+	 * @return token type
+	 */
+	@Override
+	public IElementType getBracedBarewordTokenType()
+	{
+		// fixme this is bad
+		if( "defined".equals(yytext().toString()))
+			return PERL_OPERATOR_UNARY;
+
+		return PERL_STRING_CONTENT;
+	}
+
+	/**
+	 * Detecting package type (built-in or regular). Register package in the internal hashmap
+	 * @return token type
+	 */
+	@Override
+	public IElementType getPackageTokenType()
+	{
+		// check if sigil was before
+
+		String packageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
+		if( !knownPackages.contains(packageName))
+			knownPackages.add(packageName);
+		return PERL_PACKAGE;
+	}
+
+	@Override
+	public IElementType getSubTokenType()
+	{
+		String subName = yytext().toString();
+		if( !knownSubs.contains(subName))
+			knownSubs.add(subName);
+		return PERL_SUB;
+	}
 }
