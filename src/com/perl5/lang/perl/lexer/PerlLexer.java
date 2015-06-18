@@ -1373,6 +1373,7 @@ public class PerlLexer extends PerlLexerGenerated
 			return tokenType;
 			// filetest [(] bareword (])
 		else if (preHandleTokenTypes.contains(lastUnparenTokenType)
+				&& !((Character) '(').equals(nextSignificantCharacter)
 				&& (lastSignificantTokenType != PERL_LPAREN || ((Character) ')').equals(nextSignificantCharacter))
 				)
 			return getHandleTokenType();
