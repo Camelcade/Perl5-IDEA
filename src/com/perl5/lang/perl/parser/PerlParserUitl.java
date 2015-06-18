@@ -161,16 +161,4 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
-	/**
-	 * fixme this is a bad solution. Lexser must return appropriate tokens for keywords, this will speed up things
-	 * Checks current token type for parsing by names, when we need to check token type and token name
-	 * @param b Perl builder
-	 * @param l parsing level
-	 * @param tokenType tokentype to check
-	 * @return parsing results
-	 */
-	public static boolean checkTokenType(PsiBuilder b, int l, IElementType tokenType)
-	{
-		return b.getTokenType() == tokenType;
-	}
 }

@@ -40,6 +40,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType getBracedBarewordTokenType();
 	public abstract IElementType getPackageType();
 	public abstract IElementType getBarewordTokenType();
+	public abstract IElementType getReservedTokenType();
 	public abstract boolean isKnownPackage();
 
 	public abstract IElementType processSemicolon();

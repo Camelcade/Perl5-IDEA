@@ -72,6 +72,49 @@ limitations under the License.
 
     PERL_RESERVED="PERL_RESERVED"
 
+    RESERVED_IF="if"
+    RESERVED_UNLESS="unless"
+    RESERVED_ELSIF="elsif"
+    RESERVED_ELSE="else"
+    RESERVED_GIVEN="given"
+    RESERVED_WHILE="while"
+    RESERVED_UNTIL="until"
+    RESERVED_FOR="for"
+    RESERVED_FOREACH="foreach"
+    RESERVED_CONTINUE="continue"
+
+    RESERVED_SUB="sub"
+    RESERVED_PACKAGE="package"
+    RESERVED_USE="use"
+    RESERVED_NO="no"
+    RESERVED_REQUIRE="require"
+
+    RESERVED_UNDEF="undef"
+
+    RESERVED_QW="qw"
+
+    RESERVED_QQ="qq"
+    RESERVED_Q="q"
+    RESERVED_QX="qx"
+
+    RESERVED_TR="tr"
+    RESERVED_Y="y"
+
+    RESERVED_S="s"
+    RESERVED_QR="qr"
+    RESERVED_M="m"
+
+    RESERVED_MY="my"
+    RESERVED_OUR="our"
+    RESERVED_STATE="state"
+    RESERVED_LOCAL="local"
+
+    RESERVED_DO="do"
+    RESERVED_EVAL="eval"
+    RESERVED_REDO="redo"
+    RESERVED_NEXT="next"
+    RESERVED_LAST="last"
+
     PERL_OPERATOR="PERL_OPERATOR"
     PERL_OPERATOR_NOT="not"
     PERL_OPERATOR_X="x"
@@ -183,14 +226,14 @@ root ::= file_item *
 private file_item ::= !<<eof>> {PERL_SEMI | namespace_block | namespace_item} //{pin=1 }
 
 namespace_block ::= namespace_definition (block | PERL_SEMI namespace_content)
-namespace_definition ::= "package" namespace_element [perl_version] {pin=1 recoverWhile=recover_namespace_definition}
+namespace_definition ::= RESERVED_PACKAGE namespace_element [perl_version] {pin=1 recoverWhile=recover_namespace_definition}
 private recover_namespace_definition ::= !(PERL_SEMI | PERL_LBRACE)
 namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
 
-// todo make package as token
-private recover_namespace ::= !( "package" | PERL_RBRACE )
+// todo count opening braces
+private recover_namespace ::= !( RESERVED_PACKAGE | PERL_RBRACE )
 
-block ::= "{" block_content "}" {pin=1}
+block ::= PERL_LBRACE block_content PERL_RBRACE {pin=1}
 private block_content ::= file_item * {recoverWhile=recover_block}
 private recover_block ::= !(PERL_RBRACE)
 
@@ -207,7 +250,7 @@ private compound_statement ::=
 named_block ::= PERL_BLOCK_NAME block
 
 // fixme we can't pin this because we need to distinct declaration and definition
-sub_definition ::= [annotations] "sub" canonical_sub_name [sub_definition_parameters] block
+sub_definition ::= [annotations] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
@@ -227,10 +270,10 @@ private labelable_compound_statment ::=
         | foreach_compound
      )
 
-if_compound ::= 'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
-unless_compound ::= 'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
-private if_compound_elsif ::= 'elsif' conditional_block  {pin=1}
-private if_compound_else  ::= 'else' unconditional_block {pin=1}
+if_compound ::= RESERVED_IF conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
+unless_compound ::= RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
+private if_compound_elsif ::= RESERVED_ELSIF conditional_block  {pin=1}
+private if_compound_else  ::= RESERVED_ELSE unconditional_block {pin=1}
 unconditional_block ::= block
 
 conditional_block ::= condition_statement block {pin=1 name="Conditional block"}
@@ -239,20 +282,20 @@ private condition_statement_expr ::= expr {recoverWhile=recover_condition_statem
 private recover_condition_statement_expr ::= !(PERL_LBRACE|PERL_RPAREN)
 private recover_to_block ::= !(PERL_LBRACE)
 
-given_compound ::= 'given' conditional_block  {pin=1}
+given_compound ::= RESERVED_GIVEN conditional_block  {pin=1}
 
-while_compound ::= 'while' conditional_block [continue_block]  {pin=1}
-until_compound ::= 'until' conditional_block [continue_block]  {pin=1}
+while_compound ::= RESERVED_WHILE conditional_block [continue_block]  {pin=1}
+until_compound ::= RESERVED_UNTIL conditional_block [continue_block]  {pin=1}
 
-continue_block ::= 'continue' block {pin=1}
+continue_block ::= RESERVED_CONTINUE block {pin=1}
 
 private block_compound ::= block [continue_block]
 
 
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is a error on "use", both pinned
-for_compound ::= 'for' for_arguments {pin=1}
-foreach_compound ::= 'foreach' for_arguments  {pin=1}
+for_compound ::= RESERVED_FOR for_arguments {pin=1}
+foreach_compound ::= RESERVED_FOREACH for_arguments  {pin=1}
 private for_arguments ::=
     for_iterator block
     | for_list_statement block_compound
@@ -276,7 +319,7 @@ private statement_body ::=
 
 private normal_statement ::= [label_declaration] expr [statement_modifier] {pin=2}
 
-sub_declaration ::= [annotations] "sub" canonical_sub_name sub_declaration_parameters
+sub_declaration ::= [annotations] RESERVED_SUB canonical_sub_name sub_declaration_parameters
 
 private canonical_sub_name ::= [namespace_element] sub_name_element
 
@@ -296,9 +339,9 @@ private recover_sub_signature_content ::= !(PERL_RPAREN | ":" | PERL_LBRACE | PE
 private sub_attributes ::= ":" <<parseSubAttributes>> {pin=1 recoverWhile=recover_sub_attributes}
 recover_sub_attributes ::= !(PERL_LPAREN| PERL_SEMI| PERL_LBRACE)
 
-last_expr ::= 'last' [lnr_param] {pin=1}
-next_expr ::= 'next' [lnr_param] {pin=1}
-redo_expr ::= 'redo' [lnr_param] {pin=1}
+last_expr ::= RESERVED_LAST [lnr_param] {pin=1}
+next_expr ::= RESERVED_NEXT [lnr_param] {pin=1}
+redo_expr ::= RESERVED_REDO [lnr_param] {pin=1}
 private lnr_param ::= PERL_LABEL | expr
 
 private statement_modifier ::=
@@ -310,23 +353,23 @@ private statement_modifier ::=
     | foreach_statement_modifier
     | when_statement_modifier
 
-if_statement_modifier ::= 'if' expr {pin=1 name="Postfix if"}
-unless_statement_modifier ::=  'unless' expr {pin=1 name="Postfix unless"}
-while_statement_modifier ::=  'while' expr {pin=1 name="Postfix while"}
-until_statement_modifier ::=  'until' expr {pin=1 name="Postfix until"}
-for_statement_modifier ::=  'for' expr  {pin=1 name="Postfix for"}
-foreach_statement_modifier ::=  'foreach' expr {pin=1 name="Postfix foreach"}
-when_statement_modifier ::= 'when' expr {pin=1 name="Postfix when"}
+if_statement_modifier ::= RESERVED_IF expr {pin=1 name="Postfix if"}
+unless_statement_modifier ::=  RESERVED_UNLESS expr {pin=1 name="Postfix unless"}
+while_statement_modifier ::=  RESERVED_WHILE expr {pin=1 name="Postfix while"}
+until_statement_modifier ::=  RESERVED_UNTIL expr {pin=1 name="Postfix until"}
+for_statement_modifier ::=  RESERVED_FOR expr  {pin=1 name="Postfix for"}
+foreach_statement_modifier ::=  RESERVED_FOREACH expr {pin=1 name="Postfix foreach"}
+when_statement_modifier ::= RESERVED_WHEN expr {pin=1 name="Postfix when"}
 
-use_statement ::= 'use' use_no_parameters {pin=1}
-no_statement ::= 'no' use_no_parameters {pin=1}
+use_statement ::= RESERVED_USE use_no_parameters {pin=1}
+no_statement ::= RESERVED_NO use_no_parameters {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= namespace_element [perl_version] [expr];
 private use_version_parameters ::= perl_version;
 
-undef_expr ::= "undef" (variable | PERL_LPAREN variable PERL_RPAREN) ? {pin=1}
-require_expr ::= 'require' (namespace_element | perl_version | unary_expr)  {pin=1}// multiline string is possible too
+undef_expr ::= RESERVED_UNDEF (variable | PERL_LPAREN variable PERL_RPAREN) ? {pin=1}
+require_expr ::= RESERVED_REQUIRE (namespace_element | perl_version | unary_expr)  {pin=1}// multiline string is possible too
 
 private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | PERL_REGEX_QUOTE_CLOSE)
 
@@ -466,7 +509,7 @@ private sort_op_arguments ::=
     | scalar_expr expr
     | expr
 
-sub_expr ::= 'sub' sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
+sub_expr ::= RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
 
 grep_expr ::= 'grep' grep_map_arguments {pin=1}
 map_expr ::= 'map' grep_map_arguments {pin=1}
@@ -496,25 +539,25 @@ private regex_term ::=
     | match_regex
 
 // pinning quotes leads to bug with replacement block
-compile_regex ::= 'qr' match_regex_body
-match_regex ::= ['m'] match_regex_body
+compile_regex ::= RESERVED_QR match_regex_body
+match_regex ::= [RESERVED_M] match_regex_body
 private match_regex_body ::= PERL_REGEX_QUOTE_OPEN [perl_regex] PERL_REGEX_QUOTE_CLOSE [perl_regex_modifiers]
-replacement_regex ::= "s" PERL_REGEX_QUOTE_OPEN [perl_regex] PERL_REGEX_QUOTE_CLOSE [PERL_REGEX_QUOTE_OPEN] [perl_regex | regex_code] PERL_REGEX_QUOTE_CLOSE [perl_regex_modifiers]
+replacement_regex ::= RESERVED_S PERL_REGEX_QUOTE_OPEN [perl_regex] PERL_REGEX_QUOTE_CLOSE [PERL_REGEX_QUOTE_OPEN] [perl_regex | regex_code] PERL_REGEX_QUOTE_CLOSE [perl_regex_modifiers]
 private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(PERL_REGEX_QUOTE_CLOSE)
 
 perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
 perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick
 
-tr_regex ::= ('tr'|'y') PERL_REGEX_QUOTE_OPEN tr_searchlist PERL_REGEX_QUOTE_CLOSE [PERL_REGEX_QUOTE_OPEN] tr_replacementlist PERL_REGEX_QUOTE_CLOSE [tr_modifiers] {pin=1}
+tr_regex ::= (RESERVED_TR|RESERVED_Y) PERL_REGEX_QUOTE_OPEN tr_searchlist PERL_REGEX_QUOTE_CLOSE [PERL_REGEX_QUOTE_OPEN] tr_replacementlist PERL_REGEX_QUOTE_CLOSE [tr_modifiers] {pin=1}
 tr_searchlist ::= PERL_STRING_CONTENT
 tr_replacementlist ::= PERL_STRING_CONTENT
 
 tr_modifiers ::= PERL_REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
-do_expr ::= "do" eval_argument {pin=1}
-eval_expr ::= "eval" eval_argument {pin=1}
+do_expr ::= RESERVED_DO eval_argument {pin=1}
+eval_expr ::= RESERVED_EVAL eval_argument {pin=1}
 private eval_argument ::= parenthesised_expr | block | expr
 
 private variable_declaration ::=
@@ -523,9 +566,9 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::= <<checkTokenType PERL_RESERVED>> 'local' [namespace_element]  local_variable_declaration_variation {pin=2}
-variable_declaration_lexical ::= <<checkTokenType PERL_RESERVED>> ('my' | 'state') [namespace_element] variable_declaration_variation {pin=2}
-variable_declaration_global ::= <<checkTokenType PERL_RESERVED>> 'our' [namespace_element] variable_declaration_variation  {pin=2}
+variable_declaration_local ::= RESERVED_LOCAL [namespace_element]  local_variable_declaration_variation {pin=1}
+variable_declaration_lexical ::= (RESERVED_MY | RESERVED_STATE) [namespace_element] variable_declaration_variation {pin=1}
+variable_declaration_global ::= RESERVED_OUR [namespace_element] variable_declaration_variation  {pin=1}
 
 private local_variable_declaration_variation ::=
     PERL_LPAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * PERL_RPAREN
@@ -539,7 +582,7 @@ private variable_declaration_variation ::=
     PERL_LPAREN lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* PERL_RPAREN
     | lexical_variable_definition_argument
 
-private lexical_variable_definition_argument ::= lexical_variable | "undef"
+private lexical_variable_definition_argument ::= lexical_variable | RESERVED_UNDEF
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 // most of the references created by \ operator, but some - don't
@@ -550,7 +593,7 @@ private reference_value_expr ::=
 
 anon_array ::= '[' [expr] ']' //{pin=1}
 anon_hash ::= '{' [expr] '}' // fixme pin here after solving problem with code block and prototypes
-code_ref ::= "sub" block
+code_ref ::= RESERVED_SUB block
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
@@ -647,20 +690,20 @@ private string ::= string_sq | string_dq | string_xq | heredoc_opener
 private string_quoted ::= PERL_QUOTE [PERL_STRING_CONTENT] PERL_QUOTE
 string_dq ::=
     "\"" [PERL_STRING_CONTENT] "\""
-     | "qq" string_quoted
+     | RESERVED_QQ string_quoted
 
 string_sq ::=
     "'" [PERL_STRING_CONTENT] "'"
-    | "q" string_quoted
+    | RESERVED_Q string_quoted
     | PERL_STRING_CONTENT
 
 string_xq ::=
     "`" [PERL_STRING_CONTENT] "`"
-    | "qx" string_quoted
+    | RESERVED_QX string_quoted
 
 heredoc_opener ::= '<<' ( string_xq | string_dq | string_sq | PERL_STRING_CONTENT )
 
-string_list ::= 'qw' PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
+string_list ::= RESERVED_QW PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable

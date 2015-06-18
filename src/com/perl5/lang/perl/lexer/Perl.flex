@@ -197,15 +197,8 @@ QUOTE_LIST_FUNCTIONS = "qw"
 QUOTE_FUNCTIONS = "qq" | "qx" | "q"
 TRANS_FUNCTIONS = "tr" | "y"
 REGEX_FUNCTIONS = "s" | "qr" | "m"
-PERL_SYN_QUOTE_LIKE = {QUOTE_LIST_FUNCTIONS} | {QUOTE_FUNCTIONS} | {TRANS_FUNCTIONS} | {REGEX_FUNCTIONS}
 
-PERL_SYN_BLOCK_OP = "do" | "eval"
-PERL_SYN_FLOW_CONTROL = "redo" | "next" | "last"
-PERL_SYN_DECLARE = "package" | "sub" | {VARIABLE_DECLARATOR}
-PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
-// "print" | "say" | "open"
-
-PERL_SYN_OTHER = "undef" | "grep" | "sort" | "map" | "close"
+PERL_SYN_OTHER = "grep" | "sort" | "map" | "close"
 
 PERL_SYN_BINARY_NOT = "not"
 PERL_SYN_BINARY_X = "x"
@@ -214,8 +207,13 @@ PERL_SYN_BINARY = "and" | "or" | "xor" | "x" | "lt" | "gt" | "le" | "ge" | "eq" 
 
 
 PERL_SYN_UNARY = "defined" | "ref" | "exists" | "scalar"
-FUNCTION_SPECIAL = {PERL_SYN_BLOCK_OP} | {PERL_SYN_QUOTE_LIKE} | {PERL_SYN_FLOW_CONTROL} | {PERL_SYN_OTHER}
+FUNCTION_SPECIAL = {PERL_SYN_OTHER}
 
+PERL_SYN_BLOCK_OP = "do" | "eval"
+PERL_SYN_FLOW_CONTROL = "redo" | "next" | "last"
+PERL_SYN_COMPOUND = "if" | "unless" | "given" | "while" | "until" | "for" | "foreach" | "elsif" | "else" | "continue"
+
+FUNCTION_RESERVED = {PERL_SYN_BLOCK_OP} | {PERL_SYN_FLOW_CONTROL} | {PRE_PACKAGE_SURE} | {PERL_SYN_COMPOUND} | "require"
 
 PERL_TAGS = "__FILE__" | "__LINE__" | "__PACKAGE__" | "__SUB__"
 
@@ -291,7 +289,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_HANDLE_HANDLE>
 {
     "(" {return PERL_LPAREN;}
-    {VARIABLE_DECLARATOR} {endCustomBlock();return PERL_RESERVED;}
+    {VARIABLE_DECLARATOR} {endCustomBlock();return getReservedTokenType();}
     {BAREWORD} {endCustomBlock();return PERL_HANDLE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -348,9 +346,10 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_LABEL>
 {
-    {PERL_LABEL_PREFIX} {return PERL_RESERVED;}
+    {PERL_LABEL_PREFIX} {return getReservedTokenType();}
     {FUNCTION_SPECIAL} {endCustomBlock();return PERL_SUB;}
-    {PERL_SYN_COMPOUND} {endCustomBlock();return PERL_RESERVED;}
+    "undef" {endCustomBlock();return RESERVED_UNDEF;}
+    {FUNCTION_RESERVED} {endCustomBlock();return getReservedTokenType();}
     {BAREWORD} {endCustomBlock(); return PERL_LABEL;}
 
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
@@ -409,7 +408,6 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_PACKAGE_METHOD_CALL_FANCY>
 {
-    // here are should be keywords and resreved words
     {BAREWORD} {
         IElementType tokenType = getBarewordTokenType();
         if( tokenType != PERL_SUB )
@@ -449,7 +447,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_SURE_PACKAGE>
 {
-    {PRE_PACKAGE_SURE}|"require"    {yybegin(LEX_SURE_PACKAGE_PACKAGE);return PERL_RESERVED;}
+    {PRE_PACKAGE_SURE}|"require"    {yybegin(LEX_SURE_PACKAGE_PACKAGE);return getReservedTokenType();}
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -639,7 +637,7 @@ TRANS_MODIFIERS = [cdsr]
 "$" {return PERL_SIGIL_SCALAR;}
 {CAPUTRE_PERL_VARIABLE} {startCustomBlock(LEX_VARIABLE);break;}
 
-"sub" {pushState();yybegin(LEX_SUB_NAME);return PERL_RESERVED;}
+"sub" {pushState();yybegin(LEX_SUB_NAME);return getReservedTokenType();}
 {CAPTURE_SURE_PACKAGE} {startCustomBlock(LEX_SURE_PACKAGE);break;}
 {CAPTURE_REQUIRE_PACKAGE} {startCustomBlock(LEX_SURE_PACKAGE);break;}
 
@@ -666,15 +664,15 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_OPERATORS_FILETEST} {yypushback(1);return PERL_OPERATOR_FILETEST;}
 {PERL_SYN_UNARY} {return PERL_OPERATOR_UNARY;}
 
-{PERL_SYN_COMPOUND} {return PERL_RESERVED;}
-{PRE_PACKAGE_SURE} {return PERL_RESERVED;}
-"require" {return PERL_RESERVED;}
-{PERL_SYN_DECLARE} {return PERL_RESERVED;}
+{FUNCTION_RESERVED} {return getReservedTokenType();}
+{PRE_PACKAGE_SURE} {return getReservedTokenType();}
+"require" {return getReservedTokenType();}
 
 {PERL_SYN_BINARY_NOT} {return PERL_OPERATOR_NOT;}
 {PERL_SYN_BINARY_X} {return PERL_OPERATOR_X;}
 {PERL_SYN_BINARY} {return PERL_OPERATOR;}
 
+"undef" {return RESERVED_UNDEF;}
 {FUNCTION_SPECIAL} {return PERL_SUB;}
 {BLOCK_NAMES} {return PERL_BLOCK_NAME;}
 

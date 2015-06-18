@@ -21,6 +21,7 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
@@ -35,6 +36,54 @@ public class PerlLexer extends PerlLexerGenerated{
 	protected String lastSignificantToken;
 	protected IElementType lastTokenType;
 	protected HashMap<String,IElementType> knownPackages = new HashMap<>();
+
+	public static final HashMap<String,IElementType> reservedTokenTypes = new HashMap<>();
+
+	static
+	{
+		reservedTokenTypes.put("if", RESERVED_IF);
+		reservedTokenTypes.put("unless", RESERVED_UNLESS);
+		reservedTokenTypes.put("elsif", RESERVED_ELSIF);
+		reservedTokenTypes.put("else", RESERVED_ELSE);
+		reservedTokenTypes.put("given", RESERVED_GIVEN);
+		reservedTokenTypes.put("while", RESERVED_WHILE);
+		reservedTokenTypes.put("until", RESERVED_UNTIL);
+		reservedTokenTypes.put("for", RESERVED_FOR);
+		reservedTokenTypes.put("foreach", RESERVED_FOREACH);
+		reservedTokenTypes.put("continue", RESERVED_CONTINUE);
+
+		reservedTokenTypes.put("sub", RESERVED_SUB);
+		reservedTokenTypes.put("package", RESERVED_PACKAGE);
+		reservedTokenTypes.put("use", RESERVED_USE);
+		reservedTokenTypes.put("no", RESERVED_NO);
+		reservedTokenTypes.put("require", RESERVED_REQUIRE);
+
+		reservedTokenTypes.put("undef", RESERVED_UNDEF);
+
+		reservedTokenTypes.put("qw", RESERVED_QW);
+
+		reservedTokenTypes.put("qq", RESERVED_QQ);
+		reservedTokenTypes.put("q", RESERVED_Q);
+		reservedTokenTypes.put("qx", RESERVED_QX);
+
+		reservedTokenTypes.put("tr", RESERVED_TR);
+		reservedTokenTypes.put("y", RESERVED_Y);
+
+		reservedTokenTypes.put("s", RESERVED_S);
+		reservedTokenTypes.put("qr", RESERVED_QR);
+		reservedTokenTypes.put("m", RESERVED_M);
+
+		reservedTokenTypes.put("my", RESERVED_MY);
+		reservedTokenTypes.put("our", RESERVED_OUR);
+		reservedTokenTypes.put("state", RESERVED_STATE);
+		reservedTokenTypes.put("local", RESERVED_LOCAL);
+
+		reservedTokenTypes.put("do", RESERVED_DO);
+		reservedTokenTypes.put("eval", RESERVED_EVAL);
+		reservedTokenTypes.put("redo", RESERVED_REDO);
+		reservedTokenTypes.put("next", RESERVED_NEXT);
+		reservedTokenTypes.put("last", RESERVED_LAST);
+	}
 
 	public PerlLexer(java.io.Reader in) {
 		super(in);
@@ -569,7 +618,7 @@ public class PerlLexer extends PerlLexerGenerated{
 
 		pushState();
 		yybegin(LEX_REGEX_OPENER);
-		return PERL_RESERVED;
+		return getReservedTokenType();
 	}
 
 	/**
@@ -703,7 +752,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		currentSectionNumber = 0;
 		pushState();
 		yybegin(LEX_TRANS_OPENER);
-		return PERL_RESERVED;
+		return getReservedTokenType();
 	}
 
 	public IElementType processTransQuote()
@@ -779,7 +828,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		isEscaped = false;
 		pushState();
 		yybegin(LEX_QUOTE_LIKE_OPENER);
-		return PERL_RESERVED;
+		return getReservedTokenType();
 	}
 
 	public IElementType processQuoteLikeQuote()
@@ -822,7 +871,7 @@ public class PerlLexer extends PerlLexerGenerated{
 		allowSharpQuote = true;
 		pushState();
 		yybegin(LEX_QUOTE_LIKE_LIST_OPENER);
-		return PERL_RESERVED;
+		return getReservedTokenType();
 	}
 
 	public IElementType processQuoteLikeListQuote()
@@ -913,8 +962,12 @@ public class PerlLexer extends PerlLexerGenerated{
 	public IElementType getBarewordTokenType()
 	{
 		String bareword = yytext().toString();
-		if( knownPackages.containsKey(bareword) )
-			return knownPackages.get(bareword);
+		IElementType tokenType = null;
+
+		if( (tokenType = reservedTokenTypes.get(bareword)) != null)
+			return tokenType;
+		else if( (tokenType = knownPackages.get(bareword)) != null  )
+			return tokenType;
 
 		return PERL_SUB;
 	}
@@ -1000,6 +1053,16 @@ public class PerlLexer extends PerlLexerGenerated{
 			return PERL_OPERATOR;
 		else
 			throw new RuntimeException("Unknown sigil: " + sigil);
+	}
+
+	public IElementType getReservedTokenType()
+	{
+		IElementType tokenType = reservedTokenTypes.get(yytext().toString());
+
+		if( tokenType != null )
+			return tokenType;
+		else
+			throw new RuntimeException("Unknwon token type for " + yytext().toString());
 	}
 
 }

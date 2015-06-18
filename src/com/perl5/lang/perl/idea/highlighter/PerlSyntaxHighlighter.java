@@ -30,8 +30,10 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodTokenType;
 import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
@@ -39,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
@@ -48,6 +51,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributes ITALIC = new TextAttributes(null, null, null, null, Font.ITALIC);
 	public static final TextAttributes BOLD_ITALIC = TextAttributes.merge(BOLD, ITALIC);
 	public static final TextAttributes STROKE = new TextAttributes(null, null, null, EffectType.STRIKEOUT, Font.PLAIN);
+
+	public static final HashSet<IElementType> RESERVED_SET = new HashSet<>(PerlLexer.reservedTokenTypes.values());
 
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
@@ -159,6 +164,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR_UNARY, new TextAttributesKey[]{PERL_OPERATOR});
 
 		attributesMap.put(PerlElementTypes.PERL_RESERVED, new TextAttributesKey[]{PERL_KEYWORD});
+
 		attributesMap.put(PerlElementTypes.PERL_TAG, new TextAttributesKey[]{PERL_TAG});
 
 		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
@@ -191,6 +197,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 		if( tokenType instanceof PodTokenType)
 			attributesKeys = POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
+		else if(RESERVED_SET.contains(tokenType))
+			attributesKeys = attributesMap.get(PerlElementTypes.PERL_RESERVED);
 		else
 			attributesKeys = attributesMap.get(tokenType);
 
