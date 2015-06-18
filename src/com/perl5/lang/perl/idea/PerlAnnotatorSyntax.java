@@ -23,7 +23,6 @@ package com.perl5.lang.perl.idea;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
-import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -34,10 +33,8 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 {
@@ -85,14 +82,14 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
 		else if (parent instanceof PsiPerlSubDefinition)
 			holder.createInfoAnnotation(perlSubNameElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
-		else if( parent instanceof PsiPerlExpr ) // fixme temporary solution for pre-defined expressions, suppose only built-ins
+		else if (parent instanceof PsiPerlExpr) // fixme temporary solution for pre-defined expressions, suppose only built-ins
 			decorateElement(
 					holder.createInfoAnnotation(perlSubNameElement, null),
 					PerlSyntaxHighlighter.PERL_SUB,
 					true,
 					false
 			);
-		else if( parent instanceof PerlMethod )
+		else if (parent instanceof PerlMethod)
 		{
 			PerlNamespaceElement namespaceElement = ((PerlMethod) parent).getNamespaceElement();
 			boolean hasExplicitNamespace = namespaceElement != null && !"CORE".equals(namespaceElement.getName());
@@ -165,5 +162,12 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			annotateStringContent((PerlStringContentElementImpl) element, holder);
 		else if (element instanceof PerlSubNameElement)
 			annotateSubNameElement((PerlSubNameElement) element, holder);
+		else if (element.getNode().getElementType() == PERL_HANDLE && PerlGlobUtil.BUILT_IN.contains(element.getText()))
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_GLOB,
+					true,
+					false);
+
 	}
 }

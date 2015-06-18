@@ -56,7 +56,6 @@ WHITE_SPACE     = [ \t\f]
 
 EMPTY_SPACE = [ \t\f\r\n]
 BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
-BAREWORD_BRACED = "{"{WHITE_SPACE}*{BAREWORD}{WHITE_SPACE}*"}"
 
 BAREWORD_MINUS = "-" * {BAREWORD}
 BAREWORD_STRING_COMMA = {BAREWORD_MINUS}{EMPTY_SPACE}*"=>"
@@ -85,7 +84,7 @@ PERL_BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 PERL_PACKAGE_CANONICAL = "::"* ({PERL_BASIC_IDENTIFIER} "::" +) + | "::"
 
 // todo adjust in perl lexer too
-PERL_PACKAGE_AMBIGUOUS = "::"* {PERL_BASIC_IDENTIFIER} ("::"+ {PERL_BASIC_IDENTIFIER})+
+PERL_PACKAGE_AMBIGUOUS = "::" * {PERL_BASIC_IDENTIFIER} ("::"+ {PERL_BASIC_IDENTIFIER})*
 
 CAPTURE_HANDLE_READ = "<"{BAREWORD}">"
 
@@ -112,12 +111,11 @@ X_OP_STICKED = "x"[0-9]+[^a-zA-Z]*
 PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
 
 // atm making the same, but seems unary are different
-PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
+PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC][^a-zA-Z0-9_]
 
 HEREDOC_MARKER = [a-zA-Z0-9_]+
 HEREDOC_OPENER = "<<"{WHITE_SPACE}* (\'{HEREDOC_MARKER}\' | \"{HEREDOC_MARKER}\" | \`{HEREDOC_MARKER}\` | {HEREDOC_MARKER})
 
-%state LEX_BAREWORD_STRING
 %state LEX_CODE
 
 %state LEX_HEREDOC_WAITING
@@ -134,19 +132,9 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_SUB_NAME
 %xstate LEX_SUB_PROTOTYPE
 
-%xstate LEX_BAREWORD_BRACED
 %xstate LEX_BAREWORD_STRING_COMMA
-%xstate LEX_PACKAGE_METHOD_CALL, LEX_PACKAGE_METHOD_CALL_VAR, LEX_PACKAGE_METHOD_CALL_FANCY
-%xstate LEX_SUPER_METHOD_CALL
-%xstate LEX_MAIN_FUNCTION_CALL
-%xstate LEX_LABEL
 %xstate LEX_LABEL_DEFINITION
-%xstate LEX_METHOD_CALL
-%xstate LEX_PACKAGE_FUNCTION_CALL
 %xstate LEX_HANDLE_READ
-%xstate LEX_HANDLE, LEX_HANDLE_HANDLE
-%xstate LEX_HANDLE_FILETEST
-%xstate LEX_VARIABLE
 %state LEX_HTML_BLOCK
 %%
 
@@ -179,7 +167,7 @@ TRANS_MODIFIERS = [cdsr]
         if( trenarCounter > 0 )
         {
             endCustomBlock();
-            return PERL_SUB;
+            return guessBareword();
         }
         else
             return PERL_LABEL;
@@ -199,19 +187,11 @@ TRANS_MODIFIERS = [cdsr]
 
 
 // exclusive
-<LEX_BAREWORD_BRACED>
-{
-    "{" {return PERL_LBRACE;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {BAREWORD}   {endCustomBlock();return guessBracedBareword(); }
-    . {yypushback(1);endCustomBlock();break;}
-}
-
-// exclusive
 <LEX_SUB_NAME>
 {
-    {PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}
+    {PERL_PACKAGE_CANONICAL} {
+        // subname
+        return getPackageTokenType();}
     {BAREWORD} {yybegin(LEX_SUB_DEFINITION);return getSubTokenType();}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -332,8 +312,6 @@ TRANS_MODIFIERS = [cdsr]
 "->"            {return PERL_DEREFERENCE;}
 "=>"            {return PERL_ARROW_COMMA; } // for barewords in array
 ","            {return PERL_COMMA; }
-// todo issue #92
-{BAREWORD_BRACED} {startCustomBlock(LEX_BAREWORD_BRACED);}   // disambiguates things like $var{m}
 "{"             {return PERL_LBRACE;}
 "}"             {return PERL_RBRACE;}
 "["             {return PERL_LBRACK;}
@@ -371,19 +349,14 @@ TRANS_MODIFIERS = [cdsr]
 }
 {BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
-{PERL_OPERATORS_FILETEST} {return PERL_OPERATOR_FILETEST;}
+{PERL_OPERATORS_FILETEST} {yypushback(1);return PERL_OPERATOR_FILETEST;}
 {X_OP_STICKED} {yypushback(yylength()-1);return PERL_OPERATOR_X;}
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
 {CAPTURE_HANDLE_READ} {startCustomBlock(LEX_HANDLE_READ);break;}
 
-{PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}
 {BAREWORD} { return guessBareword();}
-{PERL_PACKAGE_AMBIGUOUS} {
-    IElementType tokenType = guessPackageName();
-    if( tokenType != null )
-        return  tokenType;
-    break;
-}
+{PERL_PACKAGE_AMBIGUOUS} {return guessPackageName();}
+{PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

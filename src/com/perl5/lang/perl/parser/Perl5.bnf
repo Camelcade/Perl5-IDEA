@@ -87,6 +87,10 @@ limitations under the License.
     RESERVED_NO="no"
     RESERVED_REQUIRE="require"
 
+    RESERVED_PRINT="print"
+    RESERVED_PRINTF="printf"
+    RESERVED_SAY="say"
+
     RESERVED_UNDEF="undef"
 
     RESERVED_QW="qw"
@@ -452,8 +456,7 @@ prefix_unary_expr ::=  ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
 regex_expr ::= expr ('=~'|'!~') expr
 
-// fixme introduce PERL_OPERATOR_MOD instead of PERL_SIGIL_HASH
-mul_expr ::= expr (PERL_OPERATOR_MUL|PERL_OPERATOR_DIV|PERL_SIGIL_HASH|PERL_OPERATOR_X) expr
+mul_expr ::= expr (PERL_OPERATOR_MUL|PERL_OPERATOR_DIV|PERL_OPERATOR_MOD|PERL_OPERATOR_X) expr
 add_expr ::= expr ('+'|'-'|'.') expr
 shift_expr ::= expr ('<<'|'>>') expr
 
@@ -488,7 +491,7 @@ lp_or_xor_expr ::= expr ('or'|'xor') expr
 private scalar_expr ::= <<parseExpressionLevel 3>>
 private list_expr ::= <<parseExpressionLevel 2>>
 
-print_expr ::= ("print"|"printf"|"say") ( PERL_LPAREN [print_arguments] PERL_RPAREN | [print_arguments] ) // {pin=1}
+print_expr ::= (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( PERL_LPAREN [print_arguments] PERL_RPAREN | [print_arguments] ) // {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
 open_expr ::= "open" ( PERL_LPAREN open_arguments PERL_RPAREN | open_arguments )

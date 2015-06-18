@@ -26,18 +26,19 @@ import com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Created by hurricup on 19.04.2015.
  */
 public class PerlGlobUtil implements PerlElementTypes
 {
-	public static final ArrayList<String> BUILT_IN = new ArrayList<String>( Arrays.asList(
-			"*ARGV",
-			"*STDERR",
-			"*STDOUT",
-			"*ARGVOUT",
-			"*STDIN"
+	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
+			"ARGV",
+			"STDERR",
+			"STDOUT",
+			"ARGVOUT",
+			"STDIN"
 	));
 
 	/**

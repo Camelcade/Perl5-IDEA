@@ -42,7 +42,6 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract void popState();
 	public abstract void pushState();
 
-	public abstract IElementType guessBracedBareword();
 	public abstract IElementType getPackageTokenType();
 	public abstract IElementType guessBareword();
 	public abstract IElementType getReservedTokenType();
