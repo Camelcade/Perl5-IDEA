@@ -46,6 +46,8 @@ limitations under the License.
     PERL_SIGIL_HASH="SIGIL_HASH"
     PERL_SIGIL_SCALAR="SIGIL_SCALAR"
     PERL_SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
+    PERL_SIGIL_GLOB = "SIGIL_GLOB"
+    PERL_SIGIL_CODE = "SIGIL_CODE"
 
     ANNOTATION_PREFIX="ANNOTATION_PREFIX"
 
@@ -55,10 +57,6 @@ limitations under the License.
     ANNOTATION_OVERRIDE_KEY="ANNOTATION_OVERRIDE"
     ANNOTATION_METHOD_KEY="ANNOTATION_METHOD"
     ANNOTATION_ABSTRACT_KEY="ANNOTATION_ABSTRACT"
-
-    // these being detected in parser
-//    PERL_SIGIL_GLOB = "SIGIL_GLOB"
-//    PERL_SIGIL_CODE = "SIGIL_CODE"
 
     PERL_VARIABLE_NAME="PERL_VARIABLE_NAME"
 
@@ -119,6 +117,9 @@ limitations under the License.
     PERL_OPERATOR_NOT="not"
     PERL_OPERATOR_X="x"
     PERL_OPERATOR_DIV="/"
+    PERL_OPERATOR_MUL="*"
+    PERL_OPERATOR_AMP="&"
+    PERL_OPERATOR_MOD="%"
 
     PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
     PERL_OPERATOR_FILETEST="PERL_OPERATOR_FILETEST"
@@ -451,7 +452,8 @@ prefix_unary_expr ::=  ('~'| '!'| '+' | '-') expr { rightAssociative=true }
 
 regex_expr ::= expr ('=~'|'!~') expr
 
-mul_expr ::= expr ('*'|PERL_OPERATOR_DIV|'%'|PERL_OPERATOR_X) expr
+// fixme introduce PERL_OPERATOR_MOD instead of PERL_SIGIL_HASH
+mul_expr ::= expr (PERL_OPERATOR_MUL|PERL_OPERATOR_DIV|PERL_SIGIL_HASH|PERL_OPERATOR_X) expr
 add_expr ::= expr ('+'|'-'|'.') expr
 shift_expr ::= expr ('<<'|'>>') expr
 
@@ -466,7 +468,7 @@ filetest_expr ::= PERL_OPERATOR_FILETEST [(perl_handle | expr )]
 
 compare_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
 equal_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
-bitwise_and_expr ::= expr '&' expr
+bitwise_and_expr ::= expr PERL_OPERATOR_AMP expr
 bitwise_or_xor_expr ::= expr ('|'|'^') expr
 and_expr ::= expr '&&' expr
 or_expr ::= expr ('||'|'//') expr
@@ -632,7 +634,7 @@ scalar_hash_element ::= scalar_variable ( "{" expr "}" | braced_string )
 scalar_anon_array_element ::= PERL_LPAREN expr PERL_RPAREN "["expr"]"
 
 private glob ::=
-    "*" "{" expr "}"     // @todo we need to colorize this as glob
+    PERL_SIGIL_GLOB "{" expr "}"     // @todo we need to colorize this as glob
     | glob_variable                    // hash as is
 
 private nested_element ::=
@@ -657,7 +659,7 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 private callable ::= method | referencable_method
 
 private referencable_expr ::= referencable_method | scalar_expr
-private referencable_method ::= '&'
+private referencable_method ::= PERL_SIGIL_CODE
     (
         method
         | "{"method"}"
@@ -718,7 +720,7 @@ hash_variable ::= PERL_SIGIL_HASH [scalar_sigils] variable_body
 
 scalar_sigils ::= PERL_SIGIL_SCALAR+
 
-glob_variable ::= "*" glob_name [glob_slot_part]
+glob_variable ::= PERL_SIGIL_GLOB glob_name [glob_slot_part]
 private glob_slot_part ::= PERL_LBRACE glob_slot PERL_RBRACE {pin=1}
 private glob_name ::= variable_body | scalar_variable
 glob_slot ::=

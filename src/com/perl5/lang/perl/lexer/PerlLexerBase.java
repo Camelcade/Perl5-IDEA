@@ -30,19 +30,25 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	// @todo should be parseString
 	public abstract IElementType processStringOpener();
 
-	public abstract IElementType processDiv();
+	public abstract IElementType guessMul();
+	public abstract IElementType guessAmp();
+	public abstract IElementType guessMod();
+	public abstract IElementType guessDiv();
+
+
 	public abstract IElementType parseRegex();
 	public abstract IElementType getParsedToken();
 
 	public abstract void popState();
 	public abstract void pushState();
 
-	public abstract IElementType getBracedBarewordTokenType();
+	public abstract IElementType guessBracedBareword();
 	public abstract IElementType getPackageTokenType();
-	public abstract IElementType getBarewordTokenType();
+	public abstract IElementType guessBareword();
 	public abstract IElementType getReservedTokenType();
 	public abstract IElementType getHandleTokenType();
 	public abstract IElementType getSubTokenType();
+	public abstract IElementType guessPackageName();
 
 	public abstract IElementType processSemicolon();
 
@@ -56,17 +62,17 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 
 	public abstract IElementType processOpenerWhiteSpace();
 
-	public abstract IElementType processTransOpener();
+	public abstract void processTransOpener();
 	public abstract IElementType processTransQuote();
 	public abstract IElementType processTransChar();
 	public abstract IElementType processTransCloser();
 
-	public abstract IElementType processRegexOpener();
+	public abstract void processRegexOpener();
 
+	public abstract void processQuoteLikeListOpener();
 	public abstract IElementType processQuoteLikeListQuote();
-	public abstract IElementType processQuoteLikeListOpener();
 
-	public abstract IElementType processQuoteLikeStringOpener();
+	public abstract void processQuoteLikeStringOpener();
 
 	public abstract IElementType processQuoteLikeQuote();
 	public abstract IElementType processQuoteLikeWord();

@@ -31,6 +31,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -53,6 +54,16 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributes STROKE = new TextAttributes(null, null, null, EffectType.STRIKEOUT, Font.PLAIN);
 
 	public static final HashSet<IElementType> RESERVED_SET = new HashSet<>(PerlLexer.reservedTokenTypes.values());
+	public static final TokenSet OPERATORS_SET = TokenSet.create(
+			PerlElementTypes.PERL_OPERATOR,
+			PerlElementTypes.PERL_OPERATOR_DIV,
+			PerlElementTypes.PERL_OPERATOR_MUL,
+			PerlElementTypes.PERL_OPERATOR_AMP,
+			PerlElementTypes.PERL_OPERATOR_FILETEST,
+			PerlElementTypes.PERL_OPERATOR_NOT,
+			PerlElementTypes.PERL_OPERATOR_UNARY,
+			PerlElementTypes.PERL_OPERATOR_X
+	);
 
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
@@ -157,11 +168,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.PERL_NUMBER_VERSION, new TextAttributesKey[]{PERL_VERSION});
 
 		attributesMap.put(PerlElementTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR});
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_DIV, new TextAttributesKey[]{PERL_OPERATOR});
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_X, new TextAttributesKey[]{PERL_OPERATOR});
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_FILETEST, new TextAttributesKey[]{PERL_OPERATOR});
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_NOT, new TextAttributesKey[]{PERL_OPERATOR});
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR_UNARY, new TextAttributesKey[]{PERL_OPERATOR});
 
 		attributesMap.put(PerlElementTypes.PERL_RESERVED, new TextAttributesKey[]{PERL_KEYWORD});
 
@@ -199,6 +205,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 			attributesKeys = POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
 		else if(RESERVED_SET.contains(tokenType))
 			attributesKeys = attributesMap.get(PerlElementTypes.PERL_RESERVED);
+		else if(OPERATORS_SET.contains(tokenType))
+			attributesKeys = attributesMap.get(PerlElementTypes.PERL_OPERATOR);
 		else
 			attributesKeys = attributesMap.get(tokenType);
 

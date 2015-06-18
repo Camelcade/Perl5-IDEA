@@ -65,14 +65,14 @@ BAREWORD_STRING_COMMA = {BAREWORD_MINUS}{EMPTY_SPACE}*"=>"
 ANYWORD = [^ \t\f\r\n]
 
 BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"FORMAT_LINE_BREAK_CHARACTERS"|"EXCEPTIONS_BEING_CAUGHT"|"LAST_REGEXP_CODE_RESULT"|"OUTPUT_RECORD_SEPARATOR"|"INPUT_RECORD_SEPARATOR"|"OUTPUT_FIELD_SEPARATOR"|"FORMAT_LINES_PER_PAGE"|"SUBSCRIPT_SEPARATOR"|"^CHILD_ERROR_NATIVE"|"EFFECTIVE_GROUP_ID"|"FORMAT_PAGE_NUMBER"|"MULTILINE_MATCHING"|"^WIDE_SYSTEM_CALLS"|"EFFECTIVE_USER_ID"|"EXTENDED_OS_ERROR"|"FORMAT_LINES_LEFT"|"INPUT_LINE_NUMBER"|"OUTPUT_AUTO_FLUSH"|"LAST_MATCH_START"|"LAST_PAREN_MATCH"|"EXECUTABLE_NAME"|"FORMAT_FORMFEED"|"FORMAT_TOP_NAME"|"^RE_DEBUG_FLAGS"|"^RE_TRIE_MAXBUF"|"LAST_MATCH_END"|"LIST_SEPARATOR"|"REAL_GROUP_ID"|"SYSTEM_FD_MAX"|"^WARNING_BITS"|"INPLACE_EDIT"|"PERL_VERSION"|"PROGRAM_NAME"|"REAL_USER_ID"|"ACCUMULATOR"|"CHILD_ERROR"|"FORMAT_NAME"|"^UTF8LOCALE"|"EVAL_ERROR"|"PROCESS_ID"|"COMPILING"|"DEBUGGING"|"POSTMATCH"|"^ENCODING"|"BASETIME"|"OS_ERROR"|"OVERLOAD"|"PREMATCH"|"^UNICODE"|"WARNING"|"OSNAME"|"PERLDB"|"SUBSEP"|"^TAINT"|"ERRNO"|"MATCH"|"^OPEN"|"ARGV"|"EGID"|"EUID"|"OFMT"|"ARG"|"ENV"|"GID"|"INC"|"OFS"|"ORS"|"PID"|"SIG"|"UID"|"NR"|"RS"|"\""|"\\"|"^A"|"^C"|"^D"|"^E"|"^F"|"^H"|"^I"|"^L"|"^M"|"^N"|"^O"|"^P"|"^R"|"^S"|"^T"|"^V"|"^W"|"^X"|"!"|"$"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"^"|"_"|"`"|"a"|"b"|"|"|"~"|"?"
-PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} )
+PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} ) [^a-zA-Z0-9_]
 
 BUILT_IN_ARRAY_NAME = "LAST_MATCH_START"|"EXPORT_TAGS"|"EXPORT_OK"|"OVERLOAD"|"EXPORT"|"ARGV"|"ENV"|"INC"|"ISA"|"SIG"|"^H"|"!"|"+"|"-"|"_"
-PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
-PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
+PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} ) [^a-zA-Z0-9_]
+PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} ) [^a-zA-Z0-9_]
 
 BUILT_IN_HASH_NAME = "EXPORT_TAGS"|"OVERLOAD"|"ENV"|"INC"|"SIG"|"^H"|"!"|"+"|"-"
-PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
+PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} ) [^a-zA-Z0-9_]
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 //PERL_XIDS = [\w && \p{XID_Start}]
@@ -83,6 +83,8 @@ PERL_XIDC = [_a-zA-Z0-9]
 
 PERL_BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 PERL_PACKAGE_CANONICAL = "::"* ({PERL_BASIC_IDENTIFIER} "::" +) + | "::"
+
+// todo adjust in perl lexer too
 PERL_PACKAGE_AMBIGUOUS = "::"* {PERL_BASIC_IDENTIFIER} ("::"+ {PERL_BASIC_IDENTIFIER})+
 
 CAPTURE_HANDLE_READ = "<"{BAREWORD}">"
@@ -107,18 +109,13 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
 X_OP_STICKED = "x"[0-9]+[^a-zA-Z]*
 
-PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "*" | "%"  | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "&" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
+PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
 
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
 
 HEREDOC_MARKER = [a-zA-Z0-9_]+
 HEREDOC_OPENER = "<<"{WHITE_SPACE}* (\'{HEREDOC_MARKER}\' | \"{HEREDOC_MARKER}\" | \`{HEREDOC_MARKER}\` | {HEREDOC_MARKER})
-
-QUOTE_LIST_FUNCTIONS = "qw"
-QUOTE_FUNCTIONS = "qq" | "qx" | "q"
-TRANS_FUNCTIONS = "tr" | "y"
-REGEX_FUNCTIONS = "s" | "qr" | "m"
 
 %state LEX_BAREWORD_STRING
 %state LEX_CODE
@@ -207,7 +204,7 @@ TRANS_MODIFIERS = [cdsr]
     "{" {return PERL_LBRACE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {BAREWORD}   {endCustomBlock();return getBracedBarewordTokenType(); }
+    {BAREWORD}   {endCustomBlock();return guessBracedBareword(); }
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -353,45 +350,36 @@ TRANS_MODIFIERS = [cdsr]
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 
-{PERL_SCALAR_BUILT_IN}      {return parseBuiltInVariable();}
-{PERL_ARRAY_BUILT_IN}       {return parseBuiltInVariable();}
-{PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}
-{PERL_HASH_BUILT_IN}        {return parseBuiltInVariable();}
+{PERL_SCALAR_BUILT_IN}      {yypushback(1);return parseBuiltInVariable();}
+{PERL_ARRAY_BUILT_IN}       {yypushback(1);return parseBuiltInVariable();}
+{PERL_ARRAY_INDEX_BUILT_IN} {yypushback(1);return parseBuiltInVariable();}
+{PERL_HASH_BUILT_IN}        {yypushback(1);return parseBuiltInVariable();}
 
 "@" {return PERL_SIGIL_ARRAY;}
-"%" {return PERL_SIGIL_HASH;}
+"%" {return guessMod();}
+"*" {return guessMul();}
+"&" {return guessAmp();}
 "$#" {return PERL_SIGIL_SCALAR_INDEX;}
 "$" {return PERL_SIGIL_SCALAR;}
 
 "sub" {pushState();yybegin(LEX_SUB_NAME);return getReservedTokenType();}
-
-{REGEX_FUNCTIONS} {return processRegexOpener();}
-{TRANS_FUNCTIONS} {return processTransOpener();}
-{QUOTE_FUNCTIONS} {return processQuoteLikeStringOpener();}
-{QUOTE_LIST_FUNCTIONS} {return processQuoteLikeListOpener();}
-
 "/"   {   // regexp or div
-    IElementType tokenType = processDiv();
+    IElementType tokenType = guessDiv();
     if( tokenType == null )
         break;
     return tokenType;
 }
-
 {BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
-
 {PERL_OPERATORS}    {return PERL_OPERATOR;}
 {PERL_OPERATORS_FILETEST} {return PERL_OPERATOR_FILETEST;}
-
 {X_OP_STICKED} {yypushback(yylength()-1);return PERL_OPERATOR_X;}
-
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
-
 {CAPTURE_HANDLE_READ} {startCustomBlock(LEX_HANDLE_READ);break;}
 
 {PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}
-{BAREWORD} { return getBarewordTokenType();}
+{BAREWORD} { return guessBareword();}
 {PERL_PACKAGE_AMBIGUOUS} {
-    IElementType tokenType = parsePackageName();
+    IElementType tokenType = guessPackageName();
     if( tokenType != null )
         return  tokenType;
     break;
