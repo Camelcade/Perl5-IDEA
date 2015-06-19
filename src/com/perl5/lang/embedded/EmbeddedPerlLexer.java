@@ -50,7 +50,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 		int bufferEnd = buffer.length();
 		int currentState = yystate();
 
-		if( tokenStart < bufferEnd )
+		if( tokenStart < bufferEnd && currentState != LEX_PREPARSED_ITEMS )
 		{
 			if (currentState == LEX_HTML_BLOCK)
 			{
