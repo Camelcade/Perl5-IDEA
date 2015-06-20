@@ -57,7 +57,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		return node.findChildByType(PerlElementTypes.PERL_SUB) != null;
+		return node.findChildByType(PerlElementTypes.SUB) != null;
 	}
 
 	@NotNull

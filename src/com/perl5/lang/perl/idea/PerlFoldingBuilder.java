@@ -112,14 +112,14 @@ public class PerlFoldingBuilder extends FoldingBuilderEx {
 
                     while (currentComment != null) {
                         IElementType tokenType = currentComment.getNode().getElementType();
-                        if (tokenType == PerlElementTypes.PERL_COMMENT) {
+                        if (tokenType == PerlElementTypes.COMMENT_LINE) {
                             blockEnd = currentComment.getTextOffset() + currentComment.getTextLength();
                             if (currentComment.getText().endsWith("\n"))
                                 blockEnd--;
                             commentsNumber++;
                         }
 
-                        if (tokenType != PerlElementTypes.PERL_COMMENT && tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT)
+                        if (tokenType != PerlElementTypes.COMMENT_LINE && tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT)
                             break;
 
                         currentComment = currentComment.getNextSibling();
@@ -232,15 +232,15 @@ public class PerlFoldingBuilder extends FoldingBuilderEx {
             return "{hash}";
         else if (elementType == PerlElementTypes.PARENTHESISED_EXPR)
             return "(list expression...)";
-        else if (elementType == PerlElementTypes.PERL_HEREDOC)
+        else if (elementType == PerlElementTypes.HEREDOC)
             return "<< heredoc >>";
-        else if (elementType == PerlElementTypes.PERL_POD)
+        else if (elementType == PerlElementTypes.POD)
             return "= POD block =";
         else if (elementType == PerlElementTypes.TEMPLATE_BLOCK_HTML)
             return ">? HTML block <?";
-        else if (elementType == PerlElementTypes.PERL_COMMENT_BLOCK)
+        else if (elementType == PerlElementTypes.COMMENT_BLOCK)
             return "# Block comment";
-        else if (elementType == PerlElementTypes.PERL_COMMENT)
+        else if (elementType == PerlElementTypes.COMMENT_LINE)
             return "# comments...";
 //		else if (elementType == PerlElementTypes.NAMESPACE_BLOCK)
 //			return node.getFirstChildNode().getText() + "...";
@@ -255,11 +255,11 @@ public class PerlFoldingBuilder extends FoldingBuilderEx {
     @Override
     public boolean isCollapsedByDefault(@NotNull ASTNode node) {
         IElementType elementType = node.getElementType();
-        if (elementType == PerlElementTypes.PERL_COMMENT_BLOCK)
+        if (elementType == PerlElementTypes.COMMENT_BLOCK)
             return true;
-        else if (elementType == PerlElementTypes.PERL_POD)
+        else if (elementType == PerlElementTypes.POD)
             return true;
-        else if (elementType == PerlElementTypes.PERL_COMMENT)
+        else if (elementType == PerlElementTypes.COMMENT_LINE)
             return true;
         else if (elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_EXPR)
             return true;

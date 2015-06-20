@@ -79,6 +79,6 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		return node.findChildByType(PerlElementTypes.PERL_PACKAGE) != null;
+		return node.findChildByType(PerlElementTypes.PACKAGE) != null;
 	}
 }

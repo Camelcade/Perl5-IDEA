@@ -32,9 +32,9 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	@Override
 	public LeafElement createComment( @NotNull IElementType type, CharSequence text)
 	{
-		if( type == PERL_HEREDOC_END )
+		if( type == HEREDOC_END )
 			return new PerlHeredocTerminatorElementImpl(type, text);
-		else if( type == PERL_HEREDOC )
+		else if( type == HEREDOC )
 			return new PerlHeredocElementImpl(type, text);
 		else
 			return super.createComment(type, text);
@@ -44,13 +44,13 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	@Override
 	public LeafElement createLeaf(@NotNull IElementType type, CharSequence text)
 	{
-		if( type == PERL_STRING_CONTENT )
+		if( type == STRING_CONTENT )
 			return new PerlStringContentElementImpl(type, text);
-		else if( type == PERL_VARIABLE_NAME )
+		else if( type == VARIABLE_NAME )
 			return new PerlVariableNameElementImpl(type, text);
-		else if( type == PERL_SUB )
+		else if( type == SUB )
 			return new PerlSubNameElementImpl(type, text);
-		else if( type == PERL_PACKAGE  )
+		else if( type == PACKAGE  )
 			return new PerlNamespaceElementImpl(type, text);
 		else
 			return super.createLeaf(type, text);

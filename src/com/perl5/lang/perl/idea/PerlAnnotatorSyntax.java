@@ -162,7 +162,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			annotateStringContent((PerlStringContentElementImpl) element, holder);
 		else if (element instanceof PerlSubNameElement)
 			annotateSubNameElement((PerlSubNameElement) element, holder);
-		else if (element.getNode().getElementType() == PERL_HANDLE && PerlGlobUtil.BUILT_IN.contains(element.getText()))
+		else if (element.getNode().getElementType() == HANDLE && PerlGlobUtil.BUILT_IN.contains(element.getText()))
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_GLOB,

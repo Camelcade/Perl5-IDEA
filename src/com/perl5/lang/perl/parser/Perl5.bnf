@@ -251,6 +251,7 @@ limitations under the License.
 
     // inline HTML support
     EMBED_MARKER="EMBED_MARKER"
+    TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
   ]
 
     extends(".*expr")=expr

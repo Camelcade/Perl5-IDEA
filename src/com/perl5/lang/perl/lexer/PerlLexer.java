@@ -796,11 +796,19 @@ public class PerlLexer extends PerlLexerGenerated
 			return null;
 		} else
 		{
-			if (!isLastToken() && getBuffer().charAt(getNextTokenStart()) == '/')
+			Character nextChar = isLastToken() ? null : getBuffer().charAt(getNextTokenStart());
+
+			if ( nextChar!= null && nextChar.equals('/'))
 			{
 				setTokenEnd(getNextTokenStart() + 1);
 				return OPERATOR_OR_DEFINED;
-			} else
+			}
+			else if (nextChar!= null && nextChar.equals('='))
+			{
+				setTokenEnd(getNextTokenStart() + 1);
+				return OPERATOR_DIV_ASSIGN;
+			}
+			else
 			{
 				return OPERATOR_DIV;
 			}

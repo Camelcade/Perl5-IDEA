@@ -334,7 +334,7 @@ TRANS_MODIFIERS = [cdsr]
 
 "&&" {return OPERATOR_AND;}
 "||" {return OPERATOR_OR;}
-"//" {return OPERATOR_OR_DEFINED;} // guessDiv
+// "//" {return OPERATOR_OR_DEFINED;} // guessDiv
 "!" {return OPERATOR_NOT;}
 
 "**=" {return OPERATOR_POW_ASSIGN;}
@@ -344,7 +344,7 @@ TRANS_MODIFIERS = [cdsr]
 ".=" {return OPERATOR_CONCAT_ASSIGN;}
 
 "*=" {return OPERATOR_MUL_ASSIGN;}
-"/=" {return OPERATOR_DIV_ASSIGN;}   // guessDiv
+// "/=" {return OPERATOR_DIV_ASSIGN;}   // guessDiv
 "%=" {return OPERATOR_MOD_ASSIGN;}
 "x=" {return OPERATOR_X_ASSIGN;}
 
@@ -357,7 +357,7 @@ TRANS_MODIFIERS = [cdsr]
 
 "&&=" {return OPERATOR_AND_ASSIGN;}
 "||=" {return OPERATOR_OR_ASSIGN;}
-"//=" {return OPERATOR_OR_DEFINED_ASSIGN;} // guessDiv
+"//=" {return OPERATOR_OR_DEFINED_ASSIGN;}
 
 "?"  {trenarCounter++;return OPERATOR_TRENAR_IF;}
 ":"  {return guessColon();}

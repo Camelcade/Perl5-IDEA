@@ -53,7 +53,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 				currentPackageName = ((PerlVariable) nextElement.getFirstChild()).guessVariableType();
 				if (currentPackageName == null)
 					return null;
-			} else if (nextElement.getNode().getElementType() != PerlElementTypes.PERL_DEREFERENCE)
+			} else if (nextElement.getNode().getElementType() != PerlElementTypes.OPERATOR_DEREFERENCE)
 			{
 //				System.out.println("Stopped traversing at: " + nextElement.getText() + " " + nextElement.getClass());
 				break;

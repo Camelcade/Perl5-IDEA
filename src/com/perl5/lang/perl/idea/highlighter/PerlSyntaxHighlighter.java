@@ -46,14 +46,91 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 	public static final HashSet<IElementType> RESERVED_SET = new HashSet<>(PerlLexer.reservedTokenTypes.values());
 	public static final TokenSet OPERATORS_SET = TokenSet.create(
-			PerlElementTypes.PERL_OPERATOR,
-			PerlElementTypes.PERL_OPERATOR_DIV,
-			PerlElementTypes.PERL_OPERATOR_MUL,
-			PerlElementTypes.PERL_OPERATOR_AMP,
-			PerlElementTypes.PERL_OPERATOR_FILETEST,
-			PerlElementTypes.PERL_OPERATOR_NOT,
-			PerlElementTypes.PERL_OPERATOR_UNARY,
-			PerlElementTypes.PERL_OPERATOR_X
+			PerlElementTypes.OPERATOR_X,
+
+			PerlElementTypes.OPERATOR_CMP_NUMERIC,
+			PerlElementTypes.OPERATOR_LE_NUMERIC,
+			PerlElementTypes.OPERATOR_GE_NUMERIC,
+			PerlElementTypes.OPERATOR_EQ_NUMERIC,
+			PerlElementTypes.OPERATOR_NE_NUMERIC,
+			PerlElementTypes.OPERATOR_LT_NUMERIC,
+			PerlElementTypes.OPERATOR_GT_NUMERIC,
+
+			PerlElementTypes.OPERATOR_CMP_STR,
+			PerlElementTypes.OPERATOR_LE_STR,
+			PerlElementTypes.OPERATOR_GE_STR,
+			PerlElementTypes.OPERATOR_EQ_STR,
+			PerlElementTypes.OPERATOR_NE_STR,
+			PerlElementTypes.OPERATOR_LT_STR,
+			PerlElementTypes.OPERATOR_GT_STR,
+
+			PerlElementTypes.OPERATOR_HELLIP,
+			PerlElementTypes.OPERATOR_FLIP_FLOP,
+			PerlElementTypes.OPERATOR_CONCAT,
+
+			PerlElementTypes.OPERATOR_PLUS_PLUS,
+			PerlElementTypes.OPERATOR_MINUS_MINUS,
+			PerlElementTypes.OPERATOR_POW,
+
+			PerlElementTypes.OPERATOR_RE,
+			PerlElementTypes.OPERATOR_NOT_RE,
+
+			PerlElementTypes.OPERATOR_HEREDOC,
+			PerlElementTypes.OPERATOR_SHIFT_LEFT,
+			PerlElementTypes.OPERATOR_SHIFT_RIGHT,
+
+			PerlElementTypes.OPERATOR_SMARTMATCH,
+
+			PerlElementTypes.OPERATOR_AND,
+			PerlElementTypes.OPERATOR_OR,
+			PerlElementTypes.OPERATOR_OR_DEFINED,
+			PerlElementTypes.OPERATOR_NOT,
+
+			PerlElementTypes.OPERATOR_ASSIGN,
+			PerlElementTypes.OPERATOR_POW_ASSIGN,
+
+			PerlElementTypes.OPERATOR_PLUS_ASSIGN,
+			PerlElementTypes.OPERATOR_MINUS_ASSIGN,
+			PerlElementTypes.OPERATOR_CONCAT_ASSIGN,
+
+			PerlElementTypes.OPERATOR_MUL_ASSIGN,
+			PerlElementTypes.OPERATOR_DIV_ASSIGN,
+			PerlElementTypes.OPERATOR_MOD_ASSIGN,
+			PerlElementTypes.OPERATOR_X_ASSIGN,
+
+			PerlElementTypes.OPERATOR_BITWISE_AND_ASSIGN,
+			PerlElementTypes.OPERATOR_BITWISE_OR_ASSIGN,
+			PerlElementTypes.OPERATOR_BITWISE_XOR_ASSIGN,
+
+			PerlElementTypes.OPERATOR_SHIFT_LEFT_ASSIGN,
+			PerlElementTypes.OPERATOR_SHIFT_RIGHT_ASSIGN,
+
+			PerlElementTypes.OPERATOR_AND_ASSIGN,
+			PerlElementTypes.OPERATOR_OR_ASSIGN,
+			PerlElementTypes.OPERATOR_OR_DEFINED_ASSIGN,
+
+			PerlElementTypes.OPERATOR_TRENAR_IF,
+			PerlElementTypes.OPERATOR_TRENAR_ELSE,
+
+			PerlElementTypes.OPERATOR_REFERENCE,
+
+			PerlElementTypes.OPERATOR_DIV,
+			PerlElementTypes.OPERATOR_MUL,
+			PerlElementTypes.OPERATOR_MOD,
+			PerlElementTypes.OPERATOR_PLUS,
+			PerlElementTypes.OPERATOR_MINUS,
+
+			PerlElementTypes.OPERATOR_BITWISE_NOT,
+			PerlElementTypes.OPERATOR_BITWISE_AND,
+			PerlElementTypes.OPERATOR_BITWISE_OR,
+			PerlElementTypes.OPERATOR_BITWISE_XOR,
+
+			PerlElementTypes.OPERATOR_AND_LP,
+			PerlElementTypes.OPERATOR_OR_LP,
+			PerlElementTypes.OPERATOR_XOR_LP,
+			PerlElementTypes.OPERATOR_NOT_LP,
+
+			PerlElementTypes.OPERATOR_FILETEST
 	);
 
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
@@ -116,62 +193,63 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.ANNOTATION_RETURNS_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
 		attributesMap.put(PerlElementTypes.ANNOTATION_UNKNOWN_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
 
-		attributesMap.put(PerlElementTypes.PERL_ARROW_COMMA, new TextAttributesKey[]{PERL_COMMA});
+		attributesMap.put(PerlElementTypes.OPERATOR_COMMA_ARROW, new TextAttributesKey[]{PERL_COMMA});
+		attributesMap.put(PerlElementTypes.OPERATOR_COMMA, new TextAttributesKey[]{PERL_COMMA});
 
-		attributesMap.put(PerlElementTypes.PERL_BLOCK_NAME, new TextAttributesKey[]{PERL_KEYWORD});
+		attributesMap.put(PerlElementTypes.BLOCK_NAME, new TextAttributesKey[]{PERL_KEYWORD});
 
-		attributesMap.put(PerlElementTypes.PERL_COLON, new TextAttributesKey[]{PERL_OPERATOR});
-		attributesMap.put(PerlElementTypes.PERL_COMMA, new TextAttributesKey[]{PERL_COMMA});
+		attributesMap.put(PerlElementTypes.COLON, new TextAttributesKey[]{PERL_OPERATOR});
 
-		attributesMap.put(PerlElementTypes.PERL_COMMENT, new TextAttributesKey[]{PERL_COMMENT});
-		attributesMap.put(PerlElementTypes.PERL_COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
+		attributesMap.put(PerlElementTypes.COMMENT_LINE, new TextAttributesKey[]{PERL_COMMENT});
+		attributesMap.put(PerlElementTypes.COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
-		attributesMap.put(PerlElementTypes.PERL_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
+		attributesMap.put(PerlElementTypes.OPERATOR_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
 
-		attributesMap.put(PerlElementTypes.PERL_SUB, new TextAttributesKey[]{PERL_SUB});
-		attributesMap.put(PerlElementTypes.PERL_SUB_PROTOTYPE_TOKEN, new TextAttributesKey[]{PERL_SUB_PROTOTYPE_TOKEN});
-		attributesMap.put(PerlElementTypes.PERL_SUB_ATTRIBUTE, new TextAttributesKey[]{PERL_SUB_ATTRIBUTE});
+		attributesMap.put(PerlElementTypes.SUB, new TextAttributesKey[]{PERL_SUB});
+		attributesMap.put(PerlElementTypes.SUB_PROTOTYPE_TOKEN, new TextAttributesKey[]{PERL_SUB_PROTOTYPE_TOKEN});
+		attributesMap.put(PerlElementTypes.SUB_ATTRIBUTE, new TextAttributesKey[]{PERL_SUB_ATTRIBUTE});
 
-		attributesMap.put(PerlElementTypes.PERL_HANDLE, new TextAttributesKey[]{PERL_HANDLE});
+		attributesMap.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 
 		attributesMap.put(PerlElementTypes.TEMPLATE_BLOCK_HTML, new TextAttributesKey[]{PERL_COMMENT});
-		attributesMap.put(PerlElementTypes.PERL_HEREDOC_END, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.HEREDOC_END, new TextAttributesKey[]{PERL_SQ_STRING});
 
-		attributesMap.put(PerlElementTypes.PERL_STRING_CONTENT, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.STRING_CONTENT, new TextAttributesKey[]{PERL_SQ_STRING});
 
-		attributesMap.put(PerlElementTypes.PERL_REGEX_QUOTE_CLOSE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.PERL_REGEX_QUOTE_OPEN, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.PERL_REGEX_TOKEN, new TextAttributesKey[]{PERL_REGEX_TOKEN});
-		attributesMap.put(PerlElementTypes.PERL_REGEX_MODIFIER, new TextAttributesKey[]{PERL_KEYWORD});
+		attributesMap.put(PerlElementTypes.REGEX_QUOTE_CLOSE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		attributesMap.put(PerlElementTypes.REGEX_QUOTE_OPEN, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		attributesMap.put(PerlElementTypes.REGEX_TOKEN, new TextAttributesKey[]{PERL_REGEX_TOKEN});
+		attributesMap.put(PerlElementTypes.REGEX_MODIFIER, new TextAttributesKey[]{PERL_KEYWORD});
 
-		attributesMap.put(PerlElementTypes.PERL_QUOTE, new TextAttributesKey[]{PERL_SQ_STRING});
-		attributesMap.put(PerlElementTypes.PERL_SEMI, new TextAttributesKey[]{PERL_SEMICOLON});
-		attributesMap.put(PerlElementTypes.PERL_LBRACE, new TextAttributesKey[]{PERL_BRACE});
-		attributesMap.put(PerlElementTypes.PERL_RBRACE, new TextAttributesKey[]{PERL_BRACE});
-		attributesMap.put(PerlElementTypes.PERL_LBRACK, new TextAttributesKey[]{PERL_BRACK});
-		attributesMap.put(PerlElementTypes.PERL_RBRACK, new TextAttributesKey[]{PERL_BRACK});
-		attributesMap.put(PerlElementTypes.PERL_LPAREN, new TextAttributesKey[]{PERL_PAREN});
-		attributesMap.put(PerlElementTypes.PERL_RPAREN, new TextAttributesKey[]{PERL_PAREN});
-		attributesMap.put(PerlElementTypes.PERL_LANGLE, new TextAttributesKey[]{PERL_ANGLE});
-		attributesMap.put(PerlElementTypes.PERL_RANGLE, new TextAttributesKey[]{PERL_ANGLE});
+		attributesMap.put(PerlElementTypes.QUOTE, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.SEMICOLON, new TextAttributesKey[]{PERL_SEMICOLON});
+		attributesMap.put(PerlElementTypes.LEFT_BRACE, new TextAttributesKey[]{PERL_BRACE});
+		attributesMap.put(PerlElementTypes.RIGHT_BRACE, new TextAttributesKey[]{PERL_BRACE});
+		attributesMap.put(PerlElementTypes.LEFT_BRACKET, new TextAttributesKey[]{PERL_BRACK});
+		attributesMap.put(PerlElementTypes.RIGHT_BRACKET, new TextAttributesKey[]{PERL_BRACK});
+		attributesMap.put(PerlElementTypes.LEFT_PAREN, new TextAttributesKey[]{PERL_PAREN});
+		attributesMap.put(PerlElementTypes.RIGHT_PAREN, new TextAttributesKey[]{PERL_PAREN});
+		attributesMap.put(PerlElementTypes.LEFT_ANGLE, new TextAttributesKey[]{PERL_ANGLE});
+		attributesMap.put(PerlElementTypes.RIGHT_ANGLE, new TextAttributesKey[]{PERL_ANGLE});
 
-		attributesMap.put(PerlElementTypes.PERL_NUMBER, new TextAttributesKey[]{PERL_NUMBER});
-		attributesMap.put(PerlElementTypes.PERL_NUMBER_VERSION, new TextAttributesKey[]{PERL_VERSION});
+		attributesMap.put(PerlElementTypes.NUMBER, new TextAttributesKey[]{PERL_NUMBER});
+		attributesMap.put(PerlElementTypes.NUMBER_VERSION, new TextAttributesKey[]{PERL_VERSION});
 
-		attributesMap.put(PerlElementTypes.PERL_OPERATOR, new TextAttributesKey[]{PERL_OPERATOR});
+		// key for all operators
+		attributesMap.put(PerlElementTypes.OPERATOR_MUL, new TextAttributesKey[]{PERL_OPERATOR});
+		// key for all reserved
+		attributesMap.put(PerlElementTypes.RESERVED_IF, new TextAttributesKey[]{PERL_KEYWORD});
 
-		attributesMap.put(PerlElementTypes.PERL_RESERVED, new TextAttributesKey[]{PERL_KEYWORD});
+		attributesMap.put(PerlElementTypes.TAG, new TextAttributesKey[]{PERL_TAG});
 
-		attributesMap.put(PerlElementTypes.PERL_TAG, new TextAttributesKey[]{PERL_TAG});
+		attributesMap.put(PerlElementTypes.PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
+		attributesMap.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 
-		attributesMap.put(PerlElementTypes.PERL_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
-		attributesMap.put(PerlElementTypes.PERL_HANDLE, new TextAttributesKey[]{PERL_HANDLE});
-
-		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
-		attributesMap.put(PerlElementTypes.PERL_SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
-		attributesMap.put(PerlElementTypes.PERL_SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
-		attributesMap.put(PerlElementTypes.PERL_SIGIL_HASH, new TextAttributesKey[]{PERL_HASH});
-		attributesMap.put(PerlElementTypes.PERL_VARIABLE_NAME, new TextAttributesKey[]{DefaultLanguageHighlighterColors.IDENTIFIER});
+		attributesMap.put(PerlElementTypes.SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+		attributesMap.put(PerlElementTypes.SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
+		attributesMap.put(PerlElementTypes.SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
+		attributesMap.put(PerlElementTypes.SIGIL_HASH, new TextAttributesKey[]{PERL_HASH});
+		attributesMap.put(PerlElementTypes.VARIABLE_NAME, new TextAttributesKey[]{DefaultLanguageHighlighterColors.IDENTIFIER});
 	}
 
 
@@ -194,9 +272,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		if (tokenType instanceof PodTokenType)
 			attributesKeys = POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
 		else if (RESERVED_SET.contains(tokenType))
-			attributesKeys = attributesMap.get(PerlElementTypes.PERL_RESERVED);
+			attributesKeys = attributesMap.get(PerlElementTypes.RESERVED_IF);
 		else if (OPERATORS_SET.contains(tokenType))
-			attributesKeys = attributesMap.get(PerlElementTypes.PERL_OPERATOR);
+			attributesKeys = attributesMap.get(PerlElementTypes.OPERATOR_MUL);
 		else
 			attributesKeys = attributesMap.get(tokenType);
 

@@ -169,7 +169,7 @@ public class RegexBlock implements PerlElementTypes
 			subLexer.advance();
 		}
 
-		tokens.add(new CustomToken(endOffset - 1, endOffset, PERL_REGEX_QUOTE_CLOSE));
+		tokens.add(new CustomToken(endOffset - 1, endOffset, REGEX_QUOTE_CLOSE));
 
 		return tokens;
 	}
@@ -212,7 +212,7 @@ public class RegexBlock implements PerlElementTypes
 				while( currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')'){currentOffset++;};
 				if( currentOffset < regexEndOffset )
 					currentOffset++;
-				tokens.add(new CustomToken(commentStart, currentOffset, PERL_COMMENT));
+				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 			}
 			else if(!isEscaped && !isCharGroup && isWhiteSpace(currentChar)) // whitespace here
 			{
@@ -224,11 +224,11 @@ public class RegexBlock implements PerlElementTypes
 			{
 				int commentStart = currentOffset;
 				while(currentOffset < regexEndOffset && buffer.charAt(currentOffset) != '\n'){currentOffset++;}
-				tokens.add(new CustomToken(commentStart, currentOffset, PERL_COMMENT));
+				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 			}
 			else
 			{
-				tokens.add(new CustomToken(currentOffset, ++currentOffset, PERL_REGEX_TOKEN));
+				tokens.add(new CustomToken(currentOffset, ++currentOffset, REGEX_TOKEN));
 			}
 
 			if( !isEscaped && !isCharGroup && currentChar == '[')
@@ -239,7 +239,7 @@ public class RegexBlock implements PerlElementTypes
 			isEscaped = !isEscaped && currentChar == '\\';
 		}
 
-		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE_CLOSE));
+		tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_CLOSE));
 
 		return tokens;
 	}
@@ -269,13 +269,13 @@ public class RegexBlock implements PerlElementTypes
 				currentOffset += 2;
 				while( currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')'){currentOffset++;}
 				if(currentOffset == regexEndOffset)
-					tokens.add(new CustomToken(commentStart, currentOffset, PERL_COMMENT));
+					tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				else
-					tokens.add(new CustomToken(commentStart, currentOffset+1, PERL_COMMENT));
+					tokens.add(new CustomToken(commentStart, currentOffset+1, COMMENT_LINE));
 			}
 			else
 			{
-				tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_TOKEN));
+				tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_TOKEN));
 			}
 
 			if( !isEscaped && !isCharGroup && currentChar == '[')
@@ -288,7 +288,7 @@ public class RegexBlock implements PerlElementTypes
 			currentOffset++;
 		}
 
-		tokens.add(new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE_CLOSE));
+		tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_CLOSE));
 
 		return tokens;
 	}

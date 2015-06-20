@@ -38,7 +38,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	static{
 		for( String functionName: BUILT_IN )
 		{
-			knownFunctions.put(functionName, PERL_SUB);
+			knownFunctions.put(functionName, SUB);
 		}
 	}
 

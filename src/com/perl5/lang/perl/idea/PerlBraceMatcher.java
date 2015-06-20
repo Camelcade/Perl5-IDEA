@@ -34,10 +34,9 @@ import org.jetbrains.annotations.Nullable;
 public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 {
 	private static final BracePair[] PAIRS = new BracePair[]{
-			new BracePair(PERL_LPAREN, PERL_RPAREN, false),
-			new BracePair(PERL_LBRACK, PERL_RBRACK, false),
-			new BracePair(PERL_LBRACE, PERL_RBRACE, true),
-//			new BracePair(PERL_LANGLE, PERL_RANGLE, false),
+			new BracePair(LEFT_PAREN, RIGHT_PAREN, false),
+			new BracePair(LEFT_BRACKET, RIGHT_BRACE, false),
+			new BracePair(LEFT_BRACE, RIGHT_BRACE, true),
 	};
 
 	@Override

@@ -52,9 +52,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseArrowSmart(PsiBuilder b, int l )
 	{
 		IElementType tokenType = b.getTokenType();
-		if( b.getTokenType() == PERL_DEREFERENCE )
+		if( b.getTokenType() == OPERATOR_DEREFERENCE )
 		{
-			return consumeToken(b, PERL_DEREFERENCE);
+			return consumeToken(b, OPERATOR_DEREFERENCE);
 		}
 		else
 		{
@@ -64,8 +64,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			// optional }->[ or ]->{
 			if(
-				( prevTokenType == PERL_RBRACE || prevTokenType == PERL_RBRACK )
-				&& ( tokenType == PERL_LBRACE || tokenType == PERL_LBRACK || tokenType == PERL_LPAREN )
+				( prevTokenType == RIGHT_BRACE || prevTokenType == RIGHT_BRACKET )
+				&& ( tokenType == LEFT_BRACE || tokenType == LEFT_BRACKET || tokenType == LEFT_PAREN )
 					)
 				return true;
 		}
@@ -108,7 +108,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 //		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
 
-		while( !b.eof() && b.getTokenType() != PERL_RPAREN )
+		while( !b.eof() && b.getTokenType() != RIGHT_PAREN )
 			consumeToken(b, b.getTokenType());
 
 		return true;
@@ -120,11 +120,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
 //		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
 
-		while( !b.eof() && b.getTokenType() != PERL_LBRACE )
+		while( !b.eof() && b.getTokenType() != LEFT_BRACE )
 		{
 			PerlBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(PERL_SUB_ATTRIBUTE);
+			m.collapse(SUB_ATTRIBUTE);
 		}
 
 		return true;
@@ -146,12 +146,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean statementSemi(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
-		if( tokenType == PERL_SEMI )
+		if( tokenType == SEMICOLON )
 		{
-			consumeToken(b, PERL_SEMI);
+			consumeToken(b, SEMICOLON);
 			return true;
 		}
-		else if( tokenType == PERL_RBRACE  || tokenType == PERL_REGEX_QUOTE_CLOSE)
+		else if( tokenType == RIGHT_BRACE  || tokenType == REGEX_QUOTE_CLOSE)
 			return true;
 		else if(b.eof()) // eof
 			return true;

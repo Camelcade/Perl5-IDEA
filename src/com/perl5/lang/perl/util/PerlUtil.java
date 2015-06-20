@@ -102,7 +102,7 @@ public class PerlUtil
 	{
 		PsiElement prevElement = currentElement.getPrevSibling();
 
-		if( prevElement != null && prevElement.getNode().getElementType() == PerlElementTypes.PERL_DEREFERENCE)
+		if( prevElement != null && prevElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
 			prevElement = prevElement.getPrevSibling();
 
 		return prevElement;

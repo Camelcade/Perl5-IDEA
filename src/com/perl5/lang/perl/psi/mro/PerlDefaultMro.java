@@ -65,10 +65,10 @@ public class PerlDefaultMro
 						// package->sub
 
 					}
-					else if( baseElement instanceof PsiPerlString)
-					{
-						// string->sub
-					}
+//					else if( baseElement instanceof PsiPerlString)
+//					{
+//						// string->sub
+//					}
 					else if (baseElement instanceof PsiPerlVariableExpr)
 					{
 						// $scalar->sub

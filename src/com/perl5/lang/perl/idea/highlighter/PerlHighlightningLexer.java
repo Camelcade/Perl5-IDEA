@@ -34,7 +34,7 @@ public class PerlHighlightningLexer extends LayeredLexer
 
 		registerSelfStoppingLayer(
 				new PodLexerAdapter(),
-				new IElementType[]{PerlElementTypes.PERL_POD},
+				new IElementType[]{PerlElementTypes.POD},
 				IElementType.EMPTY_ARRAY
 		);
 	}
