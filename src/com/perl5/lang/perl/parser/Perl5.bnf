@@ -498,7 +498,7 @@ term_expr ::=
     | require_expr
     | undef_expr
     | function_call_expr
-    | rightward_call_expr
+//    | rightward_call_expr
     | reference_value_expr
     | variable_expr
     | namespace_expr
@@ -608,17 +608,17 @@ private print_arguments ::= perl_handle expr | expr
 
 sub_expr ::= RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
 
+function_call_expr ::= <<parseFunctionCall>>
 
-
-function_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN !"["  // avoiding ()[]
-rightward_call_expr ::= callable [call_arguments]
-//    <<isUnaryOperator>> SUB [unary_expr]
-
-// fixme this should depend on prototype
-call_arguments ::=
-    anon_hash comma list_expr
-    | block [[comma] list_expr]
-    | list_expr
+//function_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN !"["  // avoiding ()[]
+//rightward_call_expr ::= callable [call_arguments]
+////    <<isUnaryOperator>> SUB [unary_expr]
+//
+//// fixme this should depend on prototype
+//call_arguments ::=
+//    anon_hash comma list_expr
+//    | block [[comma] list_expr]
+//    | list_expr
 
 file_read_expr ::= LEFT_ANGLE [perl_handle] RIGHT_ANGLE
 
@@ -737,7 +737,7 @@ private nested_element_expr ::=
     | parenthesised_expr    // function call like $var->()
     | scalar_call
     | function_call_expr
-    | rightward_call_expr
+//    | rightward_call_expr
     | scalar
 
 scalar_call ::= scalar_variable [parenthesised_expr]
@@ -745,7 +745,7 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
-private callable ::= method | referencable_method
+private callable ::= method | referencable_method // being used in parseFunctionCall
 
 private referencable_expr ::= referencable_method | scalar_expr
 private referencable_method ::= SIGIL_CODE

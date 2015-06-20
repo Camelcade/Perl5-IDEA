@@ -93,6 +93,21 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return tokenType == OPERATOR_FILETEST || tokenType == SUB && PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
 	}
 
+	/**
+	 * Parses function call
+	 * @param b Perlbuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseFunctionCall(PsiBuilder b, int l)
+	{
+		// check if it's list or unary
+		// check if it's accepts code as first param
+		// check if it's rightward or leftward
+		return false;
+	}
+
+
 	/*
 // @todo actually, prototypes and signatures depends on feature in current block; We should do this in parse time
 //private sub_declaration_parameters ::=
