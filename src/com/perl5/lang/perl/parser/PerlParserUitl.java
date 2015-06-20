@@ -23,9 +23,11 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlBuilder;
+import com.perl5.lang.perl.util.PerlSubUtil;
 
 /**
  * Created by hurricup on 01.05.2015.
+ *
  */
 public class PerlParserUitl extends GeneratedParserUtilBase implements PerlElementTypes
 {
@@ -77,6 +79,18 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseExpressionLevel(PsiBuilder b, int l, int g )
 	{
 		return PerlParser.expr(b,l,g);
+	}
+
+	/**
+	 * Checks if it's unary expression
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean isUnaryOperator(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		return tokenType == OPERATOR_FILETEST || tokenType == SUB && PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
 	}
 
 	/*

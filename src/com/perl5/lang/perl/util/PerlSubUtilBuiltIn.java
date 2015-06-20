@@ -26,7 +26,59 @@ import java.util.Set;
  */
 public interface PerlSubUtilBuiltIn
 {
-	public static final Set<String> BUILT_IN = new HashSet<>( Arrays.asList(
+	public static final HashSet<String> BUILT_IN_UNARY = new HashSet<>(Arrays.asList(
+
+	// original list taken from http://docstore.mik.ua/orelly/perl2/prog/ch03_10.htm
+		"alarm",
+		"getnetbyname",
+		"lock",
+		"rmdir",
+		"caller",
+		"getpgrp",
+		"log",
+		"scalar",
+		"chdir",
+		"getprotobyname",
+		"lstat",
+		"sin",
+		"chroot",
+		"glob",
+//		"my",	// this being handled separately
+		"sleep",
+		"cos",
+		"gmtime",
+		"oct",
+		"sqrt",
+		"defined",
+//		"goto",	// this specified in 21 line
+		"ord",
+		"srand",
+		"delete",
+		"hex",
+		"quotemeta",
+		"stat",
+//		"do",	// being handled separately
+		"int",
+		"rand",
+		"uc",
+//		"eval",	// being handled separately
+		"lc",
+		"readlink",
+		"ucfirst",
+		"exists",
+		"lcfirst",
+		"ref",
+		"umask",
+		"exit",
+		"length",
+//		"require", // being handled separately
+//		"undef", // being handled separately
+		"gethostbyname",
+		"localtime",
+		"return"	// ("foo").bar
+	));
+
+	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
 			"chomp",
