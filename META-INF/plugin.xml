@@ -27,7 +27,7 @@
     <change-notes><![CDATA[
       <p>0.29 beta</p>
       <ul>
-      <li></li>
+      <li>Fixed bug with hanging on Embedded perl files</li>
       <li></li>
       <li></li>
       <li></li>

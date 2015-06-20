@@ -36,18 +36,16 @@ limitations under the License.
 //  tokenTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
 
   tokens=[
-    PERL_COMMENT="PERL_COMMENT"
-    PERL_COMMENT_BLOCK="PERL_COMMENT_BLOCK"
-    PERL_POD="PERL_POD"
+    COMMENT_LINE="COMMENT_LINE"
+    COMMENT_BLOCK="COMMENT_BLOCK"
+    POD="PERL_POD"
 
-    PERL_SUB_PROTOTYPE_TOKEN="PERL_SUB_PROTOTYPE_TOKEN"
-
-    PERL_SIGIL_ARRAY="SIGIL_ARRAY"
-    PERL_SIGIL_HASH="SIGIL_HASH"
-    PERL_SIGIL_SCALAR="SIGIL_SCALAR"
-    PERL_SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
-    PERL_SIGIL_GLOB = "SIGIL_GLOB"
-    PERL_SIGIL_CODE = "SIGIL_CODE"
+    SIGIL_ARRAY="SIGIL_ARRAY"
+    SIGIL_HASH="SIGIL_HASH"
+    SIGIL_SCALAR="SIGIL_SCALAR"
+    SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
+    SIGIL_GLOB = "SIGIL_GLOB"
+    SIGIL_CODE = "SIGIL_CODE"
 
     ANNOTATION_PREFIX="ANNOTATION_PREFIX"
 
@@ -58,17 +56,14 @@ limitations under the License.
     ANNOTATION_METHOD_KEY="ANNOTATION_METHOD"
     ANNOTATION_ABSTRACT_KEY="ANNOTATION_ABSTRACT"
 
-    PERL_VARIABLE_NAME="PERL_VARIABLE_NAME"
+    VARIABLE_NAME="VARIABLE_NAME"
 
+    HEREDOC="HEREDOC" // should be string content too
+    HEREDOC_END="HEREDOC_END"
 
-    PERL_HEREDOC="PERL_HEREDOC" // should be string content too
-    PERL_HEREDOC_END="PERL_HEREDOC_END"
-
-    PERL_VERSION="PERL_VERSION"
-    PERL_NUMBER_VERSION="PERL_NUMBER_VERSION"
-    PERL_NUMBER="PERL_NUMBER"
-
-    PERL_RESERVED="PERL_RESERVED"
+    VERSION="VERSION"
+    NUMBER_VERSION="NUMBER_VERSION"
+    NUMBER="NUMBER"
 
     RESERVED_IF="if"
     RESERVED_UNLESS="unless"
@@ -80,6 +75,7 @@ limitations under the License.
     RESERVED_FOR="for"
     RESERVED_FOREACH="foreach"
     RESERVED_CONTINUE="continue"
+    RESERVED_WHEN="when"
 
     RESERVED_SUB="sub"
     RESERVED_PACKAGE="package"
@@ -119,58 +115,142 @@ limitations under the License.
     RESERVED_NEXT="next"
     RESERVED_LAST="last"
 
-    PERL_OPERATOR="PERL_OPERATOR"
-    PERL_OPERATOR_NOT="not"
-    PERL_OPERATOR_X="x"
-    PERL_OPERATOR_DIV="/"
-    PERL_OPERATOR_MUL="*"
-    PERL_OPERATOR_AMP="&"
-    PERL_OPERATOR_MOD="%"
+    // Operators
 
-    PERL_OPERATOR_UNARY="PERL_OPERATOR_UNARY"
-    PERL_OPERATOR_FILETEST="PERL_OPERATOR_FILETEST"
+    OPERATOR_X="x"
 
-    PERL_REGEX_QUOTE_OPEN="PERL_REGEX_QUOTE_OPEN"
-    PERL_REGEX_QUOTE_CLOSE="PERL_REGEX_QUOTE_CLOSE"
-    PERL_REGEX_MODIFIER="PERL_REGEX_MODIFIER"
-    PERL_REGEX_TOKEN="PERL_REGEX_TOKEN"
+    OPERATOR_CMP_NUMERIC="<=>"
+    OPERATOR_LE_NUMERIC="<="
+    OPERATOR_GE_NUMERIC=">="
+    OPERATOR_EQ_NUMERIC="=="
+    OPERATOR_NE_NUMERIC="!="
+    OPERATOR_LT_NUMERIC="<"
+    OPERATOR_GT_NUMERIC=">"
 
-//    PERL_STRING="PERL_STRING"
-    PERL_STRING_CONTENT="PERL_STRING_CONTENT"
+    OPERATOR_DEREFERENCE="->"
+    OPERATOR_COMMA_ARROW="=>"
+    OPERATOR_COMMA=","
 
-    PERL_TAG="PERL_TAG"
+    OPERATOR_HELLIP="..."
+    OPERATOR_FLIP_FLOP=".."
+    OPERATOR_CONCAT="."
 
-    PERL_COMMA=','
-    PERL_ARROW_COMMA='=>'
-    PERL_DEREFERENCE='->'
-    PERL_COLON=":"
-    PERL_LBRACK='['
-    PERL_RBRACK=']'
-    PERL_LPAREN="("
-    PERL_RPAREN=")"
-    PERL_LBRACE='{'
-    PERL_RBRACE='}'
-    PERL_LANGLE='<'
-    PERL_RANGLE='>'
-    PERL_SEMI=';';
-    PERL_QUOTE="\""
+    OPERATOR_PLUS_PLUS="++"
+    OPERATOR_MINUS_MINUS="--"
+    OPERATOR_POW="**"
+
+    OPERATOR_RE="=~"
+    OPERATOR_NOT_RE="!~"
+
+    OPERATOR_HEREDOC="<<"
+    OPERATOR_SHIFT_LEFT="<<"
+    OPERATOR_SHIFT_RIGHT=">>"
+
+    OPERATOR_SMARTMATCH="~~"
+
+    OPERATOR_AND="&&"
+    OPERATOR_OR="||"
+    OPERATOR_OR_DEFINED="//"
+    OPERATOR_NOT="!"
+
+    OPERATOR_ASSIGN="="
+    OPERATOR_POW_ASSIGN="**="
+
+    OPERATOR_PLUS_ASSIGN="+="
+    OPERATOR_MINUS_ASSIGN="-="
+    OPERATOR_CONCAT_ASSIGN=".="
+
+    OPERATOR_MUL_ASSIGN="*="
+    OPERATOR_DIV_ASSIGN="/="
+    OPERATOR_MOD_ASSIGN="%="
+    OPERATOR_X_ASSIGN="x="
+
+    OPERATOR_BITWISE_AND_ASSIGN="&="
+    OPERATOR_BITWISE_OR_ASSIGN="|="
+    OPERATOR_BITWISE_XOR_ASSIGN="^="
+
+    OPERATOR_SHIFT_LEFT_ASSIGN="<<="
+    OPERATOR_SHIFT_RIGHT_ASSIGN=">>="
+
+    OPERATOR_AND_ASSIGN="&&="
+    OPERATOR_OR_ASSIGN="||="
+    OPERATOR_OR_DEFINED_ASSIGN="//="
+
+    OPERATOR_TRENAR_IF="?"
+    OPERATOR_TRENAR_ELSE=":"
+
+    OPERATOR_REFERENCE="\\"
+
+    OPERATOR_DIV="/"
+    OPERATOR_MUL="*"
+    OPERATOR_MOD="%"
+    OPERATOR_PLUS="+"
+    OPERATOR_MINUS="-"
+
+    OPERATOR_BITWISE_NOT="~"
+    OPERATOR_BITWISE_AND="&"
+    OPERATOR_BITWISE_OR="|"
+    OPERATOR_BITWISE_XOR="^"
+
+    OPERATOR_AND_LP="and"
+    OPERATOR_OR_LP="or"
+    OPERATOR_XOR_LP="xor"
+    OPERATOR_NOT_LP="not"
+
+    OPERATOR_LT_STR="lt"
+    OPERATOR_GT_STR="gt"
+    OPERATOR_LE_STR="le"
+    OPERATOR_GE_STR="ge"
+    OPERATOR_CMP_STR="cmp"
+    OPERATOR_EQ_STR="eq"
+    OPERATOR_NE_STR="ne"
+
+//    OPERATOR_DEFINED="defined"
+//    OPERATOR_REF="ref"
+//    OPERATOR_EXISTS="exists"
+//    OPERATOR_SCALAR="scalar"
+
+    OPERATOR_FILETEST="OPERATOR_FILETEST"
+
+    REGEX_QUOTE_OPEN="REGEX_QUOTE_OPEN"
+    REGEX_QUOTE_CLOSE="REGEX_QUOTE_CLOSE"
+    REGEX_MODIFIER="REGEX_MODIFIER"
+    REGEX_TOKEN="REGEX_TOKEN"
+
+    STRING_CONTENT="STRING_CONTENT"
+
+    TAG="TAG"
+
+    LEFT_BRACKET='LEFT_BRACKET'
+    RIGHT_BRACKET='RIGHT_BRACKET'
+    LEFT_PAREN="LEFT_PAREN"
+    RIGHT_PAREN="RIGHT_PAREN"
+    LEFT_BRACE='LEFT_BRACE'
+    RIGHT_BRACE='RIGHT_BRACE'
+    LEFT_ANGLE='LEFT_ANGLE'
+    RIGHT_ANGLE='RIGHT_ANGLE'
+
+    SEMICOLON=';';
+    COLON=':';
+
+    QUOTE="\""
+    QUOTE_DOUBLE="\""
+    QUOTE_SINGLE="'"
+    QUOTE_TICK="`"
 
     // custom tokens
-    PERL_SUB="PERL_SUB"
-    PERL_SUB_ATTRIBUTE="PERL_SUB_ATTRIBUTE"
+    SUB="SUB"
+    SUB_ATTRIBUTE="SUB_ATTRIBUTE"
+    SUB_PROTOTYPE_TOKEN="SUB_PROTOTYPE_TOKEN"
 
-    PERL_PACKAGE="PERL_PACKAGE"
+    PACKAGE="PACKAGE"
 
-    PERL_HANDLE="PERL_HANDLE"
-    PERL_HANDLE_BUILT_IN="PERL_HANDLE_BUILT_IN"
-    PERL_BLOCK_NAME="PERL_BLOCK_NAME"
-    PERL_LABEL="PERL_LABEL"
+    HANDLE="HANDLE"
+    BLOCK_NAME="BLOCK_NAME"
+    LABEL="LABEL"
 
     // inline HTML support
-    TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
     EMBED_MARKER="EMBED_MARKER"
-
-//    TEMPLATE_BLOCK_SQL="TEMPLATE_BLOCK_SQL"
   ]
 
     extends(".*expr")=expr
@@ -230,22 +310,22 @@ limitations under the License.
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 root ::= file_item *
 
-private file_item ::= !<<eof>> {PERL_SEMI | namespace_block | namespace_item} //{pin=1 }
+private file_item ::= !<<eof>> {SEMICOLON | namespace_block | namespace_item} //{pin=1 }
 
-namespace_block ::= namespace_definition (block | PERL_SEMI namespace_content)
+namespace_block ::= namespace_definition (block | SEMICOLON namespace_content)
 namespace_definition ::= RESERVED_PACKAGE namespace_element [perl_version] {pin=1 recoverWhile=recover_namespace_definition}
-private recover_namespace_definition ::= !(PERL_SEMI | PERL_LBRACE)
+private recover_namespace_definition ::= !(SEMICOLON | LEFT_BRACE)
 namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
 
 // todo count opening braces
-private recover_namespace ::= !( RESERVED_PACKAGE | PERL_RBRACE )
+private recover_namespace ::= !( RESERVED_PACKAGE | RIGHT_BRACE )
 
-block ::= PERL_LBRACE block_content PERL_RBRACE {pin=1}
+block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1}
 private block_content ::= file_item * {recoverWhile=recover_block}
-private recover_block ::= !(PERL_RBRACE)
+private recover_block ::= !(RIGHT_BRACE)
 
 private namespace_item ::=
-    compound_statement [PERL_SEMI+]
+    compound_statement [SEMICOLON+]
     | statement
     | annotation
 
@@ -254,7 +334,7 @@ private compound_statement ::=
     | named_block
     | labelable_compound_statment
 
-named_block ::= PERL_BLOCK_NAME block
+named_block ::= BLOCK_NAME block
 
 // fixme we can't pin this because we need to distinct declaration and definition
 sub_definition ::= [annotations] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
@@ -284,10 +364,10 @@ private if_compound_else  ::= RESERVED_ELSE unconditional_block {pin=1}
 unconditional_block ::= block
 
 conditional_block ::= condition_statement block {pin=1 name="Conditional block"}
-condition_statement ::= PERL_LPAREN condition_statement_expr PERL_RPAREN {pin=1 recoverWhile=recover_to_block name="Condition"}
+condition_statement ::= LEFT_PAREN condition_statement_expr RIGHT_PAREN {pin=1 recoverWhile=recover_to_block name="Condition"}
 private condition_statement_expr ::= expr {recoverWhile=recover_condition_statement_expr}
-private recover_condition_statement_expr ::= !(PERL_LBRACE|PERL_RPAREN)
-private recover_to_block ::= !(PERL_LBRACE)
+private recover_condition_statement_expr ::= !(LEFT_BRACE|RIGHT_PAREN)
+private recover_to_block ::= !(LEFT_BRACE)
 
 given_compound ::= RESERVED_GIVEN conditional_block  {pin=1}
 
@@ -307,12 +387,12 @@ private for_arguments ::=
     for_iterator block
     | for_list_statement block_compound
 
-for_iterator ::= PERL_LPAREN [for_iterator_statement]  PERL_SEMI [for_iterator_statement] PERL_SEMI [for_iterator_statement] PERL_RPAREN {pin=3}
+for_iterator ::= LEFT_PAREN [for_iterator_statement]  SEMICOLON [for_iterator_statement] SEMICOLON [for_iterator_statement] RIGHT_PAREN {pin=3}
 for_iterator_statement ::= expr {recoverWhile=recover_parenthesised}
 
 // @todo only single variable or variable definition may be here
 for_list_statement ::= [ variable_declaration | variable ] for_list_epxr
-for_list_epxr ::= PERL_LPAREN for_list_expr_content PERL_RPAREN {pin=1}
+for_list_epxr ::= LEFT_PAREN for_list_expr_content RIGHT_PAREN {pin=1}
 private for_list_expr_content ::= list_expr {recoverWhile=recover_parenthesised}
 
 
@@ -333,25 +413,26 @@ private canonical_sub_name ::= [namespace_element] sub_name_element
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
 // todo implement parsing
-private sub_prototype ::= PERL_LPAREN [sub_prototype_content] PERL_RPAREN {pin=1 recoverWhile=recover_sub_prototype}
-private recover_sub_prototype ::= !(":" | PERL_LBRACE | PERL_SEMI)
+private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_prototype}
+private recover_sub_prototype ::= !(COLON | LEFT_BRACE | SEMICOLON)
 private sub_prototype_content ::= <<parseSubPrototype>> {recoverWhile=recover_sub_prototype_content}
-private recover_sub_prototype_content ::= !(PERL_RPAREN | ":" | PERL_LBRACE | PERL_SEMI)
+private recover_sub_prototype_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | SEMICOLON)
 
-private sub_signature ::= PERL_LPAREN [sub_signature_content] PERL_RPAREN {pin=1 recoverWhile=recover_sub_signature}
-private recover_sub_signature ::= !(PERL_LBRACE | PERL_SEMI)
+private sub_signature ::= LEFT_PAREN [sub_signature_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_signature}
+private recover_sub_signature ::= !(LEFT_BRACE | SEMICOLON)
 private sub_signature_content ::= <<parseSubSignature>> {recoverWhile=recover_sub_signature_content}
-private recover_sub_signature_content ::= !(PERL_RPAREN | ":" | PERL_LBRACE | PERL_SEMI)
+private recover_sub_signature_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | SEMICOLON)
 
-private sub_attributes ::= ":" <<parseSubAttributes>> {pin=1 recoverWhile=recover_sub_attributes}
-recover_sub_attributes ::= !(PERL_LPAREN| PERL_SEMI| PERL_LBRACE)
+private sub_attributes ::= COLON <<parseSubAttributes>> {pin=1 recoverWhile=recover_sub_attributes}
+recover_sub_attributes ::= !(LEFT_PAREN| SEMICOLON| LEFT_BRACE)
 
 last_expr ::= RESERVED_LAST [lnr_param] {pin=1}
 next_expr ::= RESERVED_NEXT [lnr_param] {pin=1}
 redo_expr ::= RESERVED_REDO [lnr_param] {pin=1}
 goto_expr ::= RESERVED_GOTO [goto_param] {pin=1}
-private lnr_param ::= PERL_LABEL | expr // fixme scalar_expr ?
-private goto_param ::= PERL_LABEL | PERL_SIGIL_CODE PERL_SUB | expr // fixme same, scalar expr?
+
+private lnr_param ::= LABEL | expr // fixme scalar_expr ?
+private goto_param ::= LABEL | SIGIL_CODE SUB | expr // fixme same, scalar expr?
 
 private statement_modifier ::=
     if_statement_modifier
@@ -377,10 +458,10 @@ private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= namespace_element [perl_version] [expr];
 private use_version_parameters ::= perl_version;
 
-undef_expr ::= RESERVED_UNDEF (variable | PERL_LPAREN variable PERL_RPAREN) ? {pin=1}
+undef_expr ::= RESERVED_UNDEF (variable | LEFT_PAREN variable RIGHT_PAREN) ? {pin=1}
 require_expr ::= RESERVED_REQUIRE (namespace_element | perl_version | unary_expr)  {pin=1}// multiline string is possible too
 
-private recover_statement ::= !(PERL_SEMI | PERL_RBRACE | PERL_REGEX_QUOTE_CLOSE)
+private recover_statement ::= !(SEMICOLON | RIGHT_BRACE | REGEX_QUOTE_CLOSE)
 
 // expression
 expr ::=
@@ -388,7 +469,7 @@ expr ::=
     | lp_and_expr
     | lp_not_expr
     | comma_expr
-    | assign_expr
+    | assign_or_flow_expr
     | trenar_expr
     | flipflop_expr
     | or_expr
@@ -419,87 +500,137 @@ term_expr ::=
     | regex_term
     | file_read_expr
     | print_expr
-    | open_expr
-    | close_expr
-    | grep_expr
-    | sort_expr
-    | map_expr
+//    | open_expr
+//    | close_expr
+//    | grep_expr
+//    | sort_expr
+//    | map_expr
     | require_expr
     | undef_expr
-    | last_expr
-    | next_expr
-    | goto_expr
     | return_expr
-    | redo_expr
-    | PERL_OPERATOR_UNARY parenthesised_expr !"["   // named operators as functions
     | function_call_expr
     | rightward_call_expr
     | reference_value_expr
     | variable_expr
     | namespace_expr
 
+
 variable_expr ::= array_index_variable | variable
 namespace_expr ::= namespace_element
-parenthesised_expr ::= PERL_LPAREN [parenthesised_expr_content] PERL_RPAREN {pin=1 name="Parenthesised expression"}
+parenthesised_expr ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
-private recover_parenthesised ::= !(PERL_RPAREN | PERL_LBRACE | PERL_RBRACE | PERL_SEMI )
+private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
 
+// todo specific token or just a prototype?
 return_expr ::= "return" [list_expr] {pin=1}
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
 private immutable_expression ::= <<parseExpressionLevel 20>>
 
 private op_3_expr ::= pref_pp_expr | suff_pp_expr
-pref_pp_expr ::= ('++'|'--') expr
-suff_pp_expr ::= expr ('++'|'--')
+pref_pp_expr ::= (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS) expr
+suff_pp_expr ::= expr (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS)
 
-pow_expr ::= expr ('**' expr)+ { rightAssociative=true }
+pow_expr ::= expr (OPERATOR_POW expr)+ { rightAssociative=true }
 
 private op_5_expr ::= ref_expr  | prefix_unary_expr
-ref_expr ::= '\' referencable_expr { rightAssociative=true }
-prefix_unary_expr ::=  ('~'| '!'| '+' | '-') expr { rightAssociative=true }
+ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
+prefix_unary_expr ::=  (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR_MINUS) expr { rightAssociative=true }
 
-regex_expr ::= expr ('=~'|'!~') expr
+regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 
-mul_expr ::= expr (PERL_OPERATOR_MUL|PERL_OPERATOR_DIV|PERL_OPERATOR_MOD|PERL_OPERATOR_X) expr
-add_expr ::= expr ('+'|'-'|'.') expr
-shift_expr ::= expr ('<<'|'>>') expr
+mul_expr ::= expr (OPERATOR_MUL|OPERATOR_DIV|OPERATOR_MOD|OPERATOR_X) expr
+add_expr ::= expr (OPERATOR_PLUS|OPERATOR_MINUS|OPERATOR_CONCAT) expr
+shift_expr ::= expr (OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) expr
 
-private op_10_expr ::= named_unary_expr | filetest_expr
-named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
-private named_undry_expr_defined ::= 'defined' !PERL_LPAREN [unary_expr]
-private named_unary_expr_normal ::= PERL_OPERATOR_UNARY !PERL_LPAREN unary_expr
+private op_10_expr ::= filetest_expr
+// todo waiting for monks answer
+// named_unary_expr |
+//named_unary_expr ::= named_undry_expr_defined | named_unary_expr_normal
+//private named_undry_expr_defined ::= OPERATOR_DEFINED !LEFT_PAREN [unary_expr]
+//private named_unary_expr_normal ::= {OPERATOR_SCALAR | OPERATOR_EXISTS | OPERATOR_REF} !LEFT_PAREN unary_expr
 
 private unary_expr ::= <<parseExpressionLevel 13>>
 
-filetest_expr ::= PERL_OPERATOR_FILETEST [(perl_handle | expr )]
+filetest_expr ::= OPERATOR_FILETEST [(perl_handle | expr )]
 
-compare_expr ::= expr ('>='|'<='|'<'|'>'|'lt'|'gt'|'le'|'ge') expr
-equal_expr ::= expr ('=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~') expr
-bitwise_and_expr ::= expr PERL_OPERATOR_AMP expr
-bitwise_or_xor_expr ::= expr ('|'|'^') expr
-and_expr ::= expr '&&' expr
-or_expr ::= expr ('||'|'//') expr
-flipflop_expr ::= expr ('..'|'...') expr
-trenar_expr ::= expr '?' scalar_expr ':' scalar_expr { rightAssociative=true }
-assign_expr ::= expr ('=' | '**='|'+='|'-='| '*='|'/='|'x='| '&='|'|='|'.='| '<<='|'>>='|'%='| '&&='|'||='|'^='| '//=') expr { rightAssociative=true }
+compare_expr ::= expr (
+    OPERATOR_GE_NUMERIC
+    |OPERATOR_LE_NUMERIC
+    |OPERATOR_LT_NUMERIC
+    |OPERATOR_GT_NUMERIC
+
+    |OPERATOR_GE_STR
+    |OPERATOR_LE_STR
+    |OPERATOR_LT_STR
+    |OPERATOR_GT_STR
+    ) expr
+
+equal_expr ::= expr (
+    OPERATOR_EQ_NUMERIC
+    |OPERATOR_NE_NUMERIC
+    |OPERATOR_CMP_NUMERIC
+
+    |OPERATOR_EQ_STR
+    |OPERATOR_NE_STR
+    |OPERATOR_CMP_STR
+
+    |OPERATOR_SMARTMATCH
+    ) expr
+
+bitwise_and_expr ::= expr OPERATOR_BITWISE_AND expr
+bitwise_or_xor_expr ::= expr (OPERATOR_BITWISE_OR|OPERATOR_BITWISE_XOR) expr
+and_expr ::= expr OPERATOR_AND expr
+or_expr ::= expr (OPERATOR_OR|OPERATOR_OR_DEFINED) expr
+flipflop_expr ::= expr (OPERATOR_FLIP_FLOP|OPERATOR_HELLIP) expr
+trenar_expr ::= expr OPERATOR_TRENAR_IF scalar_expr OPERATOR_TRENAR_ELSE scalar_expr { rightAssociative=true }
+
+private assign_or_flow_expr ::=
+    assign_expr
+    | last_expr
+    | next_expr
+    | goto_expr
+    | redo_expr
+
+assign_expr ::= expr (
+    OPERATOR_ASSIGN
+    |OPERATOR_POW_ASSIGN
+    |OPERATOR_PLUS_ASSIGN
+    |OPERATOR_MINUS_ASSIGN
+    |OPERATOR_MUL_ASSIGN
+    |OPERATOR_DIV_ASSIGN
+    |OPERATOR_X_ASSIGN
+    |OPERATOR_BITWISE_AND_ASSIGN
+    |OPERATOR_BITWISE_OR_ASSIGN
+    |OPERATOR_CONCAT_ASSIGN
+    |OPERATOR_SHIFT_LEFT_ASSIGN
+    |OPERATOR_SHIFT_RIGHT_ASSIGN
+    |OPERATOR_MOD_ASSIGN
+    |OPERATOR_AND_ASSIGN
+    |OPERATOR_OR_ASSIGN
+    |OPERATOR_OR_DEFINED_ASSIGN
+    ) expr { rightAssociative=true }
+
+
 
 private comma_expr ::= comma_sequence_expr | comma_last_expr
 comma_last_expr ::= expr comma
 comma_sequence_expr ::= expr (comma_any expr) +
-private comma_any ::= comma + !(PERL_RPAREN|"]"|"}")
+private comma_any ::= comma + !(RIGHT_PAREN|"]"|"}")
 
-lp_not_expr ::= PERL_OPERATOR_NOT expr { rightAssociative=true }
-lp_and_expr ::= expr 'and' expr
-lp_or_xor_expr ::= expr ('or'|'xor') expr
+lp_not_expr ::= OPERATOR_NOT_LP expr { rightAssociative=true }
+lp_and_expr ::= expr OPERATOR_AND_LP expr
+lp_or_xor_expr ::= expr (OPERATOR_OR_LP|OPERATOR_XOR_LP) expr
 
 private scalar_expr ::= <<parseExpressionLevel 3>>
 private list_expr ::= <<parseExpressionLevel 2>>
 
-print_expr ::= (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( PERL_LPAREN [print_arguments] PERL_RPAREN | [print_arguments] ) // {pin=1}
+print_expr ::= (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( LEFT_PAREN [print_arguments] RIGHT_PAREN | [print_arguments] ) // {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-open_expr ::= "open" ( PERL_LPAREN open_arguments PERL_RPAREN | open_arguments )
+/*
+// todo token or proto
+open_expr ::= "open" ( LEFT_PAREN open_arguments RIGHT_PAREN | open_arguments )
 private open_arguments ::=
     open_handle comma open_mode comma open_ref  // open FILEHANDLE,MODE,REFERENCE
     | open_handle comma open_mode comma expr    // open FILEHANDLE,MODE,EXPR,LIST ?
@@ -509,29 +640,35 @@ open_handle ::= variable_declaration | perl_handle
 open_mode ::= scalar_expr
 open_ref ::= ref_expr
 
-close_expr ::= "close" ( PERL_LPAREN close_arguments PERL_RPAREN | close_arguments ) {pin=1}
+// todo token or proto
+close_expr ::= "close" ( LEFT_PAREN close_arguments RIGHT_PAREN | close_arguments ) {pin=1}
 private close_arguments ::= perl_handle
 
-sort_expr ::= 'sort' ( PERL_LPAREN sort_op_arguments PERL_RPAREN| sort_op_arguments ) {pin=1}
+// todo token or proto
+sort_expr ::= 'sort' ( LEFT_PAREN sort_op_arguments RIGHT_PAREN| sort_op_arguments ) {pin=1}
 private sort_op_arguments ::=
     sub_name_element expr
     | block expr
     | scalar_expr expr
     | expr
 
-sub_expr ::= RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
-
+// todo token or proto
 grep_expr ::= 'grep' grep_map_arguments {pin=1}
+// todo token or proto
 map_expr ::= 'map' grep_map_arguments {pin=1}
 private grep_map_arguments ::=
-    PERL_LPAREN grep_map_arguments_variations PERL_RPAREN
+    LEFT_PAREN grep_map_arguments_variations RIGHT_PAREN
     | grep_map_arguments_variations
 
 private grep_map_arguments_variations ::=
     block expr
     | scalar_expr comma expr
+*/
 
-function_call_expr ::= callable PERL_LPAREN [call_arguments] PERL_RPAREN !"["  // avoiding ()[]
+sub_expr ::= RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
+
+
+function_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN !"["  // avoiding ()[]
 rightward_call_expr ::= callable [call_arguments]
 
 call_arguments ::=
@@ -539,7 +676,7 @@ call_arguments ::=
     | block [[comma] list_expr]
     | list_expr
 
-file_read_expr ::= '<' [perl_handle] '>'
+file_read_expr ::= LEFT_ANGLE [perl_handle] RIGHT_ANGLE
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -551,19 +688,19 @@ private regex_term ::=
 // pinning quotes leads to bug with replacement block
 compile_regex ::= RESERVED_QR match_regex_body
 match_regex ::= [RESERVED_M] match_regex_body
-private match_regex_body ::= PERL_REGEX_QUOTE_OPEN [perl_regex] PERL_REGEX_QUOTE_CLOSE [perl_regex_modifiers]
-replacement_regex ::= RESERVED_S PERL_REGEX_QUOTE_OPEN [perl_regex] PERL_REGEX_QUOTE_CLOSE [PERL_REGEX_QUOTE_OPEN] [perl_regex | regex_code] PERL_REGEX_QUOTE_CLOSE [perl_regex_modifiers]
+private match_regex_body ::= REGEX_QUOTE_OPEN [perl_regex] REGEX_QUOTE_CLOSE [perl_regex_modifiers]
+replacement_regex ::= RESERVED_S REGEX_QUOTE_OPEN [perl_regex] REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] [perl_regex | regex_code] REGEX_QUOTE_CLOSE [perl_regex_modifiers]
 private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
-private recover_regex_code ::= !(PERL_REGEX_QUOTE_CLOSE)
+private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
-perl_regex_modifiers ::= PERL_REGEX_MODIFIER +
-perl_regex ::= PERL_REGEX_TOKEN + // here we should make a trick
+perl_regex_modifiers ::= REGEX_MODIFIER +
+perl_regex ::= REGEX_TOKEN + // here we should make a trick
 
-tr_regex ::= (RESERVED_TR|RESERVED_Y) PERL_REGEX_QUOTE_OPEN tr_searchlist PERL_REGEX_QUOTE_CLOSE [PERL_REGEX_QUOTE_OPEN] tr_replacementlist PERL_REGEX_QUOTE_CLOSE [tr_modifiers] {pin=1}
-tr_searchlist ::= PERL_STRING_CONTENT
-tr_replacementlist ::= PERL_STRING_CONTENT
+tr_regex ::= (RESERVED_TR|RESERVED_Y) REGEX_QUOTE_OPEN tr_searchlist REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] tr_replacementlist REGEX_QUOTE_CLOSE [tr_modifiers] {pin=1}
+tr_searchlist ::= STRING_CONTENT
+tr_replacementlist ::= STRING_CONTENT
 
-tr_modifiers ::= PERL_REGEX_MODIFIER +
+tr_modifiers ::= REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
 do_expr ::= RESERVED_DO eval_argument {pin=1}
@@ -581,7 +718,7 @@ variable_declaration_lexical ::= (RESERVED_MY | RESERVED_STATE) [namespace_eleme
 variable_declaration_global ::= RESERVED_OUR [namespace_element] variable_declaration_variation  {pin=1}
 
 private local_variable_declaration_variation ::=
-    PERL_LPAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * PERL_RPAREN
+    LEFT_PAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * RIGHT_PAREN
     | local_variable_declaration_argument
 
 
@@ -589,7 +726,7 @@ private local_variable_declaration_variation ::=
 private local_variable_declaration_argument ::= immutable_expression | lexical_variable_definition_argument
 
 private variable_declaration_variation ::=
-    PERL_LPAREN lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* PERL_RPAREN
+    LEFT_PAREN lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* RIGHT_PAREN
     | lexical_variable_definition_argument
 
 private lexical_variable_definition_argument ::= lexical_variable | RESERVED_UNDEF
@@ -601,8 +738,8 @@ private reference_value_expr ::=
     | anon_hash
     | code_ref
 
-anon_array ::= '[' [expr] ']' //{pin=1}
-anon_hash ::= '{' [expr] '}' // fixme pin here after solving problem with code block and prototypes
+anon_array ::= LEFT_BRACKET [expr] RIGHT_BRACKET //{pin=1}
+anon_hash ::= LEFT_BRACE [expr] RIGHT_BRACE // fixme pin here after solving problem with code block and prototypes
 code_ref ::= RESERVED_SUB block
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
@@ -611,21 +748,21 @@ code_ref ::= RESERVED_SUB block
 private variable ::= scalar | array | hash | glob
 
 private array ::=
-    PERL_SIGIL_ARRAY '{' expr '}'   // scalar dereference
+    SIGIL_ARRAY LEFT_BRACE expr RIGHT_BRACE   // scalar dereference
     | array_array_slice              // array slice
     | array_hash_slice              // hash slice
     | array_variable
     | array_constant
 
-array_array_slice ::= array_variable '[' expr ']'
-array_hash_slice ::= array_variable '{' expr '}'
+array_array_slice ::= array_variable LEFT_BRACKET expr RIGHT_BRACKET
+array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
-    PERL_SIGIL_HASH '{' expr '}'      // hash dereference w braces
+    SIGIL_HASH LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
     | hash_variable                    // hash as is
 
 private scalar ::=
-    PERL_SIGIL_SCALAR + "{" expr "}"
+    SIGIL_SCALAR + LEFT_BRACE expr RIGHT_BRACE
     | scalar_array_element
     | scalar_hash_element
     | scalar_variable
@@ -633,22 +770,22 @@ private scalar ::=
     | scalar_constant
     | scalar_anon_array_element
     | undef_expr
-    | PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * ( '{' expr '}' | scalar_variable )
+    | SIGIL_SCALAR_INDEX SIGIL_SCALAR * ( LEFT_BRACE expr RIGHT_BRACE | scalar_variable )
     | perl_handle_basic
 
-scalar_array_index ::= PERL_SIGIL_SCALAR_INDEX PERL_SIGIL_SCALAR * scalar_variable
-scalar_array_element ::= scalar_variable "[" expr "]"
-scalar_hash_element ::= scalar_variable ( "{" expr "}" | braced_string )
-scalar_anon_array_element ::= PERL_LPAREN expr PERL_RPAREN "["expr"]"
+scalar_array_index ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * scalar_variable
+scalar_array_element ::= scalar_variable LEFT_BRACKET expr RIGHT_BRACKET
+scalar_hash_element ::= scalar_variable ( LEFT_BRACE expr RIGHT_BRACE | braced_string )
+scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
-    PERL_SIGIL_GLOB "{" expr "}"     // @todo we need to colorize this as glob
+    SIGIL_GLOB LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
     | glob_variable                    // hash as is
 
 private nested_element ::=
     braced_string
-    | "{" expr "}"
-    | "[" expr "]"
+    | LEFT_BRACE expr RIGHT_BRACE
+    | LEFT_BRACKET expr RIGHT_BRACKET
 
 // extended nested element for using in ()
 private nested_element_expr ::=
@@ -667,82 +804,70 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 private callable ::= method | referencable_method
 
 private referencable_expr ::= referencable_method | scalar_expr
-private referencable_method ::= PERL_SIGIL_CODE
+private referencable_method ::= SIGIL_CODE
     (
         method
-        | "{"method"}"
-        | "{"expr"}"
+        | LEFT_PAREN method RIGHT_PAREN
+        | LEFT_BRACE expr RIGHT_BRACE
         | scalar
     )
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
-label_declaration ::= PERL_LABEL ":" // do we need to change tokentype?
-private perl_version ::= PERL_NUMBER_VERSION | PERL_NUMBER
-private perl_handle ::=  perl_handle_basic | "{" scalar_expr "}" | <<parseExpressionLevel 21>>
-private perl_handle_basic ::= PERL_HANDLE | PERL_HANDLE_BUILT_IN
+label_declaration ::= LABEL COLON // do we need to change tokentype?
+private perl_version ::= NUMBER_VERSION | NUMBER
+private perl_handle ::=  perl_handle_basic | LEFT_BRACE scalar_expr RIGHT_BRACE | <<parseExpressionLevel 21>>
+private perl_handle_basic ::= HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 
 private scalar_constant ::=
-    PERL_NUMBER
-    | PERL_NUMBER_VERSION
-    | PERL_TAG  // __PACKAGE__ etc.
+    NUMBER
+    | NUMBER_VERSION
+    | TAG  // __PACKAGE__ etc.
     | string
 
-braced_string ::= "{" PERL_STRING_CONTENT "}"
+braced_string ::= LEFT_BRACE STRING_CONTENT RIGHT_BRACE
 
 private array_constant ::=
     string_list
 
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
-private string_quoted ::= PERL_QUOTE [PERL_STRING_CONTENT] PERL_QUOTE
+private string_quoted ::= QUOTE [STRING_CONTENT] QUOTE
 string_dq ::=
-    "\"" [PERL_STRING_CONTENT] "\""
+    QUOTE_DOUBLE [STRING_CONTENT] QUOTE_DOUBLE
      | RESERVED_QQ string_quoted
 
 string_sq ::=
-    "'" [PERL_STRING_CONTENT] "'"
+    QUOTE_SINGLE [STRING_CONTENT] QUOTE_SINGLE
     | RESERVED_Q string_quoted
-    | PERL_STRING_CONTENT
+    | STRING_CONTENT
 
 string_xq ::=
-    "`" [PERL_STRING_CONTENT] "`"
+    QUOTE_TICK [STRING_CONTENT] QUOTE_TICK
     | RESERVED_QX string_quoted
 
-heredoc_opener ::= '<<' ( string_xq | string_dq | string_sq | PERL_STRING_CONTENT )
+heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT )
 
-string_list ::= RESERVED_QW PERL_QUOTE PERL_STRING_CONTENT * PERL_QUOTE
+string_list ::= RESERVED_QW QUOTE STRING_CONTENT * QUOTE
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-array_index_variable ::= PERL_SIGIL_SCALAR_INDEX [scalar_sigils] variable_body
+array_index_variable ::= SIGIL_SCALAR_INDEX [scalar_sigils] variable_body
 
-scalar_variable ::= PERL_SIGIL_SCALAR [scalar_sigils] variable_body
+scalar_variable ::= SIGIL_SCALAR [scalar_sigils] variable_body
 
-array_variable ::= PERL_SIGIL_ARRAY [scalar_sigils] variable_body
+array_variable ::= SIGIL_ARRAY [scalar_sigils] variable_body
 
-hash_variable ::= PERL_SIGIL_HASH [scalar_sigils] variable_body
+hash_variable ::= SIGIL_HASH [scalar_sigils] variable_body
 
-scalar_sigils ::= PERL_SIGIL_SCALAR+
+scalar_sigils ::= SIGIL_SCALAR+
 
-glob_variable ::= PERL_SIGIL_GLOB glob_name [glob_slot_part]
-private glob_slot_part ::= PERL_LBRACE glob_slot PERL_RBRACE {pin=1}
+glob_variable ::= SIGIL_GLOB glob_name [glob_slot_part]
+private glob_slot_part ::= ( LEFT_BRACE expr RIGHT_BRACE | braced_string )
 private glob_name ::= variable_body | scalar_variable
-glob_slot ::=
-    "SCALAR"
-    | "ARRAY"
-    | "HASH"
-    | "CODE"
-    | "IO"
-    | "GLOB"
-    | "FORMAT"
-    | "NAME"
-    | "PACKAGE"
-    | expr
-
 
 private variable_body ::=
     variable_body_braced
@@ -750,19 +875,19 @@ private variable_body ::=
     | variable_body_namespace_braced
     | variable_body_namespace
 
-private variable_body_namespace_braced ::= PERL_LBRACE namespace_element PERL_RBRACE {pin=2}
+private variable_body_namespace_braced ::= LEFT_BRACE namespace_element RIGHT_BRACE {pin=2}
 private variable_body_namespace ::= namespace_element
-private variable_body_braced ::= PERL_LBRACE [namespace_element] variable_name_element PERL_RBRACE {pin=3}
+private variable_body_braced ::= LEFT_BRACE [namespace_element] variable_name_element RIGHT_BRACE {pin=3}
 private variable_body_canonical ::= [namespace_element] variable_name_element {pin=2}
 
-private variable_name_element ::= PERL_VARIABLE_NAME
+private variable_name_element ::= VARIABLE_NAME
 
-private comma ::= PERL_COMMA | PERL_ARROW_COMMA
+private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::=
     namespace_element sub_name_element         // package::method
-    | sub_name_element [namespace_element &PERL_LPAREN]       // method package
+    | sub_name_element [namespace_element &LEFT_PAREN]       // method package
 
-private sub_name_element ::= PERL_SUB
+private sub_name_element ::= SUB
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private annotations ::= annotation+
@@ -787,8 +912,8 @@ annotation_returns_arrayref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespa
 annotation_returns_hashref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_braced
 annotation_incomplete ::= ANNOTATION_PREFIX
 
-private namespace_element_bracketed ::= PERL_LBRACK namespace_element PERL_RBRACK {name="[Package::Name]"}
-private namespace_element_braced ::= PERL_LBRACE namespace_element PERL_RBRACE {name="{Package::Name}"}
+private namespace_element_bracketed ::= LEFT_BRACKET namespace_element RIGHT_BRACKET {name="[Package::Name]"}
+private namespace_element_braced ::= LEFT_BRACE namespace_element RIGHT_BRACE {name="{Package::Name}"}
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
-private namespace_element ::= PERL_PACKAGE {name="Package::Name"}
+private namespace_element ::= PACKAGE {name="Package::Name"}

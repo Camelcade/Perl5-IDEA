@@ -108,8 +108,6 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
 X_OP_STICKED = "x"[0-9]+[^a-zA-Z]*
 
-PERL_OPERATORS =  ","  | "++" | "--" | "**" | "!" | "~" | "\\" | "+" | "-" | "=~" | "!~" | "<<" | ">>" | "<" | ">" | "<=" | ">=" | "==" | "!=" | "<=>" | "~~" | "|" | "^" | "&&" | "||" | "/" | ".." | "..." | "?" | "=" | "+=" | "-=" | "*="
-
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC][^a-zA-Z0-9_]
 
@@ -142,21 +140,22 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_HEREDOC_OPENER>
 {
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {BAREWORD}     {popState();return PERL_STRING_CONTENT;}
+    {BAREWORD}     {popState();return STRING_CONTENT;}
     {QUOTE}        {popState();return processStringOpener();}
     [^]            {throw new Error("Can't be here");}
 }
 
 //exclusive
 <LEX_HEREDOC_MARKER>{
-    {ANYWORD}+   {popState();return PERL_HEREDOC_END;}
+    {ANYWORD}+   {popState();return HEREDOC_END;}
 }
 
 // exclusive
 <LEX_HANDLE_READ>
 {
     {BAREWORD} {endCustomBlock();return getHandleTokenType();}
-    "<" {return PERL_LANGLE;}
+    "<" {return LEFT_ANGLE;}
+    ">" {endCustomBlock();return RIGHT_ANGLE;}
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -170,9 +169,9 @@ TRANS_MODIFIERS = [cdsr]
             return guessBareword();
         }
         else
-            return PERL_LABEL;
+            return LABEL;
     }
-    ":" {endCustomBlock(); return PERL_COLON;}
+    ":" {endCustomBlock(); return COLON;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     . {yypushback(1);endCustomBlock();break;}
@@ -181,7 +180,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_BAREWORD_STRING_COMMA>
 {
-    {BAREWORD_MINUS}   {endCustomBlock(); return PERL_STRING_CONTENT; }
+    {BAREWORD_MINUS}   {endCustomBlock(); return STRING_CONTENT; }
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -204,16 +203,16 @@ TRANS_MODIFIERS = [cdsr]
     "{" {popState();yypushback(1);break;}   // block of definition
     ";" {popState();yypushback(1);break;}   // end of declaration
     ":" {popState();yypushback(1);break;}   // attribute
-    "(" {yybegin(LEX_SUB_PROTOTYPE);return PERL_LPAREN;}
+    "(" {yybegin(LEX_SUB_PROTOTYPE);return LEFT_PAREN;}
 }
 
 // exclusive
 <LEX_SUB_PROTOTYPE>
 {
-    ")" {popState();return PERL_RPAREN;}
+    ")" {popState();return RIGHT_PAREN;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    .   {return PERL_SUB_PROTOTYPE_TOKEN; }
+    .   {return SUB_PROTOTYPE_TOKEN; }
 }
 
 // inclusive states
@@ -257,7 +256,7 @@ TRANS_MODIFIERS = [cdsr]
 }
 
 <LEX_TRANS_MODIFIERS>{
-    {TRANS_MODIFIERS} {return PERL_REGEX_MODIFIER;}
+    {TRANS_MODIFIERS} {return REGEX_MODIFIER;}
     {CHAR_ANY}   { popState(); yypushback(1); break; }
 }
 
@@ -297,34 +296,108 @@ TRANS_MODIFIERS = [cdsr]
 }
 
 <LEX_QUOTE_LIKE_LIST_CLOSER>{
-    .   { popState(); return PERL_QUOTE; }
+    .   { popState(); return QUOTE; }
 }
 
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 
 {HEREDOC_OPENER}   {return processHeredocOpener();}
-
 {QUOTE}         {return processStringOpener();}
 
-"?"             {trenarCounter++;return PERL_OPERATOR;}
-":"             {trenarCounter--;return PERL_COLON;}
-"->"            {return PERL_DEREFERENCE;}
-"=>"            {return PERL_ARROW_COMMA; } // for barewords in array
-","            {return PERL_COMMA; }
-"{"             {return PERL_LBRACE;}
-"}"             {return PERL_RBRACE;}
-"["             {return PERL_LBRACK;}
-"]"             {return PERL_RBRACK;}
-"("             {return PERL_LPAREN;}
-")"             {return PERL_RPAREN;}
-"<"             {return PERL_LANGLE;}
-">"             {return PERL_RANGLE;}
+"<=>" {return OPERATOR_CMP_NUMERIC;}
+"<=" {return OPERATOR_LE_NUMERIC;}
+">=" {return OPERATOR_GE_NUMERIC;}
+"==" {return OPERATOR_EQ_NUMERIC;}
+"!=" {return OPERATOR_NE_NUMERIC;}
+"<" {return OPERATOR_LT_NUMERIC;}
+">" {return OPERATOR_GT_NUMERIC;}
+
+"->" {return OPERATOR_DEREFERENCE;}
+"=>" {return OPERATOR_COMMA_ARROW;}
+"," {return OPERATOR_COMMA;}
+
+"..." {return OPERATOR_HELLIP;}
+".." {return OPERATOR_FLIP_FLOP;}
+"." {return OPERATOR_CONCAT;}
+
+"++" {return OPERATOR_PLUS_PLUS;}
+"--" {return OPERATOR_MINUS_MINUS;}
+"**" {return OPERATOR_POW;}
+
+"=~" {return OPERATOR_RE;}
+"!~" {return OPERATOR_NOT_RE;}
+
+"<<" {return OPERATOR_SHIFT_LEFT;}
+">>" {return OPERATOR_SHIFT_RIGHT;}
+"~~" {return OPERATOR_SMARTMATCH;}
+
+"&&" {return OPERATOR_AND;}
+"||" {return OPERATOR_OR;}
+"//" {return OPERATOR_OR_DEFINED;} // guessDiv
+"!" {return OPERATOR_NOT;}
+
+"**=" {return OPERATOR_POW_ASSIGN;}
+
+"+=" {return OPERATOR_PLUS_ASSIGN;}
+"-=" {return OPERATOR_MINUS_ASSIGN;}
+".=" {return OPERATOR_CONCAT_ASSIGN;}
+
+"*=" {return OPERATOR_MUL_ASSIGN;}
+"/=" {return OPERATOR_DIV_ASSIGN;}   // guessDiv
+"%=" {return OPERATOR_MOD_ASSIGN;}
+"x=" {return OPERATOR_X_ASSIGN;}
+
+"&=" {return OPERATOR_BITWISE_AND_ASSIGN;}
+"|=" {return OPERATOR_BITWISE_OR_ASSIGN;}
+"^=" {return OPERATOR_BITWISE_XOR_ASSIGN;}
+
+"<<=" {return OPERATOR_SHIFT_LEFT_ASSIGN;}
+">>=" {return OPERATOR_SHIFT_RIGHT_ASSIGN;}
+
+"&&=" {return OPERATOR_AND_ASSIGN;}
+"||=" {return OPERATOR_OR_ASSIGN;}
+"//=" {return OPERATOR_OR_DEFINED_ASSIGN;} // guessDiv
+
+"?"  {trenarCounter++;return OPERATOR_TRENAR_IF;}
+":"  {return guessColon();}
+
+"\\" {return OPERATOR_REFERENCE;}
+
+"+" {return OPERATOR_PLUS;}
+"-" {return OPERATOR_MINUS;}
+"/"   {   // regexp or div
+    IElementType tokenType = guessDiv();
+    if( tokenType == null )
+        break;
+    return tokenType;
+}
+"*" {return guessMul();}    // mul or glob sigil
+"%" {return guessMod();}
 
 
-{NUMBER_HEX}        {return PERL_NUMBER;}
-{NUMBER}        {return PERL_NUMBER;}
-{PERL_VERSION}  {return PERL_NUMBER_VERSION;}
+"&" {return guessAmp();}    // bitwise and or code sigil
+"|" {return OPERATOR_BITWISE_OR;}
+"^" {return OPERATOR_BITWISE_XOR;}
+"~" {return OPERATOR_BITWISE_NOT;}
+
+"=" {return OPERATOR_ASSIGN;}
+
+"@" {return SIGIL_ARRAY;}
+"$#" {return SIGIL_SCALAR_INDEX;}
+"$" {return SIGIL_SCALAR;}
+
+"{"             {return LEFT_BRACE;}
+"}"             {return RIGHT_BRACE;}
+"["             {return LEFT_BRACKET;}
+"]"             {return RIGHT_BRACKET;}
+"("             {return LEFT_PAREN;}
+")"             {return RIGHT_PAREN;}
+
+
+{NUMBER_HEX}        {return NUMBER;}
+{NUMBER}        {return NUMBER;}
+{PERL_VERSION}  {return NUMBER_VERSION;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 
@@ -333,24 +406,12 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_ARRAY_INDEX_BUILT_IN} {yypushback(1);return parseBuiltInVariable();}
 {PERL_HASH_BUILT_IN}        {yypushback(1);return parseBuiltInVariable();}
 
-"@" {return PERL_SIGIL_ARRAY;}
-"%" {return guessMod();}
-"*" {return guessMul();}
-"&" {return guessAmp();}
-"$#" {return PERL_SIGIL_SCALAR_INDEX;}
-"$" {return PERL_SIGIL_SCALAR;}
 
 "sub" {pushState();yybegin(LEX_SUB_NAME);return getReservedTokenType();}
-"/"   {   // regexp or div
-    IElementType tokenType = guessDiv();
-    if( tokenType == null )
-        break;
-    return tokenType;
-}
+
 {BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
-{PERL_OPERATORS}    {return PERL_OPERATOR;}
-{PERL_OPERATORS_FILETEST} {yypushback(1);return PERL_OPERATOR_FILETEST;}
-{X_OP_STICKED} {yypushback(yylength()-1);return PERL_OPERATOR_X;}
+{PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
+{X_OP_STICKED} {yypushback(yylength()-1);return OPERATOR_X;}
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
 {CAPTURE_HANDLE_READ} {startCustomBlock(LEX_HANDLE_READ);break;}
 

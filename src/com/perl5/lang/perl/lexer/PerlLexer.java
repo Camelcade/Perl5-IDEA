@@ -42,11 +42,11 @@ public class PerlLexer extends PerlLexerGenerated
 	protected static final TokenSet UNSIGNIFICANT_TOKENS = TokenSet.create(
 			TokenType.NEW_LINE_INDENT,
 			TokenType.WHITE_SPACE,
-			PERL_COMMENT,
-			PERL_COMMENT_BLOCK,
-			PERL_POD,
-			PERL_HEREDOC,
-			PERL_HEREDOC_END
+			COMMENT_LINE,
+			COMMENT_BLOCK,
+			POD,
+			HEREDOC,
+			HEREDOC_END
 	);
 	protected IElementType lastSignificantTokenType;
 	protected String lastSignificantToken;
@@ -66,21 +66,21 @@ public class PerlLexer extends PerlLexerGenerated
 
 	static
 	{
-		SIGIL_TOKENS_MAP.put("$#", PERL_SIGIL_SCALAR_INDEX);
-		SIGIL_TOKENS_MAP.put("$", PERL_SIGIL_SCALAR);
-		SIGIL_TOKENS_MAP.put("@", PERL_SIGIL_ARRAY);
-		SIGIL_TOKENS_MAP.put("%", PERL_SIGIL_HASH);
-		SIGIL_TOKENS_MAP.put("*", PERL_SIGIL_GLOB);
-		SIGIL_TOKENS_MAP.put("&", PERL_SIGIL_CODE);
+		SIGIL_TOKENS_MAP.put("$#", SIGIL_SCALAR_INDEX);
+		SIGIL_TOKENS_MAP.put("$", SIGIL_SCALAR);
+		SIGIL_TOKENS_MAP.put("@", SIGIL_ARRAY);
+		SIGIL_TOKENS_MAP.put("%", SIGIL_HASH);
+		SIGIL_TOKENS_MAP.put("*", SIGIL_GLOB);
+		SIGIL_TOKENS_MAP.put("&", SIGIL_CODE);
 	}
 
 	// pre-variable name tokens
 	protected static final TokenSet SIGILS_TOKENS = TokenSet.create(
-			PERL_SIGIL_ARRAY,
-			PERL_SIGIL_HASH,
-			PERL_SIGIL_SCALAR,
-			PERL_SIGIL_SCALAR_INDEX,
-			PERL_SIGIL_GLOB
+			SIGIL_ARRAY,
+			SIGIL_HASH,
+			SIGIL_SCALAR,
+			SIGIL_SCALAR_INDEX,
+			SIGIL_GLOB
 	);
 
 
@@ -107,7 +107,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 	// tokens which preceeds filehandle bareword
 	public static final HashSet<IElementType> preHandleTokenTypes = new HashSet<>(Arrays.asList(
-			PERL_OPERATOR_FILETEST
+			OPERATOR_FILETEST
 	));
 
 	public static final TokenSet preHandleTokenTypesPrint = TokenSet.create(
@@ -171,37 +171,33 @@ public class PerlLexer extends PerlLexerGenerated
 	static
 	{
 		// named operators
-		namedOperators.put("not", PERL_OPERATOR_NOT);
-		namedOperators.put("x", PERL_OPERATOR_X);
+		namedOperators.put("x", OPERATOR_X);
 
-		namedOperators.put("and", PERL_OPERATOR);
-		namedOperators.put("or", PERL_OPERATOR);
-		namedOperators.put("xor", PERL_OPERATOR);
-		namedOperators.put("lt", PERL_OPERATOR);
-		namedOperators.put("gt", PERL_OPERATOR);
-		namedOperators.put("le", PERL_OPERATOR);
-		namedOperators.put("ge", PERL_OPERATOR);
-		namedOperators.put("eq", PERL_OPERATOR);
-		namedOperators.put("ne", PERL_OPERATOR);
-		namedOperators.put("cmp", PERL_OPERATOR);
+		namedOperators.put("not", OPERATOR_NOT_LP);
+		namedOperators.put("and", OPERATOR_AND_LP);
+		namedOperators.put("or", OPERATOR_OR_LP);
+		namedOperators.put("xor", OPERATOR_XOR_LP);
 
-		namedOperators.put("dfined", PERL_OPERATOR_UNARY);
-		namedOperators.put("ref", PERL_OPERATOR_UNARY);
-		namedOperators.put("exists", PERL_OPERATOR_UNARY);
-		namedOperators.put("scalar", PERL_OPERATOR_UNARY);
+		namedOperators.put("lt", OPERATOR_LT_STR);
+		namedOperators.put("gt", OPERATOR_GT_STR);
+		namedOperators.put("le", OPERATOR_LE_STR);
+		namedOperators.put("ge", OPERATOR_GE_STR);
+		namedOperators.put("eq", OPERATOR_EQ_STR);
+		namedOperators.put("ne", OPERATOR_NE_STR);
+		namedOperators.put("cmp", OPERATOR_CMP_STR);
 
 		// block names
-		blockNames.put("BEGIN", PERL_BLOCK_NAME);
-		blockNames.put("UNITCHECK", PERL_BLOCK_NAME);
-		blockNames.put("CHECK", PERL_BLOCK_NAME);
-		blockNames.put("INIT", PERL_BLOCK_NAME);
-		blockNames.put("END", PERL_BLOCK_NAME);
+		blockNames.put("BEGIN", BLOCK_NAME);
+		blockNames.put("UNITCHECK", BLOCK_NAME);
+		blockNames.put("CHECK", BLOCK_NAME);
+		blockNames.put("INIT", BLOCK_NAME);
+		blockNames.put("END", BLOCK_NAME);
 
 		// tags
-		tagNames.put("__FILE__", PERL_TAG);
-		tagNames.put("__LINE__", PERL_TAG);
-		tagNames.put("__PACKAGE__", PERL_TAG);
-		tagNames.put("__SUB__", PERL_TAG);
+		tagNames.put("__FILE__", TAG);
+		tagNames.put("__LINE__", TAG);
+		tagNames.put("__PACKAGE__", TAG);
+		tagNames.put("__SUB__", TAG);
 
 		// reserved
 		reservedTokenTypes.put("if", RESERVED_IF);
@@ -209,6 +205,7 @@ public class PerlLexer extends PerlLexerGenerated
 		reservedTokenTypes.put("elsif", RESERVED_ELSIF);
 		reservedTokenTypes.put("else", RESERVED_ELSE);
 		reservedTokenTypes.put("given", RESERVED_GIVEN);
+		reservedTokenTypes.put("when", RESERVED_WHEN);
 		reservedTokenTypes.put("while", RESERVED_WHILE);
 		reservedTokenTypes.put("until", RESERVED_UNTIL);
 		reservedTokenTypes.put("for", RESERVED_FOR);
@@ -339,7 +336,7 @@ public class PerlLexer extends PerlLexerGenerated
 					// found string
 					setTokenStart(tokenStart);
 					setTokenEnd(currentPosition);
-					return PERL_STRING_CONTENT;
+					return STRING_CONTENT;
 				} else
 					// empty string
 					return quoteLikeCloser(tokenStart);
@@ -354,7 +351,7 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(bufferEnd);
-				return PERL_COMMENT_BLOCK;
+				return COMMENT_BLOCK;
 			}
 			// capture line comment
 			else if (
@@ -385,7 +382,7 @@ public class PerlLexer extends PerlLexerGenerated
 				}
 
 				setTokenEnd(currentPosition);
-				return PERL_COMMENT;
+				return COMMENT_LINE;
 			}
 
 		}
@@ -408,19 +405,19 @@ public class PerlLexer extends PerlLexerGenerated
 			lastSignificantTokenType = tokenType;
 			lastSignificantToken = lastToken;
 
-			if (tokenType != PERL_LBRACE)
+			if (tokenType != LEFT_BRACE)
 			{
 				lastUnbraceTokenType = tokenType;
 				lastUnbraceToken = lastToken;
 			}
 
-			if (tokenType != PERL_LPAREN)
+			if (tokenType != LEFT_PAREN)
 			{
 				lastUnparenTokenType = tokenType;
 				lastUnparenToken = lastToken;
 			}
 
-			if (yystate() == 0 && tokenType != PERL_SEMI) // to ensure proper highlighting reparsing
+			if (yystate() == 0 && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
 				yybegin(LEX_CODE);
 		}
 	}
@@ -468,7 +465,7 @@ public class PerlLexer extends PerlLexerGenerated
 				{
 					if (pm.group(1) != null && pm.group(1).length() > 0)
 					{
-						tokensList.add(new CustomToken(baseOffset, baseOffset + pm.group(1).length(), PERL_PACKAGE));
+						tokensList.add(new CustomToken(baseOffset, baseOffset + pm.group(1).length(), PACKAGE));
 						baseOffset += pm.group(1).length();
 					}
 
@@ -481,7 +478,7 @@ public class PerlLexer extends PerlLexerGenerated
 			tailComment = annotationLine;
 
 		if (tailComment != null && tailComment.length() > 0)
-			tokensList.add(new CustomToken(baseOffset, baseOffset + tailComment.length(), PERL_COMMENT));
+			tokensList.add(new CustomToken(baseOffset, baseOffset + tailComment.length(), COMMENT_LINE));
 
 		if (tokensList.size() > 0)
 		{
@@ -493,6 +490,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 	/**
 	 * Processes quote closer token
+	 * fixme this can be done as pre-parsing on string capture
 	 *
 	 * @param tokenStart offset of current token start
 	 * @return quote element type
@@ -502,7 +500,7 @@ public class PerlLexer extends PerlLexerGenerated
 		popState();
 		setTokenStart(tokenStart);
 		setTokenEnd(tokenStart + 1);
-		return PERL_QUOTE;
+		return getQuoteToken(getBuffer().charAt(tokenStart));
 	}
 
 
@@ -551,7 +549,7 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 		}
 
-		return PERL_POD;
+		return POD;
 	}
 
 	/**
@@ -579,7 +577,7 @@ public class PerlLexer extends PerlLexerGenerated
 		if (m.matches())
 		{
 			if (m.group(1).matches("\\d+"))    // check if it's numeric shift
-				return PERL_OPERATOR;
+				return OPERATOR_SHIFT_LEFT;
 			heredocMarker = m.group(1);
 		}
 
@@ -588,7 +586,7 @@ public class PerlLexer extends PerlLexerGenerated
 		pushState();
 		yybegin(LEX_HEREDOC_OPENER);
 
-		return PERL_OPERATOR;
+		return OPERATOR_HEREDOC;
 	}
 
 	/**
@@ -611,7 +609,7 @@ public class PerlLexer extends PerlLexerGenerated
 //		if( "SQL".equals(heredocMarker))
 //			blockType = PerlTokenType.HEREDOC_SQL;
 //		else
-		blockType = PERL_HEREDOC;
+		blockType = HEREDOC;
 
 		String endPattern = "^" + heredocMarker + "[\r\n]+";
 
@@ -766,17 +764,18 @@ public class PerlLexer extends PerlLexerGenerated
 	 **/
 	String regexCommand = null;
 
-	// guess if this is a PERL_OPERATOR_DIV or regex opener
+	// guess if this is a OPERATOR_DIV or regex opener
 	public IElementType guessDiv()
 	{
-		if (    // seems regex, @todo map types and words
+		if (    // seems regex, @todo map types and words / make sets
 				lastSignificantTokenType == null
-						|| lastSignificantTokenType == PERL_OPERATOR
-						|| lastSignificantTokenType == PERL_OPERATOR_X
-						|| lastSignificantTokenType == PERL_LPAREN
-						|| lastSignificantTokenType == PERL_LBRACE
-						|| lastSignificantTokenType == PERL_LBRACK
-						|| lastSignificantTokenType == PERL_SEMI
+						|| lastSignificantTokenType == OPERATOR_RE
+						|| lastSignificantTokenType == OPERATOR_NOT_RE
+//						|| lastSignificantTokenType == OPERATOR_X
+						|| lastSignificantTokenType == LEFT_PAREN
+						|| lastSignificantTokenType == LEFT_BRACE
+						|| lastSignificantTokenType == LEFT_BRACKET
+						|| lastSignificantTokenType == SEMICOLON
 						|| lastSignificantTokenType == RESERVED_IF
 						|| lastSignificantTokenType == RESERVED_UNLESS
 						|| "return".equals(lastSignificantToken)
@@ -800,17 +799,17 @@ public class PerlLexer extends PerlLexerGenerated
 			if (!isLastToken() && getBuffer().charAt(getNextTokenStart()) == '/')
 			{
 				setTokenEnd(getNextTokenStart() + 1);
-				return PERL_OPERATOR;
+				return OPERATOR_OR_DEFINED;
 			} else
 			{
-				return PERL_OPERATOR_DIV;
+				return OPERATOR_DIV;
 			}
 		}
 	}
 
 
 	/**
-	 * Here we should decide if it's PERL_OPERATOR_MUL or PERL_SIGIL_GLOB
+	 * Here we should decide if it's OPERATOR_MUL or PERL_SIGIL_GLOB
 	 *
 	 * @return proper token type
 	 */
@@ -824,13 +823,13 @@ public class PerlLexer extends PerlLexerGenerated
 								|| nextChar == '_'                    // *{...
 								|| Character.isLetter(nextChar)    // *[a-z]...
 				)))
-			return PERL_SIGIL_GLOB;
+			return SIGIL_GLOB;
 
-		return PERL_OPERATOR_MUL;
+		return OPERATOR_MUL;
 	}
 
 	/**
-	 * Here we should decide if it's PERL_OPERATOR_AMP or PERL_SIGIL_CODE
+	 * Here we should decide if it's OPERATOR_AMP or PERL_SIGIL_CODE
 	 *
 	 * @return proper token type
 	 */
@@ -846,13 +845,13 @@ public class PerlLexer extends PerlLexerGenerated
 //						|| nextChar == '$'                // &$... fixme this triggers in wrong places
 						|| Character.isLetter(nextChar)    // &[a-z]...
 		)))
-			return PERL_SIGIL_CODE;
+			return SIGIL_CODE;
 
-		return PERL_OPERATOR_AMP;
+		return OPERATOR_BITWISE_AND;
 	}
 
 	/**
-	 * Here we should decide if it's PERL_OPERATOR_MOD or PERL_SIGIL_HASH
+	 * Here we should decide if it's OPERATOR_MOD or PERL_SIGIL_HASH
 	 *
 	 * @return proper token type
 	 */
@@ -867,9 +866,9 @@ public class PerlLexer extends PerlLexerGenerated
 								|| nextChar == '$'                // %$...
 								|| Character.isLetter(nextChar)    // %[a-z]...
 				)))
-			return PERL_SIGIL_HASH;
+			return SIGIL_HASH;
 
-		return PERL_OPERATOR_MOD;
+		return OPERATOR_MOD;
 	}
 
 
@@ -911,7 +910,7 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 //			System.err.println("Stop after first block");
 			yybegin(YYINITIAL);
-			return PERL_REGEX_QUOTE_OPEN;
+			return REGEX_QUOTE_OPEN;
 		}
 		int currentOffset = firstBlock.getEndOffset();
 
@@ -946,13 +945,13 @@ public class PerlLexer extends PerlLexerGenerated
 						{
 							currentOffset++;
 						}
-						betweenBlocks.add(new CustomToken(commentStart, currentOffset, PERL_COMMENT));
+						betweenBlocks.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 					} else
 						break;
 				}
 
 				// read block
-				secondBlockOpener = new CustomToken(currentOffset, currentOffset + 1, PERL_REGEX_QUOTE_OPEN);
+				secondBlockOpener = new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_OPEN);
 				secondBLock = RegexBlock.parseBlock(buffer, currentOffset + 1, bufferEnd, buffer.charAt(currentOffset));
 			}
 
@@ -960,7 +959,7 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 //				System.err.println("Stop after second block");
 				yybegin(YYINITIAL);
-				return PERL_REGEX_QUOTE_OPEN;
+				return REGEX_QUOTE_OPEN;
 			}
 			currentOffset = secondBLock.getEndOffset();
 		}
@@ -983,7 +982,7 @@ public class PerlLexer extends PerlLexerGenerated
 			else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
 				isEvaluated = true;
 
-			modifierTokens.add(new CustomToken(modifiersEnd, modifiersEnd + 1, PERL_REGEX_MODIFIER));
+			modifierTokens.add(new CustomToken(modifiersEnd, modifiersEnd + 1, REGEX_MODIFIER));
 
 			modifiersEnd++;
 		}
@@ -1011,7 +1010,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		yybegin(LEX_PREPARSED_ITEMS);
 
-		return PERL_REGEX_QUOTE_OPEN;
+		return REGEX_QUOTE_OPEN;
 	}
 
 
@@ -1042,7 +1041,7 @@ public class PerlLexer extends PerlLexerGenerated
 		yybegin(LEX_TRANS_CHARS);
 		stringContentStart = getTokenStart() + 1;
 
-		return PERL_REGEX_QUOTE_OPEN;
+		return REGEX_QUOTE_OPEN;
 	}
 
 	public IElementType processTransChar()
@@ -1054,11 +1053,11 @@ public class PerlLexer extends PerlLexerGenerated
 			yypushback(1);
 			setTokenStart(stringContentStart);
 			yybegin(LEX_TRANS_CLOSER);
-			return PERL_STRING_CONTENT;
+			return STRING_CONTENT;
 		} else if (isLastToken())
 		{
 			setTokenStart(stringContentStart);
-			return PERL_STRING_CONTENT;
+			return STRING_CONTENT;
 		} else
 			isEscaped = (currentChar == '\\' && !isEscaped);
 
@@ -1082,7 +1081,7 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			yybegin(LEX_TRANS_MODIFIERS);
 		}
-		return PERL_REGEX_QUOTE_CLOSE;
+		return REGEX_QUOTE_CLOSE;
 	}
 
 
@@ -1111,7 +1110,7 @@ public class PerlLexer extends PerlLexerGenerated
 		if (!isLastToken())
 			yybegin(LEX_QUOTE_LIKE_CHARS);
 
-		return PERL_QUOTE;
+		return QUOTE;
 	}
 
 	/**
@@ -1124,7 +1123,21 @@ public class PerlLexer extends PerlLexerGenerated
 		pushState();
 		if (!isLastToken())
 			yybegin(LEX_QUOTE_LIKE_CHARS);
-		return PERL_QUOTE;
+
+		return getQuoteToken(charOpener);
+	}
+
+	public IElementType getQuoteToken(char quoteCharacter)
+	{
+		if( charOpener == '"')
+			return QUOTE_DOUBLE;
+		else if( charOpener == '`')
+			return QUOTE_TICK;
+		else if( charOpener == '\'')
+			return QUOTE_SINGLE;
+		else
+			return QUOTE;
+
 	}
 
 	/**
@@ -1151,7 +1164,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		yybegin(LEX_QUOTE_LIKE_WORDS);
 
-		return PERL_QUOTE;
+		return QUOTE;
 	}
 
 
@@ -1168,12 +1181,12 @@ public class PerlLexer extends PerlLexerGenerated
 				yypushback(currentToken.length() - i);
 				yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);
 
-				return i == 0 ? null : PERL_STRING_CONTENT;
+				return i == 0 ? null : STRING_CONTENT;
 			}
 
 			isEscaped = !isEscaped && currentToken.charAt(i) == '\\';
 		}
-		return PERL_STRING_CONTENT;
+		return STRING_CONTENT;
 	}
 
 
@@ -1191,7 +1204,7 @@ public class PerlLexer extends PerlLexerGenerated
 			stateStack.pop();
 			stateStack.push(YYINITIAL);
 		}
-		return PERL_SEMI;
+		return SEMICOLON;
 	}
 
 	/**
@@ -1217,7 +1230,7 @@ public class PerlLexer extends PerlLexerGenerated
 			String name = m.group(2);
 
 			tokenStart += sigil.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), PERL_VARIABLE_NAME));
+			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
 
 			yypushback(tokenText.length() - sigil.length());
 			return getSigilTokenType(sigil);
@@ -1230,11 +1243,11 @@ public class PerlLexer extends PerlLexerGenerated
 			String name = m.group(2);
 
 			tokenStart += sigil.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, PERL_LBRACE));
+			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, LEFT_BRACE));
 			tokenStart++;
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), PERL_VARIABLE_NAME));
+			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
 			tokenStart += name.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, PERL_RBRACE));
+			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, RIGHT_BRACE));
 
 			yypushback(tokenText.length() - sigil.length());
 			return getSigilTokenType(sigil);
@@ -1275,7 +1288,7 @@ public class PerlLexer extends PerlLexerGenerated
 		String handleName = yytext().toString();
 		if (!knownHandles.contains(handleName))
 			knownHandles.add(handleName);
-		return PERL_HANDLE;
+		return HANDLE;
 	}
 
 	/**
@@ -1289,7 +1302,7 @@ public class PerlLexer extends PerlLexerGenerated
 		String packageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
 		if (!knownPackages.contains(packageName))
 			knownPackages.add(packageName);
-		return PERL_PACKAGE;
+		return PACKAGE;
 	}
 
 	@Override
@@ -1298,7 +1311,17 @@ public class PerlLexer extends PerlLexerGenerated
 		String subName = yytext().toString();
 		if (!knownSubs.contains(subName))
 			knownSubs.add(subName);
-		return PERL_SUB;
+		return SUB;
+	}
+
+	// fixme this is bad. Can be $smth ? sub{ label: ...} : $other;
+	public IElementType guessColon()
+	{
+		if( trenarCounter == 0 )
+			return COLON;
+
+		trenarCounter--;
+		return OPERATOR_TRENAR_ELSE;
 	}
 
 	private static final Pattern ambigousPackage = Pattern.compile("((?:(?:::)*[_a-zA-Z][_a-zA-Z0-9]*)?(?:(?:::)+[_a-zA-Z][_a-zA-Z0-9]*)*(?:::)+)([_a-zA-Z][_a-zA-Z0-9]*)");
@@ -1334,7 +1357,7 @@ public class PerlLexer extends PerlLexerGenerated
 		if (SIGILS_TOKENS.contains(lastSignificantTokenType)) // got package variable
 		{
 			tokensList.clear();
-			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), PERL_VARIABLE_NAME));
+			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), VARIABLE_NAME));
 			pushState();
 			yybegin(LEX_PREPARSED_ITEMS);
 			setTokenEnd(getTokenStart() + subPackageName.length());
@@ -1348,7 +1371,7 @@ public class PerlLexer extends PerlLexerGenerated
 		} else // guess it's sub
 		{
 			tokensList.clear();
-			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), PERL_SUB));
+			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));
 			pushState();
 			yybegin(LEX_PREPARSED_ITEMS);
 			setTokenEnd(getTokenStart() + subPackageName.length());
@@ -1374,8 +1397,8 @@ public class PerlLexer extends PerlLexerGenerated
 		Character nextSignificantCharacter = getNextSignificantCharacter();
 
 		// ->bareword
-		if (lastSignificantTokenType == PERL_DEREFERENCE)
-			return PERL_SUB;
+		if (lastSignificantTokenType == OPERATOR_DEREFERENCE)
+			return SUB;
 			// BEGIN, INIT, etc
 		else if ((tokenType = blockNames.get(bareword)) != null)
 			return tokenType;
@@ -1391,14 +1414,14 @@ public class PerlLexer extends PerlLexerGenerated
 			// filetest [(] bareword (])
 		else if (preHandleTokenTypes.contains(lastUnparenTokenType)
 				&& !((Character) '(').equals(nextSignificantCharacter)
-				&& (lastSignificantTokenType != PERL_LPAREN || ((Character) ')').equals(nextSignificantCharacter))
+				&& (lastSignificantTokenType != LEFT_PAREN || ((Character) ')').equals(nextSignificantCharacter))
 				)
 			return getHandleTokenType();
 			// $/@/... bareword
 		else if (SIGILS_TOKENS.contains(lastUnbraceTokenType)
-				&& (lastSignificantTokenType != PERL_LBRACE || ((Character) '}').equals(nextSignificantCharacter))
+				&& (lastSignificantTokenType != LEFT_BRACE || ((Character) '}').equals(nextSignificantCharacter))
 				)
-			return PERL_VARIABLE_NAME;
+			return VARIABLE_NAME;
 			// reserved bareword
 		else if ((tokenType = reservedTokenTypes.get(bareword)) != null)
 		{
@@ -1415,16 +1438,16 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 		// next/redo/last/goto bareword
 		else if (preLabelTokenTypes.contains(lastUnparenTokenType))
-			return PERL_LABEL;
+			return LABEL;
 		// previously confirmed handles
 		else if (knownHandles.contains(bareword))
-			return PERL_HANDLE;
+			return HANDLE;
 			// previously confirmed packages
 		else if (knownPackages.contains(bareword))
-			return PERL_PACKAGE;
+			return PACKAGE;
 			// built in filehandles
 		else if (PerlGlobUtil.BUILT_IN.contains(bareword))
-			return PERL_HANDLE;
+			return HANDLE;
 			// open/binmode/etc with filehandle
 		else if (preHandleTokens.contains(lastUnparenToken) && preHandleProperSuffix.contains(nextSignificantCharacter))
 			return getHandleTokenType();
@@ -1438,10 +1461,10 @@ public class PerlLexer extends PerlLexerGenerated
 		else if (PerlSubUtil.BUILT_IN.contains(bareword))
 			return getSubTokenType();
 			// braced string
-		else if (lastSignificantTokenType == PERL_LBRACE && ((Character) '}').equals(nextSignificantCharacter))
-			return PERL_STRING_CONTENT;
+		else if (lastSignificantTokenType == LEFT_BRACE && ((Character) '}').equals(nextSignificantCharacter))
+			return STRING_CONTENT;
 
-		return PERL_SUB;
+		return SUB;
 	}
 
 	/**
