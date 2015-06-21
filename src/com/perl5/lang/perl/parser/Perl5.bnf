@@ -87,6 +87,10 @@ limitations under the License.
     RESERVED_PRINTF="printf"
     RESERVED_SAY="say"
 
+    RESERVED_MAP="map"
+    RESERVED_GREP="grep"
+    RESERVED_SORT="sort"
+
     RESERVED_UNDEF="undef"
 
     RESERVED_QW="qw"
@@ -455,35 +459,51 @@ private use_module_parameters ::= namespace_element [perl_version] [expr];
 private use_version_parameters ::= perl_version;
 
 undef_expr ::= RESERVED_UNDEF (variable | LEFT_PAREN variable RIGHT_PAREN) ? {pin=1}
-require_expr ::= RESERVED_REQUIRE (namespace_element | perl_version | unary_expr)  {pin=1}// multiline string is possible too
+require_expr ::= RESERVED_REQUIRE (namespace_element | perl_version | scalar_expr)  {pin=1}// multiline string is possible too
 
 private recover_statement ::= !(SEMICOLON | RIGHT_BRACE | REGEX_QUOTE_CLOSE)
 
 // expression
 expr ::=
-    lp_or_xor_expr
-    | lp_and_expr
-    | lp_not_expr
-    | comma_expr
-    | assign_or_flow_expr
-    | trenar_expr
-    | flipflop_expr
-    | or_expr
-    | and_expr
-    | bitwise_or_xor_expr
-    | bitwise_and_expr
-    | equal_expr
-    | compare_expr
-    | shift_expr
-    | add_expr
-    | mul_expr
-    | regex_expr
-    | op_5_expr
-    | pow_expr
-    | op_3_expr
-    | deref_expr
-    | term_expr
+    lp_or_xor_expr          // 0
+    | lp_and_expr           // 1
+    | lp_not_expr           // 2
+    | named_list_expr       // 3
+    | comma_expr            // 4
+    | assign_or_flow_expr   // 5
+    | trenar_expr           // 6
+    | flipflop_expr         // 7
+    | or_expr               // 8
+    | and_expr              // 9
+    | bitwise_or_xor_expr   // 10
+    | bitwise_and_expr      // 11
+    | equal_expr            // 12
+    | compare_expr          // 13
+    | named_unary_expr      // 14
+    | shift_expr            // 15
+    | add_expr              // 16
+    | mul_expr              // 17
+    | regex_expr            // 18
+    | op_5_expr             // 19
+    | pow_expr              // 20
+    | op_3_expr             // 21
+    | deref_expr            // 22
+    | term_expr             // 23
 
+// above list operators
+private list_expr ::= <<parseExpressionLevel 3>>
+
+// List expression elements
+private scalar_expr ::= <<parseExpressionLevel 4>>
+
+// Unary expression argument
+private unary_expr ::= <<parseExpressionLevel 14>>
+
+// used in local declaration
+private immutable_expr ::= <<parseExpressionLevel 22>>
+
+named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_expr]
+named_list_expr ::= <<isListOperator>> method [list_expr]
 
 term_expr ::=
     variable_declaration
@@ -492,17 +512,33 @@ term_expr ::=
     | do_expr
     | sub_expr
     | eval_expr
+    | grep_expr
+    | map_expr
+    | sort_expr
     | regex_term
     | file_read_expr
     | print_expr
     | require_expr
     | undef_expr
-    | function_call_expr
+    | sub_call_expr
 //    | rightward_call_expr
     | reference_value_expr
     | variable_expr
     | namespace_expr
 
+
+grep_expr ::= RESERVED_GREP grep_map_arguments {pin=1}
+map_expr ::= RESERVED_MAP grep_map_arguments {pin=1}
+
+private grep_map_arguments ::=
+    block [comma] list_expr
+    | scalar_expr comma list_expr
+
+sort_expr ::= RESERVED_SORT sort_arguments {pin=1}
+private sort_arguments ::=
+    block [comma] list_expr
+    | callable list_expr
+    | list_expr
 
 variable_expr ::= array_index_variable | variable
 namespace_expr ::= namespace_element
@@ -511,7 +547,6 @@ private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
-private immutable_expression ::= <<parseExpressionLevel 20>>
 
 private op_3_expr ::= pref_pp_expr | suff_pp_expr
 pref_pp_expr ::= (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS) expr
@@ -528,9 +563,6 @@ regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 mul_expr ::= expr (OPERATOR_MUL|OPERATOR_DIV|OPERATOR_MOD|OPERATOR_X) expr
 add_expr ::= expr (OPERATOR_PLUS|OPERATOR_MINUS|OPERATOR_CONCAT) expr
 shift_expr ::= expr (OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) expr
-
-private unary_expr ::= <<parseExpressionLevel 13>>
-
 
 compare_expr ::= expr (
     OPERATOR_GE_NUMERIC
@@ -600,25 +632,21 @@ lp_not_expr ::= OPERATOR_NOT_LP expr { rightAssociative=true }
 lp_and_expr ::= expr OPERATOR_AND_LP expr
 lp_or_xor_expr ::= expr (OPERATOR_OR_LP|OPERATOR_XOR_LP) expr
 
-private scalar_expr ::= <<parseExpressionLevel 3>>
-private list_expr ::= <<parseExpressionLevel 2>>
-
 print_expr ::= (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( LEFT_PAREN [print_arguments] RIGHT_PAREN | [print_arguments] ) // {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
 sub_expr ::= RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
 
-function_call_expr ::= <<parseFunctionCall>>
+sub_call_expr ::= leftward_call_expr | rightward_call_expr
 
-//function_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN !"["  // avoiding ()[]
-//rightward_call_expr ::= callable [call_arguments]
-////    <<isUnaryOperator>> SUB [unary_expr]
-//
+private leftward_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN // !"["  // avoiding ()[]
+private rightward_call_expr ::= callable [call_arguments]
+
 //// fixme this should depend on prototype
-//call_arguments ::=
-//    anon_hash comma list_expr
-//    | block [[comma] list_expr]
-//    | list_expr
+call_arguments ::=
+    anon_hash comma list_expr
+    | block [[comma] list_expr]
+    | list_expr
 
 file_read_expr ::= LEFT_ANGLE [perl_handle] RIGHT_ANGLE
 
@@ -667,7 +695,7 @@ private local_variable_declaration_variation ::=
 
 
 
-private local_variable_declaration_argument ::= immutable_expression | lexical_variable_definition_argument
+private local_variable_declaration_argument ::= immutable_expr | lexical_variable_definition_argument
 
 private variable_declaration_variation ::=
     LEFT_PAREN lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* RIGHT_PAREN
@@ -736,7 +764,7 @@ private nested_element_expr ::=
     nested_element
     | parenthesised_expr    // function call like $var->()
     | scalar_call
-    | function_call_expr
+    | sub_call_expr
 //    | rightward_call_expr
     | scalar
 
@@ -760,7 +788,7 @@ private referencable_method ::= SIGIL_CODE
 
 label_declaration ::= LABEL COLON // do we need to change tokentype?
 private perl_version ::= NUMBER_VERSION | NUMBER
-private perl_handle ::=  perl_handle_basic | LEFT_BRACE scalar_expr RIGHT_BRACE | <<parseExpressionLevel 21>>
+private perl_handle ::=  perl_handle_basic | LEFT_BRACE scalar_expr RIGHT_BRACE | immutable_expr
 private perl_handle_basic ::= HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////

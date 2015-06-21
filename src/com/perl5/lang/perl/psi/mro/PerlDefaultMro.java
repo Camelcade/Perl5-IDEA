@@ -45,7 +45,7 @@ public class PerlDefaultMro
 			PsiElement callElement = perlMethod.getParent();
 			PsiElement callContainer = callElement.getParent();
 
-			assert callElement instanceof PsiPerlRightwardCallExpr || callElement instanceof PsiPerlFunctionCallExpr;
+//			assert callElement instanceof PsiPerlRightwardCallExpr || callElement instanceof PsiPerlFunctionCallExpr;
 
 			PsiElement baseElement = null;
 			if (callContainer instanceof PerlDerefExpression)

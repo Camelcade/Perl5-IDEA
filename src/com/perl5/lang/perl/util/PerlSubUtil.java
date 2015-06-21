@@ -25,6 +25,8 @@ import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -52,6 +54,18 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		return knownFunctions.containsKey(function);
 	}
 
+
+	/**
+	 * Checks if sub defined as unary with ($) proto
+	 * @param packageName package name
+	 * @param subName sub name
+	 * @return check result
+	 */
+	public static boolean isUnary(@Nullable String packageName, @NotNull String subName)
+	{
+		// todo implement checking
+		return false;
+	}
 
 	/**
 	 * Searching project files for sub definitions by specific package and function name

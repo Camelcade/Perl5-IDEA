@@ -82,30 +82,183 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Checks if it's unary expression
+	 * Named unary operators
 	 * @param b PerlBuilder
 	 * @param l parsing level
 	 * @return parsing result
 	 */
 	public static boolean isUnaryOperator(PsiBuilder b, int l)
 	{
+		if( b.lookAhead(-1) == OPERATOR_DEREFERENCE)
+			return false;
+
 		IElementType tokenType = b.getTokenType();
-		return tokenType == OPERATOR_FILETEST || tokenType == SUB && PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
+		assert b instanceof PerlBuilder;
+
+		if( tokenType == SUB && b.lookAhead(1) != LEFT_PAREN)
+			// todo we should check current namespace here
+			return PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
+		else if( tokenType == PACKAGE && b.lookAhead(1) == SUB && b.lookAhead(2) != LEFT_PAREN)
+			return PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText() );
+
+		return false;
 	}
 
 	/**
+	 * Named list operators
+	 * @param b PerlBuilder
+	 * @param l Parsing level
+	 * @return parsing result
+	 */
+	public static boolean isListOperator(PsiBuilder b, int l)
+	{
+		if( b.lookAhead(-1) == OPERATOR_DEREFERENCE)
+			return false;
+
+		IElementType tokenType = b.getTokenType();
+		assert b instanceof PerlBuilder;
+
+		if( tokenType == SUB && b.lookAhead(1) != LEFT_PAREN)
+			// todo we should check current namespace here
+			return !PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
+		else if( tokenType == PACKAGE && b.lookAhead(1) == SUB && b.lookAhead(2) != LEFT_PAREN)
+			return !PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText() );
+
+		return false;
+	}
+
+/*
+	*/
+/**
 	 * Parses function call
 	 * @param b Perlbuilder
 	 * @param l parsing level
 	 * @return parsing result
-	 */
-	public static boolean parseFunctionCall(PsiBuilder b, int l)
+	 *//*
+
+	public static boolean parseSubCall(PsiBuilder b, int l)
 	{
 		// check if it's list or unary
 		// check if it's accepts code as first param
 		// check if it's rightward or leftward
+
+		assert b instanceof PerlBuilder;
+
+		IElementType tokenType = b.getTokenType();
+		String tokenText = b.getTokenText();
+
+		IElementType prevTokenType = b.lookAhead(-1);
+		IElementType nextTokenType = b.lookAhead(1);
+
+		// deref makes sub list, perl can't detect this
+		boolean isUnary = false;
+		boolean requiresCode = false;
+
+		if( prevTokenType != OPERATOR_DEREFERENCE )
+		{
+			if( tokenType == PACKAGE && nextTokenType == SUB)
+			{
+				PerlTokenData nextToken = ((PerlBuilder) b).lookupToken(1);
+				// package::sub or package::sub() call
+				if( "CORE::".equals(tokenText) )
+				{
+					isUnary = PerlSubUtil.BUILT_IN_UNARY.contains(nextToken.getTokenText());
+					requiresCode = PerlSubUtil.BUILT_IN_CODED.contains(nextToken.getTokenText());
+				}
+
+				// todo we should check user subs here
+
+			}
+			else if( tokenType == SUB )
+			{
+				// sub or sub() call
+				// todo we should check user subs here, and they depends on current namespace
+
+				if( nextTokenType != PACKAGE)
+				{
+					isUnary = PerlSubUtil.BUILT_IN_UNARY.contains(tokenText);
+					requiresCode = PerlSubUtil.BUILT_IN_CODED.contains(tokenText);
+				}
+				else
+				{
+					IElementType nextNextTokenType = b.lookAhead(2);
+					if( nextNextTokenType != OPERATOR_DEREFERENCE && nextNextTokenType != SUB)
+					{
+						// this is a fancy: method package call
+						// todo check user subs here
+					}
+					else
+					{
+						// this is a sequence, like sub package::method or sub package->method
+						isUnary = PerlSubUtil.BUILT_IN_UNARY.contains(tokenText);
+						requiresCode = PerlSubUtil.BUILT_IN_CODED.contains(tokenText);
+					}
+				}
+			}
+		}
+		else if( tokenType == SUB  && b.lookAhead(-2) == PACKAGE)
+		{
+			// package->sub() or package->sub call
+			// todo we should check user subs here
+		}
+
+		// parsing invocation
+		// todo make a hack for sort sub block
+		if( PerlParser.callable(b,l))
+		{
+			PsiBuilder.Marker m = b.mark();
+
+			if( consumeToken(b, LEFT_PAREN )) // leftward
+			{
+				if( requiresCode )
+				{
+					PerlParser.block(b, l + 1);
+					consumeTokenSmart(b,OPERATOR_COMMA);
+					consumeTokenSmart(b,OPERATOR_COMMA_ARROW);
+				}
+				PerlParser.expr(b,l+1,-1);
+
+				if( consumeToken(b, RIGHT_PAREN))
+				{
+					m.done(CALL_ARGUMENTS);
+					return true;
+				}
+				else
+				{
+					m.drop();
+					return false;
+				}
+			}
+			else // rightward
+			{
+				if( requiresCode )
+				{
+					if( PerlParser.block(b, l + 1))
+					{
+						if (!isUnary)
+						{
+							consumeTokenSmart(b, OPERATOR_COMMA);
+							consumeTokenSmart(b, OPERATOR_COMMA_ARROW);
+							PerlParser.list_expr(b, l + 1);
+						}
+					}
+				}
+				else
+				{
+					// todo need code heuristic here
+					if( isUnary )
+						PerlParser.scalar_expr(b, l +1);
+					else
+						PerlParser.list_expr(b,l+1);
+				}
+				m.done(CALL_ARGUMENTS);
+				return true;
+			}
+		}
+
 		return false;
 	}
+*/
 
 
 	/*

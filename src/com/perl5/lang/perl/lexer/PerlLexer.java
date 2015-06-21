@@ -224,6 +224,10 @@ public class PerlLexer extends PerlLexerGenerated
 		reservedTokenTypes.put("printf", RESERVED_PRINTF);
 		reservedTokenTypes.put("say", RESERVED_SAY);
 
+		reservedTokenTypes.put("grep", RESERVED_GREP);
+		reservedTokenTypes.put("map", RESERVED_MAP);
+		reservedTokenTypes.put("sort", RESERVED_SORT);
+
 		reservedTokenTypes.put("qw", RESERVED_QW);
 
 		reservedTokenTypes.put("qq", RESERVED_QQ);
