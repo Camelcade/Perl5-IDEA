@@ -64,13 +64,11 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
 
-		TextAttributesKey[] attributesKeys;
-
 		if( tokenType instanceof PerlTokenType)
-			attributesKeys = PERL_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
-		else
-			attributesKeys = attributesMap.get(tokenType);
+			return PERL_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
+		else if(attributesMap.containsKey(tokenType))
+			return attributesMap.get(tokenType);
 
-		return attributesKeys == null ? EMPTY_KEYS: attributesKeys;
+		return EMPTY_KEYS;
 	}
 }

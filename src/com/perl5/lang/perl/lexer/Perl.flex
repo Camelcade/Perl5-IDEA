@@ -180,7 +180,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_BAREWORD_STRING_COMMA>
 {
-    {BAREWORD_MINUS}   {endCustomBlock(); return STRING_CONTENT; }
+    {BAREWORD_MINUS}   {return endBarewordStringComma(); }
     . {yypushback(1);endCustomBlock();break;}
 }
 
@@ -405,9 +405,6 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_ARRAY_BUILT_IN}       {yypushback(1);return parseBuiltInVariable();}
 {PERL_ARRAY_INDEX_BUILT_IN} {yypushback(1);return parseBuiltInVariable();}
 {PERL_HASH_BUILT_IN}        {yypushback(1);return parseBuiltInVariable();}
-
-
-"sub" {pushState();yybegin(LEX_SUB_NAME);return getReservedTokenType();}
 
 {BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}

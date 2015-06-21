@@ -44,95 +44,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributes BOLD_ITALIC = TextAttributes.merge(BOLD, ITALIC);
 	public static final TextAttributes STROKE = new TextAttributes(null, null, null, EffectType.STRIKEOUT, Font.PLAIN);
 
-	public static final HashSet<IElementType> RESERVED_SET = new HashSet<>(PerlLexer.reservedTokenTypes.values());
-	public static final TokenSet OPERATORS_SET = TokenSet.create(
-			PerlElementTypes.OPERATOR_X,
-
-			PerlElementTypes.OPERATOR_CMP_NUMERIC,
-			PerlElementTypes.OPERATOR_LE_NUMERIC,
-			PerlElementTypes.OPERATOR_GE_NUMERIC,
-			PerlElementTypes.OPERATOR_EQ_NUMERIC,
-			PerlElementTypes.OPERATOR_NE_NUMERIC,
-			PerlElementTypes.OPERATOR_LT_NUMERIC,
-			PerlElementTypes.OPERATOR_GT_NUMERIC,
-
-			PerlElementTypes.OPERATOR_CMP_STR,
-			PerlElementTypes.OPERATOR_LE_STR,
-			PerlElementTypes.OPERATOR_GE_STR,
-			PerlElementTypes.OPERATOR_EQ_STR,
-			PerlElementTypes.OPERATOR_NE_STR,
-			PerlElementTypes.OPERATOR_LT_STR,
-			PerlElementTypes.OPERATOR_GT_STR,
-
-			PerlElementTypes.OPERATOR_HELLIP,
-			PerlElementTypes.OPERATOR_FLIP_FLOP,
-			PerlElementTypes.OPERATOR_CONCAT,
-
-			PerlElementTypes.OPERATOR_PLUS_PLUS,
-			PerlElementTypes.OPERATOR_MINUS_MINUS,
-			PerlElementTypes.OPERATOR_POW,
-
-			PerlElementTypes.OPERATOR_RE,
-			PerlElementTypes.OPERATOR_NOT_RE,
-
-			PerlElementTypes.OPERATOR_HEREDOC,
-			PerlElementTypes.OPERATOR_SHIFT_LEFT,
-			PerlElementTypes.OPERATOR_SHIFT_RIGHT,
-
-			PerlElementTypes.OPERATOR_SMARTMATCH,
-
-			PerlElementTypes.OPERATOR_AND,
-			PerlElementTypes.OPERATOR_OR,
-			PerlElementTypes.OPERATOR_OR_DEFINED,
-			PerlElementTypes.OPERATOR_NOT,
-
-			PerlElementTypes.OPERATOR_ASSIGN,
-			PerlElementTypes.OPERATOR_POW_ASSIGN,
-
-			PerlElementTypes.OPERATOR_PLUS_ASSIGN,
-			PerlElementTypes.OPERATOR_MINUS_ASSIGN,
-			PerlElementTypes.OPERATOR_CONCAT_ASSIGN,
-
-			PerlElementTypes.OPERATOR_MUL_ASSIGN,
-			PerlElementTypes.OPERATOR_DIV_ASSIGN,
-			PerlElementTypes.OPERATOR_MOD_ASSIGN,
-			PerlElementTypes.OPERATOR_X_ASSIGN,
-
-			PerlElementTypes.OPERATOR_BITWISE_AND_ASSIGN,
-			PerlElementTypes.OPERATOR_BITWISE_OR_ASSIGN,
-			PerlElementTypes.OPERATOR_BITWISE_XOR_ASSIGN,
-
-			PerlElementTypes.OPERATOR_SHIFT_LEFT_ASSIGN,
-			PerlElementTypes.OPERATOR_SHIFT_RIGHT_ASSIGN,
-
-			PerlElementTypes.OPERATOR_AND_ASSIGN,
-			PerlElementTypes.OPERATOR_OR_ASSIGN,
-			PerlElementTypes.OPERATOR_OR_DEFINED_ASSIGN,
-
-			PerlElementTypes.OPERATOR_TRENAR_IF,
-			PerlElementTypes.OPERATOR_TRENAR_ELSE,
-
-			PerlElementTypes.OPERATOR_REFERENCE,
-
-			PerlElementTypes.OPERATOR_DIV,
-			PerlElementTypes.OPERATOR_MUL,
-			PerlElementTypes.OPERATOR_MOD,
-			PerlElementTypes.OPERATOR_PLUS,
-			PerlElementTypes.OPERATOR_MINUS,
-
-			PerlElementTypes.OPERATOR_BITWISE_NOT,
-			PerlElementTypes.OPERATOR_BITWISE_AND,
-			PerlElementTypes.OPERATOR_BITWISE_OR,
-			PerlElementTypes.OPERATOR_BITWISE_XOR,
-
-			PerlElementTypes.OPERATOR_AND_LP,
-			PerlElementTypes.OPERATOR_OR_LP,
-			PerlElementTypes.OPERATOR_XOR_LP,
-			PerlElementTypes.OPERATOR_NOT_LP,
-
-			PerlElementTypes.OPERATOR_FILETEST
-	);
-
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
 	public static final TextAttributesKey PERL_NUMBER = createTextAttributesKey("PERL_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
@@ -222,6 +133,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.REGEX_MODIFIER, new TextAttributesKey[]{PERL_KEYWORD});
 
 		attributesMap.put(PerlElementTypes.QUOTE, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE, new TextAttributesKey[]{PERL_DQ_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_SINGLE, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_TICK, new TextAttributesKey[]{PERL_DX_STRING});
+
 		attributesMap.put(PerlElementTypes.SEMICOLON, new TextAttributesKey[]{PERL_SEMICOLON});
 		attributesMap.put(PerlElementTypes.LEFT_BRACE, new TextAttributesKey[]{PERL_BRACE});
 		attributesMap.put(PerlElementTypes.RIGHT_BRACE, new TextAttributesKey[]{PERL_BRACE});
@@ -266,20 +181,15 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
-
-		TextAttributesKey[] attributesKeys;
-
 		if (tokenType instanceof PodTokenType)
-			attributesKeys = POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
-		else if (RESERVED_SET.contains(tokenType))
-			attributesKeys = attributesMap.get(PerlElementTypes.RESERVED_IF);
-		else if (OPERATORS_SET.contains(tokenType))
-			attributesKeys = attributesMap.get(PerlElementTypes.OPERATOR_MUL);
-		else
-			attributesKeys = attributesMap.get(tokenType);
+			return POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
+		else if (attributesMap.containsKey(tokenType) )
+			return attributesMap.get(tokenType);
+		else if (PerlLexer.RESERVED_TOKENSET.contains(tokenType))
+			return attributesMap.get(PerlElementTypes.RESERVED_IF);
+		else if (PerlLexer.OPERATORS_TOKENSET.contains(tokenType))
+			return attributesMap.get(PerlElementTypes.OPERATOR_MUL);
 
-		return attributesKeys == null
-				? EMPTY_KEYS
-				: attributesKeys;
+		return EMPTY_KEYS;
 	}
 }

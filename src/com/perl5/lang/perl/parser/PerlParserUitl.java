@@ -94,11 +94,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		IElementType tokenType = b.getTokenType();
 		assert b instanceof PerlBuilder;
+		IElementType nextTokenType = b.lookAhead(1);
 
-		if( tokenType == SUB && b.lookAhead(1) != LEFT_PAREN)
+		if( tokenType == SUB && nextTokenType != LEFT_PAREN && nextTokenType != PACKAGE)
 			// todo we should check current namespace here
 			return PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
-		else if( tokenType == PACKAGE && b.lookAhead(1) == SUB && b.lookAhead(2) != LEFT_PAREN)
+		else if( tokenType == PACKAGE && nextTokenType == SUB && b.lookAhead(2) != LEFT_PAREN)
 			return PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText() );
 
 		return false;
@@ -116,12 +117,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return false;
 
 		IElementType tokenType = b.getTokenType();
+		IElementType nextTokenType = b.lookAhead(1);
 		assert b instanceof PerlBuilder;
 
-		if( tokenType == SUB && b.lookAhead(1) != LEFT_PAREN)
+		if( tokenType == SUB && nextTokenType != LEFT_PAREN && nextTokenType != PACKAGE)
 			// todo we should check current namespace here
 			return !PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
-		else if( tokenType == PACKAGE && b.lookAhead(1) == SUB && b.lookAhead(2) != LEFT_PAREN)
+		else if( tokenType == PACKAGE && nextTokenType == SUB && b.lookAhead(2) != LEFT_PAREN)
 			return !PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText() );
 
 		return false;

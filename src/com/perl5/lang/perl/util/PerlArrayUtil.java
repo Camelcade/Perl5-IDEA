@@ -36,11 +36,11 @@ public class PerlArrayUtil implements PerlElementTypes
 			"_",
 			"ARGV",
 			"INC",
-			"LAST_MATCH_START",
-			"EXPORT",
-			"ISA",
-			"EXPORT_OK",
-			"EXPORT_TAGS"
+			"LAST_MATCH_START"
+//			"EXPORT",
+//			"ISA",
+//			"EXPORT_OK",
+//			"EXPORT_TAGS"
 	));
 
 	public static boolean isBuiltIn(String variable)

@@ -560,9 +560,9 @@ prefix_unary_expr ::=  (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 
-mul_expr ::= expr (OPERATOR_MUL|OPERATOR_DIV|OPERATOR_MOD|OPERATOR_X) expr
-add_expr ::= expr (OPERATOR_PLUS|OPERATOR_MINUS|OPERATOR_CONCAT) expr
-shift_expr ::= expr (OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) expr
+mul_expr ::= expr ((OPERATOR_MUL|OPERATOR_DIV|OPERATOR_MOD|OPERATOR_X) expr)+
+add_expr ::= expr ((OPERATOR_PLUS|OPERATOR_MINUS|OPERATOR_CONCAT) expr)+
+shift_expr ::= expr ((OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) expr)+
 
 compare_expr ::= expr (
     OPERATOR_GE_NUMERIC
@@ -588,10 +588,10 @@ equal_expr ::= expr (
     |OPERATOR_SMARTMATCH
     ) expr
 
-bitwise_and_expr ::= expr OPERATOR_BITWISE_AND expr
-bitwise_or_xor_expr ::= expr (OPERATOR_BITWISE_OR|OPERATOR_BITWISE_XOR) expr
-and_expr ::= expr OPERATOR_AND expr
-or_expr ::= expr (OPERATOR_OR|OPERATOR_OR_DEFINED) expr
+bitwise_and_expr ::= expr (OPERATOR_BITWISE_AND expr)+
+bitwise_or_xor_expr ::= expr ((OPERATOR_BITWISE_OR|OPERATOR_BITWISE_XOR) expr)+
+and_expr ::= expr (OPERATOR_AND expr)+
+or_expr ::= expr ((OPERATOR_OR|OPERATOR_OR_DEFINED) expr)+
 flipflop_expr ::= expr (OPERATOR_FLIP_FLOP|OPERATOR_HELLIP) expr
 trenar_expr ::= expr OPERATOR_TRENAR_IF scalar_expr OPERATOR_TRENAR_ELSE scalar_expr { rightAssociative=true }
 
@@ -602,7 +602,7 @@ private assign_or_flow_expr ::=
     | goto_expr
     | redo_expr
 
-assign_expr ::= expr (
+assign_expr ::= expr ((
     OPERATOR_ASSIGN
     |OPERATOR_POW_ASSIGN
     |OPERATOR_PLUS_ASSIGN
@@ -619,7 +619,7 @@ assign_expr ::= expr (
     |OPERATOR_AND_ASSIGN
     |OPERATOR_OR_ASSIGN
     |OPERATOR_OR_DEFINED_ASSIGN
-    ) expr { rightAssociative=true }
+    ) expr ) + { rightAssociative=true }
 
 
 
@@ -629,8 +629,9 @@ comma_sequence_expr ::= expr (comma_any expr) +
 private comma_any ::= comma + !(RIGHT_PAREN|"]"|"}")
 
 lp_not_expr ::= OPERATOR_NOT_LP expr { rightAssociative=true }
-lp_and_expr ::= expr OPERATOR_AND_LP expr
-lp_or_xor_expr ::= expr (OPERATOR_OR_LP|OPERATOR_XOR_LP) expr
+lp_and_expr ::= expr (OPERATOR_AND_LP expr)+
+
+lp_or_xor_expr ::= expr ((OPERATOR_OR_LP|OPERATOR_XOR_LP) expr)+
 
 print_expr ::= (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( LEFT_PAREN [print_arguments] RIGHT_PAREN | [print_arguments] ) // {pin=1}
 private print_arguments ::= perl_handle expr | expr
@@ -837,9 +838,8 @@ hash_variable ::= SIGIL_HASH [scalar_sigils] variable_body
 
 scalar_sigils ::= SIGIL_SCALAR+
 
-glob_variable ::= SIGIL_GLOB glob_name [glob_slot_part]
+glob_variable ::= SIGIL_GLOB [scalar_sigils] variable_body [glob_slot_part]
 private glob_slot_part ::= ( LEFT_BRACE expr RIGHT_BRACE | braced_string )
-private glob_name ::= variable_body | scalar_variable
 
 private variable_body ::=
     variable_body_braced
@@ -857,7 +857,7 @@ private variable_name_element ::= VARIABLE_NAME
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::=
     namespace_element SUB                  // package::method
-    | SUB [namespace_element &LEFT_PAREN]  // method package
+    | SUB [namespace_element !(SUB|OPERATOR_DEREFERENCE)]  // method package
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private annotations ::= annotation+
