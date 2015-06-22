@@ -24,9 +24,10 @@ import com.intellij.lexer.FlexAdapter;
 import java.io.Reader;
 
 import com.intellij.lexer.LayeredLexer;
+import com.intellij.openapi.project.Project;
 
 public class PerlLexerAdapter extends FlexAdapter {
-	public PerlLexerAdapter() {
-		super(new PerlLexer((Reader) null));
+	public PerlLexerAdapter(Project project) {
+		super(new PerlLexer(project));
 	}
 }

@@ -34,7 +34,7 @@ public class PerlSyntaxHighlighterFactory extends SyntaxHighlighterFactory
 	@NotNull
 	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
 	{
-		return new PerlSyntaxHighlighter();
+		return new PerlSyntaxHighlighter(project);
 	}
 
 }

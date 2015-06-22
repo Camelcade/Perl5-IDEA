@@ -16,6 +16,7 @@
 
 package com.perl5.lang.embedded;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.text.ImmutableText;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -28,8 +29,8 @@ import java.io.IOException;
  */
 public class EmbeddedPerlLexer extends PerlLexer
 {
-	public EmbeddedPerlLexer(java.io.Reader in) {
-		super(in);
+	public EmbeddedPerlLexer(Project project) {
+		super(project);
 	}
 
 	@Override

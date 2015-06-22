@@ -49,7 +49,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 	@NotNull
 	@Override
 	public Lexer createLexer(Project project) {
-		return new PodLexerAdapter();
+		return new PodLexerAdapter(project);
 	}
 
 	@NotNull

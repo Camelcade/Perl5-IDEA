@@ -17,6 +17,7 @@
 package com.perl5.lang.embedded;
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
 
 import java.io.Reader;
 
@@ -25,7 +26,7 @@ import java.io.Reader;
  */
 public class EmbeddedPerlLexerAdapter extends FlexAdapter
 {
-	public EmbeddedPerlLexerAdapter() {
-		super(new EmbeddedPerlLexer((Reader) null));
+	public EmbeddedPerlLexerAdapter(Project project) {
+		super(new EmbeddedPerlLexer(project));
 	}
 }

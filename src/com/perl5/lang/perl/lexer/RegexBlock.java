@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.apache.commons.lang.ArrayUtils;
@@ -158,10 +159,10 @@ public class RegexBlock implements PerlElementTypes
 	}
 
 
-	Collection<CustomToken> parseEval()
+	Collection<CustomToken> parseEval(Project project)
 	{
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
-		PerlLexerAdapter subLexer = new PerlLexerAdapter();
+		PerlLexerAdapter subLexer = new PerlLexerAdapter(project);
 		subLexer.start(buffer,startOffset,endOffset-1);
 		while( subLexer.getTokenType() != null )
 		{

@@ -19,6 +19,7 @@ package com.perl5.lang.embedded.idea;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
@@ -37,11 +38,16 @@ public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighter impleme
 
 	TextAttributesKey[]	EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER};
 
+	public EmbeddedPerlSyntaxHighlighter(Project project)
+	{
+		super(project);
+	}
+
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new EmbeddedPerlLexerAdapter();
+		return new EmbeddedPerlLexerAdapter(myProject);
 	}
 
 	@NotNull

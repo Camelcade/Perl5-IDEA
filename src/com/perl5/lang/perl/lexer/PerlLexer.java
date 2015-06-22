@@ -19,6 +19,7 @@
 package com.perl5.lang.perl.lexer;
 
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -27,12 +28,14 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
+import java.io.Reader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PerlLexer extends PerlLexerGenerated
 {
+	Project myProject;
 
 	// last token
 	protected IElementType lastTokenType;
@@ -382,9 +385,14 @@ public class PerlLexer extends PerlLexerGenerated
 
 	// todo implement constructor with project parameter, use it to build packages and subs set
 	// todo if project was not passed (highlighter, for example) use all opened projects or nothing ?
-	public PerlLexer(java.io.Reader in)
+	public PerlLexer(Project project)
 	{
-		super(in);
+		super((Reader) null);
+		myProject = project;
+		if( project == null)
+			System.out.println("Created lexer without project");
+		else
+			System.out.println("Created lexer with project");
 	}
 
 	/**
@@ -1137,7 +1145,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 			// parse block 2
 			if (isEvaluated)
-				tokensList.addAll(secondBLock.parseEval());
+				tokensList.addAll(secondBLock.parseEval(myProject));
 			else
 				tokensList.addAll(secondBLock.tokenize(isExtended));
 		}

@@ -16,7 +16,9 @@
 
 package com.perl5.lang.pod.lexer;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
 
 import java.io.Reader;
 
@@ -25,7 +27,7 @@ import java.io.Reader;
  */
 public class PodLexerAdapter extends FlexAdapter
 {
-	public PodLexerAdapter() {
-		super(new PodLexer((Reader) null));
+	public PodLexerAdapter(Project project) {
+		super(new PodLexer((java.io.Reader)null));
 	}
 }

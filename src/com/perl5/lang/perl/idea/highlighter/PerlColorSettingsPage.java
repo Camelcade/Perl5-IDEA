@@ -96,8 +96,9 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	@Override
 	public SyntaxHighlighter getHighlighter()
 	{
-		return new PerlSyntaxHighlighter();
+		return new PerlSyntaxHighlighter(null);
 	}
+
 
 	@NotNull
 	@Override

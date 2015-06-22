@@ -36,7 +36,7 @@ public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter
 								   @Nullable final VirtualFile virtualFile,
 								   @NotNull final EditorColorsScheme colors)
 	{
-		super(new EmbeddedPerlSyntaxHighlighter(), colors);
+		super(new EmbeddedPerlSyntaxHighlighter(project), colors);
 		registerLayer(PerlElementTypes.TEMPLATE_BLOCK_HTML, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
 	}

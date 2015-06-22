@@ -60,7 +60,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new PerlLexerAdapter();
+		return new PerlLexerAdapter(project);
 	}
 
 	@NotNull

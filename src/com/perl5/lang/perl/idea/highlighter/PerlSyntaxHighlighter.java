@@ -23,6 +23,7 @@ import com.intellij.openapi.editor.markup.EffectType;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -168,13 +169,21 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	}
 
 
-	private static final SyntaxHighlighter POD_SYNTAX_HIGHLIGHTER = new PodSyntaxHighlighter();
+	private final SyntaxHighlighter POD_SYNTAX_HIGHLIGHTER;
+
+	protected Project myProject;
+
+	public PerlSyntaxHighlighter(Project project)
+	{
+		myProject = project;
+		POD_SYNTAX_HIGHLIGHTER = new PodSyntaxHighlighter(project);
+	}
 
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new PerlHighlightningLexer();
+		return new PerlHighlightningLexer(myProject);
 	}
 
 	@NotNull

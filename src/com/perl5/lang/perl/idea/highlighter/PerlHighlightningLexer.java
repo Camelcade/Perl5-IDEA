@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.highlighter;
 
 import com.intellij.lexer.LayeredLexer;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
@@ -28,12 +29,12 @@ import com.perl5.lang.pod.lexer.PodLexerAdapter;
  */
 public class PerlHighlightningLexer extends LayeredLexer
 {
-	public PerlHighlightningLexer()
+	public PerlHighlightningLexer(Project project)
 	{
-		super(new PerlLexerAdapter());
+		super(new PerlLexerAdapter(project));
 
 		registerSelfStoppingLayer(
-				new PodLexerAdapter(),
+				new PodLexerAdapter(project),
 				new IElementType[]{PerlElementTypes.POD},
 				IElementType.EMPTY_ARRAY
 		);

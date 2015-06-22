@@ -33,7 +33,7 @@ public class EmbeddedPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterF
 	@NotNull
 	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
 	{
-		return new EmbeddedPerlSyntaxHighlighter();
+		return new EmbeddedPerlSyntaxHighlighter(project);
 	}
 
 }

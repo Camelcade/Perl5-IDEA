@@ -20,6 +20,7 @@ import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lexer.FlexAdapter;
 import com.perl5.lang.embedded.EmbeddedPerlLexer;
+import com.perl5.lang.embedded.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.PerlFindUsagesProvider;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -40,7 +41,7 @@ public class EmbeddedPerlFindUsagesProvider extends PerlFindUsagesProvider
 	@Override
 	public WordsScanner getWordsScanner() {
 //		return WORDS_SCANNER; todo solve the concurrency problem
-		return new DefaultWordsScanner(new FlexAdapter(new EmbeddedPerlLexer((Reader) null)),
+		return new DefaultWordsScanner(new EmbeddedPerlLexerAdapter(null),
 				PerlParserDefinition.IDENTIFIERS,
 				PerlParserDefinition.COMMENTS,
 				PerlParserDefinition.LITERALS
