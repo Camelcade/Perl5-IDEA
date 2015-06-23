@@ -41,7 +41,8 @@ import java.util.*;
  */
 public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 {
-    public static final String PACKAGE_SEPARATOR = "::";
+	public static final String PACKAGE_SEPARATOR = "::";
+	public static final String PACKAGE_SEPARATOR_LEGACY = "'";
 
     /**
 	 * Checks if package is built in
@@ -64,7 +65,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		if( PACKAGE_SEPARATOR.equals(name))
 			return "main";
 		else
-			return name.replaceFirst("::$", "").replaceFirst("^::", "");
+			return name.replaceFirst(PACKAGE_SEPARATOR + "$", "").replaceFirst("^" + PACKAGE_SEPARATOR, "").replaceAll(PACKAGE_SEPARATOR_LEGACY, PACKAGE_SEPARATOR);
 	}
 
 	/**

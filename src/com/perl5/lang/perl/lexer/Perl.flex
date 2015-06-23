@@ -81,12 +81,10 @@ PERL_XIDC = [_a-zA-Z0-9]
 
 
 PERL_BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
-PERL_PACKAGE_CANONICAL = "::"* ({PERL_BASIC_IDENTIFIER} "::" +) + | "::"
 
 // todo adjust in perl lexer too
-PERL_PACKAGE_AMBIGUOUS = "::" * {PERL_BASIC_IDENTIFIER} ("::"+ {PERL_BASIC_IDENTIFIER})*
-
-CAPTURE_HANDLE_READ = "<"{BAREWORD}">"
+PERL_PACKAGE_AMBIGUOUS = "::" * {PERL_BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {PERL_BASIC_IDENTIFIER}) +
+PERL_PACKAGE_CANONICAL = "::" * {PERL_BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {PERL_BASIC_IDENTIFIER}) * "::" +
 
 
 CHAR_ANY        = .|{NEW_LINE}
@@ -132,7 +130,6 @@ TRANS_MODIFIERS = [cdsr]
 
 %xstate LEX_BAREWORD_STRING_COMMA
 %xstate LEX_LABEL_DEFINITION
-%xstate LEX_HANDLE_READ
 %state LEX_HTML_BLOCK
 %%
 
@@ -148,15 +145,6 @@ TRANS_MODIFIERS = [cdsr]
 //exclusive
 <LEX_HEREDOC_MARKER>{
     {ANYWORD}+   {popState();return HEREDOC_END;}
-}
-
-// exclusive
-<LEX_HANDLE_READ>
-{
-    {BAREWORD} {endCustomBlock();return getHandleTokenType();}
-    "<" {return LEFT_ANGLE;}
-    ">" {endCustomBlock();return RIGHT_ANGLE;}
-    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -310,8 +298,8 @@ TRANS_MODIFIERS = [cdsr]
 ">=" {return OPERATOR_GE_NUMERIC;}
 "==" {return OPERATOR_EQ_NUMERIC;}
 "!=" {return OPERATOR_NE_NUMERIC;}
-"<" {return OPERATOR_LT_NUMERIC;}
-">" {return OPERATOR_GT_NUMERIC;}
+"<" {return guessOpenAngle();}
+">" {return guessCloseAngle();}
 
 "->" {return OPERATOR_DEREFERENCE;}
 "=>" {return OPERATOR_COMMA_ARROW;}
@@ -346,7 +334,7 @@ TRANS_MODIFIERS = [cdsr]
 "*=" {return OPERATOR_MUL_ASSIGN;}
 // "/=" {return OPERATOR_DIV_ASSIGN;}   // guessDiv
 "%=" {return OPERATOR_MOD_ASSIGN;}
-"x=" {return OPERATOR_X_ASSIGN;}
+"x=" {return checkOperatorXAssign();}
 
 "&=" {return OPERATOR_BITWISE_AND_ASSIGN;}
 "|=" {return OPERATOR_BITWISE_OR_ASSIGN;}
@@ -410,7 +398,6 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
 {X_OP_STICKED} {yypushback(yylength()-1);return OPERATOR_X;}
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
-{CAPTURE_HANDLE_READ} {startCustomBlock(LEX_HANDLE_READ);break;}
 
 {BAREWORD} { return guessBareword();}
 {PERL_PACKAGE_AMBIGUOUS} {return guessPackageName();}

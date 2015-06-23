@@ -159,10 +159,9 @@ public class RegexBlock implements PerlElementTypes
 	}
 
 
-	Collection<CustomToken> parseEval(Project project)
+	Collection<CustomToken> parseEval(PerlLexerAdapter subLexer)
 	{
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
-		PerlLexerAdapter subLexer = new PerlLexerAdapter(project);
 		subLexer.start(buffer,startOffset,endOffset-1);
 		while( subLexer.getTokenType() != null )
 		{
