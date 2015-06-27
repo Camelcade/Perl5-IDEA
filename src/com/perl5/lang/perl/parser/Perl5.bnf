@@ -507,7 +507,7 @@ named_list_expr ::= <<isListOperator>> method [list_expr]
 
 term_expr ::=
     variable_declaration
-    | parenthesised_expr ["[" expr "]"]
+    | parenthesised_expr [LEFT_BRACKET expr RIGHT_BRACKET]
     | scalar_constant
     | do_expr
     | sub_expr
@@ -612,6 +612,7 @@ assign_expr ::= expr ((
     |OPERATOR_X_ASSIGN
     |OPERATOR_BITWISE_AND_ASSIGN
     |OPERATOR_BITWISE_OR_ASSIGN
+    |OPERATOR_BITWISE_XOR_ASSIGN
     |OPERATOR_CONCAT_ASSIGN
     |OPERATOR_SHIFT_LEFT_ASSIGN
     |OPERATOR_SHIFT_RIGHT_ASSIGN
@@ -640,7 +641,7 @@ sub_expr ::= RESERVED_SUB sub_definition_parameters block  // fixme make sure th
 
 sub_call_expr ::= leftward_call_expr | rightward_call_expr
 
-private leftward_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN // !"["  // avoiding ()[]
+private leftward_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN !LEFT_BRACKET
 private rightward_call_expr ::= callable [call_arguments]
 
 //// fixme this should depend on prototype

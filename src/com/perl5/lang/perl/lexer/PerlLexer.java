@@ -836,6 +836,17 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return OPERATOR_X_ASSIGN;
 	}
 
+	public IElementType checkOperatorXSticked()
+	{
+		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x123;
+		{
+			yypushback(1);
+			return VARIABLE_NAME;
+		}
+		yypushback(yylength()-1);
+		return OPERATOR_X;
+	}
+
 
 	/**
 	 * Sets up regex parser

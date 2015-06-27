@@ -105,7 +105,7 @@ NUMBER_HEX = "0x" [0-9a-fA-F]+
 NUMBER_BIN = "0b"[01]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
-X_OP_STICKED = "x"[0-9]+[^a-zA-Z]*
+X_OP_STICKED = "x"[0-9]+[^a-zA-Z]
 
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC][^a-zA-Z0-9_]
@@ -336,6 +336,7 @@ TRANS_MODIFIERS = [cdsr]
 // "/=" {return OPERATOR_DIV_ASSIGN;}   // guessDiv
 "%=" {return OPERATOR_MOD_ASSIGN;}
 "x=" {return checkOperatorXAssign();}
+{X_OP_STICKED} {return checkOperatorXSticked();}
 
 "&=" {return OPERATOR_BITWISE_AND_ASSIGN;}
 "|=" {return OPERATOR_BITWISE_OR_ASSIGN;}
@@ -398,7 +399,6 @@ TRANS_MODIFIERS = [cdsr]
 
 {BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
-{X_OP_STICKED} {yypushback(yylength()-1);return OPERATOR_X;}
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
 
 {BAREWORD} { return guessBareword();}
