@@ -24,6 +24,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -111,7 +112,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param project project to search in
 	 * @return collection of package names
 	 */
-	public static Collection<String> listDefinedPackageNames(Project project)
+	public static Collection<String> getDefinedPackageNames(Project project)
 	{
 		return StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
 	}

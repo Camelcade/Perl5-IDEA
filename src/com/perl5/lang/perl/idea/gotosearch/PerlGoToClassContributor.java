@@ -44,7 +44,7 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
     @NotNull
     @Override
     public String[] getNames(Project project, boolean b) {
-        return PerlPackageUtil.listDefinedPackageNames(project).toArray(new String[]{});
+        return PerlPackageUtil.getDefinedPackageNames(project).toArray(new String[]{});
     }
 
     @NotNull

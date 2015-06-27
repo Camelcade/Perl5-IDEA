@@ -52,7 +52,7 @@ public class PerlNamespaceUndefinedInspection extends PerlInspection
 					return;
 
 				if (o.getNamespaceDefinitions().size() == 0)
-					registerError(holder, o, "Unable to find namespace definition");
+					registerProblem(holder, o, "Unable to find namespace definition");
 			}
 		};
 	}

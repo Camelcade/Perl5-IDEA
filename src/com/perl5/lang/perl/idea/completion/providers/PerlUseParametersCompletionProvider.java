@@ -56,7 +56,7 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 				{
 					// fixme actually, we should fill files here, not packages, or make a diff provider
 					// fixme we should only add packages that has classes inside of them
-					for (String packageName : PerlPackageUtil.listDefinedPackageNames(file.getProject()))
+					for (String packageName : PerlPackageUtil.getDefinedPackageNames(file.getProject()))
 					{
 						resultSet.addElement(LookupElementBuilder.create(packageName).withIcon(PerlIcons.PACKAGE_GUTTER_ICON));
 					}

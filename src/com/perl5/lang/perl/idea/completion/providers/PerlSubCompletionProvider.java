@@ -127,7 +127,7 @@ public class PerlSubCompletionProvider extends CompletionProvider<CompletionPara
 				}
 
 				// subs for incomplete ns and inital enter
-				Collection<String> knownNamespaces = PerlPackageUtil.listDefinedPackageNames(project);
+				Collection<String> knownNamespaces = PerlPackageUtil.getDefinedPackageNames(project);
 
 				// todo take SUPER into account
 				if (!hasExplicitNamespace)

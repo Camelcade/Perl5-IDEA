@@ -1361,14 +1361,14 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				return PACKAGE;
 		} else if  (	// 100% package::sub from perl perspective
 				FORCED_PACKAGES.contains(subCanonicalPackageName)	// fixme not sure about this
-				|| PerlSubUtil.KNOWN_METHODS.contains(canonicalPackageName)
-				|| knownPackages.contains(subCanonicalPackageName)
+//				|| PerlSubUtil.KNOWN_METHODS.contains(canonicalPackageName)
+				|| knownPackages.contains(subCanonicalPackageName)	// shortcut search for slow ones
 				|| indexAvailable &&
-						(
-								PerlPackageUtil.findNamespaceDefinitions(myProject, subCanonicalPackageName).size() > 0
-								|| PerlSubUtil.findSubDeclarations(myProject, canonicalPackageName).size() > 0
-								|| PerlSubUtil.findSubDefinitions(myProject, canonicalPackageName).size() > 0
-								|| PerlGlobUtil.findGlobsDefinitions(myProject, canonicalPackageName).size() > 0
+						(		// slow searches
+								PerlPackageUtil.getDefinedPackageNames(myProject).contains(subCanonicalPackageName)
+								|| PerlSubUtil.getDeclaredSubsNames(myProject).contains(canonicalPackageName)
+								|| PerlSubUtil.getDeclaredSubsNames(myProject).contains(canonicalPackageName)
+								|| PerlGlobUtil.getDefinedGlobsNames(myProject).contains(canonicalPackageName)
 						)
 				)
 		{
