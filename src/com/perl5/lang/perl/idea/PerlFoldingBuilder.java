@@ -203,9 +203,6 @@ public class PerlFoldingBuilder extends FoldingBuilderEx {
         for (PsiElement block : PsiTreeUtil.findChildrenOfType(root, c)) {
             if (!(block instanceof PsiPerlNamespaceBlock || block instanceof PsiPerlNamespaceContent)) {
 
-                if (block instanceof PsiPerlBlock && block.getParent() instanceof PerlSubDefinition)
-                    block = block.getParent();
-
                 TextRange range = block.getTextRange();
                 int startOffset = range.getStartOffset() + startMargin;
                 int endOffset = range.getEndOffset() - endMargin;
@@ -242,10 +239,6 @@ public class PerlFoldingBuilder extends FoldingBuilderEx {
             return "# Block comment";
         else if (elementType == PerlElementTypes.COMMENT_LINE)
             return "# comments...";
-//		else if (elementType == PerlElementTypes.NAMESPACE_BLOCK)
-//			return node.getFirstChildNode().getText() + "...";
-        else if (elementType == PerlElementTypes.SUB_DEFINITION)
-            return node.getText().substring(0, node.getTextLength() - node.getLastChildNode().getTextLength()) + "{...}";
         else if (elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_EXPR)
             return "imports...";
         else

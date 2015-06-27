@@ -1378,15 +1378,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			yybegin(LEX_PREPARSED_ITEMS);
 			setTokenEnd(getTokenStart() + subPackageName.length());
 		}
-//		else // some heuristic here?
-//		{
-//		}
-
-//		|| knownPackages.contains(canonicalPackageName)
-//			|| PerlPackageUtil.isBuiltIn(canonicalPackageName)
-//			|| ( && PerlPackageUtil.findNamespaceDefinitions(myProject, canonicalPackageName).size() > 0)
-//		)
-//				|| PerlPackageUtil.listDefinedPackageNames()
 
 		return getPackageTokenType();
 	}
