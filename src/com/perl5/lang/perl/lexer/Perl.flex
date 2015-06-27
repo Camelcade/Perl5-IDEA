@@ -84,6 +84,7 @@ PERL_BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
 // todo adjust in perl lexer too
 PERL_PACKAGE_AMBIGUOUS = "::" * {PERL_BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {PERL_BASIC_IDENTIFIER}) +
+PERL_PACKAGE_AMBIGUOUS_SHORT = "::" + {PERL_BASIC_IDENTIFIER}
 PERL_PACKAGE_CANONICAL = "::" * {PERL_BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {PERL_BASIC_IDENTIFIER}) * "::" +
 
 
@@ -401,6 +402,7 @@ TRANS_MODIFIERS = [cdsr]
 
 {BAREWORD} { return guessBareword();}
 {PERL_PACKAGE_AMBIGUOUS} {return guessPackageName();}
+{PERL_PACKAGE_AMBIGUOUS_SHORT} {return guessPackageName();}
 {PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}
 
 /* error fallback [^] */
