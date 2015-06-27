@@ -165,6 +165,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	protected PerlLexerAdapter evalPerlLexer;
 
+	protected HashSet<String> KNOWN_SUBS = new HashSet<>();
+	protected HashSet<String> KNOWN_PACKAGES = new HashSet<>(PerlPackageUtil.BUILT_IN_ALL);
+
 	// todo implement constructor with project parameter, use it to build packages and subs set
 	// todo if project was not passed (highlighter, for example) use all opened projects or nothing ?
 	public PerlLexer(Project project)
@@ -172,10 +175,14 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		super((Reader) null);
 		myProject = project;
 
-//		if( project == null)
-//			System.out.println("Created lexer without project");
-//		else
-//			System.out.println("Created lexer with project");
+		if( project != null && !DumbService.isDumb(myProject))
+		{
+			KNOWN_SUBS.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
+			KNOWN_SUBS.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
+			KNOWN_SUBS.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
+
+			KNOWN_PACKAGES.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
+		}
 	}
 
 	/**
@@ -1372,16 +1379,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				return PACKAGE;
 		} else if  (	// 100% package::sub from perl perspective
 				FORCED_PACKAGES.contains(subCanonicalPackageName)	// fixme not sure about this
-//				|| PerlSubUtil.KNOWN_METHODS.contains(canonicalPackageName)
-				|| knownPackages.contains(subCanonicalPackageName)	// shortcut search for slow ones
-				|| indexAvailable &&
-						(		// slow searches
-								PerlPackageUtil.getDefinedPackageNames(myProject).contains(subCanonicalPackageName)
-								|| PerlSubUtil.getDeclaredSubsNames(myProject).contains(canonicalPackageName)
-								|| PerlSubUtil.getDeclaredSubsNames(myProject).contains(canonicalPackageName)
-								|| PerlGlobUtil.getDefinedGlobsNames(myProject).contains(canonicalPackageName)
-						)
-				)
+				|| KNOWN_SUBS.contains(canonicalPackageName)
+				|| KNOWN_PACKAGES.contains(subCanonicalPackageName) && !KNOWN_PACKAGES.contains(canonicalPackageName)
+		)
 		{
 			tokensList.clear();
 			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));

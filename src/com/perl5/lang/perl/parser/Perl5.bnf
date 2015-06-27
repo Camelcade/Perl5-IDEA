@@ -544,7 +544,8 @@ private sort_arguments ::=
     | sort_arguments_
 
 private sort_arguments_ ::=
-    block [comma] list_expr
+    scalar_variable list_expr
+    | block [comma] list_expr
     | callable list_expr
     | list_expr
 

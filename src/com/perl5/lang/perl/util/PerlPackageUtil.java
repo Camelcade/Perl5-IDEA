@@ -45,6 +45,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static final String PACKAGE_SEPARATOR = "::";
 	public static final String PACKAGE_SEPARATOR_LEGACY = "'";
 
+	public static final HashSet<String> BUILT_IN_ALL = new HashSet<>();
+
+	static{
+		BUILT_IN_ALL.addAll(BUILT_IN);
+		BUILT_IN_ALL.addAll(BUILT_IN_PRAGMA);
+		BUILT_IN_ALL.addAll(BUILT_IN_DEPRECATED);
+	}
+
     /**
 	 * Checks if package is built in
 	 * @param pacakgeName package name
@@ -53,7 +61,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static boolean isBuiltIn(String pacakgeName)
 	{
 		String canonicalPcakageName = getCanonicalPackageName(pacakgeName);
-		return BUILT_IN.contains(canonicalPcakageName) || BUILT_IN_DEPRECATED.contains(canonicalPcakageName) || BUILT_IN_PRAGMA.contains(canonicalPcakageName);
+		return BUILT_IN_ALL.contains(canonicalPcakageName);
 	}
 
 	/**
