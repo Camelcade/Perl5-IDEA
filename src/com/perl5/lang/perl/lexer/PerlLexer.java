@@ -1292,7 +1292,26 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return OPERATOR_TRENAR_ELSE;
 	}
 
-	private static final Pattern ambigousPackage = Pattern.compile("((?:(?:::)*[_a-zA-Z][_a-zA-Z0-9]*)?(?:(?:::)+[_a-zA-Z][_a-zA-Z0-9]*)*(?:::)+)([_a-zA-Z][_a-zA-Z0-9]*)");
+	// http://perldoc.perl.org/perldata.html#Identifier-parsing
+	private static final String reBasicIdentifier = "[_a-zA-Z][_a-zA-Z0-9]*"; // something strang in Java with unicode props
+	private static final String reSeparator =
+			"(?:" +
+				"(?:::)+'?" +
+				"|" +
+				"(?:::)*'" +
+			")";
+	private static final Pattern ambigousPackage = Pattern.compile(
+					"(" +
+						reSeparator + "?" +		// optional opening separator,
+						"(?:" +
+							reBasicIdentifier +
+							reSeparator +
+						")*" +
+					")" +
+					"(" +
+						reBasicIdentifier +
+					")"
+			);
 
 	/**
 	 * Guesses if it's package or package::method or package::variable
