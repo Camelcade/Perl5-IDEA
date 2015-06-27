@@ -1322,11 +1322,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		// check if sigil was before, check if
 		String packageName = yytext().toString();
-		if (knownPackages.contains(packageName))
-			return PACKAGE;
 
 		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(packageName);
 		String subPackageName = "";
+		String subCanonicalPackageName = "";
 		String subPackageTail = "";
 
 		Matcher m = ambigousPackage.matcher(packageName);
@@ -1335,7 +1334,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			try
 			{
 				subPackageName = m.group(1);
+				subCanonicalPackageName = PerlPackageUtil.getCanonicalPackageName(subPackageName);
 				subPackageTail = m.group(2);
+
 			} catch (Exception e)
 			{
 				e.printStackTrace();
@@ -1343,26 +1344,33 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		} else
 			throw new RuntimeException("Inappropriate package name " + packageName);
 
+		boolean indexAvailable = myProject != null && !DumbService.isDumb(myProject);
+
 		// lastcontroltokentype here causes @{sub()} to be parsed like array
-		if (SIGILS_TOKENS.contains(lastSignificantTokenType)) // got package variable
+		if (SIGILS_TOKENS.contains(lastSignificantTokenType)) // 100% variable name with package
 		{
 			tokensList.clear();
 			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), VARIABLE_NAME));
 			pushState();
 			yybegin(LEX_PREPARSED_ITEMS);
 			setTokenEnd(getTokenStart() + subPackageName.length());
-		} else if (
-				prePackageTokenTypes.contains(lastSignificantTokenType)
-						|| knownPackages.contains(canonicalPackageName)
-						|| PerlPackageUtil.isBuiltIn(canonicalPackageName)
-						|| (myProject != null && !DumbService.isDumb(myProject) && PerlPackageUtil.findNamespaceDefinitions(myProject, canonicalPackageName).size() > 0)
-				)
-//				|| PerlPackageUtil.listDefinedPackageNames()
+		} else if ( prePackageTokenTypes.contains(lastSignificantTokenType) )	// 100% package
 		{
 			// we shouldn't store used namespaces into the knownPackages
 			if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_REQUIRE)
 				return PACKAGE;
-		} else // guess it's sub
+		} else if  (	// 100% package::sub from perl perspective
+				FORCED_PACKAGES.contains(subCanonicalPackageName)	// fixme not sure about this
+				|| PerlSubUtil.KNOWN_METHODS.contains(canonicalPackageName)
+				|| knownPackages.contains(subCanonicalPackageName)
+				|| indexAvailable &&
+						(
+								PerlPackageUtil.findNamespaceDefinitions(myProject, subCanonicalPackageName).size() > 0
+								|| PerlSubUtil.findSubDeclarations(myProject, canonicalPackageName).size() > 0
+								|| PerlSubUtil.findSubDefinitions(myProject, canonicalPackageName).size() > 0
+								|| PerlGlobUtil.findGlobsDefinitions(myProject, canonicalPackageName).size() > 0
+						)
+				)
 		{
 			tokensList.clear();
 			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));
@@ -1370,6 +1378,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			yybegin(LEX_PREPARSED_ITEMS);
 			setTokenEnd(getTokenStart() + subPackageName.length());
 		}
+//		else // some heuristic here?
+//		{
+//		}
+
+//		|| knownPackages.contains(canonicalPackageName)
+//			|| PerlPackageUtil.isBuiltIn(canonicalPackageName)
+//			|| ( && PerlPackageUtil.findNamespaceDefinitions(myProject, canonicalPackageName).size() > 0)
+//		)
+//				|| PerlPackageUtil.listDefinedPackageNames()
 
 		return getPackageTokenType();
 	}

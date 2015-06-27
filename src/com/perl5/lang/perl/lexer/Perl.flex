@@ -350,6 +350,7 @@ TRANS_MODIFIERS = [cdsr]
 
 "?"  {trenarCounter++;return OPERATOR_TRENAR_IF;}
 ":"  {return guessColon();}
+"::"+  {return PACKAGE;}
 
 "\\" {return OPERATOR_REFERENCE;}
 

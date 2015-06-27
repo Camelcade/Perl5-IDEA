@@ -26,6 +26,11 @@ import java.util.Set;
  */
 public interface PerlSubUtilBuiltIn
 {
+	// this set is to help with PP undeclared and undefined methods
+	public static final HashSet<String> KNOWN_METHODS = new HashSet<>(Arrays.asList(
+			"UNIVERSAL::isa",
+			"UNIVERSAL::can"
+	));
 
 	public static final HashSet<String> BUILT_IN_UNARY = new HashSet<>(Arrays.asList(
 

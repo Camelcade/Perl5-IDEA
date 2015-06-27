@@ -28,6 +28,12 @@ import java.util.HashSet;
  */
 public interface LexerDetectionSets extends PerlElementTypes
 {
+	// Ambiguous package detectors
+	public static final HashSet<String> FORCED_PACKAGES = new HashSet<>(Arrays.asList(
+		"SUPER",
+		"main"
+	));
+
 	// tokens that preceeds regexp opener
 	public static final TokenSet REGEXP_PREFIX = TokenSet.create(
 			SEMICOLON,
