@@ -1323,20 +1323,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		tokensList.clear();
 
-		Matcher m = variablePattern.matcher(tokenText);
-		if (m.matches())
-		{
-			String sigil = m.group(1);
-			String name = m.group(2);
-
-			tokenStart += sigil.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
-
-			yypushback(tokenText.length() - sigil.length());
-			return getSigilTokenType(sigil);
-		}
-
-		m = bracedVariablePattern.matcher(tokenText);
+		Matcher m = bracedVariablePattern.matcher(tokenText);
 		if (m.matches())
 		{
 			String sigil = m.group(1);
@@ -1348,6 +1335,19 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
 			tokenStart += name.length();
 			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, RIGHT_BRACE));
+
+			yypushback(tokenText.length() - sigil.length());
+			return getSigilTokenType(sigil);
+		}
+
+		m = variablePattern.matcher(tokenText);
+		if (m.matches())
+		{
+			String sigil = m.group(1);
+			String name = m.group(2);
+
+			tokenStart += sigil.length();
+			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
 
 			yypushback(tokenText.length() - sigil.length());
 			return getSigilTokenType(sigil);
