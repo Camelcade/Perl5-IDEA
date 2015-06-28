@@ -605,7 +605,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		lastUnbraceToken = null;
 		lastUnparenTokenType = null;
 		lastUnparenToken = null;
-
+//		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
 	}
 
 	/**
@@ -779,6 +779,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				|| (nextChar != null && (
 				nextChar == '{'                    // *{...
 						|| nextChar == '_'                    // *{...
+						|| nextChar == ':'                // *::..
 						|| Character.isLetter(nextChar)    // *[a-z]...
 		)))
 			return SIGIL_GLOB;
@@ -801,6 +802,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				nextChar == '{'                            // &{...
 						|| nextChar == '_'                        // &_...
 //						|| nextChar == '$'                // &$... fixme this triggers in wrong places
+						|| nextChar == ':'                // &::..
 						|| Character.isLetter(nextChar)    // &[a-z]...
 		)))
 			return SIGIL_CODE;
@@ -818,16 +820,20 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		Character nextChar = getNextCharacter();
 
 		if (
-				lastSignificantTokenType != VARIABLE_NAME
-						&& (
+				lastSignificantTokenType != VARIABLE_NAME &&
+				(
 						lastSignificantTokenType == null
 								|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
 								|| (nextChar != null && (
-								nextChar == '{'                            // %{...
+										nextChar == '{'                    // %{...
 										|| nextChar == '_'                // %_...
 										|| nextChar == '$'                // %$...
+										|| nextChar == ':'                // %::..
 										|| Character.isLetter(nextChar)    // %[a-z]...
-						))))
+								)
+						)
+				)
+			)
 			return SIGIL_HASH;
 
 		return OPERATOR_MOD;
@@ -852,6 +858,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 		yypushback(yylength()-1);
 		return OPERATOR_X;
+	}
+
+	public IElementType parseCappedVariableName()
+	{
+		if (SIGILS_TOKENS.contains(lastUnbraceTokenType))
+			return VARIABLE_NAME;
+
+		yypushback(yylength()-1);
+		return OPERATOR_BITWISE_XOR;
 	}
 
 

@@ -133,7 +133,7 @@
         <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
 
         <localInspection language="Perl5"
-                         shortName="PackageFileMissing" displayName="Missing package file" groupName="Perl5" enabledByDefault="true" level="ERROR"
+                         shortName="PackageFileMissing" displayName="Missing package file" groupName="Perl5" enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlPackageFileMissingInspection" />
 
         <localInspection language="Perl5"

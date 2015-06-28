@@ -55,23 +55,6 @@ NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
 
 EMPTY_SPACE = [ \t\f\r\n]
-BAREWORD = [a-zA-Z_][a-zA-Z0-9_]*
-
-BAREWORD_MINUS = "-" * {BAREWORD}
-BAREWORD_STRING_COMMA = {BAREWORD_MINUS}{EMPTY_SPACE}*"=>"
-
-// bad solution, $scalar -function eats it
-ANYWORD = [^ \t\f\r\n]
-
-BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"FORMAT_LINE_BREAK_CHARACTERS"|"EXCEPTIONS_BEING_CAUGHT"|"LAST_REGEXP_CODE_RESULT"|"OUTPUT_RECORD_SEPARATOR"|"INPUT_RECORD_SEPARATOR"|"OUTPUT_FIELD_SEPARATOR"|"FORMAT_LINES_PER_PAGE"|"SUBSCRIPT_SEPARATOR"|"^CHILD_ERROR_NATIVE"|"EFFECTIVE_GROUP_ID"|"FORMAT_PAGE_NUMBER"|"MULTILINE_MATCHING"|"^WIDE_SYSTEM_CALLS"|"EFFECTIVE_USER_ID"|"EXTENDED_OS_ERROR"|"FORMAT_LINES_LEFT"|"INPUT_LINE_NUMBER"|"OUTPUT_AUTO_FLUSH"|"LAST_MATCH_START"|"LAST_PAREN_MATCH"|"EXECUTABLE_NAME"|"FORMAT_FORMFEED"|"FORMAT_TOP_NAME"|"^RE_DEBUG_FLAGS"|"^RE_TRIE_MAXBUF"|"LAST_MATCH_END"|"LIST_SEPARATOR"|"REAL_GROUP_ID"|"SYSTEM_FD_MAX"|"^WARNING_BITS"|"INPLACE_EDIT"|"PERL_VERSION"|"PROGRAM_NAME"|"REAL_USER_ID"|"ACCUMULATOR"|"CHILD_ERROR"|"FORMAT_NAME"|"^UTF8LOCALE"|"EVAL_ERROR"|"PROCESS_ID"|"COMPILING"|"DEBUGGING"|"POSTMATCH"|"^ENCODING"|"BASETIME"|"OS_ERROR"|"OVERLOAD"|"PREMATCH"|"^UNICODE"|"WARNING"|"OSNAME"|"PERLDB"|"SUBSEP"|"^TAINT"|"ERRNO"|"MATCH"|"^OPEN"|"ARGV"|"EGID"|"EUID"|"OFMT"|"ARG"|"ENV"|"GID"|"INC"|"OFS"|"ORS"|"PID"|"SIG"|"UID"|"NR"|"RS"|"\""|"\\"|"^A"|"^C"|"^D"|"^E"|"^F"|"^H"|"^I"|"^L"|"^M"|"^N"|"^O"|"^P"|"^R"|"^S"|"^T"|"^V"|"^W"|"^X"|"!"|"$"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"^"|"_"|"`"|"a"|"b"|"|"|"~"|"?"
-PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} ) [^a-zA-Z0-9_]
-
-BUILT_IN_ARRAY_NAME = "LAST_MATCH_START"|"EXPORT_TAGS"|"EXPORT_OK"|"OVERLOAD"|"EXPORT"|"ARGV"|"ENV"|"INC"|"ISA"|"SIG"|"^H"|"!"|"+"|"-"|"_"
-PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} ) [^a-zA-Z0-9_]
-PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} ) [^a-zA-Z0-9_]
-
-BUILT_IN_HASH_NAME = "EXPORT_TAGS"|"OVERLOAD"|"ENV"|"INC"|"SIG"|"^H"|"!"|"+"|"-"
-PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} ) [^a-zA-Z0-9_]
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 //PERL_XIDS = [\w && \p{XID_Start}]
@@ -79,19 +62,36 @@ PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} ) 
 PERL_XIDS = [_a-zA-Z]
 PERL_XIDC = [_a-zA-Z0-9]
 
+BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
-PERL_BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
+BAREWORD_MINUS = "-" * {BASIC_IDENTIFIER}
+BAREWORD_STRING_COMMA = {BAREWORD_MINUS}{EMPTY_SPACE}*"=>"
+
+// bad solution, $scalar -function eats it
+ANYWORD = [^ \t\f\r\n]
+
+CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
+
+BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"\""|"\\"|"!"|"$"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"^"|"_"|"`"|"|"|"~"|"?"
+PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} ) [^a-zA-Z0-9_]
+
+BUILT_IN_ARRAY_NAME = "!"|"+"|"-"|"_"
+PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} ) [^a-zA-Z0-9_]
+PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} ) [^a-zA-Z0-9_]
+
+BUILT_IN_HASH_NAME = "!"|"+"|"-"
+PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} ) [^a-zA-Z0-9_]
 
 // todo adjust in perl lexer too
-PERL_PACKAGE_AMBIGUOUS = "::" * {PERL_BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {PERL_BASIC_IDENTIFIER}) +
-PERL_PACKAGE_AMBIGUOUS_SHORT = "::" + {PERL_BASIC_IDENTIFIER}
-PERL_PACKAGE_CANONICAL = "::" * {PERL_BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {PERL_BASIC_IDENTIFIER}) * "::" +
+PERL_PACKAGE_AMBIGUOUS = "::" * {BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {BASIC_IDENTIFIER}) +
+PERL_PACKAGE_AMBIGUOUS_SHORT = "::" + {BASIC_IDENTIFIER}
+PERL_PACKAGE_CANONICAL = "::" * {BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {BASIC_IDENTIFIER}) * "::" +
 
 
 CHAR_ANY        = .|{NEW_LINE}
 QUOTE           = "\"" | "'" | "`"
 
-CAPTURE_LABEL_DEFINITION = {BAREWORD}{EMPTY_SPACE}*":"[^:]
+CAPTURE_LABEL_DEFINITION = {BASIC_IDENTIFIER}{EMPTY_SPACE}*":"[^:]
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
@@ -138,7 +138,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_HEREDOC_OPENER>
 {
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {BAREWORD}     {popState();return STRING_CONTENT;}
+    {BASIC_IDENTIFIER}     {popState();return STRING_CONTENT;}
     {QUOTE}        {popState();return processStringOpener();}
     [^]            {throw new Error("Can't be here");}
 }
@@ -151,7 +151,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_LABEL_DEFINITION>
 {
-    {BAREWORD} {
+    {BASIC_IDENTIFIER} {
         if( trenarCounter > 0 )
         {
             endCustomBlock();
@@ -180,7 +180,7 @@ TRANS_MODIFIERS = [cdsr]
     {PERL_PACKAGE_CANONICAL} {
         // subname
         return getPackageTokenType();}
-    {BAREWORD} {yybegin(LEX_SUB_DEFINITION);return getSubTokenType();}
+    {BASIC_IDENTIFIER} {yybegin(LEX_SUB_DEFINITION);return getSubTokenType();}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     .   {yypushback(1);yybegin(LEX_SUB_DEFINITION);break;}
@@ -386,7 +386,6 @@ TRANS_MODIFIERS = [cdsr]
 ")"             {return RIGHT_PAREN;}
 
 
-{NUMBER_HEX}        {return NUMBER;}
 {NUMBER}        {return NUMBER;}
 {PERL_VERSION}  {return NUMBER_VERSION;}
 
@@ -401,7 +400,8 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
 
-{BAREWORD} { return guessBareword();}
+{CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
+{BASIC_IDENTIFIER} { return guessBareword();}
 {PERL_PACKAGE_AMBIGUOUS} {return guessPackageName();}
 {PERL_PACKAGE_AMBIGUOUS_SHORT} {return guessPackageName();}
 {PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}

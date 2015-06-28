@@ -503,7 +503,7 @@ private unary_expr ::= <<parseExpressionLevel 14>>
 private immutable_expr ::= <<parseExpressionLevel 22>>
 
 named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_expr]
-named_list_expr ::= <<isListOperator>> method [list_expr]
+named_list_expr ::= <<isListOperator>> method [call_arguments]
 
 term_expr ::=
     variable_declaration
@@ -521,7 +521,6 @@ term_expr ::=
     | require_expr
     | undef_expr
     | sub_call_expr
-//    | rightward_call_expr
     | reference_value_expr
     | variable_expr
     | namespace_expr
@@ -555,7 +554,7 @@ parenthesised_expr ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=
 private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
 
-deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) +
+deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) + {pin(".*")=1}
 
 private op_3_expr ::= pref_pp_expr | suff_pp_expr
 pref_pp_expr ::= (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS) expr
@@ -631,12 +630,10 @@ assign_expr ::= expr ((
     |OPERATOR_OR_DEFINED_ASSIGN
     ) expr ) + { rightAssociative=true }
 
-
-
-private comma_expr ::= comma_sequence_expr | comma_last_expr
-comma_last_expr ::= expr comma
-comma_sequence_expr ::= expr (comma_any expr) +
-private comma_any ::= comma + !(RIGHT_PAREN|"]"|"}")
+private comma_expr ::= comma_sequence_expr | trailing_comma_expr
+comma_sequence_expr ::= expr (comma_any+ expr ) + {pin(".*")=1}
+trailing_comma_expr ::= expr comma+ // fixme we should annotate this
+private comma_any ::= comma + !(RIGHT_PAREN|RIGHT_BRACKET|RIGHT_BRACE|SEMICOLON)
 
 lp_not_expr ::= OPERATOR_NOT_LP expr { rightAssociative=true }
 lp_and_expr ::= expr (OPERATOR_AND_LP expr)+
