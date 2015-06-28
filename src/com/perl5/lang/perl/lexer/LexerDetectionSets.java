@@ -45,6 +45,25 @@ public interface LexerDetectionSets extends PerlElementTypes
 //			SUB	// fixme this works with argumentless subs, not all of them
 	);
 
+
+	// tokens that preceeds code sigil
+	public static final TokenSet CODE_SIGIL_PREFIX = TokenSet.create(
+			SEMICOLON,
+			COLON,
+			LEFT_PAREN,
+			LEFT_BRACE,
+			LEFT_BRACKET
+	);
+
+	// tokens that preceeds hash sigil
+	public static final TokenSet HASH_SIGIL_PREFIX = TokenSet.create(
+			SEMICOLON,
+			COLON,
+			LEFT_PAREN,
+			LEFT_BRACE,
+			LEFT_BRACKET
+	);
+
 	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<>(Arrays.asList(
 			"split",
 			"grep"

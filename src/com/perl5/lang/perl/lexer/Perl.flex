@@ -72,15 +72,15 @@ ANYWORD = [^ \t\f\r\n]
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
-BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"\""|"\\"|"!"|"$"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"^"|"_"|"`"|"|"|"~"|"?"
-PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} ) [^a-zA-Z0-9_]
+BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"_"|"`"|"|"|"~"|"?"
+PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} )
 
 BUILT_IN_ARRAY_NAME = "!"|"+"|"-"|"_"
-PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} ) [^a-zA-Z0-9_]
-PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} ) [^a-zA-Z0-9_]
+PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
+PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
 
 BUILT_IN_HASH_NAME = "!"|"+"|"-"
-PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} ) [^a-zA-Z0-9_]
+PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
 
 // todo adjust in perl lexer too
 PERL_PACKAGE_AMBIGUOUS = "::" * {BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {BASIC_IDENTIFIER}) +
@@ -369,14 +369,15 @@ TRANS_MODIFIERS = [cdsr]
 
 "&" {return guessAmp();}    // bitwise and or code sigil
 "|" {return OPERATOR_BITWISE_OR;}
-"^" {return OPERATOR_BITWISE_XOR;}
+"^" {return guessBitwiseXor();}
 "~" {return OPERATOR_BITWISE_NOT;}
 
 "=" {return OPERATOR_ASSIGN;}
 
-"@" {return SIGIL_ARRAY;}
-"$#" {return SIGIL_SCALAR_INDEX;}
-"$" {return SIGIL_SCALAR;}
+"%""$"* {return parseHashSigil();}
+"@""$"* {return parseArraySigil();}
+"$#""$"* {return parseScalarSigilIndex();}
+"$"+ {return parseScalarSigil();}
 
 "{"             {return LEFT_BRACE;}
 "}"             {return RIGHT_BRACE;}
@@ -391,10 +392,10 @@ TRANS_MODIFIERS = [cdsr]
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 
-{PERL_SCALAR_BUILT_IN}      {yypushback(1);return parseBuiltInVariable();}
-{PERL_ARRAY_BUILT_IN}       {yypushback(1);return parseBuiltInVariable();}
-{PERL_ARRAY_INDEX_BUILT_IN} {yypushback(1);return parseBuiltInVariable();}
-{PERL_HASH_BUILT_IN}        {yypushback(1);return parseBuiltInVariable();}
+{PERL_SCALAR_BUILT_IN}      {return parseBuiltInVariable();}
+{PERL_ARRAY_BUILT_IN}       {return parseBuiltInVariable();}
+{PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}
+{PERL_HASH_BUILT_IN}        {return parseBuiltInVariable();}
 
 {BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}

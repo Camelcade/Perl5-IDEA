@@ -27,6 +27,7 @@ public interface PerlScalarUtilBuiltIn
 {
 	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
 			"!",
+			"^",
 			"^RE_TRIE_MAXBUF",
 			"LAST_REGEXP_CODE_RESULT",
 			"\"",

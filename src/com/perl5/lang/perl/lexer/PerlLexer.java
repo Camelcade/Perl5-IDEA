@@ -774,8 +774,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		Character nextChar = getNextCharacter();
 
 		if (lastSignificantTokenType == null
-				|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
 				|| GLOB_SIGIL_PREFIX.contains(lastSignificantTokenType)
+				|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
 				|| (nextChar != null && (
 				nextChar == '{'                    // *{...
 						|| nextChar == '_'                    // *{...
@@ -797,6 +797,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		Character nextChar = getNextCharacter();
 		// todo works bad
 		if (lastSignificantTokenType == null
+				|| CODE_SIGIL_PREFIX.contains(lastSignificantTokenType)
 				|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
 				|| (nextChar != null && (
 				nextChar == '{'                            // &{...
@@ -823,6 +824,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				lastSignificantTokenType != VARIABLE_NAME &&
 				(
 						lastSignificantTokenType == null
+								|| HASH_SIGIL_PREFIX.contains(lastSignificantTokenType)
 								|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
 								|| (nextChar != null && (
 										nextChar == '{'                    // %{...
@@ -1208,6 +1210,100 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return SEMICOLON;
 	}
 
+
+	@Override
+	public IElementType parseScalarSigil()
+	{
+		String tokenText = yytext().toString();
+		Character nextSignificantCharacter = getNextSignificantCharacter();
+
+		if( tokenText.length() > 1)	// may be sequential sigils or sequential sigils and built in $$
+		{
+			pushState();
+			yybegin(LEX_PREPARSED_ITEMS);
+			tokensList.clear();
+
+			int tokenStart = getTokenStart();
+
+			if( nextSignificantCharacter != null
+					&& (
+						Character.isLetterOrDigit(nextSignificantCharacter)	// $$$$varname
+						|| nextSignificantCharacter.equals('{')	// $$$${varname}
+					)
+			)
+			{
+				// just sigils
+				tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+			}
+			else
+			{
+				// sigils and $$
+				int tokenEnd = getTokenEnd();
+
+				if( tokenEnd -1 > tokenStart + 1)
+					tokensList.add(new CustomToken(tokenStart + 1, tokenEnd-1, SIGIL_SCALAR));
+				tokensList.add(new CustomToken(tokenEnd-1, tokenEnd, VARIABLE_NAME));
+			}
+			setTokenEnd(tokenStart + 1);
+		}
+		else if( lastSignificantTokenType == LEFT_BRACE && nextSignificantCharacter != null && nextSignificantCharacter.equals('}')) // for ${$}
+			return VARIABLE_NAME;
+
+		return SIGIL_SCALAR;
+	}
+
+	@Override
+	public IElementType parseScalarSigilIndex()
+	{
+		String tokenText = yytext().toString();
+		if( tokenText.length() > 2)
+		{
+			pushState();
+			yybegin(LEX_PREPARSED_ITEMS);
+			tokensList.clear();
+			int tokenStart = getTokenStart();
+			tokensList.add(new CustomToken(tokenStart + 2, getTokenEnd(), SIGIL_SCALAR));
+			setTokenEnd(tokenStart + 2);
+		}
+
+		return SIGIL_SCALAR_INDEX;
+	}
+
+	@Override
+	public IElementType parseArraySigil()
+	{
+		String tokenText = yytext().toString();
+		if( tokenText.length() > 1)
+		{
+			pushState();
+			yybegin(LEX_PREPARSED_ITEMS);
+			tokensList.clear();
+			int tokenStart = getTokenStart();
+			tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+			setTokenEnd(tokenStart + 1);
+		}
+
+		return SIGIL_ARRAY;
+	}
+
+	@Override
+	public IElementType parseHashSigil()
+	{
+		String tokenText = yytext().toString();
+
+		if( tokenText.length() > 1)
+		{
+			pushState();
+			yybegin(LEX_PREPARSED_ITEMS);
+			tokensList.clear();
+			int tokenStart = getTokenStart();
+			tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+			setTokenEnd(tokenStart+1);
+		}
+
+		return SIGIL_HASH;
+	}
+
 	/**
 	 * Parses token as built-in variable
 	 */
@@ -1217,6 +1313,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	@Override
 	public IElementType parseBuiltInVariable()
 	{
+//		if( !isLastToken() )
+//		yypushback(1);
+
 		String tokenText = yytext().toString();
 		int tokenStart = getTokenStart();
 		pushState();
@@ -1325,6 +1424,14 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return OPERATOR_TRENAR_ELSE;
 	}
 
+	@Override
+	public IElementType guessBitwiseXor()
+	{
+		if( lastUnbraceTokenType == SIGIL_SCALAR )
+			return VARIABLE_NAME;
+		return 	OPERATOR_BITWISE_XOR;
+	}
+
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	private static final String reBasicIdentifier = "[_a-zA-Z][_a-zA-Z0-9]*"; // something strang in Java with unicode props
 	private static final String reSeparator =
@@ -1377,10 +1484,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		} else
 			throw new RuntimeException("Inappropriate package name " + packageName);
 
-		boolean indexAvailable = myProject != null && !DumbService.isDumb(myProject);
-
 		// lastcontroltokentype here causes @{sub()} to be parsed like array
-		if (SIGILS_TOKENS.contains(lastSignificantTokenType)) // 100% variable name with package
+		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // 100% variable name with package
 		{
 			tokensList.clear();
 			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), VARIABLE_NAME));
@@ -1392,17 +1497,25 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			// we shouldn't store used namespaces into the knownPackages
 			if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_REQUIRE)
 				return PACKAGE;
-		} else if  (	// 100% package::sub from perl perspective
-				FORCED_PACKAGES.contains(subCanonicalPackageName)	// fixme not sure about this
-				|| KNOWN_SUBS.contains(canonicalPackageName)
-				|| KNOWN_PACKAGES.contains(subCanonicalPackageName) && !KNOWN_PACKAGES.contains(canonicalPackageName)
-		)
-		{
-			tokensList.clear();
-			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-			setTokenEnd(getTokenStart() + subPackageName.length());
+		} else{
+
+			boolean mayBeSub = KNOWN_SUBS.contains(canonicalPackageName);
+			boolean mayBePackage = KNOWN_PACKAGES.contains(canonicalPackageName);
+			Character nextSignificantCharacter = getNextSignificantCharacter();
+
+
+			if  (	// 100% package::sub from perl perspective
+					FORCED_PACKAGES.contains(subCanonicalPackageName)	// main/SUPER/CORE
+					|| !mayBePackage	// no such package
+					|| mayBeSub && nextSignificantCharacter != null && nextSignificantCharacter.equals('(') // has sub and package
+			)
+			{
+				tokensList.clear();
+				tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));
+				pushState();
+				yybegin(LEX_PREPARSED_ITEMS);
+				setTokenEnd(getTokenStart() + subPackageName.length());
+			}
 		}
 
 		return getPackageTokenType();

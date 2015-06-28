@@ -56,6 +56,14 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType getHandleTokenType();
 	public abstract IElementType getSubTokenType();
 	public abstract IElementType guessPackageName();
+	public abstract IElementType guessBitwiseXor();
+
+
+	public abstract IElementType parseScalarSigil();
+	public abstract IElementType parseScalarSigilIndex();
+	public abstract IElementType parseArraySigil();
+	public abstract IElementType parseHashSigil();
+
 
 	public abstract IElementType processSemicolon();
 
