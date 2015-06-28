@@ -52,6 +52,11 @@ public interface LexerDetectionSets extends PerlElementTypes
 
 	// tokens that preceeds <FH> opening angle
 	public static final TokenSet LEFT_ANGLE_PREFIX = TokenSet.create(
+			RESERVED_PRINT,
+			RESERVED_PRINTF,
+			RESERVED_SAY,
+			RESERVED_WHILE,
+
 			OPERATOR_CMP_NUMERIC,
 			OPERATOR_LE_NUMERIC,
 			OPERATOR_GE_NUMERIC,
