@@ -62,9 +62,9 @@ EMPTY_SPACE = [ \t\f\r\n]
 PERL_XIDS = [_a-zA-Z]
 PERL_XIDC = [_a-zA-Z0-9]
 
-BASIC_IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
+IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
-BAREWORD_MINUS = "-" * {BASIC_IDENTIFIER}
+BAREWORD_MINUS = "-" * {IDENTIFIER}
 BAREWORD_STRING_COMMA = {BAREWORD_MINUS}{EMPTY_SPACE}*"=>"
 
 // bad solution, $scalar -function eats it
@@ -82,16 +82,14 @@ PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRA
 BUILT_IN_HASH_NAME = "!"|"+"|"-"
 PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
 
-// todo adjust in perl lexer too
-PERL_PACKAGE_AMBIGUOUS = "::" * {BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {BASIC_IDENTIFIER}) +
-PERL_PACKAGE_AMBIGUOUS_SHORT = "::" + {BASIC_IDENTIFIER}
-PERL_PACKAGE_CANONICAL = "::" * {BASIC_IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {BASIC_IDENTIFIER}) * "::" +
+PACKAGE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) +
+PACKAGE_SHORT = "::"+ "'" ?
 
 
 CHAR_ANY        = .|{NEW_LINE}
 QUOTE           = "\"" | "'" | "`"
 
-CAPTURE_LABEL_DEFINITION = {BASIC_IDENTIFIER}{EMPTY_SPACE}*":"[^:]
+CAPTURE_LABEL_DEFINITION = {IDENTIFIER}{EMPTY_SPACE}*":"[^:]
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
@@ -138,7 +136,7 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_HEREDOC_OPENER>
 {
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {BASIC_IDENTIFIER}     {popState();return STRING_CONTENT;}
+    {IDENTIFIER}     {popState();return STRING_CONTENT;}
     {QUOTE}        {popState();return processStringOpener();}
     [^]            {throw new Error("Can't be here");}
 }
@@ -151,11 +149,11 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_LABEL_DEFINITION>
 {
-    {BASIC_IDENTIFIER} {
+    {IDENTIFIER} {
         if( trenarCounter > 0 )
         {
             endCustomBlock();
-            return guessBareword();
+            return getIdentifierToken();
         }
         else
             return LABEL;
@@ -177,10 +175,8 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_SUB_NAME>
 {
-    {PERL_PACKAGE_CANONICAL} {
-        // subname
-        return getPackageTokenType();}
-    {BASIC_IDENTIFIER} {yybegin(LEX_SUB_DEFINITION);return getSubTokenType();}
+    {PACKAGE} { return PACKAGE;}
+    {IDENTIFIER} {yybegin(LEX_SUB_DEFINITION);return IDENTIFIER;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     .   {yypushback(1);yybegin(LEX_SUB_DEFINITION);break;}
@@ -351,7 +347,6 @@ TRANS_MODIFIERS = [cdsr]
 
 "?"  {trenarCounter++;return OPERATOR_TRENAR_IF;}
 ":"  {return guessColon();}
-"::"+  {return PACKAGE;}
 
 "\\" {return OPERATOR_REFERENCE;}
 
@@ -400,10 +395,10 @@ TRANS_MODIFIERS = [cdsr]
 {CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
 
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
-{BASIC_IDENTIFIER} { return guessBareword();}
-{PERL_PACKAGE_AMBIGUOUS} {return guessPackageName();}
-{PERL_PACKAGE_AMBIGUOUS_SHORT} {return guessPackageName();}
-{PERL_PACKAGE_CANONICAL} {return getPackageTokenType();}
+
+{IDENTIFIER} { return getIdentifierToken();}
+{PACKAGE_SHORT} {return PACKAGE;}
+{PACKAGE} {return PACKAGE;}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

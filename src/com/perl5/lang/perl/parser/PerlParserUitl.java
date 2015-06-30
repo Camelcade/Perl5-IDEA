@@ -345,4 +345,54 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
+
+	/**
+	 * Replaces identifier as a variable name
+	 * @param b Perlbuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean convertIdentifier(PsiBuilder b, int l, IElementType tokenType)
+	{
+		if( b.getTokenType() == IDENTIFIER )
+		{
+			b.remapCurrentToken(tokenType);
+			b.advanceLexer();
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Merges sequence [package] identifier to a package
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
+	public static boolean mergePackageName(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+
+		if( tokenType == IDENTIFIER )	// single word package
+		{
+			b.remapCurrentToken(PACKAGE);
+			b.advanceLexer();
+			return true;
+		}
+		else if(
+			tokenType == PACKAGE && b.lookAhead(1) == IDENTIFIER
+		)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			b.advanceLexer();
+			m.collapse(PACKAGE);
+			return true;
+		}
+
+		return false;
+	}
+
+
 }

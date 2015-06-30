@@ -16,14 +16,22 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.project.DumbService;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 30.06.2015.
  * This file contains my attempt to guess ambigious things like: *, %, <, >, &
  * I've stopped this direction after realized that i need to parse in lexer, cause }%$ may be a mod if it was hash
  * element before brace and may be a hash sigil if it was a block and lexer does not know it
+ * At the moment this is a deadend
  */
 public class PerlLexerExtra
 {
@@ -387,5 +395,276 @@ public class PerlLexerExtra
 //			),
 //			OPERATORS_TOKENSET
 //	);
+
+	// http://perldoc.perl.org/perldata.html#Identifier-parsing
+//	private static final String reBasicIdentifier = "[_a-zA-Z][_a-zA-Z0-9]*"; // something strang in Java with unicode props
+//	private static final String reSeparator =
+//			"(?:" +
+//					"(?:::)+'?" +
+//					"|" +
+//					"(?:::)*'" +
+//					")";
+//	private static final Pattern ambigousPackage = Pattern.compile(
+//			"(" +
+//					reSeparator + "?" +        // optional opening separator,
+//					"(?:" +
+//					reBasicIdentifier +
+//					reSeparator +
+//					")*" +
+//					")" +
+//					"(" +
+//					reBasicIdentifier +
+//					")"
+//	);
+//
+//	/**
+//	 * Guesses if it's package or package::method or package::variable
+//	 *
+//	 * @return token type or null if re-parsed
+//	 */
+//	public IElementType guessPackageName()
+//	{
+//		// check if sigil was before, check if
+//		String packageName = yytext().toString();
+//
+//		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(packageName);
+//		String subPackageName = "";
+//		String subCanonicalPackageName = "";
+//		String subPackageTail = "";
+//
+//		Matcher m = ambigousPackage.matcher(packageName);
+//		if (m.matches())
+//		{
+//			try
+//			{
+//				subPackageName = m.group(1);
+//				subCanonicalPackageName = PerlPackageUtil.getCanonicalPackageName(subPackageName);
+//				subPackageTail = m.group(2);
+//
+//			} catch (Exception e)
+//			{
+//				e.printStackTrace();
+//			}
+//		} else
+//			throw new RuntimeException("Inappropriate package name " + packageName);
+//
+//		Character nextSignificantCharacter = getNextSignificantCharacter();
+//
+//		// lastcontroltokentype here causes @{sub()} to be parsed like array
+//		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)
+//				&& (lastSignificantTokenType != LEFT_BRACE
+//				|| nextSignificantCharacter != null && nextSignificantCharacter.equals('}')
+//		)
+//				) // 100% variable name with package
+//		{
+//			tokensList.clear();
+//			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), VARIABLE_NAME));
+//			pushState();
+//			yybegin(LEX_PREPARSED_ITEMS);
+//			setTokenEnd(getTokenStart() + subPackageName.length());
+//		} else if (prePackageTokenTypes.contains(lastSignificantTokenType))    // 100% package
+//		{
+//			// we shouldn't store used namespaces into the knownPackages
+//			if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_REQUIRE)
+//				return PACKAGE;
+//		} else
+//		{
+//
+//			boolean mayBeSub = KNOWN_SUBS.contains(canonicalPackageName);
+//			boolean mayBePackage = KNOWN_PACKAGES.contains(canonicalPackageName);
+//
+//
+//			if (    // 100% package::sub from perl perspective
+//					FORCED_PACKAGES.contains(subCanonicalPackageName)    // main/SUPER/CORE
+//							|| !mayBePackage    // no such package
+//							|| mayBeSub && nextSignificantCharacter != null && nextSignificantCharacter.equals('(') // has sub and package
+//					)
+//			{
+//				tokensList.clear();
+//				tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));
+//				pushState();
+//				yybegin(LEX_PREPARSED_ITEMS);
+//				setTokenEnd(getTokenStart() + subPackageName.length());
+//			}
+//		}
+//
+//		return getPackageTokenType();
+//	}
+//
+//	/**
+//	 * Guessing bareword as function or package, if it has been used before
+//	 *
+//	 * @return token type
+//	 */
+//	@Override
+//	public IElementType guessBareword()
+//	{
+//		String bareword = yytext().toString();
+//		IElementType tokenType = null;
+//
+//		// todo check for defined labels
+//
+////		Character nextCharacter = getNextCharacter();
+//		Character nextSignificantCharacter = getNextSignificantCharacter();
+//
+//		boolean isFollowedRightBrace = ((Character) '}').equals(nextSignificantCharacter);
+//
+//		// ->bareword
+//		if (lastSignificantTokenType == OPERATOR_DEREFERENCE)
+//			return SUB;
+//			// $/@/... bareword
+//		else if (SIGILS_TOKENS.contains(lastUnbraceTokenType)
+//				&& (lastSignificantTokenType != LEFT_BRACE || isFollowedRightBrace)
+//				)
+//			return VARIABLE_NAME;
+//			// package/use/no/require/... bareword
+//		else if (prePackageTokenTypes.contains(lastSignificantTokenType))
+//			return getPackageTokenType();
+//		else if (lastSignificantTokenType == LEFT_BRACE && isFollowedRightBrace && PRE_BRACED_STRING_TOKENS.contains(lastUnbraceTokenType))
+//			return STRING_CONTENT;
+//			// BEGIN, INIT, etc
+//		else if ((tokenType = blockNames.get(bareword)) != null)
+//			return tokenType;
+//			// __PACKAGE__, __LINE__ etc
+//		else if ((tokenType = tagNames.get(bareword)) != null)
+//			return tokenType;
+//			// and/not/defined/scalar/...
+//		else if ((tokenType = namedOperators.get(bareword)) != null)
+//			return tokenType;
+//			// filetest [(] bareword (])
+//		else if (preHandleTokenTypes.contains(lastUnparenTokenType)
+//				&& !((Character) '(').equals(nextSignificantCharacter)
+//				&& (lastSignificantTokenType != LEFT_PAREN || ((Character) ')').equals(nextSignificantCharacter))
+//				)
+//			return getHandleTokenType();
+//			// reserved bareword
+//		else if ((tokenType = reservedTokenTypes.get(bareword)) != null)
+//		{
+//			if (tokenType == RESERVED_QW)
+//				processQuoteLikeListOpener();
+//			else if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
+//				processTransOpener();
+//			else if (tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
+//				processQuoteLikeStringOpener();
+//			else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
+//				processRegexOpener();
+//			else if (tokenType == RESERVED_SUB)
+//			{
+//				pushState();
+//				yybegin(LEX_SUB_NAME);
+//			}
+//
+//			return tokenType;
+//		}
+//		// next/redo/last/goto bareword
+//		else if (preLabelTokenTypes.contains(lastUnparenTokenType))
+//			return LABEL;
+//			// already known subs
+//		else if (knownSubs.contains(bareword))
+//			return SUB;
+//			// built in subs (large list)
+//		else if (PerlSubUtil.BUILT_IN.contains(bareword))
+//			return getSubTokenType();
+//			// previously confirmed handles
+//		else if (knownHandles.contains(bareword))
+//			return HANDLE;
+//			// previously confirmed packages
+//		else if (knownPackages.contains(bareword))
+//			return PACKAGE;
+//			// built in filehandles
+//		else if (PerlGlobUtil.BUILT_IN.contains(bareword))
+//			return HANDLE;
+//			// open/binmode/etc with filehandle
+//		else if (preHandleTokens.contains(lastUnparenToken) && preHandleProperSuffix.contains(nextSignificantCharacter))
+//			return getHandleTokenType();
+//			// print/say/printf HANDLE
+//		else if (preHandleTokenTypesPrint.contains(lastUnparenTokenType) && !printHandleNegativeChars.contains(nextSignificantCharacter))
+//			return getHandleTokenType();
+//			// built in packages (large list)
+//		else if (PerlPackageUtil.BUILT_IN.contains(bareword))
+//			return getPackageTokenType();
+//			// indexed packages
+//		else if (myProject != null && !DumbService.isDumb(myProject) && PerlPackageUtil.findNamespaceDefinitions(myProject, bareword).size() > 0)
+//			return getPackageTokenType();
+//
+//		return SUB;
+//	}
+//
+//	/**
+//	 * Returns any next character or null if eof
+//	 *
+//	 * @return character
+//	 */
+//	private Character getNextCharacter()
+//	{
+//		int currentPosition = getTokenEnd();
+//		int bufferEnd = getBufferEnd();
+//		CharSequence buffer = getBuffer();
+//		if (currentPosition < bufferEnd)
+//			return buffer.charAt(currentPosition);
+//		return null;
+//	}
+//
+//	/**
+//	 * searching for next non-spcae/newline/comment character
+//	 *
+//	 * @return next character
+//	 */
+//	private Character getNextSignificantCharacter()
+//	{
+//		int currentPosition = getTokenEnd();
+//		int bufferEnd = getBufferEnd();
+//		CharSequence buffer = getBuffer();
+//
+//		while (currentPosition < bufferEnd)
+//		{
+//			char currentChar = buffer.charAt(currentPosition);
+//			if (currentChar == '#')
+//			{
+//				while (currentPosition < bufferEnd)
+//				{
+//					if (buffer.charAt(currentPosition) == '\n')
+//						break;
+//					currentPosition++;
+//				}
+//			} else if (!Character.isWhitespace(currentChar))
+//				return currentChar;
+//
+//			currentPosition++;
+//		}
+//		return null;
+//	}
+
+//	@Override
+//	public IElementType getHandleTokenType()
+//	{
+//		String handleName = yytext().toString();
+//		if (!knownHandles.contains(handleName))
+//			knownHandles.add(handleName);
+//		return HANDLE;
+//	}
+//
+//	/**
+//	 * Registers 100% sure package
+//	 *
+//	 * @return token type
+//	 */
+//	@Override
+//	public IElementType getPackageTokenType()
+//	{
+//		String packageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
+//		if (!knownPackages.contains(packageName))
+//			knownPackages.add(packageName);
+//		return PACKAGE;
+//	}
+//
+//	@Override
+//	public IElementType getSubTokenType()
+//	{
+//		String subName = yytext().toString();
+//		if (!knownSubs.contains(subName))
+//			knownSubs.add(subName);
+//		return SUB;
+//	}
 
 }

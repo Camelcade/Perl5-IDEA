@@ -53,7 +53,9 @@ limitations under the License.
     ANNOTATION_METHOD_KEY="ANNOTATION_METHOD"
     ANNOTATION_ABSTRACT_KEY="ANNOTATION_ABSTRACT"
 
+    // generated tokens
     VARIABLE_NAME="VARIABLE_NAME"
+    SUB="SUB"
 
     HEREDOC="HEREDOC" // should be string content too
     HEREDOC_END="HEREDOC_END"
@@ -233,7 +235,8 @@ limitations under the License.
     QUOTE_TICK="`"
 
     // custom tokens
-    SUB="SUB"
+    IDENTIFIER="IDENTIFIER"
+
     SUB_ATTRIBUTE="SUB_ATTRIBUTE"
     SUB_PROTOTYPE_TOKEN="SUB_PROTOTYPE_TOKEN"
 
@@ -308,7 +311,7 @@ root ::= file_item *
 private file_item ::= !<<eof>> {SEMICOLON | namespace_block | namespace_item} //{pin=1 }
 
 namespace_block ::= namespace_definition (block | SEMICOLON namespace_content)
-namespace_definition ::= RESERVED_PACKAGE namespace_element [perl_version] {pin=1 recoverWhile=recover_namespace_definition}
+namespace_definition ::= RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=1 recoverWhile=recover_namespace_definition}
 private recover_namespace_definition ::= !(SEMICOLON | LEFT_BRACE)
 namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
 
@@ -403,7 +406,7 @@ private normal_statement ::= [label_declaration] expr [statement_modifier] {pin=
 
 sub_declaration ::= [annotations] RESERVED_SUB canonical_sub_name sub_declaration_parameters
 
-private canonical_sub_name ::= [namespace_element] SUB
+private canonical_sub_name ::= [namespace_element] <<convertIdentifier SUB>>
 
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
@@ -427,7 +430,7 @@ redo_expr ::= RESERVED_REDO [lnr_param] {pin=1}
 goto_expr ::= RESERVED_GOTO [goto_param] {pin=1}
 
 private lnr_param ::= LABEL | expr // fixme scalar_expr ?
-private goto_param ::= LABEL | OPERATOR_BITWISE_AND SUB | expr // fixme same, scalar expr?
+private goto_param ::= LABEL | OPERATOR_BITWISE_AND <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
 
 private statement_modifier ::=
     if_statement_modifier
@@ -450,11 +453,11 @@ use_statement ::= RESERVED_USE use_no_parameters {pin=1}
 no_statement ::= RESERVED_NO use_no_parameters {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters
-private use_module_parameters ::= namespace_element [perl_version] [expr];
+private use_module_parameters ::= <<mergePackageName>> [perl_version] [expr];
 private use_version_parameters ::= perl_version;
 
 undef_expr ::= RESERVED_UNDEF (variable | LEFT_PAREN variable RIGHT_PAREN) ? {pin=1}
-require_expr ::= RESERVED_REQUIRE (namespace_element | perl_version | scalar_expr)  {pin=1}// multiline string is possible too
+require_expr ::= RESERVED_REQUIRE (<<mergePackageName>> | perl_version | scalar_expr)  {pin=1}// multiline string is possible too
 
 private recover_statement ::= !(SEMICOLON | RIGHT_BRACE | REGEX_QUOTE_CLOSE)
 
@@ -851,15 +854,13 @@ private variable_body ::=
 
 private variable_body_namespace_braced ::= LEFT_BRACE namespace_element RIGHT_BRACE {pin=2}
 private variable_body_namespace ::= namespace_element
-private variable_body_braced ::= LEFT_BRACE [namespace_element] variable_name_element RIGHT_BRACE {pin=3}
-private variable_body_canonical ::= [namespace_element] variable_name_element {pin=2}
-
-private variable_name_element ::= VARIABLE_NAME
+private variable_body_braced ::= LEFT_BRACE [namespace_element] <<convertIdentifier VARIABLE_NAME>> RIGHT_BRACE {pin=3}
+private variable_body_canonical ::= [namespace_element] <<convertIdentifier VARIABLE_NAME>> {pin=2}
 
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::=
-    namespace_element SUB                  // package::method
-    | SUB [namespace_element !(SUB|OPERATOR_DEREFERENCE)]  // method package
+    namespace_element <<convertIdentifier SUB>>                  // package::method
+    | <<convertIdentifier SUB>> [namespace_element !(IDENTIFIER|OPERATOR_DEREFERENCE)]  // method package
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private annotations ::= annotation+

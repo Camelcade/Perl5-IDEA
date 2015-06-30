@@ -33,6 +33,8 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType guessDiv();
 	public abstract IElementType guessColon();
 
+	public abstract IElementType getIdentifierToken();
+
 	public abstract IElementType checkOperatorXAssign();
 	public abstract IElementType checkOperatorXSticked();
 	public abstract IElementType parseCappedVariableName();
@@ -45,12 +47,6 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract void popState();
 	public abstract void pushState();
 
-	public abstract IElementType getPackageTokenType();
-	public abstract IElementType guessBareword();
-	public abstract IElementType getReservedTokenType();
-	public abstract IElementType getHandleTokenType();
-	public abstract IElementType getSubTokenType();
-	public abstract IElementType guessPackageName();
 	public abstract IElementType guessBitwiseXor();
 
 	public abstract IElementType processSemicolon();
@@ -65,17 +61,11 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 
 	public abstract IElementType processOpenerWhiteSpace();
 
-	public abstract void processTransOpener();
 	public abstract IElementType processTransQuote();
 	public abstract IElementType processTransChar();
 	public abstract IElementType processTransCloser();
 
-	public abstract void processRegexOpener();
-
-	public abstract void processQuoteLikeListOpener();
 	public abstract IElementType processQuoteLikeListQuote();
-
-	public abstract void processQuoteLikeStringOpener();
 
 	public abstract IElementType processQuoteLikeQuote();
 	public abstract IElementType processQuoteLikeWord();
