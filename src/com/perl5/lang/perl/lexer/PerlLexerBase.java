@@ -30,13 +30,8 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	// @todo should be parseString
 	public abstract IElementType processStringOpener();
 
-	public abstract IElementType guessMul();
-	public abstract IElementType guessAmp();
-	public abstract IElementType guessMod();
 	public abstract IElementType guessDiv();
 	public abstract IElementType guessColon();
-	public abstract IElementType guessOpenAngle();
-	public abstract IElementType guessCloseAngle();
 
 	public abstract IElementType checkOperatorXAssign();
 	public abstract IElementType checkOperatorXSticked();
@@ -57,13 +52,6 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType getSubTokenType();
 	public abstract IElementType guessPackageName();
 	public abstract IElementType guessBitwiseXor();
-
-
-	public abstract IElementType parseScalarSigil();
-	public abstract IElementType parseScalarSigilIndex();
-	public abstract IElementType parseArraySigil();
-	public abstract IElementType parseHashSigil();
-
 
 	public abstract IElementType processSemicolon();
 

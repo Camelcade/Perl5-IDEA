@@ -28,155 +28,6 @@ import java.util.HashSet;
  */
 public interface LexerDetectionSets extends PerlElementTypes
 {
-	// Ambiguous package detectors
-	public static final HashSet<String> FORCED_PACKAGES = new HashSet<>(Arrays.asList(
-		"SUPER",
-		"main",
-		"CORE"
-	));
-
-	// tokens that preceeds regexp opener
-	public static final TokenSet REGEXP_PREFIX = TokenSet.create(
-			SEMICOLON,
-			COLON,
-			LEFT_PAREN,
-			LEFT_BRACE,
-			LEFT_BRACKET
-//			SUB	// fixme this works with argumentless subs, not all of them
-	);
-
-
-	// tokens that preceeds code sigil
-	public static final TokenSet CODE_SIGIL_PREFIX = TokenSet.create(
-			SEMICOLON,
-			COLON,
-			LEFT_PAREN,
-			LEFT_BRACE,
-			LEFT_BRACKET
-	);
-
-	// tokens that preceeds hash sigil
-	public static final TokenSet HASH_SIGIL_PREFIX = TokenSet.create(
-			SEMICOLON,
-			COLON,
-			LEFT_PAREN,
-			LEFT_BRACE,
-			LEFT_BRACKET
-	);
-
-	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<>(Arrays.asList(
-			"split",
-			"grep"
-	));
-
-	// tokens that preceeds <FH> opening angle
-	public static final TokenSet LEFT_ANGLE_PREFIX = TokenSet.create(
-			RESERVED_PRINT,
-			RESERVED_PRINTF,
-			RESERVED_SAY,
-			RESERVED_WHILE,
-
-			OPERATOR_CMP_NUMERIC,
-			OPERATOR_LE_NUMERIC,
-			OPERATOR_GE_NUMERIC,
-			OPERATOR_EQ_NUMERIC,
-			OPERATOR_NE_NUMERIC,
-			OPERATOR_LT_NUMERIC,
-			OPERATOR_GT_NUMERIC,
-
-			OPERATOR_CMP_STR,
-			OPERATOR_LE_STR,
-			OPERATOR_GE_STR,
-			OPERATOR_EQ_STR,
-			OPERATOR_NE_STR,
-			OPERATOR_LT_STR,
-			OPERATOR_GT_STR,
-
-			OPERATOR_HELLIP,
-			OPERATOR_FLIP_FLOP,
-			OPERATOR_CONCAT,
-
-			OPERATOR_POW,
-
-			OPERATOR_RE,
-			OPERATOR_NOT_RE,
-
-			OPERATOR_HEREDOC,
-			OPERATOR_SHIFT_LEFT,
-			OPERATOR_SHIFT_RIGHT,
-
-			OPERATOR_SMARTMATCH,
-
-			OPERATOR_AND,
-			OPERATOR_OR,
-			OPERATOR_OR_DEFINED,
-			OPERATOR_NOT,
-
-			OPERATOR_ASSIGN,
-			OPERATOR_POW_ASSIGN,
-
-			OPERATOR_PLUS_ASSIGN,
-			OPERATOR_MINUS_ASSIGN,
-			OPERATOR_CONCAT_ASSIGN,
-
-			OPERATOR_MUL_ASSIGN,
-			OPERATOR_DIV_ASSIGN,
-			OPERATOR_MOD_ASSIGN,
-			OPERATOR_X_ASSIGN,
-
-			OPERATOR_BITWISE_AND_ASSIGN,
-			OPERATOR_BITWISE_OR_ASSIGN,
-			OPERATOR_BITWISE_XOR_ASSIGN,
-
-			OPERATOR_SHIFT_LEFT_ASSIGN,
-			OPERATOR_SHIFT_RIGHT_ASSIGN,
-
-			OPERATOR_AND_ASSIGN,
-			OPERATOR_OR_ASSIGN,
-			OPERATOR_OR_DEFINED_ASSIGN,
-
-			OPERATOR_TRENAR_IF,
-			OPERATOR_TRENAR_ELSE,
-
-			OPERATOR_REFERENCE,
-
-			OPERATOR_DIV,
-			OPERATOR_MUL,
-			OPERATOR_MOD,
-			OPERATOR_PLUS,
-			OPERATOR_MINUS,
-
-			OPERATOR_BITWISE_NOT,
-			OPERATOR_BITWISE_AND,
-			OPERATOR_BITWISE_OR,
-			OPERATOR_BITWISE_XOR,
-
-			OPERATOR_AND_LP,
-			OPERATOR_OR_LP,
-			OPERATOR_XOR_LP,
-			OPERATOR_NOT_LP,
-
-			OPERATOR_COMMA,
-			OPERATOR_COMMA_ARROW,
-
-			SEMICOLON,
-			COLON,
-			LEFT_PAREN,
-			LEFT_BRACE,
-			LEFT_BRACKET
-	);
-
-	// tokens that preceeds glob sigil
-	public static final TokenSet GLOB_SIGIL_PREFIX = TokenSet.create(
-			SEMICOLON,
-			COLON,
-			LEFT_PAREN,
-			LEFT_BRACE,
-			LEFT_BRACKET
-	);
-
-	public static final HashSet<IElementType> RESERVED_TOKENSET = new HashSet<>();
-
 	// operators tokens (except commas)
 	public static final TokenSet OPERATORS_TOKENSET = TokenSet.create(
 			OPERATOR_CMP_NUMERIC,
@@ -270,6 +121,34 @@ public interface LexerDetectionSets extends PerlElementTypes
 			OPERATOR_FILETEST
 	);
 
+	// Ambiguous package detectors
+	public static final HashSet<String> FORCED_PACKAGES = new HashSet<>(Arrays.asList(
+			"SUPER",
+			"main",
+			"CORE"
+	));
+
+	// tokens that preceeds regexp opener
+	public static final TokenSet REGEXP_PREFIX = TokenSet.create(
+			SEMICOLON,
+			COLON,
+			LEFT_PAREN,
+			LEFT_BRACE,
+			LEFT_BRACKET
+//			SUB	// fixme this works with argumentless subs, not all of them
+	);
+
+
+
+	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<>(Arrays.asList(
+			"split",
+			"grep"
+	));
+
+
+	public static final HashSet<IElementType> RESERVED_TOKENSET = new HashSet<>();
+
+
 	// tokens which preceeds {bareword}
 	public static final TokenSet PRE_BRACED_STRING_TOKENS = TokenSet.create(
 			OPERATOR_DEREFERENCE,    // ..->{bareword}
@@ -293,10 +172,10 @@ public interface LexerDetectionSets extends PerlElementTypes
 	// pre-variable name tokens
 	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
 			SIGIL_ARRAY,
-			SIGIL_HASH,
 			SIGIL_SCALAR,
 			SIGIL_SCALAR_INDEX,
-			SIGIL_GLOB
+			OPERATOR_MOD,	// same token for hash sigil
+			OPERATOR_MUL	// same token for glob sigil
 	);
 
 

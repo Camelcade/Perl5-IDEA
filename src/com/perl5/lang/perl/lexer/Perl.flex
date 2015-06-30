@@ -72,7 +72,7 @@ ANYWORD = [^ \t\f\r\n]
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
-BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"_"|"`"|"|"|"~"|"?"
+BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"
 PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} )
 
 BUILT_IN_ARRAY_NAME = "!"|"+"|"-"|"_"
@@ -299,8 +299,8 @@ TRANS_MODIFIERS = [cdsr]
 ">=" {return OPERATOR_GE_NUMERIC;}
 "==" {return OPERATOR_EQ_NUMERIC;}
 "!=" {return OPERATOR_NE_NUMERIC;}
-"<" {return guessOpenAngle();}
-">" {return guessCloseAngle();}
+"<" {return OPERATOR_LT_NUMERIC;}
+">" {return OPERATOR_GT_NUMERIC;}
 
 "->" {return OPERATOR_DEREFERENCE;}
 "=>" {return OPERATOR_COMMA_ARROW;}
@@ -363,21 +363,19 @@ TRANS_MODIFIERS = [cdsr]
         break;
     return tokenType;
 }
-"*" {return guessMul();}    // mul or glob sigil
-"%" {return guessMod();}
+"*" {return OPERATOR_MUL;}    // mul or glob sigil
+"%" {return OPERATOR_MOD;}
+"&" {return OPERATOR_BITWISE_AND;}    // bitwise and or code sigil
 
-
-"&" {return guessAmp();}    // bitwise and or code sigil
 "|" {return OPERATOR_BITWISE_OR;}
 "^" {return guessBitwiseXor();}
 "~" {return OPERATOR_BITWISE_NOT;}
 
 "=" {return OPERATOR_ASSIGN;}
 
-"%""$"* {return parseHashSigil();}
-"@""$"* {return parseArraySigil();}
-"$#""$"* {return parseScalarSigilIndex();}
-"$"+ {return parseScalarSigil();}
+"@" {return SIGIL_ARRAY;}
+"$#" {return SIGIL_SCALAR_INDEX;}
+"$" {return SIGIL_SCALAR;}
 
 "{"             {return LEFT_BRACE;}
 "}"             {return RIGHT_BRACE;}

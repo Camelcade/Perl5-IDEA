@@ -145,8 +145,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.RIGHT_BRACKET, new TextAttributesKey[]{PERL_BRACK});
 		attributesMap.put(PerlElementTypes.LEFT_PAREN, new TextAttributesKey[]{PERL_PAREN});
 		attributesMap.put(PerlElementTypes.RIGHT_PAREN, new TextAttributesKey[]{PERL_PAREN});
-		attributesMap.put(PerlElementTypes.LEFT_ANGLE, new TextAttributesKey[]{PERL_ANGLE});
-		attributesMap.put(PerlElementTypes.RIGHT_ANGLE, new TextAttributesKey[]{PERL_ANGLE});
 
 		attributesMap.put(PerlElementTypes.NUMBER, new TextAttributesKey[]{PERL_NUMBER});
 		attributesMap.put(PerlElementTypes.NUMBER_VERSION, new TextAttributesKey[]{PERL_VERSION});
@@ -164,7 +162,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
 		attributesMap.put(PerlElementTypes.SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
-		attributesMap.put(PerlElementTypes.SIGIL_HASH, new TextAttributesKey[]{PERL_HASH});
 		attributesMap.put(PerlElementTypes.VARIABLE_NAME, new TextAttributesKey[]{DefaultLanguageHighlighterColors.IDENTIFIER});
 	}
 

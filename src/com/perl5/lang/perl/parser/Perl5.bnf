@@ -41,11 +41,8 @@ limitations under the License.
     POD="PERL_POD"
 
     SIGIL_ARRAY="SIGIL_ARRAY"
-    SIGIL_HASH="SIGIL_HASH"
     SIGIL_SCALAR="SIGIL_SCALAR"
     SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
-    SIGIL_GLOB = "SIGIL_GLOB"
-    SIGIL_CODE = "SIGIL_CODE"
 
     ANNOTATION_PREFIX="ANNOTATION_PREFIX"
 
@@ -226,8 +223,6 @@ limitations under the License.
     RIGHT_PAREN="RIGHT_PAREN"
     LEFT_BRACE='LEFT_BRACE'
     RIGHT_BRACE='RIGHT_BRACE'
-    LEFT_ANGLE='LEFT_ANGLE'
-    RIGHT_ANGLE='RIGHT_ANGLE'
 
     SEMICOLON=';';
     COLON=':';
@@ -432,7 +427,7 @@ redo_expr ::= RESERVED_REDO [lnr_param] {pin=1}
 goto_expr ::= RESERVED_GOTO [goto_param] {pin=1}
 
 private lnr_param ::= LABEL | expr // fixme scalar_expr ?
-private goto_param ::= LABEL | SIGIL_CODE SUB | expr // fixme same, scalar expr?
+private goto_param ::= LABEL | OPERATOR_BITWISE_AND SUB | expr // fixme same, scalar expr?
 
 private statement_modifier ::=
     if_statement_modifier
@@ -656,7 +651,7 @@ call_arguments ::=
     | block [[comma] list_expr]
     | list_expr
 
-file_read_expr ::= LEFT_ANGLE [perl_handle] RIGHT_ANGLE
+file_read_expr ::= OPERATOR_LT_NUMERIC [perl_handle] OPERATOR_GT_NUMERIC
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -738,7 +733,7 @@ array_array_slice ::= array_variable LEFT_BRACKET expr RIGHT_BRACKET
 array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
-    SIGIL_HASH LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
+    OPERATOR_MOD LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
     | hash_variable                    // hash as is
 
 private scalar ::=
@@ -759,7 +754,7 @@ scalar_hash_element ::= scalar_variable ( LEFT_BRACE expr RIGHT_BRACE | braced_s
 scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
-    SIGIL_GLOB LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
+    OPERATOR_MUL LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
     | glob_variable                    // hash as is
 
 private nested_element ::=
@@ -784,7 +779,7 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 private callable ::= method | referencable_method // being used in parseFunctionCall
 
 private referencable_expr ::= referencable_method | scalar_expr
-private referencable_method ::= SIGIL_CODE
+private referencable_method ::= OPERATOR_BITWISE_AND
     (
         method
 //        | LEFT_PAREN method RIGHT_PAREN   // not sure what was it
@@ -841,11 +836,11 @@ scalar_variable ::= SIGIL_SCALAR [scalar_sigils] variable_body
 
 array_variable ::= SIGIL_ARRAY [scalar_sigils] variable_body
 
-hash_variable ::= SIGIL_HASH [scalar_sigils] variable_body
+hash_variable ::= OPERATOR_MOD [scalar_sigils] variable_body
 
 scalar_sigils ::= SIGIL_SCALAR+
 
-glob_variable ::= SIGIL_GLOB [scalar_sigils] variable_body [glob_slot_part]
+glob_variable ::= OPERATOR_MUL [scalar_sigils] variable_body [glob_slot_part]
 private glob_slot_part ::= ( LEFT_BRACE expr RIGHT_BRACE | braced_string )
 
 private variable_body ::=

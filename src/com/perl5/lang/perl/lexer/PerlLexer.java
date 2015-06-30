@@ -56,6 +56,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	protected HashSet<String> knownSubs = new HashSet<>();
 	protected HashSet<String> knownLabels = new HashSet<>();
 
+
 	protected static final HashMap<String, IElementType> SIGIL_TOKENS_MAP = new HashMap<>();
 
 	static
@@ -63,9 +64,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		SIGIL_TOKENS_MAP.put("$#", SIGIL_SCALAR_INDEX);
 		SIGIL_TOKENS_MAP.put("$", SIGIL_SCALAR);
 		SIGIL_TOKENS_MAP.put("@", SIGIL_ARRAY);
-		SIGIL_TOKENS_MAP.put("%", SIGIL_HASH);
-		SIGIL_TOKENS_MAP.put("*", SIGIL_GLOB);
-		SIGIL_TOKENS_MAP.put("&", SIGIL_CODE);
+		SIGIL_TOKENS_MAP.put("%", OPERATOR_MOD);
+		SIGIL_TOKENS_MAP.put("*", OPERATOR_MUL);
+		SIGIL_TOKENS_MAP.put("&", OPERATOR_BITWISE_AND);
 	}
 
 
@@ -175,7 +176,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		super((Reader) null);
 		myProject = project;
 
-		if( project != null && !DumbService.isDumb(myProject))
+		if (project != null && !DumbService.isDumb(myProject))
 		{
 			KNOWN_SUBS.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
 			KNOWN_SUBS.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
@@ -740,107 +741,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 	}
 
-	protected boolean openedAngle = false;
-
-	public IElementType guessOpenAngle()
-	{
-		if (LEFT_ANGLE_PREFIX.contains(lastSignificantTokenType))
-		{
-			openedAngle = true;
-			return LEFT_ANGLE;
-		}
-		return OPERATOR_LT_NUMERIC;
-	}
-
-
-	public IElementType guessCloseAngle()
-	{
-		if (openedAngle)
-		{
-			openedAngle = false;
-			return RIGHT_ANGLE;
-		}
-		return OPERATOR_GT_NUMERIC;
-	}
-
-
-	/**
-	 * Here we should decide if it's OPERATOR_MUL or PERL_SIGIL_GLOB
-	 *
-	 * @return proper token type
-	 */
-	public IElementType guessMul()
-	{
-		Character nextChar = getNextCharacter();
-
-		if (lastSignificantTokenType == null
-				|| GLOB_SIGIL_PREFIX.contains(lastSignificantTokenType)
-				|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
-				|| (nextChar != null && (
-				nextChar == '{'                    // *{...
-						|| nextChar == '_'                    // *{...
-						|| nextChar == ':'                // *::..
-						|| Character.isLetter(nextChar)    // *[a-z]...
-		)))
-			return SIGIL_GLOB;
-
-		return OPERATOR_MUL;
-	}
-
-	/**
-	 * Here we should decide if it's OPERATOR_AMP or PERL_SIGIL_CODE
-	 *
-	 * @return proper token type
-	 */
-	public IElementType guessAmp()
-	{
-		Character nextChar = getNextCharacter();
-		// todo works bad
-		if (lastSignificantTokenType == null
-				|| CODE_SIGIL_PREFIX.contains(lastSignificantTokenType)
-				|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
-				|| (nextChar != null && (
-				nextChar == '{'                            // &{...
-						|| nextChar == '_'                        // &_...
-//						|| nextChar == '$'                // &$... fixme this triggers in wrong places
-						|| nextChar == ':'                // &::..
-						|| Character.isLetter(nextChar)    // &[a-z]...
-		)))
-			return SIGIL_CODE;
-
-		return OPERATOR_BITWISE_AND;
-	}
-
-	/**
-	 * Here we should decide if it's OPERATOR_MOD or PERL_SIGIL_HASH
-	 *
-	 * @return proper token type
-	 */
-	public IElementType guessMod()
-	{
-		Character nextChar = getNextCharacter();
-
-		if (
-				lastSignificantTokenType != VARIABLE_NAME &&
-				(
-						lastSignificantTokenType == null
-								|| HASH_SIGIL_PREFIX.contains(lastSignificantTokenType)
-								|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
-								|| (nextChar != null && (
-										nextChar == '{'                    // %{...
-										|| nextChar == '_'                // %_...
-										|| nextChar == '$'                // %$...
-										|| nextChar == ':'                // %::..
-										|| Character.isLetter(nextChar)    // %[a-z]...
-								)
-						)
-				)
-			)
-			return SIGIL_HASH;
-
-		return OPERATOR_MOD;
-	}
-
 	public IElementType checkOperatorXAssign()
 	{
 		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x=smth;
@@ -858,7 +758,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			yypushback(1);
 			return VARIABLE_NAME;
 		}
-		yypushback(yylength()-1);
+		yypushback(yylength() - 1);
 		return OPERATOR_X;
 	}
 
@@ -867,7 +767,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		if (SIGILS_TOKENS.contains(lastUnbraceTokenType))
 			return VARIABLE_NAME;
 
-		yypushback(yylength()-1);
+		yypushback(yylength() - 1);
 		return OPERATOR_BITWISE_XOR;
 	}
 
@@ -1210,100 +1110,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return SEMICOLON;
 	}
 
-
-	@Override
-	public IElementType parseScalarSigil()
-	{
-		String tokenText = yytext().toString();
-		Character nextSignificantCharacter = getNextSignificantCharacter();
-
-		if( tokenText.length() > 1)	// may be sequential sigils or sequential sigils and built in $$
-		{
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-			tokensList.clear();
-
-			int tokenStart = getTokenStart();
-
-			if( nextSignificantCharacter != null
-					&& (
-						Character.isLetterOrDigit(nextSignificantCharacter)	// $$$$varname
-						|| nextSignificantCharacter.equals('{')	// $$$${varname}
-					)
-			)
-			{
-				// just sigils
-				tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
-			}
-			else
-			{
-				// sigils and $$
-				int tokenEnd = getTokenEnd();
-
-				if( tokenEnd -1 > tokenStart + 1)
-					tokensList.add(new CustomToken(tokenStart + 1, tokenEnd-1, SIGIL_SCALAR));
-				tokensList.add(new CustomToken(tokenEnd-1, tokenEnd, VARIABLE_NAME));
-			}
-			setTokenEnd(tokenStart + 1);
-		}
-		else if( lastSignificantTokenType == LEFT_BRACE && nextSignificantCharacter != null && nextSignificantCharacter.equals('}')) // for ${$}
-			return VARIABLE_NAME;
-
-		return SIGIL_SCALAR;
-	}
-
-	@Override
-	public IElementType parseScalarSigilIndex()
-	{
-		String tokenText = yytext().toString();
-		if( tokenText.length() > 2)
-		{
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-			tokensList.clear();
-			int tokenStart = getTokenStart();
-			tokensList.add(new CustomToken(tokenStart + 2, getTokenEnd(), SIGIL_SCALAR));
-			setTokenEnd(tokenStart + 2);
-		}
-
-		return SIGIL_SCALAR_INDEX;
-	}
-
-	@Override
-	public IElementType parseArraySigil()
-	{
-		String tokenText = yytext().toString();
-		if( tokenText.length() > 1)
-		{
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-			tokensList.clear();
-			int tokenStart = getTokenStart();
-			tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
-			setTokenEnd(tokenStart + 1);
-		}
-
-		return SIGIL_ARRAY;
-	}
-
-	@Override
-	public IElementType parseHashSigil()
-	{
-		String tokenText = yytext().toString();
-
-		if( tokenText.length() > 1)
-		{
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-			tokensList.clear();
-			int tokenStart = getTokenStart();
-			tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
-			setTokenEnd(tokenStart+1);
-		}
-
-		return SIGIL_HASH;
-	}
-
 	/**
 	 * Parses token as built-in variable
 	 */
@@ -1427,31 +1233,31 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	@Override
 	public IElementType guessBitwiseXor()
 	{
-		if( lastUnbraceTokenType == SIGIL_SCALAR )
+		if (lastUnbraceTokenType == SIGIL_SCALAR)
 			return VARIABLE_NAME;
-		return 	OPERATOR_BITWISE_XOR;
+		return OPERATOR_BITWISE_XOR;
 	}
 
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	private static final String reBasicIdentifier = "[_a-zA-Z][_a-zA-Z0-9]*"; // something strang in Java with unicode props
 	private static final String reSeparator =
 			"(?:" +
-				"(?:::)+'?" +
-				"|" +
-				"(?:::)*'" +
-			")";
+					"(?:::)+'?" +
+					"|" +
+					"(?:::)*'" +
+					")";
 	private static final Pattern ambigousPackage = Pattern.compile(
-					"(" +
-						reSeparator + "?" +		// optional opening separator,
-						"(?:" +
-							reBasicIdentifier +
-							reSeparator +
-						")*" +
+			"(" +
+					reSeparator + "?" +        // optional opening separator,
+					"(?:" +
+					reBasicIdentifier +
+					reSeparator +
+					")*" +
 					")" +
 					"(" +
-						reBasicIdentifier +
+					reBasicIdentifier +
 					")"
-			);
+	);
 
 	/**
 	 * Guesses if it's package or package::method or package::variable
@@ -1484,31 +1290,37 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		} else
 			throw new RuntimeException("Inappropriate package name " + packageName);
 
+		Character nextSignificantCharacter = getNextSignificantCharacter();
+
 		// lastcontroltokentype here causes @{sub()} to be parsed like array
-		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // 100% variable name with package
+		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)
+				&& (lastSignificantTokenType != LEFT_BRACE
+				|| nextSignificantCharacter != null && nextSignificantCharacter.equals('}')
+			)
+		) // 100% variable name with package
 		{
 			tokensList.clear();
 			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), VARIABLE_NAME));
 			pushState();
 			yybegin(LEX_PREPARSED_ITEMS);
 			setTokenEnd(getTokenStart() + subPackageName.length());
-		} else if ( prePackageTokenTypes.contains(lastSignificantTokenType) )	// 100% package
+		} else if (prePackageTokenTypes.contains(lastSignificantTokenType))    // 100% package
 		{
 			// we shouldn't store used namespaces into the knownPackages
 			if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_REQUIRE)
 				return PACKAGE;
-		} else{
+		} else
+		{
 
 			boolean mayBeSub = KNOWN_SUBS.contains(canonicalPackageName);
 			boolean mayBePackage = KNOWN_PACKAGES.contains(canonicalPackageName);
-			Character nextSignificantCharacter = getNextSignificantCharacter();
 
 
-			if  (	// 100% package::sub from perl perspective
-					FORCED_PACKAGES.contains(subCanonicalPackageName)	// main/SUPER/CORE
-					|| !mayBePackage	// no such package
-					|| mayBeSub && nextSignificantCharacter != null && nextSignificantCharacter.equals('(') // has sub and package
-			)
+			if (    // 100% package::sub from perl perspective
+					FORCED_PACKAGES.contains(subCanonicalPackageName)    // main/SUPER/CORE
+							|| !mayBePackage    // no such package
+							|| mayBeSub && nextSignificantCharacter != null && nextSignificantCharacter.equals('(') // has sub and package
+					)
 			{
 				tokensList.clear();
 				tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));
