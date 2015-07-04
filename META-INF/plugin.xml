@@ -29,7 +29,7 @@
       <ul>
       <li>Re-wrote lexer and heavy refactored parser</li>
       <li>Fixed bug with hanging on Embedded perl files</li>
-      <li>Added support for archaic package name delimiters, Foo'Bar is now on</li>
+      <li>Added support for archaic package name delimiters, Foo'Bar is now valid (NB: refactoring/find usages not working on them)</li>
       </ul>
 
     ]]>
@@ -107,7 +107,7 @@
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
 
-        <lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFindUsagesProvider"/>
+        <lang.findUsagesProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
 
         <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/-->
 

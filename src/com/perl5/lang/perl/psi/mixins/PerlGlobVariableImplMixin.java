@@ -86,7 +86,7 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	public String getExplicitPackageName()
 	{
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getName(): null;
+		return namespaceElement != null ? namespaceElement.getCanonicalName(): null;
 	}
 
 	@Override

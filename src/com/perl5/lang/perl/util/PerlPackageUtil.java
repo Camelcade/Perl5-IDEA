@@ -34,8 +34,10 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubInde
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
+import javax.print.DocFlavor;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 24.04.2015.
@@ -44,6 +46,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 {
 	public static final String PACKAGE_SEPARATOR = "::";
 	public static final String PACKAGE_SEPARATOR_LEGACY = "'";
+	public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
+	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("("+ PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
 	public static final HashSet<String> BUILT_IN_ALL = new HashSet<>();
 
@@ -64,6 +68,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return BUILT_IN_ALL.contains(canonicalPcakageName);
 	}
 
+
+	public static final HashMap<String,String> CANONICAL_NAMES_CACHE = new HashMap<>();
+
 	/**
 	 * Make canonical package name, atm crude, jut chop off :: from end and begining
 	 * @param name package name
@@ -71,10 +78,41 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static String getCanonicalPackageName(String name)
 	{
-		if( PACKAGE_SEPARATOR.equals(name))
-			return "main";
+		String newName;
+
+		if((newName = CANONICAL_NAMES_CACHE.get(name)) != null )
+			return newName;
+
+		String originalName = name;
+
+//		System.out.println("Source: " + name);
+		// removing trailing separator if any
+		name = PACKAGE_SEPARATOR_TAIL_RE.matcher(name).replaceFirst("");
+//		System.out.println("Notail: " + name);
+
+		ArrayList<String> canonicalChunks = new ArrayList<>();
+		String[] chunks = PACKAGE_SEPARATOR_RE.split(name, -1);
+
+//		System.out.println("Chunks: " + chunks.length);
+
+		if( chunks.length > 0 && chunks[0].equals(""))	// implicit main
+			chunks[0] = "main";
+
+		for( String chunk: chunks)
+			if( !(canonicalChunks.size() == 0 && chunk.equals("main")))
+				canonicalChunks.add(chunk);
+
+//		System.out.println("Canonical chunks: " + chunks.length);
+
+		if( canonicalChunks.size() == 0)
+			newName = "main";
 		else
-			return name.replaceFirst(PACKAGE_SEPARATOR + "$", "").replaceFirst("^" + PACKAGE_SEPARATOR, "").replaceAll(PACKAGE_SEPARATOR_LEGACY, PACKAGE_SEPARATOR);
+			newName = StringUtils.join(canonicalChunks, "::");
+
+//		System.out.println("Canonical: " + newName + "\n");
+		CANONICAL_NAMES_CACHE.put(originalName,newName);
+
+		return newName;
 	}
 
 	/**
@@ -93,7 +131,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 			if( namespaceDefinition.getNamespaceElement() != null ) // checking that definition is valid and got namespace
 			{
-				String name = namespaceDefinition.getNamespaceElement().getName();
+				String name = namespaceDefinition.getNamespaceElement().getCanonicalName();
 				assert name != null;
 				return name;
 			}

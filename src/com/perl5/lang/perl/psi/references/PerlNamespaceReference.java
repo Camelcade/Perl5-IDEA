@@ -38,10 +38,17 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		assert element instanceof PerlNamedElement;
-		canonicalPackageName = ((PerlNamedElement) element).getName();
-		if( element.getText().endsWith("::"))
-			setRangeInElement(new TextRange(0, element.getTextLength()-2));
+//		if( !(element instanceof PerlNamespaceElement))
+		assert element instanceof PerlNamespaceElement;
+		canonicalPackageName = ((PerlNamespaceElement) element).getCanonicalName();
+
+		String text = element.getText();
+		if (text.endsWith("::"))
+			setRangeInElement(new TextRange(0, text.length()-2));
+		else if( text.endsWith("'"))
+		{
+			setRangeInElement(new TextRange(0, text.length()-1));
+		}
 	}
 
 	@NotNull

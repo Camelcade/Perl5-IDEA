@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -45,6 +44,8 @@ import java.util.List;
  */
 public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlNamespaceElement
 {
+	protected String myCanonicalName = null;
+
 	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text) {
 		super(type, text);
 	}
@@ -60,11 +61,11 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	{
 		String currentName = getText();
 
-		boolean currentTail = currentName.endsWith("::");
-		boolean newTail = name.endsWith("::");
+		boolean currentTail = currentName.endsWith("::") || currentName.endsWith("'");
+		boolean newTail = name.endsWith("::") || name.endsWith("'");
 
 		if (newTail && !currentTail)
-			name = name.replaceAll(":+$", "");
+			name = PerlPackageUtil.PACKAGE_SEPARATOR_TAIL_RE.matcher(name).replaceFirst("");
 		else if (!newTail && currentTail)
 			name = name + "::";
 
@@ -72,6 +73,8 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 
 		if( newName != null )
 			replace(newName);
+
+		myCanonicalName = null;
 
 		return this;
 	}
@@ -87,8 +90,18 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public String getName()
 	{
-		return PerlPackageUtil.getCanonicalPackageName(this.getText());
+		return this.getText();
 	}
+
+	public String getCanonicalName()
+	{
+		if( myCanonicalName == null )
+			myCanonicalName = PerlPackageUtil.getCanonicalPackageName(getName());
+
+		return myCanonicalName;
+	}
+
+
 
 	@NotNull
 	@Override
@@ -171,10 +184,16 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public TextRange getTextRange()
 	{
-		if( getText().endsWith("::"))
+		String text = getText();
+		if( text.endsWith("::"))
 		{
 			int start = getStartOffset();
 			return new TextRange(start, start + getTextLength()-2);
+		}
+		else if( text.endsWith("'"))
+		{
+			int start = getStartOffset();
+			return new TextRange(start, start + getTextLength()-1);
 		}
 		return super.getTextRange();
 	}

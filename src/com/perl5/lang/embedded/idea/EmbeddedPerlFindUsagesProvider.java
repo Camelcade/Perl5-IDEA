@@ -18,15 +18,10 @@ package com.perl5.lang.embedded.idea;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.intellij.lexer.FlexAdapter;
-import com.perl5.lang.embedded.EmbeddedPerlLexer;
 import com.perl5.lang.embedded.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.PerlFindUsagesProvider;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.Reader;
 
 public class EmbeddedPerlFindUsagesProvider extends PerlFindUsagesProvider
 {

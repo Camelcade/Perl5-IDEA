@@ -55,7 +55,9 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	public static final TokenSet IDENTIFIERS = TokenSet.create(
 			SUB,
 			PACKAGE,
-			VARIABLE_NAME
+			VARIABLE_NAME,
+			IDENTIFIER,
+			PACKAGE_IDENTIFIER
 	);
 
 	public static final IFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);

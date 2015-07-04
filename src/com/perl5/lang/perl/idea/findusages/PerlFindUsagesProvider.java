@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.findusages;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
@@ -27,6 +27,7 @@ import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -99,11 +100,8 @@ public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTy
 	public String getNodeText(@NotNull PsiElement element, boolean useFullName)
 	{
 		if (element instanceof PerlNamedElementImpl)
-		{
 			return ((PerlNamedElementImpl) element).getName();
-		} else
-		{
+		else
 			return "";
-		}
 	}
 }

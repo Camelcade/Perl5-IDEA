@@ -114,7 +114,7 @@ public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends Stu
 	public String getExplicitPackageName()
 	{
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getName() : null;
+		return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
 	}
 
 	@Override

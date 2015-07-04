@@ -108,14 +108,15 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					}
 				}
 		);
-		registrar.registerReferenceProvider(STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN), new PsiReferenceProvider()
-		{
-			@NotNull
-			@Override
-			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-			{
-				return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
-			}
-		});
+		// fixme here we should return string reference, which should be smart
+//		registrar.registerReferenceProvider(STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN), new PsiReferenceProvider()
+//		{
+//			@NotNull
+//			@Override
+//			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+//			{
+//				return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
+//			}
+//		});
 	}
 }

@@ -55,4 +55,10 @@ public interface PerlNamespaceElement extends PerlNamedElement
 	 * @return list of PerlNameSpaceDefitions
 	 */
 	public List<PerlFileElement> getNamespaceFiles();
+
+	/**
+	 * Returns canonical namespace name
+	 * @return canonical name
+	 */
+	public String getCanonicalName();
 }

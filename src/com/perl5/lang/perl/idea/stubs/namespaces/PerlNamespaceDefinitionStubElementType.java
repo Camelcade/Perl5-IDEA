@@ -45,7 +45,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	@Override
 	public PerlNamespaceDefinitionStub createStub(@NotNull PsiPerlNamespaceDefinition psi, StubElement parentStub)
 	{
-		return new PerlNamespaceDefinitionStubImpl(parentStub, psi.getNamespaceElement().getName());
+		return new PerlNamespaceDefinitionStubImpl(parentStub, psi.getNamespaceElement().getCanonicalName());
 	}
 
 	@NotNull
