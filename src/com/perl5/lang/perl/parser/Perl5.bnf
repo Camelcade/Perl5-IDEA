@@ -44,6 +44,10 @@ limitations under the License.
     SIGIL_SCALAR="SIGIL_SCALAR"
     SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
 
+    SIGIL_HASH="SIGIL_HASH"
+    SIGIL_GLOB="SIGIL_GLOB"
+    SIGIL_CODE="SIGIL_CODE"
+
     ANNOTATION_PREFIX="ANNOTATION_PREFIX"
 
     ANNOTATION_UNKNOWN_KEY="ANNOTATION_UNKNOWN"
@@ -431,7 +435,7 @@ redo_expr ::= RESERVED_REDO [lnr_param] {pin=1}
 goto_expr ::= RESERVED_GOTO [goto_param] {pin=1}
 
 private lnr_param ::= LABEL | expr // fixme scalar_expr ?
-private goto_param ::= LABEL | OPERATOR_BITWISE_AND <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
+private goto_param ::= LABEL | <<sigilCode>> <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
 
 private statement_modifier ::=
     if_statement_modifier
@@ -567,7 +571,7 @@ prefix_unary_expr ::=  (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 
-mul_expr ::= expr ((OPERATOR_MUL|OPERATOR_DIV|OPERATOR_MOD|OPERATOR_X) expr)+
+mul_expr ::= expr ((<<operatorMul>>|OPERATOR_DIV|<<operatorMod>>|OPERATOR_X) expr)+
 add_expr ::= expr ((OPERATOR_PLUS|OPERATOR_MINUS|OPERATOR_CONCAT) expr)+
 shift_expr ::= expr ((OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) expr)+
 
@@ -595,7 +599,7 @@ equal_expr ::= expr (
     |OPERATOR_SMARTMATCH
     ) expr
 
-bitwise_and_expr ::= expr (OPERATOR_BITWISE_AND expr)+
+bitwise_and_expr ::= expr (<<operatorBitwiseAnd>> expr)+
 bitwise_or_xor_expr ::= expr ((OPERATOR_BITWISE_OR|OPERATOR_BITWISE_XOR) expr)+
 and_expr ::= expr (OPERATOR_AND expr)+
 or_expr ::= expr ((OPERATOR_OR|OPERATOR_OR_DEFINED) expr)+
@@ -738,7 +742,7 @@ array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
     hash_variable                    // hash as is
-    | OPERATOR_MOD LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
+    | <<sigilHash>> LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
 
 private scalar ::=
     scalar_array_element
@@ -759,7 +763,7 @@ scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGH
 
 private glob ::=
     glob_variable                    // hash as is
-    | OPERATOR_MUL LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
+    | <<sigilGlob>> LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
 
 private nested_element ::=
     braced_string
@@ -783,10 +787,9 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 private callable ::= method | referencable_method // being used in parseFunctionCall
 
 private referencable_expr ::= referencable_method | scalar_expr
-private referencable_method ::= OPERATOR_BITWISE_AND
+private referencable_method ::= <<sigilCode>>
     (
         method
-//        | LEFT_PAREN method RIGHT_PAREN   // not sure what was it
         | LEFT_BRACE expr RIGHT_BRACE
         | scalar
     )
@@ -840,11 +843,11 @@ scalar_variable ::= SIGIL_SCALAR [scalar_sigils] variable_body
 
 array_variable ::= SIGIL_ARRAY [scalar_sigils] variable_body
 
-hash_variable ::= OPERATOR_MOD [scalar_sigils] variable_body
+hash_variable ::= <<sigilHash>> [scalar_sigils] variable_body
 
 scalar_sigils ::= SIGIL_SCALAR+
 
-glob_variable ::= OPERATOR_MUL [scalar_sigils] variable_body [glob_slot_part]
+glob_variable ::= <<sigilGlob>> [scalar_sigils] variable_body [glob_slot_part]
 private glob_slot_part ::= ( LEFT_BRACE expr RIGHT_BRACE | braced_string )
 
 private variable_body ::=
@@ -853,14 +856,14 @@ private variable_body ::=
     | variable_body_namespace_braced
     | variable_body_namespace
 
-private variable_body_namespace_braced ::= LEFT_BRACE namespace_canonical RIGHT_BRACE {pin=2}
+private variable_body_namespace_braced ::= LEFT_BRACE namespace_canonical RIGHT_BRACE
 private variable_body_namespace ::= namespace_canonical
-private variable_body_braced ::= LEFT_BRACE [namespace_canonical] <<convertIdentifier VARIABLE_NAME>> RIGHT_BRACE // {pin=3}
-private variable_body_canonical ::= [namespace_canonical] <<convertIdentifier VARIABLE_NAME>> // {pin=2}
+private variable_body_braced ::= LEFT_BRACE [namespace_canonical] <<convertIdentifier VARIABLE_NAME>> RIGHT_BRACE
+private variable_body_canonical ::= [namespace_canonical] <<convertIdentifier VARIABLE_NAME>>
 
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::=
-    namespace_element <<convertIdentifier SUB>>                  // package::method
+    namespace_canonical <<convertIdentifier SUB>>                  // package::method
     | <<convertIdentifier SUB>> [namespace_element !(IDENTIFIER|OPERATOR_DEREFERENCE)]  // method package
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/

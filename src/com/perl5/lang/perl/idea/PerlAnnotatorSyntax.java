@@ -28,6 +28,7 @@ import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -91,16 +92,12 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			);
 		else if (parent instanceof PerlMethod)
 		{
-			PerlNamespaceElement namespaceElement = ((PerlMethod) parent).getNamespaceElement();
-			boolean hasExplicitNamespace = namespaceElement != null && !"CORE".equals(namespaceElement.getName());
-
-			if (!hasExplicitNamespace)
-				decorateElement(
-						holder.createInfoAnnotation(perlSubNameElement, null),
-						PerlSyntaxHighlighter.PERL_SUB,
-						perlSubNameElement.isBuiltIn(),
-						false
-				);
+			decorateElement(
+					holder.createInfoAnnotation(perlSubNameElement, null),
+					PerlSyntaxHighlighter.PERL_SUB,
+					perlSubNameElement.isBuiltIn(),
+					false
+			);
 		}
 	}
 
@@ -168,6 +165,27 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					PerlSyntaxHighlighter.PERL_GLOB,
 					true,
 					false);
-
+		else
+		{
+			IElementType tokenType = element.getNode().getElementType();
+			if(tokenType == SIGIL_HASH)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_HASH,
+						false,
+						false);
+			else if(tokenType == SIGIL_GLOB)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_GLOB,
+						false,
+						false);
+			else if(tokenType == SIGIL_CODE)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_SUB,
+						false,
+						false);
+		}
 	}
 }
