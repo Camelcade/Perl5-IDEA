@@ -225,10 +225,15 @@ limitations under the License.
 
     LEFT_BRACKET='LEFT_BRACKET'
     RIGHT_BRACKET='RIGHT_BRACKET'
+
     LEFT_PAREN="LEFT_PAREN"
     RIGHT_PAREN="RIGHT_PAREN"
+
     LEFT_BRACE='LEFT_BRACE'
     RIGHT_BRACE='RIGHT_BRACE'
+
+    LEFT_ANGLE='LEFT_ANGLE'
+    RIGHT_ANGLE='RIGHT_ANGLE'
 
     SEMICOLON=';';
     COLON=':';
@@ -578,8 +583,8 @@ shift_expr ::= expr ((OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) expr)+
 compare_expr ::= expr (
     OPERATOR_GE_NUMERIC
     |OPERATOR_LE_NUMERIC
-    |OPERATOR_LT_NUMERIC
-    |OPERATOR_GT_NUMERIC
+    |<<operatorLtNumeric>>
+    |<<operatorGtNumeric>>
 
     |OPERATOR_GE_STR
     |OPERATOR_LE_STR
@@ -659,7 +664,7 @@ call_arguments ::=
     | block [[comma] list_expr]
     | list_expr
 
-file_read_expr ::= OPERATOR_LT_NUMERIC [perl_handle] OPERATOR_GT_NUMERIC
+file_read_expr ::= <<leftAngle>> [perl_handle] <<rightAngle>>
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 private regex_term ::=
@@ -752,7 +757,6 @@ private scalar ::=
     | undef_expr
     | SIGIL_SCALAR + LEFT_BRACE expr RIGHT_BRACE
     | SIGIL_SCALAR_INDEX SIGIL_SCALAR * ( LEFT_BRACE expr RIGHT_BRACE | scalar_variable )
-    | perl_handle_basic
 
 scalar_array_index ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * scalar_variable
 scalar_array_element ::= scalar_variable LEFT_BRACKET expr RIGHT_BRACKET
@@ -797,7 +801,7 @@ private referencable_method ::= <<sigilCode>>
 label_declaration ::= LABEL COLON // do we need to change tokentype?
 private perl_version ::= NUMBER_VERSION | NUMBER
 private perl_handle ::=  perl_handle_basic | LEFT_BRACE scalar_expr RIGHT_BRACE | immutable_expr
-private perl_handle_basic ::= HANDLE
+private perl_handle_basic ::= <<convertIdentifier HANDLE>>
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 

@@ -496,6 +496,26 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return checkAndConvertToken(b, l, SIGIL_HASH, OPERATOR_MOD);
 	}
 
+	public static boolean leftAngle(PsiBuilder b, int l)
+	{
+		return checkAndConvertToken(b, l, OPERATOR_LT_NUMERIC, LEFT_ANGLE);
+	}
+
+	public static boolean operatorLtNumeric(PsiBuilder b, int l)
+	{
+		return checkAndConvertToken(b, l, LEFT_ANGLE, OPERATOR_LT_NUMERIC);
+	}
+
+	public static boolean rightAngle(PsiBuilder b, int l)
+	{
+		return checkAndConvertToken(b, l, OPERATOR_GT_NUMERIC, RIGHT_ANGLE);
+	}
+
+	public static boolean operatorGtNumeric(PsiBuilder b, int l)
+	{
+		return checkAndConvertToken(b, l, RIGHT_ANGLE, OPERATOR_GT_NUMERIC);
+	}
+
 	/**
 	 * Joining several regex tokens into one to lighten PSI tree. Temporary solution, until regex parsing is implemented
 	 * @param b PerlBuilder
