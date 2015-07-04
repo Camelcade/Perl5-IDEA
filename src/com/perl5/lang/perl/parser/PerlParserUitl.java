@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.ITokenTypeRemapper;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
@@ -354,9 +355,39 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean convertIdentifier(PsiBuilder b, int l, IElementType tokenType)
 	{
-		if( b.getTokenType() == IDENTIFIER )
+		IElementType currentTokenType = b.getTokenType();
+		if( currentTokenType == tokenType )
+		{
+			b.advanceLexer();
+			return true;
+		}
+		else if( currentTokenType == IDENTIFIER) //  || currentTokenType == SUB || currentTokenType == VARIABLE_NAME
 		{
 			b.remapCurrentToken(tokenType);
+			b.advanceLexer();
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Completes namespace, invoked when we are 100% sure that PACKAGE_IDENTIFIER is package
+	 * @param b Perlbuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean convertPackageIdentifier(PsiBuilder b, int l)
+	{
+		IElementType currentTokenType = b.getTokenType();
+		if( currentTokenType == PACKAGE )
+		{
+			b.advanceLexer();
+			return true;
+		}
+		else if( currentTokenType == PACKAGE_IDENTIFIER )
+		{
+			b.remapCurrentToken(PACKAGE);
 			b.advanceLexer();
 			return true;
 		}
@@ -374,14 +405,19 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		IElementType tokenType = b.getTokenType();
 
-		if( tokenType == IDENTIFIER )	// single word package
+		if( tokenType == PACKAGE )
+		{
+			b.advanceLexer();
+			return true;
+		}
+		else if( tokenType == IDENTIFIER )	// single word package
 		{
 			b.remapCurrentToken(PACKAGE);
 			b.advanceLexer();
 			return true;
 		}
 		else if(
-			tokenType == PACKAGE && b.lookAhead(1) == IDENTIFIER
+			tokenType == PACKAGE_IDENTIFIER && b.lookAhead(1) == IDENTIFIER
 		)
 		{
 			PsiBuilder.Marker m = b.mark();

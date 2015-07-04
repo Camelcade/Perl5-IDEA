@@ -236,6 +236,7 @@ limitations under the License.
 
     // custom tokens
     IDENTIFIER="IDENTIFIER"
+    PACKAGE_IDENTIFIER="PACKAGE_IDENTIFIER"
 
     SUB_ATTRIBUTE="SUB_ATTRIBUTE"
     SUB_PROTOTYPE_TOKEN="SUB_PROTOTYPE_TOKEN"
@@ -726,28 +727,28 @@ code_ref ::= RESERVED_SUB block
 private variable ::= scalar | array | hash | glob
 
 private array ::=
-    SIGIL_ARRAY LEFT_BRACE expr RIGHT_BRACE   // scalar dereference
-    | array_array_slice              // array slice
+    array_array_slice              // array slice
     | array_hash_slice              // hash slice
     | array_variable
     | array_constant
+    | SIGIL_ARRAY LEFT_BRACE expr RIGHT_BRACE   // scalar dereference
 
 array_array_slice ::= array_variable LEFT_BRACKET expr RIGHT_BRACKET
 array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
-    OPERATOR_MOD LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
-    | hash_variable                    // hash as is
+    hash_variable                    // hash as is
+    | OPERATOR_MOD LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
 
 private scalar ::=
-    SIGIL_SCALAR + LEFT_BRACE expr RIGHT_BRACE
-    | scalar_array_element
+    scalar_array_element
     | scalar_hash_element
     | scalar_variable
     | scalar_array_index
     | scalar_constant
     | scalar_anon_array_element
     | undef_expr
+    | SIGIL_SCALAR + LEFT_BRACE expr RIGHT_BRACE
     | SIGIL_SCALAR_INDEX SIGIL_SCALAR * ( LEFT_BRACE expr RIGHT_BRACE | scalar_variable )
     | perl_handle_basic
 
@@ -757,8 +758,8 @@ scalar_hash_element ::= scalar_variable ( LEFT_BRACE expr RIGHT_BRACE | braced_s
 scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
-    OPERATOR_MUL LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
-    | glob_variable                    // hash as is
+    glob_variable                    // hash as is
+    | OPERATOR_MUL LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
 
 private nested_element ::=
     braced_string
@@ -852,10 +853,10 @@ private variable_body ::=
     | variable_body_namespace_braced
     | variable_body_namespace
 
-private variable_body_namespace_braced ::= LEFT_BRACE namespace_element RIGHT_BRACE {pin=2}
-private variable_body_namespace ::= namespace_element
-private variable_body_braced ::= LEFT_BRACE [namespace_element] <<convertIdentifier VARIABLE_NAME>> RIGHT_BRACE {pin=3}
-private variable_body_canonical ::= [namespace_element] <<convertIdentifier VARIABLE_NAME>> {pin=2}
+private variable_body_namespace_braced ::= LEFT_BRACE namespace_canonical RIGHT_BRACE {pin=2}
+private variable_body_namespace ::= namespace_canonical
+private variable_body_braced ::= LEFT_BRACE [namespace_canonical] <<convertIdentifier VARIABLE_NAME>> RIGHT_BRACE // {pin=3}
+private variable_body_canonical ::= [namespace_canonical] <<convertIdentifier VARIABLE_NAME>> // {pin=2}
 
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::=
@@ -890,3 +891,4 @@ private namespace_element_braced ::= LEFT_BRACE namespace_element RIGHT_BRACE {n
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private namespace_element ::= PACKAGE {name="Package::Name"}
+private namespace_canonical ::= <<convertPackageIdentifier>>

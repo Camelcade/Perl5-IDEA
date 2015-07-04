@@ -175,7 +175,7 @@ TRANS_MODIFIERS = [cdsr]
 // exclusive
 <LEX_SUB_NAME>
 {
-    {PACKAGE} { return PACKAGE;}
+    {PACKAGE} { return PACKAGE_IDENTIFIER;}
     {IDENTIFIER} {yybegin(LEX_SUB_DEFINITION);return IDENTIFIER;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
@@ -397,8 +397,8 @@ TRANS_MODIFIERS = [cdsr]
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
 {IDENTIFIER} { return getIdentifierToken();}
-{PACKAGE_SHORT} {return PACKAGE;}
-{PACKAGE} {return PACKAGE;}
+{PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}
+{PACKAGE} {return PACKAGE_IDENTIFIER;}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }
