@@ -411,7 +411,7 @@ private normal_statement ::= [label_declaration] expr [statement_modifier] {pin=
 
 sub_declaration ::= [annotations] RESERVED_SUB canonical_sub_name sub_declaration_parameters
 
-private canonical_sub_name ::= [namespace_element] <<convertIdentifier SUB>>
+private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
 
 private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
 
@@ -552,7 +552,7 @@ private sort_arguments_ ::=
     | list_expr
 
 variable_expr ::= array_index_variable | variable
-namespace_expr ::= namespace_element
+namespace_expr ::= <<mergePackageName>>
 parenthesised_expr ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
@@ -677,7 +677,7 @@ private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
 perl_regex_modifiers ::= REGEX_MODIFIER +
-perl_regex ::= REGEX_TOKEN + // here we should make a trick
+perl_regex ::= <<joinRegexTokens>> // fixme implement regex parsing
 
 tr_regex ::= (RESERVED_TR|RESERVED_Y) REGEX_QUOTE_OPEN tr_searchlist REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] tr_replacementlist REGEX_QUOTE_CLOSE [tr_modifiers] {pin=1}
 tr_searchlist ::= STRING_CONTENT
@@ -696,15 +696,13 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::= RESERVED_LOCAL [namespace_element]  local_variable_declaration_variation {pin=1}
-variable_declaration_lexical ::= (RESERVED_MY | RESERVED_STATE) [namespace_element] variable_declaration_variation {pin=1}
-variable_declaration_global ::= RESERVED_OUR [namespace_element] variable_declaration_variation  {pin=1}
+variable_declaration_local ::= RESERVED_LOCAL [<<mergePackageName>>]  local_variable_declaration_variation {pin=1}
+variable_declaration_lexical ::= (RESERVED_MY | RESERVED_STATE) [<<mergePackageName>>] variable_declaration_variation {pin=1}
+variable_declaration_global ::= RESERVED_OUR [<<mergePackageName>>] variable_declaration_variation  {pin=1}
 
 private local_variable_declaration_variation ::=
     LEFT_PAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * RIGHT_PAREN
     | local_variable_declaration_argument
-
-
 
 private local_variable_declaration_argument ::= immutable_expr | lexical_variable_definition_argument
 
@@ -864,7 +862,7 @@ private variable_body_canonical ::= [namespace_canonical] <<convertIdentifier VA
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::=
     namespace_canonical <<convertIdentifier SUB>>                  // package::method
-    | <<convertIdentifier SUB>> [namespace_element !(IDENTIFIER|OPERATOR_DEREFERENCE)]  // method package
+    | <<convertIdentifier SUB>> [namespace_element !(IDENTIFIER|OPERATOR_DEREFERENCE)]  // method package; Here we should use some logic or disable it at all
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private annotations ::= annotation+
@@ -884,13 +882,13 @@ annotation_abstract ::= ANNOTATION_PREFIX ANNOTATION_ABSTRACT_KEY
 annotation_deprectaed ::= ANNOTATION_PREFIX ANNOTATION_DEPRECATED_KEY
 annotation_method ::= ANNOTATION_PREFIX ANNOTATION_METHOD_KEY
 annotation_override ::= ANNOTATION_PREFIX ANNOTATION_OVERRIDE_KEY
-annotation_returns_ref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element
+annotation_returns_ref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY <<mergePackageName>>
 annotation_returns_arrayref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_bracketed
 annotation_returns_hashref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_braced
 annotation_incomplete ::= ANNOTATION_PREFIX
 
-private namespace_element_bracketed ::= LEFT_BRACKET namespace_element RIGHT_BRACKET {name="[Package::Name]"}
-private namespace_element_braced ::= LEFT_BRACE namespace_element RIGHT_BRACE {name="{Package::Name}"}
+private namespace_element_bracketed ::= LEFT_BRACKET <<mergePackageName>> RIGHT_BRACKET {name="[Package::Name]"}
+private namespace_element_braced ::= LEFT_BRACE <<mergePackageName>> RIGHT_BRACE {name="{Package::Name}"}
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private namespace_element ::= PACKAGE {name="Package::Name"}

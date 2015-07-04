@@ -27,10 +27,9 @@
     <change-notes><![CDATA[
       <p>0.29 beta</p>
       <ul>
+      <li>Re-wrote lexer and heavy refactored parser</li>
       <li>Fixed bug with hanging on Embedded perl files</li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li>Added support for archaic package name delimiters, Foo'Bar is now on</li>
       </ul>
 
     ]]>

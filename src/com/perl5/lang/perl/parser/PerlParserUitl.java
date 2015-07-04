@@ -496,5 +496,25 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return checkAndConvertToken(b, l, SIGIL_HASH, OPERATOR_MOD);
 	}
 
+	/**
+	 * Joining several regex tokens into one to lighten PSI tree. Temporary solution, until regex parsing is implemented
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean joinRegexTokens(PsiBuilder b, int l)
+	{
+		if( b.getTokenType() == REGEX_TOKEN )
+		{
+			PsiBuilder.Marker m = b.mark();
+
+			while( b.getTokenType() == REGEX_TOKEN)
+				b.advanceLexer();
+
+			m.collapse(REGEX_TOKEN);
+			return true;
+		}
+		return false;
+	}
 
 }
