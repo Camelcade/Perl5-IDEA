@@ -723,6 +723,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 	}
 
+	// this symbols after sigils means that it's just a sigil, not $$ variable
+	public static final HashSet<Character> SCALAR_SIGIL_SUFFIXES = new HashSet<>(Arrays.asList(
+		'{', '^', '_'
+	));
+
 	/**
 	 * Decide if it's two sigils or variable name for $$
 	 *
@@ -744,8 +749,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			if (nextSignificantCharacter != null
 					&& (
 							Character.isLetterOrDigit(nextSignificantCharacter)    // $$$$varname
-							|| nextSignificantCharacter.equals('{')    // $$$${varname}
-							|| nextSignificantCharacter.equals('^')    // $$$$^SOMEVAR
+							|| SCALAR_SIGIL_SUFFIXES.contains(nextSignificantCharacter)
 					)
 			)
 			{
