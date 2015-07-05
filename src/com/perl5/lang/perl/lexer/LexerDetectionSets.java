@@ -28,6 +28,18 @@ import java.util.HashSet;
  */
 public interface LexerDetectionSets extends PerlElementTypes
 {
+	// we should not check bareword for reserved tokens if following was before
+	public static final TokenSet PRE_PACKAGE_TOKENS = TokenSet.create(
+			RESERVED_USE,
+			RESERVED_NO,
+			RESERVED_PACKAGE,
+			RESERVED_MY,
+			RESERVED_OUR,
+			RESERVED_STATE,
+			RESERVED_LOCAL
+	);
+
+
 	// operators tokens (except commas)
 	public static final TokenSet OPERATORS_TOKENSET = TokenSet.create(
 			OPERATOR_CMP_NUMERIC,
@@ -121,12 +133,6 @@ public interface LexerDetectionSets extends PerlElementTypes
 			OPERATOR_FILETEST
 	);
 
-	// Ambiguous package detectors
-	public static final HashSet<String> FORCED_PACKAGES = new HashSet<>(Arrays.asList(
-			"SUPER",
-			"main",
-			"CORE"
-	));
 
 	// tokens that preceeds regexp opener
 	public static final TokenSet REGEXP_PREFIX = TokenSet.create(
@@ -137,7 +143,6 @@ public interface LexerDetectionSets extends PerlElementTypes
 			LEFT_BRACKET
 //			SUB	// fixme this works with argumentless subs, not all of them
 	);
-
 
 
 	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<>(Arrays.asList(
@@ -174,88 +179,9 @@ public interface LexerDetectionSets extends PerlElementTypes
 			SIGIL_ARRAY,
 			SIGIL_SCALAR,
 			SIGIL_SCALAR_INDEX,
-			OPERATOR_MOD,	// same token for hash sigil
-			OPERATOR_MUL	// same token for glob sigil
+			OPERATOR_MOD,    // same token for hash sigil
+			OPERATOR_MUL    // same token for glob sigil
 	);
 
-
-	// tokens which preceeds labels
-	public static final TokenSet preLabelTokenTypes = TokenSet.create(
-			RESERVED_NEXT,
-			RESERVED_LAST,
-			RESERVED_REDO,
-			RESERVED_GOTO
-	);
-
-	// tokens which preceeds 100% package bareword
-	public static final TokenSet prePackageTokenTypes = TokenSet.create(
-			RESERVED_MY,
-			RESERVED_OUR,
-			RESERVED_STATE,
-			RESERVED_LOCAL,
-
-			RESERVED_PACKAGE,
-			RESERVED_USE,
-			RESERVED_NO,
-			RESERVED_REQUIRE
-	);
-
-	// tokens which preceeds filehandle bareword
-	public static final HashSet<IElementType> preHandleTokenTypes = new HashSet<>(Arrays.asList(
-			OPERATOR_FILETEST
-	));
-
-	public static final TokenSet preHandleTokenTypesPrint = TokenSet.create(
-			RESERVED_PRINT,
-			RESERVED_PRINTF,
-			RESERVED_SAY
-	);
-
-	public static final HashSet<Character> printHandleNegativeChars = new HashSet<>(Arrays.asList(
-			'(',
-			'-', // fixme we suppose it's ->
-			','
-	));
-
-	public static final HashSet<Character> preHandleProperSuffix = new HashSet<>(Arrays.asList(
-			')',
-			',',
-			'=', // fixme we suppose it's =>
-			';'
-	));
-
-	public static final HashSet<String> preHandleTokens = new HashSet<>(Arrays.asList(
-			"opendir",
-			"chdir",
-			"telldir",
-			"seekdir",
-			"rewinddir",
-			"readdir",
-			"closedir",
-
-			"sysopen",
-			"syswrite",
-			"sysseek",
-			"sysread",
-
-			"open",
-			"close",
-			"read",
-			"write",
-			"stat",
-			"ioctl",
-			"fcntl",
-			"lstat",
-			"truncate",
-			"tell",
-			"select",
-			"seek",
-			"getc",
-			"flock",
-			"fileno",
-			"eof",
-			"eof",
-			"binmode"
-	));
 
 }

@@ -27,11 +27,13 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.exceptions.PerlParsingException;
 import com.perl5.lang.perl.parser.*;
+import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by hurricup on 04.05.2015.
@@ -39,16 +41,11 @@ import java.util.HashMap;
  */
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
-	private boolean myRegexOpenerSuppressed = false;
+	protected final HashSet<String> REGISTERED_HANDLES = new HashSet<>();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
 		super(builder, state, parser);
-	}
-
-	@NotNull
-	private TreeElement createLeaf(@NotNull IElementType type, final int start, final int end)
-	{
-		throw new RuntimeException("Gotcha");
+		REGISTERED_HANDLES.addAll(PerlGlobUtil.BUILT_IN);
 	}
 
 	/**
@@ -82,13 +79,14 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep+1)).toString());
 	}
 
-	public boolean isRegexOpenerSuppressed()
+	public void registerHandle(String handle)
 	{
-		return myRegexOpenerSuppressed;
+		REGISTERED_HANDLES.add(handle);
 	}
 
-	public void setRegexOpenerSuppressed(boolean myRegexOpenerSuppressed)
+	public boolean isRegisteredHandle(String handle)
 	{
-		this.myRegexOpenerSuppressed = myRegexOpenerSuppressed;
+		return REGISTERED_HANDLES.contains(handle);
 	}
+
 }

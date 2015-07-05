@@ -38,7 +38,8 @@ public class PerlGlobUtil implements PerlElementTypes
 			"STDERR",
 			"STDOUT",
 			"ARGVOUT",
-			"STDIN"
+			"STDIN",
+			"_"
 	));
 
 	/**

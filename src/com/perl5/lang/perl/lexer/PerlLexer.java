@@ -19,6 +19,7 @@
 package com.perl5.lang.perl.lexer;
 
 
+import com.intellij.execution.console.RunIdeConsoleAction;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
@@ -166,24 +167,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	protected PerlLexerAdapter evalPerlLexer;
 
-	protected HashSet<String> KNOWN_SUBS = new HashSet<>();
-	protected HashSet<String> KNOWN_PACKAGES = new HashSet<>(PerlPackageUtil.BUILT_IN_ALL);
-
-	// todo implement constructor with project parameter, use it to build packages and subs set
-	// todo if project was not passed (highlighter, for example) use all opened projects or nothing ?
 	public PerlLexer(Project project)
 	{
 		super((Reader) null);
 		myProject = project;
-
-		if (project != null && !DumbService.isDumb(myProject))
-		{
-			KNOWN_SUBS.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
-			KNOWN_SUBS.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
-			KNOWN_SUBS.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
-
-			KNOWN_PACKAGES.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
-		}
 	}
 
 	/**
@@ -1215,8 +1202,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		String tokenText = yytext().toString();
 		IElementType tokenType = IDENTIFIER;
 
-		if( lastSignificantTokenType != OPERATOR_DEREFERENCE		// not kinda ..->if
-				&& !SIGILS_TOKENS.contains(lastUnbraceTokenType)	// not $if
+		if(
+				lastSignificantTokenType != OPERATOR_DEREFERENCE		   // not kinda ..->if
+				&& !PRE_PACKAGE_TOKENS.contains(lastSignificantTokenType ) // not use if...
+				&& !SIGILS_TOKENS.contains(lastUnbraceTokenType)		  // not $if
 		)
 		{
 			if ((tokenType = namedOperators.get(tokenText)) != null )

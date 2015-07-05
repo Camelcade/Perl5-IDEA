@@ -22,8 +22,12 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.utils.PerlBuilder;
 import com.perl5.lang.perl.util.PerlSubUtil;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Created by hurricup on 01.05.2015.
@@ -36,6 +40,63 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			VARIABLE_NAME,
 			SUB
 	);
+
+	// tokens, which can succeed ambiguous bareword filehandle
+	public static final TokenSet HANDLE_POSTFIX = TokenSet.create(
+			OPERATOR_COMMA_ARROW,
+			OPERATOR_COMMA,
+			RIGHT_PAREN,
+			RIGHT_BRACE,
+			SEMICOLON
+	);
+
+	public static final TokenSet PRINT_HANDLE_NEGATE_SUFFIX = TokenSet.orSet(
+			TokenSet.create(
+					LEFT_ANGLE,
+					LEFT_BRACE,
+					LEFT_BRACKET,
+					LEFT_PAREN,
+					OPERATOR_LT_NUMERIC
+			),
+			PerlLexer.OPERATORS_TOKENSET
+	);
+
+
+	// commands, that accepts filehandles as first parameter
+	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<>(Arrays.asList(
+			"opendir",
+			"chdir",
+			"telldir",
+			"seekdir",
+			"rewinddir",
+			"readdir",
+			"closedir",
+
+			"sysopen",
+			"syswrite",
+			"sysseek",
+			"sysread",
+
+			"open",
+			"close",
+			"read",
+			"write",
+			"stat",
+			"ioctl",
+			"fcntl",
+			"lstat",
+			"truncate",
+			"tell",
+			"select",
+			"seek",
+			"getc",
+			"flock",
+			"fileno",
+			"eof",
+			"eof",
+			"binmode"
+	));
+
 
 	/**
 	 * Wrapper for Builder class in order to implement additional per parser information in PerlBuilder
@@ -442,21 +503,21 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	/**
 	 * Checks current token and convert it if necessary
-	 * @param b PerlBuilder
-	 * @param l parsing level
+	 *
+	 * @param b         PerlBuilder
+	 * @param l         parsing level
 	 * @param fromToken possible source token
-	 * @param toToken token we want to have
+	 * @param toToken   token we want to have
 	 * @return parsing result
 	 */
 	public static boolean checkAndConvertToken(PsiBuilder b, int l, IElementType fromToken, IElementType toToken)
 	{
 		IElementType tokenType = b.getTokenType();
-		if( tokenType == toToken)
+		if (tokenType == toToken)
 		{
 			b.advanceLexer();
 			return true;
-		}
-		else if( tokenType == fromToken )
+		} else if (tokenType == fromToken)
 		{
 			b.remapCurrentToken(toToken);
 			b.advanceLexer();
@@ -518,22 +579,101 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	/**
 	 * Joining several regex tokens into one to lighten PSI tree. Temporary solution, until regex parsing is implemented
+	 *
 	 * @param b PerlBuilder
 	 * @param l parsing level
 	 * @return parsing result
 	 */
 	public static boolean joinRegexTokens(PsiBuilder b, int l)
 	{
-		if( b.getTokenType() == REGEX_TOKEN )
+		if (b.getTokenType() == REGEX_TOKEN)
 		{
 			PsiBuilder.Marker m = b.mark();
 
-			while( b.getTokenType() == REGEX_TOKEN)
+			while (b.getTokenType() == REGEX_TOKEN)
 				b.advanceLexer();
 
 			m.collapse(REGEX_TOKEN);
 			return true;
 		}
+		return false;
+	}
+
+	/**
+	 * Checks and parses identifier as a handle
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean smartHandle(PsiBuilder b, int l)
+	{
+		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && HANDLE_POSTFIX.contains(b.lookAhead(1)))    // we can convert and afterward token is ok
+		{
+			assert b instanceof PerlBuilder;
+
+			PerlTokenData lastToken = ((PerlBuilder) b).lookupToken(-1);
+
+			if (lastToken.getTokenType() == SUB
+					|| lastToken.getTokenType() == LEFT_PAREN
+					&& (lastToken = ((PerlBuilder) b).lookupToken(-2)).getTokenType() == SUB
+					)
+				if (PRE_HANDLE_OPS.contains(lastToken.getTokenText()))
+				{
+					b.remapCurrentToken(HANDLE);
+					((PerlBuilder) b).registerHandle(b.getTokenText());
+					b.advanceLexer();
+					return true;
+				}
+		}
+		return false;
+	}
+
+	/**
+	 * parser for print/say/printf filehandle
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parsePrintHandle(PsiBuilder b, int l)
+	{
+		IElementType currentTokenType = b.getTokenType();
+		IElementType nextTokenType = b.lookAhead(1);
+		assert b instanceof PerlBuilder;
+
+		if (
+			CONVERTABLE_TOKENS.contains(currentTokenType)				// it's identifier
+			&& !PRINT_HANDLE_NEGATE_SUFFIX.contains(nextTokenType)		// no negation tokens
+			&& ((PerlBuilder) b).isRegisteredHandle(b.getTokenText())	// handle was opened here fixme this is not true. print eats any handle
+		)
+		{
+			b.remapCurrentToken(HANDLE);
+			b.advanceLexer();
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks and parses bareword filehandle for <FH> operations
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseReadHandle(PsiBuilder b, int l)
+	{
+		IElementType currentTokenType = b.getTokenType();
+		IElementType nextTokenType = b.lookAhead(1);
+
+		if (CONVERTABLE_TOKENS.contains(currentTokenType) && (nextTokenType == OPERATOR_GT_NUMERIC || nextTokenType == RIGHT_ANGLE))
+		{
+			b.remapCurrentToken(HANDLE);
+			b.advanceLexer();
+			return true;
+		}
+
 		return false;
 	}
 

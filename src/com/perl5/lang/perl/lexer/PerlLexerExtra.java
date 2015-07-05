@@ -23,6 +23,8 @@ import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -646,5 +648,59 @@ public class PerlLexerExtra
 //			knownSubs.add(subName);
 //		return SUB;
 //	}
+
+//	// Ambiguous package detectors
+//	public static final HashSet<String> FORCED_PACKAGES = new HashSet<>(Arrays.asList(
+//			"SUPER",
+//			"main",
+//			"CORE"
+//	));
+
+
+//	// tokens which preceeds labels
+//	public static final TokenSet preLabelTokenTypes = TokenSet.create(
+//			RESERVED_NEXT,
+//			RESERVED_LAST,
+//			RESERVED_REDO,
+//			RESERVED_GOTO
+//	);
+//
+//	// tokens which preceeds 100% package bareword
+//	public static final TokenSet prePackageTokenTypes = TokenSet.create(
+//			RESERVED_MY,
+//			RESERVED_OUR,
+//			RESERVED_STATE,
+//			RESERVED_LOCAL,
+//
+//			RESERVED_PACKAGE,
+//			RESERVED_USE,
+//			RESERVED_NO,
+//			RESERVED_REQUIRE
+//	);
+//
+//	// tokens which preceeds filehandle bareword
+//	public static final HashSet<IElementType> preHandleTokenTypes = new HashSet<>(Arrays.asList(
+//			OPERATOR_FILETEST
+//	));
+//
+//	public static final TokenSet preHandleTokenTypesPrint = TokenSet.create(
+//			RESERVED_PRINT,
+//			RESERVED_PRINTF,
+//			RESERVED_SAY
+//	);
+//
+//	public static final HashSet<Character> printHandleNegativeChars = new HashSet<>(Arrays.asList(
+//			'(',
+//			'-', // fixme we suppose it's ->
+//			','
+//	));
+//
+//	public static final HashSet<Character> preHandleProperSuffix = new HashSet<>(Arrays.asList(
+//			')',
+//			',',
+//			'=', // fixme we suppose it's =>
+//			';'
+//	));
+//
 
 }
