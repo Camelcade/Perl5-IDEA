@@ -188,46 +188,6 @@ public class PerlLexerExtra
 //		}
 //	}
 
-//	@Override
-//	public IElementType parseScalarSigil()
-//	{
-//		String tokenText = yytext().toString();
-//		Character nextSignificantCharacter = getNextSignificantCharacter();
-//
-//		if( tokenText.length() > 1)	// may be sequential sigils or sequential sigils and built in $$
-//		{
-//			pushState();
-//			yybegin(LEX_PREPARSED_ITEMS);
-//			tokensList.clear();
-//
-//			int tokenStart = getTokenStart();
-//
-//			if( nextSignificantCharacter != null
-//					&& (
-//					Character.isLetterOrDigit(nextSignificantCharacter)	// $$$$varname
-//							|| nextSignificantCharacter.equals('{')	// $$$${varname}
-//			)
-//					)
-//			{
-//				// just sigils
-//				tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
-//			}
-//			else
-//			{
-//				// sigils and $$
-//				int tokenEnd = getTokenEnd();
-//
-//				if( tokenEnd -1 > tokenStart + 1)
-//					tokensList.add(new CustomToken(tokenStart + 1, tokenEnd-1, SIGIL_SCALAR));
-//				tokensList.add(new CustomToken(tokenEnd-1, tokenEnd, VARIABLE_NAME));
-//			}
-//			setTokenEnd(tokenStart + 1);
-//		}
-//		else if( lastSignificantTokenType == LEFT_BRACE && nextSignificantCharacter != null && nextSignificantCharacter.equals('}')) // for ${$}
-//			return VARIABLE_NAME;
-//
-//		return SIGIL_SCALAR;
-//	}
 //
 //	@Override
 //	public IElementType parseScalarSigilIndex()
@@ -592,30 +552,6 @@ public class PerlLexerExtra
 //	 *
 //	 * @return next character
 //	 */
-//	private Character getNextSignificantCharacter()
-//	{
-//		int currentPosition = getTokenEnd();
-//		int bufferEnd = getBufferEnd();
-//		CharSequence buffer = getBuffer();
-//
-//		while (currentPosition < bufferEnd)
-//		{
-//			char currentChar = buffer.charAt(currentPosition);
-//			if (currentChar == '#')
-//			{
-//				while (currentPosition < bufferEnd)
-//				{
-//					if (buffer.charAt(currentPosition) == '\n')
-//						break;
-//					currentPosition++;
-//				}
-//			} else if (!Character.isWhitespace(currentChar))
-//				return currentChar;
-//
-//			currentPosition++;
-//		}
-//		return null;
-//	}
 
 //	@Override
 //	public IElementType getHandleTokenType()

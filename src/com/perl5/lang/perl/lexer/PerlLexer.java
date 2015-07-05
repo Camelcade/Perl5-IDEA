@@ -19,14 +19,9 @@
 package com.perl5.lang.perl.lexer;
 
 
-import com.intellij.execution.console.RunIdeConsoleAction;
-import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -711,13 +706,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			return null;
 		} else
 		{
-			Character nextChar = isLastToken() ? null : getBuffer().charAt(getNextTokenStart());
+			Character nextCharacter = getNextCharacter();
 
-			if (nextChar != null && nextChar.equals('/'))
+			if (nextCharacter != null && nextCharacter.equals('/'))
 			{
 				setTokenEnd(getNextTokenStart() + 1);
 				return OPERATOR_OR_DEFINED;
-			} else if (nextChar != null && nextChar.equals('='))
+			} else if (nextCharacter != null && nextCharacter.equals('='))
 			{
 				setTokenEnd(getNextTokenStart() + 1);
 				return OPERATOR_DIV_ASSIGN;
@@ -727,6 +722,51 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			}
 		}
 	}
+
+	/**
+	 * Decide if it's two sigils or variable name for $$
+	 *
+	 * @return token type
+	 */
+	public IElementType parseScalarSigils()
+	{
+		String tokenText = yytext().toString();
+		Character nextSignificantCharacter = getNextSignificantCharacter();
+
+		if (tokenText.length() > 1)    // may be sequential sigils or sequential sigils and built in $$
+		{
+			pushState();
+			yybegin(LEX_PREPARSED_ITEMS);
+			tokensList.clear();
+
+			int tokenStart = getTokenStart();
+
+			if (nextSignificantCharacter != null
+					&& (
+							Character.isLetterOrDigit(nextSignificantCharacter)    // $$$$varname
+							|| nextSignificantCharacter.equals('{')    // $$$${varname}
+							|| nextSignificantCharacter.equals('^')    // $$$$^SOMEVAR
+					)
+			)
+			{
+				// just sigils
+				tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+			} else
+			{
+				// sigils and $$
+				int tokenEnd = getTokenEnd();
+
+				if (tokenEnd - 1 > tokenStart + 1)
+					tokensList.add(new CustomToken(tokenStart + 1, tokenEnd - 1, SIGIL_SCALAR));
+				tokensList.add(new CustomToken(tokenEnd - 1, tokenEnd, VARIABLE_NAME));
+			}
+			setTokenEnd(tokenStart + 1);
+		} else if (lastSignificantTokenType == LEFT_BRACE && nextSignificantCharacter != null && nextSignificantCharacter.equals('}')) // for ${$}
+			return VARIABLE_NAME;
+
+		return SIGIL_SCALAR;
+	}
+
 
 	public IElementType checkOperatorXAssign()
 	{
@@ -1125,7 +1165,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			tokenStart += sigil.length();
 			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, LEFT_BRACE));
 			tokenStart++;
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), IDENTIFIER));
+			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
 			tokenStart += name.length();
 			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, RIGHT_BRACE));
 
@@ -1140,7 +1180,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			String name = m.group(2);
 
 			tokenStart += sigil.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), IDENTIFIER));
+			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
 
 			yypushback(tokenText.length() - sigil.length());
 			return getSigilTokenType(sigil);
@@ -1165,16 +1205,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			throw new RuntimeException("Unknown sigil: " + sigil);
 	}
 
-	public IElementType getReservedTokenType()
-	{
-		IElementType tokenType = reservedTokenTypes.get(yytext().toString());
-
-		if (tokenType != null)
-			return tokenType;
-		else
-			throw new RuntimeException("Unknwon token type for " + yytext().toString());
-	}
-
 	// fixme this is bad. Can be $smth ? sub{ label: ...} : $other;
 	public IElementType guessColon()
 	{
@@ -1195,6 +1225,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	/**
 	 * Bareword parser, resolves built-ins and runs additional processings where it's necessary
+	 *
 	 * @return token type
 	 */
 	public IElementType getIdentifierToken()
@@ -1202,15 +1233,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		String tokenText = yytext().toString();
 		IElementType tokenType = IDENTIFIER;
 
-		if(
-				lastSignificantTokenType != OPERATOR_DEREFERENCE		   // not kinda ..->if
-				&& !PRE_PACKAGE_TOKENS.contains(lastSignificantTokenType ) // not use if...
-				&& !SIGILS_TOKENS.contains(lastUnbraceTokenType)		  // not $if
-		)
+		if (
+				lastSignificantTokenType != OPERATOR_DEREFERENCE           // not kinda ..->if
+						&& !PRE_PACKAGE_TOKENS.contains(lastSignificantTokenType) // not use if...
+						&& !SIGILS_TOKENS.contains(lastUnbraceTokenType)          // not $if
+				)
 		{
-			if ((tokenType = namedOperators.get(tokenText)) != null )
+			if ((tokenType = namedOperators.get(tokenText)) != null)
 				return tokenType;
-			else if ((tokenType = reservedTokenTypes.get(tokenText)) != null )
+			else if ((tokenType = reservedTokenTypes.get(tokenText)) != null)
 			{
 				if (tokenType == RESERVED_QW)
 					processQuoteLikeListOpener();
@@ -1226,10 +1257,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					yybegin(LEX_SUB_NAME);
 				}
 				return tokenType;
-			}
-			else if ((tokenType = blockNames.get(tokenText)) != null )
+			} else if ((tokenType = blockNames.get(tokenText)) != null)
 				return tokenType;
-			else if ((tokenType = tagNames.get(tokenText)) != null )
+			else if ((tokenType = tagNames.get(tokenText)) != null)
 				return tokenType;
 		}
 
@@ -1248,18 +1278,19 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			"(" +
 					reSeparator + "?" +        // optional opening separator,
 					"(?:" +
-						reBasicIdentifier +
-						reSeparator +
-					")*" +
-			")" +
-			"(" +
 					reBasicIdentifier +
-			")"
+					reSeparator +
+					")*" +
+					")" +
+					"(" +
+					reBasicIdentifier +
+					")"
 	);
 
 
 	/**
 	 * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER
+	 *
 	 * @return token type
 	 */
 	public IElementType parsePackage()
@@ -1283,6 +1314,41 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		} else
 			throw new RuntimeException("Inappropriate package name " + tokenText);
+	}
+
+	private Character getNextCharacter()
+	{
+		int currentPosition = getTokenEnd();
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+		if (currentPosition < bufferEnd)
+			return buffer.charAt(currentPosition);
+		return null;
+	}
+
+	private Character getNextSignificantCharacter()
+	{
+		int currentPosition = getTokenEnd();
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+
+		while (currentPosition < bufferEnd)
+		{
+			char currentChar = buffer.charAt(currentPosition);
+			if (currentChar == '#')
+			{
+				while (currentPosition < bufferEnd)
+				{
+					if (buffer.charAt(currentPosition) == '\n')
+						break;
+					currentPosition++;
+				}
+			} else if (!Character.isWhitespace(currentChar))
+				return currentChar;
+
+			currentPosition++;
+		}
+		return null;
 	}
 
 }

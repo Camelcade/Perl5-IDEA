@@ -39,8 +39,10 @@ public class PerlHashUtil implements PerlElementTypes
 			"INC",
 			"OVERLOAD",
 			"SIG",
-			"EXPORT_TAGS"
-
+			"LAST_PAREN_MATCH",
+			"LAST_MATCH_START",
+			"OS_ERROR",
+			"ERRNO"
 	));
 
 	public static boolean isBuiltIn(String variable)

@@ -73,7 +73,7 @@ ANYWORD = [^ \t\f\r\n]
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
-BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"
+BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["
 PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} )
 
 BUILT_IN_ARRAY_NAME = "!"|"+"|"-"|"_"
@@ -373,9 +373,9 @@ TRANS_MODIFIERS = [cdsr]
         break;
     return tokenType;
 }
-"*" {return OPERATOR_MUL;}    // mul or glob sigil
+"*" {return OPERATOR_MUL;}
 "%" {return OPERATOR_MOD;}
-"&" {return OPERATOR_BITWISE_AND;}    // bitwise and or code sigil
+"&" {return OPERATOR_BITWISE_AND;}
 
 "|" {return OPERATOR_BITWISE_OR;}
 "^" {return guessBitwiseXor();}
@@ -385,7 +385,7 @@ TRANS_MODIFIERS = [cdsr]
 
 "@" {return SIGIL_ARRAY;}
 "$#" {return SIGIL_SCALAR_INDEX;}
-"$" {return SIGIL_SCALAR;}
+"$"+ { return parseScalarSigils(); }
 
 "{"             {return LEFT_BRACE;}
 "}"             {return RIGHT_BRACE;}
@@ -400,6 +400,8 @@ TRANS_MODIFIERS = [cdsr]
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 
+
+"${$}" { return parseBuiltInVariable();}
 {PERL_SCALAR_BUILT_IN}      {return parseBuiltInVariable();}
 {PERL_ARRAY_BUILT_IN}       {return parseBuiltInVariable();}
 {PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}

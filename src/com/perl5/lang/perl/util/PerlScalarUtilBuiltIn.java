@@ -26,6 +26,16 @@ import java.util.HashSet;
 public interface PerlScalarUtilBuiltIn
 {
 	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
+			"OLD_PERL_VERSION",
+			"^WIN32_SLOPPY_STAT",
+			"^MATCH",
+			"^PREMATCH",
+			"^POSTMATCH",
+			"LAST_SUBMATCH_RESULT",
+			"OUTPUT_AUTOFLUSH",
+			"^LAST_FH",
+			"^UTF8CACHE",
+			"^GLOBAL_PHASE",
 			"!",
 			"^",
 			"^RE_TRIE_MAXBUF",

@@ -34,13 +34,12 @@ public class PerlArrayUtil implements PerlElementTypes
 			"+",
 			"-",
 			"_",
+			"F",
+			"ARG",
+			"LAST_MATCH_END",
 			"ARGV",
 			"INC",
 			"LAST_MATCH_START"
-//			"EXPORT",
-//			"ISA",
-//			"EXPORT_OK",
-//			"EXPORT_TAGS"
 	));
 
 	public static boolean isBuiltIn(String variable)
