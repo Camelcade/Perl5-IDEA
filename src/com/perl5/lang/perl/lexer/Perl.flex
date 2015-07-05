@@ -82,7 +82,8 @@ PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRA
 BUILT_IN_HASH_NAME = "!"|"+"|"-"
 PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
 
-PACKAGE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) +
+PACKAGE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) * {IDENTIFIER} "::" +
+PACKAGE_PARSABLE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) + {IDENTIFIER}
 PACKAGE_SHORT = "::"+ "'" ?
 
 
@@ -397,6 +398,7 @@ TRANS_MODIFIERS = [cdsr]
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
 {IDENTIFIER} { return getIdentifierToken();}
+{PACKAGE_PARSABLE} {return parsePackage(); }
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}
 {PACKAGE} {return PACKAGE_IDENTIFIER;}
 

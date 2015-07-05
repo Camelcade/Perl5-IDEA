@@ -1206,6 +1206,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return OPERATOR_BITWISE_XOR;
 	}
 
+	/**
+	 * Bareword parser, resolves built-ins and runs additional processings where it's necessary
+	 * @return token type
+	 */
 	public IElementType getIdentifierToken()
 	{
 		String tokenText = yytext().toString();
@@ -1243,5 +1247,53 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return IDENTIFIER;
 	}
 
+	// http://perldoc.perl.org/perldata.html#Identifier-parsing
+	private static final String reBasicIdentifier = "[_a-zA-Z][_a-zA-Z0-9]*"; // something strang in Java with unicode props
+	private static final String reSeparator =
+			"(?:" +
+					"(?:::)+'?" +
+					"|" +
+					"(?:::)*'" +
+					")";
+	private static final Pattern ambigousPackage = Pattern.compile(
+			"(" +
+					reSeparator + "?" +        // optional opening separator,
+					"(?:" +
+						reBasicIdentifier +
+						reSeparator +
+					")*" +
+			")" +
+			"(" +
+					reBasicIdentifier +
+			")"
+	);
+
+
+	/**
+	 * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER
+	 * @return token type
+	 */
+	public IElementType parsePackage()
+	{
+		String tokenText = yytext().toString();
+
+		Matcher m = ambigousPackage.matcher(tokenText);
+		if (m.matches())
+		{
+			String packageIdentifier = m.group(1);
+			String identifier = m.group(2);
+
+			tokensList.clear();
+			pushState();
+			int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
+			tokensList.add(new CustomToken(packageIdentifierEnd, getTokenEnd(), IDENTIFIER));
+			yybegin(LEX_PREPARSED_ITEMS);
+			setTokenEnd(packageIdentifierEnd);
+
+			return PACKAGE_IDENTIFIER;
+
+		} else
+			throw new RuntimeException("Inappropriate package name " + tokenText);
+	}
 
 }
