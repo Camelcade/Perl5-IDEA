@@ -53,7 +53,7 @@ public class PerlDefaultMro
 
 			if (baseElement != null)
 			{
-				if( namespaceElement != null && "SUPER".equals(namespaceElement.getName()))
+				if( namespaceElement != null && "SUPER".equals(namespaceElement.getCanonicalName()))
 				{
 					// expr->SUPER::sub
 
@@ -80,7 +80,7 @@ public class PerlDefaultMro
 				// sub
 				String packageName;
 				if( namespaceElement != null )
-					packageName = namespaceElement.getName();
+					packageName = namespaceElement.getCanonicalName();
 				else
 					packageName = PerlPackageUtil.getContextPackageName(callElement);
 

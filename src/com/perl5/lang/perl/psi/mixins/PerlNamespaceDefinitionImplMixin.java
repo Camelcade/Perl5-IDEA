@@ -84,7 +84,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
 		if (namespaceElement != null)
-			return namespaceElement.getName();
+			return namespaceElement.getCanonicalName();
 
 		return null;
 	}

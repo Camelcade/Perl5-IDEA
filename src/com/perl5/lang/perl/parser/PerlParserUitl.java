@@ -24,6 +24,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.utils.PerlBuilder;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.util.Arrays;
@@ -159,11 +160,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean isUnaryOperator(PsiBuilder b, int l)
 	{
-		if (b.lookAhead(-1) == OPERATOR_DEREFERENCE)
+		assert b instanceof PerlBuilder;
+		PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
+
+		if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
 			return false;
 
 		IElementType tokenType = b.getTokenType();
-		assert b instanceof PerlBuilder;
 		IElementType nextTokenType = b.lookAhead(1);
 
 		if (tokenType == SUB && nextTokenType != LEFT_PAREN && nextTokenType != PACKAGE)
@@ -184,12 +187,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean isListOperator(PsiBuilder b, int l)
 	{
-		if (b.lookAhead(-1) == OPERATOR_DEREFERENCE)
+		PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
+
+		if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
 			return false;
 
 		IElementType tokenType = b.getTokenType();
 		IElementType nextTokenType = b.lookAhead(1);
-		assert b instanceof PerlBuilder;
 
 		if (tokenType == SUB && nextTokenType != LEFT_PAREN && nextTokenType != PACKAGE)
 			// todo we should check current namespace here
@@ -199,141 +203,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		return false;
 	}
-
-/*
-	*/
-
-	/**
-	 * Parses function call
-	 *
-	 * @param b Perlbuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 *//*
-
-	public static boolean parseSubCall(PsiBuilder b, int l)
-	{
-		// check if it's list or unary
-		// check if it's accepts code as first param
-		// check if it's rightward or leftward
-
-		assert b instanceof PerlBuilder;
-
-		IElementType tokenType = b.getTokenType();
-		String tokenText = b.getTokenText();
-
-		IElementType prevTokenType = b.lookAhead(-1);
-		IElementType nextTokenType = b.lookAhead(1);
-
-		// deref makes sub list, perl can't detect this
-		boolean isUnary = false;
-		boolean requiresCode = false;
-
-		if( prevTokenType != OPERATOR_DEREFERENCE )
-		{
-			if( tokenType == PACKAGE && nextTokenType == SUB)
-			{
-				PerlTokenData nextToken = ((PerlBuilder) b).lookupToken(1);
-				// package::sub or package::sub() call
-				if( "CORE::".equals(tokenText) )
-				{
-					isUnary = PerlSubUtil.BUILT_IN_UNARY.contains(nextToken.getTokenText());
-					requiresCode = PerlSubUtil.BUILT_IN_CODED.contains(nextToken.getTokenText());
-				}
-
-				// todo we should check user subs here
-
-			}
-			else if( tokenType == SUB )
-			{
-				// sub or sub() call
-				// todo we should check user subs here, and they depends on current namespace
-
-				if( nextTokenType != PACKAGE)
-				{
-					isUnary = PerlSubUtil.BUILT_IN_UNARY.contains(tokenText);
-					requiresCode = PerlSubUtil.BUILT_IN_CODED.contains(tokenText);
-				}
-				else
-				{
-					IElementType nextNextTokenType = b.lookAhead(2);
-					if( nextNextTokenType != OPERATOR_DEREFERENCE && nextNextTokenType != SUB)
-					{
-						// this is a fancy: method package call
-						// todo check user subs here
-					}
-					else
-					{
-						// this is a sequence, like sub package::method or sub package->method
-						isUnary = PerlSubUtil.BUILT_IN_UNARY.contains(tokenText);
-						requiresCode = PerlSubUtil.BUILT_IN_CODED.contains(tokenText);
-					}
-				}
-			}
-		}
-		else if( tokenType == SUB  && b.lookAhead(-2) == PACKAGE)
-		{
-			// package->sub() or package->sub call
-			// todo we should check user subs here
-		}
-
-		// parsing invocation
-		// todo make a hack for sort sub block
-		if( PerlParser.callable(b,l))
-		{
-			PsiBuilder.Marker m = b.mark();
-
-			if( consumeToken(b, LEFT_PAREN )) // leftward
-			{
-				if( requiresCode )
-				{
-					PerlParser.block(b, l + 1);
-					consumeTokenSmart(b,OPERATOR_COMMA);
-					consumeTokenSmart(b,OPERATOR_COMMA_ARROW);
-				}
-				PerlParser.expr(b,l+1,-1);
-
-				if( consumeToken(b, RIGHT_PAREN))
-				{
-					m.done(CALL_ARGUMENTS);
-					return true;
-				}
-				else
-				{
-					m.drop();
-					return false;
-				}
-			}
-			else // rightward
-			{
-				if( requiresCode )
-				{
-					if( PerlParser.block(b, l + 1))
-					{
-						if (!isUnary)
-						{
-							consumeTokenSmart(b, OPERATOR_COMMA);
-							consumeTokenSmart(b, OPERATOR_COMMA_ARROW);
-							PerlParser.list_expr(b, l + 1);
-						}
-					}
-				}
-				else
-				{
-					// todo need code heuristic here
-					if( isUnary )
-						PerlParser.scalar_expr(b, l +1);
-					else
-						PerlParser.list_expr(b,l+1);
-				}
-				m.done(CALL_ARGUMENTS);
-				return true;
-			}
-		}
-
-		return false;
-	}
-*/
 
 
 	/*
@@ -631,6 +500,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	/**
 	 * parser for print/say/printf filehandle
+	 *
 	 * @param b PerlBuilder
 	 * @param l parsing level
 	 * @return parsing result
@@ -642,10 +512,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 
 		if (
-			CONVERTABLE_TOKENS.contains(currentTokenType)				// it's identifier
-			&& !PRINT_HANDLE_NEGATE_SUFFIX.contains(nextTokenType)		// no negation tokens
-			&& ((PerlBuilder) b).isRegisteredHandle(b.getTokenText())	// handle was opened here fixme this is not true. print eats any handle
-		)
+				CONVERTABLE_TOKENS.contains(currentTokenType)                // it's identifier
+						&& !PRINT_HANDLE_NEGATE_SUFFIX.contains(nextTokenType)        // no negation tokens
+						&& ((PerlBuilder) b).isRegisteredHandle(b.getTokenText())    // handle was opened here fixme this is not true. print eats any handle
+				)
 		{
 			b.remapCurrentToken(HANDLE);
 			b.advanceLexer();
@@ -674,6 +544,103 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 
+		return false;
+	}
+
+	/**
+	 * Parses invocable method
+	 * As input we may have:
+	 * PACKAGE_IDENTIFIER IDENTIFIER	Foo::sub
+	 * IDENTIFIER PACKAGE_IDENTIFIER	sub Foo::
+	 * IDENTIFIER IDENTIFIER			sub Foo
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseMethod(PsiBuilder b, int l)
+	{
+		IElementType currentTokenType = b.getTokenType();
+		IElementType nextTokenType = b.lookAhead(1);
+
+		assert b instanceof PerlBuilder;
+
+		// can be
+		// 	Foo::method
+		//  Foo::Bar
+		if ((currentTokenType == PACKAGE_IDENTIFIER || currentTokenType == PACKAGE) && CONVERTABLE_TOKENS.contains(nextTokenType))
+		{
+			PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
+			String potentialSubName = PerlPackageUtil.getCanonicalPackageName(b.getTokenText()) + "::" + nextTokenData.getTokenText();
+			boolean subExists = ((PerlBuilder) b).isKnownSub(potentialSubName);
+			boolean packageExists = ((PerlBuilder) b).isKnownPackage(potentialSubName);
+
+			if (subExists || !packageExists)
+				return convertPackageIdentifier(b, l) && convertIdentifier(b, l, SUB);
+			else
+				return mergePackageName(b, l);
+		}
+		// 	method [Foo]
+		else if (CONVERTABLE_TOKENS.contains(currentTokenType))
+		{
+			PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
+
+
+			// ->sub
+			if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
+				return convertIdentifier(b, l, SUB);
+				// may be
+				// 	method Foo::
+				//	method Foo::Bar
+				//  method Foo::othermethod
+			else if (nextTokenType == PACKAGE_IDENTIFIER || nextTokenType == PACKAGE)
+			{
+				IElementType nextNextTokenType = b.lookAhead(2);
+				if (CONVERTABLE_TOKENS.contains(nextNextTokenType))
+					// it's somesub Package::method
+					return convertIdentifier(b, l, SUB);
+				else
+					// it's method Package::
+					return convertIdentifier(b, l, SUB) && convertPackageIdentifier(b, l);
+			}
+			// may be
+			// 	method Foo
+			else if (CONVERTABLE_TOKENS.contains(nextTokenType))
+			{
+				PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
+
+				String potentialSubName = nextTokenData.getTokenText() + "::" + b.getTokenText();
+				if (((PerlBuilder) b).isKnownSub(potentialSubName))
+					return convertIdentifier(b, l, SUB) && convertIdentifier(b, l, PACKAGE);
+				else
+					return convertIdentifier(b, l, SUB);
+			} else // it's just sub
+				return convertIdentifier(b, l, SUB);
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Parses {IDENTIFIER}
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseBracedString(PsiBuilder b, int l)
+	{
+		if (consumeToken(b, LEFT_BRACE)
+				&& CONVERTABLE_TOKENS.contains(b.getTokenType())
+				&& b.lookAhead(1) == RIGHT_BRACE
+				)
+		{
+			b.remapCurrentToken(STRING_CONTENT);
+			b.advanceLexer();
+			b.advanceLexer();
+			return true;
+		}
 		return false;
 	}
 

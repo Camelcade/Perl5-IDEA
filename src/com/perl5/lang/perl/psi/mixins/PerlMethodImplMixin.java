@@ -36,7 +36,7 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
 
 		if( namespaceElement != null )
-			return namespaceElement.getName();
+			return namespaceElement.getCanonicalName();
 
 		PsiElement parent = getParent();
 		PsiElement grandParent = parent == null ? null : parent.getParent();

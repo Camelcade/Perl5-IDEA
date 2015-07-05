@@ -42,7 +42,7 @@ public class PerlNamespaceClashesInspection extends PerlInspection
 			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
 			{
 				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-				if (namespaceElement == null || "main".equals(namespaceElement.getName()))
+				if (namespaceElement == null || "main".equals(namespaceElement.getCanonicalName()))
 					return;
 
 				// fixme we should check that this is not in SDK

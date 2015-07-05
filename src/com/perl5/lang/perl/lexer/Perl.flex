@@ -63,6 +63,7 @@ PERL_XIDS = [_a-zA-Z]
 PERL_XIDC = [_a-zA-Z0-9]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
+IDENTIFIER_BRACED = "{" {EMPTY_SPACE}* {IDENTIFIER} {EMPTY_SPACE}* "}"
 
 BAREWORD_MINUS = "-" * {IDENTIFIER}
 BAREWORD_STRING_COMMA = {BAREWORD_MINUS}{EMPTY_SPACE}*"=>"
@@ -128,10 +129,23 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_SUB_NAME
 %xstate LEX_SUB_PROTOTYPE
 
+%xstate LEX_BRACED_IDENTIFIER
+
 %xstate LEX_BAREWORD_STRING_COMMA
 %xstate LEX_LABEL_DEFINITION
 %state LEX_HTML_BLOCK
 %%
+
+// exclusive
+<LEX_BRACED_IDENTIFIER>
+{
+    "{" {return LEFT_BRACE;}
+    "}" {endCustomBlock();return RIGHT_BRACE;}
+    {IDENTIFIER} {return IDENTIFIER;}
+    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
+    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
+}
+
 
 //exclusive
 <LEX_HEREDOC_OPENER>
@@ -397,6 +411,7 @@ TRANS_MODIFIERS = [cdsr]
 
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
+{IDENTIFIER_BRACED} {startCustomBlock(LEX_BRACED_IDENTIFIER);break;}
 {IDENTIFIER} { return getIdentifierToken();}
 {PACKAGE_PARSABLE} {return parsePackage(); }
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}

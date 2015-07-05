@@ -814,7 +814,7 @@ private scalar_constant ::=
     | TAG  // __PACKAGE__ etc.
     | string
 
-braced_string ::= LEFT_BRACE STRING_CONTENT RIGHT_BRACE
+braced_string ::= <<parseBracedString>> // LEFT_BRACE STRING_CONTENT RIGHT_BRACE // <<convertIdentifier STRING_CONTENT>>
 
 private array_constant ::=
     string_list
@@ -867,9 +867,7 @@ private variable_body_braced ::= LEFT_BRACE [namespace_canonical] <<convertIdent
 private variable_body_canonical ::= [namespace_canonical] <<convertIdentifier VARIABLE_NAME>>
 
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
-method ::=
-    namespace_canonical <<convertIdentifier SUB>>                  // package::method
-    | <<convertIdentifier SUB>> [namespace_element !(IDENTIFIER|OPERATOR_DEREFERENCE)]  // method package; Here we should use some logic or disable it at all
+method ::= <<parseMethod>>
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private annotations ::= annotation+
@@ -898,5 +896,4 @@ private namespace_element_bracketed ::= LEFT_BRACKET <<mergePackageName>> RIGHT_
 private namespace_element_braced ::= LEFT_BRACE <<mergePackageName>> RIGHT_BRACE {name="{Package::Name}"}
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
-private namespace_element ::= PACKAGE {name="Package::Name"}
 private namespace_canonical ::= <<convertPackageIdentifier>>
