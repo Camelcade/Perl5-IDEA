@@ -33,6 +33,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType guessDiv();
 	public abstract IElementType guessColon();
 	public abstract IElementType parseScalarSigils();
+	public abstract IElementType parseFormatLineBreakCharacters();
 
 	public abstract IElementType getIdentifierToken();
 

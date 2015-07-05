@@ -691,7 +691,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 						|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
 						|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
 						|| REGEXP_PREFIX.contains(lastSignificantTokenType)
-						|| lastUnparenTokenType == SUB && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
+						|| lastUnparenTokenType == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
 				)
 		{
 			allowSharpQuote = true;
@@ -1190,6 +1190,17 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	}
 
 	/**
+	 * Parser for $: variable
+	 * @return token type
+	 */
+	public IElementType parseFormatLineBreakCharacters()
+	{
+		yypushback(1);
+		return SIGIL_SCALAR;
+	}
+
+
+	/**
 	 * Returns token type for sigil
 	 *
 	 * @param sigil sigli text
@@ -1205,14 +1216,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			throw new RuntimeException("Unknown sigil: " + sigil);
 	}
 
-	// fixme this is bad. Can be $smth ? sub{ label: ...} : $other;
 	public IElementType guessColon()
 	{
-		if (trenarCounter == 0)
-			return COLON;
+		if( lastUnbraceTokenType == SIGIL_SCALAR )
+			return IDENTIFIER;
 
-		trenarCounter--;
-		return OPERATOR_TRENAR_ELSE;
+		return COLON;
 	}
 
 	@Override

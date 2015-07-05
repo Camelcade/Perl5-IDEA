@@ -35,11 +35,17 @@ import java.util.HashSet;
  */
 public class PerlParserUitl extends GeneratedParserUtilBase implements PerlElementTypes
 {
+	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
+			PACKAGE_IDENTIFIER,
+			PACKAGE
+	);
+
 	// tokens that can be converted between each other depending on context
 	public static final TokenSet CONVERTABLE_TOKENS = TokenSet.create(
 			IDENTIFIER,
 			VARIABLE_NAME,
-			SUB
+			SUB,
+			LABEL
 	);
 
 	// tokens, which can succeed ambiguous bareword filehandle
@@ -169,10 +175,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType tokenType = b.getTokenType();
 		IElementType nextTokenType = b.lookAhead(1);
 
-		if (tokenType == SUB && nextTokenType != LEFT_PAREN && nextTokenType != PACKAGE)
+		if (CONVERTABLE_TOKENS.contains(tokenType) && nextTokenType != LEFT_PAREN && !PACKAGE_TOKENS.contains(nextTokenType))
 			// todo we should check current namespace here
 			return PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
-		else if (tokenType == PACKAGE && nextTokenType == SUB && b.lookAhead(2) != LEFT_PAREN)
+		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(SUB) && b.lookAhead(2) != LEFT_PAREN)
 			return PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText());
 
 		return false;
@@ -195,10 +201,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType tokenType = b.getTokenType();
 		IElementType nextTokenType = b.lookAhead(1);
 
-		if (tokenType == SUB && nextTokenType != LEFT_PAREN && nextTokenType != PACKAGE)
+		if (CONVERTABLE_TOKENS.contains(tokenType) && nextTokenType != LEFT_PAREN && !PACKAGE_TOKENS.contains(nextTokenType))
 			// todo we should check current namespace here
 			return !PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
-		else if (tokenType == PACKAGE && nextTokenType == SUB && b.lookAhead(2) != LEFT_PAREN)
+		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(2) != LEFT_PAREN)
 			return !PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText());
 
 		return false;
@@ -483,7 +489,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			PerlTokenData lastToken = ((PerlBuilder) b).lookupToken(-1);
 
-			if (lastToken.getTokenType() == SUB
+			if (lastToken.getTokenType() == SUB    // we sure that here is SUB
 					|| lastToken.getTokenType() == LEFT_PAREN
 					&& (lastToken = ((PerlBuilder) b).lookupToken(-2)).getTokenType() == SUB
 					)
@@ -568,14 +574,17 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		// can be
 		// 	Foo::method
 		//  Foo::Bar
-		if ((currentTokenType == PACKAGE_IDENTIFIER || currentTokenType == PACKAGE) && CONVERTABLE_TOKENS.contains(nextTokenType))
+		if (PACKAGE_TOKENS.contains(currentTokenType) && CONVERTABLE_TOKENS.contains(nextTokenType))
 		{
 			PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
-			String potentialSubName = PerlPackageUtil.getCanonicalPackageName(b.getTokenText()) + "::" + nextTokenData.getTokenText();
-			boolean subExists = ((PerlBuilder) b).isKnownSub(potentialSubName);
-			boolean packageExists = ((PerlBuilder) b).isKnownPackage(potentialSubName);
+			PerlTokenData nextNextTokenData = ((PerlBuilder) b).lookupToken(2);
 
-			if (subExists || !packageExists)
+			IElementType nextNextTokenType = nextNextTokenData == null ? null : nextNextTokenData.getTokenType();
+
+			String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(b.getTokenText());
+			String potentialSubName = canonicalPackageName + "::" + nextTokenData.getTokenText();
+
+			if (((PerlBuilder) b).isKnownSub(potentialSubName) || nextNextTokenType == LEFT_PAREN || ((PerlBuilder) b).isKnownPackage(canonicalPackageName))
 				return convertPackageIdentifier(b, l) && convertIdentifier(b, l, SUB);
 			else
 				return mergePackageName(b, l);
@@ -593,13 +602,23 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				// 	method Foo::
 				//	method Foo::Bar
 				//  method Foo::othermethod
-			else if (nextTokenType == PACKAGE_IDENTIFIER || nextTokenType == PACKAGE)
+			else if (PACKAGE_TOKENS.contains(nextTokenType))
 			{
 				IElementType nextNextTokenType = b.lookAhead(2);
+
 				if (CONVERTABLE_TOKENS.contains(nextNextTokenType))
-					// it's somesub Package::method
+				{
+					PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
+					PerlTokenData nextNextTokenData = ((PerlBuilder) b).lookupToken(2);
+
+					String packageOrSub = PerlPackageUtil.getCanonicalPackageName(nextTokenData.getTokenText()) + "::" + nextNextTokenData.getTokenText();
+
+					if (((PerlBuilder) b).isKnownSub(packageOrSub))
+						return convertIdentifier(b, l, SUB);
+					else if (((PerlBuilder) b).isKnownPackage(packageOrSub))
+						return convertIdentifier(b, l, SUB) && mergePackageName(b, l);
 					return convertIdentifier(b, l, SUB);
-				else
+				} else
 					// it's method Package::
 					return convertIdentifier(b, l, SUB) && convertPackageIdentifier(b, l);
 			}

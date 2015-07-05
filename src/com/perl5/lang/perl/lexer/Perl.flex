@@ -91,8 +91,6 @@ PACKAGE_SHORT = "::"+ "'" ?
 CHAR_ANY        = .|{NEW_LINE}
 QUOTE           = "\"" | "'" | "`"
 
-CAPTURE_LABEL_DEFINITION = {IDENTIFIER}{EMPTY_SPACE}*":"[^:]
-
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
 // heading _ removed to avoid @_ parsing as sigil-number
@@ -132,7 +130,6 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_BRACED_IDENTIFIER
 
 %xstate LEX_BAREWORD_STRING_COMMA
-%xstate LEX_LABEL_DEFINITION
 %state LEX_HTML_BLOCK
 %%
 
@@ -159,24 +156,6 @@ TRANS_MODIFIERS = [cdsr]
 //exclusive
 <LEX_HEREDOC_MARKER>{
     {ANYWORD}+   {popState();return HEREDOC_END;}
-}
-
-// exclusive
-<LEX_LABEL_DEFINITION>
-{
-    {IDENTIFIER} {
-        if( trenarCounter > 0 )
-        {
-            endCustomBlock();
-            return getIdentifierToken();
-        }
-        else
-            return LABEL;
-    }
-    ":" {endCustomBlock(); return COLON;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    . {yypushback(1);endCustomBlock();break;}
 }
 
 // exclusive
@@ -402,6 +381,7 @@ TRANS_MODIFIERS = [cdsr]
 
 
 "${$}" { return parseBuiltInVariable();}
+"$:"    { return parseFormatLineBreakCharacters(); }
 {PERL_SCALAR_BUILT_IN}      {return parseBuiltInVariable();}
 {PERL_ARRAY_BUILT_IN}       {return parseBuiltInVariable();}
 {PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}
@@ -409,7 +389,6 @@ TRANS_MODIFIERS = [cdsr]
 
 {BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
-{CAPTURE_LABEL_DEFINITION} {startCustomBlock(LEX_LABEL_DEFINITION);break;}
 
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 

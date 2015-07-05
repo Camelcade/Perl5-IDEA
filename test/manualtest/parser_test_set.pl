@@ -1,3 +1,155 @@
+SOMELABEL: {
+    last SOMELABEL;
+}
+
+$abc ? $cde : blah();
+
+split /2134/, @array;
+m/2342342/x;
+s/234234/$$/e;
+
+Foo::Bar;
+
+Foo::bar; 
+
+Foo::bar baz;
+
+Foo::Bar->method();
+
+bar Foo::baz;
+
+bar Foo(123);
+
+Foo->bar;
+my $self;
+
+my $abc = {
+    some => 1
+};
+
+my @array;
+
+grep {defined} @array;
+
+print if defined $abc;
+
+$abc->{cde} = 2;
+
+$self->SUPER::method;
+
+Foo::Bar->something;
+
+BEGIN {
+    print "something";
+}
+
+$abc = __PACKAGE__->"something";
+$abc = 1 and 2;
+
+
+open (IF, 'something');
+open IF, 'something';
+open Foo->method();
+open Foo::method();
+
+somesub IF, blah;
+
+print OF "something";
+say OF "something";
+printf OF "something";
+
+print OF(1,2,3);
+print sprintf "here we go";
+print Foo->method();
+print Foo::method();
+print method, "text";
+
+my @list = <IF>;
+my @list = <Foo::method>;
+my @list = <{Foo->method}>;
+
+use if (1 > 2);
+use open;
+
+package Foo;
+
+sub bar{
+}
+
+package main;
+
+sub somesub
+{
+}
+
+package Foo::Bar;
+
+sub somesub
+{
+
+}
+
+${Foo::Bar::somesub()};
+@{Foo::Bar::somesub()};
+$#{Foo::Bar::somesub()};
+%{Foo::Bar::somesub()};
+*{Foo::Bar::somesub()};
+&{Foo::Bar::somesub()};
+
+Foo::Bar::somesub;
+::somesub;
+Foo::Bar::somesub();
+::somesub();
+somesub;
+somesub();
+
+$Foo::Bar::var;
+$#Foo::Bar::var;
+@Foo::Bar::var;
+%Foo::Bar::var;
+*Foo::Bar::var;
+
+
+$$Foo::Bar::var;
+$#$Foo::Bar::var;
+@$Foo::Bar::var;
+%$Foo::Bar::var;
+*$Foo::Bar::var;
+&$Foo::Bar::var;
+
+${Foo::Bar::var};
+$#{Foo::Bar::var};
+@{Foo::Bar::var};
+%{Foo::Bar::var};
+*{Foo::Bar::var};
+
+$Foo::Bar::'var;
+$#Foo::'Bar'var;
+@Foo'Bar'var;
+%Foo::Bar'var;
+*Foo'Bar::var;
+
+*isn't = sub{};
+
+$abcd;
+@abcd;
+%abcd;
+*abcd;
+$#abcd;
+
+${abcd};
+@{abcd};
+%{abcd};
+*{abcd};
+$#{abcd};
+
+$$abcd;
+$#$abcd;
+&$abcd;
+@$abcd;
+%$abcd;
+*$abcd;
+
 $ARG, ${ARG};
 $_, ${_};
 @ARG, @{ARG};
@@ -139,149 +291,3 @@ $^UTF8CACHE, ${^UTF8CACHE};
 $^UTF8LOCALE, ${^UTF8LOCALE};
 $*, ${*};
 $[, ${[};
-
-
-s/234234/$$/e;
-
-Foo::Bar;
-
-Foo::bar; 
-
-Foo::bar baz;
-
-Foo::Bar->method();
-
-bar Foo::baz;
-
-bar Foo(123);
-
-Foo->bar;
-my $self;
-
-my $abc = {
-    some => 1
-};
-
-my @array;
-
-grep {defined} @array;
-
-print if defined $abc;
-
-$abc->{cde} = 2;
-
-$self->SUPER::method;
-
-Foo::Bar->something;
-
-BEGIN {
-    print "something";
-}
-
-my $abc = __PACKAGE__->"something";
-$abc = 1 and 2;
-
-
-open (IF, 'something');
-open IF, 'something';
-open Foo->method();
-open Foo::method();
-
-somesub IF, blah;
-
-print OF "something";
-say OF "something";
-printf OF "something";
-
-print OF(1,2,3);
-print sprintf "here we go";
-print Foo->method();
-print Foo::method();
-print method, "text";
-
-my @list = <IF>;
-my @list = <Foo::method>;
-my @list = <{Foo->method}>;
-
-use if (1 > 2);
-use open;
-
-package Foo;
-
-sub bar{
-}
-
-package main;
-
-sub somesub
-{
-}
-
-package Foo::Bar;
-
-sub somesub
-{
-
-}
-
-${Foo::Bar::somesub()};
-@{Foo::Bar::somesub()};
-$#{Foo::Bar::somesub()};
-%{Foo::Bar::somesub()};
-*{Foo::Bar::somesub()};
-&{Foo::Bar::somesub()};
-
-Foo::Bar::somesub;
-::somesub;
-Foo::Bar::somesub();
-::somesub();
-somesub;
-somesub();
-
-$Foo::Bar::var;
-$#Foo::Bar::var;
-@Foo::Bar::var;
-%Foo::Bar::var;
-*Foo::Bar::var;
-
-
-$$Foo::Bar::var;
-$#$Foo::Bar::var;
-@$Foo::Bar::var;
-%$Foo::Bar::var;
-*$Foo::Bar::var;
-&$Foo::Bar::var;
-
-${Foo::Bar::var};
-$#{Foo::Bar::var};
-@{Foo::Bar::var};
-%{Foo::Bar::var};
-*{Foo::Bar::var};
-
-$Foo::Bar::'var;
-$#Foo::'Bar'var;
-@Foo'Bar'var;
-%Foo::Bar'var;
-*Foo'Bar::var;
-
-*isn't = sub{};
-
-$abcd;
-@abcd;
-%abcd;
-*abcd;
-$#abcd;
-
-${abcd};
-@{abcd};
-%{abcd};
-*{abcd};
-$#{abcd};
-
-$$abcd;
-$#$abcd;
-&$abcd;
-@$abcd;
-%$abcd;
-*$abcd;
-
