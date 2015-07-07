@@ -273,10 +273,10 @@ limitations under the License.
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
 
-    extends("use_statement|no_statement|condition_statement|for_list_statement|for_iterator_statement")=statement
+    extends("use_statement|no_statement|condition_statement|condition_statement_while|for_list_statement|for_iterator_statement")=statement
 
-    implements("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
-    mixin("conditional_block|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
+    implements("conditional_block|conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
+    mixin("conditional_block|conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound|namespace_block")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
@@ -373,13 +373,16 @@ unconditional_block ::= block
 
 conditional_block ::= condition_statement block {pin=1 name="Conditional block"}
 condition_statement ::= LEFT_PAREN condition_statement_expr RIGHT_PAREN {pin=1 recoverWhile=recover_to_block name="Condition"}
+
+conditional_block_while ::= condition_statement_while block {pin=1 name="Conditional block"}
+condition_statement_while ::= LEFT_PAREN [condition_statement_expr] RIGHT_PAREN {pin=1 recoverWhile=recover_to_block name="Condition"}
 private condition_statement_expr ::= expr {recoverWhile=recover_condition_statement_expr}
 private recover_condition_statement_expr ::= !(LEFT_BRACE|RIGHT_PAREN)
 private recover_to_block ::= !(LEFT_BRACE)
 
 given_compound ::= RESERVED_GIVEN conditional_block  {pin=1}
 
-while_compound ::= RESERVED_WHILE conditional_block [continue_block]  {pin=1}
+while_compound ::= RESERVED_WHILE conditional_block_while [continue_block]  {pin=1}
 until_compound ::= RESERVED_UNTIL conditional_block [continue_block]  {pin=1}
 
 continue_block ::= RESERVED_CONTINUE block {pin=1}

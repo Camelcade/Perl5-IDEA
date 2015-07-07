@@ -1,5 +1,10 @@
 
-
+for(;;){
+    print "Here";
+}
+while(){
+    print "Here";
+}
 
 print sprintf "here we go";
 
