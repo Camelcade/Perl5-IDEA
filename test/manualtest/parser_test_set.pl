@@ -6,6 +6,14 @@ while(){
     print "Here";
 }
 
+sub eval{}
+sub if{}
+sub while{}
+
+&eval;
+&while;
+&if;
+
 print sprintf "here we go";
 
 print OF "something";

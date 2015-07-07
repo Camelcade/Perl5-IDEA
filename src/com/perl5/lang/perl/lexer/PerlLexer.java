@@ -1266,6 +1266,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		if (
 				lastSignificantTokenType != OPERATOR_DEREFERENCE           // not kinda ..->if
+						&& lastSignificantTokenType != OPERATOR_BITWISE_AND           // not kinda &eval
 						&& !PRE_PACKAGE_TOKENS.contains(lastSignificantTokenType) // not use if...
 						&& !SIGILS_TOKENS.contains(lastUnbraceTokenType)          // not $if
 				)
@@ -1396,11 +1397,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			char nextChar = buffer.charAt(nextPosition);
 			if (
 					nextChar == ','
-					|| nextChar == ';'
-					|| nextChar == ')'
-					|| buffer.charAt(nextPosition) == '='
-					&& nextPosition + 1 < buffer.length()
-					&& buffer.charAt(nextPosition + 1) == '>'
+							|| nextChar == ';'
+							|| nextChar == ')'
+							|| buffer.charAt(nextPosition) == '='
+							&& nextPosition + 1 < buffer.length()
+							&& buffer.charAt(nextPosition + 1) == '>'
 					)
 				return true;
 		}
