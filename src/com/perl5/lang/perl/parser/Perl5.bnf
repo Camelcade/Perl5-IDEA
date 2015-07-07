@@ -463,7 +463,7 @@ use_statement ::= RESERVED_USE use_no_parameters {pin=1}
 no_statement ::= RESERVED_NO use_no_parameters {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters
-private use_module_parameters ::= <<mergePackageName>> [perl_version] [expr];
+private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
 
 undef_expr ::= RESERVED_UNDEF (variable | LEFT_PAREN variable RIGHT_PAREN) ? {pin=1}

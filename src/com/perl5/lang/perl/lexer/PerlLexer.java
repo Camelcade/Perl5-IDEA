@@ -671,7 +671,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets 
 
     // this symbols after sigils means that it's just a sigil, not $$ variable
     public static final HashSet<Character> SCALAR_SIGIL_SUFFIXES = new HashSet<>(Arrays.asList(
-            '{', '^', '_'
+            // fixme some of theese can't be dereferenced
+            // fixme need additional parsing for variables bodies (or, eat them right here)
+            '{', '^', '_' // ,'/','@'   ,'\"','\\','!','%','&','\'','(',')','+',',','-','.','0',';','<','=','>','[',']','`','|','~','?',':','*','['
     ));
 
     /**
@@ -681,7 +683,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets 
      */
     public IElementType parseScalarSigils() {
         String tokenText = yytext().toString();
-        Character nextSignificantCharacter = getNextSignificantCharacter();
+        Character nextCharacter = getNextCharacter();
 
         if (tokenText.length() > 1)    // may be sequential sigils or sequential sigils and built in $$
         {
@@ -691,10 +693,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets 
 
             int tokenStart = getTokenStart();
 
-            if (nextSignificantCharacter != null
+            if (nextCharacter != null
                     && (
-                    Character.isLetterOrDigit(nextSignificantCharacter)    // $$$$varname
-                            || SCALAR_SIGIL_SUFFIXES.contains(nextSignificantCharacter)
+                    Character.isLetterOrDigit(nextCharacter)    // $$$$varname
+                            || SCALAR_SIGIL_SUFFIXES.contains(nextCharacter)
             )
                     ) {
                 // just sigils
@@ -708,7 +710,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets 
                 tokensList.add(new CustomToken(tokenEnd - 1, tokenEnd, VARIABLE_NAME));
             }
             setTokenEnd(tokenStart + 1);
-        } else if (lastSignificantTokenType == LEFT_BRACE && nextSignificantCharacter != null && nextSignificantCharacter.equals('}')) // for ${$}
+        } else if (lastSignificantTokenType == LEFT_BRACE && nextCharacter != null && nextCharacter.equals('}')) // for ${$}
             return VARIABLE_NAME;
 
         return SIGIL_SCALAR;

@@ -1,5 +1,17 @@
 
 
+use Opcode 1.01, qw(..);
+
+kill 'ABRT', $$ if $panic++;
+
+my $$$_wow;
+my $${some};
+my $$$^a;
+$_;
+$$_;
+my $ abc;
+$ $$abc;
+
 qw/testing/;
 qw#testing#;
 qw'testing testing';
@@ -230,7 +242,7 @@ $LIST_SEPARATOR, ${LIST_SEPARATOR};
 $", ${"};
 $PROCESS_ID, ${PROCESS_ID};
 $PID, ${PID};
-$$, ${$};
+$$,# ${$};
 $PROGRAM_NAME, ${PROGRAM_NAME};
 $0, ${0};
 $REAL_GROUP_ID, ${REAL_GROUP_ID};
