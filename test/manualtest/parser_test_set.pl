@@ -1,4 +1,25 @@
 
+
+print <<'!END!';
+Test from perl lib
+!END!
+
+print <<TEST;
+message
+TEST
+
+print <<'TEST WITH SPACE !';
+message
+TEST WITH SPACE !
+
+print <<`TEST WITH SPACE !`;
+message
+TEST WITH SPACE !
+
+print <<"TEST WITH SPACE !";
+message
+TEST WITH SPACE !
+
 for(;;){
     print "Here";
 }

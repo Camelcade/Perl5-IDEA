@@ -54,7 +54,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 
 	public abstract IElementType processSemicolon();
 
-	public abstract IElementType processHeredocOpener();
+	public abstract IElementType parseHeredocOpener();
 
 	/**
 	 * Parses current token as a variable

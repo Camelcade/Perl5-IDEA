@@ -485,31 +485,72 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public String heredocMarker;
 
 	// pattern for getting marker
-	public Pattern markerPattern = Pattern.compile("<<\\s*['\"`]?([^\"\'`]+)['\"`]?");
+	public Pattern markerPattern = Pattern.compile("<<(.+?)");
+	public Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
+	public Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.+?)\'");
+	public Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
 
 	/**
 	 * Processing captured heredoc opener. Stores marker and switches to proper lexical state
 	 *
 	 * @return PERL_OPERATOR  for << operator
 	 */
-	public IElementType processHeredocOpener()
+	public IElementType parseHeredocOpener()
 	{
 		String openToken = yytext().toString();
-		Matcher m = markerPattern.matcher(openToken);
+		Matcher m = null;
+
+		if( openToken.endsWith("\""))
+			m = markerPatternDQ.matcher(openToken);
+		else if( openToken.endsWith("'"))
+			m = markerPatternSQ.matcher(openToken);
+		else if( openToken.endsWith("`"))
+			m = markerPatternXQ.matcher(openToken);
+		else
+			m = markerPattern.matcher(openToken);
 
 		yypushback(openToken.length() - 2);
 
 		if (m.matches())
 		{
-			if (m.group(1).matches("\\d+"))    // check if it's numeric shift
+			tokensList.clear();
+			int currentPosition = getNextTokenStart();
+
+			if( m.groupCount() > 1)	// quoted heredoc
+			{
+				heredocMarker = m.group(3);
+
+				int elementLength = m.group(1).length();
+				if( elementLength > 0 )	// got spaces
+					tokensList.add(new CustomToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE));
+
+				currentPosition += elementLength;
+				forceQuote = false;
+				IElementType quoteType = getQuoteToken(m.group(2).charAt(0));
+
+				tokensList.add(new CustomToken(currentPosition, currentPosition + 1, quoteType));
+				currentPosition++;
+
+				tokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
+				currentPosition += heredocMarker.length();
+
+				tokensList.add(new CustomToken(currentPosition, currentPosition + 1, quoteType));
+			}
+			else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
 				return OPERATOR_SHIFT_LEFT;
-			heredocMarker = m.group(1);
+			else	// bareword heredoc
+			{
+				heredocMarker = m.group(1);
+				tokensList.add(new CustomToken(currentPosition, currentPosition+heredocMarker.length(), STRING_CONTENT));
+			}
 		}
+		else
+			throw new RuntimeException("Unable to parse HEREDOC opener " + openToken);
 
 		pushState();
 		yybegin(LEX_HEREDOC_WAITING);
 		pushState();
-		yybegin(LEX_HEREDOC_OPENER);
+		yybegin(LEX_PREPARSED_ITEMS);
 
 		return OPERATOR_HEREDOC;
 	}
@@ -1080,11 +1121,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		if (forceQuote) // fixme this must be refactored
 			return QUOTE;
-		else if (charOpener == '"')
+		else if (quoteCharacter == '"')
 			return QUOTE_DOUBLE;
-		else if (charOpener == '`')
+		else if (quoteCharacter == '`')
 			return QUOTE_TICK;
-		else if (charOpener == '\'')
+		else if (quoteCharacter == '\'')
 			return QUOTE_SINGLE;
 		else
 			return QUOTE;

@@ -70,6 +70,7 @@ BAREWORD_STRING_COMMA = {BAREWORD_MINUS}{EMPTY_SPACE}*"=>"
 
 // bad solution, $scalar -function eats it
 ANYWORD = [^ \t\f\r\n]
+HEREDOC_CLOSER = [^\f\r\n]
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
@@ -109,12 +110,15 @@ X_OP_STICKED = "x"[0-9]+[^a-zA-Z]
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC][^a-zA-Z0-9_]
 
 HEREDOC_MARKER = [a-zA-Z0-9_]+
-HEREDOC_OPENER = "<<"{WHITE_SPACE}* (\'{HEREDOC_MARKER}\' | \"{HEREDOC_MARKER}\" | \`{HEREDOC_MARKER}\` | {HEREDOC_MARKER})
+HEREDOC_MARKER_DQ = [^\"\n\r]+
+HEREDOC_MARKER_SQ = [^\'\n\r]+
+HEREDOC_MARKER_XQ = [^\`\n\r]+
+HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"{HEREDOC_MARKER_DQ}\" | {WHITE_SPACE}* \`{HEREDOC_MARKER_XQ}\` | {HEREDOC_MARKER})
 
 %state LEX_CODE
 
 %state LEX_HEREDOC_WAITING
-%xstate LEX_HEREDOC_MARKER, LEX_HEREDOC_OPENER
+%xstate LEX_HEREDOC_MARKER
 
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
 %xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS, LEX_QUOTE_LIKE_LIST_CLOSER
@@ -145,17 +149,8 @@ TRANS_MODIFIERS = [cdsr]
 
 
 //exclusive
-<LEX_HEREDOC_OPENER>
-{
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {IDENTIFIER}     {popState();return STRING_CONTENT;}
-    {QUOTE}        {popState();return processStringOpener();}
-    [^]            {throw new Error("Can't be here");}
-}
-
-//exclusive
 <LEX_HEREDOC_MARKER>{
-    {ANYWORD}+   {popState();return HEREDOC_END;}
+    {HEREDOC_CLOSER}+   {popState();return HEREDOC_END;}
 }
 
 // exclusive
@@ -281,7 +276,7 @@ TRANS_MODIFIERS = [cdsr]
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 
-{HEREDOC_OPENER}   {return processHeredocOpener();}
+{HEREDOC_OPENER}   {return parseHeredocOpener();}
 {QUOTE}         {return processStringOpener();}
 
 "<=>" {return OPERATOR_CMP_NUMERIC;}
