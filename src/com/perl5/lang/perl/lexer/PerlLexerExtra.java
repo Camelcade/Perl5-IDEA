@@ -16,18 +16,6 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.openapi.project.DumbService;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Created by hurricup on 30.06.2015.
  * This file contains my attempt to guess ambigious things like: *, %, <, >, &
@@ -638,5 +626,49 @@ public class PerlLexerExtra
 //			';'
 //	));
 //
+
+	/**
+	 * Checks and parses identifier as a handle
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+//	public static boolean smartHandle(PsiBuilder b, int l) {
+//
+//		if( b.getTokenType() == HANDLE )    // lexer detected handle
+//		{
+//			b.advanceLexer();
+//			return true;
+//		}
+//		else if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && HANDLE_POSTFIX.contains(b.lookAhead(1)))    // we can convert and afterward token is ok
+//		{
+//			assert b instanceof PerlBuilder;
+//
+//			PerlTokenData lastToken = ((PerlBuilder) b).lookupToken(-1);
+//
+//			if (lastToken.getTokenType() == SUB    // we sure that here is SUB
+//					|| lastToken.getTokenType() == LEFT_PAREN
+//					&& (lastToken = ((PerlBuilder) b).lookupToken(-2)).getTokenType() == SUB
+//					)
+//				if (PRE_HANDLE_OPS.contains(lastToken.getTokenText())) {
+//					b.remapCurrentToken(HANDLE);
+//					((PerlBuilder) b).registerHandle(b.getTokenText());
+//					b.advanceLexer();
+//					return true;
+//				}
+//		}
+//		return false;
+//	}
+
+//	// tokens, which can succeed ambiguous bareword filehandle
+//	public static final TokenSet HANDLE_POSTFIX = TokenSet.create(
+//			OPERATOR_COMMA_ARROW,
+//			OPERATOR_COMMA,
+//			RIGHT_PAREN,
+//			RIGHT_BRACE,
+//			SEMICOLON
+//	);
+
 
 }

@@ -804,7 +804,7 @@ private referencable_method ::= <<sigilCode>>
 label_declaration ::= <<convertIdentifier LABEL>> COLON // do we need to change tokentype?
 private perl_version ::= NUMBER_VERSION | NUMBER
 private perl_handle ::=  LEFT_BRACE scalar_expr RIGHT_BRACE | immutable_expr
-perl_handle_expr ::= <<smartHandle>>
+perl_handle_expr ::= HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 

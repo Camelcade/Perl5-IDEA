@@ -1,7 +1,28 @@
 
 
+
+print sprintf "here we go";
+
+print OF "something";
+say OF "something";
+printf OF "something";
+
+print OF, "something";
+say OF, "something";
+printf OF, "something";
+
+print OF() "something";
+say OF() "something";
+printf OF() "something";
+
+close STDERR;
+close (STDERR);
+syswrite(STDERR, 'Caught a SIG', 12);
+syswrite STDERR, 'Caught a SIG', 12;
+
 use Opcode 1.01, qw(..);
 
+my $panic;
 kill 'ABRT', $$ if $panic++;
 
 my $$$_wow;
@@ -136,10 +157,6 @@ open Foo::->method();
 open Foo::method();
 
 somesub IF, blah;
-
-print OF "something";
-say OF "something";
-printf OF "something";
 
 print OF(1,2,3);
 print sprintf "here we go";

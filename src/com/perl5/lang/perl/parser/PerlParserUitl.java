@@ -47,15 +47,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
             LABEL
     );
 
-    // tokens, which can succeed ambiguous bareword filehandle
-    public static final TokenSet HANDLE_POSTFIX = TokenSet.create(
-            OPERATOR_COMMA_ARROW,
-            OPERATOR_COMMA,
-            RIGHT_PAREN,
-            RIGHT_BRACE,
-            SEMICOLON
-    );
-
     public static final TokenSet PRINT_HANDLE_NEGATE_SUFFIX = TokenSet.orSet(
             TokenSet.create(
                     LEFT_ANGLE,
@@ -438,33 +429,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
         return false;
     }
 
-    /**
-     * Checks and parses identifier as a handle
-     *
-     * @param b PerlBuilder
-     * @param l parsing level
-     * @return parsing result
-     */
-    public static boolean smartHandle(PsiBuilder b, int l) {
-        if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && HANDLE_POSTFIX.contains(b.lookAhead(1)))    // we can convert and afterward token is ok
-        {
-            assert b instanceof PerlBuilder;
-
-            PerlTokenData lastToken = ((PerlBuilder) b).lookupToken(-1);
-
-            if (lastToken.getTokenType() == SUB    // we sure that here is SUB
-                    || lastToken.getTokenType() == LEFT_PAREN
-                    && (lastToken = ((PerlBuilder) b).lookupToken(-2)).getTokenType() == SUB
-                    )
-                if (PRE_HANDLE_OPS.contains(lastToken.getTokenText())) {
-                    b.remapCurrentToken(HANDLE);
-                    ((PerlBuilder) b).registerHandle(b.getTokenText());
-                    b.advanceLexer();
-                    return true;
-                }
-        }
-        return false;
-    }
 
     /**
      * parser for print/say/printf filehandle
@@ -480,8 +444,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
         if (
                 CONVERTABLE_TOKENS.contains(currentTokenType)                // it's identifier
-                        && !PRINT_HANDLE_NEGATE_SUFFIX.contains(nextTokenType)        // no negation tokens
-                        && ((PerlBuilder) b).isRegisteredHandle(b.getTokenText())    // handle was opened here fixme this is not true. print eats any handle
+                && !PRINT_HANDLE_NEGATE_SUFFIX.contains(nextTokenType)        // no negation tokens
+                && !PerlSubUtil.BUILT_IN.contains(b.getTokenText())         // it's not built in. crude, probably we should check any known sub
                 ) {
             b.remapCurrentToken(HANDLE);
             b.advanceLexer();
@@ -548,7 +512,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
         // 	method [Foo]
         else if (CONVERTABLE_TOKENS.contains(currentTokenType)) {
             PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
-
 
             // ->sub
             if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)

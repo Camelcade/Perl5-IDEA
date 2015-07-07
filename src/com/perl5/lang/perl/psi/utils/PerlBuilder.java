@@ -36,8 +36,6 @@ import java.util.HashSet;
  */
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
-	protected final HashSet<String> REGISTERED_HANDLES = new HashSet<>();
-
 	protected HashSet<String> KNOWN_SUBS = new HashSet<>();
 	protected HashSet<String> KNOWN_PACKAGES = new HashSet<>(PerlPackageUtil.BUILT_IN_ALL);
 
@@ -47,8 +45,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
 	{
 		super(builder, state, parser);
-		REGISTERED_HANDLES.addAll(PerlGlobUtil.BUILT_IN);
-
 	}
 
 	/**
@@ -99,16 +95,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		}
 
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
-	}
-
-	public void registerHandle(String handle)
-	{
-		REGISTERED_HANDLES.add(handle);
-	}
-
-	public boolean isRegisteredHandle(String handle)
-	{
-		return REGISTERED_HANDLES.contains(handle);
 	}
 
 	/**
