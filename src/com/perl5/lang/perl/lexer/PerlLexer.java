@@ -29,1339 +29,1255 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
-{
-	Project myProject;
-
-	// last token
-	protected IElementType lastTokenType;
-	protected String lastToken;
-
-
-	protected IElementType lastSignificantTokenType;
-	protected String lastSignificantToken;
-
-	protected IElementType lastUnbraceTokenType;
-	protected String lastUnbraceToken;
-
-	protected IElementType lastUnparenTokenType;
-	protected String lastUnparenToken;
-
-	protected HashSet<String> knownPackages = new HashSet<>();
-	protected HashSet<String> knownHandles = new HashSet<>();
-	protected HashSet<String> knownSubs = new HashSet<>();
-	protected HashSet<String> knownLabels = new HashSet<>();
-
-
-	protected static final HashMap<String, IElementType> SIGIL_TOKENS_MAP = new HashMap<>();
-
-	static
-	{
-		SIGIL_TOKENS_MAP.put("$#", SIGIL_SCALAR_INDEX);
-		SIGIL_TOKENS_MAP.put("$", SIGIL_SCALAR);
-		SIGIL_TOKENS_MAP.put("@", SIGIL_ARRAY);
-		SIGIL_TOKENS_MAP.put("%", OPERATOR_MOD);
-		SIGIL_TOKENS_MAP.put("*", OPERATOR_MUL);
-		SIGIL_TOKENS_MAP.put("&", OPERATOR_BITWISE_AND);
-	}
-
-
-	public static final HashMap<String, IElementType> reservedTokenTypes = new HashMap<>();
-	public static final HashMap<String, IElementType> namedOperators = new HashMap<>();
-	public static final HashMap<String, IElementType> blockNames = new HashMap<>();
-	public static final HashMap<String, IElementType> tagNames = new HashMap<>();
-
-	static
-	{
-		// named operators
-		namedOperators.put("x", OPERATOR_X);
-
-		namedOperators.put("not", OPERATOR_NOT_LP);
-		namedOperators.put("and", OPERATOR_AND_LP);
-		namedOperators.put("or", OPERATOR_OR_LP);
-		namedOperators.put("xor", OPERATOR_XOR_LP);
-
-		namedOperators.put("lt", OPERATOR_LT_STR);
-		namedOperators.put("gt", OPERATOR_GT_STR);
-		namedOperators.put("le", OPERATOR_LE_STR);
-		namedOperators.put("ge", OPERATOR_GE_STR);
-		namedOperators.put("eq", OPERATOR_EQ_STR);
-		namedOperators.put("ne", OPERATOR_NE_STR);
-		namedOperators.put("cmp", OPERATOR_CMP_STR);
-
-		// block names
-		blockNames.put("BEGIN", BLOCK_NAME);
-		blockNames.put("UNITCHECK", BLOCK_NAME);
-		blockNames.put("CHECK", BLOCK_NAME);
-		blockNames.put("INIT", BLOCK_NAME);
-		blockNames.put("END", BLOCK_NAME);
-
-		// tags
-		tagNames.put("__FILE__", TAG);
-		tagNames.put("__LINE__", TAG);
-		tagNames.put("__PACKAGE__", TAG);
-		tagNames.put("__SUB__", TAG);
-
-		// reserved
-		reservedTokenTypes.put("if", RESERVED_IF);
-		reservedTokenTypes.put("unless", RESERVED_UNLESS);
-		reservedTokenTypes.put("elsif", RESERVED_ELSIF);
-		reservedTokenTypes.put("else", RESERVED_ELSE);
-		reservedTokenTypes.put("given", RESERVED_GIVEN);
-		reservedTokenTypes.put("when", RESERVED_WHEN);
-		reservedTokenTypes.put("while", RESERVED_WHILE);
-		reservedTokenTypes.put("until", RESERVED_UNTIL);
-		reservedTokenTypes.put("for", RESERVED_FOR);
-		reservedTokenTypes.put("foreach", RESERVED_FOREACH);
-		reservedTokenTypes.put("continue", RESERVED_CONTINUE);
-
-		reservedTokenTypes.put("sub", RESERVED_SUB);
-		reservedTokenTypes.put("package", RESERVED_PACKAGE);
-		reservedTokenTypes.put("use", RESERVED_USE);
-		reservedTokenTypes.put("no", RESERVED_NO);
-		reservedTokenTypes.put("require", RESERVED_REQUIRE);
-
-		reservedTokenTypes.put("undef", RESERVED_UNDEF);
-
-		reservedTokenTypes.put("print", RESERVED_PRINT);
-		reservedTokenTypes.put("printf", RESERVED_PRINTF);
-		reservedTokenTypes.put("say", RESERVED_SAY);
-
-		reservedTokenTypes.put("grep", RESERVED_GREP);
-		reservedTokenTypes.put("map", RESERVED_MAP);
-		reservedTokenTypes.put("sort", RESERVED_SORT);
-
-		reservedTokenTypes.put("qw", RESERVED_QW);
-
-		reservedTokenTypes.put("qq", RESERVED_QQ);
-		reservedTokenTypes.put("q", RESERVED_Q);
-		reservedTokenTypes.put("qx", RESERVED_QX);
-
-		reservedTokenTypes.put("tr", RESERVED_TR);
-		reservedTokenTypes.put("y", RESERVED_Y);
-
-		reservedTokenTypes.put("s", RESERVED_S);
-		reservedTokenTypes.put("qr", RESERVED_QR);
-		reservedTokenTypes.put("m", RESERVED_M);
-
-		reservedTokenTypes.put("my", RESERVED_MY);
-		reservedTokenTypes.put("our", RESERVED_OUR);
-		reservedTokenTypes.put("state", RESERVED_STATE);
-		reservedTokenTypes.put("local", RESERVED_LOCAL);
-
-		reservedTokenTypes.put("do", RESERVED_DO);
-		reservedTokenTypes.put("eval", RESERVED_EVAL);
-
-		reservedTokenTypes.put("goto", RESERVED_GOTO);
-		reservedTokenTypes.put("redo", RESERVED_REDO);
-		reservedTokenTypes.put("next", RESERVED_NEXT);
-		reservedTokenTypes.put("last", RESERVED_LAST);
-
-		RESERVED_TOKENSET.addAll(reservedTokenTypes.values());
-	}
-
-	protected PerlLexerAdapter evalPerlLexer;
-
-	public PerlLexer(Project project)
-	{
-		super((Reader) null);
-		myProject = project;
-	}
-
-	/**
-	 * Lexers advance method. Parses some thing here, or just invoking generated flex parser
-	 *
-	 * @return next token type
-	 * @throws IOException
-	 */
-	public IElementType advance() throws IOException
-	{
-
-		CharSequence buffer = getBuffer();
-		int tokenStart = getTokenEnd();
-		int bufferEnd = buffer.length();
-
-		if (bufferEnd > 0 && tokenStart < bufferEnd)
-		{
-			int currentState = yystate();
-
-			// higest priority, pre-parsed tokens
-			if (currentState == LEX_PREPARSED_ITEMS)
-			{
-				IElementType nextTokenType = getParsedToken();
-				if (nextTokenType != null)
-					return nextTokenType;
-			}
-
-			// capture heredoc
-			if (currentState == LEX_HEREDOC_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
-			{
-				IElementType tokenType = captureHereDoc();
-				if (tokenType != null)    // got something
-					return tokenType;
-			}
-			// capture pod
-			else if (buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
-			{
-				return capturePodBlock();
-			}
-			// capture string content from "" '' `` q qq qx
-			else if (currentState == LEX_QUOTE_LIKE_CHARS)
-			{
-				int currentPosition = tokenStart;
-
-				boolean isEscaped = false;
-				boolean quotesDiffer = charOpener != charCloser;
-				int quotesDepth = 0;    // for using with different quotes
-
-				while (currentPosition < bufferEnd)
-				{
-					char currentChar = buffer.charAt(currentPosition);
-
-					if (!isEscaped && quotesDepth == 0 && currentChar == charCloser)
-						break;
-
-					if (!isEscaped && quotesDiffer)
-					{
-						if (currentChar == charOpener)
-							quotesDepth++;
-						else if (currentChar == charCloser)
-							quotesDepth--;
-					}
-
-					isEscaped = !isEscaped && currentChar == '\\';
-
-					currentPosition++;
-				}
-
-				if (currentPosition == bufferEnd)
-					// forces to exit lex state
-					popState();
-				else
-					// switch to closer lex state
-					yybegin(LEX_QUOTE_LIKE_CLOSER);
-
-				if (currentPosition > tokenStart)
-				{
-					// found string
-					setTokenStart(tokenStart);
-					setTokenEnd(currentPosition);
-					return STRING_CONTENT;
-				} else
-					// empty string
-					return quoteLikeCloser(tokenStart);
-			}
-			// closing quote of string
-			else if (currentState == LEX_QUOTE_LIKE_CLOSER)
-				return quoteLikeCloser(tokenStart);
-				// capture __DATA__ __END__
-			else if (((tokenStart < bufferEnd - 8) && "__DATA__".equals(buffer.subSequence(tokenStart, tokenStart + 8).toString()))
-					|| ((tokenStart < bufferEnd - 7) && "__END__".equals(buffer.subSequence(tokenStart, tokenStart + 7).toString()))
-					)
-			{
-				setTokenStart(tokenStart);
-				setTokenEnd(bufferEnd);
-				return COMMENT_BLOCK;
-			}
-			// capture line comment
-			else if (
-					buffer.charAt(tokenStart) == '#'
-							&& (currentState != LEX_QUOTE_LIKE_OPENER || !allowSharpQuote)
-							&& (currentState != LEX_TRANS_OPENER && currentState != LEX_TRANS_CLOSER || !allowSharpQuote)
-							&& (currentState != LEX_TRANS_CHARS)
-							&& (currentState != LEX_REGEX_OPENER)
-					)
-			{
-				// comment may end on newline or ?>
-				int currentPosition = tokenStart;
-				setTokenStart(tokenStart);
-
-				while (currentPosition < bufferEnd && !isCommentEnd(currentPosition))
-				{
-					currentPosition++;
-				}
-
-				// catching annotations #@
-				if (tokenStart + 1 < bufferEnd && buffer.charAt(tokenStart + 1) == '@')
-				{
-					if (currentPosition > tokenStart + 2)
-						parseAnnotation(buffer.subSequence(tokenStart + 2, currentPosition), tokenStart + 2);
-
-					setTokenEnd(tokenStart + 2);
-					return ANNOTATION_PREFIX;
-				}
-
-				setTokenEnd(currentPosition);
-				return COMMENT_LINE;
-			}
-
-		}
-
-		IElementType tokenType = super.advance();
-
-		registerLastToken(tokenType, yytext().toString());
-
-		return tokenType;
-	}
-
-	@Override
-	public IElementType endBarewordStringComma()
-	{
-		endCustomBlock();
-		return SIGILS_TOKENS.contains(lastSignificantTokenType) ? IDENTIFIER : STRING_CONTENT;
-	}
-
-
-	public void registerLastToken(IElementType tokenType, String tokenText)
-	{
-		lastTokenType = tokenType;
-		lastToken = tokenText;
-
-		if (!UNSIGNIFICANT_TOKENS.contains(tokenType))
-		{
-			lastSignificantTokenType = tokenType;
-			lastSignificantToken = lastToken;
-
-			if (tokenType != LEFT_BRACE)
-			{
-				lastUnbraceTokenType = tokenType;
-				lastUnbraceToken = lastToken;
-			}
-
-			if (tokenType != LEFT_PAREN)
-			{
-				lastUnparenTokenType = tokenType;
-				lastUnparenToken = lastToken;
-			}
-
-			if (yystate() == 0 && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
-				yybegin(LEX_CODE);
-		}
-	}
-
-
-	public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
-
-	public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
-
-	/**
-	 * Parses annotation line and puts result into the pre-parsed buffer
-	 *
-	 * @param annotationLine - string with annotation after marker
-	 */
-	void parseAnnotation(CharSequence annotationLine, int baseOffset)
-	{
-		Matcher m = annotationPattern.matcher(annotationLine);
-		tokensList.clear();
-		CharSequence tailComment = null;
-
-		if (m.matches())
-		{
-			String annotationKey = m.group(1);
-			IElementType tokenType = PerlAnnotations.TOKEN_TYPES.get(m.group(1));
-
-			if (tokenType == null)
-				tokenType = ANNOTATION_UNKNOWN_KEY;
-
-			tokensList.add(new CustomToken(baseOffset, baseOffset + m.group(1).length(), tokenType));
-			baseOffset += m.group(1).length();
-
-			if (m.group(2) != null)
-			{
-				tokensList.add(new CustomToken(baseOffset, baseOffset + m.group(2).length(), TokenType.WHITE_SPACE));
-				baseOffset += m.group(2).length();
-			}
-
-			if (tokenType == ANNOTATION_RETURNS_KEY && m.group(3) != null)
-			{
-				// additional parsing
-				String annotationRest = m.group(3);
-				Matcher pm = annotationPatternPackage.matcher(annotationRest);
-
-				if (pm.matches())
-				{
-					if (pm.group(1) != null && pm.group(1).length() > 0)
-					{
-						tokensList.add(new CustomToken(baseOffset, baseOffset + pm.group(1).length(), PACKAGE));
-						baseOffset += pm.group(1).length();
-					}
-
-					tailComment = pm.group(2);
-				} else
-					tailComment = m.group(3);
-			} else
-				tailComment = m.group(3);
-		} else
-			tailComment = annotationLine;
-
-		if (tailComment != null && tailComment.length() > 0)
-			tokensList.add(new CustomToken(baseOffset, baseOffset + tailComment.length(), COMMENT_LINE));
-
-		if (tokensList.size() > 0)
-		{
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-		}
-	}
-
-
-	/**
-	 * Processes quote closer token
-	 * fixme this can be done as pre-parsing on string capture
-	 *
-	 * @param tokenStart offset of current token start
-	 * @return quote element type
-	 */
-	IElementType quoteLikeCloser(int tokenStart)
-	{
-		popState();
-		setTokenStart(tokenStart);
-		setTokenEnd(tokenStart + 1);
-		return getQuoteToken(getBuffer().charAt(tokenStart));
-	}
-
-
-	/**
-	 * Checking if comment is ended. Implemented for overriding in {@link com.perl5.lang.embedded.EmbeddedPerlLexer#isCommentEnd(int)} }
-	 *
-	 * @param currentPosition current position to check
-	 * @return checking result
-	 */
-	public boolean isCommentEnd(int currentPosition)
-	{
-		return getBuffer().charAt(currentPosition) == '\n';
-	}
-
-
-	/**
-	 * Captures pod block from current position
-	 *
-	 * @return PERL_POD token type
-	 */
-	public IElementType capturePodBlock()
-	{
-		CharSequence buffer = getBuffer();
-		int tokenStart = getTokenEnd();
-		setTokenStart(tokenStart);
-		int bufferEnd = buffer.length();
-
-		int currentPosition = tokenStart;
-		int linePos = currentPosition;
-
-		while (true)
-		{
-			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n')
-			{
-				linePos++;
-			}
-			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
-				linePos++;
-			String line = buffer.subSequence(currentPosition, linePos).toString();
-			currentPosition = linePos;
-
-			if (linePos == bufferEnd || line.startsWith("=cut"))
-			{
-				setTokenEnd(linePos);
-				break;
-			}
-		}
-
-		return POD;
-	}
-
-	/**
-	 * HEREDOC proceccing section
-	 */
-
-	// last captured heredoc marker
-	public String heredocMarker;
-
-	// pattern for getting marker
-	public Pattern markerPattern = Pattern.compile("<<\\s*['\"`]?([^\"\'`]+)['\"`]?");
-
-	/**
-	 * Processing captured heredoc opener. Stores marker and switches to proper lexical state
-	 *
-	 * @return PERL_OPERATOR  for << operator
-	 */
-	public IElementType processHeredocOpener()
-	{
-		String openToken = yytext().toString();
-		Matcher m = markerPattern.matcher(openToken);
-
-		yypushback(openToken.length() - 2);
-
-		if (m.matches())
-		{
-			if (m.group(1).matches("\\d+"))    // check if it's numeric shift
-				return OPERATOR_SHIFT_LEFT;
-			heredocMarker = m.group(1);
-		}
-
-		pushState();
-		yybegin(LEX_HEREDOC_WAITING);
-		pushState();
-		yybegin(LEX_HEREDOC_OPENER);
-
-		return OPERATOR_HEREDOC;
-	}
-
-	/**
-	 * Captures HereDoc document and returns appropriate token type
-	 *
-	 * @return Heredoc token type
-	 */
-	public IElementType captureHereDoc()
-	{
-		CharSequence buffer = getBuffer();
-		int tokenStart = getTokenEnd();
-		setTokenStart(tokenStart);
-		int bufferEnd = buffer.length();
-
-		int currentPosition = tokenStart;
-		int linePos = currentPosition;
-
-		IElementType blockType;
+public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets {
+    Project myProject;
+
+    // last token
+    protected IElementType lastTokenType;
+    protected String lastToken;
+
+
+    protected IElementType lastSignificantTokenType;
+    protected String lastSignificantToken;
+
+    protected IElementType lastUnbraceTokenType;
+    protected String lastUnbraceToken;
+
+    protected IElementType lastUnparenTokenType;
+    protected String lastUnparenToken;
+
+    protected HashSet<String> knownPackages = new HashSet<>();
+    protected HashSet<String> knownHandles = new HashSet<>();
+    protected HashSet<String> knownSubs = new HashSet<>();
+    protected HashSet<String> knownLabels = new HashSet<>();
+
+
+    protected static final HashMap<String, IElementType> SIGIL_TOKENS_MAP = new HashMap<>();
+
+    static {
+        SIGIL_TOKENS_MAP.put("$#", SIGIL_SCALAR_INDEX);
+        SIGIL_TOKENS_MAP.put("$", SIGIL_SCALAR);
+        SIGIL_TOKENS_MAP.put("@", SIGIL_ARRAY);
+        SIGIL_TOKENS_MAP.put("%", OPERATOR_MOD);
+        SIGIL_TOKENS_MAP.put("*", OPERATOR_MUL);
+        SIGIL_TOKENS_MAP.put("&", OPERATOR_BITWISE_AND);
+    }
+
+
+    public static final HashMap<String, IElementType> reservedTokenTypes = new HashMap<>();
+    public static final HashMap<String, IElementType> namedOperators = new HashMap<>();
+    public static final HashMap<String, IElementType> blockNames = new HashMap<>();
+    public static final HashMap<String, IElementType> tagNames = new HashMap<>();
+
+    static {
+        // named operators
+        namedOperators.put("x", OPERATOR_X);
+
+        namedOperators.put("not", OPERATOR_NOT_LP);
+        namedOperators.put("and", OPERATOR_AND_LP);
+        namedOperators.put("or", OPERATOR_OR_LP);
+        namedOperators.put("xor", OPERATOR_XOR_LP);
+
+        namedOperators.put("lt", OPERATOR_LT_STR);
+        namedOperators.put("gt", OPERATOR_GT_STR);
+        namedOperators.put("le", OPERATOR_LE_STR);
+        namedOperators.put("ge", OPERATOR_GE_STR);
+        namedOperators.put("eq", OPERATOR_EQ_STR);
+        namedOperators.put("ne", OPERATOR_NE_STR);
+        namedOperators.put("cmp", OPERATOR_CMP_STR);
+
+        // block names
+        blockNames.put("BEGIN", BLOCK_NAME);
+        blockNames.put("UNITCHECK", BLOCK_NAME);
+        blockNames.put("CHECK", BLOCK_NAME);
+        blockNames.put("INIT", BLOCK_NAME);
+        blockNames.put("END", BLOCK_NAME);
+
+        // these added for built ins, not blocks, just subs
+        blockNames.put("AUTOLOAD", BLOCK_NAME);
+        blockNames.put("DESTROY", BLOCK_NAME);
+
+        // tags
+        tagNames.put("__FILE__", TAG);
+        tagNames.put("__LINE__", TAG);
+        tagNames.put("__PACKAGE__", TAG);
+        tagNames.put("__SUB__", TAG);
+
+        // reserved
+        reservedTokenTypes.put("if", RESERVED_IF);
+        reservedTokenTypes.put("unless", RESERVED_UNLESS);
+        reservedTokenTypes.put("elsif", RESERVED_ELSIF);
+        reservedTokenTypes.put("else", RESERVED_ELSE);
+        reservedTokenTypes.put("given", RESERVED_GIVEN);
+        reservedTokenTypes.put("when", RESERVED_WHEN);
+        reservedTokenTypes.put("while", RESERVED_WHILE);
+        reservedTokenTypes.put("until", RESERVED_UNTIL);
+        reservedTokenTypes.put("for", RESERVED_FOR);
+        reservedTokenTypes.put("foreach", RESERVED_FOREACH);
+        reservedTokenTypes.put("continue", RESERVED_CONTINUE);
+
+        reservedTokenTypes.put("sub", RESERVED_SUB);
+        reservedTokenTypes.put("package", RESERVED_PACKAGE);
+        reservedTokenTypes.put("use", RESERVED_USE);
+        reservedTokenTypes.put("no", RESERVED_NO);
+        reservedTokenTypes.put("require", RESERVED_REQUIRE);
+
+        reservedTokenTypes.put("undef", RESERVED_UNDEF);
+
+        reservedTokenTypes.put("print", RESERVED_PRINT);
+        reservedTokenTypes.put("printf", RESERVED_PRINTF);
+        reservedTokenTypes.put("say", RESERVED_SAY);
+
+        reservedTokenTypes.put("grep", RESERVED_GREP);
+        reservedTokenTypes.put("map", RESERVED_MAP);
+        reservedTokenTypes.put("sort", RESERVED_SORT);
+
+        reservedTokenTypes.put("qw", RESERVED_QW);
+
+        reservedTokenTypes.put("qq", RESERVED_QQ);
+        reservedTokenTypes.put("q", RESERVED_Q);
+        reservedTokenTypes.put("qx", RESERVED_QX);
+
+        reservedTokenTypes.put("tr", RESERVED_TR);
+        reservedTokenTypes.put("y", RESERVED_Y);
+
+        reservedTokenTypes.put("s", RESERVED_S);
+        reservedTokenTypes.put("qr", RESERVED_QR);
+        reservedTokenTypes.put("m", RESERVED_M);
+
+        reservedTokenTypes.put("my", RESERVED_MY);
+        reservedTokenTypes.put("our", RESERVED_OUR);
+        reservedTokenTypes.put("state", RESERVED_STATE);
+        reservedTokenTypes.put("local", RESERVED_LOCAL);
+
+        reservedTokenTypes.put("do", RESERVED_DO);
+        reservedTokenTypes.put("eval", RESERVED_EVAL);
+
+        reservedTokenTypes.put("goto", RESERVED_GOTO);
+        reservedTokenTypes.put("redo", RESERVED_REDO);
+        reservedTokenTypes.put("next", RESERVED_NEXT);
+        reservedTokenTypes.put("last", RESERVED_LAST);
+
+        RESERVED_TOKENSET.addAll(reservedTokenTypes.values());
+    }
+
+    protected PerlLexerAdapter evalPerlLexer;
+
+    public PerlLexer(Project project) {
+        super((Reader) null);
+        myProject = project;
+    }
+
+    /**
+     * Lexers advance method. Parses some thing here, or just invoking generated flex parser
+     *
+     * @return next token type
+     * @throws IOException
+     */
+    public IElementType advance() throws IOException {
+
+        CharSequence buffer = getBuffer();
+        int tokenStart = getTokenEnd();
+        int bufferEnd = buffer.length();
+
+        if (bufferEnd > 0 && tokenStart < bufferEnd) {
+            int currentState = yystate();
+
+            // higest priority, pre-parsed tokens
+            if (currentState == LEX_PREPARSED_ITEMS) {
+                IElementType nextTokenType = getParsedToken();
+                if (nextTokenType != null)
+                    return nextTokenType;
+            }
+
+            // capture heredoc
+            if (currentState == LEX_HEREDOC_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n')) {
+                IElementType tokenType = captureHereDoc();
+                if (tokenType != null)    // got something
+                    return tokenType;
+            }
+            // capture pod
+            else if (buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n')) {
+                return capturePodBlock();
+            }
+            // capture string content from "" '' `` q qq qx
+            else if (currentState == LEX_QUOTE_LIKE_CHARS) {
+                int currentPosition = tokenStart;
+
+                boolean isEscaped = false;
+                boolean quotesDiffer = charOpener != charCloser;
+                int quotesDepth = 0;    // for using with different quotes
+
+                while (currentPosition < bufferEnd) {
+                    char currentChar = buffer.charAt(currentPosition);
+
+                    if (!isEscaped && quotesDepth == 0 && currentChar == charCloser)
+                        break;
+
+                    if (!isEscaped && quotesDiffer) {
+                        if (currentChar == charOpener)
+                            quotesDepth++;
+                        else if (currentChar == charCloser)
+                            quotesDepth--;
+                    }
+
+                    isEscaped = !isEscaped && currentChar == '\\';
+
+                    currentPosition++;
+                }
+
+                if (currentPosition == bufferEnd)
+                    // forces to exit lex state
+                    popState();
+                else
+                    // switch to closer lex state
+                    yybegin(LEX_QUOTE_LIKE_CLOSER);
+
+                if (currentPosition > tokenStart) {
+                    // found string
+                    setTokenStart(tokenStart);
+                    setTokenEnd(currentPosition);
+                    return STRING_CONTENT;
+                } else
+                    // empty string
+                    return quoteLikeCloser(tokenStart);
+            }
+            // closing quote of string
+            else if (currentState == LEX_QUOTE_LIKE_CLOSER)
+                return quoteLikeCloser(tokenStart);
+                // capture __DATA__ __END__
+            else if (((tokenStart < bufferEnd - 8) && "__DATA__".equals(buffer.subSequence(tokenStart, tokenStart + 8).toString()))
+                    || ((tokenStart < bufferEnd - 7) && "__END__".equals(buffer.subSequence(tokenStart, tokenStart + 7).toString()))
+                    ) {
+                setTokenStart(tokenStart);
+                setTokenEnd(bufferEnd);
+                return COMMENT_BLOCK;
+            }
+            // capture line comment
+            else if (
+                    buffer.charAt(tokenStart) == '#'
+                            // fixme these should be in tokenset
+                            && (currentState != LEX_QUOTE_LIKE_LIST_OPENER && currentState != LEX_QUOTE_LIKE_LIST_CLOSER|| !allowSharpQuote)
+                            && (currentState != LEX_QUOTE_LIKE_OPENER && currentState != LEX_QUOTE_LIKE_CLOSER || !allowSharpQuote)
+                            && (currentState != LEX_TRANS_OPENER && currentState != LEX_TRANS_CLOSER || !allowSharpQuote)
+                            && (currentState != LEX_TRANS_CHARS)
+                            && (currentState != LEX_REGEX_OPENER)
+                    ) {
+                // comment may end on newline or ?>
+                int currentPosition = tokenStart;
+                setTokenStart(tokenStart);
+
+                while (currentPosition < bufferEnd && !isCommentEnd(currentPosition)) {
+                    currentPosition++;
+                }
+
+                // catching annotations #@
+                if (tokenStart + 1 < bufferEnd && buffer.charAt(tokenStart + 1) == '@') {
+                    if (currentPosition > tokenStart + 2)
+                        parseAnnotation(buffer.subSequence(tokenStart + 2, currentPosition), tokenStart + 2);
+
+                    setTokenEnd(tokenStart + 2);
+                    return ANNOTATION_PREFIX;
+                }
+
+                setTokenEnd(currentPosition);
+                return COMMENT_LINE;
+            }
+
+        }
+
+        IElementType tokenType = super.advance();
+
+        registerLastToken(tokenType, yytext().toString());
+
+        return tokenType;
+    }
+
+    @Override
+    public IElementType endBarewordStringComma() {
+        endCustomBlock();
+        return SIGILS_TOKENS.contains(lastSignificantTokenType) ? IDENTIFIER : STRING_CONTENT;
+    }
+
+
+    public void registerLastToken(IElementType tokenType, String tokenText) {
+        lastTokenType = tokenType;
+        lastToken = tokenText;
+
+        if (!UNSIGNIFICANT_TOKENS.contains(tokenType)) {
+            lastSignificantTokenType = tokenType;
+            lastSignificantToken = lastToken;
+
+            if (tokenType != LEFT_BRACE) {
+                lastUnbraceTokenType = tokenType;
+                lastUnbraceToken = lastToken;
+            }
+
+            if (tokenType != LEFT_PAREN) {
+                lastUnparenTokenType = tokenType;
+                lastUnparenToken = lastToken;
+            }
+
+            if (yystate() == 0 && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
+                yybegin(LEX_CODE);
+        }
+    }
+
+
+    public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
+
+    public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
+
+    /**
+     * Parses annotation line and puts result into the pre-parsed buffer
+     *
+     * @param annotationLine - string with annotation after marker
+     */
+    void parseAnnotation(CharSequence annotationLine, int baseOffset) {
+        Matcher m = annotationPattern.matcher(annotationLine);
+        tokensList.clear();
+        CharSequence tailComment = null;
+
+        if (m.matches()) {
+            String annotationKey = m.group(1);
+            IElementType tokenType = PerlAnnotations.TOKEN_TYPES.get(m.group(1));
+
+            if (tokenType == null)
+                tokenType = ANNOTATION_UNKNOWN_KEY;
+
+            tokensList.add(new CustomToken(baseOffset, baseOffset + m.group(1).length(), tokenType));
+            baseOffset += m.group(1).length();
+
+            if (m.group(2) != null) {
+                tokensList.add(new CustomToken(baseOffset, baseOffset + m.group(2).length(), TokenType.WHITE_SPACE));
+                baseOffset += m.group(2).length();
+            }
+
+            if (tokenType == ANNOTATION_RETURNS_KEY && m.group(3) != null) {
+                // additional parsing
+                String annotationRest = m.group(3);
+                Matcher pm = annotationPatternPackage.matcher(annotationRest);
+
+                if (pm.matches()) {
+                    if (pm.group(1) != null && pm.group(1).length() > 0) {
+                        tokensList.add(new CustomToken(baseOffset, baseOffset + pm.group(1).length(), PACKAGE));
+                        baseOffset += pm.group(1).length();
+                    }
+
+                    tailComment = pm.group(2);
+                } else
+                    tailComment = m.group(3);
+            } else
+                tailComment = m.group(3);
+        } else
+            tailComment = annotationLine;
+
+        if (tailComment != null && tailComment.length() > 0)
+            tokensList.add(new CustomToken(baseOffset, baseOffset + tailComment.length(), COMMENT_LINE));
+
+        if (tokensList.size() > 0) {
+            pushState();
+            yybegin(LEX_PREPARSED_ITEMS);
+        }
+    }
+
+
+    /**
+     * Processes quote closer token
+     * fixme this can be done as pre-parsing on string capture
+     *
+     * @param tokenStart offset of current token start
+     * @return quote element type
+     */
+    IElementType quoteLikeCloser(int tokenStart) {
+        popState();
+        setTokenStart(tokenStart);
+        setTokenEnd(tokenStart + 1);
+        return getQuoteToken(getBuffer().charAt(tokenStart));
+    }
+
+
+    /**
+     * Checking if comment is ended. Implemented for overriding in {@link com.perl5.lang.embedded.EmbeddedPerlLexer#isCommentEnd(int)} }
+     *
+     * @param currentPosition current position to check
+     * @return checking result
+     */
+    public boolean isCommentEnd(int currentPosition) {
+        return getBuffer().charAt(currentPosition) == '\n';
+    }
+
+
+    /**
+     * Captures pod block from current position
+     *
+     * @return PERL_POD token type
+     */
+    public IElementType capturePodBlock() {
+        CharSequence buffer = getBuffer();
+        int tokenStart = getTokenEnd();
+        setTokenStart(tokenStart);
+        int bufferEnd = buffer.length();
+
+        int currentPosition = tokenStart;
+        int linePos = currentPosition;
+
+        while (true) {
+            while (linePos < bufferEnd && buffer.charAt(linePos) != '\n') {
+                linePos++;
+            }
+            if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
+                linePos++;
+            String line = buffer.subSequence(currentPosition, linePos).toString();
+            currentPosition = linePos;
+
+            if (linePos == bufferEnd || line.startsWith("=cut")) {
+                setTokenEnd(linePos);
+                break;
+            }
+        }
+
+        return POD;
+    }
+
+    /**
+     * HEREDOC proceccing section
+     */
+
+    // last captured heredoc marker
+    public String heredocMarker;
+
+    // pattern for getting marker
+    public Pattern markerPattern = Pattern.compile("<<\\s*['\"`]?([^\"\'`]+)['\"`]?");
+
+    /**
+     * Processing captured heredoc opener. Stores marker and switches to proper lexical state
+     *
+     * @return PERL_OPERATOR  for << operator
+     */
+    public IElementType processHeredocOpener() {
+        String openToken = yytext().toString();
+        Matcher m = markerPattern.matcher(openToken);
+
+        yypushback(openToken.length() - 2);
+
+        if (m.matches()) {
+            if (m.group(1).matches("\\d+"))    // check if it's numeric shift
+                return OPERATOR_SHIFT_LEFT;
+            heredocMarker = m.group(1);
+        }
+
+        pushState();
+        yybegin(LEX_HEREDOC_WAITING);
+        pushState();
+        yybegin(LEX_HEREDOC_OPENER);
+
+        return OPERATOR_HEREDOC;
+    }
+
+    /**
+     * Captures HereDoc document and returns appropriate token type
+     *
+     * @return Heredoc token type
+     */
+    public IElementType captureHereDoc() {
+        CharSequence buffer = getBuffer();
+        int tokenStart = getTokenEnd();
+        setTokenStart(tokenStart);
+        int bufferEnd = buffer.length();
+
+        int currentPosition = tokenStart;
+        int linePos = currentPosition;
+
+        IElementType blockType;
 
 //		if( "SQL".equals(heredocMarker))
 //			blockType = PerlTokenType.HEREDOC_SQL;
 //		else
-		blockType = HEREDOC;
+        blockType = HEREDOC;
 
-		String endPattern = "^" + heredocMarker + "[\r\n]+";
+        String endPattern = "^" + heredocMarker + "[\r\n]+";
 
-		while (true)
-		{
-			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
-			{
-				linePos++;
-			}
-			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
-				linePos++;
-			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
-				linePos++;
+        while (true) {
+            while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r') {
+                linePos++;
+            }
+            if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
+                linePos++;
+            if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
+                linePos++;
 
-			// reached the end of heredoc and got end marker
-			if (Pattern.matches(endPattern, buffer.subSequence(currentPosition, linePos)))
-			{
-				yybegin(LEX_HEREDOC_MARKER);
+            // reached the end of heredoc and got end marker
+            if (Pattern.matches(endPattern, buffer.subSequence(currentPosition, linePos))) {
+                yybegin(LEX_HEREDOC_MARKER);
 
-				// non-empty heredoc and got the end
-				if (currentPosition > tokenStart)
-				{
-					setTokenStart(tokenStart);
-					setTokenEnd(currentPosition);
-					return blockType;
-				}
-				// empty heredoc and got the end
-				else
-					return null;
-			}
-			// reached the end of file
-			else if (linePos == bufferEnd)
-			{
-				popState();
-				// non-empty heredoc and got the end of file
-				if (currentPosition > tokenStart)
-				{
-					setTokenStart(tokenStart);
-					setTokenEnd(currentPosition);
-					return blockType;
-				}
-				// empty heredoc and got the end of file
-				else
-					return null;
-			}
-			currentPosition = linePos;
-		}
-	}
+                // non-empty heredoc and got the end
+                if (currentPosition > tokenStart) {
+                    setTokenStart(tokenStart);
+                    setTokenEnd(currentPosition);
+                    return blockType;
+                }
+                // empty heredoc and got the end
+                else
+                    return null;
+            }
+            // reached the end of file
+            else if (linePos == bufferEnd) {
+                popState();
+                // non-empty heredoc and got the end of file
+                if (currentPosition > tokenStart) {
+                    setTokenStart(tokenStart);
+                    setTokenEnd(currentPosition);
+                    return blockType;
+                }
+                // empty heredoc and got the end of file
+                else
+                    return null;
+            }
+            currentPosition = linePos;
+        }
+    }
 
-	public void reset(CharSequence buf, int start, int end, int initialState)
-	{
-		super.reset(buf, start, end, initialState);
+    public void reset(CharSequence buf, int start, int end, int initialState) {
+        super.reset(buf, start, end, initialState);
 
-		lastTokenType = null;
-		lastToken = null;
-		lastSignificantTokenType = null;
-		lastSignificantToken = null;
-		lastUnbraceTokenType = null;
-		lastUnbraceToken = null;
-		lastUnparenTokenType = null;
-		lastUnparenToken = null;
+        lastTokenType = null;
+        lastToken = null;
+        lastSignificantTokenType = null;
+        lastSignificantToken = null;
+        lastUnbraceTokenType = null;
+        lastUnbraceToken = null;
+        lastUnparenTokenType = null;
+        lastUnparenToken = null;
 //		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
-	}
+    }
 
-	/**
-	 * Forces push back and reparsing
-	 *
-	 * @param newState exclusive state for re-parsing specific constructions
-	 */
-	public void startCustomBlock(int newState)
-	{
-		yypushback(yylength());
-		pushState();
-		yybegin(newState);
-	}
+    /**
+     * Forces push back and reparsing
+     *
+     * @param newState exclusive state for re-parsing specific constructions
+     */
+    public void startCustomBlock(int newState) {
+        yypushback(yylength());
+        pushState();
+        yybegin(newState);
+    }
 
-	/**
-	 * Ends custom block parsing
-	 */
-	public void endCustomBlock()
-	{
-		popState();
-	}
+    /**
+     * Ends custom block parsing
+     */
+    public void endCustomBlock() {
+        popState();
+    }
 
-	/**
-	 * States stack
-	 **/
-	private final Stack<Integer> stateStack = new Stack<Integer>();
+    /**
+     * States stack
+     **/
+    private final Stack<Integer> stateStack = new Stack<Integer>();
 
-	public void pushState()
-	{
-		stateStack.push(yystate());
-	}
+    public void pushState() {
+        stateStack.push(yystate());
+    }
 
-	public void popState()
-	{
-		setState(stateStack.pop());
-	}
+    public void popState() {
+        setState(stateStack.pop());
+    }
 
-	/**
-	 * Quote-like, transliteration and regexps common part
-	 */
-	public boolean allowSharpQuote = true;
-	public char charOpener;
-	public char charCloser;
-	public int stringContentStart;
-	public boolean isEscaped = false;
+    /**
+     * Quote-like, transliteration and regexps common part
+     */
+    public boolean allowSharpQuote = true;
+    public char charOpener;
+    public char charCloser;
+    public int stringContentStart;
+    public boolean isEscaped = false;
 
-	public int sectionsNumber = 0;    // number of sections one or two
-	public int currentSectionNumber = 0; // current section
+    public int sectionsNumber = 0;    // number of sections one or two
+    public int currentSectionNumber = 0; // current section
 
-	public final LinkedList<CustomToken> tokensList = new LinkedList<CustomToken>();
+    public final LinkedList<CustomToken> tokensList = new LinkedList<CustomToken>();
 
-	private IElementType restoreToken(CustomToken token)
-	{
-		setTokenStart(token.getTokenStart());
-		setTokenEnd(token.getTokenEnd());
-		registerLastToken(token.getTokenType(), yytext().toString());
-		return token.getTokenType();
-	}
+    private IElementType restoreToken(CustomToken token) {
+        setTokenStart(token.getTokenStart());
+        setTokenEnd(token.getTokenEnd());
+        registerLastToken(token.getTokenType(), yytext().toString());
+        return token.getTokenType();
+    }
 
-	/**
-	 * Disallows sharp delimiter on space occurance for quote-like operations
-	 *
-	 * @return whitespace token type
-	 */
-	public IElementType processOpenerWhiteSpace()
-	{
-		allowSharpQuote = false;
-		return TokenType.WHITE_SPACE;
-	}
+    /**
+     * Disallows sharp delimiter on space occurance for quote-like operations
+     *
+     * @return whitespace token type
+     */
+    public IElementType processOpenerWhiteSpace() {
+        allowSharpQuote = false;
+        return TokenType.WHITE_SPACE;
+    }
 
-	/**
-	 * Reading tokens from parsed queue, setting start and end and returns them one by one
-	 *
-	 * @return token type or null if queue is empty
-	 */
-	public IElementType getParsedToken()
-	{
-		if (tokensList.size() == 0)
-		{
-			popState();
-			return null;
-		} else
-		{
-			return restoreToken(tokensList.removeFirst());
-		}
-	}
+    /**
+     * Reading tokens from parsed queue, setting start and end and returns them one by one
+     *
+     * @return token type or null if queue is empty
+     */
+    public IElementType getParsedToken() {
+        if (tokensList.size() == 0) {
+            popState();
+            return null;
+        } else {
+            return restoreToken(tokensList.removeFirst());
+        }
+    }
 
-	/**
-	 * Regex processor qr{} m{} s{}{}
-	 **/
-	String regexCommand = null;
+    /**
+     * Regex processor qr{} m{} s{}{}
+     **/
+    String regexCommand = null;
 
-	// guess if this is a OPERATOR_DIV or regex opener
-	public IElementType guessDiv()
-	{
-		if (    // seems regex
-			// todo we should check argumentless prefix sub
-			// todo we should check if we are after grep/map/sort block
-				lastSignificantTokenType == null
-						|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
-						|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
-						|| REGEXP_PREFIX.contains(lastSignificantTokenType)
-						|| lastUnparenTokenType == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
-				)
-		{
-			allowSharpQuote = true;
-			isEscaped = false;
-			regexCommand = "m";
-			sectionsNumber = 1;
+    // guess if this is a OPERATOR_DIV or regex opener
+    public IElementType guessDiv() {
+        if (    // seems regex
+            // todo we should check argumentless prefix sub
+            // todo we should check if we are after grep/map/sort block
+                lastSignificantTokenType == null
+                        || OPERATORS_TOKENSET.contains(lastSignificantTokenType)
+                        || RESERVED_TOKENSET.contains(lastSignificantTokenType)
+                        || REGEXP_PREFIX.contains(lastSignificantTokenType)
+                        || lastUnparenTokenType == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
+                ) {
+            allowSharpQuote = true;
+            isEscaped = false;
+            regexCommand = "m";
+            sectionsNumber = 1;
 
-			pushState();
-			yypushback(1);
-			yybegin(LEX_REGEX_OPENER);
+            pushState();
+            yypushback(1);
+            yybegin(LEX_REGEX_OPENER);
 
-			return null;
-		} else
-		{
-			Character nextCharacter = getNextCharacter();
+            return null;
+        } else {
+            Character nextCharacter = getNextCharacter();
 
-			if (nextCharacter != null && nextCharacter.equals('/'))
-			{
-				setTokenEnd(getNextTokenStart() + 1);
-				return OPERATOR_OR_DEFINED;
-			} else if (nextCharacter != null && nextCharacter.equals('='))
-			{
-				setTokenEnd(getNextTokenStart() + 1);
-				return OPERATOR_DIV_ASSIGN;
-			} else
-			{
-				return OPERATOR_DIV;
-			}
-		}
-	}
+            if (nextCharacter != null && nextCharacter.equals('/')) {
+                setTokenEnd(getNextTokenStart() + 1);
+                return OPERATOR_OR_DEFINED;
+            } else if (nextCharacter != null && nextCharacter.equals('=')) {
+                setTokenEnd(getNextTokenStart() + 1);
+                return OPERATOR_DIV_ASSIGN;
+            } else {
+                return OPERATOR_DIV;
+            }
+        }
+    }
 
-	// this symbols after sigils means that it's just a sigil, not $$ variable
-	public static final HashSet<Character> SCALAR_SIGIL_SUFFIXES = new HashSet<>(Arrays.asList(
-		'{', '^', '_'
-	));
+    // this symbols after sigils means that it's just a sigil, not $$ variable
+    public static final HashSet<Character> SCALAR_SIGIL_SUFFIXES = new HashSet<>(Arrays.asList(
+            '{', '^', '_'
+    ));
 
-	/**
-	 * Decide if it's two sigils or variable name for $$
-	 *
-	 * @return token type
-	 */
-	public IElementType parseScalarSigils()
-	{
-		String tokenText = yytext().toString();
-		Character nextSignificantCharacter = getNextSignificantCharacter();
+    /**
+     * Decide if it's two sigils or variable name for $$
+     *
+     * @return token type
+     */
+    public IElementType parseScalarSigils() {
+        String tokenText = yytext().toString();
+        Character nextSignificantCharacter = getNextSignificantCharacter();
 
-		if (tokenText.length() > 1)    // may be sequential sigils or sequential sigils and built in $$
-		{
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-			tokensList.clear();
+        if (tokenText.length() > 1)    // may be sequential sigils or sequential sigils and built in $$
+        {
+            pushState();
+            yybegin(LEX_PREPARSED_ITEMS);
+            tokensList.clear();
 
-			int tokenStart = getTokenStart();
+            int tokenStart = getTokenStart();
 
-			if (nextSignificantCharacter != null
-					&& (
-							Character.isLetterOrDigit(nextSignificantCharacter)    // $$$$varname
-							|| SCALAR_SIGIL_SUFFIXES.contains(nextSignificantCharacter)
-					)
-			)
-			{
-				// just sigils
-				tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
-			} else
-			{
-				// sigils and $$
-				int tokenEnd = getTokenEnd();
+            if (nextSignificantCharacter != null
+                    && (
+                    Character.isLetterOrDigit(nextSignificantCharacter)    // $$$$varname
+                            || SCALAR_SIGIL_SUFFIXES.contains(nextSignificantCharacter)
+            )
+                    ) {
+                // just sigils
+                tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+            } else {
+                // sigils and $$
+                int tokenEnd = getTokenEnd();
 
-				if (tokenEnd - 1 > tokenStart + 1)
-					tokensList.add(new CustomToken(tokenStart + 1, tokenEnd - 1, SIGIL_SCALAR));
-				tokensList.add(new CustomToken(tokenEnd - 1, tokenEnd, VARIABLE_NAME));
-			}
-			setTokenEnd(tokenStart + 1);
-		} else if (lastSignificantTokenType == LEFT_BRACE && nextSignificantCharacter != null && nextSignificantCharacter.equals('}')) // for ${$}
-			return VARIABLE_NAME;
+                if (tokenEnd - 1 > tokenStart + 1)
+                    tokensList.add(new CustomToken(tokenStart + 1, tokenEnd - 1, SIGIL_SCALAR));
+                tokensList.add(new CustomToken(tokenEnd - 1, tokenEnd, VARIABLE_NAME));
+            }
+            setTokenEnd(tokenStart + 1);
+        } else if (lastSignificantTokenType == LEFT_BRACE && nextSignificantCharacter != null && nextSignificantCharacter.equals('}')) // for ${$}
+            return VARIABLE_NAME;
 
-		return SIGIL_SCALAR;
-	}
+        return SIGIL_SCALAR;
+    }
 
 
-	public IElementType checkOperatorXAssign()
-	{
-		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x=smth;
-		{
-			yypushback(1);
-			return IDENTIFIER;
-		}
-		return OPERATOR_X_ASSIGN;
-	}
+    public IElementType checkOperatorXAssign() {
+        if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x=smth;
+        {
+            yypushback(1);
+            return IDENTIFIER;
+        }
+        return OPERATOR_X_ASSIGN;
+    }
 
-	public IElementType checkOperatorXSticked()
-	{
-		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x123;
-		{
-			yypushback(1);
-			return IDENTIFIER;
-		}
-		yypushback(yylength() - 1);
-		return OPERATOR_X;
-	}
+    public IElementType checkOperatorXSticked() {
+        if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x123;
+        {
+            yypushback(1);
+            return IDENTIFIER;
+        }
+        yypushback(yylength() - 1);
+        return OPERATOR_X;
+    }
 
-	public IElementType parseCappedVariableName()
-	{
-		if (SIGILS_TOKENS.contains(lastUnbraceTokenType))
-			return IDENTIFIER;
+    public IElementType parseCappedVariableName() {
+        if (SIGILS_TOKENS.contains(lastUnbraceTokenType))
+            return IDENTIFIER;
 
-		yypushback(yylength() - 1);
-		return OPERATOR_BITWISE_XOR;
-	}
+        yypushback(yylength() - 1);
+        return OPERATOR_BITWISE_XOR;
+    }
 
 
-	/**
-	 * Sets up regex parser
-	 */
-	public void processRegexOpener()
-	{
-		allowSharpQuote = true;
-		isEscaped = false;
-		regexCommand = yytext().toString();
+    /**
+     * Sets up regex parser
+     */
+    public void processRegexOpener() {
+        allowSharpQuote = true;
+        isEscaped = false;
+        regexCommand = yytext().toString();
 
-		if ("s".equals(regexCommand))    // two sections s
-			sectionsNumber = 2;
-		else                        // one section qr m
-			sectionsNumber = 1;
+        if ("s".equals(regexCommand))    // two sections s
+            sectionsNumber = 2;
+        else                        // one section qr m
+            sectionsNumber = 1;
 
-		pushState();
-		yybegin(LEX_REGEX_OPENER);
-	}
+        pushState();
+        yybegin(LEX_REGEX_OPENER);
+    }
 
-	/**
-	 * Parses regexp from the current position (opening delimiter) and preserves tokens in tokensList
-	 * REGEX_MODIFIERS = [msixpodualgcer]
-	 *
-	 * @return opening delimiter type
-	 */
-	public IElementType parseRegex()
-	{
-		tokensList.clear();
+    /**
+     * Parses regexp from the current position (opening delimiter) and preserves tokens in tokensList
+     * REGEX_MODIFIERS = [msixpodualgcer]
+     *
+     * @return opening delimiter type
+     */
+    public IElementType parseRegex() {
+        tokensList.clear();
 
-		CharSequence buffer = getBuffer();
-		int bufferEnd = getBufferEnd();
+        CharSequence buffer = getBuffer();
+        int bufferEnd = getBufferEnd();
 
-		// find block 1
-		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, getTokenStart() + 1, bufferEnd, yytext().charAt(0));
+        // find block 1
+        RegexBlock firstBlock = RegexBlock.parseBlock(buffer, getTokenStart() + 1, bufferEnd, yytext().charAt(0));
 
-		if (firstBlock == null)
-		{
+        if (firstBlock == null) {
 //			System.err.println("Stop after first block");
-			yybegin(YYINITIAL);
-			return REGEX_QUOTE_OPEN;
-		}
-		int currentOffset = firstBlock.getEndOffset();
+            yybegin(YYINITIAL);
+            return REGEX_QUOTE_OPEN;
+        }
+        int currentOffset = firstBlock.getEndOffset();
 
-		// find block 2
-		ArrayList<CustomToken> betweenBlocks = new ArrayList<CustomToken>();
-		RegexBlock secondBLock = null;
-		CustomToken secondBlockOpener = null;
+        // find block 2
+        ArrayList<CustomToken> betweenBlocks = new ArrayList<CustomToken>();
+        RegexBlock secondBLock = null;
+        CustomToken secondBlockOpener = null;
 
-		if (sectionsNumber == 2 && currentOffset < bufferEnd)
-		{
-			if (firstBlock.hasSameQuotes())
-			{
-				secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd, firstBlock.getOpeningQuote());
-			} else
-			{
-				// spaces and comments between if {}, fill betweenBlock
-				while (true)
-				{
-					char currentChar = buffer.charAt(currentOffset);
-					if (RegexBlock.isWhiteSpace(currentChar))    // white spaces
-					{
-						int whiteSpaceStart = currentOffset;
-						while (RegexBlock.isWhiteSpace(buffer.charAt(currentOffset)))
-						{
-							currentOffset++;
-						}
-						betweenBlocks.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
-					} else if (currentChar == '#')    // line comment
-					{
-						int commentStart = currentOffset;
-						while (buffer.charAt(currentOffset) != '\n')
-						{
-							currentOffset++;
-						}
-						betweenBlocks.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
-					} else
-						break;
-				}
+        if (sectionsNumber == 2 && currentOffset < bufferEnd) {
+            if (firstBlock.hasSameQuotes()) {
+                secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd, firstBlock.getOpeningQuote());
+            } else {
+                // spaces and comments between if {}, fill betweenBlock
+                while (true) {
+                    char currentChar = buffer.charAt(currentOffset);
+                    if (RegexBlock.isWhiteSpace(currentChar))    // white spaces
+                    {
+                        int whiteSpaceStart = currentOffset;
+                        while (RegexBlock.isWhiteSpace(buffer.charAt(currentOffset))) {
+                            currentOffset++;
+                        }
+                        betweenBlocks.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
+                    } else if (currentChar == '#')    // line comment
+                    {
+                        int commentStart = currentOffset;
+                        while (buffer.charAt(currentOffset) != '\n') {
+                            currentOffset++;
+                        }
+                        betweenBlocks.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
+                    } else
+                        break;
+                }
 
-				// read block
-				secondBlockOpener = new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_OPEN);
-				secondBLock = RegexBlock.parseBlock(buffer, currentOffset + 1, bufferEnd, buffer.charAt(currentOffset));
-			}
+                // read block
+                secondBlockOpener = new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_OPEN);
+                secondBLock = RegexBlock.parseBlock(buffer, currentOffset + 1, bufferEnd, buffer.charAt(currentOffset));
+            }
 
-			if (secondBLock == null)
-			{
+            if (secondBLock == null) {
 //				System.err.println("Stop after second block");
-				yybegin(YYINITIAL);
-				return REGEX_QUOTE_OPEN;
-			}
-			currentOffset = secondBLock.getEndOffset();
-		}
+                yybegin(YYINITIAL);
+                return REGEX_QUOTE_OPEN;
+            }
+            currentOffset = secondBLock.getEndOffset();
+        }
 
-		// check modifiers for x
-		boolean isExtended = false;
-		boolean isEvaluated = false;
-		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand);
-		int modifiersEnd = currentOffset;
-		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
+        // check modifiers for x
+        boolean isExtended = false;
+        boolean isEvaluated = false;
+        List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand);
+        int modifiersEnd = currentOffset;
+        ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
 
-		while (true)
-		{
-			if (modifiersEnd == bufferEnd)    // eof
-				break;
-			else if (!allowedModifiers.contains(buffer.charAt(modifiersEnd)))    // unknown modifier
-				break;
-			else if (buffer.charAt(modifiersEnd) == 'x')    // mark as extended
-				isExtended = true;
-			else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
-				isEvaluated = true;
+        while (true) {
+            if (modifiersEnd == bufferEnd)    // eof
+                break;
+            else if (!allowedModifiers.contains(buffer.charAt(modifiersEnd)))    // unknown modifier
+                break;
+            else if (buffer.charAt(modifiersEnd) == 'x')    // mark as extended
+                isExtended = true;
+            else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
+                isEvaluated = true;
 
-			modifierTokens.add(new CustomToken(modifiersEnd, modifiersEnd + 1, REGEX_MODIFIER));
+            modifierTokens.add(new CustomToken(modifiersEnd, modifiersEnd + 1, REGEX_MODIFIER));
 
-			modifiersEnd++;
-		}
+            modifiersEnd++;
+        }
 
-		// parse block 1
-		tokensList.addAll(firstBlock.tokenize(isExtended));
+        // parse block 1
+        tokensList.addAll(firstBlock.tokenize(isExtended));
 
-		if (secondBLock != null)
-		{
-			// parse spaces
-			tokensList.addAll(betweenBlocks);
+        if (secondBLock != null) {
+            // parse spaces
+            tokensList.addAll(betweenBlocks);
 
-			if (secondBlockOpener != null)
-				tokensList.add(secondBlockOpener);
+            if (secondBlockOpener != null)
+                tokensList.add(secondBlockOpener);
 
-			// parse block 2
-			if (isEvaluated)
-			{
-				if (evalPerlLexer == null)
-					evalPerlLexer = new PerlLexerAdapter(myProject);
-				tokensList.addAll(secondBLock.parseEval(evalPerlLexer));
-			} else
-				tokensList.addAll(secondBLock.tokenize(isExtended));
-		}
+            // parse block 2
+            if (isEvaluated) {
+                if (evalPerlLexer == null)
+                    evalPerlLexer = new PerlLexerAdapter(myProject);
+                tokensList.addAll(secondBLock.parseEval(evalPerlLexer));
+            } else
+                tokensList.addAll(secondBLock.tokenize(isExtended));
+        }
 
-		// parse modifiers
-		tokensList.addAll(modifierTokens);
+        // parse modifiers
+        tokensList.addAll(modifierTokens);
 
-		yybegin(LEX_PREPARSED_ITEMS);
+        yybegin(LEX_PREPARSED_ITEMS);
 
-		return REGEX_QUOTE_OPEN;
-	}
+        return REGEX_QUOTE_OPEN;
+    }
 
 
-	/**
-	 * Transliteration processors tr y
-	 **/
+    /**
+     * Transliteration processors tr y
+     **/
 
-	public void processTransOpener()
-	{
-		allowSharpQuote = true;
-		isEscaped = false;
-		currentSectionNumber = 0;
-		pushState();
-		yybegin(LEX_TRANS_OPENER);
-	}
+    public void processTransOpener() {
+        allowSharpQuote = true;
+        isEscaped = false;
+        currentSectionNumber = 0;
+        pushState();
+        yybegin(LEX_TRANS_OPENER);
+    }
 
-	public IElementType processTransQuote()
-	{
-		charOpener = yytext().charAt(0);
+    public IElementType processTransQuote() {
+        charOpener = yytext().charAt(0);
 
-		if (charOpener == '#' && !allowSharpQuote)
-		{
-			yypushback(1);
-			popState();
-			return null;
-		} else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
+        if (charOpener == '#' && !allowSharpQuote) {
+            yypushback(1);
+            popState();
+            return null;
+        } else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
-		yybegin(LEX_TRANS_CHARS);
-		stringContentStart = getTokenStart() + 1;
+        yybegin(LEX_TRANS_CHARS);
+        stringContentStart = getTokenStart() + 1;
 
-		return REGEX_QUOTE_OPEN;
-	}
+        return REGEX_QUOTE_OPEN;
+    }
 
-	public IElementType processTransChar()
-	{
-		char currentChar = yytext().charAt(0);
+    public IElementType processTransChar() {
+        char currentChar = yytext().charAt(0);
 
-		if (currentChar == charCloser && !isEscaped)
-		{
-			yypushback(1);
-			setTokenStart(stringContentStart);
-			yybegin(LEX_TRANS_CLOSER);
-			return STRING_CONTENT;
-		} else if (isLastToken())
-		{
-			setTokenStart(stringContentStart);
-			return STRING_CONTENT;
-		} else
-			isEscaped = (currentChar == '\\' && !isEscaped);
+        if (currentChar == charCloser && !isEscaped) {
+            yypushback(1);
+            setTokenStart(stringContentStart);
+            yybegin(LEX_TRANS_CLOSER);
+            return STRING_CONTENT;
+        } else if (isLastToken()) {
+            setTokenStart(stringContentStart);
+            return STRING_CONTENT;
+        } else
+            isEscaped = (currentChar == '\\' && !isEscaped);
 
-		return null;
-	}
+        return null;
+    }
 
-	public IElementType processTransCloser()
-	{
-		if (currentSectionNumber == 0) // first section
-		{
-			currentSectionNumber++;
-			if (charCloser == charOpener) // next is replacements block
-			{
-				yybegin(LEX_TRANS_CHARS);
-				stringContentStart = getTokenStart() + 1;
-			} else    // next is new opener, possibly other
-			{
-				yybegin(LEX_TRANS_OPENER);
-			}
-		} else // last section
-		{
-			yybegin(LEX_TRANS_MODIFIERS);
-		}
-		return REGEX_QUOTE_CLOSE;
-	}
+    public IElementType processTransCloser() {
+        if (currentSectionNumber == 0) // first section
+        {
+            currentSectionNumber++;
+            if (charCloser == charOpener) // next is replacements block
+            {
+                yybegin(LEX_TRANS_CHARS);
+                stringContentStart = getTokenStart() + 1;
+            } else    // next is new opener, possibly other
+            {
+                yybegin(LEX_TRANS_OPENER);
+            }
+        } else // last section
+        {
+            yybegin(LEX_TRANS_MODIFIERS);
+        }
+        return REGEX_QUOTE_CLOSE;
+    }
 
 
-	/**
-	 * Quote-like string procesors
-	 **/
-	public void processQuoteLikeStringOpener()
-	{
-		allowSharpQuote = true;
-		isEscaped = false;
-		pushState();
-		yybegin(LEX_QUOTE_LIKE_OPENER);
-	}
+    /**
+     * Quote-like string procesors
+     **/
+    public void processQuoteLikeStringOpener() {
+        allowSharpQuote = true;
+        isEscaped = false;
+        pushState();
+        yybegin(LEX_QUOTE_LIKE_OPENER);
+    }
 
-	public IElementType processQuoteLikeQuote()
-	{
-		charOpener = yytext().charAt(0);
+    private boolean forceQuote = false;
 
-		if (charOpener == '#' && !allowSharpQuote)
-		{
-			yypushback(1);
-			yybegin(YYINITIAL);
-			return null;
-		} else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
+    public IElementType processQuoteLikeQuote() {
+        charOpener = yytext().charAt(0);
+        forceQuote = true;
 
-		if (!isLastToken())
-			yybegin(LEX_QUOTE_LIKE_CHARS);
+        // fixme comment should work here i belive
+        if (charOpener == '#' && !allowSharpQuote) {
+            yypushback(1);
+            yybegin(YYINITIAL);
+            return null;
+        } else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
-		return QUOTE;
-	}
+        if (!isLastToken())
+            yybegin(LEX_QUOTE_LIKE_CHARS);
 
-	/**
-	 * Strings handler
-	 */
-	public IElementType processStringOpener()
-	{
-		isEscaped = false;
-		charOpener = charCloser = yytext().charAt(0);
-		pushState();
-		if (!isLastToken())
-			yybegin(LEX_QUOTE_LIKE_CHARS);
+        return QUOTE;
+    }
 
-		return getQuoteToken(charOpener);
-	}
+    /**
+     * Strings handler
+     */
+    public IElementType processStringOpener() {
+        isEscaped = false;
+        forceQuote = false;
+        charOpener = charCloser = yytext().charAt(0);
+        pushState();
+        if (!isLastToken())
+            yybegin(LEX_QUOTE_LIKE_CHARS);
 
-	public IElementType getQuoteToken(char quoteCharacter)
-	{
-		if (charOpener == '"')
-			return QUOTE_DOUBLE;
-		else if (charOpener == '`')
-			return QUOTE_TICK;
-		else if (charOpener == '\'')
-			return QUOTE_SINGLE;
-		else
-			return QUOTE;
+        return getQuoteToken(charOpener);
+    }
 
-	}
+    public IElementType getQuoteToken(char quoteCharacter) {
+        if (forceQuote) // fixme this must be refactored
+            return QUOTE;
+        else if (charOpener == '"')
+            return QUOTE_DOUBLE;
+        else if (charOpener == '`')
+            return QUOTE_TICK;
+        else if (charOpener == '\'')
+            return QUOTE_SINGLE;
+        else
+            return QUOTE;
 
-	/**
-	 * Quote-like list procesors
-	 **/
+    }
 
-	public void processQuoteLikeListOpener()
-	{
-		allowSharpQuote = true;
-		pushState();
-		yybegin(LEX_QUOTE_LIKE_LIST_OPENER);
-	}
+    /**
+     * Quote-like list procesors
+     **/
 
-	public IElementType processQuoteLikeListQuote()
-	{
-		charOpener = yytext().charAt(0);
+    public void processQuoteLikeListOpener() {
+        allowSharpQuote = true;
+        pushState();
+        yybegin(LEX_QUOTE_LIKE_LIST_OPENER);
+    }
 
-		if (charOpener == '#' && !allowSharpQuote)
-		{
-			yypushback(1);
-			yybegin(YYINITIAL);
-			return null;
-		} else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
+    public IElementType processQuoteLikeListQuote() {
+        charOpener = yytext().charAt(0);
 
-		yybegin(LEX_QUOTE_LIKE_WORDS);
+        if (charOpener == '#' && !allowSharpQuote) {
+            yypushback(1);
+            yybegin(YYINITIAL);
+            return null;
+        } else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
-		return QUOTE;
-	}
+        yybegin(LEX_QUOTE_LIKE_WORDS);
 
-
-	public IElementType processQuoteLikeWord()
-	{
-		CharSequence currentToken = yytext();
-
-		isEscaped = false;
-
-		for (int i = 0; i < currentToken.length(); i++)
-		{
-			if (!isEscaped && currentToken.charAt(i) == charCloser)
-			{
-				yypushback(currentToken.length() - i);
-				yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);
-
-				return i == 0 ? null : STRING_CONTENT;
-			}
-
-			isEscaped = !isEscaped && currentToken.charAt(i) == '\\';
-		}
-		return STRING_CONTENT;
-	}
+        return QUOTE;
+    }
 
 
-	public boolean waitingHereDoc()
-	{
-		return yystate() == LEX_HEREDOC_WAITING;
-	}
+    public IElementType processQuoteLikeWord() {
+        CharSequence currentToken = yytext();
 
-	public IElementType processSemicolon()
-	{
-		if (!waitingHereDoc())
-			yybegin(YYINITIAL);
-		else
-		{
-			stateStack.pop();
-			stateStack.push(YYINITIAL);
-		}
-		return SEMICOLON;
-	}
+        isEscaped = false;
 
-	/**
-	 * Parses token as built-in variable
-	 */
-	public static Pattern variablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)(.+)$");
-	public static Pattern bracedVariablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)\\{(.+)\\}$");
+        for (int i = 0; i < currentToken.length(); i++) {
+            if (!isEscaped && currentToken.charAt(i) == charCloser) {
+                yypushback(currentToken.length() - i);
+                yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);
 
-	@Override
-	public IElementType parseBuiltInVariable()
-	{
+                return i == 0 ? null : STRING_CONTENT;
+            }
+
+            isEscaped = !isEscaped && currentToken.charAt(i) == '\\';
+        }
+        return STRING_CONTENT;
+    }
+
+
+    public boolean waitingHereDoc() {
+        return yystate() == LEX_HEREDOC_WAITING;
+    }
+
+    public IElementType processSemicolon() {
+        if (!waitingHereDoc())
+            yybegin(YYINITIAL);
+        else {
+            stateStack.pop();
+            stateStack.push(YYINITIAL);
+        }
+        return SEMICOLON;
+    }
+
+    /**
+     * Parses token as built-in variable
+     */
+    public static Pattern variablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)(.+)$");
+    public static Pattern bracedVariablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)\\{(.+)\\}$");
+
+    @Override
+    public IElementType parseBuiltInVariable() {
 //		if( !isLastToken() )
 //		yypushback(1);
 
-		String tokenText = yytext().toString();
-		int tokenStart = getTokenStart();
-		pushState();
-		yybegin(LEX_PREPARSED_ITEMS);
+        String tokenText = yytext().toString();
+        int tokenStart = getTokenStart();
+        pushState();
+        yybegin(LEX_PREPARSED_ITEMS);
 
-		tokensList.clear();
+        tokensList.clear();
 
-		Matcher m = bracedVariablePattern.matcher(tokenText);
-		if (m.matches())
-		{
-			String sigil = m.group(1);
-			String name = m.group(2);
+        Matcher m = bracedVariablePattern.matcher(tokenText);
+        if (m.matches()) {
+            String sigil = m.group(1);
+            String name = m.group(2);
 
-			tokenStart += sigil.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, LEFT_BRACE));
-			tokenStart++;
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
-			tokenStart += name.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, RIGHT_BRACE));
+            tokenStart += sigil.length();
+            tokensList.add(new CustomToken(tokenStart, tokenStart + 1, LEFT_BRACE));
+            tokenStart++;
+            tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
+            tokenStart += name.length();
+            tokensList.add(new CustomToken(tokenStart, tokenStart + 1, RIGHT_BRACE));
 
-			yypushback(tokenText.length() - sigil.length());
-			return getSigilTokenType(sigil);
-		}
+            yypushback(tokenText.length() - sigil.length());
+            return getSigilTokenType(sigil);
+        }
 
-		m = variablePattern.matcher(tokenText);
-		if (m.matches())
-		{
-			String sigil = m.group(1);
-			String name = m.group(2);
+        m = variablePattern.matcher(tokenText);
+        if (m.matches()) {
+            String sigil = m.group(1);
+            String name = m.group(2);
 
-			tokenStart += sigil.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
+            tokenStart += sigil.length();
+            tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
 
-			yypushback(tokenText.length() - sigil.length());
-			return getSigilTokenType(sigil);
-		}
+            yypushback(tokenText.length() - sigil.length());
+            return getSigilTokenType(sigil);
+        }
 
-		throw new RuntimeException("Unable to parse built-in variable: " + tokenText);
-	}
+        throw new RuntimeException("Unable to parse built-in variable: " + tokenText);
+    }
 
-	/**
-	 * Parser for $: variable
-	 * @return token type
-	 */
-	public IElementType parseFormatLineBreakCharacters()
-	{
-		yypushback(1);
-		return SIGIL_SCALAR;
-	}
+    /**
+     * Parser for $: variable
+     *
+     * @return token type
+     */
+    public IElementType parseFormatLineBreakCharacters() {
+        yypushback(1);
+        return SIGIL_SCALAR;
+    }
 
 
-	/**
-	 * Returns token type for sigil
-	 *
-	 * @param sigil sigli text
-	 * @return elementType
-	 */
-	public IElementType getSigilTokenType(String sigil)
-	{
-		IElementType tokenType;
+    /**
+     * Returns token type for sigil
+     *
+     * @param sigil sigli text
+     * @return elementType
+     */
+    public IElementType getSigilTokenType(String sigil) {
+        IElementType tokenType;
 
-		if ((tokenType = SIGIL_TOKENS_MAP.get(sigil)) != null)
-			return tokenType;
-		else
-			throw new RuntimeException("Unknown sigil: " + sigil);
-	}
+        if ((tokenType = SIGIL_TOKENS_MAP.get(sigil)) != null)
+            return tokenType;
+        else
+            throw new RuntimeException("Unknown sigil: " + sigil);
+    }
 
-	public IElementType guessColon()
-	{
-		if( lastUnbraceTokenType == SIGIL_SCALAR )
-			return IDENTIFIER;
+    public IElementType guessColon() {
+        if (lastUnbraceTokenType == SIGIL_SCALAR)
+            return IDENTIFIER;
 
-		return COLON;
-	}
+        return COLON;
+    }
 
-	@Override
-	public IElementType guessBitwiseXor()
-	{
-		if (lastUnbraceTokenType == SIGIL_SCALAR)
-			return IDENTIFIER;
-		return OPERATOR_BITWISE_XOR;
-	}
+    @Override
+    public IElementType guessBitwiseXor() {
+        if (lastUnbraceTokenType == SIGIL_SCALAR)
+            return IDENTIFIER;
+        return OPERATOR_BITWISE_XOR;
+    }
 
-	/**
-	 * Bareword parser, resolves built-ins and runs additional processings where it's necessary
-	 *
-	 * @return token type
-	 */
-	public IElementType getIdentifierToken()
-	{
-		String tokenText = yytext().toString();
-		IElementType tokenType = IDENTIFIER;
+    /**
+     * Bareword parser, resolves built-ins and runs additional processings where it's necessary
+     *
+     * @return token type
+     */
+    public IElementType getIdentifierToken() {
+        String tokenText = yytext().toString();
+        IElementType tokenType = IDENTIFIER;
 
-		if (
-				lastSignificantTokenType != OPERATOR_DEREFERENCE           // not kinda ..->if
-						&& !PRE_PACKAGE_TOKENS.contains(lastSignificantTokenType) // not use if...
-						&& !SIGILS_TOKENS.contains(lastUnbraceTokenType)          // not $if
-				)
-		{
-			if ((tokenType = namedOperators.get(tokenText)) != null)
-				return tokenType;
-			else if ((tokenType = reservedTokenTypes.get(tokenText)) != null)
-			{
-				if (tokenType == RESERVED_QW)
-					processQuoteLikeListOpener();
-				else if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
-					processTransOpener();
-				else if (tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
-					processQuoteLikeStringOpener();
-				else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
-					processRegexOpener();
-				else if (tokenType == RESERVED_SUB)
-				{
-					pushState();
-					yybegin(LEX_SUB_NAME);
-				}
-				return tokenType;
-			} else if ((tokenType = blockNames.get(tokenText)) != null)
-				return tokenType;
-			else if ((tokenType = tagNames.get(tokenText)) != null)
-				return tokenType;
-		}
+        if (
+                lastSignificantTokenType != OPERATOR_DEREFERENCE           // not kinda ..->if
+                        && !PRE_PACKAGE_TOKENS.contains(lastSignificantTokenType) // not use if...
+                        && !SIGILS_TOKENS.contains(lastUnbraceTokenType)          // not $if
+                ) {
+            if ((tokenType = namedOperators.get(tokenText)) != null)
+                return tokenType;
+            else if ((tokenType = reservedTokenTypes.get(tokenText)) != null) {
+                if (tokenType == RESERVED_QW)
+                    processQuoteLikeListOpener();
+                else if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
+                    processTransOpener();
+                else if (tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
+                    processQuoteLikeStringOpener();
+                else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
+                    processRegexOpener();
+                else if (tokenType == RESERVED_SUB) {
+                    pushState();
+                    yybegin(LEX_SUB_NAME);
+                }
+                return tokenType;
+            } else if ((tokenType = blockNames.get(tokenText)) != null)
+                return tokenType;
+            else if ((tokenType = tagNames.get(tokenText)) != null)
+                return tokenType;
+        }
 
-		return IDENTIFIER;
-	}
+        return IDENTIFIER;
+    }
 
-	// http://perldoc.perl.org/perldata.html#Identifier-parsing
-	private static final String reBasicIdentifier = "[_a-zA-Z][_a-zA-Z0-9]*"; // something strang in Java with unicode props
-	private static final String reSeparator =
-			"(?:" +
-					"(?:::)+'?" +
-					"|" +
-					"(?:::)*'" +
-					")";
-	private static final Pattern ambigousPackage = Pattern.compile(
-			"(" +
-					reSeparator + "?" +        // optional opening separator,
-					"(?:" +
-					reBasicIdentifier +
-					reSeparator +
-					")*" +
-					")" +
-					"(" +
-					reBasicIdentifier +
-					")"
-	);
+    // http://perldoc.perl.org/perldata.html#Identifier-parsing
+    private static final String reBasicIdentifier = "[_a-zA-Z][_a-zA-Z0-9]*"; // something strang in Java with unicode props
+    private static final String reSeparator =
+            "(?:" +
+                    "(?:::)+'?" +
+                    "|" +
+                    "(?:::)*'" +
+                    ")";
+    private static final Pattern ambigousPackage = Pattern.compile(
+            "(" +
+                    reSeparator + "?" +        // optional opening separator,
+                    "(?:" +
+                    reBasicIdentifier +
+                    reSeparator +
+                    ")*" +
+                    ")" +
+                    "(" +
+                    reBasicIdentifier +
+                    ")"
+    );
 
+    private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<>(Arrays.asList(
+            "qw",
+            "qr",
+            "qx",
+            "qq",
+            "tr",
+            "m",
+            "q",
+            "s",
+            "y"
+    ));
 
-	/**
-	 * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER
-	 *
-	 * @return token type
-	 */
-	public IElementType parsePackage()
-	{
-		String tokenText = yytext().toString();
+    /**
+     * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER
+     *
+     * @return token type
+     */
+    public IElementType parsePackage() {
+        String tokenText = yytext().toString();
 
-		Matcher m = ambigousPackage.matcher(tokenText);
-		if (m.matches())
-		{
-			String packageIdentifier = m.group(1);
-			String identifier = m.group(2);
+        // check if it's qw|qr|qx|qq|tr|m|q|s|y'
+        if (tokenText.length() > 3 && tokenText.charAt(2) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.substring(0, 2))) {
+            yypushback(tokenText.length() - 2);
+            return getIdentifierToken();
+        } else if (tokenText.length() > 2 && tokenText.charAt(1) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.substring(0, 1))) {
+            yypushback(tokenText.length() - 1);
+            return getIdentifierToken();
+        }
 
-			tokensList.clear();
-			pushState();
-			int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
-			tokensList.add(new CustomToken(packageIdentifierEnd, getTokenEnd(), IDENTIFIER));
-			yybegin(LEX_PREPARSED_ITEMS);
-			setTokenEnd(packageIdentifierEnd);
+        Matcher m = ambigousPackage.matcher(tokenText);
+        if (m.matches()) {
+            String packageIdentifier = m.group(1);
+            String identifier = m.group(2);
 
-			return PACKAGE_IDENTIFIER;
+            tokensList.clear();
+            pushState();
+            int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
+            tokensList.add(new CustomToken(packageIdentifierEnd, getTokenEnd(), IDENTIFIER));
+            yybegin(LEX_PREPARSED_ITEMS);
+            setTokenEnd(packageIdentifierEnd);
 
-		} else
-			throw new RuntimeException("Inappropriate package name " + tokenText);
-	}
+            return PACKAGE_IDENTIFIER;
 
-	private Character getNextCharacter()
-	{
-		int currentPosition = getTokenEnd();
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-		if (currentPosition < bufferEnd)
-			return buffer.charAt(currentPosition);
-		return null;
-	}
+        } else
+            throw new RuntimeException("Inappropriate package name " + tokenText);
+    }
 
-	private Character getNextSignificantCharacter()
-	{
-		int currentPosition = getTokenEnd();
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
+    private Character getNextCharacter() {
+        int currentPosition = getTokenEnd();
+        int bufferEnd = getBufferEnd();
+        CharSequence buffer = getBuffer();
+        if (currentPosition < bufferEnd)
+            return buffer.charAt(currentPosition);
+        return null;
+    }
 
-		while (currentPosition < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentPosition);
-			if (currentChar == '#')
-			{
-				while (currentPosition < bufferEnd)
-				{
-					if (buffer.charAt(currentPosition) == '\n')
-						break;
-					currentPosition++;
-				}
-			} else if (!Character.isWhitespace(currentChar))
-				return currentChar;
+    private Character getNextSignificantCharacter() {
+        int currentPosition = getTokenEnd();
+        int bufferEnd = getBufferEnd();
+        CharSequence buffer = getBuffer();
 
-			currentPosition++;
-		}
-		return null;
-	}
+        while (currentPosition < bufferEnd) {
+            char currentChar = buffer.charAt(currentPosition);
+            if (currentChar == '#') {
+                while (currentPosition < bufferEnd) {
+                    if (buffer.charAt(currentPosition) == '\n')
+                        break;
+                    currentPosition++;
+                }
+            } else if (!Character.isWhitespace(currentChar))
+                return currentChar;
+
+            currentPosition++;
+        }
+        return null;
+    }
 
 }

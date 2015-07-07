@@ -1,3 +1,50 @@
+
+
+qw/testing/;
+qw#testing#;
+qw'testing testing';
+qw{testing testing};
+
+qr'testing';
+qr#testing#;
+qr/testing/;
+qr{testing};
+
+qx/testing/;
+qx'testing';
+qx#testing#;
+qx{testing};
+
+qq/testing/;
+qq'testing';
+qq#'testing#;
+qq{testing};
+
+q/testing/;
+q'testing';
+q#testing#;
+q{testing};
+
+tr'testing'testing';
+tr#testing#testing#;
+tr/testing/testing/;
+tr{testing}{testing};
+
+y'testing'testing';
+y#testing#testing#;
+y/testing/testing/;
+y{testing}{testing};
+
+m'testing';
+m#testing#;
+m{testing};
+m/testing/;
+
+s'testing'testing';
+s#testing#testing#;
+s/testing/testing/;
+s{testing}{testing};
+
 SOMELABEL: {
     last SOMELABEL;
 }
@@ -10,7 +57,7 @@ s/234234/$$/e;
 
 Foo::Bar;
 
-Foo::bar; 
+Foo::bar;
 
 Foo::bar baz;
 
@@ -40,6 +87,30 @@ $self->SUPER::method;
 Foo::Bar->something;
 
 BEGIN {
+    print "something";
+}
+
+UNITCHECK {
+    print "something";
+}
+
+CHECK {
+    print "something";
+}
+
+INIT {
+    print "something";
+}
+
+END {
+    print "something";
+}
+
+AUTOLOAD {
+    print "something";
+}
+
+DESTROY {
     print "something";
 }
 
