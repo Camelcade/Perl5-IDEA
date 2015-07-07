@@ -82,7 +82,7 @@ print if defined $abc;
 
 $abc->{cde} = 2;
 
-$self->SUPER::method;
+$self->SUPER::method();
 
 Foo::Bar->something;
 
@@ -120,7 +120,7 @@ $abc = 1 and 2;
 
 open (IF, 'something');
 open IF, 'something';
-open Foo->method();
+open Foo::->method();
 open Foo::method();
 
 somesub IF, blah;
@@ -133,6 +133,7 @@ print OF(1,2,3);
 print sprintf "here we go";
 print Foo->method();
 print Foo::method();
+print Foo::->method();
 print method, "text";
 
 my @list = <IF>;
