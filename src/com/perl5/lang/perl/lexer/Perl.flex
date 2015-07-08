@@ -73,7 +73,8 @@ HEREDOC_CLOSER = [^\f\r\n]
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
-BUILT_IN_SCALAR_NAME = [1-9][0-9]*|"\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["
+GLOBBED_SCALAR_NAME = "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["
+BUILT_IN_SCALAR_NAME = [1-9][0-9]*|{GLOBBED_SCALAR_NAME}
 PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} )
 
 BUILT_IN_ARRAY_NAME = "!"|"+"|"-"|"_"
@@ -82,6 +83,9 @@ PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRA
 
 BUILT_IN_HASH_NAME = "!"|"+"|"-"
 PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
+
+BUILT_IN_GLOB_NAME = {GLOBBED_SCALAR_NAME} | "$"
+PERL_GLOB_BUILT_IN = "*"("{" {BUILT_IN_GLOB_NAME} "}" | {BUILT_IN_GLOB_NAME} )
 
 PACKAGE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) * {IDENTIFIER} "::" +
 PACKAGE_PARSABLE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) + {IDENTIFIER}
@@ -308,7 +312,7 @@ TRANS_MODIFIERS = [cdsr]
 "-=" {return OPERATOR_MINUS_ASSIGN;}
 ".=" {return OPERATOR_CONCAT_ASSIGN;}
 
-"*=" {return OPERATOR_MUL_ASSIGN;}
+//"*=" {return OPERATOR_MUL_ASSIGN;} // parse builtInGlob
 // "/=" {return OPERATOR_DIV_ASSIGN;}   // guessDiv
 "%=" {return OPERATOR_MOD_ASSIGN;}
 "x=" {return checkOperatorXAssign();}
@@ -372,6 +376,7 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_ARRAY_BUILT_IN}       {return parseBuiltInVariable();}
 {PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}
 {PERL_HASH_BUILT_IN}        {return parseBuiltInVariable();}
+{PERL_GLOB_BUILT_IN}        {return parseBuiltInGlob();}
 
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
 

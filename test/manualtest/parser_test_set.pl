@@ -1,4 +1,89 @@
 
+# The ground of all being.
+
+	*ARG					= *_	;
+
+# Matching.
+
+	*LAST_PAREN_MATCH			= *+	;
+	*LAST_SUBMATCH_RESULT			= *^N ;
+	*LAST_MATCH_START			= *-{ARRAY} ;
+	*LAST_MATCH_END				= *+{ARRAY} ;
+
+# Input.
+
+	*INPUT_LINE_NUMBER			= *.	;
+	    *NR					= *.	;
+	*INPUT_RECORD_SEPARATOR			= */	;
+	    *RS					= */	;
+
+# Output.
+
+	*OUTPUT_AUTOFLUSH			= *|	;
+	*OUTPUT_FIELD_SEPARATOR			= *,	;
+	    *OFS				= *,	;
+	*OUTPUT_RECORD_SEPARATOR		= *\	;
+	    *ORS				= *\	;
+
+# Interpolation "constants".
+
+	*LIST_SEPARATOR				= *"	;
+	*SUBSCRIPT_SEPARATOR			= *;	;
+	    *SUBSEP				= *;	;
+
+# Formats
+
+	*FORMAT_PAGE_NUMBER			= *%	;
+	*FORMAT_LINES_PER_PAGE			= *=	;
+	my $abc *= 123;
+	*FORMAT_LINES_LEFT			= *-	;
+	*FORMAT_NAME				= *~	;
+	*FORMAT_TOP_NAME			= *^	;
+	*FORMAT_LINE_BREAK_CHARACTERS		= *:	;
+	*FORMAT_FORMFEED			= *^L	;
+
+# Error status.
+
+	*CHILD_ERROR				= *?	;
+	*OS_ERROR				= *!	;
+	    *ERRNO				= *!	;
+	*OS_ERROR				= *!	;
+	    *ERRNO				= *!	;
+	*EXTENDED_OS_ERROR			= *^E	;
+	*EVAL_ERROR				= *@	;
+
+# Process info.
+
+	*PROCESS_ID				= *$	;
+	    *PID				= *$	;
+    $abc*$abc;
+	*REAL_USER_ID				= *<	;
+	    *UID				= *<	;
+	*EFFECTIVE_USER_ID			= *>	;
+	    *EUID				= *>	;
+	*REAL_GROUP_ID				= *(	;
+	    *GID				= *(	;
+	*EFFECTIVE_GROUP_ID			= *)	;
+	    *EGID				= *)	;
+	*PROGRAM_NAME				= *0	;
+
+# Internals.
+
+	*PERL_VERSION				= *^V	;
+	*OLD_PERL_VERSION			= *]	;
+	*ACCUMULATOR				= *^A	;
+	*COMPILING				= *^C	;
+	*DEBUGGING				= *^D	;
+	*SYSTEM_FD_MAX				= *^F	;
+	*INPLACE_EDIT				= *^I	;
+	*PERLDB					= *^P	;
+	*LAST_REGEXP_CODE_RESULT		= *^R	;
+	*EXCEPTIONS_BEING_CAUGHT		= *^S	;
+	*BASETIME				= *^T	;
+	*WARNING				= *^W	;
+	*EXECUTABLE_NAME			= *^X	;
+	*OSNAME					= *^O	;
+
 
 &method => 123;
 --something => 145;

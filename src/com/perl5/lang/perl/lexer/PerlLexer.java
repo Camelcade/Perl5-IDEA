@@ -1206,6 +1206,28 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public static Pattern variablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)(.+)$");
 	public static Pattern bracedVariablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)\\{(.+)\\}$");
 
+	/**
+	 * Here we should check for *=
+	 * @return
+	 */
+	@Override
+	public IElementType parseBuiltInGlob()
+	{
+		if( lastSignificantTokenType != OPERATOR_ASSIGN )
+		{
+			// fixme this hack is for English.pm, probably this should be done in parser with smart re-mapping
+			String tokenText = yytext().toString();
+			if ("*=".equals(tokenText))
+				return OPERATOR_MUL_ASSIGN;
+			else if ("*$".equals(tokenText))
+			{
+				yypushback(1);
+				return OPERATOR_MUL;
+			}
+		}
+		return parseBuiltInVariable();
+	}
+
 	@Override
 	public IElementType parseBuiltInVariable()
 	{
@@ -1291,7 +1313,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	@Override
 	public IElementType guessBitwiseXor()
 	{
-		if (lastUnbraceTokenType == SIGIL_SCALAR)
+		if (lastUnbraceTokenType == SIGIL_SCALAR || lastUnbraceTokenType == OPERATOR_MUL )
 			return IDENTIFIER;
 		return OPERATOR_BITWISE_XOR;
 	}

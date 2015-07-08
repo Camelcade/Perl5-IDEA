@@ -63,6 +63,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	 * @return sigil's token type
 	 */
 	public abstract IElementType parseBuiltInVariable();
+	public abstract IElementType parseBuiltInGlob();
 
 	public abstract IElementType processOpenerWhiteSpace();
 
