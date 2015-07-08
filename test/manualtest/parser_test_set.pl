@@ -1,3 +1,23 @@
+no warnings qw(once);
+local *alias = *$full_path;
+use warnings qw(once);
+
+# Copy innocent bystanders back.  Note that we lose
+# formats; it seems that Perl versions up to 5.10.0
+# have a bug which causes copying formats to end up in
+# the scalar slot.  Thanks to Ben Morrow for spotting this.
+
+my $oldglob;
+
+foreach my $slot (qw( SCALAR ARRAY HASH IO ) ) {
+    next unless defined *$oldglob{$slot};
+    *alias = *$oldglob{$slot};
+}
+my $sub_ref;
+
+if ($sub_ref) {
+    *$full_path = $sub_ref;
+}
 
 
 my $cde = $^];

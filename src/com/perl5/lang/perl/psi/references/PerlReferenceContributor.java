@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.*;
@@ -57,7 +58,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 				}
 		);
 		registrar.registerReferenceProvider(
-				VARIABLE_NAME_PATTERN.inside(VARIABLE_PATTERN),
+				VARIABLE_NAME_PATTERN.withParent(VARIABLE_PATTERN),
 				new PsiReferenceProvider()
 				{
 					@NotNull
@@ -72,7 +73,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 				}
 		);
 		registrar.registerReferenceProvider(
-				VARIABLE_NAME_PATTERN.inside(GLOB_PATTERN),
+				VARIABLE_NAME_PATTERN.withParent(GLOB_PATTERN),
 				new PsiReferenceProvider()
 				{
 					@NotNull
@@ -80,6 +81,10 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 					{
 						assert element instanceof PerlVariableNameElement;
+						// check if it's dereference
+						PsiElement parent = element.getParent();
+						assert parent instanceof PerlGlobVariable: "Got: " + parent.getClass() + " in " + parent.getText();
+
 						return new PsiReference[]{new PerlGlobVariableNameReference(element, new TextRange(0, element.getTextLength()))};
 					}
 				}

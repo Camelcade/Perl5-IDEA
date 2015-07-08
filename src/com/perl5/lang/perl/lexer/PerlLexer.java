@@ -1213,13 +1213,14 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	@Override
 	public IElementType parseBuiltInGlob()
 	{
-		if( lastSignificantTokenType != OPERATOR_ASSIGN )
+		String tokenText = yytext().toString();
+		// fixme this hack is for English.pm, probably this should be done in parser with smart re-mapping
+		if( lastSignificantTokenType != OPERATOR_ASSIGN && "*=".equals(tokenText))
+			return OPERATOR_MUL_ASSIGN;
+		else if ("*$".equals(tokenText) )
 		{
-			// fixme this hack is for English.pm, probably this should be done in parser with smart re-mapping
-			String tokenText = yytext().toString();
-			if ("*=".equals(tokenText))
-				return OPERATOR_MUL_ASSIGN;
-			else if ("*$".equals(tokenText))
+			Character nextCharacter = getNextCharacter();
+			if( nextCharacter != null && ( nextCharacter.equals('{')  || Character.isLetterOrDigit(nextCharacter)))
 			{
 				yypushback(1);
 				return OPERATOR_MUL;

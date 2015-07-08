@@ -99,6 +99,8 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		ResolveResult[] resolveResults = multiResolve(false);
 		if( resolveResults.length == 0)
 			return null;
+		else if( resolveResults.length == 1 )
+			return resolveResults[0].getElement();
 
 		for( ResolveResult resolveResult: resolveResults)
 			if( resolveResult.getElement() instanceof PerlGlobVariable)

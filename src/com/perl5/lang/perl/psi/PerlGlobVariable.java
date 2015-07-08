@@ -21,10 +21,17 @@ import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
 public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer, PerlNamedElement
 {
+	/**
+	 * Dumb getter for scalar sigils part, shows if it's pure type or some dereferences like @$$$var
+	 * @return scalar sigils if any
+	 */
+	@Nullable
+	PsiPerlScalarSigils getScalarSigils();
 }

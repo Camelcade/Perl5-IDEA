@@ -38,9 +38,16 @@ public class PerlGlobUtil implements PerlElementTypes
 			"STDERR",
 			"STDOUT",
 			"ARGVOUT",
-			"STDIN",
-			"_"
+			"STDIN"
 	));
+
+	static
+	{
+		BUILT_IN.addAll(PerlScalarUtilBuiltIn.BUILT_IN);
+		BUILT_IN.addAll(PerlSubUtilBuiltIn.BUILT_IN);
+		BUILT_IN.addAll(PerlArrayUtil.BUILT_IN);
+		BUILT_IN.addAll(PerlHashUtil.BUILT_IN);
+	}
 
 	/**
 	 * Searching project files for sub definitions by specific package and function name
