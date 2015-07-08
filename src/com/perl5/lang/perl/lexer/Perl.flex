@@ -73,7 +73,7 @@ HEREDOC_CLOSER = [^\f\r\n]
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
-GLOBBED_SCALAR_NAME = "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["
+GLOBBED_SCALAR_NAME = "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
 BUILT_IN_SCALAR_NAME = [1-9][0-9]*|{GLOBBED_SCALAR_NAME}
 PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} )
 

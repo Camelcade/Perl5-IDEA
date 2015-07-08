@@ -770,7 +770,7 @@ scalar_hash_element ::= scalar_variable ( LEFT_BRACE expr RIGHT_BRACE | braced_s
 scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
-    glob_variable                    // hash as is
+    glob_variable
     | <<sigilGlob>> LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
 
 private nested_element ::=
@@ -817,7 +817,7 @@ private scalar_constant ::=
     | TAG  // __PACKAGE__ etc.
     | string
 
-braced_string ::= <<parseBracedString>> // LEFT_BRACE STRING_CONTENT RIGHT_BRACE // <<convertIdentifier STRING_CONTENT>>
+braced_string ::= <<parseBracedString>>
 
 private array_constant ::=
     string_list
@@ -855,8 +855,8 @@ hash_variable ::= <<sigilHash>> [scalar_sigils] variable_body
 
 scalar_sigils ::= SIGIL_SCALAR+
 
-glob_variable ::= <<sigilGlob>> [scalar_sigils] variable_body [glob_slot_part]
-private glob_slot_part ::= ( LEFT_BRACE expr RIGHT_BRACE | braced_string )
+glob_variable ::= <<sigilGlob>> [scalar_sigils] variable_body [glob_slot]
+private glob_slot ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
 
 private variable_body ::=
     variable_body_braced

@@ -1,4 +1,8 @@
 
+
+my $cde = $^];
+$cde = $^[;
+
 # The ground of all being.
 
 	*ARG					= *_	;
