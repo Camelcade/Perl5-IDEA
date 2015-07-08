@@ -56,6 +56,8 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 
 	public abstract IElementType parseHeredocOpener();
 
+	public abstract IElementType parseBarewordMinus();
+
 	/**
 	 * Parses current token as a variable
 	 * @return sigil's token type

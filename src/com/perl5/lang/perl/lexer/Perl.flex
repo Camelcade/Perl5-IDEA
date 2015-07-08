@@ -66,7 +66,6 @@ IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 IDENTIFIER_BRACED = "{" {EMPTY_SPACE}* {IDENTIFIER} {EMPTY_SPACE}* "}"
 
 BAREWORD_MINUS = "-" * {IDENTIFIER}
-BAREWORD_STRING_COMMA = {BAREWORD_MINUS}{EMPTY_SPACE}*"=>"
 
 // bad solution, $scalar -function eats it
 ANYWORD = [^ \t\f\r\n]
@@ -133,7 +132,6 @@ TRANS_MODIFIERS = [cdsr]
 
 %xstate LEX_BRACED_IDENTIFIER
 
-%xstate LEX_BAREWORD_STRING_COMMA
 %state LEX_HTML_BLOCK
 %%
 
@@ -151,13 +149,6 @@ TRANS_MODIFIERS = [cdsr]
 //exclusive
 <LEX_HEREDOC_MARKER>{
     {HEREDOC_CLOSER}+   {popState();return HEREDOC_END;}
-}
-
-// exclusive
-<LEX_BAREWORD_STRING_COMMA>
-{
-    {BAREWORD_MINUS}   {return endBarewordStringComma(); }
-    . {yypushback(1);endCustomBlock();break;}
 }
 
 
@@ -382,13 +373,12 @@ TRANS_MODIFIERS = [cdsr]
 {PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}
 {PERL_HASH_BUILT_IN}        {return parseBuiltInVariable();}
 
-{BAREWORD_STRING_COMMA} {startCustomBlock(LEX_BAREWORD_STRING_COMMA);break;}
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
 
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
 {IDENTIFIER_BRACED} {startCustomBlock(LEX_BRACED_IDENTIFIER);break;}
-{IDENTIFIER} { return getIdentifierToken();}
+{BAREWORD_MINUS} {return parseBarewordMinus();}
 {PACKAGE_PARSABLE} {return parsePackage(); }
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}
 {PACKAGE} {return PACKAGE_IDENTIFIER;}

@@ -28,6 +28,15 @@ import java.util.HashSet;
  */
 public interface LexerDetectionSets extends PerlElementTypes
 {
+	// pre-variable name tokens
+	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
+			SIGIL_ARRAY,
+			SIGIL_SCALAR,
+			SIGIL_SCALAR_INDEX,
+			OPERATOR_MOD,    // same token for hash sigil
+			OPERATOR_MUL    // same token for glob sigil
+	);
+
 	// we should not check bareword for reserved tokens if following was before
 	public static final TokenSet PRE_PACKAGE_TOKENS = TokenSet.create(
 			RESERVED_USE,
@@ -39,6 +48,15 @@ public interface LexerDetectionSets extends PerlElementTypes
 			RESERVED_LOCAL
 	);
 
+	// prefixes, disables identifier interpretation attempt
+	public static final TokenSet IDENTIFIER_NEGATION_PREFIX = TokenSet.orSet(
+			PRE_PACKAGE_TOKENS,
+			SIGILS_TOKENS,
+			TokenSet.create(
+					OPERATOR_DEREFERENCE,    // ->identifier
+					OPERATOR_BITWISE_AND    // &identifier
+			)
+	);
 
 	// operators tokens (except commas)
 	public static final TokenSet OPERATORS_TOKENSET = TokenSet.create(
@@ -174,14 +192,6 @@ public interface LexerDetectionSets extends PerlElementTypes
 			HEREDOC_END
 	);
 
-	// pre-variable name tokens
-	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
-			SIGIL_ARRAY,
-			SIGIL_SCALAR,
-			SIGIL_SCALAR_INDEX,
-			OPERATOR_MOD,    // same token for hash sigil
-			OPERATOR_MUL    // same token for glob sigil
-	);
 
 
 }

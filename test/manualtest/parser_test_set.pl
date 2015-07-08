@@ -1,5 +1,10 @@
 
 
+&method => 123;
+--something => 145;
+-something => 123;
+$self->method => something;
+
 print <<'!END!';
 Test from perl lib
 !END!
@@ -34,6 +39,11 @@ sub while{}
 &eval;
 &while;
 &if;
+*eval;
+
+my $abcd = {
+    --test => something
+};
 
 print sprintf "here we go";
 

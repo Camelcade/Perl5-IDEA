@@ -25,6 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.PerlParserUitl;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
+import javax.print.DocFlavor;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
@@ -1295,6 +1296,32 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return OPERATOR_BITWISE_XOR;
 	}
 
+
+	/**
+	 * Parses IDENTIFIER =>
+	 * can be string_content => or ->identifier
+	 * @return token type
+	 */
+	public IElementType parseBarewordMinus()
+	{
+		String tokenText = yytext().toString();
+
+		if(!IDENTIFIER_NEGATION_PREFIX.contains(lastUnbraceTokenType) && isCommaArrowAhead())
+			return STRING_CONTENT;
+		else if( tokenText.startsWith("--"))
+		{
+			yypushback(tokenText.length()-2);
+			return OPERATOR_MINUS_MINUS;
+		}
+		else if( tokenText.startsWith("-"))
+		{
+			yypushback(tokenText.length()-1);
+			return OPERATOR_MINUS;
+		}
+
+		return getIdentifierToken();
+	}
+
 	/**
 	 * Bareword parser, resolves built-ins and runs additional processings where it's necessary
 	 *
@@ -1305,12 +1332,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		String tokenText = yytext().toString();
 		IElementType tokenType = IDENTIFIER;
 
-		if (
-				lastSignificantTokenType != OPERATOR_DEREFERENCE           // not kinda ..->if
-						&& lastSignificantTokenType != OPERATOR_BITWISE_AND           // not kinda &eval
-						&& !PRE_PACKAGE_TOKENS.contains(lastSignificantTokenType) // not use if...
-						&& !SIGILS_TOKENS.contains(lastUnbraceTokenType)          // not $if
-				)
+		if (!IDENTIFIER_NEGATION_PREFIX.contains(lastUnbraceTokenType))
 		{
 			if ((tokenType = namedOperators.get(tokenText)) != null)
 				return tokenType;
@@ -1440,10 +1462,27 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					nextChar == ','
 							|| nextChar == ';'
 							|| nextChar == ')'
-							|| buffer.charAt(nextPosition) == '='
+							|| nextChar == '='
 							&& nextPosition + 1 < buffer.length()
 							&& buffer.charAt(nextPosition + 1) == '>'
 					)
+				return true;
+		}
+		return false;
+	}
+
+	// checks if ahead is =>
+	private boolean isCommaArrowAhead()
+	{
+		int nextPosition = getNextSignificantCharacterPosition(getTokenEnd());
+		if (nextPosition > -1)
+		{
+			CharSequence buffer = getBuffer();
+			if (
+				buffer.charAt(nextPosition) == '='
+				&& nextPosition + 1 < buffer.length()
+				&& buffer.charAt(nextPosition + 1) == '>'
+			)
 				return true;
 		}
 		return false;
@@ -1479,6 +1518,5 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 		return -1;
 	}
-
 
 }
