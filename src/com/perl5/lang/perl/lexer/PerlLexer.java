@@ -187,6 +187,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		int tokenStart = getTokenEnd();
 		int bufferEnd = buffer.length();
 
+
+		if (bufferEnd == 0 || tokenStart >= bufferEnd )
+			return null;
+
+
 		if (bufferEnd > 0 && tokenStart < bufferEnd)
 		{
 			int currentState = yystate();
@@ -292,7 +297,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			{
 				if( currentWordStart < currentPosition )
 					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
-				tokensList.add(new CustomToken(currentPosition, currentPosition + 1, QUOTE));
+
+				currentWordStart = currentPosition;
+				currentPosition++;
+				currentWordType = QUOTE;
 				break;
 			}
 			else if( currentChar == '\n' || !isEscaped && Character.isSpaceChar(currentChar))	// atm no difference between space and \n tokens; \n unescapable
@@ -326,6 +334,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			isEscaped = !isEscaped && currentChar == '\\';
 			currentPosition++;
 		}
+
+		if( currentWordStart < currentPosition )
+			tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
 
 		assert tokensList.size() > 0;
 		yybegin(LEX_PREPARSED_ITEMS);
