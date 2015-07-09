@@ -650,23 +650,23 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 //		else
 		blockType = HEREDOC;
 
-		String endPattern = "^" + heredocMarker + "[\r\n]+";
-
 		while (true)
 		{
 			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
-			{
 				linePos++;
-			}
+			int lineContentsEnd = linePos;
+
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
 				linePos++;
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
 				linePos++;
 
 			// reached the end of heredoc and got end marker
-			if (Pattern.matches(endPattern, buffer.subSequence(currentPosition, linePos)))
+			if (heredocMarker.equals(buffer.subSequence(currentPosition, lineContentsEnd).toString()))
 			{
-				yybegin(LEX_HEREDOC_MARKER);
+				tokensList.clear();
+				tokensList.add(new CustomToken(currentPosition, lineContentsEnd, HEREDOC_END));
+				yybegin(LEX_PREPARSED_ITEMS);
 
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)
@@ -677,7 +677,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				}
 				// empty heredoc and got the end
 				else
-					return null;
+					return getPreParsedToken();
 			}
 			// reached the end of file
 			else if (linePos == bufferEnd)

@@ -67,9 +67,6 @@ IDENTIFIER_BRACED = "{" {EMPTY_SPACE}* {IDENTIFIER} {EMPTY_SPACE}* "}"
 
 BAREWORD_MINUS = "-" * {IDENTIFIER}
 
-// bad solution, $scalar -function eats it
-HEREDOC_CLOSER = [^\f\r\n]
-
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
 GLOBBED_SCALAR_NAME = "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
@@ -120,7 +117,6 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 %state LEX_CODE
 
 %state LEX_HEREDOC_WAITING
-%xstate LEX_HEREDOC_MARKER
 
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
 %xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS
@@ -146,12 +142,6 @@ TRANS_MODIFIERS = [cdsr]
     {IDENTIFIER} {return IDENTIFIER;}
     {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
     {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-}
-
-
-//exclusive
-<LEX_HEREDOC_MARKER>{
-    {HEREDOC_CLOSER}+   {popState();return HEREDOC_END;}
 }
 
 

@@ -1,4 +1,14 @@
 
+my $text = <<'=end';
+
+=pod
+
+some pod document
+
+=end
+
+
+
 $_something;
 @_something;
 %_something;
