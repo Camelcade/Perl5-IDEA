@@ -69,20 +69,6 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
-GLOBBED_SCALAR_NAME = "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
-BUILT_IN_SCALAR_NAME = [1-9][0-9]*|{GLOBBED_SCALAR_NAME}
-PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} )
-
-BUILT_IN_ARRAY_NAME = "!"|"+"|"-"
-PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
-PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
-
-BUILT_IN_HASH_NAME = "!"|"+"|"-"
-PERL_HASH_BUILT_IN = "%" ("{" {BUILT_IN_HASH_NAME} "}" | {BUILT_IN_HASH_NAME} )
-
-BUILT_IN_GLOB_NAME = {GLOBBED_SCALAR_NAME} | "$"
-PERL_GLOB_BUILT_IN = "*"("{" {BUILT_IN_GLOB_NAME} "}" | {BUILT_IN_GLOB_NAME} )
-
 PACKAGE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) * {IDENTIFIER} "::" +
 PACKAGE_PARSABLE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) + {IDENTIFIER}
 PACKAGE_SHORT = "::"+ "'" ?
@@ -97,6 +83,7 @@ PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
 
 NUMBER_EXP = [eE][+-]?[0-9_]+
 NUMBER_FLOAT = "." [0-9][0-9_]*
+NUMBER_INT_SIMPLE = [0-9]+
 NUMBER_INT = [0-9][0-9_] *  {NUMBER_FLOAT}? {NUMBER_EXP}?
 NUMBER_SMALL = {NUMBER_FLOAT}{NUMBER_EXP}?
 NUMBER_HEX = "0x" [0-9a-fA-F]+
@@ -266,7 +253,7 @@ TRANS_MODIFIERS = [cdsr]
 
 "++" {return OPERATOR_PLUS_PLUS;}
 "--" {return OPERATOR_MINUS_MINUS;}
-"**" {return OPERATOR_POW;}
+// "**" {return OPERATOR_POW;} // $* supported prior to 5.10
 
 "=~" {return OPERATOR_RE;}
 "!~" {return OPERATOR_NOT_RE;}
@@ -286,13 +273,13 @@ TRANS_MODIFIERS = [cdsr]
 "-=" {return OPERATOR_MINUS_ASSIGN;}
 ".=" {return OPERATOR_CONCAT_ASSIGN;}
 
-//"*=" {return OPERATOR_MUL_ASSIGN;} // parse builtInGlob
+//"*=" {return OPERATOR_MUL_ASSIGN;} // moved to parser
 // "/=" {return OPERATOR_DIV_ASSIGN;}   // guessDiv
-"%=" {return OPERATOR_MOD_ASSIGN;}
-"x=" {return checkOperatorXAssign();}
-{X_OP_STICKED} {return checkOperatorXSticked();}
+"%=" {return OPERATOR_MOD_ASSIGN;}  // fixme we can split this too
+"x=" {return checkOperatorXAssign();} // fixme split this ?
+{X_OP_STICKED} {return checkOperatorXSticked();} // fixme split this ?
 
-"&=" {return OPERATOR_BITWISE_AND_ASSIGN;}
+"&=" {return OPERATOR_BITWISE_AND_ASSIGN;}  // fixme split this ?
 "|=" {return OPERATOR_BITWISE_OR_ASSIGN;}
 "^=" {return OPERATOR_BITWISE_XOR_ASSIGN;}
 
@@ -303,8 +290,8 @@ TRANS_MODIFIERS = [cdsr]
 "||=" {return OPERATOR_OR_ASSIGN;}
 "//=" {return OPERATOR_OR_DEFINED_ASSIGN;}
 
-"?"  {trenarCounter++;return OPERATOR_TRENAR_IF;}
-":"  {return guessColon();}
+"?"  {return QUESTION;}
+":"  {return COLON;}
 
 "\\" {return OPERATOR_REFERENCE;}
 
@@ -321,14 +308,14 @@ TRANS_MODIFIERS = [cdsr]
 "&" {return OPERATOR_BITWISE_AND;}
 
 "|" {return OPERATOR_BITWISE_OR;}
-"^" {return guessBitwiseXor();}
+"^" {return OPERATOR_BITWISE_XOR;}
 "~" {return OPERATOR_BITWISE_NOT;}
 
 "=" {return OPERATOR_ASSIGN;}
 
 "@" {return SIGIL_ARRAY;}
 "$#" {return SIGIL_SCALAR_INDEX;}
-"$"+ { return parseScalarSigils(); }
+"$" { return SIGIL_SCALAR; }
 
 "{"             {return LEFT_BRACE;}
 "}"             {return RIGHT_BRACE;}
@@ -337,20 +324,12 @@ TRANS_MODIFIERS = [cdsr]
 "("             {return LEFT_PAREN;}
 ")"             {return RIGHT_PAREN;}
 
-
+{NUMBER_INT_SIMPLE} {return NUMBER_SIMPLE;}
 {NUMBER}        {return NUMBER;}
 {PERL_VERSION}  {return NUMBER_VERSION;}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 
-
-"${$}" { return parseBuiltInVariable();}
-"$:"    { return parseFormatLineBreakCharacters(); }
-{PERL_SCALAR_BUILT_IN}      {return parseBuiltInVariable();}
-{PERL_ARRAY_BUILT_IN}       {return parseBuiltInVariable();}
-{PERL_ARRAY_INDEX_BUILT_IN} {return parseBuiltInVariable();}
-{PERL_HASH_BUILT_IN}        {return parseBuiltInVariable();}
-{PERL_GLOB_BUILT_IN}        {return parseBuiltInGlob();}
 
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
 

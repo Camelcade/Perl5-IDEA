@@ -67,6 +67,7 @@ limitations under the License.
     VERSION="VERSION"
     NUMBER_VERSION="NUMBER_VERSION"
     NUMBER="NUMBER"
+    NUMBER_SIMPLE="NUMBER_SIMPLE"
 
     RESERVED_IF="if"
     RESERVED_UNLESS="unless"
@@ -183,8 +184,8 @@ limitations under the License.
     OPERATOR_OR_ASSIGN="||="
     OPERATOR_OR_DEFINED_ASSIGN="//="
 
-    OPERATOR_TRENAR_IF="?"
-    OPERATOR_TRENAR_ELSE=":"
+    QUESTION="?"
+    COLON=":"
 
     OPERATOR_REFERENCE="\\"
 
@@ -235,8 +236,7 @@ limitations under the License.
     LEFT_ANGLE='LEFT_ANGLE'
     RIGHT_ANGLE='RIGHT_ANGLE'
 
-    SEMICOLON=';';
-    COLON=':';
+    SEMICOLON=";";
 
     QUOTE="\""
     QUOTE_DOUBLE="\""
@@ -572,7 +572,7 @@ private op_3_expr ::= pref_pp_expr | suff_pp_expr
 pref_pp_expr ::= (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS) expr
 suff_pp_expr ::= expr (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS)
 
-pow_expr ::= expr (OPERATOR_POW expr)+ { rightAssociative=true }
+pow_expr ::= expr (<<parseOperatorPow>> expr)+ { rightAssociative=true }
 
 private op_5_expr ::= ref_expr  | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
@@ -613,7 +613,7 @@ bitwise_or_xor_expr ::= expr ((OPERATOR_BITWISE_OR|OPERATOR_BITWISE_XOR) expr)+
 and_expr ::= expr (OPERATOR_AND expr)+
 or_expr ::= expr ((OPERATOR_OR|OPERATOR_OR_DEFINED) expr)+
 flipflop_expr ::= expr (OPERATOR_FLIP_FLOP|OPERATOR_HELLIP) expr
-trenar_expr ::= expr OPERATOR_TRENAR_IF scalar_expr COLON scalar_expr { rightAssociative=true }
+trenar_expr ::= expr QUESTION scalar_expr COLON scalar_expr { rightAssociative=true }
 
 private assign_or_flow_expr ::=
     assign_expr
@@ -627,7 +627,7 @@ assign_expr ::= expr ((
     |OPERATOR_POW_ASSIGN
     |OPERATOR_PLUS_ASSIGN
     |OPERATOR_MINUS_ASSIGN
-    |OPERATOR_MUL_ASSIGN
+    |<<parseMulAssign>>
     |OPERATOR_DIV_ASSIGN
     |OPERATOR_X_ASSIGN
     |OPERATOR_BITWISE_AND_ASSIGN
@@ -803,8 +803,8 @@ private referencable_method ::= <<sigilCode>>
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
-label_declaration ::= <<convertIdentifier LABEL>> COLON // do we need to change tokentype?
-private perl_version ::= NUMBER_VERSION | NUMBER
+label_declaration ::= <<parseLabelDeclaration>> // do we need to change tokentype?
+private perl_version ::= NUMBER_VERSION | NUMBER | NUMBER_SIMPLE // fixme convert to version
 private perl_handle ::=  LEFT_BRACE scalar_expr RIGHT_BRACE | immutable_expr
 perl_handle_expr ::= HANDLE
 
@@ -813,7 +813,8 @@ perl_handle_expr ::= HANDLE
 private scalar_constant ::=
     NUMBER
     | NUMBER_VERSION
-    | TAG  // __PACKAGE__ etc.
+    | NUMBER_SIMPLE
+    | TAG
     | string
 
 private array_constant ::=
@@ -842,6 +843,7 @@ string_list ::= RESERVED_QW QUOTE STRING_CONTENT * QUOTE
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
+// fixme last sigil can be a variable name
 array_index_variable ::= SIGIL_SCALAR_INDEX [scalar_sigils] variable_body
 
 scalar_variable ::= SIGIL_SCALAR [scalar_sigils] variable_body

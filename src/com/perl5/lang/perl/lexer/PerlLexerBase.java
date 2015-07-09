@@ -31,9 +31,6 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType processStringOpener();
 
 	public abstract IElementType guessDiv();
-	public abstract IElementType guessColon();
-	public abstract IElementType parseScalarSigils();
-	public abstract IElementType parseFormatLineBreakCharacters();
 
 	public abstract IElementType getIdentifierToken();
 
@@ -48,20 +45,11 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract void popState();
 	public abstract void pushState();
 
-	public abstract IElementType guessBitwiseXor();
-
 	public abstract IElementType processSemicolon();
 
 	public abstract IElementType parseHeredocOpener();
 
 	public abstract IElementType parseBarewordMinus();
-
-	/**
-	 * Parses current token as a variable
-	 * @return sigil's token type
-	 */
-	public abstract IElementType parseBuiltInVariable();
-	public abstract IElementType parseBuiltInGlob();
 
 	public abstract IElementType processOpenerWhiteSpace();
 

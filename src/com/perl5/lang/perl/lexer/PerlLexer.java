@@ -49,25 +49,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	protected IElementType lastUnparenTokenType;
 	protected String lastUnparenToken;
 
-	protected HashSet<String> knownPackages = new HashSet<>();
-	protected HashSet<String> knownHandles = new HashSet<>();
-	protected HashSet<String> knownSubs = new HashSet<>();
-	protected HashSet<String> knownLabels = new HashSet<>();
-
-
-	protected static final HashMap<String, IElementType> SIGIL_TOKENS_MAP = new HashMap<>();
-
-	static
-	{
-		SIGIL_TOKENS_MAP.put("$#", SIGIL_SCALAR_INDEX);
-		SIGIL_TOKENS_MAP.put("$", SIGIL_SCALAR);
-		SIGIL_TOKENS_MAP.put("@", SIGIL_ARRAY);
-		SIGIL_TOKENS_MAP.put("%", OPERATOR_MOD);
-		SIGIL_TOKENS_MAP.put("*", OPERATOR_MUL);
-		SIGIL_TOKENS_MAP.put("&", OPERATOR_BITWISE_AND);
-	}
-
-
 	public static final HashMap<String, IElementType> reservedTokenTypes = new HashMap<>();
 	public static final HashMap<String, IElementType> namedOperators = new HashMap<>();
 	public static final HashMap<String, IElementType> blockNames = new HashMap<>();
@@ -98,7 +79,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		blockNames.put("INIT", BLOCK_NAME);
 		blockNames.put("END", BLOCK_NAME);
 
-		// these added for built ins, not blocks, just subs
+		// these added for core packages, not blocks, just subs
 		blockNames.put("AUTOLOAD", BLOCK_NAME);
 		blockNames.put("DESTROY", BLOCK_NAME);
 
@@ -845,57 +826,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 	}
 
-	// this symbols after sigils means that it's just a sigil, not $$ variable
-	public static final HashSet<Character> SCALAR_SIGIL_SUFFIXES = new HashSet<>(Arrays.asList(
-			// fixme some of theese can't be dereferenced
-			// fixme need additional parsing for variables bodies (or, eat them right here)
-			'{', '^', '_' // ,'/','@'   ,'\"','\\','!','%','&','\'','(',')','+',',','-','.','0',';','<','=','>','[',']','`','|','~','?',':','*','['
-	));
-
-	/**
-	 * Decide if it's two sigils or variable name for $$
-	 *
-	 * @return token type
-	 */
-	public IElementType parseScalarSigils()
-	{
-		String tokenText = yytext().toString();
-		Character nextCharacter = getNextCharacter();
-
-		if (tokenText.length() > 1)    // may be sequential sigils or sequential sigils and built in $$
-		{
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-			tokensList.clear();
-
-			int tokenStart = getTokenStart();
-
-			if (nextCharacter != null
-					&& (
-					Character.isLetterOrDigit(nextCharacter)    // $$$$varname
-							|| SCALAR_SIGIL_SUFFIXES.contains(nextCharacter)
-			)
-					)
-			{
-				// just sigils
-				tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
-			} else
-			{
-				// sigils and $$
-				int tokenEnd = getTokenEnd();
-
-				if (tokenEnd - 1 > tokenStart + 1)
-					tokensList.add(new CustomToken(tokenStart + 1, tokenEnd - 1, SIGIL_SCALAR));
-				tokensList.add(new CustomToken(tokenEnd - 1, tokenEnd, VARIABLE_NAME));
-			}
-			setTokenEnd(tokenStart + 1);
-		} else if (lastSignificantTokenType == LEFT_BRACE && nextCharacter != null && nextCharacter.equals('}')) // for ${$}
-			return VARIABLE_NAME;
-
-		return SIGIL_SCALAR;
-	}
-
-
 	public IElementType checkOperatorXAssign()
 	{
 		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x=smth;
@@ -1180,12 +1110,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 */
 	public IElementType processStringOpener()
 	{
-		isEscaped = false;
-		forceQuote = false;
 		charOpener = charCloser = yytext().charAt(0);
-		pushState();
-		if (!isLastToken())
-			yybegin(LEX_QUOTE_LIKE_CHARS);
+		if( !(SIGILS_TOKENS.contains(lastUnbraceTokenType) && charOpener == '"')) // this is string, not variable name
+		{
+			isEscaped = false;
+			forceQuote = false;
+			pushState();
+			if (!isLastToken())
+				yybegin(LEX_QUOTE_LIKE_CHARS);
+		}
 
 		return getQuoteToken(charOpener);
 	}
@@ -1249,126 +1182,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 		return SEMICOLON;
 	}
-
-	/**
-	 * Parses token as built-in variable
-	 */
-	public static Pattern variablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)(.+)$");
-	public static Pattern bracedVariablePattern = Pattern.compile("^(\\$#|\\$|@|%|\\*)\\{(.+)\\}$");
-
-	/**
-	 * Here we should check for *=
-	 * @return
-	 */
-	@Override
-	public IElementType parseBuiltInGlob()
-	{
-		String tokenText = yytext().toString();
-		// fixme this hack is for English.pm, probably this should be done in parser with smart re-mapping
-		if( lastSignificantTokenType != OPERATOR_ASSIGN && "*=".equals(tokenText))
-			return OPERATOR_MUL_ASSIGN;
-		else if ("*$".equals(tokenText) )
-		{
-			Character nextCharacter = getNextCharacter();
-			if( nextCharacter != null && ( nextCharacter.equals('{')  || nextCharacter.equals('_')  || Character.isLetterOrDigit(nextCharacter)))
-			{
-				yypushback(1);
-				return OPERATOR_MUL;
-			}
-		}
-		return parseBuiltInVariable();
-	}
-
-	@Override
-	public IElementType parseBuiltInVariable()
-	{
-//		if( !isLastToken() )
-//		yypushback(1);
-
-		String tokenText = yytext().toString();
-		int tokenStart = getTokenStart();
-		pushState();
-		yybegin(LEX_PREPARSED_ITEMS);
-
-		tokensList.clear();
-
-		Matcher m = bracedVariablePattern.matcher(tokenText);
-		if (m.matches())
-		{
-			String sigil = m.group(1);
-			String name = m.group(2);
-
-			tokenStart += sigil.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, LEFT_BRACE));
-			tokenStart++;
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
-			tokenStart += name.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + 1, RIGHT_BRACE));
-
-			yypushback(tokenText.length() - sigil.length());
-			return getSigilTokenType(sigil);
-		}
-
-		m = variablePattern.matcher(tokenText);
-		if (m.matches())
-		{
-			String sigil = m.group(1);
-			String name = m.group(2);
-
-			tokenStart += sigil.length();
-			tokensList.add(new CustomToken(tokenStart, tokenStart + name.length(), VARIABLE_NAME));
-
-			yypushback(tokenText.length() - sigil.length());
-			return getSigilTokenType(sigil);
-		}
-
-		throw new RuntimeException("Unable to parse built-in variable: " + tokenText);
-	}
-
-	/**
-	 * Parser for $: variable
-	 *
-	 * @return token type
-	 */
-	public IElementType parseFormatLineBreakCharacters()
-	{
-		yypushback(1);
-		return SIGIL_SCALAR;
-	}
-
-
-	/**
-	 * Returns token type for sigil
-	 *
-	 * @param sigil sigli text
-	 * @return elementType
-	 */
-	public IElementType getSigilTokenType(String sigil)
-	{
-		IElementType tokenType;
-
-		if ((tokenType = SIGIL_TOKENS_MAP.get(sigil)) != null)
-			return tokenType;
-		else
-			throw new RuntimeException("Unknown sigil: " + sigil);
-	}
-
-	public IElementType guessColon()
-	{
-		if (lastUnbraceTokenType == SIGIL_SCALAR)
-			return IDENTIFIER;
-
-		return COLON;
-	}
-
-	@Override
-	public IElementType guessBitwiseXor()
-	{
-		if (lastUnbraceTokenType == SIGIL_SCALAR || lastUnbraceTokenType == OPERATOR_MUL )
-			return IDENTIFIER;
-		return OPERATOR_BITWISE_XOR;
-	}
-
 
 	/**
 	 * Parses IDENTIFIER =>

@@ -121,7 +121,7 @@ public interface LexerDetectionSets extends PerlElementTypes
 			OPERATOR_OR_ASSIGN,
 			OPERATOR_OR_DEFINED_ASSIGN,
 
-			OPERATOR_TRENAR_IF,
+			QUESTION,
 			COLON,
 
 			OPERATOR_REFERENCE,
