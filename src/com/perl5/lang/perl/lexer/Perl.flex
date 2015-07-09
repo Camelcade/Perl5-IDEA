@@ -76,7 +76,7 @@ GLOBBED_SCALAR_NAME = "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|
 BUILT_IN_SCALAR_NAME = [1-9][0-9]*|{GLOBBED_SCALAR_NAME}
 PERL_SCALAR_BUILT_IN = "$" ("{" {BUILT_IN_SCALAR_NAME} "}" | {BUILT_IN_SCALAR_NAME} )
 
-BUILT_IN_ARRAY_NAME = "!"|"+"|"-"|"_"
+BUILT_IN_ARRAY_NAME = "!"|"+"|"-"
 PERL_ARRAY_BUILT_IN = "@" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
 PERL_ARRAY_INDEX_BUILT_IN = "$#" ("{" {BUILT_IN_ARRAY_NAME} "}" | {BUILT_IN_ARRAY_NAME} )
 

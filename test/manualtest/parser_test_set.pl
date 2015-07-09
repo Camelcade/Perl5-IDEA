@@ -1,4 +1,9 @@
 
+$_something;
+@_something;
+%_something;
+*_something;
+
 @B::specialsv_name = qw(Nullsv &PL_sv_undef &PL_sv_yes &PL_sv_no
             (SV*)pWARN_ALL (SV*)pWARN_NONE (SV*)pWARN_STD);
 
