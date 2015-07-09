@@ -542,7 +542,7 @@ grep_expr ::= RESERVED_GREP grep_map_arguments {pin=1}
 map_expr ::= RESERVED_MAP grep_map_arguments {pin=1}
 
 private grep_map_arguments ::=
-    LEFT_PAREN grep_map_arguments RIGHT_PAREN !LEFT_BRACKET
+    LEFT_PAREN grep_map_arguments_ RIGHT_PAREN !LEFT_BRACKET
     | grep_map_arguments_
 
 private grep_map_arguments_ ::=

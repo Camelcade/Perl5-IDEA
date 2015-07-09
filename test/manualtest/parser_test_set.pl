@@ -1,4 +1,14 @@
 
+
+
+my %Units = ( map(($_,             1), qw(s second seconds sec secs)),
+              map(($_,            60), qw(m minute minutes min mins)),
+              map(($_,         60*60), qw(h hr hour hours)),
+              map(($_,      60*60*24), qw(d day days)),
+              map(($_,    60*60*24*7), qw(w week weeks)),
+              map(($_,   60*60*24*30), qw(M month months)),
+              map(($_,  60*60*24*365), qw(y year years)) );
+
 my %hash;
 
 $hash{something};
