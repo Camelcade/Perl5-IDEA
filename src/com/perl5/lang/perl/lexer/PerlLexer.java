@@ -25,7 +25,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.PerlParserUitl;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
@@ -195,7 +194,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			// higest priority, pre-parsed tokens
 			if (currentState == LEX_PREPARSED_ITEMS)
 			{
-				IElementType nextTokenType = getParsedToken();
+				IElementType nextTokenType = getPreParsedToken();
 				if (nextTokenType != null)
 					return nextTokenType;
 			}
@@ -209,55 +208,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			}
 			// capture pod
 			else if (buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
-			{
 				return capturePodBlock();
-			}
+			// capture qw content from qw();
+			else if (currentState == LEX_QUOTE_LIKE_WORDS )
+				return captureQuoteLikeWords();
 			// capture string content from "" '' `` q qq qx
 			else if (currentState == LEX_QUOTE_LIKE_CHARS)
-			{
-				int currentPosition = tokenStart;
-
-				boolean isEscaped = false;
-				boolean quotesDiffer = charOpener != charCloser;
-				int quotesDepth = 0;    // for using with different quotes
-
-				while (currentPosition < bufferEnd)
-				{
-					char currentChar = buffer.charAt(currentPosition);
-
-					if (!isEscaped && quotesDepth == 0 && currentChar == charCloser)
-						break;
-
-					if (!isEscaped && quotesDiffer)
-					{
-						if (currentChar == charOpener)
-							quotesDepth++;
-						else if (currentChar == charCloser)
-							quotesDepth--;
-					}
-
-					isEscaped = !isEscaped && currentChar == '\\';
-
-					currentPosition++;
-				}
-
-				if (currentPosition == bufferEnd)
-					// forces to exit lex state
-					popState();
-				else
-					// switch to closer lex state
-					yybegin(LEX_QUOTE_LIKE_CLOSER);
-
-				if (currentPosition > tokenStart)
-				{
-					// found string
-					setTokenStart(tokenStart);
-					setTokenEnd(currentPosition);
-					return STRING_CONTENT;
-				} else
-					// empty string
-					return quoteLikeCloser(tokenStart);
-			}
+				return captureQuoteLikeChars();
 			// closing quote of string
 			else if (currentState == LEX_QUOTE_LIKE_CLOSER)
 				return quoteLikeCloser(tokenStart);
@@ -274,7 +231,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			else if (
 					buffer.charAt(tokenStart) == '#'
 							// fixme these should be in tokenset
-							&& (currentState != LEX_QUOTE_LIKE_LIST_OPENER && currentState != LEX_QUOTE_LIKE_LIST_CLOSER || !allowSharpQuote)
+							&& (currentState != LEX_QUOTE_LIKE_LIST_OPENER  || !allowSharpQuote)
 							&& (currentState != LEX_QUOTE_LIKE_OPENER && currentState != LEX_QUOTE_LIKE_CLOSER || !allowSharpQuote)
 							&& (currentState != LEX_TRANS_OPENER && currentState != LEX_TRANS_CLOSER || !allowSharpQuote)
 							&& (currentState != LEX_TRANS_CHARS)
@@ -286,9 +243,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				setTokenStart(tokenStart);
 
 				while (currentPosition < bufferEnd && !isCommentEnd(currentPosition))
-				{
 					currentPosition++;
-				}
 
 				// catching annotations #@
 				if (tokenStart + 1 < bufferEnd && buffer.charAt(tokenStart + 1) == '@')
@@ -309,17 +264,123 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		IElementType tokenType = super.advance();
 
 		registerLastToken(tokenType, yytext().toString());
-
 		return tokenType;
 	}
 
-	@Override
-	public IElementType endBarewordStringComma()
+	public IElementType captureQuoteLikeWords()
 	{
-		endCustomBlock();
-		return SIGILS_TOKENS.contains(lastSignificantTokenType) ? IDENTIFIER : STRING_CONTENT;
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenEnd();
+		int bufferEnd = buffer.length();
+		int currentPosition = tokenStart;
+
+		boolean isEscaped = false;
+		boolean quotesDiffer = charOpener != charCloser;
+		int quotesDepth = 0;    // for using with different quotes
+
+		tokensList.clear();
+
+		int currentWordStart = currentPosition;
+		IElementType currentWordType = TokenType.WHITE_SPACE;
+
+		while (currentPosition < bufferEnd)
+		{
+			char currentChar = buffer.charAt(currentPosition);
+
+			// qw close quote
+			if (!isEscaped && quotesDepth == 0 && currentChar == charCloser)
+			{
+				if( currentWordStart < currentPosition )
+					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
+				tokensList.add(new CustomToken(currentPosition, currentPosition + 1, QUOTE));
+				break;
+			}
+			else if( currentChar == '\n' || !isEscaped && Character.isSpaceChar(currentChar))	// atm no difference between space and \n tokens; \n unescapable
+			{
+				if( currentWordType != TokenType.WHITE_SPACE && currentWordStart < currentPosition) // word before it
+				{
+					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
+					currentWordStart = currentPosition;
+					currentWordType = TokenType.WHITE_SPACE;
+				}
+			}
+			else	// non-space char
+			{
+				if( currentWordType != STRING_CONTENT && currentWordStart < currentPosition) // space before it
+				{
+					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
+					currentWordStart = currentPosition;
+					currentWordType = STRING_CONTENT;
+				}
+
+				// nested () check
+				if (!isEscaped && quotesDiffer)
+				{
+					if (currentChar == charOpener)
+						quotesDepth++;
+					else if (currentChar == charCloser)
+						quotesDepth--;
+				}
+			}
+
+			isEscaped = !isEscaped && currentChar == '\\';
+			currentPosition++;
+		}
+
+		assert tokensList.size() > 0;
+		yybegin(LEX_PREPARSED_ITEMS);
+		return getPreParsedToken();
 	}
 
+	public IElementType captureQuoteLikeChars()
+	{
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenEnd();
+		int bufferEnd = buffer.length();
+		int currentPosition = tokenStart;
+
+		boolean isEscaped = false;
+		boolean quotesDiffer = charOpener != charCloser;
+		int quotesDepth = 0;    // for using with different quotes
+
+		while (currentPosition < bufferEnd)
+		{
+			char currentChar = buffer.charAt(currentPosition);
+
+			if (!isEscaped && quotesDepth == 0 && currentChar == charCloser)
+				break;
+
+			if (!isEscaped && quotesDiffer)
+			{
+				if (currentChar == charOpener)
+					quotesDepth++;
+				else if (currentChar == charCloser)
+					quotesDepth--;
+			}
+
+			isEscaped = !isEscaped && currentChar == '\\';
+
+			currentPosition++;
+		}
+
+		if (currentPosition == bufferEnd)
+			// forces to exit lex state
+			popState();
+		else
+			// switch to closer lex state
+			yybegin(LEX_QUOTE_LIKE_CLOSER);
+
+		if (currentPosition > tokenStart)
+		{
+			// found string
+			setTokenStart(tokenStart);
+			setTokenEnd(currentPosition);
+			return STRING_CONTENT;
+		} else
+			// empty string
+			return quoteLikeCloser(tokenStart);
+
+	}
 
 	public void registerLastToken(IElementType tokenType, String tokenText)
 	{
@@ -714,7 +775,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 *
 	 * @return token type or null if queue is empty
 	 */
-	public IElementType getParsedToken()
+	public IElementType getPreParsedToken()
 	{
 		if (tokensList.size() == 0)
 		{
@@ -1158,28 +1219,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		yybegin(LEX_QUOTE_LIKE_WORDS);
 
 		return QUOTE;
-	}
-
-
-	public IElementType processQuoteLikeWord()
-	{
-		CharSequence currentToken = yytext();
-
-		isEscaped = false;
-
-		for (int i = 0; i < currentToken.length(); i++)
-		{
-			if (!isEscaped && currentToken.charAt(i) == charCloser)
-			{
-				yypushback(currentToken.length() - i);
-				yybegin(LEX_QUOTE_LIKE_LIST_CLOSER);
-
-				return i == 0 ? null : STRING_CONTENT;
-			}
-
-			isEscaped = !isEscaped && currentToken.charAt(i) == '\\';
-		}
-		return STRING_CONTENT;
 	}
 
 

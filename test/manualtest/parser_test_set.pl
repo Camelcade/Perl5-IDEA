@@ -1,4 +1,31 @@
 
+qw #something
+(
+    test
+    (test2) t\)est3
+    te(st4\ test5
+    tes)t6\
+    te\(st7
+);
+
+qw#
+   test
+    (test2) t\)est3
+    te(st4\ test5
+    tes)t6\
+    te\(st7
+    #;
+
+
+qw#testing#;
+qr#testing#;
+qx#testing#;
+qq#'testing#;
+q#testing#;
+tr#testing#testing#;
+m#testing#;
+
+
 
 
 my %Units = ( map(($_,             1), qw(s second seconds sec secs)),
@@ -211,33 +238,35 @@ $$_;
 my $ abc;
 $ $$abc;
 
-qw/testing/;
 qw#testing#;
+qr#testing#;
+qx#testing#;
+qq#'testing#;
+q#testing#;
+tr#testing#testing#;
+m#testing#;
+
+qw/testing/;
 qw'testing testing';
 qw{testing testing};
 
 qr'testing';
-qr#testing#;
 qr/testing/;
 qr{testing};
 
 qx/testing/;
 qx'testing';
-qx#testing#;
 qx{testing};
 
 qq/testing/;
 qq'testing';
-qq#'testing#;
 qq{testing};
 
 q/testing/;
 q'testing';
-q#testing#;
 q{testing};
 
 tr'testing'testing';
-tr#testing#testing#;
 tr/testing/testing/;
 tr{testing}{testing};
 
@@ -247,7 +276,6 @@ y/testing/testing/;
 y{testing}{testing};
 
 m'testing';
-m#testing#;
 m{testing};
 m/testing/;
 

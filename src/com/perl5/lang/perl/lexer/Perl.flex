@@ -68,7 +68,6 @@ IDENTIFIER_BRACED = "{" {EMPTY_SPACE}* {IDENTIFIER} {EMPTY_SPACE}* "}"
 BAREWORD_MINUS = "-" * {IDENTIFIER}
 
 // bad solution, $scalar -function eats it
-ANYWORD = [^ \t\f\r\n]
 HEREDOC_CLOSER = [^\f\r\n]
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
@@ -124,7 +123,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 %xstate LEX_HEREDOC_MARKER
 
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
-%xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS, LEX_QUOTE_LIKE_LIST_CLOSER
+%xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS
 TRANS_MODIFIERS = [cdsr]
 %xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
 %xstate LEX_REGEX_OPENER
@@ -199,7 +198,7 @@ TRANS_MODIFIERS = [cdsr]
 
 
 /**
-    tr y
+    tr y fixme make a function to parse this
 **/
 <LEX_TRANS_OPENER>{
     {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
@@ -253,21 +252,6 @@ TRANS_MODIFIERS = [cdsr]
             return type;
         }
 }
-
-<LEX_QUOTE_LIKE_WORDS>{
-    {EMPTY_SPACE}+ {return processOpenerWhiteSpace(); }
-    {ANYWORD}+   {
-          IElementType tokenType = processQuoteLikeWord();
-          if( tokenType != null )
-                return tokenType;
-          break;
-        }
-}
-
-<LEX_QUOTE_LIKE_LIST_CLOSER>{
-    .   { popState(); return QUOTE; }
-}
-
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 

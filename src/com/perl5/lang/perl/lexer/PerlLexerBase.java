@@ -42,10 +42,8 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType parseCappedVariableName();
 	public abstract IElementType parsePackage();
 
-	public abstract IElementType endBarewordStringComma();
-
 	public abstract IElementType parseRegex();
-	public abstract IElementType getParsedToken();
+	public abstract IElementType getPreParsedToken();
 
 	public abstract void popState();
 	public abstract void pushState();
@@ -72,9 +70,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType processTransCloser();
 
 	public abstract IElementType processQuoteLikeListQuote();
-
 	public abstract IElementType processQuoteLikeQuote();
-	public abstract IElementType processQuoteLikeWord();
 
 }
 
