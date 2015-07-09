@@ -9,6 +9,11 @@ $_something;
 
 qw##;
 
+qw<asdf[<asdf]>asdf>;
+qw(asdf[(asdf])asdf);
+qw{asdf[a{sdf]a}sdf};
+qw[asdf[asdf]asdf];
+
 qw #something
 (
     test

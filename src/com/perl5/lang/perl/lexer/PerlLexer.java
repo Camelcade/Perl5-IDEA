@@ -309,8 +309,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				{
 					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
 					currentWordStart = currentPosition;
-					currentWordType = TokenType.WHITE_SPACE;
 				}
+				currentWordType = TokenType.WHITE_SPACE;
 			}
 			else	// non-space char
 			{
@@ -318,8 +318,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				{
 					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
 					currentWordStart = currentPosition;
-					currentWordType = STRING_CONTENT;
 				}
+				currentWordType = STRING_CONTENT;
 
 				// nested () check
 				if (!isEscaped && quotesDiffer)
