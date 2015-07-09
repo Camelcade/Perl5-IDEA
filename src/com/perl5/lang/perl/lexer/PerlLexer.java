@@ -1270,7 +1270,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		else if ("*$".equals(tokenText) )
 		{
 			Character nextCharacter = getNextCharacter();
-			if( nextCharacter != null && ( nextCharacter.equals('{')  || Character.isLetterOrDigit(nextCharacter)))
+			if( nextCharacter != null && ( nextCharacter.equals('{')  || nextCharacter.equals('_')  || Character.isLetterOrDigit(nextCharacter)))
 			{
 				yypushback(1);
 				return OPERATOR_MUL;
