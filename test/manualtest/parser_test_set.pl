@@ -1,3 +1,18 @@
+
+my %hash;
+
+$hash{something};
+$hash{something}->{something};
+$hash{'something'};
+$hash{'something'}->{'something'};
+$hash{"something"};
+$hash{"something"}->{"something"};
+
+--blah => -blah => blah => 1;
+
+*{something};
+*something{SCALAR};
+
 no warnings qw(once);
 local *alias = *$full_path;
 use warnings qw(once);

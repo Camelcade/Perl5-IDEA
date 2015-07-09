@@ -766,16 +766,15 @@ private scalar ::=
 
 scalar_array_index ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * scalar_variable
 scalar_array_element ::= scalar_variable LEFT_BRACKET expr RIGHT_BRACKET
-scalar_hash_element ::= scalar_variable ( LEFT_BRACE expr RIGHT_BRACE | braced_string )
+scalar_hash_element ::= scalar_variable braced_expr
 scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
     glob_variable
-    | <<sigilGlob>> LEFT_BRACE expr RIGHT_BRACE     // @todo we need to colorize this as glob
+    | <<sigilGlob>> LEFT_BRACE expr RIGHT_BRACE
 
 private nested_element ::=
-    braced_string
-    | LEFT_BRACE expr RIGHT_BRACE
+    braced_expr
     | LEFT_BRACKET expr RIGHT_BRACKET
 
 // extended nested element for using in ()
@@ -817,8 +816,6 @@ private scalar_constant ::=
     | TAG  // __PACKAGE__ etc.
     | string
 
-braced_string ::= <<parseBracedString>>
-
 private array_constant ::=
     string_list
 
@@ -855,8 +852,10 @@ hash_variable ::= <<sigilHash>> [scalar_sigils] variable_body
 
 scalar_sigils ::= SIGIL_SCALAR+
 
-glob_variable ::= <<sigilGlob>> [scalar_sigils] variable_body [glob_slot]
-private glob_slot ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
+glob_variable ::= <<sigilGlob>> [scalar_sigils] variable_body [braced_expr]
+
+private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
+braced_string ::= <<parseBracedString>>
 
 private variable_body ::=
     variable_body_braced
