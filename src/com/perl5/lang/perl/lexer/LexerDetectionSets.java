@@ -33,8 +33,9 @@ public interface LexerDetectionSets extends PerlElementTypes
 			SIGIL_ARRAY,
 			SIGIL_SCALAR,
 			SIGIL_SCALAR_INDEX,
-			OPERATOR_MOD,    // same token for hash sigil
-			OPERATOR_MUL    // same token for glob sigil
+			OPERATOR_BITWISE_AND,    // code sigil
+			OPERATOR_MOD,    // hash sigil
+			OPERATOR_MUL    // glob sigil
 	);
 
 	// we should not check bareword for reserved tokens if following was before
@@ -52,8 +53,7 @@ public interface LexerDetectionSets extends PerlElementTypes
 	public static final TokenSet IDENTIFIER_NEGATION_PREFIX = TokenSet.orSet(
 			PRE_PACKAGE_TOKENS,
 			TokenSet.create(
-					OPERATOR_DEREFERENCE,    // ->identifier
-					OPERATOR_BITWISE_AND    // &identifier
+					OPERATOR_DEREFERENCE    // ->identifier
 			)
 	);
 

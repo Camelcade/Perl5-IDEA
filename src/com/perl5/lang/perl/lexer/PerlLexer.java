@@ -1101,15 +1101,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		charOpener = charCloser = yytext().charAt(0);
 		forceQuote = false;
-		
+
 		if( !(SIGILS_TOKENS.contains(lastSignificantTokenType))) // this is string, not variable name $", $', $`
 		{
-			if( lastSignificantTokenType == LEFT_BRACE )	// can be ${"}
-			{
-				Character nextSignificantCharacter = getNextSignificantCharacter();
-				if( nextSignificantCharacter != null && nextSignificantCharacter.equals('}'))
-					return getQuoteToken(charOpener);
-			}
+			if( isBraced() )	// can be ${"}
+				return getQuoteToken(charOpener);
+
 			isEscaped = false;
 			pushState();
 			if (!isLastToken())
@@ -1188,7 +1185,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		String tokenText = yytext().toString();
 
-		if(!IDENTIFIER_NEGATION_PREFIX.contains(lastUnbraceTokenType) && !SIGILS_TOKENS.contains(lastTokenType)&& isCommaArrowAhead())
+		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType) || SIGILS_TOKENS.contains(lastTokenType);
+		Character nextCharacter;
+
+		if( !negate	&& ( isBraced() || isCommaArrowAhead())
+		)
 			return STRING_CONTENT;
 		else if( tokenText.startsWith("--"))
 		{
@@ -1214,8 +1215,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		String tokenText = yytext().toString();
 		IElementType tokenType = null;
 
-		if (!IDENTIFIER_NEGATION_PREFIX.contains(lastUnbraceTokenType)
-				&& 	!SIGILS_TOKENS.contains(lastTokenType)
+		if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
+				&& 	!SIGILS_TOKENS.contains(lastTokenType)	// print $$ if smth
 
 		)
 		{
@@ -1368,6 +1369,18 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				&& nextPosition + 1 < buffer.length()
 				&& buffer.charAt(nextPosition + 1) == '>'
 			)
+				return true;
+		}
+		return false;
+	}
+
+	// check that current token surrounded with braces
+	private boolean isBraced()
+	{
+		if( lastSignificantTokenType == LEFT_BRACE )
+		{
+			Character nextSignificantCharacter = getNextSignificantCharacter();
+			if( nextSignificantCharacter != null && nextSignificantCharacter.equals('}'))
 				return true;
 		}
 		return false;

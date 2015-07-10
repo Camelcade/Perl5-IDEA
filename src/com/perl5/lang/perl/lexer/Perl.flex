@@ -309,6 +309,7 @@ TRANS_MODIFIERS = [cdsr]
 
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
+// fixme refactor
 {IDENTIFIER_BRACED} {startCustomBlock(LEX_BRACED_IDENTIFIER);break;}
 {BAREWORD_MINUS} {return parseBarewordMinus();}
 {PACKAGE_PARSABLE} {return parsePackage(); }

@@ -1,4 +1,20 @@
 
+our $AUTOLOADED_ROUTINES=<<'END_OF_AUTOLOAD';
+
+END_OF_AUTOLOAD
+;
+
+package main;
+
+--blah => -blah => blah => 1;
+-package => 123;
+package => 123;
+
+$hash{--package} =4;
+$a->{--package} = 5;
+
+print $$ if 123;
+
 sub import {
     my $callpack = caller;
     my $pack = shift;
@@ -72,6 +88,7 @@ my $cde = $^];
 $cde = $^[;
 
 kill 'ABRT', $$ if $panic++;
+$$ if something;
 
 
 $$Foo::Bar::var;
@@ -160,8 +177,6 @@ $hash{'something'};
 $hash{'something'}->{'something'};
 $hash{"something"};
 $hash{"something"}->{"something"};
-
---blah => -blah => blah => 1;
 
 *{something};
 *something{SCALAR};
