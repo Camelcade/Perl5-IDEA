@@ -35,7 +35,7 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 {
 	private static final BracePair[] PAIRS = new BracePair[]{
 			new BracePair(LEFT_PAREN, RIGHT_PAREN, false),
-			new BracePair(LEFT_BRACKET, RIGHT_BRACE, false),
+			new BracePair(LEFT_BRACKET, RIGHT_BRACKET, false),
 			new BracePair(LEFT_BRACE, RIGHT_BRACE, true),
 	};
 
