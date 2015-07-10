@@ -33,7 +33,7 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 	 * @return scalar sigils if any
 	 */
 	@Nullable
-	PsiPerlScalarSigils getScalarSigils();
+	PsiElement getScalarSigils();
 
 	/**
 	 * Guesses variable type from definition or context

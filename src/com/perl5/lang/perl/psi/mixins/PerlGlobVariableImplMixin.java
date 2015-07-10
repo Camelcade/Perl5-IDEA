@@ -24,8 +24,12 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
-import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import com.perl5.lang.perl.psi.impl.PerlScalarSigilsImpl;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -35,129 +39,113 @@ import javax.swing.*;
 
 /**
  * Created by hurricup on 25.05.2015.
- *
  */
-public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PsiPerlGlobVariable
-{
-	public PerlGlobVariableImplMixin(@NotNull ASTNode node){
-		super(node);
-	}
+public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PsiPerlGlobVariable, PerlElementTypes {
+    public PerlGlobVariableImplMixin(@NotNull ASTNode node) {
+        super(node);
+    }
 
-	public PerlGlobVariableImplMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
-		super(stub,nodeType);
-	}
+    public PerlGlobVariableImplMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
+        super(stub, nodeType);
+    }
 
-	@Override
-	public String getPackageName()
-	{
-		PerlGlobStub stub = getStub();
-		if( stub != null)
-			return stub.getPackageName();
+    @Override
+    public String getPackageName() {
+        PerlGlobStub stub = getStub();
+        if (stub != null)
+            return stub.getPackageName();
 
-		String namespace = getExplicitPackageName();
+        String namespace = getExplicitPackageName();
 
-		if( namespace == null )
-			namespace = getContextPackageName();
+        if (namespace == null)
+            namespace = getContextPackageName();
 
-		return namespace;
-	}
+        return namespace;
+    }
 
-	@Override
-	public String getName()
-	{
-		PerlGlobStub stub = getStub();
-		if( stub != null)
-			return stub.getName();
+    @Override
+    public String getName() {
+        PerlGlobStub stub = getStub();
+        if (stub != null)
+            return stub.getName();
 
-		PerlVariableNameElement variableNameElement = getVariableNameElement();
-		if( variableNameElement != null )
-			return variableNameElement.getName();
+        PerlVariableNameElement variableNameElement = getVariableNameElement();
+        if (variableNameElement != null)
+            return variableNameElement.getName();
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public String getContextPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
+    @Override
+    public String getContextPackageName() {
+        return PerlPackageUtil.getContextPackageName(this);
+    }
 
-	@Override
-	public String getExplicitPackageName()
-	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getCanonicalName(): null;
-	}
+    @Override
+    public String getExplicitPackageName() {
+        PerlNamespaceElement namespaceElement = getNamespaceElement();
+        return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
+    }
 
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
+    @Override
+    public PerlNamespaceElement getNamespaceElement() {
+        return findChildByClass(PerlNamespaceElement.class);
+    }
 
-	@Override
-	public PerlVariableNameElement getVariableNameElement()
-	{
-		return findChildByClass(PerlVariableNameElement.class);
-	}
+    @Override
+    public PerlVariableNameElement getVariableNameElement() {
+        return findChildByClass(PerlVariableNameElement.class);
+    }
 
-	@Override
-	public boolean isBuiltIn()
-	{
-		if( getNamespaceElement() != null )
-			return false;
+    @Override
+    public boolean isBuiltIn() {
+        if (getNamespaceElement() != null)
+            return false;
 
-		String globName = getName();
-		if( globName == null )
-			return false;
+        String globName = getName();
+        if (globName == null)
+            return false;
 
-		return PerlGlobUtil.BUILT_IN.contains(globName);
-	}
+        return PerlGlobUtil.BUILT_IN.contains(globName);
+    }
 
-	@Override
-	public boolean isDeprecated()
-	{
-		return false;
-	}
+    @Override
+    public boolean isDeprecated() {
+        return false;
+    }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getVariableNameElement();
-	}
+    @Nullable
+    @Override
+    public PsiElement getNameIdentifier() {
+        return getVariableNameElement();
+    }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		return getVariableNameElement().setName(name);
-	}
+    @Override
+    public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+        return getVariableNameElement().setName(name);
+    }
 
-	@Override
-	public String getCanonicalName()
-	{
-		return getPackageName() + "::" + getName();
-	}
+    @Override
+    public String getCanonicalName() {
+        return getPackageName() + "::" + getName();
+    }
 
 
-	@Nullable
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return PerlIcons.GLOB_GUTTER_ICON;
-	}
+    @Nullable
+    @Override
+    public Icon getIcon(int flags) {
+        return PerlIcons.GLOB_GUTTER_ICON;
+    }
 
-	@Override
-	public ItemPresentation getPresentation()
-	{
-		return new PerlItemPresentationSimple(this, "Typeglob assignment");
-	}
+    @Override
+    public ItemPresentation getPresentation() {
+        return new PerlItemPresentationSimple(this, "Typeglob assignment");
+    }
 
-	@Nullable
-	@Override
-	public PsiPerlScalarSigils getScalarSigils()
-	{
-		return findChildByClass(PsiPerlScalarSigils.class);
-	}
+    @Nullable
+    @Override
+    public PsiElement getScalarSigils() {
+        return findChildByClass(PerlScalarSigilsImpl.class);
+    }
 
 }

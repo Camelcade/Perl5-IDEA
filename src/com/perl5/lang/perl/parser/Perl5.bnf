@@ -44,6 +44,8 @@ limitations under the License.
     SIGIL_SCALAR="SIGIL_SCALAR"
     SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
 
+    SCALAR_SIGILS="SCALAR_SIGILS"
+
     SIGIL_HASH="SIGIL_HASH"
     SIGIL_GLOB="SIGIL_GLOB"
     SIGIL_CODE="SIGIL_CODE"
@@ -843,7 +845,6 @@ string_list ::= RESERVED_QW QUOTE STRING_CONTENT * QUOTE
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-// fixme last sigil can be a variable name
 array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
@@ -854,7 +855,6 @@ private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
 braced_string ::= <<parseBracedString>>
 
 private variable_body ::= <<parseVariableName>>
-scalar_sigils ::= SIGIL_SCALAR+
 
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::= <<parseMethod>>

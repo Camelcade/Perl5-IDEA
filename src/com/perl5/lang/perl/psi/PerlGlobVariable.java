@@ -33,5 +33,5 @@ public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlNam
 	 * @return scalar sigils if any
 	 */
 	@Nullable
-	PsiPerlScalarSigils getScalarSigils();
+	PsiElement getScalarSigils();
 }

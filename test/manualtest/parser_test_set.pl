@@ -1,6 +1,10 @@
 
+my $abc;
 
-
+@$abc;
+%$abc;
+*$abc;
+&$abc;
 
 my $cde = $^];
 $cde = $^[;
