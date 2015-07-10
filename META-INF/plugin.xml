@@ -30,6 +30,7 @@
       <li>Re-wrote lexer and heavy refactored parser</li>
       <li>Fixed bug with hanging on Embedded perl files</li>
       <li>Added support for archaic package name delimiters, Foo'Bar is now valid (NB: refactoring/find usages not working on them)</li>
+      <li>Added perl script file detection by shebang line</li>
       </ul>
 
     ]]>
