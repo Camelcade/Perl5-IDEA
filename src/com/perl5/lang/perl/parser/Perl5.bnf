@@ -551,7 +551,8 @@ private pow_operator ::= OPERATOR_MUL OPERATOR_MUL
 
 private op_5_expr ::= ref_expr  | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
-prefix_unary_expr ::=  (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR_MINUS) expr { rightAssociative=true }
+prefix_unary_expr ::= operator_prefix_unary expr { rightAssociative=true }
+private operator_prefix_unary ::= (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR_MINUS) !OPERATOR_ASSIGN
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 
