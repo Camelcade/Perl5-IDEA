@@ -1,4 +1,26 @@
 
+my $cde = $^];
+$cde = $^[;
+
+kill 'ABRT', $$ if $panic++;
+
+
+$$Foo::Bar::var;
+$#$Foo::Bar::var;
+@$Foo::Bar::var;
+%$Foo::Bar::var;
+*$Foo::Bar::var;
+&$Foo::Bar::var;
+
+
+$text;
+$main::text;
+${text};
+${main::text};
+$main::;
+${main::};
+
+
 my $text = <<'=end';
 
 =pod
@@ -97,8 +119,6 @@ if ($sub_ref) {
 }
 
 
-my $cde = $^];
-$cde = $^[;
 
 # The ground of all being.
 
@@ -253,7 +273,6 @@ syswrite STDERR, 'Caught a SIG', 12;
 use Opcode 1.01, qw(..);
 
 my $panic;
-kill 'ABRT', $$ if $panic++;
 
 my $$$_wow;
 my $${some};
@@ -441,14 +460,6 @@ $#Foo::Bar::var;
 %Foo::Bar::var;
 *Foo::Bar::var;
 
-
-$$Foo::Bar::var;
-$#$Foo::Bar::var;
-@$Foo::Bar::var;
-%$Foo::Bar::var;
-*$Foo::Bar::var;
-&$Foo::Bar::var;
-
 ${Foo::Bar::var};
 $#{Foo::Bar::var};
 @{Foo::Bar::var};
@@ -490,7 +501,7 @@ $LIST_SEPARATOR, ${LIST_SEPARATOR};
 $", ${"};
 $PROCESS_ID, ${PROCESS_ID};
 $PID, ${PID};
-$$,# ${$};
+$$ ,# ${$};
 $PROGRAM_NAME, ${PROGRAM_NAME};
 $0, ${0};
 $REAL_GROUP_ID, ${REAL_GROUP_ID};

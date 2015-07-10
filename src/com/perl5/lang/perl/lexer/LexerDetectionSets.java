@@ -51,7 +51,6 @@ public interface LexerDetectionSets extends PerlElementTypes
 	// prefixes, disables identifier interpretation attempt
 	public static final TokenSet IDENTIFIER_NEGATION_PREFIX = TokenSet.orSet(
 			PRE_PACKAGE_TOKENS,
-			SIGILS_TOKENS,
 			TokenSet.create(
 					OPERATOR_DEREFERENCE,    // ->identifier
 					OPERATOR_BITWISE_AND    // &identifier

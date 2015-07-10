@@ -790,12 +790,14 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		if (    // seems regex
 			// todo we should check argumentless prefix sub
 			// todo we should check if we are after grep/map/sort block
+				!SIGILS_TOKENS.contains(lastUnbraceTokenType)	// for $/
+				&& (
 				lastSignificantTokenType == null
 						|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
 						|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
 						|| REGEXP_PREFIX.contains(lastSignificantTokenType)
 						|| lastUnparenTokenType == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
-				)
+				))
 		{
 			allowSharpQuote = true;
 			isEscaped = false;
@@ -1111,7 +1113,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public IElementType processStringOpener()
 	{
 		charOpener = charCloser = yytext().charAt(0);
-		if( !(SIGILS_TOKENS.contains(lastUnbraceTokenType) && charOpener == '"')) // this is string, not variable name
+		if( !(SIGILS_TOKENS.contains(lastUnbraceTokenType))) // this is string, not variable name
 		{
 			isEscaped = false;
 			forceQuote = false;
@@ -1216,9 +1218,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public IElementType getIdentifierToken()
 	{
 		String tokenText = yytext().toString();
-		IElementType tokenType = IDENTIFIER;
+		IElementType tokenType = null;
 
-		if (!IDENTIFIER_NEGATION_PREFIX.contains(lastUnbraceTokenType))
+		if (!IDENTIFIER_NEGATION_PREFIX.contains(lastUnbraceTokenType)
+				&& 	!SIGILS_TOKENS.contains(lastTokenType)
+
+		)
 		{
 			if ((tokenType = namedOperators.get(tokenText)) != null)
 				return tokenType;

@@ -48,9 +48,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			LABEL
 	);
 
-	// Following tokens may be a scalar/glob names
-	// "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
-	public static final TokenSet POSSIBLE_BUILT_IN_NAMES = TokenSet.orSet(
+
+	// tokens, allowed to be $^ names part
+	public static final TokenSet CONTROL_VARIABLE_NAMES = TokenSet.create(
+			LEFT_BRACKET,
+			RIGHT_BRACKET
+	);
+
+			// Following tokens may be a scalar/glob names
+			// "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
+	public static final TokenSet CAN_BE_VARIABLE_NAME = TokenSet.orSet(
 			CONVERTABLE_TOKENS,
 			TokenSet.create(
 					QUOTE_DOUBLE,   // suppress in lexer
@@ -77,11 +84,19 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 					RIGHT_BRACKET,
 					OPERATOR_BITWISE_OR,
 					OPERATOR_BITWISE_NOT,
+					OPERATOR_BITWISE_XOR,
 					QUESTION,
 					COLON,
 					OPERATOR_MUL,
 					NUMBER_SIMPLE
 			));
+
+
+	public static final TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
+		PACKAGE_TOKENS,
+			CAN_BE_VARIABLE_NAME,
+			TokenSet.create(LEFT_BRACE)
+	);
 
 
 	public static final TokenSet PRINT_HANDLE_NEGATE_SUFFIX = TokenSet.orSet(
@@ -721,4 +736,115 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 	}
+
+	/**
+	 * Parses tokens as variables name; replaces:
+	 *
+	 variable_body = [scalar_sigils] (
+	 variable_body_braced
+	 | variable_body_canonical
+	 | variable_body_namespace_braced
+	 | variable_body_namespace
+	 )
+
+	 scalar_sigils ::= SIGIL_SCALAR+
+	 private variable_body_namespace_braced ::= LEFT_BRACE namespace_canonical RIGHT_BRACE
+	 private variable_body_namespace ::= namespace_canonical
+	 private variable_body_braced ::= LEFT_BRACE [namespace_canonical] <<convertIdentifier VARIABLE_NAME>> RIGHT_BRACE
+	 private variable_body_canonical ::= [namespace_canonical] <<convertIdentifier VARIABLE_NAME>>
+
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseVariableName(PsiBuilder b, int l)
+	{
+		IElementType currentTokenType = b.getTokenType();
+		IElementType nextTokenType = b.rawLookup(1);
+
+		PsiBuilder.Marker m = null;
+
+		while( currentTokenType == SIGIL_SCALAR && POST_SIGILS_SUFFIXES.contains(nextTokenType))
+		{
+			if( m == null )
+				m = b.mark();
+			b.advanceLexer();
+			currentTokenType = nextTokenType;
+			nextTokenType = b.rawLookup(1);
+		}
+
+		if( m != null )
+			m.collapse(SCALAR_SIGILS);
+
+		// $package::
+		// $package::var
+		if( PACKAGE_TOKENS.contains(currentTokenType) )
+		{
+			b.remapCurrentToken(PACKAGE);
+			b.advanceLexer();
+			if( CONVERTABLE_TOKENS.contains(nextTokenType))
+			{
+				b.remapCurrentToken(VARIABLE_NAME);
+				b.advanceLexer();
+			}
+			return true;
+		}
+		// $var
+		else if( CAN_BE_VARIABLE_NAME.contains(currentTokenType))
+		{
+			if( currentTokenType == OPERATOR_BITWISE_XOR && CONTROL_VARIABLE_NAMES.contains(nextTokenType) ) // branch for $^]
+			{
+				m = b.mark();
+				b.advanceLexer();
+				b.advanceLexer();
+				m.collapse(VARIABLE_NAME);
+			}
+			else
+			{
+				b.remapCurrentToken(VARIABLE_NAME);
+				b.advanceLexer();
+			}
+
+			return true;
+		}
+		// ${var}
+		else if( currentTokenType == LEFT_BRACE )
+		{
+			b.advanceLexer();
+			currentTokenType = nextTokenType;
+			nextTokenType = b.lookAhead(1);
+
+			// ${package::}
+			// ${package::var}
+			if( PACKAGE_TOKENS.contains(currentTokenType) )
+			{
+				b.remapCurrentToken(PACKAGE);
+				b.advanceLexer();
+				if( CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(1) == RIGHT_BRACE)
+				{
+					b.remapCurrentToken(VARIABLE_NAME);
+					b.advanceLexer();
+					b.advanceLexer();
+					return true;
+				}
+				else if(nextTokenType == RIGHT_BRACE)
+				{
+					b.advanceLexer();
+					return true;
+				}
+			}
+			// ${var}
+			else if( CAN_BE_VARIABLE_NAME.contains(currentTokenType) && nextTokenType == RIGHT_BRACE)
+			{
+				b.remapCurrentToken(VARIABLE_NAME);
+				b.advanceLexer();
+				b.advanceLexer();
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 }

@@ -320,4 +320,12 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
 		return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
 	}
+
+	@Nullable
+	@Override
+	public PsiPerlScalarSigils getScalarSigils()
+	{
+		return findChildByClass(PsiPerlScalarSigils.class);
+	}
+
 }

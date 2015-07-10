@@ -153,4 +153,11 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 		return new PerlItemPresentationSimple(this, "Typeglob assignment");
 	}
 
+	@Nullable
+	@Override
+	public PsiPerlScalarSigils getScalarSigils()
+	{
+		return findChildByClass(PsiPerlScalarSigils.class);
+	}
+
 }
