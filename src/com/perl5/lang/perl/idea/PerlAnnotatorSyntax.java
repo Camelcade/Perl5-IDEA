@@ -29,7 +29,6 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -40,13 +39,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 {
-	public static final TokenSet PAINT_LIKE_GLOB = TokenSet.create(
-			SIGIL_GLOB,
-			LEFT_ANGLE,
-			RIGHT_ANGLE,
-			HANDLE
-	);
-
 	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
 
 	private void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
@@ -169,29 +161,11 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		else
 		{
 			IElementType tokenType = element.getNode().getElementType();
-			if(tokenType == SIGIL_HASH)
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_HASH,
-						false,
-						false);
-			else if(tokenType == SIGIL_CODE)
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_SUB,
-						false,
-						false);
-			else if (tokenType == HANDLE )
+			if (tokenType == HANDLE)
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_GLOB,
 						PerlGlobUtil.BUILT_IN.contains(element.getText()),
-						false);
-			else if(PAINT_LIKE_GLOB.contains(tokenType))
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_GLOB,
-						false,
 						false);
 		}
 	}

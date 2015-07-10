@@ -817,10 +817,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			{
 				setTokenEnd(getNextTokenStart() + 1);
 				return OPERATOR_OR_DEFINED;
-			} else if (nextCharacter != null && nextCharacter.equals('='))
-			{
-				setTokenEnd(getNextTokenStart() + 1);
-				return OPERATOR_DIV_ASSIGN;
 			} else
 			{
 				return OPERATOR_DIV;
@@ -828,16 +824,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 	}
 
-	public IElementType checkOperatorXAssign()
-	{
-		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x=smth;
-		{
-			yypushback(1);
-			return IDENTIFIER;
-		}
-		return OPERATOR_X_ASSIGN;
-	}
-
+	// fixme how about $x234sdfsdf ?
 	public IElementType checkOperatorXSticked()
 	{
 		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x123;
@@ -1194,7 +1181,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		String tokenText = yytext().toString();
 
-		if(!IDENTIFIER_NEGATION_PREFIX.contains(lastUnbraceTokenType) && isCommaArrowAhead())
+		if(!IDENTIFIER_NEGATION_PREFIX.contains(lastUnbraceTokenType) && !SIGILS_TOKENS.contains(lastTokenType)&& isCommaArrowAhead())
 			return STRING_CONTENT;
 		else if( tokenText.startsWith("--"))
 		{

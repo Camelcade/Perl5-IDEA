@@ -46,9 +46,9 @@ limitations under the License.
 
     SCALAR_SIGILS="SCALAR_SIGILS"
 
-    SIGIL_HASH="SIGIL_HASH"
-    SIGIL_GLOB="SIGIL_GLOB"
-    SIGIL_CODE="SIGIL_CODE"
+//    SIGIL_HASH="SIGIL_HASH"
+//    SIGIL_GLOB="SIGIL_GLOB"
+//    SIGIL_CODE="SIGIL_CODE"
 
     ANNOTATION_PREFIX="ANNOTATION_PREFIX"
 
@@ -130,10 +130,6 @@ limitations under the License.
     OPERATOR_X="x"
 
     OPERATOR_CMP_NUMERIC="<=>"
-    OPERATOR_LE_NUMERIC="<="
-    OPERATOR_GE_NUMERIC=">="
-    OPERATOR_EQ_NUMERIC="=="
-    OPERATOR_NE_NUMERIC="!="
     OPERATOR_LT_NUMERIC="<"
     OPERATOR_GT_NUMERIC=">"
 
@@ -164,27 +160,6 @@ limitations under the License.
     OPERATOR_NOT="!"
 
     OPERATOR_ASSIGN="="
-    OPERATOR_POW_ASSIGN="**="
-
-    OPERATOR_PLUS_ASSIGN="+="
-    OPERATOR_MINUS_ASSIGN="-="
-    OPERATOR_CONCAT_ASSIGN=".="
-
-    OPERATOR_MUL_ASSIGN="*="
-    OPERATOR_DIV_ASSIGN="/="
-    OPERATOR_MOD_ASSIGN="%="
-    OPERATOR_X_ASSIGN="x="
-
-    OPERATOR_BITWISE_AND_ASSIGN="&="
-    OPERATOR_BITWISE_OR_ASSIGN="|="
-    OPERATOR_BITWISE_XOR_ASSIGN="^="
-
-    OPERATOR_SHIFT_LEFT_ASSIGN="<<="
-    OPERATOR_SHIFT_RIGHT_ASSIGN=">>="
-
-    OPERATOR_AND_ASSIGN="&&="
-    OPERATOR_OR_ASSIGN="||="
-    OPERATOR_OR_DEFINED_ASSIGN="//="
 
     QUESTION="?"
     COLON=":"
@@ -234,9 +209,6 @@ limitations under the License.
 
     LEFT_BRACE='LEFT_BRACE'
     RIGHT_BRACE='RIGHT_BRACE'
-
-    LEFT_ANGLE='LEFT_ANGLE'
-    RIGHT_ANGLE='RIGHT_ANGLE'
 
     SEMICOLON=";";
 
@@ -445,7 +417,7 @@ redo_expr ::= RESERVED_REDO [lnr_param] {pin=1}
 goto_expr ::= RESERVED_GOTO [goto_param] {pin=1}
 
 private lnr_param ::= <<convertIdentifier LABEL>> | expr // fixme scalar_expr ?
-private goto_param ::= <<convertIdentifier LABEL>> | <<sigilCode>> <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
+private goto_param ::= <<convertIdentifier LABEL>> | OPERATOR_BITWISE_AND <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
 
 private statement_modifier ::=
     if_statement_modifier
@@ -574,7 +546,8 @@ private op_3_expr ::= pref_pp_expr | suff_pp_expr
 pref_pp_expr ::= (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS) expr
 suff_pp_expr ::= expr (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS)
 
-pow_expr ::= expr (<<parseOperatorPow>> expr)+ { rightAssociative=true }
+pow_expr ::= expr (pow_operator expr)+ { rightAssociative=true }
+private pow_operator ::= OPERATOR_MUL OPERATOR_MUL
 
 private op_5_expr ::= ref_expr  | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
@@ -582,15 +555,15 @@ prefix_unary_expr ::=  (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 
-mul_expr ::= expr ((<<operatorMul>>|OPERATOR_DIV|<<operatorMod>>|OPERATOR_X) expr)+
+mul_expr ::= expr ((OPERATOR_MUL|OPERATOR_DIV|OPERATOR_MOD|OPERATOR_X) expr)+
 add_expr ::= expr ((OPERATOR_PLUS|OPERATOR_MINUS|OPERATOR_CONCAT) expr)+
 shift_expr ::= expr ((OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) expr)+
 
 compare_expr ::= expr (
-    OPERATOR_GE_NUMERIC
-    |OPERATOR_LE_NUMERIC
-    |<<operatorLtNumeric>>
-    |<<operatorGtNumeric>>
+    OPERATOR_GT_NUMERIC OPERATOR_ASSIGN   // >=
+    |OPERATOR_LT_NUMERIC OPERATOR_ASSIGN  // <=
+    |OPERATOR_GT_NUMERIC
+    |OPERATOR_LT_NUMERIC
 
     |OPERATOR_GE_STR
     |OPERATOR_LE_STR
@@ -599,8 +572,8 @@ compare_expr ::= expr (
     ) expr
 
 equal_expr ::= expr (
-    OPERATOR_EQ_NUMERIC
-    |OPERATOR_NE_NUMERIC
+    OPERATOR_ASSIGN OPERATOR_ASSIGN // ==
+    |OPERATOR_NOT OPERATOR_ASSIGN   // !=
     |OPERATOR_CMP_NUMERIC
 
     |OPERATOR_EQ_STR
@@ -610,7 +583,7 @@ equal_expr ::= expr (
     |OPERATOR_SMARTMATCH
     ) expr
 
-bitwise_and_expr ::= expr (<<operatorBitwiseAnd>> expr)+
+bitwise_and_expr ::= expr (OPERATOR_BITWISE_AND expr)+
 bitwise_or_xor_expr ::= expr ((OPERATOR_BITWISE_OR|OPERATOR_BITWISE_XOR) expr)+
 and_expr ::= expr (OPERATOR_AND expr)+
 or_expr ::= expr ((OPERATOR_OR|OPERATOR_OR_DEFINED) expr)+
@@ -624,24 +597,25 @@ private assign_or_flow_expr ::=
     | goto_expr
     | redo_expr
 
+// fixme do we need to collapse tokens?
 assign_expr ::= expr ((
-    OPERATOR_ASSIGN
-    |OPERATOR_POW_ASSIGN
-    |OPERATOR_PLUS_ASSIGN
-    |OPERATOR_MINUS_ASSIGN
-    |<<parseMulAssign>>
-    |OPERATOR_DIV_ASSIGN
-    |OPERATOR_X_ASSIGN
-    |OPERATOR_BITWISE_AND_ASSIGN
-    |OPERATOR_BITWISE_OR_ASSIGN
-    |OPERATOR_BITWISE_XOR_ASSIGN
-    |OPERATOR_CONCAT_ASSIGN
-    |OPERATOR_SHIFT_LEFT_ASSIGN
-    |OPERATOR_SHIFT_RIGHT_ASSIGN
-    |OPERATOR_MOD_ASSIGN
-    |OPERATOR_AND_ASSIGN
-    |OPERATOR_OR_ASSIGN
-    |OPERATOR_OR_DEFINED_ASSIGN
+    OPERATOR_MUL OPERATOR_MUL OPERATOR_ASSIGN  // **=
+    |OPERATOR_PLUS OPERATOR_ASSIGN      // +=
+    |OPERATOR_MINUS OPERATOR_ASSIGN     // -=
+    |OPERATOR_MUL OPERATOR_ASSIGN       // *=
+    |OPERATOR_DIV OPERATOR_ASSIGN       // /=
+    |OPERATOR_MOD OPERATOR_ASSIGN       // %=
+    |OPERATOR_CONCAT OPERATOR_ASSIGN    // .=
+    |OPERATOR_X OPERATOR_ASSIGN         // x=
+    |OPERATOR_BITWISE_AND OPERATOR_ASSIGN   // &=
+    |OPERATOR_BITWISE_OR OPERATOR_ASSIGN    // |=
+    |OPERATOR_BITWISE_XOR OPERATOR_ASSIGN   // ^=
+    |OPERATOR_SHIFT_LEFT OPERATOR_ASSIGN    //  <<=
+    |OPERATOR_SHIFT_RIGHT OPERATOR_ASSIGN   //  >>=
+    |OPERATOR_AND OPERATOR_ASSIGN           //  &&=
+    |OPERATOR_OR OPERATOR_ASSIGN            //  ||=
+    |OPERATOR_OR_DEFINED OPERATOR_ASSIGN    //  //=
+    |OPERATOR_ASSIGN !OPERATOR_ASSIGN
     ) expr ) + { rightAssociative=true }
 
 private comma_expr ::= comma_sequence_expr | trailing_comma_expr
@@ -671,7 +645,7 @@ call_arguments ::=
     | block [[comma] list_expr]
     | list_expr
 
-file_read_expr ::= <<leftAngle>> [read_handle | perl_handle] <<rightAngle>>
+file_read_expr ::= OPERATOR_LT_NUMERIC [read_handle | perl_handle] OPERATOR_GT_NUMERIC
 read_handle ::= <<parseReadHandle>>
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
@@ -753,7 +727,7 @@ array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
     hash_variable                    // hash as is
-    | <<sigilHash>> LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
+    | OPERATOR_MOD LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
 
 private scalar ::=
     scalar_array_element
@@ -773,7 +747,7 @@ scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGH
 
 private glob ::=
     glob_variable
-    | <<sigilGlob>> LEFT_BRACE expr RIGHT_BRACE
+    | OPERATOR_MUL LEFT_BRACE expr RIGHT_BRACE
 
 private nested_element ::=
     braced_expr
@@ -796,7 +770,7 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 private callable ::= method | referencable_method // being used in parseFunctionCall
 
 private referencable_expr ::= referencable_method | scalar_expr
-private referencable_method ::= <<sigilCode>>
+private referencable_method ::= OPERATOR_BITWISE_AND
     (
         method
         | LEFT_BRACE expr RIGHT_BRACE
@@ -848,8 +822,8 @@ private lexical_variable ::= scalar_variable | array_variable | hash_variable
 array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
-hash_variable ::= <<sigilHash>> variable_body
-glob_variable ::= <<sigilGlob>> variable_body [braced_expr]
+hash_variable ::= OPERATOR_MOD variable_body
+glob_variable ::= OPERATOR_MUL variable_body [braced_expr]
 
 private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
 braced_string ::= <<parseBracedString>>

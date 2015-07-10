@@ -236,10 +236,6 @@ TRANS_MODIFIERS = [cdsr]
 {QUOTE}         {return processStringOpener();}
 
 "<=>" {return OPERATOR_CMP_NUMERIC;}
-"<=" {return OPERATOR_LE_NUMERIC;}
-">=" {return OPERATOR_GE_NUMERIC;}
-"==" {return OPERATOR_EQ_NUMERIC;}
-"!=" {return OPERATOR_NE_NUMERIC;}
 "<" {return OPERATOR_LT_NUMERIC;}
 ">" {return OPERATOR_GT_NUMERIC;}
 
@@ -253,7 +249,6 @@ TRANS_MODIFIERS = [cdsr]
 
 "++" {return OPERATOR_PLUS_PLUS;}
 "--" {return OPERATOR_MINUS_MINUS;}
-// "**" {return OPERATOR_POW;} // $* supported prior to 5.10
 
 "=~" {return OPERATOR_RE;}
 "!~" {return OPERATOR_NOT_RE;}
@@ -264,31 +259,10 @@ TRANS_MODIFIERS = [cdsr]
 
 "&&" {return OPERATOR_AND;}
 "||" {return OPERATOR_OR;}
-// "//" {return OPERATOR_OR_DEFINED;} // guessDiv
 "!" {return OPERATOR_NOT;}
 
-"**=" {return OPERATOR_POW_ASSIGN;}
-
-"+=" {return OPERATOR_PLUS_ASSIGN;}
-"-=" {return OPERATOR_MINUS_ASSIGN;}
-".=" {return OPERATOR_CONCAT_ASSIGN;}
-
-//"*=" {return OPERATOR_MUL_ASSIGN;} // moved to parser
-// "/=" {return OPERATOR_DIV_ASSIGN;}   // guessDiv
-"%=" {return OPERATOR_MOD_ASSIGN;}  // fixme we can split this too
-"x=" {return checkOperatorXAssign();} // fixme split this ?
 {X_OP_STICKED} {return checkOperatorXSticked();} // fixme split this ?
 
-"&=" {return OPERATOR_BITWISE_AND_ASSIGN;}  // fixme split this ?
-"|=" {return OPERATOR_BITWISE_OR_ASSIGN;}
-"^=" {return OPERATOR_BITWISE_XOR_ASSIGN;}
-
-"<<=" {return OPERATOR_SHIFT_LEFT_ASSIGN;}
-">>=" {return OPERATOR_SHIFT_RIGHT_ASSIGN;}
-
-"&&=" {return OPERATOR_AND_ASSIGN;}
-"||=" {return OPERATOR_OR_ASSIGN;}
-"//=" {return OPERATOR_OR_DEFINED_ASSIGN;}
 
 "?"  {return QUESTION;}
 ":"  {return COLON;}

@@ -58,38 +58,38 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// Following tokens may be a scalar/glob names
 			// "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
 	public static final TokenSet CAN_BE_VARIABLE_NAME = TokenSet.orSet(
-			CONVERTABLE_TOKENS,
-			TokenSet.create(
-					QUOTE_DOUBLE,   // suppress in lexer
-					QUOTE_SINGLE,   // suppress in lexer
-					QUOTE_TICK,     // suppress in lexer
-					OPERATOR_REFERENCE,
-					OPERATOR_NOT,
-					OPERATOR_MOD,
-					OPERATOR_BITWISE_AND,
-					LEFT_PAREN,
-					RIGHT_PAREN,
-					OPERATOR_PLUS,
-					SIGIL_SCALAR,
-					OPERATOR_COMMA,
-					OPERATOR_MINUS,
-					OPERATOR_CONCAT,
-					OPERATOR_DIV,
-					SEMICOLON,
-					OPERATOR_LT_NUMERIC,
-					OPERATOR_ASSIGN,
-					OPERATOR_GT_NUMERIC,
-					SIGIL_ARRAY,
-					LEFT_BRACKET,
-					RIGHT_BRACKET,
-					OPERATOR_BITWISE_OR,
-					OPERATOR_BITWISE_NOT,
-					OPERATOR_BITWISE_XOR,
-					QUESTION,
-					COLON,
-					OPERATOR_MUL,
-					NUMBER_SIMPLE
-			));
+					CONVERTABLE_TOKENS,
+					TokenSet.create(
+							QUOTE_DOUBLE,   // suppress in lexer
+							QUOTE_SINGLE,   // suppress in lexer
+							QUOTE_TICK,     // suppress in lexer
+							OPERATOR_REFERENCE,
+							OPERATOR_NOT,
+							OPERATOR_MOD,
+							OPERATOR_BITWISE_AND,
+							LEFT_PAREN,
+							RIGHT_PAREN,
+							OPERATOR_PLUS,
+							SIGIL_SCALAR,
+							OPERATOR_COMMA,
+							OPERATOR_MINUS,
+							OPERATOR_CONCAT,
+							OPERATOR_DIV,
+							SEMICOLON,
+							OPERATOR_LT_NUMERIC,
+							OPERATOR_ASSIGN,
+							OPERATOR_GT_NUMERIC,
+							SIGIL_ARRAY,
+							LEFT_BRACKET,
+							RIGHT_BRACKET,
+							OPERATOR_BITWISE_OR,
+							OPERATOR_BITWISE_NOT,
+							OPERATOR_BITWISE_XOR,
+							QUESTION,
+							COLON,
+							OPERATOR_MUL,
+							NUMBER_SIMPLE
+					));
 
 
 	public static final TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
@@ -101,7 +101,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static final TokenSet PRINT_HANDLE_NEGATE_SUFFIX = TokenSet.orSet(
 			TokenSet.create(
-					LEFT_ANGLE,
 					LEFT_BRACE,
 					LEFT_BRACKET,
 					LEFT_PAREN,
@@ -447,56 +446,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	}
 
-	public static boolean sigilCode(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, OPERATOR_BITWISE_AND, SIGIL_CODE);
-	}
-
-	public static boolean operatorBitwiseAnd(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, SIGIL_CODE, OPERATOR_BITWISE_AND);
-	}
-
-	public static boolean sigilGlob(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, OPERATOR_MUL, SIGIL_GLOB);
-	}
-
-	public static boolean operatorMul(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, SIGIL_GLOB, OPERATOR_MUL);
-	}
-
-	public static boolean sigilHash(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, OPERATOR_MOD, SIGIL_HASH);
-	}
-
-	public static boolean operatorMod(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, SIGIL_HASH, OPERATOR_MOD);
-	}
-
-	public static boolean leftAngle(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, OPERATOR_LT_NUMERIC, LEFT_ANGLE);
-	}
-
-	public static boolean operatorLtNumeric(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, LEFT_ANGLE, OPERATOR_LT_NUMERIC);
-	}
-
-	public static boolean rightAngle(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, OPERATOR_GT_NUMERIC, RIGHT_ANGLE);
-	}
-
-	public static boolean operatorGtNumeric(PsiBuilder b, int l)
-	{
-		return checkAndConvertToken(b, l, RIGHT_ANGLE, OPERATOR_GT_NUMERIC);
-	}
-
 	/**
 	 * Joining several regex tokens into one to lighten PSI tree. Temporary solution, until regex parsing is implemented
 	 *
@@ -559,7 +508,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType currentTokenType = b.getTokenType();
 		IElementType nextTokenType = b.lookAhead(1);
 
-		if (CONVERTABLE_TOKENS.contains(currentTokenType) && (nextTokenType == OPERATOR_GT_NUMERIC || nextTokenType == RIGHT_ANGLE))
+		if (CONVERTABLE_TOKENS.contains(currentTokenType) && nextTokenType == OPERATOR_GT_NUMERIC )
 		{
 			b.remapCurrentToken(HANDLE);
 			b.advanceLexer();
@@ -698,61 +647,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Merges sequence of *= to operator
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseMulAssign(PsiBuilder b, int l)
-	{
-		if (b.getTokenType() == OPERATOR_MUL && b.lookAhead(1) == OPERATOR_ASSIGN)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			b.advanceLexer();
-			m.collapse(OPERATOR_MUL_ASSIGN);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Merges sequence of ** to operator OPERATOR_POW
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseOperatorPow(PsiBuilder b, int l)
-	{
-		if (b.getTokenType() == OPERATOR_MUL && b.lookAhead(1) == OPERATOR_MUL)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			b.advanceLexer();
-			m.collapse(OPERATOR_POW);
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * Parses tokens as variables name; replaces:
-	 *
-	 variable_body = [scalar_sigils] (
-	 variable_body_braced
-	 | variable_body_canonical
-	 | variable_body_namespace_braced
-	 | variable_body_namespace
-	 )
-
-	 scalar_sigils ::= SIGIL_SCALAR+
-	 private variable_body_namespace_braced ::= LEFT_BRACE namespace_canonical RIGHT_BRACE
-	 private variable_body_namespace ::= namespace_canonical
-	 private variable_body_braced ::= LEFT_BRACE [namespace_canonical] <<convertIdentifier VARIABLE_NAME>> RIGHT_BRACE
-	 private variable_body_canonical ::= [namespace_canonical] <<convertIdentifier VARIABLE_NAME>>
-
 	 *
 	 * @param b PerlBuilder
 	 * @param l parsing level
