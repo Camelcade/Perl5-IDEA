@@ -1100,6 +1100,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public IElementType processStringOpener()
 	{
 		charOpener = charCloser = yytext().charAt(0);
+		forceQuote = false;
+		
 		if( !(SIGILS_TOKENS.contains(lastSignificantTokenType))) // this is string, not variable name $", $', $`
 		{
 			if( lastSignificantTokenType == LEFT_BRACE )	// can be ${"}
@@ -1109,7 +1111,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					return getQuoteToken(charOpener);
 			}
 			isEscaped = false;
-			forceQuote = false;
 			pushState();
 			if (!isLastToken())
 				yybegin(LEX_QUOTE_LIKE_CHARS);

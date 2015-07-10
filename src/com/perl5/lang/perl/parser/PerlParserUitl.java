@@ -55,48 +55,50 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			RIGHT_BRACKET
 	);
 
-			// Following tokens may be a scalar/glob names
-			// "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
-	public static final TokenSet CAN_BE_VARIABLE_NAME = TokenSet.orSet(
-					CONVERTABLE_TOKENS,
-					TokenSet.create(
-							QUOTE_DOUBLE,   // suppress in lexer
-							QUOTE_SINGLE,   // suppress in lexer
-							QUOTE_TICK,     // suppress in lexer
-							OPERATOR_REFERENCE,
-							OPERATOR_NOT,
-							OPERATOR_MOD,
-							OPERATOR_BITWISE_AND,
-							LEFT_PAREN,
-							RIGHT_PAREN,
-							OPERATOR_PLUS,
-							SIGIL_SCALAR,
-							OPERATOR_COMMA,
-							OPERATOR_MINUS,
-							OPERATOR_CONCAT,
-							OPERATOR_DIV,
-							SEMICOLON,
-							OPERATOR_LT_NUMERIC,
-							OPERATOR_ASSIGN,
-							OPERATOR_GT_NUMERIC,
-							SIGIL_ARRAY,
-							LEFT_BRACKET,
-							RIGHT_BRACKET,
-							OPERATOR_BITWISE_OR,
-							OPERATOR_BITWISE_NOT,
-							OPERATOR_BITWISE_XOR,
-							QUESTION,
-							COLON,
-							OPERATOR_MUL,
-							NUMBER_SIMPLE
-					));
-
+	// Following tokens may be a scalar/glob names
+	// "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
+	public static final TokenSet POSSIBLE_VARIABLE_NAME = TokenSet.orSet(
+			CONVERTABLE_TOKENS,
+			TokenSet.create(
+					QUOTE_DOUBLE,   // suppress in lexer
+					QUOTE_SINGLE,   // suppress in lexer
+					QUOTE_TICK,     // suppress in lexer
+					OPERATOR_REFERENCE,
+					OPERATOR_NOT,
+					OPERATOR_MOD,
+					OPERATOR_BITWISE_AND,
+					LEFT_PAREN,
+					RIGHT_PAREN,
+					OPERATOR_PLUS,
+					SIGIL_SCALAR,
+					OPERATOR_COMMA,
+					OPERATOR_MINUS,
+					OPERATOR_CONCAT,
+					OPERATOR_DIV,
+					SEMICOLON,
+					OPERATOR_LT_NUMERIC,
+					OPERATOR_ASSIGN,
+					OPERATOR_GT_NUMERIC,
+					SIGIL_ARRAY,
+					LEFT_BRACKET,
+					RIGHT_BRACKET,
+					OPERATOR_BITWISE_OR,
+					OPERATOR_BITWISE_NOT,
+					OPERATOR_BITWISE_XOR,
+					QUESTION,
+					COLON,
+					OPERATOR_MUL,
+					NUMBER_SIMPLE
+			));
 
 	public static final TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
-		PACKAGE_TOKENS,
-			CAN_BE_VARIABLE_NAME,
-			TokenSet.create(LEFT_BRACE)
-	);
+			PACKAGE_TOKENS,
+			CONVERTABLE_TOKENS,
+			TokenSet.create(
+					LEFT_BRACE,
+					SIGIL_SCALAR,
+					OPERATOR_BITWISE_XOR
+			));
 
 
 	public static final TokenSet PRINT_HANDLE_NEGATE_SUFFIX = TokenSet.orSet(
@@ -508,7 +510,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType currentTokenType = b.getTokenType();
 		IElementType nextTokenType = b.lookAhead(1);
 
-		if (CONVERTABLE_TOKENS.contains(currentTokenType) && nextTokenType == OPERATOR_GT_NUMERIC )
+		if (CONVERTABLE_TOKENS.contains(currentTokenType) && nextTokenType == OPERATOR_GT_NUMERIC)
 		{
 			b.remapCurrentToken(HANDLE);
 			b.advanceLexer();
@@ -660,25 +662,27 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		PsiBuilder.Marker m = null;
 
-		while( currentTokenType == SIGIL_SCALAR && POST_SIGILS_SUFFIXES.contains(nextTokenType))
+		while (currentTokenType == SIGIL_SCALAR                                // sigil is here
+				&& POST_SIGILS_SUFFIXES.contains(nextTokenType)            // next can be variable name
+				)
 		{
-			if( m == null )
+			if (m == null)
 				m = b.mark();
 			b.advanceLexer();
 			currentTokenType = nextTokenType;
 			nextTokenType = b.rawLookup(1);
 		}
 
-		if( m != null )
+		if (m != null)
 			m.collapse(SCALAR_SIGILS);
 
 		// $package::
 		// $package::var
-		if( PACKAGE_TOKENS.contains(currentTokenType) )
+		if (PACKAGE_TOKENS.contains(currentTokenType))
 		{
 			b.remapCurrentToken(PACKAGE);
 			b.advanceLexer();
-			if( CONVERTABLE_TOKENS.contains(nextTokenType))
+			if (CONVERTABLE_TOKENS.contains(nextTokenType))
 			{
 				b.remapCurrentToken(VARIABLE_NAME);
 				b.advanceLexer();
@@ -686,16 +690,15 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 		// $var
-		else if( CAN_BE_VARIABLE_NAME.contains(currentTokenType))
+		else if (POSSIBLE_VARIABLE_NAME.contains(currentTokenType))
 		{
-			if( currentTokenType == OPERATOR_BITWISE_XOR && CONTROL_VARIABLE_NAMES.contains(nextTokenType) ) // branch for $^]
+			if (currentTokenType == OPERATOR_BITWISE_XOR && CONTROL_VARIABLE_NAMES.contains(nextTokenType)) // branch for $^]
 			{
 				m = b.mark();
 				b.advanceLexer();
 				b.advanceLexer();
 				m.collapse(VARIABLE_NAME);
-			}
-			else
+			} else
 			{
 				b.remapCurrentToken(VARIABLE_NAME);
 				b.advanceLexer();
@@ -704,7 +707,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 		// ${var}
-		else if( currentTokenType == LEFT_BRACE )
+		else if (currentTokenType == LEFT_BRACE)
 		{
 			b.advanceLexer();
 			currentTokenType = nextTokenType;
@@ -712,25 +715,24 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 			// ${package::}
 			// ${package::var}
-			if( PACKAGE_TOKENS.contains(currentTokenType) )
+			if (PACKAGE_TOKENS.contains(currentTokenType))
 			{
 				b.remapCurrentToken(PACKAGE);
 				b.advanceLexer();
-				if( CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(1) == RIGHT_BRACE)
+				if (CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(1) == RIGHT_BRACE)
 				{
 					b.remapCurrentToken(VARIABLE_NAME);
 					b.advanceLexer();
 					b.advanceLexer();
 					return true;
-				}
-				else if(nextTokenType == RIGHT_BRACE)
+				} else if (nextTokenType == RIGHT_BRACE)
 				{
 					b.advanceLexer();
 					return true;
 				}
 			}
 			// ${var}
-			else if( CAN_BE_VARIABLE_NAME.contains(currentTokenType) && nextTokenType == RIGHT_BRACE)
+			else if (POSSIBLE_VARIABLE_NAME.contains(currentTokenType) && nextTokenType == RIGHT_BRACE)
 			{
 				b.remapCurrentToken(VARIABLE_NAME);
 				b.advanceLexer();

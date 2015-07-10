@@ -555,11 +555,17 @@ prefix_unary_expr ::=  (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 
-mul_expr ::= expr ((OPERATOR_MUL !OPERATOR_MUL|OPERATOR_DIV|OPERATOR_MOD|OPERATOR_X) expr)+
-add_expr ::= expr ((OPERATOR_PLUS|OPERATOR_MINUS|OPERATOR_CONCAT) expr)+
-shift_expr ::= expr ((OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) expr)+
+mul_expr ::= expr (operator_mul expr)+
+private operator_mul ::= (OPERATOR_MUL !OPERATOR_MUL |OPERATOR_DIV|OPERATOR_MOD|OPERATOR_X) !OPERATOR_ASSIGN
 
-compare_expr ::= expr (
+add_expr ::= expr (operator_add expr)+
+private operator_add ::= (OPERATOR_PLUS|OPERATOR_MINUS|OPERATOR_CONCAT) !OPERATOR_ASSIGN
+
+shift_expr ::= expr (operator_shift expr)+
+private operator_shift ::= (OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) !OPERATOR_ASSIGN
+
+compare_expr ::= expr (operator_compare) expr
+private operator_compare ::=
     OPERATOR_GT_NUMERIC OPERATOR_ASSIGN   // >=
     |OPERATOR_LT_NUMERIC OPERATOR_ASSIGN  // <=
     |OPERATOR_GT_NUMERIC
@@ -569,24 +575,28 @@ compare_expr ::= expr (
     |OPERATOR_LE_STR
     |OPERATOR_LT_STR
     |OPERATOR_GT_STR
-    ) expr
 
-equal_expr ::= expr (
+equal_expr ::= expr operator_equal expr
+private operator_equal ::=
     OPERATOR_ASSIGN OPERATOR_ASSIGN // ==
     |OPERATOR_NOT OPERATOR_ASSIGN   // !=
     |OPERATOR_CMP_NUMERIC
-
     |OPERATOR_EQ_STR
     |OPERATOR_NE_STR
     |OPERATOR_CMP_STR
-
     |OPERATOR_SMARTMATCH
-    ) expr
 
-bitwise_and_expr ::= expr (OPERATOR_BITWISE_AND expr)+
-bitwise_or_xor_expr ::= expr ((OPERATOR_BITWISE_OR|OPERATOR_BITWISE_XOR) expr)+
-and_expr ::= expr (OPERATOR_AND expr)+
-or_expr ::= expr ((OPERATOR_OR|OPERATOR_OR_DEFINED) expr)+
+bitwise_and_expr ::= expr (OPERATOR_BITWISE_AND !OPERATOR_ASSIGN expr)+
+
+bitwise_or_xor_expr ::= expr ( operator_bitwise_or_xor expr)+
+private operator_bitwise_or_xor ::= (OPERATOR_BITWISE_OR|OPERATOR_BITWISE_XOR) !OPERATOR_ASSIGN
+
+and_expr ::= expr ( operator_and expr)+
+private operator_and ::= OPERATOR_AND !OPERATOR_ASSIGN
+
+or_expr ::= expr ( operator_or_or_defined expr)+
+private operator_or_or_defined ::= (OPERATOR_OR|OPERATOR_OR_DEFINED) !OPERATOR_ASSIGN
+
 flipflop_expr ::= expr (OPERATOR_FLIP_FLOP|OPERATOR_HELLIP) expr
 trenar_expr ::= expr QUESTION scalar_expr COLON scalar_expr { rightAssociative=true }
 
@@ -598,7 +608,9 @@ private assign_or_flow_expr ::=
     | redo_expr
 
 // fixme do we need to collapse tokens?
-assign_expr ::= expr ((
+assign_expr ::= expr (operator_assign expr ) + { rightAssociative=true }
+
+private operator_assign ::=
     OPERATOR_MUL OPERATOR_MUL OPERATOR_ASSIGN  // **=
     |OPERATOR_PLUS OPERATOR_ASSIGN      // +=
     |OPERATOR_MINUS OPERATOR_ASSIGN     // -=
@@ -616,7 +628,6 @@ assign_expr ::= expr ((
     |OPERATOR_OR OPERATOR_ASSIGN            //  ||=
     |OPERATOR_OR_DEFINED OPERATOR_ASSIGN    //  //=
     |OPERATOR_ASSIGN !OPERATOR_ASSIGN
-    ) expr ) + { rightAssociative=true }
 
 private comma_expr ::= comma_sequence_expr | trailing_comma_expr
 comma_sequence_expr ::= expr (comma_any+ expr ) + {pin(".*")=1}
