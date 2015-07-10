@@ -1,4 +1,14 @@
 
+sub import {
+    my $callpack = caller;
+    my $pack = shift;
+    my @imports = @_;
+    foreach my $sym (@imports) {
+	*{"${callpack}::$sym"} = \&{"${callpack}::$sym"};
+    }
+};
+
+
 $a = $a + $b;
 $a = $a - $b;
 $a = $a * $b;

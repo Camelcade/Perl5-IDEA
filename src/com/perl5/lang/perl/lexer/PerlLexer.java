@@ -1100,8 +1100,14 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public IElementType processStringOpener()
 	{
 		charOpener = charCloser = yytext().charAt(0);
-		if( !(SIGILS_TOKENS.contains(lastUnbraceTokenType))) // this is string, not variable name
+		if( !(SIGILS_TOKENS.contains(lastSignificantTokenType))) // this is string, not variable name $", $', $`
 		{
+			if( lastSignificantTokenType == LEFT_BRACE )	// can be ${"}
+			{
+				Character nextSignificantCharacter = getNextSignificantCharacter();
+				if( nextSignificantCharacter != null && nextSignificantCharacter.equals('}'))
+					return getQuoteToken(charOpener);
+			}
 			isEscaped = false;
 			forceQuote = false;
 			pushState();
