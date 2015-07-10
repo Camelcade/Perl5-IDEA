@@ -52,6 +52,7 @@
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
 
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
+        <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
 
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
         <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
