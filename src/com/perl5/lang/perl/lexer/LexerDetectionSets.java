@@ -150,6 +150,7 @@ public interface LexerDetectionSets extends PerlElementTypes
 
 	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<>(Arrays.asList(
 			"split",
+			"return",
 			"grep"
 	));
 

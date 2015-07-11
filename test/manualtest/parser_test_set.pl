@@ -1,4 +1,47 @@
 
+# B::Deparse
+if (!$raw and $name =~ /^(\^..|{)/ ) {
+    $name = "{$name}";       # ${^WARNING_BITS}, etc and ${
+}
+
+
+# Devel::Peek
+$num |=  (1<<index($D_flags, $_)) for split //, $on;
+
+# guess a file :)
+package Encode::KR::2022_KR;
+
+# ExtUtils::Constant::Base what the heck is this?
+my $r = ref $b eq 'ARRAY' ? ($b->[0] || $->[1]) : $b;
+
+# Log::Agent::File::Native  print magic doesn't work here
+return CORE::print $glob @_;
+
+# Net::NNTP
+{
+    last:
+}
+
+# Pod/Functions.pm
+format =
+
+^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    $typedesc
+~~ ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    $typedesc
+ ~~  ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	$list
+.
+
+
+# no idea Pod::Main Config::Perl::V
+if ($$self{MAGIC_EMDASH}) {
+    s{          (\s) \\-\\- (\s)                } { $1 . '\*(--' . $2 }egx;
+    s{ (\b[a-zA-Z]+) \\-\\- (\s|\Z|[a-zA-Z]+\b) } { $1 . '\*(--' . $2 }egx;
+}
+
+# thinks it's a glob parameter  Time/Local.pm
+time * $_[123];
 
 our Foo $var :shared unique;
 our Foo ($var1, $var2) :shared unique = 1;
@@ -24,6 +67,7 @@ sub abc($$$@){}
 sub abc;
 sub abc{}
 
+$a =.123;
 
 $a->[123].123;
 $a->{something}.123;
