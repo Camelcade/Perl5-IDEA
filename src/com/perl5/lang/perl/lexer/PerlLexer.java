@@ -428,6 +428,22 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return NUMBER_VERSION;
 	}
 
+	/**
+	 * Parses number. Specifically: $var.123; where . is concat
+	 * @return
+	 */
+	@Override
+	public IElementType parseNumber()
+	{
+		String tokenText = yytext().toString();
+		if( tokenText.startsWith(".") && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType))
+		{
+			yypushback(tokenText.length()-1);
+			return OPERATOR_CONCAT;
+		}
+		return NUMBER;
+	}
+
 	public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
 
 	public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
@@ -1212,10 +1228,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		String tokenText = yytext().toString();
 
 		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType) || SIGILS_TOKENS.contains(lastTokenType);
-		Character nextCharacter;
 
-		if( !negate	&& ( isBraced() || isCommaArrowAhead())
-		)
+		if( !negate	&& isBraced())
+			return IDENTIFIER;
+		else if (!negate && isCommaArrowAhead() )
 			return STRING_CONTENT;
 		else if( tokenText.startsWith("--"))
 		{
@@ -1265,11 +1281,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					processQuoteLikeStringOpener();
 				else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
 					processRegexOpener();
-				else if (tokenType == RESERVED_SUB)
-				{
-					pushState();
-					yybegin(LEX_SUB_NAME);
-				}
 				return tokenType;
 			} else if ((tokenType = blockNames.get(tokenText)) != null)
 				return tokenType;

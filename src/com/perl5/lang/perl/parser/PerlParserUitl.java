@@ -282,8 +282,15 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 //		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
 
+		PsiBuilder.Marker m = null;
 		while (!b.eof() && b.getTokenType() != RIGHT_PAREN)
-			consumeToken(b, b.getTokenType());
+		{
+			if( m == null )
+				m = b.mark();
+			b.advanceLexer();
+		}
+		if( m != null )
+			m.collapse(SUB_PROTOTYPE_TOKEN);
 
 		return true;
 	}
@@ -294,12 +301,15 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
 //		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
 
-		while (!b.eof() && b.getTokenType() != LEFT_BRACE)
+		PsiBuilder.Marker m = null;
+		while (!b.eof() && b.getTokenType() != LEFT_BRACE && b.getTokenType() != SEMICOLON)
 		{
-			PerlBuilder.Marker m = b.mark();
+			if( m == null )
+				m = b.mark();
 			b.advanceLexer();
-			m.collapse(SUB_ATTRIBUTE);
 		}
+		if( m != null )
+			m.collapse(SUB_ATTRIBUTE);
 
 		return true;
 	}

@@ -63,7 +63,6 @@ PERL_XIDS = [_a-zA-Z]
 PERL_XIDC = [_a-zA-Z0-9]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
-IDENTIFIER_BRACED = "{" {EMPTY_SPACE}* {IDENTIFIER} {EMPTY_SPACE}* "}"
 
 BAREWORD_MINUS = "-" * {IDENTIFIER}
 
@@ -90,6 +89,7 @@ NUMBER_HEX = "0x" [0-9a-fA-F]+
 NUMBER_BIN = "0b"[01]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
+// fixme this can be done in bareword parser
 X_OP_STICKED = "x"[0-9]+[^a-zA-Z]
 
 // atm making the same, but seems unary are different
@@ -112,53 +112,8 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_REGEX_OPENER
 %xstate LEX_PREPARSED_ITEMS
 
-%state LEX_SUB_DEFINITION
-%xstate LEX_SUB_NAME
-%xstate LEX_SUB_PROTOTYPE
-
-%xstate LEX_BRACED_IDENTIFIER
-
 %state LEX_HTML_BLOCK
 %%
-
-// exclusive
-<LEX_BRACED_IDENTIFIER>
-{
-    "{" {return LEFT_BRACE;}
-    "}" {endCustomBlock();return RIGHT_BRACE;}
-    {IDENTIFIER} {return IDENTIFIER;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-}
-
-
-// exclusive
-<LEX_SUB_NAME>
-{
-    {PACKAGE} { return PACKAGE_IDENTIFIER;}
-    {IDENTIFIER} {yybegin(LEX_SUB_DEFINITION);return IDENTIFIER;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    .   {yypushback(1);yybegin(LEX_SUB_DEFINITION);break;}
-}
-
-// inclusive
-<LEX_SUB_DEFINITION>
-{
-    "{" {popState();yypushback(1);break;}   // block of definition
-    ";" {popState();yypushback(1);break;}   // end of declaration
-    ":" {popState();yypushback(1);break;}   // attribute
-    "(" {yybegin(LEX_SUB_PROTOTYPE);return LEFT_PAREN;}
-}
-
-// exclusive
-<LEX_SUB_PROTOTYPE>
-{
-    ")" {popState();return RIGHT_PAREN;}
-    {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-    {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-    .   {return SUB_PROTOTYPE_TOKEN; }
-}
 
 // inclusive states
 {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
@@ -299,7 +254,7 @@ TRANS_MODIFIERS = [cdsr]
 ")"             {return RIGHT_PAREN;}
 
 {NUMBER_INT_SIMPLE} {return NUMBER_SIMPLE;}
-{NUMBER}        {return NUMBER;}
+{NUMBER}        {return parseNumber();}
 {PERL_VERSION}  {return parseVersion();}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
@@ -310,7 +265,6 @@ TRANS_MODIFIERS = [cdsr]
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
 // fixme refactor
-{IDENTIFIER_BRACED} {startCustomBlock(LEX_BRACED_IDENTIFIER);break;}
 {BAREWORD_MINUS} {return parseBarewordMinus();}
 {PACKAGE_PARSABLE} {return parsePackage(); }
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}

@@ -1,4 +1,24 @@
 
+
+
+sub abc($$$@): method;
+sub abc($$$@): method {};
+
+sub abc: method;
+sub abc: method{};
+
+sub abc($$$@);
+sub abc($$$@){}
+
+sub abc;
+sub abc{}
+
+
+$a->[123].123;
+$a->{something}.123;
+($a).123;
+$a.123;
+
 my $v123;
 my $v123_234;
 $v123."something";
@@ -11,6 +31,11 @@ END_OF_AUTOLOAD
 ;
 
 package main;
+
+&method => 123;
+--something => 145;
+-something => 123;
+$self->method => something;
 
 --blah => -blah => blah => 1;
 -package => 123;
@@ -296,10 +321,6 @@ if ($sub_ref) {
 	*OSNAME					= *^O	;
 
 
-&method => 123;
---something => 145;
--something => 123;
-$self->method => something;
 
 print <<'!END!';
 Test from perl lib

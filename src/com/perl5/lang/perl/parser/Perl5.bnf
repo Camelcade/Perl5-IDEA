@@ -221,6 +221,9 @@ limitations under the License.
     IDENTIFIER="IDENTIFIER"
     PACKAGE_IDENTIFIER="PACKAGE_IDENTIFIER"
 
+
+    VAR_ATTRIBUTE="VAR_ATTRIBUTE"
+
     SUB_ATTRIBUTE="SUB_ATTRIBUTE"
     SUB_PROTOTYPE_TOKEN="SUB_PROTOTYPE_TOKEN"
 
@@ -318,14 +321,6 @@ private compound_statement ::=
 
 named_block ::= BLOCK_NAME block
 
-// fixme we can't pin this because we need to distinct declaration and definition
-sub_definition ::= [annotations] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
-
-private sub_definition_parameters ::=
-    sub_prototype [sub_attributes]
-    | sub_attributes [sub_signature]
-    | sub_signature
-
 
 private labelable_compound_statment ::=
     [label_declaration] (
@@ -391,11 +386,21 @@ private statement_body ::=
 
 private normal_statement ::= [label_declaration] expr [statement_modifier] {pin=2}
 
-sub_declaration ::= [annotations] RESERVED_SUB canonical_sub_name sub_declaration_parameters
+// fixme we can't pin this because we need to distinct declaration and definition
+sub_definition ::= [annotations] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
+
+private sub_definition_parameters ::=
+    sub_prototype [sub_attributes]
+    | sub_attributes [sub_signature]
+    | sub_signature
+
+sub_declaration ::= [annotations] RESERVED_SUB canonical_sub_name [sub_declaration_parameters]
 
 private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
 
-private sub_declaration_parameters ::=  [sub_prototype] [sub_attributes]
+private sub_declaration_parameters ::=
+    sub_prototype [sub_attributes]
+    | sub_attributes
 
 // todo implement parsing
 private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_prototype}

@@ -117,10 +117,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 		attributesMap.put(PerlElementTypes.OPERATOR_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
 
-		attributesMap.put(PerlElementTypes.SUB, new TextAttributesKey[]{PERL_SUB});
-		attributesMap.put(PerlElementTypes.SUB_PROTOTYPE_TOKEN, new TextAttributesKey[]{PERL_SUB_PROTOTYPE_TOKEN});
-		attributesMap.put(PerlElementTypes.SUB_ATTRIBUTE, new TextAttributesKey[]{PERL_SUB_ATTRIBUTE});
-
 		attributesMap.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 
 		attributesMap.put(PerlElementTypes.TEMPLATE_BLOCK_HTML, new TextAttributesKey[]{PERL_COMMENT});
@@ -158,11 +154,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 		attributesMap.put(PerlElementTypes.PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
 		attributesMap.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
-
-		attributesMap.put(PerlElementTypes.SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
-		attributesMap.put(PerlElementTypes.SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
-		attributesMap.put(PerlElementTypes.SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
-		attributesMap.put(PerlElementTypes.VARIABLE_NAME, new TextAttributesKey[]{DefaultLanguageHighlighterColors.IDENTIFIER});
 	}
 
 

@@ -53,6 +53,7 @@ public interface LexerDetectionSets extends PerlElementTypes
 	public static final TokenSet IDENTIFIER_NEGATION_PREFIX = TokenSet.orSet(
 			PRE_PACKAGE_TOKENS,
 			TokenSet.create(
+					RESERVED_SUB,			// sub eval
 					OPERATOR_DEREFERENCE    // ->identifier
 			)
 	);
@@ -123,6 +124,16 @@ public interface LexerDetectionSets extends PerlElementTypes
 
 			OPERATOR_X,
 			OPERATOR_FILETEST
+	);
+
+
+	// tokens which may preceeds .123 and . is a concat
+	public static final TokenSet CONCAT_OPERATOR_PREFIX = TokenSet.create(
+			IDENTIFIER,
+			RIGHT_BRACE,
+			RIGHT_PAREN,
+			RIGHT_BRACKET,
+			PACKAGE_IDENTIFIER
 	);
 
 

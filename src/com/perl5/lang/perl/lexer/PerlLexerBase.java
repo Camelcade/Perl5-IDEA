@@ -36,6 +36,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 
 	public abstract IElementType checkOperatorXSticked();
 	public abstract IElementType parseVersion();
+	public abstract IElementType parseNumber();
 
 	public abstract IElementType parseCappedVariableName();
 	public abstract IElementType parsePackage();
