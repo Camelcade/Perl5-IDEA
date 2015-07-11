@@ -10,6 +10,7 @@ for our $var  (@array)
 }
 
 sub abc: prototype($$$$){};
+sub abc: prototype($$$$);
 
 sub abc($$$@): method;
 sub abc($$$@): method {};
