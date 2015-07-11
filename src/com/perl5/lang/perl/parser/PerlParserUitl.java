@@ -755,10 +755,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean parseGlobSigil(PsiBuilder b, int l)
+	public static boolean parseAmbiguousSigil(PsiBuilder b, int l, IElementType sigilTokenType)
 	{
 		IElementType tokenType = b.getTokenType();
-		if (tokenType == OPERATOR_MUL)
+		if (tokenType == sigilTokenType)
 		{
 			if (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1))) // space disallowed after *
 				return false;

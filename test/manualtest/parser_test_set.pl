@@ -31,6 +31,8 @@ my $r = ref $b eq 'ARRAY' ? ($b->[0] || $->[1]) : $b;
 
 # thinks it's a glob parameter  Time/Local.pm
 time * $_[123];;;;
+time & $_[123];;;;
+time % $_[123];;;;
 
 our Foo $var :shared unique;
 our Foo ($var1, $var2) :shared unique = 1;

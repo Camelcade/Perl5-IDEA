@@ -796,7 +796,7 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 private callable ::= method | referencable_method // being used in parseFunctionCall
 
 private referencable_expr ::= referencable_method | scalar_expr
-private referencable_method ::= OPERATOR_BITWISE_AND
+private referencable_method ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>>
     (
         method
         | LEFT_BRACE expr RIGHT_BRACE
@@ -848,8 +848,8 @@ private lexical_variable ::= scalar_variable | array_variable | hash_variable
 array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
-hash_variable ::= OPERATOR_MOD variable_body
-glob_variable ::= <<parseGlobSigil>> variable_body [braced_expr]
+hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD>> variable_body
+glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body [braced_expr]
 
 private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
 braced_string ::= <<parseBracedString>>
