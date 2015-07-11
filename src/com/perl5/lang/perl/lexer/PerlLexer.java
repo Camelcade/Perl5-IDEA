@@ -102,6 +102,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		reservedTokenTypes.put("foreach", RESERVED_FOREACH);
 		reservedTokenTypes.put("continue", RESERVED_CONTINUE);
 
+		reservedTokenTypes.put("format", RESERVED_FORMAT);
 		reservedTokenTypes.put("sub", RESERVED_SUB);
 		reservedTokenTypes.put("package", RESERVED_PACKAGE);
 		reservedTokenTypes.put("use", RESERVED_USE);
@@ -189,6 +190,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			if (currentState == LEX_HEREDOC_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
 			{
 				IElementType tokenType = captureHereDoc();
+				if (tokenType != null)    // got something
+					return tokenType;
+			}
+			// capture format
+			if (currentState == LEX_FORMAT_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
+			{
+				IElementType tokenType = captureFormat();
 				if (tokenType != null)    // got something
 					return tokenType;
 			}
@@ -670,13 +678,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		int currentPosition = tokenStart;
 		int linePos = currentPosition;
 
-		IElementType blockType;
-
-//		if( "SQL".equals(heredocMarker))
-//			blockType = PerlTokenType.HEREDOC_SQL;
-//		else
-		blockType = HEREDOC;
-
 		while (true)
 		{
 			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
@@ -700,7 +701,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				{
 					setTokenStart(tokenStart);
 					setTokenEnd(currentPosition);
-					return blockType;
+					return HEREDOC;
 				}
 				// empty heredoc and got the end
 				else
@@ -715,7 +716,70 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				{
 					setTokenStart(tokenStart);
 					setTokenEnd(currentPosition);
-					return blockType;
+					return HEREDOC;
+				}
+				// empty heredoc and got the end of file
+				else
+					return null;
+			}
+			currentPosition = linePos;
+		}
+	}
+
+	/**
+	 * Captures format; fixme refactor with captureHeredoc got common parts
+	 *
+	 * @return Heredoc token type
+	 */
+	public IElementType captureFormat()
+	{
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenEnd();
+		setTokenStart(tokenStart);
+		int bufferEnd = buffer.length();
+
+		int currentPosition = tokenStart;
+		int linePos = currentPosition;
+
+		while (true)
+		{
+			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
+				linePos++;
+			int lineContentsEnd = linePos;
+
+			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
+				linePos++;
+			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
+				linePos++;
+
+			// reached the end of heredoc and got end marker
+			if (".".equals(buffer.subSequence(currentPosition, lineContentsEnd).toString()))
+			{
+				tokensList.clear();
+				tokensList.add(new CustomToken(currentPosition, lineContentsEnd, FORMAT_TERMINATOR));
+				yybegin(LEX_PREPARSED_ITEMS);
+
+				// non-empty heredoc and got the end
+				if (currentPosition > tokenStart)
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(currentPosition);
+					return FORMAT;
+				}
+				// empty format and got the end
+				else
+					return getPreParsedToken();
+			}
+			// reached the end of file
+			else if (linePos == bufferEnd)
+			{
+				popState();
+				// non-empty format and got the end of file
+				if (currentPosition > tokenStart)
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(currentPosition);
+					return FORMAT;
 				}
 				// empty heredoc and got the end of file
 				else
@@ -1285,6 +1349,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					processQuoteLikeStringOpener();
 				else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
 					processRegexOpener();
+				else if(tokenType == RESERVED_FORMAT)
+				{
+					pushState();
+					yybegin(LEX_FORMAT_WAITING);
+				}
 				return tokenType;
 			} else if ((tokenType = blockNames.get(tokenText)) != null)
 				return tokenType;

@@ -66,6 +66,9 @@ limitations under the License.
     HEREDOC="HEREDOC" // should be string content too
     HEREDOC_END="HEREDOC_END"
 
+    FORMAT="FORMAT"
+    FORMAT_TERMINATOR="."
+
     VERSION="VERSION"
     NUMBER_VERSION="NUMBER_VERSION"
     NUMBER="NUMBER"
@@ -83,6 +86,7 @@ limitations under the License.
     RESERVED_CONTINUE="continue"
     RESERVED_WHEN="when"
 
+    RESERVED_FORMAT="format"
     RESERVED_SUB="sub"
     RESERVED_PACKAGE="package"
     RESERVED_USE="use"
@@ -311,8 +315,11 @@ private recover_block ::= !(RIGHT_BRACE)
 
 private namespace_item ::=
     compound_statement [SEMICOLON+]
+    | format_definition
     | statement
     | annotation
+
+format_definition ::= RESERVED_FORMAT [IDENTIFIER] OPERATOR_ASSIGN [FORMAT] FORMAT_TERMINATOR
 
 private compound_statement ::=
     sub_definition

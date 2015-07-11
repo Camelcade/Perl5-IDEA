@@ -1,3 +1,8 @@
+
+s{          (\s) \\-\\- (\s)                } { $1 . '\*(--' . $2 }egx;
+
+__DATA__
+
 $name =~ /^(\^..|\{)/;
 
 # Devel::Peek
@@ -14,25 +19,14 @@ package Encode::KR::2022_KR;
 # ExtUtils::Constant::Base what the heck is this?
 my $r = ref $b eq 'ARRAY' ? ($b->[0] || $->[1]) : $b;
 
-# Log::Agent::File::Native  print magic doesn't work here
-return CORE::print $glob @_;
-
 # Net::NNTP
 {
     last:
 }
 
-# Pod/Functions.pm
-format =
 
-^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    $typedesc
-~~ ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    $typedesc
- ~~  ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	$list
-.
-
+# Log::Agent::File::Native  print magic doesn't work here
+#return CORE::print $glob @_;
 
 # no idea Pod::Main Config::Perl::V
 if ($$self{MAGIC_EMDASH}) {
@@ -605,6 +599,36 @@ sub somesub
 {
 
 }
+
+
+format =
+
+^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    $typedesc
+~~ ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    $typedesc
+ ~~  ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	$list
+.
+
+# Pod/Functions.pm
+format =
+.
+
+format SOMETHING =
+
+^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    $typedesc
+~~ ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    $typedesc
+ ~~  ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	$list
+.
+
+# Pod/Functions.pm
+format STDOUT =
+.
+
 
 ${Foo::Bar::somesub()};
 @{Foo::Bar::somesub()};
