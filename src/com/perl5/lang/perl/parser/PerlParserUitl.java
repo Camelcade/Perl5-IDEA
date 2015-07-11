@@ -261,17 +261,21 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 
-	// fixme may have nested ()
 	public static boolean parseSubPrototype(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = null;
-		while (!b.eof() && b.getTokenType() != RIGHT_PAREN)
+
+		IElementType tokenType = b.getTokenType();
+		while (!b.eof() && (tokenType != RIGHT_PAREN))
 		{
-			if( m == null )
+			if (m == null)
 				m = b.mark();
+
+
 			b.advanceLexer();
+			tokenType = b.getTokenType();
 		}
-		if( m != null )
+		if (m != null)
 			m.collapse(SUB_PROTOTYPE_TOKEN);
 
 		return true;
@@ -282,13 +286,15 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 
 		PsiBuilder.Marker m = null;
-		while (!b.eof() && b.getTokenType() != LEFT_BRACE && b.getTokenType() != SEMICOLON)
+		IElementType tokenType = b.getTokenType();
+		while (!b.eof() && tokenType != LEFT_BRACE && tokenType != SEMICOLON)
 		{
-			if( m == null )
+			if (m == null)
 				m = b.mark();
 			b.advanceLexer();
+			tokenType = b.getTokenType();
 		}
-		if( m != null )
+		if (m != null)
 			m.collapse(SUB_ATTRIBUTE);
 
 		return true;
@@ -301,11 +307,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		PsiBuilder.Marker m = null;
 		while (!b.eof() && !VARIABLE_ATTRIBUTE_STOP_TOKENS.contains(b.getTokenType()))
 		{
-			if( m == null )
+			if (m == null)
 				m = b.mark();
 			b.advanceLexer();
 		}
-		if( m != null )
+		if (m != null)
 			m.collapse(VAR_ATTRIBUTE);
 
 		return true;
