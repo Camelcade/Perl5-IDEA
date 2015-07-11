@@ -16,21 +16,21 @@ $num |=  (1<<index($D_flags, $_)) for split //, $on;
 # B::Deparse
 if (!$raw and $name =~ /^(\^..|\{)/ ) {
     $name = "{$name}";       # ${^WARNING_BITS}, etc and ${
-}
+};;;;;
 
 # guess a file :)
-package Encode::KR::2022_KR;
+package Encode::KR::2022_KR;;;;;;
 
 # ExtUtils::Constant::Base what the heck is this?
 my $r = ref $b eq 'ARRAY' ? ($b->[0] || $->[1]) : $b;
 
 # Net::NNTP
 {
-    last;
+    last;;;;
 }
 
 # thinks it's a glob parameter  Time/Local.pm
-time * $_[123];
+time * $_[123];;;;
 
 our Foo $var :shared unique;
 our Foo ($var1, $var2) :shared unique = 1;
@@ -72,7 +72,6 @@ v5.10;
 our $AUTOLOADED_ROUTINES=<<'END_OF_AUTOLOAD';
 
 END_OF_AUTOLOAD
-;
 
 package main;
 

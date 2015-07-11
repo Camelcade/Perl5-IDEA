@@ -19,7 +19,6 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -336,10 +335,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		IElementType tokenType = b.getTokenType();
 		if (tokenType == SEMICOLON)
-		{
-			consumeToken(b, SEMICOLON);
-			return true;
-		} else if (tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE)
+			return consumeToken(b, SEMICOLON);
+		else if (tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE)
 			return true;
 		else if (b.eof()) // eof
 			return true;
@@ -761,9 +758,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseGlobSigil(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
-		if( tokenType == OPERATOR_MUL )
+		if (tokenType == OPERATOR_MUL)
 		{
-			if(PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1))) // space disallowed after *
+			if (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1))) // space disallowed after *
 				return false;
 
 			b.advanceLexer();

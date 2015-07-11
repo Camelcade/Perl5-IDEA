@@ -314,7 +314,8 @@ private block_content ::= file_item * {recoverWhile=recover_block}
 private recover_block ::= !(RIGHT_BRACE)
 
 private namespace_item ::=
-    compound_statement [SEMICOLON+]
+    SEMICOLON +
+    | compound_statement
     | format_definition
     | statement
     | annotation
