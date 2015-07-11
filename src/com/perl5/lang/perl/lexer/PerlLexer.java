@@ -402,6 +402,32 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	}
 
 
+	Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
+	/**
+	 * Checks that version is a really version, not a variable name
+	 * fixme how about sub v123123 ?
+	 * @return token type
+	 */
+	@Override
+	public IElementType parseVersion()
+	{
+		if( SIGILS_TOKENS.contains(lastTokenType)
+				|| isBraced() && SIGILS_TOKENS.contains(lastUnbraceTokenType)
+		)
+		{
+			CharSequence tokenText = yytext();
+			Matcher m = versionIdentifierPattern.matcher(tokenText);
+			if( m.find())
+			{
+				if( m.group(1).length() < tokenText.length() )
+					yypushback(tokenText.length() - m.group(1).length());
+				return IDENTIFIER;
+			}
+
+		}
+		return NUMBER_VERSION;
+	}
+
 	public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
 
 	public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
@@ -1416,5 +1442,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 		return -1;
 	}
+
 
 }

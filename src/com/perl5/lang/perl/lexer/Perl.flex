@@ -300,7 +300,7 @@ TRANS_MODIFIERS = [cdsr]
 
 {NUMBER_INT_SIMPLE} {return NUMBER_SIMPLE;}
 {NUMBER}        {return NUMBER;}
-{PERL_VERSION}  {return NUMBER_VERSION;}
+{PERL_VERSION}  {return parseVersion();}
 
 ///////////////////////////////// PERL VARIABLE ////////////////////////////////////////////////////////////////////////
 

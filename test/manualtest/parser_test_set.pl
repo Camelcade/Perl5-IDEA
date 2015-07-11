@@ -1,4 +1,10 @@
 
+my $v123;
+my $v123_234;
+$v123."something";
+
+v5.10;
+
 our $AUTOLOADED_ROUTINES=<<'END_OF_AUTOLOAD';
 
 END_OF_AUTOLOAD
