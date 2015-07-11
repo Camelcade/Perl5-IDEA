@@ -1,7 +1,12 @@
+# Log::Agent::File::Native  print magic doesn't work here
+#return CORE::print $glob @_;
 
-s{          (\s) \\-\\- (\s)                } { $1 . '\*(--' . $2 }egx;
-
-__DATA__
+# Pod::Main Config::Perl::V
+if ($$self{MAGIC_EMDASH}) {
+    s{          (\s) \\-\\- (\s)                } { $1 . '\*\(--' . $2 }egx;
+    s{ (\b[a-zA-Z]+) \\-\\- (\s|\Z|[a-zA-Z]+\b) } { $1 . '\*\(--' . $2 }egx;
+}
+s{          (\s) \\-\\- (\s)                } { $1 . '\*\(--' . $2 }egx;
 
 $name =~ /^(\^..|\{)/;
 
@@ -21,17 +26,7 @@ my $r = ref $b eq 'ARRAY' ? ($b->[0] || $->[1]) : $b;
 
 # Net::NNTP
 {
-    last:
-}
-
-
-# Log::Agent::File::Native  print magic doesn't work here
-#return CORE::print $glob @_;
-
-# no idea Pod::Main Config::Perl::V
-if ($$self{MAGIC_EMDASH}) {
-    s{          (\s) \\-\\- (\s)                } { $1 . '\*(--' . $2 }egx;
-    s{ (\b[a-zA-Z]+) \\-\\- (\s|\Z|[a-zA-Z]+\b) } { $1 . '\*(--' . $2 }egx;
+    last;
 }
 
 # thinks it's a glob parameter  Time/Local.pm

@@ -19,8 +19,10 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.utils.PerlBuilder;
@@ -751,6 +753,21 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				b.advanceLexer();
 				return true;
 			}
+		}
+
+		return false;
+	}
+
+	public static boolean parseGlobSigil(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		if( tokenType == OPERATOR_MUL )
+		{
+			if(PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1))) // space disallowed after *
+				return false;
+
+			b.advanceLexer();
+			return true;
 		}
 
 		return false;

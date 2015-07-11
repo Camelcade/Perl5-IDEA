@@ -848,7 +848,7 @@ array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
 hash_variable ::= OPERATOR_MOD variable_body
-glob_variable ::= OPERATOR_MUL variable_body [braced_expr]
+glob_variable ::= <<parseGlobSigil>> variable_body [braced_expr]
 
 private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
 braced_string ::= <<parseBracedString>>
