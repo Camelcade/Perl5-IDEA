@@ -605,6 +605,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		else
 			m = markerPattern.matcher(openToken);
 
+		Character nextCharacter = getNextSignificantCharacter();
 		yypushback(openToken.length() - 2);
 
 		if (m.matches())
@@ -636,6 +637,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				return OPERATOR_SHIFT_LEFT;
 			else	// bareword heredoc
 			{
+				if( nextCharacter != null && nextCharacter.equals('('))	// it's a sub
+					return OPERATOR_SHIFT_LEFT;
+
 				heredocMarker = m.group(1);
 				tokensList.add(new CustomToken(currentPosition, currentPosition+heredocMarker.length(), STRING_CONTENT));
 			}

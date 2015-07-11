@@ -1,12 +1,13 @@
 
+# Devel::Peek
+$num |=  (1<<index($D_flags, $_)) for split //, $on;
+
+__DATA__
 # B::Deparse
 if (!$raw and $name =~ /^(\^..|{)/ ) {
     $name = "{$name}";       # ${^WARNING_BITS}, etc and ${
 }
 
-
-# Devel::Peek
-$num |=  (1<<index($D_flags, $_)) for split //, $on;
 
 # guess a file :)
 package Encode::KR::2022_KR;
