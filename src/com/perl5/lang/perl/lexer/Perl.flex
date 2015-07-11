@@ -59,7 +59,9 @@ EMPTY_SPACE = [ \t\f\r\n]
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 //PERL_XIDS = [\w && \p{XID_Start}]
 //PERL_XIDC = [\w && \p{XID_Continue}]
-PERL_XIDS = [_a-zA-Z]
+
+// added digits to opener for package Encode::KR::2022_KR;
+PERL_XIDS = [_a-zA-Z0-9]
 PERL_XIDC = [_a-zA-Z0-9]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
@@ -194,7 +196,7 @@ TRANS_MODIFIERS = [cdsr]
 "<" {return OPERATOR_LT_NUMERIC;}
 ">" {return OPERATOR_GT_NUMERIC;}
 
-"->" {return OPERATOR_DEREFERENCE;}
+"->" {return parseOperatorDereference();}
 "=>" {return OPERATOR_COMMA_ARROW;}
 "," {return OPERATOR_COMMA;}
 

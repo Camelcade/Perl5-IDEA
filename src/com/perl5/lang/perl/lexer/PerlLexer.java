@@ -1296,7 +1296,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	}
 
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
-	private static final String reBasicIdentifier = "[_a-zA-Z][_a-zA-Z0-9]*"; // something strang in Java with unicode props
+	private static final String reBasicIdentifier = "[_a-zA-Z0-9][_a-zA-Z0-9]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
 	private static final String reSeparator =
 			"(?:" +
 					"(?:::)+'?" +
@@ -1458,5 +1458,14 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return -1;
 	}
 
-
+	@Override
+	public IElementType parseOperatorDereference()
+	{
+		if( SIGILS_TOKENS.contains(lastTokenType) )	// suppose it's a $->
+		{
+			yypushback(1);
+			return IDENTIFIER;
+		}
+		return OPERATOR_DEREFERENCE;
+	}
 }
