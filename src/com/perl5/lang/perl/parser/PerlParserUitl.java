@@ -112,6 +112,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	);
 
 
+	public static final TokenSet VARIABLE_ATTRIBUTE_STOP_TOKENS = TokenSet.orSet(
+			PerlLexer.OPERATORS_TOKENSET,
+			TokenSet.create(
+					SEMICOLON
+			)
+	);
+
 	// commands, that accepts filehandles as first parameter
 	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<>(Arrays.asList(
 			"opendir",
@@ -254,34 +261,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 
-	/*
-// @todo actually, prototypes and signatures depends on feature in current block; We should do this in parse time
-//private sub_declaration_parameters ::=
-//    sub_prototype sub_attributes ?
-//    | sub_attributes
-//
-//private sub_definition_parameters ::=
-//    sub_attributes ? sub_signature
-//    | sub_declaration_parameters
-//
-//private sub_prototype ::= "(" sub_prototype_element * (";" sub_prototype_element *) ? ")"
-//private sub_prototype_element ::=
-//        "\\" ( "[" sub_prototype_char + "]" | sub_prototype_char )
-//        | sub_prototype_char
-//
-//private sub_prototype_char ::= "$" | "@" | "+" | "*" | "&"
-//
-//private sub_attributes ::= 'NYI'
-//
-//// @todo this requires use feature 'signatures' and no warnings 'experimental:signatures';
-//private sub_signature ::= 'NYI'
-	* */
+	// fixme may have nested ()
 	public static boolean parseSubPrototype(PsiBuilder b, int l)
 	{
-//		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
-
-//		System.out.println("Sub definition parsing, Signatures enabled: "+isSignatureEnabled);
-
 		PsiBuilder.Marker m = null;
 		while (!b.eof() && b.getTokenType() != RIGHT_PAREN)
 		{
@@ -298,8 +280,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	// @todo this is really raw
 	public static boolean parseSubAttributes(PsiBuilder b, int l)
 	{
-//		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
-//		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
 
 		PsiBuilder.Marker m = null;
 		while (!b.eof() && b.getTokenType() != LEFT_BRACE && b.getTokenType() != SEMICOLON)
@@ -314,10 +294,26 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
+	// @todo this is really raw
+	public static boolean parseVariableAttributes(PsiBuilder b, int l)
+	{
+
+		PsiBuilder.Marker m = null;
+		while (!b.eof() && !VARIABLE_ATTRIBUTE_STOP_TOKENS.contains(b.getTokenType()))
+		{
+			if( m == null )
+				m = b.mark();
+			b.advanceLexer();
+		}
+		if( m != null )
+			m.collapse(VAR_ATTRIBUTE);
+
+		return true;
+	}
+
+	// todo implement
 	public static boolean parseSubSignature(PsiBuilder b, int l)
 	{
-//		boolean isSignatureEnabled  = getCurrentBlockState(b).getFeatures().isSignaturesEnabled();
-//		System.out.println("Sub declaration parsing, Signatures enabled: "+isSignatureEnabled);
 		return false;
 	}
 

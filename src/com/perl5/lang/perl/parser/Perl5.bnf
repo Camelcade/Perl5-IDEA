@@ -700,9 +700,10 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::= RESERVED_LOCAL [<<mergePackageName>>]  local_variable_declaration_variation {pin=1}
-variable_declaration_lexical ::= (RESERVED_MY | RESERVED_STATE) [<<mergePackageName>>] variable_declaration_variation {pin=1}
-variable_declaration_global ::= RESERVED_OUR [<<mergePackageName>>] variable_declaration_variation  {pin=1}
+variable_declaration_local ::= RESERVED_LOCAL [<<mergePackageName>>]  local_variable_declaration_variation [variable_attributes] {pin=1}
+variable_declaration_lexical ::= (RESERVED_MY | RESERVED_STATE) [<<mergePackageName>>] variable_declaration_variation [variable_attributes] {pin=1}
+variable_declaration_global ::= RESERVED_OUR [<<mergePackageName>>] variable_declaration_variation [variable_attributes] {pin=1}
+private variable_attributes ::= COLON <<parseVariableAttributes>> {pin=1}
 
 private local_variable_declaration_variation ::=
     LEFT_PAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * RIGHT_PAREN

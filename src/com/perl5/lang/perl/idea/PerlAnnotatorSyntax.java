@@ -167,6 +167,18 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 						PerlSyntaxHighlighter.PERL_GLOB,
 						PerlGlobUtil.BUILT_IN.contains(element.getText()),
 						false);
+			else if (tokenType == SUB_ATTRIBUTE || tokenType == VAR_ATTRIBUTE)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE,
+						false,
+						false);
+			else if (tokenType == SUB_PROTOTYPE_TOKEN)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN,
+						false,
+						false);
 		}
 	}
 }

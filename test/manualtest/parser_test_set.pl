@@ -1,5 +1,14 @@
 
 
+our Foo $var :shared unique;
+our Foo ($var1, $var2) :shared unique = 1;
+say $var1;
+
+my @array;
+for our $var  (@array)
+{
+}
+
 
 sub abc($$$@): method;
 sub abc($$$@): method {};
