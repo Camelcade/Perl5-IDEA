@@ -752,6 +752,7 @@ private array ::=
     | array_variable
     | array_constant
     | SIGIL_ARRAY LEFT_BRACE expr RIGHT_BRACE   // scalar dereference
+    | SIGIL_ARRAY scalar
 
 array_array_slice ::= array_variable LEFT_BRACKET expr RIGHT_BRACKET
 array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
@@ -759,6 +760,7 @@ array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
 private hash ::=
     hash_variable                    // hash as is
     | OPERATOR_MOD LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
+    | <<parseAmbiguousSigil OPERATOR_MOD>> scalar
 
 private scalar ::=
     scalar_array_element
@@ -779,6 +781,7 @@ scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGH
 private glob ::=
     glob_variable
     | OPERATOR_MUL LEFT_BRACE expr RIGHT_BRACE
+    | <<parseAmbiguousSigil OPERATOR_MUL>> scalar
 
 private nested_element ::=
     braced_expr

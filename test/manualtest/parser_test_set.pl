@@ -1,4 +1,14 @@
 
+
+${"blah"};
+$${"blah"};
+%${"blah"};
+@${"blah"};
+&${"blah"};
+*${"blah"};
+
+my $self = bless {%${"$class\::Defaults"}}, $class;
+
 for(1..10)
 {
     say;
