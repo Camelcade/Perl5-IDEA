@@ -28,6 +28,7 @@ import com.perl5.lang.perl.psi.utils.PerlBuilder;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
+import javax.print.DocFlavor;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -373,8 +374,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		} else if (CONVERTABLE_TOKENS.contains(currentTokenType))
 		{
-			b.remapCurrentToken(tokenType);
+			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+			m.collapse(tokenType);
 			return true;
 		}
 
@@ -397,8 +399,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		} else if (CONVERTABLE_PACKAGE_TOKENS.contains(currentTokenType))
 		{
-			b.remapCurrentToken(PACKAGE);
+			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+			m.collapse(PACKAGE);
 			return true;
 		}
 
@@ -434,8 +437,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 						|| CONVERTABLE_TOKENS.contains(tokenType) // single word package
 				)
 		{
-			b.remapCurrentToken(PACKAGE);
+			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+			m.collapse(PACKAGE);
 			return true;
 		}
 
@@ -491,8 +495,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 						&& !PerlSubUtil.BUILT_IN.contains(b.getTokenText())         // it's not built in. crude, probably we should check any known sub
 				)
 		{
-			b.remapCurrentToken(HANDLE);
+			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+			m.collapse(HANDLE);
 			return true;
 		}
 
@@ -513,34 +518,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		if (CONVERTABLE_TOKENS.contains(currentTokenType) && nextTokenType == OPERATOR_GT_NUMERIC)
 		{
-			b.remapCurrentToken(HANDLE);
-			b.advanceLexer();
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Checks and parses CORE:: package
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseCorePackage(PsiBuilder b, int l)
-	{
-		if (b.getTokenType() == PACKAGE_CORE_IDENTIFIER)
-		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(PACKAGE);
+			m.collapse(HANDLE);
 			return true;
 		}
 
 		return false;
 	}
-
 
 	/**
 	 * Parses invocable method
@@ -643,8 +628,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				&& b.lookAhead(1) == RIGHT_BRACE
 				)
 		{
-			b.remapCurrentToken(STRING_CONTENT);
+			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+			m.collapse(STRING_CONTENT);
 			b.advanceLexer();
 			return true;
 		}
@@ -662,8 +648,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	{
 		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == COLON)
 		{
-			b.remapCurrentToken(LABEL);
+			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+			m.collapse(LABEL);
 			b.advanceLexer();
 			return true;
 		}
@@ -702,12 +689,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		// $package::var
 		if (PACKAGE_TOKENS.contains(currentTokenType))
 		{
-			b.remapCurrentToken(PACKAGE);
+			PsiBuilder.Marker mp = b.mark();
 			b.advanceLexer();
+			mp.collapse(PACKAGE);
 			if (CONVERTABLE_TOKENS.contains(nextTokenType))
 			{
-				b.remapCurrentToken(VARIABLE_NAME);
+				PsiBuilder.Marker mv = b.mark();
 				b.advanceLexer();
+				mv.collapse(VARIABLE_NAME);
 			}
 			return true;
 		}
@@ -722,8 +711,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 				m.collapse(VARIABLE_NAME);
 			} else
 			{
-				b.remapCurrentToken(VARIABLE_NAME);
+				PsiBuilder.Marker mv = b.mark();
 				b.advanceLexer();
+				mv.collapse(VARIABLE_NAME);
 			}
 
 			return true;
@@ -739,12 +729,14 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// ${package::var}
 			if (PACKAGE_TOKENS.contains(currentTokenType))
 			{
-				b.remapCurrentToken(PACKAGE);
+				PsiBuilder.Marker mp = b.mark();
 				b.advanceLexer();
+				mp.collapse(PACKAGE);
 				if (CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(1) == RIGHT_BRACE)
 				{
-					b.remapCurrentToken(VARIABLE_NAME);
+					PsiBuilder.Marker mv = b.mark();
 					b.advanceLexer();
+					mv.collapse(VARIABLE_NAME);
 					b.advanceLexer();
 					return true;
 				} else if (nextTokenType == RIGHT_BRACE)
@@ -756,8 +748,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			// ${var}
 			else if (POSSIBLE_VARIABLE_NAME.contains(currentTokenType) && nextTokenType == RIGHT_BRACE)
 			{
-				b.remapCurrentToken(VARIABLE_NAME);
+				PsiBuilder.Marker mv = b.mark();
 				b.advanceLexer();
+				mv.collapse(VARIABLE_NAME);
 				b.advanceLexer();
 				return true;
 			}

@@ -1,4 +1,6 @@
 
+CORE::package main;
+
 # tailing comma
 
 $x123;
@@ -147,7 +149,8 @@ return CORE::exit(1);
 return CORE::print $glob @_;
 return CORE::printf $glob @_;
 return CORE::say $glob @_;
-CORE::package main;
+
+
 CORE::if(1){}
 CORE::elsif(2){}
 CORE::else{}

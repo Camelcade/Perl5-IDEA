@@ -152,6 +152,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 		attributesMap.put(PerlElementTypes.TAG, new TextAttributesKey[]{PERL_TAG});
 
+		// fixme move core highlighting in annotation
+		attributesMap.put(PerlElementTypes.PACKAGE_CORE_IDENTIFIER, new TextAttributesKey[]{PERL_PACKAGE});
 		attributesMap.put(PerlElementTypes.PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
 		attributesMap.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 	}
