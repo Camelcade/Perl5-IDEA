@@ -1228,7 +1228,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		{
 			Character nextCharacter = getNextNonSpaceCharacter();
 
-			if (lastSignificantTokenType == LEFT_BRACE && nextCharacter != null && nextCharacter.equals('}'))    // ${"}
+			if (lastSignificantTokenType == LEFT_BRACE && nextCharacter != null && nextCharacter.equals('}') && SIGILS_TOKENS.contains(lastUnbraceTokenType))    // ${"}
 				return getQuoteToken(charOpener);
 
 			isEscaped = false;
