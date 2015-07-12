@@ -32,6 +32,7 @@
       <li>Added support for archaic package name delimiters, Foo'Bar is now valid (NB: refactoring/find usages not working on them)</li>
       <li>Added perl script file detection by shebang line</li>
       <li>Added variables attributes parsing</li>
+      <li>Added formats parsing</li>
       </ul>
 
     ]]>

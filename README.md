@@ -12,4 +12,7 @@ to write tests (mostly for lexer and parser at the moment).
 
 #Current status - development (0.29 beta)
 
+[Download current dev build jar](http://evstigneev.com/camelcade.jar)
+
+
 Wiki: https://github.com/hurricup/Perl5-IDEA/wiki
