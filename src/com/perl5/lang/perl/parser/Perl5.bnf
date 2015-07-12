@@ -85,6 +85,7 @@ limitations under the License.
     RESERVED_FOREACH="foreach"
     RESERVED_CONTINUE="continue"
     RESERVED_WHEN="when"
+    RESERVED_DEFAULT="default"
 
     RESERVED_FORMAT="format"
     RESERVED_SUB="sub"
@@ -341,6 +342,8 @@ private labelable_compound_statment ::=
         | for_compound
         | foreach_compound
      )
+     | when_compound
+     | default_compound
 
 if_compound ::= [<<parseCorePackage>>] RESERVED_IF conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
 unless_compound ::= [<<parseCorePackage>>] RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
@@ -358,6 +361,8 @@ private recover_condition_statement_expr ::= !(LEFT_BRACE|RIGHT_PAREN)
 private recover_to_block ::= !(LEFT_BRACE)
 
 given_compound ::= [<<parseCorePackage>>] RESERVED_GIVEN conditional_block  {pin=2}
+when_compound ::= [<<parseCorePackage>>] RESERVED_WHEN conditional_block  {pin=2}
+default_compound ::= [<<parseCorePackage>>] RESERVED_DEFAULT block {pin=2}
 
 while_compound ::= [<<parseCorePackage>>] RESERVED_WHILE conditional_block_while [continue_block]  {pin=2}
 until_compound ::= [<<parseCorePackage>>] RESERVED_UNTIL conditional_block [continue_block]  {pin=2}

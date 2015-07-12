@@ -157,27 +157,4 @@ public interface LexerDetectionSets extends PerlElementTypes
 
 	public static final HashSet<IElementType> RESERVED_TOKENSET = new HashSet<>();
 
-
-	// tokens which preceeds {bareword}
-	public static final TokenSet PRE_BRACED_STRING_TOKENS = TokenSet.create(
-			OPERATOR_DEREFERENCE,    // ..->{bareword}
-			VARIABLE_NAME,        // $hash{bareword}
-			RIGHT_BRACE,        // $hash{something}{bareword}
-			RIGHT_BRACKET        // $array[something]{bareword}
-	);
-
-
-	// last token except comments and whitespaces
-	public static final TokenSet UNSIGNIFICANT_TOKENS = TokenSet.create(
-			TokenType.NEW_LINE_INDENT,
-			TokenType.WHITE_SPACE,
-			COMMENT_LINE,
-			COMMENT_BLOCK,
-			POD,
-			HEREDOC,
-			HEREDOC_END
-	);
-
-
-
 }

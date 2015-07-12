@@ -22,6 +22,7 @@ package com.perl5.lang.perl.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.PerlParserUitl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -97,6 +98,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		reservedTokenTypes.put("else", RESERVED_ELSE);
 		reservedTokenTypes.put("given", RESERVED_GIVEN);
 		reservedTokenTypes.put("when", RESERVED_WHEN);
+		reservedTokenTypes.put("default", RESERVED_DEFAULT);
 		reservedTokenTypes.put("while", RESERVED_WHILE);
 		reservedTokenTypes.put("until", RESERVED_UNTIL);
 		reservedTokenTypes.put("for", RESERVED_FOR);
@@ -388,7 +390,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		lastTokenType = tokenType;
 		lastToken = tokenText;
 
-		if (!UNSIGNIFICANT_TOKENS.contains(tokenType))
+		if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType))
 		{
 			lastSignificantTokenType = tokenType;
 			lastSignificantToken = lastToken;
