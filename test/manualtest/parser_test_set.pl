@@ -1,5 +1,30 @@
+
+#$rest=~/=> {$/
 #$text =~ s/{/{{/g;
 #m!\G(.*?<%[ ]*(?:\$(?:\.|self->))fl(?:oc)?(?:[ ]*\((.*?)\))?[ ]*{[ ]*%>(.*?)</%>)!sg
+#    return '" . ' . join('.', map {s/\\\\#\\{/#\\{/; $_} @parts) . '."';
+#    s! \{  !$g_escape_table{'\{'}!ogx;
+#    s! \}  !$g_escape_table{'\}'}!ogx;
+
+# causes LexerEditorHighlighter exception
+#if ($str =~ s{($finder_regexp)([\[\{]?)}
+#    <
+#        if ($1 =~ tr/\{//) { substr($1, 0, ($1=~tr/#//)+1) . "{$replacement}$2" }
+#        else              { substr($1, 0, ($1=~tr/#//)+1) . "$replacement$2" }
+#    >ge
+#    )
+# {
+#
+#    # TODO do this without breaking encapsulation!
+#    $node->{content} = $str;
+#}
+
+# block undistinctable from anon hash, cause such hash is a valid block
+#sub blah {
+#  { 1 => 0 # SQL_CB_NULL
+#  , 2 => 1 # SQL_CB_NON_NULL
+#  }->{$_[0]->{ado_conn}->Properties->{'NULL Concatenation Behavior'}{Value}};
+#}
 
 $@->method;
 

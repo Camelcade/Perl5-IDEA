@@ -310,7 +310,7 @@ namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_name
 // todo count opening braces
 private recover_namespace ::= !( [<<parseCorePackage>>] RESERVED_PACKAGE | RIGHT_BRACE )
 
-block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1}
+block ::= LEFT_BRACE block_content RIGHT_BRACE !OPERATOR_DEREFERENCE //{pin=1} pin disabled for dereference of anon hash; probably this slows us down
 private block_content ::= file_item * {recoverWhile=recover_block}
 private recover_block ::= !(RIGHT_BRACE)
 
