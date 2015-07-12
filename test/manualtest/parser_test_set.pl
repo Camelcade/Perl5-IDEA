@@ -1,5 +1,10 @@
-#$text =~ s/\{/\{\{/g;
+#$text =~ s/{/{{/g;
+#m!\G(.*?<%[ ]*(?:\$(?:\.|self->))fl(?:oc)?(?:[ ]*\((.*?)\))?[ ]*{[ ]*%>(.*?)</%>)!sg
 
+if ( my $comment = $self->msg_comment($msgid) ) {
+    my @lines = split '\n', $comment;
+    print LEXICON map {"# $_\n"} @lines;
+}
 
 $var[time];
 $var[CORE::time];

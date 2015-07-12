@@ -197,16 +197,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					return tokenType;
 			}
 			// capture format
-			if (currentState == LEX_FORMAT_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
+			else if (currentState == LEX_FORMAT_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
 			{
 				IElementType tokenType = captureFormat();
 				if (tokenType != null)    // got something
 					return tokenType;
 			}
-			// capture pod
-			else if (buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
-				return capturePodBlock();
-				// capture qw content from qw();
 			else if (currentState == LEX_QUOTE_LIKE_WORDS)
 				return captureQuoteLikeWords();
 				// capture string content from "" '' `` q qq qx
@@ -216,6 +212,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			else if (currentState == LEX_QUOTE_LIKE_CLOSER)
 				return quoteLikeCloser(tokenStart);
 				// capture __DATA__ __END__
+				// capture pod
+			else if (buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
+				return capturePodBlock();
+				// capture qw content from qw();
 			else if (((tokenStart < bufferEnd - 8) && "__DATA__".equals(buffer.subSequence(tokenStart, tokenStart + 8).toString()))
 					|| ((tokenStart < bufferEnd - 7) && "__END__".equals(buffer.subSequence(tokenStart, tokenStart + 7).toString()))
 					)
@@ -1226,7 +1226,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		if (!(SIGILS_TOKENS.contains(lastSignificantTokenType))) // this is string, not variable name $", $', $`
 		{
-			if (isBraced())    // can be ${"}
+			Character nextCharacter = getNextNonSpaceCharacter();
+
+			if (lastSignificantTokenType == LEFT_BRACE && nextCharacter != null && nextCharacter.equals('}'))    // ${"}
 				return getQuoteToken(charOpener);
 
 			isEscaped = false;
@@ -1565,6 +1567,28 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			currentPosition++;
 		}
 		return -1;
+	}
+
+	private int getNextNonSpaceCharacterPosition(int position)
+	{
+		int currentPosition = position;
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+
+		while (currentPosition < bufferEnd)
+		{
+			if (!Character.isWhitespace(buffer.charAt(currentPosition)))
+				return currentPosition;
+
+			currentPosition++;
+		}
+		return -1;
+	}
+
+	private Character getNextNonSpaceCharacter()
+	{
+		int nextPosition = getNextNonSpaceCharacterPosition(getTokenEnd());
+		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : null;
 	}
 
 	@Override
