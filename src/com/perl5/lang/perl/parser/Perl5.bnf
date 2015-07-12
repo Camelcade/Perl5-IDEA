@@ -461,7 +461,11 @@ private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
 
-undef_expr ::= [<<parseCorePackage>>] RESERVED_UNDEF (variable | LEFT_PAREN variable RIGHT_PAREN) ? {pin=2}
+undef_expr ::= [<<parseCorePackage>>] RESERVED_UNDEF (undef_params | LEFT_PAREN undef_params RIGHT_PAREN) ? {pin=2}
+private undef_params ::=
+    deref_expr
+    | variable
+
 require_expr ::= [<<parseCorePackage>>] RESERVED_REQUIRE (<<mergePackageName>> | perl_version | scalar_expr)  {pin=2}// multiline string is possible too
 
 private recover_statement ::= !(SEMICOLON | RIGHT_BRACE | REGEX_QUOTE_CLOSE)

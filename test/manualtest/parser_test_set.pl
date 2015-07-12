@@ -1,4 +1,12 @@
+#$text =~ s/\{/\{\{/g;
 
+
+$var[time];
+$var[CORE::time];
+$var[HTML::Template::LOOP::PARAM_SET];
+$self->{param_map}{$name}[HTML::Template::LOOP::PARAM_SET];
+
+undef($self->{param_map}{$name}[HTML::Template::LOOP::PARAM_SET]);
 
 ${"blah"};
 $${"blah"};
