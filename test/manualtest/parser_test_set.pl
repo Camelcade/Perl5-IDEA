@@ -1,6 +1,17 @@
-return CORE::exit(1);
 
-__DATA__
+$a cmp'test';
+$a eq'test';
+$a ne'test';
+$a lt'test';
+$a gt'test';
+$a le'test';
+$a ge'test';
+qw'test';
+q'test';
+qq'test';
+qx'test';
+
+return CORE::exit(1);
 
 # Log::Agent::File::Native  print magic doesn't work here
 return CORE::print $glob @_;

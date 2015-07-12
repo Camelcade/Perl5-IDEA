@@ -1387,6 +1387,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	);
 
 	private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<>(Arrays.asList(
+			"eq",
+			"ne",
+			"gt",
+			"lt",
+			"ge",
+			"le",
+
 			"qw",
 			"qr",
 			"qx",
@@ -1407,12 +1414,20 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		String tokenText = yytext().toString();
 
-		// check if it's qw|qr|qx|qq|tr|m|q|s|y'
-		if (tokenText.length() > 3 && tokenText.charAt(2) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.substring(0, 2)))
+		// check if it's cmp'
+		if (tokenText.length() > 4 && tokenText.charAt(3) == '\'' && tokenText.substring(0, 3).equals("cmp"))
+		{
+			yypushback(tokenText.length() - 3);
+			return getIdentifierToken();
+		}
+		// check if it's qw|qr|qx|qq|tr|ne|eq|gt|lt|ge|le'
+		else if (tokenText.length() > 3 && tokenText.charAt(2) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.substring(0, 2)))
 		{
 			yypushback(tokenText.length() - 2);
 			return getIdentifierToken();
-		} else if (tokenText.length() > 2 && tokenText.charAt(1) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.substring(0, 1)))
+		}
+		// check if it's m|q|s|y'
+		else if (tokenText.length() > 2 && tokenText.charAt(1) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.substring(0, 1)))
 		{
 			yypushback(tokenText.length() - 1);
 			return getIdentifierToken();
