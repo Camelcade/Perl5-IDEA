@@ -149,6 +149,7 @@ package main;
 --something => 145;
 -something => 123;
 $self->method => something;
+$var => something;
 
 --blah => -blah => blah => 1;
 -package => 123;
