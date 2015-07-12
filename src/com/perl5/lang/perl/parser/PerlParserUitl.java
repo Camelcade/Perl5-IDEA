@@ -441,6 +441,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	public static boolean mergeRequirePackageName(PsiBuilder b, int l)
+	{
+		if( CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == LEFT_PAREN)
+			return false;
+		return mergePackageName(b,l);
+	}
+
 	/**
 	 * Joining several regex tokens into one to lighten PSI tree. Temporary solution, until regex parsing is implemented
 	 *

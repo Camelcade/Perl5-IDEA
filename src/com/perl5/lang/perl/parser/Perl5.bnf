@@ -310,7 +310,7 @@ namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_name
 // todo count opening braces
 private recover_namespace ::= !( [<<parseCorePackage>>] RESERVED_PACKAGE | RIGHT_BRACE )
 
-block ::= LEFT_BRACE block_content RIGHT_BRACE !OPERATOR_DEREFERENCE //{pin=1} pin disabled for dereference of anon hash; probably this slows us down
+block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1} // !OPERATOR_DEREFERENCE  pin disabled for dereference of anon hash; probably this slows us down
 private block_content ::= file_item * {recoverWhile=recover_block}
 private recover_block ::= !(RIGHT_BRACE)
 
@@ -466,7 +466,7 @@ private undef_params ::=
     deref_expr
     | variable
 
-require_expr ::= [<<parseCorePackage>>] RESERVED_REQUIRE (<<mergePackageName>> | perl_version | scalar_expr)  {pin=2}// multiline string is possible too
+require_expr ::= [<<parseCorePackage>>] RESERVED_REQUIRE (<<mergeRequirePackageName>> | perl_version | scalar_expr)  {pin=2}// multiline string is possible too
 
 private recover_statement ::= !(SEMICOLON | RIGHT_BRACE | REGEX_QUOTE_CLOSE)
 
