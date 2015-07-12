@@ -57,4 +57,9 @@ class CustomToken{
 	{
 		return tokenType;
 	}
+
+	public void setTokenType(IElementType tokenType)
+	{
+		this.tokenType = tokenType;
+	}
 }

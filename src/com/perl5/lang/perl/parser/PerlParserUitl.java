@@ -36,10 +36,18 @@ import java.util.HashSet;
  */
 public class PerlParserUitl extends GeneratedParserUtilBase implements PerlElementTypes
 {
+
 	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
 			PACKAGE_IDENTIFIER,
 			PACKAGE
 	);
+
+	// tokens that can be converted to a PACKAGE
+	public static final TokenSet CONVERTABLE_PACKAGE_TOKENS = TokenSet.create(
+			PACKAGE_IDENTIFIER,
+			PACKAGE_CORE_IDENTIFIER
+	);
+
 
 	// tokens that can be converted between each other depending on context
 	public static final TokenSet CONVERTABLE_TOKENS = TokenSet.create(
@@ -385,7 +393,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		{
 			b.advanceLexer();
 			return true;
-		} else if (currentTokenType == PACKAGE_IDENTIFIER)
+		} else if (CONVERTABLE_PACKAGE_TOKENS.contains(currentTokenType))
 		{
 			b.remapCurrentToken(PACKAGE);
 			b.advanceLexer();
@@ -411,7 +419,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer();
 			return true;
 		} else if (
-				tokenType == PACKAGE_IDENTIFIER && CONVERTABLE_TOKENS.contains(b.lookAhead(1))
+				CONVERTABLE_PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(b.lookAhead(1))
 				)
 		{
 			PsiBuilder.Marker m = b.mark();
@@ -420,7 +428,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			m.collapse(PACKAGE);
 			return true;
 		} else if (
-				tokenType == PACKAGE_IDENTIFIER    // explicit package name, like Foo::->method()
+				CONVERTABLE_PACKAGE_TOKENS.contains(tokenType)  // explicit package name, like Foo::->method()
 						|| CONVERTABLE_TOKENS.contains(tokenType) // single word package
 				)
 		{
@@ -430,33 +438,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		}
 
 		return false;
-	}
-
-
-	/**
-	 * Checks current token and convert it if necessary
-	 *
-	 * @param b         PerlBuilder
-	 * @param l         parsing level
-	 * @param fromToken possible source token
-	 * @param toToken   token we want to have
-	 * @return parsing result
-	 */
-	public static boolean checkAndConvertToken(PsiBuilder b, int l, IElementType fromToken, IElementType toToken)
-	{
-		IElementType tokenType = b.getTokenType();
-		if (tokenType == toToken)
-		{
-			b.advanceLexer();
-			return true;
-		} else if (tokenType == fromToken)
-		{
-			b.remapCurrentToken(toToken);
-			b.advanceLexer();
-			return true;
-		}
-		return false;
-
 	}
 
 	/**
@@ -530,6 +511,27 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		return false;
 	}
+
+	/**
+	 * Checks and parses CORE:: package
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseCorePackage(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == PACKAGE_CORE_IDENTIFIER)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(PACKAGE);
+			return true;
+		}
+
+		return false;
+	}
+
 
 	/**
 	 * Parses invocable method

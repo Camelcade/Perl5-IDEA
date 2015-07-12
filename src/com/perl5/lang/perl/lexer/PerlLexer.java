@@ -23,6 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.PerlParserUitl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
@@ -1426,14 +1427,27 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			tokensList.clear();
 			pushState();
 			int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
-			tokensList.add(new CustomToken(packageIdentifierEnd, getTokenEnd(), IDENTIFIER));
+			CustomToken barewordToken = new CustomToken(packageIdentifierEnd, getTokenEnd(), IDENTIFIER);
+			tokensList.add(barewordToken);
 			yybegin(LEX_PREPARSED_ITEMS);
 			setTokenEnd(packageIdentifierEnd);
 
-			return PACKAGE_IDENTIFIER;
+			IElementType packageTokenType = parsePackageCanonical();
+
+			if(packageTokenType == PACKAGE_CORE_IDENTIFIER && reservedTokenTypes.containsKey(identifier) )
+				barewordToken.setTokenType(reservedTokenTypes.get(identifier));
+			return packageTokenType;
 
 		} else
 			throw new RuntimeException("Inappropriate package name " + tokenText);
+	}
+
+	public IElementType parsePackageCanonical()
+	{
+		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
+		if( canonicalPackageName.equals("CORE"))
+			return PACKAGE_CORE_IDENTIFIER;
+		return PACKAGE_IDENTIFIER;
 	}
 
 	private Character getNextCharacter()
@@ -1537,4 +1551,5 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 		return OPERATOR_DEREFERENCE;
 	}
+
 }

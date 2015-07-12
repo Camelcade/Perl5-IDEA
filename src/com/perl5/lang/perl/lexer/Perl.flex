@@ -271,7 +271,7 @@ TRANS_MODIFIERS = [cdsr]
 {BAREWORD_MINUS} {return parseBarewordMinus();}
 {PACKAGE_PARSABLE} {return parsePackage(); }
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}
-{PACKAGE} {return PACKAGE_IDENTIFIER;}
+{PACKAGE} {return parsePackageCanonical();}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }

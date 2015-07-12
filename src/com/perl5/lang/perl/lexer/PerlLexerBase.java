@@ -41,6 +41,7 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 
 	public abstract IElementType parseCappedVariableName();
 	public abstract IElementType parsePackage();
+	public abstract IElementType parsePackageCanonical();
 
 	public abstract IElementType parseRegex();
 	public abstract IElementType getPreParsedToken();

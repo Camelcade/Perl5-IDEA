@@ -224,7 +224,7 @@ limitations under the License.
     // custom tokens
     IDENTIFIER="IDENTIFIER"
     PACKAGE_IDENTIFIER="PACKAGE_IDENTIFIER"
-
+    PACKAGE_CORE_IDENTIFIER="PACKAGE_CORE_IDENTIFIER"
 
     VAR_ATTRIBUTE="VAR_ATTRIBUTE"
 
@@ -302,12 +302,12 @@ root ::= file_item *
 private file_item ::= !<<eof>> {SEMICOLON | namespace_block | namespace_item} //{pin=1 }
 
 namespace_block ::= namespace_definition (block | SEMICOLON namespace_content)
-namespace_definition ::= RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=1 recoverWhile=recover_namespace_definition}
+namespace_definition ::= [<<parseCorePackage>>] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=2 recoverWhile=recover_namespace_definition}
 private recover_namespace_definition ::= !(SEMICOLON | LEFT_BRACE)
 namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
 
 // todo count opening braces
-private recover_namespace ::= !( RESERVED_PACKAGE | RIGHT_BRACE )
+private recover_namespace ::= !( [<<parseCorePackage>>] RESERVED_PACKAGE | RIGHT_BRACE )
 
 block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1}
 private block_content ::= file_item * {recoverWhile=recover_block}
@@ -320,7 +320,7 @@ private namespace_item ::=
     | statement
     | annotation
 
-format_definition ::= RESERVED_FORMAT [IDENTIFIER] OPERATOR_ASSIGN [FORMAT] FORMAT_TERMINATOR
+format_definition ::= [<<parseCorePackage>>] RESERVED_FORMAT [IDENTIFIER] OPERATOR_ASSIGN [FORMAT] FORMAT_TERMINATOR {pin=2}
 
 private compound_statement ::=
     sub_definition
@@ -342,10 +342,10 @@ private labelable_compound_statment ::=
         | foreach_compound
      )
 
-if_compound ::= RESERVED_IF conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
-unless_compound ::= RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
-private if_compound_elsif ::= RESERVED_ELSIF conditional_block  {pin=1}
-private if_compound_else  ::= RESERVED_ELSE unconditional_block {pin=1}
+if_compound ::= [<<parseCorePackage>>] RESERVED_IF conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
+unless_compound ::= [<<parseCorePackage>>] RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
+private if_compound_elsif ::= [<<parseCorePackage>>] RESERVED_ELSIF conditional_block  {pin=2}
+private if_compound_else  ::= [<<parseCorePackage>>] RESERVED_ELSE unconditional_block {pin=2}
 unconditional_block ::= block
 
 conditional_block ::= condition_statement block {pin=1 name="Conditional block"}
@@ -357,20 +357,20 @@ private condition_statement_expr ::= expr {recoverWhile=recover_condition_statem
 private recover_condition_statement_expr ::= !(LEFT_BRACE|RIGHT_PAREN)
 private recover_to_block ::= !(LEFT_BRACE)
 
-given_compound ::= RESERVED_GIVEN conditional_block  {pin=1}
+given_compound ::= [<<parseCorePackage>>] RESERVED_GIVEN conditional_block  {pin=2}
 
-while_compound ::= RESERVED_WHILE conditional_block_while [continue_block]  {pin=1}
-until_compound ::= RESERVED_UNTIL conditional_block [continue_block]  {pin=1}
+while_compound ::= [<<parseCorePackage>>] RESERVED_WHILE conditional_block_while [continue_block]  {pin=2}
+until_compound ::= [<<parseCorePackage>>] RESERVED_UNTIL conditional_block [continue_block]  {pin=2}
 
-continue_block ::= RESERVED_CONTINUE block {pin=1}
+continue_block ::= [<<parseCorePackage>>] RESERVED_CONTINUE block {pin=2}
 
 private block_compound ::= block [continue_block]
 
 
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is a error on "use", both pinned
-for_compound ::= RESERVED_FOR for_arguments {pin=1}
-foreach_compound ::= RESERVED_FOREACH for_arguments  {pin=1}
+for_compound ::= [<<parseCorePackage>>] RESERVED_FOR for_arguments {pin=2}
+foreach_compound ::= [<<parseCorePackage>>] RESERVED_FOREACH for_arguments  {pin=2}
 private for_arguments ::=
     for_iterator block
     | for_list_statement block_compound
@@ -395,14 +395,14 @@ private statement_body ::=
 private normal_statement ::= [label_declaration] expr [statement_modifier] {pin=2}
 
 // fixme we can't pin this because we need to distinct declaration and definition
-sub_definition ::= [annotations] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
+sub_definition ::= [annotations] [<<parseCorePackage>>] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
 
 private sub_definition_parameters ::=
     sub_prototype [sub_attributes]
     | sub_attributes [sub_signature]
     | sub_signature
 
-sub_declaration ::= [annotations] RESERVED_SUB canonical_sub_name [sub_declaration_parameters]
+sub_declaration ::= [annotations] [<<parseCorePackage>>] RESERVED_SUB canonical_sub_name [sub_declaration_parameters]
 
 private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
 
@@ -424,10 +424,10 @@ private recover_sub_signature_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | S
 private sub_attributes ::= COLON <<parseSubAttributes>> {pin=1 recoverWhile=recover_sub_attributes}
 recover_sub_attributes ::= !(LEFT_PAREN| SEMICOLON| LEFT_BRACE)
 
-last_expr ::= RESERVED_LAST [lnr_param] {pin=1}
-next_expr ::= RESERVED_NEXT [lnr_param] {pin=1}
-redo_expr ::= RESERVED_REDO [lnr_param] {pin=1}
-goto_expr ::= RESERVED_GOTO [goto_param] {pin=1}
+last_expr ::= [<<parseCorePackage>>] RESERVED_LAST [lnr_param] {pin=2}
+next_expr ::= [<<parseCorePackage>>] RESERVED_NEXT [lnr_param] {pin=2}
+redo_expr ::= [<<parseCorePackage>>] RESERVED_REDO [lnr_param] {pin=2}
+goto_expr ::= [<<parseCorePackage>>] RESERVED_GOTO [goto_param] {pin=2}
 
 private lnr_param ::= <<convertIdentifier LABEL>> | expr // fixme scalar_expr ?
 private goto_param ::= <<convertIdentifier LABEL>> | OPERATOR_BITWISE_AND <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
@@ -441,23 +441,23 @@ private statement_modifier ::=
     | foreach_statement_modifier
     | when_statement_modifier
 
-if_statement_modifier ::= RESERVED_IF expr {pin=1 name="Postfix if"}
-unless_statement_modifier ::=  RESERVED_UNLESS expr {pin=1 name="Postfix unless"}
-while_statement_modifier ::=  RESERVED_WHILE expr {pin=1 name="Postfix while"}
-until_statement_modifier ::=  RESERVED_UNTIL expr {pin=1 name="Postfix until"}
-for_statement_modifier ::=  RESERVED_FOR expr  {pin=1 name="Postfix for"}
-foreach_statement_modifier ::=  RESERVED_FOREACH expr {pin=1 name="Postfix foreach"}
-when_statement_modifier ::= RESERVED_WHEN expr {pin=1 name="Postfix when"}
+if_statement_modifier ::= [<<parseCorePackage>>]  RESERVED_IF expr {pin=2 name="Postfix if"}
+unless_statement_modifier ::=  [<<parseCorePackage>>]  RESERVED_UNLESS expr {pin=2 name="Postfix unless"}
+while_statement_modifier ::=  [<<parseCorePackage>>]  RESERVED_WHILE expr {pin=2 name="Postfix while"}
+until_statement_modifier ::=  [<<parseCorePackage>>]  RESERVED_UNTIL expr {pin=2 name="Postfix until"}
+for_statement_modifier ::=  [<<parseCorePackage>>]  RESERVED_FOR expr  {pin=2 name="Postfix for"}
+foreach_statement_modifier ::=  [<<parseCorePackage>>]  RESERVED_FOREACH expr {pin=2 name="Postfix foreach"}
+when_statement_modifier ::= [<<parseCorePackage>>]  RESERVED_WHEN expr {pin=2 name="Postfix when"}
 
-use_statement ::= RESERVED_USE use_no_parameters {pin=1}
-no_statement ::= RESERVED_NO use_no_parameters {pin=1}
+use_statement ::= [<<parseCorePackage>>] RESERVED_USE use_no_parameters {pin=2}
+no_statement ::= [<<parseCorePackage>>] RESERVED_NO use_no_parameters {pin=2}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
 
-undef_expr ::= RESERVED_UNDEF (variable | LEFT_PAREN variable RIGHT_PAREN) ? {pin=1}
-require_expr ::= RESERVED_REQUIRE (<<mergePackageName>> | perl_version | scalar_expr)  {pin=1}// multiline string is possible too
+undef_expr ::= [<<parseCorePackage>>] RESERVED_UNDEF (variable | LEFT_PAREN variable RIGHT_PAREN) ? {pin=2}
+require_expr ::= [<<parseCorePackage>>] RESERVED_REQUIRE (<<mergePackageName>> | perl_version | scalar_expr)  {pin=2}// multiline string is possible too
 
 private recover_statement ::= !(SEMICOLON | RIGHT_BRACE | REGEX_QUOTE_CLOSE)
 
@@ -525,8 +525,8 @@ term_expr ::=
     | namespace_expr
 
 
-grep_expr ::= RESERVED_GREP grep_map_arguments {pin=1}
-map_expr ::= RESERVED_MAP grep_map_arguments {pin=1}
+grep_expr ::= [<<parseCorePackage>>] RESERVED_GREP grep_map_arguments {pin=2}
+map_expr ::= [<<parseCorePackage>>] RESERVED_MAP grep_map_arguments {pin=2}
 
 private grep_map_arguments ::=
     LEFT_PAREN grep_map_arguments_ RIGHT_PAREN !LEFT_BRACKET
@@ -536,7 +536,7 @@ private grep_map_arguments_ ::=
     block [comma] list_expr
     | scalar_expr comma list_expr
 
-sort_expr ::= RESERVED_SORT sort_arguments {pin=1}
+sort_expr ::= [<<parseCorePackage>>] RESERVED_SORT sort_arguments {pin=2}
 private sort_arguments ::=
     LEFT_PAREN sort_arguments_ RIGHT_PAREN !LEFT_BRACKET
     | sort_arguments_
@@ -653,11 +653,11 @@ lp_and_expr ::= expr (OPERATOR_AND_LP expr)+
 
 lp_or_xor_expr ::= expr ((OPERATOR_OR_LP|OPERATOR_XOR_LP) expr)+
 
-print_expr ::= (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( LEFT_PAREN [print_arguments] RIGHT_PAREN | [print_arguments] ) // {pin=1}
+print_expr ::= [<<parseCorePackage>>] (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( LEFT_PAREN [print_arguments] RIGHT_PAREN | [print_arguments] ) {pin=2}
 private print_arguments ::= print_handle expr | expr
 private print_handle ::= <<parsePrintHandle>> | perl_handle
 
-sub_expr ::= RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
+sub_expr ::= [<<parseCorePackage>>] RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
 
 sub_call_expr ::= leftward_call_expr | rightward_call_expr
 
@@ -681,25 +681,25 @@ private regex_term ::=
     | match_regex
 
 // pinning quotes leads to bug with replacement block
-compile_regex ::= RESERVED_QR match_regex_body
-match_regex ::= [RESERVED_M] match_regex_body
+compile_regex ::= [<<parseCorePackage>>]  RESERVED_QR match_regex_body {pin=2}
+match_regex ::= [<<parseCorePackage>>]  [RESERVED_M] match_regex_body
 private match_regex_body ::= REGEX_QUOTE_OPEN [perl_regex] REGEX_QUOTE_CLOSE [perl_regex_modifiers]
-replacement_regex ::= RESERVED_S REGEX_QUOTE_OPEN [perl_regex] REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] [perl_regex | regex_code] REGEX_QUOTE_CLOSE [perl_regex_modifiers]
+replacement_regex ::= [<<parseCorePackage>>] RESERVED_S REGEX_QUOTE_OPEN [perl_regex] REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] [perl_regex | regex_code] REGEX_QUOTE_CLOSE [perl_regex_modifiers] {pin=2}
 private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
 perl_regex_modifiers ::= REGEX_MODIFIER +
 perl_regex ::= <<joinRegexTokens>> // fixme implement regex parsing
 
-tr_regex ::= (RESERVED_TR|RESERVED_Y) REGEX_QUOTE_OPEN tr_searchlist REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] tr_replacementlist REGEX_QUOTE_CLOSE [tr_modifiers] {pin=1}
+tr_regex ::= [<<parseCorePackage>>] (RESERVED_TR|RESERVED_Y) REGEX_QUOTE_OPEN tr_searchlist REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] tr_replacementlist REGEX_QUOTE_CLOSE [tr_modifiers] {pin=2}
 tr_searchlist ::= STRING_CONTENT
 tr_replacementlist ::= STRING_CONTENT
 
 tr_modifiers ::= REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
-do_expr ::= RESERVED_DO eval_argument {pin=1}
-eval_expr ::= RESERVED_EVAL eval_argument {pin=1}
+do_expr ::= [<<parseCorePackage>>] RESERVED_DO eval_argument {pin=2}
+eval_expr ::= [<<parseCorePackage>>] RESERVED_EVAL eval_argument {pin=2}
 private eval_argument ::= parenthesised_expr | block | expr
 
 private variable_declaration ::=
@@ -708,9 +708,9 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::= RESERVED_LOCAL [<<mergePackageName>>]  local_variable_declaration_variation [variable_attributes] {pin=1}
-variable_declaration_lexical ::= (RESERVED_MY | RESERVED_STATE) [<<mergePackageName>>] variable_declaration_variation [variable_attributes] {pin=1}
-variable_declaration_global ::= RESERVED_OUR [<<mergePackageName>>] variable_declaration_variation [variable_attributes] {pin=1}
+variable_declaration_local ::= [<<parseCorePackage>>] RESERVED_LOCAL [<<mergePackageName>>]  local_variable_declaration_variation [variable_attributes] {pin=2}
+variable_declaration_lexical ::= [<<parseCorePackage>>] (RESERVED_MY | RESERVED_STATE) [<<mergePackageName>>] variable_declaration_variation [variable_attributes] {pin=2}
+variable_declaration_global ::= [<<parseCorePackage>>] RESERVED_OUR [<<mergePackageName>>] variable_declaration_variation [variable_attributes] {pin=2}
 private variable_attributes ::= COLON <<parseVariableAttributes>> {pin=1}
 
 private local_variable_declaration_variation ::=
@@ -723,7 +723,7 @@ private variable_declaration_variation ::=
     LEFT_PAREN lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* RIGHT_PAREN
     | lexical_variable_definition_argument
 
-private lexical_variable_definition_argument ::= lexical_variable | RESERVED_UNDEF
+private lexical_variable_definition_argument ::= lexical_variable | [<<parseCorePackage>>] RESERVED_UNDEF
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 // most of the references created by \ operator, but some - don't
@@ -734,7 +734,7 @@ private reference_value_expr ::=
 
 anon_array ::= LEFT_BRACKET [expr] RIGHT_BRACKET //{pin=1}
 anon_hash ::= LEFT_BRACE [expr] RIGHT_BRACE // fixme pin here after solving problem with code block and prototypes
-code_ref ::= RESERVED_SUB block
+code_ref ::= [<<parseCorePackage>>] RESERVED_SUB block
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
@@ -827,20 +827,23 @@ private string ::= string_sq | string_dq | string_xq | heredoc_opener
 private string_quoted ::= QUOTE [STRING_CONTENT] QUOTE
 string_dq ::=
     QUOTE_DOUBLE [STRING_CONTENT] QUOTE_DOUBLE
-     | RESERVED_QQ string_quoted
+     | string_qq
+private string_qq ::= [<<parseCorePackage>>] RESERVED_QQ string_quoted {pin=2}
 
 string_sq ::=
     QUOTE_SINGLE [STRING_CONTENT] QUOTE_SINGLE
-    | RESERVED_Q string_quoted
+    | string_q
     | STRING_CONTENT
+private string_q ::= [<<parseCorePackage>>] RESERVED_Q string_quoted {pin=2}
 
 string_xq ::=
     QUOTE_TICK [STRING_CONTENT] QUOTE_TICK
-    | RESERVED_QX string_quoted
+    | string_qx
+private string_qx ::= [<<parseCorePackage>>] RESERVED_QX string_quoted {pin=2}
 
-heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT )
+heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
 
-string_list ::= RESERVED_QW QUOTE STRING_CONTENT * QUOTE
+string_list ::= [<<parseCorePackage>>] RESERVED_QW QUOTE STRING_CONTENT * QUOTE {pin=2}
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
