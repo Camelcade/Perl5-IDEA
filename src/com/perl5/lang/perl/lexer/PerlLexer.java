@@ -440,17 +440,23 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	}
 
 	/**
-	 * Parses number. Specifically: $var.123; where . is concat
+	 * Parses number.
 	 * @return
 	 */
 	@Override
 	public IElementType parseNumber()
 	{
 		String tokenText = yytext().toString();
-		if( tokenText.startsWith(".") && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType))
+		if( tokenText.startsWith(".") && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType)) // It's a $var.123; where . is a concat
 		{
 			yypushback(tokenText.length()-1);
 			return OPERATOR_CONCAT;
+		}
+		else if( tokenText.endsWith("."))
+		{
+			Character nextCharacter = getNextCharacter();
+			if( nextCharacter != null && nextCharacter.equals('.'))	// it's a 1..10
+				yypushback(1);
 		}
 		return NUMBER;
 	}

@@ -1,4 +1,39 @@
 
+for(1..10)
+{
+    say;
+}
+
+CORE::given ( $self->{buffer} ) {
+}
+
+given ( $self->{buffer} ) {
+    when ( $_ =~ /^Subroutine [\w:]+ not found[.]/sxm ) {
+        return 0;
+    }
+    when ( $_ =~ /^Line \d+ not breakable[.]/sxm ) {
+        return 0;
+    }
+    when ( $_ =~ /^\d+ levels deep in subroutine calls!/sxm ) {
+        return 0;
+    }
+    CORE::when ( $_ =~ /^Already in/m ) {
+        return 1;
+    }
+    when ( $_ =~ /\S/sxm ) {
+
+        # say 'Non-whitespace charter found';
+        return 0;
+    }
+    default {
+        return 1;
+    }
+    CORE::default {
+        return 1;
+    }
+    print "something" when 100;
+}
+
 $a cmp'test';
 $a eq'test';
 $a ne'test';
