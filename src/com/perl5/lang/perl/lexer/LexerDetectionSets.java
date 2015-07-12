@@ -87,8 +87,6 @@ public interface LexerDetectionSets extends PerlElementTypes
 			OPERATOR_SHIFT_LEFT,
 			OPERATOR_SHIFT_RIGHT,
 
-			OPERATOR_SMARTMATCH,
-
 			OPERATOR_AND,
 			OPERATOR_OR,
 			OPERATOR_OR_DEFINED,

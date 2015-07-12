@@ -213,7 +213,6 @@ TRANS_MODIFIERS = [cdsr]
 
 "<<" {return OPERATOR_SHIFT_LEFT;}
 ">>" {return OPERATOR_SHIFT_RIGHT;}
-"~~" {return OPERATOR_SMARTMATCH;}
 
 "&&" {return OPERATOR_AND;}
 "||" {return OPERATOR_OR;}
