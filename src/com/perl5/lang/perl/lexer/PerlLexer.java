@@ -1084,7 +1084,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 
 		// parse block 1
-		tokensList.addAll(firstBlock.tokenize(isExtended));
+		tokensList.addAll(firstBlock.tokenize(isExtended, false));
 
 		if (secondBLock != null)
 		{
@@ -1101,7 +1101,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					evalPerlLexer = new PerlLexerAdapter(myProject);
 				tokensList.addAll(secondBLock.parseEval(evalPerlLexer));
 			} else
-				tokensList.addAll(secondBLock.tokenize(isExtended));
+				tokensList.addAll(secondBLock.tokenize(isExtended, true));
 		}
 
 		// parse modifiers

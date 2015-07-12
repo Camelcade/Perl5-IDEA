@@ -185,11 +185,11 @@ public class RegexBlock implements PerlElementTypes
 	 * @param isExtended flag that regular expression is extended with spaces and comments
 	 * @return ArrayList of tokens
 	 */
-	public Collection<CustomToken> tokenize(boolean isExtended)
+	public Collection<CustomToken> tokenize(boolean isExtended, boolean isSecondBlock)
 	{
 		return isExtended
-				? tokenizeExtended()
-				: tokenizeRegular();
+				? tokenizeExtended(isSecondBlock)
+				: tokenizeRegular(isSecondBlock);
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class RegexBlock implements PerlElementTypes
 	 *
 	 * @return array of CustomTokens
 	 */
-	protected Collection<CustomToken> tokenizeExtended()
+	protected Collection<CustomToken> tokenizeExtended(boolean isSecondBlock)
 	{
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
 
@@ -216,38 +216,30 @@ public class RegexBlock implements PerlElementTypes
 				int commentStart = currentOffset;
 				currentOffset += 2;
 				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')')
-				{
 					currentOffset++;
-				}
-				;
 				if (currentOffset < regexEndOffset)
 					currentOffset++;
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
-			} else if (!isEscaped && !isCharGroup && isWhiteSpace(currentChar)) // whitespace here
+			} else if (!isEscaped && isWhiteSpace(currentChar)) // whitespace here
 			{
 				int whiteSpaceStart = currentOffset;
 				while (currentOffset < regexEndOffset && isWhiteSpace(buffer.charAt(currentOffset)))
-				{
 					currentOffset++;
-				}
 				tokens.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
-			} else if (!isEscaped && !isCharGroup && currentChar == '#') // comment here
+			} else if (!isEscaped  && currentChar == '#') // comment here
 			{
 				int commentStart = currentOffset;
 				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != '\n')
-				{
 					currentOffset++;
-				}
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 			} else
-			{
 				tokens.add(new CustomToken(currentOffset, ++currentOffset, REGEX_TOKEN));
-			}
 
-			if (!isEscaped && !isCharGroup && currentChar == '[')
-				isCharGroup = true;
-			else if (!isEscaped && isCharGroup && currentChar == ']')
-				isCharGroup = false;
+			if( !isSecondBlock )
+				if (!isEscaped && !isCharGroup && currentChar == '[')
+					isCharGroup = true;
+				else if (!isEscaped && isCharGroup && currentChar == ']')
+					isCharGroup = false;
 
 			isEscaped = !isEscaped && currentChar == '\\';
 		}
@@ -262,7 +254,7 @@ public class RegexBlock implements PerlElementTypes
 	 *
 	 * @return array of CustomTokens
 	 */
-	protected Collection<CustomToken> tokenizeRegular()
+	protected Collection<CustomToken> tokenizeRegular(boolean isSecondBlock)
 	{
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
 
@@ -282,22 +274,21 @@ public class RegexBlock implements PerlElementTypes
 				int commentStart = currentOffset;
 				currentOffset += 2;
 				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')')
-				{
 					currentOffset++;
-				}
 				if (currentOffset == regexEndOffset)
 					tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				else
 					tokens.add(new CustomToken(commentStart, currentOffset + 1, COMMENT_LINE));
 			} else
-			{
 				tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_TOKEN));
-			}
 
-			if (!isEscaped && !isCharGroup && currentChar == '[')
-				isCharGroup = true;
-			else if (!isEscaped && isCharGroup && currentChar == ']')
-				isCharGroup = false;
+			if( !isSecondBlock )
+			{
+				if (!isEscaped && !isCharGroup && currentChar == '[')
+					isCharGroup = true;
+				else if (!isEscaped && isCharGroup && currentChar == ']')
+					isCharGroup = false;
+			}
 
 			isEscaped = !isEscaped && currentChar == '\\';
 

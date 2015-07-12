@@ -1,14 +1,22 @@
 
-s/asdfasdf/as
+s/a
+s
+d[          # this is a test
+f
+a]
+s
+df/as
     dfa{
     sdf(
-    asdf[
+    asdf[       # this is a test
     {{{{
     }}
     [[[[
     ]]
 
 /x;
+
+!!!$a;
 
 require Foo;
 require join( '/', split /::/, $server ) . '.pm';
