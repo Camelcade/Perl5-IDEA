@@ -1224,7 +1224,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		charOpener = charCloser = yytext().charAt(0);
 		forceQuote = false;
 
-		if (!(SIGILS_TOKENS.contains(lastSignificantTokenType))) // this is string, not variable name $", $', $`
+		if (!(SIGILS_TOKENS.contains(lastTokenType))) // this is string, not variable name $", $', $`
 		{
 			Character nextCharacter = getNextNonSpaceCharacter();
 

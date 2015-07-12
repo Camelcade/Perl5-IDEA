@@ -22,6 +22,7 @@ import com.intellij.psi.tree.IElementType;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class RegexBlock implements PerlElementTypes
 {
@@ -39,6 +40,9 @@ public class RegexBlock implements PerlElementTypes
 	{
 		return whiteSpaces.contains(character);
 	}
+
+//	public static final Pattern OCCURANCE_PATTERN = Pattern.compile("\\{\\d+(,\\d*)?\\}");
+//	public static final Pattern EXPRESSION_PATTERN = Pattern.compile("\\\\[xNogbB]\\{.*?\\}");
 
 	/**
 	 * Parses guaranteed opened regex block
@@ -92,7 +96,6 @@ public class RegexBlock implements PerlElementTypes
 
 
 			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
-
 
 			currentOffset++;
 		}

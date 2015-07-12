@@ -1,6 +1,10 @@
 #$text =~ s/{/{{/g;
 #m!\G(.*?<%[ ]*(?:\$(?:\.|self->))fl(?:oc)?(?:[ ]*\((.*?)\))?[ ]*{[ ]*%>(.*?)</%>)!sg
 
+$self->{grammar}{tree}{'TOP'} & 'TOP' or
+die "No starting rule for Pegex::Parser::parse";
+
+
 if ( my $comment = $self->msg_comment($msgid) ) {
     my @lines = split '\n', $comment;
     print LEXICON map {"# $_\n"} @lines;
