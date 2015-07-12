@@ -1,9 +1,17 @@
 
-# unless (exists $opts{x1} and exists $opts{y1}) { $self->{ERRSTR}='missing begining coord'; return undef; }
-# my $digest = new $hash(@param);
 # tailing comma
-# bad recovery in Template::Grammar
 
+$x123;
+$var x1223;
+
+x123 => 123;
+$a->x123 => 123;
+package x123;
+use x123;
+require x123();
+
+
+unless (exists $opts{x1} and exists $opts{y1}) { $self->{ERRSTR}='missing begining coord'; return undef; }
 
 $string =~
     s{\\([Nnever\\fartz0b]|x([0-9a-fA-F]{2}))}
@@ -1006,5 +1014,6 @@ $[, ${[};
 #SELECT __ESSENTIAL__
 #FROM   __TABLE__
 #WHERE  %s
+# my $digest = new $hash(@param);
 
 

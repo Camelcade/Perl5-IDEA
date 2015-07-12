@@ -949,12 +949,17 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	// fixme how about $x234sdfsdf ?
 	public IElementType checkOperatorXSticked()
 	{
-		if (SIGILS_TOKENS.contains(lastUnbraceTokenType)) // for $x123;
-		{
-			yypushback(1);
+		yypushback(1);
+		if ( lastSignificantTokenType == RESERVED_REQUIRE 							// require x123
+				|| IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType) 	// package x123, ->x123, etc.
+				|| SIGILS_TOKENS.contains(lastTokenType)							// $x123
+				|| isBraced()														// {x123}
+		)
 			return IDENTIFIER;
-		}
-		yypushback(yylength() - 1);
+		else if( isCommaArrowAhead() )	// we should check for ->
+			return STRING_CONTENT;
+
+		yypushback(yylength() - 2);
 		return OPERATOR_X;
 	}
 
