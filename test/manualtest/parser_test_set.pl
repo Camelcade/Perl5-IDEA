@@ -1,3 +1,6 @@
+return CORE::exit(1);
+
+__DATA__
 
 # Log::Agent::File::Native  print magic doesn't work here
 return CORE::print $glob @_;

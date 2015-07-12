@@ -38,6 +38,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 {
 
 	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
+			PACKAGE_CORE_IDENTIFIER,
 			PACKAGE_IDENTIFIER,
 			PACKAGE
 	);

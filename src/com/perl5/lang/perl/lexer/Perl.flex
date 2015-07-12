@@ -83,7 +83,7 @@ PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
 // heading _ removed to avoid @_ parsing as sigil-number
 
 NUMBER_EXP = [eE][+-]?[0-9_]+
-NUMBER_FLOAT = "." [0-9][0-9_]*
+NUMBER_FLOAT = "." ([0-9][0-9_]*)?
 NUMBER_INT_SIMPLE = [0-9]+
 NUMBER_INT = [0-9][0-9_] *  {NUMBER_FLOAT}? {NUMBER_EXP}?
 NUMBER_SMALL = {NUMBER_FLOAT}{NUMBER_EXP}?
