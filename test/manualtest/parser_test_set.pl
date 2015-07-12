@@ -1,4 +1,36 @@
 
+# unless (exists $opts{x1} and exists $opts{y1}) { $self->{ERRSTR}='missing begining coord'; return undef; }
+# my $digest = new $hash(@param);
+# tailing comma
+# bad recovery in Template::Grammar
+
+
+$string =~
+    s{\\([Nnever\\fartz0b]|x([0-9a-fA-F]{2}))}
+     {(length($1)>1)?pack("H2",$2):$UNESCAPES{$1}}gex;
+
+    if (my %kv = ($pv =~ m{\b
+	    (\w+)		# key
+	    \s*=		# assign
+	    ( '\s*[^']*?\s*'	# quoted value
+	    | \S+[^=]*?\s*\n	# unquoted running till end of line
+	    | \S+		# unquoted value
+	    | \s*\n		# empty
+	    )
+	    (?:,?\s+|\s*\n)?	# separator \(5.8.x reports did not have a ','
+	    }gx)) {}		# between every kv pair
+
+
+#DBM::Deep
+my %is_legal_filter = map {
+    $_ => ~~1
+} qw(
+    store_key store_value
+    fetch_key fetch_value
+);
+set_in_declare(~~@{$temp_name||[]});
+
+
 *{$callpkg."::".$1} = \$$1;
 
 ~~1;
@@ -935,7 +967,10 @@ $^UTF8LOCALE, ${^UTF8LOCALE};
 $*, ${*};
 $[, ${[};
 
+
 # stool samples
+
+#  $desc =~ s/{/\\{/g;
 #$rest=~/=> {$/
 #$text =~ s/{/{{/g;
 #    s/\bIM_ROUND\(/IM_ROUND_8(/g;
@@ -972,14 +1007,4 @@ $[, ${[};
 #FROM   __TABLE__
 #WHERE  %s
 
-#DBM::Deep
-#my %is_legal_filter = map {
-#    $_ => ~~1
-#} qw(
-#    store_key store_value
-#    fetch_key fetch_value
-#);
 
-#set_in_declare(~~@{$temp_name||[]});
-
-# tailing comma
