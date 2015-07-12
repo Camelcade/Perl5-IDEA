@@ -1,6 +1,8 @@
 #$text =~ s/{/{{/g;
 #m!\G(.*?<%[ ]*(?:\$(?:\.|self->))fl(?:oc)?(?:[ ]*\((.*?)\))?[ ]*{[ ]*%>(.*?)</%>)!sg
 
+$@->method;
+
 $self->{grammar}{tree}{'TOP'} & 'TOP' or
 die "No starting rule for Pegex::Parser::parse";
 

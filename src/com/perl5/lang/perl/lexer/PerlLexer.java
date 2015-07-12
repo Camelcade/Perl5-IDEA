@@ -1594,7 +1594,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	@Override
 	public IElementType parseOperatorDereference()
 	{
-		if (SIGILS_TOKENS.contains(lastTokenType))    // suppose it's a $->
+		if (lastTokenType == SIGIL_SCALAR)    // suppose it's a $->
 		{
 			yypushback(1);
 			return IDENTIFIER;
