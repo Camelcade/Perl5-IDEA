@@ -107,7 +107,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					LEFT_BRACE,
 					SIGIL_SCALAR,
-					OPERATOR_BITWISE_XOR
+					OPERATOR_BITWISE_XOR,
+					NUMBER_SIMPLE
 			));
 
 

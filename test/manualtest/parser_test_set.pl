@@ -1,4 +1,7 @@
 
+*{$callpkg."::".$1} = \$$1;
+
+
 s/a
 s
 d[          # this is a test
