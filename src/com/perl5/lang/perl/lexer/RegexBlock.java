@@ -97,13 +97,13 @@ public class RegexBlock implements PerlElementTypes
 					parenLevel--;
 			}
 
-			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
-
 			if( !isEscaped && isQuotesDiffers && !isCharGroup )
 				if( currentChar == openingChar )
 					delimiterLevel++;
 				else if( currentChar == closingChar && delimiterLevel > 0 )
 					delimiterLevel--;
+
+			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
 
 			currentOffset++;
 		}
