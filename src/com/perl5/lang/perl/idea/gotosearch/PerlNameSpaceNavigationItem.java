@@ -51,7 +51,7 @@ public class PerlNameSpaceNavigationItem implements NavigationItem {
             @Nullable
             @Override
             public String getPresentableText() {
-                return nameSpace.getText();
+                return nameSpace.getName();
             }
 
             @Nullable
