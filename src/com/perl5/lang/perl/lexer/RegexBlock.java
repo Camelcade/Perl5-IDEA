@@ -16,13 +16,10 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class RegexBlock implements PerlElementTypes
 {
@@ -46,13 +43,14 @@ public class RegexBlock implements PerlElementTypes
 
 	/**
 	 * Parses guaranteed opened regex block
-	 * @param buffer               	Input characters stream
-	 * @param startOffset          	Start parsing offset
-	 * @param bufferSize			Buffer last offset
-	 * @param openingChar			Opener character
-	 * @return						Parsed regex block or null if failed
+	 *
+	 * @param buffer      Input characters stream
+	 * @param startOffset Start parsing offset
+	 * @param bufferSize  Buffer last offset
+	 * @param openingChar Opener character
+	 * @return Parsed regex block or null if failed
 	 */
-	public static RegexBlock parseBlock(CharSequence buffer, int startOffset, int bufferSize, char openingChar)
+	public static RegexBlock parseBlock(CharSequence buffer, int startOffset, int bufferSize, char openingChar, boolean isSecondBlock)
 	{
 		char closingChar = getQuoteCloseChar(openingChar);
 
@@ -65,35 +63,37 @@ public class RegexBlock implements PerlElementTypes
 		RegexBlock newBlock = null;
 		int currentOffset = startOffset;
 
-		while(true)
+		while (true)
 		{
-			if( currentOffset == bufferSize )
+			if (currentOffset == bufferSize)
 				break;
 
 			char currentChar = buffer.charAt(currentOffset);
 
-			if( braceLevel == 0 && !isCharGroup && !isEscaped && parenLevel == 0 && closingChar == currentChar )
+			if (braceLevel == 0 && !isCharGroup && !isEscaped && parenLevel == 0 && closingChar == currentChar)
 			{
 				newBlock = new RegexBlock(buffer, startOffset, currentOffset + 1, openingChar, closingChar);
 				break;
 			}
 
-			if( !isEscaped && !isCharGroup && currentChar == '[')
-				isCharGroup = true;
-			else if( !isEscaped && isCharGroup && currentChar == ']')
-				isCharGroup = false;
+			if (!isSecondBlock)
+			{
+				if (!isEscaped && !isCharGroup && currentChar == '[')
+					isCharGroup = true;
+				else if (!isEscaped && isCharGroup && currentChar == ']')
+					isCharGroup = false;
 
-			// @todo this is buggy, sometimes bare is allowed. See example from `redo` doc
-			if( !isEscaped && !isCharGroup && currentChar == '{')
-				braceLevel++;
-			else if( !isEscaped && !isCharGroup && braceLevel > 0 && currentChar == '}')
-				braceLevel--;
+				// @todo this is buggy, sometimes bare is allowed. See example from `redo` doc
+				if (!isEscaped && !isCharGroup && currentChar == '{')
+					braceLevel++;
+				else if (!isEscaped && !isCharGroup && braceLevel > 0 && currentChar == '}')
+					braceLevel--;
 
-			if( !isEscaped && !isCharGroup && currentChar == '(')
-				parenLevel++;
-			else if( !isEscaped && !isCharGroup && parenLevel > 0 && currentChar == ')')
-				parenLevel--;
-
+				if (!isEscaped && !isCharGroup && currentChar == '(')
+					parenLevel++;
+				else if (!isEscaped && !isCharGroup && parenLevel > 0 && currentChar == ')')
+					parenLevel--;
+			}
 
 			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
 
@@ -104,18 +104,19 @@ public class RegexBlock implements PerlElementTypes
 
 	/**
 	 * Choosing closing character by opening one
+	 *
 	 * @param charOpener - char with which sequence started
 	 * @return - ending char
 	 */
 	public static char getQuoteCloseChar(char charOpener)
 	{
-		if( charOpener == '<' )
+		if (charOpener == '<')
 			return '>';
-		else if( charOpener == '{' )
+		else if (charOpener == '{')
 			return '}';
-		else if( charOpener == '(' )
+		else if (charOpener == '(')
 			return ')';
-		else if( charOpener == '[' )
+		else if (charOpener == '[')
 			return ']';
 		else
 			return charOpener;
@@ -165,10 +166,10 @@ public class RegexBlock implements PerlElementTypes
 	Collection<CustomToken> parseEval(PerlLexerAdapter subLexer)
 	{
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
-		subLexer.start(buffer,startOffset,endOffset-1);
-		while( subLexer.getTokenType() != null )
+		subLexer.start(buffer, startOffset, endOffset - 1);
+		while (subLexer.getTokenType() != null)
 		{
-			tokens.add(new CustomToken(subLexer.getTokenStart(),subLexer.getTokenEnd(),subLexer.getTokenType()));
+			tokens.add(new CustomToken(subLexer.getTokenStart(), subLexer.getTokenEnd(), subLexer.getTokenType()));
 			subLexer.advance();
 		}
 
@@ -180,8 +181,9 @@ public class RegexBlock implements PerlElementTypes
 
 	/**
 	 * Tokenizing entry point
-	 * @param isExtended	flag that regular expression is extended with spaces and comments
-	 * @return				ArrayList of tokens
+	 *
+	 * @param isExtended flag that regular expression is extended with spaces and comments
+	 * @return ArrayList of tokens
 	 */
 	public Collection<CustomToken> tokenize(boolean isExtended)
 	{
@@ -192,6 +194,7 @@ public class RegexBlock implements PerlElementTypes
 
 	/**
 	 * Tokenizing regexp object with nested comments and spaces
+	 *
 	 * @return array of CustomTokens
 	 */
 	protected Collection<CustomToken> tokenizeExtended()
@@ -203,40 +206,47 @@ public class RegexBlock implements PerlElementTypes
 		boolean isCharGroup = false;
 		int regexEndOffset = endOffset - 1; // one for quote
 
-		while( currentOffset < regexEndOffset )
+		while (currentOffset < regexEndOffset)
 		{
 			char currentChar = buffer.charAt(currentOffset);
 			int charsLeft = regexEndOffset - currentOffset;
 
-			if( charsLeft > 3 && "(?#".equals(buffer.subSequence(currentOffset, currentOffset + 3).toString()))
+			if (charsLeft > 3 && "(?#".equals(buffer.subSequence(currentOffset, currentOffset + 3).toString()))
 			{
 				int commentStart = currentOffset;
 				currentOffset += 2;
-				while( currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')'){currentOffset++;};
-				if( currentOffset < regexEndOffset )
+				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')')
+				{
+					currentOffset++;
+				}
+				;
+				if (currentOffset < regexEndOffset)
 					currentOffset++;
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
-			}
-			else if(!isEscaped && !isCharGroup && isWhiteSpace(currentChar)) // whitespace here
+			} else if (!isEscaped && !isCharGroup && isWhiteSpace(currentChar)) // whitespace here
 			{
 				int whiteSpaceStart = currentOffset;
-				while( currentOffset < regexEndOffset && isWhiteSpace(buffer.charAt(currentOffset))){currentOffset++;}
+				while (currentOffset < regexEndOffset && isWhiteSpace(buffer.charAt(currentOffset)))
+				{
+					currentOffset++;
+				}
 				tokens.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
-			}
-			else if(!isEscaped && !isCharGroup && currentChar == '#') // comment here
+			} else if (!isEscaped && !isCharGroup && currentChar == '#') // comment here
 			{
 				int commentStart = currentOffset;
-				while(currentOffset < regexEndOffset && buffer.charAt(currentOffset) != '\n'){currentOffset++;}
+				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != '\n')
+				{
+					currentOffset++;
+				}
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
-			}
-			else
+			} else
 			{
 				tokens.add(new CustomToken(currentOffset, ++currentOffset, REGEX_TOKEN));
 			}
 
-			if( !isEscaped && !isCharGroup && currentChar == '[')
+			if (!isEscaped && !isCharGroup && currentChar == '[')
 				isCharGroup = true;
-			else if( !isEscaped && isCharGroup && currentChar == ']')
+			else if (!isEscaped && isCharGroup && currentChar == ']')
 				isCharGroup = false;
 
 			isEscaped = !isEscaped && currentChar == '\\';
@@ -249,6 +259,7 @@ public class RegexBlock implements PerlElementTypes
 
 	/**
 	 * Tokenizing regexp object without nested comments and spaces
+	 *
 	 * @return array of CustomTokens
 	 */
 	protected Collection<CustomToken> tokenizeRegular()
@@ -261,29 +272,31 @@ public class RegexBlock implements PerlElementTypes
 		boolean isCharGroup = false;
 		int regexEndOffset = endOffset - 1; // one for quote
 
-		while( currentOffset < regexEndOffset )
+		while (currentOffset < regexEndOffset)
 		{
 			char currentChar = buffer.charAt(currentOffset);
 			int charsLeft = regexEndOffset - currentOffset;
 
-			if( charsLeft > 3 && "(?#".equals(buffer.subSequence(currentOffset, currentOffset + 3).toString()))
+			if (charsLeft > 3 && "(?#".equals(buffer.subSequence(currentOffset, currentOffset + 3).toString()))
 			{
 				int commentStart = currentOffset;
 				currentOffset += 2;
-				while( currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')'){currentOffset++;}
-				if(currentOffset == regexEndOffset)
+				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')')
+				{
+					currentOffset++;
+				}
+				if (currentOffset == regexEndOffset)
 					tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				else
-					tokens.add(new CustomToken(commentStart, currentOffset+1, COMMENT_LINE));
-			}
-			else
+					tokens.add(new CustomToken(commentStart, currentOffset + 1, COMMENT_LINE));
+			} else
 			{
 				tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_TOKEN));
 			}
 
-			if( !isEscaped && !isCharGroup && currentChar == '[')
+			if (!isEscaped && !isCharGroup && currentChar == '[')
 				isCharGroup = true;
-			else if( !isEscaped && isCharGroup && currentChar == ']')
+			else if (!isEscaped && isCharGroup && currentChar == ']')
 				isCharGroup = false;
 
 			isEscaped = !isEscaped && currentChar == '\\';

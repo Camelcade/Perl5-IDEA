@@ -1000,7 +1000,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		int bufferEnd = getBufferEnd();
 
 		// find block 1
-		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, getTokenStart() + 1, bufferEnd, yytext().charAt(0));
+		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, getTokenStart() + 1, bufferEnd, yytext().charAt(0), false);
 
 		if (firstBlock == null)
 		{
@@ -1019,7 +1019,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		{
 			if (firstBlock.hasSameQuotes())
 			{
-				secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd, firstBlock.getOpeningQuote());
+				secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd, firstBlock.getOpeningQuote(), true);
 			} else
 			{
 				// spaces and comments between if {}, fill betweenBlock
@@ -1048,7 +1048,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 				// read block
 				secondBlockOpener = new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_OPEN);
-				secondBLock = RegexBlock.parseBlock(buffer, currentOffset + 1, bufferEnd, buffer.charAt(currentOffset));
+				secondBLock = RegexBlock.parseBlock(buffer, currentOffset + 1, bufferEnd, buffer.charAt(currentOffset), true);
 			}
 
 			if (secondBLock == null)

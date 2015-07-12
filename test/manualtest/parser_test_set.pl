@@ -1,7 +1,17 @@
 
+s/asdfasdf/as
+    dfa{
+    sdf(
+    asdf[
+    {{{{
+    }}
+    [[[[
+    ]]
+
+/x;
+
 require Foo;
 require join( '/', split /::/, $server ) . '.pm';
-
 
 $@->method;
 
@@ -911,12 +921,14 @@ $^UTF8LOCALE, ${^UTF8LOCALE};
 $*, ${*};
 $[, ${[};
 
+# stool samples
 #$rest=~/=> {$/
 #$text =~ s/{/{{/g;
+#    s/\bIM_ROUND\(/IM_ROUND_8(/g;
 #m!\G(.*?<%[ ]*(?:\$(?:\.|self->))fl(?:oc)?(?:[ ]*\((.*?)\))?[ ]*{[ ]*%>(.*?)</%>)!sg
 #    return '" . ' . join('.', map {s/\\\\#\\{/#\\{/; $_} @parts) . '."';
-#    s! \{  !$g_escape_table{'\{'}!ogx;
-#    s! \}  !$g_escape_table{'\}'}!ogx;
+    s! \{  !$g_escape_table{'\{'}!ogx;
+    s! \}  !$g_escape_table{'\}'}!ogx;
 
 # causes LexerEditorHighlighter exception
 #if ($str =~ s{($finder_regexp)([\[\{]?)}
