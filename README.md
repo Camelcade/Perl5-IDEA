@@ -1,4 +1,4 @@
-#Perl5 plugin for IntellijIDEA - Camelcade
+#Perl5 plugin for Intellij IDEA - Camelcade
 
 This is my attempt to build a plugin for IDEA that will support Perl5 language.
 
