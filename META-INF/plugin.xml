@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.30 beta</version>
+    <version>0.31 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -25,15 +25,8 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.30 beta</p>
+      <p>0.31 beta</p>
       <ul>
-      <li>Re-wrote lexer and heavily refactored parser</li>
-      <li>Fixed bug with hanging on Embedded perl files</li>
-      <li>Added support for archaic package name delimiters, Foo'Bar is now valid (NB: refactoring/find usages not working on them)</li>
-      <li>Added perl script file detection by shebang line</li>
-      <li>Added variables attributes parsing</li>
-      <li>Added formats parsing</li>
-      <li>Added <a href="https://github.com/hurricup/Perl5-IDEA/wiki">wiki pages</a> in the repo</li>
       </ul>
 
     ]]>
