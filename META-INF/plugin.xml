@@ -25,7 +25,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.29 beta</p>
+      <p>0.30 beta</p>
       <ul>
       <li>Re-wrote lexer and heavily refactored parser</li>
       <li>Fixed bug with hanging on Embedded perl files</li>
