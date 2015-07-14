@@ -959,7 +959,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		else if( isCommaArrowAhead() )	// we should check for ->
 			return STRING_CONTENT;
 
-		yypushback(yylength() - 2);
+		yypushback(yylength() - 1);
 		return OPERATOR_X;
 	}
 
