@@ -30,7 +30,8 @@
       <li>Heredoc rename refactoring is now localized in file</li>
       <li>Lexical and local variables rename refactoring is now localized in file</li>
       <li>Fixed bug with $var x123 parsing</li>
-      <li>Improved statement recovery on errors, even if there are paired braces ahead. (NB: errors inside braces still badly recovered)</li>
+      <li>Improved statement recovery on errors, even if there are paired braces ahead. (NB: errors inside hash index still badly recovered)</li>
+      <li>Added decorations for cast expressions</li>
       </ul>
 
     ]]>

@@ -1,4 +1,33 @@
 
+$$${a}; # sclar cast
+$$${$a}; # sclar cast
+$$$$a; # sclar cast
+
+  
+@$${$a};  # array cast
+@$${a};  # array cast
+@$$$a;  # array cast
+
+$#${$a}; # array index cast
+$#${a}; # array index cast
+$#$$a; # array index cast
+
+%$${$a}; # hash cast
+%$${a}; # hash cast
+%$$$a; # hash cast
+
+*$${$a}; # glob cast
+*$${a}; # glob cast
+*$$$a; # glob cast
+
+my $abc = 1;
+&$${$abc}; # code cast
+&$${abc}; # code cast
+&$$$abc; # code cast
+
+@_[1,2,3];      # array slice
+@-{'a','b','c'}; # hash slice
+
 my $query = <<'SQL';
 
 SQL

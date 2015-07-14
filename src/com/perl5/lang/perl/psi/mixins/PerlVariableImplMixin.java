@@ -132,7 +132,9 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
         PsiElement variableContainer = this.getParent();
         boolean gotScalarSigils = this.getScalarSigils() != null;
 
-        if (
+        if( this instanceof PsiPerlCodeVariable )
+            return PerlVariableType.SCALAR;
+        else if (
                 !gotScalarSigils
                         && (
                         variableContainer instanceof PsiPerlScalarHashElement

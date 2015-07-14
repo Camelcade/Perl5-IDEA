@@ -27,6 +27,7 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
@@ -40,6 +41,29 @@ import org.jetbrains.annotations.NotNull;
 public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 {
 	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
+
+	private void decorateCastElement(@NotNull final PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key)
+	{
+		int startOffset = element.getTextOffset();
+		int endOffset = startOffset + 1;
+
+		PsiElement currentElement = element.getFirstChild();
+		while( currentElement != null )
+		{
+			if (currentElement.getNode().getElementType() == LEFT_BRACE)
+			{
+				endOffset = currentElement.getTextOffset() + 1;
+				break;
+			}
+			currentElement = currentElement.getNextSibling();
+		}
+
+		Annotation annotation = holder.createInfoAnnotation(new TextRange(startOffset, endOffset), null);
+		annotation.setTextAttributes(key);
+
+		annotation = holder.createInfoAnnotation(element.getLastChild(), null);
+		annotation.setTextAttributes(key);
+	}
 
 	private void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
 	{
@@ -126,6 +150,8 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					((PerlVariable) element).isBuiltIn(),
 					((PerlVariable) element).isDeprecated()
 			);
+		else if (element instanceof PsiPerlScalarCastExpr || element instanceof PsiPerlScalarIndexCastExpr)
+			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SCALAR);
 		else if (element instanceof PsiPerlHashVariable)
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
@@ -133,6 +159,8 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					((PerlVariable) element).isBuiltIn(),
 					((PerlVariable) element).isDeprecated()
 			);
+		else if (element instanceof PsiPerlHashCastExpr )
+			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_HASH);
 		else if (element instanceof PsiPerlArrayVariable)
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
@@ -140,12 +168,24 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					((PerlVariable) element).isBuiltIn(),
 					((PerlVariable) element).isDeprecated()
 			);
+		else if (element instanceof PsiPerlArrayCastExpr )
+			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_ARRAY);
 		else if (element instanceof PsiPerlGlobVariable)
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_GLOB,
 					((PerlVariableNameElementContainer) element).isBuiltIn(),
 					false);
+		else if (element instanceof PsiPerlGlobCastExpr)
+			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_GLOB);
+		else if (element instanceof PsiPerlCodeVariable)
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_SUB,
+					((PerlVariableNameElementContainer) element).isBuiltIn(),
+					false);
+		else if (element instanceof PsiPerlCodeCastExpr )
+			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SUB);
 		else if (element instanceof PsiPerlAnnotation)
 			decorateElement(
 					holder.createInfoAnnotation(element, null),

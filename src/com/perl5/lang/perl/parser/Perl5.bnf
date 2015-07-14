@@ -263,8 +263,8 @@ limitations under the License.
     elementTypeFactory("scalar_variable|array_variable|hash_variable|glob_variable|array_index_variable")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
     stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
 
-    mixin("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
-    implements("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
+    mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
+    implements("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
     elementTypeFactory("sub_declaration|sub_definition|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
@@ -551,6 +551,7 @@ private sort_arguments_ ::=
     | list_expr
 
 variable_expr ::= array_index_variable | variable
+
 namespace_expr ::= <<mergePackageName>>
 parenthesised_expr ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
@@ -733,11 +734,11 @@ private lexical_variable_definition_argument ::= lexical_variable | [PACKAGE_COR
 private reference_value_expr ::=
     anon_array
     | anon_hash
-    | code_ref
+    | anonymous_sub
 
 anon_array ::= LEFT_BRACKET [expr] RIGHT_BRACKET //{pin=1}
 anon_hash ::= LEFT_BRACE [expr] RIGHT_BRACE // fixme pin here after solving problem with code block and prototypes
-code_ref ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB block
+anonymous_sub ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB block
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
@@ -749,16 +750,18 @@ private array ::=
     | array_hash_slice              // hash slice
     | array_variable
     | array_constant
-    | SIGIL_ARRAY LEFT_BRACE expr RIGHT_BRACE   // scalar dereference
+    | array_cast_expr
     | SIGIL_ARRAY scalar
 
+array_cast_expr ::= SIGIL_ARRAY SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
 array_array_slice ::= array_variable LEFT_BRACKET expr RIGHT_BRACKET
 array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
     hash_variable                    // hash as is
-    | OPERATOR_MOD LEFT_BRACE expr RIGHT_BRACE      // hash dereference w braces
+    | hash_cast_expr
     | <<parseAmbiguousSigil OPERATOR_MOD>> scalar
+hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD>> SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
 
 private scalar ::=
     scalar_array_element
@@ -768,8 +771,12 @@ private scalar ::=
     | scalar_constant
     | scalar_anon_array_element
     | undef_expr
-    | SIGIL_SCALAR + LEFT_BRACE expr RIGHT_BRACE
-    | SIGIL_SCALAR_INDEX SIGIL_SCALAR * ( LEFT_BRACE expr RIGHT_BRACE | scalar_variable )
+    | scalar_cast_expr
+    | scalar_index_cast_expr
+    | SIGIL_SCALAR_INDEX scalar_variable
+
+scalar_cast_expr ::= SIGIL_SCALAR + LEFT_BRACE expr RIGHT_BRACE
+scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
 
 scalar_array_index ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * scalar_variable
 scalar_array_element ::= scalar_variable LEFT_BRACKET expr RIGHT_BRACKET
@@ -778,8 +785,10 @@ scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGH
 
 private glob ::=
     glob_variable
-    | OPERATOR_MUL LEFT_BRACE expr RIGHT_BRACE
+    | glob_cast_expr
     | <<parseAmbiguousSigil OPERATOR_MUL>> scalar
+
+glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL>> SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
 
 private nested_element ::=
     braced_expr
@@ -799,15 +808,16 @@ scalar_call ::= scalar_variable [parenthesised_expr]
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
-private callable ::= method | referencable_method // being used in parseFunctionCall
+private callable ::= method | code // being used in parseFunctionCall
+private referencable_expr ::= code | scalar_expr
 
-private referencable_expr ::= referencable_method | scalar_expr
-private referencable_method ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>>
-    (
-        method
-        | LEFT_BRACE expr RIGHT_BRACE
-        | scalar
-    )
+private code ::=
+    <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> method
+    | code_variable
+    | code_cast_expr
+    | <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> scalar
+
+code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> SIGIL_SCALAR* LEFT_BRACE expr RIGHT_BRACE
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
@@ -858,6 +868,8 @@ array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
 hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD>> variable_body
+code_variable ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> variable_body
+
 glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body [braced_expr]
 
 private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
