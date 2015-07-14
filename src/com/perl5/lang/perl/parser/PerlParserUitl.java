@@ -28,7 +28,6 @@ import com.perl5.lang.perl.psi.utils.PerlBuilder;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
-import javax.print.DocFlavor;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -448,9 +447,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean mergeRequirePackageName(PsiBuilder b, int l)
 	{
-		if( CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == LEFT_PAREN)
+		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == LEFT_PAREN)
 			return false;
-		return mergePackageName(b,l);
+		return mergePackageName(b, l);
 	}
 
 	/**
@@ -774,4 +773,74 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+
+	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
+			SEMICOLON,
+			RIGHT_BRACE,
+			REGEX_QUOTE_CLOSE,
+
+			BLOCK_NAME,
+
+			RESERVED_PACKAGE,
+			RESERVED_USE,
+			RESERVED_NO,
+
+			RESERVED_FOREACH,	// may have no opening paren after a keyword
+			RESERVED_FOR, 		// may have no opening paren after a keyword
+			RESERVED_DEFAULT	// has no opening paren
+	);
+
+	public static TokenSet PARENTHESISED_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
+			RESERVED_IF,
+			RESERVED_UNLESS,
+			RESERVED_GIVEN,
+			RESERVED_WHILE,
+			RESERVED_UNTIL,
+			RESERVED_WHEN
+	);
+
+	public static TokenSet STATEMENT_RECOVERY_SUB_SUFFIX = TokenSet.create(
+			IDENTIFIER,
+			PACKAGE,
+			PACKAGE_IDENTIFIER,
+			PACKAGE_CORE_IDENTIFIER
+	);
+
+	/**
+	 * Statement recovery function. Should not consume token, only check;
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean recoverStatement(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+		if( !((PerlBuilder) b).isRecoveringStatement())
+			((PerlBuilder) b).startRecovery();
+
+		IElementType currentTokenType = b.getTokenType();
+
+//		System.err.println("Checking " + b.getTokenText() + currentTokenType);
+
+		if( currentTokenType == null																					// got end of file
+			|| ((PerlBuilder) b).getBracesLevel() == 0 && (																// we are not in braced statement
+				currentTokenType == RESERVED_SUB && STATEMENT_RECOVERY_SUB_SUFFIX.contains(b.lookAhead(1))				// got sub definition/declaration
+				||  PARENTHESISED_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType) && b.lookAhead(1) == LEFT_PAREN	// got compound statement
+				||  UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType) 									// got semi, package, end of regex, use
+			)
+		)
+		{
+			((PerlBuilder) b).stopRecovery();
+			return false;
+		}
+
+		if( currentTokenType == LEFT_BRACE)
+			((PerlBuilder) b).openBrace();
+		else if(currentTokenType == RIGHT_BRACE)
+			((PerlBuilder) b).closeBrace();
+
+		return true;
+	}
 }

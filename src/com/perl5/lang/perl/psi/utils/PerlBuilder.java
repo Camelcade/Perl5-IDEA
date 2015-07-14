@@ -125,4 +125,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return KNOWN_PACKAGES.contains(canonicalPackageName);
 	}
 
+	protected boolean recoveringStatement = false;
+	protected int bracesLevel = 0;
+
+	public void startRecovery(){
+		recoveringStatement = true;
+		bracesLevel = 0;
+	}
+	public void stopRecovery(){recoveringStatement = false;}
+	public boolean isRecoveringStatement(){return recoveringStatement;}
+	public int getBracesLevel(){return bracesLevel;}
+	public void openBrace(){bracesLevel++;}
+	public void closeBrace(){bracesLevel--;}
+
 }

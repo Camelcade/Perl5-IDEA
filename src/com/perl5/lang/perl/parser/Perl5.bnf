@@ -462,7 +462,7 @@ private undef_params ::=
 
 require_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_REQUIRE (<<mergeRequirePackageName>> | perl_version | scalar_expr)  {pin=2}// multiline string is possible too
 
-private recover_statement ::= !(SEMICOLON | RIGHT_BRACE | REGEX_QUOTE_CLOSE)
+private recover_statement ::= <<recoverStatement>>
 
 // expression
 expr ::=
