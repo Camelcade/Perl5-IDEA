@@ -28,6 +28,7 @@
       <p>0.31 beta</p>
       <ul>
       <li>Heredoc rename refactoring is now localized in file</li>
+      <li>Lexical and local variables rename refactoring is now localized in file</li>
       </ul>
 
     ]]>
@@ -86,6 +87,7 @@
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameHeredocProcessor"/>
+        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameVariableProcessor"/>
 
         <nameSuggestionProvider implementation="com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider" order="first"/>
 
