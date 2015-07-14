@@ -1,4 +1,22 @@
 
+my $query = <<'SQL';
+
+SQL
+
+my $query = <<`SQL`;
+
+SQL
+
+my $query = <<"SQL";
+
+SQL
+
+my $query = <<SQL;
+
+SQL
+
+
+
 CORE::package main;
 
 # tailing comma

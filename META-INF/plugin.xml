@@ -27,6 +27,7 @@
     <change-notes><![CDATA[
       <p>0.31 beta</p>
       <ul>
+      <li>Heredoc rename refactoring is now localized in file</li>
       </ul>
 
     ]]>
@@ -81,8 +82,11 @@
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first" implementationClass="com.perl5.lang.perl.idea.editor.PerlPsiHeredocManipulator"/>
 
         <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
+
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
+        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameHeredocProcessor"/>
+
         <nameSuggestionProvider implementation="com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider" order="first"/>
 
         <defaultLiveTemplatesProvider implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
