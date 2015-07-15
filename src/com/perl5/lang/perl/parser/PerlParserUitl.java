@@ -527,7 +527,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
             else
                 return mergePackageName(b, l);
         }
-        // 	method [Foo]
+        // 	method
         else if (CONVERTABLE_TOKENS.contains(currentTokenType)) {
             PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
 
@@ -541,7 +541,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
             else if (PACKAGE_TOKENS.contains(nextTokenType)) {
                 IElementType nextNextTokenType = b.lookAhead(2);
 
-                if (CONVERTABLE_TOKENS.contains(nextNextTokenType)) {
+                // sub Foo::->method
+                if( nextNextTokenType == OPERATOR_DEREFERENCE )
+                    return convertIdentifier(b, l, SUB);
+                // identifier Package::identifier
+                else if (CONVERTABLE_TOKENS.contains(nextNextTokenType)) {
+
+                    // identifier Package::identifier->
+                    if( b.lookAhead(3) == OPERATOR_DEREFERENCE)
+                        return convertIdentifier(b, l, SUB);
+
                     PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
                     PerlTokenData nextNextTokenData = ((PerlBuilder) b).lookupToken(2);
 
@@ -558,7 +567,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
             }
             // may be
             // 	method Foo
-            else if (CONVERTABLE_TOKENS.contains(nextTokenType)) {
+            else if (CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(2) != OPERATOR_DEREFERENCE) {
                 PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
 
                 String potentialSubName = nextTokenData.getTokenText() + "::" + b.getTokenText();

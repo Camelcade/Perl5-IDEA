@@ -53,12 +53,19 @@ public class PerlDefaultMro
 			if( result.size() == 0)	// not found, need to check parents
 			{
 				for( PsiPerlNamespaceDefinition namespaceDefinition: PerlPackageUtil.findNamespaceDefinitions(project, packageName) )
-					for( String parentNamespace: namespaceDefinition.getParentNamespaces() )
+				{
+					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
+
+					if( parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
+						parentNamespaces.add("UNIVERSAL");
+
+					for (String parentNamespace : parentNamespaces )
 					{
 						result.addAll(getSubDefinitions(project, parentNamespace, subName, checkedPackages));
-						if( result.size() > 0)
+						if (result.size() > 0)
 							break;
 					}
+				}
 			}
 		}
 
