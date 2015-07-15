@@ -49,6 +49,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 
 	/**
 	 * Makes index snapshot hashsets
+	 *
 	 * @return result
 	 */
 	public synchronized boolean makeIndexSnapshot()
@@ -99,12 +100,13 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 
 	/**
 	 * Checks if sub is indexed.
+	 *
 	 * @param subName canonical sub name Foo::somesub
 	 * @return checking result
 	 */
 	public boolean isKnownSub(String subName)
 	{
-		if(!indexSnapshotDone)
+		if (!indexSnapshotDone)
 			makeIndexSnapshot();
 
 		return KNOWN_SUBS.contains(subName);
@@ -112,6 +114,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 
 	/**
 	 * Checks if package is indexed.
+	 *
 	 * @param packageName package name
 	 * @return checking result
 	 */
@@ -119,7 +122,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	{
 		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(packageName);
 
-		if(!indexSnapshotDone)
+		if (!indexSnapshotDone)
 			makeIndexSnapshot();
 
 		return KNOWN_PACKAGES.contains(canonicalPackageName);
@@ -128,14 +131,35 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	protected boolean recoveringStatement = false;
 	protected int bracesLevel = 0;
 
-	public void startRecovery(){
+	public void startRecovery()
+	{
 		recoveringStatement = true;
 		bracesLevel = 0;
 	}
-	public void stopRecovery(){recoveringStatement = false;}
-	public boolean isRecoveringStatement(){return recoveringStatement;}
-	public int getBracesLevel(){return bracesLevel;}
-	public void openBrace(){bracesLevel++;}
-	public void closeBrace(){bracesLevel--;}
+
+	public void stopRecovery()
+	{
+		recoveringStatement = false;
+	}
+
+	public boolean isRecoveringStatement()
+	{
+		return recoveringStatement;
+	}
+
+	public int getBracesLevel()
+	{
+		return bracesLevel;
+	}
+
+	public void openBrace()
+	{
+		bracesLevel++;
+	}
+
+	public void closeBrace()
+	{
+		bracesLevel--;
+	}
 
 }
