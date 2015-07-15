@@ -112,6 +112,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		String packageName = getPackageName();
 		String subName = getName();
 
+		// fixme resolve SUPER::
 		if( subName != null && parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
 			result.addAll(PerlDefaultMro.getSubDefinitions(getProject(), packageName, subName));
 		else
@@ -128,10 +129,16 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		List<PerlSubDeclaration> result = new ArrayList<>();
 		PsiElement parent = getParent();
 
-		// todo handle inheritance search
-		for( PsiPerlSubDeclaration subDeclaration: PerlSubUtil.findSubDeclarations(getProject(), getCanonicalName()))
-			if( !subDeclaration.isEquivalentTo(parent))
-				result.add(subDeclaration);
+		String packageName = getPackageName();
+		String subName = getName();
+
+		// fixme resolve SUPER::
+		if( subName != null && parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
+			result.addAll(PerlDefaultMro.getSubDeclarations(getProject(), packageName, subName));
+		else
+			for( PsiPerlSubDeclaration subDeclaration: PerlSubUtil.findSubDeclarations(getProject(), packageName + "::" + subName))
+				if( !subDeclaration.isEquivalentTo(parent))
+					result.add(subDeclaration);
 
 		return result;
 	}
@@ -142,9 +149,17 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		List<PerlGlobVariable> result = new ArrayList<>();
 		PsiElement parent = getParent();
 
-		for( PerlGlobVariable glob: PerlGlobUtil.findGlobsDefinitions(getProject(), getCanonicalName()))
-			if( !glob.isEquivalentTo(parent))
-				result.add(glob);
+		String packageName = getPackageName();
+		String subName = getName();
+
+		// fixme resolve SUPER::
+		if( subName != null && parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
+			result.addAll(PerlDefaultMro.getSubAliases(getProject(), packageName, subName));
+		else
+			for( PerlGlobVariable glob: PerlGlobUtil.findGlobsDefinitions(getProject(), packageName + "::" + subName))
+				if( !glob.isEquivalentTo(parent))
+					result.add(glob);
+
 
 		return result;
 	}
