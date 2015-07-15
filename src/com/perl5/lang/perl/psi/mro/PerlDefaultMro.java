@@ -17,12 +17,13 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,49 +39,70 @@ public class PerlDefaultMro
 {
 	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName)
 	{
-		return getSubDefinitions(project, packageName, subName, new HashSet<String>());
+		return getSubDefinitions(project, packageName, subName, new HashSet<String>(), false);
 	}
 
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName)
 	{
-		return getSubDeclarations(project, packageName, subName, new HashSet<String>());
+		return getSubDeclarations(project, packageName, subName, new HashSet<String>(), false);
 	}
 
 	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName)
 	{
-		return getSubAliases(project, packageName, subName, new HashSet<String>());
+		return getSubAliases(project, packageName, subName, new HashSet<String>(), false);
+	}
+
+	public static Collection<PsiPerlSubDefinition> getSuperSubDefinitions(Project project, String packageName, String subName)
+	{
+		return getSubDefinitions(project, packageName, subName, new HashSet<String>(), true);
+	}
+
+	public static Collection<PsiPerlSubDeclaration> getSuperSubDeclarations(Project project, String packageName, String subName)
+	{
+		return getSubDeclarations(project, packageName, subName, new HashSet<String>(), true);
+	}
+
+	public static Collection<PsiPerlGlobVariable> getSuperSubAliases(Project project, String packageName, String subName)
+	{
+		return getSubAliases(project, packageName, subName, new HashSet<String>(), true);
 	}
 
 	/**
 	 * Resolving sub definitions according to the Perl's MRO; fixme not dry
-	 * @param project current project
-	 * @param packageName	current package name
-	 * @param subName	current sub name
-	 * @param checkedPackages	recursion control hashset
-	 * @return	collection of definitions
+	 *
+	 * @param project         current project
+	 * @param packageName     current package name
+	 * @param subName         current sub name
+	 * @param checkedPackages recursion control hashset
+	 * @return collection of definitions
 	 */
-	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages)
+	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
+		assert packageName != null: "Null package name for " + subName;
+		assert subName != null: "Null sub name for " + packageName;
+
+
 		Collection<PsiPerlSubDefinition> result = new ArrayList<>();
 
-		if( !checkedPackages.contains(packageName))
+		if (!checkedPackages.contains(packageName))
 		{
 			checkedPackages.add(packageName);
 
-			result.addAll(PerlSubUtil.findSubDefinitions(project, packageName + "::" + subName));
+			if (!noCheckCurrent)    // suppress for resolving SUPER::
+				result.addAll(PerlSubUtil.findSubDefinitions(project, packageName + "::" + subName));
 
-			if( result.size() == 0)	// not found, need to check parents
+			if (result.size() == 0)    // not found, need to check parents
 			{
-				for( PsiPerlNamespaceDefinition namespaceDefinition: PerlPackageUtil.findNamespaceDefinitions(project, packageName) )
+				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
 				{
 					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
 
-					if( parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
+					if (parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
 						parentNamespaces.add("UNIVERSAL");
 
-					for (String parentNamespace : parentNamespaces )
+					for (String parentNamespace : parentNamespaces)
 					{
-						result.addAll(getSubDefinitions(project, parentNamespace, subName, checkedPackages));
+						result.addAll(getSubDefinitions(project, parentNamespace, subName, checkedPackages, false));
 						if (result.size() > 0)
 							break;
 					}
@@ -93,34 +115,39 @@ public class PerlDefaultMro
 
 	/**
 	 * Resolving sub declarations according to the Perl's MRO; fixme not dry
-	 * @param project current project
-	 * @param packageName	current package name
-	 * @param subName	current sub name
-	 * @param checkedPackages	recursion control hashset
-	 * @return	collection of definitions
+	 *
+	 * @param project         current project
+	 * @param packageName     current package name
+	 * @param subName         current sub name
+	 * @param checkedPackages recursion control hashset
+	 * @return collection of definitions
 	 */
-	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName, HashSet<String> checkedPackages)
+	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
+		assert packageName != null: "Null package name for " + subName;
+		assert subName != null: "Null sub name for " + packageName;
+
 		Collection<PsiPerlSubDeclaration> result = new ArrayList<>();
 
-		if( !checkedPackages.contains(packageName))
+		if (!checkedPackages.contains(packageName))
 		{
 			checkedPackages.add(packageName);
 
-			result.addAll(PerlSubUtil.findSubDeclarations(project, packageName + "::" + subName));
+			if (!noCheckCurrent)    // suppress for resolving SUPER::
+				result.addAll(PerlSubUtil.findSubDeclarations(project, packageName + "::" + subName));
 
-			if( result.size() == 0)	// not found, need to check parents
+			if (result.size() == 0)    // not found, need to check parents
 			{
-				for( PsiPerlNamespaceDefinition namespaceDefinition: PerlPackageUtil.findNamespaceDefinitions(project, packageName) )
+				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
 				{
 					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
 
-					if( parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
+					if (parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
 						parentNamespaces.add("UNIVERSAL");
 
-					for (String parentNamespace : parentNamespaces )
+					for (String parentNamespace : parentNamespaces)
 					{
-						result.addAll(getSubDeclarations(project, parentNamespace, subName, checkedPackages));
+						result.addAll(getSubDeclarations(project, parentNamespace, subName, checkedPackages, false));
 						if (result.size() > 0)
 							break;
 					}
@@ -133,34 +160,39 @@ public class PerlDefaultMro
 
 	/**
 	 * Resolving sub aliases according to the Perl's MRO; fixme not dry; not sure globs works this way
-	 * @param project current project
-	 * @param packageName	current package name
-	 * @param subName	current sub name
-	 * @param checkedPackages	recursion control hashset
-	 * @return	collection of definitions
+	 *
+	 * @param project         current project
+	 * @param packageName     current package name
+	 * @param subName         current sub name
+	 * @param checkedPackages recursion control hashset
+	 * @return collection of definitions
 	 */
-	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName, HashSet<String> checkedPackages)
+	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
+		assert packageName != null: "Null package name for " + subName;
+		assert subName != null: "Null sub name for " + packageName;
+
 		Collection<PsiPerlGlobVariable> result = new ArrayList<>();
 
-		if( !checkedPackages.contains(packageName))
+		if (!checkedPackages.contains(packageName))
 		{
 			checkedPackages.add(packageName);
 
-			result.addAll(PerlGlobUtil.findGlobsDefinitions(project, packageName + "::" + subName));
+			if (!noCheckCurrent)    // suppress for resolving SUPER::
+				result.addAll(PerlGlobUtil.findGlobsDefinitions(project, packageName + "::" + subName));
 
-			if( result.size() == 0)	// not found, need to check parents
+			if (result.size() == 0)    // not found, need to check parents
 			{
-				for( PsiPerlNamespaceDefinition namespaceDefinition: PerlPackageUtil.findNamespaceDefinitions(project, packageName) )
+				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
 				{
 					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
 
-					if( parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
+					if (parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
 						parentNamespaces.add("UNIVERSAL");
 
-					for (String parentNamespace : parentNamespaces )
+					for (String parentNamespace : parentNamespaces)
 					{
-						result.addAll(getSubAliases(project, parentNamespace, subName, checkedPackages));
+						result.addAll(getSubAliases(project, parentNamespace, subName, checkedPackages, false));
 						if (result.size() > 0)
 							break;
 					}

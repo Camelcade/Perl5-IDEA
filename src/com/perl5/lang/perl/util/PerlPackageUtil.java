@@ -20,23 +20,27 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import javax.print.DocFlavor;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -47,18 +51,20 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static final String PACKAGE_SEPARATOR = "::";
 	public static final String PACKAGE_SEPARATOR_LEGACY = "'";
 	public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
-	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("("+ PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
+	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
 	public static final HashSet<String> BUILT_IN_ALL = new HashSet<>();
 
-	static{
+	static
+	{
 		BUILT_IN_ALL.addAll(BUILT_IN);
 		BUILT_IN_ALL.addAll(BUILT_IN_PRAGMA);
 		BUILT_IN_ALL.addAll(BUILT_IN_DEPRECATED);
 	}
 
-    /**
+	/**
 	 * Checks if package is built in
+	 *
 	 * @param pacakgeName package name
 	 * @return result
 	 */
@@ -69,10 +75,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 
-	public static final HashMap<String,String> CANONICAL_NAMES_CACHE = new HashMap<>();
+	public static final ConcurrentHashMap<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
 
 	/**
-	 * Make canonical package name, atm crude, jut chop off :: from end and begining
+	 * Make canonical package name.
+	 *
 	 * @param name package name
 	 * @return canonical package name
 	 */
@@ -80,7 +87,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		String newName;
 
-		if((newName = CANONICAL_NAMES_CACHE.get(name)) != null )
+		if ((newName = CANONICAL_NAMES_CACHE.get(name)) != null)
 			return newName;
 
 		String originalName = name;
@@ -95,28 +102,29 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 //		System.out.println("Chunks: " + chunks.length);
 
-		if( chunks.length > 0 && chunks[0].equals(""))	// implicit main
+		if (chunks.length > 0 && chunks[0].equals(""))    // implicit main
 			chunks[0] = "main";
 
-		for( String chunk: chunks)
-			if( !(canonicalChunks.size() == 0 && chunk.equals("main")))
+		for (String chunk : chunks)
+			if (!(canonicalChunks.size() == 0 && chunk.equals("main")))
 				canonicalChunks.add(chunk);
 
 //		System.out.println("Canonical chunks: " + chunks.length);
 
-		if( canonicalChunks.size() == 0)
+		if (canonicalChunks.size() == 0)
 			newName = "main";
 		else
 			newName = StringUtils.join(canonicalChunks, "::");
 
 //		System.out.println("Canonical: " + newName + "\n");
-		CANONICAL_NAMES_CACHE.put(originalName,newName);
+		CANONICAL_NAMES_CACHE.put(originalName, newName);
 
 		return newName;
 	}
 
 	/**
 	 * Searching of namespace element is in. If no explicit namespaces defined, main is returned
+	 *
 	 * @param element psi element to find definition for
 	 * @return canonical package name
 	 */
@@ -129,7 +137,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		{
 			PsiPerlNamespaceDefinition namespaceDefinition = namespaceBlock.getNamespaceDefinition();
 
-			if( namespaceDefinition.getNamespaceElement() != null ) // checking that definition is valid and got namespace
+			if (namespaceDefinition.getNamespaceElement() != null) // checking that definition is valid and got namespace
 			{
 				String name = namespaceDefinition.getNamespaceElement().getCanonicalName();
 				assert name != null;
@@ -142,9 +150,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Searching project files for namespace definitions by specific package name
-	 * @param project	project to search in
-	 * @param packageName	canonical package name (without tailing ::)
-	 * @return	collection of found definitions
+	 *
+	 * @param project     project to search in
+	 * @param packageName canonical package name (without tailing ::)
+	 * @return collection of found definitions
 	 */
 	public static Collection<PsiPerlNamespaceDefinition> findNamespaceDefinitions(Project project, String packageName)
 	{
@@ -155,6 +164,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Returns list of defined package names
+	 *
 	 * @param project project to search in
 	 * @return collection of package names
 	 */
@@ -165,6 +175,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Builds package path from packageName Foo::Bar => Foo/Bar.pm
+	 *
 	 * @param packageName canonical package name
 	 * @return package path
 	 */
@@ -175,6 +186,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Translates package relative name to the package name Foo/Bar.pm => Foo::Bar
+	 *
 	 * @param packagePath package relative path
 	 * @return canonical package name
 	 */
@@ -187,8 +199,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Adds to queue netsted namespaces, which names should be adjusted to the new package name/path
-	 * @param queue - RenameRefactoringQueue
-	 * @param file - file has been moved
+	 *
+	 * @param queue   - RenameRefactoringQueue
+	 * @param file    - file has been moved
 	 * @param oldPath - previous filepath
 	 */
 	public static void handleMovedPackageNamespaces(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath)
@@ -203,18 +216,18 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 			VirtualFile oldInnermostRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForFile(file, project), oldPath);
 
-			if( oldInnermostRoot != null )
+			if (oldInnermostRoot != null)
 			{
 				String oldRelativePath = Paths.get(oldInnermostRoot.getPath()).relativize(Paths.get(oldPath)).toString();
 				String oldPackageName = PerlPackageUtil.getPackageNameByPath(oldRelativePath);
 
-				if( !oldPackageName.equals(newPackageName))
+				if (!oldPackageName.equals(newPackageName))
 				{
 					PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
-					if( psiFile != null)
-						for( PsiPerlNamespaceDefinition namespaceDefinition: PsiTreeUtil.findChildrenOfType(psiFile, PsiPerlNamespaceDefinition.class) )
-							if( oldPackageName.equals(namespaceDefinition.getPackageName()))
-								queue.addElement(namespaceDefinition,newPackageName);
+					if (psiFile != null)
+						for (PsiPerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PsiPerlNamespaceDefinition.class))
+							if (oldPackageName.equals(namespaceDefinition.getPackageName()))
+								queue.addElement(namespaceDefinition, newPackageName);
 				}
 			}
 		}
@@ -222,9 +235,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Searches for all pm files and add renaming of nested package definitions to the queue. Invoked after renaming
-	 * @param queue	RenameRefactoringQueue object
-	 * @param directory	VirtualFile of renamed directory
-	 * @param oldPath old directory path
+	 *
+	 * @param queue     RenameRefactoringQueue object
+	 * @param directory VirtualFile of renamed directory
+	 * @param oldPath   old directory path
 	 */
 	public static void handlePackagePathChange(RenameRefactoringQueue queue, VirtualFile directory, String oldPath)
 	{
@@ -232,8 +246,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		VirtualFile directorySourceRoot = PerlUtil.getFileClassRoot(project, directory);
 
 		if (directorySourceRoot != null)
-			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
-				if( !file.isDirectory() && "pm".equals(file.getExtension()) && directorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)) )
+			for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory))
+				if (!file.isDirectory() && "pm".equals(file.getExtension()) && directorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)))
 				{
 					String relativePath = VfsUtil.getRelativePath(file, directory);
 					String oldFilePath = oldPath + "/" + relativePath;
@@ -243,9 +257,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Searches for all pm files in directory to be renamed/moved, searches for references to those packages and add them to the renaming queue
-	 * @param queue RenameRefactoringQueue object
+	 *
+	 * @param queue     RenameRefactoringQueue object
 	 * @param directory VirtualFile of directory to be renamed
-	 * @param newPath new directory path
+	 * @param newPath   new directory path
 	 */
 	public static void handlePackagePathChangeReferences(RenameRefactoringQueue queue, VirtualFile directory, String newPath)
 	{
@@ -255,13 +270,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 		if (oldDirectorySourceRoot != null)
 		{
-			for( VirtualFile file: VfsUtil.collectChildrenRecursively(directory))
-				if( !file.isDirectory() && "pm".equals(file.getExtension()) && oldDirectorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)) )
+			for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory))
+				if (!file.isDirectory() && "pm".equals(file.getExtension()) && oldDirectorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)))
 				{
 					PsiFile psiFile = psiManager.findFile(file);
 
-					if( psiFile != null )
-						for( PsiReference inboundReference: ReferencesSearch.search(psiFile) )
+					if (psiFile != null)
+						for (PsiReference inboundReference : ReferencesSearch.search(psiFile))
 						{
 							String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
 							VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForPsiElement(psiFile), newPackagePath);

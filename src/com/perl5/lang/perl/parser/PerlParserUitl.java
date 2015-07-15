@@ -522,10 +522,13 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
             String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(b.getTokenText());
             String potentialSubName = canonicalPackageName + "::" + nextTokenData.getTokenText();
 
-            if (((PerlBuilder) b).isKnownSub(potentialSubName) || nextNextTokenType == LEFT_PAREN || ((PerlBuilder) b).isKnownPackage(canonicalPackageName))
+            if (
+                     nextNextTokenType == LEFT_PAREN                        // Package::Identifier( - what can it be?
+                    || ((PerlBuilder) b).isKnownSub(potentialSubName)       // we know this sub
+                    || !((PerlBuilder) b).isKnownPackage(potentialSubName)) // we don't know such package
                 return convertPackageIdentifier(b, l) && convertIdentifier(b, l, SUB);
             else
-                return mergePackageName(b, l);
+                return false;
         }
         // 	method
         else if (CONVERTABLE_TOKENS.contains(currentTokenType)) {
@@ -575,7 +578,12 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
                     return convertIdentifier(b, l, SUB) && convertIdentifier(b, l, PACKAGE);
                 else
                     return convertIdentifier(b, l, SUB);
-            } else // it's just sub
+            }
+            // KnownPackage->
+            else if( nextTokenType == OPERATOR_DEREFERENCE && ((PerlBuilder) b).isKnownPackage(b.getTokenText()))
+                return false;
+            // it's just sub
+            else
                 return convertIdentifier(b, l, SUB);
         }
 
