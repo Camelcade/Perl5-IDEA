@@ -391,7 +391,8 @@ private statement_body ::=
     | normal_statement
     {recoverWhile=recover_statement}
 
-private normal_statement ::= [label_declaration] expr [statement_modifier] {pin=2}
+private normal_statement ::= [label_declaration] normal_statement_body [statement_modifier] {pin=2}
+private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme we can't pin this because we need to distinct declaration and definition
 sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block

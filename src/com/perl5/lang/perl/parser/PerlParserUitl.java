@@ -725,6 +725,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
             BLOCK_NAME,
 
+            RESERVED_IF,
+            RESERVED_UNLESS,
+            RESERVED_GIVEN,
+            RESERVED_WHILE,
+            RESERVED_UNTIL,
+            RESERVED_WHEN,
+
+            RESERVED_FOREACH,    // may have no opening paren after a keyword
+            RESERVED_FOR,        // may have no opening paren after a keyword
+
             RESERVED_PACKAGE,
             RESERVED_USE,
             RESERVED_NO,
@@ -757,10 +767,9 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //		System.err.println("Checking " + b.getTokenText() + currentTokenType);
 
         if (currentTokenType == null                                                                                    // got end of file
-                || ((PerlBuilder) b).getBracesLevel() == 0 && (                                                                // we are not in braced statement
-                UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType)                                    // got semi, package, end of regex, use
-                        || isSubDefinitionAhead(b, l)
-                        || isCompoundAhead(b, l)
+            || ((PerlBuilder) b).getBracesLevel() == 0 && (                                                                // we are not in braced statement
+                UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType)                              // got semi, package, end of regex, use, compound or suffix
+                || currentTokenType == RESERVED_SUB && STATEMENT_RECOVERY_SUB_SUFFIX.contains(b.lookAhead(1))   // got sub definition
         )
                 ) {
             ((PerlBuilder) b).stopRecovery();
@@ -774,74 +783,4 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
         return true;
     }
-
-    /**
-     * Checks if ahead is sub definition
-     *
-     * @param b PerlBuilder
-     * @param l parsing level
-     * @return checking result
-     */
-    public static boolean isSubDefinitionAhead(PsiBuilder b, int l) {
-        return b.getTokenType() == RESERVED_SUB && STATEMENT_RECOVERY_SUB_SUFFIX.contains(b.lookAhead(1));
-    }
-
-    public static final TokenSet COMPOUND_KEYWORDS = TokenSet.create(
-            RESERVED_IF,
-            RESERVED_UNLESS,
-            RESERVED_GIVEN,
-            RESERVED_WHILE,
-            RESERVED_UNTIL,
-            RESERVED_WHEN,
-
-            RESERVED_FOREACH,    // may have no opening paren after a keyword
-            RESERVED_FOR        // may have no opening paren after a keyword
-    );
-
-    /**
-     * Checks if compound statement is ahead
-     *
-     * @param b PerlBuilder
-     * @param l parsing level
-     * @return checking resutl
-     */
-    public static boolean isCompoundAhead(PsiBuilder b, int l) {
-        IElementType currentTokenType = b.getTokenType();
-
-        if (COMPOUND_KEYWORDS.contains(currentTokenType) && b.lookAhead(1) == LEFT_PAREN) // if(... can be suffix or compound
-            return isCompoundArgumentAhead(b,l,1);
-        else if (currentTokenType == RESERVED_FOR || currentTokenType == RESERVED_FOREACH)   // can be suffix or compound, but have not opening paren in both cases
-            // loook for opening paren 5 tokens from current
-            for( int i = 1; i < 6; i++)
-                if( b.lookAhead(i) == LEFT_PAREN )
-                    return isCompoundArgumentAhead(b,l,i);
-
-        return false;
-    }
-
-    /**
-     * Checks if (...){ is ahead
-     * @param b PerlBuilder
-     * @param l parsing level
-     * @param offset look ahead offset
-     * @return checking result
-     */
-    public static boolean isCompoundArgumentAhead(PsiBuilder b, int l, int offset)
-    {
-        int parenLevel = 0;
-        IElementType currentTokenType;
-
-        while ((currentTokenType = b.lookAhead(offset)) != null) {
-            if (currentTokenType == LEFT_PAREN)
-                parenLevel++;
-            else if (currentTokenType == RIGHT_PAREN) {
-                parenLevel--;
-                if (parenLevel == 0)
-                    return b.lookAhead(offset + 1) == LEFT_BRACE;
-            }
-            offset++;
-        }
-        return false;
-    }
-
 }
