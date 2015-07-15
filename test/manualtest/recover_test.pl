@@ -87,6 +87,10 @@ $a = פûגאפûגאז if @ARGV {something braced is here}
 foreach $a (@ARGV){$b = 123;};  # this one should be parsed ok
 
 # recover on foreach compound
+$a = פûגאפûגאז for @ARGV {something braced is here}
+foreach $a (@ARGV){$b = 123;};  # this one should be parsed ok
+
+# recover on foreach compound
 $a = פûגאפûגאז if @ARGV {something braced is here}
 foreach($a = 1; $a < 100; $a++){$b = 123;};  # this one should be parsed ok
 
@@ -101,3 +105,4 @@ when($a){$b = 123;};  # this one should be parsed ok
 # recover on default compound
 $a = פûגאפûגאז if $something {something braced is here}
 default{$b = 123;};  # this one should be parsed ok
+

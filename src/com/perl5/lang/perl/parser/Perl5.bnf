@@ -391,8 +391,7 @@ private statement_body ::=
     | normal_statement
     {recoverWhile=recover_statement}
 
-private normal_statement ::= [label_declaration] normal_statement_body [statement_modifier] {pin=2}
-private normal_statement_body ::= expr {recoverWhile=recover_statement}
+private normal_statement ::= [label_declaration] expr [statement_modifier] {pin=2}
 
 // fixme we can't pin this because we need to distinct declaration and definition
 sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
@@ -432,22 +431,24 @@ goto_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_GOTO [goto_param] {pin=2}
 private lnr_param ::= <<convertIdentifier LABEL>> | expr // fixme scalar_expr ?
 private goto_param ::= <<convertIdentifier LABEL>> | OPERATOR_BITWISE_AND <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
 
+
 private statement_modifier ::=
-    if_statement_modifier
+    ( if_statement_modifier
     | unless_statement_modifier
     | while_statement_modifier
     | until_statement_modifier
     | for_statement_modifier
     | foreach_statement_modifier
     | when_statement_modifier
+    ) !LEFT_BRACE
 
-if_statement_modifier ::= [PACKAGE_CORE_IDENTIFIER]  RESERVED_IF expr {pin=2 name="Postfix if"}
+if_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_IF expr {pin=2 name="Postfix if"}
 unless_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_UNLESS expr {pin=2 name="Postfix unless"}
 while_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_WHILE expr {pin=2 name="Postfix while"}
 until_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_UNTIL expr {pin=2 name="Postfix until"}
 for_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_FOR expr  {pin=2 name="Postfix for"}
 foreach_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_FOREACH expr {pin=2 name="Postfix foreach"}
-when_statement_modifier ::= [PACKAGE_CORE_IDENTIFIER]  RESERVED_WHEN expr {pin=2 name="Postfix when"}
+when_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_WHEN expr {pin=2 name="Postfix when"}
 
 use_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE use_no_parameters {pin=2}
 no_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_NO use_no_parameters {pin=2}
