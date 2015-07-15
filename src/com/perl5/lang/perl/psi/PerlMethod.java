@@ -32,4 +32,7 @@ public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameEl
 	 * @return checking result
 	 */
 	public boolean hasExplicitNamespace();
+
+	public boolean isObjectMethod();
+
 }

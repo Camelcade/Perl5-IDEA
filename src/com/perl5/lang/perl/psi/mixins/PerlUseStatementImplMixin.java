@@ -16,11 +16,15 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -48,7 +52,7 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	public String getPackageName()
 	{
 		PerlNamespaceElement ns = getNamespaceElement();
-		if( ns != null )
+		if (ns != null)
 			return ns.getName();
 		return null;
 	}
@@ -59,4 +63,12 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 		return findChildByClass(PerlNamespaceElement.class);
 	}
 
+	@Override
+	public List<String> getStringParameters()
+	{
+		List<String> stringParameters = new ArrayList<>();
+		for (PerlStringContentElementImpl stringContentElement : PsiTreeUtil.findChildrenOfType(this, PerlStringContentElementImpl.class))
+			stringParameters.add(stringContentElement.getText());
+		return stringParameters;
+	}
 }

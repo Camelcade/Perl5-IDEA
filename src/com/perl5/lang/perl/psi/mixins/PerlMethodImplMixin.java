@@ -48,6 +48,18 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	}
 
 	@Override
+	public boolean isObjectMethod()
+	{
+		if( !hasExplicitNamespace() )
+		{
+			PsiElement parent = getParent();
+			PsiElement grandParent = parent == null ? null : parent.getParent();
+			return grandParent instanceof PsiPerlDerefExpr;
+		}
+		return false;
+	}
+
+	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespaceElement.class);

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.mro;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -24,6 +25,7 @@ import com.perl5.lang.perl.util.PerlUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -33,61 +35,35 @@ import java.util.List;
  */
 public class PerlDefaultMro
 {
-	public static Collection<PsiPerlSubDefinition> getSubDefinitions(PerlMethod perlMethod)
+	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName)
+	{
+		return getSubDefinitions(project, packageName, subName, new HashSet<String>());
+	}
+
+	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages)
 	{
 		Collection<PsiPerlSubDefinition> result = new ArrayList<>();
 
-		PerlSubNameElement subNameElement = perlMethod.getSubNameElement();
-		if( subNameElement != null )
+		if( !checkedPackages.contains(packageName))
 		{
+			checkedPackages.add(packageName);
 
-			PerlNamespaceElement namespaceElement = perlMethod.getNamespaceElement();
-			PsiElement callElement = perlMethod.getParent();
-			PsiElement callContainer = callElement.getParent();
+			result.addAll(PerlSubUtil.findSubDefinitions(project, packageName + "::" + subName));
 
-//			assert callElement instanceof PsiPerlRightwardCallExpr || callElement instanceof PsiPerlFunctionCallExpr;
-
-			PsiElement baseElement = null;
-			if (callContainer instanceof PerlDerefExpression)
-				baseElement = PerlUtil.getPrevDereferenceElement(callElement);
-
-			if (baseElement != null)
+			if( result.size() == 0)	// not found, need to check parents
 			{
-				if( namespaceElement != null && "SUPER".equals(namespaceElement.getCanonicalName()))
-				{
-					// expr->SUPER::sub
-
-				}
-				else
-				{
-					if( baseElement instanceof PsiPerlNamespaceExpr)
+				for( PsiPerlNamespaceDefinition namespaceDefinition: PerlPackageUtil.findNamespaceDefinitions(project, packageName) )
+					for( String parentNamespace: namespaceDefinition.getParentNamespaces() )
 					{
-						// package->sub
-
+						result.addAll(getSubDefinitions(project, parentNamespace, subName, checkedPackages));
+						if( result.size() > 0)
+							break;
 					}
-//					else if( baseElement instanceof PsiPerlString)
-//					{
-//						// string->sub
-//					}
-					else if (baseElement instanceof PsiPerlVariableExpr)
-					{
-						// $scalar->sub
-					}
-					// expr->sub
-				}
-			} else
-			{
-				// sub
-				String packageName;
-				if( namespaceElement != null )
-					packageName = namespaceElement.getCanonicalName();
-				else
-					packageName = PerlPackageUtil.getContextPackageName(callElement);
-
-				String canonicalName = packageName + "::" + subNameElement.getName();
-				result = PerlSubUtil.findSubDefinitions(callElement.getProject(), canonicalName);
 			}
 		}
+
 		return result;
 	}
+
+
 }

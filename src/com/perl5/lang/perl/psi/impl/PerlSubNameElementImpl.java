@@ -23,6 +23,7 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mro.PerlDefaultMro;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -108,10 +109,15 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		List<PerlSubDefinition> result = new ArrayList<>();
 		PsiElement parent = getParent();
 
-		// todo handle inheritance search
-		for( PsiPerlSubDefinition subDefinition : PerlSubUtil.findSubDefinitions(getProject(), getCanonicalName()))
-			if( !subDefinition.isEquivalentTo(parent))
-				result.add(subDefinition);
+		String packageName = getPackageName();
+		String subName = getName();
+
+		if( subName != null && parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
+			result.addAll(PerlDefaultMro.getSubDefinitions(getProject(), packageName, subName));
+		else
+			for (PsiPerlSubDefinition subDefinition : PerlSubUtil.findSubDefinitions(getProject(), packageName + "::" + subName))
+				if (!subDefinition.isEquivalentTo(parent))
+					result.add(subDefinition);
 
 		return result;
 	}

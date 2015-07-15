@@ -19,6 +19,8 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 
+import java.util.List;
+
 /**
  * Created by hurricup on 31.05.2015.
  */
@@ -27,4 +29,5 @@ public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContai
 	public String getPackageName();
 	public boolean isUseParent();
 	public boolean isUseBase();
+	public List<String> getStringParameters();
 }

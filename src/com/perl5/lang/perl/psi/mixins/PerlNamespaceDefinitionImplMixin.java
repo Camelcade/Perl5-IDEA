@@ -21,22 +21,32 @@ import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by hurricup on 28.05.2015.
+ *
  */
 public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub> implements PsiPerlNamespaceDefinition
 {
+	List<String> parentPackages = null;
+
 	public PerlNamespaceDefinitionImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -87,6 +97,39 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return namespaceElement.getCanonicalName();
 
 		return null;
+	}
+
+	public static HashSet<String> PARENT_PRAGMAS = new HashSet<>(Arrays.asList(
+			"base",
+			"parent"
+	));
+
+	@Override
+	public List<String> getParentNamespaces()
+	{
+		if( parentPackages != null )
+			return parentPackages;
+
+		List<String> result = new ArrayList<>();
+
+		// fixme add to stub and check it here
+		// fixme check for push @ISA
+
+		PsiElement namespaceBlock = this.getParent();
+
+		for( PsiPerlUseStatement useStatement: PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
+			if (useStatement.getNamespaceElement() != null && PARENT_PRAGMAS.contains(useStatement.getNamespaceElement().getCanonicalName()))
+				if( PsiTreeUtil.getParentOfType(useStatement, PsiPerlNamespaceBlock.class) == namespaceBlock)    // check that it's not nested package use
+					result.addAll(useStatement.getStringParameters());
+
+		return parentPackages = result;
+	}
+
+	@Override
+	public void subtreeChanged()
+	{
+		parentPackages = null;
+		super.subtreeChanged();
 	}
 
 	@Nullable
