@@ -1,53 +1,61 @@
 # Statements recovery tests
 
 # recover on semicolon
-$a = פûגאפûגאז {something braced is here}
+$a = פûגאפûגאז {something braced is here} if($somevar)
 $b = 123;   # <= recover till now
 $a = 123;   # this one should be parsed ok
 
 # recover on closing brace
 {
-    $a = פûגאפûגאז {something braced is here}
+    $a = פûגאפûגאז {something braced is here}  if($somevar)
     $b = 123
 }
 $a = 123;   # this one should be parsed ok
 
 # recover on closing regex delimiter
-s/someting/$a = פûגאפûגאז {something braced is here}/ex;
+s/someting/$a = פûגאפûגאז {something braced is here}  if($somevar)/ex;
 $a = 123;   # this one should be parsed ok
 
 # recover on named block
-$a = פûגאפûגאז {something braced is here}
+$a = פûגאפûגאז {something braced is here}  if($somevar)
 BEGIN{
     $a = 123;   # this one should be parsed ok
 }
 
 # recover on package keyword
-$a = פûגאפûגאז {something braced is here}
+$a = פûגאפûגאז {something braced is here}  if($somevar)
 package main;  # this one should be parsed ok
 
 # recover on use keyword
-$a = פûגאפûגאז {something braced is here}
+$a = פûגאפûגאז {something braced is here}  if($somevar)
 use warnings;  # this one should be parsed ok
 
 # recover on no keyword
-$a = פûגאפûגאז {something braced is here}
+$a = פûגאפûגאז {something braced is here}  if($somevar)
 no warnings;  # this one should be parsed ok
 
 # recover on sub keyword
-$a = פûגאפûגאז sub {somethingbad;}
+$a = פûגאפûגאז sub {somethingbad;}  if($somevar)
 sub abc{$b = 123;};  # this one should be parsed ok
 
 # recover on sub keyword
-$a = פûגאפûגאז sub {somethingbad;}
+$a = פûגאפûגאז sub {somethingbad;}  if($somevar)
 sub CORE::abc{$b = 123;};  # this one should be parsed ok
 
 # recover on sub keyword
-$a = פûגאפûגאז sub {somethingbad;}
+$a = פûגאפûגאז sub {somethingbad;}  if($somevar)
 sub Foo::abc{$b = 123;};  # this one should be parsed ok
 
 # recover on if compound
 $a = פûגאפûגאז if $something {something braced is here}
+if(1){$b = 123;};  # this one should be parsed ok
+
+# recover on if compound
+$a = פûגאפûגאז  {something braced is here} if ($something)
+if(1){$b = 123;};  # this one should be parsed ok
+
+# recover on if compound
+$a = פûגאפûגאז  {something braced is here} if $something
 if(1){$b = 123;};  # this one should be parsed ok
 
 # recover on unless compound
@@ -84,6 +92,10 @@ foreach($a = 1; $a < 100; $a++){$b = 123;};  # this one should be parsed ok
 
 # recover on when compound
 $a = פûגאפûגאז when $something {something braced is here}
+when($a){$b = 123;};  # this one should be parsed ok
+
+# recover on when compound
+$a = פûגאפûגאז when ($something) {something braced is here}
 when($a){$b = 123;};  # this one should be parsed ok
 
 # recover on default compound

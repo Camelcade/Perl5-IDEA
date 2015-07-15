@@ -785,18 +785,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			RESERVED_USE,
 			RESERVED_NO,
 
-			RESERVED_FOREACH,	// may have no opening paren after a keyword
-			RESERVED_FOR, 		// may have no opening paren after a keyword
-			RESERVED_DEFAULT	// has no opening paren
-	);
-
-	public static TokenSet PARENTHESISED_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			RESERVED_IF,
 			RESERVED_UNLESS,
 			RESERVED_GIVEN,
 			RESERVED_WHILE,
 			RESERVED_UNTIL,
-			RESERVED_WHEN
+			RESERVED_WHEN,
+
+			RESERVED_FOREACH,	// may have no opening paren after a keyword
+			RESERVED_FOR, 		// may have no opening paren after a keyword
+			RESERVED_DEFAULT	// has no opening paren
 	);
 
 	public static TokenSet STATEMENT_RECOVERY_SUB_SUFFIX = TokenSet.create(
@@ -827,7 +825,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		if( currentTokenType == null																					// got end of file
 			|| ((PerlBuilder) b).getBracesLevel() == 0 && (																// we are not in braced statement
 				currentTokenType == RESERVED_SUB && STATEMENT_RECOVERY_SUB_SUFFIX.contains(b.lookAhead(1))				// got sub definition/declaration
-				||  PARENTHESISED_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType) && b.lookAhead(1) == LEFT_PAREN	// got compound statement
 				||  UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType) 									// got semi, package, end of regex, use
 			)
 		)
