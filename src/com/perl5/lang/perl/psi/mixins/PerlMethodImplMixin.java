@@ -76,4 +76,5 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	{
 		return getNamespaceElement() != null;
 	}
+
 }

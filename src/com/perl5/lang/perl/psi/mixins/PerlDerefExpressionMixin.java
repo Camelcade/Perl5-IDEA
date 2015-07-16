@@ -48,7 +48,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 				return currentPackageName;
 			else if (nextElement instanceof PsiPerlNamespaceExpr)
 				currentPackageName = ((PerlNamespaceElement) nextElement.getFirstChild()).getName();
-			else if (step == 0 && nextElement instanceof PsiPerlTermExpr && nextElement.getFirstChild() instanceof PerlVariable)
+			else if (step == 0 && nextElement instanceof PsiPerlVariableExpr && nextElement.getFirstChild() instanceof PerlVariable)
 			{
 				currentPackageName = ((PerlVariable) nextElement.getFirstChild()).guessVariableType();
 				if (currentPackageName == null)
