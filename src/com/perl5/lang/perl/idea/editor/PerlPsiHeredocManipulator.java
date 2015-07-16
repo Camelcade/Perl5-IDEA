@@ -39,4 +39,5 @@ public class PerlPsiHeredocManipulator extends PsiCommentManipulator
 
 		return (PsiComment)psiComment.replace(newElement);
 	}
+
 }

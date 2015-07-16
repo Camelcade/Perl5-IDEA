@@ -16,19 +16,11 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
-
-import java.util.List;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by evstigneev on 16.07.2015.
  */
-public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement
+public interface PerlNamespaceBlock extends PerlLexicalScope
 {
-	String getPackageName();
-	List<String> getParentNamespaces();
-	public void subtreeChanged();
 }

@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
-
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by evstigneev on 16.07.2015.
  */
-public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement
+public abstract class PerlNamespaceBlockImplMixin extends PerlLexicalScopeMemberMixin implements PsiPerlNamespaceBlock
 {
-	String getPackageName();
-	List<String> getParentNamespaces();
-	public void subtreeChanged();
+    public PerlNamespaceBlockImplMixin(ASTNode node) {
+        super(node);
+    }
+
+    @Override
+    public void subtreeChanged() {
+        super.subtreeChanged();
+        getNamespaceDefinition().subtreeChanged();
+    }
 }

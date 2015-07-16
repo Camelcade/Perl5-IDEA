@@ -97,6 +97,7 @@ public class PerlDefaultMro
 				{
 					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
 
+					// fixme this should be returned by getParentNamespaces
 					if (parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
 						parentNamespaces.add("UNIVERSAL");
 
