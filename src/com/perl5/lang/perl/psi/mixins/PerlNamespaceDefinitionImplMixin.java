@@ -107,12 +107,10 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public List<String> getParentNamespaces()
 	{
-		if( parentPackages != null )
+		if (parentPackages != null)
 			return parentPackages;
 
 		List<String> result = new ArrayList<>();
-
-		// fixme add to stub and check it here
 		// fixme check for push @ISA
 
 		PsiElement namespaceBlock = this.getParent();
@@ -128,8 +126,8 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public void subtreeChanged()
 	{
-		parentPackages = null;
 		super.subtreeChanged();
+		parentPackages = null;
 	}
 
 	@Nullable

@@ -21,6 +21,8 @@ import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 
+import java.util.List;
+
 /**
  * Created by hurricup on 28.05.2015.
  */
