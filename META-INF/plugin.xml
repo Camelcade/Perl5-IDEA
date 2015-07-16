@@ -28,7 +28,7 @@
       <p>0.32 beta</p>
       <ul>
       <li>Improved statements recovery on compound statement</li>
-      <li>Implemented basic default Perl MRO: resolves inherite methods, SUPER methods </li>
+      <li>Implemented basic default Perl MRO: resolves inherited methods, SUPER methods (NB: do not refactor, only navigate)</li>
       </ul>
 
     ]]>
