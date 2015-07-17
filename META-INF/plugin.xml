@@ -150,6 +150,10 @@
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceMultipleDefinitionsInspection" />
 
         <localInspection language="Perl5"
+                         shortName="FancyMethodCall" displayName="Fancy method calls" groupName="Perl5" enabledByDefault="true" level="WARNING"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection" />
+
+        <localInspection language="Perl5"
                          shortName="SubDeprecated" displayName="Deprecated sub" groupName="Perl5" enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubDeprecatedInspection" />
         <localInspection language="Perl5"

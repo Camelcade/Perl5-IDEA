@@ -21,17 +21,29 @@ import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
+	public static PsiPerlDerefExpr createMethodCall(Project project, String packageName, String subName)
+	{
+		assert packageName != null;
+		assert subName != null;
+
+		PerlFileElement file = createFile(project, String.format("%s->%s;", packageName, subName));
+		PsiPerlDerefExpr def = PsiTreeUtil.findChildOfType(file, PsiPerlDerefExpr.class);
+		assert def != null;
+		return def;
+	}
+
+
+	// fixme probably we don't need package name and sub. just identifier
 	public static PerlNamespaceElementImpl createPackageName(Project project, String name)
 	{
 		PerlFileElement file = createFile(project, "package " + name + ";");
 		PsiPerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PsiPerlNamespaceDefinition.class);
 		assert def != null;
-		return (PerlNamespaceElementImpl)def.getNamespaceElement();
+		return (PerlNamespaceElementImpl) def.getNamespaceElement();
 	}
 
 	public static PerlSubNameElement createUserFunction(Project project, String name)
@@ -52,21 +64,21 @@ public class PerlElementFactory
 
 	public static PerlHeredocTerminatorElementImpl createHereDocTerminator(Project project, String name)
 	{
-		PerlFileElement file = createFile(project, "<<'" + name + "';\n"+name+"\n");
+		PerlFileElement file = createFile(project, "<<'" + name + "';\n" + name + "\n");
 		return PsiTreeUtil.findChildOfType(file, PerlHeredocTerminatorElementImpl.class);
 	}
 
 	public static PerlHeredocElementImpl createHereDoc(Project project, String text)
 	{
-		long randomNumber = (long)(Math.random() * Long.MAX_VALUE);
+		long randomNumber = (long) (Math.random() * Long.MAX_VALUE);
 		String marker = "TEXT" + randomNumber;
-		PerlFileElement file = createFile(project, "<<'"+marker+"';\n"+ text +"\n"+marker+"\n");
+		PerlFileElement file = createFile(project, "<<'" + marker + "';\n" + text + "\n" + marker + "\n");
 		return PsiTreeUtil.findChildOfType(file, PerlHeredocElementImpl.class);
 	}
 
 	public static PerlStringContentElementImpl createStringContent(Project project, String name)
 	{
-		PerlFileElement file = createFile(project, "'"+name+"';");
+		PerlFileElement file = createFile(project, "'" + name + "';");
 		PsiPerlStringSq string = PsiTreeUtil.findChildOfType(file, PsiPerlStringSq.class);
 		assert string != null;
 		return (PerlStringContentElementImpl) string.getFirstChild().getNextSibling();

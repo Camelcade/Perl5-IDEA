@@ -254,7 +254,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
         IElementType tokenType = b.getTokenType();
         IElementType nextTokenType = b.lookAhead(1);
 
-        if (CONVERTABLE_TOKENS.contains(tokenType) && nextTokenType != LEFT_PAREN && !PACKAGE_TOKENS.contains(nextTokenType))
+        if (    CONVERTABLE_TOKENS.contains(tokenType)
+                && nextTokenType != LEFT_PAREN              // not function call
+                && !PACKAGE_TOKENS.contains(nextTokenType)  // not method Package::
+                && !(nextTokenType == IDENTIFIER && ((PerlBuilder) b).isKnownPackage(((PerlBuilder) b).lookupToken(1).getTokenText()))  // not Method Package
+        )
             // todo we should check current namespace here
             return !PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
         else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(2) != LEFT_PAREN)
