@@ -313,11 +313,13 @@ private recover_block ::= !(RIGHT_BRACE)
 
 private namespace_item ::=
     SEMICOLON +
+    | nyi_statement
     | compound_statement
     | format_definition
     | statement
     | annotation
 
+nyi_statement ::= OPERATOR_HELLIP
 format_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_FORMAT [IDENTIFIER] OPERATOR_ASSIGN [FORMAT] FORMAT_TERMINATOR {pin=2}
 
 private compound_statement ::=
