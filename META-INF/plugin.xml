@@ -27,6 +27,8 @@
     <change-notes><![CDATA[
       <p>0.33 beta</p>
       <ul>
+      <li>We now have a <a href="https://twitter.com/CamelcadeIDE">twitter account</a> for interactions. Don't forget to subscribe and interact :)</li>
+      <li>Implemented MRO for fancy calls: method Package();</li>
       </ul>
 
     ]]>
