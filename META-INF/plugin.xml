@@ -28,7 +28,9 @@
       <p>0.33 beta</p>
       <ul>
       <li>We now have a <a href="https://twitter.com/CamelcadeIDE">twitter account</a> for interactions. Don't forget to subscribe and interact :)</li>
-      <li>Implemented MRO for fancy calls: method Package();</li>
+      <li>Implemented MRO for fancy methods invocation: <code>method Package();</code></li>
+      <li>Implemented fancy methods invocation inspection and quickfix.</li>
+      <li>Implemented the <a href="http://perldoc.perl.org/perlsyn.html#The-Ellipsis-Statement">ellipsis statement</a> from 5.12, annotated as fixme/todo.</li>
       </ul>
 
     ]]>
