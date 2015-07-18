@@ -23,24 +23,29 @@ import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 23.05.2015.
  */
-public class PerlStringContentElementImpl extends LeafPsiElement implements PerlNamedElement
+public class PerlStringContentElementImpl extends LeafPsiElement implements PerlStringContentElement
 {
-	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text) {
+	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
+	{
 		super(type, text);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitStringContentElement(this);
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitStringContentElement(this);
 		else super.accept(visitor);
 	}
 
@@ -60,14 +65,14 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		if( name.equals(""))
+		if (name.equals(""))
 			throw new IncorrectOperationException("You can't rename a string to the empty one");
 
 		PerlStringContentElementImpl newName = PerlElementFactory.createStringContent(getProject(), name);
-		if( newName != null )
+		if (newName != null)
 			replace(newName);
 		else
-			throw new IncorrectOperationException("Unable to create string from: "+ name);
+			throw new IncorrectOperationException("Unable to create string from: " + name);
 		return this;
 	}
 
@@ -78,4 +83,32 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
 	}
 
+	@Override
+	public boolean looksLikePackage()
+	{
+		return false;
+	}
+
+	final static String validFileNameRe = "\\.?[a-zA-Z0-9\\-_]+(?:\\.[a-zA-Z0-9\\-_]*)*";
+	final static String validPathDelimiterRe = "(?:\\\\+|/+)";
+	final static Pattern validPathRe = Pattern.compile(
+			validPathDelimiterRe + "?" +
+					"(?:" + validFileNameRe + validPathDelimiterRe + ")+ ?" +
+					"(" + validFileNameRe + ")" + validPathDelimiterRe + "?"
+	);
+
+	@Override
+	public boolean looksLikePath()
+	{
+		return validPathRe.matcher(getText()).matches();
+	}
+
+	@Override
+	public String getContentFileName()
+	{
+		Matcher m = validPathRe.matcher(getText());
+		if( m.matches())
+			return m.group(1);
+		return null;
+	}
 }

@@ -31,6 +31,7 @@
       <li>Implemented MRO for fancy methods invocation: <code>method Package();</code></li>
       <li>Implemented fancy methods invocation inspection and quickfix.</li>
       <li>Implemented the <a href="http://perldoc.perl.org/perlsyn.html#The-Ellipsis-Statement">ellipsis statement</a> from 5.12, annotated as fixme/todo.</li>
+      <li>Implemented go-to file on string text click. If string content looks like a file path (even partial), IDEA will jump to a matching file or offer you possible matches.</li>
       </ul>
 
     ]]>
