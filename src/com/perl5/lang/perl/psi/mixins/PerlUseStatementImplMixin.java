@@ -24,6 +24,8 @@ import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -35,17 +37,16 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	{
 		super(node);
 	}
+	public static final HashSet<String> PARENT_PRAGMAS = new HashSet<>(Arrays.asList(
+			"parent",
+			"base"
+	));
+
 
 	@Override
 	public boolean isUseParent()
 	{
-		return "parent".equals(getPackageName());
-	}
-
-	@Override
-	public boolean isUseBase()
-	{
-		return "base".equals(getPackageName());
+		return PARENT_PRAGMAS.contains(getPackageName());
 	}
 
 	@Override

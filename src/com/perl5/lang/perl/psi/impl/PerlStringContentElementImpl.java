@@ -22,8 +22,11 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
@@ -86,7 +89,9 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	@Override
 	public boolean looksLikePackage()
 	{
-		return false;
+		PerlUseStatement parentUse = PsiTreeUtil.getParentOfType(this, PerlUseStatement.class, true);
+		return parentUse != null && (parentUse.isUseParent() && !"-norequire".equals(getText())) || PerlLexer.AMBIGUOUS_PACKAGE_RE.matcher(getText()).matches();
+
 	}
 
 	final static String validFileNameRe = "\\.?[a-zA-Z0-9\\-_]+(?:\\.[a-zA-Z0-9\\-_]*)*";

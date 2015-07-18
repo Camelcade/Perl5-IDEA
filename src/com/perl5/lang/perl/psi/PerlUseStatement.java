@@ -28,6 +28,5 @@ public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContai
 {
 	public String getPackageName();
 	public boolean isUseParent();
-	public boolean isUseBase();
 	public List<String> getStringParameters();
 }

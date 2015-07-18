@@ -20,14 +20,9 @@ import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.indexing.FileBasedIndex;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import org.jetbrains.annotations.Nullable;
@@ -85,16 +80,16 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 					{
 						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
 						if (canonicalPath != null)
-							if (canonicalPath.contains(tokenText + "."))	// higer priority
+							if (canonicalPath.contains(tokenText + "."))    // higer priority
 								result.add(0, fileItem);
 							else if (canonicalPath.contains(tokenText))
 								result.add(fileItem);
 					}
-					for( PsiFileSystemItem fileItem: FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true))
+					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true))
 					{
 						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-						if (canonicalPath != null )
-							if( canonicalPath.contains(tokenText))
+						if (canonicalPath != null)
+							if (canonicalPath.contains(tokenText))
 								result.add(fileItem);
 					}
 				}

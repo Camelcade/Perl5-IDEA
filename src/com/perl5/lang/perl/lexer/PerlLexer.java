@@ -1391,7 +1391,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					"|" +
 					"(?:::)*'" +
 					")";
-	private static final Pattern ambigousPackage = Pattern.compile(
+	public static final Pattern AMBIGUOUS_PACKAGE_RE = Pattern.compile(
 			"(" +
 					reSeparator + "?" +        // optional opening separator,
 					"(?:" +
@@ -1451,7 +1451,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			return getIdentifierToken();
 		}
 
-		Matcher m = ambigousPackage.matcher(tokenText);
+		Matcher m = AMBIGUOUS_PACKAGE_RE.matcher(tokenText);
 		if (m.matches())
 		{
 			String packageIdentifier = m.group(1);

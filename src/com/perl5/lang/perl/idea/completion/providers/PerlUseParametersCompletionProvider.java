@@ -52,14 +52,12 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 
 				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
-				if( useStatement != null && (useStatement.isUseParent() || useStatement.isUseBase()) )
+				if( useStatement != null && useStatement.isUseParent() )
 				{
 					// fixme actually, we should fill files here, not packages, or make a diff provider
 					// fixme we should only add packages that has classes inside of them
 					for (String packageName : PerlPackageUtil.getDefinedPackageNames(file.getProject()))
-					{
 						resultSet.addElement(LookupElementBuilder.create(packageName).withIcon(PerlIcons.PACKAGE_GUTTER_ICON));
-					}
 
 					if( useStatement.isUseParent())
 						resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));

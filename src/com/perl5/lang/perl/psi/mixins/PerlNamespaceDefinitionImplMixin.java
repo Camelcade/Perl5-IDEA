@@ -99,11 +99,6 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		return null;
 	}
 
-	public static HashSet<String> PARENT_PRAGMAS = new HashSet<>(Arrays.asList(
-			"base",
-			"parent"
-	));
-
 	@Override
 	public List<String> getParentNamespaces()
 	{
@@ -116,7 +111,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		PsiElement namespaceBlock = this.getParent();
 
 		for( PsiPerlUseStatement useStatement: PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
-			if (useStatement.getNamespaceElement() != null && PARENT_PRAGMAS.contains(useStatement.getNamespaceElement().getCanonicalName()))
+			if (useStatement.isUseParent())
 				if( PsiTreeUtil.getParentOfType(useStatement, PsiPerlNamespaceBlock.class) == namespaceBlock)    // check that it's not nested package use
 					result.addAll(useStatement.getStringParameters());
 

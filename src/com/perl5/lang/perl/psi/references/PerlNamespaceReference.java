@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -38,9 +39,13 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-//		if( !(element instanceof PerlNamespaceElement))
-		assert element instanceof PerlNamespaceElement;
-		canonicalPackageName = ((PerlNamespaceElement) element).getCanonicalName();
+
+		if( element instanceof PerlNamespaceElement )
+			canonicalPackageName = ((PerlNamespaceElement) element).getCanonicalName();
+		else if( element instanceof PerlStringContentElement )
+			canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(element.getText());
+		else
+			throw new RuntimeException("Incorrect referencable element: " + element.getClass());
 
 		String text = element.getText();
 		if (text.endsWith("::"))
@@ -86,4 +91,9 @@ public class PerlNamespaceReference extends PerlReferencePoly
 		return super.isReferenceTo(element);
 	}
 
+	@Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
+	{
+		return super.handleElementRename(newElementName);
+	}
 }
