@@ -112,14 +112,13 @@ public class PerlFoldingBuilder extends FoldingBuilderEx {
 
                     while (currentComment != null) {
                         IElementType tokenType = currentComment.getNode().getElementType();
-                        if (tokenType == PerlElementTypes.COMMENT_LINE) {
+                        if (tokenType == PerlElementTypes.COMMENT_LINE && !currentComment.getText().contains("todo") && !currentComment.getText().contains("fixme")) {
                             blockEnd = currentComment.getTextOffset() + currentComment.getTextLength();
                             if (currentComment.getText().endsWith("\n"))
                                 blockEnd--;
                             commentsNumber++;
                         }
-
-                        if (tokenType != PerlElementTypes.COMMENT_LINE && tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT)
+                        else if ( tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT)
                             break;
 
                         currentComment = currentComment.getNextSibling();

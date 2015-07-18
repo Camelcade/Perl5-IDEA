@@ -34,6 +34,7 @@
       <li>Implemented go-to file on string text click. If string content looks like a file path (even partial), IDEA will jump to a matching file or offer you possible matches.</li>
       <li>Implemented unused lexical variable inspection.</li>
       <li>Disabled collapsing of pragma and version usages.</li>
+      <li>Disabled collapsing of line comments with fixme/todo words.</li>
       </ul>
 
     ]]>
