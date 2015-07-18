@@ -227,6 +227,12 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 						PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN,
 						false,
 						false);
+			else if (tokenType == NUMBER_VERSION)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_VERSION,
+						false,
+						false);
 		}
 	}
 }

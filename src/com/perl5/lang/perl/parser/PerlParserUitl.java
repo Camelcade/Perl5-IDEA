@@ -804,4 +804,30 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
         return true;
     }
+
+    public static final TokenSet VERSION_TOKENS = TokenSet.create(
+            NUMBER,
+            NUMBER_SIMPLE
+    );
+
+    /**
+     * Checks for version token and convert if necessary
+     * @param b PerlBuilder
+     * @param l parsing level
+     * @return parsing result
+     */
+    public static boolean parsePerlVersion(PsiBuilder b, int l)
+    {
+        if( b.getTokenType() == NUMBER_VERSION )
+            return consumeToken(b,NUMBER_VERSION);
+        else if( VERSION_TOKENS.contains(b.getTokenType()))
+        {
+            PsiBuilder.Marker m = b.mark();
+            b.advanceLexer();
+            m.collapse(NUMBER_VERSION);
+            return true;
+        }
+        return false;
+    }
+
 }

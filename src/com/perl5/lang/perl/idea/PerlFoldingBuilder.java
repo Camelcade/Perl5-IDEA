@@ -165,7 +165,9 @@ public class PerlFoldingBuilder extends FoldingBuilderEx {
                     int importsNumber = 0;
 
                     while (currentStatement != null) {
-                        if (currentStatement instanceof PsiPerlUseStatement || currentStatement.getFirstChild() instanceof PerlRequireExpr) {
+                        if (currentStatement instanceof PsiPerlUseStatement && !((PsiPerlUseStatement) currentStatement).isPragma() && !((PsiPerlUseStatement) currentStatement).isVersion()
+                                || currentStatement.getFirstChild() instanceof PerlRequireExpr)
+                        {
                             blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
                             importsNumber++;
                         } else if (!(currentStatement instanceof PsiComment || currentStatement instanceof PsiWhiteSpace))

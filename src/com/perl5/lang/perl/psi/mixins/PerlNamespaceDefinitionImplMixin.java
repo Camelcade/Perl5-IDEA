@@ -35,8 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -111,7 +109,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		PsiElement namespaceBlock = this.getParent();
 
 		for( PsiPerlUseStatement useStatement: PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
-			if (useStatement.isUseParent())
+			if (useStatement.isParentPragma())
 				if( PsiTreeUtil.getParentOfType(useStatement, PsiPerlNamespaceBlock.class) == namespaceBlock)    // check that it's not nested package use
 					result.addAll(useStatement.getStringParameters());
 

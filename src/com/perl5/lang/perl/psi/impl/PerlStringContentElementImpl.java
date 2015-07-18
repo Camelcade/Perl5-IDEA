@@ -91,7 +91,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	public boolean looksLikePackage()
 	{
 		PerlUseStatement parentUse = PsiTreeUtil.getParentOfType(this, PerlUseStatement.class, true);
-		return parentUse != null && (parentUse.isUseParent() && !"-norequire".equals(getText())) || PerlLexer.AMBIGUOUS_PACKAGE_RE.matcher(getText()).matches();
+		return parentUse != null && (parentUse.isParentPragma() && !"-norequire".equals(getText())) || PerlLexer.AMBIGUOUS_PACKAGE_RE.matcher(getText()).matches();
 
 	}
 
