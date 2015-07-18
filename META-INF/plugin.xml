@@ -35,6 +35,7 @@
       <li>Implemented unused lexical variable inspection.</li>
       <li>Disabled collapsing of pragma and version usages.</li>
       <li>Disabled collapsing of line comments with fixme/todo words.</li>
+      <li>Go to sub declaration click prefers definition over declaration if only both are resolved.</li>
       </ul>
 
     ]]>

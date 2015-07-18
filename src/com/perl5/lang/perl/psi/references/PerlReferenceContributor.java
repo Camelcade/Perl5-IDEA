@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.*;
@@ -46,7 +45,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 				}
 		);
 		registrar.registerReferenceProvider(
-				FUNCTION_PATTERN,
+				SUB_NAME_PATTERN,
 				new PsiReferenceProvider()
 				{
 					@NotNull
@@ -113,7 +112,6 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					}
 				}
 		);
-		// fixme here we should return string reference, which should be smart
 		registrar.registerReferenceProvider(STRING_CONENT_PATTERN, new PsiReferenceProvider()
 		{
 			@NotNull

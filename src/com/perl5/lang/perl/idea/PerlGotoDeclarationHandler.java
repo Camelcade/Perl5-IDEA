@@ -64,7 +64,20 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 						result.add(shadowedVariable);
 				}
 			}
-		} else if (sourceElement instanceof PerlStringContentElement && ((PerlStringContentElement) sourceElement).looksLikePath())
+		}
+		// additional procesing for subname
+		else if( sourceElement instanceof PerlSubNameElement )
+		{
+			PsiElement elementParent = sourceElement.getParent();
+
+			// suppress declaration if there is a definition and declaration
+			if( result.size() == 2 && !(elementParent instanceof PerlSubDefinition || elementParent instanceof PerlSubDeclaration ))
+				if( result.get(0).getOriginalElement() instanceof PerlSubDeclaration && result.get(1).getOriginalElement() instanceof PerlSubDefinition)
+					result.remove(0);
+
+		}
+		// string content to file jump
+		else if (sourceElement instanceof PerlStringContentElement && ((PerlStringContentElement) sourceElement).looksLikePath())
 		{
 			String tokenText = sourceElement.getText().replaceAll("\\\\", "/").replaceAll("/+", "/");
 			Project project = sourceElement.getProject();
