@@ -32,6 +32,7 @@
       <li>Implemented fancy methods invocation inspection and quickfix.</li>
       <li>Implemented the <a href="http://perldoc.perl.org/perlsyn.html#The-Ellipsis-Statement">ellipsis statement</a> from 5.12, annotated as fixme/todo.</li>
       <li>Implemented go-to file on string text click. If string content looks like a file path (even partial), IDEA will jump to a matching file or offer you possible matches.</li>
+      <li>Implemented unused lexical variable inspection</li>
       </ul>
 
     ]]>
@@ -178,6 +179,10 @@
         <localInspection language="Perl5"
                          shortName="VariableLexicalBuiltIn" displayName="Lexical built-in declarations" groupName="Perl5" enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableBuiltinRedeclarationInspection" />
+        <localInspection language="Perl5"
+                         shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5" enabledByDefault="true" level="WARNING"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedLexicalVariableInspection" />
+
 
     </extensions>
 

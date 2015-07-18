@@ -37,6 +37,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 23.05.2015.
+ *
  */
 public class PerlStringContentElementImpl extends LeafPsiElement implements PerlStringContentElement
 {
