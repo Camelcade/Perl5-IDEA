@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileTypePackage;
@@ -25,6 +26,13 @@ import com.perl5.lang.perl.psi.impl.*;
 
 public class PerlElementFactory
 {
+	public static PsiElement createNewLine(Project project)
+	{
+		PerlFileElement file = createFile(project, "\n");
+		return file.getFirstChild();
+	}
+
+
 	public static PsiPerlDerefExpr createMethodCall(Project project, String packageName, String subName)
 	{
 		assert packageName != null;
@@ -36,6 +44,15 @@ public class PerlElementFactory
 		return def;
 	}
 
+	public static PerlUseStatement createUseStatement(Project project, String packageName)
+	{
+		assert packageName != null;
+
+		PerlFileElement file = createFile(project, String.format("use %s;", packageName));
+		PerlUseStatement def = PsiTreeUtil.findChildOfType(file, PerlUseStatement.class);
+		assert def != null;
+		return def;
+	}
 
 	// fixme probably we don't need package name and sub. just identifier
 	public static PerlNamespaceElementImpl createPackageName(Project project, String name)

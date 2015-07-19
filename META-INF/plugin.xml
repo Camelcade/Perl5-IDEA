@@ -25,7 +25,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.33 beta</p>
+      <p>0.33 beta changes:</p>
       <ul>
       <li>We now have a <a href="https://twitter.com/CamelcadeIDE">twitter account</a> for interactions. Don't forget to subscribe and interact :)</li>
       <li>Implemented MRO for fancy methods invocation: <code>method Package();</code></li>
@@ -36,6 +36,7 @@
       <li>Disabled collapsing of pragma and version usages.</li>
       <li>Disabled collapsing of line comments with fixme/todo words.</li>
       <li>Go to sub declaration click prefers definition over declaration if only both are resolved.</li>
+      <li>Implemented <code>use strict;</code> inspection and quickfix.</li>
       </ul>
 
     ]]>
@@ -185,6 +186,10 @@
         <localInspection language="Perl5"
                          shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5" enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedLexicalVariableInspection" />
+
+        <localInspection language="Perl5"
+                         shortName="UseStrict" displayName="strict pragma usage" groupName="Perl5" enabledByDefault="true" level="ERROR"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection" />
 
 
     </extensions>
