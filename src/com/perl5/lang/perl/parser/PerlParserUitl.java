@@ -233,7 +233,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
             // todo we should check current namespace here
             return PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
         else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(SUB) && b.lookAhead(2) != LEFT_PAREN)
-            return PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText());
+        {
+            PerlTokenData nextToken = ((PerlBuilder) b).lookupToken(1);
+            if( nextToken != null )
+                return PerlSubUtil.isUnary(b.getTokenText(), nextToken.getTokenText());
+        }
 
         return false;
     }

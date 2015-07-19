@@ -39,6 +39,7 @@
       <li>Implemented <code>use strict;</code> inspection and quickfix.</li>
       <li>Implemented <code>use warnings;</code> inspection and quickfix to add <code>use warnings FATAL => 'all';</code>.</li>
       <li>Implemented convert to heredoc intention action. You may now convert any string to heredoc in one click.</li>
+      <li>New Perl File actions are now in separate groups of main New file menu.</li>
       </ul>
 
     ]]>
@@ -58,9 +59,12 @@
         <internalFileTemplate name="Perl5 script"/>
         <internalFileTemplate name="Perl5 embedded"/>
 
+        <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
+
+
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
 
-        <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
+
         <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
 
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
@@ -217,10 +221,24 @@
     </project-components>
 
     <actions>
-        <action id="Perl5.NewPerlFile" class="com.perl5.lang.perl.idea.actions.CreatePerlFileAction"
-                text="Perl5 File" description="Create new Perl5 file">
-            <add-to-group group-id="NewGroup" anchor="first" relative-to-action="NewFile"/>
-        </action>
+        <group class="com.perl5.lang.perl.idea.actions.groups.PerlFileActionsGroup" id="Perl5NewFile" text="Perl5 File Actions" description="Create Perl5 File" icon="com/perl5/icons/perl5.png">
+
+            <action id="Perl5.NewPerlPackage" class="com.perl5.lang.perl.idea.actions.CreatePerlPackageFileAction"
+                    text="Perl5 Package" description="Create Perl5 Package">
+            </action>
+
+            <action id="Perl5.NewPerlScript" class="com.perl5.lang.perl.idea.actions.CreatePerlScriptFileAction"
+                    text="Perl5 Script" description="Create Perl5 Script">
+            </action>
+
+            <action id="Perl5.NewPerlEmbedded" class="com.perl5.lang.perl.idea.actions.CreateEmbeddedPerlFileAction"
+                    text="Embedded Perl5 File" description="Create Embedded Perl5 file">
+            </action>
+
+            <separator/>
+
+            <add-to-group group-id="NewGroup" anchor="first"/>
+        </group>
 
     </actions>
 

@@ -1,4 +1,5 @@
 package ${PERL_PACKAGE_NAME};
-use strict; use warnings FATAL => 'all';
+use strict;
+use warnings FATAL => 'all';
 
 1;

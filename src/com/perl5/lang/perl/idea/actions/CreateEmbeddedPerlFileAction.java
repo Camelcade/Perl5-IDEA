@@ -23,18 +23,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.PerlIcons;
 
-import javax.swing.*;
-
 /**
- * Created by hurricup on 10.06.2015.
+ * Created by hurricup on 19.07.2015.
  */
-public class CreatePerlFileAction extends CreateFileFromTemplateAction implements DumbAware
+public class CreateEmbeddedPerlFileAction extends CreateFileFromTemplateAction implements DumbAware
 {
-	private static final String NEW_PERL_FILE = "New Perl5 File";
+	private static final String NEW_PERL_FILE = "New Embedded Perl5 File";
 
-	public CreatePerlFileAction()
+	public CreateEmbeddedPerlFileAction()
 	{
-		super(NEW_PERL_FILE, "", PerlIcons.PERL_LANGUAGE);
+		super(NEW_PERL_FILE, "", PerlIcons.EMBEDDED_PERL_FILE);
 	}
 
 	@Override
@@ -42,9 +40,7 @@ public class CreatePerlFileAction extends CreateFileFromTemplateAction implement
 	{
 		builder
 				.setTitle(NEW_PERL_FILE)
-				.addKind("Package", PerlIcons.PM_FILE, "Perl5 package")
-				.addKind("Script", PerlIcons.SCRIPT_FILE, "Perl5 script")
-				.addKind("Embedded Perl File", PerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded")
+				.addKind("Embedded Perl5 File", PerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded")
 		;
 	}
 
@@ -63,6 +59,6 @@ public class CreatePerlFileAction extends CreateFileFromTemplateAction implement
 	@Override
 	public boolean equals(Object obj)
 	{
-		return obj instanceof CreatePerlFileAction;
+		return obj instanceof CreateEmbeddedPerlFileAction;
 	}
 }
