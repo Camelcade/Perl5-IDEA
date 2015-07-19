@@ -18,10 +18,13 @@ package com.perl5.lang.perl.idea.editor;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiComment;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.resolve.reference.impl.manipulators.PsiCommentManipulator;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 10.06.2015.
@@ -34,10 +37,10 @@ public class PerlPsiHeredocManipulator extends PsiCommentManipulator
 		String oldText = psiComment.getText();
 		String newText = oldText.substring(0, range.getStartOffset()) + newContent + oldText.substring(range.getEndOffset());
 
-		PsiComment newElement = PerlElementFactory.createHereDoc(psiComment.getProject(), newText);
-		assert newElement != null;
+		List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(psiComment.getProject(), '\'', "TEXT" + Math.random(), newText);
+		assert heredocElements.size() == 4;
 
-		return (PsiComment)psiComment.replace(newElement);
+		return (PsiComment)psiComment.replace(heredocElements.get(1));
 	}
 
 }

@@ -1,0 +1,4 @@
+my $var = <<'TEXT'
+String content
+TEXT
+;

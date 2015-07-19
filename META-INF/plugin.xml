@@ -38,6 +38,7 @@
       <li>Go to sub declaration click prefers definition over declaration if only both are resolved.</li>
       <li>Implemented <code>use strict;</code> inspection and quickfix.</li>
       <li>Implemented <code>use warnings;</code> inspection and quickfix to add <code>use warnings FATAL => 'all';</code>.</li>
+      <li>Implemented convert to heredoc intention action. You may now convert any string to heredoc in one click.</li>
       </ul>
 
     ]]>
@@ -195,6 +196,13 @@
                          shortName="UseWarnings" displayName="Pragma usage: warnings" groupName="Perl5" enabledByDefault="true" level="ERROR"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection" />
 
+        <intentionAction>
+            <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverter</className>
+            <category>String converter</category>
+            <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
+
+        </intentionAction>
+
 
     </extensions>
 
@@ -213,6 +221,7 @@
                 text="Perl5 File" description="Create new Perl5 file">
             <add-to-group group-id="NewGroup" anchor="first" relative-to-action="NewFile"/>
         </action>
+
     </actions>
 
 </idea-plugin>

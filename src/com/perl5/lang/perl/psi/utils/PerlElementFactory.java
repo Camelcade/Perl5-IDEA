@@ -24,6 +24,10 @@ import com.perl5.lang.perl.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PerlElementFactory
 {
 	public static PsiElement createNewLine(Project project)
@@ -85,12 +89,18 @@ public class PerlElementFactory
 		return PsiTreeUtil.findChildOfType(file, PerlHeredocTerminatorElementImpl.class);
 	}
 
-	public static PerlHeredocElementImpl createHereDoc(Project project, String text)
+	public static List<PsiElement> createHereDocElements(Project project, char quoteSymbol, String markerText, String contentText)
 	{
-		long randomNumber = (long) (Math.random() * Long.MAX_VALUE);
-		String marker = "TEXT" + randomNumber;
-		PerlFileElement file = createFile(project, "<<'" + marker + "';\n" + text + "\n" + marker + "\n");
-		return PsiTreeUtil.findChildOfType(file, PerlHeredocElementImpl.class);
+		PerlFileElement file = createFile(project,
+				String.format("<<%c%s%c\n%s\n%s\n", quoteSymbol, markerText, quoteSymbol, contentText, markerText)
+		);
+
+		return new ArrayList<>(Arrays.asList(
+				PsiTreeUtil.findChildOfType(file, PsiPerlHeredocOpener.class),
+				PsiTreeUtil.findChildOfType(file, PerlHeredocElementImpl.class),
+				PsiTreeUtil.findChildOfType(file, PerlHeredocTerminatorElementImpl.class),
+				file.getLastChild()
+		));
 	}
 
 	public static PerlStringContentElementImpl createStringContent(Project project, String name)
