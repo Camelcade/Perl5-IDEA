@@ -62,41 +62,57 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 		PsiElement currentElement = descriptor.getPsiElement();
 		PsiElement[] currentElementChildren = currentElement.getChildren();
 
-		PsiElement lastCommentElement = null;
-
 		// fixme the best way here is to add next usage between use pragma and use package; Will help to keep consistency
-		PsiElement addBeforeStatement = PsiTreeUtil.findChildOfType(currentElement, PerlUseStatement.class);
-		if (addBeforeStatement == null)
+		PsiElement addAfterElement = PsiTreeUtil.findChildOfType(currentElement, PerlUseStatement.class);
+		if (addAfterElement == null)
 		{
 			for (PsiElement checkElement : currentElementChildren)
 
 				if (checkElement instanceof PsiComment)
-					lastCommentElement = checkElement;
-				else if( !(checkElement instanceof PsiWhiteSpace))
+					addAfterElement = checkElement;
+				else if (!(checkElement instanceof PsiWhiteSpace))
 				{
-					addBeforeStatement = checkElement;
+					addAfterElement = checkElement;
 					break;
 				}
+		} else
+		{
+			if (((PerlUseStatement) addAfterElement).isPragmaOrVersion() ) // pragma or version
+			{
+				while (true	)
+				{
+					// trying to find next use statement
+					PsiElement nextStatement = addAfterElement;
+
+					while ((nextStatement = nextStatement.getNextSibling()) != null
+							&& (nextStatement instanceof PsiWhiteSpace || nextStatement instanceof PsiComment)
+							){}
+
+					if (nextStatement instanceof PerlUseStatement && ((PerlUseStatement) nextStatement).isPragmaOrVersion())	// found more use pragma/version
+						addAfterElement = nextStatement;
+					else
+						break;
+				}
+			}
+			else    // not a pragma
+			{
+				addAfterElement = addAfterElement.getPrevSibling();
+				if (addAfterElement instanceof PsiWhiteSpace) // newline
+					addAfterElement = addAfterElement.getPrevSibling();
+			}
 		}
 
 		PsiElement newLineElement = PerlElementFactory.createNewLine(project);
-		if( addBeforeStatement != null) // add before element
+		if (addAfterElement != null) // add after element
 		{
-			PsiElement containerElement = addBeforeStatement.getParent();
-			containerElement.addBefore(newStatement, addBeforeStatement);
-			containerElement.addBefore(newLineElement, addBeforeStatement);
-		}
-		else if( lastCommentElement != null ) // add after last comment
+			PsiElement containerElement = addAfterElement.getParent();
+			containerElement.addAfter(newStatement, addAfterElement);
+			containerElement.addAfter(newLineElement, addAfterElement);
+		} else if (currentElementChildren.length > 0)    // add before the first valid element
 		{
-			currentElement.addAfter(newLineElement, lastCommentElement);
-			currentElement.addAfter(newStatement, lastCommentElement.getNextSibling());
-		}
-		else if(currentElementChildren.length > 0 )	// add before the first valid element
-		{
-			currentElement.addBefore(newLineElement, currentElementChildren[0]);
 			currentElement.addBefore(newStatement, currentElementChildren[0]);
-		}
-		else	// add as first element of the file
+			currentElement.addBefore(newLineElement, currentElementChildren[0]);
+		} else    // add as first element of the file
 		{
 			currentElement.add(newStatement);
 			currentElement.add(newLineElement);

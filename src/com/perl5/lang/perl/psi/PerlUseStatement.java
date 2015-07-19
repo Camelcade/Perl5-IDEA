@@ -30,6 +30,7 @@ public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContai
 	public boolean isParentPragma();
 	public boolean isPragma();
 	public boolean isVersion();
+	public boolean isPragmaOrVersion();
 	public List<String> getStringParameters();
 	public PsiElement getVersionElement();
 }

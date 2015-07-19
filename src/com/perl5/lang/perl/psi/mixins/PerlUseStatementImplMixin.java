@@ -65,6 +65,12 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	}
 
 	@Override
+	public boolean isPragmaOrVersion()
+	{
+		return isPragma() || isVersion();
+	}
+
+	@Override
 	public String getPackageName()
 	{
 		PerlNamespaceElement ns = getNamespaceElement();

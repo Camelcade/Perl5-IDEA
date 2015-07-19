@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class PerlUseStrictInspection extends PerlInspection
+public class PerlUseWarningsInspection extends PerlInspection
 {
 	@NotNull
 	@Override
@@ -40,17 +40,16 @@ public class PerlUseStrictInspection extends PerlInspection
 			@Override
 			public void visitFile(PsiFile file)
 			{
-				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-					if ("strict".equals(useStatement.getPackageName()))
+				for(PerlUseStatement useStatement: PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
+					if( "warnings".equals(useStatement.getPackageName()) )
 						return;
 				holder.registerProblem(
 						file,
-						"No strict pragma found in the file",
+						"No warnings pragma found in the file",
 						ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
-						new PerlUsePackageQuickFix("strict")
+						new PerlUsePackageQuickFix("warnings FATAL => 'all'")
 				);
 			}
-
 		};
 	}
 }
