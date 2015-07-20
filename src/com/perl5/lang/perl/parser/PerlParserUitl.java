@@ -233,7 +233,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
             // todo we should check current namespace here
             return PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
         else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(SUB) && b.lookAhead(2) != LEFT_PAREN)
-            return PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText());
+        {
+            PerlTokenData nextToken = ((PerlBuilder) b).lookupToken(1);
+            if( nextToken != null )
+                return PerlSubUtil.isUnary(b.getTokenText(), nextToken.getTokenText());
+        }
 
         return false;
     }
@@ -254,7 +258,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
         IElementType tokenType = b.getTokenType();
         IElementType nextTokenType = b.lookAhead(1);
 
-        if (CONVERTABLE_TOKENS.contains(tokenType) && nextTokenType != LEFT_PAREN && !PACKAGE_TOKENS.contains(nextTokenType))
+        if (    CONVERTABLE_TOKENS.contains(tokenType)
+                && nextTokenType != LEFT_PAREN              // not function call
+                && !PACKAGE_TOKENS.contains(nextTokenType)  // not method Package::
+                && !(nextTokenType == IDENTIFIER && ((PerlBuilder) b).isKnownPackage(((PerlBuilder) b).lookupToken(1).getTokenText()))  // not Method Package
+        )
             // todo we should check current namespace here
             return !PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
         else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(2) != LEFT_PAREN)
@@ -800,4 +808,30 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
         return true;
     }
+
+    public static final TokenSet VERSION_TOKENS = TokenSet.create(
+            NUMBER,
+            NUMBER_SIMPLE
+    );
+
+    /**
+     * Checks for version token and convert if necessary
+     * @param b PerlBuilder
+     * @param l parsing level
+     * @return parsing result
+     */
+    public static boolean parsePerlVersion(PsiBuilder b, int l)
+    {
+        if( b.getTokenType() == NUMBER_VERSION )
+            return consumeToken(b,NUMBER_VERSION);
+        else if( VERSION_TOKENS.contains(b.getTokenType()))
+        {
+            PsiBuilder.Marker m = b.mark();
+            b.advanceLexer();
+            m.collapse(NUMBER_VERSION);
+            return true;
+        }
+        return false;
+    }
+
 }

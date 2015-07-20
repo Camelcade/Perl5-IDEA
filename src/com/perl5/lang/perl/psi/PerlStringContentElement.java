@@ -16,21 +16,15 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-
-import java.util.List;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 18.07.2015.
  */
-public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContainer
+public interface PerlStringContentElement extends PerlNamedElement
 {
-	public String getPackageName();
-	public boolean isParentPragma();
-	public boolean isPragma();
-	public boolean isVersion();
-	public boolean isPragmaOrVersion();
-	public List<String> getStringParameters();
-	public PsiElement getVersionElement();
+	public boolean looksLikePackage();
+	public boolean looksLikePath();
+	String getContentFileName();
+
 }

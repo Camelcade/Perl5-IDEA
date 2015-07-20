@@ -51,7 +51,9 @@ public class EmbeddedPerlLexer extends PerlLexer
 		int bufferEnd = buffer.length();
 		int currentState = yystate();
 
-		if( tokenStart < bufferEnd && currentState != LEX_PREPARSED_ITEMS )
+		if( currentState == LEX_PREPARSED_ITEMS )
+			return super.advance();
+		else if( tokenStart < bufferEnd )
 		{
 			if (currentState == LEX_HTML_BLOCK)
 			{
@@ -63,27 +65,33 @@ public class EmbeddedPerlLexer extends PerlLexer
 					return EMBED_MARKER;
 				} else
 				{
-					for (int offset = tokenStart; offset < bufferEnd - 3; offset++)
+					// fixme how about end of file?
+					int offset = tokenStart;
+					for ( ; offset < bufferEnd; offset++)
 					{
-						if (buffer.charAt(offset + 1) == '<' && buffer.charAt(offset + 2) == '?')
-						{
-							setTokenEnd(offset + 1);
-							return TEMPLATE_BLOCK_HTML;
-						}
+						if( offset <= bufferEnd - 2 && buffer.charAt(offset) == '<' && buffer.charAt(offset + 1) == '?')
+							break;
 					}
-					setState(preHTMLState);
-					setTokenEnd(bufferEnd);
+
+					if( offset == bufferEnd )
+						setState(preHTMLState);
+					setTokenEnd(offset);
 					return TEMPLATE_BLOCK_HTML;
 				}
 			} else if (tokenStart <= bufferEnd - 2 && buffer.charAt(tokenStart) == '?' && buffer.charAt(tokenStart + 1) == '>')
 			{
-				preHTMLState = currentState;
-				yybegin(LEX_HTML_BLOCK);
+				if( tokenStart < bufferEnd - 2)
+				{
+					preHTMLState = currentState;
+					yybegin(LEX_HTML_BLOCK);
+				}
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 2);
 				return EMBED_MARKER;
 			}
 		}
+		else
+			return null;
 
 		return super.advance();
 	}

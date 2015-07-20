@@ -2,7 +2,7 @@
 
 This is my attempt to build a plugin for IDEA that will support Perl5 language.
 
-This project is currently in development, and if you want to participate - you may fork or contact me via Skype: hurricup
+This project is currently in development, and if you want to participate - you may fork or contact me via [Skype](skype:hurricup)
 
 * [Camelcade twitter](https://twitter.com/CamelcadeIDE)
 * [Camelcade wiki](https://github.com/hurricup/Perl5-IDEA/wiki)
@@ -13,7 +13,7 @@ Optimized using [Java Profiler](http://www.ej-technologies.com/products/jprofile
 There is tremendous amount of work to do in development and project really need testers. Not only users-testers, but someone
 to write tests (mostly for lexer and parser at the moment).
 
-#Current status - development (0.32 beta)
+#Current status - development (0.33 beta)
 
 [Download current dev build jar](http://evstigneev.com/camelcade.jar)
 

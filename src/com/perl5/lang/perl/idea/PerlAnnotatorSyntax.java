@@ -18,11 +18,13 @@ package com.perl5.lang.perl.idea;
 
 /**
  * Created by hurricup on 25.04.2015.
+ * 
  */
 
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -48,7 +50,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 		int endOffset = startOffset + 1;
 
 		PsiElement currentElement = element.getFirstChild();
-		while( currentElement != null )
+		while (currentElement != null)
 		{
 			if (currentElement.getNode().getElementType() == LEFT_BRACE)
 			{
@@ -159,7 +161,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					((PerlVariable) element).isBuiltIn(),
 					((PerlVariable) element).isDeprecated()
 			);
-		else if (element instanceof PsiPerlHashCastExpr )
+		else if (element instanceof PsiPerlHashCastExpr)
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_HASH);
 		else if (element instanceof PsiPerlArrayVariable)
 			decorateElement(
@@ -168,7 +170,7 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					((PerlVariable) element).isBuiltIn(),
 					((PerlVariable) element).isDeprecated()
 			);
-		else if (element instanceof PsiPerlArrayCastExpr )
+		else if (element instanceof PsiPerlArrayCastExpr)
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_ARRAY);
 		else if (element instanceof PsiPerlGlobVariable)
 			decorateElement(
@@ -184,7 +186,13 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					PerlSyntaxHighlighter.PERL_SUB,
 					((PerlVariableNameElementContainer) element).isBuiltIn(),
 					false);
-		else if (element instanceof PsiPerlCodeCastExpr )
+		else if (element instanceof PsiPerlNyiStatement)
+			decorateElement(
+					holder.createInfoAnnotation(element, "Unimplemented statement"),
+					CodeInsightColors.TODO_DEFAULT_ATTRIBUTES,
+					true,
+					false);
+		else if (element instanceof PsiPerlCodeCastExpr)
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SUB);
 		else if (element instanceof PsiPerlAnnotation)
 			decorateElement(
@@ -217,6 +225,12 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN,
+						false,
+						false);
+			else if (tokenType == NUMBER_VERSION)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_VERSION,
 						false,
 						false);
 		}

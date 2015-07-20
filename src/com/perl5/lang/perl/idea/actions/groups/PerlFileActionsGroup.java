@@ -14,23 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.idea.actions.groups;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-
-import java.util.List;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 19.07.2015.
  */
-public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContainer
+public class PerlFileActionsGroup extends DefaultActionGroup
 {
-	public String getPackageName();
-	public boolean isParentPragma();
-	public boolean isPragma();
-	public boolean isVersion();
-	public boolean isPragmaOrVersion();
-	public List<String> getStringParameters();
-	public PsiElement getVersionElement();
+
 }

@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.*;
@@ -46,7 +45,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 				}
 		);
 		registrar.registerReferenceProvider(
-				FUNCTION_PATTERN,
+				SUB_NAME_PATTERN,
 				new PsiReferenceProvider()
 				{
 					@NotNull
@@ -113,15 +112,17 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					}
 				}
 		);
-		// fixme here we should return string reference, which should be smart
-//		registrar.registerReferenceProvider(STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN), new PsiReferenceProvider()
-//		{
-//			@NotNull
-//			@Override
-//			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-//			{
-//				return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
-//			}
-//		});
+		registrar.registerReferenceProvider(STRING_CONENT_PATTERN, new PsiReferenceProvider()
+		{
+			@NotNull
+			@Override
+			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+			{
+				assert element instanceof PerlStringContentElement;
+				if( ((PerlStringContentElement) element).looksLikePackage())
+					return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
+				return new PsiReference[0];
+			}
+		});
 	}
 }

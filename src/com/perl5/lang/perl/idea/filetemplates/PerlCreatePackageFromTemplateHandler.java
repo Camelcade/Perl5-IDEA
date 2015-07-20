@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.filetemplates;
 
 import com.intellij.ide.fileTemplates.DefaultCreateFromTemplateHandler;
 import com.intellij.ide.fileTemplates.FileTemplate;
+import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.perl.PerlFileTypePackage;
 
 import java.util.Map;
@@ -34,6 +35,11 @@ public class PerlCreatePackageFromTemplateHandler extends DefaultCreateFromTempl
 		return template.isTemplateOfType(PerlFileTypePackage.INSTANCE);
 	}
 
+	@Override
+	public boolean canCreate(PsiDirectory[] dirs)
+	{
+		return false;// super.canCreate(dirs);
+	}
 
 	@Override
 	public void prepareProperties(Map<String, Object> props)

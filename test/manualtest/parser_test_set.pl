@@ -1,4 +1,10 @@
 
+sub abc
+{
+    ...;
+}
+
+
 $$${a}; # sclar cast
 $$${$a}; # sclar cast
 $$$$a; # sclar cast

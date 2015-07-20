@@ -17,13 +17,17 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -36,16 +40,34 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 		super(node);
 	}
 
+	public static final HashSet<String> PARENT_PRAGMAS = new HashSet<>(Arrays.asList(
+			"parent",
+			"base"
+	));
+
+
 	@Override
-	public boolean isUseParent()
+	public boolean isParentPragma()
 	{
-		return "parent".equals(getPackageName());
+		return PARENT_PRAGMAS.contains(getPackageName());
 	}
 
 	@Override
-	public boolean isUseBase()
+	public boolean isPragma()
 	{
-		return "base".equals(getPackageName());
+		return getNamespaceElement() != null && getNamespaceElement().isPragma();
+	}
+
+	@Override
+	public boolean isVersion()
+	{
+		return getNamespaceElement() == null && getVersionElement() != null;
+	}
+
+	@Override
+	public boolean isPragmaOrVersion()
+	{
+		return isPragma() || isVersion();
 	}
 
 	@Override
@@ -61,6 +83,12 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	public PerlNamespaceElement getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespaceElement.class);
+	}
+
+	@Override
+	public PsiElement getVersionElement()
+	{
+		return findChildByType(PerlElementTypes.NUMBER_VERSION);
 	}
 
 	@Override
