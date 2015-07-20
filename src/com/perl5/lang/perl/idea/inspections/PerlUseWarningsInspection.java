@@ -29,27 +29,24 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class PerlUseWarningsInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitFile(PsiFile file)
-			{
-				for(PerlUseStatement useStatement: PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-					if( "warnings".equals(useStatement.getPackageName()) )
-						return;
-				holder.registerProblem(
-						file,
-						"No warnings pragma found in the file",
-						ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
-						new PerlUsePackageQuickFix("warnings FATAL => 'all'")
-				);
-			}
-		};
-	}
+public class PerlUseWarningsInspection extends PerlInspection {
+    @NotNull
+    @Override
+    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+        return new PerlVisitor() {
+            @Override
+            public void visitFile(PsiFile file) {
+                for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
+                    if ("warnings".equals(useStatement.getPackageName()))
+                        return;
+                holder.registerProblem(
+                        file,
+                        "No warnings pragma found in the file",
+                        ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
+                        new PerlUsePackageQuickFix("warnings FATAL => 'all'"),
+                        new PerlUsePackageQuickFix("warnings")
+                );
+            }
+        };
+    }
 }

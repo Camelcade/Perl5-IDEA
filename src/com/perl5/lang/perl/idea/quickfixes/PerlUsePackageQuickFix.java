@@ -67,14 +67,10 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 		if (addAfterElement == null)
 		{
 			for (PsiElement checkElement : currentElementChildren)
-
 				if (checkElement instanceof PsiComment)
 					addAfterElement = checkElement;
 				else if (!(checkElement instanceof PsiWhiteSpace))
-				{
-					addAfterElement = checkElement;
 					break;
-				}
 		} else
 		{
 			if (((PerlUseStatement) addAfterElement).isPragmaOrVersion() ) // pragma or version
