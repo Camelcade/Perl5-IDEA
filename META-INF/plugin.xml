@@ -37,7 +37,7 @@
       <li>Disabled collapsing of line comments with fixme/todo words.</li>
       <li>Go to sub declaration click prefers definition over declaration if only both are resolved.</li>
       <li>Implemented <code>use strict;</code> inspection and quickfix.</li>
-      <li>Implemented <code>use warnings;</code> inspection and quickfix to add <code>use warnings FATAL => 'all';</code>.</li>
+      <li>Implemented <code>use warnings;</code> inspection and quickfix to add <code>use warnings FATAL => 'all';</code> or <code>use warnings;</code>.</li>
       <li>Implemented convert to heredoc intention action. You may now convert any string to heredoc in one click.</li>
       <li>New Perl File actions are now in separate groups of main New file menu.</li>
       </ul>
