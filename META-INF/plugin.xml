@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Camelcade</name>
-    <version>0.33 beta</version>
+    <version>0.34 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -25,21 +25,8 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.33 beta changes:</p>
+      <p>0.34 beta changes:</p>
       <ul>
-      <li>We now have a <a href="https://twitter.com/CamelcadeIDE">twitter account</a> for interactions. Don't forget to subscribe and interact :)</li>
-      <li>Implemented MRO for fancy methods invocation: <code>method Package();</code></li>
-      <li>Implemented fancy methods invocation inspection and quickfix.</li>
-      <li>Implemented the <a href="http://perldoc.perl.org/perlsyn.html#The-Ellipsis-Statement">ellipsis statement</a> from 5.12, annotated as fixme/todo.</li>
-      <li>Implemented go-to file on string text click. If string content looks like a file path (even partial), IDEA will jump to a matching file or offer you possible matches.</li>
-      <li>Implemented unused lexical variable inspection.</li>
-      <li>Disabled collapsing of pragma and version usages.</li>
-      <li>Disabled collapsing of line comments with fixme/todo words.</li>
-      <li>Go to sub declaration click prefers definition over declaration if only both are resolved.</li>
-      <li>Implemented <code>use strict;</code> inspection and quickfix.</li>
-      <li>Implemented <code>use warnings;</code> inspection and quickfix to add <code>use warnings FATAL => 'all';</code> or <code>use warnings;</code>.</li>
-      <li>Implemented convert to heredoc intention action. You may now convert any string to heredoc in one click.</li>
-      <li>New Perl File actions are now in separate groups of main New file menu.</li>
       </ul>
 
     ]]>
