@@ -32,16 +32,26 @@ public class MojoliciousPerlLexer extends PerlLexer
 		super(project);
 	}
 
+	int mojoState = LEX_HTML_BLOCK;
+
+	protected int getMojoState()
+	{
+		return mojoState;
+	}
+
+	protected void setMojoState(int newState)
+	{
+		mojoState = newState;
+	}
+
 	@Override
 	public void reset(CharSequence buf, int start, int end, int initialState)
 	{
 		if (start == 0)
-			initialState = LEX_HTML_BLOCK;
+			setMojoState(LEX_HTML_BLOCK);
 
 		super.reset(buf, start, end, initialState);
 	}
-
-	private int preHTMLState = YYINITIAL;
 
 	public IElementType advance() throws IOException
 	{
@@ -49,47 +59,79 @@ public class MojoliciousPerlLexer extends PerlLexer
 		int tokenStart = getNextTokenStart();
 		int bufferEnd = buffer.length();
 		int currentState = yystate();
+		int currentMojoState = getMojoState();
 
-		if (currentState == LEX_PREPARSED_ITEMS)
+/*
+		if (preparsedTokensList.size() > 0)
 			return super.advance();
-		else if (tokenStart < bufferEnd)
-		{
-			if (currentState == LEX_HTML_BLOCK)
-			{
-				setTokenStart(tokenStart);
-				if (tokenStart <= bufferEnd - 2 && buffer.charAt(tokenStart) == '<' && buffer.charAt(tokenStart + 1) == '?') // finishing html block
-				{
-					setState(preHTMLState);
-					setTokenEnd(tokenStart + 2);
-					return EMBED_MARKER;
-				} else
-				{
-					// fixme how about end of file?
-					int offset = tokenStart;
-					for (; offset < bufferEnd; offset++)
-					{
-						if (offset <= bufferEnd - 2 && buffer.charAt(offset) == '<' && buffer.charAt(offset + 1) == '?')
-							break;
-					}
-
-					if (offset == bufferEnd)
-						setState(preHTMLState);
-					setTokenEnd(offset);
-					return TEMPLATE_BLOCK_HTML;
-				}
-			} else if (tokenStart <= bufferEnd - 2 && buffer.charAt(tokenStart) == '?' && buffer.charAt(tokenStart + 1) == '>')
-			{
-				if (tokenStart < bufferEnd - 2)
-				{
-					preHTMLState = currentState;
-					yybegin(LEX_HTML_BLOCK);
-				}
-				setTokenStart(tokenStart);
-				setTokenEnd(tokenStart + 2);
-				return EMBED_MARKER;
-			}
-		} else
+		else if( bufferEnd == 0 || tokenStart >= bufferEnd)
 			return null;
+		else if (currentMojoState == LEX_HTML_BLOCK)
+		{
+			setTokenStart(tokenStart);
+			int offset = tokenStart;
+
+			boolean blockStart = false;
+
+			for (; offset < bufferEnd; offset++)
+			{
+				if (offset < bufferEnd - 1 && buffer.charAt(offset) == '<' && buffer.charAt(offset + 1) == '%')
+				{
+					blockStart = true;
+					break;
+				} else if (offset < bufferEnd && buffer.charAt(offset) == '%')
+					break;
+			}
+
+			if (offset == bufferEnd)    // end of file
+				setState(YYINITIAL);
+			else if (blockStart)    // begin of perl block
+			{
+				if (offset + 2 < bufferEnd)
+				{
+					char controlCharacter = buffer.charAt(offset + 2);
+					int endOffset = offset + 3;
+					if (controlCharacter == '#') // block comment
+					{
+
+					} else if (controlCharacter == '%') // <%% macro
+					{
+
+					} else    // just code with possible control ==
+					{
+						if (endOffset < bufferEnd && buffer.charAt(endOffset) == '=')
+							endOffset++;
+						if (endOffset < bufferEnd && buffer.charAt(endOffset) == '=')
+							endOffset++;
+
+					}
+				}
+				else	// just <%<eof>
+				{
+
+				}
+			} else // begin of perl line
+			{
+
+			}
+
+			setTokenEnd(offset);
+			return TEMPLATE_BLOCK_HTML;
+
+		} else if (currentMojoState == LEX_MOJO_BLOCK_COMMENT)
+		{
+
+		} else if (currentMojoState == LEX_MOJO_LINE_COMMENT)
+		{
+
+		} else if (currentMojoState == LEX_MOJO_PERL_BLOCK)
+		{
+
+		} else if (currentMojoState == LEX_MOJO_PERL_LINE)
+		{
+
+		}
+*/
 
 		return super.advance();
 	}

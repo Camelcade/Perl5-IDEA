@@ -72,9 +72,9 @@ public class PerlLexerExtra
 //		{
 //			pushState();
 //			yybegin(LEX_PREPARSED_ITEMS);
-//			tokensList.clear();
+//			preparsedTokensList.clear();
 //			int tokenStart = getTokenStart();
-//			tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+//			preparsedTokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
 //			setTokenEnd(tokenStart+1);
 //		}
 //		return SIGIL_GLOB;
@@ -113,9 +113,9 @@ public class PerlLexerExtra
 //			{
 //				pushState();
 //				yybegin(LEX_PREPARSED_ITEMS);
-//				tokensList.clear();
+//				preparsedTokensList.clear();
 //				int tokenStart = getTokenStart();
-//				tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+//				preparsedTokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
 //				setTokenEnd(tokenStart+1);
 //			}
 //			return SIGIL_CODE;
@@ -160,9 +160,9 @@ public class PerlLexerExtra
 //			{
 //				pushState();
 //				yybegin(LEX_PREPARSED_ITEMS);
-//				tokensList.clear();
+//				preparsedTokensList.clear();
 //				int tokenStart = getTokenStart();
-//				tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+//				preparsedTokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
 //				setTokenEnd(tokenStart+1);
 //			}
 //			return SIGIL_HASH;
@@ -185,9 +185,9 @@ public class PerlLexerExtra
 //		{
 //			pushState();
 //			yybegin(LEX_PREPARSED_ITEMS);
-//			tokensList.clear();
+//			preparsedTokensList.clear();
 //			int tokenStart = getTokenStart();
-//			tokensList.add(new CustomToken(tokenStart + 2, getTokenEnd(), SIGIL_SCALAR));
+//			preparsedTokensList.add(new CustomToken(tokenStart + 2, getTokenEnd(), SIGIL_SCALAR));
 //			setTokenEnd(tokenStart + 2);
 //		}
 //
@@ -202,9 +202,9 @@ public class PerlLexerExtra
 //		{
 //			pushState();
 //			yybegin(LEX_PREPARSED_ITEMS);
-//			tokensList.clear();
+//			preparsedTokensList.clear();
 //			int tokenStart = getTokenStart();
-//			tokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
+//			preparsedTokensList.add(new CustomToken(tokenStart + 1, getTokenEnd(), SIGIL_SCALAR));
 //			setTokenEnd(tokenStart + 1);
 //		}
 //
@@ -387,8 +387,8 @@ public class PerlLexerExtra
 //		)
 //				) // 100% variable name with package
 //		{
-//			tokensList.clear();
-//			tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), VARIABLE_NAME));
+//			preparsedTokensList.clear();
+//			preparsedTokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), VARIABLE_NAME));
 //			pushState();
 //			yybegin(LEX_PREPARSED_ITEMS);
 //			setTokenEnd(getTokenStart() + subPackageName.length());
@@ -410,8 +410,8 @@ public class PerlLexerExtra
 //							|| mayBeSub && nextSignificantCharacter != null && nextSignificantCharacter.equals('(') // has sub and package
 //					)
 //			{
-//				tokensList.clear();
-//				tokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));
+//				preparsedTokensList.clear();
+//				preparsedTokensList.add(new CustomToken(getTokenStart() + subPackageName.length(), getTokenEnd(), SUB));
 //				pushState();
 //				yybegin(LEX_PREPARSED_ITEMS);
 //				setTokenEnd(getTokenStart() + subPackageName.length());

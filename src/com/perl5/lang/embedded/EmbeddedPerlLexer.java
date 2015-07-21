@@ -50,9 +50,11 @@ public class EmbeddedPerlLexer extends PerlLexer
 		int bufferEnd = buffer.length();
 		int currentState = yystate();
 
-		if (currentState == LEX_PREPARSED_ITEMS)
-			return super.advance();
-		else if (tokenStart < bufferEnd)
+		if (preparsedTokensList.size() > 0)
+			return getPreParsedToken();
+		else if( bufferEnd == 0 || tokenStart >= bufferEnd)
+			return null;
+		else
 		{
 			if (currentState == LEX_HTML_BLOCK)
 			{
@@ -88,9 +90,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 				setTokenEnd(tokenStart + 2);
 				return EMBED_MARKER;
 			}
-		} else
-			return null;
-
+		}
 		return super.advance();
 	}
 
