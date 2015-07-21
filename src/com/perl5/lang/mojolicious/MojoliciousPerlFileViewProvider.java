@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.mojolicious;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
@@ -25,6 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
+import com.perl5.lang.embedded.EmbeddedPerlTokens;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,16 +34,16 @@ import java.util.Arrays;
 import java.util.Set;
 
 /**
- * Created by hurricup on 18.05.2015.
+ * Created by hurricup on 21.07.2015.
  */
-public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider
+public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider
 {
 
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, EmbeddedPerlLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MojoliciousPerlLanguage.INSTANCE));
 
 
-	public EmbeddedPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
+	public MojoliciousPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
 	{
 		super(manager, virtualFile, physical);
 	}
@@ -51,7 +52,7 @@ public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFil
 	@NotNull
 	public Language getBaseLanguage()
 	{
-		return EmbeddedPerlLanguage.INSTANCE;
+		return MojoliciousPerlLanguage.INSTANCE;
 	}
 
 	@Override
@@ -81,9 +82,9 @@ public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFil
 	}
 
 	@Override
-	protected EmbeddedPerlFileViewProvider cloneInner(final VirtualFile copy)
+	protected MojoliciousPerlFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new EmbeddedPerlFileViewProvider(getManager(), copy, false);
+		return new MojoliciousPerlFileViewProvider(getManager(), copy, false);
 	}
 
 	@Override

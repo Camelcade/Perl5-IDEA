@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.mojolicious;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
@@ -23,11 +23,11 @@ import com.perl5.lang.perl.lexer.PerlLexer;
 import java.io.IOException;
 
 /**
- * Created by hurricup on 19.05.2015.
+ * Created by hurricup on 21.07.2015.
  */
-public class EmbeddedPerlLexer extends PerlLexer
+public class MojoliciousPerlLexer extends PerlLexer
 {
-	public EmbeddedPerlLexer(Project project)
+	public MojoliciousPerlLexer(Project project)
 	{
 		super(project);
 	}

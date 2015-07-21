@@ -45,9 +45,9 @@
         <internalFileTemplate name="Perl5 package"/>
         <internalFileTemplate name="Perl5 script"/>
         <internalFileTemplate name="Perl5 embedded"/>
+        <internalFileTemplate name="Perl5 mojolicious"/>
 
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
-
 
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
 
@@ -118,9 +118,21 @@
         <lang.fileViewProviderFactory language="Embedded Perl"
                                       implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
+        <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
+
         <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
         <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
-        <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
+        <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+
+
+        <lang.parserDefinition language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlParserDefinition"/>
+        <lang.fileViewProviderFactory language="Mojolicious Perl"
+                                      implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlFileViewProviderFactory"/>
+        <lang.syntaxHighlighterFactory key="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlSyntaxHighlighterFactory"/>
+        <lang.findUsagesProvider language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlFindUsagesProvider"/>
+
+        <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+        <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
         <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
 
@@ -218,6 +230,10 @@
 
             <action id="Perl5.NewPerlEmbedded" class="com.perl5.lang.perl.idea.actions.CreateEmbeddedPerlFileAction"
                     text="Embedded Perl5 File" description="Create Embedded Perl5 file">
+            </action>
+
+            <action id="Perl5.NewPerlMojolicious" class="com.perl5.lang.perl.idea.actions.CreateMojoliciousTemplateAction"
+                    text="Mojolicious Template File" description="Create Mojolicious Template File">
             </action>
 
             <separator/>

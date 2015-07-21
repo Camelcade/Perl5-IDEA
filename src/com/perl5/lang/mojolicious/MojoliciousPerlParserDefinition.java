@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.mojolicious;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
+import com.perl5.lang.embedded.EmbeddedPerlFileElement;
+import com.perl5.lang.embedded.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 18.05.2015.
+ * Created by hurricup on 21.07.2015.
  */
-public class EmbeddedPerlParserDefinition extends PerlParserDefinition
+public class MojoliciousPerlParserDefinition extends PerlParserDefinition
 {
-	public static final IFileElementType FILE = new PerlFileElementType("Embedded Perl5", EmbeddedPerlLanguage.INSTANCE);
+	public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousPerlLanguage.INSTANCE);
 
 	@NotNull
 	@Override
@@ -47,7 +49,7 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new EmbeddedPerlFileElement(viewProvider);
+		return new MojoliciousPerlFileElement(viewProvider);
 	}
 
 }

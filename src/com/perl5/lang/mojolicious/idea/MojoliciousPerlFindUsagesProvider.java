@@ -14,23 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.idea;
+package com.perl5.lang.mojolicious.idea;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.perl5.lang.embedded.EmbeddedPerlLexerAdapter;
+import com.perl5.lang.mojolicious.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
 
-public class EmbeddedPerlFindUsagesProvider extends PerlFindUsagesProvider
+/**
+ * Created by hurricup on 21.07.2015.
+ */
+public class MojoliciousPerlFindUsagesProvider extends PerlFindUsagesProvider
 {
 
 	@Nullable
 	@Override
-	public WordsScanner getWordsScanner() {
-//		return WORDS_SCANNER; todo solve the concurrency problem
-		return new DefaultWordsScanner(new EmbeddedPerlLexerAdapter(null),
+	public WordsScanner getWordsScanner()
+	{
+		return new DefaultWordsScanner(new MojoliciousPerlLexerAdapter(null),
 				PerlParserDefinition.IDENTIFIERS,
 				PerlParserDefinition.COMMENTS,
 				PerlParserDefinition.LITERALS
