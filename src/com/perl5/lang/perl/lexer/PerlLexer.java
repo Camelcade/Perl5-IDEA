@@ -172,25 +172,16 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		int tokenStart = getTokenEnd();
 		int bufferEnd = buffer.length();
 
-
-		if (bufferEnd == 0 || tokenStart >= bufferEnd)
+		if (preparsedTokensList.size() > 0)
+			return getPreParsedToken();
+		else if( bufferEnd == 0 || tokenStart >= bufferEnd)
 			return null;
-
-
-		if (bufferEnd > 0 && tokenStart < bufferEnd)
+		else
 		{
 			int currentState = yystate();
 
-			// higest priority, pre-parsed tokens
-			if (currentState == LEX_PREPARSED_ITEMS)
-			{
-				IElementType nextTokenType = getPreParsedToken();
-				if (nextTokenType != null)
-					return nextTokenType;
-			}
-
 			// capture heredoc
-			if (currentState == LEX_HEREDOC_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
+			if (waitingHereDoc() && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
 			{
 				IElementType tokenType = captureHereDoc();
 				if (tokenType != null)    // got something
@@ -202,8 +193,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				IElementType tokenType = captureFormat();
 				if (tokenType != null)    // got something
 					return tokenType;
-			}
-			else if (currentState == LEX_QUOTE_LIKE_WORDS)
+			} else if (currentState == LEX_QUOTE_LIKE_WORDS)
 				return captureQuoteLikeWords();
 				// capture string content from "" '' `` q qq qx
 			else if (currentState == LEX_QUOTE_LIKE_CHARS)
@@ -266,6 +256,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	public IElementType captureQuoteLikeWords()
 	{
+		popState();
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 		int bufferEnd = buffer.length();
@@ -275,7 +266,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		boolean quotesDiffer = charOpener != charCloser;
 		int quotesDepth = 0;    // for using with different quotes
 
-		tokensList.clear();
+		preparsedTokensList.clear();
 
 		int currentWordStart = currentPosition;
 		IElementType currentWordType = TokenType.WHITE_SPACE;
@@ -288,7 +279,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			if (!isEscaped && quotesDepth == 0 && currentChar == charCloser)
 			{
 				if (currentWordStart < currentPosition)
-					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
+					preparsedTokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
 
 				currentWordStart = currentPosition;
 				currentPosition++;
@@ -298,7 +289,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			{
 				if (currentWordType != TokenType.WHITE_SPACE && currentWordStart < currentPosition) // word before it
 				{
-					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
+					preparsedTokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
 					currentWordStart = currentPosition;
 				}
 				currentWordType = TokenType.WHITE_SPACE;
@@ -306,7 +297,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			{
 				if (currentWordType != STRING_CONTENT && currentWordStart < currentPosition) // space before it
 				{
-					tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
+					preparsedTokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
 					currentWordStart = currentPosition;
 				}
 				currentWordType = STRING_CONTENT;
@@ -326,10 +317,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 
 		if (currentWordStart < currentPosition)
-			tokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
+			preparsedTokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
 
-		assert tokensList.size() > 0;
-		yybegin(LEX_PREPARSED_ITEMS);
+		assert preparsedTokensList.size() > 0;
 		return getPreParsedToken();
 	}
 
@@ -460,7 +450,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				return IDENTIFIER;
 			}
 			Character nextCharacter = getNextCharacter();
-			if( nextCharacter != null && nextCharacter.equals('.'))    // it's a 1..10
+			if (nextCharacter != null && nextCharacter.equals('.'))    // it's a 1..10
 				yypushback(1);
 		}
 		return NUMBER;
@@ -478,7 +468,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	void parseAnnotation(CharSequence annotationLine, int baseOffset)
 	{
 		Matcher m = annotationPattern.matcher(annotationLine);
-		tokensList.clear();
+		preparsedTokensList.clear();
 		CharSequence tailComment = null;
 
 		if (m.matches())
@@ -489,12 +479,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			if (tokenType == null)
 				tokenType = ANNOTATION_UNKNOWN_KEY;
 
-			tokensList.add(new CustomToken(baseOffset, baseOffset + m.group(1).length(), tokenType));
+			preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + m.group(1).length(), tokenType));
 			baseOffset += m.group(1).length();
 
 			if (m.group(2) != null)
 			{
-				tokensList.add(new CustomToken(baseOffset, baseOffset + m.group(2).length(), TokenType.WHITE_SPACE));
+				preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + m.group(2).length(), TokenType.WHITE_SPACE));
 				baseOffset += m.group(2).length();
 			}
 
@@ -508,7 +498,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				{
 					if (pm.group(1) != null && pm.group(1).length() > 0)
 					{
-						tokensList.add(new CustomToken(baseOffset, baseOffset + pm.group(1).length(), PACKAGE));
+						preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + pm.group(1).length(), PACKAGE));
 						baseOffset += pm.group(1).length();
 					}
 
@@ -521,13 +511,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			tailComment = annotationLine;
 
 		if (tailComment != null && tailComment.length() > 0)
-			tokensList.add(new CustomToken(baseOffset, baseOffset + tailComment.length(), COMMENT_LINE));
-
-		if (tokensList.size() > 0)
-		{
-			pushState();
-			yybegin(LEX_PREPARSED_ITEMS);
-		}
+			preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + tailComment.length(), COMMENT_LINE));
 	}
 
 
@@ -632,7 +616,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		if (m.matches())
 		{
-			tokensList.clear();
+			preparsedTokensList.clear();
 			int currentPosition = getNextTokenStart();
 
 			if (m.groupCount() > 1)    // quoted heredoc
@@ -641,19 +625,19 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 				int elementLength = m.group(1).length();
 				if (elementLength > 0)    // got spaces
-					tokensList.add(new CustomToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE));
+					preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE));
 
 				currentPosition += elementLength;
 				forceQuote = false;
 				IElementType quoteType = getQuoteToken(m.group(2).charAt(0));
 
-				tokensList.add(new CustomToken(currentPosition, currentPosition + 1, quoteType));
+				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, quoteType));
 				currentPosition++;
 
-				tokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
+				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
 				currentPosition += heredocMarker.length();
 
-				tokensList.add(new CustomToken(currentPosition, currentPosition + 1, quoteType));
+				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, quoteType));
 			} else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
 				return OPERATOR_SHIFT_LEFT;
 			else    // bareword heredoc
@@ -662,15 +646,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					return OPERATOR_SHIFT_LEFT;
 
 				heredocMarker = m.group(1);
-				tokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
+				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
 			}
 		} else
 			throw new RuntimeException("Unable to parse HEREDOC opener " + openToken);
 
 		pushState();
 		yybegin(LEX_HEREDOC_WAITING);
-		pushState();
-		yybegin(LEX_PREPARSED_ITEMS);
 
 		return OPERATOR_HEREDOC;
 	}
@@ -682,6 +664,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 */
 	public IElementType captureHereDoc()
 	{
+		popState();
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 		setTokenStart(tokenStart);
@@ -704,9 +687,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			// reached the end of heredoc and got end marker
 			if (heredocMarker.equals(buffer.subSequence(currentPosition, lineContentsEnd).toString()))
 			{
-				tokensList.clear();
-				tokensList.add(new CustomToken(currentPosition, lineContentsEnd, HEREDOC_END));
-				yybegin(LEX_PREPARSED_ITEMS);
+				preparsedTokensList.clear();
+				preparsedTokensList.add(new CustomToken(currentPosition, lineContentsEnd, HEREDOC_END));
 
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)
@@ -745,6 +727,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 */
 	public IElementType captureFormat()
 	{
+		popState();
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 		setTokenStart(tokenStart);
@@ -767,9 +750,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			// reached the end of heredoc and got end marker
 			if (".".equals(buffer.subSequence(currentPosition, lineContentsEnd).toString()))
 			{
-				tokensList.clear();
-				tokensList.add(new CustomToken(currentPosition, lineContentsEnd, FORMAT_TERMINATOR));
-				yybegin(LEX_PREPARSED_ITEMS);
+				preparsedTokensList.clear();
+				preparsedTokensList.add(new CustomToken(currentPosition, lineContentsEnd, FORMAT_TERMINATOR));
 
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)
@@ -863,7 +845,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public int sectionsNumber = 0;    // number of sections one or two
 	public int currentSectionNumber = 0; // current section
 
-	public final LinkedList<CustomToken> tokensList = new LinkedList<CustomToken>();
+	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
 
 	private IElementType restoreToken(CustomToken token)
 	{
@@ -891,14 +873,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 */
 	public IElementType getPreParsedToken()
 	{
-		if (tokensList.size() == 0)
-		{
-			popState();
-			return null;
-		} else
-		{
-			return restoreToken(tokensList.removeFirst());
-		}
+		return restoreToken(preparsedTokensList.removeFirst());
 	}
 
 	/**
@@ -950,13 +925,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public IElementType checkOperatorXSticked()
 	{
 		yypushback(1);
-		if ( lastSignificantTokenType == RESERVED_REQUIRE 							// require x123
-				|| IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType) 	// package x123, ->x123, etc.
-				|| SIGILS_TOKENS.contains(lastTokenType)							// $x123
-				|| isBraced()														// {x123}
-		)
+		if (lastSignificantTokenType == RESERVED_REQUIRE                            // require x123
+				|| IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)    // package x123, ->x123, etc.
+				|| SIGILS_TOKENS.contains(lastTokenType)                            // $x123
+				|| isBraced()                                                        // {x123}
+				)
 			return IDENTIFIER;
-		else if( isCommaArrowAhead() )	// we should check for ->
+		else if (isCommaArrowAhead())    // we should check for ->
 			return STRING_CONTENT;
 
 		yypushback(yylength() - 1);
@@ -992,14 +967,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	}
 
 	/**
-	 * Parses regexp from the current position (opening delimiter) and preserves tokens in tokensList
+	 * Parses regexp from the current position (opening delimiter) and preserves tokens in preparsedTokensList
 	 * REGEX_MODIFIERS = [msixpodualgcer]
 	 *
 	 * @return opening delimiter type
 	 */
 	public IElementType parseRegex()
 	{
-		tokensList.clear();
+		popState();
+		preparsedTokensList.clear();
 
 		CharSequence buffer = getBuffer();
 		int bufferEnd = getBufferEnd();
@@ -1089,30 +1065,28 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 
 		// parse block 1
-		tokensList.addAll(firstBlock.tokenize(isExtended, false));
+		preparsedTokensList.addAll(firstBlock.tokenize(isExtended, false));
 
 		if (secondBLock != null)
 		{
 			// parse spaces
-			tokensList.addAll(betweenBlocks);
+			preparsedTokensList.addAll(betweenBlocks);
 
 			if (secondBlockOpener != null)
-				tokensList.add(secondBlockOpener);
+				preparsedTokensList.add(secondBlockOpener);
 
 			// parse block 2
 			if (isEvaluated)
 			{
 				if (evalPerlLexer == null)
 					evalPerlLexer = new PerlLexerAdapter(myProject);
-				tokensList.addAll(secondBLock.parseEval(evalPerlLexer));
+				preparsedTokensList.addAll(secondBLock.parseEval(evalPerlLexer));
 			} else
-				tokensList.addAll(secondBLock.tokenize(isExtended, true));
+				preparsedTokensList.addAll(secondBLock.tokenize(isExtended, true));
 		}
 
 		// parse modifiers
-		tokensList.addAll(modifierTokens);
-
-		yybegin(LEX_PREPARSED_ITEMS);
+		preparsedTokensList.addAll(modifierTokens);
 
 		return REGEX_QUOTE_OPEN;
 	}
@@ -1457,12 +1431,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			String packageIdentifier = m.group(1);
 			String identifier = m.group(2);
 
-			tokensList.clear();
-			pushState();
+			preparsedTokensList.clear();
 			int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
 			CustomToken barewordToken = new CustomToken(packageIdentifierEnd, getTokenEnd(), IDENTIFIER);
-			tokensList.add(barewordToken);
-			yybegin(LEX_PREPARSED_ITEMS);
+			preparsedTokensList.add(barewordToken);
 			setTokenEnd(packageIdentifierEnd);
 
 			IElementType packageTokenType = parsePackageCanonical();
