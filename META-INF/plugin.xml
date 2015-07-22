@@ -131,9 +131,9 @@
         <lang.syntaxHighlighterFactory key="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlFindUsagesProvider"/>
 
-        <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-        <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
-        <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+        <lang.foldingBuilder language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+        <lang.commenter language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
+        <lang.namesValidator language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
 
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>

@@ -704,7 +704,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			// reached the end of file
 			else if (linePos == bufferEnd)
 			{
-				popState();
 				// non-empty heredoc and got the end of file
 				if (currentPosition > tokenStart)
 				{
