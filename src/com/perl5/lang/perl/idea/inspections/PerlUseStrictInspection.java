@@ -21,6 +21,8 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.embedded.EmbeddedPerlFileType;
+import com.perl5.lang.mojolicious.MojoliciousPerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -40,6 +42,9 @@ public class PerlUseStrictInspection extends PerlInspection
 			@Override
 			public void visitFile(PsiFile file)
 			{
+				if (file.getFileType() == EmbeddedPerlFileType.INSTANCE || file.getFileType() == MojoliciousPerlFileType.INSTANCE)
+					return;
+
 				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
 					if ("strict".equals(useStatement.getPackageName()))
 						return;

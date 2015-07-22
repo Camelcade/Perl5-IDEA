@@ -61,6 +61,15 @@ public class MojoliciousPerlLexer extends PerlLexer
 		int currentState = yystate();
 		int currentMojoState = getMojoState();
 
+		if (preparsedTokensList.size() > 0)
+			return super.advance();
+		else if (bufferEnd == 0 || tokenStart >= bufferEnd)
+			return null;
+		else
+		{
+			setTokenEnd(bufferEnd);
+			return TEMPLATE_BLOCK_HTML;
+		}
 /*
 		if (preparsedTokensList.size() > 0)
 			return super.advance();
@@ -133,7 +142,7 @@ public class MojoliciousPerlLexer extends PerlLexer
 		}
 */
 
-		return super.advance();
+//		return super.advance();
 	}
 
 	@Override

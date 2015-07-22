@@ -21,6 +21,8 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.embedded.EmbeddedPerlFileType;
+import com.perl5.lang.mojolicious.MojoliciousPerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -29,24 +31,33 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class PerlUseWarningsInspection extends PerlInspection {
-    @NotNull
-    @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new PerlVisitor() {
-            @Override
-            public void visitFile(PsiFile file) {
-                for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-                    if ("warnings".equals(useStatement.getPackageName()))
-                        return;
-                holder.registerProblem(
-                        file,
-                        "No warnings pragma found in the file",
-                        ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
-                        new PerlUsePackageQuickFix("warnings FATAL => 'all'"),
-                        new PerlUsePackageQuickFix("warnings")
-                );
-            }
-        };
-    }
+public class PerlUseWarningsInspection extends PerlInspection
+{
+
+
+	@NotNull
+	@Override
+	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
+	{
+		return new PerlVisitor()
+		{
+			@Override
+			public void visitFile(PsiFile file)
+			{
+				if (file.getFileType() == EmbeddedPerlFileType.INSTANCE || file.getFileType() == MojoliciousPerlFileType.INSTANCE)
+					return;
+
+				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
+					if ("warnings".equals(useStatement.getPackageName()))
+						return;
+				holder.registerProblem(
+						file,
+						"No warnings pragma found in the file",
+						ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
+						new PerlUsePackageQuickFix("warnings FATAL => 'all'"),
+						new PerlUsePackageQuickFix("warnings")
+				);
+			}
+		};
+	}
 }

@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -61,62 +62,65 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 		PerlUseStatement newStatement = PerlElementFactory.createUseStatement(project, myPackageName);
 		PsiElement statementContainer = descriptor.getPsiElement();
 
-		// fixme the best way here is to add next usage between use pragma and use package; Will help to keep consistency
-		PsiElement baseElement = PsiTreeUtil.findChildOfType(statementContainer, PerlUseStatement.class);
-		if (baseElement != null)
+		PsiElement baseStatement = PsiTreeUtil.findChildOfType(statementContainer, PerlUseStatement.class);
+		if (baseStatement != null)
 		{
-			if (((PerlUseStatement) baseElement).isPragmaOrVersion() ) // pragma or version
-			{
-				while (true	)
+			statementContainer = baseStatement.getParent();
+			if (((PerlUseStatement) baseStatement).isPragmaOrVersion()) // pragma or version
+				while (true)
 				{
 					// trying to find next use statement
-					PsiElement nextStatement = baseElement;
+					PsiElement nextStatement = baseStatement;
 
 					while ((nextStatement = nextStatement.getNextSibling()) != null
 							&& (nextStatement instanceof PsiWhiteSpace || nextStatement instanceof PsiComment)
-							){}
+							)
+					{
+					}
 
-					if (nextStatement instanceof PerlUseStatement && ((PerlUseStatement) nextStatement).isPragmaOrVersion())	// found more use pragma/version
-						baseElement = nextStatement;
+					if (nextStatement instanceof PerlUseStatement && ((PerlUseStatement) nextStatement).isPragmaOrVersion())    // found more use pragma/version
+						baseStatement = nextStatement;
 					else
-						break;
+						break;    // we've got last pragma statement
 				}
-			}
 			else    // not a pragma
 			{
+				baseStatement = baseStatement.getPrevSibling();
 
-				if( addAfterElement.getPrevSibling() == null ) // first element of some block
-					currentElement = addAfterElement.getParent();
+				// moving up to previous statement or beginning of the block
+				while (baseStatement != null && (baseStatement instanceof PsiWhiteSpace || baseStatement instanceof PsiComment))
+					baseStatement = baseStatement.getPrevSibling();
 
-				addAfterElement = addAfterElement.getPrevSibling();
-
-				if (addAfterElement instanceof PsiWhiteSpace) // newline
-					addAfterElement = addAfterElement.getPrevSibling();
+				// got last statement before use ...
 			}
-		}
-		else
+		} else    // no uses found
 		{
-			for (PsiElement checkElement : currentElementChildren)
-				if (checkElement instanceof PsiComment)
-					baseElement = checkElement;
-				else if (!(checkElement instanceof PsiWhiteSpace))
-					break;
+			baseStatement = PsiTreeUtil.findChildOfType(statementContainer, PsiPerlNamespaceBlock.class);
+			if (baseStatement != null)    // got a namespace block
+			{
+				statementContainer = baseStatement;
+				baseStatement = null;
+			} else
+			{
+				baseStatement = statementContainer.getFirstChild();
+				if (!(baseStatement instanceof PsiComment && baseStatement.getText().startsWith("#!")))    // not a shebang
+					baseStatement = null;
+			}
 		}
 
 		PsiElement newLineElement = PerlElementFactory.createNewLine(project);
-		if (baseElement != null) // add after element
+
+		if (baseStatement != null) // add after element
+			statementContainer.addBefore(newLineElement,
+					statementContainer.addAfter(newStatement, baseStatement));
+		else if (statementContainer.getFirstChild() != null)   // add as first element of the file
 		{
-			PsiElement containerElement = baseElement.getParent();
-			containerElement.addAfter(newStatement, baseElement);
-			containerElement.addAfter(newLineElement, baseElement);
-		} else if (currentElementChildren.length > 0)    // add before the first valid element
+			statementContainer.addAfter(newLineElement,
+					statementContainer.addBefore(newStatement, statementContainer.getFirstChild()));
+		} else    // just add
 		{
-			currentElement.addBefore(newStatement, currentElementChildren[0]);
-			currentElement.addBefore(newLineElement, currentElementChildren[0]);
-		} else    // add as first element of the file
-		{
-			currentElement.add(newStatement);
-			currentElement.add(newLineElement);
+			statementContainer.add(newStatement);
+			statementContainer.add(newLineElement);
 		}
 	}
 }

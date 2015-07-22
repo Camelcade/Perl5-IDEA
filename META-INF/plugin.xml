@@ -21,12 +21,38 @@
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
-      Perl5 support for Intellij IDEA
+    <h1>Camelcade</h1>
+    <p>Camelcade adds Perl5 support for Intellij IDEA and other JetBrains products.</p>
+<br/>
+    <p>Plugin works but still not released (consider it being in open Beta).</p>
+<br/>
+    <p>Even in current beta state, Camelcade is better than NP++ or Sublime. And IDEA itself gives you a lot of useful features.</p>
+<br/>
+    <p>I am using Camelcade at my full-time job as a Perl programmer.</p>
+<br/>
+    <h2>More information:</h2>
+    <ul>
+     <li><a href="https://twitter.com/CamelcadeIDE">Twitter</a></li>
+     <li><a href="https://github.com/hurricup/Perl5-IDEA">GitHub</a></li>
+     <li><a href="https://github.com/hurricup/Perl5-IDEA/issues">Issue Tracker</a></li>
+     <li><a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>
+     <ul>
+     <li><a href="https://github.com/hurricup/Perl5-IDEA/wiki/Getting-started">Getting started</a></li>
+     <li><a href="https://github.com/hurricup/Perl5-IDEA/wiki/Implemented-features">Implemented features</a></li>
+     <li><a href="https://github.com/hurricup/Perl5-IDEA/wiki/Known-issues">Known issues</a></li>
+     </ul>
+     </li>
+    </ul>
     ]]></description>
 
     <change-notes><![CDATA[
       <p>0.34 beta changes:</p>
       <ul>
+      <li>Created Mojolicious template file classes (parsing NYI)</li>
+      <li>Disabled use pragma inspections for Embedded Perl and Mojolicious files</li>
+      <li>Fixed bug in use warnings/strict quickfixes</li>
+      <li>Changed JB repo plugin name to make it easier to find it</li>
+      <li>Small internal optimizations</li>
       </ul>
 
     ]]>
