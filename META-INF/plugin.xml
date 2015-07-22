@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.34 beta</version>
+    <version>0.35 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -42,13 +42,8 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.34 beta changes:</p>
+      <p>0.35 beta changes:</p>
       <ul>
-      <li>Created Mojolicious template file classes (parsing NYI)</li>
-      <li>Disabled use pragma inspections for Embedded Perl and Mojolicious files</li>
-      <li>Fixed bug in use warnings/strict quickfixes</li>
-      <li>Changed JB repo plugin name to make it easier to find it</li>
-      <li>Small internal optimizations</li>
       </ul>
 
     ]]>
