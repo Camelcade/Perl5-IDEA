@@ -59,51 +59,51 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 	public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor)
 	{
 		PerlUseStatement newStatement = PerlElementFactory.createUseStatement(project, myPackageName);
-		PsiElement currentElement = descriptor.getPsiElement();
-		PsiElement[] currentElementChildren = currentElement.getChildren();
+		PsiElement statementContainer = descriptor.getPsiElement();
 
 		// fixme the best way here is to add next usage between use pragma and use package; Will help to keep consistency
-		PsiElement addAfterElement = PsiTreeUtil.findChildOfType(currentElement, PerlUseStatement.class);
-		if (addAfterElement == null)
+		PsiElement baseElement = PsiTreeUtil.findChildOfType(statementContainer, PerlUseStatement.class);
+		if (baseElement != null)
 		{
-			for (PsiElement checkElement : currentElementChildren)
-				if (checkElement instanceof PsiComment)
-					addAfterElement = checkElement;
-				else if (!(checkElement instanceof PsiWhiteSpace))
-					break;
-		} else
-		{
-			if (((PerlUseStatement) addAfterElement).isPragmaOrVersion() ) // pragma or version
+			if (((PerlUseStatement) baseElement).isPragmaOrVersion() ) // pragma or version
 			{
 				while (true	)
 				{
 					// trying to find next use statement
-					PsiElement nextStatement = addAfterElement;
+					PsiElement nextStatement = baseElement;
 
 					while ((nextStatement = nextStatement.getNextSibling()) != null
 							&& (nextStatement instanceof PsiWhiteSpace || nextStatement instanceof PsiComment)
 							){}
 
 					if (nextStatement instanceof PerlUseStatement && ((PerlUseStatement) nextStatement).isPragmaOrVersion())	// found more use pragma/version
-						addAfterElement = nextStatement;
+						baseElement = nextStatement;
 					else
 						break;
 				}
 			}
 			else    // not a pragma
 			{
-				addAfterElement = addAfterElement.getPrevSibling();
-				if (addAfterElement instanceof PsiWhiteSpace) // newline
-					addAfterElement = addAfterElement.getPrevSibling();
+				baseElement = baseElement.getPrevSibling();
+				if (baseElement instanceof PsiWhiteSpace) // newline
+					baseElement = baseElement.getPrevSibling();
 			}
+		}
+		else
+		{
+			for (PsiElement checkElement : currentElementChildren)
+				if (checkElement instanceof PsiComment)
+					baseElement = checkElement;
+				else if (!(checkElement instanceof PsiWhiteSpace))
+					break;
 		}
 
 		PsiElement newLineElement = PerlElementFactory.createNewLine(project);
-		if (addAfterElement != null) // add after element
+		if (baseElement != null) // add after element
 		{
-			PsiElement containerElement = addAfterElement.getParent();
-			containerElement.addAfter(newStatement, addAfterElement);
-			containerElement.addAfter(newLineElement, addAfterElement);
+			PsiElement containerElement = baseElement.getParent();
+			containerElement.addAfter(newStatement, baseElement);
+			containerElement.addAfter(newLineElement, baseElement);
 		} else if (currentElementChildren.length > 0)    // add before the first valid element
 		{
 			currentElement.addBefore(newStatement, currentElementChildren[0]);
