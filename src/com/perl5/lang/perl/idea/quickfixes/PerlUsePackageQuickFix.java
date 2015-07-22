@@ -92,7 +92,12 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 			}
 			else    // not a pragma
 			{
+
+				if( addAfterElement.getPrevSibling() == null ) // first element of some block
+					currentElement = addAfterElement.getParent();
+
 				addAfterElement = addAfterElement.getPrevSibling();
+
 				if (addAfterElement instanceof PsiWhiteSpace) // newline
 					addAfterElement = addAfterElement.getPrevSibling();
 			}
