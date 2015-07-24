@@ -565,7 +565,7 @@ parenthesised_expr ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=
 private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
 
-deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + {pin(".*")=1}
+deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + //{pin(".*")=1}
 
 private op_3_expr ::= pref_pp_expr | suff_pp_expr
 pref_pp_expr ::= (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS) expr
@@ -762,8 +762,11 @@ private array ::=
     | SIGIL_ARRAY scalar
 
 array_cast_expr ::= SIGIL_ARRAY SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
-array_array_slice ::= array_variable LEFT_BRACKET expr RIGHT_BRACKET
-array_hash_slice ::= array_variable LEFT_BRACE expr RIGHT_BRACE
+array_array_slice ::= {array_cast_expr | array_variable } array_slice_index
+array_slice_index ::= LEFT_BRACKET expr RIGHT_BRACKET
+
+array_hash_slice ::= {array_cast_expr | array_variable } hash_slice_index
+hash_slice_index ::= LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
     hash_variable                    // hash as is
@@ -809,13 +812,13 @@ private nested_element_variation ::=
     | scalar_call
 
 nested_call ::= method [nested_call_arguments]
-scalar_call ::= scalar_variable nested_call_arguments
-nested_call_arguments ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1}
+scalar_call ::= scalar_variable [nested_call_arguments]
+nested_call_arguments ::= LEFT_PAREN [expr] RIGHT_PAREN
 
-hash_index ::= LEFT_BRACE hash_index_content RIGHT_BRACE {pin=1}
-private hash_index_content ::= <<convertIdentifier STRING_CONTENT>> | expr
+hash_index ::= LEFT_BRACE hash_index_content RIGHT_BRACE
+private hash_index_content ::= <<convertBracedString>> | expr
 
-array_index ::= LEFT_BRACKET array_index_content RIGHT_BRACKET {pin=1}
+array_index ::= LEFT_BRACKET array_index_content RIGHT_BRACKET
 private array_index_content ::= number_constant | expr
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////

@@ -371,6 +371,17 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
         return false;
     }
 
+    public static boolean convertBracedString(PsiBuilder b, int l) {
+
+        if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == RIGHT_BRACE) {
+            PsiBuilder.Marker m = b.mark();
+            b.advanceLexer();
+            m.collapse(STRING_CONTENT);
+            return true;
+        }
+        return false;
+        }
+
     /**
      * Completes namespace, invoked when we are 100% sure that PACKAGE_IDENTIFIER is a package
      *

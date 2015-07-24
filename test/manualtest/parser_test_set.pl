@@ -1,4 +1,29 @@
 
+#$self->get_errors();
+@{$self->get_errors()};
+
+
+return $logger->$func;
+
+$hash{'logf'} = $log_format{ $_[2] or 'default' };
+
+[@{$images}[0..5]];
+
+
+ERRORS: foreach my $error (@{$self->get_errors()})
+{
+    foreach my $class (@error_types)
+    {
+        if (UNIVERSAL::isa($error, $class))
+        {
+            push @$result, $error;
+            next ERRORS;
+        }
+    }
+}
+
+
+
 $a->eval->[0]->{test}->eval()->[$a+$b]->{$a.$b}->eval()->SUPER::eval()->$a();
 $b->();
 
