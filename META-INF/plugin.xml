@@ -46,6 +46,12 @@
       <p>0.35 beta changes:</p>
       <ul>
       <li>Lexer and parser improvements</li>
+      <li>Basic chained calls resolution like <code>Foo::Bar->new()->method()->other_method();</code>:
+      <ul>
+      <li>To make this work, mid methods should be <a href="https://github.com/hurricup/Perl5-IDEA/wiki/Subs-annotations">annotated</a> with <code>#@returns</code>.</li>
+      <li><code>new</code> is implicitly annotated with a package it's invoked for.</li>
+      </ul>
+      </li>
       </ul>
 
     ]]>

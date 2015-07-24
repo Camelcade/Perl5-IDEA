@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlReturnType;
 import org.jetbrains.annotations.Nullable;
 
 /**

@@ -36,30 +36,44 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 	@Override
 	public String getPackageNameForElement(PsiElement methodElement)
 	{
-		PsiElement[] chainElements = getChildren();
-		String currentPackageName = PerlPackageUtil.getContextPackageName(this);
-
-		int step = 0;
-
 		// todo add some caching here
-		for (PsiElement nextElement : chainElements)
+		if (methodElement == getFirstChild())    // first element
+			return PerlPackageUtil.getContextPackageName(this);
+
+		PsiElement currentElement = methodElement.getPrevSibling();
+		if (currentElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
+			currentElement = currentElement.getPrevSibling();
+
+		assert currentElement != null;
+		boolean isFirst = currentElement == getFirstChild();
+
+		if (currentElement instanceof PsiPerlNamespaceExpr)
+			return ((PerlNamespaceElement) currentElement.getFirstChild()).getCanonicalName();
+		else if (isFirst && currentElement instanceof PsiPerlVariableExpr && currentElement.getFirstChild() instanceof PerlVariable)
+			return ((PerlVariable) currentElement.getFirstChild()).guessVariableType();
+		else if (
+				currentElement instanceof PsiPerlSubCallExpr
+						&& ((PsiPerlSubCallExpr) currentElement).getMethod() != null
+						&& ((PsiPerlSubCallExpr) currentElement).getMethod().getSubNameElement() != null
+				)
 		{
-			if (nextElement == methodElement)
-				return currentPackageName;
-			else if (nextElement instanceof PsiPerlNamespaceExpr)
-				currentPackageName = ((PerlNamespaceElement) nextElement.getFirstChild()).getName();
-			else if (step == 0 && nextElement instanceof PsiPerlVariableExpr && nextElement.getFirstChild() instanceof PerlVariable)
+			// fixme this should be moved to a method
+			PerlSubNameElement subNameElement = ((PsiPerlSubCallExpr) currentElement).getMethod().getSubNameElement();
+
+			if (subNameElement != null)
 			{
-				currentPackageName = ((PerlVariable) nextElement.getFirstChild()).guessVariableType();
-				if (currentPackageName == null)
-					return null;
-			} else if (nextElement.getNode().getElementType() != PerlElementTypes.OPERATOR_DEREFERENCE)
-			{
-//				System.out.println("Stopped traversing at: " + nextElement.getText() + " " + nextElement.getClass());
-				break;
+				if( "new".equals(subNameElement.getName()))
+					return ((PsiPerlSubCallExpr) currentElement).getMethod().getPackageName();
+				for (PerlSubDefinition subDefinition : subNameElement.getSubDefinitions())
+					if (subDefinition.getSubAnnotations().getReturns() != null)
+						return subDefinition.getSubAnnotations().getReturns();
+				for (PerlSubDeclaration subDeclaration : subNameElement.getSubDeclarations())
+					if (subDeclaration.getSubAnnotations().getReturns() != null)
+						return subDeclaration.getSubAnnotations().getReturns();
 			}
-			step++;
 		}
+
+
 		return null;
 	}
 }

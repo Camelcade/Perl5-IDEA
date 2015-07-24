@@ -895,7 +895,7 @@ private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::= <<parseMethod>>
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
-private annotations ::= annotation+
+private annotations ::= annotation+ //{recoverWhile=recover_sub_annotation}
 annotation ::=
     annotation_unknown
     | annotation_abstract
@@ -916,6 +916,8 @@ annotation_returns_ref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY <<mergePacka
 annotation_returns_arrayref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_bracketed
 annotation_returns_hashref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_braced
 annotation_incomplete ::= ANNOTATION_PREFIX
+
+//private recover_sub_annotation ::= !(RESERVED_SUB|ANNOTATION_PREFIX)
 
 private namespace_element_bracketed ::= LEFT_BRACKET <<mergePackageName>> RIGHT_BRACKET {name="[Package::Name]"}
 private namespace_element_braced ::= LEFT_BRACE <<mergePackageName>> RIGHT_BRACE {name="{Package::Name}"}

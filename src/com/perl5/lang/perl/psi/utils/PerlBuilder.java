@@ -90,11 +90,10 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 				return null;
 
 			if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(rawTokenType))
-			{
 				steps -= step;
-			}
 		}
 
+		// fixme crushes on quick s typing
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
 	}
 

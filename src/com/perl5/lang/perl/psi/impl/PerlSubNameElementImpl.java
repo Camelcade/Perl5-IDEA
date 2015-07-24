@@ -65,7 +65,6 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 
 
 	@Override
-	@NotNull
 	public String getPackageName()
 	{
 		PsiElement parent = getParent();

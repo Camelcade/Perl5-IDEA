@@ -78,11 +78,9 @@ public class PerlDefaultMro
 	 */
 	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
-		assert packageName != null: "Null package name for " + subName;
-		assert subName != null: "Null sub name for " + packageName;
-
-
 		Collection<PsiPerlSubDefinition> result = new ArrayList<>();
+		if(packageName == null || subName == null )
+			return result;
 
 		if (!checkedPackages.contains(packageName))
 		{
@@ -125,10 +123,9 @@ public class PerlDefaultMro
 	 */
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
-		assert packageName != null: "Null package name for " + subName;
-		assert subName != null: "Null sub name for " + packageName;
-
 		Collection<PsiPerlSubDeclaration> result = new ArrayList<>();
+		if(packageName == null || subName == null )
+			return result;
 
 		if (!checkedPackages.contains(packageName))
 		{
@@ -170,10 +167,9 @@ public class PerlDefaultMro
 	 */
 	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
-		assert packageName != null: "Null package name for " + subName;
-		assert subName != null: "Null sub name for " + packageName;
-
 		Collection<PsiPerlGlobVariable> result = new ArrayList<>();
+		if(packageName == null || subName == null )
+			return result;
 
 		if (!checkedPackages.contains(packageName))
 		{

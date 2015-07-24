@@ -111,6 +111,7 @@ $var x1223;
 x123 => 123;
 $a->x123 => 123;
 package x123;
+use strict;
 use x123;
 require x123();
 

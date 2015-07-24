@@ -26,7 +26,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin implements PsiPerlMethod
 {
-	public PerlMethodImplMixin(@NotNull ASTNode node){
+	public PerlMethodImplMixin(@NotNull ASTNode node)
+	{
 		super(node);
 	}
 
@@ -35,24 +36,29 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	{
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
 
-		if( namespaceElement != null )
+		if (namespaceElement != null)
 			return namespaceElement.getCanonicalName();
+		return null;
+	}
 
+	@Override
+	public String getContextPackageName()
+	{
 		PsiElement parent = getParent();
 		PsiElement grandParent = parent == null ? null : parent.getParent();
 
-		if( grandParent instanceof PsiPerlDerefExpr )
+		if (grandParent instanceof PsiPerlDerefExpr)
 			return ((PsiPerlDerefExpr) grandParent).getPackageNameForElement(parent);
 
-		return null;
+		return super.getContextPackageName();
 	}
 
 	@Override
 	public boolean isObjectMethod()
 	{
 		boolean hasExplicitNamespace = hasExplicitNamespace();
-		return !hasExplicitNamespace && getParent() instanceof PsiPerlNestedCall			// part of ..->method()
-				|| hasExplicitNamespace && getFirstChild() instanceof PerlSubNameElement;	// method Foo::Bar
+		return !hasExplicitNamespace && getParent() instanceof PsiPerlNestedCall            // part of ..->method()
+				|| hasExplicitNamespace && getFirstChild() instanceof PerlSubNameElement;    // method Foo::Bar
 	}
 
 	@Override
