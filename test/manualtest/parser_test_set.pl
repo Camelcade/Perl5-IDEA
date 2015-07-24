@@ -1,3 +1,7 @@
+
+$a->eval->[0]->{test}->eval()->[$a+$b]->{$a.$b}->eval()->SUPER::eval()->$a()->$b->();
+
+
 sub abc
 {
     ...;

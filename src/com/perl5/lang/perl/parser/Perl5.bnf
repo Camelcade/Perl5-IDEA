@@ -564,7 +564,7 @@ parenthesised_expr ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=
 private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
 
-deref_expr ::= expr (<<parseArrowSmart>> nested_element_expr) + {pin(".*")=1}
+deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + {pin(".*")=1}
 
 private op_3_expr ::= pref_pp_expr | suff_pp_expr
 pref_pp_expr ::= (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS) expr
@@ -797,21 +797,28 @@ private glob ::=
 
 glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL>> SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
 
-private nested_element ::=
-    braced_expr
-    | LEFT_BRACKET expr RIGHT_BRACKET
+
 
 // extended nested element for using in ()
-private nested_element_expr ::=
-    nested_element
-    | parenthesised_expr    // function call like $var->()
+private nested_element_variation ::=
+    hash_index
+    | array_index
+    | nested_call
+    | call_arguments_nested    // function call like $var->()
     | scalar_call
-    | sub_call_expr
-//    | rightward_call_expr
-    | scalar
 
-scalar_call ::= scalar_variable [parenthesised_expr]
+nested_call ::= method [call_arguments_nested]
+scalar_call ::= scalar_variable call_arguments_nested
 
+
+hash_index ::= braced_expr
+array_index ::= LEFT_BRACKET array_index_content RIGHT_BRACKET {pin=1}
+private array_index_content ::= number_constant | expr
+
+private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
+braced_string ::= <<parseBracedString>>
+
+call_arguments_nested ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1}
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
@@ -836,11 +843,14 @@ perl_handle_expr ::= HANDLE
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 
 private scalar_constant ::=
+    number_constant
+    | TAG
+    | string
+
+private number_constant ::=
     NUMBER
     | NUMBER_VERSION
     | NUMBER_SIMPLE
-    | TAG
-    | string
 
 private array_constant ::=
     string_list
@@ -878,9 +888,6 @@ hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD>> variable_body
 code_variable ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> variable_body
 
 glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body [braced_expr]
-
-private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
-braced_string ::= <<parseBracedString>>
 
 private variable_body ::= <<parseVariableName>>
 
