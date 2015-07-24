@@ -38,13 +38,9 @@ public class PerlBuiltInSubCompletionProvider extends CompletionProvider<Complet
 		PsiElement method = parameters.getPosition().getParent();
 		assert method instanceof PsiPerlMethod;
 
-		if( !((PsiPerlMethod) method).hasExplicitNamespace())
-		{
+		if( !((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
 			for (String functionName : PerlSubUtil.BUILT_IN)
-			{
 				resultSet.addElement(LookupElementBuilder.create(functionName));
-			}
-		}
 	}
 
 }
