@@ -45,6 +45,7 @@
     <change-notes><![CDATA[
       <p>0.35 beta changes:</p>
       <ul>
+      <li>Lexer and parser improvements</li>
       </ul>
 
     ]]>

@@ -1,3 +1,24 @@
+% { $args[3] || {} };
+$ { $args[3] || {} };
+* { $args[3] || {} };
+@ { $args[3] || {} };
+
+%attrs = (
+  % { $args[3] || {} },
+  % { $args[4] || {} },
+);
+
+$lpBuffer .= pack("L@".16, 0);
+
+
+2*$a;
+2*$i;
+
+$flags .= qw(d l u a aa)[$charset >> 7];
+#substr $name, 0, 0, = $our ? 'o' : 'm'; # our/my
+$dir = 0 if !defined $self->[2*$i];
+$dir = 1 if !defined $self->[2*$i+1];
+Socket->${\"IPPROTO_\U$proto"}();
 
 #$self->get_errors();
 @{$self->get_errors()};

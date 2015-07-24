@@ -86,15 +86,15 @@ public class RegexBlock implements PerlElementTypes
 					isCharGroup = false;
 
 				// @todo this is buggy, sometimes bare is allowed. See example from `redo` doc
-				if (!isEscaped && !isCharGroup && currentChar == '{')
-					braceLevel++;
-				else if (!isEscaped && !isCharGroup && braceLevel > 0 && currentChar == '}')
-					braceLevel--;
-
-				if (!isEscaped && !isCharGroup && currentChar == '(')
-					parenLevel++;
-				else if (!isEscaped && !isCharGroup && parenLevel > 0 && currentChar == ')')
-					parenLevel--;
+//				if (!isEscaped && !isCharGroup && currentChar == '{')
+//					braceLevel++;
+//				else if (!isEscaped && !isCharGroup && braceLevel > 0 && currentChar == '}')
+//					braceLevel--;
+//
+//				if (!isEscaped && !isCharGroup && currentChar == '(')
+//					parenLevel++;
+//				else if (!isEscaped && !isCharGroup && parenLevel > 0 && currentChar == ')')
+//					parenLevel--;
 			}
 
 			if( !isEscaped && isQuotesDiffers && !isCharGroup )

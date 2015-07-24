@@ -722,7 +722,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
     public static boolean parseAmbiguousSigil(PsiBuilder b, int l, IElementType sigilTokenType) {
         IElementType tokenType = b.getTokenType();
         if (tokenType == sigilTokenType) {
-            if (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1))) // space disallowed after *
+            if (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1)) && b.lookAhead(1) != LEFT_BRACE) // space disallowed after * or % if it's not a cast
                 return false;
 
             b.advanceLexer();

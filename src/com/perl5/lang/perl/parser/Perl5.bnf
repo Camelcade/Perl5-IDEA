@@ -512,7 +512,7 @@ private unary_expr ::= <<parseExpressionLevel 14>>
 private immutable_expr ::= <<parseExpressionLevel 22>>
 
 named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_expr]
-named_list_expr ::= <<isListOperator>> method [call_arguments]
+named_list_expr ::= <<isListOperator>> method [call_arguments]  // optional comma for substr $name, 0, 0,  (B::Deparse)  [comma]
 
 term_expr ::=
     variable_declaration
@@ -762,7 +762,7 @@ private array ::=
     | SIGIL_ARRAY scalar
 
 array_cast_expr ::= SIGIL_ARRAY SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
-array_array_slice ::= {array_cast_expr | array_variable } array_slice_index
+array_array_slice ::= {array_cast_expr | array_variable | string_list} array_slice_index
 array_slice_index ::= LEFT_BRACKET expr RIGHT_BRACKET
 
 array_hash_slice ::= {array_cast_expr | array_variable } hash_slice_index
@@ -812,14 +812,13 @@ private nested_element_variation ::=
     | scalar_call
 
 nested_call ::= method [nested_call_arguments]
-scalar_call ::= scalar_variable [nested_call_arguments]
+scalar_call ::= scalar [nested_call_arguments]
 nested_call_arguments ::= LEFT_PAREN [expr] RIGHT_PAREN
 
 hash_index ::= LEFT_BRACE hash_index_content RIGHT_BRACE
 private hash_index_content ::= <<convertBracedString>> | expr
 
-array_index ::= LEFT_BRACKET array_index_content RIGHT_BRACKET
-private array_index_content ::= number_constant | expr
+array_index ::= LEFT_BRACKET expr RIGHT_BRACKET
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 

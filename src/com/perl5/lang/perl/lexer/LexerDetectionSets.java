@@ -131,7 +131,11 @@ public interface LexerDetectionSets extends PerlElementTypes
 			RIGHT_BRACE,
 			RIGHT_PAREN,
 			RIGHT_BRACKET,
-			PACKAGE_IDENTIFIER
+			PACKAGE_IDENTIFIER,
+			QUOTE,
+			QUOTE_SINGLE,
+			QUOTE_DOUBLE,
+			QUOTE_TICK
 	);
 
 
