@@ -600,27 +600,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 
     /**
-     * Parses {IDENTIFIER}
-     *
-     * @param b PerlBuilder
-     * @param l parsing level
-     * @return parsing result
-     */
-    public static boolean parseBracedString(PsiBuilder b, int l) {
-        if (consumeToken(b, LEFT_BRACE)
-                && CONVERTABLE_TOKENS.contains(b.getTokenType())
-                && b.lookAhead(1) == RIGHT_BRACE
-                ) {
-            PsiBuilder.Marker m = b.mark();
-            b.advanceLexer();
-            m.collapse(STRING_CONTENT);
-            b.advanceLexer();
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Parsing label declaration LABEL:
      *
      * @param b PerlBuilder

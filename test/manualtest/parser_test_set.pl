@@ -1,6 +1,6 @@
 
-$a->eval->[0]->{test}->eval()->[$a+$b]->{$a.$b}->eval()->SUPER::eval()->$a()->$b->();
-
+$a->eval->[0]->{test}->eval()->[$a+$b]->{$a.$b}->eval()->SUPER::eval()->$a();
+$b->();
 
 sub abc
 {
@@ -766,7 +766,7 @@ DESTROY {
     print "something";
 }
 
-$abc = __PACKAGE__->"something";
+$abc = __PACKAGE__;
 $abc = 1 and 2;
 
 

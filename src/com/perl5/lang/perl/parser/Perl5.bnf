@@ -240,6 +240,7 @@ limitations under the License.
     name(".*expr")="expression"
 
     extends("string_sq|string_dq|string_xq|heredoc_opener")=term_expr
+    extends("nested_call")=sub_call_expr
 
     extends("annotation_.*")=annotation
     implements("annotation_returns.*")="com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer"
@@ -787,7 +788,7 @@ scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * LEFT_BRACE expr RIG
 
 scalar_array_index ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * scalar_variable
 scalar_array_element ::= scalar_variable LEFT_BRACKET expr RIGHT_BRACKET
-scalar_hash_element ::= scalar_variable braced_expr
+scalar_hash_element ::= scalar_variable hash_index
 scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
@@ -804,21 +805,18 @@ private nested_element_variation ::=
     hash_index
     | array_index
     | nested_call
-    | call_arguments_nested    // function call like $var->()
+    | nested_call_arguments    // function call like $var->()
     | scalar_call
 
-nested_call ::= method [call_arguments_nested]
-scalar_call ::= scalar_variable call_arguments_nested
+nested_call ::= method [nested_call_arguments]
+scalar_call ::= scalar_variable nested_call_arguments
+nested_call_arguments ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1}
 
+hash_index ::= LEFT_BRACE hash_index_content RIGHT_BRACE {pin=1}
+private hash_index_content ::= <<convertIdentifier STRING_CONTENT>> | expr
 
-hash_index ::= braced_expr
 array_index ::= LEFT_BRACKET array_index_content RIGHT_BRACKET {pin=1}
 private array_index_content ::= number_constant | expr
-
-private braced_expr ::= braced_string | LEFT_BRACE expr RIGHT_BRACE
-braced_string ::= <<parseBracedString>>
-
-call_arguments_nested ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1}
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
@@ -887,7 +885,7 @@ array_variable ::= SIGIL_ARRAY variable_body
 hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD>> variable_body
 code_variable ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> variable_body
 
-glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body [braced_expr]
+glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body [hash_index]
 
 private variable_body ::= <<parseVariableName>>
 
