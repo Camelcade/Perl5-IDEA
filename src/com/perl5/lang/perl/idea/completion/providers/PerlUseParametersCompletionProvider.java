@@ -54,10 +54,8 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 
 				if( useStatement != null && useStatement.isParentPragma() )
 				{
-					// fixme actually, we should fill files here, not packages, or make a diff provider
-					// fixme we should only add packages that has classes inside of them
-					for (String packageName : PerlPackageUtil.getDefinedPackageNames(file.getProject()))
-						resultSet.addElement(LookupElementBuilder.create(packageName).withIcon(PerlIcons.PACKAGE_GUTTER_ICON));
+					for( String packageName: PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
+						resultSet.addElement(PerlPackageUtil.getPackageLookupElement(packageName));
 
 					if( useStatement.isParentPragma())
 						resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));

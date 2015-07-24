@@ -43,35 +43,8 @@ public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<Com
 				// built in packages
 				PsiElement element = parameters.getPosition();
 
-				for (String packageName : PerlPackageUtil.BUILT_IN)
-				{
-					resultSet.addElement(LookupElementBuilder
-									.create(element, packageName)
-									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-									.withBoldness(true)
-					);
-				}
-
-				// todo some decoration for pragma
-				for (String packageName : PerlPackageUtil.BUILT_IN_PRAGMA)
-				{
-					resultSet.addElement(LookupElementBuilder
-									.create(element, packageName)
-									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-									.withBoldness(true)
-					);
-				}
-
-				for (String packageName : PerlPackageUtil.BUILT_IN_DEPRECATED)
-				{
-					resultSet.addElement(LookupElementBuilder
-									.create(element, packageName)
-									.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-									.withBoldness(true)
-									.withStrikeoutness(true)
-					);
-				}
-
+				for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
+					resultSet.addElement(PerlPackageUtil.getPackageLookupElement(packageName));
 			}
 		});
 	}

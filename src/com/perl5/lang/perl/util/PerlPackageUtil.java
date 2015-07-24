@@ -16,8 +16,13 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -28,6 +33,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -40,6 +46,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
@@ -70,8 +77,30 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static boolean isBuiltIn(String pacakgeName)
 	{
-		String canonicalPcakageName = getCanonicalPackageName(pacakgeName);
-		return BUILT_IN_ALL.contains(canonicalPcakageName);
+		return BUILT_IN_ALL.contains(getCanonicalPackageName(pacakgeName));
+	}
+
+	/**
+	 * Checks if package is pragma
+	 *
+	 * @param pacakgeName package name
+	 * @return result
+	 */
+	public static boolean isPragma(String pacakgeName)
+	{
+		return BUILT_IN_PRAGMA.contains(getCanonicalPackageName(pacakgeName));
+	}
+
+
+	/**
+	 * Checks if package is deprecated
+	 *
+	 * @param pacakgeName package name
+	 * @return result
+	 */
+	public static boolean isDeprecated(String pacakgeName)
+	{
+		return BUILT_IN_DEPRECATED.contains(getCanonicalPackageName(pacakgeName));
 	}
 
 
@@ -288,4 +317,75 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 				}
 		}
 	}
+
+	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_SELECTIONS = new ConcurrentHashMap<>();
+
+	/**
+	 * Returns package lookup element by package name
+	 *
+	 * @param packageName package name in any form
+	 * @return lookup element
+	 */
+	public static LookupElement getPackageLookupElement(String packageName)
+	{
+		LookupElementBuilder result = PACKAGE_SELECTIONS.get(packageName);
+
+		if (result == null)
+		{
+			result = LookupElementBuilder
+					.create(packageName)
+					.withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
+
+			if (isBuiltIn(packageName))
+				result = result.withBoldness(true);
+
+			// todo add pragma decoration for lookup element
+//			if( isPragma(packageName))
+//				result = result.withBoldness(true);
+
+			if (isDeprecated(packageName))
+				result = result.withStrikeoutness(true);
+
+
+			PACKAGE_SELECTIONS.put(packageName, result);
+		}
+
+		return result;
+	}
+
+	/**
+	 * Returns list of Package names available as pm files for specific psi element
+	 *	todo we could cache this with invalidating on file event
+	 * @param element base PsiElement
+	 * @return list of distinct strings
+	 */
+	public static List<String> getPackageFilesForPsiElement(PsiElement element)
+	{
+		HashSet<String> result = new HashSet<>();
+
+		if (element != null)
+		{
+			Module module = ModuleUtil.findModuleForPsiElement(element);
+			VirtualFile[] classRoots;
+
+			if (module != null)
+				classRoots = ModuleRootManager.getInstance(module).orderEntries().classes().getRoots();
+			else
+				classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
+
+			for (VirtualFile classRoot : classRoots)
+			{
+				for (VirtualFile virtualFile : VfsUtil.collectChildrenRecursively(classRoot))
+					if (!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()))
+					{
+						String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
+						String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
+
+						result.add(packageName);
+					}
+			}
+		}
+		return new ArrayList<>(result);
+	}
+
 }

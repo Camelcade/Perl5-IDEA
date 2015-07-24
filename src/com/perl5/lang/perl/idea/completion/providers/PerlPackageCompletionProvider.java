@@ -50,36 +50,8 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 			@Override
 			public void run()
 			{
-				PsiFile file = parameters.getOriginalFile();
-				PsiElement element = parameters.getPosition();
-
-				// we need to cache here
-
-				Module module = ModuleUtil.findModuleForPsiElement(element);
-				VirtualFile[] classRoots;
-
-				if (module != null)
-					classRoots = ModuleRootManager.getInstance(module).orderEntries().classes().getRoots();
-				else
-					classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
-
-				// todo add some caching here
-				for (VirtualFile classRoot : classRoots)
-				{
-					for (VirtualFile virtualFile : VfsUtil.collectChildrenRecursively(classRoot))
-						if (!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()))
-						{
-							String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
-							String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
-
-							resultSet.addElement(LookupElementBuilder
-											.create(element, packageName)
-											.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-							)
-							;
-
-						}
-				}
+				for( String packageName: PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
+					resultSet.addElement(PerlPackageUtil.getPackageLookupElement(packageName));
 			}
 		});
 	}

@@ -28,12 +28,11 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,11 +42,9 @@ import java.util.List;
 
 /**
  * Created by hurricup on 01.06.2015.
- *
  */
 public class PerlSubCompletionProvider extends CompletionProvider<CompletionParameters>
 {
-	public static final NamespaceSelectionHanlder NAMESPACE_SELECTION_HANLDER = new NamespaceSelectionHanlder();
 	public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
 	public void addCompletions(@NotNull final CompletionParameters parameters,
@@ -57,8 +54,6 @@ public class PerlSubCompletionProvider extends CompletionProvider<CompletionPara
 
 		ApplicationManager.getApplication().runReadAction(new Runnable()
 		{
-
-
 			@Override
 			public void run()
 			{
@@ -70,7 +65,6 @@ public class PerlSubCompletionProvider extends CompletionProvider<CompletionPara
 
 				String packagePrefix = packageName + "::";
 
-				boolean hasExplicitNamespace = ((PsiPerlMethod) method).hasExplicitNamespace();
 				Project project = parameters.getPosition().getProject();
 
 				// todo we should show declared and not defined subs too for XS extensions
@@ -88,7 +82,7 @@ public class PerlSubCompletionProvider extends CompletionProvider<CompletionPara
 						{
 							Collection<PsiPerlSubDefinition> subDefinitions = PerlSubUtil.findSubDefinitions(project, canonicalSubName);
 
-							for(PsiPerlSubDefinition subDefinition: subDefinitions )
+							for (PsiPerlSubDefinition subDefinition : subDefinitions)
 							{
 								// todo set method icon if isMethod is true
 								// todo omit first argument is isMethod is true
@@ -99,13 +93,13 @@ public class PerlSubCompletionProvider extends CompletionProvider<CompletionPara
 								int argumentsNumber = subArguments.size();
 
 								List<String> argumentsList = new ArrayList<String>();
-								for( PerlSubArgument argument: subArguments)
+								for (PerlSubArgument argument : subArguments)
 								{
 									// todo we can mark optional subArguments after prototypes implementation
 									argumentsList.add(argument.toStringShort());
 
 									int compiledListSize = argumentsList.size();
-									if( compiledListSize > 4 && argumentsNumber > compiledListSize )
+									if (compiledListSize > 4 && argumentsNumber > compiledListSize)
 									{
 										argumentsList.add("...");
 										break;
@@ -115,63 +109,20 @@ public class PerlSubCompletionProvider extends CompletionProvider<CompletionPara
 								String argsString = "(" + StringUtils.join(argumentsList, ", ") + ")";
 
 								resultSet.addElement(LookupElementBuilder
-										.create(subDefinition, subName)
-										.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-										.withPresentableText(subName + argsString)
-										.withInsertHandler(SUB_SELECTION_HANDLER)
-										.withStrikeoutness(subAnnotations.isDeprecated())
+												.create(subDefinition, subName)
+												.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+												.withPresentableText(subName + argsString)
+												.withInsertHandler(SUB_SELECTION_HANDLER)
+												.withStrikeoutness(subAnnotations.isDeprecated())
 								);
 							}
 						}
-					}
-				}
-
-				// subs for incomplete ns and inital enter
-				Collection<String> knownNamespaces = PerlPackageUtil.getDefinedPackageNames(project);
-
-				// todo take SUPER into account
-				if (!hasExplicitNamespace)
-					packagePrefix = resultSet.getPrefixMatcher().getPrefix();
-
-				for (String namespaceName : knownNamespaces)
-				{
-					if (namespaceName.startsWith(packagePrefix))
-					{
-						String replacement = hasExplicitNamespace
-								? namespaceName.substring(packagePrefix.length())
-								: namespaceName;
-
-						resultSet.addElement(
-								LookupElementBuilder
-										.create(replacement)
-										.withIcon(PerlIcons.PACKAGE_GUTTER_ICON)
-										.withPresentableText(namespaceName + "...")
-										.withInsertHandler(NAMESPACE_SELECTION_HANLDER));
 					}
 				}
 			}
 		});
 	}
 
-	static class NamespaceSelectionHanlder implements InsertHandler<LookupElement>
-	{
-		@Override
-		public void handleInsert(final InsertionContext context, LookupElement item)
-		{
-			final Editor editor = context.getEditor();
-
-			EditorModificationUtil.insertStringAtCaret(editor, "::");
-
-			context.setLaterRunnable(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor);
-				}
-			});
-		}
-	}
 
 	static class SubSelectionHandler implements InsertHandler<LookupElement>
 	{
@@ -187,7 +138,7 @@ public class PerlSubCompletionProvider extends CompletionProvider<CompletionPara
 			// todo if prefix is :: and target function is a method (got self/this/proto) replace :: with ->
 			// todo here we could check a method prototype and position caret accordingly
 			// todo we need hint with prototype here, but prototypes handling NYI
-			if( !(subDefitnition instanceof PerlSubDefinition && ((PerlSubDefinition) subDefitnition).getSubArgumentsList().size() == 0))
+			if (!(subDefitnition instanceof PerlSubDefinition && ((PerlSubDefinition) subDefitnition).getSubArgumentsList().size() == 0))
 				editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
 		}
 	}

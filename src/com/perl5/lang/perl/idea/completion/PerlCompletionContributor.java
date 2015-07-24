@@ -50,35 +50,46 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 new PerlVariableLexicalCompletionProvider()
         );
 
+//        extend(
+//                CompletionType.BASIC,
+//                SUB_NAME_PATTERN.inside(METHOD_PATTERN),
+//                new PerlSubCompletionProvider()
+//        );
+
+        // adds packages when it's appropriate
         extend(
                 CompletionType.BASIC,
                 SUB_NAME_PATTERN.inside(METHOD_PATTERN),
-                new PerlSubCompletionProvider()
+                new PerlSubPackageCompletionProvider()
         );
 
-        extend(
-                CompletionType.BASIC,
-                SUB_NAME_PATTERN.inside(METHOD_PATTERN),
-                new PerlBuiltInSubCompletionProvider()
-        );
+//        extend(
+//                CompletionType.BASIC,
+//                SUB_NAME_PATTERN.inside(METHOD_PATTERN),
+//                new PerlBuiltInSubCompletionProvider()
+//        );
 
+        // refactored
         extend(
                 CompletionType.BASIC,
                 NAMESPACE_NAME_PATTERN,
                 new PerlPackageCompletionProvider()
         );
 
+        // refactored
         extend(
                 CompletionType.BASIC,
                 NAMESPACE_NAME_PATTERN,
                 new PerlBuiltInPackageCompletionProvider()
         );
 
+        // refactored
         extend(
                 CompletionType.BASIC,
                 STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN),
                 new PerlUseParametersCompletionProvider()
         );
+
         extend(
                 CompletionType.BASIC,
                 UNKNOWN_ANNOTATION_PATTERN,
