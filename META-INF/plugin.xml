@@ -54,6 +54,7 @@
       </li>
       <li>Autocompletion performance for packages, subs and variables has been significally improved.</li>
       <li>Implemented auto-completion for object methods.</li>
+      <li>Implemented auto-completion popup after typing <code>-&gt;</code> or <code>::</code>.</li>
       </ul>
 
     ]]>
