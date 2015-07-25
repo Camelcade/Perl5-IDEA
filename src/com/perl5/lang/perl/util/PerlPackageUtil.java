@@ -318,40 +318,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
-	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_SELECTIONS = new ConcurrentHashMap<>();
-
-	/**
-	 * Returns package lookup element by package name
-	 *
-	 * @param packageName package name in any form
-	 * @return lookup element
-	 */
-	public static LookupElement getPackageLookupElement(String packageName)
-	{
-		LookupElementBuilder result = PACKAGE_SELECTIONS.get(packageName);
-
-		if (result == null)
-		{
-			result = LookupElementBuilder
-					.create(packageName)
-					.withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
-
-			if (isBuiltIn(packageName))
-				result = result.withBoldness(true);
-
-			// todo add pragma decoration for lookup element
-//			if( isPragma(packageName))
-//				result = result.withBoldness(true);
-
-			if (isDeprecated(packageName))
-				result = result.withStrikeoutness(true);
-
-
-			PACKAGE_SELECTIONS.put(packageName, result);
-		}
-
-		return result;
-	}
 
 	/**
 	 * Returns list of Package names available as pm files for specific psi element

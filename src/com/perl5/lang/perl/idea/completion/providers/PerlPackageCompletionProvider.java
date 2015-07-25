@@ -51,7 +51,7 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 			public void run()
 			{
 				for( String packageName: PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
-					resultSet.addElement(PerlPackageUtil.getPackageLookupElement(packageName));
+					resultSet.addElement(PerlCompletionProviderUtils.getPackageLookupElement(packageName));
 			}
 		});
 	}

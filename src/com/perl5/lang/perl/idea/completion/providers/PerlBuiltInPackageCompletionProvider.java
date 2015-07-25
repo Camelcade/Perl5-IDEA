@@ -19,11 +19,9 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,7 +42,7 @@ public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<Com
 				PsiElement element = parameters.getPosition();
 
 				for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
-					resultSet.addElement(PerlPackageUtil.getPackageLookupElement(packageName));
+					resultSet.addElement(PerlCompletionProviderUtils.getPackageLookupElement(packageName));
 			}
 		});
 	}

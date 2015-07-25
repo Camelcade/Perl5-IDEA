@@ -52,12 +52,12 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 
 				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
-				if( useStatement != null && useStatement.isParentPragma() )
+				if (useStatement != null && useStatement.isParentPragma())
 				{
-					for( String packageName: PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
-						resultSet.addElement(PerlPackageUtil.getPackageLookupElement(packageName));
+					for (String packageName : PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
+						resultSet.addElement(PerlCompletionProviderUtils.getPackageLookupElement(packageName));
 
-					if( useStatement.isParentPragma())
+					if (useStatement.isParentPragma())
 						resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));
 				}
 			}
