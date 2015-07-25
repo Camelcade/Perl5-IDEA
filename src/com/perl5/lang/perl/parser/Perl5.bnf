@@ -242,6 +242,8 @@ limitations under the License.
     extends("string_sq|string_dq|string_xq|heredoc_opener")=term_expr
     extends("nested_call")=sub_call_expr
 
+    implements("nested_call|sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
+
     extends("annotation_.*")=annotation
     implements("annotation_returns.*")="com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer"
     methods("annotation_returns.*")=[getNamespaceElement]

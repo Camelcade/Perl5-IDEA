@@ -55,7 +55,7 @@ public class PerlGlobUtil implements PerlElementTypes
 	 * @param canonicalName	canonical function name package::name
 	 * @return collection of found definitions
 	 */
-	public static Collection<PsiPerlGlobVariable> findGlobsDefinitions(Project project, String canonicalName)
+	public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
 

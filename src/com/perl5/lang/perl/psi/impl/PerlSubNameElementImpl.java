@@ -118,7 +118,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
 				result.addAll(PerlDefaultMro.getSuperSubDefinitions(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
-				for (PsiPerlSubDefinition subDefinition : PerlSubUtil.findSubDefinitions(getProject(), packageName + "::" + subName))
+				for (PsiPerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(getProject(), packageName + "::" + subName))
 					if (!subDefinition.isEquivalentTo(parent))
 						result.add(subDefinition);
 		}
@@ -141,7 +141,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 			else if (parent instanceof PerlMethod &&  "SUPER".equals(packageName))
 				result.addAll(PerlDefaultMro.getSuperSubDeclarations(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
-				for (PsiPerlSubDeclaration subDeclaration : PerlSubUtil.findSubDeclarations(getProject(), packageName + "::" + subName))
+				for (PsiPerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(getProject(), packageName + "::" + subName))
 					if (!subDeclaration.isEquivalentTo(parent))
 						result.add(subDeclaration);
 		}
@@ -167,7 +167,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
 				result.addAll(PerlDefaultMro.getSuperSubAliases(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
-				for (PerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(getProject(), packageName + "::" + subName))
+				for (PerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), packageName + "::" + subName))
 					if (!glob.isEquivalentTo(parent))
 						result.add(glob);
 		}

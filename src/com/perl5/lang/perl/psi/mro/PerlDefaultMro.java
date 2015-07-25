@@ -17,18 +17,13 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by hurricup on 15.06.2015.
@@ -79,7 +74,7 @@ public class PerlDefaultMro
 	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
 		Collection<PsiPerlSubDefinition> result = new ArrayList<>();
-		if(packageName == null || subName == null )
+		if (packageName == null || subName == null)
 			return result;
 
 		if (!checkedPackages.contains(packageName))
@@ -87,7 +82,7 @@ public class PerlDefaultMro
 			checkedPackages.add(packageName);
 
 			if (!noCheckCurrent)    // suppress for resolving SUPER::
-				result.addAll(PerlSubUtil.findSubDefinitions(project, packageName + "::" + subName));
+				result.addAll(PerlSubUtil.getSubDefinitions(project, packageName + "::" + subName));
 
 			if (result.size() == 0)    // not found, need to check parents
 			{
@@ -124,7 +119,7 @@ public class PerlDefaultMro
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
 		Collection<PsiPerlSubDeclaration> result = new ArrayList<>();
-		if(packageName == null || subName == null )
+		if (packageName == null || subName == null)
 			return result;
 
 		if (!checkedPackages.contains(packageName))
@@ -132,7 +127,7 @@ public class PerlDefaultMro
 			checkedPackages.add(packageName);
 
 			if (!noCheckCurrent)    // suppress for resolving SUPER::
-				result.addAll(PerlSubUtil.findSubDeclarations(project, packageName + "::" + subName));
+				result.addAll(PerlSubUtil.getSubDeclarations(project, packageName + "::" + subName));
 
 			if (result.size() == 0)    // not found, need to check parents
 			{
@@ -168,7 +163,7 @@ public class PerlDefaultMro
 	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
 		Collection<PsiPerlGlobVariable> result = new ArrayList<>();
-		if(packageName == null || subName == null )
+		if (packageName == null || subName == null)
 			return result;
 
 		if (!checkedPackages.contains(packageName))
@@ -176,7 +171,7 @@ public class PerlDefaultMro
 			checkedPackages.add(packageName);
 
 			if (!noCheckCurrent)    // suppress for resolving SUPER::
-				result.addAll(PerlGlobUtil.findGlobsDefinitions(project, packageName + "::" + subName));
+				result.addAll(PerlGlobUtil.getGlobsDefinitions(project, packageName + "::" + subName));
 
 			if (result.size() == 0)    // not found, need to check parents
 			{
@@ -194,6 +189,69 @@ public class PerlDefaultMro
 							break;
 					}
 				}
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Returns collection of Sub Definitions of class and it's superclasses according perl's default MRO
+	 *
+	 * @param project         Current project
+	 * @param basePackageName base project
+	 * @param isSuper         flag for SUPER resolutions
+	 * @return collection of definitions
+	 */
+	public static Collection<PsiElement> getPackagePossibleMethods(Project project, String basePackageName, boolean isSuper)
+	{
+		HashMap<String, PsiElement> methods = new HashMap<>();
+
+		for (String packageName : getPackageParentsSequence(project, basePackageName, isSuper, new HashSet<String>()))
+		{
+			for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
+				if (!methods.containsKey(subDefinition.getSubName()))
+					methods.put(subDefinition.getSubName(), subDefinition);
+			for (PerlSubDeclaration subDeclaration: PerlSubUtil.getSubDeclarations(project, "*" + packageName))
+				if (!methods.containsKey(subDeclaration.getSubName()))
+					methods.put(subDeclaration.getSubName(), subDeclaration);
+			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
+				if (!methods.containsKey(globVariable.getName()))
+					methods.put(globVariable.getName(), globVariable);
+		}
+
+		return new ArrayList<>(methods.values());
+	}
+
+	/**
+	 * Builds list of inheritance path. Basically, this should be re-implemented for other MROs
+	 *
+	 * @param project      project
+	 * @param packageName  current package name
+	 * @param isSuper      flag if it's SUPER resolution
+	 * @param recursionMap recursion protection map
+	 * @return list of package names
+	 */
+	public static ArrayList<String> getPackageParentsSequence(Project project, String packageName, boolean isSuper, HashSet<String> recursionMap)
+	{
+		ArrayList<String> result = new ArrayList<>();
+
+		if (!recursionMap.contains(packageName))
+		{
+			recursionMap.add(packageName);
+
+			if (!isSuper)
+				result.add(packageName);
+
+			for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+			{
+				Collection<String> parentPackageNames = namespaceDefinition.getParentNamespaces();
+
+				if( parentPackageNames.size() == 0 && !recursionMap.contains("UNIVERSAL"))
+					parentPackageNames.add("UNIVERSAL");
+
+				for (String parentPackageName : parentPackageNames)
+					result.addAll(getPackageParentsSequence(project, parentPackageName, false, recursionMap));
 			}
 		}
 

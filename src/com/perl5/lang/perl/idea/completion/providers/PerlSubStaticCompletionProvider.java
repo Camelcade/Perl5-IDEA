@@ -16,16 +16,16 @@
 
 package com.perl5.lang.perl.idea.completion.providers;
 
-import com.intellij.codeInsight.completion.*;
-import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionProvider;
+import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
@@ -64,9 +64,9 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 				Project project = parameters.getPosition().getProject();
 
 				// defined subs
-				for (PerlSubDefinition subDefinition : PerlSubUtil.findSubDefinitions(project, "*" + packageName))
+				for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
 				{
-					if( !subDefinition.isMethod() )
+					if (!subDefinition.isMethod())
 					{
 						String argsString = subDefinition.getSubArgumentsListAsString();
 
@@ -87,7 +87,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 				// defined subs with prefix
 				if (!subPrefix.isEmpty())
-					for (PerlSubDefinition subDefinition : PerlSubUtil.findSubDefinitions(project, "*" + packageName + "::" + subPrefix))
+					for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName + "::" + subPrefix))
 					{
 						String argsString = subDefinition.getSubArgumentsListAsString();
 
@@ -109,9 +109,9 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 					}
 
 				// declared subs
-				for (PerlSubDeclaration subDeclaration : PerlSubUtil.findSubDeclarations(project, "*" + packageName))
+				for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
 				{
-					if( !subDeclaration.isMethod())
+					if (!subDeclaration.isMethod())
 					{
 						PerlSubAnnotations subAnnotations = subDeclaration.getSubAnnotations();
 
@@ -130,7 +130,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 				// declared subs with prefix
 				if (!subPrefix.isEmpty())
-					for (PerlSubDeclaration subDeclaration : PerlSubUtil.findSubDeclarations(project, "*" + packageName + "::" + subPrefix))
+					for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName + "::" + subPrefix))
 					{
 						PerlSubAnnotations subAnnotations = subDeclaration.getSubAnnotations();
 						String delimiter = subDeclaration.isMethod() ? "->" : "::";
@@ -148,7 +148,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 					}
 
 				// Globs
-				for (PerlGlobVariable globVariable : PerlGlobUtil.findGlobsDefinitions(project, "*" + packageName))
+				for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
 					if (globVariable.getName() != null)
 						resultSet.addElement(LookupElementBuilder
 								.create(globVariable.getName())
@@ -159,7 +159,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 				// Globs with prefix
 				if (!subPrefix.isEmpty())
-					for (PerlGlobVariable globVariable : PerlGlobUtil.findGlobsDefinitions(project, "*" + packageName + "::" + subPrefix))
+					for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName + "::" + subPrefix))
 						if (globVariable.getName() != null)
 							resultSet.addElement(LookupElementBuilder
 									.create(subPrefix + "::" + globVariable.getName())
@@ -170,23 +170,4 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 			}
 		});
 	}
-
-	static class SubSelectionHandler implements InsertHandler<LookupElement>
-	{
-		@Override
-		public void handleInsert(final InsertionContext context, LookupElement item)
-		{
-			assert item instanceof LookupElementBuilder;
-
-			final Editor editor = context.getEditor();
-
-			PsiElement subDefitnition = item.getPsiElement();
-			EditorModificationUtil.insertStringAtCaret(editor, "()");
-
-			// todo we need hint with prototype here, but prototypes handling NYI
-			if (!(subDefitnition instanceof PerlSubDefinition && ((PerlSubDefinition) subDefitnition).getSubArgumentsList().size() == 0))
-				editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
-		}
-	}
-
 }

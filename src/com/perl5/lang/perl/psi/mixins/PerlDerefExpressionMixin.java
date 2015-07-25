@@ -52,18 +52,18 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 		else if (isFirst && currentElement instanceof PsiPerlVariableExpr && currentElement.getFirstChild() instanceof PerlVariable)
 			return ((PerlVariable) currentElement.getFirstChild()).guessVariableType();
 		else if (
-				currentElement instanceof PsiPerlSubCallExpr
-						&& ((PsiPerlSubCallExpr) currentElement).getMethod() != null
-						&& ((PsiPerlSubCallExpr) currentElement).getMethod().getSubNameElement() != null
+				currentElement instanceof PerlMethodContainer
+						&& ((PerlMethodContainer) currentElement).getMethod() != null
+						&& ((PerlMethodContainer) currentElement).getMethod().getSubNameElement() != null
 				)
 		{
 			// fixme this should be moved to a method
-			PerlSubNameElement subNameElement = ((PsiPerlSubCallExpr) currentElement).getMethod().getSubNameElement();
+			PerlSubNameElement subNameElement = ((PerlMethodContainer) currentElement).getMethod().getSubNameElement();
 
 			if (subNameElement != null)
 			{
 				if( "new".equals(subNameElement.getName()))
-					return ((PsiPerlSubCallExpr) currentElement).getMethod().getPackageName();
+					return ((PerlMethodContainer) currentElement).getMethod().getPackageName();
 				for (PerlSubDefinition subDefinition : subNameElement.getSubDefinitions())
 					if (subDefinition.getSubAnnotations().getReturns() != null)
 						return subDefinition.getSubAnnotations().getReturns();

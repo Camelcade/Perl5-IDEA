@@ -53,6 +53,7 @@
       </ul>
       </li>
       <li>Autocompletion performance for packages, subs and variables has been significally improved.</li>
+      <li>Implemented auto-completion for object methods.</li>
       </ul>
 
     ]]>

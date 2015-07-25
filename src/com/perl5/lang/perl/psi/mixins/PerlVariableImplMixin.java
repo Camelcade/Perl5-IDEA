@@ -284,7 +284,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
     public List<PerlGlobVariable> getRelatedGlobs() {
         List<PerlGlobVariable> result = new ArrayList<>();
 
-        for (PsiPerlGlobVariable glob : PerlGlobUtil.findGlobsDefinitions(getProject(), getCanonicalName()))
+        for (PsiPerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), getCanonicalName()))
             result.add(glob);
 
         return result;

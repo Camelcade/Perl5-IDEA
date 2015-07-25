@@ -59,7 +59,7 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 		Project project = myVariable.getProject();
 
 		// resolve to other globs
-		for(PerlGlobVariable glob: PerlGlobUtil.findGlobsDefinitions(project, canonicalName))
+		for(PerlGlobVariable glob: PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
 			if( !glob.equals(myVariable))
 				result.add(new PsiElementResolveResult(glob));
 

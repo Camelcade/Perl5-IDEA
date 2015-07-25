@@ -73,7 +73,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @param canonicalName	canonical function name package::name
 	 * @return	Collection of found definitions
 	 */
-	public static Collection<PsiPerlSubDefinition> findSubDefinitions(Project project, String canonicalName)
+	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
 		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PsiPerlSubDefinition.class);
@@ -96,7 +96,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @param canonicalName	canonical function name package::name
 	 * @return	Collection of found definitions
 	 */
-	public static Collection<PsiPerlSubDeclaration> findSubDeclarations(Project project, String canonicalName)
+	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
 		return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PsiPerlSubDeclaration.class);
