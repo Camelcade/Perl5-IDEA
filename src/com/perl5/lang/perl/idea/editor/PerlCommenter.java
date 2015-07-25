@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.editor;
 
 import com.intellij.lang.Commenter;
 import org.jetbrains.annotations.Nullable;

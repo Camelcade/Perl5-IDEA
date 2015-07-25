@@ -77,7 +77,7 @@
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
 
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
-
+        <typedHandler implementation="com.perl5.lang.perl.idea.editor.PerlTypedHandler" id="PerlTypedHandler"/>
 
         <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
 
@@ -93,8 +93,8 @@
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlAnnotatorSyntax"/>
         <completion.contributor language="Perl5" implementationClass="com.perl5.lang.perl.idea.completion.PerlCompletionContributor"/>
         <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-        <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
-        <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlBraceMatcher"/>
+        <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+        <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
         <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.utils.PerlASTFactory" order="first"/>
         <psi.referenceContributor implementation="com.perl5.lang.perl.psi.references.PerlReferenceContributor"/>
         <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
@@ -148,7 +148,7 @@
         <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
 
         <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-        <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
+        <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
         <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
 
@@ -159,7 +159,7 @@
         <lang.findUsagesProvider language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlFindUsagesProvider"/>
 
         <lang.foldingBuilder language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-        <lang.commenter language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlCommenter"/>
+        <lang.commenter language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
         <lang.namesValidator language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
 
