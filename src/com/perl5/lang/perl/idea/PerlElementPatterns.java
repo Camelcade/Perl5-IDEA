@@ -37,17 +37,24 @@ public interface PerlElementPatterns
 	public static final PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_TERM_PATTERN = psiElement(PsiPerlRequireExpr.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class).withLanguage(PerlLanguage.INSTANCE);
+
 	public static final PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlGlobVariable> GLOB_PATTERN = psiElement(PerlGlobVariable.class).withLanguage(PerlLanguage.INSTANCE);
+
+	public static final PsiElementPattern.Capture IN_VARIABLE_PATTERN = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(VARIABLE_PATTERN);
+	public static final PsiElementPattern.Capture IN_GLOB_PATTERN = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(GLOB_PATTERN);
+
 	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlHeredocTerminatorElementImpl> HEREDOC_TERMINATOR_PATTERN = psiElement(PerlHeredocTerminatorElementImpl.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(PerlElementTypes.ANNOTATION_UNKNOWN_KEY).withLanguage(PerlLanguage.INSTANCE);
 
-	public static final PsiElementPattern.Capture INSIDE_LEXICAL_DECLARATION = psiElement().inside(PsiPerlVariableDeclarationLexical.class);
-	public static final PsiElementPattern.Capture INSIDE_GLOBAL_DECLARATION = psiElement().inside(PsiPerlVariableDeclarationGlobal.class);
-	public static final PsiElementPattern.Capture INSIDE_LOCAL_DECLARATION = psiElement().inside(PsiPerlVariableDeclarationLocal.class);
+	public static final PsiElementPattern.Capture INSIDE_LEXICAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationLexical.class);
+	public static final PsiElementPattern.Capture INSIDE_GLOBAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationGlobal.class);
+	public static final PsiElementPattern.Capture INSIDE_LOCAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationLocal.class);
 
-	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN = VARIABLE_NAME_PATTERN.inside(VARIABLE_PATTERN.andNot(INSIDE_GLOBAL_DECLARATION).andNot(INSIDE_LEXICAL_DECLARATION));
 
+
+	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN =
+			VARIABLE_NAME_PATTERN.andOr(IN_VARIABLE_PATTERN, IN_GLOB_PATTERN).andNot(INSIDE_GLOBAL_DECLARATION).andNot(INSIDE_LEXICAL_DECLARATION);
 
 }

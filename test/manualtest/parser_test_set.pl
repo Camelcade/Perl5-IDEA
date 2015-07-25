@@ -1,5 +1,4 @@
 
-#@returns Admin::Navigation::NodeOriginal
 
 
 __DATA__

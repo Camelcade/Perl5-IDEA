@@ -16,7 +16,10 @@
 
 package com.perl5.lang.perl.idea.completion;
 
-import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.CompletionType;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.*;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -24,38 +27,37 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.04.2015.
- *
  */
 public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes, PerlElementPatterns
 {
 
 	public PerlCompletionContributor()
-    {
+	{
 
-        extend(
-                CompletionType.BASIC,
-                VARIABLE_COMPLETION_PATTERN,
-                new PerlVariableBuiltInCompletionProvider()
-        );
+		extend(
+				CompletionType.BASIC,
+				VARIABLE_COMPLETION_PATTERN,
+				new PerlVariableBuiltInCompletionProvider()
+		);
 
-        extend(
-                CompletionType.BASIC,
-                VARIABLE_COMPLETION_PATTERN,
-                new PerlVariableGlobalCompletionProvider()
-        );
+//        extend(
+//                CompletionType.BASIC,
+//                VARIABLE_COMPLETION_PATTERN,
+//                new PerlVariableGlobalCompletionProvider()
+//        );
+//
+//        extend(
+//                CompletionType.BASIC,
+//                VARIABLE_COMPLETION_PATTERN,
+//                new PerlVariableLexicalCompletionProvider()
+//        );
 
-        extend(
-                CompletionType.BASIC,
-                VARIABLE_COMPLETION_PATTERN,
-                new PerlVariableLexicalCompletionProvider()
-        );
-
-        // refactored
-        extend(
-                CompletionType.BASIC,
-                SUB_NAME_PATTERN.inside(METHOD_PATTERN),
-                new PerlBuiltInSubCompletionProvider()
-        );
+		// refactored
+		extend(
+				CompletionType.BASIC,
+				SUB_NAME_PATTERN.inside(METHOD_PATTERN),
+				new PerlBuiltInSubCompletionProvider()
+		);
 
 
 //        extend(
@@ -64,41 +66,41 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 //                new PerlSubCompletionProvider()
 //        );
 
-        // refactored, adds packages when it's appropriate
-        extend(
-                CompletionType.BASIC,
-                SUB_NAME_PATTERN.inside(METHOD_PATTERN),
-                new PerlSubPackageCompletionProvider()
-        );
+		// refactored, adds packages when it's appropriate
+		extend(
+				CompletionType.BASIC,
+				SUB_NAME_PATTERN.inside(METHOD_PATTERN),
+				new PerlSubPackageCompletionProvider()
+		);
 
-        // refactored
-        extend(
-                CompletionType.BASIC,
-                NAMESPACE_NAME_PATTERN,
-                new PerlPackageCompletionProvider()
-        );
+		// refactored
+		extend(
+				CompletionType.BASIC,
+				NAMESPACE_NAME_PATTERN,
+				new PerlPackageCompletionProvider()
+		);
 
-        // refactored
-        extend(
-                CompletionType.BASIC,
-                NAMESPACE_NAME_PATTERN,
-                new PerlBuiltInPackageCompletionProvider()
-        );
+		// refactored
+		extend(
+				CompletionType.BASIC,
+				NAMESPACE_NAME_PATTERN,
+				new PerlBuiltInPackageCompletionProvider()
+		);
 
-        // refactored
-        extend(
-                CompletionType.BASIC,
-                STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN),
-                new PerlUseParametersCompletionProvider()
-        );
+		// refactored
+		extend(
+				CompletionType.BASIC,
+				STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN),
+				new PerlUseParametersCompletionProvider()
+		);
 
-        // refactored
-        extend(
-                CompletionType.BASIC,
-                UNKNOWN_ANNOTATION_PATTERN,
-                new PerlAnnotationCompletionProvider()
-        );
-    }
+		// refactored
+		extend(
+				CompletionType.BASIC,
+				UNKNOWN_ANNOTATION_PATTERN,
+				new PerlAnnotationCompletionProvider()
+		);
+	}
 
 	@Override
 	public void fillCompletionVariants(@NotNull CompletionParameters parameters, @NotNull CompletionResultSet result)

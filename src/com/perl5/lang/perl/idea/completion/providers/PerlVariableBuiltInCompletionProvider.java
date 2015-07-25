@@ -34,114 +34,106 @@ import com.perl5.lang.perl.util.PerlHashUtil;
 import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hurricup on 01.06.2015.
  */
 public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<CompletionParameters>
 {
-	public void addCompletions(@NotNull CompletionParameters parameters,
-							   ProcessingContext context,
-							   @NotNull CompletionResultSet resultSet)
+	public static final List<LookupElementBuilder> BUILT_IN_SCALARS = new ArrayList<>();
+	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS = new ArrayList<>();
+	public static final List<LookupElementBuilder> BUILT_IN_HASHES = new ArrayList<>();
+	public static final List<LookupElementBuilder> BUILT_IN_GLOBS = new ArrayList<>();
+
+	// fill scalars
+	static
 	{
-
-		PsiElement variableName = parameters.getPosition();
-		PsiElement variable = variableName.getParent();
-
-		if (variable instanceof PsiPerlScalarVariable)
-			fillScalarCompletions(parameters, context, resultSet);
-		else if (variable instanceof PsiPerlArrayVariable)
-			fillArrayCompletions(parameters, context, resultSet);
-		else if (variable instanceof PsiPerlHashVariable)
-			fillHashCompletions(parameters, context, resultSet);
-		else if (variable instanceof PsiPerlGlobVariable)
-			fillGlobCompletions(parameters, context, resultSet);
-	}
-
-	private void fillScalarCompletions(@NotNull CompletionParameters parameters,
-									   ProcessingContext context,
-									   @NotNull CompletionResultSet resultSet)
-	{
-
 		for (String name : PerlScalarUtil.BUILT_IN)
-		{
-			resultSet.addElement(LookupElementBuilder
+			BUILT_IN_SCALARS.add(LookupElementBuilder
 							.create(name)
 							.withIcon(PerlIcons.SCALAR_GUTTER_ICON)
 							.withBoldness(true)
 			);
-		}
+
 		for (String name : PerlArrayUtil.BUILT_IN)
-		{
-			resultSet.addElement(LookupElementBuilder
+			BUILT_IN_SCALARS.add(LookupElementBuilder
 							.create(name)
 							.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
 							.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-							.withPresentableText(name + "[]")
+							.withTailText("[]")
 							.withBoldness(true)
 			);
-		}
+
 		for (String name : PerlHashUtil.BUILT_IN)
-		{
-			resultSet.addElement(LookupElementBuilder
+			BUILT_IN_SCALARS.add(LookupElementBuilder
 							.create(name)
 							.withIcon(PerlIcons.HASH_GUTTER_ICON)
 							.withBoldness(true)
 							.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-							.withPresentableText(name + "{}")
+							.withTailText("{}")
 			);
-		}
 	}
 
-	private void fillArrayCompletions(@NotNull CompletionParameters parameters,
-									  ProcessingContext context,
-									  @NotNull CompletionResultSet resultSet)
+	// fill arrays
+	static
 	{
-		// built in arrays
 		for (String name : PerlArrayUtil.BUILT_IN)
-		{
-			resultSet.addElement(LookupElementBuilder.create(name).withIcon(PerlIcons.ARRAY_GUTTER_ICON));
-		}
+			BUILT_IN_ARRAYS.add(LookupElementBuilder
+					.create(name)
+					.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
+					.withBoldness(true)
+			);
+
 		for (String name : PerlHashUtil.BUILT_IN)
-		{
-			resultSet.addElement(LookupElementBuilder
+			BUILT_IN_ARRAYS.add(LookupElementBuilder
 							.create(name)
 							.withIcon(PerlIcons.HASH_GUTTER_ICON)
 							.withBoldness(true)
 							.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-							.withPresentableText(name + "{}")
+							.withTailText("{}")
 			);
-		}
-
 	}
 
-	private void fillHashCompletions(@NotNull CompletionParameters parameters,
-									 ProcessingContext context,
-									 @NotNull CompletionResultSet resultSet)
+	// fill hashes
+	static
 	{
-		// built-in hashes
 		for (String name : PerlHashUtil.BUILT_IN)
-		{
-			resultSet.addElement(LookupElementBuilder
+			BUILT_IN_HASHES.add(LookupElementBuilder
 							.create(name)
 							.withIcon(PerlIcons.HASH_GUTTER_ICON)
 							.withBoldness(true)
 			);
-		}
-
 	}
 
-	private void fillGlobCompletions(@NotNull CompletionParameters parameters,
-									 ProcessingContext context,
-									 @NotNull CompletionResultSet resultSet)
+	// fill globs
+	static
 	{
 		// built-in globs
 		for (String name : PerlGlobUtil.BUILT_IN)
-		{
-			resultSet.addElement(LookupElementBuilder
+			BUILT_IN_GLOBS.add(LookupElementBuilder
 							.create(name)
 							.withIcon(PerlIcons.GLOB_GUTTER_ICON)
 							.withBoldness(true)
 			);
-		}
+	}
+
+
+	public void addCompletions(@NotNull CompletionParameters parameters,
+							   ProcessingContext context,
+							   @NotNull CompletionResultSet resultSet)
+	{
+		PsiElement variableName = parameters.getPosition();
+		PsiElement variable = variableName.getParent();
+
+		if (variable instanceof PsiPerlScalarVariable)
+			resultSet.addAllElements(BUILT_IN_SCALARS);
+		else if (variable instanceof PsiPerlArrayVariable)
+			resultSet.addAllElements(BUILT_IN_ARRAYS);
+		else if (variable instanceof PsiPerlHashVariable)
+			resultSet.addAllElements(BUILT_IN_HASHES);
+		else if (variable instanceof PsiPerlGlobVariable)
+			resultSet.addAllElements(BUILT_IN_GLOBS);
 	}
 }
