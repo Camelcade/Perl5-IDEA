@@ -52,6 +52,7 @@
       <li><code>new</code> is implicitly annotated with a package it's invoked for.</li>
       </ul>
       </li>
+      <li>Autocompletion performance for packages, subs and variables has been significally improved.</li>
       </ul>
 
     ]]>
