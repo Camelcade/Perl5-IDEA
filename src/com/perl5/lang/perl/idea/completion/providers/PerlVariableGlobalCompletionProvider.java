@@ -45,7 +45,29 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 		final PsiElement variableNameElement = parameters.getPosition();
 		final PsiElement perlVariable = variableNameElement.getParent();
 
-		if (perlVariable instanceof PerlGlobVariable)
+		if (perlVariable instanceof PsiPerlScalarVariable
+				|| perlVariable instanceof PerlVariable && ((PerlVariable) perlVariable).getScalarSigils() != null
+				|| perlVariable instanceof PerlGlobVariable && ((PerlGlobVariable) perlVariable).getScalarSigils() != null
+				)
+			ApplicationManager.getApplication().runReadAction(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					// global scalars
+					for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
+						resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
+
+					// global arrays
+					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
+						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
+
+					// global hashes
+					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
+						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
+				}
+			});
+		else if (perlVariable instanceof PerlGlobVariable)
 		{
 			ApplicationManager.getApplication().runReadAction(new Runnable()
 			{
@@ -69,38 +91,12 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 						resultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(name));
 				}
 			});
-		} else if (perlVariable instanceof PsiPerlScalarVariable)
+		} else if (perlVariable instanceof PsiPerlArrayVariable)
 			ApplicationManager.getApplication().runReadAction(new Runnable()
 			{
 				@Override
 				public void run()
 				{
-					// global scalars
-					for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
-
-					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
-
-					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
-				}
-			});
-		else if (perlVariable instanceof PsiPerlArrayVariable)
-			ApplicationManager.getApplication().runReadAction(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					boolean isScalarCast = ((PsiPerlArrayVariable) perlVariable).getScalarSigils() != null;
-
-					// global scalars for casts
-					if (isScalarCast)
-						for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
-
 					// global arrays
 					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
 						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
@@ -116,13 +112,6 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				@Override
 				public void run()
 				{
-					boolean isScalarCast = ((PsiPerlArrayIndexVariable) perlVariable).getScalarSigils() != null;
-
-					// global scalars
-					if (isScalarCast)
-						for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
-
 					// global arrays
 					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
 						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
@@ -134,14 +123,6 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				@Override
 				public void run()
 				{
-
-					boolean isScalarCast = ((PsiPerlHashVariable) perlVariable).getScalarSigils() != null;
-
-					// global scalars
-					if (isScalarCast)
-						for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
-
 					// global hashes
 					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
 						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(name));
