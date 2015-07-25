@@ -50,6 +50,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 new PerlVariableLexicalCompletionProvider()
         );
 
+        // refactored
         extend(
                 CompletionType.BASIC,
                 SUB_NAME_PATTERN.inside(METHOD_PATTERN),
@@ -63,7 +64,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 //                new PerlSubCompletionProvider()
 //        );
 
-        // adds packages when it's appropriate
+        // refactored, adds packages when it's appropriate
         extend(
                 CompletionType.BASIC,
                 SUB_NAME_PATTERN.inside(METHOD_PATTERN),
@@ -91,6 +92,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
                 new PerlUseParametersCompletionProvider()
         );
 
+        // refactored
         extend(
                 CompletionType.BASIC,
                 UNKNOWN_ANNOTATION_PATTERN,

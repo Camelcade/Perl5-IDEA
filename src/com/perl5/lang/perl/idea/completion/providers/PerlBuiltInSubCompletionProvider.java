@@ -22,16 +22,31 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlCompletionProviderUtils;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashSet;
 
 /**
  * Created by hurricup on 01.06.2015.
  */
 public class PerlBuiltInSubCompletionProvider extends CompletionProvider<CompletionParameters>
 {
+	public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<>();
+
+	static
+	{
+		for( String subName: PerlSubUtil.BUILT_IN)
+			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
+							.create(subName)
+							.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+							.withBoldness(true)
+			);
+	}
+
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
@@ -40,7 +55,7 @@ public class PerlBuiltInSubCompletionProvider extends CompletionProvider<Complet
 		assert method instanceof PsiPerlMethod;
 
 		if( !((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
-			resultSet.addAllElements(PerlCompletionProviderUtils.BUILT_IN_SUB_LOOKUP_ELEMENTS);
+			resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
 	}
 
 }

@@ -39,8 +39,6 @@ public class PerlAnnotationInsertHandler implements InsertHandler<LookupElement>
 	public void handleInsert(final InsertionContext context, LookupElement item)
 	{
 
-
-
 		final Editor editor = context.getEditor();
 		if( "returns".equals(item.getLookupString()))
 		{

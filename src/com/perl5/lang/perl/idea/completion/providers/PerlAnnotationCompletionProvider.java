@@ -22,9 +22,13 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.util.ProcessingContext;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.PerlAnnotationInsertHandler;
 import com.perl5.lang.perl.lexer.PerlAnnotations;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashSet;
 
 /**
  * Created by hurricup on 03.06.2015.
@@ -32,16 +36,22 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlAnnotationCompletionProvider extends CompletionProvider<CompletionParameters>
 {
+	public static final HashSet<LookupElementBuilder> ANNOTATIONS_LOOKUP_ELEMENTS = new HashSet<>();
+
+	static
+	{
+		for (String annotation : PerlAnnotations.TOKEN_TYPES.keySet())
+			ANNOTATIONS_LOOKUP_ELEMENTS.add( LookupElementBuilder
+					.create(annotation)
+					.withInsertHandler(PerlAnnotationInsertHandler.INSTANCE)
+			);
+	}
+
+
 	@Override
 	protected void addCompletions(@NotNull final CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet resultSet)
 	{
-		for (String annotation : PerlAnnotations.TOKEN_TYPES.keySet())
-		{
-			// todo add an icon here
-			resultSet.addElement(LookupElementBuilder
-					.create(annotation)
-					.withInsertHandler(PerlAnnotationInsertHandler.INSTANCE));
-		}
+		resultSet.addAllElements(ANNOTATIONS_LOOKUP_ELEMENTS);
 	}
 
 

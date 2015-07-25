@@ -1,4 +1,6 @@
 
+#@returns Admin::Navigation::NodeOriginal
+
 
 __DATA__
 % { $args[3] || {} };

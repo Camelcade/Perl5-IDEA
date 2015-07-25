@@ -39,18 +39,6 @@ public class PerlCompletionProviderUtils
 	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_REOPEN_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
 
-	public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<>();
-
-	static
-	{
-		for( String subName: PerlSubUtil.BUILT_IN)
-			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-							.create(subName)
-							.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-							.withBoldness(true)
-			);
-	}
-
 	/**
 	 * Returns package lookup element by package name
 	 *
