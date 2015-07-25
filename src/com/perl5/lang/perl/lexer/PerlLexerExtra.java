@@ -514,7 +514,7 @@ public class PerlLexerExtra
 //		else if (PerlPackageUtil.BUILT_IN.contains(bareword))
 //			return getPackageTokenType();
 //			// indexed packages
-//		else if (myProject != null && !DumbService.isDumb(myProject) && PerlPackageUtil.findNamespaceDefinitions(myProject, bareword).size() > 0)
+//		else if (myProject != null && !DumbService.isDumb(myProject) && PerlPackageUtil.getNamespaceDefinitions(myProject, bareword).size() > 0)
 //			return getPackageTokenType();
 //
 //		return SUB;

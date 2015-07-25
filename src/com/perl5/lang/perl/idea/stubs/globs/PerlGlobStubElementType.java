@@ -62,6 +62,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPe
 	{
 		String name = stub.getPackageName() + "::" + stub.getName();
 		sink.occurrence(PerlGlobsStubIndex.KEY, name);
+		sink.occurrence(PerlGlobsStubIndex.KEY, "*" + stub.getPackageName());
 	}
 
 	@Override

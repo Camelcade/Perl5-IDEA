@@ -71,6 +71,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
 	{
 		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, stub.getCanonicalName());
+		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, "*" + stub.getPackageName());
 	}
 
 	@Override

@@ -184,7 +184,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param packageName canonical package name (without tailing ::)
 	 * @return collection of found definitions
 	 */
-	public static Collection<PsiPerlNamespaceDefinition> findNamespaceDefinitions(Project project, String packageName)
+	public static Collection<PsiPerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName)
 	{
 		assert packageName != null;
 

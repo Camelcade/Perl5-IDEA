@@ -36,7 +36,12 @@ public interface PerlElementPatterns
 	public static final PsiElementPattern.Capture<PsiPerlUseStatement> USE_STATEMENT_PATTERN = psiElement(PsiPerlUseStatement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_TERM_PATTERN = psiElement(PsiPerlRequireExpr.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class).withLanguage(PerlLanguage.INSTANCE);
+
 	public static final PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final PsiElementPattern.Capture IN_OBJECT_CALL_PATTERN = psiElement().withParent(PsiPerlNestedCall.class);
+
+	public static final PsiElementPattern.Capture IN_STATIC_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.andNot(IN_OBJECT_CALL_PATTERN));
+	public static final PsiElementPattern.Capture IN_OBJECT_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));
 
 	public static final PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlGlobVariable> GLOB_PATTERN = psiElement(PerlGlobVariable.class).withLanguage(PerlLanguage.INSTANCE);
@@ -51,7 +56,6 @@ public interface PerlElementPatterns
 	public static final PsiElementPattern.Capture INSIDE_LEXICAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationLexical.class);
 	public static final PsiElementPattern.Capture INSIDE_GLOBAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationGlobal.class);
 	public static final PsiElementPattern.Capture INSIDE_LOCAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationLocal.class);
-
 
 
 	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN =

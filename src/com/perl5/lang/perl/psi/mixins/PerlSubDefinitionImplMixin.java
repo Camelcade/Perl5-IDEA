@@ -29,6 +29,7 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -76,6 +77,35 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 		PerlSubArgument firstArgument = arguments.get(0);
 
 		return firstArgument.getArgumentType() == PerlVariableType.SCALAR && PerlThisNames.NAMES_SET.contains(firstArgument.getArgumentName());
+	}
+
+	@Override
+	public String getSubArgumentsListAsString()
+	{
+		List<PerlSubArgument> subArguments = getSubArgumentsList();
+
+		if( isMethod() )
+			subArguments.remove(0);
+
+		int argumentsNumber = subArguments.size();
+
+		List<String> argumentsList = new ArrayList<>();
+		for (PerlSubArgument argument : subArguments)
+		{
+			// todo we can mark optional subArguments after prototypes implementation
+			argumentsList.add(argument.toStringShort());
+
+			int compiledListSize = argumentsList.size();
+			if (compiledListSize > 4 && argumentsNumber > compiledListSize)
+			{
+				argumentsList.add("...");
+				break;
+			}
+		}
+
+		return argumentsList.size() > 0
+				? "(" + StringUtils.join(argumentsList, ", ") + ")"
+				: "";
 	}
 
 	@Override

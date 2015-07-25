@@ -91,7 +91,7 @@ public class PerlDefaultMro
 
 			if (result.size() == 0)    // not found, need to check parents
 			{
-				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
+				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
 				{
 					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
 
@@ -136,7 +136,7 @@ public class PerlDefaultMro
 
 			if (result.size() == 0)    // not found, need to check parents
 			{
-				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
+				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
 				{
 					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
 
@@ -180,7 +180,7 @@ public class PerlDefaultMro
 
 			if (result.size() == 0)    // not found, need to check parents
 			{
-				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, packageName))
+				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
 				{
 					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
 

@@ -53,7 +53,5 @@ public class PerlAnnotationInsertHandler implements InsertHandler<LookupElement>
 				}
 			});
 		}
-		else
-			EditorModificationUtil.insertStringAtCaret(editor, "\n");
 	}
 }

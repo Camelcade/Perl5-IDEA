@@ -57,16 +57,16 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		// refactored
 		extend(
 				CompletionType.BASIC,
-				SUB_NAME_PATTERN.inside(METHOD_PATTERN),
+				SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN),
 				new PerlSubBuiltInCompletionProvider()
 		);
 
 
-//        extend(
-//                CompletionType.BASIC,
-//                SUB_NAME_PATTERN.inside(METHOD_PATTERN),
-//                new PerlSubCompletionProvider()
-//        );
+        extend(
+                CompletionType.BASIC,
+				SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN),
+                new PerlSubStaticCompletionProvider()
+        );
 
 		// refactored, adds packages when it's appropriate
 		extend(

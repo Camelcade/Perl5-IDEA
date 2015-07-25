@@ -50,7 +50,7 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
     @NotNull
     @Override
     public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean b) {
-        PsiPerlNamespaceDefinition[] nameSpaces = PerlPackageUtil.findNamespaceDefinitions(project, packageName).toArray(new PsiPerlNamespaceDefinition[]{});
+        PsiPerlNamespaceDefinition[] nameSpaces = PerlPackageUtil.getNamespaceDefinitions(project, packageName).toArray(new PsiPerlNamespaceDefinition[]{});
         NavigationItem[] navigationItems = new NavigationItem[nameSpaces.length];
         for (int i = 0; i < nameSpaces.length; i++) {
             PsiPerlNamespaceDefinition nameSpace = nameSpaces[i];

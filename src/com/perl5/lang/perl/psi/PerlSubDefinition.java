@@ -35,4 +35,9 @@ public interface PerlSubDefinition extends PerlSubBase<PerlSubDefinitionStub>, P
 	 */
 	public List<PerlSubArgument> getSubArgumentsList();
 
+	/**
+	 * Returns compiled and parenthesised arguments list
+	 * @return String with parenthesised arguments
+	 */
+	public String getSubArgumentsListAsString();
 }

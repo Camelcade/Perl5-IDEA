@@ -21,10 +21,8 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +70,7 @@ public class PerlNamespaceReference extends PerlReferencePoly
 
 		PsiElement parent = myElement.getParent();
 
-		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.findNamespaceDefinitions(project, canonicalPackageName))
+		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, canonicalPackageName))
 		{
 			if( !parent.isEquivalentTo(namespaceDefinition) )
 				result.add(new PsiElementResolveResult(namespaceDefinition));
