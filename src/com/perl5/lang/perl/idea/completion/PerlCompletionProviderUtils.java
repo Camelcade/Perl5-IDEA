@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.completion.providers;
+package com.perl5.lang.perl.idea.completion;
 
 import com.intellij.codeInsight.completion.CodeCompletionHandlerBase;
 import com.intellij.codeInsight.completion.CompletionType;
@@ -25,8 +25,10 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Editor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -36,6 +38,18 @@ public class PerlCompletionProviderUtils
 {
 	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_REOPEN_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
+
+	public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<>();
+
+	static
+	{
+		for( String subName: PerlSubUtil.BUILT_IN)
+			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
+							.create(subName)
+							.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+							.withBoldness(true)
+			);
+	}
 
 	/**
 	 * Returns package lookup element by package name

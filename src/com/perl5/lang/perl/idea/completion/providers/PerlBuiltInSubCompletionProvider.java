@@ -22,6 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.PerlCompletionProviderUtils;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -39,8 +40,7 @@ public class PerlBuiltInSubCompletionProvider extends CompletionProvider<Complet
 		assert method instanceof PsiPerlMethod;
 
 		if( !((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
-			for (String functionName : PerlSubUtil.BUILT_IN)
-				resultSet.addElement(LookupElementBuilder.create(functionName));
+			resultSet.addAllElements(PerlCompletionProviderUtils.BUILT_IN_SUB_LOOKUP_ELEMENTS);
 	}
 
 }
