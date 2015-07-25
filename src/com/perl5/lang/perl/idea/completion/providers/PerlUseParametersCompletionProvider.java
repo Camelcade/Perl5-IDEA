@@ -23,11 +23,10 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.PerlCompletionProviderUtils;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -48,7 +47,6 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 			@Override
 			public void run()
 			{
-				PsiFile file = parameters.getOriginalFile();
 				PsiElement stringContentElement = parameters.getPosition();
 
 				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
@@ -56,7 +54,7 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 				if (useStatement != null && useStatement.isParentPragma())
 				{
 					for (String packageName : PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
-						resultSet.addElement(PerlCompletionProviderUtils.getPackageLookupElement(packageName));
+						resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(packageName));
 
 					if (useStatement.isParentPragma())
 						resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));

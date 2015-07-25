@@ -33,18 +33,19 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
 	public PerlCompletionContributor()
 	{
-
+		// refactored
 		extend(
 				CompletionType.BASIC,
 				VARIABLE_COMPLETION_PATTERN,
 				new PerlVariableBuiltInCompletionProvider()
 		);
 
-//        extend(
-//                CompletionType.BASIC,
-//                VARIABLE_COMPLETION_PATTERN,
-//                new PerlVariableGlobalCompletionProvider()
-//        );
+		// refactored
+        extend(
+                CompletionType.BASIC,
+                VARIABLE_COMPLETION_PATTERN,
+                new PerlVariableGlobalCompletionProvider()
+        );
 //
 //        extend(
 //                CompletionType.BASIC,
@@ -56,7 +57,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		extend(
 				CompletionType.BASIC,
 				SUB_NAME_PATTERN.inside(METHOD_PATTERN),
-				new PerlBuiltInSubCompletionProvider()
+				new PerlSubBuiltInCompletionProvider()
 		);
 
 
@@ -70,7 +71,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		extend(
 				CompletionType.BASIC,
 				SUB_NAME_PATTERN.inside(METHOD_PATTERN),
-				new PerlSubPackageCompletionProvider()
+				new PerlPackageSubCompletionProvider()
 		);
 
 		// refactored
@@ -84,7 +85,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		extend(
 				CompletionType.BASIC,
 				NAMESPACE_NAME_PATTERN,
-				new PerlBuiltInPackageCompletionProvider()
+				new PerlPackageBuiltInCompletionProvider()
 		);
 
 		// refactored

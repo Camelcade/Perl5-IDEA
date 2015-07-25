@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.completion;
+package com.perl5.lang.perl.idea.completion.util;
 
 import com.intellij.codeInsight.completion.CodeCompletionHandlerBase;
 import com.intellij.codeInsight.completion.CompletionType;
@@ -25,16 +25,14 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Editor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by hurricup on 25.07.2015.
  */
-public class PerlCompletionProviderUtils
+public class PerlPackageCompletionProviderUtil
 {
 	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_REOPEN_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
@@ -45,7 +43,9 @@ public class PerlCompletionProviderUtils
 	 * @param packageName package name in any form
 	 * @return lookup element
 	 */
-	public static @NotNull LookupElementBuilder getPackageLookupElement(String packageName)
+	public static
+	@NotNull
+	LookupElementBuilder getPackageLookupElement(String packageName)
 	{
 		LookupElementBuilder result = PACKAGE_LOOKUP_ELEMENTS.get(packageName);
 
@@ -104,7 +104,7 @@ public class PerlCompletionProviderUtils
 		public void handleInsert(final InsertionContext context, final LookupElement item)
 		{
 			// fixme this is bad check for auto-inserting, i belive
-			if( context.getCompletionChar() != '\u0000')
+			if (context.getCompletionChar() != '\u0000')
 				context.setLaterRunnable(new Runnable()
 				{
 					@Override

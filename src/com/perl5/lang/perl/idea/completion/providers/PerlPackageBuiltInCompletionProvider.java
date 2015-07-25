@@ -22,14 +22,14 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.completion.PerlCompletionProviderUtils;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<CompletionParameters>
+public class PerlPackageBuiltInCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	@Override
 	protected void addCompletions(@NotNull final CompletionParameters parameters, final ProcessingContext context, @NotNull final CompletionResultSet resultSet)
@@ -43,7 +43,7 @@ public class PerlBuiltInPackageCompletionProvider extends CompletionProvider<Com
 				PsiElement element = parameters.getPosition();
 
 				for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
-					resultSet.addElement(PerlCompletionProviderUtils.getPackageLookupElement(packageName));
+					resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(packageName));
 			}
 		});
 	}

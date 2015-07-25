@@ -23,7 +23,6 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.PerlCompletionProviderUtils;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +32,7 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public class PerlBuiltInSubCompletionProvider extends CompletionProvider<CompletionParameters>
+public class PerlSubBuiltInCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<>();
 

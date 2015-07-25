@@ -23,7 +23,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.completion.PerlCompletionProviderUtils;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.07.2015.
  */
-public class PerlSubPackageCompletionProvider extends CompletionProvider<CompletionParameters>
+public class PerlPackageSubCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	@Override
 	protected void addCompletions(
@@ -64,11 +64,11 @@ public class PerlSubPackageCompletionProvider extends CompletionProvider<Complet
 															  {
 																  Project project = parameters.getPosition().getProject();
 
-																  resultSet.addElement(PerlCompletionProviderUtils.getPackageLookupElementWithAutocomplete("SUPER"));
+																  resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete("SUPER"));
 
 																  if (!isObjectMethod)
 																	  for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
-																		  resultSet.addElement(PerlCompletionProviderUtils.getPackageLookupElementWithAutocomplete(packageName));
+																		  resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(packageName));
 															  }
 
 														  }

@@ -22,7 +22,9 @@ package com.perl5.lang.perl.psi.utils;
 public enum PerlVariableType{
 	SCALAR,
 	ARRAY,
-	HASH;
+	HASH,
+	GLOB
+	;
 
 	public char getSigil()
 	{
@@ -32,6 +34,8 @@ public enum PerlVariableType{
 			return '@';
 		else if( this == HASH )
 			return '%';
+		else if( this == GLOB )
+			return '*';
 		return ' ';
 	}
 

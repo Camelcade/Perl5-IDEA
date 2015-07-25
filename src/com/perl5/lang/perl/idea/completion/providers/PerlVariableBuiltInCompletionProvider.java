@@ -24,10 +24,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
-import com.perl5.lang.perl.psi.PsiPerlArrayVariable;
-import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
-import com.perl5.lang.perl.psi.PsiPerlHashVariable;
-import com.perl5.lang.perl.psi.PsiPerlScalarVariable;
+import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -44,6 +42,7 @@ public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<Co
 {
 	public static final List<LookupElementBuilder> BUILT_IN_SCALARS = new ArrayList<>();
 	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS = new ArrayList<>();
+	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS_INDEXES = new ArrayList<>();
 	public static final List<LookupElementBuilder> BUILT_IN_HASHES = new ArrayList<>();
 	public static final List<LookupElementBuilder> BUILT_IN_GLOBS = new ArrayList<>();
 
@@ -51,60 +50,37 @@ public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<Co
 	static
 	{
 		for (String name : PerlScalarUtil.BUILT_IN)
-			BUILT_IN_SCALARS.add(LookupElementBuilder
-							.create(name)
-							.withIcon(PerlIcons.SCALAR_GUTTER_ICON)
-							.withBoldness(true)
-			);
+			BUILT_IN_SCALARS.add(PerlVariableCompletionProviderUtil.getScalarLookupElement(name).withBoldness(true));
 
 		for (String name : PerlArrayUtil.BUILT_IN)
-			BUILT_IN_SCALARS.add(LookupElementBuilder
-							.create(name)
-							.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
-							.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-							.withTailText("[]")
-							.withBoldness(true)
-			);
+			BUILT_IN_SCALARS.add(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name).withBoldness(true));
 
 		for (String name : PerlHashUtil.BUILT_IN)
-			BUILT_IN_SCALARS.add(LookupElementBuilder
-							.create(name)
-							.withIcon(PerlIcons.HASH_GUTTER_ICON)
-							.withBoldness(true)
-							.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-							.withTailText("{}")
-			);
+			BUILT_IN_SCALARS.add(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name).withBoldness(true));
 	}
 
 	// fill arrays
 	static
 	{
 		for (String name : PerlArrayUtil.BUILT_IN)
-			BUILT_IN_ARRAYS.add(LookupElementBuilder
-					.create(name)
-					.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
-					.withBoldness(true)
-			);
+			BUILT_IN_ARRAYS.add(PerlVariableCompletionProviderUtil.getArrayLookupElement(name).withBoldness(true));
 
 		for (String name : PerlHashUtil.BUILT_IN)
-			BUILT_IN_ARRAYS.add(LookupElementBuilder
-							.create(name)
-							.withIcon(PerlIcons.HASH_GUTTER_ICON)
-							.withBoldness(true)
-							.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-							.withTailText("{}")
-			);
+			BUILT_IN_ARRAYS.add(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(name).withBoldness(true));
+	}
+
+	// fill arrays indexes
+	static
+	{
+		for (String name : PerlArrayUtil.BUILT_IN)
+			BUILT_IN_ARRAYS.add(PerlVariableCompletionProviderUtil.getArrayLookupElement(name).withBoldness(true));
 	}
 
 	// fill hashes
 	static
 	{
 		for (String name : PerlHashUtil.BUILT_IN)
-			BUILT_IN_HASHES.add(LookupElementBuilder
-							.create(name)
-							.withIcon(PerlIcons.HASH_GUTTER_ICON)
-							.withBoldness(true)
-			);
+			BUILT_IN_HASHES.add(PerlVariableCompletionProviderUtil.getHashLookupElement(name).withBoldness(true));
 	}
 
 	// fill globs
@@ -112,11 +88,7 @@ public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<Co
 	{
 		// built-in globs
 		for (String name : PerlGlobUtil.BUILT_IN)
-			BUILT_IN_GLOBS.add(LookupElementBuilder
-							.create(name)
-							.withIcon(PerlIcons.GLOB_GUTTER_ICON)
-							.withBoldness(true)
-			);
+			BUILT_IN_GLOBS.add(PerlVariableCompletionProviderUtil.getGlobLookupElement(name).withBoldness(true));
 	}
 
 
@@ -127,10 +99,15 @@ public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<Co
 		PsiElement variableName = parameters.getPosition();
 		PsiElement variable = variableName.getParent();
 
-		if (variable instanceof PsiPerlScalarVariable)
+		if (variable instanceof PsiPerlScalarVariable
+				|| variable instanceof PerlVariable && ((PerlVariable) variable).getScalarSigils() != null  // cast check
+				|| variable instanceof PerlGlobVariable && ((PerlGlobVariable) variable).getScalarSigils() != null  // cast check
+				)
 			resultSet.addAllElements(BUILT_IN_SCALARS);
 		else if (variable instanceof PsiPerlArrayVariable)
 			resultSet.addAllElements(BUILT_IN_ARRAYS);
+		else if (variable instanceof PsiPerlArrayIndexVariable)
+			resultSet.addAllElements(BUILT_IN_ARRAYS_INDEXES);
 		else if (variable instanceof PsiPerlHashVariable)
 			resultSet.addAllElements(BUILT_IN_HASHES);
 		else if (variable instanceof PsiPerlGlobVariable)
