@@ -84,7 +84,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 	{
 		List<PerlSubArgument> subArguments = getSubArgumentsList();
 
-		if( isMethod() )
+		if( isMethod() && subArguments.size() > 0 )
 			subArguments.remove(0);
 
 		int argumentsNumber = subArguments.size();
