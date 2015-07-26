@@ -22,9 +22,9 @@
 
     <description><![CDATA[
     <h1>Camelcade</h1>
-    <p>Camelcade adds Perl5 support for Intellij IDEA and other JetBrains products.</p>
-    <p>Plugin works but still not released (consider it being in open Beta).</p>
-    <p>Even in current beta state, Camelcade is better than NP++ or Sublime. And IDEA itself gives you a lot of useful features.</p>
+    <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
+    <p>The plugin works but is still not released (consider it being in an open Beta).</p>
+    <p>Even in its current beta state, Camelcade is better than Notepad++ or Sublime Text. Moreover IDEA itself gives you a lot of useful features.</p>
     <p>I am using Camelcade at my full-time job as a Perl programmer.</p>
     <h2>More information:</h2>
     <ul>
