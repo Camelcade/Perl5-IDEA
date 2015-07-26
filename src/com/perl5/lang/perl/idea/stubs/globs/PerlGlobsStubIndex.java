@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlGlobsStubIndex extends StringStubIndexExtension<PsiPerlGlobVariable>
 {
-	public static final int VERSION = 0;
+	public static final int VERSION = 1;
 	public static final StubIndexKey<String,PsiPerlGlobVariable> KEY = StubIndexKey.createIndexKey("perl.glob");
 
 	@Override
