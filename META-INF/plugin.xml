@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.35 beta</version>
+    <version>0.36 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -43,7 +43,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.35 beta changes:</p>
+      <p>0.36 beta changes:</p>
       <ul>
       <li>Lexer and parser improvements</li>
       <li>Basic chained calls resolution like <code>Foo::Bar->new()->method()->other_method();</code>:
