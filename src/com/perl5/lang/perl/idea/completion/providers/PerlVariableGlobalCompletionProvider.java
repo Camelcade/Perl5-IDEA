@@ -20,10 +20,12 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -39,11 +41,25 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 
 	public void addCompletions(@NotNull final CompletionParameters parameters,
 							   ProcessingContext context,
-							   @NotNull final CompletionResultSet resultSet)
+							   @NotNull CompletionResultSet resultSet)
 	{
 
 		final PsiElement variableNameElement = parameters.getPosition();
 		final PsiElement perlVariable = variableNameElement.getParent();
+		final Project project = variableNameElement.getProject();
+
+		// fixme refactor smart variables selection by *package
+		if (perlVariable instanceof PerlNamespaceElementContainer
+				&& ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement() != null
+				&& ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement().getCanonicalName() != null
+				)
+			resultSet = resultSet.withPrefixMatcher(
+					((PerlNamespaceElementContainer) perlVariable).getNamespaceElement().getCanonicalName()
+							+ "::"
+							+ resultSet.getPrefixMatcher().getPrefix()
+			);
+
+		final CompletionResultSet finalResultSet = resultSet;
 
 		if (perlVariable instanceof PsiPerlScalarVariable
 				|| perlVariable instanceof PerlVariable && ((PerlVariable) perlVariable).getScalarSigils() != null
@@ -55,16 +71,16 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				public void run()
 				{
 					// global scalars
-					for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
+					for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
 
 					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
+					for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
 
 					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
+					for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
 				}
 			});
 		else if (perlVariable instanceof PerlGlobVariable)
@@ -75,20 +91,20 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				public void run()
 				{
 					// global scalars
-					for (String name : PerlScalarUtil.listDefinedGlobalScalars(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
+					for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
 
 					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
+					for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
 
 					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
+					for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
 
 					// globs
-					for (String name : PerlGlobUtil.getDefinedGlobsNames(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(name));
+					for (String name : PerlGlobUtil.getDefinedGlobsNames(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(name));
 				}
 			});
 		} else if (perlVariable instanceof PsiPerlArrayVariable)
@@ -98,12 +114,12 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				public void run()
 				{
 					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
+					for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
 
 					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(name));
+					for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(name));
 				}
 			});
 		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
@@ -113,8 +129,8 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				public void run()
 				{
 					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
+					for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
 				}
 			});
 		else if (perlVariable instanceof PsiPerlHashVariable)
@@ -124,10 +140,10 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				public void run()
 				{
 					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(variableNameElement.getProject()))
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(name));
-
+					for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(name));
 				}
 			});
 	}
+
 }

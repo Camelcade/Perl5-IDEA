@@ -26,6 +26,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -39,9 +40,13 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 							   ProcessingContext context,
 							   @NotNull final CompletionResultSet resultSet)
 	{
-
 		final PsiElement variableNameElement = parameters.getPosition();
 		final PsiElement perlVariable = variableNameElement.getParent();
+
+		// fixme move this to pattern
+		if (perlVariable instanceof PerlNamespaceElementContainer && ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement() != null)
+			return;
+
 		PsiFile perlFile = variableNameElement.getContainingFile();
 		assert perlFile instanceof PerlFileElement;
 		final Collection<PerlVariable> declaredVariables = ((PerlFileElement) perlFile).getVisibleLexicalVariables(perlVariable);

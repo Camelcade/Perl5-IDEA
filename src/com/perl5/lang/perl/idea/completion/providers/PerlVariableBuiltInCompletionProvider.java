@@ -22,10 +22,9 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -96,21 +95,25 @@ public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<Co
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
 	{
-		PsiElement variableName = parameters.getPosition();
-		PsiElement variable = variableName.getParent();
+		PsiElement variableNameElement = parameters.getPosition();
+		PsiElement perlVariable = variableNameElement.getParent();
 
-		if (variable instanceof PsiPerlScalarVariable
-				|| variable instanceof PerlVariable && ((PerlVariable) variable).getScalarSigils() != null  // cast check
-				|| variable instanceof PerlGlobVariable && ((PerlGlobVariable) variable).getScalarSigils() != null  // cast check
+		// fixme move this to pattern
+		if (perlVariable instanceof PerlNamespaceElementContainer && ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement() != null)
+			return;
+
+		if (perlVariable instanceof PsiPerlScalarVariable
+				|| perlVariable instanceof PerlVariable && ((PerlVariable) perlVariable).getScalarSigils() != null  // cast check
+				|| perlVariable instanceof PerlGlobVariable && ((PerlGlobVariable) perlVariable).getScalarSigils() != null  // cast check
 				)
 			resultSet.addAllElements(BUILT_IN_SCALARS);
-		else if (variable instanceof PsiPerlArrayVariable)
+		else if (perlVariable instanceof PsiPerlArrayVariable)
 			resultSet.addAllElements(BUILT_IN_ARRAYS);
-		else if (variable instanceof PsiPerlArrayIndexVariable)
+		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 			resultSet.addAllElements(BUILT_IN_ARRAYS_INDEXES);
-		else if (variable instanceof PsiPerlHashVariable)
+		else if (perlVariable instanceof PsiPerlHashVariable)
 			resultSet.addAllElements(BUILT_IN_HASHES);
-		else if (variable instanceof PsiPerlGlobVariable)
+		else if (perlVariable instanceof PsiPerlGlobVariable)
 			resultSet.addAllElements(BUILT_IN_GLOBS);
 	}
 }

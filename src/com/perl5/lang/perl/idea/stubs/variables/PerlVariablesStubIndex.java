@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.PerlVariable;
  */
 public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlVariable> implements PerlVariableStubIndexKeys
 {
-	public static final int VERSION = 1;
+	public static final int VERSION = 2;
 
 	@Override
 	public int getVersion()
