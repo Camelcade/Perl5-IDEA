@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.36 beta</version>
+    <version>0.37 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -43,18 +43,8 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.36 beta changes:</p>
+      <p>0.37 beta changes:</p>
       <ul>
-      <li>Lexer and parser improvements</li>
-      <li>Basic chained calls resolution like <code>Foo::Bar->new()->method()->other_method();</code>:
-      <ul>
-      <li>To make this work, mid methods should be <a href="https://github.com/hurricup/Perl5-IDEA/wiki/Subs-annotations">annotated</a> with <code>#@returns</code>.</li>
-      <li><code>new</code> is implicitly annotated with a package it's invoked for.</li>
-      </ul>
-      </li>
-      <li>Autocompletion performance for packages, subs and variables has been significally improved.</li>
-      <li>Implemented auto-completion for object methods.</li>
-      <li>Implemented auto-completion popup after typing <code>-&gt;</code> or <code>::</code>.</li>
       </ul>
 
     ]]>
