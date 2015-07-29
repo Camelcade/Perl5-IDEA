@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.embedded.lexer;
 
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
-
-import java.io.Reader;
 
 /**
  * Created by hurricup on 18.05.2015.

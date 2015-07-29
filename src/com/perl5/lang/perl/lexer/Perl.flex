@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 %unicode
 %public
 
+
 %function advance
 %type IElementType
 
@@ -116,6 +117,7 @@ TRANS_MODIFIERS = [cdsr]
 
 %state LEX_HTML_BLOCK
 %state LEX_MOJO_PERL_LINE, LEX_MOJO_PERL_BLOCK, LEX_MOJO_LINE_COMMENT, LEX_MOJO_BLOCK_COMMENT
+%state LEX_PREPARSED_ITEMS
 %%
 
 // inclusive states

@@ -61,10 +61,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 		int currentState = yystate();
 		int currentMojoState = getMojoState();
 
-		if (preparsedTokensList.size() > 0)
+		if (preparsedTokensList.size() > 0 || bufferEnd == 0 || tokenStart >= bufferEnd)
 			return super.advance();
-		else if (bufferEnd == 0 || tokenStart >= bufferEnd)
-			return null;
 		else
 		{
 			setTokenEnd(bufferEnd);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.embedded.lexer;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
@@ -50,10 +50,8 @@ public class EmbeddedPerlLexer extends PerlLexer
 		int bufferEnd = buffer.length();
 		int currentState = yystate();
 
-		if (preparsedTokensList.size() > 0)
-			return getPreParsedToken();
-		else if( bufferEnd == 0 || tokenStart >= bufferEnd)
-			return null;
+		if (preparsedTokensList.size() > 0 || bufferEnd == 0 || tokenStart >= bufferEnd)
+			return super.advance();
 		else
 		{
 			if (currentState == LEX_HTML_BLOCK)

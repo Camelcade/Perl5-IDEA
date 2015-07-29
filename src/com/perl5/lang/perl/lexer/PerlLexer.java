@@ -22,6 +22,7 @@ package com.perl5.lang.perl.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.PerlParserUitl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -159,6 +160,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		myProject = project;
 	}
 
+
+	@Override
+	public int yystate()
+	{
+		if( preparsedTokensList.size() > 0 )
+			return LEX_PREPARSED_ITEMS;
+		return super.yystate();
+	}
+
 	/**
 	 * Lexers advance method. Parses some thing here, or just invoking generated flex parser
 	 *
@@ -175,7 +185,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		if (preparsedTokensList.size() > 0)
 			return getPreParsedToken();
 		else if( bufferEnd == 0 || tokenStart >= bufferEnd)
-			return null;
+			return super.advance();
 		else
 		{
 			int currentState = yystate();
@@ -532,7 +542,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 
 	/**
-	 * Checking if comment is ended. Implemented for overriding in {@link com.perl5.lang.embedded.EmbeddedPerlLexer#isCommentEnd(int)} }
+	 * Checking if comment is ended. Implemented for overriding in {@link EmbeddedPerlLexer#isCommentEnd(int)} }
 	 *
 	 * @param currentPosition current position to check
 	 * @return checking result

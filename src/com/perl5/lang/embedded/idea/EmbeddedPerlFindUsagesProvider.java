@@ -18,7 +18,7 @@ package com.perl5.lang.embedded.idea;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.perl5.lang.embedded.EmbeddedPerlLexerAdapter;
+import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
