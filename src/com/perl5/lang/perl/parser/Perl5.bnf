@@ -392,7 +392,7 @@ private for_list_expr_content ::= list_expr {recoverWhile=recover_parenthesised}
 
 statement ::= statement_body <<statementSemi>>
 private statement_body ::=
-    use_statement
+    use_statement   // fixme these shold be recovered otherwise, cause it has no statement modifiers
     | no_statement
     | sub_declaration
     | normal_statement
