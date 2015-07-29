@@ -793,6 +793,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		lastUnbraceToken = null;
 		lastUnparenTokenType = null;
 		lastUnparenToken = null;
+		preparsedTokensList.clear();
 //		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
 	}
 

@@ -16,17 +16,16 @@
 
 package com.perl5.lang.perl.lexer;
 
-/**
- * Created by hurricup on 12.04.2015.
- */
-
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 
-public class PerlLexerAdapter extends FlexAdapter
+/**
+ * Created by hurricup on 29.07.2015.
+ */
+public class PerlDebuggingLexerAdapter extends FlexAdapter
 {
-	public PerlLexerAdapter(Project project)
+	public PerlDebuggingLexerAdapter(Project project)
 	{
-		super(new PerlLexer(project));
+		super(new PerlDebuggingLexer(project));
 	}
 }
