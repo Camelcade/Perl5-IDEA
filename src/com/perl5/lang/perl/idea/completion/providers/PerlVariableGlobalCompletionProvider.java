@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
@@ -39,14 +38,14 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 {
 
 
-	public void addCompletions(@NotNull final CompletionParameters parameters,
+	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
 	{
 
-		final PsiElement variableNameElement = parameters.getPosition();
-		final PsiElement perlVariable = variableNameElement.getParent();
-		final Project project = variableNameElement.getProject();
+		PsiElement variableNameElement = parameters.getPosition();
+		PsiElement perlVariable = variableNameElement.getParent();
+		Project project = variableNameElement.getProject();
 
 		// fixme refactor smart variables selection by *package
 		if (perlVariable instanceof PerlNamespaceElementContainer
@@ -59,91 +58,60 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 							+ resultSet.getPrefixMatcher().getPrefix()
 			);
 
-		final CompletionResultSet finalResultSet = resultSet;
 
 		if (perlVariable instanceof PsiPerlScalarVariable
 				|| perlVariable instanceof PerlVariable && ((PerlVariable) perlVariable).getScalarSigils() != null
 				|| perlVariable instanceof PerlGlobVariable && ((PerlGlobVariable) perlVariable).getScalarSigils() != null
 				)
-			ApplicationManager.getApplication().runReadAction(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					// global scalars
-					for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
-
-					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
-
-					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
-				}
-			});
-		else if (perlVariable instanceof PerlGlobVariable)
 		{
-			ApplicationManager.getApplication().runReadAction(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					// global scalars
-					for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
+			// global scalars
+			for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
 
-					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
+			// global arrays
+			for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
 
-					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
+			// global hashes
+			for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
+		} else if (perlVariable instanceof PerlGlobVariable)
+		{
+			// global scalars
+			for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
 
-					// globs
-					for (String name : PerlGlobUtil.getDefinedGlobsNames(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(name));
-				}
-			});
+			// global arrays
+			for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
+
+			// global hashes
+			for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
+
+			// globs
+			for (String name : PerlGlobUtil.getDefinedGlobsNames(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(name));
 		} else if (perlVariable instanceof PsiPerlArrayVariable)
-			ApplicationManager.getApplication().runReadAction(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
+		{
+			// global arrays
+			for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
 
-					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(name));
-				}
-			});
-		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
-			ApplicationManager.getApplication().runReadAction(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					// global arrays
-					for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
-				}
-			});
-		else if (perlVariable instanceof PsiPerlHashVariable)
-			ApplicationManager.getApplication().runReadAction(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					// global hashes
-					for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(name));
-				}
-			});
+			// global hashes
+			for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(name));
+		} else if (perlVariable instanceof PsiPerlArrayIndexVariable)
+		{
+			// global arrays
+			for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
+		} else if (perlVariable instanceof PsiPerlHashVariable)
+		{
+			// global hashes
+			for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(name));
+		}
 	}
 
 }

@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -31,19 +30,12 @@ import org.jetbrains.annotations.NotNull;
 public class PerlPackageCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	@Override
-	public void addCompletions(@NotNull final CompletionParameters parameters,
+	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
-							   @NotNull final CompletionResultSet resultSet)
+							   @NotNull CompletionResultSet resultSet)
 	{
 
-		ApplicationManager.getApplication().runReadAction(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				for( String packageName: PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
-					resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(packageName));
-			}
-		});
+		for (String packageName : PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
+			resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(packageName));
 	}
 }

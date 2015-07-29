@@ -16,23 +16,19 @@
 
 package com.perl5.lang.perl.idea.completion.providers;
 
-import com.intellij.codeInsight.completion.*;
-import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionProvider;
+import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.PerlAnnotationInsertHandler;
 import com.perl5.lang.perl.lexer.PerlAnnotations;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 
 /**
  * Created by hurricup on 03.06.2015.
- *
  */
 public class PerlAnnotationCompletionProvider extends CompletionProvider<CompletionParameters>
 {
@@ -41,15 +37,15 @@ public class PerlAnnotationCompletionProvider extends CompletionProvider<Complet
 	static
 	{
 		for (String annotation : PerlAnnotations.TOKEN_TYPES.keySet())
-			ANNOTATIONS_LOOKUP_ELEMENTS.add( LookupElementBuilder
-					.create(annotation)
-					.withInsertHandler(PerlAnnotationInsertHandler.INSTANCE)
+			ANNOTATIONS_LOOKUP_ELEMENTS.add(LookupElementBuilder
+							.create(annotation)
+							.withInsertHandler(PerlAnnotationInsertHandler.INSTANCE)
 			);
 	}
 
 
 	@Override
-	protected void addCompletions(@NotNull final CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet resultSet)
+	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet resultSet)
 	{
 		resultSet.addAllElements(ANNOTATIONS_LOOKUP_ELEMENTS);
 	}

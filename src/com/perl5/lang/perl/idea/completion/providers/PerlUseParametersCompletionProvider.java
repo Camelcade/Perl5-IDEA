@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.psi.PsiElement;
@@ -42,25 +41,18 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 	@Override
 	protected void addCompletions(@NotNull final CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet resultSet)
 	{
-		ApplicationManager.getApplication().runReadAction(new Runnable()
+		PsiElement stringContentElement = parameters.getPosition();
+
+		PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
+
+		if (useStatement != null && useStatement.isParentPragma())
 		{
-			@Override
-			public void run()
-			{
-				PsiElement stringContentElement = parameters.getPosition();
+			for (String packageName : PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
+				resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(packageName));
 
-				PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
-
-				if (useStatement != null && useStatement.isParentPragma())
-				{
-					for (String packageName : PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
-						resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(packageName));
-
-					if (useStatement.isParentPragma())
-						resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));
-				}
-			}
-		});
+			if (useStatement.isParentPragma())
+				resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));
+		}
 	}
 
 	/**

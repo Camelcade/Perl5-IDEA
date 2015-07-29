@@ -38,7 +38,7 @@ public class PerlSubBuiltInCompletionProvider extends CompletionProvider<Complet
 
 	static
 	{
-		for( String subName: PerlSubUtil.BUILT_IN)
+		for (String subName : PerlSubUtil.BUILT_IN)
 			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
 							.create(subName)
 							.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
@@ -53,7 +53,7 @@ public class PerlSubBuiltInCompletionProvider extends CompletionProvider<Complet
 		PsiElement method = parameters.getPosition().getParent();
 		assert method instanceof PsiPerlMethod;
 
-		if( !((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
+		if (!((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
 			resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
 	}
 

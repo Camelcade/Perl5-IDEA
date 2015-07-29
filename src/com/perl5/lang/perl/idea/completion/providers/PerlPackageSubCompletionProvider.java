@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
@@ -36,16 +35,16 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 {
 	@Override
 	protected void addCompletions(
-			@NotNull final CompletionParameters parameters,
+			@NotNull CompletionParameters parameters,
 			ProcessingContext context,
 			@NotNull CompletionResultSet result)
 	{
-		final PsiElement method = parameters.getPosition().getParent();
+		PsiElement method = parameters.getPosition().getParent();
 		assert method instanceof PsiPerlMethod;
 
 		PerlNamespaceElement explicitNamespace = ((PsiPerlMethod) method).getNamespaceElement();
 
-		final boolean isObjectMethod = ((PsiPerlMethod) method).isObjectMethod();
+		boolean isObjectMethod = ((PsiPerlMethod) method).isObjectMethod();
 
 		String packagePrefix = result.getPrefixMatcher().getPrefix();
 
@@ -55,24 +54,14 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 			result = result.withPrefixMatcher(packagePrefix);
 		}
 
-		final CompletionResultSet resultSet = result;
+		Project project = parameters.getPosition().getProject();
 
-		ApplicationManager.getApplication().runReadAction(new Runnable()
-														  {
-															  @Override
-															  public void run()
-															  {
-																  Project project = parameters.getPosition().getProject();
+		result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete("SUPER"));
 
-																  resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete("SUPER"));
+		if (!isObjectMethod)
+			for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
+				result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(packageName));
 
-																  if (!isObjectMethod)
-																	  for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
-																		  resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(packageName));
-															  }
-
-														  }
-		);
 
 	}
 }
