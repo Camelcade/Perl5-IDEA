@@ -28,11 +28,4 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer, PerlNamedElement
 {
-	/**
-	 * Dumb getter for scalar sigils part, shows if it's pure type or some dereferences like @$$$var
-	 *
-	 * @return scalar sigils if any
-	 */
-	@Nullable
-	PsiElement getScalarSigils();
 }

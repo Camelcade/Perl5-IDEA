@@ -45,25 +45,21 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 
 	private void decorateCastElement(@NotNull final PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key)
 	{
-		int startOffset = element.getTextOffset();
-		int endOffset = startOffset + 1;
+		// annotating sigil
+		PsiElement sigilElement = element.getFirstChild();
+		Annotation annotation = holder.createInfoAnnotation(sigilElement, null);
+		annotation.setTextAttributes(key);
 
-		PsiElement currentElement = element.getFirstChild();
-		while (currentElement != null)
+		// annotating braces
+		PsiElement nextElement = sigilElement.getNextSibling();
+		if( nextElement != null && nextElement.getNode().getElementType() == LEFT_BRACE)
 		{
-			if (currentElement.getNode().getElementType() == LEFT_BRACE)
-			{
-				endOffset = currentElement.getTextOffset() + 1;
-				break;
-			}
-			currentElement = currentElement.getNextSibling();
+			annotation = holder.createInfoAnnotation(nextElement, null);
+			annotation.setTextAttributes(key);
+
+			annotation = holder.createInfoAnnotation(element.getLastChild(), null);
+			annotation.setTextAttributes(key);
 		}
-
-		Annotation annotation = holder.createInfoAnnotation(new TextRange(startOffset, endOffset), null);
-		annotation.setTextAttributes(key);
-
-		annotation = holder.createInfoAnnotation(element.getLastChild(), null);
-		annotation.setTextAttributes(key);
 	}
 
 	private void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)

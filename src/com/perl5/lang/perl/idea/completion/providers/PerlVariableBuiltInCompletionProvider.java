@@ -102,10 +102,7 @@ public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<Co
 		if (perlVariable instanceof PerlNamespaceElementContainer && ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement() != null)
 			return;
 
-		if (perlVariable instanceof PsiPerlScalarVariable
-				|| perlVariable instanceof PerlVariable && ((PerlVariable) perlVariable).getScalarSigils() != null  // cast check
-				|| perlVariable instanceof PerlGlobVariable && ((PerlGlobVariable) perlVariable).getScalarSigils() != null  // cast check
-				)
+		if (perlVariable instanceof PsiPerlScalarVariable)
 			resultSet.addAllElements(BUILT_IN_SCALARS);
 		else if (perlVariable instanceof PsiPerlArrayVariable)
 			resultSet.addAllElements(BUILT_IN_ARRAYS);

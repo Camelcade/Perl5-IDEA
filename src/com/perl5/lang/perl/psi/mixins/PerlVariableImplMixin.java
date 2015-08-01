@@ -32,7 +32,6 @@ import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileElement;
-import com.perl5.lang.perl.psi.impl.PerlScalarSigilsImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -144,33 +143,25 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	public PerlVariableType getActualType()
 	{
 		PsiElement variableContainer = this.getParent();
-		boolean gotScalarSigils = this.getScalarSigils() != null;
 
 		if (this instanceof PsiPerlCodeVariable)
 			return PerlVariableType.SCALAR;
 		else if (
-				!gotScalarSigils
-						&& (
-						variableContainer instanceof PsiPerlScalarHashElement
-								|| variableContainer instanceof PsiPerlArrayHashSlice
-								|| this instanceof PsiPerlHashVariable
-				)
+				variableContainer instanceof PsiPerlScalarHashElement
+						|| variableContainer instanceof PsiPerlArrayHashSlice
+						|| this instanceof PsiPerlHashVariable
 				)
 			return PerlVariableType.HASH;
 		else if (
-				!gotScalarSigils
-						&& (
-						variableContainer instanceof PsiPerlArrayArraySlice
-								|| variableContainer instanceof PsiPerlScalarArrayElement
-								|| this instanceof PsiPerlArrayIndexVariable
-								|| this instanceof PsiPerlArrayVariable
-				)
+				variableContainer instanceof PsiPerlArrayArraySlice
+						|| variableContainer instanceof PsiPerlScalarArrayElement
+						|| this instanceof PsiPerlArrayIndexVariable
+						|| this instanceof PsiPerlArrayVariable
 				)
 			return PerlVariableType.ARRAY;
 		else if (
 				variableContainer instanceof PsiPerlDerefExpr
 						|| this instanceof PsiPerlScalarVariable
-						|| gotScalarSigils
 				)
 			return PerlVariableType.SCALAR;
 		else
@@ -323,13 +314,6 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	{
 		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
 		return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement getScalarSigils()
-	{
-		return findChildByClass(PerlScalarSigilsImpl.class);
 	}
 
 }

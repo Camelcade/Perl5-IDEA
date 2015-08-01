@@ -29,14 +29,6 @@ import java.util.List;
 public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer, PerlNamedElement
 {
 	/**
-	 * Dumb getter for scalar sigils part, shows if it's pure type or some dereferences like @$$$var
-	 *
-	 * @return scalar sigils if any
-	 */
-	@Nullable
-	PsiElement getScalarSigils();
-
-	/**
 	 * Guesses variable type from definition or context
 	 *
 	 * @return Package name if found

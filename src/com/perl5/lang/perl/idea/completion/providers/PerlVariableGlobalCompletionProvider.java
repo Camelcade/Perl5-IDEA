@@ -59,10 +59,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 			);
 
 
-		if (perlVariable instanceof PsiPerlScalarVariable
-				|| perlVariable instanceof PerlVariable && ((PerlVariable) perlVariable).getScalarSigils() != null
-				|| perlVariable instanceof PerlGlobVariable && ((PerlGlobVariable) perlVariable).getScalarSigils() != null
-				)
+		if (perlVariable instanceof PsiPerlScalarVariable)
 		{
 			// global scalars
 			for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))

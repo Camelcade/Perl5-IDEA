@@ -37,7 +37,6 @@ import java.util.List;
 public class PerlGlobVariableNameReference extends PerlReferencePoly
 {
 	PerlGlobVariable myVariable;
-	boolean isScalar;
 
 	public PerlGlobVariableNameReference(@NotNull PsiElement element, TextRange textRange)
 	{
@@ -45,16 +44,12 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 		PsiElement parent = element.getParent();
 		assert parent instanceof PerlGlobVariable;
 		myVariable = (PerlGlobVariable) parent;
-		isScalar = myVariable.getScalarSigils() != null;
 	}
 
 	@NotNull
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		if (isScalar)
-			return multiResolveScalar(incompleteCode);
-
 		List<ResolveResult> result = new ArrayList<>();
 
 		String canonicalName = myVariable.getCanonicalName();
@@ -67,12 +62,6 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 
 
 		return result.toArray(new ResolveResult[result.size()]);
-	}
-
-	// fixme not dry, duplicates from variablename
-	public ResolveResult[] multiResolveScalar(boolean incompleteCode)
-	{
-		return new ResolveResult[0];
 	}
 
 

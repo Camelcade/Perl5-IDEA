@@ -17,12 +17,12 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.361 beta</version>
+    <version>0.37 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
     <h1>Camelcade</h1>
-    <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
+    <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products (Temporary available for IDEA only).</p>
     <p>The plugin works but is still not released (consider it being in an open Beta).</p>
     <p>Even in its current beta state, Camelcade is better than Notepad++ or Sublime Text. Moreover IDEA itself gives you a lot of useful features.</p>
     <p>I am using Camelcade at my full-time job as a Perl programmer.</p>
@@ -43,10 +43,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.361 beta changes:</p>
+      <p>0.37 beta changes:</p>
       <ul>
-      <li>Fixed known lexer bugs.</li>
-      <li>Auto-completion performance improvement.</li>
+      <li>Added IDEA dependency.</li>
       </ul>
 
     ]]>

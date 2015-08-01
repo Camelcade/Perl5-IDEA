@@ -44,8 +44,6 @@ limitations under the License.
     SIGIL_SCALAR="SIGIL_SCALAR"
     SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
 
-    SCALAR_SIGILS="SCALAR_SIGILS"
-
     ANNOTATION_PREFIX="ANNOTATION_PREFIX"
 
     ANNOTATION_UNKNOWN_KEY="ANNOTATION_UNKNOWN"
@@ -560,7 +558,7 @@ private sort_arguments_ ::=
     | callable list_expr
     | list_expr
 
-variable_expr ::= array_index_variable | variable
+variable_expr ::= variable | array_index_variable
 
 namespace_expr ::= <<mergePackageName>>
 parenthesised_expr ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1 name="Parenthesised expression"}
@@ -758,12 +756,16 @@ private variable ::= scalar | array | hash | glob
 private array ::=
     array_array_slice              // array slice
     | array_hash_slice              // hash slice
+    | array_cast_expr
     | array_variable
     | array_constant
-    | array_cast_expr
-    | SIGIL_ARRAY scalar
 
-array_cast_expr ::= SIGIL_ARRAY SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
+array_cast_expr ::= SIGIL_ARRAY
+    {
+        LEFT_BRACE expr RIGHT_BRACE
+        | scalar
+    }
+
 array_array_slice ::= {array_cast_expr | array_variable | string_list} array_slice_index
 array_slice_index ::= LEFT_BRACKET expr RIGHT_BRACKET
 
@@ -771,39 +773,50 @@ array_hash_slice ::= {array_cast_expr | array_variable } hash_slice_index
 hash_slice_index ::= LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
-    hash_variable                    // hash as is
-    | hash_cast_expr
-    | <<parseAmbiguousSigil OPERATOR_MOD>> scalar
-hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD>> SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
+    hash_cast_expr
+    | hash_variable
+
+hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD>>
+    {
+        LEFT_BRACE expr RIGHT_BRACE
+        | scalar
+    }
 
 private scalar ::=
     scalar_array_element
     | scalar_hash_element
+    | scalar_cast_expr
     | scalar_variable
-    | scalar_array_index
     | scalar_constant
     | scalar_anon_array_element
     | undef_expr
-    | scalar_cast_expr
     | scalar_index_cast_expr
-    | SIGIL_SCALAR_INDEX scalar_variable
 
-scalar_cast_expr ::= SIGIL_SCALAR + LEFT_BRACE expr RIGHT_BRACE
-scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
+scalar_cast_expr ::= SIGIL_SCALAR
+    {
+        LEFT_BRACE expr RIGHT_BRACE
+        | scalar
+    }
 
-scalar_array_index ::= SIGIL_SCALAR_INDEX SIGIL_SCALAR * scalar_variable
+scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX
+    {
+        LEFT_BRACE expr RIGHT_BRACE
+        | scalar
+    }
+
 scalar_array_element ::= scalar_variable LEFT_BRACKET expr RIGHT_BRACKET
 scalar_hash_element ::= scalar_variable hash_index
 scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
-    glob_variable
-    | glob_cast_expr
-    | <<parseAmbiguousSigil OPERATOR_MUL>> scalar
+    glob_cast_expr
+    | glob_variable
 
-glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL>> SIGIL_SCALAR * LEFT_BRACE expr RIGHT_BRACE
-
-
+glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL>>
+    {
+        LEFT_BRACE expr RIGHT_BRACE
+        | scalar
+    }
 
 // extended nested element for using in ()
 private nested_element_variation ::=
@@ -831,9 +844,12 @@ private code ::=
     <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> method
     | code_variable
     | code_cast_expr
-    | <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> scalar
 
-code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> SIGIL_SCALAR* LEFT_BRACE expr RIGHT_BRACE
+code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>>
+    {
+        LEFT_BRACE expr RIGHT_BRACE
+        | scalar
+    }
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 

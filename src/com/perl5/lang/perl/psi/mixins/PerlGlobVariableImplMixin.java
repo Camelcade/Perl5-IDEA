@@ -29,7 +29,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
-import com.perl5.lang.perl.psi.impl.PerlScalarSigilsImpl;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -157,12 +156,4 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	{
 		return new PerlItemPresentationSimple(this, "Typeglob assignment");
 	}
-
-	@Nullable
-	@Override
-	public PsiElement getScalarSigils()
-	{
-		return findChildByClass(PerlScalarSigilsImpl.class);
-	}
-
 }

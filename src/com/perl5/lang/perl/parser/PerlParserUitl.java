@@ -712,19 +712,19 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		PsiBuilder.Marker m = null;
 
-		while (currentTokenType == SIGIL_SCALAR                                // sigil is here
-				&& POST_SIGILS_SUFFIXES.contains(nextTokenType)            // next can be variable name
-				)
-		{
-			if (m == null)
-				m = b.mark();
-			b.advanceLexer();
-			currentTokenType = nextTokenType;
-			nextTokenType = b.rawLookup(1);
-		}
-
-		if (m != null)
-			m.collapse(SCALAR_SIGILS);
+//		while (currentTokenType == SIGIL_SCALAR                                // sigil is here
+//				&& POST_SIGILS_SUFFIXES.contains(nextTokenType)            // next can be variable name
+//				)
+//		{
+//			if (m == null)
+//				m = b.mark();
+//			b.advanceLexer();
+//			currentTokenType = nextTokenType;
+//			nextTokenType = b.rawLookup(1);
+//		}
+//
+//		if (m != null)
+//			m.collapse(SCALAR_SIGILS);
 
 		// $package::
 		// $package::var
