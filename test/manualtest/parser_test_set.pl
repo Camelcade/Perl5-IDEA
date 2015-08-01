@@ -1,5 +1,14 @@
-my @args;
+@{[map {$add->[$_-$replaceIDX] || ()} @a]};
 
+__DATA__
+
+[map {$add->[$_-$replaceIDX] || ( )} ($replaceIDX..$lim-1)];
+
+@{[map { $add->[$_-$replaceIDX] || ( ) } ($replaceIDX..$lim-1)]};
+$var || ();
+
+
+my @args;
 % { $args[3] || {} };
 $ { $args[3] || {} };
 * { $args[3] || {} };
@@ -520,6 +529,8 @@ $hash{"something"}->{"something"};
 *{something};
 *something{SCALAR};
 
+my $full_path;
+
 no warnings qw(once);
 local *alias = *$full_path;
 use warnings qw(once);
@@ -529,7 +540,7 @@ use warnings qw(once);
 # have a bug which causes copying formats to end up in
 # the scalar slot.  Thanks to Ben Morrow for spotting this.
 
-my $oldglob;
+my %oldglob;
 
 foreach my $slot (qw( SCALAR ARRAY HASH IO ) ) {
     next unless defined *$oldglob{$slot};
@@ -667,7 +678,7 @@ sub while{}
 *eval;
 
 my $abcd = {
-    --test => something
+    --test => &while
 };
 
 print sprintf "here we go";
@@ -693,9 +704,9 @@ use Opcode 1.01, qw(..);
 
 my $panic;
 
-my $$$_wow;
-my $${some};
-my $$$^a;
+my $_wow;
+my ${some};
+my $^a;
 $_;
 $$_;
 my $ abc;
@@ -888,6 +899,11 @@ format SOMETHING =
 format STDOUT =
 .
 
+package Foo::Bar;
+
+package main;
+
+sub Foo::Bar::somesub{};
 
 ${Foo::Bar::somesub()};
 @{Foo::Bar::somesub()};

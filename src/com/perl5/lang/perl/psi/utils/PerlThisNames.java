@@ -31,5 +31,6 @@ public abstract class PerlThisNames
 		NAMES_SET.add("this");
 		NAMES_SET.add("self");
 		NAMES_SET.add("proto");
+		NAMES_SET.add("class");
 	}
 }

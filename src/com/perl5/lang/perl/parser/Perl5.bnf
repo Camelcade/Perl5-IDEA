@@ -561,8 +561,8 @@ private sort_arguments_ ::=
 variable_expr ::= variable | array_index_variable
 
 namespace_expr ::= <<mergePackageName>>
-parenthesised_expr ::= LEFT_PAREN [parenthesised_expr_content] RIGHT_PAREN {pin=1 name="Parenthesised expression"}
-private parenthesised_expr_content ::= expr {recoverWhile=recover_parenthesised}
+parenthesised_expr ::= LEFT_PAREN parenthesised_expr_content RIGHT_PAREN {pin=1 name="Parenthesised expression"}
+private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + //{pin(".*")=1}
@@ -756,8 +756,8 @@ private variable ::= scalar | array | hash | glob
 private array ::=
     array_array_slice              // array slice
     | array_hash_slice              // hash slice
-    | array_cast_expr
     | array_variable
+    | array_cast_expr
     | array_constant
 
 array_cast_expr ::= SIGIL_ARRAY
@@ -773,8 +773,8 @@ array_hash_slice ::= {array_cast_expr | array_variable } hash_slice_index
 hash_slice_index ::= LEFT_BRACE expr RIGHT_BRACE
 
 private hash ::=
-    hash_cast_expr
-    | hash_variable
+    hash_variable
+    | hash_cast_expr
 
 hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD>>
     {
@@ -785,8 +785,8 @@ hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD>>
 private scalar ::=
     scalar_array_element
     | scalar_hash_element
-    | scalar_cast_expr
     | scalar_variable
+    | scalar_cast_expr
     | scalar_constant
     | scalar_anon_array_element
     | undef_expr
@@ -809,8 +809,8 @@ scalar_hash_element ::= scalar_variable hash_index
 scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
-    glob_cast_expr
-    | glob_variable
+    glob_variable
+    | glob_cast_expr
 
 glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL>>
     {

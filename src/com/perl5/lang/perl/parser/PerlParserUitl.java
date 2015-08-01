@@ -65,41 +65,45 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			RIGHT_BRACKET
 	);
 
+	public static final TokenSet SPECIAL_VARIABLE_NAME = TokenSet.create(
+			QUOTE_DOUBLE,
+			QUOTE_SINGLE,
+			QUOTE_TICK,
+			OPERATOR_REFERENCE,
+			OPERATOR_NOT,
+			OPERATOR_MOD,
+			OPERATOR_BITWISE_AND,
+			LEFT_PAREN,
+			RIGHT_PAREN,
+			OPERATOR_PLUS,
+			SIGIL_SCALAR,
+			OPERATOR_COMMA,
+			OPERATOR_MINUS,
+			OPERATOR_CONCAT,
+			OPERATOR_DIV,
+			SEMICOLON,
+			OPERATOR_LT_NUMERIC,
+			OPERATOR_ASSIGN,
+			OPERATOR_GT_NUMERIC,
+			SIGIL_ARRAY,
+			LEFT_BRACKET,
+			RIGHT_BRACKET,
+			OPERATOR_BITWISE_OR,
+			OPERATOR_BITWISE_NOT,
+			OPERATOR_BITWISE_XOR,
+			QUESTION,
+			COLON,
+			OPERATOR_MUL,
+			NUMBER_SIMPLE
+	);
+
+
 	// Following tokens may be a scalar/glob names
 	// "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
 	public static final TokenSet POSSIBLE_VARIABLE_NAME = TokenSet.orSet(
 			CONVERTABLE_TOKENS,
-			TokenSet.create(
-					QUOTE_DOUBLE,   // suppress in lexer
-					QUOTE_SINGLE,   // suppress in lexer
-					QUOTE_TICK,     // suppress in lexer
-					OPERATOR_REFERENCE,
-					OPERATOR_NOT,
-					OPERATOR_MOD,
-					OPERATOR_BITWISE_AND,
-					LEFT_PAREN,
-					RIGHT_PAREN,
-					OPERATOR_PLUS,
-					SIGIL_SCALAR,
-					OPERATOR_COMMA,
-					OPERATOR_MINUS,
-					OPERATOR_CONCAT,
-					OPERATOR_DIV,
-					SEMICOLON,
-					OPERATOR_LT_NUMERIC,
-					OPERATOR_ASSIGN,
-					OPERATOR_GT_NUMERIC,
-					SIGIL_ARRAY,
-					LEFT_BRACKET,
-					RIGHT_BRACKET,
-					OPERATOR_BITWISE_OR,
-					OPERATOR_BITWISE_NOT,
-					OPERATOR_BITWISE_XOR,
-					QUESTION,
-					COLON,
-					OPERATOR_MUL,
-					NUMBER_SIMPLE
-			));
+			SPECIAL_VARIABLE_NAME
+	);
 
 	public static final TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
 			PACKAGE_TOKENS,
@@ -710,7 +714,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType currentTokenType = b.getTokenType();
 		IElementType nextTokenType = b.rawLookup(1);
 
-		PsiBuilder.Marker m = null;
+		PsiBuilder.Marker m;
 
 //		while (currentTokenType == SIGIL_SCALAR                                // sigil is here
 //				&& POST_SIGILS_SUFFIXES.contains(nextTokenType)            // next can be variable name
@@ -725,6 +729,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 //
 //		if (m != null)
 //			m.collapse(SCALAR_SIGILS);
+
+		// checking for scalar cast
+		if (currentTokenType == SIGIL_SCALAR && POST_SIGILS_SUFFIXES.contains(b.lookAhead(1)))
+			return false;
 
 		// $package::
 		// $package::var

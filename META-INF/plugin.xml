@@ -45,7 +45,9 @@
     <change-notes><![CDATA[
       <p>0.37 beta changes:</p>
       <ul>
-      <li>Added IDEA dependency.</li>
+      <li>Added IDEA dependency to plugin.xml.</li>
+      <li>Improved simple variable cast parsing.</li>
+      <li>Added <code>$class</code> as implicit pointer to <code>this</code>.</li>
       </ul>
 
     ]]>

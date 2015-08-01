@@ -28,8 +28,9 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -52,7 +53,12 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 
 		// annotating braces
 		PsiElement nextElement = sigilElement.getNextSibling();
-		if( nextElement != null && nextElement.getNode().getElementType() == LEFT_BRACE)
+
+		while (nextElement != null &&
+				(nextElement instanceof PsiWhiteSpace || nextElement instanceof PsiComment))
+			nextElement = nextElement.getNextSibling();
+
+		if (nextElement != null && nextElement.getNode().getElementType() == LEFT_BRACE)
 		{
 			annotation = holder.createInfoAnnotation(nextElement, null);
 			annotation.setTextAttributes(key);
