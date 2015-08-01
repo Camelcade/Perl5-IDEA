@@ -17,9 +17,9 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 
 import java.util.List;
 
@@ -29,6 +29,8 @@ import java.util.List;
 public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement
 {
 	String getPackageName();
+
 	List<String> getParentNamespaces();
+
 	public void subtreeChanged();
 }

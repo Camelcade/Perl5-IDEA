@@ -18,13 +18,10 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -46,7 +43,7 @@ public class PerlNamespaceClashesInspection extends PerlInspection
 					return;
 
 				// fixme we should check that this is not in SDK
-				if( namespaceElement.isBuiltin() )
+				if (namespaceElement.isBuiltin())
 					registerProblem(holder, o, "Namespace definition clashes with built-in namespace");
 
 			}

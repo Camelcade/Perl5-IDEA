@@ -212,7 +212,7 @@ public class PerlDefaultMro
 			for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
 				if (!methods.containsKey(subDefinition.getSubName()))
 					methods.put(subDefinition.getSubName(), subDefinition);
-			for (PerlSubDeclaration subDeclaration: PerlSubUtil.getSubDeclarations(project, "*" + packageName))
+			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
 				if (!methods.containsKey(subDeclaration.getSubName()))
 					methods.put(subDeclaration.getSubName(), subDeclaration);
 			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
@@ -247,7 +247,7 @@ public class PerlDefaultMro
 			{
 				Collection<String> parentPackageNames = namespaceDefinition.getParentNamespaces();
 
-				if( parentPackageNames.size() == 0 && !recursionMap.contains("UNIVERSAL"))
+				if (parentPackageNames.size() == 0 && !recursionMap.contains("UNIVERSAL"))
 					parentPackageNames.add("UNIVERSAL");
 
 				for (String parentPackageName : parentPackageNames)

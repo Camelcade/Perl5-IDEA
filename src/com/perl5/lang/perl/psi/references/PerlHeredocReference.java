@@ -29,7 +29,8 @@ public class PerlHeredocReference extends PerlReference
 {
 	private String marker;
 
-	public PerlHeredocReference(@NotNull PsiElement element, TextRange textRange) {
+	public PerlHeredocReference(@NotNull PsiElement element, TextRange textRange)
+	{
 		super(element, textRange);
 		assert element instanceof PsiNamedElement;
 		marker = ((PsiNamedElement) element).getName();
@@ -47,17 +48,16 @@ public class PerlHeredocReference extends PerlReference
 	public PsiElement resolve()
 	{
 		PsiElement result = null;
-		for( PsiPerlHeredocOpener opener: PsiTreeUtil.findChildrenOfType(myElement.getContainingFile(), PsiPerlHeredocOpener.class))
+		for (PsiPerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(myElement.getContainingFile(), PsiPerlHeredocOpener.class))
 		{
 			PerlStringContentElementImpl stringContent = PsiTreeUtil.findChildOfType(opener, PerlStringContentElementImpl.class);
 
-			if( stringContent != null && marker.equals(stringContent.getName()))
+			if (stringContent != null && marker.equals(stringContent.getName()))
 			{
 				if (opener.getTextOffset() < myElement.getTextOffset())
 				{
 					result = stringContent;
-				}
-				else
+				} else
 					break;
 			}
 		}

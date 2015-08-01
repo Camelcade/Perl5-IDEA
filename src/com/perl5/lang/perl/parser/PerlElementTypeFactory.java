@@ -25,27 +25,29 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlElementTypeFactory
 {
-	private PerlElementTypeFactory(){}
+	private PerlElementTypeFactory()
+	{
+	}
 
 	public static IElementType factory(@NotNull String name)
 	{
-		if( name.equals("SUB_DEFINITION"))
+		if (name.equals("SUB_DEFINITION"))
 			return PerlStubElementTypes.SUB_DEFINITION;
-		else if( name.equals("SUB_DECLARATION"))
+		else if (name.equals("SUB_DECLARATION"))
 			return PerlStubElementTypes.SUB_DECLARATION;
-		else if( name.equals("GLOB_VARIABLE"))
+		else if (name.equals("GLOB_VARIABLE"))
 			return PerlStubElementTypes.PERL_GLOB;
-		else if( name.equals("NAMESPACE_DEFINITION"))
+		else if (name.equals("NAMESPACE_DEFINITION"))
 			return PerlStubElementTypes.PERL_NAMESPACE;
-		else if( name.equals("SCALAR_VARIABLE"))
+		else if (name.equals("SCALAR_VARIABLE"))
 			return PerlStubElementTypes.PERL_SCALAR;
-		else if( name.equals("ARRAY_VARIABLE"))
+		else if (name.equals("ARRAY_VARIABLE"))
 			return PerlStubElementTypes.PERL_ARRAY;
-		else if( name.equals("ARRAY_INDEX_VARIABLE"))
+		else if (name.equals("ARRAY_INDEX_VARIABLE"))
 			return PerlStubElementTypes.PERL_ARRAY_INDEX;
-		else if( name.equals("HASH_VARIABLE"))
+		else if (name.equals("HASH_VARIABLE"))
 			return PerlStubElementTypes.PERL_HASH;
 
-		throw new RuntimeException("Unknown element type "+name);
+		throw new RuntimeException("Unknown element type " + name);
 	}
 }

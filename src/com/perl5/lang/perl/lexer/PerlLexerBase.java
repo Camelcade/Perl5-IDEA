@@ -25,6 +25,7 @@ import com.intellij.psi.tree.IElementType;
 public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 {
 	public abstract void startCustomBlock(int newState);
+
 	public abstract void endCustomBlock();
 
 	// @todo should be parseString
@@ -35,18 +36,25 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType getIdentifierToken();
 
 	public abstract IElementType checkOperatorXSticked();
+
 	public abstract IElementType parseVersion();
+
 	public abstract IElementType parseNumber();
+
 	public abstract IElementType parseOperatorDereference();
 
 	public abstract IElementType parseCappedVariableName();
+
 	public abstract IElementType parsePackage();
+
 	public abstract IElementType parsePackageCanonical();
 
 	public abstract IElementType parseRegex();
+
 	public abstract IElementType getPreParsedToken();
 
 	public abstract void popState();
+
 	public abstract void pushState();
 
 	public abstract IElementType processSemicolon();
@@ -58,10 +66,13 @@ public interface PerlLexerBase extends FlexLexer, PerlElementTypes
 	public abstract IElementType processOpenerWhiteSpace();
 
 	public abstract IElementType processTransQuote();
+
 	public abstract IElementType processTransChar();
+
 	public abstract IElementType processTransCloser();
 
 	public abstract IElementType processQuoteLikeListQuote();
+
 	public abstract IElementType processQuoteLikeQuote();
 
 }

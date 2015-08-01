@@ -40,7 +40,8 @@ public class EmbeddedPerlFileType extends LanguageFileType
 	public static final EmbeddedPerlFileType INSTANCE = new EmbeddedPerlFileType();
 	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
-	public EmbeddedPerlFileType(){
+	public EmbeddedPerlFileType()
+	{
 
 		super(EmbeddedPerlLanguage.INSTANCE);
 		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
@@ -48,32 +49,36 @@ public class EmbeddedPerlFileType extends LanguageFileType
 			@Override
 			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
 			{
-				return new EmbeddedPerlHighlighter(project,virtualFile,editorColorsScheme);
+				return new EmbeddedPerlHighlighter(project, virtualFile, editorColorsScheme);
 			}
 		});
 	}
 
 	@NotNull
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return "Embedded perl";
 	}
 
 	@NotNull
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
 		return "Embedded perl file";
 	}
 
 	@NotNull
 	@Override
-	public String getDefaultExtension() {
+	public String getDefaultExtension()
+	{
 		return "thtml";
 	}
 
 	@Nullable
 	@Override
-	public Icon getIcon() {
+	public Icon getIcon()
+	{
 		return PerlIcons.EMBEDDED_PERL_FILE;
 	}
 

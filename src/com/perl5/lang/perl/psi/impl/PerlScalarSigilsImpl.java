@@ -22,8 +22,10 @@ import com.intellij.psi.tree.IElementType;
 /**
  * Created by evstigneev on 10.07.2015.
  */
-public class PerlScalarSigilsImpl extends LeafPsiElement {
-    public PerlScalarSigilsImpl(IElementType type, CharSequence text) {
-        super(type, text);
-    }
+public class PerlScalarSigilsImpl extends LeafPsiElement
+{
+	public PerlScalarSigilsImpl(IElementType type, CharSequence text)
+	{
+		super(type, text);
+	}
 }

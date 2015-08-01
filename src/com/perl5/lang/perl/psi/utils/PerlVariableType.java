@@ -19,22 +19,22 @@ package com.perl5.lang.perl.psi.utils;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public enum PerlVariableType{
+public enum PerlVariableType
+{
 	SCALAR,
 	ARRAY,
 	HASH,
-	GLOB
-	;
+	GLOB;
 
 	public char getSigil()
 	{
-		if( this == SCALAR)
+		if (this == SCALAR)
 			return '$';
-		else if( this == ARRAY )
+		else if (this == ARRAY)
 			return '@';
-		else if( this == HASH )
+		else if (this == HASH)
 			return '%';
-		else if( this == GLOB )
+		else if (this == GLOB)
 			return '*';
 		return ' ';
 	}

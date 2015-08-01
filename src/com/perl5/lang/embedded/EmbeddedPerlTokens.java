@@ -16,11 +16,9 @@
 
 package com.perl5.lang.embedded;
 
-import com.intellij.lang.StdLanguages;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlElementType;
-import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**

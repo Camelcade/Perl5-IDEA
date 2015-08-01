@@ -28,9 +28,8 @@ import java.io.IOException;
 
 /**
  * Created by hurricup on 25.05.2015.
- *
  */
-public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPerlGlobVariable>
+public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiPerlGlobVariable>
 {
 
 	public PerlGlobStubElementType(String name)
@@ -41,7 +40,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPe
 	@Override
 	public PsiPerlGlobVariable createPsi(@NotNull PerlGlobStub stub)
 	{
-		return new PsiPerlGlobVariableImpl(stub,this);
+		return new PsiPerlGlobVariableImpl(stub, this);
 	}
 
 	@Override
@@ -54,7 +53,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPe
 	@Override
 	public String getExternalId()
 	{
-		return "perl."+super.toString();
+		return "perl." + super.toString();
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub,PsiPe
 	@Override
 	public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlGlobStubImpl(parentStub,dataStream.readName().getString(),dataStream.readName().getString());
+		return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString());
 	}
 
 	@Override

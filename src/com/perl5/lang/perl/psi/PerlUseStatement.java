@@ -27,10 +27,16 @@ import java.util.List;
 public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContainer
 {
 	public String getPackageName();
+
 	public boolean isParentPragma();
+
 	public boolean isPragma();
+
 	public boolean isVersion();
+
 	public boolean isPragmaOrVersion();
+
 	public List<String> getStringParameters();
+
 	public PsiElement getVersionElement();
 }

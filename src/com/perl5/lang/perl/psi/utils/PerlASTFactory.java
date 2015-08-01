@@ -30,11 +30,11 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	private static final CharTable WHITESPACES = new CharTableImpl();
 
 	@Override
-	public LeafElement createComment( @NotNull IElementType type, CharSequence text)
+	public LeafElement createComment(@NotNull IElementType type, CharSequence text)
 	{
-		if( type == HEREDOC_END )
+		if (type == HEREDOC_END)
 			return new PerlHeredocTerminatorElementImpl(type, text);
-		else if( type == HEREDOC )
+		else if (type == HEREDOC)
 			return new PerlHeredocElementImpl(type, text);
 		else
 			return super.createComment(type, text);
@@ -44,13 +44,13 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	@Override
 	public LeafElement createLeaf(@NotNull IElementType type, CharSequence text)
 	{
-		if( type == STRING_CONTENT )
+		if (type == STRING_CONTENT)
 			return new PerlStringContentElementImpl(type, text);
-		else if( type == VARIABLE_NAME )
+		else if (type == VARIABLE_NAME)
 			return new PerlVariableNameElementImpl(type, text);
-		else if( type == SUB )
+		else if (type == SUB)
 			return new PerlSubNameElementImpl(type, text);
-		else if( type == PACKAGE  )
+		else if (type == PACKAGE)
 			return new PerlNamespaceElementImpl(type, text);
 		else if (type == SCALAR_SIGILS)
 			return new PerlScalarSigilsImpl(type, text);

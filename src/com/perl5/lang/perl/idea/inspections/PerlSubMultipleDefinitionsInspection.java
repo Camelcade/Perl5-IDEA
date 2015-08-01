@@ -18,7 +18,10 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -41,9 +44,9 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				List<PerlGlobVariable> relatedGlobs = o.getRelatedGlobs();
 				boolean isDefinition = o.getParent() instanceof PerlSubDefinition;
 
-				if (definitionList.size() > 1 || definitionList.size() > 0 && isDefinition )
+				if (definitionList.size() > 1 || definitionList.size() > 0 && isDefinition)
 					registerProblem(holder, o, "Multiple sub definitions found");
-				else if( relatedGlobs.size() > 0 && ( definitionList.size() > 0 || isDefinition ))
+				else if (relatedGlobs.size() > 0 && (definitionList.size() > 0 || isDefinition))
 					registerProblem(holder, o, "Sub definition and typeglob aliasing found");
 			}
 		};

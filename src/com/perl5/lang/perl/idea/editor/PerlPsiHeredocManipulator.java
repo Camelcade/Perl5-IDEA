@@ -40,7 +40,7 @@ public class PerlPsiHeredocManipulator extends PsiCommentManipulator
 		List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(psiComment.getProject(), '\'', "TEXT" + Math.random(), newText);
 		assert heredocElements.size() == 4;
 
-		return (PsiComment)psiComment.replace(heredocElements.get(1));
+		return (PsiComment) psiComment.replace(heredocElements.get(1));
 	}
 
 }

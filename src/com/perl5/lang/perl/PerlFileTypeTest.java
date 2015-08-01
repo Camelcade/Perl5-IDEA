@@ -33,25 +33,29 @@ public class PerlFileTypeTest extends PerlFileType
 
 	@NotNull
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return "Perl5 test";
 	}
 
 	@NotNull
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
 		return "Perl5 test";
 	}
 
 	@NotNull
 	@Override
-	public String getDefaultExtension() {
+	public String getDefaultExtension()
+	{
 		return "t";
 	}
 
 	@Nullable
 	@Override
-	public Icon getIcon() {
+	public Icon getIcon()
+	{
 		return PerlIcons.SCRIPT_FILE;
 	}
 

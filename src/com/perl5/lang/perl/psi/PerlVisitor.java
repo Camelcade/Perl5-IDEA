@@ -31,22 +31,27 @@ public class PerlVisitor extends PsiPerlVisitor
 	{
 		visitPsiElement(o);
 	}
+
 	public void visitVariableNameElement(@NotNull PerlVariableNameElement o)
 	{
 		visitPsiElement(o);
 	}
+
 	public void visitSubNameElement(@NotNull PerlSubNameElement o)
 	{
 		visitPsiElement(o);
 	}
+
 	public void visitStringContentElement(@NotNull PerlStringContentElementImpl o)
 	{
 		visitPsiElement(o);
 	}
+
 	public void visitHeredocTeminator(@NotNull PerlHeredocTerminatorElementImpl o)
 	{
 		visitComment(o);
 	}
+
 	public void visitHeredocElement(@NotNull PerlHeredocElementImpl o)
 	{
 		visitComment(o);

@@ -26,18 +26,21 @@ import org.jetbrains.annotations.NotNull;
  */
 public class EmbeddedPerlFileElement extends PerlFileElement
 {
-	public EmbeddedPerlFileElement(@NotNull FileViewProvider viewProvider) {
+	public EmbeddedPerlFileElement(@NotNull FileViewProvider viewProvider)
+	{
 		super(viewProvider, EmbeddedPerlLanguage.INSTANCE);
 	}
 
 	@NotNull
 	@Override
-	public FileType getFileType() {
+	public FileType getFileType()
+	{
 		return EmbeddedPerlFileType.INSTANCE;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "Embedded Perl file";
 	}
 

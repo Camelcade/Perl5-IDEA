@@ -28,7 +28,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.parser.PodParser;
@@ -48,45 +47,54 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 
 	@NotNull
 	@Override
-	public Lexer createLexer(Project project) {
+	public Lexer createLexer(Project project)
+	{
 		return new PodLexerAdapter(project);
 	}
 
 	@NotNull
-	public TokenSet getWhitespaceTokens() {
+	public TokenSet getWhitespaceTokens()
+	{
 		return WHITE_SPACES;
 	}
 
 	@NotNull
-	public TokenSet getCommentTokens() {
+	public TokenSet getCommentTokens()
+	{
 		return TokenSet.EMPTY;
 	}
 
 	@NotNull
-	public TokenSet getStringLiteralElements() {
+	public TokenSet getStringLiteralElements()
+	{
 		return TokenSet.EMPTY;
 	}
 
 	@NotNull
-	public PsiParser createParser(final Project project) {
+	public PsiParser createParser(final Project project)
+	{
 		return new PodParser();
 	}
 
 	@Override
-	public IFileElementType getFileNodeType() {
+	public IFileElementType getFileNodeType()
+	{
 		return FILE;
 	}
 
-	public PsiFile createFile(FileViewProvider viewProvider) {
+	public PsiFile createFile(FileViewProvider viewProvider)
+	{
 		return new PsiFilePod(viewProvider);
 	}
 
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
+	{
 		return SpaceRequirements.MAY;
 	}
 
 	@NotNull
-	public PsiElement createElement(ASTNode node) {
+	public PsiElement createElement(ASTNode node)
+	{
 		return PodElementTypes.Factory.createElement(node);
 	}
 }

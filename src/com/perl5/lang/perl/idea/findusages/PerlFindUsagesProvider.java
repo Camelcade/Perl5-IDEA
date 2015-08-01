@@ -27,7 +27,6 @@ import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

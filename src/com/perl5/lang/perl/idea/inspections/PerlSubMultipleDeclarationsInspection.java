@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class PerlSubMultipleDeclarationsInspection extends PerlInspection
 			public void visitSubNameElement(@NotNull PerlSubNameElement o)
 			{
 				List<PerlSubDeclaration> subDeclarations = o.getSubDeclarations();
-				if ( subDeclarations.size() > 1 || subDeclarations.size()> 0 && o.getParent() instanceof PerlSubDeclaration)
+				if (subDeclarations.size() > 1 || subDeclarations.size() > 0 && o.getParent() instanceof PerlSubDeclaration)
 					registerProblem(holder, o, "Multiple sub declarations found");
 			}
 		};

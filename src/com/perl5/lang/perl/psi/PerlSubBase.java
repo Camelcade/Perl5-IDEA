@@ -62,6 +62,7 @@ public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiEleme
 
 	/**
 	 * Returns list of sub annotations elements
+	 *
 	 * @return list
 	 */
 	@NotNull

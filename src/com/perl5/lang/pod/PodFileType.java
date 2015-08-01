@@ -32,31 +32,36 @@ public class PodFileType extends LanguageFileType
 	public static final PodFileType INSTANCE = new PodFileType();
 	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
-	private PodFileType() {
+	private PodFileType()
+	{
 		super(PodLanguage.INSTANCE);
 	}
 
 	@NotNull
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return "Plain Old Documentation";
 	}
 
 	@NotNull
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
 		return "Perl5 Documentation File";
 	}
 
 	@NotNull
 	@Override
-	public String getDefaultExtension() {
+	public String getDefaultExtension()
+	{
 		return "pod";
 	}
 
 	@Nullable
 	@Override
-	public Icon getIcon() {
+	public Icon getIcon()
+	{
 		return PerlIcons.POD_FILE;
 	}
 }

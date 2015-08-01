@@ -47,259 +47,289 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable {
-    public PerlVariableImplMixin(PerlVariableStub stub, IStubElementType nodeType) {
-        super(stub, nodeType);
-    }
+public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlElementTypes, PerlVariable
+{
+	public PerlVariableImplMixin(PerlVariableStub stub, IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
 
-    public PerlVariableImplMixin(ASTNode node) {
-        super(node);
-    }
+	public PerlVariableImplMixin(ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public PerlLexicalScope getLexicalScope() {
-        return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
-    }
+	@Override
+	public PerlLexicalScope getLexicalScope()
+	{
+		return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
+	}
 
-    @Override
-    public String getPackageName() {
-        PerlVariableStub stub = getStub();
-        if (stub != null)
-            return stub.getPackageName();
+	@Override
+	public String getPackageName()
+	{
+		PerlVariableStub stub = getStub();
+		if (stub != null)
+			return stub.getPackageName();
 
-        String namespace = getExplicitPackageName();
+		String namespace = getExplicitPackageName();
 
-        if (namespace == null)
-            namespace = getContextPackageName();
+		if (namespace == null)
+			namespace = getContextPackageName();
 
-        return namespace;
-    }
+		return namespace;
+	}
 
-    @Override
-    public String getContextPackageName() {
-        return PerlPackageUtil.getContextPackageName(this);
-    }
+	@Override
+	public String getContextPackageName()
+	{
+		return PerlPackageUtil.getContextPackageName(this);
+	}
 
-    @Override
-    public String getExplicitPackageName() {
-        PerlNamespaceElement namespaceElement = getNamespaceElement();
-        return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
-    }
+	@Override
+	public String getExplicitPackageName()
+	{
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
+	}
 
-    @Override
-    public PerlNamespaceElement getNamespaceElement() {
-        return findChildByClass(PerlNamespaceElement.class);
-    }
+	@Override
+	public PerlNamespaceElement getNamespaceElement()
+	{
+		return findChildByClass(PerlNamespaceElement.class);
+	}
 
-    @Nullable
-    @Override
-    public PerlVariableNameElement getVariableNameElement() {
-        return findChildByClass(PerlVariableNameElement.class);
-    }
+	@Nullable
+	@Override
+	public PerlVariableNameElement getVariableNameElement()
+	{
+		return findChildByClass(PerlVariableNameElement.class);
+	}
 
-    @Nullable
-    @Override
-    public String guessVariableType() {
-        PerlVariableNameElement variableNameElement = getVariableNameElement();
+	@Nullable
+	@Override
+	public String guessVariableType()
+	{
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
 
-        if (variableNameElement != null) {
-            String variableName = variableNameElement.getName();
+		if (variableNameElement != null)
+		{
+			String variableName = variableNameElement.getName();
 
-            if (this instanceof PsiPerlScalarVariable && PerlThisNames.NAMES_SET.contains(variableName))
-                return PerlPackageUtil.getContextPackageName(this);
+			if (this instanceof PsiPerlScalarVariable && PerlThisNames.NAMES_SET.contains(variableName))
+				return PerlPackageUtil.getContextPackageName(this);
 
-            // find lexicaly visible declaration and check type
-            PerlVariable declaredVariable = getLexicalDeclaration();
-            if (declaredVariable != null) {
-                PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declaredVariable, PerlVariableDeclaration.class);
-                if (declaration != null) {
-                    PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
-                    if (declarationNamespaceElelement != null)
-                        return declarationNamespaceElelement.getName();
-                }
-            }
+			// find lexicaly visible declaration and check type
+			PerlVariable declaredVariable = getLexicalDeclaration();
+			if (declaredVariable != null)
+			{
+				PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declaredVariable, PerlVariableDeclaration.class);
+				if (declaration != null)
+				{
+					PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
+					if (declarationNamespaceElelement != null)
+						return declarationNamespaceElelement.getName();
+				}
+			}
 
-            // todo check global declarations
-            // todo check assignment expression with this variable in the left and guess from there (constructors, other vars that can have known type
-        }
+			// todo check global declarations
+			// todo check assignment expression with this variable in the left and guess from there (constructors, other vars that can have known type
+		}
 
-        return null;
-    }
-
-
-    @Override
-    public PerlVariableType getActualType() {
-        PsiElement variableContainer = this.getParent();
-        boolean gotScalarSigils = this.getScalarSigils() != null;
-
-        if( this instanceof PsiPerlCodeVariable )
-            return PerlVariableType.SCALAR;
-        else if (
-                !gotScalarSigils
-                        && (
-                        variableContainer instanceof PsiPerlScalarHashElement
-                                || variableContainer instanceof PsiPerlArrayHashSlice
-                                || this instanceof PsiPerlHashVariable
-                )
-                )
-            return PerlVariableType.HASH;
-        else if (
-                !gotScalarSigils
-                        && (
-                        variableContainer instanceof PsiPerlArrayArraySlice
-                                || variableContainer instanceof PsiPerlScalarArrayElement
-                                || this instanceof PsiPerlArrayIndexVariable
-                                || this instanceof PsiPerlArrayVariable
-                )
-                )
-            return PerlVariableType.ARRAY;
-        else if (
-                variableContainer instanceof PsiPerlDerefExpr
-                        || this instanceof PsiPerlScalarVariable
-                        || gotScalarSigils
-                )
-            return PerlVariableType.SCALAR;
-        else
-            throw new RuntimeException("Can't be: could not detect actual type of myVariable: " + getText());
-
-    }
+		return null;
+	}
 
 
-    @Override
-    public boolean isBuiltIn() {
-        if (getNamespaceElement() != null)
-            return false;
+	@Override
+	public PerlVariableType getActualType()
+	{
+		PsiElement variableContainer = this.getParent();
+		boolean gotScalarSigils = this.getScalarSigils() != null;
 
-        if (getVariableNameElement() == null)
-            return false;
+		if (this instanceof PsiPerlCodeVariable)
+			return PerlVariableType.SCALAR;
+		else if (
+				!gotScalarSigils
+						&& (
+						variableContainer instanceof PsiPerlScalarHashElement
+								|| variableContainer instanceof PsiPerlArrayHashSlice
+								|| this instanceof PsiPerlHashVariable
+				)
+				)
+			return PerlVariableType.HASH;
+		else if (
+				!gotScalarSigils
+						&& (
+						variableContainer instanceof PsiPerlArrayArraySlice
+								|| variableContainer instanceof PsiPerlScalarArrayElement
+								|| this instanceof PsiPerlArrayIndexVariable
+								|| this instanceof PsiPerlArrayVariable
+				)
+				)
+			return PerlVariableType.ARRAY;
+		else if (
+				variableContainer instanceof PsiPerlDerefExpr
+						|| this instanceof PsiPerlScalarVariable
+						|| gotScalarSigils
+				)
+			return PerlVariableType.SCALAR;
+		else
+			throw new RuntimeException("Can't be: could not detect actual type of myVariable: " + getText());
 
-        PerlVariableType variableType = getActualType();
+	}
 
-        // tood make getter for this
-        String variableName = getVariableNameElement().getName();
-        if (variableName == null)
-            return false;
 
-        if (variableType == PerlVariableType.SCALAR)
-            return variableName.matches("^\\d+$") || PerlScalarUtil.BUILT_IN.contains(variableName);
-        if (variableType == PerlVariableType.ARRAY)
-            return PerlArrayUtil.BUILT_IN.contains(variableName);
+	@Override
+	public boolean isBuiltIn()
+	{
+		if (getNamespaceElement() != null)
+			return false;
 
-        return variableType == PerlVariableType.HASH && PerlHashUtil.BUILT_IN.contains(variableName);
-    }
+		if (getVariableNameElement() == null)
+			return false;
 
-    @Override
-    public boolean isDeprecated() {
-        return false;
-    }
+		PerlVariableType variableType = getActualType();
 
-    @Nullable
-    @Override
-    public PsiElement getNameIdentifier() {
-        return getVariableNameElement();
-    }
+		// tood make getter for this
+		String variableName = getVariableNameElement().getName();
+		if (variableName == null)
+			return false;
 
-    @Override
-    public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
-        PerlVariableNameElement variableNameElement = getVariableNameElement();
-        if (variableNameElement != null)
-            variableNameElement.setName(name);
+		if (variableType == PerlVariableType.SCALAR)
+			return variableName.matches("^\\d+$") || PerlScalarUtil.BUILT_IN.contains(variableName);
+		if (variableType == PerlVariableType.ARRAY)
+			return PerlArrayUtil.BUILT_IN.contains(variableName);
 
-        return this;
-    }
+		return variableType == PerlVariableType.HASH && PerlHashUtil.BUILT_IN.contains(variableName);
+	}
 
-    @Override
-    public String getName() {
-        PerlVariableStub stub = getStub();
-        if (stub != null)
-            return stub.getVariableName();
+	@Override
+	public boolean isDeprecated()
+	{
+		return false;
+	}
 
-        PerlVariableNameElement variableNameElement = getVariableNameElement();
-        if (variableNameElement != null)
-            return variableNameElement.getName();
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return getVariableNameElement();
+	}
 
-        return super.getName();
-    }
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if (variableNameElement != null)
+			variableNameElement.setName(name);
 
-    @Override
-    public String getCanonicalName() {
-        return getPackageName() + "::" + getName();
-    }
+		return this;
+	}
 
-    @Override
-    public ItemPresentation getPresentation() {
-        return new PerlVariablePresentation(this);
-    }
+	@Override
+	public String getName()
+	{
+		PerlVariableStub stub = getStub();
+		if (stub != null)
+			return stub.getVariableName();
 
-    @Nullable
-    @Override
-    public Icon getIcon(int flags) {
-        PerlVariableType actualType = getActualType();
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if (variableNameElement != null)
+			return variableNameElement.getName();
 
-        if (actualType == PerlVariableType.ARRAY)
-            return PerlIcons.ARRAY_GUTTER_ICON;
-        if (actualType == PerlVariableType.HASH)
-            return PerlIcons.HASH_GUTTER_ICON;
-        if (actualType == PerlVariableType.SCALAR)
-            return PerlIcons.SCALAR_GUTTER_ICON;
+		return super.getName();
+	}
 
-        return super.getIcon(flags);
-    }
+	@Override
+	public String getCanonicalName()
+	{
+		return getPackageName() + "::" + getName();
+	}
 
-    @Override
-    public PerlVariable getLexicalDeclaration() {
-        if (getNamespaceElement() != null)
-            return null;
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new PerlVariablePresentation(this);
+	}
 
-        PsiFile myFile = getContainingFile();
-        if (myFile instanceof PerlFileElement)
-            return ((PerlFileElement) myFile).getLexicalDeclaration(this);
+	@Nullable
+	@Override
+	public Icon getIcon(int flags)
+	{
+		PerlVariableType actualType = getActualType();
 
-        return null;
-    }
+		if (actualType == PerlVariableType.ARRAY)
+			return PerlIcons.ARRAY_GUTTER_ICON;
+		if (actualType == PerlVariableType.HASH)
+			return PerlIcons.HASH_GUTTER_ICON;
+		if (actualType == PerlVariableType.SCALAR)
+			return PerlIcons.SCALAR_GUTTER_ICON;
 
-    @Override
-    public List<PerlVariable> getGlobalDeclarations() {
-        List<PerlVariable> result = new ArrayList<>();
-        PerlVariableType myType = getActualType();
+		return super.getIcon(flags);
+	}
 
-        if (myType == PerlVariableType.SCALAR) {
-            for (PerlVariable variable : PerlScalarUtil.findGlobalScalarDefinitions(getProject(), getCanonicalName()))
-                if (!variable.equals(this))
-                    result.add(variable);
-        } else if (myType == PerlVariableType.ARRAY) {
-            for (PerlVariable variable : PerlArrayUtil.findGlobalArrayDefinitions(getProject(), getCanonicalName()))
-                if (!variable.equals(this))
-                    result.add(variable);
-        } else if (myType == PerlVariableType.HASH) {
-            for (PerlVariable variable : PerlHashUtil.findGlobalHashDefinitions(getProject(), getCanonicalName()))
-                if (!variable.equals(this))
-                    result.add(variable);
-        }
+	@Override
+	public PerlVariable getLexicalDeclaration()
+	{
+		if (getNamespaceElement() != null)
+			return null;
 
-        return result;
-    }
+		PsiFile myFile = getContainingFile();
+		if (myFile instanceof PerlFileElement)
+			return ((PerlFileElement) myFile).getLexicalDeclaration(this);
 
-    @Override
-    public List<PerlGlobVariable> getRelatedGlobs() {
-        List<PerlGlobVariable> result = new ArrayList<>();
+		return null;
+	}
 
-        for (PsiPerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), getCanonicalName()))
-            result.add(glob);
+	@Override
+	public List<PerlVariable> getGlobalDeclarations()
+	{
+		List<PerlVariable> result = new ArrayList<>();
+		PerlVariableType myType = getActualType();
 
-        return result;
-    }
+		if (myType == PerlVariableType.SCALAR)
+		{
+			for (PerlVariable variable : PerlScalarUtil.findGlobalScalarDefinitions(getProject(), getCanonicalName()))
+				if (!variable.equals(this))
+					result.add(variable);
+		} else if (myType == PerlVariableType.ARRAY)
+		{
+			for (PerlVariable variable : PerlArrayUtil.findGlobalArrayDefinitions(getProject(), getCanonicalName()))
+				if (!variable.equals(this))
+					result.add(variable);
+		} else if (myType == PerlVariableType.HASH)
+		{
+			for (PerlVariable variable : PerlHashUtil.findGlobalHashDefinitions(getProject(), getCanonicalName()))
+				if (!variable.equals(this))
+					result.add(variable);
+		}
 
-    @Override
-    public int getLineNumber() {
-        Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
-        return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
-    }
+		return result;
+	}
 
-    @Nullable
-    @Override
-    public PsiElement getScalarSigils() {
-        return findChildByClass(PerlScalarSigilsImpl.class);
-    }
+	@Override
+	public List<PerlGlobVariable> getRelatedGlobs()
+	{
+		List<PerlGlobVariable> result = new ArrayList<>();
+
+		for (PsiPerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), getCanonicalName()))
+			result.add(glob);
+
+		return result;
+	}
+
+	@Override
+	public int getLineNumber()
+	{
+		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
+		return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getScalarSigils()
+	{
+		return findChildByClass(PerlScalarSigilsImpl.class);
+	}
 
 }

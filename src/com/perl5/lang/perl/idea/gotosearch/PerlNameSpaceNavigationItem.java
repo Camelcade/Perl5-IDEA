@@ -29,57 +29,68 @@ import javax.swing.*;
 /**
  * Navigation item for GoToByClass Feature
  */
-public class PerlNameSpaceNavigationItem implements NavigationItem {
-    private final Project project;
-    private final PsiPerlNamespaceDefinition nameSpace;
+public class PerlNameSpaceNavigationItem implements NavigationItem
+{
+	private final Project project;
+	private final PsiPerlNamespaceDefinition nameSpace;
 
-    public PerlNameSpaceNavigationItem(Project project, PsiPerlNamespaceDefinition nameSpace) {
-        this.project = project;
-        this.nameSpace = nameSpace;
-    }
+	public PerlNameSpaceNavigationItem(Project project, PsiPerlNamespaceDefinition nameSpace)
+	{
+		this.project = project;
+		this.nameSpace = nameSpace;
+	}
 
-    @Nullable
-    @Override
-    public String getName() {
-        return nameSpace.getText();
-    }
+	@Nullable
+	@Override
+	public String getName()
+	{
+		return nameSpace.getText();
+	}
 
-    @Nullable
-    @Override
-    public ItemPresentation getPresentation() {
-        return new ItemPresentation() {
-            @Nullable
-            @Override
-            public String getPresentableText() {
-                return nameSpace.getName();
-            }
+	@Nullable
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new ItemPresentation()
+		{
+			@Nullable
+			@Override
+			public String getPresentableText()
+			{
+				return nameSpace.getName();
+			}
 
-            @Nullable
-            @Override
-            public String getLocationString() {
-                return nameSpace.getContainingFile().getVirtualFile().getCanonicalPath();
-            }
+			@Nullable
+			@Override
+			public String getLocationString()
+			{
+				return nameSpace.getContainingFile().getVirtualFile().getCanonicalPath();
+			}
 
-            @Nullable
-            @Override
-            public Icon getIcon(boolean b) {
-                return PerlIcons.PACKAGE_GUTTER_ICON;
-            }
-        };
-    }
+			@Nullable
+			@Override
+			public Icon getIcon(boolean b)
+			{
+				return PerlIcons.PACKAGE_GUTTER_ICON;
+			}
+		};
+	}
 
-    @Override
-    public void navigate(boolean b) {
-        FileEditorManagerEx.getInstance(project).openFile(nameSpace.getContainingFile().getVirtualFile(), true);
-    }
+	@Override
+	public void navigate(boolean b)
+	{
+		FileEditorManagerEx.getInstance(project).openFile(nameSpace.getContainingFile().getVirtualFile(), true);
+	}
 
-    @Override
-    public boolean canNavigate() {
-        return true;
-    }
+	@Override
+	public boolean canNavigate()
+	{
+		return true;
+	}
 
-    @Override
-    public boolean canNavigateToSource() {
-        return true;
-    }
+	@Override
+	public boolean canNavigateToSource()
+	{
+		return true;
+	}
 }

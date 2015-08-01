@@ -62,7 +62,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 
 			if (subNameElement != null)
 			{
-				if( "new".equals(subNameElement.getName()))
+				if ("new".equals(subNameElement.getName()))
 					return ((PerlMethodContainer) currentElement).getMethod().getPackageName();
 				for (PerlSubDefinition subDefinition : subNameElement.getSubDefinitions())
 					if (subDefinition.getSubAnnotations().getReturns() != null)

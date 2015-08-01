@@ -31,12 +31,14 @@ public class PerlLanguage extends Language
 
 //	protected volatile ArrayList<VirtualFile> libPaths = null;
 
-	public PerlLanguage() {
+	public PerlLanguage()
+	{
 		super(NAME);
 	}
 
 	@Override
-	public boolean isCaseSensitive() {
+	public boolean isCaseSensitive()
+	{
 		return true;
 	}
 

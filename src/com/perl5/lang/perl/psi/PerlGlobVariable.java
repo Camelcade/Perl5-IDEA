@@ -30,6 +30,7 @@ public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlNam
 {
 	/**
 	 * Dumb getter for scalar sigils part, shows if it's pure type or some dereferences like @$$$var
+	 *
 	 * @return scalar sigils if any
 	 */
 	@Nullable

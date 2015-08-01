@@ -20,10 +20,10 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -32,9 +32,8 @@ import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
- *
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub,PsiPerlSubDefinition>
+public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PsiPerlSubDefinition>
 {
 
 	public PerlSubDefinitionStubElementType(String name)
@@ -45,7 +44,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public PsiPerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
-		return new PsiPerlSubDefinitionImpl(stub,this);
+		return new PsiPerlSubDefinitionImpl(stub, this);
 	}
 
 	@Override
@@ -64,7 +63,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public String getExternalId()
 	{
-		return "perl."+super.toString();
+		return "perl." + super.toString();
 	}
 
 	@Override
@@ -82,7 +81,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 
 		List<PerlSubArgument> arguments = stub.getSubArgumentsList();
 		dataStream.writeInt(arguments.size());
-		for( PerlSubArgument argument: arguments )
+		for (PerlSubArgument argument : arguments)
 			argument.serialize(dataStream);
 
 		stub.getSubAnnotations().serialize(dataStream);
@@ -100,13 +99,13 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 
 		List<PerlSubArgument> arguments = new ArrayList<>(argumentsNumber);
 
-		for( int i = 0; i < argumentsNumber; i++ )
+		for (int i = 0; i < argumentsNumber; i++)
 			arguments.add(PerlSubArgument.deserialize(dataStream));
 
 		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
 
 		boolean isMethod = dataStream.readBoolean();
 
-		return new PerlSubDefinitionStubImpl(parentStub,packageName,functionName,arguments,isMethod, annotations);
+		return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, isMethod, annotations);
 	}
 }

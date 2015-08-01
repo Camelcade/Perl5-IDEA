@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -43,7 +42,7 @@ public class PerlSubUnresolvableInspection extends PerlInspection
 
 				boolean hasExplicitNamespace = namespaceElement != null && !"CORE".equals(namespaceElement.getCanonicalName());
 
-				if( subNameElement == null || (namespaceElement != null && namespaceElement.isBuiltin()) || (!hasExplicitNamespace && subNameElement.isBuiltIn()))
+				if (subNameElement == null || (namespaceElement != null && namespaceElement.isBuiltin()) || (!hasExplicitNamespace && subNameElement.isBuiltIn()))
 					return;
 
 				// todo globs aliasing must be resolved

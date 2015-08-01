@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 public class PerlSdkType extends SdkType
 {
 
+	Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
 	private String perlExecutablePath = "";
 
 	public PerlSdkType()
@@ -34,7 +35,8 @@ public class PerlSdkType extends SdkType
 	}
 
 	@NotNull
-	public static PerlSdkType getInstance() {
+	public static PerlSdkType getInstance()
+	{
 		PerlSdkType instance = SdkType.findInstance(PerlSdkType.class);
 		assert instance != null : "Make sure PerlSdkType is registered in plugin.xml";
 		return instance;
@@ -46,7 +48,6 @@ public class PerlSdkType extends SdkType
 
 	}
 
-
 	@Override
 	public void setupSdkPaths(@NotNull Sdk sdk)
 	{
@@ -54,13 +55,13 @@ public class PerlSdkType extends SdkType
 
 		List<String> perlLibPaths = readFromProgram("perl -le \"print for @INC\"");
 
-		for( String perlLibPath: perlLibPaths)
+		for (String perlLibPath : perlLibPaths)
 		{
-			if( !".".equals(perlLibPath))
+			if (!".".equals(perlLibPath))
 			{
 				File libDir = new File(perlLibPath);
 
-				if( libDir.exists() && libDir.isDirectory())
+				if (libDir.exists() && libDir.isDirectory())
 				{
 					VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
 					if (virtualDir != null)
@@ -82,7 +83,6 @@ public class PerlSdkType extends SdkType
 		return null;
 	}
 
-
 	@Override
 	public String getPresentableName()
 	{
@@ -94,10 +94,10 @@ public class PerlSdkType extends SdkType
 	public String suggestHomePath()
 	{
 		String perlPath = askPerlForPath();
-		if( perlPath != null )
+		if (perlPath != null)
 			return perlPath;
 
-		if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD )
+		if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD)
 		{
 			return "/usr/bin/";
 		}
@@ -109,7 +109,6 @@ public class PerlSdkType extends SdkType
 	{
 		return "Perl " + getPerlVersionString();
 	}
-
 
 	@Override
 	public boolean isValidSdkHome(String sdkHome)
@@ -150,9 +149,6 @@ public class PerlSdkType extends SdkType
 		return getPerlVersionString();
 	}
 
-
-	Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
-
 	public String getPerlVersionString()
 	{
 		List<String> versionLines = readFromProgram(perlExecutablePath + " -v");
@@ -161,7 +157,7 @@ public class PerlSdkType extends SdkType
 		{
 			Matcher m = perlVersionStringPattern.matcher(versionLines.get(0));
 
-			if( m.find() )
+			if (m.find())
 				return m.group(1) + " (" + m.group(2) + ")";
 
 			return "Unknown version";
@@ -175,10 +171,10 @@ public class PerlSdkType extends SdkType
 	{
 		List<String> perlPathLines = readFromProgram("perl -le \"print $^X\"");
 
-		if( perlPathLines.size() == 1)
+		if (perlPathLines.size() == 1)
 		{
 			int perlIndex = perlPathLines.get(0).lastIndexOf("perl");
-			if( perlIndex > 0 )
+			if (perlIndex > 0)
 				return perlPathLines.get(0).substring(0, perlIndex);
 
 		}
@@ -195,7 +191,7 @@ public class PerlSdkType extends SdkType
 
 			String line;
 			while ((line = in.readLine()) != null)
-				if( !line.isEmpty() )
+				if (!line.isEmpty())
 					result.add(line);
 
 			in.close();

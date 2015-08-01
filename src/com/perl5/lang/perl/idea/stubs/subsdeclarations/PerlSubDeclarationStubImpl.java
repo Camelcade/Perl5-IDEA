@@ -18,8 +18,8 @@ package com.perl5.lang.perl.idea.stubs.subsdeclarations;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 
 /**

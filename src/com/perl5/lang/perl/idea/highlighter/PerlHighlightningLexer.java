@@ -19,10 +19,8 @@ package com.perl5.lang.perl.idea.highlighter;
 import com.intellij.lexer.LayeredLexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlDebuggingLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
-import com.perl5.lang.pod.idea.highlighter.PodHighlightingLexer;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 
 /**

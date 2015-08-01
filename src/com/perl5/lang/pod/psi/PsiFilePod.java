@@ -30,23 +30,27 @@ import javax.swing.*;
  */
 public class PsiFilePod extends PsiFileBase
 {
-	public PsiFilePod(@NotNull FileViewProvider viewProvider) {
+	public PsiFilePod(@NotNull FileViewProvider viewProvider)
+	{
 		super(viewProvider, PodLanguage.INSTANCE);
 	}
 
 	@NotNull
 	@Override
-	public FileType getFileType() {
+	public FileType getFileType()
+	{
 		return PodFileType.INSTANCE;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "POD file";
 	}
 
 	@Override
-	public Icon getIcon(int flags) {
+	public Icon getIcon(int flags)
+	{
 		return super.getIcon(flags);
 	}
 }

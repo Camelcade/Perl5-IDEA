@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
@@ -33,7 +31,6 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -61,6 +58,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
 	public static final HashSet<String> BUILT_IN_ALL = new HashSet<>();
+	public static final ConcurrentHashMap<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
 
 	static
 	{
@@ -91,7 +89,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return BUILT_IN_PRAGMA.contains(getCanonicalPackageName(pacakgeName));
 	}
 
-
 	/**
 	 * Checks if package is deprecated
 	 *
@@ -102,9 +99,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		return BUILT_IN_DEPRECATED.contains(getCanonicalPackageName(pacakgeName));
 	}
-
-
-	public static final ConcurrentHashMap<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
 
 	/**
 	 * Make canonical package name.
@@ -321,7 +315,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	/**
 	 * Returns list of Package names available as pm files for specific psi element
-	 *	todo we could cache this with invalidating on file event
+	 * todo we could cache this with invalidating on file event
+	 *
 	 * @param element base PsiElement
 	 * @return list of distinct strings
 	 */

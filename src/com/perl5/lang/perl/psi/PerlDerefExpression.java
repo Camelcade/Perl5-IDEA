@@ -25,6 +25,7 @@ public interface PerlDerefExpression extends PsiPerlExpr
 {
 	/**
 	 * Attempting to traverse dereference chain in order to detect package name
+	 *
 	 * @param methodElement - method, for which we are traversing
 	 * @return package name or null
 	 */

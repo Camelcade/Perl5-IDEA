@@ -17,10 +17,7 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.*;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.PerlVariable;
 
 import java.util.List;
 
@@ -32,10 +29,10 @@ public class PerlVariableShadowingInspection extends PerlVariableDeclarationInsp
 	@Override
 	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList)
 	{
-		for( PerlVariable variable: variableList)
+		for (PerlVariable variable : variableList)
 		{
 			PerlVariable lexicalDeclaration = variable.getLexicalDeclaration();
-			if( lexicalDeclaration != null )
+			if (lexicalDeclaration != null)
 				registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber());
 		}
 	}

@@ -22,8 +22,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 /**
  * Created by hurricup on 14.06.2015.
  * Check that namespace is defined
@@ -45,7 +43,7 @@ public class PerlNamespaceUndefinedInspection extends PerlInspection
 					return;
 
 				// fixme should depend on parent resolving
-				if( "SUPER".equals(o.getCanonicalName()))
+				if ("SUPER".equals(o.getCanonicalName()))
 					return;
 
 				if (o.isBuiltin())

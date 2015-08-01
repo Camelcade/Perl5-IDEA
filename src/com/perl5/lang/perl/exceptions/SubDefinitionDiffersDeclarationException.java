@@ -25,7 +25,8 @@ public class SubDefinitionDiffersDeclarationException extends PerlParsingExcepti
 	{
 		super(message);
 	}
-	public SubDefinitionDiffersDeclarationException(String format, Object ... str)
+
+	public SubDefinitionDiffersDeclarationException(String format, Object... str)
 	{
 		super(String.format(format, str));
 	}

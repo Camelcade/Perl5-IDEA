@@ -21,11 +21,11 @@ package com.perl5.lang.perl.psi.utils;
  */
 public enum PerlReturnType
 {
-	VALUE,		// default
-	REF,		// Package::Name	NYI
-	ARRAY,		// @Package::Name	NYI
-	HASH,		// %Package::Name	NYI
-	ARRAY_REF,	// [Package::Name]
-	HASH_REF,	// {Package::Name}
-	CODE_REF	// &				NYI
+	VALUE,        // default
+	REF,        // Package::Name	NYI
+	ARRAY,        // @Package::Name	NYI
+	HASH,        // %Package::Name	NYI
+	ARRAY_REF,    // [Package::Name]
+	HASH_REF,    // {Package::Name}
+	CODE_REF    // &				NYI
 }

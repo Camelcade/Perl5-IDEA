@@ -21,8 +21,10 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.util.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,7 +44,7 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 		super(element, textRange);
 		PsiElement parent = element.getParent();
 		assert parent instanceof PerlGlobVariable;
-		myVariable = (PerlGlobVariable)parent;
+		myVariable = (PerlGlobVariable) parent;
 		isScalar = myVariable.getScalarSigils() != null;
 	}
 
@@ -50,7 +52,7 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		if( isScalar )
+		if (isScalar)
 			return multiResolveScalar(incompleteCode);
 
 		List<ResolveResult> result = new ArrayList<>();
@@ -59,8 +61,8 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 		Project project = myVariable.getProject();
 
 		// resolve to other globs
-		for(PerlGlobVariable glob: PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-			if( !glob.equals(myVariable))
+		for (PerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+			if (!glob.equals(myVariable))
 				result.add(new PsiElementResolveResult(glob));
 
 
@@ -78,7 +80,7 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 	public boolean isReferenceTo(PsiElement element)
 	{
 		PsiElement parent = element.getParent();
-		if( parent instanceof PerlVariable || parent instanceof PerlGlobVariable || parent instanceof PerlSubBase)
+		if (parent instanceof PerlVariable || parent instanceof PerlGlobVariable || parent instanceof PerlSubBase)
 			return super.isReferenceTo(parent) || super.isReferenceTo(element);
 
 		return super.isReferenceTo(element);
@@ -90,13 +92,13 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-		if( resolveResults.length == 0)
+		if (resolveResults.length == 0)
 			return null;
-		else if( resolveResults.length == 1 )
+		else if (resolveResults.length == 1)
 			return resolveResults[0].getElement();
 
-		for( ResolveResult resolveResult: resolveResults)
-			if( resolveResult.getElement() instanceof PerlGlobVariable)
+		for (ResolveResult resolveResult : resolveResults)
+			if (resolveResult.getElement() instanceof PerlGlobVariable)
 				return resolveResult.getElement();
 
 		return resolveResults[0].getElement();

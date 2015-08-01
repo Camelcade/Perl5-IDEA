@@ -45,7 +45,8 @@ public abstract class PerlItemPresentationBase implements ItemPresentation
 		PsiFile file = myElement.getContainingFile();
 		Document document = PsiDocumentManager.getInstance(myElement.getProject()).getCachedDocument(file);
 
-		if (document != null) {
+		if (document != null)
+		{
 
 			int lineNumber = document.getLineNumber(myElement.getTextOffset()) + 1;
 			VirtualFile virtualFile = file.getVirtualFile();

@@ -26,6 +26,7 @@ public interface PerlNamespaceElementContainer extends PsiElement
 {
 	/**
 	 * Trying to search for netsted NamespaceElement
+	 *
 	 * @return psi element or null
 	 */
 	public PerlNamespaceElement getNamespaceElement();

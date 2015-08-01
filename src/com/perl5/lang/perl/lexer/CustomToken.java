@@ -25,18 +25,20 @@ import com.intellij.psi.tree.IElementType;
 /**
  * Class for parsed token type, stores start, end and token type
  */
-class CustomToken{
+class CustomToken
+{
 	private int tokenStart;
 	private int tokenEnd;
 	private IElementType tokenType;
 
 	/**
 	 * Creates parsed token entry
-	 * @param start	token start offset
-	 * @param end token end offset
-	 * @param type token type
+	 *
+	 * @param start token start offset
+	 * @param end   token end offset
+	 * @param type  token type
 	 */
-	public CustomToken( int start, int end, IElementType type )
+	public CustomToken(int start, int end, IElementType type)
 	{
 		tokenStart = start;
 		tokenEnd = end;

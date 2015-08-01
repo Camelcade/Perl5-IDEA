@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdeclarations;
 
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 
 /**
  * Created by hurricup on 05.06.2015.

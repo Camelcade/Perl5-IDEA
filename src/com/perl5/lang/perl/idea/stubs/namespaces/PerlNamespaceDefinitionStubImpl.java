@@ -18,10 +18,8 @@ package com.perl5.lang.perl.idea.stubs.namespaces;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
-
-import java.util.List;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 
 /**
  * Created by hurricup on 28.05.2015.

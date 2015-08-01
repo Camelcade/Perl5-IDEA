@@ -26,6 +26,7 @@ public interface PerlSubNameElementContainer
 {
 	/**
 	 * Trying to find nested PerlSubName element
+	 *
 	 * @return psi element or null
 	 */
 	PerlSubNameElement getSubNameElement();

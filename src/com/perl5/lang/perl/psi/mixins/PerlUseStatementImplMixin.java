@@ -35,16 +35,15 @@ import java.util.List;
  */
 public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl implements PsiPerlUseStatement
 {
-	public PerlUseStatementImplMixin(ASTNode node)
-	{
-		super(node);
-	}
-
 	public static final HashSet<String> PARENT_PRAGMAS = new HashSet<>(Arrays.asList(
 			"parent",
 			"base"
 	));
 
+	public PerlUseStatementImplMixin(ASTNode node)
+	{
+		super(node);
+	}
 
 	@Override
 	public boolean isParentPragma()

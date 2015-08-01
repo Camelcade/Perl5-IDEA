@@ -17,7 +17,8 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReferenceBase;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ public abstract class PerlReference extends PsiReferenceBase<PsiElement>
 {
 	public PerlReference(@NotNull PsiElement element, TextRange textRange)
 	{
-		super(element,textRange);
+		super(element, textRange);
 	}
 
 	@Override

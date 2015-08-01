@@ -25,10 +25,10 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +39,6 @@ import java.util.List;
 
 /**
  * Created by hurricup on 28.05.2015.
- *
  */
 public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub> implements PsiPerlNamespaceDefinition
 {
@@ -108,9 +107,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 
 		PsiElement namespaceBlock = this.getParent();
 
-		for( PsiPerlUseStatement useStatement: PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
+		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
 			if (useStatement.isParentPragma())
-				if( PsiTreeUtil.getParentOfType(useStatement, PsiPerlNamespaceBlock.class) == namespaceBlock)    // check that it's not nested package use
+				if (PsiTreeUtil.getParentOfType(useStatement, PsiPerlNamespaceBlock.class) == namespaceBlock)    // check that it's not nested package use
 					result.addAll(useStatement.getStringParameters());
 
 		return parentPackages = result;

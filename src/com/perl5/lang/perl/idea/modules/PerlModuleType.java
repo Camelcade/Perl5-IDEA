@@ -25,7 +25,6 @@ import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import javax.swing.*;
 
@@ -39,11 +38,15 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder>
 	public static final String MODULE_DESCRIPTION = "Anyting written in Perl5";
 //	public static final String PERL5_GROUP = "Perl5";
 
-	public static PerlModuleType getInstance() {
-		return (PerlModuleType) ModuleTypeManager.getInstance().findByID(PERL_MODULE_TYPE_ID);
+	public PerlModuleType()
+	{
+		super(PERL_MODULE_TYPE_ID);
 	}
 
-	public PerlModuleType(){super(PERL_MODULE_TYPE_ID);}
+	public static PerlModuleType getInstance()
+	{
+		return (PerlModuleType) ModuleTypeManager.getInstance().findByID(PERL_MODULE_TYPE_ID);
+	}
 
 	@NotNull
 	@Override
@@ -82,8 +85,10 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder>
 	@Override
 	public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull final PerlModuleBuilder moduleBuilder, @NotNull ModulesProvider modulesProvider)
 	{
-		return new ModuleWizardStep[]{new ProjectJdkForModuleStep(wizardContext, PerlSdkType.findInstance(PerlSdkType.class)) {
-			public void updateDataModel() {
+		return new ModuleWizardStep[]{new ProjectJdkForModuleStep(wizardContext, PerlSdkType.findInstance(PerlSdkType.class))
+		{
+			public void updateDataModel()
+			{
 				super.updateDataModel();
 				moduleBuilder.setModuleJdk(getJdk());
 			}

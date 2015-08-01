@@ -20,25 +20,27 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by hurricup on 19.04.2015.
  */
 public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 {
-	protected static final HashMap<String,IElementType> knownFunctions = new HashMap<String,IElementType>();
+	protected static final HashMap<String, IElementType> knownFunctions = new HashMap<String, IElementType>();
 
-	static{
-		for( String functionName: BUILT_IN )
+	static
+	{
+		for (String functionName : BUILT_IN)
 		{
 			knownFunctions.put(functionName, SUB);
 		}
@@ -46,6 +48,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	/**
 	 * Checks if provided function is built in
+	 *
 	 * @param function function name
 	 * @return checking result
 	 */
@@ -57,8 +60,9 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	/**
 	 * Checks if sub defined as unary with ($) proto
+	 *
 	 * @param packageName package name
-	 * @param subName sub name
+	 * @param subName     sub name
 	 * @return check result
 	 */
 	public static boolean isUnary(@Nullable String packageName, @NotNull String subName)
@@ -69,9 +73,10 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	/**
 	 * Searching project files for sub definitions by specific package and function name
-	 * @param project	project to search in
-	 * @param canonicalName	canonical function name package::name
-	 * @return	Collection of found definitions
+	 *
+	 * @param project       project to search in
+	 * @param canonicalName canonical function name package::name
+	 * @return Collection of found definitions
 	 */
 	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String canonicalName)
 	{
@@ -81,6 +86,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	/**
 	 * Returns list of defined subs names
+	 *
 	 * @param project project to search in
 	 * @return collection of sub names
 	 */
@@ -92,9 +98,10 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	/**
 	 * Searching project files for sub declarations by specific package and function name
-	 * @param project	project to search in
-	 * @param canonicalName	canonical function name package::name
-	 * @return	Collection of found definitions
+	 *
+	 * @param project       project to search in
+	 * @param canonicalName canonical function name package::name
+	 * @return Collection of found definitions
 	 */
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName)
 	{
@@ -104,6 +111,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	/**
 	 * Returns list of declared subs names
+	 *
 	 * @param project project to search in
 	 * @return collection of sub names
 	 */

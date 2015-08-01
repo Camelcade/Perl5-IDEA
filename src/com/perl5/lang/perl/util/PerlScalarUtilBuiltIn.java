@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -25,7 +24,7 @@ import java.util.HashSet;
  */
 public interface PerlScalarUtilBuiltIn
 {
-	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
+	public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
 			"^]",
 			"^[",
 			"OLD_PERL_VERSION",

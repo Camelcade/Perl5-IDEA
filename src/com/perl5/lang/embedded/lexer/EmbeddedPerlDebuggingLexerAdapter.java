@@ -24,7 +24,8 @@ import com.intellij.openapi.project.Project;
  */
 public class EmbeddedPerlDebuggingLexerAdapter extends FlexAdapter
 {
-	public EmbeddedPerlDebuggingLexerAdapter(Project project) {
+	public EmbeddedPerlDebuggingLexerAdapter(Project project)
+	{
 		super(new EmbeddedPerlDebuggingLexer(project));
 	}
 

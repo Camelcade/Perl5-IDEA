@@ -20,8 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 /**

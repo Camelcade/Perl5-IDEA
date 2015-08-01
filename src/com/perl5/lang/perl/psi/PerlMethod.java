@@ -19,8 +19,6 @@ package com.perl5.lang.perl.psi;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
-import com.perl5.lang.perl.psi.utils.PerlReturnType;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -30,6 +28,7 @@ public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameEl
 {
 	/**
 	 * Checks if explicit namespace defined - got object or namespace element
+	 *
 	 * @return checking result
 	 */
 	public boolean hasExplicitNamespace();

@@ -26,11 +26,11 @@ import com.perl5.PerlIcons;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class CreateMojoliciousTemplateAction  extends CreateFileFromTemplateAction implements DumbAware
+public class CreateMojoliciousTemplateAction extends CreateFileFromTemplateAction implements DumbAware
 {
 	private static final String NEW_PERL_FILE = "New Mojolicious Template";
 
-	public CreateMojoliciousTemplateAction ()
+	public CreateMojoliciousTemplateAction()
 	{
 		super(NEW_PERL_FILE, "", PerlIcons.MOJO_FILE);
 	}

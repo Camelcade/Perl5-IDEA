@@ -18,18 +18,13 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
-import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.PerlIcons;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by hurricup on 26.04.2015.
@@ -41,7 +36,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 	{
 		// @todo this should not be shown on static method calls (we should jump to definition of method)
 		// @todo thi should not be shown if there is only one result found?
-		if(element instanceof LeafPsiElement)
+		if (element instanceof LeafPsiElement)
 		{
 			IElementType elementType = ((LeafPsiElement) element).getElementType();
 

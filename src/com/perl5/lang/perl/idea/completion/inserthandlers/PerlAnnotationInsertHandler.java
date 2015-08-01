@@ -40,7 +40,7 @@ public class PerlAnnotationInsertHandler implements InsertHandler<LookupElement>
 	{
 
 		final Editor editor = context.getEditor();
-		if( "returns".equals(item.getLookupString()))
+		if ("returns".equals(item.getLookupString()))
 		{
 			EditorModificationUtil.insertStringAtCaret(editor, " ");
 

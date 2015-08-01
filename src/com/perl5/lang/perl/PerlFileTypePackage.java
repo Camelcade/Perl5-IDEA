@@ -33,25 +33,29 @@ public class PerlFileTypePackage extends PerlFileType
 
 	@NotNull
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return "Perl5 package";
 	}
 
 	@NotNull
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
 		return "Perl5 package";
 	}
 
 	@NotNull
 	@Override
-	public String getDefaultExtension() {
+	public String getDefaultExtension()
+	{
 		return "pm";
 	}
 
 	@Nullable
 	@Override
-	public Icon getIcon() {
+	public Icon getIcon()
+	{
 		return PerlIcons.PM_FILE;
 	}
 }

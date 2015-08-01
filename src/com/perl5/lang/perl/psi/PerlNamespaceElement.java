@@ -28,36 +28,42 @@ public interface PerlNamespaceElement extends PerlNamedElement
 {
 	/**
 	 * Checks if package is from Core list
+	 *
 	 * @return result
 	 */
 	public boolean isBuiltin();
 
 	/**
 	 * Checks if package is pragma
+	 *
 	 * @return result
 	 */
 	public boolean isPragma();
 
 	/**
 	 * Checks if package is deprecated
+	 *
 	 * @return result
 	 */
 	public boolean isDeprecated();
 
 	/**
 	 * Returns list of definitions of current namespace
+	 *
 	 * @return list of PerlNameSpaceDefitions
 	 */
 	public List<PerlNamespaceDefinition> getNamespaceDefinitions();
 
 	/**
 	 * Returns list of files suitable for this namespace, works only if namespace is in use or require statement
+	 *
 	 * @return list of PerlNameSpaceDefitions
 	 */
 	public List<PerlFileElement> getNamespaceFiles();
 
 	/**
 	 * Returns canonical namespace name
+	 *
 	 * @return canonical name
 	 */
 	public String getCanonicalName();

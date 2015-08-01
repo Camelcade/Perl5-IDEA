@@ -17,17 +17,18 @@
 package com.perl5.lang.perl;
 
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.ILazyParseableElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlTokenType extends IElementType
 {
-	public PerlTokenType(@NotNull @NonNls String debugName) {
+	public PerlTokenType(@NotNull @NonNls String debugName)
+	{
 		super(debugName, PerlLanguage.INSTANCE);
 	}
 
-	public String toString() {
+	public String toString()
+	{
 		return "PerlTokenType." + super.toString();
 	}
 

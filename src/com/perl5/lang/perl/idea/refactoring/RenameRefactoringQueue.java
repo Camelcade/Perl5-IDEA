@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.refactoring;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
@@ -26,7 +25,7 @@ import com.intellij.refactoring.RenameRefactoring;
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class RenameRefactoringQueue	implements Runnable
+public class RenameRefactoringQueue implements Runnable
 {
 	private Project myProject;
 	private RenameRefactoring myRefactoring;
@@ -40,31 +39,33 @@ public class RenameRefactoringQueue	implements Runnable
 	{
 
 
-		if( element instanceof PsiNamedElement )
+		if (element instanceof PsiNamedElement)
 		{
 			if (myRefactoring == null)
 				myRefactoring = RefactoringFactory.getInstance(myProject).createRename(element, newName);
 			else
-				myRefactoring.addElement(element,newName);
+				myRefactoring.addElement(element, newName);
 		}
 	}
 
 	void setSearchInComments(boolean value)
 	{
-		if(myRefactoring != null)
+		if (myRefactoring != null)
 			myRefactoring.setSearchInComments(value);
-	};
+	}
+
+	;
 
 
 	void setSearchInNonJavaFiles(boolean value)
 	{
-		if(myRefactoring != null)
+		if (myRefactoring != null)
 			myRefactoring.setSearchInNonJavaFiles(value);
 	}
 
 	public void run()
 	{
-		if(myRefactoring != null)
+		if (myRefactoring != null)
 			myRefactoring.run();
 	}
 

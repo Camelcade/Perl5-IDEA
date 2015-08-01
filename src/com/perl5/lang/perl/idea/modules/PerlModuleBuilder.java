@@ -17,20 +17,13 @@
 package com.perl5.lang.perl.idea.modules;
 
 import com.intellij.ide.util.projectWizard.JavaModuleBuilder;
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
-import com.intellij.ide.util.projectWizard.ModuleBuilderListener;
-import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.util.Pair;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
-import org.jetbrains.annotations.NonNls;
 
-import javax.swing.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +32,7 @@ import java.util.List;
  */
 public class PerlModuleBuilder extends JavaModuleBuilder
 {
-	private List<Pair<String,String>> mySourcePaths;
+	private List<Pair<String, String>> mySourcePaths;
 
 	@Override
 	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException
@@ -60,8 +53,10 @@ public class PerlModuleBuilder extends JavaModuleBuilder
 	}
 
 	@Override
-	public List<Pair<String,String>> getSourcePaths() {
-		if (mySourcePaths == null) {
+	public List<Pair<String, String>> getSourcePaths()
+	{
+		if (mySourcePaths == null)
+		{
 			final List<Pair<String, String>> paths = new ArrayList<Pair<String, String>>();
 			paths.add(Pair.create(getContentEntryPath(), ""));
 			return paths;
@@ -70,13 +65,16 @@ public class PerlModuleBuilder extends JavaModuleBuilder
 	}
 
 	@Override
-	public void setSourcePaths(List<Pair<String,String>> sourcePaths) {
-		mySourcePaths = sourcePaths != null? new ArrayList<Pair<String, String>>(sourcePaths) : null;
+	public void setSourcePaths(List<Pair<String, String>> sourcePaths)
+	{
+		mySourcePaths = sourcePaths != null ? new ArrayList<Pair<String, String>>(sourcePaths) : null;
 	}
 
 	@Override
-	public void addSourcePath(Pair<String,String> sourcePathInfo) {
-		if (mySourcePaths == null) {
+	public void addSourcePath(Pair<String, String> sourcePathInfo)
+	{
+		if (mySourcePaths == null)
+		{
 			mySourcePaths = new ArrayList<Pair<String, String>>();
 		}
 		mySourcePaths.add(sourcePathInfo);

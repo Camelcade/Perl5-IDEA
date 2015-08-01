@@ -59,28 +59,28 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 
 		PsiElement codeBlock = element.getParent();
 
-		if( codeBlock != null && codeBlock instanceof PsiPerlBlock)
+		if (codeBlock != null && codeBlock instanceof PsiPerlBlock)
 		{
 			PsiElement blockContainer = codeBlock.getParent();
 
-			if( blockContainer != null)
+			if (blockContainer != null)
 			{
-				if(blockContainer instanceof PsiPerlSubDefinition
+				if (blockContainer instanceof PsiPerlSubDefinition
 						|| blockContainer instanceof PsiPerlForCompound
 						|| blockContainer instanceof PsiPerlForeachCompound
 						)
 					return blockContainer.getTextOffset();
-				else if( blockContainer instanceof PsiPerlConditionalBlock
+				else if (blockContainer instanceof PsiPerlConditionalBlock
 						|| blockContainer instanceof PsiPerlUnconditionalBlock)
 				{
 					PsiElement keyword = blockContainer.getPrevSibling();
 
-					while( keyword != null && (keyword instanceof PsiWhiteSpace || keyword instanceof PsiComment) )
+					while (keyword != null && (keyword instanceof PsiWhiteSpace || keyword instanceof PsiComment))
 					{
 						keyword = keyword.getPrevSibling();
 					}
 
-					if( keyword != null )
+					if (keyword != null)
 						return keyword.getTextOffset();
 				}
 			}

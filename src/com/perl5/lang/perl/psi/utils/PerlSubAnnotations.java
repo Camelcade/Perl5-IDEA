@@ -35,6 +35,25 @@ public class PerlSubAnnotations
 	PerlReturnType returnType = PerlReturnType.VALUE;
 	String returns = null;
 
+	public PerlSubAnnotations()
+	{
+	}
+
+	public PerlSubAnnotations(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, String returns, PerlReturnType returnType)
+	{
+		this.isMethod = isMethod;
+		this.isDeprecated = isDeprecated;
+		this.isAbstract = isAbstract;
+		this.isOverride = isOverride;
+		this.returns = returns;
+		this.returnType = returnType;
+	}
+
+	public PerlSubAnnotations(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, StringRef returns, PerlReturnType returnType)
+	{
+		this(isMethod, isDeprecated, isAbstract, isOverride, returns == null ? null : returns.toString(), returnType);
+	}
+
 	public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
 	{
 		return new PerlSubAnnotations(
@@ -55,25 +74,6 @@ public class PerlSubAnnotations
 		dataStream.writeBoolean(isOverride);
 		dataStream.writeName(returns);
 		dataStream.writeName(returnType.toString());
-	}
-
-	public PerlSubAnnotations()
-	{
-	}
-
-	public PerlSubAnnotations(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, String returns, PerlReturnType returnType)
-	{
-		this.isMethod = isMethod;
-		this.isDeprecated = isDeprecated;
-		this.isAbstract = isAbstract;
-		this.isOverride = isOverride;
-		this.returns = returns;
-		this.returnType = returnType;
-	}
-
-	public PerlSubAnnotations(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, StringRef returns, PerlReturnType returnType)
-	{
-		this(isMethod,isDeprecated,isAbstract,isOverride,returns == null ? null: returns.toString(),returnType);
 	}
 
 	public boolean isMethod()

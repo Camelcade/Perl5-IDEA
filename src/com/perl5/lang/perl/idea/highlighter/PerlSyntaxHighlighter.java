@@ -25,7 +25,6 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.pod.PodTokenType;
@@ -34,7 +33,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
@@ -182,7 +180,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	{
 		if (tokenType instanceof PodTokenType)
 			return POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
-		else if (attributesMap.containsKey(tokenType) )
+		else if (attributesMap.containsKey(tokenType))
 			return attributesMap.get(tokenType);
 		else if (PerlLexer.RESERVED_TOKENSET.contains(tokenType))
 			return attributesMap.get(PerlElementTypes.RESERVED_IF);

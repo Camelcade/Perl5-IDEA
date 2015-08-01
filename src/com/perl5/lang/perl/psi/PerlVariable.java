@@ -30,6 +30,7 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 {
 	/**
 	 * Dumb getter for scalar sigils part, shows if it's pure type or some dereferences like @$$$var
+	 *
 	 * @return scalar sigils if any
 	 */
 	@Nullable
@@ -37,40 +38,46 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 
 	/**
 	 * Guesses variable type from definition or context
+	 *
 	 * @return Package name if found
 	 */
-	@Nullable String guessVariableType();
+	@Nullable
+	String guessVariableType();
 
 	/**
 	 * Guessing actual variable type from context
+	 *
 	 * @return variable type
 	 */
 	PerlVariableType getActualType();
 
 	/**
 	 * Looking for lexical declaration of variable
+	 *
 	 * @return declare variable or null
 	 */
 	PerlVariable getLexicalDeclaration();
 
 	/**
 	 * Looking for global variable declarations sutable for current variable
+	 *
 	 * @return list of global declarations
 	 */
 	List<PerlVariable> getGlobalDeclarations();
 
 	/**
 	 * Looking for globs, sutable for current variable
+	 *
 	 * @return list of globs
 	 */
 	List<PerlGlobVariable> getRelatedGlobs();
 
 	/**
 	 * Returns line number of element in the document
+	 *
 	 * @return list of globs
 	 */
 	int getLineNumber();
-
 
 
 }

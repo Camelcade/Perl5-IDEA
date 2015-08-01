@@ -32,31 +32,36 @@ public class XSFileType extends LanguageFileType
 	public static final XSFileType INSTANCE = new XSFileType();
 	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
-	private XSFileType() {
+	private XSFileType()
+	{
 		super(XSLanguage.INSTANCE);
 	}
 
 	@NotNull
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return "XS extension";
 	}
 
 	@NotNull
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
 		return "Perl5 extension in C";
 	}
 
 	@NotNull
 	@Override
-	public String getDefaultExtension() {
+	public String getDefaultExtension()
+	{
 		return "xs";
 	}
 
 	@Nullable
 	@Override
-	public Icon getIcon() {
+	public Icon getIcon()
+	{
 		return PerlIcons.XS_FILE;
 	}
 }

@@ -16,16 +16,11 @@
 
 package com.perl5.lang.perl.idea.highlighter;
 
-import com.intellij.openapi.options.colors.ColorSettingsPage;
-
-/**
- * Created by hurricup on 19.04.2015.
- */
-
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
+import com.intellij.openapi.options.colors.ColorSettingsPage;
 import com.perl5.PerlIcons;
 import com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +28,10 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.Map;
+
+/**
+ * Created by hurricup on 19.04.2015.
+ */
 
 public class PerlColorSettingsPage implements ColorSettingsPage
 {

@@ -41,6 +41,15 @@ public class PerlSubArgument
 		this.variableClass = variableClass;
 	}
 
+	public static PerlSubArgument deserialize(@NotNull StubInputStream dataStream) throws IOException
+	{
+		PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
+		String argumentName = dataStream.readName().toString();
+		String variableClass = dataStream.readName().toString();
+		boolean isOptional = dataStream.readBoolean();
+		return new PerlSubArgument(argumentType, argumentName, variableClass, isOptional);
+	}
+
 	public PerlVariableType getArgumentType()
 	{
 		return argumentType;
@@ -64,15 +73,6 @@ public class PerlSubArgument
 	public String toStringShort()
 	{
 		return argumentType.getSigil() + argumentName;
-	}
-
-	public static PerlSubArgument deserialize(@NotNull StubInputStream dataStream) throws IOException
-	{
-		PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
-		String argumentName = dataStream.readName().toString();
-		String variableClass = dataStream.readName().toString();
-		boolean isOptional = dataStream.readBoolean();
-		return new PerlSubArgument(argumentType,argumentName,variableClass,isOptional);
 	}
 
 	public void serialize(@NotNull StubOutputStream dataStream) throws IOException

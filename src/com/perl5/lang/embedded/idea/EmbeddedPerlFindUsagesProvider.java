@@ -28,7 +28,8 @@ public class EmbeddedPerlFindUsagesProvider extends PerlFindUsagesProvider
 
 	@Nullable
 	@Override
-	public WordsScanner getWordsScanner() {
+	public WordsScanner getWordsScanner()
+	{
 //		return WORDS_SCANNER; todo solve the concurrency problem
 		return new DefaultWordsScanner(new EmbeddedPerlLexerAdapter(null),
 				PerlParserDefinition.IDENTIFIERS,

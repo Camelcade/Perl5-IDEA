@@ -17,8 +17,10 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
-import com.intellij.util.xml.Resolve;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.ResolveResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,7 +31,7 @@ public abstract class PerlReferencePoly extends PerlReference implements PsiPoly
 {
 	public PerlReferencePoly(@NotNull PsiElement element, TextRange textRange)
 	{
-		super(element,textRange);
+		super(element, textRange);
 	}
 
 	@Override
@@ -38,9 +40,9 @@ public abstract class PerlReferencePoly extends PerlReference implements PsiPoly
 		ResolveResult[] results = multiResolve(false);
 		PsiManager psiManager = getElement().getManager();
 
-		for(ResolveResult result : results)
+		for (ResolveResult result : results)
 		{
-			if( psiManager.areElementsEquivalent(result.getElement(), element) )
+			if (psiManager.areElementsEquivalent(result.getElement(), element))
 				return true;
 		}
 

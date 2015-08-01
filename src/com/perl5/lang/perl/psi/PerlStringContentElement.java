@@ -24,7 +24,9 @@ import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 public interface PerlStringContentElement extends PerlNamedElement
 {
 	public boolean looksLikePackage();
+
 	public boolean looksLikePath();
+
 	String getContentFileName();
 
 }

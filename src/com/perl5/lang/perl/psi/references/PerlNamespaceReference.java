@@ -18,9 +18,14 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,19 +43,19 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	{
 		super(element, textRange);
 
-		if( element instanceof PerlNamespaceElement )
+		if (element instanceof PerlNamespaceElement)
 			canonicalPackageName = ((PerlNamespaceElement) element).getCanonicalName();
-		else if( element instanceof PerlStringContentElement )
+		else if (element instanceof PerlStringContentElement)
 			canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(element.getText());
 		else
 			throw new RuntimeException("Incorrect referencable element: " + element.getClass());
 
 		String text = element.getText();
 		if (text.endsWith("::"))
-			setRangeInElement(new TextRange(0, text.length()-2));
-		else if( text.endsWith("'"))
+			setRangeInElement(new TextRange(0, text.length() - 2));
+		else if (text.endsWith("'"))
 		{
-			setRangeInElement(new TextRange(0, text.length()-1));
+			setRangeInElement(new TextRange(0, text.length() - 1));
 		}
 	}
 
@@ -72,7 +77,7 @@ public class PerlNamespaceReference extends PerlReferencePoly
 
 		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, canonicalPackageName))
 		{
-			if( !parent.isEquivalentTo(namespaceDefinition) )
+			if (!parent.isEquivalentTo(namespaceDefinition))
 				result.add(new PsiElementResolveResult(namespaceDefinition));
 		}
 
@@ -84,8 +89,9 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	public boolean isReferenceTo(PsiElement element)
 	{
 		PsiElement parent = element.getParent();
-		if( parent instanceof PerlNamespaceDefinition)
-			return super.isReferenceTo(element) || super.isReferenceTo(parent);;
+		if (parent instanceof PerlNamespaceDefinition)
+			return super.isReferenceTo(element) || super.isReferenceTo(parent);
+		;
 		return super.isReferenceTo(element);
 	}
 

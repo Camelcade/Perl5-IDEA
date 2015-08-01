@@ -68,7 +68,7 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		Module module = ModuleUtil.findModuleForPsiElement(myElement);
 		VirtualFile[] classRoots;
 
-		if( module != null )
+		if (module != null)
 			classRoots = ModuleRootManager.getInstance(module).orderEntries().classes().getRoots();
 		else
 			classRoots = ProjectRootManager.getInstance(myElement.getProject()).orderEntries().getClassesRoots();

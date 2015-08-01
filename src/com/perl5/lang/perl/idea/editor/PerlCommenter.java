@@ -24,33 +24,38 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlCommenter implements Commenter
 {
-    @Nullable
-    @Override
-    public String getLineCommentPrefix() {
-        return "#";
-    }
+	@Nullable
+	@Override
+	public String getLineCommentPrefix()
+	{
+		return "#";
+	}
 
-    @Nullable
-    @Override
-    public String getBlockCommentPrefix() {
-        return "=pod";
-    }
+	@Nullable
+	@Override
+	public String getBlockCommentPrefix()
+	{
+		return "=pod";
+	}
 
-    @Nullable
-    @Override
-    public String getBlockCommentSuffix() {
-        return "=cut";
-    }
+	@Nullable
+	@Override
+	public String getBlockCommentSuffix()
+	{
+		return "=cut";
+	}
 
-    @Nullable
-    @Override
-    public String getCommentedBlockCommentPrefix() {
-        return null;
-    }
+	@Nullable
+	@Override
+	public String getCommentedBlockCommentPrefix()
+	{
+		return null;
+	}
 
-    @Nullable
-    @Override
-    public String getCommentedBlockCommentSuffix() {
-        return null;
-    }
+	@Nullable
+	@Override
+	public String getCommentedBlockCommentSuffix()
+	{
+		return null;
+	}
 }

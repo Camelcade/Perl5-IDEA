@@ -36,26 +36,50 @@ import java.util.regex.Pattern;
 
 public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 {
-	Project myProject;
-
-	// last token
-	protected IElementType lastTokenType;
-	protected String lastToken;
-
-
-	protected IElementType lastSignificantTokenType;
-	protected String lastSignificantToken;
-
-	protected IElementType lastUnbraceTokenType;
-	protected String lastUnbraceToken;
-
-	protected IElementType lastUnparenTokenType;
-	protected String lastUnparenToken;
-
 	public static final HashMap<String, IElementType> reservedTokenTypes = new HashMap<>();
 	public static final HashMap<String, IElementType> namedOperators = new HashMap<>();
 	public static final HashMap<String, IElementType> blockNames = new HashMap<>();
 	public static final HashMap<String, IElementType> tagNames = new HashMap<>();
+	// http://perldoc.perl.org/perldata.html#Identifier-parsing
+	private static final String reBasicIdentifier = "[_a-zA-Z0-9][_a-zA-Z0-9]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
+	private static final String reSeparator =
+			"(?:" +
+					"(?:::)+'?" +
+					"|" +
+					"(?:::)*'" +
+					")";
+	public static final Pattern AMBIGUOUS_PACKAGE_RE = Pattern.compile(
+			"(" +
+					reSeparator + "?" +        // optional opening separator,
+					"(?:" +
+					reBasicIdentifier +
+					reSeparator +
+					")*" +
+					")" +
+					"(" +
+					reBasicIdentifier +
+					")"
+	);
+	private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<>(Arrays.asList(
+			"eq",
+			"ne",
+			"gt",
+			"lt",
+			"ge",
+			"le",
+
+			"qw",
+			"qr",
+			"qx",
+			"qq",
+			"tr",
+			"m",
+			"q",
+			"s",
+			"y"
+	));
+	public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
+	public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
 
 	static
 	{
@@ -152,7 +176,49 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		RESERVED_TOKENSET.addAll(reservedTokenTypes.values());
 	}
 
+	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
+	/**
+	 * States stack
+	 **/
+	private final Stack<Integer> stateStack = new Stack<Integer>();
+	/**
+	 * HEREDOC proceccing section
+	 */
+
+	// last captured heredoc marker
+	public String heredocMarker;
+	// pattern for getting marker
+	public Pattern markerPattern = Pattern.compile("<<(.+?)");
+	public Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
+	public Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.+?)\'");
+	public Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
+	/**
+	 * Quote-like, transliteration and regexps common part
+	 */
+	public boolean allowSharpQuote = true;
+	public char charOpener;
+	public char charCloser;
+	public int stringContentStart;
+	public boolean isEscaped = false;
+	public int sectionsNumber = 0;    // number of sections one or two
+	public int currentSectionNumber = 0; // current section
+	// last token
+	protected IElementType lastTokenType;
+	protected String lastToken;
+	protected IElementType lastSignificantTokenType;
+	protected String lastSignificantToken;
+	protected IElementType lastUnbraceTokenType;
+	protected String lastUnbraceToken;
+	protected IElementType lastUnparenTokenType;
+	protected String lastUnparenToken;
 	protected PerlLexerAdapter evalPerlLexer;
+	Project myProject;
+	Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
+	/**
+	 * Regex processor qr{} m{} s{}{}
+	 **/
+	String regexCommand = null;
+	private boolean forceQuote = false;
 
 	public PerlLexer(Project project)
 	{
@@ -160,11 +226,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		myProject = project;
 	}
 
-
 	@Override
 	public int yystate()
 	{
-		if( preparsedTokensList.size() > 0 )
+		if (preparsedTokensList.size() > 0)
 			return LEX_PREPARSED_ITEMS;
 		return super.yystate();
 	}
@@ -184,7 +249,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		if (preparsedTokensList.size() > 0)
 			return getPreParsedToken();
-		else if( bufferEnd == 0 || tokenStart >= bufferEnd)
+		else if (bufferEnd == 0 || tokenStart >= bufferEnd)
 			return super.advance();
 		else
 		{
@@ -410,9 +475,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 	}
 
-
-	Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
-
 	/**
 	 * Checks that version is a really version, not a variable name
 	 * fixme how about sub v123123 ?
@@ -465,10 +527,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 		return NUMBER;
 	}
-
-	public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
-
-	public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
 
 	/**
 	 * Parses annotation line and puts result into the pre-parsed buffer
@@ -524,7 +582,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + tailComment.length(), COMMENT_LINE));
 	}
 
-
 	/**
 	 * Processes quote closer token
 	 * fixme this can be done as pre-parsing on string capture
@@ -540,7 +597,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return getQuoteToken(getBuffer().charAt(tokenStart));
 	}
 
-
 	/**
 	 * Checking if comment is ended. Implemented for overriding in {@link EmbeddedPerlLexer#isCommentEnd(int)} }
 	 *
@@ -551,7 +607,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		return getBuffer().charAt(currentPosition) == '\n';
 	}
-
 
 	/**
 	 * Captures pod block from current position
@@ -588,19 +643,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		return POD;
 	}
-
-	/**
-	 * HEREDOC proceccing section
-	 */
-
-	// last captured heredoc marker
-	public String heredocMarker;
-
-	// pattern for getting marker
-	public Pattern markerPattern = Pattern.compile("<<(.+?)");
-	public Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
-	public Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.+?)\'");
-	public Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
 
 	/**
 	 * Processing captured heredoc opener. Stores marker and switches to proper lexical state
@@ -827,11 +869,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		popState();
 	}
 
-	/**
-	 * States stack
-	 **/
-	private final Stack<Integer> stateStack = new Stack<Integer>();
-
 	public void pushState()
 	{
 		stateStack.push(yystate());
@@ -841,20 +878,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		setState(stateStack.pop());
 	}
-
-	/**
-	 * Quote-like, transliteration and regexps common part
-	 */
-	public boolean allowSharpQuote = true;
-	public char charOpener;
-	public char charCloser;
-	public int stringContentStart;
-	public boolean isEscaped = false;
-
-	public int sectionsNumber = 0;    // number of sections one or two
-	public int currentSectionNumber = 0; // current section
-
-	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
 
 	private IElementType restoreToken(CustomToken token)
 	{
@@ -884,11 +907,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		return restoreToken(preparsedTokensList.removeFirst());
 	}
-
-	/**
-	 * Regex processor qr{} m{} s{}{}
-	 **/
-	String regexCommand = null;
 
 	// guess if this is a OPERATOR_DIV or regex opener
 	public IElementType guessDiv()
@@ -955,7 +973,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		yypushback(yylength() - 1);
 		return OPERATOR_BITWISE_XOR;
 	}
-
 
 	/**
 	 * Sets up regex parser
@@ -1100,7 +1117,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return REGEX_QUOTE_OPEN;
 	}
 
-
 	/**
 	 * Transliteration processors tr y
 	 **/
@@ -1171,7 +1187,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return REGEX_QUOTE_CLOSE;
 	}
 
-
 	/**
 	 * Quote-like string procesors
 	 **/
@@ -1182,8 +1197,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		pushState();
 		yybegin(LEX_QUOTE_LIKE_OPENER);
 	}
-
-	private boolean forceQuote = false;
 
 	public IElementType processQuoteLikeQuote()
 	{
@@ -1269,7 +1282,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		return QUOTE;
 	}
-
 
 	public boolean waitingHereDoc()
 	{
@@ -1365,46 +1377,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		return IDENTIFIER;
 	}
-
-	// http://perldoc.perl.org/perldata.html#Identifier-parsing
-	private static final String reBasicIdentifier = "[_a-zA-Z0-9][_a-zA-Z0-9]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
-	private static final String reSeparator =
-			"(?:" +
-					"(?:::)+'?" +
-					"|" +
-					"(?:::)*'" +
-					")";
-	public static final Pattern AMBIGUOUS_PACKAGE_RE = Pattern.compile(
-			"(" +
-					reSeparator + "?" +        // optional opening separator,
-					"(?:" +
-					reBasicIdentifier +
-					reSeparator +
-					")*" +
-					")" +
-					"(" +
-					reBasicIdentifier +
-					")"
-	);
-
-	private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<>(Arrays.asList(
-			"eq",
-			"ne",
-			"gt",
-			"lt",
-			"ge",
-			"le",
-
-			"qw",
-			"qr",
-			"qx",
-			"qq",
-			"tr",
-			"m",
-			"q",
-			"s",
-			"y"
-	));
 
 	/**
 	 * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER

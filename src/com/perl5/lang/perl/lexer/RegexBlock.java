@@ -33,13 +33,28 @@ public class RegexBlock implements PerlElementTypes
 		allowedModifiers.put("qr", Arrays.asList(ArrayUtils.toObject("msixpodual".toCharArray())));
 	}
 
+	protected int startOffset;
+
+//	public static final Pattern OCCURANCE_PATTERN = Pattern.compile("\\{\\d+(,\\d*)?\\}");
+//	public static final Pattern EXPRESSION_PATTERN = Pattern.compile("\\\\[xNogbB]\\{.*?\\}");
+	protected int endOffset;
+	protected CharSequence buffer;
+	protected char charOpener;
+	protected char charCloser;
+
+	protected RegexBlock(CharSequence buffer, int startOffset, int endOffset, char charOpener, char charCloser)
+	{
+		this.startOffset = startOffset;
+		this.endOffset = endOffset;
+		this.buffer = buffer;
+		this.charOpener = charOpener;
+		this.charCloser = charCloser;
+	}
+
 	public static boolean isWhiteSpace(char character)
 	{
 		return whiteSpaces.contains(character);
 	}
-
-//	public static final Pattern OCCURANCE_PATTERN = Pattern.compile("\\{\\d+(,\\d*)?\\}");
-//	public static final Pattern EXPRESSION_PATTERN = Pattern.compile("\\\\[xNogbB]\\{.*?\\}");
 
 	/**
 	 * Parses guaranteed opened regex block
@@ -97,10 +112,10 @@ public class RegexBlock implements PerlElementTypes
 //					parenLevel--;
 			}
 
-			if( !isEscaped && isQuotesDiffers && !isCharGroup )
-				if( currentChar == openingChar )
+			if (!isEscaped && isQuotesDiffers && !isCharGroup)
+				if (currentChar == openingChar)
 					delimiterLevel++;
-				else if( currentChar == closingChar && delimiterLevel > 0 )
+				else if (currentChar == closingChar && delimiterLevel > 0)
 					delimiterLevel--;
 
 			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
@@ -138,21 +153,6 @@ public class RegexBlock implements PerlElementTypes
 	public int getEndOffset()
 	{
 		return endOffset;
-	}
-
-	protected int startOffset;
-	protected int endOffset;
-	protected CharSequence buffer;
-	protected char charOpener;
-	protected char charCloser;
-
-	protected RegexBlock(CharSequence buffer, int startOffset, int endOffset, char charOpener, char charCloser)
-	{
-		this.startOffset = startOffset;
-		this.endOffset = endOffset;
-		this.buffer = buffer;
-		this.charOpener = charOpener;
-		this.charCloser = charCloser;
 	}
 
 	public Character getOpeningQuote()
@@ -234,7 +234,7 @@ public class RegexBlock implements PerlElementTypes
 				while (currentOffset < regexEndOffset && isWhiteSpace(buffer.charAt(currentOffset)))
 					currentOffset++;
 				tokens.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
-			} else if (!isEscaped  && currentChar == '#') // comment here
+			} else if (!isEscaped && currentChar == '#') // comment here
 			{
 				int commentStart = currentOffset;
 				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != '\n')
@@ -243,7 +243,7 @@ public class RegexBlock implements PerlElementTypes
 			} else
 				tokens.add(new CustomToken(currentOffset, ++currentOffset, REGEX_TOKEN));
 
-			if( !isSecondBlock )
+			if (!isSecondBlock)
 				if (!isEscaped && !isCharGroup && currentChar == '[')
 					isCharGroup = true;
 				else if (!isEscaped && isCharGroup && currentChar == ']')
@@ -290,7 +290,7 @@ public class RegexBlock implements PerlElementTypes
 			} else
 				tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_TOKEN));
 
-			if( !isSecondBlock )
+			if (!isSecondBlock)
 			{
 				if (!isEscaped && !isCharGroup && currentChar == '[')
 					isCharGroup = true;

@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by hurricup on 11.05.2015.
@@ -34,7 +32,7 @@ public interface PerlSubUtilBuiltIn
 
 	public static final HashSet<String> BUILT_IN_UNARY = new HashSet<>(Arrays.asList(
 
-	// original list taken from http://www.perlmonks.org/?node_id=1131277
+			// original list taken from http://www.perlmonks.org/?node_id=1131277
 			"abs",
 			"alarm",
 			"caller",
@@ -109,7 +107,7 @@ public interface PerlSubUtilBuiltIn
 			"write"
 	));
 
-	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
+	public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
 			"chomp",

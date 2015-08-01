@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
 import java.util.List;
 
@@ -29,6 +29,7 @@ public interface PerlSubDefinitionStub extends PerlSubBaseStub<PsiPerlSubDefinit
 {
 	/**
 	 * Returns list of accepted arguments
+	 *
 	 * @return list of accepted arguments
 	 */
 	public List<PerlSubArgument> getSubArgumentsList();

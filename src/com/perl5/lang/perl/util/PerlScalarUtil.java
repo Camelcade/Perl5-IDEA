@@ -19,11 +19,11 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 
-import java.util.*;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -32,6 +32,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 {
 	/**
 	 * Checks if variable is built in
+	 *
 	 * @param variable variable name
 	 * @return checking result
 	 */
@@ -42,9 +43,10 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 
 	/**
 	 * Searching project files for global scalar definitions by specific package and variable name
-	 * @param project	project to search in
-	 * @param canonicalName	canonical variable name package::name
-	 * @return	Collection of found definitions
+	 *
+	 * @param project       project to search in
+	 * @param canonicalName canonical variable name package::name
+	 * @return Collection of found definitions
 	 */
 	public static Collection<PerlVariable> findGlobalScalarDefinitions(Project project, String canonicalName)
 	{
@@ -54,6 +56,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 
 	/**
 	 * Returns list of defined global scalars
+	 *
 	 * @param project project to search in
 	 * @return collection of variable canonical names
 	 */

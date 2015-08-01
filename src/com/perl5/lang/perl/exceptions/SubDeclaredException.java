@@ -25,7 +25,8 @@ public class SubDeclaredException extends PerlParsingException
 	{
 		super(message);
 	}
-	public SubDeclaredException(String format, Object ... str)
+
+	public SubDeclaredException(String format, Object... str)
 	{
 		super(String.format(format, str));
 	}

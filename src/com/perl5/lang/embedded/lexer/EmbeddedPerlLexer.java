@@ -27,6 +27,8 @@ import java.io.IOException;
  */
 public class EmbeddedPerlLexer extends PerlLexer
 {
+	private int preHTMLState = YYINITIAL;
+
 	public EmbeddedPerlLexer(Project project)
 	{
 		super(project);
@@ -40,8 +42,6 @@ public class EmbeddedPerlLexer extends PerlLexer
 
 		super.reset(buf, start, end, initialState);
 	}
-
-	private int preHTMLState = YYINITIAL;
 
 	public IElementType advance() throws IOException
 	{

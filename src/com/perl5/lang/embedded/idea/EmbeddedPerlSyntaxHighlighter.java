@@ -35,7 +35,7 @@ public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighter impleme
 {
 	public static final TextAttributesKey EMBED_MARKER = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
 
-	TextAttributesKey[]	EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER};
+	TextAttributesKey[] EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER};
 
 	public EmbeddedPerlSyntaxHighlighter(Project project)
 	{
@@ -53,7 +53,7 @@ public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighter impleme
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
-		if( tokenType == PerlElementTypes.EMBED_MARKER )
+		if (tokenType == PerlElementTypes.EMBED_MARKER)
 			return EMBED_MARKER_KEYS;
 		else
 			return super.getTokenHighlights(tokenType);

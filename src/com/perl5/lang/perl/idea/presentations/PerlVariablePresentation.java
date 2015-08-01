@@ -43,21 +43,21 @@ public class PerlVariablePresentation extends PerlItemPresentationBase
 	{
 		// default getName || getText
 		String variableText = null;
-		if( myVariableType == PerlVariableType.ARRAY)
+		if (myVariableType == PerlVariableType.ARRAY)
 			variableText = "array";
-		else if( myVariableType == PerlVariableType.HASH)
+		else if (myVariableType == PerlVariableType.HASH)
 			variableText = "hash";
-		else if( myVariableType == PerlVariableType.SCALAR)
+		else if (myVariableType == PerlVariableType.SCALAR)
 			variableText = "scalar";
 
-		if( variableText != null )
+		if (variableText != null)
 		{
 			String contextText = null;
 			PsiElement parent = getElement().getParent();
 
-			if( parent instanceof PsiPerlVariableDeclarationLexical)
+			if (parent instanceof PsiPerlVariableDeclarationLexical)
 				contextText = "Lexical %s variable declaration";
-			else if( parent instanceof PsiPerlVariableDeclarationGlobal)
+			else if (parent instanceof PsiPerlVariableDeclarationGlobal)
 				contextText = "Global %s variable declaration";
 			else
 				contextText = "%s variable in unknown context";

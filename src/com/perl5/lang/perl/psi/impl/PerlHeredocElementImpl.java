@@ -27,14 +27,15 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlHeredocElementImpl extends PsiCommentImpl
 {
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitHeredocElement(this);
-		else super.accept(visitor);
-	}
-
 	public PerlHeredocElementImpl(IElementType type, CharSequence text)
 	{
 		super(type, text);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
+		else super.accept(visitor);
 	}
 }

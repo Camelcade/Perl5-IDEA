@@ -27,7 +27,10 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectBundle;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ui.configuration.*;
+import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
+import com.intellij.openapi.roots.ui.configuration.ContentEntryEditor;
+import com.intellij.openapi.roots.ui.configuration.JavaContentEntryEditor;
+import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtilCore;
@@ -54,37 +57,15 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 		super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE);
 	}
 
-	@Override
-	protected ContentEntryEditor createContentEntryEditor(final String contentEntryUrl) {
-		return new JavaContentEntryEditor(contentEntryUrl, getEditHandlers()) {
-			@Override
-			protected ModifiableRootModel getModel() {
-				return PerlContentEntriesEditor.this.getModel();
-			}
-		};
-	}
-
-	@Override
-	protected List<ContentEntry> addContentEntries(VirtualFile[] files) {
-		List<ContentEntry> contentEntries = super.addContentEntries(files);
-		if (!contentEntries.isEmpty()) {
-			final ContentEntry[] contentEntriesArray = contentEntries.toArray(new ContentEntry[contentEntries.size()]);
-			addSourceRoots(myProject, contentEntriesArray, new Runnable() {
-				@Override
-				public void run() {
-					addContentEntryPanels(contentEntriesArray);
-				}
-			});
-		}
-		return contentEntries;
-	}
-
-	private static void addSourceRoots(@NotNull Project project, final ContentEntry[] contentEntries, final Runnable finishRunnable) {
+	private static void addSourceRoots(@NotNull Project project, final ContentEntry[] contentEntries, final Runnable finishRunnable)
+	{
 		final HashMap<ContentEntry, Collection<JavaModuleSourceRoot>> entryToRootMap = new HashMap<ContentEntry, Collection<JavaModuleSourceRoot>>();
 		final Map<File, ContentEntry> fileToEntryMap = new HashMap<File, ContentEntry>();
-		for (final ContentEntry contentEntry : contentEntries) {
+		for (final ContentEntry contentEntry : contentEntries)
+		{
 			final VirtualFile file = contentEntry.getFile();
-			if (file != null) {
+			if (file != null)
+			{
 				entryToRootMap.put(contentEntry, null);
 				fileToEntryMap.put(VfsUtilCore.virtualToIoFile(file), contentEntry);
 			}
@@ -93,13 +74,18 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 		final ProgressWindow progressWindow = new ProgressWindow(true, project);
 		final ProgressIndicator progressIndicator = new SmoothProgressAdapter(progressWindow, project);
 
-		final Runnable searchRunnable = new Runnable() {
+		final Runnable searchRunnable = new Runnable()
+		{
 			@Override
-			public void run() {
-				final Runnable process = new Runnable() {
+			public void run()
+			{
+				final Runnable process = new Runnable()
+				{
 					@Override
-					public void run() {
-						for (final File file : fileToEntryMap.keySet()) {
+					public void run()
+					{
+						for (final File file : fileToEntryMap.keySet())
+						{
 							progressIndicator.setText(ProjectBundle.message("module.paths.searching.source.roots.progress", file.getPath()));
 							final Collection<JavaModuleSourceRoot> roots = JavaSourceRootDetectionUtil.suggestRoots(file);
 							entryToRootMap.put(fileToEntryMap.get(file), roots);
@@ -111,43 +97,86 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 			}
 		};
 
-		final Runnable addSourcesRunnable = new Runnable() {
+		final Runnable addSourcesRunnable = new Runnable()
+		{
 			@Override
-			public void run() {
-				for (final ContentEntry contentEntry : contentEntries) {
+			public void run()
+			{
+				for (final ContentEntry contentEntry : contentEntries)
+				{
 					final Collection<JavaModuleSourceRoot> suggestedRoots = entryToRootMap.get(contentEntry);
-					if (suggestedRoots != null) {
-						for (final JavaModuleSourceRoot suggestedRoot : suggestedRoots) {
+					if (suggestedRoots != null)
+					{
+						for (final JavaModuleSourceRoot suggestedRoot : suggestedRoots)
+						{
 							final VirtualFile sourceRoot = LocalFileSystem.getInstance().findFileByIoFile(suggestedRoot.getDirectory());
 							final VirtualFile fileContent = contentEntry.getFile();
-							if (sourceRoot != null && fileContent != null && VfsUtilCore.isAncestor(fileContent, sourceRoot, false)) {
+							if (sourceRoot != null && fileContent != null && VfsUtilCore.isAncestor(fileContent, sourceRoot, false))
+							{
 								contentEntry.addSourceFolder(sourceRoot, false, suggestedRoot.getPackagePrefix());
 							}
 						}
 					}
 				}
-				if (finishRunnable != null) {
+				if (finishRunnable != null)
+				{
 					finishRunnable.run();
 				}
 			}
 		};
 
-		new SwingWorker() {
+		new SwingWorker()
+		{
 			@Override
-			public Object construct() {
+			public Object construct()
+			{
 				searchRunnable.run();
 				return null;
 			}
 
 			@Override
-			public void finished() {
+			public void finished()
+			{
 				addSourcesRunnable.run();
 			}
 		}.start();
 	}
 
 	@Override
-	protected JPanel createBottomControl(Module module) {
+	protected ContentEntryEditor createContentEntryEditor(final String contentEntryUrl)
+	{
+		return new JavaContentEntryEditor(contentEntryUrl, getEditHandlers())
+		{
+			@Override
+			protected ModifiableRootModel getModel()
+			{
+				return PerlContentEntriesEditor.this.getModel();
+			}
+		};
+	}
+
+	@Override
+	protected List<ContentEntry> addContentEntries(VirtualFile[] files)
+	{
+		List<ContentEntry> contentEntries = super.addContentEntries(files);
+		if (!contentEntries.isEmpty())
+		{
+			final ContentEntry[] contentEntriesArray = contentEntries.toArray(new ContentEntry[contentEntries.size()]);
+			addSourceRoots(myProject, contentEntriesArray, new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					addContentEntryPanels(contentEntriesArray);
+				}
+			});
+		}
+		return contentEntries;
+	}
+
+	@Override
+	protected JPanel createBottomControl(Module module)
+	{
 		if (Registry.is("ide.new.project.settings")) return null;
 		final JPanel innerPanel = new JPanel(new GridBagLayout());
 		innerPanel.setBorder(BorderFactory.createEmptyBorder(6, 0, 0, 6));

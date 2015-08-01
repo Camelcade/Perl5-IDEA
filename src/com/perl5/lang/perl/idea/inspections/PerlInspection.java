@@ -30,10 +30,12 @@ public abstract class PerlInspection extends LocalInspectionTool
 	{
 		holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
 	}
+
 	protected void registerError(ProblemsHolder holder, PsiElement element, String message)
 	{
 		holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR);
 	}
+
 	protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message)
 	{
 		holder.registerProblem(element, message, ProblemHighlightType.LIKE_DEPRECATED);

@@ -38,7 +38,8 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
 	protected HashSet<String> KNOWN_SUBS = new HashSet<>();
 	protected HashSet<String> KNOWN_PACKAGES = new HashSet<>(PerlPackageUtil.BUILT_IN_ALL);
-
+	protected boolean recoveringStatement = false;
+	protected int bracesLevel = 0;
 	boolean indexSnapshotDone = false;
 	Project myProject = getProject();
 
@@ -126,9 +127,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 
 		return KNOWN_PACKAGES.contains(canonicalPackageName);
 	}
-
-	protected boolean recoveringStatement = false;
-	protected int bracesLevel = 0;
 
 	public void startRecovery()
 	{

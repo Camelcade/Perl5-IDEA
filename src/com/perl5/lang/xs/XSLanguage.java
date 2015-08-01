@@ -30,12 +30,14 @@ public class XSLanguage extends Language
 
 	public static final XSLanguage INSTANCE = new XSLanguage();
 
-	public XSLanguage() {
+	public XSLanguage()
+	{
 		super("Perl extension language");
 	}
 
 	@Override
-	public boolean isCaseSensitive() {
+	public boolean isCaseSensitive()
+	{
 		return true;
 	}
 }

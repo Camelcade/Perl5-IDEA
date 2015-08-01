@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea;
 
 /**
  * Created by hurricup on 25.04.2015.
- * 
  */
 
 import com.intellij.lang.annotation.Annotation;

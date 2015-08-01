@@ -30,7 +30,8 @@ import org.jetbrains.annotations.NotNull;
 public class PerlTypeFactory extends FileTypeFactory
 {
 	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
+	{
 		fileTypeConsumer.consume(PerlFileTypePackage.INSTANCE, "pm");
 		fileTypeConsumer.consume(PerlFileType.INSTANCE, "cgi");
 		fileTypeConsumer.consume(PerlFileType.INSTANCE, "pl");

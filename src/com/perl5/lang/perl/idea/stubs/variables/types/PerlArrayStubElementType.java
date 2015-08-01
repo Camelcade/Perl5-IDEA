@@ -18,11 +18,11 @@ package com.perl5.lang.perl.idea.stubs.variables.types;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.impl.PsiPerlArrayVariableImpl;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.impl.PsiPerlArrayVariableImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -38,7 +38,7 @@ public class PerlArrayStubElementType extends PerlVariableStubElementType
 	@Override
 	public PerlVariable createPsi(@NotNull PerlVariableStub stub)
 	{
-		return new PsiPerlArrayVariableImpl(stub,this);
+		return new PsiPerlArrayVariableImpl(stub, this);
 	}
 
 	@Override

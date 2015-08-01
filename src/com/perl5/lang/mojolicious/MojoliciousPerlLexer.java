@@ -27,12 +27,12 @@ import java.io.IOException;
  */
 public class MojoliciousPerlLexer extends PerlLexer
 {
+	int mojoState = LEX_HTML_BLOCK;
+
 	public MojoliciousPerlLexer(Project project)
 	{
 		super(project);
 	}
-
-	int mojoState = LEX_HTML_BLOCK;
 
 	protected int getMojoState()
 	{

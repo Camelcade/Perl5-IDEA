@@ -28,35 +28,41 @@ import org.jetbrains.annotations.Nullable;
 /**
  * GoToClassContributor looks up namespaces (packages names) - windows shortcut Ctrl+N
  */
-public class PerlGoToClassContributor implements ChooseByNameContributor, GotoClassContributor {
-    @Nullable
-    @Override
-    public String getQualifiedName(NavigationItem navigationItem) {
-        return navigationItem.getName();
-    }
+public class PerlGoToClassContributor implements ChooseByNameContributor, GotoClassContributor
+{
+	@Nullable
+	@Override
+	public String getQualifiedName(NavigationItem navigationItem)
+	{
+		return navigationItem.getName();
+	}
 
-    @Nullable
-    @Override
-    public String getQualifiedNameSeparator() {
-        return PerlPackageUtil.PACKAGE_SEPARATOR;
-    }
+	@Nullable
+	@Override
+	public String getQualifiedNameSeparator()
+	{
+		return PerlPackageUtil.PACKAGE_SEPARATOR;
+	}
 
-    @NotNull
-    @Override
-    public String[] getNames(Project project, boolean b) {
-        return PerlPackageUtil.getDefinedPackageNames(project).toArray(new String[]{});
-    }
+	@NotNull
+	@Override
+	public String[] getNames(Project project, boolean b)
+	{
+		return PerlPackageUtil.getDefinedPackageNames(project).toArray(new String[]{});
+	}
 
-    @NotNull
-    @Override
-    public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean b) {
-        PsiPerlNamespaceDefinition[] nameSpaces = PerlPackageUtil.getNamespaceDefinitions(project, packageName).toArray(new PsiPerlNamespaceDefinition[]{});
-        NavigationItem[] navigationItems = new NavigationItem[nameSpaces.length];
-        for (int i = 0; i < nameSpaces.length; i++) {
-            PsiPerlNamespaceDefinition nameSpace = nameSpaces[i];
-            navigationItems[i] = new PerlNameSpaceNavigationItem(project,nameSpace);
-        }
+	@NotNull
+	@Override
+	public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean b)
+	{
+		PsiPerlNamespaceDefinition[] nameSpaces = PerlPackageUtil.getNamespaceDefinitions(project, packageName).toArray(new PsiPerlNamespaceDefinition[]{});
+		NavigationItem[] navigationItems = new NavigationItem[nameSpaces.length];
+		for (int i = 0; i < nameSpaces.length; i++)
+		{
+			PsiPerlNamespaceDefinition nameSpace = nameSpaces[i];
+			navigationItems[i] = new PerlNameSpaceNavigationItem(project, nameSpace);
+		}
 
-        return navigationItems;
-    }
+		return navigationItems;
+	}
 }

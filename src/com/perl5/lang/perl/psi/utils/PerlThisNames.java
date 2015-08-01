@@ -25,7 +25,9 @@ import java.util.Set;
 public abstract class PerlThisNames
 {
 	public final static Set<String> NAMES_SET = new HashSet<>();
-	static{
+
+	static
+	{
 		NAMES_SET.add("this");
 		NAMES_SET.add("self");
 		NAMES_SET.add("proto");

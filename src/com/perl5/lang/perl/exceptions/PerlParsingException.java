@@ -26,7 +26,7 @@ public class PerlParsingException extends Exception
 		super(message);
 	}
 
-	public PerlParsingException(String format, Object ... str)
+	public PerlParsingException(String format, Object... str)
 	{
 		super(String.format(format, str));
 	}

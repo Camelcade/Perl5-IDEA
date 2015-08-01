@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import org.jetbrains.annotations.Nullable;
 
 /**

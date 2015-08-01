@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
 import java.util.List;
@@ -37,6 +37,7 @@ public interface PerlSubDefinition extends PerlSubBase<PerlSubDefinitionStub>, P
 
 	/**
 	 * Returns compiled and parenthesised arguments list
+	 *
 	 * @return String with parenthesised arguments
 	 */
 	public String getSubArgumentsListAsString();

@@ -19,11 +19,10 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
-import com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -33,7 +32,7 @@ import java.util.HashSet;
  */
 public class PerlGlobUtil implements PerlElementTypes
 {
-	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
+	public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
 			"ARGV",
 			"STDERR",
 			"STDOUT",
@@ -51,8 +50,9 @@ public class PerlGlobUtil implements PerlElementTypes
 
 	/**
 	 * Searching project files for sub definitions by specific package and function name
-	 * @param project	project to search in
-	 * @param canonicalName	canonical function name package::name
+	 *
+	 * @param project       project to search in
+	 * @param canonicalName canonical function name package::name
 	 * @return collection of found definitions
 	 */
 	public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName)
@@ -64,6 +64,7 @@ public class PerlGlobUtil implements PerlElementTypes
 
 	/**
 	 * Returns list of known stubbed globs
+	 *
 	 * @param project project to search in
 	 * @return collection of globs names
 	 */

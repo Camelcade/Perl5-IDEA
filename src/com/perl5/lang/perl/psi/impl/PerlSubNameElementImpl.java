@@ -38,17 +38,18 @@ import java.util.List;
 
 /**
  * Created by hurricup on 24.05.2015.
- *
  */
 public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNameElement
 {
-	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text) {
+	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text)
+	{
 		super(type, text);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubNameElement(this);
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitSubNameElement(this);
 		else super.accept(visitor);
 	}
 
@@ -56,10 +57,10 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		PerlSubNameElement newFunction = PerlElementFactory.createUserFunction(getProject(), name);
-		if( newFunction != null )
+		if (newFunction != null)
 			replace(newFunction);
 		else
-			throw new IncorrectOperationException("Unable to create function from: "+ name);
+			throw new IncorrectOperationException("Unable to create function from: " + name);
 		return this;
 	}
 
@@ -69,7 +70,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	{
 		PsiElement parent = getParent();
 
-		if( parent instanceof PerlPackageMember)
+		if (parent instanceof PerlPackageMember)
 			return ((PerlPackageMember) parent).getPackageName();
 		else
 			return PerlPackageUtil.getContextPackageName(this);
@@ -111,7 +112,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		String packageName = getPackageName();
 		String subName = getName();
 
-		if( subName != null  )
+		if (subName != null)
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
 				result.addAll(PerlDefaultMro.getSubDefinitions(getProject(), packageName, subName));
@@ -134,11 +135,11 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		String packageName = getPackageName();
 		String subName = getName();
 
-		if( subName != null  )
+		if (subName != null)
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
 				result.addAll(PerlDefaultMro.getSubDeclarations(getProject(), packageName, subName));
-			else if (parent instanceof PerlMethod &&  "SUPER".equals(packageName))
+			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
 				result.addAll(PerlDefaultMro.getSuperSubDeclarations(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
 				for (PsiPerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(getProject(), packageName + "::" + subName))
@@ -160,9 +161,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		String packageName = getPackageName();
 		String subName = getName();
 
-		if( subName != null  )
+		if (subName != null)
 		{
-			if ( parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
+			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
 				result.addAll(PerlDefaultMro.getSubAliases(getProject(), packageName, subName));
 			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
 				result.addAll(PerlDefaultMro.getSuperSubAliases(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));

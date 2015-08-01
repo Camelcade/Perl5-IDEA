@@ -24,13 +24,15 @@ import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
  */
 public abstract class PerlNamespaceBlockImplMixin extends PerlLexicalScopeMemberMixin implements PsiPerlNamespaceBlock
 {
-    public PerlNamespaceBlockImplMixin(ASTNode node) {
-        super(node);
-    }
+	public PerlNamespaceBlockImplMixin(ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public void subtreeChanged() {
-        super.subtreeChanged();
-        getNamespaceDefinition().subtreeChanged();
-    }
+	@Override
+	public void subtreeChanged()
+	{
+		super.subtreeChanged();
+		getNamespaceDefinition().subtreeChanged();
+	}
 }

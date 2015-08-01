@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 
 import java.util.List;
@@ -28,29 +27,35 @@ public interface PerlSubNameElement extends PerlNamedElement
 {
 	/**
 	 * Attempts to find sub definition
+	 *
 	 * @return sub definition elements list
 	 */
 	public List<PerlSubDefinition> getSubDefinitions();
+
 	/**
 	 * Attempts to find sub declarations
+	 *
 	 * @return sub declarations elements list
 	 */
 	public List<PerlSubDeclaration> getSubDeclarations();
 
 	/**
 	 * Searching for related globs
+	 *
 	 * @return related globs
 	 */
 	public List<PerlGlobVariable> getRelatedGlobs();
 
 	/**
 	 * Trying to get the package name from explicit specification or by traversing
+	 *
 	 * @return package name for current element
 	 */
 	public String getPackageName();
 
 	/**
 	 * Returns fullname package::element
+	 *
 	 * @return name
 	 */
 	public String getCanonicalName();
@@ -58,6 +63,7 @@ public interface PerlSubNameElement extends PerlNamedElement
 
 	/**
 	 * Checks if this sub name is built in
+	 *
 	 * @return checking result
 	 */
 	public boolean isBuiltIn();

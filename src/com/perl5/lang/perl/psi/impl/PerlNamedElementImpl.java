@@ -31,7 +31,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public abstract class PerlNamedElementImpl extends ASTWrapperPsiElement implements PerlNamedElement
 {
-	public PerlNamedElementImpl(@NotNull ASTNode node){
+	public PerlNamedElementImpl(@NotNull ASTNode node)
+	{
 		super(node);
 	}
 

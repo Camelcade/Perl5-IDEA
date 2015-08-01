@@ -26,7 +26,6 @@ import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,19 +42,22 @@ public class PodColorSettingsPage implements ColorSettingsPage
 
 	@Nullable
 	@Override
-	public Icon getIcon() {
+	public Icon getIcon()
+	{
 		return PerlIcons.POD_FILE;
 	}
 
 	@NotNull
 	@Override
-	public SyntaxHighlighter getHighlighter() {
+	public SyntaxHighlighter getHighlighter()
+	{
 		return new PodSyntaxHighlighter(null);
 	}
 
 	@NotNull
 	@Override
-	public String getDemoText() {
+	public String getDemoText()
+	{
 		return "=head1 NAME\n" +
 				"\n" +
 				"DTL::Fast - Perl implementation of Django templating language.\n" +
@@ -77,25 +79,29 @@ public class PodColorSettingsPage implements ColorSettingsPage
 
 	@Nullable
 	@Override
-	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
+	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap()
+	{
 		return null;
 	}
 
 	@NotNull
 	@Override
-	public AttributesDescriptor[] getAttributeDescriptors() {
+	public AttributesDescriptor[] getAttributeDescriptors()
+	{
 		return DESCRIPTORS;
 	}
 
 	@NotNull
 	@Override
-	public ColorDescriptor[] getColorDescriptors() {
+	public ColorDescriptor[] getColorDescriptors()
+	{
 		return ColorDescriptor.EMPTY_ARRAY;
 	}
 
 	@NotNull
 	@Override
-	public String getDisplayName() {
+	public String getDisplayName()
+	{
 		return "Perl5 POD";
 	}
 }

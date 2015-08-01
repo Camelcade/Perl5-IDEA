@@ -21,7 +21,7 @@ import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 						assert element instanceof PerlVariableNameElement;
 						// check if it's dereference
 						PsiElement parent = element.getParent();
-						assert parent instanceof PerlGlobVariable: "Got: " + parent.getClass() + " in " + parent.getText();
+						assert parent instanceof PerlGlobVariable : "Got: " + parent.getClass() + " in " + parent.getText();
 
 						return new PsiReference[]{new PerlGlobVariableNameReference(element, new TextRange(0, element.getTextLength()))};
 					}
@@ -119,7 +119,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
 			{
 				assert element instanceof PerlStringContentElement;
-				if( ((PerlStringContentElement) element).looksLikePackage())
+				if (((PerlStringContentElement) element).looksLikePackage())
 					return new PsiReference[]{new PerlNamespaceReference(element, new TextRange(0, element.getTextLength()))};
 				return new PsiReference[0];
 			}

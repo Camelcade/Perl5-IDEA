@@ -19,11 +19,11 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -41,9 +41,9 @@ public class PerlSubDeprecatedInspection extends PerlInspection
 			{
 				PsiElement container = o.getParent();
 
-				if( container instanceof PerlSubDefinition && ((PerlSubDefinition) container).getSubAnnotations().isDeprecated())
+				if (container instanceof PerlSubDefinition && ((PerlSubDefinition) container).getSubAnnotations().isDeprecated())
 					markDeprecated(holder, o, "This sub defined as deprecated");
-				else if( container instanceof PerlSubDeclaration && ((PerlSubDeclaration) container).getSubAnnotations().isDeprecated())
+				else if (container instanceof PerlSubDeclaration && ((PerlSubDeclaration) container).getSubAnnotations().isDeprecated())
 					markDeprecated(holder, o, "This sub declared as deprecated");
 				else
 				{

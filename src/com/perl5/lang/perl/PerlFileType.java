@@ -33,28 +33,36 @@ public class PerlFileType extends LanguageFileType
 	public static final PerlFileType INSTANCE = new PerlFileType();
 	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
-	public PerlFileType(){super(PerlLanguage.INSTANCE);}
+	public PerlFileType()
+	{
+		super(PerlLanguage.INSTANCE);
+	}
 
 	@NotNull
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return "Perl5 script";
 	}
 
 	@NotNull
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
 		return "Perl5 script file";
 	}
 
 	@NotNull
 	@Override
-	public String getDefaultExtension() {
+	public String getDefaultExtension()
+	{
 		return "pl";
 	}
 
 	@Nullable
 	@Override
-	public Icon getIcon() {
+	public Icon getIcon()
+	{
 		return PerlIcons.SCRIPT_FILE;
-	}}
+	}
+}

@@ -19,18 +19,20 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Created by hurricup on 19.04.2015.
  */
 public class PerlHashUtil implements PerlElementTypes
 {
-	public static final HashSet<String> BUILT_IN = new HashSet<>( Arrays.asList(
+	public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
 			"!",
 			"+",
 			"-",
@@ -52,9 +54,10 @@ public class PerlHashUtil implements PerlElementTypes
 
 	/**
 	 * Searching project files for global hash definitions by specific package and variable name
-	 * @param project	project to search in
-	 * @param canonicalName	canonical variable name package::name
-	 * @return	Collection of found definitions
+	 *
+	 * @param project       project to search in
+	 * @param canonicalName canonical variable name package::name
+	 * @return Collection of found definitions
 	 */
 	public static Collection<PerlVariable> findGlobalHashDefinitions(Project project, String canonicalName)
 	{
@@ -64,6 +67,7 @@ public class PerlHashUtil implements PerlElementTypes
 
 	/**
 	 * Returns list of defined global hashes
+	 *
 	 * @param project project to search in
 	 * @return collection of variable canonical names
 	 */

@@ -23,8 +23,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStringDq;
@@ -47,17 +45,17 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
 	{
 		String markerText = Messages.showInputDialog(project, "What here-doc marker should we use?", "Input a Heredoc Marker", Messages.getQuestionIcon(), HEREDOC_MARKER, null);
-		if( markerText != null )
+		if (markerText != null)
 			if (markerText.isEmpty())
 				Messages.showErrorDialog(project, "Empty heredoc markers are not supported", "Marker Error");
-			else	// converting
+			else    // converting
 			{
 				HEREDOC_MARKER = markerText;
 				PsiElement parentElement = element.getParent();
 				char quoteSymbol = '"';
-				if( parentElement instanceof PsiPerlStringSq)
+				if (parentElement instanceof PsiPerlStringSq)
 					quoteSymbol = '\'';
-				else if( parentElement instanceof PsiPerlStringXq)
+				else if (parentElement instanceof PsiPerlStringXq)
 					quoteSymbol = '`';
 
 				List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(project, quoteSymbol, markerText, element.getText());
@@ -66,17 +64,16 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 
 				PsiElement newLineItem = null;
 				int newLineIndex = currentFile.getText().indexOf("\n", element.getTextOffset());
-				if( newLineIndex > 1 )
+				if (newLineIndex > 1)
 					newLineItem = currentFile.findElementAt(newLineIndex);
 
-				if( newLineItem == null ) // last statement without newline
+				if (newLineItem == null) // last statement without newline
 				{
 					currentFile.addAfter(heredocElements.get(3), currentFile.getLastChild());
 					currentFile.addAfter(heredocElements.get(1), currentFile.getLastChild());
 					currentFile.addAfter(heredocElements.get(2), currentFile.getLastChild());
 					currentFile.addAfter(heredocElements.get(3), currentFile.getLastChild());
-				}
-				else
+				} else
 				{
 					PsiElement container = newLineItem.getParent();
 					container.addAfter(heredocElements.get(3),
@@ -91,7 +88,7 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 	@Override
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
 	{
-		if( !element.isWritable())
+		if (!element.isWritable())
 			return false;
 		PsiElement parent = element.getParent();
 		return

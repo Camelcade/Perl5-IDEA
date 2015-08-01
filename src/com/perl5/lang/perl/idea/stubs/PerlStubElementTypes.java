@@ -17,13 +17,13 @@
 package com.perl5.lang.perl.idea.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStubElementType;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.variables.types.PerlArrayStubElementType;
 import com.perl5.lang.perl.idea.stubs.variables.types.PerlHashStubElementType;
 import com.perl5.lang.perl.idea.stubs.variables.types.PerlScalarStubElementType;
-import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStubElementType;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 
 /**
  * Created by hurricup on 25.05.2015.

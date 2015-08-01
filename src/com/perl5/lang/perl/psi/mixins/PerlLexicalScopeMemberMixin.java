@@ -28,7 +28,8 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
  */
 public abstract class PerlLexicalScopeMemberMixin extends ASTWrapperPsiElement implements PerlLexicalScopeMember
 {
-	public PerlLexicalScopeMemberMixin(ASTNode node) {
+	public PerlLexicalScopeMemberMixin(ASTNode node)
+	{
 		super(node);
 	}
 

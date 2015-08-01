@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 
@@ -53,7 +52,7 @@ public interface LexerDetectionSets extends PerlElementTypes
 	public static final TokenSet IDENTIFIER_NEGATION_PREFIX = TokenSet.orSet(
 			PRE_PACKAGE_TOKENS,
 			TokenSet.create(
-					RESERVED_SUB,			// sub eval
+					RESERVED_SUB,            // sub eval
 					OPERATOR_DEREFERENCE    // ->identifier
 			)
 	);

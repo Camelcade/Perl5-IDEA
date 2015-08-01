@@ -40,19 +40,20 @@ import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
- *
  */
 public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlNamespaceElement
 {
 	protected String myCanonicalName = null;
 
-	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text) {
+	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text)
+	{
 		super(type, text);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitNamespaceElement(this);
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitNamespaceElement(this);
 		else super.accept(visitor);
 	}
 
@@ -71,7 +72,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 
 		PerlNamespaceElementImpl newName = PerlElementFactory.createPackageName(getProject(), name);
 
-		if( newName != null )
+		if (newName != null)
 			replace(newName);
 
 		myCanonicalName = null;
@@ -95,12 +96,11 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 
 	public String getCanonicalName()
 	{
-		if( myCanonicalName == null )
+		if (myCanonicalName == null)
 			myCanonicalName = PerlPackageUtil.getCanonicalPackageName(getName());
 
 		return myCanonicalName;
 	}
-
 
 
 	@NotNull
@@ -138,7 +138,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 
 		for (PsiReference reference : references)
 		{
-			if( reference instanceof PerlNamespaceReference)
+			if (reference instanceof PerlNamespaceReference)
 			{
 				ResolveResult[] results = ((PerlNamespaceReference) reference).multiResolve(false);
 
@@ -148,7 +148,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 					assert targetElement != null;
 					assert targetElement instanceof PerlNamespaceDefinition;
 
-					namespaceDefinitions.add((PerlNamespaceDefinition)targetElement);
+					namespaceDefinitions.add((PerlNamespaceDefinition) targetElement);
 				}
 			}
 		}
@@ -164,7 +164,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 
 		for (PsiReference reference : references)
 		{
-			if( reference instanceof PerlNamespaceFileReference)
+			if (reference instanceof PerlNamespaceFileReference)
 			{
 				ResolveResult[] results = ((PerlNamespaceFileReference) reference).multiResolve(false);
 
@@ -185,15 +185,14 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	public TextRange getTextRange()
 	{
 		String text = getText();
-		if( text.endsWith("::"))
+		if (text.endsWith("::"))
 		{
 			int start = getStartOffset();
-			return new TextRange(start, start + getTextLength()-2);
-		}
-		else if( text.endsWith("'"))
+			return new TextRange(start, start + getTextLength() - 2);
+		} else if (text.endsWith("'"))
 		{
 			int start = getStartOffset();
-			return new TextRange(start, start + getTextLength()-1);
+			return new TextRange(start, start + getTextLength() - 1);
 		}
 		return super.getTextRange();
 	}

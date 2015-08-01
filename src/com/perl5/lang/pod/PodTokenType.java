@@ -25,12 +25,14 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PodTokenType extends IElementType
 {
-	public PodTokenType(@NotNull @NonNls String debugName) {
+	public PodTokenType(@NotNull @NonNls String debugName)
+	{
 		super(debugName, PodLanguage.INSTANCE);
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "PodTokenType." + super.toString();
 	}
 }

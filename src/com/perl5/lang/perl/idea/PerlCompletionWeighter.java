@@ -25,14 +25,14 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 01.06.2015.
- *
  */
 public class PerlCompletionWeighter extends CompletionWeigher
 {
 	@Override
 	public Comparable weigh(@NotNull LookupElement element, @NotNull CompletionLocation location)
 	{
-		if (!PsiUtilCore.findLanguageFromElement(location.getCompletionParameters().getPosition()).isKindOf(PerlLanguage.INSTANCE)) {
+		if (!PsiUtilCore.findLanguageFromElement(location.getCompletionParameters().getPosition()).isKindOf(PerlLanguage.INSTANCE))
+		{
 			return 0;
 		}
 

@@ -22,8 +22,6 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -34,9 +32,8 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 /**
  * Created by hurricup on 21.04.2015.
- *
  */
-public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
+public class PodSyntaxHighlighter extends SyntaxHighlighterBase
 {
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
@@ -44,11 +41,12 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 	public static final TextAttributesKey POD_TEXT = createTextAttributesKey("POD_TEXT", DefaultLanguageHighlighterColors.DOC_COMMENT);
 	public static final TextAttributesKey POD_CODE = createTextAttributesKey("POD_CODE", DefaultLanguageHighlighterColors.DOC_COMMENT);
 
-	public static final HashMap<IElementType,TextAttributesKey[]> attributesMap = new HashMap<IElementType,TextAttributesKey[]>();
+	public static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<IElementType, TextAttributesKey[]>();
 
 //	private final PerlSyntaxHighlighter PERL_SYNTAX_HIGHLIGHTER;
 
-	static{
+	static
+	{
 		attributesMap.put(PodElementTypes.POD_TAG, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TAG});
 		attributesMap.put(PodElementTypes.POD_TEXT, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
 		attributesMap.put(PodElementTypes.POD_NEWLINE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
@@ -66,18 +64,20 @@ public class PodSyntaxHighlighter  extends SyntaxHighlighterBase
 
 	@NotNull
 	@Override
-	public Lexer getHighlightingLexer() {
+	public Lexer getHighlightingLexer()
+	{
 		return new PodLexerAdapter(myProject);
 	}
 
 	@NotNull
 	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
+	{
 
 //		if( tokenType instanceof PerlTokenType)
 //			return PERL_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
 //		else
-		if(attributesMap.containsKey(tokenType))
+		if (attributesMap.containsKey(tokenType))
 			return attributesMap.get(tokenType);
 
 		return EMPTY_KEYS;

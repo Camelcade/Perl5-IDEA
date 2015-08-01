@@ -30,27 +30,33 @@ import java.util.Collection;
 /**
  * Created by evstigneev on 14.07.2015.
  */
-public class PerlRenameHeredocProcessor extends RenamePsiElementProcessor {
-    @Override
-    public boolean canProcessElement(@NotNull PsiElement element) {
-        if (element instanceof PerlStringContentElementImpl) {
-            PsiElement parentElement = element.getParent();
-            if (parentElement != null) {
-                if (parentElement instanceof PsiPerlHeredocOpener)
-                    return true;
-                else {
-                    PsiElement grandParentElement = parentElement.getParent();
-                    if (grandParentElement != null && grandParentElement instanceof PsiPerlHeredocOpener)
-                        return true;
-                }
-            }
-        }
-        return false;
-    }
+public class PerlRenameHeredocProcessor extends RenamePsiElementProcessor
+{
+	@Override
+	public boolean canProcessElement(@NotNull PsiElement element)
+	{
+		if (element instanceof PerlStringContentElementImpl)
+		{
+			PsiElement parentElement = element.getParent();
+			if (parentElement != null)
+			{
+				if (parentElement instanceof PsiPerlHeredocOpener)
+					return true;
+				else
+				{
+					PsiElement grandParentElement = parentElement.getParent();
+					if (grandParentElement != null && grandParentElement instanceof PsiPerlHeredocOpener)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    @NotNull
-    @Override
-    public Collection<PsiReference> findReferences(PsiElement element) {
-        return ReferencesSearch.search(element, GlobalSearchScope.fileScope(element.getContainingFile())).findAll();
-    }
+	@NotNull
+	@Override
+	public Collection<PsiReference> findReferences(PsiElement element)
+	{
+		return ReferencesSearch.search(element, GlobalSearchScope.fileScope(element.getContainingFile())).findAll();
+	}
 }

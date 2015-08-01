@@ -36,6 +36,7 @@ public class PerlPackageCompletionProviderUtil
 {
 	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_REOPEN_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
+	public static final InsertHandler COMPLETION_REOPENER = new CompletionOpener();
 
 	/**
 	 * Returns package lookup element by package name
@@ -71,9 +72,6 @@ public class PerlPackageCompletionProviderUtil
 
 		return result;
 	}
-
-
-	public static final InsertHandler COMPLETION_REOPENER = new CompletionOpener();
 
 	/**
 	 * Returns package lookup element with automatic re-opening autocompeltion

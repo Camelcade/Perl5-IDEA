@@ -18,9 +18,9 @@ import org.jetbrains.annotations.Nullable;
 public class PerlSdk implements Sdk
 {
 
+	PerlSdkTypeId perlSdkTypeId = new PerlSdkTypeId();
 	@NonNls
 	private String libPath;
-	PerlSdkTypeId perlSdkTypeId = new PerlSdkTypeId();
 
 	public PerlSdk(String libPath)
 	{

@@ -34,7 +34,6 @@ import java.io.File;
 
 /**
  * Created by hurricup on 05.06.2015.
- *
  */
 public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 {

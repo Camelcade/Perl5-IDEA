@@ -37,10 +37,17 @@ import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 23.05.2015.
- *
  */
 public class PerlStringContentElementImpl extends LeafPsiElement implements PerlStringContentElement
 {
+	final static String validFileNameRe = "\\.?[a-zA-Z0-9\\-_]+(?:\\.[a-zA-Z0-9\\-_]*)*";
+	final static String validPathDelimiterRe = "(?:\\\\+|/+)";
+	final static Pattern validPathRe = Pattern.compile(
+			validPathDelimiterRe + "?" +
+					"(?:" + validFileNameRe + validPathDelimiterRe + ")+ ?" +
+					"(" + validFileNameRe + ")" + validPathDelimiterRe + "?"
+	);
+
 	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
@@ -95,14 +102,6 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 
 	}
 
-	final static String validFileNameRe = "\\.?[a-zA-Z0-9\\-_]+(?:\\.[a-zA-Z0-9\\-_]*)*";
-	final static String validPathDelimiterRe = "(?:\\\\+|/+)";
-	final static Pattern validPathRe = Pattern.compile(
-			validPathDelimiterRe + "?" +
-					"(?:" + validFileNameRe + validPathDelimiterRe + ")+ ?" +
-					"(" + validFileNameRe + ")" + validPathDelimiterRe + "?"
-	);
-
 	@Override
 	public boolean looksLikePath()
 	{
@@ -113,7 +112,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	public String getContentFileName()
 	{
 		Matcher m = validPathRe.matcher(getText());
-		if( m.matches())
+		if (m.matches())
 			return m.group(1);
 		return null;
 	}

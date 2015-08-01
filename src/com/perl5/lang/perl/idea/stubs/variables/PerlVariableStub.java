@@ -25,5 +25,6 @@ import com.perl5.lang.perl.psi.PerlVariable;
 public interface PerlVariableStub extends StubElement<PerlVariable>
 {
 	public String getPackageName();
+
 	public String getVariableName();
 }

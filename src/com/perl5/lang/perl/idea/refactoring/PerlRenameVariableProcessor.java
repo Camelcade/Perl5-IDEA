@@ -32,20 +32,23 @@ import java.util.Collection;
 /**
  * Created by evstigneev on 14.07.2015.
  */
-public class PerlRenameVariableProcessor extends RenamePsiElementProcessor {
-    @Override
-    public boolean canProcessElement(@NotNull PsiElement element) {
-        return element instanceof PerlVariableNameElement && element.getParent() instanceof PerlVariable;
-    }
+public class PerlRenameVariableProcessor extends RenamePsiElementProcessor
+{
+	@Override
+	public boolean canProcessElement(@NotNull PsiElement element)
+	{
+		return element instanceof PerlVariableNameElement && element.getParent() instanceof PerlVariable;
+	}
 
-    @NotNull
-    @Override
-    public Collection<PsiReference> findReferences(PsiElement element) {
-        PsiElement parentElement = element.getParent().getParent();
+	@NotNull
+	@Override
+	public Collection<PsiReference> findReferences(PsiElement element)
+	{
+		PsiElement parentElement = element.getParent().getParent();
 
-        if( parentElement != null && (parentElement instanceof PsiPerlVariableDeclarationLexical || parentElement instanceof PsiPerlVariableDeclarationLocal))
-            return ReferencesSearch.search(element, GlobalSearchScope.fileScope(element.getContainingFile())).findAll();
+		if (parentElement != null && (parentElement instanceof PsiPerlVariableDeclarationLexical || parentElement instanceof PsiPerlVariableDeclarationLocal))
+			return ReferencesSearch.search(element, GlobalSearchScope.fileScope(element.getContainingFile())).findAll();
 
-        return super.findReferences(element);
-    }
+		return super.findReferences(element);
+	}
 }

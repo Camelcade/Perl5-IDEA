@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.psi.properties;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
-import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 26.04.2015.

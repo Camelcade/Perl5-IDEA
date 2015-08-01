@@ -19,7 +19,9 @@ package com.perl5.lang.perl.idea.modules;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleConfigurationEditor;
 import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.roots.ui.configuration.*;
+import com.intellij.openapi.roots.ui.configuration.ClasspathEditor;
+import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationEditorProvider;
+import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 
 /**
  * Created by hurricup on 07.06.2015.
@@ -30,7 +32,8 @@ public class PerlModuleConfigurationEditorProvider implements ModuleConfiguratio
 	public ModuleConfigurationEditor[] createEditors(ModuleConfigurationState state)
 	{
 		Module module = state.getRootModel().getModule();
-		if (ModuleType.get(module) instanceof PerlModuleType) {
+		if (ModuleType.get(module) instanceof PerlModuleType)
+		{
 			return new ModuleConfigurationEditor[]{
 					new PerlContentEntriesEditor(module.getName(), state),
 					new ClasspathEditor(state)

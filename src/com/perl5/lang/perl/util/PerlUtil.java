@@ -20,25 +20,13 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlDerefExpression;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclaration;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -72,13 +60,13 @@ public class PerlUtil
 	/**
 	 * Searches for innermost source root for a file by it's absolute path
 	 *
-	 * @param module module to search in
+	 * @param module   module to search in
 	 * @param filePath containing filename
 	 * @return innermost root
 	 */
 	public static VirtualFile getFileClassRoot(Module module, String filePath)
 	{
-		if( module != null )
+		if (module != null)
 		{
 			File file = new File(filePath);
 
@@ -95,6 +83,7 @@ public class PerlUtil
 
 	/**
 	 * Returns previous element in dereference chain
+	 *
 	 * @param currentElement current chain element
 	 * @return previous element or null if it's a first one
 	 */
@@ -102,7 +91,7 @@ public class PerlUtil
 	{
 		PsiElement prevElement = currentElement.getPrevSibling();
 
-		if( prevElement != null && prevElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
+		if (prevElement != null && prevElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
 			prevElement = prevElement.getPrevSibling();
 
 		return prevElement;

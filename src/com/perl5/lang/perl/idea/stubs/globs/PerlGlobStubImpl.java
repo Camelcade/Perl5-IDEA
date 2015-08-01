@@ -18,8 +18,8 @@ package com.perl5.lang.perl.idea.stubs.globs;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 
 /**
  * Created by hurricup on 25.05.2015.

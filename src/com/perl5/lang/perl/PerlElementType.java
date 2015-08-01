@@ -24,11 +24,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlElementType extends PerlTokenType
 {
-	public PerlElementType(@NotNull @NonNls String debugName) {
+	public PerlElementType(@NotNull @NonNls String debugName)
+	{
 		super(debugName);
 	}
 
-	public String toString() {
+	public String toString()
+	{
 		return "PerlElementType." + super.toString();
 	}
 }

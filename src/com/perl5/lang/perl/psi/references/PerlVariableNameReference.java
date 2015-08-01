@@ -16,19 +16,15 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -54,7 +50,8 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		List<ResolveResult> result = new ArrayList<>();;
+		List<ResolveResult> result = new ArrayList<>();
+		;
 
 		PsiElement variableContainer = myVariable.getParent();
 		PerlVariable lexicalDeclaration = null;
@@ -64,19 +61,18 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		else if (!(variableContainer instanceof PsiPerlVariableDeclarationGlobal))
 			lexicalDeclaration = myVariable.getLexicalDeclaration();
 
-		if( lexicalDeclaration == null || lexicalDeclaration.getParent() instanceof PsiPerlVariableDeclarationGlobal)
+		if (lexicalDeclaration == null || lexicalDeclaration.getParent() instanceof PsiPerlVariableDeclarationGlobal)
 		{
 			// not found lexical declaration or our is closes to us
 
 			// our variable declaration
-			for( PerlGlobVariable glob: myVariable.getRelatedGlobs())
+			for (PerlGlobVariable glob : myVariable.getRelatedGlobs())
 				result.add(new PsiElementResolveResult(glob));
 
 			// globs
-			for(PerlVariable globalDeclaration: myVariable.getGlobalDeclarations())
+			for (PerlVariable globalDeclaration : myVariable.getGlobalDeclarations())
 				result.add(new PsiElementResolveResult(globalDeclaration));
-		}
-		else
+		} else
 			result.add(new PsiElementResolveResult(lexicalDeclaration));
 
 		return result.toArray(new ResolveResult[result.size()]);
@@ -97,13 +93,13 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-		if( resolveResults.length == 0)
+		if (resolveResults.length == 0)
 			return null;
-		else if( resolveResults.length == 1 )
+		else if (resolveResults.length == 1)
 			return resolveResults[0].getElement();
 
-		for( ResolveResult resolveResult: resolveResults)
-			if( resolveResult.getElement() instanceof PerlGlobVariable)
+		for (ResolveResult resolveResult : resolveResults)
+			if (resolveResult.getElement() instanceof PerlGlobVariable)
 				return resolveResult.getElement();
 
 		return resolveResults[0].getElement();

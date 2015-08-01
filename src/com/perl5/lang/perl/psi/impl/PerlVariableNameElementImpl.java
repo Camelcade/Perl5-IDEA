@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
@@ -36,13 +35,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlVariableNameElement
 {
-	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text) {
+	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text)
+	{
 		super(type, text);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitVariableNameElement(this);
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitVariableNameElement(this);
 		else super.accept(visitor);
 	}
 
@@ -50,7 +51,7 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		PerlVariableNameElement newName = PerlElementFactory.createVariableName(getProject(), name);
-		if( newName != null )
+		if (newName != null)
 			replace(newName);
 		else
 			throw new IncorrectOperationException("Unable to create new variable name from: " + name);

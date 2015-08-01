@@ -30,7 +30,8 @@ public class EmbeddedPerlFileViewProviderFactory implements FileViewProviderFact
 	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
 												   com.intellij.lang.Language language,
 												   @NotNull PsiManager manager,
-												   boolean eventSystemEnabled) {
+												   boolean eventSystemEnabled)
+	{
 		return new EmbeddedPerlFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

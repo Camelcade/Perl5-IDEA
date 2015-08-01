@@ -57,11 +57,11 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 			else if (element instanceof PerlVariable)
 			{
 				PerlVariableType actualType = ((PerlVariable) element).getActualType();
-				if( actualType == PerlVariableType.ARRAY)
+				if (actualType == PerlVariableType.ARRAY)
 					return "Array variable";
-				else if( actualType == PerlVariableType.HASH)
+				else if (actualType == PerlVariableType.HASH)
 					return "Hash variable";
-				else if( actualType == PerlVariableType.SCALAR)
+				else if (actualType == PerlVariableType.SCALAR)
 					return "Scalar variable";
 			}
 			return null;

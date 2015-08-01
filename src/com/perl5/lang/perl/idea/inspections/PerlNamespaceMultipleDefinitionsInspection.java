@@ -40,7 +40,7 @@ public class PerlNamespaceMultipleDefinitionsInspection extends PerlInspection
 			{
 				PsiElement parent = o.getParent();
 
-				if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement )
+				if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
 					return;
 
 				if (o.isBuiltin())
@@ -49,7 +49,7 @@ public class PerlNamespaceMultipleDefinitionsInspection extends PerlInspection
 				List<PerlNamespaceDefinition> namespaceDefinitions = o.getNamespaceDefinitions();
 				boolean isNamespaceDefinition = parent instanceof PerlNamespaceDefinition;
 
-				if (namespaceDefinitions.size() > 1 || isNamespaceDefinition && namespaceDefinitions.size() > 0 )
+				if (namespaceDefinitions.size() > 1 || isNamespaceDefinition && namespaceDefinitions.size() > 0)
 					registerProblem(holder, o, "Multiple namespace definitions");
 			}
 		};
