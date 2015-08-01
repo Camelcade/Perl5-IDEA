@@ -25,7 +25,7 @@ import com.intellij.psi.tree.IElementType;
 /**
  * Class for parsed token type, stores start, end and token type
  */
-class CustomToken
+public class CustomToken
 {
 	private int tokenStart;
 	private int tokenEnd;

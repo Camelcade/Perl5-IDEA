@@ -42,7 +42,6 @@ import org.jetbrains.annotations.NotNull;
     public int getBufferEnd() {return zzEndRead;}
     public int getNextTokenStart(){ return zzMarkedPos;}
     public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
-    public void setState(int newState){ zzLexicalState = newState; }
 
     protected int trenarCounter = 0;
 %}
@@ -116,7 +115,7 @@ TRANS_MODIFIERS = [cdsr]
 %xstate LEX_REGEX_OPENER
 
 %state LEX_HTML_BLOCK
-%state LEX_MOJO_PERL_LINE, LEX_MOJO_PERL_BLOCK, LEX_MOJO_LINE_COMMENT, LEX_MOJO_BLOCK_COMMENT
+%state LEX_MOJO_PERL_LINE, LEX_MOJO_PERL_BLOCK
 %state LEX_PREPARSED_ITEMS
 %%
 

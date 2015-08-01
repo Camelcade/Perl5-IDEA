@@ -876,7 +876,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	public void popState()
 	{
-		setState(stateStack.pop());
+		yybegin(stateStack.pop());
 	}
 
 	private IElementType restoreToken(CustomToken token)
@@ -1558,6 +1558,19 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			return IDENTIFIER;
 		}
 		return OPERATOR_DEREFERENCE;
+	}
+
+	/**
+	 * Checks if buffer at current offset contains specific string
+	 * @param buffer CharSequence buffer
+	 * @param offset offset
+	 * @param pattern string to search
+	 * @return search result
+	 */
+	public boolean bufferAtString(CharSequence buffer, int offset, String pattern)
+	{
+		int patternEnd = offset + pattern.length();
+		return buffer.length() >= patternEnd && buffer.subSequence(offset, patternEnd).toString().equals(pattern);
 	}
 
 }

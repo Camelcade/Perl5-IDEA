@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+package com.perl5.lang.mojolicious.lexer;
 
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;

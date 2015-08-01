@@ -59,7 +59,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 				setTokenStart(tokenStart);
 				if (tokenStart <= bufferEnd - 2 && buffer.charAt(tokenStart) == '<' && buffer.charAt(tokenStart + 1) == '?') // finishing html block
 				{
-					setState(preHTMLState);
+					yybegin(preHTMLState);
 					setTokenEnd(tokenStart + 2);
 					return EMBED_MARKER;
 				} else
@@ -73,7 +73,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 					}
 
 					if (offset == bufferEnd)
-						setState(preHTMLState);
+						yybegin(preHTMLState);
 					setTokenEnd(offset);
 					return TEMPLATE_BLOCK_HTML;
 				}

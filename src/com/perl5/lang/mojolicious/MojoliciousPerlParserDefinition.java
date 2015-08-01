@@ -22,6 +22,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
+import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +38,7 @@ public class MojoliciousPerlParserDefinition extends PerlParserDefinition
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new EmbeddedPerlLexerAdapter(project);
+		return new MojoliciousPerlLexerAdapter(project);
 	}
 
 	@Override
