@@ -304,7 +304,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				int currentPosition = tokenStart;
 				setTokenStart(tokenStart);
 
-				while (currentPosition < bufferEnd && !isCommentEnd(currentPosition))
+				while (currentPosition < bufferEnd && !isLineCommentEnd(currentPosition))
 					currentPosition++;
 
 				// catching annotations #@
@@ -598,12 +598,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	}
 
 	/**
-	 * Checking if comment is ended. Implemented for overriding in {@link EmbeddedPerlLexer#isCommentEnd(int)} }
+	 * Checking if comment is ended. Implemented for overriding in {@link EmbeddedPerlLexer#isLineCommentEnd(int)} }
 	 *
 	 * @param currentPosition current position to check
 	 * @return checking result
 	 */
-	public boolean isCommentEnd(int currentPosition)
+	public boolean isLineCommentEnd(int currentPosition)
 	{
 		return getBuffer().charAt(currentPosition) == '\n';
 	}

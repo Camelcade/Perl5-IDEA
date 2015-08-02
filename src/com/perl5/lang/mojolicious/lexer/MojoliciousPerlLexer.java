@@ -23,6 +23,7 @@ import com.perl5.lang.perl.lexer.CustomToken;
 import com.perl5.lang.perl.lexer.PerlLexer;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -47,6 +48,14 @@ public class MojoliciousPerlLexer extends PerlLexer
 		mojoState = newState;
 	}
 
+	public static final String MOJO_SPACES = "([ \t\f]*)";
+
+	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile( "^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
+	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile( "^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(=?%>)");
+
+	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)(.?)");
+	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)(.?)");
+
 	public IElementType advance() throws IOException
 	{
 		CharSequence buffer = getBuffer();
@@ -56,14 +65,44 @@ public class MojoliciousPerlLexer extends PerlLexer
 
 		if (preparsedTokensList.size() > 0 || bufferEnd == 0 || tokenStart >= bufferEnd)
 			return super.advance();
-		else if ((currentMojoState == LEX_MOJO_PERL_LINE || currentMojoState == LEX_MOJO_PERL_LINE_SEMI) && buffer.charAt(tokenStart) == '\n')
+		else if ((currentMojoState == LEX_MOJO_PERL_LINE || currentMojoState == LEX_MOJO_PERL_LINE_SEMI))
 		{
-			setTokenStart(tokenStart);
-			setTokenEnd(tokenStart + 1);
+			if( buffer.charAt(tokenStart) == '\n' )
+			{
+				setTokenStart(tokenStart);
+				setTokenEnd(tokenStart + 1);
 
-			IElementType tokenType = currentMojoState == LEX_MOJO_PERL_LINE_SEMI ? SEMICOLON : TokenType.NEW_LINE_INDENT;
-			setMojoState(LEX_HTML_BLOCK);
-			return tokenType;
+				IElementType tokenType = currentMojoState == LEX_MOJO_PERL_LINE_SEMI ? SEMICOLON : TokenType.NEW_LINE_INDENT;
+				setMojoState(LEX_HTML_BLOCK);
+				return tokenType;
+			}
+			else if(currentMojoState == LEX_MOJO_PERL_LINE )
+			{
+				Matcher m = BLOCK_START_PERL_LINE.matcher(buffer);
+				m.region(tokenStart,bufferEnd);
+
+				if( m.lookingAt() )
+				{
+					if( !m.group(1).isEmpty())
+					{
+						preparsedTokensList.add(new CustomToken(tokenStart, tokenStart + m.group(1).length(), TokenType.WHITE_SPACE));
+						tokenStart += m.group(1).length();
+					}
+
+					preparsedTokensList.add(new CustomToken(tokenStart, tokenStart + 5, RESERVED_SUB));
+					tokenStart+=5;
+
+					if( !m.group(3).isEmpty())	// spaces as braces
+						preparsedTokensList.add(new CustomToken(tokenStart, tokenStart + m.group(3).length(), LEFT_BRACE));
+					else	// newline as brace
+					{
+						preparsedTokensList.add(new CustomToken(tokenStart, tokenStart + 1, LEFT_BRACE));
+						setMojoState(LEX_HTML_BLOCK);
+					}
+
+					return getPreParsedToken();
+				}
+			}
 		} else if (currentMojoState == LEX_MOJO_PERL_BLOCK || currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI)
 		{
 			int closeTokenSize = 0;
@@ -178,12 +217,9 @@ public class MojoliciousPerlLexer extends PerlLexer
 	}
 
 	@Override
-	public boolean isCommentEnd(int currentPosition)
+	public boolean isLineCommentEnd(int currentPosition)
 	{
 		CharSequence buffer = getBuffer();
-		return buffer.charAt(currentPosition) == '\n'
-				|| (currentPosition < buffer.length() - 2 && buffer.charAt(currentPosition + 1) == '?' && buffer.charAt(currentPosition + 2) == '>');
+		return buffer.charAt(currentPosition) == '\n' || bufferAtString(buffer, currentPosition, "=%>") || bufferAtString(buffer, currentPosition, "%>");
 	}
-
-
 }

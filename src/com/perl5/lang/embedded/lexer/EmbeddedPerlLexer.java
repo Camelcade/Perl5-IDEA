@@ -93,12 +93,9 @@ public class EmbeddedPerlLexer extends PerlLexer
 	}
 
 	@Override
-	public boolean isCommentEnd(int currentPosition)
+	public boolean isLineCommentEnd(int currentPosition)
 	{
 		CharSequence buffer = getBuffer();
-		return buffer.charAt(currentPosition) == '\n'
-				|| (currentPosition < buffer.length() - 2 && buffer.charAt(currentPosition + 1) == '?' && buffer.charAt(currentPosition + 2) == '>');
+		return buffer.charAt(currentPosition) == '\n' || bufferAtString(buffer, currentPosition, "?>");
 	}
-
-
 }
