@@ -143,6 +143,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.RIGHT_PAREN, new TextAttributesKey[]{PERL_PAREN});
 
 		attributesMap.put(PerlElementTypes.NUMBER, new TextAttributesKey[]{PERL_NUMBER});
+		attributesMap.put(PerlElementTypes.NUMBER_SIMPLE, new TextAttributesKey[]{PERL_NUMBER});
 		attributesMap.put(PerlElementTypes.NUMBER_VERSION, new TextAttributesKey[]{PERL_VERSION});
 
 		// key for all operators
