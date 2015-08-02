@@ -31,6 +31,13 @@ import java.util.regex.Pattern;
  */
 public class MojoliciousPerlLexer extends PerlLexer
 {
+	public static final String MOJO_SPACES = "([ \t\f]*)";
+	public static final String MOJO_CLOSE_TAG = MOJO_SPACES + "(=?%>)";
+	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
+	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_CLOSE_TAG);
+	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
+	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
+	public static final Pattern PERL_BLOCK_CLOSER = Pattern.compile("^" + MOJO_CLOSE_TAG);
 	int mojoState = LEX_HTML_BLOCK;
 
 	public MojoliciousPerlLexer(Project project)
@@ -47,17 +54,6 @@ public class MojoliciousPerlLexer extends PerlLexer
 	{
 		mojoState = newState;
 	}
-
-	public static final String MOJO_SPACES = "([ \t\f]*)";
-	public static final String MOJO_CLOSE_TAG = MOJO_SPACES + "(=?%>)";
-
-	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
-	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_CLOSE_TAG);
-
-	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
-	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
-
-	public static final Pattern PERL_BLOCK_CLOSER = Pattern.compile("^" + MOJO_CLOSE_TAG);
 
 	public IElementType advance() throws IOException
 	{

@@ -16,9 +16,6 @@
 
 package com.perl5.lang.mojolicious.util;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 /**
  * Created by hurricup on 02.08.2015.
  */

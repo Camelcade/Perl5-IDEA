@@ -1562,8 +1562,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	/**
 	 * Checks if buffer at current offset contains specific string
-	 * @param buffer CharSequence buffer
-	 * @param offset offset
+	 *
+	 * @param buffer  CharSequence buffer
+	 * @param offset  offset
 	 * @param pattern string to search
 	 * @return search result
 	 */

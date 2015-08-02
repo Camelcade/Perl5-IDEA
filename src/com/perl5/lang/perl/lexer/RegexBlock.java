@@ -35,7 +35,7 @@ public class RegexBlock implements PerlElementTypes
 
 	protected int startOffset;
 
-//	public static final Pattern OCCURANCE_PATTERN = Pattern.compile("\\{\\d+(,\\d*)?\\}");
+	//	public static final Pattern OCCURANCE_PATTERN = Pattern.compile("\\{\\d+(,\\d*)?\\}");
 //	public static final Pattern EXPRESSION_PATTERN = Pattern.compile("\\\\[xNogbB]\\{.*?\\}");
 	protected int endOffset;
 	protected CharSequence buffer;

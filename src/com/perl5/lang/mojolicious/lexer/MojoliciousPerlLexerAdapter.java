@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mojolicious.lexer;
 
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.project.Project;
@@ -45,23 +44,24 @@ public class MojoliciousPerlLexerAdapter extends LexerBase
 		myFlex = new MojoliciousPerlLexer(project);
 	}
 
-	public FlexLexer getFlex() {
+	public FlexLexer getFlex()
+	{
 		return myFlex;
 	}
 
 	@Override
-	public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, int initialState) {
+	public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, int initialState)
+	{
 		myText = buffer;
 		myEnd = endOffset;
 
-		if( startOffset == 0 && initialState == PerlLexerGenerated.YYINITIAL)
+		if (startOffset == 0 && initialState == PerlLexerGenerated.YYINITIAL)
 			myFlex.setMojoState(PerlLexerGenerated.LEX_HTML_BLOCK);
-		else if( initialState > 255 )
+		else if (initialState > 255)
 		{
-			myFlex.setMojoState((int)(initialState / 255));
+			myFlex.setMojoState((int) (initialState / 255));
 			initialState = initialState % 255;
-		}
-		else
+		} else
 			myFlex.setMojoState(PerlLexerGenerated.LEX_MOJO_PERL_BLOCK);
 
 		myFlex.reset(myText, startOffset, endOffset, initialState);
@@ -69,43 +69,50 @@ public class MojoliciousPerlLexerAdapter extends LexerBase
 	}
 
 	@Override
-	public int getState() {
+	public int getState()
+	{
 		if (myTokenType == null) locateToken();
 		return myState;
 	}
 
 	@Override
-	public IElementType getTokenType() {
+	public IElementType getTokenType()
+	{
 		if (myTokenType == null) locateToken();
 		return myTokenType;
 	}
 
 	@Override
-	public int getTokenStart() {
+	public int getTokenStart()
+	{
 		if (myTokenType == null) locateToken();
 		return myFlex.getTokenStart();
 	}
 
 	@Override
-	public int getTokenEnd() {
+	public int getTokenEnd()
+	{
 		if (myTokenType == null) locateToken();
 		return myFlex.getTokenEnd();
 	}
 
 	@Override
-	public void advance() {
+	public void advance()
+	{
 		if (myTokenType == null) locateToken();
 		myTokenType = null;
 	}
 
 	@NotNull
 	@Override
-	public CharSequence getBufferSequence() {
+	public CharSequence getBufferSequence()
+	{
 		return myText;
 	}
 
 	@Override
-	public int getBufferEnd() {
+	public int getBufferEnd()
+	{
 		return myEnd;
 	}
 
@@ -117,20 +124,22 @@ public class MojoliciousPerlLexerAdapter extends LexerBase
 		assert mojoState < 255;
 		assert lexerState < 255;
 
-		if( mojoState == PerlLexer.LEX_MOJO_PERL_BLOCK )
+		if (mojoState == PerlLexer.LEX_MOJO_PERL_BLOCK)
 			myState = lexerState;
 		else
 			myState = mojoState * 255 + lexerState;
 	}
 
-	protected void locateToken() {
+	protected void locateToken()
+	{
 		if (myTokenType != null) return;
-		try {
+		try
+		{
 			getCompiledState();
 			myTokenType = myFlex.advance();
-		}
-		catch (IOException e) { /*Can't happen*/ }
-		catch (Error e) {
+		} catch (IOException e)
+		{ /*Can't happen*/ } catch (Error e)
+		{
 			// add lexer class name to the error
 			final Error error = new Error(myFlex.getClass().getName() + ": " + e.getMessage());
 			error.setStackTrace(e.getStackTrace());

@@ -34,9 +34,9 @@ import java.util.Map;
  */
 public class PerlLanguageInjector implements LanguageInjector
 {
-	public static final Map<String, Language> LANGUAGE_MAP = new HashMap<String,Language>();
+	public static final Map<String, Language> LANGUAGE_MAP = new HashMap<String, Language>();
 
-	protected static final Map<String, String> ACCEPTABLE_LANGUAGES = new HashMap<String,String>();
+	protected static final Map<String, String> ACCEPTABLE_LANGUAGES = new HashMap<String, String>();
 
 	static
 	{

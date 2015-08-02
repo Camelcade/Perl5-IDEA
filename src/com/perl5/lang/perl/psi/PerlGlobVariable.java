@@ -21,7 +21,6 @@ import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.

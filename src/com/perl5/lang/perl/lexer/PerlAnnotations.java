@@ -25,7 +25,7 @@ import java.util.HashMap;
  */
 public class PerlAnnotations implements PerlElementTypes
 {
-	public static final HashMap<String, IElementType> TOKEN_TYPES = new HashMap<String,IElementType>();
+	public static final HashMap<String, IElementType> TOKEN_TYPES = new HashMap<String, IElementType>();
 
 	static
 	{
