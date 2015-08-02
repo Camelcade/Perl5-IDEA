@@ -50,8 +50,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 
 	public static final String MOJO_SPACES = "([ \t\f]*)";
 
-	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile( "^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
-	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile( "^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(=?%>)");
+	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
+	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(=?%>)");
 
 	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
 	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
@@ -67,7 +67,7 @@ public class MojoliciousPerlLexer extends PerlLexer
 			return super.advance();
 		else if ((currentMojoState == LEX_MOJO_PERL_LINE || currentMojoState == LEX_MOJO_PERL_LINE_SEMI))
 		{
-			if( buffer.charAt(tokenStart) == '\n' )
+			if (buffer.charAt(tokenStart) == '\n')
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 1);
@@ -75,33 +75,13 @@ public class MojoliciousPerlLexer extends PerlLexer
 				IElementType tokenType = currentMojoState == LEX_MOJO_PERL_LINE_SEMI ? SEMICOLON : TokenType.NEW_LINE_INDENT;
 				setMojoState(LEX_HTML_BLOCK);
 				return tokenType;
-			}
-			else if(currentMojoState == LEX_MOJO_PERL_LINE )
+			} else if (currentMojoState == LEX_MOJO_PERL_LINE)
 			{
 				Matcher m = BLOCK_START_PERL_LINE.matcher(buffer);
-				m.region(tokenStart,bufferEnd);
+				m.region(tokenStart, bufferEnd);
 
-				if( m.lookingAt() )
-				{
-					if( !m.group(1).isEmpty())
-					{
-						preparsedTokensList.add(new CustomToken(tokenStart, tokenStart + m.group(1).length(), TokenType.WHITE_SPACE));
-						tokenStart += m.group(1).length();
-					}
-
-					preparsedTokensList.add(new CustomToken(tokenStart, tokenStart + 5, RESERVED_SUB));
-					tokenStart+=5;
-
-					if( !m.group(3).isEmpty())	// spaces as braces
-						preparsedTokensList.add(new CustomToken(tokenStart, tokenStart + m.group(3).length(), LEFT_BRACE));
-					else	// newline as brace
-					{
-						preparsedTokensList.add(new CustomToken(tokenStart, tokenStart + 1, LEFT_BRACE));
-						setMojoState(LEX_HTML_BLOCK);
-					}
-
-					return getPreParsedToken();
-				}
+				if (m.lookingAt())
+					return parseBeginBlock(tokenStart, m);
 			}
 		} else if (currentMojoState == LEX_MOJO_PERL_BLOCK || currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI)
 		{
@@ -111,14 +91,24 @@ public class MojoliciousPerlLexer extends PerlLexer
 			else if (bufferAtString(buffer, tokenStart, "%>"))
 				closeTokenSize = 2;
 			else
+			{
+				if( currentMojoState == LEX_MOJO_PERL_BLOCK )
+				{
+					Matcher m = BLOCK_START_PERL_BLOCK.matcher(buffer);
+					m.region(tokenStart, bufferEnd);
+
+					if (m.lookingAt())
+						return parseBeginBlock(tokenStart, m);
+				}
 				return super.advance();
+			}
 
 			setTokenStart(tokenStart);
 			boolean addSemi = currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI;
 			setMojoState(LEX_HTML_BLOCK);
 
 			setTokenEnd(tokenStart + closeTokenSize);
-			if( addSemi )
+			if (addSemi)
 				return EMBED_MARKER_SEMICOLON;
 			else
 				return EMBED_MARKER;
@@ -158,13 +148,18 @@ public class MojoliciousPerlLexer extends PerlLexer
 					Matcher m = BLOCK_END_PERL_LINE.matcher(buffer);
 					m.region(offset, bufferEnd);
 
-					if( m.lookingAt() )	// % end construction
+					if (m.lookingAt())    // % end construction
 					{
 						// marker
 						preparsedTokensList.add(new CustomToken(offset, offset + m.group(1).length(), EMBED_MARKER));
 						offset += m.group(1).length();
 
-						if( !m.group(2).isEmpty())	// spaces if any
+						if (m.group(1).length() == 1)
+							setMojoState(LEX_MOJO_PERL_LINE);
+						else
+							setMojoState(LEX_MOJO_PERL_LINE_SEMI);
+
+						if (!m.group(2).isEmpty())    // spaces if any
 						{
 							preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), TokenType.WHITE_SPACE));
 							offset += m.group(2).length();
@@ -174,15 +169,14 @@ public class MojoliciousPerlLexer extends PerlLexer
 						preparsedTokensList.add(new CustomToken(offset, offset + m.group(3).length(), RIGHT_BRACE));
 						offset += m.group(3).length();
 
-						if( offset < bufferEnd )
+						if (offset < bufferEnd)
 						{
 							char semiChar = buffer.charAt(offset);
 							preparsedTokensList.add(new CustomToken(offset, offset + 1, SEMICOLON));
-							if( semiChar == '\n')
+							if (semiChar == '\n')
 								setMojoState(LEX_HTML_BLOCK);
 						}
-					}
-					else
+					} else
 					{
 						int embedTokenSize = 1;
 						int newMojoState = LEX_MOJO_PERL_LINE;
@@ -228,8 +222,7 @@ public class MojoliciousPerlLexer extends PerlLexer
 				{
 					embedTokenSize = 4;
 					newMojoState = LEX_MOJO_PERL_BLOCK_SEMI;
-				}
-				else if (bufferAtString(buffer, offset, "<%="))
+				} else if (bufferAtString(buffer, offset, "<%="))
 				{
 					embedTokenSize = 3;
 					newMojoState = LEX_MOJO_PERL_BLOCK_SEMI;
@@ -243,6 +236,34 @@ public class MojoliciousPerlLexer extends PerlLexer
 
 		}
 		return super.advance();
+	}
+
+	/**
+	 * Parsing begin statement from line or block
+	 * @param offset current offset
+	 * @param m matcher, which is matches begin statement
+	 * @return token type
+	 */
+	public IElementType parseBeginBlock(int offset, Matcher m)
+	{
+		if (!m.group(1).isEmpty())
+		{
+			preparsedTokensList.add(new CustomToken(offset, offset + m.group(1).length(), TokenType.WHITE_SPACE));
+			offset += m.group(1).length();
+		}
+
+		preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), RESERVED_SUB));
+		offset += m.group(2).length();
+
+		if (!m.group(3).isEmpty())    // spaces as a left brace
+			preparsedTokensList.add(new CustomToken(offset, offset + m.group(3).length(), LEFT_BRACE));
+		else    // close token as a left brace
+		{
+			preparsedTokensList.add(new CustomToken(offset, offset + m.group(4).length(), LEFT_BRACE));
+			setMojoState(LEX_HTML_BLOCK);
+		}
+
+		return getPreParsedToken();
 	}
 
 	@Override
