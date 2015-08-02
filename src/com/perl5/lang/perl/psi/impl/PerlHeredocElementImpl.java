@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.idea.intellilang.PerlHeredocLiteralEscaper;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,5 +39,12 @@ public class PerlHeredocElementImpl extends PsiCommentImpl
 	{
 		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
 		else super.accept(visitor);
+	}
+
+	@NotNull
+	@Override
+	public LiteralTextEscaper<PsiCommentImpl> createLiteralTextEscaper()
+	{
+		return new PerlHeredocLiteralEscaper(this);
 	}
 }
