@@ -36,8 +36,8 @@ import java.util.HashSet;
  */
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
-	protected HashSet<String> KNOWN_SUBS = new HashSet<>();
-	protected HashSet<String> KNOWN_PACKAGES = new HashSet<>(PerlPackageUtil.BUILT_IN_ALL);
+	protected HashSet<String> KNOWN_SUBS = new HashSet<String>();
+	protected HashSet<String> KNOWN_PACKAGES = new HashSet<String>(PerlPackageUtil.BUILT_IN_ALL);
 	protected boolean recoveringStatement = false;
 	protected int bracesLevel = 0;
 	boolean indexSnapshotDone = false;

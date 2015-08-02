@@ -71,7 +71,7 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		Project project = myElement.getProject();
-		List<ResolveResult> result = new ArrayList<>();
+		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
 		PsiElement parent = myElement.getParent();
 

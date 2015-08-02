@@ -136,7 +136,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	);
 
 	// commands, that accepts filehandles as first parameter
-	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<>(Arrays.asList(
+	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<String>(Arrays.asList(
 			"opendir",
 			"chdir",
 			"telldir",

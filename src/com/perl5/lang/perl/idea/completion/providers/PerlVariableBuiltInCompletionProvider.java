@@ -39,11 +39,11 @@ import java.util.List;
  */
 public class PerlVariableBuiltInCompletionProvider extends CompletionProvider<CompletionParameters>
 {
-	public static final List<LookupElementBuilder> BUILT_IN_SCALARS = new ArrayList<>();
-	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS = new ArrayList<>();
-	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS_INDEXES = new ArrayList<>();
-	public static final List<LookupElementBuilder> BUILT_IN_HASHES = new ArrayList<>();
-	public static final List<LookupElementBuilder> BUILT_IN_GLOBS = new ArrayList<>();
+	public static final List<LookupElementBuilder> BUILT_IN_SCALARS = new ArrayList<LookupElementBuilder>();
+	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS = new ArrayList<LookupElementBuilder>();
+	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS_INDEXES = new ArrayList<LookupElementBuilder>();
+	public static final List<LookupElementBuilder> BUILT_IN_HASHES = new ArrayList<LookupElementBuilder>();
+	public static final List<LookupElementBuilder> BUILT_IN_GLOBS = new ArrayList<LookupElementBuilder>();
 
 	// fill scalars
 	static

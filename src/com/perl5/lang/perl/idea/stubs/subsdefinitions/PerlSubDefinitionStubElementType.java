@@ -97,7 +97,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		String functionName = dataStream.readName().toString();
 		int argumentsNumber = dataStream.readInt();
 
-		List<PerlSubArgument> arguments = new ArrayList<>(argumentsNumber);
+		List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>(argumentsNumber);
 
 		for (int i = 0; i < argumentsNumber; i++)
 			arguments.add(PerlSubArgument.deserialize(dataStream));

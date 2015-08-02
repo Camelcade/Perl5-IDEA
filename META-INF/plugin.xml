@@ -22,7 +22,7 @@
 
     <description><![CDATA[
     <h1>Camelcade</h1>
-    <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products (Temporary available for IDEA only).</p>
+    <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products (<b>atm. works as intended in IDEA only</b>).</p>
     <p>The plugin works but is still not released (consider it being in an open Beta).</p>
     <p>Even in its current beta state, Camelcade is better than Notepad++ or Sublime Text. Moreover IDEA itself gives you a lot of useful features.</p>
     <p>I am using Camelcade at my full-time job as a Perl programmer.</p>
@@ -45,11 +45,12 @@
     <change-notes><![CDATA[
       <p>0.362 beta changes:</p>
       <ul>
-      <li>Added IDEA dependency to plugin.xml.</li>
       <li>Improved simple variable cast parsing.</li>
       <li>Added <code>$class</code> as implicit pointer to <code>this</code>.</li>
       <li>Implemented Mojolicious templates parsing.</li>
+      <li>Implemented pretty dumb Mojolicious autocompletion: default helpers and tag helpers.</li>
       <li>Implemented embedded markers matching.</li>
+      <li>Moved to Java 1.6.</li>
       </ul>
 
     ]]>
@@ -62,7 +63,7 @@
          on how to target different products -->
 
     <depends>com.intellij.modules.lang</depends>
-    <depends>com.intellij.modules.java</depends>
+    <!--<depends>com.intellij.modules.java</depends>-->
 
     <extensions defaultExtensionNs="com.intellij">
 
@@ -154,6 +155,8 @@
                                       implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory key="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlFindUsagesProvider"/>
+
+        <completion.contributor language="Perl5" implementationClass="com.perl5.lang.mojolicious.idea.completion.MojoliciousCompletionContributor"/>
 
         <lang.foldingBuilder language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
         <lang.commenter language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>

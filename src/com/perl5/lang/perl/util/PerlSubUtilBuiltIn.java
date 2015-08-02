@@ -24,13 +24,8 @@ import java.util.HashSet;
  */
 public interface PerlSubUtilBuiltIn
 {
-	// this set is to help with PP undeclared and undefined methods
-	public static final HashSet<String> KNOWN_METHODS = new HashSet<>(Arrays.asList(
-			"UNIVERSAL::isa",
-			"UNIVERSAL::can"
-	));
 
-	public static final HashSet<String> BUILT_IN_UNARY = new HashSet<>(Arrays.asList(
+	public static final HashSet<String> BUILT_IN_UNARY = new HashSet<String>(Arrays.asList(
 
 			// original list taken from http://www.perlmonks.org/?node_id=1131277
 			"abs",
@@ -107,7 +102,7 @@ public interface PerlSubUtilBuiltIn
 			"write"
 	));
 
-	public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
+	public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
 			"chomp",

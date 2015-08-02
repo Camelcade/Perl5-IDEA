@@ -51,7 +51,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		if (root instanceof OuterLanguageElementImpl)
 			return FoldingDescriptor.EMPTY;
 
-		List<FoldingDescriptor> descriptors = new ArrayList<>();
+		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlBlock.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonHash.class, 0, 0));
@@ -74,7 +74,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	 */
 	private List<FoldingDescriptor> getCommentsDescriptors(@NotNull PsiElement root, @NotNull Document document)
 	{
-		List<FoldingDescriptor> descriptors = new ArrayList<>();
+		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
 		Collection<PsiComment> comments = PsiTreeUtil.findChildrenOfType(root, PsiComment.class);
 

@@ -27,16 +27,16 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PerlVariableCompletionProviderUtil
 {
-	public static final ConcurrentHashMap<String, LookupElementBuilder> SCALAR_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
-	public static final ConcurrentHashMap<String, LookupElementBuilder> ARRAY_ELEMENT_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
-	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_ELEMENT_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> SCALAR_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> ARRAY_ELEMENT_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_ELEMENT_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 
-	public static final ConcurrentHashMap<String, LookupElementBuilder> ARRAY_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
-	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_SLICE_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> ARRAY_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_SLICE_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 
-	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 
-	public static final ConcurrentHashMap<String, LookupElementBuilder> GLOB_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> GLOB_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 
 	public static LookupElementBuilder getScalarLookupElement(String name)
 	{

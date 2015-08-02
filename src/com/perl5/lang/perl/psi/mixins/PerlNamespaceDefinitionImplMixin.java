@@ -102,7 +102,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (parentPackages != null)
 			return parentPackages;
 
-		List<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<String>();
 		// fixme check for push @ISA
 
 		PsiElement namespaceBlock = this.getParent();

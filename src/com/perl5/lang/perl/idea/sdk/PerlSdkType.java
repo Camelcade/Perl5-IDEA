@@ -185,7 +185,7 @@ public class PerlSdkType extends SdkType
 	{
 		try
 		{
-			List<String> result = new ArrayList<>();
+			List<String> result = new ArrayList<String>();
 			Process p = Runtime.getRuntime().exec(command);
 			BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 

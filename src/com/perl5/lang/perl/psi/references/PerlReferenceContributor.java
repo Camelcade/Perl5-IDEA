@@ -98,7 +98,7 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 					{
 						PsiElement nameSpaceContainer = element.getParent();
 
-						ArrayList<PsiReference> result = new ArrayList<>();
+						ArrayList<PsiReference> result = new ArrayList<PsiReference>();
 
 						// fixme this should be done using patterns
 						if (nameSpaceContainer instanceof PsiPerlUseStatement

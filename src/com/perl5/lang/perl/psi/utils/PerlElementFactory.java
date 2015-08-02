@@ -95,7 +95,7 @@ public class PerlElementFactory
 				String.format("<<%c%s%c\n%s\n%s\n", quoteSymbol, markerText, quoteSymbol, contentText, markerText)
 		);
 
-		return new ArrayList<>(Arrays.asList(
+		return new ArrayList<PsiElement>(Arrays.asList(
 				PsiTreeUtil.findChildOfType(file, PsiPerlHeredocOpener.class),
 				PsiTreeUtil.findChildOfType(file, PerlHeredocElementImpl.class),
 				PsiTreeUtil.findChildOfType(file, PerlHeredocTerminatorElementImpl.class),

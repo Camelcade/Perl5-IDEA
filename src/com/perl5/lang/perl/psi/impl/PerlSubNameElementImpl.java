@@ -106,7 +106,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public List<PerlSubDefinition> getSubDefinitions()
 	{
-		List<PerlSubDefinition> result = new ArrayList<>();
+		List<PerlSubDefinition> result = new ArrayList<PerlSubDefinition>();
 		PsiElement parent = getParent();
 
 		String packageName = getPackageName();
@@ -129,7 +129,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public List<PerlSubDeclaration> getSubDeclarations()
 	{
-		List<PerlSubDeclaration> result = new ArrayList<>();
+		List<PerlSubDeclaration> result = new ArrayList<PerlSubDeclaration>();
 		PsiElement parent = getParent();
 
 		String packageName = getPackageName();
@@ -155,7 +155,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public List<PerlGlobVariable> getRelatedGlobs()
 	{
-		List<PerlGlobVariable> result = new ArrayList<>();
+		List<PerlGlobVariable> result = new ArrayList<PerlGlobVariable>();
 		PsiElement parent = getParent();
 
 		String packageName = getPackageName();

@@ -34,8 +34,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PerlPackageCompletionProviderUtil
 {
-	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
-	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_REOPEN_LOOKUP_ELEMENTS = new ConcurrentHashMap<>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_REOPEN_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 	public static final InsertHandler COMPLETION_REOPENER = new CompletionOpener();
 
 	/**

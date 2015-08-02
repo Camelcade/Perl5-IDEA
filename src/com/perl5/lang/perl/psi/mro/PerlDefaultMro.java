@@ -73,7 +73,7 @@ public class PerlDefaultMro
 	 */
 	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
-		Collection<PsiPerlSubDefinition> result = new ArrayList<>();
+		Collection<PsiPerlSubDefinition> result = new ArrayList<PsiPerlSubDefinition>();
 		if (packageName == null || subName == null)
 			return result;
 
@@ -118,7 +118,7 @@ public class PerlDefaultMro
 	 */
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
-		Collection<PsiPerlSubDeclaration> result = new ArrayList<>();
+		Collection<PsiPerlSubDeclaration> result = new ArrayList<PsiPerlSubDeclaration>();
 		if (packageName == null || subName == null)
 			return result;
 
@@ -162,7 +162,7 @@ public class PerlDefaultMro
 	 */
 	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
-		Collection<PsiPerlGlobVariable> result = new ArrayList<>();
+		Collection<PsiPerlGlobVariable> result = new ArrayList<PsiPerlGlobVariable>();
 		if (packageName == null || subName == null)
 			return result;
 
@@ -205,7 +205,7 @@ public class PerlDefaultMro
 	 */
 	public static Collection<PsiElement> getPackagePossibleMethods(Project project, String basePackageName, boolean isSuper)
 	{
-		HashMap<String, PsiElement> methods = new HashMap<>();
+		HashMap<String, PsiElement> methods = new HashMap<String, PsiElement>();
 
 		for (String packageName : getPackageParentsSequence(project, basePackageName, isSuper, new HashSet<String>()))
 		{
@@ -220,7 +220,7 @@ public class PerlDefaultMro
 					methods.put(globVariable.getName(), globVariable);
 		}
 
-		return new ArrayList<>(methods.values());
+		return new ArrayList<PsiElement>(methods.values());
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class PerlDefaultMro
 	 */
 	public static ArrayList<String> getPackageParentsSequence(Project project, String packageName, boolean isSuper, HashSet<String> recursionMap)
 	{
-		ArrayList<String> result = new ArrayList<>();
+		ArrayList<String> result = new ArrayList<String>();
 
 		if (!recursionMap.contains(packageName))
 		{

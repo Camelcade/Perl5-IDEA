@@ -57,8 +57,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
 	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
-	public static final HashSet<String> BUILT_IN_ALL = new HashSet<>();
-	public static final ConcurrentHashMap<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
+	public static final HashSet<String> BUILT_IN_ALL = new HashSet<String>();
+	public static final ConcurrentHashMap<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<String,String>();
 
 	static
 	{
@@ -120,7 +120,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		name = PACKAGE_SEPARATOR_TAIL_RE.matcher(name).replaceFirst("");
 //		System.out.println("Notail: " + name);
 
-		ArrayList<String> canonicalChunks = new ArrayList<>();
+		ArrayList<String> canonicalChunks = new ArrayList<String>();
 		String[] chunks = PACKAGE_SEPARATOR_RE.split(name, -1);
 
 //		System.out.println("Chunks: " + chunks.length);
@@ -322,7 +322,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static List<String> getPackageFilesForPsiElement(PsiElement element)
 	{
-		HashSet<String> result = new HashSet<>();
+		HashSet<String> result = new HashSet<String>();
 
 		if (element != null)
 		{
@@ -346,7 +346,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 					}
 			}
 		}
-		return new ArrayList<>(result);
+		return new ArrayList<String>(result);
 	}
 
 }

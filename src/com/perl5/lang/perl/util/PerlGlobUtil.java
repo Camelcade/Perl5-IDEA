@@ -32,7 +32,7 @@ import java.util.HashSet;
  */
 public class PerlGlobUtil implements PerlElementTypes
 {
-	public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
+	public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
 			"ARGV",
 			"STDERR",
 			"STDOUT",

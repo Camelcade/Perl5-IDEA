@@ -45,7 +45,7 @@ public class PerlSubReference extends PerlReferencePoly
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		List<PsiElement> relatedItems = new ArrayList<>();
+		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
 		relatedItems.addAll(mySubNameElement.getSubDeclarations());
 		relatedItems.addAll(mySubNameElement.getSubDefinitions());
 		relatedItems.addAll(mySubNameElement.getRelatedGlobs());

@@ -43,10 +43,10 @@ import java.util.*;
  */
 public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 {
-	List<PerlLexicalDeclaration> declaredScalars = new ArrayList<>();
-	List<PerlLexicalDeclaration> declaredArrays = new ArrayList<>();
-	List<PerlLexicalDeclaration> declaredHashes = new ArrayList<>();
-	List<PerlLexicalDeclaration> declaredVariables = new ArrayList<>();
+	List<PerlLexicalDeclaration> declaredScalars = new ArrayList<PerlLexicalDeclaration>();
+	List<PerlLexicalDeclaration> declaredArrays = new ArrayList<PerlLexicalDeclaration>();
+	List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
+	List<PerlLexicalDeclaration> declaredVariables = new ArrayList<PerlLexicalDeclaration>();
 
 	boolean lexicalCacheInvalid = true;
 
@@ -108,10 +108,10 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 	{
 		if (lexicalCacheInvalid)
 		{
-			List<PerlLexicalDeclaration> declaredScalars = new ArrayList<>();
-			List<PerlLexicalDeclaration> declaredArrays = new ArrayList<>();
-			List<PerlLexicalDeclaration> declaredHashes = new ArrayList<>();
-			List<PerlLexicalDeclaration> declaredVariables = new ArrayList<>();
+			List<PerlLexicalDeclaration> declaredScalars = new ArrayList<PerlLexicalDeclaration>();
+			List<PerlLexicalDeclaration> declaredArrays = new ArrayList<PerlLexicalDeclaration>();
+			List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
+			List<PerlLexicalDeclaration> declaredVariables = new ArrayList<PerlLexicalDeclaration>();
 
 			Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(this, PerlVariableDeclaration.class);
 
@@ -210,7 +210,7 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 		if (lexicalCacheInvalid)
 			rescanLexicalVariables();
 
-		HashMap<String, PerlVariable> declarationsHash = new HashMap<>();
+		HashMap<String, PerlVariable> declarationsHash = new HashMap<String, PerlVariable>();
 
 		PerlLexicalScope currentScope = PsiTreeUtil.getParentOfType(currentElement, PerlLexicalScope.class);
 		assert currentScope != null;

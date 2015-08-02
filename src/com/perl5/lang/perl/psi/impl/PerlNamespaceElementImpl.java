@@ -132,7 +132,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public List<PerlNamespaceDefinition> getNamespaceDefinitions()
 	{
-		List<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<>();
+		List<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<PerlNamespaceDefinition>();
 
 		PsiReference[] references = getReferences();
 
@@ -158,7 +158,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public List<PerlFileElement> getNamespaceFiles()
 	{
-		List<PerlFileElement> namespaceFiles = new ArrayList<>();
+		List<PerlFileElement> namespaceFiles = new ArrayList<PerlFileElement>();
 
 		PsiReference[] references = getReferences();
 

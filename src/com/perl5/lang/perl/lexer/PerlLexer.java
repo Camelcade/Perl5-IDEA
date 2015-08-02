@@ -36,10 +36,10 @@ import java.util.regex.Pattern;
 
 public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 {
-	public static final HashMap<String, IElementType> reservedTokenTypes = new HashMap<>();
-	public static final HashMap<String, IElementType> namedOperators = new HashMap<>();
-	public static final HashMap<String, IElementType> blockNames = new HashMap<>();
-	public static final HashMap<String, IElementType> tagNames = new HashMap<>();
+	public static final HashMap<String, IElementType> reservedTokenTypes = new HashMap<String, IElementType>();
+	public static final HashMap<String, IElementType> namedOperators = new HashMap<String, IElementType>();
+	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
+	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	private static final String reBasicIdentifier = "[_a-zA-Z0-9][_a-zA-Z0-9]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
 	private static final String reSeparator =
@@ -60,7 +60,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					reBasicIdentifier +
 					")"
 	);
-	private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<>(Arrays.asList(
+	private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
 			"eq",
 			"ne",
 			"gt",

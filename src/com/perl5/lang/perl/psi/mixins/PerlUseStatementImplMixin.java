@@ -35,7 +35,7 @@ import java.util.List;
  */
 public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl implements PsiPerlUseStatement
 {
-	public static final HashSet<String> PARENT_PRAGMAS = new HashSet<>(Arrays.asList(
+	public static final HashSet<String> PARENT_PRAGMAS = new HashSet<String>(Arrays.asList(
 			"parent",
 			"base"
 	));
@@ -93,7 +93,7 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	@Override
 	public List<String> getStringParameters()
 	{
-		List<String> stringParameters = new ArrayList<>();
+		List<String> stringParameters = new ArrayList<String>();
 		for (PerlStringContentElementImpl stringContentElement : PsiTreeUtil.findChildrenOfType(this, PerlStringContentElementImpl.class))
 			stringParameters.add(stringContentElement.getText());
 		return stringParameters;

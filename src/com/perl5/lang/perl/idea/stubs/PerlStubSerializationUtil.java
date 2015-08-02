@@ -39,7 +39,7 @@ public class PerlStubSerializationUtil
 	public static List<String> readStringsList(@NotNull StubInputStream dataStream) throws IOException
 	{
 		int listSize = dataStream.readInt();
-		ArrayList<String> result = new ArrayList<>(listSize);
+		ArrayList<String> result = new ArrayList<String>(listSize);
 		for (int i = 0; i < listSize; i++)
 			result.add(dataStream.readName().toString());
 		return result;

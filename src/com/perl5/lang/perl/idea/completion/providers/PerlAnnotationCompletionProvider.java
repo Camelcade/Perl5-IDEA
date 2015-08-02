@@ -32,7 +32,7 @@ import java.util.HashSet;
  */
 public class PerlAnnotationCompletionProvider extends CompletionProvider<CompletionParameters>
 {
-	public static final HashSet<LookupElementBuilder> ANNOTATIONS_LOOKUP_ELEMENTS = new HashSet<>();
+	public static final HashSet<LookupElementBuilder> ANNOTATIONS_LOOKUP_ELEMENTS = new HashSet<LookupElementBuilder>();
 
 	static
 	{

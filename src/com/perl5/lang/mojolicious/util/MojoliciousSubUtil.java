@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.utils;
+package com.perl5.lang.mojolicious.util;
 
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
- * Created by hurricup on 01.06.2015.
+ * Created by hurricup on 02.08.2015.
  */
-public abstract class PerlThisNames
+public class MojoliciousSubUtil implements MojoliciousSubsBuiltIn
 {
-	public final static Set<String> NAMES_SET = new HashSet<String>();
-
-	static
+	public static boolean isBuiltIn(String subName)
 	{
-		NAMES_SET.add("this");
-		NAMES_SET.add("self");
-		NAMES_SET.add("proto");
-		NAMES_SET.add("class");
+		return MOJO_DEFAULT_HELPERS.contains(subName) || MOJO_TAG_HELPERS.contains(subName);
 	}
 }

@@ -50,7 +50,7 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		List<ResolveResult> result = new ArrayList<>();
+		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
 		String canonicalName = myVariable.getCanonicalName();
 		Project project = myVariable.getProject();

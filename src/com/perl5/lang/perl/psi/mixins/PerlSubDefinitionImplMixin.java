@@ -89,7 +89,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 
 		int argumentsNumber = subArguments.size();
 
-		List<String> argumentsList = new ArrayList<>();
+		List<String> argumentsList = new ArrayList<String>();
 		for (PerlSubArgument argument : subArguments)
 		{
 			// todo we can mark optional subArguments after prototypes implementation
@@ -115,7 +115,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 		if (stub != null)
 			return stub.getSubArgumentsList();
 
-		List<PerlSubArgument> arguments = new ArrayList<>();
+		List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>();
 
 		// todo add stubs reading here
 

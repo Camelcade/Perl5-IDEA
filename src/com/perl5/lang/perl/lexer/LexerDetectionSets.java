@@ -149,13 +149,13 @@ public interface LexerDetectionSets extends PerlElementTypes
 	);
 
 
-	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<>(Arrays.asList(
+	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<String>(Arrays.asList(
 			"split",
 			"return",
 			"grep"
 	));
 
 
-	public static final HashSet<IElementType> RESERVED_TOKENSET = new HashSet<>();
+	public static final HashSet<IElementType> RESERVED_TOKENSET = new HashSet<IElementType>();
 
 }

@@ -275,7 +275,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public List<PerlVariable> getGlobalDeclarations()
 	{
-		List<PerlVariable> result = new ArrayList<>();
+		List<PerlVariable> result = new ArrayList<PerlVariable>();
 		PerlVariableType myType = getActualType();
 
 		if (myType == PerlVariableType.SCALAR)
@@ -301,7 +301,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public List<PerlGlobVariable> getRelatedGlobs()
 	{
-		List<PerlGlobVariable> result = new ArrayList<>();
+		List<PerlGlobVariable> result = new ArrayList<PerlGlobVariable>();
 
 		for (PsiPerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), getCanonicalName()))
 			result.add(glob);

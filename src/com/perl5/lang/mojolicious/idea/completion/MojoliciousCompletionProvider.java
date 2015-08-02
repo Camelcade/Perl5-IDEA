@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.completion.providers;
+package com.perl5.lang.mojolicious.idea.completion;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
@@ -23,25 +23,31 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 
 /**
- * Created by hurricup on 01.06.2015.
+ * Created by hurricup on 02.08.2015.
  */
-public class PerlSubBuiltInCompletionProvider extends CompletionProvider<CompletionParameters>
+public class MojoliciousCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<LookupElementBuilder>();
 
 	static
 	{
-		for (String subName : PerlSubUtil.BUILT_IN)
+		for (String subName : MojoliciousSubUtil.MOJO_DEFAULT_HELPERS)
 			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
 							.create(subName)
-							.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+							.withIcon(PerlIcons.MOJO_FILE)
+							.withBoldness(true)
+			);
+		for (String subName : MojoliciousSubUtil.MOJO_TAG_HELPERS)
+			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
+							.create(subName)
+							.withIcon(PerlIcons.MOJO_FILE)
 							.withBoldness(true)
 			);
 	}
