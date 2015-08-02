@@ -51,6 +51,13 @@
       <li>Implemented pretty dumb Mojolicious autocompletion: default helpers and tag helpers.</li>
       <li>Implemented embedded markers matching.</li>
       <li>Moved to Java 1.6.</li>
+      <li>Added three new here-doc injection markers:
+      <ul>
+        <li> PERL5 - Perl5 itself. Can you deal with this?</li>
+        <li> MOJO - Mojolicious templates</li>
+        <li> EPERL5 - Embedded perl.</li>
+      </ul>
+      </li>
       </ul>
 
     ]]>

@@ -81,6 +81,10 @@ public class PerlLanguageInjector implements LanguageInjector
 		ACCEPTABLE_LANGUAGES.put("PHP", "PHP");
 		ACCEPTABLE_LANGUAGES.put("Python", "PYTHON");
 
+		ACCEPTABLE_LANGUAGES.put("Perl5", "PERL5");
+		ACCEPTABLE_LANGUAGES.put("Embedded Perl", "EPERL5");
+		ACCEPTABLE_LANGUAGES.put("Mojolicious Perl", "MOJO");
+
 //		Collection<Language> languages = Language.getRegisteredLanguages();
 
 		for (Language language : Language.getRegisteredLanguages())
