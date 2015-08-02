@@ -130,7 +130,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static final TokenSet VARIABLE_ATTRIBUTE_STOP_TOKENS = TokenSet.orSet(
 			PerlLexer.OPERATORS_TOKENSET,
 			TokenSet.create(
-					SEMICOLON
+					SEMICOLON,
+					EMBED_MARKER_SEMICOLON
 			)
 	);
 
@@ -174,6 +175,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	);
 	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
+			EMBED_MARKER_SEMICOLON,
+
 			RIGHT_BRACE,
 			REGEX_QUOTE_CLOSE,
 
@@ -340,7 +343,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		PsiBuilder.Marker m = null;
 		IElementType tokenType = b.getTokenType();
-		while (!b.eof() && tokenType != LEFT_BRACE && tokenType != SEMICOLON)
+		while (!b.eof() && tokenType != LEFT_BRACE && tokenType != SEMICOLON && tokenType != EMBED_MARKER_SEMICOLON)
 		{
 			if (m == null)
 				m = b.mark();
@@ -388,6 +391,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		IElementType tokenType = b.getTokenType();
 		if (tokenType == SEMICOLON)
 			return consumeToken(b, SEMICOLON);
+		else if (tokenType == EMBED_MARKER_SEMICOLON)
+			return consumeToken(b, EMBED_MARKER_SEMICOLON);
 		else if (tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE)
 			return true;
 		else if (b.eof()) // eof

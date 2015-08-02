@@ -53,7 +53,7 @@ public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighter impl
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
-		if (tokenType == PerlElementTypes.EMBED_MARKER)
+		if (tokenType == PerlElementTypes.EMBED_MARKER || tokenType == PerlElementTypes.EMBED_MARKER_SEMICOLON)
 			return EMBED_MARKER_KEYS;
 		else
 			return super.getTokenHighlights(tokenType);

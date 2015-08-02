@@ -23,6 +23,7 @@ import com.perl5.lang.perl.lexer.CustomToken;
 import com.perl5.lang.perl.lexer.PerlLexer;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 21.07.2015.
@@ -30,7 +31,6 @@ import java.io.IOException;
 public class MojoliciousPerlLexer extends PerlLexer
 {
 	int mojoState = LEX_HTML_BLOCK;
-	boolean addSemicolon = false;
 
 	public MojoliciousPerlLexer(Project project)
 	{
@@ -47,15 +47,6 @@ public class MojoliciousPerlLexer extends PerlLexer
 		mojoState = newState;
 	}
 
-	@Override
-	public void reset(CharSequence buf, int start, int end, int initialState)
-	{
-		if (start == 0)
-			setMojoState(LEX_HTML_BLOCK);
-
-		super.reset(buf, start, end, initialState);
-	}
-
 	public IElementType advance() throws IOException
 	{
 		CharSequence buffer = getBuffer();
@@ -65,34 +56,33 @@ public class MojoliciousPerlLexer extends PerlLexer
 
 		if (preparsedTokensList.size() > 0 || bufferEnd == 0 || tokenStart >= bufferEnd)
 			return super.advance();
-		else if (currentMojoState == LEX_MOJO_PERL_LINE && buffer.charAt(tokenStart) == '\n')
+		else if ((currentMojoState == LEX_MOJO_PERL_LINE || currentMojoState == LEX_MOJO_PERL_LINE_SEMI) && buffer.charAt(tokenStart) == '\n')
 		{
 			setTokenStart(tokenStart);
 			setTokenEnd(tokenStart + 1);
+
+			IElementType tokenType = currentMojoState == LEX_MOJO_PERL_LINE_SEMI ? SEMICOLON : TokenType.NEW_LINE_INDENT;
 			setMojoState(LEX_HTML_BLOCK);
-			return addSemicolon ? SEMICOLON : TokenType.NEW_LINE_INDENT;
-		} else if (currentMojoState == LEX_MOJO_PERL_BLOCK)
+			return tokenType;
+		} else if (currentMojoState == LEX_MOJO_PERL_BLOCK || currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI)
 		{
 			int closeTokenSize = 0;
-			if (bufferAtString(buffer, tokenStart, " =%>"))
-				closeTokenSize = 4;
-			else if (bufferAtString(buffer, tokenStart, " %>"))
+			if (bufferAtString(buffer, tokenStart, "=%>"))
 				closeTokenSize = 3;
+			else if (bufferAtString(buffer, tokenStart, "%>"))
+				closeTokenSize = 2;
 			else
 				return super.advance();
 
 			setTokenStart(tokenStart);
+			boolean addSemi = currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI;
 			setMojoState(LEX_HTML_BLOCK);
-			if( addSemicolon )
-			{
-				setTokenEnd(tokenStart + 1);
-				preparsedTokensList.add(new CustomToken(tokenStart + 1, tokenStart + closeTokenSize, EMBED_MARKER));
-				return SEMICOLON;
-			} else
-			{
-				setTokenEnd(tokenStart + closeTokenSize);
+
+			setTokenEnd(tokenStart + closeTokenSize);
+			if( addSemi )
+				return EMBED_MARKER_SEMICOLON;
+			else
 				return EMBED_MARKER;
-			}
 		} else if (currentMojoState == LEX_HTML_BLOCK)
 		{
 			setTokenStart(tokenStart);
@@ -127,26 +117,26 @@ public class MojoliciousPerlLexer extends PerlLexer
 				else
 				{
 					int embedTokenSize = 1;
-					addSemicolon = false;
+					int newMojoState = LEX_MOJO_PERL_LINE;
 
 					if (bufferAtString(buffer, offset, "%=="))
 					{
 						embedTokenSize = 3;
-						addSemicolon = true;
+						newMojoState = LEX_MOJO_PERL_LINE_SEMI;
 					}
 					else if (bufferAtString(buffer, offset, "%="))
 					{
-						addSemicolon = true;
 						embedTokenSize = 2;
+						newMojoState = LEX_MOJO_PERL_LINE_SEMI;
 					}
 
 					preparsedTokensList.add(new CustomToken(offset, offset + embedTokenSize, EMBED_MARKER));
-					setMojoState(LEX_MOJO_PERL_LINE);
+					setMojoState(newMojoState);
 				}
 			} else if (bufferAtString(buffer, offset, "<%#"))    // block comment
 			{
-				preparsedTokensList.add(new CustomToken(offset, offset + 2, EMBED_MARKER));
-				offset += 2;
+				preparsedTokensList.add(new CustomToken(offset, offset + 3, EMBED_MARKER));
+				offset += 3;
 				int commentEnd = offset;
 				while (commentEnd < bufferEnd)
 				{
@@ -164,21 +154,21 @@ public class MojoliciousPerlLexer extends PerlLexer
 			else   // begin of perl block
 			{
 				int embedTokenSize = 2;
-				addSemicolon = false;
+				int newMojoState = LEX_MOJO_PERL_BLOCK;
 
 				if (bufferAtString(buffer, offset, "<%=="))
 				{
-					addSemicolon = true;
 					embedTokenSize = 4;
+					newMojoState = LEX_MOJO_PERL_BLOCK_SEMI;
 				}
 				else if (bufferAtString(buffer, offset, "<%="))
 				{
-					addSemicolon = true;
 					embedTokenSize = 3;
+					newMojoState = LEX_MOJO_PERL_BLOCK_SEMI;
 				}
 
 				preparsedTokensList.add(new CustomToken(offset, offset + embedTokenSize, EMBED_MARKER));
-				setMojoState(LEX_MOJO_PERL_BLOCK);
+				setMojoState(newMojoState);
 			}
 
 			return TEMPLATE_BLOCK_HTML;

@@ -231,6 +231,7 @@ limitations under the License.
 
     // inline HTML support
     EMBED_MARKER="EMBED_MARKER"
+    EMBED_MARKER_SEMICOLON="EMBED_MARKER_SEMICOLON" // this is for implicit semicolon in Mojolicious
     TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
   ]
 
@@ -297,11 +298,11 @@ limitations under the License.
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 root ::= file_item *
 
-private file_item ::= !<<eof>> {SEMICOLON | namespace_block | namespace_item} //{pin=1 }
+private file_item ::= !<<eof>> {semicolon_any | namespace_block | namespace_item} //{pin=1 }
 
-namespace_block ::= namespace_definition (block | SEMICOLON namespace_content)
+namespace_block ::= namespace_definition (block | semicolon_any namespace_content)
 namespace_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=2 recoverWhile=recover_namespace_definition}
-private recover_namespace_definition ::= !(SEMICOLON | LEFT_BRACE)
+private recover_namespace_definition ::= !(semicolon_any | LEFT_BRACE)
 namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
 
 // todo count opening braces
@@ -312,7 +313,7 @@ private block_content ::= file_item * {recoverWhile=recover_block}
 private recover_block ::= !(RIGHT_BRACE)
 
 private namespace_item ::=
-    SEMICOLON +
+    semicolon_any +
     | nyi_statement
     | compound_statement
     | format_definition
@@ -417,17 +418,17 @@ private sub_declaration_parameters ::=
 
 // todo implement parsing
 private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_prototype}
-private recover_sub_prototype ::= !(COLON | LEFT_BRACE | SEMICOLON)
+private recover_sub_prototype ::= !(COLON | LEFT_BRACE | semicolon_any)
 private sub_prototype_content ::= <<parseSubPrototype>> {recoverWhile=recover_sub_prototype_content}
-private recover_sub_prototype_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | SEMICOLON)
+private recover_sub_prototype_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | semicolon_any)
 
 private sub_signature ::= LEFT_PAREN [sub_signature_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_signature}
-private recover_sub_signature ::= !(LEFT_BRACE | SEMICOLON)
+private recover_sub_signature ::= !(LEFT_BRACE | semicolon_any)
 private sub_signature_content ::= <<parseSubSignature>> {recoverWhile=recover_sub_signature_content}
-private recover_sub_signature_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | SEMICOLON)
+private recover_sub_signature_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | semicolon_any)
 
 private sub_attributes ::= COLON <<parseSubAttributes>> {pin=1 recoverWhile=recover_sub_attributes}
-recover_sub_attributes ::= !(LEFT_PAREN| SEMICOLON| LEFT_BRACE)
+recover_sub_attributes ::= !(LEFT_PAREN| semicolon_any| LEFT_BRACE)
 
 last_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_LAST [lnr_param] {pin=2}
 next_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_NEXT [lnr_param] {pin=2}
@@ -563,7 +564,7 @@ variable_expr ::= variable | array_index_variable
 namespace_expr ::= <<mergePackageName>>
 parenthesised_expr ::= LEFT_PAREN parenthesised_expr_content RIGHT_PAREN {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
-private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
+private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | semicolon_any )
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + //{pin(".*")=1}
 
@@ -658,7 +659,7 @@ private operator_assign ::=
 private comma_expr ::= comma_sequence_expr | trailing_comma_expr
 comma_sequence_expr ::= expr (comma_any+ expr ) + {pin(".*")=1}
 trailing_comma_expr ::= expr comma+ // fixme we should annotate this
-private comma_any ::= comma + !(RIGHT_PAREN|RIGHT_BRACKET|RIGHT_BRACE|SEMICOLON)
+private comma_any ::= comma + !(RIGHT_PAREN|RIGHT_BRACKET|RIGHT_BRACE|semicolon_any)
 
 lp_not_expr ::= OPERATOR_NOT_LP expr { rightAssociative=true }
 lp_and_expr ::= expr (OPERATOR_AND_LP expr)+
@@ -942,3 +943,4 @@ private namespace_element_braced ::= LEFT_BRACE <<mergePackageName>> RIGHT_BRACE
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private namespace_canonical ::= <<convertPackageIdentifier>>
+private semicolon_any ::= SEMICOLON | EMBED_MARKER_SEMICOLON

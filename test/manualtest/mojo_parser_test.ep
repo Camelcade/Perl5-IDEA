@@ -1,0 +1,78 @@
+% use Time::Piece;
+<html>
+<!DOCTYPE html>
+<head><title>Simple</title></head>  % not a perl
+%%  <!-- Just line marker --> <table></table>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%%  <!-- Just block marker --> <table></table>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%#
+    block comment is here
+    String line
+ %>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+% warn "perl statement";  # just perl statement
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+%= "Perl expression"
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+%== "perl expression"."escaped"
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%
+    warn "some perl code";
+    say 42;
+%>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%= "perl expression block" %>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%== "perl expression block".sin(42) %>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%
+    warn "some perl code, adjusted";
+    say 42;
+=%>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%= "perl expression block, adjusted" =%>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%== "perl expression block, adjusted".sin(42) =%>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+  %# Line comment is being handled by Perl's parser
+
+  % my $now = localtime;
+  <body>Time: <%= $now->hms %></body>
+
+% my ($num, $title) = @_;
+%= 5 * 5
+
+  <head><title><%= $title %></title></head>
+  <body>
+    test 123
+    foo <% my $i = $num + 2; %>
+    % for (1 .. 23) {
+    * some text <%= $i++ %>
+    % }
+  </body>
+</html>
