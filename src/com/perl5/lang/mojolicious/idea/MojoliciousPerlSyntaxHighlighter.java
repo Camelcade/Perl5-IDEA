@@ -33,10 +33,6 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
  */
 public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighter implements PerlElementTypes
 {
-	public static final TextAttributesKey EMBED_MARKER = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
-
-	TextAttributesKey[] EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER};
-
 	public MojoliciousPerlSyntaxHighlighter(Project project)
 	{
 		super(project);
@@ -49,13 +45,4 @@ public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighter impl
 		return new MojoliciousPerlLexerAdapter(myProject);
 	}
 
-	@NotNull
-	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
-	{
-		if (tokenType == PerlElementTypes.EMBED_MARKER || tokenType == PerlElementTypes.EMBED_MARKER_SEMICOLON)
-			return EMBED_MARKER_KEYS;
-		else
-			return super.getTokenHighlights(tokenType);
-	}
 }

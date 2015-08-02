@@ -45,6 +45,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
+	public static final TextAttributesKey EMBED_MARKER = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+
 	public static final TextAttributesKey PERL_NUMBER = createTextAttributesKey("PERL_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 	public static final TextAttributesKey PERL_VERSION = createTextAttributesKey("PERL_VERSION", PERL_NUMBER);
 
@@ -149,6 +151,12 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.RESERVED_IF, new TextAttributesKey[]{PERL_KEYWORD});
 
 		attributesMap.put(PerlElementTypes.TAG, new TextAttributesKey[]{PERL_TAG});
+
+		// embedding markers
+		attributesMap.put(PerlElementTypes.EMBED_MARKER, new TextAttributesKey[]{EMBED_MARKER});
+		attributesMap.put(PerlElementTypes.EMBED_MARKER_CLOSE, new TextAttributesKey[]{EMBED_MARKER});
+		attributesMap.put(PerlElementTypes.EMBED_MARKER_OPEN, new TextAttributesKey[]{EMBED_MARKER});
+		attributesMap.put(PerlElementTypes.EMBED_MARKER_SEMICOLON, new TextAttributesKey[]{EMBED_MARKER});
 
 		// fixme move core highlighting in annotation
 		attributesMap.put(PerlElementTypes.PACKAGE_CORE_IDENTIFIER, new TextAttributesKey[]{PERL_PACKAGE});

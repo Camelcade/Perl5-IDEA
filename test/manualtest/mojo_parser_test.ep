@@ -1,6 +1,88 @@
 % use Time::Piece;
 <html>
 <!DOCTYPE html>
+
+% my $block = begin
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+% end
+
+% $block = begin
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+%= end
+
+% $block = begin
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+%== end
+
+<% $block = begin %>
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+%   end
+
+
+<% $block = begin %>
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+% end
+
+<%begin%>
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+%end
+
+% $block = begin
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+<%   end %>
+
+<% $block = begin =%>
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+%   end
+
+<% $block = begin =%>
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+%=   end
+
+<% $block = begin =%>
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+%==  end
+
+% $block = begin
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+<%==   end %>
+
+%# wrong block
+<%== $block = begin =%>
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+%=   end
+
+%# wrong block
+%== $block = begin
+    <b>Bold text</b>
+    % say 42;
+    <i>Italic text</i>
+<%==   end %>
+
 <head><title>Simple</title></head>  % not a perl
 %%  <!-- Just line marker --> <table></table>
 <table><tr>
@@ -33,6 +115,21 @@
     warn "some perl code";
     say 42;
 %>
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%
+    warn "some perl code";
+    say 42; # comment is here %>
+
+<%= warn "some perl code"%>
+
+<table><tr>
+        <th>Some html here</th>
+</tr></table>
+<%
+    warn "some perl code";
+    say 42; # comment is here =%>
 <table><tr>
         <th>Some html here</th>
 </tr></table>
@@ -73,6 +170,6 @@
     foo <% my $i = $num + 2; %>
     % for (1 .. 23) {
     * some text <%= $i++ %>
-    % }
+    % }}
   </body>
 </html>

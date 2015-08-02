@@ -57,18 +57,18 @@ public class EmbeddedPerlLexer extends PerlLexer
 			if (currentState == LEX_HTML_BLOCK)
 			{
 				setTokenStart(tokenStart);
-				if (tokenStart <= bufferEnd - 2 && buffer.charAt(tokenStart) == '<' && buffer.charAt(tokenStart + 1) == '?') // finishing html block
+				if (bufferAtString(buffer, tokenStart, "<?")) // finishing html block
 				{
 					yybegin(preHTMLState);
 					setTokenEnd(tokenStart + 2);
-					return EMBED_MARKER;
+					return EMBED_MARKER_OPEN;
 				} else
 				{
 					// fixme how about end of file?
 					int offset = tokenStart;
 					for (; offset < bufferEnd; offset++)
 					{
-						if (offset <= bufferEnd - 2 && buffer.charAt(offset) == '<' && buffer.charAt(offset + 1) == '?')
+						if (bufferAtString(buffer, tokenStart, "<?"))
 							break;
 					}
 
@@ -77,7 +77,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 					setTokenEnd(offset);
 					return TEMPLATE_BLOCK_HTML;
 				}
-			} else if (tokenStart <= bufferEnd - 2 && buffer.charAt(tokenStart) == '?' && buffer.charAt(tokenStart + 1) == '>')
+			} else if (bufferAtString(buffer, tokenStart, "?>"))
 			{
 				if (tokenStart < bufferEnd - 2)
 				{
@@ -86,7 +86,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 				}
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 2);
-				return EMBED_MARKER;
+				return EMBED_MARKER_CLOSE;
 			}
 		}
 		return super.advance();

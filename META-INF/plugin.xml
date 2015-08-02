@@ -48,6 +48,8 @@
       <li>Added IDEA dependency to plugin.xml.</li>
       <li>Improved simple variable cast parsing.</li>
       <li>Added <code>$class</code> as implicit pointer to <code>this</code>.</li>
+      <li>Implemented Mojolicious templates parsing.</li>
+      <li>Implemented embedded markers matching.</li>
       </ul>
 
     ]]>

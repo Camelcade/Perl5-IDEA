@@ -42,7 +42,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 {
 
 	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT);
-	public static final TokenSet COMMENTS = TokenSet.create(COMMENT_LINE, COMMENT_BLOCK, POD, HEREDOC, HEREDOC_END, EMBED_MARKER, TEMPLATE_BLOCK_HTML);
+	public static final TokenSet COMMENTS = TokenSet.create(COMMENT_LINE, COMMENT_BLOCK, POD, HEREDOC, HEREDOC_END, EMBED_MARKER, EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE, TEMPLATE_BLOCK_HTML);
 	public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);
 	public static final TokenSet LITERALS = TokenSet.create(
 			STRING_CONTENT,

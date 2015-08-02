@@ -231,6 +231,8 @@ limitations under the License.
 
     // inline HTML support
     EMBED_MARKER="EMBED_MARKER"
+    EMBED_MARKER_OPEN="EMBED_MARKER_OPEN"   // for braces match
+    EMBED_MARKER_CLOSE="EMBED_MARKER_CLOSE" // for braces match
     EMBED_MARKER_SEMICOLON="EMBED_MARKER_SEMICOLON" // this is for implicit semicolon in Mojolicious
     TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
   ]

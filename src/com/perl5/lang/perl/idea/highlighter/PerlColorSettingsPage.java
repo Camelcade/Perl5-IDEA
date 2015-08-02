@@ -42,7 +42,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
 			new AttributesDescriptor("Block comment", PerlSyntaxHighlighter.PERL_COMMENT_BLOCK),
 
-			new AttributesDescriptor("Embedding marker <? / ?>", EmbeddedPerlSyntaxHighlighter.EMBED_MARKER),
+			new AttributesDescriptor("Embedding marker <?/?>/%=/<%/%> ", PerlSyntaxHighlighter.EMBED_MARKER),
 
 			new AttributesDescriptor("Handle", PerlSyntaxHighlighter.PERL_HANDLE),
 			new AttributesDescriptor("Label", PerlSyntaxHighlighter.PERL_LABEL),
