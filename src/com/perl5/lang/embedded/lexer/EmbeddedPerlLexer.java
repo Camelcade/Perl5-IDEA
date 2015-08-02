@@ -67,10 +67,8 @@ public class EmbeddedPerlLexer extends PerlLexer
 					// fixme how about end of file?
 					int offset = tokenStart;
 					for (; offset < bufferEnd; offset++)
-					{
-						if (bufferAtString(buffer, tokenStart, "<?"))
+						if (bufferAtString(buffer, offset, "<?"))
 							break;
-					}
 
 					if (offset == bufferEnd)
 						yybegin(preHTMLState);
