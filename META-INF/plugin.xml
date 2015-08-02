@@ -52,6 +52,7 @@
       <li>Implemented embedded markers matching.</li>
       <li>Fixed problem with caret re-setting on hitting enter in here-doc with injection.</li>
       <li>Fixed bug with integer numbers highlighting.</li>
+      <li>Added Darcula color settings.</li>
       <li>Moved to Java 1.6.</li>
       <li>Added three new here-doc injection markers:
       <ul>
@@ -175,6 +176,7 @@
 
 
         <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
+        <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
         <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
 
         <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
