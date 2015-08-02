@@ -23,6 +23,8 @@ import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.mojolicious.MojoliciousPerlFileElement;
+import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlDefaultMro;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
@@ -179,7 +181,11 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public boolean isBuiltIn()
 	{
-		return PerlSubUtil.isBuiltIn(getText());
+		// fixme i belive this should be implemented in file element
+		if (this.getContainingFile() instanceof MojoliciousPerlFileElement)
+			return PerlSubUtil.isBuiltIn(getText()) || MojoliciousSubUtil.isBuiltIn(getText());
+		else
+			return PerlSubUtil.isBuiltIn(getText());
 	}
 }
 
