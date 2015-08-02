@@ -53,8 +53,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile( "^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
 	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile( "^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(=?%>)");
 
-	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)(.?)");
-	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)(.?)");
+	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
+	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
 
 	public IElementType advance() throws IOException
 	{
@@ -155,22 +155,51 @@ public class MojoliciousPerlLexer extends PerlLexer
 					preparsedTokensList.add(new CustomToken(offset, offset + 2, EMBED_MARKER));
 				else
 				{
-					int embedTokenSize = 1;
-					int newMojoState = LEX_MOJO_PERL_LINE;
+					Matcher m = BLOCK_END_PERL_LINE.matcher(buffer);
+					m.region(offset, bufferEnd);
 
-					if (bufferAtString(buffer, offset, "%=="))
+					if( m.lookingAt() )	// % end construction
 					{
-						embedTokenSize = 3;
-						newMojoState = LEX_MOJO_PERL_LINE_SEMI;
-					}
-					else if (bufferAtString(buffer, offset, "%="))
-					{
-						embedTokenSize = 2;
-						newMojoState = LEX_MOJO_PERL_LINE_SEMI;
-					}
+						// marker
+						preparsedTokensList.add(new CustomToken(offset, offset + m.group(1).length(), EMBED_MARKER));
+						offset += m.group(1).length();
 
-					preparsedTokensList.add(new CustomToken(offset, offset + embedTokenSize, EMBED_MARKER));
-					setMojoState(newMojoState);
+						if( !m.group(2).isEmpty())	// spaces if any
+						{
+							preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), TokenType.WHITE_SPACE));
+							offset += m.group(2).length();
+						}
+
+						// end as a right brace
+						preparsedTokensList.add(new CustomToken(offset, offset + m.group(3).length(), RIGHT_BRACE));
+						offset += m.group(3).length();
+
+						if( offset < bufferEnd )
+						{
+							char semiChar = buffer.charAt(offset);
+							preparsedTokensList.add(new CustomToken(offset, offset + 1, SEMICOLON));
+							if( semiChar == '\n')
+								setMojoState(LEX_HTML_BLOCK);
+						}
+					}
+					else
+					{
+						int embedTokenSize = 1;
+						int newMojoState = LEX_MOJO_PERL_LINE;
+
+						if (bufferAtString(buffer, offset, "%=="))
+						{
+							embedTokenSize = 3;
+							newMojoState = LEX_MOJO_PERL_LINE_SEMI;
+						} else if (bufferAtString(buffer, offset, "%="))
+						{
+							embedTokenSize = 2;
+							newMojoState = LEX_MOJO_PERL_LINE_SEMI;
+						}
+
+						preparsedTokensList.add(new CustomToken(offset, offset + embedTokenSize, EMBED_MARKER));
+						setMojoState(newMojoState);
+					}
 				}
 			} else if (bufferAtString(buffer, offset, "<%#"))    // block comment
 			{
