@@ -16,19 +16,22 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.stubs.strings.PerlStringStub;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,7 +41,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 23.05.2015.
  */
-public class PerlStringContentElementImpl extends LeafPsiElement implements PerlStringContentElement
+public class PerlStringContentElementImpl extends StubBasedPsiElementBase<PerlStringStub> implements PerlStringContentElement
 {
 	final static String validFileNameRe = "\\.?[a-zA-Z0-9\\-_]+(?:\\.[a-zA-Z0-9\\-_]*)*";
 	final static String validPathDelimiterRe = "(?:\\\\+|/+)";
@@ -48,9 +51,14 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 					"(" + validFileNameRe + ")" + validPathDelimiterRe + "?"
 	);
 
-	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
+	public PerlStringContentElementImpl(@NotNull PerlStringStub stub, @NotNull IStubElementType nodeType)
 	{
-		super(type, text);
+		super(stub, nodeType);
+	}
+
+	public PerlStringContentElementImpl(@NotNull ASTNode node)
+	{
+		super(node);
 	}
 
 	@Override
@@ -116,4 +124,34 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 			return m.group(1);
 		return null;
 	}
+
+	@Override
+	public String getContextPackageName()
+	{
+		return PerlPackageUtil.getContextPackageName(this);
+	}
+
+	@Override
+	public String getExplicitPackageName()
+	{
+		return null;
+	}
+
+	@Override
+	public String getPackageName()
+	{
+		String namespace = getExplicitPackageName();
+
+		if (namespace == null)
+			namespace = getContextPackageName();
+
+		return namespace;
+	}
+
+	@Override
+	public String getCanonicalName()
+	{
+		return getPackageName() + "::" + getName();
+	}
+
 }

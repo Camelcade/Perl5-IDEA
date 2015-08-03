@@ -44,9 +44,10 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	@Override
 	public LeafElement createLeaf(@NotNull IElementType type, CharSequence text)
 	{
-		if (type == STRING_CONTENT)
-			return new PerlStringContentElementImpl(type, text);
-		else if (type == VARIABLE_NAME)
+//		if (type == STRING_CONTENT)
+//			return new PerlStringContentElementImpl(type, text);
+//		else
+		if (type == VARIABLE_NAME)
 			return new PerlVariableNameElementImpl(type, text);
 		else if (type == SUB)
 			return new PerlSubNameElementImpl(type, text);

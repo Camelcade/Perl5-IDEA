@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.idea.stubs.strings;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.idea.stubs.strings.PerlStringStub;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 
 /**
- * Created by hurricup on 18.07.2015.
+ * Created by hurricup on 03.08.2015.
  */
-public interface PerlStringContentElement extends PerlNamedElement, PerlPackageMember, StubBasedPsiElement<PerlStringStub>
+public interface PerlStringStub extends StubElement<PerlStringContentElementImpl>
 {
-	public boolean looksLikePackage();
+	public String getPackageName();
 
-	public boolean looksLikePath();
-
-	String getContentFileName();
-
+	public String getName();
 }

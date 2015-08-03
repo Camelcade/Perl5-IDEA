@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlElementType;
+import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +31,15 @@ public class PerlElementTypeFactory
 	{
 	}
 
-	public static IElementType factory(@NotNull String name)
+	public static IElementType getTokenType(@NotNull String name)
+	{
+		if( name.equals("STRING_CONTENT"))
+			return PerlStubElementTypes.STRING_CONTENT;
+
+		return new PerlTokenType(name);
+	}
+
+	public static IElementType getElementType(@NotNull String name)
 	{
 		if (name.equals("SUB_DEFINITION"))
 			return PerlStubElementTypes.SUB_DEFINITION;
@@ -48,6 +58,6 @@ public class PerlElementTypeFactory
 		else if (name.equals("HASH_VARIABLE"))
 			return PerlStubElementTypes.PERL_HASH;
 
-		throw new RuntimeException("Unknown element type " + name);
+		return new PerlElementType(name);
 	}
 }

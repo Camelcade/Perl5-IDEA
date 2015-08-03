@@ -18,7 +18,6 @@ limitations under the License.
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
-//  generate=[tokens="yes" psi="yes" tokenAccessors="yes"]
 
   psiClassPrefix="PsiPerl"
   psiImplClassSuffix="Impl"
@@ -26,14 +25,15 @@ limitations under the License.
   psiImplPackage="com.perl5.lang.perl.psi.impl"
 
   elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlElementTypes"
-  elementTypeClass="com.perl5.lang.perl.PerlElementType"
+
   tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
+  elementTypeClass="com.perl5.lang.perl.PerlElementType"
+
+  elementTypeFactory="com.perl5.lang.perl.parser.PerlElementTypeFactory.getElementType"
+  tokenTypeFactory="com.perl5.lang.perl.parser.PerlElementTypeFactory.getTokenType"
 
   parserUtilClass="com.perl5.lang.perl.parser.PerlParserUitl"
   psiImplUtilClass="com.perl5.lang.perl.psi.utils.PerlPsiImplUtil"
-
-  //elementTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
-//  tokenTypeFactory="com.perl5.lang.perl.psi.PerlElementFactory.getCompositeType"
 
   tokens=[
     COMMENT_LINE="COMMENT_LINE"
@@ -193,7 +193,7 @@ limitations under the License.
     REGEX_MODIFIER="REGEX_MODIFIER"
     REGEX_TOKEN="REGEX_TOKEN"
 
-    STRING_CONTENT="STRING_CONTENT"
+    STRING_CONTENT="STRING_CONTENT"   // moved to stub
 
     TAG="TAG"
 
@@ -266,13 +266,11 @@ limitations under the License.
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
-    elementTypeFactory("scalar_variable|array_variable|hash_variable|glob_variable|array_index_variable")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
     stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
 
     mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
-    elementTypeFactory("sub_declaration|sub_definition|namespace_definition")="com.perl5.lang.perl.parser.PerlElementTypeFactory.factory"
 
     stubClass("namespace_definition")="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
