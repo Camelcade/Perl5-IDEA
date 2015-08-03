@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.37 beta</version>
+    <version>0.371 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -43,25 +43,8 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.37 beta changes:</p>
+      <p>0.371 beta changes:</p>
       <ul>
-      <li>Improved simple variable cast parsing.</li>
-      <li>Added <code>$class</code> as implicit pointer to <code>this</code>.</li>
-      <li>Implemented Mojolicious templates parsing.</li>
-      <li>Implemented pretty dumb Mojolicious autocompletion: default helpers and tag helpers.</li>
-      <li>Implemented embedded markers matching.</li>
-      <li>Fixed problem with caret re-setting on hitting enter in here-doc with injection.</li>
-      <li>Fixed bug with integer numbers highlighting.</li>
-      <li>Enabled quote handler template files.</li>
-      <li>Added Darcula color settings (by Sergey Vardanyan).</li>
-      <li>Moved to Java 1.6.</li>
-      <li>Added three new here-doc injection markers:
-      <ul>
-        <li> PERL5 - Perl5 itself. Can you deal with this?</li>
-        <li> MOJO - Mojolicious templates</li>
-        <li> EPERL5 - Embedded perl.</li>
-      </ul>
-      </li>
       </ul>
 
     ]]>
