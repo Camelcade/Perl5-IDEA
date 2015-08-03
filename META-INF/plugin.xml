@@ -52,6 +52,7 @@
       <li>Implemented embedded markers matching.</li>
       <li>Fixed problem with caret re-setting on hitting enter in here-doc with injection.</li>
       <li>Fixed bug with integer numbers highlighting.</li>
+      <li>Enabled quote handler template files.</li>
       <li>Added Darcula color settings (by Sergey Vardanyan).</li>
       <li>Moved to Java 1.6.</li>
       <li>Added three new here-doc injection markers:
