@@ -156,7 +156,7 @@
         <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
         <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
         <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-
+        <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
         <lang.parserDefinition language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlParserDefinition"/>
         <lang.fileViewProviderFactory language="Mojolicious Perl"
@@ -170,13 +170,17 @@
         <lang.commenter language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
         <lang.namesValidator language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
+        <quoteHandler fileType="Mojolicious Perl5 Template" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+
 
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
         <lang.syntaxHighlighterFactory key="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
+        <quoteHandler fileType="POD file" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
 
         <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
         <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
+
         <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
 
         <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>

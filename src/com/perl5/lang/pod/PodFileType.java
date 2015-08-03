@@ -41,7 +41,7 @@ public class PodFileType extends LanguageFileType
 	@Override
 	public String getName()
 	{
-		return "Plain Old Documentation";
+		return "POD file";
 	}
 
 	@NotNull
