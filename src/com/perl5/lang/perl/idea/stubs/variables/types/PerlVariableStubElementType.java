@@ -38,15 +38,13 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 		super(debugName, PerlLanguage.INSTANCE);
 	}
 
-	protected abstract IStubElementType getStubElementType();
-
 	protected abstract StubIndexKey getStubIndexKey();
 
 	@Override
 	public PerlVariableStub createStub(@NotNull PerlVariable psi, StubElement parentStub)
 	{
 		assert psi.getVariableNameElement() != null;
-		return new PerlVariableStubImpl(parentStub, getStubElementType(), psi.getPackageName(), psi.getVariableNameElement().getName());
+		return new PerlVariableStubImpl(parentStub, this, psi.getPackageName(), psi.getVariableNameElement().getName());
 	}
 
 
@@ -82,7 +80,7 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 	@Override
 	public PerlVariableStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlVariableStubImpl(parentStub, getStubElementType(), dataStream.readName().toString(), dataStream.readName().toString());
+		return new PerlVariableStubImpl(parentStub, this, dataStream.readName().toString(), dataStream.readName().toString());
 	}
 
 	@Override

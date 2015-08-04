@@ -41,11 +41,6 @@ public class PerlArrayStubElementType extends PerlVariableStubElementType
 		return new PsiPerlArrayVariableImpl(stub, this);
 	}
 
-	@Override
-	protected IStubElementType getStubElementType()
-	{
-		return PerlStubElementTypes.PERL_ARRAY;
-	}
 
 	protected StubIndexKey getStubIndexKey()
 	{

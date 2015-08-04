@@ -21,8 +21,7 @@ import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -30,7 +29,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 03.08.2015.
  */
-public class PerlStringStubElementType extends IStubElementType<PerlStringStub, PerlStringContentElement> implements PerlElementTypes
+public abstract class PerlStringStubElementType extends IStubElementType<PerlStringStub, PerlString> implements PerlElementTypes
 {
 
 	public PerlStringStubElementType(String name)
@@ -39,15 +38,9 @@ public class PerlStringStubElementType extends IStubElementType<PerlStringStub, 
 	}
 
 	@Override
-	public PerlStringContentElement createPsi(@NotNull PerlStringStub stub)
+	public PerlStringStub createStub(@NotNull PerlString psi, StubElement parentStub)
 	{
-		return new PerlStringContentElementImpl(stub, this);
-	}
-
-	@Override
-	public PerlStringStub createStub(@NotNull PerlStringContentElement psi, StubElement parentStub)
-	{
-		return new PerlStringStubImpl(parentStub, psi.getPackageName(), psi.getName());
+		return new PerlStringStubImpl(parentStub, this, psi.getPackageName(), psi.getName());
 	}
 
 	@NotNull
@@ -68,14 +61,13 @@ public class PerlStringStubElementType extends IStubElementType<PerlStringStub, 
 	@Override
 	public PerlStringStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlStringStubImpl(parentStub, dataStream.readName().toString(), dataStream.readName().toString());
+		return new PerlStringStubImpl(parentStub, this, dataStream.readName().toString(), dataStream.readName().toString());
 	}
 
 	@Override
 	public void indexStub(@NotNull PerlStringStub stub, @NotNull IndexSink sink)
 	{
 		String name = stub.getPackageName() + "::" + stub.getName();
-		System.err.println("Indexing: " + name);
 		sink.occurrence(PerlConstantsStubIndex.KEY, name);
 		sink.occurrence(PerlConstantsStubIndex.KEY, "*" + stub.getPackageName());
 	}
@@ -83,46 +75,42 @@ public class PerlStringStubElementType extends IStubElementType<PerlStringStub, 
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		ASTNode stringNode = node.getTreeParent();
-
-		if (stringNode != null)
+		ASTNode commaSequence = node.getTreeParent();
+		if (commaSequence != null && commaSequence.getElementType() == COMMA_SEQUENCE_EXPR)
 		{
-			ASTNode commaSequence = stringNode.getTreeParent();
-			if (commaSequence != null && commaSequence.getElementType() == COMMA_SEQUENCE_EXPR)
+			ASTNode useStatement = commaSequence.getTreeParent();
+			ASTNode packageSeeker = commaSequence;
+
+			if (useStatement != null && useStatement.getElementType() == ANON_HASH)    // multiple constants
 			{
-				ASTNode useStatement = commaSequence.getTreeParent();
+				// check that it's an even element
+				int elementCounter = 0;
 
-				ASTNode packageSeeker = stringNode.getTreePrev();
-
-				if (useStatement != null && useStatement.getElementType() == ANON_HASH)    // multiple constants
+				for (ASTNode childElement : commaSequence.getChildren(null))
 				{
-					// check that it's an even element
-					int elementCounter = 0;
-
-					for (ASTNode childElement : useStatement.getChildren(null))
-					{
-						if (childElement == stringNode)
-							break;
-						if (childElement.getElementType() == OPERATOR_COMMA || childElement == OPERATOR_COMMA_ARROW)
-							elementCounter++;
-					}
-
-					if (elementCounter % 2 != 0)
-						return false;
-
-					useStatement = useStatement.getTreeParent();
-					packageSeeker = commaSequence.getTreePrev();
+					if (childElement == node)
+						break;
+					if (childElement.getElementType() == OPERATOR_COMMA || childElement.getElementType() == OPERATOR_COMMA_ARROW)
+						elementCounter++;
 				}
 
+				if (elementCounter % 2 != 0)
+					return false;
 
-				if (packageSeeker != null && useStatement != null && useStatement.getElementType() == USE_STATEMENT)
-				{
-					ASTNode prevElement = stringNode.getTreePrev();
-					while (prevElement != null && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(prevElement.getElementType()))
-						prevElement = prevElement.getTreePrev();
+				packageSeeker = useStatement;
+				useStatement = useStatement.getTreeParent();
+			}
+			else if( node.getTreePrev() != null )	// if a single constant, should be first element in sequence
+				return false;
 
-					return prevElement != null && prevElement.getElementType() == PACKAGE && prevElement.getText().equals("constant");
-				}
+
+			if (useStatement != null && useStatement.getElementType() == USE_STATEMENT)
+			{
+				ASTNode prevElement = packageSeeker.getTreePrev();
+				while (prevElement != null && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(prevElement.getElementType()))
+					prevElement = prevElement.getTreePrev();
+
+				return prevElement != null && prevElement.getElementType() == PACKAGE && prevElement.getText().equals("constant");
 			}
 		}
 

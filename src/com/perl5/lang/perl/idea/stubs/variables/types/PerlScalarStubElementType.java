@@ -41,11 +41,6 @@ public class PerlScalarStubElementType extends PerlVariableStubElementType
 		return new PsiPerlScalarVariableImpl(stub, this);
 	}
 
-	@Override
-	protected IStubElementType getStubElementType()
-	{
-		return PerlStubElementTypes.PERL_SCALAR;
-	}
 
 	protected StubIndexKey getStubIndexKey()
 	{

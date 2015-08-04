@@ -18,16 +18,17 @@ package com.perl5.lang.perl.idea.stubs.strings;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 03.08.2015.
  */
-public class PerlConstantsStubIndex extends StringStubIndexExtension<PerlStringContentElementImpl>
+public class PerlConstantsStubIndex extends StringStubIndexExtension<PerlString>
 {
-	public static final int VERSION = 1;
-	public static final StubIndexKey<String, PerlStringContentElementImpl> KEY = StubIndexKey.createIndexKey("perl.constant");
+	public static final int VERSION = 2;
+	public static final StubIndexKey<String, PerlString> KEY = StubIndexKey.createIndexKey("perl.constant");
 
 	@Override
 	public int getVersion()
@@ -37,7 +38,7 @@ public class PerlConstantsStubIndex extends StringStubIndexExtension<PerlStringC
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlStringContentElementImpl> getKey()
+	public StubIndexKey<String, PerlString> getKey()
 	{
 		return KEY;
 	}

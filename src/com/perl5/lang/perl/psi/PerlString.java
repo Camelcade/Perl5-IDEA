@@ -17,16 +17,12 @@
 package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 
 /**
- * Created by hurricup on 18.07.2015.
+ * Created by hurricup on 04.08.2015.
  */
-public interface PerlStringContentElement extends PerlNamedElement
+public interface PerlString extends PerlNamedElement, PerlPackageMember
 {
-	public boolean looksLikePackage();
-
-	public boolean looksLikePath();
-
-	String getContentFileName();
-
+	public PerlStringContentElement getStringContentElement();
 }

@@ -27,15 +27,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlElementTypeFactory
 {
-	private PerlElementTypeFactory()
-	{
-	}
-
 	public static IElementType getTokenType(@NotNull String name)
 	{
-		if( name.equals("STRING_CONTENT"))
-			return PerlStubElementTypes.STRING_CONTENT;
-
 		return new PerlTokenType(name);
 	}
 
@@ -57,6 +50,10 @@ public class PerlElementTypeFactory
 			return PerlStubElementTypes.PERL_ARRAY_INDEX;
 		else if (name.equals("HASH_VARIABLE"))
 			return PerlStubElementTypes.PERL_HASH;
+		else if (name.equals("STRING_SQ"))
+			return PerlStubElementTypes.STRING_SQ;
+		else if (name.equals("STRING_DQ"))
+			return PerlStubElementTypes.STRING_DQ;
 
 		return new PerlElementType(name);
 	}

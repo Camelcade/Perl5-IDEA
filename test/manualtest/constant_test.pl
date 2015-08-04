@@ -11,6 +11,8 @@ use constant {
     "array2" => ('four', 'five', 'six')
 };
 
+
+$a->{test};
 say join ', ', (simple);
 say join ', ', array;
 say join ', ', array2;

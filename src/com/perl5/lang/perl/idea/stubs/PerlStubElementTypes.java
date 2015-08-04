@@ -19,7 +19,8 @@ package com.perl5.lang.perl.idea.stubs;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStubElementType;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
-import com.perl5.lang.perl.idea.stubs.strings.PerlStringStubElementType;
+import com.perl5.lang.perl.idea.stubs.strings.PerlStringStubElementTypeDQ;
+import com.perl5.lang.perl.idea.stubs.strings.PerlStringStubElementTypeSQ;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.variables.types.PerlArrayStubElementType;
@@ -36,7 +37,8 @@ public interface PerlStubElementTypes
 
 	IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("NAMESPACE");
 
-	IStubElementType STRING_CONTENT = new PerlStringStubElementType("STRING_CONTENT");
+	IStubElementType STRING_SQ = new PerlStringStubElementTypeSQ("STRING_SQ");
+	IStubElementType STRING_DQ = new PerlStringStubElementTypeDQ("STRING_DQ");
 
 	IStubElementType PERL_GLOB = new PerlGlobStubElementType("*");
 

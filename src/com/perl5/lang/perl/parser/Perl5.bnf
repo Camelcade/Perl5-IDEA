@@ -240,7 +240,13 @@ limitations under the License.
     extends(".*expr")=expr
     name(".*expr")="expression"
 
-    extends("string_sq|string_dq|string_xq|heredoc_opener")=term_expr
+    extends("heredoc_opener|anon_array|anon_hash")=expr
+
+    extends("string_sq|string_dq|string_xq|heredoc_opener")=expr
+    implements("string_sq|string_dq")="com.perl5.lang.perl.psi.PerlString"
+    mixin("string_sq|string_dq")="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin"
+    stubClass("string_sq|string_dq")="com.perl5.lang.perl.idea.stubs.strings.PerlStringStub"
+
     extends("nested_call")=sub_call_expr
 
     implements("nested_call|sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
@@ -266,8 +272,8 @@ limitations under the License.
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
+//    extends("scalar_variable|array_variable|hash_variable|array_index_variable")=expr
     stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
-
     mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
@@ -743,11 +749,11 @@ private lexical_variable_definition_argument ::= lexical_variable | [PACKAGE_COR
 private reference_value_expr ::=
     anon_array
     | anon_hash
-    | anonymous_sub
+    | anon_sub
 
 anon_array ::= LEFT_BRACKET [expr] RIGHT_BRACKET //{pin=1}
 anon_hash ::= LEFT_BRACE [expr] RIGHT_BRACE // fixme pin here after solving problem with code block and prototypes
-anonymous_sub ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB block
+anon_sub ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB block
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 

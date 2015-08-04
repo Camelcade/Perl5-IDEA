@@ -20,9 +20,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.idea.stubs.strings.PerlConstantsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import org.jetbrains.annotations.NotNull;
@@ -119,5 +121,31 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	{
 		return StubIndex.getInstance().getAllKeys(PerlSubDeclarationStubIndex.KEY, project);
 	}
+
+	/**
+	 * Searching project files for constants definitions by specific package and name
+	 *
+	 * @param project       project to search in
+	 * @param canonicalName canonical function name package::name
+	 * @return Collection of found definitions
+	 */
+	public static Collection<PerlString> getConstantsDefinitions(Project project, String canonicalName)
+	{
+		assert canonicalName != null;
+		return StubIndex.getElements(PerlConstantsStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PerlString.class);
+	}
+
+	/**
+	 * Returns list of defined constants
+	 *
+	 * @param project project to search in
+	 * @return collection of constants names
+	 */
+	public static Collection<String> getDefinedConstantsNames(Project project)
+	{
+		return StubIndex.getInstance().getAllKeys(PerlConstantsStubIndex.KEY, project);
+	}
+
+
 
 }

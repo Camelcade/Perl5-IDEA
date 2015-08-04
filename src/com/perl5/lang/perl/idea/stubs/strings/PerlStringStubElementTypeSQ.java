@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.idea.stubs.strings;
 
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.impl.PsiPerlStringSqImpl;
 
 /**
- * Created by hurricup on 18.07.2015.
+ * Created by hurricup on 04.08.2015.
  */
-public interface PerlStringContentElement extends PerlNamedElement
+public class PerlStringStubElementTypeSQ extends PerlStringStubElementType
 {
-	public boolean looksLikePackage();
+	public PerlStringStubElementTypeSQ(String name)
+	{
+		super(name);
+	}
 
-	public boolean looksLikePath();
-
-	String getContentFileName();
-
+	@Override
+	public PerlString createPsi(PerlStringStub stub)
+	{
+		return new PsiPerlStringSqImpl(stub, this);
+	}
 }

@@ -433,6 +433,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == RIGHT_BRACE)
 		{
+			// fixme shouldn't we add string_sq here?
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.collapse(STRING_CONTENT);

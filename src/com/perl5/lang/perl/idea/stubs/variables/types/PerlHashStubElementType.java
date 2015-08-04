@@ -41,11 +41,6 @@ public class PerlHashStubElementType extends PerlVariableStubElementType
 		return new PsiPerlHashVariableImpl(stub, this);
 	}
 
-	@Override
-	protected IStubElementType getStubElementType()
-	{
-		return PerlStubElementTypes.PERL_HASH;
-	}
 
 	protected StubIndexKey getStubIndexKey()
 	{
