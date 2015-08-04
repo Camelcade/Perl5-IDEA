@@ -25,10 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -161,5 +158,23 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 							.withPresentableText(globVariable.getName())
 							.withInsertHandler(SUB_SELECTION_HANDLER)
 							.withTailText("(?)"));
+
+		// Constants
+		for (PerlString stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
+			if (stringConstant.getName() != null)
+				resultSet.addElement(LookupElementBuilder
+						.create(stringConstant.getName())
+						.withIcon(PerlIcons.CONSTANT_GUTTER_ICON));
+
+
+		// Constatns with prefix
+		if (!subPrefix.isEmpty())
+			for (PerlString stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName + "::" + subPrefix))
+				if (stringConstant.getName() != null)
+					resultSet.addElement(LookupElementBuilder
+							.create(subPrefix + "::" + stringConstant.getName())
+							.withIcon(PerlIcons.CONSTANT_GUTTER_ICON)
+							.withPresentableText(stringConstant.getName()));
+
 	}
 }

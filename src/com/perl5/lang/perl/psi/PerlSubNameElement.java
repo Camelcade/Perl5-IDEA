@@ -47,6 +47,14 @@ public interface PerlSubNameElement extends PerlNamedElement
 	public List<PerlGlobVariable> getRelatedGlobs();
 
 	/**
+	 * Searching for related constants
+	 *
+	 * @return related constants
+	 */
+	public List<PerlString> getConstantDefinitions();
+
+
+	/**
 	 * Trying to get the package name from explicit specification or by traversing
 	 *
 	 * @return package name for current element

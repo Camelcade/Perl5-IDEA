@@ -116,4 +116,5 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 			return m.group(1);
 		return null;
 	}
+
 }

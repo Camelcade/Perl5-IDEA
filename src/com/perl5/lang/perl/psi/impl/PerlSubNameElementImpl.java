@@ -152,6 +152,29 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		return result;
 	}
 
+	@Override
+	public List<PerlString> getConstantDefinitions()
+	{
+		List<PerlString> result = new ArrayList<PerlString>();
+		PsiElement parent = getParent();
+
+		String packageName = getPackageName();
+		String subName = getName();
+
+		if (subName != null)
+		{
+			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
+				result.addAll(PerlDefaultMro.getConstants(getProject(), packageName, subName));
+			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
+				result.addAll(PerlDefaultMro.getSuperConstants(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
+			else
+				for (PerlString stringConstant : PerlSubUtil.getConstantsDefinitions(getProject(), packageName + "::" + subName))
+					result.add(stringConstant);
+		}
+
+		return result;
+	}
+
 	// fixme getRelatedGlobs => getSubAliases
 	// fixme not dry with declarations and definitions
 	@Override

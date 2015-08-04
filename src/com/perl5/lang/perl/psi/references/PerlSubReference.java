@@ -20,10 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,6 +46,7 @@ public class PerlSubReference extends PerlReferencePoly
 		relatedItems.addAll(mySubNameElement.getSubDeclarations());
 		relatedItems.addAll(mySubNameElement.getSubDefinitions());
 		relatedItems.addAll(mySubNameElement.getRelatedGlobs());
+		relatedItems.addAll(mySubNameElement.getConstantDefinitions());
 
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
@@ -63,7 +61,7 @@ public class PerlSubReference extends PerlReferencePoly
 	public boolean isReferenceTo(PsiElement element)
 	{
 		PsiElement parent = element.getParent();
-		if (parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration || parent instanceof PerlGlobVariable)
+		if (parent instanceof PerlSubDefinition || parent instanceof PerlSubDeclaration || parent instanceof PerlGlobVariable || parent instanceof PerlString)
 			return super.isReferenceTo(parent) || super.isReferenceTo(element);
 		return super.isReferenceTo(element);
 	}

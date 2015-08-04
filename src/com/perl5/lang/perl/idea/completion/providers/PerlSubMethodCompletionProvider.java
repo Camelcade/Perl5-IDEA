@@ -88,6 +88,13 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 						.withTailText("(?)");
 
 				resultSet.addElement(newElement);
+			}else if (element instanceof PerlString && ((PerlString) element).getName() != null)
+			{
+				LookupElementBuilder newElement = LookupElementBuilder
+						.create(((PerlString) element).getName())
+						.withIcon(PerlIcons.CONSTANT_GUTTER_ICON);
+
+				resultSet.addElement(newElement);
 			}
 		}
 	}

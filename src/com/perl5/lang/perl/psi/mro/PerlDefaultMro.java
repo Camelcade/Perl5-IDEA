@@ -37,19 +37,14 @@ public class PerlDefaultMro
 		return getSubDefinitions(project, packageName, subName, new HashSet<String>(), false);
 	}
 
-	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName)
-	{
-		return getSubDeclarations(project, packageName, subName, new HashSet<String>(), false);
-	}
-
-	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName)
-	{
-		return getSubAliases(project, packageName, subName, new HashSet<String>(), false);
-	}
-
 	public static Collection<PsiPerlSubDefinition> getSuperSubDefinitions(Project project, String packageName, String subName)
 	{
 		return getSubDefinitions(project, packageName, subName, new HashSet<String>(), true);
+	}
+
+	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName)
+	{
+		return getSubDeclarations(project, packageName, subName, new HashSet<String>(), false);
 	}
 
 	public static Collection<PsiPerlSubDeclaration> getSuperSubDeclarations(Project project, String packageName, String subName)
@@ -57,9 +52,24 @@ public class PerlDefaultMro
 		return getSubDeclarations(project, packageName, subName, new HashSet<String>(), true);
 	}
 
+	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName)
+	{
+		return getSubAliases(project, packageName, subName, new HashSet<String>(), false);
+	}
+
 	public static Collection<PsiPerlGlobVariable> getSuperSubAliases(Project project, String packageName, String subName)
 	{
 		return getSubAliases(project, packageName, subName, new HashSet<String>(), true);
+	}
+
+	public static Collection<PerlString> getConstants(Project project, String packageName, String subName)
+	{
+		return getConstantDefinitions(project, packageName, subName, new HashSet<String>(), false);
+	}
+
+	public static Collection<PerlString> getSuperConstants(Project project, String packageName, String subName)
+	{
+		return getConstantDefinitions(project, packageName, subName, new HashSet<String>(), true);
 	}
 
 	/**
@@ -152,6 +162,50 @@ public class PerlDefaultMro
 	}
 
 	/**
+	 * Resolving constants according to the Perl's MRO; fixme not dry
+	 *
+	 * @param project         current project
+	 * @param packageName     current package name
+	 * @param subName         current sub name
+	 * @param checkedPackages recursion control hashset
+	 * @return collection of definitions
+	 */
+	public static Collection<PerlString> getConstantDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
+	{
+		Collection<PerlString> result = new ArrayList<PerlString>();
+		if (packageName == null || subName == null)
+			return result;
+
+		if (!checkedPackages.contains(packageName))
+		{
+			checkedPackages.add(packageName);
+
+			if (!noCheckCurrent)    // suppress for resolving SUPER::
+				result.addAll(PerlSubUtil.getConstantsDefinitions(project, packageName + "::" + subName));
+
+			if (result.size() == 0)    // not found, need to check parents
+			{
+				for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+				{
+					List<String> parentNamespaces = namespaceDefinition.getParentNamespaces();
+
+					if (parentNamespaces.size() == 0 && !"UNIVERSAL".equals(packageName))
+						parentNamespaces.add("UNIVERSAL");
+
+					for (String parentNamespace : parentNamespaces)
+					{
+						result.addAll(getConstantDefinitions(project, parentNamespace, subName, checkedPackages, false));
+						if (result.size() > 0)
+							break;
+					}
+				}
+			}
+		}
+
+		return result;
+	}
+
+	/**
 	 * Resolving sub aliases according to the Perl's MRO; fixme not dry; not sure globs works this way
 	 *
 	 * @param project         current project
@@ -215,6 +269,9 @@ public class PerlDefaultMro
 			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
 				if (!methods.containsKey(subDeclaration.getSubName()))
 					methods.put(subDeclaration.getSubName(), subDeclaration);
+			for (PerlString constant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
+				if (!methods.containsKey(constant.getName()))
+					methods.put(constant.getName(), constant);
 			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
 				if (!methods.containsKey(globVariable.getName()))
 					methods.put(globVariable.getName(), globVariable);

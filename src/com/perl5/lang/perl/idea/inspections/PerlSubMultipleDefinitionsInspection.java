@@ -18,10 +18,7 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -42,6 +39,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 			{
 				List<PerlSubDefinition> definitionList = o.getSubDefinitions();
 				List<PerlGlobVariable> relatedGlobs = o.getRelatedGlobs();
+
 				boolean isDefinition = o.getParent() instanceof PerlSubDefinition;
 
 				if (definitionList.size() > 1 || definitionList.size() > 0 && isDefinition)
