@@ -45,6 +45,7 @@
     <change-notes><![CDATA[
       <p>0.371 beta changes:</p>
       <ul>
+      <li>Implemented constants resolution and auto-completion</li>
       </ul>
 
     ]]>
