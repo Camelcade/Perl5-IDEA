@@ -139,7 +139,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 
 						if (leftTerm instanceof PsiPerlVariableDeclarationLexical)
 						{
-							PsiPerlVariableDeclarationLexical declaration = (PsiPerlVariableDeclarationLexical)leftTerm;
+							PsiPerlVariableDeclarationLexical declaration = (PsiPerlVariableDeclarationLexical) leftTerm;
 							PerlNamespaceElement variableClass = declaration.getNamespaceElement();
 							String definitionClassName = "";
 							if (variableClass != null)

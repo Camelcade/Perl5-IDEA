@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
@@ -57,6 +57,6 @@ public class PerlRenameHeredocProcessor extends RenamePsiElementProcessor
 	@Override
 	public Collection<PsiReference> findReferences(PsiElement element)
 	{
-		return ReferencesSearch.search(element, GlobalSearchScope.fileScope(element.getContainingFile())).findAll();
+		return ReferencesSearch.search(element, new LocalSearchScope(element.getContainingFile())).findAll();
 	}
 }

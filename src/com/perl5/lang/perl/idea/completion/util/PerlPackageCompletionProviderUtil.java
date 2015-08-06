@@ -59,7 +59,7 @@ public class PerlPackageCompletionProviderUtil
 			if (PerlPackageUtil.isBuiltIn(packageName))
 				result = result.withBoldness(true);
 
-			if( PerlPackageUtil.isPragma(packageName))
+			if (PerlPackageUtil.isPragma(packageName))
 				result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
 
 

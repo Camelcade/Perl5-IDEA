@@ -19,9 +19,7 @@ package com.perl5.lang.perl.idea.stubs.strings;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 
 /**
  * Created by hurricup on 03.08.2015.
@@ -31,7 +29,7 @@ public class PerlStringStubImpl extends StubBase<PerlString> implements PerlStri
 	private final String myPackageName;
 	private final String myName;
 
-	public PerlStringStubImpl(final StubElement parent, IStubElementType stubElementType,  final String packageName, final String name)
+	public PerlStringStubImpl(final StubElement parent, IStubElementType stubElementType, final String packageName, final String name)
 	{
 		super(parent, stubElementType);
 		myPackageName = packageName;

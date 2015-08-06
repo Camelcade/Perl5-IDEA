@@ -17,28 +17,28 @@
 <list>
     <option name="PERL_ARRAY">
         <value>
-            <option name="FOREGROUND" value="9876aa" />
+            <option name="FOREGROUND" value="9876aa"/>
         </value>
     </option>
     <option name="PERL_EMBED_MARKER">
         <value>
-            <option name="FOREGROUND" value="cc7832" />
-            <option name="BACKGROUND" value="232525" />
+            <option name="FOREGROUND" value="cc7832"/>
+            <option name="BACKGROUND" value="232525"/>
         </value>
     </option>
     <option name="PERL_HASH">
         <value>
-            <option name="FOREGROUND" value="9876aa" />
+            <option name="FOREGROUND" value="9876aa"/>
         </value>
     </option>
     <option name="PERL_SCALAR">
         <value>
-            <option name="FOREGROUND" value="9876aa" />
+            <option name="FOREGROUND" value="9876aa"/>
         </value>
     </option>
     <option name="PERL_SUB">
         <value>
-            <option name="FOREGROUND" value="ffc66d" />
+            <option name="FOREGROUND" value="ffc66d"/>
         </value>
     </option>
 </list>

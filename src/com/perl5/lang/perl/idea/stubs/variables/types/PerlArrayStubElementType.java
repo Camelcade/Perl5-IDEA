@@ -16,9 +16,7 @@
 
 package com.perl5.lang.perl.idea.stubs.variables.types;
 
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 import com.perl5.lang.perl.psi.PerlVariable;

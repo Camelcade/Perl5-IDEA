@@ -20,8 +20,11 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
-import com.intellij.psi.*;
-import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -41,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -110,7 +112,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String guessVariableType()
 	{
-		if( this instanceof PsiPerlScalarVariable )
+		if (this instanceof PsiPerlScalarVariable)
 		{
 //			System.err.println("Guessing type for " + getText() + " at " + getTextOffset());
 			PerlVariableNameElement variableNameElement = getVariableNameElement();
@@ -136,30 +138,30 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 					}
 
 					// check assignments
-					for( PsiReference inReference: ReferencesSearch.search(declaredVariable, GlobalSearchScope.fileScope(getContainingFile())).findAll())
+					for (PsiReference inReference : ReferencesSearch.search(declaredVariable, new LocalSearchScope(getContainingFile())).findAll())
 					{
 						PsiElement sourceElement = inReference.getElement().getParent();
-						if(
-							sourceElement != this
-							&& sourceElement instanceof PsiPerlScalarVariable
-							&& sourceElement.getParent() instanceof PsiPerlAssignExpr
+						if (
+								sourceElement != this
+										&& sourceElement instanceof PsiPerlScalarVariable
+										&& sourceElement.getParent() instanceof PsiPerlAssignExpr
 								)
 						{
 							// found variable assignment
-							PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)sourceElement.getParent();
+							PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) sourceElement.getParent();
 							List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
 
-							if( assignmentElements.size() > 0 )
+							if (assignmentElements.size() > 0)
 							{
-								PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size()-1);
+								PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
 
-								if( lastExpression != sourceElement && lastExpression.getTextOffset() < getTextOffset())
+								if (lastExpression != sourceElement && lastExpression.getTextOffset() < getTextOffset())
 								{
 									// source element is on the left side
 									// fixme implement variables assignment support. Need to build kinda visitor with recursion control
-									if( lastExpression instanceof PerlMethodContainer )
-										return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
-									if( lastExpression instanceof PerlDerefExpression )
+									if (lastExpression instanceof PerlMethodContainer)
+										return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) lastExpression);
+									if (lastExpression instanceof PerlDerefExpression)
 										return ((PerlDerefExpression) lastExpression).guessType();
 
 								}

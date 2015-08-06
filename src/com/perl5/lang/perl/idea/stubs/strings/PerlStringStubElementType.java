@@ -81,7 +81,7 @@ public abstract class PerlStringStubElementType extends IStubElementType<PerlStr
 			ASTNode useStatement = commaSequence.getTreeParent();
 			ASTNode packageSeeker = commaSequence;
 
-			if( useStatement != null && useStatement.getElementType() == TRAILING_COMMA_EXPR ) // fixme burn in hell for this
+			if (useStatement != null && useStatement.getElementType() == TRAILING_COMMA_EXPR) // fixme burn in hell for this
 			{
 				packageSeeker = useStatement;
 				useStatement = useStatement.getTreeParent();
@@ -105,8 +105,7 @@ public abstract class PerlStringStubElementType extends IStubElementType<PerlStr
 
 				packageSeeker = useStatement;
 				useStatement = useStatement.getTreeParent();
-			}
-			else if( node.getTreePrev() != null )	// if a single constant, should be first element in sequence
+			} else if (node.getTreePrev() != null)    // if a single constant, should be first element in sequence
 				return false;
 
 

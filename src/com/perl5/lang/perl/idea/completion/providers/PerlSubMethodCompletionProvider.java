@@ -20,7 +20,6 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
@@ -36,75 +35,68 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 {
 	public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
-	public void addCompletions(@NotNull final CompletionParameters parameters,
+	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
-							   @NotNull final CompletionResultSet resultSet)
+							   @NotNull CompletionResultSet resultSet)
 	{
-		ApplicationManager.getApplication().runReadAction(new Runnable()
-		{
-			@Override
-			public void run()
-			{
 
-				PsiElement method = parameters.getPosition().getParent();
-				assert method instanceof PsiPerlMethod;
+		PsiElement method = parameters.getPosition().getParent();
+		assert method instanceof PsiPerlMethod;
 
-				String packageName = ((PsiPerlMethod) method).getPackageName();
+		String packageName = ((PsiPerlMethod) method).getPackageName();
 
-				if (packageName == null)
-					return;
+		if (packageName == null)
+			return;
 
-				PerlNamespaceElement namespaceElement = ((PsiPerlMethod) method).getNamespaceElement();
-				boolean isSuper = namespaceElement != null && "SUPER".equals(namespaceElement.getCanonicalName());
+		PerlNamespaceElement namespaceElement = ((PsiPerlMethod) method).getNamespaceElement();
+		boolean isSuper = namespaceElement != null && "SUPER".equals(namespaceElement.getCanonicalName());
 
 //				System.out.println("Autocomplete for " + packageName);
 
-				for (PsiElement element : PerlDefaultMro.getPackagePossibleMethods(method.getProject(), packageName, isSuper))
-				{
-					if (element instanceof PerlSubDefinition && ((PerlSubDefinition) element).isMethod())
-					{
-						String argsString = ((PerlSubDefinition) element).getSubArgumentsListAsString();
+		for (PsiElement element : PerlDefaultMro.getPackagePossibleMethods(method.getProject(), packageName, isSuper))
+		{
+			if (element instanceof PerlSubDefinition && ((PerlSubDefinition) element).isMethod())
+			{
+				String argsString = ((PerlSubDefinition) element).getSubArgumentsListAsString();
 
-						LookupElementBuilder newElement = LookupElementBuilder
-								.create(((PerlSubDefinition) element).getSubName())
-								.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-								.withStrikeoutness(((PerlSubDefinition) element).getSubAnnotations().isDeprecated());
+				LookupElementBuilder newElement = LookupElementBuilder
+						.create(((PerlSubDefinition) element).getSubName())
+						.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+						.withStrikeoutness(((PerlSubDefinition) element).getSubAnnotations().isDeprecated());
 
-						if (!argsString.isEmpty())
-							newElement = newElement
-									.withInsertHandler(SUB_SELECTION_HANDLER)
-									.withTailText(argsString);
+				if (!argsString.isEmpty())
+					newElement = newElement
+							.withInsertHandler(SUB_SELECTION_HANDLER)
+							.withTailText(argsString);
 
-						resultSet.addElement(newElement);
-					} else if (element instanceof PerlSubDeclaration && ((PerlSubDeclaration) element).isMethod())
-					{
-						LookupElementBuilder newElement = LookupElementBuilder
-								.create(((PerlSubDeclaration) element).getSubName())
-								.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-								.withStrikeoutness(((PerlSubDeclaration) element).getSubAnnotations().isDeprecated())
-								.withInsertHandler(SUB_SELECTION_HANDLER)
-								.withTailText("(?)");
+				resultSet.addElement(newElement);
+			} else if (element instanceof PerlSubDeclaration && ((PerlSubDeclaration) element).isMethod())
+			{
+				LookupElementBuilder newElement = LookupElementBuilder
+						.create(((PerlSubDeclaration) element).getSubName())
+						.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+						.withStrikeoutness(((PerlSubDeclaration) element).getSubAnnotations().isDeprecated())
+						.withInsertHandler(SUB_SELECTION_HANDLER)
+						.withTailText("(?)");
 
-						resultSet.addElement(newElement);
-					} else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).getName() != null)
-					{
-						LookupElementBuilder newElement = LookupElementBuilder
-								.create(((PerlGlobVariable) element).getName())
-								.withIcon(PerlIcons.GLOB_GUTTER_ICON)
-								.withInsertHandler(SUB_SELECTION_HANDLER)
-								.withTailText("(?)");
+				resultSet.addElement(newElement);
+			} else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).getName() != null)
+			{
+				LookupElementBuilder newElement = LookupElementBuilder
+						.create(((PerlGlobVariable) element).getName())
+						.withIcon(PerlIcons.GLOB_GUTTER_ICON)
+						.withInsertHandler(SUB_SELECTION_HANDLER)
+						.withTailText("(?)");
 
-						resultSet.addElement(newElement);
-					} else if (element instanceof PerlString && ((PerlString) element).getName() != null)
-					{
-						LookupElementBuilder newElement = LookupElementBuilder
-								.create(((PerlString) element).getName())
-								.withIcon(PerlIcons.CONSTANT_GUTTER_ICON);
+				resultSet.addElement(newElement);
+			} else if (element instanceof PerlString && ((PerlString) element).getName() != null)
+			{
+				LookupElementBuilder newElement = LookupElementBuilder
+						.create(((PerlString) element).getName())
+						.withIcon(PerlIcons.CONSTANT_GUTTER_ICON);
 
-						resultSet.addElement(newElement);
-					}
-				}
+				resultSet.addElement(newElement);
 			}
-		});
+		}
 	}
 }

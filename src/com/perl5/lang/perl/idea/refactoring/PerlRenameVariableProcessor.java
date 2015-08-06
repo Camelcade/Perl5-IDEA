@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -47,7 +47,7 @@ public class PerlRenameVariableProcessor extends RenamePsiElementProcessor
 		PsiElement parentElement = element.getParent().getParent();
 
 		if (parentElement != null && (parentElement instanceof PsiPerlVariableDeclarationLexical || parentElement instanceof PsiPerlVariableDeclarationLocal))
-			return ReferencesSearch.search(element, GlobalSearchScope.fileScope(element.getContainingFile())).findAll();
+			return ReferencesSearch.search(element, new LocalSearchScope(element.getContainingFile())).findAll();
 
 		return super.findReferences(element);
 	}

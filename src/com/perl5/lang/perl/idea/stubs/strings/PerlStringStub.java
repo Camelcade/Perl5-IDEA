@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.stubs.strings;
 
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 
 /**
  * Created by hurricup on 03.08.2015.

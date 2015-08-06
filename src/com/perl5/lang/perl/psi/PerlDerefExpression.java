@@ -33,6 +33,7 @@ public interface PerlDerefExpression extends PsiPerlExpr
 
 	/**
 	 * Attempting to traverse dereference chain in order to detect package name retuning by current element
+	 *
 	 * @param currentElement current element
 	 * @return type or null
 	 */
@@ -40,6 +41,7 @@ public interface PerlDerefExpression extends PsiPerlExpr
 
 	/**
 	 * Attempting to guess dereference chain result
+	 *
 	 * @return type or null
 	 */
 	public String guessType();

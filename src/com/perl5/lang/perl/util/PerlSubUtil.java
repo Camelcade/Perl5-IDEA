@@ -146,12 +146,13 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	/**
 	 * Detects return value of method container
+	 *
 	 * @param methodContainer method container inspected
 	 * @return package name or null
 	 */
 	public static String getMethodReturnValue(PerlMethodContainer methodContainer)
 	{
-		if ( methodContainer.getMethod() != null && methodContainer.getMethod().getSubNameElement() != null )
+		if (methodContainer.getMethod() != null && methodContainer.getMethod().getSubNameElement() != null)
 		{
 			// fixme this should be moved to a method
 			PerlMethod methodElement = methodContainer.getMethod();

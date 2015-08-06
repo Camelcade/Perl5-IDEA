@@ -24,8 +24,6 @@ import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
-import java.util.Collection;
-
 /**
  * Created by hurricup on 07.06.2015.
  */
@@ -52,7 +50,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 
 	public String getCurrentElementType(PsiElement currentElement)
 	{
-		if( currentElement != null )
+		if (currentElement != null)
 		{
 			boolean isFirst = currentElement == getFirstChild();
 
@@ -70,8 +68,8 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 	public String guessType()
 	{
 		PsiElement[] children = getChildren();
-		if( children.length > 0 )
-			return getCurrentElementType(children[children.length-1]);
+		if (children.length > 0)
+			return getCurrentElementType(children[children.length - 1]);
 		return null;
 	}
 
