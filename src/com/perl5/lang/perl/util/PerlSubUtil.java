@@ -24,9 +24,7 @@ import com.perl5.lang.perl.idea.stubs.strings.PerlConstantsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -146,6 +144,29 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		return StubIndex.getInstance().getAllKeys(PerlConstantsStubIndex.KEY, project);
 	}
 
+	/**
+	 * Detects return value of method container
+	 * @param methodContainer method container inspected
+	 * @return package name or null
+	 */
+	public static String getMethodReturnValue(PerlMethodContainer methodContainer)
+	{
+		if ( methodContainer.getMethod() != null && methodContainer.getMethod().getSubNameElement() != null )
+		{
+			// fixme this should be moved to a method
+			PerlMethod methodElement = methodContainer.getMethod();
+			PerlSubNameElement subNameElement = methodElement.getSubNameElement();
 
+			if ("new".equals(subNameElement.getName()))
+				return methodElement.getPackageName();
+			for (PerlSubDefinition subDefinition : subNameElement.getSubDefinitions())
+				if (subDefinition.getSubAnnotations().getReturns() != null)
+					return subDefinition.getSubAnnotations().getReturns();
+			for (PerlSubDeclaration subDeclaration : subNameElement.getSubDeclarations())
+				if (subDeclaration.getSubAnnotations().getReturns() != null)
+					return subDeclaration.getSubAnnotations().getReturns();
+		}
 
+		return null;
+	}
 }

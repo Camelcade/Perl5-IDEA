@@ -59,9 +59,9 @@ public class PerlPackageCompletionProviderUtil
 			if (PerlPackageUtil.isBuiltIn(packageName))
 				result = result.withBoldness(true);
 
-			// todo add pragma decoration for lookup element
-//			if( PerlPackageUtil.isPragma(packageName))
-//				result = result.withBoldness(true);
+			if( PerlPackageUtil.isPragma(packageName))
+				result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
+
 
 			if (PerlPackageUtil.isDeprecated(packageName))
 				result = result.withStrikeoutness(true);

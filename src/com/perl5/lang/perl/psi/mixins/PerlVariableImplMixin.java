@@ -20,9 +20,9 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.*;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
@@ -41,6 +41,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -109,30 +110,59 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String guessVariableType()
 	{
-		PerlVariableNameElement variableNameElement = getVariableNameElement();
-
-		if (variableNameElement != null)
+		if( this instanceof PsiPerlScalarVariable )
 		{
-			String variableName = variableNameElement.getName();
 
-			if (this instanceof PsiPerlScalarVariable && PerlThisNames.NAMES_SET.contains(variableName))
-				return PerlPackageUtil.getContextPackageName(this);
+			PerlVariableNameElement variableNameElement = getVariableNameElement();
 
-			// find lexicaly visible declaration and check type
-			PerlVariable declaredVariable = getLexicalDeclaration();
-			if (declaredVariable != null)
+			if (variableNameElement != null)
 			{
-				PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declaredVariable, PerlVariableDeclaration.class);
-				if (declaration != null)
-				{
-					PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
-					if (declarationNamespaceElelement != null)
-						return declarationNamespaceElelement.getName();
-				}
-			}
+				String variableName = variableNameElement.getName();
 
-			// todo check global declarations
-			// todo check assignment expression with this variable in the left and guess from there (constructors, other vars that can have known type
+				if (this instanceof PsiPerlScalarVariable && PerlThisNames.NAMES_SET.contains(variableName))
+					return PerlPackageUtil.getContextPackageName(this);
+
+				// find lexicaly visible declaration and check type
+				PerlVariable declaredVariable = getLexicalDeclaration();
+				if (declaredVariable != null)
+				{
+					// check explicit type in declaration
+					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declaredVariable, PerlVariableDeclaration.class);
+					if (declaration != null)
+					{
+						PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
+						if (declarationNamespaceElelement != null)
+							return declarationNamespaceElelement.getName();
+					}
+
+					// check assignments
+					for( PsiReference inReference: ReferencesSearch.search(declaredVariable, GlobalSearchScope.fileScope(getContainingFile())).findAll())
+					{
+						PsiElement sourceElement = inReference.getElement();
+						if( sourceElement != this && sourceElement instanceof PsiPerlScalarVariable && sourceElement.getParent() instanceof PsiPerlAssignExpr)
+						{
+							// found variable assignment
+							PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)sourceElement.getParent();
+							List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
+
+							if( assignmentElements.size() > 0 )
+							{
+								PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size()-1);
+								if( lastExpression != sourceElement )
+								{
+									// source element is on the left side
+									// fixme implement variables assignment support. Need to build kinda visitor with recursion control
+									if( lastExpression instanceof PerlMethodContainer )
+										return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
+								}
+							}
+						}
+					}
+				}
+
+				// todo check global declarations
+				// todo check assignment expression with this variable in the left and guess from there (constructors, other vars that can have known type
+			}
 		}
 
 		return null;

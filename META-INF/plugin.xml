@@ -46,6 +46,7 @@
       <p>0.371 beta changes:</p>
       <ul>
       <li>Implemented constants resolution and auto-completion</li>
+      <li>Improved parser performance</li>
       </ul>
 
     ]]>

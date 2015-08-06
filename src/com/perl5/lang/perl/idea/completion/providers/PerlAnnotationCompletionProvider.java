@@ -21,6 +21,7 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.util.ProcessingContext;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.PerlAnnotationInsertHandler;
 import com.perl5.lang.perl.lexer.PerlAnnotations;
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +41,7 @@ public class PerlAnnotationCompletionProvider extends CompletionProvider<Complet
 			ANNOTATIONS_LOOKUP_ELEMENTS.add(LookupElementBuilder
 							.create(annotation)
 							.withInsertHandler(PerlAnnotationInsertHandler.INSTANCE)
+							.withIcon(PerlIcons.ANNOTATION_GUTTER_ICON)
 			);
 	}
 

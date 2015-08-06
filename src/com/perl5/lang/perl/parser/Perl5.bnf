@@ -532,7 +532,7 @@ named_list_expr ::= <<isListOperator>> method [call_arguments]  // optional comm
 
 term_expr ::=
     variable_declaration
-    | anon_array_element
+    | anon_array_element  // fixme we can speed this up to parse manually () and ()[]
     | parenthesised_expr
     | scalar_constant
     | do_expr

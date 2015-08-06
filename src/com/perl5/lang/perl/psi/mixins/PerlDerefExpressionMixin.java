@@ -22,6 +22,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 
 /**
  * Created by hurricup on 07.06.2015.
@@ -51,28 +52,8 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 			return ((PerlNamespaceElement) currentElement.getFirstChild()).getCanonicalName();
 		else if (isFirst && currentElement instanceof PerlVariable)
 			return ((PerlVariable) currentElement).guessVariableType();
-		else if (
-				currentElement instanceof PerlMethodContainer
-						&& ((PerlMethodContainer) currentElement).getMethod() != null
-						&& ((PerlMethodContainer) currentElement).getMethod().getSubNameElement() != null
-				)
-		{
-			// fixme this should be moved to a method
-			PerlSubNameElement subNameElement = ((PerlMethodContainer) currentElement).getMethod().getSubNameElement();
-
-			if (subNameElement != null)
-			{
-				if ("new".equals(subNameElement.getName()))
-					return ((PerlMethodContainer) currentElement).getMethod().getPackageName();
-				for (PerlSubDefinition subDefinition : subNameElement.getSubDefinitions())
-					if (subDefinition.getSubAnnotations().getReturns() != null)
-						return subDefinition.getSubAnnotations().getReturns();
-				for (PerlSubDeclaration subDeclaration : subNameElement.getSubDeclarations())
-					if (subDeclaration.getSubAnnotations().getReturns() != null)
-						return subDeclaration.getSubAnnotations().getReturns();
-			}
-		}
-
+		else if (currentElement instanceof PerlMethodContainer )
+			return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)currentElement);
 
 		return null;
 	}

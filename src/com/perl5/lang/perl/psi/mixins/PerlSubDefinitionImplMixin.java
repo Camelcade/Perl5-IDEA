@@ -133,12 +133,13 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 					assert assignTerms instanceof SmartList;
 					if (assignTerms.size() == 2)
 					{
+						// fixme need to implement things in assignExpr
 						PsiPerlExpr leftTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(0);
 						PsiPerlExpr rightTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(1);
 
-						PsiPerlVariableDeclarationLexical declaration = PsiTreeUtil.findChildOfType(leftTerm, PsiPerlVariableDeclarationLexical.class);
-						if (declaration != null)
+						if (leftTerm instanceof PsiPerlVariableDeclarationLexical)
 						{
+							PsiPerlVariableDeclarationLexical declaration = (PsiPerlVariableDeclarationLexical)leftTerm;
 							PerlNamespaceElement variableClass = declaration.getNamespaceElement();
 							String definitionClassName = "";
 							if (variableClass != null)
