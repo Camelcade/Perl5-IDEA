@@ -272,7 +272,11 @@ limitations under the License.
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
-//    extends("scalar_variable|array_variable|hash_variable|array_index_variable")=expr
+    extends("code_variable")=expr
+
+    extends("array_array_slice|array_hash_slice|scalar_array_element|scalar_hash_element|scalar_anon_array_element")=expr
+
+    extends("array_index_variable|scalar_variable|array_variable|hash_variable|glob_variable")=expr
     stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
     mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
@@ -565,7 +569,7 @@ private sort_arguments_ ::=
     | callable list_expr
     | list_expr
 
-variable_expr ::= variable | array_index_variable
+private variable_expr ::= variable | array_index_variable
 
 namespace_expr ::= <<mergePackageName>>
 parenthesised_expr ::= LEFT_PAREN parenthesised_expr_content RIGHT_PAREN {pin=1 name="Parenthesised expression"}
@@ -910,6 +914,8 @@ array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
 hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD>> variable_body
+
+//fixme probably this should not be here
 code_variable ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> variable_body
 
 glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body [hash_index]
