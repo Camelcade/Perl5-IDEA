@@ -24,6 +24,8 @@ import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
+import java.util.Collection;
+
 /**
  * Created by hurricup on 07.06.2015.
  */
@@ -35,7 +37,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 	}
 
 	@Override
-	public String getPackageNameForElement(PsiElement methodElement)
+	public String getPreviousElementType(PsiElement methodElement)
 	{
 		// todo add some caching here
 		if (methodElement == getFirstChild())    // first element
@@ -45,16 +47,33 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 		if (currentElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
 			currentElement = currentElement.getPrevSibling();
 
-		assert currentElement != null;
-		boolean isFirst = currentElement == getFirstChild();
+		return getCurrentElementType(currentElement);
+	}
 
-		if (currentElement instanceof PsiPerlNamespaceExpr)
-			return ((PerlNamespaceElement) currentElement.getFirstChild()).getCanonicalName();
-		else if (isFirst && currentElement instanceof PerlVariable)
-			return ((PerlVariable) currentElement).guessVariableType();
-		else if (currentElement instanceof PerlMethodContainer )
-			return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)currentElement);
+	public String getCurrentElementType(PsiElement currentElement)
+	{
+		if( currentElement != null )
+		{
+			boolean isFirst = currentElement == getFirstChild();
 
+			if (currentElement instanceof PsiPerlNamespaceExpr)
+				return ((PerlNamespaceElement) currentElement.getFirstChild()).getCanonicalName();
+			else if (isFirst && currentElement instanceof PerlVariable)
+				return ((PerlVariable) currentElement).guessVariableType();
+			else if (currentElement instanceof PerlMethodContainer)
+				return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) currentElement);
+		}
+		return null;
+
+	}
+
+	public String guessType()
+	{
+		PsiElement[] children = getChildren();
+		if( children.length > 0 )
+			return getCurrentElementType(children[children.length-1]);
 		return null;
 	}
+
+
 }

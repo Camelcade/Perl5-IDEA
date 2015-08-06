@@ -112,7 +112,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	{
 		if( this instanceof PsiPerlScalarVariable )
 		{
-
+//			System.err.println("Guessing type for " + getText() + " at " + getTextOffset());
 			PerlVariableNameElement variableNameElement = getVariableNameElement();
 
 			if (variableNameElement != null)
@@ -138,8 +138,12 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 					// check assignments
 					for( PsiReference inReference: ReferencesSearch.search(declaredVariable, GlobalSearchScope.fileScope(getContainingFile())).findAll())
 					{
-						PsiElement sourceElement = inReference.getElement();
-						if( sourceElement != this && sourceElement instanceof PsiPerlScalarVariable && sourceElement.getParent() instanceof PsiPerlAssignExpr)
+						PsiElement sourceElement = inReference.getElement().getParent();
+						if(
+							sourceElement != this
+							&& sourceElement instanceof PsiPerlScalarVariable
+							&& sourceElement.getParent() instanceof PsiPerlAssignExpr
+								)
 						{
 							// found variable assignment
 							PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)sourceElement.getParent();
@@ -148,12 +152,16 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 							if( assignmentElements.size() > 0 )
 							{
 								PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size()-1);
-								if( lastExpression != sourceElement )
+
+								if( lastExpression != sourceElement && lastExpression.getTextOffset() < getTextOffset())
 								{
 									// source element is on the left side
 									// fixme implement variables assignment support. Need to build kinda visitor with recursion control
 									if( lastExpression instanceof PerlMethodContainer )
 										return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
+									if( lastExpression instanceof PerlDerefExpression )
+										return ((PerlDerefExpression) lastExpression).guessType();
+
 								}
 							}
 						}

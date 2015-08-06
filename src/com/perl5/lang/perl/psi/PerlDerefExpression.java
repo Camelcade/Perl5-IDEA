@@ -24,10 +24,25 @@ import com.intellij.psi.PsiElement;
 public interface PerlDerefExpression extends PsiPerlExpr
 {
 	/**
-	 * Attempting to traverse dereference chain in order to detect package name
+	 * Attempting to traverse dereference chain in order to detect package name before method element
 	 *
 	 * @param methodElement - method, for which we are traversing
 	 * @return package name or null
 	 */
-	public String getPackageNameForElement(PsiElement methodElement);
+	public String getPreviousElementType(PsiElement methodElement);
+
+	/**
+	 * Attempting to traverse dereference chain in order to detect package name retuning by current element
+	 * @param currentElement current element
+	 * @return type or null
+	 */
+	public String getCurrentElementType(PsiElement currentElement);
+
+	/**
+	 * Attempting to guess dereference chain result
+	 * @return type or null
+	 */
+	public String guessType();
+
+
 }

@@ -48,7 +48,7 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 		PsiElement grandParent = parent == null ? null : parent.getParent();
 
 		if (grandParent instanceof PsiPerlDerefExpr)
-			return ((PsiPerlDerefExpr) grandParent).getPackageNameForElement(parent);
+			return ((PsiPerlDerefExpr) grandParent).getPreviousElementType(parent);
 
 		return super.getContextPackageName();
 	}
