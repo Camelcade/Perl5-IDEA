@@ -240,9 +240,13 @@ limitations under the License.
     extends(".*expr")=expr
     name(".*expr")="expression"
 
-    extends("heredoc_opener|anon_array|anon_hash")=expr
+    extends("heredoc_opener|anon_array|anon_hash|anon_sub")=expr
+    extends("string_list|number_constant")=expr
+    extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
-    extends("string_sq|string_dq|string_xq|heredoc_opener")=expr
+    extends("anon_array_element")=expr
+
+    extends("string_sq|string_dq|string_xq|tag_scalar|heredoc_opener")=expr
     implements("string_sq|string_dq")="com.perl5.lang.perl.psi.PerlString"
     mixin("string_sq|string_dq")="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin"
     stubClass("string_sq|string_dq")="com.perl5.lang.perl.idea.stubs.strings.PerlStringStub"
@@ -269,12 +273,13 @@ limitations under the License.
     implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
 
+    extends("variable_declaration_global|variable_declaration_lexical|variable_declaration_local")=expr
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
 
     extends("code_variable")=expr
 
-    extends("array_array_slice|array_hash_slice|scalar_array_element|scalar_hash_element|scalar_anon_array_element")=expr
+    extends("array_array_slice|array_hash_slice|scalar_array_element|scalar_hash_element")=expr
 
     extends("array_index_variable|scalar_variable|array_variable|hash_variable|glob_variable")=expr
     stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
@@ -527,7 +532,8 @@ named_list_expr ::= <<isListOperator>> method [call_arguments]  // optional comm
 
 term_expr ::=
     variable_declaration
-    | parenthesised_expr [LEFT_BRACKET expr RIGHT_BRACKET]
+    | anon_array_element
+    | parenthesised_expr
     | scalar_constant
     | do_expr
     | sub_expr
@@ -799,7 +805,6 @@ private scalar ::=
     | scalar_variable
     | scalar_cast_expr
     | scalar_constant
-    | scalar_anon_array_element
     | undef_expr
     | scalar_index_cast_expr
 
@@ -817,7 +822,7 @@ scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX
 
 scalar_array_element ::= scalar_variable LEFT_BRACKET expr RIGHT_BRACKET
 scalar_hash_element ::= scalar_variable hash_index
-scalar_anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
+anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
 
 private glob ::=
     glob_variable
@@ -873,10 +878,12 @@ perl_handle_expr ::= HANDLE
 
 private scalar_constant ::=
     number_constant
-    | TAG
+    | tag_scalar
     | string
 
-private number_constant ::=
+tag_scalar ::= TAG
+
+number_constant ::=
     NUMBER
     | NUMBER_VERSION
     | NUMBER_SIMPLE

@@ -207,6 +207,8 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 			annotateStringContent((PerlStringContentElementImpl) element, holder);
 		else if (element instanceof PerlSubNameElement)
 			annotateSubNameElement((PerlSubNameElement) element, holder);
+//		else if( element instanceof PsiPerlTermExpr)
+//			holder.createErrorAnnotation(element, "Term expression wrapper");
 		else
 		{
 			IElementType tokenType = element.getNode().getElementType();

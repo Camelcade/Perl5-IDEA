@@ -17,9 +17,12 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclaration;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 01.06.2015.
@@ -37,4 +40,26 @@ public abstract class PerlVariableDeclarationMixin extends PerlLexicalScopeMembe
 	{
 		return findChildByClass(PerlNamespaceElement.class);
 	}
+
+	@Override
+	@NotNull
+	public List<PsiPerlArrayVariable> getArrayVariableList()
+	{
+		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlArrayVariable.class);
+	}
+
+	@Override
+	@NotNull
+	public List<PsiPerlHashVariable> getHashVariableList()
+	{
+		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlHashVariable.class);
+	}
+
+	@Override
+	@NotNull
+	public List<PsiPerlScalarVariable> getScalarVariableList()
+	{
+		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlScalarVariable.class);
+	}
+
 }
