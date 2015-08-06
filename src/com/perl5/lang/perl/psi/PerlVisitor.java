@@ -57,5 +57,23 @@ public class PerlVisitor extends PsiPerlVisitor
 		visitComment(o);
 	}
 
+	public void visitArrayIndexVariable(@NotNull PsiPerlArrayIndexVariable o) {
+		 visitPerlVariable(o);
+	}
+	public void visitArrayVariable(@NotNull PsiPerlArrayVariable o) {
+		 visitPerlVariable(o);
+	}
 
+	public void visitHashVariable(@NotNull PsiPerlHashVariable o) {
+		 visitPerlVariable(o);
+	}
+
+	public void visitScalarVariable(@NotNull PsiPerlScalarVariable o) {
+		 visitPerlVariable(o);
+	}
+
+	public void visitPerlVariable(@NotNull PerlVariable o)
+	{
+		visitPsiElement(o);
+	}
 }
