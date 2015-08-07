@@ -820,9 +820,9 @@ scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX
         | scalar
     }
 
-scalar_array_element ::= scalar_variable LEFT_BRACKET expr RIGHT_BRACKET
+scalar_array_element ::= scalar_variable array_index
 scalar_hash_element ::= scalar_variable hash_index
-anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN LEFT_BRACKET expr RIGHT_BRACKET
+anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN array_index
 
 private glob ::=
     glob_variable
