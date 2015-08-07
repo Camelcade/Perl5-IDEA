@@ -49,7 +49,7 @@ public abstract class PerlNamedElementImpl extends ASTWrapperPsiElement implemen
 		return null;
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getName()
 	{
