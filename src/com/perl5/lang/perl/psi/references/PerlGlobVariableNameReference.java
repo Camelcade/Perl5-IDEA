@@ -22,8 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -60,38 +58,26 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 			if (!glob.equals(myVariable))
 				result.add(new PsiElementResolveResult(glob));
 
-
 		return result.toArray(new ResolveResult[result.size()]);
 	}
-
 
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
-		PsiElement parent = element.getParent();
-		if (parent instanceof PerlVariable || parent instanceof PerlGlobVariable || parent instanceof PerlSubBase)
-			return super.isReferenceTo(parent) || super.isReferenceTo(element);
+		if (!(element instanceof PerlGlobVariable))
+			return false;
 
 		return super.isReferenceTo(element);
 	}
 
 	@Nullable
 	@Override
-	// fixme not dry, duplicates from variablename
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
 		if (resolveResults.length == 0)
 			return null;
-		else if (resolveResults.length == 1)
-			return resolveResults[0].getElement();
-
-		for (ResolveResult resolveResult : resolveResults)
-			if (resolveResult.getElement() instanceof PerlGlobVariable)
-				return resolveResult.getElement();
 
 		return resolveResults[0].getElement();
 	}
-
-
 }
