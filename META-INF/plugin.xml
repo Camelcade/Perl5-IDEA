@@ -43,10 +43,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.371 beta changes:</p>
+      <p>0.372 beta changes:</p>
       <ul>
       <li>Implemented constants resolution and auto-completion</li>
       <li>Improved parser performance</li>
+      <li>Implemented scalar type detection on assignment to sub or method call.</li>
       </ul>
 
     ]]>
