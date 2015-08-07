@@ -26,6 +26,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlDefaultMro;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -50,6 +51,8 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 
 		PerlNamespaceElement namespaceElement = ((PsiPerlMethod) method).getNamespaceElement();
 		boolean isSuper = namespaceElement != null && "SUPER".equals(namespaceElement.getCanonicalName());
+		if( isSuper )
+			packageName = PerlPackageUtil.getContextPackageName(method);
 
 //				System.out.println("Autocomplete for " + packageName);
 
