@@ -63,7 +63,7 @@ public class PerlStringImplMixin extends StubBasedPsiElementBase<PerlStringStub>
 		PerlStringContentElement perlStringContentElement = getStringContentElement();
 		if (perlStringContentElement != null)
 			return perlStringContentElement.getName();
-		return super.getName();
+		return null;
 	}
 
 	@Override

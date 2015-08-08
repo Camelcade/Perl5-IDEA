@@ -81,11 +81,12 @@ public class PerlVariableNameReference extends PerlReferencePoly
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
-		PsiElement parent = element.getParent();
-		if (parent instanceof PerlVariable || parent instanceof PerlGlobVariable)
-			return super.isReferenceTo(parent) || super.isReferenceTo(element);
+		if( element instanceof PerlVariable || element instanceof PerlGlobVariable )
+			return super.isReferenceTo(element);
+		else if( element instanceof PerlVariableNameElement )
+			return isReferenceTo(element.getParent());
 
-		return super.isReferenceTo(element);
+		return false;
 	}
 
 	@Nullable

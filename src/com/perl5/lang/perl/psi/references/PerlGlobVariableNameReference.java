@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,10 +65,12 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
-		if (!(element instanceof PerlGlobVariable))
-			return false;
+		if( element instanceof PerlGlobVariable )
+			return super.isReferenceTo(element);
+		else if( element instanceof PerlVariableNameElement )
+			return isReferenceTo(element.getParent());
 
-		return super.isReferenceTo(element);
+		return false;
 	}
 
 	@Nullable

@@ -21,8 +21,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,10 +55,9 @@ public class PerlHeredocReference extends PerlReference
 			if (opener.getTextOffset() < myElement.getTextOffset())
 			{
 				String markerName = opener.getName();
-				if( markerName != null && markerName.equals(myElement.getText()))
-					result= opener;
-			}
-			else
+				if (marker.equals(markerName))
+					result = opener.getNameIdentifier();
+			} else
 				break;
 		}
 		return result;
@@ -66,8 +66,11 @@ public class PerlHeredocReference extends PerlReference
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
-		if( element instanceof PerlHeredocOpener )
-			return super.isReferenceTo(element);
+		if (element instanceof PerlHeredocOpener)
+			return super.isReferenceTo(((PerlHeredocOpener) element).getNameIdentifier());
+		else if (element instanceof PerlString || element instanceof PerlStringContentElement )
+			return isReferenceTo(element.getParent());
+
 		return false;
 	}
 }
