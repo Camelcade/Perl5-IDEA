@@ -88,12 +88,12 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
-		if( element instanceof PerlNamespaceDefinition)
+		if (element instanceof PerlNamespaceDefinition)
 			return super.isReferenceTo(element);
 
 		PsiElement parent = element.getParent();
 		if (parent instanceof PerlNamespaceDefinition)
-			return  isReferenceTo(parent);
+			return isReferenceTo(parent);
 		;
 		return false;
 	}

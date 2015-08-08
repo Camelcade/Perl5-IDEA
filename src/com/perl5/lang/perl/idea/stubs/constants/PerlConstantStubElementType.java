@@ -19,13 +19,11 @@ package com.perl5.lang.perl.idea.stubs.constants;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.impl.PsiPerlConstantNameImpl;
 import org.jetbrains.annotations.NotNull;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 
 /**
@@ -86,9 +84,9 @@ public class PerlConstantStubElementType extends IStubElementType<PerlConstantSt
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		ASTNode firstChild = node.getFirstChildNode();
-		if( firstChild != null && firstChild.getElementType() == STRING_CONTENT )
+		if (firstChild != null && firstChild.getElementType() == STRING_CONTENT)
 			return true;
-		else if( firstChild != null && firstChild.findChildByType(STRING_CONTENT) != null )
+		else if (firstChild != null && firstChild.findChildByType(STRING_CONTENT) != null)
 			return true;
 
 		return false;

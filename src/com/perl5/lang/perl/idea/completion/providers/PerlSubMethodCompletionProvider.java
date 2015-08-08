@@ -51,7 +51,7 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 
 		PerlNamespaceElement namespaceElement = ((PsiPerlMethod) method).getNamespaceElement();
 		boolean isSuper = namespaceElement != null && "SUPER".equals(namespaceElement.getCanonicalName());
-		if( isSuper )
+		if (isSuper)
 			packageName = PerlPackageUtil.getContextPackageName(method);
 
 //				System.out.println("Autocomplete for " + packageName);

@@ -464,15 +464,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	/**
 	 * Checks and parses pragma to package token
-	 * @param b PerlBuilder
-	 * @param l parsing level
+	 *
+	 * @param b               PerlBuilder
+	 * @param l               parsing level
 	 * @param sourceTokenType source token type
 	 * @param targetTokenType token type to collapse to
 	 * @return result
 	 */
 	public static boolean checkAndCollapseToken(PsiBuilder b, int l, IElementType sourceTokenType, IElementType targetTokenType)
 	{
-		if( b.getTokenType() == sourceTokenType)
+		if (b.getTokenType() == sourceTokenType)
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
@@ -905,6 +906,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 	/**
 	 * Parses comma sequence with trailing comma support
+	 *
 	 * @param b PerlBuilder
 	 * @param l parsing level
 	 * @return parsing result
@@ -912,20 +914,22 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseCommaSequence(PsiBuilder b, int l)
 	{
 		boolean r = false;
-		while (true) {
-			if( consumeToken(b,OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW))	// got comma
+		while (true)
+		{
+			if (consumeToken(b, OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW))    // got comma
 			{
 				r = true;
 
 				// consume sequential commas
-				while(true){
-					if( !(consumeToken(b,OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW)))
+				while (true)
+				{
+					if (!(consumeToken(b, OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW)))
 						break;
-				};
-				if (!PerlParser.expr(b, l, 4))	// looks like an end
+				}
+				;
+				if (!PerlParser.expr(b, l, 4))    // looks like an end
 					break;
-			}
-			else
+			} else
 				break;
 		}
 		return r;

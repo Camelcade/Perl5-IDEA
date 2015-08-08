@@ -38,7 +38,7 @@ public abstract class PerlStringImplMixin extends PerlNamedElementImpl
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		PsiElement nameIdentifier = getNameIdentifier();
-		if( nameIdentifier instanceof PerlStringContentElement )
+		if (nameIdentifier instanceof PerlStringContentElement)
 			return ((PerlStringContentElement) nameIdentifier).setName(name);
 		return null;
 	}
@@ -55,7 +55,7 @@ public abstract class PerlStringImplMixin extends PerlNamedElementImpl
 	public String getName()
 	{
 		PsiElement nameIdentifier = getNameIdentifier();
-		if( nameIdentifier instanceof PerlStringContentElement )
+		if (nameIdentifier instanceof PerlStringContentElement)
 			return ((PerlStringContentElement) nameIdentifier).getName();
 		return null;
 	}

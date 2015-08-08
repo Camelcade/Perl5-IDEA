@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.stubs.constants.PerlConstantStub;
-import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlConstantName;
