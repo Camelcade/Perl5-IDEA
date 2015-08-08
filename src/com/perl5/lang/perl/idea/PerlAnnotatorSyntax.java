@@ -131,14 +131,17 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 	{
 		PsiElement parent = element.getParent();
 
-		Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
+		if (!(parent instanceof PsiPerlConstantName || parent.getParent() instanceof PsiPerlConstantName))
+		{
+			Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
 
-		if (parent instanceof PsiPerlStringDq) // interpolated
-			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
-		else if (parent instanceof PsiPerlStringXq) // executable
-			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
-		else
-			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+			if (parent instanceof PsiPerlStringDq) // interpolated
+				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
+			else if (parent instanceof PsiPerlStringXq) // executable
+				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
+			else
+				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+		}
 	}
 
 
@@ -178,6 +181,12 @@ public class PerlAnnotatorSyntax implements Annotator, PerlElementTypes
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_GLOB,
 					((PerlVariableNameElementContainer) element).isBuiltIn(),
+					false);
+		else if (element instanceof PsiPerlConstantName)
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_CONSTANT,
+					false,
 					false);
 		else if (element instanceof PsiPerlGlobCastExpr)
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_GLOB);

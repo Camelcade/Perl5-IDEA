@@ -54,6 +54,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Annotation", PerlSyntaxHighlighter.PERL_ANNOTATION),
 
+			new AttributesDescriptor("Constant", PerlSyntaxHighlighter.PERL_CONSTANT),
 			new AttributesDescriptor("Sub call", PerlSyntaxHighlighter.PERL_SUB),
 			new AttributesDescriptor("Sub definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION),
 			new AttributesDescriptor("Sub declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION),
@@ -102,7 +103,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	@Override
 	public String getDemoText()
 	{
-		return "package DTL::Fast::Filter v1.100_00.10;\n" +
+		return "Example doesn't work. Not Yet Implemented.\n\npackage DTL::Fast::Filter v1.100_00.10;\n" +
 				"use strict; use utf8; use warnings FATAL => 'all'; \n" +
 				"use parent 'DTL::Fast::Entity';\n" +
 				"use Module::Build::YAML;\n" +

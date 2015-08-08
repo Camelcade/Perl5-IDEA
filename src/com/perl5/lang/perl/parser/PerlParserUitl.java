@@ -37,18 +37,13 @@ import java.util.HashSet;
 public class PerlParserUitl extends GeneratedParserUtilBase implements PerlElementTypes
 {
 
+	// tokens that can be converted to a PACKAGE
 	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
 			PACKAGE_CORE_IDENTIFIER,
+			PACKAGE_PRAGMA_CONSTANT,
 			PACKAGE_IDENTIFIER,
 			PACKAGE
 	);
-
-	// tokens that can be converted to a PACKAGE
-	public static final TokenSet CONVERTABLE_PACKAGE_TOKENS = TokenSet.create(
-			PACKAGE_IDENTIFIER,
-			PACKAGE_CORE_IDENTIFIER
-	);
-
 
 	// tokens that can be converted between each other depending on context
 	public static final TokenSet CONVERTABLE_TOKENS = TokenSet.create(
@@ -456,7 +451,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		{
 			b.advanceLexer();
 			return true;
-		} else if (CONVERTABLE_PACKAGE_TOKENS.contains(currentTokenType))
+		} else if (PACKAGE_TOKENS.contains(currentTokenType))
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
@@ -466,6 +461,27 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 
 		return false;
 	}
+
+	/**
+	 * Checks and parses pragma to package token
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @param sourceTokenType source token type
+	 * @param targetTokenType token type to collapse to
+	 * @return result
+	 */
+	public static boolean checkAndCollapseToken(PsiBuilder b, int l, IElementType sourceTokenType, IElementType targetTokenType)
+	{
+		if( b.getTokenType() == sourceTokenType)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(targetTokenType);
+			return true;
+		}
+		return false;
+	}
+
 
 	/**
 	 * Merges sequence [package] identifier to a package
@@ -483,7 +499,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer();
 			return true;
 		} else if (
-				CONVERTABLE_PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(b.lookAhead(1))
+				PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(b.lookAhead(1))
 				)
 		{
 			PsiBuilder.Marker m = b.mark();
@@ -492,7 +508,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			m.collapse(PACKAGE);
 			return true;
 		} else if (
-				CONVERTABLE_PACKAGE_TOKENS.contains(tokenType)  // explicit package name, like Foo::->method()
+				PACKAGE_TOKENS.contains(tokenType)  // explicit package name, like Foo::->method()
 						|| CONVERTABLE_TOKENS.contains(tokenType) // single word package
 				)
 		{

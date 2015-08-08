@@ -1374,6 +1374,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			else if ((tokenType = tagNames.get(tokenText)) != null)
 				return tokenType;
 		}
+		else if( lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_NO) // pragma section
+		{
+			if( "constant".equals(tokenText))
+				return PACKAGE_PRAGMA_CONSTANT;
+		}
 
 		return IDENTIFIER;
 	}
