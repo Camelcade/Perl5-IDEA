@@ -887,4 +887,32 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	/**
+	 * Parses comma sequence with trailing comma support
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseCommaSequence(PsiBuilder b, int l)
+	{
+		boolean r = false;
+		while (true) {
+			if( consumeToken(b,OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW))	// got comma
+			{
+				r = true;
+
+				// consume sequential commas
+				while(true){
+					if( !(consumeToken(b,OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW)))
+						break;
+				};
+				if (!PerlParser.expr(b, l, 4))	// looks like an end
+					break;
+			}
+			else
+				break;
+		}
+		return r;
+	}
+
 }

@@ -81,12 +81,6 @@ public abstract class PerlStringStubElementType extends IStubElementType<PerlStr
 			ASTNode useStatement = commaSequence.getTreeParent();
 			ASTNode packageSeeker = commaSequence;
 
-			if (useStatement != null && useStatement.getElementType() == TRAILING_COMMA_EXPR) // fixme burn in hell for this
-			{
-				packageSeeker = useStatement;
-				useStatement = useStatement.getTreeParent();
-			}
-
 			if (useStatement != null && useStatement.getElementType() == ANON_HASH)    // multiple constants
 			{
 				// check that it's an even element

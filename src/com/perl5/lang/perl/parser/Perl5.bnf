@@ -497,7 +497,8 @@ expr ::=
     | lp_and_expr           // 1
     | lp_not_expr           // 2
     | named_list_expr       // 3
-    | comma_expr            // 4
+    | comma_sequence_expr   // 4
+//    | comma_expr            // 4
     | assign_or_flow_expr   // 5
     | trenar_expr           // 6
     | flipflop_expr         // 7
@@ -675,10 +676,7 @@ private operator_assign ::=
     |OPERATOR_OR_DEFINED OPERATOR_ASSIGN    //  //=
     |OPERATOR_ASSIGN !OPERATOR_ASSIGN
 
-private comma_expr ::= comma_sequence_expr | trailing_comma_expr
-comma_sequence_expr ::= expr (comma_any+ expr ) + {pin(".*")=1}
-trailing_comma_expr ::= expr comma+ // fixme we should annotate this
-private comma_any ::= comma + !(RIGHT_PAREN|RIGHT_BRACKET|RIGHT_BRACE|semicolon_any)
+comma_sequence_expr ::= expr <<parseCommaSequence>> // fixme implement pinnning
 
 lp_not_expr ::= OPERATOR_NOT_LP expr { rightAssociative=true }
 lp_and_expr ::= expr (OPERATOR_AND_LP expr)+
