@@ -27,6 +27,7 @@ import com.perl5.lang.mojolicious.MojoliciousPerlFileElement;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlDefaultMro;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -206,10 +207,28 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	{
 		// fixme i belive this should be implemented in file element
 		if (this.getContainingFile() instanceof MojoliciousPerlFileElement)
-			return PerlSubUtil.isBuiltIn(getText()) || MojoliciousSubUtil.isBuiltIn(getText());
+			return isPerlBuiltIn() || MojoliciousSubUtil.isBuiltIn(getText());
 		else
-			return PerlSubUtil.isBuiltIn(getText());
+			return isPerlBuiltIn();
 	}
+
+	// fixme move to file element
+	protected boolean isPerlBuiltIn()
+	{
+		PsiElement parent = getParent();
+		if( parent instanceof PerlMethod)
+		{
+			PsiElement grandParent = parent.getParent();
+
+			if(
+					!(grandParent instanceof PsiPerlNestedCall)
+							&& ( getPrevSibling() == null || "CORE::".equals(getPrevSibling().getText()))
+					)
+				return PerlSubUtil.isBuiltIn(getText());
+		}
+		return false;
+	}
+
 }
 
 

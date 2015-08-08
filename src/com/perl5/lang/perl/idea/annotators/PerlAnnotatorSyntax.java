@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.annotators;
 
 /**
  * Created by hurricup on 25.04.2015.
