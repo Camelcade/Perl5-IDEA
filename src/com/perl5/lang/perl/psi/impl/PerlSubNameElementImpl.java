@@ -26,7 +26,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.mojolicious.MojoliciousPerlFileElement;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlDefaultMro;
+import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -117,9 +117,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		if (subName != null)
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				result.addAll(PerlDefaultMro.getSubDefinitions(getProject(), packageName, subName));
+				result.addAll(PerlMroDfs.getSubDefinitions(getProject(), packageName, subName));
 			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				result.addAll(PerlDefaultMro.getSuperSubDefinitions(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
+				result.addAll(PerlMroDfs.getSuperSubDefinitions(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
 				for (PsiPerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(getProject(), packageName + "::" + subName))
 					if (!subDefinition.isEquivalentTo(parent))
@@ -140,9 +140,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		if (subName != null)
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				result.addAll(PerlDefaultMro.getSubDeclarations(getProject(), packageName, subName));
+				result.addAll(PerlMroDfs.getSubDeclarations(getProject(), packageName, subName));
 			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				result.addAll(PerlDefaultMro.getSuperSubDeclarations(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
+				result.addAll(PerlMroDfs.getSuperSubDeclarations(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
 				for (PsiPerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(getProject(), packageName + "::" + subName))
 					if (!subDeclaration.isEquivalentTo(parent))
@@ -164,9 +164,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		if (subName != null)
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				result.addAll(PerlDefaultMro.getConstants(getProject(), packageName, subName));
+				result.addAll(PerlMroDfs.getConstants(getProject(), packageName, subName));
 			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				result.addAll(PerlDefaultMro.getSuperConstants(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
+				result.addAll(PerlMroDfs.getSuperConstants(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
 				for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(getProject(), packageName + "::" + subName))
 					result.add(stringConstant);
@@ -189,9 +189,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		if (subName != null)
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				result.addAll(PerlDefaultMro.getSubAliases(getProject(), packageName, subName));
+				result.addAll(PerlMroDfs.getSubAliases(getProject(), packageName, subName));
 			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				result.addAll(PerlDefaultMro.getSuperSubAliases(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
+				result.addAll(PerlMroDfs.getSuperSubAliases(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
 				for (PerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), packageName + "::" + subName))
 					if (!glob.isEquivalentTo(parent))

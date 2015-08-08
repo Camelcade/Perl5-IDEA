@@ -25,7 +25,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlDefaultMro;
+import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +56,7 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 
 //				System.out.println("Autocomplete for " + packageName);
 
-		for (PsiElement element : PerlDefaultMro.getPackagePossibleMethods(method.getProject(), packageName, isSuper))
+		for (PsiElement element : PerlMroDfs.getVariants(method.getProject(), packageName, isSuper))
 		{
 			if (element instanceof PerlSubDefinition && ((PerlSubDefinition) element).isMethod())
 			{
