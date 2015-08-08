@@ -60,12 +60,16 @@ public class PerlSubReference extends PerlReferencePoly
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
-		if( element instanceof PerlGlobVariable || element instanceof PerlString || element instanceof PerlSubDeclaration || element instanceof PerlSubDefinition )
+		if( element instanceof PerlGlobVariable || element instanceof PerlConstant || element instanceof PerlSubDeclaration || element instanceof PerlSubDefinition )
 			return super.isReferenceTo(element);
 
 		PsiElement parent = element.getParent();
-		if( parent instanceof PerlGlobVariable || parent instanceof PerlString || parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinition )
+		if( parent instanceof PerlGlobVariable || parent instanceof PerlConstant || parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinition )
 			return isReferenceTo(parent);
+
+		PsiElement grandParent = parent.getParent();
+		if( grandParent instanceof PerlConstant)
+			return isReferenceTo(grandParent);
 
 		return false;
 	}

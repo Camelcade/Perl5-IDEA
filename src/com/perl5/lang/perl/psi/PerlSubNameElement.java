@@ -51,7 +51,7 @@ public interface PerlSubNameElement extends PerlNamedElement
 	 *
 	 * @return related constants
 	 */
-	public List<PerlString> getConstantDefinitions();
+	public List<PerlConstant> getConstantDefinitions();
 
 
 	/**

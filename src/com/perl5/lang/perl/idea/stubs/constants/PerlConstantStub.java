@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.strings;
+package com.perl5.lang.perl.idea.stubs.constants;
 
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.impl.PsiPerlStringSqImpl;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlConstant;
 
 /**
- * Created by hurricup on 04.08.2015.
+ * Created by hurricup on 03.08.2015.
  */
-public class PerlStringStubElementTypeSQ extends PerlStringStubElementType
+public interface PerlConstantStub extends StubElement<PerlConstant>
 {
-	public PerlStringStubElementTypeSQ(String name)
-	{
-		super(name);
-	}
+	public String getPackageName();
 
-	@Override
-	public PerlString createPsi(PerlStringStub stub)
-	{
-		return new PsiPerlStringSqImpl(stub, this);
-	}
+	public String getName();
 }

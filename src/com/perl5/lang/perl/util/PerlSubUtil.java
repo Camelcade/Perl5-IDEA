@@ -20,7 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.idea.stubs.strings.PerlConstantsStubIndex;
+import com.perl5.lang.perl.idea.stubs.constants.PerlConstantsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -127,10 +127,10 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @param canonicalName canonical function name package::name
 	 * @return Collection of found definitions
 	 */
-	public static Collection<PerlString> getConstantsDefinitions(Project project, String canonicalName)
+	public static Collection<PerlConstant> getConstantsDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlConstantsStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PerlString.class);
+		return StubIndex.getElements(PerlConstantsStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PerlConstant.class);
 	}
 
 	/**

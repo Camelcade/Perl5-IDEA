@@ -153,9 +153,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	}
 
 	@Override
-	public List<PerlString> getConstantDefinitions()
+	public List<PerlConstant> getConstantDefinitions()
 	{
-		List<PerlString> result = new ArrayList<PerlString>();
+		List<PerlConstant> result = new ArrayList<PerlConstant>();
 		PsiElement parent = getParent();
 
 		String packageName = getPackageName();
@@ -168,7 +168,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
 				result.addAll(PerlDefaultMro.getSuperConstants(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
 			else
-				for (PerlString stringConstant : PerlSubUtil.getConstantsDefinitions(getProject(), packageName + "::" + subName))
+				for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(getProject(), packageName + "::" + subName))
 					result.add(stringConstant);
 		}
 

@@ -49,7 +49,7 @@ public class PerlSubUnresolvableInspection extends PerlInspection
 				List<PerlSubDefinition> subDefinitions = subNameElement.getSubDefinitions();
 				List<PerlSubDeclaration> subDeclarations = subNameElement.getSubDeclarations();
 				List<PerlGlobVariable> relatedGlobs = subNameElement.getRelatedGlobs();
-				List<PerlString> stringConstants = subNameElement.getConstantDefinitions();
+				List<PerlConstant> stringConstants = subNameElement.getConstantDefinitions();
 
 				if (subDefinitions.size() == 0 && subDeclarations.size() == 0 && relatedGlobs.size() == 0 && stringConstants.size() == 0)
 					registerProblem(holder, subNameElement, "Unable to find sub definition, declaration, constant definition or typeglob aliasing");

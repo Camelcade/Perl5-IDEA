@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
 import org.jetbrains.annotations.NotNull;
@@ -68,7 +68,7 @@ public class PerlHeredocReference extends PerlReference
 	{
 		if (element instanceof PerlHeredocOpener)
 			return super.isReferenceTo(((PerlHeredocOpener) element).getNameIdentifier());
-		else if (element instanceof PerlString || element instanceof PerlStringContentElement )
+		else if (element instanceof PerlConstant || element instanceof PerlStringContentElement )
 			return isReferenceTo(element.getParent());
 
 		return false;

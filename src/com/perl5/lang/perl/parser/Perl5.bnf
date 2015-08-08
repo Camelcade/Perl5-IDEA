@@ -245,12 +245,15 @@ limitations under the License.
     extends("string_list|number_constant")=expr
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
-    extends("anon_array_element")=expr
+    extends("anon_array_element|heredoc_opener|tag_scalar")=expr
 
-    extends("string_sq|string_dq|string_xq|tag_scalar|heredoc_opener")=expr
-    implements("string_sq|string_dq")="com.perl5.lang.perl.psi.PerlString"
-    mixin("string_sq|string_dq")="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin"
-    stubClass("string_sq|string_dq")="com.perl5.lang.perl.idea.stubs.strings.PerlStringStub"
+    extends("string_sq|string_dq|string_xq")=expr
+    implements("string_sq|string_dq|string_xq")="com.perl5.lang.perl.psi.PerlString"
+    mixin("string_sq|string_dq|string_xq")="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin"
+
+    implements("constant_name")="com.perl5.lang.perl.psi.PerlConstant"
+    mixin("constant_name")="com.perl5.lang.perl.psi.mixins.PerlConstantImplMixin"
+    stubClass("constant_name")="com.perl5.lang.perl.idea.stubs.constants.PerlConstantStub"
 
     extends("nested_call")=sub_call_expr
 

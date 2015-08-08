@@ -14,24 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.strings;
+package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.impl.PsiPerlStringDqImpl;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 
 /**
  * Created by hurricup on 04.08.2015.
  */
-public class PerlStringStubElementTypeDQ extends PerlStringStubElementType
+public interface PerlConstant extends PerlNamedElement, PerlPackageMember
 {
-	public PerlStringStubElementTypeDQ(String name)
-	{
-		super(name);
-	}
-
-	@Override
-	public PerlString createPsi(PerlStringStub stub)
-	{
-		return new PsiPerlStringDqImpl(stub, this);
-	}
+	public PerlStringContentElement getStringContentElement();
 }

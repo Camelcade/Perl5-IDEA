@@ -160,7 +160,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 							.withTailText("(?)"));
 
 		// Constants
-		for (PerlString stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
+		for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
 			if (stringConstant.getName() != null)
 				resultSet.addElement(LookupElementBuilder
 						.create(stringConstant.getName())
@@ -169,7 +169,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		// Constatns with prefix
 		if (!subPrefix.isEmpty())
-			for (PerlString stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName + "::" + subPrefix))
+			for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName + "::" + subPrefix))
 				if (stringConstant.getName() != null)
 					resultSet.addElement(LookupElementBuilder
 							.create(subPrefix + "::" + stringConstant.getName())

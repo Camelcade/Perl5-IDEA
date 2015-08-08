@@ -50,10 +50,8 @@ public class PerlElementTypeFactory
 			return PerlStubElementTypes.PERL_ARRAY_INDEX;
 		else if (name.equals("HASH_VARIABLE"))
 			return PerlStubElementTypes.PERL_HASH;
-		else if (name.equals("STRING_SQ"))
-			return PerlStubElementTypes.STRING_SQ;
-		else if (name.equals("STRING_DQ"))
-			return PerlStubElementTypes.STRING_DQ;
+		else if (name.equals("CONSTANT_NAME"))
+			return PerlStubElementTypes.PERL_CONSTANT;
 
 		return new PerlElementType(name);
 	}

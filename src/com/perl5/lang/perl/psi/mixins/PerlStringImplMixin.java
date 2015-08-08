@@ -16,94 +16,47 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.idea.stubs.strings.PerlStringStub;
-import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 04.08.2015.
+ * Created by hurricup on 08.08.2015.
  */
-public class PerlStringImplMixin extends StubBasedPsiElementBase<PerlStringStub> implements PerlString
+public abstract class PerlStringImplMixin extends PerlNamedElementImpl
 {
-	public PerlStringImplMixin(PerlStringStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
-
-	public PerlStringImplMixin(ASTNode node)
+	public PerlStringImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+		if( nameIdentifier instanceof PerlStringContentElement )
+			return ((PerlStringContentElement) nameIdentifier).setName(name);
+		return null;
 	}
 
 	@Nullable
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return getStringContentElement();
-	}
-
-	@Override
-	public PerlStringContentElement getStringContentElement()
-	{
 		return findChildByClass(PerlStringContentElement.class);
 	}
 
+	@Nullable
 	@Override
 	public String getName()
 	{
-		// fixme check stub
-
-		PerlStringContentElement perlStringContentElement = getStringContentElement();
-		if (perlStringContentElement != null)
-			return perlStringContentElement.getName();
+		PsiElement nameIdentifier = getNameIdentifier();
+		if( nameIdentifier instanceof PerlStringContentElement )
+			return ((PerlStringContentElement) nameIdentifier).getName();
 		return null;
-	}
-
-	@Override
-	public PsiElement setName(String name) throws IncorrectOperationException
-	{
-		PerlStringContentElement stringContentElement = getStringContentElement();
-		if (stringContentElement != null)
-			return stringContentElement.setName(name);
-
-		return null;
-	}
-
-
-	@Override
-	public String getContextPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
-
-	@Override
-	public String getExplicitPackageName()
-	{
-		return null;
-	}
-
-	@Override
-	public String getPackageName()
-	{
-		// fixme check stub
-		String namespace = getExplicitPackageName();
-
-		if (namespace == null)
-			namespace = getContextPackageName();
-
-		return namespace;
-	}
-
-	@Override
-	public String getCanonicalName()
-	{
-		return getPackageName() + "::" + getName();
 	}
 }

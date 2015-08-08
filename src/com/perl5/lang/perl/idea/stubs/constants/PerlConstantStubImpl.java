@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.strings;
+package com.perl5.lang.perl.idea.stubs.constants;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlConstant;
 
 /**
  * Created by hurricup on 03.08.2015.
  */
-public class PerlStringStubImpl extends StubBase<PerlString> implements PerlStringStub
+public class PerlConstantStubImpl extends StubBase<PerlConstant> implements PerlConstantStub
 {
 	private final String myPackageName;
 	private final String myName;
 
-	public PerlStringStubImpl(final StubElement parent, IStubElementType stubElementType, final String packageName, final String name)
+	public PerlConstantStubImpl(final StubElement parent, IStubElementType stubElementType, final String packageName, final String name)
 	{
 		super(parent, stubElementType);
 		myPackageName = packageName;

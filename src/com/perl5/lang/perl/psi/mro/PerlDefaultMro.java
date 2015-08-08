@@ -62,12 +62,12 @@ public class PerlDefaultMro
 		return getSubAliases(project, packageName, subName, new HashSet<String>(), true);
 	}
 
-	public static Collection<PerlString> getConstants(Project project, String packageName, String subName)
+	public static Collection<PerlConstant> getConstants(Project project, String packageName, String subName)
 	{
 		return getConstantDefinitions(project, packageName, subName, new HashSet<String>(), false);
 	}
 
-	public static Collection<PerlString> getSuperConstants(Project project, String packageName, String subName)
+	public static Collection<PerlConstant> getSuperConstants(Project project, String packageName, String subName)
 	{
 		return getConstantDefinitions(project, packageName, subName, new HashSet<String>(), true);
 	}
@@ -170,9 +170,9 @@ public class PerlDefaultMro
 	 * @param checkedPackages recursion control hashset
 	 * @return collection of definitions
 	 */
-	public static Collection<PerlString> getConstantDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
+	public static Collection<PerlConstant> getConstantDefinitions(Project project, String packageName, String subName, HashSet<String> checkedPackages, boolean noCheckCurrent)
 	{
-		Collection<PerlString> result = new ArrayList<PerlString>();
+		Collection<PerlConstant> result = new ArrayList<PerlConstant>();
 		if (packageName == null || subName == null)
 			return result;
 
@@ -269,7 +269,7 @@ public class PerlDefaultMro
 			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
 				if (!methods.containsKey(subDeclaration.getSubName()))
 					methods.put(subDeclaration.getSubName(), subDeclaration);
-			for (PerlString constant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
+			for (PerlConstant constant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
 				if (!methods.containsKey(constant.getName()))
 					methods.put(constant.getName(), constant);
 			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))

@@ -17,12 +17,10 @@
 package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 
 /**
- * Created by hurricup on 04.08.2015.
+ * Created by hurricup on 08.08.2015.
  */
-public interface PerlString extends PerlNamedElement, PerlPackageMember
+public interface PerlString extends PerlNamedElement
 {
-	public PerlStringContentElement getStringContentElement();
 }
