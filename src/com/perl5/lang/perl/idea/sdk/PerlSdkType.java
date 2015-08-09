@@ -51,29 +51,33 @@ public class PerlSdkType extends SdkType
 	{
 		SdkModificator sdkModificator = sdk.getSdkModificator();
 
-		List<String> perlLibPaths =
-				readFromProgram(SystemInfo.isWindows
-								? "perl -le \"print for @INC\""
-								: "perl -le 'print for @INC'"
-				);
+		String executablePath = getExecutablePath(sdk);
+		if (executablePath != null)
+		{
+			List<String> perlLibPaths =
+					getDataFromProgram(executablePath + (SystemInfo.isWindows
+							? " -le \"print for @INC\""
+							: " -le 'print for @INC'"
+					));
 
-		for (String perlLibPath : perlLibPaths)
-			if (!".".equals(perlLibPath))
-			{
-				File libDir = new File(perlLibPath);
-
-				if (libDir.exists() && libDir.isDirectory())
+			for (String perlLibPath : perlLibPaths)
+				if (!".".equals(perlLibPath))
 				{
-					VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
-					if (virtualDir != null)
+					File libDir = new File(perlLibPath);
+
+					if (libDir.exists() && libDir.isDirectory())
 					{
-						sdkModificator.addRoot(virtualDir, OrderRootType.SOURCES);
-						sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
+						VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
+						if (virtualDir != null)
+						{
+							sdkModificator.addRoot(virtualDir, OrderRootType.SOURCES);
+							sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
+						}
 					}
 				}
-			}
 
-		sdkModificator.commitChanges();
+			sdkModificator.commitChanges();
+		}
 	}
 
 	@Nullable
@@ -93,7 +97,7 @@ public class PerlSdkType extends SdkType
 	@Override
 	public String suggestHomePath()
 	{
-		String perlPath = askPerlForPath();
+		String perlPath = getPathFromPerl();
 		if (perlPath != null)
 			return perlPath;
 
@@ -112,11 +116,21 @@ public class PerlSdkType extends SdkType
 	@Override
 	public boolean isValidSdkHome(String sdkHome)
 	{
-		File f = new File(executablePath(sdkHome));
+		File f = new File(getExecutablePath(sdkHome));
 		return f.exists();
 	}
 
-	private String executablePath(String sdkHome)
+	private String getExecutablePath(Sdk sdk)
+	{
+		String sdkHomePath = sdk.getHomePath();
+		if (sdkHomePath != null)
+			return getExecutablePath(sdkHomePath);
+		else
+			return null;
+	}
+
+
+	private String getExecutablePath(String sdkHome)
 	{
 		if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\")))
 			sdkHome += File.separator;
@@ -137,6 +151,11 @@ public class PerlSdkType extends SdkType
 	@Override
 	public String getVersionString(@NotNull Sdk sdk)
 	{
+		return getPerlVersionString(sdk);
+	}
+
+	public String getPerlVersionString(@NotNull Sdk sdk)
+	{
 		String sdkHomePath = sdk.getHomePath();
 		if (sdkHomePath != null)
 			return getPerlVersionString(sdkHomePath);
@@ -144,9 +163,10 @@ public class PerlSdkType extends SdkType
 			return null;
 	}
 
+
 	public String getPerlVersionString(@NotNull String sdkHomePath)
 	{
-		List<String> versionLines = readFromProgram(executablePath(sdkHomePath) + " -v");
+		List<String> versionLines = getDataFromProgram(getExecutablePath(sdkHomePath) + " -v");
 
 		if (versionLines.size() > 0)
 		{
@@ -162,9 +182,9 @@ public class PerlSdkType extends SdkType
 	}
 
 
-	public String askPerlForPath()
+	public String getPathFromPerl()
 	{
-		List<String> perlPathLines = readFromProgram("perl -le \"print $^X\"");
+		List<String> perlPathLines = getDataFromProgram("perl -le \"print $^X\"");
 
 		if (perlPathLines.size() == 1)
 		{
@@ -176,7 +196,8 @@ public class PerlSdkType extends SdkType
 		return null;
 	}
 
-	public List<String> readFromProgram(String command)
+
+	public List<String> getDataFromProgram(String command)
 	{
 		try
 		{
