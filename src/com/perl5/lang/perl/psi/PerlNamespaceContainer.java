@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.mro.PerlMro;
+import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 import java.util.List;
 
@@ -26,11 +27,6 @@ import java.util.List;
  */
 public interface PerlNamespaceContainer
 {
-	enum MroType{
-		DFS,
-		C3
-	}
-
 	/**
 	 * Returns package name
 	 * @return canonical package name
@@ -47,7 +43,7 @@ public interface PerlNamespaceContainer
 	 * Get mro type for current package
 	 * @return mro type
 	 */
-	MroType getMroType();
+	PerlMroType getMroType();
 
 	/**
 	 * Returns MRO instance for current package

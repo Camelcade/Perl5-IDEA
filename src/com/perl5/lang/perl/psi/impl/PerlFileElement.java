@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlLexicalDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -259,16 +260,15 @@ public class PerlFileElement extends PsiFileBase implements PerlFile
 	}
 
 	@Override
-	public MroType getMroType()
+	public PerlMroType getMroType()
 	{
-		// fixme check use mro here
-		return MroType.DFS;
+		return PerlMroType.DFS;
 	}
 
 	@Override
 	public PerlMro getMro()
 	{
-		if( getMroType() == MroType.DFS )
+		if( getMroType() == PerlMroType.DFS )
 			return PerlMroDfs.INSTANCE;
 		else
 			return PerlMroC3.INSTANCE;

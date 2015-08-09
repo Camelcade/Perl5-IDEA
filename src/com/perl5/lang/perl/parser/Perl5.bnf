@@ -225,6 +225,7 @@ limitations under the License.
 
     PACKAGE="PACKAGE"
     PACKAGE_PRAGMA_CONSTANT="PACKAGE_PRAGMA_CONSTANT"
+    PACKAGE_PRAGMA_MRO="PACKAGE_PRAGMA_MRO"
 
     HANDLE="HANDLE"
     BLOCK_NAME="BLOCK_NAME"
@@ -263,9 +264,9 @@ limitations under the License.
     implements("annotation_returns.*")="com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer"
     methods("annotation_returns.*")=[getNamespaceElement]
 
-    mixin("use_statement|use_statement_constant")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
-    implements("use_statement|use_statement_constant")="com.perl5.lang.perl.psi.PerlUseStatement"
-    extends("use_statement|use_statement_constant")=statement
+    mixin("use_statement.*")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
+    implements("use_statement.*")="com.perl5.lang.perl.psi.PerlUseStatement"
+    extends("use_statement.*")=statement
 
     extends("no_statement")=statement
 
@@ -481,6 +482,7 @@ when_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_WHEN expr {pin=
 
 private use_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
   use_statement_constant
+  | use_statement_mro
   | use_statement
 
 private no_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
@@ -493,7 +495,10 @@ private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
 
-use_statement_constant ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_CONSTANT PACKAGE>> use_constant_parameters {pin=3}
+use_statement_mro ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_MRO PACKAGE>> [use_mro_parameters] {pin=3}
+private use_mro_parameters ::= scalar_expr;
+
+use_statement_constant ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_CONSTANT PACKAGE>> [use_constant_parameters] {pin=3}
 private use_constant_parameters ::=
   constant_definition
   | multiple_constants_definition

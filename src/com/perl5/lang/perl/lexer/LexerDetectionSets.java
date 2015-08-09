@@ -20,6 +20,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -27,6 +28,7 @@ import java.util.HashSet;
  */
 public interface LexerDetectionSets extends PerlElementTypes
 {
+
 	// pre-variable name tokens
 	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
 			SIGIL_ARRAY,

@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,8 +44,6 @@ import java.util.List;
  */
 public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub> implements PsiPerlNamespaceDefinition
 {
-	List<String> parentPackages = null;
-
 	public PerlNamespaceDefinitionImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -100,27 +99,23 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public List<String> getParentNamespaces()
 	{
-		if (parentPackages != null)
-			return parentPackages;
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getParentNamespaces();
 
 		List<String> result = new ArrayList<String>();
-		// fixme check for push @ISA
+		// fixme check for push @ISA, assign to @ISA
 
 		PsiElement namespaceBlock = getBlock();
 
 		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
 			if (useStatement.isParentPragma())
 				if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this)    // check that it's not nested package use
-					result.addAll(useStatement.getStringParameters());
+					for (String parentPackage : useStatement.getStringParameters())
+						if (parentPackage != null && !parentPackage.equals("-norequire"))
+							result.add(parentPackage);
 
-		return parentPackages = result;
-	}
-
-	@Override
-	public void subtreeChanged()
-	{
-		super.subtreeChanged();
-		parentPackages = null;
+		return result;
 	}
 
 	@Nullable
@@ -137,24 +132,36 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	}
 
 	@Override
-	public MroType getMroType()
+	public PerlMroType getMroType()
 	{
-		// fixme check use mro here
-		return MroType.DFS;
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getMroType();
+
+		PerlUseStatement useMroStatement = PsiTreeUtil.findChildOfType(this, PsiPerlUseStatementMro.class);
+
+		if (useMroStatement != null && PsiTreeUtil.getParentOfType(useMroStatement, PerlNamespaceDefinition.class) == this)
+		{
+			List<String> parameters = useMroStatement.getStringParameters();
+			if (parameters.size() > 0 && "c3".equals(parameters.get(0)))
+				return PerlMroType.C3;
+		}
+
+		return PerlMroType.DFS;
 	}
 
 	@Override
 	public PerlMro getMro()
 	{
-		if( getMroType() == MroType.DFS )
-			return PerlMroDfs.INSTANCE;
-		else
+		if (getMroType() == PerlMroType.C3)
 			return PerlMroC3.INSTANCE;
+		else
+			return PerlMroDfs.INSTANCE;
 	}
 
 	@Override
 	public void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result)
 	{
-		getMro().getLinearISA(getProject(),getParentNamespaces(), recursionMap,result);
+		getMro().getLinearISA(getProject(), getParentNamespaces(), recursionMap, result);
 	}
 }

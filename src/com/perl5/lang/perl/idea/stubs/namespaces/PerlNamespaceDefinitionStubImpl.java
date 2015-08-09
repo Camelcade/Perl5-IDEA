@@ -20,22 +20,42 @@ import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.mro.PerlMroType;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
 public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDefinition> implements PerlNamespaceDefinitionStub
 {
-	private final String packageName;
+	private final String myPackageName;
+	private final PerlMroType myMroType;
+	private final List<String> myParentNamespaces;
 
-	public PerlNamespaceDefinitionStubImpl(final StubElement parent, final String packageName)
+	public PerlNamespaceDefinitionStubImpl(StubElement parent, String packageName, PerlMroType mroType, List<String> parentNamespaces)
 	{
 		super(parent, PerlStubElementTypes.PERL_NAMESPACE);
-		this.packageName = packageName;
+		myPackageName = packageName;
+		myMroType = mroType;
+		myParentNamespaces = parentNamespaces;
 	}
 
+	@Override
 	public String getPackageName()
 	{
-		return packageName;
+		return myPackageName;
+	}
+
+	@Override
+	public PerlMroType getMroType()
+	{
+		return myMroType;
+	}
+
+	@Override
+	public List<String> getParentNamespaces()
+	{
+		return myParentNamespaces;
 	}
 }

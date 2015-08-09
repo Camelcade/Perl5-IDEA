@@ -36,6 +36,13 @@ import java.util.regex.Pattern;
 
 public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 {
+	public static final HashMap<String,IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
+	static {
+		PRAGMA_TOKENS_MAP.put("constant", PACKAGE_PRAGMA_CONSTANT);
+		PRAGMA_TOKENS_MAP.put("mro", PACKAGE_PRAGMA_MRO);
+	}
+
+
 	public static final HashMap<String, IElementType> reservedTokenTypes = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
@@ -1374,10 +1381,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			else if ((tokenType = tagNames.get(tokenText)) != null)
 				return tokenType;
 		} else if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_NO) // pragma section
-		{
-			if ("constant".equals(tokenText))
-				return PACKAGE_PRAGMA_CONSTANT;
-		}
+			if( PRAGMA_TOKENS_MAP.containsKey(tokenText))
+				return PRAGMA_TOKENS_MAP.get(tokenText);
 
 		return IDENTIFIER;
 	}

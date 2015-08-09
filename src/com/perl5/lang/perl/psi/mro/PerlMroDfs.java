@@ -42,6 +42,8 @@ public class PerlMroDfs extends PerlMro
 	@Override
 	public void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result)
 	{
+//		System.err.println("Resolving DFS for " + packageNames);
+
 		for (String packageName : packageNames)
 			if (!recursionMap.contains(packageName))
 			{

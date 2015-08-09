@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class PerlMroC3 extends PerlMro
 {
-	public static final PerlMro INSTANCE = new PerlMroDfs();
+	public static final PerlMro INSTANCE = new PerlMroC3();
 
 	/**
 	 * Builds list of inheritance path for C3 mro (Dylan, Python, Perl6): http://perldoc.perl.org/mro.html#The-C3-MRO
@@ -44,6 +44,7 @@ public class PerlMroC3 extends PerlMro
 	@Override
 	public void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result)
 	{
+//		System.err.println("Resolving C3 for " + packageNames);
 		Collection<String> nextIterationNames = new ArrayList<String>();
 		for( String packageName: packageNames )
 		{

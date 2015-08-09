@@ -21,9 +21,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +37,7 @@ import java.util.List;
  */
 public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl implements PsiPerlUseStatement
 {
+	// fixme do this wit specific class
 	public static final HashSet<String> PARENT_PRAGMAS = new HashSet<String>(Arrays.asList(
 			"parent",
 			"base"
@@ -94,7 +97,7 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	public List<String> getStringParameters()
 	{
 		List<String> stringParameters = new ArrayList<String>();
-		for (PerlStringContentElementImpl stringContentElement : PsiTreeUtil.findChildrenOfType(this, PerlStringContentElementImpl.class))
+		for (PerlStringContentElement stringContentElement : PerlPsiUtil.findStringElments(getNamespaceElement().getNextSibling()))
 			stringParameters.add(stringContentElement.getText());
 		return stringParameters;
 	}

@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.namespaces;
-
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.mro.PerlMroType;
-
-import java.util.List;
+package com.perl5.lang.perl.psi.mro;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 09.08.2015.
  */
-public interface PerlNamespaceDefinitionStub extends StubElement<PsiPerlNamespaceDefinition>
+public enum PerlMroType
 {
-	public String getPackageName();
-
-	public PerlMroType getMroType();
-
-	public List<String> getParentNamespaces();
+	DFS,
+	C3
 }
