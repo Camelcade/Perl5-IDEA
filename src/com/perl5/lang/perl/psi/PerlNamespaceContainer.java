@@ -29,24 +29,28 @@ public interface PerlNamespaceContainer
 {
 	/**
 	 * Returns package name
+	 *
 	 * @return canonical package name
 	 */
 	String getPackageName();
 
 	/**
 	 * Returns parent namespaces
+	 *
 	 * @return list of packages specified in parent
 	 */
 	List<String> getParentNamespaces();
 
 	/**
 	 * Get mro type for current package
+	 *
 	 * @return mro type
 	 */
 	PerlMroType getMroType();
 
 	/**
 	 * Returns MRO instance for current package
+	 *
 	 * @return mro class instance
 	 */
 	PerlMro getMro();

@@ -20,7 +20,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 
 /**

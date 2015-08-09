@@ -17,10 +17,7 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -46,7 +43,7 @@ public class PerlMroC3 extends PerlMro
 	{
 //		System.err.println("Resolving C3 for " + packageNames);
 		Collection<String> nextIterationNames = new ArrayList<String>();
-		for( String packageName: packageNames )
+		for (String packageName : packageNames)
 		{
 			if (!recursionMap.contains(packageName))
 			{
@@ -56,7 +53,7 @@ public class PerlMroC3 extends PerlMro
 			}
 		}
 
-		for( String packageName: nextIterationNames)
+		for (String packageName : nextIterationNames)
 			getPackageParents(project, packageName, recursionMap, result);
 	}
 }

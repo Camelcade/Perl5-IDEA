@@ -268,7 +268,7 @@ public class PerlFileElement extends PsiFileBase implements PerlFile
 	@Override
 	public PerlMro getMro()
 	{
-		if( getMroType() == PerlMroType.DFS )
+		if (getMroType() == PerlMroType.DFS)
 			return PerlMroDfs.INSTANCE;
 		else
 			return PerlMroC3.INSTANCE;

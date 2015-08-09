@@ -39,16 +39,6 @@ public abstract class PerlMro
 	{
 	}
 
-	/**
-	 * Method should return a sequence of packages. See http://perldoc.perl.org/mro.html#mro%3a%3aget_linear_isa(%24classname%5b%2c-%24type%5d)
-	 * Method should not add package itself or UNIVERSAL, only parents structure. Package itself and UNIVERSAL being added by calee
-	 *
-	 * @param project      current project
-	 * @param packageNames list of package names to populate
-	 * @param recursionMap map for controlling recursive inheritance
-	 */
-	public abstract void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result);
-
 	// fixme do we need theese methods?
 	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName)
 	{
@@ -186,6 +176,16 @@ public abstract class PerlMro
 		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
 			namespaceDefinition.getLinearISA(recursionMap, result);
 	}
+
+	/**
+	 * Method should return a sequence of packages. See http://perldoc.perl.org/mro.html#mro%3a%3aget_linear_isa(%24classname%5b%2c-%24type%5d)
+	 * Method should not add package itself or UNIVERSAL, only parents structure. Package itself and UNIVERSAL being added by calee
+	 *
+	 * @param project      current project
+	 * @param packageNames list of package names to populate
+	 * @param recursionMap map for controlling recursive inheritance
+	 */
+	public abstract void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result);
 
 	// fixme shouldn't we move this to separate class for reuse?
 	abstract static class EntitiesGetter<T>
