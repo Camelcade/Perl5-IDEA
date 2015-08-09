@@ -19,13 +19,11 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,8 +32,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlSubMethodCompletionProvider extends CompletionProvider<CompletionParameters>
 {
-	public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
-
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
@@ -56,50 +52,16 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 
 //				System.out.println("Autocomplete for " + packageName);
 
-		for (PsiElement element : PerlMroDfs.getVariants(method.getProject(), packageName, isSuper))
+		for (PsiElement element : PerlMro.getVariants(method.getProject(), packageName, isSuper))
 		{
 			if (element instanceof PerlSubDefinition && ((PerlSubDefinition) element).isMethod())
-			{
-				String argsString = ((PerlSubDefinition) element).getSubArgumentsListAsString();
-
-				LookupElementBuilder newElement = LookupElementBuilder
-						.create(((PerlSubDefinition) element).getSubName())
-						.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-						.withStrikeoutness(((PerlSubDefinition) element).getSubAnnotations().isDeprecated());
-
-				if (!argsString.isEmpty())
-					newElement = newElement
-							.withInsertHandler(SUB_SELECTION_HANDLER)
-							.withTailText(argsString);
-
-				resultSet.addElement(newElement);
-			} else if (element instanceof PerlSubDeclaration && ((PerlSubDeclaration) element).isMethod())
-			{
-				LookupElementBuilder newElement = LookupElementBuilder
-						.create(((PerlSubDeclaration) element).getSubName())
-						.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-						.withStrikeoutness(((PerlSubDeclaration) element).getSubAnnotations().isDeprecated())
-						.withInsertHandler(SUB_SELECTION_HANDLER)
-						.withTailText("(?)");
-
-				resultSet.addElement(newElement);
-			} else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).getName() != null)
-			{
-				LookupElementBuilder newElement = LookupElementBuilder
-						.create(((PerlGlobVariable) element).getName())
-						.withIcon(PerlIcons.GLOB_GUTTER_ICON)
-						.withInsertHandler(SUB_SELECTION_HANDLER)
-						.withTailText("(?)");
-
-				resultSet.addElement(newElement);
-			} else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
-			{
-				LookupElementBuilder newElement = LookupElementBuilder
-						.create(((PerlConstant) element).getName())
-						.withIcon(PerlIcons.CONSTANT_GUTTER_ICON);
-
-				resultSet.addElement(newElement);
-			}
+				resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement((PerlSubDefinition) element));
+			else if (element instanceof PerlSubDeclaration && ((PerlSubDeclaration) element).isMethod())
+				resultSet.addElement(PerlSubCompletionProviderUtil.getSubDeclarationLookupElement((PerlSubDeclaration) element));
+			else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).getName() != null)
+				resultSet.addElement(PerlSubCompletionProviderUtil.getGlobLookupElement((PerlGlobVariable) element));
+			else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
+				resultSet.addElement(PerlSubCompletionProviderUtil.getConstantLookupElement((PerlConstant) element));
 		}
 	}
 }
