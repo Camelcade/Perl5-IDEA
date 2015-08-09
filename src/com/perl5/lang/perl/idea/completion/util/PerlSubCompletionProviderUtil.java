@@ -23,6 +23,7 @@ import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -38,10 +39,15 @@ public class PerlSubCompletionProviderUtil
 	public static final ConcurrentHashMap<String, LookupElementBuilder> GLOBS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> CONSTANTS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 
+	public static final ConcurrentHashMap<String, LookupElementBuilder> INCOMPLETE_SUB_DEFINITIONS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> INCOMPLETE_SUB_DECLARATIONS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> INCOMPLETE_GLOBS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+	public static final ConcurrentHashMap<String, LookupElementBuilder> INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+
 	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinition subDefinition)
 	{
-		String canonicalName = subDefinition.getCanonicalName();
-		if (!SUB_DEFINITIONS_LOOKUP_ELEMENTS.containsKey(canonicalName))
+		String indexKeyName = subDefinition.getSubName();
+		if (!SUB_DEFINITIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
 			String argsString = subDefinition.getSubArgumentsListAsString();
 
@@ -55,15 +61,15 @@ public class PerlSubCompletionProviderUtil
 						.withInsertHandler(SUB_SELECTION_HANDLER)
 						.withTailText(argsString);
 
-			SUB_DEFINITIONS_LOOKUP_ELEMENTS.put(canonicalName, newElement);
+			SUB_DEFINITIONS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
 		}
-		return SUB_DEFINITIONS_LOOKUP_ELEMENTS.get(canonicalName);
+		return SUB_DEFINITIONS_LOOKUP_ELEMENTS.get(indexKeyName);
 	}
 
 	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubDeclaration subDeclaration)
 	{
-		String canonicalName = subDeclaration.getCanonicalName();
-		if (!SUB_DECLARATIONS_LOOKUP_ELEMENTS.containsKey(canonicalName))
+		String indexKeyName = subDeclaration.getSubName();
+		if (!SUB_DECLARATIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
 			LookupElementBuilder newElement = LookupElementBuilder
 					.create(subDeclaration.getSubName())
@@ -72,41 +78,130 @@ public class PerlSubCompletionProviderUtil
 					.withInsertHandler(SUB_SELECTION_HANDLER)
 					.withTailText("(?)");
 
-			SUB_DECLARATIONS_LOOKUP_ELEMENTS.put(canonicalName, newElement);
+			SUB_DECLARATIONS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
 		}
-		return SUB_DECLARATIONS_LOOKUP_ELEMENTS.get(canonicalName);
+		return SUB_DECLARATIONS_LOOKUP_ELEMENTS.get(indexKeyName);
 	}
 
 	public static LookupElementBuilder getGlobLookupElement(PerlGlobVariable globVariable)
 	{
-		String canonicalName = globVariable.getCanonicalName();
-		if (!GLOBS_LOOKUP_ELEMENTS.containsKey(canonicalName))
+		assert globVariable.getName() != null;
+		String indexKeyName = globVariable.getName();
+		if (!GLOBS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
-			assert globVariable.getName() != null;
 			LookupElementBuilder newElement = LookupElementBuilder
 					.create(globVariable.getName())
 					.withIcon(PerlIcons.GLOB_GUTTER_ICON)
 					.withInsertHandler(SUB_SELECTION_HANDLER)
 					.withTailText("(?)");
 
-			GLOBS_LOOKUP_ELEMENTS.put(canonicalName, newElement);
+			GLOBS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
 		}
-		return GLOBS_LOOKUP_ELEMENTS.get(canonicalName);
+		return GLOBS_LOOKUP_ELEMENTS.get(indexKeyName);
 	}
 
 	public static LookupElementBuilder getConstantLookupElement(PerlConstant constant)
 	{
-		String canonicalName = constant.getCanonicalName();
-		if (!CONSTANTS_LOOKUP_ELEMENTS.containsKey(canonicalName))
+		assert constant.getName() != null;
+		String indexKeyName = constant.getName();
+		if (!CONSTANTS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
-			assert constant.getName() != null;
 			LookupElementBuilder newElement = LookupElementBuilder
 					.create(constant.getName())
 					.withIcon(PerlIcons.CONSTANT_GUTTER_ICON);
 
-			CONSTANTS_LOOKUP_ELEMENTS.put(canonicalName, newElement);
+			CONSTANTS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
 		}
-		return CONSTANTS_LOOKUP_ELEMENTS.get(canonicalName);
+		return CONSTANTS_LOOKUP_ELEMENTS.get(indexKeyName);
+	}
+
+	// fixme dont know why modifying of definition lookup element doesn't work
+	public static LookupElementBuilder getIncompleteSubDefinitionLookupElement(PerlSubDefinition subDefinition, String prefix)
+	{
+		String indexKeyName =
+				prefix +
+						(subDefinition.isMethod() ? "->" : "::") +
+						subDefinition.getSubName();
+
+		if (!INCOMPLETE_SUB_DEFINITIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
+		{
+			String argsString = subDefinition.getSubArgumentsListAsString();
+
+			LookupElementBuilder newElement = LookupElementBuilder
+					.create(indexKeyName)
+					.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+					.withPresentableText(subDefinition.getSubName())
+					.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated());
+
+			if (!argsString.isEmpty())
+				newElement = newElement
+						.withInsertHandler(SUB_SELECTION_HANDLER)
+						.withTailText(argsString);
+
+			INCOMPLETE_SUB_DEFINITIONS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
+		}
+		return INCOMPLETE_SUB_DEFINITIONS_LOOKUP_ELEMENTS.get(indexKeyName);
+	}
+
+	public static LookupElementBuilder getIncompleteSubDeclarationLookupElement(PerlSubDeclaration subDeclaration, String prefix)
+	{
+		String indexKeyName =
+				prefix +
+						(subDeclaration.isMethod() ? "->" : "::") +
+						subDeclaration.getSubName();
+
+		if (!INCOMPLETE_SUB_DECLARATIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
+		{
+			PerlSubAnnotations subAnnotations = subDeclaration.getSubAnnotations();
+
+			LookupElementBuilder newElement = LookupElementBuilder
+					.create(indexKeyName)
+					.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+					.withStrikeoutness(subAnnotations.isDeprecated())
+					.withPresentableText(subDeclaration.getSubName())
+					.withInsertHandler(SUB_SELECTION_HANDLER)
+					.withTailText("(?)");
+			;
+
+			INCOMPLETE_SUB_DECLARATIONS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
+		}
+		return INCOMPLETE_SUB_DECLARATIONS_LOOKUP_ELEMENTS.get(indexKeyName);
+	}
+
+	public static LookupElementBuilder getIncompleteGlobLookupElement(PerlGlobVariable globVariable, String prefix)
+	{
+		assert globVariable.getName() != null;
+		String indexKeyName = prefix + "::" + globVariable.getName();
+
+		if (!INCOMPLETE_GLOBS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
+		{
+			LookupElementBuilder newElement = LookupElementBuilder
+					.create(indexKeyName)
+					.withIcon(PerlIcons.GLOB_GUTTER_ICON)
+					.withPresentableText(globVariable.getName())
+					.withInsertHandler(SUB_SELECTION_HANDLER)
+					.withTailText("(?)");
+
+			INCOMPLETE_GLOBS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
+		}
+		return INCOMPLETE_GLOBS_LOOKUP_ELEMENTS.get(indexKeyName);
+	}
+
+	public static LookupElementBuilder getIncompleteConstantLookupElement(PerlConstant constant, String prefix)
+	{
+		assert constant.getName() != null;
+		String indexKeyName = prefix + "::" + constant.getName();
+
+		if (!INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
+		{
+			LookupElementBuilder newElement = LookupElementBuilder
+					.create(indexKeyName)
+					.withIcon(PerlIcons.CONSTANT_GUTTER_ICON)
+					.withPresentableText(constant.getName());
+
+			INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
+		}
+		return INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS.get(indexKeyName);
 	}
 
 

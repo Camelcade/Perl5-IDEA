@@ -19,14 +19,11 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -36,8 +33,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlSubStaticCompletionProvider extends CompletionProvider<CompletionParameters>
 {
-	public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
-
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
@@ -56,125 +51,46 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		// defined subs
 		for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
-		{
 			if (!subDefinition.isMethod())
-			{
-				String argsString = subDefinition.getSubArgumentsListAsString();
-
-				LookupElementBuilder newElement = LookupElementBuilder
-						.create(subDefinition.getSubName())
-						.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-						.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated());
-
-				if (!argsString.isEmpty())
-					newElement = newElement
-							.withInsertHandler(SUB_SELECTION_HANDLER)
-							.withTailText(argsString);
-
-				resultSet.addElement(newElement);
-			}
-		}
-
+				resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement(subDefinition));
 
 		// defined subs with prefix
 		if (!subPrefix.isEmpty())
 			for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName + "::" + subPrefix))
-			{
-				String argsString = subDefinition.getSubArgumentsListAsString();
-
-				String delimiter = subDefinition.isMethod() ? "->" : "::";
-
-				LookupElementBuilder newElement = LookupElementBuilder
-						.create(subPrefix + delimiter + subDefinition.getSubName())
-						.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-						.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated())
-						.withPresentableText(subDefinition.getSubName());
-
-				if (!argsString.isEmpty())
-					newElement = newElement
-							.withInsertHandler(SUB_SELECTION_HANDLER)
-							.withTailText(argsString);
-
-				resultSet.addElement(newElement);
-
-			}
+				resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteSubDefinitionLookupElement(subDefinition, subPrefix));
 
 		// declared subs
 		for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
-		{
 			if (!subDeclaration.isMethod())
-			{
-				PerlSubAnnotations subAnnotations = subDeclaration.getSubAnnotations();
-
-				LookupElementBuilder newElement = LookupElementBuilder
-						.create(subDeclaration.getSubName())
-						.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-						.withStrikeoutness(subAnnotations.isDeprecated())
-						.withInsertHandler(SUB_SELECTION_HANDLER)
-						.withTailText("(?)");
-				;
-
-				resultSet.addElement(newElement);
-			}
-		}
-
+				resultSet.addElement(PerlSubCompletionProviderUtil.getSubDeclarationLookupElement(subDeclaration));
 
 		// declared subs with prefix
 		if (!subPrefix.isEmpty())
 			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName + "::" + subPrefix))
-			{
-				PerlSubAnnotations subAnnotations = subDeclaration.getSubAnnotations();
-				String delimiter = subDeclaration.isMethod() ? "->" : "::";
-
-				LookupElementBuilder newElement = LookupElementBuilder
-						.create(subPrefix + delimiter + subDeclaration.getSubName())
-						.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
-						.withStrikeoutness(subAnnotations.isDeprecated())
-						.withPresentableText(subDeclaration.getSubName())
-						.withInsertHandler(SUB_SELECTION_HANDLER)
-						.withTailText("(?)");
-				;
-
-				resultSet.addElement(newElement);
-			}
+				resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteSubDeclarationLookupElement(subDeclaration, subPrefix));
 
 		// Globs
 		for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
 			if (globVariable.getName() != null)
-				resultSet.addElement(LookupElementBuilder
-						.create(globVariable.getName())
-						.withIcon(PerlIcons.GLOB_GUTTER_ICON)
-						.withInsertHandler(SUB_SELECTION_HANDLER)
-						.withTailText("(?)"));
-
+				resultSet.addElement(PerlSubCompletionProviderUtil.getGlobLookupElement(globVariable));
 
 		// Globs with prefix
 		if (!subPrefix.isEmpty())
 			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName + "::" + subPrefix))
 				if (globVariable.getName() != null)
-					resultSet.addElement(LookupElementBuilder
-							.create(subPrefix + "::" + globVariable.getName())
-							.withIcon(PerlIcons.GLOB_GUTTER_ICON)
-							.withPresentableText(globVariable.getName())
-							.withInsertHandler(SUB_SELECTION_HANDLER)
-							.withTailText("(?)"));
+					resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteGlobLookupElement(globVariable, subPrefix));
 
 		// Constants
 		for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
 			if (stringConstant.getName() != null)
-				resultSet.addElement(LookupElementBuilder
-						.create(stringConstant.getName())
-						.withIcon(PerlIcons.CONSTANT_GUTTER_ICON));
+				resultSet.addElement(PerlSubCompletionProviderUtil.getConstantLookupElement(stringConstant));
 
 
 		// Constatns with prefix
 		if (!subPrefix.isEmpty())
 			for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName + "::" + subPrefix))
 				if (stringConstant.getName() != null)
-					resultSet.addElement(LookupElementBuilder
-							.create(subPrefix + "::" + stringConstant.getName())
-							.withIcon(PerlIcons.CONSTANT_GUTTER_ICON)
-							.withPresentableText(stringConstant.getName()));
+					resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteConstantLookupElement(stringConstant, subPrefix));
 
 	}
 }
