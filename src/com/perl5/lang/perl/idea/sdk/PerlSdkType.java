@@ -13,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +51,13 @@ public class PerlSdkType extends SdkType
 	{
 		SdkModificator sdkModificator = sdk.getSdkModificator();
 
-		List<String> perlLibPaths = readFromProgram("perl -le \"print for @INC\"");
+		List<String> perlLibPaths =
+				readFromProgram(SystemInfo.isWindows
+								? "perl -le \"print for @INC\""
+								: "perl -le 'print for @INC'"
+				);
 
 		for (String perlLibPath : perlLibPaths)
-		{
 			if (!".".equals(perlLibPath))
 			{
 				File libDir = new File(perlLibPath);
@@ -70,7 +72,6 @@ public class PerlSdkType extends SdkType
 					}
 				}
 			}
-		}
 
 		sdkModificator.commitChanges();
 	}
@@ -97,9 +98,8 @@ public class PerlSdkType extends SdkType
 			return perlPath;
 
 		if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD)
-		{
 			return "/usr/bin/";
-		}
+
 		return System.getenv("PERL_HOME");
 	}
 
@@ -137,17 +137,16 @@ public class PerlSdkType extends SdkType
 	@Override
 	public String getVersionString(@NotNull Sdk sdk)
 	{
-		String sdkHome = sdk.getHomePath();
-		if (sdkHome != null) {
-			return getPerlVersionString(sdkHome);
-		} else {
+		String sdkHomePath = sdk.getHomePath();
+		if (sdkHomePath != null)
+			return getPerlVersionString(sdkHomePath);
+		else
 			return null;
-		}
 	}
 
-	public String getPerlVersionString(@NotNull String sdkHome)
+	public String getPerlVersionString(@NotNull String sdkHomePath)
 	{
-		List<String> versionLines = readFromProgram(executablePath(sdkHome) + " -v");
+		List<String> versionLines = readFromProgram(executablePath(sdkHomePath) + " -v");
 
 		if (versionLines.size() > 0)
 		{
