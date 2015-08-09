@@ -27,7 +27,6 @@ public class PerlSdkType extends SdkType
 {
 
 	Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
-	private String perlExecutablePath = "";
 
 	public PerlSdkType()
 	{
@@ -107,29 +106,21 @@ public class PerlSdkType extends SdkType
 	@Override
 	public String suggestSdkName(String currentSdkName, String sdkHome)
 	{
-		return "Perl " + getPerlVersionString();
+		return "Perl " + getPerlVersionString(sdkHome);
 	}
 
 	@Override
 	public boolean isValidSdkHome(String sdkHome)
 	{
-		if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\")))
-			sdkHome += File.separator;
-
-		try
-		{
-			File f = new File(executablePath(sdkHome));
-			this.perlExecutablePath = f.getCanonicalPath();
-			return f.exists();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		return false;
+		File f = new File(executablePath(sdkHome));
+		return f.exists();
 	}
 
 	private String executablePath(String sdkHome)
 	{
+		if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\")))
+			sdkHome += File.separator;
+
 		if (SystemInfo.isWindows)
 			return sdkHome + "perl.exe";
 		else
@@ -146,12 +137,17 @@ public class PerlSdkType extends SdkType
 	@Override
 	public String getVersionString(@NotNull Sdk sdk)
 	{
-		return getPerlVersionString();
+		String sdkHome = sdk.getHomePath();
+		if (sdkHome != null) {
+			return getPerlVersionString(sdkHome);
+		} else {
+			return null;
+		}
 	}
 
-	public String getPerlVersionString()
+	public String getPerlVersionString(@NotNull String sdkHome)
 	{
-		List<String> versionLines = readFromProgram(perlExecutablePath + " -v");
+		List<String> versionLines = readFromProgram(executablePath(sdkHome) + " -v");
 
 		if (versionLines.size() > 0)
 		{
