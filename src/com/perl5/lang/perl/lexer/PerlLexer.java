@@ -233,6 +233,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		myProject = project;
 	}
 
+	// fixme to make this work you must remove final in PerlParserGenerated manually.
 	@Override
 	public int yystate()
 	{
