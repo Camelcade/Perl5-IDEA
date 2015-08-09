@@ -17,12 +17,10 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by hurricup on 15.06.2015.
@@ -31,31 +29,25 @@ import java.util.HashSet;
  */
 public class PerlMroDfs extends PerlMro
 {
-	public final PerlMro INSTANCE = new PerlMroDfs();
+	public static final PerlMro INSTANCE = new PerlMroDfs();
 
 	/**
 	 * Builds list of inheritance path for DFS mro (Perl5 default): http://perldoc.perl.org/mro.html
 	 *
 	 * @param project      project
-	 * @param packageName  current package name
+	 * @param packageNames List of package names to add
 	 * @param recursionMap recursion protection map
 	 * @param result       list to populate
 	 */
 	@Override
-	public void getLinearISA(Project project, String packageName, HashSet<String> recursionMap, ArrayList<String> result)
+	public void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result)
 	{
-		// at the moment we are checking all definitions available
-		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
-		{
-			Collection<String> parentPackageNames = namespaceDefinition.getParentNamespaces();
-
-			for (String parentPackageName : parentPackageNames)
-				if (!recursionMap.contains(parentPackageName))
-				{
-					recursionMap.add(parentPackageName);
-					result.add(parentPackageName);
-					getLinearISA(project, parentPackageName, recursionMap, result);
-				}
-		}
+		for (String packageName : packageNames)
+			if (!recursionMap.contains(packageName))
+			{
+				recursionMap.add(packageName);
+				result.add(packageName);
+				getPackageParents(project, packageName, recursionMap, result);
+			}
 	}
 }

@@ -14,25 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.mixins;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 
 /**
- * Created by evstigneev on 16.07.2015.
+ * Created by hurricup on 09.08.2015.
  */
-public abstract class PerlNamespaceBlockImplMixin extends PerlLexicalScopeMemberMixin implements PsiPerlNamespaceBlock
+public interface PerlFile extends PerlLexicalScope, PerlNamespaceContainer
 {
-	public PerlNamespaceBlockImplMixin(ASTNode node)
-	{
-		super(node);
-	}
-
-	@Override
-	public void subtreeChanged()
-	{
-		super.subtreeChanged();
-		getNamespaceDefinition().subtreeChanged();
-	}
 }

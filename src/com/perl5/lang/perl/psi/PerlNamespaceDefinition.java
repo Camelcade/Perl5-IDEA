@@ -18,19 +18,31 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement
+public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement, PerlNamespaceContainer
 {
-	String getPackageName();
+	/**
+	 * Retuns block or namespace content with statements
+	 * @return PsiElement
+	 */
+	@NotNull
+	PsiPerlBlock getBlock();
 
-	List<String> getParentNamespaces();
-
-	public void subtreeChanged();
+	/**
+	 * Populates result with linear ISA according to the namespace MRO
+	 * @param recursionMap recursion map
+	 * @param result array to populate
+	 */
+	public void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result);
 }

@@ -277,9 +277,6 @@ limitations under the License.
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.mixins.PerlHeredocOpenerMixin"
 
-    implements("namespace_block")="com.perl5.lang.perl.psi.PerlNamespaceBlock"
-    mixin("namespace_block")="com.perl5.lang.perl.psi.mixins.PerlNamespaceBlockImplMixin"
-
     implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
 
@@ -323,10 +320,10 @@ limitations under the License.
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 root ::= file_item *
 
-private file_item ::= !<<eof>> {semicolon_any | namespace_block | namespace_item} //{pin=1 }
+private file_item ::= !<<eof>> {semicolon_any | namespace_definition | namespace_item} //{pin=1 }
 
-namespace_block ::= namespace_definition (block | semicolon_any namespace_content)
-namespace_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=2 recoverWhile=recover_namespace_definition}
+namespace_definition ::= namespace_definition_name (block | semicolon_any namespace_content)
+private namespace_definition_name ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=2 recoverWhile=recover_namespace_definition}
 private recover_namespace_definition ::= !(semicolon_any | LEFT_BRACE)
 namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
 

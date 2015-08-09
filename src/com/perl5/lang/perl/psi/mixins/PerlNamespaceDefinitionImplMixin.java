@@ -26,15 +26,16 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PsiPerlUseStatement;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mro.PerlMro;
+import com.perl5.lang.perl.psi.mro.PerlMroC3;
+import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -105,11 +106,11 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		List<String> result = new ArrayList<String>();
 		// fixme check for push @ISA
 
-		PsiElement namespaceBlock = this.getParent();
+		PsiElement namespaceBlock = getBlock();
 
 		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
 			if (useStatement.isParentPragma())
-				if (PsiTreeUtil.getParentOfType(useStatement, PsiPerlNamespaceBlock.class) == namespaceBlock)    // check that it's not nested package use
+				if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this)    // check that it's not nested package use
 					result.addAll(useStatement.getStringParameters());
 
 		return parentPackages = result;
@@ -133,5 +134,27 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	public ItemPresentation getPresentation()
 	{
 		return new PerlItemPresentationSimple(this, "Namespace definition");
+	}
+
+	@Override
+	public MroType getMroType()
+	{
+		// fixme check use mro here
+		return MroType.DFS;
+	}
+
+	@Override
+	public PerlMro getMro()
+	{
+		if( getMroType() == MroType.DFS )
+			return PerlMroDfs.INSTANCE;
+		else
+			return PerlMroC3.INSTANCE;
+	}
+
+	@Override
+	public void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result)
+	{
+		getMro().getLinearISA(getProject(),getParentNamespaces(), recursionMap,result);
 	}
 }

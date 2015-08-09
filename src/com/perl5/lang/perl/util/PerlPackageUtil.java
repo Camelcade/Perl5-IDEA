@@ -34,7 +34,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -154,19 +154,15 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	@NotNull
 	public static String getContextPackageName(PsiElement element)
 	{
-		PsiPerlNamespaceBlock namespaceBlock = PsiTreeUtil.getParentOfType(element, PsiPerlNamespaceBlock.class);
+		PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
 
-		if (namespaceBlock != null)
+		if (namespaceDefinition != null && namespaceDefinition.getNamespaceElement() != null) // checking that definition is valid and got namespace
 		{
-			PsiPerlNamespaceDefinition namespaceDefinition = namespaceBlock.getNamespaceDefinition();
-
-			if (namespaceDefinition.getNamespaceElement() != null) // checking that definition is valid and got namespace
-			{
-				String name = namespaceDefinition.getNamespaceElement().getCanonicalName();
-				assert name != null;
-				return name;
-			}
+			String name = namespaceDefinition.getNamespaceElement().getCanonicalName();
+			assert name != null;
+			return name;
 		}
+
 		// default value
 		return "main";
 	}

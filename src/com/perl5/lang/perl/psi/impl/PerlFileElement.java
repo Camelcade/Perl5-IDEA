@@ -26,9 +26,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.mro.PerlMro;
+import com.perl5.lang.perl.psi.mro.PerlMroC3;
+import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlLexicalDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -41,8 +45,10 @@ import java.util.*;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
+public class PerlFileElement extends PsiFileBase implements PerlFile
 {
+	private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
+
 	List<PerlLexicalDeclaration> declaredScalars = new ArrayList<PerlLexicalDeclaration>();
 	List<PerlLexicalDeclaration> declaredArrays = new ArrayList<PerlLexicalDeclaration>();
 	List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
@@ -238,6 +244,33 @@ public class PerlFileElement extends PsiFileBase implements PerlLexicalScope
 		}
 
 		return declarationsHash.values();
+	}
 
+	@Override
+	public String getPackageName()
+	{
+		return "main";
+	}
+
+	@Override
+	public List<String> getParentNamespaces()
+	{
+		return EMPTY_LIST;
+	}
+
+	@Override
+	public MroType getMroType()
+	{
+		// fixme check use mro here
+		return MroType.DFS;
+	}
+
+	@Override
+	public PerlMro getMro()
+	{
+		if( getMroType() == MroType.DFS )
+			return PerlMroDfs.INSTANCE;
+		else
+			return PerlMroC3.INSTANCE;
 	}
 }

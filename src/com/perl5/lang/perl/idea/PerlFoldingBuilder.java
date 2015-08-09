@@ -221,7 +221,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		// Anon arrays
 		for (PsiElement block : PsiTreeUtil.findChildrenOfType(root, c))
 		{
-			if (!(block instanceof PsiPerlNamespaceBlock || block instanceof PsiPerlNamespaceContent))
+			if (!(block.getParent() instanceof PerlNamespaceDefinition))
 			{
 
 				TextRange range = block.getTextRange();

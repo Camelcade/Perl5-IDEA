@@ -23,8 +23,8 @@ import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceBlock;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -95,10 +95,10 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 			}
 		} else    // no uses found
 		{
-			baseStatement = PsiTreeUtil.findChildOfType(statementContainer, PsiPerlNamespaceBlock.class);
-			if (baseStatement != null)    // got a namespace block
+			baseStatement = PsiTreeUtil.findChildOfType(statementContainer, PerlNamespaceDefinition.class);
+			if (baseStatement != null)    // got a namespace definition
 			{
-				statementContainer = baseStatement;
+				statementContainer = ((PerlNamespaceDefinition) baseStatement).getBlock();
 				baseStatement = null;
 			} else
 			{

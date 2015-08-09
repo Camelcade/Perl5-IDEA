@@ -20,22 +20,20 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Created by hurricup on 08.08.2015.
  */
 public abstract class PerlMro
 {
-	public final SubDefinitionGetter SUB_DEFINITIONS_GETTER = new SubDefinitionGetter();
-	public final SubDeclarationsGetter SUB_DECLARATIONS_GETTER = new SubDeclarationsGetter();
-	public final ConstantsGetter CONSTANTS_GETTER = new ConstantsGetter();
-	public final GlobVariablesGetter GLOBS_GETTER = new GlobVariablesGetter();
+	public static final SubDefinitionGetter SUB_DEFINITIONS_GETTER = new SubDefinitionGetter();
+	public static final SubDeclarationsGetter SUB_DECLARATIONS_GETTER = new SubDeclarationsGetter();
+	public static final ConstantsGetter CONSTANTS_GETTER = new ConstantsGetter();
+	public static final GlobVariablesGetter GLOBS_GETTER = new GlobVariablesGetter();
 
 	protected PerlMro()
 	{
@@ -46,48 +44,48 @@ public abstract class PerlMro
 	 * Method should not add package itself or UNIVERSAL, only parents structure. Package itself and UNIVERSAL being added by calee
 	 *
 	 * @param project      current project
-	 * @param packageName  package we are building for
+	 * @param packageNames list of package names to populate
 	 * @param recursionMap map for controlling recursive inheritance
 	 */
-	protected abstract void getLinearISA(Project project, String packageName, HashSet<String> recursionMap, ArrayList<String> result);
+	public abstract void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result);
 
 	// fixme do we need theese methods?
-	public Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName)
+	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String packageName, String subName)
 	{
 		return SUB_DEFINITIONS_GETTER.resolveSub(project, packageName, subName, false);
 	}
 
-	public Collection<PsiPerlSubDefinition> getSuperSubDefinitions(Project project, String packageName, String subName)
+	public static Collection<PsiPerlSubDefinition> getSuperSubDefinitions(Project project, String packageName, String subName)
 	{
 		return SUB_DEFINITIONS_GETTER.resolveSub(project, packageName, subName, true);
 	}
 
-	public Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName)
+	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String packageName, String subName)
 	{
 		return SUB_DECLARATIONS_GETTER.resolveSub(project, packageName, subName, false);
 	}
 
-	public Collection<PsiPerlSubDeclaration> getSuperSubDeclarations(Project project, String packageName, String subName)
+	public static Collection<PsiPerlSubDeclaration> getSuperSubDeclarations(Project project, String packageName, String subName)
 	{
 		return SUB_DECLARATIONS_GETTER.resolveSub(project, packageName, subName, true);
 	}
 
-	public Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName)
+	public static Collection<PsiPerlGlobVariable> getSubAliases(Project project, String packageName, String subName)
 	{
 		return GLOBS_GETTER.resolveSub(project, packageName, subName, false);
 	}
 
-	public Collection<PsiPerlGlobVariable> getSuperSubAliases(Project project, String packageName, String subName)
+	public static Collection<PsiPerlGlobVariable> getSuperSubAliases(Project project, String packageName, String subName)
 	{
 		return GLOBS_GETTER.resolveSub(project, packageName, subName, true);
 	}
 
-	public Collection<PerlConstant> getConstants(Project project, String packageName, String subName)
+	public static Collection<PerlConstant> getConstants(Project project, String packageName, String subName)
 	{
 		return CONSTANTS_GETTER.resolveSub(project, packageName, subName, false);
 	}
 
-	public Collection<PerlConstant> getSuperConstants(Project project, String packageName, String subName)
+	public static Collection<PerlConstant> getSuperConstants(Project project, String packageName, String subName)
 	{
 		return CONSTANTS_GETTER.resolveSub(project, packageName, subName, true);
 	}
@@ -101,7 +99,7 @@ public abstract class PerlMro
 	 * @param isSuper     super flag
 	 * @return collection of first encountered super subs declarations, definitions, constants and typeglobs
 	 */
-	public Collection<PsiElement> resolveSub(Project project, String packageName, String subName, boolean isSuper)
+	public static Collection<PsiElement> resolveSub(Project project, String packageName, String subName, boolean isSuper)
 	{
 		Collection<PsiElement> result = new ArrayList<PsiElement>();
 		if (packageName == null || subName == null)
@@ -131,7 +129,7 @@ public abstract class PerlMro
 	 * @param isSuper         flag for SUPER resolutions
 	 * @return collection of definitions
 	 */
-	public Collection<PsiElement> getVariants(Project project, String basePackageName, boolean isSuper)
+	public static Collection<PsiElement> getVariants(Project project, String basePackageName, boolean isSuper)
 	{
 		HashMap<String, PsiElement> methods = new HashMap<String, PsiElement>();
 
@@ -155,14 +153,14 @@ public abstract class PerlMro
 	}
 
 	/**
-	 * Building linear @ISA list for this MRO algorithm.
+	 * Building linear @ISA list
 	 *
 	 * @param project     current project
 	 * @param packageName current package name
 	 * @param isSuper     if false - we include current package into the list, true - otherwise
 	 * @return list of linear @ISA
 	 */
-	public ArrayList<String> getLinearISA(Project project, String packageName, boolean isSuper)
+	public static ArrayList<String> getLinearISA(Project project, String packageName, boolean isSuper)
 	{
 		HashSet<String> recursionMap = new HashSet<String>();
 		ArrayList<String> result = new ArrayList<String>();
@@ -173,7 +171,7 @@ public abstract class PerlMro
 			result.add(packageName);
 		}
 
-		getLinearISA(project, packageName, recursionMap, result);
+		getPackageParents(project, packageName, recursionMap, result);
 
 		if (!recursionMap.contains("UNIVERSAL"))
 			result.add("UNIVERSAL");
@@ -181,8 +179,16 @@ public abstract class PerlMro
 		return result;
 	}
 
+	public static void getPackageParents(Project project, String packageName, HashSet<String> recursionMap, ArrayList<String> result)
+	{
+		// at the moment we are checking all definitions available
+		// fixme we should check only those, which are used in currrent file
+		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+			namespaceDefinition.getLinearISA(recursionMap, result);
+	}
+
 	// fixme shouldn't we move this to separate class for reuse?
-	abstract class EntitiesGetter<T>
+	abstract static class EntitiesGetter<T>
 	{
 		public Collection<T> resolveSub(Project project, String packageName, String subName, boolean isSuper)
 		{
@@ -203,7 +209,7 @@ public abstract class PerlMro
 		public abstract Collection<T> getEntities(Project project, String name);
 	}
 
-	class SubDefinitionGetter extends EntitiesGetter<PsiPerlSubDefinition>
+	static class SubDefinitionGetter extends EntitiesGetter<PsiPerlSubDefinition>
 	{
 		@Override
 		public Collection<PsiPerlSubDefinition> getEntities(Project project, String name)
@@ -212,7 +218,7 @@ public abstract class PerlMro
 		}
 	}
 
-	class SubDeclarationsGetter extends EntitiesGetter<PsiPerlSubDeclaration>
+	static class SubDeclarationsGetter extends EntitiesGetter<PsiPerlSubDeclaration>
 	{
 		@Override
 		public Collection<PsiPerlSubDeclaration> getEntities(Project project, String name)
@@ -221,7 +227,7 @@ public abstract class PerlMro
 		}
 	}
 
-	class GlobVariablesGetter extends EntitiesGetter<PsiPerlGlobVariable>
+	static class GlobVariablesGetter extends EntitiesGetter<PsiPerlGlobVariable>
 	{
 		@Override
 		public Collection<PsiPerlGlobVariable> getEntities(Project project, String name)
@@ -230,7 +236,7 @@ public abstract class PerlMro
 		}
 	}
 
-	class ConstantsGetter extends EntitiesGetter<PerlConstant>
+	static class ConstantsGetter extends EntitiesGetter<PerlConstant>
 	{
 		@Override
 		public Collection<PerlConstant> getEntities(Project project, String name)
