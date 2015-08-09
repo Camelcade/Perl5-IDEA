@@ -935,4 +935,25 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
+	/**
+	 * Parses parenthesised list or parenthesised list element. To avoid double parenthesised expression parsing
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseListOrListElement(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.parenthesised_expr(b, l))
+		{
+			if (PerlParser.array_index(b, l))
+				m.done(ANON_ARRAY_ELEMENT);
+			else
+				m.drop();
+			return true;
+		}
+		m.drop();
+		return false;
+	}
 }

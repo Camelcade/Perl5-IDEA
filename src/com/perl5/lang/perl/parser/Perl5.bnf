@@ -561,8 +561,7 @@ named_list_expr ::= <<isListOperator>> method [call_arguments]  // optional comm
 
 term_expr ::=
     variable_declaration
-    | anon_array_element  // fixme we can speed this up to parse manually () and ()[]
-    | parenthesised_expr
+    | <<parseListOrListElement>>
     | scalar_constant
     | do_expr
     | sub_expr
@@ -848,7 +847,8 @@ scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX
 
 scalar_array_element ::= scalar_variable array_index
 scalar_hash_element ::= scalar_variable hash_index
-anon_array_element ::= LEFT_PAREN expr RIGHT_PAREN array_index
+
+anon_array_element ::= parenthesised_expr array_index
 
 private glob ::=
     glob_variable
