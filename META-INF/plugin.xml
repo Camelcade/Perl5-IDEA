@@ -50,6 +50,7 @@
       <li>Implemented scalar type detection on assignment to sub or method call.</li>
       <li>Improved methods resolution performance.</li>
       <li>C3 mro and fixed bug with DFS.</li>
+      <li>Postfix livetemplates moved to separate group 'Perl5 postfix' to be able to utilize same abbreviations.</li>
       </ul>
 
     ]]>

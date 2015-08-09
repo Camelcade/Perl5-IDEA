@@ -26,7 +26,10 @@ import org.jetbrains.annotations.Nullable;
 public class PerlDefaultTemplatesProvider implements DefaultLiveTemplatesProvider
 {
 
-	public static final String[] TEMPLATES = new String[]{"liveTemplates/Perl5"};//directs to liveTemplates/Perl5.xml template file
+	public static final String[] TEMPLATES = new String[]{
+			"liveTemplates/Perl5"
+			, "liveTemplates/Perl5Postfix"
+	};//directs to liveTemplates/Perl5.xml template file
 
 	@Override
 	public String[] getDefaultLiveTemplateFiles()

@@ -1,0 +1,61 @@
+<!--
+  ~ Copyright 2015 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<templateSet group="Perl5 postfix">
+    <template name="if" value="if ($CONDITION$);&#10;$END$" description="postfix if" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_POSTFIX" value="true"/>
+        </context>
+    </template>
+    <template name="unl" value="unless ($CONDITION$);&#10;$END$" description="postfix unless" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_POSTFIX" value="true"/>
+        </context>
+    </template>
+    <template name="wh" value="while ($CONDITION$);&#10;$END$" description="postfix while" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_POSTFIX" value="true"/>
+        </context>
+    </template>
+    <template name="unt" value="until ($CONDITION$);&#10;$END$" description="postfix until" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_POSTFIX" value="true"/>
+        </context>
+    </template>
+    <template name="fo" value="for ($LIST$);&#10;$END$" description="postfix for" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_POSTFIX" value="true"/>
+        </context>
+    </template>
+    <template name="fe" value="foreach ($LIST$);&#10;$END$&#10;" description="postfix foreach" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_POSTFIX" value="true"/>
+        </context>
+    </template>
+
+</templateSet>
