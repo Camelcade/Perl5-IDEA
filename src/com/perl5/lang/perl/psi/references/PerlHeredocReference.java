@@ -20,7 +20,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
@@ -66,10 +65,10 @@ public class PerlHeredocReference extends PerlReference
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
-		if (element instanceof PerlHeredocOpener)
-			return super.isReferenceTo(((PerlHeredocOpener) element).getNameIdentifier());
-		else if (element instanceof PerlConstant || element instanceof PerlStringContentElement)
-			return isReferenceTo(element.getParent());
+		if (element instanceof PerlStringContentElement)
+			return super.isReferenceTo(element);
+		else if (element instanceof PerlHeredocOpener)
+			return isReferenceTo(((PerlHeredocOpener) element).getNameIdentifier());
 
 		return false;
 	}

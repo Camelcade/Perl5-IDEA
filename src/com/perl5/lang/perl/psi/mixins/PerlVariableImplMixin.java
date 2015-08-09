@@ -193,8 +193,17 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 					}
 				}
 
-				// todo check global declarations
-				// todo check assignment expression with this variable in the left and guess from there (constructors, other vars that can have known type
+				// checking global declarations with explicit types
+				List<PerlVariable> globalDeclarations = getGlobalDeclarations();
+				if (globalDeclarations.size() > 0)
+				{
+					PsiElement parent = globalDeclarations.get(0).getParent();
+					if (parent instanceof PsiPerlVariableDeclarationGlobal
+							&& ((PsiPerlVariableDeclarationGlobal) parent).getNamespaceElement() != null
+							&& ((PsiPerlVariableDeclarationGlobal) parent).getNamespaceElement().getCanonicalName() != null
+							)
+						return ((PsiPerlVariableDeclarationGlobal) parent).getNamespaceElement().getCanonicalName();
+				}
 			}
 		}
 
