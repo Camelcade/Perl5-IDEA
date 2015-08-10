@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.38 beta</version>
+    <version>0.381 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -43,13 +43,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.38 beta changes:</p>
+      <p>0.381 beta changes:</p>
       <ul>
-      <li>Implemented constants resolution, auto-completion and highlighting</li>
-      <li>Performance improvements: parser, methods resolution, subs and methods autocompletion.</li>
-      <li>Implemented scalar type detection on assignment to sub or method call (sub or method must be annotated to make this work).</li>
-      <li>Implemented C3 mro and fixed bug with DFS.</li>
-      <li>Postfix livetemplates moved to separate group 'Perl5 postfix' to be able to utilize same abbreviations.</li>
+      <li>Fixed bug with occasional wrong constant usage annotation</li>
       </ul>
 
     ]]>
