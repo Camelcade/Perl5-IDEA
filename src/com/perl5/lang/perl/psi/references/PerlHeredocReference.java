@@ -20,7 +20,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
 import org.jetbrains.annotations.NotNull;
@@ -65,11 +64,16 @@ public class PerlHeredocReference extends PerlReference
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
+		//fixme need to figure out what is wrong here
+//		System.err.println("Checking for " + element);
+//		boolean result = super.isReferenceTo(element);
+//		System.err.println("Result for " + element + " - "+ result);
+//		return result;
 		if (element instanceof PerlStringContentElement)
 			return super.isReferenceTo(element);
-		else if (element instanceof PerlHeredocOpener)
-			return isReferenceTo(((PerlHeredocOpener) element).getNameIdentifier());
-
+//		else if (element instanceof PerlHeredocOpener)
+//			return isReferenceTo(((PerlHeredocOpener) element).getNameIdentifier());
+//
 		return false;
 	}
 }
