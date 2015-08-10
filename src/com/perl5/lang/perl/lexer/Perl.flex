@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 %%
 
 %class PerlLexerGenerated
-%implements PerlLexerBase
+%extends PerlBaseLexer
 %abstract
 %unicode
 %public
@@ -35,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 %{
+    // fixme this must be in skeleton
     public void setTokenStart(int position){zzCurrentPos = zzStartRead = position;}
     public void setTokenEnd(int position){zzMarkedPos = position;}
     public CharSequence getBuffer(){ return zzBuffer;}
@@ -44,6 +45,24 @@ import org.jetbrains.annotations.NotNull;
     public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
 
     protected int trenarCounter = 0;
+
+	public abstract IElementType processStringOpener();
+	public abstract IElementType guessDiv();
+	public abstract IElementType getIdentifierToken();
+	public abstract IElementType checkOperatorXSticked();
+	public abstract IElementType parseVersion();
+	public abstract IElementType parseNumber();
+	public abstract IElementType parseOperatorDereference();
+	public abstract IElementType parseCappedVariableName();
+	public abstract IElementType parseRegex();
+	public abstract IElementType processSemicolon();
+	public abstract IElementType parseHeredocOpener();
+	public abstract IElementType processOpenerWhiteSpace();
+	public abstract IElementType processTransQuote();
+	public abstract IElementType processTransChar();
+	public abstract IElementType processTransCloser();
+	public abstract IElementType processQuoteLikeListQuote();
+	public abstract IElementType processQuoteLikeQuote();
 %}
 
 
@@ -108,7 +127,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 %state LEX_HEREDOC_WAITING
 %state LEX_FORMAT_WAITING
 
-%xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CLOSER
+%xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CHARS_QQ, LEX_QUOTE_LIKE_CLOSER
 %xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS
 TRANS_MODIFIERS = [cdsr]
 %xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
@@ -117,6 +136,7 @@ TRANS_MODIFIERS = [cdsr]
 %state LEX_HTML_BLOCK
 %state LEX_MOJO_PERL_LINE, LEX_MOJO_PERL_BLOCK, LEX_MOJO_PERL_LINE_SEMI, LEX_MOJO_PERL_BLOCK_SEMI
 %state LEX_PREPARSED_ITEMS
+
 %%
 
 // inclusive states

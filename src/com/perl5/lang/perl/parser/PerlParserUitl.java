@@ -956,4 +956,46 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		m.drop();
 		return false;
 	}
+
+	/**
+	 * Converting string element to string content if it's not a closing quote
+	 *
+	 * @param b PerlBuildder
+	 * @param l Parsing level
+	 * @return parsing result
+	 */
+	public static boolean convertToStringContent(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		if (tokenType != null && tokenType != QUOTE_DOUBLE && tokenType != QUOTE)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(STRING_CONTENT);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Parses SQ string content. Implemented for interpolation parsing, where 'test' is identifier in quotes
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseSQStringContent(PsiBuilder b, int l)
+	{
+		if (consumeToken(b, STRING_CONTENT))
+			return true;
+		else if (b.getTokenType() == IDENTIFIER && b.lookAhead(1) == QUOTE_SINGLE)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(STRING_CONTENT);
+			return true;
+		}
+		return false;
+	}
+
 }

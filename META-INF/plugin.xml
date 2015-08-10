@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.381 beta</version>
+    <version>0.382 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -43,9 +43,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.381 beta changes:</p>
+      <p>0.382 beta changes:</p>
       <ul>
       <li>Fixed bug with occasional wrong constant usage annotation</li>
+      <li>Prototyped interpolation in qq strings</li>
       </ul>
 
     ]]>

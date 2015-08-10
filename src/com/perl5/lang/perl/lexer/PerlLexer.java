@@ -25,7 +25,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.PerlParserUitl;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
@@ -42,25 +41,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
-	private static final String reBasicIdentifier = "[_a-zA-Z0-9][_a-zA-Z0-9]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
-	private static final String reSeparator =
-			"(?:" +
-					"(?:::)+'?" +
-					"|" +
-					"(?:::)*'" +
-					")";
-	public static final Pattern AMBIGUOUS_PACKAGE_RE = Pattern.compile(
-			"(" +
-					reSeparator + "?" +        // optional opening separator,
-					"(?:" +
-					reBasicIdentifier +
-					reSeparator +
-					")*" +
-					")" +
-					"(" +
-					reBasicIdentifier +
-					")"
-	);
 	private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
 			"eq",
 			"ne",
@@ -183,11 +163,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		RESERVED_TOKENSET.addAll(reservedTokenTypes.values());
 	}
 
-	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
-	/**
-	 * States stack
-	 **/
-	private final Stack<Integer> stateStack = new Stack<Integer>();
 	/**
 	 * HEREDOC proceccing section
 	 */
@@ -209,16 +184,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public boolean isEscaped = false;
 	public int sectionsNumber = 0;    // number of sections one or two
 	public int currentSectionNumber = 0; // current section
-	// last token
-	protected IElementType lastTokenType;
-	protected String lastToken;
-	protected IElementType lastSignificantTokenType;
-	protected String lastSignificantToken;
-	protected IElementType lastUnbraceTokenType;
-	protected String lastUnbraceToken;
-	protected IElementType lastUnparenTokenType;
-	protected String lastUnparenToken;
 	protected PerlLexerAdapter evalPerlLexer;
+	protected PerlStringLexer stringLexer;
+
 	Project myProject;
 	Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
 	/**
@@ -279,7 +247,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			} else if (currentState == LEX_QUOTE_LIKE_WORDS)
 				return captureQuoteLikeWords();
 				// capture string content from "" '' `` q qq qx
-			else if (currentState == LEX_QUOTE_LIKE_CHARS)
+			else if (currentState == LEX_QUOTE_LIKE_CHARS || currentState == LEX_QUOTE_LIKE_CHARS_QQ)
 				return captureQuoteLikeChars();
 				// closing quote of string
 			else if (currentState == LEX_QUOTE_LIKE_CLOSER)
@@ -413,6 +381,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		int bufferEnd = buffer.length();
 		int currentPosition = tokenStart;
 
+		boolean parseString = yystate() == LEX_QUOTE_LIKE_CHARS_QQ;
+		boolean containsSigils = false;
+
 		boolean isEscaped = false;
 		boolean quotesDiffer = charOpener != charCloser;
 		int quotesDepth = 0;    // for using with different quotes
@@ -432,6 +403,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					quotesDepth--;
 			}
 
+			if (!isEscaped && parseString && (currentChar == '$' || currentChar == '@'))    // to avoid parsing strings without sigils
+				containsSigils = true;
+
 			isEscaped = !isEscaped && currentChar == '\\';
 
 			currentPosition++;
@@ -445,43 +419,36 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			yybegin(LEX_QUOTE_LIKE_CLOSER);
 
 		if (currentPosition > tokenStart)
-		{
-			// found string
-			setTokenStart(tokenStart);
-			setTokenEnd(currentPosition);
-			return STRING_CONTENT;
-		} else
+			if (parseString && containsSigils)
+			{
+				// found string, reparse with string lexer
+				if (stringLexer == null)
+					stringLexer = new PerlStringLexer();
+
+				stringLexer.reset(buffer, tokenStart, currentPosition, YYINITIAL);
+				try
+				{
+					IElementType tokenType;
+					while ((tokenType = stringLexer.advance()) != null)
+						preparsedTokensList.add(new CustomToken(stringLexer.getTokenStart(), stringLexer.getTokenEnd(), tokenType));
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+
+				return getPreParsedToken();
+			} else
+			{
+				setTokenStart(tokenStart);
+				setTokenEnd(currentPosition);
+				return STRING_CONTENT;
+			}
+		else
 			// empty string
 			return quoteLikeCloser(tokenStart);
 
 	}
 
-	public void registerLastToken(IElementType tokenType, String tokenText)
-	{
-		lastTokenType = tokenType;
-		lastToken = tokenText;
-
-		if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType))
-		{
-			lastSignificantTokenType = tokenType;
-			lastSignificantToken = lastToken;
-
-			if (tokenType != LEFT_BRACE)
-			{
-				lastUnbraceTokenType = tokenType;
-				lastUnbraceToken = lastToken;
-			}
-
-			if (tokenType != LEFT_PAREN)
-			{
-				lastUnparenTokenType = tokenType;
-				lastUnparenToken = lastToken;
-			}
-
-			if (yystate() == 0 && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
-				yybegin(LEX_CODE);
-		}
-	}
 
 	/**
 	 * Checks that version is a really version, not a variable name
@@ -870,32 +837,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	}
 
 	/**
-	 * Ends custom block parsing
-	 */
-	public void endCustomBlock()
-	{
-		popState();
-	}
-
-	public void pushState()
-	{
-		stateStack.push(yystate());
-	}
-
-	public void popState()
-	{
-		yybegin(stateStack.pop());
-	}
-
-	private IElementType restoreToken(CustomToken token)
-	{
-		setTokenStart(token.getTokenStart());
-		setTokenEnd(token.getTokenEnd());
-		registerLastToken(token.getTokenType(), yytext().toString());
-		return token.getTokenType();
-	}
-
-	/**
 	 * Disallows sharp delimiter on space occurance for quote-like operations
 	 *
 	 * @return whitespace token type
@@ -906,15 +847,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return TokenType.WHITE_SPACE;
 	}
 
-	/**
-	 * Reading tokens from parsed queue, setting start and end and returns them one by one
-	 *
-	 * @return token type or null if queue is empty
-	 */
-	public IElementType getPreParsedToken()
-	{
-		return restoreToken(preparsedTokensList.removeFirst());
-	}
 
 	// guess if this is a OPERATOR_DIV or regex opener
 	public IElementType guessDiv()
@@ -1243,7 +1175,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			isEscaped = false;
 			pushState();
 			if (!isLastToken())
-				yybegin(LEX_QUOTE_LIKE_CHARS);
+				if (charOpener == '"' || charOpener == '`')
+					yybegin(LEX_QUOTE_LIKE_CHARS_QQ);
+				else
+					yybegin(LEX_QUOTE_LIKE_CHARS);
 		}
 
 		return getQuoteToken(charOpener);
@@ -1438,14 +1373,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			throw new RuntimeException("Inappropriate package name " + tokenText);
 	}
 
-	public IElementType parsePackageCanonical()
-	{
-		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
-		if (canonicalPackageName.equals("CORE"))
-			return PACKAGE_CORE_IDENTIFIER;
-		return PACKAGE_IDENTIFIER;
-	}
-
 	private Character getNextCharacter()
 	{
 		int currentPosition = getTokenEnd();
@@ -1494,71 +1421,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return false;
 	}
 
-	// check that current token surrounded with braces
-	private boolean isBraced()
-	{
-		if (lastSignificantTokenType == LEFT_BRACE)
-		{
-			Character nextSignificantCharacter = getNextSignificantCharacter();
-			if (nextSignificantCharacter != null && nextSignificantCharacter.equals('}'))
-				return true;
-		}
-		return false;
-	}
-
-	private Character getNextSignificantCharacter()
-	{
-		int nextPosition = getNextSignificantCharacterPosition(getTokenEnd());
-		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : null;
-	}
-
-	private int getNextSignificantCharacterPosition(int position)
-	{
-		int currentPosition = position;
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-
-		while (currentPosition < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentPosition);
-			if (currentChar == '#')
-			{
-				while (currentPosition < bufferEnd)
-				{
-					if (buffer.charAt(currentPosition) == '\n')
-						break;
-					currentPosition++;
-				}
-			} else if (!Character.isWhitespace(currentChar))
-				return currentPosition;
-
-			currentPosition++;
-		}
-		return -1;
-	}
-
-	private int getNextNonSpaceCharacterPosition(int position)
-	{
-		int currentPosition = position;
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-
-		while (currentPosition < bufferEnd)
-		{
-			if (!Character.isWhitespace(buffer.charAt(currentPosition)))
-				return currentPosition;
-
-			currentPosition++;
-		}
-		return -1;
-	}
-
-	private Character getNextNonSpaceCharacter()
-	{
-		int nextPosition = getNextNonSpaceCharacterPosition(getTokenEnd());
-		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : null;
-	}
-
 	@Override
 	public IElementType parseOperatorDereference()
 	{
@@ -1583,5 +1445,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		int patternEnd = offset + pattern.length();
 		return buffer.length() >= patternEnd && buffer.subSequence(offset, patternEnd).toString().equals(pattern);
 	}
+
+	public void registerLastToken(IElementType tokenType, String tokenText)
+	{
+		super.registerLastToken(tokenType, tokenText);
+
+		if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType))
+			if (yystate() == 0 && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
+				yybegin(LEX_CODE);
+	}
+
 
 }

@@ -919,14 +919,26 @@ private array_constant ::=
 
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
+private string_qq ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QQ string_quoted {pin=2}
 private string_quoted ::= QUOTE [STRING_CONTENT] QUOTE
 string_dq ::=
-    QUOTE_DOUBLE [STRING_CONTENT] QUOTE_DOUBLE
+    QUOTE_DOUBLE [string_content_qq] QUOTE_DOUBLE
      | string_qq
-private string_qq ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QQ string_quoted {pin=2}
+
+private string_content_qq ::= string_content_element +
+private string_content_element ::=
+  STRING_CONTENT
+  | scalar_array_element
+  | scalar_hash_element
+  | scalar_variable
+  | scalar_cast_expr
+  | array_variable
+  | array_cast_expr
+  | array_index_variable
+  | <<convertToStringContent>>
 
 string_sq ::=
-    QUOTE_SINGLE [STRING_CONTENT] QUOTE_SINGLE
+    QUOTE_SINGLE [<<parseSQStringContent>>] QUOTE_SINGLE
     | string_q
     | STRING_CONTENT
 private string_q ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_Q string_quoted {pin=2}
