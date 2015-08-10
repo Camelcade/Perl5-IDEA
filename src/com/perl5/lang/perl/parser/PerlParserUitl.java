@@ -168,6 +168,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			NUMBER,
 			NUMBER_SIMPLE
 	);
+	protected static final TokenSet STRING_STOP_TOKENS = TokenSet.create(
+			QUOTE_DOUBLE,
+			QUOTE_TICK,
+			QUOTE
+	);
 	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
 			EMBED_MARKER_SEMICOLON,
@@ -482,7 +487,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 	}
-
 
 	/**
 	 * Merges sequence [package] identifier to a package
@@ -967,7 +971,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean convertToStringContent(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
-		if (tokenType != null && tokenType != QUOTE_DOUBLE && tokenType != QUOTE)
+		if (tokenType != null && !STRING_STOP_TOKENS.contains(tokenType))
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();

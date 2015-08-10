@@ -919,8 +919,9 @@ private array_constant ::=
 
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
-private string_qq ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QQ string_quoted {pin=2}
+private string_qq ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QQ string_quoted_interpolated {pin=2}
 private string_quoted ::= QUOTE [STRING_CONTENT] QUOTE
+private string_quoted_interpolated ::= QUOTE [string_content_qq] QUOTE
 string_dq ::=
     QUOTE_DOUBLE [string_content_qq] QUOTE_DOUBLE
      | string_qq
@@ -944,9 +945,9 @@ string_sq ::=
 private string_q ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_Q string_quoted {pin=2}
 
 string_xq ::=
-    QUOTE_TICK [STRING_CONTENT] QUOTE_TICK
+    QUOTE_TICK [string_content_qq] QUOTE_TICK
     | string_qx
-private string_qx ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QX string_quoted {pin=2}
+private string_qx ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QX string_quoted_interpolated {pin=2}
 
 heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
 

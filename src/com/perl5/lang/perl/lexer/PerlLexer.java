@@ -1130,12 +1130,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	/**
 	 * Quote-like string procesors
 	 **/
-	public void processQuoteLikeStringOpener()
+	public void processQuoteLikeStringOpener(IElementType tokenType)
 	{
 		allowSharpQuote = true;
 		isEscaped = false;
 		pushState();
-		yybegin(LEX_QUOTE_LIKE_OPENER);
+		if (tokenType == RESERVED_Q)
+			yybegin(LEX_QUOTE_LIKE_OPENER);
+		else
+			yybegin(LEX_QUOTE_LIKE_OPENER_QQ);
 	}
 
 	public IElementType processQuoteLikeQuote()
@@ -1152,7 +1155,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		} else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
 		if (!isLastToken())
-			yybegin(LEX_QUOTE_LIKE_CHARS);
+			if (yystate() == LEX_QUOTE_LIKE_OPENER)
+				yybegin(LEX_QUOTE_LIKE_CHARS);
+			else
+				yybegin(LEX_QUOTE_LIKE_CHARS_QQ);
 
 		return QUOTE;
 	}
@@ -1303,7 +1309,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				else if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
 					processTransOpener();
 				else if (tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
-					processQuoteLikeStringOpener();
+					processQuoteLikeStringOpener(tokenType);
 				else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
 					processRegexOpener();
 				else if (tokenType == RESERVED_FORMAT)
