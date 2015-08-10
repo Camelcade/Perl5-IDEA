@@ -46,7 +46,7 @@
       <p>0.382 beta changes:</p>
       <ul>
       <li>Fixed bug with occasional wrong constant usage annotation</li>
-      <li>Prototyped interpolation in qq strings</li>
+      <li>Implemented interpolation of double-quoted, back-ticked, qq-ed and qx-ed strings</li>
       </ul>
 
     ]]>
