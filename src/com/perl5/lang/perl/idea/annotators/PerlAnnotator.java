@@ -17,26 +17,31 @@
 package com.perl5.lang.perl.idea.annotators;
 
 import com.intellij.lang.annotation.Annotation;
-import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
-import com.intellij.psi.PsiElement;
+import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.editor.markup.TextAttributes;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 08.08.2015.
+ * Created by hurricup on 10.08.2015.
  */
-public class PerlAnnotatorConstants implements Annotator, PerlElementTypes
+public abstract class PerlAnnotator implements Annotator, PerlElementTypes
 {
-	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
+	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
+
+	public void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
 	{
-		if (element instanceof PerlSubNameElement && ((PerlSubNameElement) element).getConstantDefinitions().size() > 0)
-		{
-			Annotation annotation = holder.createInfoAnnotation(element, null);
-			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
-		}
+		TextAttributes attrs = currentScheme.getAttributes(key);
+
+		if (builtin)
+			attrs = TextAttributes.merge(attrs, PerlSyntaxHighlighter.BOLD);
+		if (deprecated)
+			attrs = TextAttributes.merge(attrs, PerlSyntaxHighlighter.STROKE);
+
+		annotation.setEnforcedTextAttributes(attrs);
 	}
+
 }
