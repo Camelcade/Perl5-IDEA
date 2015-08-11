@@ -86,6 +86,18 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
     }
 }
 
+"<=>" {return OPERATOR_CMP_NUMERIC;}
+"=>" {return OPERATOR_COMMA_ARROW;}
+"..." {return OPERATOR_HELLIP;}
+".." {return OPERATOR_FLIP_FLOP;}
+"++" {return OPERATOR_PLUS_PLUS;}
+"--" {return OPERATOR_MINUS_MINUS;}
+"=~" {return OPERATOR_RE;}
+"!~" {return OPERATOR_NOT_RE;}
+"<<" {return OPERATOR_SHIFT_LEFT;}
+">>" {return OPERATOR_SHIFT_RIGHT;}
+"&&" {return OPERATOR_AND;}
+"||" {return OPERATOR_OR;}
 "->" {return OPERATOR_DEREFERENCE;}
 "<" {return OPERATOR_LT_NUMERIC;}
 ">" {return OPERATOR_GT_NUMERIC;}
