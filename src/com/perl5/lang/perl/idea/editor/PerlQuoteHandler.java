@@ -26,6 +26,6 @@ public class PerlQuoteHandler extends SimpleTokenSetQuoteHandler
 {
 	public PerlQuoteHandler()
 	{
-		super(PerlElementTypes.QUOTE, PerlElementTypes.QUOTE_SINGLE, PerlElementTypes.QUOTE_DOUBLE, PerlElementTypes.QUOTE_TICK);
+		super(PerlElementTypes.QUOTE_SINGLE_OPEN, PerlElementTypes.QUOTE_DOUBLE_OPEN, PerlElementTypes.QUOTE_TICK_OPEN);
 	}
 }

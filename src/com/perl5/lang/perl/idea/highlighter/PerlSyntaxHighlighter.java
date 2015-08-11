@@ -129,10 +129,15 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.REGEX_TOKEN, new TextAttributesKey[]{PERL_REGEX_TOKEN});
 		attributesMap.put(PerlElementTypes.REGEX_MODIFIER, new TextAttributesKey[]{PERL_KEYWORD});
 
-		attributesMap.put(PerlElementTypes.QUOTE, new TextAttributesKey[]{PERL_SQ_STRING});
 		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE, new TextAttributesKey[]{PERL_DQ_STRING});
 		attributesMap.put(PerlElementTypes.QUOTE_SINGLE, new TextAttributesKey[]{PERL_SQ_STRING});
 		attributesMap.put(PerlElementTypes.QUOTE_TICK, new TextAttributesKey[]{PERL_DX_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE_OPEN, new TextAttributesKey[]{PERL_DQ_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_SINGLE_OPEN, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_TICK_OPEN, new TextAttributesKey[]{PERL_DX_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE_CLOSE, new TextAttributesKey[]{PERL_DQ_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_SINGLE_CLOSE, new TextAttributesKey[]{PERL_SQ_STRING});
+		attributesMap.put(PerlElementTypes.QUOTE_TICK_CLOSE, new TextAttributesKey[]{PERL_DX_STRING});
 
 		attributesMap.put(PerlElementTypes.SEMICOLON, new TextAttributesKey[]{PERL_SEMICOLON});
 		attributesMap.put(PerlElementTypes.LEFT_BRACE, new TextAttributesKey[]{PERL_BRACE});

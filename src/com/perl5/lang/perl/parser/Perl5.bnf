@@ -188,8 +188,14 @@ limitations under the License.
 
     OPERATOR_FILETEST="OPERATOR_FILETEST"
 
+    REGEX_QUOTE="REGEX_QUOTE"
+    REGEX_QUOTE_X="REGEX_QUOTE_X"
+
     REGEX_QUOTE_OPEN="REGEX_QUOTE_OPEN"
+    REGEX_QUOTE_OPEN_X="REGEX_QUOTE_OPEN_X"
+
     REGEX_QUOTE_CLOSE="REGEX_QUOTE_CLOSE"
+
     REGEX_MODIFIER="REGEX_MODIFIER"
     REGEX_TOKEN="REGEX_TOKEN"
 
@@ -208,10 +214,17 @@ limitations under the License.
 
     SEMICOLON=";";
 
-    QUOTE="\""
-    QUOTE_DOUBLE="\""
-    QUOTE_SINGLE="'"
-    QUOTE_TICK="`"
+    QUOTE_DOUBLE="QUOTE_DOUBLE"
+    QUOTE_DOUBLE_OPEN="QUOTE_DOUBLE_OPEN"
+    QUOTE_DOUBLE_CLOSE="QUOTE_DOUBLE_CLOSE"
+
+    QUOTE_SINGLE="QUOTE_SINGLE"
+    QUOTE_SINGLE_OPEN="QUOTE_SINGLE_OPEN"
+    QUOTE_SINGLE_CLOSE="QUOTE_SINGLE_CLOSE"
+
+    QUOTE_TICK="QUOTE_TICK"
+    QUOTE_TICK_OPEN="QUOTE_TICK_OPEN"
+    QUOTE_TICK_CLOSE="QUOTE_TICK_CLOSE"
 
     // custom tokens
     IDENTIFIER="IDENTIFIER"
@@ -919,12 +932,18 @@ private array_constant ::=
 
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
-private string_qq ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QQ string_quoted_interpolated {pin=2}
-private string_quoted ::= QUOTE [STRING_CONTENT] QUOTE
-private string_quoted_interpolated ::= QUOTE [string_content_qq] QUOTE
 string_dq ::=
-    QUOTE_DOUBLE [string_content_qq] QUOTE_DOUBLE
-     | string_qq
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] QUOTE_DOUBLE_OPEN [string_content_qq] QUOTE_DOUBLE_CLOSE
+  | <<parseNetstedInterpolatedString QUOTE_DOUBLE>>
+
+string_xq ::=
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QX ] QUOTE_TICK_OPEN [string_content_qq] QUOTE_TICK_CLOSE
+  | <<parseNetstedInterpolatedString QUOTE_TICK>>
+
+string_sq ::=
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] QUOTE_SINGLE_OPEN [STRING_CONTENT] QUOTE_SINGLE_CLOSE
+  | STRING_CONTENT
+  | <<parseNestedSQString>> // nested sq string
 
 private string_content_qq ::= string_content_element +
 private string_content_element ::=
@@ -938,20 +957,9 @@ private string_content_element ::=
   | array_index_variable
   | <<convertToStringContent>>
 
-string_sq ::=
-    QUOTE_SINGLE [<<parseSQStringContent>>] QUOTE_SINGLE
-    | string_q
-    | STRING_CONTENT
-private string_q ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_Q string_quoted {pin=2}
-
-string_xq ::=
-    QUOTE_TICK [string_content_qq] QUOTE_TICK
-    | string_qx
-private string_qx ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QX string_quoted_interpolated {pin=2}
-
 heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
 
-string_list ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QW QUOTE STRING_CONTENT * QUOTE {pin=2}
+string_list ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QW QUOTE_SINGLE_OPEN STRING_CONTENT * QUOTE_SINGLE_CLOSE {pin=2}
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable

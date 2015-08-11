@@ -204,4 +204,19 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 		}
 	}
 
+	// fixme this must be done using skeleton
+	public void resetInternals()
+	{
+		lastTokenType = null;
+		lastToken = null;
+		lastSignificantTokenType = null;
+		lastSignificantToken = null;
+		lastUnbraceTokenType = null;
+		lastUnbraceToken = null;
+		lastUnparenTokenType = null;
+		lastUnparenToken = null;
+		preparsedTokensList.clear();
+	}
+
+
 }

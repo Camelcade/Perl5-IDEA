@@ -80,11 +80,33 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
 %%
 
 <LEX_ESCAPED> {
-    .   {
+    [^]   {
         yybegin(YYINITIAL);
         return STRING_CONTENT;
     }
 }
+
+"->" {return OPERATOR_DEREFERENCE;}
+"<" {return OPERATOR_LT_NUMERIC;}
+">" {return OPERATOR_GT_NUMERIC;}
+"," {return OPERATOR_COMMA;}
+"." {return OPERATOR_CONCAT;}
+"!" {return OPERATOR_NOT;}
+"?"  {return QUESTION;}
+":"  {return COLON;}
+";"  {return SEMICOLON;}
+"+" {return OPERATOR_PLUS;}
+"-" {return OPERATOR_MINUS;}
+"/"  {return OPERATOR_DIV;}
+"*" {return OPERATOR_MUL;}
+"%" {return OPERATOR_MOD;}
+"&" {return OPERATOR_BITWISE_AND;}
+
+"|" {return OPERATOR_BITWISE_OR;}
+"^" {return OPERATOR_BITWISE_XOR;}
+"~" {return OPERATOR_BITWISE_NOT;}
+
+"=" {return OPERATOR_ASSIGN;}
 
 "@"     {return SIGIL_ARRAY;}
 "$#"    {return SIGIL_SCALAR_INDEX;}
@@ -93,16 +115,17 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
 "}"     {return RIGHT_BRACE;}
 "["     {return LEFT_BRACKET;}
 "]"     {return RIGHT_BRACKET;}
+
+"`"     {return QUOTE_TICK;}
 "'"     {return QUOTE_SINGLE;}
 "\""     {return QUOTE_DOUBLE;}
 "\\"    {
     yybegin(LEX_ESCAPED);
-    return STRING_CONTENT;
+    return OPERATOR_REFERENCE;
 }
 
 {NUMBER_INT_SIMPLE} {return NUMBER_SIMPLE;}
 {NUMBER} {return NUMBER;}
-"->" {return OPERATOR_DEREFERENCE;}
 
 {BAREWORD_MINUS} {return parseBarewordMinus();}
 {CAPPED_VARIABLE_NAME} {return IDENTIFIER;}

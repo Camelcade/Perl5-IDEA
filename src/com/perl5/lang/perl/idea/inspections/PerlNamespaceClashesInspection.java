@@ -44,7 +44,7 @@ public class PerlNamespaceClashesInspection extends PerlInspection
 
 				// fixme we should check that this is not in SDK
 				if (namespaceElement.isBuiltin())
-					registerProblem(holder, o, "Namespace definition clashes with built-in namespace");
+					registerProblem(holder, namespaceElement, "Namespace definition clashes with built-in namespace");
 
 			}
 		};

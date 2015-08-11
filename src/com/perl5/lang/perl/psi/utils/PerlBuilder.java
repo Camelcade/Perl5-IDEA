@@ -40,6 +40,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	protected HashSet<String> KNOWN_PACKAGES = new HashSet<String>(PerlPackageUtil.BUILT_IN_ALL);
 	protected boolean recoveringStatement = false;
 	protected int bracesLevel = 0;
+	protected boolean currentStringState = false;
 	boolean indexSnapshotDone = false;
 	Project myProject = getProject();
 
@@ -159,4 +160,13 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		bracesLevel--;
 	}
 
+	public boolean getCurrentStringState()
+	{
+		return currentStringState;
+	}
+
+	public void setCurrentStringState(boolean currentStringState)
+	{
+		this.currentStringState = currentStringState;
+	}
 }

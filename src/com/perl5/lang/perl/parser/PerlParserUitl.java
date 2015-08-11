@@ -168,10 +168,10 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			NUMBER,
 			NUMBER_SIMPLE
 	);
-	protected static final TokenSet STRING_STOP_TOKENS = TokenSet.create(
-			QUOTE_DOUBLE,
-			QUOTE_TICK,
-			QUOTE
+	protected static final TokenSet CLOSE_QUOTES = TokenSet.create(
+			QUOTE_DOUBLE_CLOSE,
+			QUOTE_TICK_CLOSE,
+			QUOTE_SINGLE_CLOSE
 	);
 	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
@@ -971,10 +971,19 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean convertToStringContent(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
-		if (tokenType != null && !STRING_STOP_TOKENS.contains(tokenType))
+		assert b instanceof PerlBuilder;
+		if (tokenType != null
+				&& !CLOSE_QUOTES.contains(tokenType)
+				&& !(
+				((PerlBuilder) b).getCurrentStringState()
+						&& (tokenType == QUOTE_DOUBLE || tokenType == QUOTE_TICK)
+						&& b.lookAhead(1) == RIGHT_BRACE
+		) // we need to check that we are in the nested string
+				)
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+//			m.drop();
 			m.collapse(STRING_CONTENT);
 			return true;
 		}
@@ -988,18 +997,61 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean parseSQStringContent(PsiBuilder b, int l)
+	public static boolean parseNestedSQString(PsiBuilder b, int l)
 	{
-		if (consumeToken(b, STRING_CONTENT))
-			return true;
-		else if (b.getTokenType() == IDENTIFIER && b.lookAhead(1) == QUOTE_SINGLE)
+		IElementType tokenType;
+
+		if (b.rawLookup(-1) == LEFT_BRACE && consumeToken(b, QUOTE_SINGLE))
 		{
 			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(STRING_CONTENT);
-			return true;
+
+			while ((tokenType = b.getTokenType()) != null)
+			{
+				if (CLOSE_QUOTES.contains(tokenType))    // reached end of outer string
+				{
+					m.drop();
+					return false;
+				} else if (tokenType == QUOTE_SINGLE)    // reached end of inner string
+				{
+					m.collapse(STRING_CONTENT);
+
+					if (b.lookAhead(1) == RIGHT_BRACE)
+						return consumeToken(b, QUOTE_SINGLE);
+				}
+				b.advanceLexer();
+			}
+
+			m.drop();
 		}
 		return false;
 	}
+
+	/**
+	 * Magic for nested string opener
+	 *
+	 * @param b         PerlPraser
+	 * @param l         paring level
+	 * @param tokenType opening quote type (atm only QQ)
+	 * @return parsing result
+	 */
+	public static boolean parseNetstedInterpolatedString(PsiBuilder b, int l, IElementType tokenType)
+	{
+		// [string_content_qq] QUOTE_DOUBLE &RIGHT_BRACE// nested qq string
+		if (b.rawLookup(-1) == LEFT_BRACE && consumeToken(b, tokenType))
+		{
+			assert b instanceof PerlBuilder;
+			boolean oldState = ((PerlBuilder) b).getCurrentStringState();
+			((PerlBuilder) b).setCurrentStringState(true);
+
+			PerlParser.string_content_qq(b, l);
+
+			((PerlBuilder) b).setCurrentStringState(oldState);
+
+			return (consumeToken(b, tokenType));    // && b.getTokenType() == RIGHT_BRACE  fixme not sure we should check for closing brace here. We could leave this to the outer element
+		}
+
+		return false;
+	}
+
 
 }

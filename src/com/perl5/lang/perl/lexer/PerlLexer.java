@@ -193,7 +193,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 * Regex processor qr{} m{} s{}{}
 	 **/
 	String regexCommand = null;
-	private boolean forceQuote = false;
 
 	public PerlLexer(Project project)
 	{
@@ -247,11 +246,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			} else if (currentState == LEX_QUOTE_LIKE_WORDS)
 				return captureQuoteLikeWords();
 				// capture string content from "" '' `` q qq qx
-			else if (currentState == LEX_QUOTE_LIKE_CHARS || currentState == LEX_QUOTE_LIKE_CHARS_QQ)
+			else if (currentState == LEX_QUOTE_LIKE_CHARS || currentState == LEX_QUOTE_LIKE_CHARS_QQ || currentState == LEX_QUOTE_LIKE_CHARS_QX)
 				return captureQuoteLikeChars();
 				// closing quote of string
-			else if (currentState == LEX_QUOTE_LIKE_CLOSER)
+			else if (currentState == LEX_QUOTE_LIKE_CLOSER || currentState == LEX_QUOTE_LIKE_CLOSER_QQ || currentState == LEX_QUOTE_LIKE_CLOSER_QX)
 				return quoteLikeCloser(tokenStart);
+			else if (currentState == LEX_TRANS_CLOSER)
+				return processTransCloser();
 				// capture __DATA__ __END__
 				// capture pod
 			else if (buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
@@ -270,8 +271,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					buffer.charAt(tokenStart) == '#'
 							// fixme these should be in tokenset
 							&& (currentState != LEX_QUOTE_LIKE_LIST_OPENER || !allowSharpQuote)
-							&& (currentState != LEX_QUOTE_LIKE_OPENER && currentState != LEX_QUOTE_LIKE_CLOSER || !allowSharpQuote)
-							&& (currentState != LEX_TRANS_OPENER && currentState != LEX_TRANS_CLOSER || !allowSharpQuote)
+							&& (
+							currentState != LEX_QUOTE_LIKE_OPENER
+									&& currentState != LEX_QUOTE_LIKE_OPENER_QQ
+									&& currentState != LEX_QUOTE_LIKE_OPENER_QX
+									|| !allowSharpQuote)
+							&& (currentState != LEX_TRANS_OPENER || !allowSharpQuote)
 							&& (currentState != LEX_TRANS_CHARS)
 							&& (currentState != LEX_REGEX_OPENER)
 					)
@@ -334,7 +339,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 				currentWordStart = currentPosition;
 				currentPosition++;
-				currentWordType = QUOTE;
+				currentWordType = QUOTE_SINGLE_CLOSE;
 				break;
 			} else if (currentChar == '\n' || !isEscaped && Character.isSpaceChar(currentChar))    // atm no difference between space and \n tokens; \n unescapable
 			{
@@ -380,8 +385,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		int tokenStart = getTokenEnd();
 		int bufferEnd = buffer.length();
 		int currentPosition = tokenStart;
+		int currentState = yystate();
 
-		boolean parseString = yystate() == LEX_QUOTE_LIKE_CHARS_QQ;
+		boolean parseString = currentState == LEX_QUOTE_LIKE_CHARS_QQ || currentState == LEX_QUOTE_LIKE_CHARS_QX;
 		boolean containsSigils = false;
 
 		boolean isEscaped = false;
@@ -416,7 +422,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			popState();
 		else
 			// switch to closer lex state
-			yybegin(LEX_QUOTE_LIKE_CLOSER);
+			if (currentState == LEX_QUOTE_LIKE_CHARS)
+				yybegin(LEX_QUOTE_LIKE_CLOSER);
+			else if (currentState == LEX_QUOTE_LIKE_CHARS_QQ)
+				yybegin(LEX_QUOTE_LIKE_CLOSER_QQ);
+			else
+				yybegin(LEX_QUOTE_LIKE_CLOSER_QX);
 
 		if (currentPosition > tokenStart)
 			if (parseString && containsSigils)
@@ -566,10 +577,19 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 */
 	IElementType quoteLikeCloser(int tokenStart)
 	{
+		int currentState = yystate();
 		popState();
 		setTokenStart(tokenStart);
 		setTokenEnd(tokenStart + 1);
-		return getQuoteToken(getBuffer().charAt(tokenStart));
+
+		if (currentState == LEX_QUOTE_LIKE_CLOSER)
+			return QUOTE_SINGLE_CLOSE;
+		else if (currentState == LEX_QUOTE_LIKE_CLOSER_QQ)
+			return QUOTE_DOUBLE_CLOSE;
+		else if (currentState == LEX_QUOTE_LIKE_CLOSER_QX)
+			return QUOTE_TICK_CLOSE;
+		else
+			throw new RuntimeException("Uknown lexical state for closing quote");
 	}
 
 	/**
@@ -655,16 +675,14 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE));
 
 				currentPosition += elementLength;
-				forceQuote = false;
-				IElementType quoteType = getQuoteToken(m.group(2).charAt(0));
 
-				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, quoteType));
+				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, getOpenQuoteToken(m.group(2).charAt(0))));
 				currentPosition++;
 
 				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
 				currentPosition += heredocMarker.length();
 
-				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, quoteType));
+				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, getCloseQuoteToken(m.group(2).charAt(0))));
 			} else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
 				return OPERATOR_SHIFT_LEFT;
 			else    // bareword heredoc
@@ -811,16 +829,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public void reset(CharSequence buf, int start, int end, int initialState)
 	{
 		super.reset(buf, start, end, initialState);
-
-		lastTokenType = null;
-		lastToken = null;
-		lastSignificantTokenType = null;
-		lastSignificantToken = null;
-		lastUnbraceTokenType = null;
-		lastUnbraceToken = null;
-		lastUnparenTokenType = null;
-		lastUnparenToken = null;
-		preparsedTokensList.clear();
+		resetInternals();
 //		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
 	}
 
@@ -1073,7 +1082,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public IElementType processTransQuote()
 	{
 		charOpener = yytext().charAt(0);
-
 		if (charOpener == '#' && !allowSharpQuote)
 		{
 			yypushback(1);
@@ -1109,6 +1117,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	public IElementType processTransCloser()
 	{
+		setTokenStart(getNextTokenStart());
+		setTokenEnd(getTokenStart() + 1);
 		if (currentSectionNumber == 0) // first section
 		{
 			currentSectionNumber++;
@@ -1137,14 +1147,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		pushState();
 		if (tokenType == RESERVED_Q)
 			yybegin(LEX_QUOTE_LIKE_OPENER);
-		else
+		else if (tokenType == RESERVED_QQ)
 			yybegin(LEX_QUOTE_LIKE_OPENER_QQ);
+		else
+			yybegin(LEX_QUOTE_LIKE_OPENER_QX);
 	}
 
 	public IElementType processQuoteLikeQuote()
 	{
 		charOpener = yytext().charAt(0);
-		forceQuote = true;
 
 		// fixme comment should work here i belive
 		if (charOpener == '#' && !allowSharpQuote)
@@ -1154,13 +1165,26 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			return null;
 		} else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
 
-		if (!isLastToken())
-			if (yystate() == LEX_QUOTE_LIKE_OPENER)
-				yybegin(LEX_QUOTE_LIKE_CHARS);
-			else
-				yybegin(LEX_QUOTE_LIKE_CHARS_QQ);
+		int currentState = yystate();
+		boolean isLastToken = isLastToken();
 
-		return QUOTE;
+		if (currentState == LEX_QUOTE_LIKE_OPENER)
+		{
+			if (!isLastToken)
+				yybegin(LEX_QUOTE_LIKE_CHARS);
+			return QUOTE_SINGLE_OPEN;
+		} else if (currentState == LEX_QUOTE_LIKE_OPENER_QQ)
+		{
+			if (!isLastToken)
+				yybegin(LEX_QUOTE_LIKE_CHARS_QQ);
+			return QUOTE_DOUBLE_OPEN;
+		} else if (currentState == LEX_QUOTE_LIKE_OPENER_QX)
+		{
+			if (!isLastToken)
+				yybegin(LEX_QUOTE_LIKE_CHARS_QX);
+			return QUOTE_TICK_OPEN;
+		} else
+			throw new RuntimeException("Unknown lexical state for quote opener");
 	}
 
 	/**
@@ -1169,7 +1193,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public IElementType processStringOpener()
 	{
 		charOpener = charCloser = yytext().charAt(0);
-		forceQuote = false;
 
 		if (!(SIGILS_TOKENS.contains(lastTokenType))) // this is string, not variable name $", $', $`
 		{
@@ -1180,11 +1203,25 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 			isEscaped = false;
 			pushState();
-			if (!isLastToken())
-				if (charOpener == '"' || charOpener == '`')
+			boolean isLastToken = isLastToken();
+
+			if (charOpener == '"')
+			{
+				if (!isLastToken)
 					yybegin(LEX_QUOTE_LIKE_CHARS_QQ);
+				return QUOTE_DOUBLE_OPEN;
+			} else if (charOpener == '`')
+			{
+				if (!isLastToken)
+					yybegin(LEX_QUOTE_LIKE_CHARS_QX);
+				return QUOTE_TICK_OPEN;
+			}
 				else
+			{
+				if (!isLastToken)
 					yybegin(LEX_QUOTE_LIKE_CHARS);
+				return QUOTE_SINGLE_OPEN;
+			}
 		}
 
 		return getQuoteToken(charOpener);
@@ -1192,17 +1229,38 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	public IElementType getQuoteToken(char quoteCharacter)
 	{
-		if (forceQuote) // fixme this must be refactored
-			return QUOTE;
-		else if (quoteCharacter == '"')
+		if (quoteCharacter == '"')
 			return QUOTE_DOUBLE;
 		else if (quoteCharacter == '`')
 			return QUOTE_TICK;
 		else if (quoteCharacter == '\'')
 			return QUOTE_SINGLE;
 		else
-			return QUOTE;
+			throw new RuntimeException("unknown quote type " + quoteCharacter);
+	}
 
+	public IElementType getOpenQuoteToken(char quoteCharacter)
+	{
+		if (quoteCharacter == '"')
+			return QUOTE_DOUBLE_OPEN;
+		else if (quoteCharacter == '`')
+			return QUOTE_TICK_OPEN;
+		else if (quoteCharacter == '\'')
+			return QUOTE_SINGLE_OPEN;
+		else
+			throw new RuntimeException("Unknown open quote type " + quoteCharacter);
+	}
+
+	public IElementType getCloseQuoteToken(char quoteCharacter)
+	{
+		if (quoteCharacter == '"')
+			return QUOTE_DOUBLE_CLOSE;
+		else if (quoteCharacter == '`')
+			return QUOTE_TICK_CLOSE;
+		else if (quoteCharacter == '\'')
+			return QUOTE_SINGLE_CLOSE;
+		else
+			throw new RuntimeException("Unknown close quote type " + quoteCharacter);
 	}
 
 	/**
@@ -1229,7 +1287,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		yybegin(LEX_QUOTE_LIKE_WORDS);
 
-		return QUOTE;
+		return QUOTE_SINGLE_OPEN;
 	}
 
 	public boolean waitingHereDoc()

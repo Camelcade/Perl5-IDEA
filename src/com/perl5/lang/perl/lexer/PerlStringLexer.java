@@ -38,13 +38,12 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	public void reset(CharSequence buffer, int start, int end, int initialState)
 	{
 		super.reset(buffer, start, end, initialState);
-		preparsedTokensList.clear();
+		resetInternals();
 	}
 
 	@Override
 	public IElementType advance() throws IOException
 	{
-
 		return super.advance();
 	}
 
