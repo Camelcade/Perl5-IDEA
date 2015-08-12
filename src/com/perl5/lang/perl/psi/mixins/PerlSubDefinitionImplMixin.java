@@ -186,7 +186,8 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 	@Override
 	public ItemPresentation getPresentation()
 	{
-		return new PerlItemPresentationSimple(this, "Sub definition");
+		return new PerlItemPresentationSimple(this, getSubName());
 	}
+
 
 }

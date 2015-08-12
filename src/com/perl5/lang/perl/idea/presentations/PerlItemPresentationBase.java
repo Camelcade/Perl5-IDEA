@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.presentations;
 
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -45,14 +44,11 @@ public abstract class PerlItemPresentationBase implements ItemPresentation
 		PsiFile file = myElement.getContainingFile();
 		Document document = PsiDocumentManager.getInstance(myElement.getProject()).getCachedDocument(file);
 
+		String suffix = "";
 		if (document != null)
-		{
+			suffix = ", line " + document.getLineNumber(myElement.getTextOffset()) + 1;
 
-			int lineNumber = document.getLineNumber(myElement.getTextOffset()) + 1;
-			VirtualFile virtualFile = file.getVirtualFile();
-			if (virtualFile != null) return "; line " + lineNumber + "; " + virtualFile.getPath();
-		}
-		return null;
+		return getElement().getContainingFile().getName() + suffix;
 	}
 
 	@Nullable
