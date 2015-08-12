@@ -173,6 +173,16 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			QUOTE_TICK_CLOSE,
 			QUOTE_SINGLE_CLOSE
 	);
+	protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
+			REGEX_QUOTE,
+			REGEX_QUOTE_CLOSE,
+			REGEX_QUOTE_E
+	);
+	protected static final TokenSet REGEX_MERGE_STOP_TOKENS = TokenSet.orSet(
+			REGEX_BLOCK_CLOSER,
+			TokenSet.create(
+					SIGIL_SCALAR, SIGIL_ARRAY
+			));
 	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
 			EMBED_MARKER_SEMICOLON,
@@ -1031,7 +1041,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-
 	/**
 	 * Converts everything till $, @ or close brace to regex tokens;
 	 *
@@ -1039,33 +1048,22 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean joinRegexTokens(PsiBuilder b, int l, boolean forceSigilConsumption) {
-		PsiBuilder.Marker m = b.mark();
-		boolean isEmpty = true;
-		while (true) {
+	public static boolean convertRegexToken(PsiBuilder b, int l)
+	{
 
-			IElementType tokenType = b.getTokenType();
-			boolean isSigil = tokenType == SIGIL_ARRAY || tokenType == SIGIL_SCALAR || tokenType == SIGIL_SCALAR_INDEX;
-			boolean isCloseQuote = tokenType == REGEX_QUOTE || tokenType == REGEX_QUOTE_CLOSE;
+		IElementType tokenType = b.getTokenType();
+		if (!REGEX_BLOCK_CLOSER.contains(tokenType))
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
 
-			if (tokenType != null && !isCloseQuote && (!isSigil || forceSigilConsumption)) {
-				if (forceSigilConsumption && isSigil)
-					forceSigilConsumption = false;
-
-				if (isEmpty)
-					isEmpty = false;
-
+			while (!REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType()))
 				b.advanceLexer();
-			} else
-				break;
-		}
 
-		if (isEmpty)
-			m.drop();
-		else
 			m.collapse(REGEX_TOKEN);
-
-		return !isEmpty;
+			return true;
+		}
+		return false;
 	}
 
 

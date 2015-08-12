@@ -200,14 +200,17 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		myProject = project;
 	}
 
-	public static List<CustomToken> lexString(PerlStringLexer initedStringLexer) {
+	public static List<CustomToken> lexString(PerlStringLexer initedStringLexer)
+	{
 		ArrayList<CustomToken> result = new ArrayList<CustomToken>();
 
-		try {
+		try
+		{
 			IElementType tokenType;
 			while ((tokenType = initedStringLexer.advance()) != null)
 				result.add(new CustomToken(initedStringLexer.getTokenStart(), initedStringLexer.getTokenEnd(), tokenType));
-		} catch (IOException e) {
+		} catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 
@@ -463,7 +466,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	}
 
-	protected PerlStringLexer getStringLexer() {
+	protected PerlStringLexer getStringLexer()
+	{
 		if (myStringLexer == null)
 			myStringLexer = new PerlStringLexer();
 
@@ -1042,7 +1046,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			else if (buffer.charAt(modifiersEnd) == 'x')    // mark as extended
 				isExtended = true;
 			else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
+			{
 				isEvaluated = true;
+				if (secondBlockOpener != null)
+					secondBlockOpener.setTokenType(REGEX_QUOTE_OPEN_E);
+			}
 
 			modifierTokens.add(new CustomToken(modifiersEnd, modifiersEnd + 1, REGEX_MODIFIER));
 
@@ -1059,6 +1067,11 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 			if (secondBlockOpener != null)
 				preparsedTokensList.add(secondBlockOpener);
+			else if (isEvaluated)
+				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE_E);
+			else
+				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE);
+
 
 			// parse block 2
 			if (isEvaluated)
@@ -1225,8 +1238,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				if (!isLastToken)
 					yybegin(LEX_QUOTE_LIKE_CHARS_QX);
 				return QUOTE_TICK_OPEN;
-			}
-				else
+			} else
 			{
 				if (!isLastToken)
 					yybegin(LEX_QUOTE_LIKE_CHARS);

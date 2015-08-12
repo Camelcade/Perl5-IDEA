@@ -39,6 +39,8 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	{
 		super.reset(buffer, start, end, initialState);
 		resetInternals();
+//		if( end > 0 )
+//			System.err.println("Reset buffer to: " + buffer.subSequence(start, end).toString());
 	}
 
 	@Override

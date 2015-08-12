@@ -753,7 +753,21 @@ private regex_term ::=
 compile_regex ::= [PACKAGE_CORE_IDENTIFIER]  RESERVED_QR match_regex_body {pin=2}
 match_regex ::= [PACKAGE_CORE_IDENTIFIER]  [RESERVED_M] match_regex_body
 private match_regex_body ::= REGEX_QUOTE_OPEN [perl_regex] REGEX_QUOTE_CLOSE [perl_regex_modifiers]
-replacement_regex ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_S REGEX_QUOTE_OPEN [perl_regex] REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] [perl_regex | regex_code] REGEX_QUOTE_CLOSE [perl_regex_modifiers] {pin=2}
+
+replacement_regex ::=
+    [PACKAGE_CORE_IDENTIFIER] RESERVED_S
+    replacement_match
+    replacement_replace
+    REGEX_QUOTE_CLOSE
+    [perl_regex_modifiers]
+    {pin=2}
+
+private replacement_match ::= REGEX_QUOTE_OPEN [perl_regex]
+private replacement_replace ::= replacement_replace_regex | replacement_replace_code
+
+private replacement_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [perl_regex]
+private replacement_replace_code ::= {REGEX_QUOTE_E | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_E} [regex_code]
+
 private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
@@ -761,9 +775,8 @@ perl_regex_modifiers ::= REGEX_MODIFIER +
 perl_regex ::= perl_regex_item +
 
 private perl_regex_item ::=
-  <<joinRegexTokens false>>
-  | interpolated_constructs
-  | <<joinRegexTokens true>>
+  interpolated_constructs
+  | <<convertRegexToken>>
 
 tr_regex ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_TR|RESERVED_Y) REGEX_QUOTE_OPEN tr_searchlist REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] tr_replacementlist REGEX_QUOTE_CLOSE [tr_modifiers] {pin=2}
 tr_searchlist ::= STRING_CONTENT

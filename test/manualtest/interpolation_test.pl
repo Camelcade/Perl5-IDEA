@@ -15,7 +15,7 @@ $abc =~ /test $abc{test} test/;
 $abc =~ /test $abc{'test'} test/;
 $abc =~ /test $abc{"test"} test/;
 $abc =~ /test $abc{`test`} test/;
-$abc =~ /test $abc{$abc} test/;
+$abc =~ /te (?# This is a comment) st $abc{$abc} test/;
 $abc =~ /test $abc{$abc[$abc]} test/;
 $abc =~ /test $abc{$abc{$abc}} test/;
 
@@ -51,6 +51,34 @@ $abc =~ s/test $abc{`test`} test/test $abc{`test`} test/;
 $abc =~ s/test $abc{$abc} test/test $abc{$abc} test/;
 $abc =~ s/test $abc{$abc[$abc]} test/test $abc{$abc[$abc]} test/;
 $abc =~ s/test $abc{$abc{$abc}} test/test $abc{$abc{$abc}} test/;
+
+$abc =~ s/test $abc test/test $abc/e;
+$abc =~ s/test @abc test/test @abc/e;
+$abc =~ s/test $abc[0] test/test $abc[0]/e;
+$abc =~ s/test $abc{test} test/test $abc{test}/e;
+$abc =~ s/test $abc{'test'} test/test $abc{'test'}/e;
+$abc =~ s/test $abc{"test"} test/test $abc{"test"}/e;
+$abc =~ s/test $abc{`test`} test/test $abc{`test`}/e;
+$abc =~ s/test $abc{$abc} test/test $abc{$abc}/e;
+$abc =~ s/test $abc{$abc[$abc]} test/test $abc{$abc[$abc]}/e;
+$abc =~ s/test $abc{$abc{$abc}} test/test $abc{$abc{$abc}}/e;
+
+$abc =~ s/
+               test
+               $abc
+               test  /
+               test
+               $abc test
+   /x;
+$abc =~ s/test @abc test/test @abc test/x;
+$abc =~ s/test $abc[0] test/test $abc[0] test/x;
+$abc =~ s/test $abc{test} test/test $abc{test} test/x;
+$abc =~ s/test $abc{'test'} test/test $abc{'test'} test/x;
+$abc =~ s/test $abc{"test"} test/test $abc{"test"} test/x;
+$abc =~ s/test $abc{`test`} test/test $abc{`test`} test/x;
+$abc =~ s/test $abc{$abc} test/test $abc{$abc} test/x;
+$abc =~ s/test $abc{$abc[$abc]} test/test $abc{$abc[$abc]} test/x;
+$abc =~ s/test $abc{$abc{$abc}} test/test $abc{$abc{$abc}} test/x;
 
 $abc =~ s{test $abc test}
         {test $abc test};
@@ -154,10 +182,15 @@ $abc =~ s{test $abc{`test`} test}
         {test $abc{`test`} test}x;
 $abc =~ s{test $abc{$abc} test}
         {test $abc{$abc} test}x;
-$abc =~ s{test $abc{$abc[$abc]} test}
-        {test $abc{$abc[$abc]} test}x;
+$abc =~ s{
+            test $abc{$abc[$abc]} test
+        }{
+            test $abc{$abc[$abc]} test
+        }x;
 $abc =~ s{test $abc{$abc{$abc}} test}
         {test $abc{$abc{$abc}} test}x;
+
+$abc = 1 ? 1 : 0;
 
 $abc =~ s{test $abc test}
         {print $abc}ex;
@@ -276,3 +309,6 @@ say qx/test $abc{`key`} test/;
 say qx/test $abc{`complex key`} test/;
 say qx/test $$abc_ref test/;
 say qx/test @$abc_aref test/;
+
+
+
