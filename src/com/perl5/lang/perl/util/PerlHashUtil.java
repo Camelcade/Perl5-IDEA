@@ -59,7 +59,7 @@ public class PerlHashUtil implements PerlElementTypes
 	 * @param canonicalName canonical variable name package::name
 	 * @return Collection of found definitions
 	 */
-	public static Collection<PerlVariable> findGlobalHashDefinitions(Project project, String canonicalName)
+	public static Collection<PerlVariable> getGlobalHashDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
 		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_HASH, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariable.class);
@@ -71,7 +71,7 @@ public class PerlHashUtil implements PerlElementTypes
 	 * @param project project to search in
 	 * @return collection of variable canonical names
 	 */
-	public static Collection<String> listDefinedGlobalHahses(Project project)
+	public static Collection<String> getDefinedGlobalHashNames(Project project)
 	{
 		return StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_HASH, project);
 	}

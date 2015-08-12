@@ -25,10 +25,12 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+
 /**
  * GoToClassContributor looks up namespaces (packages names) - windows shortcut Ctrl+N
  */
-public class PerlGoToClassContributor implements ChooseByNameContributor, GotoClassContributor
+public class PerlGoToNamespaceDefinitionContributor implements ChooseByNameContributor, GotoClassContributor
 {
 	@Nullable
 	@Override
@@ -55,14 +57,7 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
 	@Override
 	public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean b)
 	{
-		PsiPerlNamespaceDefinition[] nameSpaces = PerlPackageUtil.getNamespaceDefinitions(project, packageName).toArray(new PsiPerlNamespaceDefinition[]{});
-		NavigationItem[] navigationItems = new NavigationItem[nameSpaces.length];
-		for (int i = 0; i < nameSpaces.length; i++)
-		{
-			PsiPerlNamespaceDefinition nameSpace = nameSpaces[i];
-			navigationItems[i] = new PerlNameSpaceNavigationItem(project, nameSpace);
-		}
-
-		return navigationItems;
+		Collection<PsiPerlNamespaceDefinition> result = PerlPackageUtil.getNamespaceDefinitions(project, packageName);
+		return result.toArray(new NavigationItem[result.size()]);
 	}
 }

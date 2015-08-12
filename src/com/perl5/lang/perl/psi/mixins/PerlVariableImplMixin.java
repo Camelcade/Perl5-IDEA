@@ -30,7 +30,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.presentations.PerlVariablePresentation;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -312,7 +312,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public ItemPresentation getPresentation()
 	{
-		return new PerlVariablePresentation(this);
+		return new PerlItemPresentationSimple(this, getFirstChild().getText() + getName());
 	}
 
 	@Nullable
@@ -352,17 +352,17 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 
 		if (myType == PerlVariableType.SCALAR)
 		{
-			for (PerlVariable variable : PerlScalarUtil.findGlobalScalarDefinitions(getProject(), getCanonicalName()))
+			for (PerlVariable variable : PerlScalarUtil.getGlobalScalarDefinitions(getProject(), getCanonicalName()))
 				if (!variable.equals(this))
 					result.add(variable);
 		} else if (myType == PerlVariableType.ARRAY)
 		{
-			for (PerlVariable variable : PerlArrayUtil.findGlobalArrayDefinitions(getProject(), getCanonicalName()))
+			for (PerlVariable variable : PerlArrayUtil.getGlobalArrayDefinitions(getProject(), getCanonicalName()))
 				if (!variable.equals(this))
 					result.add(variable);
 		} else if (myType == PerlVariableType.HASH)
 		{
-			for (PerlVariable variable : PerlHashUtil.findGlobalHashDefinitions(getProject(), getCanonicalName()))
+			for (PerlVariable variable : PerlHashUtil.getGlobalHashDefinitions(getProject(), getCanonicalName()))
 				if (!variable.equals(this))
 					result.add(variable);
 		}

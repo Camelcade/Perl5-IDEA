@@ -46,7 +46,7 @@ public abstract class PerlItemPresentationBase implements ItemPresentation
 
 		String suffix = "";
 		if (document != null)
-			suffix = ", line " + document.getLineNumber(myElement.getTextOffset()) + 1;
+			suffix = ", line " + (document.getLineNumber(myElement.getTextOffset()) + 1);
 
 		return getElement().getContainingFile().getName() + suffix;
 	}

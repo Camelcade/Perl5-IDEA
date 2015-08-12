@@ -62,28 +62,28 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 		if (perlVariable instanceof PsiPerlScalarVariable)
 		{
 			// global scalars
-			for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))
+			for (String name : PerlScalarUtil.getDefinedGlobalScalarNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
 
 			// global arrays
-			for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+			for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
 
 			// global hashes
-			for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+			for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
 		} else if (perlVariable instanceof PerlGlobVariable)
 		{
 			// global scalars
-			for (String name : PerlScalarUtil.listDefinedGlobalScalars(project))
+			for (String name : PerlScalarUtil.getDefinedGlobalScalarNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
 
 			// global arrays
-			for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+			for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
 
 			// global hashes
-			for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+			for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
 
 			// globs
@@ -92,21 +92,21 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 		} else if (perlVariable instanceof PsiPerlArrayVariable)
 		{
 			// global arrays
-			for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+			for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
 
 			// global hashes
-			for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+			for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(name));
 		} else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 		{
 			// global arrays
-			for (String name : PerlArrayUtil.listDefinedGlobalArrays(project))
+			for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
 		} else if (perlVariable instanceof PsiPerlHashVariable)
 		{
 			// global hashes
-			for (String name : PerlHashUtil.listDefinedGlobalHahses(project))
+			for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
 				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(name));
 		}
 	}

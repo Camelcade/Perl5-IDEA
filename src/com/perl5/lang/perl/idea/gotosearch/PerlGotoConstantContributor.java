@@ -23,9 +23,7 @@ import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by hurricup on 12.08.2015.
@@ -36,12 +34,7 @@ public class PerlGotoConstantContributor implements ChooseByNameContributor
 	@Override
 	public String[] getNames(Project project, boolean includeNonProjectItems)
 	{
-		List<String> names = new ArrayList<String>();
-
-		for (String name : PerlSubUtil.getDefinedConstantsNames(project))
-			names.add(name);
-
-		return names.toArray(new String[names.size()]);
+		return PerlSubUtil.getDefinedConstantsNames(project).toArray(new String[]{});
 	}
 
 	@NotNull

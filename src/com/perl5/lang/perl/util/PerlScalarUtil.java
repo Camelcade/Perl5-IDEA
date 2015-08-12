@@ -48,7 +48,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 * @param canonicalName canonical variable name package::name
 	 * @return Collection of found definitions
 	 */
-	public static Collection<PerlVariable> findGlobalScalarDefinitions(Project project, String canonicalName)
+	public static Collection<PerlVariable> getGlobalScalarDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
 		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_SCALAR, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariable.class);
@@ -60,7 +60,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 * @param project project to search in
 	 * @return collection of variable canonical names
 	 */
-	public static Collection<String> listDefinedGlobalScalars(Project project)
+	public static Collection<String> getDefinedGlobalScalarNames(Project project)
 	{
 		return StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_SCALAR, project);
 	}
