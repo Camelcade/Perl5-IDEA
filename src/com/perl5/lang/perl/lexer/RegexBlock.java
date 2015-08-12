@@ -193,11 +193,11 @@ public class RegexBlock implements PerlElementTypes
 	 * @param isExtended flag that regular expression is extended with spaces and comments
 	 * @return ArrayList of tokens
 	 */
-	public Collection<CustomToken> tokenize(boolean isExtended, boolean isSecondBlock)
+	public Collection<CustomToken> tokenize(PerlStringLexer stringLexer, boolean isExtended, boolean isSecondBlock)
 	{
 		return isExtended
-				? tokenizeExtended(isSecondBlock)
-				: tokenizeRegular(isSecondBlock);
+				? tokenizeExtended(stringLexer, isSecondBlock)
+				: tokenizeRegular(stringLexer, isSecondBlock);
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class RegexBlock implements PerlElementTypes
 	 *
 	 * @return array of CustomTokens
 	 */
-	protected Collection<CustomToken> tokenizeExtended(boolean isSecondBlock)
+	protected Collection<CustomToken> tokenizeExtended(PerlStringLexer stringLexer, boolean isSecondBlock)
 	{
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
 
@@ -262,7 +262,7 @@ public class RegexBlock implements PerlElementTypes
 	 *
 	 * @return array of CustomTokens
 	 */
-	protected Collection<CustomToken> tokenizeRegular(boolean isSecondBlock)
+	protected Collection<CustomToken> tokenizeRegular(PerlStringLexer stringLexer, boolean isSecondBlock)
 	{
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
 

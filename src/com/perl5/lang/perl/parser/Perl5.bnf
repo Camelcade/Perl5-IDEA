@@ -188,11 +188,13 @@ limitations under the License.
 
     OPERATOR_FILETEST="OPERATOR_FILETEST"
 
+    // single mid-quote. e evaluatable s///e;
     REGEX_QUOTE="REGEX_QUOTE"
-    REGEX_QUOTE_X="REGEX_QUOTE_X"
+    REGEX_QUOTE_E="REGEX_QUOTE_E"
 
+    // paired mid-quote. e for evaluatable s{}{}e;
     REGEX_QUOTE_OPEN="REGEX_QUOTE_OPEN"
-    REGEX_QUOTE_OPEN_X="REGEX_QUOTE_OPEN_X"
+    REGEX_QUOTE_OPEN_E="REGEX_QUOTE_OPEN_E"
 
     REGEX_QUOTE_CLOSE="REGEX_QUOTE_CLOSE"
 

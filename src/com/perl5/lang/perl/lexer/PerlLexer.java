@@ -185,7 +185,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public int sectionsNumber = 0;    // number of sections one or two
 	public int currentSectionNumber = 0; // current section
 	protected PerlLexerAdapter evalPerlLexer;
-	protected PerlStringLexer stringLexer;
+	protected PerlStringLexer myStringLexer;
 
 	Project myProject;
 	Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
@@ -198,6 +198,20 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		super((Reader) null);
 		myProject = project;
+	}
+
+	public static List<CustomToken> lexString(PerlStringLexer initedStringLexer) {
+		ArrayList<CustomToken> result = new ArrayList<CustomToken>();
+
+		try {
+			IElementType tokenType;
+			while ((tokenType = initedStringLexer.advance()) != null)
+				result.add(new CustomToken(initedStringLexer.getTokenStart(), initedStringLexer.getTokenEnd(), tokenType));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 
 	// fixme to make this work you must remove final in PerlParserGenerated manually.
@@ -433,20 +447,9 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			if (parseString && containsSigils)
 			{
 				// found string, reparse with string lexer
-				if (stringLexer == null)
-					stringLexer = new PerlStringLexer();
-
+				PerlStringLexer stringLexer = getStringLexer();
 				stringLexer.reset(buffer, tokenStart, currentPosition, YYINITIAL);
-				try
-				{
-					IElementType tokenType;
-					while ((tokenType = stringLexer.advance()) != null)
-						preparsedTokensList.add(new CustomToken(stringLexer.getTokenStart(), stringLexer.getTokenEnd(), tokenType));
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-				}
-
+				preparsedTokensList.addAll(lexString(stringLexer));
 				return getPreParsedToken();
 			} else
 			{
@@ -460,6 +463,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	}
 
+	protected PerlStringLexer getStringLexer() {
+		if (myStringLexer == null)
+			myStringLexer = new PerlStringLexer();
+
+
+		return myStringLexer;
+	}
 
 	/**
 	 * Checks that version is a really version, not a variable name
@@ -1040,7 +1050,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		}
 
 		// parse block 1
-		preparsedTokensList.addAll(firstBlock.tokenize(isExtended, false));
+		preparsedTokensList.addAll(firstBlock.tokenize(getStringLexer(), isExtended, false));
 
 		if (secondBLock != null)
 		{
@@ -1057,7 +1067,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					evalPerlLexer = new PerlLexerAdapter(myProject);
 				preparsedTokensList.addAll(secondBLock.parseEval(evalPerlLexer));
 			} else
-				preparsedTokensList.addAll(secondBLock.tokenize(isExtended, true));
+				preparsedTokensList.addAll(secondBLock.tokenize(getStringLexer(), isExtended, true));
 		}
 
 		// parse modifiers

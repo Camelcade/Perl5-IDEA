@@ -1031,6 +1031,7 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+
 	/**
 	 * Converts everything till $, @ or close brace to regex tokens;
 	 *
