@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.383 beta</version>
+    <version>0.384 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -44,10 +44,15 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.383 beta changes:</p>
+      <p>0.384 beta changes:</p>
       <ul>
       <li>Fixed bug with occasional wrong constant usage annotation</li>
-      <li>Implemented interpolation of double-quoted, back-ticked, qq-ed, qx-ed strings and regexps. (NB: code interpolation is still lame, and may show that it's ok in places where it is not.)</li>
+      <li>Implemented interpolation of double-quoted, back-ticked, qq-ed, qx-ed strings and regexps.
+      <ul>NB:
+      <li>Code interpolation is still lame, and may show that it's ok in places where it is not.</li>
+      <li>Regex interpolation can't distinct array element from scalar with character group after it.</li>
+      </ul>
+      </li>
       <li>Implemented brace matching for string quotes and regex delimiters.</li>
       <li>Fixed problem with clashed namespaces definition inspection annotation all namespace content.</li>
       <li>Fixed problem with minor.major version.</li>

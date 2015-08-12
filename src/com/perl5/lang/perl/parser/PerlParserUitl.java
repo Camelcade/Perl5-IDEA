@@ -173,6 +173,11 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			QUOTE_TICK_CLOSE,
 			QUOTE_SINGLE_CLOSE
 	);
+	protected static final TokenSet STRING_MERGE_STOP_TOKENS = TokenSet.orSet(
+			CLOSE_QUOTES,
+			TokenSet.create(
+					SIGIL_SCALAR, SIGIL_ARRAY
+			));
 	protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
 			REGEX_QUOTE,
 			REGEX_QUOTE_CLOSE,
@@ -949,34 +954,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	/**
-	 * Converting string element to string content if it's not a closing quote
-	 *
-	 * @param b PerlBuildder
-	 * @param l Parsing level
-	 * @return parsing result
-	 */
-	public static boolean convertToStringContent(PsiBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
-		assert b instanceof PerlBuilder;
-		if (tokenType != null
-				&& !CLOSE_QUOTES.contains(tokenType)
-				&& !(
-				((PerlBuilder) b).getCurrentStringState()
-						&& (tokenType == QUOTE_DOUBLE || tokenType == QUOTE_TICK)
-						&& b.lookAhead(1) == RIGHT_BRACE
-		) // we need to check that we are in the nested string
-				)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-//			m.drop();
-			m.collapse(STRING_CONTENT);
-			return true;
-		}
-		return false;
-	}
 
 	/**
 	 * Parses SQ string content. Implemented for interpolation parsing, where 'test' is identifier in quotes
@@ -1042,6 +1019,50 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
+	 * Converting string element to string content if it's not a closing quote
+	 *
+	 * @param b PerlBuildder
+	 * @param l Parsing level
+	 * @return parsing result
+	 */
+	public static boolean convertToStringContent(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		assert b instanceof PerlBuilder;
+
+		boolean currentStringState = ((PerlBuilder) b).getCurrentStringState();
+
+		if (tokenType != null
+				&& !CLOSE_QUOTES.contains(tokenType)
+				&& !(currentStringState
+				&& (tokenType == QUOTE_DOUBLE || tokenType == QUOTE_TICK)
+				&& b.lookAhead(1) == RIGHT_BRACE
+		)
+				)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+
+			// reduces nodes number
+			while ((tokenType = b.getTokenType()) != null
+					&& !STRING_MERGE_STOP_TOKENS.contains(tokenType)
+					&& !(
+					currentStringState
+							&& (tokenType == QUOTE_DOUBLE || tokenType == QUOTE_TICK)
+							&& b.lookAhead(1) == RIGHT_BRACE
+			)
+					)
+				b.advanceLexer();
+
+//			m.drop();
+			m.collapse(STRING_CONTENT);
+			return true;
+		}
+		return false;
+	}
+
+
+	/**
 	 * Converts everything till $, @ or close brace to regex tokens;
 	 *
 	 * @param b PerlBuilder
@@ -1057,7 +1078,8 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 
-			while (!REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType()))
+			// reduces nodes number
+			while (!b.eof() && !REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType()))
 				b.advanceLexer();
 
 			m.collapse(REGEX_TOKEN);

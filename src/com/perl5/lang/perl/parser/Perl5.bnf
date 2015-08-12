@@ -967,8 +967,7 @@ string_sq ::=
 
 private string_content_qq ::= string_content_element +
 private string_content_element ::=
-  STRING_CONTENT
-  | interpolated_constructs
+  interpolated_constructs
   | <<convertToStringContent>>
 
 private interpolated_constructs ::=
