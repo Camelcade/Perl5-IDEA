@@ -100,6 +100,12 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 						PerlSyntaxHighlighter.PERL_VERSION,
 						false,
 						false);
+			else if (tokenType == REGEX_TOKEN)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_REGEX_TOKEN,
+						false,
+						false);
 		}
 	}
 }

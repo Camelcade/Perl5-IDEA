@@ -126,7 +126,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 		attributesMap.put(PerlElementTypes.REGEX_QUOTE_CLOSE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		attributesMap.put(PerlElementTypes.REGEX_QUOTE_OPEN, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.REGEX_TOKEN, new TextAttributesKey[]{PERL_REGEX_TOKEN});
+		attributesMap.put(PerlElementTypes.REGEX_QUOTE_OPEN_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		attributesMap.put(PerlElementTypes.REGEX_QUOTE_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		attributesMap.put(PerlElementTypes.REGEX_QUOTE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		attributesMap.put(PerlElementTypes.REGEX_MODIFIER, new TextAttributesKey[]{PERL_KEYWORD});
 
 		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE, new TextAttributesKey[]{PERL_DQ_STRING});

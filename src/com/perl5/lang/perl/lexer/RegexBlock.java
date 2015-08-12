@@ -267,28 +267,37 @@ public class RegexBlock implements PerlElementTypes
 		ArrayList<CustomToken> tokens = new ArrayList<CustomToken>();
 
 		int currentOffset = startOffset;
+		int blockStart = currentOffset;
 
 		boolean isEscaped = false;
 		boolean isCharGroup = false;
 		int regexEndOffset = endOffset - 1; // one for quote
+
 
 		while (currentOffset < regexEndOffset)
 		{
 			char currentChar = buffer.charAt(currentOffset);
 			int charsLeft = regexEndOffset - currentOffset;
 
-			if (charsLeft > 3 && "(?#".equals(buffer.subSequence(currentOffset, currentOffset + 3).toString()))
+			if (!isEscaped && !isCharGroup && charsLeft > 3 && "(?#".equals(buffer.subSequence(currentOffset, currentOffset + 3).toString()))
 			{
+				if (currentOffset > blockStart)
+				{
+					stringLexer.reset(buffer, blockStart, currentOffset, 0);
+					tokens.addAll(PerlLexer.lexString(stringLexer));
+				}
+
 				int commentStart = currentOffset;
 				currentOffset += 2;
 				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')')
 					currentOffset++;
+
+				blockStart = currentOffset;
 				if (currentOffset == regexEndOffset)
 					tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				else
 					tokens.add(new CustomToken(commentStart, currentOffset + 1, COMMENT_LINE));
-			} else
-				tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_TOKEN));
+			}
 
 			if (!isSecondBlock)
 			{
@@ -301,6 +310,12 @@ public class RegexBlock implements PerlElementTypes
 			isEscaped = !isEscaped && currentChar == '\\';
 
 			currentOffset++;
+		}
+
+		if (currentOffset > blockStart)
+		{
+			stringLexer.reset(buffer, blockStart, currentOffset, 0);
+			tokens.addAll(PerlLexer.lexString(stringLexer));
 		}
 
 		tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_CLOSE));
