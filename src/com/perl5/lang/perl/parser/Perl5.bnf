@@ -756,7 +756,12 @@ private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
 perl_regex_modifiers ::= REGEX_MODIFIER +
-perl_regex ::= <<joinRegexTokens>> // fixme implement regex parsing
+perl_regex ::= perl_regex_item +
+
+private perl_regex_item ::=
+  <<joinRegexTokens false>>
+  | interpolated_constructs
+  | <<joinRegexTokens true>>
 
 tr_regex ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_TR|RESERVED_Y) REGEX_QUOTE_OPEN tr_searchlist REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] tr_replacementlist REGEX_QUOTE_CLOSE [tr_modifiers] {pin=2}
 tr_searchlist ::= STRING_CONTENT
@@ -948,14 +953,17 @@ string_sq ::=
 private string_content_qq ::= string_content_element +
 private string_content_element ::=
   STRING_CONTENT
-  | scalar_array_element
+  | interpolated_constructs
+  | <<convertToStringContent>>
+
+private interpolated_constructs ::=
+  scalar_array_element
   | scalar_hash_element
   | scalar_variable
   | scalar_cast_expr
   | array_variable
   | array_cast_expr
   | array_index_variable
-  | <<convertToStringContent>>
 
 heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
 

@@ -534,28 +534,6 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Joining several regex tokens into one to lighten PSI tree. Temporary solution, until regex parsing is implemented
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean joinRegexTokens(PsiBuilder b, int l)
-	{
-		if (b.getTokenType() == REGEX_TOKEN)
-		{
-			PsiBuilder.Marker m = b.mark();
-
-			while (b.getTokenType() == REGEX_TOKEN)
-				b.advanceLexer();
-
-			m.collapse(REGEX_TOKEN);
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * parser for print/say/printf filehandle
 	 *
 	 * @param b PerlBuilder
@@ -1051,6 +1029,42 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		}
 
 		return false;
+	}
+
+	/**
+	 * Converts everything till $, @ or close brace to regex tokens;
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean joinRegexTokens(PsiBuilder b, int l, boolean forceSigilConsumption) {
+		PsiBuilder.Marker m = b.mark();
+		boolean isEmpty = true;
+		while (true) {
+
+			IElementType tokenType = b.getTokenType();
+			boolean isSigil = tokenType == SIGIL_ARRAY || tokenType == SIGIL_SCALAR || tokenType == SIGIL_SCALAR_INDEX;
+			boolean isCloseQuote = tokenType == REGEX_QUOTE || tokenType == REGEX_QUOTE_CLOSE;
+
+			if (tokenType != null && !isCloseQuote && (!isSigil || forceSigilConsumption)) {
+				if (forceSigilConsumption && isSigil)
+					forceSigilConsumption = false;
+
+				if (isEmpty)
+					isEmpty = false;
+
+				b.advanceLexer();
+			} else
+				break;
+		}
+
+		if (isEmpty)
+			m.drop();
+		else
+			m.collapse(REGEX_TOKEN);
+
+		return !isEmpty;
 	}
 
 

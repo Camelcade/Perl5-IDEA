@@ -22,7 +22,8 @@
 
     <description><![CDATA[
     <h1>Camelcade</h1>
-    <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products (<b>atm. works as intended in IDEA only</b>).</p>
+    <p>Camelcade adds Perl5 support for IntelliJ IDEA.</p>
+     <!--and other JetBrains products (<b>atm. works as intended in IDEA only</b>)-->
     <p>The plugin works but is still not released (consider it being in an open Beta).</p>
     <p>Even in its current beta state, Camelcade is better than Notepad++ or Sublime Text. Moreover IDEA itself gives you a lot of useful features.</p>
     <p>I am using Camelcade at my full-time job as a Perl programmer.</p>
@@ -46,9 +47,10 @@
       <p>0.383 beta changes:</p>
       <ul>
       <li>Fixed bug with occasional wrong constant usage annotation</li>
-      <li>Implemented interpolation of double-quoted, back-ticked, qq-ed and qx-ed strings. (NB: code interpolation is still lame, and may show that it's ok in places where it is not. Like <code>@{...};</code>)</li>
+      <li>Implemented interpolation of double-quoted, back-ticked, qq-ed, qx-ed strings and regexps. (NB: code interpolation is still lame, and may show that it's ok in places where it is not.)</li>
       <li>Implemented brace matching for string quotes and regex delimiters.</li>
       <li>Fixed problem with clashed namespaces definition inspection annotation all namespace content.</li>
+      <li>Fixed problem with minor.major version.</li>
       </ul>
 
     ]]>
@@ -61,7 +63,7 @@
          on how to target different products -->
 
     <depends>com.intellij.modules.lang</depends>
-    <!--<depends>com.intellij.modules.java</depends>-->
+    <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
 
