@@ -18,42 +18,11 @@ package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 
-import java.util.List;
-
 /**
  * Created by hurricup on 31.05.2015.
  */
 public interface PerlSubNameElement extends PerlNamedElement
 {
-	/**
-	 * Attempts to find sub definition
-	 *
-	 * @return sub definition elements list
-	 */
-	public List<PerlSubDefinition> getSubDefinitions();
-
-	/**
-	 * Attempts to find sub declarations
-	 *
-	 * @return sub declarations elements list
-	 */
-	public List<PerlSubDeclaration> getSubDeclarations();
-
-	/**
-	 * Searching for related globs
-	 *
-	 * @return related globs
-	 */
-	public List<PerlGlobVariable> getRelatedGlobs();
-
-	/**
-	 * Searching for related constants
-	 *
-	 * @return related constants
-	 */
-	public List<PerlConstant> getConstantDefinitions();
-
-
 	/**
 	 * Trying to get the package name from explicit specification or by traversing
 	 *

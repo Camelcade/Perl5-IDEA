@@ -18,10 +18,13 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.*;
+import com.intellij.psi.PsiReference;
+import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -42,16 +45,13 @@ public class PerlSubUnresolvableInspection extends PerlInspection
 
 				boolean hasExplicitNamespace = namespaceElement != null && !"CORE".equals(namespaceElement.getCanonicalName());
 
+				// fixme adjust built in checking to the file; Remove second condition after implementing annotations
 				if (subNameElement == null || (namespaceElement != null && namespaceElement.isBuiltin()) || (!hasExplicitNamespace && subNameElement.isBuiltIn()))
 					return;
 
-				// todo globs aliasing must be resolved
-				List<PerlSubDefinition> subDefinitions = subNameElement.getSubDefinitions();
-				List<PerlSubDeclaration> subDeclarations = subNameElement.getSubDeclarations();
-				List<PerlGlobVariable> relatedGlobs = subNameElement.getRelatedGlobs();
-				List<PerlConstant> stringConstants = subNameElement.getConstantDefinitions();
+				PsiReference reference = subNameElement.getReference();
 
-				if (subDefinitions.size() == 0 && subDeclarations.size() == 0 && relatedGlobs.size() == 0 && stringConstants.size() == 0)
+				if (reference instanceof PerlSubReference && ((PerlSubReference) reference).multiResolve(false).length == 0)
 					registerProblem(holder, subNameElement, "Unable to find sub definition, declaration, constant definition or typeglob aliasing");
 			}
 		};

@@ -19,10 +19,13 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -47,22 +50,20 @@ public class PerlSubDeprecatedInspection extends PerlInspection
 					markDeprecated(holder, o, "This sub declared as deprecated");
 				else
 				{
-					for (PerlSubDefinition subDefinition : o.getSubDefinitions())
-					{
-						if (subDefinition.getSubAnnotations().isDeprecated())
+					PsiReference reference = o.getReference();
+
+					if (reference instanceof PerlSubReference)
+						for (ResolveResult resolveResult : ((PerlSubReference) reference).multiResolve(false))
 						{
-							markDeprecated(holder, o, "This sub defined as deprecated");
-							return;
+							PsiElement targetElement = resolveResult.getElement();
+							if (targetElement instanceof PerlSubDefinition && ((PerlSubDefinition) targetElement).getSubAnnotations().isDeprecated()
+									|| targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).getSubAnnotations().isDeprecated()
+									)
+							{
+								markDeprecated(holder, o, "This sub declared as deprecated");
+								return;
+							}
 						}
-					}
-					for (PerlSubDeclaration subDeclaration : o.getSubDeclarations())
-					{
-						if (subDeclaration.getSubAnnotations().isDeprecated())
-						{
-							markDeprecated(holder, o, "This sub declared as deprecated");
-							return;
-						}
-					}
 				}
 			}
 		};

@@ -17,6 +17,9 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
@@ -25,6 +28,7 @@ import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubInd
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -160,12 +164,18 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 			if ("new".equals(subNameElement.getName()))
 				return methodElement.getPackageName();
-			for (PerlSubDefinition subDefinition : subNameElement.getSubDefinitions())
-				if (subDefinition.getSubAnnotations().getReturns() != null)
-					return subDefinition.getSubAnnotations().getReturns();
-			for (PerlSubDeclaration subDeclaration : subNameElement.getSubDeclarations())
-				if (subDeclaration.getSubAnnotations().getReturns() != null)
-					return subDeclaration.getSubAnnotations().getReturns();
+
+			PsiReference reference = subNameElement.getReference();
+
+			if (reference instanceof PerlSubReference)
+				for (ResolveResult resolveResult : ((PerlSubReference) reference).multiResolve(false))
+				{
+					PsiElement targetElement = resolveResult.getElement();
+					if (targetElement instanceof PerlSubDefinition && ((PerlSubDefinition) targetElement).getSubAnnotations().getReturns() != null)
+						return ((PerlSubDefinition) targetElement).getSubAnnotations().getReturns();
+					else if (targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).getSubAnnotations().getReturns() != null)
+						return ((PerlSubDeclaration) targetElement).getSubAnnotations().getReturns();
+				}
 		}
 
 		return null;

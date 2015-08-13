@@ -16,11 +16,12 @@
 
 package com.perl5.lang.perl.idea.annotators;
 
-import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,34 +34,41 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 	{
 		if (element instanceof PerlSubNameElement)
 		{
-			if (((PerlSubNameElement) element).getConstantDefinitions().size() > 0)
-			{
-				Annotation annotation = holder.createInfoAnnotation(element, null);
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
-			} else
-			{
-
-				PsiElement parent = element.getParent();
-
-				if (parent instanceof PsiPerlSubDeclaration)
-					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
-				else if (parent instanceof PsiPerlSubDefinition)
+			PsiElement parent = element.getParent();
+			if (parent instanceof PsiPerlSubDeclaration)
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
+			else if (parent instanceof PsiPerlSubDefinition)
+				if ("AUTOLOAD".equals(((PerlSubNameElement) element).getName()))
+					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+				else
 					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
-				else if (parent instanceof PsiPerlExpr) // fixme temporary solution for pre-defined expressions, suppose only built-ins
-					decorateElement(
-							holder.createInfoAnnotation(element, null),
-							PerlSyntaxHighlighter.PERL_SUB,
-							true,
-							false
-					);
-				else if (parent instanceof PerlMethod)
+			else if (parent instanceof PsiPerlExpr) // fixme temporary solution for pre-defined expressions, suppose only built-ins
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_SUB,
+						true,
+						false
+				);
+			else if (parent instanceof PerlMethod)
+			{
+				// fixme don't we need to take multiple references here?
+				PsiReference reference = element.getReference();
+
+				if (reference instanceof PerlSubReference)
 				{
-					decorateElement(
-							holder.createInfoAnnotation(element, null),
-							PerlSyntaxHighlighter.PERL_SUB,
-							((PerlSubNameElement) element).isBuiltIn(),
-							false
-					);
+					((PerlSubReference) reference).multiResolve(false);
+
+					if (((PerlSubReference) reference).isConstant())
+						holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
+					else if (((PerlSubReference) reference).isAutoloaded())
+						holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+					else
+						decorateElement(
+								holder.createInfoAnnotation(element, null),
+								PerlSyntaxHighlighter.PERL_SUB,
+								((PerlSubNameElement) element).isBuiltIn(),
+								false
+						);
 				}
 			}
 		}

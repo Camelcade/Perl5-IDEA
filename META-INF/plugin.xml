@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.384 beta</version>
+    <version>0.385 beta</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -44,7 +44,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.384 beta changes:</p>
+      <p>0.385 beta changes:</p>
       <ul>
       <li>Fixed bug with occasional wrong constant usage annotation</li>
       <li>Implemented interpolation of double-quoted, back-ticked, qq-ed, qx-ed strings and regexps.
@@ -55,9 +55,13 @@
       </li>
       <li>Implemented brace matching for string quotes and regex delimiters.</li>
       <li>Implemented goto symbol navigation for: subs definitions, constants, packages, global variables.</li>
+      <li>Implemented AUTOLOAD-ed methods and subs resolution and decoration.</li>
+      <li>Implemented clash checking between subs definitions, typeglobs and constants.</li>
+      <li>Multiple subs definitions, namespace definitions inspecitons now works on definitions only.</li>
       <li>Optimized goto class contributor.</li>
       <li>Fixed problem with clashed namespaces definition inspection annotation all namespace content.</li>
       <li>Fixed problem with minor.major version.</li>
+      <li>Fixed few bugs with subs resolution.</li>
       </ul>
 
     ]]>

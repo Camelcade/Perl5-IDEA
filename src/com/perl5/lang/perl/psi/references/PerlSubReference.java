@@ -16,11 +16,16 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,6 +34,11 @@ import java.util.List;
 
 public class PerlSubReference extends PerlReferencePoly
 {
+	protected boolean myIsAutoLoaded = false;
+	protected boolean myIsConstant = false;
+	protected boolean myIsDeclared = false;
+	protected boolean myIsDefined = false;
+	protected boolean myIsAliased = false;
 	PerlSubNameElement mySubNameElement;
 
 	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
@@ -43,15 +53,82 @@ public class PerlSubReference extends PerlReferencePoly
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
-		relatedItems.addAll(mySubNameElement.getSubDeclarations());
-		relatedItems.addAll(mySubNameElement.getSubDefinitions());
-		relatedItems.addAll(mySubNameElement.getRelatedGlobs());
-		relatedItems.addAll(mySubNameElement.getConstantDefinitions());
+
+		PsiElement parent = mySubNameElement.getParent();
+
+		String packageName = mySubNameElement.getPackageName();
+		String subName = mySubNameElement.getName();
+		Project project = mySubNameElement.getProject();
+
+		if (subName != null)
+		{
+			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
+				relatedItems.addAll(PerlMroDfs.resolveSub(project, packageName, subName, false));
+			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
+				relatedItems.addAll(PerlMroDfs.resolveSub(project, ((PerlMethod) parent).getContextPackageName(), subName, true));
+			else    // static resolution
+			{
+				String canonicalName = packageName + "::" + subName;
+				for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
+					if (!target.isEquivalentTo(parent))
+						relatedItems.add(target);
+				for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
+					if (!target.isEquivalentTo(parent))
+						relatedItems.add(target);
+				for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+					if (!target.isEquivalentTo(parent))
+						relatedItems.add(target);
+				for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
+					if (!target.isEquivalentTo(parent))
+						relatedItems.add(target);
+
+				if (!"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
+						&& relatedItems.size() == 0 && !(
+						parent instanceof PerlSubDeclaration
+								|| parent instanceof PerlSubDefinition
+				))
+				{
+					canonicalName = packageName + "::AUTOLOAD";
+					for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
+						if (!target.isEquivalentTo(parent))
+							relatedItems.add(target);
+					for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
+						if (!target.isEquivalentTo(parent))
+							relatedItems.add(target);
+					for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+						if (!target.isEquivalentTo(parent))
+							relatedItems.add(target);
+					for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
+						if (!target.isEquivalentTo(parent))
+							relatedItems.add(target);
+				}
+			}
+		}
+
 
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
+		myIsAutoLoaded = myIsConstant = myIsAliased = myIsDeclared = myIsDefined = false;
+
 		for (PsiElement element : relatedItems)
+		{
+			if (!myIsAutoLoaded && element instanceof PerlNamedElement && "AUTOLOAD".equals(((PerlNamedElement) element).getName()))
+				myIsAutoLoaded = true;
+
+			if (!myIsConstant && element instanceof PerlConstant)
+				myIsConstant = true;
+
+			if (!myIsDeclared && element instanceof PerlSubDeclaration)
+				myIsDeclared = true;
+
+			if (!myIsDefined && element instanceof PerlSubDefinition)
+				myIsDefined = true;
+
+			if (!myIsAliased && element instanceof PerlGlobVariable)
+				myIsAliased = true;
+
 			result.add(new PsiElementResolveResult(element));
+		}
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
@@ -90,4 +167,28 @@ public class PerlSubReference extends PerlReferencePoly
 		return resolveResults[0].getElement();
 	}
 
+	public boolean isAutoloaded()
+	{
+		return myIsAutoLoaded;
+	}
+
+	public boolean isDefined()
+	{
+		return myIsDefined;
+	}
+
+	public boolean isDeclared()
+	{
+		return myIsDeclared;
+	}
+
+	public boolean isAliased()
+	{
+		return myIsAliased;
+	}
+
+	public boolean isConstant()
+	{
+		return myIsConstant;
+	}
 }

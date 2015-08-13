@@ -54,6 +54,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Annotation", PerlSyntaxHighlighter.PERL_ANNOTATION),
 
+			new AttributesDescriptor("Auto-loaded sub", PerlSyntaxHighlighter.PERL_AUTOLOAD),
 			new AttributesDescriptor("Constant", PerlSyntaxHighlighter.PERL_CONSTANT),
 			new AttributesDescriptor("Sub call", PerlSyntaxHighlighter.PERL_SUB),
 			new AttributesDescriptor("Sub definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION),

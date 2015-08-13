@@ -25,18 +25,16 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.mojolicious.MojoliciousPerlFileElement;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlNestedCall;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -106,99 +104,13 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	}
 
 	@Override
-	public List<PerlSubDefinition> getSubDefinitions()
+	public PsiReference getReference()
 	{
-		List<PerlSubDefinition> result = new ArrayList<PerlSubDefinition>();
-		PsiElement parent = getParent();
+		PsiReference[] references = getReferences();
+		if (references.length > 0)
+			return references[0];
 
-		String packageName = getPackageName();
-		String subName = getName();
-
-		if (subName != null)
-		{
-			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				result.addAll(PerlMroDfs.getSubDefinitions(getProject(), packageName, subName));
-			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				result.addAll(PerlMroDfs.getSuperSubDefinitions(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
-			else
-				for (PsiPerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(getProject(), packageName + "::" + subName))
-					if (!subDefinition.isEquivalentTo(parent))
-						result.add(subDefinition);
-		}
-		return result;
-	}
-
-	@Override
-	public List<PerlSubDeclaration> getSubDeclarations()
-	{
-		List<PerlSubDeclaration> result = new ArrayList<PerlSubDeclaration>();
-		PsiElement parent = getParent();
-
-		String packageName = getPackageName();
-		String subName = getName();
-
-		if (subName != null)
-		{
-			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				result.addAll(PerlMroDfs.getSubDeclarations(getProject(), packageName, subName));
-			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				result.addAll(PerlMroDfs.getSuperSubDeclarations(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
-			else
-				for (PsiPerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(getProject(), packageName + "::" + subName))
-					if (!subDeclaration.isEquivalentTo(parent))
-						result.add(subDeclaration);
-		}
-
-		return result;
-	}
-
-	@Override
-	public List<PerlConstant> getConstantDefinitions()
-	{
-		List<PerlConstant> result = new ArrayList<PerlConstant>();
-		PsiElement parent = getParent();
-
-		String packageName = getPackageName();
-		String subName = getName();
-
-		if (subName != null)
-		{
-			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				result.addAll(PerlMroDfs.getConstants(getProject(), packageName, subName));
-			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				result.addAll(PerlMroDfs.getSuperConstants(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
-			else
-				for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(getProject(), packageName + "::" + subName))
-					result.add(stringConstant);
-		}
-
-		return result;
-	}
-
-	// fixme getRelatedGlobs => getSubAliases
-	// fixme not dry with declarations and definitions
-	@Override
-	public List<PerlGlobVariable> getRelatedGlobs()
-	{
-		List<PerlGlobVariable> result = new ArrayList<PerlGlobVariable>();
-		PsiElement parent = getParent();
-
-		String packageName = getPackageName();
-		String subName = getName();
-
-		if (subName != null)
-		{
-			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				result.addAll(PerlMroDfs.getSubAliases(getProject(), packageName, subName));
-			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				result.addAll(PerlMroDfs.getSuperSubAliases(getProject(), ((PerlMethod) parent).getContextPackageName(), subName));
-			else
-				for (PerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), packageName + "::" + subName))
-					if (!glob.isEquivalentTo(parent))
-						result.add(glob);
-		}
-
-		return result;
+		return null;
 	}
 
 	@Override

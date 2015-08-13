@@ -17,13 +17,12 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -37,11 +36,13 @@ public class PerlSubMultipleDeclarationsInspection extends PerlInspection
 		return new PerlVisitor()
 		{
 			@Override
-			public void visitSubNameElement(@NotNull PerlSubNameElement o)
+			public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
 			{
-				List<PerlSubDeclaration> subDeclarations = o.getSubDeclarations();
-				if (subDeclarations.size() > 1 || subDeclarations.size() > 0 && o.getParent() instanceof PerlSubDeclaration)
-					registerProblem(holder, o, "Multiple sub declarations found");
+				Project project = o.getProject();
+
+				String canonicalName = o.getCanonicalName();
+				if (PerlSubUtil.getSubDeclarations(project, canonicalName).size() > 1)
+					registerProblem(holder, o.getNameIdentifier(), "Multiple subs declarations found");
 			}
 		};
 	}

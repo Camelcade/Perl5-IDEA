@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.highlighter;
 
+import com.intellij.codeInsight.template.impl.TemplateColors;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -87,6 +88,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey PERL_PAREN = createTextAttributesKey("PERL_PARENTESS", DefaultLanguageHighlighterColors.PARENTHESES);
 	public static final TextAttributesKey PERL_BRACK = createTextAttributesKey("PERL_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS);
 	public static final TextAttributesKey PERL_ANGLE = createTextAttributesKey("PERL_ANGLES", DefaultLanguageHighlighterColors.BRACKETS);
+
+	public static final TextAttributesKey PERL_AUTOLOAD = createTextAttributesKey("PERL_AUTOLOAD", TemplateColors.TEMPLATE_VARIABLE_ATTRIBUTES);
 
 	public static final TextAttributesKey PERL_SCALAR = createTextAttributesKey("PERL_SCALAR", DefaultLanguageHighlighterColors.IDENTIFIER);
 	public static final TextAttributesKey PERL_ARRAY = createTextAttributesKey("PERL_ARRAY", DefaultLanguageHighlighterColors.IDENTIFIER);

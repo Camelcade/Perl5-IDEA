@@ -17,12 +17,11 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -36,21 +35,11 @@ public class PerlNamespaceMultipleDefinitionsInspection extends PerlInspection
 		return new PerlVisitor()
 		{
 			@Override
-			public void visitNamespaceElement(@NotNull PerlNamespaceElement o)
+			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
 			{
-				PsiElement parent = o.getParent();
+				if (PerlPackageUtil.getNamespaceDefinitions(o.getProject(), o.getPackageName()).size() > 1)
+					registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");
 
-				if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement)
-					return;
-
-				if (o.isBuiltin())
-					return;
-
-				List<PerlNamespaceDefinition> namespaceDefinitions = o.getNamespaceDefinitions();
-				boolean isNamespaceDefinition = parent instanceof PerlNamespaceDefinition;
-
-				if (namespaceDefinitions.size() > 1 || isNamespaceDefinition && namespaceDefinitions.size() > 0)
-					registerProblem(holder, o, "Multiple namespace definitions");
 			}
 		};
 	}
