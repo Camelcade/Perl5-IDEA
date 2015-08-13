@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,9 +45,8 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 					if (!"main".equals(o.getPackageName()))
 						registerProblem(holder, o.getNameIdentifier(), "Multiple subs definitions found");
 
-				// fixme uncomment after limiting stubs with assignment only
-//				if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 0)
-//					registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with typeglob alias");
+				if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 0)
+					registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with typeglob alias");
 
 				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 0)
 					registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with constant definition");
@@ -65,9 +65,8 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 					if (PerlSubUtil.getSubDefinitions(project, canonicalName).size() > 0)
 						registerProblem(holder, o.getNameIdentifier(), "Typeglob clashes with sub definition");
 
-					// fixme uncomment after limiting stubs with assignment only
-//					if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 1)
-//						registerProblem(holder, o.getNameIdentifier(), "Multiple typeglob aliases found");
+					if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 1)
+						registerProblem(holder, o.getNameIdentifier(), "Multiple typeglob aliases found");
 
 					if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 0)
 						registerProblem(holder, o.getNameIdentifier(), "Typeglob clashes with constant definition");
@@ -83,9 +82,8 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				if (PerlSubUtil.getSubDefinitions(project, canonicalName).size() > 0)
 					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with sub definition");
 
-				// fixme uncomment after limiting stubs with assignment only
-//				if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 0)
-//					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with with typeglob alias");
+				if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 0)
+					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with with typeglob alias");
 
 				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 1)
 					registerProblem(holder, o.getNameIdentifier(), "Multiple constants definitions found");

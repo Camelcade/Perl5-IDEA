@@ -81,7 +81,6 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		// todo control assignment expressions, should be on left side
-		return node.findChildByType(PerlElementTypes.VARIABLE_NAME) != null && node.findChildByType(PerlElementTypes.SIGIL_SCALAR) == null;
+		return node.findChildByType(PerlElementTypes.VARIABLE_NAME) != null && node.getTreeParent().getElementType() == PerlElementTypes.ASSIGN_EXPR && node.getTreeNext() != null;
 	}
 }
