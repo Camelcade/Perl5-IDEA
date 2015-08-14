@@ -296,4 +296,12 @@
             <option name="PERL5" value="true"/>
         </context>
     </template>
+    <template name="const" value="use constant {&#10;    $CONST_NAME$ =&gt; $CONST_VAL$&#10;};"
+              description="Constant definition" toReformat="false" toShortenFQNames="true">
+        <variable name="CONST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="CONST_VAL" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_PREFIX" value="true"/>
+        </context>
+    </template>
 </templateSet>

@@ -59,6 +59,7 @@
       <li>Implemented clash checking between subs definitions, typeglobs and constants.</li>
       <li>Multiple subs definitions, namespace definitions inspecitons now works on definitions only.</li>
       <li>Optimized goto class contributor.</li>
+      <li>Added live tempalte for constant definition: <b>const</b>.</li>
       <li>Fixed problem with clashed namespaces definition inspection annotation all namespace content.</li>
       <li>Fixed problem with minor.major version.</li>
       <li>Fixed few bugs with subs resolution.</li>
