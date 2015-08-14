@@ -27,28 +27,40 @@ import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 /**
  * Created by hurricup on 14.08.2015.
  */
 public class PerlSubUnusedInpsection extends PerlInspection
 {
+	public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
+			"BEGIN",
+			"UNITCHECK",
+			"CHECK",
+			"INIT",
+			"END"
+	));
+
 	@NotNull
 	@Override
 	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
 	{
+
 		return new PerlVisitor()
 		{
 			@Override
 			public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
 			{
-				if (ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findAll().size() == 0)
+				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findAll().size() == 0)
 					holder.registerProblem(o.getSubNameElement(), "Unused sub definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 			}
 
 			@Override
 			public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
 			{
-				if (ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findAll().size() == 0)
+				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findAll().size() == 0)
 					holder.registerProblem(o.getSubNameElement(), "Unused sub declaration", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 			}
 
