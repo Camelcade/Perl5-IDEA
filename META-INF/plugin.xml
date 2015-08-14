@@ -56,6 +56,7 @@
       <li>Implemented brace matching for string quotes and regex delimiters.</li>
       <li>Implemented goto symbol navigation for: subs definitions, constants, packages, global variables.</li>
       <li>Implemented AUTOLOAD-ed methods and subs resolution and decoration (atm. AUTOLOAD must be defined as a sub, not named block).</li>
+      <li>Implemented __PACKAGE__ methods resolution.</li>
       <li>Implemented clash checking between subs definitions, typeglobs and constants.</li>
       <li>Multiple subs definitions, namespace definitions inspecitons now works on definitions only.</li>
       <li>Optimized goto class contributor.</li>

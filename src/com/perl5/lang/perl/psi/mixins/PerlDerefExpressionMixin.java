@@ -60,6 +60,8 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 				return ((PerlVariable) currentElement).guessVariableType();
 			else if (currentElement instanceof PerlMethodContainer)
 				return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) currentElement);
+			else if (currentElement instanceof PsiPerlTagScalar && "__PACKAGE__".equals(currentElement.getText()))
+				return PerlPackageUtil.getContextPackageName(this);
 		}
 		return null;
 
