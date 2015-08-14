@@ -16,26 +16,34 @@
 
 package com.perl5.lang.perl.idea.inspections;
 
-import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.search.LocalSearchScope;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.SearchScope;
-import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLexical;
+import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationGlobal;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
- * Created by hurricup on 18.07.2015.
+ * Created by hurricup on 14.08.2015.
  */
-public class PerlUnusedLexicalVariableInspection extends PerlInspection
+public class PerlUnusedGlobalVariableInspection extends PerlUnusedLexicalVariableInspection
 {
+	public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
+			"@ISA",
+			"@EXPORT_OK",
+			"@EXPORT",
+
+			"%EXPORT_TAGS",
+
+			"$VERSION"
+	));
+
 	@NotNull
 	@Override
 	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
@@ -43,40 +51,29 @@ public class PerlUnusedLexicalVariableInspection extends PerlInspection
 		return new PerlVisitor()
 		{
 			@Override
-			public void visitVariableDeclarationLexical(@NotNull PsiPerlVariableDeclarationLexical o)
+			public void visitVariableDeclarationGlobal(@NotNull PsiPerlVariableDeclarationGlobal o)
 			{
 				checkDeclaration(holder, o);
 			}
 		};
 	}
 
-	public <T extends PerlVariableDeclaration> void checkDeclaration(ProblemsHolder holder, T declaration)
-	{
-		checkVariables(holder, declaration.getArrayVariableList());
-		checkVariables(holder, declaration.getScalarVariableList());
-		checkVariables(holder, declaration.getHashVariableList());
-	}
-
-	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList)
-	{
-		for (PerlVariable variable : variableList)
-			if (isVariableUnused(variable))
-				holder.registerProblem(variable, getErrorMessage(variable), ProblemHighlightType.LIKE_UNUSED_SYMBOL);
-	}
-
-
+	@Override
 	public boolean isVariableUnused(PerlVariable variable)
 	{
-		return ReferencesSearch.search(variable, getSearchScope(variable)).findAll().size() == 0;
+		// fixme maybe we should check for @{ISA} too, but it's rare and this one works faster
+		return !EXCLUSIONS.contains(variable.getText()) && super.isVariableUnused(variable);
 	}
 
+	@Override
 	protected SearchScope getSearchScope(PsiElement element)
 	{
-		return new LocalSearchScope(element.getContainingFile());
+		return GlobalSearchScope.allScope(element.getProject());
 	}
 
+	@Override
 	protected String getErrorMessage(PerlVariable variable)
 	{
-		return "Unused lexical variable:" + variable.getText();
+		return "Unused global variable " + variable.getText();
 	}
 }
