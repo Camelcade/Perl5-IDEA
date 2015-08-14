@@ -27,50 +27,55 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 08.08.2015.
  */
-public class PerlAnnotatorSubs extends PerlAnnotator
-{
-	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		if (element instanceof PerlSubNameElement)
-		{
-			PsiElement parent = element.getParent();
-			if (parent instanceof PsiPerlSubDeclaration)
-				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
-			else if (parent instanceof PsiPerlSubDefinition)
-				if ("AUTOLOAD".equals(((PerlSubNameElement) element).getName()))
-					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
-				else
-					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
-			else if (parent instanceof PsiPerlExpr) // fixme temporary solution for pre-defined expressions, suppose only built-ins
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_SUB,
-						true,
-						false
-				);
-			else if (parent instanceof PerlMethod)
-			{
-				// fixme don't we need to take multiple references here?
-				PsiReference reference = element.getReference();
+public class PerlAnnotatorSubs extends PerlAnnotator {
+    @Override
+    public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+        if (element instanceof PerlSubNameElement) {
+            PsiElement parent = element.getParent();
+            if (parent instanceof PsiPerlSubDeclaration)
+                holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
+            else if (parent instanceof PsiPerlSubDefinition)
+                if ("AUTOLOAD".equals(((PerlSubNameElement) element).getName()))
+                    holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+                else
+                    holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+            else if (parent instanceof PerlMethod) {
+                // fixme don't we need to take multiple references here?
+                PsiElement grandParent = parent.getParent();
+                PerlNamespaceElement methodNamespace = ((PerlMethod) parent).getNamespaceElement();
 
-				if (reference instanceof PerlSubReference)
-				{
-					((PerlSubReference) reference).multiResolve(false);
+                if (
+                        !(grandParent instanceof PsiPerlNestedCall)    /// not ...->method
+                                && (methodNamespace == null || "CORE".equals(methodNamespace.getCanonicalName()))    // no explicit NS or it's core
+                                && ((PerlSubNameElement) element).isBuiltIn()
+                        ) {
+                    decorateElement(
+                            holder.createInfoAnnotation(element, null),
+                            PerlSyntaxHighlighter.PERL_SUB,
+                            ((PerlSubNameElement) element).isBuiltIn(),
+                            false
+                    );
+                } else {
 
-					if (((PerlSubReference) reference).isConstant())
-						holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
-					else if (((PerlSubReference) reference).isAutoloaded())
-						holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
-					else
-						decorateElement(
-								holder.createInfoAnnotation(element, null),
-								PerlSyntaxHighlighter.PERL_SUB,
-								((PerlSubNameElement) element).isBuiltIn(),
-								false
-						);
-				}
-			}
-		}
-	}
+                    PsiReference reference = element.getReference();
+
+                    if (reference instanceof PerlSubReference) {
+                        ((PerlSubReference) reference).multiResolve(false);
+
+                        if (((PerlSubReference) reference).isConstant())
+                            holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
+                        else if (((PerlSubReference) reference).isAutoloaded())
+                            holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+                        else
+                            decorateElement(
+                                    holder.createInfoAnnotation(element, null),
+                                    PerlSyntaxHighlighter.PERL_SUB,
+                                    ((PerlSubNameElement) element).isBuiltIn(),
+                                    false
+                            );
+                    }
+                }
+            }
+        }
+    }
 }
