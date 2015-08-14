@@ -53,6 +53,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlConstantsBlock.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlBlock.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonHash.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonArray.class, 0, 0));
@@ -245,6 +246,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 
 		if (elementType == PerlElementTypes.BLOCK)
 			return "{code block}";
+		if (elementType == PerlElementTypes.CONSTANTS_BLOCK)
+			return "{constants definitions}";
 		else if (elementType == PerlElementTypes.ANON_ARRAY)
 			return "[array]";
 		else if (elementType == PerlElementTypes.ANON_HASH)

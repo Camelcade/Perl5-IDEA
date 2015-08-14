@@ -516,9 +516,9 @@ private use_mro_parameters ::= scalar_expr;
 use_statement_constant ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_CONSTANT PACKAGE>> [perl_version] [use_constant_parameters] {pin=3}
 private use_constant_parameters ::=
   constant_definition
-  | multiple_constants_definition
+  | constants_block
 
-private multiple_constants_definition ::= LEFT_BRACE constant_definition (comma constant_definition) * [comma+] RIGHT_BRACE {pin=1}
+constants_block ::= LEFT_BRACE constant_definition (comma constant_definition) * [comma+] RIGHT_BRACE {pin=1}
 constant_definition ::= constant_name comma scalar_expr
 constant_name ::= string
 
