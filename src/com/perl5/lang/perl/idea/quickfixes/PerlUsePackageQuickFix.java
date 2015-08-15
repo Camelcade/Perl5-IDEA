@@ -116,9 +116,9 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 		PsiElement prevElement = insertedStatement.getPrevSibling();
 		PsiElement nextElement = insertedStatement.getNextSibling();
 
-		if( prevElement != null && !"\n".equals(prevElement.getText()))
+		if (prevElement != null && !"\n".equals(prevElement.getText()))
 			statementContainer.addBefore(newLineElement, insertedStatement);
-		if( nextElement != null && !"\n".equals(nextElement.getText()))
+		if (nextElement != null && !"\n".equals(nextElement.getText()))
 			statementContainer.addAfter(newLineElement, insertedStatement);
 
 	}
