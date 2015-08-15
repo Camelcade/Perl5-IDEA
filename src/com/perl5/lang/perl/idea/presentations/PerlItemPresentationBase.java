@@ -34,10 +34,14 @@ import javax.swing.*;
 public abstract class PerlItemPresentationBase implements ColoredItemPresentation
 {
 	PsiElement myElement;
+	TextAttributesKey myAttributesKey;
 
 	public PerlItemPresentationBase(PsiElement element)
 	{
 		myElement = element;
+		myAttributesKey = myElement instanceof PerlDeprecatable && ((PerlDeprecatable) myElement).isDeprecated()
+				? CodeInsightColors.DEPRECATED_ATTRIBUTES
+				: null;
 	}
 
 	@Nullable
@@ -73,8 +77,11 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
 	@Override
 	public TextAttributesKey getTextAttributesKey()
 	{
-		return myElement instanceof PerlDeprecatable && ((PerlDeprecatable) myElement).isDeprecated()
-				? CodeInsightColors.DEPRECATED_ATTRIBUTES
-				: null;
+		return myAttributesKey;
+	}
+
+	public void setAttributesKey(TextAttributesKey myAttributesKey)
+	{
+		this.myAttributesKey = myAttributesKey;
 	}
 }

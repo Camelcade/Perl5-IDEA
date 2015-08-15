@@ -19,10 +19,13 @@ package com.perl5.lang.perl.idea.structureView;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewModelBase;
 import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.util.treeView.smartTree.Filter;
 import com.intellij.ide.util.treeView.smartTree.Sorter;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.idea.structureView.elements.PerlLeafStructureViewElement;
+import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
+import com.perl5.lang.perl.idea.structureView.filters.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,6 +33,15 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider
 {
+	private static final Filter[] FILTERS = new Filter[]{
+			PerlVariableFilter.INSTANCE,
+			PerlConstantFilter.INSTANCE,
+			PerlMethodFilter.INSTANCE,
+			PerlDeclarationFilter.INSTANCE,
+			PerlInheritedFilter.INSTANCE,
+			PerlImportedFilter.INSTANCE
+	};
+
 	public PerlStructureViewModel(PsiFile psiFile, Editor editor)
 	{
 		super(psiFile, editor, new PerlStructureViewElement(psiFile));
@@ -42,6 +54,20 @@ public class PerlStructureViewModel extends StructureViewModelBase implements St
 		return new Sorter[]{Sorter.ALPHA_SORTER};
 	}
 
+	@NotNull
+	@Override
+	public Filter[] getFilters()
+	{
+		return FILTERS;
+	}
+
+	@NotNull
+	@Override
+	protected Class[] getSuitableClasses()
+	{
+		return super.getSuitableClasses();
+	}
+
 	@Override
 	public boolean isAlwaysShowsPlus(StructureViewTreeElement structureViewTreeElement)
 	{
@@ -51,6 +77,8 @@ public class PerlStructureViewModel extends StructureViewModelBase implements St
 	@Override
 	public boolean isAlwaysLeaf(StructureViewTreeElement structureViewTreeElement)
 	{
-		return structureViewTreeElement instanceof PerlFile;
+		return structureViewTreeElement instanceof PerlLeafStructureViewElement;
 	}
+
+
 }

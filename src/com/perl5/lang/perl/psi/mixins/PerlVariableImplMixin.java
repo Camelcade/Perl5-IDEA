@@ -324,10 +324,14 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public ItemPresentation getPresentation()
 	{
+		return new PerlItemPresentationSimple(this, getName());
+
+/*		not sure it's a good idea or it must be smarter than that
 		if( getParent() instanceof PsiPerlVariableDeclarationGlobal)
 			return new PerlItemPresentationSimple(this, getCanonicalName());
 		else
 			return new PerlItemPresentationSimple(this, getName());
+*/
 	}
 
 	@Nullable

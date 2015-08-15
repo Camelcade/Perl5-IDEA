@@ -14,21 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.structureView;
+package com.perl5.lang.perl.idea.structureView.elements;
 
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mro.PerlMro;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -37,10 +42,34 @@ import java.util.List;
 public class PerlStructureViewElement implements StructureViewTreeElement, SortableTreeElement
 {
 	protected PsiElement myElement;
+	protected boolean isInherited;
+	protected boolean isImported;
 
 	public PerlStructureViewElement(PsiElement element)
 	{
 		myElement = element;
+	}
+
+	public PerlStructureViewElement setInherited()
+	{
+		this.isInherited = true;
+		return this;
+	}
+
+	public PerlStructureViewElement setImported()
+	{
+		this.isImported = true;
+		return this;
+	}
+
+	public boolean isInherited()
+	{
+		return isInherited;
+	}
+
+	public boolean isImported()
+	{
+		return isImported;
 	}
 
 	@Override
@@ -94,6 +123,8 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 		if (itemPresentation == null)
 			itemPresentation = new PerlItemPresentationSimple(myElement, "FIXME");
+		else if (isInherited() && itemPresentation instanceof PerlItemPresentationBase)
+			((PerlItemPresentationBase) itemPresentation).setAttributesKey(CodeInsightColors.NOT_USED_ELEMENT_ATTRIBUTES);
 
 		return itemPresentation;
 	}
@@ -104,39 +135,70 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 	{
 		List<TreeElement> result = new ArrayList<TreeElement>();
 
-		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition || myElement instanceof PerlSubDefinition)
+		HashSet<String> implementedMethods = new HashSet<String>();
+
+		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition)
+		{
 			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
 					result.add(new PerlStructureViewElement(child));
 
-		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition)
-		{
 			for (PsiPerlVariableDeclarationGlobal child : PsiTreeUtil.findChildrenOfType(myElement, PsiPerlVariableDeclarationGlobal.class))
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
 				{
 					for (PerlVariable variable : child.getScalarVariableList())
-						result.add(new PerlStructureViewElement(variable));
+						result.add(new PerlVariableStructureViewElement(variable));
 					for (PerlVariable variable : child.getArrayVariableList())
-						result.add(new PerlStructureViewElement(variable));
+						result.add(new PerlVariableStructureViewElement(variable));
 					for (PerlVariable variable : child.getHashVariableList())
-						result.add(new PerlStructureViewElement(variable));
+						result.add(new PerlVariableStructureViewElement(variable));
 				}
 
 			for (PerlGlobVariable child : PsiTreeUtil.findChildrenOfType(myElement, PerlGlobVariable.class))
 				if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
-					result.add(new PerlStructureViewElement(child));
+				{
+					implementedMethods.add(child.getName());
+					result.add(new PerlGlobStructureViewElement(child));
+				}
 
 			for (PerlConstant child : PsiTreeUtil.findChildrenOfType(myElement, PerlConstant.class))
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
-					result.add(new PerlStructureViewElement(child));
+				{
+					implementedMethods.add(child.getName());
+					result.add(new PerlConstantStructureViewElement(child));
+				}
 
 			for (PerlSubDeclaration child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDeclaration.class))
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
-					result.add(new PerlStructureViewElement(child));
+					result.add(new PerlSubStructureViewElement(child));
 
 			for (PerlSubDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinition.class))
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
-					result.add(new PerlStructureViewElement(child));
+				{
+					implementedMethods.add(child.getName());
+					result.add(new PerlSubStructureViewElement(child));
+				}
+		}
+
+		if (myElement instanceof PerlNamespaceDefinition)
+		{
+			List<TreeElement> inheritedResult = new ArrayList<TreeElement>();
+
+			for (PsiElement element : PerlMro.getVariants(myElement.getProject(), ((PerlNamespaceDefinition) myElement).getName(), true))
+				if (element instanceof PerlNamedElement && !implementedMethods.contains(((PerlNamedElement) element).getName()))
+				{
+					if (element instanceof PerlSubDefinition)
+						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinition) element).setInherited());
+					else if (element instanceof PerlSubDeclaration)
+						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclaration) element).setInherited());
+					else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).getName() != null)
+						inheritedResult.add(new PerlGlobStructureViewElement((PerlGlobVariable) element).setInherited());
+					else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
+						inheritedResult.add(new PerlConstantStructureViewElement((PerlConstant) element).setInherited());
+				}
+
+			if (inheritedResult.size() > 0)
+				result.addAll(0, inheritedResult);
 		}
 
 		return result.toArray(new TreeElement[result.size()]);
