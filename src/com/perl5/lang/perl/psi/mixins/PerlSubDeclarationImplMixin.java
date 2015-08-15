@@ -48,7 +48,12 @@ public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseMixin<PerlS
 	@Override
 	public ItemPresentation getPresentation()
 	{
-		return new PerlItemPresentationSimple(this, "Sub declaration");
+		return new PerlItemPresentationSimple(this, getPresentableName());
 	}
 
+	@Override
+	public String getPresentableName()
+	{
+		return this.getName() + "(?)";
+	}
 }

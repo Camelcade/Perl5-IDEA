@@ -66,4 +66,11 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 		PsiElement nameIdentifier = getNameIdentifier();
 		return nameIdentifier == null ? null : nameIdentifier.getText();
 	}
+
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
+
 }

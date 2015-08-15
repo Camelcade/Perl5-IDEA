@@ -45,8 +45,12 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 					if (!"main".equals(o.getPackageName()))
 						registerProblem(holder, o.getNameIdentifier(), "Multiple subs definitions found");
 
-				if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 0)
-					registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with typeglob alias");
+				for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+					if (target.isLeftSideOfAssignment())
+					{
+						registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with typeglob alias");
+						break;
+					}
 
 				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 0)
 					registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with constant definition");
@@ -65,8 +69,13 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 					if (PerlSubUtil.getSubDefinitions(project, canonicalName).size() > 0)
 						registerProblem(holder, o.getNameIdentifier(), "Typeglob clashes with sub definition");
 
-					if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 1)
-						registerProblem(holder, o.getNameIdentifier(), "Multiple typeglob aliases found");
+					int globsNumber = 0;
+					for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+						if (target.isLeftSideOfAssignment() && ++globsNumber > 1)
+						{
+							registerProblem(holder, o.getNameIdentifier(), "Multiple typeglob aliases found");
+							break;
+						}
 
 					if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 0)
 						registerProblem(holder, o.getNameIdentifier(), "Typeglob clashes with constant definition");
@@ -82,8 +91,12 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				if (PerlSubUtil.getSubDefinitions(project, canonicalName).size() > 0)
 					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with sub definition");
 
-				if (PerlGlobUtil.getGlobsDefinitions(project, canonicalName).size() > 0)
-					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with with typeglob alias");
+				for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+					if (target.isLeftSideOfAssignment())
+					{
+						registerProblem(holder, o.getNameIdentifier(), "Constant clashes with with typeglob alias");
+						break;
+					}
 
 				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 1)
 					registerProblem(holder, o.getNameIdentifier(), "Multiple constants definitions found");

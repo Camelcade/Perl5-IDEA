@@ -160,9 +160,17 @@ public class PerlSubReference extends PerlReferencePoly
 		if (resolveResults.length == 0)
 			return null;
 
+		PerlGlobVariable lastGlob = null;
 		for (ResolveResult resolveResult : resolveResults)
 			if (resolveResult.getElement() instanceof PerlGlobVariable)
-				return resolveResult.getElement();
+			{
+				lastGlob = (PerlGlobVariable) resolveResult.getElement();
+				if (lastGlob.isLeftSideOfAssignment())
+					return lastGlob;
+			}
+
+		if (lastGlob != null)
+			return lastGlob;
 
 		return resolveResults[0].getElement();
 	}

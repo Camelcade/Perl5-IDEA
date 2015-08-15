@@ -112,9 +112,21 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String guessVariableType()
 	{
+		PsiFile file = getContainingFile();
+		if (file instanceof PerlFileElement)
+			return ((PerlFileElement) file).getVariableType(this);
+		return guessVariableTypeHeavy();
+	}
+
+
+	@Nullable
+	@Override
+	public String guessVariableTypeHeavy()
+	{
 		if (this instanceof PsiPerlScalarVariable)
 		{
 //			System.err.println("Guessing type for " + getText() + " at " + getTextOffset());
+
 			PerlVariableNameElement variableNameElement = getVariableNameElement();
 
 			if (variableNameElement != null)
@@ -388,4 +400,9 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
 	}
 
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
 }

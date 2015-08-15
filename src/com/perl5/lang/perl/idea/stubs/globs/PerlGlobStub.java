@@ -27,4 +27,6 @@ public interface PerlGlobStub extends StubElement<PsiPerlGlobVariable>
 	public String getPackageName();
 
 	public String getName();
+
+	public boolean isLeftSideOfAssignment();
 }

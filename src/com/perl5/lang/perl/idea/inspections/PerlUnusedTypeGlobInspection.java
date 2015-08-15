@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,10 +39,7 @@ public class PerlUnusedTypeGlobInspection extends PerlInspection
 			@Override
 			public void visitGlobVariable(@NotNull PsiPerlGlobVariable o)
 			{
-				if (o.getParent() instanceof PsiPerlAssignExpr
-						&& o.getNextSibling() != null
-						&& ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findAll().size() == 0
-						)
+				if (ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findFirst() == null)
 					holder.registerProblem(o, "Unused typeglob alias", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 
 			}

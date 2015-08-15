@@ -28,12 +28,14 @@ public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements P
 {
 	private final String packageName;
 	private final String variableName;
+	private final boolean isLeftSideOfAssignment;
 
-	public PerlGlobStubImpl(final StubElement parent, final String packageName, final String variableName)
+	public PerlGlobStubImpl(final StubElement parent, final String packageName, final String variableName, boolean isLeftSideOfAssignment)
 	{
 		super(parent, PerlStubElementTypes.PERL_GLOB);
 		this.packageName = packageName;
 		this.variableName = variableName;
+		this.isLeftSideOfAssignment = isLeftSideOfAssignment;
 	}
 
 	@Override
@@ -46,5 +48,11 @@ public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements P
 	public String getName()
 	{
 		return variableName;
+	}
+
+	@Override
+	public boolean isLeftSideOfAssignment()
+	{
+		return isLeftSideOfAssignment;
 	}
 }

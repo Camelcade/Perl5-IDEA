@@ -18,7 +18,9 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -44,6 +46,18 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	@Override
 	public String getContextPackageName()
 	{
+		PsiFile file = getContainingFile();
+		if (file instanceof PerlFileElement)
+			return ((PerlFileElement) file).getMethodNamespace(this);
+
+		else return getContextPackageNameHeavy();
+	}
+
+	@Override
+	public String getContextPackageNameHeavy()
+	{
+//		System.err.println("Guessing type for method " + getText() + " at " + getTextOffset());
+
 		PsiElement parent = getParent();
 		PsiElement grandParent = parent == null ? null : parent.getParent();
 

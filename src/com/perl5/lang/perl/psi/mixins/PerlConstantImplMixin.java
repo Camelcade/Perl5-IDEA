@@ -138,4 +138,10 @@ public abstract class PerlConstantImplMixin extends StubBasedPsiElementBase<Perl
 		return PerlIcons.CONSTANT_GUTTER_ICON;
 	}
 
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
+
 }

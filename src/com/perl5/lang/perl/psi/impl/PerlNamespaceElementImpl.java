@@ -197,5 +197,10 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 		return super.getTextRange();
 	}
 
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
 
 }

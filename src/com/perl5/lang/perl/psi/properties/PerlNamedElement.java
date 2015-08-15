@@ -23,4 +23,10 @@ import com.intellij.psi.PsiNameIdentifierOwner;
  */
 public interface PerlNamedElement extends PsiNameIdentifierOwner
 {
+	/**
+	 * Getting name for presentation
+	 *
+	 * @return ^^
+	 */
+	public String getPresentableName();
 }

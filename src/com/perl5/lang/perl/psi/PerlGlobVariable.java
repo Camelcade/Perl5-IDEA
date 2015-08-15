@@ -27,4 +27,10 @@ import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
  */
 public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer, PerlNamedElement
 {
+	/**
+	 * Checks if this typeglob is left part of assignment
+	 *
+	 * @return result
+	 */
+	boolean isLeftSideOfAssignment();
 }

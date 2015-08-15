@@ -78,9 +78,20 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
+
+		// got nothing
 		if (resolveResults.length == 0)
 			return null;
 
+		// first left-side of assignment element
+		for (ResolveResult result : resolveResults)
+		{
+			PsiElement element = result.getElement();
+			if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).isLeftSideOfAssignment())
+				return element;
+		}
+
+		// any element
 		return resolveResults[0].getElement();
 	}
 }

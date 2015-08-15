@@ -67,7 +67,7 @@ public class PerlUnusedLexicalVariableInspection extends PerlInspection
 
 	public boolean isVariableUnused(PerlVariable variable)
 	{
-		return ReferencesSearch.search(variable, getSearchScope(variable)).findAll().size() == 0;
+		return ReferencesSearch.search(variable, getSearchScope(variable)).findFirst() == null;
 	}
 
 	protected SearchScope getSearchScope(PsiElement element)

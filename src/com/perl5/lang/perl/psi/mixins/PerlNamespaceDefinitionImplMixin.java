@@ -164,4 +164,10 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	{
 		getMro().getLinearISA(getProject(), getParentNamespaces(), recursionMap, result);
 	}
+
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
 }

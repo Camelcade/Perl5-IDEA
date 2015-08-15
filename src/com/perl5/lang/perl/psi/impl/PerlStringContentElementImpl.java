@@ -117,4 +117,10 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		return null;
 	}
 
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
+
 }

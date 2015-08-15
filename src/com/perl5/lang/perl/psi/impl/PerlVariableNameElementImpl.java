@@ -79,5 +79,10 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
 	}
 
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
 
 }

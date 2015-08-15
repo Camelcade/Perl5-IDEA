@@ -99,9 +99,18 @@ public class PerlVariableNameReference extends PerlReferencePoly
 		else if (resolveResults.length == 1)
 			return resolveResults[0].getElement();
 
+
+		PerlGlobVariable lastGlob = null;
 		for (ResolveResult resolveResult : resolveResults)
 			if (resolveResult.getElement() instanceof PerlGlobVariable)
-				return resolveResult.getElement();
+			{
+				lastGlob = (PerlGlobVariable) resolveResult.getElement();
+				if (lastGlob.isLeftSideOfAssignment())
+					return lastGlob;
+			}
+
+		if (lastGlob != null)
+			return lastGlob;
 
 		return resolveResults[0].getElement();
 	}

@@ -23,4 +23,19 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
  */
 public interface PerlFile extends PerlLexicalScope, PerlNamespaceContainer
 {
+	/**
+	 * Checks variable type from cache or using callback guessVariableTypeHeavy
+	 *
+	 * @param element variable element
+	 * @return variable type string
+	 */
+	public String getVariableType(PerlVariable element);
+
+	/**
+	 * Checks method namespace in cache or using callback getContextPackageNameHeavy
+	 *
+	 * @param element method element
+	 * @return variable type string
+	 */
+	public String getMethodNamespace(PerlMethod element);
 }

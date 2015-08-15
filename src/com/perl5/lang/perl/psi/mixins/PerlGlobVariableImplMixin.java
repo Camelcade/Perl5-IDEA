@@ -27,6 +27,7 @@ import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -154,5 +155,20 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	public ItemPresentation getPresentation()
 	{
 		return new PerlItemPresentationSimple(this, "Typeglob assignment");
+	}
+
+	@Override
+	public boolean isLeftSideOfAssignment()
+	{
+		PerlGlobStub stub = getStub();
+		if (stub != null)
+			return stub.isLeftSideOfAssignment();
+		return getParent() instanceof PsiPerlAssignExpr && getNextSibling() != null;
+	}
+
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
 	}
 }

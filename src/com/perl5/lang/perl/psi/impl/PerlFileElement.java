@@ -26,10 +26,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclaration;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -42,6 +39,7 @@ import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by hurricup on 26.04.2015.
@@ -49,12 +47,12 @@ import java.util.*;
 public class PerlFileElement extends PsiFileBase implements PerlFile
 {
 	private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
-
+	protected ConcurrentHashMap<PerlVariable, String> VARIABLE_TYPES_CACHE = new ConcurrentHashMap<PerlVariable, String>();
+	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESAPCES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
 	List<PerlLexicalDeclaration> declaredScalars = new ArrayList<PerlLexicalDeclaration>();
 	List<PerlLexicalDeclaration> declaredArrays = new ArrayList<PerlLexicalDeclaration>();
 	List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
 	List<PerlLexicalDeclaration> declaredVariables = new ArrayList<PerlLexicalDeclaration>();
-
 	boolean lexicalCacheInvalid = true;
 
 	public PerlFileElement(@NotNull FileViewProvider viewProvider, Language language)
@@ -106,6 +104,8 @@ public class PerlFileElement extends PsiFileBase implements PerlFile
 	{
 		super.subtreeChanged();
 		lexicalCacheInvalid = true;
+		VARIABLE_TYPES_CACHE.clear();
+		METHODS_NAMESAPCES_CACHE.clear();
 	}
 
 	/**
@@ -273,4 +273,36 @@ public class PerlFileElement extends PsiFileBase implements PerlFile
 		else
 			return PerlMroC3.INSTANCE;
 	}
+
+	@Override
+	public String getVariableType(PerlVariable element)
+	{
+		if (VARIABLE_TYPES_CACHE.containsKey(element))
+		{
+			String type = VARIABLE_TYPES_CACHE.get(element);
+			return type.isEmpty() ? null : type;
+		}
+
+		String type = element.guessVariableTypeHeavy();
+		VARIABLE_TYPES_CACHE.put(element, type == null ? "" : type);
+		return getVariableType(element);
+	}
+
+	@Override
+	public String getMethodNamespace(PerlMethod element)
+	{
+		if (METHODS_NAMESAPCES_CACHE.containsKey(element))
+		{
+//			System.err.println("Got cached type for method " + element.getText() + " at " + element.getTextOffset());
+			String type = METHODS_NAMESAPCES_CACHE.get(element);
+			return type.isEmpty() ? null : type;
+		}
+
+		String type = element.getContextPackageNameHeavy();
+		METHODS_NAMESAPCES_CACHE.put(element, type == null ? "" : type);
+		return getMethodNamespace(element);
+	}
+
+
+
 }

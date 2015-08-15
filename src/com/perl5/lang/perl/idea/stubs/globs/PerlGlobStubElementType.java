@@ -46,7 +46,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	@Override
 	public PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub)
 	{
-		return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getName());
+		return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getName(), psi.isLeftSideOfAssignment());
 	}
 
 	@NotNull
@@ -69,18 +69,19 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	{
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getName());
+		dataStream.writeBoolean(stub.isLeftSideOfAssignment());
 	}
 
 	@NotNull
 	@Override
 	public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString());
+		return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString(), dataStream.readBoolean());
 	}
 
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		return node.findChildByType(PerlElementTypes.VARIABLE_NAME) != null && node.getTreeParent().getElementType() == PerlElementTypes.ASSIGN_EXPR && node.getTreeNext() != null;
+		return node.findChildByType(PerlElementTypes.VARIABLE_NAME) != null;
 	}
 }

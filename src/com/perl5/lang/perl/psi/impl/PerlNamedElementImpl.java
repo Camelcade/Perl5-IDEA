@@ -57,6 +57,12 @@ public abstract class PerlNamedElementImpl extends ASTWrapperPsiElement implemen
 		return nameElement == null ? "UNKNOWN" : nameElement.getText();
 	}
 
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
+
 	@NotNull
 	@Override
 	public PsiReference[] getReferences()

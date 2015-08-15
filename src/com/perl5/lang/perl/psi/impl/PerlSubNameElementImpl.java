@@ -96,6 +96,12 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		return this.getText();
 	}
 
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
+
 	@NotNull
 	@Override
 	public PsiReference[] getReferences()
