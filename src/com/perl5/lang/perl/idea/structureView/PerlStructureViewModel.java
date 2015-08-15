@@ -35,6 +35,7 @@ public class PerlStructureViewModel extends StructureViewModelBase implements St
 {
 	private static final Filter[] FILTERS = new Filter[]{
 			PerlVariableFilter.INSTANCE,
+			PerlGlobFilter.INSTANCE,
 			PerlConstantFilter.INSTANCE,
 			PerlMethodFilter.INSTANCE,
 			PerlDeclarationFilter.INSTANCE,

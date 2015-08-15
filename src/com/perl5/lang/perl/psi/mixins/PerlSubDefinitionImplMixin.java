@@ -121,7 +121,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 
 		PsiPerlBlock subBlock = getBlock();
 
-		if (subBlock != null)
+		if (subBlock.isValid())
 		{
 
 			for (PsiElement statement : subBlock.getChildren())

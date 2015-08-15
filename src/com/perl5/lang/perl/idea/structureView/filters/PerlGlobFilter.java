@@ -21,21 +21,21 @@ import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
 import com.intellij.ide.util.treeView.smartTree.Filter;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.structureView.elements.PerlVariableStructureViewElement;
+import com.perl5.lang.perl.idea.structureView.elements.PerlGlobStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlVariableFilter implements Filter
+public class PerlGlobFilter implements Filter
 {
-	public static final PerlVariableFilter INSTANCE = new PerlVariableFilter();
-	private static final String ID = "SHOW_VARIABLES";
+	public static final PerlGlobFilter INSTANCE = new PerlGlobFilter();
+	private static final String ID = "SHOW_GLOBS";
 
 	@Override
 	public boolean isVisible(TreeElement treeElement)
 	{
-		return !(treeElement instanceof PerlVariableStructureViewElement);
+		return !(treeElement instanceof PerlGlobStructureViewElement);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class PerlVariableFilter implements Filter
 	@Override
 	public ActionPresentation getPresentation()
 	{
-		return new ActionPresentationData("Show variables", null, PerlIcons.SCALAR_GUTTER_ICON);
+		return new ActionPresentationData("Show typeglobs", null, PerlIcons.GLOB_GUTTER_ICON);
 	}
 
 	@NotNull
