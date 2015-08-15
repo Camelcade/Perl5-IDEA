@@ -40,7 +40,8 @@ public class PerlSubUnusedInpsection extends PerlInspection
 			"UNITCHECK",
 			"CHECK",
 			"INIT",
-			"END"
+			"END",
+			"DESTROY"
 	));
 
 	@NotNull

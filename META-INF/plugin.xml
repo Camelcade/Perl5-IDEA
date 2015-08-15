@@ -108,6 +108,9 @@
         <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
         <lang.syntaxHighlighterFactory key="Perl5" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
 
+        <lang.psiStructureViewFactory language="Perl5"
+                                      implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorMisc"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorSubs"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorVariables"/>
