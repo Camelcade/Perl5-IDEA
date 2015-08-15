@@ -23,6 +23,7 @@ import com.intellij.usageView.UsageViewShortNameLocation;
 import com.intellij.usageView.UsageViewTypeLocation;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -36,22 +37,24 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 	{
 		PsiElement parent = element.getParent();
 
+//		System.out.println(element + " for " + location);
+
 		if (location == HighlightUsagesDescriptionLocation.INSTANCE    // ???
 				|| location == UsageViewNodeTextLocation.INSTANCE        // child element of find usages
 				)
 			return getElementDescription(element, UsageViewShortNameLocation.INSTANCE);
 		else if (location == UsageViewTypeLocation.INSTANCE)
 		{
-			if (element instanceof PerlSubDeclaration || parent instanceof PerlSubDeclaration)
-				return "sub declaration";
-			else if (element instanceof PerlSubDefinition || parent instanceof PerlSubDefinition)
-				return "sub definition";
-			else if (element instanceof PerlNamespaceDefinition || parent instanceof PerlNamespaceDefinition)
-				return "namespace definition";
+			if (element instanceof PerlSubDeclaration)
+				return "Sub declaration";
+			else if (element instanceof PerlSubDefinition)
+				return "Sub definition";
+			else if (element instanceof PerlNamespaceDefinition)
+				return "Namespace definition";
 			else if (element instanceof PerlFileElement)
 				return "perl file";
 			else if (element instanceof PsiPackage)
-				return "directory";
+				return "Directory";
 			else if (element instanceof PerlGlobVariable)
 				return "Typeglob";
 			else if (element instanceof PerlVariable)
@@ -69,7 +72,9 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 		// file renaming
 		else if (location == UsageViewShortNameLocation.INSTANCE)
 		{
-			if (element instanceof PerlPackageMember)
+			if (element instanceof PerlNamedElement)
+				return ((PerlNamedElement) element).getPresentableName();
+			else if (element instanceof PerlPackageMember)
 				return ((PerlPackageMember) element).getCanonicalName();
 			else if (element instanceof PsiNamedElement)
 				return ((PsiNamedElement) element).getName();
