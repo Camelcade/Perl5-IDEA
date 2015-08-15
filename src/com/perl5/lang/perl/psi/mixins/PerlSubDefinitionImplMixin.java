@@ -67,7 +67,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 		if (stub != null)
 			return stub.isMethod();
 
-		if (getSubAnnotations().isMethod())
+		if (super.isMethod())
 			return true;
 
 		List<PerlSubArgument> arguments = getSubArgumentsList();

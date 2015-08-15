@@ -32,16 +32,19 @@ public abstract class PerlAnnotator implements Annotator, PerlElementTypes
 {
 	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
 
+	public static TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isBuiltIn, boolean isDeprecated)
+	{
+		if (isBuiltIn)
+			textAttributes = TextAttributes.merge(textAttributes, PerlSyntaxHighlighter.BOLD);
+		if (isDeprecated)
+			textAttributes = TextAttributes.merge(textAttributes, PerlSyntaxHighlighter.STROKE);
+		return textAttributes;
+	}
+
+
 	public void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
 	{
-		TextAttributes attrs = currentScheme.getAttributes(key);
-
-		if (builtin)
-			attrs = TextAttributes.merge(attrs, PerlSyntaxHighlighter.BOLD);
-		if (deprecated)
-			attrs = TextAttributes.merge(attrs, PerlSyntaxHighlighter.STROKE);
-
-		annotation.setEnforcedTextAttributes(attrs);
+		annotation.setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), builtin, deprecated));
 	}
 
 }

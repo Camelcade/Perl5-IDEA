@@ -39,7 +39,9 @@ public class PerlIcons
 	public static final Icon PACKAGE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/package_gutter_icon.png");
 	public static final Icon PRAGMA_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/pragmaicon.png");
 
-	public static final Icon SUBROUTINE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/subroutine_gutter_icon.png");
+	public static final Icon SUB_DECLARATION_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/sub_declaration_gutter_icon.png");
+	public static final Icon METHOD_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/method_gutter_icon.png");
+	public static final Icon SUB_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/subroutine_gutter_icon.png");
 	public static final Icon CONSTANT_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/constant_gutter_icon.png");
 
 	public static final Icon ANNOTATION_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/annotation_gutter_icon.png");

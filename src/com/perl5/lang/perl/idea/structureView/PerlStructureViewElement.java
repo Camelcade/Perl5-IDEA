@@ -23,8 +23,13 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 15.08.2015.
@@ -97,6 +102,43 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 	@Override
 	public TreeElement[] getChildren()
 	{
-		return new TreeElement[0];
+		List<TreeElement> result = new ArrayList<TreeElement>();
+
+		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition || myElement instanceof PerlSubDefinition)
+			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
+				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+					result.add(new PerlStructureViewElement(child));
+
+		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition)
+		{
+			for (PsiPerlVariableDeclarationGlobal child : PsiTreeUtil.findChildrenOfType(myElement, PsiPerlVariableDeclarationGlobal.class))
+				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+				{
+					for (PerlVariable variable : child.getScalarVariableList())
+						result.add(new PerlStructureViewElement(variable));
+					for (PerlVariable variable : child.getArrayVariableList())
+						result.add(new PerlStructureViewElement(variable));
+					for (PerlVariable variable : child.getHashVariableList())
+						result.add(new PerlStructureViewElement(variable));
+				}
+
+			for (PerlGlobVariable child : PsiTreeUtil.findChildrenOfType(myElement, PerlGlobVariable.class))
+				if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+					result.add(new PerlStructureViewElement(child));
+
+			for (PerlConstant child : PsiTreeUtil.findChildrenOfType(myElement, PerlConstant.class))
+				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+					result.add(new PerlStructureViewElement(child));
+
+			for (PerlSubDeclaration child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDeclaration.class))
+				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+					result.add(new PerlStructureViewElement(child));
+
+			for (PerlSubDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinition.class))
+				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+					result.add(new PerlStructureViewElement(child));
+		}
+
+		return result.toArray(new TreeElement[result.size()]);
 	}
 }

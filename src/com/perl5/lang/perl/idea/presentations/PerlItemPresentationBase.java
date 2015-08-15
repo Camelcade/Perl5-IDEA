@@ -16,11 +16,14 @@
 
 package com.perl5.lang.perl.idea.presentations;
 
-import com.intellij.navigation.ItemPresentation;
+import com.intellij.navigation.ColoredItemPresentation;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.psi.PerlDeprecatable;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -28,7 +31,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlItemPresentationBase implements ItemPresentation
+public abstract class PerlItemPresentationBase implements ColoredItemPresentation
 {
 	PsiElement myElement;
 
@@ -41,6 +44,9 @@ public abstract class PerlItemPresentationBase implements ItemPresentation
 	@Override
 	public String getLocationString()
 	{
+		if (!myElement.isValid())
+			return null;
+
 		PsiFile file = myElement.getContainingFile();
 		Document document = PsiDocumentManager.getInstance(myElement.getProject()).getCachedDocument(file);
 
@@ -61,5 +67,14 @@ public abstract class PerlItemPresentationBase implements ItemPresentation
 	public PsiElement getElement()
 	{
 		return myElement;
+	}
+
+	@Nullable
+	@Override
+	public TextAttributesKey getTextAttributesKey()
+	{
+		return myElement instanceof PerlDeprecatable && ((PerlDeprecatable) myElement).isDeprecated()
+				? CodeInsightColors.DEPRECATED_ATTRIBUTES
+				: null;
 	}
 }

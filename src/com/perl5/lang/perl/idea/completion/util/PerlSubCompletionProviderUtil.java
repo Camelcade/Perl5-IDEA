@@ -53,7 +53,7 @@ public class PerlSubCompletionProviderUtil
 
 			LookupElementBuilder newElement = LookupElementBuilder
 					.create(subDefinition.getSubName())
-					.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+					.withIcon(PerlIcons.SUB_GUTTER_ICON)
 					.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated());
 
 			if (!argsString.isEmpty())
@@ -73,7 +73,7 @@ public class PerlSubCompletionProviderUtil
 		{
 			LookupElementBuilder newElement = LookupElementBuilder
 					.create(subDeclaration.getSubName())
-					.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+					.withIcon(PerlIcons.SUB_GUTTER_ICON)
 					.withStrikeoutness(subDeclaration.getSubAnnotations().isDeprecated())
 					.withInsertHandler(SUB_SELECTION_HANDLER)
 					.withTailText("(?)");
@@ -129,7 +129,7 @@ public class PerlSubCompletionProviderUtil
 
 			LookupElementBuilder newElement = LookupElementBuilder
 					.create(indexKeyName)
-					.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+					.withIcon(PerlIcons.SUB_GUTTER_ICON)
 					.withPresentableText(subDefinition.getSubName())
 					.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated());
 
@@ -156,7 +156,7 @@ public class PerlSubCompletionProviderUtil
 
 			LookupElementBuilder newElement = LookupElementBuilder
 					.create(indexKeyName)
-					.withIcon(PerlIcons.SUBROUTINE_GUTTER_ICON)
+					.withIcon(PerlIcons.SUB_GUTTER_ICON)
 					.withStrikeoutness(subAnnotations.isDeprecated())
 					.withPresentableText(subDeclaration.getSubName())
 					.withInsertHandler(SUB_SELECTION_HANDLER)

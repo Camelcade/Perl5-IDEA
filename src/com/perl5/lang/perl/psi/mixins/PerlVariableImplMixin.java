@@ -324,7 +324,10 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public ItemPresentation getPresentation()
 	{
-		return new PerlItemPresentationSimple(this, getFirstChild().getText() + getName());
+		if( getParent() instanceof PsiPerlVariableDeclarationGlobal)
+			return new PerlItemPresentationSimple(this, getCanonicalName());
+		else
+			return new PerlItemPresentationSimple(this, getName());
 	}
 
 	@Nullable

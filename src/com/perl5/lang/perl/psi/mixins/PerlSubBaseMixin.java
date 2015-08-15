@@ -163,10 +163,25 @@ public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends Stu
 		return myAnnotations;
 	}
 
+	@Override
+	public boolean isDeprecated()
+	{
+		return getSubAnnotations().isDeprecated();
+	}
+
+	@Override
+	public boolean isMethod()
+	{
+		return getSubAnnotations().isMethod();
+	}
+
 	@Nullable
 	@Override
 	public Icon getIcon(int flags)
 	{
-		return PerlIcons.SUBROUTINE_GUTTER_ICON;
+		if (isMethod())
+			return PerlIcons.METHOD_GUTTER_ICON;
+		else
+			return PerlIcons.SUB_GUTTER_ICON;
 	}
 }

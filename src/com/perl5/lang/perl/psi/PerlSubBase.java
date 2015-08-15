@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiElement<Stub>, PerlPackageMember, PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlNamedElement
+public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiElement<Stub>, PerlPackageMember, PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlNamedElement, PerlDeprecatable
 {
 	/**
 	 * Returns package name for current function
@@ -52,6 +52,7 @@ public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiEleme
 	 * @return result
 	 */
 	public boolean isMethod();
+
 
 	/**
 	 * Checks PSI tree before a sub definition for annotations and builds annotations object

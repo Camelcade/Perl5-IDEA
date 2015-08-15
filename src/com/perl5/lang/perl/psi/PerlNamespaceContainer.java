@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
@@ -25,7 +26,7 @@ import java.util.List;
  * Created by hurricup on 09.08.2015.
  * This interface shows that element wraps the namespace.
  */
-public interface PerlNamespaceContainer
+public interface PerlNamespaceContainer extends PsiElement
 {
 	/**
 	 * Returns package name

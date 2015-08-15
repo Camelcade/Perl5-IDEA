@@ -154,7 +154,7 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public ItemPresentation getPresentation()
 	{
-		return new PerlItemPresentationSimple(this, "Typeglob assignment");
+		return new PerlItemPresentationSimple(this, getName());
 	}
 
 	@Override
