@@ -84,8 +84,13 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String canonicalName)
 	{
+		return getSubDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+	}
+
+	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
+	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PsiPerlSubDefinition.class);
+		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PsiPerlSubDefinition.class);
 	}
 
 	/**
@@ -109,8 +114,13 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName)
 	{
+		return getSubDeclarations(project, canonicalName, GlobalSearchScope.allScope(project));
+	}
+
+	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope)
+	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PsiPerlSubDeclaration.class);
+		return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PsiPerlSubDeclaration.class);
 	}
 
 	/**
@@ -133,9 +143,15 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<PerlConstant> getConstantsDefinitions(Project project, String canonicalName)
 	{
-		assert canonicalName != null;
-		return StubIndex.getElements(PerlConstantsStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PerlConstant.class);
+		return getConstantsDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
 	}
+
+	public static Collection<PerlConstant> getConstantsDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
+	{
+		assert canonicalName != null;
+		return StubIndex.getElements(PerlConstantsStubIndex.KEY, canonicalName, project, scope, PerlConstant.class);
+	}
+
 
 	/**
 	 * Returns list of defined constants

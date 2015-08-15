@@ -176,10 +176,18 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static Collection<PsiPerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName)
 	{
+		return getNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
+	}
+
+	public static Collection<PsiPerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
+	{
 		assert packageName != null;
 
-		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, GlobalSearchScope.allScope(project), PsiPerlNamespaceDefinition.class);
+		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PsiPerlNamespaceDefinition.class);
 	}
+
+
+
 
 	/**
 	 * Returns list of defined package names

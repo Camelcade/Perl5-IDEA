@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -39,9 +40,9 @@ public class PerlSubMultipleDeclarationsInspection extends PerlInspection
 			public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
 			{
 				Project project = o.getProject();
-
 				String canonicalName = o.getCanonicalName();
-				if (PerlSubUtil.getSubDeclarations(project, canonicalName).size() > 1)
+
+				if (canonicalName != null && PerlSubUtil.getSubDeclarations(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
 					registerProblem(holder, o.getNameIdentifier(), "Multiple subs declarations found");
 			}
 		};

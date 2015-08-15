@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -41,19 +42,22 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				Project project = o.getProject();
 
 				String canonicalName = o.getCanonicalName();
-				if (PerlSubUtil.getSubDefinitions(project, canonicalName).size() > 1)
-					if (!"main".equals(o.getPackageName()))
-						registerProblem(holder, o.getNameIdentifier(), "Multiple subs definitions found");
+				if (canonicalName != null)
+				{
+					if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
+						if (!"main".equals(o.getPackageName()))
+							registerProblem(holder, o.getNameIdentifier(), "Multiple subs definitions found");
 
-				for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-					if (target.isLeftSideOfAssignment())
-					{
-						registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with typeglob alias");
-						break;
-					}
+					for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)))
+						if (target.isLeftSideOfAssignment())
+						{
+							registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with typeglob alias");
+							break;
+						}
 
-				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 0)
-					registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with constant definition");
+					if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 0)
+						registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with constant definition");
+				}
 			}
 
 			@Override
@@ -61,24 +65,27 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 			{
 				if (o.getParent() instanceof PsiPerlAssignExpr && o.getNextSibling() != null)
 				{
-
-					Project project = o.getProject();
-
 					String canonicalName = o.getCanonicalName();
+					if (canonicalName != null)
+					{
 
-					if (PerlSubUtil.getSubDefinitions(project, canonicalName).size() > 0)
-						registerProblem(holder, o.getNameIdentifier(), "Typeglob clashes with sub definition");
+						Project project = o.getProject();
 
-					int globsNumber = 0;
-					for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-						if (target.isLeftSideOfAssignment() && ++globsNumber > 1)
-						{
-							registerProblem(holder, o.getNameIdentifier(), "Multiple typeglob aliases found");
-							break;
-						}
 
-					if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 0)
-						registerProblem(holder, o.getNameIdentifier(), "Typeglob clashes with constant definition");
+						if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 0)
+							registerProblem(holder, o.getNameIdentifier(), "Typeglob clashes with sub definition");
+
+						int globsNumber = 0;
+						for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)))
+							if (target.isLeftSideOfAssignment() && ++globsNumber > 1)
+							{
+								registerProblem(holder, o.getNameIdentifier(), "Multiple typeglob aliases found");
+								break;
+							}
+
+						if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 0)
+							registerProblem(holder, o.getNameIdentifier(), "Typeglob clashes with constant definition");
+					}
 				}
 			}
 
@@ -86,20 +93,23 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 			public void visitPerlConstant(@NotNull PerlConstant o)
 			{
 				Project project = o.getProject();
-
 				String canonicalName = o.getCanonicalName();
-				if (PerlSubUtil.getSubDefinitions(project, canonicalName).size() > 0)
-					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with sub definition");
 
-				for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-					if (target.isLeftSideOfAssignment())
-					{
-						registerProblem(holder, o.getNameIdentifier(), "Constant clashes with with typeglob alias");
-						break;
-					}
+				if (canonicalName != null)
+				{
+					if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 0)
+						registerProblem(holder, o.getNameIdentifier(), "Constant clashes with sub definition");
 
-				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName).size() > 1)
-					registerProblem(holder, o.getNameIdentifier(), "Multiple constants definitions found");
+					for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)))
+						if (target.isLeftSideOfAssignment())
+						{
+							registerProblem(holder, o.getNameIdentifier(), "Constant clashes with with typeglob alias");
+							break;
+						}
+
+					if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
+						registerProblem(holder, o.getNameIdentifier(), "Multiple constants definitions found");
+				}
 			}
 		};
 	}

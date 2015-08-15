@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -37,7 +39,9 @@ public class PerlNamespaceMultipleDefinitionsInspection extends PerlInspection
 			@Override
 			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
 			{
-				if (PerlPackageUtil.getNamespaceDefinitions(o.getProject(), o.getPackageName()).size() > 1)
+				Project project = o.getProject();
+				String packageName = o.getPackageName();
+				if (packageName != null && PerlPackageUtil.getNamespaceDefinitions(project, o.getPackageName(), GlobalSearchScope.projectScope(project)).size() > 1)
 					registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");
 
 			}

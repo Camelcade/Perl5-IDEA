@@ -57,9 +57,13 @@ public class PerlGlobUtil implements PerlElementTypes
 	 */
 	public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName)
 	{
-		assert canonicalName != null;
+		return getGlobsDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+	}
 
-		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, GlobalSearchScope.allScope(project), PsiPerlGlobVariable.class);
+	public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
+	{
+		assert canonicalName != null;
+		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, scope, PsiPerlGlobVariable.class);
 	}
 
 	/**
