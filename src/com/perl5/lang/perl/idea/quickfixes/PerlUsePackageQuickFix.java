@@ -23,6 +23,7 @@ import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -66,6 +67,7 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 		if (baseStatement != null)
 		{
 			statementContainer = baseStatement.getParent();
+
 			if (((PerlUseStatement) baseStatement).isPragmaOrVersion()) // pragma or version
 				while (true)
 				{
@@ -84,15 +86,7 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 						break;    // we've got last pragma statement
 				}
 			else    // not a pragma
-			{
 				baseStatement = baseStatement.getPrevSibling();
-
-				// moving up to previous statement or beginning of the block
-				while (baseStatement != null && (baseStatement instanceof PsiWhiteSpace || baseStatement instanceof PsiComment))
-					baseStatement = baseStatement.getPrevSibling();
-
-				// got last statement before use ...
-			}
 		} else    // no uses found
 		{
 			baseStatement = PsiTreeUtil.findChildOfType(statementContainer, PerlNamespaceDefinition.class);
@@ -103,24 +97,29 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 			} else
 			{
 				baseStatement = statementContainer.getFirstChild();
-				if (!(baseStatement instanceof PsiComment && baseStatement.getText().startsWith("#!")))    // not a shebang
-					baseStatement = null;
+				if (baseStatement != null)
+					while (baseStatement.getNextSibling() != null && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(baseStatement.getNextSibling().getNode().getElementType()))
+						baseStatement = baseStatement.getNextSibling();
 			}
 		}
 
 		PsiElement newLineElement = PerlElementFactory.createNewLine(project);
 
+		PsiElement insertedStatement;
 		if (baseStatement != null) // add after element
-			statementContainer.addBefore(newLineElement,
-					statementContainer.addAfter(newStatement, baseStatement));
+			insertedStatement = statementContainer.addAfter(newStatement, baseStatement);
 		else if (statementContainer.getFirstChild() != null)   // add as first element of the file
-		{
-			statementContainer.addAfter(newLineElement,
-					statementContainer.addBefore(newStatement, statementContainer.getFirstChild()));
-		} else    // just add
-		{
-			statementContainer.add(newStatement);
-			statementContainer.add(newLineElement);
-		}
+			insertedStatement = statementContainer.addBefore(newStatement, statementContainer.getFirstChild());
+		else
+			insertedStatement = statementContainer.add(newStatement);
+
+		PsiElement prevElement = insertedStatement.getPrevSibling();
+		PsiElement nextElement = insertedStatement.getNextSibling();
+
+		if( prevElement != null && !"\n".equals(prevElement.getText()))
+			statementContainer.addBefore(newLineElement, insertedStatement);
+		if( nextElement != null && !"\n".equals(nextElement.getText()))
+			statementContainer.addAfter(newLineElement, insertedStatement);
+
 	}
 }
