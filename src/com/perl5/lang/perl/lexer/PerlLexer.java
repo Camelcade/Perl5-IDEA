@@ -248,7 +248,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			int currentState = yystate();
 
 			// capture heredoc
-			if (waitingHereDoc() && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
+			if (waitingHereDoc() && (tokenStart == 0 || buffer.charAt(tokenStart) == '\n'))
 			{
 				IElementType tokenType = captureHereDoc();
 				if (tokenType != null)    // got something
@@ -662,13 +662,20 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		String openToken = yytext().toString();
 		Matcher m = null;
+		int newState = LEX_HEREDOC_WAITING;
 
 		if (openToken.endsWith("\""))
+		{
 			m = markerPatternDQ.matcher(openToken);
+			newState = LEX_HEREDOC_WAITING_QQ;
+		}
 		else if (openToken.endsWith("'"))
 			m = markerPatternSQ.matcher(openToken);
 		else if (openToken.endsWith("`"))
+		{
 			m = markerPatternXQ.matcher(openToken);
+			newState = LEX_HEREDOC_WAITING_QX;
+		}
 		else
 			m = markerPattern.matcher(openToken);
 
@@ -711,7 +718,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			throw new RuntimeException("Unable to parse HEREDOC opener " + openToken);
 
 		pushState();
-		yybegin(LEX_HEREDOC_WAITING);
+		yybegin(newState);
 
 		return OPERATOR_HEREDOC;
 	}
@@ -723,6 +730,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 */
 	public IElementType captureHereDoc()
 	{
+		int oldState = yystate();
+		IElementType tokenType = HEREDOC;
+		if (oldState == LEX_HEREDOC_WAITING_QQ)
+			tokenType = HEREDOC_QQ;
+		else if (oldState == LEX_HEREDOC_WAITING_QX)
+			tokenType = HEREDOC_QX;
+
 		popState();
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
@@ -754,7 +768,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				{
 					setTokenStart(tokenStart);
 					setTokenEnd(currentPosition);
-					return HEREDOC;
+					return tokenType;
 				}
 				// empty heredoc and got the end
 				else
@@ -768,7 +782,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				{
 					setTokenStart(tokenStart);
 					setTokenEnd(currentPosition);
-					return HEREDOC;
+					return tokenType;
 				}
 				// empty heredoc and got the end of file
 				else
@@ -1314,7 +1328,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	public boolean waitingHereDoc()
 	{
-		return yystate() == LEX_HEREDOC_WAITING;
+		int state = yystate();
+		return state == LEX_HEREDOC_WAITING || state == LEX_HEREDOC_WAITING_QQ || state == LEX_HEREDOC_WAITING_QX;
 	}
 
 	public IElementType processSemicolon()

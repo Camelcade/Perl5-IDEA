@@ -57,7 +57,9 @@ limitations under the License.
     VARIABLE_NAME="VARIABLE_NAME"
     SUB="SUB"
 
-    HEREDOC="HEREDOC" // should be string content too
+    HEREDOC="HEREDOC"
+    HEREDOC_QQ="HEREDOC_QQ"
+    HEREDOC_QX="HEREDOC_QX"
     HEREDOC_END="HEREDOC_END"
 
     FORMAT="FORMAT"
