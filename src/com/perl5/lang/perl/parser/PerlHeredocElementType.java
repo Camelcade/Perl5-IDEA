@@ -24,16 +24,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlStringLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlHeredocLexerAdapter;
 
 /**
  * Created by hurricup on 13.08.2015.
  */
 public class PerlHeredocElementType extends ILazyParseableElementType
 {
-	public PerlHeredocElementType()
+	public PerlHeredocElementType(String name)
 	{
-		super("HEREDOC_ELEMENT", PerlLanguage.INSTANCE);
+		super(name, PerlLanguage.INSTANCE);
 	}
 
 	@Override
@@ -41,13 +41,15 @@ public class PerlHeredocElementType extends ILazyParseableElementType
 	{
 		PsiElement parentElement = chameleon.getTreeParent().getPsi();
 		Project project = parentElement.getProject();
-		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(project, chameleon, new PerlStringLexerAdapter(), getLanguage(),
+		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
+				project,
+				chameleon,
+				new PerlHeredocLexerAdapter(toString()),
+				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlParser();
 
 		return parser.parse(this, builder).getFirstChildNode();
-//			return PerlParser.string_content_qq(this, chameleon);
-		//return super.parseContents(chameleon);
 	}
 
 }

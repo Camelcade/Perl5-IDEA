@@ -23,6 +23,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlLanguage;
@@ -175,13 +176,37 @@ public class PerlFileElement extends PsiFileBase implements PerlFile
 			return null;
 
 		PerlLexicalScope currentScope = currentVariable.getLexicalScope();
-		PsiPerlStatement currentStatement = PsiTreeUtil.getParentOfType(currentVariable, PsiPerlStatement.class);
 		PerlVariableType variableType = currentVariable.getActualType();
+
+		int currentStatementOffset;
+
+		PsiElement currentStatement = PsiTreeUtil.getParentOfType(currentVariable, PerlHeredocElementImpl.class);
+
+		if (currentStatement != null)    // we are in heredoc
+		{
+			PsiFile file = currentStatement.getContainingFile();
+			while (currentStatement != null)
+			{
+				int offset = currentStatement.getTextOffset() - 1;
+				if (offset < 0)
+				{
+					currentStatement = null;
+					break;
+				}
+				currentStatement = file.findElementAt(offset);
+
+				if (currentStatement instanceof PerlStringContentElement && currentStatement.getParent().getParent() instanceof PerlHeredocOpener)
+				{
+					currentStatement = PsiTreeUtil.getParentOfType(currentStatement, PsiPerlStatement.class);
+					break;
+				}
+			}
+		} else
+			currentStatement = PsiTreeUtil.getParentOfType(currentVariable, PsiPerlStatement.class);
 
 		if (currentStatement == null)
 			throw new RuntimeException("Unable to find current variable statement");
-
-		int currentStatementOffset = currentStatement.getTextOffset();
+		currentStatementOffset = currentStatement.getTextOffset();
 
 		List<PerlLexicalDeclaration> knownDeclarations;
 

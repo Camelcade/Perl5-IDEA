@@ -16,35 +16,36 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.LiteralTextEscaper;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.idea.intellilang.PerlHeredocLiteralEscaper;
-import com.perl5.lang.perl.psi.PerlVisitor;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlHeredocElementImpl extends PsiCommentImpl
+public class PerlHeredocElementImpl extends ASTWrapperPsiElement
 {
-	public PerlHeredocElementImpl(IElementType type, CharSequence text)
+	public PerlHeredocElementImpl(@NotNull ASTNode node)
 	{
-		super(type, text);
+		super(node);
 	}
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
-		else super.accept(visitor);
-	}
+	//	public PerlHeredocElementImpl(IElementType type, CharSequence text)
+//	{
+//		super(type, text);
+//	}
+//
+//	@Override
+//	public void accept(@NotNull PsiElementVisitor visitor)
+//	{
+//		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
+//		else super.accept(visitor);
+//	}
 
-	@NotNull
-	@Override
-	public LiteralTextEscaper<PsiCommentImpl> createLiteralTextEscaper()
-	{
-		return new PerlHeredocLiteralEscaper(this);
-	}
+//	@NotNull
+//	@Override
+//	public LiteralTextEscaper<PsiCommentImpl> createLiteralTextEscaper()
+//	{
+//		return new PerlHeredocLiteralEscaper(this);
+//	}
 }

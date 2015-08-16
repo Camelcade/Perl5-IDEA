@@ -24,7 +24,6 @@ import java.util.regex.Matcher;
 
 /**
  * Created by hurricup on 10.08.2015.
- * fixme not dry, need to implement preparsedTokensList in some superclass
  */
 public class PerlStringLexer extends PerlStringLexerGenerated
 {
@@ -46,9 +45,10 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	@Override
 	public IElementType advance() throws IOException
 	{
+		if (preparsedTokensList.size() > 0)
+			return getPreParsedToken();
 		return super.advance();
 	}
-
 
 	/**
 	 * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER

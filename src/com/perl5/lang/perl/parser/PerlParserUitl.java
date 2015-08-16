@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -1088,5 +1089,22 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-
+	/**
+	 * Parses lazy heredoc content
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
+	public static boolean parseHeredocContent(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == HEREDOC_PSEUDO_QUOTE)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(TokenType.NEW_LINE_INDENT);
+			return PerlParser.string_content_qq(b, l);
+		}
+		return false;
+	}
 }

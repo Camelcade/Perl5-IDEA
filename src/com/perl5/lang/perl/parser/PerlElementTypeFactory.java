@@ -29,6 +29,8 @@ public class PerlElementTypeFactory
 {
 	public static IElementType getTokenType(@NotNull String name)
 	{
+		if (name.equals("HEREDOC_QQ") || name.equals("HEREDOC_QX") || name.equals("HEREDOC"))
+			return new PerlHeredocElementType(name);
 		return new PerlTokenType(name);
 	}
 

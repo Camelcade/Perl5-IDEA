@@ -29,6 +29,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
@@ -36,6 +37,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
@@ -113,6 +115,13 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@NotNull
 	public PsiElement createElement(ASTNode node)
 	{
+		IElementType elementType = node.getElementType();
+		if (elementType == HEREDOC_QQ)
+			return new PerlHeredocElementImpl(node);
+		else if (elementType == HEREDOC_QX)
+			return new PerlHeredocElementImpl(node);
+		else if (elementType == HEREDOC)
+			return new PerlHeredocElementImpl(node);
 		return PerlElementTypes.Factory.createElement(node);
 	}
 }

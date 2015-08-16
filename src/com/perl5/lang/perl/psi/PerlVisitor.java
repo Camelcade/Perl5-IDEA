@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -52,10 +51,10 @@ public class PerlVisitor extends PsiPerlVisitor
 		visitComment(o);
 	}
 
-	public void visitHeredocElement(@NotNull PerlHeredocElementImpl o)
-	{
-		visitComment(o);
-	}
+//	public void visitHeredocElement(@NotNull PerlHeredocElementImpl o)
+//	{
+//		visitComment(o);
+//	}
 
 	public void visitArrayIndexVariable(@NotNull PsiPerlArrayIndexVariable o)
 	{
