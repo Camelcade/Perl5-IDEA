@@ -101,8 +101,7 @@ public class PerlLanguageInjector implements LanguageInjector
 	@Override
 	public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar)
 	{
-
-		if (host instanceof PerlHeredocElementImpl)
+		if (host instanceof PerlHeredocElementImpl && host.isValidHost())
 		{
 			PsiElement terminator = host.getNextSibling();
 			if (terminator instanceof PerlHeredocTerminatorElementImpl)

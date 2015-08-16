@@ -205,7 +205,9 @@ public class PerlFileElement extends PsiFileBase implements PerlFile
 			currentStatement = PsiTreeUtil.getParentOfType(currentVariable, PsiPerlStatement.class);
 
 		if (currentStatement == null)
-			throw new RuntimeException("Unable to find current variable statement");
+			return null;
+		//throw new RuntimeException("Unable to find current variable statement: " + currentVariableName); // atm happens on bad recovery
+
 		currentStatementOffset = currentStatement.getTextOffset();
 
 		List<PerlLexicalDeclaration> knownDeclarations;

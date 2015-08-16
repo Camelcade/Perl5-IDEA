@@ -16,15 +16,17 @@
 
 package com.perl5.lang.perl.idea.intellilang;
 
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
-import com.intellij.psi.impl.source.tree.injected.CommentLiteralEscaper;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.LiteralTextEscaper;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 02.08.2015.
  */
-public class PerlHeredocLiteralEscaper extends CommentLiteralEscaper
+public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocElementImpl>
 {
-	public PerlHeredocLiteralEscaper(PsiCommentImpl host)
+	public PerlHeredocLiteralEscaper(PerlHeredocElementImpl host)
 	{
 		super(host);
 	}
@@ -33,5 +35,28 @@ public class PerlHeredocLiteralEscaper extends CommentLiteralEscaper
 	public boolean isOneLine()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean decode(@NotNull final TextRange rangeInsideHost, @NotNull StringBuilder outChars)
+	{
+		outChars.append(myHost.getText(), rangeInsideHost.getStartOffset(), rangeInsideHost.getEndOffset());
+		return true;
+	}
+
+	@Override
+	public int getOffsetInHost(int offsetInDecoded, @NotNull final TextRange rangeInsideHost)
+	{
+		int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
+		if (offset < rangeInsideHost.getStartOffset()) offset = rangeInsideHost.getStartOffset();
+		if (offset > rangeInsideHost.getEndOffset()) offset = rangeInsideHost.getEndOffset();
+		return offset;
+	}
+
+	@NotNull
+	@Override
+	public TextRange getRelevantTextRange()
+	{
+		return TextRange.from(1, myHost.getTextLength());
 	}
 }

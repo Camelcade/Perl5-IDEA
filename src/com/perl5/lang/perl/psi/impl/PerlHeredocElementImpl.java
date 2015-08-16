@@ -18,34 +18,46 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.LiteralTextEscaper;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiLanguageInjectionHost;
+import com.perl5.lang.perl.idea.intellilang.PerlHeredocLiteralEscaper;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlHeredocElementImpl extends ASTWrapperPsiElement
+public class PerlHeredocElementImpl extends ASTWrapperPsiElement implements PsiLanguageInjectionHost
 {
 	public PerlHeredocElementImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	//	public PerlHeredocElementImpl(IElementType type, CharSequence text)
-//	{
-//		super(type, text);
-//	}
-//
-//	@Override
-//	public void accept(@NotNull PsiElementVisitor visitor)
-//	{
-//		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
-//		else super.accept(visitor);
-//	}
+	@Override
+	public boolean isValidHost()
+	{
+		return getChildren().length == 0; // only composits counted. Dunno why
+	}
 
-//	@NotNull
-//	@Override
-//	public LiteralTextEscaper<PsiCommentImpl> createLiteralTextEscaper()
-//	{
-//		return new PerlHeredocLiteralEscaper(this);
-//	}
+	@Override
+	public PsiLanguageInjectionHost updateText(@NotNull final String text)
+	{
+		return null; //return (PerlHeredocElementImpl)replaceWithText(text);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
+		else super.accept(visitor);
+	}
+
+	@NotNull
+	@Override
+	public LiteralTextEscaper<PerlHeredocElementImpl> createLiteralTextEscaper()
+	{
+		return new PerlHeredocLiteralEscaper(this);
+	}
 }

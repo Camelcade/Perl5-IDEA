@@ -27,6 +27,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
@@ -38,8 +39,13 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 	private void annotateStringContent(PerlStringContentElementImpl element, AnnotationHolder holder)
 	{
 		PsiElement parent = element.getParent();
+		PsiElement grandParent = element.getParent();
 
-		if (!(parent instanceof PsiPerlConstantName || parent.getParent() instanceof PsiPerlConstantName))
+		if (!(parent instanceof PsiPerlConstantName
+				|| grandParent instanceof PsiPerlConstantName
+				|| parent instanceof PerlHeredocElementImpl
+				|| grandParent instanceof PerlHeredocElementImpl
+		))
 		{
 			Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
 
