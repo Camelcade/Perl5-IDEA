@@ -59,7 +59,7 @@
       <li>Implemented __PACKAGE__ methods resolution.</li>
       <li>Implemented clash checking between subs definitions, typeglobs and constants.</li>
       <li>Implemented unused global variables inspection.</li>
-      <li>Implemented unused subs and constants inspection.</li>
+      <li>Implemented unused subs and constants inspection (Disabled by default. Got performance issues on large files with short sub names).</li>
       <li>Implemented unused typeglob inspection.</li>
       <li>Implemented bulk constants definitions folding.</li>
       <li>Implemented structure view.</li>
@@ -234,6 +234,10 @@
         <localInspection language="Perl5"
                          shortName="NamespaceMultipleDefinitions" displayName="Multiple namespace definitions" groupName="Perl5" enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceMultipleDefinitionsInspection" />
+        <localInspection language="Perl5"
+                         shortName="NamespaceRecursiveInheritance" displayName="Recursive inheritance" groupName="Perl5"
+                         enabledByDefault="true" level="ERROR"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection"/>
 
         <localInspection language="Perl5"
                          shortName="FancyMethodCall" displayName="Fancy method calls" groupName="Perl5" enabledByDefault="true" level="WARNING"
@@ -253,7 +257,7 @@
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection" />
         <localInspection language="Perl5"
                          shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
+                         enabledByDefault="false" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnusedInpsection"/>
 
 
