@@ -30,6 +30,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,6 +59,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonHash.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonArray.class, 0, 0));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlParenthesisedExpr.class, 0, 0));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlHeredocElementImpl.class, 1, 1));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 1));
 
 		descriptors.addAll(getCommentsDescriptors(root, document));
