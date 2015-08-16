@@ -23,6 +23,7 @@ import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +47,7 @@ public class PerlPackageCompletionProviderUtil
 	 */
 	public static
 	@NotNull
-	LookupElementBuilder getPackageLookupElement(String packageName)
+	LookupElementBuilder getPackageLookupElement(Project project, String packageName)
 	{
 		LookupElementBuilder result = PACKAGE_LOOKUP_ELEMENTS.get(packageName);
 
@@ -62,8 +63,7 @@ public class PerlPackageCompletionProviderUtil
 			if (PerlPackageUtil.isPragma(packageName))
 				result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
 
-
-			if (PerlPackageUtil.isDeprecated(packageName))
+			if (PerlPackageUtil.isDeprecated(project, packageName))
 				result = result.withStrikeoutness(true);
 
 
@@ -79,13 +79,13 @@ public class PerlPackageCompletionProviderUtil
 	 * @param packageName package name
 	 * @return lookup element
 	 */
-	public static LookupElementBuilder getPackageLookupElementWithAutocomplete(String packageName)
+	public static LookupElementBuilder getPackageLookupElementWithAutocomplete(Project project, String packageName)
 	{
 		LookupElementBuilder result = PACKAGE_REOPEN_LOOKUP_ELEMENTS.get(packageName);
 
 		if (result == null)
 		{
-			result = getPackageLookupElement(packageName).withInsertHandler(COMPLETION_REOPENER);
+			result = getPackageLookupElement(project, packageName).withInsertHandler(COMPLETION_REOPENER);
 			result = result.withTailText("...");
 			PACKAGE_REOPEN_LOOKUP_ELEMENTS.put(packageName, result);
 		}

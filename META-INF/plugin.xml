@@ -63,6 +63,7 @@
       <li>Implemented unused typeglob inspection.</li>
       <li>Implemented bulk constants definitions folding.</li>
       <li>Implemented structure view.</li>
+      <li>Implemented <code>#@deprecated</code> annotation for packages.</li>
       <li>Multiple namespace and sub definitions now checks duplication in project only.</li>
       <li>Added subs unpacked arguments into subs presentation.</li>
       <li>Added live tempalte for constant definition: <b>const</b>.</li>

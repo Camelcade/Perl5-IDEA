@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<PsiPerlNamespaceDefinition>
 {
-	public static final int VERSION = 2;
+	public static final int VERSION = 3;
 	public static final StubIndexKey<String, PsiPerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");
 
 	@Override

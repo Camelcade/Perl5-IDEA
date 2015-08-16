@@ -48,7 +48,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	@Override
 	public PerlNamespaceDefinitionStub createStub(@NotNull PsiPerlNamespaceDefinition psi, StubElement parentStub)
 	{
-		return new PerlNamespaceDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getMroType(), psi.getParentNamespaces());
+		return new PerlNamespaceDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getMroType(), psi.getParentNamespaces(), psi.isDeprecated());
 	}
 
 	@NotNull
@@ -72,6 +72,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getMroType().toString());
 		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getParentNamespaces());
+		dataStream.writeBoolean(stub.isDeprecated());
 	}
 
 	@NotNull
@@ -81,8 +82,9 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		String packageName = dataStream.readName().toString();
 		PerlMroType mroType = PerlMroType.valueOf(dataStream.readName().toString());
 		List<String> parentNamespaces = PerlStubSerializationUtil.readStringsList(dataStream);
+		boolean isDeprecated = dataStream.readBoolean();
 
-		return new PerlNamespaceDefinitionStubImpl(parentStub, packageName, mroType, parentNamespaces);
+		return new PerlNamespaceDefinitionStubImpl(parentStub, packageName, mroType, parentNamespaces, isDeprecated);
 	}
 
 	@Override

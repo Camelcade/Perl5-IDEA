@@ -32,4 +32,6 @@ public interface PerlNamespaceDefinitionStub extends StubElement<PsiPerlNamespac
 	public PerlMroType getMroType();
 
 	public List<String> getParentNamespaces();
+
+	public boolean isDeprecated();
 }

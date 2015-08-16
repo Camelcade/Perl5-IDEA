@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.openapi.project.Project;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -34,8 +35,8 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
 	{
-
+		Project project = parameters.getPosition().getProject();
 		for (String packageName : PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
-			resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(packageName));
+			resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, packageName));
 	}
 }

@@ -21,6 +21,7 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
@@ -42,13 +43,14 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 	protected void addCompletions(@NotNull final CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet resultSet)
 	{
 		PsiElement stringContentElement = parameters.getPosition();
+		Project project = stringContentElement.getProject();
 
 		PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
 		if (useStatement != null && useStatement.isParentPragma())
 		{
 			for (String packageName : PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
-				resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(packageName));
+				resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, packageName));
 
 			if (useStatement.isParentPragma())
 				resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));

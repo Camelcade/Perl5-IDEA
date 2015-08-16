@@ -170,4 +170,13 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	{
 		return getName();
 	}
+
+	@Override
+	public boolean isDeprecated()
+	{
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.isDeprecated();
+		return getAnnotationDeprectaed() != null;
+	}
 }

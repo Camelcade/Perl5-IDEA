@@ -92,12 +92,19 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	/**
 	 * Checks if package is deprecated
 	 *
-	 * @param pacakgeName package name
+	 * @param packageName package name
 	 * @return result
 	 */
-	public static boolean isDeprecated(String pacakgeName)
+	public static boolean isDeprecated(Project project, String packageName)
 	{
-		return BUILT_IN_DEPRECATED.contains(getCanonicalPackageName(pacakgeName));
+		if ("main".equals(packageName))
+			return false;
+
+		for (PerlNamespaceDefinition definition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+			if (definition.isDeprecated())
+				return true;
+
+		return BUILT_IN_DEPRECATED.contains(getCanonicalPackageName(packageName));
 	}
 
 	/**

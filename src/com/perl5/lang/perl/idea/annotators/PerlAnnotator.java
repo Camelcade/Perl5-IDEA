@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.annotators;
 
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -32,12 +33,12 @@ public abstract class PerlAnnotator implements Annotator, PerlElementTypes
 {
 	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
 
-	public static TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isBuiltIn, boolean isDeprecated)
+	public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isBuiltIn, boolean isDeprecated)
 	{
 		if (isBuiltIn)
 			textAttributes = TextAttributes.merge(textAttributes, PerlSyntaxHighlighter.BOLD);
 		if (isDeprecated)
-			textAttributes = TextAttributes.merge(textAttributes, PerlSyntaxHighlighter.STROKE);
+			textAttributes = TextAttributes.merge(textAttributes, currentScheme.getAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES));
 		return textAttributes;
 	}
 

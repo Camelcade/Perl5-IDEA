@@ -28,7 +28,7 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement, PerlNamespaceContainer
+public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement, PerlNamespaceContainer, PerlDeprecatable
 {
 	/**
 	 * Retuns block or namespace content with statements

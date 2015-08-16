@@ -32,13 +32,15 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 	private final String myPackageName;
 	private final PerlMroType myMroType;
 	private final List<String> myParentNamespaces;
+	private final boolean myIsDeprecated;
 
-	public PerlNamespaceDefinitionStubImpl(StubElement parent, String packageName, PerlMroType mroType, List<String> parentNamespaces)
+	public PerlNamespaceDefinitionStubImpl(StubElement parent, String packageName, PerlMroType mroType, List<String> parentNamespaces, boolean isDeprecated)
 	{
 		super(parent, PerlStubElementTypes.PERL_NAMESPACE);
 		myPackageName = packageName;
 		myMroType = mroType;
 		myParentNamespaces = parentNamespaces;
+		myIsDeprecated = isDeprecated;
 	}
 
 	@Override
@@ -57,5 +59,11 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 	public List<String> getParentNamespaces()
 	{
 		return myParentNamespaces;
+	}
+
+	@Override
+	public boolean isDeprecated()
+	{
+		return myIsDeprecated;
 	}
 }

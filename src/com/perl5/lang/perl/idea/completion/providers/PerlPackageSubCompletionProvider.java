@@ -56,11 +56,11 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 
 		Project project = parameters.getPosition().getProject();
 
-		result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete("SUPER::"));
+		result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, "SUPER::"));
 
 		if (!isObjectMethod)
 			for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
-				result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(packageName));
+				result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, packageName));
 
 
 	}

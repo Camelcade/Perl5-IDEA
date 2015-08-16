@@ -36,8 +36,13 @@ public class PerlAnnotatorNamespaces extends PerlAnnotator
 
 		if (parent instanceof PerlNamespaceDefinition)
 		{
-			holder.createInfoAnnotation(namespaceElement, null).setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION);
-		} else if (namespaceElement.isPragma())
+			decorateElement(
+					holder.createInfoAnnotation(namespaceElement, null),
+					PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION,
+					namespaceElement.isBuiltin(),
+					namespaceElement.isDeprecated()
+			);
+		} else if (namespaceElement.isPragma())    // fixme with such way pragma can't be deprecated
 		{
 			Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
 			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE);

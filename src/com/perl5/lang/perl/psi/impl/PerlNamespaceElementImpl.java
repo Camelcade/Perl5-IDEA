@@ -122,11 +122,10 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 		return PerlPackageUtil.BUILT_IN_PRAGMA.contains(getName());
 	}
 
-	// todo implement deprecation support for user packages and take it into account
 	@Override
 	public boolean isDeprecated()
 	{
-		return PerlPackageUtil.BUILT_IN_DEPRECATED.contains(getName());
+		return PerlPackageUtil.isDeprecated(getProject(), getName());
 	}
 
 	@Override
