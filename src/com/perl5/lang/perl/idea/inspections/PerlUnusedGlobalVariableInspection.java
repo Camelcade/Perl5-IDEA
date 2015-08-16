@@ -68,7 +68,7 @@ public class PerlUnusedGlobalVariableInspection extends PerlUnusedLexicalVariabl
 	@Override
 	protected SearchScope getSearchScope(PsiElement element)
 	{
-		return GlobalSearchScope.allScope(element.getProject());
+		return GlobalSearchScope.projectScope(element.getProject());
 	}
 
 	@Override

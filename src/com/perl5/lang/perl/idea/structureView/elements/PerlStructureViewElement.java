@@ -195,7 +195,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinition) element).setInherited());
 					else if (element instanceof PerlSubDeclaration)
 						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclaration) element).setInherited());
-					else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).getName() != null)
+					else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).isLeftSideOfAssignment() && ((PerlGlobVariable) element).getName() != null)
 						inheritedResult.add(new PerlGlobStructureViewElement((PerlGlobVariable) element).setInherited());
 					else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
 						inheritedResult.add(new PerlConstantStructureViewElement((PerlConstant) element).setInherited());

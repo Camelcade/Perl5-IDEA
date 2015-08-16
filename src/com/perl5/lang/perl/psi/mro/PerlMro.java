@@ -108,7 +108,7 @@ public abstract class PerlMro
 				if (!methods.containsKey(constant.getName()))
 					methods.put(constant.getName(), constant);
 			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
-				if (!methods.containsKey(globVariable.getName()))
+				if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName()))
 					methods.put(globVariable.getName(), globVariable);
 		}
 

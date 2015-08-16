@@ -27,6 +27,8 @@ import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -34,6 +36,10 @@ import java.util.List;
  */
 public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PsiPerlNamespaceDefinition>
 {
+	public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
+			"main", "CORE"
+	));
+
 	public PerlNamespaceDefinitionStubElementType(String name)
 	{
 		super(name, PerlLanguage.INSTANCE);
@@ -64,6 +70,10 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		String name = stub.getPackageName();
 		assert name != null;
 		sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, name);
+
+		for (String parent : stub.getParentNamespaces())
+			if (parent != null && !parent.isEmpty())
+				sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, "*" + parent);
 	}
 
 	@Override
@@ -90,7 +100,8 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		return node.findChildByType(PerlElementTypes.PACKAGE) != null;
+		ASTNode packageNode = node.findChildByType(PerlElementTypes.PACKAGE);
+		return packageNode != null && !EXCLUSIONS.contains(packageNode.getText());
 	}
 
 }

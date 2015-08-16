@@ -193,9 +193,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PsiPerlNamespaceDefinition.class);
 	}
 
-
-
-
 	/**
 	 * Returns list of defined package names
 	 *
@@ -205,6 +202,25 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static Collection<String> getDefinedPackageNames(Project project)
 	{
 		return StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
+	}
+
+
+	/**
+	 * Returns list of derived classes
+	 *
+	 * @param project project to search in
+	 * @return collection of definitions
+	 */
+	public static Collection<PsiPerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName)
+	{
+		return getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
+	}
+
+	public static Collection<PsiPerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
+	{
+		assert packageName != null;
+
+		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, "*" + packageName, project, scope, PsiPerlNamespaceDefinition.class);
 	}
 
 	/**

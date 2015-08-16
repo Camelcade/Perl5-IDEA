@@ -39,7 +39,7 @@ public class PerlUnusedTypeGlobInspection extends PerlInspection
 			@Override
 			public void visitGlobVariable(@NotNull PsiPerlGlobVariable o)
 			{
-				if (ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findFirst() == null)
+				if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
 					holder.registerProblem(o, "Unused typeglob alias", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 
 			}

@@ -54,21 +54,21 @@ public class PerlSubUnusedInpsection extends PerlInspection
 			@Override
 			public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
 			{
-				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findFirst() == null)
+				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
 					holder.registerProblem(o.getSubNameElement(), "Unused sub definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 			}
 
 			@Override
 			public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
 			{
-				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findFirst() == null)
+				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
 					holder.registerProblem(o.getSubNameElement(), "Unused sub declaration", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 			}
 
 			@Override
 			public void visitPerlConstant(@NotNull PerlConstant o)
 			{
-				if (ReferencesSearch.search(o, GlobalSearchScope.allScope(o.getProject())).findFirst() == null)
+				if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
 					holder.registerProblem(o.getStringContentElement(), "Unused constant definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 			}
 		};

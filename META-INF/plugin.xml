@@ -63,6 +63,7 @@
       <li>Implemented unused typeglob inspection.</li>
       <li>Implemented bulk constants definitions folding.</li>
       <li>Implemented structure view.</li>
+      <li>Implemented class hierarchy view view.</li>
       <li>Implemented <code>#@deprecated</code> annotation for packages.</li>
       <li>Multiple namespace and sub definitions now checks duplication in project only.</li>
       <li>Added subs unpacked arguments into subs presentation.</li>
@@ -113,6 +114,9 @@
 
         <lang.psiStructureViewFactory language="Perl5"
                                       implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+
+        <typeHierarchyProvider language="Perl5"
+                               implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider"/>
 
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorMisc"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorSubs"/>

@@ -66,4 +66,6 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 	{
 		return myIsDeprecated;
 	}
+
+
 }
