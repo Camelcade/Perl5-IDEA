@@ -62,7 +62,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 */
 	public static Collection<String> getDefinedGlobalScalarNames(Project project)
 	{
-		return PerlUtil.filterInternalNames(StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_SCALAR, project));
+		return PerlUtil.getIndexKeysWithoutInternals(PerlVariableStubIndexKeys.KEY_SCALAR, project);
 	}
 
 }

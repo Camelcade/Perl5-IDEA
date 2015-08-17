@@ -74,7 +74,7 @@ public class PerlGlobUtil implements PerlElementTypes
 	 */
 	public static Collection<String> getDefinedGlobsNames(Project project)
 	{
-		return PerlUtil.filterInternalNames(StubIndex.getInstance().getAllKeys(PerlGlobsStubIndex.KEY, project));
+		return PerlUtil.getIndexKeysWithoutInternals(PerlGlobsStubIndex.KEY, project);
 	}
 
 }

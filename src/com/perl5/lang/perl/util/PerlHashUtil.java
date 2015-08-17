@@ -73,7 +73,7 @@ public class PerlHashUtil implements PerlElementTypes
 	 */
 	public static Collection<String> getDefinedGlobalHashNames(Project project)
 	{
-		return PerlUtil.filterInternalNames(StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_HASH, project));
+		return PerlUtil.getIndexKeysWithoutInternals(PerlVariableStubIndexKeys.KEY_HASH, project);
 	}
 
 }

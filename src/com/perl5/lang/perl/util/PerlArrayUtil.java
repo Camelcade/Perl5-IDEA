@@ -71,7 +71,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	 */
 	public static Collection<String> getDefinedGlobalArrayNames(Project project)
 	{
-		return PerlUtil.filterInternalNames(StubIndex.getInstance().getAllKeys(PerlVariableStubIndexKeys.KEY_ARRAY, project));
+		return PerlUtil.getIndexKeysWithoutInternals(PerlVariableStubIndexKeys.KEY_ARRAY, project);
 	}
 
 }

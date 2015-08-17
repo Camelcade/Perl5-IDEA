@@ -22,11 +22,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.Processor;
+import gnu.trove.THashSet;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -81,12 +85,22 @@ public class PerlUtil
 		return null;
 	}
 
-	public static Collection<String> filterInternalNames(Collection<String> unfilteredNames)
+	public static Collection<String> getIndexKeysWithoutInternals(StubIndexKey<String, ?> key, Project project)
 	{
-		HashSet<String> result = new HashSet<String>();
-		for (String name : unfilteredNames)
-			if (name.charAt(0) != '*' && !result.contains(name))
-				result.add(name);
+		final Set<String> result = new THashSet<String>();
+
+		StubIndex.getInstance().processAllKeys(key, project, new
+				Processor<String>()
+				{
+					@Override
+					public boolean process(String name)
+					{
+						if (name.charAt(0) != '*')
+							result.add(name);
+						return true;
+					}
+				});
+
 		return result;
 	}
 
