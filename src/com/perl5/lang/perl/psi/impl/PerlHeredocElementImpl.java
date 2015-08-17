@@ -47,6 +47,7 @@ public class PerlHeredocElementImpl extends ASTWrapperPsiElement implements PsiL
 		return null; //return (PerlHeredocElementImpl)replaceWithText(text);
 	}
 
+
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
