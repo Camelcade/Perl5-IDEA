@@ -19,22 +19,33 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+
 /**
  * Created by hurricup on 31.05.2015.
  */
 public class PerlPackageBuiltInCompletionProvider extends CompletionProvider<CompletionParameters>
 {
+	public static final HashSet<LookupElementBuilder> PACKAGES_LOOKUP_ELEMENTS = new HashSet<LookupElementBuilder>();
+
+
 	@Override
 	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet resultSet)
 	{
-		Project project = parameters.getPosition().getProject();
-		for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
-			resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, packageName));
+		if( PACKAGES_LOOKUP_ELEMENTS.size() == 0 )
+		{
+			Project project = parameters.getPosition().getProject();
+			// fixme need workaround here; We've should make pre-set list to add, but project required for deprecation
+			for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
+				PACKAGES_LOOKUP_ELEMENTS.add(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, packageName));
+		}
+		resultSet.addAllElements(PACKAGES_LOOKUP_ELEMENTS);
 	}
 }

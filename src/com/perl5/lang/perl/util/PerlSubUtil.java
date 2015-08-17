@@ -23,6 +23,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.stubs.constants.PerlConstantsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
@@ -102,6 +103,17 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		return PerlUtil.getIndexKeysWithoutInternals(PerlSubDefinitionsStubIndex.KEY, project);
 	}
 
+	/**
+	 * Processes all defined subs names with given processor
+	 *
+	 * @param project   project to search in
+	 * @param processor string processor for suitable strings
+	 * @return collection of constants names
+	 */
+	public static boolean processDefinedSubsNames(Project project, Processor<String> processor)
+	{
+		return StubIndex.getInstance().processAllKeys(PerlSubDefinitionsStubIndex.KEY, project, processor);
+	}
 
 	/**
 	 * Searching project files for sub declarations by specific package and function name
@@ -133,6 +145,18 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	}
 
 	/**
+	 * Processes all declared subs names with given processor
+	 *
+	 * @param project   project to search in
+	 * @param processor string processor for suitable strings
+	 * @return collection of constants names
+	 */
+	public static boolean processDeclaredSubsNames(Project project, Processor<String> processor)
+	{
+		return StubIndex.getInstance().processAllKeys(PerlSubDeclarationStubIndex.KEY, project, processor);
+	}
+
+	/**
 	 * Searching project files for constants definitions by specific package and name
 	 *
 	 * @param project       project to search in
@@ -160,6 +184,18 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	public static Collection<String> getDefinedConstantsNames(Project project)
 	{
 		return PerlUtil.getIndexKeysWithoutInternals(PerlConstantsStubIndex.KEY, project);
+	}
+
+	/**
+	 * Processes all defined constants names with given processor
+	 *
+	 * @param project   project to search in
+	 * @param processor string processor for suitable strings
+	 * @return collection of constants names
+	 */
+	public static boolean processDefinedConstantsNames(Project project, Processor<String> processor)
+	{
+		return StubIndex.getInstance().processAllKeys(PerlConstantsStubIndex.KEY, project, processor);
 	}
 
 	/**

@@ -19,6 +19,7 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -63,6 +64,18 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	public static Collection<String> getDefinedGlobalScalarNames(Project project)
 	{
 		return PerlUtil.getIndexKeysWithoutInternals(PerlVariableStubIndexKeys.KEY_SCALAR, project);
+	}
+
+	/**
+	 * Processes all global scalars names with specific processor
+	 *
+	 * @param project   project to search in
+	 * @param processor string processor for suitable strings
+	 * @return collection of constants names
+	 */
+	public static boolean processDefinedGlobalScalarNames(Project project, Processor<String> processor)
+	{
+		return StubIndex.getInstance().processAllKeys(PerlVariableStubIndexKeys.KEY_SCALAR, project, processor);
 	}
 
 }

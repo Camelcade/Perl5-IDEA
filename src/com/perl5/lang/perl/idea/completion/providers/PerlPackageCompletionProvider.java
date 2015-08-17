@@ -21,6 +21,7 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ProcessingContext;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -33,10 +34,17 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 	@Override
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
-							   @NotNull CompletionResultSet resultSet)
+							   @NotNull final CompletionResultSet resultSet)
 	{
-		Project project = parameters.getPosition().getProject();
-		for (String packageName : PerlPackageUtil.getPackageFilesForPsiElement(parameters.getPosition()))
-			resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, packageName));
+		final Project project = parameters.getPosition().getProject();
+		PerlPackageUtil.processPackageFilesForPsiElement(parameters.getPosition(), new Processor<String>()
+		{
+			@Override
+			public boolean process(String s)
+			{
+				resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
+				return true;
+			}
+		});
 	}
 }

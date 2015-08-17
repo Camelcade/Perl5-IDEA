@@ -25,6 +25,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.util.PerlInternalIndexKeysProcessor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,14 +55,23 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 			result = result.withPrefixMatcher(packagePrefix);
 		}
 
-		Project project = parameters.getPosition().getProject();
+		final Project project = parameters.getPosition().getProject();
 
 		result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, "SUPER::"));
 
-		if (!isObjectMethod)
-			for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
-				result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, packageName));
+		final CompletionResultSet finalResultSet = result;
 
+		if (!isObjectMethod)
+			PerlPackageUtil.processDefinedPackageNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, s));
+					return true;
+				}
+			});
 
 	}
 }

@@ -31,11 +31,13 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +45,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
@@ -204,6 +206,17 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return PerlUtil.getIndexKeysWithoutInternals(PerlNamespaceDefinitionStubIndex.KEY, project);
 	}
 
+	/**
+	 * Processes all global hashes names with specific processor
+	 *
+	 * @param project   project to search in
+	 * @param processor string processor for suitable strings
+	 * @return collection of constants names
+	 */
+	public static boolean processDefinedPackageNames(Project project, Processor<String> processor)
+	{
+		return StubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project, processor);
+	}
 
 	/**
 	 * Returns list of derived classes
@@ -347,10 +360,26 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param element base PsiElement
 	 * @return list of distinct strings
 	 */
-	public static List<String> getPackageFilesForPsiElement(PsiElement element)
+	public static Collection<String> getPackageFilesForPsiElement(PsiElement element)
 	{
-		HashSet<String> result = new HashSet<String>();
+		final Set<String> result = new THashSet<String>();
 
+		processPackageFilesForPsiElement(element, new Processor<String>()
+		{
+			@Override
+			public boolean process(String s)
+			{
+				result.add(s);
+				return true;
+			}
+		});
+
+		return result;
+	}
+
+
+	public static void processPackageFilesForPsiElement(PsiElement element, Processor<String> processor)
+	{
 		if (element != null)
 		{
 			Module module = ModuleUtil.findModuleForPsiElement(element);
@@ -368,12 +397,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 					{
 						String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
 						String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
-
-						result.add(packageName);
+						processor.process(packageName);
 					}
 			}
 		}
-		return new ArrayList<String>(result);
 	}
+
 
 }

@@ -25,10 +25,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -58,56 +55,146 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 							+ resultSet.getPrefixMatcher().getPrefix()
 			);
 
+		final CompletionResultSet finalResultSet = resultSet;
 
 		if (perlVariable instanceof PsiPerlScalarVariable)
 		{
 			// global scalars
-			for (String name : PerlScalarUtil.getDefinedGlobalScalarNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
+			PerlScalarUtil.processDefinedGlobalScalarNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(s));
+					return true;
+				}
+			});
 
 			// global arrays
-			for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
+			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(s));
+					return true;
+				}
+			});
 
 			// global hashes
-			for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
+			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(s));
+					return true;
+				}
+			});
+
 		} else if (perlVariable instanceof PerlGlobVariable)
 		{
 			// global scalars
-			for (String name : PerlScalarUtil.getDefinedGlobalScalarNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(name));
+			PerlScalarUtil.processDefinedGlobalScalarNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(s));
+					return true;
+				}
+			});
 
 			// global arrays
-			for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(name));
+			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(s));
+					return true;
+				}
+			});
 
 			// global hashes
-			for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(name));
+			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(s));
+					return true;
+				}
+			});
 
 			// globs
-			for (String name : PerlGlobUtil.getDefinedGlobsNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(name));
+			PerlGlobUtil.processDefinedGlobsNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(s));
+					return true;
+				}
+			});
 		} else if (perlVariable instanceof PsiPerlArrayVariable)
 		{
 			// global arrays
-			for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
+			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(s));
+					return true;
+				}
+			});
 
 			// global hashes
-			for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(name));
+			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(s));
+					return true;
+				}
+			});
 		} else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 		{
 			// global arrays
-			for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(name));
+			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(s));
+					return true;
+				}
+			});
 		} else if (perlVariable instanceof PsiPerlHashVariable)
 		{
 			// global hashes
-			for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
-				resultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(name));
+			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor()
+			{
+				@Override
+				public boolean process(String s)
+				{
+					if (super.process(s))
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(s));
+					return true;
+				}
+			});
 		}
 	}
 

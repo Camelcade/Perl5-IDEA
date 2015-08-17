@@ -25,7 +25,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.Processor;
 import gnu.trove.THashSet;
 
 import java.io.File;
@@ -90,12 +89,12 @@ public class PerlUtil
 		final Set<String> result = new THashSet<String>();
 
 		StubIndex.getInstance().processAllKeys(key, project, new
-				Processor<String>()
+				PerlInternalIndexKeysProcessor()
 				{
 					@Override
 					public boolean process(String name)
 					{
-						if (name.charAt(0) != '*')
+						if (super.process(name))
 							result.add(name);
 						return true;
 					}

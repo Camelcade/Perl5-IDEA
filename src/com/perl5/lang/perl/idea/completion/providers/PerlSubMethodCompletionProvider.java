@@ -52,6 +52,7 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 
 //				System.out.println("Autocomplete for " + packageName);
 
+		// fixme
 		for (PsiElement element : PerlMro.getVariants(method.getProject(), packageName, isSuper))
 		{
 			if (element instanceof PerlSubDefinition && ((PerlSubDefinition) element).isMethod())
