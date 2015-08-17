@@ -69,17 +69,15 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 
 				if (newLineItem == null) // last statement without newline
 				{
-					currentFile.addAfter(heredocElements.get(3), currentFile.getLastChild());
 					currentFile.addAfter(heredocElements.get(1), currentFile.getLastChild());
 					currentFile.addAfter(heredocElements.get(2), currentFile.getLastChild());
 					currentFile.addAfter(heredocElements.get(3), currentFile.getLastChild());
 				} else
 				{
 					PsiElement container = newLineItem.getParent();
-					container.addAfter(heredocElements.get(3),
-							container.addAfter(heredocElements.get(2),
-									container.addAfter(heredocElements.get(1), newLineItem))
-					);
+					container.addAfter(heredocElements.get(2),
+							container.addBefore(heredocElements.get(1), newLineItem))
+					;
 				}
 				parentElement.replace(heredocElements.get(0));
 			}
