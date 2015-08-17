@@ -101,7 +101,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<String> getDefinedSubsNames(Project project)
 	{
-		return StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project);
+		return PerlUtil.filterInternalNames(StubIndex.getInstance().getAllKeys(PerlSubDefinitionsStubIndex.KEY, project));
 	}
 
 
@@ -131,7 +131,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<String> getDeclaredSubsNames(Project project)
 	{
-		return StubIndex.getInstance().getAllKeys(PerlSubDeclarationStubIndex.KEY, project);
+		return PerlUtil.filterInternalNames(StubIndex.getInstance().getAllKeys(PerlSubDeclarationStubIndex.KEY, project));
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<String> getDefinedConstantsNames(Project project)
 	{
-		return StubIndex.getInstance().getAllKeys(PerlConstantsStubIndex.KEY, project);
+		return PerlUtil.filterInternalNames(StubIndex.getInstance().getAllKeys(PerlConstantsStubIndex.KEY, project));
 	}
 
 	/**

@@ -22,11 +22,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -81,21 +81,13 @@ public class PerlUtil
 		return null;
 	}
 
-	/**
-	 * Returns previous element in dereference chain
-	 *
-	 * @param currentElement current chain element
-	 * @return previous element or null if it's a first one
-	 */
-	public static PsiElement getPrevDereferenceElement(PsiElement currentElement)
+	public static Collection<String> filterInternalNames(Collection<String> unfilteredNames)
 	{
-		PsiElement prevElement = currentElement.getPrevSibling();
-
-		if (prevElement != null && prevElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
-			prevElement = prevElement.getPrevSibling();
-
-		return prevElement;
+		HashSet<String> result = new HashSet<String>();
+		for (String name : unfilteredNames)
+			if (name.charAt(0) != '*' && !result.contains(name))
+				result.add(name);
+		return result;
 	}
-
 
 }
