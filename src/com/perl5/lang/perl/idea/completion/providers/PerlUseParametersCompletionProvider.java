@@ -27,6 +27,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
@@ -48,20 +51,31 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 
 		PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
-		if (useStatement != null && useStatement.isParentPragma())
+		if (useStatement != null)
 		{
-			if ("parent".equals(useStatement.getPackageName()))
-				resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));
-
-			PerlPackageUtil.processPackageFilesForPsiElement(parameters.getPosition(), new Processor<String>()
+			IPerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+			if (packageProcessor != null)
 			{
-				@Override
-				public boolean process(String s)
-				{
-					resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
-					return true;
-				}
-			});
+				// fixme we should allow lookup elements customization by package processor
+				if (packageProcessor instanceof IPerlPackageOptionsProvider)
+					for (String option : ((IPerlPackageOptionsProvider) packageProcessor).getOptions().keySet())
+						resultSet.addElement(LookupElementBuilder
+								.create(option)
+								.withTypeText(((IPerlPackageOptionsProvider) packageProcessor).getOptions().get(option), true)
+								.withIcon(PerlIcons.PERL_OPTION)
+								.withInsertHandler(USE_OPTION_INSERT_HANDLER));
+
+				if (packageProcessor instanceof IPerlPackageParentsProvider && ((IPerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
+					PerlPackageUtil.processPackageFilesForPsiElement(parameters.getPosition(), new Processor<String>()
+					{
+						@Override
+						public boolean process(String s)
+						{
+							resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
+							return true;
+						}
+					});
+			}
 		}
 	}
 

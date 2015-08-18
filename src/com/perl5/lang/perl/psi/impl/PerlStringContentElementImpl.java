@@ -24,7 +24,8 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -98,8 +99,13 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	public boolean looksLikePackage()
 	{
 		PerlUseStatement parentUse = PsiTreeUtil.getParentOfType(this, PerlUseStatement.class, true);
-		return parentUse != null && (parentUse.isParentPragma() && !"-norequire".equals(getText())) || PerlLexer.AMBIGUOUS_PACKAGE_RE.matcher(getText()).matches();
-
+		if (parentUse != null)
+		{
+			IPerlPackageProcessor packageProcessor = parentUse.getPackageProcessor();
+			return packageProcessor instanceof IPerlPackageParentsProvider
+					&& ((IPerlPackageParentsProvider) packageProcessor).getParentsList(parentUse).contains(getText());
+		}
+		return false;
 	}
 
 	@Override

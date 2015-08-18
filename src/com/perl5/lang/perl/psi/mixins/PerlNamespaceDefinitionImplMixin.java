@@ -24,6 +24,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
@@ -109,11 +110,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		PsiElement namespaceBlock = getBlock();
 
 		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
-			if (useStatement.isParentPragma())
+			if (useStatement.getPackageProcessor() instanceof IPerlPackageParentsProvider)
 				if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this)    // check that it's not nested package use
-					for (String parentPackage : useStatement.getStringParameters())
-						if (parentPackage != null && !parentPackage.equals("-norequire"))
-							result.add(parentPackage);
+					result.addAll(((IPerlPackageParentsProvider) useStatement.getPackageProcessor()).getParentsList(useStatement));
 
 		return result;
 	}

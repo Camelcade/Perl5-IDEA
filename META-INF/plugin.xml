@@ -48,6 +48,11 @@
 
       <p><b>Features:</b>
       <ul>
+      <li>Implemented extension point for PackageProcessors, describing unusual packages behaviour and provide packages options. NB: inteface is experimental and subject to change.
+      <ul>
+        <li>Implemented processors for <code>base</code>, <code>parent</code>, <code>strict</code> and <code>warnings</code> pragmas.
+      </ul>
+      </li>
       </ul>
       </p>
 
@@ -68,8 +73,25 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.java</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
+    <extensionPoints>
+        <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
+            <with attribute="implementationClass"
+                  implements="com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor"/>
+        </extensionPoint>
+    </extensionPoints>
 
+    <extensions defaultExtensionNs="com.perl5">
+        <packageProcessor key="parent"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ParentProcessor"/>
+        <packageProcessor key="base"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseProcessor"/>
+        <packageProcessor key="strict"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StrictProcessor"/>
+        <packageProcessor key="warnings"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.WarningsProcessor"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
         <internalFileTemplate name="Perl5 package"/>
         <internalFileTemplate name="Perl5 script"/>
         <internalFileTemplate name="Perl5 embedded"/>

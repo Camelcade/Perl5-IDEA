@@ -14,30 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.idea.EP;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.openapi.util.KeyedExtensionCollector;
+import com.intellij.util.KeyedLazyInstanceEP;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 18.08.2015.
  */
-public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContainer
+public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<IPerlPackageProcessor>
 {
-	public String getPackageName();
+	public static final KeyedExtensionCollector<IPerlPackageProcessor, String> EP = new KeyedExtensionCollector<IPerlPackageProcessor, String>("com.perl5.packageProcessor")
+	{
+		@NotNull
+		@Override
+		protected String keyToString(@NotNull String key)
+		{
+			return key;
+		}
 
-	public boolean isPragma();
-
-	public boolean isVersion();
-
-	public boolean isPragmaOrVersion();
-
-	public ArrayList<String> getStringParameters();
-
-	public PsiElement getVersionElement();
-
-	public IPerlPackageProcessor getPackageProcessor();
+	};
 }

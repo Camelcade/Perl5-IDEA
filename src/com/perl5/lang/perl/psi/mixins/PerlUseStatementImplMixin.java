@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
@@ -26,36 +27,22 @@ import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
 public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl implements PsiPerlUseStatement
 {
-	// fixme do this wit specific class
-	public static final HashSet<String> PARENT_PRAGMAS = new HashSet<String>(Arrays.asList(
-			"parent",
-			"base"
-	));
-
 	public PerlUseStatementImplMixin(ASTNode node)
 	{
 		super(node);
 	}
 
 	@Override
-	public boolean isParentPragma()
-	{
-		return PARENT_PRAGMAS.contains(getPackageName());
-	}
-
-	@Override
 	public boolean isPragma()
 	{
-		return getNamespaceElement() != null && getNamespaceElement().isPragma();
+		IPerlPackageProcessor packageProcessor = getPackageProcessor();
+		return packageProcessor != null && packageProcessor.isPragma();
 	}
 
 	@Override
@@ -92,11 +79,19 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	}
 
 	@Override
-	public List<String> getStringParameters()
+	public ArrayList<String> getStringParameters()
 	{
-		List<String> stringParameters = new ArrayList<String>();
+		ArrayList<String> stringParameters = new ArrayList<String>();
 		for (PerlStringContentElement stringContentElement : PerlPsiUtil.findStringElments(getNamespaceElement().getNextSibling()))
 			stringParameters.add(stringContentElement.getText());
 		return stringParameters;
+	}
+
+	@Override
+	public IPerlPackageProcessor getPackageProcessor()
+	{
+		if (getNamespaceElement() != null)
+			return getNamespaceElement().getPackageProcessor();
+		return null;
 	}
 }
