@@ -89,6 +89,8 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StrictProcessor"/>
         <packageProcessor key="warnings"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.WarningsProcessor"/>
+        <packageProcessor key="feature"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.FeatureProcessor"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
