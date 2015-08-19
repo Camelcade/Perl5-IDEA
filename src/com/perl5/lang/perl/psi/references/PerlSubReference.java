@@ -21,16 +21,18 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class PerlSubReference extends PerlReferencePoly
 {
@@ -39,6 +41,7 @@ public class PerlSubReference extends PerlReferencePoly
 	protected boolean myIsDeclared = false;
 	protected boolean myIsDefined = false;
 	protected boolean myIsAliased = false;
+	protected boolean myIsImported = false;
 	PerlSubNameElement mySubNameElement;
 
 	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
@@ -68,40 +71,67 @@ public class PerlSubReference extends PerlReferencePoly
 				relatedItems.addAll(PerlMroDfs.resolveSub(project, ((PerlMethod) parent).getContextPackageName(), subName, true));
 			else    // static resolution
 			{
-				String canonicalName = packageName + "::" + subName;
-				for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
-					if (!target.isEquivalentTo(parent))
-						relatedItems.add(target);
-				for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
-					if (!target.isEquivalentTo(parent))
-						relatedItems.add(target);
-				for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-					if (!target.isEquivalentTo(parent))
-						relatedItems.add(target);
-				for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
-					if (!target.isEquivalentTo(parent))
-						relatedItems.add(target);
+				if (parent instanceof PerlNamespaceElementContainer && ((PerlNamespaceElementContainer) parent).getNamespaceElement() == null && mySubNameElement.isBuiltIn())
+					return new ResolveResult[0];
 
-				if (!"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
-						&& relatedItems.size() == 0 && !(
+//				System.err.println("Checking for " + subName);
+
+				collectRelatedItems(
+						packageName + "::" + subName,
+						project,
+						parent,
+						relatedItems
+				);
+
+				// check for imports
+				if (relatedItems.size() == 0)
+				{
+					// fixme implement imports to the file
+					PerlNamespaceDefinition namespaceDefinitionContainer = PsiTreeUtil.getParentOfType(myElement, PerlNamespaceDefinition.class);
+
+					if (namespaceDefinitionContainer != null)
+					{
+						Map<String, List<String>> imports = namespaceDefinitionContainer.getImports();
+						for (String importSourcePackageName : imports.keySet())
+						{
+							List<String> importOptions = imports.get(importSourcePackageName);
+							Set<String> packageExport = new HashSet<String>();
+							Set<String> packageExportOk = new HashSet<String>();
+
+							// fixme handle tags
+							for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, importSourcePackageName))
+							{
+								packageExport.addAll(namespaceDefinition.getEXPORT());
+								packageExportOk.addAll(namespaceDefinition.getEXPORT_OK());
+								packageExportOk.addAll(namespaceDefinition.getEXPORT());
+							}
+
+							if (importOptions == null && packageExport.contains(subName) // default import
+									|| importOptions != null && importOptions.contains(subName) && packageExportOk.contains(subName)
+									)
+								collectRelatedItems(
+										importSourcePackageName + "::" + subName,
+										project,
+										parent,
+										relatedItems
+								);
+						}
+					}
+				}
+
+				// check for autoload
+				if (relatedItems.size() == 0
+						&& !"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
+						&& !(
 						parent instanceof PerlSubDeclaration
 								|| parent instanceof PerlSubDefinition
 				))
-				{
-					canonicalName = packageName + "::AUTOLOAD";
-					for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
-						if (!target.isEquivalentTo(parent))
-							relatedItems.add(target);
-					for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
-						if (!target.isEquivalentTo(parent))
-							relatedItems.add(target);
-					for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-						if (!target.isEquivalentTo(parent))
-							relatedItems.add(target);
-					for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
-						if (!target.isEquivalentTo(parent))
-							relatedItems.add(target);
-				}
+					collectRelatedItems(
+							packageName + "::AUTOLOAD",
+							project,
+							parent,
+							relatedItems
+					);
 			}
 		}
 
@@ -131,6 +161,22 @@ public class PerlSubReference extends PerlReferencePoly
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);
+	}
+
+	public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems)
+	{
+		for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
+			if (!target.isEquivalentTo(exclusion))
+				relatedItems.add(target);
+		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
+			if (!target.isEquivalentTo(exclusion))
+				relatedItems.add(target);
+		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+			if (!target.isEquivalentTo(exclusion))
+				relatedItems.add(target);
+		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
+			if (!target.isEquivalentTo(exclusion))
+				relatedItems.add(target);
 	}
 
 
@@ -198,5 +244,10 @@ public class PerlSubReference extends PerlReferencePoly
 	public boolean isConstant()
 	{
 		return myIsConstant;
+	}
+
+	public boolean isImported()
+	{
+		return myIsImported;
 	}
 }

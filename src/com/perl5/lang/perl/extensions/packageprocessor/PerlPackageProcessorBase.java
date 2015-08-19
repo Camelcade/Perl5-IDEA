@@ -16,13 +16,11 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -52,31 +50,20 @@ public abstract class PerlPackageProcessorBase implements IPerlPackageProcessor
 	}
 
 	@Override
-	@NotNull
 	public List<String> getImports(PerlUseStatement useStatement)
 	{
 		HashSet<String> result = new HashSet<String>();
+		Project project = useStatement.getProject();
 		String packageName = useStatement.getPackageName();
 		if (packageName != null)
 		{
 			PsiElement expr = useStatement.getExpr();
-			HashSet<String> possibleExports = new HashSet<String>();
-			for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(useStatement.getProject(), packageName))
-				possibleExports.addAll(namespaceDefinition.getEXPORT());
 
 			if (expr == null) // default imports
-				result = possibleExports;
+				return null;
 			else
-			{
-				for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(useStatement.getProject(), packageName))
-					possibleExports.addAll(namespaceDefinition.getEXPORT_OK());
-
-				// fixme implement tags import
-
 				for (PerlStringContentElement stringContentElement : PerlPsiUtil.findStringElments(expr))
-					if (possibleExports.contains(stringContentElement.getName()))
-						result.add(stringContentElement.getName());
-			}
+					result.add(stringContentElement.getName());
 		}
 
 //		System.err.println("Imported from " + packageName + ": " + result);

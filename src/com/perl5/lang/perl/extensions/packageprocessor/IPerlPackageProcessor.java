@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -49,12 +48,11 @@ public interface IPerlPackageProcessor
 	public void no(PerlUseStatement noStatement);
 
 	/**
-	 * Retuns list of subs imported by current statement
+	 * Retuns list of subs imported by current statement; Null means @EXPORT, empty list means suppressing @EXPORT
 	 *
 	 * @param useStatement use statement psi element
 	 * @return list of subs imported by current statement with current options
 	 */
-	@NotNull
 	public List<String> getImports(PerlUseStatement useStatement);
 
 }

@@ -223,7 +223,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getImports();
 
-		Map<String, List<String>> result = null;
+		Map<String, List<String>> result = new HashMap<String, List<String>>();
 
 		for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PerlUseStatement.class))
 		{
@@ -232,14 +232,15 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			{
 				List<String> imports = useStatement.getPackageProcessor().getImports(useStatement);
 
-				if (imports.size() > 0)
+				if (!result.containsKey(packageName))
+					result.put(packageName, null);
+
+				if (imports != null && result.get(packageName) == null)
+					result.put(packageName, new ArrayList<String>());
+
+//				System.err.println("Imports for " + packageName + ": " + imports);
+				if (imports != null && imports.size() > 0)
 				{
-					if (result == null)
-						result = new HashMap<String, List<String>>();
-
-					if (!result.containsKey(packageName))
-						result.put(packageName, new ArrayList<String>());
-
 					// fixme this is bad, must be a hashmap
 					List<String> packageImports = result.get(packageName);
 					for (String subName : imports)
@@ -249,7 +250,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			}
 		}
 
-		return result == null ? Collections.<String, List<String>>emptyMap() : result;
+		return result;
 	}
 
 	/**
