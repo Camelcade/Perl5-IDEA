@@ -19,7 +19,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -55,6 +55,6 @@ public interface IPerlPackageProcessor
 	 * @return list of subs imported by current statement with current options
 	 */
 	@NotNull
-	public Collection<String> getImports(PerlUseStatement useStatement);
+	public List<String> getImports(PerlUseStatement useStatement);
 
 }

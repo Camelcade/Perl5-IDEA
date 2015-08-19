@@ -19,16 +19,14 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by hurricup on 18.08.2015.
  */
 public abstract class PerlPackageProcessorBase implements IPerlPackageProcessor
 {
-	protected static final Collection<String> EMPTY_COLLECTION = new ArrayList<String>();
-
 	@Override
 	public boolean isPragma()
 	{
@@ -49,8 +47,8 @@ public abstract class PerlPackageProcessorBase implements IPerlPackageProcessor
 
 	@Override
 	@NotNull
-	public Collection<String> getImports(PerlUseStatement useStatement)
+	public List<String> getImports(PerlUseStatement useStatement)
 	{
-		return EMPTY_COLLECTION;
+		return Collections.emptyList();
 	}
 }

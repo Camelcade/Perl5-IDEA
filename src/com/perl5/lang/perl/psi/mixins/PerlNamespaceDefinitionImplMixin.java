@@ -180,30 +180,84 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public List<String> getISA()
 	{
-		return Collections.emptyList();
+		return getArrayAsList("ISA");
 	}
 
 	@Override
 	public List<String> getEXPORT()
 	{
-		return Collections.emptyList();
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getEXPORT();
+
+		return getArrayAsList("EXPORT");
 	}
 
 	@Override
 	public List<String> getEXPORT_OK()
 	{
-		return Collections.emptyList();
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getEXPORT_OK();
+
+		return getArrayAsList("EXPORT_OK");
 	}
 
 	@Override
 	public Map<String, List<String>> getEXPORT_TAGS()
 	{
-		return Collections.emptyMap();
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getEXPORT_TAGS();
+
+		return getHashAsMap("EXPORT_TAGS");
 	}
 
 	@Override
 	public Map<String, List<String>> getImports()
 	{
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getImports();
+
+		Map<String, List<String>> result = null;
+
+		for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PerlUseStatement.class))
+		{
+			String packageName = useStatement.getPackageName();
+			if (packageName != null && PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this)
+			{
+				List<String> imports = useStatement.getPackageProcessor().getImports(useStatement);
+
+				if (imports.size() > 0)
+				{
+					if (result == null)
+						result = new HashMap<String, List<String>>();
+
+					if (!result.containsKey(packageName))
+						result.put(packageName, new ArrayList<String>());
+
+					// fixme this is bad, must be a hashmap
+					List<String> packageImports = result.get(packageName);
+					for (String subName : imports)
+						if (!packageImports.contains(subName))
+							packageImports.add(subName);
+				}
+			}
+		}
+
+		return result == null ? Collections.<String, List<String>>emptyMap() : result;
+	}
+
+	public List<String> getArrayAsList(String arrayName)
+	{
+		// fixme NYI
+		return Collections.emptyList();
+	}
+
+	public Map<String, List<String>> getHashAsMap(String hashMap)
+	{
+		// fixme NYI
 		return Collections.emptyMap();
 	}
 }
