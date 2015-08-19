@@ -278,16 +278,12 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 
 				// checks for @ARRAY = ...
 				if (assignExpression instanceof PsiPerlAssignExpr && assignElement.getNextSibling() != null)// not leftside element
-				{
-					Collection<PerlStringContentElement> parameters = new ArrayList<PerlStringContentElement>();
-					PerlPsiUtil.findStringElments(assignExpression.getLastChild(), parameters);
-					for (PerlStringContentElement element : parameters)
+					for (PerlStringContentElement element : PerlPsiUtil.findStringElments(assignExpression.getLastChild()))
 					{
 						if (result == null)
 							result = new HashSet<String>();
 						result.add(element.getText());
 					}
-				}
 			}
 
 //		System.err.println("Searched for @" + arrayName + " found: " + result);

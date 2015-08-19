@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -40,4 +41,8 @@ public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContai
 	public PsiElement getVersionElement();
 
 	public IPerlPackageProcessor getPackageProcessor();
+
+	@Nullable
+	PsiPerlExpr getExpr();
+
 }
