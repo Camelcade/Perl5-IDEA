@@ -32,6 +32,7 @@ import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,6 +112,8 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			if (useStatement.getPackageProcessor() instanceof IPerlPackageParentsProvider)
 				if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this)    // check that it's not nested package use
 					result.addAll(((IPerlPackageParentsProvider) useStatement.getPackageProcessor()).getParentsList(useStatement));
+
+		result.addAll(getArrayAsList("ISA"));
 
 		return result;
 	}
@@ -249,10 +252,47 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		return result == null ? Collections.<String, List<String>>emptyMap() : result;
 	}
 
+	/**
+	 * Searches for array by name and returns distinct list of string values
+	 *
+	 * @param arrayName array name without a sigil
+	 * @return distinct list of string values
+	 */
 	public List<String> getArrayAsList(String arrayName)
 	{
-		// fixme NYI
-		return Collections.emptyList();
+		HashSet<String> result = null;
+		for (PerlVariable arrayVariable : PsiTreeUtil.findChildrenOfType(this, PsiPerlArrayVariable.class))
+			if (arrayVariable.getNamespaceElement() == null
+					&& arrayName.equals(arrayVariable.getName())
+					&& PsiTreeUtil.getParentOfType(arrayVariable, PerlNamespaceDefinition.class) == this
+					)
+			{
+				PsiElement assignExpression = arrayVariable.getParent();
+				PsiElement assignElement = arrayVariable;
+
+				if (assignExpression instanceof PsiPerlVariableDeclarationGlobal)    // proceed our @ARRAY =
+				{
+					assignElement = assignExpression;
+					assignExpression = assignExpression.getParent();
+				}
+
+				// checks for @ARRAY = ...
+				if (assignExpression instanceof PsiPerlAssignExpr && assignElement.getNextSibling() != null)// not leftside element
+				{
+					Collection<PerlStringContentElement> parameters = new ArrayList<PerlStringContentElement>();
+					PerlPsiUtil.findStringElments(assignExpression.getLastChild(), parameters);
+					for (PerlStringContentElement element : parameters)
+					{
+						if (result == null)
+							result = new HashSet<String>();
+						result.add(element.getText());
+					}
+				}
+			}
+
+//		System.err.println("Searched for @" + arrayName + " found: " + result);
+
+		return result == null ? Collections.<String>emptyList() : new ArrayList<String>(result);
 	}
 
 	public Map<String, List<String>> getHashAsMap(String hashMap)

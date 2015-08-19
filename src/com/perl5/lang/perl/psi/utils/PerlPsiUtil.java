@@ -46,7 +46,7 @@ public class PerlPsiUtil
 	 * @param startWith element to start with (inclusive)
 	 * @param result    list to populate
 	 */
-	protected static void findStringElments(PsiElement startWith, Collection<PerlStringContentElement> result)
+	public static void findStringElments(PsiElement startWith, Collection<PerlStringContentElement> result)
 	{
 		while (startWith != null)
 		{
