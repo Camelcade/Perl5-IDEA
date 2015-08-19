@@ -24,6 +24,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -45,4 +47,41 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 * @param result       array to populate
 	 */
 	public void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result);
+
+	/**
+	 * Returns explicit ISA value, initialized with @ISA = ...
+	 *
+	 * @return @ISA list
+	 */
+	public List<String> getISA();
+
+	/**
+	 * Retuns list of exports from this module
+	 *
+	 * @return list of @EXPORTs
+	 */
+	public List<String> getEXPORT();
+
+	/**
+	 * .
+	 * Returns list of optional exports from this module
+	 *
+	 * @return list of @EXPORT_OKs
+	 */
+	public List<String> getEXPORT_OK();
+
+	/**
+	 * Returns map of exported tags
+	 *
+	 * @return map of %EXPORT_TAGS
+	 */
+	public Map<String, List<String>> getEXPORT_TAGS();
+
+	/**
+	 * Returns map of imported subs as map package => qw(subs)
+	 *
+	 * @return map of imports
+	 */
+	public Map<String, List<String>> getImports();
+
 }

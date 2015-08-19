@@ -22,7 +22,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 16.07.2015.
@@ -44,5 +46,29 @@ public class PerlStubSerializationUtil
 			result.add(dataStream.readName().toString());
 		return result;
 	}
+
+	public static void writeStringListMap(@NotNull StubOutputStream dataStream, Map<String, List<String>> stringListMap) throws IOException
+	{
+		dataStream.writeInt(stringListMap.size());
+		for (String key : stringListMap.keySet())
+		{
+			dataStream.writeName(key);
+			writeStringsList(dataStream, stringListMap.get(key));
+		}
+	}
+
+	public static Map<String, List<String>> readStringListMap(@NotNull StubInputStream dataStream) throws IOException
+	{
+		int mapSize = dataStream.readInt();
+		Map<String, List<String>> stringListMap = new HashMap<String, List<String>>(mapSize);
+		for (int i = 0; i < mapSize; i++)
+		{
+			String key = dataStream.readName().toString();
+			stringListMap.put(key, readStringsList(dataStream));
+		}
+		return stringListMap;
+	}
+
+
 
 }

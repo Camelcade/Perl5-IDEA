@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 28.05.2015.
@@ -54,7 +55,17 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	@Override
 	public PerlNamespaceDefinitionStub createStub(@NotNull PsiPerlNamespaceDefinition psi, StubElement parentStub)
 	{
-		return new PerlNamespaceDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getMroType(), psi.getParentNamespaces(), psi.isDeprecated());
+		return new PerlNamespaceDefinitionStubImpl(
+				parentStub,
+				psi.getPackageName(),
+				psi.getMroType(),
+				psi.getParentNamespaces(),
+				psi.isDeprecated(),
+				psi.getEXPORT(),
+				psi.getEXPORT_OK(),
+				psi.getEXPORT_TAGS(),
+				psi.getImports()
+		);
 	}
 
 	@NotNull
@@ -82,6 +93,10 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getMroType().toString());
 		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getParentNamespaces());
+		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT());
+		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT_OK());
+		PerlStubSerializationUtil.writeStringListMap(dataStream, stub.getEXPORT_TAGS());
+		PerlStubSerializationUtil.writeStringListMap(dataStream, stub.getImports());
 		dataStream.writeBoolean(stub.isDeprecated());
 	}
 
@@ -92,9 +107,23 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		String packageName = dataStream.readName().toString();
 		PerlMroType mroType = PerlMroType.valueOf(dataStream.readName().toString());
 		List<String> parentNamespaces = PerlStubSerializationUtil.readStringsList(dataStream);
+		List<String> EXPORT = PerlStubSerializationUtil.readStringsList(dataStream);
+		List<String> EXPORT_OK = PerlStubSerializationUtil.readStringsList(dataStream);
+		Map<String, List<String>> EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(dataStream);
+		Map<String, List<String>> importsMap = PerlStubSerializationUtil.readStringListMap(dataStream);
 		boolean isDeprecated = dataStream.readBoolean();
 
-		return new PerlNamespaceDefinitionStubImpl(parentStub, packageName, mroType, parentNamespaces, isDeprecated);
+		return new PerlNamespaceDefinitionStubImpl(
+				parentStub,
+				packageName,
+				mroType,
+				parentNamespaces,
+				isDeprecated,
+				EXPORT,
+				EXPORT_OK,
+				EXPORT_TAGS,
+				importsMap
+		);
 	}
 
 	@Override

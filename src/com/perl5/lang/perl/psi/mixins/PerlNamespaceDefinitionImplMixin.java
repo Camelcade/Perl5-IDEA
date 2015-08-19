@@ -36,9 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by hurricup on 28.05.2015.
@@ -177,5 +175,35 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.isDeprecated();
 		return getAnnotationDeprectaed() != null;
+	}
+
+	@Override
+	public List<String> getISA()
+	{
+		return Collections.emptyList();
+	}
+
+	@Override
+	public List<String> getEXPORT()
+	{
+		return Collections.emptyList();
+	}
+
+	@Override
+	public List<String> getEXPORT_OK()
+	{
+		return Collections.emptyList();
+	}
+
+	@Override
+	public Map<String, List<String>> getEXPORT_TAGS()
+	{
+		return Collections.emptyMap();
+	}
+
+	@Override
+	public Map<String, List<String>> getImports()
+	{
+		return Collections.emptyMap();
 	}
 }
