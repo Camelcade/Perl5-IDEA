@@ -50,7 +50,7 @@
       <ul>
       <li>Implemented extension point for PackageProcessors, describing unusual packages behaviour and provide packages options. NB: inteface is experimental and subject to change.
       <ul>
-        <li>Implemented processors for <code>base</code>, <code>parent</code>, <code>strict</code> and <code>warnings</code> pragmas.
+        <li>Implemented processors for <code>base</code>, <code>parent</code>, <code>strict</code>, <code>feature</code> and <code>warnings</code> pragmas.
       </ul>
       </li>
       </ul>
