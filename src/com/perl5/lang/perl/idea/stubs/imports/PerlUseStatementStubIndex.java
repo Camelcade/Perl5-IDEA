@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.namespaces;
+package com.perl5.lang.perl.idea.stubs.imports;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 20.08.2015.
  */
-public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<PsiPerlNamespaceDefinition>
+public class PerlUseStatementStubIndex extends StringStubIndexExtension<PerlUseStatement>
 {
-	public static final int VERSION = 1;
-	public static final StubIndexKey<String, PsiPerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");
+	public static final int VERSION = 3;
+	public static final StubIndexKey<String, PerlUseStatement> KEY = StubIndexKey.createIndexKey("perl.imports");
 
 	@Override
 	public int getVersion()
@@ -37,7 +37,7 @@ public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<P
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PsiPerlNamespaceDefinition> getKey()
+	public StubIndexKey<String, PerlUseStatement> getKey()
 	{
 		return KEY;
 	}

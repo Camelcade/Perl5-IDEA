@@ -16,26 +16,37 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl implements PsiPerlUseStatement
+public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
 {
 	public PerlUseStatementImplMixin(ASTNode node)
 	{
 		super(node);
+	}
+
+	public PerlUseStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType)
+	{
+		super(stub, nodeType);
 	}
 
 	@Override
@@ -79,7 +90,7 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	}
 
 	@Override
-	public ArrayList<String> getStringParameters()
+	public List<String> getImportParameters()
 	{
 		ArrayList<String> stringParameters = new ArrayList<String>();
 		for (PerlStringContentElement stringContentElement : PerlPsiUtil.findStringElments(getNamespaceElement().getNextSibling()))
@@ -93,5 +104,18 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 		if (getNamespaceElement() != null)
 			return getNamespaceElement().getPackageProcessor();
 		return null;
+	}
+
+	@Override
+	public String getOuterPackageName()
+	{
+		return PerlPackageUtil.getContextPackageName(this);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlExpr getExpr()
+	{
+		return findChildByClass(PsiPerlExpr.class);
 	}
 }

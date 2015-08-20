@@ -14,31 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.namespaces;
+package com.perl5.lang.perl.idea.stubs.imports;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 20.08.2015.
  */
-public interface PerlNamespaceDefinitionStub extends StubElement<PsiPerlNamespaceDefinition>
+public interface PerlUseStatementStub extends StubElement<PerlUseStatement>
 {
 	public String getPackageName();
 
-	public PerlMroType getMroType();
+	public String getOuterPackageName();
 
-	public List<String> getParentNamespaces();
-
-	public boolean isDeprecated();
-
-	public List<String> getEXPORT();
-
-	public List<String> getEXPORT_OK();
-
-	public Map<String, List<String>> getEXPORT_TAGS();
+	public List<String> getImportParameters();
 }

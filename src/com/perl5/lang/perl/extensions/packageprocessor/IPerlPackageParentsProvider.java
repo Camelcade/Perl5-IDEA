@@ -19,7 +19,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -34,7 +34,7 @@ public interface IPerlPackageParentsProvider
 	 */
 	public
 	@NotNull
-	ArrayList<String> getParentsList(PerlUseStatement useStatement);
+	List<String> getParentsList(PerlUseStatement useStatement);
 
 	/**
 	 * Returns true if we should show available package files in autocompletion

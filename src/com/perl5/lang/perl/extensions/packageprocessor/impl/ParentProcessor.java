@@ -20,8 +20,8 @@ import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvid
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -44,9 +44,9 @@ public class ParentProcessor extends BaseProcessor implements IPerlPackageOption
 
 	@NotNull
 	@Override
-	public ArrayList<String> getParentsList(PerlUseStatement useStatement)
+	public List<String> getParentsList(PerlUseStatement useStatement)
 	{
-		ArrayList<String> result = super.getParentsList(useStatement);
+		List<String> result = super.getParentsList(useStatement);
 		for (int i = 0; i < result.size(); i++)
 		{
 			if ("-norequire".equals(result.get(i)))

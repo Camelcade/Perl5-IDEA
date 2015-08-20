@@ -21,7 +21,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -30,9 +30,9 @@ public class BaseProcessor extends PerlPragmaProcessorBase implements IPerlPacka
 {
 	@NotNull
 	@Override
-	public ArrayList<String> getParentsList(PerlUseStatement useStatement)
+	public List<String> getParentsList(PerlUseStatement useStatement)
 	{
-		return useStatement.getStringParameters();
+		return useStatement.getImportParameters();
 	}
 
 	@Override

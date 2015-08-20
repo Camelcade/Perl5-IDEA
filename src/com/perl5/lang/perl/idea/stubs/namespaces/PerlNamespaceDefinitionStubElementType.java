@@ -63,8 +63,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 				psi.isDeprecated(),
 				psi.getEXPORT(),
 				psi.getEXPORT_OK(),
-				psi.getEXPORT_TAGS(),
-				psi.getImports()
+				psi.getEXPORT_TAGS()
 		);
 	}
 
@@ -96,7 +95,6 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT());
 		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT_OK());
 		PerlStubSerializationUtil.writeStringListMap(dataStream, stub.getEXPORT_TAGS());
-		PerlStubSerializationUtil.writeStringListMap(dataStream, stub.getImports());
 		dataStream.writeBoolean(stub.isDeprecated());
 	}
 
@@ -110,7 +108,6 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		List<String> EXPORT = PerlStubSerializationUtil.readStringsList(dataStream);
 		List<String> EXPORT_OK = PerlStubSerializationUtil.readStringsList(dataStream);
 		Map<String, List<String>> EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(dataStream);
-		Map<String, List<String>> importsMap = PerlStubSerializationUtil.readStringListMap(dataStream);
 		boolean isDeprecated = dataStream.readBoolean();
 
 		return new PerlNamespaceDefinitionStubImpl(
@@ -121,8 +118,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 				isDeprecated,
 				EXPORT,
 				EXPORT_OK,
-				EXPORT_TAGS,
-				importsMap
+				EXPORT_TAGS
 		);
 	}
 

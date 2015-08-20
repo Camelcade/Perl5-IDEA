@@ -55,6 +55,9 @@ public class PerlElementTypeFactory
 		else if (name.equals("CONSTANT_NAME"))
 			return PerlStubElementTypes.PERL_CONSTANT;
 
+		else if (name.equals("USE_STATEMENT"))
+			return PerlStubElementTypes.PERL_USE_STATEMENT;
+
 		return new PerlElementType(name);
 	}
 }

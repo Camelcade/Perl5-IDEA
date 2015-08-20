@@ -37,7 +37,6 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 	private final List<String> myEXPORT;
 	private final List<String> myEXPORT_OK;
 	private final Map<String, List<String>> myEXPORT_TAGS;
-	private final Map<String, List<String>> myImportsMap;
 
 	public PerlNamespaceDefinitionStubImpl(
 			StubElement parent,
@@ -47,8 +46,7 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 			boolean isDeprecated,
 			List<String> EXPORT,
 			List<String> EXPORT_OK,
-			Map<String, List<String>> EXPORT_TAGS,
-			Map<String, List<String>> importsMap
+			Map<String, List<String>> EXPORT_TAGS
 	)
 	{
 		super(parent, PerlStubElementTypes.PERL_NAMESPACE);
@@ -59,7 +57,6 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 		myEXPORT = EXPORT;
 		myEXPORT_OK = EXPORT_OK;
 		myEXPORT_TAGS = EXPORT_TAGS;
-		myImportsMap = importsMap;
 	}
 
 	@Override
@@ -102,11 +99,5 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 	public Map<String, List<String>> getEXPORT_TAGS()
 	{
 		return myEXPORT_TAGS;
-	}
-
-	@Override
-	public Map<String, List<String>> getImports()
-	{
-		return myImportsMap;
 	}
 }

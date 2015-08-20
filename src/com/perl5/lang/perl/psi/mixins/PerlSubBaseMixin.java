@@ -142,7 +142,7 @@ public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends Stu
 		{
 			if (annotation instanceof PsiPerlAnnotationAbstract)
 				myAnnotations.setIsAbstract(true);
-			else if (annotation instanceof PsiPerlAnnotationDeprectaed)
+			else if (annotation instanceof PsiPerlAnnotationDeprecated)
 				myAnnotations.setIsDeprecated(true);
 			else if (annotation instanceof PsiPerlAnnotationMethod)
 				myAnnotations.setIsMethod(true);

@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -138,14 +139,14 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getMroType();
 
-		PerlUseStatement useMroStatement = PsiTreeUtil.findChildOfType(this, PsiPerlUseStatementMro.class);
-
-		if (useMroStatement != null && PsiTreeUtil.getParentOfType(useMroStatement, PerlNamespaceDefinition.class) == this)
-		{
-			List<String> parameters = useMroStatement.getStringParameters();
-			if (parameters.size() > 0 && "c3".equals(parameters.get(0)))
-				return PerlMroType.C3;
-		}
+		// fixme implement mroprovider interface
+		for (PerlUseStatement useStatement : PerlPackageUtil.getPackageImports(getProject(), getPackageName(), getContainingFile()))
+			if ("mro".equals(useStatement.getPackageName()))
+			{
+				List<String> parameters = useStatement.getImportParameters();
+				if (parameters != null && parameters.size() > 0 && "c3".equals(parameters.get(0)))
+					return PerlMroType.C3;
+			}
 
 		return PerlMroType.DFS;
 	}
@@ -177,7 +178,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
 			return stub.isDeprecated();
-		return getAnnotationDeprectaed() != null;
+		return getAnnotationDeprecated() != null;
 	}
 
 	@Override
@@ -219,11 +220,12 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public Map<String, List<String>> getImports()
 	{
+		Map<String, List<String>> result = new HashMap<String, List<String>>();
+/*
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
 			return stub.getImports();
 
-		Map<String, List<String>> result = new HashMap<String, List<String>>();
 
 		for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PerlUseStatement.class))
 		{
@@ -249,6 +251,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 				}
 			}
 		}
+*/
 
 		return result;
 	}
