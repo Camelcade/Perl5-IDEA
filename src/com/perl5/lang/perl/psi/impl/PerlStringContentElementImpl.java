@@ -22,12 +22,9 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
@@ -98,14 +95,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	@Override
 	public boolean looksLikePackage()
 	{
-		PerlUseStatement parentUse = PsiTreeUtil.getParentOfType(this, PerlUseStatement.class, true);
-		if (parentUse != null)
-		{
-			IPerlPackageProcessor packageProcessor = parentUse.getPackageProcessor();
-			return packageProcessor instanceof IPerlPackageParentsProvider
-					&& ((IPerlPackageParentsProvider) packageProcessor).getParentsList(parentUse).contains(getText());
-		}
-		return false;
+		return PerlBaseLexer.AMBIGUOUS_PACKAGE_RE.matcher(getText()).matches();
 	}
 
 	@Override
