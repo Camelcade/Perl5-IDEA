@@ -46,6 +46,9 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 					"(" + validFileNameRe + ")" + validPathDelimiterRe + "?"
 	);
 
+	protected Boolean looksLikePath = null;
+	protected Boolean looksLikePackage = null;
+
 	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
@@ -95,21 +98,27 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	@Override
 	public boolean looksLikePackage()
 	{
-		return PerlBaseLexer.AMBIGUOUS_PACKAGE_RE.matcher(getText()).matches();
+		if (looksLikePackage != null)
+			return looksLikePackage;
+		return looksLikePackage = PerlBaseLexer.AMBIGUOUS_PACKAGE_RE.matcher(getText()).matches();
 	}
 
 	@Override
 	public boolean looksLikePath()
 	{
-		return validPathRe.matcher(getText()).matches();
+		if (looksLikePath != null)
+			return looksLikePath;
+		return looksLikePath = validPathRe.matcher(getText()).matches();
 	}
 
 	@Override
 	public String getContentFileName()
 	{
-		Matcher m = validPathRe.matcher(getText());
-		if (m.matches())
-			return m.group(1);
+		if (looksLikePath()) {
+			Matcher m = validPathRe.matcher(getText());
+			if (m.matches())
+				return m.group(1);
+		}
 		return null;
 	}
 
