@@ -31,73 +31,88 @@ import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvid
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+
 /**
  * Created by hurricup on 31.05.2015.
  */
-public class PerlUseParametersCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	public static final InsertHandler USE_OPTION_INSERT_HANDLER = new UseOptionInsertHandler();
+public class PerlUseParametersCompletionProvider extends CompletionProvider<CompletionParameters> {
+    public static final InsertHandler USE_OPTION_INSERT_HANDLER = new UseOptionInsertHandler();
 
-	@Override
-	protected void addCompletions(@NotNull final CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet resultSet)
-	{
-		PsiElement stringContentElement = parameters.getPosition();
-		final Project project = stringContentElement.getProject();
+    @Override
+    protected void addCompletions(@NotNull final CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet resultSet) {
+        PsiElement stringContentElement = parameters.getPosition();
+        final Project project = stringContentElement.getProject();
 
-		PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
+        PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
-		if (useStatement != null)
-		{
-			IPerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
-			if (packageProcessor != null)
-			{
-				// fixme we should allow lookup elements customization by package processor
-				if (packageProcessor instanceof IPerlPackageOptionsProvider)
-					for (String option : ((IPerlPackageOptionsProvider) packageProcessor).getOptions().keySet())
-						resultSet.addElement(LookupElementBuilder
-								.create(option)
-								.withTypeText(((IPerlPackageOptionsProvider) packageProcessor).getOptions().get(option), true)
-								.withIcon(PerlIcons.PERL_OPTION)
-								.withInsertHandler(USE_OPTION_INSERT_HANDLER));
+        if (useStatement != null) {
+            IPerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+            if (packageProcessor != null) {
+                // fixme we should allow lookup elements customization by package processor
+                if (packageProcessor instanceof IPerlPackageOptionsProvider)
+                    for (String option : ((IPerlPackageOptionsProvider) packageProcessor).getOptions().keySet())
+                        resultSet.addElement(LookupElementBuilder
+                                .create(option)
+                                .withTypeText(((IPerlPackageOptionsProvider) packageProcessor).getOptions().get(option), true)
+                                .withIcon(PerlIcons.PERL_OPTION)
+                                .withInsertHandler(USE_OPTION_INSERT_HANDLER));
 
-				if (packageProcessor instanceof IPerlPackageParentsProvider && ((IPerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
-					PerlPackageUtil.processPackageFilesForPsiElement(parameters.getPosition(), new Processor<String>()
-					{
-						@Override
-						public boolean process(String s)
-						{
-							resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
-							return true;
-						}
-					});
-			}
-		}
-	}
+                if (packageProcessor instanceof IPerlPackageParentsProvider && ((IPerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
+                    PerlPackageUtil.processPackageFilesForPsiElement(parameters.getPosition(), new Processor<String>() {
+                        @Override
+                        public boolean process(String s) {
+                            resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
+                            return true;
+                        }
+                    });
 
-	/**
-	 * Parent pragma additional insert
-	 */
-	static class UseOptionInsertHandler implements InsertHandler<LookupElement>
-	{
-		@Override
-		public void handleInsert(final InsertionContext context, LookupElement item)
-		{
-			final Editor editor = context.getEditor();
-			EditorModificationUtil.insertStringAtCaret(editor, " ");
+                String packageName = useStatement.getPackageName();
+                if (packageName != null)
+                    for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
+                        HashSet<String> export = new HashSet<String>(namespaceDefinition.getEXPORT());
+                        HashSet<String> exportOk = new HashSet<String>(namespaceDefinition.getEXPORT_OK());
+                        // fixme we should resove subs here and put them in with signatures
+                        for (String subName : export)
+                            resultSet.addElement(LookupElementBuilder
+                                            .create(subName)
+                                            .withIcon(PerlIcons.SUB_GUTTER_ICON)
+                                            .withTypeText("default", true)
+                                            .withInsertHandler(USE_OPTION_INSERT_HANDLER)
+                            );
+                        for (String subName : exportOk)
+                            resultSet.addElement(LookupElementBuilder
+                                            .create(subName)
+                                            .withIcon(PerlIcons.SUB_GUTTER_ICON)
+                                            .withTypeText("optional", true)
+                                            .withInsertHandler(USE_OPTION_INSERT_HANDLER)
+                            );
+                    }
+            }
+        }
+    }
 
-			context.setLaterRunnable(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor);
-				}
-			});
-		}
-	}
+    /**
+     * Parent pragma additional insert
+     */
+    static class UseOptionInsertHandler implements InsertHandler<LookupElement> {
+        @Override
+        public void handleInsert(final InsertionContext context, LookupElement item) {
+            final Editor editor = context.getEditor();
+            EditorModificationUtil.insertStringAtCaret(editor, " ");
+
+            context.setLaterRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor);
+                }
+            });
+        }
+    }
 }

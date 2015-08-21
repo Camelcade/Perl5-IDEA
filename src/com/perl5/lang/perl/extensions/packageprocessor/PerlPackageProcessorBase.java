@@ -17,14 +17,14 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -50,24 +50,35 @@ public abstract class PerlPackageProcessorBase implements IPerlPackageProcessor
 	}
 
 	@Override
-	public List<String> getImports(PerlUseStatement useStatement)
+	public List<String> getImportedSubs(PerlUseStatement useStatement)
 	{
-		HashSet<String> result = new HashSet<String>();
+		List<String> result = new ArrayList<String>();
 		Project project = useStatement.getProject();
 		String packageName = useStatement.getPackageName();
 		if (packageName != null)
 		{
-			PsiElement expr = useStatement.getExpr();
+			List<String> parameters = useStatement.getImportParameters();
+//			System.err.println("Import parameters for " + packageName + " are " + parameters);
+			Set<String> packageExport = new HashSet<String>();
+			Set<String> packageExportOk = new HashSet<String>();
 
-			if (expr == null) // default imports
-				return null;
+			// fixme handle tags
+			for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
+				packageExport.addAll(namespaceDefinition.getEXPORT());
+				packageExportOk.addAll(namespaceDefinition.getEXPORT_OK());
+			}
+			packageExportOk.addAll(packageExport);
+
+			if (parameters == null)    // default import
+				result.addAll(packageExport);
 			else
-				for (PerlStringContentElement stringContentElement : PerlPsiUtil.findStringElments(expr))
-					result.add(stringContentElement.getName());
+				for (String parameter : parameters)
+					if (packageExportOk.contains(parameter))
+						result.add(parameter);
 		}
 
 //		System.err.println("Imported from " + packageName + ": " + result);
 
-		return new ArrayList<String>(result);
+		return result;
 	}
 }

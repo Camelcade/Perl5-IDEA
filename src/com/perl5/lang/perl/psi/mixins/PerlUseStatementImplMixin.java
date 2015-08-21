@@ -71,6 +71,10 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public String getPackageName()
 	{
+		PerlUseStatementStub stub = getStub();
+		if (stub != null)
+			return stub.getPackageName();
+
 		PerlNamespaceElement ns = getNamespaceElement();
 		if (ns != null)
 			return ns.getName();
@@ -92,6 +96,13 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public List<String> getImportParameters()
 	{
+		PerlUseStatementStub stub = getStub();
+		if (stub != null)
+			return stub.getImportParameters();
+
+		if (getExpr() == null)
+			return null;
+
 		ArrayList<String> stringParameters = new ArrayList<String>();
 		for (PerlStringContentElement stringContentElement : PerlPsiUtil.findStringElments(getNamespaceElement().getNextSibling()))
 			stringParameters.add(stringContentElement.getText());
@@ -109,6 +120,10 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public String getOuterPackageName()
 	{
+		PerlUseStatementStub stub = getStub();
+		if (stub != null)
+			return stub.getOuterPackageName();
+
 		return PerlPackageUtil.getContextPackageName(this);
 	}
 

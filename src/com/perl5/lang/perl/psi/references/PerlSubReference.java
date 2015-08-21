@@ -27,227 +27,200 @@ import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class PerlSubReference extends PerlReferencePoly
-{
-	protected boolean myIsAutoLoaded = false;
-	protected boolean myIsConstant = false;
-	protected boolean myIsDeclared = false;
-	protected boolean myIsDefined = false;
-	protected boolean myIsAliased = false;
-	protected boolean myIsImported = false;
-	PerlSubNameElement mySubNameElement;
+public class PerlSubReference extends PerlReferencePoly {
+    protected boolean myIsAutoLoaded = false;
+    protected boolean myIsConstant = false;
+    protected boolean myIsDeclared = false;
+    protected boolean myIsDefined = false;
+    protected boolean myIsAliased = false;
+    protected boolean myIsImported = false;
+    PerlSubNameElement mySubNameElement;
 
-	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
-	{
-		super(element, textRange);
-		assert element instanceof PerlSubNameElement;
-		mySubNameElement = (PerlSubNameElement) element;
-	}
+    public PerlSubReference(@NotNull PsiElement element, TextRange textRange) {
+        super(element, textRange);
+        assert element instanceof PerlSubNameElement;
+        mySubNameElement = (PerlSubNameElement) element;
+    }
 
-	@NotNull
-	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
-	{
-		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
+    @NotNull
+    @Override
+    public ResolveResult[] multiResolve(boolean incompleteCode) {
+        List<PsiElement> relatedItems = new ArrayList<PsiElement>();
 
-		PsiElement parent = mySubNameElement.getParent();
+        PsiElement parent = mySubNameElement.getParent();
 
-		String packageName = mySubNameElement.getPackageName();
-		String subName = mySubNameElement.getName();
-		Project project = mySubNameElement.getProject();
+        String packageName = mySubNameElement.getPackageName();
+        String subName = mySubNameElement.getName();
+        Project project = mySubNameElement.getProject();
 
-		if (subName != null)
-		{
-			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				relatedItems.addAll(PerlMroDfs.resolveSub(project, packageName, subName, false));
-			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				relatedItems.addAll(PerlMroDfs.resolveSub(project, ((PerlMethod) parent).getContextPackageName(), subName, true));
-			else    // static resolution
-			{
-				if (parent instanceof PerlNamespaceElementContainer && ((PerlNamespaceElementContainer) parent).getNamespaceElement() == null && mySubNameElement.isBuiltIn())
-					return new ResolveResult[0];
+        if (subName != null) {
+            if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
+                relatedItems.addAll(PerlMroDfs.resolveSub(project, packageName, subName, false));
+            else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
+                relatedItems.addAll(PerlMroDfs.resolveSub(project, ((PerlMethod) parent).getContextPackageName(), subName, true));
+            else    // static resolution
+            {
+                if (parent instanceof PerlNamespaceElementContainer && ((PerlNamespaceElementContainer) parent).getNamespaceElement() == null && mySubNameElement.isBuiltIn())
+                    return new ResolveResult[0];
 
 //				System.err.println("Checking for " + subName);
 
-				collectRelatedItems(
-						packageName + "::" + subName,
-						project,
-						parent,
-						relatedItems
-				);
+                collectRelatedItems(
+                        packageName + "::" + subName,
+                        project,
+                        parent,
+                        relatedItems
+                );
 
-				// check for imports
-				if (relatedItems.size() == 0)
-				{
-					// fixme implement imports to the file
-					PerlNamespaceDefinition namespaceDefinitionContainer = PsiTreeUtil.getParentOfType(myElement, PerlNamespaceDefinition.class);
+                // check for imports
+//				if (relatedItems.size() == 0)
+//				{
+                // fixme implement imports to the file
+                PerlNamespaceDefinition namespaceDefinitionContainer = PsiTreeUtil.getParentOfType(myElement, PerlNamespaceDefinition.class);
 
-					if (namespaceDefinitionContainer != null)
-					{
-						Map<String, List<String>> imports = namespaceDefinitionContainer.getImports();
-						for (String importSourcePackageName : imports.keySet())
-						{
-							List<String> importOptions = imports.get(importSourcePackageName);
-							Set<String> packageExport = new HashSet<String>();
-							Set<String> packageExportOk = new HashSet<String>();
+                if (namespaceDefinitionContainer != null) {
+                    Map<String, Set<String>> importsMap = namespaceDefinitionContainer.getImportedSubs();
+                    for (String importSourcePackageName : importsMap.keySet()) {
+                        Set<String> importedSubs = importsMap.get(importSourcePackageName);
+                        for (String importedSubName : importedSubs)
+                            if (importedSubName.equals(subName))
+                                collectRelatedItems(
+                                        importSourcePackageName + "::" + subName,
+                                        project,
+                                        parent,
+                                        relatedItems
+                                );
+                    }
+                }
+//				}
 
-							// fixme handle tags
-							for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, importSourcePackageName))
-							{
-								packageExport.addAll(namespaceDefinition.getEXPORT());
-								packageExportOk.addAll(namespaceDefinition.getEXPORT_OK());
-								packageExportOk.addAll(namespaceDefinition.getEXPORT());
-							}
-
-							if (importOptions == null && packageExport.contains(subName) // default import
-									|| importOptions != null && importOptions.contains(subName) && packageExportOk.contains(subName)
-									)
-								collectRelatedItems(
-										importSourcePackageName + "::" + subName,
-										project,
-										parent,
-										relatedItems
-								);
-						}
-					}
-				}
-
-				// check for autoload
-				if (relatedItems.size() == 0
-						&& !"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
-						&& !(
-						parent instanceof PerlSubDeclaration
-								|| parent instanceof PerlSubDefinition
-				))
-					collectRelatedItems(
-							packageName + "::AUTOLOAD",
-							project,
-							parent,
-							relatedItems
-					);
-			}
-		}
+                // check for autoload
+                if (relatedItems.size() == 0
+                        && !"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
+                        && !(
+                        parent instanceof PerlSubDeclaration
+                                || parent instanceof PerlSubDefinition
+                ))
+                    collectRelatedItems(
+                            packageName + "::AUTOLOAD",
+                            project,
+                            parent,
+                            relatedItems
+                    );
+            }
+        }
 
 
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
+        List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		myIsAutoLoaded = myIsConstant = myIsAliased = myIsDeclared = myIsDefined = false;
+        myIsAutoLoaded = myIsConstant = myIsAliased = myIsDeclared = myIsDefined = false;
 
-		for (PsiElement element : relatedItems)
-		{
-			if (!myIsAutoLoaded && element instanceof PerlNamedElement && "AUTOLOAD".equals(((PerlNamedElement) element).getName()))
-				myIsAutoLoaded = true;
+        for (PsiElement element : relatedItems) {
+            if (!myIsAutoLoaded && element instanceof PerlNamedElement && "AUTOLOAD".equals(((PerlNamedElement) element).getName()))
+                myIsAutoLoaded = true;
 
-			if (!myIsConstant && element instanceof PerlConstant)
-				myIsConstant = true;
+            if (!myIsConstant && element instanceof PerlConstant)
+                myIsConstant = true;
 
-			if (!myIsDeclared && element instanceof PerlSubDeclaration)
-				myIsDeclared = true;
+            if (!myIsDeclared && element instanceof PerlSubDeclaration)
+                myIsDeclared = true;
 
-			if (!myIsDefined && element instanceof PerlSubDefinition)
-				myIsDefined = true;
+            if (!myIsDefined && element instanceof PerlSubDefinition)
+                myIsDefined = true;
 
-			if (!myIsAliased && element instanceof PerlGlobVariable)
-				myIsAliased = true;
+            if (!myIsAliased && element instanceof PerlGlobVariable)
+                myIsAliased = true;
 
-			result.add(new PsiElementResolveResult(element));
-		}
+            result.add(new PsiElementResolveResult(element));
+        }
 
-		return result.toArray(new ResolveResult[result.size()]);
-	}
+        return result.toArray(new ResolveResult[result.size()]);
+    }
 
-	public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems)
-	{
-		for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-	}
+    public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems) {
+        for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
+            if (!target.isEquivalentTo(exclusion))
+                relatedItems.add(target);
+        for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
+            if (!target.isEquivalentTo(exclusion))
+                relatedItems.add(target);
+        for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+            if (!target.isEquivalentTo(exclusion))
+                relatedItems.add(target);
+        for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
+            if (!target.isEquivalentTo(exclusion))
+                relatedItems.add(target);
+    }
 
 
-	@Override
-	public boolean isReferenceTo(PsiElement element)
-	{
-		if (element instanceof PerlGlobVariable || element instanceof PerlConstant || element instanceof PerlSubDeclaration || element instanceof PerlSubDefinition)
-			return super.isReferenceTo(element);
+    @Override
+    public boolean isReferenceTo(PsiElement element) {
+        if (element instanceof PerlGlobVariable || element instanceof PerlConstant || element instanceof PerlSubDeclaration || element instanceof PerlSubDefinition)
+            return super.isReferenceTo(element);
 
-		PsiElement parent = element.getParent();
-		if (parent instanceof PerlGlobVariable || parent instanceof PerlConstant || parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinition)
-			return isReferenceTo(parent);
+        PsiElement parent = element.getParent();
+        if (parent instanceof PerlGlobVariable || parent instanceof PerlConstant || parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinition)
+            return isReferenceTo(parent);
 
-		PsiElement grandParent = parent.getParent();
-		if (grandParent instanceof PerlConstant)
-			return isReferenceTo(grandParent);
+        PsiElement grandParent = parent.getParent();
+        if (grandParent instanceof PerlConstant)
+            return isReferenceTo(grandParent);
 
-		return false;
-	}
+        return false;
+    }
 
 
-	@Nullable
-	@Override
-	public PsiElement resolve()
-	{
-		ResolveResult[] resolveResults = multiResolve(false);
-		if (resolveResults.length == 0)
-			return null;
+    @Nullable
+    @Override
+    public PsiElement resolve() {
+        ResolveResult[] resolveResults = multiResolve(false);
+        if (resolveResults.length == 0)
+            return null;
 
-		PerlGlobVariable lastGlob = null;
-		for (ResolveResult resolveResult : resolveResults)
-			if (resolveResult.getElement() instanceof PerlGlobVariable)
-			{
-				lastGlob = (PerlGlobVariable) resolveResult.getElement();
-				if (lastGlob.isLeftSideOfAssignment())
-					return lastGlob;
-			}
+        PerlGlobVariable lastGlob = null;
+        for (ResolveResult resolveResult : resolveResults)
+            if (resolveResult.getElement() instanceof PerlGlobVariable) {
+                lastGlob = (PerlGlobVariable) resolveResult.getElement();
+                if (lastGlob.isLeftSideOfAssignment())
+                    return lastGlob;
+            }
 
-		if (lastGlob != null)
-			return lastGlob;
+        if (lastGlob != null)
+            return lastGlob;
 
-		return resolveResults[0].getElement();
-	}
+        return resolveResults[0].getElement();
+    }
 
-	public boolean isAutoloaded()
-	{
-		return myIsAutoLoaded;
-	}
+    public boolean isAutoloaded() {
+        return myIsAutoLoaded;
+    }
 
-	public boolean isDefined()
-	{
-		return myIsDefined;
-	}
+    public boolean isDefined() {
+        return myIsDefined;
+    }
 
-	public boolean isDeclared()
-	{
-		return myIsDeclared;
-	}
+    public boolean isDeclared() {
+        return myIsDeclared;
+    }
 
-	public boolean isAliased()
-	{
-		return myIsAliased;
-	}
+    public boolean isAliased() {
+        return myIsAliased;
+    }
 
-	public boolean isConstant()
-	{
-		return myIsConstant;
-	}
+    public boolean isConstant() {
+        return myIsConstant;
+    }
 
-	public boolean isImported()
-	{
-		return myIsImported;
-	}
+    public boolean isImported() {
+        return myIsImported;
+    }
 }

@@ -53,6 +53,6 @@ public interface IPerlPackageProcessor
 	 * @param useStatement use statement psi element
 	 * @return list of subs imported by current statement with current options
 	 */
-	public List<String> getImports(PerlUseStatement useStatement);
+	public List<String> getImportedSubs(PerlUseStatement useStatement);
 
 }

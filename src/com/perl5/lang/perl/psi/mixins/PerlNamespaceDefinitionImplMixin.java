@@ -24,6 +24,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
@@ -104,19 +105,19 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getParentNamespaces();
 
-		List<String> result = new ArrayList<String>();
-		// fixme check for push @ISA, assign to @ISA
+		LinkedHashSet<String> result = new LinkedHashSet<String>();
 
-		PsiElement namespaceBlock = getBlock();
+		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
+			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof IPerlPackageParentsProvider)
+				result.addAll(((IPerlPackageParentsProvider) useStatement.getPackageProcessor()).getParentsList(useStatement));
 
-		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
-			if (useStatement.getPackageProcessor() instanceof IPerlPackageParentsProvider)
-				if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this)    // check that it's not nested package use
-					result.addAll(((IPerlPackageParentsProvider) useStatement.getPackageProcessor()).getParentsList(useStatement));
+		List<String> isa = getArrayAsList("ISA");
 
-		result.addAll(getArrayAsList("ISA"));
+		// fixme, acutally isa might overwrite isa from packages
+		if (isa != null)
+			result.addAll(isa);
 
-		return result;
+		return new ArrayList<String>(result);
 	}
 
 	@Nullable
@@ -139,14 +140,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getMroType();
 
-		// fixme implement mroprovider interface
-		for (PerlUseStatement useStatement : PerlPackageUtil.getPackageImports(getProject(), getPackageName(), getContainingFile()))
-			if ("mro".equals(useStatement.getPackageName()))
-			{
-				List<String> parameters = useStatement.getImportParameters();
-				if (parameters != null && parameters.size() > 0 && "c3".equals(parameters.get(0)))
-					return PerlMroType.C3;
-			}
+		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
+			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof IPerlMroProvider)
+				return ((IPerlMroProvider) useStatement.getPackageProcessor()).getMroType(useStatement);
 
 		return PerlMroType.DFS;
 	}
@@ -154,6 +150,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public PerlMro getMro()
 	{
+		// fixme this should be another EP
 		if (getMroType() == PerlMroType.C3)
 			return PerlMroC3.INSTANCE;
 		else
@@ -218,40 +215,28 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	}
 
 	@Override
-	public Map<String, List<String>> getImports()
+	public Map<String, Set<String>> getImportedSubs()
 	{
-		Map<String, List<String>> result = new HashMap<String, List<String>>();
-/*
-		PerlNamespaceDefinitionStub stub = getStub();
-		if (stub != null)
-			return stub.getImports();
+		Map<String, Set<String>> result = new HashMap<String, Set<String>>();
 
-
-		for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PerlUseStatement.class))
+		for (PerlUseStatement useStatement : PerlPackageUtil.getPackageImports(getProject(), getPackageName(), getContainingFile()))
 		{
 			String packageName = useStatement.getPackageName();
-			if (packageName != null && PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this)
+			if (packageName != null)
 			{
-				List<String> imports = useStatement.getPackageProcessor().getImports(useStatement);
-
 				if (!result.containsKey(packageName))
 					result.put(packageName, null);
 
-				if (imports != null && result.get(packageName) == null)
-					result.put(packageName, new ArrayList<String>());
+				List<String> imports = useStatement.getPackageProcessor().getImportedSubs(useStatement);
 
-//				System.err.println("Imports for " + packageName + ": " + imports);
-				if (imports != null && imports.size() > 0)
+				if (imports != null)
 				{
-					// fixme this is bad, must be a hashmap
-					List<String> packageImports = result.get(packageName);
-					for (String subName : imports)
-						if (!packageImports.contains(subName))
-							packageImports.add(subName);
+					if (result.get(packageName) == null)
+						result.put(packageName, new HashSet<String>());
+					result.get(packageName).addAll(imports);
 				}
 			}
 		}
-*/
 
 		return result;
 	}

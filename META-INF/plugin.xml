@@ -91,6 +91,8 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.WarningsProcessor"/>
         <packageProcessor key="feature"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.FeatureProcessor"/>
+        <packageProcessor key="mro"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MroProcessor"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
