@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -31,6 +31,15 @@ public interface IPerlPackageOptionsProvider
 	 *
 	 * @return HashMap of options
 	 */
-	@NotNull
+	@Nullable
 	public HashMap<String, String> getOptions();
+
+	/**
+	 * Returns full list of available bundled options, atm they are with other icon
+	 * fixme Probably we should return options with icons?
+	 *
+	 * @return HashMap of bundled options
+	 */
+	@Nullable
+	public HashMap<String, String> getOptionsBundles();
 }

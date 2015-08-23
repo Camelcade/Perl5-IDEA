@@ -38,6 +38,7 @@ import java.util.Set;
 
 public class PerlSubReference extends PerlReferencePoly
 {
+	// fixme make this with Mask
 	protected boolean myIsAutoLoaded = false;
 	protected boolean myIsConstant = false;
 	protected boolean myIsDeclared = false;

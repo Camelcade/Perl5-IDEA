@@ -23,8 +23,11 @@ import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by evstigneev on 19.08.2015.
@@ -32,18 +35,31 @@ import java.util.HashMap;
 public class FeatureProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider, IPerlFeaturesProvider
 {
     protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
+    protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<String, String>();
 
     static {
         OPTIONS.putAll(PerlFeaturesTable.AVAILABLE_FEATURES);
 
-        for (String option : PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.keySet())
-            OPTIONS.put(":" + option, StringUtils.join(PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.get(option), " "));
     }
+
+    static
+    {
+        for (Map.Entry<String, List<String>> option : PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.entrySet())
+            OPTIONS_BUNDLES.put(":" + option.getKey(), StringUtils.join(option.getValue(), " "));
+    }
+
 
     @NotNull
     @Override
     public HashMap<String, String> getOptions() {
         return OPTIONS;
+    }
+
+    @Nullable
+    @Override
+    public HashMap<String, String> getOptionsBundles()
+    {
+        return OPTIONS_BUNDLES;
     }
 
     @Override

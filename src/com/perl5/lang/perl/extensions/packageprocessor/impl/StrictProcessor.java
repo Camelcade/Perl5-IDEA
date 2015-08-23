@@ -22,6 +22,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.internals.PerlStrictMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -36,7 +37,7 @@ public class StrictProcessor extends PerlPragmaProcessorBase implements IPerlPac
 	{
 		OPTIONS.put("vars", "generates a compile-time error if you access a variable that was neither explicitly declared");
 		OPTIONS.put("refs", "generates a runtime error if you use symbolic references");
-		OPTIONS.put("subs", "generating a compile-time error if you try to use a bareword identifier that's not a subroutine");
+		OPTIONS.put("subs", "generates a compile-time error if you try to use a bareword identifier that's not a subroutine");
 	}
 
 	@NotNull
@@ -44,6 +45,13 @@ public class StrictProcessor extends PerlPragmaProcessorBase implements IPerlPac
 	public HashMap<String, String> getOptions()
 	{
 		return OPTIONS;
+	}
+
+	@Nullable
+	@Override
+	public HashMap<String, String> getOptionsBundles()
+	{
+		return null;
 	}
 
 	@Override

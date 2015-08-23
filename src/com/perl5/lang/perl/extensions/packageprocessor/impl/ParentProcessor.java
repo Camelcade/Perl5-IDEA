@@ -19,6 +19,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,13 @@ public class ParentProcessor extends BaseProcessor implements IPerlPackageOption
 	public HashMap<String, String> getOptions()
 	{
 		return OPTIONS;
+	}
+
+	@Nullable
+	@Override
+	public HashMap<String, String> getOptionsBundles()
+	{
+		return null;
 	}
 
 	@NotNull

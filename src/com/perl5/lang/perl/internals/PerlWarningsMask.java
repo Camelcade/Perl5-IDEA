@@ -16,12 +16,27 @@
 
 package com.perl5.lang.perl.internals;
 
+import com.perl5.lang.perl.internals.warnings.PerlWarningTree;
+import com.perl5.lang.perl.internals.warnings.PerlWarningTreeLeaf;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by hurricup on 23.08.2015.
  * Represents ${^WARNING_BITS}
  */
 public class PerlWarningsMask implements Cloneable
 {
+	protected final HashMap<String,Boolean> currentMask;
+
+	public PerlWarningsMask()
+	{
+		currentMask = new HashMap<String, Boolean>();
+		for(Map.Entry<String,PerlWarningTreeLeaf> leaf: PerlWarningTree.LEAF_OPTIONS.entrySet())
+			currentMask.put(leaf.getKey(), leaf.getValue().getDefaultValue());
+	}
+
 	public PerlWarningsMask clone()
 	{
 		try

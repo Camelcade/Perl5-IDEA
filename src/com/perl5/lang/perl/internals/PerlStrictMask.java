@@ -23,6 +23,7 @@ package com.perl5.lang.perl.internals;
  */
 public class PerlStrictMask implements Cloneable
 {
+	// fixme make this with Mask
 	boolean hintInt = false;            //#define HINT_INTEGER        	0x00000001 /* integer pragma */
 	boolean hintRefs = false;            //#define HINT_STRICT_REFS    	0x00000002 /* strict pragma */
 	boolean hintLocale = false;            //#define HINT_LOCALE     		0x00000004 /* locale pragma */

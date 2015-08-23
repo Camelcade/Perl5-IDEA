@@ -20,10 +20,17 @@ import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvid
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlWarningsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.internals.PerlWarningsMask;
+import com.perl5.lang.perl.internals.warnings.PerlWarningTree;
+import com.perl5.lang.perl.internals.warnings.PerlWarningTreeLeaf;
+import com.perl5.lang.perl.internals.warnings.PerlWarningTreeNode;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import org.jetbrains.annotations.NotNull;
+import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -31,91 +38,45 @@ import java.util.HashMap;
 public class WarningsProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider, IPerlWarningsProvider
 {
 	protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
+	protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<String, String>();
 
 	static
 	{
-		OPTIONS.put("FATAL", "v5.8");
+		OPTIONS.put("FATAL", "FATALITY!");
 
-		OPTIONS.put("all", "v5.8");
-		OPTIONS.put("closure", "v5.8");
-		OPTIONS.put("deprecated", "v5.8");
-		OPTIONS.put("exiting", "v5.8");
-		OPTIONS.put("glob", "v5.8");
-		OPTIONS.put("io", "v5.8");
-		OPTIONS.put("closed", "v5.8");
-		OPTIONS.put("exec", "v5.8");
-		OPTIONS.put("layer", "v5.8");
-		OPTIONS.put("newline", "v5.8");
-		OPTIONS.put("pipe", "v5.8");
-		OPTIONS.put("unopened", "v5.8");
-		OPTIONS.put("misc", "v5.8");
-		OPTIONS.put("numeric", "v5.8");
-		OPTIONS.put("once", "v5.8");
-		OPTIONS.put("overflow", "v5.8");
-		OPTIONS.put("pack", "v5.8");
-		OPTIONS.put("portable", "v5.8");
-		OPTIONS.put("recursion", "v5.8");
-		OPTIONS.put("redefine", "v5.8");
-		OPTIONS.put("regexp", "v5.8");
-		OPTIONS.put("severe", "v5.8");
-		OPTIONS.put("debugging", "v5.8");
-		OPTIONS.put("inplace", "v5.8");
-		OPTIONS.put("internal", "v5.8");
-		OPTIONS.put("malloc", "v5.8");
-		OPTIONS.put("signal", "v5.8");
-		OPTIONS.put("substr", "v5.8");
-		OPTIONS.put("syntax", "v5.8");
-		OPTIONS.put("ambiguous", "v5.8");
-		OPTIONS.put("bareword", "v5.8");
-		OPTIONS.put("digit", "v5.8");
-		OPTIONS.put("parenthesis", "v5.8");
-		OPTIONS.put("precedence", "v5.8");
-		OPTIONS.put("printf", "v5.8");
-		OPTIONS.put("prototype", "v5.8");
-		OPTIONS.put("qw", "v5.8");
-		OPTIONS.put("reserved", "v5.8");
-		OPTIONS.put("semicolon", "v5.8");
-		OPTIONS.put("taint", "v5.8");
-		OPTIONS.put("threads", "v5.8");
-		OPTIONS.put("uninitialized", "v5.8");
-		OPTIONS.put("unpack", "v5.8");
-		OPTIONS.put("untie", "v5.8");
-		OPTIONS.put("utf8", "v5.8");
-		OPTIONS.put("void", "v5.8");
-
-		OPTIONS.put("imprecision", "v5.11");
-		OPTIONS.put("illegalproto", "v5.11");
-
-		OPTIONS.put("non_unicode", "v5.13");
-		OPTIONS.put("nonchar", "v5.13");
-		OPTIONS.put("surrogate", "v5.13");
-
-		OPTIONS.put("experimental", "v5.17");
-		OPTIONS.put("experimental::lexical_subs", "v5.17");
-		OPTIONS.put("experimental::lexical_topic", "v5.17");
-		OPTIONS.put("experimental::regex_sets", "v5.17");
-		OPTIONS.put("experimental::smartmatch", "v5.17");
-
-		OPTIONS.put("experimental::autoderef", "v5.19");
-		OPTIONS.put("experimental::postderef", "v5.19");
-		OPTIONS.put("experimental::signatures", "v5.19");
-		OPTIONS.put("syscalls", "v5.19");
-
-		OPTIONS.put("experimental::bitwise", "v5.21");
-		OPTIONS.put("experimental::const_attr", "v5.21");
-		OPTIONS.put("experimental::re_strict", "v5.21");
-		OPTIONS.put("experimental::refaliasing", "v5.21");
-		OPTIONS.put("experimental::win32_perlio", "v5.21");
-		OPTIONS.put("locale", "v5.21");
-		OPTIONS.put("missing", "v5.21");
-		OPTIONS.put("redundant", "v5.21");
+		for (Map.Entry<String, PerlWarningTreeLeaf> option : PerlWarningTree.LEAF_OPTIONS.entrySet())
+			OPTIONS.put(option.getKey(), option.getValue().getMinVersion().toString());
 	}
 
-	@NotNull
+	static
+	{
+		for (Map.Entry<String, PerlWarningTreeNode> option : PerlWarningTree.NODE_OPTIONS.entrySet())
+		{
+			List<String> subElements = new ArrayList<String>();
+			for (PerlWarningTreeLeaf leaf : option.getValue().collectChildLeafs())
+				subElements.add(leaf.getStringIdentifier() + "(" + leaf.getMinVersion().toString() + ")");
+
+			OPTIONS_BUNDLES.put(option.getKey(),
+					option.getValue().getMinVersion().toString()
+							+ ", "
+							+ StringUtils.join(subElements, " ")
+			);
+		}
+	}
+
+	@Nullable
 	@Override
 	public HashMap<String, String> getOptions()
 	{
 		return OPTIONS;
+	}
+
+
+	@Nullable
+	@Override
+	public HashMap<String, String> getOptionsBundles()
+	{
+		return OPTIONS_BUNDLES;
 	}
 
 	@Override
