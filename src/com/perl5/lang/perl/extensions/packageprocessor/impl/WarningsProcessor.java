@@ -17,7 +17,10 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlWarningsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
+import com.perl5.lang.perl.internals.PerlWarningsMask;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -25,7 +28,7 @@ import java.util.HashMap;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class WarningsProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider
+public class WarningsProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider, IPerlWarningsProvider
 {
 	protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
 
@@ -113,5 +116,12 @@ public class WarningsProcessor extends PerlPragmaProcessorBase implements IPerlP
 	public HashMap<String, String> getOptions()
 	{
 		return OPTIONS;
+	}
+
+	@Override
+	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask)
+	{
+		// fixme implement modification
+		return currentMask == null ? new PerlWarningsMask() : currentMask.clone();
 	}
 }

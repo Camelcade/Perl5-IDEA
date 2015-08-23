@@ -20,6 +20,16 @@ package com.perl5.lang.perl.internals;
  * Created by hurricup on 23.08.2015.
  * Represents ${^WARNING_BITS}
  */
-public class PerlWarningsMask
+public class PerlWarningsMask implements Cloneable
 {
+	public PerlWarningsMask clone()
+	{
+		try
+		{
+			return (PerlWarningsMask) super.clone();
+		} catch (CloneNotSupportedException e)
+		{
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 }

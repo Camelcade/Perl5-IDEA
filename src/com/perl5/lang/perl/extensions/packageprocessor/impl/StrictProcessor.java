@@ -17,7 +17,10 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlStrictProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
+import com.perl5.lang.perl.internals.PerlStrictMask;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -25,7 +28,7 @@ import java.util.HashMap;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class StrictProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider
+public class StrictProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider, IPerlStrictProvider
 {
 	protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
 
@@ -41,5 +44,12 @@ public class StrictProcessor extends PerlPragmaProcessorBase implements IPerlPac
 	public HashMap<String, String> getOptions()
 	{
 		return OPTIONS;
+	}
+
+	@Override
+	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask)
+	{
+		// fixme implement modification
+		return currentMask == null ? new PerlStrictMask() : currentMask.clone();
 	}
 }
