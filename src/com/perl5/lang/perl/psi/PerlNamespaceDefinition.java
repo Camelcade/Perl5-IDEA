@@ -22,7 +22,10 @@ import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -73,12 +76,5 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 * @return map of %EXPORT_TAGS
 	 */
 	public Map<String, List<String>> getEXPORT_TAGS();
-
-	/**
-	 * Returns map of imported subs as map package => qw(subs)
-	 *
-	 * @return map of imports
-	 */
-	public Map<String, Set<String>> getImportedSubs();
 
 }

@@ -48,7 +48,7 @@ public class MojoliciousPerlParserDefinition extends PerlParserDefinition
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new MojoliciousPerlFileElement(viewProvider);
+		return new MojoliciousPerlFileImpl(viewProvider);
 	}
 
 }

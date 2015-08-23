@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -47,8 +47,8 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 	public String getContextPackageName()
 	{
 		PsiFile file = getContainingFile();
-		if (file instanceof PerlFileElement)
-			return ((PerlFileElement) file).getMethodNamespace(this);
+		if (file instanceof PerlFileImpl)
+			return ((PerlFileImpl) file).getMethodNamespace(this);
 
 		else return getContextPackageNameHeavy();
 	}

@@ -18,15 +18,15 @@ package com.perl5.lang.embedded;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlFileElement extends PerlFileElement
+public class EmbeddedPerlFileImpl extends PerlFileImpl
 {
-	public EmbeddedPerlFileElement(@NotNull FileViewProvider viewProvider)
+	public EmbeddedPerlFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, EmbeddedPerlLanguage.INSTANCE);
 	}

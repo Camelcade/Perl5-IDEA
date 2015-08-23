@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.mojolicious.MojoliciousPerlFileElement;
+import com.perl5.lang.mojolicious.MojoliciousPerlFileImpl;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -51,7 +51,7 @@ public interface PerlElementPatterns
 	public static final PsiElementPattern.Capture IN_VARIABLE_PATTERN = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(VARIABLE_PATTERN);
 	public static final PsiElementPattern.Capture IN_GLOB_PATTERN = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(GLOB_PATTERN);
 
-	public static final PsiElementPattern.Capture IN_MOJOLICIOUS_FILE = psiElement().withLanguage(PerlLanguage.INSTANCE).inFile(psiFile(MojoliciousPerlFileElement.class));
+	public static final PsiElementPattern.Capture IN_MOJOLICIOUS_FILE = psiElement().withLanguage(PerlLanguage.INSTANCE).inFile(psiFile(MojoliciousPerlFileImpl.class));
 
 	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PerlHeredocTerminatorElementImpl> HEREDOC_TERMINATOR_PATTERN = psiElement(PerlHeredocTerminatorElementImpl.class).withLanguage(PerlLanguage.INSTANCE);

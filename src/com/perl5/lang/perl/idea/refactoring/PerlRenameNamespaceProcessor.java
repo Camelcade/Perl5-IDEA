@@ -28,7 +28,7 @@ import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -90,9 +90,9 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 			String currentPackageName = ((PerlNamedElement) element).getName();
 			final String newPackageName = PerlPackageUtil.getCanonicalPackageName(newName);
 
-			if (psiFile instanceof PerlFileElement)
+			if (psiFile instanceof PerlFileImpl)
 			{
-				final String currentFilePackageName = ((PerlFileElement) psiFile).getFilePackageName();
+				final String currentFilePackageName = ((PerlFileImpl) psiFile).getFilePackageName();
 
 				if (currentFilePackageName != null && currentFilePackageName.equals(currentPackageName) && !newPackageName.equals(currentPackageName))
 				{

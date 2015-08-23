@@ -22,7 +22,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public class PerlPackageFileMissingInspection extends PerlInspection
 
 			public void checkPackageFile(PerlNamespaceElement o)
 			{
-				List<PerlFileElement> namespaceFiles = o.getNamespaceFiles();
+				List<PerlFileImpl> namespaceFiles = o.getNamespaceFiles();
 
 				if (namespaceFiles.size() == 0)
 					registerProblem(holder, o, "Unable to find package file");

@@ -34,7 +34,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -215,30 +215,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	}
 
 	@Override
-	public Map<String, Set<String>> getImportedSubs()
+	public Map<String, Set<String>> getImportedSubsNames()
 	{
-		Map<String, Set<String>> result = new HashMap<String, Set<String>>();
-
-		for (PerlUseStatement useStatement : PerlPackageUtil.getPackageImports(getProject(), getPackageName(), getContainingFile()))
-		{
-			String packageName = useStatement.getPackageName();
-			if (packageName != null)
-			{
-				if (!result.containsKey(packageName))
-					result.put(packageName, null);
-
-				List<String> imports = useStatement.getPackageProcessor().getImportedSubs(useStatement);
-
-				if (imports != null)
-				{
-					if (result.get(packageName) == null)
-						result.put(packageName, new HashSet<String>());
-					result.get(packageName).addAll(imports);
-				}
-			}
-		}
-
-		return result;
+		return PerlSubUtil.getImportedSubsNames(getProject(), getPackageName(), getContainingFile());
 	}
 
 	/**

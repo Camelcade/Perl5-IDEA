@@ -21,6 +21,8 @@ import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hurricup on 09.08.2015.
@@ -55,4 +57,11 @@ public interface PerlNamespaceContainer extends PsiElement
 	 * @return mro class instance
 	 */
 	PerlMro getMro();
+
+	/**
+	 * Returns map of imported subs as map package => qw(subs)
+	 *
+	 * @return map of imports
+	 */
+	public Map<String, Set<String>> getImportedSubsNames();
 }

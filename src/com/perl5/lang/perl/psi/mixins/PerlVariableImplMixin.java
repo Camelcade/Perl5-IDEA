@@ -34,7 +34,7 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -113,8 +113,8 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	public String guessVariableType()
 	{
 		PsiFile file = getContainingFile();
-		if (file instanceof PerlFileElement)
-			return ((PerlFileElement) file).getVariableType(this);
+		if (file instanceof PerlFileImpl)
+			return ((PerlFileImpl) file).getVariableType(this);
 		return guessVariableTypeHeavy();
 	}
 
@@ -357,8 +357,8 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 			return null;
 
 		PsiFile myFile = getContainingFile();
-		if (myFile instanceof PerlFileElement)
-			return ((PerlFileElement) myFile).getLexicalDeclaration(this);
+		if (myFile instanceof PerlFileImpl)
+			return ((PerlFileImpl) myFile).getLexicalDeclaration(this);
 
 		return null;
 	}

@@ -159,9 +159,9 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	}
 
 	@Override
-	public List<PerlFileElement> getNamespaceFiles()
+	public List<PerlFileImpl> getNamespaceFiles()
 	{
-		List<PerlFileElement> namespaceFiles = new ArrayList<PerlFileElement>();
+		List<PerlFileImpl> namespaceFiles = new ArrayList<PerlFileImpl>();
 
 		PsiReference[] references = getReferences();
 
@@ -175,9 +175,9 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 				{
 					PsiElement targetElement = result.getElement();
 					assert targetElement != null;
-					assert targetElement instanceof PerlFileElement;
+					assert targetElement instanceof PerlFileImpl;
 
-					namespaceFiles.add((PerlFileElement) targetElement);
+					namespaceFiles.add((PerlFileImpl) targetElement);
 				}
 			}
 		}

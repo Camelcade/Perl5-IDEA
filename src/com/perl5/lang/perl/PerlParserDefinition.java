@@ -36,7 +36,7 @@ import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -104,7 +104,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new PerlFileElement(viewProvider);
+		return new PerlFileImpl(viewProvider);
 	}
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)

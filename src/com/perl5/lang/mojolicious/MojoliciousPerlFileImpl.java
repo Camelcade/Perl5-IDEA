@@ -18,15 +18,15 @@ package com.perl5.lang.mojolicious;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlFileElement extends PerlFileElement
+public class MojoliciousPerlFileImpl extends PerlFileImpl
 {
-	public MojoliciousPerlFileElement(@NotNull FileViewProvider viewProvider)
+	public MojoliciousPerlFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, MojoliciousPerlLanguage.INSTANCE);
 	}

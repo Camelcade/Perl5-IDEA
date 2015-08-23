@@ -36,6 +36,7 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlLexicalDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlFileElement extends PsiFileBase implements PerlFile
+public class PerlFileImpl extends PsiFileBase implements PerlFile
 {
 	private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
 	protected ConcurrentHashMap<PerlVariable, String> VARIABLE_TYPES_CACHE = new ConcurrentHashMap<PerlVariable, String>();
@@ -56,12 +57,12 @@ public class PerlFileElement extends PsiFileBase implements PerlFile
 	List<PerlLexicalDeclaration> declaredVariables = new ArrayList<PerlLexicalDeclaration>();
 	boolean lexicalCacheInvalid = true;
 
-	public PerlFileElement(@NotNull FileViewProvider viewProvider, Language language)
+	public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language)
 	{
 		super(viewProvider, language);
 	}
 
-	public PerlFileElement(@NotNull FileViewProvider viewProvider)
+	public PerlFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, PerlLanguage.INSTANCE);
 	}
@@ -330,5 +331,9 @@ public class PerlFileElement extends PsiFileBase implements PerlFile
 		return getMethodNamespace(element);
 	}
 
-
+	@Override
+	public Map<String, Set<String>> getImportedSubsNames()
+	{
+		return PerlSubUtil.getImportedSubsNames(getProject(), "main", this);
+	}
 }

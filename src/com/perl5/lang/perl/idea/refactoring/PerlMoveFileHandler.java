@@ -28,7 +28,7 @@ import com.intellij.refactoring.move.moveFilesOrDirectories.MoveFileHandler;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Nullable;
@@ -47,13 +47,13 @@ public class PerlMoveFileHandler extends MoveFileHandler
 	public boolean canProcessElement(PsiFile element)
 	{
 		// todo assign proper type to the pm files
-		return element instanceof PerlFileElement && element.getName() != null && element.getName().endsWith(".pm");
+		return element instanceof PerlFileImpl && element.getName() != null && element.getName().endsWith(".pm");
 	}
 
 	@Override
 	public void prepareMovedFile(PsiFile file, PsiDirectory moveDestination, Map<PsiElement, PsiElement> oldToNewMap)
 	{
-		file.putUserData(ORIGINAL_PACKAGE_NAME, ((PerlFileElement) file).getFilePackageName());
+		file.putUserData(ORIGINAL_PACKAGE_NAME, ((PerlFileImpl) file).getFilePackageName());
 	}
 
 	@Nullable
