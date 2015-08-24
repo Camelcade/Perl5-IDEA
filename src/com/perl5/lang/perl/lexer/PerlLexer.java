@@ -667,15 +667,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		{
 			m = markerPatternDQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING_QQ;
-		}
-		else if (openToken.endsWith("'"))
+		} else if (openToken.endsWith("'"))
 			m = markerPatternSQ.matcher(openToken);
 		else if (openToken.endsWith("`"))
 		{
 			m = markerPatternXQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING_QX;
-		}
-		else
+		} else
 			m = markerPattern.matcher(openToken);
 
 		Character nextCharacter = getNextSignificantCharacter();

@@ -28,12 +28,12 @@ import java.util.Map;
  */
 public class PerlWarningsMask implements Cloneable
 {
-	protected final HashMap<String,Boolean> currentMask;
+	protected final HashMap<String, Boolean> currentMask;
 
 	public PerlWarningsMask()
 	{
 		currentMask = new HashMap<String, Boolean>();
-		for(Map.Entry<String,PerlWarningTreeLeaf> leaf: PerlWarningTree.LEAF_OPTIONS.entrySet())
+		for (Map.Entry<String, PerlWarningTreeLeaf> leaf : PerlWarningTree.LEAF_OPTIONS.entrySet())
 			currentMask.put(leaf.getKey(), leaf.getValue().getDefaultValue());
 	}
 

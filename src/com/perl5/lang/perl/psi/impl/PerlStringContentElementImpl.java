@@ -114,7 +114,8 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	@Override
 	public String getContentFileName()
 	{
-		if (looksLikePath()) {
+		if (looksLikePath())
+		{
 			Matcher m = validPathRe.matcher(getText());
 			if (m.matches())
 				return m.group(1);

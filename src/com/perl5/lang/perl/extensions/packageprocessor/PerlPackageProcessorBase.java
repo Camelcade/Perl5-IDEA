@@ -63,7 +63,8 @@ public abstract class PerlPackageProcessorBase implements IPerlPackageProcessor
 			Set<String> packageExportOk = new HashSet<String>();
 
 			// fixme handle tags
-			for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
+			for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+			{
 				packageExport.addAll(namespaceDefinition.getEXPORT());
 				packageExportOk.addAll(namespaceDefinition.getEXPORT_OK());
 			}

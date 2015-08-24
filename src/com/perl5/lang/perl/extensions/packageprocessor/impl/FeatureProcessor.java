@@ -34,38 +34,40 @@ import java.util.Map;
  */
 public class FeatureProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider, IPerlFeaturesProvider
 {
-    protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
-    protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<String, String>();
+	protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
+	protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<String, String>();
 
-    static {
-        OPTIONS.putAll(PerlFeaturesTable.AVAILABLE_FEATURES);
+	static
+	{
+		OPTIONS.putAll(PerlFeaturesTable.AVAILABLE_FEATURES);
 
-    }
+	}
 
-    static
-    {
-        for (Map.Entry<String, List<String>> option : PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.entrySet())
-            OPTIONS_BUNDLES.put(":" + option.getKey(), StringUtils.join(option.getValue(), " "));
-    }
+	static
+	{
+		for (Map.Entry<String, List<String>> option : PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.entrySet())
+			OPTIONS_BUNDLES.put(":" + option.getKey(), StringUtils.join(option.getValue(), " "));
+	}
 
 
-    @NotNull
-    @Override
-    public HashMap<String, String> getOptions() {
-        return OPTIONS;
-    }
+	@NotNull
+	@Override
+	public HashMap<String, String> getOptions()
+	{
+		return OPTIONS;
+	}
 
-    @Nullable
-    @Override
-    public HashMap<String, String> getOptionsBundles()
-    {
-        return OPTIONS_BUNDLES;
-    }
+	@Nullable
+	@Override
+	public HashMap<String, String> getOptionsBundles()
+	{
+		return OPTIONS_BUNDLES;
+	}
 
-    @Override
-    public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable)
-    {
-        // fixme implement modification
-        return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
-    }
+	@Override
+	public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable)
+	{
+		// fixme implement modification
+		return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
+	}
 }

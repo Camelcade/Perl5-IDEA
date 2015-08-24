@@ -26,13 +26,15 @@ import java.util.List;
 /**
  * Created by evstigneev on 21.08.2015.
  */
-public class MroProcessor extends PerlPragmaProcessorBase implements IPerlMroProvider {
-    @Override
-    public PerlMroType getMroType(PerlUseStatement useStatement) {
-        List<String> parameters = useStatement.getImportParameters();
+public class MroProcessor extends PerlPragmaProcessorBase implements IPerlMroProvider
+{
+	@Override
+	public PerlMroType getMroType(PerlUseStatement useStatement)
+	{
+		List<String> parameters = useStatement.getImportParameters();
 
-        if (parameters.size() > 0 && "c3".equals(parameters.get(0)))
-            return PerlMroType.C3;
-        return PerlMroType.DFS;
-    }
+		if (parameters.size() > 0 && "c3".equals(parameters.get(0)))
+			return PerlMroType.C3;
+		return PerlMroType.DFS;
+	}
 }
