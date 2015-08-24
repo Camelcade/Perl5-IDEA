@@ -217,7 +217,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public Map<String, Set<String>> getImportedSubsNames()
 	{
-		return PerlSubUtil.getImportedSubsNames(getProject(), getPackageName(), getContainingFile());
+		return PerlSubUtil.getImportedSubs(getProject(), getPackageName(), getContainingFile());
 	}
 
 	/**

@@ -90,19 +90,15 @@ public class PerlSubReference extends PerlReferencePoly
 
 				assert namespaceContainer != null;
 
-				Map<String, Set<String>> importsMap = namespaceContainer.getImportedSubsNames();
-				for (String importSourcePackageName : importsMap.keySet())
-				{
-					Set<String> importedSubs = importsMap.get(importSourcePackageName);
-					for (String importedSubName : importedSubs)
+				for (Map.Entry<String, Set<String>> imports : namespaceContainer.getImportedSubsNames().entrySet())
+					for (String importedSubName : imports.getValue())
 						if (importedSubName.equals(subName))
 							collectRelatedItems(
-									importSourcePackageName + "::" + subName,
+									imports.getKey() + "::" + subName,
 									project,
 									parent,
 									relatedItems
 							);
-				}
 
 				// check for autoload
 				if (relatedItems.size() == 0

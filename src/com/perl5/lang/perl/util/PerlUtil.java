@@ -22,14 +22,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.Processor;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import gnu.trove.THashSet;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -102,5 +104,42 @@ public class PerlUtil
 
 		return result;
 	}
+
+	/**
+	 * Returns a map of imported names, filtered by specific processor
+	 *
+	 * @param project   Project to search in
+	 * @param namespace namespace to search in
+	 * @param file      PsiFile to search in
+	 * @return result map
+	 */
+	public static Map<String, Set<String>> getImportedNames(Project project, String namespace, PsiFile file, Processor<String> processor)
+	{
+		Map<String, Set<String>> result = new HashMap<String, Set<String>>();
+
+		for (PerlUseStatement useStatement : PerlPackageUtil.getPackageImports(project, namespace, file))
+		{
+			String packageName = useStatement.getPackageName();
+
+			if (packageName != null)
+			{
+				List<String> imports = useStatement.getPackageProcessor().getImportedSubs(useStatement);
+
+				Set<String> currentSet = result.get(packageName);
+				if (imports != null)
+					for (String item : imports)
+						if (processor.process(item))
+						{
+							if (!result.containsKey(packageName))
+								result.put(packageName, currentSet = new HashSet<String>());
+
+							currentSet.add(item);
+						}
+			}
+		}
+
+		return result;
+	}
+
 
 }

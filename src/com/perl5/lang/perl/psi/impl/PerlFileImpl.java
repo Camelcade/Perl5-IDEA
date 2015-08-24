@@ -334,6 +334,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public Map<String, Set<String>> getImportedSubsNames()
 	{
-		return PerlSubUtil.getImportedSubsNames(getProject(), "main", this);
+		return PerlSubUtil.getImportedSubs(getProject(), "main", this);
 	}
 }

@@ -34,7 +34,10 @@ import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -231,7 +234,6 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		return null;
 	}
 
-
 	/**
 	 * Returns a map of imported subs names
 	 *
@@ -240,30 +242,19 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @param file      PsiFile to search in
 	 * @return result map
 	 */
-	public static Map<String, Set<String>> getImportedSubsNames(Project project, String namespace, PsiFile file)
+	public static Map<String, Set<String>> getImportedSubs(Project project, String namespace, PsiFile file)
 	{
-		Map<String, Set<String>> result = new HashMap<String, Set<String>>();
-
-		for (PerlUseStatement useStatement : PerlPackageUtil.getPackageImports(project, namespace, file))
+		return PerlUtil.getImportedNames(project, namespace, file, new Processor<String>()
 		{
-			String packageName = useStatement.getPackageName();
-			if (packageName != null)
+			@Override
+			public boolean process(String s)
 			{
-				if (!result.containsKey(packageName))
-					result.put(packageName, null);
-
-				List<String> imports = useStatement.getPackageProcessor().getImportedSubs(useStatement);
-
-				if (imports != null)
-				{
-					if (result.get(packageName) == null)
-						result.put(packageName, new HashSet<String>());
-					result.get(packageName).addAll(imports);
-				}
+				if (s == null || s.isEmpty())
+					return false;
+				char firstChar = s.charAt(0);
+				return firstChar != '$' && firstChar != '@' && firstChar != '%';
 			}
-		}
-
-		return result;
+		});
 	}
 
 }
