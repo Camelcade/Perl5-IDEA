@@ -23,10 +23,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
-import com.perl5.lang.perl.psi.PsiPerlUseStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
@@ -133,4 +130,86 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	{
 		return findChildByClass(PsiPerlExpr.class);
 	}
+
+
+	/**
+	 * following trash required to extend use_statement with statement fixme do something about it
+	 **/
+	@Override
+	@Nullable
+	public PsiPerlForStatementModifier getForStatementModifier()
+	{
+		return findChildByClass(PsiPerlForStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlForeachStatementModifier getForeachStatementModifier()
+	{
+		return findChildByClass(PsiPerlForeachStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlIfStatementModifier getIfStatementModifier()
+	{
+		return findChildByClass(PsiPerlIfStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlLabelDeclaration getLabelDeclaration()
+	{
+		return findChildByClass(PsiPerlLabelDeclaration.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlNoStatement getNoStatement()
+	{
+		return findChildByClass(PsiPerlNoStatement.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlStatement getStatement()
+	{
+		return findChildByClass(PsiPerlStatement.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlSubDeclaration getSubDeclaration()
+	{
+		return findChildByClass(PsiPerlSubDeclaration.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlUnlessStatementModifier getUnlessStatementModifier()
+	{
+		return findChildByClass(PsiPerlUnlessStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlUntilStatementModifier getUntilStatementModifier()
+	{
+		return findChildByClass(PsiPerlUntilStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlWhenStatementModifier getWhenStatementModifier()
+	{
+		return findChildByClass(PsiPerlWhenStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlWhileStatementModifier getWhileStatementModifier()
+	{
+		return findChildByClass(PsiPerlWhileStatementModifier.class);
+	}
+
 }

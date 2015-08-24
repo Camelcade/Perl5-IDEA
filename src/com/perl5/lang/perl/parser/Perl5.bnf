@@ -284,7 +284,7 @@ limitations under the License.
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
     stubClass("use_statement")="com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub"
-//    extends("use_statement.*")=statement
+    extends("use_statement.*")=statement
 
     extends("no_statement")=statement
 
