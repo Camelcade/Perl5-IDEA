@@ -40,6 +40,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				new PerlVariableBuiltInCompletionProvider()
 		);
 
+		extend(
+				CompletionType.BASIC,
+				VARIABLE_COMPLETION_PATTERN,
+				new PerlVariableImportCompletionProvider()
+		);
+
 		// refactored
 		extend(
 				CompletionType.BASIC,

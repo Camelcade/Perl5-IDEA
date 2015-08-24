@@ -20,7 +20,6 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
@@ -32,41 +31,45 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by hurricup on 24.08.2015.
  */
 public class PerlSubImportsCompletionProvider extends CompletionProvider<CompletionParameters>
 {
+	protected final static Map<String, LookupElementBuilder> LOOKUP_CACHE = new ConcurrentHashMap<String, LookupElementBuilder>();
+
 	public void addCompletions(@NotNull final CompletionParameters parameters,
 							   ProcessingContext context,
 							   @NotNull final CompletionResultSet resultSet)
 	{
-		ApplicationManager.getApplication().runReadAction(new Runnable()
+		PsiElement method = parameters.getPosition().getParent();
+		assert method instanceof PsiPerlMethod;
+
+		if (!((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
 		{
-			@Override
-			public void run()
-			{
-				PsiElement method = parameters.getPosition().getParent();
-				assert method instanceof PsiPerlMethod;
+			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(method, PerlNamespaceContainer.class);
 
-				if (!((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
+			assert namespaceContainer != null;
+
+			for (Map.Entry<String, Set<String>> imported : PerlSubUtil.getImportedSubs(method.getProject(), namespaceContainer.getPackageName(), parameters.getOriginalFile()).entrySet())
+				for (String subName : imported.getValue())
 				{
-					PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(method, PerlNamespaceContainer.class);
+					String lookupKey = imported.getKey() + "::" + subName;
+					LookupElementBuilder element = LOOKUP_CACHE.get(subName);
 
-					assert namespaceContainer != null;
+					if (element == null)
+						LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
+										.create(subName)
+										.withTypeText(imported.getKey())
+										.withTailText("(?)")    // fixme here we should have a signature
+										.withIcon(PerlIcons.SUB_GUTTER_ICON)
+						);
 
-					for (Map.Entry<String, Set<String>> imported : PerlSubUtil.getImportedSubs(method.getProject(), namespaceContainer.getPackageName(), parameters.getOriginalFile()).entrySet())
-						for (String subName : imported.getValue())
-							resultSet.addElement(LookupElementBuilder
-											.create(subName)
-											.withTypeText(imported.getKey())
-											.withTailText("(?)")    // fixme here we should have a signature
-											.withIcon(PerlIcons.SUB_GUTTER_ICON)
-							);
+					resultSet.addElement(element);
 				}
-			}
-		});
+		}
 
 	}
 
