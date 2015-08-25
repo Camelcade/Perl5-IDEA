@@ -91,8 +91,6 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
 				parents.add(allOptions.get(0));
 		}
 
-		System.err.println("Parents are " + parents);
-
 		return parents;
 	}
 

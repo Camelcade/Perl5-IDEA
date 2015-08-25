@@ -54,6 +54,7 @@
         <li>Implemented processor for <code>Mojo::Base</code></li>
       </ul>
       </li>
+      <li>use strict and use warnings inspections now checks for any known modules (atm strict, warnings and Mojo::Base)</li>
       </ul>
       </p>
 
