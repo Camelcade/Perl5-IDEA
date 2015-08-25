@@ -35,7 +35,7 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 01.05.2015.
  */
-public class PerlParserUitl extends GeneratedParserUtilBase implements PerlElementTypes
+public class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes
 {
 
 	// tokens that can be converted to a PACKAGE
@@ -1104,6 +1104,51 @@ public class PerlParserUitl extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer();
 			m.collapse(TokenType.NEW_LINE_INDENT);
 			return PerlParser.string_content_qq(b, l);
+		}
+		return false;
+	}
+
+	/**
+	 * This is kinda hack for use/no statements and bareword -options
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseStringifiedExpression(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+		boolean oldState = ((PerlBuilder) b).setStringify(true);
+		boolean r = PerlParser.expr(b, l, -1);
+		((PerlBuilder) b).setStringify(oldState);
+		return r;
+	}
+
+
+	/**
+	 * Collapses -bareword to a string if stringify is forced
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
+	public static boolean parseMinusBareword(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+		if (((PerlBuilder) b).isStringify()
+				&& (b.getTokenType() == OPERATOR_MINUS || b.getTokenType() == OPERATOR_MINUS_MINUS)
+				&& b.lookAhead(1) == IDENTIFIER
+				)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			if (!PerlSubUtil.isBuiltIn(b.getTokenText()))
+			{
+				b.advanceLexer();
+				m.collapse(STRING_CONTENT);
+				return true;
+			}
+			m.drop();
 		}
 		return false;
 	}

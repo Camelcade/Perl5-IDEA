@@ -24,7 +24,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.parser.PerlParserUitl;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
@@ -1389,7 +1389,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				return tokenType;
 			else if (
 					lastUnparenTokenType == IDENTIFIER
-							&& PerlParserUitl.PRE_HANDLE_OPS.contains(lastUnparenToken)
+							&& PerlParserUtil.PRE_HANDLE_OPS.contains(lastUnparenToken)
 							&& !PerlSubUtil.BUILT_IN.contains(tokenText)
 							&& isListElementEndAhead()
 					)

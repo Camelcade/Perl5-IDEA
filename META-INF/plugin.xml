@@ -54,7 +54,8 @@
         <li>Implemented processor for <code>Mojo::Base</code></li>
       </ul>
       </li>
-      <li>use strict and use warnings inspections now checks for any known modules (atm strict, warnings and Mojo::Base)</li>
+      <li>use strict and use warnings inspections now checks for any known modules (atm <code>strict</code>, <code>warnings</code> and <code>Mojo::Base</code>)</li>
+      <li>implemented bareword arguments support for use/no, like <code>use Mojo::Base -base;</code></li>
       </ul>
       </p>
 
