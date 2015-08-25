@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.perl5.lang.perl.psi.PerlUseStatement;
+
 import java.util.List;
 
 /**
@@ -29,5 +31,5 @@ public interface IPerlPackageLoader
 	 *
 	 * @return list of canonical package names
 	 */
-	public List<String> getLoadedPackageNames();
+	public List<String> getLoadedPackageNames(PerlUseStatement useStatement);
 }

@@ -19,7 +19,6 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +42,7 @@ public class ParentProcessor extends BaseProcessor implements IPerlPackageOption
 		return OPTIONS;
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public HashMap<String, String> getOptionsBundles()
 	{
@@ -54,12 +53,8 @@ public class ParentProcessor extends BaseProcessor implements IPerlPackageOption
 	@Override
 	public List<String> getParentsList(PerlUseStatement useStatement)
 	{
-		List<String> result = super.getParentsList(useStatement);
-		for (int i = 0; i < result.size(); i++)
-		{
-			if ("-norequire".equals(result.get(i)))
-				result.remove(i);
-		}
-		return result;
+		List<String> parents = super.getParentsList(useStatement);
+		parents.removeAll(getOptions().keySet());
+		return parents;
 	}
 }

@@ -25,7 +25,7 @@ import com.perl5.lang.perl.internals.warnings.PerlWarningTreeLeaf;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTreeNode;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.apache.commons.lang.StringUtils;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,17 +64,17 @@ public class WarningsProcessor extends PerlPragmaProcessorBase implements IPerlP
 		}
 	}
 
-	@Nullable
+	@NotNull
 	@Override
-	public HashMap<String, String> getOptions()
+	public Map<String, String> getOptions()
 	{
 		return OPTIONS;
 	}
 
 
-	@Nullable
+	@NotNull
 	@Override
-	public HashMap<String, String> getOptionsBundles()
+	public Map<String, String> getOptionsBundles()
 	{
 		return OPTIONS_BUNDLES;
 	}

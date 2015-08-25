@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -31,8 +31,8 @@ public interface IPerlPackageOptionsProvider
 	 *
 	 * @return HashMap of options
 	 */
-	@Nullable
-	public HashMap<String, String> getOptions();
+	@NotNull
+	public Map<String, String> getOptions();
 
 	/**
 	 * Returns full list of available bundled options, atm they are with other icon
@@ -40,6 +40,6 @@ public interface IPerlPackageOptionsProvider
 	 *
 	 * @return HashMap of bundled options
 	 */
-	@Nullable
-	public HashMap<String, String> getOptionsBundles();
+	@NotNull
+	public Map<String, String> getOptionsBundles();
 }

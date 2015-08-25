@@ -23,7 +23,6 @@ import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -52,14 +51,14 @@ public class FeatureProcessor extends PerlPragmaProcessorBase implements IPerlPa
 
 	@NotNull
 	@Override
-	public HashMap<String, String> getOptions()
+	public Map<String, String> getOptions()
 	{
 		return OPTIONS;
 	}
 
-	@Nullable
+	@NotNull
 	@Override
-	public HashMap<String, String> getOptionsBundles()
+	public Map<String, String> getOptionsBundles()
 	{
 		return OPTIONS_BUNDLES;
 	}

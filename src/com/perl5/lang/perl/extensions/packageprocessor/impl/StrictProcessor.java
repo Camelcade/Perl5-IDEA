@@ -22,9 +22,10 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.internals.PerlStrictMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -42,16 +43,16 @@ public class StrictProcessor extends PerlPragmaProcessorBase implements IPerlPac
 
 	@NotNull
 	@Override
-	public HashMap<String, String> getOptions()
+	public Map<String, String> getOptions()
 	{
 		return OPTIONS;
 	}
 
-	@Nullable
+	@NotNull
 	@Override
-	public HashMap<String, String> getOptionsBundles()
+	public Map<String, String> getOptionsBundles()
 	{
-		return null;
+		return Collections.emptyMap();
 	}
 
 	@Override

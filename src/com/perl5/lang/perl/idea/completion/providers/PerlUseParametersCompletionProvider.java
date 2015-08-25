@@ -37,7 +37,6 @@ import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
@@ -64,25 +63,23 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 				// fixme we should allow lookup elements customization by package processor
 				if (packageProcessor instanceof IPerlPackageOptionsProvider)
 				{
-					HashMap<String, String> options = ((IPerlPackageOptionsProvider) packageProcessor).getOptions();
+					Map<String, String> options = ((IPerlPackageOptionsProvider) packageProcessor).getOptions();
 
-					if (options != null)
-						for (Map.Entry<String, String> option : options.entrySet())
-							resultSet.addElement(LookupElementBuilder
-									.create(option.getKey())
-									.withTypeText(option.getValue(), true)
-									.withIcon(PerlIcons.PERL_OPTION)
-									.withInsertHandler(USE_OPTION_INSERT_HANDLER));
+					for (Map.Entry<String, String> option : options.entrySet())
+						resultSet.addElement(LookupElementBuilder
+								.create(option.getKey())
+								.withTypeText(option.getValue(), true)
+								.withIcon(PerlIcons.PERL_OPTION)
+								.withInsertHandler(USE_OPTION_INSERT_HANDLER));
 
 					options = ((IPerlPackageOptionsProvider) packageProcessor).getOptionsBundles();
 
-					if (options != null)
-						for (Map.Entry<String, String> option : options.entrySet())
-							resultSet.addElement(LookupElementBuilder
-									.create(option.getKey())
-									.withTypeText(option.getValue(), true)
-									.withIcon(PerlIcons.PERL_OPTIONS)
-									.withInsertHandler(USE_OPTION_INSERT_HANDLER));
+					for (Map.Entry<String, String> option : options.entrySet())
+						resultSet.addElement(LookupElementBuilder
+								.create(option.getKey())
+								.withTypeText(option.getValue(), true)
+								.withIcon(PerlIcons.PERL_OPTIONS)
+								.withInsertHandler(USE_OPTION_INSERT_HANDLER));
 				}
 
 				if (packageProcessor instanceof IPerlPackageParentsProvider && ((IPerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
