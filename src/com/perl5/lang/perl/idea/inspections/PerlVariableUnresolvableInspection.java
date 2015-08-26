@@ -19,11 +19,10 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 13.06.2015.
@@ -46,30 +45,18 @@ public class PerlVariableUnresolvableInspection extends PerlInspection
 
 				boolean isLexicalDeclaration = parent instanceof PsiPerlVariableDeclarationLexical;
 
-				if (isGlobalDeclaration || isLexicalDeclaration)
+				if (isGlobalDeclaration || isLexicalDeclaration || element.isBuiltIn())
 					return;
 
-				PerlNamespaceElement namespaceElement = element.getNamespaceElement();
 				PerlVariableNameElement variableNameElement = element.getVariableNameElement();
 
-				if (variableNameElement == null || element.isBuiltIn())
-					return;
-
-				PerlVariable lexicalDeclaration = element.getLexicalDeclaration();
-
-				boolean hasExplicitNamespace = namespaceElement != null;
-
-				if (!hasExplicitNamespace)
+				if (variableNameElement != null)
 				{
-					if (lexicalDeclaration == null)
-						registerProblem(holder, variableNameElement, "Unable to find lexically visible variable declaration.");
-				} else
-				{
-					List<PerlVariable> globalDeclarations = element.getGlobalDeclarations();
-					List<PerlGlobVariable> relatedGlobs = element.getRelatedGlobs();
+					for (PsiReference reference : variableNameElement.getReferences())
+						if (reference.resolve() != null)
+							return;
 
-					if (globalDeclarations.size() == 0 && relatedGlobs.size() == 0)
-						registerProblem(holder, variableNameElement, "Unable to find global variable declaration or typeglob aliasing for variable.");
+					registerProblem(holder, variableNameElement, "Unable to find variable declaration.");
 				}
 			}
 		};
