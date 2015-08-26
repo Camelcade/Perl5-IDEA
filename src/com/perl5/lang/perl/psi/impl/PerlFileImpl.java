@@ -117,6 +117,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	{
 		if (lexicalCacheInvalid)
 		{
+//			System.err.println("Started scanning declarations");
 			List<PerlLexicalDeclaration> declaredScalars = new ArrayList<PerlLexicalDeclaration>();
 			List<PerlLexicalDeclaration> declaredArrays = new ArrayList<PerlLexicalDeclaration>();
 			List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
@@ -158,6 +159,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			this.declaredHashes = declaredHashes;
 			this.declaredVariables = declaredVariables;
 			lexicalCacheInvalid = false;
+//			System.err.println("Finished scanning declarations");
 		}
 	}
 

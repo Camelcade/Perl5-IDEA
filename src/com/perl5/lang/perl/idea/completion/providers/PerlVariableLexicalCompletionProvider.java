@@ -63,7 +63,13 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
 	{
-		PsiElement variableNameElement = parameters.getPosition();
+		PsiElement variableNameElement = parameters.getOriginalPosition();
+
+		if (variableNameElement == null)
+			variableNameElement = parameters.getPosition();
+
+		assert variableNameElement instanceof PerlVariableNameElement;
+
 		PsiElement perlVariable = variableNameElement.getParent();
 
 		// fixme move this to pattern
