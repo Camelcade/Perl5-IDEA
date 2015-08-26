@@ -63,6 +63,7 @@
       <p><b>Fixes:</b>
       <ul>
       <li>Fixed empty heredoc parsing problem</li>
+      <li>Perl new file actions now displayed only in Perl5 modules</li>
       </ul>
       </p>
 
