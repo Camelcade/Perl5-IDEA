@@ -70,7 +70,6 @@ import org.jetbrains.annotations.NotNull;
 // Char classes
 */
 NEW_LINE = \r?\n
-
 WHITE_SPACE     = [ \t\f]
 
 EMPTY_SPACE = [ \t\f\r\n]
