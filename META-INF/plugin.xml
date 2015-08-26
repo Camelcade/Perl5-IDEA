@@ -62,6 +62,7 @@
 
       <p><b>Fixes:</b>
       <ul>
+      <li>Fixed empty heredoc parsing problem</li>
       </ul>
       </p>
 
