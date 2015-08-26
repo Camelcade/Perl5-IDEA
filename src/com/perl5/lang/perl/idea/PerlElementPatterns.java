@@ -59,11 +59,12 @@ public interface PerlElementPatterns
 
 	public static final PsiElementPattern.Capture INSIDE_LEXICAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationLexical.class);
 	public static final PsiElementPattern.Capture INSIDE_GLOBAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationGlobal.class);
+	public static final PsiElementPattern.Capture INSIDE_USE_VARS = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(IPerlUseVars.class);
 	public static final PsiElementPattern.Capture INSIDE_LOCAL_DECLARATION = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(PsiPerlVariableDeclarationLocal.class);
 
 
 	public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN =
-			VARIABLE_NAME_PATTERN.andOr(IN_VARIABLE_PATTERN, IN_GLOB_PATTERN).andNot(INSIDE_GLOBAL_DECLARATION).andNot(INSIDE_LEXICAL_DECLARATION);
+			VARIABLE_NAME_PATTERN.andOr(IN_VARIABLE_PATTERN, IN_GLOB_PATTERN).andNot(INSIDE_GLOBAL_DECLARATION).andNot(INSIDE_LEXICAL_DECLARATION).andNot(INSIDE_USE_VARS);
 
 
 }

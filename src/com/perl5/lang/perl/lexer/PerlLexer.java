@@ -65,6 +65,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	static
 	{
 		PRAGMA_TOKENS_MAP.put("constant", PACKAGE_PRAGMA_CONSTANT);
+		PRAGMA_TOKENS_MAP.put("vars", PACKAGE_PRAGMA_VARS);
 	}
 
 	static

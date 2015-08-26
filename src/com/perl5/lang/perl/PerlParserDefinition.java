@@ -38,6 +38,7 @@ import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
@@ -122,6 +123,8 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			return new PerlHeredocElementImpl(node);
 		else if (elementType == HEREDOC)
 			return new PerlHeredocElementImpl(node);
+		else if (elementType == PARSABLE_STRING)
+			return new PerlParsableStringWrapperlImpl(node);
 		return PerlElementTypes.Factory.createElement(node);
 	}
 }

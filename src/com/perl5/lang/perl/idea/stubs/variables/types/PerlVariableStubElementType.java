@@ -58,6 +58,12 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 		if (parent != null)
 			if (parent.getElementType() == VARIABLE_DECLARATION_GLOBAL)
 				return true;
+			else if (    // use vars
+					(parent = parent.getTreeParent()) != null
+							&& (parent = parent.getTreeParent()) != null
+							&& parent.getElementType() == USE_VARS_STATEMENT
+					)
+				return true;
 
 		return false; //super.shouldCreateStub(node);
 	}

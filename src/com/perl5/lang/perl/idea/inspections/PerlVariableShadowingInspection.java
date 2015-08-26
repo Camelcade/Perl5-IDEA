@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.perl5.lang.perl.psi.PerlVariable;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -27,7 +27,7 @@ import java.util.List;
 public class PerlVariableShadowingInspection extends PerlVariableDeclarationInspection
 {
 	@Override
-	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList)
+	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, Collection<T> variableList)
 	{
 		for (PerlVariable variable : variableList)
 		{

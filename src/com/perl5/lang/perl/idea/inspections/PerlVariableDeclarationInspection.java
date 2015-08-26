@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -55,6 +55,6 @@ public abstract class PerlVariableDeclarationInspection extends PerlInspection
 		checkVariables(holder, declaration.getHashVariableList());
 	}
 
-	public abstract <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList);
+	public abstract <T extends PerlVariable> void checkVariables(ProblemsHolder holder, Collection<T> variableList);
 
 }

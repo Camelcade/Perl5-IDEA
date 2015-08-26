@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.inspections;
+package com.perl5.lang.perl.lexer;
 
-import com.intellij.codeInspection.ProblemsHolder;
-import com.perl5.lang.perl.psi.PerlVariable;
-
-import java.util.Collection;
+import com.intellij.lexer.FlexAdapter;
 
 /**
- * Created by hurricup on 14.06.2015.
+ * Created by hurricup on 26.08.2015.
  */
-public class PerlVariableBuiltinRedeclarationInspection extends PerlVariableDeclarationInspection
+public class PerlQuotedStringLexerAdapter extends FlexAdapter
 {
-	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, Collection<T> variableList)
+	public PerlQuotedStringLexerAdapter()
 	{
-		for (PerlVariable variable : variableList)
-			if (variable.isBuiltIn())
-				registerProblem(holder, variable, "It's a very bad practice to declare built-in variable as our/my/state");
+		super(new PerlQuotedStringLexer());
 	}
 }

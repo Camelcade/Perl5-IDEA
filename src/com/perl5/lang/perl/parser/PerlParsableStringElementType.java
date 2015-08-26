@@ -24,14 +24,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlHeredocLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlQuotedStringLexerAdapter;
 
 /**
- * Created by hurricup on 13.08.2015.
+ * Created by hurricup on 26.08.2015.
  */
-public class PerlHeredocElementType extends ILazyParseableElementType
+public class PerlParsableStringElementType extends ILazyParseableElementType
 {
-	public PerlHeredocElementType(String name)
+	public PerlParsableStringElementType(String name)
 	{
 		super(name, PerlLanguage.INSTANCE);
 	}
@@ -44,11 +44,12 @@ public class PerlHeredocElementType extends ILazyParseableElementType
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				new PerlHeredocLexerAdapter(toString()),
+				new PerlQuotedStringLexerAdapter(),
 				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlParser();
 
-		return parser.parse(this, builder).getFirstChildNode();
+		return parser.parse(this, builder).getFirstChildNode().getFirstChildNode();
 	}
+
 }

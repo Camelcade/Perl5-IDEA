@@ -16,25 +16,9 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
-
 /**
- * Created by hurricup on 27.05.2015.
- * Declarations marker
+ * Created by hurricup on 26.08.2015.
  */
-public interface PerlVariableDeclaration extends PsiElement, PerlNamespaceElementContainer, PerlLexicalScopeMember
+public interface IPerlUseVars extends PerlVariableDeclaration, PsiPerlStatement
 {
-	@NotNull
-	Collection<PsiPerlArrayVariable> getArrayVariableList();
-
-	@NotNull
-	Collection<PsiPerlHashVariable> getHashVariableList();
-
-	@NotNull
-	Collection<PsiPerlScalarVariable> getScalarVariableList();
 }

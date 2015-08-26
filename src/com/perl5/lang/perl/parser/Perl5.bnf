@@ -205,6 +205,7 @@ limitations under the License.
     REGEX_TOKEN="REGEX_TOKEN"
 
     STRING_CONTENT="STRING_CONTENT"   // moved to stub
+    PARSABLE_STRING="PARSABLE_STRING"
 
     TAG="TAG"
 
@@ -243,6 +244,7 @@ limitations under the License.
 
     PACKAGE="PACKAGE"
     PACKAGE_PRAGMA_CONSTANT="PACKAGE_PRAGMA_CONSTANT"
+    PACKAGE_PRAGMA_VARS="PACKAGE_PRAGMA_VARS"
 
     HANDLE="HANDLE"
     BLOCK_NAME="BLOCK_NAME"
@@ -297,6 +299,10 @@ limitations under the License.
 
     implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
+
+    extends("use_vars_statement")=statement
+    implements("use_vars_statement")="com.perl5.lang.perl.psi.IPerlUseVars"
+    mixin("use_vars_statement")="com.perl5.lang.perl.psi.mixins.PerlUseVarsMixin"
 
     extends("variable_declaration_global|variable_declaration_lexical|variable_declaration_local")=expr
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
@@ -500,6 +506,7 @@ when_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_WHEN expr {pin=
 
 private use_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
   use_statement_constant
+  | use_vars_statement
   | use_statement
 
 private no_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
@@ -516,6 +523,9 @@ use_statement_constant ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndColl
 private use_constant_parameters ::=
   constant_definition
   | constants_block
+
+// other name to extend declaration, not variable
+use_vars_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_VARS PACKAGE>> [perl_version] [<<parseUseVarsParameters>>] {pin=3}
 
 constants_block ::= LEFT_BRACE constant_definition (comma constant_definition) * [comma+] RIGHT_BRACE {pin=1}
 constant_definition ::= constant_name comma scalar_expr

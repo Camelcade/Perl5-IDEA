@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLexical;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 18.07.2015.
@@ -57,7 +57,7 @@ public class PerlUnusedLexicalVariableInspection extends PerlInspection
 		checkVariables(holder, declaration.getHashVariableList());
 	}
 
-	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList)
+	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, Collection<T> variableList)
 	{
 		for (PerlVariable variable : variableList)
 			if (isVariableUnused(variable))

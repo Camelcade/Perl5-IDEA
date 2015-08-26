@@ -42,6 +42,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
 			PACKAGE_CORE_IDENTIFIER,
 			PACKAGE_PRAGMA_CONSTANT,
+			PACKAGE_PRAGMA_VARS,
 			PACKAGE_IDENTIFIER,
 			PACKAGE
 	);
@@ -1152,4 +1153,25 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 	}
+
+	public static boolean parseUseVarsParameters(PsiBuilder b, int l)
+	{
+		if (consumeToken(b, RESERVED_QW))
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+
+			while (!b.eof() && b.getTokenType() != QUOTE_SINGLE_CLOSE)
+				b.advanceLexer();
+
+			if (!b.eof())
+				b.advanceLexer();
+
+			m.collapse(PARSABLE_STRING);
+
+			return true;
+		}
+		return false;
+	}
+
 }
