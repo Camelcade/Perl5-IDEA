@@ -40,7 +40,12 @@ public class PerlQuotedStringLexer extends PerlStringLexer
 			return QUOTE_DOUBLE_CLOSE;
 		}
 
-		return super.advance();
+		IElementType result = super.advance();
+
+		if (getTokenEnd() == getBufferEnd() && getTokenStart() < getBufferEnd() - 1)
+			setTokenEnd(getTokenEnd() - 1);
+
+		return result;
 	}
 
 }
