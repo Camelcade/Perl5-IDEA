@@ -20,15 +20,17 @@ import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvid
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 18.08.2015.
  */
 public class ParentProcessor extends BaseProcessor implements IPerlPackageOptionsProvider
 {
-	protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
+	protected static final Map<String, String> OPTIONS = new HashMap<String, String>();
 
 	static
 	{
@@ -37,16 +39,16 @@ public class ParentProcessor extends BaseProcessor implements IPerlPackageOption
 
 	@NotNull
 	@Override
-	public HashMap<String, String> getOptions()
+	public Map<String, String> getOptions()
 	{
 		return OPTIONS;
 	}
 
 	@NotNull
 	@Override
-	public HashMap<String, String> getOptionsBundles()
+	public Map<String, String> getOptionsBundles()
 	{
-		return null;
+		return Collections.emptyMap();
 	}
 
 	@NotNull
