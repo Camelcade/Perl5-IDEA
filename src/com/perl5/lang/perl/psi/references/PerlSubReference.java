@@ -27,6 +27,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -66,6 +67,10 @@ public class PerlSubReference extends PerlReferencePoly
 		String subName = mySubNameElement.getName();
 		Project project = mySubNameElement.getProject();
 
+		PerlNamespaceElement expliclitPackageElement = null;
+		if (parent instanceof PerlNamespaceElementContainer)
+			expliclitPackageElement = ((PerlNamespaceElementContainer) parent).getNamespaceElement();
+
 		if (subName != null)
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
@@ -74,11 +79,12 @@ public class PerlSubReference extends PerlReferencePoly
 				relatedItems.addAll(PerlMroDfs.resolveSub(project, ((PerlMethod) parent).getContextPackageName(), subName, true));
 			else    // static resolution
 			{
-				if (parent instanceof PerlNamespaceElementContainer && ((PerlNamespaceElementContainer) parent).getNamespaceElement() == null && mySubNameElement.isBuiltIn())
+				if (expliclitPackageElement == null && mySubNameElement.isBuiltIn())
 					return new ResolveResult[0];
 
 //				System.err.println("Checking for " + subName);
 
+				// check indexes for defined subs
 				collectRelatedItems(
 						packageName + "::" + subName,
 						project,
@@ -86,19 +92,39 @@ public class PerlSubReference extends PerlReferencePoly
 						relatedItems
 				);
 
-				PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(myElement, PerlNamespaceContainer.class);
+				if (expliclitPackageElement == null)
+				{
+					// check for imports to the current file
+					PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(myElement, PerlNamespaceContainer.class);
 
-				assert namespaceContainer != null;
+					assert namespaceContainer != null;
 
-				for (Map.Entry<String, Set<String>> imports : namespaceContainer.getImportedSubsNames().entrySet())
-					for (String importedSubName : imports.getValue())
-						if (importedSubName.equals(subName))
-							collectRelatedItems(
-									imports.getKey() + "::" + subName,
-									project,
-									parent,
-									relatedItems
-							);
+					for (Map.Entry<String, Set<String>> imports : namespaceContainer.getImportedSubsNames().entrySet())
+						for (String importedSubName : imports.getValue())
+							if (importedSubName.equals(subName))
+								collectRelatedItems(
+										imports.getKey() + "::" + subName,
+										project,
+										parent,
+										relatedItems
+								);
+				} else    // check imports to target namespace
+				{
+					String targetPackageName = expliclitPackageElement.getCanonicalName();
+					if (targetPackageName != null)
+					{
+						for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
+							for (Map.Entry<String, Set<String>> imports : namespaceDefinition.getImportedSubsNames().entrySet())
+								for (String importedSubName : imports.getValue())
+									if (importedSubName.equals(subName))
+										collectRelatedItems(
+												imports.getKey() + "::" + subName,
+												project,
+												parent,
+												relatedItems
+										);
+					}
+				}
 
 				// check for autoload
 				if (relatedItems.size() == 0
