@@ -20,12 +20,16 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlNamespaceContainer;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +42,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PerlSubImportsCompletionProvider extends CompletionProvider<CompletionParameters>
 {
+	// fixme make a wrapper for lazy cache
 	protected final static Map<String, LookupElementBuilder> LOOKUP_CACHE = new ConcurrentHashMap<String, LookupElementBuilder>();
 
 	public void addCompletions(@NotNull final CompletionParameters parameters,
@@ -47,28 +52,60 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 		PsiElement method = parameters.getPosition().getParent();
 		assert method instanceof PsiPerlMethod;
 
-		if (!((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
+		if (!((PsiPerlMethod) method).isObjectMethod())
 		{
-			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(method, PerlNamespaceContainer.class);
+			Project project = method.getProject();
+			if (!((PsiPerlMethod) method).hasExplicitNamespace())
+			{
+				PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(method, PerlNamespaceContainer.class);
 
-			assert namespaceContainer != null;
+				assert namespaceContainer != null;
 
-			for (Map.Entry<String, Set<String>> imported : PerlSubUtil.getImportedSubs(method.getProject(), namespaceContainer.getPackageName(), parameters.getOriginalFile()).entrySet())
-				for (String subName : imported.getValue())
+				for (Map.Entry<String, Set<String>> imported : PerlSubUtil.getImportedSubs(project, namespaceContainer.getPackageName(), parameters.getOriginalFile()).entrySet())
+					for (String subName : imported.getValue())
+					{
+						String lookupKey = imported.getKey() + "::" + subName;
+						LookupElementBuilder element = LOOKUP_CACHE.get(subName);
+
+						if (element == null)
+							LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
+											.create(subName)
+											.withTypeText(imported.getKey())
+											.withTailText("(?)")    // fixme here we should have a signature
+											.withIcon(PerlIcons.SUB_GUTTER_ICON)
+							);
+
+						resultSet.addElement(element);
+					}
+			} else
+			{    // not an object method, but has explicit namespace
+				PerlNamespaceElement namespaceElement = ((PsiPerlMethod) method).getNamespaceElement();
+				if (namespaceElement != null)
 				{
-					String lookupKey = imported.getKey() + "::" + subName;
-					LookupElementBuilder element = LOOKUP_CACHE.get(subName);
+					String targetPackageName = namespaceElement.getCanonicalName();
+					if (targetPackageName != null)
+					{    // fixme partially not dry with above block
+						for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
+							for (Map.Entry<String, Set<String>> imported : namespaceDefinition.getImportedSubsNames().entrySet())
+								for (String subName : imported.getValue())
+								{
+									String lookupKey = imported.getKey() + "::" + subName;
+									LookupElementBuilder element = LOOKUP_CACHE.get(subName);
 
-					if (element == null)
-						LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-										.create(subName)
-										.withTypeText(imported.getKey())
-										.withTailText("(?)")    // fixme here we should have a signature
-										.withIcon(PerlIcons.SUB_GUTTER_ICON)
-						);
+									if (element == null)
+										LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
+														.create(subName)
+														.withTypeText(imported.getKey())
+														.withTailText("(?)")    // fixme here we should have a signature
+														.withIcon(PerlIcons.SUB_GUTTER_ICON)
+										);
 
-					resultSet.addElement(element);
+									resultSet.addElement(element);
+								}
+
+					}
 				}
+			}
 		}
 
 	}

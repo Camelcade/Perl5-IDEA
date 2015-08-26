@@ -113,6 +113,7 @@ public class PerlSubReference extends PerlReferencePoly
 					String targetPackageName = expliclitPackageElement.getCanonicalName();
 					if (targetPackageName != null)
 					{
+						// fixme partially not DRY with previous block
 						for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
 							for (Map.Entry<String, Set<String>> imports : namespaceDefinition.getImportedSubsNames().entrySet())
 								for (String importedSubName : imports.getValue())
