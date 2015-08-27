@@ -50,7 +50,7 @@
       <ul>
       <li>Implemented import mechanic support:
       <ul>
-      <li>Exporter's arrays `@EXPORT`, `@EXPORT_OK`. `@EXPORT_TAGS` not yet implemented.</li>
+      <li>Exporter's arrays <code>@EXPORT</code>, <code>@EXPORT_OK</code>. <code>@EXPORT_TAGS</code> support and tags import are not yet implemented.</li>
       <li>Importing of subs and variables.</li>
       </ul>
       </li>
