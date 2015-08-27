@@ -34,6 +34,9 @@ import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlScalarUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -218,6 +221,24 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	public Map<String, Set<String>> getImportedSubsNames()
 	{
 		return PerlSubUtil.getImportedSubs(getProject(), getPackageName(), getContainingFile());
+	}
+
+	@Override
+	public Map<String, Set<String>> getImportedScalarNames()
+	{
+		return PerlScalarUtil.getImportedScalars(getProject(), getPackageName(), getContainingFile());
+	}
+
+	@Override
+	public Map<String, Set<String>> getImportedArrayNames()
+	{
+		return PerlArrayUtil.getImportedArrays(getProject(), getPackageName(), getContainingFile());
+	}
+
+	@Override
+	public Map<String, Set<String>> getImportedHashNames()
+	{
+		return PerlHashUtil.getImportedHashes(getProject(), getPackageName(), getContainingFile());
 	}
 
 	/**

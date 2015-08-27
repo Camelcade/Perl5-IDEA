@@ -35,9 +35,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlLexicalDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
-import com.perl5.lang.perl.util.PerlUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -337,5 +335,23 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public Map<String, Set<String>> getImportedSubsNames()
 	{
 		return PerlSubUtil.getImportedSubs(getProject(), "main", this);
+	}
+
+	@Override
+	public Map<String, Set<String>> getImportedScalarNames()
+	{
+		return PerlScalarUtil.getImportedScalars(getProject(), "main", this);
+	}
+
+	@Override
+	public Map<String, Set<String>> getImportedArrayNames()
+	{
+		return PerlArrayUtil.getImportedArrays(getProject(), "main", this);
+	}
+
+	@Override
+	public Map<String, Set<String>> getImportedHashNames()
+	{
+		return PerlHashUtil.getImportedHashes(getProject(), "main", this);
 	}
 }

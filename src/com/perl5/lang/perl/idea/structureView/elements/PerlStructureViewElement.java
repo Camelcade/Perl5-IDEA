@@ -33,8 +33,7 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -145,11 +144,88 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition)
 		{
-			// gathering imports
+			// nested namespaces
+			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
+				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+					result.add(new PerlStructureViewElement(child));
+
+			// global variables
+			for (PsiPerlVariableDeclarationGlobal child : PsiTreeUtil.findChildrenOfType(myElement, PsiPerlVariableDeclarationGlobal.class))
+				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+				{
+					for (PerlVariable variable : child.getScalarVariableList())
+						result.add(new PerlVariableStructureViewElement(variable));
+					for (PerlVariable variable : child.getArrayVariableList())
+						result.add(new PerlVariableStructureViewElement(variable));
+					for (PerlVariable variable : child.getHashVariableList())
+						result.add(new PerlVariableStructureViewElement(variable));
+				}
+
 			Project project = myElement.getProject();
 			GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
-			// populating with imports
+			// imported scalars
+			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedScalarNames().entrySet())
+				for (String variableName : importEntry.getValue())
+				{
+					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+
+					Collection<PerlVariable> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
+
+					for (PerlVariable variable : variables)
+						result.add(new PerlVariableStructureViewElement(variable).setImported());
+
+					// globs
+					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
+					if (items.size() == 0)
+						items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
+
+					for (PerlGlobVariable item : items)
+						result.add(new PerlGlobStructureViewElement(item).setImported());
+				}
+
+			// imported arrays
+			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedArrayNames().entrySet())
+				for (String variableName : importEntry.getValue())
+				{
+					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+
+					Collection<PerlVariable> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
+
+					for (PerlVariable variable : variables)
+						result.add(new PerlVariableStructureViewElement(variable).setImported());
+
+					// globs
+					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
+					if (items.size() == 0)
+						items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
+
+					for (PerlGlobVariable item : items)
+						result.add(new PerlGlobStructureViewElement(item).setImported());
+				}
+
+			// imported hashes
+			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedHashNames().entrySet())
+				for (String variableName : importEntry.getValue())
+				{
+					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+
+					Collection<PerlVariable> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
+
+					for (PerlVariable variable : variables)
+						result.add(new PerlVariableStructureViewElement(variable).setImported());
+
+					// globs
+					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
+					if (items.size() == 0)
+						items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
+
+					for (PerlGlobVariable item : items)
+						result.add(new PerlGlobStructureViewElement(item).setImported());
+				}
+
+
+			// Imported subs
 			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedSubsNames().entrySet())
 				for (String subName : importEntry.getValue())
 				{
@@ -188,21 +264,6 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 						result.add(new PerlGlobStructureViewElement(item).setImported());
 				}
 
-
-			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
-				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
-					result.add(new PerlStructureViewElement(child));
-
-			for (PsiPerlVariableDeclarationGlobal child : PsiTreeUtil.findChildrenOfType(myElement, PsiPerlVariableDeclarationGlobal.class))
-				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
-				{
-					for (PerlVariable variable : child.getScalarVariableList())
-						result.add(new PerlVariableStructureViewElement(variable));
-					for (PerlVariable variable : child.getArrayVariableList())
-						result.add(new PerlVariableStructureViewElement(variable));
-					for (PerlVariable variable : child.getHashVariableList())
-						result.add(new PerlVariableStructureViewElement(variable));
-				}
 
 			for (PerlGlobVariable child : PsiTreeUtil.findChildrenOfType(myElement, PerlGlobVariable.class))
 				if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
