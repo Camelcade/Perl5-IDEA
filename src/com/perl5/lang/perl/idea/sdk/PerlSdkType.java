@@ -147,6 +147,12 @@ public class PerlSdkType extends SdkType
 		return PerlIcons.PERL_LANGUAGE;
 	}
 
+	@Override
+	public Icon getIconForAddAction()
+	{
+		return getIcon();
+	}
+
 	@Nullable
 	@Override
 	public String getVersionString(@NotNull Sdk sdk)
