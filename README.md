@@ -13,7 +13,7 @@ Optimized using [Java Profiler](http://www.ej-technologies.com/products/jprofile
 There is tremendous amount of work to do in development and project really need testers. Not only users-testers, but someone
 to write tests (mostly for lexer and parser at the moment).
 
-#Current status - 0.40 RC testing
+#Current status - 0.99 RC testing
 
 [Download current dev build jar](http://evstigneev.com/camelcade.jar)
 
