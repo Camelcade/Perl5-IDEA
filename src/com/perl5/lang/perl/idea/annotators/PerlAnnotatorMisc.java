@@ -39,7 +39,7 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 	private void annotateStringContent(PerlStringContentElementImpl element, AnnotationHolder holder)
 	{
 		PsiElement parent = element.getParent();
-		PsiElement grandParent = element.getParent();
+		PsiElement grandParent = parent.getParent();
 
 		if (!(parent instanceof PsiPerlConstantName
 				|| grandParent instanceof PsiPerlConstantName

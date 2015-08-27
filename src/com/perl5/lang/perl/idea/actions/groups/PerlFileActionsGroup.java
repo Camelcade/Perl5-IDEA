@@ -23,5 +23,4 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup;
  */
 public class PerlFileActionsGroup extends DefaultActionGroup
 {
-
 }

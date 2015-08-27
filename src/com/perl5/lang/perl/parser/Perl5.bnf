@@ -32,7 +32,7 @@ limitations under the License.
   elementTypeFactory="com.perl5.lang.perl.parser.PerlElementTypeFactory.getElementType"
   tokenTypeFactory="com.perl5.lang.perl.parser.PerlElementTypeFactory.getTokenType"
 
-  parserUtilClass="com.perl5.lang.perl.parser.PerlParserUitl"
+  parserUtilClass="com.perl5.lang.perl.parser.PerlParserUtil"
   psiImplUtilClass="com.perl5.lang.perl.psi.utils.PerlPsiImplUtil"
 
   tokens=[
@@ -205,6 +205,7 @@ limitations under the License.
     REGEX_TOKEN="REGEX_TOKEN"
 
     STRING_CONTENT="STRING_CONTENT"   // moved to stub
+    PARSABLE_STRING="PARSABLE_STRING"
 
     TAG="TAG"
 
@@ -243,7 +244,7 @@ limitations under the License.
 
     PACKAGE="PACKAGE"
     PACKAGE_PRAGMA_CONSTANT="PACKAGE_PRAGMA_CONSTANT"
-    PACKAGE_PRAGMA_MRO="PACKAGE_PRAGMA_MRO"
+    PACKAGE_PRAGMA_VARS="PACKAGE_PRAGMA_VARS"
 
     HANDLE="HANDLE"
     BLOCK_NAME="BLOCK_NAME"
@@ -282,12 +283,12 @@ limitations under the License.
     implements("annotation_returns.*")="com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer"
     methods("annotation_returns.*")=[getNamespaceElement]
 
-    mixin("use_statement.*")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
-    implements("use_statement.*")="com.perl5.lang.perl.psi.PerlUseStatement"
+    mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
+    implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
+    stubClass("use_statement")="com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub"
+
     extends("use_statement.*")=statement
-
     extends("no_statement")=statement
-
     extends("condition_statement|condition_statement_while|for_list_statement|for_iterator_statement")=statement
 
     implements("conditional_block|conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
@@ -298,6 +299,10 @@ limitations under the License.
 
     implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
+
+    extends("use_vars_statement")=statement
+    implements("use_vars_statement")="com.perl5.lang.perl.psi.IPerlUseVars"
+    mixin("use_vars_statement")="com.perl5.lang.perl.psi.mixins.PerlUseVarsMixin"
 
     extends("variable_declaration_global|variable_declaration_lexical|variable_declaration_local")=expr
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
@@ -343,7 +348,7 @@ private file_item ::= !<<eof>> {semicolon_any | <<parseHeredocContent>> | namesp
 
 namespace_definition ::= namespace_definition_name (block | semicolon_any namespace_content)
 private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_namespace_definition}
-private namespace_annotations ::= annotation_deprectaed
+private namespace_annotations ::= annotation_deprecated
 private recover_namespace_definition ::= !(semicolon_any | LEFT_BRACE)
 namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
 
@@ -501,7 +506,7 @@ when_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_WHEN expr {pin=
 
 private use_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
   use_statement_constant
-  | use_statement_mro
+  | use_vars_statement
   | use_statement
 
 private no_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
@@ -511,16 +516,16 @@ use_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE use_no_parameters {pin=
 no_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_NO use_no_parameters {pin=2}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters
-private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [expr];
+private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [<<parseStringifiedExpression>>];
 private use_version_parameters ::= perl_version;
-
-use_statement_mro ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_MRO PACKAGE>> [perl_version] [use_mro_parameters] {pin=3}
-private use_mro_parameters ::= scalar_expr;
 
 use_statement_constant ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_CONSTANT PACKAGE>> [perl_version] [use_constant_parameters] {pin=3}
 private use_constant_parameters ::=
   constant_definition
   | constants_block
+
+// other name to extend declaration, not variable
+use_vars_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_VARS PACKAGE>> [perl_version] [<<parseUseVarsParameters>>] {pin=3}
 
 constants_block ::= LEFT_BRACE constant_definition (comma constant_definition) * [comma+] RIGHT_BRACE {pin=1}
 constant_definition ::= constant_name comma scalar_expr
@@ -631,17 +636,20 @@ private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | sem
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + //{pin(".*")=1}
 
-private op_3_expr ::= pref_pp_expr | suff_pp_expr
-pref_pp_expr ::= (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS) expr
+private op_3_expr ::= pref_pp_expr | prefix_minus_as_string_expr | pref_mm_expr | suff_pp_expr
+pref_pp_expr ::= OPERATOR_PLUS_PLUS expr
+pref_mm_expr ::= OPERATOR_MINUS_MINUS expr
+
 suff_pp_expr ::= expr (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS)
 
 pow_expr ::= expr (pow_operator expr)+ { rightAssociative=true }
 private pow_operator ::= OPERATOR_MUL OPERATOR_MUL !OPERATOR_ASSIGN
 
-private op_5_expr ::= ref_expr  | prefix_unary_expr
+private op_5_expr ::= ref_expr | prefix_minus_as_string_expr | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
 prefix_unary_expr ::= operator_prefix_unary expr { rightAssociative=true }
-private operator_prefix_unary ::= (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR_MINUS) !OPERATOR_ASSIGN
+prefix_minus_as_string_expr ::= <<parseMinusBareword>>
+private operator_prefix_unary ::= (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR_MINUS) !OPERATOR_ASSIGN // not sure we need !OPERATOR_ASSIGN
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 
@@ -1010,7 +1018,7 @@ private annotations ::= annotation+ //{recoverWhile=recover_sub_annotation}
 annotation ::=
     annotation_unknown
     | annotation_abstract
-    | annotation_deprectaed
+    | annotation_deprecated
     | annotation_method
     | annotation_returns_ref
     | annotation_returns_arrayref
@@ -1020,7 +1028,7 @@ annotation ::=
 
 annotation_unknown ::= ANNOTATION_PREFIX ANNOTATION_UNKNOWN_KEY
 annotation_abstract ::= ANNOTATION_PREFIX ANNOTATION_ABSTRACT_KEY
-annotation_deprectaed ::= ANNOTATION_PREFIX ANNOTATION_DEPRECATED_KEY
+annotation_deprecated ::= ANNOTATION_PREFIX ANNOTATION_DEPRECATED_KEY
 annotation_method ::= ANNOTATION_PREFIX ANNOTATION_METHOD_KEY
 annotation_override ::= ANNOTATION_PREFIX ANNOTATION_OVERRIDE_KEY
 annotation_returns_ref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY <<mergePackageName>>

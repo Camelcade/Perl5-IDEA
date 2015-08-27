@@ -39,7 +39,7 @@ public class PerlPackageBuiltInCompletionProvider extends CompletionProvider<Com
 	@Override
 	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet resultSet)
 	{
-		if( PACKAGES_LOOKUP_ELEMENTS.size() == 0 )
+		if (PACKAGES_LOOKUP_ELEMENTS.size() == 0)
 		{
 			Project project = parameters.getPosition().getProject();
 			// fixme need workaround here; We've should make pre-set list to add, but project required for deprecation

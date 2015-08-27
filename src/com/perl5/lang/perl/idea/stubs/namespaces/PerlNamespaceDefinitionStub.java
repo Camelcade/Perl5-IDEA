@@ -21,6 +21,7 @@ import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 28.05.2015.
@@ -34,4 +35,10 @@ public interface PerlNamespaceDefinitionStub extends StubElement<PsiPerlNamespac
 	public List<String> getParentNamespaces();
 
 	public boolean isDeprecated();
+
+	public List<String> getEXPORT();
+
+	public List<String> getEXPORT_OK();
+
+	public Map<String, List<String>> getEXPORT_TAGS();
 }

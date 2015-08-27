@@ -19,14 +19,14 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.perl5.lang.perl.psi.PerlVariable;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 14.06.2015.
  */
 public class PerlVariableBuiltinRedeclarationInspection extends PerlVariableDeclarationInspection
 {
-	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, List<T> variableList)
+	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, Collection<T> variableList)
 	{
 		for (PerlVariable variable : variableList)
 			if (variable.isBuiltIn())

@@ -23,6 +23,7 @@ import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 28.05.2015.
@@ -33,14 +34,29 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 	private final PerlMroType myMroType;
 	private final List<String> myParentNamespaces;
 	private final boolean myIsDeprecated;
+	private final List<String> myEXPORT;
+	private final List<String> myEXPORT_OK;
+	private final Map<String, List<String>> myEXPORT_TAGS;
 
-	public PerlNamespaceDefinitionStubImpl(StubElement parent, String packageName, PerlMroType mroType, List<String> parentNamespaces, boolean isDeprecated)
+	public PerlNamespaceDefinitionStubImpl(
+			StubElement parent,
+			String packageName,
+			PerlMroType mroType,
+			List<String> parentNamespaces,
+			boolean isDeprecated,
+			List<String> EXPORT,
+			List<String> EXPORT_OK,
+			Map<String, List<String>> EXPORT_TAGS
+	)
 	{
 		super(parent, PerlStubElementTypes.PERL_NAMESPACE);
 		myPackageName = packageName;
 		myMroType = mroType;
 		myParentNamespaces = parentNamespaces;
 		myIsDeprecated = isDeprecated;
+		myEXPORT = EXPORT;
+		myEXPORT_OK = EXPORT_OK;
+		myEXPORT_TAGS = EXPORT_TAGS;
 	}
 
 	@Override
@@ -67,5 +83,21 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDe
 		return myIsDeprecated;
 	}
 
+	@Override
+	public List<String> getEXPORT()
+	{
+		return myEXPORT;
+	}
 
+	@Override
+	public List<String> getEXPORT_OK()
+	{
+		return myEXPORT_OK;
+	}
+
+	@Override
+	public Map<String, List<String>> getEXPORT_TAGS()
+	{
+		return myEXPORT_TAGS;
+	}
 }

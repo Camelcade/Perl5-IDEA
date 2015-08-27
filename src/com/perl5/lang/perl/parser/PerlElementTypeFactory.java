@@ -31,6 +31,8 @@ public class PerlElementTypeFactory
 	{
 		if (name.equals("HEREDOC_QQ") || name.equals("HEREDOC_QX") || name.equals("HEREDOC"))
 			return new PerlHeredocElementType(name);
+		if (name.equals("PARSABLE_STRING"))
+			return new PerlParsableStringElementType(name);
 		return new PerlTokenType(name);
 	}
 
@@ -54,6 +56,9 @@ public class PerlElementTypeFactory
 			return PerlStubElementTypes.PERL_HASH;
 		else if (name.equals("CONSTANT_NAME"))
 			return PerlStubElementTypes.PERL_CONSTANT;
+
+		else if (name.equals("USE_STATEMENT"))
+			return PerlStubElementTypes.PERL_USE_STATEMENT;
 
 		return new PerlElementType(name);
 	}

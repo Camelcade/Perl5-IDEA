@@ -40,6 +40,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				new PerlVariableBuiltInCompletionProvider()
 		);
 
+		extend(
+				CompletionType.BASIC,
+				VARIABLE_COMPLETION_PATTERN,
+				new PerlVariableImportCompletionProvider()
+		);
+
 		// refactored
 		extend(
 				CompletionType.BASIC,
@@ -59,6 +65,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				CompletionType.BASIC,
 				SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN),
 				new PerlSubBuiltInCompletionProvider()
+		);
+
+		extend(
+				CompletionType.BASIC,
+				SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN),
+				new PerlSubImportsCompletionProvider()
 		);
 
 		// refactored

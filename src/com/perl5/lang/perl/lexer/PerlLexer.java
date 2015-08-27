@@ -24,7 +24,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.parser.PerlParserUitl;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
@@ -65,7 +65,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	static
 	{
 		PRAGMA_TOKENS_MAP.put("constant", PACKAGE_PRAGMA_CONSTANT);
-		PRAGMA_TOKENS_MAP.put("mro", PACKAGE_PRAGMA_MRO);
+		PRAGMA_TOKENS_MAP.put("vars", PACKAGE_PRAGMA_VARS);
 	}
 
 	static
@@ -668,15 +668,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		{
 			m = markerPatternDQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING_QQ;
-		}
-		else if (openToken.endsWith("'"))
+		} else if (openToken.endsWith("'"))
 			m = markerPatternSQ.matcher(openToken);
 		else if (openToken.endsWith("`"))
 		{
 			m = markerPatternXQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING_QX;
-		}
-		else
+		} else
 			m = markerPattern.matcher(openToken);
 
 		Character nextCharacter = getNextSignificantCharacter();
@@ -1392,7 +1390,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 				return tokenType;
 			else if (
 					lastUnparenTokenType == IDENTIFIER
-							&& PerlParserUitl.PRE_HANDLE_OPS.contains(lastUnparenToken)
+							&& PerlParserUtil.PRE_HANDLE_OPS.contains(lastUnparenToken)
 							&& !PerlSubUtil.BUILT_IN.contains(tokenText)
 							&& isListElementEndAhead()
 					)

@@ -26,7 +26,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.refactoring.rename.RenamePsiFileProcessor;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +40,7 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 	@Override
 	public boolean canProcessElement(@NotNull PsiElement element)
 	{
-		return element instanceof PerlFileElement && "pm".equals(element.getContainingFile().getVirtualFile().getExtension());
+		return element instanceof PerlFileImpl && "pm".equals(element.getContainingFile().getVirtualFile().getExtension());
 	}
 
 	@Nullable
@@ -51,10 +51,10 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 
 		if (newName.endsWith(".pm"))
 		{
-			assert element instanceof PerlFileElement;
+			assert element instanceof PerlFileImpl;
 			final Project project = element.getProject();
-			VirtualFile currentVirtualFile = ((PerlFileElement) element).getVirtualFile();
-			final String currentPacakgeName = ((PerlFileElement) element).getFilePackageName();
+			VirtualFile currentVirtualFile = ((PerlFileImpl) element).getVirtualFile();
+			final String currentPacakgeName = ((PerlFileImpl) element).getFilePackageName();
 
 			if (currentPacakgeName != null)
 			{

@@ -48,6 +48,10 @@ import com.intellij.lexer.FlexLexer;
 /*
 // Char classes
 */
+
+NEW_LINE = \r?\n
+WHITE_SPACE     = [ \t\f]
+
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 //PERL_XIDS = [\w && \p{XID_Start}]
 //PERL_XIDC = [\w && \p{XID_Continue}]
@@ -86,6 +90,8 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
     }
 }
 
+{NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
+{WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 "<=>" {return OPERATOR_CMP_NUMERIC;}
 "=>" {return OPERATOR_COMMA_ARROW;}
 "..." {return OPERATOR_HELLIP;}

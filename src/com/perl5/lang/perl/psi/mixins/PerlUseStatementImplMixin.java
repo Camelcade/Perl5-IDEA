@@ -16,46 +16,41 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PsiPerlUseStatement;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl implements PsiPerlUseStatement
+public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
 {
-	// fixme do this wit specific class
-	public static final HashSet<String> PARENT_PRAGMAS = new HashSet<String>(Arrays.asList(
-			"parent",
-			"base"
-	));
-
 	public PerlUseStatementImplMixin(ASTNode node)
 	{
 		super(node);
 	}
 
-	@Override
-	public boolean isParentPragma()
+	public PerlUseStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType)
 	{
-		return PARENT_PRAGMAS.contains(getPackageName());
+		super(stub, nodeType);
 	}
 
 	@Override
 	public boolean isPragma()
 	{
-		return getNamespaceElement() != null && getNamespaceElement().isPragma();
+		IPerlPackageProcessor packageProcessor = getPackageProcessor();
+		return packageProcessor != null && packageProcessor.isPragma();
 	}
 
 	@Override
@@ -73,6 +68,10 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	@Override
 	public String getPackageName()
 	{
+		PerlUseStatementStub stub = getStub();
+		if (stub != null)
+			return stub.getPackageName();
+
 		PerlNamespaceElement ns = getNamespaceElement();
 		if (ns != null)
 			return ns.getName();
@@ -92,11 +91,125 @@ public abstract class PerlUseStatementImplMixin extends PsiPerlStatementImpl imp
 	}
 
 	@Override
-	public List<String> getStringParameters()
+	public List<String> getImportParameters()
 	{
-		List<String> stringParameters = new ArrayList<String>();
+		PerlUseStatementStub stub = getStub();
+		if (stub != null)
+			return stub.getImportParameters();
+
+		if (getExpr() == null)
+			return null;
+
+		ArrayList<String> stringParameters = new ArrayList<String>();
 		for (PerlStringContentElement stringContentElement : PerlPsiUtil.findStringElments(getNamespaceElement().getNextSibling()))
 			stringParameters.add(stringContentElement.getText());
 		return stringParameters;
 	}
+
+	@Override
+	public IPerlPackageProcessor getPackageProcessor()
+	{
+		if (getNamespaceElement() != null)
+			return getNamespaceElement().getPackageProcessor();
+		return null;
+	}
+
+	@Override
+	public String getOuterPackageName()
+	{
+		PerlUseStatementStub stub = getStub();
+		if (stub != null)
+			return stub.getOuterPackageName();
+
+		return PerlPackageUtil.getContextPackageName(this);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlExpr getExpr()
+	{
+		return findChildByClass(PsiPerlExpr.class);
+	}
+
+
+	/**
+	 * following trash required to extend use_statement with statement fixme do something about it
+	 **/
+	@Override
+	@Nullable
+	public PsiPerlForStatementModifier getForStatementModifier()
+	{
+		return findChildByClass(PsiPerlForStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlForeachStatementModifier getForeachStatementModifier()
+	{
+		return findChildByClass(PsiPerlForeachStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlIfStatementModifier getIfStatementModifier()
+	{
+		return findChildByClass(PsiPerlIfStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlLabelDeclaration getLabelDeclaration()
+	{
+		return findChildByClass(PsiPerlLabelDeclaration.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlNoStatement getNoStatement()
+	{
+		return findChildByClass(PsiPerlNoStatement.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlStatement getStatement()
+	{
+		return findChildByClass(PsiPerlStatement.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlSubDeclaration getSubDeclaration()
+	{
+		return findChildByClass(PsiPerlSubDeclaration.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlUnlessStatementModifier getUnlessStatementModifier()
+	{
+		return findChildByClass(PsiPerlUnlessStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlUntilStatementModifier getUntilStatementModifier()
+	{
+		return findChildByClass(PsiPerlUntilStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlWhenStatementModifier getWhenStatementModifier()
+	{
+		return findChildByClass(PsiPerlWhenStatementModifier.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlWhileStatementModifier getWhileStatementModifier()
+	{
+		return findChildByClass(PsiPerlWhileStatementModifier.class);
+	}
+
 }

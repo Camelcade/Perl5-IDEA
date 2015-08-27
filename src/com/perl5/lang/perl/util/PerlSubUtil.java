@@ -18,6 +18,7 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -35,6 +36,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -230,4 +233,28 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 		return null;
 	}
+
+	/**
+	 * Returns a map of imported subs names
+	 *
+	 * @param project   Project to search in
+	 * @param namespace namespace to search in
+	 * @param file      PsiFile to search in
+	 * @return result map
+	 */
+	public static Map<String, Set<String>> getImportedSubs(Project project, String namespace, PsiFile file)
+	{
+		return PerlUtil.getImportedNames(project, namespace, file, new Processor<String>()
+		{
+			@Override
+			public boolean process(String s)
+			{
+				if (s == null || s.isEmpty())
+					return false;
+				char firstChar = s.charAt(0);
+				return firstChar != '$' && firstChar != '@' && firstChar != '%';
+			}
+		});
+	}
+
 }

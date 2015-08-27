@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.39 beta</version>
+    <version>0.40 release candidate</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -44,45 +44,26 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.39 beta changes:</p>
+      <p>0.40 release candidate changes:</p>
 
       <p><b>Features:</b>
-          <ul>
-          <li>Implemented interpolation in appropriate strings, here-docs and regexps.
-          <ul>NB:
-          <li>Code interpolation is still lame, and may show that it's ok in places where it is not.</li>
-          <li>Regex interpolation can't distinct array element from scalar with character group after it.</li>
-          <li>Here-doc language injection is automatically turned off in QQ/QX heredoc if there is at least one variable.</li>
-          </ul>
-          </li>
-          <li>Implemented brace matching for string quotes and regex delimiters.</li>
-          <li>Implemented goto symbol navigation for: subs definitions, constants, packages and global variables.</li>
-          <li>Implemented AUTOLOAD-ed methods and subs resolution and decoration (atm. AUTOLOAD must be defined as a sub, not a named block).</li>
-          <li>Implemented __PACKAGE__ methods resolution.</li>
-          <li>Implemented clash checking between subs definitions, typeglobs and constants.</li>
-          <li>Implemented unused global variables inspection.</li>
-          <li>Implemented unused subs and constants inspection (Disabled by default. Got performance issues on large files with short sub names).</li>
-          <li>Implemented unused typeglob inspection.</li>
-          <li>Implemented bulk constants definitions folding.</li>
-          <li>Implemented structure view.</li>
-          <li>Implemented class hierarchy view.</li>
-          <li>Implemented <code>#@deprecated</code> annotation for packages.</li>
-          <li>Added subs unpacked arguments into subs presentation.</li>
-          <li>Added live tempalte for constant definition: <b>const</b>.</li>
+      <ul>
+      <li>Implemented extension point for PackageProcessors, describing unusual packages behaviour and provide packages options. NB: inteface is experimental and subject to change.
+      <ul>
+        <li>Implemented processors for <code>base</code>, <code>parent</code>, <code>strict</code>, <code>feature</code>, <code>mro</code> and <code>warnings</code> pragmas.
+        <li>Implemented processor for <code>Mojo::Base</code></li>
+      </ul>
+      </li>
+      <li>use strict and use warnings inspections now checks for any known  modules (atm <code>strict</code>, <code>warnings</code> and <code>Mojo::Base</code>)</li>
+      <li>implemented bareword arguments support for use/no, like <code>use Mojo::Base -base;</code></li>
+      <li>implemented <code>use vars</code> pragma support. Only following form works right atm: <code>use vars qw(...);</code></li>
       </ul>
       </p>
 
       <p><b>Fixes:</b>
       <ul>
-      <li>Multiple namespace and sub definitions now checks duplication in project only.</li>
-      <li>Multiple subs definitions, namespace definitions inspections now works on definitions only.</li>
-      <li>Optimized goto class contributor.</li>
-      <li>Improved performance of different inspections</li>
-      <li>Improved performance of auto-completion</li>
-      <li>Fixed bug with occasional wrong constant usage annotation</li>
-      <li>Fixed problem with clashed namespaces definition inspection annotation all namespace content.</li>
-      <li>Fixed problem with minor.major version.</li>
-      <li>Fixed few bugs with subs resolution.</li>
+      <li>Fixed empty heredoc parsing problem</li>
+      <li>Perl new file actions now displayed only in Perl5 modules</li>
       </ul>
       </p>
 
@@ -98,8 +79,34 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.java</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
+    <extensionPoints>
+        <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
+            <with attribute="implementationClass"
+                  implements="com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor"/>
+        </extensionPoint>
+    </extensionPoints>
 
+    <extensions defaultExtensionNs="com.perl5">
+        <packageProcessor key="parent"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ParentProcessor"/>
+        <packageProcessor key="base"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseProcessor"/>
+        <packageProcessor key="strict"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StrictProcessor"/>
+        <packageProcessor key="warnings"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.WarningsProcessor"/>
+        <packageProcessor key="feature"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.FeatureProcessor"/>
+        <packageProcessor key="mro"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MroProcessor"/>
+
+        <!--Mojolicious processors-->
+        <packageProcessor key="Mojo::Base"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MojoBaseProcessor"/>
+
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
         <internalFileTemplate name="Perl5 package"/>
         <internalFileTemplate name="Perl5 script"/>
         <internalFileTemplate name="Perl5 embedded"/>
@@ -182,6 +189,7 @@
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlHashesStubIndex"/>
 
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.constants.PerlConstantsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex"/>
 
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>

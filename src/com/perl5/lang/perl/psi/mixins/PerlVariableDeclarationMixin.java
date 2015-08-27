@@ -22,7 +22,7 @@ import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 01.06.2015.
@@ -43,23 +43,23 @@ public abstract class PerlVariableDeclarationMixin extends PerlLexicalScopeMembe
 
 	@Override
 	@NotNull
-	public List<PsiPerlArrayVariable> getArrayVariableList()
+	public Collection<PsiPerlArrayVariable> getArrayVariableList()
 	{
-		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlArrayVariable.class);
+		return PsiTreeUtil.findChildrenOfType(this, PsiPerlArrayVariable.class);
 	}
 
 	@Override
 	@NotNull
-	public List<PsiPerlHashVariable> getHashVariableList()
+	public Collection<PsiPerlHashVariable> getHashVariableList()
 	{
-		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlHashVariable.class);
+		return PsiTreeUtil.findChildrenOfType(this, PsiPerlHashVariable.class);
 	}
 
 	@Override
 	@NotNull
-	public List<PsiPerlScalarVariable> getScalarVariableList()
+	public Collection<PsiPerlScalarVariable> getScalarVariableList()
 	{
-		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlScalarVariable.class);
+		return PsiTreeUtil.findChildrenOfType(this, PsiPerlScalarVariable.class);
 	}
 
 }

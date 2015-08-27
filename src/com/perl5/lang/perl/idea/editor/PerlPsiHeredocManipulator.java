@@ -45,7 +45,8 @@ public class PerlPsiHeredocManipulator extends AbstractElementManipulator<PerlHe
 
 	@NotNull
 	@Override
-	public TextRange getRangeInElement(@NotNull final PerlHeredocElementImpl element) {
+	public TextRange getRangeInElement(@NotNull final PerlHeredocElementImpl element)
+	{
 		return new TextRange(1, element.getTextLength());
 	}
 }

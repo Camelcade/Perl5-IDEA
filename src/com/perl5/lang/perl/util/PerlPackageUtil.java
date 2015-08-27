@@ -33,9 +33,11 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.refactoring.RenameRefactoringQueue;
+import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
@@ -403,5 +405,21 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
+	public static Collection<PerlUseStatement> getPackageImports(Project project, String packageName)
+	{
+		return getPackageImports(project, packageName, GlobalSearchScope.allScope(project));
+	}
+
+	public static Collection<PerlUseStatement> getPackageImports(Project project, String packageName, PsiFile file)
+	{
+		return getPackageImports(project, packageName, GlobalSearchScope.fileScope(project, file.getVirtualFile()));
+	}
+
+	public static Collection<PerlUseStatement> getPackageImports(Project project, String packageName, GlobalSearchScope scope)
+	{
+		assert packageName != null;
+
+		return StubIndex.getElements(PerlUseStatementStubIndex.KEY, packageName, project, scope, PerlUseStatement.class);
+	}
 
 }

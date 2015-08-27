@@ -14,34 +14,32 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 /**
- * Created by hurricup on 21.07.2015.
+ * Created by hurricup on 18.08.2015.
+ * Implement this interface if package should provide options for autocompletion
  */
-public class MojoliciousPerlFileElement extends PerlFileElement
+public interface IPerlPackageOptionsProvider
 {
-	public MojoliciousPerlFileElement(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, MojoliciousPerlLanguage.INSTANCE);
-	}
-
+	/**
+	 * Returns full list of available options with explanations
+	 *
+	 * @return HashMap of options
+	 */
 	@NotNull
-	@Override
-	public FileType getFileType()
-	{
-		return MojoliciousPerlFileType.INSTANCE;
-	}
+	public Map<String, String> getOptions();
 
-	@Override
-	public String toString()
-	{
-		return "Mojolicious Perl5 Template";
-	}
-
+	/**
+	 * Returns full list of available bundled options, atm they are with other icon
+	 * fixme Probably we should return options with icons?
+	 *
+	 * @return HashMap of bundled options
+	 */
+	@NotNull
+	public Map<String, String> getOptionsBundles();
 }

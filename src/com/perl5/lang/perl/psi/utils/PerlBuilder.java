@@ -42,6 +42,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	protected int bracesLevel = 0;
 	protected boolean currentStringState = false;
 	boolean indexSnapshotDone = false;
+	boolean stringify = false;
 	Project myProject = getProject();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
@@ -168,5 +169,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	public void setCurrentStringState(boolean currentStringState)
 	{
 		this.currentStringState = currentStringState;
+	}
+
+	public boolean isStringify()
+	{
+		return stringify;
+	}
+
+	public boolean setStringify(boolean stringify)
+	{
+		boolean oldState = this.stringify;
+		this.stringify = stringify;
+		return oldState;
 	}
 }

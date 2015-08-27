@@ -24,7 +24,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,7 +63,13 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
 	{
-		PsiElement variableNameElement = parameters.getPosition();
+		PsiElement variableNameElement = parameters.getOriginalPosition();
+
+		if (variableNameElement == null)
+			variableNameElement = parameters.getPosition();
+
+		assert variableNameElement instanceof PerlVariableNameElement;
+
 		PsiElement perlVariable = variableNameElement.getParent();
 
 		// fixme move this to pattern
@@ -71,8 +77,8 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 			return;
 
 		PsiFile perlFile = variableNameElement.getContainingFile();
-		assert perlFile instanceof PerlFileElement;
-		Collection<PerlVariable> declaredVariables = ((PerlFileElement) perlFile).getVisibleLexicalVariables(perlVariable);
+		assert perlFile instanceof PerlFileImpl;
+		Collection<PerlVariable> declaredVariables = ((PerlFileImpl) perlFile).getVisibleLexicalVariables(perlVariable);
 
 		if (perlVariable instanceof PsiPerlScalarVariable)
 			addScalarResults(declaredVariables, resultSet);

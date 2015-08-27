@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
@@ -25,6 +26,8 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariable;
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -76,6 +79,26 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	public static boolean processDefinedGlobalScalarNames(Project project, Processor<String> processor)
 	{
 		return StubIndex.getInstance().processAllKeys(PerlVariableStubIndexKeys.KEY_SCALAR, project, processor);
+	}
+
+	/**
+	 * Returns a map of imported scalars names
+	 *
+	 * @param project   Project to search in
+	 * @param namespace namespace to search in
+	 * @param file      PsiFile to search in
+	 * @return result map
+	 */
+	public static Map<String, Set<String>> getImportedScalars(Project project, String namespace, PsiFile file)
+	{
+		return PerlUtil.getImportedNames(project, namespace, file, new Processor<String>()
+		{
+			@Override
+			public boolean process(String s)
+			{
+				return s != null && !s.isEmpty() && s.charAt(0) == '$';
+			}
+		});
 	}
 
 }

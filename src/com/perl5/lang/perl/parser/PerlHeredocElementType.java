@@ -51,5 +51,4 @@ public class PerlHeredocElementType extends ILazyParseableElementType
 
 		return parser.parse(this, builder).getFirstChildNode();
 	}
-
 }

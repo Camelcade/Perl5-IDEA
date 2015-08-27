@@ -14,34 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.perl.internals.warnings;
 
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.internals.PerlVersion;
 
 /**
- * Created by hurricup on 18.05.2015.
+ * Created by hurricup on 23.08.2015.
  */
-public class EmbeddedPerlFileElement extends PerlFileElement
+public abstract class PerlAbstractWarningTreeElement
 {
-	public EmbeddedPerlFileElement(@NotNull FileViewProvider viewProvider)
+	protected final PerlVersion minVersion;
+	protected final String stringIdentifier;
+
+	public PerlAbstractWarningTreeElement(double minVersion, String stringIdentifier)
 	{
-		super(viewProvider, EmbeddedPerlLanguage.INSTANCE);
+		this.minVersion = new PerlVersion(minVersion);
+		this.stringIdentifier = stringIdentifier;
 	}
 
-	@NotNull
-	@Override
-	public FileType getFileType()
+	public PerlVersion getMinVersion()
 	{
-		return EmbeddedPerlFileType.INSTANCE;
+		return minVersion;
 	}
 
-	@Override
-	public String toString()
+	public String getStringIdentifier()
 	{
-		return "Embedded Perl file";
+		return stringIdentifier;
 	}
-
 }

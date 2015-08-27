@@ -48,7 +48,7 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new EmbeddedPerlFileElement(viewProvider);
+		return new EmbeddedPerlFileImpl(viewProvider);
 	}
 
 }

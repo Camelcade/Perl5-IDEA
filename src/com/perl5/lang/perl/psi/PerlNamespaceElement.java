@@ -16,7 +16,8 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public interface PerlNamespaceElement extends PerlNamedElement
 	 *
 	 * @return list of PerlNameSpaceDefitions
 	 */
-	public List<PerlFileElement> getNamespaceFiles();
+	public List<PerlFileImpl> getNamespaceFiles();
 
 	/**
 	 * Returns canonical namespace name
@@ -67,4 +68,11 @@ public interface PerlNamespaceElement extends PerlNamedElement
 	 * @return canonical name
 	 */
 	public String getCanonicalName();
+
+	/**
+	 * Returns package processor object
+	 *
+	 * @return package processor
+	 */
+	public IPerlPackageProcessor getPackageProcessor();
 }

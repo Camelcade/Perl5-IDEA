@@ -24,6 +24,8 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlMroProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
@@ -31,13 +33,13 @@ import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by hurricup on 28.05.2015.
@@ -103,19 +105,19 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getParentNamespaces();
 
-		List<String> result = new ArrayList<String>();
-		// fixme check for push @ISA, assign to @ISA
+		LinkedHashSet<String> result = new LinkedHashSet<String>();
 
-		PsiElement namespaceBlock = getBlock();
+		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
+			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof IPerlPackageParentsProvider)
+				result.addAll(((IPerlPackageParentsProvider) useStatement.getPackageProcessor()).getParentsList(useStatement));
 
-		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(namespaceBlock, PsiPerlUseStatement.class))
-			if (useStatement.isParentPragma())
-				if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this)    // check that it's not nested package use
-					for (String parentPackage : useStatement.getStringParameters())
-						if (parentPackage != null && !parentPackage.equals("-norequire"))
-							result.add(parentPackage);
+		List<String> isa = getArrayAsList("ISA");
 
-		return result;
+		// fixme, acutally isa might overwrite isa from packages
+		if (isa != null)
+			result.addAll(isa);
+
+		return new ArrayList<String>(result);
 	}
 
 	@Nullable
@@ -138,14 +140,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getMroType();
 
-		PerlUseStatement useMroStatement = PsiTreeUtil.findChildOfType(this, PsiPerlUseStatementMro.class);
-
-		if (useMroStatement != null && PsiTreeUtil.getParentOfType(useMroStatement, PerlNamespaceDefinition.class) == this)
-		{
-			List<String> parameters = useMroStatement.getStringParameters();
-			if (parameters.size() > 0 && "c3".equals(parameters.get(0)))
-				return PerlMroType.C3;
-		}
+		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
+			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof IPerlMroProvider)
+				return ((IPerlMroProvider) useStatement.getPackageProcessor()).getMroType(useStatement);
 
 		return PerlMroType.DFS;
 	}
@@ -153,6 +150,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public PerlMro getMro()
 	{
+		// fixme this should be another EP
 		if (getMroType() == PerlMroType.C3)
 			return PerlMroC3.INSTANCE;
 		else
@@ -177,6 +175,93 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
 			return stub.isDeprecated();
-		return getAnnotationDeprectaed() != null;
+		return getAnnotationDeprecated() != null;
+	}
+
+	@Override
+	public List<String> getISA()
+	{
+		return getArrayAsList("ISA");
+	}
+
+	@Override
+	public List<String> getEXPORT()
+	{
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getEXPORT();
+
+		return getArrayAsList("EXPORT");
+	}
+
+	@Override
+	public List<String> getEXPORT_OK()
+	{
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getEXPORT_OK();
+
+		return getArrayAsList("EXPORT_OK");
+	}
+
+	@Override
+	public Map<String, List<String>> getEXPORT_TAGS()
+	{
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+			return stub.getEXPORT_TAGS();
+
+		return getHashAsMap("EXPORT_TAGS");
+	}
+
+	@Override
+	public Map<String, Set<String>> getImportedSubsNames()
+	{
+		return PerlSubUtil.getImportedSubs(getProject(), getPackageName(), getContainingFile());
+	}
+
+	/**
+	 * Searches for array by name and returns distinct list of string values
+	 *
+	 * @param arrayName array name without a sigil
+	 * @return distinct list of string values
+	 */
+	public List<String> getArrayAsList(String arrayName)
+	{
+		HashSet<String> result = null;
+		for (PerlVariable arrayVariable : PsiTreeUtil.findChildrenOfType(this, PsiPerlArrayVariable.class))
+			if (arrayVariable.getNamespaceElement() == null
+					&& arrayName.equals(arrayVariable.getName())
+					&& PsiTreeUtil.getParentOfType(arrayVariable, PerlNamespaceDefinition.class) == this
+					)
+			{
+				PsiElement assignExpression = arrayVariable.getParent();
+				PsiElement assignElement = arrayVariable;
+
+				if (assignExpression instanceof PsiPerlVariableDeclarationGlobal)    // proceed our @ARRAY =
+				{
+					assignElement = assignExpression;
+					assignExpression = assignExpression.getParent();
+				}
+
+				// checks for @ARRAY = ...
+				if (assignExpression instanceof PsiPerlAssignExpr && assignElement.getNextSibling() != null)// not leftside element
+					for (PerlStringContentElement element : PerlPsiUtil.findStringElments(assignExpression.getLastChild()))
+					{
+						if (result == null)
+							result = new HashSet<String>();
+						result.add(element.getText());
+					}
+			}
+
+//		System.err.println("Searched for @" + arrayName + " found: " + result);
+
+		return result == null ? Collections.<String>emptyList() : new ArrayList<String>(result);
+	}
+
+	public Map<String, List<String>> getHashAsMap(String hashMap)
+	{
+		// fixme NYI
+		return Collections.emptyMap();
 	}
 }

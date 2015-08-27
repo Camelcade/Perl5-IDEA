@@ -17,18 +17,20 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContainer
+public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementStub>, PerlNamespaceElementContainer
 {
 	public String getPackageName();
-
-	public boolean isParentPragma();
 
 	public boolean isPragma();
 
@@ -36,7 +38,15 @@ public interface PerlUseStatement extends PsiElement, PerlNamespaceElementContai
 
 	public boolean isPragmaOrVersion();
 
-	public List<String> getStringParameters();
+	public List<String> getImportParameters();
 
 	public PsiElement getVersionElement();
+
+	public IPerlPackageProcessor getPackageProcessor();
+
+	@Nullable
+	public PsiPerlExpr getExpr();
+
+	public String getOuterPackageName();
+
 }

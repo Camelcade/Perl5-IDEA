@@ -36,8 +36,9 @@ import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
-import com.perl5.lang.perl.psi.impl.PerlFileElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
@@ -104,7 +105,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new PerlFileElement(viewProvider);
+		return new PerlFileImpl(viewProvider);
 	}
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
@@ -122,6 +123,8 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			return new PerlHeredocElementImpl(node);
 		else if (elementType == HEREDOC)
 			return new PerlHeredocElementImpl(node);
+		else if (elementType == PARSABLE_STRING)
+			return new PerlParsableStringWrapperlImpl(node);
 		return PerlElementTypes.Factory.createElement(node);
 	}
 }

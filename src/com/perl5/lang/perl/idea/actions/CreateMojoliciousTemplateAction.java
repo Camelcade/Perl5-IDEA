@@ -16,9 +16,7 @@
 
 package com.perl5.lang.perl.idea.actions;
 
-import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
-import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.PerlIcons;
@@ -26,7 +24,7 @@ import com.perl5.PerlIcons;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class CreateMojoliciousTemplateAction extends CreateFileFromTemplateAction implements DumbAware
+public class CreateMojoliciousTemplateAction extends PerlFileFromTemplateAction
 {
 	private static final String NEW_PERL_FILE = "New Mojolicious Template";
 

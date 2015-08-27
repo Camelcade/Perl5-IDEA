@@ -27,11 +27,18 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -48,20 +55,67 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 
 		PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
-		if (useStatement != null && useStatement.isParentPragma())
+		if (useStatement != null)
 		{
-			if ("parent".equals(useStatement.getPackageName()))
-				resultSet.addElement(LookupElementBuilder.create("-norequire").withIcon(PerlIcons.PERL_OPTION).withInsertHandler(USE_OPTION_INSERT_HANDLER));
-
-			PerlPackageUtil.processPackageFilesForPsiElement(parameters.getPosition(), new Processor<String>()
+			IPerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+			if (packageProcessor != null)
 			{
-				@Override
-				public boolean process(String s)
+				// fixme we should allow lookup elements customization by package processor
+				if (packageProcessor instanceof IPerlPackageOptionsProvider)
 				{
-					resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
-					return true;
+					Map<String, String> options = ((IPerlPackageOptionsProvider) packageProcessor).getOptions();
+
+					for (Map.Entry<String, String> option : options.entrySet())
+						resultSet.addElement(LookupElementBuilder
+								.create(option.getKey())
+								.withTypeText(option.getValue(), true)
+								.withIcon(PerlIcons.PERL_OPTION)
+								.withInsertHandler(USE_OPTION_INSERT_HANDLER));
+
+					options = ((IPerlPackageOptionsProvider) packageProcessor).getOptionsBundles();
+
+					for (Map.Entry<String, String> option : options.entrySet())
+						resultSet.addElement(LookupElementBuilder
+								.create(option.getKey())
+								.withTypeText(option.getValue(), true)
+								.withIcon(PerlIcons.PERL_OPTIONS)
+								.withInsertHandler(USE_OPTION_INSERT_HANDLER));
 				}
-			});
+
+				if (packageProcessor instanceof IPerlPackageParentsProvider && ((IPerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
+					PerlPackageUtil.processPackageFilesForPsiElement(parameters.getPosition(), new Processor<String>()
+					{
+						@Override
+						public boolean process(String s)
+						{
+							resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
+							return true;
+						}
+					});
+
+				String packageName = useStatement.getPackageName();
+				if (packageName != null)
+					for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+					{
+						HashSet<String> export = new HashSet<String>(namespaceDefinition.getEXPORT());
+						HashSet<String> exportOk = new HashSet<String>(namespaceDefinition.getEXPORT_OK());
+						// fixme we should resove subs here and put them in with signatures
+						for (String subName : export)
+							resultSet.addElement(LookupElementBuilder
+											.create(subName)
+											.withIcon(PerlIcons.SUB_GUTTER_ICON)
+											.withTypeText("default", true)
+											.withInsertHandler(USE_OPTION_INSERT_HANDLER)
+							);
+						for (String subName : exportOk)
+							resultSet.addElement(LookupElementBuilder
+											.create(subName)
+											.withIcon(PerlIcons.SUB_GUTTER_ICON)
+											.withTypeText("optional", true)
+											.withInsertHandler(USE_OPTION_INSERT_HANDLER)
+							);
+					}
+			}
 		}
 	}
 

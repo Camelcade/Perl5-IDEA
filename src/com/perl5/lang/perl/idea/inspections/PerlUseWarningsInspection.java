@@ -23,6 +23,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.embedded.EmbeddedPerlFileType;
 import com.perl5.lang.mojolicious.MojoliciousPerlFileType;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlStrictProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlWarningsProvider;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -48,7 +50,7 @@ public class PerlUseWarningsInspection extends PerlInspection
 					return;
 
 				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-					if ("warnings".equals(useStatement.getPackageName()))
+					if( useStatement.getPackageProcessor() instanceof IPerlWarningsProvider)
 						return;
 				holder.registerProblem(
 						file,

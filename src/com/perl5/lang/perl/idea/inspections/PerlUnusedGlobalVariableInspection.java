@@ -23,6 +23,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlUseVarsStatement;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationGlobal;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,6 +51,12 @@ public class PerlUnusedGlobalVariableInspection extends PerlUnusedLexicalVariabl
 	{
 		return new PerlVisitor()
 		{
+			@Override
+			public void visitUseVarsStatement(@NotNull PsiPerlUseVarsStatement o)
+			{
+				checkDeclaration(holder, o);
+			}
+
 			@Override
 			public void visitVariableDeclarationGlobal(@NotNull PsiPerlVariableDeclarationGlobal o)
 			{
