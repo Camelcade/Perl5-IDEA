@@ -78,7 +78,7 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder>
 	@Override
 	public Icon getNodeIcon(@Deprecated boolean isOpened)
 	{
-		return PerlIcons.PM_FILE;
+		return PerlIcons.PERL_LANGUAGE;
 	}
 
 	@NotNull

@@ -64,4 +64,25 @@ public interface PerlNamespaceContainer extends PsiElement
 	 * @return map of imports
 	 */
 	public Map<String, Set<String>> getImportedSubsNames();
+
+	/**
+	 * Returns map of imported scalars as map package => qw(scalars)
+	 *
+	 * @return map of imports
+	 */
+	public Map<String, Set<String>> getImportedScalarNames();
+
+	/**
+	 * Returns map of imported arrays as map package => qw(arrays)
+	 *
+	 * @return map of imports
+	 */
+	public Map<String, Set<String>> getImportedArrayNames();
+
+	/**
+	 * Returns map of imported hashes as map package => qw(hashes)
+	 *
+	 * @return map of imports
+	 */
+	public Map<String, Set<String>> getImportedHashNames();
 }

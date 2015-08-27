@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.40 release candidate</version>
+    <version>0.99 RC</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -44,10 +44,16 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.40 release candidate changes:</p>
+      <p>0.99 RC changes:</p>
 
       <p><b>Features:</b>
       <ul>
+      <li>Implemented import mechanic support:
+      <ul>
+      <li>Exporter's arrays <code>@EXPORT</code>, <code>@EXPORT_OK</code>. <code>@EXPORT_TAGS</code> support and tags import are not yet implemented.</li>
+      <li>Importing of subs and variables.</li>
+      </ul>
+      </li>
       <li>Implemented extension point for PackageProcessors, describing unusual packages behaviour and provide packages options. NB: inteface is experimental and subject to change.
       <ul>
         <li>Implemented processors for <code>base</code>, <code>parent</code>, <code>strict</code>, <code>feature</code>, <code>mro</code> and <code>warnings</code> pragmas.

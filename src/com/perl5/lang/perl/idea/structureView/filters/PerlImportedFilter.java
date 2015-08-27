@@ -48,7 +48,7 @@ public class PerlImportedFilter implements Filter
 	@Override
 	public ActionPresentation getPresentation()
 	{
-		return new ActionPresentationData("Show imported [NYI]", null, AllIcons.Welcome.ImportProject);
+		return new ActionPresentationData("Show imported", null, AllIcons.Welcome.ImportProject);
 	}
 
 	@NotNull

@@ -22,8 +22,10 @@ import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
@@ -31,11 +33,10 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by hurricup on 15.08.2015.
@@ -124,7 +125,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 		if (itemPresentation == null)
 			itemPresentation = new PerlItemPresentationSimple(myElement, "FIXME");
-		else if (isInherited() && itemPresentation instanceof PerlItemPresentationBase)
+		else if ((isInherited() || isImported()) && itemPresentation instanceof PerlItemPresentationBase)
 			if (getValue() instanceof PerlDeprecatable && ((PerlDeprecatable) getValue()).isDeprecated())
 				((PerlItemPresentationBase) itemPresentation).setAttributesKey(PerlSyntaxHighlighter.UNUSED_DEPRECATED);
 			else
@@ -143,10 +144,12 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition)
 		{
+			// nested namespaces
 			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
 					result.add(new PerlStructureViewElement(child));
 
+			// global variables
 			for (PsiPerlVariableDeclarationGlobal child : PsiTreeUtil.findChildrenOfType(myElement, PsiPerlVariableDeclarationGlobal.class))
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
 				{
@@ -157,6 +160,110 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 					for (PerlVariable variable : child.getHashVariableList())
 						result.add(new PerlVariableStructureViewElement(variable));
 				}
+
+			Project project = myElement.getProject();
+			GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
+
+			// imported scalars
+			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedScalarNames().entrySet())
+				for (String variableName : importEntry.getValue())
+				{
+					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+
+					Collection<PerlVariable> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
+
+					for (PerlVariable variable : variables)
+						result.add(new PerlVariableStructureViewElement(variable).setImported());
+
+					// globs
+					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
+					if (items.size() == 0)
+						items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
+
+					for (PerlGlobVariable item : items)
+						result.add(new PerlGlobStructureViewElement(item).setImported());
+				}
+
+			// imported arrays
+			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedArrayNames().entrySet())
+				for (String variableName : importEntry.getValue())
+				{
+					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+
+					Collection<PerlVariable> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
+
+					for (PerlVariable variable : variables)
+						result.add(new PerlVariableStructureViewElement(variable).setImported());
+
+					// globs
+					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
+					if (items.size() == 0)
+						items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
+
+					for (PerlGlobVariable item : items)
+						result.add(new PerlGlobStructureViewElement(item).setImported());
+				}
+
+			// imported hashes
+			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedHashNames().entrySet())
+				for (String variableName : importEntry.getValue())
+				{
+					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+
+					Collection<PerlVariable> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
+
+					for (PerlVariable variable : variables)
+						result.add(new PerlVariableStructureViewElement(variable).setImported());
+
+					// globs
+					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
+					if (items.size() == 0)
+						items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
+
+					for (PerlGlobVariable item : items)
+						result.add(new PerlGlobStructureViewElement(item).setImported());
+				}
+
+
+			// Imported subs
+			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedSubsNames().entrySet())
+				for (String subName : importEntry.getValue())
+				{
+					String canonicalName = importEntry.getKey() + "::" + subName;
+
+					// declarations
+					Collection<PsiPerlSubDeclaration> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);
+					if (subDeclarations.size() == 0)
+						subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName);
+
+					for (PsiPerlSubDeclaration item : subDeclarations)
+						result.add(new PerlSubStructureViewElement(item).setImported());
+
+					// definitions
+					Collection<PsiPerlSubDefinition> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
+					if (subDefinitions.size() == 0)
+						subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName);
+
+					for (PerlSubDefinition item : subDefinitions)
+						result.add(new PerlSubStructureViewElement(item).setImported());
+
+					// constants
+					Collection<PerlConstant> constantsDefinitions = PerlSubUtil.getConstantsDefinitions(project, canonicalName, projectScope);
+					if (constantsDefinitions.size() == 0)
+						constantsDefinitions = PerlSubUtil.getConstantsDefinitions(project, canonicalName);
+
+					for (PerlConstant item : constantsDefinitions)
+						result.add(new PerlConstantStructureViewElement(item).setImported());
+
+					// globs
+					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
+					if (items.size() == 0)
+						items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
+
+					for (PerlGlobVariable item : items)
+						result.add(new PerlGlobStructureViewElement(item).setImported());
+				}
+
 
 			for (PerlGlobVariable child : PsiTreeUtil.findChildrenOfType(myElement, PerlGlobVariable.class))
 				if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
@@ -182,6 +289,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 					implementedMethods.add(child.getName());
 					result.add(new PerlSubStructureViewElement(child));
 				}
+
 		}
 
 		if (myElement instanceof PerlNamespaceDefinition)
@@ -207,4 +315,5 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 		return result.toArray(new TreeElement[result.size()]);
 	}
+
 }
