@@ -70,7 +70,7 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 						((PerlSubReference) reference).multiResolve(false);
 
 						if (((PerlSubReference) reference).isConstant())
-							holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
+							holder.createInfoAnnotation(element, ((PerlSubReference)reference).getConstantValue()).setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
 						else if (((PerlSubReference) reference).isAutoloaded())
 							holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
 						else
