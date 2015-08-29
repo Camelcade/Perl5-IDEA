@@ -287,6 +287,9 @@ limitations under the License.
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
     stubClass("use_statement")="com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub"
 
+    implements("constant_definition")="com.perl5.lang.perl.psi.IPerlConstantDefinition"
+    mixin("constant_definition")="com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin"
+
     extends("use_statement.*")=statement
     extends("no_statement")=statement
     extends("condition_statement|condition_statement_while|for_list_statement|for_iterator_statement")=statement
