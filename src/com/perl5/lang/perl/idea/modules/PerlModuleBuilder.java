@@ -30,6 +30,7 @@ import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 
@@ -39,10 +40,17 @@ import java.util.List;
 
 /**
  * Created by hurricup on 28.05.2015.
+ * Partially cloned from JavaModuleBuilder
  */
 public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuilder
 {
+	private final List<Pair<String, String>> myModuleLibraries = new ArrayList<Pair<String, String>>();
 	private List<Pair<String, String>> mySourcePaths;
+
+	private static String getUrlByPath(final String path)
+	{
+		return VfsUtil.getUrlForLibraryRoot(new File(path));
+	}
 
 	@Override
 	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException
@@ -87,9 +95,7 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
 			Library.ModifiableModel modifiableModel = library.getModifiableModel();
 			modifiableModel.addRoot(getUrlByPath(moduleLibraryPath), OrderRootType.CLASSES);
 			if (sourceLibraryPath != null)
-			{
 				modifiableModel.addRoot(getUrlByPath(sourceLibraryPath), OrderRootType.SOURCES);
-			}
 			modifiableModel.commit();
 		}
 	}
@@ -128,9 +134,20 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
 	public void addSourcePath(Pair<String, String> sourcePathInfo)
 	{
 		if (mySourcePaths == null)
-		{
 			mySourcePaths = new ArrayList<Pair<String, String>>();
-		}
+
 		mySourcePaths.add(sourcePathInfo);
 	}
+
+	public void addModuleLibrary(String moduleLibraryPath, String sourcePath)
+	{
+		myModuleLibraries.add(Pair.create(moduleLibraryPath, sourcePath));
+	}
+
+//	@Nullable
+//	@Override
+//	public ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
+//		return PerlModuleType.getInstance().modifySettingsStep(settingsStep, this);
+//	}
+
 }

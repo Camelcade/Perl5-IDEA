@@ -94,4 +94,17 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder>
 			}
 		}};
 	}
+
+//	@Nullable
+//	@Override
+//	public ModuleWizardStep modifyProjectTypeStep(@NotNull SettingsStep settingsStep, @NotNull final ModuleBuilder moduleBuilder) {
+//		// fixme refactor
+//		return ProjectWizardStepFactory.getInstance().createJavaSettingsStep(settingsStep, moduleBuilder, new Condition<SdkTypeId>() {
+//			@Override
+//			public boolean value(SdkTypeId sdkType) {
+//				return moduleBuilder.isSuitableSdkType(sdkType);
+//			}
+//		});
+//	}
+
 }
