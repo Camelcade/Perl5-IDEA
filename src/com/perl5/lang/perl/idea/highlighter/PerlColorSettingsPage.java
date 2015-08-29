@@ -168,4 +168,6 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	{
 		return "Perl5";
 	}
+
+
 }

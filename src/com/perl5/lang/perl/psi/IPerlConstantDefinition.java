@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public interface IPerlConstantDefinition
+public interface IPerlConstantDefinition extends PsiElement
 {
 	/**
 	 * Returns constant defenition value PsiElement
