@@ -29,4 +29,6 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	{
 		super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE, PerlLibrarySourceRootType.INSTANCE);
 	}
+
+
 }

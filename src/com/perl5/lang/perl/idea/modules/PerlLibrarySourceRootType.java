@@ -30,4 +30,7 @@ public class PerlLibrarySourceRootType extends JpsElementTypeWithDummyProperties
 	private PerlLibrarySourceRootType()
 	{
 	}
+
+
 }
+

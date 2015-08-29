@@ -80,7 +80,7 @@
          on how to target different products -->
 
     <depends>com.intellij.modules.lang</depends>
-    <depends>com.intellij.modules.java</depends>
+    <depends optional="true" config-file="java-depts.xml">com.intellij.modules.java</depends>
 
     <extensionPoints>
         <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
@@ -117,8 +117,6 @@
 
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
 
-        <projectStructure.sourceRootEditHandler
-                implementation="com.perl5.lang.perl.idea.modules.PerlIncludeLibrarySourceRootEditHandler"/>
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.PerlTypedHandler" id="PerlTypedHandler"/>
 
@@ -126,8 +124,16 @@
 
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
         <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
+
+        <!-- Should be in java-depths ? -->
         <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
+
         <moduleConfigurationEditorProvider implementation="com.perl5.lang.perl.idea.modules.PerlModuleConfigurationEditorProvider" order="first"/>
+
+        <projectStructure.sourceRootEditHandler
+                implementation="com.perl5.lang.perl.idea.modules.PerlIncludeLibrarySourceRootEditHandler"/>
+        <!-- End of Should be in java-depths ? -->
+
 
         <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
 
@@ -355,6 +361,13 @@
 
             <add-to-group group-id="NewGroup" anchor="first"/>
         </group>
+
+        <!-- Should be in java depts ? -->
+        <action id="Perl.MarkAsLibraryDirectory"
+                class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction">
+            <add-to-group group-id="MarkRootGroup"/>
+        </action>
+
 
     </actions>
 

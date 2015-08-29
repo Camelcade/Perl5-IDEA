@@ -24,12 +24,13 @@ import java.util.regex.Pattern;
  */
 public class PerlSdkType extends SdkType
 {
+	public static final String PERL_SDK_TYPE_ID = "Perl5 Interpreter";
 
 	Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
 
 	public PerlSdkType()
 	{
-		super("Perl5 Interpreter");
+		super(PERL_SDK_TYPE_ID);
 	}
 
 	@NotNull
