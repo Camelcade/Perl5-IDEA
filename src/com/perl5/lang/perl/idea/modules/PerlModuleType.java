@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.modules;
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
-import com.intellij.ide.util.projectWizard.ProjectJdkForModuleStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.module.ModuleTypeManager;
@@ -85,7 +84,7 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder>
 	@Override
 	public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull final PerlModuleBuilder moduleBuilder, @NotNull ModulesProvider modulesProvider)
 	{
-		return new ModuleWizardStep[]{new ProjectJdkForModuleStep(wizardContext, PerlSdkType.findInstance(PerlSdkType.class))
+		return new ModuleWizardStep[]{new PerlInterpreterForModuleStep(wizardContext, PerlSdkType.findInstance(PerlSdkType.class))
 		{
 			public void updateDataModel()
 			{
