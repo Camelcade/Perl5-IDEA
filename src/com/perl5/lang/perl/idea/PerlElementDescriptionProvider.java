@@ -53,7 +53,7 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 				return "Namespace definition";
 			else if (element instanceof PerlFileImpl)
 				return "perl file";
-			else if (element instanceof PsiPackage)
+			else if (element instanceof PsiDirectoryContainer)
 				return "Directory";
 			else if (element instanceof PerlGlobVariable)
 				return "Typeglob";

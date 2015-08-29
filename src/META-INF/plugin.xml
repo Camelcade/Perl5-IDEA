@@ -125,15 +125,6 @@
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
         <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
-        <!-- Should be in java-depths ? -->
-        <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
-
-        <moduleConfigurationEditorProvider implementation="com.perl5.lang.perl.idea.modules.PerlModuleConfigurationEditorProvider" order="first"/>
-
-        <projectStructure.sourceRootEditHandler
-                implementation="com.perl5.lang.perl.idea.modules.PerlIncludeLibrarySourceRootEditHandler"/>
-        <!-- End of Should be in java-depths ? -->
-
 
         <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
 
@@ -361,12 +352,6 @@
 
             <add-to-group group-id="NewGroup" anchor="first"/>
         </group>
-
-        <!-- Should be in java depts ? -->
-        <action id="Perl.MarkAsLibraryDirectory"
-                class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction">
-            <add-to-group group-id="MarkRootGroup"/>
-        </action>
 
 
     </actions>
