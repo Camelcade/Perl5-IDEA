@@ -16,28 +16,82 @@
 
 package com.perl5.lang.perl.idea.modules;
 
-import com.intellij.ide.util.projectWizard.JavaModuleBuilder;
+import com.intellij.ide.util.projectWizard.ModuleBuilder;
+import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.SdkTypeId;
+import com.intellij.openapi.roots.CompilerModuleExtension;
+import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.roots.libraries.Library;
+import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlModuleBuilder extends JavaModuleBuilder
+public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuilder
 {
 	private List<Pair<String, String>> mySourcePaths;
 
 	@Override
 	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException
 	{
-		super.setupRootModel(rootModel);
+		final CompilerModuleExtension compilerModuleExtension = rootModel.getModuleExtension(CompilerModuleExtension.class);
+		compilerModuleExtension.setExcludeOutput(true);
+		if (myJdk != null)
+		{
+			rootModel.setSdk(myJdk);
+		} else
+		{
+			rootModel.inheritSdk();
+		}
+
+		ContentEntry contentEntry = doAddContentEntry(rootModel);
+		if (contentEntry != null)
+		{
+			final List<Pair<String, String>> sourcePaths = getSourcePaths();
+
+			if (sourcePaths != null)
+			{
+				for (final Pair<String, String> sourcePath : sourcePaths)
+				{
+					String first = sourcePath.first;
+					new File(first).mkdirs();
+					final VirtualFile sourceRoot = LocalFileSystem.getInstance()
+							.refreshAndFindFileByPath(FileUtil.toSystemIndependentName(first));
+					if (sourceRoot != null)
+					{
+						contentEntry.addSourceFolder(sourceRoot, false, sourcePath.second);
+					}
+				}
+			}
+		}
+
+		LibraryTable libraryTable = rootModel.getModuleLibraryTable();
+		for (Pair<String, String> libInfo : myModuleLibraries)
+		{
+			final String moduleLibraryPath = libInfo.first;
+			final String sourceLibraryPath = libInfo.second;
+			Library library = libraryTable.createLibrary();
+			Library.ModifiableModel modifiableModel = library.getModifiableModel();
+			modifiableModel.addRoot(getUrlByPath(moduleLibraryPath), OrderRootType.CLASSES);
+			if (sourceLibraryPath != null)
+			{
+				modifiableModel.addRoot(getUrlByPath(sourceLibraryPath), OrderRootType.SOURCES);
+			}
+			modifiableModel.commit();
+		}
 	}
 
 	@Override
