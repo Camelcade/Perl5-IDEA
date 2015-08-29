@@ -16,17 +16,18 @@
 
 package com.perl5.lang.perl.idea.modules;
 
-import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
-import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
-import org.jetbrains.jps.model.java.JavaSourceRootType;
+import org.jetbrains.jps.model.JpsDummyElement;
+import org.jetbrains.jps.model.ex.JpsElementTypeWithDummyProperties;
+import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 /**
- * Created by hurricup on 07.06.2015.
+ * Created by hurricup on 29.08.2015.
  */
-public class PerlContentEntriesEditor extends CommonContentEntriesEditor
+public class PerlLibrarySourceRootType extends JpsElementTypeWithDummyProperties implements JpsModuleSourceRootType<JpsDummyElement>
 {
-	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state)
+	public static final PerlLibrarySourceRootType INSTANCE = new PerlLibrarySourceRootType();
+
+	private PerlLibrarySourceRootType()
 	{
-		super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE, PerlLibrarySourceRootType.INSTANCE);
 	}
 }

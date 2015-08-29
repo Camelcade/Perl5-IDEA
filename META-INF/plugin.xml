@@ -117,6 +117,8 @@
 
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
 
+        <projectStructure.sourceRootEditHandler
+                implementation="com.perl5.lang.perl.idea.modules.PerlIncludeLibrarySourceRootEditHandler"/>
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.PerlTypedHandler" id="PerlTypedHandler"/>
 

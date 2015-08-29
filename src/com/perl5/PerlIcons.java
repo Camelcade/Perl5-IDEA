@@ -36,6 +36,8 @@ public class PerlIcons
 	public static final Icon SCRIPT_FILE = IconLoader.getIcon("/com/perl5/icons/perl5classic.png");
 	public static final Icon XS_FILE = IconLoader.getIcon("/com/perl5/icons/xsicon.png");
 
+	public static final Icon LIB_ROOT = IconLoader.getIcon("/com/perl5/icons/library_root.png");
+
 	public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/com/perl5/icons/embeddedperl.png");
 	public static final Icon PACKAGE_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/package_gutter_icon.png");
 	public static final Icon PRAGMA_GUTTER_ICON = IconLoader.getIcon("/com/perl5/icons/pragmaicon.png");
