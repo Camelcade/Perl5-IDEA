@@ -16,15 +16,12 @@
 
 <idea-plugin version="2">
     <extensions defaultExtensionNs="com.intellij">
-        <compileServer.plugin classpath="camelcade.jar"/>
 
-        <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
+    <compileServer.plugin classpath="camelcade.jar"/>
 
         <moduleConfigurationEditorProvider
                 implementation="com.perl5.lang.perl.idea.modules.PerlModuleConfigurationEditorProvider" order="first"/>
 
-        <projectStructure.sourceRootEditHandler
-                implementation="com.perl5.lang.perl.idea.modules.PerlIncludeLibrarySourceRootEditHandler"/>
 
     </extensions>
     <project-components>

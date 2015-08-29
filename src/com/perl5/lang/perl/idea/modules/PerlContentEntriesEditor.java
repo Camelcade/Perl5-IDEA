@@ -28,6 +28,7 @@ import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
+import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import java.util.Comparator;
 
@@ -39,6 +40,11 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state)
 	{
 		super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE, JpsPerlLibrarySourceRootType.INSTANCE);
+	}
+
+	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state, JpsModuleSourceRootType<?>... rootTypes)
+	{
+		super(moduleName, state, rootTypes);
 	}
 
 	@Override
@@ -75,4 +81,5 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 		rootModel.rearrangeOrderEntries(entries);
 
 	}
+
 }

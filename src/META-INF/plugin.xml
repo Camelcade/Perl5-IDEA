@@ -80,7 +80,7 @@
          on how to target different products -->
 
     <depends>com.intellij.modules.lang</depends>
-    <depends optional="true" config-file="java-depts.xml">com.intellij.modules.java</depends>
+    <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
 
     <extensionPoints>
         <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
@@ -114,6 +114,15 @@
         <internalFileTemplate name="Perl5 script"/>
         <internalFileTemplate name="Perl5 embedded"/>
         <internalFileTemplate name="Perl5 mojolicious"/>
+
+
+        <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
+
+        <projectConfigurable displayName="Perl paths" groupId="language"
+                             provider="com.perl5.lang.perl.idea.modules.PerlConfigurableProvider"/>
+        <projectStructure.sourceRootEditHandler
+                implementation="com.perl5.lang.perl.idea.modules.PerlIncludeLibrarySourceRootEditHandler"/>
+
 
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
 
