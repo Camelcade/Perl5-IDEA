@@ -34,7 +34,7 @@ public class PerlIncludeLibrarySourceRootEditHandler extends ModuleSourceRootEdi
 {
 	public PerlIncludeLibrarySourceRootEditHandler()
 	{
-		super(PerlLibrarySourceRootType.INSTANCE);
+		super(JpsPerlLibrarySourceRootType.INSTANCE);
 	}
 
 	@NotNull

@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.actions;
 import com.intellij.ide.projectView.actions.MarkSourceRootAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
-import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +30,7 @@ public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction
 {
 	public PerlMarkLibrarySourceRootAction()
 	{
-		super(PerlLibrarySourceRootType.INSTANCE);
+		super(JpsPerlLibrarySourceRootType.INSTANCE);
 	}
 
 	@Override

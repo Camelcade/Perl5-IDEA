@@ -34,7 +34,7 @@ public class JpsPerlModelSerializerExtension extends JpsModelSerializerExtension
 	@Override
 	public List<? extends JpsModuleSourceRootPropertiesSerializer<?>> getModuleSourceRootPropertiesSerializers()
 	{
-		return Collections.singletonList(new JpsModuleSourceRootDummyPropertiesSerializer(PerlLibrarySourceRootType.INSTANCE, "perl-library"));
+		return Collections.singletonList(new JpsModuleSourceRootDummyPropertiesSerializer(JpsPerlLibrarySourceRootType.INSTANCE, "perl-library"));
 	}
 
 }
