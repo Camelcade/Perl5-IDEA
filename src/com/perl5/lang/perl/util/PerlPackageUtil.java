@@ -43,7 +43,6 @@ import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -283,7 +282,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 			if (oldInnermostRoot != null)
 			{
-				String oldRelativePath = Paths.get(oldInnermostRoot.getPath()).relativize(Paths.get(oldPath)).toString();
+				String oldRelativePath = oldPath.substring(oldInnermostRoot.getPath().length());
 				String oldPackageName = PerlPackageUtil.getPackageNameByPath(oldRelativePath);
 
 				if (!oldPackageName.equals(newPackageName))
@@ -345,7 +344,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 						{
 							String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
 							VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForPsiElement(psiFile), newPackagePath);
-							String newRelativePath = Paths.get(newInnermostRoot.getPath()).relativize(Paths.get(newPackagePath)).toString();
+							String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
 							String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
 							queue.addElement(inboundReference.getElement(), newPackageName);
