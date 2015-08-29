@@ -59,6 +59,7 @@
       <li>use strict and use warnings inspections now checks for any known  modules (atm <code>strict</code>, <code>warnings</code> and <code>Mojo::Base</code>)</li>
       <li>implemented bareword arguments support for use/no, like <code>use Mojo::Base -base;</code></li>
       <li>implemented <code>use vars</code> pragma support. Only following form works right atm: <code>use vars qw(...);</code></li>
+      <li>updated color settings page to properly show respective elements</li>
       </ul>
       </p>
 

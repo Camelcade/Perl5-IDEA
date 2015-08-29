@@ -45,8 +45,7 @@ public class PerlAnnotatorNamespaces extends PerlAnnotator
 		} else if (namespaceElement.isPragma())    // fixme with such way pragma can't be deprecated
 		{
 			Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
-			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE);
-			annotation.setEnforcedTextAttributes(PerlSyntaxHighlighter.BOLD_ITALIC);
+			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PRAGMA);
 		} else if (!(parent instanceof PerlVariable || parent instanceof PerlGlobVariable))
 			decorateElement(
 					holder.createInfoAnnotation(namespaceElement, null),

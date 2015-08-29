@@ -44,14 +44,15 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributes BOLD = new TextAttributes(null, null, null, null, Font.BOLD);
 	public static final TextAttributes ITALIC = new TextAttributes(null, null, null, null, Font.ITALIC);
 	public static final TextAttributes BOLD_ITALIC = TextAttributes.merge(BOLD, ITALIC);
+
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 	public static final TextAttributesKey EMBED_MARKER = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
 	public static final TextAttributesKey PERL_NUMBER = createTextAttributesKey("PERL_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 	public static final TextAttributesKey PERL_VERSION = createTextAttributesKey("PERL_VERSION", PERL_NUMBER);
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
-	public static final TextAttributesKey PERL_COMMENT_BLOCK = createTextAttributesKey("PERL_COMMENT_BLOCK", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
 	public static final TextAttributesKey PERL_HANDLE = createTextAttributesKey("PERL_HANDLE", DefaultLanguageHighlighterColors.CONSTANT);
 	public static final TextAttributesKey PERL_PACKAGE = createTextAttributesKey("PERL_PACKAGE", DefaultLanguageHighlighterColors.CLASS_NAME);
+	public static final TextAttributesKey PERL_PRAGMA = createTextAttributesKey("PERL_PRAGMA", TextAttributes.merge(PERL_PACKAGE.getDefaultAttributes(), BOLD_ITALIC));
 	public static final TextAttributesKey PERL_PACKAGE_DEFINITION = createTextAttributesKey("PERL_PACKAGE_DEFINITION", PERL_PACKAGE);
 	public static final TextAttributesKey PERL_SUB = createTextAttributesKey("PERL_SUB", DefaultLanguageHighlighterColors.FUNCTION_CALL);
 	public static final TextAttributesKey PERL_SUB_DEFINITION = createTextAttributesKey("PERL_SUB_DEFINITION", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
