@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.999 RC</version>
+    <version>0.9991 RC</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -39,7 +39,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.999 RC changes:</p>
+      <p>0.9991 RC changes:</p>
 
       <p><b>Features:</b>
       <ul>
@@ -118,7 +118,7 @@
 
         <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
 
-        <projectConfigurable displayName="Perl5 libs" groupId="language"
+        <projectConfigurable displayName="Perl5 libs" groupId="project"
                              provider="com.perl5.lang.perl.idea.configuration.paths.PerlPathsConfigurableProvider"/>
         <projectConfigurable groupId="language"
                              provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"/>

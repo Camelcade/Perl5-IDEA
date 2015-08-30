@@ -54,8 +54,6 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 	// fixme make this non-static and request it from manager
 	public static void applyClassPaths(ModifiableRootModel rootModel)
 	{
-		assert !PlatformUtils.isIntelliJ();
-
 		for (OrderEntry entry : rootModel.getOrderEntries())
 		{
 //			System.err.println("Checking " + entry + " of " + entry.getClass());
@@ -91,20 +89,23 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 		});
 		rootModel.rearrangeOrderEntries(entries);
 
-		// add perl @inc to the end of libs
-		Perl5Settings settings = Perl5Settings.getInstance(rootModel.getProject());
-		if (!settings.perlPath.isEmpty())
+		if (!PlatformUtils.isIntelliJ())
 		{
-			for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.perlPath))
+			// add perl @inc to the end of libs
+			Perl5Settings settings = Perl5Settings.getInstance(rootModel.getProject());
+			if (!settings.perlPath.isEmpty())
 			{
-				VirtualFile incFile = LocalFileSystem.getInstance().findFileByIoFile(new File(incPath));
-				if (incFile != null)
+				for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.perlPath))
 				{
-					Library tableLibrary = table.createLibrary();
-					Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
-					modifiableModel.addRoot(incFile, OrderRootType.CLASSES);
-					modifiableModel.addRoot(incFile, OrderRootType.SOURCES);
-					modifiableModel.commit();
+					VirtualFile incFile = LocalFileSystem.getInstance().findFileByIoFile(new File(incPath));
+					if (incFile != null)
+					{
+						Library tableLibrary = table.createLibrary();
+						Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
+						modifiableModel.addRoot(incFile, OrderRootType.CLASSES);
+						modifiableModel.addRoot(incFile, OrderRootType.SOURCES);
+						modifiableModel.commit();
+					}
 				}
 			}
 		}
