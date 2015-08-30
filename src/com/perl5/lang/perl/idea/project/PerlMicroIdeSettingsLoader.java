@@ -58,7 +58,7 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 
 		for (OrderEntry entry : rootModel.getOrderEntries())
 		{
-//			System.err.println("Checking " + entry);
+//			System.err.println("Checking " + entry + " of " + entry.getClass());
 			if (entry instanceof LibraryOrderEntry)
 			{
 //				System.err.println("Removing " + entry);
