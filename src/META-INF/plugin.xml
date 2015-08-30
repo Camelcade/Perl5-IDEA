@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>0.9991 RC</version>
+    <version>1.0</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -39,35 +39,42 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>0.9991 RC changes:</p>
+      <p><b>1.0 Release notes</b></p>
 
       <p><b>Features:</b>
-      <ul>
-      <li>Implemented import mechanic support:
-      <ul>
-      <li>Exporter's arrays <code>@EXPORT</code>, <code>@EXPORT_OK</code>. <code>@EXPORT_TAGS</code> support and tags import are not yet implemented.</li>
-      <li>Importing of subs and variables.</li>
-      </ul>
-      </li>
-      <li>Implemented extension point for PackageProcessors, describing unusual packages behaviour and provide packages options. NB: inteface is experimental and subject to change.
-      <ul>
-        <li>Implemented processors for <code>base</code>, <code>parent</code>, <code>strict</code>, <code>feature</code>, <code>mro</code> and <code>warnings</code> pragmas.
-        <li>Implemented processor for <code>Mojo::Base</code></li>
-      </ul>
-      </li>
-      <li>use strict and use warnings inspections now checks for any known  modules (atm <code>strict</code>, <code>warnings</code> and <code>Mojo::Base</code>)</li>
-      <li>implemented bareword arguments support for use/no, like <code>use Mojo::Base -base;</code></li>
-      <li>implemented <code>use vars</code> pragma support. Only following form works right atm: <code>use vars qw(...);</code></li>
-      <li>updated color settings page to properly show respective elements</li>
-      </ul>
-      </p>
-
-      <p><b>Fixes:</b>
-      <ul>
-      <li>Fixed empty heredoc parsing problem</li>
-      <li>Implemented Perl interpreter selection and library directories markings for specialized IDEs, now compatible with any IntelliJ product</li>
-      </ul>
-      </p>
+<ul>
+<li>Creating Perl5 module and selecting Perl5 interpreter as an SDK.</li>
+<li>Parsing for Perl5 and POD files, Mojolicious templates and PHP-like templates.</li>
+<li>Syntax highlighting.</li>
+<li>Highlighting and matching for braces, quotes and regex delimiters.</li>
+<li>Interpolation in appropriate strings, regexes and here-docs.</li>
+<li>Auto-completion, navigation and refactoring for subs, methods, packages, namespaces, constants and variables.</li>
+<li>Fast navigation for subs, global variables, namespaces and constants (Go to symbol/class)</li>
+<li>File structure view</li>
+<li>Class hierarchy view</li>
+<li>Inheritance support with C3/DFS mro</li>
+<li>Imports/Exports support</li>
+<li>AUTOLOAD-ed subs resolution</li>
+<li>File templates for scripts, packages and Mojo templates</li>
+<li>Live templates for different language constructions</li>
+<li>Support of global variables declaration with use vars</li>
+<li>Here-docs markers navigation and re-factoring </li>
+<li>IntelliLang integration: allows to inject different language to the here-doc, depending on here-doc marker text.</li>
+<li>Annotations for subs: #@deprecated, #@method, #@returns </li>
+<li>Annotations for namespaces: #@deprecated</li>
+<li>Variables declaration types support</li>
+<li>Intentions: </li>
+<ul>
+<li>Convert string to here-doc</li>
+</ul>
+<li>Inspections:</li>
+<ul>
+<li>Packages and namespaces: missing package file, unknown namespace, multiple namespace definitions, clash with core namespace, missing strict/warnings pragmas.</li>
+<li>Variables: unused variables, undefined variables, variables shadowing, re-declaring of built-in variables.</li>
+<li>Subs and constants: deprecated sub, unresolvable sub, multiple subs definitions, fancy method call (new Foo::Bar), unused subs, constants and globs.</li>
+</ul>
+<li>Extension point to implement package processors, allowing to describe package behavior (like Mojo::Base acts like strict, warnings, features and base at once)</li>
+</ul>
 
     ]]>
     </change-notes>
