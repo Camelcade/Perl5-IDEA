@@ -115,6 +115,7 @@
         <internalFileTemplate name="Perl5 embedded"/>
         <internalFileTemplate name="Perl5 mojolicious"/>
 
+        <projectService serviceImplementation="com.perl5.lang.perl.idea.settings.Perl5Settings"/>
 
         <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
 
@@ -335,6 +336,9 @@
         <!-- Add your project components here -->
         <component>
             <implementation-class>com.perl5.lang.perl.idea.components.PerlProjectComponent</implementation-class>
+        </component>
+        <component>
+            <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>
         </component>
     </project-components>
 

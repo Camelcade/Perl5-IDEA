@@ -17,20 +17,15 @@
 package com.perl5.lang.perl.idea.modules;
 
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.roots.LibraryOrderEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.OrderEntry;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
+import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
-import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by hurricup on 07.06.2015.
@@ -50,36 +45,14 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	@Override
 	public void apply() throws ConfigurationException
 	{
-		ModifiableRootModel rootModel = getModel();
-		for (OrderEntry entry : rootModel.getOrderEntries())
-			if (entry instanceof LibraryOrderEntry)
-				rootModel.removeOrderEntry(entry);
+		Perl5Settings mySettings = Perl5Settings.getInstance(getModel().getProject());
 
-		LibraryTable table = rootModel.getModuleLibraryTable();
+		List<String> libRoots = mySettings.getLibRoots();
+		libRoots.clear();
 
-		for (VirtualFile entry : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
-		{
-			Library tableLibrary = table.createLibrary();
-			Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
-			modifiableModel.addRoot(entry, OrderRootType.CLASSES);
-			modifiableModel.commit();
-		}
+		for (VirtualFile entry : getModel().getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
+			libRoots.add(entry.getUrl());
 
-
-		OrderEntry[] entries = rootModel.getOrderEntries();
-
-		ContainerUtil.sort(entries, new Comparator<OrderEntry>()
-		{
-			@Override
-			public int compare(OrderEntry orderEntry, OrderEntry t1)
-			{
-				int i1 = orderEntry instanceof LibraryOrderEntry ? 1 : 0;
-				int i2 = t1 instanceof LibraryOrderEntry ? 1 : 0;
-				return i2 - i1;
-			}
-		});
-		rootModel.rearrangeOrderEntries(entries);
-
+		PerlMicroIdeSettingsLoader.applyClassPaths(getModel());
 	}
-
 }
