@@ -23,13 +23,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
@@ -51,6 +54,8 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 	// fixme make this non-static and request it from manager
 	public static void applyClassPaths(ModifiableRootModel rootModel)
 	{
+		assert !PlatformUtils.isIntelliJ();
+
 		for (OrderEntry entry : rootModel.getOrderEntries())
 		{
 //			System.err.println("Checking " + entry);
@@ -85,6 +90,24 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 			}
 		});
 		rootModel.rearrangeOrderEntries(entries);
+
+		// add perl @inc to the end of libs
+		Perl5Settings settings = Perl5Settings.getInstance(rootModel.getProject());
+		if (!settings.perlPath.isEmpty())
+		{
+			for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.perlPath))
+			{
+				VirtualFile incFile = LocalFileSystem.getInstance().findFileByIoFile(new File(incPath));
+				if (incFile != null)
+				{
+					Library tableLibrary = table.createLibrary();
+					Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
+					modifiableModel.addRoot(incFile, OrderRootType.CLASSES);
+					modifiableModel.addRoot(incFile, OrderRootType.SOURCES);
+					modifiableModel.commit();
+				}
+			}
+		}
 	}
 
 	public void initComponent()
@@ -115,7 +138,7 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 				{
 					ModifiableRootModel rootModel = ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
 					ContentEntry entry = rootModel.getContentEntries()[0];
-					Set<String> libPaths = new HashSet<String>(perl5Settings.getLibRoots());
+					Set<String> libPaths = new HashSet<String>(perl5Settings.libRoots);
 
 
 					for (SourceFolder folder : entry.getSourceFolders())
@@ -143,4 +166,5 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 	{
 		// called when project is being closed
 	}
+
 }

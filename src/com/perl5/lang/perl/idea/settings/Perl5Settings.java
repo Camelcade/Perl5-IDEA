@@ -39,12 +39,12 @@ import java.util.List;
 public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 {
 	public List<String> libRoots = new ArrayList<String>();
+	public String perlPath = "";
 
 	public static Perl5Settings getInstance(@NotNull Project project)
 	{
 		Perl5Settings persisted = ServiceManager.getService(project, Perl5Settings.class);
 		return persisted != null ? persisted : new Perl5Settings();
-
 	}
 
 	@Nullable
@@ -60,8 +60,4 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 		XmlSerializerUtil.copyBean(state, this);
 	}
 
-	public List<String> getLibRoots()
-	{
-		return libRoots;
-	}
 }

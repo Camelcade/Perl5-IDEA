@@ -52,38 +52,45 @@ public class PerlSdkType extends SdkType
 	{
 		SdkModificator sdkModificator = sdk.getSdkModificator();
 
-		String executablePath = getExecutablePath(sdk);
+		for (String perlLibPath : getINCPaths(sdk.getHomePath()))
+		{
+			File libDir = new File(perlLibPath);
+
+			if (libDir.exists() && libDir.isDirectory())
+			{
+				VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
+				if (virtualDir != null)
+				{
+					sdkModificator.addRoot(virtualDir, OrderRootType.SOURCES);
+					sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
+				}
+			}
+		}
+
+		sdkModificator.commitChanges();
+	}
+
+	public List<String> getINCPaths(String sdkHomePath)
+	{
+		String executablePath = getExecutablePath(sdkHomePath);
+		List<String> perlLibPaths = new ArrayList<String>();
 		if (executablePath != null)
 		{
-			List<String> perlLibPaths =
-					getDataFromProgram(executablePath + (SystemInfo.isWindows
+			for (String path : getDataFromProgram(
+					executablePath + (SystemInfo.isWindows
 							? " -le \"print for @INC\""
 							: " -le 'print for @INC'"
-					));
-
-			for (String perlLibPath : perlLibPaths)
-				if (!".".equals(perlLibPath))
-				{
-					File libDir = new File(perlLibPath);
-
-					if (libDir.exists() && libDir.isDirectory())
-					{
-						VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
-						if (virtualDir != null)
-						{
-							sdkModificator.addRoot(virtualDir, OrderRootType.SOURCES);
-							sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
-						}
-					}
-				}
-
-			sdkModificator.commitChanges();
+					)))
+				if (!".".equals(path))
+					perlLibPaths.add(path);
 		}
+		return perlLibPaths;
 	}
 
 	@Nullable
 	@Override
-	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator)
+	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator
+			sdkModificator)
 	{
 		return null;
 	}

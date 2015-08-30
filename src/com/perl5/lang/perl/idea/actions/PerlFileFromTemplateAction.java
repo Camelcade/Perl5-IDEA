@@ -18,10 +18,7 @@ package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.DumbAware;
-import com.perl5.lang.perl.idea.modules.PerlModuleType;
 
 import javax.swing.*;
 
@@ -39,7 +36,6 @@ public abstract class PerlFileFromTemplateAction extends CreateFileFromTemplateA
 	protected boolean isAvailable(DataContext dataContext)
 	{
 		// fixme conditions should be changed for micro-ides
-		Module module = LangDataKeys.MODULE.getData(dataContext);
-		return super.isAvailable(dataContext) && module != null && PerlModuleType.PERL_MODULE_TYPE_ID.equals(module.getOptionValue(Module.ELEMENT_TYPE));
+		return super.isAvailable(dataContext);
 	}
 }

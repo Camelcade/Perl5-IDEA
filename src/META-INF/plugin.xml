@@ -22,8 +22,7 @@
 
     <description><![CDATA[
     <h1>Camelcade</h1>
-    <p>Camelcade adds Perl5 support for IntelliJ IDEA.</p>
-     <!--and other JetBrains products (<b>atm. works as intended in IDEA only</b>)-->
+    <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
     <h2>Useful links:</h2>
     <ul>
      <li><a href="https://twitter.com/CamelcadeIDE">Twitter</a></li>
@@ -66,7 +65,7 @@
       <p><b>Fixes:</b>
       <ul>
       <li>Fixed empty heredoc parsing problem</li>
-      <li>Perl new file actions now displayed only in Perl5 modules</li>
+      <li>Implemented Perl interpreter selection and library directories markings for specialized IDEs, now compatible with any IntelliJ product</li>
       </ul>
       </p>
 
@@ -119,10 +118,13 @@
 
         <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
 
-        <projectConfigurable displayName="Perl paths" groupId="language"
-                             provider="com.perl5.lang.perl.idea.modules.PerlConfigurableProvider"/>
+        <projectConfigurable displayName="Perl5 libs" groupId="language"
+                             provider="com.perl5.lang.perl.idea.configuration.paths.PerlPathsConfigurableProvider"/>
+        <projectConfigurable groupId="language"
+                             provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"/>
+
         <projectStructure.sourceRootEditHandler
-                implementation="com.perl5.lang.perl.idea.modules.PerlIncludeLibrarySourceRootEditHandler"/>
+                implementation="com.perl5.lang.perl.idea.configuration.paths.PerlIncludeLibrarySourceRootEditHandler"/>
 
 
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
@@ -335,7 +337,7 @@
     <project-components>
         <!-- Add your project components here -->
         <component>
-            <implementation-class>com.perl5.lang.perl.idea.components.PerlProjectComponent</implementation-class>
+            <implementation-class>com.perl5.lang.perl.idea.project.PerlProjectComponent</implementation-class>
         </component>
         <component>
             <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>

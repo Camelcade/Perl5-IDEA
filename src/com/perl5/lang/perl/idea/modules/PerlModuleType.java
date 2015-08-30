@@ -22,6 +22,8 @@ import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.module.ModuleTypeManager;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.configuration.module.PerlInterpreterForModuleStep;
+import com.perl5.lang.perl.idea.configuration.paths.PerlModuleBuilder;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
 

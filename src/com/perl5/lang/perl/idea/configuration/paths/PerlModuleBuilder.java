@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.modules;
+package com.perl5.lang.perl.idea.configuration.paths;
 
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
@@ -32,6 +32,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.idea.modules.PerlModuleType;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 
 import java.io.File;

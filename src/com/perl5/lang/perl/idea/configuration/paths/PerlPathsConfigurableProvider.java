@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.modules;
+package com.perl5.lang.perl.idea.configuration.paths;
 
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurableProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.PlatformUtils;
-import com.perl5.lang.perl.idea.small.PerlPlatformContentEntriesConfigurable;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlConfigurableProvider extends ConfigurableProvider
+public class PerlPathsConfigurableProvider extends ConfigurableProvider
 {
 	Project project;
 
-	public PerlConfigurableProvider(Project project)
+	public PerlPathsConfigurableProvider(Project project)
 	{
 		this.project = project;
 	}

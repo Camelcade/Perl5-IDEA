@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.modules;
+package com.perl5.lang.perl.idea.configuration.paths;
 
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
@@ -47,7 +48,7 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	{
 		Perl5Settings mySettings = Perl5Settings.getInstance(getModel().getProject());
 
-		List<String> libRoots = mySettings.getLibRoots();
+		List<String> libRoots = mySettings.libRoots;
 		libRoots.clear();
 
 		for (VirtualFile entry : getModel().getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))

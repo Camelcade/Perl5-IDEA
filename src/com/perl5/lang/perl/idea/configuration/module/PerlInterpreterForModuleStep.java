@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.modules;
+package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.newProjectWizard.AddModuleWizard;
