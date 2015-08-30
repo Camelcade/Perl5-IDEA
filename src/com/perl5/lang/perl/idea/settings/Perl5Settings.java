@@ -39,31 +39,12 @@ import java.util.List;
 public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 {
 	public List<String> libRoots = new ArrayList<String>();
-	private Project myProject; // shouldn't be serialized
-
-	public Perl5Settings()
-	{
-	}
-
-	public Perl5Settings(Project myProject)
-	{
-		this.myProject = myProject;
-	}
 
 	public static Perl5Settings getInstance(@NotNull Project project)
 	{
 		Perl5Settings persisted = ServiceManager.getService(project, Perl5Settings.class);
-		if (persisted != null)
-			persisted.setProject(project);
-		else
-			persisted = new Perl5Settings(project);
-		return persisted;
+		return persisted != null ? persisted : new Perl5Settings();
 
-	}
-
-	public void setProject(Project project)
-	{
-		myProject = project;
 	}
 
 	@Nullable
