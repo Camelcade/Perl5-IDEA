@@ -13,9 +13,6 @@ Optimized using [Java Profiler](http://www.ej-technologies.com/products/jprofile
 There is tremendous amount of work to do in development and project really need testers. Not only users-testers, but someone
 to write tests (mostly for lexer and parser at the moment).
 
-#Current status - 1.0 released
-
 [Download current dev build jar](http://evstigneev.com/camelcade.jar)
-
 
 Wiki: https://github.com/hurricup/Perl5-IDEA/wiki
