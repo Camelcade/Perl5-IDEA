@@ -73,7 +73,7 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder>
 	@Override
 	public Icon getBigIcon()
 	{
-		return PerlIcons.PERL_MODULE;
+		return PerlIcons.PM_FILE;
 	}
 
 	@Override
