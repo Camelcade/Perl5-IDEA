@@ -53,7 +53,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	/**
 	 * Makes index snapshot hashsets
 	 *
-	 * @return result test
+	 * @return result
 	 */
 	public synchronized boolean makeIndexSnapshot()
 	{
