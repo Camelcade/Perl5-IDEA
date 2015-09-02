@@ -33,7 +33,7 @@ public class PerlHeredocLexer extends PerlStringLexer
 	}
 
 	@Override
-	public IElementType advance() throws IOException
+	public IElementType perlAdvance() throws IOException
 	{
 		if (getTokenStart() == 0 && getBufferEnd() > 0 && getTokenEnd() == 0)
 		{
@@ -45,6 +45,6 @@ public class PerlHeredocLexer extends PerlStringLexer
 			return HEREDOC_PSEUDO_QUOTE;
 		}
 
-		return super.advance();
+		return super.perlAdvance();
 	}
 }

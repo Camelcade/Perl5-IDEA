@@ -42,14 +42,6 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 //			System.err.println("Reset buffer to: " + buffer.subSequence(start, end).toString());
 	}
 
-	@Override
-	public IElementType advance() throws IOException
-	{
-		if (preparsedTokensList.size() > 0)
-			return getPreParsedToken();
-		return super.advance();
-	}
-
 	/**
 	 * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER
 	 *

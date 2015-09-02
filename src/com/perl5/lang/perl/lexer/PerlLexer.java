@@ -227,22 +227,20 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	}
 
 	/**
-	 * Lexers advance method. Parses some thing here, or just invoking generated flex parser
+	 * Lexers perlAdvance method. Parses some thing here, or just invoking generated flex parser
 	 *
 	 * @return next token type
 	 * @throws IOException
 	 */
-	public IElementType advance() throws IOException
+	public IElementType perlAdvance() throws IOException
 	{
 
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 		int bufferEnd = buffer.length();
 
-		if (preparsedTokensList.size() > 0)
-			return getPreParsedToken();
-		else if (bufferEnd == 0 || tokenStart >= bufferEnd)
-			return super.advance();
+		if (bufferEnd == 0 || tokenStart >= bufferEnd)
+			return super.perlAdvance();
 		else
 		{
 			int currentState = yystate();
@@ -321,9 +319,8 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		}
 
-		IElementType tokenType = super.advance();
+		IElementType tokenType = super.perlAdvance();
 
-		registerLastToken(tokenType, yytext().toString());
 		return tokenType;
 	}
 
@@ -510,6 +507,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public IElementType parseNumber()
 	{
 		String tokenText = yytext().toString();
+//		System.err.println("For "  + tokenText + "Last significant token is " + lastSignificantTokenType);
 		if (tokenText.startsWith(".") && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType)) // It's a $var.123; where . is a concat
 		{
 			yypushback(tokenText.length() - 1);
@@ -1553,12 +1551,13 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return buffer.length() >= patternEnd && buffer.subSequence(offset, patternEnd).toString().equals(pattern);
 	}
 
-	public void registerLastToken(IElementType tokenType, String tokenText)
+	public void registerToken(IElementType tokenType, String tokenText)
 	{
-		super.registerLastToken(tokenType, tokenText);
+		super.registerToken(tokenType, tokenText);
 
+		// fixme refactor this
 		if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType))
-			if (yystate() == 0 && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
+			if (yystate() == YYINITIAL && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
 				yybegin(LEX_CODE);
 	}
 

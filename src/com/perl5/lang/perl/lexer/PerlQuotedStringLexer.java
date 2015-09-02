@@ -26,7 +26,7 @@ import java.io.IOException;
 public class PerlQuotedStringLexer extends PerlStringLexer
 {
 	@Override
-	public IElementType advance() throws IOException
+	public IElementType perlAdvance() throws IOException
 	{
 		if (getTokenStart() == 0 && getBufferEnd() > 0 && getTokenEnd() == 0)
 		{
@@ -40,7 +40,7 @@ public class PerlQuotedStringLexer extends PerlStringLexer
 			return QUOTE_DOUBLE_CLOSE;
 		}
 
-		IElementType result = super.advance();
+		IElementType result = super.perlAdvance();
 
 		if (getTokenEnd() == getBufferEnd() && getTokenStart() < getBufferEnd() - 1)
 			setTokenEnd(getTokenEnd() - 1);

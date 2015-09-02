@@ -43,15 +43,15 @@ public class EmbeddedPerlLexer extends PerlLexer
 		super.reset(buf, start, end, initialState);
 	}
 
-	public IElementType advance() throws IOException
+	public IElementType perlAdvance() throws IOException
 	{
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
 		int bufferEnd = buffer.length();
 		int currentState = yystate();
 
-		if (preparsedTokensList.size() > 0 || bufferEnd == 0 || tokenStart >= bufferEnd)
-			return super.advance();
+		if (bufferEnd == 0 || tokenStart >= bufferEnd)
+			return super.perlAdvance();
 		else
 		{
 			if (currentState == LEX_HTML_BLOCK)
@@ -87,7 +87,7 @@ public class EmbeddedPerlLexer extends PerlLexer
 				return EMBED_MARKER_CLOSE;
 			}
 		}
-		return super.advance();
+		return super.perlAdvance();
 	}
 
 	@Override

@@ -55,15 +55,15 @@ public class MojoliciousPerlLexer extends PerlLexer
 		mojoState = newState;
 	}
 
-	public IElementType advance() throws IOException
+	public IElementType perlAdvance() throws IOException
 	{
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
 		int bufferEnd = buffer.length();
 		int currentMojoState = getMojoState();
 
-		if (preparsedTokensList.size() > 0 || bufferEnd == 0 || tokenStart >= bufferEnd)
-			return super.advance();
+		if (  bufferEnd == 0 || tokenStart >= bufferEnd)
+			return super.perlAdvance();
 		else if ((currentMojoState == LEX_MOJO_PERL_LINE || currentMojoState == LEX_MOJO_PERL_LINE_SEMI))
 		{
 			if (buffer.charAt(tokenStart) == '\n')
@@ -99,7 +99,7 @@ public class MojoliciousPerlLexer extends PerlLexer
 				if (m.lookingAt())
 					return parseBeginBlock(tokenStart, m, true);
 //				}
-				return super.advance();
+				return super.perlAdvance();
 			}
 
 			setTokenStart(tokenStart);
@@ -279,7 +279,7 @@ public class MojoliciousPerlLexer extends PerlLexer
 			return TEMPLATE_BLOCK_HTML;
 
 		}
-		return super.advance();
+		return super.perlAdvance();
 	}
 
 	/**

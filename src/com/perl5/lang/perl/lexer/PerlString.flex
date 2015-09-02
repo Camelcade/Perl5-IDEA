@@ -29,7 +29,7 @@ import com.intellij.lexer.FlexLexer;
 %public
 
 
-%function advance
+%function perlAdvance
 %type IElementType
 
 

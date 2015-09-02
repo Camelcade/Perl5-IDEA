@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 %public
 
 
-%function advance
+%function perlAdvance
 %type IElementType
 
 

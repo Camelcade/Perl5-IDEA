@@ -21,6 +21,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Stack;
 import java.util.regex.Pattern;
@@ -79,6 +80,24 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 
 	public abstract CharSequence yytext();
 
+	public final IElementType advance() throws IOException
+	{
+		IElementType tokenType = null;
+
+		if (preparsedTokensList.size() > 0)
+			tokenType = getPreParsedToken();
+		else
+			tokenType = perlAdvance();
+
+		if( tokenType != null )
+			registerToken(tokenType, yytext().toString());
+
+		return tokenType;
+	}
+
+	public abstract IElementType perlAdvance() throws IOException;
+
+
 	/**
 	 * Reading tokens from parsed queue, setting start and end and returns them one by one
 	 *
@@ -93,7 +112,6 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	{
 		setTokenStart(token.getTokenStart());
 		setTokenEnd(token.getTokenEnd());
-		registerLastToken(token.getTokenType(), yytext().toString());
 		return token.getTokenType();
 	}
 
@@ -180,7 +198,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : null;
 	}
 
-	public void registerLastToken(IElementType tokenType, String tokenText)
+	public void registerToken(IElementType tokenType, String tokenText)
 	{
 		lastTokenType = tokenType;
 		lastToken = tokenText;
