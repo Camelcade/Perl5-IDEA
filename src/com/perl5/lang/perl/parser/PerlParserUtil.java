@@ -1155,12 +1155,41 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	/**
+	 * Parsing use vars parameters by forsing re-parsing SQ strings as DQ
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
 	public static boolean parseUseVarsParameters(PsiBuilder b, int l)
 	{
-		if (consumeToken(b, RESERVED_QW))
+		assert b instanceof PerlBuilder;
+		boolean currentState = ((PerlBuilder) b).setReparseSQString(true);
+
+		boolean r = PerlParser.expr(b, l, -1);
+
+		((PerlBuilder) b).setReparseSQString(currentState);
+
+		return r;
+	}
+
+	/**
+	 * Parses SQ string depending on reparseSQString flag of PerlBuilder
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseSQString(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == QUOTE_SINGLE_OPEN)
 		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
+			assert b instanceof PerlBuilder;
+			PsiBuilder.Marker m = null;
+
+			if (((PerlBuilder) b).isReparseSQString())
+				m = b.mark();
 
 			while (!b.eof() && b.getTokenType() != QUOTE_SINGLE_CLOSE)
 				b.advanceLexer();
@@ -1168,7 +1197,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			if (!b.eof())
 				b.advanceLexer();
 
-			m.collapse(PARSABLE_STRING);
+			if (m != null)
+				m.collapse(PARSABLE_STRING);
 
 			return true;
 		}

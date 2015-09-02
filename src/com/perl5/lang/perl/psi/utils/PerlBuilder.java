@@ -42,7 +42,13 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	protected int bracesLevel = 0;
 	protected boolean currentStringState = false;
 	boolean indexSnapshotDone = false;
+
+	// flag forces stringification of -identifiers, required for use Package -option;
 	boolean stringify = false;
+
+	// flag shows that SQ strings should be re-parsed as QQ strings. Used in use vars expr
+	boolean reparseSQString = false;
+
 	Project myProject = getProject();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
@@ -181,5 +187,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		boolean oldState = this.stringify;
 		this.stringify = stringify;
 		return oldState;
+	}
+
+	public boolean isReparseSQString()
+	{
+		return reparseSQString;
+	}
+
+	public boolean setReparseSQString(boolean newState)
+	{
+		boolean currentState = isReparseSQString();
+		reparseSQString = newState;
+		return currentState;
 	}
 }
