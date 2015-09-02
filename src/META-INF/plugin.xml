@@ -50,7 +50,7 @@
 
       <p><b>Fixes:</b>
       <ul>
-
+        <li>It's not possible anymore to start identifier with digit, like <code>$123abc</code></li>
       </ul>
       </p>
 
