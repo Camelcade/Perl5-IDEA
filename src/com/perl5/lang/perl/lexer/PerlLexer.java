@@ -1354,7 +1354,15 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType) || SIGILS_TOKENS.contains(lastTokenType);
 
-		if (!negate && isBraced())
+		if (Character.isDigit(tokenText.charAt(0)))
+		{
+			int endOffset = 1;
+			while (Character.isDigit(tokenText.charAt(endOffset)))
+				endOffset++;
+
+			yypushback(tokenText.length() - endOffset);
+			return NUMBER_SIMPLE;
+		} else if (!negate && isBraced())
 			return IDENTIFIER;
 		else if (!negate && isCommaArrowAhead())
 			return STRING_CONTENT;
