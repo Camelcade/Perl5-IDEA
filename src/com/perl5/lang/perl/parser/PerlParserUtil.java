@@ -958,6 +958,78 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 
 	/**
+	 * Parses Array variable or array/hash slice
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseArrayOrSlice(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.array(b, l))
+		{
+			if (PerlParser.array_index(b, l))
+				m.done(ARRAY_ARRAY_SLICE);
+			else if (PerlParser.hash_index(b, l))
+				m.done(ARRAY_HASH_SLICE);
+			else
+				m.drop();
+			return true;
+		}
+		m.drop();
+		return false;
+	}
+
+	/**
+	 * Parses scalar variable or hash/array element
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
+	public static boolean parseScalarOrElement(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.scalar(b, l))
+		{
+			if (PerlParser.array_index(b, l))
+				m.done(SCALAR_ARRAY_ELEMENT);
+			else if (PerlParser.hash_index(b, l))
+				m.done(SCALAR_HASH_ELEMENT);
+			else
+				m.drop();
+			return true;
+		}
+		m.drop();
+		return false;
+	}
+
+	/**
+	 * Parses typeglob or typeglob with a slot
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
+	public static boolean parseGlobOrElement(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.scalar(b, l))
+		{
+			// fixme atm we have no special treatment or even psi-element for typeglobs with slots
+//			if (PerlParser.hash_index(b, l))
+//				m.done(SCALAR_HASH_ELEMENT);
+//			else
+			m.drop();
+			return true;
+		}
+		m.drop();
+		return false;
+	}
+
+
+	/**
 	 * Parses SQ string content. Implemented for interpolation parsing, where 'test' is identifier in quotes
 	 *
 	 * @param b PerlBuilder
