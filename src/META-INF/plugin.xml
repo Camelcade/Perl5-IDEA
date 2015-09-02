@@ -41,10 +41,10 @@
     <change-notes><![CDATA[
       <p><b>1.100 changes</b></p>
 
-      <p><b>Features:</b>
+      <p><b>Features & Improvements:</b>
       <ul>
         <li>Added icons for retina displays</li>
-
+        <li>Tricky <code>use vars</code> declarations now being handled correctly. <code>use vars @SOMELIST</code> still not working.</li>
       </ul>
       </p>
 
