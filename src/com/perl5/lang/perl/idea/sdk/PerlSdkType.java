@@ -1,5 +1,8 @@
 package com.perl5.lang.perl.idea.sdk;
 
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.process.ProcessOutput;
+import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
@@ -11,10 +14,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,10 +79,10 @@ public class PerlSdkType extends SdkType
 		if (executablePath != null)
 		{
 			for (String path : getDataFromProgram(
-					executablePath + (SystemInfo.isWindows
-							? " -le \"print for @INC\""
-							: " -le 'print for @INC'"
-					)))
+					executablePath,
+					"-le",
+					"print for @INC"
+			))
 				if (!".".equals(path))
 					perlLibPaths.add(path);
 		}
@@ -180,7 +182,7 @@ public class PerlSdkType extends SdkType
 
 	public String getPerlVersionString(@NotNull String sdkHomePath)
 	{
-		List<String> versionLines = getDataFromProgram(getExecutablePath(sdkHomePath) + " -v");
+		List<String> versionLines = getDataFromProgram(getExecutablePath(sdkHomePath), "-v");
 
 		if (versionLines.size() > 0)
 		{
@@ -198,7 +200,7 @@ public class PerlSdkType extends SdkType
 
 	public String getPathFromPerl()
 	{
-		List<String> perlPathLines = getDataFromProgram("perl -le \"print $^X\"");
+		List<String> perlPathLines = getDataFromProgram("perl", "-le", "print $^X");
 
 		if (perlPathLines.size() == 1)
 		{
@@ -211,24 +213,24 @@ public class PerlSdkType extends SdkType
 	}
 
 
-	public List<String> getDataFromProgram(String command)
+	public List<String> getDataFromProgram(String... command)
 	{
 		try
 		{
-			List<String> result = new ArrayList<String>();
-			Process p = Runtime.getRuntime().exec(command);
-			BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			GeneralCommandLine generalCommandLine = null;
+			generalCommandLine = new GeneralCommandLine(command);
+//			if( SystemInfo.isWindows )
+//				generalCommandLine = new GeneralCommandLine(command);
+//			else
+//				generalCommandLine = new GeneralCommandLine( new String[]{"/bin/sh", "-c", command});
 
-			String line;
-			while ((line = in.readLine()) != null)
-				if (!line.isEmpty())
-					result.add(line);
+			ProcessOutput processOutput = ExecUtil.execAndGetOutput(generalCommandLine);
+			return processOutput.getStdoutLines(true);
 
-			in.close();
-			return result;
 		} catch (Exception e)
 		{
-			return null;
+//			throw new IncorrectOperationException("Error executing external perl, please report to plugin developers: " + e.getMessage());
+			return Collections.emptyList();
 		}
 	}
 
