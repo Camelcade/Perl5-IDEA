@@ -51,7 +51,7 @@
       <p><b>Fixes:</b>
       <ul>
         <li>It's not possible anymore to start identifier with digit, like <code>$123abc</code></li>
-        <li>Heximal  and binary numbers with underscores now being parsed right.</li>
+        <li>Hexadecimal and binary numbers with underscores now being parsed right.</li>
       </ul>
       </p>
 
