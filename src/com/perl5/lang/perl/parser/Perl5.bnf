@@ -588,7 +588,7 @@ named_list_expr ::= <<isListOperator>> method [call_arguments]  // optional comm
 
 term_expr ::=
     variable_declaration
-    | <<parseListOrListElement>>
+    | <<parseListOrListElement>> // fixme this must be in array with qw
     | scalar_constant
     | do_expr
     | sub_expr
@@ -843,70 +843,51 @@ anon_sub ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB block
 // fixme it's not a variable, its variable expression
 private variable ::= scalar | array | hash | glob
 
-private array ::=
-    array_array_slice              // array slice
-    | array_hash_slice              // hash slice
-    | array_variable
+private array ::= <<parseArrayOrSlice>>
+
+private array_primitive ::=
+    array_variable
     | array_cast_expr
-    | array_constant
+    | string_list
+array_array_slice ::= array_primitive array_index
+array_hash_slice ::= array_primitive hash_index
 
-array_cast_expr ::= SIGIL_ARRAY
-    {
-        LEFT_BRACE expr RIGHT_BRACE
-        | scalar
-    }
-
-array_array_slice ::= {array_cast_expr | array_variable | string_list} array_slice_index
-array_slice_index ::= LEFT_BRACKET expr RIGHT_BRACKET
-
-array_hash_slice ::= {array_cast_expr | array_variable } hash_slice_index
-hash_slice_index ::= LEFT_BRACE expr RIGHT_BRACE
+array_cast_expr ::= SIGIL_ARRAY cast_target
 
 private hash ::=
     hash_variable
     | hash_cast_expr
 
-hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD>>
-    {
-        LEFT_BRACE expr RIGHT_BRACE
-        | scalar
-    }
+hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD>> cast_target
 
-private scalar ::=
-    scalar_array_element
-    | scalar_hash_element
-    | scalar_variable
+private scalar ::= <<parseScalarOrElement>>
+
+private scalar_primitive ::=
+    scalar_variable
     | scalar_cast_expr
-    | scalar_constant
-    | undef_expr
+    | undef_expr  // shouldn't it be in term ? (check declarations)
     | scalar_index_cast_expr
 
-scalar_cast_expr ::= SIGIL_SCALAR
-    {
+scalar_cast_expr ::= SIGIL_SCALAR cast_target
+
+scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX cast_target
+
+private cast_target ::=
         LEFT_BRACE expr RIGHT_BRACE
-        | scalar
-    }
+        | scalar_primitive
 
-scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX
-    {
-        LEFT_BRACE expr RIGHT_BRACE
-        | scalar
-    }
-
-scalar_array_element ::= scalar_variable array_index
-scalar_hash_element ::= scalar_variable hash_index
-
+scalar_array_element ::= scalar_primitive array_index
+scalar_hash_element ::= scalar_primitive hash_index
 anon_array_element ::= parenthesised_expr array_index
 
-private glob ::=
+private glob ::= <<parseGlobOrElement>>
+private glob_primitive ::=
     glob_variable
     | glob_cast_expr
 
-glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL>>
-    {
-        LEFT_BRACE expr RIGHT_BRACE
-        | scalar
-    }
+glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL>> cast_target
+
+glob_slot ::= glob_primitive hash_index
 
 // extended nested element for using in ()
 private nested_element_variation ::=
@@ -935,11 +916,7 @@ private code ::=
     | code_variable
     | code_cast_expr
 
-code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>>
-    {
-        LEFT_BRACE expr RIGHT_BRACE
-        | scalar
-    }
+code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> cast_target
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
@@ -962,9 +939,6 @@ number_constant ::=
     | NUMBER_VERSION
     | NUMBER_SIMPLE
 
-private array_constant ::=
-    string_list
-
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::=
@@ -986,12 +960,8 @@ private string_content_element ::=
   | <<convertToStringContent>>
 
 private interpolated_constructs ::=
-  scalar_array_element
-  | scalar_hash_element
-  | scalar_variable
-  | scalar_cast_expr
-  | array_variable
-  | array_cast_expr
+  scalar
+  | array
   | array_index_variable
 
 heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
@@ -1009,7 +979,7 @@ hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD>> variable_body
 //fixme probably this should not be here
 code_variable ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> variable_body
 
-glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body [hash_index]
+glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body
 
 private variable_body ::= <<parseVariableName>>
 

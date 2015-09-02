@@ -1,6 +1,8 @@
 use strict;
 use warnings;
 
+m/([\$*])(([\w\:\']*)\bVERSION)\b.*\=/;
+
 our $test;
 my $abc = 'abc scalar';
 my @abc = ('abc array');

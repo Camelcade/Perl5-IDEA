@@ -80,7 +80,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 
 	public abstract CharSequence yytext();
 
-	public final IElementType advance() throws IOException
+	public IElementType advance() throws IOException
 	{
 		IElementType tokenType = null;
 

@@ -53,6 +53,8 @@
         <li>It's not possible anymore to start identifier with digit, like <code>$123abc</code></li>
         <li>Hexadecimal and binary numbers with underscores now being parsed right.</li>
         <li>Fixed parsing problem for concatenation of string and fractional number.</li>
+        <li>Fixed parsing for simple dereferences like <code>$$array_ref[1]</code>.</li>
+        <li>Added requirement for 14 platform, no more buggy usages in outdated products.</li>
       </ul>
       </p>
 
@@ -60,7 +62,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="131"/>
+    <idea-version since-build="139"/>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
          on how to target different products -->

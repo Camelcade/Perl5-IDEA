@@ -967,7 +967,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseArrayOrSlice(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.array(b, l))
+		if (PerlParser.array_primitive(b, l))
 		{
 			if (PerlParser.array_index(b, l))
 				m.done(ARRAY_ARRAY_SLICE);
@@ -991,7 +991,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseScalarOrElement(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.scalar(b, l))
+		if (PerlParser.scalar_primitive(b, l))
 		{
 			if (PerlParser.array_index(b, l))
 				m.done(SCALAR_ARRAY_ELEMENT);
@@ -1015,13 +1015,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseGlobOrElement(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.scalar(b, l))
+		if (PerlParser.glob_primitive(b, l))
 		{
-			// fixme atm we have no special treatment or even psi-element for typeglobs with slots
-//			if (PerlParser.hash_index(b, l))
-//				m.done(SCALAR_HASH_ELEMENT);
-//			else
-			m.drop();
+			if (PerlParser.hash_index(b, l))
+				m.done(GLOB_SLOT);
+			else
+				m.drop();
 			return true;
 		}
 		m.drop();
@@ -1155,7 +1154,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			// reduces nodes number
 			while (!b.eof() && !REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType()))
 				b.advanceLexer();
-
 			m.collapse(REGEX_TOKEN);
 			return true;
 		}

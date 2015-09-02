@@ -1,6 +1,19 @@
-@{[map {$add->[$_-$replaceIDX] || ()} @a]};
 
-__DATA__
+my @array;
+my $array_ref;
+
+@array[123];
+@array[1,2,3];
+@array[@array];
+
+$array_ref->[1];
+@$array_ref;
+@$array_ref[123];
+@$array_ref[1,2,3];
+@$array_ref{'abc','cde'};
+$$array_ref[123];
+$$array_ref;
+$$array_ref[1,2,3];
 
 [map {$add->[$_-$replaceIDX] || ( )} ($replaceIDX..$lim-1)];
 
@@ -20,7 +33,6 @@ my %attrs = (
 );
 
 my $lpBuffer .= pack("L@".16, 0);
-
 
 2*$a;
 2*$i;
