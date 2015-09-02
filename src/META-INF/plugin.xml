@@ -55,6 +55,7 @@
         <li>Fixed parsing problem for concatenation of string and fractional number.</li>
         <li>Fixed parsing for simple dereferences like <code>$$array_ref[1]</code>.</li>
         <li>Added requirement for 14 platform, no more buggy usages in outdated products.</li>
+        <li>Fixed and tested interactions with perl process.</li>
       </ul>
       </p>
 

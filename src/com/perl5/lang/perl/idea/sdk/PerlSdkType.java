@@ -1,7 +1,6 @@
 package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.roots.OrderRootType;
@@ -217,15 +216,7 @@ public class PerlSdkType extends SdkType
 	{
 		try
 		{
-			GeneralCommandLine generalCommandLine = null;
-			generalCommandLine = new GeneralCommandLine(command);
-//			if( SystemInfo.isWindows )
-//				generalCommandLine = new GeneralCommandLine(command);
-//			else
-//				generalCommandLine = new GeneralCommandLine( new String[]{"/bin/sh", "-c", command});
-
-			ProcessOutput processOutput = ExecUtil.execAndGetOutput(generalCommandLine);
-			return processOutput.getStdoutLines(true);
+			return ExecUtil.execAndGetOutput(new GeneralCommandLine(command)).getStdoutLines(true);
 
 		} catch (Exception e)
 		{
