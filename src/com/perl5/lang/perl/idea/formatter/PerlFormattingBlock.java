@@ -81,7 +81,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		final List<Block> blocks = new ArrayList<Block>();
 		System.err.println("Creating sub-blocks for " + myNode);
 
-		Alignment alignment = Alignment.createAlignment();
+		Alignment alignment = null;//Alignment.createAlignment();
 
 		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
 		{

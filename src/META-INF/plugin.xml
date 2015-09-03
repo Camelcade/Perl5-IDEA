@@ -109,12 +109,22 @@
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.settings.Perl5Settings"/>
 
-        <lang.formatter language="Perl5"
-                        implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
-        <codeStyleSettingsProvider
-                implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
-        <langCodeStyleSettingsProvider
-                implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
+        <!--following code requires implementation-->
+        <!--
+                <lang.formatter language="Perl5"
+                                implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
+                <codeStyleSettingsProvider
+                        implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
+                <langCodeStyleSettingsProvider
+                        implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
+        -->
+
+        <!--Not working-->
+        <!--
+                <disabledIndentRangesProvider implementation="com.perl5.lang.perl.idea.editor.PerlDisabledIndentRangesProvider" />
+        -->
+
+        <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
 
         <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
 
