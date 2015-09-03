@@ -38,8 +38,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 	@Override
 	public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType)
 	{
-		consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", "Optional quotes", null, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
-		consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE", "Optional dereferences", null, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
+		consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", "Optional quotes [NYI]", null, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
+		consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE", "Optional dereferences [NYI]", null, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
+		consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_PARENTHESES", "Optional parentheses [NYI]", null, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
 	}
 
 	@Override

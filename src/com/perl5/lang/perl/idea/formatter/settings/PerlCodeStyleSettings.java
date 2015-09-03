@@ -26,6 +26,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 {
 	public int OPTIONAL_QUOTES = OptionalConstructions.WHATEVER;
 	public int OPTIONAL_DEREFERENCE = OptionalConstructions.WHATEVER;
+	public int OPTIONAL_PARENTHESES = OptionalConstructions.WHATEVER;
 
 	public PerlCodeStyleSettings(CodeStyleSettings container)
 	{
