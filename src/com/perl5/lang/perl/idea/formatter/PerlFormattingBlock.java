@@ -18,24 +18,28 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlFormattingBlock extends AbstractBlock
+public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes
 {
 	private final Indent myIndent;
 	private final CommonCodeStyleSettings mySettings;
 	private final PerlCodeStyleSettings myPerl5Settings;
 	private final SpacingBuilder mySpacingBuilder;
-	private final Alignment myAlignmentStrategy; // AlignmentStrategy
+	private final Alignment myAlignment;
+	private List<Block> mySubBlocks;
 
 
 	public PerlFormattingBlock(
@@ -52,14 +56,51 @@ public class PerlFormattingBlock extends AbstractBlock
 		mySettings = codeStyleSettings;
 		myPerl5Settings = perlCodeStyleSettings;
 		mySpacingBuilder = spacingBuilder;
-		myAlignmentStrategy = alignment;
+		myAlignment = alignment;
 		myIndent = new PerlIndentProcessor(perlCodeStyleSettings).getChildIndent(node, binaryExpressionIndex);
 	}
 
+	private static boolean shouldCreateBlockFor(ASTNode node)
+	{
+		return node.getTextRange().getLength() != 0 && node.getElementType() != TokenType.WHITE_SPACE;
+	}
+
+	@NotNull
 	@Override
 	protected List<Block> buildChildren()
 	{
-		return null;
+		if (mySubBlocks == null)
+		{
+			mySubBlocks = buildSubBlocks();
+		}
+		return new ArrayList<Block>(mySubBlocks);
+	}
+
+	private List<Block> buildSubBlocks()
+	{
+		final List<Block> blocks = new ArrayList<Block>();
+		System.err.println("Creating sub-blocks for " + myNode);
+
+		Alignment alignment = Alignment.createAlignment();
+
+		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
+		{
+			if (!shouldCreateBlockFor(child)) continue;
+			System.err.println("Creating sub-block for " + child);
+			blocks.add(createChildBlock(myNode, child, alignment, -1));
+		}
+
+		return blocks;
+	}
+
+	private PerlFormattingBlock createChildBlock(
+			ASTNode parent,
+			ASTNode child,
+			Alignment alignment,
+			int binaryExpressionIndex
+	)
+	{
+		return new PerlFormattingBlock(child, myWrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder, binaryExpressionIndex);
 	}
 
 	@Nullable
@@ -72,6 +113,19 @@ public class PerlFormattingBlock extends AbstractBlock
 	@Override
 	public boolean isLeaf()
 	{
-		return false;
+		return myNode.getFirstChildNode() == null;
+	}
+
+	@Override
+	public Indent getIndent()
+	{
+		return myIndent;
+	}
+
+	@Nullable
+	@Override
+	public Alignment getAlignment()
+	{
+		return super.getAlignment();
 	}
 }

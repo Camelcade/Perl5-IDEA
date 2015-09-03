@@ -18,12 +18,15 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlIndentProcessor
+public class PerlIndentProcessor implements PerlElementTypes
 {
 	private final PerlCodeStyleSettings myCodeStyleSettings;
 
@@ -34,7 +37,16 @@ public class PerlIndentProcessor
 
 	public Indent getChildIndent(ASTNode node, int binaryExpressionIndex)
 	{
+		// fixme wtf is this
 		if (binaryExpressionIndex > 0) return com.intellij.formatting.Indent.getNormalIndent();
+		IElementType nodeType = node.getElementType();
+		ASTNode parent = node.getTreeParent();
+
+		// fixme not working
+		if (nodeType == PerlParserDefinition.FILE || parent != null && parent.getElementType() == PerlParserDefinition.FILE)
+			return Indent.getNoneIndent();
+		if (nodeType == HEREDOC_END)
+			return Indent.getAbsoluteNoneIndent();
 		return com.intellij.formatting.Indent.getNormalIndent();
 	}
 }
