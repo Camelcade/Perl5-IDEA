@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.editor;
 
 import com.intellij.openapi.editor.IndentStrategy;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 
@@ -29,6 +30,6 @@ public class PerlIndentStrategy implements IndentStrategy
 	@Override
 	public boolean canIndent(PsiElement element)
 	{
-		return !(element instanceof PerlHeredocElementImpl || element instanceof PerlHeredocTerminatorElementImpl);
+		return !(element instanceof PerlHeredocTerminatorElementImpl) && PsiTreeUtil.getParentOfType(element, PerlHeredocElementImpl.class, false) == null;
 	}
 }
