@@ -23,6 +23,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,7 +40,9 @@ public class PerlUnusedTypeGlobInspection extends PerlInspection
 			@Override
 			public void visitGlobVariable(@NotNull PsiPerlGlobVariable o)
 			{
-				if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
+				if (o.getNamespaceElement() == null && PerlGlobUtil.BUILT_IN.contains(o.getName()))
+				{
+				} else if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
 					holder.registerProblem(o, "Unused typeglob alias", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 
 			}
