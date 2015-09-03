@@ -14,32 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl;
+package com.perl5.lang.perl.idea.editor;
+
+import com.intellij.openapi.editor.IndentStrategy;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 
 /**
- * Created by hurricup on 12.04.2015.
+ * Created by hurricup on 03.09.2015.
  */
-
-import com.intellij.lang.Language;
-import com.intellij.openapi.vfs.VirtualFileListener;
-
-public class PerlLanguage extends Language
+public class PerlIndentStrategy implements IndentStrategy
 {
-	public static final PerlLanguage INSTANCE = new PerlLanguage();
-	public static final String NAME = "Perl5";
-	private static VirtualFileListener myChangeListener;
-
-//	protected volatile ArrayList<VirtualFile> libPaths = null;
-
-	public PerlLanguage()
-	{
-		super(NAME);
-	}
-
 	@Override
-	public boolean isCaseSensitive()
+	public boolean canIndent(PsiElement element)
 	{
-		return true;
+		return !(element instanceof PerlHeredocTerminatorElementImpl);// && PsiTreeUtil.getParentOfType(element, PerlHeredocElementImpl.class, false) == null;
 	}
 }
-
