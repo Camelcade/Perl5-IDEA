@@ -72,7 +72,6 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 			for (Map.Entry<String, Set<String>> imported : PerlScalarUtil.getImportedScalars(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
-					name = name.substring(1);
 					String lookupKey = imported.getKey() + "::" + name;
 					LookupElementBuilder element = SCALAR_LOOKUP_CACHE.get(name);
 
@@ -89,7 +88,6 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 			for (Map.Entry<String, Set<String>> imported : PerlArrayUtil.getImportedArrays(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
-					name = name.substring(1);
 					String lookupKey = imported.getKey() + "::" + name;
 					LookupElementBuilder element = ARRAY_LOOKUP_CACHE.get(name);
 
@@ -106,7 +104,6 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 			for (Map.Entry<String, Set<String>> imported : PerlHashUtil.getImportedHashes(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
-					name = name.substring(1);
 					String lookupKey = imported.getKey() + "::" + name;
 					LookupElementBuilder element = HASH_LOOKUP_CACHE.get(name);
 

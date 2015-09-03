@@ -92,7 +92,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 					importsMap = PerlScalarUtil.getImportedScalars(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
-							if (variable.substring(1).equals(variableName))
+							if (variable.equals(variableName))
 								for (PerlVariable targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getKey() + "::" + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
 				} else if (actualType == PerlVariableType.ARRAY)
@@ -100,7 +100,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 					importsMap = PerlArrayUtil.getImportedArrays(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
-							if (variable.substring(1).equals(variableName))
+							if (variable.equals(variableName))
 								for (PerlVariable targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getKey() + "::" + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
 				} else if (actualType == PerlVariableType.HASH)
@@ -108,7 +108,7 @@ public class PerlVariableNameReference extends PerlReferencePoly
 					importsMap = PerlHashUtil.getImportedHashes(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
-							if (variable.substring(1).equals(variableName))
+							if (variable.equals(variableName))
 								for (PerlVariable targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getKey() + "::" + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
 				}

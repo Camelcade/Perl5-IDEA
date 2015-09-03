@@ -24,6 +24,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 
 import java.util.*;
 
@@ -98,14 +99,9 @@ public class PerlHashUtil implements PerlElementTypes
 	 */
 	public static Map<String, Set<String>> getImportedHashes(Project project, String namespace, PsiFile file)
 	{
-		return PerlUtil.getImportedNames(project, namespace, file, new Processor<String>()
-		{
-			@Override
-			public boolean process(String s)
-			{
-				return s != null && !s.isEmpty() && s.charAt(0) == '%';
-			}
-		});
+		PerlImportsCollector collector = new PerlImportsCollector('%', new HashMap<String, Set<String>>());
+		PerlUtil.getImportedNames(project, namespace, file, collector);
+		return collector.getResult();
 	}
 
 

@@ -168,7 +168,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedScalarNames().entrySet())
 				for (String variableName : importEntry.getValue())
 				{
-					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+					String canonicalName = importEntry.getKey() + "::" + variableName;
 
 					Collection<PerlVariable> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
 
@@ -188,7 +188,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedArrayNames().entrySet())
 				for (String variableName : importEntry.getValue())
 				{
-					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+					String canonicalName = importEntry.getKey() + "::" + variableName;
 
 					Collection<PerlVariable> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
 
@@ -208,7 +208,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedHashNames().entrySet())
 				for (String variableName : importEntry.getValue())
 				{
-					String canonicalName = importEntry.getKey() + "::" + variableName.substring(1);
+					String canonicalName = importEntry.getKey() + "::" + variableName;
 
 					Collection<PerlVariable> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
 

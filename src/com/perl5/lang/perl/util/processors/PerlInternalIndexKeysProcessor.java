@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.util;
+package com.perl5.lang.perl.util.processors;
 
 import com.intellij.util.Processor;
 

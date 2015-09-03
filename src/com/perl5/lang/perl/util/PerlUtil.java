@@ -26,8 +26,9 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
+import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import gnu.trove.THashSet;
 
 import java.io.File;
@@ -113,7 +114,7 @@ public class PerlUtil
 	 * @param file      PsiFile to search in
 	 * @return result map
 	 */
-	public static Map<String, Set<String>> getImportedNames(Project project, String namespace, PsiFile file, Processor<String> processor)
+	public static Map<String, Set<String>> getImportedNames(Project project, String namespace, PsiFile file, PerlNamespaceEntityProcessor<String> processor)
 	{
 		Map<String, Set<String>> result = new HashMap<String, Set<String>>();
 
@@ -125,16 +126,9 @@ public class PerlUtil
 			{
 				List<String> imports = useStatement.getPackageProcessor().getImportedSubs(useStatement);
 
-				Set<String> currentSet = result.get(packageName);
 				if (imports != null)
 					for (String item : imports)
-						if (processor.process(item))
-						{
-							if (!result.containsKey(packageName))
-								result.put(packageName, currentSet = new HashSet<String>());
-
-							currentSet.add(item);
-						}
+						processor.process(packageName, item);
 			}
 		}
 
