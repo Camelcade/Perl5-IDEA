@@ -17,18 +17,14 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.lang.DefaultASTFactoryImpl;
-import com.intellij.psi.impl.source.CharTableImpl;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.CharTable;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElementTypes
 {
-	private static final CharTable WHITESPACES = new CharTableImpl();
-
 	@Override
 	public LeafElement createComment(@NotNull IElementType type, CharSequence text)
 	{

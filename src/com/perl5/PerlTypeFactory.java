@@ -18,7 +18,7 @@ package com.perl5;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
-import com.perl5.lang.embedded.EmbeddedPerlFileType;
+import com.perl5.lang.embedded.psi.EmbeddedPerlFileType;
 import com.perl5.lang.mojolicious.MojoliciousPerlFileType;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlFileTypePackage;

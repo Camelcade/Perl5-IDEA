@@ -30,14 +30,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlHighlighter extends LayeredLexerEditorHighlighter
+public class MojoliciousPerlHighlighter extends LayeredLexerEditorHighlighter implements PerlElementTypes
 {
 	public MojoliciousPerlHighlighter(@Nullable final Project project,
 									  @Nullable final VirtualFile virtualFile,
 									  @NotNull final EditorColorsScheme colors)
 	{
 		super(new MojoliciousPerlSyntaxHighlighter(project), colors);
-		registerLayer(PerlElementTypes.TEMPLATE_BLOCK_HTML, new LayerDescriptor(
+		registerLayer(TEMPLATE_BLOCK_HTML, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
 	}
 }

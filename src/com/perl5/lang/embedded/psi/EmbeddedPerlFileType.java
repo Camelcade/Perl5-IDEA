@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.embedded.psi;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
@@ -26,6 +26,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
+import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.idea.EmbeddedPerlHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

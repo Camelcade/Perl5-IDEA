@@ -21,13 +21,12 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.embedded.EmbeddedPerlFileType;
+import com.perl5.lang.embedded.psi.EmbeddedPerlFileType;
 import com.perl5.lang.mojolicious.MojoliciousPerlFileType;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlStrictProvider;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.embedded.psi.impl;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
+import com.perl5.lang.embedded.EmbeddedPerlLanguage;
+import com.perl5.lang.embedded.psi.EmbeddedPerlFileType;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 

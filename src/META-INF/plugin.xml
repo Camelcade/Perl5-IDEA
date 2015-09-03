@@ -110,15 +110,12 @@
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.settings.Perl5Settings"/>
 
-        <!--following code requires implementation-->
-        <!--
-                <lang.formatter language="Perl5"
-                                implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
-                <codeStyleSettingsProvider
-                        implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
-                <langCodeStyleSettingsProvider
-                        implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
-        -->
+        <lang.formatter language="Perl5"
+                        implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
+        <codeStyleSettingsProvider
+                implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
+        <langCodeStyleSettingsProvider
+                implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
 
         <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
         <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
@@ -226,11 +223,17 @@
                                       implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory key="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Embedded Perl" implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
+        <lang.braceMatcher language="Embedded Perl"
+                           implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
 
         <lang.foldingBuilder language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-        <lang.commenter language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
         <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+
+        <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
+        <lang.commenter language="Embedded Perl"
+                        implementationClass="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenter"/>
+
 
         <lang.parserDefinition language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlParserDefinition"/>
         <lang.fileViewProviderFactory language="Mojolicious Perl"
@@ -241,10 +244,12 @@
         <completion.contributor language="Perl5" implementationClass="com.perl5.lang.mojolicious.idea.completion.MojoliciousCompletionContributor"/>
 
         <lang.foldingBuilder language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
-        <lang.commenter language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
         <lang.namesValidator language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
         <quoteHandler fileType="Mojolicious Perl5 Template" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+
+        <multiLangCommenter implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
+        <!--<lang.commenter language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>-->
 
 
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>

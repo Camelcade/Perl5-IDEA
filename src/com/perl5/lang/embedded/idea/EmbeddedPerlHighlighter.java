@@ -30,14 +30,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 19.05.2015.
  */
-public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter
+public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter implements PerlElementTypes
 {
 	public EmbeddedPerlHighlighter(@Nullable final Project project,
 								   @Nullable final VirtualFile virtualFile,
 								   @NotNull final EditorColorsScheme colors)
 	{
 		super(new EmbeddedPerlSyntaxHighlighter(project), colors);
-		registerLayer(PerlElementTypes.TEMPLATE_BLOCK_HTML, new LayerDescriptor(
+		registerLayer(TEMPLATE_BLOCK_HTML, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
 	}
 }

@@ -42,8 +42,6 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 			new BracePair(LEFT_PAREN, RIGHT_PAREN, false),
 			new BracePair(LEFT_BRACKET, RIGHT_BRACKET, false),
 			new BracePair(LEFT_BRACE, RIGHT_BRACE, true),
-			new BracePair(EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE, false),
-			new BracePair(EMBED_MARKER_OPEN, EMBED_MARKER_SEMICOLON, false),
 	};
 
 	@Override
