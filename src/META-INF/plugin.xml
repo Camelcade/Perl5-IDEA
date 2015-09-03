@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.001</version>
+    <version>1.002</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -39,7 +39,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p><b>1.001 changes</b></p>
+      <p><b>1.002 changes</b></p>
 
       <p><b>Features & Improvements:</b>
       <ul>
@@ -108,6 +108,13 @@
         <internalFileTemplate name="Perl5 mojolicious"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.settings.Perl5Settings"/>
+
+        <lang.formatter language="Perl5"
+                        implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
+        <codeStyleSettingsProvider
+                implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
+        <langCodeStyleSettingsProvider
+                implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
 
         <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
 
