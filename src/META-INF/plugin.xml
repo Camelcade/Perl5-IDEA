@@ -58,6 +58,7 @@
         <li>Added requirement for 14 platform, no more buggy usages in outdated products.</li>
         <li>Fixed and tested interactions with perl process.</li>
         <li>Typeglobs for built-ins are not annotated as unused anymore.</li>
+        <li>Fixed package file creation in specialized IDEs.</li>
       </ul>
       </p>
 
@@ -120,6 +121,8 @@
 
 
         <createFromTemplateHandler implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler" />
+        <defaultTemplatePropertiesProvider
+                implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.PerlTypedHandler" id="PerlTypedHandler"/>
