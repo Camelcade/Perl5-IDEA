@@ -230,9 +230,9 @@
         <lang.namesValidator language="Embedded Perl" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
-        <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
+        <!-- Here should be an EmbeddedPerlCommenter -->
         <lang.commenter language="Embedded Perl"
-                        implementationClass="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenter"/>
+                        implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
 
 
         <lang.parserDefinition language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlParserDefinition"/>
@@ -248,8 +248,9 @@
 
         <quoteHandler fileType="Mojolicious Perl5 Template" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
-        <multiLangCommenter implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
-        <!--<lang.commenter language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>-->
+        <!-- Here should be an EmbeddedPerlCommenter -->
+        <lang.commenter language="Mojolicious Perl"
+                        implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
 
 
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>

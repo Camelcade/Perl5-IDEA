@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.idea.commenter;
+package com.perl5.lang.mojolicious.idea.commenter;
 
 import com.intellij.codeInsight.generation.SelfManagingCommenter;
 import com.intellij.lang.Commenter;
@@ -25,11 +25,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 03.09.2015.
+ * Created by hurricup on 04.09.2015.
  */
-public class EmbeddedPerlCommenter implements Commenter, SelfManagingCommenter<EmbeddedPerlCommenter.CommenterDataHolder>
+public class MojoliciousCommenter implements Commenter, SelfManagingCommenter<MojoliciousCommenter.CommenterDataHolder>
 {
-
 	@Nullable
 	@Override
 	public String getLineCommentPrefix()
@@ -142,4 +141,5 @@ public class EmbeddedPerlCommenter implements Commenter, SelfManagingCommenter<E
 	{
 
 	}
+
 }
