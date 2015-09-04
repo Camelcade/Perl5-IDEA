@@ -40,6 +40,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public static final HashMap<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
+	// pattern for getting marker
+	public static final Pattern markerPattern = Pattern.compile("<<(.+?)");
+	public static final Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
+	public static final Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.+?)\'");
+	public static final Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
+	public static final Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
 			"eq",
@@ -169,11 +175,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	// last captured heredoc marker
 	public String heredocMarker;
-	// pattern for getting marker
-	public Pattern markerPattern = Pattern.compile("<<(.+?)");
-	public Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
-	public Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.+?)\'");
-	public Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
 	/**
 	 * Quote-like, transliteration and regexps common part
 	 */
@@ -186,9 +187,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public int currentSectionNumber = 0; // current section
 	protected PerlLexerAdapter evalPerlLexer;
 	protected PerlStringLexer myStringLexer;
-
 	Project myProject;
-	Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
 	/**
 	 * Regex processor qr{} m{} s{}{}
 	 **/
