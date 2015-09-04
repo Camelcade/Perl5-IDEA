@@ -27,119 +27,160 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.09.2015.
  */
-public class MojoliciousCommenter implements Commenter, SelfManagingCommenter<MojoliciousCommenter.CommenterDataHolder>
+public class MojoliciousCommenter implements Commenter, SelfManagingCommenter<MojoliciousCommenter.EmbeddedPerlCommenterDataHolder>
 {
+
+	@Nullable
+	@Override
+	public EmbeddedPerlCommenterDataHolder createLineCommentingState(int startLine, int endLine, @NotNull Document document, @NotNull PsiFile file)
+	{
+		System.err.println("createLineCommentingState" + " " + startLine + " " + endLine + " " + document + " " + file);
+		return new EmbeddedPerlCommenterDataHolder(startLine, endLine, document, file);
+	}
+
+	@Nullable
+	@Override
+	public EmbeddedPerlCommenterDataHolder createBlockCommentingState(int selectionStart, int selectionEnd, @NotNull Document document, @NotNull PsiFile file)
+	{
+		System.err.println("createLineCommentingState" + " " + selectionStart + " " + selectionEnd + " " + document + " " + file);
+		return new EmbeddedPerlCommenterDataHolder(selectionStart, selectionEnd, document, file);
+	}
+
+	@Override
+	public void commentLine(int line, int offset, @NotNull Document document, @NotNull EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("commentLine" + " " + line + " " + offset + " " + document + " " + data);
+
+	}
+
+	@Override
+	public void uncommentLine(int line, int offset, @NotNull Document document, @NotNull EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("unCommentLine" + " " + line + " " + offset + " " + document + " " + data);
+	}
+
+	@Override
+	public boolean isLineCommented(int line, int offset, @NotNull Document document, @NotNull EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("isLineCommented" + " " + line + " " + offset + " " + document + " " + data);
+		return false;
+	}
+
+	@Nullable
+	@Override
+	public String getCommentPrefix(int line, @NotNull Document document, @NotNull EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("getCommentPrefix" + " " + line + " " + document + " " + data);
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public TextRange getBlockCommentRange(int selectionStart, int selectionEnd, @NotNull Document document, @NotNull EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("getBlockCommentRange" + " " + selectionStart + " " + selectionEnd + " " + document + " " + data);
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public String getBlockCommentPrefix(int selectionStart, @NotNull Document document, @NotNull EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("getBlockCommentPrefix" + " " + selectionStart + " " + document + " " + data);
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public String getBlockCommentSuffix(int selectionEnd, @NotNull Document document, @NotNull EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("getBlockCommentSuffix" + " " + selectionEnd + " " + document + " " + data);
+		return null;
+	}
+
+	@Override
+	public void uncommentBlockComment(int startOffset, int endOffset, Document document, EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("uncommentBlockComment" + " " + startOffset + " " + endOffset + " " + document + " " + data);
+	}
+
+	@NotNull
+	@Override
+	public TextRange insertBlockComment(int startOffset, int endOffset, Document document, EmbeddedPerlCommenterDataHolder data)
+	{
+		System.err.println("insertBlockComment" + " " + startOffset + " " + endOffset + " " + document + " " + data);
+		return new TextRange(0, 0);
+	}
+
 	@Nullable
 	@Override
 	public String getLineCommentPrefix()
 	{
-		return null;
+		return "#linecommentprefix";
 	}
 
 	@Nullable
 	@Override
 	public String getBlockCommentPrefix()
 	{
-		return null;
+		return "#blockcommentprefix";
 	}
 
 	@Nullable
 	@Override
 	public String getBlockCommentSuffix()
 	{
-		return null;
+		return "#blockcommentsuffix";
 	}
 
 	@Nullable
 	@Override
 	public String getCommentedBlockCommentPrefix()
 	{
-		return null;
+		return "#blockcommentprefix";
 	}
 
 	@Nullable
 	@Override
 	public String getCommentedBlockCommentSuffix()
 	{
-		return null;
+		return "#blockcommentsuffix";
 	}
 
-	@Nullable
-	@Override
-	public CommenterDataHolder createLineCommentingState(int startLine, int endLine, Document document, PsiFile file)
+	static class EmbeddedPerlCommenterDataHolder extends com.intellij.codeInsight.generation.CommenterDataHolder
 	{
-		return null;
-	}
+		protected int start;    // context-dependent start line or selection start
+		protected int end;        // context-dependent end line or selectionend
+		protected Document document;
+		protected PsiFile file;
 
-	@Nullable
-	@Override
-	public CommenterDataHolder createBlockCommentingState(int selectionStart, int selectionEnd, Document document, PsiFile file)
-	{
-		return null;
-	}
+		public EmbeddedPerlCommenterDataHolder(int start, int end, Document document, PsiFile file)
+		{
+			this.start = start;
+			this.end = end;
+			this.document = document;
+			this.file = file;
+		}
 
-	@Override
-	public void commentLine(int line, int offset, Document document, CommenterDataHolder data)
-	{
+		public int getStart()
+		{
+			return start;
+		}
 
-	}
+		public int getEnd()
+		{
+			return end;
+		}
 
-	@Override
-	public void uncommentLine(int line, int offset, Document document, CommenterDataHolder data)
-	{
+		public Document getDocument()
+		{
+			return document;
+		}
 
-	}
-
-	@Override
-	public boolean isLineCommented(int line, int offset, Document document, CommenterDataHolder data)
-	{
-		return false;
-	}
-
-	@Nullable
-	@Override
-	public String getCommentPrefix(int line, Document document, CommenterDataHolder data)
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public TextRange getBlockCommentRange(int selectionStart, int selectionEnd, Document document, CommenterDataHolder data)
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public String getBlockCommentPrefix(int selectionStart, Document document, CommenterDataHolder data)
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public String getBlockCommentSuffix(int selectionEnd, Document document, CommenterDataHolder data)
-	{
-		return null;
-	}
-
-	@Override
-	public void uncommentBlockComment(int startOffset, int endOffset, Document document, CommenterDataHolder data)
-	{
-
-	}
-
-	@NotNull
-	@Override
-	public TextRange insertBlockComment(int startOffset, int endOffset, Document document, CommenterDataHolder data)
-	{
-		return null;
-	}
-
-	static class CommenterDataHolder extends com.intellij.codeInsight.generation.CommenterDataHolder
-	{
-
+		public PsiFile getFile()
+		{
+			return file;
+		}
 	}
 
 }
