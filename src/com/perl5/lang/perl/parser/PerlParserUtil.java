@@ -26,6 +26,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.utils.PerlBuilder;
+import com.perl5.lang.perl.psi.utils.PerlNamesCache;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
@@ -324,7 +325,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (CONVERTABLE_TOKENS.contains(tokenType)
 				&& nextTokenType != LEFT_PAREN              // not function call
 				&& !PACKAGE_TOKENS.contains(nextTokenType)  // not method Package::
-				&& !(nextTokenType == IDENTIFIER && ((PerlBuilder) b).isKnownPackage(((PerlBuilder) b).lookupToken(1).getTokenText()))  // not Method Package
+				&& !(nextTokenType == IDENTIFIER && PerlNamesCache.isPackageExists(((PerlBuilder) b).lookupToken(1).getTokenText()))  // not Method Package
 				)
 			// todo we should check current namespace here
 			return !PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
@@ -634,8 +635,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 			if (
 					nextNextTokenType == LEFT_PAREN                        // Package::Identifier( - what can it be?
-							|| ((PerlBuilder) b).isKnownSub(potentialSubName)       // we know this sub
-							|| !((PerlBuilder) b).isKnownPackage(potentialSubName)) // we don't know such package
+							|| PerlNamesCache.isSubExists(potentialSubName)       // we know this sub
+							|| !PerlNamesCache.isPackageExists(potentialSubName)) // we don't know such package
 				return convertPackageIdentifier(b, l) && convertIdentifier(b, l, SUB);
 			else
 				return false;
@@ -672,9 +673,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 					String packageOrSub = PerlPackageUtil.getCanonicalPackageName(nextTokenData.getTokenText()) + "::" + nextNextTokenData.getTokenText();
 
-					if (((PerlBuilder) b).isKnownSub(packageOrSub))
+					if (PerlNamesCache.isSubExists(packageOrSub))
 						return convertIdentifier(b, l, SUB);
-					else if (((PerlBuilder) b).isKnownPackage(packageOrSub))
+					else if (PerlNamesCache.isPackageExists(packageOrSub))
 						return convertIdentifier(b, l, SUB) && mergePackageName(b, l);
 					return convertIdentifier(b, l, SUB);
 				} else
@@ -688,13 +689,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
 
 				String potentialSubName = nextTokenData.getTokenText() + "::" + b.getTokenText();
-				if (((PerlBuilder) b).isKnownSub(potentialSubName))
+				if (PerlNamesCache.isSubExists(potentialSubName))
 					return convertIdentifier(b, l, SUB) && convertIdentifier(b, l, PACKAGE);
 				else
 					return convertIdentifier(b, l, SUB);
 			}
 			// KnownPackage->
-			else if (nextTokenType == OPERATOR_DEREFERENCE && ((PerlBuilder) b).isKnownPackage(b.getTokenText()))
+			else if (nextTokenType == OPERATOR_DEREFERENCE && PerlNamesCache.isPackageExists(b.getTokenText()))
 				return false;
 				// it's just sub
 			else

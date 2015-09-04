@@ -59,7 +59,7 @@
         </context>
     </template>
     <template name="sql" value="my $query = &lt;&lt;'SQL';&#10;    $END$&#10;SQL&#10;" description="query"
-              toReformat="true" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true">
         <context>
             <option name="SQL" value="false"/>
             <option name="PERL5_PREFIX" value="true"/>

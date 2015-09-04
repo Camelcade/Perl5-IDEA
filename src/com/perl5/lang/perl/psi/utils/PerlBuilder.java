@@ -19,16 +19,10 @@ package com.perl5.lang.perl.psi.utils;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.PerlTokenData;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
-
-import java.util.HashSet;
 
 /**
  * Created by hurricup on 04.05.2015.
@@ -36,8 +30,8 @@ import java.util.HashSet;
  */
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
-	protected HashSet<String> KNOWN_SUBS = new HashSet<String>();
-	protected HashSet<String> KNOWN_PACKAGES = new HashSet<String>(PerlPackageUtil.BUILT_IN_ALL);
+	//	protected Set<String> KNOWN_SUBS = new THashSet<String>();
+//	protected Set<String> KNOWN_PACKAGES = new THashSet<String>(PerlPackageUtil.BUILT_IN_ALL);
 	protected boolean recoveringStatement = false;
 	protected int bracesLevel = 0;
 	protected boolean currentStringState = false;
@@ -56,24 +50,29 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		super(builder, state, parser);
 	}
 
-	/**
+/*
+	*/
+/**
 	 * Makes index snapshot hashsets
 	 *
 	 * @return result
-	 */
+ *//*
+
 	public synchronized boolean makeIndexSnapshot()
 	{
-		if (!indexSnapshotDone && !DumbService.isDumb(myProject))
-		{
-			KNOWN_SUBS.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
-			KNOWN_SUBS.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
-			KNOWN_SUBS.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
-
-			KNOWN_PACKAGES.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
-			indexSnapshotDone = true;
-		}
-		return indexSnapshotDone;
+		return indexSnapshotDone || (indexSnapshotDone = PerlNamesCache.initCaches(myProject));
+//		if (!indexSnapshotDone && !DumbService.isDumb(myProject))
+//		{
+//			KNOWN_SUBS.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
+//			KNOWN_SUBS.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
+//			KNOWN_SUBS.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
+//
+//			KNOWN_PACKAGES.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
+//			indexSnapshotDone = true;
+//		}
+//		return indexSnapshotDone;
 	}
+*/
 
 	/**
 	 * Return token ahead of current, skips spaces and comments
@@ -106,12 +105,15 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
 	}
 
-	/**
+/*
+	*/
+/**
 	 * Checks if sub is indexed.
 	 *
 	 * @param subName canonical sub name Foo::somesub
 	 * @return checking result
-	 */
+ *//*
+
 	public boolean isKnownSub(String subName)
 	{
 		if (!indexSnapshotDone)
@@ -120,12 +122,14 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return KNOWN_SUBS.contains(subName);
 	}
 
+	*/
+
 	/**
 	 * Checks if package is indexed.
 	 *
-	 * @param packageName package name
 	 * @return checking result
-	 */
+	 *//*
+
 	public boolean isKnownPackage(String packageName)
 	{
 		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(packageName);
@@ -135,6 +139,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 
 		return KNOWN_PACKAGES.contains(canonicalPackageName);
 	}
+*/
 
 	public void startRecovery()
 	{
