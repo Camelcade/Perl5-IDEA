@@ -25,9 +25,6 @@ import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorDefault;
-import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -47,7 +44,6 @@ import java.util.List;
 public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlNamespaceElement
 {
 	protected String myCanonicalName = null;
-	protected IPerlPackageProcessor packageProcessor = null;
 
 	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -204,19 +200,5 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	public String getPresentableName()
 	{
 		return getName();
-	}
-
-	@Override
-	public IPerlPackageProcessor getPackageProcessor()
-	{
-		if (packageProcessor != null)
-			return packageProcessor;
-
-		packageProcessor = PerlPackageProcessorEP.EP.findSingle(getCanonicalName());
-
-		if (packageProcessor == null)
-			packageProcessor = PerlPackageProcessorDefault.INSTANCE;
-
-		return getPackageProcessor();
 	}
 }

@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 
@@ -69,10 +68,4 @@ public interface PerlNamespaceElement extends PerlNamedElement
 	 */
 	public String getCanonicalName();
 
-	/**
-	 * Returns package processor object
-	 *
-	 * @return package processor
-	 */
-	public IPerlPackageProcessor getPackageProcessor();
 }

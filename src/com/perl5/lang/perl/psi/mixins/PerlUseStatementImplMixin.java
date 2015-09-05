@@ -21,6 +21,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorDefault;
+import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -36,6 +38,7 @@ import java.util.List;
  */
 public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
 {
+	protected IPerlPackageProcessor packageProcessor = null;
 	public PerlUseStatementImplMixin(ASTNode node)
 	{
 		super(node);
@@ -109,9 +112,15 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public IPerlPackageProcessor getPackageProcessor()
 	{
-		if (getNamespaceElement() != null)
-			return getNamespaceElement().getPackageProcessor();
-		return null;
+		if (packageProcessor != null)
+			return packageProcessor;
+
+		packageProcessor = PerlPackageProcessorEP.EP.findSingle(getPackageName());
+
+		if (packageProcessor == null)
+			packageProcessor = PerlPackageProcessorDefault.INSTANCE;
+
+		return getPackageProcessor();
 	}
 
 	@Override

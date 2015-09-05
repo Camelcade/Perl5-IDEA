@@ -249,6 +249,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				length = builder.getOriginalText().length();
 			System.err.println("Adapting builder for " + root + " " + builder.getOriginalText().length() + " " + builder.getOriginalText().subSequence(0, length));
 		}
+//		else
+//			System.err.println("Adapting safe builder for " + root + " " + builder.getOriginalText().length());
 
 		return new PerlBuilder(builder, state, parser, SAFE_PARSERS.contains(root));
 	}
