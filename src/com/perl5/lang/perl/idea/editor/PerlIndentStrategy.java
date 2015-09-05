@@ -28,6 +28,6 @@ public class PerlIndentStrategy implements IndentStrategy
 	@Override
 	public boolean canIndent(PsiElement element)
 	{
-		return !(element instanceof PerlHeredocTerminatorElementImpl);// && PsiTreeUtil.getParentOfType(element, PerlHeredocElementImpl.class, false) == null;
+		return !(element instanceof PerlHeredocTerminatorElementImpl);
 	}
 }

@@ -29,6 +29,9 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  */
 public class PerlIndentProcessor implements PerlElementTypes
 {
+	/**
+	 * Tokens that must be suppressed for indentation
+	 */
 	public static final TokenSet UNINDENTED_TOKENS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
