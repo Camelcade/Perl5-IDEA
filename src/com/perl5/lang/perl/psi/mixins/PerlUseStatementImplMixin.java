@@ -169,13 +169,6 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 
 	@Override
 	@Nullable
-	public PsiPerlLabelDeclaration getLabelDeclaration()
-	{
-		return findChildByClass(PsiPerlLabelDeclaration.class);
-	}
-
-	@Override
-	@Nullable
 	public PsiPerlNoStatement getNoStatement()
 	{
 		return findChildByClass(PsiPerlNoStatement.class);

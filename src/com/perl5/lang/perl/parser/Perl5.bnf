@@ -363,12 +363,14 @@ private block_content ::= file_item * {recoverWhile=recover_block}
 private recover_block ::= !(RIGHT_BRACE)
 
 private namespace_item ::=
-    semicolon_any +
-    | nyi_statement
-    | compound_statement
-    | format_definition
-    | statement
-    | annotation
+    [label_declaration] (
+        semicolon_any +
+        | nyi_statement
+        | compound_statement
+        | format_definition
+        | statement
+        | annotation
+     )
 
 nyi_statement ::= OPERATOR_HELLIP
 format_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_FORMAT [IDENTIFIER] OPERATOR_ASSIGN [FORMAT] FORMAT_TERMINATOR {pin=2}
@@ -376,24 +378,19 @@ format_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_FORMAT [IDENTIFIER] OPE
 private compound_statement ::=
     sub_definition
     | named_block
-    | labelable_compound_statment
+    | block_compound
+    | if_compound
+    | unless_compound
+    | given_compound
+    | while_compound
+    | until_compound
+    | for_compound
+    | foreach_compound
+    | when_compound
+    | default_compound
+
 
 named_block ::= BLOCK_NAME block
-
-
-private labelable_compound_statment ::=
-    [label_declaration] (
-        block_compound
-        | if_compound
-        | unless_compound
-        | given_compound
-        | while_compound
-        | until_compound
-        | for_compound
-        | foreach_compound
-     )
-     | when_compound
-     | default_compound
 
 if_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_IF conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
 unless_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
@@ -447,7 +444,7 @@ private statement_body ::=
     | normal_statement
     {recoverWhile=recover_statement}
 
-private normal_statement ::= [label_declaration] normal_statement_body [statement_modifier] {pin=2}
+private normal_statement ::= normal_statement_body [statement_modifier] {pin=1}
 private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme we can't pin this because we need to distinct declaration and definition
