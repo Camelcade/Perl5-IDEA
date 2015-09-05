@@ -20,6 +20,7 @@ import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 
@@ -28,6 +29,18 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  */
 public class PerlIndentProcessor implements PerlElementTypes
 {
+	public static final TokenSet UNINDENTED_TOKENS = TokenSet.create(
+			HEREDOC,
+			HEREDOC_QQ,
+			HEREDOC_QX,
+			HEREDOC_END
+	);
+	public static final TokenSet BLOCK_LIKE_TOKENS = TokenSet.create(
+			BLOCK,
+			PARENTHESISED_EXPR,
+			ANON_ARRAY,
+			ANON_HASH
+	);
 	private final PerlCodeStyleSettings myCodeStyleSettings;
 
 	public PerlIndentProcessor(PerlCodeStyleSettings codeStyleSettings)
@@ -51,10 +64,10 @@ public class PerlIndentProcessor implements PerlElementTypes
 		ASTNode nextSibling = FormatterUtil.getNextNonWhitespaceSibling(node);
 		IElementType nextSiblingElementType = nextSibling != null ? nextSibling.getElementType() : null;
 
-		if (nodeType == HEREDOC_END || parent == null || grandParent == null)
+		if (UNINDENTED_TOKENS.contains(nodeType) || parent == null || grandParent == null)
 			return Indent.getAbsoluteNoneIndent();
 
-		if (parentType == BLOCK && nextSibling != null && prevSibling != null)
+		if (BLOCK_LIKE_TOKENS.contains(parentType) && nextSibling != null && prevSibling != null)
 			return Indent.getNormalIndent();
 
 		return Indent.getNoneIndent();

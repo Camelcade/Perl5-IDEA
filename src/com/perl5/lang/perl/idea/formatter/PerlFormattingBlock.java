@@ -23,6 +23,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +37,12 @@ import java.util.List;
  */
 public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes
 {
+	protected final static TokenSet LEAF_ELEMENTS = TokenSet.create(
+			HEREDOC,
+			HEREDOC_QX,
+			HEREDOC_QQ
+	);
+
 	private final Indent myIndent;
 	private final CommonCodeStyleSettings mySettings;
 	private final PerlCodeStyleSettings myPerl5Settings;
@@ -114,7 +121,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	@Override
 	public boolean isLeaf()
 	{
-		return myNode.getFirstChildNode() == null;
+		return myNode.getFirstChildNode() == null || LEAF_ELEMENTS.contains(myNode.getElementType());
 	}
 
 	@Override
@@ -138,7 +145,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 //		System.err.println("Invoced getchild indent");
 		IElementType type = getNode().getElementType();
 
-		if (type == BLOCK)
+		if (PerlIndentProcessor.BLOCK_LIKE_TOKENS.contains(type))
 			return Indent.getNormalIndent();
 
 		return Indent.getNoneIndent();
