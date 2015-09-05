@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
@@ -29,6 +30,14 @@ import java.util.Collection;
  */
 public interface PerlVariableDeclaration extends PsiElement, PerlNamespaceElementContainer, PerlLexicalScopeMember
 {
+	/**
+	 * Returns explicit declared type
+	 *
+	 * @return declaration type name or null
+	 */
+	@Nullable
+	String getDeclarationType();
+
 	@NotNull
 	Collection<PsiPerlArrayVariable> getArrayVariableList();
 

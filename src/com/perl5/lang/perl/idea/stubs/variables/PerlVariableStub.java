@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.stubs.variables;
 
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlVariable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 30.05.2015.
@@ -27,4 +28,7 @@ public interface PerlVariableStub extends StubElement<PerlVariable>
 	public String getPackageName();
 
 	public String getVariableName();
+
+	@Nullable
+	public String getDeclaredType();
 }

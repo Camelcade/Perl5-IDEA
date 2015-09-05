@@ -108,6 +108,21 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		return findChildByClass(PerlVariableNameElement.class);
 	}
 
+
+	@Nullable
+	@Override
+	public String getDeclaredType()
+	{
+		PerlVariableStub stub = getStub();
+		if (stub != null)
+			return stub.getDeclaredType();
+
+		PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
+		if (declaration != null)
+			return declaration.getDeclarationType();
+		return null;
+	}
+
 	@Nullable
 	@Override
 	public String guessVariableType()
@@ -206,16 +221,9 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 				}
 
 				// checking global declarations with explicit types
-				List<PerlVariable> globalDeclarations = getGlobalDeclarations();
-				if (globalDeclarations.size() > 0)
-				{
-					PsiElement parent = globalDeclarations.get(0).getParent();
-					if (parent instanceof PsiPerlVariableDeclarationGlobal
-							&& ((PsiPerlVariableDeclarationGlobal) parent).getNamespaceElement() != null
-							&& ((PsiPerlVariableDeclarationGlobal) parent).getNamespaceElement().getCanonicalName() != null
-							)
-						return ((PsiPerlVariableDeclarationGlobal) parent).getNamespaceElement().getCanonicalName();
-				}
+				for (PerlVariable declaration : getGlobalDeclarations())
+					if (declaration.getDeclaredType() != null)
+						return declaration.getDeclaredType();
 			}
 		}
 

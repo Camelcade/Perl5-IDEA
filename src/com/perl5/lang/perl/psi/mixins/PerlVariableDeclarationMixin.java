@@ -36,6 +36,16 @@ public abstract class PerlVariableDeclarationMixin extends PerlLexicalScopeMembe
 
 	@Nullable
 	@Override
+	public String getDeclarationType()
+	{
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		if (namespaceElement != null)
+			return namespaceElement.getCanonicalName();
+		return null;
+	}
+
+	@Nullable
+	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespaceElement.class);

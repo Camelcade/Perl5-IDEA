@@ -45,7 +45,7 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 	public PerlVariableStub createStub(@NotNull PerlVariable psi, StubElement parentStub)
 	{
 		assert psi.getVariableNameElement() != null;
-		return new PerlVariableStubImpl(parentStub, this, psi.getPackageName(), psi.getVariableNameElement().getName());
+		return new PerlVariableStubImpl(parentStub, this, psi.getPackageName(), psi.getVariableNameElement().getName(), psi.getDeclaredType());
 	}
 
 
@@ -75,6 +75,10 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 	@Override
 	public void serialize(@NotNull PerlVariableStub stub, @NotNull StubOutputStream dataStream) throws IOException
 	{
+		if (stub.getDeclaredType() == null)
+			dataStream.writeName("");
+		else
+			dataStream.writeName(stub.getDeclaredType());
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getVariableName());
 	}
@@ -83,7 +87,11 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 	@Override
 	public PerlVariableStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlVariableStubImpl(parentStub, this, dataStream.readName().toString(), dataStream.readName().toString());
+		String variableType = dataStream.readName().toString();
+		if (variableType.isEmpty())
+			variableType = null;
+
+		return new PerlVariableStubImpl(parentStub, this, dataStream.readName().toString(), dataStream.readName().toString(), variableType);
 	}
 
 	@Override

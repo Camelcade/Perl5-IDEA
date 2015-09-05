@@ -242,13 +242,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		ErrorState state = new ErrorState();
 		ErrorState.initState(state, builder, root, extendsSets);
 
-		if (!SAFE_PARSERS.contains(root))
-		{
-			int length = 100;
-			if (length > builder.getOriginalText().length())
-				length = builder.getOriginalText().length();
-			System.err.println("Adapting builder for " + root + " " + builder.getOriginalText().length() + " " + builder.getOriginalText().subSequence(0, length));
-		}
+//		if (!SAFE_PARSERS.contains(root))
+//		{
+//		int length = 100;
+//			if (length > builder.getOriginalText().length())
+//				length = builder.getOriginalText().length();
+//			System.err.println("Adapting builder for " + root + " " + builder.getOriginalText().length() + " " + builder.getOriginalText().subSequence(0, length));
+//		}
 //		else
 //			System.err.println("Adapting safe builder for " + root + " " + builder.getOriginalText().length());
 

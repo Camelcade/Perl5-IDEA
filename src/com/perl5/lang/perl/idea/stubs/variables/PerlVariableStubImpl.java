@@ -28,12 +28,14 @@ public class PerlVariableStubImpl extends StubBase<PerlVariable> implements Perl
 {
 	private final String myPackageName;
 	private final String myVariableName;
+	private final String myDeclaredType;
 
-	public PerlVariableStubImpl(StubElement parent, IStubElementType elementType, String myPackageName, String myVariableName)
+	public PerlVariableStubImpl(StubElement parent, IStubElementType elementType, String myPackageName, String myVariableName, String myDeclaredType)
 	{
 		super(parent, elementType);
 		this.myPackageName = myPackageName;
 		this.myVariableName = myVariableName;
+		this.myDeclaredType = myDeclaredType;
 	}
 
 	@Override
@@ -46,5 +48,11 @@ public class PerlVariableStubImpl extends StubBase<PerlVariable> implements Perl
 	public String getVariableName()
 	{
 		return myVariableName;
+	}
+
+	@Override
+	public String getDeclaredType()
+	{
+		return myDeclaredType;
 	}
 }

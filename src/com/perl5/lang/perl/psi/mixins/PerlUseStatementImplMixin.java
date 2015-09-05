@@ -115,7 +115,9 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 		if (packageProcessor != null)
 			return packageProcessor;
 
-		packageProcessor = PerlPackageProcessorEP.EP.findSingle(getPackageName());
+		String packageName = getPackageName();
+		if (packageName != null)
+			packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
 
 		if (packageProcessor == null)
 			packageProcessor = PerlPackageProcessorDefault.INSTANCE;

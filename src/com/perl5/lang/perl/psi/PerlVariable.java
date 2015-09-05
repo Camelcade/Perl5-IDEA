@@ -29,13 +29,19 @@ import java.util.List;
 public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer, PerlNamedElement
 {
 	/**
+	 * Returns declaration type if variable is in declaration
+	 * @return type string or null
+	 */
+	@Nullable
+	String getDeclaredType();
+
+	/**
 	 * Guesses variable type from definition or context (uses containing perl file to cache types)
 	 *
 	 * @return Package name if found
 	 */
 	@Nullable
 	String guessVariableType();
-
 
 	/**
 	 * Guesses variable type from definition or context, using source

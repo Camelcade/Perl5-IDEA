@@ -68,7 +68,7 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 		if (variableNameElement == null)
 			variableNameElement = parameters.getPosition();
 
-		assert variableNameElement instanceof PerlVariableNameElement;
+		assert variableNameElement instanceof PerlVariableNameElement : "Got type " + variableNameElement.getClass();
 
 		PsiElement perlVariable = variableNameElement.getParent();
 
