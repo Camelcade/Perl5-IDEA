@@ -26,7 +26,6 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.utils.PerlBuilder;
-import com.perl5.lang.perl.psi.utils.PerlNamesCache;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
@@ -223,6 +222,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PACKAGE_CORE_IDENTIFIER
 	);
 
+	public static TokenSet SAFE_PARSERS = TokenSet.create(
+			HEREDOC,
+			HEREDOC_QQ,
+			HEREDOC_QX
+	);
+
 	/**
 	 * Wrapper for Builder class in order to implement additional per parser information in PerlBuilder
 	 *
@@ -236,7 +241,16 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		ErrorState state = new ErrorState();
 		ErrorState.initState(state, builder, root, extendsSets);
-		return new PerlBuilder(builder, state, parser);
+
+		if (!SAFE_PARSERS.contains(root))
+		{
+			int length = 100;
+			if (length > builder.getOriginalText().length())
+				length = builder.getOriginalText().length();
+			System.err.println("Adapting builder for " + root + " " + builder.getOriginalText().length() + " " + builder.getOriginalText().subSequence(0, length));
+		}
+
+		return new PerlBuilder(builder, state, parser, SAFE_PARSERS.contains(root));
 	}
 
 	/**
@@ -325,7 +339,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (CONVERTABLE_TOKENS.contains(tokenType)
 				&& nextTokenType != LEFT_PAREN              // not function call
 				&& !PACKAGE_TOKENS.contains(nextTokenType)  // not method Package::
-				&& !(nextTokenType == IDENTIFIER && PerlNamesCache.isPackageExists(((PerlBuilder) b).lookupToken(1).getTokenText()))  // not Method Package
+				&& !(nextTokenType == IDENTIFIER && ((PerlBuilder) b).isKnownPackage(((PerlBuilder) b).lookupToken(1).getTokenText()))  // not Method Package
 				)
 			// todo we should check current namespace here
 			return !PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
@@ -635,8 +649,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 			if (
 					nextNextTokenType == LEFT_PAREN                        // Package::Identifier( - what can it be?
-							|| PerlNamesCache.isSubExists(potentialSubName)       // we know this sub
-							|| !PerlNamesCache.isPackageExists(potentialSubName)) // we don't know such package
+							|| ((PerlBuilder) b).isKnownSub(potentialSubName)       // we know this sub
+							|| !((PerlBuilder) b).isKnownPackage(potentialSubName)) // we don't know such package
 				return convertPackageIdentifier(b, l) && convertIdentifier(b, l, SUB);
 			else
 				return false;
@@ -673,9 +687,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 					String packageOrSub = PerlPackageUtil.getCanonicalPackageName(nextTokenData.getTokenText()) + "::" + nextNextTokenData.getTokenText();
 
-					if (PerlNamesCache.isSubExists(packageOrSub))
+					if (((PerlBuilder) b).isKnownSub(packageOrSub))
 						return convertIdentifier(b, l, SUB);
-					else if (PerlNamesCache.isPackageExists(packageOrSub))
+					else if (((PerlBuilder) b).isKnownPackage(packageOrSub))
 						return convertIdentifier(b, l, SUB) && mergePackageName(b, l);
 					return convertIdentifier(b, l, SUB);
 				} else
@@ -689,13 +703,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
 
 				String potentialSubName = nextTokenData.getTokenText() + "::" + b.getTokenText();
-				if (PerlNamesCache.isSubExists(potentialSubName))
+				if (((PerlBuilder) b).isKnownSub(potentialSubName))
 					return convertIdentifier(b, l, SUB) && convertIdentifier(b, l, PACKAGE);
 				else
 					return convertIdentifier(b, l, SUB);
 			}
 			// KnownPackage->
-			else if (nextTokenType == OPERATOR_DEREFERENCE && PerlNamesCache.isPackageExists(b.getTokenText()))
+			else if (nextTokenType == OPERATOR_DEREFERENCE && ((PerlBuilder) b).isKnownPackage(b.getTokenText()))
 				return false;
 				// it's just sub
 			else

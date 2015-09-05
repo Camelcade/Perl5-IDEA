@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.util;
 
+import gnu.trove.THashSet;
+
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hurricup on 26.04.2015.
@@ -25,7 +27,7 @@ import java.util.HashSet;
 // @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprication control
 public interface PerlPackageUtilBuiltIn
 {
-	public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+	public static final Set<String> BUILT_IN = new THashSet<String>(Arrays.asList(
 			"AnyDBM_File",
 			"App::Prove",
 			"App::Prove::State",
@@ -447,7 +449,7 @@ public interface PerlPackageUtilBuiltIn
 			"CORE"
 	));
 
-	public static final HashSet<String> BUILT_IN_PRAGMA = new HashSet<String>(Arrays.asList(
+	public static final Set<String> BUILT_IN_PRAGMA = new THashSet<String>(Arrays.asList(
 			"attributes",
 			"autodie",
 			"autouse",
@@ -489,7 +491,7 @@ public interface PerlPackageUtilBuiltIn
 			"warnings::register"
 	));
 
-	public static final HashSet<String> BUILT_IN_DEPRECATED = new HashSet<String>(Arrays.asList(
+	public static final Set<String> BUILT_IN_DEPRECATED = new THashSet<String>(Arrays.asList(
 			"Locale::Maketext::Guts",
 			"Locale::Maketext::GutsLoader",
 			"Module::Build::ModuleInfo",
