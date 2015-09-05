@@ -20,6 +20,7 @@ package com.perl5.lang.perl.lexer;
 
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
@@ -507,7 +508,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		String tokenText = yytext().toString();
 //		System.err.println("For "  + tokenText + "Last significant token is " + lastSignificantTokenType);
-		if (tokenText.startsWith(".") && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType)) // It's a $var.123; where . is a concat
+		if (StringUtil.startsWithChar(tokenText, '.') && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType)) // It's a $var.123; where . is a concat
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_CONCAT;
@@ -1367,7 +1368,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		{
 			yypushback(tokenText.length() - 2);
 			return OPERATOR_MINUS_MINUS;
-		} else if (tokenText.startsWith("-"))
+		} else if (StringUtil.startsWithChar(tokenText, '-'))
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_MINUS;

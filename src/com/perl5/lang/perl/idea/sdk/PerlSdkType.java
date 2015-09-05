@@ -27,7 +27,7 @@ public class PerlSdkType extends SdkType
 {
 	public static final String PERL_SDK_TYPE_ID = "Perl5 Interpreter";
 
-	Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
+	public static final Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
 
 	public PerlSdkType()
 	{
