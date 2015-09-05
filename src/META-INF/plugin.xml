@@ -51,6 +51,7 @@
 
       <p><b>Fixes:</b>
       <ul>
+        <li>Significally increased re-parsing performance on code typing</li>
         <li>It's not possible anymore to start identifier with digit, like <code>$123abc</code></li>
         <li>Hexadecimal and binary numbers with underscores now being parsed right.</li>
         <li>Fixed parsing problem for concatenation of string and fractional number.</li>
