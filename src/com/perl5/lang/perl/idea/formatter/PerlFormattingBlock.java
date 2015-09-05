@@ -18,9 +18,11 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.AbstractBlock;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +64,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
 	private static boolean shouldCreateBlockFor(ASTNode node)
 	{
-		return node.getTextRange().getLength() != 0 && node.getElementType() != TokenType.WHITE_SPACE;
+		return node.getElementType() != TokenType.WHITE_SPACE && node.getText().length() != 0;
 	}
 
 	@NotNull
@@ -70,23 +72,22 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	protected List<Block> buildChildren()
 	{
 		if (mySubBlocks == null)
-		{
 			mySubBlocks = buildSubBlocks();
-		}
+
 		return new ArrayList<Block>(mySubBlocks);
 	}
 
 	private List<Block> buildSubBlocks()
 	{
 		final List<Block> blocks = new ArrayList<Block>();
-		System.err.println("Creating sub-blocks for " + myNode);
+//		System.err.println("Creating sub-blocks for " + myNode);
 
 		Alignment alignment = null;//Alignment.createAlignment();
 
 		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
 		{
 			if (!shouldCreateBlockFor(child)) continue;
-			System.err.println("Creating sub-block for " + child);
+//			System.err.println("Creating sub-block for " + child);
 			blocks.add(createChildBlock(myNode, child, alignment, -1));
 		}
 
@@ -105,9 +106,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
 	@Nullable
 	@Override
-	public Spacing getSpacing(Block child1, Block child2)
+	public Spacing getSpacing(Block child1, @NotNull Block child2)
 	{
-		return null;
+		return mySpacingBuilder.getSpacing(this, child1, child2);
 	}
 
 	@Override
@@ -127,5 +128,27 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	public Alignment getAlignment()
 	{
 		return super.getAlignment();
+	}
+
+
+	@Nullable
+	@Override
+	protected Indent getChildIndent()
+	{
+//		System.err.println("Invoced getchild indent");
+		IElementType type = getNode().getElementType();
+
+		if (type == BLOCK)
+			return Indent.getNormalIndent();
+
+		return Indent.getNoneIndent();
+	}
+
+	@NotNull
+	@Override
+	public TextRange getTextRange()
+	{
+		int start = myNode.getStartOffset();
+		return new TextRange(start, start + myNode.getText().length());
 	}
 }

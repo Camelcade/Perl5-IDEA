@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -37,14 +38,25 @@ public class PerlIndentProcessor implements PerlElementTypes
 	public Indent getChildIndent(ASTNode node, int binaryExpressionIndex)
 	{
 		// fixme wtf is this
-		if (binaryExpressionIndex > 0) return com.intellij.formatting.Indent.getNormalIndent();
-		IElementType nodeType = node.getElementType();
+		if (binaryExpressionIndex > 0)
+			return Indent.getNormalIndent();
 
-		// fixme not working
-		if (nodeType == HEREDOC_END)
+		IElementType nodeType = node.getElementType();
+		ASTNode parent = node.getTreeParent();
+		IElementType parentType = parent != null ? parent.getElementType() : null;
+		ASTNode grandParent = parent != null ? parent.getTreeParent() : null;
+		IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
+		ASTNode prevSibling = FormatterUtil.getPreviousNonWhitespaceSibling(node);
+		IElementType prevSiblingElementType = prevSibling != null ? prevSibling.getElementType() : null;
+		ASTNode nextSibling = FormatterUtil.getNextNonWhitespaceSibling(node);
+		IElementType nextSiblingElementType = nextSibling != null ? nextSibling.getElementType() : null;
+
+		if (nodeType == HEREDOC_END || parent == null || grandParent == null)
 			return Indent.getAbsoluteNoneIndent();
 
-		//	return com.intellij.formatting.Indent.getNormalIndent();
+		if (parentType == BLOCK && nextSibling != null && prevSibling != null)
+			return Indent.getNormalIndent();
+
 		return Indent.getNoneIndent();
 	}
 }

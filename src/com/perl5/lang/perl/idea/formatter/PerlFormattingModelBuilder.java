@@ -47,7 +47,6 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlE
 	@Override
 	public FormattingModel createModel(PsiElement element, CodeStyleSettings settings)
 	{
-		System.err.println("Creating model for " + element);
 		CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
 		PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
 		SpacingBuilder spacingBuilder = createSpacingBuilder(commonSettings, perlSettings);
