@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
@@ -46,6 +47,7 @@ public class PerlSubReference extends PerlReferencePoly
 	protected boolean myIsDefined = false;
 	protected boolean myIsAliased = false;
 	protected boolean myIsImported = false;
+	private String myConstantValue;
 	PerlSubNameElement mySubNameElement;
 
 	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
@@ -153,8 +155,10 @@ public class PerlSubReference extends PerlReferencePoly
 			if (!myIsAutoLoaded && element instanceof PerlNamedElement && "AUTOLOAD".equals(((PerlNamedElement) element).getName()))
 				myIsAutoLoaded = true;
 
-			if (!myIsConstant && element instanceof PerlConstant)
+			if (!myIsConstant && element instanceof PerlConstant) {
 				myIsConstant = true;
+				myConstantValue = getConstantValue(element);
+			}
 
 			if (!myIsDeclared && element instanceof PerlSubDeclaration)
 				myIsDeclared = true;
@@ -169,6 +173,24 @@ public class PerlSubReference extends PerlReferencePoly
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);
+	}
+
+	private String getConstantValue(@NotNull PsiElement psi) {
+		String result = "Constant";
+
+		boolean nextElement = true;
+		PsiElement element = psi.getNextSibling();
+
+		do {
+			nextElement = (element instanceof PsiWhiteSpace) || (element.getNode().getText().equals("=>"));
+			if (nextElement) {
+				element = element.getNextSibling();
+			} else {
+				result = element.getText();
+			}
+		} while(nextElement);
+
+		return result;
 	}
 
 	public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems)
@@ -257,5 +279,9 @@ public class PerlSubReference extends PerlReferencePoly
 	public boolean isImported()
 	{
 		return myIsImported;
+	}
+
+	public String getConstantValue() {
+		return "Constant: " + myConstantValue;
 	}
 }
