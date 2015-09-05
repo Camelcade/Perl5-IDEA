@@ -20,6 +20,7 @@ package com.perl5.lang.perl.lexer;
 
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
@@ -40,6 +41,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public static final HashMap<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
+	// pattern for getting marker
+	public static final Pattern markerPattern = Pattern.compile("<<(.+?)");
+	public static final Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
+	public static final Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.+?)\'");
+	public static final Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
+	public static final Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	private static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
 			"eq",
@@ -169,11 +176,6 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 	// last captured heredoc marker
 	public String heredocMarker;
-	// pattern for getting marker
-	public Pattern markerPattern = Pattern.compile("<<(.+?)");
-	public Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
-	public Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.+?)\'");
-	public Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
 	/**
 	 * Quote-like, transliteration and regexps common part
 	 */
@@ -186,9 +188,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	public int currentSectionNumber = 0; // current section
 	protected PerlLexerAdapter evalPerlLexer;
 	protected PerlStringLexer myStringLexer;
-
 	Project myProject;
-	Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
 	/**
 	 * Regex processor qr{} m{} s{}{}
 	 **/
@@ -508,7 +508,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	{
 		String tokenText = yytext().toString();
 //		System.err.println("For "  + tokenText + "Last significant token is " + lastSignificantTokenType);
-		if (tokenText.startsWith(".") && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType)) // It's a $var.123; where . is a concat
+		if (StringUtil.startsWithChar(tokenText, '.') && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType)) // It's a $var.123; where . is a concat
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_CONCAT;
@@ -1368,7 +1368,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		{
 			yypushback(tokenText.length() - 2);
 			return OPERATOR_MINUS_MINUS;
-		} else if (tokenText.startsWith("-"))
+		} else if (StringUtil.startsWithChar(tokenText, '-'))
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_MINUS;

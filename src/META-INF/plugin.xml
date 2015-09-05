@@ -60,6 +60,7 @@
         <li>Typeglobs for built-ins are not annotated as unused anymore.</li>
         <li>Fixed package file creation in specialized IDEs.</li>
         <li>Here-doc end marker is not being indented on block tabbing.</li>
+        <li>Here-doc end marker is not being indented on live-template insertion.</li>
       </ul>
       </p>
 
@@ -197,6 +198,7 @@
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
+        <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
 
         <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
 
