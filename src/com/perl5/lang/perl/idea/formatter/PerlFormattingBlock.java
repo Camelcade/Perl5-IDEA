@@ -169,10 +169,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 							|| BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock) child2).isLast()
 					))
 				return Spacing.createSpacing(0, 0, 1, true, 1);
-
-			// LF between statements and so on
-			if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type))
-				return Spacing.createSpacing(0, 0, 1, true, 1);
 		}
 		return mySpacingBuilder.getSpacing(this, child1, child2);
 	}

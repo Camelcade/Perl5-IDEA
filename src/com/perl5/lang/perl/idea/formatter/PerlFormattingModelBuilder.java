@@ -26,6 +26,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -39,8 +40,18 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlE
 {
 	private static SpacingBuilder createSpacingBuilder(@NotNull CommonCodeStyleSettings settings, @NotNull PerlCodeStyleSettings perlSettings)
 	{
-		return new SpacingBuilder(settings.getRootSettings(), PerlLanguage.INSTANCE)
-				.before(HEREDOC_END).none();
+		SpacingBuilder spacingBuilder = new SpacingBuilder(settings.getRootSettings(), PerlLanguage.INSTANCE)
+				.before(HEREDOC_END).none()
+
+				.after(RESERVED_MY).spaces(1)
+				.after(RESERVED_OUR).spaces(1)
+				.after(RESERVED_LOCAL).spaces(1)
+				.after(RESERVED_STATE).spaces(1);
+
+		for (IElementType type : PerlFormattingBlock.LF_ELEMENTS.getTypes())
+			spacingBuilder = spacingBuilder.after(type).lineBreakInCode();
+
+		return spacingBuilder;
 	}
 
 	@NotNull
