@@ -44,18 +44,21 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 		} else if (settingsType == SettingsType.SPACING_SETTINGS)
 		{
 			consumer.showStandardOptions(
-					"SPACE_AROUND_ASSIGNMENT_OPERATORS",
-					"SPACE_AROUND_LOGICAL_OPERATORS",
-					"SPACE_AROUND_EQUALITY_OPERATORS",
-					"SPACE_AROUND_RELATIONAL_OPERATORS",
-					"SPACE_AROUND_BITWISE_OPERATORS",
-					"SPACE_AROUND_ADDITIVE_OPERATORS",
-					"SPACE_AROUND_MULTIPLICATIVE_OPERATORS",
-					"SPACE_AROUND_SHIFT_OPERATORS",
-					"SPACE_AROUND_UNARY_OPERATOR",
-					"SPACE_AFTER_COMMA",
+					"SPACE_AROUND_ASSIGNMENT_OPERATORS",    // implemented
+					"SPACE_AROUND_LOGICAL_OPERATORS",        // implemented
+					"SPACE_AROUND_EQUALITY_OPERATORS",        // implemented
+					"SPACE_AROUND_RELATIONAL_OPERATORS",    // implemented
+					"SPACE_AROUND_BITWISE_OPERATORS",        // implemented
+					"SPACE_AROUND_ADDITIVE_OPERATORS",        // implemented
+					"SPACE_AROUND_MULTIPLICATIVE_OPERATORS",// implemented
+					"SPACE_AROUND_SHIFT_OPERATORS",            // implemented
+					"SPACE_AROUND_UNARY_OPERATOR",            // implemented
+
+					"SPACE_AFTER_COMMA",    // implemented
+					"SPACE_BEFORE_COMMA",    // implemented
+
 					"SPACE_AFTER_COLON",
-					"SPACE_BEFORE_COMMA",
+
 					"SPACE_AFTER_SEMICOLON",
 					"SPACE_BEFORE_SEMICOLON",
 

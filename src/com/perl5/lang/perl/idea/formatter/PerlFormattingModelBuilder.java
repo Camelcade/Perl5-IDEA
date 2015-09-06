@@ -26,55 +26,42 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlElementTypes
+public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlFormattingTokenSets
 {
-	public static final TokenSet OPERATORS_ASSIGNMENT = TokenSet.create(
-			OPERATOR_ASSIGN,
-			OPERATOR_POW_ASSIGN,
-			OPERATOR_PLUS_ASSIGN,
-			OPERATOR_MINUS_ASSIGN,
-			OPERATOR_MUL_ASSIGN,
-			OPERATOR_DIV_ASSIGN,
-			OPERATOR_MOD_ASSIGN,
-			OPERATOR_CONCAT_ASSIGN,
-			OPERATOR_X_ASSIGN,
-			OPERATOR_BITWISE_AND_ASSIGN,
-			OPERATOR_BITWISE_OR_ASSIGN,
-			OPERATOR_BITWISE_XOR_ASSIGN,
-			OPERATOR_SHIFT_LEFT_ASSIGN,
-			OPERATOR_SHIFT_RIGHT_ASSIGN,
-			OPERATOR_AND_ASSIGN,
-			OPERATOR_OR_ASSIGN,
-			OPERATOR_OR_DEFINED_ASSIGN
-	);
-
-	public static final TokenSet RESERVED_VARIABLE_DECLARATION = TokenSet.create(
-			RESERVED_MY,
-			RESERVED_OUR,
-			RESERVED_LOCAL,
-			RESERVED_STATE
-	);
 
 	private static SpacingBuilder createSpacingBuilder(@NotNull CommonCodeStyleSettings settings, @NotNull PerlCodeStyleSettings perlSettings)
 	{
 		return new SpacingBuilder(settings.getRootSettings(), PerlLanguage.INSTANCE)
-				.before(HEREDOC_END).none()
-				.after(RESERVED_VARIABLE_DECLARATION).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
+				// standart settings
 				.around(OPERATORS_ASSIGNMENT).spaceIf(settings.SPACE_AROUND_ASSIGNMENT_OPERATORS)
+				.around(OPERATORS_EQUALITY).spaceIf(settings.SPACE_AROUND_EQUALITY_OPERATORS)
+				.around(OPERATORS_RELATIONAL).spaceIf(settings.SPACE_AROUND_RELATIONAL_OPERATORS)
+				.around(OPERATORS_LOGICAL).spaceIf(settings.SPACE_AROUND_LOGICAL_OPERATORS)
+				.around(OPERATORS_BITWISE).spaceIf(settings.SPACE_AROUND_BITWISE_OPERATORS)
+				.around(OPERATORS_ADDITIVE).spaceIf(settings.SPACE_AROUND_ADDITIVE_OPERATORS)
+				.around(OPERATORS_MULTIPLICATIVE).spaceIf(settings.SPACE_AROUND_MULTIPLICATIVE_OPERATORS)
+				.around(OPERATORS_SHIFT).spaceIf(settings.SPACE_AROUND_SHIFT_OPERATORS)
+				.around(OPERATORS_UNARY).spaceIf(settings.SPACE_AROUND_UNARY_OPERATOR)
+
 				.before(OPERATOR_COMMA).spaceIf(settings.SPACE_BEFORE_COMMA)
 				.after(OPERATOR_COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
-				.around(OPERATOR_COMMA_ARROW).spacing(1, Integer.MAX_VALUE, 0, true, 1)
+
+						// unconditional
+				.before(HEREDOC_END).none()
+				.around(OPERATORS_STR).spaces(1)
 				.after(PerlFormattingBlock.LF_ELEMENTS).lineBreakInCode()
+
+						// perl specific
+				.after(RESERVED_VARIABLE_DECLARATION).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
+				.around(OPERATOR_COMMA_ARROW).spacing(1, Integer.MAX_VALUE, 0, true, 1)
 				;
 	}
 
