@@ -24,6 +24,54 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  */
 public interface PerlFormattingTokenSets extends PerlElementTypes
 {
+	public static final TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
+			CONDITION_STATEMENT,
+			FOR_ITERATOR,
+			FOR_LIST_EPXR
+	);
+
+	public static final TokenSet BLOCK_CONTAINERS = TokenSet.create(
+			CONDITIONAL_BLOCK,
+			FOR_COMPOUND,
+			FOREACH_COMPOUND,
+			UNCONDITIONAL_BLOCK,
+			CONTINUE_BLOCK,
+
+			// fixme probably we should move them somewhere
+			SUB_DEFINITION,
+			NAMESPACE_DEFINITION
+	);
+
+	public static final TokenSet STATEMENT_MODIFIERS = TokenSet.create(
+			IF_STATEMENT_MODIFIER,
+			UNLESS_STATEMENT_MODIFIER,
+			WHILE_STATEMENT_MODIFIER,
+			UNTIL_STATEMENT_MODIFIER,
+			FOR_STATEMENT_MODIFIER,
+			FOREACH_STATEMENT_MODIFIER,
+			WHEN_STATEMENT_MODIFIER
+	);
+
+	public static final TokenSet RESERVED_COMPOUND_CONDITIONAL = TokenSet.create(
+			RESERVED_IF,
+			RESERVED_UNLESS,
+			RESERVED_GIVEN,
+			RESERVED_WHILE,
+			RESERVED_UNTIL,
+			RESERVED_ELSIF,
+
+			// these are redundant here, but used in statement modifiers
+			RESERVED_FOR,
+			RESERVED_FOREACH
+	);
+
+	public static final TokenSet RESERVED_TERMS_BLOCKS = TokenSet.create(
+			RESERVED_DO,
+			RESERVED_EVAL,
+			RESERVED_SUB
+	);
+
+
 	public static final TokenSet OPERATORS_BITWISE = TokenSet.create(
 			OPERATOR_BITWISE_OR,
 			OPERATOR_BITWISE_XOR,

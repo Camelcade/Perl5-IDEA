@@ -26,9 +26,18 @@ public interface PerlCodeStyleOptionNames
 	// fixme temporary solution, should be on a separate tab
 	public static final String WRAP_GROUP_PERL_SPECIFIC = "Perl specific";
 
-	public static final String SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD = "Variable declaration (my/our/state/local)";
+	public static final String SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD = "Variable declaration";
+
+	public static final String SPACE_OPTION_COMPOUND_EXPRESSION = "Compound condition or expression";
+	public static final String SPACE_OPTION_COMPOUND_BLOCK = "Compound block";
+
+	public static final String SPACE_OPTION_COMPOUND_SECONDARY = "Secondary compound (else/elsif/continue/default)";
+	public static final String SPACE_OPTION_TERM_BLOCKS = "Term blocks (sub/eval/do)";
+
+	public static final String SPACE_OPTION_STATEMENT_MODIFIERS = "Statement modifiers";
 
 	public static final String PERL_OPTION_OPTIONAL_QUOTES = "Optional quotes [NYI]";
 	public static final String PERL_OPTION_OPTIONAL_PARENTHESES = "Optional parentheses [NYI]";
 	public static final String PERL_OPTION_OPTIONAL_DEREFERENCE = "Optional dereferences [NYI]";
+	public static final String PERL_OPTION_OPTIONAL_SEMI = "Optional semicolons [NYI]";
 }

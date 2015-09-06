@@ -40,7 +40,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 	private static SpacingBuilder createSpacingBuilder(@NotNull CommonCodeStyleSettings settings, @NotNull PerlCodeStyleSettings perlSettings)
 	{
 		return new SpacingBuilder(settings.getRootSettings(), PerlLanguage.INSTANCE)
-				// standart settings
+				// standard settings
 				.around(OPERATORS_ASSIGNMENT).spaceIf(settings.SPACE_AROUND_ASSIGNMENT_OPERATORS)
 				.around(OPERATORS_EQUALITY).spaceIf(settings.SPACE_AROUND_EQUALITY_OPERATORS)
 				.around(OPERATORS_RELATIONAL).spaceIf(settings.SPACE_AROUND_RELATIONAL_OPERATORS)
@@ -53,6 +53,35 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 
 				.before(OPERATOR_COMMA).spaceIf(settings.SPACE_BEFORE_COMMA)
 				.after(OPERATOR_COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
+
+				.afterInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_AFTER_COLON)
+
+				.afterInside(SEMICOLON, FOR_ITERATOR).spaceIf(settings.SPACE_AFTER_SEMICOLON)
+				.beforeInside(SEMICOLON, FOR_ITERATOR).spaceIf(settings.SPACE_BEFORE_SEMICOLON)
+
+				.between(RESERVED_TERMS_BLOCKS, BLOCK).spaceIf(settings.SPACE_BEFORE_DO_LBRACE)
+				.beforeInside(STATEMENT_MODIFIERS, STATEMENT).spaceIf(settings.SPACE_BEFORE_WHILE_KEYWORD)
+
+				.between(RESERVED_COMPOUND_CONDITIONAL, CONDITIONAL_BLOCK).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+				.between(RESERVED_FOR, FOR_ITERATOR).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+
+				.afterInside(RESERVED_IF, IF_STATEMENT_MODIFIER).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+				.afterInside(RESERVED_UNLESS, UNLESS_STATEMENT_MODIFIER).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+				.afterInside(RESERVED_WHILE, WHILE_STATEMENT_MODIFIER).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+				.afterInside(RESERVED_UNTIL, UNTIL_STATEMENT_MODIFIER).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+				.afterInside(RESERVED_FOR, FOR_STATEMENT_MODIFIER).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+				.afterInside(RESERVED_FOREACH, FOREACH_STATEMENT_MODIFIER).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+				.afterInside(RESERVED_WHEN, WHEN_STATEMENT_MODIFIER).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
+
+				.beforeInside(BLOCK, BLOCK_CONTAINERS).spaceIf(settings.SPACE_BEFORE_IF_LBRACE)
+
+				.afterInside(LEFT_PAREN, CONDITION_LIKE_ELEMENTS).spaceIf(settings.SPACE_WITHIN_IF_PARENTHESES)
+				.beforeInside(RIGHT_PAREN, CONDITION_LIKE_ELEMENTS).spaceIf(settings.SPACE_WITHIN_IF_PARENTHESES)
+
+				.before(CONTINUE_BLOCK).spaceIf(settings.SPACE_BEFORE_ELSE_KEYWORD)
+				.before(RESERVED_ELSE).spaceIf(settings.SPACE_BEFORE_ELSE_KEYWORD)
+				.before(RESERVED_ELSIF).spaceIf(settings.SPACE_BEFORE_ELSE_KEYWORD)
+				.before(RESERVED_DEFAULT).spaceIf(settings.SPACE_BEFORE_ELSE_KEYWORD)
 
 						// unconditional
 				.before(HEREDOC_END).none()

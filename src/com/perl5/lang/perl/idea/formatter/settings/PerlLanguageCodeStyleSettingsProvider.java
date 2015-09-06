@@ -55,33 +55,29 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 					"SPACE_AROUND_UNARY_OPERATOR",            // implemented
 
 					"SPACE_AFTER_COMMA",    // implemented
-					"SPACE_BEFORE_COMMA",    // implemented
+					"SPACE_BEFORE_COMMA",   // implemented
 
-					"SPACE_AFTER_COLON",
+					"SPACE_AFTER_COLON",    // implemented
 
-					"SPACE_AFTER_SEMICOLON",
-					"SPACE_BEFORE_SEMICOLON",
+					"SPACE_AFTER_SEMICOLON",    // implemented
+					"SPACE_BEFORE_SEMICOLON",    // implemented
 
-					"SPACE_WITHIN_IF_PARENTHESES",
-					"SPACE_BEFORE_IF_LBRACE",
+					"SPACE_BEFORE_IF_PARENTHESES",    // implemented, any conditional block, for and iterator
+					"SPACE_WITHIN_IF_PARENTHESES",    // condition, for iterator
+					"SPACE_BEFORE_IF_LBRACE",        // implemented, any or undonditional conditional block, for,
 
-					"SPACE_BEFORE_ELSE_LBRACE",
-					"SPACE_BEFORE_ELSE_KEYWORD",
+					"SPACE_BEFORE_ELSE_KEYWORD",    // implemented, else,elsif,continue,default
 
-					"SPACE_BEFORE_WHILE_LBRACE",
-					"SPACE_WITHIN_WHILE_PARENTHESES",
-					"SPACE_BEFORE_WHILE_PARENTHESES",
-					"SPACE_BEFORE_WHILE_KEYWORD",
-
-					"SPACE_BEFORE_FOR_LBRACE",
-					"SPACE_WITHIN_FOR_PARENTHESES",
-					"SPACE_BEFORE_FOR_PARENTHESES",
-
-					"SPACE_WITHIN_SWITCH_PARENTHESES",
-					"SPACE_BEFORE_SWITCH_LBRACE",
-
-					"SPACE_BEFORE_DO_LBRACE"
+					"SPACE_BEFORE_WHILE_KEYWORD",    // implemented, postfix if/for/etc
+					"SPACE_BEFORE_DO_LBRACE"        // implemented, sub_{}, do_{}, eval_{}
 			);
+			consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
+			consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
+			consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", SPACE_OPTION_COMPOUND_BLOCK);
+			consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", SPACE_OPTION_COMPOUND_SECONDARY);
+			consumer.renameStandardOption("SPACE_BEFORE_WHILE_KEYWORD", SPACE_OPTION_STATEMENT_MODIFIERS);
+			consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", SPACE_OPTION_TERM_BLOCKS);
+
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD", SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD, SPACE_GROUP_AFTER_KEYWORD);
 		} else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS)
 		{
@@ -89,6 +85,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", PERL_OPTION_OPTIONAL_QUOTES, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE", PERL_OPTION_OPTIONAL_DEREFERENCE, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_PARENTHESES", PERL_OPTION_OPTIONAL_PARENTHESES, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_SEMI", PERL_OPTION_OPTIONAL_SEMI, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
 
 		}
 //		else if( settingsType == SettingsType.INDENT_SETTINGS ) // fixme seems not invoked
