@@ -163,12 +163,13 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			ASTNode child2Node = ((PerlFormattingBlock) child2).getNode();
 			IElementType child2Type = child2Node.getElementType();
 
-			// LF after opening brace and before closing
-			if (isCodeBlock() &&
-					(BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock) child1).isFirst()
-							|| BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock) child2).isLast()
-					))
-				return Spacing.createSpacing(0, 0, 1, true, 1);
+			// LF after opening brace and before closing need to check if here-doc opener is in the line
+//			.after(PerlFormattingBlock.LF_ELEMENTS).lineBreakInCode()
+//			if (isCodeBlock() &&
+//					(BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock) child1).isFirst()
+//							|| BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock) child2).isLast()
+//					))
+//				return Spacing.createSpacing(0, 0, 1, true, 1);
 		}
 		return mySpacingBuilder.getSpacing(this, child1, child2);
 	}

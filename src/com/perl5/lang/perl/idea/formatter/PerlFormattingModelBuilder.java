@@ -86,7 +86,6 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 						// unconditional
 				.before(HEREDOC_END).none()
 				.around(OPERATORS_STR).spaces(1)
-				.after(PerlFormattingBlock.LF_ELEMENTS).lineBreakInCode()
 
 						// perl specific
 				.after(RESERVED_VARIABLE_DECLARATION).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)

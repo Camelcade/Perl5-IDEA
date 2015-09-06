@@ -44,6 +44,11 @@ limitations under the License.
     SIGIL_SCALAR="SIGIL_SCALAR"
     SIGIL_SCALAR_INDEX="SIGIL_SCALAR_INDEX"
 
+    // synthetic sigils
+    SIGIL_GLOB="SIGIL_GLOB"
+    SIGIL_HASH="SIGIL_HASH"
+    SIGIL_CODE="SIGIL_CODE"
+
     ANNOTATION_PREFIX="ANNOTATION_PREFIX"
 
     ANNOTATION_UNKNOWN_KEY="ANNOTATION_UNKNOWN"
@@ -880,7 +885,7 @@ private hash ::=
     hash_variable
     | hash_cast_expr
 
-hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD>> cast_target
+hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD SIGIL_HASH>> cast_target
 
 private scalar ::= <<parseScalarOrElement>>
 
@@ -907,7 +912,7 @@ private glob_primitive ::=
     glob_variable
     | glob_cast_expr
 
-glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL>> cast_target
+glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL SIGIL_GLOB>> cast_target
 
 glob_slot ::= glob_primitive hash_index
 
@@ -934,11 +939,11 @@ private callable ::= method | code // being used in parseFunctionCall
 private referencable_expr ::= code | scalar_expr
 
 private code ::=
-    <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> method
+    <<parseAmbiguousSigil OPERATOR_BITWISE_AND SIGIL_CODE>> method
     | code_variable
     | code_cast_expr
 
-code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> cast_target
+code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND SIGIL_CODE>> cast_target
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
@@ -996,12 +1001,12 @@ private lexical_variable ::= scalar_variable | array_variable | hash_variable
 array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
-hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD>> variable_body
+hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD SIGIL_HASH>> variable_body
 
 //fixme probably this should not be here
-code_variable ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND>> variable_body
+code_variable ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND SIGIL_CODE>> variable_body
 
-glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL>> variable_body
+glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL SIGIL_GLOB>> variable_body
 
 private variable_body ::= <<parseVariableName>>
 

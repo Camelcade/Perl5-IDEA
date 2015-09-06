@@ -52,7 +52,7 @@ public class PerlHeredocLexer extends PerlStringLexer
 		{
 			// hack for leading spaces
 			setTokenStart(tokenEnd);
-			while (tokenEnd <= bufferEnd && Character.isWhitespace(buffer.charAt(tokenEnd)))
+			while (tokenEnd < bufferEnd && Character.isWhitespace(buffer.charAt(tokenEnd)))
 				tokenEnd++;
 			setTokenEnd(tokenEnd);
 			return STRING_CONTENT;

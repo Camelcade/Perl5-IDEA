@@ -855,7 +855,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean parseAmbiguousSigil(PsiBuilder b, int l, IElementType sigilTokenType)
+	public static boolean parseAmbiguousSigil(PsiBuilder b, int l, IElementType sigilTokenType, IElementType targetTokenType)
 	{
 		IElementType tokenType = b.getTokenType();
 		if (tokenType == sigilTokenType)
@@ -863,7 +863,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			if (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1)) && b.lookAhead(1) != LEFT_BRACE) // space disallowed after * or % if it's not a cast
 				return false;
 
+			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+			m.collapse(targetTokenType);
 			return true;
 		}
 
