@@ -38,9 +38,9 @@ public class PerlTypedHandler extends TypedHandlerDelegate
 	{
 		if (c == '>')
 		{
-			PsiElement token = file.findElementAt(editor.getCaretModel().getOffset() - 1);
+			PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 1);
 
-			if (token != null && token.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
+			if (element != null && element.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
 				ApplicationManager.getApplication().invokeLater(new Runnable()
 				{
 					@Override
@@ -51,9 +51,9 @@ public class PerlTypedHandler extends TypedHandlerDelegate
 				});
 		} else if (c == ':')
 		{
-			PsiElement token = file.findElementAt(editor.getCaretModel().getOffset() - 1);
+			PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 1);
 
-			if (token instanceof PerlNamespaceElement)
+			if (element instanceof PerlNamespaceElement)
 				ApplicationManager.getApplication().invokeLater(new Runnable()
 				{
 					@Override
@@ -63,6 +63,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate
 					}
 				});
 		}
+
 		return super.charTyped(c, project, editor, file);
 	}
 }

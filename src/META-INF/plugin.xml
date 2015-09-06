@@ -46,7 +46,8 @@
         <li>Added icons for retina displays</li>
         <li>Tricky <code>use vars</code> declarations now being handled correctly. <code>use vars @SOMELIST</code> still not working.</li>
         <li>Implemented imports processing for subs with explicit code sigil.</li>
-        <li>Implemented basic CodeStyle settings and basic formatter.</li>
+        <li>Implemented basic CodeStyle settings and basic formatter (use with care with version control). Need feedbacks.</li>
+        <li>Implemented automatic here-doc closing marker insertion.</li>
       </ul>
       </p>
 
@@ -138,7 +139,10 @@
                 implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
+
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.PerlTypedHandler" id="PerlTypedHandler"/>
+        <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.PerlEnterHandlerDelegate"
+                              id="PerlEnterHandler"/>
 
         <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
 
