@@ -16,34 +16,23 @@
 
 package com.perl5.lang.perl.idea.formatter.settings;
 
-import com.intellij.application.options.CodeStyleAbstractConfigurable;
-import com.intellij.application.options.CodeStyleAbstractPanel;
+import com.intellij.application.options.TabbedLanguageCodeStylePanel;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 03.09.2015.
+ * Created by hurricup on 06.09.2015.
  */
-public class PerlCodeStyleConfigurable extends CodeStyleAbstractConfigurable
+public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel
 {
-	public PerlCodeStyleConfigurable(CodeStyleSettings settings, CodeStyleSettings cloneSettings)
+	public PerlCodeStyleMainPanel(CodeStyleSettings currentSettings, CodeStyleSettings settings)
 	{
-		super(settings, cloneSettings, PerlLanguage.INSTANCE.getDisplayName());
+		super(PerlLanguage.INSTANCE, currentSettings, settings);
 	}
 
-	@Override
-	protected CodeStyleAbstractPanel createPanel(CodeStyleSettings settings)
+	protected void addSpacesTab(CodeStyleSettings settings)
 	{
-		return new PerlCodeStyleMainPanel(getCurrentSettings(), settings);
+		addTab(new PerlCodeStyleSpacesPanel(settings));
 	}
-
-	@Nullable
-	@Override
-	public String getHelpTopic()
-	{
-		return null;
-	}
-
 
 }

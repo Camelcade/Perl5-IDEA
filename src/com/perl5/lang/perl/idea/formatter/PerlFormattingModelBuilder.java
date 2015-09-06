@@ -43,13 +43,13 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlE
 		SpacingBuilder spacingBuilder = new SpacingBuilder(settings.getRootSettings(), PerlLanguage.INSTANCE)
 				.before(HEREDOC_END).none()
 
-				.after(RESERVED_MY).spaces(1)
-				.after(RESERVED_OUR).spaces(1)
-				.after(RESERVED_LOCAL).spaces(1)
-				.after(RESERVED_STATE).spaces(1)
+				.after(RESERVED_MY).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
+				.after(RESERVED_OUR).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
+				.after(RESERVED_LOCAL).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
+				.after(RESERVED_STATE).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
 
-				.before(OPERATOR_COMMA).spaces(0)
-				.after(OPERATOR_COMMA).spaces(1)
+				.before(OPERATOR_COMMA).spaceIf(settings.SPACE_BEFORE_COMMA)
+				.after(OPERATOR_COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
 				.around(OPERATOR_COMMA_ARROW).spacing(1, Integer.MAX_VALUE, 0, true, 1);
 
 		for (IElementType type : PerlFormattingBlock.LF_ELEMENTS.getTypes())

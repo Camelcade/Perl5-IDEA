@@ -16,39 +16,37 @@
 
 package com.perl5.lang.perl.idea.formatter.settings;
 
+import com.intellij.application.options.codeStyle.CodeStyleSpacesPanel;
 import com.intellij.lang.Language;
-import com.intellij.openapi.options.Configurable;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
-import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 03.09.2015.
+ * Created by hurricup on 06.09.2015.
  */
-public class PerlCodeStyleSettingsProvider extends CodeStyleSettingsProvider
+public class PerlCodeStyleSpacesPanel extends CodeStyleSpacesPanel implements PerlCodeStyleOptionNames
 {
-
-	@NotNull
-	@Override
-	public Configurable createSettingsPage(CodeStyleSettings settings, CodeStyleSettings originalSettings)
+	public PerlCodeStyleSpacesPanel(CodeStyleSettings settings)
 	{
-		return new PerlCodeStyleConfigurable(settings, originalSettings);
+		super(settings);
 	}
 
-	@Nullable
 	@Override
-	public CustomCodeStyleSettings createCustomSettings(CodeStyleSettings settings)
+	protected boolean shouldHideOptions()
 	{
-		return new PerlCodeStyleSettings(settings);
+		return true;
 	}
 
-	@Nullable
 	@Override
-	public Language getLanguage()
+	public Language getDefaultLanguage()
 	{
 		return PerlLanguage.INSTANCE;
+	}
+
+	@Override
+	protected void initTables()
+	{
+		initCustomOptions(SPACE_GROUP_AFTER_KEYWORD);
+		super.initTables();
 	}
 }
