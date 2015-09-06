@@ -35,7 +35,12 @@ public class PerlHeredocLexer extends PerlStringLexer
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
-		if (getTokenStart() == 0 && getBufferEnd() > 0 && getTokenEnd() == 0)
+		int tokenStart = getTokenStart();
+		int tokenEnd = getTokenEnd();
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+
+		if (tokenStart == 0 && getBufferEnd() > 0 && tokenEnd == 0)
 		{
 			if ("HEREDOC".equals(myType) && getBufferEnd() > 1)
 				preparsedTokensList.add(new CustomToken(1, getBufferEnd(), STRING_CONTENT));
@@ -43,7 +48,17 @@ public class PerlHeredocLexer extends PerlStringLexer
 			setTokenStart(0);
 			setTokenEnd(1);
 			return HEREDOC_PSEUDO_QUOTE;
+		} else if (tokenEnd == 1 && bufferEnd > 1 && Character.isWhitespace(buffer.charAt(tokenEnd)))
+		{
+			// hack for leading spaces
+			setTokenStart(tokenEnd);
+			while (tokenEnd <= bufferEnd && Character.isWhitespace(buffer.charAt(tokenEnd)))
+				tokenEnd++;
+			setTokenEnd(tokenEnd);
+			return STRING_CONTENT;
 		}
+
+
 
 		return super.perlAdvance();
 	}
