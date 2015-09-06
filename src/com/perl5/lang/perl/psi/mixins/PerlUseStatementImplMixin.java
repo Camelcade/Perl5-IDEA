@@ -39,6 +39,7 @@ import java.util.List;
 public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
 {
 	protected IPerlPackageProcessor packageProcessor = null;
+
 	public PerlUseStatementImplMixin(ASTNode node)
 	{
 		super(node);

@@ -48,7 +48,7 @@ public class PerlUseStrictInspection extends PerlInspection
 					return;
 
 				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-					if( useStatement.getPackageProcessor() instanceof IPerlStrictProvider)
+					if (useStatement.getPackageProcessor() instanceof IPerlStrictProvider)
 						return;
 
 				holder.registerProblem(

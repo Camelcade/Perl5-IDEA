@@ -504,9 +504,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	/**
 	 * Checks token sequence and collapses it into target token
 	 *
-	 * @param b                PerlBuilder
-	 * @param l                parsing level
-	 * @param targetTokenType    source token type
+	 * @param b                 PerlBuilder
+	 * @param l                 parsing level
+	 * @param targetTokenType   source token type
 	 * @param sequenceTokenType varargs tokens to check
 	 * @return result
 	 */

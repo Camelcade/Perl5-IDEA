@@ -59,7 +59,6 @@ public class PerlHeredocLexer extends PerlStringLexer
 		}
 
 
-
 		return super.perlAdvance();
 	}
 }

@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <extensions defaultExtensionNs="com.intellij">
 
-    <compileServer.plugin classpath="camelcade.jar"/>
+        <compileServer.plugin classpath="camelcade.jar"/>
 
         <moduleConfigurationEditorProvider
                 implementation="com.perl5.lang.perl.idea.configuration.module.PerlModuleConfigurationEditorProvider"

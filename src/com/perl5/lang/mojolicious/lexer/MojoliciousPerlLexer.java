@@ -62,7 +62,7 @@ public class MojoliciousPerlLexer extends PerlLexer
 		int bufferEnd = buffer.length();
 		int currentMojoState = getMojoState();
 
-		if (  bufferEnd == 0 || tokenStart >= bufferEnd)
+		if (bufferEnd == 0 || tokenStart >= bufferEnd)
 			return super.perlAdvance();
 		else if ((currentMojoState == LEX_MOJO_PERL_LINE || currentMojoState == LEX_MOJO_PERL_LINE_SEMI))
 		{

@@ -86,12 +86,12 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
 	}
 
-/**
+	/**
 	 * Checks if sub is indexed.
 	 *
 	 * @param subName canonical sub name Foo::somesub
 	 * @return checking result
- */
+	 */
 
 	public boolean isKnownSub(String subName)
 	{

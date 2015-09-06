@@ -30,6 +30,7 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 {
 	/**
 	 * Returns declaration type if variable is in declaration
+	 *
 	 * @return type string or null
 	 */
 	@Nullable

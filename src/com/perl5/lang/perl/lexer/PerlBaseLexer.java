@@ -89,7 +89,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 		else
 			tokenType = perlAdvance();
 
-		if( tokenType != null )
+		if (tokenType != null)
 			registerToken(tokenType, yytext().toString());
 
 		return tokenType;

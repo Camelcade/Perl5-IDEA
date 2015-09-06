@@ -49,7 +49,7 @@ public class PerlUseWarningsInspection extends PerlInspection
 					return;
 
 				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-					if( useStatement.getPackageProcessor() instanceof IPerlWarningsProvider)
+					if (useStatement.getPackageProcessor() instanceof IPerlWarningsProvider)
 						return;
 				holder.registerProblem(
 						file,

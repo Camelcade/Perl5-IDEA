@@ -18,7 +18,6 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
 
-import java.io.IOException;
 import java.io.Reader;
 import java.util.regex.Matcher;
 

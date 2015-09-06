@@ -20,7 +20,6 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurableProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.PlatformUtils;
-import com.perl5.lang.perl.idea.configuration.paths.PerlPlatformContentEntriesConfigurable;
 import org.jetbrains.annotations.Nullable;
 
 /**
