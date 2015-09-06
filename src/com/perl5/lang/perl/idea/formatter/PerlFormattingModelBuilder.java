@@ -48,6 +48,8 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlE
 				.after(RESERVED_LOCAL).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
 				.after(RESERVED_STATE).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
 
+				.around(OPERATOR_ASSIGN).spaceIf(settings.SPACE_AROUND_ASSIGNMENT_OPERATORS)
+
 				.before(OPERATOR_COMMA).spaceIf(settings.SPACE_BEFORE_COMMA)
 				.after(OPERATOR_COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
 				.around(OPERATOR_COMMA_ARROW).spacing(1, Integer.MAX_VALUE, 0, true, 1);

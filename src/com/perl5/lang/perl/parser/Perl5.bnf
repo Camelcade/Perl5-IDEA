@@ -159,6 +159,22 @@ limitations under the License.
     OPERATOR_NOT="!"
 
     OPERATOR_ASSIGN="="
+    OPERATOR_POW_ASSIGN="**="
+    OPERATOR_PLUS_ASSIGN="+="
+    OPERATOR_MINUS_ASSIGN="-="
+    OPERATOR_MUL_ASSIGN="*="
+    OPERATOR_DIV_ASSIGN="/="
+    OPERATOR_MOD_ASSIGN="%="
+    OPERATOR_CONCAT_ASSIGN=".="
+    OPERATOR_X_ASSIGN="x="
+    OPERATOR_BITWISE_AND_ASSIGN="&="
+    OPERATOR_BITWISE_OR_ASSIGN="|="
+    OPERATOR_BITWISE_XOR_ASSIGN="^="
+    OPERATOR_SHIFT_LEFT_ASSIGN="<<="
+    OPERATOR_SHIFT_RIGHT_ASSIGN=">>="
+    OPERATOR_AND_ASSIGN="&&="
+    OPERATOR_OR_ASSIGN="||="
+    OPERATOR_OR_DEFINED_ASSIGN="//="
 
     QUESTION="?"
     COLON=":"
@@ -519,13 +535,13 @@ private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [<<parseStringifiedExpression>>];
 private use_version_parameters ::= perl_version;
 
-use_statement_constant ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_CONSTANT PACKAGE>> [perl_version] [use_constant_parameters] {pin=3}
+use_statement_constant ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE PACKAGE_PRAGMA_CONSTANT>> [perl_version] [use_constant_parameters] {pin=3}
 private use_constant_parameters ::=
   constant_definition
   | constants_block
 
 // other name to extend declaration, not variable
-use_vars_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE_PRAGMA_VARS PACKAGE>> [perl_version] [<<parseUseVarsParameters>>] {pin=3}
+use_vars_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE PACKAGE_PRAGMA_VARS>> [perl_version] [<<parseUseVarsParameters>>] {pin=3}
 
 constants_block ::= LEFT_BRACE constant_definition (comma constant_definition) * [comma+] RIGHT_BRACE {pin=1}
 constant_definition ::= constant_name comma scalar_expr
@@ -709,22 +725,22 @@ private assign_or_flow_expr ::=
 assign_expr ::= expr (operator_assign expr ) + { rightAssociative=true }
 
 private operator_assign ::=
-    OPERATOR_MUL OPERATOR_MUL OPERATOR_ASSIGN  // **=
-    |OPERATOR_PLUS OPERATOR_ASSIGN      // +=
-    |OPERATOR_MINUS OPERATOR_ASSIGN     // -=
-    |OPERATOR_MUL OPERATOR_ASSIGN       // *=
-    |OPERATOR_DIV OPERATOR_ASSIGN       // /=
-    |OPERATOR_MOD OPERATOR_ASSIGN       // %=
-    |OPERATOR_CONCAT OPERATOR_ASSIGN    // .=
-    |OPERATOR_X OPERATOR_ASSIGN         // x=
-    |OPERATOR_BITWISE_AND OPERATOR_ASSIGN   // &=
-    |OPERATOR_BITWISE_OR OPERATOR_ASSIGN    // |=
-    |OPERATOR_BITWISE_XOR OPERATOR_ASSIGN   // ^=
-    |OPERATOR_SHIFT_LEFT OPERATOR_ASSIGN    //  <<=
-    |OPERATOR_SHIFT_RIGHT OPERATOR_ASSIGN   //  >>=
-    |OPERATOR_AND OPERATOR_ASSIGN           //  &&=
-    |OPERATOR_OR OPERATOR_ASSIGN            //  ||=
-    |OPERATOR_OR_DEFINED OPERATOR_ASSIGN    //  //=
+    <<checkAndCollapseToken OPERATOR_POW_ASSIGN OPERATOR_MUL OPERATOR_MUL OPERATOR_ASSIGN>>  // **=
+    |<<checkAndCollapseToken OPERATOR_PLUS_ASSIGN OPERATOR_PLUS OPERATOR_ASSIGN>>      // +=
+    |<<checkAndCollapseToken OPERATOR_MINUS_ASSIGN OPERATOR_MINUS OPERATOR_ASSIGN>>     // -=
+    |<<checkAndCollapseToken OPERATOR_MUL_ASSIGN OPERATOR_MUL OPERATOR_ASSIGN>>       // *=
+    |<<checkAndCollapseToken OPERATOR_DIV_ASSIGN OPERATOR_DIV OPERATOR_ASSIGN>>       // /=
+    |<<checkAndCollapseToken OPERATOR_MOD_ASSIGN OPERATOR_MOD OPERATOR_ASSIGN>>       // %=
+    |<<checkAndCollapseToken OPERATOR_CONCAT_ASSIGN OPERATOR_CONCAT OPERATOR_ASSIGN>>    // .=
+    |<<checkAndCollapseToken OPERATOR_X_ASSIGN OPERATOR_X OPERATOR_ASSIGN>>         // x=
+    |<<checkAndCollapseToken OPERATOR_BITWISE_AND_ASSIGN OPERATOR_BITWISE_AND OPERATOR_ASSIGN>>   // &=
+    |<<checkAndCollapseToken OPERATOR_BITWISE_OR_ASSIGN OPERATOR_BITWISE_OR OPERATOR_ASSIGN>>    // |=
+    |<<checkAndCollapseToken OPERATOR_BITWISE_XOR_ASSIGN OPERATOR_BITWISE_XOR OPERATOR_ASSIGN>>   // ^=
+    |<<checkAndCollapseToken OPERATOR_SHIFT_LEFT_ASSIGN OPERATOR_SHIFT_LEFT OPERATOR_ASSIGN>>    //  <<=
+    |<<checkAndCollapseToken OPERATOR_SHIFT_RIGHT_ASSIGN OPERATOR_SHIFT_RIGHT OPERATOR_ASSIGN>>   //  >>=
+    |<<checkAndCollapseToken OPERATOR_AND_ASSIGN OPERATOR_AND OPERATOR_ASSIGN>>           //  &&=
+    |<<checkAndCollapseToken OPERATOR_OR_ASSIGN OPERATOR_OR OPERATOR_ASSIGN>>            //  ||=
+    |<<checkAndCollapseToken OPERATOR_OR_DEFINED_ASSIGN OPERATOR_OR_DEFINED OPERATOR_ASSIGN>>    //  //=
     |OPERATOR_ASSIGN !OPERATOR_ASSIGN
 
 comma_sequence_expr ::= expr <<parseCommaSequence>> // fixme implement pinnning

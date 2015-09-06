@@ -502,24 +502,32 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Checks and parses pragma to package token
+	 * Checks token sequence and collapses it into target token
 	 *
-	 * @param b               PerlBuilder
-	 * @param l               parsing level
-	 * @param sourceTokenType source token type
-	 * @param targetTokenType token type to collapse to
+	 * @param b                PerlBuilder
+	 * @param l                parsing level
+	 * @param targetTokenType    source token type
+	 * @param sequenceTokenType varargs tokens to check
 	 * @return result
 	 */
-	public static boolean checkAndCollapseToken(PsiBuilder b, int l, IElementType sourceTokenType, IElementType targetTokenType)
+	public static boolean checkAndCollapseToken(PsiBuilder b, int l, IElementType targetTokenType, IElementType... sequenceTokenType)
 	{
-		if (b.getTokenType() == sourceTokenType)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(targetTokenType);
-			return true;
-		}
-		return false;
+		if (sequenceTokenType.length == 0)
+			return false;
+
+		PsiBuilder.Marker m = b.mark();
+
+		for (IElementType tokenType : sequenceTokenType)
+			if (b.getTokenType() == tokenType)
+				b.advanceLexer();
+			else
+			{
+				m.rollbackTo();
+				return false;
+			}
+
+		m.collapse(targetTokenType);
+		return true;
 	}
 
 	/**
