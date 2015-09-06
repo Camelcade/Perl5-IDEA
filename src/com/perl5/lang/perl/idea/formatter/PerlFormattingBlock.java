@@ -18,7 +18,11 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.FormatterUtil;
@@ -27,6 +31,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -164,14 +169,42 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			IElementType child2Type = child2Node.getElementType();
 
 			// LF after opening brace and before closing need to check if here-doc opener is in the line
-//			.after(PerlFormattingBlock.LF_ELEMENTS).lineBreakInCode()
-//			if (isCodeBlock() &&
-//					(BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock) child1).isFirst()
-//							|| BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock) child2).isLast()
-//					))
-//				return Spacing.createSpacing(0, 0, 1, true, 1);
+			if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type))
+				if (!isHeredocAhead((PerlFormattingBlock) child1))
+					return Spacing.createSpacing(0, 0, 1, true, 1);
+				else
+					return Spacing.createSpacing(1, Integer.MAX_VALUE, 0, true, 1);
+
+			if (isCodeBlock() &&
+					(BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock) child1).isFirst()
+							|| BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock) child2).isLast()
+					)
+					&& !isHeredocAhead((PerlFormattingBlock) child1)
+					)
+				return Spacing.createSpacing(0, 0, 1, true, 1);
 		}
 		return mySpacingBuilder.getSpacing(this, child1, child2);
+	}
+
+	/**
+	 * Checks if Heredoc is ahead of current block and it's not possible to insert newline
+	 * fixme we should cache result here by line number
+	 *
+	 * @param block block in question
+	 * @return check result
+	 */
+	public boolean isHeredocAhead(PerlFormattingBlock block)
+	{
+		PsiFile file = block.getNode().getPsi().getContainingFile();
+		Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
+		if (document != null)
+		{
+			int lineNumber = document.getLineNumber(block.getTextRange().getEndOffset());
+			int lineEndOffset = document.getLineEndOffset(lineNumber);
+			PsiElement lastLineElement = file.findElementAt(lineEndOffset);
+			return lastLineElement != null && lastLineElement.getParent() instanceof PerlHeredocElementImpl;
+		}
+		return false;
 	}
 
 	@Override
