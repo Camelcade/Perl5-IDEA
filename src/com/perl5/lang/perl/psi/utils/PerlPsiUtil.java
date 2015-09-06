@@ -17,7 +17,11 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,4 +63,28 @@ public class PerlPsiUtil
 			startWith = startWith.getNextSibling();
 		}
 	}
+
+	/**
+	 * Searching for statement this element belongs
+	 *
+	 * @param element
+	 * @return
+	 */
+	public static PsiPerlStatement getElementStatement(PsiElement element)
+	{
+		PsiElement currentStatement = PsiTreeUtil.getParentOfType(element, PerlHeredocElementImpl.class);
+
+		if (currentStatement != null)    // we are in heredoc
+		{
+			PsiElement opener = PerlHeredocReference.getClosestHeredocOpener(currentStatement);
+
+			if (opener == null)
+				return null;
+
+			return PsiTreeUtil.getParentOfType(opener, PsiPerlStatement.class);
+
+		} else
+			return PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+	}
+
 }

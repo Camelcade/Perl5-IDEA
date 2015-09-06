@@ -23,17 +23,20 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlLexicalDeclaration;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -181,33 +184,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 
 		int currentStatementOffset;
 
-		PsiElement currentStatement = PsiTreeUtil.getParentOfType(currentVariable, PerlHeredocElementImpl.class);
-
-		if (currentStatement != null)    // we are in heredoc
-		{
-			PsiFile file = currentStatement.getContainingFile();
-			while (currentStatement != null)
-			{
-				int offset = currentStatement.getTextOffset() - 1;
-				if (offset < 0)
-				{
-					currentStatement = null;
-					break;
-				}
-				currentStatement = file.findElementAt(offset);
-
-				if (currentStatement instanceof PerlStringContentElement && currentStatement.getParent().getParent() instanceof PerlHeredocOpener)
-				{
-					currentStatement = PsiTreeUtil.getParentOfType(currentStatement, PsiPerlStatement.class);
-					break;
-				}
-			}
-		} else
-			currentStatement = PsiTreeUtil.getParentOfType(currentVariable, PsiPerlStatement.class);
+		PsiElement currentStatement = PerlPsiUtil.getElementStatement(currentVariable);
 
 		if (currentStatement == null)
 			return null;
-		//throw new RuntimeException("Unable to find current variable statement: " + currentVariableName); // atm happens on bad recovery
+//			throw new RuntimeException("Unable to find current variable statement: " + currentVariableName); // atm happens on bad recovery
 
 		currentStatementOffset = currentStatement.getTextOffset();
 
@@ -250,7 +231,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		PerlLexicalScope currentScope = PsiTreeUtil.getParentOfType(currentElement, PerlLexicalScope.class);
 		assert currentScope != null;
 
-		PsiPerlStatement currentStatement = PsiTreeUtil.getParentOfType(currentElement, PsiPerlStatement.class);
+		PsiElement currentStatement = PerlPsiUtil.getElementStatement(currentElement);
 
 		if (currentStatement == null)
 			throw new RuntimeException("Unable to find current element statement");

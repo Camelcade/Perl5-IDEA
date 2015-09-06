@@ -27,13 +27,32 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlHeredocReference extends PerlReference
 {
-	private String marker;
+	private String myMarker;
 
 	public PerlHeredocReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 		assert element instanceof PsiNamedElement;
-		marker = ((PsiNamedElement) element).getName();
+		myMarker = ((PsiNamedElement) element).getName();
+	}
+
+	public static PsiElement getClosestHeredocOpener(PsiElement element)
+	{
+		return findHeredocOpenerByOffset(element.getContainingFile(), null, element.getTextOffset());
+	}
+
+	public static PsiElement findHeredocOpenerByOffset(PsiElement file, String marker, int offset)
+	{
+		PsiElement result = null;
+		for (PsiPerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(file, PsiPerlHeredocOpener.class))
+		{
+			if (opener.getTextOffset() < offset)
+				if (marker == null || marker.equals(opener.getName()))
+					result = opener.getNameIdentifier();
+				else
+					break;
+		}
+		return result;
 	}
 
 	@NotNull
@@ -47,18 +66,7 @@ public class PerlHeredocReference extends PerlReference
 	@Override
 	public PsiElement resolve()
 	{
-		PsiElement result = null;
-		for (PsiPerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(myElement.getContainingFile(), PsiPerlHeredocOpener.class))
-		{
-			if (opener.getTextOffset() < myElement.getTextOffset())
-			{
-				String markerName = opener.getName();
-				if (marker.equals(markerName))
-					result = opener.getNameIdentifier();
-			} else
-				break;
-		}
-		return result;
+		return findHeredocOpenerByOffset(myElement.getContainingFile(), myMarker, myElement.getTextOffset());
 	}
 
 	@Override
@@ -76,4 +84,5 @@ public class PerlHeredocReference extends PerlReference
 //
 		return false;
 	}
+
 }
