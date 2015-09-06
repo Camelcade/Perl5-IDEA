@@ -84,6 +84,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.before(RESERVED_DEFAULT).spaceIf(settings.SPACE_BEFORE_ELSE_KEYWORD)
 
 						// unconditional
+				.beforeInside(SEMICOLON, STATEMENT).spaces(0)
 				.before(HEREDOC_END).none()
 				.around(OPERATORS_STR).spaces(1)
 
@@ -100,7 +101,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 		CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
 		PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
 		SpacingBuilder spacingBuilder = createSpacingBuilder(commonSettings, perlSettings);
-		PerlFormattingBlock block = new PerlFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder, -1);
+		PerlFormattingBlock block = new PerlFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder);
 		return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
 	}
 

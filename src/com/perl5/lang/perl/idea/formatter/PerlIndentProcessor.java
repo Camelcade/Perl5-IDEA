@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -29,6 +28,16 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  */
 public class PerlIndentProcessor implements PerlElementTypes
 {
+	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.create(
+			NAMESPACE_DEFINITION,
+			NAMESPACE_CONTENT,
+			SUB_DEFINITION,
+			IF_COMPOUND,
+			FOREACH_COMPOUND,
+			CONDITIONAL_BLOCK,
+			COMMA_SEQUENCE_EXPR
+	);
+
 	/**
 	 * Tokens that must be suppressed for indentation
 	 */
@@ -38,12 +47,6 @@ public class PerlIndentProcessor implements PerlElementTypes
 			HEREDOC_QX,
 			HEREDOC_END
 	);
-	public static final TokenSet BLOCK_LIKE_TOKENS = TokenSet.create(
-			BLOCK,
-			PARENTHESISED_EXPR,
-			ANON_ARRAY,
-			ANON_HASH
-	);
 	private final PerlCodeStyleSettings myCodeStyleSettings;
 
 	public PerlIndentProcessor(PerlCodeStyleSettings codeStyleSettings)
@@ -51,29 +54,27 @@ public class PerlIndentProcessor implements PerlElementTypes
 		this.myCodeStyleSettings = codeStyleSettings;
 	}
 
-	public Indent getChildIndent(ASTNode node, int binaryExpressionIndex)
+	public Indent getNodeIndent(ASTNode node)
 	{
-		// fixme wtf is this
-		if (binaryExpressionIndex > 0)
-			return Indent.getNormalIndent();
-
 		IElementType nodeType = node.getElementType();
 		ASTNode parent = node.getTreeParent();
-		IElementType parentType = parent != null ? parent.getElementType() : null;
 		ASTNode grandParent = parent != null ? parent.getTreeParent() : null;
-		IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
-		ASTNode prevSibling = FormatterUtil.getPreviousNonWhitespaceSibling(node);
-		IElementType prevSiblingElementType = prevSibling != null ? prevSibling.getElementType() : null;
-		ASTNode nextSibling = FormatterUtil.getNextNonWhitespaceSibling(node);
-		IElementType nextSiblingElementType = nextSibling != null ? nextSibling.getElementType() : null;
+
+		IElementType parentType = parent != null ? parent.getElementType() : null;
+//		IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
+//		ASTNode prevSibling = FormatterUtil.getPreviousNonWhitespaceSibling(node);
+//		IElementType prevSiblingElementType = prevSibling != null ? prevSibling.getElementType() : null;
+//		ASTNode nextSibling = FormatterUtil.getNextNonWhitespaceSibling(node);
+//		IElementType nextSiblingElementType = nextSibling != null ? nextSibling.getElementType() : null;
 
 		if (UNINDENTED_TOKENS.contains(nodeType) || parent == null || grandParent == null)
 			return Indent.getAbsoluteNoneIndent();
 
-		if (BLOCK_LIKE_TOKENS.contains(parentType) && nextSibling != null && prevSibling != null)
-			return Indent.getNormalIndent();
+		if (UNINDENTABLE_CONTAINERS.contains(parentType))
+			return Indent.getNoneIndent();
 
-		return Indent.getNoneIndent();
+
+		return Indent.getContinuationWithoutFirstIndent(false);
 	}
 }
 

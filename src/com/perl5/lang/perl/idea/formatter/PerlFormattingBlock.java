@@ -32,6 +32,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -78,7 +79,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	public final static TokenSet BLOCK_CLOSERS = TokenSet.create(
 			RIGHT_BRACE,
 			RIGHT_BRACKET,
-			RIGHT_PAREN
+			RIGHT_PAREN,
+
+			SEMICOLON
 	);
 
 	private final Indent myIndent;
@@ -86,7 +89,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	private final PerlCodeStyleSettings myPerl5Settings;
 	private final SpacingBuilder mySpacingBuilder;
 	private final Alignment myAlignment;
-	private final boolean myBlockLike;
 	private final boolean myIsFirst;
 	private final boolean myIsLast;
 	private final IElementType myElementType;
@@ -98,8 +100,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			@Nullable Alignment alignment,
 			@NotNull CommonCodeStyleSettings codeStyleSettings,
 			@NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-			@NotNull SpacingBuilder spacingBuilder,
-			int binaryExpressionIndex
+			@NotNull SpacingBuilder spacingBuilder
 	)
 	{
 		super(node, wrap, alignment);
@@ -107,8 +108,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		myPerl5Settings = perlCodeStyleSettings;
 		mySpacingBuilder = spacingBuilder;
 		myAlignment = alignment;
-		myIndent = new PerlIndentProcessor(perlCodeStyleSettings).getChildIndent(node, binaryExpressionIndex);
-		myBlockLike = PerlIndentProcessor.BLOCK_LIKE_TOKENS.contains(node.getElementType());
+		myIndent = new PerlIndentProcessor(perlCodeStyleSettings).getNodeIndent(node);
 		myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
 		myIsLast = FormatterUtil.getNextNonWhitespaceSibling(node) == null;
 		myElementType = node.getElementType();
@@ -141,7 +141,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		{
 			if (!shouldCreateBlockFor(child)) continue;
 //			System.err.println("Creating sub-block for " + child);
-			blocks.add(createChildBlock(myNode, child, alignment, -1));
+			blocks.add(createChildBlock(myNode, child, alignment));
 		}
 
 		return blocks;
@@ -150,11 +150,10 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	private PerlFormattingBlock createChildBlock(
 			ASTNode parent,
 			ASTNode child,
-			Alignment alignment,
-			int binaryExpressionIndex
+			Alignment alignment
 	)
 	{
-		return new PerlFormattingBlock(child, myWrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder, binaryExpressionIndex);
+		return new PerlFormattingBlock(child, myWrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder);
 	}
 
 	@Nullable
@@ -199,10 +198,14 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
 		if (document != null)
 		{
-			int lineNumber = document.getLineNumber(block.getTextRange().getEndOffset());
+			int endOffset = block.getTextRange().getEndOffset();
+			int lineNumber = document.getLineNumber(endOffset);
 			int lineEndOffset = document.getLineEndOffset(lineNumber);
 			PsiElement lastLineElement = file.findElementAt(lineEndOffset);
-			return lastLineElement != null && lastLineElement.getParent() instanceof PerlHeredocElementImpl;
+			return lastLineElement != null
+					&& lastLineElement.getParent() instanceof PerlHeredocElementImpl
+					&& PerlHeredocReference.getClosestHeredocOpener(lastLineElement).getTextOffset() < endOffset
+					;
 		}
 		return false;
 	}
@@ -216,6 +219,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	@Override
 	public Indent getIndent()
 	{
+		if (isFirst() || isLast() && isBlockCloser())
+			return Indent.getNoneIndent();
 		return myIndent;
 	}
 
@@ -231,10 +236,10 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	@Override
 	protected Indent getChildIndent()
 	{
-		if (isBlockLike())
-			return Indent.getNormalIndent();
+		if (PerlIndentProcessor.UNINDENTABLE_CONTAINERS.contains(getElementType()))
+			return Indent.getNoneIndent();
 
-		return Indent.getNoneIndent();
+		return super.getChildIndent();
 	}
 
 	@NotNull
@@ -255,11 +260,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		return myIsFirst;
 	}
 
-	public boolean isBlockLike()
-	{
-		return myBlockLike;
-	}
-
 	public IElementType getElementType()
 	{
 		return myElementType;
@@ -268,6 +268,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	public boolean isCodeBlock()
 	{
 		return getElementType() == BLOCK;
+	}
+
+	public boolean isBlockCloser()
+	{
+		return BLOCK_CLOSERS.contains(getElementType());
 	}
 
 }
