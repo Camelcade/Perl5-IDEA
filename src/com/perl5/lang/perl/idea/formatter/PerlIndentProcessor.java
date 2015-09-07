@@ -52,7 +52,9 @@ public class PerlIndentProcessor implements PerlElementTypes
 			HEREDOC_QQ,
 			HEREDOC_QX,
 			HEREDOC_END,
-			POD
+			POD,
+			FORMAT,
+			FORMAT_TERMINATOR
 	);
 	private final PerlCodeStyleSettings myCodeStyleSettings;
 

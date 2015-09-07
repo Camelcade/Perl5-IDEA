@@ -62,7 +62,7 @@
         <li>Fixed and tested interactions with perl process.</li>
         <li>Typeglobs for built-ins are not annotated as unused anymore.</li>
         <li>Fixed package file creation in specialized IDEs.</li>
-        <li>Here-doc end marker is not being indented on block tabbing.</li>
+        <li>Here-doc end marker, pod and formats are not being indented on block tabbing.</li>
         <li>Here-doc end marker is not being indented on live-template insertion.</li>
       </ul>
       </p>
