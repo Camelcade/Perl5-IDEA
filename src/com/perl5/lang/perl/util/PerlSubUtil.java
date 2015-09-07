@@ -32,6 +32,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
+import com.perl5.lang.perl.util.processors.PerlSubImportsCollector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -245,7 +246,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Map<String, Set<String>> getImportedSubs(Project project, String namespace, PsiFile file)
 	{
-		PerlImportsCollector collector = new PerlImportsCollector('&', new HashMap<String, Set<String>>());
+		PerlImportsCollector collector = new PerlSubImportsCollector('&', new HashMap<String, Set<String>>());
 		PerlUtil.getImportedNames(project, namespace, file, collector);
 		return collector.getResult();
 	}

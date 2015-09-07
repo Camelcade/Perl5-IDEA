@@ -31,9 +31,9 @@ public class PerlSubImportsCollector extends PerlImportsCollector
 	}
 
 	@Override
-	public boolean process(String namespaceName, String entity)
+	public boolean processEntity(String namespaceName, String entity)
 	{
-		boolean r = super.process(namespaceName, entity);
+		boolean r = super.processEntity(namespaceName, entity);
 		if (!r)
 		{
 			char firstChar;
@@ -43,6 +43,7 @@ public class PerlSubImportsCollector extends PerlImportsCollector
 					myResult.put(namespaceName, new HashSet<String>());
 
 				myResult.get(namespaceName).add(entity);
+				r = true;
 			}
 		}
 		return r;
