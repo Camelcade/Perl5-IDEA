@@ -46,7 +46,8 @@ public class PerlIndentProcessor implements PerlElementTypes
 			HEREDOC,
 			HEREDOC_QQ,
 			HEREDOC_QX,
-			HEREDOC_END
+			HEREDOC_END,
+			POD
 	);
 	private final PerlCodeStyleSettings myCodeStyleSettings;
 

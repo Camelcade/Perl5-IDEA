@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.editor;
 
 import com.intellij.openapi.editor.IndentStrategy;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
+import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
 /**
  * Created by hurricup on 03.09.2015.
@@ -28,6 +28,6 @@ public class PerlIndentStrategy implements IndentStrategy
 	@Override
 	public boolean canIndent(PsiElement element)
 	{
-		return !(element instanceof PerlHeredocTerminatorElementImpl);
+		return !PerlIndentProcessor.UNINDENTED_TOKENS.contains(element.getNode().getElementType());
 	}
 }

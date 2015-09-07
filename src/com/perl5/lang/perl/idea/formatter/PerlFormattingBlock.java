@@ -50,7 +50,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	public final static TokenSet LEAF_ELEMENTS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QX,
-			HEREDOC_QQ
+			HEREDOC_QQ,
+			POD
 	);
 
 	/**
