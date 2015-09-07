@@ -20,6 +20,7 @@ import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 
@@ -36,7 +37,11 @@ public class PerlIndentProcessor implements PerlElementTypes
 			FOR_COMPOUND,
 			FOREACH_COMPOUND,
 			CONDITIONAL_BLOCK,
-			COMMA_SEQUENCE_EXPR
+			CONDITIONAL_BLOCK_WHILE,
+			CONTINUE_BLOCK,
+			UNCONDITIONAL_BLOCK,
+			COMMA_SEQUENCE_EXPR,
+			PerlParserDefinition.FILE
 	);
 
 	/**
