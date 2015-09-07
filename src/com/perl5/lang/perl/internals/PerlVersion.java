@@ -16,26 +16,115 @@
 
 package com.perl5.lang.perl.internals;
 
+import java.util.regex.Matcher;
+
 /**
  * Created by hurricup on 23.08.2015.
  * Represents perl version
  */
-public class PerlVersion
+public class PerlVersion implements PerlVersionRegexps
 {
-	protected final double myVersion;
+	final protected boolean isAlpha;
+	final protected boolean isStrict;
+	final protected boolean isValid;
+	protected int revision = 0;
+	protected int major = 0;
+	protected int minor = 0;
 
 	public PerlVersion(double version)
 	{
-		myVersion = version;
+		long longVersion = (long) (version * 1000000);
+		isStrict = true;
+		isAlpha = false;
+		isValid = version > 0;
+		revision = (int) version;
+		longVersion = (longVersion - revision * 1000000);
+		major = (int) (longVersion / 1000);
+		minor = (int) (longVersion % 1000);
+	}
+
+	public PerlVersion(String versionString)
+	{
+		Matcher matcher = null;
+		if ((matcher = strictDecimalVersion.matcher(versionString)).matches())
+		{
+			isStrict = true;
+			isAlpha = false;
+		} else if ((matcher = strictDottedDecimalVersion.matcher(versionString)).matches())
+		{
+			isStrict = true;
+			isAlpha = false;
+		} else if ((matcher = laxDecimalVersion.matcher(versionString)).matches())
+		{
+			isStrict = false;
+			isAlpha = false;
+
+		} else if ((matcher = laxDottedDecimalVersion.matcher(versionString)).matches())
+		{
+			isStrict = true;
+			isAlpha = false;
+		} else
+		{
+			isAlpha = false;
+			isStrict = false;
+			isValid = false;
+			return;
+		}
+		isValid = true;
 	}
 
 	public double getVersion()
 	{
-		return myVersion;
+		return (double) revision + ((double) major / 1000) + ((double) minor / 1000000);
 	}
 
 	public String toString()
 	{
 		return Double.toString(getVersion());
+	}
+
+	public int getRevision()
+	{
+		return revision;
+	}
+
+	public void setRevision(int revision)
+	{
+		this.revision = revision;
+	}
+
+	public int getMajor()
+	{
+		return major;
+	}
+
+	public void setMajor(int major)
+	{
+		this.major = major;
+	}
+
+	public int getMinor()
+	{
+		return minor;
+	}
+
+	public void setMinor(int minor)
+	{
+		this.minor = minor;
+	}
+
+	public boolean isAlpha()
+	{
+		return isAlpha;
+	}
+
+	public boolean isStrict()
+	{
+		return isStrict;
+	}
+
+	public boolean isValid()
+	{
+		return isValid;
 	}
 }

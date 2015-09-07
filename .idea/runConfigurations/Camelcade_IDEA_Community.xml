@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Camelcade IDEA Community" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+    <module name="camelcade" />
+    <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea -Didea.is.internal=true" />
+    <option name="PROGRAM_PARAMETERS" value="" />
+    <alternative-path path="IntelliJ IDEA Community Edition IC-141.1532.4" alternative-path-enabled="true" />
+    <log_file path="$USER_HOME$/.IntelliJIdea13/system/plugins-sandbox-perl5/system/log/idea.log" checked="false" skipped="true" show_all="false" alias="IDEA LOG" />
+    <RunnerSettings RunnerId="JProfiler">
+      <option name="WINDOW" value="true" />
+    </RunnerSettings>
+    <RunnerSettings RunnerId="Profile ">
+      <option name="myExternalizedOptions" value="force-bitness=64&#13;&#10;additional-options2=onexit\=snapshot" />
+    </RunnerSettings>
+    <method />
+  </configuration>
+</component>
