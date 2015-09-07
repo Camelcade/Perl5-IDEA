@@ -33,6 +33,7 @@ public class PerlIndentProcessor implements PerlElementTypes
 			NAMESPACE_CONTENT,
 			SUB_DEFINITION,
 			IF_COMPOUND,
+			FOR_COMPOUND,
 			FOREACH_COMPOUND,
 			CONDITIONAL_BLOCK,
 			COMMA_SEQUENCE_EXPR
