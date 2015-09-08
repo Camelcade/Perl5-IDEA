@@ -24,6 +24,20 @@ import java.util.regex.Pattern;
  */
 public interface PerlVersionRegexps
 {
+	static final Pattern numericVersion = Pattern.compile(
+			"(0|[1-9]\\d*)" +                    // revision
+					"(?:\\." +
+					"(\\d+)" +            // major
+					"(?:_(\\d+))?" +    // alpha
+					")?"
+	);
+
+	static final Pattern dottedVersion = Pattern.compile(
+			"v(?:0|[1-9]\\d*)" +            // revision
+					"(?:\\.\\d+)*" +    // major, minor and others
+					"(_\\d+)?"        // alpha
+	);
+
 	static final String fractionPart = "(?:\\.([0-9]+))";
 
 	static final String strictIntegerPart = "(0|[1-9][0-9]*)";
@@ -62,6 +76,5 @@ public interface PerlVersionRegexps
 	static final Pattern lax = Pattern.compile(
 			laxDecimalVersion + "|" + laxDottedDecimalVersion
 	);
-
 
 }
