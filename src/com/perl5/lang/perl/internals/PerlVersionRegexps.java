@@ -25,10 +25,9 @@ import java.util.regex.Pattern;
 public interface PerlVersionRegexps
 {
 	static final Pattern numericVersion = Pattern.compile(
-			"(0|[1-9]\\d*)" +                    // revision
+			"(0|[1-9]\\d*)" +                // revision
 					"(?:\\." +
-					"(\\d+)" +            // major
-					"(?:_(\\d+))?" +    // alpha
+					"([\\d_]+)" +            // major
 					")?"
 	);
 

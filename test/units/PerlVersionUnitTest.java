@@ -84,7 +84,7 @@ public class PerlVersionUnitTest extends TestCase
 		processTest(new PerlVersion(".1.2"), false, false, false, 0, 0, 0, 0, "v0");
 		processTest(new PerlVersion("1."), false, false, false, 0, 0, 0, 0, "v0");
 		processTest(new PerlVersion("1.a"), false, false, false, 0, 0, 0, 0, "v0");
-		processTest(new PerlVersion("1._"), false, false, false, 0, 0, 0, 0, "v0");
+		processTest(new PerlVersion("1._"), true, false, true, 1, 0, 0, 1, "v1");
 		processTest(new PerlVersion("1.02_03"), true, false, true, 1, 20, 300, 1.020300, "v1.20.300");
 		processTest(new PerlVersion("v1.2_3"), true, false, true, 1, 2, 3, 1.002003, "v1.2.3");
 		processTest(new PerlVersion("v1.02_03"), true, false, true, 1, 2, 3, 1.002003, "v1.2.3");
@@ -94,8 +94,8 @@ public class PerlVersionUnitTest extends TestCase
 		processTest(new PerlVersion("0_"), false, false, false, 0, 0, 0, 0, "v0");
 		processTest(new PerlVersion("1_"), false, false, false, 0, 0, 0, 0, "v0");
 		processTest(new PerlVersion("1_."), false, false, false, 0, 0, 0, 0, "v0");
-		processTest(new PerlVersion("1.1_"), false, false, false, 0, 0, 0, 0, "v0");
-		processTest(new PerlVersion("1.02_03_04"), false, false, false, 0, 0, 0, 0, "v0");
+		processTest(new PerlVersion("1.1_"), true, false, true, 1, 100, 0, 1.1, "v1.100");
+		processTest(new PerlVersion("1.02_03_04"), true, false, true, 1, 20, 304, 1.020304, "v1.20.304");
 		processTest(new PerlVersion("1.2.3"), false, false, false, 0, 0, 0, 0, "v0");
 		processTest(new PerlVersion("v1.2"), true, false, false, 1, 2, 0, 1.002, "v1.2");
 		processTest(new PerlVersion("v0"), true, false, false, 0, 0, 0, 0, "v0");

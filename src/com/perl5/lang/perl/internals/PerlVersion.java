@@ -58,7 +58,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 			if ((matcher = numericVersion.matcher(versionString)).matches())
 			{
 				parseDoubleVersion(Double.parseDouble(versionString.replace("_", "")));
-				isAlpha = matcher.group(3) != null;
+				isAlpha = versionString.contains("_");
 			} else if ((matcher = dottedVersion.matcher(versionString)).matches())
 			{
 				List<String> versionChunks = new ArrayList<String>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
