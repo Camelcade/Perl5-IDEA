@@ -48,6 +48,7 @@
         <li>Implemented imports processing for subs with explicit code sigil.</li>
         <li>Implemented basic CodeStyle settings and basic formatter (use with care with version control). Need feedbacks.</li>
         <li>Implemented automatic heredoc closing marker insertion.</li>
+        <li>Plugin now knows that <code>use v5.12; # and above</code> includes <code>use strict;</code>.</li>
       </ul>
       </p>
 
