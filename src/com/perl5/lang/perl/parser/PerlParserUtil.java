@@ -168,7 +168,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	));
 	public static final TokenSet VERSION_TOKENS = TokenSet.create(
 			NUMBER,
-			NUMBER_SIMPLE
+			NUMBER_SIMPLE,
+			NUMBER_VERSION
 	);
 	protected static final TokenSet CLOSE_QUOTES = TokenSet.create(
 			QUOTE_DOUBLE_CLOSE,
@@ -918,13 +919,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parsePerlVersion(PsiBuilder b, int l)
 	{
-		if (b.getTokenType() == NUMBER_VERSION)
-			return consumeToken(b, NUMBER_VERSION);
-		else if (VERSION_TOKENS.contains(b.getTokenType()))
+		if (VERSION_TOKENS.contains(b.getTokenType()))
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(NUMBER_VERSION);
+			m.collapse(VERSION_ELEMENT);
 			return true;
 		}
 		return false;

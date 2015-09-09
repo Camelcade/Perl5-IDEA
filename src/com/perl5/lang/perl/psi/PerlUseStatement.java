@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
@@ -40,7 +39,7 @@ public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementSt
 
 	public List<String> getImportParameters();
 
-	public PsiElement getVersionElement();
+	public PerlVersionElement getVersionElement();
 
 	public IPerlPackageProcessor getPackageProcessor();
 

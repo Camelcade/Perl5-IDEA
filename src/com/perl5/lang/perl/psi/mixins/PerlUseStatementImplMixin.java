@@ -18,13 +18,12 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorDefault;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlVersionProcessor;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -89,9 +88,9 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	}
 
 	@Override
-	public PsiElement getVersionElement()
+	public PerlVersionElement getVersionElement()
 	{
-		return findChildByType(PerlElementTypes.NUMBER_VERSION);
+		return findChildByClass(PerlVersionElement.class);
 	}
 
 	@Override
@@ -113,17 +112,24 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public IPerlPackageProcessor getPackageProcessor()
 	{
+		// cached
 		if (packageProcessor != null)
 			return packageProcessor;
 
+		// package name processor
 		String packageName = getPackageName();
 		if (packageName != null)
 			packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
 
+		// version processor
+		if (packageName == null && getVersionElement() != null)
+			packageProcessor = PerlVersionProcessor.getProcessor(this);
+
+		// default processor
 		if (packageProcessor == null)
 			packageProcessor = PerlPackageProcessorDefault.INSTANCE;
 
-		return getPackageProcessor();
+		return packageProcessor;
 	}
 
 	@Override
@@ -217,4 +223,10 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 		return findChildByClass(PsiPerlWhileStatementModifier.class);
 	}
 
+	@Override
+	public void subtreeChanged()
+	{
+		super.subtreeChanged();
+		packageProcessor = null;
+	}
 }

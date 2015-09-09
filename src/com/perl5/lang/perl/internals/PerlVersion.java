@@ -30,12 +30,14 @@ import java.util.regex.Matcher;
  */
 public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 {
-	protected boolean isAlpha = false;
-	protected boolean isStrict = false;
-	protected boolean isValid = false;
-	protected int revision = 0;
-	protected int major = 0;
-	protected int minor = 0;
+	public static final PerlVersion V5_12 = new PerlVersion(5.012);
+
+	protected boolean isAlpha;
+	protected boolean isStrict;
+	protected boolean isValid;
+	protected int revision;
+	protected int major;
+	protected int minor;
 	protected List<Integer> extraChunks = Collections.emptyList();
 
 	public PerlVersion(double version)
@@ -55,10 +57,10 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 		{
 			Matcher matcher;
 
-			if ((matcher = numericVersion.matcher(versionString)).matches())
+			if (numericVersion.matcher(versionString).matches())
 			{
 				parseDoubleVersion(Double.parseDouble(versionString.replace("_", "")));
-				isAlpha = versionString.contains("_");
+				isAlpha = versionString.contains("_"); // fixme not sure about this at all
 			} else if ((matcher = dottedVersion.matcher(versionString)).matches())
 			{
 				List<String> versionChunks = new ArrayList<String>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
