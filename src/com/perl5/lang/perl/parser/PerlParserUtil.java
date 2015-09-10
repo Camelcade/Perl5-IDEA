@@ -1295,7 +1295,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				b.advanceLexer();
 
 			if (m != null)
-				m.collapse(PARSABLE_STRING);
+				m.collapse(PARSABLE_STRING_QQ);
 
 			return true;
 		}

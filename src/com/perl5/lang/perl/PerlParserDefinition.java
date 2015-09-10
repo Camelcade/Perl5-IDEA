@@ -128,7 +128,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			return new PerlHeredocElementImpl(node);
 		else if (elementType == HEREDOC)
 			return new PerlHeredocElementImpl(node);
-		else if (elementType == PARSABLE_STRING)
+		else if (elementType == PARSABLE_STRING_QQ)
 			return new PerlParsableStringWrapperlImpl(node);
 		return PerlElementTypes.Factory.createElement(node);
 	}

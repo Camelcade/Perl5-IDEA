@@ -127,8 +127,6 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 %state LEX_FORMAT_WAITING
 
 %xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX
-%xstate LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CHARS_QQ, LEX_QUOTE_LIKE_CHARS_QX
-%xstate LEX_QUOTE_LIKE_CLOSER, LEX_QUOTE_LIKE_CLOSER_QQ, LEX_QUOTE_LIKE_CLOSER_QX
 %xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS
 TRANS_MODIFIERS = [cdsr]
 %xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
@@ -181,18 +179,6 @@ TRANS_MODIFIERS = [cdsr]
     {CHAR_ANY}   { popState(); yypushback(1); break; }
 }
 
-/**
-    qq qx q
-**/
-<LEX_QUOTE_LIKE_OPENER,LEX_QUOTE_LIKE_OPENER_QQ,LEX_QUOTE_LIKE_OPENER_QX>{
-    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
-    .   {
-            IElementType type = processQuoteLikeQuote();
-            if( type == null ) // disallowed sharp
-                break;
-            return type;
-        }
-}
 /**
     qw ()
 **/

@@ -244,9 +244,10 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		else
 		{
 			int currentState = yystate();
+			char currentChar = buffer.charAt(tokenStart);
 
 			// capture heredoc
-			if (waitingHereDoc() && (tokenStart == 0 || buffer.charAt(tokenStart) == '\n'))
+			if (waitingHereDoc() && (tokenStart == 0 || currentChar == '\n'))
 			{
 				IElementType tokenType = captureHereDoc();
 				if (tokenType != null)    // got something
@@ -260,17 +261,23 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 					return tokenType;
 			} else if (currentState == LEX_QUOTE_LIKE_WORDS)
 				return captureQuoteLikeWords();
-				// capture string content from "" '' `` q qq qx
-			else if (currentState == LEX_QUOTE_LIKE_CHARS || currentState == LEX_QUOTE_LIKE_CHARS_QQ || currentState == LEX_QUOTE_LIKE_CHARS_QX)
-				return captureQuoteLikeChars();
-				// closing quote of string
-			else if (currentState == LEX_QUOTE_LIKE_CLOSER || currentState == LEX_QUOTE_LIKE_CLOSER_QQ || currentState == LEX_QUOTE_LIKE_CLOSER_QX)
-				return quoteLikeCloser(tokenStart);
+			else if (
+					(currentState == LEX_QUOTE_LIKE_OPENER || currentState == LEX_QUOTE_LIKE_OPENER_QQ || currentState == LEX_QUOTE_LIKE_OPENER_QX)
+							&& !Character.isWhitespace(currentChar)
+							&& (currentChar != '#' || allowSharpQuote)
+					)
+				return captureString();
+			else if (currentChar == '\'')
+				return captureString(LEX_QUOTE_LIKE_OPENER);
+			else if (currentChar == '"')
+				return captureString(LEX_QUOTE_LIKE_OPENER_QQ);
+			else if (currentChar == '`')
+				return captureString(LEX_QUOTE_LIKE_OPENER_QX);
 			else if (currentState == LEX_TRANS_CLOSER)
 				return processTransCloser();
 				// capture __DATA__ __END__
 				// capture pod
-			else if (buffer.charAt(tokenStart) == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
+			else if (currentChar == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
 				return capturePodBlock();
 				// capture qw content from qw();
 			else if (((tokenStart < bufferEnd - 8) && "__DATA__".equals(buffer.subSequence(tokenStart, tokenStart + 8).toString()))
@@ -283,7 +290,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			}
 			// capture line comment
 			else if (
-					buffer.charAt(tokenStart) == '#'
+					currentChar == '#'
 							// fixme these should be in tokenset
 							&& (currentState != LEX_QUOTE_LIKE_LIST_OPENER || !allowSharpQuote)
 							&& (
@@ -323,6 +330,33 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 
 		return tokenType;
 	}
+
+
+	/**
+	 * Changes current lexical state and than captures string
+	 *
+	 * @return string token
+	 */
+	public IElementType captureString(int newState)
+	{
+		pushState();
+		yybegin(newState);
+		return captureString();
+	}
+
+
+	/**
+	 * Captures string token from current position according to the current lexical state
+	 *
+	 * @return string token
+	 */
+	public IElementType captureString()
+	{
+		popState();
+		throw new RuntimeException("NYI");
+		return null;
+	}
+
 
 	public IElementType captureQuoteLikeWords()
 	{
@@ -393,6 +427,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 		return getPreParsedToken();
 	}
 
+	@Deprecated
 	public IElementType captureQuoteLikeChars()
 	{
 		CharSequence buffer = getBuffer();
@@ -587,6 +622,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	 * @param tokenStart offset of current token start
 	 * @return quote element type
 	 */
+	@Deprecated
 	IElementType quoteLikeCloser(int tokenStart)
 	{
 		int currentState = yystate();
@@ -1186,6 +1222,7 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 			yybegin(LEX_QUOTE_LIKE_OPENER_QX);
 	}
 
+	@Deprecated
 	public IElementType processQuoteLikeQuote()
 	{
 		charOpener = yytext().charAt(0);
@@ -1223,11 +1260,12 @@ public class PerlLexer extends PerlLexerGenerated implements LexerDetectionSets
 	/**
 	 * Strings handler
 	 */
+	@Deprecated
 	public IElementType processStringOpener()
 	{
 		charOpener = charCloser = yytext().charAt(0);
 
-		if (!(SIGILS_TOKENS.contains(lastTokenType))) // this is string, not variable name $", $', $`
+		if (!SIGILS_TOKENS.contains(lastTokenType)) // this is string, not variable name $", $', $`
 		{
 			Character nextCharacter = getNextNonSpaceCharacter();
 
