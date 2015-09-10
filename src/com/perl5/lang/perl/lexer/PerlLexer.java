@@ -406,7 +406,7 @@ public class PerlLexer extends PerlLexerGenerated
 					)
 				return captureString(LEX_QUOTE_LIKE_OPENER_QQ);
 			else if (currentChar == '`'
-					&& currentState != LEX_TRANS_OPENER    // fixme this would be fixed after tr capture refactoring
+					&& currentState != LEX_TRANS_OPENER    // fixme  this would be fixed after tr capture refactoring
 					&& currentState != LEX_TRANS_CHARS
 					&& currentState != LEX_REGEX_OPENER
 					)
