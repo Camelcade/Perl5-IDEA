@@ -16,35 +16,15 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.psi.tree.IElementType;
-
-import java.io.IOException;
+import com.intellij.lexer.FlexAdapter;
 
 /**
- * Created by hurricup on 16.08.2015.
+ * Created by hurricup on 26.08.2015.
  */
-public class PerlHeredocLexer extends PerlStringLexer
+public class PerlQQStringLexerAdapter extends FlexAdapter
 {
-	final protected String myType;
-
-	public PerlHeredocLexer(String myType)
+	public PerlQQStringLexerAdapter()
 	{
-		this.myType = myType;
-	}
-
-	@Override
-	public IElementType perlAdvance() throws IOException
-	{
-		if (getTokenStart() == 0 && getBufferEnd() > 0 && getTokenEnd() == 0)
-		{
-			if ("HEREDOC".equals(myType) && getBufferEnd() > 1)
-				addPreparsedToken(1, getBufferEnd(), STRING_CONTENT);
-
-			setTokenStart(0);
-			setTokenEnd(1);
-			return HEREDOC_PSEUDO_QUOTE;
-		}
-
-		return super.perlAdvance();
+		super(new PerlQQStringLexer());
 	}
 }

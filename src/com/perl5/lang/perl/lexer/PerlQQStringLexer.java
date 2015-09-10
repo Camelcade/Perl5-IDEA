@@ -21,30 +21,40 @@ import com.intellij.psi.tree.IElementType;
 import java.io.IOException;
 
 /**
- * Created by hurricup on 16.08.2015.
+ * Created by hurricup on 26.08.2015.
  */
-public class PerlHeredocLexer extends PerlStringLexer
+public class PerlQQStringLexer extends PerlStringLexer
 {
-	final protected String myType;
-
-	public PerlHeredocLexer(String myType)
-	{
-		this.myType = myType;
-	}
-
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
 		if (getTokenStart() == 0 && getBufferEnd() > 0 && getTokenEnd() == 0)
 		{
-			if ("HEREDOC".equals(myType) && getBufferEnd() > 1)
-				addPreparsedToken(1, getBufferEnd(), STRING_CONTENT);
-
 			setTokenStart(0);
 			setTokenEnd(1);
-			return HEREDOC_PSEUDO_QUOTE;
+			return getOpenQuoteToken();
+		} else if (getTokenEnd() == getBufferEnd() - 1)
+		{
+			setTokenStart(getTokenEnd());
+			setTokenEnd(getBufferEnd());
+			return getCloseQuoteToken();
 		}
 
-		return super.perlAdvance();
+		IElementType result = super.perlAdvance();
+
+		if (getTokenEnd() == getBufferEnd() && getTokenStart() < getBufferEnd() - 1)
+			setTokenEnd(getTokenEnd() - 1);
+
+		return result;
+	}
+
+	protected IElementType getOpenQuoteToken()
+	{
+		return QUOTE_DOUBLE_OPEN;
+	}
+
+	protected IElementType getCloseQuoteToken()
+	{
+		return QUOTE_DOUBLE_CLOSE;
 	}
 }

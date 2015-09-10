@@ -18,6 +18,7 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
 
+import java.io.IOException;
 import java.io.Reader;
 import java.util.regex.Matcher;
 
@@ -39,6 +40,25 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		resetInternals();
 //		if( end > 0 )
 //			System.err.println("Reset buffer to: " + buffer.subSequence(start, end).toString());
+	}
+
+	@Override
+	public IElementType perlAdvance() throws IOException
+	{
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+		int tokenEnd = getTokenEnd();
+
+//		if (tokenEnd == 1 && bufferEnd > 1 && Character.isWhitespace(buffer.charAt(tokenEnd)))
+//		{
+//			// hack for leading spaces
+//			setTokenStart(tokenEnd);
+//			while (tokenEnd < bufferEnd && Character.isWhitespace(buffer.charAt(tokenEnd)))
+//				tokenEnd++;
+//			setTokenEnd(tokenEnd);
+//			return STRING_CONTENT;
+//		}
+		return super.perlAdvance();
 	}
 
 	/**

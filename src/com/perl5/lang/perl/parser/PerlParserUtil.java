@@ -1280,7 +1280,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseSQString(PsiBuilder b, int l)
 	{
-		if (b.getTokenType() == QUOTE_SINGLE_OPEN)
+		if (b.getTokenType() == PARSABLE_STRING_Q)
 		{
 			assert b instanceof PerlBuilder;
 			PsiBuilder.Marker m = null;
@@ -1288,11 +1288,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			if (((PerlBuilder) b).isReparseSQString())
 				m = b.mark();
 
-			while (!b.eof() && b.getTokenType() != QUOTE_SINGLE_CLOSE)
-				b.advanceLexer();
-
-			if (!b.eof())
-				b.advanceLexer();
+			b.advanceLexer();
 
 			if (m != null)
 				m.collapse(PARSABLE_STRING_QQ);
@@ -1301,5 +1297,23 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 	}
+
+/*
+	At the moment we are merging everyting in lexer
+	public static boolean parseSQStringContent(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = null;
+		while( !b.eof() && b.getTokenType() != QUOTE_SINGLE_CLOSE)
+		{
+			if( m == null )
+				m = b.mark();
+			b.advanceLexer();
+		}
+		if( m!= null )
+			m.collapse(STRING_CONTENT);
+		return true;
+	}
+*/
+
 
 }

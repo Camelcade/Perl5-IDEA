@@ -130,6 +130,10 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			return new PerlHeredocElementImpl(node);
 		else if (elementType == PARSABLE_STRING_QQ)
 			return new PerlParsableStringWrapperlImpl(node);
+		else if (elementType == PARSABLE_STRING_Q)
+			return new PerlParsableStringWrapperlImpl(node);
+		else if (elementType == PARSABLE_STRING_QX)
+			return new PerlParsableStringWrapperlImpl(node);
 		return PerlElementTypes.Factory.createElement(node);
 	}
 }

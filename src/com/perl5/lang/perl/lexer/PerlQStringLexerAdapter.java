@@ -19,12 +19,12 @@ package com.perl5.lang.perl.lexer;
 import com.intellij.lexer.FlexAdapter;
 
 /**
- * Created by hurricup on 26.08.2015.
+ * Created by hurricup on 10.09.2015.
  */
-public class PerlQuotedStringLexerAdapter extends FlexAdapter
+public class PerlQStringLexerAdapter extends FlexAdapter
 {
-	public PerlQuotedStringLexerAdapter()
+	public PerlQStringLexerAdapter()
 	{
-		super(new PerlQuotedStringLexer());
+		super(new PerlQStringLexer());
 	}
 }

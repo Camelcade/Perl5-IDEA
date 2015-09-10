@@ -192,10 +192,10 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 		return -1;
 	}
 
-	protected Character getNextNonSpaceCharacter()
+	protected char getNextNonSpaceCharacter()
 	{
 		int nextPosition = getNextNonSpaceCharacterPosition(getTokenEnd());
-		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : null;
+		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : 0;    // not sure it's a good idea
 	}
 
 	public void registerToken(IElementType tokenType, String tokenText)
@@ -234,6 +234,19 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 		lastUnparenTokenType = null;
 		lastUnparenToken = null;
 		preparsedTokensList.clear();
+	}
+
+	/**
+	 * Adds preparsed token to the queue with consistency control
+	 *
+	 * @param start     token start
+	 * @param end       token end
+	 * @param tokenType token type
+	 */
+	protected void addPreparsedToken(int start, int end, IElementType tokenType)
+	{
+		assert preparsedTokensList.size() == 0 || preparsedTokensList.getLast().getTokenEnd() == start;
+		preparsedTokensList.add(new CustomToken(start, end, tokenType));
 	}
 
 
