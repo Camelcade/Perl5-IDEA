@@ -38,13 +38,14 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	protected boolean recoveringStatement = false;
 	protected int bracesLevel = 0;
 	protected boolean currentStringState = false;
-	boolean indexSnapshotDone = false;
 
 	// flag forces stringification of -identifiers, required for use Package -option;
 	boolean stringify = false;
 
 	// flag shows that SQ strings should be re-parsed as QQ strings. Used in use vars expr
 	boolean reparseSQString = false;
+
+	boolean allowAllSigils = false;
 
 	Project myProject = getProject();
 
@@ -172,6 +173,18 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	{
 		boolean currentState = isReparseSQString();
 		reparseSQString = newState;
+		return currentState;
+	}
+
+	public boolean isAllowAllSigils()
+	{
+		return allowAllSigils;
+	}
+
+	public boolean setAllowSigils(boolean newState)
+	{
+		boolean currentState = isAllowAllSigils();
+		allowAllSigils = newState;
 		return currentState;
 	}
 }

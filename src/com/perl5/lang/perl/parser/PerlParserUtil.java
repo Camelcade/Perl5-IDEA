@@ -1262,11 +1262,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseUseVarsParameters(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
-		boolean currentState = ((PerlBuilder) b).setReparseSQString(true);
+		boolean currentReparseState = ((PerlBuilder) b).setReparseSQString(true);
+		boolean currentAllowSigils = ((PerlBuilder) b).setAllowSigils(true);
 
 		boolean r = PerlParser.expr(b, l, -1);
 
-		((PerlBuilder) b).setReparseSQString(currentState);
+		((PerlBuilder) b).setReparseSQString(currentReparseState);
+		((PerlBuilder) b).setAllowSigils(currentAllowSigils);
 
 		return r;
 	}
