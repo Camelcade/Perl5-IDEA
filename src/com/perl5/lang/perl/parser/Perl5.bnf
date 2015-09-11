@@ -238,6 +238,7 @@ limitations under the License.
 
     STRING_CONTENT="STRING_CONTENT"   // moved to stub
 
+    PARSABLE_STRING_QW="PARSABLE_STRING_QW"
     PARSABLE_STRING_QQ="PARSABLE_STRING_QQ"
     PARSABLE_STRING_QX="PARSABLE_STRING_QX"
     PARSABLE_STRING_Q="PARSABLE_STRING_Q"
@@ -987,7 +988,7 @@ string_xq ::=
 private string_xq_parsed ::= QUOTE_TICK_OPEN [string_content_qq] QUOTE_TICK_CLOSE {pin=1}
 
 string_sq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString>>
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString PARSABLE_STRING_Q>>
   | string_sq_parsed
   | STRING_CONTENT
   | <<parseNestedSQString>> // nested sq string
@@ -1006,7 +1007,7 @@ private interpolated_constructs ::=
 
 heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
 
-string_list ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QW <<parseSQString>> {pin=2}
+string_list ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QW <<parseSQString PARSABLE_STRING_QW>> {pin=2}
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable

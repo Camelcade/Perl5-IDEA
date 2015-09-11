@@ -1278,9 +1278,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean parseSQString(PsiBuilder b, int l)
+	public static boolean parseSQString(PsiBuilder b, int l, IElementType tokenType)
 	{
-		if (b.getTokenType() == PARSABLE_STRING_Q)
+		if (b.getTokenType() == tokenType)
 		{
 			assert b instanceof PerlBuilder;
 			PsiBuilder.Marker m = null;

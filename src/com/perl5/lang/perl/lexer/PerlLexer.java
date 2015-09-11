@@ -383,11 +383,9 @@ public class PerlLexer extends PerlLexerGenerated
 				IElementType tokenType = captureFormat();
 				if (tokenType != null)    // got something
 					return tokenType;
-			} else if (currentState == LEX_QUOTE_LIKE_WORDS)
-				return captureQuoteLikeWords();
-			else if (
-					(currentState == LEX_QUOTE_LIKE_OPENER || currentState == LEX_QUOTE_LIKE_OPENER_QQ || currentState == LEX_QUOTE_LIKE_OPENER_QX)
-							&& !Character.isWhitespace(currentChar)
+            } else if (
+                    (currentState == LEX_QUOTE_LIKE_OPENER_Q || currentState == LEX_QUOTE_LIKE_OPENER_QQ || currentState == LEX_QUOTE_LIKE_OPENER_QX || currentState == LEX_QUOTE_LIKE_OPENER_QW)
+                            && !Character.isWhitespace(currentChar)
 							&& (currentChar != '#' || allowSharpQuote)
 					)
 				return captureString();
@@ -398,8 +396,8 @@ public class PerlLexer extends PerlLexerGenerated
 					&& currentState != LEX_TRANS_CHARS
 					&& currentState != LEX_REGEX_OPENER
 					)
-				return captureString(LEX_QUOTE_LIKE_OPENER);
-			else if (currentChar == '"'
+                return captureString(LEX_QUOTE_LIKE_OPENER_Q);
+            else if (currentChar == '"'
 					&& currentState != LEX_TRANS_OPENER    // fixme this would be fixed after tr capture refactoring
 					&& currentState != LEX_TRANS_CHARS
 					&& currentState != LEX_REGEX_OPENER
@@ -427,13 +425,6 @@ public class PerlLexer extends PerlLexerGenerated
 			// capture line comment
 			else if (
 					currentChar == '#'
-							// fixme these should be in tokenset
-							&& (currentState != LEX_QUOTE_LIKE_LIST_OPENER || !allowSharpQuote)
-							&& (
-							currentState != LEX_QUOTE_LIKE_OPENER
-									&& currentState != LEX_QUOTE_LIKE_OPENER_QQ
-									&& currentState != LEX_QUOTE_LIKE_OPENER_QX
-									|| !allowSharpQuote)
 							&& (currentState != LEX_TRANS_OPENER || !allowSharpQuote)
 							&& (currentState != LEX_TRANS_CHARS)
 							&& (currentState != LEX_REGEX_OPENER)
@@ -539,75 +530,6 @@ public class PerlLexer extends PerlLexerGenerated
 		return stringTokentType;
 	}
 
-
-	public IElementType captureQuoteLikeWords()
-	{
-		popState();
-		CharSequence buffer = getBuffer();
-		int tokenStart = getTokenEnd();
-		int bufferEnd = buffer.length();
-		int currentPosition = tokenStart;
-
-		boolean isEscaped = false;
-		boolean quotesDiffer = charOpener != charCloser;
-		int quotesDepth = 0;    // for using with different quotes
-
-		preparsedTokensList.clear();
-
-		int currentWordStart = currentPosition;
-		IElementType currentWordType = TokenType.WHITE_SPACE;
-
-		while (currentPosition < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentPosition);
-
-			// qw close quote
-			if (!isEscaped && quotesDepth == 0 && currentChar == charCloser)
-			{
-				if (currentWordStart < currentPosition)
-					preparsedTokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
-
-				currentWordStart = currentPosition;
-				currentPosition++;
-				currentWordType = QUOTE_SINGLE_CLOSE;
-				break;
-			} else if (currentChar == '\n' || !isEscaped && Character.isSpaceChar(currentChar))    // atm no difference between space and \n tokens; \n unescapable
-			{
-				if (currentWordType != TokenType.WHITE_SPACE && currentWordStart < currentPosition) // word before it
-				{
-					preparsedTokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
-					currentWordStart = currentPosition;
-				}
-				currentWordType = TokenType.WHITE_SPACE;
-			} else    // non-space char
-			{
-				if (currentWordType != STRING_CONTENT && currentWordStart < currentPosition) // space before it
-				{
-					preparsedTokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
-					currentWordStart = currentPosition;
-				}
-				currentWordType = STRING_CONTENT;
-
-				// nested () check
-				if (!isEscaped && quotesDiffer)
-				{
-					if (currentChar == charOpener)
-						quotesDepth++;
-					else if (currentChar == charCloser)
-						quotesDepth--;
-				}
-			}
-
-			isEscaped = !isEscaped && currentChar == '\\';
-			currentPosition++;
-		}
-
-		if (currentWordStart < currentPosition)
-			preparsedTokensList.add(new CustomToken(currentWordStart, currentPosition, currentWordType));
-
-		assert preparsedTokensList.size() > 0;
-		return getPreParsedToken();
-	}
 
 	protected PerlStringLexer getStringLexer()
 	{
@@ -1289,12 +1211,16 @@ public class PerlLexer extends PerlLexerGenerated
 		isEscaped = false;
 		pushState();
 		if (tokenType == RESERVED_Q)
-			yybegin(LEX_QUOTE_LIKE_OPENER);
-		else if (tokenType == RESERVED_QQ)
+            yybegin(LEX_QUOTE_LIKE_OPENER_Q);
+        else if (tokenType == RESERVED_QQ)
 			yybegin(LEX_QUOTE_LIKE_OPENER_QQ);
-		else
-			yybegin(LEX_QUOTE_LIKE_OPENER_QX);
-	}
+        else if (tokenType == RESERVED_QX)
+            yybegin(LEX_QUOTE_LIKE_OPENER_QX);
+        else if (tokenType == RESERVED_QW)
+            yybegin(LEX_QUOTE_LIKE_OPENER_QW);
+        else
+            throw new RuntimeException("Unable to switch state by token " + tokenType);
+    }
 
 	public IElementType getOpenQuoteTokenType(char quoteCharacter)
 	{
@@ -1323,41 +1249,16 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType getStringTokentType()
 	{
 		int currentState = yystate();
-		if (currentState == LEX_QUOTE_LIKE_OPENER)
-			return PARSABLE_STRING_Q;
+        if (currentState == LEX_QUOTE_LIKE_OPENER_Q)
+            return PARSABLE_STRING_Q;
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QQ)
 			return PARSABLE_STRING_QQ;
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QX)
 			return PARSABLE_STRING_QX;
+        if (currentState == LEX_QUOTE_LIKE_OPENER_QW)
+            return PARSABLE_STRING_QW;
 
 		throw new RuntimeException("Unknown lexical state for string token " + currentState);
-	}
-
-	/**
-	 * Quote-like list procesors
-	 **/
-
-	public void processQuoteLikeListOpener()
-	{
-		allowSharpQuote = true;
-		pushState();
-		yybegin(LEX_QUOTE_LIKE_LIST_OPENER);
-	}
-
-	public IElementType processQuoteLikeListQuote()
-	{
-		charOpener = yytext().charAt(0);
-
-		if (charOpener == '#' && !allowSharpQuote)
-		{
-			yypushback(1);
-			yybegin(YYINITIAL);
-			return null;
-		} else charCloser = RegexBlock.getQuoteCloseChar(charOpener);
-
-		yybegin(LEX_QUOTE_LIKE_WORDS);
-
-		return QUOTE_SINGLE_OPEN;
 	}
 
 	public boolean waitingHereDoc()
@@ -1441,12 +1342,10 @@ public class PerlLexer extends PerlLexerGenerated
 				return HANDLE;
 			else if ((tokenType = reservedTokenTypes.get(tokenText)) != null)
 			{
-				if (tokenType == RESERVED_QW)
-					processQuoteLikeListOpener();
-				else if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
-					processTransOpener();
-				else if (tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
-					processQuoteLikeStringOpener(tokenType);
+                if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
+                    processTransOpener();
+                else if (tokenType == RESERVED_QW || tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
+                    processQuoteLikeStringOpener(tokenType);
 				else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
 					processRegexOpener();
 				else if (tokenType == RESERVED_FORMAT)

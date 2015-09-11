@@ -39,6 +39,8 @@ public class PerlElementTypeFactory
 			return new PerlQStringElementType(name);
 		if (name.equals("PARSABLE_STRING_QX"))
 			return new PerlQXStringElementType(name);
+		if (name.equals("PARSABLE_STRING_QW"))
+			return new PerlQWStringElementType(name);
 		if (name.equals("TEMPLATE_BLOCK_HTML"))
 			return EmbeddedPerlTokenTypes.TEMPLATE_BLOCK_HTML;
 		if (name.startsWith("EMBED_"))

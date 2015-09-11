@@ -60,7 +60,6 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType processTransQuote();
 	public abstract IElementType processTransChar();
 	public abstract IElementType processTransCloser();
-	public abstract IElementType processQuoteLikeListQuote();
 	public abstract IElementType processWhiteSpace();
 	public abstract IElementType processNewLine();
 %}
@@ -125,8 +124,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 %state LEX_HEREDOC_WAITING, LEX_HEREDOC_WAITING_QQ, LEX_HEREDOC_WAITING_QX
 %state LEX_FORMAT_WAITING
 
-%state LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX
-%xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS
+%state LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW
 TRANS_MODIFIERS = [cdsr]
 %xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
 %xstate LEX_REGEX_OPENER
@@ -175,19 +173,6 @@ TRANS_MODIFIERS = [cdsr]
 <LEX_TRANS_MODIFIERS>{
     {TRANS_MODIFIERS} {return REGEX_MODIFIER;}
     {CHAR_ANY}   { popState(); yypushback(1); break; }
-}
-
-/**
-    qw ()
-**/
-<LEX_QUOTE_LIKE_LIST_OPENER>{
-    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
-    .   {
-            IElementType type = processQuoteLikeListQuote();
-            if( type == null ) // disallowed sharp
-                break;
-            return type;
-        }
 }
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
