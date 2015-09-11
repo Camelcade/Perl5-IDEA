@@ -226,7 +226,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static TokenSet SAFE_PARSERS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
-			HEREDOC_QX
+			HEREDOC_QX,
+			PARSABLE_STRING_Q,
+			PARSABLE_STRING_QQ,
+			PARSABLE_STRING_QX,
+			PARSABLE_STRING_QW
 	);
 
 	/**
