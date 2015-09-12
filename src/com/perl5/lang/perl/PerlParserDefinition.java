@@ -122,19 +122,10 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	public PsiElement createElement(ASTNode node)
 	{
 		IElementType elementType = node.getElementType();
-		if (elementType == HEREDOC_QQ)
+
+		if (elementType == HEREDOC_QQ || elementType == HEREDOC_QX || elementType == HEREDOC) // fixme instanceof is faster ?
 			return new PerlHeredocElementImpl(node);
-		else if (elementType == HEREDOC_QX)
-			return new PerlHeredocElementImpl(node);
-		else if (elementType == HEREDOC)
-			return new PerlHeredocElementImpl(node);
-		else if (elementType == PARSABLE_STRING_QQ)
-			return new PerlParsableStringWrapperlImpl(node);
-		else if (elementType == PARSABLE_STRING_Q)
-			return new PerlParsableStringWrapperlImpl(node);
-		else if (elementType == PARSABLE_STRING_QX)
-			return new PerlParsableStringWrapperlImpl(node);
-		else if (elementType == PARSABLE_STRING_QW)
+		else if (elementType == PARSABLE_STRING_USE_VARS)
 			return new PerlParsableStringWrapperlImpl(node);
 		return PerlElementTypes.Factory.createElement(node);
 	}

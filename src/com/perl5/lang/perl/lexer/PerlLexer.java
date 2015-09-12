@@ -1331,21 +1331,6 @@ public class PerlLexer extends PerlLexerGenerated
 	}
 
 
-	public IElementType getStringTokentType()
-	{
-		int currentState = yystate();
-		if (currentState == LEX_QUOTE_LIKE_OPENER_Q)
-			return PARSABLE_STRING_Q;
-		if (currentState == LEX_QUOTE_LIKE_OPENER_QQ)
-			return PARSABLE_STRING_QQ;
-		if (currentState == LEX_QUOTE_LIKE_OPENER_QX)
-			return PARSABLE_STRING_QX;
-		if (currentState == LEX_QUOTE_LIKE_OPENER_QW)
-			return PARSABLE_STRING_QW;
-
-		throw new RuntimeException("Unknown lexical state for string token " + currentState);
-	}
-
 	public PerlStringLexer getStringLexer()
 	{
 		int currentState = yystate();

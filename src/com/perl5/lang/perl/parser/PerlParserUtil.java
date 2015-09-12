@@ -25,7 +25,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.psi.utils.PerlBuilder;
+import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.perl5.lang.perl.parser.builder.PerlBuilderLight;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
@@ -223,14 +224,10 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PACKAGE_CORE_IDENTIFIER
 	);
 
-	public static TokenSet SAFE_PARSERS = TokenSet.create(
+	public static TokenSet LIGHT_CONTAINERS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
-			HEREDOC_QX,
-			PARSABLE_STRING_Q,
-			PARSABLE_STRING_QQ,
-			PARSABLE_STRING_QX,
-			PARSABLE_STRING_QW
+			HEREDOC_QX
 	);
 
 	/**
@@ -247,7 +244,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		ErrorState state = new ErrorState();
 		ErrorState.initState(state, builder, root, extendsSets);
 
-//		if (!SAFE_PARSERS.contains(root))
+//		if (!LIGHT_CONTAINERS.contains(root))
 //		{
 //		int length = 100;
 //			if (length > builder.getOriginalText().length())
@@ -257,7 +254,16 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 //		else
 //			System.err.println("Adapting safe builder for " + root + " " + builder.getOriginalText().length());
 
-		return new PerlBuilder(builder, state, parser, SAFE_PARSERS.contains(root));
+		if (root == PARSABLE_STRING_USE_VARS)
+		{
+			PerlBuilder perlBuilder = new PerlBuilderLight(builder, state, parser);
+			perlBuilder.setAllowSigils(true);
+			return perlBuilder;
+		}
+		if (LIGHT_CONTAINERS.contains(root))
+			return new PerlBuilderLight(builder, state, parser);
+		else
+			return new PerlBuilder(builder, state, parser);
 	}
 
 	/**
@@ -1284,20 +1290,35 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean parseSQString(PsiBuilder b, int l, IElementType tokenType)
+	public static boolean parseSQString(PsiBuilder b, int l)
 	{
-		assert b instanceof PerlBuilder;
 		PsiBuilder.Marker m = b.mark();
 
-		boolean r = consumeToken(b, tokenType);
-		if (!r) r = PerlParser.string_sq_parsed(b, l);
+		boolean r = PerlParser.string_sq_parsed(b, l);
 
 		if (r && ((PerlBuilder) b).isReparseSQString())
-			m.collapse(PARSABLE_STRING_QQ);
+			m.collapse(PARSABLE_STRING_USE_VARS);
 		else
 			m.drop();
 
 		return r;
+	}
+
+	/**
+	 * Hack for use vars parameter
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseInterpolatedConstructs(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+		if (((PerlBuilder) b).isAllowAllSigils())
+			return PerlParser.use_vars_interpolated_constructs(b, l);
+		else
+			return PerlParser.interpolated_constructs(b, l);
 	}
 
 }

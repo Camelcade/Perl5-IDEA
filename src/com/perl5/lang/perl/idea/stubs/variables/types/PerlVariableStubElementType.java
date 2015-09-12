@@ -58,7 +58,6 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 		if (PerlASTUtil.getParentNodeOfType(node, VARIABLE_DECLARATION_GLOBAL) != null)    // our declaration
 			return true;
 		else if (PerlASTUtil.getParentNodeOfType(node, USE_VARS_STATEMENT) != null    // use vars declaration
-				&& PerlASTUtil.getParentNodeOfType(node, PARSABLE_STRING_QQ) != null
 				)
 			return true;
 

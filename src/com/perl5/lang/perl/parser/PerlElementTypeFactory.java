@@ -33,14 +33,8 @@ public class PerlElementTypeFactory
 	{
 		if (name.equals("HEREDOC_QQ") || name.equals("HEREDOC_QX") || name.equals("HEREDOC"))
 			return new PerlHeredocElementType(name);
-		if (name.equals("PARSABLE_STRING_QQ"))
+		if (name.equals("PARSABLE_STRING_USE_VARS"))
 			return new PerlQQStringElementType(name);
-		if (name.equals("PARSABLE_STRING_Q"))
-			return new PerlQStringElementType(name);
-		if (name.equals("PARSABLE_STRING_QX"))
-			return new PerlQXStringElementType(name);
-		if (name.equals("PARSABLE_STRING_QW"))
-			return new PerlQWStringElementType(name);
 		if (name.equals("TEMPLATE_BLOCK_HTML"))
 			return EmbeddedPerlTokenTypes.TEMPLATE_BLOCK_HTML;
 		if (name.startsWith("EMBED_"))

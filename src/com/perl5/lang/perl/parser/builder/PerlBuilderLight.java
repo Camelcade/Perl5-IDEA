@@ -14,24 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.parser.builder;
 
-import com.intellij.lexer.FlexAdapter;
-import com.perl5.lang.perl.lexer.PerlQXStringLexerAdapter;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiParser;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.perl5.lang.perl.psi.utils.PerlNamesCache;
 
 /**
- * Created by hurricup on 10.09.2015.
+ * Created by hurricup on 12.09.2015.
  */
-public class PerlQXStringElementType extends PerlParsableStringElementType
+public class PerlBuilderLight extends PerlBuilder
 {
-	public PerlQXStringElementType(String name)
+	public PerlBuilderLight(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
 	{
-		super(name);
+		super(builder, state, parser);
 	}
 
 	@Override
-	protected FlexAdapter getLexerAdapter()
+	protected void initIndexes()
 	{
-		return new PerlQXStringLexerAdapter();
+		KNOWN_SUBS = PerlNamesCache.getSubsNamesSet(myProject, true);
+		KNOWN_PACKAGES = PerlNamesCache.getPackagesNamesSet(myProject, true);
 	}
 }
+

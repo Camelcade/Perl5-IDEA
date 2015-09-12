@@ -238,10 +238,7 @@ limitations under the License.
 
     STRING_CONTENT="STRING_CONTENT"   // moved to stub
 
-    PARSABLE_STRING_QW="PARSABLE_STRING_QW"
-    PARSABLE_STRING_QQ="PARSABLE_STRING_QQ"
-    PARSABLE_STRING_QX="PARSABLE_STRING_QX"
-    PARSABLE_STRING_Q="PARSABLE_STRING_Q"
+    PARSABLE_STRING_USE_VARS = "PARSABLE_STRING_USE_VARS"
 
     TAG="TAG"
 
@@ -974,19 +971,19 @@ number_constant ::=
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] {PARSABLE_STRING_QQ | string_dq_parsed}
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] string_dq_parsed
   | <<parseNetstedInterpolatedString QUOTE_DOUBLE>>
 
 private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [string_content_qq] QUOTE_DOUBLE_CLOSE {pin=1}
 
 string_xq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QX] {PARSABLE_STRING_QX | string_xq_parsed }
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QX] string_xq_parsed
   | <<parseNetstedInterpolatedString QUOTE_TICK>>
 
 private string_xq_parsed ::= QUOTE_TICK_OPEN [string_content_qq] QUOTE_TICK_CLOSE {pin=1}
 
 string_sq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString PARSABLE_STRING_Q>>
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString>>
   | STRING_CONTENT
   | <<parseNestedSQString>> // nested sq string
 
@@ -994,17 +991,25 @@ private string_sq_parsed ::= QUOTE_SINGLE_OPEN STRING_CONTENT* QUOTE_SINGLE_CLOS
 
 private string_content_qq ::= string_content_element +
 private string_content_element ::=
-  interpolated_constructs
+  <<parseInterpolatedConstructs>>
   | <<convertToStringContent>>
 
+// these constructs are for regular strings
 private interpolated_constructs ::=
   scalar
   | array
   | array_index_variable
 
+private use_vars_interpolated_constructs ::=
+    scalar_variable
+    | array_variable
+    | hash_variable
+    | glob_variable
+    | code_variable
+
 heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
 
-string_list ::= [[PACKAGE_CORE_IDENTIFIER] RESERVED_QW] <<parseSQString PARSABLE_STRING_QW>>
+string_list ::= [[PACKAGE_CORE_IDENTIFIER] RESERVED_QW] <<parseSQString>>
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable

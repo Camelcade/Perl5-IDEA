@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.utils;
+package com.perl5.lang.perl.parser.builder;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -23,6 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.PerlTokenData;
+import com.perl5.lang.perl.psi.utils.PerlNamesCache;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.Set;
@@ -49,11 +50,16 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 
 	Project myProject = getProject();
 
-	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser, boolean reuseIndex)
+	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
 	{
 		super(builder, state, parser);
-		KNOWN_SUBS = PerlNamesCache.getSubsNamesSet(myProject, reuseIndex);
-		KNOWN_PACKAGES = PerlNamesCache.getPackagesNamesSet(myProject, reuseIndex);
+		initIndexes();
+	}
+
+	protected void initIndexes()
+	{
+		KNOWN_SUBS = PerlNamesCache.getSubsNamesSet(myProject, false);
+		KNOWN_PACKAGES = PerlNamesCache.getPackagesNamesSet(myProject, false);
 	}
 
 	/**
@@ -164,7 +170,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return oldState;
 	}
 
-	// this getter is alsow allowes additional variables parsing
 	public boolean isReparseSQString()
 	{
 		return reparseSQString;
