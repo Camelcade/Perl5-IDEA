@@ -24,57 +24,62 @@ import java.io.IOException;
 /**
  * Created by evstigneev on 11.09.2015.
  */
-public class PerlQWStringLexer extends PerlQQStringLexer {
-    @Override
-    public IElementType perlAdvance() throws IOException {
-        int bufferEnd = getBufferEnd();
-        int tokenStart = getTokenEnd();
+public class PerlQWStringLexer extends PerlQQStringLexer
+{
+	@Override
+	public IElementType perlAdvance() throws IOException
+	{
+		int bufferEnd = getBufferEnd();
+		int tokenStart = getTokenEnd();
 
-        if (tokenStart < getBufferStart() + 1 || tokenStart >= bufferEnd - 1)    // empty buffer and opening/closing quote
-            return super.perlAdvance();
+		if (tokenStart < getBufferStart() + 1 || tokenStart >= bufferEnd - 1)    // empty buffer and opening/closing quote
+			return super.perlAdvance();
 
-        CharSequence buffer = getBuffer();
+		CharSequence buffer = getBuffer();
 
-        setTokenStart(tokenStart);
-        int tokenEnd = tokenStart;
+		setTokenStart(tokenStart);
+		int tokenEnd = tokenStart;
 
-        if (buffer.charAt(tokenStart) == '\n') // newlines
-        {
-            setTokenEnd(tokenStart + 1);
-            return TokenType.NEW_LINE_INDENT;
-        } else if (Character.isWhitespace(buffer.charAt(tokenStart))) // whitespaces
-        {
-            char currentChar;
-            while (tokenEnd < bufferEnd && (currentChar = buffer.charAt(tokenEnd)) != '\n' && Character.isWhitespace(currentChar))
-                tokenEnd++;
-            setTokenEnd(tokenEnd);
-            return TokenType.WHITE_SPACE;
-        }
+		if (buffer.charAt(tokenStart) == '\n') // newlines
+		{
+			setTokenEnd(tokenStart + 1);
+			return TokenType.NEW_LINE_INDENT;
+		} else if (Character.isWhitespace(buffer.charAt(tokenStart))) // whitespaces
+		{
+			char currentChar;
+			while (tokenEnd < bufferEnd && (currentChar = buffer.charAt(tokenEnd)) != '\n' && Character.isWhitespace(currentChar))
+				tokenEnd++;
+			setTokenEnd(tokenEnd);
+			return TokenType.WHITE_SPACE;
+		}
 
-        // words
-        boolean isEscaped = false;
+		// words
+		boolean isEscaped = false;
 
-        while (tokenEnd < bufferEnd - 1) {
-            char currentChar = buffer.charAt(tokenEnd);
-            if (!isEscaped && Character.isWhitespace(currentChar))
-                break;
+		while (tokenEnd < bufferEnd - 1)
+		{
+			char currentChar = buffer.charAt(tokenEnd);
+			if (!isEscaped && Character.isWhitespace(currentChar))
+				break;
 
-            isEscaped = !isEscaped && currentChar == '\\';
+			isEscaped = !isEscaped && currentChar == '\\';
 
-            tokenEnd++;
-        }
-        setTokenEnd(tokenEnd);
+			tokenEnd++;
+		}
+		setTokenEnd(tokenEnd);
 
-        return STRING_CONTENT;
-    }
+		return STRING_CONTENT;
+	}
 
-    @Override
-    protected IElementType getOpenQuoteToken() {
-        return QUOTE_SINGLE_OPEN;
-    }
+	@Override
+	protected IElementType getOpenQuoteToken()
+	{
+		return QUOTE_SINGLE_OPEN;
+	}
 
-    @Override
-    protected IElementType getCloseQuoteToken() {
-        return QUOTE_SINGLE_CLOSE;
-    }
+	@Override
+	protected IElementType getCloseQuoteToken()
+	{
+		return QUOTE_SINGLE_CLOSE;
+	}
 }

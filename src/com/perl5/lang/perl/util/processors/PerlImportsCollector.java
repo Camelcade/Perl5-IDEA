@@ -41,8 +41,10 @@ public class PerlImportsCollector extends PerlNamespaceEntityProcessor<String>
 	 * @param entity        entity name
 	 * @return check result
 	 */
-	protected boolean processEntity(String namespaceName, String entity) {
-		if (entity != null && !entity.isEmpty() && entity.charAt(0) == getSigil()) {
+	protected boolean processEntity(String namespaceName, String entity)
+	{
+		if (entity != null && !entity.isEmpty() && entity.charAt(0) == getSigil())
+		{
 			if (!myResult.containsKey(namespaceName))
 				myResult.put(namespaceName, new HashSet<String>());
 
@@ -54,8 +56,9 @@ public class PerlImportsCollector extends PerlNamespaceEntityProcessor<String>
 
 
 	@Override
-	public boolean process(String namespaceName, String entity) {
-		processEntity(namespaceName,entity);
+	public boolean process(String namespaceName, String entity)
+	{
+		processEntity(namespaceName, entity);
 		return true;
 	}
 
