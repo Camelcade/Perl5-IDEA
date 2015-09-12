@@ -31,7 +31,7 @@ public class PerlQStringLexer extends PerlQQStringLexer
 		int bufferEnd = getBufferEnd();
 		int tokenStart = getTokenEnd();
 
-		if (tokenStart == 1 && bufferEnd > 2)
+		if (tokenStart == getBufferStart() + 1 && bufferEnd > getBufferStart() + 2)
 		{
 			setTokenStart(tokenStart);
 			setTokenEnd(bufferEnd - 1);

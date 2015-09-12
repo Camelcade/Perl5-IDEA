@@ -52,6 +52,8 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	);
 	public final Stack<Integer> stateStack = new Stack<Integer>();
 	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
+	protected int bufferStart;
+
 	// last token
 	protected IElementType lastTokenType;
 	protected String lastToken;
@@ -234,6 +236,12 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 		lastUnparenTokenType = null;
 		lastUnparenToken = null;
 		preparsedTokensList.clear();
+		bufferStart = getTokenStart();
+	}
+
+	public int getBufferStart()
+	{
+		return bufferStart;
 	}
 
 	/**

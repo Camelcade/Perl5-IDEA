@@ -49,15 +49,15 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		CharSequence buffer = getBuffer();
 		int tokenEnd = getTokenEnd();
 
-//		if (tokenEnd == 1 && bufferEnd > 1 && Character.isWhitespace(buffer.charAt(tokenEnd)))
-//		{
-//			// hack for leading spaces
-//			setTokenStart(tokenEnd);
-//			while (tokenEnd < bufferEnd && Character.isWhitespace(buffer.charAt(tokenEnd)))
-//				tokenEnd++;
-//			setTokenEnd(tokenEnd);
-//			return STRING_CONTENT;
-//		}
+		if (tokenEnd == getBufferStart() + 1 && bufferEnd > getBufferStart() + 1 && Character.isWhitespace(buffer.charAt(tokenEnd)))
+		{
+			// hack for leading spaces
+			setTokenStart(tokenEnd);
+			while (tokenEnd < bufferEnd && Character.isWhitespace(buffer.charAt(tokenEnd)))
+				tokenEnd++;
+			setTokenEnd(tokenEnd);
+			return STRING_CONTENT;
+		}
 		return super.perlAdvance();
 	}
 

@@ -35,13 +35,13 @@ public class PerlHeredocLexer extends PerlStringLexer
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
-		if (getTokenStart() == 0 && getBufferEnd() > 0 && getTokenEnd() == 0)
+		if (getTokenStart() == getBufferStart() && getBufferEnd() > getBufferStart() && getTokenEnd() == getBufferStart())
 		{
-			if ("HEREDOC".equals(myType) && getBufferEnd() > 1)
-				addPreparsedToken(1, getBufferEnd(), STRING_CONTENT);
+			if ("HEREDOC".equals(myType) && getBufferEnd() > getBufferStart() + 1)
+				addPreparsedToken(getBufferStart() + 1, getBufferEnd(), STRING_CONTENT);
 
-			setTokenStart(0);
-			setTokenEnd(1);
+			setTokenStart(getBufferStart());
+			setTokenEnd(getBufferStart() + 1);
 			return HEREDOC_PSEUDO_QUOTE;
 		}
 

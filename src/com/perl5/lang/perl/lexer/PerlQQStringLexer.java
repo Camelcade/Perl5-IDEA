@@ -28,10 +28,10 @@ public class PerlQQStringLexer extends PerlStringLexer
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
-		if (getTokenStart() == 0 && getBufferEnd() > 0 && getTokenEnd() == 0)
+		if (getTokenStart() == getBufferStart() && getBufferEnd() > getBufferStart() && getTokenEnd() == getBufferStart())
 		{
-			setTokenStart(0);
-			setTokenEnd(1);
+			setTokenStart(getBufferStart());
+			setTokenEnd(getBufferStart() + 1);
 			return getOpenQuoteToken();
 		} else if (getTokenEnd() == getBufferEnd() - 1)
 		{

@@ -19,6 +19,7 @@
 package com.perl5.lang.perl.lexer;
 
 
+import com.intellij.lexer.FlexLexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
@@ -310,8 +311,15 @@ public class PerlLexer extends PerlLexerGenerated
 	public boolean isEscaped = false;
 	public int sectionsNumber = 0;    // number of sections one or two
 	public int currentSectionNumber = 0; // current section
+
 	protected PerlLexerAdapter evalPerlLexer;
 	protected PerlStringLexer myStringLexer;
+
+	protected PerlQStringLexer myQStringLexer;
+	protected PerlQQStringLexer myQQStringLexer;
+	protected PerlQXStringLexer myQXStringLexer;
+	protected PerlQWStringLexer myQWStringLexer;
+
 	Project myProject;
 	/**
 	 * Regex processor qr{} m{} s{}{}
@@ -324,15 +332,34 @@ public class PerlLexer extends PerlLexerGenerated
 		myProject = project;
 	}
 
-	public static List<CustomToken> lexString(PerlStringLexer initedStringLexer)
+	public List<CustomToken> lexCurrentToken(FlexLexer tokenLexer)
+	{
+		tokenLexer.reset(getBuffer(), getTokenStart(), getTokenEnd(), 0);
+		return processLexer(tokenLexer);
+	}
+
+
+	public List<CustomToken> lexCurrentToken(FlexLexer tokenLexer)
+	{
+		tokenLexer.reset(getBuffer(), getTokenStart(), getTokenEnd(), 0);
+		return processLexer(tokenLexer);
+	}
+
+	/**
+	 * Lex current token with specific lexer
+	 *
+	 * @param tokenLexer lexer to use
+	 * @return list of custom tokens
+	 */
+	public static List<CustomToken> processLexer(FlexLexer tokenLexer)
 	{
 		ArrayList<CustomToken> result = new ArrayList<CustomToken>();
 
 		try
 		{
 			IElementType tokenType;
-			while ((tokenType = initedStringLexer.advance()) != null)
-				result.add(new CustomToken(initedStringLexer.getTokenStart(), initedStringLexer.getTokenEnd(), tokenType));
+			while ((tokenType = tokenLexer.advance()) != null)
+				result.add(new CustomToken(tokenLexer.getTokenStart(), tokenLexer.getTokenEnd(), tokenType));
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -525,20 +552,84 @@ public class PerlLexer extends PerlLexerGenerated
 
 //		System.err.println("Captured string " + yytext() );
 
-		IElementType stringTokentType = getStringTokentType();
+		// following block is for lazy parsing of strings, seems works slower
+//		IElementType tokenType = getStringTokentType();
+//		popState();
+//		return tokenType;
+
+		PerlStringLexer stringLexer = getStringLexer();
 		popState();
-		return stringTokentType;
+		preparsedTokensList.addAll(lexCurrentToken(stringLexer));
+		return getPreParsedToken();
 	}
 
 
-	protected PerlStringLexer getStringLexer()
+	/**
+	 * Lazy getter for StringLexer
+	 *
+	 * @return string lexer
+	 */
+	@Deprecated
+	protected PerlStringLexer getBareStringLexer()
 	{
 		if (myStringLexer == null)
 			myStringLexer = new PerlStringLexer();
 
-
 		return myStringLexer;
 	}
+
+	/**
+	 * Lazy getter for QStringLexer
+	 *
+	 * @return string lexer
+	 */
+	protected PerlQStringLexer getQStringLexer()
+	{
+		if (myQStringLexer == null)
+			myQStringLexer = new PerlQStringLexer();
+
+		return myQStringLexer;
+	}
+
+	/**
+	 * Lazy getter for QStringLexer
+	 *
+	 * @return string lexer
+	 */
+	protected PerlQQStringLexer getQQStringLexer()
+	{
+		if (myQQStringLexer == null)
+			myQQStringLexer = new PerlQQStringLexer();
+
+		return myQQStringLexer;
+	}
+
+	/**
+	 * Lazy getter for QStringLexer
+	 *
+	 * @return string lexer
+	 */
+	protected PerlQXStringLexer getQXStringLexer()
+	{
+		if (myQXStringLexer == null)
+			myQXStringLexer = new PerlQXStringLexer();
+
+		return myQXStringLexer;
+	}
+
+	/**
+	 * Lazy getter for QStringLexer
+	 *
+	 * @return string lexer
+	 */
+	protected PerlQWStringLexer getQWStringLexer()
+	{
+		if (myQWStringLexer == null)
+			myQWStringLexer = new PerlQWStringLexer();
+
+		return myQWStringLexer;
+	}
+
 
 	/**
 	 * Checks that version is a really version, not a variable name
@@ -1100,7 +1191,7 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 
 		// parse block 1
-		preparsedTokensList.addAll(firstBlock.tokenize(getStringLexer(), isExtended, false));
+		preparsedTokensList.addAll(firstBlock.tokenize(getBareStringLexer(), isExtended, false));
 
 		if (secondBLock != null)
 		{
@@ -1122,7 +1213,7 @@ public class PerlLexer extends PerlLexerGenerated
 					evalPerlLexer = new PerlLexerAdapter(myProject);
 				preparsedTokensList.addAll(secondBLock.parseEval(evalPerlLexer));
 			} else
-				preparsedTokensList.addAll(secondBLock.tokenize(getStringLexer(), isExtended, true));
+				preparsedTokensList.addAll(secondBLock.tokenize(getBareStringLexer(), isExtended, true));
 		}
 
 		// parse modifiers
@@ -1246,17 +1337,33 @@ public class PerlLexer extends PerlLexerGenerated
 			throw new RuntimeException("Unknown close quote type " + quoteCharacter);
 	}
 
+
 	public IElementType getStringTokentType()
 	{
 		int currentState = yystate();
-        if (currentState == LEX_QUOTE_LIKE_OPENER_Q)
-            return PARSABLE_STRING_Q;
+		if (currentState == LEX_QUOTE_LIKE_OPENER_Q)
+			return PARSABLE_STRING_Q;
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QQ)
 			return PARSABLE_STRING_QQ;
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QX)
 			return PARSABLE_STRING_QX;
-        if (currentState == LEX_QUOTE_LIKE_OPENER_QW)
-            return PARSABLE_STRING_QW;
+		if (currentState == LEX_QUOTE_LIKE_OPENER_QW)
+			return PARSABLE_STRING_QW;
+
+		throw new RuntimeException("Unknown lexical state for string token " + currentState);
+	}
+
+	public PerlStringLexer getStringLexer()
+	{
+		int currentState = yystate();
+		if (currentState == LEX_QUOTE_LIKE_OPENER_Q)
+			return getQStringLexer();
+		if (currentState == LEX_QUOTE_LIKE_OPENER_QQ)
+			return getQQStringLexer();
+		if (currentState == LEX_QUOTE_LIKE_OPENER_QX)
+			return getQXStringLexer();
+		if (currentState == LEX_QUOTE_LIKE_OPENER_QW)
+			return getQWStringLexer();
 
 		throw new RuntimeException("Unknown lexical state for string token " + currentState);
 	}

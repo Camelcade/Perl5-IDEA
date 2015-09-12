@@ -30,7 +30,7 @@ public class PerlQWStringLexer extends PerlQQStringLexer {
         int bufferEnd = getBufferEnd();
         int tokenStart = getTokenEnd();
 
-        if (tokenStart < 1 || tokenStart >= bufferEnd - 1)    // empty buffer and opening/closing quote
+        if (tokenStart < getBufferStart() + 1 || tokenStart >= bufferEnd - 1)    // empty buffer and opening/closing quote
             return super.perlAdvance();
 
         CharSequence buffer = getBuffer();

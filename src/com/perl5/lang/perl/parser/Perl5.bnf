@@ -974,22 +974,19 @@ number_constant ::=
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] PARSABLE_STRING_QQ
-  | string_dq_parsed
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] {PARSABLE_STRING_QQ | string_dq_parsed}
   | <<parseNetstedInterpolatedString QUOTE_DOUBLE>>
 
 private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [string_content_qq] QUOTE_DOUBLE_CLOSE {pin=1}
 
 string_xq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QX ] PARSABLE_STRING_QX
-  | string_xq_parsed
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QX] {PARSABLE_STRING_QX | string_xq_parsed }
   | <<parseNetstedInterpolatedString QUOTE_TICK>>
 
 private string_xq_parsed ::= QUOTE_TICK_OPEN [string_content_qq] QUOTE_TICK_CLOSE {pin=1}
 
 string_sq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString PARSABLE_STRING_Q>>
-  | string_sq_parsed
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] { <<parseSQString PARSABLE_STRING_Q>> | string_sq_parsed }
   | STRING_CONTENT
   | <<parseNestedSQString>> // nested sq string
 
@@ -1007,7 +1004,7 @@ private interpolated_constructs ::=
 
 heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
 
-string_list ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QW <<parseSQString PARSABLE_STRING_QW>> {pin=2}
+string_list ::= [[PACKAGE_CORE_IDENTIFIER] RESERVED_QW] {<<parseSQString PARSABLE_STRING_QW>> | string_sq_parsed} {pin=2}
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable

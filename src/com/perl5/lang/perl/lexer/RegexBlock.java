@@ -226,7 +226,7 @@ public class RegexBlock implements PerlElementTypes
 				if (currentOffset > blockStart)
 				{
 					stringLexer.reset(buffer, blockStart, currentOffset, 0);
-					tokens.addAll(PerlLexer.lexString(stringLexer));
+					tokens.addAll(PerlLexer.processLexer(stringLexer));
 				}
 
 				int commentStart = currentOffset;
@@ -242,7 +242,7 @@ public class RegexBlock implements PerlElementTypes
 				if (currentOffset > blockStart)
 				{
 					stringLexer.reset(buffer, blockStart, currentOffset, 0);
-					tokens.addAll(PerlLexer.lexString(stringLexer));
+					tokens.addAll(PerlLexer.processLexer(stringLexer));
 				}
 
 				int whiteSpaceStart = currentOffset;
@@ -255,7 +255,7 @@ public class RegexBlock implements PerlElementTypes
 				if (currentOffset > blockStart)
 				{
 					stringLexer.reset(buffer, blockStart, currentOffset, 0);
-					tokens.addAll(PerlLexer.lexString(stringLexer));
+					tokens.addAll(PerlLexer.processLexer(stringLexer));
 				}
 
 				int commentStart = currentOffset;
@@ -278,7 +278,7 @@ public class RegexBlock implements PerlElementTypes
 		if (currentOffset > blockStart)
 		{
 			stringLexer.reset(buffer, blockStart, currentOffset, 0);
-			tokens.addAll(PerlLexer.lexString(stringLexer));
+			tokens.addAll(PerlLexer.processLexer(stringLexer));
 		}
 
 		tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_CLOSE));
@@ -313,7 +313,7 @@ public class RegexBlock implements PerlElementTypes
 				if (currentOffset > blockStart)
 				{
 					stringLexer.reset(buffer, blockStart, currentOffset, 0);
-					tokens.addAll(PerlLexer.lexString(stringLexer));
+					tokens.addAll(PerlLexer.processLexer(stringLexer));
 				}
 
 				int commentStart = currentOffset;
@@ -344,7 +344,7 @@ public class RegexBlock implements PerlElementTypes
 		if (currentOffset > blockStart)
 		{
 			stringLexer.reset(buffer, blockStart, currentOffset, 0);
-			tokens.addAll(PerlLexer.lexString(stringLexer));
+			tokens.addAll(PerlLexer.processLexer(stringLexer));
 		}
 
 		tokens.add(new CustomToken(currentOffset, currentOffset + 1, REGEX_QUOTE_CLOSE));
