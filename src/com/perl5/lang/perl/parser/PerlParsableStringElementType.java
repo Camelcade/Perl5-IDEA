@@ -20,16 +20,16 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lang.PsiParser;
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlQuotedStringLexerAdapter;
 
 /**
  * Created by hurricup on 26.08.2015.
  */
-public class PerlParsableStringElementType extends ILazyParseableElementType
+public abstract class PerlParsableStringElementType extends ILazyParseableElementType
 {
 	public PerlParsableStringElementType(String name)
 	{
@@ -44,12 +44,14 @@ public class PerlParsableStringElementType extends ILazyParseableElementType
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				new PerlQuotedStringLexerAdapter(),
+				getLexerAdapter(),
 				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlParser();
 
 		return parser.parse(this, builder).getFirstChildNode().getFirstChildNode();
 	}
+
+	protected abstract FlexAdapter getLexerAdapter();
 
 }

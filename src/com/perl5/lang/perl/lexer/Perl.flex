@@ -46,7 +46,6 @@ import org.jetbrains.annotations.NotNull;
 
     protected int trenarCounter = 0;
 
-	public abstract IElementType processStringOpener();
 	public abstract IElementType guessDiv();
 	public abstract IElementType getIdentifierToken();
 	public abstract IElementType checkOperatorXSticked();
@@ -61,8 +60,8 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType processTransQuote();
 	public abstract IElementType processTransChar();
 	public abstract IElementType processTransCloser();
-	public abstract IElementType processQuoteLikeListQuote();
-	public abstract IElementType processQuoteLikeQuote();
+	public abstract IElementType processWhiteSpace();
+	public abstract IElementType processNewLine();
 %}
 
 
@@ -94,7 +93,6 @@ PACKAGE_SHORT = "::"+ "'" ?
 
 
 CHAR_ANY        = .|{NEW_LINE}
-QUOTE           = "\"" | "'" | "`"
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
@@ -126,10 +124,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 %state LEX_HEREDOC_WAITING, LEX_HEREDOC_WAITING_QQ, LEX_HEREDOC_WAITING_QX
 %state LEX_FORMAT_WAITING
 
-%xstate LEX_QUOTE_LIKE_OPENER, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX
-%xstate LEX_QUOTE_LIKE_CHARS, LEX_QUOTE_LIKE_CHARS_QQ, LEX_QUOTE_LIKE_CHARS_QX
-%xstate LEX_QUOTE_LIKE_CLOSER, LEX_QUOTE_LIKE_CLOSER_QQ, LEX_QUOTE_LIKE_CLOSER_QX
-%xstate LEX_QUOTE_LIKE_LIST_OPENER, LEX_QUOTE_LIKE_WORDS
+%state LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW
 TRANS_MODIFIERS = [cdsr]
 %xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
 %xstate LEX_REGEX_OPENER
@@ -141,9 +136,8 @@ TRANS_MODIFIERS = [cdsr]
 %%
 
 // inclusive states
-{NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-
-{WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
+{NEW_LINE}   {return processNewLine();}
+{WHITE_SPACE}+   {return processWhiteSpace();}
 ";"     {return processSemicolon();}
 
 /**
@@ -181,35 +175,13 @@ TRANS_MODIFIERS = [cdsr]
     {CHAR_ANY}   { popState(); yypushback(1); break; }
 }
 
-/**
-    qq qx q
-**/
-<LEX_QUOTE_LIKE_OPENER,LEX_QUOTE_LIKE_OPENER_QQ,LEX_QUOTE_LIKE_OPENER_QX>{
-    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
-    .   {
-            IElementType type = processQuoteLikeQuote();
-            if( type == null ) // disallowed sharp
-                break;
-            return type;
-        }
-}
-/**
-    qw ()
-**/
-<LEX_QUOTE_LIKE_LIST_OPENER>{
-    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
-    .   {
-            IElementType type = processQuoteLikeListQuote();
-            if( type == null ) // disallowed sharp
-                break;
-            return type;
-        }
-}
-
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 
 {HEREDOC_OPENER}   {return parseHeredocOpener();}
-{QUOTE}         {return processStringOpener();}
+
+"\"" {return QUOTE_DOUBLE;}
+"`" {return QUOTE_TICK;}
+"'" {return QUOTE_SINGLE;}
 
 "<=>" {return OPERATOR_CMP_NUMERIC;}
 "<" {return OPERATOR_LT_NUMERIC;}

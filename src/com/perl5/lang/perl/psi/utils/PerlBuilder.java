@@ -164,6 +164,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return oldState;
 	}
 
+	// this getter is alsow allowes additional variables parsing
 	public boolean isReparseSQString()
 	{
 		return reparseSQString;

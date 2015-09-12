@@ -18,34 +18,20 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
 
-import java.io.IOException;
-
 /**
- * Created by hurricup on 26.08.2015.
+ * Created by hurricup on 10.09.2015.
  */
-public class PerlQuotedStringLexer extends PerlStringLexer
+public class PerlQXStringLexer extends PerlQQStringLexer
 {
 	@Override
-	public IElementType perlAdvance() throws IOException
+	protected IElementType getOpenQuoteToken()
 	{
-		if (getTokenStart() == 0 && getBufferEnd() > 0 && getTokenEnd() == 0)
-		{
-			setTokenStart(0);
-			setTokenEnd(1);
-			return QUOTE_DOUBLE_OPEN;
-		} else if (getTokenEnd() == getBufferEnd() - 1)
-		{
-			setTokenStart(getTokenEnd());
-			setTokenEnd(getBufferEnd());
-			return QUOTE_DOUBLE_CLOSE;
-		}
-
-		IElementType result = super.perlAdvance();
-
-		if (getTokenEnd() == getBufferEnd() && getTokenStart() < getBufferEnd() - 1)
-			setTokenEnd(getTokenEnd() - 1);
-
-		return result;
+		return QUOTE_TICK_OPEN;
 	}
 
+	@Override
+	protected IElementType getCloseQuoteToken()
+	{
+		return QUOTE_TICK_CLOSE;
+	}
 }

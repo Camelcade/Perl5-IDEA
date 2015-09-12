@@ -237,7 +237,11 @@ limitations under the License.
     REGEX_TOKEN="REGEX_TOKEN"
 
     STRING_CONTENT="STRING_CONTENT"   // moved to stub
-    PARSABLE_STRING="PARSABLE_STRING"
+
+    PARSABLE_STRING_QW="PARSABLE_STRING_QW"
+    PARSABLE_STRING_QQ="PARSABLE_STRING_QQ"
+    PARSABLE_STRING_QX="PARSABLE_STRING_QX"
+    PARSABLE_STRING_Q="PARSABLE_STRING_Q"
 
     TAG="TAG"
 
@@ -970,17 +974,23 @@ number_constant ::=
 private string ::= string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] QUOTE_DOUBLE_OPEN [string_content_qq] QUOTE_DOUBLE_CLOSE
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] {PARSABLE_STRING_QQ | string_dq_parsed}
   | <<parseNetstedInterpolatedString QUOTE_DOUBLE>>
 
+private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [string_content_qq] QUOTE_DOUBLE_CLOSE {pin=1}
+
 string_xq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QX ] QUOTE_TICK_OPEN [string_content_qq] QUOTE_TICK_CLOSE
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_QX] {PARSABLE_STRING_QX | string_xq_parsed }
   | <<parseNetstedInterpolatedString QUOTE_TICK>>
 
+private string_xq_parsed ::= QUOTE_TICK_OPEN [string_content_qq] QUOTE_TICK_CLOSE {pin=1}
+
 string_sq ::=
-  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString>>
+  [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString PARSABLE_STRING_Q>>
   | STRING_CONTENT
   | <<parseNestedSQString>> // nested sq string
+
+private string_sq_parsed ::= QUOTE_SINGLE_OPEN STRING_CONTENT* QUOTE_SINGLE_CLOSE {pin=1}
 
 private string_content_qq ::= string_content_element +
 private string_content_element ::=
@@ -994,7 +1004,7 @@ private interpolated_constructs ::=
 
 heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
 
-string_list ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QW <<parseSQString>> {pin=2}
+string_list ::= [[PACKAGE_CORE_IDENTIFIER] RESERVED_QW] <<parseSQString PARSABLE_STRING_QW>>
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable

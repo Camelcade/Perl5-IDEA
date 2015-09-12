@@ -37,13 +37,11 @@ public class PerlNamesCache
 	{
 		if (!reuseCache && !DumbService.isDumb(project))
 		{
-//			long l = System.currentTimeMillis();
 			Set<String> newSet = new THashSet<String>();
 			newSet.addAll(PerlSubUtil.getDeclaredSubsNames(project));
 			newSet.addAll(PerlSubUtil.getDefinedSubsNames(project));
 			newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(project));
 			return KNOWN_SUBS = newSet;
-//			System.err.println("Generated subs cache in " + (System.currentTimeMillis() - l));
 		}
 		return KNOWN_SUBS;
 	}
@@ -52,12 +50,10 @@ public class PerlNamesCache
 	{
 		if (!reuseCache && !DumbService.isDumb(project))
 		{
-//			long l = System.currentTimeMillis();
 			Set<String> newSet = new THashSet<String>();
 			newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);
 			newSet.addAll(PerlPackageUtil.getDefinedPackageNames(project));
 			return KNOWN_PACKAGES = newSet;
-//			System.err.println("Generated packages cache in " + (System.currentTimeMillis() - l));
 		}
 		return KNOWN_PACKAGES;
 	}

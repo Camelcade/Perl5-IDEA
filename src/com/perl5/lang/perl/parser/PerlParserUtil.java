@@ -226,7 +226,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static TokenSet SAFE_PARSERS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
-			HEREDOC_QX
+			HEREDOC_QX,
+			PARSABLE_STRING_Q,
+			PARSABLE_STRING_QQ,
+			PARSABLE_STRING_QX,
+			PARSABLE_STRING_QW
 	);
 
 	/**
@@ -1280,28 +1284,20 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean parseSQString(PsiBuilder b, int l)
+	public static boolean parseSQString(PsiBuilder b, int l, IElementType tokenType)
 	{
-		if (b.getTokenType() == QUOTE_SINGLE_OPEN)
-		{
-			assert b instanceof PerlBuilder;
-			PsiBuilder.Marker m = null;
+		assert b instanceof PerlBuilder;
+		PsiBuilder.Marker m = b.mark();
 
-			if (((PerlBuilder) b).isReparseSQString())
-				m = b.mark();
+		boolean r = consumeToken(b, tokenType);
+		if (!r) r = PerlParser.string_sq_parsed(b, l);
 
-			while (!b.eof() && b.getTokenType() != QUOTE_SINGLE_CLOSE)
-				b.advanceLexer();
+		if (r && ((PerlBuilder) b).isReparseSQString())
+			m.collapse(PARSABLE_STRING_QQ);
+		else
+			m.drop();
 
-			if (!b.eof())
-				b.advanceLexer();
-
-			if (m != null)
-				m.collapse(PARSABLE_STRING);
-
-			return true;
-		}
-		return false;
+		return r;
 	}
 
 }
