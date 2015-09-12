@@ -1284,40 +1284,18 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseSQString(PsiBuilder b, int l, IElementType tokenType)
 	{
-		if (b.getTokenType() == tokenType)
-		{
-			assert b instanceof PerlBuilder;
-			PsiBuilder.Marker m = null;
+		assert b instanceof PerlBuilder;
+		PsiBuilder.Marker m = b.mark();
 
-			if (((PerlBuilder) b).isReparseSQString())
-				m = b.mark();
+		boolean r = consumeToken(b, tokenType);
+		if (!r) r = PerlParser.string_sq_parsed(b, l);
 
-			b.advanceLexer();
+		if (r && ((PerlBuilder) b).isReparseSQString())
+			m.collapse(PARSABLE_STRING_QQ);
+		else
+			m.drop();
 
-			if (m != null)
-				m.collapse(PARSABLE_STRING_QQ);
-
-			return true;
-		}
-		return false;
+		return r;
 	}
-
-/*
-	At the moment we are merging everyting in lexer
-	public static boolean parseSQStringContent(PsiBuilder b, int l)
-	{
-		PsiBuilder.Marker m = null;
-		while( !b.eof() && b.getTokenType() != QUOTE_SINGLE_CLOSE)
-		{
-			if( m == null )
-				m = b.mark();
-			b.advanceLexer();
-		}
-		if( m!= null )
-			m.collapse(STRING_CONTENT);
-		return true;
-	}
-*/
-
 
 }

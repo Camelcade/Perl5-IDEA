@@ -332,19 +332,6 @@ public class PerlLexer extends PerlLexerGenerated
 		myProject = project;
 	}
 
-	public List<CustomToken> lexCurrentToken(FlexLexer tokenLexer)
-	{
-		tokenLexer.reset(getBuffer(), getTokenStart(), getTokenEnd(), 0);
-		return processLexer(tokenLexer);
-	}
-
-
-	public List<CustomToken> lexCurrentToken(FlexLexer tokenLexer)
-	{
-		tokenLexer.reset(getBuffer(), getTokenStart(), getTokenEnd(), 0);
-		return processLexer(tokenLexer);
-	}
-
 	/**
 	 * Lex current token with specific lexer
 	 *
@@ -366,6 +353,12 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 
 		return result;
+	}
+
+	public List<CustomToken> lexCurrentToken(FlexLexer tokenLexer)
+	{
+		tokenLexer.reset(getBuffer(), getTokenStart(), getTokenEnd(), 0);
+		return processLexer(tokenLexer);
 	}
 
 	// fixme to make this work you must remove final in PerlParserGenerated manually.
