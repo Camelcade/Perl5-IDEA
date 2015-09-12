@@ -822,11 +822,13 @@ private perl_regex_item ::=
   interpolated_constructs
   | <<convertRegexToken>>
 
-tr_regex ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_TR|RESERVED_Y) REGEX_QUOTE_OPEN tr_searchlist REGEX_QUOTE_CLOSE [REGEX_QUOTE_OPEN] tr_replacementlist REGEX_QUOTE_CLOSE [tr_modifiers] {pin=2}
+tr_regex ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_TR|RESERVED_Y) tr_search tr_replacement [tr_modifiers] {pin=2}
+private tr_search ::= REGEX_QUOTE_OPEN [tr_searchlist] {pin=1}
 tr_searchlist ::= STRING_CONTENT
+private tr_replacement ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [tr_replacementlist] REGEX_QUOTE_CLOSE {pin=1}
 tr_replacementlist ::= STRING_CONTENT
-
 tr_modifiers ::= REGEX_MODIFIER +
+
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
 do_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_DO eval_argument {pin=2}

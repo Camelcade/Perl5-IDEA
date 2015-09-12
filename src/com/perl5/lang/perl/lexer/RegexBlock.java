@@ -24,7 +24,6 @@ import java.util.*;
 public class RegexBlock implements PerlElementTypes
 {
 	public static final HashMap<String, List<Character>> allowedModifiers = new HashMap<String, List<Character>>();
-	public static final List<Character> whiteSpaces = Arrays.asList(' ', '\n', '\t', '\f', '\r');
 
 	static
 	{
@@ -49,11 +48,6 @@ public class RegexBlock implements PerlElementTypes
 		this.buffer = buffer;
 		this.charOpener = charOpener;
 		this.charCloser = charCloser;
-	}
-
-	public static boolean isWhiteSpace(char character)
-	{
-		return whiteSpaces.contains(character);
 	}
 
 	/**
@@ -237,7 +231,7 @@ public class RegexBlock implements PerlElementTypes
 					currentOffset++;
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				blockStart = currentOffset;
-			} else if (!isEscaped && isWhiteSpace(currentChar)) // whitespace here
+			} else if (!isEscaped && Character.isWhitespace(currentChar)) // whitespace here
 			{
 				if (currentOffset > blockStart)
 				{
@@ -246,7 +240,7 @@ public class RegexBlock implements PerlElementTypes
 				}
 
 				int whiteSpaceStart = currentOffset;
-				while (currentOffset < regexEndOffset && isWhiteSpace(buffer.charAt(currentOffset)))
+				while (currentOffset < regexEndOffset && Character.isWhitespace(buffer.charAt(currentOffset)))
 					currentOffset++;
 				tokens.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
 				blockStart = currentOffset;

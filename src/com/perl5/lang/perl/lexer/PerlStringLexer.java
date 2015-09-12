@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
 import java.io.IOException;
@@ -58,7 +59,17 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 			setTokenEnd(tokenEnd);
 			return STRING_CONTENT;
 		}
-		return super.perlAdvance();
+
+		IElementType tokenType = super.perlAdvance();
+
+		// handling tailing spaces
+		tokenEnd = getTokenEnd();
+		if (tokenEnd == getBufferEnd()
+				&& (tokenType == TokenType.WHITE_SPACE || tokenType == TokenType.NEW_LINE_INDENT)
+				)
+			tokenType = STRING_CONTENT;
+
+		return tokenType;
 	}
 
 	/**

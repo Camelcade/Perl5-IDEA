@@ -53,13 +53,9 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType parseNumber();
 	public abstract IElementType parseOperatorDereference();
 	public abstract IElementType parseCappedVariableName();
-	public abstract IElementType parseRegex();
 	public abstract IElementType processSemicolon();
 	public abstract IElementType parseHeredocOpener();
 	public abstract IElementType processOpenerWhiteSpace();
-	public abstract IElementType processTransQuote();
-	public abstract IElementType processTransChar();
-	public abstract IElementType processTransCloser();
 	public abstract IElementType processWhiteSpace();
 	public abstract IElementType processNewLine();
 %}
@@ -70,8 +66,6 @@ import org.jetbrains.annotations.NotNull;
 */
 NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
-
-EMPTY_SPACE = [ \t\f\r\n]
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 //PERL_XIDS = [\w && \p{XID_Start}]
@@ -90,9 +84,6 @@ CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 PACKAGE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) * {IDENTIFIER} "::" +
 PACKAGE_PARSABLE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) + {IDENTIFIER}
 PACKAGE_SHORT = "::"+ "'" ?
-
-
-CHAR_ANY        = .|{NEW_LINE}
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
@@ -125,9 +116,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 %state LEX_FORMAT_WAITING
 
 %state LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW
-TRANS_MODIFIERS = [cdsr]
-%xstate LEX_TRANS_OPENER, LEX_TRANS_CHARS, LEX_TRANS_CLOSER, LEX_TRANS_MODIFIERS
-%xstate LEX_REGEX_OPENER
+%state LEX_TRANS_OPENER, LEX_REGEX_OPENER
 
 %state LEX_HTML_BLOCK
 %state LEX_MOJO_PERL_LINE, LEX_MOJO_PERL_BLOCK, LEX_MOJO_PERL_LINE_SEMI, LEX_MOJO_PERL_BLOCK_SEMI
@@ -139,41 +128,6 @@ TRANS_MODIFIERS = [cdsr]
 {NEW_LINE}   {return processNewLine();}
 {WHITE_SPACE}+   {return processWhiteSpace();}
 ";"     {return processSemicolon();}
-
-/**
-**/
-<LEX_REGEX_OPENER>{
-    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
-    .   { return parseRegex(); }
-}
-
-
-/**
-    tr y fixme make a function to parse this
-**/
-<LEX_TRANS_OPENER>{
-    {EMPTY_SPACE}+  {return processOpenerWhiteSpace();}
-    .   {
-            IElementType type = processTransQuote();
-            if( type == null ) // disallowed sharp
-                break;
-            return type;
-        }
-}
-
-<LEX_TRANS_CHARS>{
-    {CHAR_ANY}   {
-          IElementType tokenType = processTransChar();
-          if( tokenType != null )
-                return tokenType;
-          break;
-        }
-}
-
-<LEX_TRANS_MODIFIERS>{
-    {TRANS_MODIFIERS} {return REGEX_MODIFIER;}
-    {CHAR_ANY}   { popState(); yypushback(1); break; }
-}
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 
@@ -218,12 +172,7 @@ TRANS_MODIFIERS = [cdsr]
 
 "+" {return OPERATOR_PLUS;}
 "-" {return OPERATOR_MINUS;}
-"/"   {   // regexp or div
-    IElementType tokenType = guessDiv();
-    if( tokenType == null )
-        break;
-    return tokenType;
-}
+"/"   { return guessDiv(); }
 "*" {return OPERATOR_MUL;}
 "%" {return OPERATOR_MOD;}
 "&" {return OPERATOR_BITWISE_AND;}
