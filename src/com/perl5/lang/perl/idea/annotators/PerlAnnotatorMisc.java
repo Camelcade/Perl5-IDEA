@@ -24,6 +24,7 @@ import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
@@ -41,10 +42,23 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 		PsiElement parent = element.getParent();
 		PsiElement grandParent = parent.getParent();
 
-		if (!(parent instanceof PsiPerlConstantName
+		if (parent instanceof PerlHeredocElementImpl)
+		{
+			if (!InjectedLanguageUtil.hasInjections((PerlHeredocElementImpl) parent))
+			{
+				Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
+				IElementType tokenType = parent.getNode().getElementType();
+
+				if (tokenType == HEREDOC_QQ)
+					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
+				else if (tokenType == HEREDOC_QX) // executable
+					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
+				else
+					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+
+			}
+		} else if (!(parent instanceof PsiPerlConstantName
 				|| grandParent instanceof PsiPerlConstantName
-				|| parent instanceof PerlHeredocElementImpl
-				|| grandParent instanceof PerlHeredocElementImpl
 		))
 		{
 			Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);

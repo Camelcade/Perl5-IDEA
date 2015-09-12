@@ -47,10 +47,13 @@ public class PerlHeredocReference extends PerlReference
 		for (PsiPerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(file, PsiPerlHeredocOpener.class))
 		{
 			if (opener.getTextOffset() < offset)
+			{
 				if (marker == null || marker.equals(opener.getName()))
 					result = opener.getNameIdentifier();
-				else
-					break;
+			} else
+			{
+				break;
+			}
 		}
 		return result;
 	}
