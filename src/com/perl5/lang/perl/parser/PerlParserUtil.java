@@ -1190,6 +1190,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			// reduces nodes number
 			while (!b.eof() && !REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType()))
 				b.advanceLexer();
+//			m.drop();
 			m.collapse(REGEX_TOKEN);
 			return true;
 		}

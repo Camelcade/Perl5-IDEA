@@ -229,7 +229,8 @@ limitations under the License.
 
     // paired mid-quote. e for evaluatable s{}{}e;
     REGEX_QUOTE_OPEN="REGEX_QUOTE_OPEN"
-    REGEX_QUOTE_OPEN_E="REGEX_QUOTE_OPEN_E"
+    REGEX_QUOTE_OPEN_X="REGEX_QUOTE_OPEN_X" // extended regex, spaces and newlines must be escaped
+    REGEX_QUOTE_OPEN_E="REGEX_QUOTE_OPEN_E" // block should be interpolated as a perl script
 
     REGEX_QUOTE_CLOSE="REGEX_QUOTE_CLOSE"
 
