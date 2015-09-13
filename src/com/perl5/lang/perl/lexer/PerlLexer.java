@@ -1112,8 +1112,6 @@ public class PerlLexer extends PerlLexerGenerated
 		if (currentOffset < bufferEnd)
 			addPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
 
-		if (currentOffset < bufferEnd)
-			currentOffset = lexWhiteSpacesAndComments(currentOffset, preparsedTokensList);
 
 		// trans modifiers
 		if (currentOffset < bufferEnd)
@@ -1261,15 +1259,19 @@ public class PerlLexer extends PerlLexerGenerated
 		int modifiersEnd = currentOffset;
 		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
 
-		if (modifiersEnd < bufferEnd)
-			modifiersEnd = lexWhiteSpacesAndComments(modifiersEnd, modifierTokens);
-
 		while (modifiersEnd < bufferEnd)
 		{
 			if (!allowedModifiers.contains(buffer.charAt(modifiersEnd)))    // unknown modifier
 				break;
 			else if (buffer.charAt(modifiersEnd) == 'x')    // mark as extended
+			{
+				if (preparsedTokensList.getFirst().getTokenType() == REGEX_QUOTE_OPEN)
+					preparsedTokensList.getFirst().setTokenType(REGEX_QUOTE_OPEN_X);
+				if (secondBlockOpener != null && secondBlockOpener.getTokenType() == REGEX_QUOTE_OPEN)
+					secondBlockOpener.setTokenType(REGEX_QUOTE_OPEN_X);
+
 				isExtended = true;
+			}
 			else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
 			{
 				isEvaluated = true;
@@ -1294,6 +1296,8 @@ public class PerlLexer extends PerlLexerGenerated
 				preparsedTokensList.add(secondBlockOpener);
 			else if (isEvaluated)
 				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE_E);
+			else if (isExtended)
+				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE_X);
 			else
 				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE);
 

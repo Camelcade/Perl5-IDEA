@@ -226,6 +226,7 @@ limitations under the License.
     // single mid-quote. e evaluatable s///e;
     REGEX_QUOTE="REGEX_QUOTE"
     REGEX_QUOTE_E="REGEX_QUOTE_E"
+    REGEX_QUOTE_X="REGEX_QUOTE_X"
 
     // paired mid-quote. e for evaluatable s{}{}e;
     REGEX_QUOTE_OPEN="REGEX_QUOTE_OPEN"
@@ -797,20 +798,23 @@ private regex_term ::=
 // pinning quotes leads to bug with replacement block
 compile_regex ::= [PACKAGE_CORE_IDENTIFIER]  RESERVED_QR match_regex_body {pin=2}
 match_regex ::= [PACKAGE_CORE_IDENTIFIER]  [RESERVED_M] match_regex_body
-private match_regex_body ::= REGEX_QUOTE_OPEN [perl_regex] REGEX_QUOTE_CLOSE [perl_regex_modifiers]
+private match_regex_body ::= regex_match REGEX_QUOTE_CLOSE [perl_regex_modifiers]
 
 replacement_regex ::=
     [PACKAGE_CORE_IDENTIFIER] RESERVED_S
-    replacement_match
+    regex_match
     replacement_replace
     REGEX_QUOTE_CLOSE
     [perl_regex_modifiers]
     {pin=2}
 
-private replacement_match ::= REGEX_QUOTE_OPEN [perl_regex]
-private replacement_replace ::= replacement_replace_regex | replacement_replace_code
+private regex_match ::=
+  REGEX_QUOTE_OPEN [perl_regex]
+  | REGEX_QUOTE_OPEN_X [perl_regex_ex]
+private replacement_replace ::= replacement_replace_regex | replacement_replace_regex_ex | replacement_replace_code
 
 private replacement_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [perl_regex]
+private replacement_replace_regex_ex ::= {REGEX_QUOTE_X | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_X} [perl_regex_ex]
 private replacement_replace_code ::= {REGEX_QUOTE_E | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_E} [regex_code]
 
 private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
@@ -822,6 +826,12 @@ perl_regex ::= perl_regex_item +
 private perl_regex_item ::=
   interpolated_constructs
   | <<convertRegexToken>>
+
+perl_regex_ex ::= perl_regex_item_ex + {extends=perl_regex}
+
+private perl_regex_item_ex ::=
+  interpolated_constructs
+  | <<convertRegexTokenEx>>
 
 tr_regex ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_TR|RESERVED_Y) tr_search tr_replacement [tr_modifiers] {pin=2}
 private tr_search ::= REGEX_QUOTE_OPEN [tr_searchlist] {pin=1}

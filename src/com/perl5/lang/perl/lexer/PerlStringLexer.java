@@ -50,7 +50,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		CharSequence buffer = getBuffer();
 		int tokenEnd = getTokenEnd();
 
-		if (tokenEnd == getBufferStart() + 1 && bufferEnd > getBufferStart() + 1 && Character.isWhitespace(buffer.charAt(tokenEnd)))
+		if (tokenEnd <= getBufferStart() + 1 && bufferEnd > getBufferStart() + 1 && Character.isWhitespace(buffer.charAt(tokenEnd)))
 		{
 			// hack for leading spaces
 			setTokenStart(tokenEnd);

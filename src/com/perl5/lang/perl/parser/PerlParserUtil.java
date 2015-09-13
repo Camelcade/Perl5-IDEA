@@ -185,6 +185,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
 			REGEX_QUOTE,
 			REGEX_QUOTE_CLOSE,
+			REGEX_QUOTE_X,
 			REGEX_QUOTE_E
 	);
 	protected static final TokenSet REGEX_MERGE_STOP_TOKENS = TokenSet.orSet(
@@ -192,6 +193,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
+
 	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
 			EMBED_MARKER_SEMICOLON,
@@ -1190,6 +1192,39 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			// reduces nodes number
 			while (!b.eof() && !REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType()))
 				b.advanceLexer();
+//			m.drop();
+			m.collapse(REGEX_TOKEN);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Converts everything till $, @ or close brace to regex tokens; Spaces and newlines must be escaped
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean convertRegexTokenEx(PsiBuilder b, int l)
+	{
+
+		IElementType tokenType = b.getTokenType();
+		if (!REGEX_BLOCK_CLOSER.contains(tokenType))
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+
+			IElementType prevRawTokenType;
+
+			// reduces nodes number
+			while (!b.eof()
+					&& !REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType())
+					&& (prevRawTokenType = b.rawLookup(-1)) != TokenType.WHITE_SPACE
+					&& prevRawTokenType != TokenType.NEW_LINE_INDENT)
+			{
+				b.advanceLexer();
+			}
 //			m.drop();
 			m.collapse(REGEX_TOKEN);
 			return true;
