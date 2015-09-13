@@ -44,9 +44,22 @@ public class PerlSubCompletionProviderUtil
 	public static final ConcurrentHashMap<String, LookupElementBuilder> INCOMPLETE_GLOBS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 
+	public static void removeFromLookupCache(String canonicalName)
+	{
+		SUB_DEFINITIONS_LOOKUP_ELEMENTS.remove(canonicalName);
+		SUB_DECLARATIONS_LOOKUP_ELEMENTS.remove(canonicalName);
+		GLOBS_LOOKUP_ELEMENTS.remove(canonicalName);
+		CONSTANTS_LOOKUP_ELEMENTS.remove(canonicalName);
+
+		INCOMPLETE_SUB_DEFINITIONS_LOOKUP_ELEMENTS.remove(canonicalName);
+		INCOMPLETE_SUB_DECLARATIONS_LOOKUP_ELEMENTS.remove(canonicalName);
+		INCOMPLETE_GLOBS_LOOKUP_ELEMENTS.remove(canonicalName);
+		INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS.remove(canonicalName);
+	}
+
 	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinition subDefinition)
 	{
-		String indexKeyName = subDefinition.getSubName();
+		String indexKeyName = subDefinition.getCanonicalName();
 		if (!SUB_DEFINITIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
 			String argsString = subDefinition.getSubArgumentsListAsString();
@@ -68,7 +81,7 @@ public class PerlSubCompletionProviderUtil
 
 	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubDeclaration subDeclaration)
 	{
-		String indexKeyName = subDeclaration.getSubName();
+		String indexKeyName = subDeclaration.getCanonicalName();
 		if (!SUB_DECLARATIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
 			LookupElementBuilder newElement = LookupElementBuilder
@@ -86,7 +99,7 @@ public class PerlSubCompletionProviderUtil
 	public static LookupElementBuilder getGlobLookupElement(PerlGlobVariable globVariable)
 	{
 		assert globVariable.getName() != null;
-		String indexKeyName = globVariable.getName();
+		String indexKeyName = globVariable.getCanonicalName();
 		if (!GLOBS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
 			LookupElementBuilder newElement = LookupElementBuilder
@@ -103,7 +116,7 @@ public class PerlSubCompletionProviderUtil
 	public static LookupElementBuilder getConstantLookupElement(PerlConstant constant)
 	{
 		assert constant.getName() != null;
-		String indexKeyName = constant.getName();
+		String indexKeyName = constant.getCanonicalName();
 		if (!CONSTANTS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
 			LookupElementBuilder newElement = LookupElementBuilder

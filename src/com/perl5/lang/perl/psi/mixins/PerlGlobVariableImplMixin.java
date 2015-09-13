@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -170,5 +171,12 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	public String getPresentableName()
 	{
 		return getName();
+	}
+
+	@Override
+	public void subtreeChanged()
+	{
+		PerlSubCompletionProviderUtil.removeFromLookupCache(getCanonicalName());
+		super.subtreeChanged();
 	}
 }

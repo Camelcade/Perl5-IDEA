@@ -1093,7 +1093,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		// between blocks
 		if (quotesDiffer)
-			currentOffset = parseBetweenBlocks(currentOffset, preparsedTokensList);
+			currentOffset = lexWhiteSpacesAndComments(currentOffset, preparsedTokensList);
 
 		// second block
 		if (currentOffset < bufferEnd)
@@ -1111,6 +1111,9 @@ public class PerlLexer extends PerlLexerGenerated
 		// close quote
 		if (currentOffset < bufferEnd)
 			addPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
+
+		if (currentOffset < bufferEnd)
+			currentOffset = lexWhiteSpacesAndComments(currentOffset, preparsedTokensList);
 
 		// trans modifiers
 		if (currentOffset < bufferEnd)
@@ -1165,7 +1168,7 @@ public class PerlLexer extends PerlLexerGenerated
 	 * @param targetList    target list for CustomTokens
 	 * @return new offset
 	 */
-	protected int parseBetweenBlocks(int currentOffset, List<CustomToken> targetList)
+	protected int lexWhiteSpacesAndComments(int currentOffset, List<CustomToken> targetList)
 	{
 		CharSequence buffer = getBuffer();
 		int bufferEnd = getBufferEnd();
@@ -1232,7 +1235,7 @@ public class PerlLexer extends PerlLexerGenerated
 				secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd, firstBlock.getOpeningQuote(), true);
 			else
 			{
-				currentOffset = parseBetweenBlocks(currentOffset, betweenBlocks);
+				currentOffset = lexWhiteSpacesAndComments(currentOffset, betweenBlocks);
 
 				if (currentOffset < bufferEnd)
 				{
@@ -1258,11 +1261,12 @@ public class PerlLexer extends PerlLexerGenerated
 		int modifiersEnd = currentOffset;
 		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
 
-		while (true)
+		if (modifiersEnd < bufferEnd)
+			modifiersEnd = lexWhiteSpacesAndComments(modifiersEnd, modifierTokens);
+
+		while (modifiersEnd < bufferEnd)
 		{
-			if (modifiersEnd == bufferEnd)    // eof
-				break;
-			else if (!allowedModifiers.contains(buffer.charAt(modifiersEnd)))    // unknown modifier
+			if (!allowedModifiers.contains(buffer.charAt(modifiersEnd)))    // unknown modifier
 				break;
 			else if (buffer.charAt(modifiersEnd) == 'x')    // mark as extended
 				isExtended = true;

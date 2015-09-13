@@ -49,6 +49,10 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		Project project = parameters.getPosition().getProject();
 
+		String packageWithPrefix = packageName;
+		if (!subPrefix.isEmpty())
+			packageWithPrefix = packageName + "::" + subPrefix;
+
 		// defined subs
 		for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
 			if (!subDefinition.isMethod())
@@ -56,8 +60,8 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		// defined subs with prefix
 		if (!subPrefix.isEmpty())
-			for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName + "::" + subPrefix))
-				resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteSubDefinitionLookupElement(subDefinition, subPrefix));
+			for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageWithPrefix))
+				resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteSubDefinitionLookupElement(subDefinition, packageWithPrefix));
 
 		// declared subs
 		for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
@@ -66,8 +70,8 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		// declared subs with prefix
 		if (!subPrefix.isEmpty())
-			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName + "::" + subPrefix))
-				resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteSubDeclarationLookupElement(subDeclaration, subPrefix));
+			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageWithPrefix))
+				resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteSubDeclarationLookupElement(subDeclaration, packageWithPrefix));
 
 		// Globs
 		for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
@@ -76,9 +80,9 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		// Globs with prefix
 		if (!subPrefix.isEmpty())
-			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName + "::" + subPrefix))
+			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageWithPrefix))
 				if (globVariable.getName() != null)
-					resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteGlobLookupElement(globVariable, subPrefix));
+					resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteGlobLookupElement(globVariable, packageWithPrefix));
 
 		// Constants
 		for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
@@ -88,9 +92,9 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		// Constatns with prefix
 		if (!subPrefix.isEmpty())
-			for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName + "::" + subPrefix))
+			for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageWithPrefix))
 				if (stringConstant.getName() != null)
-					resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteConstantLookupElement(stringConstant, subPrefix));
+					resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteConstantLookupElement(stringConstant, packageWithPrefix));
 
 	}
 }

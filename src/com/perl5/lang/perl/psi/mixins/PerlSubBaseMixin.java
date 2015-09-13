@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
@@ -183,5 +184,12 @@ public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends Stu
 			return PerlIcons.METHOD_GUTTER_ICON;
 		else
 			return PerlIcons.SUB_GUTTER_ICON;
+	}
+
+	@Override
+	public void subtreeChanged()
+	{
+		PerlSubCompletionProviderUtil.removeFromLookupCache(getCanonicalName());
+		super.subtreeChanged();
 	}
 }

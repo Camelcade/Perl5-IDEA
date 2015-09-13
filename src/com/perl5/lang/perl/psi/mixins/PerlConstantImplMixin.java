@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.constants.PerlConstantStub;
 import com.perl5.lang.perl.psi.PerlString;
@@ -144,4 +145,10 @@ public abstract class PerlConstantImplMixin extends StubBasedPsiElementBase<Perl
 		return getName();
 	}
 
+	@Override
+	public void subtreeChanged()
+	{
+		PerlSubCompletionProviderUtil.removeFromLookupCache(getCanonicalName());
+		super.subtreeChanged();
+	}
 }
