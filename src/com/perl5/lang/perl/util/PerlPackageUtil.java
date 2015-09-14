@@ -207,7 +207,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 	/**
-	 * Processes all global hashes names with specific processor
+	 * Processes all global packages names with specific processor
 	 *
 	 * @param project   project to search in
 	 * @param processor string processor for suitable strings

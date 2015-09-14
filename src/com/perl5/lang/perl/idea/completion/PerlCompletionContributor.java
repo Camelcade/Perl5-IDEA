@@ -97,6 +97,20 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		// refactored
 		extend(
 				CompletionType.BASIC,
+				DQ_STRING_BEGIN,
+				new PerlPackageNamesCompletionProvider()
+		);
+
+		extend(
+				CompletionType.BASIC,
+				SQ_STRING_BEGIN,
+				new PerlPackageNamesCompletionProvider()
+		);
+
+
+		// refactored
+		extend(
+				CompletionType.BASIC,
 				NAMESPACE_NAME_PATTERN,
 				new PerlPackageCompletionProvider()
 		);
