@@ -1215,11 +1215,8 @@ public class PerlLexer extends PerlLexerGenerated
 		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, tokenStart, bufferEnd, openQuote, false);
 
 		if (firstBlock == null)
-		{
-//			System.err.println("Stop after first block");
-			yybegin(YYINITIAL);
-			return REGEX_QUOTE_OPEN;
-		}
+			return getPreParsedToken();
+
 		int currentOffset = firstBlock.getEndOffset();
 
 		// find block 2
@@ -1244,11 +1241,8 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 
 			if (secondBLock == null)
-			{
-//				System.err.println("Stop after second block");
-				yybegin(YYINITIAL);
-				return REGEX_QUOTE_OPEN;
-			}
+				return getPreParsedToken();
+
 			currentOffset = secondBLock.getEndOffset();
 		}
 
