@@ -1154,6 +1154,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 
+
+/*
 			// reduces nodes number
 			while ((tokenType = b.getTokenType()) != null
 					&& !STRING_MERGE_STOP_TOKENS.contains(tokenType)
@@ -1164,6 +1166,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			)
 					)
 				b.advanceLexer();
+*/
 
 //			m.drop();
 			m.collapse(STRING_CONTENT);
