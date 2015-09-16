@@ -23,9 +23,11 @@ import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
-import com.perl5.lang.perl.psi.references.PerlHeredocReference;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
@@ -39,39 +41,48 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 	public Result preprocessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull Ref<Integer> caretOffset, @NotNull Ref<Integer> caretAdvance, @NotNull DataContext dataContext, EditorActionHandler originalHandler)
 	{
 		// here-doc terminator auto-inserting
-		PsiElement element = file.findElementAt(editor.getCaretModel().getOffset());
-		if (element != null && element.getParent() instanceof PerlHeredocElementImpl && element.getPrevSibling() == null)
+
+		int offset = editor.getCaretModel().getOffset();
+		PsiElement heredocOpenerOperator = PerlPsiUtil.searchLineForElementByType(file, offset - 1, PerlElementTypes.OPERATOR_HEREDOC);
+
+		if (heredocOpenerOperator != null)
 		{
-			PsiElement parent = element.getParent();
-			PsiElement nextSibling = parent.getNextSibling();
+			PsiElement heredocOpener = heredocOpenerOperator.getParent();
+			assert heredocOpener instanceof PerlHeredocOpener;
 
-			boolean needAdd = nextSibling == null || !(nextSibling instanceof PerlHeredocTerminatorElementImpl);
+			String markerName = ((PerlHeredocOpener) heredocOpener).getName();
+			PsiElement currentElement = file.findElementAt(offset);
+			boolean needAdd = currentElement == null;    // last element
 
-			if (!needAdd)
+			if (!needAdd && currentElement.getParent() instanceof PerlHeredocElementImpl) // end of the line with opened heredoc
 			{
-				// checking for overlapping heredocs
-				Pattern openerPattern = Pattern.compile("<<(\\s*)[\"'`]?" + nextSibling.getText() + "[\"'`]?");
-				if (openerPattern.matcher(parent.getText()).find())
-					needAdd = true;
+				PsiElement hereDocBody = currentElement.getParent();
+				PsiElement nextSibling = hereDocBody.getNextSibling();
+				needAdd = nextSibling == null || !(nextSibling instanceof PerlHeredocTerminatorElementImpl);
+
+				if (!needAdd)
+				{
+					// checking for overlapping heredocs
+					Pattern openerPattern = Pattern.compile("<<(\\s*)[\"'`]?" + markerName + "[\"'`]?");
+					if (openerPattern.matcher(hereDocBody.getText()).find())
+						needAdd = true;
+				}
 			}
+
 
 			if (needAdd)
 			{
-				PsiElement opener = PerlHeredocReference.getClosestHeredocOpener(element);
-				if (opener != null)
-				{
-					editor.getDocument().insertString(caretOffset.get(), opener.getText());
-					return Result.DefaultSkipIndent;
-				}
+				editor.getDocument().insertString(caretOffset.get(), markerName + "\n");
+				return Result.DefaultSkipIndent;
 			}
 		}
 
-		return Result.Default;
+		return Result.Continue;
 	}
 
 	@Override
 	public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext)
 	{
-		return Result.Default;
+		return Result.Continue;
 	}
 }

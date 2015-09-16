@@ -62,6 +62,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 		final CompletionResultSet finalResultSet = result;
 
 		if (!isObjectMethod)
+			// fixme not dry with PerlPackageNamesCompletionProvider
 			PerlPackageUtil.processDefinedPackageNames(project, new PerlInternalIndexKeysProcessor()
 			{
 				@Override

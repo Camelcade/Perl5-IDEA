@@ -19,9 +19,8 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,24 +37,7 @@ public class PerlHeredocReference extends PerlReference
 
 	public static PsiElement getClosestHeredocOpener(PsiElement element)
 	{
-		return findHeredocOpenerByOffset(element.getContainingFile(), null, element.getTextOffset());
-	}
-
-	public static PsiElement findHeredocOpenerByOffset(PsiElement file, String marker, int offset)
-	{
-		PsiElement result = null;
-		for (PsiPerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(file, PsiPerlHeredocOpener.class))
-		{
-			if (opener.getTextOffset() < offset)
-			{
-				if (marker == null || marker.equals(opener.getName()))
-					result = opener.getNameIdentifier();
-			} else
-			{
-				break;
-			}
-		}
-		return result;
+		return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), null, element.getTextOffset());
 	}
 
 	@NotNull
@@ -69,7 +51,7 @@ public class PerlHeredocReference extends PerlReference
 	@Override
 	public PsiElement resolve()
 	{
-		return findHeredocOpenerByOffset(myElement.getContainingFile(), myMarker, myElement.getTextOffset());
+		return PerlPsiUtil.findHeredocOpenerByOffset(myElement.getContainingFile(), myMarker, myElement.getTextOffset());
 	}
 
 	@Override

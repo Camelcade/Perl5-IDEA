@@ -21,6 +21,8 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
@@ -85,4 +87,19 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		return getName();
 	}
 
+	@NotNull
+	@Override
+	public SearchScope getUseScope()
+	{
+		return getParent().getUseScope();
+//		return super.getUseScope();
+	}
+
+	@NotNull
+	@Override
+	public GlobalSearchScope getResolveScope()
+	{
+		return getParent().getResolveScope();
+//		return super.getResolveScope();
+	}
 }

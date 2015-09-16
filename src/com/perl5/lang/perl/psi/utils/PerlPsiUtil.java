@@ -16,9 +16,13 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
@@ -85,6 +89,65 @@ public class PerlPsiUtil
 
 		} else
 			return PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+	}
+
+
+	/**
+	 * Searching for last heredoc opener before offset
+	 *
+	 * @param file   File to search in
+	 * @param marker optional marker text
+	 * @param offset offset
+	 * @return Marker element
+	 */
+	public static PsiElement findHeredocOpenerByOffset(PsiElement file, String marker, int offset)
+	{
+		PsiElement result = null;
+		for (PsiPerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(file, PsiPerlHeredocOpener.class))
+		{
+			if (opener.getTextOffset() < offset)
+			{
+				if (marker == null || marker.equals(opener.getName()))
+					result = opener.getNameIdentifier();
+			} else
+			{
+				break;
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Back-searching file for an element
+	 *
+	 * @param file        file to search in
+	 * @param offset      end offset
+	 * @param elementType element type to search
+	 * @return PsiElement of found element
+	 */
+	public static PsiElement searchLineForElementByType(PsiFile file, int offset, IElementType elementType)
+	{
+		if (offset == file.getTextLength())
+			offset--;
+
+		if (offset >= 0)
+		{
+			do
+			{
+				PsiElement currentElement = file.findElementAt(offset);
+
+				if (currentElement == null || StringUtil.containsChar(currentElement.getText(), '\n'))
+					break;
+
+				if (currentElement.getNode().getElementType() == elementType)
+					return currentElement;
+
+				offset = currentElement.getTextRange().getStartOffset() - 1;
+
+			} while (offset >= 0);
+		}
+
+		return null;
 	}
 
 }

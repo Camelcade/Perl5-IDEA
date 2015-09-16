@@ -26,23 +26,51 @@ import java.io.IOException;
 public class PerlHeredocLexer extends PerlStringLexer
 {
 	final protected String myType;
+	final protected boolean isInterpolated;
 
 	public PerlHeredocLexer(String myType)
 	{
 		this.myType = myType;
+		isInterpolated = !"HEREDOC".equals(myType);
 	}
 
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
-		if (getTokenStart() == getBufferStart() && getBufferEnd() > getBufferStart() && getTokenEnd() == getBufferStart())
-		{
-			if ("HEREDOC".equals(myType) && getBufferEnd() > getBufferStart() + 1)
-				addPreparsedToken(getBufferStart() + 1, getBufferEnd(), STRING_CONTENT);
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenEnd();
 
-			setTokenStart(getBufferStart());
-			setTokenEnd(getBufferStart() + 1);
-			return HEREDOC_PSEUDO_QUOTE;
+		if (tokenStart < bufferEnd) {
+			if (tokenStart == bufferStart) {
+				setTokenStart(tokenStart);
+				setTokenEnd(tokenStart + 1);
+				return HEREDOC_PSEUDO_QUOTE;
+			} else if (!isInterpolated && tokenStart > bufferStart) {
+				// fixme not dry with PerlQStringLexer
+				setTokenStart(tokenStart);
+
+				int currentPosition = tokenStart;
+
+				char currentChar = buffer.charAt(currentPosition);
+
+				if (currentChar == '\n')
+					setTokenEnd(currentPosition + 1);
+				else if (Character.isWhitespace(currentChar)) {
+					do {
+						currentChar = buffer.charAt(++currentPosition);
+					}
+					while (currentPosition < bufferEnd - 1 && currentChar != '\n' && Character.isWhitespace(currentChar));
+					setTokenEnd(currentPosition);
+				} else {
+					do {
+						currentChar = buffer.charAt(++currentPosition);
+					} while (currentPosition < bufferEnd - 1 && !Character.isWhitespace(currentChar));
+					setTokenEnd(currentPosition);
+				}
+
+				return STRING_CONTENT;
+			}
 		}
 
 		return super.perlAdvance();

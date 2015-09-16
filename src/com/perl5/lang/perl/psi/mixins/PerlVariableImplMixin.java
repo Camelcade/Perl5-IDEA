@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.LocalSearchScope;
+import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -420,4 +421,17 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	{
 		return getName();
 	}
+
+	@NotNull
+	@Override
+	public SearchScope getUseScope()
+	{
+		PsiElement parent = getParent();
+
+		if (parent instanceof PsiPerlVariableDeclarationLexical || parent instanceof PsiPerlVariableDeclarationLocal)
+			return new LocalSearchScope(getLexicalScope());
+
+		return super.getUseScope();
+	}
+
 }

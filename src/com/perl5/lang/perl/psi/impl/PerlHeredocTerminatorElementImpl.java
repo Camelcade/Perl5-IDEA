@@ -73,4 +73,5 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 		return getName();
 	}
 
+
 }

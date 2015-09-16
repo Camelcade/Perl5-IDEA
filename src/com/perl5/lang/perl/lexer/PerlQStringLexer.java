@@ -28,15 +28,34 @@ public class PerlQStringLexer extends PerlQQStringLexer
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
-		int bufferEnd = getBufferEnd();
-		int tokenStart = getTokenEnd();
+        int bufferEnd = getBufferEnd();
+        CharSequence buffer = getBuffer();
+        int tokenStart = getTokenEnd();
 
-		if (tokenStart == getBufferStart() + 1 && bufferEnd > getBufferStart() + 2)
-		{
-			setTokenStart(tokenStart);
-			setTokenEnd(bufferEnd - 1);
-			return STRING_CONTENT;
-		}
+        if (tokenStart > getBufferStart() && tokenStart < bufferEnd - 1) {
+            // fixme not dry with PerlHeredocLexer
+            setTokenStart(tokenStart);
+
+            int currentPosition = tokenStart;
+
+            char currentChar = buffer.charAt(currentPosition);
+
+            if (currentChar == '\n')
+                setTokenEnd(currentPosition + 1);
+            else if (Character.isWhitespace(currentChar)) {
+                do {
+                    currentChar = buffer.charAt(++currentPosition);
+                } while (currentPosition < bufferEnd - 1 && currentChar != '\n' && Character.isWhitespace(currentChar));
+                setTokenEnd(currentPosition);
+            } else {
+                do {
+                    currentChar = buffer.charAt(++currentPosition);
+                } while (currentPosition < bufferEnd - 1 && !Character.isWhitespace(currentChar));
+                setTokenEnd(currentPosition);
+            }
+
+            return STRING_CONTENT;
+        }
 
 		return super.perlAdvance();
 	}

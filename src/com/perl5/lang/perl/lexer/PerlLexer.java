@@ -104,7 +104,7 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_RE,
 			OPERATOR_NOT_RE,
 
-			OPERATOR_HEREDOC,
+//			OPERATOR_HEREDOC, // this is an artificial operator, not the real one
 			OPERATOR_SHIFT_LEFT,
 			OPERATOR_SHIFT_RIGHT,
 
@@ -872,7 +872,7 @@ public class PerlLexer extends PerlLexerGenerated
 				linePos++;
 
 			// reached the end of heredoc and got end marker
-			if (heredocMarker.equals(buffer.subSequence(currentPosition, lineContentsEnd).toString()))
+			if (StringUtil.equals(heredocMarker, buffer.subSequence(currentPosition, lineContentsEnd)))
 			{
 				preparsedTokensList.clear();
 				preparsedTokensList.add(new CustomToken(currentPosition, lineContentsEnd, HEREDOC_END));
@@ -892,10 +892,10 @@ public class PerlLexer extends PerlLexerGenerated
 			else if (linePos == bufferEnd)
 			{
 				// non-empty heredoc and got the end of file
-				if (currentPosition > tokenStart)
+				if (linePos > tokenStart)
 				{
 					setTokenStart(tokenStart);
-					setTokenEnd(currentPosition);
+					setTokenEnd(linePos);
 					return tokenType;
 				}
 				// empty heredoc and got the end of file
@@ -1215,11 +1215,8 @@ public class PerlLexer extends PerlLexerGenerated
 		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, tokenStart, bufferEnd, openQuote, false);
 
 		if (firstBlock == null)
-		{
-//			System.err.println("Stop after first block");
-			yybegin(YYINITIAL);
-			return REGEX_QUOTE_OPEN;
-		}
+			return getPreParsedToken();
+
 		int currentOffset = firstBlock.getEndOffset();
 
 		// find block 2
@@ -1244,11 +1241,8 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 
 			if (secondBLock == null)
-			{
-//				System.err.println("Stop after second block");
-				yybegin(YYINITIAL);
-				return REGEX_QUOTE_OPEN;
-			}
+				return getPreParsedToken();
+
 			currentOffset = secondBLock.getEndOffset();
 		}
 

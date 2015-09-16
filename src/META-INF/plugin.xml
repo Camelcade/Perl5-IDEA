@@ -44,12 +44,12 @@
       <p><b>Features & Improvements:</b>
       <ul>
         <li>Added icons for retina displays</li>
-        <li>Tricky <code>use vars</code> declarations now being handled correctly. <code>use vars @SOMELIST</code> still not working.</li>
         <li>Implemented imports processing for subs with explicit code sigil.</li>
         <li>Implemented basic CodeStyle settings and basic formatter (use with care with version control). Need feedbacks.</li>
         <li>Implemented automatic heredoc closing marker insertion.</li>
         <li>Plugin now knows that <code>use v5.12; # and above</code> includes <code>use strict;</code>.</li>
         <li>Here-doc without injection now highlighted as an appropriate string</li>
+        <li>Implemented auto-completion of defined package names in the strings content</li>
       </ul>
       </p>
 
@@ -66,6 +66,12 @@
         <li>Fixed package file creation in specialized IDEs.</li>
         <li>Here-doc end marker, pod and formats are not being indented on block tabbing.</li>
         <li>Here-doc end marker is not being indented on live-template insertion.</li>
+        <li>Tricky <code>use vars</code> declarations now being handled correctly. <code>use vars @SOMELIST</code> still not working. Also fixed declaration of hashes, code refs and typeglobs.</li>
+        <li>Fixed bug with tail LF in convert string to here-doc intention.</li>
+        <li>Fixed bug with lookup elements caching for subs.</li>
+        <li>Cleaned up extended regex parsing.</li>
+        <li>Fixed but with broken line splitting.</li>
+        <li>Fixed bug with <code>print OF &lt;&lt;EOM;</code> parsing.</li>
       </ul>
       </p>
 
@@ -205,7 +211,8 @@
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
         <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameHeredocProcessor"/>
-        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameVariableProcessor"/>
+
+        <!--<renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameVariableProcessor"/>-->
 
         <nameSuggestionProvider implementation="com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider"
                                 order="first"/>

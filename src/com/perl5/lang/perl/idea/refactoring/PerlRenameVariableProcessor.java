@@ -44,10 +44,15 @@ public class PerlRenameVariableProcessor extends RenamePsiElementProcessor
 	@Override
 	public Collection<PsiReference> findReferences(PsiElement element)
 	{
-		PsiElement parentElement = element.getParent().getParent();
+		PsiElement variableElement = element.getParent();
+		PsiElement parentElement = variableElement.getParent();
 
-		if (parentElement != null && (parentElement instanceof PsiPerlVariableDeclarationLexical || parentElement instanceof PsiPerlVariableDeclarationLocal))
-			return ReferencesSearch.search(element, new LocalSearchScope(element.getContainingFile())).findAll();
+		if (variableElement instanceof PerlVariable
+				&& (parentElement instanceof PsiPerlVariableDeclarationLexical || parentElement instanceof PsiPerlVariableDeclarationLocal)
+				)
+		{
+			return ReferencesSearch.search(element, new LocalSearchScope(((PerlVariable) variableElement).getLexicalScope())).findAll();
+		}
 
 		return super.findReferences(element);
 	}

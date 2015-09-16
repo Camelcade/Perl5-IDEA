@@ -66,4 +66,6 @@ public abstract class PerlHeredocOpenerMixin extends PerlNamedElementImpl implem
 			return stringNameIdentifier.setName(name);
 		return null;
 	}
+
+
 }

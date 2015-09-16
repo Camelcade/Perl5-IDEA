@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea;
 
+import com.intellij.patterns.ElementPattern;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mojolicious.MojoliciousPerlFileImpl;
@@ -31,9 +32,14 @@ import static com.intellij.patterns.PlatformPatterns.psiFile;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlElementPatterns
+public interface PerlElementPatterns extends PerlElementTypes
 {
 	public static final PsiElementPattern.Capture<PerlStringContentElementImpl> STRING_CONENT_PATTERN = psiElement(PerlStringContentElementImpl.class).withLanguage(PerlLanguage.INSTANCE);
+	public static final ElementPattern<PsiElement> SQ_OPENING_QUOTE = psiElement(QUOTE_SINGLE_OPEN);
+	public static final PsiElementPattern.Capture<PerlStringContentElementImpl> SQ_STRING_BEGIN = STRING_CONENT_PATTERN.afterLeaf(SQ_OPENING_QUOTE).inside(PsiPerlStringSq.class);
+	public static final ElementPattern<PsiElement> DQ_OPENING_QUOTE = psiElement(QUOTE_DOUBLE_OPEN);
+	public static final PsiElementPattern.Capture<PerlStringContentElementImpl> DQ_STRING_BEGIN = STRING_CONENT_PATTERN.afterLeaf(DQ_OPENING_QUOTE).inside(PsiPerlStringDq.class);
+
 	public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = psiElement(PerlNamespaceElement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PsiPerlUseStatement> USE_STATEMENT_PATTERN = psiElement(PsiPerlUseStatement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_TERM_PATTERN = psiElement(PsiPerlRequireExpr.class).withLanguage(PerlLanguage.INSTANCE);
