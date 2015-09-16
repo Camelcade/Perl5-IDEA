@@ -71,6 +71,7 @@
         <li>Fixed bug with lookup elements caching for subs.</li>
         <li>Cleaned up extended regex parsing.</li>
         <li>Fixed but with broken line splitting.</li>
+        <li>Fixed bug with <code>print OF <<EOM;</code> parsing.</li>
       </ul>
       </p>
 
