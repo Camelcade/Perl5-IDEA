@@ -46,7 +46,11 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	// flag shows that SQ strings should be re-parsed as QQ strings. Used in use vars expr
 	boolean reparseSQString = false;
 
+	// flag allowes additional sigils to parse, required in use vars reparsed strings
 	boolean allowAllSigils = false;
+
+	// flags shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
+	boolean isInterpolated = false;
 
 	Project myProject = getProject();
 
@@ -191,6 +195,16 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	{
 		boolean currentState = isAllowAllSigils();
 		allowAllSigils = newState;
+		return currentState;
+	}
+
+	public boolean isInterpolated() {
+		return isInterpolated;
+	}
+
+	public boolean setIsInterpolated(boolean newState) {
+		boolean currentState = isInterpolated();
+		isInterpolated = newState;
 		return currentState;
 	}
 }

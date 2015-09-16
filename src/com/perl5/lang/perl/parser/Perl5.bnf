@@ -987,13 +987,13 @@ string_dq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] string_dq_parsed
   | <<parseNetstedInterpolatedString QUOTE_DOUBLE>>
 
-private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [string_content_qq] QUOTE_DOUBLE_CLOSE {pin=1}
+private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [<<parseInterpolatedStringContent>>] QUOTE_DOUBLE_CLOSE {pin=1}
 
 string_xq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_QX] string_xq_parsed
   | <<parseNetstedInterpolatedString QUOTE_TICK>>
 
-private string_xq_parsed ::= QUOTE_TICK_OPEN [string_content_qq] QUOTE_TICK_CLOSE {pin=1}
+private string_xq_parsed ::= QUOTE_TICK_OPEN [<<parseInterpolatedStringContent>>] QUOTE_TICK_CLOSE {pin=1}
 
 string_sq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString>>
@@ -1001,7 +1001,6 @@ string_sq ::=
   | <<parseNestedSQString>> // nested sq string
 
 private string_sq_parsed ::= QUOTE_SINGLE_OPEN STRING_CONTENT* QUOTE_SINGLE_CLOSE {pin=1}
-
 private string_content_qq ::= string_content_element +
 private string_content_element ::=
   <<parseInterpolatedConstructs>>

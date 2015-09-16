@@ -26,10 +26,12 @@ import java.io.IOException;
 public class PerlHeredocLexer extends PerlStringLexer
 {
 	final protected String myType;
+	final protected boolean isInterpolated;
 
 	public PerlHeredocLexer(String myType)
 	{
 		this.myType = myType;
+		isInterpolated = !"HEREDOC".equals(myType);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class PerlHeredocLexer extends PerlStringLexer
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 1);
 				return HEREDOC_PSEUDO_QUOTE;
-			} else if (tokenStart > bufferStart) {
+			} else if (!isInterpolated && tokenStart > bufferStart) {
 				// fixme not dry with PerlQStringLexer
 				setTokenStart(tokenStart);
 
