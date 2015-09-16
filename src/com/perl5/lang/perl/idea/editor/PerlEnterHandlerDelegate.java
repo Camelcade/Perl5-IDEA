@@ -66,12 +66,12 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 			}
 		}
 
-		return Result.Default;
+		return Result.Continue;
 	}
 
 	@Override
 	public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext)
 	{
-		return Result.Default;
+		return Result.Continue;
 	}
 }
