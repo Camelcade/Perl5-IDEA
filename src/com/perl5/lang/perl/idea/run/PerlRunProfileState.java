@@ -21,6 +21,7 @@ import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
@@ -162,6 +163,8 @@ public class PerlRunProfileState extends CommandLineState
 		commandLine.withWorkDirectory(homePath);
 		commandLine.withEnvironment(runProfile.getEnvs());
 		commandLine.setPassParentEnvironment(runProfile.isPassParentEnvs());
-		return new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset);
+		OSProcessHandler handler = new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset);
+		ProcessTerminatedListener.attach(handler, getEnvironment().getProject());
+		return handler;
 	}
 }
