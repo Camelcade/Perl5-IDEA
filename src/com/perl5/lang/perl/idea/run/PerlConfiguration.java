@@ -47,6 +47,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public String WORKING_DIRECTORY;
 	public Map<String, String> ENV = new HashMap<String, String>();
 	public boolean PASS_PARENT_ENVS = true;
+	public String CHARSET;
 
 	public PerlConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -65,7 +66,6 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	{
 		super.writeExternal(element);
 		DefaultJDOMExternalizer.writeExternal(this, element);
-
 	}
 
 	@NotNull
@@ -80,6 +80,16 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
 	{
 		return new PerlRunProfileState(executionEnvironment);
+	}
+
+	public void setCharset(String charset)
+	{
+		CHARSET = charset;
+	}
+
+	public String getCharset()
+	{
+		return CHARSET;
 	}
 
 	public String getScriptPath()

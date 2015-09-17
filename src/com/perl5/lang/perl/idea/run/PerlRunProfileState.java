@@ -35,6 +35,9 @@ import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
+
 /**
  * @author VISTALL
  * @since 16-Sep-15
@@ -110,9 +113,28 @@ public class PerlRunProfileState extends CommandLineState
 			commandLine.addParameters(StringUtil.split(programParameters, " "));
 		}
 
+		String charsetName = runProfile.getCharset();
+		Charset charset = null;
+		if(!StringUtil.isEmpty(charsetName))
+		{
+			try
+			{
+				charset = Charset.forName(charsetName);
+			}
+			catch (UnsupportedCharsetException e)
+			{
+				throw new ExecutionException("Unknown charset: " + charsetName);
+			}
+		}
+		else
+		{
+			charset = scriptFile.getCharset();
+		}
+
+		commandLine.setCharset(charset);
 		commandLine.withWorkDirectory(homePath);
 		commandLine.withEnvironment(runProfile.getEnvs());
 		commandLine.setPassParentEnvironment(runProfile.isPassParentEnvs());
-		return new OSProcessHandler(commandLine);
+		return new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset);
 	}
 }
