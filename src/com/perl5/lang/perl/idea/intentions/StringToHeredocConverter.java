@@ -24,7 +24,6 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStringDq;
 import com.perl5.lang.perl.psi.PsiPerlStringSq;
 import com.perl5.lang.perl.psi.PsiPerlStringXq;
@@ -58,7 +57,9 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 				else if (parentElement instanceof PsiPerlStringXq)
 					quoteSymbol = '`';
 
-				List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(project, quoteSymbol, markerText, element.getText());
+				List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(project, quoteSymbol, markerText,
+						parentElement.getText().substring(1, parentElement.getText().length() - 1)
+				);
 
 				PsiFile currentFile = element.getContainingFile();
 
@@ -88,10 +89,7 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 		if (!element.isWritable())
 			return false;
 		PsiElement parent = element.getParent();
-		return
-				element instanceof PerlStringContentElement
-						&&
-						(parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq);
+		return parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq;
 	}
 
 	@Nls
