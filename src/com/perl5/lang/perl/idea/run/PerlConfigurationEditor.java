@@ -21,25 +21,22 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.encoding.EncodingManager;
-import com.intellij.ui.DocumentAdapter;
-import com.intellij.ui.TextFieldWithAutoCompletion;
-import com.intellij.ui.TextFieldWithAutoCompletionListProvider;
+import com.intellij.ui.*;
 import com.perl5.lang.perl.PerlFileType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.nio.charset.Charset;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * @author VISTALL
@@ -48,7 +45,7 @@ import java.util.Collection;
 public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 {
 	private TextFieldWithBrowseButton myScriptField;
-	private TextFieldWithAutoCompletion<Charset> myCharsetField;
+	private ComboBox myCharsetBox;
 	private CommonProgramParametersPanel myParametersPanel;
 	private Project myProject;
 
@@ -62,7 +59,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	{
 		myScriptField.setText(perlConfiguration.getScriptPath());
 		myParametersPanel.reset(perlConfiguration);
-		myCharsetField.setText(perlConfiguration.getCharset());
+		myCharsetBox.setSelectedItem(perlConfiguration.getCharset());
 	}
 
 	@Override
@@ -70,7 +67,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	{
 		perlConfiguration.setScriptPath(myScriptField.getText());
 		myParametersPanel.applyTo(perlConfiguration);
-		perlConfiguration.setCharset(StringUtil.nullize(myCharsetField.getText(), true));
+		perlConfiguration.setCharset(StringUtil.nullize((String) myCharsetBox.getSelectedItem(), true));
 	}
 
 	@NotNull
@@ -80,43 +77,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		myScriptField = new TextFieldWithBrowseButton();
 		myScriptField.addBrowseFolderListener("Select Perl Script", "Please select perl script file", myProject, FileChooserDescriptorFactory.createSingleFileDescriptor(PerlFileType.INSTANCE), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
 
-		Collection<Charset> favorites = EncodingManager.getInstance().getFavorites();
-		myCharsetField = new TextFieldWithAutoCompletion<Charset>(myProject, new TextFieldWithAutoCompletionListProvider<Charset>(favorites)
-		{
-			@Nullable
-			@Override
-			protected Icon getIcon(@NotNull Charset charset)
-			{
-				return null;
-			}
-
-			@NotNull
-			@Override
-			protected String getLookupString(@NotNull Charset charset)
-			{
-				return charset.displayName();
-			}
-
-			@Nullable
-			@Override
-			protected String getTailText(@NotNull Charset charset)
-			{
-				return null;
-			}
-
-			@Nullable
-			@Override
-			protected String getTypeText(@NotNull Charset charset)
-			{
-				return null;
-			}
-
-			@Override
-			public int compare(Charset t1, Charset t2)
-			{
-				return t1.displayName().compareTo(t2.displayName());
-			}
-		}, false, null);
+		myCharsetBox = new ComboBox(new CollectionComboBoxModel<String>(new ArrayList<String>(Charset.availableCharsets().keySet())));
 
 		myScriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter()
 		{
@@ -126,26 +87,24 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myScriptField.getText());
 				if(file != null)
 				{
-					myCharsetField.setPlaceholder(file.getCharset().displayName());
+					myCharsetBox.setSelectedItem(file.getCharset().displayName());
 				}
 				else
 				{
-					myCharsetField.setPlaceholder(null);
+					myCharsetBox.setSelectedItem(null);
 				}
 			}
 		});
-
-		myCharsetField.setPlaceholder("file encoding");
 
 		myParametersPanel = new CommonProgramParametersPanel()
 		{
 			@Override
 			protected void addComponents()
 			{
-				LabeledComponent<TextFieldWithBrowseButton> scriptLabel = LabeledComponent.create(myScriptField, "Script");
+				LabeledComponent<?> scriptLabel = LabeledComponent.create(myScriptField, "Script");
 				scriptLabel.setLabelLocation(BorderLayout.WEST);
 				add(scriptLabel);
-				LabeledComponent<TextFieldWithAutoCompletion<Charset>> consoleEncoding = LabeledComponent.create(myCharsetField, "Console Encoding");
+				LabeledComponent<?> consoleEncoding = LabeledComponent.create(myCharsetBox, "Console Encoding");
 				consoleEncoding.setLabelLocation(BorderLayout.WEST);
 				add(consoleEncoding);
 				super.addComponents();
