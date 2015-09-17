@@ -139,7 +139,8 @@ public class PerlSdkType extends SdkType
 	}
 
 
-	private String getExecutablePath(String sdkHome)
+	@NotNull
+	public String getExecutablePath(@NotNull String sdkHome)
 	{
 		if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\")))
 			sdkHome += File.separator;
