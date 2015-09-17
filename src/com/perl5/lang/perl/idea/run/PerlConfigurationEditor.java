@@ -28,6 +28,7 @@ import com.perl5.lang.perl.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author VISTALL
@@ -70,7 +71,9 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 			@Override
 			protected void addComponents()
 			{
-				add(LabeledComponent.create(myScriptField, "Script")); //, BorderLayout.WEST
+				LabeledComponent<TextFieldWithBrowseButton> scriptLabel = LabeledComponent.create(myScriptField, "Script");
+				scriptLabel.setLabelLocation(BorderLayout.WEST);
+				add(scriptLabel);
 				super.addComponents();
 			}
 		};
