@@ -50,6 +50,7 @@
         <li>Plugin now knows that <code>use v5.12; # and above</code> includes <code>use strict;</code>.</li>
         <li>Here-doc without injection now highlighted as an appropriate string</li>
         <li>Implemented auto-completion of defined package names in the strings content</li>
+        <li>Implemented Run configuration settings</li>
       </ul>
       </p>
 
