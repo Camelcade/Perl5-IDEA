@@ -101,8 +101,8 @@ public class PerlRunProfileState extends CommandLineState
 
 		assert homePath != null;
 
-		GeneralCommandLine commandLine = new GeneralCommandLine();
-		commandLine.withExePath(PerlSdkType.getInstance().getExecutablePath(perlSdkPath));
+		GeneralCommandLine commandLine = new GeneralCommandLine(PerlSdkType.getInstance().getExecutablePath(perlSdkPath));
+//		commandLine.withExePath();
 		commandLine.addParameter(scriptPath);
 		String programParameters = runProfile.getProgramParameters();
 		if (programParameters != null)
@@ -112,7 +112,7 @@ public class PerlRunProfileState extends CommandLineState
 
 		commandLine.withWorkDirectory(homePath);
 		commandLine.withEnvironment(runProfile.getEnvs());
-		commandLine.withPassParentEnvironment(runProfile.isPassParentEnvs());
+//		commandLine.withPassParentEnvironment(runProfile.isPassParentEnvs());
 		return new OSProcessHandler(commandLine);
 	}
 }

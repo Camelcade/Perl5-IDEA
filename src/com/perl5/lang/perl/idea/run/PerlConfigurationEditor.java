@@ -28,7 +28,6 @@ import com.perl5.lang.perl.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * @author VISTALL
@@ -71,7 +70,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 			@Override
 			protected void addComponents()
 			{
-				add(LabeledComponent.create(myScriptField, "Script", BorderLayout.WEST));
+				add(LabeledComponent.create(myScriptField, "Script")); //, BorderLayout.WEST
 				super.addComponents();
 			}
 		};
