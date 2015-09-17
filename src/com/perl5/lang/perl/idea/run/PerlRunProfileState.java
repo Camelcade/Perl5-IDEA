@@ -25,6 +25,7 @@ import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.io.FileUtil;
@@ -109,6 +110,20 @@ public class PerlRunProfileState extends CommandLineState
 			Perl5Settings perl5Settings = Perl5Settings.getInstance(getEnvironment().getProject());
 			perlSdkPath = perl5Settings.perlPath;
 			includePaths = perl5Settings.libRoots;
+		}
+
+		String alternativeSdkPath = runProfile.ALTERNATIVE_SDK_PATH;
+		if(runProfile.isUseAlternativeSdk() && !StringUtil.isEmpty(alternativeSdkPath))
+		{
+			Sdk sdk = ProjectJdkTable.getInstance().findJdk(alternativeSdkPath);
+			if(sdk != null)
+			{
+				perlSdkPath = sdk.getHomePath();
+			}
+			else
+			{
+				perlSdkPath = alternativeSdkPath;
+			}
 		}
 
 		if (perlSdkPath == null)

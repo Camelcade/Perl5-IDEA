@@ -48,6 +48,8 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public Map<String, String> ENV = new HashMap<String, String>();
 	public boolean PASS_PARENT_ENVS = true;
 	public String CHARSET;
+	public boolean USE_ALTERNATIVE_SDK;
+	public String ALTERNATIVE_SDK_PATH;
 
 	public PerlConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -100,6 +102,26 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public void setScriptPath(String scriptPath)
 	{
 		SCRIPT_PATH = scriptPath;
+	}
+
+	public void setAlternativeSdkPath(String path)
+	{
+		this.ALTERNATIVE_SDK_PATH = path;
+	}
+
+	public String getAlternativeSdkPath()
+	{
+		return ALTERNATIVE_SDK_PATH;
+	}
+
+	public boolean isUseAlternativeSdk()
+	{
+		return USE_ALTERNATIVE_SDK;
+	}
+
+	public void setUseAlternativeSdk(boolean value)
+	{
+		this.USE_ALTERNATIVE_SDK = value;
 	}
 
 	@Override

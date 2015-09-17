@@ -47,6 +47,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	private TextFieldWithBrowseButton myScriptField;
 	private ComboBox myCharsetBox;
 	private CommonProgramParametersPanel myParametersPanel;
+	private PerlAlternativeSdkPanel myAlternativeSdkPanel;
 	private Project myProject;
 
 	public PerlConfigurationEditor(Project project)
@@ -60,6 +61,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		myScriptField.setText(perlConfiguration.getScriptPath());
 		myParametersPanel.reset(perlConfiguration);
 		myCharsetBox.setSelectedItem(perlConfiguration.getCharset());
+		myAlternativeSdkPanel.reset(perlConfiguration.getAlternativeSdkPath(), perlConfiguration.isUseAlternativeSdk());
 	}
 
 	@Override
@@ -68,6 +70,8 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		perlConfiguration.setScriptPath(myScriptField.getText());
 		myParametersPanel.applyTo(perlConfiguration);
 		perlConfiguration.setCharset(StringUtil.nullize((String) myCharsetBox.getSelectedItem(), true));
+		perlConfiguration.setAlternativeSdkPath(myAlternativeSdkPanel.getPath());
+		perlConfiguration.setUseAlternativeSdk(myAlternativeSdkPanel.isPathEnabled());
 	}
 
 	@NotNull
@@ -96,6 +100,8 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 			}
 		});
 
+		myAlternativeSdkPanel = new PerlAlternativeSdkPanel();
+
 		myParametersPanel = new CommonProgramParametersPanel()
 		{
 			@Override
@@ -108,6 +114,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				consoleEncoding.setLabelLocation(BorderLayout.WEST);
 				add(consoleEncoding);
 				super.addComponents();
+				add(myAlternativeSdkPanel);
 			}
 		};
 		return myParametersPanel;
