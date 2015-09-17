@@ -26,10 +26,12 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
+import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import org.jetbrains.annotations.NotNull;
@@ -37,6 +39,9 @@ import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author VISTALL
@@ -68,6 +73,7 @@ public class PerlRunProfileState extends CommandLineState
 		}
 
 		String perlSdkPath = null;
+		List<String> includePaths = Collections.emptyList();
 		if (PlatformUtils.isIntelliJ())
 		{
 			Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, getEnvironment().getProject());
@@ -78,13 +84,30 @@ public class PerlRunProfileState extends CommandLineState
 			else
 			{
 				Sdk sdk = ModuleRootManager.getInstance(moduleForFile).getSdk();
-				perlSdkPath = sdk == null ? null : sdk.getHomePath();
+				if (sdk == null)
+				{
+					perlSdkPath = null;
+				}
+				else
+				{
+					perlSdkPath = sdk.getHomePath();
+					List<VirtualFile> sourceRoots = ModuleRootManager.getInstance(moduleForFile).getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE);
+					if(!sourceRoots.isEmpty())
+					{
+						includePaths = new ArrayList<String>(sourceRoots.size());
+						for (VirtualFile sourceRoot : sourceRoots)
+						{
+							includePaths.add(sourceRoot.getPath());
+						}
+					}
+				}
 			}
 		}
 		else
 		{
 			Perl5Settings perl5Settings = Perl5Settings.getInstance(getEnvironment().getProject());
 			perlSdkPath = perl5Settings.perlPath;
+			includePaths = perl5Settings.libRoots;
 		}
 
 		if (perlSdkPath == null)
@@ -106,6 +129,10 @@ public class PerlRunProfileState extends CommandLineState
 
 		GeneralCommandLine commandLine = new GeneralCommandLine();
 		commandLine.setExePath(PerlSdkType.getInstance().getExecutablePath(perlSdkPath));
+		for (String includePath : includePaths)
+		{
+			commandLine.addParameter("-I" + FileUtil.toSystemIndependentName(includePath));
+		}
 		commandLine.addParameter(scriptPath);
 		String programParameters = runProfile.getProgramParameters();
 		if (programParameters != null)
@@ -115,7 +142,7 @@ public class PerlRunProfileState extends CommandLineState
 
 		String charsetName = runProfile.getCharset();
 		Charset charset = null;
-		if(!StringUtil.isEmpty(charsetName))
+		if (!StringUtil.isEmpty(charsetName))
 		{
 			try
 			{
