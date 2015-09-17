@@ -81,7 +81,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		myScriptField = new TextFieldWithBrowseButton();
 		myScriptField.addBrowseFolderListener("Select Perl Script", "Please select perl script file", myProject, FileChooserDescriptorFactory.createSingleFileDescriptor(PerlFileType.INSTANCE), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
 
-		myCharsetBox = new ComboBox(new CollectionComboBoxModel<String>(new ArrayList<String>(Charset.availableCharsets().keySet())));
+		myCharsetBox = new ComboBox(new CollectionComboBoxModel(new ArrayList<String>(Charset.availableCharsets().keySet())));
 
 		myScriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter()
 		{
