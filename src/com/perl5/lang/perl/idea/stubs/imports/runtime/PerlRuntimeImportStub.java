@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.imports;
+package com.perl5.lang.perl.idea.stubs.imports.runtime;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
-
-import java.util.List;
+import com.perl5.lang.perl.psi.PerlDoExpr;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.08.2015.
+ * Created by hurricup on 19.09.2015.
  */
-public interface PerlUseStatementStub extends StubElement<PerlUseStatement>
+public interface PerlRuntimeImportStub extends StubElement<PerlDoExpr>
 {
-	String getPackageName();
-
-	String getOuterPackageName();
-
-	List<String> getImportParameters();
+	/**
+	 * Returns imported file relative path or null if unrecognizable
+	 * @return relative path
+	 */
+	@Nullable
+	String getImportPath();
 }

@@ -157,70 +157,70 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	@Nullable
 	public PsiPerlForStatementModifier getForStatementModifier()
 	{
-		return findChildByClass(PsiPerlForStatementModifier.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlForeachStatementModifier getForeachStatementModifier()
 	{
-		return findChildByClass(PsiPerlForeachStatementModifier.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlIfStatementModifier getIfStatementModifier()
 	{
-		return findChildByClass(PsiPerlIfStatementModifier.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlNoStatement getNoStatement()
 	{
-		return findChildByClass(PsiPerlNoStatement.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlStatement getStatement()
 	{
-		return findChildByClass(PsiPerlStatement.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlSubDeclaration getSubDeclaration()
 	{
-		return findChildByClass(PsiPerlSubDeclaration.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlUnlessStatementModifier getUnlessStatementModifier()
 	{
-		return findChildByClass(PsiPerlUnlessStatementModifier.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlUntilStatementModifier getUntilStatementModifier()
 	{
-		return findChildByClass(PsiPerlUntilStatementModifier.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlWhenStatementModifier getWhenStatementModifier()
 	{
-		return findChildByClass(PsiPerlWhenStatementModifier.class);
+		return null;
 	}
 
 	@Override
 	@Nullable
 	public PsiPerlWhileStatementModifier getWhileStatementModifier()
 	{
-		return findChildByClass(PsiPerlWhileStatementModifier.class);
+		return null;
 	}
 
 	@Override

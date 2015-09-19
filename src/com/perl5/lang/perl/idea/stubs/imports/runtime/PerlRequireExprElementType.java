@@ -14,21 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.imports;
+package com.perl5.lang.perl.idea.stubs.imports.runtime;
 
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
-
-import java.util.List;
+import com.perl5.lang.perl.psi.PerlDoExpr;
+import com.perl5.lang.perl.psi.impl.PsiPerlDoExprImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlRequireExprImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 20.08.2015.
+ * Created by hurricup on 19.09.2015.
  */
-public interface PerlUseStatementStub extends StubElement<PerlUseStatement>
+public class PerlRequireExprElementType extends PerlDoExprElementType
 {
-	String getPackageName();
+	public PerlRequireExprElementType(@NotNull String debugName)
+	{
+		super(debugName);
+	}
 
-	String getOuterPackageName();
-
-	List<String> getImportParameters();
+	@Override
+	public PerlDoExpr createPsi(@NotNull PerlRuntimeImportStub stub)
+	{
+		return new PsiPerlRequireExprImpl(stub, this);
+	}
 }

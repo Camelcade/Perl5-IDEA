@@ -61,32 +61,39 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		else super.accept(visitor);
 	}
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return this;
-	}
+//	@Nullable
+//	@Override
+//	public PsiElement getNameIdentifier()
+//	{
+//		return this;
+//	}
 
-	@Override
-	public String getName()
-	{
-		return getText();
-	}
+//	@Override
+//	public String getPresentableName()
+//	{
+//		return getName();
+//	}
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		if (name.equals(""))
-			throw new IncorrectOperationException("You can't rename a string to the empty one");
+//	@NotNull
+//	@Override
+//	public String getName()
+//	{
+//		return getText();
+//	}
 
-		PerlStringContentElementImpl newName = PerlElementFactory.createStringContent(getProject(), name);
-		if (newName != null)
-			replace(newName);
-		else
-			throw new IncorrectOperationException("Unable to create string from: " + name);
-		return this;
-	}
+//	@Override
+//	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+//	{
+//		if (name.equals(""))
+//			throw new IncorrectOperationException("You can't rename a string to the empty one");
+//
+//		PerlStringContentElementImpl newName = PerlElementFactory.createStringContent(getProject(), name);
+//		if (newName != null)
+//			replace(newName);
+//		else
+//			throw new IncorrectOperationException("Unable to create string from: " + name);
+//		return this;
+//	}
 
 	@NotNull
 	@Override
@@ -123,10 +130,5 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		return null;
 	}
 
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
 
 }

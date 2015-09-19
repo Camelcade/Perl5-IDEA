@@ -16,12 +16,12 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by hurricup on 18.07.2015.
  */
-public interface PerlStringContentElement extends PerlNamedElement
+public interface PerlStringContentElement extends PsiElement
 {
 	public boolean looksLikePackage();
 

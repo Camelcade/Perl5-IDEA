@@ -171,11 +171,18 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
             NUMBER_SIMPLE,
             NUMBER_VERSION
     );
-    protected static final TokenSet CLOSE_QUOTES = TokenSet.create(
+
+    public static final TokenSet OPEN_QUOTES = TokenSet.create(
+            QUOTE_DOUBLE_OPEN,
+            QUOTE_TICK_OPEN,
+            QUOTE_SINGLE_OPEN
+    );
+    public static final TokenSet CLOSE_QUOTES = TokenSet.create(
             QUOTE_DOUBLE_CLOSE,
             QUOTE_TICK_CLOSE,
             QUOTE_SINGLE_CLOSE
     );
+
     protected static final TokenSet STRING_MERGE_STOP_TOKENS = TokenSet.orSet(
             CLOSE_QUOTES,
             TokenSet.create(

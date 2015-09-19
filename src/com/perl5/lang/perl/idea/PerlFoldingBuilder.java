@@ -160,7 +160,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		Collection<PerlNamespaceElementContainer> imports = PsiTreeUtil.findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireExpr.class);
+		Collection<PerlNamespaceElementContainer> imports = PsiTreeUtil.<PerlNamespaceElementContainer>findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireExpr.class);
 
 		int currentOffset = 0;
 

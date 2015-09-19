@@ -16,45 +16,41 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.PerlDoExpr;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlRequireExpr;
-import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 19.09.2015.
  */
-public abstract class PerlRequireExprImplMixin extends PerlDoExprImplMixin implements PerlRequireExpr
+public abstract class PerlDoExprImplMixin extends StubBasedPsiElementBase<PerlRuntimeImportStub> implements PerlDoExpr
 {
-	public PerlRequireExprImplMixin(ASTNode node)
+	public PerlDoExprImplMixin(ASTNode node)
 	{
 		super(node);
 	}
 
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
-
-	public PerlRequireExprImplMixin(PerlRuntimeImportStub stub, IStubElementType nodeType)
+	public PerlDoExprImplMixin(PerlRuntimeImportStub stub, IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}
 
 	@Nullable
 	@Override
-	protected String findImportPath()
+	public String getImportPath()
 	{
-		if( getNamespaceElement() != null )
-			return PerlPackageUtil.getPackagePathByName(getNamespaceElement().getCanonicalName());
+		PerlRuntimeImportStub stub = getStub();
+		if( stub != null )
+			return stub.getImportPath();
 
-		return super.findImportPath();
+		return findImportPath();
+	}
+
+	@Nullable
+	protected String findImportPath(){
+		return null;
 	}
 }

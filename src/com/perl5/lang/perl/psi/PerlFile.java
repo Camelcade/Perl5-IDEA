@@ -21,6 +21,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -36,7 +37,7 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @param element variable element
 	 * @return variable type string
 	 */
-	public String getVariableType(PerlVariable element);
+	String getVariableType(PerlVariable element);
 
 	/**
 	 * Checks method namespace in cache or using callback getContextPackageNameHeavy
@@ -44,14 +45,13 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @param element method element
 	 * @return variable type string
 	 */
-	public String getMethodNamespace(PerlMethod element);
+	String getMethodNamespace(PerlMethod element);
 
 	/**
 	 * Returns lib paths for current file
 	 *
 	 * @return lib paths list in normal order
 	 */
-	public
 	@NotNull
 	List<VirtualFile> getLibPaths();
 
@@ -60,7 +60,6 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 *
 	 * @return search scope
 	 */
-	public
 	@NotNull
 	GlobalSearchScope getElementsResolveScope();
 
@@ -69,5 +68,24 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 *
 	 * @param includedVirtualFiles set of already gathered files
 	 */
-	public void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles);
+	void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles);
+
+	/**
+	 * Resolves package name according to the current file contents
+	 *
+	 * @param canonicalPackageName canonical package name
+	 * @return target PsiFile if resolved
+	 */
+	@Nullable
+	PsiFile resolvePackageName(String canonicalPackageName);
+
+	/**
+	 * Resolves relative path (from do/require) according to the current file contents
+	 *
+	 * @param relativePath relative path
+	 * @return target PsiFile if resolved
+	 */
+	@Nullable
+	PsiFile resolveRelativePath(String relativePath);
+
 }

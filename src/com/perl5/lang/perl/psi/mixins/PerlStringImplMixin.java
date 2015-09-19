@@ -17,8 +17,11 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNamedElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -38,8 +41,9 @@ public abstract class PerlStringImplMixin extends PerlNamedElementImpl
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof PerlStringContentElement)
-			return ((PerlStringContentElement) nameIdentifier).setName(name);
+		if( nameIdentifier != this && nameIdentifier instanceof PsiNamedElement)
+			return ((PsiNamedElement) nameIdentifier).setName(name);
+
 		return null;
 	}
 
@@ -47,7 +51,9 @@ public abstract class PerlStringImplMixin extends PerlNamedElementImpl
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return findChildByClass(PerlStringContentElement.class);
+		if( getFirstChild() instanceof PerlStringContentElement )
+			return getFirstChild();
+		return this;
 	}
 
 	@Nullable
@@ -55,8 +61,44 @@ public abstract class PerlStringImplMixin extends PerlNamedElementImpl
 	public String getName()
 	{
 		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof PerlStringContentElement)
-			return ((PerlStringContentElement) nameIdentifier).getName();
-		return null;
+		if( nameIdentifier != this && nameIdentifier instanceof PsiNamedElement)
+			return ((PsiNamedElement) nameIdentifier).getName();
+
+		int baseOffset = getTextOffset();
+		return getText().substring(getOpenQuoteOffset()-baseOffset + 1, getCloseQuoteOffset() - baseOffset);
+	}
+
+
+	protected int getOpenQuoteOffset()
+	{
+		ASTNode currentNode = getFirstChild().getNode();
+		while( currentNode != null )
+		{
+			if(PerlParserUtil.OPEN_QUOTES.contains(currentNode.getElementType()))
+				return currentNode.getStartOffset();
+			currentNode = currentNode.getTreeNext();
+		}
+		throw new RuntimeException("Unable to find opening quote");
+	}
+
+	protected int getCloseQuoteOffset()
+	{
+		ASTNode currentNode = getLastChild().getNode();
+		while( currentNode != null )
+		{
+			if(PerlParserUtil.CLOSE_QUOTES.contains(currentNode.getElementType()))
+				return currentNode.getStartOffset();
+			currentNode = currentNode.getTreePrev();
+		}
+		throw new RuntimeException("Unable to find closing quote");
+	}
+
+	@Override
+	public TextRange getTextRange()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+		if( nameIdentifier != this && nameIdentifier != null )
+			return nameIdentifier.getTextRange();
+		return new TextRange(getOpenQuoteOffset() + 1, getCloseQuoteOffset() );
 	}
 }

@@ -58,29 +58,17 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		// resolves to a psi file
-		String properPath = PerlPackageUtil.getPackagePathByName(packageName);
-		Project project = myElement.getProject();
-
 		PsiFile file = myElement.getContainingFile();
+		PsiFile targetFile = null;
 
 		if (file instanceof PerlFile)
 		{
-			for (VirtualFile classRoot : ((PerlFile) file).getLibPaths())
-			{
-				VirtualFile packageFile = classRoot.findFileByRelativePath(properPath);
-				if (packageFile != null)
-				{
-					PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
-					if (packagePsiFile != null)
-						return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
-				}
-			}
+			targetFile = ((PerlFile) file).resolvePackageName(packageName);
 		}
 
-		// todo search relatively to current directory
-
-		return new ResolveResult[0];
+		return targetFile == null
+				? new ResolveResult[0]
+				: new ResolveResult[]{new PsiElementResolveResult(targetFile)};
 	}
 
 	@Override

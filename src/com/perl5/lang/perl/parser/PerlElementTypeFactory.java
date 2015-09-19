@@ -65,6 +65,10 @@ public class PerlElementTypeFactory
 
 		else if (name.equals("USE_STATEMENT"))
 			return PerlStubElementTypes.PERL_USE_STATEMENT;
+		else if (name.equals("DO_EXPR"))
+			return PerlStubElementTypes.PERL_DO_EXPR;
+		else if (name.equals("REQUIRE_EXPR"))
+			return PerlStubElementTypes.PERL_REQUIRE_EXPR;
 
 		return new PerlElementType(name);
 	}
