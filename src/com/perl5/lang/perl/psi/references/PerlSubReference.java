@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
@@ -81,6 +82,10 @@ public class PerlSubReference extends PerlReferencePoly
 			{
 				if (expliclitPackageElement == null && mySubNameElement.isBuiltIn())
 					return new ResolveResult[0];
+
+				PsiFile file = mySubNameElement.getContainingFile();
+				if (file instanceof PerlFile)
+					((PerlFile) file).getElementsResolveScope();
 
 //				System.err.println("Checking for " + subName);
 

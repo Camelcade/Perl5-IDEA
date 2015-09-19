@@ -52,7 +52,7 @@
         <li>Implemented auto-completion of defined package names in the strings content</li>
         <li>Implemented Run configuration settings</li>
         <li>Implemented <code>use lib</code> support</li>
-        <li>Implemented package names resolution in current directory</li>
+        <li>Implemented package names resolution in the current directory</li>
       </ul>
       </p>
 

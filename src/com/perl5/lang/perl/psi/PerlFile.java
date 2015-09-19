@@ -17,14 +17,18 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 09.08.2015.
  */
-public interface PerlFile extends PerlLexicalScope, PerlNamespaceContainer
+public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContainer
 {
 	/**
 	 * Checks variable type from cache or using callback guessVariableTypeHeavy
@@ -47,5 +51,23 @@ public interface PerlFile extends PerlLexicalScope, PerlNamespaceContainer
 	 *
 	 * @return lib paths list in normal order
 	 */
-	public List<VirtualFile> getLibPaths();
+	public
+	@NotNull
+	List<VirtualFile> getLibPaths();
+
+	/**
+	 * Returns resolve scope for nested elements. Probably it should be getResolveScope, but still not sure
+	 *
+	 * @return search scope
+	 */
+	public
+	@NotNull
+	GlobalSearchScope getElementsResolveScope();
+
+	/**
+	 * Recursively collects virtual files included in current file
+	 *
+	 * @param includedVirtualFiles set of already gathered files
+	 */
+	public void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles);
 }

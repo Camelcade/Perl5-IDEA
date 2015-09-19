@@ -27,6 +27,8 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlLanguage;
@@ -38,10 +40,12 @@ import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
 import com.perl5.lang.perl.psi.utils.PerlLexicalDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -340,7 +344,9 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	}
 
 	@Override
-	public List<VirtualFile> getLibPaths()
+	public
+	@NotNull
+	List<VirtualFile> getLibPaths()
 	{
 		List<VirtualFile> result = new ArrayList<VirtualFile>();
 
@@ -369,5 +375,42 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		}
 
 		return result;
+	}
+
+	@Override
+	public
+	@NotNull
+	GlobalSearchScope getElementsResolveScope()
+	{
+		Set<VirtualFile> filesToSearch = new THashSet<VirtualFile>();
+
+		collectIncludedFiles(filesToSearch);
+		return GlobalSearchScope.filesScope(getProject(), filesToSearch);
+	}
+
+	@Override
+	public void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles)
+	{
+		if (!includedVirtualFiles.contains(getVirtualFile()))
+		{
+			includedVirtualFiles.add(getVirtualFile());
+
+			for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PerlUseStatement.class))
+			{
+				PerlNamespaceElement namespaceElement = useStatement.getNamespaceElement();
+				if (namespaceElement != null)
+				{
+					PsiReference reference = namespaceElement.getReference();
+					if (reference instanceof PerlNamespaceFileReference)
+					{
+						PsiElement targetElement = reference.resolve();
+						if (targetElement instanceof PerlFile)
+						{
+							((PerlFile) targetElement).collectIncludedFiles(includedVirtualFiles);
+						}
+					}
+				}
+			}
+		}
 	}
 }

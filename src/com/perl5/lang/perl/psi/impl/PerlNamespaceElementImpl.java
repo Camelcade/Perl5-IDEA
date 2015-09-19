@@ -111,6 +111,13 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	}
 
 	@Override
+	public PsiReference getReference()
+	{
+		PsiReference[] references = getReferences();
+		return references.length > 0 ? references[0] : null;
+	}
+
+	@Override
 	public boolean isBuiltin()
 	{
 		return PerlPackageUtil.isBuiltIn(getName());
