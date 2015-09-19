@@ -3,8 +3,8 @@
     <module name="camelcade" />
     <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea -Didea.is.internal=true" />
     <option name="PROGRAM_PARAMETERS" value="" />
-    <alternative-path path="RubyMine RM-141.1835" alternative-path-enabled="true" />
-    <log_file path="$USER_HOME$/.IntelliJIdea14/system/plugins-sandbox/system/log/idea.log" checked="false" skipped="true" show_all="false" alias="IDEA LOG" />
+    <alternative-path path="RubyMine" alternative-path-enabled="true" />
+    <log_file path="$USER_HOME$/.IntelliJIdea13/system/plugins-sandbox-perl5/system/log/idea.log" checked="false" skipped="true" show_all="false" alias="IDEA LOG" />
     <RunnerSettings RunnerId="JProfiler">
       <option name="WINDOW" value="true" />
     </RunnerSettings>
