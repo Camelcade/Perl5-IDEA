@@ -65,16 +65,10 @@ public class PerlRunProfileState extends CommandLineState
 	{
 		PerlConfiguration runProfile = (PerlConfiguration) getEnvironment().getRunProfile();
 
-		String scriptPath = runProfile.getScriptPath();
-		if (scriptPath == null)
-		{
-			throw new ExecutionException("Please setup script file");
-		}
-
-		VirtualFile scriptFile = LocalFileSystem.getInstance().findFileByPath(scriptPath);
+		VirtualFile scriptFile = runProfile.getScriptFile();
 		if (scriptFile == null)
 		{
-			throw new ExecutionException("Script file: " + scriptPath + " is not exists");
+			throw new ExecutionException("Script file: " + runProfile.getScriptPath() + " is not exists");
 		}
 
 		String perlSdkPath = null;
@@ -122,7 +116,7 @@ public class PerlRunProfileState extends CommandLineState
 			});
 		}
 
-		String alternativeSdkPath = runProfile.ALTERNATIVE_SDK_PATH;
+		String alternativeSdkPath = runProfile.getAlternativeSdkPath();
 		if(runProfile.isUseAlternativeSdk() && !StringUtil.isEmpty(alternativeSdkPath))
 		{
 			Sdk sdk = ProjectJdkTable.getInstance().findJdk(alternativeSdkPath);
@@ -141,7 +135,7 @@ public class PerlRunProfileState extends CommandLineState
 			throw new ExecutionException("Perl SDK is not set");
 		}
 
-		String homePath = runProfile.WORKING_DIRECTORY;
+		String homePath = runProfile.getWorkingDirectory();
 		if (StringUtil.isEmpty(homePath))
 		{
 			Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, getEnvironment().getProject());
@@ -154,12 +148,13 @@ public class PerlRunProfileState extends CommandLineState
 		assert homePath != null;
 
 		GeneralCommandLine commandLine = new GeneralCommandLine();
-		commandLine.setExePath(PerlSdkType.getInstance().getExecutablePath(perlSdkPath));
+		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlSdkPath);
+		commandLine.setExePath(FileUtil.toSystemIndependentName(executablePath));
 		for (String includePath : includePaths)
 		{
 			commandLine.addParameter("-I" + FileUtil.toSystemIndependentName(includePath));
 		}
-		commandLine.addParameter(scriptPath);
+		commandLine.addParameter(scriptFile.getPath());
 		String programParameters = runProfile.getProgramParameters();
 		if (programParameters != null)
 		{

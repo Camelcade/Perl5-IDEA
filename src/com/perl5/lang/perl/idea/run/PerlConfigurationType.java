@@ -21,6 +21,7 @@ import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import com.perl5.PerlIcons;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author VISTALL
@@ -28,6 +29,12 @@ import com.perl5.PerlIcons;
  */
 public class PerlConfigurationType extends ConfigurationTypeBase
 {
+	@NotNull
+	public static PerlConfigurationType getInstance()
+	{
+		return CONFIGURATION_TYPE_EP.findExtension(PerlConfigurationType.class);
+	}
+
 	public PerlConfigurationType()
 	{
 		super("#PerlConfigurationType", "Perl", "", PerlIcons.PERL_LANGUAGE);

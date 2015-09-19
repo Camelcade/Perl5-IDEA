@@ -29,10 +29,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,6 +86,19 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
 	{
 		return new PerlRunProfileState(executionEnvironment);
+	}
+
+	@Override
+	public String suggestedName()
+	{
+		VirtualFile scriptFile = getScriptFile();
+		return scriptFile == null ? null : scriptFile.getName();
+	}
+
+	@Nullable
+	public VirtualFile getScriptFile()
+	{
+		return StringUtils.isEmpty(SCRIPT_PATH) ? null : LocalFileSystem.getInstance().findFileByPath(SCRIPT_PATH);
 	}
 
 	public void setCharset(String charset)
