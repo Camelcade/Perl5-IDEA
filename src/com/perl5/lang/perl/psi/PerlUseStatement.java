@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +41,7 @@ public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementSt
 
 	public PerlVersionElement getVersionElement();
 
-	public IPerlPackageProcessor getPackageProcessor();
+	public PerlPackageProcessor getPackageProcessor();
 
 	@Nullable
 	public PsiPerlExpr getExpr();

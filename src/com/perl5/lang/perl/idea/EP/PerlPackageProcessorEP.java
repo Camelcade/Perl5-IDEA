@@ -18,15 +18,15 @@ package com.perl5.lang.perl.idea.EP;
 
 import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.util.KeyedLazyInstanceEP;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<IPerlPackageProcessor>
+public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<PerlPackageProcessor>
 {
-	public static final KeyedExtensionCollector<IPerlPackageProcessor, String> EP = new KeyedExtensionCollector<IPerlPackageProcessor, String>("com.perl5.packageProcessor")
+	public static final KeyedExtensionCollector<PerlPackageProcessor, String> EP = new KeyedExtensionCollector<PerlPackageProcessor, String>("com.perl5.packageProcessor")
 	{
 		@NotNull
 		@Override

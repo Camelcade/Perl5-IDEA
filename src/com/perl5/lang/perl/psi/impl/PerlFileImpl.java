@@ -19,6 +19,10 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
@@ -26,10 +30,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlMethod;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclaration;
+import com.perl5.lang.perl.extensions.packageprocessor.IPerlLibProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -334,5 +337,37 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public Map<String, Set<String>> getImportedHashNames()
 	{
 		return PerlHashUtil.getImportedHashes(getProject(), "main", this);
+	}
+
+	@Override
+	public List<VirtualFile> getLibPaths()
+	{
+		List<VirtualFile> result = new ArrayList<VirtualFile>();
+
+		// libdirs providers
+		for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PerlUseStatement.class))
+		{
+			PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+			if (packageProcessor instanceof IPerlLibProvider)
+			{
+				((IPerlLibProvider) packageProcessor).addLibDirs(useStatement, result);
+			}
+		}
+
+		// classpath
+		Module module = ModuleUtil.findModuleForPsiElement(this);
+		if (module != null)
+			result.addAll(Arrays.asList(ModuleRootManager.getInstance(module).orderEntries().classes().getRoots()));
+		else
+			result.addAll(Arrays.asList(ProjectRootManager.getInstance(getProject()).orderEntries().getClassesRoots()));
+
+		// current dir
+		VirtualFile virtualFile = getVirtualFile();
+		if (virtualFile != null)
+		{
+			result.add(virtualFile.getParent());
+		}
+
+		return result;
 	}
 }

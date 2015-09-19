@@ -16,17 +16,14 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReference;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
@@ -65,22 +62,19 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		String properPath = PerlPackageUtil.getPackagePathByName(packageName);
 		Project project = myElement.getProject();
 
-		Module module = ModuleUtil.findModuleForPsiElement(myElement);
-		VirtualFile[] classRoots;
+		PsiFile file = myElement.getContainingFile();
 
-		if (module != null)
-			classRoots = ModuleRootManager.getInstance(module).orderEntries().classes().getRoots();
-		else
-			classRoots = ProjectRootManager.getInstance(myElement.getProject()).orderEntries().getClassesRoots();
-
-		for (VirtualFile classRoot : classRoots)
+		if (file instanceof PerlFile)
 		{
-			VirtualFile packageFile = classRoot.findFileByRelativePath(properPath);
-			if (packageFile != null)
+			for (VirtualFile classRoot : ((PerlFile) file).getLibPaths())
 			{
-				PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
-				if (packagePsiFile != null)
-					return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
+				VirtualFile packageFile = classRoot.findFileByRelativePath(properPath);
+				if (packageFile != null)
+				{
+					PsiFile packagePsiFile = PsiManager.getInstance(project).findFile(packageFile);
+					if (packagePsiFile != null)
+						return new ResolveResult[]{new PsiElementResolveResult(packagePsiFile)};
+				}
 			}
 		}
 

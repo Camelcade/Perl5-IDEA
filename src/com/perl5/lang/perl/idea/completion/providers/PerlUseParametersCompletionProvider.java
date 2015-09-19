@@ -29,7 +29,7 @@ import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
@@ -57,7 +57,7 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 
 		if (useStatement != null)
 		{
-			IPerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+			PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
 			if (packageProcessor != null)
 			{
 				// fixme we should allow lookup elements customization by package processor

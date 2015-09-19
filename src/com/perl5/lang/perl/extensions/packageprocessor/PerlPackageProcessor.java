@@ -24,7 +24,7 @@ import java.util.List;
  * Created by hurricup on 18.08.2015.
  * implement this interface to provide a package processor
  */
-public interface IPerlPackageProcessor
+public interface PerlPackageProcessor
 {
 	/**
 	 * Returns true if package is pragma, false otherwise

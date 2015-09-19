@@ -16,7 +16,10 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 09.08.2015.
@@ -38,4 +41,11 @@ public interface PerlFile extends PerlLexicalScope, PerlNamespaceContainer
 	 * @return variable type string
 	 */
 	public String getMethodNamespace(PerlMethod element);
+
+	/**
+	 * Returns lib paths for current file
+	 *
+	 * @return lib paths list in normal order
+	 */
+	public List<VirtualFile> getLibPaths();
 }

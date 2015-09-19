@@ -16,10 +16,15 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.psi.PerlUseStatement;
+
+import java.util.List;
+
 /**
- * Created by hurricup on 18.08.2015.
+ * Created by hurricup on 19.09.2015.
  */
-public class PerlPackageProcessorDefault extends PerlPackageProcessorBase
+public interface IPerlLibProvider
 {
-	public static final PerlPackageProcessor INSTANCE = new PerlPackageProcessorDefault();
+	public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs);
 }

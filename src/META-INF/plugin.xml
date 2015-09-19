@@ -51,6 +51,8 @@
         <li>Here-doc without injection now highlighted as an appropriate string</li>
         <li>Implemented auto-completion of defined package names in the strings content</li>
         <li>Implemented Run configuration settings</li>
+        <li>Implemented <code>use lib</code> support</li>
+        <li>Implemented package names resolution in current directory</li>
       </ul>
       </p>
 
@@ -91,7 +93,7 @@
     <extensionPoints>
         <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
             <with attribute="implementationClass"
-                  implements="com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor"/>
+                  implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
         </extensionPoint>
     </extensionPoints>
 
@@ -108,7 +110,8 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.FeatureProcessor"/>
         <packageProcessor key="mro"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MroProcessor"/>
-
+        <packageProcessor key="lib"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.LibProcessor"/>
         <!--Mojolicious processors-->
         <packageProcessor key="Mojo::Base"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MojoBaseProcessor"/>

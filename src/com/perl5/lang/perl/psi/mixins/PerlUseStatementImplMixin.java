@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageProcessor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorDefault;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlVersionProcessor;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
@@ -37,7 +37,7 @@ import java.util.List;
  */
 public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
 {
-	protected IPerlPackageProcessor packageProcessor = null;
+	protected PerlPackageProcessor packageProcessor = null;
 
 	public PerlUseStatementImplMixin(ASTNode node)
 	{
@@ -52,7 +52,7 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public boolean isPragma()
 	{
-		IPerlPackageProcessor packageProcessor = getPackageProcessor();
+		PerlPackageProcessor packageProcessor = getPackageProcessor();
 		return packageProcessor != null && packageProcessor.isPragma();
 	}
 
@@ -110,7 +110,7 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	}
 
 	@Override
-	public IPerlPackageProcessor getPackageProcessor()
+	public PerlPackageProcessor getPackageProcessor()
 	{
 		// cached
 		if (packageProcessor != null)

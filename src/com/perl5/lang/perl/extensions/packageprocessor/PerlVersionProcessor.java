@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by hurricup on 09.09.2015.
  */
-public class PerlVersionProcessor implements IPerlPackageProcessor, IPerlFeaturesProvider
+public class PerlVersionProcessor implements PerlPackageProcessor, IPerlFeaturesProvider
 {
 	protected static final PerlVersionProcessor INSTANCE = new PerlVersionProcessor();
 

@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public abstract class PerlPackageProcessorBase implements IPerlPackageProcessor
+public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
 {
 	@Override
 	public boolean isPragma()
