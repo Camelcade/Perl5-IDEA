@@ -31,8 +31,11 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.Function;
 import com.intellij.util.PlatformUtils;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.settings.Perl5Settings;
@@ -109,7 +112,14 @@ public class PerlRunProfileState extends CommandLineState
 		{
 			Perl5Settings perl5Settings = Perl5Settings.getInstance(getEnvironment().getProject());
 			perlSdkPath = perl5Settings.perlPath;
-			includePaths = perl5Settings.libRoots;
+			includePaths = ContainerUtil.map(perl5Settings.libRootUrls, new Function<String, String>()
+			{
+				@Override
+				public String fun(String str)
+				{
+					return VfsUtil.urlToPath(str);
+				}
+			});
 		}
 
 		String alternativeSdkPath = runProfile.ALTERNATIVE_SDK_PATH;

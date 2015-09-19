@@ -48,7 +48,7 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	{
 		Perl5Settings mySettings = Perl5Settings.getInstance(getModel().getProject());
 
-		List<String> libRoots = mySettings.libRoots;
+		List<String> libRoots = mySettings.libRootUrls;
 		libRoots.clear();
 
 		for (VirtualFile entry : getModel().getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))

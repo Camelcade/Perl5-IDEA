@@ -38,7 +38,7 @@ import java.util.List;
 
 public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 {
-	public List<String> libRoots = new ArrayList<String>();
+	public List<String> libRootUrls = new ArrayList<String>();
 	public String perlPath = "";
 
 	public static Perl5Settings getInstance(@NotNull Project project)

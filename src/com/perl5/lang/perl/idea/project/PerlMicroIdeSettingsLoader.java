@@ -139,7 +139,7 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 				{
 					ModifiableRootModel rootModel = ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
 					ContentEntry entry = rootModel.getContentEntries()[0];
-					Set<String> libPaths = new HashSet<String>(perl5Settings.libRoots);
+					Set<String> libPaths = new HashSet<String>(perl5Settings.libRootUrls);
 
 
 					for (SourceFolder folder : entry.getSourceFolders())
