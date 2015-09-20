@@ -21,8 +21,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
@@ -103,12 +103,12 @@ public class PerlPsiUtil
 	public static PsiElement findHeredocOpenerByOffset(PsiElement file, String marker, int offset)
 	{
 		PsiElement result = null;
-		for (PsiPerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(file, PsiPerlHeredocOpener.class))
+		for (PerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(file, PerlHeredocOpener.class))
 		{
 			if (opener.getTextOffset() < offset)
 			{
 				if (marker == null || marker.equals(opener.getName()))
-					result = opener.getNameIdentifier();
+					result = opener;
 			} else
 			{
 				break;

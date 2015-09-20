@@ -69,7 +69,7 @@ public class PerlSubUnusedInpsection extends PerlInspection
 			public void visitPerlConstant(@NotNull PerlConstant o)
 			{
 				if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
-					holder.registerProblem(o.getStringContentElement(), "Unused constant definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+					holder.registerProblem(o, "Unused constant definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 			}
 		};
 	}

@@ -16,19 +16,16 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlNamedElement, PerlElementTypes
+public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl
 {
 	public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text)
 	{
@@ -42,36 +39,38 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 		else super.accept(visitor);
 	}
 
+	@NotNull
 	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	public PsiReference[] getReferences()
 	{
-		if (name.equals(""))
-			throw new IncorrectOperationException("You can't set heredoc terminator to the empty one");
-
-		replace(PerlElementFactory.createHereDocTerminator(getProject(), name));
-		return this;
+		return new PsiReference[]{new PerlHeredocReference(this, new TextRange(0, getTextLength()))};
 	}
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getPsi();
-	}
-
-	// todo we should move this to some superclass
-	@Override
-	public String getName()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : nameIdentifier.getText();
-	}
-
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
-
+//	@Override
+//	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+//	{
+//	}
+//
+//	@Nullable
+//	@Override
+//	public PsiElement getNameIdentifier()
+//	{
+//		return getPsi();
+//	}
+//
+//	// todo we should move this to some superclass
+//	@Override
+//	public String getName()
+//	{
+//		PsiElement nameIdentifier = getNameIdentifier();
+//		return nameIdentifier == null ? null : nameIdentifier.getText();
+//	}
+//
+//	@Override
+//	public String getPresentableName()
+//	{
+//		return getName();
+//	}
+//
 
 }

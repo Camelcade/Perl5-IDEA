@@ -23,8 +23,17 @@ import com.intellij.psi.PsiElement;
  */
 public interface PerlStringContentElement extends PsiElement
 {
+	/**
+	 * Checks if contents looks like a package
+	 *
+	 * @return checking result
+	 */
 	public boolean looksLikePackage();
 
+	/**
+	 * Checks if contents looks like a valid path
+	 * @return checking result
+	 */
 	public boolean looksLikePath();
 
 	String getContentFileName();

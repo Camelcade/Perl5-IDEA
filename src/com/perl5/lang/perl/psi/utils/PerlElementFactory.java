@@ -111,6 +111,14 @@ public class PerlElementFactory
 		return (PerlStringContentElementImpl) string.getFirstChild().getNextSibling();
 	}
 
+	public static PerlString createString(Project project, String code)
+	{
+		PerlFileImpl file = createFile(project, code + ";");
+		PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
+		assert string != null;
+		return string;
+	}
+
 	public static PerlFileImpl createFile(Project project, String text)
 	{
 		String fileName = "file.dummy";

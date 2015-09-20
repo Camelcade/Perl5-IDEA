@@ -21,15 +21,16 @@ import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.constants.PerlConstantStub;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlConstantName;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -51,20 +52,19 @@ public abstract class PerlConstantImplMixin extends StubBasedPsiElementBase<Perl
 
 	@Nullable
 	@Override
-	public PsiElement getNameIdentifier()
+	public PerlString getNameIdentifier()
 	{
-		return getStringContentElement();
+		return PsiTreeUtil.getChildOfType(this, PerlString.class);
 	}
 
 	@Override
-	public PerlStringContentElement getStringContentElement()
+	public int getTextOffset()
 	{
-		PsiElement firstChild = getFirstChild();
-		if (firstChild instanceof PerlStringContentElement)
-			return (PerlStringContentElement) firstChild;
-		else if (firstChild instanceof PerlString)
-			return (PerlStringContentElement) (((PerlString) firstChild).getNameIdentifier());
-		return null;
+		PsiElement nameIdentifier = getNameIdentifier();
+
+		return nameIdentifier == null
+				? super.getTextOffset()
+				: getNameIdentifier().getTextOffset();
 	}
 
 	@Override
@@ -74,22 +74,22 @@ public abstract class PerlConstantImplMixin extends StubBasedPsiElementBase<Perl
 		if (stub != null)
 			return stub.getName();
 
-		PerlStringContentElement perlStringContentElement = getStringContentElement();
-		if (perlStringContentElement != null)
-			return perlStringContentElement.getName();
-		return null;
+		PerlString nameIdentifier = getNameIdentifier();
+		return nameIdentifier == null ? null : nameIdentifier.getStringContent();
 	}
 
 	@Override
-	public PsiElement setName(String name) throws IncorrectOperationException
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PerlStringContentElement stringContentElement = getStringContentElement();
-		if (stringContentElement != null)
-			return stringContentElement.setName(name);
+		if (name.isEmpty())
+			throw new IncorrectOperationException("You can't set an empty constant name");
 
-		return null;
+		PerlString nameIdentifier = getNameIdentifier();
+		if (nameIdentifier != null)
+			nameIdentifier.setStringContent(name);
+
+		return this;
 	}
-
 
 	@Override
 	public String getContextPackageName()

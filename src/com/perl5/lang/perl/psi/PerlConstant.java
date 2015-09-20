@@ -24,5 +24,4 @@ import com.perl5.lang.perl.psi.properties.PerlPackageMember;
  */
 public interface PerlConstant extends PerlNamedElement, PerlPackageMember
 {
-	public PerlStringContentElement getStringContentElement();
 }

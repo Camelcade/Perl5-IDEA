@@ -18,8 +18,8 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,20 +31,14 @@ public class PerlHeredocReference extends PerlReference
 	public PerlHeredocReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		assert element instanceof PsiNamedElement;
-		myMarker = ((PsiNamedElement) element).getName();
+		myMarker = element.getText();
+//		System.err.println("Created heredoc reference");
 	}
 
+	// fixme move to PsiUtil ?
 	public static PsiElement getClosestHeredocOpener(PsiElement element)
 	{
 		return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), null, element.getTextOffset());
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
 	}
 
 	@Nullable
@@ -55,19 +49,11 @@ public class PerlHeredocReference extends PerlReference
 	}
 
 	@Override
-	public boolean isReferenceTo(PsiElement element)
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
-		//fixme need to figure out what is wrong here
-//		System.err.println("Checking for " + element);
-//		boolean result = super.isReferenceTo(element);
-//		System.err.println("Result for " + element + " - "+ result);
-//		return result;
-		if (element instanceof PerlStringContentElement)
-			return super.isReferenceTo(element);
-//		else if (element instanceof PerlHeredocOpener)
-//			return isReferenceTo(((PerlHeredocOpener) element).getNameIdentifier());
-//
-		return false;
-	}
+		if (newElementName.equals(""))
+			throw new IncorrectOperationException("You can't set heredoc terminator to the empty one");
 
+		return myElement.replace(PerlElementFactory.createHereDocTerminator(myElement.getProject(), newElementName));
+	}
 }

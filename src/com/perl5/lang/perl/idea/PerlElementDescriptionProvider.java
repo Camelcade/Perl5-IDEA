@@ -47,6 +47,8 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 		{
 			if (element instanceof PerlSubDeclaration)
 				return "Sub declaration";
+			else if (element instanceof PerlHeredocOpener)
+				return "Heredoc marker";
 			else if (element instanceof PerlSubDefinition)
 				return "Sub definition";
 			else if (element instanceof PerlNamespaceDefinition)
@@ -55,6 +57,8 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 				return "perl file";
 			else if (element instanceof PsiDirectoryContainer)
 				return "Directory";
+			else if (element instanceof PerlVariableNameElement)
+				return getElementDescription(element.getParent(), location);
 			else if (element instanceof PerlGlobVariable)
 				return "Typeglob";
 			else if (element instanceof PerlVariable)

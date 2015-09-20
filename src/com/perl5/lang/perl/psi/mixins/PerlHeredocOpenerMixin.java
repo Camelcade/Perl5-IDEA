@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
 import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -38,34 +38,40 @@ public abstract class PerlHeredocOpenerMixin extends PerlNamedElementImpl implem
 
 	@Nullable
 	@Override
-	public PsiElement getNameIdentifier()
+	public PerlString getNameIdentifier()
 	{
-		return getStringNameIdentifier();
+		return PsiTreeUtil.findChildOfType(this, PerlString.class);
 	}
 
-	public PerlStringContentElement getStringNameIdentifier()
+	@Override
+	public int getTextOffset()
 	{
-		return PsiTreeUtil.findChildOfType(this, PerlStringContentElement.class);
+		PsiElement nameIdentifier = getNameIdentifier();
+
+		return nameIdentifier == null
+				? super.getTextOffset()
+				: getNameIdentifier().getTextOffset();
 	}
 
 	@Nullable
 	@Override
 	public String getName()
 	{
-		PerlStringContentElement stringNameIdentifier = getStringNameIdentifier();
-		if (stringNameIdentifier != null)
-			return stringNameIdentifier.getName();
-		return null;
+		PerlString nameIdentifier = getNameIdentifier();
+		return nameIdentifier == null ? null : nameIdentifier.getStringContent();
 	}
 
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PerlStringContentElement stringNameIdentifier = getStringNameIdentifier();
-		if (stringNameIdentifier != null)
-			return stringNameIdentifier.setName(name);
-		return null;
-	}
+		if (name.isEmpty())
+			throw new IncorrectOperationException("Empty here-doc markers are not supported");
 
+		PerlString nameIdentifier = getNameIdentifier();
+		if (nameIdentifier != null)
+			nameIdentifier.setStringContent(name);
+
+		return this;
+	}
 
 }

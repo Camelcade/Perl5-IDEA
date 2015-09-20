@@ -16,11 +16,26 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 08.08.2015.
  */
-public interface PerlString extends PerlNamedElement
+public interface PerlString extends PsiElement
 {
+	/**
+	 * Returns string content text
+	 *
+	 * @return String content text
+	 */
+	@NotNull
+	String getStringContent();
+
+	/**
+	 * Changing string contents
+	 *
+	 * @param newContent new string content
+	 */
+	void setStringContent(String newContent);
 }

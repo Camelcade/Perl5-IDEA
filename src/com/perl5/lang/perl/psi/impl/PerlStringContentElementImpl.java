@@ -16,19 +16,15 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,40 +56,6 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitStringContentElement(this);
 		else super.accept(visitor);
 	}
-
-//	@Nullable
-//	@Override
-//	public PsiElement getNameIdentifier()
-//	{
-//		return this;
-//	}
-
-//	@Override
-//	public String getPresentableName()
-//	{
-//		return getName();
-//	}
-
-//	@NotNull
-//	@Override
-//	public String getName()
-//	{
-//		return getText();
-//	}
-
-//	@Override
-//	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-//	{
-//		if (name.equals(""))
-//			throw new IncorrectOperationException("You can't rename a string to the empty one");
-//
-//		PerlStringContentElementImpl newName = PerlElementFactory.createStringContent(getProject(), name);
-//		if (newName != null)
-//			replace(newName);
-//		else
-//			throw new IncorrectOperationException("Unable to create string from: " + name);
-//		return this;
-//	}
 
 	@NotNull
 	@Override

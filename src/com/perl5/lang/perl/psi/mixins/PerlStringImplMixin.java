@@ -18,63 +18,51 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.PerlParserUtil;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 08.08.2015.
  */
-public abstract class PerlStringImplMixin extends PerlNamedElementImpl
+public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 {
 	public PerlStringImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
+	@NotNull
 	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	public String getStringContent()
 	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if( nameIdentifier != this && nameIdentifier instanceof PsiNamedElement)
-			return ((PsiNamedElement) nameIdentifier).setName(name);
-
-		return null;
+		int baseOffset = getNode().getStartOffset();
+		return getText().substring(getOpenQuoteOffset() - baseOffset + 1, getCloseQuoteOffset() - baseOffset);
 	}
 
-	@Nullable
 	@Override
-	public PsiElement getNameIdentifier()
+	public void setStringContent(String newContent)
 	{
-		if( getFirstChild() instanceof PerlStringContentElement )
-			return getFirstChild();
-		return this;
+		int baseOffset = getNode().getStartOffset();
+		String currentContent = getNode().getText();
+
+		String newNodeContent = currentContent.substring(0, getOpenQuoteOffset() - baseOffset + 1) + newContent + currentContent.substring(currentContent.length() - 1);
+
+		replace(PerlElementFactory.createString(getProject(), newNodeContent));
 	}
 
-	@Nullable
 	@Override
-	public String getName()
+	public int getTextLength()
 	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if( nameIdentifier != this && nameIdentifier instanceof PsiNamedElement)
-			return ((PsiNamedElement) nameIdentifier).getName();
-
-		int baseOffset = getTextOffset();
-		return getText().substring(getOpenQuoteOffset()-baseOffset + 1, getCloseQuoteOffset() - baseOffset);
+		return getTextRange().getLength();
 	}
-
 
 	protected int getOpenQuoteOffset()
 	{
 		ASTNode currentNode = getFirstChild().getNode();
-		while( currentNode != null )
+		while (currentNode != null)
 		{
-			if(PerlParserUtil.OPEN_QUOTES.contains(currentNode.getElementType()))
+			if (PerlParserUtil.OPEN_QUOTES.contains(currentNode.getElementType()))
 				return currentNode.getStartOffset();
 			currentNode = currentNode.getTreeNext();
 		}
@@ -84,9 +72,9 @@ public abstract class PerlStringImplMixin extends PerlNamedElementImpl
 	protected int getCloseQuoteOffset()
 	{
 		ASTNode currentNode = getLastChild().getNode();
-		while( currentNode != null )
+		while (currentNode != null)
 		{
-			if(PerlParserUtil.CLOSE_QUOTES.contains(currentNode.getElementType()))
+			if (PerlParserUtil.CLOSE_QUOTES.contains(currentNode.getElementType()))
 				return currentNode.getStartOffset();
 			currentNode = currentNode.getTreePrev();
 		}
@@ -96,9 +84,13 @@ public abstract class PerlStringImplMixin extends PerlNamedElementImpl
 	@Override
 	public TextRange getTextRange()
 	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if( nameIdentifier != this && nameIdentifier != null )
-			return nameIdentifier.getTextRange();
-		return new TextRange(getOpenQuoteOffset() + 1, getCloseQuoteOffset() );
+		return new TextRange(getTextOffset(), getCloseQuoteOffset());
 	}
+
+	@Override
+	public int getTextOffset()
+	{
+		return getOpenQuoteOffset() + 1;
+	}
+
 }

@@ -302,9 +302,10 @@ limitations under the License.
 
     extends("anon_array_element|heredoc_opener|tag_scalar")=expr
 
-    extends("string_sq|string_dq|string_xq")=expr
-    implements("string_sq|string_dq|string_xq")="com.perl5.lang.perl.psi.PerlString"
+    extends("string_sq|string_dq|string_xq|string_bare")=expr
+    implements("string_sq|string_dq|string_xq|string_bare")="com.perl5.lang.perl.psi.PerlString"
     mixin("string_sq|string_dq|string_xq")="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin"
+    mixin("string_bare")="com.perl5.lang.perl.psi.mixins.PerlStringBareImplMixin"
 
     implements("constant_name")="com.perl5.lang.perl.psi.PerlConstant"
     mixin("constant_name")="com.perl5.lang.perl.psi.mixins.PerlConstantImplMixin"
@@ -986,7 +987,7 @@ number_constant ::=
     | NUMBER_VERSION
     | NUMBER_SIMPLE
 
-private string ::= string_sq | string_dq | string_xq | heredoc_opener
+private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] string_dq_parsed
@@ -1000,9 +1001,10 @@ string_xq ::=
 
 private string_xq_parsed ::= QUOTE_TICK_OPEN [<<parseInterpolatedStringContent>>] QUOTE_TICK_CLOSE {pin=1}
 
+string_bare ::= STRING_CONTENT
+
 string_sq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString>>
-  | STRING_CONTENT
   | <<parseNestedSQString>> // nested sq string
 
 private string_sq_parsed ::= QUOTE_SINGLE_OPEN STRING_CONTENT* QUOTE_SINGLE_CLOSE {pin=1}
@@ -1024,7 +1026,7 @@ private use_vars_interpolated_constructs ::=
     | glob_variable
     | code_variable
 
-heredoc_opener ::= OPERATOR_HEREDOC ( string_xq | string_dq | string_sq | STRING_CONTENT ) {pin=1}
+heredoc_opener ::= OPERATOR_HEREDOC string {pin=1}
 
 string_list ::= [[PACKAGE_CORE_IDENTIFIER] RESERVED_QW] <<parseSQString>>
 
