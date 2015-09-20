@@ -24,6 +24,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PsiPerlStringDq;
 import com.perl5.lang.perl.psi.PsiPerlStringSq;
 import com.perl5.lang.perl.psi.PsiPerlStringXq;
@@ -89,7 +90,8 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 		if (!element.isWritable())
 			return false;
 		PsiElement parent = element.getParent();
-		return parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq;
+		PsiElement grandParent = parent.getParent();
+		return !(grandParent instanceof PerlHeredocOpener) && (parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq);
 	}
 
 	@Nls

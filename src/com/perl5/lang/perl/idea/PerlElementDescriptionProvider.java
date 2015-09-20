@@ -51,6 +51,8 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 				return "Heredoc marker";
 			else if (element instanceof PerlSubDefinition)
 				return "Sub definition";
+			else if (element instanceof PerlConstant)
+				return "Constant";
 			else if (element instanceof PerlNamespaceDefinition)
 				return "Namespace definition";
 			else if (element instanceof PerlFileImpl)
