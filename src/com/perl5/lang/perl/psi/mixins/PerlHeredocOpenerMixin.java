@@ -18,6 +18,8 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.LocalSearchScope;
+import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlString;
@@ -74,4 +76,10 @@ public abstract class PerlHeredocOpenerMixin extends PerlNamedElementImpl implem
 		return this;
 	}
 
+	@NotNull
+	@Override
+	public SearchScope getUseScope()
+	{
+		return new LocalSearchScope(getContainingFile());
+	}
 }

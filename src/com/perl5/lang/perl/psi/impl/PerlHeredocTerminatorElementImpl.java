@@ -46,31 +46,4 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl
 		return new PsiReference[]{new PerlHeredocReference(this, new TextRange(0, getTextLength()))};
 	}
 
-//	@Override
-//	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-//	{
-//	}
-//
-//	@Nullable
-//	@Override
-//	public PsiElement getNameIdentifier()
-//	{
-//		return getPsi();
-//	}
-//
-//	// todo we should move this to some superclass
-//	@Override
-//	public String getName()
-//	{
-//		PsiElement nameIdentifier = getNameIdentifier();
-//		return nameIdentifier == null ? null : nameIdentifier.getText();
-//	}
-//
-//	@Override
-//	public String getPresentableName()
-//	{
-//		return getName();
-//	}
-//
-
 }
