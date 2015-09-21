@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlHeredocReference extends PerlReference
 {
-	public static final ResolveCache.Resolver myResolver = new ResolveCache.Resolver()
+	private static final ResolveCache.Resolver ourResolver = new ResolveCache.Resolver()
 	{
 		@Override
 		public PsiElement resolve(@NotNull PsiReference psiReference, boolean incompleteCode)
@@ -53,7 +53,7 @@ public class PerlHeredocReference extends PerlReference
 	@Override
 	public PsiElement resolve()
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, myResolver, true, false);
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, ourResolver, true, false);
 	}
 
 	@Override
