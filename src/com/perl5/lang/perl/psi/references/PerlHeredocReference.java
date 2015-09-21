@@ -18,6 +18,8 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -26,13 +28,19 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlHeredocReference extends PerlReference
 {
-	private String myMarker;
+	public static final ResolveCache.Resolver myResolver = new ResolveCache.Resolver()
+	{
+		@Override
+		public PsiElement resolve(@NotNull PsiReference psiReference, boolean incompleteCode)
+		{
+			PsiElement element = psiReference.getElement();
+			return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), element.getText(), element.getTextOffset());
+		}
+	};
 
 	public PerlHeredocReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		myMarker = element.getText();
-//		System.err.println("Created heredoc reference");
 	}
 
 	// fixme move to PsiUtil ?
@@ -45,7 +53,7 @@ public class PerlHeredocReference extends PerlReference
 	@Override
 	public PsiElement resolve()
 	{
-		return PerlPsiUtil.findHeredocOpenerByOffset(myElement.getContainingFile(), myMarker, myElement.getTextOffset());
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, myResolver, true, false);
 	}
 
 	@Override
@@ -56,4 +64,12 @@ public class PerlHeredocReference extends PerlReference
 
 		return myElement.replace(PerlElementFactory.createHereDocTerminator(myElement.getProject(), newElementName));
 	}
+
+	@Override
+	public TextRange getRangeInElement()
+	{
+		return new TextRange(0, myElement.getTextLength());
+	}
+
+
 }

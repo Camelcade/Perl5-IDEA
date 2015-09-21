@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
@@ -27,6 +26,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl
 {
+	protected final PsiReference[] myReferences = new PsiReference[]{new PerlHeredocReference(this, null)};
+
 	public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text)
 	{
 		super(type, text);
@@ -43,7 +44,6 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl
 	@Override
 	public PsiReference[] getReferences()
 	{
-		return new PsiReference[]{new PerlHeredocReference(this, new TextRange(0, getTextLength()))};
+		return myReferences;
 	}
-
 }
