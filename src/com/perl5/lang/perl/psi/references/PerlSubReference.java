@@ -84,8 +84,8 @@ public class PerlSubReference extends PerlReferencePoly
 					return new ResolveResult[0];
 
 				PsiFile file = mySubNameElement.getContainingFile();
-				if (file instanceof PerlFile)
-					((PerlFile) file).getElementsResolveScope();
+//				if (file instanceof PerlFile)
+//					((PerlFile) file).getElementsResolveScope();
 
 //				System.err.println("Checking for " + subName);
 

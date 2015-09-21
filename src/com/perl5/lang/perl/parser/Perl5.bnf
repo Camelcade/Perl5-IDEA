@@ -430,7 +430,6 @@ private compound_statement ::=
     | when_compound
     | default_compound
 
-
 named_block ::= BLOCK_NAME block
 
 if_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_IF conditional_block if_compound_elsif * [unconditional_block]  {pin=2}
