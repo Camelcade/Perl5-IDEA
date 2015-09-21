@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNameIdentifierOwner;
-import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,11 +30,7 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 	@Override
 	public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
 	{
-		// suppress VariableRenaming for strings as identifiers
-		if (element instanceof PsiNameIdentifierOwner && ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlString)
-			return false;
-
-		return super.isInplaceRenameAvailable(element, context);
+		return false;
 	}
 
 	@Override

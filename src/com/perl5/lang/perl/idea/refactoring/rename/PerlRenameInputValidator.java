@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.patterns.ElementPattern;
 import com.intellij.patterns.ElementPatternCondition;
