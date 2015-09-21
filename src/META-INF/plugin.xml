@@ -194,6 +194,9 @@
         <lang.refactoringSupport language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.PerlRefactoringSupportProvider"/>
 
+        <renameHandler implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlVariableInplaceRenameHandler"
+                       order="first"/>
+
         <gotoClassContributor
                 implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToNamespaceDefinitionContributor"/>
         <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToSubDefinitionContributor"/>
@@ -213,9 +216,12 @@
 
         <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
 
-        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameNamespaceProcessor"/>
-        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameFileProcessor"/>
-        <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameHeredocProcessor"/>
+        <renamePsiElementProcessor
+                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceProcessor"/>
+        <renamePsiElementProcessor
+                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
+        <renamePsiElementProcessor
+                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameHeredocProcessor"/>
 
         <!--<renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameVariableProcessor"/>-->
 
