@@ -18,9 +18,11 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.PerlDoExpr;
+import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -51,6 +53,9 @@ public abstract class PerlDoExprImplMixin extends StubBasedPsiElementBase<PerlRu
 
 	@Nullable
 	protected String findImportPath(){
+		PsiElement lastChild = getLastChild();
+		if (lastChild instanceof PerlString)    // seems we've got require "...";
+			return ((PerlString) lastChild).getStringContent();
 		return null;
 	}
 }
