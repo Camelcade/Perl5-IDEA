@@ -824,13 +824,16 @@ private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
 perl_regex_modifiers ::= REGEX_MODIFIER +
-perl_regex ::= perl_regex_item +
+perl_regex ::= <<parseRegexContent false>>
+private perl_regex_items ::= perl_regex_item +
+
 
 private perl_regex_item ::=
   interpolated_constructs
   | <<convertRegexToken>>
 
-perl_regex_ex ::= perl_regex_item_ex + {extends=perl_regex}
+perl_regex_ex ::= <<parseRegexContent true>> {extends=perl_regex}
+private perl_regex_ex_items ::= perl_regex_item_ex +
 
 private perl_regex_item_ex ::=
   interpolated_constructs

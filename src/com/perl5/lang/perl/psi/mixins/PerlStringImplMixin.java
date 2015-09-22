@@ -18,7 +18,9 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.parser.PerlParserUtil;
+import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,26 +61,38 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 
 	protected int getOpenQuoteOffset()
 	{
-		ASTNode currentNode = getFirstChild().getNode();
+		PsiElement firstChild = getFirstChild();
+
+		if (firstChild instanceof PerlParsableStringWrapperlImpl)
+			firstChild = firstChild.getFirstChild().getFirstChild();
+
+		ASTNode currentNode = firstChild.getNode();
+
 		while (currentNode != null)
 		{
 			if (PerlParserUtil.OPEN_QUOTES.contains(currentNode.getElementType()))
 				return currentNode.getStartOffset();
 			currentNode = currentNode.getTreeNext();
 		}
-		throw new RuntimeException("Unable to find opening quote");
+		throw new RuntimeException("Unable to find opening quote inside: " + getText() + " " + getContainingFile().getVirtualFile());
 	}
 
 	protected int getCloseQuoteOffset()
 	{
-		ASTNode currentNode = getLastChild().getNode();
+		PsiElement lastChild = getLastChild();
+
+		if (lastChild instanceof PerlParsableStringWrapperlImpl)
+			lastChild = lastChild.getLastChild().getLastChild();
+
+		ASTNode currentNode = lastChild.getNode();
+
 		while (currentNode != null)
 		{
 			if (PerlParserUtil.CLOSE_QUOTES.contains(currentNode.getElementType()))
 				return currentNode.getStartOffset();
 			currentNode = currentNode.getTreePrev();
 		}
-		throw new RuntimeException("Unable to find closing quote");
+		throw new RuntimeException("Unable to find closing quote inside: " + getText() + " " + getContainingFile().getVirtualFile());
 	}
 
 	@Override

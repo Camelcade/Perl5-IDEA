@@ -49,8 +49,11 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	// flag allowes additional sigils to parse, required in use vars reparsed strings
 	boolean allowAllSigils = false;
 
-	// flags shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
+	// flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
 	boolean isInterpolated = false;
+
+	// flag set if we are inside of regexp. Safe parsing for array indexes
+	boolean isRegex = false;
 
 	Project myProject = getProject();
 
@@ -207,4 +210,19 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		isInterpolated = newState;
 		return currentState;
 	}
+
+	public boolean isRegex()
+	{
+		return isRegex;
+	}
+
+	public boolean setIsRegex(boolean newState)
+	{
+		boolean currentState = isRegex();
+		isRegex = newState;
+		return currentState;
+	}
+
+
+
 }
