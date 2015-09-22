@@ -226,7 +226,6 @@ limitations under the License.
     // single mid-quote. e evaluatable s///e;
     REGEX_QUOTE="REGEX_QUOTE"
     REGEX_QUOTE_E="REGEX_QUOTE_E"
-    REGEX_QUOTE_X="REGEX_QUOTE_X"
 
     // paired mid-quote. e for evaluatable s{}{}e;
     REGEX_QUOTE_OPEN="REGEX_QUOTE_OPEN"
@@ -816,10 +815,9 @@ replacement_regex ::=
 private regex_match ::=
   REGEX_QUOTE_OPEN [perl_regex]
   | REGEX_QUOTE_OPEN_X [perl_regex_ex]
-private replacement_replace ::= replacement_replace_regex | replacement_replace_regex_ex | replacement_replace_code
+private replacement_replace ::= replacement_replace_regex | replacement_replace_code
 
 private replacement_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [perl_regex]
-private replacement_replace_regex_ex ::= {REGEX_QUOTE_X | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_X} [perl_regex_ex]
 private replacement_replace_code ::= {REGEX_QUOTE_E | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_E} [regex_code]
 
 private regex_code ::= file_item+ {recoverWhile=recover_regex_code}

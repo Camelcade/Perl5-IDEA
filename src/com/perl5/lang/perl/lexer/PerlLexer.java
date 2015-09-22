@@ -1261,8 +1261,6 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				if (preparsedTokensList.getFirst().getTokenType() == REGEX_QUOTE_OPEN)
 					preparsedTokensList.getFirst().setTokenType(REGEX_QUOTE_OPEN_X);
-				if (secondBlockOpener != null && secondBlockOpener.getTokenType() == REGEX_QUOTE_OPEN)
-					secondBlockOpener.setTokenType(REGEX_QUOTE_OPEN_X);
 
 				isExtended = true;
 			}
@@ -1290,8 +1288,6 @@ public class PerlLexer extends PerlLexerGenerated
 				preparsedTokensList.add(secondBlockOpener);
 			else if (isEvaluated)
 				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE_E);
-			else if (isExtended)
-				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE_X);
 			else
 				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE);
 
@@ -1303,7 +1299,7 @@ public class PerlLexer extends PerlLexerGenerated
 					evalPerlLexer = new PerlLexerAdapter(myProject);
 				preparsedTokensList.addAll(secondBLock.parseEval(evalPerlLexer));
 			} else
-				preparsedTokensList.addAll(secondBLock.tokenize(getBareStringLexer(), isExtended, true));
+				preparsedTokensList.addAll(secondBLock.tokenize(getBareStringLexer(), false, true));
 		}
 
 		// parse modifiers

@@ -191,7 +191,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
             REGEX_QUOTE,
             REGEX_QUOTE_CLOSE,
-            REGEX_QUOTE_X,
             REGEX_QUOTE_E
     );
     protected static final TokenSet REGEX_MERGE_STOP_TOKENS = TokenSet.orSet(
