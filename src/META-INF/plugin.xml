@@ -75,6 +75,7 @@
         <li>Cleaned up extended regex parsing.</li>
         <li>Fixed but with broken line splitting.</li>
         <li>Fixed bug with <code>print OF &lt;&lt;EOM;</code> parsing.</li>
+        <li>Suppressed livetemplates inside a string</li>
       </ul>
       </p>
 

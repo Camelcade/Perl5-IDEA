@@ -24,6 +24,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,7 +48,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 			if (element == null)
 				element = psiFile.findElementAt(fileOffset - 1);
 
-			if (element instanceof PsiWhiteSpace)
+			if (element instanceof PsiWhiteSpace || element instanceof PerlStringContentElement)
 			{
 				return false;
 			}
