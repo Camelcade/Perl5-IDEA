@@ -76,6 +76,7 @@
         <li>Fixed but with broken line splitting.</li>
         <li>Fixed bug with <code>print OF &lt;&lt;EOM;</code> parsing.</li>
         <li>Suppressed livetemplates inside a string</li>
+        <li>Suppressed string to namespace resolution for top-level namespaces.</li>
       </ul>
       </p>
 

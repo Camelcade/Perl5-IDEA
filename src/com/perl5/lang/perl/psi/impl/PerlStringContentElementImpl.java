@@ -69,7 +69,9 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	{
 		if (looksLikePackage != null)
 			return looksLikePackage;
-		return looksLikePackage = PerlBaseLexer.AMBIGUOUS_PACKAGE_RE.matcher(getText()).matches();
+
+		String text = getText();
+		return looksLikePackage = text.contains("::") && PerlBaseLexer.AMBIGUOUS_PACKAGE_RE.matcher(text).matches();
 	}
 
 	@Override
