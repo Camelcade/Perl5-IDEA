@@ -46,6 +46,7 @@
         <li>Added icons for retina displays</li>
         <li>Tricky <code>use vars</code> declarations now being handled correctly. <code>use vars @SOMELIST</code> still not working.</li>
         <li>Implemented imports processing for subs with explicit code sigil</li>
+        <li>added stacktrace and files paths hyperlinks in consoles (doesn't include terminal)</li>
       </ul>
       </p>
 

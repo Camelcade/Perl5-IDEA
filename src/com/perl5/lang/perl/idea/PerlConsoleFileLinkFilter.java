@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.OpenFileHyperlinkInfo;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -33,8 +32,25 @@ import java.util.regex.Pattern;
 
 /**
  * Created by ELI-HOME on 21-Sep-15.
+ * This filter detects file paths and stack traces and turns them into code hyperlinks inside consoles (this doesn't affect the Terminal).
+ * You can create various consoles using the external tools or remote SSH external tools (under Settings > Tools).
+ * The classic usage will be to create an local or ssh tool to tail your server logs,
+ * then whenever an exception occurs - you can click on it to go to the specific line in the code.
+ *
+ * the logic works in a way that allows the remote server and you local code base to exists on different libraries (providing they both have the same project folder name).
+ * example:
+ * the file in your local project folder:  /home/user.folder/main.project/lib/ABC.pm
+ * the file in your remote server folder: /usr/server/main.project/lib/ABC.pm
+ *
+ * since the project folder is named main.project, it will know to remove the prefix of the path and replace it with the correct one.
  */
 public class PerlConsoleFileLinkFilter implements Filter {
+
+    private final Project project;
+
+    public PerlConsoleFileLinkFilter(Project project) {
+        this.project = project;
+    }
 
     @Nullable
     @Override
@@ -47,9 +63,7 @@ public class PerlConsoleFileLinkFilter implements Filter {
     }
 
     private void match(List<ResultItem> results, String textLine, int startPoint) {
-        Project[] projects = ProjectManager.getInstance().getOpenProjects();
-        if (projects.length > 0) {
-            Project project = ProjectManager.getInstance().getOpenProjects()[0];
+        if (project != null) {
             String projectDir = project.getBaseDir().toString();
             String projectName = project.getBaseDir().getName();
 
