@@ -53,6 +53,7 @@
         <li>Implemented Run configuration settings</li>
         <li>Implemented <code>use lib</code> support</li>
         <li>Implemented package names resolution in the current directory</li>
+        <li>Added stacktrace and files paths hyperlinks in consoles (doesn't include terminal)</li>
       </ul>
       </p>
 
@@ -181,6 +182,8 @@
 
         <typeHierarchyProvider language="Perl5"
                                implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider"/>
+
+        <consoleFilterProvider implementation="com.perl5.lang.perl.idea.PerlConsoleFilterProvider"/>
 
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorMisc"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorSubs"/>
