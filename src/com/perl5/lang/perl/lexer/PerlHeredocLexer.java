@@ -54,20 +54,18 @@ public class PerlHeredocLexer extends PerlStringLexer
 
 				char currentChar = buffer.charAt(currentPosition);
 
-				if (currentChar == '\n')
-					setTokenEnd(currentPosition + 1);
-				else if (Character.isWhitespace(currentChar)) {
-					do {
-						currentChar = buffer.charAt(++currentPosition);
+				if (currentChar == '\n') {
+					currentPosition++;
+				} else if (Character.isWhitespace(currentChar)) {
+					while (currentPosition < bufferEnd && (currentChar = buffer.charAt(currentPosition)) != '\n' && Character.isWhitespace(currentChar)) {
+						currentPosition++;
 					}
-					while (currentPosition < bufferEnd - 1 && currentChar != '\n' && Character.isWhitespace(currentChar));
-					setTokenEnd(currentPosition);
 				} else {
-					do {
-						currentChar = buffer.charAt(++currentPosition);
-					} while (currentPosition < bufferEnd - 1 && !Character.isWhitespace(currentChar));
-					setTokenEnd(currentPosition);
+					while (currentPosition < bufferEnd && !Character.isWhitespace(buffer.charAt(currentPosition))) {
+						currentPosition++;
+					}
 				}
+				setTokenEnd(currentPosition);
 
 				return STRING_CONTENT;
 			}
