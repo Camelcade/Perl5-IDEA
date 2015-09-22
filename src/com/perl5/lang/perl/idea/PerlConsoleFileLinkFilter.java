@@ -67,7 +67,7 @@ public class PerlConsoleFileLinkFilter implements Filter {
             String projectDir = project.getBaseDir().toString();
             String projectName = project.getBaseDir().getName();
 
-            String separator = (SystemInfo.isWindows) ? File.separator + File.separator : File.separator;
+            String separator = "[\\\\/]";
             Pattern pattern = Pattern.compile(projectName + "(" + separator + "([\\w-]+" + separator + ")*\\w([\\w-.])+)( line (\\d+))?");
             Matcher matcher = pattern.matcher(textLine);
             while (matcher.find()) {
