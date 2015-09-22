@@ -36,6 +36,8 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 	private static final BracePair[] PAIRS = new BracePair[]{
 			new BracePair(REGEX_QUOTE_OPEN, REGEX_QUOTE_CLOSE, false),
 			new BracePair(REGEX_QUOTE_OPEN_E, REGEX_QUOTE_CLOSE, false),
+			new BracePair(REGEX_QUOTE_OPEN_X, REGEX_QUOTE_CLOSE, false),
+
 			new BracePair(QUOTE_DOUBLE_OPEN, QUOTE_DOUBLE_CLOSE, false),
 			new BracePair(QUOTE_SINGLE_OPEN, QUOTE_SINGLE_CLOSE, false),
 			new BracePair(QUOTE_TICK_OPEN, QUOTE_TICK_CLOSE, false),
