@@ -57,6 +57,7 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor
 	@Override
 	public boolean isEnabled(Template template)
 	{
+		// fixme this is probably bad. Doesn't work if it's custom group
 		if (template instanceof TemplateImpl)
 			return ((TemplateImpl) template).getGroupName().startsWith("Perl5");
 		return false;
