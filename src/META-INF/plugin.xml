@@ -154,6 +154,8 @@
         <typeHierarchyProvider language="Perl5"
                                implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider"/>
 
+        <consoleFilterProvider implementation="com.perl5.lang.perl.idea.PerlConsoleFilterProvider"/>
+
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorMisc"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorSubs"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorVariables"/>
