@@ -79,6 +79,7 @@
         <li>Suppressed livetemplates inside a string</li>
         <li>Suppressed string to namespace resolution for top-level namespaces.</li>
         <li>Pod block now may starts with <code>=cut</code>.</li>
+        <li>Fixed an error creating new file outside of the modules.</li>
       </ul>
       </p>
 
