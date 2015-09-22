@@ -46,6 +46,6 @@ public class PerlVariableInplaceRenameHandler extends VariableInplaceRenameHandl
 	@Override
 	protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file)
 	{
-		return editor.getSettings().isVariableInplaceRenameEnabled() && element.getLanguage() == PerlLanguage.INSTANCE;
+		return editor.getSettings().isVariableInplaceRenameEnabled() && element != null && element.getLanguage() == PerlLanguage.INSTANCE;
 	}
 }
