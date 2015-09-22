@@ -415,7 +415,7 @@ public class PerlLexer extends PerlLexerGenerated
 				return captureString(LEX_QUOTE_LIKE_OPENER_QX);
 				// capture __DATA__ __END__
 				// capture pod
-			else if (currentChar == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
+			else if (currentChar == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n') && bufferEnd > tokenStart + 1 && Character.isLetter(buffer.charAt(tokenStart + 1)))
 				return capturePodBlock();
 				// capture qw content from qw();
 			else if (((tokenStart < bufferEnd - STRING_DATA_LENGTH) && StringUtil.equals(buffer.subSequence(tokenStart, tokenStart + STRING_DATA_LENGTH), STRING_DATA))
@@ -747,6 +747,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		int currentPosition = tokenStart;
 		int linePos = currentPosition;
+		int linesNumber = 0;
 
 		while (true)
 		{
@@ -759,11 +760,12 @@ public class PerlLexer extends PerlLexerGenerated
 			String line = buffer.subSequence(currentPosition, linePos).toString();
 			currentPosition = linePos;
 
-			if (linePos == bufferEnd || line.startsWith("=cut"))
+			if (linePos == bufferEnd || line.startsWith("=cut") && linesNumber > 0)
 			{
 				setTokenEnd(linePos);
 				break;
 			}
+			linesNumber++;
 		}
 
 		return POD;

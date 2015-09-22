@@ -78,6 +78,7 @@
         <li>Fixed bug with <code>print OF &lt;&lt;EOM;</code> parsing.</li>
         <li>Suppressed livetemplates inside a string</li>
         <li>Suppressed string to namespace resolution for top-level namespaces.</li>
+        <li>Pod block now may starts with <code>=cut</code>.</li>
       </ul>
       </p>
 
