@@ -31,21 +31,18 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.09.2015.
  */
-public class PerlVariableInplaceRenameHandler extends VariableInplaceRenameHandler
+public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplaceRenameHandler
 {
 	@Nullable
 	@Override
 	protected VariableInplaceRenamer createRenamer(@NotNull PsiElement elementToRename, Editor editor)
 	{
-		if (elementToRename instanceof PsiNameIdentifierOwner && ((PsiNameIdentifierOwner) elementToRename).getNameIdentifier() instanceof PerlString)
-			return new PerlVariableInplaceRenamer((PsiNamedElement) elementToRename, editor);
-
-		return super.createRenamer((PsiNamedElement) elementToRename, editor);
+		return new PerlVariableInplaceRenamer((PsiNamedElement) elementToRename, editor);
 	}
 
 	@Override
 	protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file)
 	{
-		return editor.getSettings().isVariableInplaceRenameEnabled() && element != null && element.getLanguage() == PerlLanguage.INSTANCE;
+		return editor.getSettings().isVariableInplaceRenameEnabled() && element != null && element.getLanguage() == PerlLanguage.INSTANCE && element instanceof PsiNameIdentifierOwner && ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlString;
 	}
 }
