@@ -25,9 +25,12 @@ import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.ex.ProjectRoot;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -73,12 +76,17 @@ public class PerlRunProfileState extends CommandLineState
 
 		String perlSdkPath = null;
 		List<String> includePaths = Collections.emptyList();
+		Project project = getEnvironment().getProject();
 		if (PlatformUtils.isIntelliJ())
 		{
-			Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, getEnvironment().getProject());
+			Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, project);
 			if (moduleForFile == null)
 			{
-				perlSdkPath = null;
+				Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
+				if(projectSdk != null)
+				{
+					perlSdkPath = projectSdk.getHomePath();
+				}
 			}
 			else
 			{
@@ -104,7 +112,7 @@ public class PerlRunProfileState extends CommandLineState
 		}
 		else
 		{
-			Perl5Settings perl5Settings = Perl5Settings.getInstance(getEnvironment().getProject());
+			Perl5Settings perl5Settings = Perl5Settings.getInstance(project);
 			perlSdkPath = perl5Settings.perlPath;
 			includePaths = ContainerUtil.map(perl5Settings.libRootUrls, new Function<String, String>()
 			{
@@ -138,10 +146,14 @@ public class PerlRunProfileState extends CommandLineState
 		String homePath = runProfile.getWorkingDirectory();
 		if (StringUtil.isEmpty(homePath))
 		{
-			Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, getEnvironment().getProject());
+			Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, project);
 			if (moduleForFile != null)
 			{
 				homePath = PathMacroUtil.getModuleDir(moduleForFile.getModuleFilePath());
+			}
+			else
+			{
+				homePath = project.getBasePath();
 			}
 		}
 
@@ -184,7 +196,7 @@ public class PerlRunProfileState extends CommandLineState
 		commandLine.withEnvironment(runProfile.getEnvs());
 		commandLine.setPassParentEnvironment(runProfile.isPassParentEnvs());
 		OSProcessHandler handler = new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset);
-		ProcessTerminatedListener.attach(handler, getEnvironment().getProject());
+		ProcessTerminatedListener.attach(handler, project);
 		return handler;
 	}
 }
