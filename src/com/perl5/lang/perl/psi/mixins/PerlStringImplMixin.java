@@ -63,8 +63,11 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 	{
 		PsiElement firstChild = getFirstChild();
 
-		if (firstChild instanceof PerlParsableStringWrapperlImpl)
-			firstChild = firstChild.getFirstChild().getFirstChild();
+		if (firstChild instanceof PerlParsableStringWrapperlImpl) {
+			PsiElement realString = firstChild.getFirstChild();
+			assert realString instanceof PerlStringImplMixin;
+			return ((PerlStringImplMixin) realString).getOpenQuoteOffset();
+		}
 
 		ASTNode currentNode = firstChild.getNode();
 
@@ -81,8 +84,11 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 	{
 		PsiElement lastChild = getLastChild();
 
-		if (lastChild instanceof PerlParsableStringWrapperlImpl)
-			lastChild = lastChild.getLastChild().getLastChild();
+		if (lastChild instanceof PerlParsableStringWrapperlImpl) {
+			PsiElement realString = lastChild.getFirstChild();
+			assert realString instanceof PerlStringImplMixin;
+			return ((PerlStringImplMixin) realString).getCloseQuoteOffset();
+		}
 
 		ASTNode currentNode = lastChild.getNode();
 
