@@ -33,12 +33,17 @@ public class LibProcessor extends PerlPragmaProcessorBase implements IPerlLibPro
 	public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs)
 	{
 		int fileIndex = 0;
-		for (String parameter : useStatement.getImportParameters())
+
+		List<String> importParameters = useStatement.getImportParameters();
+		if (importParameters != null)
 		{
-			VirtualFile file = LocalFileSystem.getInstance().findFileByPath(parameter);
-			if (file != null && file.isDirectory())
+			for (String parameter : useStatement.getImportParameters())
 			{
-				libDirs.add(fileIndex++, file);
+				VirtualFile file = LocalFileSystem.getInstance().findFileByPath(parameter);
+				if (file != null && file.isDirectory())
+				{
+					libDirs.add(fileIndex++, file);
+				}
 			}
 		}
 	}

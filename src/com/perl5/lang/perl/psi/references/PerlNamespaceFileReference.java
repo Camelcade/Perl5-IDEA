@@ -16,11 +16,13 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReference;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlFile;
@@ -63,7 +65,7 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 
 		if (file instanceof PerlFile)
 		{
-			targetFile = ((PerlFile) file).resolvePackageName(packageName);
+			targetFile = ((PerlFile) file).resolvePackageNameToPsi(packageName);
 		}
 
 		return targetFile == null

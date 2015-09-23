@@ -77,7 +77,16 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @return target PsiFile if resolved
 	 */
 	@Nullable
-	PsiFile resolvePackageName(String canonicalPackageName);
+	PsiFile resolvePackageNameToPsi(String canonicalPackageName);
+
+	/**
+	 * Resolves package name according to the current file contents
+	 *
+	 * @param canonicalPackageName canonical package name
+	 * @return target VirtualFile if resolved
+	 */
+	@Nullable
+	VirtualFile resolvePackageNameToVirtualFile(String canonicalPackageName);
 
 	/**
 	 * Resolves relative path (from do/require) according to the current file contents
@@ -86,6 +95,15 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @return target PsiFile if resolved
 	 */
 	@Nullable
-	PsiFile resolveRelativePath(String relativePath);
+	PsiFile resolveRelativePathToPsi(String relativePath);
+
+	/**
+	 * Resolves relative path (from do/require) according to the current file contents
+	 *
+	 * @param relativePath relative path
+	 * @return target VirtualFile if resolved
+	 */
+	@Nullable
+	VirtualFile resolveRelativePathToVirtualFile(String relativePath);
 
 }

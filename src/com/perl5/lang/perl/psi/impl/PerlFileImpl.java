@@ -30,11 +30,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.ObjectStubTree;
+import com.intellij.psi.stubs.PsiFileStub;
+import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubTreeLoader;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlFileType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
+import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
+import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
@@ -60,6 +66,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
 	protected ConcurrentHashMap<PerlVariable, String> VARIABLE_TYPES_CACHE = new ConcurrentHashMap<PerlVariable, String>();
 	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESAPCES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
+	protected GlobalSearchScope myElementsResolveScope;
 	List<PerlLexicalDeclaration> declaredScalars = new ArrayList<PerlLexicalDeclaration>();
 	List<PerlLexicalDeclaration> declaredArrays = new ArrayList<PerlLexicalDeclaration>();
 	List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
@@ -117,6 +124,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		lexicalCacheInvalid = true;
 		VARIABLE_TYPES_CACHE.clear();
 		METHODS_NAMESAPCES_CACHE.clear();
+		myElementsResolveScope = null;
 	}
 
 	/**
@@ -383,10 +391,17 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@NotNull
 	GlobalSearchScope getElementsResolveScope()
 	{
+		if (myElementsResolveScope != null)
+			return myElementsResolveScope;
+
+		long t = System.currentTimeMillis();
 		Set<VirtualFile> filesToSearch = new THashSet<VirtualFile>();
-		// fixme leads to reparsing
 		collectIncludedFiles(filesToSearch);
-		return GlobalSearchScope.filesScope(getProject(), filesToSearch);
+		myElementsResolveScope = GlobalSearchScope.filesScope(getProject(), filesToSearch);
+
+		System.err.println("Collected in ms: " + (System.currentTimeMillis() - t) / 1000);
+
+		return myElementsResolveScope;
 	}
 
 	@Override
@@ -396,59 +411,157 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		{
 			includedVirtualFiles.add(getVirtualFile());
 
-			for (PsiElement importStatement : PsiTreeUtil.<PsiElement>findChildrenOfAnyType(this, PerlUseStatement.class, PerlDoExpr.class))
+			StubElement fileStub = getStub();
+
+			if (fileStub == null)
 			{
-				if (importStatement instanceof PerlUseStatement)
-				{
-					String packageName = ((PerlUseStatement) importStatement).getPackageName();
-					if (packageName != null)
-					{
-						PsiFile targetFile = resolvePackageName(packageName);
+				System.err.println("Collecting from psi for " + getVirtualFile());
+				collectRequiresFromPsi(this, includedVirtualFiles);
+			} else
+			{
+				System.err.println("Collecting from stubs for " + getVirtualFile());
+				collectRequiresFromStub(fileStub, includedVirtualFiles);
+			}
+		}
+	}
 
-						if (targetFile instanceof PerlFile)
-						{
-							((PerlFile) targetFile).collectIncludedFiles(includedVirtualFiles);
-						}
-					}
-				} else if (importStatement instanceof PerlDoExpr && ((PerlDoExpr) importStatement).getImportPath() != null)
-				{
-					PsiFile targetFile = resolveRelativePath(((PerlDoExpr) importStatement).getImportPath());
+	protected void collectRequiresFromVirtualFile(VirtualFile virtualFile, Set<VirtualFile> includedVirtualFiles)
+	{
+		if (!includedVirtualFiles.contains(virtualFile))
+		{
+			includedVirtualFiles.add(virtualFile);
 
-					if (targetFile instanceof PerlFile)
-					{
-						((PerlFile) targetFile).collectIncludedFiles(includedVirtualFiles);
-					}
+			ObjectStubTree objectStubTree = StubTreeLoader.getInstance().readOrBuild(getProject(), virtualFile, null);
+			if (objectStubTree != null)
+			{
+				System.err.println("Collecting from stub for " + virtualFile);
+				collectRequiresFromStub((PsiFileStub) objectStubTree.getRoot(), includedVirtualFiles);
+			} else
+			{
+				System.err.println("Collecting from psi for " + virtualFile);
+				PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(virtualFile);
+				if (targetPsiFile != null)
+					collectRequiresFromPsi(targetPsiFile, includedVirtualFiles);
+			}
+		}
+	}
+
+	protected void collectRequiresFromStub(@NotNull StubElement currentStub, Set<VirtualFile> includedVirtualFiles)
+	{
+		VirtualFile virtualFile = null;
+		if (currentStub instanceof PerlUseStatementStub)
+		{
+			String packageName = ((PerlUseStatementStub) currentStub).getPackageName();
+			if (packageName != null)
+			{
+				virtualFile = resolvePackageNameToVirtualFile(packageName);
+			}
+
+		}
+		if (currentStub instanceof PerlRuntimeImportStub)
+		{
+			String importPath = ((PerlRuntimeImportStub) currentStub).getImportPath();
+			if (importPath != null)
+			{
+				virtualFile = resolveRelativePathToVirtualFile(importPath);
+			}
+		}
+
+		if (virtualFile != null)
+		{
+			collectRequiresFromVirtualFile(virtualFile, includedVirtualFiles);
+		}
+
+		for (Object childStub : currentStub.getChildrenStubs())
+		{
+			assert childStub instanceof StubElement : childStub.getClass();
+			collectRequiresFromStub((StubElement) childStub, includedVirtualFiles);
+		}
+	}
+
+
+	/**
+	 * Collects required files from psi structure, used in currently modified document
+	 *
+	 * @param includedVirtualFiles set of already collected virtual files
+	 */
+	protected void collectRequiresFromPsi(PsiFile psiFile, Set<VirtualFile> includedVirtualFiles)
+	{
+		for (PsiElement importStatement : PsiTreeUtil.<PsiElement>findChildrenOfAnyType(psiFile, PerlUseStatement.class, PerlDoExpr.class))
+		{
+			VirtualFile virtualFile = null;
+			if (importStatement instanceof PerlUseStatement)
+			{
+				String packageName = ((PerlUseStatement) importStatement).getPackageName();
+				if (packageName != null)
+				{
+					virtualFile = resolvePackageNameToVirtualFile(packageName);
 				}
+			} else if (importStatement instanceof PerlDoExpr)
+			{
+				String importPath = ((PerlDoExpr) importStatement).getImportPath();
+
+				if (importPath != null)
+				{
+					virtualFile = resolveRelativePathToVirtualFile(((PerlDoExpr) importStatement).getImportPath());
+				}
+			}
+
+			if (virtualFile != null)
+			{
+				collectRequiresFromVirtualFile(virtualFile, includedVirtualFiles);
 			}
 		}
 	}
 
 	@Nullable
 	@Override
-	public PsiFile resolvePackageName(String canonicalPackageName)
+	public PsiFile resolvePackageNameToPsi(String canonicalPackageName)
 	{
 		// resolves to a psi file
-		return resolveRelativePath(PerlPackageUtil.getPackagePathByName(canonicalPackageName));
+		return resolveRelativePathToPsi(PerlPackageUtil.getPackagePathByName(canonicalPackageName));
 	}
 
 	@Nullable
 	@Override
-	public PsiFile resolveRelativePath(String relativePath)
+	public VirtualFile resolvePackageNameToVirtualFile(String canonicalPackageName)
 	{
-		if( relativePath != null )
+		// resolves to a psi file
+		return resolveRelativePathToVirtualFile(PerlPackageUtil.getPackagePathByName(canonicalPackageName));
+	}
+
+	@Nullable
+	@Override
+	public PsiFile resolveRelativePathToPsi(String relativePath)
+	{
+		VirtualFile targetFile = resolveRelativePathToVirtualFile(relativePath);
+
+		if (targetFile != null)
+		{
+			PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(targetFile);
+			if (targetPsiFile != null)
+				return targetPsiFile;
+		}
+
+		return null;
+	}
+
+	@Override
+	public VirtualFile resolveRelativePathToVirtualFile(String relativePath)
+	{
+		if (relativePath != null)
 		{
 			for (VirtualFile classRoot : getLibPaths())
 			{
 				VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
 				if (targetFile != null)
 				{
-					PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(targetFile);
-					if (targetPsiFile != null)
-						return targetPsiFile;
+					return targetFile;
 				}
 			}
 		}
 
 		return null;
 	}
+
 }
