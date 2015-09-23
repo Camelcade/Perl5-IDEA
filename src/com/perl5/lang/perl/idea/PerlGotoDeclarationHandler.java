@@ -19,7 +19,10 @@ package com.perl5.lang.perl.idea;
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
+import com.intellij.psi.search.FilenameIndex;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.Nullable;
@@ -74,36 +77,32 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 
 		}
 		// string content to file jump fixme change to string
-//		else if (sourceElement instanceof PerlStringContentElement && ((PerlStringContentElement) sourceElement).looksLikePath())
-//		{
-//			String tokenText = sourceElement.getText().replaceAll("\\\\", "/").replaceAll("/+", "/");
-//			Project project = sourceElement.getProject();
-//
-//			String fileName = ((PerlStringContentElement) sourceElement).getContentFileName();
-//
-//
-//			for (String file : FilenameIndex.getAllFilenames(project))
-//				if (file.contains(fileName))
-//				{
-//					// fixme somehow if includeDirectories is true - no files found
-//					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project)))
-//					{
-//						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-//						if (canonicalPath != null)
-//							if (canonicalPath.contains(tokenText + "."))    // higer priority
-//								result.add(0, fileItem);
-//							else if (canonicalPath.contains(tokenText))
-//								result.add(fileItem);
-//					}
-//					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true))
-//					{
-//						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-//						if (canonicalPath != null)
-//							if (canonicalPath.contains(tokenText))
-//								result.add(fileItem);
-//					}
-//				}
-//		}
+		else if (sourceElement instanceof PerlStringContentElement && ((PerlStringContentElement) sourceElement).looksLikePath()) {
+			String tokenText = sourceElement.getText().replaceAll("\\\\", "/").replaceAll("/+", "/");
+			Project project = sourceElement.getProject();
+
+			String fileName = ((PerlStringContentElement) sourceElement).getContentFileName();
+
+
+			for (String file : FilenameIndex.getAllFilenames(project))
+				if (file.contains(fileName)) {
+					// fixme somehow if includeDirectories is true - no files found
+					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
+						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+						if (canonicalPath != null)
+							if (canonicalPath.contains(tokenText + "."))    // higer priority
+								result.add(0, fileItem);
+							else if (canonicalPath.contains(tokenText))
+								result.add(fileItem);
+					}
+					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
+						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+						if (canonicalPath != null)
+							if (canonicalPath.contains(tokenText))
+								result.add(fileItem);
+					}
+				}
+		}
 
 		return result.size() == 0 ? null : result.toArray(new PsiElement[result.size()]);
 	}
