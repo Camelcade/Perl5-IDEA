@@ -68,18 +68,20 @@ public class PerlConsoleFileLinkFilter implements Filter {
             String projectName = project.getBaseDir().getName();
 
             String separator = "[\\\\/]";
-            Pattern pattern = Pattern.compile(projectName + "(" + separator + "([\\w-]+" + separator + ")*\\w([\\w-.])+)( line (\\d+))?");
+            Pattern pattern = Pattern.compile("([A-Za-z:]+)?" + separator + "+([\\w-.]+" + separator + ")+" + projectName + "(" + separator + "+([\\w-.]+" + separator + "+)*\\w([\\w-.])+)( line (\\d+))?");
             Matcher matcher = pattern.matcher(textLine);
             while (matcher.find()) {
                 int startIndex = matcher.start(0);
                 int endIndex = matcher.end(0);
-                String file = matcher.group(1);
-                int line = (matcher.group(5) != null) ? (Integer.valueOf(matcher.group(5)) - 1) : 0;
+                String file = matcher.group(3);
+                int line = (matcher.group(7) != null) ? (Integer.valueOf(matcher.group(7)) - 1) : 0;
                 VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(projectDir + file);
+                if(virtualFile != null){
                 results.add(new Result(
                         startPoint + startIndex,
                         startPoint + endIndex,
                         new OpenFileHyperlinkInfo(project, virtualFile, line)));
+                }
             }
         }
     }
