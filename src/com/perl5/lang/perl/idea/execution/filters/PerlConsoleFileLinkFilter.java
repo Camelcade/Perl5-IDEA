@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.execution.filters;
 
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.OpenFileHyperlinkInfo;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -64,18 +61,18 @@ public class PerlConsoleFileLinkFilter implements Filter {
 
     private void match(List<ResultItem> results, String textLine, int startPoint) {
         if (project != null) {
-            String projectDir = project.getBaseDir().toString();
-            String projectName = project.getBaseDir().getName();
+            VirtualFile projectDir = project.getBaseDir();
+            String projectDirName = project.getBaseDir().getName();
 
             String separator = "[\\\\/]";
-            Pattern pattern = Pattern.compile("([A-Za-z:]+)?" + separator + "+([\\w-.]+" + separator + ")+" + projectName + "(" + separator + "+([\\w-.]+" + separator + "+)*\\w([\\w-.])+)( line (\\d+))?");
+            Pattern pattern = Pattern.compile("([A-Za-z:]+)?" + separator + "+([\\w\\-.]+" + separator + ")+" + projectDirName + "(" + separator + "+([\\w\\-.]+" + separator + "+)*\\w([\\w\\-.])+)( line (\\d+))?");
             Matcher matcher = pattern.matcher(textLine);
             while (matcher.find()) {
                 int startIndex = matcher.start(0);
                 int endIndex = matcher.end(0);
                 String file = matcher.group(3);
                 int line = (matcher.group(7) != null) ? (Integer.valueOf(matcher.group(7)) - 1) : 0;
-                VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(projectDir + file);
+                VirtualFile virtualFile = projectDir.findFileByRelativePath(file);
                 if(virtualFile != null){
                 results.add(new Result(
                         startPoint + startIndex,

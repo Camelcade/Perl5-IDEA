@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.execution.filters;
 
 import com.intellij.execution.filters.ConsoleFilterProviderEx;
 import com.intellij.execution.filters.Filter;
