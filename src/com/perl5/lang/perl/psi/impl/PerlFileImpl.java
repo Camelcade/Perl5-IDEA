@@ -51,7 +51,6 @@ import com.perl5.lang.perl.psi.utils.PerlLexicalDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -386,23 +385,22 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		return result;
 	}
 
-	@Override
-	public
-	@NotNull
-	GlobalSearchScope getElementsResolveScope()
-	{
-		if (myElementsResolveScope != null)
-			return myElementsResolveScope;
-
-		long t = System.currentTimeMillis();
-		Set<VirtualFile> filesToSearch = new THashSet<VirtualFile>();
-		collectIncludedFiles(filesToSearch);
-		myElementsResolveScope = GlobalSearchScope.filesScope(getProject(), filesToSearch);
-
-		System.err.println("Collected in ms: " + (System.currentTimeMillis() - t) / 1000);
-
-		return myElementsResolveScope;
-	}
+//	@Override
+//	@NotNull
+//	public GlobalSearchScope getElementsResolveScope()
+//	{
+//		if (myElementsResolveScope != null)
+//			return myElementsResolveScope;
+//
+//		long t = System.currentTimeMillis();
+//		Set<VirtualFile> filesToSearch = new THashSet<VirtualFile>();
+//		collectIncludedFiles(filesToSearch);
+//		myElementsResolveScope = GlobalSearchScope.filesScope(getProject(), filesToSearch);
+//
+//		System.err.println("Collected in ms: " + (System.currentTimeMillis() - t) / 1000);
+//
+//		return myElementsResolveScope;
+//	}
 
 	@Override
 	public void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles)

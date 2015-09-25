@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -61,7 +60,7 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @return search scope
 	 */
 	@NotNull
-	GlobalSearchScope getElementsResolveScope();
+//	GlobalSearchScope getElementsResolveScope();
 
 	/**
 	 * Recursively collects virtual files included in current file
