@@ -387,7 +387,7 @@ limitations under the License.
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 root ::= file_item *
 
-private file_item ::= !<<eof>> {semicolon_any | <<parseHeredocContent>> | namespace_definition | namespace_item} //{pin=1 }
+private file_item ::= !<<eof>> {semicolon_any | <<parseHeredocContent>> | namespace_definition | namespace_item | <<parseErrorElement>>}
 
 namespace_definition ::= namespace_definition_name (block | semicolon_any namespace_content)
 private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_namespace_definition}

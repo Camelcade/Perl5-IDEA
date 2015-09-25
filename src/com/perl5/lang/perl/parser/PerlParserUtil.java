@@ -1480,5 +1480,24 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
+	/**
+	 * Consuming unexpected token
+	 *
+	 * @param b perlbuilder
+	 * @param l parsing level
+	 * @return true
+	 */
+	public static boolean parseErrorElement(PsiBuilder b, int l)
+	{
+		if (!b.eof())
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.error("Unexpected token");
+			return true;
+		}
+		return false;
+	}
+
 
 }
