@@ -72,7 +72,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 
 			if (needAdd)
 			{
-				editor.getDocument().insertString(caretOffset.get(), markerName + "\n");
+				editor.getDocument().insertString(caretOffset.get(), "\n" + markerName + "\n");
 				return Result.DefaultSkipIndent;
 			}
 		}

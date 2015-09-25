@@ -161,7 +161,7 @@
 
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.PerlTypedHandler" id="PerlTypedHandler"/>
         <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.PerlEnterHandlerDelegate"
-                              id="PerlEnterHandler"/>
+                              id="PerlEnterHandler" order="first"/>
 
         <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
 
