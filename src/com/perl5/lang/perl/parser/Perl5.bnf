@@ -387,7 +387,7 @@ limitations under the License.
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 root ::= file_item *
 
-private file_item ::= !<<eof>> {semicolon_any | <<parseHeredocContent>> | namespace_definition | namespace_item } //| <<parseErrorElement>>
+private file_item ::= !<<eof>> {semicolon_any | <<parseHeredocContent>> | namespace_definition | namespace_item }
 
 namespace_definition ::= namespace_definition_name (block | semicolon_any namespace_content)
 private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_namespace_definition}
@@ -482,8 +482,8 @@ private statement_body ::=
     | normal_statement
     {recoverWhile=recover_statement}
 
-private normal_statement ::= normal_statement_body [statement_modifier] {pin=1}
-private normal_statement_body ::= expr {recoverWhile=recover_statement}
+private normal_statement ::= expr [statement_modifier] {pin=1}
+//private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme we can't pin this because we need to distinct declaration and definition
 sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
@@ -949,10 +949,8 @@ nested_call ::= method [nested_call_arguments]
 scalar_call ::= scalar [nested_call_arguments]
 nested_call_arguments ::= LEFT_PAREN [expr] RIGHT_PAREN
 
-hash_index ::= LEFT_BRACE hash_index_content RIGHT_BRACE
-private hash_index_content ::= <<convertBracedString>> | expr
-
-array_index ::= LEFT_BRACKET expr RIGHT_BRACKET
+hash_index ::= <<parseHashIndex>>
+array_index ::= <<parseArrayIndex>>
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 

@@ -929,6 +929,67 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
+	 * Parsing hash index, counting braces, smart error on empty expr
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseHashIndex(PsiBuilder b, int l)
+	{
+		if (consumeToken(b, LEFT_BRACE))
+		{
+			boolean r = convertBracedString(b, l);
+			if (!r) r = PerlParser.expr(b, l, -1);
+
+			if (!r && b.getTokenType() == RIGHT_BRACE)
+			{
+				r = true;
+				b.mark().error("Empty hash index");    // fixme this must be done via inspection or annotator
+			}
+
+			return r && consumeToken(b, RIGHT_BRACE);
+		}
+		return false;
+	}
+
+
+	/**
+	 * Parsing array index, smart error on empty expr
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseArrayIndex(PsiBuilder b, int l)
+	{
+		if (consumeToken(b, LEFT_BRACKET))
+		{
+			boolean r = false;
+			assert b instanceof PerlBuilder;
+			if (((PerlBuilder) b).isRegex())    // we could take it from ErrorState stack. I guess...
+			{
+				r = PerlParser.interpolated_constructs(b, l);    // we can't parse an expression here, cause it's pinned inside
+				if (!r)
+					r = PerlParser.number_constant(b, l);    // little hack for plain number. Basically we need to use expr here with pin checking
+			} else
+			{
+				r = PerlParser.expr(b, l + 1, -1);
+
+				if (!r && b.getTokenType() == RIGHT_BRACKET)
+				{
+					r = true;
+					b.mark().error("Empty array index");    // fixme this must be done via inspection or annotator
+				}
+			}
+			return r && consumeToken(b, RIGHT_BRACKET);
+		}
+		return false;
+	}
+
+
+
+	/**
 	 * Checks for version token and convert if necessary
 	 *
 	 * @param b PerlBuilder
@@ -1004,37 +1065,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Parses array index without pinnning. Requires to distinct array index from characters group in the regexp
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseUnpinnedArrayIndex(PsiBuilder b, int l)
-	{
-		PsiBuilder.Marker m = b.mark();
-
-		boolean r = false;
-
-		if (consumeToken(b, LEFT_BRACKET))
-		{
-			r = PerlParser.interpolated_constructs(b, l);	// we can't parse an expression here, cause it's pinned inside
-			if (!r)
-				r = PerlParser.number_constant(b, l);    // little hack for plain number. Basically we need to use expr here with pin checking
-			r = r && consumeToken(b, RIGHT_BRACKET);
-		}
-
-		if (r)
-		{
-			m.done(ARRAY_INDEX);
-		} else
-		{
-			m.rollbackTo();
-		}
-		return r;
-	}
-
-	/**
 	 * Parses Array variable or array/hash slice
 	 *
 	 * @param b PerlBuilder
@@ -1057,10 +1087,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					)
 			{
 
-				boolean isRegex = ((PerlBuilder) b).isRegex();
-				if (isRegex && parseUnpinnedArrayIndex(b, l)
-						|| !isRegex && PerlParser.array_index(b, l)
-						)
+				if ( PerlParser.array_index(b, l))
 				{
 					m.done(ARRAY_ARRAY_SLICE);
 				} else if (PerlParser.hash_index(b, l))
@@ -1104,9 +1131,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					)
 			{
 
-				boolean isRegex = ((PerlBuilder) b).isRegex();
-
-				if (isRegex && parseUnpinnedArrayIndex(b, l) || !isRegex && PerlParser.array_index(b, l))
+				if (PerlParser.array_index(b, l))
 				{
 					m.done(SCALAR_ARRAY_ELEMENT);
 				} else if (PerlParser.hash_index(b, l))
@@ -1480,13 +1505,16 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
-	/**
+/*
+	*/
+/**
 	 * Consuming unexpected token
 	 *
 	 * @param b perlbuilder
-	 * @param l parsing level
+ * @param l parsing level
 	 * @return true
-	 */
+	 *//*
+
 	public static boolean parseErrorElement(PsiBuilder b, int l)
 	{
 		if (!b.eof())
@@ -1499,5 +1527,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+*/
 
 }
