@@ -16,14 +16,15 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
@@ -41,9 +42,20 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 					"(?:" + validFileNameRe + validPathDelimiterRe + ")+ ?" +
 					"(" + validFileNameRe + ")" + validPathDelimiterRe + "?"
 	);
-
 	protected Boolean looksLikePath = null;
 	protected Boolean looksLikePackage = null;
+	protected final AtomicNotNullLazyValue<PsiReference[]> myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+	{
+		@NotNull
+		@Override
+		protected PsiReference[] compute()
+		{
+			if (looksLikePackage())
+				return new PsiReference[]{new PerlNamespaceReference(PerlStringContentElementImpl.this, null)};
+			else
+				return new PsiReference[0];
+		}
+	};
 
 	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -61,7 +73,13 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	@Override
 	public PsiReference[] getReferences()
 	{
-		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+		return myReferences.getValue();
+	}
+
+	@Override
+	public PsiReference getReference()
+	{
+		return myReferences.getValue()[0];
 	}
 
 	@Override

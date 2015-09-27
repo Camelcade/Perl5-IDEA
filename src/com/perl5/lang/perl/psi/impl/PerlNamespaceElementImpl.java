@@ -16,24 +16,19 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +38,25 @@ import java.util.List;
  */
 public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlNamespaceElement
 {
-	protected String myCanonicalName = null;
+	protected final AtomicNotNullLazyValue<PsiReference[]> myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+	{
+		@NotNull
+		@Override
+		protected PsiReference[] compute()
+		{
+			PerlNamespaceElement element = PerlNamespaceElementImpl.this;
+			PsiElement nameSpaceContainer = element.getParent();
+
+			if (nameSpaceContainer instanceof PsiPerlUseStatement
+					|| nameSpaceContainer instanceof PsiPerlRequireExpr
+					)
+				return new PsiReference[]{new PerlNamespaceFileReference(element, null)};
+			else if (nameSpaceContainer instanceof PerlNamespaceDefinition)
+				return new PsiReference[0];
+			else
+				return new PsiReference[]{new PerlNamespaceReference(element, null)};
+		}
+	};
 
 	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -57,36 +70,6 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 		else super.accept(visitor);
 	}
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		String currentName = getText();
-
-		boolean currentTail = currentName.endsWith("::") || currentName.endsWith("'");
-		boolean newTail = name.endsWith("::") || name.endsWith("'");
-
-		if (newTail && !currentTail)
-			name = PerlPackageUtil.PACKAGE_SEPARATOR_TAIL_RE.matcher(name).replaceFirst("");
-		else if (!newTail && currentTail)
-			name = name + "::";
-
-		PerlNamespaceElementImpl newName = PerlElementFactory.createPackageName(getProject(), name);
-
-		if (newName != null)
-			replace(newName);
-
-		myCanonicalName = null;
-
-		return this;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return this;
-	}
-
 	@NotNull
 	@Override
 	public String getName()
@@ -96,10 +79,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 
 	public String getCanonicalName()
 	{
-		if (myCanonicalName == null)
-			myCanonicalName = PerlPackageUtil.getCanonicalPackageName(getName());
-
-		return myCanonicalName;
+		return PerlPackageUtil.getCanonicalPackageName(getName());
 	}
 
 
@@ -107,32 +87,31 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public PsiReference[] getReferences()
 	{
-		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+		return myReferences.getValue();
 	}
 
 	@Override
 	public PsiReference getReference()
 	{
-		PsiReference[] references = getReferences();
-		return references.length > 0 ? references[0] : null;
+		return myReferences.getValue()[0];
 	}
 
 	@Override
 	public boolean isBuiltin()
 	{
-		return PerlPackageUtil.isBuiltIn(getName());
+		return PerlPackageUtil.isBuiltIn(getCanonicalName());
 	}
 
 	@Override
 	public boolean isPragma()
 	{
-		return PerlPackageUtil.BUILT_IN_PRAGMA.contains(getName());
+		return PerlPackageUtil.BUILT_IN_PRAGMA.contains(getCanonicalName());
 	}
 
 	@Override
 	public boolean isDeprecated()
 	{
-		return PerlPackageUtil.isDeprecated(getProject(), getName());
+		return PerlPackageUtil.isDeprecated(getProject(), getCanonicalName());
 	}
 
 	@Override
@@ -190,22 +169,6 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public TextRange getTextRange()
 	{
-		String text = getText();
-		if (text.endsWith("::"))
-		{
-			int start = getStartOffset();
-			return new TextRange(start, start + getTextLength() - 2);
-		} else if (text.endsWith("'"))
-		{
-			int start = getStartOffset();
-			return new TextRange(start, start + getTextLength() - 1);
-		}
-		return super.getTextRange();
-	}
-
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
+		return PerlPackageUtil.getPackageRangeFromOffset(getStartOffset(), getText());
 	}
 }

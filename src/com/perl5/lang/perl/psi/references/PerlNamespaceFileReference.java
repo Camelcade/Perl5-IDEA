@@ -20,13 +20,12 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReference;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.references.resolvers.PerlNamespaceFileResolver;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.apache.commons.lang.StringUtils;
@@ -36,17 +35,17 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 28.05.2015.
  */
 public class PerlNamespaceFileReference extends PerlReferencePoly implements PsiFileReference
-
 {
-	private final String packageName;
+	protected static final ResolveCache.PolyVariantResolver<PerlNamespaceFileReference> RESOLVER = new PerlNamespaceFileResolver();
 
 	public PerlNamespaceFileReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		assert element instanceof PerlNamespaceElement;
-		packageName = ((PerlNamespaceElement) element).getName();
-		if (element.getText().endsWith("::"))
-			setRangeInElement(new TextRange(0, element.getTextLength() - 2));
+	}
+
+	public String getPackageName()
+	{
+		return ((PerlNamespaceElement) myElement).getCanonicalName();
 	}
 
 	@NotNull
@@ -60,24 +59,14 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		PsiFile file = myElement.getContainingFile();
-		PsiFile targetFile = null;
-
-		if (file instanceof PerlFile)
-		{
-			targetFile = ((PerlFile) file).resolvePackageNameToPsi(packageName);
-		}
-
-		return targetFile == null
-				? new ResolveResult[0]
-				: new ResolveResult[]{new PsiElementResolveResult(targetFile)};
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
 		assert myElement instanceof PerlNamespaceElement;
-		String currentName = ((PerlNamespaceElement) myElement).getName();
+		String currentName = ((PerlNamespaceElement) myElement).getCanonicalName();
 		if (currentName != null && newElementName.endsWith(".pm"))
 		{
 			String[] nameChunks = currentName.split("::");
@@ -85,7 +74,6 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 			newElementName = StringUtils.join(nameChunks, "::");
 
 			return super.handleElementRename(newElementName);
-
 		}
 
 		throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
@@ -118,6 +106,6 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	@Override
 	public TextRange getRangeInElement()
 	{
-		return super.getRangeInElement();
+		return PerlPackageUtil.getPackageRangeFromOffset(0, myElement.getText());
 	}
 }

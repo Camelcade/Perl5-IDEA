@@ -162,7 +162,7 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 					{
 						PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
 						if (declarationNamespaceElelement != null)
-							return declarationNamespaceElelement.getName();
+							return declarationNamespaceElelement.getCanonicalName();
 
 						// check dfinition and assignment. Fixme not dry with following code
 						// found variable assignment
@@ -434,4 +434,13 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 		return super.getUseScope();
 	}
 
+	@Override
+	public int getTextOffset()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+
+		return nameIdentifier == null
+				? super.getTextOffset()
+				: getNameIdentifier().getTextOffset();
+	}
 }

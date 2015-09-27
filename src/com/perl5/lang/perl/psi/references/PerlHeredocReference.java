@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -26,9 +27,9 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlHeredocReference extends PerlReference
+public class PerlHeredocReference extends PsiReferenceBase<PsiElement>
 {
-	private static final ResolveCache.Resolver ourResolver = new ResolveCache.Resolver()
+	private static final ResolveCache.Resolver RESOLVER = new ResolveCache.Resolver()
 	{
 		@Override
 		public PsiElement resolve(@NotNull PsiReference psiReference, boolean incompleteCode)
@@ -53,7 +54,7 @@ public class PerlHeredocReference extends PerlReference
 	@Override
 	public PsiElement resolve()
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, ourResolver, true, false);
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
 	@Override
@@ -71,5 +72,10 @@ public class PerlHeredocReference extends PerlReference
 		return new TextRange(0, myElement.getTextLength());
 	}
 
-
+	@NotNull
+	@Override
+	public Object[] getVariants()
+	{
+		return new Object[0];
+	}
 }

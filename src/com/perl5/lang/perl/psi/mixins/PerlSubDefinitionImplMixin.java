@@ -143,7 +143,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 							PerlNamespaceElement variableClass = declaration.getNamespaceElement();
 							String definitionClassName = "";
 							if (variableClass != null)
-								definitionClassName = variableClass.getName();
+								definitionClassName = variableClass.getCanonicalName();
 
 							if ("@_".equals(rightTerm.getText()))
 							{

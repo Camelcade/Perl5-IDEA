@@ -16,47 +16,27 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.ResolveResult;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.perl5.lang.perl.psi.references.resolvers.PerlNamespaceDefinitionResolver;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceReference extends PerlReferencePoly
+public class PerlNamespaceReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference
 {
-	private final String canonicalPackageName;
+	protected static final ResolveCache.PolyVariantResolver<PerlNamespaceReference> RESOLVER = new PerlNamespaceDefinitionResolver();
 
 	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-
-		if (element instanceof PerlNamespaceElement)
-			canonicalPackageName = ((PerlNamespaceElement) element).getCanonicalName();
-		else if (element instanceof PerlStringContentElement)
-			canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(element.getText());
-		else
-			throw new RuntimeException("Incorrect referencable element: " + element.getClass());
-
-		String text = element.getText();
-		if (text.endsWith("::"))
-			setRangeInElement(new TextRange(0, text.length() - 2));
-		else if (text.endsWith("'"))
-		{
-			setRangeInElement(new TextRange(0, text.length() - 1));
-		}
 	}
 
 	@NotNull
@@ -70,37 +50,25 @@ public class PerlNamespaceReference extends PerlReferencePoly
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		Project project = myElement.getProject();
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-
-		PsiElement parent = myElement.getParent();
-
-		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, canonicalPackageName))
-		{
-			if (!parent.isEquivalentTo(namespaceDefinition))
-				result.add(new PsiElementResolveResult(namespaceDefinition));
-		}
-
-		return result.toArray(new ResolveResult[result.size()]);
-	}
-
-
-	@Override
-	public boolean isReferenceTo(PsiElement element)
-	{
-		if (element instanceof PerlNamespaceDefinition)
-			return super.isReferenceTo(element);
-
-		PsiElement parent = element.getParent();
-		if (parent instanceof PerlNamespaceDefinition)
-			return isReferenceTo(parent);
-		;
-		return false;
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
 	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
+	public TextRange getRangeInElement()
 	{
-		return super.handleElementRename(newElementName);
+		return PerlPackageUtil.getPackageRangeFromOffset(0, myElement.getText());
+	}
+
+	public String getCanonicalName()
+	{
+		return PerlPackageUtil.getCanonicalPackageName(myElement.getText());
+	}
+
+	@Nullable
+	@Override
+	public PsiElement resolve()
+	{
+		ResolveResult[] resolveResults = multiResolve(false);
+		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
 	}
 }

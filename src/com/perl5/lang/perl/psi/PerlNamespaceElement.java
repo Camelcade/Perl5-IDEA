@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 
 import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespaceElement extends PerlNamedElement
+public interface PerlNamespaceElement extends PsiElement
 {
 	/**
 	 * Checks if package is from Core list

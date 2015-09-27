@@ -154,7 +154,7 @@ public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends Stu
 				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
 				if (ns != null)
 				{
-					myAnnotations.setReturns(ns.getName());
+					myAnnotations.setReturns(ns.getCanonicalName());
 					myAnnotations.setReturnType(PerlReturnType.REF);
 					// todo implement brackets and braces
 				}

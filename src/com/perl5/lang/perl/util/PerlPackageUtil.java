@@ -21,6 +21,7 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -420,4 +421,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return StubIndex.getElements(PerlUseStatementStubIndex.KEY, packageName, project, scope, PerlUseStatement.class);
 	}
 
+	public static TextRange getPackageRangeFromOffset(int startOffset, String text)
+	{
+		int endOffset = startOffset + text.length();
+		if (text.endsWith("::"))
+		{
+			endOffset -= 2;
+		} else if (text.endsWith("'"))
+		{
+			endOffset -= 1;
+		}
+		return new TextRange(startOffset, endOffset);
+	}
 }

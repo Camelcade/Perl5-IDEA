@@ -77,7 +77,7 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 
 		PerlNamespaceElement ns = getNamespaceElement();
 		if (ns != null)
-			return ns.getName();
+			return ns.getCanonicalName();
 		return null;
 	}
 

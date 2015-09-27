@@ -225,7 +225,13 @@
         <quoteHandler fileType="Perl5 script" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.editor.PerlPsiHeredocManipulator"/>
+                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlPsiHeredocManipulator"/>
+
+        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlStringContentElement" order="first"
+                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator"/>
+
+        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlNamespaceElement" order="first"
+                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator" />
 
         <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
 
