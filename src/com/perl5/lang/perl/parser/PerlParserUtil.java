@@ -987,6 +987,35 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	/**
+	 * Parses statement modifier and rolls back if it looks like compound
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return check result
+	 */
+	public static boolean parseStatementModifier(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+
+		if (PerlParser.statement_modifier(b, l))
+		{
+			IElementType tokenType = b.getTokenType();
+			if (tokenType == RIGHT_BRACE || tokenType == SEMICOLON)    // we accepts only strict modifiers;
+			{
+				m.drop();
+				return true;
+			} else    // we suppose that it's compound
+			{
+				m.rollbackTo();
+				return false;
+			}
+		} else
+		{
+			m.drop();
+			return false;
+		}
+	}
 
 
 	/**
@@ -1087,7 +1116,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					)
 			{
 
-				if ( PerlParser.array_index(b, l))
+				if (PerlParser.array_index(b, l))
 				{
 					m.done(ARRAY_ARRAY_SLICE);
 				} else if (PerlParser.hash_index(b, l))
@@ -1505,28 +1534,28 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
-/*
-	*/
-/**
+	/**
 	 * Consuming unexpected token
 	 *
 	 * @param b perlbuilder
- * @param l parsing level
+	 * @param l parsing level
 	 * @return true
-	 *//*
-
-	public static boolean parseErrorElement(PsiBuilder b, int l)
+	 **/
+	public static boolean parseBadCharacters(PsiBuilder b, int l)
 	{
-		if (!b.eof())
+		if (!b.eof() && b.getTokenType() == TokenType.BAD_CHARACTER)
 		{
 			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
+
+			while (b.getTokenType() == TokenType.BAD_CHARACTER)
+			{
+				b.advanceLexer();
+			}
 			m.error("Unexpected token");
 			return true;
 		}
 		return false;
 	}
 
-*/
 
 }

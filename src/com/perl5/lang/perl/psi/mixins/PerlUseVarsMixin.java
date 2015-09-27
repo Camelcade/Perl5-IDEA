@@ -35,27 +35,6 @@ public class PerlUseVarsMixin extends PerlVariableDeclarationMixin implements IP
 	 **/
 	@Override
 	@Nullable
-	public PsiPerlForStatementModifier getForStatementModifier()
-	{
-		return findChildByClass(PsiPerlForStatementModifier.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlForeachStatementModifier getForeachStatementModifier()
-	{
-		return findChildByClass(PsiPerlForeachStatementModifier.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlIfStatementModifier getIfStatementModifier()
-	{
-		return findChildByClass(PsiPerlIfStatementModifier.class);
-	}
-
-	@Override
-	@Nullable
 	public PsiPerlNoStatement getNoStatement()
 	{
 		return findChildByClass(PsiPerlNoStatement.class);
@@ -75,33 +54,6 @@ public class PerlUseVarsMixin extends PerlVariableDeclarationMixin implements IP
 		return findChildByClass(PsiPerlSubDeclaration.class);
 	}
 
-	@Override
-	@Nullable
-	public PsiPerlUnlessStatementModifier getUnlessStatementModifier()
-	{
-		return findChildByClass(PsiPerlUnlessStatementModifier.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlUntilStatementModifier getUntilStatementModifier()
-	{
-		return findChildByClass(PsiPerlUntilStatementModifier.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlWhenStatementModifier getWhenStatementModifier()
-	{
-		return findChildByClass(PsiPerlWhenStatementModifier.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlWhileStatementModifier getWhileStatementModifier()
-	{
-		return findChildByClass(PsiPerlWhileStatementModifier.class);
-	}
 
 	@Nullable
 	@Override

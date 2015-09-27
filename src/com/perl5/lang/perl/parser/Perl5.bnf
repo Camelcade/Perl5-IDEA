@@ -480,9 +480,10 @@ private statement_body ::=
     | no_statements
     | sub_declaration
     | normal_statement
+    | <<parseBadCharacters>> // this is kinda hack to handle bad characters we have
     {recoverWhile=recover_statement}
 
-private normal_statement ::= expr [statement_modifier] {pin=1}
+private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme we can't pin this because we need to distinct declaration and definition
@@ -525,14 +526,13 @@ private goto_param ::= <<convertIdentifier LABEL>> | OPERATOR_BITWISE_AND <<conv
 
 
 private statement_modifier ::=
-    ( if_statement_modifier
+    if_statement_modifier
     | unless_statement_modifier
     | while_statement_modifier
     | until_statement_modifier
     | for_statement_modifier
     | foreach_statement_modifier
     | when_statement_modifier
-    ) !LEFT_BRACE
 
 if_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_IF expr {pin=2 name="Postfix if"}
 unless_statement_modifier ::=  [PACKAGE_CORE_IDENTIFIER]  RESERVED_UNLESS expr {pin=2 name="Postfix unless"}

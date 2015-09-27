@@ -155,27 +155,6 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	 **/
 	@Override
 	@Nullable
-	public PsiPerlForStatementModifier getForStatementModifier()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlForeachStatementModifier getForeachStatementModifier()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlIfStatementModifier getIfStatementModifier()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
 	public PsiPerlNoStatement getNoStatement()
 	{
 		return null;
@@ -191,34 +170,6 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	@Override
 	@Nullable
 	public PsiPerlSubDeclaration getSubDeclaration()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlUnlessStatementModifier getUnlessStatementModifier()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlUntilStatementModifier getUntilStatementModifier()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlWhenStatementModifier getWhenStatementModifier()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlWhileStatementModifier getWhileStatementModifier()
 	{
 		return null;
 	}
