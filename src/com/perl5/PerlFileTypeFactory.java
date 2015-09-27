@@ -27,7 +27,7 @@ import com.perl5.lang.pod.PodFileType;
 import com.perl5.lang.xs.XSFileType;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlTypeFactory extends FileTypeFactory
+public class PerlFileTypeFactory extends FileTypeFactory
 {
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)

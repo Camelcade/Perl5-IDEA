@@ -29,6 +29,7 @@ public class PerlDefaultTemplatesProvider implements DefaultLiveTemplatesProvide
 	public static final String[] TEMPLATES = new String[]{
 			"liveTemplates/Perl5"
 			, "liveTemplates/Perl5Postfix"
+			, "liveTemplates/Perl5Test"
 	};//directs to liveTemplates/Perl5.xml template file
 
 	@Override

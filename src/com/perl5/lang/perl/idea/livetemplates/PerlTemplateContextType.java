@@ -24,6 +24,8 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileTypeTest;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import org.jetbrains.annotations.NotNull;
@@ -48,11 +50,14 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 			if (element == null)
 				element = psiFile.findElementAt(fileOffset - 1);
 
-			if (element instanceof PsiWhiteSpace || element instanceof PerlStringContentElement)
+			if (element == null)
+				return false;
+
+			if (element instanceof PsiWhiteSpace || element instanceof PerlStringContentElement || element.getNode().getElementType() == PerlElementTypes.REGEX_TOKEN)
 			{
 				return false;
 			}
-			return element != null && isInContext(element);
+			return isInContext(element);
 		}
 		return false;
 	}
@@ -105,6 +110,20 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 
 			return statement != null
 					&& statement.getTextOffset() == element.getTextOffset();
+		}
+	}
+
+	public static class TestFile extends PerlTemplateContextType
+	{
+		public TestFile()
+		{
+			super("PERL5_TEST_FILE", "Test file", Generic.class);
+		}
+
+		@Override
+		public boolean isInContext(PsiElement element)
+		{
+			return element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == PerlFileTypeTest.INSTANCE;
 		}
 	}
 

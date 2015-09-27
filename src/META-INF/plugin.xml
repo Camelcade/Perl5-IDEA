@@ -54,6 +54,7 @@
         <li>Implemented <code>use lib</code> support</li>
         <li>Implemented package names resolution in the current directory</li>
         <li>Added stacktrace and files paths hyperlinks in consoles (doesn't include terminal)</li>
+        <li>Implemented 'Create Perl5 Test' action and live templates for Test::More</li>
       </ul>
       </p>
 
@@ -170,7 +171,7 @@
         <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
 
-        <fileTypeFactory implementation="com.perl5.PerlTypeFactory"/>
+        <fileTypeFactory implementation="com.perl5.PerlFileTypeFactory"/>
 
         <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType" />
         <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer" />
@@ -244,6 +245,7 @@
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
+        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>
         <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
 
         <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
