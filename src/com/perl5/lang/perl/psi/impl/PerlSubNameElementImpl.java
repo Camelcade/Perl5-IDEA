@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
@@ -30,6 +29,7 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlNestedCall;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -41,6 +41,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNameElement
 {
+	protected final PsiReference[] myReferences = new PsiReference[]{new PerlSubReference(this, null)};
+
 	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
@@ -106,17 +108,13 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public PsiReference[] getReferences()
 	{
-		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+		return myReferences;
 	}
 
 	@Override
 	public PsiReference getReference()
 	{
-		PsiReference[] references = getReferences();
-		if (references.length > 0)
-			return references[0];
-
-		return null;
+		return myReferences[0];
 	}
 
 	@Override

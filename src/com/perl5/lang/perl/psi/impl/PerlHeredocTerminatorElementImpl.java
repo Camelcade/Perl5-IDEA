@@ -46,4 +46,10 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl
 	{
 		return myReferences;
 	}
+
+	@Override
+	public PsiReference getReference()
+	{
+		return myReferences[0];
+	}
 }

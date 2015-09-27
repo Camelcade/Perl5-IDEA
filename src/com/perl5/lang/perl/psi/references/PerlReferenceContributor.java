@@ -31,18 +31,6 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
 	{
 		registrar.registerReferenceProvider(
-				SUB_NAME_PATTERN,
-				new PsiReferenceProvider()
-				{
-					@NotNull
-					@Override
-					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-					{
-						return new PsiReference[]{new PerlSubReference(element, new TextRange(0, element.getTextLength()))};
-					}
-				}
-		);
-		registrar.registerReferenceProvider(
 				VARIABLE_NAME_PATTERN.withParent(VARIABLE_PATTERN),
 				new PsiReferenceProvider()
 				{

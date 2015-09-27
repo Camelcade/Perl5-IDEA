@@ -160,4 +160,10 @@ public class PerlSubReference extends PerlReferencePoly
 	{
 		FLAGS |= FLAG_IMPORTED;
 	}
+
+	@Override
+	public TextRange getRangeInElement()
+	{
+		return new TextRange(0, myElement.getTextLength());
+	}
 }
