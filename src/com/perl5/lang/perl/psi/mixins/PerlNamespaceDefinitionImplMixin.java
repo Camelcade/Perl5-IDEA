@@ -29,12 +29,10 @@ import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvid
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -83,20 +81,14 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		if (name.isEmpty())
-			throw new IncorrectOperationException("You can't set empty namespace");
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
-
 		if (namespaceElement != null)
 		{
-			PerlNamespaceElementImpl newName = PerlElementFactory.createPackageName(getProject(), name);
-			if (newName != null)
-			{
-				namespaceElement.replace(newName);
-			}
+			PerlPsiUtil.renameElement(namespaceElement, name);
 		}
 		return this;
 	}
+
 
 	@Override
 	public String getPackageName()

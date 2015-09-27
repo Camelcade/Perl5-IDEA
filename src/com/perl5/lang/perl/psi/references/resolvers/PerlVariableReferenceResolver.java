@@ -24,7 +24,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
+import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -39,13 +39,13 @@ import java.util.Set;
 /**
  * Created by hurricup on 27.09.2015.
  */
-public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantResolver<PerlVariableNameReference>
+public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantResolver<PerlVariableReference>
 {
 	@NotNull
 	@Override
-	public ResolveResult[] resolve(@NotNull PerlVariableNameReference perlVariableNameReference, boolean incompleteCode)
+	public ResolveResult[] resolve(@NotNull PerlVariableReference perlVariableReference, boolean incompleteCode)
 	{
-		PerlVariable myVariable = perlVariableNameReference.getVariable();
+		PerlVariable myVariable = perlVariableReference.getVariable();
 
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 

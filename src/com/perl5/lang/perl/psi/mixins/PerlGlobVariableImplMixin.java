@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -135,7 +136,13 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		return getVariableNameElement().setName(name);
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if (variableNameElement != null)
+		{
+			PerlPsiUtil.renameElement(variableNameElement, name);
+		}
+
+		return this;
 	}
 
 	@Override
@@ -179,4 +186,15 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 		PerlSubCompletionProviderUtil.removeFromLookupCache(getCanonicalName());
 		super.subtreeChanged();
 	}
+
+	@Override
+	public int getTextOffset()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+
+		return nameIdentifier == null
+				? super.getTextOffset()
+				: getNameIdentifier().getTextOffset();
+	}
+
 }

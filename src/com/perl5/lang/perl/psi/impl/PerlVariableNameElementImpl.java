@@ -17,23 +17,16 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.references.PerlGlobVariableNameReference;
-import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.references.PerlGlobVariableReference;
+import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -47,9 +40,9 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		protected PsiReference[] compute()
 		{
 			if (getParent() instanceof PerlGlobVariable)
-				return new PsiReference[]{new PerlGlobVariableNameReference(PerlVariableNameElementImpl.this, null)};
+				return new PsiReference[]{new PerlGlobVariableReference(PerlVariableNameElementImpl.this, null)};
 			else
-				return new PsiReference[]{new PerlVariableNameReference(PerlVariableNameElementImpl.this, null)};
+				return new PsiReference[]{new PerlVariableReference(PerlVariableNameElementImpl.this, null)};
 		}
 	};
 
@@ -65,29 +58,11 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		else super.accept(visitor);
 	}
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		PerlVariableNameElement newName = PerlElementFactory.createVariableName(getProject(), name);
-		if (newName != null)
-			replace(newName);
-		else
-			throw new IncorrectOperationException("Unable to create new variable name from: " + name);
-		return this;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return this;
-	}
-
 	@NotNull
 	@Override
 	public String getName()
 	{
-		return PerlPackageUtil.getCanonicalPackageName(this.getText());
+		return this.getText();
 	}
 
 	@NotNull
@@ -103,25 +78,4 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		return myReferences.getValue()[0];
 	}
 
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
-
-	@NotNull
-	@Override
-	public SearchScope getUseScope()
-	{
-		return getParent().getUseScope();
-//		return super.getUseScope();
-	}
-
-	@NotNull
-	@Override
-	public GlobalSearchScope getResolveScope()
-	{
-		return getParent().getResolveScope();
-//		return super.getResolveScope();
-	}
 }

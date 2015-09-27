@@ -17,15 +17,19 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulator;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -148,6 +152,37 @@ public class PerlPsiUtil
 		}
 
 		return null;
+	}
+
+	/**
+	 * Searching for manipulator by element
+	 *
+	 * @param element PsiElement to search manipulator for
+	 * @return manipulator
+	 */
+	@NotNull
+	public static ElementManipulator getManipulator(PsiElement element)
+	{
+		ElementManipulator manipulator = ElementManipulators.getManipulator(element);
+		if (manipulator == null)
+		{
+			throw new IncorrectOperationException("Unable to find manipulator for " + element);
+		}
+		return manipulator;
+	}
+
+
+	/**
+	 * Renaming PsiElement using manipulator
+	 *
+	 * @param element PsiElement to rename
+	 * @param newName newName
+	 * @return manipulator return value
+	 */
+	public static PsiElement renameElement(PsiElement element, String newName)
+	{
+		//noinspection unchecked
+		return PerlPsiUtil.getManipulator(element).handleContentChange(element, newName);
 	}
 
 }

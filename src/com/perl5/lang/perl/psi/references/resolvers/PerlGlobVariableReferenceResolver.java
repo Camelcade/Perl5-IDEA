@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.references.PerlGlobVariableNameReference;
+import com.perl5.lang.perl.psi.references.PerlGlobVariableReference;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,15 +31,15 @@ import java.util.List;
 /**
  * Created by hurricup on 27.09.2015.
  */
-public class PerlGlobVariableReferenceResolver implements ResolveCache.PolyVariantResolver<PerlGlobVariableNameReference>
+public class PerlGlobVariableReferenceResolver implements ResolveCache.PolyVariantResolver<PerlGlobVariableReference>
 {
 	@NotNull
 	@Override
-	public ResolveResult[] resolve(@NotNull PerlGlobVariableNameReference perlGlobVariableNameReference, boolean incompleteCode)
+	public ResolveResult[] resolve(@NotNull PerlGlobVariableReference perlGlobVariableReference, boolean incompleteCode)
 	{
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		PerlGlobVariable myVariable = perlGlobVariableNameReference.getVariable();
+		PerlGlobVariable myVariable = perlGlobVariableReference.getVariable();
 		String canonicalName = myVariable.getCanonicalName();
 		Project project = myVariable.getProject();
 

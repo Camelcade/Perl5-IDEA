@@ -53,12 +53,6 @@ public class PerlNamespaceReference extends PsiReferenceBase<PsiElement> impleme
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
-	@Override
-	public TextRange getRangeInElement()
-	{
-		return PerlPackageUtil.getPackageRangeFromOffset(0, myElement.getText());
-	}
-
 	public String getCanonicalName()
 	{
 		return PerlPackageUtil.getCanonicalPackageName(myElement.getText());

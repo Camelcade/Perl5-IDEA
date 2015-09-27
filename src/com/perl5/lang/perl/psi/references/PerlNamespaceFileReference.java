@@ -102,10 +102,4 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 		}
 		throw new IncorrectOperationException("Unable to rebind package use/require to a non-pm file " + newFile.getName());
 	}
-
-	@Override
-	public TextRange getRangeInElement()
-	{
-		return PerlPackageUtil.getPackageRangeFromOffset(0, myElement.getText());
-	}
 }

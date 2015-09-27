@@ -18,31 +18,39 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import com.perl5.lang.perl.psi.references.resolvers.PerlGlobVariableReferenceResolver;
+import com.perl5.lang.perl.psi.references.resolvers.PerlVariableReferenceResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 05.06.2015.
+ * Created by hurricup on 27.05.2015.
  */
-public class PerlGlobVariableNameReference extends PerlReferencePoly
+public class PerlVariableReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference
 {
-	protected static final ResolveCache.PolyVariantResolver<PerlGlobVariableNameReference> RESOLVER = new PerlGlobVariableReferenceResolver();
-	PerlGlobVariable myVariable;
+	protected static final ResolveCache.PolyVariantResolver<PerlVariableReference> RESOLVER = new PerlVariableReferenceResolver();
 
-	public PerlGlobVariableNameReference(@NotNull PsiElement element, TextRange textRange)
+	private PerlVariable myVariable;
+
+	public PerlVariableReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		PsiElement parent = element.getParent();
-		assert parent instanceof PerlGlobVariable;
-		myVariable = (PerlGlobVariable) parent;
+		assert element instanceof PerlVariableNameElement;
+
+		if (element.getParent() instanceof PerlVariable)
+			myVariable = (PerlVariable) element.getParent();
+		else
+			throw new RuntimeException("Can't be: got myVariable name without a myVariable");
+
 	}
 
-	public PerlGlobVariable getVariable()
+	public PerlVariable getVariable()
 	{
 		return myVariable;
 	}
@@ -57,7 +65,7 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
-		if (element instanceof PerlGlobVariable)
+		if (element instanceof PerlVariable || element instanceof PerlGlobVariable)
 			return super.isReferenceTo(element);
 		else if (element instanceof PerlVariableNameElement)
 			return isReferenceTo(element.getParent());
@@ -70,27 +78,31 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
-
-		// got nothing
 		if (resolveResults.length == 0)
 			return null;
+		else if (resolveResults.length == 1)
+			return resolveResults[0].getElement();
 
-		// first left-side of assignment element
-		for (ResolveResult result : resolveResults)
-		{
-			PsiElement element = result.getElement();
-			if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).isLeftSideOfAssignment())
-				return element;
-		}
 
-		// any element
+		PerlGlobVariable lastGlob = null;
+		for (ResolveResult resolveResult : resolveResults)
+			if (resolveResult.getElement() instanceof PerlGlobVariable)
+			{
+				lastGlob = (PerlGlobVariable) resolveResult.getElement();
+				if (lastGlob.isLeftSideOfAssignment())
+					return lastGlob;
+			}
+
+		if (lastGlob != null)
+			return lastGlob;
+
 		return resolveResults[0].getElement();
 	}
 
+	@NotNull
 	@Override
-	public TextRange getRangeInElement()
+	public Object[] getVariants()
 	{
-		return new TextRange(0, myElement.getTextLength());
+		return new Object[0];
 	}
-
 }

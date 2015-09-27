@@ -37,6 +37,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
@@ -305,7 +306,9 @@ public abstract class PerlVariableImplMixin extends StubBasedPsiElementBase<Perl
 	{
 		PerlVariableNameElement variableNameElement = getVariableNameElement();
 		if (variableNameElement != null)
-			variableNameElement.setName(name);
+		{
+			PerlPsiUtil.renameElement(variableNameElement, name);
+		}
 
 		return this;
 	}
