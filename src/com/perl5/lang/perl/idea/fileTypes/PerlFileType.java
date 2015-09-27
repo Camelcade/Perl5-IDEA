@@ -14,48 +14,56 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl;
+package com.perl5.lang.perl.idea.fileTypes;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
 /**
- * Created by hurricup on 21.04.2015.
+ * Created by hurricup on 26.04.2015.
  */
-public class PerlFileTypePackage extends PerlFileType
+public class PerlFileType extends LanguageFileType
 {
-	public static final PerlFileTypePackage INSTANCE = new PerlFileTypePackage();
+
+	public static final PerlFileType INSTANCE = new PerlFileType();
 	public static final Language LANGUAGE = INSTANCE.getLanguage();
+
+	public PerlFileType()
+	{
+		super(PerlLanguage.INSTANCE);
+	}
 
 	@NotNull
 	@Override
 	public String getName()
 	{
-		return "Perl5 package";
+		return "Perl5 script";
 	}
 
 	@NotNull
 	@Override
 	public String getDescription()
 	{
-		return "Perl5 package";
+		return "Perl5 script file";
 	}
 
 	@NotNull
 	@Override
 	public String getDefaultExtension()
 	{
-		return "pm";
+		return "pl";
 	}
 
 	@Nullable
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.PM_FILE;
+		return PerlIcons.SCRIPT_FILE;
 	}
 }

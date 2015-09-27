@@ -28,15 +28,16 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.*;
-import com.perl5.lang.perl.PerlFileType;
+import com.intellij.ui.CollectionComboBoxModel;
+import com.intellij.ui.DocumentAdapter;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * @author VISTALL

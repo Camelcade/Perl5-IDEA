@@ -21,10 +21,8 @@ import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.RunConfigurationProducer;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.PerlFileType;
-import org.apache.commons.lang.StringUtils;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileType;
 import org.jetbrains.annotations.Nullable;
 
 /**

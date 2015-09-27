@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl;
+package com.perl5.lang.perl.idea.fileTypes;
 
 import com.intellij.lang.Language;
 import com.perl5.PerlIcons;
@@ -56,7 +56,7 @@ public class PerlFileTypeTest extends PerlFileType
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.SCRIPT_FILE;
+		return PerlIcons.TEST_FILE;
 	}
 
 }

@@ -130,6 +130,7 @@
         <internalFileTemplate name="Perl5 script"/>
         <internalFileTemplate name="Perl5 embedded"/>
         <internalFileTemplate name="Perl5 mojolicious"/>
+        <internalFileTemplate name="Perl5 test"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.settings.Perl5Settings"/>
 
@@ -459,6 +460,11 @@
                     class="com.perl5.lang.perl.idea.actions.CreateMojoliciousTemplateAction"
                     text="Mojolicious Template File" description="Create Mojolicious Template File">
             </action>
+
+            <action id="Perl5.NewPerlTest" class="com.perl5.lang.perl.idea.actions.CreatePerlTestFileAction"
+                    text="Perl5 Test" description="Create Perl5 Test">
+            </action>
+
 
             <separator/>
 
