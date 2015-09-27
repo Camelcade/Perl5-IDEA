@@ -40,13 +40,13 @@ import java.util.Set;
 
 public class PerlSubReference extends PerlReferencePoly
 {
-	// fixme make this with Mask
-	protected boolean myIsAutoLoaded = false;
-	protected boolean myIsConstant = false;
-	protected boolean myIsDeclared = false;
-	protected boolean myIsDefined = false;
-	protected boolean myIsAliased = false;
-	protected boolean myIsImported = false;
+	protected static final int FLAG_AUTOLOADED = 1;
+	protected static final int FLAG_CONSTANT = 2;
+	protected static final int FLAG_DECLARED = 4;
+	protected static final int FLAG_DEFINED = 8;
+	protected static final int FLAG_ALIASED = 16;
+	protected static final int FLAG_IMPORTED = 32;    // fixme this is not set anyway
+	protected int FLAGS = 0;
 	PerlSubNameElement mySubNameElement;
 
 	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
@@ -152,24 +152,24 @@ public class PerlSubReference extends PerlReferencePoly
 
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		myIsAutoLoaded = myIsConstant = myIsAliased = myIsDeclared = myIsDefined = false;
+		FLAGS = 0;
 
 		for (PsiElement element : relatedItems)
 		{
-			if (!myIsAutoLoaded && element instanceof PerlNamedElement && "AUTOLOAD".equals(((PerlNamedElement) element).getName()))
-				myIsAutoLoaded = true;
+			if (!isAutoloaded() && element instanceof PerlNamedElement && "AUTOLOAD".equals(((PerlNamedElement) element).getName()))
+				FLAGS |= FLAG_AUTOLOADED;
 
-			if (!myIsConstant && element instanceof PerlConstant)
-				myIsConstant = true;
+			if (!isConstant() && element instanceof PerlConstant)
+				FLAGS |= FLAG_CONSTANT;
 
-			if (!myIsDeclared && element instanceof PerlSubDeclaration)
-				myIsDeclared = true;
+			if (!isDeclared() && element instanceof PerlSubDeclaration)
+				FLAGS |= FLAG_DECLARED;
 
-			if (!myIsDefined && element instanceof PerlSubDefinition)
-				myIsDefined = true;
+			if (!isDefined() && element instanceof PerlSubDefinition)
+				FLAGS |= FLAG_DEFINED;
 
-			if (!myIsAliased && element instanceof PerlGlobVariable)
-				myIsAliased = true;
+			if (!isAliased() && element instanceof PerlGlobVariable)
+				FLAGS |= FLAG_ALIASED;
 
 			result.add(new PsiElementResolveResult(element));
 		}
@@ -237,31 +237,31 @@ public class PerlSubReference extends PerlReferencePoly
 
 	public boolean isAutoloaded()
 	{
-		return myIsAutoLoaded;
+		return (FLAGS & FLAG_AUTOLOADED) > 0;
 	}
 
 	public boolean isDefined()
 	{
-		return myIsDefined;
+		return (FLAGS & FLAG_DEFINED) > 0;
 	}
 
 	public boolean isDeclared()
 	{
-		return myIsDeclared;
+		return (FLAGS & FLAG_DECLARED) > 0;
 	}
 
 	public boolean isAliased()
 	{
-		return myIsAliased;
+		return (FLAGS & FLAG_ALIASED) > 0;
 	}
 
 	public boolean isConstant()
 	{
-		return myIsConstant;
+		return (FLAGS & FLAG_CONSTANT) > 0;
 	}
 
 	public boolean isImported()
 	{
-		return myIsImported;
+		return (FLAGS & FLAG_IMPORTED) > 0;
 	}
 }
