@@ -16,17 +16,20 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.references.PerlGlobVariableNameReference;
+import com.perl5.lang.perl.psi.references.PerlVariableNameReference;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -37,6 +40,19 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlVariableNameElement
 {
+	protected final AtomicNotNullLazyValue<PsiReference[]> myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+	{
+		@NotNull
+		@Override
+		protected PsiReference[] compute()
+		{
+			if (getParent() instanceof PerlGlobVariable)
+				return new PsiReference[]{new PerlGlobVariableNameReference(PerlVariableNameElementImpl.this, null)};
+			else
+				return new PsiReference[]{new PerlVariableNameReference(PerlVariableNameElementImpl.this, null)};
+		}
+	};
+
 	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
@@ -78,7 +94,13 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 	@Override
 	public PsiReference[] getReferences()
 	{
-		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+		return myReferences.getValue();
+	}
+
+	@Override
+	public PsiReference getReference()
+	{
+		return myReferences.getValue()[0];
 	}
 
 	@Override

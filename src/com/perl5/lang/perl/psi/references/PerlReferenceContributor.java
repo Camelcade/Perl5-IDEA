@@ -20,7 +20,9 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
+import com.perl5.lang.perl.psi.PsiPerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -30,38 +32,6 @@ public class PerlReferenceContributor extends PsiReferenceContributor implements
 	@Override
 	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
 	{
-		registrar.registerReferenceProvider(
-				VARIABLE_NAME_PATTERN.withParent(VARIABLE_PATTERN),
-				new PsiReferenceProvider()
-				{
-					@NotNull
-					@Override
-					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-					{
-						assert element instanceof PerlVariableNameElement;
-						assert !(element.getParent() instanceof PerlGlobVariable);
-
-						return new PsiReference[]{new PerlVariableNameReference(element, new TextRange(0, element.getTextLength()))};
-					}
-				}
-		);
-		registrar.registerReferenceProvider(
-				VARIABLE_NAME_PATTERN.withParent(GLOB_PATTERN),
-				new PsiReferenceProvider()
-				{
-					@NotNull
-					@Override
-					public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-					{
-						assert element instanceof PerlVariableNameElement;
-						// check if it's dereference
-						PsiElement parent = element.getParent();
-						assert parent instanceof PerlGlobVariable : "Got: " + parent.getClass() + " in " + parent.getText();
-
-						return new PsiReference[]{new PerlGlobVariableNameReference(element, new TextRange(0, element.getTextLength()))};
-					}
-				}
-		);
 		registrar.registerReferenceProvider(
 				NAMESPACE_NAME_PATTERN,
 				new PsiReferenceProvider()

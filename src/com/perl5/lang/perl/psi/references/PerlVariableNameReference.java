@@ -16,31 +16,23 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.references.resolvers.PerlVariableReferenceResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by hurricup on 27.05.2015.
  */
 public class PerlVariableNameReference extends PerlReferencePoly
 {
+	protected static final ResolveCache.PolyVariantResolver<PerlVariableNameReference> RESOLVER = new PerlVariableReferenceResolver();
 
 	private PerlVariable myVariable;
 
@@ -53,79 +45,19 @@ public class PerlVariableNameReference extends PerlReferencePoly
 			myVariable = (PerlVariable) element.getParent();
 		else
 			throw new RuntimeException("Can't be: got myVariable name without a myVariable");
+
+	}
+
+	public PerlVariable getVariable()
+	{
+		return myVariable;
 	}
 
 	@NotNull
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-
-		PsiElement variableContainer = myVariable.getParent();
-		PerlVariable lexicalDeclaration = null;
-
-		if (variableContainer instanceof PsiPerlVariableDeclarationLexical)
-			return new ResolveResult[0];
-		else if (!(variableContainer instanceof PsiPerlVariableDeclarationGlobal))
-			lexicalDeclaration = myVariable.getLexicalDeclaration();
-
-		if (lexicalDeclaration == null || lexicalDeclaration.getParent() instanceof PsiPerlVariableDeclarationGlobal)
-		{
-			// not found lexical declaration or our is closes to us
-
-			// imports
-			Map<String, Set<String>> importsMap = null;
-			PerlVariableType actualType = myVariable.getActualType();
-			Project project = myVariable.getProject();
-			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(myVariable, PerlNamespaceContainer.class);
-			assert namespaceContainer != null;
-			String packageName = namespaceContainer.getPackageName();
-
-			if (packageName != null)
-			{
-				PsiFile originalFile = myVariable.getContainingFile();
-				String variableName = myVariable.getName();
-
-				// fixme DRY this
-				if (actualType == PerlVariableType.SCALAR)
-				{
-					importsMap = PerlScalarUtil.getImportedScalars(project, packageName, originalFile);
-					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
-						for (String variable : importEntry.getValue())
-							if (variable.equals(variableName))
-								for (PerlVariable targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getKey() + "::" + variableName))
-									result.add(new PsiElementResolveResult(targetVariable));
-				} else if (actualType == PerlVariableType.ARRAY)
-				{
-					importsMap = PerlArrayUtil.getImportedArrays(project, packageName, originalFile);
-					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
-						for (String variable : importEntry.getValue())
-							if (variable.equals(variableName))
-								for (PerlVariable targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getKey() + "::" + variableName))
-									result.add(new PsiElementResolveResult(targetVariable));
-				} else if (actualType == PerlVariableType.HASH)
-				{
-					importsMap = PerlHashUtil.getImportedHashes(project, packageName, originalFile);
-					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
-						for (String variable : importEntry.getValue())
-							if (variable.equals(variableName))
-								for (PerlVariable targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getKey() + "::" + variableName))
-									result.add(new PsiElementResolveResult(targetVariable));
-				}
-
-			}
-
-			// our variable declaration
-			for (PerlGlobVariable glob : myVariable.getRelatedGlobs())
-				result.add(new PsiElementResolveResult(glob));
-
-			// globs
-			for (PerlVariable globalDeclaration : myVariable.getGlobalDeclarations())
-				result.add(new PsiElementResolveResult(globalDeclaration));
-		} else
-			result.add(new PsiElementResolveResult(lexicalDeclaration));
-
-		return result.toArray(new ResolveResult[result.size()]);
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
 	@Override
@@ -163,5 +95,11 @@ public class PerlVariableNameReference extends PerlReferencePoly
 			return lastGlob;
 
 		return resolveResults[0].getElement();
+	}
+
+	@Override
+	public TextRange getRangeInElement()
+	{
+		return new TextRange(0, myElement.getTextLength());
 	}
 }

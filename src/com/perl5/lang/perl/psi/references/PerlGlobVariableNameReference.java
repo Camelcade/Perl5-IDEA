@@ -16,25 +16,22 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.psi.references.resolvers.PerlGlobVariableReferenceResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hurricup on 05.06.2015.
  */
 public class PerlGlobVariableNameReference extends PerlReferencePoly
 {
+	protected static final ResolveCache.PolyVariantResolver<PerlGlobVariableNameReference> RESOLVER = new PerlGlobVariableReferenceResolver();
 	PerlGlobVariable myVariable;
 
 	public PerlGlobVariableNameReference(@NotNull PsiElement element, TextRange textRange)
@@ -45,21 +42,16 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 		myVariable = (PerlGlobVariable) parent;
 	}
 
+	public PerlGlobVariable getVariable()
+	{
+		return myVariable;
+	}
+
 	@NotNull
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-
-		String canonicalName = myVariable.getCanonicalName();
-		Project project = myVariable.getProject();
-
-		// resolve to other globs
-		for (PerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-			if (!glob.equals(myVariable))
-				result.add(new PsiElementResolveResult(glob));
-
-		return result.toArray(new ResolveResult[result.size()]);
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
 	@Override
@@ -94,4 +86,11 @@ public class PerlGlobVariableNameReference extends PerlReferencePoly
 		// any element
 		return resolveResults[0].getElement();
 	}
+
+	@Override
+	public TextRange getRangeInElement()
+	{
+		return new TextRange(0, myElement.getTextLength());
+	}
+
 }
