@@ -18,12 +18,9 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.references.resolvers.PerlGlobVariableReferenceResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlGlobVariableReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference
+public class PerlGlobVariableReference extends PerlPolyVariantReference
 {
 	protected static final ResolveCache.PolyVariantResolver<PerlGlobVariableReference> RESOLVER = new PerlGlobVariableReferenceResolver();
 	PerlGlobVariable myVariable;
@@ -56,17 +53,6 @@ public class PerlGlobVariableReference extends PsiReferenceBase<PsiElement> impl
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
-	@Override
-	public boolean isReferenceTo(PsiElement element)
-	{
-		if (element instanceof PerlGlobVariable)
-			return super.isReferenceTo(element);
-		else if (element instanceof PerlVariableNameElement)
-			return isReferenceTo(element.getParent());
-
-		return false;
-	}
-
 	@Nullable
 	@Override
 	public PsiElement resolve()
@@ -87,12 +73,5 @@ public class PerlGlobVariableReference extends PsiReferenceBase<PsiElement> impl
 
 		// any element
 		return resolveResults[0].getElement();
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
 	}
 }

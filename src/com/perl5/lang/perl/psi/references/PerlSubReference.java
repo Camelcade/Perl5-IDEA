@@ -20,15 +20,12 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlSubReference extends PerlReferencePoly
+public class PerlSubReference extends PerlPolyVariantReference
 {
 	protected static final int FLAG_AUTOLOADED = 1;
 	protected static final int FLAG_CONSTANT = 2;
@@ -50,25 +47,6 @@ public class PerlSubReference extends PerlReferencePoly
 	{
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
-
-	@Override
-	public boolean isReferenceTo(PsiElement element)
-	{
-		// fixme this is shit
-		if (element instanceof PerlGlobVariable || element instanceof PerlConstant || element instanceof PerlSubDeclaration || element instanceof PerlSubDefinition)
-			return super.isReferenceTo(element);
-
-		PsiElement parent = element.getParent();
-		if (parent instanceof PerlGlobVariable || parent instanceof PerlConstant || parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinition)
-			return isReferenceTo(parent);
-
-		PsiElement grandParent = parent.getParent();
-		if (grandParent instanceof PerlConstant)
-			return isReferenceTo(grandParent);
-
-		return false;
-	}
-
 
 	@Nullable
 	@Override
@@ -161,9 +139,4 @@ public class PerlSubReference extends PerlReferencePoly
 		FLAGS |= FLAG_IMPORTED;
 	}
 
-	@Override
-	public TextRange getRangeInElement()
-	{
-		return new TextRange(0, myElement.getTextLength());
-	}
 }

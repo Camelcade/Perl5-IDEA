@@ -18,19 +18,16 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.references.resolvers.PerlNamespaceDefinitionResolver;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference
+public class PerlNamespaceReference extends PerlPolyVariantReference
 {
 	protected static final ResolveCache.PolyVariantResolver<PerlNamespaceReference> RESOLVER = new PerlNamespaceDefinitionResolver();
 
@@ -39,11 +36,9 @@ public class PerlNamespaceReference extends PsiReferenceBase<PsiElement> impleme
 		super(element, textRange);
 	}
 
-	@NotNull
-	@Override
-	public Object[] getVariants()
+	public String getCanonicalName()
 	{
-		return new Object[0];
+		return PerlPackageUtil.getCanonicalPackageName(myElement.getText());
 	}
 
 	@NotNull
@@ -51,18 +46,5 @@ public class PerlNamespaceReference extends PsiReferenceBase<PsiElement> impleme
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
-	}
-
-	public String getCanonicalName()
-	{
-		return PerlPackageUtil.getCanonicalPackageName(myElement.getText());
-	}
-
-	@Nullable
-	@Override
-	public PsiElement resolve()
-	{
-		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
 	}
 }

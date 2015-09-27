@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.mojolicious.MojoliciousPerlFileImpl;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
 import com.perl5.lang.perl.psi.PerlMethod;
@@ -30,11 +29,9 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlNestedCall;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -56,18 +53,6 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	}
 
 	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		PerlSubNameElement newFunction = PerlElementFactory.createUserFunction(getProject(), name);
-		if (newFunction != null)
-			replace(newFunction);
-		else
-			throw new IncorrectOperationException("Unable to create function from: " + name);
-		return this;
-	}
-
-
-	@Override
 	public String getPackageName()
 	{
 		PsiElement parent = getParent();
@@ -85,23 +70,11 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		return getPackageName() + "::" + getName();
 	}
 
-	@Nullable
 	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return this;
-	}
-
-	@Override
+	@NotNull
 	public String getName()
 	{
 		return this.getText();
-	}
-
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
 	}
 
 	@NotNull

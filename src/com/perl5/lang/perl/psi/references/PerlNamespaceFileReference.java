@@ -22,7 +22,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.psi.impl.source.resolve.reference.impl.providers.PsiFileReference;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.references.resolvers.PerlNamespaceFileResolver;
@@ -34,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceFileReference extends PerlReferencePoly implements PsiFileReference
+public class PerlNamespaceFileReference extends PerlPolyVariantReference
 {
 	protected static final ResolveCache.PolyVariantResolver<PerlNamespaceFileReference> RESOLVER = new PerlNamespaceFileResolver();
 
@@ -46,13 +45,6 @@ public class PerlNamespaceFileReference extends PerlReferencePoly implements Psi
 	public String getPackageName()
 	{
 		return ((PerlNamespaceElement) myElement).getCanonicalName();
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
 	}
 
 	@NotNull

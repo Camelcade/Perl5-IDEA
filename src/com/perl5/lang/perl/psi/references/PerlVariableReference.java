@@ -18,8 +18,6 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
@@ -32,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public class PerlVariableReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference
+public class PerlVariableReference extends PerlPolyVariantReference
 {
 	protected static final ResolveCache.PolyVariantResolver<PerlVariableReference> RESOLVER = new PerlVariableReferenceResolver();
 
@@ -59,18 +57,7 @@ public class PerlVariableReference extends PsiReferenceBase<PsiElement> implemen
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
-	}
-
-	@Override
-	public boolean isReferenceTo(PsiElement element)
-	{
-		if (element instanceof PerlVariable || element instanceof PerlGlobVariable)
-			return super.isReferenceTo(element);
-		else if (element instanceof PerlVariableNameElement)
-			return isReferenceTo(element.getParent());
-
-		return false;
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
 	}
 
 	@Nullable
@@ -99,10 +86,4 @@ public class PerlVariableReference extends PsiReferenceBase<PsiElement> implemen
 		return resolveResults[0].getElement();
 	}
 
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
-	}
 }

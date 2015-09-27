@@ -14,28 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.references;
+package com.perl5.lang.perl.idea.manipulators;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReferenceBase;
+import com.intellij.psi.AbstractElementManipulator;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 24.05.2015.
+ * Created by hurricup on 27.09.2015.
  */
-public abstract class PerlReference extends PsiReferenceBase<PsiElement>
+public class PerlSubNameManipulator extends AbstractElementManipulator<PerlSubNameElement>
 {
-	public PerlReference(@NotNull PsiElement element, TextRange textRange)
-	{
-		super(element, textRange);
-	}
-
-	@NotNull
 	@Override
-	public Object[] getVariants()
+	public PerlSubNameElement handleContentChange(@NotNull PerlSubNameElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
-		return new Object[0];
+		return (PerlSubNameElement) ((LeafPsiElement) element).replaceWithText(newContent);
 	}
 
 }

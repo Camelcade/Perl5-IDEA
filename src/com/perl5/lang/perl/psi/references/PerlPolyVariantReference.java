@@ -27,9 +27,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlReferencePoly extends PerlReference implements PsiPolyVariantReference
+public abstract class PerlPolyVariantReference extends PerlReference implements PsiPolyVariantReference
 {
-	public PerlReferencePoly(@NotNull PsiElement element, TextRange textRange)
+	public PerlPolyVariantReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 	}

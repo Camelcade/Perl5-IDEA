@@ -26,6 +26,7 @@ import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlReturnType;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -75,7 +76,10 @@ public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends Stu
 	{
 		PerlSubNameElement subNameElement = getSubNameElement();
 		if (subNameElement != null)
-			subNameElement.setName(name);
+		{
+			PerlPsiUtil.renameElement(subNameElement, name);
+		}
+
 		return this;
 	}
 

@@ -16,12 +16,13 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubNameElement extends PerlNamedElement
+public interface PerlSubNameElement extends PsiElement
 {
 	/**
 	 * Trying to get the package name from explicit specification or by traversing
@@ -46,4 +47,11 @@ public interface PerlSubNameElement extends PerlNamedElement
 	public boolean isBuiltIn();
 
 
+	/**
+	 * Returns sub name
+	 *
+	 * @return sub name
+	 */
+	@NotNull
+	public String getName();
 }

@@ -201,7 +201,6 @@
         <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.utils.PerlASTFactory"
                           order="first"/>
 
-        <psi.referenceContributor implementation="com.perl5.lang.perl.psi.references.PerlReferenceContributor"/>
         <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
         <lang.refactoringSupport language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
@@ -235,6 +234,12 @@
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlVariableNameElement" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlVariableNameManipulator"/>
+
+        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlSubNameElement" order="first"
+                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlSubNameManipulator"/>
+
+        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlHeredocTerminatorElement" order="first"
+                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
 
         <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
 

@@ -19,15 +19,12 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlHeredocReference extends PsiReferenceBase<PsiElement>
+public class PerlHeredocReference extends PerlReference
 {
 	private static final ResolveCache.Resolver RESOLVER = new ResolveCache.Resolver()
 	{
@@ -57,25 +54,4 @@ public class PerlHeredocReference extends PsiReferenceBase<PsiElement>
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		if (newElementName.equals(""))
-			throw new IncorrectOperationException("You can't set heredoc terminator to the empty one");
-
-		return myElement.replace(PerlElementFactory.createHereDocTerminator(myElement.getProject(), newElementName));
-	}
-
-	@Override
-	public TextRange getRangeInElement()
-	{
-		return new TextRange(0, myElement.getTextLength());
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
-	}
 }
