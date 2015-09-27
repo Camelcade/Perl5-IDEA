@@ -196,4 +196,15 @@ public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends Stu
 		PerlSubCompletionProviderUtil.removeFromLookupCache(getCanonicalName());
 		super.subtreeChanged();
 	}
+
+	@Override
+	public int getTextOffset()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+
+		return nameIdentifier == null
+				? super.getTextOffset()
+				: getNameIdentifier().getTextOffset();
+	}
+
 }
