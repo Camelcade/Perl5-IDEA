@@ -16,27 +16,17 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.perl5.lang.perl.psi.PerlConstant;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class PerlSubReference extends PerlReferencePoly
 {
@@ -46,157 +36,25 @@ public class PerlSubReference extends PerlReferencePoly
 	protected static final int FLAG_DEFINED = 8;
 	protected static final int FLAG_ALIASED = 16;
 	protected static final int FLAG_IMPORTED = 32;    // fixme this is not set anyway
+	private static final ResolveCache.PolyVariantResolver<PerlSubReference> RESOLVER = new PerlSubReferenceResolver();
 	protected int FLAGS = 0;
-	PerlSubNameElement mySubNameElement;
 
 	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		assert element instanceof PerlSubNameElement;
-		mySubNameElement = (PerlSubNameElement) element;
 	}
 
 	@NotNull
 	@Override
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
-		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
-
-		PsiElement parent = mySubNameElement.getParent();
-
-		String packageName = mySubNameElement.getPackageName();
-		String subName = mySubNameElement.getName();
-		Project project = mySubNameElement.getProject();
-
-		PerlNamespaceElement expliclitPackageElement = null;
-		if (parent instanceof PerlNamespaceElementContainer)
-			expliclitPackageElement = ((PerlNamespaceElementContainer) parent).getNamespaceElement();
-
-		if (subName != null)
-		{
-			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				relatedItems.addAll(PerlMroDfs.resolveSub(project, packageName, subName, false));
-			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				relatedItems.addAll(PerlMroDfs.resolveSub(project, ((PerlMethod) parent).getContextPackageName(), subName, true));
-			else    // static resolution
-			{
-				if (expliclitPackageElement == null && mySubNameElement.isBuiltIn())
-					return new ResolveResult[0];
-
-				PsiFile file = mySubNameElement.getContainingFile();
-
-//				if (file instanceof PerlFile)
-//					((PerlFile) file).getElementsResolveScope();
-
-//				System.err.println("Checking for " + subName);
-
-				// check indexes for defined subs
-				collectRelatedItems(
-						packageName + "::" + subName,
-						project,
-						parent,
-						relatedItems
-				);
-
-				if (expliclitPackageElement == null)
-				{
-					// check for imports to the current file
-					PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(myElement, PerlNamespaceContainer.class);
-
-					assert namespaceContainer != null;
-
-					for (Map.Entry<String, Set<String>> imports : namespaceContainer.getImportedSubsNames().entrySet())
-						for (String importedSubName : imports.getValue())
-							if (importedSubName.equals(subName))
-								collectRelatedItems(
-										imports.getKey() + "::" + subName,
-										project,
-										parent,
-										relatedItems
-								);
-				} else    // check imports to target namespace
-				{
-					String targetPackageName = expliclitPackageElement.getCanonicalName();
-					if (targetPackageName != null)
-					{
-						// fixme partially not DRY with previous block
-						for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
-							for (Map.Entry<String, Set<String>> imports : namespaceDefinition.getImportedSubsNames().entrySet())
-								for (String importedSubName : imports.getValue())
-									if (importedSubName.equals(subName))
-										collectRelatedItems(
-												imports.getKey() + "::" + subName,
-												project,
-												parent,
-												relatedItems
-										);
-					}
-				}
-
-				// check for autoload
-				if (relatedItems.size() == 0
-						&& !"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
-						&& !(
-						parent instanceof PerlSubDeclaration
-								|| parent instanceof PerlSubDefinition
-				))
-					collectRelatedItems(
-							packageName + "::AUTOLOAD",
-							project,
-							parent,
-							relatedItems
-					);
-			}
-		}
-
-
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-
-		FLAGS = 0;
-
-		for (PsiElement element : relatedItems)
-		{
-			if (!isAutoloaded() && element instanceof PerlNamedElement && "AUTOLOAD".equals(((PerlNamedElement) element).getName()))
-				FLAGS |= FLAG_AUTOLOADED;
-
-			if (!isConstant() && element instanceof PerlConstant)
-				FLAGS |= FLAG_CONSTANT;
-
-			if (!isDeclared() && element instanceof PerlSubDeclaration)
-				FLAGS |= FLAG_DECLARED;
-
-			if (!isDefined() && element instanceof PerlSubDefinition)
-				FLAGS |= FLAG_DEFINED;
-
-			if (!isAliased() && element instanceof PerlGlobVariable)
-				FLAGS |= FLAG_ALIASED;
-
-			result.add(new PsiElementResolveResult(element));
-		}
-
-		return result.toArray(new ResolveResult[result.size()]);
+		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
-
-	public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems)
-	{
-		for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-	}
-
 
 	@Override
 	public boolean isReferenceTo(PsiElement element)
 	{
+		// fixme this is shit
 		if (element instanceof PerlGlobVariable || element instanceof PerlConstant || element instanceof PerlSubDeclaration || element instanceof PerlSubDefinition)
 			return super.isReferenceTo(element);
 
@@ -263,5 +121,43 @@ public class PerlSubReference extends PerlReferencePoly
 	public boolean isImported()
 	{
 		return (FLAGS & FLAG_IMPORTED) > 0;
+	}
+
+	public void resetFlags()
+	{
+		FLAGS = 0;
+	}
+
+	public void setAutoloaded()
+	{
+		FLAGS |= FLAG_AUTOLOADED;
+	}
+
+	public void setDefined()
+	{
+
+		FLAGS |= FLAG_DEFINED;
+	}
+
+	public void setDeclared()
+	{
+
+		FLAGS |= FLAG_DECLARED;
+	}
+
+	public void setAliased()
+	{
+		FLAGS |= FLAG_ALIASED;
+	}
+
+	public void setConstant()
+	{
+
+		FLAGS |= FLAG_CONSTANT;
+	}
+
+	public void setImported()
+	{
+		FLAGS |= FLAG_IMPORTED;
 	}
 }
