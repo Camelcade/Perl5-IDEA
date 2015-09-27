@@ -83,6 +83,7 @@
         <li>Pod block now may starts with <code>=cut</code>.</li>
         <li>Fixed an error creating new file outside of the modules.</li>
         <li>Implemented distinction of array index from characters group in regexes.</li>
+        <li>Improved parser recovery before compound statements.</li>
       </ul>
       </p>
 
