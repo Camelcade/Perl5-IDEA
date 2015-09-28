@@ -19,10 +19,13 @@ package com.perl5.lang.perl.idea.run;
 import com.intellij.execution.Location;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.RunConfigurationProducer;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.fileTypes.PerlFileType;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileTypeTest;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -41,7 +44,7 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 	{
 		Location location = configurationContext.getLocation();
 		VirtualFile virtualFile = location == null ? null : location.getVirtualFile();
-		return virtualFile != null && virtualFile.getFileType() == PerlFileType.INSTANCE ? virtualFile : null;
+		return virtualFile != null && isExecutableFile(virtualFile) ? virtualFile : null;
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 	protected boolean setupConfigurationFromContext(PerlConfiguration runConfiguration, ConfigurationContext configurationContext, Ref ref)
 	{
 		VirtualFile perlFile = findPerlFile(configurationContext);
-		if(perlFile != null)
+		if (perlFile != null)
 		{
 			runConfiguration.setScriptPath(perlFile.getPath());
 			runConfiguration.setCharset(perlFile.getCharset().displayName());
@@ -63,5 +66,11 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 			return true;
 		}
 		return false;
+	}
+
+	public static boolean isExecutableFile(@NotNull VirtualFile virtualFile)
+	{
+		FileType fileType = virtualFile.getFileType();
+		return fileType == PerlFileType.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
 	}
 }

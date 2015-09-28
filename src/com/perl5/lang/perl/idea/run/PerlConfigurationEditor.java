@@ -25,6 +25,7 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -80,7 +81,14 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	protected JComponent createEditor()
 	{
 		myScriptField = new TextFieldWithBrowseButton();
-		myScriptField.addBrowseFolderListener("Select Perl Script", "Please select perl script file", myProject, FileChooserDescriptorFactory.createSingleFileDescriptor(PerlFileType.INSTANCE), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+		myScriptField.addBrowseFolderListener("Select Perl Script", "Please select perl script file", myProject, FileChooserDescriptorFactory.createSingleFileDescriptor().withFileFilter(new Condition<VirtualFile>()
+		{
+			@Override
+			public boolean value(VirtualFile virtualFile)
+			{
+				return PerlConfigurationProducer.isExecutableFile(virtualFile);
+			}
+		}), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
 
 		myCharsetBox = new ComboBox(new CollectionComboBoxModel(new ArrayList<String>(Charset.availableCharsets().keySet())));
 
