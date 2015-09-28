@@ -178,8 +178,8 @@
 
         <fileTypeFactory implementation="com.perl5.PerlFileTypeFactory"/>
 
-        <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType" />
-        <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer" />
+        <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType"/>
+        <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
         <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
         <lang.syntaxHighlighterFactory key="Perl5"
                                        implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
@@ -214,7 +214,7 @@
 
         <renameHandler
                 implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlStringNameIdentifierInplaceRenameHandler"
-                       order="first"/>
+                order="first"/>
 
         <gotoClassContributor
                 implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToNamespaceDefinitionContributor"/>
@@ -237,7 +237,7 @@
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator"/>
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlNamespaceElement" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator" />
+                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator"/>
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlVariableNameElement" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlVariableNameManipulator"/>

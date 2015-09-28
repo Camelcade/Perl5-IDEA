@@ -18,6 +18,9 @@ package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.search.LocalSearchScope;
+import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,7 +33,10 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 	@Override
 	public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
 	{
-		return false;
+		return element.getUseScope() instanceof LocalSearchScope
+				&& element instanceof PsiNameIdentifierOwner
+				&& !(((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlString)
+				;
 	}
 
 	@Override
