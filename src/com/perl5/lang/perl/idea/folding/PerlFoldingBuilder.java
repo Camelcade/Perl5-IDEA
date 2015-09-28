@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.folding;
 
+import com.intellij.codeInsight.folding.CodeFoldingSettings;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
@@ -276,14 +277,28 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	public boolean isCollapsedByDefault(@NotNull ASTNode node)
 	{
 		IElementType elementType = node.getElementType();
-		if (elementType == PerlElementTypes.COMMENT_BLOCK)
-			return true;
-		else if (elementType == PerlElementTypes.POD)
-			return true;
+		if (elementType == PerlElementTypes.POD)    // documentation comments
+			return CodeFoldingSettings.getInstance().COLLAPSE_DOC_COMMENTS;
+		else if (elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_EXPR)    // imports
+			return CodeFoldingSettings.getInstance().COLLAPSE_IMPORTS;
+		else if (elementType == PerlElementTypes.BLOCK)    // method bodies
+			return CodeFoldingSettings.getInstance().COLLAPSE_METHODS;
 		else if (elementType == PerlElementTypes.COMMENT_LINE)
-			return true;
-		else if (elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_EXPR)
-			return true;
+			return PerlFoldingSettings.getInstance().COLLAPSE_SEQUENTIONAL_COMMENTS;
+		else if (elementType == PerlElementTypes.COMMENT_BLOCK)
+			return PerlFoldingSettings.getInstance().COLLAPSE_BLOCK_COMMENTS;
+		else if (elementType == PerlElementTypes.CONSTANTS_BLOCK)
+			return PerlFoldingSettings.getInstance().COLLAPSE_CONSTANT_BLOCKS;
+		else if (elementType == PerlElementTypes.ANON_ARRAY)
+			return PerlFoldingSettings.getInstance().COLLAPSE_ANON_ARRAYS;
+		else if (elementType == PerlElementTypes.ANON_HASH)
+			return PerlFoldingSettings.getInstance().COLLAPSE_ANON_HASHES;
+		else if (elementType == PerlElementTypes.PARENTHESISED_EXPR)
+			return PerlFoldingSettings.getInstance().COLLAPSE_PARENTHESISED;
+		else if (elementType == PerlElementTypes.HEREDOC)
+			return PerlFoldingSettings.getInstance().COLLAPSE_HEREDOCS;
+		else if (elementType == PerlElementTypes.TEMPLATE_BLOCK_HTML)
+			return PerlFoldingSettings.getInstance().COLLAPSE_TEMPLATES;
 		else
 			return false;
 	}

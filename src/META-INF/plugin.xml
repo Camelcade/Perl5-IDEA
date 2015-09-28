@@ -55,6 +55,7 @@
         <li>Implemented package names resolution in the current directory</li>
         <li>Added stacktrace and files paths hyperlinks in consoles (doesn't include terminal)</li>
         <li>Implemented 'Create Perl5 Test' action and live templates for Test::More</li>
+        <li>Implemented Code Folding settings for Perl entities (Default settings: imports, doc comments and method bodies being used too).</li>
       </ul>
       </p>
 
@@ -135,6 +136,9 @@
         <internalFileTemplate name="Perl5 test"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.settings.Perl5Settings"/>
+        <applicationService serviceInterface="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"
+                            serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
+
 
         <lang.formatter language="Perl5"
                         implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
@@ -193,9 +197,12 @@
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorVariables"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorNamespaces"/>
 
+        <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlCodeFoldingOptionsProvider"/>
+
         <completion.contributor language="Perl5"
                                 implementationClass="com.perl5.lang.perl.idea.completion.PerlCompletionContributor"/>
-        <lang.foldingBuilder language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+        <lang.foldingBuilder language="Perl5"
+                             implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
         <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
         <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
         <lang.ast.factory language="Perl5" implementationClass="com.perl5.lang.perl.psi.utils.PerlASTFactory"
@@ -296,7 +303,7 @@
                            implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
 
         <lang.foldingBuilder language="Embedded Perl"
-                             implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+                             implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
         <lang.namesValidator language="Embedded Perl"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
@@ -322,7 +329,7 @@
                                 implementationClass="com.perl5.lang.mojolicious.idea.completion.MojoliciousCompletionContributor"/>
 
         <lang.foldingBuilder language="Mojolicious Perl"
-                             implementationClass="com.perl5.lang.perl.idea.PerlFoldingBuilder"/>
+                             implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
         <lang.namesValidator language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
