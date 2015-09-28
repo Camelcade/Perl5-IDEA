@@ -437,13 +437,12 @@ private if_compound_elsif ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_ELSIF condition
 unconditional_block ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_ELSE block {pin=2}
 
 conditional_block ::= condition_statement block {pin=1 name="Conditional block"}
-condition_statement ::= LEFT_PAREN condition_statement_expr RIGHT_PAREN {pin=1 recoverWhile=recover_to_block name="Condition"}
+condition_statement ::= LEFT_PAREN condition_statement_expr RIGHT_PAREN {pin=1 name="Condition"}
 
 conditional_block_while ::= condition_statement_while block {pin=1 name="Conditional block"}
-condition_statement_while ::= LEFT_PAREN [condition_statement_expr] RIGHT_PAREN {pin=1 recoverWhile=recover_to_block name="Condition"}
+condition_statement_while ::= LEFT_PAREN [condition_statement_expr] RIGHT_PAREN {pin=1 name="Condition"}
 private condition_statement_expr ::= expr {recoverWhile=recover_condition_statement_expr}
 private recover_condition_statement_expr ::= !(LEFT_BRACE|RIGHT_PAREN)
-private recover_to_block ::= !(LEFT_BRACE)
 
 given_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_GIVEN conditional_block  {pin=2}
 when_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_WHEN conditional_block  {pin=2}
