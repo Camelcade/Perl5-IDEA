@@ -20,11 +20,12 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl
+public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlHeredocTerminatorElement
 {
 	protected final PsiReference[] myReferences = new PsiReference[]{new PerlHeredocReference(this, null)};
 
