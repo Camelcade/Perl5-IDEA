@@ -21,7 +21,7 @@ import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
 import com.intellij.ide.util.treeView.smartTree.Filter;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.structureView.elements.PerlVariableStructureViewElement;
+import com.perl5.lang.perl.idea.structureView.elements.PerlVariableDeclarationStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,7 +35,7 @@ public class PerlVariableFilter implements Filter
 	@Override
 	public boolean isVisible(TreeElement treeElement)
 	{
-		return !(treeElement instanceof PerlVariableStructureViewElement);
+		return !(treeElement instanceof PerlVariableDeclarationStructureViewElement);
 	}
 
 	@Override
