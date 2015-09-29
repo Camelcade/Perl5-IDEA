@@ -16,22 +16,33 @@
 
 package com.perl5.lang.perl.idea.inspections;
 
+import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
 
 /**
- * Created by hurricup on 14.06.2015.
+ * Created by hurricup on 18.07.2015.
  */
-public class PerlVariableBuiltinRedeclarationInspection extends PerlVariableDeclarationInspection
+public class PerlVariableLexicalUnusedInspection extends PerlVariableDeclarationInspection
 {
+	@Override
 	public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper)
 	{
-		PerlVariable variable = variableDeclarationWrapper.getVariable();
-		PsiElement declarationContainer = variableDeclarationWrapper.getParent();
-		if (variable != null && variable.isBuiltIn() && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal))
-			registerProblem(holder, variable, "It's a very bad practice to declare built-in variable as our/my/state");
+		if (variableDeclarationWrapper.isLexicalDeclaration())
+		{
+			if (ReferencesSearch.search(variableDeclarationWrapper, variableDeclarationWrapper.getUseScope()).findFirst() == null)
+			{
+				PerlVariable variable = variableDeclarationWrapper.getVariable();
+				if (variable != null)
+				{
+					holder.registerProblem(
+							variable,
+							"Unused lexical variable:" + variable.getText(),
+							ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+				}
+			}
+		}
 	}
 }

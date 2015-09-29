@@ -54,14 +54,18 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 
 			if (variable instanceof PerlVariable)
 			{
-				PsiElement variableContainer = sourceElement.getParent().getParent();
-				PsiFile myFile = sourceElement.getContainingFile();
+				PsiElement variableContainer = variable.getParent();
 
-				if (myFile instanceof PerlFileImpl && (variableContainer instanceof PsiPerlVariableDeclarationLexical || variableContainer instanceof PsiPerlVariableDeclarationGlobal))
+				if (variableContainer instanceof PerlVariableDeclarationWrapper)
 				{
-					PerlVariableDeclarationWrapper shadowedVariable = ((PerlFileImpl) myFile).getLexicalDeclaration((PerlVariable) variable);
-					if (shadowedVariable != null && !result.contains(shadowedVariable))
-						result.add(shadowedVariable);
+					PsiFile myFile = sourceElement.getContainingFile();
+
+					if (myFile instanceof PerlFileImpl)
+					{
+						PerlVariableDeclarationWrapper shadowedVariable = ((PerlFileImpl) myFile).getLexicalDeclaration((PerlVariable) variable);
+						if (shadowedVariable != null && !result.contains(shadowedVariable))
+							result.add(shadowedVariable);
+					}
 				}
 			}
 		}

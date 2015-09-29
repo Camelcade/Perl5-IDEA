@@ -143,12 +143,25 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 	@Override
 	public SearchScope getUseScope()
 	{
-		PsiElement parent = getParent();
-
-		if (parent instanceof PsiPerlVariableDeclarationLexical || parent instanceof PsiPerlVariableDeclarationLocal)
+		if (isLexicalDeclaration())
+		{
 			return new LocalSearchScope(getVariable().getLexicalScope());
+		}
 
 		return super.getUseScope();
+	}
+
+	@Override
+	public boolean isLexicalDeclaration()
+	{
+		PsiElement parent = getParent();
+		return parent instanceof PsiPerlVariableDeclarationLexical || parent instanceof PsiPerlVariableDeclarationLocal;
+	}
+
+	@Override
+	public boolean isGlobalDeclaration()
+	{
+		return !isLexicalDeclaration();
 	}
 
 	@Override

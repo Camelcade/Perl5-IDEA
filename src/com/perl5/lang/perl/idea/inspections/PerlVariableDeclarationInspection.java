@@ -18,10 +18,10 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationWrapper;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -35,26 +35,13 @@ public abstract class PerlVariableDeclarationInspection extends PerlInspection
 		return new PerlVisitor()
 		{
 			@Override
-			public void visitVariableDeclarationLexical(@NotNull PsiPerlVariableDeclarationLexical o)
-			{
-				checkDeclaration(holder, o);
-			}
-
-			@Override
-			public void visitVariableDeclarationGlobal(@NotNull PsiPerlVariableDeclarationGlobal o)
+			public void visitVariableDeclarationWrapper(@NotNull PsiPerlVariableDeclarationWrapper o)
 			{
 				checkDeclaration(holder, o);
 			}
 		};
 	}
 
-	public <T extends PerlVariableDeclaration> void checkDeclaration(ProblemsHolder holder, T declaration)
-	{
-		checkVariables(holder, declaration.getArrayVariableList());
-		checkVariables(holder, declaration.getScalarVariableList());
-		checkVariables(holder, declaration.getHashVariableList());
-	}
-
-	public abstract <T extends PerlVariable> void checkVariables(ProblemsHolder holder, Collection<T> variableList);
+	public abstract void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper);
 
 }

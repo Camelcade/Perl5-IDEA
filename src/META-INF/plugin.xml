@@ -429,11 +429,11 @@
         <localInspection language="Perl5"
                          shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5"
                          enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedLexicalVariableInspection"/>
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableLexicalUnusedInspection"/>
         <localInspection language="Perl5"
                          shortName="UnusedGlobalVariable" displayName="Unused global variables" groupName="Perl5"
                          enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedGlobalVariableInspection"/>
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableGlobalUnusedInspection"/>
         <localInspection language="Perl5"
                          shortName="UnusedTypeGlob" displayName="Unused typeglob alias" groupName="Perl5"
                          enabledByDefault="true" level="WARNING"

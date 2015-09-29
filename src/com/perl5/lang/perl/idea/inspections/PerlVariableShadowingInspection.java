@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-
-import java.util.Collection;
+import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -28,9 +28,12 @@ import java.util.Collection;
 public class PerlVariableShadowingInspection extends PerlVariableDeclarationInspection
 {
 	@Override
-	public <T extends PerlVariable> void checkVariables(ProblemsHolder holder, Collection<T> variableList)
+	public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper)
 	{
-		for (PerlVariable variable : variableList)
+		PerlVariable variable = variableDeclarationWrapper.getVariable();
+		PsiElement declarationContainer = variableDeclarationWrapper.getParent();
+
+		if (variable != null && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal))
 		{
 			PerlVariableDeclarationWrapper lexicalDeclaration = variable.getLexicalDeclaration();
 			if (lexicalDeclaration != null)

@@ -20,8 +20,10 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -40,12 +42,7 @@ public class PerlVariableUnresolvableInspection extends PerlInspection
 			{
 				PsiElement parent = element.getParent();
 
-				boolean isGlobalDeclaration = parent instanceof PsiPerlVariableDeclarationGlobal
-						|| PsiTreeUtil.getParentOfType(parent, IPerlUseVars.class) != null;
-
-				boolean isLexicalDeclaration = parent instanceof PsiPerlVariableDeclarationLexical;
-
-				if (isGlobalDeclaration || isLexicalDeclaration || element.isBuiltIn())
+				if (parent instanceof PerlVariableDeclarationWrapper || element.isBuiltIn())
 					return;
 
 				PerlVariableNameElement variableNameElement = element.getVariableNameElement();
