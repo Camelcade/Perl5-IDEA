@@ -44,11 +44,12 @@ public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplac
 	@Override
 	protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file)
 	{
+
 		return
 				editor.getSettings().isVariableInplaceRenameEnabled()
 						&& element.getUseScope() instanceof LocalSearchScope
 						&& element instanceof PsiNameIdentifierOwner
-						&& element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE
+						&& element.getLanguage() == PerlLanguage.INSTANCE
 						&& ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlString
 				;
 	}

@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.004</version>
+    <version>1.005</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -308,6 +308,10 @@
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
+        <lang.psiStructureViewFactory language="Embedded Perl"
+                                      implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+
+
         <!--Temporary solution, better than nothing-->
         <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
 
@@ -336,6 +340,9 @@
         <quoteHandler fileType="Mojolicious Perl5 Template"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
+
+        <lang.psiStructureViewFactory language="Mojolicious Perl"
+                                      implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
 
         <!--Temporary solution, better than nothing-->
         <multiLangCommenter
