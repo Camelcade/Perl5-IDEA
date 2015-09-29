@@ -262,10 +262,11 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 				PsiElement assignExpression = arrayVariable.getParent();
 				PsiElement assignElement = arrayVariable;
 
-				if (assignExpression instanceof PsiPerlVariableDeclarationGlobal)    // proceed our @ARRAY =
+				if (assignExpression instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper) assignExpression).isGlobalDeclaration()) // proceed our @ARRAY =
 				{
-					assignElement = assignExpression;
-					assignExpression = assignExpression.getParent();
+					assignElement = assignExpression.getParent();
+					assignExpression = assignElement.getParent();
+
 				}
 
 				// checks for @ARRAY = ...
