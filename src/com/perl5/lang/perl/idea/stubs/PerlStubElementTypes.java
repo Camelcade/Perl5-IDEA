@@ -25,9 +25,7 @@ import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRequireExprElementType
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
-import com.perl5.lang.perl.idea.stubs.variables.types.PerlArrayStubElementType;
-import com.perl5.lang.perl.idea.stubs.variables.types.PerlHashStubElementType;
-import com.perl5.lang.perl.idea.stubs.variables.types.PerlScalarStubElementType;
+import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubElementType;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -48,9 +46,6 @@ public interface PerlStubElementTypes
 
 	IStubElementType PERL_GLOB = new PerlGlobStubElementType("*");
 
-	IStubElementType PERL_SCALAR = new PerlScalarStubElementType("$");
-	IStubElementType PERL_HASH = new PerlHashStubElementType("%");
-	IStubElementType PERL_ARRAY = new PerlArrayStubElementType("@");
-	IStubElementType PERL_ARRAY_INDEX = new PerlArrayStubElementType("$#");
+	IStubElementType PERL_VARIABLE_DECLARATION_WRAPPER = new PerlVariableStubElementType("VARIABLE_DECLARATION_WRAPPER");
 
 }

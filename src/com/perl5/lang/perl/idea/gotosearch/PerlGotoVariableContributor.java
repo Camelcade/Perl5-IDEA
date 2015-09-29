@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.gotosearch;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -60,7 +60,7 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor
 	@Override
 	public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems)
 	{
-		Collection<PerlVariable> result;
+		Collection<PerlVariableDeclarationWrapper> result;
 
 		if (name.startsWith("$"))
 			result = PerlScalarUtil.getGlobalScalarDefinitions(project, name.substring(1));

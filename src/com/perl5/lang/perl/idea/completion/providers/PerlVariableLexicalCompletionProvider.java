@@ -26,6 +26,7 @@ import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUt
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -35,25 +36,23 @@ import java.util.Collection;
  */
 public class PerlVariableLexicalCompletionProvider extends CompletionProvider<CompletionParameters>
 {
-	static void addScalarResults(@NotNull Collection<PerlVariable> declaredVariables, @NotNull CompletionResultSet resultSet)
+	static void addScalarResults(@NotNull Collection<PerlVariableDeclarationWrapper> declaredVariables, @NotNull CompletionResultSet resultSet)
 	{
-		for (PerlVariable variable : declaredVariables)
+		for (PerlVariableDeclarationWrapper variable : declaredVariables)
 		{
-			if (variable instanceof PsiPerlScalarVariable)
+			String variableName = variable.getName();
+			if (variableName != null)
 			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variableName != null && variableName.getName() != null)
-					resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(variableName.getName()));
-			} else if (variable instanceof PsiPerlArrayVariable)
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variableName != null && variableName.getName() != null)
-					resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(variableName.getName()));
-			} else if (variable instanceof PsiPerlHashVariable)
-			{
-				PerlVariableNameElement variableName = variable.getVariableNameElement();
-				if (variableName != null && variableName.getName() != null)
-					resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(variableName.getName()));
+				if (variable.getActualType() == PerlVariableType.SCALAR)
+				{
+					resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(variableName));
+				} else if (variable.getActualType() == PerlVariableType.ARRAY)
+				{
+					resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(variableName));
+				} else if (variable.getActualType() == PerlVariableType.HASH)
+				{
+					resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(variableName));
+				}
 			}
 		}
 
@@ -80,43 +79,53 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 
 		PsiFile perlFile = variableNameElement.getContainingFile();
 		assert perlFile instanceof PerlFileImpl;
-		Collection<PerlVariable> declaredVariables = ((PerlFileImpl) perlFile).getVisibleLexicalVariables(perlVariable);
+		Collection<PerlVariableDeclarationWrapper> declaredVariables = ((PerlFileImpl) perlFile).getVisibleLexicalVariables(perlVariable);
 
 		if (perlVariable instanceof PsiPerlScalarVariable)
 			addScalarResults(declaredVariables, resultSet);
 		else if (perlVariable instanceof PsiPerlArrayVariable)
 		{
-			for (PerlVariable variable : declaredVariables)
-				if (variable instanceof PsiPerlArrayVariable)
+			for (PerlVariableDeclarationWrapper variable : declaredVariables)
+			{
+				String variableName = variable.getName();
+				if (variableName != null)
 				{
-					PerlVariableNameElement variableName = variable.getVariableNameElement();
-					if (variableName != null && variableName.getName() != null)
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(variableName.getName()));
+					if (variable.getActualType() == PerlVariableType.ARRAY)
+					{
+						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(variableName));
 
-				} else if (variable instanceof PsiPerlHashVariable)
-				{
-					PerlVariableNameElement variableName = variable.getVariableNameElement();
-					if (variableName != null && variableName.getName() != null)
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(variableName.getName()));
+					} else if (variable.getActualType() == PerlVariableType.HASH)
+					{
+						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(variableName));
+					}
 				}
+			}
 		} else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 		{
-			for (PerlVariable variable : declaredVariables)
-				if (variable instanceof PsiPerlArrayVariable)
+			for (PerlVariableDeclarationWrapper variable : declaredVariables)
+			{
+				String variableName = variable.getName();
+				if (variableName != null)
 				{
-					PerlVariableNameElement variableName = variable.getVariableNameElement();
-					if (variableName != null && variableName.getName() != null)
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(variableName.getName()));
+					if (variable.getActualType() == PerlVariableType.ARRAY)
+					{
+						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(variableName));
+					}
 				}
+			}
 		} else if (perlVariable instanceof PsiPerlHashVariable)
 		{
-			for (PerlVariable variable : declaredVariables)
-				if (variable instanceof PsiPerlHashVariable)
+			for (PerlVariableDeclarationWrapper variable : declaredVariables)
+			{
+				String variableName = variable.getName();
+				if (variableName != null)
 				{
-					PerlVariableNameElement variableName = variable.getVariableNameElement();
-					if (variableName != null && variableName.getName() != null)
-						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(variableName.getName()));
+					if (variable.getActualType() == PerlVariableType.HASH)
+					{
+						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(variableName));
+					}
 				}
+			}
 		}
 	}
 

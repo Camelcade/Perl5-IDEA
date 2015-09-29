@@ -17,7 +17,10 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.*;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +29,7 @@ import java.util.List;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer, PerlNamedElement
+public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer
 {
 	/**
 	 * Returns declaration type if variable is in declaration
@@ -64,14 +67,14 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 	 *
 	 * @return declare variable or null
 	 */
-	PerlVariable getLexicalDeclaration();
+	PerlVariableDeclarationWrapper getLexicalDeclaration();
 
 	/**
 	 * Looking for global variable declarations sutable for current variable
 	 *
 	 * @return list of global declarations
 	 */
-	List<PerlVariable> getGlobalDeclarations();
+	List<PerlVariableDeclarationWrapper> getGlobalDeclarations();
 
 	/**
 	 * Looking for globs, sutable for current variable
@@ -87,5 +90,10 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 	 */
 	int getLineNumber();
 
-
+	/**
+	 * Returns variable name
+	 *
+	 * @return variable name or null
+	 */
+	String getName();
 }

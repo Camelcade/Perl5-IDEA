@@ -19,23 +19,27 @@ package com.perl5.lang.perl.idea.stubs.variables;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 
 /**
  * Created by hurricup on 30.05.2015.
  */
-public class PerlVariableStubImpl extends StubBase<PerlVariable> implements PerlVariableStub
+public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrapper> implements PerlVariableStub
 {
 	private final String myPackageName;
 	private final String myVariableName;
 	private final String myDeclaredType;
+	private final PerlVariableType myVariableType;
 
-	public PerlVariableStubImpl(StubElement parent, IStubElementType elementType, String myPackageName, String myVariableName, String myDeclaredType)
+	public PerlVariableStubImpl(StubElement parent, IStubElementType elementType, String myPackageName, String myVariableName, String myDeclaredType, PerlVariableType variableType)
 	{
 		super(parent, elementType);
 		this.myPackageName = myPackageName;
 		this.myVariableName = myVariableName;
 		this.myDeclaredType = myDeclaredType;
+		this.myVariableType = variableType;
 	}
 
 	@Override
@@ -54,5 +58,27 @@ public class PerlVariableStubImpl extends StubBase<PerlVariable> implements Perl
 	public String getDeclaredType()
 	{
 		return myDeclaredType;
+	}
+
+	@Override
+	public PerlVariableType getActualType()
+	{
+		return myVariableType;
+	}
+
+	@Override
+	public StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey()
+	{
+		if (myVariableType == PerlVariableType.ARRAY)
+		{
+			return PerlVariablesStubIndex.KEY_ARRAY;
+		} else if (myVariableType == PerlVariableType.SCALAR)
+		{
+			return PerlVariablesStubIndex.KEY_SCALAR;
+		} else if (myVariableType == PerlVariableType.HASH)
+		{
+			return PerlVariablesStubIndex.KEY_HASH;
+		}
+		throw new RuntimeException("Don't have key for " + myVariableType);
 	}
 }

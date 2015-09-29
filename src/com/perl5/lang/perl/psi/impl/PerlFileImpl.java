@@ -139,35 +139,31 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
 			List<PerlLexicalDeclaration> declaredVariables = new ArrayList<PerlLexicalDeclaration>();
 
-			Collection<PerlVariableDeclaration> declarations = PsiTreeUtil.findChildrenOfType(this, PerlVariableDeclaration.class);
+			Collection<PerlVariableDeclarationWrapper> declarationWrappers = PsiTreeUtil.findChildrenOfType(this, PerlVariableDeclarationWrapper.class);
 
-			for (PerlVariableDeclaration declaration : declarations)
+			for (PerlVariableDeclarationWrapper declarationWrapper : declarationWrappers)
 			{
+				PerlVariable variable = declarationWrapper.getVariable();
+				assert variable != null;
 				// lexically ok
-				PerlLexicalScope declarationScope = declaration.getLexicalScope();
-				assert declarationScope != null;
+				PerlLexicalScope variableScope = variable.getLexicalScope();
+				assert variableScope != null;
 
-				for (PsiElement var : declaration.getScalarVariableList())
+				PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration(declarationWrapper, variableScope);
+				if (variable instanceof PsiPerlScalarVariable)
 				{
-					assert var instanceof PerlVariable;
-					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
 					declaredScalars.add(variableDeclaration);
-					declaredVariables.add(variableDeclaration);
-				}
-				for (PsiElement var : declaration.getArrayVariableList())
+				} else if (variable instanceof PsiPerlArrayVariable)
 				{
-					assert var instanceof PerlVariable;
-					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
 					declaredArrays.add(variableDeclaration);
-					declaredVariables.add(variableDeclaration);
-				}
-				for (PsiElement var : declaration.getHashVariableList())
+				} else if (variable instanceof PsiPerlHashVariable)
 				{
-					assert var instanceof PerlVariable;
-					PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration((PerlVariable) var, declarationScope);
 					declaredHashes.add(variableDeclaration);
-					declaredVariables.add(variableDeclaration);
+				} else
+				{
+					throw new RuntimeException("Unknown variable declaration: " + variable);
 				}
+				declaredVariables.add(variableDeclaration);
 			}
 
 			this.declaredScalars = declaredScalars;
@@ -185,7 +181,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	 * @param currentVariable variable to search declaration for
 	 * @return variable in declaration term or null if there is no such one
 	 */
-	public PerlVariable getLexicalDeclaration(PerlVariable currentVariable)
+	public PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable currentVariable)
 	{
 		if (lexicalCacheInvalid)
 			rescanLexicalVariables();
@@ -223,9 +219,9 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		{
 			PerlLexicalDeclaration declaration = iterator.previous();
 			if (declaration.getTextOffset() < currentStatementOffset
-					&& currentVariableName.equals(declaration.getVariable().getName())
+					&& currentVariableName.equals(declaration.getDeclarationWrapper().getName())
 					&& PsiTreeUtil.isAncestor(declaration.getScope(), currentScope, false))
-				return declaration.getVariable();
+				return declaration.getDeclarationWrapper();
 		}
 
 		return null;
@@ -236,12 +232,12 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	 *
 	 * @return list of visible variables
 	 */
-	public Collection<PerlVariable> getVisibleLexicalVariables(PsiElement currentElement)
+	public Collection<PerlVariableDeclarationWrapper> getVisibleLexicalVariables(PsiElement currentElement)
 	{
 		if (lexicalCacheInvalid)
 			rescanLexicalVariables();
 
-		HashMap<String, PerlVariable> declarationsHash = new HashMap<String, PerlVariable>();
+		HashMap<String, PerlVariableDeclarationWrapper> declarationsHash = new HashMap<String, PerlVariableDeclarationWrapper>();
 
 		PerlLexicalScope currentScope = PsiTreeUtil.getParentOfType(currentElement, PerlLexicalScope.class);
 		assert currentScope != null;
@@ -260,11 +256,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			if (declaration.getTextOffset() < currentStatementOffset)
 			{
 				// todo actually, we should use variable as a key or canonical variable name WITHOUT package and possible braces
-				String variableName = declaration.getVariable().getText();
+				String variableName = declaration.getDeclarationWrapper().getName();
 
 				if (declarationsHash.get(variableName) == null
 						&& PsiTreeUtil.isAncestor(declaration.getScope(), currentScope, false))
-					declarationsHash.put(variableName, declaration.getVariable());
+					declarationsHash.put(variableName, declaration.getDeclarationWrapper());
 			}
 		}
 

@@ -17,18 +17,24 @@
 package com.perl5.lang.perl.idea.stubs.variables;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 30.05.2015.
  */
-public interface PerlVariableStub extends StubElement<PerlVariable>
+public interface PerlVariableStub extends StubElement<PerlVariableDeclarationWrapper>
 {
-	public String getPackageName();
+	String getPackageName();
 
-	public String getVariableName();
+	String getVariableName();
 
 	@Nullable
-	public String getDeclaredType();
+	String getDeclaredType();
+
+	PerlVariableType getActualType();
+
+	StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey();
 }

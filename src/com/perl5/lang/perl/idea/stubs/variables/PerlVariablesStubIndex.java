@@ -17,13 +17,18 @@
 package com.perl5.lang.perl.idea.stubs.variables;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 
 /**
  * Created by hurricup on 30.05.2015.
  */
-public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlVariable> implements PerlVariableStubIndexKeys
+public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlVariableDeclarationWrapper>
 {
+	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_SCALAR = StubIndexKey.createIndexKey("perl.global.scalar");
+	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
+	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
+
 	public static final int VERSION = 4;
 
 	@Override

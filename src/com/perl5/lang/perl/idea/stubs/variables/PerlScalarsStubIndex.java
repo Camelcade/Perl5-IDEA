@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.stubs.variables;
 
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -27,7 +27,7 @@ public class PerlScalarsStubIndex extends PerlVariablesStubIndex
 {
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlVariable> getKey()
+	public StubIndexKey<String, PerlVariableDeclarationWrapper> getKey()
 	{
 		return KEY_SCALAR;
 	}

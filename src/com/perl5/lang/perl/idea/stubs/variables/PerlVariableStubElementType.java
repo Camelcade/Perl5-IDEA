@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.variables.types;
+package com.perl5.lang.perl.idea.stubs.variables;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubImpl;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin;
 import com.perl5.lang.perl.psi.utils.PerlASTUtil;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -32,33 +31,31 @@ import java.io.IOException;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public abstract class PerlVariableStubElementType extends IStubElementType<PerlVariableStub, PerlVariable> implements PerlVariableStubIndexKeys, PerlElementTypes
+public class PerlVariableStubElementType extends IStubElementType<PerlVariableStub, PerlVariableDeclarationWrapper> implements PerlElementTypes
 {
 	public PerlVariableStubElementType(@NotNull String debugName)
 	{
 		super(debugName, PerlLanguage.INSTANCE);
 	}
 
-	protected abstract StubIndexKey getStubIndexKey();
-
 	@Override
-	public PerlVariableStub createStub(@NotNull PerlVariable psi, StubElement parentStub)
+	public PerlVariableStub createStub(@NotNull PerlVariableDeclarationWrapper psi, StubElement parentStub)
 	{
-		assert psi.getVariableNameElement() != null;
-		return new PerlVariableStubImpl(parentStub, this, psi.getPackageName(), psi.getVariableNameElement().getName(), psi.getDeclaredType());
+		return new PerlVariableStubImpl(parentStub, this, psi.getPackageName(), psi.getName(), psi.getDeclaredType(), psi.getActualType());
 	}
 
+	@Override
+	public PerlVariableDeclarationWrapper createPsi(@NotNull PerlVariableStub stub)
+	{
+		return new PerlVariableDeclarationWrapperMixin(stub, this);
+	}
 
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		if (node.getElementType() == ARRAY_INDEX_VARIABLE)
-			return false;
-
 		if (PerlASTUtil.getParentNodeOfType(node, VARIABLE_DECLARATION_GLOBAL) != null)    // our declaration
 			return true;
-		else if (PerlASTUtil.getParentNodeOfType(node, USE_VARS_STATEMENT) != null    // use vars declaration
-				)
+		else if (PerlASTUtil.getParentNodeOfType(node, USE_VARS_STATEMENT) != null)    // use vars declaration
 			return true;
 
 		return false;
@@ -80,6 +77,7 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 			dataStream.writeName(stub.getDeclaredType());
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getVariableName());
+		dataStream.writeByte(stub.getActualType().ordinal());
 	}
 
 	@NotNull
@@ -90,14 +88,14 @@ public abstract class PerlVariableStubElementType extends IStubElementType<PerlV
 		if (variableType.isEmpty())
 			variableType = null;
 
-		return new PerlVariableStubImpl(parentStub, this, dataStream.readName().toString(), dataStream.readName().toString(), variableType);
+		return new PerlVariableStubImpl(parentStub, this, dataStream.readName().toString(), dataStream.readName().toString(), variableType, PerlVariableType.values()[dataStream.readByte()]);
 	}
 
 	@Override
 	public void indexStub(@NotNull PerlVariableStub stub, @NotNull IndexSink sink)
 	{
 		String variableName = stub.getPackageName() + "::" + stub.getVariableName();
-		sink.occurrence(getStubIndexKey(), variableName);
-		sink.occurrence(getStubIndexKey(), "*" + stub.getPackageName());
+		sink.occurrence(stub.getIndexKey(), variableName);
+		sink.occurrence(stub.getIndexKey(), "*" + stub.getPackageName());
 	}
 }

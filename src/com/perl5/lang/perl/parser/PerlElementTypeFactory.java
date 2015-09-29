@@ -52,14 +52,8 @@ public class PerlElementTypeFactory
 			return PerlStubElementTypes.PERL_GLOB;
 		else if (name.equals("NAMESPACE_DEFINITION"))
 			return PerlStubElementTypes.PERL_NAMESPACE;
-		else if (name.equals("SCALAR_VARIABLE"))
-			return PerlStubElementTypes.PERL_SCALAR;
-		else if (name.equals("ARRAY_VARIABLE"))
-			return PerlStubElementTypes.PERL_ARRAY;
-		else if (name.equals("ARRAY_INDEX_VARIABLE"))
-			return PerlStubElementTypes.PERL_ARRAY_INDEX;
-		else if (name.equals("HASH_VARIABLE"))
-			return PerlStubElementTypes.PERL_HASH;
+		else if (name.equals("VARIABLE_DECLARATION_WRAPPER"))
+			return PerlStubElementTypes.PERL_VARIABLE_DECLARATION_WRAPPER;
 		else if (name.equals("CONSTANT_NAME"))
 			return PerlStubElementTypes.PERL_CONSTANT;
 

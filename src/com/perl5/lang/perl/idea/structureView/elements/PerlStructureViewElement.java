@@ -170,10 +170,10 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 				{
 					String canonicalName = importEntry.getKey() + "::" + variableName;
 
-					Collection<PerlVariable> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
+					Collection<PerlVariableDeclarationWrapper> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
 
-					for (PerlVariable variable : variables)
-						result.add(new PerlVariableStructureViewElement(variable).setImported());
+					for (PerlVariableDeclarationWrapper variable : variables)
+						result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
 
 					// globs
 					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
@@ -190,10 +190,10 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 				{
 					String canonicalName = importEntry.getKey() + "::" + variableName;
 
-					Collection<PerlVariable> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
+					Collection<PerlVariableDeclarationWrapper> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
 
-					for (PerlVariable variable : variables)
-						result.add(new PerlVariableStructureViewElement(variable).setImported());
+					for (PerlVariableDeclarationWrapper variable : variables)
+						result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
 
 					// globs
 					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
@@ -210,10 +210,10 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 				{
 					String canonicalName = importEntry.getKey() + "::" + variableName;
 
-					Collection<PerlVariable> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
+					Collection<PerlVariableDeclarationWrapper> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
 
-					for (PerlVariable variable : variables)
-						result.add(new PerlVariableStructureViewElement(variable).setImported());
+					for (PerlVariableDeclarationWrapper variable : variables)
+						result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
 
 					// globs
 					Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);

@@ -21,9 +21,9 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
+import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 
 import java.util.*;
@@ -60,10 +60,10 @@ public class PerlHashUtil implements PerlElementTypes
 	 * @param canonicalName canonical variable name package::name
 	 * @return Collection of found definitions
 	 */
-	public static Collection<PerlVariable> getGlobalHashDefinitions(Project project, String canonicalName)
+	public static Collection<PerlVariableDeclarationWrapper> getGlobalHashDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_HASH, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariable.class);
+		return StubIndex.getElements(PerlVariablesStubIndex.KEY_HASH, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariableDeclarationWrapper.class);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class PerlHashUtil implements PerlElementTypes
 	 */
 	public static Collection<String> getDefinedGlobalHashNames(Project project)
 	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlVariableStubIndexKeys.KEY_HASH, project);
+		return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_HASH, project);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class PerlHashUtil implements PerlElementTypes
 	 */
 	public static boolean processDefinedGlobalHashNames(Project project, Processor<String> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlVariableStubIndexKeys.KEY_HASH, project, processor);
+		return StubIndex.getInstance().processAllKeys(PerlVariablesStubIndex.KEY_HASH, project, processor);
 	}
 
 	/**

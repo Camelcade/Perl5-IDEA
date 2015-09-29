@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.variables;
+package com.perl5.lang.perl.idea.structureView.elements;
 
-import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 30.05.2015.
+ * Created by hurricup on 29.09.2015.
  */
-public class PerlHashesStubIndex extends PerlVariablesStubIndex
+public class PerlVariableDeclarationStructureViewElement extends PerlLeafStructureViewElement
 {
-	@NotNull
-	@Override
-	public StubIndexKey<String, PerlVariableDeclarationWrapper> getKey()
+	public PerlVariableDeclarationStructureViewElement(PerlVariableDeclarationWrapper element)
 	{
-		return KEY_HASH;
+		super(element);
 	}
+
 }

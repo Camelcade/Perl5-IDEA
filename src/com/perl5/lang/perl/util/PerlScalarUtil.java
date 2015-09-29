@@ -21,9 +21,9 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
+import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 
 import java.util.Collection;
@@ -54,10 +54,10 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 * @param canonicalName canonical variable name package::name
 	 * @return Collection of found definitions
 	 */
-	public static Collection<PerlVariable> getGlobalScalarDefinitions(Project project, String canonicalName)
+	public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_SCALAR, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariable.class);
+		return StubIndex.getElements(PerlVariablesStubIndex.KEY_SCALAR, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariableDeclarationWrapper.class);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 */
 	public static Collection<String> getDefinedGlobalScalarNames(Project project)
 	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlVariableStubIndexKeys.KEY_SCALAR, project);
+		return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_SCALAR, project);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 */
 	public static boolean processDefinedGlobalScalarNames(Project project, Processor<String> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlVariableStubIndexKeys.KEY_SCALAR, project, processor);
+		return StubIndex.getInstance().processAllKeys(PerlVariablesStubIndex.KEY_SCALAR, project, processor);
 	}
 
 	/**

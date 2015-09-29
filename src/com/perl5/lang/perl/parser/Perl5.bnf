@@ -350,8 +350,11 @@ limitations under the License.
 
     extends("array_array_slice|array_hash_slice|scalar_array_element|scalar_hash_element")=expr
 
+    stubClass("variable_declaration_wrapper")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
+    mixin("variable_declaration_wrapper")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin"
+    implements("variable_declaration_wrapper")="com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper"
+
     extends("array_index_variable|scalar_variable|array_variable|hash_variable|glob_variable")=expr
-    stubClass("scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
     mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
@@ -866,13 +869,14 @@ private local_variable_declaration_variation ::=
     LEFT_PAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * RIGHT_PAREN
     | local_variable_declaration_argument
 
-private local_variable_declaration_argument ::= immutable_expr | lexical_variable_definition_argument
+private local_variable_declaration_argument ::= immutable_expr | variable_declaration_argument
 
 private variable_declaration_variation ::=
-    LEFT_PAREN lexical_variable_definition_argument (comma + lexical_variable_definition_argument ) * comma* RIGHT_PAREN
-    | lexical_variable_definition_argument
+    LEFT_PAREN variable_declaration_argument (comma + variable_declaration_argument ) * comma* RIGHT_PAREN
+    | variable_declaration_argument
 
-private lexical_variable_definition_argument ::= lexical_variable | [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF
+private variable_declaration_argument ::= variable_declaration_wrapper | [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF
+variable_declaration_wrapper ::= lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 // most of the references created by \ operator, but some - don't

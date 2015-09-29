@@ -21,9 +21,9 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubIndexKeys;
+import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 
 import java.util.*;
@@ -58,10 +58,10 @@ public class PerlArrayUtil implements PerlElementTypes
 	 * @param canonicalName canonical variable name package::name
 	 * @return Collection of found definitions
 	 */
-	public static Collection<PerlVariable> getGlobalArrayDefinitions(Project project, String canonicalName)
+	public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project, String canonicalName)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlVariableStubIndexKeys.KEY_ARRAY, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariable.class);
+		return StubIndex.getElements(PerlVariablesStubIndex.KEY_ARRAY, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariableDeclarationWrapper.class);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	 */
 	public static Collection<String> getDefinedGlobalArrayNames(Project project)
 	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlVariableStubIndexKeys.KEY_ARRAY, project);
+		return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_ARRAY, project);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	 */
 	public static boolean processDefinedGlobalArrayNames(Project project, Processor<String> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlVariableStubIndexKeys.KEY_ARRAY, project, processor);
+		return StubIndex.getInstance().processAllKeys(PerlVariablesStubIndex.KEY_ARRAY, project, processor);
 	}
 
 	/**

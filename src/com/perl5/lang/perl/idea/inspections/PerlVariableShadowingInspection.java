@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 
 import java.util.Collection;
 
@@ -31,9 +32,9 @@ public class PerlVariableShadowingInspection extends PerlVariableDeclarationInsp
 	{
 		for (PerlVariable variable : variableList)
 		{
-			PerlVariable lexicalDeclaration = variable.getLexicalDeclaration();
+			PerlVariableDeclarationWrapper lexicalDeclaration = variable.getLexicalDeclaration();
 			if (lexicalDeclaration != null)
-				registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getLineNumber());
+				registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getVariable().getLineNumber());
 		}
 	}
 }

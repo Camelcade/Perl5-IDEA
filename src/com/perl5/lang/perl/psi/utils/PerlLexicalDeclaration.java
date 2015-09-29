@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 
 /**
@@ -25,20 +25,26 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
  */
 public class PerlLexicalDeclaration
 {
-	PerlVariable myVariable;
+	PerlVariableDeclarationWrapper myDeclarationWrapper;
 	int textOffset;
 	PerlLexicalScope myScope;
 
-	public PerlLexicalDeclaration(PerlVariable myVariable, PerlLexicalScope variableScope)
+	public PerlLexicalDeclaration(PerlVariableDeclarationWrapper declarationWrapper, PerlLexicalScope variableScope)
 	{
-		this.myVariable = myVariable;
-		textOffset = myVariable.getTextOffset();
+
+		myDeclarationWrapper = declarationWrapper;
+		textOffset = declarationWrapper.getTextOffset();
 		myScope = variableScope;
 	}
 
-	public PerlVariable getVariable()
+	public PerlVariableDeclarationWrapper getDeclarationWrapper()
 	{
-		return myVariable;
+		return myDeclarationWrapper;
+	}
+
+	public void setMyDeclarationWrapper(PerlVariableDeclarationWrapper myDeclarationWrapper)
+	{
+		this.myDeclarationWrapper = myDeclarationWrapper;
 	}
 
 	public int getTextOffset()
