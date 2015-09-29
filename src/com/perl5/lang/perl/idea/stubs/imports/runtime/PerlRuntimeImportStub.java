@@ -27,6 +27,7 @@ public interface PerlRuntimeImportStub extends StubElement<PerlDoExpr>
 {
 	/**
 	 * Returns imported file relative path or null if unrecognizable
+	 *
 	 * @return relative path
 	 */
 	@Nullable

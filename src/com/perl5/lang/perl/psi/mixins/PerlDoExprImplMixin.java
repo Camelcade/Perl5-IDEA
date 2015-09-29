@@ -45,14 +45,15 @@ public abstract class PerlDoExprImplMixin extends StubBasedPsiElementBase<PerlRu
 	public String getImportPath()
 	{
 		PerlRuntimeImportStub stub = getStub();
-		if( stub != null )
+		if (stub != null)
 			return stub.getImportPath();
 
 		return findImportPath();
 	}
 
 	@Nullable
-	protected String findImportPath(){
+	protected String findImportPath()
+	{
 		PsiElement lastChild = getLastChild();
 		if (lastChild instanceof PerlString)    // seems we've got require "...";
 			return ((PerlString) lastChild).getStringContent();

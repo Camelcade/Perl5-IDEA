@@ -39,6 +39,12 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 		super(PerlConfigurationType.getInstance().getConfigurationFactories()[0]);
 	}
 
+	public static boolean isExecutableFile(@NotNull VirtualFile virtualFile)
+	{
+		FileType fileType = virtualFile.getFileType();
+		return fileType == PerlFileType.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
+	}
+
 	@Nullable
 	public VirtualFile findPerlFile(ConfigurationContext configurationContext)
 	{
@@ -66,11 +72,5 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 			return true;
 		}
 		return false;
-	}
-
-	public static boolean isExecutableFile(@NotNull VirtualFile virtualFile)
-	{
-		FileType fileType = virtualFile.getFileType();
-		return fileType == PerlFileType.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
 	}
 }

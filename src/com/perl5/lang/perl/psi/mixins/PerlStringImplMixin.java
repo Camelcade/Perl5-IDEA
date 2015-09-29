@@ -63,7 +63,8 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 	{
 		PsiElement firstChild = getFirstChild();
 
-		if (firstChild instanceof PerlParsableStringWrapperlImpl) {
+		if (firstChild instanceof PerlParsableStringWrapperlImpl)
+		{
 			PsiElement realString = firstChild.getFirstChild();
 			assert realString instanceof PerlStringImplMixin;
 			return ((PerlStringImplMixin) realString).getOpenQuoteOffset();
@@ -84,7 +85,8 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 	{
 		PsiElement lastChild = getLastChild();
 
-		if (lastChild instanceof PerlParsableStringWrapperlImpl) {
+		if (lastChild instanceof PerlParsableStringWrapperlImpl)
+		{
 			PsiElement realString = lastChild.getFirstChild();
 			assert realString instanceof PerlStringImplMixin;
 			return ((PerlStringImplMixin) realString).getCloseQuoteOffset();

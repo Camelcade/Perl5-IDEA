@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.stubs.imports.runtime;
 
 import com.perl5.lang.perl.psi.PerlDoExpr;
-import com.perl5.lang.perl.psi.impl.PsiPerlDoExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlRequireExprImpl;
 import org.jetbrains.annotations.NotNull;
 

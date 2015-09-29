@@ -81,7 +81,8 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 
 		}
 		// string content to file jump fixme change to string
-		else if (sourceElement instanceof PerlStringContentElement && ((PerlStringContentElement) sourceElement).looksLikePath()) {
+		else if (sourceElement instanceof PerlStringContentElement && ((PerlStringContentElement) sourceElement).looksLikePath())
+		{
 			String tokenText = sourceElement.getText().replaceAll("\\\\", "/").replaceAll("/+", "/");
 			Project project = sourceElement.getProject();
 
@@ -89,9 +90,11 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 
 
 			for (String file : FilenameIndex.getAllFilenames(project))
-				if (file.contains(fileName)) {
+				if (file.contains(fileName))
+				{
 					// fixme somehow if includeDirectories is true - no files found
-					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
+					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project)))
+					{
 						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
 						if (canonicalPath != null)
 							if (canonicalPath.contains(tokenText + "."))    // higer priority
@@ -99,7 +102,8 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 							else if (canonicalPath.contains(tokenText))
 								result.add(fileItem);
 					}
-					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
+					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true))
+					{
 						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
 						if (canonicalPath != null)
 							if (canonicalPath.contains(tokenText))

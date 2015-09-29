@@ -33,53 +33,60 @@ import java.util.regex.Pattern;
  * You can create various consoles using the external tools or remote SSH external tools (under Settings > Tools).
  * The classic usage will be to create an local or ssh tool to tail your server logs,
  * then whenever an exception occurs - you can click on it to go to the specific line in the code.
- *
+ * <p/>
  * the logic works in a way that allows the remote server and you local code base to exists on different libraries (providing they both have the same project folder name).
  * example:
  * the file in your local project folder:  /home/user.folder/main.project/lib/ABC.pm
  * the file in your remote server folder: /usr/server/main.project/lib/ABC.pm
- *
+ * <p/>
  * since the project folder is named main.project, it will know to remove the prefix of the path and replace it with the correct one.
  */
-public class PerlConsoleFileLinkFilter implements Filter {
+public class PerlConsoleFileLinkFilter implements Filter
+{
 
-    private final Project project;
+	private final Project project;
 
-    public PerlConsoleFileLinkFilter(Project project) {
-        this.project = project;
-    }
+	public PerlConsoleFileLinkFilter(Project project)
+	{
+		this.project = project;
+	}
 
-    @Nullable
-    @Override
-    public Result applyFilter(String textLine, int endPoint) {
-        int startPoint = endPoint - textLine.length();
-        List<ResultItem> results = new ArrayList<ResultItem>();
-        match(results, textLine, startPoint);
+	@Nullable
+	@Override
+	public Result applyFilter(String textLine, int endPoint)
+	{
+		int startPoint = endPoint - textLine.length();
+		List<ResultItem> results = new ArrayList<ResultItem>();
+		match(results, textLine, startPoint);
 
-        return new Result(results);
-    }
+		return new Result(results);
+	}
 
-    private void match(List<ResultItem> results, String textLine, int startPoint) {
-        if (project != null) {
-            VirtualFile projectDir = project.getBaseDir();
-            String projectDirName = project.getBaseDir().getName();
+	private void match(List<ResultItem> results, String textLine, int startPoint)
+	{
+		if (project != null)
+		{
+			VirtualFile projectDir = project.getBaseDir();
+			String projectDirName = project.getBaseDir().getName();
 
-            String separator = "[\\\\/]";
-            Pattern pattern = Pattern.compile("([A-Za-z:]+)?" + separator + "+([\\w\\-.]+" + separator + ")+" + projectDirName + "(" + separator + "+([\\w\\-.]+" + separator + "+)*\\w([\\w\\-.])+)( line (\\d+))?");
-            Matcher matcher = pattern.matcher(textLine);
-            while (matcher.find()) {
-                int startIndex = matcher.start(0);
-                int endIndex = matcher.end(0);
-                String file = matcher.group(3);
-                int line = (matcher.group(7) != null) ? (Integer.valueOf(matcher.group(7)) - 1) : 0;
-                VirtualFile virtualFile = projectDir.findFileByRelativePath(file);
-                if(virtualFile != null){
-                results.add(new Result(
-                        startPoint + startIndex,
-                        startPoint + endIndex,
-                        new OpenFileHyperlinkInfo(project, virtualFile, line)));
-                }
-            }
-        }
-    }
+			String separator = "[\\\\/]";
+			Pattern pattern = Pattern.compile("([A-Za-z:]+)?" + separator + "+([\\w\\-.]+" + separator + ")+" + projectDirName + "(" + separator + "+([\\w\\-.]+" + separator + "+)*\\w([\\w\\-.])+)( line (\\d+))?");
+			Matcher matcher = pattern.matcher(textLine);
+			while (matcher.find())
+			{
+				int startIndex = matcher.start(0);
+				int endIndex = matcher.end(0);
+				String file = matcher.group(3);
+				int line = (matcher.group(7) != null) ? (Integer.valueOf(matcher.group(7)) - 1) : 0;
+				VirtualFile virtualFile = projectDir.findFileByRelativePath(file);
+				if (virtualFile != null)
+				{
+					results.add(new Result(
+							startPoint + startIndex,
+							startPoint + endIndex,
+							new OpenFileHyperlinkInfo(project, virtualFile, line)));
+				}
+			}
+		}
+	}
 }

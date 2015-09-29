@@ -1265,8 +1265,7 @@ public class PerlLexer extends PerlLexerGenerated
 					preparsedTokensList.getFirst().setTokenType(REGEX_QUOTE_OPEN_X);
 
 				isExtended = true;
-			}
-			else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
+			} else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
 			{
 				isEvaluated = true;
 				if (secondBlockOpener != null)

@@ -28,12 +28,10 @@ import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.ex.ProjectRoot;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Function;
@@ -83,23 +81,21 @@ public class PerlRunProfileState extends CommandLineState
 			if (moduleForFile == null)
 			{
 				Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
-				if(projectSdk != null)
+				if (projectSdk != null)
 				{
 					perlSdkPath = projectSdk.getHomePath();
 				}
-			}
-			else
+			} else
 			{
 				Sdk sdk = ModuleRootManager.getInstance(moduleForFile).getSdk();
 				if (sdk == null)
 				{
 					perlSdkPath = null;
-				}
-				else
+				} else
 				{
 					perlSdkPath = sdk.getHomePath();
 					List<VirtualFile> sourceRoots = ModuleRootManager.getInstance(moduleForFile).getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE);
-					if(!sourceRoots.isEmpty())
+					if (!sourceRoots.isEmpty())
 					{
 						includePaths = new ArrayList<String>(sourceRoots.size());
 						for (VirtualFile sourceRoot : sourceRoots)
@@ -109,8 +105,7 @@ public class PerlRunProfileState extends CommandLineState
 					}
 				}
 			}
-		}
-		else
+		} else
 		{
 			Perl5Settings perl5Settings = Perl5Settings.getInstance(project);
 			perlSdkPath = perl5Settings.perlPath;
@@ -125,14 +120,13 @@ public class PerlRunProfileState extends CommandLineState
 		}
 
 		String alternativeSdkPath = runProfile.getAlternativeSdkPath();
-		if(runProfile.isUseAlternativeSdk() && !StringUtil.isEmpty(alternativeSdkPath))
+		if (runProfile.isUseAlternativeSdk() && !StringUtil.isEmpty(alternativeSdkPath))
 		{
 			Sdk sdk = ProjectJdkTable.getInstance().findJdk(alternativeSdkPath);
-			if(sdk != null)
+			if (sdk != null)
 			{
 				perlSdkPath = sdk.getHomePath();
-			}
-			else
+			} else
 			{
 				perlSdkPath = alternativeSdkPath;
 			}
@@ -150,8 +144,7 @@ public class PerlRunProfileState extends CommandLineState
 			if (moduleForFile != null)
 			{
 				homePath = PathMacroUtil.getModuleDir(moduleForFile.getModuleFilePath());
-			}
-			else
+			} else
 			{
 				homePath = project.getBasePath();
 			}
@@ -180,13 +173,11 @@ public class PerlRunProfileState extends CommandLineState
 			try
 			{
 				charset = Charset.forName(charsetName);
-			}
-			catch (UnsupportedCharsetException e)
+			} catch (UnsupportedCharsetException e)
 			{
 				throw new ExecutionException("Unknown charset: " + charsetName);
 			}
-		}
-		else
+		} else
 		{
 			charset = scriptFile.getCharset();
 		}

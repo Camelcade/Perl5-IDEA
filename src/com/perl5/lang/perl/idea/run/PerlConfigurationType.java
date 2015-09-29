@@ -29,12 +29,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlConfigurationType extends ConfigurationTypeBase
 {
-	@NotNull
-	public static PerlConfigurationType getInstance()
-	{
-		return CONFIGURATION_TYPE_EP.findExtension(PerlConfigurationType.class);
-	}
-
 	public PerlConfigurationType()
 	{
 		super("#PerlConfigurationType", "Perl", "", PerlIcons.PERL_LANGUAGE);
@@ -47,5 +41,11 @@ public class PerlConfigurationType extends ConfigurationTypeBase
 				return new PerlConfiguration(project, this, "Unnamed");
 			}
 		});
+	}
+
+	@NotNull
+	public static PerlConfigurationType getInstance()
+	{
+		return CONFIGURATION_TYPE_EP.findExtension(PerlConfigurationType.class);
 	}
 }

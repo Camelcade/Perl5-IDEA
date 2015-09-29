@@ -201,11 +201,13 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return currentState;
 	}
 
-	public boolean isInterpolated() {
+	public boolean isInterpolated()
+	{
 		return isInterpolated;
 	}
 
-	public boolean setIsInterpolated(boolean newState) {
+	public boolean setIsInterpolated(boolean newState)
+	{
 		boolean currentState = isInterpolated();
 		isInterpolated = newState;
 		return currentState;
@@ -222,7 +224,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		isRegex = newState;
 		return currentState;
 	}
-
 
 
 }

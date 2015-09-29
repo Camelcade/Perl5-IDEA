@@ -36,7 +36,6 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -101,14 +100,14 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 		return StringUtils.isEmpty(SCRIPT_PATH) ? null : LocalFileSystem.getInstance().findFileByPath(SCRIPT_PATH);
 	}
 
-	public void setCharset(String charset)
-	{
-		CHARSET = charset;
-	}
-
 	public String getCharset()
 	{
 		return CHARSET;
+	}
+
+	public void setCharset(String charset)
+	{
+		CHARSET = charset;
 	}
 
 	public String getScriptPath()
@@ -121,14 +120,14 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 		SCRIPT_PATH = scriptPath;
 	}
 
-	public void setAlternativeSdkPath(String path)
-	{
-		this.ALTERNATIVE_SDK_PATH = path;
-	}
-
 	public String getAlternativeSdkPath()
 	{
 		return ALTERNATIVE_SDK_PATH;
+	}
+
+	public void setAlternativeSdkPath(String path)
+	{
+		this.ALTERNATIVE_SDK_PATH = path;
 	}
 
 	public boolean isUseAlternativeSdk()
@@ -141,12 +140,6 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 		this.USE_ALTERNATIVE_SDK = value;
 	}
 
-	@Override
-	public void setProgramParameters(@Nullable String s)
-	{
-		PROGRAM_PARAMETERS = s;
-	}
-
 	@Nullable
 	@Override
 	public String getProgramParameters()
@@ -155,9 +148,9 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	}
 
 	@Override
-	public void setWorkingDirectory(@Nullable String s)
+	public void setProgramParameters(@Nullable String s)
 	{
-		WORKING_DIRECTORY = s;
+		PROGRAM_PARAMETERS = s;
 	}
 
 	@Nullable
@@ -168,9 +161,9 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	}
 
 	@Override
-	public void setEnvs(@NotNull Map<String, String> map)
+	public void setWorkingDirectory(@Nullable String s)
 	{
-		ENV = map;
+		WORKING_DIRECTORY = s;
 	}
 
 	@NotNull
@@ -181,14 +174,20 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	}
 
 	@Override
-	public void setPassParentEnvs(boolean b)
+	public void setEnvs(@NotNull Map<String, String> map)
 	{
-		PASS_PARENT_ENVS = b;
+		ENV = map;
 	}
 
 	@Override
 	public boolean isPassParentEnvs()
 	{
 		return PASS_PARENT_ENVS;
+	}
+
+	@Override
+	public void setPassParentEnvs(boolean b)
+	{
+		PASS_PARENT_ENVS = b;
 	}
 }

@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.stubs.imports.runtime;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;

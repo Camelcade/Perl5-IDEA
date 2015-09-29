@@ -16,12 +16,9 @@
 
 package com.perl5.lang.perl.idea.stubs.imports.runtime;
 
-import com.intellij.lang.Language;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.PerlDoExpr;
-import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PsiPerlDoExprImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -64,7 +61,7 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
 	public void serialize(@NotNull PerlRuntimeImportStub stub, @NotNull StubOutputStream dataStream) throws IOException
 	{
 		String importPath = stub.getImportPath();
-		if( importPath == null )
+		if (importPath == null)
 			importPath = "";
 
 		dataStream.writeName(importPath);
@@ -75,7 +72,7 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
 	public PerlRuntimeImportStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
 		String importPath = dataStream.readName().toString();
-		if( importPath.isEmpty())
+		if (importPath.isEmpty())
 			importPath = null;
 		return new PerlRuntimeImportStubImpl(parentStub, this, importPath);
 	}

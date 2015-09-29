@@ -31,7 +31,6 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.DocumentAdapter;
-import com.perl5.lang.perl.idea.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -98,11 +97,10 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 			protected void textChanged(DocumentEvent documentEvent)
 			{
 				VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myScriptField.getText());
-				if(file != null)
+				if (file != null)
 				{
 					myCharsetBox.setSelectedItem(file.getCharset().displayName());
-				}
-				else
+				} else
 				{
 					myCharsetBox.setSelectedItem(null);
 				}

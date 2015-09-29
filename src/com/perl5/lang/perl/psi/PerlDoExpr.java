@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,6 +28,7 @@ public interface PerlDoExpr extends PsiElement, StubBasedPsiElement<PerlRuntimeI
 {
 	/**
 	 * Returns imported file relative path or null if unrecognizable
+	 *
 	 * @return relative path
 	 */
 	@Nullable

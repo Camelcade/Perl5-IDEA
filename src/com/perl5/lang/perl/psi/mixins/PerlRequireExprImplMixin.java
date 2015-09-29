@@ -16,14 +16,11 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
-import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlRequireExpr;
-import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,22 +34,22 @@ public abstract class PerlRequireExprImplMixin extends PerlDoExprImplMixin imple
 		super(node);
 	}
 
+	public PerlRequireExprImplMixin(PerlRuntimeImportStub stub, IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
+
 	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{
 		return findChildByClass(PerlNamespaceElement.class);
 	}
 
-	public PerlRequireExprImplMixin(PerlRuntimeImportStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
-
 	@Nullable
 	@Override
 	protected String findImportPath()
 	{
-		if( getNamespaceElement() != null )
+		if (getNamespaceElement() != null)
 			return PerlPackageUtil.getPackagePathByName(getNamespaceElement().getCanonicalName());
 
 		return super.findImportPath();
