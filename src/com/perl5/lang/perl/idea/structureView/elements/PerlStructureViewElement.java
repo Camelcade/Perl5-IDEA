@@ -150,17 +150,14 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 					result.add(new PerlStructureViewElement(child));
 
 			// global variables
-			for (PsiPerlVariableDeclarationGlobal child : PsiTreeUtil.findChildrenOfType(myElement, PsiPerlVariableDeclarationGlobal.class))
-				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+			for (PerlVariableDeclarationWrapper child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationWrapper.class))
+			{
+				if (child.isGlobalDeclaration() && myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
 				{
-					for (PerlVariable variable : child.getScalarVariableList())
-						result.add(new PerlVariableStructureViewElement(variable));
-					for (PerlVariable variable : child.getArrayVariableList())
-						result.add(new PerlVariableStructureViewElement(variable));
-					for (PerlVariable variable : child.getHashVariableList())
-						result.add(new PerlVariableStructureViewElement(variable));
+					result.add(new PerlVariableDeclarationStructureViewElement(child));
 				}
-
+			}
+			
 			Project project = myElement.getProject();
 			GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
