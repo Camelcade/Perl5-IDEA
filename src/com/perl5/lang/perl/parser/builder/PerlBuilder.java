@@ -47,7 +47,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	boolean reparseSQString = false;
 
 	// flag allowes additional sigils to parse, required in use vars reparsed strings
-	boolean allowAllSigils = false;
+	boolean isUseVarsContent = false;
 
 	// flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
 	boolean isInterpolated = false;
@@ -189,15 +189,15 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return currentState;
 	}
 
-	public boolean isAllowAllSigils()
+	public boolean isUseVarsContent()
 	{
-		return allowAllSigils;
+		return isUseVarsContent;
 	}
 
-	public boolean setAllowSigils(boolean newState)
+	public boolean setUseVarsContent(boolean newState)
 	{
-		boolean currentState = isAllowAllSigils();
-		allowAllSigils = newState;
+		boolean currentState = isUseVarsContent();
+		isUseVarsContent = newState;
 		return currentState;
 	}
 
