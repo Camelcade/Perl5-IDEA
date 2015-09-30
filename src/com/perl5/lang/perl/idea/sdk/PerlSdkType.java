@@ -217,7 +217,7 @@ public class PerlSdkType extends SdkType
 	{
 		try
 		{
-			return ExecUtil.execAndGetOutput(new GeneralCommandLine(command)).getStdoutLines(true);
+			return ExecUtil.execAndGetOutput(new GeneralCommandLine(command)).getStdoutLines();
 
 		} catch (Exception e)
 		{
