@@ -47,8 +47,8 @@ public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplac
 
 		return
 				editor.getSettings().isVariableInplaceRenameEnabled()
-						&& element.getUseScope() instanceof LocalSearchScope
 						&& element instanceof PsiNameIdentifierOwner
+						&& element.getUseScope() instanceof LocalSearchScope
 						&& element.getLanguage() == PerlLanguage.INSTANCE
 						&& ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlString
 				;
