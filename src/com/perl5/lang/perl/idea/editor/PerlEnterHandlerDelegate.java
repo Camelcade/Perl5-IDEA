@@ -48,32 +48,36 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 		if (heredocOpenerOperator != null)
 		{
 			PsiElement heredocOpener = heredocOpenerOperator.getParent();
-			assert heredocOpener instanceof PerlHeredocOpener;
 
-			String markerName = ((PerlHeredocOpener) heredocOpener).getName();
-			PsiElement currentElement = file.findElementAt(offset);
-			boolean needAdd = currentElement == null;    // last element
-
-			if (!needAdd && currentElement.getParent() instanceof PerlHeredocElementImpl) // end of the line with opened heredoc
+			if (heredocOpener instanceof PerlHeredocOpener)
 			{
-				PsiElement hereDocBody = currentElement.getParent();
-				PsiElement nextSibling = hereDocBody.getNextSibling();
-				needAdd = nextSibling == null || !(nextSibling instanceof PerlHeredocTerminatorElementImpl);
+//			assert heredocOpener instanceof PerlHeredocOpener: "Got " + heredocOpener + " at " + heredocOpener.getText();
 
-				if (!needAdd)
+				String markerName = ((PerlHeredocOpener) heredocOpener).getName();
+				PsiElement currentElement = file.findElementAt(offset);
+				boolean needAdd = currentElement == null;    // last element
+
+				if (!needAdd && currentElement.getParent() instanceof PerlHeredocElementImpl) // end of the line with opened heredoc
 				{
-					// checking for overlapping heredocs
-					Pattern openerPattern = Pattern.compile("<<(\\s*)[\"'`]?" + markerName + "[\"'`]?");
-					if (openerPattern.matcher(hereDocBody.getText()).find())
-						needAdd = true;
+					PsiElement hereDocBody = currentElement.getParent();
+					PsiElement nextSibling = hereDocBody.getNextSibling();
+					needAdd = nextSibling == null || !(nextSibling instanceof PerlHeredocTerminatorElementImpl);
+
+					if (!needAdd)
+					{
+						// checking for overlapping heredocs
+						Pattern openerPattern = Pattern.compile("<<(\\s*)[\"'`]?" + markerName + "[\"'`]?");
+						if (openerPattern.matcher(hereDocBody.getText()).find())
+							needAdd = true;
+					}
 				}
-			}
 
 
-			if (needAdd)
-			{
-				editor.getDocument().insertString(caretOffset.get(), "\n" + markerName + "\n");
-				return Result.DefaultSkipIndent;
+				if (needAdd)
+				{
+					editor.getDocument().insertString(caretOffset.get(), "\n" + markerName + "\n");
+					return Result.DefaultSkipIndent;
+				}
 			}
 		}
 
