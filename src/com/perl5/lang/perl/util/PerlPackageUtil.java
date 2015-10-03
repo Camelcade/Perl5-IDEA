@@ -258,7 +258,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		packagePath = packagePath.replaceAll("\\\\", "/");
 
-		return StringUtils.join(packagePath.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR);
+		return getCanonicalPackageName(StringUtils.join(packagePath.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR));
 	}
 
 	/**

@@ -16,24 +16,35 @@
 
 package com.perl5.lang.perl.idea.refactoring;
 
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.refactoring.RefactoringFactory;
+import com.intellij.refactoring.RenameRefactoring;
 import com.intellij.refactoring.move.moveFilesOrDirectories.MoveFileHandler;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -47,26 +58,35 @@ public class PerlMoveFileHandler extends MoveFileHandler
 	@Override
 	public boolean canProcessElement(PsiFile element)
 	{
-		// todo assign proper type to the pm files
-		return element instanceof PerlFileImpl && element.getName() != null && element.getName().endsWith(".pm");
+		return element instanceof PerlFileImpl && element.getVirtualFile().getFileType() == PerlFileTypePackage.INSTANCE;
 	}
 
 	@Override
 	public void prepareMovedFile(PsiFile file, PsiDirectory moveDestination, Map<PsiElement, PsiElement> oldToNewMap)
 	{
 		file.putUserData(ORIGINAL_PACKAGE_NAME, ((PerlFileImpl) file).getFilePackageName());
-	}
 
-	@Nullable
-	@Override
-	public List<UsageInfo> findUsages(PsiFile psiFile, PsiDirectory newParent, boolean searchInComments, boolean searchInNonJavaFiles)
-	{
-		return null;
-	}
+		String newFilePath = moveDestination.getVirtualFile().getPath() + '/' + file.getName();
+		VirtualFile newClassRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForFile(moveDestination.getVirtualFile(), moveDestination.getProject()), newFilePath);
 
-	@Override
-	public void retargetUsages(List<UsageInfo> usageInfos, Map<PsiElement, PsiElement> oldToNewMap)
-	{
+		if (newClassRoot != null)
+		{
+			String newRelativePath = newFilePath.substring(newClassRoot.getPath().length());
+			String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
+
+			if (newPackageName != null)
+			{
+				for (PsiReference reference : ReferencesSearch.search(file, file.getUseScope()).findAll())
+				{
+					PsiElement sourceElement = reference.getElement();
+					if (sourceElement instanceof PerlNamespaceElement)
+					{
+						PerlPsiUtil.renameElement(sourceElement, newPackageName);
+					}
+					// todo handle string contents for require
+				}
+			}
+		}
 	}
 
 	@Override
@@ -82,13 +102,38 @@ public class PerlMoveFileHandler extends MoveFileHandler
 			String newRelativePath = VfsUtil.getRelativePath(virtualFile, newInnermostRoot);
 			String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
-			RenameRefactoringQueue queue = new RenameRefactoringQueue(project);
+			RenameRefactoring refactoring = null;
 
 			for (PsiPerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(file, PsiPerlNamespaceDefinition.class))
+			{
 				if (originalPackageName.equals(namespaceDefinition.getPackageName()))
-					queue.addElement(namespaceDefinition, newPackageName);
+				{
+					if (refactoring == null)
+					{
+						refactoring = RefactoringFactory.getInstance(file.getProject()).createRename(namespaceDefinition, newPackageName);
+					} else
+					{
+						refactoring.addElement(namespaceDefinition, newPackageName);
+					}
+				}
+			}
 
-			queue.run();
+			if (refactoring != null)
+			{
+				refactoring.run();
+			}
 		}
+	}
+
+	@Nullable
+	@Override
+	public List<UsageInfo> findUsages(PsiFile psiFile, PsiDirectory newParent, boolean searchInComments, boolean searchInNonJavaFiles)
+	{
+		return null;
+	}
+
+	@Override
+	public void retargetUsages(List<UsageInfo> usageInfos, Map<PsiElement, PsiElement> oldToNewMap)
+	{
 	}
 }

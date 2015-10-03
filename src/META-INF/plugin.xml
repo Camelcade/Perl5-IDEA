@@ -256,7 +256,7 @@
         <renamePsiElementProcessor
                 implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
 
-        <!--<moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>-->
+        <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
 
         <nameSuggestionProvider implementation="com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider"
                                 order="first"/>
