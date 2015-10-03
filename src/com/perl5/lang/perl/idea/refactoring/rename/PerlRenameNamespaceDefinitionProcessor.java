@@ -16,15 +16,18 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,18 +52,14 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 	{
 		String currentPackageName = namespaceDefinition.getName();
 		assert currentPackageName != null;
-		List<String> currentPackageChunks = Arrays.asList(currentPackageName.split("::"));
-		assert currentPackageChunks.size() > 0;
-		String currentFileName = currentPackageChunks.get(currentPackageChunks.size() - 1) + ".pm";
 
-		PsiFile file = namespaceDefinition.getContainingFile();
+		VirtualFile virtualFile = namespaceDefinition.getContainingFile().getVirtualFile();
 
-		if (currentFileName.equals(file.getName()))
+		if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE)
 		{
-			String currentPackageRelativePath = PerlPackageUtil.getPackagePathByName(currentPackageName);
-			VirtualFile virtualFile = file.getVirtualFile();
+			VirtualFile classRoot = PerlUtil.getFileClassRoot(namespaceDefinition.getProject(), virtualFile);
 
-			if (virtualFile != null && virtualFile.getPath().endsWith(currentPackageRelativePath))    // we suppose this is enough
+			if (classRoot != null && currentPackageName.equals(PerlPackageUtil.getPackageNameByPath(VfsUtil.getRelativePath(virtualFile, classRoot))))
 			{
 				return true;
 			}
@@ -72,7 +71,6 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 	@Override
 	public Runnable getPostRenameCallback(PsiElement element, final String newName, RefactoringElementListener elementListener)
 	{
-
 		if (element instanceof PerlNamespaceDefinition && isFileToBeRenamed((PerlNamespaceDefinition) element))
 		{
 			final PsiFile file = element.getContainingFile();
@@ -96,104 +94,44 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 					String newPackageName = PerlPackageUtil.getCanonicalPackageName(newName);
 					List<String> newPackageChunks = Arrays.asList(newPackageName.split("::"));
 					String newFileName = newPackageChunks.get(newPackageChunks.size() - 1) + ".pm";
-					try
+					file.setName(newFileName);
+
+					// move file
+					VirtualFile containingDir = file.getVirtualFile().getParent();
+					VirtualFile newContainingDir = PerlUtil.getFileClassRoot(file.getProject(), containingDir);
+
+					for (int i = 0; i < newPackageChunks.size() - 1; i++)
 					{
-						file.getVirtualFile().rename(this, newFileName);//setName(newFileName);
-					} catch (IOException e)
-					{
-						throw new IncorrectOperationException("Unable to rename file to " + newFileName);
+						String subDirName = newPackageChunks.get(i);
+
+						assert subDirName != null && !subDirName.isEmpty();
+						assert newContainingDir != null;
+
+						VirtualFile subDir = newContainingDir.findChild(subDirName);
+
+						try
+						{
+							newContainingDir = subDir != null ? subDir : newContainingDir.createChildDirectory(null, subDirName);
+						} catch (IOException e)
+						{
+							throw new IncorrectOperationException("Could not create subdirectory: " + newContainingDir.getPath() + "/" + subDirName);
+						}
 					}
 
-					// todo move file
+					if (newContainingDir != null && !newContainingDir.equals(containingDir))
+					{
+						try
+						{
+							file.getVirtualFile().move(this, newContainingDir);
+						} catch (IOException e)
+						{
+							throw new IncorrectOperationException("Could not move package file to the: " + newContainingDir.getPath());
+						}
+					}
 				}
 			};
 		}
 
 		return super.getPostRenameCallback(element, newName, elementListener);
 	}
-
-
-/*
-	@Nullable
-	@Override
-	public Runnable getPostRenameCallback(final PsiElement element, String newName, RefactoringElementListener elementListener)
-	{
-		Runnable newProcess = null;
-
-		if (element instanceof PerlNamespaceDefinition || element.getParent() instanceof PerlNamespaceDefinition)
-		{
-			final PsiFile psiFile = element.getContainingFile();
-			String currentPackageName = ((PerlNamedElement) element).getName();
-			final String newPackageName = PerlPackageUtil.getCanonicalPackageName(newName);
-
-			if (psiFile instanceof PerlFileImpl)
-			{
-				final String currentFilePackageName = ((PerlFileImpl) psiFile).getFilePackageName();
-
-				if (currentFilePackageName != null && currentFilePackageName.equals(currentPackageName) && !newPackageName.equals(currentPackageName))
-				{
-					// todo we need to check if this is a first namespace definition in the file
-					// ok, it's package with same name and we've got a new name
-					final VirtualFile virtualFile = psiFile.getVirtualFile();
-					final Project project = element.getProject();
-
-					final RenameRefactoringQueue queue = new RenameRefactoringQueue(project);
-
-					for (PsiReference inboundReference : ReferencesSearch.search(psiFile))
-					{
-						if (inboundReference.getElement() instanceof PerlNamespaceElement)
-							queue.addElement(inboundReference.getElement(), newPackageName);
-					}
-
-					newProcess = new Runnable()
-					{
-						@Override
-						public void run()
-						{
-							// looking/creating new path for a file
-							VirtualFile newParent = PerlUtil.getFileClassRoot(project, virtualFile);
-							VirtualFile currentParent = virtualFile.getParent();
-
-							List<String> packageDirs = Arrays.asList(newPackageName.split(":+"));
-							String newFileName = packageDirs.get(packageDirs.size() - 1) + ".pm";
-
-							for (int i = 0; i < packageDirs.size() - 1; i++)
-							{
-								String dir = packageDirs.get(i);
-
-								VirtualFile subDir = newParent.findChild(dir);
-								try
-								{
-									newParent = (subDir != null) ? subDir : newParent.createChildDirectory(null, dir);
-								} catch (IOException e)
-								{
-									throw new IncorrectOperationException("Could not create subdirectory: " + newParent.getPath() + "/" + dir);
-								}
-							}
-
-							try
-							{
-								if (!newParent.getPath().equals(currentParent.getPath()))
-								{
-									// we need to handle references ourselves
-									virtualFile.move(element, newParent);
-								}
-
-								virtualFile.rename(element, newFileName);
-							} catch (IOException e)
-							{
-								throw new IncorrectOperationException("Could not rename or move package file: " + e.getMessage());
-							}
-
-							queue.run();
-						}
-					};
-				}
-			}
-		}
-
-		return newProcess;
-	}
-
-*/
 }
