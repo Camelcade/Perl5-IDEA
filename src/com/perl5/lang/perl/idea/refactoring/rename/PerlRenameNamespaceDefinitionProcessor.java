@@ -16,25 +16,15 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
-import com.intellij.ide.projectView.impl.nodes.PackageUtil;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.SearchScope;
+import com.intellij.psi.*;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
-import com.intellij.refactoring.rename.RenamePsiElementProcessor;
-import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,56 +45,73 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 		return element instanceof PerlNamespaceDefinition;
 	}
 
-	public void prepareDependentFiles(PerlNamespaceDefinition namespaceDefinition, String newName, Map<PsiElement, String> allRenames)
+	protected boolean isFileToBeRenamed(PerlNamespaceDefinition namespaceDefinition)
 	{
-		PsiFile file = namespaceDefinition.getContainingFile();
-
 		String currentPackageName = namespaceDefinition.getName();
 		assert currentPackageName != null;
 		List<String> currentPackageChunks = Arrays.asList(currentPackageName.split("::"));
 		assert currentPackageChunks.size() > 0;
 		String currentFileName = currentPackageChunks.get(currentPackageChunks.size() - 1) + ".pm";
 
-		if (currentFileName.equals(file.getName()) && !allRenames.containsKey(file))
+		PsiFile file = namespaceDefinition.getContainingFile();
+
+		if (currentFileName.equals(file.getName()))
 		{
 			String currentPackageRelativePath = PerlPackageUtil.getPackagePathByName(currentPackageName);
 			VirtualFile virtualFile = file.getVirtualFile();
 
 			if (virtualFile != null && virtualFile.getPath().endsWith(currentPackageRelativePath))    // we suppose this is enough
 			{
-				allRenames.put(file, newName);
-				System.err.println("Processing " + virtualFile.getPath() + " psi file name: " + file.getName());
-			} else
-			{
-				System.err.println("Incorrect path " + virtualFile.getPath() + " psi file name: " + file.getName());
+				return true;
 			}
 		}
-	}
-
-	@Override
-	public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope)
-	{
-		preparePsiElementRenaming(element, newName, allRenames);
-		super.prepareRenaming(element, newName, allRenames, scope);
-	}
-
-	@Override
-	public void preparePsiElementRenaming(PsiElement element, String newBaseName, Map<PsiElement, String> allRenames)
-	{
-		super.preparePsiElementRenaming(element, newBaseName, allRenames);
-		if (element instanceof PerlNamespaceDefinition)
-		{
-			prepareDependentFiles((PerlNamespaceDefinition) element, newBaseName, allRenames);
-		}
+		return false;
 	}
 
 	@Nullable
 	@Override
-	public Runnable getPostRenameCallback(PsiElement element, String newName, RefactoringElementListener elementListener)
+	public Runnable getPostRenameCallback(PsiElement element, final String newName, RefactoringElementListener elementListener)
 	{
-		System.err.println("Getting postrename callback");
+
+		if (element instanceof PerlNamespaceDefinition && isFileToBeRenamed((PerlNamespaceDefinition) element))
+		{
+			final PsiFile file = element.getContainingFile();
+
+			return new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					for (PsiReference reference : ReferencesSearch.search(file, file.getUseScope()).findAll())
+					{
+						PsiElement sourceElement = reference.getElement();
+						if (sourceElement instanceof PerlNamespaceElement)
+						{
+							PerlPsiUtil.renameElement(sourceElement, newName);
+						}
+						// todo handle string contents for require
+					}
+
+					// rename file
+					String newPackageName = PerlPackageUtil.getCanonicalPackageName(newName);
+					List<String> newPackageChunks = Arrays.asList(newPackageName.split("::"));
+					String newFileName = newPackageChunks.get(newPackageChunks.size() - 1) + ".pm";
+					try
+					{
+						file.getVirtualFile().rename(this, newFileName);//setName(newFileName);
+					} catch (IOException e)
+					{
+						throw new IncorrectOperationException("Unable to rename file to " + newFileName);
+					}
+
+					// todo move file
+				}
+			};
+		}
+
 		return super.getPostRenameCallback(element, newName, elementListener);
 	}
+
 
 /*
 	@Nullable
