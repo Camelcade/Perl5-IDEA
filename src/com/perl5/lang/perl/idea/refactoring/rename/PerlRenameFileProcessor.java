@@ -18,18 +18,24 @@ package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.refactoring.RefactoringFactory;
+import com.intellij.refactoring.RenameRefactoring;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.refactoring.rename.RenamePsiFileProcessor;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,90 +52,62 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 	@Override
 	public boolean canProcessElement(@NotNull PsiElement element)
 	{
-		return element instanceof PerlFileImpl && ((PerlFileImpl) element).getName().endsWith(".pm");
+		return element instanceof PerlFileImpl && ((PerlFileImpl) element).getVirtualFile().getFileType() == PerlFileTypePackage.INSTANCE;
 	}
 
+	@Nullable
 	@Override
-	public void renameElement(PsiElement element, String newName, UsageInfo[] usages, @Nullable RefactoringElementListener listener) throws IncorrectOperationException
+	public Runnable getPostRenameCallback(final PsiElement element, String newName, RefactoringElementListener elementListener)
 	{
-		if (!newName.endsWith(".pm")) // suppose it's a package name
+		if (newName.endsWith(".pm"))
 		{
-			String newPackageName = PerlPackageUtil.getCanonicalPackageName(newName);
-			List<String> newPackageChunks = Arrays.asList(newPackageName.split("::"));
-			newName = newPackageChunks.get(newPackageChunks.size() - 1) + ".pm";
-		}
+			final Project project = element.getProject();
+			final String currentPackageName = ((PerlFileImpl) element).getFilePackageName();
+			String[] nameChunks = currentPackageName.split("::");
+			nameChunks[nameChunks.length - 1] = newName.replaceFirst("\\.pm$", "");
+			final String newPackageName = StringUtils.join(nameChunks, "::");
 
-		super.renameElement(element, newName, usages, listener);
-	}
+			final String newFileName = ((PerlFileImpl) element).getVirtualFile().getParent().getPath() + '/' + newName;
 
-	// repeated from PerlRenamePolyReferencedElementProcessor, cause inherited from RenamePsiFileProcessor
-	@Override
-	public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope)
-	{
-		for (PsiReference reference : ReferencesSearch.search(element, element.getUseScope()).findAll())
-		{
-			if (reference instanceof PsiPolyVariantReference)
+			return new Runnable()
 			{
-				for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
+				@Override
+				public void run()
 				{
-					PsiElement resolveResultElement = resolveResult.getElement();
-					if (!allRenames.containsKey(resolveResultElement))
+					VirtualFile newFile = LocalFileSystem.getInstance().findFileByPath(newFileName);
+
+					if (newFile != null)
 					{
-						allRenames.put(resolveResultElement, newName);
+						PsiFile psiFile = PsiManager.getInstance(project).findFile(newFile);
+
+						if (psiFile != null)
+						{
+							RenameRefactoring refactoring = null;
+
+							for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
+							{
+								if (currentPackageName.equals(namespaceDefinition.getName()))
+								{
+									if (refactoring == null)
+									{
+										refactoring = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
+									} else
+									{
+										refactoring.addElement(namespaceDefinition, newPackageName);
+									}
+								}
+							}
+
+							if (refactoring != null)
+							{
+								refactoring.run();
+							}
+						}
 					}
 				}
-			}
+			};
 		}
+		return super.getPostRenameCallback(element, newName, elementListener);
 	}
 
-
-//	@Nullable
-//	@Override
-//	public Runnable getPostRenameCallback(PsiElement element, String newName, RefactoringElementListener elementListener)
-//	{
-//		Runnable postProcessor = null;
-//
-//		if (newName.endsWith(".pm"))
-//		{
-//			assert element instanceof PerlFileImpl;
-//			final Project project = element.getProject();
-//			VirtualFile currentVirtualFile = ((PerlFileImpl) element).getVirtualFile();
-//			final String currentPacakgeName = ((PerlFileImpl) element).getFilePackageName();
-//
-//			if (currentPacakgeName != null)
-//			{
-//				String currentFileName = currentVirtualFile.getNameWithoutExtension();
-//				String newFileName = newName.replaceFirst("\\.pm$", "");
-//
-//				final String newFilePath = currentVirtualFile.getPath().replaceFirst(currentVirtualFile.getName() + "$", newName);
-//				final String newPackageName = currentPacakgeName.replaceFirst(currentFileName + "$", newFileName);
-//
-//				postProcessor = new Runnable()
-//				{
-//					@Override
-//					public void run()
-//					{
-//						VirtualFile newVirtualFile = LocalFileSystem.getInstance().findFileByIoFile(new File(newFilePath));
-//
-//						if (newVirtualFile != null)
-//						{
-//							PsiFile newPsiFile = PsiManager.getInstance(project).findFile(newVirtualFile);
-//
-//							if (newPsiFile != null)
-//							{
-//								RenameRefactoringQueue queue = new RenameRefactoringQueue(project);
-//
-//								for (PsiPerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(newPsiFile, PsiPerlNamespaceDefinition.class))
-//									if (currentPacakgeName.equals(namespaceDefinition.getPackageName()))
-//										queue.addElement(namespaceDefinition, newPackageName);
-//
-//								queue.run();
-//							}
-//						}
-//					}
-//				};
-//			}
-//		}
-//		return postProcessor;
-//	}
 }

@@ -40,6 +40,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.fileTypes.PerlFileType;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.*;
@@ -105,7 +106,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	{
 		VirtualFile containingFile = getVirtualFile();
 
-		if ("pm".equals(containingFile.getExtension()))
+		if (containingFile.getFileType() == PerlFileTypePackage.INSTANCE)
 		{
 			VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(getProject(), containingFile);
 			if (innermostSourceRoot != null)
