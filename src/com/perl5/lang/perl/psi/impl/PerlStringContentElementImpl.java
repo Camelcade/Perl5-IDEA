@@ -79,7 +79,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	@Override
 	public PsiReference getReference()
 	{
-		return myReferences.getValue()[0];
+		return myReferences.getValue().length > 0 ? myReferences.getValue()[0] : null;
 	}
 
 	@Override

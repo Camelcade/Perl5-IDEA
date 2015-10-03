@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.refactoring;
+package com.perl5.lang.perl.idea.refactoring.move;
 
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;

@@ -255,8 +255,12 @@
                 implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceDefinitionProcessor"/>
         <renamePsiElementProcessor
                 implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
+        <renamePsiElementProcessor
+                implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameDirectoryProcessor"/>
+        <renamePsiElementProcessor
+                implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameIDEAPackageProcessor"/>
 
-        <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
+        <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.move.PerlMoveFileHandler"/>
 
         <nameSuggestionProvider implementation="com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider"
                                 order="first"/>

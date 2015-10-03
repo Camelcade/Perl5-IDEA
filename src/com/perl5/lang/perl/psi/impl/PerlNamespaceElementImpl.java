@@ -93,7 +93,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public PsiReference getReference()
 	{
-		return myReferences.getValue()[0];
+		return myReferences.getValue().length > 0 ? myReferences.getValue()[0] : null;
 	}
 
 	@Override
