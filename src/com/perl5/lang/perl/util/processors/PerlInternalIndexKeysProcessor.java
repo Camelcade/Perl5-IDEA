@@ -23,9 +23,40 @@ import com.intellij.util.Processor;
  */
 public class PerlInternalIndexKeysProcessor implements Processor<String>
 {
+	private static final String MAIN_TEMPLATE = "main::";
+	private final boolean myForceShortMain;
+
+	public PerlInternalIndexKeysProcessor(boolean forceShortMain)
+	{
+		myForceShortMain = forceShortMain;
+	}
+
+
+	public PerlInternalIndexKeysProcessor()
+	{
+		this(false);
+	}
+
 	@Override
 	public boolean process(String string)
 	{
 		return string.charAt(0) != '*';
+	}
+
+	public boolean isForceShortMain()
+	{
+		return myForceShortMain;
+	}
+
+	public String adjustName(String originalName)
+	{
+		if (originalName == null || !isForceShortMain() || !originalName.startsWith(MAIN_TEMPLATE))
+		{
+			return originalName;
+		}
+		else
+		{
+			return originalName.substring(4);
+		}
 	}
 }

@@ -47,54 +47,82 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 		PsiElement variableNameElement = parameters.getPosition();
 		PsiElement perlVariable = variableNameElement.getParent();
 		Project project = variableNameElement.getProject();
+		PerlNamespaceElement namespaceElement = null;
+
+		if (perlVariable instanceof PerlNamespaceElementContainer)
+		{
+			namespaceElement = ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement();
+		}
+
+
+		boolean forceShortMain = false;
 
 		// fixme refactor smart variables selection by *package
-		if (perlVariable instanceof PerlNamespaceElementContainer
-				&& ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement() != null
-				&& ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement().getCanonicalName() != null
-				)
-			resultSet = resultSet.withPrefixMatcher(
-					((PerlNamespaceElementContainer) perlVariable).getNamespaceElement().getCanonicalName()
-							+ "::"
-							+ resultSet.getPrefixMatcher().getPrefix()
-			);
+		if (namespaceElement != null)
+		{
+			String namespaceName = namespaceElement.getText();
+			String namespaceCanonicalName = namespaceElement.getCanonicalName();
+
+			if ("::".equals(namespaceName))
+			{
+				resultSet = resultSet.withPrefixMatcher(
+						"::"
+								+ resultSet.getPrefixMatcher().getPrefix()
+				);
+				forceShortMain = true;
+			}
+			else if (namespaceCanonicalName != null)
+			{
+				resultSet = resultSet.withPrefixMatcher(
+						((PerlNamespaceElementContainer) perlVariable).getNamespaceElement().getCanonicalName()
+								+ "::"
+								+ resultSet.getPrefixMatcher().getPrefix()
+				);
+			}
+		}
 
 		final CompletionResultSet finalResultSet = resultSet;
 
 		if (perlVariable instanceof PsiPerlScalarVariable)
 		{
 			// global scalars
-			PerlScalarUtil.processDefinedGlobalScalarNames(project, new PerlInternalIndexKeysProcessor()
+			PerlScalarUtil.processDefinedGlobalScalarNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 
 			// global arrays
-			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor()
+			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 
 			// global hashes
-			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor()
+			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
@@ -102,100 +130,116 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 		} else if (perlVariable instanceof PerlGlobVariable)
 		{
 			// global scalars
-			PerlScalarUtil.processDefinedGlobalScalarNames(project, new PerlInternalIndexKeysProcessor()
+			PerlScalarUtil.processDefinedGlobalScalarNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 
 			// global arrays
-			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor()
+			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 
 			// global hashes
-			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor()
+			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 
 			// globs
-			PerlGlobUtil.processDefinedGlobsNames(project, new PerlInternalIndexKeysProcessor()
+			PerlGlobUtil.processDefinedGlobsNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 		} else if (perlVariable instanceof PsiPerlArrayVariable)
 		{
 			// global arrays
-			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor()
+			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 
 			// global hashes
-			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor()
+			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 		} else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 		{
 			// global arrays
-			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor()
+			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});
 		} else if (perlVariable instanceof PsiPerlHashVariable)
 		{
 			// global hashes
-			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor()
+			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(s));
+					{
+						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(adjustName(s)));
+					}
 					return true;
 				}
 			});

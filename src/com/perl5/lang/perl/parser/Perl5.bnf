@@ -329,8 +329,8 @@ limitations under the License.
     extends("no_statement")=statement
     extends("condition_statement|condition_statement_while|for_list_statement|for_iterator_statement")=statement
 
-    implements("conditional_block|conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
-    mixin("conditional_block|conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
+    implements("conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
+    mixin("conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.mixins.PerlHeredocOpenerMixin"
