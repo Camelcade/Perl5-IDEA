@@ -19,6 +19,8 @@
 
         <compileServer.plugin classpath="camelcade.jar"/>
 
+        <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
+
         <moduleConfigurationEditorProvider
                 implementation="com.perl5.lang.perl.idea.configuration.module.PerlModuleConfigurationEditorProvider"
                 order="first"/>
