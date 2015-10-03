@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
+import com.intellij.ide.projectView.impl.nodes.PackageUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -39,13 +40,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class PerlRenameNamespaceDefinitionProcessor extends RenamePsiElementProcessor
+public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyReferencedElementProcessor
 {
 	@Override
 	public boolean canProcessElement(@NotNull PsiElement element)
@@ -53,41 +55,58 @@ public class PerlRenameNamespaceDefinitionProcessor extends RenamePsiElementProc
 		return element instanceof PerlNamespaceDefinition;
 	}
 
+	public void prepareDependentFiles(PerlNamespaceDefinition namespaceDefinition, String newName, Map<PsiElement, String> allRenames)
+	{
+		PsiFile file = namespaceDefinition.getContainingFile();
+
+		String currentPackageName = namespaceDefinition.getName();
+		assert currentPackageName != null;
+		List<String> currentPackageChunks = Arrays.asList(currentPackageName.split("::"));
+		assert currentPackageChunks.size() > 0;
+		String currentFileName = currentPackageChunks.get(currentPackageChunks.size() - 1) + ".pm";
+
+		if (currentFileName.equals(file.getName()) && !allRenames.containsKey(file))
+		{
+			String currentPackageRelativePath = PerlPackageUtil.getPackagePathByName(currentPackageName);
+			VirtualFile virtualFile = file.getVirtualFile();
+
+			if (virtualFile != null && virtualFile.getPath().endsWith(currentPackageRelativePath))    // we suppose this is enough
+			{
+				allRenames.put(file, newName);
+				System.err.println("Processing " + virtualFile.getPath() + " psi file name: " + file.getName());
+			} else
+			{
+				System.err.println("Incorrect path " + virtualFile.getPath() + " psi file name: " + file.getName());
+			}
+		}
+	}
+
 	@Override
 	public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope)
 	{
-		// we need to add all same packages here and containing files
+		preparePsiElementRenaming(element, newName, allRenames);
 		super.prepareRenaming(element, newName, allRenames, scope);
 	}
 
-/*
 	@Override
-	public void renameElement(PsiElement element, String newName, UsageInfo[] usages, RefactoringElementListener listener) throws IncorrectOperationException
+	public void preparePsiElementRenaming(PsiElement element, String newBaseName, Map<PsiElement, String> allRenames)
 	{
-		boolean packageNameInvalid;
-
-		if (!"".equals(newName) && !"main".equals(newName))
+		super.preparePsiElementRenaming(element, newBaseName, allRenames);
+		if (element instanceof PerlNamespaceDefinition)
 		{
-			try
-			{
-				String canonicalName = PerlPackageUtil.getCanonicalPackageName(newName);
-				PerlNamespaceElement newNamespace = PerlElementFactory.createPackageName(element.getProject(), canonicalName);
-				packageNameInvalid = (newNamespace == null || !canonicalName.equals(newNamespace.getCanonicalName()));
-			} catch (Exception any)
-			{
-				packageNameInvalid = true;
-			}
-		} else
-			throw new IncorrectOperationException("It's not allowed to rename to the empty/main package");
-
-		if (packageNameInvalid)
-		{
-			throw new IncorrectOperationException("Invalid package name: " + newName);
+			prepareDependentFiles((PerlNamespaceDefinition) element, newBaseName, allRenames);
 		}
-
-		super.renameElement(element, newName, usages, listener);
 	}
 
+	@Nullable
+	@Override
+	public Runnable getPostRenameCallback(PsiElement element, String newName, RefactoringElementListener elementListener)
+	{
+		System.err.println("Getting postrename callback");
+		return super.getPostRenameCallback(element, newName, elementListener);
+	}
+
+/*
 	@Nullable
 	@Override
 	public Runnable getPostRenameCallback(final PsiElement element, String newName, RefactoringElementListener elementListener)
