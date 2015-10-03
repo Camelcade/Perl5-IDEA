@@ -248,14 +248,16 @@
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlHeredocTerminatorElement" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
 
-        <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>
 
         <renamePsiElementProcessor
-                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceProcessor"/>
-        <renamePsiElementProcessor
-                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
-        <renamePsiElementProcessor
-                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameHeredocProcessor"/>
+                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceDefinitionProcessor"/>
+
+        <!--<moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.PerlMoveFileHandler"/>-->
+        <!--<renamePsiElementProcessor-->
+        <!--implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>-->
+
+        <!--<renamePsiElementProcessor-->
+        <!--implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameHeredocProcessor"/>-->
 
         <!--<renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.PerlRenameVariableProcessor"/>-->
 
@@ -269,8 +271,6 @@
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>
         <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
-
-        <!--<renameInputValidator implementation="com.perl5.lang.perl.idea.PerlRenameInputValidator"/>-->
 
         <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
 
@@ -288,8 +288,6 @@
 
         <lang.findUsagesProvider language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
-
-        <!--codeInsight.lineMarkerProvider language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/-->
 
         <lang.parserDefinition language="Embedded Perl"
                                implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
@@ -463,9 +461,9 @@
 
     <project-components>
         <!-- Add your project components here -->
-        <component>
-            <implementation-class>com.perl5.lang.perl.idea.project.PerlProjectComponent</implementation-class>
-        </component>
+        <!--<component>-->
+        <!--<implementation-class>com.perl5.lang.perl.idea.project.PerlProjectComponent</implementation-class>-->
+        <!--</component>-->
         <component>
             <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>
         </component>

@@ -21,6 +21,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
@@ -39,18 +40,27 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
+public class PerlRenameNamespaceDefinitionProcessor extends RenamePsiElementProcessor
 {
 	@Override
 	public boolean canProcessElement(@NotNull PsiElement element)
 	{
-		return element instanceof PerlNamespaceElement || element instanceof PerlNamespaceDefinition;
+		return element instanceof PerlNamespaceDefinition;
 	}
 
+	@Override
+	public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope)
+	{
+		// we need to add all same packages here and containing files
+		super.prepareRenaming(element, newName, allRenames, scope);
+	}
+
+/*
 	@Override
 	public void renameElement(PsiElement element, String newName, UsageInfo[] usages, RefactoringElementListener listener) throws IncorrectOperationException
 	{
@@ -159,4 +169,5 @@ public class PerlRenameNamespaceProcessor extends RenamePsiElementProcessor
 		return newProcess;
 	}
 
+*/
 }
