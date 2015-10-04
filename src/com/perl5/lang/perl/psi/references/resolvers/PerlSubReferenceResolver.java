@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -49,11 +50,16 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 	{
 		PsiElement myElement = reference.getElement();
 		assert myElement instanceof PerlSubNameElement;
+
+		PsiElement parent = myElement.getParent();
+		if (parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinition)
+		{
+			return ResolveResult.EMPTY_ARRAY;
+		}
+
 		PerlSubNameElement subNameElement = (PerlSubNameElement) myElement;
 
 		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
-
-		PsiElement parent = subNameElement.getParent();
 
 		String packageName = subNameElement.getPackageName();
 		String subName = subNameElement.getName();
@@ -63,7 +69,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 		if (parent instanceof PerlNamespaceElementContainer)
 			expliclitPackageElement = ((PerlNamespaceElementContainer) parent).getNamespaceElement();
 
-		if (subName != null)
+		if (!subName.isEmpty())
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
 				relatedItems.addAll(PerlMroDfs.resolveSub(project, packageName, subName, false));
@@ -74,69 +80,92 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 				if (expliclitPackageElement == null && subNameElement.isBuiltIn())
 					return new ResolveResult[0];
 
-				PsiFile file = subNameElement.getContainingFile();
+				if ("main".equals(packageName))    // fixme this is a dirty hack until proper names resolution implemented
+				{
+					PsiFile file = subNameElement.getContainingFile();
+					GlobalSearchScope fileScope = GlobalSearchScope.fileScope(file);
+
+					collectRelatedItems(
+							packageName + "::" + subName,
+							project,
+							parent,
+							relatedItems
+							, fileScope
+					);
 
 //				if (file instanceof PerlFile)
 //					((PerlFile) file).getElementsResolveScope();
 
 //				System.err.println("Checking for " + subName);
-
-				// check indexes for defined subs
-				collectRelatedItems(
-						packageName + "::" + subName,
-						project,
-						parent,
-						relatedItems
-				);
-
-				if (expliclitPackageElement == null)
-				{
-					// check for imports to the current file
-					PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(subNameElement, PerlNamespaceContainer.class);
-
-					assert namespaceContainer != null;
-
-					for (Map.Entry<String, Set<String>> imports : namespaceContainer.getImportedSubsNames().entrySet())
-						for (String importedSubName : imports.getValue())
-							if (importedSubName.equals(subName))
-								collectRelatedItems(
-										imports.getKey() + "::" + subName,
-										project,
-										parent,
-										relatedItems
-								);
-				} else    // check imports to target namespace
-				{
-					String targetPackageName = expliclitPackageElement.getCanonicalName();
-					if (targetPackageName != null)
-					{
-						// fixme partially not DRY with previous block
-						for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
-							for (Map.Entry<String, Set<String>> imports : namespaceDefinition.getImportedSubsNames().entrySet())
-								for (String importedSubName : imports.getValue())
-									if (importedSubName.equals(subName))
-										collectRelatedItems(
-												imports.getKey() + "::" + subName,
-												project,
-												parent,
-												relatedItems
-										);
-					}
 				}
 
-				// check for autoload
-				if (relatedItems.size() == 0
-						&& !"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
-						&& !(
-						parent instanceof PerlSubDeclaration
-								|| parent instanceof PerlSubDefinition
-				))
+				if (relatedItems.size() == 0)
+				{
+					GlobalSearchScope globalSearchScope = GlobalSearchScope.allScope(project);
+
+					// check indexes for defined subs
 					collectRelatedItems(
-							packageName + "::AUTOLOAD",
+							packageName + "::" + subName,
 							project,
 							parent,
 							relatedItems
+							, globalSearchScope
 					);
+
+					if (expliclitPackageElement == null)
+					{
+						// check for imports to the current file
+						PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(subNameElement, PerlNamespaceContainer.class);
+
+						assert namespaceContainer != null;
+
+						for (Map.Entry<String, Set<String>> imports : namespaceContainer.getImportedSubsNames().entrySet())
+							for (String importedSubName : imports.getValue())
+								if (importedSubName.equals(subName))
+									collectRelatedItems(
+											imports.getKey() + "::" + subName,
+											project,
+											parent,
+											relatedItems
+											, globalSearchScope
+									);
+					} else    // check imports to target namespace
+					{
+						String targetPackageName = expliclitPackageElement.getCanonicalName();
+						if (targetPackageName != null)
+						{
+							// fixme partially not DRY with previous block
+							for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
+								for (Map.Entry<String, Set<String>> imports : namespaceDefinition.getImportedSubsNames().entrySet())
+									for (String importedSubName : imports.getValue())
+										if (importedSubName.equals(subName))
+											collectRelatedItems(
+													imports.getKey() + "::" + subName,
+													project,
+													parent,
+													relatedItems
+													, globalSearchScope
+											);
+						}
+					}
+
+					// check for autoload
+					if (relatedItems.size() == 0
+							&& !"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
+							&& !(
+							parent instanceof PerlSubDeclaration
+									|| parent instanceof PerlSubDefinition
+					))
+					{
+						collectRelatedItems(
+								packageName + "::AUTOLOAD",
+								project,
+								parent,
+								relatedItems
+								, globalSearchScope
+						);
+					}
+				}
 			}
 		}
 
@@ -168,18 +197,18 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 		return result.toArray(new ResolveResult[result.size()]);
 	}
 
-	public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems)
+	public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems, GlobalSearchScope searchScope)
 	{
-		for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName))
+		for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope))
 			if (!target.isEquivalentTo(exclusion))
 				relatedItems.add(target);
-		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
+		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope))
 			if (!target.isEquivalentTo(exclusion))
 				relatedItems.add(target);
-		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName))
+		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope))
 			if (!target.isEquivalentTo(exclusion))
 				relatedItems.add(target);
-		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
+		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName, searchScope))
 			if (!target.isEquivalentTo(exclusion))
 				relatedItems.add(target);
 	}
