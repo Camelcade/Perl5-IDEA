@@ -37,11 +37,4 @@ public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementP
 				|| element instanceof PerlVariableDeclarationWrapper
 				;
 	}
-
-	@NotNull
-	@Override
-	public Collection<PsiReference> findReferences(PsiElement element)
-	{
-		return super.findReferences(element);
-	}
 }
