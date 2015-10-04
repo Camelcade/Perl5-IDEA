@@ -37,8 +37,6 @@ public class RenameRefactoringQueue implements Runnable
 
 	public void addElement(PsiElement element, String newName)
 	{
-
-
 		if (element instanceof PsiNamedElement)
 		{
 			if (myRefactoring == null)
@@ -46,21 +44,6 @@ public class RenameRefactoringQueue implements Runnable
 			else
 				myRefactoring.addElement(element, newName);
 		}
-	}
-
-	void setSearchInComments(boolean value)
-	{
-		if (myRefactoring != null)
-			myRefactoring.setSearchInComments(value);
-	}
-
-	;
-
-
-	void setSearchInNonJavaFiles(boolean value)
-	{
-		if (myRefactoring != null)
-			myRefactoring.setSearchInNonJavaFiles(value);
 	}
 
 	public void run()

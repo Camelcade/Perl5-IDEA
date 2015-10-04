@@ -78,12 +78,7 @@ public class PerlMoveFileHandler extends MoveFileHandler
 			{
 				for (PsiReference reference : ReferencesSearch.search(file, file.getUseScope()).findAll())
 				{
-					PsiElement sourceElement = reference.getElement();
-					if (sourceElement instanceof PerlNamespaceElement)
-					{
-						PerlPsiUtil.renameElement(sourceElement, newPackageName);
-					}
-					// todo handle string contents for require
+					PerlPsiUtil.renameFileReferencee(reference.getElement(), newPackageName);
 				}
 			}
 		}

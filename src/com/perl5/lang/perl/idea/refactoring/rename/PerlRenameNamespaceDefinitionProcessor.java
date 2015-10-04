@@ -20,6 +20,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.util.PsiUtil;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.fileTypes.PerlFileTypePackage;
@@ -82,12 +83,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 				{
 					for (PsiReference reference : ReferencesSearch.search(file, file.getUseScope()).findAll())
 					{
-						PsiElement sourceElement = reference.getElement();
-						if (sourceElement instanceof PerlNamespaceElement)
-						{
-							PerlPsiUtil.renameElement(sourceElement, newName);
-						}
-						// todo handle string contents for require
+						PerlPsiUtil.renameFileReferencee(reference.getElement(), newName);
 					}
 
 					// rename file

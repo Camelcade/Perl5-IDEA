@@ -25,6 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -183,6 +184,25 @@ public class PerlPsiUtil
 	{
 		//noinspection unchecked
 		return PerlPsiUtil.getManipulator(element).handleContentChange(element, newName);
+	}
+
+
+	/**
+	 * Renames file referencee element. Specific method required, cause somewhere we should put package name, and somewhere filename
+	 *
+	 * @param element        element to rename
+	 * @param newPackageName new package name
+	 */
+	public static void renameFileReferencee(PsiElement element, String newPackageName)
+	{
+		if (element instanceof PerlNamespaceElement)
+		{
+			PerlPsiUtil.renameElement(element, newPackageName);
+		} else
+		{
+			System.err.println("Unhandled reference from: " + element + ": " + element.getText());
+		}
+		// todo handle string contents for require
 	}
 
 }

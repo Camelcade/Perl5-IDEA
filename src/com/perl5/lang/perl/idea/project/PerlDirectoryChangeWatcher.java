@@ -20,18 +20,18 @@ import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.perl5.lang.perl.idea.PerlFileListener;
+import com.perl5.lang.perl.idea.PerlVirtualFileListener;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class PerlProjectComponent implements ProjectComponent
+public class PerlDirectoryChangeWatcher implements ProjectComponent
 {
 	Project myProject;
 	VirtualFileListener myChangeListener;
 
-	public PerlProjectComponent(Project project)
+	public PerlDirectoryChangeWatcher(Project project)
 	{
 		myProject = project;
 	}
@@ -43,7 +43,7 @@ public class PerlProjectComponent implements ProjectComponent
 //		System.out.println("Registered listener");
 		if (myChangeListener == null)
 		{
-			myChangeListener = new PerlFileListener(myProject);
+			myChangeListener = new PerlVirtualFileListener(myProject);
 			VirtualFileManager.getInstance().addVirtualFileListener(myChangeListener);
 		}
 	}

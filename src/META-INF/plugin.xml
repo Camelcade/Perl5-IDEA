@@ -254,10 +254,11 @@
                 implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceDefinitionProcessor"/>
         <renamePsiElementProcessor
                 implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
-        <renamePsiElementProcessor
-                implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameDirectoryProcessor"/>
-        <renamePsiElementProcessor
-                implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameIDEAPackageProcessor"/>
+        <!-- following processors are alternative to VirtualFileWatcher -->
+        <!--<renamePsiElementProcessor-->
+        <!--implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameDirectoryProcessor"/>-->
+        <!--<renamePsiElementProcessor-->
+        <!--implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameIDEAPackageProcessor"/>-->
 
         <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.move.PerlMoveFileHandler"/>
 
@@ -461,9 +462,9 @@
 
     <project-components>
         <!-- Add your project components here -->
-        <!--<component>-->
-        <!--<implementation-class>com.perl5.lang.perl.idea.project.PerlProjectComponent</implementation-class>-->
-        <!--</component>-->
+        <component>
+            <implementation-class>com.perl5.lang.perl.idea.project.PerlDirectoryChangeWatcher</implementation-class>
+        </component>
         <component>
             <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>
         </component>

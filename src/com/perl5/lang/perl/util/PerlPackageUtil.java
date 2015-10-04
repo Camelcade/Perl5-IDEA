@@ -33,6 +33,7 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.idea.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
@@ -40,6 +41,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -268,7 +270,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param file    - file has been moved
 	 * @param oldPath - previous filepath
 	 */
-	public static void handleMovedPackageNamespaces(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath)
+	public static void collectNestedPackageDefinitionsFromFile(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath)
 	{
 		Project project = queue.getProject();
 		VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(project, file);
@@ -304,38 +306,37 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param directory VirtualFile of renamed directory
 	 * @param oldPath   old directory path
 	 */
-	public static void handlePackagePathChange(RenameRefactoringQueue queue, VirtualFile directory, String oldPath)
+	public static void collectNestedPackageDefinitions(RenameRefactoringQueue queue, VirtualFile directory, String oldPath)
 	{
 		Project project = queue.getProject();
 		VirtualFile directorySourceRoot = PerlUtil.getFileClassRoot(project, directory);
 
 		if (directorySourceRoot != null)
 			for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory))
-				if (!file.isDirectory() && "pm".equals(file.getExtension()) && directorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)))
+				if (!file.isDirectory() && file.getFileType() == PerlFileTypePackage.INSTANCE && directorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)))
 				{
 					String relativePath = VfsUtil.getRelativePath(file, directory);
 					String oldFilePath = oldPath + "/" + relativePath;
-					handleMovedPackageNamespaces(queue, file, oldFilePath);
+					collectNestedPackageDefinitionsFromFile(queue, file, oldFilePath);
 				}
 	}
 
 	/**
 	 * Searches for all pm files in directory to be renamed/moved, searches for references to those packages and add them to the renaming queue
 	 *
-	 * @param queue     RenameRefactoringQueue object
+	 * @param project   Project to be renamed
 	 * @param directory VirtualFile of directory to be renamed
 	 * @param newPath   new directory path
 	 */
-	public static void handlePackagePathChangeReferences(RenameRefactoringQueue queue, VirtualFile directory, String newPath)
+	public static void adjustNestedFiles(Project project, VirtualFile directory, String newPath)
 	{
-		Project project = queue.getProject();
 		VirtualFile oldDirectorySourceRoot = PerlUtil.getFileClassRoot(project, directory);
 		PsiManager psiManager = PsiManager.getInstance(project);
 
 		if (oldDirectorySourceRoot != null)
 		{
 			for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory))
-				if (!file.isDirectory() && "pm".equals(file.getExtension()) && oldDirectorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)))
+				if (!file.isDirectory() && file.getFileType() == PerlFileTypePackage.INSTANCE && oldDirectorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)))
 				{
 					PsiFile psiFile = psiManager.findFile(file);
 
@@ -347,7 +348,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 							String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
 							String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
-							queue.addElement(inboundReference.getElement(), newPackageName);
+							PerlPsiUtil.renameFileReferencee(inboundReference.getElement(), newPackageName);
 						}
 				}
 		}

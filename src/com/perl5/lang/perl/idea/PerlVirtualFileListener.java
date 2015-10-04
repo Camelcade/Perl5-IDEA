@@ -28,14 +28,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class PerlFileListener implements VirtualFileListener
+public class PerlVirtualFileListener implements VirtualFileListener
 {
 	Project myProject;
 	ProjectFileIndex myProjectFileIndex;
-	RenameRefactoringQueue directoryRenameQueue;
-	RenameRefactoringQueue directoryMoveQueue;
 
-	public PerlFileListener(Project project)
+	public PerlVirtualFileListener(Project project)
 	{
 		myProject = project;
 		myProjectFileIndex = ProjectRootManager.getInstance(project).getFileIndex();
@@ -52,8 +50,9 @@ public class PerlFileListener implements VirtualFileListener
 			if ("name".equals(event.getPropertyName()) && virtualFile.isDirectory())
 			{
 				// package path change
-				PerlPackageUtil.handlePackagePathChange(directoryRenameQueue, virtualFile, oldPath);
-				directoryRenameQueue.run();
+				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
+				PerlPackageUtil.collectNestedPackageDefinitions(queue, virtualFile, oldPath);
+				queue.run();
 			}
 		}
 	}
@@ -89,8 +88,9 @@ public class PerlFileListener implements VirtualFileListener
 				if (movedFile.isDirectory())
 				{
 					// one of the dirs been moved to other one
-					PerlPackageUtil.handlePackagePathChange(directoryMoveQueue, movedFile, oldPath);
-					directoryMoveQueue.run();
+					RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
+					PerlPackageUtil.collectNestedPackageDefinitions(queue, movedFile, oldPath);
+					queue.run();
 				}
 			}
 		}
@@ -111,9 +111,8 @@ public class PerlFileListener implements VirtualFileListener
 			if ("name".equals(event.getPropertyName()) && virtualFile.isDirectory())
 			{
 				// package path change, preprocessing
-				directoryRenameQueue = new RenameRefactoringQueue(myProject);
 				String newPath = virtualFile.getPath().replaceFirst(event.getOldValue().toString() + "$", event.getNewValue().toString());
-				PerlPackageUtil.handlePackagePathChangeReferences(directoryRenameQueue, virtualFile, newPath);
+				PerlPackageUtil.adjustNestedFiles(myProject, virtualFile, newPath);
 			}
 		}
 	}
@@ -139,9 +138,8 @@ public class PerlFileListener implements VirtualFileListener
 			if (virtualFile.isDirectory())
 			{
 				// package path change, preprocessing
-				directoryMoveQueue = new RenameRefactoringQueue(myProject);
 				String newPath = event.getNewParent().getPath() + '/' + virtualFile.getName();
-				PerlPackageUtil.handlePackagePathChangeReferences(directoryMoveQueue, virtualFile, newPath);
+				PerlPackageUtil.adjustNestedFiles(myProject, virtualFile, newPath);
 			}
 		}
 	}
