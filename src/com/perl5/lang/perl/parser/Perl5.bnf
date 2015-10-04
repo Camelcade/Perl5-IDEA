@@ -1070,7 +1070,7 @@ annotation_override ::= ANNOTATION_PREFIX ANNOTATION_OVERRIDE_KEY
 annotation_returns_ref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY <<mergePackageName>>
 annotation_returns_arrayref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_bracketed
 annotation_returns_hashref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_braced
-annotation_incomplete ::= ANNOTATION_PREFIX
+annotation_incomplete ::= ANNOTATION_PREFIX <<parseIncompleteAnnotation>> {pin=1}
 
 //private recover_sub_annotation ::= !(RESERVED_SUB|ANNOTATION_PREFIX)
 
