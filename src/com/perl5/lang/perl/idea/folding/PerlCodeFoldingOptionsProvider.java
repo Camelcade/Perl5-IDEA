@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.folding;
 import com.intellij.application.options.editor.CodeFoldingOptionsProvider;
 import com.intellij.openapi.options.BeanConfigurable;
 
+import javax.swing.*;
+
 /**
  * Created by hurricup on 28.09.2015.
  */
@@ -27,6 +29,7 @@ public class PerlCodeFoldingOptionsProvider extends BeanConfigurable<PerlFolding
 	public PerlCodeFoldingOptionsProvider(PerlFoldingSettings beanInstance)
 	{
 		super(beanInstance);
+
 		checkBox("COLLAPSE_SEQUENTIONAL_COMMENTS", "Sequentional line comments");
 		checkBox("COLLAPSE_BLOCK_COMMENTS", "Block comments");
 		checkBox("COLLAPSE_CONSTANT_BLOCKS", "Block of constants");
@@ -35,5 +38,16 @@ public class PerlCodeFoldingOptionsProvider extends BeanConfigurable<PerlFolding
 		checkBox("COLLAPSE_PARENTHESISED", "Parenthesised expressions");
 		checkBox("COLLAPSE_HEREDOCS", "Here-docs");
 		checkBox("COLLAPSE_TEMPLATES", "Template parts (mojo, embedded)");
+	}
+
+	@Override
+	public JComponent createComponent()
+	{
+		JComponent result = super.createComponent();
+		if (result != null)
+		{
+			result.setBorder(BorderFactory.createTitledBorder("Perl5"));
+		}
+		return result;
 	}
 }
