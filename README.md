@@ -2,7 +2,7 @@
 
 This is my attempt to build a plugin for IDEA that will support Perl5 language.
 
-Version 1.1 available in JetBrains repo. Next version is currently in development, and if you want to participate - you may fork or contact me via Skype: hurricup
+Version 1.1 available in [JetBrains repo](https://plugins.jetbrains.com/plugin/7796). Next version is currently in development, and if you want to participate - you may fork or contact me via Skype: hurricup
 Don't forget to read our [contribution policy](https://github.com/hurricup/Perl5-IDEA/wiki/Contribution-policy).
 
 * [Camelcade twitter](https://twitter.com/CamelcadeIDE)
