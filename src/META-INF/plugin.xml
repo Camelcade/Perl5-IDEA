@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.1</version>
+    <version>1.101</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -39,56 +39,17 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p><b>1.1 changes</b></p>
+      <p><b>1.2 changes</b></p>
 
       <p><b>Features & Improvements:</b>
       <ul>
-        <li>Added icons for retina displays</li>
-        <li>Implemented imports processing for subs with explicit code sigil.</li>
-        <li>Implemented basic CodeStyle settings and basic formatter (use with care with version control). Need feedbacks.</li>
-        <li>Implemented automatic heredoc closing marker insertion.</li>
-        <li>Plugin now knows that <code>use v5.12; # and above</code> includes <code>use strict;</code>.</li>
-        <li>Here-doc without injection now highlighted as an appropriate string</li>
-        <li>Implemented auto-completion of defined package names in the strings content</li>
-        <li>Implemented Run configuration settings</li>
-        <li>Implemented <code>use lib</code> support</li>
-        <li>Implemented package names resolution in the current directory</li>
-        <li>Added stacktrace and files paths hyperlinks in consoles (doesn't include terminal)</li>
-        <li>Implemented 'Create Perl5 Test' action and live templates for <code>Test::More</code></li>
-        <li>Implemented Code Folding settings for Perl entities (Default settings: imports, doc comments and method bodies being used too).</li>
+        <li>Nothing yet...</li>
       </ul>
       </p>
 
       <p><b>Fixes:</b>
       <ul>
-        <li>Significally increased re-parsing performance on code typing</li>
-        <li>It's not possible anymore to start identifier with digit, like <code>$123abc</code></li>
-        <li>Hexadecimal and binary numbers with underscores now being parsed right.</li>
-        <li>Fixed parsing problem for concatenation of string and fractional number.</li>
-        <li>Fixed parsing for simple dereferences like <code>$$array_ref[1]</code>.</li>
-        <li>Added requirement for 14 platform, no more buggy usages in outdated products.</li>
-        <li>Fixed and tested interactions with perl process.</li>
-        <li>Typeglobs for built-ins are not annotated as unused anymore.</li>
-        <li>Fixed package file creation in specialized IDEs.</li>
-        <li>Here-doc end marker, pod and formats are not being indented on block tabbing.</li>
-        <li>Here-doc end marker is not being indented on live-template insertion.</li>
-        <li>Tricky <code>use vars</code> declarations now being handled correctly. <code>use vars @SOMELIST</code> still not working. Also fixed declaration of hashes, code refs and typeglobs.</li>
-        <li>Fixed bug with tail LF in convert string to here-doc intention.</li>
-        <li>Fixed bug with lookup elements caching for subs.</li>
-        <li>Cleaned up extended regex parsing.</li>
-        <li>Replacement part of extended regex /x is now parsed and usual.</li>
-        <li>Fixed but with broken line splitting.</li>
-        <li>Fixed bug with <code>print OF &lt;&lt;EOM;</code> parsing.</li>
-        <li>Suppressed livetemplates inside a string</li>
-        <li>Suppressed string to namespace resolution for top-level namespaces.</li>
-        <li>Pod block now may starts with <code>=cut</code>.</li>
-        <li>Fixed an error creating new file outside of the modules.</li>
-        <li>Implemented distinction of array index from characters group in regexes.</li>
-        <li>Improved parser recovery before compound statements.</li>
-        <li>Fixed scoping problem for if/elsif/else compound statement.</li>
-        <li>Fixed autocompletion behaviour problem with global variables auto-completion with short <code>main::</code> form.</li>
-        <li>Fixed problems with packages refactoring.</li>
-        <li>Fixed recovery after annotations.</li>
+        <li>Nothing yet...</li>
       </ul>
       </p>
 
