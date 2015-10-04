@@ -24,7 +24,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.references.PerlGlobVariableReference;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +39,7 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		protected PsiReference[] compute()
 		{
 			if (getParent() instanceof PerlGlobVariable)
-				return new PsiReference[]{new PerlGlobVariableReference(PerlVariableNameElementImpl.this, null)};
+				return PsiReference.EMPTY_ARRAY;
 			else
 				return new PsiReference[]{new PerlVariableReference(PerlVariableNameElementImpl.this, null)};
 		}
