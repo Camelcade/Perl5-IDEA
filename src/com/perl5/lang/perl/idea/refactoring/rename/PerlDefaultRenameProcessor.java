@@ -17,11 +17,11 @@
 package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.intellij.psi.PsiReference;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
 
 /**
  * Created by hurricup on 04.10.2015.
@@ -34,7 +34,14 @@ public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementP
 		return element instanceof PerlSubDefinition
 				|| element instanceof PerlSubDeclaration
 				|| element instanceof PerlGlobVariable
-				|| element instanceof PerlVariable
+				|| element instanceof PerlVariableDeclarationWrapper
 				;
+	}
+
+	@NotNull
+	@Override
+	public Collection<PsiReference> findReferences(PsiElement element)
+	{
+		return super.findReferences(element);
 	}
 }

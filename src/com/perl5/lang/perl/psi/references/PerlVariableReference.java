@@ -65,6 +65,7 @@ public class PerlVariableReference extends PerlPolyVariantReference
 	public PsiElement resolve()
 	{
 		ResolveResult[] resolveResults = multiResolve(false);
+
 		if (resolveResults.length == 0)
 			return null;
 		else if (resolveResults.length == 1)
