@@ -94,13 +94,11 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 
 		ASTNode currentNode = lastChild.getNode();
 
-		while (currentNode != null)
-		{
-			if (PerlParserUtil.CLOSE_QUOTES.contains(currentNode.getElementType()))
-				return currentNode.getStartOffset();
-			currentNode = currentNode.getTreePrev();
-		}
-		throw new RuntimeException("Unable to find closing quote inside: " + getText() + " " + getContainingFile().getVirtualFile());
+		if (PerlParserUtil.CLOSE_QUOTES.contains(currentNode.getElementType()))
+			return currentNode.getStartOffset();
+
+		// unclosed string
+		return getTextOffset() + getTextLength();
 	}
 
 	@Override
