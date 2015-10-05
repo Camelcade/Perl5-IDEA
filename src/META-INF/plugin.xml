@@ -314,6 +314,8 @@
         <lang.psiStructureViewFactory language="Embedded Perl"
                                       implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
 
+        <lang.refactoringSupport language="Embedded Perl"
+                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
         <!--Temporary solution, better than nothing-->
         <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
@@ -343,6 +345,8 @@
         <quoteHandler fileType="Mojolicious Perl5 Template"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
+        <lang.refactoringSupport language="Mojolicious Perl"
+                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
         <lang.psiStructureViewFactory language="Mojolicious Perl"
                                       implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
