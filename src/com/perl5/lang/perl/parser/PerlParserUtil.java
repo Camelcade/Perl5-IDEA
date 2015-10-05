@@ -1610,7 +1610,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
             m.error("Missing returns value");
         } else
         {
-            m.error("Incomplete annotation");
+            m.drop();
         }
 
         return true;
