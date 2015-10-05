@@ -77,7 +77,7 @@ public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTy
 			return "package";
 		} else
 		{
-			return "";
+			return "Unknown element type: " + element.toString();
 		}
 	}
 
@@ -85,22 +85,33 @@ public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTy
 	@Override
 	public String getDescriptiveName(@NotNull PsiElement element)
 	{
-		if (element instanceof PerlNamedElementImpl)
+		if (element instanceof PsiNamedElement)
 		{
-			return ((PerlNamedElementImpl) element).getName();
-		} else
-		{
-			return "";
+			String name = ((PsiNamedElement) element).getName();
+
+			if (name != null)
+			{
+				return name;
+			}
 		}
+
+		return "Unknown descriptive name: " + element.toString();
 	}
 
 	@NotNull
 	@Override
 	public String getNodeText(@NotNull PsiElement element, boolean useFullName)
 	{
-		if (element instanceof PerlNamedElementImpl)
-			return ((PerlNamedElementImpl) element).getName();
-		else
-			return "";
+		if (element instanceof PsiNamedElement)
+		{
+			String name = ((PsiNamedElement) element).getName();
+
+			if (name != null)
+			{
+				return name;
+			}
+		}
+
+		return "Unknown node text: " + element.toString();
 	}
 }
