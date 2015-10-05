@@ -70,28 +70,4 @@ public class PerlNamespaceFileReference extends PerlPolyVariantReference
 		throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
 	}
 
-	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
-	{
-//		VirtualFile newFile = element.getContainingFile().getVirtualFile();
-//
-//		if ("pm".equals(newFile.getExtension()))
-//		{
-//			VirtualFile innerMostRoot = PerlUtil.getFileClassRoot(myElement.getProject(), newFile);
-//
-//			if (innerMostRoot != null)
-//			{
-//				String newPath = VfsUtil.getRelativePath(newFile, innerMostRoot);
-//				return super.handleElementRename(PerlPackageUtil.getPackageNameByPath(newPath));
-//			}
-//			// todo this is not being handled on rename
-////			else
-////			{
-////				throw new IncorrectOperationException("Failed attempt to move package file outside of the one of the source roots: " + newFile.getPath());
-////			}
-//			return null;
-//		}
-//		throw new IncorrectOperationException("Unable to rebind package use/require to a non-pm file " + newFile.getName());
-		return myElement;
-	}
 }

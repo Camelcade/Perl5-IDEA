@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReferenceBase;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
@@ -58,33 +59,6 @@ public class PerlVariableReference extends PerlPolyVariantReference
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
-	}
-
-	@Nullable
-	@Override
-	public PsiElement resolve()
-	{
-		ResolveResult[] resolveResults = multiResolve(false);
-
-		if (resolveResults.length == 0)
-			return null;
-		else if (resolveResults.length == 1)
-			return resolveResults[0].getElement();
-
-
-		PerlGlobVariable lastGlob = null;
-		for (ResolveResult resolveResult : resolveResults)
-			if (resolveResult.getElement() instanceof PerlGlobVariable)
-			{
-				lastGlob = (PerlGlobVariable) resolveResult.getElement();
-				if (lastGlob.isLeftSideOfAssignment())
-					return lastGlob;
-			}
-
-		if (lastGlob != null)
-			return lastGlob;
-
-		return resolveResults[0].getElement();
 	}
 
 }

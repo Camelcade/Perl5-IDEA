@@ -17,44 +17,24 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlPolyVariantReference extends PerlReference implements PsiPolyVariantReference
+public abstract class PerlPolyVariantReference extends PsiPolyVariantReferenceBase<PsiElement>
 {
 	public PerlPolyVariantReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 	}
 
+	@NotNull
 	@Override
-	public boolean isReferenceTo(PsiElement element)
+	public Object[] getVariants()
 	{
-		ResolveResult[] results = multiResolve(false);
-		PsiManager psiManager = getElement().getManager();
-
-		for (ResolveResult result : results)
-		{
-			if (psiManager.areElementsEquivalent(result.getElement(), element))
-				return true;
-		}
-
-		return false;
+		return EMPTY_ARRAY;
 	}
-
-	@Nullable
-	@Override
-	public PsiElement resolve()
-	{
-		ResolveResult[] resolveResults = multiResolve(false);
-		return resolveResults.length > 0 ? resolveResults[0].getElement() : null;
-	}
-
 }

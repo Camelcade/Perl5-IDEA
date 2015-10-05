@@ -16,17 +16,19 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin implements PsiPerlMethod
+public abstract class PerlMethodImplMixin extends ASTWrapperPsiElement implements PerlMethod
 {
 	public PerlMethodImplMixin(@NotNull ASTNode node)
 	{
@@ -53,6 +55,33 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 		else return getContextPackageNameHeavy();
 	}
 
+
+	@Override
+	public String getPackageName()
+	{
+		String namespace = getExplicitPackageName();
+
+		if (namespace == null)
+			namespace = getContextPackageName();
+
+		return namespace;
+	}
+
+	@Override
+	public String getCanonicalName()
+	{
+		return getPackageName() + "::" + getName();
+	}
+
+
+	@Override
+	public String getName()
+	{
+		PerlSubNameElement subNameElement = getSubNameElement();
+		assert subNameElement != null;
+		return subNameElement.getText();
+	}
+
 	@Override
 	public String getContextPackageNameHeavy()
 	{
@@ -64,7 +93,7 @@ public abstract class PerlMethodImplMixin extends PerlPackageMemberMixin impleme
 		if (grandParent instanceof PsiPerlDerefExpr)
 			return ((PsiPerlDerefExpr) grandParent).getPreviousElementType(parent);
 
-		return super.getContextPackageName();
+		return PerlPackageUtil.getContextPackageName(this);
 	}
 
 	@Override
