@@ -56,6 +56,7 @@
         <li>Added stacktrace and files paths hyperlinks in consoles (doesn't include terminal)</li>
         <li>Implemented 'Create Perl5 Test' action and live templates for <code>Test::More</code></li>
         <li>Implemented Code Folding settings for Perl entities (Default settings: imports, doc comments and method bodies being used too).</li>
+        <li>Implemented exceptions reporting mechanism, by @VISTALL.</li>
       </ul>
       </p>
 
