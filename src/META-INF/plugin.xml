@@ -136,7 +136,7 @@
 
         <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
 
-        <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
+        <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
         <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
 
