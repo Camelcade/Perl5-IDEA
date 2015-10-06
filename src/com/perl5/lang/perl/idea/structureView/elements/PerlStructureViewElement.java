@@ -157,7 +157,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 					result.add(new PerlVariableDeclarationStructureViewElement(child));
 				}
 			}
-			
+
 			Project project = myElement.getProject();
 			GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 

@@ -70,8 +70,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 								+ resultSet.getPrefixMatcher().getPrefix()
 				);
 				forceShortMain = true;
-			}
-			else if (namespaceCanonicalName != null)
+			} else if (namespaceCanonicalName != null)
 			{
 				resultSet = resultSet.withPrefixMatcher(
 						((PerlNamespaceElementContainer) perlVariable).getNamespaceElement().getCanonicalName()
