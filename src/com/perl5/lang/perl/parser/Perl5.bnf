@@ -488,20 +488,16 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme we can't pin this because we need to distinct declaration and definition
-sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
+sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_definition_parameters block
 
-private sub_definition_parameters ::=
-    sub_prototype [sub_attributes]
-    | sub_attributes [sub_signature]
-    | sub_signature
+private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
+private sub_prototype_or_signature ::= sub_prototype | sub_signature
 
-sub_declaration ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name [sub_declaration_parameters]
+sub_declaration ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_declaration_parameters
+private sub_declaration_parameters ::= [sub_prototype] [sub_attributes]
 
 private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
 
-private sub_declaration_parameters ::=
-    sub_prototype [sub_attributes]
-    | sub_attributes
 
 // todo implement parsing
 private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_prototype}

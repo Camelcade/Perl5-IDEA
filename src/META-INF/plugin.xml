@@ -57,6 +57,8 @@
         <li>Implemented 'Create Perl5 Test' action and live templates for <code>Test::More</code></li>
         <li>Implemented Code Folding settings for Perl entities (Default settings: imports, doc comments and method bodies being used too).</li>
         <li>Implemented exceptions reporting mechanism, by @VISTALL.</li>
+        <li>Adjusted signature position according to last Perl5 changes (see perldoc).</li>
+        <li>Improved sub attributes lexing and parsing.</li>
       </ul>
       </p>
 
