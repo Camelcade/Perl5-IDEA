@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.execution.console.RunIdeConsoleAction;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
+import javax.print.DocFlavor;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.regex.Matcher;
@@ -98,6 +100,17 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 			throw new RuntimeException("Inappropriate package name " + tokenText);
 	}
 
+	@Override
+	public IElementType parseEscape()
+	{
+		if (getBufferEnd() > getTokenEnd() && Character.isWhitespace(getBuffer().charAt(getTokenEnd())))
+		{
+			addPreparsedToken(getTokenEnd(), getTokenEnd() + 1, STRING_CONTENT);
+		}
+
+		return OPERATOR_REFERENCE;
+	}
+
 	/**
 	 * Parses IDENTIFIER =>
 	 * can be string_content => or ->identifier
@@ -106,6 +119,14 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	 */
 	public IElementType parseBarewordMinus()
 	{
+		IElementType tokenType = null;
+		String tokenText = yytext().toString();
+
+		if ((tokenType = PerlLexer.tagNames.get(tokenText)) != null)
+		{
+			return tokenType;
+		}
+
 		return IDENTIFIER;
 	}
 
