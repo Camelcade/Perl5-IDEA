@@ -310,6 +310,12 @@ public class PerlLexer extends PerlLexerGenerated
 	public boolean isEscaped = false;
 	public int sectionsNumber = 0;    // number of sections one or two
 
+	// we've passed sub
+	protected boolean waitingSubAttribute = false;
+
+	// we've passed sub and colon
+	protected boolean subAttribute = false;
+
 	protected PerlLexerAdapter evalPerlLexer;
 	protected PerlStringLexer myStringLexer;
 
@@ -661,9 +667,10 @@ public class PerlLexer extends PerlLexerGenerated
 				yypushback(1);
 				return IDENTIFIER;
 			}
-			Character nextCharacter = getNextCharacter();
-			if (nextCharacter != null && nextCharacter.equals('.'))    // it's a 1..10
+			if (getNextCharacter() == '.')    // it's a 1..10
+			{
 				yypushback(1);
+			}
 		}
 		return NUMBER;
 	}
@@ -1012,9 +1019,7 @@ public class PerlLexer extends PerlLexerGenerated
 			return parseRegex(getTokenStart());
 		} else
 		{
-			Character nextCharacter = getNextCharacter();
-
-			if (nextCharacter != null && nextCharacter.equals('/'))
+			if (getNextCharacter() == '/')
 			{
 				setTokenEnd(getNextTokenStart() + 1);
 				return OPERATOR_OR_DEFINED;
@@ -1385,8 +1390,31 @@ public class PerlLexer extends PerlLexerGenerated
 		return state == LEX_HEREDOC_WAITING || state == LEX_HEREDOC_WAITING_QQ || state == LEX_HEREDOC_WAITING_QX;
 	}
 
+	@Override
+	public IElementType processColon()
+	{
+		if (waitingSubAttribute)
+		{
+			waitingSubAttribute = false;
+			subAttribute = true;
+		}
+		return COLON;
+	}
+
+	@Override
+	public IElementType processOpeningBrace()
+	{
+		subAttribute = false;
+		waitingSubAttribute = false;
+
+		return LEFT_BRACE;
+	}
+
 	public IElementType processSemicolon()
 	{
+		subAttribute = false;
+		waitingSubAttribute = false;
+
 		if (!waitingHereDoc())
 			yybegin(YYINITIAL);
 		else
@@ -1444,7 +1472,15 @@ public class PerlLexer extends PerlLexerGenerated
 		String tokenText = yytext().toString();
 		IElementType tokenType;
 
-		if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
+		if (subAttribute)
+		{
+			if (getNextCharacter() == '(')
+			{
+				pushState();
+				yybegin(LEX_QUOTE_LIKE_OPENER_Q);
+			}
+			return IDENTIFIER;
+		} else if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
 				&& !SIGILS_TOKENS.contains(lastTokenType)    // print $$ if smth
 
 				)
@@ -1470,6 +1506,10 @@ public class PerlLexer extends PerlLexerGenerated
 				{
 					pushState();
 					yybegin(LEX_FORMAT_WAITING);
+				} else if (tokenType == RESERVED_SUB)
+				{
+					waitingSubAttribute = true;
+					subAttribute = false;
 				}
 				return tokenType;
 			} else if ((tokenType = blockNames.get(tokenText)) != null)
@@ -1533,14 +1573,16 @@ public class PerlLexer extends PerlLexerGenerated
 			throw new RuntimeException("Inappropriate package name " + tokenText);
 	}
 
-	private Character getNextCharacter()
+	private char getNextCharacter()
 	{
 		int currentPosition = getTokenEnd();
 		int bufferEnd = getBufferEnd();
 		CharSequence buffer = getBuffer();
 		if (currentPosition < bufferEnd)
+		{
 			return buffer.charAt(currentPosition);
-		return null;
+		}
+		return 0;
 	}
 
 	// checks if ahead is comma, semi, close brace
