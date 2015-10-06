@@ -94,7 +94,8 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 
 			return parsePackageCanonical();
 
-		} else
+		}
+		else
 			throw new RuntimeException("Inappropriate package name " + tokenText);
 	}
 

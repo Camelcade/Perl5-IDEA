@@ -87,7 +87,8 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 							if (variable.equals(variableName))
 								for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getKey() + "::" + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
-				} else if (actualType == PerlVariableType.ARRAY)
+				}
+				else if (actualType == PerlVariableType.ARRAY)
 				{
 					importsMap = PerlArrayUtil.getImportedArrays(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
@@ -95,7 +96,8 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 							if (variable.equals(variableName))
 								for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getKey() + "::" + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
-				} else if (actualType == PerlVariableType.HASH)
+				}
+				else if (actualType == PerlVariableType.HASH)
 				{
 					importsMap = PerlHashUtil.getImportedHashes(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
@@ -114,7 +116,8 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 			// globs
 			for (PerlVariableDeclarationWrapper globalDeclaration : myVariable.getGlobalDeclarations())
 				result.add(new PsiElementResolveResult(globalDeclaration));
-		} else
+		}
+		else
 			result.add(new PsiElementResolveResult(lexicalDeclaration));
 
 		return result.toArray(new ResolveResult[result.size()]);

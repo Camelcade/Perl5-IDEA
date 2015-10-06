@@ -85,13 +85,15 @@ public class PerlRunProfileState extends CommandLineState
 				{
 					perlSdkPath = projectSdk.getHomePath();
 				}
-			} else
+			}
+			else
 			{
 				Sdk sdk = ModuleRootManager.getInstance(moduleForFile).getSdk();
 				if (sdk == null)
 				{
 					perlSdkPath = null;
-				} else
+				}
+				else
 				{
 					perlSdkPath = sdk.getHomePath();
 					List<VirtualFile> sourceRoots = ModuleRootManager.getInstance(moduleForFile).getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE);
@@ -105,7 +107,8 @@ public class PerlRunProfileState extends CommandLineState
 					}
 				}
 			}
-		} else
+		}
+		else
 		{
 			Perl5Settings perl5Settings = Perl5Settings.getInstance(project);
 			perlSdkPath = perl5Settings.perlPath;
@@ -126,7 +129,8 @@ public class PerlRunProfileState extends CommandLineState
 			if (sdk != null)
 			{
 				perlSdkPath = sdk.getHomePath();
-			} else
+			}
+			else
 			{
 				perlSdkPath = alternativeSdkPath;
 			}
@@ -144,7 +148,8 @@ public class PerlRunProfileState extends CommandLineState
 			if (moduleForFile != null)
 			{
 				homePath = PathMacroUtil.getModuleDir(moduleForFile.getModuleFilePath());
-			} else
+			}
+			else
 			{
 				homePath = project.getBasePath();
 			}
@@ -177,7 +182,8 @@ public class PerlRunProfileState extends CommandLineState
 			{
 				throw new ExecutionException("Unknown charset: " + charsetName);
 			}
-		} else
+		}
+		else
 		{
 			charset = scriptFile.getCharset();
 		}

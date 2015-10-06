@@ -61,7 +61,8 @@ public class MojoliciousPerlLexerAdapter extends LexerBase
 		{
 			myFlex.setMojoState((int) (initialState / 255));
 			initialState = initialState % 255;
-		} else
+		}
+		else
 			myFlex.setMojoState(PerlLexerGenerated.LEX_MOJO_PERL_BLOCK);
 
 		myFlex.reset(myText, startOffset, endOffset, initialState);

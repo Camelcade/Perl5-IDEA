@@ -77,7 +77,8 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 
 						resultSet.addElement(element);
 					}
-			} else
+			}
+			else
 			{    // not an object method, but has explicit namespace
 				PerlNamespaceElement namespaceElement = ((PsiPerlMethod) method).getNamespaceElement();
 				if (namespaceElement != null)

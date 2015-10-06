@@ -48,7 +48,8 @@ public class PerlHeredocLexer extends PerlStringLexer
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 1);
 				return HEREDOC_PSEUDO_QUOTE;
-			} else if (!isInterpolated && tokenStart > bufferStart)
+			}
+			else if (!isInterpolated && tokenStart > bufferStart)
 			{
 				// fixme not dry with PerlQStringLexer
 				setTokenStart(tokenStart);
@@ -60,13 +61,15 @@ public class PerlHeredocLexer extends PerlStringLexer
 				if (currentChar == '\n')
 				{
 					currentPosition++;
-				} else if (Character.isWhitespace(currentChar))
+				}
+				else if (Character.isWhitespace(currentChar))
 				{
 					while (currentPosition < bufferEnd && (currentChar = buffer.charAt(currentPosition)) != '\n' && Character.isWhitespace(currentChar))
 					{
 						currentPosition++;
 					}
-				} else
+				}
+				else
 				{
 					while (currentPosition < bufferEnd && !Character.isWhitespace(buffer.charAt(currentPosition)))
 					{

@@ -95,7 +95,8 @@ public class CookieManager
 		{
 			// we do, so lets retrieve it from the store
 			domainStore = (Map) store.get(domain);
-		} else
+		}
+		else
 		{
 			// we don't, so let's create it and put it in the store
 			domainStore = new HashMap();
@@ -193,7 +194,8 @@ public class CookieManager
 		if (host.indexOf(DOT) != host.lastIndexOf(DOT))
 		{
 			return host.substring(host.indexOf(DOT) + 1);
-		} else
+		}
+		else
 		{
 			return host;
 		}
@@ -218,13 +220,16 @@ public class CookieManager
 		if (cookiePath == null)
 		{
 			return true;
-		} else if (cookiePath.equals("/"))
+		}
+		else if (cookiePath.equals("/"))
 		{
 			return true;
-		} else if (targetPath.regionMatches(0, cookiePath, 0, cookiePath.length()))
+		}
+		else if (targetPath.regionMatches(0, cookiePath, 0, cookiePath.length()))
 		{
 			return true;
-		} else
+		}
+		else
 		{
 			return false;
 		}

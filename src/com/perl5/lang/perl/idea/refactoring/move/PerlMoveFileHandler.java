@@ -101,7 +101,8 @@ public class PerlMoveFileHandler extends MoveFileHandler
 					if (refactoring == null)
 					{
 						refactoring = RefactoringFactory.getInstance(file.getProject()).createRename(namespaceDefinition, newPackageName);
-					} else
+					}
+					else
 					{
 						refactoring.addElement(namespaceDefinition, newPackageName);
 					}

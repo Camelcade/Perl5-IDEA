@@ -288,7 +288,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (b.getTokenType() == OPERATOR_DEREFERENCE)
 		{
 			return consumeToken(b, OPERATOR_DEREFERENCE);
-		} else
+		}
+		else
 		{
 			assert b instanceof PerlBuilder;
 			PerlTokenData prevToken = ((PerlBuilder) b).lookupToken(-1);
@@ -452,7 +453,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		{
 			b.advanceLexer();
 			return true;
-		} else if (CONVERTABLE_TOKENS.contains(currentTokenType))
+		}
+		else if (CONVERTABLE_TOKENS.contains(currentTokenType))
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
@@ -491,7 +493,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		{
 			b.advanceLexer();
 			return true;
-		} else if (PACKAGE_TOKENS.contains(currentTokenType))
+		}
+		else if (PACKAGE_TOKENS.contains(currentTokenType))
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
@@ -546,7 +549,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		{
 			b.advanceLexer();
 			return true;
-		} else if (
+		}
+		else if (
 				PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(b.lookAhead(1))
 				)
 		{
@@ -555,7 +559,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer();
 			m.collapse(PACKAGE);
 			return true;
-		} else if (
+		}
+		else if (
 				PACKAGE_TOKENS.contains(tokenType)  // explicit package name, like Foo::->method()
 						|| CONVERTABLE_TOKENS.contains(tokenType) // single word package
 				)
@@ -703,7 +708,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					else if (((PerlBuilder) b).isKnownPackage(packageOrSub))
 						return convertIdentifier(b, l, SUB) && mergePackageName(b, l);
 					return convertIdentifier(b, l, SUB);
-				} else
+				}
+				else
 					// it's method Package::
 					return convertIdentifier(b, l, SUB) && convertPackageIdentifier(b, l);
 			}
@@ -806,7 +812,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				b.advanceLexer();
 				b.advanceLexer();
 				m.collapse(VARIABLE_NAME);
-			} else
+			}
+			else
 			{
 				PsiBuilder.Marker mv = b.mark();
 				b.advanceLexer();
@@ -836,7 +843,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					mv.collapse(VARIABLE_NAME);
 					b.advanceLexer();
 					return true;
-				} else if (nextTokenType == RIGHT_BRACE)
+				}
+				else if (nextTokenType == RIGHT_BRACE)
 				{
 					b.advanceLexer();
 					return true;
@@ -954,7 +962,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				r = PerlParser.interpolated_constructs(b, l);    // we can't parse an expression here, cause it's pinned inside
 				if (!r)
 					r = PerlParser.number_constant(b, l);    // little hack for plain number. Basically we need to use expr here with pin checking
-			} else
+			}
+			else
 			{
 				r = PerlParser.expr(b, l + 1, -1);
 
@@ -987,12 +996,14 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			{
 				m.drop();
 				return true;
-			} else    // we suppose that it's compound
+			}
+			else    // we suppose that it's compound
 			{
 				m.rollbackTo();
 				return false;
 			}
-		} else
+		}
+		else
 		{
 			m.drop();
 			return false;
@@ -1044,7 +1055,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				;
 				if (!PerlParser.expr(b, l, 4))    // looks like an end
 					break;
-			} else
+			}
+			else
 				break;
 		}
 		return r;
@@ -1065,7 +1077,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			if (PerlParser.array_index(b, l))
 			{
 				m.done(ANON_ARRAY_ELEMENT);
-			} else
+			}
+			else
 			{
 				m.drop();
 			}
@@ -1101,14 +1114,17 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				if (PerlParser.array_index(b, l))
 				{
 					m.done(ARRAY_ARRAY_SLICE);
-				} else if (PerlParser.hash_index(b, l))
+				}
+				else if (PerlParser.hash_index(b, l))
 				{
 					m.done(ARRAY_HASH_SLICE);
-				} else
+				}
+				else
 				{
 					m.drop();
 				}
-			} else
+			}
+			else
 			{
 				m.drop();
 			}
@@ -1145,14 +1161,17 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				if (PerlParser.array_index(b, l))
 				{
 					m.done(SCALAR_ARRAY_ELEMENT);
-				} else if (PerlParser.hash_index(b, l))
+				}
+				else if (PerlParser.hash_index(b, l))
 				{
 					m.done(SCALAR_HASH_ELEMENT);
-				} else
+				}
+				else
 				{
 					m.drop();
 				}
-			} else
+			}
+			else
 			{
 				m.drop();
 			}
@@ -1210,7 +1229,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				{
 					m.drop();
 					return false;
-				} else if (tokenType == QUOTE_SINGLE)    // reached end of inner string
+				}
+				else if (tokenType == QUOTE_SINGLE)    // reached end of inner string
 				{
 					m.collapse(STRING_CONTENT);
 					m = b.mark();
@@ -1511,7 +1531,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			}
 			m.drop();
 			return r;
-		} else
+		}
+		else
 		{
 			return PerlParser.interpolated_constructs(b, l);
 		}
@@ -1580,7 +1601,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (consumeToken(b, ANNOTATION_RETURNS_KEY))
 		{
 			m.error("Missing returns value");
-		} else
+		}
+		else
 		{
 			m.drop();
 		}

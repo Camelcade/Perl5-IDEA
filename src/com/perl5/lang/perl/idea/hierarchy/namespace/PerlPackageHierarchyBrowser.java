@@ -102,10 +102,12 @@ public class PerlPackageHierarchyBrowser extends TypeHierarchyBrowserBase
 		if (SUPERTYPES_HIERARCHY_TYPE.equals(typeName))
 		{
 			return new PerlSuperTypesHierarchyTreeStructure(psiElement);
-		} else if (SUBTYPES_HIERARCHY_TYPE.equals(typeName))
+		}
+		else if (SUBTYPES_HIERARCHY_TYPE.equals(typeName))
 		{
 			return new PerlSubTypesHierarchyTreeStructure(psiElement);
-		} else if (TYPE_HIERARCHY_TYPE.equals(typeName))
+		}
+		else if (TYPE_HIERARCHY_TYPE.equals(typeName))
 		{
 			return null;
 		}

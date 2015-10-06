@@ -40,7 +40,8 @@ public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProv
 		{
 			String newRelativePath = VfsUtil.getRelativePath(directoryFile, newInnermostRoot);
 			props.put("PERL_PACKAGE_PREFIX", PerlPackageUtil.getPackageNameByPath(newRelativePath));
-		} else
+		}
+		else
 			props.put("PERL_PACKAGE_PREFIX", "");
 	}
 }

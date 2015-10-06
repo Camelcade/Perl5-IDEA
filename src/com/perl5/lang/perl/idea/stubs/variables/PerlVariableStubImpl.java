@@ -72,10 +72,12 @@ public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrappe
 		if (myVariableType == PerlVariableType.ARRAY)
 		{
 			return PerlVariablesStubIndex.KEY_ARRAY;
-		} else if (myVariableType == PerlVariableType.SCALAR)
+		}
+		else if (myVariableType == PerlVariableType.SCALAR)
 		{
 			return PerlVariablesStubIndex.KEY_SCALAR;
-		} else if (myVariableType == PerlVariableType.HASH)
+		}
+		else if (myVariableType == PerlVariableType.HASH)
 		{
 			return PerlVariablesStubIndex.KEY_HASH;
 		}

@@ -100,7 +100,8 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				if (file != null)
 				{
 					myCharsetBox.setSelectedItem(file.getCharset().displayName());
-				} else
+				}
+				else
 				{
 					myCharsetBox.setSelectedItem(null);
 				}

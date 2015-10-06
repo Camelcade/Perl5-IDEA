@@ -624,7 +624,8 @@ public abstract class PerlLexerGenerated extends PerlBaseLexer
 					{
 						zzInput = YYEOF;
 						break zzForAction;
-					} else
+					}
+					else
 					{
 						// store back cached positions
 						zzCurrentPos = zzCurrentPosL;
@@ -639,7 +640,8 @@ public abstract class PerlLexerGenerated extends PerlBaseLexer
 						{
 							zzInput = YYEOF;
 							break zzForAction;
-						} else
+						}
+						else
 						{
 							zzInput = (zzBufferArrayL != null ? zzBufferArrayL[zzCurrentPosL++] : zzBufferL.charAt(zzCurrentPosL++));
 						}
@@ -1018,7 +1020,8 @@ public abstract class PerlLexerGenerated extends PerlBaseLexer
 					{
 						zzAtEOF = true;
 						return null;
-					} else
+					}
+					else
 					{
 						zzScanError(ZZ_NO_MATCH);
 					}

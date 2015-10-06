@@ -62,7 +62,8 @@ public class EmbeddedPerlLexer extends PerlLexer
 					yybegin(preHTMLState);
 					setTokenEnd(tokenStart + 2);
 					return EMBED_MARKER_OPEN;
-				} else
+				}
+				else
 				{
 					// fixme how about end of file?
 					int offset = tokenStart;
@@ -75,7 +76,8 @@ public class EmbeddedPerlLexer extends PerlLexer
 					setTokenEnd(offset);
 					return TEMPLATE_BLOCK_HTML;
 				}
-			} else if (bufferAtString(buffer, tokenStart, "?>"))
+			}
+			else if (bufferAtString(buffer, tokenStart, "?>"))
 			{
 				if (tokenStart < bufferEnd - 2)
 				{

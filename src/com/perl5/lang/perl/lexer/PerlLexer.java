@@ -407,7 +407,8 @@ public class PerlLexer extends PerlLexerGenerated
 				IElementType tokenType = captureFormat();
 				if (tokenType != null)    // got something
 					return tokenType;
-			} else if (isOpeningQuoteFor(currentState, currentChar, LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW))
+			}
+			else if (isOpeningQuoteFor(currentState, currentChar, LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW))
 				return captureString();
 			else if (isOpeningQuoteFor(currentState, currentChar, LEX_REGEX_OPENER))
 				return parseRegex(tokenStart);
@@ -660,7 +661,8 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_CONCAT;
-		} else if (tokenText.endsWith("."))
+		}
+		else if (tokenText.endsWith("."))
 		{
 			if (lastUnbraceTokenType == SIGIL_SCALAR) // $1.$something
 			{
@@ -718,11 +720,14 @@ public class PerlLexer extends PerlLexerGenerated
 					}
 
 					tailComment = pm.group(2);
-				} else
+				}
+				else
 					tailComment = m.group(3);
-			} else
+			}
+			else
 				tailComment = m.group(3);
-		} else
+		}
+		else
 			tailComment = annotationLine;
 
 		if (tailComment != null && tailComment.length() > 0)
@@ -793,13 +798,15 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			m = markerPatternDQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING_QQ;
-		} else if (StringUtil.endsWithChar(openToken, '\''))
+		}
+		else if (StringUtil.endsWithChar(openToken, '\''))
 			m = markerPatternSQ.matcher(openToken);
 		else if (StringUtil.endsWithChar(openToken, '`'))
 		{
 			m = markerPatternXQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING_QX;
-		} else
+		}
+		else
 			m = markerPattern.matcher(openToken);
 
 		Character nextCharacter = getNextSignificantCharacter();
@@ -827,7 +834,8 @@ public class PerlLexer extends PerlLexerGenerated
 				currentPosition += heredocMarker.length();
 
 				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, getCloseQuoteTokenType(m.group(2).charAt(0))));
-			} else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
+			}
+			else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
 				return OPERATOR_SHIFT_LEFT;
 			else    // bareword heredoc
 			{
@@ -837,7 +845,8 @@ public class PerlLexer extends PerlLexerGenerated
 				heredocMarker = m.group(1);
 				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
 			}
-		} else
+		}
+		else
 			throw new RuntimeException("Unable to parse HEREDOC opener " + openToken);
 
 		pushState();
@@ -1017,13 +1026,15 @@ public class PerlLexer extends PerlLexerGenerated
 			sectionsNumber = 1;
 			pushState();
 			return parseRegex(getTokenStart());
-		} else
+		}
+		else
 		{
 			if (getNextCharacter() == '/')
 			{
 				setTokenEnd(getNextTokenStart() + 1);
 				return OPERATOR_OR_DEFINED;
-			} else
+			}
+			else
 			{
 				return OPERATOR_DIV;
 			}
@@ -1189,13 +1200,15 @@ public class PerlLexer extends PerlLexerGenerated
 				while (currentOffset < bufferEnd && Character.isWhitespace(currentChar = buffer.charAt(currentOffset)) && currentChar != '\n')
 					currentOffset++;
 				targetList.add(getCustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
-			} else if (currentChar == '#')    // line comment
+			}
+			else if (currentChar == '#')    // line comment
 			{
 				int commentStart = currentOffset;
 				while (currentOffset < bufferEnd && buffer.charAt(currentOffset) != '\n')
 					currentOffset++;
 				targetList.add(getCustomToken(commentStart, currentOffset, COMMENT_LINE));
-			} else
+			}
+			else
 				break;
 		}
 
@@ -1270,7 +1283,8 @@ public class PerlLexer extends PerlLexerGenerated
 					preparsedTokensList.getFirst().setTokenType(REGEX_QUOTE_OPEN_X);
 
 				isExtended = true;
-			} else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
+			}
+			else if (buffer.charAt(modifiersEnd) == 'e')    // mark as evaluated
 			{
 				isEvaluated = true;
 				if (secondBlockOpener != null)
@@ -1304,7 +1318,8 @@ public class PerlLexer extends PerlLexerGenerated
 				if (evalPerlLexer == null)
 					evalPerlLexer = new PerlLexerAdapter(myProject);
 				preparsedTokensList.addAll(secondBLock.parseEval(evalPerlLexer));
-			} else
+			}
+			else
 				preparsedTokensList.addAll(secondBLock.tokenize(getBareStringLexer(), false, true));
 		}
 
@@ -1445,7 +1460,8 @@ public class PerlLexer extends PerlLexerGenerated
 
 			yypushback(tokenText.length() - endOffset);
 			return NUMBER_SIMPLE;
-		} else if (!negate && isBraced())
+		}
+		else if (!negate && isBraced())
 			return IDENTIFIER;
 		else if (!negate && isCommaArrowAhead())
 			return STRING_CONTENT;
@@ -1453,7 +1469,8 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			yypushback(tokenText.length() - 2);
 			return OPERATOR_MINUS_MINUS;
-		} else if (StringUtil.startsWithChar(tokenText, '-'))
+		}
+		else if (StringUtil.startsWithChar(tokenText, '-'))
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_MINUS;
@@ -1480,7 +1497,8 @@ public class PerlLexer extends PerlLexerGenerated
 				yybegin(LEX_QUOTE_LIKE_OPENER_Q);
 			}
 			return IDENTIFIER;
-		} else if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
+		}
+		else if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
 				&& !SIGILS_TOKENS.contains(lastTokenType)    // print $$ if smth
 
 				)
@@ -1506,17 +1524,20 @@ public class PerlLexer extends PerlLexerGenerated
 				{
 					pushState();
 					yybegin(LEX_FORMAT_WAITING);
-				} else if (tokenType == RESERVED_SUB)
+				}
+				else if (tokenType == RESERVED_SUB)
 				{
 					waitingSubAttribute = true;
 					subAttribute = false;
 				}
 				return tokenType;
-			} else if ((tokenType = blockNames.get(tokenText)) != null)
+			}
+			else if ((tokenType = blockNames.get(tokenText)) != null)
 				return tokenType;
 			else if ((tokenType = tagNames.get(tokenText)) != null)
 				return tokenType;
-		} else if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_NO) // pragma section
+		}
+		else if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_NO) // pragma section
 			if (PRAGMA_TOKENS_MAP.containsKey(tokenText))
 				return PRAGMA_TOKENS_MAP.get(tokenText);
 
@@ -1569,7 +1590,8 @@ public class PerlLexer extends PerlLexerGenerated
 				barewordToken.setTokenType(reservedTokenTypes.get(identifier));
 			return packageTokenType;
 
-		} else
+		}
+		else
 			throw new RuntimeException("Inappropriate package name " + tokenText);
 	}
 

@@ -95,7 +95,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 				if (status == SubmittedReportInfo.SubmissionStatus.NEW_ISSUE)
 				{
 					text.append("<br/>").append(DiagnosticBundle.message("error.report.gratitude"));
-				} else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE)
+				}
+				else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE)
 				{
 					text.append("<br/>Possible duplicate report");
 				}
@@ -104,10 +105,12 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 				if (status == SubmittedReportInfo.SubmissionStatus.FAILED)
 				{
 					type = NotificationType.ERROR;
-				} else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE)
+				}
+				else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE)
 				{
 					type = NotificationType.WARNING;
-				} else
+				}
+				else
 				{
 					type = NotificationType.INFORMATION;
 				}

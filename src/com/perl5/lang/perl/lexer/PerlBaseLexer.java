@@ -170,7 +170,8 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 						break;
 					currentPosition++;
 				}
-			} else if (!Character.isWhitespace(currentChar))
+			}
+			else if (!Character.isWhitespace(currentChar))
 				return currentPosition;
 
 			currentPosition++;

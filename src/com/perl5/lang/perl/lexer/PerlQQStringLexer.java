@@ -33,7 +33,8 @@ public class PerlQQStringLexer extends PerlStringLexer
 			setTokenStart(getBufferStart());
 			setTokenEnd(getBufferStart() + 1);
 			return getOpenQuoteToken();
-		} else if (
+		}
+		else if (
 				getTokenEnd() == getBufferEnd() - 1
 						&& getBuffer().charAt(getBufferEnd() - 1) == RegexBlock.getQuoteCloseChar(getBuffer().charAt(getBufferStart()))
 				)

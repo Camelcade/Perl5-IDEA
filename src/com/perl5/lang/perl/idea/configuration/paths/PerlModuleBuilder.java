@@ -61,7 +61,8 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
 		if (myJdk != null)
 		{
 			rootModel.setSdk(myJdk);
-		} else
+		}
+		else
 		{
 			rootModel.inheritSdk();
 		}

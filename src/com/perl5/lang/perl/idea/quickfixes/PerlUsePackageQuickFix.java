@@ -87,14 +87,16 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 				}
 			else    // not a pragma
 				baseStatement = baseStatement.getPrevSibling();
-		} else    // no uses found
+		}
+		else    // no uses found
 		{
 			baseStatement = PsiTreeUtil.findChildOfType(statementContainer, PerlNamespaceDefinition.class);
 			if (baseStatement != null)    // got a namespace definition
 			{
 				statementContainer = ((PerlNamespaceDefinition) baseStatement).getBlock();
 				baseStatement = null;
-			} else
+			}
+			else
 			{
 				baseStatement = statementContainer.getFirstChild();
 				if (baseStatement != null)

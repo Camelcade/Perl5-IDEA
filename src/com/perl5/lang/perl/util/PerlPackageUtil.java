@@ -428,7 +428,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		if (text.endsWith("::"))
 		{
 			endOffset -= 2;
-		} else if (text.endsWith("'"))
+		}
+		else if (text.endsWith("'"))
 		{
 			endOffset -= 1;
 		}

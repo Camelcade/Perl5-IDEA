@@ -129,7 +129,8 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 											relatedItems
 											, globalSearchScope
 									);
-					} else    // check imports to target namespace
+					}
+					else    // check imports to target namespace
 					{
 						String targetPackageName = expliclitPackageElement.getCanonicalName();
 						if (targetPackageName != null)

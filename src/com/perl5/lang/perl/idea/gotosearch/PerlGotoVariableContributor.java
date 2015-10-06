@@ -72,7 +72,8 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor
 		{
 			Collection<PsiPerlGlobVariable> globResult = PerlGlobUtil.getGlobsDefinitions(project, name.substring(1));
 			return globResult.toArray(new NavigationItem[globResult.size()]);
-		} else
+		}
+		else
 			throw new RuntimeException("Cant' be");
 
 		return result.toArray(new NavigationItem[result.size()]);

@@ -53,7 +53,8 @@ public class PerlInternalIndexKeysProcessor implements Processor<String>
 		if (originalName == null || !isForceShortMain() || !originalName.startsWith(MAIN_TEMPLATE))
 		{
 			return originalName;
-		} else
+		}
+		else
 		{
 			return originalName.substring(4);
 		}

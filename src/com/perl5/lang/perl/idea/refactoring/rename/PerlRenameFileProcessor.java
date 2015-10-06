@@ -81,7 +81,8 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 									if (refactoring == null)
 									{
 										refactoring = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
-									} else
+									}
+									else
 									{
 										refactoring.addElement(namespaceDefinition, newPackageName);
 									}
