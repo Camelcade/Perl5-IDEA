@@ -136,7 +136,7 @@
 
         <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
 
-        <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
+        <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
         <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
 
@@ -176,10 +176,6 @@
         <lang.refactoringSupport language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
-        <renameHandler
-                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlStringNameIdentifierInplaceRenameHandler"
-                order="first"/>
-
         <gotoClassContributor
                 implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToNamespaceDefinitionContributor"/>
         <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToSubDefinitionContributor"/>
@@ -213,6 +209,12 @@
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
 
 
+        <renameHandler
+                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlStringNameIdentifierInplaceRenameHandler"
+                order="first"/>
+
+        <renamePsiElementProcessor
+                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlDefaultRenameProcessor"/>
         <renamePsiElementProcessor
                 implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceDefinitionProcessor"/>
         <renamePsiElementProcessor
@@ -273,6 +275,8 @@
         <lang.psiStructureViewFactory language="Embedded Perl"
                                       implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
 
+        <lang.refactoringSupport language="Embedded Perl"
+                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
         <!--Temporary solution, better than nothing-->
         <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
@@ -302,6 +306,8 @@
         <quoteHandler fileType="Mojolicious Perl5 Template"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
+        <lang.refactoringSupport language="Mojolicious Perl"
+                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
         <lang.psiStructureViewFactory language="Mojolicious Perl"
                                       implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
