@@ -42,7 +42,8 @@ public class PerlUnusedTypeGlobInspection extends PerlInspection
 			{
 				if (o.getNamespaceElement() == null && PerlGlobUtil.BUILT_IN.contains(o.getName()))
 				{
-				} else if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
+				}
+				else if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
 					holder.registerProblem(o, "Unused typeglob alias", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 
 			}

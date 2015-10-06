@@ -74,7 +74,8 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 					currentFile.addAfter(heredocElements.get(1), currentFile.getLastChild());
 					currentFile.addAfter(heredocElements.get(2), currentFile.getLastChild());
 					currentFile.addAfter(heredocElements.get(3), currentFile.getLastChild());
-				} else
+				}
+				else
 				{
 					PsiElement container = newLineItem.getParent();
 					PsiElement anchor = container.addBefore(heredocElements.get(2), newLineItem); // heredoc element

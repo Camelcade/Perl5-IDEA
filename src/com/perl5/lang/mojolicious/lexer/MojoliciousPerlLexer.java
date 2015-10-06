@@ -74,7 +74,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 				IElementType tokenType = currentMojoState == LEX_MOJO_PERL_LINE_SEMI ? SEMICOLON : TokenType.NEW_LINE_INDENT;
 				setMojoState(LEX_HTML_BLOCK);
 				return tokenType;
-			} else // if (currentMojoState == LEX_MOJO_PERL_LINE) // there is a documentation example with %= ... begin
+			}
+			else // if (currentMojoState == LEX_MOJO_PERL_LINE) // there is a documentation example with %= ... begin
 			{
 				Matcher m = BLOCK_START_PERL_LINE.matcher(buffer);
 				m.region(tokenStart, bufferEnd);
@@ -82,7 +83,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 				if (m.lookingAt())
 					return parseBeginBlock(tokenStart, m, false);
 			}
-		} else if (currentMojoState == LEX_MOJO_PERL_BLOCK || currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI)
+		}
+		else if (currentMojoState == LEX_MOJO_PERL_BLOCK || currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI)
 		{
 			int closeTokenSize = 0;
 			if (bufferAtString(buffer, tokenStart, "=%>"))
@@ -111,7 +113,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 				return EMBED_MARKER_SEMICOLON;
 			else
 				return EMBED_MARKER_CLOSE;
-		} else if (currentMojoState == LEX_HTML_BLOCK)
+		}
+		else if (currentMojoState == LEX_HTML_BLOCK)
 		{
 			setTokenStart(tokenStart);
 			int offset = tokenStart;
@@ -126,7 +129,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 				{
 					blockStart = true;
 					break;
-				} else if (offset < bufferEnd && clearLine && currentChar == '%')
+				}
+				else if (offset < bufferEnd && clearLine && currentChar == '%')
 					break;
 				else if (currentChar == '\n')
 					clearLine = true;
@@ -175,7 +179,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 							if (semiChar == '\n')
 								setMojoState(LEX_HTML_BLOCK);
 						}
-					} else
+					}
+					else
 					{
 						int embedTokenSize = 1;
 						int newMojoState = LEX_MOJO_PERL_LINE;
@@ -184,7 +189,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 						{
 							embedTokenSize = 3;
 							newMojoState = LEX_MOJO_PERL_LINE_SEMI;
-						} else if (bufferAtString(buffer, offset, "%="))
+						}
+						else if (bufferAtString(buffer, offset, "%="))
 						{
 							embedTokenSize = 2;
 							newMojoState = LEX_MOJO_PERL_LINE_SEMI;
@@ -194,7 +200,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 						setMojoState(newMojoState);
 					}
 				}
-			} else if (bufferAtString(buffer, offset, "<%#"))    // block comment
+			}
+			else if (bufferAtString(buffer, offset, "<%#"))    // block comment
 			{
 				preparsedTokensList.add(new CustomToken(offset, offset + 3, EMBED_MARKER_OPEN));
 				offset += 3;
@@ -210,7 +217,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 				if (commentEnd < bufferEnd) // not eof, got closing marker
 					preparsedTokensList.add(new CustomToken(commentEnd, commentEnd + 2, EMBED_MARKER_CLOSE));
 
-			} else if (bufferAtString(buffer, offset, "<%%"))    // <% macro
+			}
+			else if (bufferAtString(buffer, offset, "<%%"))    // <% macro
 				preparsedTokensList.add(new CustomToken(offset, offset + 3, EMBED_MARKER));
 			else   // begin of perl block
 			{
@@ -252,11 +260,13 @@ public class MojoliciousPerlLexer extends PerlLexer
 							}
 							preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), EMBED_MARKER_SEMICOLON));
 							setMojoState(LEX_HTML_BLOCK);
-						} else    // something else is there
+						}
+						else    // something else is there
 							preparsedTokensList.add(new CustomToken(offset, offset + 1, SEMICOLON));
 					}
 
-				} else
+				}
+				else
 				{
 					int embedTokenSize = 2;
 					int newMojoState = LEX_MOJO_PERL_BLOCK;
@@ -265,7 +275,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 					{
 						embedTokenSize = 4;
 						newMojoState = LEX_MOJO_PERL_BLOCK_SEMI;
-					} else if (bufferAtString(buffer, offset, "<%="))
+					}
+					else if (bufferAtString(buffer, offset, "<%="))
 					{
 						embedTokenSize = 3;
 						newMojoState = LEX_MOJO_PERL_BLOCK_SEMI;
@@ -308,7 +319,8 @@ public class MojoliciousPerlLexer extends PerlLexer
 			{
 				preparsedTokensList.add(new CustomToken(offset, offset + 1, LEFT_BRACE));
 				preparsedTokensList.add(new CustomToken(offset + 1, offset + m.group(4).length(), EMBED_MARKER_CLOSE));
-			} else
+			}
+			else
 				preparsedTokensList.add(new CustomToken(offset, offset + m.group(4).length(), LEFT_BRACE));
 			setMojoState(LEX_HTML_BLOCK);
 		}

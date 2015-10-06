@@ -231,7 +231,8 @@ public class RegexBlock implements PerlElementTypes
 					currentOffset++;
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				blockStart = currentOffset;
-			} else if (!isEscaped && Character.isWhitespace(currentChar)) // whitespace here
+			}
+			else if (!isEscaped && Character.isWhitespace(currentChar)) // whitespace here
 			{
 				if (currentOffset > blockStart)
 				{
@@ -244,7 +245,8 @@ public class RegexBlock implements PerlElementTypes
 					currentOffset++;
 				tokens.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
 				blockStart = currentOffset;
-			} else if (!isEscaped && currentChar == '#') // comment here
+			}
+			else if (!isEscaped && currentChar == '#') // comment here
 			{
 				if (currentOffset > blockStart)
 				{
@@ -257,7 +259,8 @@ public class RegexBlock implements PerlElementTypes
 					currentOffset++;
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				blockStart = currentOffset;
-			} else
+			}
+			else
 				currentOffset++;
 
 			if (!isSecondBlock)

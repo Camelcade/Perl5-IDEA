@@ -61,7 +61,8 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 			{
 				parseDoubleVersion(Double.parseDouble(versionString.replace("_", "")));
 				isAlpha = versionString.contains("_"); // fixme not sure about this at all
-			} else if ((matcher = dottedVersion.matcher(versionString)).matches())
+			}
+			else if ((matcher = dottedVersion.matcher(versionString)).matches())
 			{
 				List<String> versionChunks = new ArrayList<String>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
 				isAlpha = matcher.group(1) != null;
@@ -93,7 +94,8 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 					}
 				}
 
-			} else
+			}
+			else
 			{
 				isValid = false;
 				return;
@@ -122,7 +124,8 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 				major = (int) (longVersion / 1000);
 				minor = (int) (longVersion % 1000);
 			}
-		} else
+		}
+		else
 			throw new Exception("Version is too big");
 	}
 

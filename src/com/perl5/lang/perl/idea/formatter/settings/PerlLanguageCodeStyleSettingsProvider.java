@@ -41,7 +41,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 		if (settingsType == SettingsType.BLANK_LINES_SETTINGS)
 		{
 
-		} else if (settingsType == SettingsType.SPACING_SETTINGS)
+		}
+		else if (settingsType == SettingsType.SPACING_SETTINGS)
 		{
 			consumer.showStandardOptions(
 					"SPACE_AROUND_ASSIGNMENT_OPERATORS",    // implemented
@@ -79,7 +80,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", SPACE_OPTION_TERM_BLOCKS);
 
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD", SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD, SPACE_GROUP_AFTER_KEYWORD);
-		} else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS)
+		}
+		else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS)
 		{
 			// fixme this should be in perl-related tab, see #422
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", PERL_OPTION_OPTIONAL_QUOTES, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);

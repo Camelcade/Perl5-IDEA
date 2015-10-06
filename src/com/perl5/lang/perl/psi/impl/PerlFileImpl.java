@@ -35,7 +35,6 @@ import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubTreeLoader;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.packageprocessor.IPerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
@@ -155,13 +154,16 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 				if (variable instanceof PsiPerlScalarVariable)
 				{
 					declaredScalars.add(variableDeclaration);
-				} else if (variable instanceof PsiPerlArrayVariable)
+				}
+				else if (variable instanceof PsiPerlArrayVariable)
 				{
 					declaredArrays.add(variableDeclaration);
-				} else if (variable instanceof PsiPerlHashVariable)
+				}
+				else if (variable instanceof PsiPerlHashVariable)
 				{
 					declaredHashes.add(variableDeclaration);
-				} else
+				}
+				else
 				{
 					throw new RuntimeException("Unknown variable declaration: " + variable);
 				}
@@ -413,7 +415,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			{
 				System.err.println("Collecting from psi for " + getVirtualFile());
 				collectRequiresFromPsi(this, includedVirtualFiles);
-			} else
+			}
+			else
 			{
 				System.err.println("Collecting from stubs for " + getVirtualFile());
 				collectRequiresFromStub(fileStub, includedVirtualFiles);
@@ -432,7 +435,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			{
 				System.err.println("Collecting from stub for " + virtualFile);
 				collectRequiresFromStub((PsiFileStub) objectStubTree.getRoot(), includedVirtualFiles);
-			} else
+			}
+			else
 			{
 				System.err.println("Collecting from psi for " + virtualFile);
 				PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(virtualFile);
@@ -493,7 +497,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 				{
 					virtualFile = resolvePackageNameToVirtualFile(packageName);
 				}
-			} else if (importStatement instanceof PerlDoExpr)
+			}
+			else if (importStatement instanceof PerlDoExpr)
 			{
 				String importPath = ((PerlDoExpr) importStatement).getImportPath();
 

@@ -42,11 +42,13 @@ public class PerlAnnotatorNamespaces extends PerlAnnotator
 					namespaceElement.isBuiltin(),
 					namespaceElement.isDeprecated()
 			);
-		} else if (namespaceElement.isPragma())    // fixme with such way pragma can't be deprecated
+		}
+		else if (namespaceElement.isPragma())    // fixme with such way pragma can't be deprecated
 		{
 			Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
 			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PRAGMA);
-		} else if (!(parent instanceof PerlVariable || parent instanceof PerlGlobVariable))
+		}
+		else if (!(parent instanceof PerlVariable || parent instanceof PerlGlobVariable))
 			decorateElement(
 					holder.createInfoAnnotation(namespaceElement, null),
 					PerlSyntaxHighlighter.PERL_PACKAGE,

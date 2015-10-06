@@ -20,10 +20,8 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolver;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PerlSubReference extends PerlPolyVariantReference
 {

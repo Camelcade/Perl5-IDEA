@@ -71,10 +71,12 @@ public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTy
 		if (element instanceof PerlSubNameElement)
 		{
 			return "sub";
-		} else if (element instanceof PerlNamespaceElement)
+		}
+		else if (element instanceof PerlNamespaceElement)
 		{
 			return "package";
-		} else
+		}
+		else
 		{
 			return "Unknown element type: " + element.toString();
 		}

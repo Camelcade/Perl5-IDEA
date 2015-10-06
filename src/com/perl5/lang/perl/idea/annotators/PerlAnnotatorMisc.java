@@ -57,7 +57,8 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
 
 			}
-		} else if (!(parent instanceof PsiPerlConstantName
+		}
+		else if (!(parent instanceof PsiPerlConstantName
 				|| grandParent instanceof PsiPerlConstantName
 		))
 		{

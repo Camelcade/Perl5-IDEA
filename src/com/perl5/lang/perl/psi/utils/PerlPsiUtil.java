@@ -92,7 +92,8 @@ public class PerlPsiUtil
 
 			return PsiTreeUtil.getParentOfType(opener, PsiPerlStatement.class);
 
-		} else
+		}
+		else
 			return PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 	}
 
@@ -114,7 +115,8 @@ public class PerlPsiUtil
 			{
 				if (marker == null || marker.equals(opener.getName()))
 					result = opener;
-			} else
+			}
+			else
 			{
 				break;
 			}
@@ -198,7 +200,8 @@ public class PerlPsiUtil
 		if (element instanceof PerlNamespaceElement)
 		{
 			PerlPsiUtil.renameElement(element, newPackageName);
-		} else
+		}
+		else
 		{
 			System.err.println("Unhandled reference from: " + element + ": " + element.getText());
 		}

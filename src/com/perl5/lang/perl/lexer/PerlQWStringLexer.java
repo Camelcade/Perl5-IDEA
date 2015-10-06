@@ -44,7 +44,8 @@ public class PerlQWStringLexer extends PerlQQStringLexer
 		{
 			setTokenEnd(tokenStart + 1);
 			return TokenType.NEW_LINE_INDENT;
-		} else if (Character.isWhitespace(buffer.charAt(tokenStart))) // whitespaces
+		}
+		else if (Character.isWhitespace(buffer.charAt(tokenStart))) // whitespaces
 		{
 			char currentChar;
 			while (tokenEnd < bufferEnd && (currentChar = buffer.charAt(tokenEnd)) != '\n' && Character.isWhitespace(currentChar))

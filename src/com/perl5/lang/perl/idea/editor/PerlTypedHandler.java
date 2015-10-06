@@ -49,7 +49,8 @@ public class PerlTypedHandler extends TypedHandlerDelegate
 						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(project, editor);
 					}
 				});
-		} else if (c == ':')
+		}
+		else if (c == ':')
 		{
 			PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 1);
 

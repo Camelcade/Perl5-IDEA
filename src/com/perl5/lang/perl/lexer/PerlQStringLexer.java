@@ -50,7 +50,8 @@ public class PerlQStringLexer extends PerlQQStringLexer
 					currentChar = buffer.charAt(++currentPosition);
 				} while (currentPosition < bufferEnd - 1 && currentChar != '\n' && Character.isWhitespace(currentChar));
 				setTokenEnd(currentPosition);
-			} else
+			}
+			else
 			{
 				do
 				{

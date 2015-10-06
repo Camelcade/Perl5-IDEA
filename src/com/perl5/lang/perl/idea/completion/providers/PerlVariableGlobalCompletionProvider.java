@@ -127,7 +127,8 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				}
 			});
 
-		} else if (perlVariable instanceof PerlGlobVariable)
+		}
+		else if (perlVariable instanceof PerlGlobVariable)
 		{
 			// global scalars
 			PerlScalarUtil.processDefinedGlobalScalarNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
@@ -184,7 +185,8 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 					return true;
 				}
 			});
-		} else if (perlVariable instanceof PsiPerlArrayVariable)
+		}
+		else if (perlVariable instanceof PsiPerlArrayVariable)
 		{
 			// global arrays
 			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
@@ -213,7 +215,8 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 					return true;
 				}
 			});
-		} else if (perlVariable instanceof PsiPerlArrayIndexVariable)
+		}
+		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 		{
 			// global arrays
 			PerlArrayUtil.processDefinedGlobalArrayNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)
@@ -228,7 +231,8 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 					return true;
 				}
 			});
-		} else if (perlVariable instanceof PsiPerlHashVariable)
+		}
+		else if (perlVariable instanceof PsiPerlHashVariable)
 		{
 			// global hashes
 			PerlHashUtil.processDefinedGlobalHashNames(project, new PerlInternalIndexKeysProcessor(forceShortMain)

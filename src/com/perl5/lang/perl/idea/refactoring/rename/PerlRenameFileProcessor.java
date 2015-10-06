@@ -18,31 +18,21 @@ package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
-import com.intellij.psi.search.SearchScope;
-import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.RefactoringFactory;
 import com.intellij.refactoring.RenameRefactoring;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.refactoring.rename.RenamePsiFileProcessor;
-import com.intellij.usageView.UsageInfo;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -91,7 +81,8 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 									if (refactoring == null)
 									{
 										refactoring = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
-									} else
+									}
+									else
 									{
 										refactoring.addElement(namespaceDefinition, newPackageName);
 									}

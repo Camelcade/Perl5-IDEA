@@ -501,7 +501,8 @@ public class PodLexer extends PodLexerProto implements FlexLexer, PodElementType
 					{
 						zzInput = YYEOF;
 						break zzForAction;
-					} else
+					}
+					else
 					{
 						// store back cached positions
 						zzCurrentPos = zzCurrentPosL;
@@ -516,7 +517,8 @@ public class PodLexer extends PodLexerProto implements FlexLexer, PodElementType
 						{
 							zzInput = YYEOF;
 							break zzForAction;
-						} else
+						}
+						else
 						{
 							zzInput = (zzBufferArrayL != null ? zzBufferArrayL[zzCurrentPosL++] : zzBufferL.charAt(zzCurrentPosL++));
 						}
@@ -613,7 +615,8 @@ public class PodLexer extends PodLexerProto implements FlexLexer, PodElementType
 					{
 						zzAtEOF = true;
 						return null;
-					} else
+					}
+					else
 					{
 						zzScanError(ZZ_NO_MATCH);
 					}

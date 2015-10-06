@@ -23,7 +23,10 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlNamespaceContainer;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -84,7 +87,8 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 							if (variable.equals(variableName))
 								for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getKey() + "::" + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
-				} else if (actualType == PerlVariableType.ARRAY)
+				}
+				else if (actualType == PerlVariableType.ARRAY)
 				{
 					importsMap = PerlArrayUtil.getImportedArrays(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
@@ -92,7 +96,8 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 							if (variable.equals(variableName))
 								for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getKey() + "::" + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
-				} else if (actualType == PerlVariableType.HASH)
+				}
+				else if (actualType == PerlVariableType.HASH)
 				{
 					importsMap = PerlHashUtil.getImportedHashes(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
@@ -111,7 +116,8 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 			// globs
 			for (PerlVariableDeclarationWrapper globalDeclaration : myVariable.getGlobalDeclarations())
 				result.add(new PsiElementResolveResult(globalDeclaration));
-		} else
+		}
+		else
 			result.add(new PsiElementResolveResult(lexicalDeclaration));
 
 		return result.toArray(new ResolveResult[result.size()]);

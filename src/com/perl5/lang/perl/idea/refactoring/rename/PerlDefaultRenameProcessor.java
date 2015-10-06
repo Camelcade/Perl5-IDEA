@@ -17,11 +17,11 @@
 package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
 
 /**
  * Created by hurricup on 04.10.2015.

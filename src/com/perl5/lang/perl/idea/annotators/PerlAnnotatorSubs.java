@@ -60,7 +60,8 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 							((PerlSubNameElement) element).isBuiltIn(),
 							false
 					);
-				} else
+				}
+				else
 				{
 
 					PsiReference reference = element.getReference();

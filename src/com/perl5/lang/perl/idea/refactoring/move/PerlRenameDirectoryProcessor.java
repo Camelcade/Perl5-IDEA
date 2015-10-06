@@ -60,7 +60,8 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor
 					}
 				}
 			}, null).run();
-		} else
+		}
+		else
 		{
 			sourceRoot.delete();
 		}

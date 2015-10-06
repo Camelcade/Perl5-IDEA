@@ -100,7 +100,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 					{
 						isCollapsable = true;
 						break;
-					} else if (prev instanceof PsiWhiteSpace)
+					}
+					else if (prev instanceof PsiWhiteSpace)
 					{
 						// whitespace with newline
 						if (prev.getText().equals("\n"))
@@ -132,7 +133,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 							if (currentComment.getText().endsWith("\n"))
 								blockEnd--;
 							commentsNumber++;
-						} else if (tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT)
+						}
+						else if (tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT)
 							break;
 
 						currentComment = currentComment.getNextSibling();
@@ -189,7 +191,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 						{
 							blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
 							importsNumber++;
-						} else if (!(currentStatement instanceof PsiComment || currentStatement instanceof PsiWhiteSpace))
+						}
+						else if (!(currentStatement instanceof PsiComment || currentStatement instanceof PsiWhiteSpace))
 							break;
 
 						currentStatement = currentStatement.getNextSibling();

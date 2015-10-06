@@ -156,7 +156,8 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 								}
 								break;
 
-							} else if ("shift".equals(rightTerm.getText()))
+							}
+							else if ("shift".equals(rightTerm.getText()))
 							{
 								PerlVariable variable = PsiTreeUtil.findChildOfType(declaration, PerlVariable.class);
 
@@ -168,13 +169,16 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
 								}
 							}
-						} else
+						}
+						else
 							// todo dunno what can else be here
 							break;
-					} else
+					}
+					else
 						// todo dunno how to handle this yet like my $scalar = my $something = shift;
 						break;
-				} else
+				}
+				else
 					// not an assignment here
 					break;
 			}

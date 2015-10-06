@@ -16,11 +16,9 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.execution.console.RunIdeConsoleAction;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.regex.Matcher;
@@ -96,7 +94,8 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 
 			return parsePackageCanonical();
 
-		} else
+		}
+		else
 			throw new RuntimeException("Inappropriate package name " + tokenText);
 	}
 

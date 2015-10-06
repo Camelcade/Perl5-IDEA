@@ -46,10 +46,12 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 				if (variable.getActualType() == PerlVariableType.SCALAR)
 				{
 					resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(variableName));
-				} else if (variable.getActualType() == PerlVariableType.ARRAY)
+				}
+				else if (variable.getActualType() == PerlVariableType.ARRAY)
 				{
 					resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(variableName));
-				} else if (variable.getActualType() == PerlVariableType.HASH)
+				}
+				else if (variable.getActualType() == PerlVariableType.HASH)
 				{
 					resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(variableName));
 				}
@@ -94,13 +96,15 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 					{
 						resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(variableName));
 
-					} else if (variable.getActualType() == PerlVariableType.HASH)
+					}
+					else if (variable.getActualType() == PerlVariableType.HASH)
 					{
 						resultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(variableName));
 					}
 				}
 			}
-		} else if (perlVariable instanceof PsiPerlArrayIndexVariable)
+		}
+		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 		{
 			for (PerlVariableDeclarationWrapper variable : declaredVariables)
 			{
@@ -113,7 +117,8 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 					}
 				}
 			}
-		} else if (perlVariable instanceof PsiPerlHashVariable)
+		}
+		else if (perlVariable instanceof PsiPerlHashVariable)
 		{
 			for (PerlVariableDeclarationWrapper variable : declaredVariables)
 			{

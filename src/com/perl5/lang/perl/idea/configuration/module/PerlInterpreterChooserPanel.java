@@ -113,7 +113,8 @@ public class PerlInterpreterChooserPanel extends JPanel
 		if (jdkToSelect != null)
 		{
 			jdkChooserPanel.selectJdk(jdkToSelect);
-		} else
+		}
+		else
 		{
 			ensureSelectionExists(jdkChooserPanel.myList);
 		}
@@ -205,16 +206,19 @@ public class PerlInterpreterChooserPanel extends JPanel
 			if (indicesToSelect.length > 0)
 			{
 				myList.setSelectedIndices(indicesToSelect);
-			} else if (myList.getModel().getSize() > 0)
+			}
+			else if (myList.getModel().getSize() > 0)
 			{
 				myList.setSelectedIndex(0);
 			}
-		} else
+		}
+		else
 		{
 			if (selectedIndices.length > 0)
 			{
 				myList.setSelectedIndices(selectedIndices);
-			} else
+			}
+			else
 			{
 				myList.setSelectedIndex(0);
 			}
@@ -236,7 +240,8 @@ public class PerlInterpreterChooserPanel extends JPanel
 		{
 			final Sdk[] allJdks = globalSdks != null ? globalSdks : ProjectJdkTable.getInstance().getAllJdks();
 			jdks = getCompatibleJdks(type, Arrays.asList(allJdks));
-		} else
+		}
+		else
 		{
 			final ProjectSdksModel projectJdksModel = ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel();
 			if (!projectJdksModel.isInitialized())

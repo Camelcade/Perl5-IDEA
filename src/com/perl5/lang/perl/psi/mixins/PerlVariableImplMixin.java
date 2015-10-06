@@ -311,12 +311,14 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 			for (PerlVariableDeclarationWrapper variable : PerlScalarUtil.getGlobalScalarDefinitions(getProject(), getCanonicalName()))
 				if (!variable.equals(parent))
 					result.add(variable);
-		} else if (myType == PerlVariableType.ARRAY)
+		}
+		else if (myType == PerlVariableType.ARRAY)
 		{
 			for (PerlVariableDeclarationWrapper variable : PerlArrayUtil.getGlobalArrayDefinitions(getProject(), getCanonicalName()))
 				if (!variable.equals(parent))
 					result.add(variable);
-		} else if (myType == PerlVariableType.HASH)
+		}
+		else if (myType == PerlVariableType.HASH)
 		{
 			for (PerlVariableDeclarationWrapper variable : PerlHashUtil.getGlobalHashDefinitions(getProject(), getCanonicalName()))
 				if (!variable.equals(parent))
