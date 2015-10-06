@@ -393,25 +393,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     }
 
     // @todo this is really raw
-    public static boolean parseSubAttributes(PsiBuilder b, int l)
-    {
-
-        PsiBuilder.Marker m = null;
-        IElementType tokenType = b.getTokenType();
-        while (!b.eof() && tokenType != LEFT_BRACE && tokenType != SEMICOLON && tokenType != EMBED_MARKER_SEMICOLON)
-        {
-            if (m == null)
-                m = b.mark();
-            b.advanceLexer();
-            tokenType = b.getTokenType();
-        }
-        if (m != null)
-            m.collapse(SUB_ATTRIBUTE);
-
-        return true;
-    }
-
-    // @todo this is really raw
     public static boolean parseVariableAttributes(PsiBuilder b, int l)
     {
 

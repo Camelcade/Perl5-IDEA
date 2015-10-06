@@ -273,7 +273,6 @@ limitations under the License.
 
     VAR_ATTRIBUTE="VAR_ATTRIBUTE"
 
-    SUB_ATTRIBUTE="SUB_ATTRIBUTE"
     SUB_PROTOTYPE_TOKEN="SUB_PROTOTYPE_TOKEN"
 
     PACKAGE="PACKAGE"
@@ -515,7 +514,8 @@ private recover_sub_signature ::= !(LEFT_BRACE | semicolon_any)
 private sub_signature_content ::= <<parseSubSignature>> {recoverWhile=recover_sub_signature_content}
 private recover_sub_signature_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | semicolon_any)
 
-private sub_attributes ::= COLON <<parseSubAttributes>> {pin=1 recoverWhile=recover_sub_attributes}
+private sub_attributes ::= COLON sub_attribute {[COLON] sub_attribute}*  {pin=1 recoverWhile=recover_sub_attributes} // <<parseSubAttributes>>
+sub_attribute ::= IDENTIFIER [string_sq_parsed]
 recover_sub_attributes ::= !(LEFT_PAREN| semicolon_any| LEFT_BRACE)
 
 last_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_LAST [lnr_param] {pin=2}
