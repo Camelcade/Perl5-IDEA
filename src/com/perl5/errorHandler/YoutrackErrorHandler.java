@@ -68,10 +68,9 @@ import static com.intellij.openapi.util.text.StringUtil.isEmpty;
  * @since 11:35:35 AM Oct 19, 2010
  */
 
-public class YoutrackErrorHandler extends ErrorReportSubmitter
-{
-    public static final String PROJECT = "CAMELCADE";
+public class YoutrackErrorHandler extends ErrorReportSubmitter {
     private static final Logger LOGGER = Logger.getInstance(YoutrackErrorHandler.class);
+    public static final String PROJECT = "CAMELCADE";
     @NonNls
     private static final String SERVER_URL = "http://camelcade.myjetbrains.com/youtrack/";
     private static final String SERVER_REST_URL = SERVER_URL + "rest/";
@@ -80,63 +79,13 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 
     private final CookieManager cookieManager = new CookieManager();
 
-    private static void popupResultInfo(final SubmittedReportInfo reportInfo, final Project project)
-    {
-        ApplicationManager.getApplication().invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                StringBuilder text = new StringBuilder("<html>");
-                final String url = reportInfo.getStatus() == SubmittedReportInfo.SubmissionStatus.FAILED || reportInfo.getLinkText() == null ? null : reportInfo.getURL();
-                IdeErrorsDialog.appendSubmissionInformation(reportInfo, text);
-                text.append(".");
-                final SubmittedReportInfo.SubmissionStatus status = reportInfo.getStatus();
-                if (status == SubmittedReportInfo.SubmissionStatus.NEW_ISSUE)
-                {
-                    text.append("<br/>").append(DiagnosticBundle.message("error.report.gratitude"));
-                }
-                else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE)
-                {
-                    text.append("<br/>Possible duplicate report");
-                }
-                text.append("</html>");
-                NotificationType type;
-                if (status == SubmittedReportInfo.SubmissionStatus.FAILED)
-                {
-                    type = NotificationType.ERROR;
-                }
-                else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE)
-                {
-                    type = NotificationType.WARNING;
-                }
-                else
-                {
-                    type = NotificationType.INFORMATION;
-                }
-                NotificationListener listener = url != null ? new NotificationListener()
-                {
-                    @Override
-                    public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent event)
-                    {
-                        BrowserUtil.launchBrowser(url);
-                        notification.expire();
-                    }
-                } : null;
-                ReportMessages.GROUP.createNotification(ReportMessages.ERROR_REPORT, text.toString(), type, listener).notify(project);
-            }
-        });
-    }
-
     @Override
-    public String getReportActionText()
-    {
+    public String getReportActionText() {
         return "Report to Camelcade issue tracker";
     }
 
     @Override
-    public SubmittedReportInfo submit(IdeaLoggingEvent[] ideaLoggingEvents, Component component)
-    {
+    public SubmittedReportInfo submit(IdeaLoggingEvent[] ideaLoggingEvents, Component component) {
         return new SubmittedReportInfo(null, "0", SubmittedReportInfo.SubmissionStatus.FAILED);
     }
 
@@ -144,16 +93,13 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
     public boolean trySubmitAsync(final IdeaLoggingEvent[] events,
                                   final String additionalInfo,
                                   final Component parentComponent,
-                                  final Consumer<SubmittedReportInfo> consumer)
-    {
+                                  final Consumer<SubmittedReportInfo> consumer) {
         final DataContext dataContext = DataManager.getInstance().getDataContext(parentComponent);
         final Project project = CommonDataKeys.PROJECT.getData(dataContext);
 
-        Task.Backgroundable task = new Task.Backgroundable(project, DiagnosticBundle.message("title.submitting.error.report"))
-        {
+        Task.Backgroundable task = new Task.Backgroundable(project, DiagnosticBundle.message("title.submitting.error.report")) {
             @Override
-            public void run(@NotNull ProgressIndicator indicator)
-            {
+            public void run(@NotNull ProgressIndicator indicator) {
                 consumer.consume(doSubmit(events, additionalInfo, parentComponent));
             }
         };
@@ -161,8 +107,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
         return true;
     }
 
-    private SubmittedReportInfo doSubmit(IdeaLoggingEvent[] ideaLoggingEvents, String addInfo, Component component)
-    {
+    private SubmittedReportInfo doSubmit(IdeaLoggingEvent[] ideaLoggingEvents, String addInfo, Component component) {
         final DataContext dataContext = DataManager.getInstance().getDataContext(component);
         final Project project = CommonDataKeys.PROJECT.getData(dataContext);
         final IdeaLoggingEvent ideaLoggingEvent = ideaLoggingEvents[0];
@@ -174,8 +119,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
         Integer signature = ideaLoggingEvent.getThrowable().getStackTrace()[0].hashCode();
 
         String existing = findExisting(signature);
-        if (existing != null)
-        {
+        if (existing != null) {
             final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "issue/" + existing, existing, DUPLICATE);
             popupResultInfo(reportInfo, project);
             return reportInfo;
@@ -194,54 +138,46 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
         String affectedVersion = null;
         Throwable t = ideaLoggingEvent.getThrowable();
         final PluginId pluginId = IdeErrorsDialog.findPluginId(t);
-        if (pluginId != null)
-        {
+        if (pluginId != null) {
             final IdeaPluginDescriptor ideaPluginDescriptor = PluginManager.getPlugin(pluginId);
-            if (ideaPluginDescriptor != null)
-            {
+            if (ideaPluginDescriptor != null) {
                 descBuilder.append("Plugin Version: ").append(ideaPluginDescriptor.getVersion()).append("\n");
                 affectedVersion = ideaPluginDescriptor.getVersion();
             }
         }
 
-        if (addInfo == null)
-        {
+        if (addInfo == null) {
             addInfo = "<none>";
         }
 
         descBuilder.append("Description: ").append(addInfo);
 
-        for (IdeaLoggingEvent e : ideaLoggingEvents)
-        {
+        for (IdeaLoggingEvent e : ideaLoggingEvents) {
             descBuilder.append("\n\n").append(e.toString());
         }
 
         String result = submit(description, descBuilder.toString(), affectedVersion);
         LOGGER.info("Error submitted, response: " + result);
 
-        if (result == null)
-        {
+        if (result == null) {
             return new SubmittedReportInfo(SERVER_ISSUE_URL, "", FAILED);
         }
 
         String ResultString = null;
-        try
-        {
+        try {
             Pattern regex = Pattern.compile("id=\"([^\"]+)\"", Pattern.DOTALL | Pattern.MULTILINE);
             Matcher regexMatcher = regex.matcher(result);
-            if (regexMatcher.find())
-            {
+            if (regexMatcher.find()) {
                 ResultString = regexMatcher.group(1);
             }
-        } catch (PatternSyntaxException ex)
-        {
+        }
+        catch (PatternSyntaxException ex) {
             // Syntax error in the regular expression
         }
 
         SubmittedReportInfo.SubmissionStatus status = NEW_ISSUE;
 
-        if (ResultString == null)
-        {
+        if (ResultString == null) {
             return new SubmittedReportInfo(SERVER_ISSUE_URL, "", FAILED);
         }
 
@@ -254,8 +190,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
       runCommand(ResultString, "Autosubmit User " + user);
     }  */
 
-        if (signature != 0)
-        {
+        if (signature != 0) {
             runCommand(ResultString, "Exception Signature " + signature);
         }
 
@@ -264,10 +199,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
         return reportInfo;
     }
 
-    public String submit(String desc, String body, String affectedVersion)
-    {
-        if (isEmpty(desc))
-        {
+    public String submit(String desc, String body, String affectedVersion) {
+        if (isEmpty(desc)) {
             throw new RuntimeException(DiagnosticBundle.message("error.report.failure.message"));
         }
 
@@ -275,8 +208,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 
         //Create Post String
         String data;
-        try
-        {
+        try {
             // Log-In
             String userName = "autoreporter";
             data = URLEncoder.encode("login", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
@@ -294,8 +226,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
 
-            while ((line = rd.readLine()) != null)
-            {
+            while ((line = rd.readLine()) != null) {
                 response += line;
             }
 
@@ -320,8 +251,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
             data += "&" + URLEncoder.encode("priority", "UTF-8") + "=" + URLEncoder.encode("4", "UTF-8");
             data += "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("Exception", "UTF-8");
 
-            if (affectedVersion != null)
-            {
+            if (affectedVersion != null) {
                 data += "&" + URLEncoder.encode("affectsVersion", "UTF-8") + "=" +
                         URLEncoder.encode(affectedVersion, "UTF-8");
             }
@@ -344,13 +274,12 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 
             // Get The Response
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = rd.readLine()) != null)
-            {
+            while ((line = rd.readLine()) != null) {
                 response += line;
             }
 
-        } catch (Exception e)
-        {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -359,10 +288,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 
     //http://sylvanaar.myjetbrains.com/youtrack/rest/issue?filter=Exception%20Signature%3A801961033
     @Nullable
-    private String findExisting(Integer signature)
-    {
-        try
-        {
+    private String findExisting(Integer signature) {
+        try {
             LOGGER.debug(String.format("Run Query for signature <%s>", signature.toString()));
             URL url = new URL(String.format("%s?filter=Exception%%20Signature%%3A%s&with=id", SERVER_ISSUE_URL, signature.toString()));
 
@@ -372,8 +299,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
             StringBuilder response = new StringBuilder(500);
-            while ((line = rd.readLine()) != null)
-            {
+            while ((line = rd.readLine()) != null) {
                 response.append(line);
             }
 
@@ -382,35 +308,31 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
             LOGGER.debug(response.toString());
 
             String resultString = null;
-            try
-            {
+            try {
                 Pattern regex = Pattern.compile("<issue id=\"([^\"]+)\"/>", Pattern.MULTILINE);
                 Matcher regexMatcher = regex.matcher(response.toString());
-                if (regexMatcher.find())
-                {
+                if (regexMatcher.find()) {
                     resultString = regexMatcher.group(1);
                 }
-            } catch (PatternSyntaxException ex)
-            {
+            }
+            catch (PatternSyntaxException ex) {
                 // Syntax error in the regular expression
             }
 
-            if (resultString != null)
-            {
+            if (resultString != null) {
                 LOGGER.debug("could be dumplicate of " + resultString);
                 return resultString;
             }
 
-        } catch (IOException e)
-        {
+        }
+        catch (IOException e) {
             LOGGER.info("Query Failed", e);
         }
 
         return null;
     }
 
-    private URLConnection getUrlConnectionAndLogin(URL url) throws IOException
-    {
+    private URLConnection getUrlConnectionAndLogin(URL url) throws IOException {
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         cookieManager.setCookies(conn);
@@ -418,10 +340,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
     }
 
     // POST /rest/issue/{issue}/execute?{command}&{comment}&{group}&{disableNotifications}&{runAs}
-    private void runCommand(String issueID, String command)
-    {
-        try
-        {
+    private void runCommand(String issueID, String command) {
+        try {
             LOGGER.debug(String.format("Run Command <%s> on issue <%s>", command, issueID));
             URL url = new URL(SERVER_ISSUE_URL + "/" + issueID + "/execute");
 
@@ -439,16 +359,53 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
             String response = "";
-            while ((line = rd.readLine()) != null)
-            {
+            while ((line = rd.readLine()) != null) {
                 response += line;
             }
 
             LOGGER.debug(response);
 
-        } catch (IOException e)
-        {
+        }
+        catch (IOException e) {
             LOGGER.info("Command Failed", e);
         }
+    }
+
+    private static void popupResultInfo(final SubmittedReportInfo reportInfo, final Project project) {
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                StringBuilder text = new StringBuilder("<html>");
+                final String url = reportInfo.getStatus() == SubmittedReportInfo.SubmissionStatus.FAILED || reportInfo.getLinkText() == null ? null : reportInfo.getURL();
+                IdeErrorsDialog.appendSubmissionInformation(reportInfo, text);
+                text.append(".");
+                final SubmittedReportInfo.SubmissionStatus status = reportInfo.getStatus();
+                if (status == SubmittedReportInfo.SubmissionStatus.NEW_ISSUE) {
+                    text.append("<br/>").append(DiagnosticBundle.message("error.report.gratitude"));
+                }
+                else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE) {
+                    text.append("<br/>Possible duplicate report");
+                }
+                text.append("</html>");
+                NotificationType type;
+                if (status == SubmittedReportInfo.SubmissionStatus.FAILED) {
+                    type = NotificationType.ERROR;
+                }
+                else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE) {
+                    type = NotificationType.WARNING;
+                }
+                else {
+                    type = NotificationType.INFORMATION;
+                }
+                NotificationListener listener = url != null ? new NotificationListener() {
+                    @Override
+                    public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent event) {
+                        BrowserUtil.launchBrowser(url);
+                        notification.expire();
+                    }
+                } : null;
+                ReportMessages.GROUP.createNotification(ReportMessages.ERROR_REPORT, text.toString(), type, listener).notify(project);
+            }
+        });
     }
 }
