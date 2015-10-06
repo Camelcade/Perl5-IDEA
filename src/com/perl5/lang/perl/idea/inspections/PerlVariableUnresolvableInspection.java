@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -50,8 +51,12 @@ public class PerlVariableUnresolvableInspection extends PerlInspection
 				if (variableNameElement != null)
 				{
 					for (PsiReference reference : variableNameElement.getReferences())
-						if (reference.resolve() != null)
+						if (reference instanceof PerlPolyVariantReference && ((PerlPolyVariantReference) reference).multiResolve(false).length > 0
+								|| reference.resolve() != null
+								)
+						{
 							return;
+						}
 
 					registerProblem(holder, variableNameElement, "Unable to find variable declaration.");
 				}

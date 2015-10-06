@@ -58,6 +58,8 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType processOpenerWhiteSpace();
 	public abstract IElementType processWhiteSpace();
 	public abstract IElementType processNewLine();
+	public abstract IElementType processOpeningBrace();
+	public abstract IElementType processColon();
 %}
 
 
@@ -166,7 +168,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 
 
 "?"  {return QUESTION;}
-":"  {return COLON;}
+":"  {return processColon();}
 
 "\\" {return OPERATOR_REFERENCE;}
 
@@ -187,7 +189,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 "$#" {return SIGIL_SCALAR_INDEX;}
 "$" { return SIGIL_SCALAR; }
 
-"{"             {return LEFT_BRACE;}
+"{"             { return processOpeningBrace(); }
 "}"             {return RIGHT_BRACE;}
 "["             {return LEFT_BRACKET;}
 "]"             {return RIGHT_BRACKET;}

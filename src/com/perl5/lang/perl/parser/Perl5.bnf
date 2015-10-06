@@ -273,7 +273,6 @@ limitations under the License.
 
     VAR_ATTRIBUTE="VAR_ATTRIBUTE"
 
-    SUB_ATTRIBUTE="SUB_ATTRIBUTE"
     SUB_PROTOTYPE_TOKEN="SUB_PROTOTYPE_TOKEN"
 
     PACKAGE="PACKAGE"
@@ -489,20 +488,16 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme we can't pin this because we need to distinct declaration and definition
-sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name [sub_definition_parameters] block
+sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_definition_parameters block
 
-private sub_definition_parameters ::=
-    sub_prototype [sub_attributes]
-    | sub_attributes [sub_signature]
-    | sub_signature
+private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
+private sub_prototype_or_signature ::= sub_prototype | sub_signature
 
-sub_declaration ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name [sub_declaration_parameters]
+sub_declaration ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_declaration_parameters
+private sub_declaration_parameters ::= [sub_prototype] [sub_attributes]
 
 private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
 
-private sub_declaration_parameters ::=
-    sub_prototype [sub_attributes]
-    | sub_attributes
 
 // todo implement parsing
 private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_prototype}
@@ -515,7 +510,8 @@ private recover_sub_signature ::= !(LEFT_BRACE | semicolon_any)
 private sub_signature_content ::= <<parseSubSignature>> {recoverWhile=recover_sub_signature_content}
 private recover_sub_signature_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | semicolon_any)
 
-private sub_attributes ::= COLON <<parseSubAttributes>> {pin=1 recoverWhile=recover_sub_attributes}
+private sub_attributes ::= COLON sub_attribute {[COLON] sub_attribute}*  {pin=1 recoverWhile=recover_sub_attributes} // <<parseSubAttributes>>
+sub_attribute ::= IDENTIFIER [string_sq_parsed]
 recover_sub_attributes ::= !(LEFT_PAREN| semicolon_any| LEFT_BRACE)
 
 last_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_LAST [lnr_param] {pin=2}
@@ -923,9 +919,8 @@ scalar_cast_expr ::= SIGIL_SCALAR cast_target
 
 scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX cast_target
 
-private cast_target ::=
-        LEFT_BRACE expr RIGHT_BRACE
-        | scalar_primitive
+private cast_target ::= braced_cast | scalar_primitive
+private braced_cast ::= LEFT_BRACE expr RIGHT_BRACE {pin=1}
 
 scalar_array_element ::= scalar_primitive array_index
 scalar_hash_element ::= scalar_primitive hash_index

@@ -20,6 +20,7 @@ import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.search.LocalSearchScope;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,6 +37,7 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 		return element.getUseScope() instanceof LocalSearchScope
 				&& element instanceof PsiNameIdentifierOwner
 				&& !(((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlString)
+				&& element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE
 				;
 	}
 

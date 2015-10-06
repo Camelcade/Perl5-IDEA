@@ -49,17 +49,16 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		PsiElement variableContainer = myVariable.getParent().getParent();
-		PerlVariableDeclarationWrapper lexicalDeclaration = null;
+		PsiElement variableContainer = myVariable.getParent();
 
-		if (variableContainer instanceof PsiPerlVariableDeclarationLexical)
-			return new ResolveResult[0];
-		else if (!(variableContainer instanceof PsiPerlVariableDeclarationGlobal))
+		if (variableContainer instanceof PerlVariableDeclarationWrapper) // it's a declaration
 		{
-			lexicalDeclaration = myVariable.getLexicalDeclaration();
+			return new ResolveResult[0];
 		}
 
-		if (lexicalDeclaration == null || lexicalDeclaration.getParent() instanceof PsiPerlVariableDeclarationGlobal)
+		PerlVariableDeclarationWrapper lexicalDeclaration = myVariable.getLexicalDeclaration();
+
+		if (lexicalDeclaration == null || lexicalDeclaration.isGlobalDeclaration())
 		{
 			// not found lexical declaration or our is closes to us
 

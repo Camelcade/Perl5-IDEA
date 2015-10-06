@@ -35,7 +35,7 @@ public abstract class PerlReference extends PsiReferenceBase<PsiElement>
 	@Override
 	public Object[] getVariants()
 	{
-		return new Object[0];
+		return EMPTY_ARRAY;
 	}
 
 }

@@ -23,6 +23,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
 
 import java.util.Map;
 
@@ -34,6 +35,8 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 	@Override
 	public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope)
 	{
+		boolean globScanned = element instanceof PerlGlobVariable;
+
 		for (PsiReference reference : ReferencesSearch.search(element, element.getUseScope()).findAll())
 		{
 			if (reference instanceof PsiPolyVariantReference)
@@ -44,6 +47,11 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 					if (!allRenames.containsKey(resolveResultElement))
 					{
 						preparePsiElementRenaming(resolveResultElement, newName, allRenames);
+						if (!globScanned && resolveResultElement instanceof PerlGlobVariable)
+						{
+							globScanned = true;
+							prepareRenaming(resolveResultElement, newName, allRenames, scope);
+						}
 					}
 				}
 			}

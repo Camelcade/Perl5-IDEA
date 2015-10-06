@@ -80,7 +80,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	protected JComponent createEditor()
 	{
 		myScriptField = new TextFieldWithBrowseButton();
-		myScriptField.addBrowseFolderListener("Select Perl Script", "Please select perl script file", myProject, FileChooserDescriptorFactory.createSingleFileDescriptor().withFileFilter(new Condition<VirtualFile>()
+		myScriptField.addBrowseFolderListener("Select Perl Script", "Please select perl script file", myProject, FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(new Condition<VirtualFile>()
 		{
 			@Override
 			public boolean value(VirtualFile virtualFile)

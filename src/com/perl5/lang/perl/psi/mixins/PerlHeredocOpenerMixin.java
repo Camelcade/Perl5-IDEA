@@ -16,22 +16,22 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PsiPerlHeredocOpener;
-import com.perl5.lang.perl.psi.impl.PerlNamedElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 07.08.2015.
  */
-public abstract class PerlHeredocOpenerMixin extends PerlNamedElementImpl implements PsiPerlHeredocOpener
+public abstract class PerlHeredocOpenerMixin extends ASTWrapperPsiElement implements PerlHeredocOpener
 {
 	public PerlHeredocOpenerMixin(@NotNull ASTNode node)
 	{
@@ -81,5 +81,11 @@ public abstract class PerlHeredocOpenerMixin extends PerlNamedElementImpl implem
 	public SearchScope getUseScope()
 	{
 		return new LocalSearchScope(getContainingFile());
+	}
+
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
 	}
 }

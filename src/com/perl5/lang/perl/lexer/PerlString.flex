@@ -42,6 +42,8 @@ import com.intellij.lexer.FlexLexer;
     public int getBufferEnd() {return zzEndRead;}
     public int getNextTokenStart(){ return zzMarkedPos;}
     public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
+
+    public abstract IElementType parseEscape();
 %}
 
 
@@ -78,17 +80,7 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
 BAREWORD_MINUS = "-" * {IDENTIFIER}
 
-
-%xstate LEX_ESCAPED
-
 %%
-
-<LEX_ESCAPED> {
-    [^]   {
-        yybegin(YYINITIAL);
-        return STRING_CONTENT;
-    }
-}
 
 {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
@@ -133,14 +125,13 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
 "}"     {return RIGHT_BRACE;}
 "["     {return LEFT_BRACKET;}
 "]"     {return RIGHT_BRACKET;}
+"("     {return LEFT_PAREN;}
+")"     {return RIGHT_PAREN;}
 
 "`"     {return QUOTE_TICK;}
 "'"     {return QUOTE_SINGLE;}
 "\""     {return QUOTE_DOUBLE;}
-"\\"    {
-    yybegin(LEX_ESCAPED);
-    return OPERATOR_REFERENCE;
-}
+"\\"    {return parseEscape();}
 
 {NUMBER_INT_SIMPLE} {return NUMBER_SIMPLE;}
 {NUMBER} {return NUMBER;}

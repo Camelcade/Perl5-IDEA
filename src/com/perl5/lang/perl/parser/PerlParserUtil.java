@@ -393,25 +393,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     }
 
     // @todo this is really raw
-    public static boolean parseSubAttributes(PsiBuilder b, int l)
-    {
-
-        PsiBuilder.Marker m = null;
-        IElementType tokenType = b.getTokenType();
-        while (!b.eof() && tokenType != LEFT_BRACE && tokenType != SEMICOLON && tokenType != EMBED_MARKER_SEMICOLON)
-        {
-            if (m == null)
-                m = b.mark();
-            b.advanceLexer();
-            tokenType = b.getTokenType();
-        }
-        if (m != null)
-            m.collapse(SUB_ATTRIBUTE);
-
-        return true;
-    }
-
-    // @todo this is really raw
     public static boolean parseVariableAttributes(PsiBuilder b, int l)
     {
 
@@ -1316,19 +1297,10 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
             PsiBuilder.Marker m = b.mark();
             b.advanceLexer();
 
-
-/*
-            // reduces nodes number
-			while ((tokenType = b.getTokenType()) != null
-					&& !STRING_MERGE_STOP_TOKENS.contains(tokenType)
-					&& !(
-					currentStringState
-							&& (tokenType == QUOTE_DOUBLE || tokenType == QUOTE_TICK)
-							&& b.lookAhead(1) == RIGHT_BRACE
-			)
-					)
-				b.advanceLexer();
-*/
+            if (!b.eof() && tokenType == OPERATOR_REFERENCE)
+            {
+                b.advanceLexer();
+            }
 
 //			m.drop();
             m.collapse(STRING_CONTENT);
@@ -1354,9 +1326,20 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
             PsiBuilder.Marker m = b.mark();
             b.advanceLexer();
 
-            // reduces nodes number
-            while (!b.eof() && !REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType()))
+            if (!b.eof() && tokenType == OPERATOR_REFERENCE)
+            {
                 b.advanceLexer();
+            }
+
+            // reduces nodes number
+            while (!b.eof() && !REGEX_MERGE_STOP_TOKENS.contains(tokenType = b.getTokenType()))
+            {
+                b.advanceLexer();
+                if (!b.eof() && tokenType == OPERATOR_REFERENCE)
+                {
+                    b.advanceLexer();
+                }
+            }
 //			m.drop();
             m.collapse(REGEX_TOKEN);
             return true;
@@ -1380,15 +1363,25 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
             PsiBuilder.Marker m = b.mark();
             b.advanceLexer();
 
+            if (!b.eof() && tokenType == OPERATOR_REFERENCE)
+            {
+                b.advanceLexer();
+            }
+
             IElementType prevRawTokenType;
 
             // reduces nodes number
             while (!b.eof()
-                    && !REGEX_MERGE_STOP_TOKENS.contains(b.getTokenType())
+                    && !REGEX_MERGE_STOP_TOKENS.contains(tokenType = b.getTokenType())
                     && (prevRawTokenType = b.rawLookup(-1)) != TokenType.WHITE_SPACE
                     && prevRawTokenType != TokenType.NEW_LINE_INDENT)
             {
                 b.advanceLexer();
+
+                if (!b.eof() && tokenType == OPERATOR_REFERENCE)
+                {
+                    b.advanceLexer();
+                }
             }
 //			m.drop();
             m.collapse(REGEX_TOKEN);
@@ -1610,7 +1603,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
             m.error("Missing returns value");
         } else
         {
-            m.error("Incomplete annotation");
+            m.drop();
         }
 
         return true;

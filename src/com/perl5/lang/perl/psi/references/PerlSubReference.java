@@ -48,29 +48,6 @@ public class PerlSubReference extends PerlPolyVariantReference
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
-	@Nullable
-	@Override
-	public PsiElement resolve()
-	{
-		ResolveResult[] resolveResults = multiResolve(false);
-		if (resolveResults.length == 0)
-			return null;
-
-		PerlGlobVariable lastGlob = null;
-		for (ResolveResult resolveResult : resolveResults)
-			if (resolveResult.getElement() instanceof PerlGlobVariable)
-			{
-				lastGlob = (PerlGlobVariable) resolveResult.getElement();
-				if (lastGlob.isLeftSideOfAssignment())
-					return lastGlob;
-			}
-
-		if (lastGlob != null)
-			return lastGlob;
-
-		return resolveResults[0].getElement();
-	}
-
 	public boolean isAutoloaded()
 	{
 		return (FLAGS & FLAG_AUTOLOADED) > 0;

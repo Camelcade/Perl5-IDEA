@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.references;
+package com.perl5.lang.perl.idea.refactoring.rename;
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
 
 /**
- * Created by hurricup on 24.05.2015.
+ * Created by hurricup on 04.10.2015.
  */
-public abstract class PerlPolyVariantReference extends PsiPolyVariantReferenceBase<PsiElement>
+public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementProcessor
 {
-	public PerlPolyVariantReference(@NotNull PsiElement element, TextRange textRange)
-	{
-		super(element, textRange);
-	}
-
-	@NotNull
 	@Override
-	public Object[] getVariants()
+	public boolean canProcessElement(@NotNull PsiElement element)
 	{
-		return EMPTY_ARRAY;
+		return element instanceof PerlSubDefinition
+				|| element instanceof PerlSubDeclaration
+				|| element instanceof PerlGlobVariable
+				|| element instanceof PerlVariableDeclarationWrapper
+				;
 	}
 }
