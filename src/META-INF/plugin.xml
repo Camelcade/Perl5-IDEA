@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.1</version>
+    <version>1.101</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -39,7 +39,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p><b>1.1 changes</b></p>
+      <p><b>1.101 changes</b></p>
 
       <p><b>Features & Improvements:</b>
       <ul>
@@ -58,7 +58,7 @@
         <li>Implemented Code Folding settings for Perl entities (Default settings: imports, doc comments and method bodies being used too).</li>
         <li>Implemented exceptions reporting mechanism, by @VISTALL.</li>
         <li>Adjusted signature position according to last Perl5 changes (see perldoc).</li>
-        <li>Improved sub attributes lexing and parsing.</li>
+        <li>Improved sub and vars attributes lexing and parsing. </li>
       </ul>
       </p>
 
