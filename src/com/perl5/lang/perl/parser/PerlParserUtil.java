@@ -125,15 +125,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PerlLexer.OPERATORS_TOKENSET
 	);
 
-
-	public static final TokenSet VARIABLE_ATTRIBUTE_STOP_TOKENS = TokenSet.orSet(
-			PerlLexer.OPERATORS_TOKENSET,
-			TokenSet.create(
-					SEMICOLON,
-					EMBED_MARKER_SEMICOLON
-			)
-	);
-
 	// commands, that accepts filehandles as first parameter
 	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<String>(Arrays.asList(
 			"opendir",
@@ -185,11 +176,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			QUOTE_SINGLE_CLOSE
 	);
 
-	protected static final TokenSet STRING_MERGE_STOP_TOKENS = TokenSet.orSet(
-			CLOSE_QUOTES,
-			TokenSet.create(
-					SIGIL_SCALAR, SIGIL_ARRAY
-			));
 	protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
 			REGEX_QUOTE,
 			REGEX_QUOTE_CLOSE,
@@ -388,23 +374,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		if (m != null)
 			m.collapse(SUB_PROTOTYPE_TOKEN);
-
-		return true;
-	}
-
-	// @todo this is really raw
-	public static boolean parseVariableAttributes(PsiBuilder b, int l)
-	{
-
-		PsiBuilder.Marker m = null;
-		while (!b.eof() && !VARIABLE_ATTRIBUTE_STOP_TOKENS.contains(b.getTokenType()))
-		{
-			if (m == null)
-				m = b.mark();
-			b.advanceLexer();
-		}
-		if (m != null)
-			m.collapse(VAR_ATTRIBUTE);
 
 		return true;
 	}

@@ -103,7 +103,7 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 						PerlSyntaxHighlighter.PERL_GLOB,
 						PerlGlobUtil.BUILT_IN.contains(element.getText()),
 						false);
-			else if (tokenType == SUB_ATTRIBUTE || tokenType == VAR_ATTRIBUTE)
+			else if (tokenType == ATTRIBUTE)
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE,
