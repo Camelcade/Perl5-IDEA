@@ -45,6 +45,89 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public static final String TR_MODIFIERS = "cdsr";
 
+	public static final TokenSet ALLOWED_WHILE_WAITING_SUB_ATTRIBUTE = TokenSet.create(
+			TokenType.NEW_LINE_INDENT
+			, TokenType.WHITE_SPACE
+
+			// for prototype/signature
+			, LEFT_PAREN
+			, RIGHT_PAREN
+
+			// var name in signature
+			, IDENTIFIER
+
+			// namespace allowed in sub name
+			, PACKAGE
+			, PACKAGE_CORE_IDENTIFIER
+			, PACKAGE_IDENTIFIER
+			, PACKAGE_PRAGMA_CONSTANT
+			, PACKAGE_PRAGMA_VARS
+
+			// comma separated vars and colon starts attribute
+			, COLON
+			, OPERATOR_COMMA
+			, OPERATOR_COMMA_ARROW
+
+			// prototype sybmols
+			, SIGIL_SCALAR
+			, SIGIL_ARRAY
+			, SIGIL_HASH
+			, OPERATOR_MOD
+			, OPERATOR_MUL
+			, OPERATOR_BITWISE_AND
+			, LEFT_BRACKET
+			, RIGHT_BRACKET
+			, OPERATOR_REFERENCE
+			, OPERATOR_PLUS
+			, SEMICOLON
+	);
+
+	// tokens allowed to be between my/our/state and attributes :
+	public static final TokenSet ALLOWED_WHILE_WAITING_VAR_ATTRIBUTE = TokenSet.create(
+			TokenType.NEW_LINE_INDENT
+			, TokenType.WHITE_SPACE
+
+			// for list declaration
+			, LEFT_PAREN
+			, RIGHT_PAREN
+
+			// var name
+			, IDENTIFIER
+
+			// namespace allowed in our
+			, PACKAGE
+			, PACKAGE_CORE_IDENTIFIER
+			, PACKAGE_IDENTIFIER
+			, PACKAGE_PRAGMA_CONSTANT
+			, PACKAGE_PRAGMA_VARS
+
+			// comma separated vars and colon starts attribute
+			, COLON
+			, OPERATOR_COMMA
+			, OPERATOR_COMMA_ARROW
+
+			// variables sigils
+			, SIGIL_SCALAR
+			, SIGIL_ARRAY
+			, SIGIL_HASH
+			, OPERATOR_MOD
+
+			// variable name may be braced fixme this wont' work for now, see #504
+//			, LEFT_BRACE
+//			, RIGHT_BRACE
+	);
+
+	// tokens allowed to be in attribute
+	public static final TokenSet ALLOWED_IN_ATTRIBUTE = TokenSet.create(
+			TokenType.NEW_LINE_INDENT
+			, TokenType.WHITE_SPACE
+			, IDENTIFIER
+			, QUOTE_SINGLE_OPEN
+			, QUOTE_SINGLE_CLOSE
+			, COLON
+			, STRING_CONTENT
+	);
+
 	// pattern for getting marker
 	public static final Pattern markerPattern = Pattern.compile("<<(.+?)");
 	public static final Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
@@ -310,11 +393,18 @@ public class PerlLexer extends PerlLexerGenerated
 	public boolean isEscaped = false;
 	public int sectionsNumber = 0;    // number of sections one or two
 
+	protected int waitingAttributeBraceLevel = 0;
+	protected int waitingAttributeBracketLevel = 0;
+	protected int waitingAttributeParenLevel = 0;
+
+	// we've parsed my/our/state
+	protected boolean waitingVarAttribute = false;
+
 	// we've passed sub
 	protected boolean waitingSubAttribute = false;
 
 	// we've passed sub and colon
-	protected boolean subAttribute = false;
+	protected boolean isAttribute = false;
 
 	protected PerlLexerAdapter evalPerlLexer;
 	protected PerlStringLexer myStringLexer;
@@ -993,18 +1083,6 @@ public class PerlLexer extends PerlLexerGenerated
 //		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
 	}
 
-	/**
-	 * Disallows sharp delimiter on space occurance for quote-like operations
-	 *
-	 * @return whitespace token type
-	 */
-	public IElementType processOpenerWhiteSpace()
-	{
-		allowSharpQuote = false;
-		return TokenType.WHITE_SPACE;
-	}
-
-
 	// guess if this is a OPERATOR_DIV or regex opener
 	public IElementType guessDiv()
 	{
@@ -1405,41 +1483,6 @@ public class PerlLexer extends PerlLexerGenerated
 		return state == LEX_HEREDOC_WAITING || state == LEX_HEREDOC_WAITING_QQ || state == LEX_HEREDOC_WAITING_QX;
 	}
 
-	@Override
-	public IElementType processColon()
-	{
-		if (waitingSubAttribute)
-		{
-			waitingSubAttribute = false;
-			subAttribute = true;
-		}
-		return COLON;
-	}
-
-	@Override
-	public IElementType processOpeningBrace()
-	{
-		subAttribute = false;
-		waitingSubAttribute = false;
-
-		return LEFT_BRACE;
-	}
-
-	public IElementType processSemicolon()
-	{
-		subAttribute = false;
-		waitingSubAttribute = false;
-
-		if (!waitingHereDoc())
-			yybegin(YYINITIAL);
-		else
-		{
-			stateStack.pop();
-			stateStack.push(YYINITIAL);
-		}
-		return SEMICOLON;
-	}
-
 	/**
 	 * Parses IDENTIFIER =>
 	 * can be string_content => or ->identifier
@@ -1489,7 +1532,7 @@ public class PerlLexer extends PerlLexerGenerated
 		String tokenText = yytext().toString();
 		IElementType tokenType;
 
-		if (subAttribute)
+		if (isAttribute)
 		{
 			if (getNextCharacter() == '(')
 			{
@@ -1513,25 +1556,7 @@ public class PerlLexer extends PerlLexerGenerated
 					)
 				return HANDLE;
 			else if ((tokenType = reservedTokenTypes.get(tokenText)) != null)
-			{
-				if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
-					processTransOpener();
-				else if (tokenType == RESERVED_QW || tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
-					processQuoteLikeStringOpener(tokenType);
-				else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
-					processRegexOpener();
-				else if (tokenType == RESERVED_FORMAT)
-				{
-					pushState();
-					yybegin(LEX_FORMAT_WAITING);
-				}
-				else if (tokenType == RESERVED_SUB)
-				{
-					waitingSubAttribute = true;
-					subAttribute = false;
-				}
 				return tokenType;
-			}
 			else if ((tokenType = blockNames.get(tokenText)) != null)
 				return tokenType;
 			else if ((tokenType = tagNames.get(tokenText)) != null)
@@ -1680,15 +1705,140 @@ public class PerlLexer extends PerlLexerGenerated
 				yybegin(LEX_CODE);
 	}
 
-	public IElementType processWhiteSpace()
+
+	@Override
+	public void resetInternals()
 	{
-		allowSharpQuote = false;
-		return TokenType.WHITE_SPACE;
+		super.resetInternals();
+		waitingSubAttribute = false;
+		waitingVarAttribute = false;
+
+		resetAttributeCounters();
+
 	}
 
-	public IElementType processNewLine()
+	@Override
+	public IElementType advance() throws IOException
 	{
-		allowSharpQuote = false;
-		return TokenType.NEW_LINE_INDENT;
+		boolean isPreParsed = preparsedTokensList.size() > 0;
+
+		IElementType tokenType = super.advance();
+
+		if (!isPreParsed)
+		{
+			attributesLogic(tokenType);
+
+			if (tokenType == TokenType.NEW_LINE_INDENT || tokenType == TokenType.WHITE_SPACE)
+			{
+				allowSharpQuote = false;
+			}
+			else if (tokenType == SEMICOLON) // fixme this is bad, semi might be in the prototype
+			{
+				if (!waitingHereDoc())
+					yybegin(YYINITIAL);
+				else
+				{
+					stateStack.pop();
+					stateStack.push(YYINITIAL);
+				}
+			}
+			else if (tokenType == RESERVED_QW || tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
+			{
+				processQuoteLikeStringOpener(tokenType);
+			}
+			else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
+			{
+				processRegexOpener();
+			}
+			else if (tokenType == RESERVED_MY || tokenType == RESERVED_OUR || tokenType == RESERVED_STATE)
+			{
+				waitingVarAttribute = true;
+				resetAttributeCounters();
+			}
+			else if (tokenType == RESERVED_SUB)
+			{
+				waitingSubAttribute = true;
+				resetAttributeCounters();
+			}
+			else if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
+			{
+				processTransOpener();
+			}
+			else if (tokenType == RESERVED_FORMAT)
+			{
+				pushState();
+				yybegin(LEX_FORMAT_WAITING);
+			}
+		}
+
+		return tokenType;
+	}
+
+	protected void attributesLogic(IElementType tokenType)
+	{
+		// stop on extra closing ) ] }
+		if (waitingSubAttribute || waitingVarAttribute)
+		{
+			if (tokenType == LEFT_BRACE)
+				waitingAttributeBraceLevel++;
+			else if (tokenType == RIGHT_BRACE)
+				waitingAttributeBraceLevel--;
+			if (tokenType == LEFT_PAREN)
+				waitingAttributeParenLevel++;
+			else if (tokenType == RIGHT_PAREN)
+				waitingAttributeParenLevel--;
+
+			if (waitingSubAttribute)
+			{
+				if (tokenType == LEFT_BRACKET)
+					waitingAttributeBracketLevel++;
+				else if (tokenType == RIGHT_BRACKET)
+					waitingAttributeBracketLevel--;
+			}
+
+			if (waitingAttributeBraceLevel < 0
+					|| waitingAttributeParenLevel < 0
+					|| waitingAttributeBracketLevel < 0
+					)
+			{
+				waitingSubAttribute = false;
+				waitingVarAttribute = false;
+			}
+		}
+
+		// stop on incorrect token
+		if (waitingSubAttribute && !ALLOWED_WHILE_WAITING_SUB_ATTRIBUTE.contains(tokenType))
+		{
+			waitingSubAttribute = false;
+		}
+
+		// stop on incorrect token
+		if (waitingVarAttribute && !ALLOWED_WHILE_WAITING_VAR_ATTRIBUTE.contains(tokenType))
+		{
+			waitingVarAttribute = false;
+		}
+
+		// stop on incorrect token
+		if (isAttribute && !ALLOWED_IN_ATTRIBUTE.contains(tokenType))
+		{
+			isAttribute = false;
+		}
+
+		// switch to attribute
+		if ((waitingVarAttribute || waitingSubAttribute) && tokenType == COLON)
+		{
+			waitingVarAttribute = false;
+			waitingSubAttribute = false;
+			isAttribute = true;
+		}
+
+	}
+
+	protected void resetAttributeCounters()
+	{
+		isAttribute = false;
+		waitingAttributeBraceLevel = 0;
+		waitingAttributeBracketLevel = 0;
+		waitingAttributeParenLevel = 0;
 	}
 }
