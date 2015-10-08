@@ -54,6 +54,7 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType parseOperatorDereference();
 	public abstract IElementType parseCappedVariableName();
 	public abstract IElementType parseHeredocOpener();
+	public abstract IElementType guessLtNumeric();
 %}
 
 
@@ -134,7 +135,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 "'" {return QUOTE_SINGLE;}
 
 "<=>" {return OPERATOR_CMP_NUMERIC;}
-"<" {return OPERATOR_LT_NUMERIC;}
+"<" {return guessLtNumeric();}
 ">" {return OPERATOR_GT_NUMERIC;}
 
 "->" {return parseOperatorDereference();}

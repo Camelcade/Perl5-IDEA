@@ -243,6 +243,9 @@ limitations under the License.
 
     TAG="TAG"
 
+    LEFT_ANGLE='LEFT_ANGLE'
+    RIGHT_ANGLE='RIGHT_ANGLE'
+
     LEFT_BRACKET='LEFT_BRACKET'
     RIGHT_BRACKET='RIGHT_BRACKET'
 
@@ -642,8 +645,10 @@ private grep_map_arguments ::=
     | grep_map_arguments_
 
 private grep_map_arguments_ ::=
-    block [comma] list_expr
-    | scalar_expr comma list_expr
+    block [comma] grep_map_sort_tail
+    | scalar_expr comma grep_map_sort_tail
+
+private grep_map_sort_tail ::= file_read_forced_expr | list_expr
 
 sort_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SORT sort_arguments {pin=2}
 private sort_arguments ::=
@@ -651,10 +656,10 @@ private sort_arguments ::=
     | sort_arguments_
 
 private sort_arguments_ ::=
-    scalar_variable list_expr
-    | block [comma] list_expr
-    | callable list_expr
-    | list_expr
+    scalar_variable grep_map_sort_tail
+    | block [comma] grep_map_sort_tail
+    | callable grep_map_sort_tail
+    | grep_map_sort_tail
 
 private variable_expr ::= variable | array_index_variable
 
@@ -780,7 +785,10 @@ call_arguments ::=
     | block [[comma] list_expr]
     | list_expr
 
-file_read_expr ::= OPERATOR_LT_NUMERIC [read_handle | perl_handle] OPERATOR_GT_NUMERIC
+file_read_expr ::= LEFT_ANGLE [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken RIGHT_ANGLE OPERATOR_GT_NUMERIC>>
+// this one is used to force parsing, like list_epxr after map, grep or sort
+file_read_forced_expr ::= <<checkAndConvertToken LEFT_ANGLE OPERATOR_LT_NUMERIC>> [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken RIGHT_ANGLE OPERATOR_GT_NUMERIC>>
+
 read_handle ::= <<parseReadHandle>>
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////

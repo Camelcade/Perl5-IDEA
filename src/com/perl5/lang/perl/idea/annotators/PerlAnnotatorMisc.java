@@ -127,6 +127,12 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 						PerlSyntaxHighlighter.PERL_REGEX_TOKEN,
 						false,
 						false);
+			else if (tokenType == LEFT_ANGLE || tokenType == RIGHT_ANGLE)
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_ANGLE,
+						false,
+						false);
 		}
 	}
 }
