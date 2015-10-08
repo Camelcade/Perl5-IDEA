@@ -43,6 +43,7 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 			new BracePair(QUOTE_TICK_OPEN, QUOTE_TICK_CLOSE, false),
 			new BracePair(LEFT_PAREN, RIGHT_PAREN, false),
 			new BracePair(LEFT_BRACKET, RIGHT_BRACKET, false),
+			new BracePair(LEFT_ANGLE, RIGHT_ANGLE, false),
 			new BracePair(LEFT_BRACE, RIGHT_BRACE, true),
 	};
 

@@ -98,7 +98,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 
 	// Following tokens may be a scalar/glob names
-	// "\""|"\\"|"!"|"%"|"&"|"'"|"("|")"|"+"|","|"-"|"."|"/"|"0"|";"|"<"|"="|">"|"@"|"["|"]"|"`"|"|"|"~"|"?"|":"|"*"|"["|"^]"|"^["
 	public static final TokenSet POSSIBLE_VARIABLE_NAME = TokenSet.orSet(
 			CONVERTABLE_TOKENS,
 			SPECIAL_VARIABLE_NAME
@@ -472,6 +471,20 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 
 		return false;
+	}
+
+	/**
+	 * Check for token and converts it to another
+	 *
+	 * @param b               PerlBuilder
+	 * @param l               parsing level
+	 * @param targetTokenType token type to convert to
+	 * @param sourceTokenType token to check for
+	 * @return checking level
+	 */
+	public static boolean checkAndConvertToken(PsiBuilder b, int l, IElementType targetTokenType, IElementType sourceTokenType)
+	{
+		return checkAndCollapseToken(b, l, targetTokenType, sourceTokenType);
 	}
 
 	/**
@@ -1254,14 +1267,17 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 
 		boolean currentStringState = ((PerlBuilder) b).getCurrentStringState();
+		boolean isStopOnNumericGt = ((PerlBuilder) b).isStopOnNumericGt();
 
 		if (tokenType != null
-				&& !CLOSE_QUOTES.contains(tokenType)
-				&& !(currentStringState
-				&& (tokenType == QUOTE_DOUBLE || tokenType == QUOTE_TICK)
-				&& b.lookAhead(1) == RIGHT_BRACE
-		)
+				&& !(isStopOnNumericGt && tokenType == OPERATOR_GT_NUMERIC)    // stop bare glob
+				&& !(!isStopOnNumericGt && CLOSE_QUOTES.contains(tokenType))    // stop on close quote
+				&& !(    // stop inner string
+				currentStringState
+						&& (tokenType == QUOTE_DOUBLE || tokenType == QUOTE_TICK)
+						&& b.lookAhead(1) == RIGHT_BRACE
 				)
+		)
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
@@ -1505,6 +1521,15 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		{
 			return PerlParser.interpolated_constructs(b, l);
 		}
+	}
+
+	public static boolean parseFileHandleAsString(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+		((PerlBuilder) b).setStopOnNumericGt(true);
+		boolean r = parseInterpolatedStringContent(b, l);
+		((PerlBuilder) b).setStopOnNumericGt(false);
+		return r;
 	}
 
 	/**

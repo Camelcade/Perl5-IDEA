@@ -45,6 +45,8 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public static final String TR_MODIFIERS = "cdsr";
 
+	public static final String SPECIAL_VARIABLE_NAMES_OPERATORS = "\\!'|+-/<=>~?";
+
 	public static final TokenSet ALLOWED_WHILE_WAITING_SUB_ATTRIBUTE = TokenSet.create(
 			TokenType.NEW_LINE_INDENT
 			, TokenType.WHITE_SPACE
@@ -250,6 +252,7 @@ public class PerlLexer extends PerlLexerGenerated
 	);
 
 	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<String>(Arrays.asList(
+			"scalar",
 			"split",
 			"return",
 			"grep"
@@ -261,7 +264,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
 	// tokens that preceeds regexp opener
-	public static final TokenSet REGEXP_PREFIX =
+	public static final TokenSet TERM_PREFIX =
 			TokenSet.andNot(
 					TokenSet.orSet(
 							OPERATORS_TOKENSET
@@ -1104,19 +1107,29 @@ public class PerlLexer extends PerlLexerGenerated
 //		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
 	}
 
+	/**
+	 * Contains heuristic to detect if we are at term position. Used for regexp and <string>
+	 *
+	 * @return check result
+	 */
+	public boolean isTermPosition()
+	{
+		// todo we should check argumentless prefix sub
+		// todo we should check if we are after grep/map/sort block
+		// actually, we can't distict somesub / somediv from somesub /regex/;
+		return !SIGILS_TOKENS.contains(lastUnbraceTokenType)    // for $/
+				&& (
+				lastSignificantTokenType == null
+						|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
+						|| TERM_PREFIX.contains(lastSignificantTokenType)
+						|| lastUnparenTokenType == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
+		);
+	}
+
 	// guess if this is a OPERATOR_DIV or regex opener
 	public IElementType guessDiv()
 	{
-		if (    // seems regex
-			// todo we should check argumentless prefix sub
-			// todo we should check if we are after grep/map/sort block
-				!SIGILS_TOKENS.contains(lastUnbraceTokenType)    // for $/
-						&& (
-						lastSignificantTokenType == null
-								|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
-								|| REGEXP_PREFIX.contains(lastSignificantTokenType)
-								|| lastUnparenTokenType == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
-				))
+		if (isTermPosition())
 		{
 			allowSharpQuote = true;
 			isEscaped = false;
@@ -1777,6 +1790,14 @@ public class PerlLexer extends PerlLexerGenerated
 				pushState();
 				yybegin(LEX_FORMAT_WAITING);
 			}
+			else if (tokenType == SIGIL_SCALAR)
+			{
+//				if( getNextCharacter() == '!')
+				if (StringUtil.containsChar(SPECIAL_VARIABLE_NAMES_OPERATORS, getNextCharacter()))
+				{
+					addPreparsedToken(getTokenEnd(), getTokenEnd() + 1, IDENTIFIER);
+				}
+			}
 		}
 
 		return tokenType;
@@ -1848,5 +1869,15 @@ public class PerlLexer extends PerlLexerGenerated
 		waitingAttributeBraceLevel = 0;
 		waitingAttributeBracketLevel = 0;
 		waitingAttributeParenLevel = 0;
+	}
+
+	@Override
+	public IElementType guessLtNumeric()
+	{
+		if (isTermPosition())
+		{
+			return LEFT_ANGLE;
+		}
+		return OPERATOR_LT_NUMERIC;
 	}
 }

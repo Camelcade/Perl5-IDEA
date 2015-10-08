@@ -55,6 +55,9 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	// flag set if we are inside of regexp. Safe parsing for array indexes
 	boolean isRegex = false;
 
+	// flag marks that interpolated string should stop on >
+	boolean stopOnNumericGt = false;
+
 	Project myProject = getProject();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
@@ -225,5 +228,13 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return currentState;
 	}
 
+	public boolean isStopOnNumericGt()
+	{
+		return stopOnNumericGt;
+	}
 
+	public void setStopOnNumericGt(boolean stopOnNumericGt)
+	{
+		this.stopOnNumericGt = stopOnNumericGt;
+	}
 }
