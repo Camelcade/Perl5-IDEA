@@ -125,6 +125,10 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		{
 			return tokenType;
 		}
+		if ("x".equals(tokenText))
+		{
+			return OPERATOR_X;
+		}
 
 		return IDENTIFIER;
 	}
