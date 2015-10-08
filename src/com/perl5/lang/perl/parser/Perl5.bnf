@@ -498,17 +498,13 @@ private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
 
 
 // todo implement parsing
-private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_prototype}
-private recover_sub_prototype ::= !(COLON | LEFT_BRACE | semicolon_any)
-private sub_prototype_content ::= <<parseSubPrototype>> {recoverWhile=recover_sub_prototype_content}
-private recover_sub_prototype_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | semicolon_any)
+private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1}
+private sub_prototype_content ::= <<parseSubPrototype>>
 
-private sub_signature ::= LEFT_PAREN [sub_signature_content] RIGHT_PAREN {pin=1 recoverWhile=recover_sub_signature}
-private recover_sub_signature ::= !(LEFT_BRACE | semicolon_any)
-private sub_signature_content ::= <<parseSubSignature>> {recoverWhile=recover_sub_signature_content}
-private recover_sub_signature_content ::= !(RIGHT_PAREN | COLON | LEFT_BRACE | semicolon_any)
+private sub_signature ::= LEFT_PAREN [sub_signature_content] RIGHT_PAREN {pin=1}
+private sub_signature_content ::= <<parseSubSignature>>
 
-private attributes ::= COLON attribute {[COLON] attribute}*  {pin=1} // <<parseSubAttributes>>
+private attributes ::= COLON attribute ([COLON] attribute)*  {pin=1} // <<parseSubAttributes>>
 attribute ::= IDENTIFIER [string_sq_parsed]
 
 last_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_LAST [lnr_param] {pin=2}

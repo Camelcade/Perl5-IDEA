@@ -48,6 +48,9 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final TokenSet ALLOWED_WHILE_WAITING_SUB_ATTRIBUTE = TokenSet.create(
 			TokenType.NEW_LINE_INDENT
 			, TokenType.WHITE_SPACE
+			, COMMENT_BLOCK
+			, COMMENT_LINE
+			, POD
 
 			// for prototype/signature
 			, LEFT_PAREN
@@ -86,6 +89,9 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final TokenSet ALLOWED_WHILE_WAITING_VAR_ATTRIBUTE = TokenSet.create(
 			TokenType.NEW_LINE_INDENT
 			, TokenType.WHITE_SPACE
+			, COMMENT_BLOCK
+			, COMMENT_LINE
+			, POD
 
 			// for list declaration
 			, LEFT_PAREN
@@ -121,6 +127,10 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final TokenSet ALLOWED_IN_ATTRIBUTE = TokenSet.create(
 			TokenType.NEW_LINE_INDENT
 			, TokenType.WHITE_SPACE
+			, COMMENT_BLOCK
+			, COMMENT_LINE
+			, POD
+
 			, IDENTIFIER
 			, QUOTE_SINGLE_OPEN
 			, QUOTE_SINGLE_CLOSE
