@@ -17,9 +17,12 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -54,4 +57,19 @@ public class PerlHeredocReference extends PerlReference
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
+	@Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
+	{
+		// fixme this is not invoked!
+		boolean appendNewLine = StringUtil.equals(myElement.getText(), "\n");
+		PsiElement result = super.handleElementRename(newElementName);
+
+		if (appendNewLine && result.getParent() != null)
+		{
+			PsiElement newLineElement = PerlElementFactory.createNewLine(myElement.getProject());
+			result.getParent().addAfter(result, newLineElement);
+		}
+
+		return result;
+	}
 }
