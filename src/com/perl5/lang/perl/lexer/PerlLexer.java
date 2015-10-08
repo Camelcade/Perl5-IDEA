@@ -142,8 +142,8 @@ public class PerlLexer extends PerlLexerGenerated
 
 	// pattern for getting marker
 	public static final Pattern markerPattern = Pattern.compile("<<(.+?)");
-	public static final Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.+?)\"");
-	public static final Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.+?)\'");
+	public static final Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
+	public static final Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
 	public static final Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
 	public static final Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
@@ -944,8 +944,11 @@ public class PerlLexer extends PerlLexerGenerated
 				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, getOpenQuoteTokenType(m.group(2).charAt(0))));
 				currentPosition++;
 
-				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
-				currentPosition += heredocMarker.length();
+				if( heredocMarker.length() > 0 )
+				{
+					preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
+					currentPosition += heredocMarker.length();
+				}
 
 				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, getCloseQuoteTokenType(m.group(2).charAt(0))));
 			}
@@ -989,7 +992,7 @@ public class PerlLexer extends PerlLexerGenerated
 		setTokenStart(tokenStart);
 		int bufferEnd = buffer.length();
 
-		int currentPosition = tokenStart;
+		int currentPosition = tokenStart + 1;
 		int linePos = currentPosition;
 
 		while (true)
@@ -1004,10 +1007,25 @@ public class PerlLexer extends PerlLexerGenerated
 				linePos++;
 
 			// reached the end of heredoc and got end marker
-			if (StringUtil.equals(heredocMarker, buffer.subSequence(currentPosition, lineContentsEnd)))
+
+			if( heredocMarker.isEmpty() && lineContentsEnd == currentPosition && linePos > lineContentsEnd )
 			{
-				preparsedTokensList.clear();
-				preparsedTokensList.add(new CustomToken(currentPosition, lineContentsEnd, HEREDOC_END));
+				addPreparsedToken(currentPosition, lineContentsEnd + 1, HEREDOC_END);
+
+				// non-empty heredoc and got the end
+				if (currentPosition > tokenStart)
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(currentPosition);
+					return tokenType;
+				}
+				// empty heredoc and got the end
+				else
+					return getPreParsedToken();
+			}
+			else if (StringUtil.equals(heredocMarker, buffer.subSequence(currentPosition, lineContentsEnd)))
+			{
+				addPreparsedToken(currentPosition, lineContentsEnd, HEREDOC_END);
 
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)

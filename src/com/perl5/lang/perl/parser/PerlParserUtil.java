@@ -93,7 +93,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			QUESTION,
 			COLON,
 			OPERATOR_MUL,
-			NUMBER_SIMPLE
+			NUMBER_SIMPLE,
+			OPERATOR_X
 	);
 
 

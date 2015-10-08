@@ -109,6 +109,12 @@ public class PerlPsiUtil
 	public static PsiElement findHeredocOpenerByOffset(PsiElement file, String marker, int offset)
 	{
 		PsiElement result = null;
+
+		if( "\n".equals(marker))
+		{
+			marker = "";
+		}
+
 		for (PerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(file, PerlHeredocOpener.class))
 		{
 			if (opener.getTextOffset() < offset)
