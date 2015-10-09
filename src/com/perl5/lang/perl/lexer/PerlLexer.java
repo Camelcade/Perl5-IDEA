@@ -144,7 +144,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern markerPattern = Pattern.compile("<<(.+?)");
 	public static final Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
 	public static final Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
-	public static final Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.+?)`");
+	public static final Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
 	public static final Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	// pre-variable name tokens
