@@ -98,7 +98,7 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 			return currentNode.getStartOffset();
 
 		// unclosed string
-		return getTextOffset() + getTextLength();
+		return lastChild.getTextOffset() + lastChild.getTextLength();
 	}
 
 	@Override
