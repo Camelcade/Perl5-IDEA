@@ -1233,23 +1233,57 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 *
 	 * @param b         PerlPraser
 	 * @param l         paring level
-	 * @param tokenType opening quote type (atm only QQ)
+	 * @param quoteTokenType opening quote type (atm only QQ)
 	 * @return parsing result
 	 */
-	public static boolean parseNetstedInterpolatedString(PsiBuilder b, int l, IElementType tokenType)
+	public static boolean parseNetstedInterpolatedString(PsiBuilder b, int l, IElementType quoteTokenType)
 	{
-		// [string_content_qq] QUOTE_DOUBLE &RIGHT_BRACE// nested qq string
-		if (b.rawLookup(-1) == LEFT_BRACE && consumeToken(b, tokenType))
+		assert b instanceof PerlBuilder;
+
+		IElementType tokenType = b.getTokenType();
+
+		if (((PerlBuilder) b).getExtraStopQuote() != quoteTokenType && tokenType == quoteTokenType)
 		{
-			assert b instanceof PerlBuilder;
-			boolean oldState = ((PerlBuilder) b).getCurrentStringState();
-			((PerlBuilder) b).setCurrentStringState(true);
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			if (quoteTokenType == QUOTE_DOUBLE)
+			{
+				m.collapse(QUOTE_DOUBLE_OPEN);
+			}
+			else if (quoteTokenType == QUOTE_TICK)
+			{
+				m.collapse(QUOTE_TICK_OPEN);
+			}
+			else
+			{
+				throw new RuntimeException("Unknown open quote for token " + quoteTokenType);
+			}
+
+			IElementType currentStopQuote = ((PerlBuilder) b).setExtraStopQuote(quoteTokenType);
 
 			parseInterpolatedStringContent(b, l);
 
-			((PerlBuilder) b).setCurrentStringState(oldState);
+			((PerlBuilder) b).setExtraStopQuote(currentStopQuote);
 
-			return (consumeToken(b, tokenType));    // && b.getTokenType() == RIGHT_BRACE  fixme not sure we should check for closing brace here. We could leave this to the outer element
+			if ((b.getTokenType()) == quoteTokenType)
+			{
+				m = b.mark();
+				b.advanceLexer();
+				if (quoteTokenType == QUOTE_DOUBLE)
+				{
+					m.collapse(QUOTE_DOUBLE_CLOSE);
+				}
+				else if (quoteTokenType == QUOTE_TICK)
+				{
+					m.collapse(QUOTE_TICK_CLOSE);
+				}
+				else
+				{
+					throw new RuntimeException("Unknown open quote for token " + quoteTokenType);
+				}
+				return true;
+			}
+			return false;
 		}
 
 		return false;
@@ -1267,17 +1301,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		IElementType tokenType = b.getTokenType();
 		assert b instanceof PerlBuilder;
 
-		boolean currentStringState = ((PerlBuilder) b).getCurrentStringState();
 		boolean isStopOnNumericGt = ((PerlBuilder) b).isStopOnNumericGt();
+		IElementType extraStopQuote = ((PerlBuilder) b).getExtraStopQuote();
 
 		if (tokenType != null
 				&& !(isStopOnNumericGt && tokenType == OPERATOR_GT_NUMERIC)    // stop bare glob
 				&& !(!isStopOnNumericGt && CLOSE_QUOTES.contains(tokenType))    // stop on close quote
-				&& !(    // stop inner string
-				currentStringState
-						&& (tokenType == QUOTE_DOUBLE || tokenType == QUOTE_TICK)
-						&& b.lookAhead(1) == RIGHT_BRACE
-				)
+				&& tokenType != extraStopQuote
 		)
 		{
 			PsiBuilder.Marker m = b.mark();
@@ -1630,4 +1660,27 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		return false;
 	}
+
+	/**
+	 * Parsing braced cast content. For interpolated strings and regex we should disable appropriate flags to remove limitations
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return result
+	 */
+	public static boolean parseBracedCastContent(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+		boolean oldInterpolatedState = ((PerlBuilder) b).setIsInterpolated(false);
+		boolean oldRegexState = ((PerlBuilder) b).setIsRegex(false);
+
+		boolean r = PerlParser.block_content(b, l);
+
+		((PerlBuilder) b).setIsInterpolated(oldInterpolatedState);
+		((PerlBuilder) b).setIsRegex(oldRegexState);
+
+		return r;
+	}
+
 }

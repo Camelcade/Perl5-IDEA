@@ -38,7 +38,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	protected Set<String> KNOWN_PACKAGES;
 	protected boolean recoveringStatement = false;
 	protected int bracesLevel = 0;
-	protected boolean currentStringState = false;
 
 	// flag forces stringification of -identifiers, required for use Package -option;
 	boolean stringify = false;
@@ -57,6 +56,9 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 
 	// flag marks that interpolated string should stop on >
 	boolean stopOnNumericGt = false;
+
+	// this is a stop quote for nexted strings parsing
+	IElementType extraStopQuote = null;
 
 	Project myProject = getProject();
 
@@ -158,16 +160,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		bracesLevel--;
 	}
 
-	public boolean getCurrentStringState()
-	{
-		return currentStringState;
-	}
-
-	public void setCurrentStringState(boolean currentStringState)
-	{
-		this.currentStringState = currentStringState;
-	}
-
 	public boolean isStringify()
 	{
 		return stringify;
@@ -236,5 +228,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	public void setStopOnNumericGt(boolean stopOnNumericGt)
 	{
 		this.stopOnNumericGt = stopOnNumericGt;
+	}
+
+	public IElementType getExtraStopQuote()
+	{
+		return extraStopQuote;
+	}
+
+	public IElementType setExtraStopQuote(IElementType extraStopQuote)
+	{
+		IElementType currentExtraStopQuote = getExtraStopQuote();
+		this.extraStopQuote = extraStopQuote;
+		return currentExtraStopQuote;
 	}
 }
