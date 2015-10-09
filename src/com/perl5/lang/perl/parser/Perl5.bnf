@@ -922,7 +922,7 @@ scalar_cast_expr ::= SIGIL_SCALAR cast_target
 scalar_index_cast_expr ::= SIGIL_SCALAR_INDEX cast_target
 
 private cast_target ::= braced_cast | scalar_primitive
-private braced_cast ::= LEFT_BRACE expr RIGHT_BRACE {pin=1}
+private braced_cast ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1} // fixme this is a hack; is code inside?
 
 scalar_array_element ::= scalar_primitive array_index
 scalar_hash_element ::= scalar_primitive hash_index
