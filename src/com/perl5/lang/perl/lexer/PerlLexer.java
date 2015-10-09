@@ -263,7 +263,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final HashMap<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
-	// tokens that preceeds regexp opener
+	// tokens that preceeds regexp opener or file <FH>
 	public static final TokenSet TERM_PREFIX =
 			TokenSet.andNot(
 					TokenSet.orSet(
@@ -277,7 +277,71 @@ public class PerlLexer extends PerlLexerGenerated
 							)),
 					TokenSet.create(
 							OPERATOR_PLUS_PLUS,
-							OPERATOR_MINUS_MINUS
+							OPERATOR_MINUS_MINUS,
+
+							OPERATOR_CMP_STR,
+							OPERATOR_LE_STR,
+							OPERATOR_GE_STR,
+							OPERATOR_EQ_STR,
+							OPERATOR_NE_STR,
+							OPERATOR_LT_STR,
+							OPERATOR_GT_STR,
+
+							OPERATOR_HELLIP,
+							OPERATOR_FLIP_FLOP,
+							OPERATOR_CONCAT,
+
+							OPERATOR_BITWISE_NOT,
+							OPERATOR_BITWISE_AND,
+							OPERATOR_BITWISE_OR,
+							OPERATOR_BITWISE_XOR,
+
+							OPERATOR_FILETEST
+
+/*
+							OPERATOR_CMP_NUMERIC,
+							OPERATOR_LT_NUMERIC,
+							OPERATOR_GT_NUMERIC,
+
+							OPERATOR_POW,
+
+							OPERATOR_RE,
+							OPERATOR_NOT_RE,
+
+//			OPERATOR_HEREDOC, // this is an artificial operator, not the real one
+							OPERATOR_SHIFT_LEFT,
+							OPERATOR_SHIFT_RIGHT,
+
+							OPERATOR_AND,
+							OPERATOR_OR,
+							OPERATOR_OR_DEFINED,
+							OPERATOR_NOT,
+
+							OPERATOR_ASSIGN,
+
+							QUESTION,
+							COLON,
+
+							OPERATOR_REFERENCE,
+
+							OPERATOR_DIV,
+							OPERATOR_MUL,
+							OPERATOR_MOD,
+							OPERATOR_PLUS,
+							OPERATOR_MINUS,
+
+							OPERATOR_AND_LP,
+							OPERATOR_OR_LP,
+							OPERATOR_XOR_LP,
+							OPERATOR_NOT_LP,
+
+							OPERATOR_COMMA,
+							OPERATOR_COMMA_ARROW,
+
+							OPERATOR_DEREFERENCE,
+
+							OPERATOR_X,
+*/
 					)
 			);
 	static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
@@ -1823,7 +1887,7 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			else if (tokenType == SIGIL_SCALAR)
 			{
-//				if( getNextCharacter() == '!')
+//				if( getNextCharacter() == '!') fixme this is really lame, because $$. is valid operation but won't work here
 				if (StringUtil.containsChar(SPECIAL_VARIABLE_NAMES_OPERATORS, getNextCharacter()))
 				{
 					addPreparsedToken(getTokenEnd(), getTokenEnd() + 1, IDENTIFIER);
