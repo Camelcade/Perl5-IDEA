@@ -1605,5 +1605,29 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
+	/**
+	 * Checking if it's angle or LT after block
+	 *
+	 * @param b PerlBuildfer
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean checkFileReadToken(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		if (tokenType == LEFT_ANGLE)
+		{
+			b.advanceLexer();
+			return true;
+		}
+		if (tokenType == OPERATOR_LT_NUMERIC && b.getLatestDoneMarker() != null && b.getLatestDoneMarker().getTokenType() == BLOCK)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(LEFT_ANGLE);
+			return true;
+		}
 
+		return false;
+	}
 }

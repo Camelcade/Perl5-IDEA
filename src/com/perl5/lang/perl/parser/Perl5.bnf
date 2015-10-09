@@ -787,8 +787,8 @@ call_arguments ::=
     | block [[comma] list_expr]
     | list_expr
 
-file_read_expr ::= LEFT_ANGLE [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken RIGHT_ANGLE OPERATOR_GT_NUMERIC>>
-// this one is used to force parsing, like list_epxr after map, grep or sort
+file_read_expr ::= <<checkFileReadToken>> [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken RIGHT_ANGLE OPERATOR_GT_NUMERIC>>
+// this one is used to force parsing, like list_epxr after map, grep or sort; Not sure if we need this after implementing chckFileReadToken
 file_read_forced_expr ::= <<checkAndConvertToken LEFT_ANGLE OPERATOR_LT_NUMERIC>> [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken RIGHT_ANGLE OPERATOR_GT_NUMERIC>>
 
 read_handle ::= <<parseReadHandle>>
