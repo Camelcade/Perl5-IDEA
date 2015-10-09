@@ -555,6 +555,7 @@ use_statement_constant ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndColl
 private use_constant_parameters ::=
   constant_definition
   | constants_block
+  | expr
 
 // other name to extend declaration, not variable
 use_vars_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE PACKAGE_PRAGMA_VARS>> [perl_version] [<<parseUseVarsParameters>>] {pin=3}
