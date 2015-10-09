@@ -1232,7 +1232,7 @@ public class PerlLexer extends PerlLexerGenerated
 		boolean quotesDiffer = openQuote != closeQuote;
 		addPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
 
-		currentOffset = parseTrBlockContent(currentOffset, closeQuote);
+		currentOffset = parseTrBlockContent(currentOffset, openQuote, closeQuote);
 
 		// close quote
 		if (currentOffset < bufferEnd)
@@ -1252,7 +1252,7 @@ public class PerlLexer extends PerlLexerGenerated
 				addPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
 			}
 
-			currentOffset = parseTrBlockContent(currentOffset, closeQuote);
+			currentOffset = parseTrBlockContent(currentOffset, openQuote, closeQuote);
 		}
 
 		// close quote
@@ -1281,22 +1281,35 @@ public class PerlLexer extends PerlLexerGenerated
 	 * @param closeQuote    close quote character
 	 * @return next offset
 	 */
-	int parseTrBlockContent(int currentOffset, char closeQuote)
+	int parseTrBlockContent(int currentOffset, char openQuote, char closeQuote)
 	{
 		int blockStartOffset = currentOffset;
 		CharSequence buffer = getBuffer();
 		int bufferEnd = getBufferEnd();
 		boolean isEscaped = false;
+		boolean isQuoteDiffers = openQuote != closeQuote;
+		int quotesLevel = 0;
 
 		while (currentOffset < bufferEnd)
 		{
 			char currentChar = buffer.charAt(currentOffset);
 
-			if (!isEscaped && currentChar == closeQuote)
+			if (!isEscaped && quotesLevel == 0 && currentChar == closeQuote)
 			{
 				if (currentOffset > blockStartOffset)
 					addPreparsedToken(blockStartOffset, currentOffset, STRING_CONTENT);
 				break;
+			}
+			if (isQuoteDiffers && !isEscaped)
+			{
+				if (currentChar == openQuote)
+				{
+					quotesLevel++;
+				}
+				else if (currentChar == closeQuote)
+				{
+					quotesLevel--;
+				}
 			}
 
 			isEscaped = (currentChar == '\\' && !isEscaped);
