@@ -107,6 +107,7 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
 ";"  {return SEMICOLON;}
 "+" {return OPERATOR_PLUS;}
 "-" {return OPERATOR_MINUS;}
+"//"  {return OPERATOR_OR_DEFINED;}
 "/"  {return OPERATOR_DIV;}
 "*" {return OPERATOR_MUL;}
 "%" {return OPERATOR_MOD;}

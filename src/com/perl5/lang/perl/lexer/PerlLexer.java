@@ -238,15 +238,7 @@ public class PerlLexer extends PerlLexerGenerated
 			QUOTE_DOUBLE_CLOSE,
 			QUOTE_TICK_CLOSE
 	);
-	// tokens that preceeds regexp opener
-	public static final TokenSet REGEXP_PREFIX = TokenSet.create(
-			SEMICOLON,
-			COLON,
-			LEFT_PAREN,
-			LEFT_BRACE,
-			LEFT_BRACKET
-//			SUB	// fixme this works with argumentless subs, not all of them
-	);
+
 	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<String>(Arrays.asList(
 			"split",
 			"return",
@@ -258,6 +250,23 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final HashMap<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
+	// tokens that preceeds regexp opener
+	public static final TokenSet REGEXP_PREFIX =
+			TokenSet.andNot(
+					TokenSet.orSet(
+							OPERATORS_TOKENSET
+							, TokenSet.create(
+									SEMICOLON,
+									COLON,
+									LEFT_PAREN,
+									LEFT_BRACE,
+									LEFT_BRACKET
+							)),
+					TokenSet.create(
+							OPERATOR_PLUS_PLUS,
+							OPERATOR_MINUS_MINUS
+					)
+			);
 	static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
 			"eq",
 			"ne",
@@ -379,6 +388,8 @@ public class PerlLexer extends PerlLexerGenerated
 
 		RESERVED_TOKENSET.addAll(reservedTokenTypes.values());
 	}
+
+//			SUB	// fixme this works with argumentless subs, not all of them
 
 	/**
 	 * HEREDOC proceccing section
@@ -1092,7 +1103,6 @@ public class PerlLexer extends PerlLexerGenerated
 				!SIGILS_TOKENS.contains(lastUnbraceTokenType)    // for $/
 						&& (
 						lastSignificantTokenType == null
-								|| OPERATORS_TOKENSET.contains(lastSignificantTokenType)
 								|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
 								|| REGEXP_PREFIX.contains(lastSignificantTokenType)
 								|| lastUnparenTokenType == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
@@ -1618,18 +1628,6 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 		else
 			throw new RuntimeException("Inappropriate package name " + tokenText);
-	}
-
-	private char getNextCharacter()
-	{
-		int currentPosition = getTokenEnd();
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-		if (currentPosition < bufferEnd)
-		{
-			return buffer.charAt(currentPosition);
-		}
-		return 0;
 	}
 
 	// checks if ahead is comma, semi, close brace

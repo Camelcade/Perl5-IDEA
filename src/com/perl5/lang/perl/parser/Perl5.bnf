@@ -560,7 +560,7 @@ private use_constant_parameters ::=
 // other name to extend declaration, not variable
 use_vars_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapseToken PACKAGE PACKAGE_PRAGMA_VARS>> [perl_version] [<<parseUseVarsParameters>>] {pin=3}
 
-constants_block ::= LEFT_BRACE constant_definition (comma constant_definition) * [comma+] RIGHT_BRACE {pin=1}
+constants_block ::= LEFT_BRACE [constant_definition (comma constant_definition) * [comma+]] RIGHT_BRACE {pin=1}
 constant_definition ::= constant_name comma scalar_expr
 constant_name ::= string
 
@@ -844,7 +844,7 @@ tr_modifiers ::= REGEX_MODIFIER +
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
 do_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_DO eval_argument {pin=2}
-eval_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_EVAL eval_argument {pin=2}
+eval_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_EVAL [eval_argument] {pin=2}
 private eval_argument ::= parenthesised_expr | block | expr
 
 private variable_declaration ::=

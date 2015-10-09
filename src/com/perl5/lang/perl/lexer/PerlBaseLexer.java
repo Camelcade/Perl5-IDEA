@@ -138,13 +138,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	// check that current token surrounded with braces
 	protected boolean isBraced()
 	{
-		if (lastSignificantTokenType == LEFT_BRACE)
-		{
-			Character nextSignificantCharacter = getNextSignificantCharacter();
-			if (nextSignificantCharacter != null && nextSignificantCharacter.equals('}'))
-				return true;
-		}
-		return false;
+		return lastSignificantTokenType == LEFT_BRACE && getNextNonSpaceCharacter() == '}';
 	}
 
 	protected Character getNextSignificantCharacter()
@@ -177,6 +171,18 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 			currentPosition++;
 		}
 		return -1;
+	}
+
+	protected char getNextCharacter()
+	{
+		int currentPosition = getTokenEnd();
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+		if (currentPosition < bufferEnd)
+		{
+			return buffer.charAt(currentPosition);
+		}
+		return 0;
 	}
 
 	protected int getNextNonSpaceCharacterPosition(int position)
