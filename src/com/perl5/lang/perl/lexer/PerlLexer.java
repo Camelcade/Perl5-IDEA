@@ -279,16 +279,16 @@ public class PerlLexer extends PerlLexerGenerated
 							OPERATOR_PLUS_PLUS,
 							OPERATOR_MINUS_MINUS,
 
-							OPERATOR_CMP_STR,
-							OPERATOR_LE_STR,
-							OPERATOR_GE_STR,
-							OPERATOR_EQ_STR,
-							OPERATOR_NE_STR,
-							OPERATOR_LT_STR,
-							OPERATOR_GT_STR,
+//							OPERATOR_CMP_STR,
+//							OPERATOR_LE_STR,
+//							OPERATOR_GE_STR,
+//							OPERATOR_EQ_STR,
+//							OPERATOR_NE_STR,
+//							OPERATOR_LT_STR,
+//							OPERATOR_GT_STR,
 
-							OPERATOR_HELLIP,
-							OPERATOR_FLIP_FLOP,
+//							OPERATOR_HELLIP,	// used in core regexs
+//							OPERATOR_FLIP_FLOP,
 							OPERATOR_CONCAT,
 
 							OPERATOR_BITWISE_NOT,

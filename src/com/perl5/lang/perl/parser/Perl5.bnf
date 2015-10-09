@@ -412,6 +412,7 @@ private namespace_item ::=
         | compound_statement
         | format_definition
         | statement
+        | block_compound  // put it after statement to handle anon hashes before it.
         | annotation
      )
 
@@ -421,7 +422,6 @@ format_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_FORMAT [IDENTIFIER] OPE
 private compound_statement ::=
     sub_definition
     | named_block
-    | block_compound
     | if_compound
     | unless_compound
     | given_compound
