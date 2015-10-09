@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.104</version>
+    <version>1.105</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -39,7 +39,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p><b>1.104 changes</b></p>
+      <p><b>1.105 changes</b></p>
 
       <p><b>Features & Improvements:</b>
       <ul>
@@ -62,6 +62,7 @@
         <li>Implemented parsing for bare glob operator like <code>my @list = &lt;some/path/*&gt;</code></li>
         <li>Implemented support for empty here-doc markers</li>
         <li>Implemented proper block dereference parsing</li>
+        <li>Significally improved nested code interpolation parsing</li>
       </ul>
       </p>
 
