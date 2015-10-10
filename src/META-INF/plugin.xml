@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.105</version>
+    <version>1.106</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -39,7 +39,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p><b>1.105 changes</b></p>
+      <p><b>1.106 changes</b></p>
 
       <p><b>Features & Improvements:</b>
       <ul>
