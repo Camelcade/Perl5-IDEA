@@ -17,14 +17,15 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.FlexLexer;
 
 /**
- * Created by hurricup on 13.08.2015.
+ * Created by hurricup on 10.10.2015.
  */
-public class PerlStringLexerAdapter extends FlexAdapter
+public class PerlSimpleHeredocLexerAdapter extends FlexAdapter
 {
-	public PerlStringLexerAdapter()
+	public PerlSimpleHeredocLexerAdapter()
 	{
-		super(new PerlStringLexer());
+		super(new PerlSimpleHeredocLexer());
 	}
 }

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.PerlQQStringLexerAdapter;
 
 /**
@@ -30,8 +31,8 @@ public class PerlQQStringElementType extends PerlParsableStringElementType
 	}
 
 	@Override
-	protected FlexAdapter getLexerAdapter()
+	protected FlexAdapter getLexerAdapter(Project project)
 	{
-		return new PerlQQStringLexerAdapter();
+		return new PerlQQStringLexerAdapter(project);
 	}
 }

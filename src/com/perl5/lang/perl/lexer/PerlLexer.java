@@ -741,7 +741,7 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlStringLexer getBareStringLexer()
 	{
 		if (myStringLexer == null)
-			myStringLexer = new PerlStringLexer();
+			myStringLexer = new PerlStringLexer(myProject);
 
 		return myStringLexer;
 	}
@@ -767,7 +767,7 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlQQStringLexer getQQStringLexer()
 	{
 		if (myQQStringLexer == null)
-			myQQStringLexer = new PerlQQStringLexer();
+			myQQStringLexer = new PerlQQStringLexer(myProject);
 
 		return myQQStringLexer;
 	}
@@ -780,7 +780,7 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlQXStringLexer getQXStringLexer()
 	{
 		if (myQXStringLexer == null)
-			myQXStringLexer = new PerlQXStringLexer();
+			myQXStringLexer = new PerlQXStringLexer(myProject);
 
 		return myQXStringLexer;
 	}

@@ -17,14 +17,15 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by hurricup on 26.08.2015.
  */
 public class PerlQQStringLexerAdapter extends FlexAdapter
 {
-	public PerlQQStringLexerAdapter()
+	public PerlQQStringLexerAdapter(Project project)
 	{
-		super(new PerlQQStringLexer());
+		super(new PerlQQStringLexer(project));
 	}
 }

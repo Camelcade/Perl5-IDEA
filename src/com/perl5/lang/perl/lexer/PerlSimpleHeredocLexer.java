@@ -22,11 +22,11 @@ import com.intellij.psi.tree.IElementType;
 import java.io.IOException;
 
 /**
- * Created by hurricup on 10.09.2015.
+ * Created by hurricup on 10.10.2015.
  */
-public class PerlQStringLexer extends PerlQQStringLexer
+public class PerlSimpleHeredocLexer extends PerlInterpolatedHeredocLexer
 {
-	public PerlQStringLexer()
+	public PerlSimpleHeredocLexer()
 	{
 		super(null);
 	}
@@ -38,9 +38,8 @@ public class PerlQStringLexer extends PerlQQStringLexer
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 
-		if (tokenStart > getBufferStart() && tokenStart < bufferEnd - 1)
+		if (tokenStart > bufferStart && tokenStart < bufferEnd)
 		{
-			// fixme not dry with PerlHeredocLexer
 			setTokenStart(tokenStart);
 
 			int currentPosition = tokenStart;
@@ -48,39 +47,27 @@ public class PerlQStringLexer extends PerlQQStringLexer
 			char currentChar = buffer.charAt(currentPosition);
 
 			if (currentChar == '\n')
-				setTokenEnd(currentPosition + 1);
+			{
+				currentPosition++;
+			}
 			else if (Character.isWhitespace(currentChar))
 			{
-				do
+				while (currentPosition < bufferEnd && (currentChar = buffer.charAt(currentPosition)) != '\n' && Character.isWhitespace(currentChar))
 				{
-					currentChar = buffer.charAt(++currentPosition);
-				} while (currentPosition < bufferEnd - 1 && currentChar != '\n' && Character.isWhitespace(currentChar));
-				setTokenEnd(currentPosition);
+					currentPosition++;
+				}
 			}
 			else
 			{
-				do
+				while (currentPosition < bufferEnd && !Character.isWhitespace(buffer.charAt(currentPosition)))
 				{
-					currentChar = buffer.charAt(++currentPosition);
-				} while (currentPosition < bufferEnd - 1 && !Character.isWhitespace(currentChar));
-				setTokenEnd(currentPosition);
+					currentPosition++;
+				}
 			}
+			setTokenEnd(currentPosition);
 
 			return STRING_CONTENT;
 		}
-
 		return super.perlAdvance();
-	}
-
-	@Override
-	protected IElementType getOpenQuoteToken()
-	{
-		return QUOTE_SINGLE_OPEN;
-	}
-
-	@Override
-	protected IElementType getCloseQuoteToken()
-	{
-		return QUOTE_SINGLE_CLOSE;
 	}
 }

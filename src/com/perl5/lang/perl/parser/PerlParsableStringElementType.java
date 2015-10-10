@@ -44,7 +44,7 @@ public abstract class PerlParsableStringElementType extends ILazyParseableElemen
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				getLexerAdapter(),
+				getLexerAdapter(parentElement.getProject()),
 				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlParser();
@@ -52,6 +52,6 @@ public abstract class PerlParsableStringElementType extends ILazyParseableElemen
 		return parser.parse(this, builder).getFirstChildNode().getFirstChildNode();
 	}
 
-	protected abstract FlexAdapter getLexerAdapter();
+	protected abstract FlexAdapter getLexerAdapter(Project project);
 
 }
