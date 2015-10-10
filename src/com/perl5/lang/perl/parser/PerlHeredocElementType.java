@@ -20,11 +20,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lang.PsiParser;
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlHeredocLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlInterpolatedHeredocLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlSimpleHeredocLexerAdapter;
 
 /**
  * Created by hurricup on 13.08.2015.
@@ -44,11 +46,23 @@ public class PerlHeredocElementType extends ILazyParseableElementType
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				new PerlHeredocLexerAdapter(toString()),
+				getLexerAdapter(parentElement.getProject()),
 				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlParser();
 
 		return parser.parse(this, builder).getFirstChildNode();
+	}
+
+	protected FlexAdapter getLexerAdapter(Project project)
+	{
+		if ("HEREDOC".equals(toString()))
+		{
+			return new PerlSimpleHeredocLexerAdapter();
+		}
+		else
+		{
+			return new PerlInterpolatedHeredocLexerAdapter(project);
+		}
 	}
 }

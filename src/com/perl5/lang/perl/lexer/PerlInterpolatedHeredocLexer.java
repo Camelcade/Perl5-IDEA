@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 
 import java.io.IOException;
@@ -23,22 +24,17 @@ import java.io.IOException;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlHeredocLexer extends PerlStringLexer
+public class PerlInterpolatedHeredocLexer extends PerlStringLexer
 {
-	final protected String myType;
-	final protected boolean isInterpolated;
-
-	public PerlHeredocLexer(String myType)
+	public PerlInterpolatedHeredocLexer(Project project)
 	{
-		this.myType = myType;
-		isInterpolated = !"HEREDOC".equals(myType);
+		super(project);
 	}
 
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
 		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 
 		if (tokenStart < bufferEnd)
@@ -48,37 +44,6 @@ public class PerlHeredocLexer extends PerlStringLexer
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 1);
 				return HEREDOC_PSEUDO_QUOTE;
-			}
-			else if (!isInterpolated && tokenStart > bufferStart)
-			{
-				// fixme not dry with PerlQStringLexer
-				setTokenStart(tokenStart);
-
-				int currentPosition = tokenStart;
-
-				char currentChar = buffer.charAt(currentPosition);
-
-				if (currentChar == '\n')
-				{
-					currentPosition++;
-				}
-				else if (Character.isWhitespace(currentChar))
-				{
-					while (currentPosition < bufferEnd && (currentChar = buffer.charAt(currentPosition)) != '\n' && Character.isWhitespace(currentChar))
-					{
-						currentPosition++;
-					}
-				}
-				else
-				{
-					while (currentPosition < bufferEnd && !Character.isWhitespace(buffer.charAt(currentPosition)))
-					{
-						currentPosition++;
-					}
-				}
-				setTokenEnd(currentPosition);
-
-				return STRING_CONTENT;
 			}
 		}
 

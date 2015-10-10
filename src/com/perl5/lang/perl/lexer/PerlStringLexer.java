@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
@@ -28,10 +29,13 @@ import java.util.regex.Matcher;
  */
 public class PerlStringLexer extends PerlStringLexerGenerated
 {
+	protected PerlLexer PERL_LEXER = null;
+	protected Project myProject = null;
 
-	public PerlStringLexer()
+	public PerlStringLexer(Project project)
 	{
 		super((Reader) null);
+		myProject = project;
 	}
 
 	@Override
@@ -131,6 +135,15 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		}
 
 		return IDENTIFIER;
+	}
+
+	public PerlLexer getPerlLexer()
+	{
+		if (PERL_LEXER == null)
+		{
+			PERL_LEXER = new PerlLexer(myProject);
+		}
+		return PERL_LEXER;
 	}
 
 }

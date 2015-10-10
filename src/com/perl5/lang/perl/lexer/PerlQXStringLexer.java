@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 
 /**
@@ -23,6 +24,11 @@ import com.intellij.psi.tree.IElementType;
  */
 public class PerlQXStringLexer extends PerlQQStringLexer
 {
+	public PerlQXStringLexer(Project project)
+	{
+		super(project);
+	}
+
 	@Override
 	protected IElementType getOpenQuoteToken()
 	{

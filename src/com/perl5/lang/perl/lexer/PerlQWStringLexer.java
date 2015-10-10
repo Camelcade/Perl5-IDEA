@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
@@ -26,6 +27,11 @@ import java.io.IOException;
  */
 public class PerlQWStringLexer extends PerlQQStringLexer
 {
+	public PerlQWStringLexer()
+	{
+		super(null);
+	}
+
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
