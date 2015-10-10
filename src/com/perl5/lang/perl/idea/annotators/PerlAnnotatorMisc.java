@@ -27,6 +27,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
@@ -132,6 +133,12 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_ANGLE,
 						false,
+						false);
+			else if (PerlLexer.RESERVED_TOKENSET.contains(tokenType))
+				decorateElement(
+						holder.createInfoAnnotation(element, null),
+						PerlSyntaxHighlighter.PERL_KEYWORD,
+						true,
 						false);
 		}
 	}

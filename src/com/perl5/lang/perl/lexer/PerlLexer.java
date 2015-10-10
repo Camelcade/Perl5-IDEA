@@ -1836,11 +1836,11 @@ public class PerlLexer extends PerlLexerGenerated
 	@Override
 	public IElementType advance() throws IOException
 	{
-		boolean isPreParsed = preparsedTokensList.size() > 0;
+		boolean wasPreparsed = preparsedTokensList.size() > 0;
 
 		IElementType tokenType = super.advance();
 
-		if (!isPreParsed)
+		if (!wasPreparsed && preparsedTokensList.isEmpty())
 		{
 			attributesLogic(tokenType);
 

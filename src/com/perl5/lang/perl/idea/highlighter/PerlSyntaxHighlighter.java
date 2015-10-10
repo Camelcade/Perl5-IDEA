@@ -197,8 +197,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 			return POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
 		else if (attributesMap.containsKey(tokenType))
 			return attributesMap.get(tokenType);
-		else if (PerlLexer.RESERVED_TOKENSET.contains(tokenType))
-			return attributesMap.get(PerlElementTypes.RESERVED_IF);
 		else if (PerlLexer.OPERATORS_TOKENSET.contains(tokenType))
 			return attributesMap.get(PerlElementTypes.OPERATOR_MUL);
 

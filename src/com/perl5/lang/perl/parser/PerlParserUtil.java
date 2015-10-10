@@ -753,20 +753,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		PsiBuilder.Marker m;
 
-//		while (currentTokenType == SIGIL_SCALAR                                // sigil is here
-//				&& POST_SIGILS_SUFFIXES.contains(nextTokenType)            // next can be variable name
-//				)
-//		{
-//			if (m == null)
-//				m = b.mark();
-//			b.advanceLexer();
-//			currentTokenType = nextTokenType;
-//			nextTokenType = b.rawLookup(1);
-//		}
-//
-//		if (m != null)
-//			m.collapse(SCALAR_SIGILS);
-
 		// checking for scalar cast
 		if (currentTokenType == SIGIL_SCALAR && POST_SIGILS_SUFFIXES.contains(b.lookAhead(1)))
 			return false;
@@ -1313,11 +1299,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 
-			if (!b.eof() && tokenType == OPERATOR_REFERENCE)
-			{
-				b.advanceLexer();
-			}
-
 //			m.drop();
 			m.collapse(STRING_CONTENT);
 			return true;
@@ -1342,19 +1323,10 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 
-			if (!b.eof() && tokenType == OPERATOR_REFERENCE)
-			{
-				b.advanceLexer();
-			}
-
 			// reduces nodes number
 			while (!b.eof() && !REGEX_MERGE_STOP_TOKENS.contains(tokenType = b.getTokenType()))
 			{
 				b.advanceLexer();
-				if (!b.eof() && tokenType == OPERATOR_REFERENCE)
-				{
-					b.advanceLexer();
-				}
 			}
 //			m.drop();
 			m.collapse(REGEX_TOKEN);
@@ -1379,11 +1351,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 
-			if (!b.eof() && tokenType == OPERATOR_REFERENCE)
-			{
-				b.advanceLexer();
-			}
-
 			IElementType prevRawTokenType;
 
 			// reduces nodes number
@@ -1394,10 +1361,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			{
 				b.advanceLexer();
 
-				if (!b.eof() && tokenType == OPERATOR_REFERENCE)
-				{
-					b.advanceLexer();
-				}
 			}
 //			m.drop();
 			m.collapse(REGEX_TOKEN);

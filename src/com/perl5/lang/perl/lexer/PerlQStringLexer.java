@@ -73,6 +73,12 @@ public class PerlQStringLexer extends PerlQQStringLexer
 	}
 
 	@Override
+	public void captureInterpolatedCode()
+	{
+
+	}
+
+	@Override
 	protected IElementType getOpenQuoteToken()
 	{
 		return QUOTE_SINGLE_OPEN;
