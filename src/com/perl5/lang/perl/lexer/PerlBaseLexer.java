@@ -260,7 +260,8 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	 */
 	protected void addPreparsedToken(int start, int end, IElementType tokenType)
 	{
-		assert preparsedTokensList.size() == 0 || preparsedTokensList.getLast().getTokenEnd() == start;
+		assert preparsedTokensList.size() == 0 || preparsedTokensList.getLast().getTokenEnd() == start : "Tokens size is " + preparsedTokensList.size() + " new token start is " + start +
+				(preparsedTokensList.size() == 0 ? "" : " last token end is " + preparsedTokensList.getLast().getTokenEnd());
 		preparsedTokensList.add(getCustomToken(start, end, tokenType));
 	}
 

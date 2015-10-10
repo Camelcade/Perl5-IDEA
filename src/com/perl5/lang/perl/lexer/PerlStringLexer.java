@@ -64,6 +64,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 			return STRING_CONTENT;
 		}
 
+		boolean wasPreparsed = preparsedTokensList.size() > 0;
 		IElementType tokenType = super.perlAdvance();
 
 		// handling tailing spaces
@@ -71,8 +72,21 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		if (tokenEnd == getBufferEnd()
 				&& (tokenType == TokenType.WHITE_SPACE || tokenType == TokenType.NEW_LINE_INDENT)
 				)
+		{
 			tokenType = STRING_CONTENT;
+		}
 
+		if (!wasPreparsed && preparsedTokensList.isEmpty())
+		{
+			if (tokenType == LEFT_BRACE && (lastSignificantTokenType == SIGIL_ARRAY || lastSignificantTokenType == SIGIL_SCALAR))
+			{
+				captureInterpolatedCode();
+			}
+			else if (tokenType == OPERATOR_REFERENCE && bufferEnd > tokenEnd)
+			{
+				addPreparsedToken(tokenEnd, tokenEnd + 1, STRING_CONTENT);
+			}
+		}
 		return tokenType;
 	}
 
@@ -146,4 +160,66 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		return PERL_LEXER;
 	}
 
+	public void captureInterpolatedCode() throws IOException
+	{
+		int seekStart = getTokenEnd();
+		int seekEnd = getBufferEnd();
+		int currentPos = seekStart;
+		CharSequence buffer = getBuffer();
+
+		int braceLevel = 0;
+		boolean isEscaped = false;
+
+		while (currentPos < seekEnd)
+		{
+			char currentChar = buffer.charAt(currentPos);
+
+			if (!isEscaped && braceLevel == 0 && currentChar == '}')
+			{
+				break;
+			}
+
+			if (!isEscaped)
+			{
+				if (currentChar == '{')
+				{
+					braceLevel++;
+				}
+				else if (currentChar == '}')
+				{
+					braceLevel--;
+				}
+			}
+
+			isEscaped = !isEscaped && currentChar == '\\';
+			currentPos++;
+		}
+
+
+		if (currentPos > seekStart)
+		{
+			PerlLexer lexer = getPerlLexer();
+			lexer.reset(buffer, seekStart, currentPos, 0);
+			IElementType tokenType = null;
+			while ((tokenType = lexer.advance()) != null)
+			{
+				addPreparsedToken(lexer.getTokenStart(), lexer.getTokenEnd(), tokenType);
+			}
+		}
+	}
+
+	@Override
+	public IElementType parseSimpleVariable(IElementType sigilTokenType)
+	{
+		int tokenStart = getTokenStart();
+		CharSequence tokenText = yytext();
+
+		setTokenEnd(++tokenStart);
+
+		addPreparsedToken(tokenStart++, tokenStart, LEFT_BRACE);
+		addPreparsedToken(tokenStart, tokenStart += tokenText.length() - 3, IDENTIFIER);
+		addPreparsedToken(tokenStart++, tokenStart, RIGHT_BRACE);
+
+		return sigilTokenType;
+	}
 }

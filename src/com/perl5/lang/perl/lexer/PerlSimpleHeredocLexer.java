@@ -70,4 +70,11 @@ public class PerlSimpleHeredocLexer extends PerlInterpolatedHeredocLexer
 		}
 		return super.perlAdvance();
 	}
+
+	@Override
+	public void captureInterpolatedCode()
+	{
+
+	}
+
 }

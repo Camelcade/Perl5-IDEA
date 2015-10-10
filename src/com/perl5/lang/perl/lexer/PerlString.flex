@@ -44,6 +44,7 @@ import com.intellij.lexer.FlexLexer;
     public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
 
     public abstract IElementType parseEscape();
+    public abstract IElementType parseSimpleVariable(IElementType sigilTokenType);
 %}
 
 
@@ -79,6 +80,9 @@ NUMBER_BIN = "0b"[01]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
 BAREWORD_MINUS = "-" * {IDENTIFIER}
+
+SIMPLE_SCALAR = "${" "^"? {BAREWORD_MINUS} "}"
+SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 
 %%
 
@@ -136,6 +140,9 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
 
 {NUMBER_INT_SIMPLE} {return NUMBER_SIMPLE;}
 {NUMBER} {return NUMBER;}
+
+{SIMPLE_SCALAR} {return parseSimpleVariable(SIGIL_SCALAR);}
+{SIMPLE_ARRAY} {return parseSimpleVariable(SIGIL_ARRAY);}
 
 {BAREWORD_MINUS} {return parseBarewordMinus();}
 {CAPPED_VARIABLE_NAME} {return IDENTIFIER;}
