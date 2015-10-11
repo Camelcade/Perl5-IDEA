@@ -471,9 +471,13 @@
         </group>
 
 
+        <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"
+                text="Generate Constructor" description="Generate class constructor">
+            <add-to-group group-id="GenerateGroup" anchor="first"/>
+        </action>
         <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterAction" id="Perl5NewGetter"
                 text="Generate Getters" description="Generate class getters">
-            <add-to-group group-id="GenerateGroup" anchor="first"/>
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewConstructor"/>
         </action>
         <action class="com.perl5.lang.perl.idea.generation.GeneratePerlSetterAction" id="Perl5NewSetter"
                 text="Generate Setters" description="Generate class setters">

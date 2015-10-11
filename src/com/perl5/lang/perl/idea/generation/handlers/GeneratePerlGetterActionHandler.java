@@ -37,7 +37,6 @@ public class GeneratePerlGetterActionHandler extends GeneratePerlGetterSetterAct
 	public void doGenerate(Document document, String name, int offset)
 	{
 		document.insertString(offset, getGetterCode(name));
-
 	}
 
 	@Override
