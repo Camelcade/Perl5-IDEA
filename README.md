@@ -7,6 +7,7 @@ Don't forget to read our [contribution policy](https://github.com/hurricup/Perl5
 
 * [Camelcade twitter](https://twitter.com/CamelcadeIDE)
 * [Camelcade wiki](https://github.com/hurricup/Perl5-IDEA/wiki)
+* [Onion parsing comparision](http://evstigneev.com/onion_all.png)
 
 Optimized using [Java Profiler](http://www.ej-technologies.com/products/jprofiler/overview.html) from ej-technologies. 
 
