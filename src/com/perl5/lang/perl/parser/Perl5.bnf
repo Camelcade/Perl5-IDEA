@@ -864,17 +864,17 @@ variable_declaration_local ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_LOCAL [<<merge
 variable_declaration_lexical ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_MY | RESERVED_STATE) [<<mergePackageName>>] variable_declaration_variation [var_attributes] {pin=2}
 variable_declaration_global ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_OUR [<<mergePackageName>>] variable_declaration_variation [var_attributes] {pin=2}
 
-private local_variable_declaration_variation ::=
-    LEFT_PAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * RIGHT_PAREN
-    | local_variable_declaration_argument
+private local_variable_declaration_variation ::= local_parenthesised_declaration | local_variable_declaration_argument
+private local_parenthesised_declaration ::= LEFT_PAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * RIGHT_PAREN {pin=1}
+private local_variable_declaration_argument ::= strict_variable_declaration_argument | scalar_expr
 
-private local_variable_declaration_argument ::= immutable_expr | variable_declaration_argument
+private variable_declaration_variation ::= variable_parenthesised_declaration | variable_declaration_argument
+private variable_parenthesised_declaration ::= LEFT_PAREN strict_variable_declaration_argument (comma + strict_variable_declaration_argument ) * comma* RIGHT_PAREN {pin=1}
 
-private variable_declaration_variation ::=
-    LEFT_PAREN variable_declaration_argument (comma + variable_declaration_argument ) * comma* RIGHT_PAREN
-    | variable_declaration_argument
-
+private strict_variable_declaration_argument ::= strict_variable_declaration_wrapper | [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF
 private variable_declaration_argument ::= variable_declaration_wrapper | [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF
+
+private strict_variable_declaration_wrapper ::= variable_declaration_wrapper !(LEFT_BRACE | LEFT_BRACKET | OPERATOR_DEREFERENCE )
 variable_declaration_wrapper ::= lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
