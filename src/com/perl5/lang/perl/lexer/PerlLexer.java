@@ -277,71 +277,7 @@ public class PerlLexer extends PerlLexerGenerated
 							)),
 					TokenSet.create(
 							OPERATOR_PLUS_PLUS,
-							OPERATOR_MINUS_MINUS,
-
-//							OPERATOR_CMP_STR,
-//							OPERATOR_LE_STR,
-//							OPERATOR_GE_STR,
-//							OPERATOR_EQ_STR,
-//							OPERATOR_NE_STR,
-//							OPERATOR_LT_STR,
-//							OPERATOR_GT_STR,
-
-//							OPERATOR_HELLIP,	// used in core regexs
-//							OPERATOR_FLIP_FLOP,
-							OPERATOR_CONCAT,
-
-							OPERATOR_BITWISE_NOT,
-							OPERATOR_BITWISE_AND,
-							OPERATOR_BITWISE_OR,
-							OPERATOR_BITWISE_XOR,
-
-							OPERATOR_FILETEST
-
-/*
-							OPERATOR_CMP_NUMERIC,
-							OPERATOR_LT_NUMERIC,
-							OPERATOR_GT_NUMERIC,
-
-							OPERATOR_POW,
-
-							OPERATOR_RE,
-							OPERATOR_NOT_RE,
-
-//			OPERATOR_HEREDOC, // this is an artificial operator, not the real one
-							OPERATOR_SHIFT_LEFT,
-							OPERATOR_SHIFT_RIGHT,
-
-							OPERATOR_AND,
-							OPERATOR_OR,
-							OPERATOR_OR_DEFINED,
-							OPERATOR_NOT,
-
-							OPERATOR_ASSIGN,
-
-							QUESTION,
-							COLON,
-
-							OPERATOR_REFERENCE,
-
-							OPERATOR_DIV,
-							OPERATOR_MUL,
-							OPERATOR_MOD,
-							OPERATOR_PLUS,
-							OPERATOR_MINUS,
-
-							OPERATOR_AND_LP,
-							OPERATOR_OR_LP,
-							OPERATOR_XOR_LP,
-							OPERATOR_NOT_LP,
-
-							OPERATOR_COMMA,
-							OPERATOR_COMMA_ARROW,
-
-							OPERATOR_DEREFERENCE,
-
-							OPERATOR_X,
-*/
+							OPERATOR_MINUS_MINUS
 					)
 			);
 	static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
@@ -659,10 +595,10 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType captureString(int newState) throws IOException
 	{
-		if (SIGILS_TOKENS.contains(lastTokenType)    // this is not a beginning of a string, but variable name
+		if (SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())    // this is not a beginning of a string, but variable name
 				|| (
-				lastSignificantTokenType == LEFT_BRACE
-						&& SIGILS_TOKENS.contains(lastUnbraceTokenType)
+				getTokenHistory().getLastSignificantTokenType() == LEFT_BRACE
+						&& SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType())
 						&& getNextNonSpaceCharacter() == '}'
 		)
 				)
@@ -808,8 +744,8 @@ public class PerlLexer extends PerlLexerGenerated
 	@Override
 	public IElementType parseVersion()
 	{
-		if (SIGILS_TOKENS.contains(lastTokenType)
-				|| isBraced() && SIGILS_TOKENS.contains(lastUnbraceTokenType)
+		if (SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())
+				|| isBraced() && SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType())
 				)
 		{
 			CharSequence tokenText = yytext();
@@ -834,15 +770,15 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseNumber()
 	{
 		String tokenText = yytext().toString();
-//		System.err.println("For "  + tokenText + "Last significant token is " + lastSignificantTokenType);
-		if (StringUtil.startsWithChar(tokenText, '.') && CONCAT_OPERATOR_PREFIX.contains(lastSignificantTokenType)) // It's a $var.123; where . is a concat
+//		System.err.println("For "  + tokenText + "Last significant token is " + getTokenHistory().getLastSignificantTokenType());
+		if (StringUtil.startsWithChar(tokenText, '.') && CONCAT_OPERATOR_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())) // It's a $var.123; where . is a concat
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_CONCAT;
 		}
 		else if (tokenText.endsWith("."))
 		{
-			if (lastUnbraceTokenType == SIGIL_SCALAR) // $1.$something
+			if (getTokenHistory().getLastUnbracedTokenType() == SIGIL_SCALAR) // $1.$something
 			{
 				yypushback(1);
 				return IDENTIFIER;
@@ -1199,12 +1135,12 @@ public class PerlLexer extends PerlLexerGenerated
 		// todo we should check argumentless prefix sub
 		// todo we should check if we are after grep/map/sort block
 		// actually, we can't distict somesub / somediv from somesub /regex/;
-		return !SIGILS_TOKENS.contains(lastUnbraceTokenType)    // for $/
+		return !SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType())    // for $/
 				&& (
-				lastSignificantTokenType == null
-						|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
-						|| TERM_PREFIX.contains(lastSignificantTokenType)
-						|| lastUnparenTokenType == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(lastUnparenToken)
+				getTokenHistory().getLastSignificantTokenType() == null
+						|| RESERVED_TOKENSET.contains(getTokenHistory().getLastSignificantTokenType())
+						|| TERM_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())
+						|| getTokenHistory().getLastUnparenTokenType() == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(getTokenHistory().getLastUnparenTokenText())
 		);
 	}
 
@@ -1238,9 +1174,9 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType checkOperatorXSticked()
 	{
 		yypushback(1);
-		if (lastSignificantTokenType == RESERVED_REQUIRE                            // require x123
-				|| IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)    // package x123, ->x123, etc.
-				|| SIGILS_TOKENS.contains(lastTokenType)                            // $x123
+		if (getTokenHistory().getLastSignificantTokenType() == RESERVED_REQUIRE                            // require x123
+				|| IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())    // package x123, ->x123, etc.
+				|| SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())                            // $x123
 				|| isBraced()                                                        // {x123}
 				)
 			return IDENTIFIER;
@@ -1253,7 +1189,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public IElementType parseCappedVariableName()
 	{
-		if (SIGILS_TOKENS.contains(lastUnbraceTokenType))
+		if (SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType()))
 			return IDENTIFIER;
 
 		yypushback(yylength() - 1);
@@ -1621,7 +1557,7 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		String tokenText = yytext().toString();
 
-		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType) || SIGILS_TOKENS.contains(lastTokenType);
+		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType()) || SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType());
 
 		if (Character.isDigit(tokenText.charAt(0)))
 		{
@@ -1669,16 +1605,16 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			return IDENTIFIER;
 		}
-		else if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
-				&& !SIGILS_TOKENS.contains(lastTokenType)    // print $$ if smth
+		else if (!IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())
+				&& !SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())    // print $$ if smth
 
 				)
 		{
 			if ((tokenType = namedOperators.get(tokenText)) != null)
 				return tokenType;
 			else if (
-					lastUnparenTokenType == IDENTIFIER
-							&& PerlParserUtil.PRE_HANDLE_OPS.contains(lastUnparenToken)
+					getTokenHistory().getLastUnparenTokenType() == IDENTIFIER
+							&& PerlParserUtil.PRE_HANDLE_OPS.contains(getTokenHistory().getLastUnparenTokenText())
 							&& !PerlSubUtil.BUILT_IN.contains(tokenText)
 							&& isListElementEndAhead()
 					)
@@ -1690,7 +1626,7 @@ public class PerlLexer extends PerlLexerGenerated
 			else if ((tokenType = tagNames.get(tokenText)) != null)
 				return tokenType;
 		}
-		else if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_NO) // pragma section
+		else if (getTokenHistory().getLastSignificantTokenType() == RESERVED_USE || getTokenHistory().getLastSignificantTokenType() == RESERVED_NO) // pragma section
 			if (PRAGMA_TOKENS_MAP.containsKey(tokenText))
 				return PRAGMA_TOKENS_MAP.get(tokenText);
 
@@ -1789,7 +1725,7 @@ public class PerlLexer extends PerlLexerGenerated
 	@Override
 	public IElementType parseOperatorDereference()
 	{
-		if (lastTokenType == SIGIL_SCALAR)    // suppose it's a $->
+		if (getTokenHistory().getLastTokenType() == SIGIL_SCALAR)    // suppose it's a $->
 		{
 			yypushback(1);
 			return IDENTIFIER;
