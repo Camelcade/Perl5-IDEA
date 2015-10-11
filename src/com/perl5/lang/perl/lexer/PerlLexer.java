@@ -1162,7 +1162,12 @@ public class PerlLexer extends PerlLexerGenerated
 	// guess if this is a OPERATOR_DIV or regex opener
 	public IElementType guessDiv()
 	{
-		if (isTermPosition())
+		char nextChar = 0;
+		if (isTermPosition()
+				// additional hacks for regexps we could add check for (? here
+				|| (nextChar = getNextNonSpaceCharacter()) == '\\' // we can div by reference
+				|| nextChar == '['    // can't div by anon array
+				)
 		{
 			allowSharpQuote = true;
 			isEscaped = false;
