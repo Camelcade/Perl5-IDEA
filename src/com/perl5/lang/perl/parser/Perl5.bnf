@@ -491,11 +491,11 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 // fixme we can't pin this because we need to distinct declaration and definition
 sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_definition_parameters block
 
-private sub_definition_parameters ::= [sub_prototype_or_signature] [attributes]
+private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
 private sub_prototype_or_signature ::= sub_prototype | sub_signature
 
 sub_declaration ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_declaration_parameters
-private sub_declaration_parameters ::= [sub_prototype] [attributes]
+private sub_declaration_parameters ::= [sub_prototype] [sub_attributes]
 
 private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
 
@@ -507,7 +507,8 @@ private sub_prototype_content ::= <<parseSubPrototype>>
 private sub_signature ::= LEFT_PAREN [sub_signature_content] RIGHT_PAREN {pin=1}
 private sub_signature_content ::= <<parseSubSignature>>
 
-private attributes ::= COLON attribute ([COLON] attribute)*  {pin=1} // <<parseSubAttributes>>
+private sub_attributes ::= COLON attribute ([COLON] attribute)*  {pin=1}
+private var_attributes ::= COLON attribute ([COLON] attribute)*  // {pin=1} pin disable because of $something ? my $var : $other;
 attribute ::= IDENTIFIER [string_sq_parsed]
 
 last_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_LAST [lnr_param] {pin=2}
@@ -860,8 +861,8 @@ private variable_declaration ::=
 
 // @todo attributes support
 variable_declaration_local ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_LOCAL [<<mergePackageName>>]  local_variable_declaration_variation {pin=2}
-variable_declaration_lexical ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_MY | RESERVED_STATE) [<<mergePackageName>>] variable_declaration_variation [attributes] {pin=2}
-variable_declaration_global ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_OUR [<<mergePackageName>>] variable_declaration_variation [attributes] {pin=2}
+variable_declaration_lexical ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_MY | RESERVED_STATE) [<<mergePackageName>>] variable_declaration_variation [var_attributes] {pin=2}
+variable_declaration_global ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_OUR [<<mergePackageName>>] variable_declaration_variation [var_attributes] {pin=2}
 
 private local_variable_declaration_variation ::=
     LEFT_PAREN local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * RIGHT_PAREN
