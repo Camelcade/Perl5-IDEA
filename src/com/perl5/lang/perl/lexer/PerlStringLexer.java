@@ -139,13 +139,14 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		IElementType tokenType = null;
 		String tokenText = yytext().toString();
 
-		if ((tokenType = PerlLexer.tagNames.get(tokenText)) != null)
+		if (Character.isDigit(tokenText.charAt(0)))
 		{
-			return tokenType;
-		}
-		if ("x".equals(tokenText))
-		{
-			return OPERATOR_X;
+			int endOffset = 1;
+			while (Character.isDigit(tokenText.charAt(endOffset)))
+				endOffset++;
+
+			yypushback(tokenText.length() - endOffset);
+			return NUMBER_SIMPLE;
 		}
 
 		return IDENTIFIER;
