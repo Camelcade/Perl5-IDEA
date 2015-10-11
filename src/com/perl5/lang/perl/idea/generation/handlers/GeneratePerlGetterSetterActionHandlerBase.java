@@ -25,7 +25,9 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
@@ -75,18 +77,28 @@ public abstract class GeneratePerlGetterSetterActionHandlerBase implements CodeI
 		}
 		if (anchor == null)
 		{
+			anchor = PsiTreeUtil.getParentOfType(currentElement, PsiCommentImpl.class);
+		}
+		if (anchor == null)
+		{
 			anchor = currentElement;
 		}
 
 		int targetOffset = anchor.getNode().getStartOffset() + anchor.getNode().getTextLength();
 
-		String name = Messages.showInputDialog(project, getPromtText(), getPromtTitle(), Messages.getQuestionIcon(), "somegetter", null);
+		String name = Messages.showInputDialog(project, getPromtText(), getPromtTitle(), Messages.getQuestionIcon(), "", null);
 
-		if (name != null)
+		if (name != null && !name.isEmpty())
 		{
 			Document document = editor.getDocument();
 
-			doGenerate(document, name, targetOffset);
+			for (String nameChunk : name.split("[ ,]+"))
+			{
+				if (!nameChunk.isEmpty() && PerlLexer.IDENTIFIER_PATTERN.matcher(nameChunk).matches())
+				{
+					doGenerate(document, nameChunk, targetOffset);
+				}
+			}
 
 			PsiDocumentManager.getInstance(project).commitDocument(document);
 		}
