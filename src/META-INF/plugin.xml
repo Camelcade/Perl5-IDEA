@@ -64,6 +64,7 @@
         <li>Implemented proper block dereference parsing</li>
         <li>Significally improved nested code interpolation parsing</li>
         <li>Implemented simple getters/setters generation</li>
+        <li>Implemented simple constructor generation</li>
       </ul>
       </p>
 
