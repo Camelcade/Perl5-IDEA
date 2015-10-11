@@ -1135,11 +1135,26 @@ public class PerlLexer extends PerlLexerGenerated
 		// todo we should check argumentless prefix sub
 		// todo we should check if we are after grep/map/sort block
 		// actually, we can't distict somesub / somediv from somesub /regex/;
-		return !SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType())    // for $/
+
+		PerlTokenHistory tokenHistory = getTokenHistory();
+		IElementType lastUnbracedTokenType = tokenHistory.getLastUnbracedTokenType();
+		IElementType lastSignificantTokenType = tokenHistory.getLastSignificantTokenType();
+
+		boolean isTermPrefix = TERM_PREFIX.contains(lastSignificantTokenType);
+		if (lastSignificantTokenType == OPERATOR_CONCAT)
+		{
+			PerlTokenHistory.PerlTokenHistoryElement prevElement = tokenHistory.getPreviousToken(tokenHistory.getLastSignificantToken());
+			if (prevElement != null && prevElement.getTokenType() == SIGIL_SCALAR)
+			{
+				isTermPrefix = false;
+			}
+		}
+
+		return !SIGILS_TOKENS.contains(lastUnbracedTokenType)    // for $/
 				&& (
-				getTokenHistory().getLastSignificantTokenType() == null
-						|| RESERVED_TOKENSET.contains(getTokenHistory().getLastSignificantTokenType())
-						|| TERM_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())
+				lastSignificantTokenType == null
+						|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
+						|| isTermPrefix
 						|| getTokenHistory().getLastUnparenTokenType() == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(getTokenHistory().getLastUnparenTokenText())
 		);
 	}

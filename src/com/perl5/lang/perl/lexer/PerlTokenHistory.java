@@ -133,6 +133,17 @@ public class PerlTokenHistory implements PerlElementTypes
 		return myHistory;
 	}
 
+	@Nullable
+	public PerlTokenHistoryElement getPreviousToken(PerlTokenHistoryElement token)
+	{
+		int index = getHistory().lastIndexOf(token);
+		if (index > 0)
+		{
+			return getHistory().get(index - 1);
+		}
+		return null;
+	}
+
 	public void reset()
 	{
 		myHistory.clear();
