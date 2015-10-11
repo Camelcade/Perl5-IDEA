@@ -487,7 +487,7 @@
 
     <actions>
         <group class="com.perl5.lang.perl.idea.actions.groups.PerlFileActionsGroup" id="Perl5NewFile"
-               text="Perl5 File Actions" description="Create Perl5 File" icon="com/perl5/icons/perl5.png">
+               text="Perl5 File Actions" description="Create Perl5 File" icon="icons/perl5.png">
 
             <action id="Perl5.NewPerlPackage" class="com.perl5.lang.perl.idea.actions.CreatePerlPackageFileAction"
                     text="Perl5 Package" description="Create Perl5 Package">
@@ -516,6 +516,19 @@
             <add-to-group group-id="NewGroup" anchor="first"/>
         </group>
 
+
+        <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterAction" id="Perl5NewGetter"
+                text="Generate Getters" description="Generate class getters">
+            <add-to-group group-id="GenerateGroup" anchor="first"/>
+        </action>
+        <action class="com.perl5.lang.perl.idea.generation.GeneratePerlSetterAction" id="Perl5NewSetter"
+                text="Generate Setters" description="Generate class setters">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewGetter"/>
+        </action>
+        <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterSetterAction" id="Perl5NewGetterSetter"
+                text="Generate Getters and Setters" description="Generate class getters and setters">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewSetter"/>
+        </action>
 
     </actions>
 
