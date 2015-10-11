@@ -23,6 +23,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -52,17 +53,8 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	);
 	public final Stack<Integer> stateStack = new Stack<Integer>();
 	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
+	protected final PerlTokenHistory myTokenHistory = new PerlTokenHistory();
 	protected int bufferStart;
-
-	// last token
-	protected IElementType lastTokenType;
-	protected String lastToken;
-	protected IElementType lastSignificantTokenType;
-	protected String lastSignificantToken;
-	protected IElementType lastUnbraceTokenType;
-	protected String lastUnbraceToken;
-	protected IElementType lastUnparenTokenType;
-	protected String lastUnparenToken;
 
 	public abstract IElementType parsePackage();
 
@@ -135,10 +127,15 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 		return PACKAGE_IDENTIFIER;
 	}
 
+	public PerlTokenHistory getTokenHistory()
+	{
+		return myTokenHistory;
+	}
+
 	// check that current token surrounded with braces
 	protected boolean isBraced()
 	{
-		return lastSignificantTokenType == LEFT_BRACE && getNextNonSpaceCharacter() == '}';
+		return getTokenHistory().getLastSignificantTokenType() == LEFT_BRACE && getNextNonSpaceCharacter() == '}';
 	}
 
 	protected Character getNextSignificantCharacter()
@@ -209,39 +206,13 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 
 	public void registerToken(IElementType tokenType, String tokenText)
 	{
-		lastTokenType = tokenType;
-		lastToken = tokenText;
-
-		if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType))
-		{
-			lastSignificantTokenType = tokenType;
-			lastSignificantToken = lastToken;
-
-			if (tokenType != LEFT_BRACE)
-			{
-				lastUnbraceTokenType = tokenType;
-				lastUnbraceToken = lastToken;
-			}
-
-			if (tokenType != LEFT_PAREN)
-			{
-				lastUnparenTokenType = tokenType;
-				lastUnparenToken = lastToken;
-			}
-		}
+		getTokenHistory().addToken(tokenType, tokenText);
 	}
 
 	// fixme this must be done using skeleton
 	public void resetInternals()
 	{
-		lastTokenType = null;
-		lastToken = null;
-		lastSignificantTokenType = null;
-		lastSignificantToken = null;
-		lastUnbraceTokenType = null;
-		lastUnbraceToken = null;
-		lastUnparenTokenType = null;
-		lastUnparenToken = null;
+		getTokenHistory().reset();
 		preparsedTokensList.clear();
 		bufferStart = getTokenStart();
 	}

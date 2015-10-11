@@ -78,7 +78,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 
 		if (!wasPreparsed && preparsedTokensList.isEmpty())
 		{
-			if (tokenType == LEFT_BRACE && (lastSignificantTokenType == SIGIL_ARRAY || lastSignificantTokenType == SIGIL_SCALAR))
+			if (tokenType == LEFT_BRACE && (getTokenHistory().getLastSignificantTokenType() == SIGIL_ARRAY || getTokenHistory().getLastSignificantTokenType() == SIGIL_SCALAR))
 			{
 				captureInterpolatedCode();
 			}
