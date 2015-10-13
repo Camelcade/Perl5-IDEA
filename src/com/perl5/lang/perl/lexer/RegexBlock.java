@@ -20,10 +20,13 @@ import com.intellij.psi.TokenType;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexBlock implements PerlElementTypes
 {
 	public static final HashMap<String, List<Character>> allowedModifiers = new HashMap<String, List<Character>>();
+	public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
 
 	static
 	{
@@ -55,11 +58,11 @@ public class RegexBlock implements PerlElementTypes
 	 *
 	 * @param buffer      Input characters stream
 	 * @param startOffset Start parsing offset
-	 * @param bufferSize  Buffer last offset
+	 * @param bufferEnd  Buffer last offset
 	 * @param openingChar Opener character
 	 * @return Parsed regex block or null if failed
 	 */
-	public static RegexBlock parseBlock(CharSequence buffer, int startOffset, int bufferSize, char openingChar, boolean isSecondBlock)
+	public static RegexBlock parseBlock(CharSequence buffer, int startOffset, int bufferEnd, char openingChar, boolean isSecondBlock)
 	{
 		char closingChar = getQuoteCloseChar(openingChar);
 
@@ -76,8 +79,10 @@ public class RegexBlock implements PerlElementTypes
 
 		while (true)
 		{
-			if (currentOffset == bufferSize)
+			if (currentOffset == bufferEnd)
+			{
 				break;
+			}
 
 			char currentChar = buffer.charAt(currentOffset);
 
@@ -90,9 +95,22 @@ public class RegexBlock implements PerlElementTypes
 			if (!isSecondBlock)
 			{
 				if (!isEscaped && !isCharGroup && currentChar == '[')
-					isCharGroup = true;
+				{
+					Matcher m = POSIX_CHAR_CLASS_PATTERN.matcher(buffer.subSequence(currentOffset, bufferEnd));
+					if (m.lookingAt())
+					{
+						currentOffset += m.toMatchResult().group(0).length();
+						continue;
+					}
+					else
+					{
+						isCharGroup = true;
+					}
+				}
 				else if (!isEscaped && isCharGroup && currentChar == ']')
+				{
 					isCharGroup = false;
+				}
 
 				// @todo this is buggy, sometimes bare is allowed. See example from `redo` doc
 //				if (!isEscaped && !isCharGroup && currentChar == '{')
@@ -107,10 +125,16 @@ public class RegexBlock implements PerlElementTypes
 			}
 
 			if (!isEscaped && isQuotesDiffers && !isCharGroup)
+			{
 				if (currentChar == openingChar)
+				{
 					delimiterLevel++;
+				}
 				else if (currentChar == closingChar && delimiterLevel > 0)
+				{
 					delimiterLevel--;
+				}
+			}
 
 			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
 
