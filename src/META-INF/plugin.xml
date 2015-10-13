@@ -100,6 +100,7 @@
         <li>Fixed recovery after annotations.</li>
         <li>Fixed POSIX character group classes within regex with bracketed delimiters.</li>
         <li>Fixed single-argument grep and map parsing.</li>
+        <li>Improved anon hash from code block distinction.</li>
       </ul>
       </p>
 
