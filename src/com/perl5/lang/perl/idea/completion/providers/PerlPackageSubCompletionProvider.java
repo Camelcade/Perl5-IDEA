@@ -22,6 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.util.PerlCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
@@ -38,7 +39,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 	protected void addCompletions(
 			@NotNull CompletionParameters parameters,
 			ProcessingContext context,
-			@NotNull CompletionResultSet result)
+			final @NotNull CompletionResultSet result)
 	{
 		PsiElement method = parameters.getPosition().getParent();
 		assert method instanceof PsiPerlMethod;
@@ -47,32 +48,42 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 
 		boolean isObjectMethod = ((PsiPerlMethod) method).isObjectMethod();
 
-		String packagePrefix = result.getPrefixMatcher().getPrefix();
+		String nameFilter = null;
+		final Project project = parameters.getPosition().getProject();
 
 		if (explicitNamespace != null)
 		{
-			packagePrefix = explicitNamespace.getText() + packagePrefix;
-			result = result.withPrefixMatcher(packagePrefix);
+			nameFilter = explicitNamespace.getCanonicalName() + "::";
+		}
+		else
+		{
+			result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, "SUPER::"));
 		}
 
-		final Project project = parameters.getPosition().getProject();
-
-		result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, "SUPER::"));
-
-		final CompletionResultSet finalResultSet = result;
+		final String finalNameFilter = nameFilter;
 
 		if (!isObjectMethod)
+		{
 			// fixme not dry with PerlPackageNamesCompletionProvider
-			PerlPackageUtil.processDefinedPackageNames(project, new PerlInternalIndexKeysProcessor()
+			PerlPackageUtil.processDefinedPackageNames(PerlCompletionUtil.getCompletionScope(parameters), new PerlInternalIndexKeysProcessor()
 			{
 				@Override
 				public boolean process(String s)
 				{
 					if (super.process(s))
-						finalResultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, s));
+					{
+						if (finalNameFilter == null)
+						{
+							result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, s));
+						}
+						else if (s.startsWith(finalNameFilter))
+						{
+							result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, s.substring(finalNameFilter.length())));
+						}
+					}
 					return true;
 				}
 			});
-
+		}
 	}
 }

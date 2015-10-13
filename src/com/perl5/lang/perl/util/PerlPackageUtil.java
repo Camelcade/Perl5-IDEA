@@ -212,13 +212,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	/**
 	 * Processes all global packages names with specific processor
 	 *
-	 * @param project   project to search in
+	 * @param scope   search scope
 	 * @param processor string processor for suitable strings
 	 * @return collection of constants names
 	 */
-	public static boolean processDefinedPackageNames(Project project, Processor<String> processor)
+	public static boolean processDefinedPackageNames(GlobalSearchScope scope, Processor<String> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project, processor);
+		return StubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, processor, scope, null);
 	}
 
 	/**
