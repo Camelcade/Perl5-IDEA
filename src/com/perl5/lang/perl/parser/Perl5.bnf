@@ -886,7 +886,7 @@ private reference_value_expr ::=
     | anon_sub
 
 anon_array ::= LEFT_BRACKET [expr] RIGHT_BRACKET //{pin=1}
-anon_hash ::= LEFT_BRACE [expr] RIGHT_BRACE // fixme pin here after solving problem with code block and prototypes
+anon_hash ::= LEFT_BRACE [expr] RIGHT_BRACE <<validateAnonHashSuffix>>  // fixme pin here after solving problem with code block and prototypes
 anon_sub ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB block
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
