@@ -651,6 +651,7 @@ private grep_map_arguments ::=
 private grep_map_arguments_ ::=
     block [comma] grep_map_sort_tail
     | scalar_expr comma grep_map_sort_tail
+    | expr
 
 private grep_map_sort_tail ::= file_read_forced_expr | list_expr
 
