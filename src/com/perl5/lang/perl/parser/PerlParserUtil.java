@@ -125,6 +125,36 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PerlLexer.OPERATORS_TOKENSET
 	);
 
+	public static final TokenSet ANON_HASH_TOKEN_SUFFIXES = TokenSet.create(
+			RIGHT_BRACE
+			, RIGHT_PAREN
+			, RIGHT_BRACKET
+			, SEMICOLON
+			, EMBED_MARKER_SEMICOLON
+			, COLON
+
+			, OPERATOR_HELLIP,
+			OPERATOR_FLIP_FLOP,
+			OPERATOR_CONCAT,
+
+			OPERATOR_AND,
+			OPERATOR_OR,
+			OPERATOR_OR_DEFINED,
+			OPERATOR_NOT,
+
+			COLON,
+
+			OPERATOR_AND_LP,
+			OPERATOR_OR_LP,
+//			OPERATOR_XOR_LP,
+			OPERATOR_NOT_LP,
+
+			OPERATOR_COMMA,
+			OPERATOR_COMMA_ARROW,
+
+			OPERATOR_DEREFERENCE
+	);
+
 	// commands, that accepts filehandles as first parameter
 	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<String>(Arrays.asList(
 			"opendir",
@@ -1217,8 +1247,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	/**
 	 * Magic for nested string opener
 	 *
-	 * @param b         PerlPraser
-	 * @param l         paring level
+	 * @param b              PerlPraser
+	 * @param l              paring level
 	 * @param quoteTokenType opening quote type (atm only QQ)
 	 * @return parsing result
 	 */
@@ -1294,7 +1324,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				&& !(isStopOnNumericGt && tokenType == OPERATOR_GT_NUMERIC)    // stop bare glob
 				&& !(!isStopOnNumericGt && CLOSE_QUOTES.contains(tokenType))    // stop on close quote
 				&& tokenType != extraStopQuote
-		)
+				)
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
@@ -1646,4 +1676,28 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
+
+	/**
+	 * Checks if anon hash has proper suffix
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return chack result.
+	 */
+	public static boolean validateAnonHashSuffix(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		if (tokenType == null || ANON_HASH_TOKEN_SUFFIXES.contains(tokenType))
+		{
+			return true;
+		}
+		else
+		{
+			PsiBuilder.Marker m = b.mark();
+			boolean r = PerlParser.statement_modifier(b, l);
+			r = r && (b.getTokenType() != LEFT_BRACE);
+			m.rollbackTo();
+			return r;
+		}
+	}
 }
