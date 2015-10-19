@@ -17,29 +17,22 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.109</version>
+    <version>1.110</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
-    <h1>Camelcade</h1>
     <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
-    <h2>Useful links:</h2>
-    <ul>
-     <li><a href="https://twitter.com/CamelcadeIDE">Twitter</a></li>
-     <li><a href="https://github.com/hurricup/Perl5-IDEA">GitHub</a></li>
-     <li><a href="https://github.com/hurricup/Perl5-IDEA/issues">Issue Tracker</a></li>
-     <li><a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>
-     <ul>
-     <li><a href="https://github.com/hurricup/Perl5-IDEA/wiki/Getting-started">Getting started</a></li>
-     <li><a href="https://github.com/hurricup/Perl5-IDEA/wiki/Implemented-features">Implemented features</a></li>
-     <li><a href="https://github.com/hurricup/Perl5-IDEA/wiki/Known-issues">Known issues</a></li>
-     </ul>
-     </li>
-    </ul>
+    <p>
+    <a href="https://twitter.com/CamelcadeIDE">Twitter</a>
+    | <a href="https://github.com/hurricup/Perl5-IDEA">GitHub</a>
+    | <a href="https://github.com/hurricup/Perl5-IDEA/issues">Tracker</a>
+    | <a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>
+    </p>
+    <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E"><image src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" alt="Donate to support Project"></a></p>
     ]]></description>
 
     <change-notes><![CDATA[
-      <p><b>1.109 changes</b></p>
+      <p><b>1.110 changes</b></p>
 
       <p><b>Features & Improvements:</b>
       <ul>
@@ -70,6 +63,7 @@
 
       <p><b>Fixes:</b>
       <ul>
+        <li>Fixed few reported Exceptions</li>
         <li>Significally increased re-parsing performance on code typing</li>
         <li>It's not possible anymore to start identifier with digit, like <code>$123abc</code></li>
         <li>Hexadecimal and binary numbers with underscores now being parsed right.</li>
