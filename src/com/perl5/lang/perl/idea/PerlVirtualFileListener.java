@@ -43,7 +43,7 @@ public class PerlVirtualFileListener implements VirtualFileListener
 	public void propertyChanged(@NotNull VirtualFilePropertyEvent event)
 	{
 		VirtualFile virtualFile = event.getFile();
-		if (myProjectFileIndex.isInSource(virtualFile))
+		if (myProjectFileIndex.isInSource(virtualFile) && event.getNewValue() != null && event.getOldValue() != null)
 		{
 			String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString() + "$", event.getOldValue().toString());
 
