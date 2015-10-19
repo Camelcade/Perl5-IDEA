@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.configuration.paths;
 
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurableProvider;
 import com.intellij.openapi.project.Project;
@@ -44,6 +45,6 @@ public class PerlPathsConfigurableProvider extends ConfigurableProvider
 	@Override
 	public boolean canCreateConfigurable()
 	{
-		return !PlatformUtils.isIntelliJ();
+		return !PlatformUtils.isIntelliJ() && ModuleManager.getInstance(project).getModules().length > 0;
 	}
 }
