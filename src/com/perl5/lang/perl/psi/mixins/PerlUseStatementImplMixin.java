@@ -30,6 +30,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -94,6 +95,7 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<
 	}
 
 	@Override
+	@Nullable
 	public List<String> getImportParameters()
 	{
 		PerlUseStatementStub stub = getStub();
