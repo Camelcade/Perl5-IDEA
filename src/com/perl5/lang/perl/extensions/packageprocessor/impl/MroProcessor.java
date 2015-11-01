@@ -34,7 +34,9 @@ public class MroProcessor extends PerlPragmaProcessorBase implements IPerlMroPro
 		List<String> parameters = useStatement.getImportParameters();
 
 		if (parameters != null && parameters.size() > 0 && "c3".equals(parameters.get(0)))
+		{
 			return PerlMroType.C3;
+		}
 		return PerlMroType.DFS;
 	}
 }

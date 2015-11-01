@@ -37,6 +37,7 @@ public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementSt
 
 	public boolean isPragmaOrVersion();
 
+	@Nullable
 	public List<String> getImportParameters();
 
 	public PerlVersionElement getVersionElement();

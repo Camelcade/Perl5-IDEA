@@ -37,7 +37,7 @@ public class LibProcessor extends PerlPragmaProcessorBase implements IPerlLibPro
 		List<String> importParameters = useStatement.getImportParameters();
 		if (importParameters != null)
 		{
-			for (String parameter : useStatement.getImportParameters())
+			for (String parameter : importParameters)
 			{
 				VirtualFile file = LocalFileSystem.getInstance().findFileByPath(parameter);
 				if (file != null && file.isDirectory())

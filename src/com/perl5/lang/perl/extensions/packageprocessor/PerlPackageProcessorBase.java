@@ -71,11 +71,19 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
 			packageExportOk.addAll(packageExport);
 
 			if (parameters == null)    // default import
+			{
 				result.addAll(packageExport);
+			}
 			else
+			{
 				for (String parameter : parameters)
+				{
 					if (packageExportOk.contains(parameter))
+					{
 						result.add(parameter);
+					}
+				}
+			}
 		}
 
 //		System.err.println("Imported from " + packageName + ": " + result);

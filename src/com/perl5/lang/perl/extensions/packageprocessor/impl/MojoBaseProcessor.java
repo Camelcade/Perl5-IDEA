@@ -82,13 +82,17 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
 		List<String> parents = new ArrayList<String>();
 
 		List<String> allOptions = useStatement.getImportParameters();
-		if (allOptions.contains("-base"))
-			parents.add("Mojo::Base");
-		else
+
+		if (allOptions != null)
 		{
-			allOptions.removeAll(getOptions().keySet());
-			if (allOptions.size() > 0)
-				parents.add(allOptions.get(0));
+			if (allOptions.contains("-base"))
+				parents.add("Mojo::Base");
+			else
+			{
+				allOptions.removeAll(getOptions().keySet());
+				if (allOptions.size() > 0)
+					parents.add(allOptions.get(0));
+			}
 		}
 
 		return parents;
