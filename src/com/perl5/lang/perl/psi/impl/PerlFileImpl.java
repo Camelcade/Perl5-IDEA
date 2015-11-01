@@ -19,9 +19,6 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -369,11 +366,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		}
 
 		// classpath
-		Module module = ModuleUtil.findModuleForPsiElement(this);
-		if (module != null)
-			result.addAll(Arrays.asList(ModuleRootManager.getInstance(module).orderEntries().classes().getRoots()));
-		else
-			result.addAll(Arrays.asList(ProjectRootManager.getInstance(getProject()).orderEntries().getClassesRoots()));
+		result.addAll(Arrays.asList(ProjectRootManager.getInstance(getProject()).orderEntries().getClassesRoots()));
 
 		// current dir
 		VirtualFile virtualFile = getVirtualFile();

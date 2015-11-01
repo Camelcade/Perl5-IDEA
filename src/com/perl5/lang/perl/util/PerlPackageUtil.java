@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -280,7 +277,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			String newRelativePath = VfsUtil.getRelativePath(file, newInnermostRoot);
 			String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
-			VirtualFile oldInnermostRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForFile(file, project), oldPath);
+			VirtualFile oldInnermostRoot = PerlUtil.getFileClassRoot(project, oldPath);
 
 			if (oldInnermostRoot != null)
 			{
@@ -344,11 +341,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 						for (PsiReference inboundReference : ReferencesSearch.search(psiFile))
 						{
 							String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
-							VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForPsiElement(psiFile), newPackagePath);
-							String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
-							String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
+							VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(project, newPackagePath);
+							if (newInnermostRoot != null)
+							{
+								String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
+								String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
-							PerlPsiUtil.renameFileReferencee(inboundReference.getElement(), newPackageName);
+								PerlPsiUtil.renameFileReferencee(inboundReference.getElement(), newPackageName);
+							}
 						}
 				}
 		}
@@ -384,13 +384,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		if (element != null)
 		{
-			Module module = ModuleUtil.findModuleForPsiElement(element);
 			VirtualFile[] classRoots;
 
-			if (module != null)
-				classRoots = ModuleRootManager.getInstance(module).orderEntries().classes().getRoots();
-			else
-				classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
+			classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
 
 			for (VirtualFile classRoot : classRoots)
 			{

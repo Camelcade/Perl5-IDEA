@@ -16,10 +16,9 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
@@ -49,14 +48,9 @@ public class PerlUtil
 	 */
 	public static VirtualFile getFileClassRoot(Project project, VirtualFile file)
 	{
-		Module module = ModuleUtil.findModuleForFile(file, project);
-
-		if (module != null)
-		{
-			for (VirtualFile classRoot : ModuleRootManager.getInstance(module).orderEntries().classes().getRoots())
-				if (VfsUtil.isAncestor(classRoot, file, false))
-					return classRoot;
-		}
+		for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
+			if (VfsUtil.isAncestor(classRoot, file, false))
+				return classRoot;
 
 		return null;
 	}
@@ -64,22 +58,19 @@ public class PerlUtil
 	/**
 	 * Searches for innermost source root for a file by it's absolute path
 	 *
-	 * @param module   module to search in
+	 * @param project  module to search in
 	 * @param filePath containing filename
 	 * @return innermost root
 	 */
-	public static VirtualFile getFileClassRoot(Module module, String filePath)
+	public static VirtualFile getFileClassRoot(Project project, String filePath)
 	{
-		if (module != null)
-		{
-			File file = new File(filePath);
+		File file = new File(filePath);
 
-			for (VirtualFile classRoot : ModuleRootManager.getInstance(module).orderEntries().classes().getRoots())
-			{
-				File sourceRootFile = new File(classRoot.getPath());
-				if (VfsUtil.isAncestor(sourceRootFile, file, false))
-					return classRoot;
-			}
+		for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
+		{
+			File sourceRootFile = new File(classRoot.getPath());
+			if (VfsUtil.isAncestor(sourceRootFile, file, false))
+				return classRoot;
 		}
 
 		return null;

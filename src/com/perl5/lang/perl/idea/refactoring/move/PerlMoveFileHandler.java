@@ -62,7 +62,7 @@ public class PerlMoveFileHandler extends MoveFileHandler
 		file.putUserData(ORIGINAL_PACKAGE_NAME, ((PerlFileImpl) file).getFilePackageName());
 
 		String newFilePath = moveDestination.getVirtualFile().getPath() + '/' + file.getName();
-		VirtualFile newClassRoot = PerlUtil.getFileClassRoot(ModuleUtil.findModuleForFile(moveDestination.getVirtualFile(), moveDestination.getProject()), newFilePath);
+		VirtualFile newClassRoot = PerlUtil.getFileClassRoot(moveDestination.getProject(), newFilePath);
 
 		if (newClassRoot != null)
 		{
