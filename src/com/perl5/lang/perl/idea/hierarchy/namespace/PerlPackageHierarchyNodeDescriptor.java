@@ -36,15 +36,11 @@ public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 		super(element.getProject(), parentDescriptor, element, isBase);
 	}
 
-	public PsiElement getPsiElement()
-	{
-		return myElement;
-	}
-
 	@Override
 	public boolean isValid()
 	{
-		return myElement != null && myElement.isValid();
+		PsiElement element = getPsiElement();
+		return element != null && element.isValid();
 	}
 
 	@Override
@@ -55,7 +51,8 @@ public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 
 		myHighlightedText = new CompositeAppearance();
 
-		NavigatablePsiElement element = (NavigatablePsiElement) myElement;
+		NavigatablePsiElement element = (NavigatablePsiElement) getPsiElement();
+
 		if (element == null)
 		{
 			final String invalidPrefix = IdeBundle.message("node.hierarchy.invalid");
@@ -72,7 +69,7 @@ public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 
 			myHighlightedText.getEnding().addText(presentation.getPresentableText());
 			myHighlightedText.getEnding().addText(" "
-							+ "(" + ((PerlNamespaceDefinition) myElement).getMroType().toString() + "), "
+							+ "(" + ((PerlNamespaceDefinition) getPsiElement()).getMroType().toString() + "), "
 							+ presentation.getLocationString(),
 					HierarchyNodeDescriptor.getPackageNameAttributes());
 		}
