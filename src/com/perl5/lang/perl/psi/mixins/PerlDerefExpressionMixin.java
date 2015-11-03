@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiWhiteSpace;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
@@ -50,6 +52,11 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 
 	public String getCurrentElementType(PsiElement currentElement)
 	{
+		while (currentElement != null && (currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment))
+		{
+			currentElement = currentElement.getPrevSibling();
+		}
+
 		if (currentElement != null)
 		{
 			boolean isFirst = currentElement == getFirstChild();

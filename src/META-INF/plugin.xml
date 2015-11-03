@@ -42,7 +42,7 @@
 
       <p><b>Fixes:</b>
       <ul>
-        <li>Nothing yet...</li>
+        <li>Chained resolution works well if there are spaces, new lines or comments between elements, fixes #539</li>
       </ul>
       </p>
 
