@@ -138,7 +138,7 @@
         <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType"/>
         <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
         <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
-        <lang.syntaxHighlighterFactory key="Perl5"
+        <lang.syntaxHighlighterFactory language="Perl5"
                                        implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
 
         <lang.psiStructureViewFactory language="Perl5"
@@ -252,7 +252,7 @@
                                implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
         <lang.fileViewProviderFactory language="Embedded Perl"
                                       implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
-        <lang.syntaxHighlighterFactory key="Embedded Perl"
+        <lang.syntaxHighlighterFactory language="Embedded Perl"
                                        implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Embedded Perl"
                                  implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
@@ -283,7 +283,7 @@
                                implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlParserDefinition"/>
         <lang.fileViewProviderFactory language="Mojolicious Perl"
                                       implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlFileViewProviderFactory"/>
-        <lang.syntaxHighlighterFactory key="Mojolicious Perl"
+        <lang.syntaxHighlighterFactory language="Mojolicious Perl"
                                        implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Mojolicious Perl"
                                  implementationClass="com.perl5.lang.mojolicious.idea.MojoliciousPerlFindUsagesProvider"/>
@@ -313,7 +313,7 @@
                         implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
 
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
-        <lang.syntaxHighlighterFactory key="Perl5 POD"
+        <lang.syntaxHighlighterFactory language="Perl5 POD"
                                        implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
         <quoteHandler fileType="POD file" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
