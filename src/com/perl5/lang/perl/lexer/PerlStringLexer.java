@@ -30,15 +30,18 @@ import java.util.regex.Pattern;
  */
 public class PerlStringLexer extends PerlStringLexerGenerated
 {
+/* for issue #251
 	protected static final String FLAGS_RE = "(:?[-+ #])?";
 	protected static final String POSITIONAL_RE = "([1-9]\\d*$)?";
 	protected static final String WIDTH_RE = "(:?\\d+|\\*)?";
 	protected static final String PRECISION_RE = "(:?\\.(:?\\d+|\\*))?";
 	protected static final String LENGTH_RE = "(:?hh|h|ll|l|j|z|t|L)?";
 	protected static final String SPECIFIER_RE = "[diuoxXfFeEgGaAcspn]";
-	public Pattern PRINTF_PLACEHOLDER_PATTERN = Pattern.compile(
+	public static final Pattern PRINTF_PLACEHOLDER_PATTERN = Pattern.compile(
 			"%" + POSITIONAL_RE + FLAGS_RE + WIDTH_RE + PRECISION_RE + LENGTH_RE + SPECIFIER_RE
 	);
+*/
+
 	protected PerlLexer PERL_LEXER = null;
 	protected Project myProject = null;
 
