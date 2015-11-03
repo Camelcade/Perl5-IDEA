@@ -51,6 +51,7 @@ public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplac
 						&& element.getUseScope() instanceof LocalSearchScope
 						&& element.getLanguage() == PerlLanguage.INSTANCE
 						&& ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlString
+						&& element.getContainingFile().getViewProvider().getAllFiles().size() < 2
 				;
 	}
 }
