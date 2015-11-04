@@ -37,7 +37,7 @@ public class GeneratePerlConstructorActionHandler extends GeneratePerlSubActionH
 	public static String getCode()
 	{
 		return "\n" +
-				"sub new()\n" +
+				"sub new\n" +
 				"{\n" +
 				"	my ($proto) = @_;\n" +
 				"	my $self = bless {}, $proto;\n" +
