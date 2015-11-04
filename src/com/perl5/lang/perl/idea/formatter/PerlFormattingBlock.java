@@ -31,6 +31,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
@@ -51,7 +52,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			HEREDOC,
 			HEREDOC_QX,
 			HEREDOC_QQ,
-			POD
+			POD,
+			PerlParserUtil.DUMMY_BLOCK
 	);
 
 	/**
@@ -125,7 +127,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	protected List<Block> buildChildren()
 	{
 		if (mySubBlocks == null)
+		{
 			mySubBlocks = buildSubBlocks();
+		}
 
 		// fixme what is re-creation for?
 		return new ArrayList<Block>(mySubBlocks);

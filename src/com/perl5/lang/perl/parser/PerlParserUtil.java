@@ -1598,18 +1598,38 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 **/
 	public static boolean parseBadCharacters(PsiBuilder b, int l)
 	{
-		if (!b.eof() && b.getTokenType() == TokenType.BAD_CHARACTER)
-		{
-			PsiBuilder.Marker m = b.mark();
+		IElementType tokenType = b.getTokenType();
 
+		if (tokenType == null || tokenType == RESERVED_PACKAGE || tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE || tokenType == SEMICOLON || tokenType == EMBED_MARKER_SEMICOLON)
+		{
+			return false;
+		}
+
+		PsiBuilder.Marker m = b.mark();
+		b.advanceLexer();
+
+		if (tokenType == TokenType.BAD_CHARACTER)
+		{
 			while (b.getTokenType() == TokenType.BAD_CHARACTER)
 			{
 				b.advanceLexer();
 			}
-			m.error("Unexpected token");
-			return true;
+			m.error("Unexpected tokens, plugin currently supports only ASCII identifiers");
 		}
-		return false;
+		else if (tokenType == RIGHT_PAREN)
+		{
+			m.error("Unopened closing parenthesis");
+		}
+		else if (tokenType == RIGHT_BRACKET)
+		{
+			m.error("Unopened closing bracket");
+		}
+		else
+		{
+			m.error("Unexpected token");
+		}
+
+		return true;
 	}
 
 	public static boolean parseIncompleteAnnotation(PsiBuilder b, int l)

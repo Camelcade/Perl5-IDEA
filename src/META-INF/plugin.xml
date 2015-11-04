@@ -47,12 +47,14 @@
         <li>SUPER methods now resolved properly even if invoked on unknown variable, fixes #534</li>
         <li>Here-doc reference should work fine after converting string to here-doc, fixes #541</li>
         <li>Removed redundant indetion of eval and do blocks on re-formatting, fixes #523</li>
-        <li>POD is now properly treated as statement, fixes #522</li>
+        <li>POD is now properly treated as statement (which can, however, be before elsif/else/continue blocks), fixes #522</li>
         <li>Package names auto-completion now works in qw expression, fixes #540</li>
         <li>foreach compound live template now has default values which prevents formatting bugs on inserting, fixes #519</li>
         <li>Recursive inheritance inspection is absolutely redundant, disabled, fixes #517</li>
         <li>Local re-declarations of built-in variables are not marked as unused anymore (like <code>$/</code>), fixes #533</li>
         <li>Removed empty prototype from generated constructor, fixes #537</li>
+        <li>Extra close parenthesis and brackets now handled smarter, should improve parser's recovery, fixes #503</li>
+        <li>Error block contents now couldn't be re-formatted to avoid unexpected effects, fixes #506</li>
       </ul>
       </p>
 
