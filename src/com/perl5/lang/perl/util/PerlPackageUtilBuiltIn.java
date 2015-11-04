@@ -441,12 +441,12 @@ public interface PerlPackageUtilBuiltIn
 			"Unicode::Collate",
 			"Unicode::Normalize",
 			"Unicode::UCD",
-			"UNIVERSAL",
+			PerlPackageUtil.UNIVERSAL_PACKAGE,
 			"User::grent",
 			"User::pwent",
 			"XSLoader",
-			"main",
-			"CORE"
+			PerlPackageUtil.MAIN_PACKAGE,
+			PerlPackageUtil.CORE_PACKAGE
 	));
 
 	public static final Set<String> BUILT_IN_PRAGMA = new THashSet<String>(Arrays.asList(

@@ -41,7 +41,9 @@ public abstract class PerlMethodImplMixin extends ASTWrapperPsiElement implement
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
 
 		if (namespaceElement != null)
+		{
 			return namespaceElement.getCanonicalName();
+		}
 		return null;
 	}
 
@@ -50,9 +52,13 @@ public abstract class PerlMethodImplMixin extends ASTWrapperPsiElement implement
 	{
 		PsiFile file = getContainingFile();
 		if (file instanceof PerlFileImpl)
+		{
 			return ((PerlFileImpl) file).getMethodNamespace(this);
-
-		else return getContextPackageNameHeavy();
+		}
+		else
+		{
+			return getContextPackageNameHeavy();
+		}
 	}
 
 
@@ -91,7 +97,9 @@ public abstract class PerlMethodImplMixin extends ASTWrapperPsiElement implement
 		PsiElement grandParent = parent == null ? null : parent.getParent();
 
 		if (grandParent instanceof PsiPerlDerefExpr)
+		{
 			return ((PsiPerlDerefExpr) grandParent).getPreviousElementType(parent);
+		}
 
 		return PerlPackageUtil.getContextPackageName(this);
 	}
@@ -100,8 +108,15 @@ public abstract class PerlMethodImplMixin extends ASTWrapperPsiElement implement
 	public boolean isObjectMethod()
 	{
 		boolean hasExplicitNamespace = hasExplicitNamespace();
-		return !hasExplicitNamespace && getParent() instanceof PsiPerlNestedCall            // part of ..->method()
-				|| hasExplicitNamespace && getFirstChild() instanceof PerlSubNameElement;    // method Foo::Bar
+		boolean isNestedCall = getParent() instanceof PsiPerlNestedCall;
+
+		return !hasExplicitNamespace && isNestedCall            // part of ..->method()
+				|| hasExplicitNamespace && getFirstChild() instanceof PerlSubNameElement    // method Foo::Bar
+				|| hasExplicitNamespace        // SUPER::method
+				&& isNestedCall
+				&& getFirstChild() instanceof PerlNamespaceElement
+				&& ((PerlNamespaceElement) getFirstChild()).isSUPER()
+				;
 	}
 
 	@Override

@@ -43,7 +43,7 @@ public class PerlSubUnresolvableInspection extends PerlInspection
 				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
 				PerlSubNameElement subNameElement = o.getSubNameElement();
 
-				boolean hasExplicitNamespace = namespaceElement != null && !"CORE".equals(namespaceElement.getCanonicalName());
+				boolean hasExplicitNamespace = namespaceElement != null && !namespaceElement.isCORE();
 
 				// fixme adjust built in checking to the file; Remove second condition after implementing annotations
 				if (subNameElement == null || (namespaceElement != null && namespaceElement.isBuiltin()) || (!hasExplicitNamespace && subNameElement.isBuiltIn()))

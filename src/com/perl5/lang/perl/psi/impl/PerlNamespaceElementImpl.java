@@ -109,6 +109,30 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	}
 
 	@Override
+	public boolean isSUPER()
+	{
+		return PerlPackageUtil.isSUPER(getCanonicalName());
+	}
+
+	@Override
+	public boolean isMain()
+	{
+		return PerlPackageUtil.isMain(getCanonicalName());
+	}
+
+	@Override
+	public boolean isCORE()
+	{
+		return PerlPackageUtil.isCORE(getCanonicalName());
+	}
+
+	@Override
+	public boolean isUNIVERSAL()
+	{
+		return PerlPackageUtil.isUNIVERSAL(getCanonicalName());
+	}
+
+	@Override
 	public boolean isDeprecated()
 	{
 		return PerlPackageUtil.isDeprecated(getProject(), getCanonicalName());

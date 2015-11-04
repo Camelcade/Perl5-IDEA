@@ -43,7 +43,7 @@ public class PerlNamespaceUndefinedInspection extends PerlInspection
 					return;
 
 				// fixme should depend on parent resolving
-				if ("SUPER".equals(o.getCanonicalName()))
+				if (o.isSUPER())
 					return;
 
 				if (o.isBuiltin())

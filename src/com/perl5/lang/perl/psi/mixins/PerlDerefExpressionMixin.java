@@ -62,13 +62,21 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 			boolean isFirst = currentElement == getFirstChild();
 
 			if (currentElement instanceof PsiPerlNamespaceExpr)
+			{
 				return ((PerlNamespaceElement) currentElement.getFirstChild()).getCanonicalName();
+			}
 			else if (isFirst && currentElement instanceof PerlVariable)
+			{
 				return ((PerlVariable) currentElement).guessVariableType();
+			}
 			else if (currentElement instanceof PerlMethodContainer)
+			{
 				return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) currentElement);
+			}
 			else if (currentElement instanceof PsiPerlTagScalar && "__PACKAGE__".equals(currentElement.getText()))
+			{
 				return PerlPackageUtil.getContextPackageName(this);
+			}
 		}
 		return null;
 

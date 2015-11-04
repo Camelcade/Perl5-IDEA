@@ -43,6 +43,8 @@
       <p><b>Fixes:</b>
       <ul>
         <li>Chained resolution works well if there are spaces, new lines or comments between elements, fixes #525</li>
+        <li>Here-doc markers and constants re-factoring in Embedded Perl and Mojo files should now work in-place, fixes #524</li>
+        <li>SUPER methods now resolved properly even if invoked on unknown variable, fixes #534</li>
       </ul>
       </p>
 

@@ -50,7 +50,7 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 
 				if (
 						!(grandParent instanceof PsiPerlNestedCall)    /// not ...->method
-								&& (methodNamespace == null || "CORE".equals(methodNamespace.getCanonicalName()))    // no explicit NS or it's core
+								&& (methodNamespace == null || methodNamespace.isCORE())    // no explicit NS or it's core
 								&& ((PerlSubNameElement) element).isBuiltIn()
 						)
 				{

@@ -53,11 +53,7 @@ public abstract class PerlMro
 
 		for (String currentPackageName : linearISA)
 		{
-			String fullName = currentPackageName + "::" + subName;
-			result.addAll(PerlSubUtil.getSubDefinitions(project, fullName));
-			result.addAll(PerlSubUtil.getSubDeclarations(project, fullName));
-			result.addAll(PerlSubUtil.getConstantsDefinitions(project, fullName));
-			result.addAll(PerlGlobUtil.getGlobsDefinitions(project, fullName));
+			collectEntities(result, project, currentPackageName + "::" + subName);
 
 			if (result.size() > 0)
 				break;
@@ -67,13 +63,9 @@ public abstract class PerlMro
 		if (result.size() == 0)
 			for (String currentPackageName : linearISA)
 			{
-				if (!"UNIVERSAL".equals(currentPackageName)) // ignoring UNIVERSAL::AUTOLOAD
+				if (!PerlPackageUtil.isUNIVERSAL(currentPackageName)) // ignoring UNIVERSAL::AUTOLOAD
 				{
-					String fullName = currentPackageName + "::" + "AUTOLOAD";
-					result.addAll(PerlSubUtil.getSubDefinitions(project, fullName));
-					result.addAll(PerlSubUtil.getSubDeclarations(project, fullName));
-					result.addAll(PerlSubUtil.getConstantsDefinitions(project, fullName));
-					result.addAll(PerlGlobUtil.getGlobsDefinitions(project, fullName));
+					collectEntities(result, project, currentPackageName + "::" + "AUTOLOAD");
 
 					if (result.size() > 0)
 						break;
@@ -82,6 +74,14 @@ public abstract class PerlMro
 
 		return result;
 
+	}
+
+	protected static void collectEntities(Collection<PsiElement> result, Project project, String fullName)
+	{
+		result.addAll(PerlSubUtil.getSubDefinitions(project, fullName));
+		result.addAll(PerlSubUtil.getSubDeclarations(project, fullName));
+		result.addAll(PerlSubUtil.getConstantsDefinitions(project, fullName));
+		result.addAll(PerlGlobUtil.getGlobsDefinitions(project, fullName));
 	}
 
 	/**
@@ -136,8 +136,8 @@ public abstract class PerlMro
 
 		getPackageParents(project, packageName, recursionMap, result);
 
-		if (!recursionMap.contains("UNIVERSAL"))
-			result.add("UNIVERSAL");
+		if (!recursionMap.contains(PerlPackageUtil.UNIVERSAL_PACKAGE))
+			result.add(PerlPackageUtil.UNIVERSAL_PACKAGE);
 
 		return result;
 	}

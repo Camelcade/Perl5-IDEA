@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.idea.quickfixes.PerlFancyMethodQuickFix;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +39,7 @@ public class PerlFancyMethodCallInspection extends PerlInspection
 			@Override
 			public void visitMethod(@NotNull PsiPerlMethod o)
 			{
-				if (o.isObjectMethod() && o.hasExplicitNamespace())
+				if (o.isObjectMethod() && o.getLastChild() instanceof PerlNamespaceElement)
 				{
 					String properForm = String.format("%s->%s", o.getPackageName(), o.getSubNameElement().getName());
 					holder.registerProblem(

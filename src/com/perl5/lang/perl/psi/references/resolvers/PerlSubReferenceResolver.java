@@ -67,20 +67,28 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 
 		PerlNamespaceElement expliclitPackageElement = null;
 		if (parent instanceof PerlNamespaceElementContainer)
+		{
 			expliclitPackageElement = ((PerlNamespaceElementContainer) parent).getNamespaceElement();
+		}
 
 		if (!subName.isEmpty())
 		{
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
-				relatedItems.addAll(PerlMroDfs.resolveSub(project, packageName, subName, false));
-			else if (parent instanceof PerlMethod && "SUPER".equals(packageName))
-				relatedItems.addAll(PerlMroDfs.resolveSub(project, ((PerlMethod) parent).getContextPackageName(), subName, true));
+			{
+				boolean isSuper = expliclitPackageElement != null && expliclitPackageElement.isSUPER();
+				relatedItems.addAll(PerlMroDfs.resolveSub(
+						project,
+						isSuper ? PerlPackageUtil.getContextPackageName(subNameElement) : packageName,
+						subName,
+						isSuper
+				));
+			}
 			else    // static resolution
 			{
 				if (expliclitPackageElement == null && subNameElement.isBuiltIn())
 					return new ResolveResult[0];
 
-				if ("main".equals(packageName))    // fixme this is a dirty hack until proper names resolution implemented
+				if (PerlPackageUtil.isMain(packageName))    // fixme this is a dirty hack until proper names resolution implemented
 				{
 					PsiFile file = subNameElement.getContainingFile();
 					GlobalSearchScope fileScope = GlobalSearchScope.fileScope(file);
@@ -152,7 +160,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 
 					// check for autoload
 					if (relatedItems.size() == 0
-							&& !"UNIVERSAL".equals(packageName)    // don't check for UNIVERSAL::AUTOLOAD
+							&& !PerlPackageUtil.isUNIVERSAL(packageName)    // don't check for UNIVERSAL::AUTOLOAD
 							&& !(
 							parent instanceof PerlSubDeclaration
 									|| parent instanceof PerlSubDefinition

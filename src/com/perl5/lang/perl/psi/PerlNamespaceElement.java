@@ -68,4 +68,31 @@ public interface PerlNamespaceElement extends PsiElement
 	 */
 	public String getCanonicalName();
 
+	/**
+	 * Checks if namespace is SUPER::
+	 *
+	 * @return check result
+	 */
+	public boolean isSUPER();
+
+	/**
+	 * Checks if namespace is SUPER::
+	 *
+	 * @return check result
+	 */
+	public boolean isMain();
+
+	/**
+	 * Checks if namespace is SUPER::
+	 *
+	 * @return check result
+	 */
+	public boolean isCORE();
+
+	/**
+	 * Checks if namespace is SUPER::
+	 *
+	 * @return check result
+	 */
+	public boolean isUNIVERSAL();
 }

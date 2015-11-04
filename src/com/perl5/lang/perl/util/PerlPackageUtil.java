@@ -62,6 +62,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static final Set<String> BUILT_IN_ALL = new THashSet<String>();
 	public static final ConcurrentHashMap<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<String, String>();
 
+	public static final String SUPER_PACKAGE = "SUPER";
+	public static final String MAIN_PACKAGE = "main";
+	public static final String UNIVERSAL_PACKAGE = "UNIVERSAL";
+	public static final String CORE_PACKAGE = "CORE";
+
 	static
 	{
 		BUILT_IN_ALL.addAll(BUILT_IN);
@@ -99,7 +104,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static boolean isDeprecated(Project project, String packageName)
 	{
-		if ("main".equals(packageName))
+		if (isMain(packageName))
 			return false;
 
 		for (PerlNamespaceDefinition definition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
@@ -108,6 +113,28 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 		return BUILT_IN_DEPRECATED.contains(getCanonicalPackageName(packageName));
 	}
+
+	public static boolean isSUPER(String packageName)
+	{
+		return PerlPackageUtil.SUPER_PACKAGE.equals(packageName);
+	}
+
+	public static boolean isMain(String packageName)
+	{
+		return PerlPackageUtil.MAIN_PACKAGE.equals(packageName);
+	}
+
+	public static boolean isCORE(String packageName)
+	{
+		return PerlPackageUtil.CORE_PACKAGE.equals(packageName);
+	}
+
+	public static boolean isUNIVERSAL(String packageName)
+	{
+		return PerlPackageUtil.UNIVERSAL_PACKAGE.equals(packageName);
+	}
+
+
 
 	/**
 	 * Make canonical package name.
@@ -134,8 +161,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 //		System.out.println("Chunks: " + chunks.length);
 
-		if (chunks.length > 0 && chunks[0].equals(""))    // implicit main
-			chunks[0] = "main";
+		if (chunks.length > 0 && chunks[0].isEmpty())    // implicit main
+			chunks[0] = PerlPackageUtil.MAIN_PACKAGE;
 
 		for (String chunk : chunks)
 			if (!(canonicalChunks.size() == 0 && chunk.equals("main")))

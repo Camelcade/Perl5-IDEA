@@ -57,7 +57,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 		}
 		else
 		{
-			result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, "SUPER::"));
+			result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, PerlPackageUtil.SUPER_PACKAGE + "::"));
 		}
 
 		final String finalNameFilter = nameFilter;
