@@ -49,6 +49,7 @@
         <li>Removed redundant indetion of eval and do blocks on re-formatting, fixes #523</li>
         <li>POD is now properly treated as statement, fixes #522</li>
         <li>Package names auto-completion now works in qw expression, fixes #540</li>
+        <li>foreach compound live template now has default values which prevents formatting bugs on inserting, fixes #519</li>
       </ul>
       </p>
 

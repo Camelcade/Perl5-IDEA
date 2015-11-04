@@ -39,11 +39,9 @@
     </template>
     <template name="fe" value="foreach my $ELEMENT$ ($LIST$)&#10;{&#10;    $END$&#10;}" description="for each block"
               toReformat="true" toShortenFQNames="true">
-        <variable name="ELEMENT" expression="" defaultValue="$element" alwaysStopAt="true"/>
-        <variable name="LIST" expression="" defaultValue="@list" alwaysStopAt="true"/>
-        <context>
-            <option name="PERL5_PREFIX" value="true"/>
-        </context>
+        <variable name="ELEMENT" expression="&quot;$element&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="LIST" expression="&quot;@list&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context/>
     </template>
     <template name="do" value="do&#10;{&#10;    $END$&#10;} " description="do block" toReformat="true"
               toShortenFQNames="true">
