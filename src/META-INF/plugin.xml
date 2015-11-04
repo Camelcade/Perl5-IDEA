@@ -46,6 +46,7 @@
         <li>Here-doc markers and constants re-factoring in Embedded Perl and Mojo files should now work in-place, fixes #524</li>
         <li>SUPER methods now resolved properly even if invoked on unknown variable, fixes #534</li>
         <li>Here-doc reference should work fine after converting string to here-doc, fixes #541</li>
+        <li>Removed redundant indetion of eval and do blocks on re-formatting, fixes #523</li>
       </ul>
       </p>
 

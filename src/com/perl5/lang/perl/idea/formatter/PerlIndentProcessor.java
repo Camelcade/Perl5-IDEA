@@ -41,6 +41,8 @@ public class PerlIndentProcessor implements PerlElementTypes
 			CONTINUE_BLOCK,
 			UNCONDITIONAL_BLOCK,
 			COMMA_SEQUENCE_EXPR,
+			DO_EXPR,
+			EVAL_EXPR,
 			PerlParserDefinition.FILE
 	);
 
