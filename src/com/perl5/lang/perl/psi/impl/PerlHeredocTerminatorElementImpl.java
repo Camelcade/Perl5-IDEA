@@ -41,6 +41,12 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 		else super.accept(visitor);
 	}
 
+	@Override
+	public void refreshReference()
+	{
+		myReferences[0] = new PerlHeredocReference(this, null);
+	}
+
 	@NotNull
 	@Override
 	public PsiReference[] getReferences()

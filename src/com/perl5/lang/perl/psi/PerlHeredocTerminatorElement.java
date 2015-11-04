@@ -23,4 +23,8 @@ import com.intellij.psi.PsiElement;
  */
 public interface PerlHeredocTerminatorElement extends PsiElement
 {
+	/**
+	 * Re-creates object reference, to invalidata ResolveCache for it
+	 */
+	public void refreshReference();
 }

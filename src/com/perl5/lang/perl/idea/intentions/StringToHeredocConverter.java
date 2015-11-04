@@ -24,10 +24,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.PsiPerlStringDq;
-import com.perl5.lang.perl.psi.PsiPerlStringSq;
-import com.perl5.lang.perl.psi.PsiPerlStringXq;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -67,21 +64,31 @@ public class StringToHeredocConverter extends PsiElementBaseIntentionAction impl
 				PsiElement newLineItem = null;
 				int newLineIndex = currentFile.getText().indexOf("\n", element.getTextOffset());
 				if (newLineIndex > 1)
+				{
 					newLineItem = currentFile.findElementAt(newLineIndex);
+				}
+
+				PsiElement newTerminator = null;
 
 				if (newLineItem == null) // last statement without newline
 				{
 					currentFile.addAfter(heredocElements.get(1), currentFile.getLastChild());
-					currentFile.addAfter(heredocElements.get(2), currentFile.getLastChild());
+					newTerminator = currentFile.addAfter(heredocElements.get(2), currentFile.getLastChild());    // terminator
 					currentFile.addAfter(heredocElements.get(3), currentFile.getLastChild());
 				}
 				else
 				{
 					PsiElement container = newLineItem.getParent();
-					PsiElement anchor = container.addBefore(heredocElements.get(2), newLineItem); // heredoc element
-					container.addBefore(heredocElements.get(1), anchor); // heredoc terminator
+					PsiElement anchor = newTerminator = container.addBefore(heredocElements.get(2), newLineItem); // heredoc terminator
+					container.addBefore(heredocElements.get(1), anchor); // heredoc element
 				}
 				parentElement.replace(heredocElements.get(0));
+
+				if (newTerminator != null)
+				{
+					assert newTerminator instanceof PerlHeredocTerminatorElement;
+					((PerlHeredocTerminatorElement) newTerminator).refreshReference();
+				}
 			}
 	}
 
