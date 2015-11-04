@@ -21,6 +21,7 @@ import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
@@ -44,9 +45,10 @@ public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTy
 	@Override
 	public WordsScanner getWordsScanner()
 	{
-		return new DefaultWordsScanner(new PerlLexerAdapter(null),
+		return new DefaultWordsScanner(
+				new PerlLexerAdapter(null),
 				PerlParserDefinition.IDENTIFIERS,
-				PerlParserDefinition.COMMENTS,
+				TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
 				PerlParserDefinition.LITERALS
 		);
 	}

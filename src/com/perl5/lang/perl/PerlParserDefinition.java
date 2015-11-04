@@ -52,7 +52,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			TEMPLATE_BLOCK_HTML
 	);
 	public static final TokenSet COMMENTS = TokenSet.create(
-			COMMENT_LINE, COMMENT_BLOCK, POD,
+			COMMENT_LINE, COMMENT_BLOCK,
 			HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END
 	);
 

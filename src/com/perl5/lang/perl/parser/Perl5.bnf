@@ -414,6 +414,7 @@ private namespace_item ::=
         | statement
         | block_compound  // put it after statement to handle anon hashes before it.
         | annotation
+        | POD
      )
 
 nyi_statement ::= OPERATOR_HELLIP

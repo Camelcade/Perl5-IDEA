@@ -30,8 +30,6 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	{
 		if (type == HEREDOC_END)
 			return new PerlHeredocTerminatorElementImpl(type, text);
-//		else if (type == HEREDOC || type == HEREDOC_QQ || type == HEREDOC_QX)
-//			return new PerlHeredocElementImpl(type, text);
 		else
 			return super.createComment(type, text);
 	}
@@ -50,6 +48,8 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 			return new PerlNamespaceElementImpl(type, text);
 		else if (type == VERSION_ELEMENT)
 			return new PerlVersionElementImpl(type, text);
+		else if (type == POD)
+			return super.createComment(type, text);
 		else
 			return super.createLeaf(type, text);
 	}
