@@ -48,6 +48,7 @@
         <li>Here-doc reference should work fine after converting string to here-doc, fixes #541</li>
         <li>Removed redundant indetion of eval and do blocks on re-formatting, fixes #523</li>
         <li>POD is now properly treated as statement, fixes #522</li>
+        <li>Package names auto-completion now works in qw expression, fixes #540</li>
       </ul>
       </p>
 

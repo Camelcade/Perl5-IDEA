@@ -39,6 +39,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 	public static final PsiElementPattern.Capture<PerlStringContentElementImpl> SQ_STRING_BEGIN = STRING_CONENT_PATTERN.afterLeaf(SQ_OPENING_QUOTE).inside(PsiPerlStringSq.class);
 	public static final ElementPattern<PsiElement> DQ_OPENING_QUOTE = psiElement(QUOTE_DOUBLE_OPEN);
 	public static final PsiElementPattern.Capture<PerlStringContentElementImpl> DQ_STRING_BEGIN = STRING_CONENT_PATTERN.afterLeaf(DQ_OPENING_QUOTE).inside(PsiPerlStringDq.class);
+	public static final PsiElementPattern.Capture<PerlStringContentElementImpl> QW_STRING_LIST = STRING_CONENT_PATTERN.inside(PsiPerlStringList.class);
 
 	public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = psiElement(PerlNamespaceElement.class).withLanguage(PerlLanguage.INSTANCE);
 	public static final PsiElementPattern.Capture<PsiPerlUseStatement> USE_STATEMENT_PATTERN = psiElement(PsiPerlUseStatement.class).withLanguage(PerlLanguage.INSTANCE);

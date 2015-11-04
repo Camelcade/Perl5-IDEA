@@ -107,6 +107,11 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				new PerlPackageNamesCompletionProvider()
 		);
 
+		extend(
+				CompletionType.BASIC,
+				QW_STRING_LIST,
+				new PerlPackageNamesCompletionProvider()
+		);
 
 		// refactored
 		extend(
