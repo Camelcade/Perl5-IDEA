@@ -57,11 +57,18 @@ public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<Perl
 	PerlVariableType getActualType();
 
 	/**
-	 * Checks if this declaration is local. IMPORTANT: builds PSI
+	 * Checks if this declaration is lexical. IMPORTANT: builds PSI
 	 *
 	 * @return checking result
 	 */
 	boolean isLexicalDeclaration();
+
+	/**
+	 * Checks if this declaration is local. IMPORTANT: builds PSI
+	 *
+	 * @return checking result
+	 */
+	boolean isLocalDeclaration();
 
 	/**
 	 * Checks if this declaration is global. IMPORTANT: builds PSI

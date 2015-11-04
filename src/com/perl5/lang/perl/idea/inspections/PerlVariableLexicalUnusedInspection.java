@@ -30,7 +30,9 @@ public class PerlVariableLexicalUnusedInspection extends PerlVariableDeclaration
 	@Override
 	public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper)
 	{
-		if (variableDeclarationWrapper.isLexicalDeclaration())
+		if (variableDeclarationWrapper.isLexicalDeclaration()
+				&& (!variableDeclarationWrapper.isLocalDeclaration() || !variableDeclarationWrapper.getVariable().isBuiltIn())
+				)
 		{
 			if (ReferencesSearch.search(variableDeclarationWrapper, variableDeclarationWrapper.getUseScope()).findFirst() == null)
 			{

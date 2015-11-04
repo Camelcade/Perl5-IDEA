@@ -154,8 +154,13 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 	@Override
 	public boolean isLexicalDeclaration()
 	{
-		PsiElement parent = getParent();
-		return parent instanceof PsiPerlVariableDeclarationLexical || parent instanceof PsiPerlVariableDeclarationLocal;
+		return getParent() instanceof PsiPerlVariableDeclarationLexical || isLocalDeclaration();
+	}
+
+	@Override
+	public boolean isLocalDeclaration()
+	{
+		return getParent() instanceof PsiPerlVariableDeclarationLocal;
 	}
 
 	@Override
