@@ -18,15 +18,45 @@ package com.perl5.lang.perl.util;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hurricup on 11.05.2015.
  */
 public interface PerlSubUtilBuiltIn
 {
+	Set<String> BUILT_IN_ARGUMENTLESS = new HashSet<String>(Arrays.asList(
+			"__FILE__",
+			"__LINE__",
+			"__PACKAGE__",
+			"__SUB__",
+			"break",
+			"continue",
+//			"dump",	// it's not argumentless
+			"endgrent",
+			"endhostent",
+			"endnetent",
+			"endprotoent",
+			"endpwent",
+			"endservent",
+			"fork",
+			"getgrent",
+			"gethostent",
+			"getlogin",
+			"getnetent",
+			"getppid",
+			"getprotoent",
+			"getpwent",
+			"getservent",
+			"setgrent",
+			"setpwent",
+			"time",
+			"times",
+			"wait",
+			"wantarray"
+	));
 
-	public static final HashSet<String> BUILT_IN_UNARY = new HashSet<String>(Arrays.asList(
-
+	Set<String> BUILT_IN_UNARY = new HashSet<String>(Arrays.asList(
 			// original list taken from http://www.perlmonks.org/?node_id=1131277
 			"abs",
 			"alarm",
@@ -102,7 +132,7 @@ public interface PerlSubUtilBuiltIn
 			"write"
 	));
 
-	public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+	Set<String> BUILT_IN = new HashSet<String>(Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
 			"chomp",

@@ -313,6 +313,7 @@ limitations under the License.
     extends("nested_call")=sub_call_expr
 
     implements("nested_call|sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
+	mixin("named_list_expr")="com.perl5.lang.perl.psi.mixins.PerlMethodContainerMixIn"
 
     extends("annotation_.*")=annotation
     implements("annotation_returns.*")="com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer"
@@ -618,7 +619,7 @@ private unary_expr ::= <<parseExpressionLevel 14>>
 private immutable_expr ::= <<parseExpressionLevel 22>>
 
 named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_expr]
-named_list_expr ::= <<isListOperator>> method [call_arguments]  // optional comma for substr $name, 0, 0,  (B::Deparse)  [comma]
+named_list_expr ::= <<parseListExpression>>
 
 term_expr ::=
     variable_declaration

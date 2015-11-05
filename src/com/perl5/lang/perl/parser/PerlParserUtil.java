@@ -363,8 +363,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 * @param b PerlBuilder
 	 * @param l Parsing level
 	 * @return parsing result
+	 *
 	 */
-	public static boolean isListOperator(PsiBuilder b, int l)
+	public static boolean parseListExpression(PsiBuilder b, int l)
 	{
 		PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
 
@@ -379,10 +380,38 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				&& !PACKAGE_TOKENS.contains(nextTokenType)  // not method Package::
 				&& !(nextTokenType == IDENTIFIER && ((PerlBuilder) b).isKnownPackage(((PerlBuilder) b).lookupToken(1).getTokenText()))  // not Method Package
 				)
+		{
 			// todo we should check current namespace here
-			return !PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
+
+			String tokenText = b.getTokenText();
+			if (!PerlSubUtil.BUILT_IN_UNARY.contains(tokenText)) // not unary
+			{
+				boolean r = PerlParser.method(b, l);
+
+				if (r && !PerlSubUtil.BUILT_IN_ARGUMENTLESS.contains(tokenText)) // not argumentless
+				{
+					PerlParser.call_arguments(b, l);
+				}
+				return r;
+			}
+		}
 		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(2) != LEFT_PAREN)
-			return !PerlSubUtil.isUnary(b.getTokenText(), ((PerlBuilder) b).lookupToken(1).getTokenText());
+		{
+			String packageName = b.getTokenText();
+			String subName = ((PerlBuilder) b).lookupToken(1).getTokenText();
+			//noinspection ConstantConditions
+			if (!PerlSubUtil.isUnary(packageName, subName))    // not unary
+			{
+				boolean r = PerlParser.method(b, l);
+
+				//noinspection ConstantConditions
+				if (r && !PerlSubUtil.isArgumentless(packageName, subName)) // not argumentless
+				{
+					PerlParser.call_arguments(b, l);
+				}
+				return r;
+			}
+		}
 
 		return false;
 	}

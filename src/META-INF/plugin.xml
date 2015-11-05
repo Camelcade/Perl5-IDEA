@@ -58,6 +58,7 @@
         <li>Fixed possible NPE on file renaming</li>
         <li>Fixed parsing of <code>$$ ^ int</code> expression, fixes #543</li>
         <li>Pragma namespaces are no more being decorated in variables, fixes #502</li>
+        <li>Improved argumentless built-ins parsing in leftward calls, fixes #492</li>
       </ul>
       </p>
 

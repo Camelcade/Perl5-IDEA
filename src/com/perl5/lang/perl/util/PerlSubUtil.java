@@ -80,6 +80,19 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	}
 
 	/**
+	 * Checks if sub defined as unary with () proto
+	 *
+	 * @param packageName package name
+	 * @param subName     sub name
+	 * @return check result
+	 */
+	public static boolean isArgumentless(@Nullable String packageName, @NotNull String subName)
+	{
+		// todo implement checking
+		return false;
+	}
+
+	/**
 	 * Searching project files for sub definitions by specific package and function name
 	 *
 	 * @param project       project to search in
