@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariable;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.08.2015.
@@ -48,19 +49,24 @@ public class PerlAnnotatorNamespaces extends PerlAnnotator
 			Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
 			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PRAGMA);
 		}
-		else if (!(parent instanceof PerlVariable || parent instanceof PerlGlobVariable))
+		else
+		{
 			decorateElement(
 					holder.createInfoAnnotation(namespaceElement, null),
 					PerlSyntaxHighlighter.PERL_PACKAGE,
 					namespaceElement.isBuiltin(),
 					namespaceElement.isDeprecated()
 			);
+		}
 	}
 
 	@Override
-	public void annotate(PsiElement element, AnnotationHolder holder)
+	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (element instanceof PerlNamespaceElement)
+		PsiElement parent = element.getParent();
+		if (element instanceof PerlNamespaceElement && !(parent instanceof PerlVariable || parent instanceof PerlGlobVariable))
+		{
 			annotateNamespaceElement((PerlNamespaceElement) element, holder);
+		}
 	}
 }

@@ -57,7 +57,7 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 	}
 
 	@Override
-	public void annotate(PsiElement element, AnnotationHolder holder)
+	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
 		if (element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
 			decorateElement(
