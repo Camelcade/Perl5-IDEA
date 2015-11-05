@@ -55,6 +55,7 @@
         <li>Removed empty prototype from generated constructor, fixes #537</li>
         <li>Extra close parenthesis and brackets now handled smarter, should improve parser's recovery, fixes #503</li>
         <li>Error block contents now couldn't be re-formatted to avoid unexpected effects, fixes #506</li>
+        <li>Fixed possible NPE on file renaming</li>
       </ul>
       </p>
 

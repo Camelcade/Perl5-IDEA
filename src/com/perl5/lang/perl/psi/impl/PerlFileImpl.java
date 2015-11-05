@@ -98,6 +98,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	 *
 	 * @return canonical package name or null if it's not pm file or it's not in source root
 	 */
+	@Nullable
 	public String getFilePackageName()
 	{
 		VirtualFile containingFile = getVirtualFile();

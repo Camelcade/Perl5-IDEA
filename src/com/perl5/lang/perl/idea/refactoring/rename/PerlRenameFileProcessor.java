@@ -53,50 +53,54 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 		{
 			final Project project = element.getProject();
 			final String currentPackageName = ((PerlFileImpl) element).getFilePackageName();
-			String[] nameChunks = currentPackageName.split("::");
-			nameChunks[nameChunks.length - 1] = newName.replaceFirst("\\.pm$", "");
-			final String newPackageName = StringUtils.join(nameChunks, "::");
 
-			final String newFileName = ((PerlFileImpl) element).getVirtualFile().getParent().getPath() + '/' + newName;
-
-			return new Runnable()
+			if (currentPackageName != null)
 			{
-				@Override
-				public void run()
+				String[] nameChunks = currentPackageName.split("::");
+				nameChunks[nameChunks.length - 1] = newName.replaceFirst("\\.pm$", "");
+				final String newPackageName = StringUtils.join(nameChunks, "::");
+
+				final String newFileName = ((PerlFileImpl) element).getVirtualFile().getParent().getPath() + '/' + newName;
+
+				return new Runnable()
 				{
-					VirtualFile newFile = LocalFileSystem.getInstance().findFileByPath(newFileName);
-
-					if (newFile != null)
+					@Override
+					public void run()
 					{
-						PsiFile psiFile = PsiManager.getInstance(project).findFile(newFile);
+						VirtualFile newFile = LocalFileSystem.getInstance().findFileByPath(newFileName);
 
-						if (psiFile != null)
+						if (newFile != null)
 						{
-							RenameRefactoring refactoring = null;
+							PsiFile psiFile = PsiManager.getInstance(project).findFile(newFile);
 
-							for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
+							if (psiFile != null)
 							{
-								if (currentPackageName.equals(namespaceDefinition.getName()))
+								RenameRefactoring refactoring = null;
+
+								for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
 								{
-									if (refactoring == null)
+									if (currentPackageName.equals(namespaceDefinition.getName()))
 									{
-										refactoring = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
-									}
-									else
-									{
-										refactoring.addElement(namespaceDefinition, newPackageName);
+										if (refactoring == null)
+										{
+											refactoring = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
+										}
+										else
+										{
+											refactoring.addElement(namespaceDefinition, newPackageName);
+										}
 									}
 								}
-							}
 
-							if (refactoring != null)
-							{
-								refactoring.run();
+								if (refactoring != null)
+								{
+									refactoring.run();
+								}
 							}
 						}
 					}
-				}
-			};
+				};
+			}
 		}
 		return super.getPostRenameCallback(element, newName, elementListener);
 	}
