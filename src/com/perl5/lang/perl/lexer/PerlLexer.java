@@ -1211,8 +1211,11 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public IElementType parseCappedVariableName()
 	{
+		// fixme fix this according to http://perldoc.perl.org/perlvar.html#The-Syntax-of-Variable-Names
 		if (SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType()))
+		{
 			return IDENTIFIER;
+		}
 
 		yypushback(yylength() - 1);
 		return OPERATOR_BITWISE_XOR;

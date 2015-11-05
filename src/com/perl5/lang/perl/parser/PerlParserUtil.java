@@ -110,7 +110,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					LEFT_BRACE,
 					SIGIL_SCALAR,
-					OPERATOR_BITWISE_XOR,
 					NUMBER_SIMPLE
 			));
 
@@ -784,8 +783,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		PsiBuilder.Marker m;
 
 		// checking for scalar cast
-		if (currentTokenType == SIGIL_SCALAR && POST_SIGILS_SUFFIXES.contains(b.lookAhead(1)))
+		if (currentTokenType == SIGIL_SCALAR && (
+				POST_SIGILS_SUFFIXES.contains(b.lookAhead(1))
+						|| b.rawLookup(1) == OPERATOR_BITWISE_XOR    // fixme this requires more love in lexer see parseCappedVariableName
+		))
+		{
 			return false;
+		}
 
 		// $package::
 		// $package::var

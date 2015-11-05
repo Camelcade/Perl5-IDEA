@@ -56,6 +56,7 @@
         <li>Extra close parenthesis and brackets now handled smarter, should improve parser's recovery, fixes #503</li>
         <li>Error block contents now couldn't be re-formatted to avoid unexpected effects, fixes #506</li>
         <li>Fixed possible NPE on file renaming</li>
+        <li>Fixed parsing of <code>$$ ^ int</code> expression, fixes 543</li>
       </ul>
       </p>
 
