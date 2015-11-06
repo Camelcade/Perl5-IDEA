@@ -46,14 +46,6 @@ import java.util.Set;
  */
 public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 {
-	protected static final HashMap<String, IElementType> knownFunctions = new HashMap<String, IElementType>();
-
-	static
-	{
-		for (String functionName : BUILT_IN)
-			knownFunctions.put(functionName, SUB);
-	}
-
 	/**
 	 * Checks if provided function is built in
 	 *
@@ -62,7 +54,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static boolean isBuiltIn(String function)
 	{
-		return knownFunctions.containsKey(function);
+		return BUILT_IN.contains(function);
 	}
 
 

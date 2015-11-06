@@ -18,22 +18,28 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.util.PerlSubUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
 public class PerlNamesValidator implements NamesValidator
 {
+	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_a-zA-Z0-9]+");
+
 	@Override
-	public boolean isKeyword(String name, Project project)
+	public boolean isKeyword(@NotNull String name, Project project)
 	{
-		// @todo add some keywords here?
+		// todo what is this for?
 		return false;
 	}
 
 	@Override
-	public boolean isIdentifier(String name, Project project)
+	public boolean isIdentifier(@NotNull String name, Project project)
 	{
-		return !"".equals(name);
+		return IDENTIFIER_PATTERN.matcher(name).matches();
 	}
 }

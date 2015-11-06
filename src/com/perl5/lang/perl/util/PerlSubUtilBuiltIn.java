@@ -135,6 +135,15 @@ public interface PerlSubUtilBuiltIn
 	Set<String> BUILT_IN = new HashSet<String>(Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
+			"q",
+			"qq",
+			"tr",
+			"y",
+			"m",
+			"qr",
+			"s",
+			"qw",
+
 			"chomp",
 			"chop",
 			"chr",
@@ -148,24 +157,17 @@ public interface PerlSubUtilBuiltIn
 			"oct",
 			"ord",
 			"pack",
-//			"q//",
-//			"qq//",
 			"reverse",
 			"rindex",
 			"sprintf",
 			"substr",
-//			"tr///",
 			"uc",
 			"ucfirst",
-//			"y///",
 			"fc",
 
 //			Regular expressions and pattern matching
-//			"m//",
 			"pos",
-//			"qr//",
 			"quotemeta",
-//			"s///",
 			"split",
 			"study",
 
@@ -197,7 +199,6 @@ public interface PerlSubUtilBuiltIn
 			"grep",
 			"join",
 			"map",
-//			"qw//",
 			"reverse",
 			"sort",
 			"unpack",
