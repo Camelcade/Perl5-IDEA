@@ -37,6 +37,7 @@
       <p><b>Features & Improvements:</b>
       <ul>
         <li>Implemented wrapping of comma sequences</li>
+        <li>Implemented aligning of arrows in comma sequences</li>
         <li>Implemented identifiers validation (NB: only ASCII allowed atm)</li>
       </ul>
       </p>

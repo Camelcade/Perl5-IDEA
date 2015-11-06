@@ -141,6 +141,12 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		final List<Block> blocks = new ArrayList<Block>();
 
 		Alignment alignment = null; //Alignment.createAlignment();
+
+		if (getElementType() == COMMA_SEQUENCE_EXPR)
+		{
+			alignment = Alignment.createAlignment(true);
+		}
+
 		Wrap wrap = null;
 
 		if (getElementType() == COMMA_SEQUENCE_EXPR && !isHeredocAhead(this))
@@ -151,8 +157,14 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
 		{
 			if (!shouldCreateBlockFor(child)) continue;
-//			System.err.println("Creating sub-block for " + child);
-			blocks.add(createChildBlock(myNode, child, wrap, alignment));
+			if (child.getElementType() == OPERATOR_COMMA_ARROW)
+			{
+				blocks.add(createChildBlock(myNode, child, wrap, alignment));
+			}
+			else
+			{
+				blocks.add(createChildBlock(myNode, child, wrap, null));
+			}
 		}
 
 		return blocks;
