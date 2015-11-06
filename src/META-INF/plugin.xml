@@ -59,6 +59,7 @@
         <li>Fixed parsing of <code>$$ ^ int</code> expression, fixes #543</li>
         <li>Pragma namespaces are no more being decorated in variables, fixes #502</li>
         <li>Improved argumentless built-ins parsing in leftward calls, fixes #492</li>
+        <li>Find usages working properly if entity is being used only in literals, fixes #496</li>
       </ul>
       </p>
 

@@ -45,12 +45,16 @@ public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTy
 	@Override
 	public WordsScanner getWordsScanner()
 	{
-		return new DefaultWordsScanner(
+		DefaultWordsScanner defaultWordsScanner = new DefaultWordsScanner(
 				new PerlLexerAdapter(null),
 				PerlParserDefinition.IDENTIFIERS,
 				TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
 				PerlParserDefinition.LITERALS
 		);
+
+		defaultWordsScanner.setMayHaveFileRefsInLiterals(true);
+
+		return defaultWordsScanner;
 	}
 
 	@Override
