@@ -29,6 +29,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  */
 public class PerlIndentProcessor implements PerlElementTypes
 {
+	// containers which has none indentation
 	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.create(
 			NAMESPACE_DEFINITION,
 			NAMESPACE_CONTENT,
@@ -40,16 +41,17 @@ public class PerlIndentProcessor implements PerlElementTypes
 			CONDITIONAL_BLOCK_WHILE,
 			CONTINUE_BLOCK,
 			UNCONDITIONAL_BLOCK,
-			COMMA_SEQUENCE_EXPR,
+
 			DO_EXPR,
 			EVAL_EXPR,
 			PerlParserDefinition.FILE
 	);
 
+
 	/**
 	 * Tokens that must be suppressed for indentation
 	 */
-	public static final TokenSet UNINDENTED_TOKENS = TokenSet.create(
+	public static final TokenSet ABSOLUTE_UNINDENTED_TOKENS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
 			HEREDOC_QX,
@@ -72,20 +74,36 @@ public class PerlIndentProcessor implements PerlElementTypes
 		ASTNode grandParent = parent != null ? parent.getTreeParent() : null;
 
 		IElementType parentType = parent != null ? parent.getElementType() : null;
-//		IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
+		IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
+
 //		ASTNode prevSibling = FormatterUtil.getPreviousNonWhitespaceSibling(node);
 //		IElementType prevSiblingElementType = prevSibling != null ? prevSibling.getElementType() : null;
 //		ASTNode nextSibling = FormatterUtil.getNextNonWhitespaceSibling(node);
 //		IElementType nextSiblingElementType = nextSibling != null ? nextSibling.getElementType() : null;
 
-		if (UNINDENTED_TOKENS.contains(nodeType) || parent == null || grandParent == null)
+		// defined by node
+		if (ABSOLUTE_UNINDENTED_TOKENS.contains(nodeType) || parent == null || grandParent == null)
+		{
 			return Indent.getAbsoluteNoneIndent();
+		}
 
-		if (UNINDENTABLE_CONTAINERS.contains(parentType))
+		if (nodeType == COMMA_SEQUENCE_EXPR)
+		{
 			return Indent.getNoneIndent();
+		}
 
+		// defined by parent
+		if (UNINDENTABLE_CONTAINERS.contains(parentType))
+		{
+			return Indent.getNoneIndent();
+		}
 
-		return Indent.getContinuationWithoutFirstIndent(false);
+		if (parentType == COMMA_SEQUENCE_EXPR)
+		{
+			return Indent.getIndent(Indent.Type.CONTINUATION, false, true);
+		}
+
+		return Indent.getContinuationWithoutFirstIndent();
 	}
 }
 

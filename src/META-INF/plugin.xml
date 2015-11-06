@@ -61,6 +61,7 @@
         <li>Improved argumentless built-ins parsing in leftward calls, fixes #492</li>
         <li>Find usages working properly if entity is being used only in literals, fixes #496</li>
         <li>Implemented identifiers validation.</li>
+        <li>Improved comma sequence indention, fixes #417</li>
       </ul>
       </p>
 

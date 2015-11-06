@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.editor;
 import com.intellij.openapi.editor.IndentStrategy;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 03.09.2015.
@@ -26,8 +27,8 @@ import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 public class PerlIndentStrategy implements IndentStrategy
 {
 	@Override
-	public boolean canIndent(PsiElement element)
+	public boolean canIndent(@NotNull PsiElement element)
 	{
-		return !PerlIndentProcessor.UNINDENTED_TOKENS.contains(element.getNode().getElementType());
+		return !PerlIndentProcessor.ABSOLUTE_UNINDENTED_TOKENS.contains(element.getNode().getElementType());
 	}
 }

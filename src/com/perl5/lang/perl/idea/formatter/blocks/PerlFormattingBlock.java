@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.formatter;
+package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
@@ -29,6 +29,7 @@ import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
@@ -224,8 +225,10 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	@Override
 	public Indent getIndent()
 	{
-		if (isFirst() || isLast() && isBlockCloser())
+		if ((isFirst() && isBlockOpener() || isLast() && isBlockCloser()))
+		{
 			return Indent.getNoneIndent();
+		}
 		return myIndent;
 	}
 
@@ -235,7 +238,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	{
 		return super.getAlignment();
 	}
-
 
 	@Nullable
 	@Override
@@ -278,6 +280,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	public boolean isBlockCloser()
 	{
 		return BLOCK_CLOSERS.contains(getElementType());
+	}
+
+	public boolean isBlockOpener()
+	{
+		return BLOCK_OPENERS.contains(getElementType());
 	}
 
 }
