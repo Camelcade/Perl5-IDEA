@@ -36,7 +36,8 @@
 
       <p><b>Features & Improvements:</b>
       <ul>
-        <li>Nothing yet...</li>
+        <li>Implemented wrapping of comma sequences</li>
+        <li>Implemented identifiers validation (NB: only ASCII allowed atm)</li>
       </ul>
       </p>
 
@@ -60,7 +61,6 @@
         <li>Pragma namespaces are no more being decorated in variables, fixes #502</li>
         <li>Improved argumentless built-ins parsing in leftward calls, fixes #492</li>
         <li>Find usages working properly if entity is being used only in literals, fixes #496</li>
-        <li>Implemented identifiers validation.</li>
         <li>Improved comma sequence indention, fixes #417</li>
       </ul>
       </p>

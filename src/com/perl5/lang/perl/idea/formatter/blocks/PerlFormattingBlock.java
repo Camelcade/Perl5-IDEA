@@ -139,15 +139,20 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	private List<Block> buildSubBlocks()
 	{
 		final List<Block> blocks = new ArrayList<Block>();
-//		System.err.println("Creating sub-blocks for " + myNode);
 
-		Alignment alignment = null;//Alignment.createAlignment();
+		Alignment alignment = null; //Alignment.createAlignment();
+		Wrap wrap = null;
+
+		if (getElementType() == COMMA_SEQUENCE_EXPR && !isHeredocAhead(this))
+		{
+			wrap = Wrap.createWrap(WrapType.NORMAL, true);
+		}
 
 		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
 		{
 			if (!shouldCreateBlockFor(child)) continue;
 //			System.err.println("Creating sub-block for " + child);
-			blocks.add(createChildBlock(myNode, child, alignment));
+			blocks.add(createChildBlock(myNode, child, wrap, alignment));
 		}
 
 		return blocks;
@@ -156,10 +161,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	private PerlFormattingBlock createChildBlock(
 			ASTNode parent,
 			ASTNode child,
+			Wrap wrap,
 			Alignment alignment
 	)
 	{
-		return new PerlFormattingBlock(child, myWrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder);
+		return new PerlFormattingBlock(child, wrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder);
 	}
 
 	@Nullable
