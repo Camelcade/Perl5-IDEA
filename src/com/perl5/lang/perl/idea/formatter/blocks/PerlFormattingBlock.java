@@ -118,7 +118,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		myElementType = node.getElementType();
 	}
 
-	private static boolean shouldCreateBlockFor(ASTNode node)
+	protected static boolean shouldCreateBlockFor(ASTNode node)
 	{
 		return node.getElementType() != TokenType.WHITE_SPACE && node.getText().length() != 0;
 	}
@@ -136,20 +136,22 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		return new ArrayList<Block>(mySubBlocks);
 	}
 
-	private List<Block> buildSubBlocks()
+	protected List<Block> buildSubBlocks()
 	{
 		final List<Block> blocks = new ArrayList<Block>();
 
+		IElementType elementType = getElementType();
+
 		Alignment alignment = null; //Alignment.createAlignment();
 
-		if (getElementType() == COMMA_SEQUENCE_EXPR)
+		if (elementType == COMMA_SEQUENCE_EXPR || elementType == CONSTANTS_BLOCK)
 		{
 			alignment = Alignment.createAlignment(true);
 		}
 
 		Wrap wrap = null;
 
-		if (getElementType() == COMMA_SEQUENCE_EXPR && !isHeredocAhead(this))
+		if (elementType == COMMA_SEQUENCE_EXPR && !isHeredocAhead(this))
 		{
 			wrap = Wrap.createWrap(WrapType.NORMAL, true);
 		}
@@ -157,27 +159,31 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
 		{
 			if (!shouldCreateBlockFor(child)) continue;
-			if (child.getElementType() == OPERATOR_COMMA_ARROW)
-			{
-				blocks.add(createChildBlock(myNode, child, wrap, alignment));
-			}
-			else
-			{
-				blocks.add(createChildBlock(myNode, child, wrap, null));
-			}
+			blocks.add(createChildBlock(child, wrap, alignment));
 		}
 
 		return blocks;
 	}
 
-	private PerlFormattingBlock createChildBlock(
-			ASTNode parent,
+	protected PerlFormattingBlock createChildBlock(
 			ASTNode child,
 			Wrap wrap,
 			Alignment alignment
 	)
 	{
-		return new PerlFormattingBlock(child, wrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder);
+		IElementType childElementType = child.getElementType();
+		if (childElementType == OPERATOR_COMMA_ARROW)
+		{
+			return new PerlFormattingBlock(child, wrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder);
+		}
+		else if (childElementType == CONSTANT_DEFINITION)
+		{
+			return new PerlConstantDefinitionFormattingBlock(child, wrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder);
+		}
+		else
+		{
+			return new PerlFormattingBlock(child, wrap, null, mySettings, myPerl5Settings, mySpacingBuilder);
+		}
 	}
 
 	@Nullable
