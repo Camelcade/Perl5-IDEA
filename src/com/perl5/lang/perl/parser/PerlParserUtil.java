@@ -30,6 +30,7 @@ import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlBuilderLight;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -1753,4 +1754,26 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			return r;
 		}
 	}
+
+	/**
+	 * Checks that we are at identifier with specific name and convert it to the token type
+	 *
+	 * @param b               PerlBuilder
+	 * @param l               parsing level
+	 * @param identifierValue text of identifier to check
+	 * @param tokenType       target token type
+	 * @return check result
+	 */
+	public static boolean checkAndConvertIdentifier(PsiBuilder b, int l, @NotNull String identifierValue, @NotNull IElementType tokenType)
+	{
+		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && identifierValue.equals(b.getTokenText()))
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(tokenType);
+			return true;
+		}
+		return false;
+	}
+
 }

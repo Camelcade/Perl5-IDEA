@@ -332,8 +332,8 @@ limitations under the License.
     extends("no_statement")=statement
     extends("condition_statement|condition_statement_while|for_list_statement|for_iterator_statement")=statement
 
-    implements("conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
-    mixin("conditional_block_while|block|block_compound|if_compound|unless_compound|given_compound|while_compound|until_compound|for_compound|foreach_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
+    implements("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
+    mixin("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.mixins.PerlHeredocOpenerMixin"
@@ -436,6 +436,7 @@ private compound_statement ::=
     | foreach_compound
     | when_compound
     | default_compound
+    | method_signatures_extension
 
 named_block ::= BLOCK_NAME block
 
@@ -877,7 +878,8 @@ private local_parenthesised_declaration ::= LEFT_PAREN local_variable_declaratio
 private local_variable_declaration_argument ::= strict_variable_declaration_argument | scalar_expr
 
 private variable_declaration_variation ::= variable_parenthesised_declaration | variable_declaration_argument
-private variable_parenthesised_declaration ::= LEFT_PAREN strict_variable_declaration_argument (comma + strict_variable_declaration_argument ) * comma* RIGHT_PAREN {pin=1}
+private variable_parenthesised_declaration ::= LEFT_PAREN variable_parenthesised_declaration_contents RIGHT_PAREN {pin=1}
+private variable_parenthesised_declaration_contents ::= strict_variable_declaration_argument (comma + strict_variable_declaration_argument ) * comma*
 
 private strict_variable_declaration_argument ::= strict_variable_declaration_wrapper | [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF
 private variable_declaration_argument ::= variable_declaration_wrapper | [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF
@@ -1087,3 +1089,21 @@ private namespace_element_braced ::= LEFT_BRACE <<mergePackageName>> RIGHT_BRACE
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private namespace_canonical ::= <<convertPackageIdentifier>>
 private semicolon_any ::= SEMICOLON | EMBED_MARKER_SEMICOLON
+
+/********************************************** Extensions for Method::Signatures *************************************/
+private method_signatures_extension ::=
+	// here we may add check if extension is enabled in settings
+	method_compound
+	| func_compound
+
+// we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
+method_compound ::= <<checkAndConvertIdentifier "method" RESERVED_SUB>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
+func_compound ::= <<checkAndConvertIdentifier "func" RESERVED_SUB>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
+
+// not sure that we need a wrapper for signatures
+method_signature ::= LEFT_PAREN [method_signature_invocant] [variable_parenthesised_declaration_contents] RIGHT_PAREN {pin=1}
+method_signature_invocant ::= strict_variable_declaration_argument COLON
+func_signature ::= LEFT_PAREN [variable_parenthesised_declaration_contents] RIGHT_PAREN {pin=1}
+
+
+/********************************************** Extensions for Moose **************************************************/
