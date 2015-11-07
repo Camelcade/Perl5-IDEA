@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -76,10 +77,11 @@ public class PerlIndentProcessor implements PerlElementTypes
 		IElementType parentType = parent != null ? parent.getElementType() : null;
 		IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
 
-//		ASTNode prevSibling = FormatterUtil.getPreviousNonWhitespaceSibling(node);
-//		IElementType prevSiblingElementType = prevSibling != null ? prevSibling.getElementType() : null;
-//		ASTNode nextSibling = FormatterUtil.getNextNonWhitespaceSibling(node);
-//		IElementType nextSiblingElementType = nextSibling != null ? nextSibling.getElementType() : null;
+		ASTNode prevSibling = FormatterUtil.getPreviousNonWhitespaceSibling(node);
+		IElementType prevSiblingElementType = prevSibling != null ? prevSibling.getElementType() : null;
+
+		ASTNode nextSibling = FormatterUtil.getNextNonWhitespaceSibling(node);
+		IElementType nextSiblingElementType = nextSibling != null ? nextSibling.getElementType() : null;
 
 		// defined by node
 		if (ABSOLUTE_UNINDENTED_TOKENS.contains(nodeType) || parent == null || grandParent == null)
@@ -95,6 +97,17 @@ public class PerlIndentProcessor implements PerlElementTypes
 		// defined by parent
 		if (UNINDENTABLE_CONTAINERS.contains(parentType))
 		{
+			// a little magic for sub attributes
+			if (parentType == SUB_DEFINITION)
+			{
+				if (nodeType == COLON && nextSiblingElementType == ATTRIBUTE ||
+						nodeType == ATTRIBUTE && prevSiblingElementType != COLON
+						)
+				{
+					return Indent.getContinuationIndent();
+				}
+			}
+
 			return Indent.getNoneIndent();
 		}
 
