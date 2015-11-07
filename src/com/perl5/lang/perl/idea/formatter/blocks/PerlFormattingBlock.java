@@ -193,18 +193,21 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
 			// LF after opening brace and before closing need to check if here-doc opener is in the line
 			if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type))
+			{
 				if (!isHeredocAhead((PerlFormattingBlock) child1))
 					return Spacing.createSpacing(0, 0, 1, true, 1);
 				else
 					return Spacing.createSpacing(1, Integer.MAX_VALUE, 0, true, 1);
-
-			if (isCodeBlock() &&
+			}
+			if (isCodeBlock() && !inGrepMapSort() && !blockHasLessChildrenThan(2) &&
 					(BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock) child1).isFirst()
 							|| BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock) child2).isLast()
 					)
 					&& !isHeredocAhead((PerlFormattingBlock) child1)
 					)
+			{
 				return Spacing.createSpacing(0, 0, 1, true, 1);
+			}
 		}
 		return mySpacingBuilder.getSpacing(this, child1, child2);
 	}
@@ -305,4 +308,39 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		return BLOCK_OPENERS.contains(getElementType());
 	}
 
+	/**
+	 * Check if we are in grep map or sort
+	 *
+	 * @return check result
+	 */
+	public boolean inGrepMapSort()
+	{
+		ASTNode parent = myNode.getTreeParent();
+		IElementType parentElementType;
+		return parent != null && ((parentElementType = parent.getElementType()) == GREP_EXPR || parentElementType == SORT_EXPR || parentElementType == MAP_EXPR);
+	}
+
+	/**
+	 * Checks if block contains more than specified number of meaningful children. Spaces and line comments are being ignored
+	 *
+	 * @return check result
+	 */
+	public boolean blockHasLessChildrenThan(int maxChildren)
+	{
+		int counter = -2; // for braces
+		ASTNode childNode = myNode.getFirstChildNode();
+		while (childNode != null)
+		{
+			IElementType nodeType = childNode.getElementType();
+			if (nodeType != TokenType.WHITE_SPACE && nodeType != COMMENT_LINE && nodeType != SEMICOLON)
+			{
+				if (++counter >= maxChildren)
+				{
+					return false;
+				}
+			}
+			childNode = childNode.getTreeNext();
+		}
+		return true;
+	}
 }

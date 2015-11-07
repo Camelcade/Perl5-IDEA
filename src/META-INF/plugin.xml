@@ -65,6 +65,7 @@
         <li>Find usages working properly if entity is being used only in literals, fixes #496</li>
         <li>Improved comma sequence indention, fixes #417</li>
         <li>Fixed formatting for sub definition attributes</li>
+        <li>Grep/map/sort blocks and one-statement blocks are not being butified anymore.</li>
       </ul>
       </p>
 
