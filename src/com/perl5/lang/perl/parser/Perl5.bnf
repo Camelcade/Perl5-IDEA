@@ -133,6 +133,8 @@ limitations under the License.
     RESERVED_NEXT="next"
     RESERVED_LAST="last"
 
+	RESERVED_RETURN="return"
+
     // Operators
 
     OPERATOR_X="x"
@@ -518,6 +520,8 @@ next_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_NEXT [lnr_param] {pin=2}
 redo_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_REDO [lnr_param] {pin=2}
 goto_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_GOTO [goto_param] {pin=2}
 
+return_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_RETURN [list_expr] {pin=2}
+
 private lnr_param ::= <<convertIdentifier LABEL>> | expr // fixme scalar_expr ?
 private goto_param ::= <<convertIdentifier LABEL>> | OPERATOR_BITWISE_AND <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
 
@@ -629,6 +633,7 @@ term_expr ::=
     | sub_expr
     | eval_expr
     | grep_expr
+    | return_expr
     | map_expr
     | sort_expr
     | regex_term

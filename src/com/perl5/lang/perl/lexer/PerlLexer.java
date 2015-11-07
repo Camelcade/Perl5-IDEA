@@ -401,6 +401,8 @@ public class PerlLexer extends PerlLexerGenerated
 		reservedTokenTypes.put("next", RESERVED_NEXT);
 		reservedTokenTypes.put("last", RESERVED_LAST);
 
+		reservedTokenTypes.put("return", RESERVED_RETURN);
+
 		RESERVED_TOKENSET.addAll(reservedTokenTypes.values());
 	}
 
