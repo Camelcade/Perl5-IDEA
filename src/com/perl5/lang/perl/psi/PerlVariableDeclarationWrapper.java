@@ -76,4 +76,11 @@ public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<Perl
 	 * @return checking result
 	 */
 	boolean isGlobalDeclaration();
+
+	/**
+	 * Checks if this is method's invocant declaration. IMPORTANT: builds PSI
+	 *
+	 * @return checking result
+	 */
+	boolean isInvocantDeclaration();
 }

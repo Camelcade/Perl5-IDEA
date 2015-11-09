@@ -127,15 +127,23 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 			{
 				String variableName = variableNameElement.getName();
 
+				// fixme this is a weak; should be re-factored
 				if (this instanceof PsiPerlScalarVariable && PerlThisNames.NAMES_SET.contains(variableName))
+				{
 					return PerlPackageUtil.getContextPackageName(this);
+				}
 
 				// find lexicaly visible declaration and check type
-				PerlVariableDeclarationWrapper declaredVariable = getLexicalDeclaration();
-				if (declaredVariable != null)
+				PerlVariableDeclarationWrapper declarationWrapper = getLexicalDeclaration();
+				if (declarationWrapper != null)
 				{
+					if (declarationWrapper.isInvocantDeclaration())
+					{
+						return PerlPackageUtil.getContextPackageName(this);
+					}
+
 					// check explicit type in declaration
-					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declaredVariable, PerlVariableDeclaration.class);
+					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declarationWrapper, PerlVariableDeclaration.class);
 					if (declaration != null)
 					{
 						PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
@@ -167,7 +175,7 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 					}
 
 					// check assignments
-					for (PsiReference inReference : ReferencesSearch.search(declaredVariable, new LocalSearchScope(getContainingFile())).findAll())
+					for (PsiReference inReference : ReferencesSearch.search(declarationWrapper, new LocalSearchScope(getContainingFile())).findAll())
 					{
 						PsiElement sourceElement = inReference.getElement().getParent();
 						if (

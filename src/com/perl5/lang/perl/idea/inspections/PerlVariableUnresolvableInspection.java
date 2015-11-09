@@ -20,10 +20,8 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import com.perl5.lang.perl.psi.PerlVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,10 +30,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlVariableUnresolvableInspection extends PerlInspection
 {
+	protected static final String DEFAULT_INVOCANT_NAME = "self";
+
 	@NotNull
 	@Override
 	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
 	{
+
 		return new PerlVisitor()
 		{
 			@Override
@@ -57,6 +58,11 @@ public class PerlVariableUnresolvableInspection extends PerlInspection
 						{
 							return;
 						}
+
+					if (PsiTreeUtil.getParentOfType(element, PsiPerlMethodCompound.class) != null && DEFAULT_INVOCANT_NAME.equals(variableNameElement.getName()))
+					{
+						return;
+					}
 
 					registerProblem(holder, variableNameElement, "Unable to find variable declaration.");
 				}

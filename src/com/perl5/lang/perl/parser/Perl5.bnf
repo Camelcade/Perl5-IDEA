@@ -297,6 +297,8 @@ limitations under the License.
     extends(".*expr")=expr
     name(".*expr")="expression"
 
+	extends(".*_signature_content")=sub_signature_content
+
     extends("heredoc_opener|anon_array|anon_hash|anon_sub")=expr
     extends("string_list|number_constant")=expr
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
@@ -497,7 +499,7 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_definition_parameters block
 
 private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
-private sub_prototype_or_signature ::= sub_prototype | sub_signature
+private sub_prototype_or_signature ::= sub_signature |sub_prototype
 
 sub_declaration ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_declaration_parameters
 private sub_declaration_parameters ::= [sub_prototype] [sub_attributes]
@@ -509,8 +511,21 @@ private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
 private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1}
 private sub_prototype_content ::= <<parseSubPrototype>>
 
-private sub_signature ::= LEFT_PAREN [sub_signature_content] RIGHT_PAREN {pin=1}
-private sub_signature_content ::= <<parseSubSignature>>
+/************************************* Sub signatures *****************************************************************/
+private sub_signature ::= LEFT_PAREN sub_signature_content RIGHT_PAREN //{pin=1} pinning is temporary disabled in favor of protos
+sub_signature_content ::=
+	sub_signature_element (OPERATOR_COMMA sub_signature_element)* [OPERATOR_COMMA sub_signature_element_slurpy]
+	| [sub_signature_element_slurpy]
+//	{recoverWhile=recover_signature_content}
+private sub_signature_element ::= sub_signature_element_ignore	| sub_signature_scalar
+private sub_signature_element_slurpy ::= <<arrayDeclarationWrapper>> | <<hashDeclarationWrapper>>
+
+// fixme this is side-effect of detecting var names in lexer
+sub_signature_element_ignore ::= SIGIL_SCALAR [<<checkAssignIdentifier>> [scalar_expr]] &(OPERATOR_COMMA|RIGHT_PAREN)
+private sub_signature_scalar ::= <<scalarDeclarationWrapper>> [OPERATOR_ASSIGN scalar_expr]
+
+private recover_signature_content ::= !(RIGHT_PAREN|LEFT_BRACE)
+/************************************* Sub signatures *****************************************************************/
 
 private sub_attributes ::= COLON attribute ([COLON] attribute)*  {pin=1}
 private var_attributes ::= COLON attribute ([COLON] attribute)*  // {pin=1} pin disable because of $something ? my $var : $other;
@@ -1101,9 +1116,10 @@ method_compound ::= <<checkAndConvertIdentifier "method" RESERVED_SUB>> <<conver
 func_compound ::= <<checkAndConvertIdentifier "func" RESERVED_SUB>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
 
 // not sure that we need a wrapper for signatures
-method_signature ::= LEFT_PAREN [method_signature_invocant] [variable_parenthesised_declaration_contents] RIGHT_PAREN {pin=1}
-method_signature_invocant ::= strict_variable_declaration_argument COLON
-func_signature ::= LEFT_PAREN [variable_parenthesised_declaration_contents] RIGHT_PAREN {pin=1}
-
+private method_signature ::= LEFT_PAREN method_signature_content RIGHT_PAREN {pin=1}
+method_signature_content ::= [method_signature_invocant] [variable_parenthesised_declaration_contents] {recoverWhile=recover_signature_content}
+method_signature_invocant ::= <<scalarDeclarationWrapper>> COLON
+private func_signature ::= LEFT_PAREN func_signature_content RIGHT_PAREN {pin=1}
+func_signature_content ::= [variable_parenthesised_declaration_contents] {recoverWhile=recover_signature_content}
 
 /********************************************** Extensions for Moose **************************************************/

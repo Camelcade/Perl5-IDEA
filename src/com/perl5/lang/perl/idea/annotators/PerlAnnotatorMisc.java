@@ -140,6 +140,12 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 						PerlSyntaxHighlighter.PERL_KEYWORD,
 						true,
 						false);
+			else if (tokenType == SUB_SIGNATURE_ELEMENT_IGNORE)
+				decorateElement(
+						holder.createInfoAnnotation(element.getFirstChild(), null),
+						PerlSyntaxHighlighter.PERL_SCALAR,
+						true,
+						false);
 		}
 	}
 }

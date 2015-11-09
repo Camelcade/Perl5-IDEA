@@ -437,12 +437,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
-	// todo implement
-	public static boolean parseSubSignature(PsiBuilder b, int l)
-	{
-		return false;
-	}
-
 	/**
 	 * Smart semi checker decides if we need semi here
 	 *
@@ -1775,5 +1769,85 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 	}
+
+	/**
+	 * This is a hack, because GrammarKit parses <<someMethod "=" OPERATOR_ASSIGN>> incorrectly
+	 *
+	 * @param b Perl builder
+	 * @param l parsing level
+	 * @return conversion result
+	 */
+	public static boolean checkAssignIdentifier(PsiBuilder b, int l)
+	{
+		return consumeToken(b, OPERATOR_ASSIGN) || checkAndConvertIdentifier(b, l, "=", OPERATOR_ASSIGN);
+	}
+
+
+	/**
+	 * Parses and wraps declaration of scalar variable
+	 *
+	 * @param b Perl builder
+	 * @param l parsing level
+	 * @return check result
+	 */
+	public static boolean scalarDeclarationWrapper(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.scalar_variable(b, l))
+		{
+			m.done(VARIABLE_DECLARATION_WRAPPER);
+			return true;
+		}
+		else
+		{
+			m.drop();
+			return false;
+		}
+	}
+
+	/**
+	 * Parses and wraps declaration of scalar variable
+	 *
+	 * @param b Perl builder
+	 * @param l parsing level
+	 * @return check result
+	 */
+	public static boolean arrayDeclarationWrapper(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.array_variable(b, l))
+		{
+			m.done(VARIABLE_DECLARATION_WRAPPER);
+			return true;
+		}
+		else
+		{
+			m.drop();
+			return false;
+		}
+	}
+
+	/**
+	 * Parses and wraps declaration of scalar variable
+	 *
+	 * @param b Perl builder
+	 * @param l parsing level
+	 * @return check result
+	 */
+	public static boolean hashDeclarationWrapper(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.hash_variable(b, l))
+		{
+			m.done(VARIABLE_DECLARATION_WRAPPER);
+			return true;
+		}
+		else
+		{
+			m.drop();
+			return false;
+		}
+	}
+
 
 }

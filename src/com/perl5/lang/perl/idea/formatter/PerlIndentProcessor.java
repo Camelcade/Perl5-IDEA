@@ -35,6 +35,8 @@ public class PerlIndentProcessor implements PerlElementTypes
 			NAMESPACE_DEFINITION,
 			NAMESPACE_CONTENT,
 			SUB_DEFINITION,
+			METHOD_COMPOUND,
+			FUNC_COMPOUND,
 			IF_COMPOUND,
 			FOR_COMPOUND,
 			FOREACH_COMPOUND,
@@ -51,6 +53,13 @@ public class PerlIndentProcessor implements PerlElementTypes
 	public static final TokenSet UNINDENTED_TOKENS = TokenSet.create(
 			COMMA_SEQUENCE_EXPR,
 			CALL_ARGUMENTS
+	);
+
+	public static final TokenSet COMMA_LIKE_SEQUENCES = TokenSet.create(
+			COMMA_SEQUENCE_EXPR,
+			SUB_SIGNATURE_CONTENT,
+			METHOD_SIGNATURE_CONTENT,
+			FUNC_SIGNATURE_CONTENT
 	);
 
 	/**
@@ -115,7 +124,7 @@ public class PerlIndentProcessor implements PerlElementTypes
 			return Indent.getNoneIndent();
 		}
 
-		if (parentType == COMMA_SEQUENCE_EXPR)
+		if (COMMA_LIKE_SEQUENCES.contains(parentType))
 		{
 			return Indent.getIndent(Indent.Type.CONTINUATION, false, true);
 		}

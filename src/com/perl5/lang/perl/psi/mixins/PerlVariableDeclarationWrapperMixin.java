@@ -27,10 +27,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLexical;
-import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -154,7 +151,18 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 	@Override
 	public boolean isLexicalDeclaration()
 	{
-		return getParent() instanceof PsiPerlVariableDeclarationLexical || isLocalDeclaration();
+		PsiElement parent = getParent();
+		return parent instanceof PsiPerlVariableDeclarationLexical ||
+				parent instanceof PsiPerlSubSignatureContent ||
+				isInvocantDeclaration() ||
+				isLocalDeclaration()
+				;
+	}
+
+	@Override
+	public boolean isInvocantDeclaration()
+	{
+		return getParent() instanceof PsiPerlMethodSignatureInvocant;
 	}
 
 	@Override
