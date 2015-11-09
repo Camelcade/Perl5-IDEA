@@ -65,6 +65,11 @@ public class PerlSubArgument
 		return isOptional;
 	}
 
+	public void setOptional(Boolean optional)
+	{
+		isOptional = optional;
+	}
+
 	public String getVariableClass()
 	{
 		return variableClass;

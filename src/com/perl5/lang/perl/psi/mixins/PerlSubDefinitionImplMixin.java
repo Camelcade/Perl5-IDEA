@@ -24,6 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.SmartList;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -31,6 +32,7 @@ import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -90,22 +92,46 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 		int argumentsNumber = subArguments.size();
 
 		List<String> argumentsList = new ArrayList<String>();
+		List<String> optionalAargumentsList = new ArrayList<String>();
+
 		for (PerlSubArgument argument : subArguments)
 		{
-			// todo we can mark optional subArguments after prototypes implementation
-			argumentsList.add(argument.toStringShort());
-
-			int compiledListSize = argumentsList.size();
-			if (compiledListSize > 4 && argumentsNumber > compiledListSize)
+			if (optionalAargumentsList.size() > 0 || argument.isOptional())
 			{
-				argumentsList.add("...");
+				optionalAargumentsList.add(argument.toStringShort());
+			}
+			else
+			{
+				argumentsList.add(argument.toStringShort());
+			}
+
+			int compiledListSize = argumentsList.size() + optionalAargumentsList.size();
+			if (compiledListSize > 5 && argumentsNumber > compiledListSize)
+			{
+				if (optionalAargumentsList.size() > 0)
+				{
+					optionalAargumentsList.add("...");
+				}
+				else
+				{
+					argumentsList.add("...");
+				}
 				break;
 			}
 		}
 
-		return argumentsList.size() > 0
-				? "(" + StringUtils.join(argumentsList, ", ") + ")"
-				: "";
+		if (argumentsList.size() == 0 && optionalAargumentsList.size() == 0)
+			return "";
+
+		if (optionalAargumentsList.size() > 0)
+			return "("
+					+ StringUtils.join(argumentsList, ", ")
+					+ "[, "
+					+ StringUtils.join(optionalAargumentsList, ", ")
+					+ "]"
+					+ ")";
+
+		return "(" + StringUtils.join(argumentsList, ", ") + ")";
 	}
 
 	@Override
@@ -115,15 +141,75 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 		if (stub != null)
 			return stub.getSubArgumentsList();
 
-		List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>();
+		List<PerlSubArgument> arguments = getPerlSubArgumentsFromSignature();
 
-		// todo add stubs reading here
+		if (arguments == null)
+		{
+			arguments = getPerlSubArgumentsFromBody();
+		}
+
+		return arguments;
+	}
+
+	@Nullable
+	protected List<PerlSubArgument> getPerlSubArgumentsFromSignature()
+	{
+		List<PerlSubArgument> arguments = null;
+
+		if (this.getSubSignatureContent() != null)
+		{
+			arguments = new ArrayList<PerlSubArgument>();
+			//noinspection unchecked
+
+			PsiElement signatureElement = this.getSubSignatureContent().getFirstChild();
+
+			while (signatureElement != null)
+			{
+				if (signatureElement instanceof PerlVariableDeclarationWrapper)
+				{
+					PerlVariable variable = ((PerlVariableDeclarationWrapper) signatureElement).getVariable();
+					if (variable != null)
+					{
+						arguments.add(new PerlSubArgument(
+								variable.getActualType(),
+								variable.getName(),
+								"",
+								false
+						));
+					}
+				}
+				else if (signatureElement instanceof PsiPerlSubSignatureElementIgnore)
+				{
+					arguments.add(new PerlSubArgument(
+							PerlVariableType.SCALAR,
+							"",
+							"",
+							signatureElement.getFirstChild() != signatureElement.getLastChild()    // has elements inside, means optional
+					));
+				}
+				else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN)
+				{
+					// setting last element as optional
+					arguments.get(arguments.size() - 1).setOptional(true);
+				}
+
+				signatureElement = signatureElement.getNextSibling();
+			}
+		}
+
+		return arguments;
+	}
+
+
+	@NotNull
+	protected List<PerlSubArgument> getPerlSubArgumentsFromBody()
+	{
+		List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>();
 
 		PsiPerlBlock subBlock = getBlock();
 
 		if (subBlock.isValid())
 		{
-
 			for (PsiElement statement : subBlock.getChildren())
 			{
 				PsiPerlAssignExpr assignExpression = PsiTreeUtil.findChildOfType(statement, PsiPerlAssignExpr.class);
@@ -152,7 +238,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 									PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
 									if (variableNameElement != null)
-										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
+										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, false));
 								}
 								break;
 
@@ -166,7 +252,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubBaseMixin<PerlSu
 									PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
 									if (variableNameElement != null)
-										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, true));
+										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, false));
 								}
 							}
 						}
