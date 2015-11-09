@@ -48,6 +48,10 @@ public class PerlIndentProcessor implements PerlElementTypes
 			PerlParserDefinition.FILE
 	);
 
+	public static final TokenSet UNINDENTED_TOKENS = TokenSet.create(
+			COMMA_SEQUENCE_EXPR,
+			CALL_ARGUMENTS
+	);
 
 	/**
 	 * Tokens that must be suppressed for indentation
@@ -89,7 +93,7 @@ public class PerlIndentProcessor implements PerlElementTypes
 			return Indent.getAbsoluteNoneIndent();
 		}
 
-		if (nodeType == COMMA_SEQUENCE_EXPR)
+		if (UNINDENTED_TOKENS.contains(nodeType))
 		{
 			return Indent.getNoneIndent();
 		}
