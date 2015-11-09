@@ -42,7 +42,7 @@
         <li><code>return</code> is now parsed as a keyword</li>
         <li>Method::Signature
         <ul>
-        <li>Implemented parsing for method and func constructions as implemented in the Method::Signature::Simple</li>
+        <li>Implemented parsing for <code>method</code> and <code>func</code> constructions as documented in the <code>Method::Signature::Simple</code></li>
         </ul>
         </li>
       </ul>
