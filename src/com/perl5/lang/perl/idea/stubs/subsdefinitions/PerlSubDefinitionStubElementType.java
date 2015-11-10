@@ -50,7 +50,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public PerlSubDefinitionStub createStub(@NotNull PsiPerlSubDefinition psi, StubElement parentStub)
 	{
-		return new PerlSubDefinitionStubImpl(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getSubArgumentsList(), psi.isMethod(), psi.getSubAnnotations());
+		return createStubElement(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getSubArgumentsList(), psi.getSubAnnotations(), psi.isMethod());
 	}
 
 	@Override
@@ -82,7 +82,9 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		List<PerlSubArgument> arguments = stub.getSubArgumentsList();
 		dataStream.writeInt(arguments.size());
 		for (PerlSubArgument argument : arguments)
+		{
 			argument.serialize(dataStream);
+		}
 
 		stub.getSubAnnotations().serialize(dataStream);
 
@@ -93,19 +95,29 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	@Override
 	public PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
+		//noinspection ConstantConditions
 		String packageName = dataStream.readName().toString();
+		//noinspection ConstantConditions
 		String functionName = dataStream.readName().toString();
 		int argumentsNumber = dataStream.readInt();
 
 		List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>(argumentsNumber);
 
 		for (int i = 0; i < argumentsNumber; i++)
+		{
 			arguments.add(PerlSubArgument.deserialize(dataStream));
+		}
 
 		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
 
 		boolean isMethod = dataStream.readBoolean();
 
-		return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, isMethod, annotations);
+		return createStubElement(parentStub, packageName, functionName, arguments, annotations, isMethod);
+	}
+
+	@NotNull
+	protected PerlSubDefinitionStub createStubElement(StubElement parentStub, String packageName, String functionName, List<PerlSubArgument> arguments, PerlSubAnnotations annotations, boolean isMethod)
+	{
+		return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, isMethod, annotations, this);
 	}
 }

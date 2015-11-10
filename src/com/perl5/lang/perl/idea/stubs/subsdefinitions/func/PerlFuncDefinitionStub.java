@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.constants;
+package com.perl5.lang.perl.idea.stubs.subsdefinitions.func;
 
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlConstant;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 
 /**
- * Created by hurricup on 03.08.2015.
+ * Created by hurricup on 10.11.2015.
  */
-public interface PerlConstantStub extends StubElement<PerlConstant>
+public interface PerlFuncDefinitionStub extends PerlSubDefinitionStub
 {
-	public String getPackageName();
-
-	public String getName();
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.constants;
+package com.perl5.lang.perl.idea.stubs.subsdefinitions.constants;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;

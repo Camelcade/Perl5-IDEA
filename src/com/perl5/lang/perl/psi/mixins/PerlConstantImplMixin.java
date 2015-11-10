@@ -26,7 +26,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
-import com.perl5.lang.perl.idea.stubs.constants.PerlConstantStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStub;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlConstantName;
 import com.perl5.lang.perl.util.PerlPackageUtil;

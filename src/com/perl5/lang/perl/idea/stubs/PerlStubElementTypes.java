@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.stubs.constants.PerlConstantStubElementType;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStubElementType;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlDoExprElementType;
@@ -25,6 +25,8 @@ import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRequireExprElementType
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.func.PerlFuncDefinitionStubElementType;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubElementType;
 
 /**
@@ -32,8 +34,10 @@ import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubElementType;
  */
 public interface PerlStubElementTypes
 {
-	IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
 	IStubElementType SUB_DECLARATION = new PerlSubDeclarationStubElementType("SUB_DECLARATION");
+	IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
+	IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionStubElementType("FUNC_DEFINITION");
+	IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionStubElementType("METHOD_DEFINITION");
 
 	IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("NAMESPACE");
 

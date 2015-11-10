@@ -262,7 +262,7 @@
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlArraysStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlHashesStubIndex"/>
 
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.constants.PerlConstantsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantsStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex"/>
 
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex"/>

@@ -46,6 +46,12 @@ public class PerlElementTypeFactory
 	{
 		if (name.equals("SUB_DEFINITION"))
 			return PerlStubElementTypes.SUB_DEFINITION;
+		else if (name.equals("METHOD_DEFINITION"))
+			return PerlStubElementTypes.METHOD_DEFINITION;
+		else if (name.equals("FUNC_DEFINITION"))
+			return PerlStubElementTypes.FUNC_DEFINITION;
+		else if (name.equals("SUB_DECLARATION"))
+			return PerlStubElementTypes.SUB_DECLARATION;
 		else if (name.equals("SUB_DECLARATION"))
 			return PerlStubElementTypes.SUB_DECLARATION;
 		else if (name.equals("GLOB_VARIABLE"))

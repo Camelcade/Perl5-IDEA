@@ -312,7 +312,7 @@ limitations under the License.
 
     implements("constant_name")="com.perl5.lang.perl.psi.PerlConstant"
     mixin("constant_name")="com.perl5.lang.perl.psi.mixins.PerlConstantImplMixin"
-    stubClass("constant_name")="com.perl5.lang.perl.idea.stubs.constants.PerlConstantStub"
+    stubClass("constant_name")="com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStub"
 
     extends("nested_call")=sub_call_expr
 
@@ -367,6 +367,16 @@ limitations under the License.
     stubClass("namespace_definition")="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
     implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinition"
+
+	extends("method_definition|func_definition")=sub_definition
+
+    stubClass("method_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub"
+    mixin("method_definition")="com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin"
+    implements("method_definition")="com.perl5.lang.perl.psi.PerlMethodDefinition"
+
+    stubClass("func_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.func.PerlFuncDefinitionStub"
+    mixin("func_definition")="com.perl5.lang.perl.psi.mixins.PerlFuncDefinitionImplMixin"
+    implements("func_definition")="com.perl5.lang.perl.psi.PerlFuncDefinition"
 
     stubClass("sub_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.mixins.PerlSubDefinitionImplMixin"
@@ -1108,12 +1118,12 @@ private semicolon_any ::= SEMICOLON | EMBED_MARKER_SEMICOLON
 /********************************************** Extensions for Method::Signatures *************************************/
 private method_signatures_extension ::=
 	// here we may add check if extension is enabled in settings
-	method_compound
-	| func_compound
+	method_definition
+	| func_definition
 
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_compound ::= <<checkAndConvertIdentifier "method" RESERVED_SUB>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
-func_compound ::= <<checkAndConvertIdentifier "func" RESERVED_SUB>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
+method_definition ::= <<checkAndConvertIdentifier "method" RESERVED_SUB>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
+func_definition ::= <<checkAndConvertIdentifier "func" RESERVED_SUB>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= LEFT_PAREN method_signature_content RIGHT_PAREN {pin=1}

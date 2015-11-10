@@ -14,31 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.constants;
+package com.perl5.lang.perl.idea.stubs.subsdefinitions.constants;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
-import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlConstant;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 03.08.2015.
  */
-public class PerlConstantsStubIndex extends StringStubIndexExtension<PerlConstant>
+public interface PerlConstantStub extends StubElement<PerlConstant>
 {
-	public static final int VERSION = 4;
-	public static final StubIndexKey<String, PerlConstant> KEY = StubIndexKey.createIndexKey("perl.constant");
+	public String getPackageName();
 
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
-
-	@NotNull
-	@Override
-	public StubIndexKey<String, PerlConstant> getKey()
-	{
-		return KEY;
-	}
+	public String getName();
 }

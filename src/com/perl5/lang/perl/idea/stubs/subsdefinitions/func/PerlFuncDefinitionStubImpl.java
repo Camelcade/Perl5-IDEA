@@ -14,37 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.constants;
+package com.perl5.lang.perl.idea.stubs.subsdefinitions.func;
 
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlConstant;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubImpl;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+
+import java.util.List;
 
 /**
- * Created by hurricup on 03.08.2015.
+ * Created by hurricup on 10.11.2015.
  */
-public class PerlConstantStubImpl extends StubBase<PerlConstant> implements PerlConstantStub
+public class PerlFuncDefinitionStubImpl extends PerlSubDefinitionStubImpl implements PerlFuncDefinitionStub
 {
-	private final String myPackageName;
-	private final String myName;
-
-	public PerlConstantStubImpl(final StubElement parent, IStubElementType stubElementType, final String packageName, final String name)
+	public PerlFuncDefinitionStubImpl(StubElement parent, String packageName, String subName, List<PerlSubArgument> arguments, PerlSubAnnotations annotations, IStubElementType elementType)
 	{
-		super(parent, stubElementType);
-		myPackageName = packageName;
-		myName = name;
-	}
-
-	@Override
-	public String getPackageName()
-	{
-		return myPackageName;
-	}
-
-	@Override
-	public String getName()
-	{
-		return myName;
+		super(parent, packageName, subName, arguments, false, annotations, elementType);
 	}
 }

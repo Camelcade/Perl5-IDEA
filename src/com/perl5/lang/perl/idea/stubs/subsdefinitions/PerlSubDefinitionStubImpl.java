@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -36,9 +38,9 @@ public class PerlSubDefinitionStubImpl extends StubBase<PsiPerlSubDefinition> im
 	private final boolean isMethod;
 	private final PerlSubAnnotations myAnnotations;
 
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String subName, List<PerlSubArgument> arguments, boolean isMethod, PerlSubAnnotations annotations)
+	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String subName, List<PerlSubArgument> arguments, boolean isMethod, PerlSubAnnotations annotations, IStubElementType elementType)
 	{
-		super(parent, PerlStubElementTypes.SUB_DEFINITION);
+		super(parent, elementType);
 		this.packageName = packageName;
 		this.subName = subName;
 		myArguments = arguments;
