@@ -1851,6 +1851,7 @@ public class PerlLexer extends PerlLexerGenerated
 			else if (tokenType == SIGIL_SCALAR)
 			{
 //				if( getNextCharacter() == '!') fixme this is really lame, because $$. is valid operation but won't work here
+				// fixme this is fires badly in prototypes and signatures like $$
 				if (StringUtil.containsChar(SPECIAL_VARIABLE_NAMES_OPERATORS, getNextCharacter()))
 				{
 					addPreparsedToken(getTokenEnd(), getTokenEnd() + 1, IDENTIFIER);

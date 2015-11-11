@@ -60,6 +60,9 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	// this is a stop quote for nexted strings parsing
 	IElementType extraStopQuote = null;
 
+	// flag allowes special variable names
+	boolean isSpecialVariableNamesAllowed = true;
+
 	Project myProject = getProject();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
@@ -240,5 +243,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		IElementType currentExtraStopQuote = getExtraStopQuote();
 		this.extraStopQuote = extraStopQuote;
 		return currentExtraStopQuote;
+	}
+
+	public boolean isSpecialVariableNamesAllowed()
+	{
+		return isSpecialVariableNamesAllowed;
+	}
+
+	public boolean setSpecialVariableNamesAllowed(boolean specialVariableNamesAllowed)
+	{
+		boolean oldValue = isSpecialVariableNamesAllowed;
+		isSpecialVariableNamesAllowed = specialVariableNamesAllowed;
+		return oldValue;
 	}
 }

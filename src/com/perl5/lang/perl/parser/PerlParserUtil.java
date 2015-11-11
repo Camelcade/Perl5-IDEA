@@ -99,12 +99,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	);
 
 
-	// Following tokens may be a scalar/glob names
-	public static final TokenSet POSSIBLE_VARIABLE_NAME = TokenSet.orSet(
-			CONVERTABLE_TOKENS,
-			SPECIAL_VARIABLE_NAME
-	);
-
 	public static final TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
 			PACKAGE_TOKENS,
 			CONVERTABLE_TOKENS,
@@ -830,7 +824,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 		// $var
-		else if (POSSIBLE_VARIABLE_NAME.contains(currentTokenType))
+		else if (canBeVariableName(currentTokenType, (PerlBuilder) b))
 		{
 			if (currentTokenType == OPERATOR_BITWISE_XOR && CONTROL_VARIABLE_NAMES.contains(nextTokenType)) // branch for $^]
 			{
@@ -864,11 +858,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				mp.collapse(PACKAGE);
 				if (CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(1) == RIGHT_BRACE)
 				{
-					PsiBuilder.Marker mv = b.mark();
-					b.advanceLexer();
-					mv.collapse(VARIABLE_NAME);
-					b.advanceLexer();
-					return true;
+					return convertVariableName(b);
 				}
 				else if (nextTokenType == RIGHT_BRACE)
 				{
@@ -877,17 +867,29 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				}
 			}
 			// ${var}
-			else if (POSSIBLE_VARIABLE_NAME.contains(currentTokenType) && nextTokenType == RIGHT_BRACE)
+			else if (canBeVariableName(currentTokenType, (PerlBuilder) b) && nextTokenType == RIGHT_BRACE)
 			{
-				PsiBuilder.Marker mv = b.mark();
-				b.advanceLexer();
-				mv.collapse(VARIABLE_NAME);
-				b.advanceLexer();
-				return true;
+				return convertVariableName(b);
 			}
 		}
 
 		return false;
+	}
+
+
+	protected static boolean canBeVariableName(IElementType elementType, PerlBuilder b)
+	{
+		return CONVERTABLE_TOKENS.contains(elementType) || b.isSpecialVariableNamesAllowed() && SPECIAL_VARIABLE_NAME.contains(elementType);
+	}
+
+
+	protected static boolean convertVariableName(PsiBuilder b)
+	{
+		PsiBuilder.Marker mv = b.mark();
+		b.advanceLexer();
+		mv.collapse(VARIABLE_NAME);
+		b.advanceLexer();
+		return true;
 	}
 
 	public static boolean parseAmbiguousSigil(PsiBuilder b, int l, IElementType sigilTokenType, IElementType targetTokenType)
@@ -1783,7 +1785,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 
 	/**
-	 * Parses and wraps declaration of scalar variable
+	 * Parses and wraps declaration of scalar variable; NB: special variable names suppressed
 	 *
 	 * @param b Perl builder
 	 * @param l parsing level
@@ -1792,20 +1794,25 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean scalarDeclarationWrapper(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
+		boolean r = false;
+		assert b instanceof PerlBuilder;
+		boolean flagBackup = ((PerlBuilder) b).setSpecialVariableNamesAllowed(false);
+
 		if (PerlParser.scalar_variable(b, l))
 		{
 			m.done(VARIABLE_DECLARATION_WRAPPER);
-			return true;
+			r = true;
 		}
 		else
 		{
 			m.drop();
-			return false;
 		}
+		((PerlBuilder) b).setSpecialVariableNamesAllowed(flagBackup);
+		return r;
 	}
 
 	/**
-	 * Parses and wraps declaration of scalar variable
+	 * Parses and wraps declaration of scalar variable; NB: special variable names suppressed
 	 *
 	 * @param b Perl builder
 	 * @param l parsing level
@@ -1814,20 +1821,25 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean arrayDeclarationWrapper(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
+		boolean r = false;
+		assert b instanceof PerlBuilder;
+		boolean flagBackup = ((PerlBuilder) b).setSpecialVariableNamesAllowed(false);
+
 		if (PerlParser.array_variable(b, l))
 		{
 			m.done(VARIABLE_DECLARATION_WRAPPER);
-			return true;
+			r = true;
 		}
 		else
 		{
 			m.drop();
-			return false;
 		}
+		((PerlBuilder) b).setSpecialVariableNamesAllowed(flagBackup);
+		return r;
 	}
 
 	/**
-	 * Parses and wraps declaration of scalar variable
+	 * Parses and wraps declaration of scalar variable; NB: special variable names suppressed
 	 *
 	 * @param b Perl builder
 	 * @param l parsing level
@@ -1836,17 +1848,21 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean hashDeclarationWrapper(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
+		boolean r = false;
+		assert b instanceof PerlBuilder;
+		boolean flagBackup = ((PerlBuilder) b).setSpecialVariableNamesAllowed(false);
+
 		if (PerlParser.hash_variable(b, l))
 		{
 			m.done(VARIABLE_DECLARATION_WRAPPER);
-			return true;
+			r = true;
 		}
 		else
 		{
 			m.drop();
-			return false;
 		}
+		((PerlBuilder) b).setSpecialVariableNamesAllowed(flagBackup);
+		return r;
 	}
-
 
 }
