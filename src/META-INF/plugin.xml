@@ -40,7 +40,7 @@
         <li>Implemented aligning of arrows in comma sequences</li>
         <li>Implemented identifiers validation (NB: only ASCII allowed atm)</li>
         <li><code>return</code> is now parsed as a keyword</li>
-        <li>Implemented parsing for <code>method</code> and <code>func</code> constructions as documented in the <code>Method::Signature::Simple</code></li>
+        <li>Implemented support for <code>method</code> and <code>func</code> constructions as documented in the <code>Method::Signature::Simple</code></li>
         <li>Implemented parsing for Perl5 native signatures.</li>
       </ul>
       </p>

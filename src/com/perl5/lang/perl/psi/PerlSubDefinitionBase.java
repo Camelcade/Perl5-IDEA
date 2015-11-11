@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -60,4 +61,11 @@ public interface PerlSubDefinitionBase<Stub extends StubElement> extends PerlSub
 	@Nullable
 	List<PerlSubArgument> getPerlSubArgumentsFromSignature();
 
+	/**
+	 * Returns signature container
+	 *
+	 * @return PsiElement or null
+	 */
+	@Nullable
+	PsiElement getSignatureContainer();
 }

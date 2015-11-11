@@ -21,8 +21,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.PsiPerlSubSignatureElementIgnore;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -48,55 +46,39 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubDefinitionBaseIm
 		super(stub, nodeType);
 	}
 
-	@Nullable
+
 	@Override
-	public List<PerlSubArgument> getPerlSubArgumentsFromSignature()
+	protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments)
 	{
-		List<PerlSubArgument> arguments = null;
-
-		if (this.getSubSignatureContent() != null)
+		if (!super.processSignatureElement(signatureElement, arguments))
 		{
-			arguments = new ArrayList<PerlSubArgument>();
-			//noinspection unchecked
-
-			PsiElement signatureElement = this.getSubSignatureContent().getFirstChild();
-
-			while (signatureElement != null)
+			if (signatureElement instanceof PsiPerlSubSignatureElementIgnore)
 			{
-				if (signatureElement instanceof PerlVariableDeclarationWrapper)
-				{
-					PerlVariable variable = ((PerlVariableDeclarationWrapper) signatureElement).getVariable();
-					if (variable != null)
-					{
-						arguments.add(new PerlSubArgument(
-								variable.getActualType(),
-								variable.getName(),
-								"",
-								false
-						));
-					}
-				}
-				else if (signatureElement instanceof PsiPerlSubSignatureElementIgnore)
-				{
-					arguments.add(new PerlSubArgument(
-							PerlVariableType.SCALAR,
-							"",
-							"",
-							signatureElement.getFirstChild() != signatureElement.getLastChild()    // has elements inside, means optional
-					));
-				}
-				else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN)
-				{
-					// setting last element as optional
-					arguments.get(arguments.size() - 1).setOptional(true);
-				}
-
-				signatureElement = signatureElement.getNextSibling();
+				arguments.add(new PerlSubArgument(
+						PerlVariableType.SCALAR,
+						"",
+						"",
+						signatureElement.getFirstChild() != signatureElement.getLastChild()    // has elements inside, means optional
+				));
+			}
+			else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN)
+			{
+				// setting last element as optional
+				arguments.get(arguments.size() - 1).setOptional(true);
+			}
+			else
+			{
+				return false;
 			}
 		}
-
-		return arguments;
+		return true;
 	}
 
 
+	@Nullable
+	@Override
+	public PsiElement getSignatureContainer()
+	{
+		return getSubSignatureContent();
+	}
 }

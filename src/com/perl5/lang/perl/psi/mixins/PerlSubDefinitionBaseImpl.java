@@ -24,6 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.SmartList;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -31,6 +32,7 @@ import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -234,4 +236,46 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 		return this.getName() + (args.isEmpty() ? "()" : args);
 	}
 
+	@Nullable
+	@Override
+	public List<PerlSubArgument> getPerlSubArgumentsFromSignature()
+	{
+		List<PerlSubArgument> arguments = null;
+		PsiElement signatureContainer = getSignatureContainer();
+
+		if (signatureContainer != null)
+		{
+			arguments = new ArrayList<PerlSubArgument>();
+			//noinspection unchecked
+
+			PsiElement signatureElement = signatureContainer.getFirstChild();
+
+			while (signatureElement != null)
+			{
+				processSignatureElement(signatureElement, arguments);
+				signatureElement = signatureElement.getNextSibling();
+			}
+		}
+
+		return arguments;
+	}
+
+	protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments)
+	{
+		if (signatureElement instanceof PerlVariableDeclarationWrapper)
+		{
+			PerlVariable variable = ((PerlVariableDeclarationWrapper) signatureElement).getVariable();
+			if (variable != null)
+			{
+				arguments.add(new PerlSubArgument(
+						variable.getActualType(),
+						variable.getName(),
+						"",
+						false
+				));
+			}
+			return true;
+		}
+		return false;
+	}
 }

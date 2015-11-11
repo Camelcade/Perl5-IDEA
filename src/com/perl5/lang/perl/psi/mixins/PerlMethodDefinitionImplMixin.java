@@ -17,10 +17,16 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlMethodDefinition;
+import com.perl5.lang.perl.psi.PsiPerlMethodSignatureInvocant;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,8 +55,41 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 
 	@Nullable
 	@Override
-	public List<PerlSubArgument> getPerlSubArgumentsFromSignature()
+	public PsiElement getSignatureContainer()
 	{
-		return null;
+		return getMethodSignatureContent();
+	}
+
+	@Override
+	protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments)
+	{
+		if (signatureElement instanceof PsiPerlMethodSignatureInvocant)    // explicit invocant
+		{
+			PerlVariable variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable.class);
+			if (variable != null)
+			{
+				arguments.add(new PerlSubArgument(
+						variable.getActualType(),
+						variable.getName(),
+						"",
+						false
+				));
+			}
+		}
+		else if (signatureElement instanceof PerlVariableDeclarationWrapper)
+		{
+			if (arguments.isEmpty()) // implicit invocant
+			{
+				arguments.add(new PerlSubArgument(
+						PerlVariableType.SCALAR,
+						"self",
+						"",    // here we could push context package, but now it's unnecessary
+						false
+				));
+			}
+
+			return super.processSignatureElement(signatureElement, arguments);
+		}
+		return false;
 	}
 }
