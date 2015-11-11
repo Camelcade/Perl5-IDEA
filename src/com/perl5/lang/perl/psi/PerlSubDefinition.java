@@ -17,28 +17,10 @@
 package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDefinition extends PerlSubBase<PerlSubDefinitionStub>, PerlLexicalScope
+public interface PerlSubDefinition extends PerlSubDefinitionBase<PerlSubDefinitionStub>
 {
-
-	/**
-	 * Returns list of accepted arguments
-	 *
-	 * @return list of accepted arguments
-	 */
-	public List<PerlSubArgument> getSubArgumentsList();
-
-	/**
-	 * Returns compiled and parenthesised arguments list
-	 *
-	 * @return String with parenthesised arguments
-	 */
-	public String getSubArgumentsListAsString();
 }

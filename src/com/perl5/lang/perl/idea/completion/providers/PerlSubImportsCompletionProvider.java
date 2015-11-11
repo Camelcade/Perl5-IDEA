@@ -69,10 +69,10 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 
 						if (element == null)
 							LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-											.create(subName)
-											.withTypeText(imported.getKey())
-											.withTailText("(?)")    // fixme here we should have a signature
-											.withIcon(PerlIcons.SUB_GUTTER_ICON)
+									.create(subName)
+									.withTypeText(imported.getKey())
+									.withTailText("(?)")    // fixme here we should have a signature
+									.withIcon(PerlIcons.SUB_GUTTER_ICON)
 							);
 
 						resultSet.addElement(element);
@@ -95,10 +95,10 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 
 									if (element == null)
 										LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-														.create(subName)
-														.withTypeText(imported.getKey())
-														.withTailText("(?)")    // fixme here we should have a signature
-														.withIcon(PerlIcons.SUB_GUTTER_ICON)
+												.create(subName)
+												.withTypeText(imported.getKey())
+												.withTailText("(?)")    // fixme here we should have a signature
+												.withIcon(PerlIcons.SUB_GUTTER_ICON)
 										);
 
 									resultSet.addElement(element);

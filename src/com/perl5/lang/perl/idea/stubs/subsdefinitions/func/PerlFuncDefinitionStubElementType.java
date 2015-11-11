@@ -19,8 +19,7 @@ package com.perl5.lang.perl.idea.stubs.subsdefinitions.func;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStubImpl;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlFuncDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -39,7 +38,7 @@ public class PerlFuncDefinitionStubElementType extends PerlSubDefinitionStubElem
 	}
 
 	@Override
-	public PsiPerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub)
+	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
 		assert stub instanceof PerlFuncDefinitionStub;
 		return new PsiPerlFuncDefinitionImpl((PerlFuncDefinitionStub) stub, this);

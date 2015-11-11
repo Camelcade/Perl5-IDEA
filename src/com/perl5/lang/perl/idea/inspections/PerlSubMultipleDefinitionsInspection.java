@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,8 +37,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 	{
 		return new PerlVisitor()
 		{
-			@Override
-			public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
+			protected void visitSubDefinitionBase(PerlSubDefinitionBase o, String name)
 			{
 				Project project = o.getProject();
 
@@ -45,19 +45,37 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				if (canonicalName != null)
 				{
 					if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
-						if (!"main".equals(o.getPackageName()))
-							registerProblem(holder, o.getNameIdentifier(), "Multiple subs definitions found");
+						if (!PerlPackageUtil.isMain(o.getPackageName()))
+							registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
 
 					for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)))
 						if (target.isLeftSideOfAssignment())
 						{
-							registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with typeglob alias");
+							registerProblem(holder, o.getNameIdentifier(), String.format("%s definition clashes with typeglob alias", name));
 							break;
 						}
 
 					if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 0)
-						registerProblem(holder, o.getNameIdentifier(), "Sub definition clashes with constant definition");
+						registerProblem(holder, o.getNameIdentifier(), String.format("%s definition clashes with constant definition", name));
 				}
+			}
+
+			@Override
+			public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
+			{
+				visitSubDefinitionBase(o, "Sub");
+			}
+
+			@Override
+			public void visitMethodDefinition(@NotNull PsiPerlMethodDefinition o)
+			{
+				visitSubDefinitionBase(o, "Method");
+			}
+
+			@Override
+			public void visitFuncDefinition(@NotNull PsiPerlFuncDefinition o)
+			{
+				visitSubDefinitionBase(o, "Func");
 			}
 
 			@Override

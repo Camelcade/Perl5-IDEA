@@ -237,11 +237,11 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 						result.add(new PerlSubStructureViewElement(item).setImported());
 
 					// definitions
-					Collection<PsiPerlSubDefinition> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
+					Collection<PerlSubDefinitionBase> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
 					if (subDefinitions.size() == 0)
 						subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName);
 
-					for (PerlSubDefinition item : subDefinitions)
+					for (PerlSubDefinitionBase item : subDefinitions)
 						result.add(new PerlSubStructureViewElement(item).setImported());
 
 					// constants
@@ -280,7 +280,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
 					result.add(new PerlSubStructureViewElement(child));
 
-			for (PerlSubDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinition.class))
+			for (PerlSubDefinitionBase child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinitionBase.class))
 				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
 				{
 					implementedMethods.add(child.getName());
@@ -296,8 +296,8 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			for (PsiElement element : PerlMro.getVariants(myElement.getProject(), ((PerlNamespaceDefinition) myElement).getName(), true))
 				if (element instanceof PerlNamedElement && !implementedMethods.contains(((PerlNamedElement) element).getName()))
 				{
-					if (element instanceof PerlSubDefinition)
-						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinition) element).setInherited());
+					if (element instanceof PerlSubDefinitionBase)
+						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionBase) element).setInherited());
 					else if (element instanceof PerlSubDeclaration)
 						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclaration) element).setInherited());
 					else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).isLeftSideOfAssignment() && ((PerlGlobVariable) element).getName() != null)

@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.func.PerlFuncDefinitionStub;
+
 /**
  * Created by hurricup on 10.11.2015.
  */
-public interface PerlFuncDefinition extends PerlSubDefinition
+public interface PerlFuncDefinition extends PerlSubDefinitionBase<PerlFuncDefinitionStub>
 {
 }

@@ -24,9 +24,9 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
@@ -90,15 +90,15 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @param canonicalName canonical function name package::name
 	 * @return Collection of found definitions
 	 */
-	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String canonicalName)
+	public static Collection<PerlSubDefinitionBase> getSubDefinitions(Project project, String canonicalName)
 	{
 		return getSubDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
 	}
 
-	public static Collection<PsiPerlSubDefinition> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
+	public static Collection<PerlSubDefinitionBase> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PsiPerlSubDefinition.class);
+		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionBase.class);
 	}
 
 	/**
@@ -230,8 +230,8 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 				for (ResolveResult resolveResult : ((PerlSubReference) reference).multiResolve(false))
 				{
 					PsiElement targetElement = resolveResult.getElement();
-					if (targetElement instanceof PerlSubDefinition && ((PerlSubDefinition) targetElement).getSubAnnotations().getReturns() != null)
-						return ((PerlSubDefinition) targetElement).getSubAnnotations().getReturns();
+					if (targetElement instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) targetElement).getSubAnnotations().getReturns() != null)
+						return ((PerlSubDefinitionBase) targetElement).getSubAnnotations().getReturns();
 					else if (targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).getSubAnnotations().getReturns() != null)
 						return ((PerlSubDeclaration) targetElement).getSubAnnotations().getReturns();
 				}

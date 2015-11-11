@@ -16,10 +16,12 @@
 
 package com.perl5.lang.perl.idea.formatter.blocks;
 
-import com.intellij.formatting.*;
+import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.SpacingBuilder;
+import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

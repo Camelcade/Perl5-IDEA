@@ -102,17 +102,17 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 						// fixme we should resove subs here and put them in with signatures
 						for (String subName : export)
 							resultSet.addElement(LookupElementBuilder
-											.create(subName)
-											.withIcon(PerlIcons.SUB_GUTTER_ICON)
-											.withTypeText("default", true)
-											.withInsertHandler(USE_OPTION_INSERT_HANDLER)
+									.create(subName)
+									.withIcon(PerlIcons.SUB_GUTTER_ICON)
+									.withTypeText("default", true)
+									.withInsertHandler(USE_OPTION_INSERT_HANDLER)
 							);
 						for (String subName : exportOk)
 							resultSet.addElement(LookupElementBuilder
-											.create(subName)
-											.withIcon(PerlIcons.SUB_GUTTER_ICON)
-											.withTypeText("optional", true)
-											.withInsertHandler(USE_OPTION_INSERT_HANDLER)
+									.create(subName)
+									.withIcon(PerlIcons.SUB_GUTTER_ICON)
+									.withTypeText("optional", true)
+									.withInsertHandler(USE_OPTION_INSERT_HANDLER)
 							);
 					}
 			}

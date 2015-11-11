@@ -39,9 +39,9 @@ public class PerlAnnotationCompletionProvider extends CompletionProvider<Complet
 	{
 		for (String annotation : PerlAnnotations.TOKEN_TYPES.keySet())
 			ANNOTATIONS_LOOKUP_ELEMENTS.add(LookupElementBuilder
-							.create(annotation)
-							.withInsertHandler(PerlAnnotationInsertHandler.INSTANCE)
-							.withIcon(PerlIcons.ANNOTATION_GUTTER_ICON)
+					.create(annotation)
+					.withInsertHandler(PerlAnnotationInsertHandler.INSTANCE)
+					.withIcon(PerlIcons.ANNOTATION_GUTTER_ICON)
 			);
 	}
 

@@ -52,7 +52,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 		assert myElement instanceof PerlSubNameElement;
 
 		PsiElement parent = myElement.getParent();
-		if (parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinition)
+		if (parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinitionBase)
 		{
 			return ResolveResult.EMPTY_ARRAY;
 		}
@@ -163,7 +163,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 							&& !PerlPackageUtil.isUNIVERSAL(packageName)    // don't check for UNIVERSAL::AUTOLOAD
 							&& !(
 							parent instanceof PerlSubDeclaration
-									|| parent instanceof PerlSubDefinition
+									|| parent instanceof PerlSubDefinitionBase
 					))
 					{
 						collectRelatedItems(
@@ -194,7 +194,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 			if (!reference.isDeclared() && element instanceof PerlSubDeclaration)
 				reference.setDeclared();
 
-			if (!reference.isDefined() && element instanceof PerlSubDefinition)
+			if (!reference.isDefined() && element instanceof PerlSubDefinitionBase)
 				reference.setDefined();
 
 			if (!reference.isAliased() && element instanceof PerlGlobVariable)
@@ -208,7 +208,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 
 	public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems, GlobalSearchScope searchScope)
 	{
-		for (PsiPerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope))
+		for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope))
 			if (!target.isEquivalentTo(exclusion))
 				relatedItems.add(target);
 		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope))

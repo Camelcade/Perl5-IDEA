@@ -31,7 +31,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseMixin<PerlSubDeclarationStub> implements PsiPerlSubDeclaration
+public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSubDeclarationStub> implements PsiPerlSubDeclaration
 {
 	public PerlSubDeclarationImplMixin(@NotNull ASTNode node)
 	{

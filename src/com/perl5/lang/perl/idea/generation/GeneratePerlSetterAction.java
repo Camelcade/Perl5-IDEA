@@ -17,8 +17,6 @@
 package com.perl5.lang.perl.idea.generation;
 
 import com.intellij.codeInsight.CodeInsightActionHandler;
-import com.intellij.codeInsight.actions.CodeInsightAction;
-import com.perl5.lang.perl.idea.generation.handlers.GeneratePerlGetterSetterActionHandler;
 import com.perl5.lang.perl.idea.generation.handlers.GeneratePerlSetterActionHandler;
 import org.jetbrains.annotations.NotNull;
 

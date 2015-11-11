@@ -18,15 +18,18 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
-import com.perl5.lang.perl.psi.PerlMethodDefinition;
+import com.perl5.lang.perl.psi.PsiPerlMethodDefinition;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionImplMixin implements PerlMethodDefinition
+public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlMethodDefinitionStub> implements PsiPerlMethodDefinition
 {
 	public PerlMethodDefinitionImplMixin(@NotNull ASTNode node)
 	{
@@ -42,5 +45,12 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionImp
 	public boolean isMethod()
 	{
 		return true;
+	}
+
+	@Nullable
+	@Override
+	public List<PerlSubArgument> getPerlSubArgumentsFromSignature()
+	{
+		return null;
 	}
 }

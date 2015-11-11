@@ -84,12 +84,12 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.before(RESERVED_ELSIF).spaceIf(settings.SPACE_BEFORE_ELSE_KEYWORD)
 				.before(RESERVED_DEFAULT).spaceIf(settings.SPACE_BEFORE_ELSE_KEYWORD)
 
-						// unconditional
+				// unconditional
 				.beforeInside(SEMICOLON, STATEMENT).spaces(0)
 				.before(HEREDOC_END).none()
 				.around(OPERATORS_STR).spaces(1)
 
-						// perl specific
+				// perl specific
 				.after(RESERVED_VARIABLE_DECLARATION).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
 				.around(OPERATOR_COMMA_ARROW).spacing(1, Integer.MAX_VALUE, 0, true, 1)
 				;

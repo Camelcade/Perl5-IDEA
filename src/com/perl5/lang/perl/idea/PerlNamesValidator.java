@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;

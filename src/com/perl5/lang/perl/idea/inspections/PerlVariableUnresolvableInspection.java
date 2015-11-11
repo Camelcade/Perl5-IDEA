@@ -59,7 +59,7 @@ public class PerlVariableUnresolvableInspection extends PerlInspection
 							return;
 						}
 
-					if (PsiTreeUtil.getParentOfType(element, PsiPerlMethodCompound.class) != null && DEFAULT_INVOCANT_NAME.equals(variableNameElement.getName()))
+					if (PsiTreeUtil.getParentOfType(element, PerlMethodDefinition.class) != null && DEFAULT_INVOCANT_NAME.equals(variableNameElement.getName()))
 					{
 						return;
 					}

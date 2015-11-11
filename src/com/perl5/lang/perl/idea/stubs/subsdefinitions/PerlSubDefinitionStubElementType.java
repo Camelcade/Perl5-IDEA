@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PsiPerlSubDefinition>
+public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionBase>
 {
 
 	public PerlSubDefinitionStubElementType(String name)
@@ -42,14 +42,15 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	}
 
 	@Override
-	public PsiPerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub)
+	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
 		return new PsiPerlSubDefinitionImpl(stub, this);
 	}
 
 	@Override
-	public PerlSubDefinitionStub createStub(@NotNull PsiPerlSubDefinition psi, StubElement parentStub)
+	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
 	{
+		//noinspection unchecked
 		return createStubElement(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getSubArgumentsList(), psi.getSubAnnotations(), psi.isMethod());
 	}
 
@@ -116,7 +117,14 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	}
 
 	@NotNull
-	protected PerlSubDefinitionStub createStubElement(StubElement parentStub, String packageName, String functionName, List<PerlSubArgument> arguments, PerlSubAnnotations annotations, boolean isMethod)
+	protected PerlSubDefinitionStub createStubElement(
+			StubElement parentStub,
+			String packageName,
+			String functionName,
+			List<PerlSubArgument> arguments,
+			PerlSubAnnotations annotations,
+			boolean isMethod
+	)
 	{
 		return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, isMethod, annotations, this);
 	}

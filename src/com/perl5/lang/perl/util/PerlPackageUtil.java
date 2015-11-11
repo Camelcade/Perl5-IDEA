@@ -135,7 +135,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 
-
 	/**
 	 * Make canonical package name.
 	 *
@@ -236,7 +235,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	/**
 	 * Processes all global packages names with specific processor
 	 *
-	 * @param scope   search scope
+	 * @param scope     search scope
 	 * @param processor string processor for suitable strings
 	 * @return collection of constants names
 	 */

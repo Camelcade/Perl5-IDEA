@@ -368,8 +368,6 @@ limitations under the License.
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
     implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinition"
 
-	extends("method_definition|func_definition")=sub_definition
-
     stubClass("method_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub"
     mixin("method_definition")="com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin"
     implements("method_definition")="com.perl5.lang.perl.psi.PerlMethodDefinition"
@@ -1122,8 +1120,8 @@ private method_signatures_extension ::=
 	| func_definition
 
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= <<checkAndConvertIdentifier "method" RESERVED_SUB>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
-func_definition ::= <<checkAndConvertIdentifier "func" RESERVED_SUB>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
+method_definition ::= [annotations] <<checkAndConvertIdentifier "method" RESERVED_SUB>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
+func_definition ::= [annotations] <<checkAndConvertIdentifier "func" RESERVED_SUB>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= LEFT_PAREN method_signature_content RIGHT_PAREN {pin=1}

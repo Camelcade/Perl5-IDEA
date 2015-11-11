@@ -23,10 +23,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +59,7 @@ public abstract class GeneratePerlSubActionHandlerBase implements CodeInsightAct
 	protected int getTargetOffset(PsiElement currentElement)
 	{
 		// look for an anchor
-		PsiElement anchor = PsiTreeUtil.getParentOfType(currentElement, PerlSubDefinition.class);
+		PsiElement anchor = PsiTreeUtil.getParentOfType(currentElement, PerlSubDefinitionBase.class);
 		if (anchor == null)
 		{
 			anchor = PsiTreeUtil.getParentOfType(currentElement, PsiPerlStatement.class);

@@ -58,7 +58,7 @@ public class RegexBlock implements PerlElementTypes
 	 *
 	 * @param buffer      Input characters stream
 	 * @param startOffset Start parsing offset
-	 * @param bufferEnd  Buffer last offset
+	 * @param bufferEnd   Buffer last offset
 	 * @param openingChar Opener character
 	 * @return Parsed regex block or null if failed
 	 */

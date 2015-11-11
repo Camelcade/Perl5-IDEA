@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStubElementType;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlDoExprElementType;
@@ -25,6 +24,7 @@ import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRequireExprElementType
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.func.PerlFuncDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubElementType;

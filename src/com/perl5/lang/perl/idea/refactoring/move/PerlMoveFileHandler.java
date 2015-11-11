@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.refactoring.move;
 
-import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VfsUtil;

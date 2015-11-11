@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexAdapter;
-import com.intellij.lexer.FlexLexer;
 
 /**
  * Created by hurricup on 10.10.2015.

@@ -98,7 +98,7 @@ public abstract class PerlMro
 
 		for (String packageName : getLinearISA(project, basePackageName, isSuper))
 		{
-			for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
+			for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
 				if (!methods.containsKey(subDefinition.getSubName()))
 					methods.put(subDefinition.getSubName(), subDefinition);
 			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))

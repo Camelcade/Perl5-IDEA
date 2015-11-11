@@ -23,7 +23,6 @@ import com.intellij.psi.tree.IElementType;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 10.08.2015.

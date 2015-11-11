@@ -364,7 +364,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 * @param b PerlBuilder
 	 * @param l Parsing level
 	 * @return parsing result
-	 *
 	 */
 	public static boolean parseListExpression(PsiBuilder b, int l)
 	{

@@ -38,14 +38,14 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlSubBaseMixin<Stub extends PerlSubBaseStub> extends StubBasedPsiElementBase<Stub> implements PerlSubBase<Stub>
+public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends StubBasedPsiElementBase<Stub> implements PerlSubBase<Stub>
 {
-	public PerlSubBaseMixin(@NotNull ASTNode node)
+	public PerlSubBaseImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	public PerlSubBaseMixin(@NotNull Stub stub, @NotNull IStubElementType nodeType)
+	public PerlSubBaseImpl(@NotNull Stub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}

@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
+
 /**
  * Created by hurricup on 10.11.2015.
  */
-public interface PerlMethodDefinition extends PerlSubDefinition
+public interface PerlMethodDefinition extends PerlSubDefinitionBase<PerlMethodDefinitionStub>
 {
 }

@@ -30,7 +30,6 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

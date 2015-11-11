@@ -18,15 +18,18 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.func.PerlFuncDefinitionStub;
 import com.perl5.lang.perl.psi.PerlFuncDefinition;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlFuncDefinitionImplMixin extends PerlSubDefinitionImplMixin implements PerlFuncDefinition
+public abstract class PerlFuncDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlFuncDefinitionStub> implements PerlFuncDefinition
 {
 	public PerlFuncDefinitionImplMixin(@NotNull ASTNode node)
 	{
@@ -42,5 +45,12 @@ public abstract class PerlFuncDefinitionImplMixin extends PerlSubDefinitionImplM
 	public boolean isMethod()
 	{
 		return false;
+	}
+
+	@Nullable
+	@Override
+	public List<PerlSubArgument> getPerlSubArgumentsFromSignature()
+	{
+		return null;
 	}
 }

@@ -54,7 +54,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 //			packageWithPrefix = packageName + "::" + subPrefix;
 
 		// defined subs
-		for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
+		for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
 			if (!subDefinition.isMethod())
 				resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement(subDefinition));
 

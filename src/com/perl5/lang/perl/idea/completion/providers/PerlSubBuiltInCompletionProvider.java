@@ -40,9 +40,9 @@ public class PerlSubBuiltInCompletionProvider extends CompletionProvider<Complet
 	{
 		for (String subName : PerlSubUtil.BUILT_IN)
 			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-							.create(subName)
-							.withIcon(PerlIcons.SUB_GUTTER_ICON)
-							.withBoldness(true)
+					.create(subName)
+					.withIcon(PerlIcons.SUB_GUTTER_ICON)
+					.withBoldness(true)
 			);
 	}
 

@@ -77,9 +77,9 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 
 					if (element == null)
 						SCALAR_LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-										.create(name)
-										.withTypeText(imported.getKey())
-										.withIcon(PerlIcons.SCALAR_GUTTER_ICON)
+								.create(name)
+								.withTypeText(imported.getKey())
+								.withIcon(PerlIcons.SCALAR_GUTTER_ICON)
 						);
 
 					resultSet.addElement(element);
@@ -93,9 +93,9 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 
 					if (element == null)
 						ARRAY_LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-										.create(name)
-										.withTypeText(imported.getKey())
-										.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
+								.create(name)
+								.withTypeText(imported.getKey())
+								.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
 						);
 
 					resultSet.addElement(element);
@@ -109,9 +109,9 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 
 					if (element == null)
 						HASH_LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-										.create(name)
-										.withTypeText(imported.getKey())
-										.withIcon(PerlIcons.HASH_GUTTER_ICON)
+								.create(name)
+								.withTypeText(imported.getKey())
+								.withIcon(PerlIcons.HASH_GUTTER_ICON)
 						);
 
 					resultSet.addElement(element);

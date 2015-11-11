@@ -40,15 +40,15 @@ public class MojoliciousCompletionProvider extends CompletionProvider<Completion
 	{
 		for (String subName : MojoliciousSubUtil.MOJO_DEFAULT_HELPERS)
 			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-							.create(subName)
-							.withIcon(PerlIcons.MOJO_FILE)
-							.withBoldness(true)
+					.create(subName)
+					.withIcon(PerlIcons.MOJO_FILE)
+					.withBoldness(true)
 			);
 		for (String subName : MojoliciousSubUtil.MOJO_TAG_HELPERS)
 			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-							.create(subName)
-							.withIcon(PerlIcons.MOJO_FILE)
-							.withBoldness(true)
+					.create(subName)
+					.withIcon(PerlIcons.MOJO_FILE)
+					.withBoldness(true)
 			);
 	}
 

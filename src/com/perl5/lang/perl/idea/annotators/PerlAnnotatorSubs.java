@@ -37,7 +37,7 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 			PsiElement parent = element.getParent();
 			if (parent instanceof PsiPerlSubDeclaration)
 				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
-			else if (parent instanceof PsiPerlSubDefinition)
+			else if (parent instanceof PerlSubDefinitionBase)
 				if ("AUTOLOAD".equals(((PerlSubNameElement) element).getName()))
 					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
 				else

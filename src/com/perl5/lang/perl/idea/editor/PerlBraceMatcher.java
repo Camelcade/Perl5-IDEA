@@ -73,7 +73,7 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 
 			if (blockContainer != null)
 			{
-				if (blockContainer instanceof PsiPerlSubDefinition
+				if (blockContainer instanceof PerlSubDefinitionBase
 						|| blockContainer instanceof PsiPerlForCompound
 						|| blockContainer instanceof PsiPerlForeachCompound
 						)

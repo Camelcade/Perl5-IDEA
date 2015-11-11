@@ -18,12 +18,10 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
 import java.util.regex.Pattern;
 

@@ -22,7 +22,7 @@ import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -57,7 +57,7 @@ public class PerlSubCompletionProviderUtil
 		INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS.remove(canonicalName);
 	}
 
-	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinition subDefinition)
+	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition)
 	{
 		String indexKeyName = subDefinition.getCanonicalName();
 		if (!SUB_DEFINITIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
@@ -129,7 +129,7 @@ public class PerlSubCompletionProviderUtil
 	}
 
 	// fixme dont know why modifying of definition lookup element doesn't work
-	public static LookupElementBuilder getIncompleteSubDefinitionLookupElement(PerlSubDefinition subDefinition, String prefix)
+	public static LookupElementBuilder getIncompleteSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition, String prefix)
 	{
 		String indexKeyName =
 				prefix +
