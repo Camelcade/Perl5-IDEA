@@ -93,7 +93,7 @@ public class PerlElementFactory
 	{
 		PerlFileImpl file = createFile(project, content + " => 42;");
 		PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
-		assert string != null;
+		assert string != null : "While creating bare string from: " + content;
 		return string;
 	}
 
@@ -101,7 +101,7 @@ public class PerlElementFactory
 	{
 		PerlFileImpl file = createFile(project, code + ";");
 		PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
-		assert string != null;
+		assert string != null : "While creating bare string from: " + code;
 		return string;
 	}
 
