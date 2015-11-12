@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.206</version>
+    <version>1.207</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -43,7 +43,7 @@
         <li>Implemented support for <code>method</code> and <code>func</code> constructions as documented in the <code>Method::Signature::Simple</code></li>
         <li>Implemented parsing for Perl5 native signatures.</li>
         <li>Implemented optional quotes automatic insertion/removing, configurable in Code style settings, fixes #135. NB: numeric values are not quoted/unquoted.</li>
-        <li>Implemented optional arrow insertion/removing between hash/array indexes, configurable in Code style settings, fixes #123.</li>
+        <li>Implemented optional arrow (dereference) insertion/removing between hash/array indexes, configurable in Code style settings, fixes #123.</li>
       </ul>
       </p>
 
