@@ -36,7 +36,7 @@ public interface PerlCodeStyleOptionNames
 
 	public static final String SPACE_OPTION_STATEMENT_MODIFIERS = "Statement modifiers";
 
-	public static final String PERL_OPTION_OPTIONAL_QUOTES = "Optional quotes [NYI]";
+	public static final String PERL_OPTION_OPTIONAL_QUOTES = "Optional quotes";
 	public static final String PERL_OPTION_OPTIONAL_PARENTHESES = "Optional parentheses [NYI]";
 	public static final String PERL_OPTION_OPTIONAL_DEREFERENCE = "Optional dereferences [NYI]";
 	public static final String PERL_OPTION_OPTIONAL_SEMI = "Optional semicolons [NYI]";

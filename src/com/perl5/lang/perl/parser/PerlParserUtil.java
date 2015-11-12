@@ -489,6 +489,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.collapse(STRING_CONTENT);
+			m.precede().done(STRING_BARE);
 			return true;
 		}
 		return false;

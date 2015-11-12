@@ -67,28 +67,6 @@ public class PerlElementFactory
 		return (PerlNamespaceElementImpl) def.getNamespaceElement();
 	}
 
-	public static PerlSubNameElement createUserFunction(Project project, String name)
-	{
-		PerlFileImpl file = createFile(project, "sub " + name + ";");
-		PsiPerlSubDeclaration decl = PsiTreeUtil.findChildOfType(file, PsiPerlSubDeclaration.class);
-		assert decl != null;
-		return decl.getSubNameElement();
-	}
-
-	public static PerlVariableNameElement createVariableName(Project project, String name)
-	{
-		PerlFileImpl file = createFile(project, "$" + name + ";");
-		PsiPerlScalarVariable scalar = PsiTreeUtil.findChildOfType(file, PsiPerlScalarVariable.class);
-		assert scalar != null;
-		return scalar.getVariableNameElement();
-	}
-
-	public static PerlHeredocTerminatorElementImpl createHereDocTerminator(Project project, String name)
-	{
-		PerlFileImpl file = createFile(project, "<<'" + name + "';\n" + name + "\n");
-		return PsiTreeUtil.findChildOfType(file, PerlHeredocTerminatorElementImpl.class);
-	}
-
 	public static List<PsiElement> createHereDocElements(Project project, char quoteSymbol, String markerText, String contentText)
 	{
 		PerlFileImpl file = createFile(project,
@@ -109,6 +87,14 @@ public class PerlElementFactory
 		PsiPerlStringSq string = PsiTreeUtil.findChildOfType(file, PsiPerlStringSq.class);
 		assert string != null;
 		return (PerlStringContentElementImpl) string.getFirstChild().getNextSibling();
+	}
+
+	public static PerlString createBareString(Project project, String content)
+	{
+		PerlFileImpl file = createFile(project, content + " => 42;");
+		PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
+		assert string != null;
+		return string;
 	}
 
 	public static PerlString createString(Project project, String code)

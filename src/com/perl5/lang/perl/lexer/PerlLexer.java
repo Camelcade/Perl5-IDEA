@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 public class PerlLexer extends PerlLexerGenerated
 {
 	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_a-zA-Z0-9]*");
+	public static final Pattern BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z0-9]+");
 
 	public static final String STRING_DATA = "__DATA__";
 	public static final int STRING_DATA_LENGTH = STRING_DATA.length();

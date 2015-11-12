@@ -17,10 +17,7 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.ElementManipulator;
-import com.intellij.psi.ElementManipulators;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
@@ -31,6 +28,7 @@ import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -214,4 +212,29 @@ public class PerlPsiUtil
 		// todo handle string contents for require
 	}
 
+	@Nullable
+	public static PsiElement getNextSignificantSibling(PsiElement element)
+	{
+		PsiElement result = element.getNextSibling();
+		while( true )
+		{
+			if( result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace) )
+				break;
+			result = result.getNextSibling();
+		}
+		return result;
+	}
+
+	@Nullable
+	public static PsiElement getPrevSignificantSibling(PsiElement element)
+	{
+		PsiElement result = element.getPrevSibling();
+		while( true )
+		{
+			if( result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace) )
+				break;
+			result = result.getPrevSibling();
+		}
+		return result;
+	}
 }

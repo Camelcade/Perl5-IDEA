@@ -42,6 +42,7 @@
         <li><code>return</code> is now parsed as a keyword</li>
         <li>Implemented support for <code>method</code> and <code>func</code> constructions as documented in the <code>Method::Signature::Simple</code></li>
         <li>Implemented parsing for Perl5 native signatures.</li>
+        <li>Implemented optional quotes automatic insertion/removing, configurable in Code style settings, fixes #135.</li>
       </ul>
       </p>
 
@@ -123,6 +124,7 @@
                             serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
 
 
+        <preFormatProcessor implementation="com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor"/>
         <lang.formatter language="Perl5"
                         implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
         <codeStyleSettingsProvider
