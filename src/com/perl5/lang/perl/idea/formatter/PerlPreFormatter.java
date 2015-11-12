@@ -190,6 +190,58 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		}
 	}
 
+	@Override
+	public void visitHashIndex(@NotNull PsiPerlHashIndex o)
+	{
+		if (!myRange.contains(o.getTextRange()))
+		{
+			return;
+		}
+
+		processDerefExpressionIndex(o);
+		super.visitHashIndex(o);
+	}
+
+	@Override
+	public void visitArrayIndex(@NotNull PsiPerlArrayIndex o)
+	{
+		if (!myRange.contains(o.getTextRange()))
+		{
+			return;
+		}
+		processDerefExpressionIndex(o);
+		super.visitArrayIndex(o);
+	}
+
+	protected void processDerefExpressionIndex(PsiElement o)
+	{
+		PsiElement parent = o.getParent();
+		if (parent instanceof PsiPerlDerefExpr)
+		{
+			if (myPerlSettings.OPTIONAL_DEREFERENCE == FORCE)
+			{
+				PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(o);
+				if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
+				{
+					myInsertionsAfter.add(Couple.of(o, PerlElementFactory.createDereference(myProject)));
+				}
+			}
+			else if (myPerlSettings.OPTIONAL_DEREFERENCE == SUPPRESS)
+			{
+				PsiElement potentialDereference = PerlPsiUtil.getNextSignificantSibling(o);
+				if (potentialDereference != null && potentialDereference.getNode().getElementType() == OPERATOR_DEREFERENCE)
+				{
+					PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(potentialDereference);
+					if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
+					{
+						myRemovals.add(potentialDereference);
+					}
+				}
+			}
+		}
+	}
+
+
 	protected void unquoteString(PerlString o)
 	{
 		myReplacements.add(Couple.of((PsiElement) o, PerlElementFactory.createBareString(myProject, o.getStringContent())));

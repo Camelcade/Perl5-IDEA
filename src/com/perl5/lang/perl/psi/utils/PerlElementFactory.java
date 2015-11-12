@@ -105,6 +105,14 @@ public class PerlElementFactory
 		return string;
 	}
 
+	public static PsiElement createDereference(Project project)
+	{
+		PerlFileImpl file = createFile(project, "$a->{bla};");
+		PerlVariable variable = PsiTreeUtil.findChildOfType(file, PerlVariable.class);
+		assert variable != null : "While creating dereference";
+		return variable.getNextSibling();
+	}
+
 	public static PerlFileImpl createFile(Project project, String text)
 	{
 		String fileName = "file.dummy";
