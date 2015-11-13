@@ -29,6 +29,9 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 	public int OPTIONAL_QUOTES_HEREDOC_OPENER = OptionalConstructions.WHATEVER;
 
 	public int OPTIONAL_DEREFERENCE = OptionalConstructions.WHATEVER;
+	public int OPTIONAL_DEREFERENCE_HASHREF_ELEMENT = OptionalConstructions.WHATEVER;
+	public int OPTIONAL_DEREFERENCE_SIMPLE = OptionalConstructions.WHATEVER;
+
 	public int OPTIONAL_PARENTHESES = OptionalConstructions.WHATEVER;
 	public int OPTIONAL_SEMI = OptionalConstructions.WHATEVER;
 	public boolean SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;
@@ -43,9 +46,16 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 		int WHATEVER = 0x00;
 		int FORCE = 0x01;
 		int SUPPRESS = 0x02;
-		public int[] VALUES = {WHATEVER, FORCE, SUPPRESS};
-		public String[] LABELS = {"Whatever", "Force", "Suppress"};
-		public Object[] OPTIONS = {LABELS, VALUES};
+		int[] VALUES = {WHATEVER, FORCE, SUPPRESS};
+
+		String[] LABELS_DEFAULT = {"Whatever", "Force", "Suppress"};
+		Object[] OPTIONS_DEFAULT = {LABELS_DEFAULT, VALUES};
+
+		String[] LABELS_HASHREF_ELEMENT_STYLE = {"As is", "$$hashref{key}", "$hashref->{key}"};
+		Object[] OPTIONS_HASHREF_ELEMENT = {LABELS_HASHREF_ELEMENT_STYLE, VALUES};
+
+		String[] LABELS_SIMPLE_DEREF_STYLE = {"As is", "@{$reference}", "@$reference"};
+		Object[] OPTIONS_SIMPLE_DEREF_STYLE = {LABELS_SIMPLE_DEREF_STYLE, VALUES};
 	}
 
 }

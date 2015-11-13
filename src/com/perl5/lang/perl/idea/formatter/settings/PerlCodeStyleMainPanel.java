@@ -100,7 +100,7 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel impleme
 		@Override
 		protected void initTables()
 		{
-			initCustomOptions(GROUP_SPACE_AFTER_KEYWORD);
+			initCustomOptions(SPACE_GROUP_AFTER_KEYWORD);
 			super.initTables();
 		}
 	}

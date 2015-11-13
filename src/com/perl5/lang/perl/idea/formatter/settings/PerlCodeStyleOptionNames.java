@@ -21,7 +21,7 @@ package com.perl5.lang.perl.idea.formatter.settings;
  */
 public interface PerlCodeStyleOptionNames
 {
-	String GROUP_SPACE_AFTER_KEYWORD = "After keywords";
+	String SPACE_GROUP_AFTER_KEYWORD = "After keywords";
 
 	String SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD = "Variable declaration";
 	String SPACE_OPTION_COMPOUND_EXPRESSION = "Compound condition or expression";
@@ -34,14 +34,19 @@ public interface PerlCodeStyleOptionNames
 
 	String TAB_PERL_SETTINGS = "Perl5-specific";
 
-	String GROUP_PERL_SETTINGS_OPTIONAL_QUOTES = "Optional quotation";
+	String QUOTATION_GROUP = "Optional quotation";
 
-	String PERL_OPTION_OPTIONAL_QUOTES_BEFORE_ARROW = "String before =>";
-	String PERL_OPTION_OPTIONAL_QUOTES_HASH_INDEX = "Hash index";
-	String PERL_OPTION_OPTIONAL_QUOTES_HEREDOC_OPENER = "Here-doc opener";
+	String QUOTATION_OPTION_BEFORE_ARROW = "String before =>";
+	String QUOTATION_OPTION_HASH_INDEX = "Hash index";
+	String QUOTATION_OPTION_HEREDOC_OPENER = "Here-doc opener [NYI]";
 
-	String GROUP_PERL_SETTINGS_OPTIONAL_ELEMENTS = "Optional syntax";
-	String PERL_OPTION_OPTIONAL_DEREFERENCE = "-> between indexes";
+	String DEREFERENCE_GROUP = "Dereferencing";
+	String DEREFERENCE_OPTION_BETWEEN_INDEXES = "-> between indexes";
+	String DEREFERENCE_OPTION_HASHREF_ELEMENT = "Hashref element [NYI]";
+	String DEREFERENCE_OPTION_SIMPLE = "Scalar dereference [NYI]";
+
+
+	String OPTIONAL_ELEMENTS_GROUP = "Optional syntax";
 	String PERL_OPTION_OPTIONAL_PARENTHESES = "Parentheses [NYI]";
 	String PERL_OPTION_OPTIONAL_SEMI = "Semicolon [NYI]";
 
