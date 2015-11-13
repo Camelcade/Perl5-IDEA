@@ -25,6 +25,9 @@ import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
 public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 {
 	public int OPTIONAL_QUOTES = OptionalConstructions.WHATEVER;
+	public int OPTIONAL_QUOTES_HASH_INDEX = OptionalConstructions.WHATEVER;
+	public int OPTIONAL_QUOTES_HEREDOC_OPENER = OptionalConstructions.WHATEVER;
+
 	public int OPTIONAL_DEREFERENCE = OptionalConstructions.WHATEVER;
 	public int OPTIONAL_PARENTHESES = OptionalConstructions.WHATEVER;
 	public int OPTIONAL_SEMI = OptionalConstructions.WHATEVER;
@@ -44,4 +47,5 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 		public String[] LABELS = {"Whatever", "Force", "Suppress"};
 		public Object[] OPTIONS = {LABELS, VALUES};
 	}
+
 }

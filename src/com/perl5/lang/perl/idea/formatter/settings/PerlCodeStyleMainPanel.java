@@ -17,7 +17,11 @@
 package com.perl5.lang.perl.idea.formatter.settings;
 
 import com.intellij.application.options.TabbedLanguageCodeStylePanel;
+import com.intellij.application.options.codeStyle.CodeStyleSpacesPanel;
+import com.intellij.application.options.codeStyle.WrappingAndBracesPanel;
+import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
 import com.perl5.lang.perl.PerlLanguage;
 
 /**
@@ -33,6 +37,72 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel
 	protected void addSpacesTab(CodeStyleSettings settings)
 	{
 		addTab(new PerlCodeStyleSpacesPanel(settings));
+	}
+
+	@Override
+	protected void addWrappingAndBracesTab(CodeStyleSettings settings)
+	{
+//		super.addWrappingAndBracesTab(settings);
+	}
+
+	@Override
+	protected void addBlankLinesTab(CodeStyleSettings settings)
+	{
+//		super.addBlankLinesTab(settings);
+		addTab(new PerlSpecificCodeStylePanel(settings));
+	}
+
+	protected class PerlSpecificCodeStylePanel extends WrappingAndBracesPanel
+	{
+		public PerlSpecificCodeStylePanel(CodeStyleSettings settings)
+		{
+			super(settings);
+		}
+
+		@Override
+		protected String getTabTitle()
+		{
+			return "Perl5-specific";
+		}
+
+		@Override
+		public Language getDefaultLanguage()
+		{
+			return PerlCodeStyleMainPanel.this.getDefaultLanguage();
+		}
+
+		@Override
+		public LanguageCodeStyleSettingsProvider.SettingsType getSettingsType()
+		{
+			return LanguageCodeStyleSettingsProvider.SettingsType.LANGUAGE_SPECIFIC;
+		}
+	}
+
+	protected class PerlCodeStyleSpacesPanel extends CodeStyleSpacesPanel implements PerlCodeStyleOptionNames
+	{
+		public PerlCodeStyleSpacesPanel(CodeStyleSettings settings)
+		{
+			super(settings);
+		}
+
+		@Override
+		protected boolean shouldHideOptions()
+		{
+			return true;
+		}
+
+		@Override
+		public Language getDefaultLanguage()
+		{
+			return PerlCodeStyleMainPanel.this.getDefaultLanguage();
+		}
+
+		@Override
+		protected void initTables()
+		{
+			initCustomOptions(SPACE_GROUP_AFTER_KEYWORD);
+			super.initTables();
+		}
 	}
 
 }

@@ -38,11 +38,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 	@Override
 	public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType)
 	{
-		if (settingsType == SettingsType.BLANK_LINES_SETTINGS)
-		{
-
-		}
-		else if (settingsType == SettingsType.SPACING_SETTINGS)
+		if (settingsType == SettingsType.SPACING_SETTINGS)
 		{
 			consumer.showStandardOptions(
 					"SPACE_AROUND_ASSIGNMENT_OPERATORS",    // implemented
@@ -81,19 +77,17 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD", SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD, SPACE_GROUP_AFTER_KEYWORD);
 		}
-		else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS)
+		else if (settingsType == SettingsType.LANGUAGE_SPECIFIC)
 		{
 			// fixme this should be in perl-related tab, see #422
-			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", PERL_OPTION_OPTIONAL_QUOTES, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", PERL_OPTION_OPTIONAL_QUOTES_BEFORE_ARROW, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES_HASH_INDEX", PERL_OPTION_OPTIONAL_QUOTES_HASH_INDEX, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES_HEREDOC_OPENER", PERL_OPTION_OPTIONAL_QUOTES_HEREDOC_OPENER, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE", PERL_OPTION_OPTIONAL_DEREFERENCE, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_PARENTHESES", PERL_OPTION_OPTIONAL_PARENTHESES, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_SEMI", PERL_OPTION_OPTIONAL_SEMI, WRAP_GROUP_PERL_SPECIFIC, PerlCodeStyleSettings.OptionalConstructions.OPTIONS);
 
 		}
-//		else if( settingsType == SettingsType.INDENT_SETTINGS ) // fixme seems not invoked
-//		{
-//
-//		}
 	}
 
 	@Override

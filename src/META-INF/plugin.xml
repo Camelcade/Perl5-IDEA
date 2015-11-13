@@ -44,6 +44,7 @@
         <li>Implemented parsing for Perl5 native signatures.</li>
         <li>Implemented optional quotes automatic insertion/removing, configurable in Code style settings, fixes #135. NB: numeric values are not quoted/unquoted.</li>
         <li>Implemented optional arrow (dereference) insertion/removing between hash/array indexes, configurable in Code style settings, fixes #123.</li>
+        <li>Implemented Perl5-specific CodeStyle settings panel, fixes #422</li>
       </ul>
       </p>
 
