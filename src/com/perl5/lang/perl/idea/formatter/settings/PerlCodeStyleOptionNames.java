@@ -21,12 +21,9 @@ package com.perl5.lang.perl.idea.formatter.settings;
  */
 public interface PerlCodeStyleOptionNames
 {
-	String SPACE_GROUP_AFTER_KEYWORD = "After keywords";
-
-	String WRAP_GROUP_PERL_SPECIFIC = "Perl specific";
+	String GROUP_SPACE_AFTER_KEYWORD = "After keywords";
 
 	String SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD = "Variable declaration";
-
 	String SPACE_OPTION_COMPOUND_EXPRESSION = "Compound condition or expression";
 	String SPACE_OPTION_COMPOUND_BLOCK = "Compound block";
 
@@ -35,11 +32,19 @@ public interface PerlCodeStyleOptionNames
 
 	String SPACE_OPTION_STATEMENT_MODIFIERS = "Statement modifiers";
 
-	String PERL_OPTION_OPTIONAL_QUOTES_BEFORE_ARROW = "Optional quotes";
-	String PERL_OPTION_OPTIONAL_QUOTES_HASH_INDEX = "Optional quotes";
-	String PERL_OPTION_OPTIONAL_QUOTES_HEREDOC_OPENER = "Optional quotes";
+	String TAB_PERL_SETTINGS = "Perl5-specific";
 
-	String PERL_OPTION_OPTIONAL_PARENTHESES = "Optional parentheses [NYI]";
-	String PERL_OPTION_OPTIONAL_DEREFERENCE = "Optional dereferences";
-	String PERL_OPTION_OPTIONAL_SEMI = "Optional semicolons [NYI]";
+	String GROUP_PERL_SETTINGS_OPTIONAL_QUOTES = "Optional quotation";
+
+	String PERL_OPTION_OPTIONAL_QUOTES_BEFORE_ARROW = "String before =>";
+	String PERL_OPTION_OPTIONAL_QUOTES_HASH_INDEX = "Hash index";
+	String PERL_OPTION_OPTIONAL_QUOTES_HEREDOC_OPENER = "Here-doc opener";
+
+	String GROUP_PERL_SETTINGS_OPTIONAL_ELEMENTS = "Optional syntax";
+	String PERL_OPTION_OPTIONAL_DEREFERENCE = "-> between indexes";
+	String PERL_OPTION_OPTIONAL_PARENTHESES = "Parentheses [NYI]";
+	String PERL_OPTION_OPTIONAL_SEMI = "Semicolon [NYI]";
+
+
+
 }

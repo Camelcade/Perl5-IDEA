@@ -27,7 +27,7 @@ import com.perl5.lang.perl.PerlLanguage;
 /**
  * Created by hurricup on 06.09.2015.
  */
-public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel
+public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel implements PerlCodeStyleOptionNames
 {
 	public PerlCodeStyleMainPanel(CodeStyleSettings currentSettings, CodeStyleSettings settings)
 	{
@@ -62,7 +62,7 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel
 		@Override
 		protected String getTabTitle()
 		{
-			return "Perl5-specific";
+			return TAB_PERL_SETTINGS;
 		}
 
 		@Override
@@ -78,7 +78,7 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel
 		}
 	}
 
-	protected class PerlCodeStyleSpacesPanel extends CodeStyleSpacesPanel implements PerlCodeStyleOptionNames
+	protected class PerlCodeStyleSpacesPanel extends CodeStyleSpacesPanel
 	{
 		public PerlCodeStyleSpacesPanel(CodeStyleSettings settings)
 		{
@@ -100,7 +100,7 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel
 		@Override
 		protected void initTables()
 		{
-			initCustomOptions(SPACE_GROUP_AFTER_KEYWORD);
+			initCustomOptions(GROUP_SPACE_AFTER_KEYWORD);
 			super.initTables();
 		}
 	}
