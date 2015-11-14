@@ -911,22 +911,26 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		CharSequence openToken = yytext();
 		Matcher m;
-		int newState = LEX_HEREDOC_WAITING;
+		int newState = LEX_HEREDOC_WAITING_QQ;
 
 		if (StringUtil.endsWithChar(openToken, '"'))
 		{
 			m = markerPatternDQ.matcher(openToken);
-			newState = LEX_HEREDOC_WAITING_QQ;
 		}
 		else if (StringUtil.endsWithChar(openToken, '\''))
+		{
 			m = markerPatternSQ.matcher(openToken);
+			newState = LEX_HEREDOC_WAITING;
+		}
 		else if (StringUtil.endsWithChar(openToken, '`'))
 		{
 			m = markerPatternXQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING_QX;
 		}
 		else
+		{
 			m = markerPattern.matcher(openToken);
+		}
 
 		Character nextCharacter = getNextSignificantCharacter();
 		yypushback(openToken.length() - 2);

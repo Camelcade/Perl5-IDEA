@@ -71,6 +71,7 @@
         <li>Improved comma sequence indention, fixes #417</li>
         <li>Fixed formatting for sub definition attributes</li>
         <li>Grep/map/sort blocks and one-statement blocks are not being butified anymore.</li>
+        <li>Here-doc with unquoted opener is now properly treated as QQ here-doc.</li>
       </ul>
       </p>
 
