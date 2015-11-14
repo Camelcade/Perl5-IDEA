@@ -96,6 +96,11 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				myPerlSettings.OPTIONAL_QUOTES_HASH_INDEX == FORCE && isHashIndexKey(o);
 	}
 
+	protected boolean isSimpleScalarCast(PsiPerlScalarCastExpr o)
+	{
+		return o.getLastChild() instanceof PsiPerlScalarVariable;
+	}
+
 	protected boolean isStringInHeredocQuotable(PsiPerlStringBare o)
 	{
 		return myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == FORCE && isInHeredocOpener(o);
@@ -244,6 +249,53 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		}
 		processDerefExpressionIndex(o);
 		super.visitArrayIndex(o);
+	}
+
+	@Override
+	public void visitScalarCastExpr(@NotNull PsiPerlScalarCastExpr o)
+	{
+		// fixme this is dumb solution, requires #577
+		PsiElement parent = o.getParent();
+		if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS &&
+				(parent instanceof PsiPerlScalarArrayElement || parent instanceof PsiPerlScalarHashElement) &&
+				isSimpleScalarCast(o)
+				)
+		{
+			myRemovals.add(o.getFirstChild());
+			myInsertionsAfter.add(Couple.of(o.getLastChild(), PerlElementFactory.createDereference(myProject)));
+		}
+		super.visitScalarCastExpr(o);
+	}
+
+	@Override
+	public void visitDerefExpr(@NotNull PsiPerlDerefExpr o)
+	{
+		if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == FORCE)
+		{
+			PsiElement scalarVariableElement = o.getFirstChild();
+			if (scalarVariableElement instanceof PsiPerlScalarVariable)
+			{
+				PsiElement derefElement = PerlPsiUtil.getNextSignificantSibling(scalarVariableElement);
+				if (derefElement != null && derefElement.getNode().getElementType() == OPERATOR_DEREFERENCE)
+				{
+					PsiElement probableIndexElement = PerlPsiUtil.getNextSignificantSibling(derefElement);
+
+					if (probableIndexElement instanceof PsiPerlHashIndex || probableIndexElement instanceof PsiPerlArrayIndex)
+					{
+						PsiElement sigilElement = scalarVariableElement.getFirstChild();
+						if (sigilElement != null && sigilElement.getNode().getElementType() == SIGIL_SCALAR)
+						{
+							// fixme this is a pretty dumb solution, code become normal only after reparsing.
+							// But replacing element is more complicated and involves index itself, which can be altered later
+							// see the #577
+							myRemovals.add(derefElement);
+							myInsertionsAfter.add(Couple.of(sigilElement, sigilElement.copy()));
+						}
+					}
+				}
+			}
+		}
+		super.visitDerefExpr(o);
 	}
 
 	protected void processDerefExpressionIndex(PsiElement o)

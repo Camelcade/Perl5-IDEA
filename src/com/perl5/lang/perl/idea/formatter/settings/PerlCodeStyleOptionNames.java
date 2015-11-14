@@ -42,7 +42,7 @@ public interface PerlCodeStyleOptionNames
 
 	String DEREFERENCE_GROUP = "Dereferencing";
 	String DEREFERENCE_OPTION_BETWEEN_INDEXES = "-> between indexes";
-	String DEREFERENCE_OPTION_HASHREF_ELEMENT = "Hashref element [NYI]";
+	String DEREFERENCE_OPTION_HASHREF_ELEMENT = "Hashref element";
 	String DEREFERENCE_OPTION_SIMPLE = "Scalar dereference [NYI]";
 
 
