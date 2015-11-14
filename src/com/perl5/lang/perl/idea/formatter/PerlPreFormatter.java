@@ -56,12 +56,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		myPerlSettings = mySettings.getCustomSettings(PerlCodeStyleSettings.class);
 	}
 
-	// this should be probably in PerlString itself
-	protected static boolean isStringUnqutable(PerlString o)
-	{
-		return (isStringSimple(o)) && (isHashIndexKey(o) || isCommaArrowAhead(o));
-	}
-
 	protected static boolean isStringSimple(PerlString o)
 	{
 		return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
@@ -69,10 +63,21 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				PerlLexer.BARE_STRING_PATTERN.matcher(o.getStringContent()).matches();
 	}
 
+	protected static boolean isStringSimpleIdentifier(PerlString o)
+	{
+		return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
+				PerlLexer.IDENTIFIER_PATTERN.matcher(o.getStringContent()).matches();
+	}
+
 	protected static boolean isCommaArrowAhead(PsiElement o)
 	{
 		PsiElement nextElement = PerlPsiUtil.getNextSignificantSibling(o);
 		return nextElement != null && nextElement.getNode().getElementType() == OPERATOR_COMMA_ARROW;
+	}
+
+	protected static boolean isInHeredocOpener(PerlString o)
+	{
+		return o.getParent() instanceof PerlHeredocOpener;
 	}
 
 	protected static boolean isHashIndexKey(PsiElement o)
@@ -83,6 +88,30 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		PsiElement nextSibling = o.getNextSibling();
 		return prevSibling != null && prevSibling.getNode().getElementType() == LEFT_BRACE &&
 				nextSibling != null && nextSibling.getNode().getElementType() == RIGHT_BRACE;
+	}
+
+	protected boolean isStringQuotable(PsiPerlStringBare o)
+	{
+		return myPerlSettings.OPTIONAL_QUOTES == FORCE && isCommaArrowAhead(o) ||
+				myPerlSettings.OPTIONAL_QUOTES_HASH_INDEX == FORCE && isHashIndexKey(o);
+	}
+
+	protected boolean isStringInHeredocQuotable(PsiPerlStringBare o)
+	{
+		return myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == FORCE && isInHeredocOpener(o);
+	}
+
+	protected boolean isStringUnqutable(PerlString o)
+	{
+		return isStringSimple(o) && (
+				isHashIndexKey(o) && myPerlSettings.OPTIONAL_QUOTES_HASH_INDEX == SUPPRESS ||
+						isCommaArrowAhead(o) && myPerlSettings.OPTIONAL_QUOTES == SUPPRESS)
+				;
+	}
+
+	protected boolean isStringInHeredocUnquotable(PerlString o)
+	{
+		return isStringSimpleIdentifier(o) && isInHeredocOpener(o) && myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == SUPPRESS;
 	}
 
 	public TextRange process(PsiElement element, TextRange range)
@@ -146,7 +175,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		{
 			return;
 		}
-		if (myPerlSettings.OPTIONAL_QUOTES == SUPPRESS && isStringUnqutable(o))
+		if (isStringUnqutable(o) || isStringInHeredocUnquotable(o))
 		{
 			unquoteString(o);
 		}
@@ -163,7 +192,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		{
 			return;
 		}
-		if (myPerlSettings.OPTIONAL_QUOTES == SUPPRESS && isStringUnqutable(o))
+		if (isStringUnqutable(o))
 		{
 			unquoteString(o);
 		}
@@ -180,9 +209,13 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		{
 			return;
 		}
-		if (myPerlSettings.OPTIONAL_QUOTES == FORCE && isStringUnqutable(o))
+		if (isStringQuotable(o))
 		{
 			myReplacements.add(Couple.of((PsiElement) o, PerlElementFactory.createString(myProject, "'" + o.getStringContent() + "'")));
+		}
+		else if (isStringInHeredocQuotable(o))
+		{
+			myReplacements.add(Couple.of((PsiElement) o, PerlElementFactory.createString(myProject, "\"" + o.getStringContent() + "\"")));
 		}
 		else
 		{

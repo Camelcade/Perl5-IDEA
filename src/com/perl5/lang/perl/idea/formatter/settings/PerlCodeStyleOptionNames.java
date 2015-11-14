@@ -38,7 +38,7 @@ public interface PerlCodeStyleOptionNames
 
 	String QUOTATION_OPTION_BEFORE_ARROW = "String before =>";
 	String QUOTATION_OPTION_HASH_INDEX = "Hash index";
-	String QUOTATION_OPTION_HEREDOC_OPENER = "Here-doc opener [NYI]";
+	String QUOTATION_OPTION_HEREDOC_OPENER = "QQ here-doc opener";
 
 	String DEREFERENCE_GROUP = "Dereferencing";
 	String DEREFERENCE_OPTION_BETWEEN_INDEXES = "-> between indexes";
