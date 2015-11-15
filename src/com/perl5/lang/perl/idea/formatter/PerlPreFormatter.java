@@ -24,7 +24,6 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.formatter.operation.*;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -35,7 +34,6 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +119,26 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		return TextRange.create(range.getStartOffset(), range.getEndOffset() + myDelta);
 	}
 
+	protected void removeElement(PsiElement o)
+	{
+		myFormattingOperations.add(new PerlFormattingRemove(o));
+	}
+
+	protected void replaceElement(PsiElement what, PsiElement with)
+	{
+		myFormattingOperations.add(new PerlFormattingReplace(what, with));
+	}
+
+	protected void insertElementAfter(PsiElement element, PsiElement anchor)
+	{
+		myFormattingOperations.add(new PerlFormattingInsertAfter(element, anchor));
+	}
+
+	protected void insertElementBefore(PsiElement element, PsiElement anchor)
+	{
+		myFormattingOperations.add(new PerlFormattingInsertBefore(element, anchor));
+	}
+
 	protected boolean isStringQuotable(PsiPerlStringBare o)
 	{
 		return myPerlSettings.OPTIONAL_QUOTES == FORCE && isCommaArrowAhead(o) ||
@@ -149,7 +167,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	{
 		return isStringSimpleIdentifier(o) && isInHeredocOpener(o) && myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == SUPPRESS;
 	}
-
 
 	@Override
 	public void visitStringDq(@NotNull PsiPerlStringDq o)
@@ -194,11 +211,11 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		}
 		if (isStringQuotable(o))
 		{
-			myFormattingOperations.add(new PerlFormattingReplace(o, PerlElementFactory.createString(myProject, "'" + o.getStringContent() + "'")));
+			replaceElement(o, PerlElementFactory.createString(myProject, "'" + o.getStringContent() + "'"));
 		}
 		else if (isStringInHeredocQuotable(o))
 		{
-			myFormattingOperations.add(new PerlFormattingReplace(o, PerlElementFactory.createString(myProject, "\"" + o.getStringContent() + "\"")));
+			replaceElement(o, PerlElementFactory.createString(myProject, "\"" + o.getStringContent() + "\""));
 		}
 		else
 		{
@@ -229,7 +246,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		super.visitArrayIndex(o);
 	}
 
-/*
 	@Override
 	public void visitScalarCastExpr(@NotNull PsiPerlScalarCastExpr o)
 	{
@@ -239,8 +255,8 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				isSimpleScalarCast(o)
 				)
 		{
-			myRemovals.add(o.getFirstChild());
-			myInsertionsAfter.add(Couple.of(o.getLastChild(), PerlElementFactory.createDereference(myProject)));
+			removeElement(o.getFirstChild());
+			insertElementAfter(PerlElementFactory.createDereference(myProject), o.getLastChild());
 		}
 		super.visitScalarCastExpr(o);
 	}
@@ -263,8 +279,8 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 						PsiElement sigilElement = scalarVariableElement.getFirstChild();
 						if (sigilElement != null && sigilElement.getNode().getElementType() == SIGIL_SCALAR)
 						{
-							myRemovals.add(derefElement);
-							myInsertionsAfter.add(Couple.of(sigilElement, sigilElement.copy()));
+							removeElement(derefElement);
+							insertElementAfter(sigilElement.copy(), sigilElement);
 						}
 					}
 				}
@@ -272,7 +288,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		}
 		super.visitDerefExpr(o);
 	}
-*/
 
 	protected void processDerefExpressionIndex(PsiElement o)
 	{
@@ -284,7 +299,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(o);
 				if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
 				{
-					myFormattingOperations.add(new PerlFormattingInsertAfter(PerlElementFactory.createDereference(myProject), o));
+					insertElementAfter(PerlElementFactory.createDereference(myProject), o);
 				}
 			}
 			else if (myPerlSettings.OPTIONAL_DEREFERENCE == SUPPRESS)
@@ -295,7 +310,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 					PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(potentialDereference);
 					if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
 					{
-						myFormattingOperations.add(new PerlFormattingRemove(potentialDereference));
+						removeElement(potentialDereference);
 					}
 				}
 			}
@@ -336,7 +351,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
 	protected void unquoteString(PerlString o)
 	{
-		myFormattingOperations.add(new PerlFormattingReplace(o, PerlElementFactory.createBareString(myProject, o.getStringContent())));
+		replaceElement(o, PerlElementFactory.createBareString(myProject, o.getStringContent()));
 	}
 
 }

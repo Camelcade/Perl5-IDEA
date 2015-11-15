@@ -46,7 +46,7 @@ public interface PerlCodeStyleOptionNames
 	String DEREFERENCE_OPTION_SIMPLE = "Scalar dereference [NYI]";
 
 	String PARENTHESES_GROUP = "Optional parentheses";
-	String PARENTHESES_OPTION_POSTFIX = "Postfix conditions";
+	String PARENTHESES_OPTION_POSTFIX = "Statement modifiers";
 
 	String OPTIONAL_ELEMENTS_GROUP = "Optional syntax";
 	String PERL_OPTION_OPTIONAL_SEMI = "Semicolon [NYI]";
