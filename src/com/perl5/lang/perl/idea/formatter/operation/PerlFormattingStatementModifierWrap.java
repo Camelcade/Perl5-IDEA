@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.formatter.operation;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;

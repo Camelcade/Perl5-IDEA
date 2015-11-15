@@ -38,16 +38,15 @@ public class PerlVariableReference extends PerlPolyVariantReference
 	{
 		super(element, textRange);
 		assert element instanceof PerlVariableNameElement;
-
-		if (element.getParent() instanceof PerlVariable)
-			myVariable = (PerlVariable) element.getParent();
-		else
-			throw new RuntimeException("Can't be: got myVariable name without a myVariable");
-
 	}
 
 	public PerlVariable getVariable()
 	{
+		if (myVariable == null)
+		{
+			assert myElement.getParent() instanceof PerlVariable;
+			myVariable = (PerlVariable) myElement.getParent();
+		}
 		return myVariable;
 	}
 

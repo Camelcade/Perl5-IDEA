@@ -16,9 +16,12 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.openapi.util.AtomicClearableLazyValue;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
@@ -32,22 +35,32 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlVariableNameElement
 {
-	protected final AtomicNotNullLazyValue<PsiReference[]> myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
-	{
-		@NotNull
-		@Override
-		protected PsiReference[] compute()
-		{
-			if (getParent() instanceof PerlGlobVariable)
-				return PsiReference.EMPTY_ARRAY;
-			else
-				return new PsiReference[]{new PerlVariableReference(PerlVariableNameElementImpl.this, null)};
-		}
-	};
+	protected AtomicClearableLazyValue<PsiReference[]> myReferences;
 
 	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
+		createMyReferences();
+	}
+
+	private void createMyReferences()
+	{
+		myReferences = new AtomicClearableLazyValue<PsiReference[]>()
+		{
+			@NotNull
+			@Override
+			protected PsiReference[] compute()
+			{
+				if (getParent() instanceof PerlGlobVariable)
+				{
+					return PsiReference.EMPTY_ARRAY;
+				}
+				else
+				{
+					return new PsiReference[]{new PerlVariableReference(PerlVariableNameElementImpl.this, null)};
+				}
+			}
+		};
 	}
 
 	@Override
@@ -77,4 +90,10 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		return myReferences.getValue()[0];
 	}
 
+	@Override
+	public void clearCaches()
+	{
+		super.clearCaches();
+		createMyReferences();
+	}
 }
