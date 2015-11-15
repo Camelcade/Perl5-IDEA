@@ -42,9 +42,14 @@
         <li><code>return</code> is now parsed as a keyword</li>
         <li>Implemented support for <code>method</code> and <code>func</code> constructions as documented in the <code>Method::Signature::Simple</code></li>
         <li>Implemented parsing for Perl5 native signatures.</li>
-        <li>Implemented optional quotes automatic insertion/removing, configurable in Code style settings, fixes #135. NB: numeric values are not quoted/unquoted.</li>
-        <li>Implemented optional arrow (dereference) insertion/removing between hash/array indexes, configurable in Code style settings, fixes #123.</li>
+        <li>Code style:
+        <ul>
         <li>Implemented Perl5-specific CodeStyle settings panel, fixes #422</li>
+        <li>Implemented optional quotes automatic insertion/removing, fixes #135. NB: numeric values are not quoted/unquoted.</li>
+        <li>Implemented optional arrow (dereference) insertion/removing between hash/array indexes, fixes #123.</li>
+        <li>Implemented optional parentheses insertion/removing in statement modifiers.</li>
+        </ul>
+        </li>
       </ul>
       </p>
 

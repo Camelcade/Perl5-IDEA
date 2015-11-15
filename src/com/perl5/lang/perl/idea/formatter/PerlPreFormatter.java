@@ -24,11 +24,9 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.idea.formatter.operation.PerlFormattingInsertAfter;
-import com.perl5.lang.perl.idea.formatter.operation.PerlFormattingOperation;
-import com.perl5.lang.perl.idea.formatter.operation.PerlFormattingRemove;
-import com.perl5.lang.perl.idea.formatter.operation.PerlFormattingReplace;
+import com.perl5.lang.perl.idea.formatter.operation.*;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -37,6 +35,7 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,9 +107,9 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				// scan document
 				element.accept(this);
 
-				for (PerlFormattingOperation operation : myFormattingOperations)
+				for (int i = myFormattingOperations.size() - 1; i >= 0; i--)
 				{
-					myDelta += operation.apply();
+					myDelta += myFormattingOperations.get(i).apply();
 				}
 
 			} finally
@@ -118,6 +117,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				manager.commitDocument(document);
 			}
 		}
+
 		return TextRange.create(range.getStartOffset(), range.getEndOffset() + myDelta);
 	}
 
@@ -233,7 +233,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	@Override
 	public void visitScalarCastExpr(@NotNull PsiPerlScalarCastExpr o)
 	{
-		// fixme this is dumb solution, requires #577
 		PsiElement parent = o.getParent();
 		if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS &&
 				(parent instanceof PsiPerlScalarArrayElement || parent instanceof PsiPerlScalarHashElement) &&
@@ -264,9 +263,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 						PsiElement sigilElement = scalarVariableElement.getFirstChild();
 						if (sigilElement != null && sigilElement.getNode().getElementType() == SIGIL_SCALAR)
 						{
-							// fixme this is a pretty dumb solution, code become normal only after reparsing.
-							// But replacing element is more complicated and involves index itself, which can be altered later
-							// see the #577
 							myRemovals.add(derefElement);
 							myInsertionsAfter.add(Couple.of(sigilElement, sigilElement.copy()));
 						}
@@ -326,15 +322,13 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		PsiPerlExpr expression = PsiTreeUtil.getChildOfType(o, PsiPerlExpr.class);
 		if (expression != null)
 		{
-			// fixme this is a bed solution, see #577
 			if (myPerlSettings.OPTIONAL_PARENTHESES == FORCE && !(expression instanceof PsiPerlParenthesisedExpr))
 			{
-				PsiPerlParenthesisedExpr parenthesisedExpression = PerlElementFactory.createParenthesisedExpression(myProject);
-
+				myFormattingOperations.add(new PerlFormattingStatementModifierWrap(o));
 			}
 			else if (myPerlSettings.OPTIONAL_PARENTHESES == SUPPRESS && expression instanceof PsiPerlParenthesisedExpr)
 			{
-
+				myFormattingOperations.add(new PerlFormattingStatementModifierUnwrap(o));
 			}
 		}
 		super.visitStatementModifier(o);
