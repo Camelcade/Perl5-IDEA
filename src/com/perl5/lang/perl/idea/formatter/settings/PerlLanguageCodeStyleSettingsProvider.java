@@ -87,7 +87,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE_HASHREF_ELEMENT", DEREFERENCE_OPTION_HASHREF_ELEMENT, DEREFERENCE_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_HASHREF_ELEMENT);
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE_SIMPLE", DEREFERENCE_OPTION_SIMPLE, DEREFERENCE_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_SIMPLE_DEREF_STYLE);
 
-			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_PARENTHESES", PERL_OPTION_OPTIONAL_PARENTHESES, OPTIONAL_ELEMENTS_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_PARENTHESES", PARENTHESES_OPTION_POSTFIX, PARENTHESES_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
+
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_SEMI", PERL_OPTION_OPTIONAL_SEMI, OPTIONAL_ELEMENTS_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
 
 		}

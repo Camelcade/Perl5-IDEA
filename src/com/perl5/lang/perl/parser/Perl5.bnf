@@ -297,6 +297,8 @@ limitations under the License.
     extends(".*expr")=expr
     name(".*expr")="expression"
 
+	extends(".*statement_modifier")=statement_modifier
+
 	extends(".*_signature_content")=sub_signature_content
 
     extends("heredoc_opener|anon_array|anon_hash|anon_sub")=expr
@@ -550,7 +552,7 @@ private lnr_param ::= <<convertIdentifier LABEL>> | expr // fixme scalar_expr ?
 private goto_param ::= <<convertIdentifier LABEL>> | OPERATOR_BITWISE_AND <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
 
 
-private statement_modifier ::=
+statement_modifier ::=
     if_statement_modifier
     | unless_statement_modifier
     | while_statement_modifier

@@ -113,6 +113,14 @@ public class PerlElementFactory
 		return variable.getNextSibling();
 	}
 
+	public static PsiPerlParenthesisedExpr createParenthesisedExpression(Project project)
+	{
+		PerlFileImpl file = createFile(project, "();");
+		PsiPerlParenthesisedExpr result = PsiTreeUtil.findChildOfType(file, PsiPerlParenthesisedExpr.class);
+		assert result != null : "While creating PsiPerlParenthesisedExpr";
+		return result;
+	}
+
 	public static PerlFileImpl createFile(Project project, String text)
 	{
 		String fileName = "file.dummy";

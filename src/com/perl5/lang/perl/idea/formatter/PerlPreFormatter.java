@@ -24,6 +24,11 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.idea.formatter.operation.PerlFormattingInsertAfter;
+import com.perl5.lang.perl.idea.formatter.operation.PerlFormattingOperation;
+import com.perl5.lang.perl.idea.formatter.operation.PerlFormattingRemove;
+import com.perl5.lang.perl.idea.formatter.operation.PerlFormattingReplace;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -43,10 +48,8 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	protected final Project myProject;
 	protected final CodeStyleSettings mySettings;
 	protected final PerlCodeStyleSettings myPerlSettings;
-	private final List<Couple<PsiElement>> myReplacements = new ArrayList<Couple<PsiElement>>();
-	private final List<PsiElement> myRemovals = new ArrayList<PsiElement>();
-	private final List<Couple<PsiElement>> myInsertionsBefore = new ArrayList<Couple<PsiElement>>();
-	private final List<Couple<PsiElement>> myInsertionsAfter = new ArrayList<Couple<PsiElement>>();
+
+	private final List<PerlFormattingOperation> myFormattingOperations = new ArrayList<PerlFormattingOperation>();
 	protected TextRange myRange;
 
 	public PerlPreFormatter(Project project)
@@ -90,6 +93,34 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				nextSibling != null && nextSibling.getNode().getElementType() == RIGHT_BRACE;
 	}
 
+	public TextRange process(PsiElement element, TextRange range)
+	{
+		myRange = range;
+		final PsiDocumentManager manager = PsiDocumentManager.getInstance(myProject);
+		final Document document = manager.getDocument(element.getContainingFile());
+		int myDelta = 0;
+		if (document != null)
+		{
+			manager.doPostponedOperationsAndUnblockDocument(document);
+
+			try
+			{
+				// scan document
+				element.accept(this);
+
+				for (PerlFormattingOperation operation : myFormattingOperations)
+				{
+					myDelta += operation.apply();
+				}
+
+			} finally
+			{
+				manager.commitDocument(document);
+			}
+		}
+		return TextRange.create(range.getStartOffset(), range.getEndOffset() + myDelta);
+	}
+
 	protected boolean isStringQuotable(PsiPerlStringBare o)
 	{
 		return myPerlSettings.OPTIONAL_QUOTES == FORCE && isCommaArrowAhead(o) ||
@@ -119,59 +150,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		return isStringSimpleIdentifier(o) && isInHeredocOpener(o) && myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == SUPPRESS;
 	}
 
-	public TextRange process(PsiElement element, TextRange range)
-	{
-/*
-		if (!myPyCodeStyleSettings.SPACE_AFTER_NUMBER_SIGN) {
-			return range;
-		}
-*/
-		myRange = range;
-		final PsiDocumentManager manager = PsiDocumentManager.getInstance(myProject);
-		final Document document = manager.getDocument(element.getContainingFile());
-		int myDelta = 0;
-		if (document != null)
-		{
-			manager.doPostponedOperationsAndUnblockDocument(document);
-
-			try
-			{
-				// scan document
-				element.accept(this);
-
-				for (Couple<PsiElement> pair : myReplacements)
-				{
-					PsiElement oldElement = pair.getFirst();
-					PsiElement newElement = pair.getSecond();
-					myDelta += newElement.getNode().getTextLength() - oldElement.getNode().getTextLength();
-					oldElement.replace(newElement);
-				}
-				for (Couple<PsiElement> pair : myInsertionsAfter)
-				{
-					PsiElement anchor = pair.getFirst();
-					PsiElement insertion = pair.getSecond();
-					myDelta += insertion.getNode().getTextLength();
-					anchor.getParent().addAfter(pair.getSecond(), anchor);
-				}
-				for (Couple<PsiElement> pair : myInsertionsBefore)
-				{
-					PsiElement anchor = pair.getFirst();
-					PsiElement insertion = pair.getSecond();
-					myDelta += insertion.getNode().getTextLength();
-					anchor.getParent().addBefore(pair.getSecond(), anchor);
-				}
-				for (PsiElement oldElement : myRemovals)
-				{
-					myDelta -= oldElement.getNode().getTextLength();
-					oldElement.delete();
-				}
-			} finally
-			{
-				manager.commitDocument(document);
-			}
-		}
-		return TextRange.create(range.getStartOffset(), range.getEndOffset() + myDelta);
-	}
 
 	@Override
 	public void visitStringDq(@NotNull PsiPerlStringDq o)
@@ -216,11 +194,11 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		}
 		if (isStringQuotable(o))
 		{
-			myReplacements.add(Couple.of((PsiElement) o, PerlElementFactory.createString(myProject, "'" + o.getStringContent() + "'")));
+			myFormattingOperations.add(new PerlFormattingReplace(o, PerlElementFactory.createString(myProject, "'" + o.getStringContent() + "'")));
 		}
 		else if (isStringInHeredocQuotable(o))
 		{
-			myReplacements.add(Couple.of((PsiElement) o, PerlElementFactory.createString(myProject, "\"" + o.getStringContent() + "\"")));
+			myFormattingOperations.add(new PerlFormattingReplace(o, PerlElementFactory.createString(myProject, "\"" + o.getStringContent() + "\"")));
 		}
 		else
 		{
@@ -251,6 +229,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		super.visitArrayIndex(o);
 	}
 
+/*
 	@Override
 	public void visitScalarCastExpr(@NotNull PsiPerlScalarCastExpr o)
 	{
@@ -297,6 +276,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		}
 		super.visitDerefExpr(o);
 	}
+*/
 
 	protected void processDerefExpressionIndex(PsiElement o)
 	{
@@ -308,7 +288,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(o);
 				if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
 				{
-					myInsertionsAfter.add(Couple.of(o, PerlElementFactory.createDereference(myProject)));
+					myFormattingOperations.add(new PerlFormattingInsertAfter(PerlElementFactory.createDereference(myProject), o));
 				}
 			}
 			else if (myPerlSettings.OPTIONAL_DEREFERENCE == SUPPRESS)
@@ -319,17 +299,50 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 					PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(potentialDereference);
 					if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
 					{
-						myRemovals.add(potentialDereference);
+						myFormattingOperations.add(new PerlFormattingRemove(potentialDereference));
 					}
 				}
 			}
 		}
 	}
 
+	@Override
+	public void visitScalarHashElement(@NotNull PsiPerlScalarHashElement o)
+	{
+		processDerefExpressionIndex(o);
+		super.visitScalarHashElement(o);
+	}
+
+	@Override
+	public void visitScalarArrayElement(@NotNull PsiPerlScalarArrayElement o)
+	{
+		processDerefExpressionIndex(o);
+		super.visitScalarArrayElement(o);
+	}
+
+	@Override
+	public void visitStatementModifier(@NotNull PsiPerlStatementModifier o)
+	{
+		PsiPerlExpr expression = PsiTreeUtil.getChildOfType(o, PsiPerlExpr.class);
+		if (expression != null)
+		{
+			// fixme this is a bed solution, see #577
+			if (myPerlSettings.OPTIONAL_PARENTHESES == FORCE && !(expression instanceof PsiPerlParenthesisedExpr))
+			{
+				PsiPerlParenthesisedExpr parenthesisedExpression = PerlElementFactory.createParenthesisedExpression(myProject);
+
+			}
+			else if (myPerlSettings.OPTIONAL_PARENTHESES == SUPPRESS && expression instanceof PsiPerlParenthesisedExpr)
+			{
+
+			}
+		}
+		super.visitStatementModifier(o);
+	}
 
 	protected void unquoteString(PerlString o)
 	{
-		myReplacements.add(Couple.of((PsiElement) o, PerlElementFactory.createBareString(myProject, o.getStringContent())));
+		myFormattingOperations.add(new PerlFormattingReplace(o, PerlElementFactory.createBareString(myProject, o.getStringContent())));
 	}
 
 }
