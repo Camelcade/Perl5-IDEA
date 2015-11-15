@@ -38,29 +38,35 @@ import java.util.List;
  */
 public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlNamespaceElement
 {
-	protected final AtomicNotNullLazyValue<PsiReference[]> myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
-	{
-		@NotNull
-		@Override
-		protected PsiReference[] compute()
-		{
-			PerlNamespaceElement element = PerlNamespaceElementImpl.this;
-			PsiElement nameSpaceContainer = element.getParent();
-
-			if (nameSpaceContainer instanceof PsiPerlUseStatement
-					|| nameSpaceContainer instanceof PsiPerlRequireExpr
-					)
-				return new PsiReference[]{new PerlNamespaceFileReference(element, null)};
-			else if (nameSpaceContainer instanceof PerlNamespaceDefinition)
-				return new PsiReference[0];
-			else
-				return new PsiReference[]{new PerlNamespaceReference(element, null)};
-		}
-	};
+	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
 
 	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
+		createMyReferences();
+	}
+
+	private void createMyReferences()
+	{
+		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+		{
+			@NotNull
+			@Override
+			protected PsiReference[] compute()
+			{
+				PerlNamespaceElement element = PerlNamespaceElementImpl.this;
+				PsiElement nameSpaceContainer = element.getParent();
+
+				if (nameSpaceContainer instanceof PsiPerlUseStatement
+						|| nameSpaceContainer instanceof PsiPerlRequireExpr
+						)
+					return new PsiReference[]{new PerlNamespaceFileReference(element, null)};
+				else if (nameSpaceContainer instanceof PerlNamespaceDefinition)
+					return new PsiReference[0];
+				else
+					return new PsiReference[]{new PerlNamespaceReference(element, null)};
+			}
+		};
 	}
 
 	@Override
@@ -194,5 +200,12 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	public TextRange getTextRange()
 	{
 		return PerlPackageUtil.getPackageRangeFromOffset(getStartOffset(), getText());
+	}
+
+	@Override
+	public void clearCaches()
+	{
+		super.clearCaches();
+		createMyReferences();
 	}
 }

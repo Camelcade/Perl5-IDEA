@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.util.AtomicClearableLazyValue;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -35,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlVariableNameElement
 {
-	protected AtomicClearableLazyValue<PsiReference[]> myReferences;
+	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
 
 	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -45,7 +44,7 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 
 	private void createMyReferences()
 	{
-		myReferences = new AtomicClearableLazyValue<PsiReference[]>()
+		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
 		{
 			@NotNull
 			@Override

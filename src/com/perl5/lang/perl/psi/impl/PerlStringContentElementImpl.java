@@ -44,22 +44,28 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	);
 	protected Boolean looksLikePath = null;
 	protected Boolean looksLikePackage = null;
-	protected final AtomicNotNullLazyValue<PsiReference[]> myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
-	{
-		@NotNull
-		@Override
-		protected PsiReference[] compute()
-		{
-			if (looksLikePackage())
-				return new PsiReference[]{new PerlNamespaceReference(PerlStringContentElementImpl.this, null)};
-			else
-				return new PsiReference[0];
-		}
-	};
+	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
 
 	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
+		createMyReferences();
+	}
+
+	private void createMyReferences()
+	{
+		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+		{
+			@NotNull
+			@Override
+			protected PsiReference[] compute()
+			{
+				if (looksLikePackage())
+					return new PsiReference[]{new PerlNamespaceReference(PerlStringContentElementImpl.this, null)};
+				else
+					return new PsiReference[0];
+			}
+		};
 	}
 
 	@Override
@@ -112,5 +118,10 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		return null;
 	}
 
-
+	@Override
+	public void clearCaches()
+	{
+		super.clearCaches();
+		createMyReferences();
+	}
 }
