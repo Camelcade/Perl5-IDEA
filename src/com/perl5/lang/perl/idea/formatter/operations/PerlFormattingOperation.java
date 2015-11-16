@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.formatter.operation;
+package com.perl5.lang.perl.idea.formatter.operations;
 
 /**
  * Created by hurricup on 15.11.2015.

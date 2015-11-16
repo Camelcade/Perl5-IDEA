@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.formatter.operation;
+package com.perl5.lang.perl.idea.formatter.operations;
 
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;

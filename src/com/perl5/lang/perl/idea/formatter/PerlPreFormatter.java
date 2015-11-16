@@ -18,14 +18,13 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.idea.formatter.operation.*;
+import com.perl5.lang.perl.idea.formatter.operations.*;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -255,8 +254,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				isSimpleScalarCast(o)
 				)
 		{
-			removeElement(o.getFirstChild());
-			insertElementAfter(PerlElementFactory.createDereference(myProject), o.getLastChild());
+			myFormattingOperations.add(new PerlFormattingScalarDerefExpand(o));
 		}
 		super.visitScalarCastExpr(o);
 	}
@@ -276,12 +274,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
 					if (probableIndexElement instanceof PsiPerlHashIndex || probableIndexElement instanceof PsiPerlArrayIndex)
 					{
-						PsiElement sigilElement = scalarVariableElement.getFirstChild();
-						if (sigilElement != null && sigilElement.getNode().getElementType() == SIGIL_SCALAR)
-						{
-							removeElement(derefElement);
-							insertElementAfter(sigilElement.copy(), sigilElement);
-						}
+						myFormattingOperations.add(new PerlFormattingScalarDerefCollapse((PsiPerlScalarVariable) scalarVariableElement, probableIndexElement));
 					}
 				}
 			}

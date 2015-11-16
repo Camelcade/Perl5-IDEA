@@ -48,7 +48,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 		int SUPPRESS = 0x02;
 		int[] VALUES = {WHATEVER, FORCE, SUPPRESS};
 
-		String[] LABELS_DEFAULT = {"Whatever", "Force", "Suppress"};
+		String[] LABELS_DEFAULT = {"As is", "Force", "Suppress"};
 		Object[] OPTIONS_DEFAULT = {LABELS_DEFAULT, VALUES};
 
 		String[] LABELS_HASHREF_ELEMENT_STYLE = {"As is", "$$hashref{key}", "$hashref->{key}"};

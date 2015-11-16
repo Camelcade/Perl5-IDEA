@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.formatter.operation;
+package com.perl5.lang.perl.idea.formatter.operations;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
