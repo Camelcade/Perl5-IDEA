@@ -645,8 +645,8 @@ private scalar_expr ::= <<parseExpressionLevel 4>>
 // Unary expression argument
 private unary_expr ::= <<parseExpressionLevel 14>>
 
-// used in local declaration
-private immutable_expr ::= <<parseExpressionLevel 22>>
+// used in local declaration, fixme legacy
+private immutable_expr ::= <<parseExpressionLevel 21>>
 
 named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_expr]
 named_list_expr ::= <<parseListExpression>>
