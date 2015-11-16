@@ -285,19 +285,22 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	protected void processDerefExpressionIndex(PsiElement o)
 	{
 		PsiElement parent = o.getParent();
-		if (parent instanceof PsiPerlDerefExpr)
+		PsiElement anchor = o;
+		if (parent instanceof PsiPerlDerefExpr
+				|| (((anchor = parent) instanceof PsiPerlScalarHashElement || anchor instanceof PsiPerlScalarArrayElement) && anchor.getParent() instanceof PsiPerlDerefExpr)
+				)
 		{
 			if (myPerlSettings.OPTIONAL_DEREFERENCE == FORCE)
 			{
-				PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(o);
+				PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(anchor);
 				if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
 				{
-					insertElementAfter(PerlElementFactory.createDereference(myProject), o);
+					insertElementAfter(PerlElementFactory.createDereference(myProject), anchor);
 				}
 			}
 			else if (myPerlSettings.OPTIONAL_DEREFERENCE == SUPPRESS)
 			{
-				PsiElement potentialDereference = PerlPsiUtil.getNextSignificantSibling(o);
+				PsiElement potentialDereference = PerlPsiUtil.getNextSignificantSibling(anchor);
 				if (potentialDereference != null && potentialDereference.getNode().getElementType() == OPERATOR_DEREFERENCE)
 				{
 					PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(potentialDereference);

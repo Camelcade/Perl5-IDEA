@@ -51,7 +51,7 @@ public class PerlFormattingScalarDerefCollapse implements PerlFormattingOperatio
 
 			if (statement != null)
 			{
-				new PerlFormattingReplace(myScalarElement, myIndexElement, statement.getFirstChild(), statement.getFirstChild()).apply();
+				delta = new PerlFormattingReplace(myScalarElement, myIndexElement, statement.getFirstChild(), statement.getFirstChild()).apply();
 			}
 		}
 

@@ -16,7 +16,11 @@
 
 package com.perl5.lang.perl.idea.formatter.operations;
 
-import com.perl5.lang.perl.psi.PsiPerlScalarCastExpr;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 
 /**
  * Created by evstigneev on 16.11.2015.
@@ -24,11 +28,11 @@ import com.perl5.lang.perl.psi.PsiPerlScalarCastExpr;
  */
 public class PerlFormattingScalarDerefExpand implements PerlFormattingOperation
 {
-	protected final PsiPerlScalarCastExpr myScalarCast;
+	protected final PsiPerlScalarCastExpr myScalarDereference;
 
-	public PerlFormattingScalarDerefExpand(PsiPerlScalarCastExpr scalarCast)
+	public PerlFormattingScalarDerefExpand(PsiPerlScalarCastExpr scalarDereference)
 	{
-		myScalarCast = scalarCast;
+		myScalarDereference = scalarDereference;
 	}
 
 	@Override
@@ -36,14 +40,37 @@ public class PerlFormattingScalarDerefExpand implements PerlFormattingOperation
 	{
 		int delta = 0;
 
-		if (myScalarCast.isValid())
+		if (myScalarDereference.isValid())
 		{
+			PsiElement parent = myScalarDereference.getParent();
+			PsiElement scalarVariable = myScalarDereference.getLastChild();
+			if (parent.isValid() &&
+					(parent instanceof PsiPerlScalarHashElement || parent instanceof PsiPerlScalarArrayElement) &&
+					scalarVariable.isValid() &&
+					scalarVariable instanceof PsiPerlScalarVariable)
+			{
+				PsiElement indexElement = parent.getLastChild();
+				if (indexElement.isValid() && (indexElement instanceof PsiPerlHashIndex || indexElement instanceof PsiPerlArrayIndex))
+				{
+					String newCode = scalarVariable.getNode().getText() + "->" + indexElement.getText();
+					PerlFileImpl newFile = PerlElementFactory.createFile(myScalarDereference.getProject(), newCode);
+					PsiPerlDerefExpr derefExpr = PsiTreeUtil.findChildOfType(newFile, PsiPerlDerefExpr.class);
+					if (derefExpr != null)
+					{
+						if (parent.getParent() instanceof PsiPerlDerefExpr)
+						{
+							delta = new PerlFormattingReplace(parent, parent, derefExpr.getFirstChild(), derefExpr.getLastChild()).apply();
+						}
+						else
+						{
+							delta = new PerlFormattingReplace(parent, derefExpr).apply();
+						}
+					}
 
-/*
-			removeElement(o.getFirstChild());
-			insertElementAfter(PerlElementFactory.createDereference(myProject), o.getLastChild());
-*/
+				}
 
+
+			}
 		}
 
 		return delta;
