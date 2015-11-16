@@ -48,7 +48,7 @@
         <li>Implemented optional quotes automatic insertion/removing, fixes #135. NB: numeric values are not quoted/unquoted.</li>
         <li>Implemented optional dereference insertion/removing between hash/array indexes, fixes #123.</li>
         <li>Implemented optional parentheses insertion/removing in statement modifiers.</li>
-        <li>Implemented conversion <code>$var->{key}</code> to <code>$$var{key}</code> and vice versa.</li>
+        <li>Implemented conversion <code>$var->{key}</code> to <code>$$var{key}</code> and vice versa, fixes #575.</li>
         </ul>
         </li>
       </ul>
