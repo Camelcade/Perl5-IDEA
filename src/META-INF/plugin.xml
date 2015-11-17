@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.208</version>
+    <version>1.209</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -49,6 +49,7 @@
         <li>Implemented optional dereference insertion/removing between hash/array indexes, fixes #123.</li>
         <li>Implemented optional parentheses insertion/removing in statement modifiers.</li>
         <li>Implemented conversion <code>$var->{key}</code> to <code>$$var{key}</code> and vice versa.</li>
+        <li>Implemented conversion <code>@$array_ref</code> to <code>@{$array_ref}</code> and vice versa (does not affects hash/array elements or slices).</li>
         </ul>
         </li>
       </ul>

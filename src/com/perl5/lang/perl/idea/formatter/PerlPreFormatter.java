@@ -144,7 +144,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				myPerlSettings.OPTIONAL_QUOTES_HASH_INDEX == FORCE && isHashIndexKey(o);
 	}
 
-	protected boolean isSimpleScalarCast(PsiPerlScalarCastExpr o)
+	protected boolean isSimpleScalarCast(PerlCastExpression o)
 	{
 		return o.getLastChild() instanceof PsiPerlScalarVariable;
 	}
@@ -246,18 +246,88 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	}
 
 	@Override
-	public void visitScalarCastExpr(@NotNull PsiPerlScalarCastExpr o)
+	public void visitPerlCastExpression(@NotNull PerlCastExpression o)
 	{
-		PsiElement parent = o.getParent();
-		if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS &&
-				(parent instanceof PsiPerlScalarArrayElement || parent instanceof PsiPerlScalarHashElement) &&
-				isSimpleScalarCast(o)
-				)
+		if (!myRange.contains(o.getTextRange()))
 		{
-			myFormattingOperations.add(new PerlFormattingScalarDerefExpand(o));
+			return;
 		}
-		super.visitScalarCastExpr(o);
+
+		PsiElement parent = o.getParent();
+		boolean isSimpleScalarCast = isSimpleScalarCast(o);
+
+		if (o instanceof PsiPerlScalarCastExpr)
+		{
+			boolean isInsideHashOrArrayElement = parent instanceof PsiPerlScalarArrayElement || parent instanceof PsiPerlScalarHashElement;
+
+			if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS && isInsideHashOrArrayElement && isSimpleScalarCast)
+			{
+				myFormattingOperations.add(new PerlFormattingScalarDerefExpand((PsiPerlScalarCastExpr) o));
+			}
+			else if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)
+			{
+				unwrapSimpleDereference(o);
+			}
+			else if (isSimpleScalarCast && !isInsideHashOrArrayElement && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == FORCE)    // need to convert $$var to ${$var}
+			{
+				wrapSimpleDereference(o);
+			}
+		}
+		else
+		{
+			if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)    // need to convert ${$var} to $$var
+			{
+				unwrapSimpleDereference(o);
+			}
+			else if (isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == FORCE)    // need to convert $$var to ${$var}
+			{
+				wrapSimpleDereference(o);
+			}
+		}
+		super.visitPerlCastExpression(o);
 	}
+
+	/**
+	 * Wrapping reference into braces
+	 *
+	 * @param o Cast expression
+	 */
+	public void wrapSimpleDereference(PerlCastExpression o)
+	{
+		PsiElement referenceVariable = o.getLastChild();
+		if (referenceVariable instanceof PsiPerlScalarVariable)
+		{
+			myFormattingOperations.add(new PerlFormattingSimpleDereferenceWrap(o, (PsiPerlScalarVariable) referenceVariable));
+		}
+	}
+
+
+	public void unwrapSimpleDereference(PerlCastExpression o)
+	{
+		PsiElement closeBraceElement = o.getLastChild();
+
+		if (closeBraceElement != null && closeBraceElement.getNode().getElementType() == RIGHT_BRACE)
+		{
+			PsiElement statementElement = PerlPsiUtil.getPrevSignificantSibling(closeBraceElement);
+			if (statementElement instanceof PsiPerlStatement)
+			{
+				PsiElement openBraceElement = PerlPsiUtil.getPrevSignificantSibling(statementElement);
+				if (openBraceElement != null && openBraceElement.getNode().getElementType() == LEFT_BRACE)
+				{
+					PsiElement referenceVariable = statementElement.getFirstChild();
+					if (referenceVariable instanceof PsiPerlScalarVariable)
+					{
+						PsiElement optionalSemi = PerlPsiUtil.getPrevSignificantSibling(referenceVariable);
+						if (optionalSemi == null || optionalSemi.getNode().getElementType() == SEMICOLON && optionalSemi.getNextSibling() == null)
+						{
+							myFormattingOperations.add(new PerlFormattingSimpleDereferenceUnwrap(o, (PsiPerlScalarVariable) referenceVariable));
+						}
+					}
+				}
+			}
+		}
+	}
+
 
 	@Override
 	public void visitDerefExpr(@NotNull PsiPerlDerefExpr o)
