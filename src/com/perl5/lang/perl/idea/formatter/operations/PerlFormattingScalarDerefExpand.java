@@ -66,10 +66,7 @@ public class PerlFormattingScalarDerefExpand implements PerlFormattingOperation
 							delta = new PerlFormattingReplace(parent, derefExpr).apply();
 						}
 					}
-
 				}
-
-
 			}
 		}
 

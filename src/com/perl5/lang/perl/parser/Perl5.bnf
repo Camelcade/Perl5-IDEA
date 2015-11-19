@@ -18,7 +18,6 @@ limitations under the License.
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
-
   psiClassPrefix="PsiPerl"
   psiImplClassSuffix="Impl"
   psiPackage="com.perl5.lang.perl.psi"
@@ -299,6 +298,9 @@ limitations under the License.
 
     extends(".*expr")=expr
     name(".*expr")="expression"
+
+	implements(".+_cast_expr")="com.perl5.lang.perl.psi.PerlCastExpression"
+	mixin(".+_cast_expr")="com.perl5.lang.perl.psi.mixins.PerlCastExpressionMixin"
 
 	extends(".*statement_modifier")=statement_modifier
 

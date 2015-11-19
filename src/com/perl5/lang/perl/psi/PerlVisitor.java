@@ -81,4 +81,44 @@ public class PerlVisitor extends PsiPerlVisitor
 	{
 		visitPsiElement(o);
 	}
+
+	public void visitPerlCastExpression(@NotNull PerlCastExpression o)
+	{
+	}
+
+	@Override
+	public void visitScalarCastExpr(@NotNull PsiPerlScalarCastExpr o)
+	{
+		super.visitScalarCastExpr(o);
+		visitPerlCastExpression(o);
+	}
+
+	@Override
+	public void visitArrayCastExpr(@NotNull PsiPerlArrayCastExpr o)
+	{
+		super.visitArrayCastExpr(o);
+		visitPerlCastExpression(o);
+	}
+
+	@Override
+	public void visitHashCastExpr(@NotNull PsiPerlHashCastExpr o)
+	{
+		super.visitHashCastExpr(o);
+		visitPerlCastExpression(o);
+	}
+
+	@Override
+	public void visitCodeCastExpr(@NotNull PsiPerlCodeCastExpr o)
+	{
+		super.visitCodeCastExpr(o);
+		visitPerlCastExpression(o);
+	}
+
+	@Override
+	public void visitGlobCastExpr(@NotNull PsiPerlGlobCastExpr o)
+	{
+		super.visitGlobCastExpr(o);
+		visitPerlCastExpression(o);
+	}
+
 }
