@@ -135,6 +135,9 @@ limitations under the License.
 
 	RESERVED_RETURN="return"
 
+	RESERVED_METHOD="method"
+	RESERVED_FUNC="func"
+
     // Operators
 
     OPERATOR_X="x"
@@ -1122,8 +1125,8 @@ private method_signatures_extension ::=
 	| func_definition
 
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= [annotations] <<checkAndConvertIdentifier "method" RESERVED_SUB>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
-func_definition ::= [annotations] <<checkAndConvertIdentifier "func" RESERVED_SUB>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
+method_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_METHOD>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
+func_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_FUNC>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= LEFT_PAREN method_signature_content RIGHT_PAREN {pin=1}

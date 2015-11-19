@@ -55,7 +55,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			IDENTIFIER,
 			VARIABLE_NAME,
 			SUB,
-			LABEL
+			LABEL,
+			RESERVED_METHOD,
+			RESERVED_FUNC
 	);
 
 
@@ -1760,6 +1762,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 * @param tokenType       target token type
 	 * @return check result
 	 */
+	@Deprecated
 	public static boolean checkAndConvertIdentifier(PsiBuilder b, int l, @NotNull String identifierValue, @NotNull IElementType tokenType)
 	{
 		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && identifierValue.equals(b.getTokenText()))
@@ -1774,11 +1777,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 	/**
 	 * This is a hack, because GrammarKit parses <<someMethod "=" OPERATOR_ASSIGN>> incorrectly
-	 *
+	 * fixme this should be changed to two-face token =/id
 	 * @param b Perl builder
 	 * @param l parsing level
 	 * @return conversion result
 	 */
+	@Deprecated
 	public static boolean checkAssignIdentifier(PsiBuilder b, int l)
 	{
 		return consumeToken(b, OPERATOR_ASSIGN) || checkAndConvertIdentifier(b, l, "=", OPERATOR_ASSIGN);

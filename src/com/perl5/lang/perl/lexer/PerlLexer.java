@@ -404,6 +404,10 @@ public class PerlLexer extends PerlLexerGenerated
 
 		reservedTokenTypes.put("return", RESERVED_RETURN);
 
+		// fixme this should be in some extendable list added using EP
+		reservedTokenTypes.put("method", RESERVED_METHOD);
+		reservedTokenTypes.put("func", RESERVED_FUNC);
+
 		RESERVED_TOKENSET.addAll(reservedTokenTypes.values());
 	}
 
