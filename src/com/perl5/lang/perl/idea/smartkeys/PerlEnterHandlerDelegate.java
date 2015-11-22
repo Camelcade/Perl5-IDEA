@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.editor;
+package com.perl5.lang.perl.idea.smartkeys;
 
 import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegate;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -23,6 +23,7 @@ import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -41,42 +42,41 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 	public Result preprocessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull Ref<Integer> caretOffset, @NotNull Ref<Integer> caretAdvance, @NotNull DataContext dataContext, EditorActionHandler originalHandler)
 	{
 		// here-doc terminator auto-inserting
-
-		int offset = editor.getCaretModel().getOffset();
-		PsiElement heredocOpenerOperator = PerlPsiUtil.searchLineForElementByType(file, offset - 1, PerlElementTypes.OPERATOR_HEREDOC);
-
-		if (heredocOpenerOperator != null)
+		if (Perl5CodeInsightSettings.getInstance().HEREDOC_AUTO_INSERTION)
 		{
-			PsiElement heredocOpener = heredocOpenerOperator.getParent();
+			int offset = editor.getCaretModel().getOffset();
+			PsiElement heredocOpenerOperator = PerlPsiUtil.searchLineForElementByType(file, offset - 1, PerlElementTypes.OPERATOR_HEREDOC);
 
-			if (heredocOpener instanceof PerlHeredocOpener)
+			if (heredocOpenerOperator != null)
 			{
-//			assert heredocOpener instanceof PerlHeredocOpener: "Got " + heredocOpener + " at " + heredocOpener.getText();
+				PsiElement heredocOpener = heredocOpenerOperator.getParent();
 
-				String markerName = ((PerlHeredocOpener) heredocOpener).getName();
-				PsiElement currentElement = file.findElementAt(offset);
-				boolean needAdd = currentElement == null;    // last element
-
-				if (!needAdd && currentElement.getParent() instanceof PerlHeredocElementImpl) // end of the line with opened heredoc
+				if (heredocOpener instanceof PerlHeredocOpener)
 				{
-					PsiElement hereDocBody = currentElement.getParent();
-					PsiElement nextSibling = hereDocBody.getNextSibling();
-					needAdd = nextSibling == null || !(nextSibling instanceof PerlHeredocTerminatorElementImpl);
+					String markerName = ((PerlHeredocOpener) heredocOpener).getName();
+					PsiElement currentElement = file.findElementAt(offset);
+					boolean needAdd = currentElement == null;    // last element
 
-					if (!needAdd)
+					if (!needAdd && currentElement.getParent() instanceof PerlHeredocElementImpl) // end of the line with opened heredoc
 					{
-						// checking for overlapping heredocs
-						Pattern openerPattern = Pattern.compile("<<(\\s*)[\"'`]?" + markerName + "[\"'`]?");
-						if (openerPattern.matcher(hereDocBody.getText()).find())
-							needAdd = true;
+						PsiElement hereDocBody = currentElement.getParent();
+						PsiElement nextSibling = hereDocBody.getNextSibling();
+						needAdd = nextSibling == null || !(nextSibling instanceof PerlHeredocTerminatorElementImpl);
+
+						if (!needAdd)
+						{
+							// checking for overlapping heredocs
+							Pattern openerPattern = Pattern.compile("<<(\\s*)[\"'`]?" + markerName + "[\"'`]?");
+							if (openerPattern.matcher(hereDocBody.getText()).find())
+								needAdd = true;
+						}
 					}
-				}
 
-
-				if (needAdd)
-				{
-					editor.getDocument().insertString(caretOffset.get(), "\n" + markerName + "\n");
-					return Result.DefaultSkipIndent;
+					if (needAdd)
+					{
+						editor.getDocument().insertString(caretOffset.get(), "\n" + markerName + "\n");
+						return Result.DefaultSkipIndent;
+					}
 				}
 			}
 		}

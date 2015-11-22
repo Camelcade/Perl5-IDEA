@@ -42,6 +42,7 @@
         <li><code>return</code> is now parsed as a keyword</li>
         <li>Implemented support for <code>method</code> and <code>func</code> constructions as documented in the <code>Method::Signature::Simple</code></li>
         <li>Implemented parsing for Perl5 native signatures.</li>
+        <li>Implemented smartkeys option for here-doc terminator auto-insertion, fixes #589</li>
         <li>Code style:
         <ul>
         <li>Implemented Perl5-specific CodeStyle settings panel, fixes #422</li>
@@ -136,9 +137,11 @@
         <internalFileTemplate name="Perl5 test"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.settings.Perl5Settings"/>
+
         <applicationService serviceInterface="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"
                             serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
-
+        <applicationService serviceInterface="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"
+                            serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
 
         <preFormatProcessor implementation="com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor"/>
         <lang.formatter language="Perl5"
@@ -147,6 +150,7 @@
                 implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider
                 implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
+        <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.smartkeys.options.PerlSmartKeyOptions"/>
 
         <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
 
@@ -167,7 +171,7 @@
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
 
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.PerlTypedHandler" id="PerlTypedHandler"/>
-        <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.PerlEnterHandlerDelegate"
+        <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.smartkeys.PerlEnterHandlerDelegate"
                               id="PerlEnterHandler" order="first"/>
 
         <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
