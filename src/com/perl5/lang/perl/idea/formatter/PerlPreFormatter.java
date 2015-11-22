@@ -31,6 +31,7 @@ import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -332,6 +333,10 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	@Override
 	public void visitDerefExpr(@NotNull PsiPerlDerefExpr o)
 	{
+		if (!myRange.contains(o.getTextRange()))
+		{
+			return;
+		}
 		if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == FORCE)
 		{
 			PsiElement scalarVariableElement = o.getFirstChild();
@@ -386,6 +391,10 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	@Override
 	public void visitScalarHashElement(@NotNull PsiPerlScalarHashElement o)
 	{
+		if (!myRange.contains(o.getTextRange()))
+		{
+			return;
+		}
 		processDerefExpressionIndex(o);
 		super.visitScalarHashElement(o);
 	}
@@ -393,6 +402,10 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	@Override
 	public void visitScalarArrayElement(@NotNull PsiPerlScalarArrayElement o)
 	{
+		if (!myRange.contains(o.getTextRange()))
+		{
+			return;
+		}
 		processDerefExpressionIndex(o);
 		super.visitScalarArrayElement(o);
 	}
@@ -400,6 +413,10 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	@Override
 	public void visitStatementModifier(@NotNull PsiPerlStatementModifier o)
 	{
+		if (!myRange.contains(o.getTextRange()))
+		{
+			return;
+		}
 		PsiPerlExpr expression = PsiTreeUtil.getChildOfType(o, PsiPerlExpr.class);
 		if (expression != null)
 		{
@@ -413,6 +430,31 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 			}
 		}
 		super.visitStatementModifier(o);
+	}
+
+
+	@Override
+	public void visitNamespaceElement(@NotNull PerlNamespaceElement o)
+	{
+		if (!myRange.contains(o.getTextRange()))
+		{
+			return;
+		}
+
+		String elementContent = o.getNode().getText();
+
+		if (myPerlSettings.MAIN_FORMAT == SUPPRESS && PerlPackageUtil.MAIN_PACKAGE_FULL.equals(elementContent))
+		{
+			myFormattingOperations.add(new PerlFormattingReplaceWithText(o, "::"));
+		}
+		else if (myPerlSettings.MAIN_FORMAT == FORCE && PerlPackageUtil.MAIN_PACKAGE_SHORT.equals(elementContent))
+		{
+			myFormattingOperations.add(new PerlFormattingReplaceWithText(o, "main::"));
+		}
+		else
+		{
+			super.visitNamespaceElement(o);
+		}
 	}
 
 	protected void unquoteString(PerlString o)

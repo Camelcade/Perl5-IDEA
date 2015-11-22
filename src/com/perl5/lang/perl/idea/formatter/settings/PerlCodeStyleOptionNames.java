@@ -51,6 +51,7 @@ public interface PerlCodeStyleOptionNames
 	String OPTIONAL_ELEMENTS_GROUP = "Optional syntax";
 	String PERL_OPTION_OPTIONAL_SEMI = "Semicolon [NYI]";
 
-
+	String MISC_ELEMENTS_GROUP = "Miscellaneous";
+	String PERL_OPTION_MISC_MAIN = "main package fromat";
 
 }

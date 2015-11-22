@@ -34,6 +34,9 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 
 	public int OPTIONAL_PARENTHESES = OptionalConstructions.WHATEVER;
 	public int OPTIONAL_SEMI = OptionalConstructions.WHATEVER;
+
+	public int MAIN_FORMAT = OptionalConstructions.WHATEVER;
+
 	public boolean SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;
 
 	public PerlCodeStyleSettings(CodeStyleSettings container)
@@ -56,6 +59,9 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 
 		String[] LABELS_SIMPLE_DEREF_STYLE = {"As is", "@{$reference}", "@$reference"};
 		Object[] OPTIONS_SIMPLE_DEREF_STYLE = {LABELS_SIMPLE_DEREF_STYLE, VALUES};
+
+		String[] LABELS_MAIN_FORMAT = {"As is", "main::", "::"};
+		Object[] OPTIONS_MAIN_FORMAT = {LABELS_MAIN_FORMAT, VALUES};
 	}
 
 }

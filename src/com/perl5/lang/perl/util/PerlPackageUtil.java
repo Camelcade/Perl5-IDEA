@@ -67,6 +67,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static final String UNIVERSAL_PACKAGE = "UNIVERSAL";
 	public static final String CORE_PACKAGE = "CORE";
 
+	public static final String MAIN_PACKAGE_FULL = MAIN_PACKAGE + PACKAGE_SEPARATOR;
+	public static final String MAIN_PACKAGE_SHORT = PACKAGE_SEPARATOR;
+
 	static
 	{
 		BUILT_IN_ALL.addAll(BUILT_IN);
