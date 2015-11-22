@@ -50,7 +50,7 @@
         <li>Implemented optional parentheses insertion/removing in statement modifiers.</li>
         <li>Implemented conversion <code>$var->{key}</code> to <code>$$var{key}</code> and vice versa, fixes #575.</li>
         <li>Implemented conversion <code>@$array_ref</code> to <code>@{$array_ref}</code> and vice versa (does not affects hash/array elements or slices).</li>
-        <li>Implemented conversion <code>main::</code> to <code>::</code> and vice versa, fixes 491</li>
+        <li>Implemented conversion <code>main::</code> to <code>::</code> and vice versa, fixes #491</li>
         </ul>
         </li>
       </ul>
