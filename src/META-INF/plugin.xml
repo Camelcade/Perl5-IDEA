@@ -312,6 +312,9 @@
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
+        <!--<lang.formatter language="Embedded Perl"-->
+        <!--implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>-->
+
         <lang.psiStructureViewFactory language="Embedded Perl"
                                       implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
 
