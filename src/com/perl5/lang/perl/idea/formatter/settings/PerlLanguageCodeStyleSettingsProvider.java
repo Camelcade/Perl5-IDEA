@@ -89,7 +89,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_PARENTHESES", PARENTHESES_OPTION_POSTFIX, PARENTHESES_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
 
-			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_SEMI", PERL_OPTION_OPTIONAL_SEMI, OPTIONAL_ELEMENTS_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
+//			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_SEMI", PERL_OPTION_OPTIONAL_SEMI, OPTIONAL_ELEMENTS_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
 
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "MAIN_FORMAT", PERL_OPTION_MISC_MAIN, MISC_ELEMENTS_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_MAIN_FORMAT);
 		}
