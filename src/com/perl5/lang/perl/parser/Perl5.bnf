@@ -179,8 +179,12 @@ limitations under the License.
     OPERATOR_DIV="/"
     OPERATOR_MUL="*"
     OPERATOR_MOD="%"
+
     OPERATOR_PLUS="+"
+    OPERATOR_PLUS_UNARY="PLUS_UNARY"
+
     OPERATOR_MINUS="-"
+    OPERATOR_MINUS_UNARY="MINUS_UNARY"
 
     OPERATOR_BITWISE_NOT="~"
     OPERATOR_BITWISE_AND="&"
@@ -729,7 +733,12 @@ private op_5_expr ::= ref_expr | prefix_minus_as_string_expr | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
 prefix_unary_expr ::= operator_prefix_unary expr { rightAssociative=true }
 prefix_minus_as_string_expr ::= <<parseMinusBareword>>
-private operator_prefix_unary ::= (OPERATOR_BITWISE_NOT|OPERATOR_NOT|OPERATOR_PLUS|OPERATOR_MINUS) !OPERATOR_ASSIGN // not sure we need !OPERATOR_ASSIGN
+private operator_prefix_unary ::= (
+	OPERATOR_BITWISE_NOT
+	| OPERATOR_NOT
+	| <<checkAndConvertToken OPERATOR_PLUS_UNARY OPERATOR_PLUS>>
+	| <<checkAndConvertToken OPERATOR_MINUS_UNARY OPERATOR_MINUS>>
+	) !OPERATOR_ASSIGN // not sure we need !OPERATOR_ASSIGN
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 
