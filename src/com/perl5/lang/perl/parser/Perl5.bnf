@@ -529,8 +529,11 @@ private sub_prototype_content ::= <<parseSubPrototype>>
 /************************************* Sub signatures *****************************************************************/
 private sub_signature ::= LEFT_PAREN sub_signature_content RIGHT_PAREN //{pin=1} pinning is temporary disabled in favor of protos
 sub_signature_content ::=
-	sub_signature_element (OPERATOR_COMMA sub_signature_element)* [OPERATOR_COMMA sub_signature_element_slurpy]
-	| [sub_signature_element_slurpy]
+	<<cancelProtoLikeSignature>>
+	{
+		sub_signature_element (OPERATOR_COMMA sub_signature_element)* [OPERATOR_COMMA sub_signature_element_slurpy]
+		| [sub_signature_element_slurpy]
+	}
 //	{recoverWhile=recover_signature_content}
 private sub_signature_element ::= sub_signature_element_ignore	| sub_signature_scalar
 private sub_signature_element_slurpy ::= <<arrayDeclarationWrapper>> | <<hashDeclarationWrapper>>

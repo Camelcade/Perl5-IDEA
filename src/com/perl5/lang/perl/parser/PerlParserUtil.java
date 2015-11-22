@@ -1881,4 +1881,20 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	/**
+	 * This is a hack to cancel empty signature or ($) signature
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return check result
+	 */
+	public static boolean cancelProtoLikeSignature(PsiBuilder b, int l)
+	{
+		IElementType currentTokenType = b.getTokenType();
+		if (currentTokenType == RIGHT_PAREN || currentTokenType == SIGIL_SCALAR && b.lookAhead(1) == RIGHT_PAREN)
+		{
+			return false;
+		}
+		return true;
+	}
 }
