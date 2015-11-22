@@ -32,15 +32,16 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by hurricup on 01.05.2015.
  */
 public class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes
 {
-
 	// tokens that can be converted to a PACKAGE
 	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
 			PACKAGE_CORE_IDENTIFIER,
@@ -49,24 +50,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PACKAGE_IDENTIFIER,
 			PACKAGE
 	);
-
-	// tokens that can be converted between each other depending on context
-	public static final TokenSet CONVERTABLE_TOKENS = TokenSet.create(
-			IDENTIFIER,
-			VARIABLE_NAME,
-			SUB,
-			LABEL,
-			RESERVED_METHOD,
-			RESERVED_FUNC
-	);
-
-
 	// tokens, allowed to be $^ names part
 	public static final TokenSet CONTROL_VARIABLE_NAMES = TokenSet.create(
 			LEFT_BRACKET,
 			RIGHT_BRACKET
 	);
-
 	public static final TokenSet SPECIAL_VARIABLE_NAME = TokenSet.create(
 			QUOTE_DOUBLE,
 			QUOTE_SINGLE,
@@ -99,18 +87,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			NUMBER_SIMPLE,
 			OPERATOR_X
 	);
-
-
-	public static final TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
-			PACKAGE_TOKENS,
-			CONVERTABLE_TOKENS,
-			TokenSet.create(
-					LEFT_BRACE,
-					SIGIL_SCALAR,
-					NUMBER_SIMPLE
-			));
-
-
 	public static final TokenSet PRINT_HANDLE_NEGATE_SUFFIX = TokenSet.orSet(
 			TokenSet.create(
 					LEFT_BRACE,
@@ -120,7 +96,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			),
 			PerlLexer.OPERATORS_TOKENSET
 	);
-
 	public static final TokenSet ANON_HASH_TOKEN_SUFFIXES = TokenSet.create(
 			RIGHT_BRACE
 			, RIGHT_PAREN
@@ -150,7 +125,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 			OPERATOR_DEREFERENCE
 	);
-
 	// commands, that accepts filehandles as first parameter
 	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<String>(Arrays.asList(
 			"opendir",
@@ -190,7 +164,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			NUMBER_SIMPLE,
 			NUMBER_VERSION
 	);
-
 	public static final TokenSet OPEN_QUOTES = TokenSet.create(
 			QUOTE_DOUBLE_OPEN,
 			QUOTE_TICK_OPEN,
@@ -201,7 +174,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			QUOTE_TICK_CLOSE,
 			QUOTE_SINGLE_CLOSE
 	);
-
 	protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
 			REGEX_QUOTE,
 			REGEX_QUOTE_CLOSE,
@@ -212,7 +184,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
-
 	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
 			EMBED_MARKER_SEMICOLON,
@@ -244,12 +215,33 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PACKAGE_IDENTIFIER,
 			PACKAGE_CORE_IDENTIFIER
 	);
-
 	public static TokenSet LIGHT_CONTAINERS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
 			HEREDOC_QX
 	);
+	// tokens that can be converted between each other depending on context
+	private static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
+			IDENTIFIER,
+			VARIABLE_NAME,
+			SUB,
+			LABEL,
+			RESERVED_METHOD,
+			RESERVED_FUNC
+	);
+	public static final TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
+			PACKAGE_TOKENS,
+			CONVERTABLE_TOKENS,
+			TokenSet.create(
+					LEFT_BRACE,
+					SIGIL_SCALAR,
+					NUMBER_SIMPLE
+			));
+
+	public static void addConvertableTokens(IElementType... convertableTokens)
+	{
+		CONVERTABLE_TOKENS = TokenSet.orSet(CONVERTABLE_TOKENS, TokenSet.create(convertableTokens));
+	}
 
 	/**
 	 * Wrapper for Builder class in order to implement additional per parser information in PerlBuilder
@@ -1868,6 +1860,25 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		((PerlBuilder) b).setSpecialVariableNamesAllowed(flagBackup);
 		return r;
+	}
+
+	/**
+	 * Processing parserExtension extensions points
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseParserExtensions(PsiBuilder b, int l)
+	{
+		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
+		{
+			if (parserExtension.parse((PerlBuilder) b, l))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

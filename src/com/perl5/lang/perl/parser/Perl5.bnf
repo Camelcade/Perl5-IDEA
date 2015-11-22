@@ -429,6 +429,7 @@ private namespace_item ::=
     [label_declaration] (
         semicolon_any +
         | nyi_statement
+        | <<parseParserExtensions>>
         | compound_statement
         | format_definition
         | statement
@@ -453,7 +454,6 @@ private compound_statement ::=
     | foreach_compound
     | when_compound
     | default_compound
-    | method_signatures_extension
 
 named_block ::= BLOCK_NAME block
 
@@ -1121,11 +1121,6 @@ private namespace_canonical ::= <<convertPackageIdentifier>>
 private semicolon_any ::= SEMICOLON | EMBED_MARKER_SEMICOLON
 
 /********************************************** Extensions for Method::Signatures *************************************/
-private method_signatures_extension ::=
-	// here we may add check if extension is enabled in settings
-	method_definition
-	| func_definition
-
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
 method_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_METHOD>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
 func_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_FUNC>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block

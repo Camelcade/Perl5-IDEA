@@ -262,7 +262,7 @@ public class PerlLexer extends PerlLexerGenerated
 	));
 	public static final HashSet<IElementType> RESERVED_TOKENSET = new HashSet<IElementType>();
 	public static final HashMap<String, IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
-	public static final HashMap<String, IElementType> reservedTokenTypes = new HashMap<String, IElementType>();
+	public static final HashMap<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
@@ -345,73 +345,7 @@ public class PerlLexer extends PerlLexerGenerated
 		tagNames.put("__PACKAGE__", TAG);
 		tagNames.put("__SUB__", TAG);
 
-		// reserved
-		reservedTokenTypes.put("if", RESERVED_IF);
-		reservedTokenTypes.put("unless", RESERVED_UNLESS);
-		reservedTokenTypes.put("elsif", RESERVED_ELSIF);
-		reservedTokenTypes.put("else", RESERVED_ELSE);
-		reservedTokenTypes.put("given", RESERVED_GIVEN);
-		reservedTokenTypes.put("when", RESERVED_WHEN);
-		reservedTokenTypes.put("default", RESERVED_DEFAULT);
-		reservedTokenTypes.put("while", RESERVED_WHILE);
-		reservedTokenTypes.put("until", RESERVED_UNTIL);
-		reservedTokenTypes.put("for", RESERVED_FOR);
-		reservedTokenTypes.put("foreach", RESERVED_FOREACH);
-		reservedTokenTypes.put("continue", RESERVED_CONTINUE);
-
-		reservedTokenTypes.put("format", RESERVED_FORMAT);
-		reservedTokenTypes.put("sub", RESERVED_SUB);
-		reservedTokenTypes.put("package", RESERVED_PACKAGE);
-		reservedTokenTypes.put("use", RESERVED_USE);
-		reservedTokenTypes.put("no", RESERVED_NO);
-		reservedTokenTypes.put("require", RESERVED_REQUIRE);
-
-		reservedTokenTypes.put("undef", RESERVED_UNDEF);
-
-		reservedTokenTypes.put("print", RESERVED_PRINT);
-		reservedTokenTypes.put("printf", RESERVED_PRINTF);
-		reservedTokenTypes.put("say", RESERVED_SAY);
-
-		reservedTokenTypes.put("grep", RESERVED_GREP);
-		reservedTokenTypes.put("map", RESERVED_MAP);
-		reservedTokenTypes.put("sort", RESERVED_SORT);
-
-		reservedTokenTypes.put("qw", RESERVED_QW);
-
-		reservedTokenTypes.put("qq", RESERVED_QQ);
-		reservedTokenTypes.put("q", RESERVED_Q);
-		reservedTokenTypes.put("qx", RESERVED_QX);
-
-		reservedTokenTypes.put("tr", RESERVED_TR);
-		reservedTokenTypes.put("y", RESERVED_Y);
-
-		reservedTokenTypes.put("s", RESERVED_S);
-		reservedTokenTypes.put("qr", RESERVED_QR);
-		reservedTokenTypes.put("m", RESERVED_M);
-
-		reservedTokenTypes.put("my", RESERVED_MY);
-		reservedTokenTypes.put("our", RESERVED_OUR);
-		reservedTokenTypes.put("state", RESERVED_STATE);
-		reservedTokenTypes.put("local", RESERVED_LOCAL);
-
-		reservedTokenTypes.put("do", RESERVED_DO);
-		reservedTokenTypes.put("eval", RESERVED_EVAL);
-
-		reservedTokenTypes.put("goto", RESERVED_GOTO);
-		reservedTokenTypes.put("redo", RESERVED_REDO);
-		reservedTokenTypes.put("next", RESERVED_NEXT);
-		reservedTokenTypes.put("last", RESERVED_LAST);
-
-		reservedTokenTypes.put("return", RESERVED_RETURN);
-
-		// fixme this should be in some extendable list added using EP
-		reservedTokenTypes.put("method", RESERVED_METHOD);
-		reservedTokenTypes.put("func", RESERVED_FUNC);
-
-		RESERVED_TOKENSET.addAll(reservedTokenTypes.values());
 	}
-
-//			SUB	// fixme this works with argumentless subs, not all of them
 
 	/**
 	 * HEREDOC proceccing section
@@ -425,28 +359,21 @@ public class PerlLexer extends PerlLexerGenerated
 	public boolean allowSharpQuote = true;
 	public boolean isEscaped = false;
 	public int sectionsNumber = 0;    // number of sections one or two
-
 	protected int waitingAttributeBraceLevel = 0;
 	protected int waitingAttributeBracketLevel = 0;
 	protected int waitingAttributeParenLevel = 0;
-
 	// we've parsed my/our/state
 	protected boolean waitingVarAttribute = false;
-
 	// we've passed sub
 	protected boolean waitingSubAttribute = false;
-
 	// we've passed sub and colon
 	protected boolean isAttribute = false;
-
 	protected PerlLexerAdapter evalPerlLexer;
 	protected PerlStringLexer myStringLexer;
-
 	protected PerlQStringLexer myQStringLexer;
 	protected PerlQQStringLexer myQQStringLexer;
 	protected PerlQXStringLexer myQXStringLexer;
 	protected PerlQWStringLexer myQWStringLexer;
-
 	Project myProject;
 	/**
 	 * Regex processor qr{} m{} s{}{}
@@ -457,6 +384,74 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		super((Reader) null);
 		myProject = project;
+	}
+
+	public static final void initReservedTokensMap()
+	{
+		RESERVED_TOKEN_TYPES.clear();
+		// reserved
+		RESERVED_TOKEN_TYPES.put("if", RESERVED_IF);
+		RESERVED_TOKEN_TYPES.put("unless", RESERVED_UNLESS);
+		RESERVED_TOKEN_TYPES.put("elsif", RESERVED_ELSIF);
+		RESERVED_TOKEN_TYPES.put("else", RESERVED_ELSE);
+		RESERVED_TOKEN_TYPES.put("given", RESERVED_GIVEN);
+		RESERVED_TOKEN_TYPES.put("when", RESERVED_WHEN);
+		RESERVED_TOKEN_TYPES.put("default", RESERVED_DEFAULT);
+		RESERVED_TOKEN_TYPES.put("while", RESERVED_WHILE);
+		RESERVED_TOKEN_TYPES.put("until", RESERVED_UNTIL);
+		RESERVED_TOKEN_TYPES.put("for", RESERVED_FOR);
+		RESERVED_TOKEN_TYPES.put("foreach", RESERVED_FOREACH);
+		RESERVED_TOKEN_TYPES.put("continue", RESERVED_CONTINUE);
+
+		RESERVED_TOKEN_TYPES.put("format", RESERVED_FORMAT);
+		RESERVED_TOKEN_TYPES.put("sub", RESERVED_SUB);
+		RESERVED_TOKEN_TYPES.put("package", RESERVED_PACKAGE);
+		RESERVED_TOKEN_TYPES.put("use", RESERVED_USE);
+		RESERVED_TOKEN_TYPES.put("no", RESERVED_NO);
+		RESERVED_TOKEN_TYPES.put("require", RESERVED_REQUIRE);
+
+		RESERVED_TOKEN_TYPES.put("undef", RESERVED_UNDEF);
+
+		RESERVED_TOKEN_TYPES.put("print", RESERVED_PRINT);
+		RESERVED_TOKEN_TYPES.put("printf", RESERVED_PRINTF);
+		RESERVED_TOKEN_TYPES.put("say", RESERVED_SAY);
+
+		RESERVED_TOKEN_TYPES.put("grep", RESERVED_GREP);
+		RESERVED_TOKEN_TYPES.put("map", RESERVED_MAP);
+		RESERVED_TOKEN_TYPES.put("sort", RESERVED_SORT);
+
+		RESERVED_TOKEN_TYPES.put("qw", RESERVED_QW);
+
+		RESERVED_TOKEN_TYPES.put("qq", RESERVED_QQ);
+		RESERVED_TOKEN_TYPES.put("q", RESERVED_Q);
+		RESERVED_TOKEN_TYPES.put("qx", RESERVED_QX);
+
+		RESERVED_TOKEN_TYPES.put("tr", RESERVED_TR);
+		RESERVED_TOKEN_TYPES.put("y", RESERVED_Y);
+
+		RESERVED_TOKEN_TYPES.put("s", RESERVED_S);
+		RESERVED_TOKEN_TYPES.put("qr", RESERVED_QR);
+		RESERVED_TOKEN_TYPES.put("m", RESERVED_M);
+
+		RESERVED_TOKEN_TYPES.put("my", RESERVED_MY);
+		RESERVED_TOKEN_TYPES.put("our", RESERVED_OUR);
+		RESERVED_TOKEN_TYPES.put("state", RESERVED_STATE);
+		RESERVED_TOKEN_TYPES.put("local", RESERVED_LOCAL);
+
+		RESERVED_TOKEN_TYPES.put("do", RESERVED_DO);
+		RESERVED_TOKEN_TYPES.put("eval", RESERVED_EVAL);
+
+		RESERVED_TOKEN_TYPES.put("goto", RESERVED_GOTO);
+		RESERVED_TOKEN_TYPES.put("redo", RESERVED_REDO);
+		RESERVED_TOKEN_TYPES.put("next", RESERVED_NEXT);
+		RESERVED_TOKEN_TYPES.put("last", RESERVED_LAST);
+
+		RESERVED_TOKEN_TYPES.put("return", RESERVED_RETURN);
+	}
+
+	public static void initReservedTokensSet()
+	{
+		RESERVED_TOKENSET.addAll(RESERVED_TOKEN_TYPES.values());
 	}
 
 	/**
@@ -1655,7 +1650,7 @@ public class PerlLexer extends PerlLexerGenerated
 							&& isListElementEndAhead()
 					)
 				return HANDLE;
-			else if ((tokenType = reservedTokenTypes.get(tokenText)) != null)
+			else if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) != null)
 				return tokenType;
 			else if ((tokenType = blockNames.get(tokenText)) != null)
 				return tokenType;
@@ -1711,8 +1706,8 @@ public class PerlLexer extends PerlLexerGenerated
 
 			IElementType packageTokenType = parsePackageCanonical();
 
-			if (packageTokenType == PACKAGE_CORE_IDENTIFIER && reservedTokenTypes.containsKey(identifier))
-				barewordToken.setTokenType(reservedTokenTypes.get(identifier));
+			if (packageTokenType == PACKAGE_CORE_IDENTIFIER && RESERVED_TOKEN_TYPES.containsKey(identifier))
+				barewordToken.setTokenType(RESERVED_TOKEN_TYPES.get(identifier));
 			return packageTokenType;
 
 		}

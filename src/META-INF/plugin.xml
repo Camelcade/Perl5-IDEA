@@ -99,6 +99,8 @@
             <with attribute="implementationClass"
                   implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
         </extensionPoint>
+        <extensionPoint name="parserExtension"
+                        interface="com.perl5.lang.perl.parser.PerlParserExtension"/>
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.perl5">
@@ -119,6 +121,8 @@
         <!--Mojolicious processors-->
         <packageProcessor key="Mojo::Base"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MojoBaseProcessor"/>
+
+        <parserExtension implementation="com.perl5.lang.perl.parser.PerlMethodSignaturesSimpleParserExtension" />
 
     </extensions>
 
@@ -457,6 +461,9 @@
     </extensions>
 
     <application-components>
+        <component>
+            <implementation-class>com.perl5.lang.perl.idea.application.PerlParserExtensions</implementation-class>
+        </component>
     </application-components>
 
     <project-components>

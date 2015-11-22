@@ -36,18 +36,24 @@ import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParser;
+import com.perl5.lang.perl.parser.PerlParserExtension;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 {
+	public static final List<PerlParserExtension> PARSER_EXTENSIONS = new ArrayList<PerlParserExtension>();
 
 	public static final TokenSet WHITE_SPACES = TokenSet.create(
 			TokenType.WHITE_SPACE,
 			TokenType.NEW_LINE_INDENT,
 
+			// these should be in other place
 			EMBED_MARKER, EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE,
 			TEMPLATE_BLOCK_HTML
 	);
@@ -123,10 +129,23 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	{
 		IElementType elementType = node.getElementType();
 
+		for (PerlParserExtension extension : PARSER_EXTENSIONS)
+		{
+			PsiElement element = extension.createElement(node);
+			if (element != null)
+			{
+				return element;
+			}
+		}
+
 		if (elementType == HEREDOC_QQ || elementType == HEREDOC_QX || elementType == HEREDOC) // fixme instanceof is faster ?
+		{
 			return new PerlHeredocElementImpl(node);
+		}
 		else if (elementType == PARSABLE_STRING_USE_VARS)
+		{
 			return new PerlParsableStringWrapperlImpl(node);
+		}
 		return PerlElementTypes.Factory.createElement(node);
 	}
 }
