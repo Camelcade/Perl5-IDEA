@@ -58,7 +58,10 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.before(OPERATOR_COMMA).spaceIf(settings.SPACE_BEFORE_COMMA)
 				.after(OPERATOR_COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
 
+				.beforeInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_BEFORE_COLON)
 				.afterInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_AFTER_COLON)
+				.beforeInside(QUESTION, TRENAR_EXPR).spaceIf(settings.SPACE_BEFORE_QUEST)
+				.afterInside(QUESTION, TRENAR_EXPR).spaceIf(settings.SPACE_AFTER_QUEST)
 
 				.afterInside(SEMICOLON, FOR_ITERATOR).spaceIf(settings.SPACE_AFTER_SEMICOLON)
 				.beforeInside(SEMICOLON, FOR_ITERATOR).spaceIf(settings.SPACE_BEFORE_SEMICOLON)

@@ -54,6 +54,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 					"SPACE_AFTER_COMMA",    // implemented
 					"SPACE_BEFORE_COMMA",   // implemented
 
+					"SPACE_BEFORE_QUEST",
+					"SPACE_AFTER_QUEST",
+					"SPACE_BEFORE_COLON",
 					"SPACE_AFTER_COLON",    // implemented
 
 					"SPACE_AFTER_SEMICOLON",    // implemented

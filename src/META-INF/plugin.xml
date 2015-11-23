@@ -43,6 +43,7 @@
         <li>Implemented support for <code>method</code> and <code>func</code> constructions as documented in the <code>Method::Signature::Simple</code></li>
         <li>Implemented parsing for Perl5 native signatures.</li>
         <li>Implemented smartkeys option for here-doc terminator auto-insertion, fixes #589</li>
+        <li>Implemented formatting and alignment for ternary operator, fixes #591</li>
         <li>Code style:
         <ul>
         <li>Implemented Perl5-specific CodeStyle settings panel, fixes #422</li>
