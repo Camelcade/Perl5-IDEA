@@ -124,7 +124,7 @@ public class PerlIndentProcessor implements PerlElementTypes
 			return Indent.getNoneIndent();
 		}
 
-		if (COMMA_LIKE_SEQUENCES.contains(parentType))
+		if (COMMA_LIKE_SEQUENCES.contains(parentType) && grandParentType != STATEMENT)
 		{
 			return Indent.getIndent(Indent.Type.CONTINUATION, false, true);
 		}
