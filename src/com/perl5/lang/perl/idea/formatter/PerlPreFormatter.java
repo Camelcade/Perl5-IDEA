@@ -361,9 +361,10 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	{
 		PsiElement parent = o.getParent();
 		PsiElement anchor = o;
-		if (parent instanceof PsiPerlDerefExpr
-				|| (((anchor = parent) instanceof PsiPerlScalarHashElement || anchor instanceof PsiPerlScalarArrayElement) && anchor.getParent() instanceof PsiPerlDerefExpr)
-				)
+		if (parent instanceof PsiPerlDerefExpr ||
+				(((anchor = parent) instanceof PsiPerlScalarHashElement || anchor instanceof PsiPerlScalarArrayElement) &&
+						anchor.getParent() instanceof PsiPerlDerefExpr
+				))
 		{
 			if (myPerlSettings.OPTIONAL_DEREFERENCE == FORCE)
 			{
@@ -386,28 +387,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				}
 			}
 		}
-	}
-
-	@Override
-	public void visitScalarHashElement(@NotNull PsiPerlScalarHashElement o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-		processDerefExpressionIndex(o);
-		super.visitScalarHashElement(o);
-	}
-
-	@Override
-	public void visitScalarArrayElement(@NotNull PsiPerlScalarArrayElement o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-		processDerefExpressionIndex(o);
-		super.visitScalarArrayElement(o);
 	}
 
 	@Override
