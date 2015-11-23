@@ -831,8 +831,10 @@ sub_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB sub_definition_parameters bl
 
 sub_call_expr ::= leftward_call_expr | rightward_call_expr
 
-private leftward_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN !LEFT_BRACKET
+private leftward_call_expr ::= callable leftward_call_arguments !LEFT_BRACKET
 private rightward_call_expr ::= callable [call_arguments]
+
+private leftward_call_arguments ::= LEFT_PAREN [call_arguments] RIGHT_PAREN
 
 //// fixme this should depend on prototype
 call_arguments ::=
@@ -999,8 +1001,8 @@ private nested_element_variation ::=
     | nested_call_arguments    // function call like $var->()
     | scalar_call
 
-nested_call ::= method [nested_call_arguments]
-scalar_call ::= scalar [nested_call_arguments]
+nested_call ::= method [leftward_call_arguments]
+scalar_call ::= scalar [leftward_call_arguments]
 nested_call_arguments ::= LEFT_PAREN [expr] RIGHT_PAREN
 
 hash_index ::= <<parseHashIndex>>

@@ -97,7 +97,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 
 				// perl specific
 				.after(RESERVED_VARIABLE_DECLARATION).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
-				.around(OPERATOR_COMMA_ARROW).spacing(1, Integer.MAX_VALUE, 0, true, 1)
+				.around(OPERATOR_COMMA_ARROW).spacing(1, 1, 0, true, 1)
 				;
 	}
 

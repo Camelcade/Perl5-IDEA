@@ -22,6 +22,7 @@ import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 
@@ -59,7 +60,8 @@ public class PerlIndentProcessor implements PerlElementTypes
 			COMMA_SEQUENCE_EXPR,
 			SUB_SIGNATURE_CONTENT,
 			METHOD_SIGNATURE_CONTENT,
-			FUNC_SIGNATURE_CONTENT
+			FUNC_SIGNATURE_CONTENT,
+			TRENAR_EXPR
 	);
 
 	/**
@@ -95,6 +97,20 @@ public class PerlIndentProcessor implements PerlElementTypes
 
 		ASTNode nextSibling = FormatterUtil.getNextNonWhitespaceSibling(node);
 		IElementType nextSiblingElementType = nextSibling != null ? nextSibling.getElementType() : null;
+
+		boolean isFirst = prevSibling == null;
+		boolean isLast = nextSibling == null;
+
+		if (isFirst && PerlFormattingBlock.BLOCK_OPENERS.contains(nodeType)
+				|| isLast && PerlFormattingBlock.BLOCK_CLOSERS.contains(nodeType)
+				)
+		{
+//			if( parentType == SUB_CALL_EXPR || parentType == NESTED_CALL )	// parens in nested call
+//			{
+//				return Indent.getIndent(Indent.Type.NONE, true, false);
+//			}
+			return Indent.getNoneIndent();
+		}
 
 		// defined by node
 		if (ABSOLUTE_UNINDENTED_TOKENS.contains(nodeType) || parent == null || grandParent == null)

@@ -252,10 +252,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	@Override
 	public Indent getIndent()
 	{
-		if ((isFirst() && isBlockOpener() || isLast() && isBlockCloser()))
-		{
-			return Indent.getNoneIndent();
-		}
 		return myIndent;
 	}
 
