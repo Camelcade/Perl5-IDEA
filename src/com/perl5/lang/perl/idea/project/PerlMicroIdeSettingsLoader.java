@@ -23,7 +23,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -141,19 +143,22 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 					ContentEntry entry = rootModel.getContentEntries()[0];
 					Set<String> libPaths = new HashSet<String>(perl5Settings.libRootUrls);
 
-
 					for (SourceFolder folder : entry.getSourceFolders())
 					{
-//						System.err.println("Before " + folder + " of " + folder.getRootType());
 						if (libPaths.contains(folder.getUrl()))
+						{
 							entry.removeSourceFolder(folder);
+						}
 					}
 
+					final String rootPath = VfsUtilCore.urlToPath(entry.getUrl());
 					for (String path : libPaths)
-						entry.addSourceFolder(path, JpsPerlLibrarySourceRootType.INSTANCE);
-
-//					for(SourceFolder folder: entry.getSourceFolders())
-//						System.err.println("After " + folder + " of " + folder.getRootType());
+					{
+						if (FileUtil.isAncestor(rootPath, VfsUtilCore.urlToPath(path), true))
+						{
+							entry.addSourceFolder(path, JpsPerlLibrarySourceRootType.INSTANCE);
+						}
+					}
 
 					applyClassPaths(rootModel);
 					rootModel.commit();
