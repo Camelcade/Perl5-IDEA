@@ -24,13 +24,13 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  */
 public interface PerlFormattingTokenSets extends PerlElementTypes
 {
-	public static final TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
+	TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
 			CONDITION_STATEMENT,
 			FOR_ITERATOR,
 			FOR_LIST_EPXR
 	);
 
-	public static final TokenSet BLOCK_CONTAINERS = TokenSet.create(
+	TokenSet BLOCK_CONTAINERS = TokenSet.create(
 			CONDITIONAL_BLOCK,
 			FOR_COMPOUND,
 			FOREACH_COMPOUND,
@@ -42,7 +42,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 			NAMESPACE_DEFINITION
 	);
 
-	public static final TokenSet STATEMENT_MODIFIERS = TokenSet.create(
+	TokenSet STATEMENT_MODIFIERS = TokenSet.create(
 			IF_STATEMENT_MODIFIER,
 			UNLESS_STATEMENT_MODIFIER,
 			WHILE_STATEMENT_MODIFIER,
@@ -52,7 +52,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 			WHEN_STATEMENT_MODIFIER
 	);
 
-	public static final TokenSet RESERVED_COMPOUND_CONDITIONAL = TokenSet.create(
+	TokenSet RESERVED_COMPOUND_CONDITIONAL = TokenSet.create(
 			RESERVED_IF,
 			RESERVED_UNLESS,
 			RESERVED_GIVEN,
@@ -65,54 +65,54 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 			RESERVED_FOREACH
 	);
 
-	public static final TokenSet RESERVED_TERMS_BLOCKS = TokenSet.create(
+	TokenSet RESERVED_TERMS_BLOCKS = TokenSet.create(
 			RESERVED_DO,
 			RESERVED_EVAL,
 			RESERVED_SUB
 	);
 
 
-	public static final TokenSet OPERATORS_BITWISE = TokenSet.create(
+	TokenSet OPERATORS_BITWISE = TokenSet.create(
 			OPERATOR_BITWISE_OR,
 			OPERATOR_BITWISE_XOR,
 			OPERATOR_BITWISE_AND
 	);
 
-	public static final TokenSet OPERATORS_ADDITIVE = TokenSet.create(
+	TokenSet OPERATORS_ADDITIVE = TokenSet.create(
 			OPERATOR_PLUS,
 			OPERATOR_MINUS
 	);
 
-	public static final TokenSet OPERATORS_MULTIPLICATIVE = TokenSet.create(
+	TokenSet OPERATORS_MULTIPLICATIVE = TokenSet.create(
 			OPERATOR_MUL,
 			OPERATOR_DIV,
 			OPERATOR_POW
 	);
 
-	public static final TokenSet OPERATORS_SHIFT = TokenSet.create(
+	TokenSet OPERATORS_SHIFT = TokenSet.create(
 			OPERATOR_SHIFT_LEFT,
 			OPERATOR_SHIFT_RIGHT
 	);
 
-	public static final TokenSet OPERATORS_UNARY = TokenSet.create(
+	TokenSet OPERATORS_UNARY = TokenSet.create(
 			OPERATOR_PLUS_PLUS,
 			OPERATOR_NOT,
 			OPERATOR_MINUS_MINUS,
 			OPERATOR_BITWISE_NOT
 	);
 
-	public static final TokenSet OPERATORS_LOGICAL = TokenSet.create(
+	TokenSet OPERATORS_LOGICAL = TokenSet.create(
 			OPERATOR_AND,
 			OPERATOR_OR,
 			OPERATOR_OR_DEFINED
 	);
 
-	public static final TokenSet OPERATORS_EQUALITY = TokenSet.create(
+	TokenSet OPERATORS_EQUALITY = TokenSet.create(
 			OPERATOR_EQ_NUMERIC,
 			OPERATOR_NE_NUMERIC
 	);
 
-	public static final TokenSet OPERATORS_RELATIONAL = TokenSet.create(
+	TokenSet OPERATORS_RELATIONAL = TokenSet.create(
 			OPERATOR_GE_NUMERIC,
 			OPERATOR_LE_NUMERIC,
 			OPERATOR_SMARTMATCH,
@@ -121,7 +121,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 			OPERATOR_CMP_NUMERIC
 	);
 
-	public static final TokenSet OPERATORS_STR = TokenSet.create(
+	TokenSet OPERATORS_STR = TokenSet.create(
 			OPERATOR_GE_STR,
 			OPERATOR_LE_STR,
 			OPERATOR_GT_STR,
@@ -135,7 +135,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 			OPERATOR_XOR_LP
 	);
 
-	public static final TokenSet OPERATORS_ASSIGNMENT = TokenSet.create(
+	TokenSet OPERATORS_ASSIGNMENT = TokenSet.create(
 			OPERATOR_ASSIGN,
 			OPERATOR_POW_ASSIGN,
 			OPERATOR_PLUS_ASSIGN,
@@ -155,7 +155,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 			OPERATOR_OR_DEFINED_ASSIGN
 	);
 
-	public static final TokenSet RESERVED_VARIABLE_DECLARATION = TokenSet.create(
+	TokenSet RESERVED_VARIABLE_DECLARATION = TokenSet.create(
 			RESERVED_MY,
 			RESERVED_OUR,
 			RESERVED_LOCAL,

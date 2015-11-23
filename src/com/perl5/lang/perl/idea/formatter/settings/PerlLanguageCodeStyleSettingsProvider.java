@@ -32,8 +32,58 @@ import org.jetbrains.annotations.Nullable;
 public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider implements PerlCodeStyleOptionNames
 {
 	private static final String DEFAULT_CODE_SAMPLE = "# Not yet implemented";
-	private static final String INDENT_CODE_SAMPLE = "# Not yet implemented";
+	private static final String SPACING_CODE_SAMPLE = "my ($var1, $var2);\n" +
+			"$var1=100;\n" +
+			"$var2 = 200;\n" +
+			"\n" +
+			"if($var1==var2)" +
+			"{\n" +
+			"    my $arrayref = [1,1,2,3,5,8];\n" +
+			"    say $var1 && $var2;\n" +
+			"    say $var1 | $var2;\n" +
+			"    for( my $i=1;$i<2;$i++)\n" +
+			"    {\n" +
+			"    say $var1&$var2;\n" +
+			"    say $var1+$var2;\n" +
+			"    }\n" +
+			"    say $var1*$var2;\n" +
+			"    say $var1<<2;\n" +
+			"    \n" +
+			"    until( !$var1)" +
+			"    {\n" +
+			"        eval{ say $var2? $var2: $var1;};\n" +
+			"    }    \n" +
+			"}" +
+			"else\n" +
+			"{\n" +
+			"    say ($var1)unless $var2;\n" +
+			"    say $var1 for @ARGV;\n" +
+			"}";
+	private static final String INDENT_CODE_SAMPLE = "if( $cond )\n" +
+			"{\n" +
+			"    say sprintf\n" +
+			"    \"here\",\n" +
+			"    \"we\",\n" +
+			"    \"go\";\n" +
+			"}";
 	private static final String BLANK_LINES_CODE_SAMPLE = "# Not yet implemented";
+	private static final String LANGUAGE_SPECIFIC_CODE_SAMPLE = "my $hashref = {\n" +
+			"    key1 => 42,\n" +
+			"    key2 => [69],\n" +
+			"};\n" +
+			"\n" +
+			"$hashref->{key3} = <<EOM;\n" +
+			"    This is a test\n" +
+			"EOM\n" +
+			"\n" +
+			"\n" +
+			"say $hashref->{'key1'} unless $1;\n" +
+			"say $hashref->{key2}[0] if $b;\n" +
+			"\n" +
+			"my %hash = %$hashref;\n" +
+			"\n" +
+			"our $VERSION = 1;\n" +
+			"say $main::VERSION;\n";
 
 	@Override
 	public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType)
@@ -125,16 +175,20 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 	}
 
 	@Override
-	public String getCodeSample(SettingsType settingsType)
+	public String getCodeSample(@NotNull SettingsType settingsType)
 	{
-		if (settingsType == SettingsType.SPACING_SETTINGS || settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS)
+		if (settingsType == SettingsType.SPACING_SETTINGS)
 		{
-			return DEFAULT_CODE_SAMPLE;
+			return SPACING_CODE_SAMPLE;
 		}
-		if (settingsType == SettingsType.INDENT_SETTINGS)
+		else if (settingsType == SettingsType.INDENT_SETTINGS)
 		{
 			return INDENT_CODE_SAMPLE;
 		}
-		return BLANK_LINES_CODE_SAMPLE;
+		else if (settingsType == SettingsType.LANGUAGE_SPECIFIC)
+		{
+			return LANGUAGE_SPECIFIC_CODE_SAMPLE;
+		}
+		return DEFAULT_CODE_SAMPLE;
 	}
 }

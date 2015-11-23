@@ -145,6 +145,11 @@ public class PerlIndentProcessor implements PerlElementTypes
 			return Indent.getIndent(Indent.Type.CONTINUATION, false, true);
 		}
 
+		if (parentType == BLOCK)
+		{
+			return Indent.getNormalIndent();
+		}
+
 		return Indent.getContinuationWithoutFirstIndent();
 	}
 }
