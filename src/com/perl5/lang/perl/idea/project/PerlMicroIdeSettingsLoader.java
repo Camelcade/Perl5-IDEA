@@ -130,7 +130,7 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 	public void projectOpened()
 	{
 		// called when project is opened
-		if (!PlatformUtils.isIntelliJ())
+		if (!PlatformUtils.isIntelliJ() && ModuleManager.getInstance(myProject).getModules().length > 0)
 		{
 			ApplicationManager.getApplication().runWriteAction(new Runnable()
 			{
