@@ -82,6 +82,7 @@
         <li>Grep/map/sort blocks and one-statement blocks are not being butified anymore.</li>
         <li>Here-doc with unquoted opener is now properly treated as QQ here-doc.</li>
         <li>Fixed problem with unary plus/minus formatting, fixes #571</li>
+        <li>Fixed bug with // formatting, fixes #594</li>
       </ul>
       </p>
 

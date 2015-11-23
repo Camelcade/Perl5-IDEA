@@ -103,7 +103,8 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 
 	public static final TokenSet OPERATORS_LOGICAL = TokenSet.create(
 			OPERATOR_AND,
-			OPERATOR_OR
+			OPERATOR_OR,
+			OPERATOR_OR_DEFINED
 	);
 
 	public static final TokenSet OPERATORS_EQUALITY = TokenSet.create(
