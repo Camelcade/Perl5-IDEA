@@ -524,8 +524,9 @@ private sub_prototype_or_signature ::= sub_signature |sub_prototype
 sub_declaration ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_declaration_parameters
 private sub_declaration_parameters ::= [sub_prototype] [sub_attributes]
 
-private canonical_sub_name ::= [namespace_canonical] <<convertIdentifier SUB>>
+private canonical_sub_name ::= [namespace_canonical] sub_definition_name
 
+private sub_definition_name ::= <<parseSubDefinitionName>>
 
 // todo implement parsing
 private sub_prototype ::= LEFT_PAREN [sub_prototype_content] RIGHT_PAREN {pin=1}
@@ -825,17 +826,15 @@ lp_and_expr ::= expr (OPERATOR_AND_LP expr)+
 lp_or_xor_expr ::= expr ((OPERATOR_OR_LP|OPERATOR_XOR_LP) expr)+
 
 print_expr ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( LEFT_PAREN [print_arguments] RIGHT_PAREN | [print_arguments] ) {pin=2}
-private print_arguments ::= print_handle expr | expr
-private print_handle ::= <<parsePrintHandle>> | perl_handle
+private print_arguments ::= [print_handle] expr | expr
+print_handle ::=  <<parsePrintHandle>> | perl_handle
 
 sub_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
 
 sub_call_expr ::= leftward_call_expr | rightward_call_expr
 
-private leftward_call_expr ::= callable leftward_call_arguments !LEFT_BRACKET
+private leftward_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN !LEFT_BRACKET
 private rightward_call_expr ::= callable [call_arguments]
-
-private leftward_call_arguments ::= LEFT_PAREN [call_arguments] RIGHT_PAREN
 
 //// fixme this should depend on prototype
 call_arguments ::=
@@ -1002,9 +1001,10 @@ private nested_element_variation ::=
     | nested_call_arguments    // function call like $var->()
     | scalar_call
 
-nested_call ::= method [leftward_call_arguments]
-scalar_call ::= scalar [leftward_call_arguments]
-nested_call_arguments ::= LEFT_PAREN [expr] RIGHT_PAREN
+nested_call ::= method [method_call_arguments]
+scalar_call ::= scalar [method_call_arguments]
+private method_call_arguments ::= LEFT_PAREN [<<parseSimpleCallArguments>>] RIGHT_PAREN
+nested_call_arguments ::= method_call_arguments
 
 hash_index ::= <<parseHashIndex>>
 array_index ::= <<parseArrayIndex>>
@@ -1025,7 +1025,7 @@ code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND SIGIL_CODE>> cast_
 
 label_declaration ::= <<parseLabelDeclaration>> // do we need to change tokentype?
 private perl_version ::= <<parsePerlVersion>>
-private perl_handle ::=  LEFT_BRACE scalar_expr RIGHT_BRACE | immutable_expr
+private perl_handle ::=  block | scalar_variable !(<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
@@ -1137,8 +1137,8 @@ private semicolon_any ::= SEMICOLON | EMBED_MARKER_SEMICOLON
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_METHOD>> <<convertIdentifier SUB>> [method_signature] [sub_attributes] block
-func_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_FUNC>> <<convertIdentifier SUB>> [func_signature] [sub_attributes] block
+method_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_METHOD>> sub_definition_name [method_signature] [sub_attributes] block
+func_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_FUNC>> sub_definition_name [func_signature] [sub_attributes] block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= LEFT_PAREN method_signature_content RIGHT_PAREN {pin=1}

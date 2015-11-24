@@ -620,7 +620,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		if (
 				CONVERTABLE_TOKENS.contains(currentTokenType)                // it's identifier
-						&& !PRINT_HANDLE_NEGATE_SUFFIX.contains(nextTokenType)        // no negation tokens
+						&& !PRINT_HANDLE_NEGATE_SUFFIX.contains(nextTokenType)        // no negation tokens, fixme << EOT
 						&& !PerlSubUtil.BUILT_IN.contains(b.getTokenText())         // it's not built in. crude, probably we should check any known sub
 				)
 		{
@@ -885,6 +885,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		mv.collapse(VARIABLE_NAME);
 		b.advanceLexer();
 		return true;
+	}
+
+	protected static boolean isOperatorToken(PsiBuilder b, int l)
+	{
+		return PerlLexer.OPERATORS_TOKENSET.contains(b.getTokenType());
 	}
 
 	public static boolean parseAmbiguousSigil(PsiBuilder b, int l, IElementType sigilTokenType, IElementType targetTokenType)
@@ -1897,4 +1902,46 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return true;
 	}
+
+	/**
+	 * Parsing simple call arguments, prototype tricks not allowed (like code block without sub
+	 *
+	 * @param b Perlbuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseSimpleCallArguments(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.expr(b, l, -1))
+		{
+			m.done(CALL_ARGUMENTS);
+			return true;
+		}
+		m.drop();
+		return false;
+	}
+
+
+	/**
+	 * Parsing sub name, any identifier might be
+	 *
+	 * @param b Perlbuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseSubDefinitionName(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		if (CONVERTABLE_TOKENS.contains(tokenType) || PerlLexer.RESERVED_TOKENSET.contains(tokenType))
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(SUB);
+			return true;
+		}
+		return false;
+	}
+
+
 }
