@@ -43,11 +43,11 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			"    say $var1 | $var2;\n" +
 			"    for( my $i=1;$i<2;$i++)\n" +
 			"    {\n" +
-			"    say $var1&$var2;\n" +
-			"    say $var1+$var2;\n" +
+			"    $a = $var1&$var2;\n" +
+			"    $a = $var1+$var2;\n" +
 			"    }\n" +
-			"    say $var1*$var2;\n" +
-			"    say $var1<<2;\n" +
+			"    $a = $var1*$var2;\n" +
+			"    $a = $var1<<2;\n" +
 			"    \n" +
 			"    until( !$var1)" +
 			"    {\n" +
