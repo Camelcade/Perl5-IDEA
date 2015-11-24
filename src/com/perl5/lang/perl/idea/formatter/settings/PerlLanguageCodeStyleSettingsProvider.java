@@ -33,30 +33,28 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 {
 	private static final String DEFAULT_CODE_SAMPLE = "# Not yet implemented";
 	private static final String SPACING_CODE_SAMPLE = "my ($var1, $var2);\n" +
-			"$var1=100;\n" +
+			"$var1 = 100;\n" +
 			"$var2 = 200;\n" +
 			"\n" +
-			"if($var1==var2)" +
-			"{\n" +
-			"    my $arrayref = [1,1,2,3,5,8];\n" +
+			"if ($var1 == $var2) {\n" +
+			"    my $arrayref = [1, 1, 2, 3, 5, 8];\n" +
 			"    say $var1 && $var2;\n" +
 			"    say $var1 | $var2;\n" +
-			"    for( my $i=1;$i<2;$i++)\n" +
-			"    {\n" +
-			"    $a = $var1&$var2;\n" +
-			"    $a = $var1+$var2;\n" +
+			"    for (my $i = 1; $i < 2; $i++)    {\n" +
+			"        $a = $var1 & $var2;\n" +
+			"        $a = $var1 + $var2;\n" +
 			"    }\n" +
-			"    $a = $var1*$var2;\n" +
-			"    $a = $var1<<2;\n" +
-			"    \n" +
-			"    until( !$var1)" +
-			"    {\n" +
-			"        eval{ say $var2? $var2: $var1;};\n" +
-			"    }    \n" +
-			"}" +
-			"else\n" +
-			"{\n" +
-			"    say ($var1)unless $var2;\n" +
+			"    $a = $var1 * $var2;\n" +
+			"    $a = $var1 << 2;\n" +
+			"\n" +
+			"    until (!$var1) {\n" +
+			"        eval { say $var2 ? $var2 : $var1;};\n" +
+			"    }\n" +
+			"} elsif ($var2) {\n" +
+			"    say ($var1) unless $var2;\n" +
+			"    say $var1 for @ARGV;\n" +
+			"}else {\n" +
+			"    say ($var1) unless $var2;\n" +
 			"    say $var1 for @ARGV;\n" +
 			"}";
 	private static final String INDENT_CODE_SAMPLE = "if( $cond )\n" +
@@ -118,14 +116,14 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
 					"SPACE_BEFORE_ELSE_KEYWORD",    // implemented, else,elsif,continue,default
 
-					"SPACE_BEFORE_WHILE_KEYWORD",    // implemented, postfix if/for/etc
+//					"SPACE_BEFORE_WHILE_KEYWORD",    // implemented, postfix if/for/etc
 					"SPACE_BEFORE_DO_LBRACE"        // implemented, sub_{}, do_{}, eval_{}
 			);
 			consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
 			consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
 			consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", SPACE_OPTION_COMPOUND_BLOCK);
 			consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", SPACE_OPTION_COMPOUND_SECONDARY);
-			consumer.renameStandardOption("SPACE_BEFORE_WHILE_KEYWORD", SPACE_OPTION_STATEMENT_MODIFIERS);
+//			consumer.renameStandardOption("SPACE_BEFORE_WHILE_KEYWORD", SPACE_OPTION_STATEMENT_MODIFIERS);
 			consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", SPACE_OPTION_TERM_BLOCKS);
 
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD", SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD, SPACE_GROUP_AFTER_KEYWORD);

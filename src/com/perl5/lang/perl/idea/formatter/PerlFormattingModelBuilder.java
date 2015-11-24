@@ -67,7 +67,6 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.beforeInside(SEMICOLON, FOR_ITERATOR).spaceIf(settings.SPACE_BEFORE_SEMICOLON)
 
 				.between(RESERVED_TERMS_BLOCKS, BLOCK).spaceIf(settings.SPACE_BEFORE_DO_LBRACE)
-				.beforeInside(STATEMENT_MODIFIERS, STATEMENT).spaceIf(settings.SPACE_BEFORE_WHILE_KEYWORD)
 
 				.between(RESERVED_COMPOUND_CONDITIONAL, CONDITIONAL_BLOCK).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
 				.between(RESERVED_FOR, FOR_ITERATOR).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
@@ -81,6 +80,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.afterInside(RESERVED_WHEN, WHEN_STATEMENT_MODIFIER).spaceIf(settings.SPACE_BEFORE_IF_PARENTHESES)
 
 				.beforeInside(BLOCK, BLOCK_CONTAINERS).spaceIf(settings.SPACE_BEFORE_IF_LBRACE)
+				.between(RESERVED_ELSE, UNCONDITIONAL_BLOCK).spaceIf(settings.SPACE_BEFORE_IF_LBRACE)
 
 				.afterInside(LEFT_PAREN, CONDITION_LIKE_ELEMENTS).spaceIf(settings.SPACE_WITHIN_IF_PARENTHESES)
 				.beforeInside(RIGHT_PAREN, CONDITION_LIKE_ELEMENTS).spaceIf(settings.SPACE_WITHIN_IF_PARENTHESES)
@@ -98,6 +98,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				// perl specific
 				.after(RESERVED_VARIABLE_DECLARATION).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
 				.around(OPERATOR_COMMA_ARROW).spacing(1, 1, 0, true, 1)
+				.beforeInside(STATEMENT_MODIFIERS, STATEMENT).spaces(1)
 				;
 	}
 

@@ -30,7 +30,7 @@ public interface PerlCodeStyleOptionNames
 	String SPACE_OPTION_COMPOUND_SECONDARY = "Secondary compound (else/elsif/continue/default)";
 	String SPACE_OPTION_TERM_BLOCKS = "Term blocks (sub/eval/do)";
 
-	String SPACE_OPTION_STATEMENT_MODIFIERS = "Statement modifiers";
+	String SPACE_OPTION_STATEMENT_MODIFIERS = "!!!Unused";
 
 	String TAB_PERL_SETTINGS = "Perl5-specific";
 

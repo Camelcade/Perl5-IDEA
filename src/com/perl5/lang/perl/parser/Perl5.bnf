@@ -461,10 +461,11 @@ private compound_statement ::=
 
 named_block ::= BLOCK_NAME block
 
-if_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_IF conditional_block if_compound_elsif * [unconditional_block]  {pin=2}
-unless_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_UNLESS conditional_block if_compound_elsif * [unconditional_block]  {pin=2}
+if_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_IF conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
+unless_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
 private if_compound_elsif ::= [POD] [PACKAGE_CORE_IDENTIFIER] RESERVED_ELSIF conditional_block  {pin=3}
-unconditional_block ::= [POD] [PACKAGE_CORE_IDENTIFIER] RESERVED_ELSE block {pin=3}
+private if_compound_else ::= [POD] [PACKAGE_CORE_IDENTIFIER] RESERVED_ELSE unconditional_block {pin=3}
+unconditional_block ::= block
 
 conditional_block ::= condition_statement block {pin=1 name="Conditional block"}
 condition_statement ::= LEFT_PAREN condition_statement_expr RIGHT_PAREN {pin=1 name="Condition"}
