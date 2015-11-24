@@ -260,12 +260,11 @@ public class PerlLexer extends PerlLexerGenerated
 			"return",
 			"grep"
 	));
-	public static final HashSet<IElementType> RESERVED_TOKENSET = new HashSet<IElementType>();
-	public static final HashMap<String, IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
-	public static final HashMap<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
-	public static final HashMap<String, IElementType> namedOperators = new HashMap<String, IElementType>();
-	public static final HashMap<String, IElementType> blockNames = new HashMap<String, IElementType>();
-	public static final HashMap<String, IElementType> tagNames = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> namedOperators = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> blockNames = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> tagNames = new HashMap<String, IElementType>();
 	// tokens that preceeds regexp opener or file <FH>
 	public static final TokenSet TERM_PREFIX =
 			TokenSet.andNot(
@@ -301,6 +300,7 @@ public class PerlLexer extends PerlLexerGenerated
 			"s",
 			"y"
 	));
+	public static TokenSet RESERVED_TOKENSET;
 	public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
 	public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
 
@@ -451,7 +451,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public static void initReservedTokensSet()
 	{
-		RESERVED_TOKENSET.addAll(RESERVED_TOKEN_TYPES.values());
+		RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
 	}
 
 	/**
