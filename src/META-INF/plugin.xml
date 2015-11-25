@@ -130,6 +130,7 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MojoBaseProcessor"/>
 
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlMethodSignaturesSimpleParserExtension" />
+        <parserExtension implementation="com.perl5.lang.perl.parser.PerlMooseParserExtensionImpl"/>
 
     </extensions>
 
