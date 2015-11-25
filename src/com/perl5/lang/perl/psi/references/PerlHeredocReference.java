@@ -45,6 +45,7 @@ public class PerlHeredocReference extends PerlReference
 	}
 
 	// fixme move to PsiUtil ?
+	@Nullable
 	public static PsiElement getClosestHeredocOpener(PsiElement element)
 	{
 		return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), null, element.getTextOffset());

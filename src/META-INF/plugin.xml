@@ -85,6 +85,7 @@
         <li>Fixed problem with unary plus/minus formatting, fixes #571</li>
         <li>Fixed bug with // formatting, fixes #594</li>
         <li>Fixed problems with indention inside ternar operator, fixes #592</li>
+        <li>Fixed possible NPE on re-formatting line with here-doc opener, fixes CAMELCADE-28</li>
       </ul>
       </p>
 

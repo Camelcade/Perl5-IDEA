@@ -237,11 +237,18 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			PsiElement lastLineElement = file.findElementAt(lineEndOffset);
 			return lastLineElement != null
 					&& lastLineElement.getParent() instanceof PerlHeredocElementImpl
-					&& PerlHeredocReference.getClosestHeredocOpener(lastLineElement).getTextOffset() < endOffset
+					&& isHeredocOpenerBeforeOffset(lastLineElement, endOffset)
 					;
 		}
 		return false;
 	}
+
+	private boolean isHeredocOpenerBeforeOffset(PsiElement anchor, int offset)
+	{
+		PsiElement opener = PerlHeredocReference.getClosestHeredocOpener(anchor);
+		return opener == null || opener.getTextOffset() < offset;
+	}
+
 
 	@Override
 	public boolean isLeaf()
