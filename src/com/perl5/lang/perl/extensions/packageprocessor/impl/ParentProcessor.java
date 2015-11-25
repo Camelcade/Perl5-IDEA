@@ -51,12 +51,10 @@ public class ParentProcessor extends BaseProcessor implements IPerlPackageOption
 		return Collections.emptyMap();
 	}
 
-	@NotNull
 	@Override
-	public List<String> getParentsList(PerlUseStatement useStatement)
+	public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList)
 	{
-		List<String> parents = super.getParentsList(useStatement);
-		parents.removeAll(getOptions().keySet());
-		return parents;
+		super.changeParentsList(useStatement, currentList);
+		currentList.removeAll(getOptions().keySet());
 	}
 }

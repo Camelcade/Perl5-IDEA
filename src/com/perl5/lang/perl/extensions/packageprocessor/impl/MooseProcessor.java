@@ -17,100 +17,45 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
-import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlStrictMask;
 import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * Created by hurricup on 25.08.2015.
+ * Created by hurricup on 25.11.2015.
  */
-public class MojoBaseProcessor extends PerlPackageProcessorBase implements
+public class MooseProcessor extends PerlPackageProcessorBase implements
 		IPerlStrictProvider,
-		IPerlUtfProvider,
 		IPerlWarningsProvider,
-		IPerlFeaturesProvider,
-		IPerlPackageOptionsProvider,
 		IPerlPackageParentsProvider,
 		IPerlPackageLoader
 {
-	public static final String MOJO_BASE = "Mojo::Base";
-	public static final String IO_HANDLE = "IO::Handle";
-
-	protected static final Map<String, String> OPTIONS = new HashMap<String, String>();
-
-	static
-	{
-		OPTIONS.put("-strict", "strict,warnings,utf8,v5.10,IO::Handle");
-		OPTIONS.put("-base", "strict,warnings,utf8,v5.10,IO::Handle,acts as parent");
-	}
-
-	@Override
-	public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable)
-	{
-		return currentFeaturesTable.clone();
-	}
+	public static final String MOOSE_OBJECT = "Moose::Object";
+	protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOOSE_OBJECT);
+	protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
 
 	@Override
 	public List<String> getLoadedPackageNames(PerlUseStatement useStatement)
 	{
-		List<String> loadedPackages = new ArrayList<String>(Arrays.asList(IO_HANDLE));
-		List<String> allOptions = useStatement.getImportParameters();
-
-		if (allOptions != null)
-		{
-			allOptions.removeAll(getOptions().keySet());
-
-			if (allOptions.size() > 0 && !MOJO_BASE.equals(allOptions.get(0)))
-			{
-				loadedPackages.add(allOptions.get(0));
-			}
-		}
-
-		return loadedPackages;
-	}
-
-	@NotNull
-	@Override
-	public Map<String, String> getOptions()
-	{
-		return OPTIONS;
-	}
-
-	@NotNull
-	@Override
-	public Map<String, String> getOptionsBundles()
-	{
-		return Collections.emptyMap();
+		return getLoadedClasses();
 	}
 
 	@Override
 	public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList)
 	{
-		List<String> allOptions = useStatement.getImportParameters();
-
-		if (allOptions != null)
-		{
-			if (allOptions.contains("-base"))
-			{
-				currentList.add(MOJO_BASE);
-			}
-			else
-			{
-				allOptions.removeAll(getOptions().keySet());
-				currentList.add(allOptions.get(0));
-			}
-		}
+		currentList.clear();
+		currentList.addAll(getParentClasses());
 	}
-
 
 	@Override
 	public boolean hasPackageFilesOptions()
 	{
-		return true;
+		return false;
 	}
 
 	@Override
@@ -125,5 +70,15 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
 	{
 		// fixme implement modification
 		return currentMask.clone();
+	}
+
+	public List<String> getLoadedClasses()
+	{
+		return LOADED_CLASSES;
+	}
+
+	public List<String> getParentClasses()
+	{
+		return PARENT_CLASSES;
 	}
 }

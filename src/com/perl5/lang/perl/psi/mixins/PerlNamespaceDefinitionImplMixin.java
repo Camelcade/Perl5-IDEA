@@ -111,17 +111,31 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getParentNamespaces();
 
+		// checking compile-time modifications
 		LinkedHashSet<String> result = new LinkedHashSet<String>();
 
+		List<String> parentClasses = new ArrayList<String>();
 		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
+		{
 			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof IPerlPackageParentsProvider)
-				result.addAll(((IPerlPackageParentsProvider) useStatement.getPackageProcessor()).getParentsList(useStatement));
+			{
+				((IPerlPackageParentsProvider) useStatement.getPackageProcessor()).changeParentsList(useStatement, parentClasses);
+			}
+		}
 
+		// checking runtime modifications
+
+
+		result.addAll(parentClasses);
+
+		// checking runtime @ISA
 		List<String> isa = getArrayAsList("ISA");
 
 		// fixme, acutally isa might overwrite isa from packages
 		if (isa != null)
+		{
 			result.addAll(isa);
+		}
 
 		return new ArrayList<String>(result);
 	}

@@ -16,32 +16,27 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by hurricup on 18.08.2015.
+ * Created by hurricup on 25.11.2015.
  */
-public class BaseProcessor extends PerlPragmaProcessorBase implements IPerlPackageParentsProvider
+public class MooProcessor extends MooseProcessor
 {
+	public static final String MOO_OBJECT = "Moo::Object";
+	protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOO_OBJECT);
+	protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
+
 	@Override
-	public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList)
+	public List<String> getLoadedClasses()
 	{
-		List<String> useParameters = useStatement.getImportParameters();
-		if (useParameters != null)
-		{
-			currentList.addAll(useParameters);
-		}
+		return LOADED_CLASSES;
 	}
 
 	@Override
-	public boolean hasPackageFilesOptions()
+	public List<String> getParentClasses()
 	{
-		return true;
+		return PARENT_CLASSES;
 	}
 }

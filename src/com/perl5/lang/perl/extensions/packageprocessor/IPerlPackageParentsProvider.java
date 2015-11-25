@@ -28,18 +28,16 @@ import java.util.List;
 public interface IPerlPackageParentsProvider
 {
 	/**
-	 * Returns list of parents provided by this package. Informaion being collected from all processors sequentially
-	 *
-	 * @return list of parent packages names
+	 * Modify list of parents provided by this package. Informaion being collected from all processors sequentially
+	 * @param useStatement use statement to fetch parameters from
+	 * @param currentList current parents list
 	 */
-	public
-	@NotNull
-	List<String> getParentsList(PerlUseStatement useStatement);
+	void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList);
 
 	/**
 	 * Returns true if we should show available package files in autocompletion
 	 *
 	 * @return result
 	 */
-	public boolean hasPackageFilesOptions();
+	boolean hasPackageFilesOptions();
 }
