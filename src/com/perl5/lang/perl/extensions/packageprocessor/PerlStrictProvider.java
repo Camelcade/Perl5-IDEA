@@ -16,13 +16,20 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.perl5.lang.perl.internals.PerlStrictMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 /**
- * Created by evstigneev on 21.08.2015.
+ * Created by hurricup on 23.08.2015.
+ * Marks package processor, that it can modify $^H (see use strict)
  */
-public interface IPerlMroProvider
+public interface PerlStrictProvider
 {
-	public PerlMroType getMroType(PerlUseStatement useStatement);
+	/**
+	 * Adjusts current mask with values, according to package import settings
+	 *
+	 * @param currentMask mask of the outer block, or null if there is no outer block
+	 * @return modified mask
+	 */
+	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask);
 }

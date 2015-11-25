@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlWarningsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTree;
@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class WarningsProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider, IPerlWarningsProvider
+public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlWarningsProvider
 {
 	protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
 	protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<String, String>();

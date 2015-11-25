@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlLibProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 
@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by hurricup on 19.09.2015.
  */
-public class LibProcessor extends PerlPragmaProcessorBase implements IPerlLibProvider
+public class LibProcessor extends PerlPragmaProcessorBase implements PerlLibProvider
 {
 	@Override
 	public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs)

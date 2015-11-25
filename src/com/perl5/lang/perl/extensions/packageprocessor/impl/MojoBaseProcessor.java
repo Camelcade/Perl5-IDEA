@@ -29,13 +29,13 @@ import java.util.*;
  * Created by hurricup on 25.08.2015.
  */
 public class MojoBaseProcessor extends PerlPackageProcessorBase implements
-		IPerlStrictProvider,
-		IPerlUtfProvider,
-		IPerlWarningsProvider,
-		IPerlFeaturesProvider,
-		IPerlPackageOptionsProvider,
-		IPerlPackageParentsProvider,
-		IPerlPackageLoader
+		PerlStrictProvider,
+		PerlUtfProvider,
+		PerlWarningsProvider,
+		PerlFeaturesProvider,
+		PerlPackageOptionsProvider,
+		PerlPackageParentsProvider,
+		PerlPackageLoader
 {
 	public static final String MOJO_BASE = "Mojo::Base";
 	public static final String IO_HANDLE = "IO::Handle";

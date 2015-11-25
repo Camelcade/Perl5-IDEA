@@ -16,18 +16,17 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class BaseProcessor extends PerlPragmaProcessorBase implements IPerlPackageParentsProvider
+public class BaseProcessor extends PerlPragmaProcessorBase implements PerlPackageParentsProvider
 {
 	@Override
 	public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList)

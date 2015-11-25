@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlMroProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by evstigneev on 21.08.2015.
  */
-public class MroProcessor extends PerlPragmaProcessorBase implements IPerlMroProvider
+public class MroProcessor extends PerlPragmaProcessorBase implements PerlMroProvider
 {
 	@Override
 	public PerlMroType getMroType(PerlUseStatement useStatement)

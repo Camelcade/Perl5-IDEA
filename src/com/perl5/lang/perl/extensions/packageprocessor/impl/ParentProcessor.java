@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class ParentProcessor extends BaseProcessor implements IPerlPackageOptionsProvider
+public class ParentProcessor extends BaseProcessor implements PerlPackageOptionsProvider
 {
 	protected static final Map<String, String> OPTIONS = new HashMap<String, String>();
 

@@ -16,20 +16,10 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.perl5.lang.perl.internals.PerlStrictMask;
-import com.perl5.lang.perl.psi.PerlUseStatement;
-
 /**
- * Created by hurricup on 23.08.2015.
- * Marks package processor, that it can modify $^H (see use strict)
+ * Created by hurricup on 25.08.2015.
+ * Marks that this package modifies utf bits of $^H
  */
-public interface IPerlStrictProvider
+public interface PerlUtfProvider extends PerlStrictProvider
 {
-	/**
-	 * Adjusts current mask with values, according to package import settings
-	 *
-	 * @param currentMask mask of the outer block, or null if there is no outer block
-	 * @return modified mask
-	 */
-	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask);
 }

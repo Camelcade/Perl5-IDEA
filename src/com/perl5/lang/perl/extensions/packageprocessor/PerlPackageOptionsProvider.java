@@ -16,20 +16,30 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.perl5.lang.perl.internals.PerlWarningsMask;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 /**
- * Created by hurricup on 23.08.2015.
- * Marks package processor that it can modify ${^WARNING_BITS} (see use warnings)
+ * Created by hurricup on 18.08.2015.
+ * Implement this interface if package should provide options for autocompletion
  */
-public interface IPerlWarningsProvider
+public interface PerlPackageOptionsProvider
 {
 	/**
-	 * Adjusts current mask with values, according to package import settings
+	 * Returns full list of available options with explanations
 	 *
-	 * @param currentMask mask of the outer block, or null if there is no outer block
-	 * @return modified mask
+	 * @return HashMap of options
 	 */
-	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask);
+	@NotNull
+	public Map<String, String> getOptions();
+
+	/**
+	 * Returns full list of available bundled options, atm they are with other icon
+	 * fixme Probably we should return options with icons?
+	 *
+	 * @return HashMap of bundled options
+	 */
+	@NotNull
+	public Map<String, String> getOptionsBundles();
 }

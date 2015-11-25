@@ -16,15 +16,21 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 
-import java.util.List;
-
 /**
- * Created by hurricup on 19.09.2015.
+ * Created by hurricup on 23.08.2015.
+ * Marks a package processor that it can modify %^H (see use feature)
  */
-public interface IPerlLibProvider
+public interface PerlFeaturesProvider
 {
-	public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs);
+	/**
+	 * Modifies outer block's features table
+	 *
+	 * @param useStatement         use statement reference
+	 * @param currentFeaturesTable features table of outer block
+	 * @return new features table
+	 */
+	public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable);
 }

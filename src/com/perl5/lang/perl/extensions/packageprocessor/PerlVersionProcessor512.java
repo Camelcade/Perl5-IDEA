@@ -22,7 +22,7 @@ import com.perl5.lang.perl.psi.PerlUseStatement;
 /**
  * Created by hurricup on 09.09.2015.
  */
-public class PerlVersionProcessor512 extends PerlVersionProcessor implements IPerlStrictProvider
+public class PerlVersionProcessor512 extends PerlVersionProcessor implements PerlStrictProvider
 {
 	protected static final PerlVersionProcessor INSTANCE = new PerlVersionProcessor512();
 

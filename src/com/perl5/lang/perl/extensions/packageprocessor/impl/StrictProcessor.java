@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlStrictProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.internals.PerlStrictMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class StrictProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider, IPerlStrictProvider
+public class StrictProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlStrictProvider
 {
 	protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
 

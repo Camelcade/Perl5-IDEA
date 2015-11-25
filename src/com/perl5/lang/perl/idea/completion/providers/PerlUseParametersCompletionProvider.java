@@ -27,8 +27,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
@@ -61,9 +61,9 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 			if (packageProcessor != null)
 			{
 				// fixme we should allow lookup elements customization by package processor
-				if (packageProcessor instanceof IPerlPackageOptionsProvider)
+				if (packageProcessor instanceof PerlPackageOptionsProvider)
 				{
-					Map<String, String> options = ((IPerlPackageOptionsProvider) packageProcessor).getOptions();
+					Map<String, String> options = ((PerlPackageOptionsProvider) packageProcessor).getOptions();
 
 					for (Map.Entry<String, String> option : options.entrySet())
 						resultSet.addElement(LookupElementBuilder
@@ -72,7 +72,7 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 								.withIcon(PerlIcons.PERL_OPTION)
 								.withInsertHandler(USE_OPTION_INSERT_HANDLER));
 
-					options = ((IPerlPackageOptionsProvider) packageProcessor).getOptionsBundles();
+					options = ((PerlPackageOptionsProvider) packageProcessor).getOptionsBundles();
 
 					for (Map.Entry<String, String> option : options.entrySet())
 						resultSet.addElement(LookupElementBuilder
@@ -82,7 +82,7 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 								.withInsertHandler(USE_OPTION_INSERT_HANDLER));
 				}
 
-				if (packageProcessor instanceof IPerlPackageParentsProvider && ((IPerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
+				if (packageProcessor instanceof PerlPackageParentsProvider && ((PerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
 					PerlPackageUtil.processPackageFilesForPsiElement(parameters.getPosition(), new Processor<String>()
 					{
 						@Override

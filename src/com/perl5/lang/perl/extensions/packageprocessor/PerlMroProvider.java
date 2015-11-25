@@ -17,19 +17,12 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.psi.PerlUseStatement;
-
-import java.util.List;
+import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 /**
- * Created by hurricup on 25.08.2015.
- * Marks that current package loading others
+ * Created by evstigneev on 21.08.2015.
  */
-public interface IPerlPackageLoader
+public interface PerlMroProvider
 {
-	/**
-	 * Returns list of canonical names of loaded packages
-	 *
-	 * @return list of canonical package names
-	 */
-	public List<String> getLoadedPackageNames(PerlUseStatement useStatement);
+	public PerlMroType getMroType(PerlUseStatement useStatement);
 }

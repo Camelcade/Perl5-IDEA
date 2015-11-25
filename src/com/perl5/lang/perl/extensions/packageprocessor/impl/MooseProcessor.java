@@ -22,7 +22,6 @@ import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,10 +29,10 @@ import java.util.List;
  * Created by hurricup on 25.11.2015.
  */
 public class MooseProcessor extends PerlPackageProcessorBase implements
-		IPerlStrictProvider,
-		IPerlWarningsProvider,
-		IPerlPackageParentsProvider,
-		IPerlPackageLoader
+		PerlStrictProvider,
+		PerlWarningsProvider,
+		PerlPackageParentsProvider,
+		PerlPackageLoader
 {
 	public static final String MOOSE_OBJECT = "Moose::Object";
 	protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOOSE_OBJECT);

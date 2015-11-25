@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlFeaturesProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlFeaturesProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.PerlUseStatement;
@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * Created by evstigneev on 19.08.2015.
  */
-public class FeatureProcessor extends PerlPragmaProcessorBase implements IPerlPackageOptionsProvider, IPerlFeaturesProvider
+public class FeatureProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlFeaturesProvider
 {
 	protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
 	protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<String, String>();

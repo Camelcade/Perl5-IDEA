@@ -16,10 +16,20 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.perl5.lang.perl.psi.PerlUseStatement;
+
+import java.util.List;
+
 /**
  * Created by hurricup on 25.08.2015.
- * Marks that this package modifies utf bits of $^H
+ * Marks that current package loading others
  */
-public interface IPerlUtfProvider extends IPerlStrictProvider
+public interface PerlPackageLoader
 {
+	/**
+	 * Returns list of canonical names of loaded packages
+	 *
+	 * @return list of canonical package names
+	 */
+	public List<String> getLoadedPackageNames(PerlUseStatement useStatement);
 }

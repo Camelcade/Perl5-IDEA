@@ -23,7 +23,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.embedded.psi.EmbeddedPerlFileType;
 import com.perl5.lang.mojolicious.MojoliciousPerlFileType;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlStrictProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -48,7 +48,7 @@ public class PerlUseStrictInspection extends PerlInspection
 					return;
 
 				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-					if (useStatement.getPackageProcessor() instanceof IPerlStrictProvider)
+					if (useStatement.getPackageProcessor() instanceof PerlStrictProvider)
 						return;
 
 				holder.registerProblem(

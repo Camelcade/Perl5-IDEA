@@ -16,21 +16,20 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.perl5.lang.perl.internals.PerlFeaturesTable;
+import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 
 /**
  * Created by hurricup on 23.08.2015.
- * Marks a package processor that it can modify %^H (see use feature)
+ * Marks package processor that it can modify ${^WARNING_BITS} (see use warnings)
  */
-public interface IPerlFeaturesProvider
+public interface PerlWarningsProvider
 {
 	/**
-	 * Modifies outer block's features table
+	 * Adjusts current mask with values, according to package import settings
 	 *
-	 * @param useStatement         use statement reference
-	 * @param currentFeaturesTable features table of outer block
-	 * @return new features table
+	 * @param currentMask mask of the outer block, or null if there is no outer block
+	 * @return modified mask
 	 */
-	public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable);
+	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask);
 }

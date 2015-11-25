@@ -24,8 +24,8 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlMroProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
@@ -117,9 +117,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		List<String> parentClasses = new ArrayList<String>();
 		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
 		{
-			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof IPerlPackageParentsProvider)
+			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof PerlPackageParentsProvider)
 			{
-				((IPerlPackageParentsProvider) useStatement.getPackageProcessor()).changeParentsList(useStatement, parentClasses);
+				((PerlPackageParentsProvider) useStatement.getPackageProcessor()).changeParentsList(useStatement, parentClasses);
 			}
 		}
 
@@ -161,8 +161,8 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return stub.getMroType();
 
 		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
-			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof IPerlMroProvider)
-				return ((IPerlMroProvider) useStatement.getPackageProcessor()).getMroType(useStatement);
+			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof PerlMroProvider)
+				return ((PerlMroProvider) useStatement.getPackageProcessor()).getMroType(useStatement);
 
 		return PerlMroType.DFS;
 	}

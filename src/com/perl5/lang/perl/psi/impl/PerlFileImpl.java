@@ -33,7 +33,7 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubTreeLoader;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.extensions.packageprocessor.IPerlLibProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.fileTypes.PerlFileTypePackage;
@@ -360,9 +360,9 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PerlUseStatement.class))
 		{
 			PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
-			if (packageProcessor instanceof IPerlLibProvider)
+			if (packageProcessor instanceof PerlLibProvider)
 			{
-				((IPerlLibProvider) packageProcessor).addLibDirs(useStatement, result);
+				((PerlLibProvider) packageProcessor).addLibDirs(useStatement, result);
 			}
 		}
 
