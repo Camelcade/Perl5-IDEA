@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlTokenType;
 
 /**
@@ -23,16 +25,27 @@ import com.perl5.lang.perl.PerlTokenType;
  */
 public interface PerlMooseParserExtension
 {
-	PerlTokenType RESERVED_INNER = new PerlTokenType("inner");
-	PerlTokenType RESERVED_WITH = new PerlTokenType("with");
-	PerlTokenType RESERVED_EXTENDS = new PerlTokenType("extends");
-	PerlTokenType RESERVED_META = new PerlTokenType("meta");
-	PerlTokenType RESERVED_OVERRIDE = new PerlTokenType("override");
-	PerlTokenType RESERVED_AROUND = new PerlTokenType("around");
-	PerlTokenType RESERVED_SUPER = new PerlTokenType("super");
-	PerlTokenType RESERVED_AUGMENT = new PerlTokenType("augment");
-	PerlTokenType RESERVED_AFTER = new PerlTokenType("after");
-	PerlTokenType RESERVED_BEFORE = new PerlTokenType("before");
-	PerlTokenType RESERVED_HAS = new PerlTokenType("has");
+	IElementType RESERVED_INNER = new PerlTokenType("inner");
+	IElementType RESERVED_WITH = new PerlTokenType("with");
+	IElementType RESERVED_EXTENDS = new PerlTokenType("extends");
+	IElementType RESERVED_META = new PerlTokenType("meta");
+	IElementType RESERVED_OVERRIDE = new PerlTokenType("override");
+	IElementType RESERVED_AROUND = new PerlTokenType("around");
+	IElementType RESERVED_SUPER = new PerlTokenType("super");
+	IElementType RESERVED_AUGMENT = new PerlTokenType("augment");
+	IElementType RESERVED_AFTER = new PerlTokenType("after");
+	IElementType RESERVED_BEFORE = new PerlTokenType("before");
+	IElementType RESERVED_HAS = new PerlTokenType("has");
 
+	IElementType MOOSE_STATEMENT_INNER = new PerlElementType("MOOSE_STATEMENT_INNER");
+	IElementType MOOSE_STATEMENT_WITH = new PerlElementType("MOOSE_STATEMENT_WITH");
+	IElementType MOOSE_STATEMENT_EXTENDS = new PerlElementType("MOOSE_STATEMENT_EXTENDS");
+	IElementType MOOSE_STATEMENT_META = new PerlElementType("MOOSE_STATEMENT_META");
+	IElementType MOOSE_STATEMENT_OVERRIDE = new PerlElementType("MOOSE_STATEMENT_OVERRIDE");
+	IElementType MOOSE_STATEMENT_AROUND = new PerlElementType("MOOSE_STATEMENT_AROUND");
+	IElementType MOOSE_STATEMENT_SUPER = new PerlElementType("MOOSE_STATEMENT_SUPER");
+	IElementType MOOSE_STATEMENT_AUGMENT = new PerlElementType("MOOSE_STATEMENT_AUGMENT");
+	IElementType MOOSE_STATEMENT_AFTER = new PerlElementType("MOOSE_STATEMENT_AFTER");
+	IElementType MOOSE_STATEMENT_BEFORE = new PerlElementType("MOOSE_STATEMENT_BEFORE");
+	IElementType MOOSE_STATEMENT_HAS = new PerlElementType("MOOSE_STATEMENT_HAS");
 }

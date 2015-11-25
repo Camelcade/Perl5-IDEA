@@ -58,7 +58,7 @@ public abstract class PerlParserExtension
 	 * @return class instance or null if undhandled
 	 */
 	@Nullable
-	public PsiElement createElement(ASTNode node)
+	public PsiElement createElement(@NotNull ASTNode node)
 	{
 		return null;
 	}
