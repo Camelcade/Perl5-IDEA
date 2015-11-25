@@ -22,15 +22,22 @@ package com.perl5.lang.perl.idea.formatter.settings;
 public interface PerlCodeStyleOptionNames
 {
 	String SPACE_GROUP_AFTER_KEYWORD = "After keywords";
-
 	String SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD = "Variable declaration";
+
 	String SPACE_OPTION_COMPOUND_EXPRESSION = "Compound condition or expression";
 	String SPACE_OPTION_COMPOUND_BLOCK = "Compound block";
 
 	String SPACE_OPTION_COMPOUND_SECONDARY = "Secondary compound (else/elsif/continue/default)";
 	String SPACE_OPTION_TERM_BLOCKS = "Term blocks (sub/eval/do)";
 
-	String SPACE_OPTION_STATEMENT_MODIFIERS = "!!!Unused";
+	String SPACE_GROUP_ANON_HASH = "Anonymous hashes";
+	String SPACE_OPTION_ANON_HASH_AFTER_LEFT_BRACE = "After left brace";
+	String SPACE_OPTION_ANON_HASH_BEFORE_RIGHT_BRACE = "Before right brace";
+
+	String SPACE_GROUP_ANON_ARRAY = "Anonymous arrays";
+	String SPACE_OPTION_ANON_ARRAY_AFTER_LEFT_BRACKET = "After left bracket";
+	String SPACE_OPTION_ANON_ARRAY_BEFORE_RIGHT_BRACKET = "Before right bracket";
+
 
 	String TAB_PERL_SETTINGS = "Perl5-specific";
 

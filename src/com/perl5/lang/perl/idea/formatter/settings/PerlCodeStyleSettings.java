@@ -39,6 +39,12 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 
 	public boolean SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;
 
+	public boolean SPACE_ANON_HASH_AFTER_LEFT_BRACE = true;
+	public boolean SPACE_ANON_HASH_BEFORE_RIGHT_BRACE = true;
+
+	public boolean SPACE_ANON_ARRAY_AFTER_LEFT_BRACKET = true;
+	public boolean SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET = true;
+
 	public PerlCodeStyleSettings(CodeStyleSettings container)
 	{
 		super("Perl5CodeStyleSettings", container);

@@ -37,7 +37,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			"$var2 = 200;\n" +
 			"\n" +
 			"if ($var1 == $var2) {\n" +
-			"    my $arrayref = [1, 1, 2, 3, 5, 8];\n" +
+			"    my $arrayref = [1, 1, 2, 3, 5, { key => 'val'}];\n" +
 			"    say $var1 && $var2;\n" +
 			"    say $var1 | $var2;\n" +
 			"    for (my $i = 1; $i < 2; $i++)    {\n" +
@@ -116,17 +116,21 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
 					"SPACE_BEFORE_ELSE_KEYWORD",    // implemented, else,elsif,continue,default
 
-//					"SPACE_BEFORE_WHILE_KEYWORD",    // implemented, postfix if/for/etc
 					"SPACE_BEFORE_DO_LBRACE"        // implemented, sub_{}, do_{}, eval_{}
 			);
 			consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
 			consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
 			consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", SPACE_OPTION_COMPOUND_BLOCK);
 			consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", SPACE_OPTION_COMPOUND_SECONDARY);
-//			consumer.renameStandardOption("SPACE_BEFORE_WHILE_KEYWORD", SPACE_OPTION_STATEMENT_MODIFIERS);
 			consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", SPACE_OPTION_TERM_BLOCKS);
 
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD", SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD, SPACE_GROUP_AFTER_KEYWORD);
+
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_HASH_AFTER_LEFT_BRACE", SPACE_OPTION_ANON_HASH_AFTER_LEFT_BRACE, SPACE_GROUP_ANON_HASH);
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_HASH_BEFORE_RIGHT_BRACE", SPACE_OPTION_ANON_HASH_BEFORE_RIGHT_BRACE, SPACE_GROUP_ANON_HASH);
+
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_ARRAY_AFTER_LEFT_BRACKET", SPACE_OPTION_ANON_ARRAY_AFTER_LEFT_BRACKET, SPACE_GROUP_ANON_ARRAY);
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET", SPACE_OPTION_ANON_ARRAY_BEFORE_RIGHT_BRACKET, SPACE_GROUP_ANON_ARRAY);
 		}
 		else if (settingsType == SettingsType.LANGUAGE_SPECIFIC)
 		{
