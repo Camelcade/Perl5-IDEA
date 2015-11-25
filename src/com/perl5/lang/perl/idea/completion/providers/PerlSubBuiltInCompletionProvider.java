@@ -39,12 +39,20 @@ public class PerlSubBuiltInCompletionProvider extends CompletionProvider<Complet
 	static
 	{
 		for (String subName : PerlSubUtil.BUILT_IN)
-			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-					.create(subName)
-					.withIcon(PerlIcons.SUB_GUTTER_ICON)
-					.withBoldness(true)
-			);
+		{
+			addCompletion(subName);
+		}
 	}
+
+	public static void addCompletion(String subName)
+	{
+		BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
+				.create(subName)
+				.withIcon(PerlIcons.SUB_GUTTER_ICON)
+				.withBoldness(true)
+		);
+	}
+
 
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
