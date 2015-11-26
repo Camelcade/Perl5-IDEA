@@ -17,12 +17,11 @@
 package com.perl5.lang.perl.parser.moose;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAfterStatementImpl extends PsiPerlStatementImpl implements PerlMooseAfterStatement
+public class PerlMooseAfterStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAfterStatement
 {
 	public PerlMooseAfterStatementImpl(ASTNode node)
 	{

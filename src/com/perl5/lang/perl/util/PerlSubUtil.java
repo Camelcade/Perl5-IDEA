@@ -45,6 +45,8 @@ import java.util.Set;
  */
 public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 {
+	public static final String SUB_AUTOLOAD = "AUTOLOAD";
+
 	/**
 	 * Checks if provided function is built in
 	 *

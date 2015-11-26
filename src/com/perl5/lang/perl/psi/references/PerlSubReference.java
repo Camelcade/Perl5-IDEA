@@ -23,16 +23,9 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolver;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlSubReference extends PerlPolyVariantReference
+public class PerlSubReference extends PerlSubReferenceSimple
 {
-	protected static final int FLAG_AUTOLOADED = 1;
-	protected static final int FLAG_CONSTANT = 2;
-	protected static final int FLAG_DECLARED = 4;
-	protected static final int FLAG_DEFINED = 8;
-	protected static final int FLAG_ALIASED = 16;
-	protected static final int FLAG_IMPORTED = 32;    // fixme this is not set anyway
 	private static final ResolveCache.PolyVariantResolver<PerlSubReference> RESOLVER = new PerlSubReferenceResolver();
-	protected int FLAGS = 0;
 
 	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
 	{
@@ -44,74 +37,6 @@ public class PerlSubReference extends PerlPolyVariantReference
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
-	}
-
-	public boolean isAutoloaded()
-	{
-		return (FLAGS & FLAG_AUTOLOADED) > 0;
-	}
-
-	public boolean isDefined()
-	{
-		return (FLAGS & FLAG_DEFINED) > 0;
-	}
-
-	public boolean isDeclared()
-	{
-		return (FLAGS & FLAG_DECLARED) > 0;
-	}
-
-	public boolean isAliased()
-	{
-		return (FLAGS & FLAG_ALIASED) > 0;
-	}
-
-	public boolean isConstant()
-	{
-		return (FLAGS & FLAG_CONSTANT) > 0;
-	}
-
-	public boolean isImported()
-	{
-		return (FLAGS & FLAG_IMPORTED) > 0;
-	}
-
-	public void resetFlags()
-	{
-		FLAGS = 0;
-	}
-
-	public void setAutoloaded()
-	{
-		FLAGS |= FLAG_AUTOLOADED;
-	}
-
-	public void setDefined()
-	{
-
-		FLAGS |= FLAG_DEFINED;
-	}
-
-	public void setDeclared()
-	{
-
-		FLAGS |= FLAG_DECLARED;
-	}
-
-	public void setAliased()
-	{
-		FLAGS |= FLAG_ALIASED;
-	}
-
-	public void setConstant()
-	{
-
-		FLAGS |= FLAG_CONSTANT;
-	}
-
-	public void setImported()
-	{
-		FLAGS |= FLAG_IMPORTED;
 	}
 
 }

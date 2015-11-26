@@ -19,6 +19,6 @@ package com.perl5.lang.perl.parser.moose;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseAfterStatement
+public interface PerlMooseAfterStatement extends PerlMooseMethodModifier
 {
 }

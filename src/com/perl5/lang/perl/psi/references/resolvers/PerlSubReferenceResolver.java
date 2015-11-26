@@ -179,29 +179,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 		}
 
 
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-
-		reference.resetFlags();
-
-		for (PsiElement element : relatedItems)
-		{
-			if (!reference.isAutoloaded() && element instanceof PerlNamedElement && "AUTOLOAD".equals(((PerlNamedElement) element).getName()))
-				reference.setAutoloaded();
-
-			if (!reference.isConstant() && element instanceof PerlConstant)
-				reference.setConstant();
-
-			if (!reference.isDeclared() && element instanceof PerlSubDeclaration)
-				reference.setDeclared();
-
-			if (!reference.isDefined() && element instanceof PerlSubDefinitionBase)
-				reference.setDefined();
-
-			if (!reference.isAliased() && element instanceof PerlGlobVariable)
-				reference.setAliased();
-
-			result.add(new PsiElementResolveResult(element));
-		}
+		List<ResolveResult> result = reference.getResolveResults(relatedItems);
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
