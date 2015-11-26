@@ -22,7 +22,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.completion.providers.PerlSubBuiltInCompletionProvider;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlParserUtil;
-import com.perl5.lang.perl.parser.PerlParserExtension;
+import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;

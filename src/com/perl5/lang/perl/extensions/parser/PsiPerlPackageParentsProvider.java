@@ -14,20 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.exceptions;
+package com.perl5.lang.perl.extensions.parser;
+
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.PsiPerlStatement;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
- * Created by hurricup on 08.05.2015.
+ * Created by hurricup on 26.11.2015.
  */
-public class SubDefinedException extends PerlParsingException
+public interface PsiPerlPackageParentsProvider extends PsiElement
 {
-	public SubDefinedException(String message)
-	{
-		super(message);
-	}
+	/**
+	 * Modify list of parents provided by this package. Informaion being collected from all processors sequentially
+	 *
+	 * @param currentList current parents list
+	 */
+	void changeParentsList(@NotNull List<String> currentList);
 
-	public SubDefinedException(String format, Object... str)
-	{
-		super(String.format(format, str));
-	}
 }

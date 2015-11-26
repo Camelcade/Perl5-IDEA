@@ -21,6 +21,7 @@ import com.perl5.lang.perl.psi.PsiPerlStatement;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseWithStatement
+public interface PerlMooseWithStatement extends PerlMooseExtendsStatement
 {
+
 }

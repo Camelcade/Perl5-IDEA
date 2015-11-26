@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.exceptions;
+package com.perl5.lang.perl.extensions.parser;
+
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 08.05.2015.
+ * Created by hurricup on 26.11.2015.
  */
-public class SubDefinitionDiffersDeclarationException extends PerlParsingException
+public interface PerlReferencesProvider extends PsiElement
 {
-	public SubDefinitionDiffersDeclarationException(String message)
-	{
-		super(message);
-	}
-
-	public SubDefinitionDiffersDeclarationException(String format, Object... str)
-	{
-		super(String.format(format, str));
-	}
-
+	@Nullable
+	PsiReference[] getReferences(PsiElement element);
 }

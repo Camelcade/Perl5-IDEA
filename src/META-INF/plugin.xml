@@ -56,6 +56,13 @@
         <li>Implemented spacing settings for braces and brackets of anon hashes and arrays respectively, fixes #604</li>
         </ul>
         </li>
+        <li>Moose and Moo (as far as it's compatible with Moose):
+        <ul>
+        <li>Implemented proper <code>use Moose;</code> and <code>use Moo;</code> processing.</li>
+        <li>Implemented Moose/Moo keywords parsing and autocompletion: has, inner, super, meta, override, around, augment, after, before.</li>
+        <li>Implemented <code>extends</code> and <code>with</code> statements support support.</li>
+        </ul>
+        </li>
       </ul>
       </p>
 
@@ -108,7 +115,7 @@
                   implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
         </extensionPoint>
         <extensionPoint name="parserExtension"
-                        interface="com.perl5.lang.perl.parser.PerlParserExtension"/>
+                        interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.perl5">

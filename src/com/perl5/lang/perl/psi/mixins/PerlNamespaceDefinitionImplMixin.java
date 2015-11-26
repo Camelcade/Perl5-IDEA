@@ -26,6 +26,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.parser.PsiPerlPackageParentsProvider;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
@@ -124,7 +125,13 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		}
 
 		// checking runtime modifications
-
+		for (PsiPerlPackageParentsProvider provider : PsiTreeUtil.findChildrenOfType(this, PsiPerlPackageParentsProvider.class))
+		{
+			if (PsiTreeUtil.getParentOfType(provider, PerlNamespaceDefinition.class) == this)
+			{
+				provider.changeParentsList(parentClasses);
+			}
+		}
 
 		result.addAll(parentClasses);
 

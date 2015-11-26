@@ -17,15 +17,25 @@
 package com.perl5.lang.perl.parser.moose;
 
 import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseWithStatementImpl extends PsiPerlStatementImpl implements PerlMooseWithStatement
+public class PerlMooseWithStatementImpl extends PerlMooseExtendsStatementImpl implements PerlMooseWithStatement
 {
 	public PerlMooseWithStatementImpl(ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public void changeParentsList(@NotNull List<String> currentList)
+	{
+		currentList.addAll(getParentsList());
 	}
 }

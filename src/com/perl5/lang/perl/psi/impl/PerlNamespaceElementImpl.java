@@ -62,7 +62,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 						)
 					return new PsiReference[]{new PerlNamespaceFileReference(element, null)};
 				else if (nameSpaceContainer instanceof PerlNamespaceDefinition)
-					return new PsiReference[0];
+					return PsiReference.EMPTY_ARRAY;
 				else
 					return new PsiReference[]{new PerlNamespaceReference(element, null)};
 			}

@@ -21,6 +21,8 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -61,9 +63,27 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 			protected PsiReference[] compute()
 			{
 				if (looksLikePackage())
+				{
 					return new PsiReference[]{new PerlNamespaceReference(PerlStringContentElementImpl.this, null)};
+				}
 				else
-					return new PsiReference[0];
+				{
+					PerlReferencesProvider referencesProvider = PsiTreeUtil.getParentOfType(PerlStringContentElementImpl.this, PerlReferencesProvider.class);
+
+					PsiReference[] references = null;
+
+					if (referencesProvider != null)
+					{
+						references = referencesProvider.getReferences(PerlStringContentElementImpl.this);
+					}
+
+					if (references == null)
+					{
+						references = PsiReference.EMPTY_ARRAY;
+					}
+
+					return references;
+				}
 			}
 		};
 	}
