@@ -26,6 +26,7 @@ import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -68,7 +69,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 				}
 				else
 				{
-					PerlReferencesProvider referencesProvider = PsiTreeUtil.getParentOfType(PerlStringContentElementImpl.this, PerlReferencesProvider.class);
+					PerlReferencesProvider referencesProvider = PsiTreeUtil.getParentOfType(PerlStringContentElementImpl.this, PerlReferencesProvider.class, true, PsiPerlStatement.class);
 
 					PsiReference[] references = null;
 
