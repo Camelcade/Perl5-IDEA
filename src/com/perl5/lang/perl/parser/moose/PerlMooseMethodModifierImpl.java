@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
+import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.references.PerlSubReferenceSimple;
 import org.jetbrains.annotations.Nullable;
@@ -40,6 +41,15 @@ public class PerlMooseMethodModifierImpl extends PsiPerlStatementImpl implements
 	public PsiReference[] getReferences(PsiElement element)
 	{
 		PsiElement expr = getExpr();
+
+		if (expr instanceof PsiPerlParenthesisedExpr)
+		{
+			expr = expr.getFirstChild();
+			if (expr != null)
+			{
+				expr = expr.getNextSibling();
+			}
+		}
 
 		if (expr instanceof PsiPerlCommaSequenceExpr)
 		{

@@ -22,7 +22,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAugmentStatementImpl extends PsiPerlStatementImpl implements PerlMooseAugmentStatement
+public class PerlMooseAugmentStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAugmentStatement
 {
 	public PerlMooseAugmentStatementImpl(ASTNode node)
 	{
