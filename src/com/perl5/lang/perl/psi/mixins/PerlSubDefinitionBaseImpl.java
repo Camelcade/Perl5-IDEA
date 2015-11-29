@@ -158,7 +158,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 
 		PsiPerlBlock subBlock = getBlock();
 
-		if (subBlock.isValid())
+		if (subBlock != null && subBlock.isValid())
 		{
 			for (PsiElement statement : subBlock.getChildren())
 			{

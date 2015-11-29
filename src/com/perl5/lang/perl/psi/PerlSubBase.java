@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiElement<Stub>, PerlPackageMember, PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlNamedElement, PerlDeprecatable
+public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiElement<Stub>, PerlPackageMember, PerlNamespaceElementContainer, PerlNamedElement, PerlDeprecatable
 {
 	/**
 	 * Returns package name for current function
@@ -45,6 +46,13 @@ public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiEleme
 	 * @return function name or null
 	 */
 	public String getSubName();
+
+	/**
+	 * Returns PsiElement containing sub name
+	 *
+	 * @return name container
+	 */
+	PsiElement getSubNameElement();
 
 	/**
 	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)

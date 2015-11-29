@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.parser;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PsiPerlAnnotation;
+import com.perl5.lang.perl.psi.PsiPerlAttribute;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by hurricup on 25.11.2015.
+ * Created by hurricup on 29.11.2015.
  */
-public interface PerlMooseOverrideStatement extends PerlSubDefinitionBase<PerlMooseOverrideStub>
+public interface PsiPerlLists
 {
+	List<PsiPerlAnnotation> EMPTY_ANNOTATIONS_LIST = new ArrayList<PsiPerlAnnotation>();
+	List<PsiPerlAttribute> EMPTY_ATTRIBUTES_LIST = new ArrayList<PsiPerlAttribute>();
+
 }

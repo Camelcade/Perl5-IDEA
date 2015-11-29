@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.parser.moose.stubs.override;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 
 /**
- * Created by hurricup on 25.11.2015.
+ * Created by hurricup on 29.11.2015.
  */
-public interface PerlMooseOverrideStatement extends PerlSubDefinitionBase<PerlMooseOverrideStub>
+public interface PerlMooseOverrideStub extends PerlSubDefinitionStub
 {
 }

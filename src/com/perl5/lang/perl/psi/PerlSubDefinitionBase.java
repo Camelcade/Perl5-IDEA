@@ -34,9 +34,8 @@ public interface PerlSubDefinitionBase<Stub extends StubElement> extends PerlSub
 	/**
 	 * Returns sub block.
 	 *
-	 * @return sub block element
+	 * @return sub block element; optional in constant, different extensions
 	 */
-	@NotNull
 	PsiPerlBlock getBlock();
 
 	/**

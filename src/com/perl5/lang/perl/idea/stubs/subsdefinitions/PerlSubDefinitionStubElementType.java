@@ -51,7 +51,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
 	{
 		//noinspection unchecked
-		return createStubElement(parentStub, psi.getPackageName(), psi.getSubNameElement().getName(), psi.getSubArgumentsList(), psi.getSubAnnotations(), psi.isMethod());
+		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getSubAnnotations(), psi.isMethod());
 	}
 
 	@Override

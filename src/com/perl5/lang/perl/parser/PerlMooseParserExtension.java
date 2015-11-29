@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlTokenType;
+import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
 
 /**
  * Created by hurricup on 25.11.2015.
@@ -41,7 +42,7 @@ public interface PerlMooseParserExtension
 	IElementType MOOSE_STATEMENT_WITH = new PerlElementType("MOOSE_STATEMENT_WITH");
 	IElementType MOOSE_STATEMENT_EXTENDS = new PerlElementType("MOOSE_STATEMENT_EXTENDS");
 	IElementType MOOSE_STATEMENT_META = new PerlElementType("MOOSE_STATEMENT_META");
-	IElementType MOOSE_STATEMENT_OVERRIDE = new PerlElementType("MOOSE_STATEMENT_OVERRIDE");
+	IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideStubElementType("MOOSE_STATEMENT_OVERRIDE");
 	IElementType MOOSE_STATEMENT_AROUND = new PerlElementType("MOOSE_STATEMENT_AROUND");
 	IElementType MOOSE_STATEMENT_SUPER = new PerlElementType("MOOSE_STATEMENT_SUPER");
 	IElementType MOOSE_STATEMENT_AUGMENT = new PerlElementType("MOOSE_STATEMENT_AUGMENT");

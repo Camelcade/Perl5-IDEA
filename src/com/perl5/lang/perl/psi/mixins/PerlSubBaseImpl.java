@@ -74,7 +74,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Stub
 	@Override
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
-		PerlSubNameElement subNameElement = getSubNameElement();
+		PsiElement subNameElement = getSubNameElement();
 		if (subNameElement != null)
 		{
 			PerlPsiUtil.renameElement(subNameElement, name);
@@ -102,9 +102,16 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Stub
 		if (stub != null)
 			return stub.getSubName();
 
-		PerlSubNameElement subNameElement = getSubNameElement();
+		return getSubNameHeavy();
+	}
+
+	protected String getSubNameHeavy()
+	{
+		PsiElement subNameElement = getSubNameElement();
 		if (subNameElement != null)
-			return subNameElement.getName();
+		{
+			return subNameElement.getText();
+		}
 
 		return null;
 	}
@@ -129,7 +136,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Stub
 	}
 
 	@Override
-	public PerlSubNameElement getSubNameElement()
+	public PsiElement getSubNameElement()
 	{
 		return findChildByClass(PerlSubNameElement.class);
 	}
