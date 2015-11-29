@@ -1042,7 +1042,8 @@ number_constant ::=
     | NUMBER_VERSION
     | NUMBER_SIMPLE
 
-private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
+private string ::= <<parseAndWrapString>>
+private parse_string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] string_dq_parsed

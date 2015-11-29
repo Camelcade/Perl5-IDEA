@@ -17,15 +17,19 @@
 package com.perl5.lang.perl.idea.application;
 
 import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.completion.providers.PerlSubBuiltInCompletionProvider;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,6 +64,23 @@ public class PerlParserExtensions implements ApplicationComponent
 			// add tokens to fallback set
 			Collection<IElementType> tokensList = customTokens.values();
 			PerlParserUtil.addConvertableTokens(tokensList.toArray(new IElementType[tokensList.size()]));
+
+			// add extensions tokens
+			List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();
+			if (extensionSets != null)
+			{
+				for (Pair<IElementType, TokenSet> extensionSet : extensionSets)
+				{
+					for (int i = 0; i < PerlParser.EXTENDS_SETS_.length; i++)
+					{
+						if (PerlParser.EXTENDS_SETS_[i].contains(extensionSet.first))
+						{
+							PerlParser.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParser.EXTENDS_SETS_[i], extensionSet.getSecond());
+							break;
+						}
+					}
+				}
+			}
 
 		}
 		PerlLexer.initReservedTokensSet();

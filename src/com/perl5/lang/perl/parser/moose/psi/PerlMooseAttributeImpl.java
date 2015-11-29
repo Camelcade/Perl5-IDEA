@@ -20,12 +20,10 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.PerlPsiLists;
 import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStub;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PsiPerlAnnotation;
-import com.perl5.lang.perl.psi.PsiPerlBlock;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -92,4 +90,39 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseA
 	{
 		return PsiTreeUtil.getChildOfType(this, PerlString.class);
 	}
+
+	@Override
+	public PsiElement getSubNameElement()
+	{
+		return getFirstChild();
+	}
+
+	@Override
+	protected String getSubNameHeavy()
+	{
+		PsiElement nameContainer = getSubNameElement();
+
+		if (nameContainer instanceof PerlString)
+		{
+			return ((PerlString) nameContainer).getStringContent();
+		}
+
+		return null;
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
+		if (name.isEmpty())
+			throw new IncorrectOperationException("You can't set an empty attribute name");
+
+		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier instanceof PerlString)
+		{
+			((PerlString) nameIdentifier).setStringContent(name);
+		}
+
+		return this;
+	}
+
 }

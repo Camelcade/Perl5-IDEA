@@ -18,12 +18,15 @@ package com.perl5.lang.perl.extensions.parser;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.extensions.ExtensionPointName;
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,5 +65,14 @@ public abstract class PerlParserExtension
 	{
 		return null;
 	}
+
+	/**
+	 * Returns list of extendable tokensets. Loader will attempt to add them into builder
+	 * Should return list of pairs: token to extend - TokenSet of extended tokens
+	 * Reqired to avoid extra TERM expressions in PSI tree
+	 * @return list of pairs to extend
+	 */
+	@Nullable
+	public List<Pair<IElementType, TokenSet>> getExtensionSets(){return null; }
 
 }

@@ -24,7 +24,6 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubEleme
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttributeImpl;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;

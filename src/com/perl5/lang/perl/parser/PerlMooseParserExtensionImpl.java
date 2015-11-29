@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -28,7 +30,7 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hurricup on 25.11.2015.
@@ -38,7 +40,10 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<IElementType, IElementType>();
-
+	@SuppressWarnings("unchecked")
+	protected static final List<Pair<IElementType, TokenSet>> EXTENSION_SET = Collections.singletonList(
+			Pair.create(EXPR, TokenSet.create(MOOSE_ATTRIBUTE))
+	);
 	protected static TokenSet MOOSE_TOKEN_SET;
 
 	static
@@ -78,8 +83,74 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 
 	private static boolean parseHas(PerlBuilder b, int l)
 	{
-		return parseAnnotatedSimpleStatement(b, l, RESERVED_HAS, MOOSE_STATEMENT_HAS);
+		PerlBuilder.Marker m = b.mark();
+		PerlParser.annotations(b, l);
+
+		if (PerlParserUtil.consumeToken(b, RESERVED_HAS) && parseHasArguments(b, l))
+		{
+			m.done(MOOSE_STATEMENT_HAS);
+			return true;
+		}
+
+		m.rollbackTo();
+		return false;
 	}
+
+	private static boolean parseHasArguments(PerlBuilder b, int l)
+	{
+		return parseHasArgumentsParenthesised(b, l) || parseHasArgumentsBare(b, l);
+	}
+
+	private static boolean parseHasArgumentsParenthesised(PerlBuilder b, int l)
+	{
+		if (b.getTokenType() == LEFT_PAREN)
+		{
+			PerlBuilder.Marker m = b.mark();
+			if (PerlParserUtil.consumeToken(b, LEFT_PAREN) && parseHasArgumentsBare(b, l) && PerlParserUtil.consumeToken(b, RIGHT_PAREN))
+			{
+				m.done(CALL_ARGUMENTS);
+				return true;
+			}
+			m.rollbackTo();
+		}
+		return false;
+	}
+
+	private static boolean parseHasArgumentsBare(PerlBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (parseHasArgumentsSequenceContent(b, l))
+		{
+			m.done(COMMA_SEQUENCE_EXPR);
+			return true;
+		}
+		m.rollbackTo();
+		return false;
+	}
+
+	private static boolean parseHasArgumentsSequenceContent(PerlBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (parseHasAttributeDefinitions(b, l) &&
+				(PerlParserUtil.consumeToken(b, OPERATOR_COMMA) || PerlParserUtil.consumeToken(b, OPERATOR_COMMA_ARROW)) &&
+				PerlParser.expr(b, l, -1)
+				)
+		{
+			m.drop();
+			return true;
+		}
+		m.rollbackTo();
+		return false;
+	}
+
+	private static boolean parseHasAttributeDefinitions(PerlBuilder b, int l)
+	{
+		IElementType currentWrapper = b.setStringWrapper(MOOSE_ATTRIBUTE);
+		boolean r = PerlParser.scalar_expr(b, l - 1);
+		b.setStringWrapper(currentWrapper);
+		return r;
+	}
+
 
 	private static boolean parseAnnotatedSimpleStatement(PerlBuilder b, int l, IElementType keywordToken, IElementType statementToken)
 	{
@@ -200,5 +271,12 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 		}
 
 		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Pair<IElementType, TokenSet>> getExtensionSets()
+	{
+		return EXTENSION_SET;
 	}
 }

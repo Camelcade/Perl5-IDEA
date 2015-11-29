@@ -1942,5 +1942,33 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	/**
+	 * Parses string and wraps it if necessary
+	 * fixme we should control where string is located, and avoid in hash indexes, for example
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseAndWrapString(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+		if (((PerlBuilder) b).getStringWrapper() == null)
+		{
+			return PerlParser.parse_string(b, l);
+		}
+		else
+		{
+			PsiBuilder.Marker m = b.mark();
+			if (PerlParser.parse_string(b, l))
+			{
+				m.done(((PerlBuilder) b).getStringWrapper());
+				return true;
+			}
+			m.rollbackTo();
+		}
+		return false;
+	}
 
 }

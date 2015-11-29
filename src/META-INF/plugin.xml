@@ -59,9 +59,11 @@
         <li>Moose and Moo (as far as it's compatible with Moose):
         <ul>
         <li>Implemented proper <code>use Moose;</code> and <code>use Moo;</code> processing.</li>
-        <li>Implemented Moose/Moo keywords parsing and autocompletion: has, augment, inner, super, meta, override.</li>
+        <li>Implemented Moose/Moo keywords parsing and autocompletion: inner, super, meta.</li>
         <li>Implemented <code>extends</code> and <code>with</code> statements support.</li>
         <li>Implemented resolution and refactoring in method modifiers: <code>around</code>, <code>after</code>, <code>before</code> and <code>augment</code>.</li>
+        <li>Implemented parsing, resolution and refactoring for <code>override</code> statement.</li>
+        <li>Implemented parsing, resolution and refactoring for  <code>has</code> statement.</li>
         </ul>
         </li>
       </ul>

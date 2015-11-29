@@ -63,6 +63,11 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	// flag allowes special variable names
 	boolean isSpecialVariableNamesAllowed = true;
 
+	/**
+	 * This element may be set to make an additional wrapping for strings, like constants and so on
+	 */
+	IElementType stringWrapper = null;
+
 	Project myProject = getProject();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
@@ -255,5 +260,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		boolean oldValue = isSpecialVariableNamesAllowed;
 		isSpecialVariableNamesAllowed = specialVariableNamesAllowed;
 		return oldValue;
+	}
+
+	public IElementType getStringWrapper()
+	{
+		return stringWrapper;
+	}
+
+	public IElementType setStringWrapper(IElementType stringWrapper)
+	{
+		IElementType currentValue = this.stringWrapper;
+		this.stringWrapper = stringWrapper;
+		return currentValue;
 	}
 }
