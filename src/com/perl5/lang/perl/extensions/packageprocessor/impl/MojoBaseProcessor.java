@@ -101,7 +101,10 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
 			else
 			{
 				allOptions.removeAll(getOptions().keySet());
-				currentList.add(allOptions.get(0));
+				if (allOptions.size() > 0)
+				{
+					currentList.add(allOptions.get(0));
+				}
 			}
 		}
 	}
