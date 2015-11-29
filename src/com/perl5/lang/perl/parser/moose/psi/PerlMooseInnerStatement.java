@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose;
+package com.perl5.lang.perl.parser.moose.psi;
 
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseWithStatement extends PerlMooseExtendsStatement
+public interface PerlMooseInnerStatement
 {
-
 }

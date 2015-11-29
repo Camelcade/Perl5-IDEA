@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose;
-
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+package com.perl5.lang.perl.parser.moose.psi;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAroundStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAroundStatement
+public interface PerlMooseAugmentStatement extends PerlMooseMethodModifier
 {
-	public PerlMooseAroundStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
 }

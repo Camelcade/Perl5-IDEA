@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose;
-
-import com.intellij.lang.ASTNode;
+package com.perl5.lang.perl.parser.moose.psi;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAfterStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAfterStatement
+public interface PerlMooseOverrideStatement
 {
-	public PerlMooseAfterStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
 }

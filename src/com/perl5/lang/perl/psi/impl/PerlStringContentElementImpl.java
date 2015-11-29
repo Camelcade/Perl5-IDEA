@@ -69,6 +69,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 				}
 				else
 				{
+					@SuppressWarnings("unchecked")
 					PerlReferencesProvider referencesProvider = PsiTreeUtil.getParentOfType(PerlStringContentElementImpl.this, PerlReferencesProvider.class, true, PsiPerlStatement.class);
 
 					PsiReference[] references = null;

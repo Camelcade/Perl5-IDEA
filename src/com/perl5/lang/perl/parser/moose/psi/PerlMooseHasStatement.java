@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose;
+package com.perl5.lang.perl.parser.moose.psi;
 
 /**
  * Created by hurricup on 25.11.2015.

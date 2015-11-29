@@ -14,18 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose;
+package com.perl5.lang.perl.parser.moose.psi;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseBeforeStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseBeforeStatement
+public class PerlMooseWithStatementImpl extends PerlMooseExtendsStatementImpl implements PerlMooseWithStatement
 {
-	public PerlMooseBeforeStatementImpl(ASTNode node)
+	public PerlMooseWithStatementImpl(ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public void changeParentsList(@NotNull List<String> currentList)
+	{
+		currentList.addAll(getParentsList());
 	}
 }

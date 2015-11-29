@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose;
+package com.perl5.lang.perl.parser.moose.psi;
+
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
 
 /**
- * Created by hurricup on 25.11.2015.
+ * Created by hurricup on 26.11.2015.
  */
-public interface PerlMooseAugmentStatement extends PerlMooseMethodModifier
+public interface PerlMooseMethodModifier extends PsiElement, PerlReferencesProvider
 {
 }
