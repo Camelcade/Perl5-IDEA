@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.stubs.override;
+package com.perl5.lang.perl.parser.moose.stubs.attribute;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStubImpl;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttributeImpl;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -35,17 +35,17 @@ import java.util.List;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes
+public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes
 {
-	public PerlMooseOverrideStubElementType(String name)
+	public PerlMooseAttributeStubElementType(String name)
 	{
 		super(name);
 	}
 
 	@Override
-	public PerlSubDefinitionBase<PerlMooseOverrideStub> createPsi(@NotNull PerlSubDefinitionStub stub)
+	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
-		return new PerlMooseOverrideStatementImpl((PerlMooseOverrideStub) stub, this);
+		return new PerlMooseAttributeImpl((PerlMooseAttributeStub) stub, this);
 	}
 
 	@NotNull
@@ -59,15 +59,14 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
 			boolean isMethod
 	)
 	{
-		return new PerlMooseOverrideStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
+		return new PerlMooseAttributeStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
 	}
 
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		PsiElement psi = node.getPsi();
-
-		return psi instanceof PerlMooseOverrideStatementImpl && ((PerlMooseOverrideStatementImpl) psi).getSubNameElement() != null;
+		return psi instanceof PerlMooseAttribute && ((PerlMooseAttribute) psi).getSubNameElement() != null;
 	}
 
 }

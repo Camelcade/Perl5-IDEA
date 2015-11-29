@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlTokenType;
+import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStubElementType;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
 
 /**
@@ -38,6 +39,7 @@ public interface PerlMooseParserExtension
 	IElementType RESERVED_BEFORE = new PerlTokenType("before");
 	IElementType RESERVED_HAS = new PerlTokenType("has");
 
+
 	IElementType MOOSE_STATEMENT_INNER = new PerlElementType("MOOSE_STATEMENT_INNER");
 	IElementType MOOSE_STATEMENT_WITH = new PerlElementType("MOOSE_STATEMENT_WITH");
 	IElementType MOOSE_STATEMENT_EXTENDS = new PerlElementType("MOOSE_STATEMENT_EXTENDS");
@@ -48,5 +50,7 @@ public interface PerlMooseParserExtension
 	IElementType MOOSE_STATEMENT_AUGMENT = new PerlElementType("MOOSE_STATEMENT_AUGMENT");
 	IElementType MOOSE_STATEMENT_AFTER = new PerlElementType("MOOSE_STATEMENT_AFTER");
 	IElementType MOOSE_STATEMENT_BEFORE = new PerlElementType("MOOSE_STATEMENT_BEFORE");
+
 	IElementType MOOSE_STATEMENT_HAS = new PerlElementType("MOOSE_STATEMENT_HAS");
+	IElementType MOOSE_ATTRIBUTE = new PerlMooseAttributeStubElementType("MOOSE_ATTRIBUTE");
 }

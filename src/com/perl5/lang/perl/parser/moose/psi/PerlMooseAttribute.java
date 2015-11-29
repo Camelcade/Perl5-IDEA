@@ -17,21 +17,13 @@
 package com.perl5.lang.perl.parser.moose.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PsiPerlAnnotation;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
+import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStub;
+import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 
 /**
- * Created by hurricup on 25.11.2015.
+ * Created by hurricup on 29.11.2015.
  */
-public interface PerlMooseHasStatement extends PsiElement
+public interface PerlMooseAttribute extends PerlSubDefinitionBase<PerlMooseAttributeStub>, PsiElement
 {
-	/**
-	 * Returns annotations list
-	 *
-	 * @return annotation list
-	 */
-	@NotNull
-	List<PsiPerlAnnotation> getAnnotationList();
 }

@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.parser;
 
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PsiPerlAnnotation;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.PsiPerlAttribute;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hurricup on 25.11.2015.
+ * Created by hurricup on 29.11.2015.
  */
-public interface PerlMooseHasStatement extends PsiElement
+public interface PerlPsiLists
 {
-	/**
-	 * Returns annotations list
-	 *
-	 * @return annotation list
-	 */
-	@NotNull
-	List<PsiPerlAnnotation> getAnnotationList();
+	List<PsiPerlAnnotation> EMPTY_ANNOTATIONS_LIST = new ArrayList<PsiPerlAnnotation>();
+	List<PsiPerlAttribute> EMPTY_ATTRIBUTES_LIST = new ArrayList<PsiPerlAttribute>();
+
 }

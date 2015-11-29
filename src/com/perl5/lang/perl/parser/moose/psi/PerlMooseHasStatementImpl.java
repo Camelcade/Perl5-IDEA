@@ -17,7 +17,12 @@
 package com.perl5.lang.perl.parser.moose.psi;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.PsiPerlAnnotation;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 25.11.2015.
@@ -27,5 +32,23 @@ public class PerlMooseHasStatementImpl extends PsiPerlStatementImpl implements P
 	public PerlMooseHasStatementImpl(ASTNode node)
 	{
 		super(node);
+	}
+
+	@NotNull
+	@Override
+	public List<PsiPerlAnnotation> getAnnotationList()
+	{
+		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlAnnotation.class);
+	}
+
+
+	@Override
+	public void subtreeChanged()
+	{
+		super.subtreeChanged();
+		for (PerlMooseAttributeImpl mooseAttribute : PsiTreeUtil.findChildrenOfType(this, PerlMooseAttributeImpl.class))
+		{
+			mooseAttribute.subtreeChanged();
+		}
 	}
 }

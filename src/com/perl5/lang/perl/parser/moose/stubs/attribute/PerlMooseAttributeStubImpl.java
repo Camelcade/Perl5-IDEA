@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.stubs.override;
+package com.perl5.lang.perl.parser.moose.stubs.attribute;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubImpl;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
@@ -28,13 +27,13 @@ import java.util.List;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseOverrideStubImpl extends PerlSubDefinitionStubImpl implements PerlMooseOverrideStub
+public class PerlMooseAttributeStubImpl extends PerlSubDefinitionStubImpl implements PerlMooseAttributeStub
 {
-	public PerlMooseOverrideStubImpl(
+	public PerlMooseAttributeStubImpl(
 			StubElement parent,
 			String packageName,
 			String subName,
-			List<PerlSubArgument> arguments,
+			List<PerlSubArgument> arguments,    // useless
 			PerlSubAnnotations annotations,
 			IStubElementType elementType
 	)

@@ -144,6 +144,10 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 		{
 			return new PerlMooseHasStatementImpl(node);
 		}
+		else if (tokenType == MOOSE_ATTRIBUTE)
+		{
+			return new PerlMooseAttributeImpl(node);
+		}
 		else if (tokenType == MOOSE_STATEMENT_INNER)
 		{
 			return new PerlMooseInnerStatementImpl(node);

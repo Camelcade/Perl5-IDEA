@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.parser.PsiPerlLists;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;

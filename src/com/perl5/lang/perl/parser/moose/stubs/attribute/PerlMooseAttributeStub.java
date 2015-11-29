@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.parser.moose.stubs.attribute;
 
-import com.perl5.lang.perl.psi.PsiPerlAnnotation;
-import com.perl5.lang.perl.psi.PsiPerlAttribute;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 
 /**
  * Created by hurricup on 29.11.2015.
  */
-public interface PsiPerlLists
+public interface PerlMooseAttributeStub extends PerlSubDefinitionStub
 {
-	List<PsiPerlAnnotation> EMPTY_ANNOTATIONS_LIST = new ArrayList<PsiPerlAnnotation>();
-	List<PsiPerlAttribute> EMPTY_ATTRIBUTES_LIST = new ArrayList<PsiPerlAttribute>();
-
 }
