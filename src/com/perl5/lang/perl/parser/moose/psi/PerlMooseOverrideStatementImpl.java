@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.moose.psi;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.PsiPerlLists;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
@@ -61,7 +62,7 @@ public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<Pe
 	@Override
 	public List<PsiPerlAnnotation> getAnnotationList()
 	{
-		return PsiPerlLists.EMPTY_ANNOTATIONS_LIST;
+		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlAnnotation.class);
 	}
 
 	@Nullable

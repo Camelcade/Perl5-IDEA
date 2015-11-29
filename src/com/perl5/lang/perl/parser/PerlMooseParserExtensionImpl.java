@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -72,6 +71,53 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 		MOOSE_TOKEN_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
 	}
 
+	private static boolean parseOverride(PerlBuilder b, int l)
+	{
+		return parseAnnotatedSimpleStatement(b, l, RESERVED_OVERRIDE, MOOSE_STATEMENT_OVERRIDE);
+	}
+
+	private static boolean parseHas(PerlBuilder b, int l)
+	{
+		return parseAnnotatedSimpleStatement(b, l, RESERVED_HAS, MOOSE_STATEMENT_HAS);
+	}
+
+	private static boolean parseAnnotatedSimpleStatement(PerlBuilder b, int l, IElementType keywordToken, IElementType statementToken)
+	{
+		PerlBuilder.Marker m = b.mark();
+		PerlParser.annotations(b, l);
+
+		if (PerlParserUtil.consumeToken(b, keywordToken))
+		{
+			if (PerlParser.expr(b, l, -1))
+			{
+				m.done(statementToken);
+				return true;
+			}
+		}
+
+		m.rollbackTo();
+		return false;
+	}
+
+	private static boolean parseDefault(PerlBuilder b, int l)
+	{
+		PerlBuilder.Marker m = b.mark();
+
+		IElementType tokenType = b.getTokenType();
+		if (MOOSE_TOKEN_SET.contains(tokenType))
+		{
+			b.advanceLexer();
+			if (PerlParser.expr(b, l, -1))
+			{
+				m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
+				return true;
+			}
+		}
+
+		m.rollbackTo();
+		return false;
+	}
+
 	@NotNull
 	@Override
 	public Map<String, IElementType> getReservedTokens()
@@ -82,24 +128,10 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 	@Override
 	public boolean parse(PerlBuilder b, int l)
 	{
-		// fallback branch
-		if (MOOSE_TOKEN_SET.contains(b.getTokenType()))
-		{
-			IElementType tokenType = b.getTokenType();
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			if (PerlParser.expr(b, l, -1))
-			{
-				m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
-				return true;
-			}
-			else
-			{
-				m.drop();
-			}
-		}
-
-		return false;
+		return parseOverride(b, l) ||
+				parseHas(b, l) ||
+				parseDefault(b, l)
+				;
 	}
 
 	@Nullable
