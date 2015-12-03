@@ -19,12 +19,14 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,9 +42,25 @@ public abstract class PerlHeredocOpenerMixin extends ASTWrapperPsiElement implem
 
 	@Nullable
 	@Override
-	public PerlString getNameIdentifier()
+	public PsiElement getNameIdentifier()
 	{
-		return PsiTreeUtil.findChildOfType(this, PerlString.class);
+		PerlString string = PsiTreeUtil.findChildOfType(this, PerlString.class);
+		if (string != null)
+		{
+			if (string instanceof PsiPerlStringBare)
+			{
+				return string.getFirstChild();
+			}
+			else
+			{
+				PsiElement quoteElement = string.getFirstChild();
+				if (quoteElement != null)
+				{
+					return quoteElement.getNextSibling();
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -59,8 +77,8 @@ public abstract class PerlHeredocOpenerMixin extends ASTWrapperPsiElement implem
 	@Override
 	public String getName()
 	{
-		PerlString nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : nameIdentifier.getStringContent();
+		PsiElement nameIdentifier = getNameIdentifier();
+		return nameIdentifier == null ? null : nameIdentifier.getText();
 	}
 
 	@Override
@@ -69,9 +87,11 @@ public abstract class PerlHeredocOpenerMixin extends ASTWrapperPsiElement implem
 		if (name.isEmpty())
 			throw new IncorrectOperationException("Empty here-doc markers are not supported");
 
-		PerlString nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-			nameIdentifier.setStringContent(name);
+		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier instanceof LeafPsiElement)
+		{
+			((LeafPsiElement) nameIdentifier).replaceWithText(name);
+		}
 
 		return this;
 	}
