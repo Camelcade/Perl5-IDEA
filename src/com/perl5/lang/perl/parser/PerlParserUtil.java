@@ -1359,6 +1359,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 //			m.drop();
 			m.collapse(STRING_CONTENT);
+
+			if (((PerlBuilder) b).getStringWrapper() != null)
+			{
+				m.precede().done(((PerlBuilder) b).getStringWrapper());
+			}
+
 			return true;
 		}
 		return false;
