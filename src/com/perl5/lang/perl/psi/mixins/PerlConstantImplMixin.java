@@ -20,6 +20,7 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
@@ -28,6 +29,7 @@ import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStub;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlConstantName;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -52,9 +54,9 @@ public abstract class PerlConstantImplMixin extends StubBasedPsiElementBase<Perl
 
 	@Nullable
 	@Override
-	public PerlString getNameIdentifier()
+	public PsiElement getNameIdentifier()
 	{
-		return PsiTreeUtil.getChildOfType(this, PerlString.class);
+		return getFirstChild();
 	}
 
 	@Override
@@ -74,8 +76,7 @@ public abstract class PerlConstantImplMixin extends StubBasedPsiElementBase<Perl
 		if (stub != null)
 			return stub.getName();
 
-		PerlString nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : nameIdentifier.getStringContent();
+		return getNode().getText();
 	}
 
 	@Override
@@ -84,9 +85,11 @@ public abstract class PerlConstantImplMixin extends StubBasedPsiElementBase<Perl
 		if (name.isEmpty())
 			throw new IncorrectOperationException("You can't set an empty constant name");
 
-		PerlString nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-			nameIdentifier.setStringContent(name);
+		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier instanceof LeafPsiElement)
+		{
+			((LeafPsiElement) nameIdentifier).replaceWithText(name);
+		}
 
 		return this;
 	}

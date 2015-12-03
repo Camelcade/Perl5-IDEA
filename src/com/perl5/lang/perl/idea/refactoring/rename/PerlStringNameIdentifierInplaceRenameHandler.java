@@ -25,7 +25,9 @@ import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenamer;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,7 +52,7 @@ public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplac
 						&& element instanceof PsiNameIdentifierOwner
 						&& element.getUseScope() instanceof LocalSearchScope
 						&& element.getLanguage() == PerlLanguage.INSTANCE
-						&& ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlString
+						&& ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlStringContentElement
 						&& element.getContainingFile().getViewProvider().getAllFiles().size() < 2
 				;
 	}

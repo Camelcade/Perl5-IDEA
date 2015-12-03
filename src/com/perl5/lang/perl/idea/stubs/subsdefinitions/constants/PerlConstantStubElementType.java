@@ -83,12 +83,6 @@ public class PerlConstantStubElementType extends IStubElementType<PerlConstantSt
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		ASTNode firstChild = node.getFirstChildNode();
-		if (firstChild != null && firstChild.getElementType() == STRING_CONTENT)
-			return true;
-		else if (firstChild != null && firstChild.findChildByType(STRING_CONTENT) != null)
-			return true;
-
-		return false;
+		return !node.getText().isEmpty();
 	}
 }

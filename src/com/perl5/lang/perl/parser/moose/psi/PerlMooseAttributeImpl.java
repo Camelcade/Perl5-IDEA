@@ -18,6 +18,7 @@ package com.perl5.lang.perl.parser.moose.psi;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
@@ -86,28 +87,21 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseA
 
 	@Nullable
 	@Override
-	public PerlString getNameIdentifier()
-	{
-		return PsiTreeUtil.getChildOfType(this, PerlString.class);
-	}
-
-	@Override
-	public PsiElement getSubNameElement()
+	public PsiElement getNameIdentifier()
 	{
 		return getFirstChild();
 	}
 
 	@Override
+	public PsiElement getSubNameElement()
+	{
+		return getNameIdentifier();
+	}
+
+	@Override
 	protected String getSubNameHeavy()
 	{
-		PsiElement nameContainer = getSubNameElement();
-
-		if (nameContainer instanceof PerlString)
-		{
-			return ((PerlString) nameContainer).getStringContent();
-		}
-
-		return null;
+		return getNode().getText();
 	}
 
 	@Override
@@ -117,9 +111,9 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseA
 			throw new IncorrectOperationException("You can't set an empty attribute name");
 
 		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof PerlString)
+		if (nameIdentifier instanceof LeafPsiElement)
 		{
-			((PerlString) nameIdentifier).setStringContent(name);
+			((LeafPsiElement) nameIdentifier).replaceWithText(name);
 		}
 
 		return this;

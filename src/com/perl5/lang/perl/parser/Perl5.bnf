@@ -610,8 +610,8 @@ use_vars_statement ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_USE <<checkAndCollapse
 constants_block ::= LEFT_BRACE [constants_block_content] RIGHT_BRACE {pin=1}
 private constants_block_content ::= constant_block_content_element (comma constant_block_content_element) * [comma+] {recoverWhile=recover_block}
 private constant_block_content_element ::= constant_definition | scalar_expr
-constant_definition ::= constant_name comma scalar_expr
-constant_name ::= string
+constant_definition ::= <<parseConstantDefinition>> comma scalar_expr
+constant_name ::= STRING_CONTENT
 
 undef_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF (undef_params | LEFT_PAREN undef_params RIGHT_PAREN) ? {pin=2}
 private undef_params ::=
@@ -1042,8 +1042,7 @@ number_constant ::=
     | NUMBER_VERSION
     | NUMBER_SIMPLE
 
-private string ::= <<parseAndWrapString>>
-private parse_string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
+private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_QQ] string_dq_parsed
@@ -1057,13 +1056,13 @@ string_xq ::=
 
 private string_xq_parsed ::= QUOTE_TICK_OPEN [<<parseInterpolatedStringContent>>] QUOTE_TICK_CLOSE {pin=1}
 
-string_bare ::= STRING_CONTENT
+string_bare ::= <<parseAndWrapStringContent>>
 
 string_sq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString>>
   | <<parseNestedSQString>> // nested sq string
 
-private string_sq_parsed ::= QUOTE_SINGLE_OPEN STRING_CONTENT* QUOTE_SINGLE_CLOSE {pin=1}
+private string_sq_parsed ::= QUOTE_SINGLE_OPEN <<parseAndWrapStringContent>>* QUOTE_SINGLE_CLOSE {pin=1}
 private string_content_qq ::= string_content_element +
 private string_content_element ::=
   <<parseInterpolatedConstructs>>

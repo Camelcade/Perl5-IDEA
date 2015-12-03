@@ -1774,6 +1774,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	/**
 	 * This is a hack, because GrammarKit parses <<someMethod "=" OPERATOR_ASSIGN>> incorrectly
 	 * fixme this should be changed to two-face token =/id
+	 *
 	 * @param b Perl builder
 	 * @param l parsing level
 	 * @return conversion result
@@ -1950,25 +1951,35 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean parseAndWrapString(PsiBuilder b, int l)
+	public static boolean parseAndWrapStringContent(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
 
-		if (((PerlBuilder) b).getStringWrapper() == null)
+		if (b.getTokenType() == STRING_CONTENT)
 		{
-			return PerlParser.parse_string(b, l);
-		}
-		else
-		{
-			PsiBuilder.Marker m = b.mark();
-			if (PerlParser.parse_string(b, l))
+			if (((PerlBuilder) b).getStringWrapper() == null)
 			{
-				m.done(((PerlBuilder) b).getStringWrapper());
-				return true;
+				consumeToken(b, STRING_CONTENT);
 			}
-			m.rollbackTo();
+			else
+			{
+				PsiBuilder.Marker m = b.mark();
+				consumeToken(b, STRING_CONTENT);
+				m.done(((PerlBuilder) b).getStringWrapper());
+			}
+			return true;
 		}
 		return false;
+
+	}
+
+	public static boolean parseConstantDefinition(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+		IElementType oldValue = ((PerlBuilder) b).setStringWrapper(CONSTANT_NAME);
+		boolean r = PerlParser.string(b, l);
+		((PerlBuilder) b).setStringWrapper(oldValue);
+		return r;
 	}
 
 }
