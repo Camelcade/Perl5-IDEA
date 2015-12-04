@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.moose.psi;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
@@ -101,7 +102,37 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseA
 	@Override
 	protected String getSubNameHeavy()
 	{
-		return getNode().getText();
+		String realName = getNode().getText();
+		if (realName.length() > 0 && realName.charAt(0) == '+')
+		{
+			return realName.substring(1);
+		}
+		return realName;
+	}
+
+	protected boolean isExtension(PsiElement element)
+	{
+		String text = element.getNode().getText();
+		return text.length() > 0 && text.charAt(0) == '+';
+	}
+
+	@Override
+	public int getNestedElementStartOffset(LeafPsiElement element, int defaultOffset)
+	{
+		return isExtension(element) ? defaultOffset + 1 : defaultOffset;
+	}
+
+	@Override
+	public TextRange getNestedElementTextRange(LeafPsiElement element)
+	{
+		int defaultStart = element.getStartOffset();
+		int defaultLength = element.getNode().getTextLength();
+		if (isExtension(element))
+		{
+			defaultLength--;
+		}
+
+		return new TextRange(defaultStart, defaultStart + defaultLength);
 	}
 
 	@Override
@@ -111,6 +142,11 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseA
 			throw new IncorrectOperationException("You can't set an empty attribute name");
 
 		PsiElement nameIdentifier = getNameIdentifier();
+		if (getNode().getText().charAt(0) == '+')
+		{
+			name = "+" + name;
+		}
+
 		if (nameIdentifier instanceof LeafPsiElement)
 		{
 			((LeafPsiElement) nameIdentifier).replaceWithText(name);

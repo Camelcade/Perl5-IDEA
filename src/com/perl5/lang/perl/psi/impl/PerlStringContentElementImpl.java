@@ -17,11 +17,14 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.extensions.parser.PerlElementRangeProvider;
 import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
@@ -146,4 +149,27 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		super.clearCaches();
 		createMyReferences();
 	}
+
+	@Override
+	public int getStartOffset()
+	{
+		PsiElement parent = getParent();
+		if (parent instanceof PerlElementRangeProvider)
+		{
+			return ((PerlElementRangeProvider) parent).getNestedElementStartOffset(this, super.getStartOffset());
+		}
+		return super.getStartOffset();
+	}
+
+	@Override
+	public TextRange getTextRange()
+	{
+		PsiElement parent = getParent();
+		if (parent instanceof PerlElementRangeProvider)
+		{
+			return ((PerlElementRangeProvider) parent).getNestedElementTextRange(this);
+		}
+		return super.getTextRange();
+	}
+
 }

@@ -14,17 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.extensions.parser;
 
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.extensions.parser.PerlElementRangeProvider;
-import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStub;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 
 /**
- * Created by hurricup on 29.11.2015.
+ * Created by hurricup on 04.12.2015.
+ * Range provider may be used to override getRange in StringContentElement, used in Moose attributes, that can be started with +
  */
-public interface PerlMooseAttribute extends PerlSubDefinitionBase<PerlMooseAttributeStub>, PsiElement, PerlElementRangeProvider
+public interface PerlElementRangeProvider
 {
+	/**
+	 * Returns range in provided element.
+	 *
+	 * @param element Element in question
+	 * @return text range
+	 */
+	int getNestedElementStartOffset(LeafPsiElement element, int defaultOffset);
+
+	TextRange getNestedElementTextRange(LeafPsiElement element);
+
 }
