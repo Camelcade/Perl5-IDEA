@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.extensions.parser;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 
 /**
@@ -27,13 +26,9 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 public interface PerlElementRangeProvider
 {
 	/**
-	 * Returns range in provided element.
-	 *
-	 * @param element Element in question
-	 * @return text range
+	 * Provides TextRange for nested LeafElement. Used in Moose and other extensions
+	 * @param element LeafElement
+	 * @return textRange
 	 */
-	int getNestedElementStartOffset(LeafPsiElement element, int defaultOffset);
-
 	TextRange getNestedElementTextRange(LeafPsiElement element);
-
 }

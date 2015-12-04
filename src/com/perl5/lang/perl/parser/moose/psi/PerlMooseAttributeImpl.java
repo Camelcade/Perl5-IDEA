@@ -25,7 +25,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.PerlPsiLists;
 import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStub;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PsiPerlAnnotation;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
+import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -117,18 +119,13 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseA
 	}
 
 	@Override
-	public int getNestedElementStartOffset(LeafPsiElement element, int defaultOffset)
-	{
-		return isExtension(element) ? defaultOffset + 1 : defaultOffset;
-	}
-
-	@Override
 	public TextRange getNestedElementTextRange(LeafPsiElement element)
 	{
 		int defaultStart = element.getStartOffset();
 		int defaultLength = element.getNode().getTextLength();
 		if (isExtension(element))
 		{
+			defaultStart++;
 			defaultLength--;
 		}
 
