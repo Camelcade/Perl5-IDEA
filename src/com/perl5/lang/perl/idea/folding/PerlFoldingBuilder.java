@@ -55,13 +55,14 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlConstantsBlock.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlBlock.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonHash.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonArray.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlParenthesisedExpr.class, 0, 0));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlHeredocElementImpl.class, 1, 1));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 1));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlConstantsBlock.class, 0, 0, 2));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlBlock.class, 0, 0, 1));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonHash.class, 0, 0, 2));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonArray.class, 0, 0, 2));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlParenthesisedExpr.class, 0, 0, 2));
+		descriptors.addAll(getDescriptorsFor(root, document, PerlHeredocElementImpl.class, 1, 1, 2));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 1, 2));
+		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlStringList.class, 2, 0, 2));
 
 		descriptors.addAll(getCommentsDescriptors(root, document));
 		descriptors.addAll(getImportDescriptors(root, document));
@@ -221,7 +222,14 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	 * @param <T>         PsiElement subclass
 	 * @return list of folding descriptors
 	 */
-	private <T extends PsiElement> List<FoldingDescriptor> getDescriptorsFor(@NotNull PsiElement root, @NotNull Document document, Class<? extends T> c, int startMargin, int endMargin)
+	private <T extends PsiElement> List<FoldingDescriptor> getDescriptorsFor(
+			@NotNull PsiElement root,
+			@NotNull Document document,
+			Class<? extends T> c,
+			int startMargin,
+			int endMargin,
+			int minLines
+	)
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
@@ -237,7 +245,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 				int startLine = document.getLineNumber(startOffset);
 				int endLine = document.getLineNumber(endOffset);
 
-				if (endLine - startLine > 2)
+				if (endLine - startLine > minLines)
 					descriptors.add(new FoldingDescriptor(block.getNode(), new TextRange(startOffset, endOffset)));
 			}
 		}
@@ -254,6 +262,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return "{code block}";
 		if (elementType == PerlElementTypes.CONSTANTS_BLOCK)
 			return "{constants definitions}";
+		if (elementType == PerlElementTypes.STRING_LIST)
+			return "{strings list}";
 		else if (elementType == PerlElementTypes.ANON_ARRAY)
 			return "[array]";
 		else if (elementType == PerlElementTypes.ANON_HASH)
@@ -302,6 +312,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return PerlFoldingSettings.getInstance().COLLAPSE_HEREDOCS;
 		else if (elementType == PerlElementTypes.TEMPLATE_BLOCK_HTML)
 			return PerlFoldingSettings.getInstance().COLLAPSE_TEMPLATES;
+		else if (elementType == PerlElementTypes.STRING_LIST)
+			return PerlFoldingSettings.getInstance().COLLAPSE_QW;
 		else
 			return false;
 	}

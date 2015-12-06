@@ -31,6 +31,7 @@ public class PerlFoldingSettings
 	public boolean COLLAPSE_PARENTHESISED = false;
 	public boolean COLLAPSE_HEREDOCS = false;
 	public boolean COLLAPSE_TEMPLATES = false;
+	public boolean COLLAPSE_QW = false;
 
 	public static PerlFoldingSettings getInstance()
 	{

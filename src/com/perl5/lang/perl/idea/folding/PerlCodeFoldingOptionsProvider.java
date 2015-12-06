@@ -38,6 +38,7 @@ public class PerlCodeFoldingOptionsProvider extends BeanConfigurable<PerlFolding
 		checkBox("COLLAPSE_PARENTHESISED", "Parenthesised expressions");
 		checkBox("COLLAPSE_HEREDOCS", "Here-docs");
 		checkBox("COLLAPSE_TEMPLATES", "Template parts (mojo, embedded)");
+		checkBox("COLLAPSE_QW", "QW contents");
 	}
 
 	@Override

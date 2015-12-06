@@ -44,6 +44,7 @@
         <li>Implemented parsing for Perl5 native signatures.</li>
         <li>Implemented smartkeys option for here-doc terminator auto-insertion, fixes #589</li>
         <li>Implemented formatting and alignment for ternary operator, fixes #591</li>
+        <li>Implemented folding for qw lists, fixes #619</li>
         <li>Code style:
         <ul>
         <li>Implemented Perl5-specific CodeStyle settings panel, fixes #422</li>
