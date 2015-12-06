@@ -826,7 +826,7 @@ lp_and_expr ::= expr (OPERATOR_AND_LP expr)+
 lp_or_xor_expr ::= expr ((OPERATOR_OR_LP|OPERATOR_XOR_LP) expr)+
 
 print_expr ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( LEFT_PAREN [print_arguments] RIGHT_PAREN | [print_arguments] ) {pin=2}
-private print_arguments ::= [print_handle] expr | expr
+private print_arguments ::= print_handle expr | expr
 print_handle ::=  <<parsePrintHandle>> | perl_handle
 
 sub_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
@@ -1025,7 +1025,7 @@ code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND SIGIL_CODE>> cast_
 
 label_declaration ::= <<parseLabelDeclaration>> // do we need to change tokentype?
 private perl_version ::= <<parsePerlVersion>>
-private perl_handle ::=  block | scalar_variable !(<<isOperatorToken>>)
+private perl_handle ::=  block | scalar_variable !(LEFT_BRACE|LEFT_BRACKET|<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
