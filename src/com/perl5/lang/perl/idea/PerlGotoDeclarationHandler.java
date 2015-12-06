@@ -83,7 +83,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 		// string content to file jump fixme change to string
 		else if (sourceElement instanceof PerlStringContentElement && ((PerlStringContentElement) sourceElement).looksLikePath())
 		{
-			String tokenText = sourceElement.getText().replaceAll("\\\\", "/").replaceAll("/+", "/");
+			String tokenText = ((PerlStringContentElement) sourceElement).getContinuosText().replaceAll("\\\\", "/").replaceAll("/+", "/");
 			Project project = sourceElement.getProject();
 
 			String fileName = ((PerlStringContentElement) sourceElement).getContentFileName();

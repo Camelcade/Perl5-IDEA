@@ -37,6 +37,15 @@ public interface PerlStringContentElement extends PsiElement
 	 */
 	public boolean looksLikePath();
 
+	/**
+	 * Returns continuos string for this element
+	 *
+	 * @return text till space or end before and after this element
+	 */
+	String getContinuosText();
+
+
 	String getContentFileName();
+
 
 }
