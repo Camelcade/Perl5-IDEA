@@ -88,6 +88,7 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 
 		if (PerlParserUtil.consumeToken(b, RESERVED_HAS) && parseHasArguments(b, l))
 		{
+			PerlParserUtil.parseStatementModifier(b, l);
 			m.done(MOOSE_STATEMENT_HAS);
 			return true;
 		}
@@ -161,6 +162,7 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 		{
 			if (PerlParser.expr(b, l, -1))
 			{
+				PerlParserUtil.parseStatementModifier(b, l);
 				m.done(statementToken);
 				return true;
 			}
@@ -180,6 +182,7 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 			b.advanceLexer();
 			if (PerlParser.expr(b, l, -1))
 			{
+				PerlParserUtil.parseStatementModifier(b, l);
 				m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
 				return true;
 			}
