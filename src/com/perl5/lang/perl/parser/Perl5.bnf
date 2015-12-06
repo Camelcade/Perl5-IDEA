@@ -729,7 +729,7 @@ pref_mm_expr ::= OPERATOR_MINUS_MINUS expr
 suff_pp_expr ::= expr (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS)
 
 pow_expr ::= expr (pow_operator expr)+ { rightAssociative=true }
-private pow_operator ::= OPERATOR_MUL OPERATOR_MUL !OPERATOR_ASSIGN
+private pow_operator ::= <<checkAndCollapseToken OPERATOR_POW OPERATOR_MUL OPERATOR_MUL>> !OPERATOR_ASSIGN
 
 private op_5_expr ::= ref_expr | prefix_minus_as_string_expr | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }

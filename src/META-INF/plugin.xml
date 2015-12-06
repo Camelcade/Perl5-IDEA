@@ -97,6 +97,8 @@
         <li>Fixed bug with // formatting, fixes #594</li>
         <li>Fixed problems with indention inside ternar operator, fixes #592</li>
         <li>Fixed possible NPE on re-formatting line with here-doc opener, fixes CAMELCADE-28</li>
+        <li>Implemented proper formatting for match and notmatch operators, fixes #629</li>
+        <li>Fixed parsing for pow operator, fixes #626</li>
       </ul>
       </p>
 
