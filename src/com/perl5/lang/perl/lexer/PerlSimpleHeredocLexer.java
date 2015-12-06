@@ -39,33 +39,7 @@ public class PerlSimpleHeredocLexer extends PerlInterpolatedHeredocLexer
 
 		if (tokenStart > bufferStart && tokenStart < bufferEnd)
 		{
-			setTokenStart(tokenStart);
-
-			int currentPosition = tokenStart;
-
-			char currentChar = buffer.charAt(currentPosition);
-
-			if (currentChar == '\n')
-			{
-				currentPosition++;
-			}
-			else if (Character.isWhitespace(currentChar))
-			{
-				while (currentPosition < bufferEnd && (currentChar = buffer.charAt(currentPosition)) != '\n' && Character.isWhitespace(currentChar))
-				{
-					currentPosition++;
-				}
-			}
-			else
-			{
-				while (currentPosition < bufferEnd && !Character.isWhitespace(buffer.charAt(currentPosition)))
-				{
-					currentPosition++;
-				}
-			}
-			setTokenEnd(currentPosition);
-
-			return STRING_CONTENT;
+			return PerlLexerUtil.remapSQToken(super.perlAdvance());
 		}
 		return super.perlAdvance();
 	}

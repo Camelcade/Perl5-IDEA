@@ -63,8 +63,8 @@
         <li>Implemented Moose/Moo keywords parsing and autocompletion: inner, super, meta.</li>
         <li>Implemented <code>extends</code> and <code>with</code> statements support.</li>
         <li>Implemented resolution and refactoring in method modifiers: <code>around</code>, <code>after</code>, <code>before</code> and <code>augment</code>.</li>
-        <li>Implemented parsing, resolution and refactoring for <code>override</code> statement.</li>
-        <li>Implemented parsing, resolution and refactoring for  <code>has</code> statement.</li>
+        <li>Implemented parsing, resolution and refactoring for <code>override</code> statement (some annotations works).</li>
+        <li>Implemented parsing, resolution and refactoring for  <code>has</code> statement (some annotations works).</li>
         </ul>
         </li>
       </ul>

@@ -29,18 +29,6 @@ import java.util.regex.Matcher;
  */
 public class PerlStringLexer extends PerlStringLexerGenerated
 {
-/* for issue #251
-	protected static final String FLAGS_RE = "(:?[-+ #])?";
-	protected static final String POSITIONAL_RE = "([1-9]\\d*$)?";
-	protected static final String WIDTH_RE = "(:?\\d+|\\*)?";
-	protected static final String PRECISION_RE = "(:?\\.(:?\\d+|\\*))?";
-	protected static final String LENGTH_RE = "(:?hh|h|ll|l|j|z|t|L)?";
-	protected static final String SPECIFIER_RE = "[diuoxXfFeEgGaAcspn]";
-	public static final Pattern PRINTF_PLACEHOLDER_PATTERN = Pattern.compile(
-			"%" + POSITIONAL_RE + FLAGS_RE + WIDTH_RE + PRECISION_RE + LENGTH_RE + SPECIFIER_RE
-	);
-*/
-
 	protected PerlLexer PERL_LEXER = null;
 	protected Project myProject = null;
 
@@ -112,7 +100,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	{
 		String tokenText = yytext().toString();
 
-		Matcher m = AMBIGUOUS_PACKAGE_RE.matcher(tokenText);
+		Matcher m = AMBIGUOUS_PACKAGE_PATTERN.matcher(tokenText);
 		if (m.matches())
 		{
 			String packageIdentifier = m.group(1);

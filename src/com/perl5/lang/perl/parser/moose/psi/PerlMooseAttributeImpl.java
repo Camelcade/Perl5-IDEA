@@ -23,12 +23,15 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlPsiLists;
 import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStub;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlAnnotation;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -104,32 +107,14 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseA
 	@Override
 	protected String getSubNameHeavy()
 	{
-		String realName = getNode().getText();
-		if (realName.length() > 0 && realName.charAt(0) == '+')
-		{
-			return realName.substring(1);
-		}
-		return realName;
-	}
-
-	protected boolean isExtension(PsiElement element)
-	{
-		String text = element.getNode().getText();
-		return text.length() > 0 && text.charAt(0) == '+';
+		return getNode().getText();
 	}
 
 	@Override
-	public TextRange getNestedElementTextRange(LeafPsiElement element)
+	public boolean isExtension()
 	{
-		int defaultStart = element.getStartOffset();
-		int defaultLength = element.getNode().getTextLength();
-		if (isExtension(element))
-		{
-			defaultStart++;
-			defaultLength--;
-		}
-
-		return new TextRange(defaultStart, defaultStart + defaultLength);
+		PsiElement prevElement = getPrevSibling();
+		return prevElement instanceof PerlStringContentElement && prevElement.getNode().getElementType() == PerlElementTypes.STRING_PLUS;
 	}
 
 	@Override
@@ -139,11 +124,6 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseA
 			throw new IncorrectOperationException("You can't set an empty attribute name");
 
 		PsiElement nameIdentifier = getNameIdentifier();
-		if (getNode().getText().charAt(0) == '+')
-		{
-			name = "+" + name;
-		}
-
 		if (nameIdentifier instanceof LeafPsiElement)
 		{
 			((LeafPsiElement) nameIdentifier).replaceWithText(name);

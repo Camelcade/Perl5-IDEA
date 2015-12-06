@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
@@ -39,6 +40,6 @@ public class PerlNamesValidator implements NamesValidator
 	@Override
 	public boolean isIdentifier(@NotNull String name, Project project)
 	{
-		return IDENTIFIER_PATTERN.matcher(name).matches();
+		return IDENTIFIER_PATTERN.matcher(name).matches() || PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(name).matches();
 	}
 }

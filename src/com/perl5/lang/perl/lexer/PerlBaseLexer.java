@@ -30,25 +30,27 @@ import java.util.regex.Pattern;
  */
 public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 {
-	private static final String reBasicIdentifier = "[_a-zA-Z0-9][_a-zA-Z0-9]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
-	private static final String reSeparator =
+	private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_a-zA-Z0-9][_a-zA-Z0-9]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
+	private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
 			"(?:" +
 					"(?:::)+'?" +
 					"|" +
 					"(?:::)*'" +
 					")";
-	public static final Pattern AMBIGUOUS_PACKAGE_RE = Pattern.compile(
+	private static final String AMBIGUOUS_PACKAGE_PATTERN_TEXT =
 			"(" +
-					reSeparator + "?" +        // optional opening separator,
+					PACKAGE_SEPARATOR_PATTERN_TEXT + "?" +        // optional opening separator,
 					"(?:" +
-					reBasicIdentifier +
-					reSeparator +
+					BASIC_IDENTIFIER_PATTERN_TEXT +
+					PACKAGE_SEPARATOR_PATTERN_TEXT +
 					")*" +
 					")" +
 					"(" +
-					reBasicIdentifier +
-					")"
-	);
+					BASIC_IDENTIFIER_PATTERN_TEXT +
+					")";
+
+	public static final Pattern AMBIGUOUS_PACKAGE_PATTERN = Pattern.compile(AMBIGUOUS_PACKAGE_PATTERN_TEXT);
+
 	public final Stack<Integer> stateStack = new Stack<Integer>();
 	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
 	protected final PerlTokenHistory myTokenHistory = new PerlTokenHistory();

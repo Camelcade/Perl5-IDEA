@@ -41,6 +41,17 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_a-zA-Z0-9]*");
 	public static final Pattern BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_a-zA-Z0-9]*");
 
+	// pattern for getting marker
+	public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
+	public static final Pattern HEREDOC_OPENER_PATTERN_DQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
+	public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
+	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
+	public static final Pattern VERSION_IDENTIFIER_PATTERN = Pattern.compile("^(v[\\d_]+)");
+
+	public static final Pattern ANNOTATION_PATTERN = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
+	public static final Pattern ANNOTATION_PATTERN_PACKAGE = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
+
+
 	public static final String STRING_DATA = "__DATA__";
 	public static final int STRING_DATA_LENGTH = STRING_DATA.length();
 	public static final String STRING_END = "__END__";
@@ -143,12 +154,6 @@ public class PerlLexer extends PerlLexerGenerated
 			, STRING_CONTENT
 	);
 
-	// pattern for getting marker
-	public static final Pattern markerPattern = Pattern.compile("<<(.+?)");
-	public static final Pattern markerPatternDQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
-	public static final Pattern markerPatternSQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
-	public static final Pattern markerPatternXQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
-	public static final Pattern versionIdentifierPattern = Pattern.compile("^(v[\\d_]+)");
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	// pre-variable name tokens
 	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
@@ -301,8 +306,6 @@ public class PerlLexer extends PerlLexerGenerated
 			"y"
 	));
 	public static TokenSet RESERVED_TOKENSET;
-	public static Pattern annotationPattern = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
-	public static Pattern annotationPatternPackage = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
 
 	static
 	{
@@ -753,7 +756,7 @@ public class PerlLexer extends PerlLexerGenerated
 				)
 		{
 			CharSequence tokenText = yytext();
-			Matcher m = versionIdentifierPattern.matcher(tokenText);
+			Matcher m = VERSION_IDENTIFIER_PATTERN.matcher(tokenText);
 			if (m.find())
 			{
 				if (m.group(1).length() < tokenText.length())
@@ -802,7 +805,7 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	void parseAnnotation(CharSequence annotationLine, int baseOffset)
 	{
-		Matcher m = annotationPattern.matcher(annotationLine);
+		Matcher m = ANNOTATION_PATTERN.matcher(annotationLine);
 		preparsedTokensList.clear();
 		CharSequence tailComment;
 
@@ -827,7 +830,7 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				// additional parsing
 				String annotationRest = m.group(3);
-				Matcher pm = annotationPatternPackage.matcher(annotationRest);
+				Matcher pm = ANNOTATION_PATTERN_PACKAGE.matcher(annotationRest);
 
 				if (pm.matches())
 				{
@@ -914,21 +917,21 @@ public class PerlLexer extends PerlLexerGenerated
 
 		if (StringUtil.endsWithChar(openToken, '"'))
 		{
-			m = markerPatternDQ.matcher(openToken);
+			m = HEREDOC_OPENER_PATTERN_DQ.matcher(openToken);
 		}
 		else if (StringUtil.endsWithChar(openToken, '\''))
 		{
-			m = markerPatternSQ.matcher(openToken);
+			m = HEREDOC_OPENER_PATTERN_SQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING;
 		}
 		else if (StringUtil.endsWithChar(openToken, '`'))
 		{
-			m = markerPatternXQ.matcher(openToken);
+			m = HEREDOC_OPENER_PATTERN_XQ.matcher(openToken);
 			newState = LEX_HEREDOC_WAITING_QX;
 		}
 		else
 		{
-			m = markerPattern.matcher(openToken);
+			m = HEREDOC_OPENER_PATTERN.matcher(openToken);
 		}
 
 		Character nextCharacter = getNextSignificantCharacter();
@@ -954,7 +957,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 				if (heredocMarker.length() > 0)
 				{
-					preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
+					preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER));
 					currentPosition += heredocMarker.length();
 				}
 
@@ -968,7 +971,7 @@ public class PerlLexer extends PerlLexerGenerated
 					return OPERATOR_SHIFT_LEFT;
 
 				heredocMarker = m.group(1);
-				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_CONTENT));
+				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER));
 			}
 		}
 		else
@@ -1209,7 +1212,9 @@ public class PerlLexer extends PerlLexerGenerated
 				)
 			return IDENTIFIER;
 		else if (isCommaArrowAhead())    // we should check for ->
-			return STRING_CONTENT;
+		{
+			return STRING_IDENTIFIER;
+		}
 
 		yypushback(yylength() - 1);
 		return OPERATOR_X;
@@ -1567,7 +1572,8 @@ public class PerlLexer extends PerlLexerGenerated
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QX)
 			return getQXStringLexer();
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QW)
-			return getQWStringLexer();
+			return getQStringLexer();
+//		return getQWStringLexer();
 
 		throw new RuntimeException("Unknown lexical state for string token " + currentState);
 	}
@@ -1600,9 +1606,20 @@ public class PerlLexer extends PerlLexerGenerated
 			return NUMBER_SIMPLE;
 		}
 		else if (!negate && isBraced())
+		{
 			return IDENTIFIER;
+		}
 		else if (!negate && isCommaArrowAhead())
-			return STRING_CONTENT;
+		{
+			if (tokenText.startsWith("-"))
+			{
+				return STRING_CONTENT;
+			}
+			else
+			{
+				return STRING_IDENTIFIER;
+			}
+		}
 		else if (tokenText.startsWith("--"))
 		{
 			yypushback(tokenText.length() - 2);
@@ -1692,7 +1709,7 @@ public class PerlLexer extends PerlLexerGenerated
 			return getIdentifierToken();
 		}
 
-		Matcher m = AMBIGUOUS_PACKAGE_RE.matcher(tokenText);
+		Matcher m = AMBIGUOUS_PACKAGE_PATTERN.matcher(tokenText);
 		if (m.matches())
 		{
 			String packageIdentifier = m.group(1);

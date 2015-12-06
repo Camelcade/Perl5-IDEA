@@ -20,6 +20,7 @@ import com.intellij.lang.DefaultASTFactoryImpl;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexerUtil;
 import com.perl5.lang.perl.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +39,7 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 	@Override
 	public LeafElement createLeaf(@NotNull IElementType type, CharSequence text)
 	{
-		if (type == STRING_CONTENT)
+		if (PerlLexerUtil.STRING_CONTENT_TOKENS.contains(type))
 			return new PerlStringContentElementImpl(type, text);
 		else if (type == VARIABLE_NAME)
 			return new PerlVariableNameElementImpl(type, text);

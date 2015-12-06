@@ -88,7 +88,6 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 		return PerlPackageUtil.getCanonicalPackageName(getName());
 	}
 
-
 	@NotNull
 	@Override
 	public PsiReference[] getReferences()

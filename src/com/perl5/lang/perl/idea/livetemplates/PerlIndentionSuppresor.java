@@ -38,10 +38,10 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor
 		{
 			String templateText = template.getTemplateText();
 
-			if (PerlLexer.markerPattern.matcher(templateText).find()
-					|| PerlLexer.markerPatternSQ.matcher(templateText).find()
-					|| PerlLexer.markerPatternDQ.matcher(templateText).find()
-					|| PerlLexer.markerPatternXQ.matcher(templateText).find()
+			if (PerlLexer.HEREDOC_OPENER_PATTERN.matcher(templateText).find()
+					|| PerlLexer.HEREDOC_OPENER_PATTERN_SQ.matcher(templateText).find()
+					|| PerlLexer.HEREDOC_OPENER_PATTERN_DQ.matcher(templateText).find()
+					|| PerlLexer.HEREDOC_OPENER_PATTERN_XQ.matcher(templateText).find()
 					)
 				template.setToIndent(false);
 		}

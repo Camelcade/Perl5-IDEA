@@ -17,14 +17,11 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.extensions.parser.PerlElementRangeProvider;
 import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
@@ -41,12 +38,12 @@ import java.util.regex.Pattern;
  */
 public class PerlStringContentElementImpl extends LeafPsiElement implements PerlStringContentElement
 {
-	final static String validFileNameRe = "\\.?[a-zA-Z0-9\\-_]+(?:\\.[a-zA-Z0-9\\-_]*)*";
-	final static String validPathDelimiterRe = "(?:\\\\+|/+)";
-	final static Pattern validPathRe = Pattern.compile(
-			validPathDelimiterRe + "?" +
-					"(?:" + validFileNameRe + validPathDelimiterRe + ")+ ?" +
-					"(" + validFileNameRe + ")" + validPathDelimiterRe + "?"
+	static final String FILE_PATH_PATTERN_TEXT = "\\.?[a-zA-Z0-9\\-_]+(?:\\.[a-zA-Z0-9\\-_]*)*";
+	static final String FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:\\\\+|/+)";
+	static final Pattern FILE_PATH_PATTERN = Pattern.compile(
+			FILE_PATH_DELIMITER_PATTERN_TEXT + "?" +
+					"(?:" + FILE_PATH_PATTERN_TEXT + FILE_PATH_DELIMITER_PATTERN_TEXT + ")+ ?" +
+					"(" + FILE_PATH_PATTERN_TEXT + ")" + FILE_PATH_DELIMITER_PATTERN_TEXT + "?"
 	);
 	protected Boolean looksLikePath = null;
 	protected Boolean looksLikePackage = null;
@@ -120,7 +117,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 			return looksLikePackage;
 
 		String text = getText();
-		return looksLikePackage = text.contains("::") && PerlBaseLexer.AMBIGUOUS_PACKAGE_RE.matcher(text).matches();
+		return looksLikePackage = text.contains("::") && PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(text).matches();
 	}
 
 	@Override
@@ -128,7 +125,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	{
 		if (looksLikePath != null)
 			return looksLikePath;
-		return looksLikePath = validPathRe.matcher(getText()).matches();
+		return looksLikePath = FILE_PATH_PATTERN.matcher(getText()).matches();
 	}
 
 	@Override
@@ -136,7 +133,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	{
 		if (looksLikePath())
 		{
-			Matcher m = validPathRe.matcher(getText());
+			Matcher m = FILE_PATH_PATTERN.matcher(getText());
 			if (m.matches())
 				return m.group(1);
 		}
@@ -150,6 +147,8 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		createMyReferences();
 	}
 
+
+/*
 	@Override
 	public TextRange getTextRange()
 	{
@@ -161,4 +160,45 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		return super.getTextRange();
 	}
 
+	@Override
+	public int getTextLength()
+	{
+		PsiElement parent = getParent();
+		if (parent instanceof PerlElementRangeProvider)
+		{
+			return ((PerlElementRangeProvider) parent).getNestedElementLength(this, super.getTextLength());
+		}
+		return super.getTextLength();
+	}
+
+
+
+	@Override
+	public int getTextOffset()
+	{
+		PsiElement parent = getParent();
+		if (parent instanceof PerlElementRangeProvider)
+		{
+			return ((PerlElementRangeProvider) parent).getNestedElementTextRange(this);
+		}
+		return super.getTextOffset();
+	}
+*/
+
+	/*
+
+	@Override
+	public int getStartOffset()
+	{
+		PsiElement parent = getParent();
+		if (parent instanceof PerlElementRangeProvider)
+		{
+			return ((PerlElementRangeProvider) parent).getNestedElementStartOffset(this, super.getStartOffset());
+		}
+		return super.getStartOffset();
+	}
+
+*/
 }
+
+

@@ -17,14 +17,18 @@
 package com.perl5.lang.perl.parser.moose.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.extensions.parser.PerlElementRangeProvider;
 import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStub;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 
 /**
  * Created by hurricup on 29.11.2015.
  */
-public interface PerlMooseAttribute extends PerlSubDefinitionBase<PerlMooseAttributeStub>, PsiElement, PerlElementRangeProvider
+public interface PerlMooseAttribute extends PerlSubDefinitionBase<PerlMooseAttributeStub>, PsiElement
 {
+	/**
+	 * Indicates, that current attribute is extension of parent one
+	 *
+	 * @return result
+	 */
+	boolean isExtension();
 }

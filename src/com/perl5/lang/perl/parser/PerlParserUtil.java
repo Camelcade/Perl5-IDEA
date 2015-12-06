@@ -27,6 +27,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlLexerUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlBuilderLight;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -1354,13 +1355,15 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				&& tokenType != extraStopQuote
 				)
 		{
+			IElementType targetToken = PerlLexerUtil.remapSQToken(tokenType);
+
 			PsiBuilder.Marker m = b.mark();
+
 			b.advanceLexer();
-
 //			m.drop();
-			m.collapse(STRING_CONTENT);
+			m.collapse(targetToken);
 
-			if (((PerlBuilder) b).getStringWrapper() != null)
+			if (((PerlBuilder) b).getStringWrapper() != null && targetToken == STRING_IDENTIFIER)
 			{
 				m.precede().done(((PerlBuilder) b).getStringWrapper());
 			}
@@ -1961,16 +1964,18 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 
-		if (b.getTokenType() == STRING_CONTENT)
+		IElementType tokenType = b.getTokenType();
+
+		if (PerlLexerUtil.STRING_CONTENT_TOKENS.contains(tokenType))
 		{
-			if (((PerlBuilder) b).getStringWrapper() == null)
+			if (((PerlBuilder) b).getStringWrapper() == null  || tokenType != STRING_IDENTIFIER )
 			{
-				consumeToken(b, STRING_CONTENT);
+				b.advanceLexer();
 			}
 			else
 			{
 				PsiBuilder.Marker m = b.mark();
-				consumeToken(b, STRING_CONTENT);
+				b.advanceLexer();
 				m.done(((PerlBuilder) b).getStringWrapper());
 			}
 			return true;
