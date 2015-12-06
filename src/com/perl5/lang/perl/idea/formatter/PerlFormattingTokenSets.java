@@ -109,7 +109,9 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 
 	TokenSet OPERATORS_EQUALITY = TokenSet.create(
 			OPERATOR_EQ_NUMERIC,
-			OPERATOR_NE_NUMERIC
+			OPERATOR_NE_NUMERIC,
+			OPERATOR_RE,
+			OPERATOR_NOT_RE
 	);
 
 	TokenSet OPERATORS_RELATIONAL = TokenSet.create(
