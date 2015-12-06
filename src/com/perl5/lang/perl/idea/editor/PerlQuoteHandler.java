@@ -17,6 +17,9 @@
 package com.perl5.lang.perl.idea.editor;
 
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
@@ -24,8 +27,24 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  */
 public class PerlQuoteHandler extends SimpleTokenSetQuoteHandler
 {
+	public static final TokenSet OPENING_QUOTES = TokenSet.create(PerlElementTypes.QUOTE_SINGLE_OPEN, PerlElementTypes.QUOTE_DOUBLE_OPEN, PerlElementTypes.QUOTE_TICK_OPEN);
+	public static final TokenSet CLOSING_QUOTES = TokenSet.create(PerlElementTypes.QUOTE_SINGLE_CLOSE, PerlElementTypes.QUOTE_DOUBLE_CLOSE, PerlElementTypes.QUOTE_TICK_CLOSE);
+
 	public PerlQuoteHandler()
 	{
-		super(PerlElementTypes.QUOTE_SINGLE_OPEN, PerlElementTypes.QUOTE_DOUBLE_OPEN, PerlElementTypes.QUOTE_TICK_OPEN);
+		super(OPENING_QUOTES);
 	}
+
+	@Override
+	public boolean isClosingQuote(HighlighterIterator iterator, int offset)
+	{
+		return CLOSING_QUOTES.contains(iterator.getTokenType());
+	}
+
+	@Override
+	public boolean isOpeningQuote(HighlighterIterator iterator, int offset)
+	{
+		return OPENING_QUOTES.contains(iterator.getTokenType());
+	}
+
 }
