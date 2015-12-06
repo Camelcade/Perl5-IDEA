@@ -151,17 +151,6 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	}
 
 	@Override
-	public int getStartOffset()
-	{
-		PsiElement parent = getParent();
-		if (parent instanceof PerlElementRangeProvider)
-		{
-			return ((PerlElementRangeProvider) parent).getNestedElementStartOffset(this, super.getStartOffset());
-		}
-		return super.getStartOffset();
-	}
-
-	@Override
 	public TextRange getTextRange()
 	{
 		PsiElement parent = getParent();
