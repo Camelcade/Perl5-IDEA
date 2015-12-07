@@ -55,6 +55,7 @@
         <li>Implemented conversion <code>@$array_ref</code> to <code>@{$array_ref}</code> and vice versa (does not affects hash/array elements or slices).</li>
         <li>Implemented conversion <code>main::</code> to <code>::</code> and vice versa, fixes #491</li>
         <li>Implemented spacing settings for braces and brackets of anon hashes and arrays respectively, fixes #604</li>
+        <li>Implemented spacing options for concatenation and range operators, fixes #630</li>
         </ul>
         </li>
         <li>Moose and Moo (as far as it's compatible with Moose):

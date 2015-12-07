@@ -43,6 +43,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			"    for (my $i = 1; $i < 2; $i++)    {\n" +
 			"        $a = $var1 & $var2;\n" +
 			"        $a = $var1 + $var2;\n" +
+			"        $a = $var1 . $var2;\n" +
+			"        $a = join '', $var1 .. $var2;\n" +
 			"    }\n" +
 			"    $a = $var1 * $var2;\n" +
 			"    $a = $var1 << 2;\n" +
@@ -123,6 +125,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", SPACE_OPTION_COMPOUND_BLOCK);
 			consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", SPACE_OPTION_COMPOUND_SECONDARY);
 			consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", SPACE_OPTION_TERM_BLOCKS);
+
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_CONCAT_OPERATOR", SPACE_OPTION_AROUND_CONCAT_OPERATOR, CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS);
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_RANGE_OPERATORS", SPACE_OPTION_AROUND_RANGE_OPERATORS, CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS);
 
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD", SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD, SPACE_GROUP_AFTER_KEYWORD);
 

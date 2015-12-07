@@ -86,12 +86,18 @@ public interface PerlFormattingTokenSets extends PerlElementTypes
 	TokenSet OPERATORS_MULTIPLICATIVE = TokenSet.create(
 			OPERATOR_MUL,
 			OPERATOR_DIV,
-			OPERATOR_POW
+			OPERATOR_POW,
+			OPERATOR_MOD
 	);
 
 	TokenSet OPERATORS_SHIFT = TokenSet.create(
 			OPERATOR_SHIFT_LEFT,
 			OPERATOR_SHIFT_RIGHT
+	);
+
+	TokenSet OPERATORS_RANGE = TokenSet.create(
+			OPERATOR_FLIP_FLOP,
+			OPERATOR_HELLIP
 	);
 
 	TokenSet OPERATORS_UNARY = TokenSet.create(

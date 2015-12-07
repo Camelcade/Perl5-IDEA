@@ -24,6 +24,9 @@ public interface PerlCodeStyleOptionNames
 	String SPACE_GROUP_AFTER_KEYWORD = "After keywords";
 	String SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD = "Variable declaration";
 
+	String SPACE_OPTION_AROUND_RANGE_OPERATORS = "Range operators (..,...)";
+	String SPACE_OPTION_AROUND_CONCAT_OPERATOR = "Concatenation (.)";
+
 	String SPACE_OPTION_COMPOUND_EXPRESSION = "Compound condition or expression";
 	String SPACE_OPTION_COMPOUND_BLOCK = "Compound block";
 

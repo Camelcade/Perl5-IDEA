@@ -51,6 +51,8 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.around(OPERATORS_MULTIPLICATIVE).spaceIf(settings.SPACE_AROUND_MULTIPLICATIVE_OPERATORS)
 				.around(OPERATORS_SHIFT).spaceIf(settings.SPACE_AROUND_SHIFT_OPERATORS)
 				.around(OPERATORS_UNARY).spaceIf(settings.SPACE_AROUND_UNARY_OPERATOR)
+				.aroundInside(OPERATORS_RANGE, FLIPFLOP_EXPR).spaceIf(perlSettings.SPACE_AROUND_RANGE_OPERATORS)
+				.aroundInside(OPERATOR_CONCAT, ADD_EXPR).spaceIf(perlSettings.SPACE_AROUND_CONCAT_OPERATOR)
 
 				.afterInside(LEFT_BRACE, ANON_HASH).spaceIf(perlSettings.SPACE_ANON_HASH_AFTER_LEFT_BRACE)
 				.beforeInside(RIGHT_BRACE, ANON_HASH).spaceIf(perlSettings.SPACE_ANON_HASH_BEFORE_RIGHT_BRACE)
