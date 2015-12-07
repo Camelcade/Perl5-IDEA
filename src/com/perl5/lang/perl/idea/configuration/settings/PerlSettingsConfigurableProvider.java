@@ -44,7 +44,7 @@ public class PerlSettingsConfigurableProvider extends ConfigurableProvider
 	@Override
 	public boolean canCreateConfigurable()
 	{
-		return !PlatformUtils.isIntelliJ();
+		return true;
 	}
 
 }

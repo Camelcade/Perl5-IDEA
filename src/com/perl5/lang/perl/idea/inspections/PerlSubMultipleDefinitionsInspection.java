@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -45,18 +46,26 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				if (canonicalName != null)
 				{
 					if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
-						if (!PerlPackageUtil.isMain(o.getPackageName()))
+					{
+						if (!PerlPackageUtil.isMain(o.getPackageName()) || !Perl5Settings.getInstance(project).SIMPLE_MAIN_RESOLUTION)
+						{
 							registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
+						}
+					}
 
 					for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)))
+					{
 						if (target.isLeftSideOfAssignment())
 						{
 							registerProblem(holder, o.getNameIdentifier(), String.format("%s definition clashes with typeglob alias", name));
 							break;
 						}
+					}
 
 					if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 0)
+					{
 						registerProblem(holder, o.getNameIdentifier(), String.format("%s definition clashes with constant definition", name));
+					}
 				}
 			}
 

@@ -40,6 +40,7 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 {
 	public List<String> libRootUrls = new ArrayList<String>();
 	public String perlPath = "";
+	public boolean SIMPLE_MAIN_RESOLUTION = true;
 
 	public static Perl5Settings getInstance(@NotNull Project project)
 	{

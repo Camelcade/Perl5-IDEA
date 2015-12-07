@@ -24,6 +24,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
@@ -88,7 +89,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 				if (expliclitPackageElement == null && subNameElement.isBuiltIn())
 					return new ResolveResult[0];
 
-				if (PerlPackageUtil.isMain(packageName))    // fixme this is a dirty hack until proper names resolution implemented
+				if (Perl5Settings.getInstance(project).SIMPLE_MAIN_RESOLUTION && PerlPackageUtil.isMain(packageName))    // fixme this is a dirty hack until proper names resolution implemented
 				{
 					PsiFile file = subNameElement.getContainingFile();
 					GlobalSearchScope fileScope = GlobalSearchScope.fileScope(file);

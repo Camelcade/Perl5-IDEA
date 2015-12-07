@@ -27,6 +27,8 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.PlatformUtils;
+import com.intellij.util.ui.CheckBox;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
@@ -44,6 +46,7 @@ public class PerlSettingsConfigurable implements Configurable
 	Project myProject;
 	Perl5Settings mySettings;
 	TextFieldWithBrowseButton perlPathInputField;
+	JCheckBox simpleMainCheckbox;
 
 	private PerlSettingsConfigurable()
 	{
@@ -76,6 +79,20 @@ public class PerlSettingsConfigurable implements Configurable
 		FormBuilder builder = FormBuilder.createFormBuilder();
 		builder.getPanel().setLayout(new VerticalFlowLayout());
 
+		if (!PlatformUtils.isIntelliJ())
+		{
+			createMicroIdeComponents(builder);
+		}
+
+		simpleMainCheckbox = new JCheckBox("Use simple main:: subs resolution (many scripts with same named subs in main:: namespace)");
+		simpleMainCheckbox.setSelected(mySettings.SIMPLE_MAIN_RESOLUTION);
+		builder.addComponent(simpleMainCheckbox);
+
+		return builder.getPanel();
+	}
+
+	protected void createMicroIdeComponents(FormBuilder builder)
+	{
 		perlPathInputField = new TextFieldWithBrowseButton();
 		perlPathInputField.setText(mySettings.perlPath);
 
@@ -98,20 +115,38 @@ public class PerlSettingsConfigurable implements Configurable
 		);
 
 		builder.addLabeledComponent("Perl5 interpreter path: ", perlPathInputField, 1);
-
-		return builder.getPanel();
 	}
 
 	@Override
 	public boolean isModified()
 	{
-		return !mySettings.perlPath.equals(perlPathInputField.getText());
+		return isMicroIdeModified() ||
+				mySettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected();
+	}
+
+	protected boolean isMicroIdeModified()
+	{
+		return !PlatformUtils.isIntelliJ() &&
+				(
+						!mySettings.perlPath.equals(perlPathInputField.getText())
+				);
 	}
 
 	@Override
 	public void apply() throws ConfigurationException
 	{
+		mySettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
+
+		if (!PlatformUtils.isIntelliJ())
+		{
+			applyMicroIdeSettings();
+		}
+	}
+
+	public void applyMicroIdeSettings()
+	{
 		mySettings.perlPath = perlPathInputField.getText();
+
 		ApplicationManager.getApplication().runWriteAction(
 				new Runnable()
 				{
@@ -136,5 +171,6 @@ public class PerlSettingsConfigurable implements Configurable
 	public void disposeUIResources()
 	{
 		perlPathInputField = null;
+		simpleMainCheckbox = null;
 	}
 }
