@@ -36,6 +36,7 @@
 
       <p><b>Features & Improvements:</b>
       <ul>
+      <li>Implemented file level variables inspection. (Pretty useful while migrating from CGI to some persistent server)</li>
       </ul>
       </p>
 
