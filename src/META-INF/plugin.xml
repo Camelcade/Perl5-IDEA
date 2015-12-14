@@ -345,6 +345,11 @@
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlPackageFileMissingInspection"/>
 
         <localInspection language="Perl5"
+                         shortName="FileLevelVariable" displayName="File level variables" groupName="Perl5"
+                         enabledByDefault="false" level="WARNING"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableFileLevelInspection"/>
+
+        <localInspection language="Perl5"
                          shortName="NamespaceUndefined" displayName="Unresovable namespace" groupName="Perl5"
                          enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceUndefinedInspection"/>
