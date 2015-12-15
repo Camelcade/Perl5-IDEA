@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.300</version>
+    <version>1.301</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -37,6 +37,7 @@
       <p><b>Features & Improvements:</b>
       <ul>
       <li>Implemented file level variables inspection. (Pretty useful while migrating from CGI to some persistent server)</li>
+      <li>Implemented parser extension for Switch core module, fixes #658</li>
       </ul>
       </p>
 
@@ -90,6 +91,7 @@
 
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlMethodSignaturesSimpleParserExtension" />
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlMooseParserExtensionImpl"/>
+        <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
 
     </extensions>
 

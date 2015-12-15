@@ -29,5 +29,8 @@ public interface PerlSwitchParserExtension
 	IElementType RESERVED_CASE = new PerlTokenType("case");
 
 	IElementType SWITCH_COMPOUND = new PerlElementType("SWITCH_COMPOUND");
+	IElementType SWITCH_CONDITION = new PerlElementType("SWITCH_CONDITION");
 	IElementType CASE_COMPOUND = new PerlElementType("CASE_COMPOUND");
+	IElementType CASE_DEFAULT = new PerlElementType("CASE_DEFAULT");
+	IElementType CASE_CONDITION = new PerlElementType("CASE_CONDITION");
 }
