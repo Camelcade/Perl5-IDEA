@@ -273,7 +273,7 @@ public class PerlMooseParserExtensionImpl extends PerlParserExtension implements
 
 		}
 
-		return null;
+		return super.createElement(node);
 	}
 
 	@Nullable
