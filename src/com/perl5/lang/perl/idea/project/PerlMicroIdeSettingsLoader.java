@@ -140,28 +140,33 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 				public void run()
 				{
 					ModifiableRootModel rootModel = ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
-					ContentEntry entry = rootModel.getContentEntries()[0];
-					Set<String> libPaths = new HashSet<String>(perl5Settings.libRootUrls);
+					ContentEntry[] entries = rootModel.getContentEntries();
 
-					for (SourceFolder folder : entry.getSourceFolders())
+					if (entries.length > 0)
 					{
-						if (libPaths.contains(folder.getUrl()))
-						{
-							entry.removeSourceFolder(folder);
-						}
-					}
+						ContentEntry entry = entries[0];
+						Set<String> libPaths = new HashSet<String>(perl5Settings.libRootUrls);
 
-					final String rootPath = VfsUtilCore.urlToPath(entry.getUrl());
-					for (String path : libPaths)
-					{
-						if (FileUtil.isAncestor(rootPath, VfsUtilCore.urlToPath(path), true))
+						for (SourceFolder folder : entry.getSourceFolders())
 						{
-							entry.addSourceFolder(path, JpsPerlLibrarySourceRootType.INSTANCE);
+							if (libPaths.contains(folder.getUrl()))
+							{
+								entry.removeSourceFolder(folder);
+							}
 						}
-					}
 
-					applyClassPaths(rootModel);
-					rootModel.commit();
+						final String rootPath = VfsUtilCore.urlToPath(entry.getUrl());
+						for (String path : libPaths)
+						{
+							if (FileUtil.isAncestor(rootPath, VfsUtilCore.urlToPath(path), true))
+							{
+								entry.addSourceFolder(path, JpsPerlLibrarySourceRootType.INSTANCE);
+							}
+						}
+
+						applyClassPaths(rootModel);
+						rootModel.commit();
+					}
 				}
 			});
 		}
