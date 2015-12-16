@@ -1643,6 +1643,7 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		String tokenText = yytext().toString();
 		IElementType tokenType;
+		PerlTokenHistory tokenHistory = getTokenHistory();
 
 		if (isAttribute)
 		{
@@ -1653,28 +1654,39 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			return IDENTIFIER;
 		}
-		else if (!IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())
-				&& !SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())    // print $$ if smth
+		else if (!IDENTIFIER_NEGATION_PREFIX.contains(tokenHistory.getLastSignificantTokenType())
+				&& !SIGILS_TOKENS.contains(tokenHistory.getLastTokenType())    // print $$ if smth
 
 				)
 		{
 			if ((tokenType = namedOperators.get(tokenText)) != null)
+			{
 				return tokenType;
+			}
 			else if (
-					getTokenHistory().getLastUnparenTokenType() == IDENTIFIER
-							&& PerlParserUtil.PRE_HANDLE_OPS.contains(getTokenHistory().getLastUnparenTokenText())
+					(tokenHistory.getLastSignificantTokenType() == OPERATOR_FILETEST && tokenText.equals("_"))
+							|| (tokenHistory.getLastUnparenTokenType() == IDENTIFIER
+							&& PerlParserUtil.PRE_HANDLE_OPS.contains(tokenHistory.getLastUnparenTokenText())
 							&& !PerlSubUtil.BUILT_IN.contains(tokenText)
 							&& isListElementEndAhead()
-					)
+					))
+			{
 				return HANDLE;
+			}
 			else if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) != null)
+			{
 				return tokenType;
+			}
 			else if ((tokenType = blockNames.get(tokenText)) != null)
+			{
 				return tokenType;
+			}
 			else if ((tokenType = tagNames.get(tokenText)) != null)
+			{
 				return tokenType;
+			}
 		}
-		else if (getTokenHistory().getLastSignificantTokenType() == RESERVED_USE || getTokenHistory().getLastSignificantTokenType() == RESERVED_NO) // pragma section
+		else if (tokenHistory.getLastSignificantTokenType() == RESERVED_USE || tokenHistory.getLastSignificantTokenType() == RESERVED_NO) // pragma section
 			if (PRAGMA_TOKENS_MAP.containsKey(tokenText))
 				return PRAGMA_TOKENS_MAP.get(tokenText);
 

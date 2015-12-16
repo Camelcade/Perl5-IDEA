@@ -48,6 +48,7 @@
       <li>Fixed possible NPE on files resolution, #CAMELCADE-43 fixed</li>
       <li>Fixed possible Icon not found exception on acitons menu opening, #CAMELCADE-42 fixed</li>
       <li>Fixed bug with creating top-level packages with main:: prefix, fixes #638</li>
+      <li>Implemented proper parsing for stacked file operations _ handle, fixes #640</li>
       </ul>
       </p>
 
