@@ -91,10 +91,15 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					LEFT_BRACE,
 					LEFT_BRACKET,
-					LEFT_PAREN,
+//					LEFT_PAREN,		// can be print STDERR ($a);
 					OPERATOR_LT_NUMERIC
 			),
-			PerlLexer.OPERATORS_TOKENSET
+			TokenSet.andNot(
+					PerlLexer.OPERATORS_TOKENSET,
+					TokenSet.create(
+							OPERATOR_NOT    // can be print STDERR !$value;
+					)
+			)
 	);
 	public static final TokenSet ANON_HASH_TOKEN_SUFFIXES = TokenSet.create(
 			RIGHT_BRACE
@@ -615,12 +620,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parsePrintHandle(PsiBuilder b, int l)
 	{
 		IElementType currentTokenType = b.getTokenType();
-		IElementType nextTokenType = b.lookAhead(1);
 		assert b instanceof PerlBuilder;
 
 		if (
 				CONVERTABLE_TOKENS.contains(currentTokenType)                // it's identifier
-						&& !PRINT_HANDLE_NEGATE_SUFFIX.contains(nextTokenType)        // no negation tokens, fixme << EOT
+						&& !printHandleNegation(b, l)        // no negation tokens,
 						&& !PerlSubUtil.BUILT_IN.contains(b.getTokenText())         // it's not built in. crude, probably we should check any known sub
 				)
 		{
@@ -632,6 +636,21 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		return false;
 	}
+
+	/**
+	 * Checks if next tokens negates filehandle in print statements
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return check result
+	 */
+	public static boolean printHandleNegation(PsiBuilder b, int l)
+	{
+		return
+				PRINT_HANDLE_NEGATE_SUFFIX.contains(b.lookAhead(1))
+						|| b.rawLookup(1) == LEFT_PAREN;
+	}
+
 
 	/**
 	 * Checks and parses bareword filehandle for <FH> operations

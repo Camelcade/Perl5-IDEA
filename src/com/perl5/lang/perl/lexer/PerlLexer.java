@@ -1664,7 +1664,7 @@ public class PerlLexer extends PerlLexerGenerated
 				return tokenType;
 			}
 			else if (
-					(tokenHistory.getLastSignificantTokenType() == OPERATOR_FILETEST && tokenText.equals("_"))
+					(tokenHistory.getLastSignificantTokenType() == OPERATOR_FILETEST && tokenText.equals("_"))    // for -t _
 							|| (tokenHistory.getLastUnparenTokenType() == IDENTIFIER
 							&& PerlParserUtil.PRE_HANDLE_OPS.contains(tokenHistory.getLastUnparenTokenText())
 							&& !PerlSubUtil.BUILT_IN.contains(tokenText)
