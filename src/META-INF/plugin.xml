@@ -43,6 +43,7 @@
 
       <p><b>Fixes:</b>
       <ul>
+      <li>Fixed possible NPE on specialized IDE start.</li>
       </ul>
       </p>
 
