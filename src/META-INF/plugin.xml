@@ -45,6 +45,7 @@
       <ul>
       <li>Fixed possible NPE on specialized IDE start, #CAMELCADE-46 fixed</li>
       <li>Fixed exception on empty error element in inspection, #CAMELCADE-44 fixed</li>
+      <li>Fixed possible NPE on files resolution, #CAMELCADE-43 fixed</li>
       </ul>
       </p>
 

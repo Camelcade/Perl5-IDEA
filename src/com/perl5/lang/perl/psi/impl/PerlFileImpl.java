@@ -548,10 +548,13 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		{
 			for (VirtualFile classRoot : getLibPaths())
 			{
-				VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
-				if (targetFile != null)
+				if (classRoot != null)
 				{
-					return targetFile;
+					VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
+					if (targetFile != null)
+					{
+						return targetFile;
+					}
 				}
 			}
 		}
