@@ -46,6 +46,7 @@
       <li>Fixed possible NPE on specialized IDE start, #CAMELCADE-46 fixed</li>
       <li>Fixed exception on empty error element in inspection, #CAMELCADE-44 fixed</li>
       <li>Fixed possible NPE on files resolution, #CAMELCADE-43 fixed</li>
+      <li>Fixed possible Icon not found exception on acitons menu opening, #CAMELCADE-42 fixed</li>
       </ul>
       </p>
 
@@ -461,7 +462,7 @@
 
     <actions>
         <group class="com.perl5.lang.perl.idea.actions.groups.PerlFileActionsGroup" id="Perl5NewFile"
-               text="Perl5 File Actions" description="Create Perl5 File" icon="icons/perl5.png">
+               text="Perl5 File Actions" description="Create Perl5 File" icon="/icons/perl5.png">
 
             <action id="Perl5.NewPerlPackage" class="com.perl5.lang.perl.idea.actions.CreatePerlPackageFileAction"
                     text="Perl5 Package" description="Create Perl5 Package">
