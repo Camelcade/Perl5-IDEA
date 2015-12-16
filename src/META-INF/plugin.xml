@@ -47,6 +47,7 @@
       <li>Fixed exception on empty error element in inspection, #CAMELCADE-44 fixed</li>
       <li>Fixed possible NPE on files resolution, #CAMELCADE-43 fixed</li>
       <li>Fixed possible Icon not found exception on acitons menu opening, #CAMELCADE-42 fixed</li>
+      <li>Fixed bug with creating top-level packages with main:: prefix, fixes #638</li>
       </ul>
       </p>
 
