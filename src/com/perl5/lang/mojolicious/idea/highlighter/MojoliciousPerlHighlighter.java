@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea;
+package com.perl5.lang.mojolicious.idea.highlighter;
 
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.ex.util.LayerDescriptor;

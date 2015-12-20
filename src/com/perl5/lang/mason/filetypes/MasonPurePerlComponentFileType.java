@@ -14,54 +14,45 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.xs;
+package com.perl5.lang.mason.filetypes;
 
-import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
 /**
- * Created by hurricup on 21.04.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class XSFileType extends LanguageFileType
+public class MasonPurePerlComponentFileType extends PerlFileType
 {
-	public static final XSFileType INSTANCE = new XSFileType();
-	public static final Language LANGUAGE = INSTANCE.getLanguage();
-
-	private XSFileType()
-	{
-		super(XSLanguage.INSTANCE);
-	}
-
 	@NotNull
 	@Override
 	public String getName()
 	{
-		return "XS extension";
+		return "Mason pure Perl component";
 	}
 
 	@NotNull
 	@Override
 	public String getDescription()
 	{
-		return "Perl5 extension in C";
+		return "Mason pure Perl component";
 	}
 
 	@NotNull
 	@Override
 	public String getDefaultExtension()
 	{
-		return "xs";
+		return "mp";
 	}
 
 	@Nullable
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.XS_FILE;
+		return PerlIcons.SCRIPT_FILE;
 	}
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+package com.perl5.lang.mojolicious.filetypes;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
@@ -26,7 +26,8 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
-import com.perl5.lang.mojolicious.idea.MojoliciousPerlHighlighter;
+import com.perl5.lang.mojolicious.MojoliciousPerlLanguage;
+import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousPerlHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,11 +39,9 @@ import javax.swing.*;
 public class MojoliciousPerlFileType extends LanguageFileType
 {
 	public static final MojoliciousPerlFileType INSTANCE = new MojoliciousPerlFileType();
-	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
 	public MojoliciousPerlFileType()
 	{
-
 		super(MojoliciousPerlLanguage.INSTANCE);
 		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
 		{

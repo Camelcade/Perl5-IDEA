@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+package com.perl5.lang.mason;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
@@ -26,6 +26,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.perl5.lang.embedded.psi.EmbeddedPerlTokenTypes;
+import com.perl5.lang.mojolicious.MojoliciousPerlLanguage;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,15 +35,15 @@ import java.util.Arrays;
 import java.util.Set;
 
 /**
- * Created by hurricup on 21.07.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider
+public class MasonPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider
 {
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MojoliciousPerlLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MasonPerlLanguage.INSTANCE));
 
 
-	public MojoliciousPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
+	public MasonPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
 	{
 		super(manager, virtualFile, physical);
 	}
@@ -51,7 +52,7 @@ public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocument
 	@NotNull
 	public Language getBaseLanguage()
 	{
-		return MojoliciousPerlLanguage.INSTANCE;
+		return MasonPerlLanguage.INSTANCE;
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocument
 		{
 
 			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(EmbeddedPerlTokenTypes.HTML_TEMPLATE_DATA);
+			file.setContentElementType(EmbeddedPerlTokenTypes.HTML_TEMPLATE_DATA); // fixme
 			return file;
 		}
 
@@ -81,9 +82,9 @@ public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocument
 	}
 
 	@Override
-	protected MojoliciousPerlFileViewProvider cloneInner(final VirtualFile copy)
+	protected MasonPerlFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new MojoliciousPerlFileViewProvider(getManager(), copy, false);
+		return new MasonPerlFileViewProvider(getManager(), copy, false);
 	}
 
 	@Override

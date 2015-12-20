@@ -14,26 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea;
+package com.perl5.lang.mason.idea.findusages;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
+import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 21.07.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class MojoliciousPerlFindUsagesProvider extends PerlFindUsagesProvider
+public class MasonPerlFindUsagesProvider extends PerlFindUsagesProvider
 {
 
 	@Nullable
 	@Override
 	public WordsScanner getWordsScanner()
 	{
-		return new DefaultWordsScanner(new MojoliciousPerlLexerAdapter(null),
+		return new DefaultWordsScanner(new MasonPerlLexerAdapter(null),
 				PerlParserDefinition.IDENTIFIERS,
 				PerlParserDefinition.COMMENTS,
 				PerlParserDefinition.LITERALS

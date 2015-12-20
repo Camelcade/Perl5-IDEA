@@ -14,43 +14,35 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.psi;
+package com.perl5.lang.mason.psi.impl;
 
-import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
+import com.perl5.lang.mason.MasonPerlLanguage;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
 /**
- * Created by hurricup on 21.04.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class PsiFilePod extends PsiFileBase
+public class MasonPerlFileImpl extends PerlFileImpl
 {
-	public PsiFilePod(@NotNull FileViewProvider viewProvider)
+	public MasonPerlFileImpl(@NotNull FileViewProvider viewProvider)
 	{
-		super(viewProvider, PodLanguage.INSTANCE);
+		super(viewProvider, MasonPerlLanguage.INSTANCE);
 	}
 
 	@NotNull
 	@Override
 	public FileType getFileType()
 	{
-		return PodFileType.INSTANCE;
+		return MasonTopLevelComponentFileType.INSTANCE;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "POD file";
-	}
-
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return super.getIcon(flags);
+		return "Mojolicious Perl5 Template";
 	}
 }

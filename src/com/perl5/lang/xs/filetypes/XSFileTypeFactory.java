@@ -14,43 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.psi;
+package com.perl5.lang.xs.filetypes;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
+import com.intellij.openapi.fileTypes.FileTypeConsumer;
+import com.intellij.openapi.fileTypes.FileTypeFactory;
 import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
 /**
- * Created by hurricup on 21.04.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class PsiFilePod extends PsiFileBase
+public class XSFileTypeFactory  extends FileTypeFactory
 {
-	public PsiFilePod(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, PodLanguage.INSTANCE);
-	}
-
-	@NotNull
 	@Override
-	public FileType getFileType()
+	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
 	{
-		return PodFileType.INSTANCE;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "POD file";
-	}
-
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return super.getIcon(flags);
+		fileTypeConsumer.consume(XSFileType.INSTANCE, "xs");
 	}
 }

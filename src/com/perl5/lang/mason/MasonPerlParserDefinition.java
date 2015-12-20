@@ -14,31 +14,33 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+package com.perl5.lang.mason;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
+import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
+import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousPerlFileImpl;
+import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 21.07.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class MojoliciousPerlParserDefinition extends PerlParserDefinition
+public class MasonPerlParserDefinition extends PerlParserDefinition
 {
-	public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousPerlLanguage.INSTANCE);
+	public static final IFileElementType FILE = new PerlFileElementType("Mason Perl5 template", MasonPerlLanguage.INSTANCE);
 
 	@NotNull
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new MojoliciousPerlLexerAdapter(project);
+		return new MasonPerlLexerAdapter(project);
 	}
 
 	@Override
@@ -49,7 +51,7 @@ public class MojoliciousPerlParserDefinition extends PerlParserDefinition
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new MojoliciousPerlFileImpl(viewProvider);
+		return new MasonPerlFileImpl(viewProvider);
 	}
 
 }

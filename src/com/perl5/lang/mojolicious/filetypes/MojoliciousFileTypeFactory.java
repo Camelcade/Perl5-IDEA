@@ -14,30 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea;
+package com.perl5.lang.mojolicious.filetypes;
 
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.intellij.openapi.fileTypes.FileTypeConsumer;
+import com.intellij.openapi.fileTypes.FileTypeFactory;
+import com.perl5.lang.mason.filetypes.MasonInternalComponentFileType;
+import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 21.07.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighter implements PerlElementTypes
+public class MojoliciousFileTypeFactory  extends FileTypeFactory
 {
-	public MojoliciousPerlSyntaxHighlighter(Project project)
-	{
-		super(project);
-	}
-
-	@NotNull
 	@Override
-	public Lexer getHighlightingLexer()
+	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
 	{
-		return new MojoliciousPerlLexerAdapter(myProject);
+		fileTypeConsumer.consume(MojoliciousPerlFileType.INSTANCE, "ep");
 	}
-
 }

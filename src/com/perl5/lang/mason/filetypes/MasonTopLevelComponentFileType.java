@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.psi;
+package com.perl5.lang.mason.filetypes;
 
-import com.intellij.lang.Language;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
@@ -26,31 +25,30 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
-import com.perl5.lang.embedded.EmbeddedPerlLanguage;
-import com.perl5.lang.embedded.idea.EmbeddedPerlHighlighter;
+import com.perl5.lang.mason.MasonPerlLanguage;
+import com.perl5.lang.mason.idea.highlighter.MasonPerlHighlighter;
+import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousPerlHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
 /**
- * Created by hurricup on 18.05.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class EmbeddedPerlFileType extends LanguageFileType
+public class MasonTopLevelComponentFileType extends LanguageFileType
 {
-	public static final EmbeddedPerlFileType INSTANCE = new EmbeddedPerlFileType();
-	public static final Language LANGUAGE = INSTANCE.getLanguage();
+	public static final MasonTopLevelComponentFileType INSTANCE = new MasonTopLevelComponentFileType();
 
-	public EmbeddedPerlFileType()
+	public MasonTopLevelComponentFileType()
 	{
-
-		super(EmbeddedPerlLanguage.INSTANCE);
+		super(MasonPerlLanguage.INSTANCE);
 		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
 		{
 			@Override
 			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
 			{
-				return new EmbeddedPerlHighlighter(project, virtualFile, editorColorsScheme);
+				return new MasonPerlHighlighter(project, virtualFile, editorColorsScheme);
 			}
 		});
 	}
@@ -59,28 +57,27 @@ public class EmbeddedPerlFileType extends LanguageFileType
 	@Override
 	public String getName()
 	{
-		return "Embedded perl";
+		return "Mason top-level component";
 	}
 
 	@NotNull
 	@Override
 	public String getDescription()
 	{
-		return "Embedded perl file";
+		return "Mason top-level component";
 	}
 
 	@NotNull
 	@Override
 	public String getDefaultExtension()
 	{
-		return "thtml";
+		return "mc";
 	}
 
 	@Nullable
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.EMBEDDED_PERL_FILE;
-	}
-
+		return PerlIcons.SCRIPT_FILE;
+	} // fixme
 }

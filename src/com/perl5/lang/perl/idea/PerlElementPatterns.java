@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea;
 import com.intellij.patterns.ElementPattern;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.mojolicious.MojoliciousPerlFileImpl;
+import com.perl5.lang.mojolicious.psi.impl.MojoliciousPerlFileImpl;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;

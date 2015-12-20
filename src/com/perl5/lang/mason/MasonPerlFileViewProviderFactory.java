@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea;
+package com.perl5.lang.mason;
 
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.project.Project;
+import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.FileViewProviderFactory;
+import com.intellij.psi.PsiManager;
+import com.perl5.lang.mojolicious.MojoliciousPerlFileViewProvider;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 21.07.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class MojoliciousPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
+public class MasonPerlFileViewProviderFactory implements FileViewProviderFactory
 {
-	@Override
 	@NotNull
-	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
+	@Override
+	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
 	{
-		return new MojoliciousPerlSyntaxHighlighter(project);
+		return new MasonPerlFileViewProvider(manager, file, eventSystemEnabled);
 	}
-
 }

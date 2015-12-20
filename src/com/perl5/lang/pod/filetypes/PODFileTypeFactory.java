@@ -14,27 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5;
+package com.perl5.lang.pod.filetypes;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
-import com.perl5.lang.perl.filetypes.PerlFileType;
-import com.perl5.lang.perl.filetypes.PerlFileTypePackage;
-import com.perl5.lang.perl.filetypes.PerlFileTypeTest;
-import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.xs.filetypes.XSFileType;
+import com.perl5.lang.mason.filetypes.MasonInternalComponentFileType;
+import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlFileTypeFactory extends FileTypeFactory
+/**
+ * Created by hurricup on 20.12.2015.
+ */
+public class PodFileTypeFactory  extends FileTypeFactory
 {
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
 	{
-		fileTypeConsumer.consume(PerlFileTypePackage.INSTANCE, "pm");
-		fileTypeConsumer.consume(PerlFileType.INSTANCE, "cgi");
-		fileTypeConsumer.consume(PerlFileType.INSTANCE, "pl");
-		fileTypeConsumer.consume(PerlFileType.INSTANCE, "ph");
-
-		fileTypeConsumer.consume(PerlFileTypeTest.INSTANCE, "t");
+		fileTypeConsumer.consume(PodFileType.INSTANCE, "pod");
 	}
 }

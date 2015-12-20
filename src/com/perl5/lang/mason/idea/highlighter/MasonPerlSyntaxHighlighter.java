@@ -14,43 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.psi;
+package com.perl5.lang.mason.idea.highlighter;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.pod.PodLanguage;
+import com.intellij.lexer.Lexer;
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
+import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
+import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
 /**
- * Created by hurricup on 21.04.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class PsiFilePod extends PsiFileBase
+public class MasonPerlSyntaxHighlighter  extends PerlSyntaxHighlighter implements PerlElementTypes
 {
-	public PsiFilePod(@NotNull FileViewProvider viewProvider)
+	public MasonPerlSyntaxHighlighter(Project project)
 	{
-		super(viewProvider, PodLanguage.INSTANCE);
+		super(project);
 	}
 
 	@NotNull
 	@Override
-	public FileType getFileType()
+	public Lexer getHighlightingLexer()
 	{
-		return PodFileType.INSTANCE;
+		return new MasonPerlLexerAdapter(myProject);
 	}
 
-	@Override
-	public String toString()
-	{
-		return "POD file";
-	}
-
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return super.getIcon(flags);
-	}
 }

@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod;
+package com.perl5.lang.pod.filetypes;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.PerlIcons;
+import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

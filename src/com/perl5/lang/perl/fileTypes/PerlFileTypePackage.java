@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.fileTypes;
+package com.perl5.lang.perl.filetypes;
 
 import com.intellij.lang.Language;
 import com.perl5.PerlIcons;

@@ -24,7 +24,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.idea.fileTypes.PerlFileTypeTest;
+import com.perl5.lang.perl.filetypes.PerlFileTypeTest;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;

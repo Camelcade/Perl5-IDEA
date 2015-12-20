@@ -14,33 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5;
+package com.perl5.lang.mason.idea.highlighter;
 
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeRegistry;
-import com.intellij.openapi.util.io.ByteSequence;
-import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.filetypes.PerlFileType;
+import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousPerlSyntaxHighlighter;
+import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by evstigneev on 10.07.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class PerlFileTypeDetector implements FileTypeRegistry.FileTypeDetector
+public class MasonPerlSyntaxHighlighterFactory  extends PerlSyntaxHighlighterFactory
 {
 	@Override
-	public FileType detect(@NotNull VirtualFile file, @NotNull ByteSequence firstBytes, @Nullable CharSequence firstCharsIfText)
+	@NotNull
+	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
 	{
-		// todo add some detections for xs/pod/pm
-		return FileUtil.isHashBangLine(firstCharsIfText, "perl") ? PerlFileType.INSTANCE : null;
+		return new MasonPerlSyntaxHighlighter(project);
 	}
 
-	@Override
-	public int getVersion()
-	{
-		return 1;
-	}
 }
-

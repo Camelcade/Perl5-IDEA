@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+package com.perl5.lang.mojolicious.psi.impl;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
+import com.perl5.lang.mojolicious.filetypes.MojoliciousPerlFileType;
+import com.perl5.lang.mojolicious.MojoliciousPerlLanguage;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 

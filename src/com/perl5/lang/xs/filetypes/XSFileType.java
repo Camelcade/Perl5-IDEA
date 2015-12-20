@@ -14,43 +14,55 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.psi;
+package com.perl5.lang.xs.filetypes;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.pod.PodLanguage;
+import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.perl5.PerlIcons;
+import com.perl5.lang.xs.XSLanguage;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PsiFilePod extends PsiFileBase
+public class XSFileType extends LanguageFileType
 {
-	public PsiFilePod(@NotNull FileViewProvider viewProvider)
+	public static final XSFileType INSTANCE = new XSFileType();
+	public static final Language LANGUAGE = INSTANCE.getLanguage();
+
+	private XSFileType()
 	{
-		super(viewProvider, PodLanguage.INSTANCE);
+		super(XSLanguage.INSTANCE);
 	}
 
 	@NotNull
 	@Override
-	public FileType getFileType()
+	public String getName()
 	{
-		return PodFileType.INSTANCE;
+		return "XS extension";
 	}
 
+	@NotNull
 	@Override
-	public String toString()
+	public String getDescription()
 	{
-		return "POD file";
+		return "Perl5 extension in C";
 	}
 
+	@NotNull
 	@Override
-	public Icon getIcon(int flags)
+	public String getDefaultExtension()
 	{
-		return super.getIcon(flags);
+		return "xs";
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon()
+	{
+		return PerlIcons.XS_FILE;
 	}
 }

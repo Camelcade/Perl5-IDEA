@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.fileTypes;
+package com.perl5.lang.mason.filetypes;
 
-import com.intellij.lang.Language;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,39 +23,35 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * Created by hurricup on 26.05.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class PerlFileTypeTest extends PerlFileType
+public class MasonInternalComponentFileType extends MasonTopLevelComponentFileType
 {
-	public static final PerlFileTypeTest INSTANCE = new PerlFileTypeTest();
-	public static final Language LANGUAGE = INSTANCE.getLanguage();
-
 	@NotNull
 	@Override
 	public String getName()
 	{
-		return "Perl5 test";
+		return "Mason internal component";
 	}
 
 	@NotNull
 	@Override
 	public String getDescription()
 	{
-		return "Perl5 test";
+		return "Mason internal component";
 	}
 
 	@NotNull
 	@Override
 	public String getDefaultExtension()
 	{
-		return "t";
+		return "mi";
 	}
 
 	@Nullable
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.TEST_FILE;
-	}
-
+		return PerlIcons.SCRIPT_FILE;
+	} // fixme
 }
