@@ -62,6 +62,10 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.after(OPERATOR_MINUS_UNARY).spaces(0)
 				.after(OPERATOR_PLUS_UNARY).spaces(0)
 
+				.around(ARRAY_INDEX).spaces(0)
+				.around(HASH_INDEX).spaces(0)
+				.around(OPERATOR_DEREFERENCE).spaces(0)
+
 				.between(LEFT_PAREN, CALL_ARGUMENTS).spaceIf(perlSettings.SPACES_WITHIN_CALL_ARGUMENTS)
 				.between(CALL_ARGUMENTS, RIGHT_PAREN).spaceIf(perlSettings.SPACES_WITHIN_CALL_ARGUMENTS)
 
