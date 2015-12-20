@@ -105,10 +105,6 @@ public class PerlIndentProcessor implements PerlElementTypes
 				|| isLast && PerlFormattingBlock.BLOCK_CLOSERS.contains(nodeType)
 				)
 		{
-//			if( parentType == SUB_CALL_EXPR || parentType == NESTED_CALL )	// parens in nested call
-//			{
-//				return Indent.getIndent(Indent.Type.NONE, true, false);
-//			}
 			return Indent.getNoneIndent();
 		}
 
@@ -141,6 +137,11 @@ public class PerlIndentProcessor implements PerlElementTypes
 		}
 
 		if (COMMA_LIKE_SEQUENCES.contains(parentType) && grandParentType != STATEMENT)
+		{
+			return Indent.getIndent(Indent.Type.CONTINUATION, false, true);
+		}
+
+		if (parentType == CALL_ARGUMENTS)
 		{
 			return Indent.getIndent(Indent.Type.CONTINUATION, false, true);
 		}
