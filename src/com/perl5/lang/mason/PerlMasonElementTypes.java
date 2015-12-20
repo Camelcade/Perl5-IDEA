@@ -24,12 +24,17 @@ import com.perl5.lang.perl.PerlTokenType;
  */
 public interface PerlMasonElementTypes
 {
-	IElementType MASON_BLOCK_OPENER = new PerlTokenType("<%");
-	IElementType MASON_BLOCK_CLOSER = new PerlTokenType("%>");
-	IElementType MASON_TAG_CLOSER = new PerlTokenType(">");
+	String KEYWORD_BLOCK_OPENER = "<% ";
+	IElementType MASON_BLOCK_OPENER = new PerlTokenType(KEYWORD_BLOCK_OPENER);
 
-	IElementType MASON_CALL_OPENER = new PerlTokenType("<&");
-	IElementType MASON_CALL_CLOSER = new PerlTokenType("&>");
+	String KEYWORD_BLOCK_CLOSER = " %>";
+	IElementType MASON_BLOCK_CLOSER = new PerlTokenType(KEYWORD_BLOCK_CLOSER);
+	IElementType MASON_TAG_CLOSER = new PerlTokenType("MASON_TAG_CLOSER");
+
+	String KEYWORD_CALL_OPENER = "<& ";
+	IElementType MASON_CALL_OPENER = new PerlTokenType(KEYWORD_CALL_OPENER);
+	String KEYWORD_CALL_CLOSER = " &>";
+	IElementType MASON_CALL_CLOSER = new PerlTokenType(KEYWORD_CALL_CLOSER);
 
 	IElementType MASON_LINE_OPENER = new PerlTokenType("%");
 	IElementType MASON_EXPR_FILTER_PIPE = new PerlTokenType("|");
@@ -58,7 +63,7 @@ public interface PerlMasonElementTypes
 	IElementType MASON_FLAGS_OPENER = new PerlTokenType(KEYWORD_FLAGS_OPENER);
 	IElementType MASON_FLAGS_CLOSER = new PerlTokenType(KEYWORD_FLAGS_CLOSER);
 
-	String KEYWORD_INIT = "";
+	String KEYWORD_INIT = "init";
 	String KEYWORD_INIT_OPENER = "<%" + KEYWORD_INIT;
 	String KEYWORD_INIT_CLOSER = "</%" + KEYWORD_INIT + ">";
 	IElementType MASON_INIT_OPENER = new PerlTokenType(KEYWORD_INIT_OPENER);

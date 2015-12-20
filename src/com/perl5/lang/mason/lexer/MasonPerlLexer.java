@@ -30,13 +30,14 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 20.12.2015.
  */
+@SuppressWarnings("Duplicates")
 public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMasonElementTypes
 {
 	public static final Pattern MASON_EXPRESSION_FILTER_BLOCK = Pattern.compile(
 			"\\|\\s*"
 					+ "(?:" + IDENTIFIER_PATTERN + "\\s*,\\s*" + ")*"
 					+ IDENTIFIER_PATTERN
-					+ "\\s+%>"
+					+ "\\s+" + KEYWORD_BLOCK_CLOSER
 	);
 
 	public static final Pattern MASON_OPENERS = Pattern.compile(
@@ -53,7 +54,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 					KEYWORD_AUGMENT + "|" +
 					KEYWORD_AROUND + "|" +
 					KEYWORD_BEFORE + "|" +
-					KEYWORD_OVERRIDE + "|" +
+					KEYWORD_OVERRIDE +
 					")"
 	);
 	// lexical states
@@ -87,19 +88,19 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 
 	static
 	{
-		OPEN_CLOSE_MAP.put(KEYWORD_CLASS_OPENER, KEYWORD_CLASS_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_DOC_OPENER, KEYWORD_DOC_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_FLAGS_OPENER, KEYWORD_FLAGS_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_INIT_OPENER, KEYWORD_INIT_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_PERL_OPENER, KEYWORD_PERL_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_TEXT_OPENER, KEYWORD_TEXT_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_METHOD_OPENER, KEYWORD_METHOD_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_FILTER_OPENER, KEYWORD_FILTER_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_AFTER_OPENER, KEYWORD_AFTER_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_AUGMENT_OPENER, KEYWORD_AUGMENT_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_AROUND_OPENER, KEYWORD_AROUND_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_BEFORE_OPENER, KEYWORD_BEFORE_OPENER);
-		OPEN_CLOSE_MAP.put(KEYWORD_OVERRIDE_OPENER, KEYWORD_OVERRIDE_OPENER);
+		OPEN_CLOSE_MAP.put(KEYWORD_CLASS_OPENER, KEYWORD_CLASS_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_DOC_OPENER, KEYWORD_DOC_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_FLAGS_OPENER, KEYWORD_FLAGS_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_INIT_OPENER, KEYWORD_INIT_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_PERL_OPENER, KEYWORD_PERL_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_TEXT_OPENER, KEYWORD_TEXT_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_METHOD_OPENER, KEYWORD_METHOD_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_FILTER_OPENER, KEYWORD_FILTER_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_AFTER_OPENER, KEYWORD_AFTER_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_AUGMENT_OPENER, KEYWORD_AUGMENT_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_AROUND_OPENER, KEYWORD_AROUND_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_BEFORE_OPENER, KEYWORD_BEFORE_CLOSER);
+		OPEN_CLOSE_MAP.put(KEYWORD_OVERRIDE_OPENER, KEYWORD_OVERRIDE_CLOSER);
 	}
 
 	static
@@ -158,7 +159,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 		{
 			setTokenStart(tokenStart);
 			setTokenEnd(tokenStart + 1);
-			setCustomState(LEX_MASON_PERL_BLOCK);
+			setCustomState(LEX_MASON_PERL_BLOCK); // fixme this is wrong
 			return MASON_TAG_CLOSER;
 		}
 		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK && buffer.charAt(tokenStart) == '|')
@@ -175,23 +176,23 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 		}
 		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK || currentCustomState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
 		{
-			if (bufferAtString(buffer, tokenStart, "%>"))
+			if (bufferAtString(buffer, tokenStart, KEYWORD_BLOCK_CLOSER))
 			{
 				setTokenStart(tokenStart);
-				setTokenEnd(tokenStart + 2);
+				setTokenEnd(tokenStart + KEYWORD_BLOCK_CLOSER.length());
 
-				setCustomState(LEX_HTML_BLOCK);
+				setCustomState(getInitialCustomState());
 				return MASON_BLOCK_CLOSER;
 			}
 		}
 		else if (currentCustomState == LEX_MASON_PERL_CALL_BLOCK)
 		{
-			if (bufferAtString(buffer, tokenStart, "&>"))
+			if (bufferAtString(buffer, tokenStart, KEYWORD_CALL_CLOSER))
 			{
 				setTokenStart(tokenStart);
-				setTokenEnd(tokenStart + 2);
+				setTokenEnd(tokenStart + KEYWORD_CALL_CLOSER.length());
 
-				setCustomState(LEX_HTML_BLOCK);
+				setCustomState(getInitialCustomState());
 				return MASON_CALL_CLOSER;
 			}
 		}
@@ -199,7 +200,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 		{
 			setTokenStart(tokenStart);
 			setTokenEnd(tokenStart + BLOCK_CLOSE_TAG.length());
-			setCustomState(LEX_HTML_BLOCK);
+			setCustomState(getInitialCustomState());
 			return CLOSE_TOKENS_MAP.get(BLOCK_CLOSE_TAG);
 		}
 		else if (currentCustomState == getInitialCustomState())
@@ -234,7 +235,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 				{
 					clearLine = true;
 				}
-				else if (currentChar != ' ' && currentChar != '\t' && currentChar != '\f')
+				else if (!Character.isWhitespace(currentChar))
 				{
 					clearLine = false;
 				}
@@ -248,14 +249,23 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 			}
 			else if (blockStart)
 			{
-				// check for unnamed block
-				Matcher m = MASON_OPENERS.matcher(buffer);
-				m.region(offset, bufferEnd);
-				if (m.lookingAt())
+				if (Character.isWhitespace(buffer.charAt(offset + 2)))
 				{
-					addPreparsedToken(offset, offset + m.group(1).length(), OPEN_TOKENS_MAP.get(m.group(1)));
-					BLOCK_CLOSE_TAG = OPEN_CLOSE_MAP.get(m.group(1));
-					setCustomState(LEX_MASON_OPENING_TAG);
+					addPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), MASON_BLOCK_OPENER);
+					setCustomState(LEX_MASON_PERL_EXPR_BLOCK);
+				}
+				else
+				{
+					// check for unnamed block
+					Matcher m = MASON_OPENERS.matcher(buffer);
+					m.region(offset, bufferEnd);
+					if (m.lookingAt())
+					{
+						String openingTag = m.group(0);
+						addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
+						BLOCK_CLOSE_TAG = OPEN_CLOSE_MAP.get(openingTag);
+						setCustomState(LEX_MASON_OPENING_TAG);
+					}
 				}
 			}
 			return TEMPLATE_BLOCK_HTML;
@@ -268,6 +278,10 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 	{
 		CharSequence buffer = getBuffer();
 		// fixme need to implement close tags handling i guess
-		return buffer.charAt(currentPosition) == '\n';
+		int customState = getCustomState();
+		return buffer.charAt(currentPosition) == '\n' ||
+				(customState == LEX_MASON_PERL_EXPR_BLOCK || customState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
+						&& bufferAtString(buffer, currentPosition, KEYWORD_BLOCK_CLOSER)
+				;
 	}
 }

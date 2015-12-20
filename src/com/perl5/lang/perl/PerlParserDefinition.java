@@ -57,12 +57,13 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			COMMENT_LINE, COMMENT_BLOCK,
 			HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END,
 
-			// these should be in other place
+			// fixme these should be moved in appropriate parser definitions
 			EMBED_MARKER, EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE,
 			TEMPLATE_BLOCK_HTML
 	);
 
 	public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);
+
 	public static final TokenSet LITERALS = TokenSet.create(
 			STRING_CONTENT,
 			HEREDOC

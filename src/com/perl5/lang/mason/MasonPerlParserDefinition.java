@@ -21,6 +21,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -30,9 +31,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlParserDefinition extends PerlParserDefinition
+public class MasonPerlParserDefinition extends PerlParserDefinition implements PerlMasonElementTypes
 {
 	public static final IFileElementType FILE = new PerlFileElementType("Mason component", MasonPerlLanguage.INSTANCE);
+	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
+			TokenSet.create(
+					MASON_LINE_OPENER
+			));
+
 
 	@NotNull
 	@Override
@@ -52,4 +58,9 @@ public class MasonPerlParserDefinition extends PerlParserDefinition
 		return new MasonPerlFileImpl(viewProvider);
 	}
 
+	@NotNull
+	public TokenSet getCommentTokens()
+	{
+		return COMMENTS;
+	}
 }
