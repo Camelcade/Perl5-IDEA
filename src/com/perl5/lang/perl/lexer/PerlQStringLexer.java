@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
 import java.io.IOException;

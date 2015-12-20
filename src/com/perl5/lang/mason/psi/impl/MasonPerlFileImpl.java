@@ -18,8 +18,8 @@ package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
 import com.perl5.lang.mason.MasonPerlLanguage;
+import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 

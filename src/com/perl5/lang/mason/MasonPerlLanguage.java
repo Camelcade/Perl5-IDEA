@@ -18,13 +18,11 @@ package com.perl5.lang.mason;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlLanguage  extends Language implements TemplateLanguage
+public class MasonPerlLanguage extends Language implements TemplateLanguage
 {
 	public static final MasonPerlLanguage INSTANCE = new MasonPerlLanguage();
 

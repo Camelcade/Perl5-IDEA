@@ -16,12 +16,10 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.btr.proxy.search.browser.ie.IELocalByPassFilter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 
-import javax.print.DocFlavor;
 import java.util.HashMap;
 import java.util.Map;
 

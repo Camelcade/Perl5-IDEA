@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
-import com.perl5.lang.perl.psi.PsiPerlStatement;
-
 /**
  * Created by hurricup on 25.11.2015.
  */

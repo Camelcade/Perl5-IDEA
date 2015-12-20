@@ -17,10 +17,8 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlGlobVariable;

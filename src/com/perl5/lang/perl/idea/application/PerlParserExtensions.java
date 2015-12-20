@@ -21,11 +21,11 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.completion.providers.PerlSubBuiltInCompletionProvider;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.parser.PerlParserUtil;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;

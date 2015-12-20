@@ -19,7 +19,6 @@ package com.perl5.lang.mason.idea.highlighter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlSyntaxHighlighter  extends PerlSyntaxHighlighter implements PerlElementTypes
+public class MasonPerlSyntaxHighlighter extends PerlSyntaxHighlighter implements PerlElementTypes
 {
 	public MasonPerlSyntaxHighlighter(Project project)
 	{

@@ -217,9 +217,9 @@ public class PerlPsiUtil
 	public static PsiElement getNextSignificantSibling(PsiElement element)
 	{
 		PsiElement result = element.getNextSibling();
-		while( true )
+		while (true)
 		{
-			if( result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace) )
+			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace))
 				break;
 			result = result.getNextSibling();
 		}
@@ -230,9 +230,9 @@ public class PerlPsiUtil
 	public static PsiElement getPrevSignificantSibling(PsiElement element)
 	{
 		PsiElement result = element.getPrevSibling();
-		while( true )
+		while (true)
 		{
-			if( result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace) )
+			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace))
 				break;
 			result = result.getPrevSibling();
 		}

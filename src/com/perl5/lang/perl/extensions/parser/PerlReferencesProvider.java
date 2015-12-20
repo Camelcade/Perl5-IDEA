@@ -18,8 +18,6 @@ package com.perl5.lang.perl.extensions.parser;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
 import org.jetbrains.annotations.Nullable;
 
 /**

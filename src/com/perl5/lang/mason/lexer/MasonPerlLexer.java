@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 20.12.2015.
- *
  */
 public class MasonPerlLexer extends PerlLexer
 {

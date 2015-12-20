@@ -17,17 +17,11 @@
 package com.perl5.lang.perl.idea.smartkeys.options;
 
 import com.intellij.openapi.options.BeanConfigurable;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.JBPopupAdapter;
 import com.intellij.ui.IdeBorderFactory;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
-import com.perl5.lang.perl.idea.settings.Perl5Settings;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by hurricup on 22.11.2015.

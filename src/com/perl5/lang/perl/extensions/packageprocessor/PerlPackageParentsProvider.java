@@ -29,8 +29,9 @@ public interface PerlPackageParentsProvider
 {
 	/**
 	 * Modify list of parents provided by this package. Informaion being collected from all processors sequentially
+	 *
 	 * @param useStatement use statement to fetch parameters from
-	 * @param currentList current parents list
+	 * @param currentList  current parents list
 	 */
 	void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList);
 

@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
-import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 

@@ -26,7 +26,6 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.perl5.lang.embedded.psi.EmbeddedPerlTokenTypes;
-import com.perl5.lang.mojolicious.MojoliciousPerlLanguage;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -30,7 +30,7 @@ import java.io.IOException;
  * Created by hurricup on 20.12.2015.
  * fixme this adapter repeats MojoLexerAdapter, need to DRY them
  */
-public class MasonPerlLexerAdapter  extends LexerBase
+public class MasonPerlLexerAdapter extends LexerBase
 {
 	private MasonPerlLexer myFlex = null;
 	private IElementType myTokenType = null;

@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTree;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTreeLeaf;

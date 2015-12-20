@@ -19,8 +19,8 @@ package com.perl5.lang.pod.psi;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

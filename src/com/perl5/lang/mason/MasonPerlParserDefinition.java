@@ -23,8 +23,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
-import com.perl5.lang.mojolicious.psi.impl.MojoliciousPerlFileImpl;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;

@@ -21,8 +21,6 @@ import com.intellij.openapi.fileTypes.FileTypeFactory;
 import com.perl5.lang.perl.filetypes.PerlFileType;
 import com.perl5.lang.perl.filetypes.PerlFileTypePackage;
 import com.perl5.lang.perl.filetypes.PerlFileTypeTest;
-import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.xs.filetypes.XSFileType;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlFileTypeFactory extends FileTypeFactory

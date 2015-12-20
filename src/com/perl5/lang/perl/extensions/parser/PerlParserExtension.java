@@ -70,9 +70,13 @@ public abstract class PerlParserExtension
 	 * Returns list of extendable tokensets. Loader will attempt to add them into builder
 	 * Should return list of pairs: token to extend - TokenSet of extended tokens
 	 * Reqired to avoid extra TERM expressions in PSI tree
+	 *
 	 * @return list of pairs to extend
 	 */
 	@Nullable
-	public List<Pair<IElementType, TokenSet>> getExtensionSets(){return null; }
+	public List<Pair<IElementType, TokenSet>> getExtensionSets()
+	{
+		return null;
+	}
 
 }

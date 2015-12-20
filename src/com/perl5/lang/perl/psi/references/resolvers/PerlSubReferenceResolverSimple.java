@@ -18,17 +18,11 @@ package com.perl5.lang.perl.psi.references.resolvers;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.references.PerlSubReferenceSimple;
-import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

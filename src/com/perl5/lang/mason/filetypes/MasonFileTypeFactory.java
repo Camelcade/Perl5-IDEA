@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonFileTypeFactory  extends FileTypeFactory
+public class MasonFileTypeFactory extends FileTypeFactory
 {
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)

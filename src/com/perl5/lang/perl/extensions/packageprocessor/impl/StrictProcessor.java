@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.internals.PerlStrictMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;

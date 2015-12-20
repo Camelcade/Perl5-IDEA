@@ -27,7 +27,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.idea.highlighter.MasonPerlHighlighter;
-import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousPerlHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

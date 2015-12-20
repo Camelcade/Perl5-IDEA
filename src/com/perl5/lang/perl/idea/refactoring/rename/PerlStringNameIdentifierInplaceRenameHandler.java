@@ -25,8 +25,6 @@ import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenamer;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

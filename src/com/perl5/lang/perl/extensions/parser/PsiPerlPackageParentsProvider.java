@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.extensions.parser;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

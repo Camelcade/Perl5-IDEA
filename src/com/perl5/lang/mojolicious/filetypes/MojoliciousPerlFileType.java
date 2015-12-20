@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mojolicious.filetypes;
 
-import com.intellij.lang.Language;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
