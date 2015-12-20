@@ -39,6 +39,11 @@ public class PerlFileType extends LanguageFileType
 		super(PerlLanguage.INSTANCE);
 	}
 
+	public PerlFileType(Language language)
+	{
+		super(language);
+	}
+
 	@NotNull
 	@Override
 	public String getName()
@@ -65,5 +70,15 @@ public class PerlFileType extends LanguageFileType
 	public Icon getIcon()
 	{
 		return PerlIcons.SCRIPT_FILE;
+	}
+
+	public boolean checkStrictPragma()
+	{
+		return true;
+	}
+
+	public boolean checkWarningsPragma()
+	{
+		return true;
 	}
 }
