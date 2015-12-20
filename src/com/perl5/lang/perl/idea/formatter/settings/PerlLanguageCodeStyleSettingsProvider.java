@@ -44,6 +44,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			"        $a = $var1 & $var2;\n" +
 			"        $a = $var1 + $var2;\n" +
 			"        $a = $var1 . $var2;\n" +
+			"		 print(join(',', $var1, $var2));" +
 			"        $a = join '', $var1 .. $var2;\n" +
 			"    }\n" +
 			"    $a = $var1 * $var2;\n" +
@@ -113,7 +114,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 					"SPACE_BEFORE_SEMICOLON",    // implemented
 
 					"SPACE_BEFORE_IF_PARENTHESES",    // implemented, any conditional block, for and iterator
+
 					"SPACE_WITHIN_IF_PARENTHESES",    // condition, for iterator
+
 					"SPACE_BEFORE_IF_LBRACE",        // implemented, any or undonditional conditional block, for,
 
 					"SPACE_BEFORE_ELSE_KEYWORD",    // implemented, else,elsif,continue,default
@@ -121,10 +124,13 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 					"SPACE_BEFORE_DO_LBRACE"        // implemented, sub_{}, do_{}, eval_{}
 			);
 			consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
-			consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
 			consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", SPACE_OPTION_COMPOUND_BLOCK);
 			consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", SPACE_OPTION_COMPOUND_SECONDARY);
 			consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", SPACE_OPTION_TERM_BLOCKS);
+
+			consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
+
+			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACES_WITHIN_CALL_ARGUMENTS", SPACE_OPTION_CALL_ARGUMENTS, CodeStyleSettingsCustomizable.SPACES_WITHIN);
 
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_CONCAT_OPERATOR", SPACE_OPTION_AROUND_CONCAT_OPERATOR, CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS);
 			consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_RANGE_OPERATORS", SPACE_OPTION_AROUND_RANGE_OPERATORS, CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS);

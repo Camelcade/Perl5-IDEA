@@ -1987,7 +1987,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		if (PerlLexerUtil.STRING_CONTENT_TOKENS.contains(tokenType))
 		{
-			if (((PerlBuilder) b).getStringWrapper() == null  || tokenType != STRING_IDENTIFIER )
+			if (((PerlBuilder) b).getStringWrapper() == null || tokenType != STRING_IDENTIFIER)
 			{
 				b.advanceLexer();
 			}
@@ -2010,6 +2010,21 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		boolean r = PerlParser.string(b, l);
 		((PerlBuilder) b).setStringWrapper(oldValue);
 		return r;
+	}
+
+	public static boolean parsePrintArguments(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParser.print_arguments_content(b, l))
+		{
+			m.done(CALL_ARGUMENTS);
+			return true;
+		}
+		else
+		{
+			m.rollbackTo();
+			return false;
+		}
 	}
 
 }

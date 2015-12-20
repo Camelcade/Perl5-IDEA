@@ -38,6 +38,7 @@
       <ul>
       <li>Implemented file level variables inspection. (Pretty useful while migrating from CGI to some persistent server)</li>
       <li>Implemented parser extension for Switch core module, fixes #658</li>
+      <li>Added spacing control for call arguments, fixes #664</li>
       </ul>
       </p>
 

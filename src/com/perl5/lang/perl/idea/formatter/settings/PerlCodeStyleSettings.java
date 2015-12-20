@@ -48,6 +48,8 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 	public boolean SPACE_AROUND_RANGE_OPERATORS = true;
 	public boolean SPACE_AROUND_CONCAT_OPERATOR = false;
 
+	public boolean SPACES_WITHIN_CALL_ARGUMENTS = true;
+
 	public PerlCodeStyleSettings(CodeStyleSettings container)
 	{
 		super("Perl5CodeStyleSettings", container);

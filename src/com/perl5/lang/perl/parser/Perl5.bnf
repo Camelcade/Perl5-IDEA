@@ -829,7 +829,8 @@ lp_and_expr ::= expr (OPERATOR_AND_LP expr)+
 lp_or_xor_expr ::= expr ((OPERATOR_OR_LP|OPERATOR_XOR_LP) expr)+
 
 print_expr ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_PRINT|RESERVED_PRINTF|RESERVED_SAY) ( LEFT_PAREN [print_arguments] RIGHT_PAREN | [print_arguments] ) {pin=2}
-private print_arguments ::= print_handle expr | expr
+private print_arguments ::= <<parsePrintArguments>>
+private print_arguments_content ::= print_handle expr | expr
 print_handle ::=  <<parsePrintHandle>> | perl_handle
 
 sub_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
