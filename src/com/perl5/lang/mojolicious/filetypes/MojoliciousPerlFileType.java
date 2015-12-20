@@ -27,6 +27,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.mojolicious.MojoliciousPerlLanguage;
 import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousPerlHighlighter;
+import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +36,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlFileType extends LanguageFileType
+public class MojoliciousPerlFileType extends PerlFileType
 {
 	public static final MojoliciousPerlFileType INSTANCE = new MojoliciousPerlFileType();
 
@@ -80,4 +81,15 @@ public class MojoliciousPerlFileType extends LanguageFileType
 		return PerlIcons.MOJO_FILE;
 	}
 
+	@Override
+	public boolean checkStrictPragma()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean checkWarningsPragma()
+	{
+		return false;
+	}
 }

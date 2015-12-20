@@ -17,6 +17,8 @@
 package com.perl5.lang.mason.filetypes;
 
 import com.perl5.PerlIcons;
+import com.perl5.lang.mason.MasonPerlLanguage;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +30,13 @@ import javax.swing.*;
  */
 public class MasonPurePerlComponentFileType extends PerlFileType
 {
+	public final static MasonPurePerlComponentFileType INSTANCE = new MasonPurePerlComponentFileType();
+
+	public MasonPurePerlComponentFileType()
+	{
+		super(PerlLanguage.INSTANCE);
+	}
+
 	@NotNull
 	@Override
 	public String getName()
@@ -54,5 +63,17 @@ public class MasonPurePerlComponentFileType extends PerlFileType
 	public Icon getIcon()
 	{
 		return PerlIcons.SCRIPT_FILE;
+	}
+
+	@Override
+	public boolean checkStrictPragma()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean checkWarningsPragma()
+	{
+		return false;
 	}
 }

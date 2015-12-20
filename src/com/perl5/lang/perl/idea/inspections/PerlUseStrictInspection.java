@@ -18,12 +18,14 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousPerlFileType;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
+import com.perl5.lang.perl.filetypes.PerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -43,9 +45,11 @@ public class PerlUseStrictInspection extends PerlInspection
 			@Override
 			public void visitFile(PsiFile file)
 			{
-				// fixme this should be solved using #369
-				if (file.getFileType() == EmbeddedPerlFileType.INSTANCE || file.getFileType() == MojoliciousPerlFileType.INSTANCE)
+				FileType fileType = file.getFileType();
+				if (!(fileType instanceof PerlFileType) || !((PerlFileType) fileType).checkStrictPragma())
+				{
 					return;
+				}
 
 				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
 					if (useStatement.getPackageProcessor() instanceof PerlStrictProvider)

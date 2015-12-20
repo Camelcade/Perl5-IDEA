@@ -27,6 +27,8 @@ import javax.swing.*;
  */
 public class MasonInternalComponentFileType extends MasonTopLevelComponentFileType
 {
+	public final static MasonInternalComponentFileType INSTANCE = new MasonInternalComponentFileType();
+
 	@NotNull
 	@Override
 	public String getName()

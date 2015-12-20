@@ -27,6 +27,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.idea.highlighter.MasonPerlHighlighter;
+import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +36,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonTopLevelComponentFileType extends LanguageFileType
+public class MasonTopLevelComponentFileType extends PerlFileType
 {
 	public static final MasonTopLevelComponentFileType INSTANCE = new MasonTopLevelComponentFileType();
 
@@ -79,4 +80,17 @@ public class MasonTopLevelComponentFileType extends LanguageFileType
 	{
 		return PerlIcons.SCRIPT_FILE;
 	} // fixme
+
+	@Override
+	public boolean checkStrictPragma()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean checkWarningsPragma()
+	{
+		return false;
+	}
+
 }

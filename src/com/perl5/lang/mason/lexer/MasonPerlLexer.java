@@ -20,7 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.CustomToken;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlLexer extends PerlLexer
+public class MasonPerlLexer extends PerlLexerWithCustomStates
 {
 	public static final String MOJO_SPACES = "([ \t\f]*)";
 	public static final String MOJO_CLOSE_TAG = MOJO_SPACES + "(=?%>)";
@@ -38,21 +38,10 @@ public class MasonPerlLexer extends PerlLexer
 	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
 	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
 	public static final Pattern PERL_BLOCK_CLOSER = Pattern.compile("^" + MOJO_CLOSE_TAG);
-	int masonState = LEX_HTML_BLOCK;
 
 	public MasonPerlLexer(Project project)
 	{
 		super(project);
-	}
-
-	protected int getMasonState()
-	{
-		return masonState;
-	}
-
-	protected void setMasonState(int newState)
-	{
-		masonState = newState;
 	}
 
 	public IElementType perlAdvance() throws IOException
@@ -60,22 +49,22 @@ public class MasonPerlLexer extends PerlLexer
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
 		int bufferEnd = buffer.length();
-		int currentMojoState = getMasonState();
+		int currentMojoState = getCustomState();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
 			return super.perlAdvance();
-		else if ((currentMojoState == LEX_MOJO_PERL_LINE || currentMojoState == LEX_MOJO_PERL_LINE_SEMI))
+		else if ((currentMojoState == LEX_PERL_LINE || currentMojoState == LEX_PERL_LINE_SEMI))
 		{
 			if (buffer.charAt(tokenStart) == '\n')
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 1);
 
-				IElementType tokenType = currentMojoState == LEX_MOJO_PERL_LINE_SEMI ? SEMICOLON : TokenType.NEW_LINE_INDENT;
-				setMasonState(LEX_HTML_BLOCK);
+				IElementType tokenType = currentMojoState == LEX_PERL_LINE_SEMI ? SEMICOLON : TokenType.NEW_LINE_INDENT;
+				setCustomState(LEX_HTML_BLOCK);
 				return tokenType;
 			}
-			else // if (currentMojoState == LEX_MOJO_PERL_LINE) // there is a documentation example with %= ... begin
+			else // if (currentMojoState == LEX_PERL_LINE) // there is a documentation example with %= ... begin
 			{
 				Matcher m = BLOCK_START_PERL_LINE.matcher(buffer);
 				m.region(tokenStart, bufferEnd);
@@ -84,7 +73,7 @@ public class MasonPerlLexer extends PerlLexer
 					return parseBeginBlock(tokenStart, m, false);
 			}
 		}
-		else if (currentMojoState == LEX_MOJO_PERL_BLOCK || currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI)
+		else if (currentMojoState == LEX_PERL_BLOCK || currentMojoState == LEX_PERL_BLOCK_SEMI)
 		{
 			int closeTokenSize = 0;
 			if (bufferAtString(buffer, tokenStart, "=%>"))
@@ -93,7 +82,7 @@ public class MasonPerlLexer extends PerlLexer
 				closeTokenSize = 2;
 			else
 			{
-//				if (currentMojoState == LEX_MOJO_PERL_BLOCK)
+//				if (currentMojoState == LEX_PERL_BLOCK)
 //				{
 				Matcher m = BLOCK_START_PERL_BLOCK.matcher(buffer);
 				m.region(tokenStart, bufferEnd);
@@ -105,8 +94,8 @@ public class MasonPerlLexer extends PerlLexer
 			}
 
 			setTokenStart(tokenStart);
-			boolean addSemi = currentMojoState == LEX_MOJO_PERL_BLOCK_SEMI;
-			setMasonState(LEX_HTML_BLOCK);
+			boolean addSemi = currentMojoState == LEX_PERL_BLOCK_SEMI;
+			setCustomState(LEX_HTML_BLOCK);
 
 			setTokenEnd(tokenStart + closeTokenSize);
 			if (addSemi)
@@ -158,9 +147,9 @@ public class MasonPerlLexer extends PerlLexer
 						offset += m.group(1).length();
 
 						if (m.group(1).length() == 1)
-							setMasonState(LEX_MOJO_PERL_LINE);
+							setCustomState(LEX_PERL_LINE);
 						else
-							setMasonState(LEX_MOJO_PERL_LINE_SEMI);
+							setCustomState(LEX_PERL_LINE_SEMI);
 
 						if (!m.group(2).isEmpty())    // spaces if any
 						{
@@ -177,27 +166,27 @@ public class MasonPerlLexer extends PerlLexer
 							char semiChar = buffer.charAt(offset);
 							preparsedTokensList.add(new CustomToken(offset, offset + 1, SEMICOLON));
 							if (semiChar == '\n')
-								setMasonState(LEX_HTML_BLOCK);
+								setCustomState(LEX_HTML_BLOCK);
 						}
 					}
 					else
 					{
 						int embedTokenSize = 1;
-						int newMojoState = LEX_MOJO_PERL_LINE;
+						int newMojoState = LEX_PERL_LINE;
 
 						if (bufferAtString(buffer, offset, "%=="))
 						{
 							embedTokenSize = 3;
-							newMojoState = LEX_MOJO_PERL_LINE_SEMI;
+							newMojoState = LEX_PERL_LINE_SEMI;
 						}
 						else if (bufferAtString(buffer, offset, "%="))
 						{
 							embedTokenSize = 2;
-							newMojoState = LEX_MOJO_PERL_LINE_SEMI;
+							newMojoState = LEX_PERL_LINE_SEMI;
 						}
 
 						preparsedTokensList.add(new CustomToken(offset, offset + embedTokenSize, EMBED_MARKER));
-						setMasonState(newMojoState);
+						setCustomState(newMojoState);
 					}
 				}
 			}
@@ -233,9 +222,9 @@ public class MasonPerlLexer extends PerlLexer
 
 					// change state
 					if (m.group(1).length() == 2)
-						setMasonState(LEX_MOJO_PERL_BLOCK);
+						setCustomState(LEX_PERL_BLOCK);
 					else
-						setMasonState(LEX_MOJO_PERL_BLOCK_SEMI);
+						setCustomState(LEX_PERL_BLOCK_SEMI);
 
 					if (!m.group(2).isEmpty())    // spaces if any
 					{
@@ -259,7 +248,7 @@ public class MasonPerlLexer extends PerlLexer
 								offset += m.group(1).length();
 							}
 							preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), EMBED_MARKER_SEMICOLON));
-							setMasonState(LEX_HTML_BLOCK);
+							setCustomState(LEX_HTML_BLOCK);
 						}
 						else    // something else is there
 							preparsedTokensList.add(new CustomToken(offset, offset + 1, SEMICOLON));
@@ -269,21 +258,21 @@ public class MasonPerlLexer extends PerlLexer
 				else
 				{
 					int embedTokenSize = 2;
-					int newMojoState = LEX_MOJO_PERL_BLOCK;
+					int newMojoState = LEX_PERL_BLOCK;
 
 					if (bufferAtString(buffer, offset, "<%=="))
 					{
 						embedTokenSize = 4;
-						newMojoState = LEX_MOJO_PERL_BLOCK_SEMI;
+						newMojoState = LEX_PERL_BLOCK_SEMI;
 					}
 					else if (bufferAtString(buffer, offset, "<%="))
 					{
 						embedTokenSize = 3;
-						newMojoState = LEX_MOJO_PERL_BLOCK_SEMI;
+						newMojoState = LEX_PERL_BLOCK_SEMI;
 					}
 
 					preparsedTokensList.add(new CustomToken(offset, offset + embedTokenSize, EMBED_MARKER_OPEN));
-					setMasonState(newMojoState);
+					setCustomState(newMojoState);
 				}
 			}
 
@@ -322,7 +311,7 @@ public class MasonPerlLexer extends PerlLexer
 			}
 			else
 				preparsedTokensList.add(new CustomToken(offset, offset + m.group(4).length(), LEFT_BRACE));
-			setMasonState(LEX_HTML_BLOCK);
+			setCustomState(LEX_HTML_BLOCK);
 		}
 
 		return getPreParsedToken();

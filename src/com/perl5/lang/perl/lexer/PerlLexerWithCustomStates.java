@@ -14,20 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.filetypes;
+package com.perl5.lang.perl.lexer;
 
-import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class PodFileTypeFactory extends FileTypeFactory
+public abstract class PerlLexerWithCustomStates extends PerlLexer
 {
-	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
+	private int customState = 0;
+
+	public PerlLexerWithCustomStates(Project project)
 	{
-		fileTypeConsumer.consume(PodFileType.INSTANCE, "pod");
+		super(project);
 	}
+
+	public int getCustomState()
+	{
+		return customState;
+	}
+
+	public void setCustomState(int newState)
+	{
+		customState = newState;
+	}
+
+
 }

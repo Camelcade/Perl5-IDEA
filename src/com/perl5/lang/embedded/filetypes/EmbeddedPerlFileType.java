@@ -28,6 +28,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.idea.EmbeddedPerlHighlighter;
+import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,10 +37,9 @@ import javax.swing.*;
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlFileType extends LanguageFileType
+public class EmbeddedPerlFileType extends PerlFileType
 {
 	public static final EmbeddedPerlFileType INSTANCE = new EmbeddedPerlFileType();
-	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
 	public EmbeddedPerlFileType()
 	{
@@ -83,4 +83,15 @@ public class EmbeddedPerlFileType extends LanguageFileType
 		return PerlIcons.EMBEDDED_PERL_FILE;
 	}
 
+	@Override
+	public boolean checkStrictPragma()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean checkWarningsPragma()
+	{
+		return false;
+	}
 }
