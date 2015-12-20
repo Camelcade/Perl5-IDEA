@@ -43,6 +43,6 @@ public class MasonPerlFileImpl extends PerlFileImpl
 	@Override
 	public String toString()
 	{
-		return "Mojolicious Perl5 Template";
+		return "Mason component";
 	}
 }

@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MasonPerlParserDefinition extends PerlParserDefinition
 {
-	public static final IFileElementType FILE = new PerlFileElementType("Mason Perl5 template", MasonPerlLanguage.INSTANCE);
+	public static final IFileElementType FILE = new PerlFileElementType("Mason component", MasonPerlLanguage.INSTANCE);
 
 	@NotNull
 	@Override

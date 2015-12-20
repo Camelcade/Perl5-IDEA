@@ -40,5 +40,8 @@ public abstract class PerlLexerWithCustomStates extends PerlLexer
 		customState = newState;
 	}
 
-
+	public int getInitialCustomState()
+	{
+		return LEX_HTML_BLOCK;
+	}
 }

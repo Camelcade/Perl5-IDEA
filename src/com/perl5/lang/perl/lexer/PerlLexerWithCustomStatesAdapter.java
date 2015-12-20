@@ -18,9 +18,7 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.lexer.LexerBase;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -54,14 +52,16 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 		myEnd = endOffset;
 
 		if (startOffset == 0 && initialState == PerlLexerGenerated.YYINITIAL)
-			myFlex.setCustomState(PerlLexerGenerated.LEX_HTML_BLOCK);
+			myFlex.setCustomState(myFlex.getInitialCustomState());
 		else if (initialState > 255)
 		{
 			myFlex.setCustomState((int) (initialState / 255));
 			initialState = initialState % 255;
 		}
 		else
+		{
 			myFlex.setCustomState(PerlLexerGenerated.LEX_PERL_BLOCK);
+		}
 
 		myFlex.reset(myText, startOffset, endOffset, initialState);
 		myTokenType = null;
