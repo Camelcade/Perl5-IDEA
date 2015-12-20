@@ -41,42 +41,42 @@ public interface PerlMasonElementTypes
 
 	String KEYWORD_METHOD = "method";
 	String KEYWORD_METHOD_OPENER = "<%" + KEYWORD_METHOD;
-	String KEYWORD_METHOD_CLOSER = "<%/" + KEYWORD_METHOD + ">";
+	String KEYWORD_METHOD_CLOSER = "</%" + KEYWORD_METHOD + ">";
 	IElementType MASON_METHOD_OPENER = new PerlTokenType(KEYWORD_METHOD_OPENER);
 	IElementType MASON_METHOD_CLOSER = new PerlTokenType(KEYWORD_METHOD_CLOSER);
 
 	String KEYWORD_CLASS = "class";
-	String KEYWORD_CLASS_OPENER = "<%" + KEYWORD_CLASS;
+	String KEYWORD_CLASS_OPENER = "<%" + KEYWORD_CLASS + ">";
 	String KEYWORD_CLASS_CLOSER = "</%" + KEYWORD_CLASS + ">";
 	IElementType MASON_CLASS_OPENER = new PerlTokenType(KEYWORD_CLASS_OPENER);
 	IElementType MASON_CLASS_CLOSER = new PerlTokenType(KEYWORD_CLASS_CLOSER);
 
 	String KEYWORD_DOC = "doc";
-	String KEYWORD_DOC_OPENER = "<%" + KEYWORD_DOC;
+	String KEYWORD_DOC_OPENER = "<%" + KEYWORD_DOC + ">";
 	String KEYWORD_DOC_CLOSER = "</%" + KEYWORD_DOC + ">";
 	IElementType MASON_DOC_OPENER = new PerlTokenType(KEYWORD_DOC_OPENER);
 	IElementType MASON_DOC_CLOSER = new PerlTokenType(KEYWORD_DOC_CLOSER);
 
 	String KEYWORD_FLAGS = "flags";
-	String KEYWORD_FLAGS_OPENER = "<%" + KEYWORD_FLAGS;
+	String KEYWORD_FLAGS_OPENER = "<%" + KEYWORD_FLAGS + ">";
 	String KEYWORD_FLAGS_CLOSER = "</%" + KEYWORD_FLAGS + ">";
 	IElementType MASON_FLAGS_OPENER = new PerlTokenType(KEYWORD_FLAGS_OPENER);
 	IElementType MASON_FLAGS_CLOSER = new PerlTokenType(KEYWORD_FLAGS_CLOSER);
 
 	String KEYWORD_INIT = "init";
-	String KEYWORD_INIT_OPENER = "<%" + KEYWORD_INIT;
+	String KEYWORD_INIT_OPENER = "<%" + KEYWORD_INIT + ">";
 	String KEYWORD_INIT_CLOSER = "</%" + KEYWORD_INIT + ">";
 	IElementType MASON_INIT_OPENER = new PerlTokenType(KEYWORD_INIT_OPENER);
 	IElementType MASON_INIT_CLOSER = new PerlTokenType(KEYWORD_INIT_CLOSER);
 
 	String KEYWORD_PERL = "perl";
-	String KEYWORD_PERL_OPENER = "<%" + KEYWORD_PERL;
+	String KEYWORD_PERL_OPENER = "<%" + KEYWORD_PERL + ">";
 	String KEYWORD_PERL_CLOSER = "</%" + KEYWORD_PERL + ">";
 	IElementType MASON_PERL_OPENER = new PerlTokenType(KEYWORD_PERL_OPENER);
 	IElementType MASON_PERL_CLOSER = new PerlTokenType(KEYWORD_PERL_CLOSER);
 
 	String KEYWORD_TEXT = "text";
-	String KEYWORD_TEXT_OPENER = "<%" + KEYWORD_TEXT;
+	String KEYWORD_TEXT_OPENER = "<%" + KEYWORD_TEXT + ">";
 	String KEYWORD_TEXT_CLOSER = "</%" + KEYWORD_TEXT + ">";
 	IElementType MASON_TEXT_OPENER = new PerlTokenType(KEYWORD_TEXT_OPENER);
 	IElementType MASON_TEXT_CLOSER = new PerlTokenType(KEYWORD_TEXT_CLOSER);
