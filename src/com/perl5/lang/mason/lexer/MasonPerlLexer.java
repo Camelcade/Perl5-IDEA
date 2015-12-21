@@ -37,7 +37,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 			"\\|\\s*"
 					+ "(?:" + IDENTIFIER_PATTERN + "\\s*,\\s*" + ")*"
 					+ IDENTIFIER_PATTERN
-					+ "\\s+" + KEYWORD_BLOCK_CLOSER
+					+ "\\s*" + KEYWORD_BLOCK_CLOSER
 	);
 
 	public static final Pattern MASON_SIMPLE_OPENERS = Pattern.compile(

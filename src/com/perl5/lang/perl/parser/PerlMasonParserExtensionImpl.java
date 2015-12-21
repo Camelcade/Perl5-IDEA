@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +29,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 21.12.2015.
  */
-public class PerlMasonParserExtensionImpl extends PerlParserExtension implements PerlMasonParserExtension
+public class PerlMasonParserExtensionImpl extends PerlParserExtension implements PerlMasonParserExtension, PerlElementTypes
 {
 	@NotNull
 	@Override
@@ -51,8 +52,85 @@ public class PerlMasonParserExtensionImpl extends PerlParserExtension implements
 			if (PerlParser.expr(b, l, -1))
 			{
 				// parse filter
+				if (PerlParserUtil.consumeToken(b, MASON_EXPR_FILTER_PIPE))
+				{
+					while (b.getTokenType() == IDENTIFIER)
+					{
+						PsiBuilder.Marker fm = b.mark();
+						b.advanceLexer();
+						fm.collapse(SUB);
+						fm.precede().done(METHOD);
+
+						if (!PerlParserUtil.consumeToken(b, OPERATOR_COMMA))
+						{
+							break;
+						}
+					}
+				}
 			}
 			r = PerlParserUtil.consumeToken(b, MASON_BLOCK_CLOSER);
+		}
+		else if (tokenType == MASON_CLASS_OPENER)
+		{
+			b.advanceLexer();
+
+			while (!b.eof() && b.getTokenType() != MASON_CLASS_CLOSER)
+			{
+				PerlParser.file_item(b, l);
+			}
+			r = PerlParserUtil.consumeToken(b, MASON_CLASS_CLOSER);
+		}
+		else if (tokenType == MASON_INIT_OPENER)
+		{
+			b.advanceLexer();
+
+			while (!b.eof() && b.getTokenType() != MASON_INIT_CLOSER)
+			{
+				PerlParser.file_item(b, l);
+			}
+			r = PerlParserUtil.consumeToken(b, MASON_INIT_CLOSER);
+		}
+		else if (tokenType == MASON_PERL_OPENER)
+		{
+			b.advanceLexer();
+
+			while (!b.eof() && b.getTokenType() != MASON_PERL_CLOSER)
+			{
+				PerlParser.file_item(b, l);
+			}
+			r = PerlParserUtil.consumeToken(b, MASON_PERL_CLOSER);
+		}
+		else if (tokenType == MASON_FLAGS_OPENER)    // fixme need more love here, extends
+		{
+			b.advanceLexer();
+
+			while (!b.eof() && b.getTokenType() != MASON_FLAGS_CLOSER)
+			{
+				PerlParser.expr(b, l, -1);
+			}
+			r = PerlParserUtil.consumeToken(b, MASON_FLAGS_CLOSER);
+		}
+		else if (tokenType == MASON_DOC_OPENER)
+		{
+			b.advanceLexer();
+			PsiBuilder.Marker dm = b.mark();
+			while (!b.eof() && b.getTokenType() != MASON_DOC_CLOSER)
+			{
+				b.advanceLexer();
+			}
+			dm.collapse(COMMENT_BLOCK);
+			r = PerlParserUtil.consumeToken(b, MASON_DOC_CLOSER);
+		}
+		else if (tokenType == MASON_TEXT_OPENER)
+		{
+			b.advanceLexer();
+			while (!b.eof() && b.getTokenType() != MASON_TEXT_CLOSER)
+			{
+				PsiBuilder.Marker dm = b.mark();
+				b.advanceLexer();
+				dm.collapse(STRING_CONTENT);
+			}
+			r = PerlParserUtil.consumeToken(b, MASON_TEXT_CLOSER);
 		}
 
 		if (r)
