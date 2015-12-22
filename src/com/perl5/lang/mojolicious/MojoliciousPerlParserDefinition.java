@@ -21,6 +21,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -30,9 +31,24 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlParserDefinition extends PerlParserDefinition
+public class MojoliciousPerlParserDefinition extends PerlParserDefinition implements MojoliciousPerlElementTypes
 {
 	public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousPerlLanguage.INSTANCE);
+	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
+			TokenSet.create(
+					TEMPLATE_BLOCK_HTML,
+					EMBED_MARKER_OPEN,
+					EMBED_MARKER_CLOSE,
+					EMBED_MARKER,
+					EMBED_MARKER_SEMICOLON
+			));
+
+	@NotNull
+	@Override
+	public TokenSet getCommentTokens()
+	{
+		return COMMENTS;
+	}
 
 	@NotNull
 	@Override

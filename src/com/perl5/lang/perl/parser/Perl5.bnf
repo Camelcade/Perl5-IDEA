@@ -296,11 +296,11 @@ limitations under the License.
     LABEL="LABEL"
 
     // inline HTML support
-    EMBED_MARKER="EMBED_MARKER"
-    EMBED_MARKER_OPEN="EMBED_MARKER_OPEN"   // for braces match
-    EMBED_MARKER_CLOSE="EMBED_MARKER_CLOSE" // for braces match
-    EMBED_MARKER_SEMICOLON="EMBED_MARKER_SEMICOLON" // this is for implicit semicolon in Mojolicious
-    TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
+//    EMBED_MARKER="EMBED_MARKER"
+//    EMBED_MARKER_OPEN="EMBED_MARKER_OPEN"   // for braces match
+//    EMBED_MARKER_CLOSE="EMBED_MARKER_CLOSE" // for braces match
+//    EMBED_MARKER_SEMICOLON="EMBED_MARKER_SEMICOLON" // this is for implicit semicolon in Mojolicious
+//    TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
   ]
 
     extends(".*expr")=expr
@@ -1137,7 +1137,7 @@ private namespace_element_braced ::= LEFT_BRACE <<mergePackageName>> RIGHT_BRACE
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private namespace_canonical ::= <<convertPackageIdentifier>>
-private semicolon_any ::= SEMICOLON | EMBED_MARKER_SEMICOLON
+private semicolon_any ::= SEMICOLON
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise

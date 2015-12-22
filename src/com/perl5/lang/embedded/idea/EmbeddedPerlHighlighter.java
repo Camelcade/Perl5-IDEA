@@ -23,6 +23,7 @@ import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 19.05.2015.
  */
-public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter implements PerlElementTypes
+public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter implements EmbeddedPerlElementTypes
 {
 	public EmbeddedPerlHighlighter(@Nullable final Project project,
 								   @Nullable final VirtualFile virtualFile,

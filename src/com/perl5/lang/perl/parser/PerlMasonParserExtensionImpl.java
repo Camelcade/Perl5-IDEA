@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 21.12.2015.
  */
-public class PerlMasonParserExtensionImpl extends PerlParserExtension implements PerlMasonParserExtension, PerlElementTypes
+public class PerlMasonParserExtensionImpl extends PerlParserExtension implements MasonPerlParserExtension, PerlElementTypes
 {
 	@NotNull
 	@Override

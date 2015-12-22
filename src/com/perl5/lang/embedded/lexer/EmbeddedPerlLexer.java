@@ -18,6 +18,7 @@ package com.perl5.lang.embedded.lexer;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 
 import java.io.IOException;
@@ -25,8 +26,10 @@ import java.io.IOException;
 /**
  * Created by hurricup on 19.05.2015.
  */
-public class EmbeddedPerlLexer extends PerlLexer
+public class EmbeddedPerlLexer extends PerlLexer implements EmbeddedPerlElementTypes
 {
+	// lexical states
+	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	private int preHTMLState = YYINITIAL;
 
 	public EmbeddedPerlLexer(Project project)

@@ -55,11 +55,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	);
 	public static final TokenSet COMMENTS = TokenSet.create(
 			COMMENT_LINE, COMMENT_BLOCK,
-			HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END,
-
-			// fixme these should be moved in appropriate parser definitions
-			EMBED_MARKER, EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE,
-			TEMPLATE_BLOCK_HTML
+			HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END
 	);
 
 	public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);

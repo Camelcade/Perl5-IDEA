@@ -106,7 +106,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			, RIGHT_PAREN
 			, RIGHT_BRACKET
 			, SEMICOLON
-			, EMBED_MARKER_SEMICOLON
 			, COLON
 
 			, OPERATOR_HELLIP,
@@ -191,7 +190,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			));
 	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
-			EMBED_MARKER_SEMICOLON,
 
 			RIGHT_BRACE,
 			REGEX_QUOTE_CLOSE,
@@ -441,8 +439,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		IElementType tokenType = b.getTokenType();
 		if (tokenType == SEMICOLON)
 			return consumeToken(b, SEMICOLON);
-		else if (tokenType == EMBED_MARKER_SEMICOLON)
-			return consumeToken(b, EMBED_MARKER_SEMICOLON);
 		else if (tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE)
 			return true;
 		else if (b.eof()) // eof
@@ -1656,7 +1652,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		IElementType tokenType = b.getTokenType();
 
-		if (tokenType == null || tokenType == RESERVED_PACKAGE || tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE || tokenType == SEMICOLON || tokenType == EMBED_MARKER_SEMICOLON)
+		if (tokenType == null || tokenType == RESERVED_PACKAGE || tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE || tokenType == SEMICOLON)
 		{
 			return false;
 		}

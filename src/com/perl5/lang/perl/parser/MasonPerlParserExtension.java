@@ -16,14 +16,24 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.embedded.EmbeddedPerlLanguage;
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementType;
+import com.perl5.lang.embedded.psi.EmbeddedPerlTokenType;
+import com.perl5.lang.mason.MasonPerlElementType;
+import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.MasonPerlTokenType;
 
 /**
  * Created by hurricup on 21.12.2015.
  */
-public interface PerlMasonParserExtension
+public interface MasonPerlParserExtension
 {
+	IElementType TEMPLATE_BLOCK_HTML = new MasonPerlTokenType("TEMPLATE_BLOCK_HTML");
+	IElementType OUTER_ELEMENT_TYPE = new MasonPerlElementType("OUTER_ELEMENT_TYPE");
+	IElementType HTML_TEMPLATE_DATA = new TemplateDataElementType("HTML_TEMPLATE_DATA", MasonPerlLanguage.INSTANCE, TEMPLATE_BLOCK_HTML, OUTER_ELEMENT_TYPE);
+
 	String KEYWORD_BLOCK_OPENER = "<% ";
 	IElementType MASON_BLOCK_OPENER = new MasonPerlTokenType(KEYWORD_BLOCK_OPENER);
 

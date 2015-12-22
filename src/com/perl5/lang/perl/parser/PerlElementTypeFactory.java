@@ -18,7 +18,7 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.psi.EmbeddedPerlTokenType;
-import com.perl5.lang.embedded.psi.EmbeddedPerlTokenTypes;
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
@@ -35,10 +35,6 @@ public class PerlElementTypeFactory
 			return new PerlHeredocElementType(name);
 		if (name.equals("PARSABLE_STRING_USE_VARS"))
 			return new PerlQQStringElementType(name);
-		if (name.equals("TEMPLATE_BLOCK_HTML"))
-			return EmbeddedPerlTokenTypes.TEMPLATE_BLOCK_HTML;
-		if (name.startsWith("EMBED_"))
-			return new EmbeddedPerlTokenType(name);
 		return new PerlTokenType(name);
 	}
 

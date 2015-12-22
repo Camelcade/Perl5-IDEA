@@ -23,6 +23,7 @@ import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlHighlighter extends LayeredLexerEditorHighlighter implements PerlElementTypes
+public class MojoliciousPerlHighlighter extends LayeredLexerEditorHighlighter implements MojoliciousPerlElementTypes
 {
 	public MojoliciousPerlHighlighter(@Nullable final Project project,
 									  @Nullable final VirtualFile virtualFile,

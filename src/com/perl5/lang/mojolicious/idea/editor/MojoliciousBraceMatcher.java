@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.idea.editor;
+package com.perl5.lang.mojolicious.idea.editor;
 
 import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
 
 /**
- * Created by hurricup on 03.09.2015.
+ * Created by hurricup on 22.12.2015.
  */
-public class EmbeddedPerlBraceMatcher implements PairedBraceMatcher, EmbeddedPerlElementTypes
+public class MojoliciousBraceMatcher implements PairedBraceMatcher, MojoliciousPerlElementTypes
 {
 	private static final BracePair[] PAIRS = new BracePair[]{
 			new BracePair(EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE, false),
+			new BracePair(EMBED_MARKER_OPEN, EMBED_MARKER_SEMICOLON, false),
 	};
 
 	@Override

@@ -25,7 +25,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
-import com.perl5.lang.embedded.psi.EmbeddedPerlTokenTypes;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +35,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider
+public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MojoliciousPerlElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
 			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MojoliciousPerlLanguage.INSTANCE));
@@ -69,7 +68,7 @@ public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocument
 		{
 
 			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(EmbeddedPerlTokenTypes.HTML_TEMPLATE_DATA);
+			file.setContentElementType(HTML_TEMPLATE_DATA);
 			return file;
 		}
 

@@ -274,8 +274,6 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return "<< heredoc >>";
 		else if (elementType == PerlElementTypes.POD)
 			return "= POD block =";
-		else if (elementType == PerlElementTypes.TEMPLATE_BLOCK_HTML)
-			return ">? HTML block <?";
 		else if (elementType == PerlElementTypes.COMMENT_BLOCK)
 			return "# Block comment";
 		else if (elementType == PerlElementTypes.COMMENT_LINE)
@@ -310,8 +308,6 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 			return PerlFoldingSettings.getInstance().COLLAPSE_PARENTHESISED;
 		else if (elementType == PerlElementTypes.HEREDOC)
 			return PerlFoldingSettings.getInstance().COLLAPSE_HEREDOCS;
-		else if (elementType == PerlElementTypes.TEMPLATE_BLOCK_HTML)
-			return PerlFoldingSettings.getInstance().COLLAPSE_TEMPLATES;
 		else if (elementType == PerlElementTypes.STRING_LIST)
 			return PerlFoldingSettings.getInstance().COLLAPSE_QW;
 		else

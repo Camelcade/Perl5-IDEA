@@ -120,7 +120,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 		attributesMap.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 
-		attributesMap.put(PerlElementTypes.TEMPLATE_BLOCK_HTML, new TextAttributesKey[]{PERL_COMMENT});
 		attributesMap.put(PerlElementTypes.HEREDOC_END, new TextAttributesKey[]{PERL_SQ_STRING});
 
 		attributesMap.put(PerlElementTypes.REGEX_QUOTE_CLOSE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
@@ -158,12 +157,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.RESERVED_IF, new TextAttributesKey[]{PERL_KEYWORD});
 
 		attributesMap.put(PerlElementTypes.TAG, new TextAttributesKey[]{PERL_TAG});
-
-		// embedding markers
-		attributesMap.put(PerlElementTypes.EMBED_MARKER, new TextAttributesKey[]{EMBED_MARKER});
-		attributesMap.put(PerlElementTypes.EMBED_MARKER_CLOSE, new TextAttributesKey[]{EMBED_MARKER});
-		attributesMap.put(PerlElementTypes.EMBED_MARKER_OPEN, new TextAttributesKey[]{EMBED_MARKER});
-		attributesMap.put(PerlElementTypes.EMBED_MARKER_SEMICOLON, new TextAttributesKey[]{EMBED_MARKER});
 
 		// fixme move core highlighting in annotation
 		attributesMap.put(PerlElementTypes.PACKAGE_CORE_IDENTIFIER, new TextAttributesKey[]{PERL_PACKAGE});

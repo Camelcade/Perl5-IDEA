@@ -60,7 +60,7 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 		}
 		else
 		{
-			myFlex.setCustomState(PerlLexerGenerated.LEX_PERL_BLOCK);
+			myFlex.setCustomState(myFlex.getPerlCustomState());
 		}
 
 		myFlex.reset(myText, startOffset, endOffset, initialState);
@@ -123,7 +123,7 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 		assert customState < 255;
 		assert lexerState < 255;
 
-		if (customState == PerlLexer.LEX_PERL_BLOCK)
+		if (customState == myFlex.getPerlCustomState())
 			myState = lexerState;
 		else
 			myState = customState * 255 + lexerState;

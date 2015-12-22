@@ -19,6 +19,7 @@ package com.perl5.lang.mojolicious.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
 import com.perl5.lang.perl.lexer.CustomToken;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 
@@ -29,7 +30,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlLexer extends PerlLexerWithCustomStates
+public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements MojoliciousPerlElementTypes
 {
 	public static final String MOJO_SPACES = "([ \t\f]*)";
 	public static final String MOJO_CLOSE_TAG = MOJO_SPACES + "(=?%>)";
@@ -39,10 +40,29 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates
 	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
 	public static final Pattern PERL_BLOCK_CLOSER = Pattern.compile("^" + MOJO_CLOSE_TAG);
 
+	// lexical states
+	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
+	public static final int LEX_PERL_BLOCK = LEX_CUSTOM2;
+	public static final int LEX_PERL_BLOCK_SEMI = LEX_CUSTOM3;
+	public static final int LEX_PERL_LINE = LEX_CUSTOM4;
+	public static final int LEX_PERL_LINE_SEMI = LEX_CUSTOM5;
+
 	public MojoliciousPerlLexer(Project project)
 	{
 		super(project);
 		setCustomState(LEX_HTML_BLOCK);
+	}
+
+	@Override
+	public int getInitialCustomState()
+	{
+		return LEX_HTML_BLOCK;
+	}
+
+	@Override
+	public int getPerlCustomState()
+	{
+		return LEX_PERL_BLOCK;
 	}
 
 	public IElementType perlAdvance() throws IOException

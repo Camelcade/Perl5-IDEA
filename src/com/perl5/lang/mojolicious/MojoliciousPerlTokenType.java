@@ -14,33 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.lexer;
+package com.perl5.lang.mojolicious;
 
-import com.intellij.openapi.project.Project;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.embedded.EmbeddedPerlLanguage;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 22.12.2015.
  */
-public abstract class PerlLexerWithCustomStates extends PerlLexer
+public class MojoliciousPerlTokenType extends IElementType
 {
-	private int customState = 0;
-
-	public PerlLexerWithCustomStates(Project project)
+	public MojoliciousPerlTokenType(@NotNull @NonNls String debugName)
 	{
-		super(project);
+		super(debugName, MojoliciousPerlLanguage.INSTANCE);
 	}
 
-	public int getCustomState()
+	public String toString()
 	{
-		return customState;
+		return "MojoliciousTokenType." + super.toString();
 	}
 
-	public void setCustomState(int newState)
-	{
-		customState = newState;
-	}
-
-	public abstract int getInitialCustomState();
-
-	public abstract int getPerlCustomState();
 }

@@ -23,9 +23,14 @@ import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 /**
  * Created by hurricup on 19.05.2015.
  */
-public interface EmbeddedPerlTokenTypes
+public interface EmbeddedPerlElementTypes
 {
 	IElementType TEMPLATE_BLOCK_HTML = new EmbeddedPerlTokenType("TEMPLATE_BLOCK_HTML");
+	IElementType EMBED_MARKER_OPEN = new EmbeddedPerlTokenType("EMBED_MARKER_OPEN");
+	IElementType EMBED_MARKER_CLOSE = new EmbeddedPerlTokenType("EMBED_MARKER_CLOSE");
+
 	IElementType OUTER_ELEMENT_TYPE = new EmbeddedPerlElementType("OUTER_ELEMENT_TYPE");
 	IElementType HTML_TEMPLATE_DATA = new TemplateDataElementType("HTML_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE, TEMPLATE_BLOCK_HTML, OUTER_ELEMENT_TYPE);
+
+
 }

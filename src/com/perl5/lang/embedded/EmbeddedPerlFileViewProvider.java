@@ -25,7 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
-import com.perl5.lang.embedded.psi.EmbeddedPerlTokenTypes;
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,7 +69,7 @@ public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFil
 		if (lang == getTemplateDataLanguage())
 		{
 			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(EmbeddedPerlTokenTypes.HTML_TEMPLATE_DATA);
+			file.setContentElementType(EmbeddedPerlElementTypes.HTML_TEMPLATE_DATA);
 			return file;
 		}
 
