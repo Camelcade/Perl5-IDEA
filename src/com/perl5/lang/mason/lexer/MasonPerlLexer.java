@@ -298,7 +298,77 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements PerlMas
 					String openingTag = m.group(0);
 					addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
 					BLOCK_CLOSE_TAG = OPEN_CLOSE_MAP.get(openingTag);
-					setCustomState(LEX_MASON_PERL_BLOCK);// fixme we should capture text here
+
+					if (openingTag.equals(KEYWORD_DOC_OPENER))
+					{
+						offset += openingTag.length();
+						int commentStart = offset;
+						boolean gotCloseTag = false;
+
+						while (offset < bufferEnd)
+						{
+							if (offset <= bufferEnd - KEYWORD_DOC_CLOSER.length() &&
+									buffer.charAt(offset) == '<' &&
+									buffer.charAt(offset + 1) == '/' &&
+									buffer.charAt(offset + 2) == '%' &&
+									buffer.charAt(offset + 3) == 'd' &&
+									buffer.charAt(offset + 4) == 'o' &&
+									buffer.charAt(offset + 5) == 'c' &&
+									buffer.charAt(offset + 6) == '>'
+									)
+							{
+								gotCloseTag = true;
+								break;
+							}
+							offset++;
+						}
+						if (offset > commentStart)
+						{
+							addPreparsedToken(commentStart, offset, COMMENT_BLOCK);
+						}
+						if (gotCloseTag)
+						{
+							addPreparsedToken(offset, offset + KEYWORD_DOC_CLOSER.length(), MASON_DOC_CLOSER);
+						}
+					}
+					else if (openingTag.equals(KEYWORD_TEXT_OPENER))
+					{
+						offset += openingTag.length();
+						int commentStart = offset;
+						boolean gotCloseTag = false;
+
+						while (offset < bufferEnd)
+						{
+							if (offset <= bufferEnd - KEYWORD_TEXT_CLOSER.length() &&
+									buffer.charAt(offset) == '<' &&
+									buffer.charAt(offset + 1) == '/' &&
+									buffer.charAt(offset + 2) == '%' &&
+									buffer.charAt(offset + 3) == 't' &&
+									buffer.charAt(offset + 4) == 'e' &&
+									buffer.charAt(offset + 5) == 'x' &&
+									buffer.charAt(offset + 6) == 't' &&
+									buffer.charAt(offset + 7) == '>'
+									)
+							{
+								gotCloseTag = true;
+								break;
+							}
+							offset++;
+						}
+
+						if (offset > commentStart)
+						{
+							addPreparsedToken(commentStart, offset, STRING_CONTENT);
+						}
+						if (gotCloseTag)
+						{
+							addPreparsedToken(offset, offset + KEYWORD_TEXT_CLOSER.length(), MASON_TEXT_CLOSER);
+						}
+					}
+					else
+					{
+						setCustomState(LEX_MASON_PERL_BLOCK);// fixme we should capture text here
+					}
 				}
 				else if ((m = MASON_OPENERS.matcher(buffer).region(offset, bufferEnd)).lookingAt())
 				{

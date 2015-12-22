@@ -113,23 +113,13 @@ public class PerlMasonParserExtensionImpl extends PerlParserExtension implements
 		else if (tokenType == MASON_DOC_OPENER)
 		{
 			b.advanceLexer();
-			PsiBuilder.Marker dm = b.mark();
-			while (!b.eof() && b.getTokenType() != MASON_DOC_CLOSER)
-			{
-				b.advanceLexer();
-			}
-			dm.collapse(COMMENT_BLOCK);
+			PerlParserUtil.consumeToken(b, COMMENT_BLOCK);
 			r = PerlParserUtil.consumeToken(b, MASON_DOC_CLOSER);
 		}
 		else if (tokenType == MASON_TEXT_OPENER)
 		{
 			b.advanceLexer();
-			while (!b.eof() && b.getTokenType() != MASON_TEXT_CLOSER)
-			{
-				PsiBuilder.Marker dm = b.mark();
-				b.advanceLexer();
-				dm.collapse(STRING_CONTENT);
-			}
+			PerlParserUtil.consumeToken(b, STRING_CONTENT);
 			r = PerlParserUtil.consumeToken(b, MASON_TEXT_CLOSER);
 		}
 
