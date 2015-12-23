@@ -23,14 +23,14 @@ import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.parser.MasonPerlParserExtension;
+import com.perl5.lang.mason.MasonPerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlHighlighter extends LayeredLexerEditorHighlighter implements MasonPerlParserExtension
+public class MasonPerlHighlighter extends LayeredLexerEditorHighlighter implements MasonPerlElementTypes
 {
 	public MasonPerlHighlighter(@Nullable final Project project,
 								@Nullable final VirtualFile virtualFile,

@@ -25,7 +25,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
-import com.perl5.lang.perl.parser.MasonPerlParserExtension;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +35,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonPerlParserExtension
+public class MasonPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonPerlElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
 			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MasonPerlLanguage.INSTANCE));

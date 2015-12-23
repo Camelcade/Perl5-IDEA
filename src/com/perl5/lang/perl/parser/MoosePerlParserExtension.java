@@ -25,7 +25,7 @@ import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElem
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseParserExtension
+public interface MoosePerlParserExtension
 {
 	IElementType RESERVED_INNER = new PerlTokenType("inner");
 	IElementType RESERVED_WITH = new PerlTokenType("with");

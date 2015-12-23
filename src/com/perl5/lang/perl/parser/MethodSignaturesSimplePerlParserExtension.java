@@ -16,12 +16,11 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.perl5.lang.mason.MasonPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
  * Created by hurricup on 23.12.2015.
  */
-public interface MasonPerlParserExtension extends MasonPerlElementTypes, PerlElementTypes
+public interface MethodSignaturesSimplePerlParserExtension extends PerlElementTypes
 {
 }

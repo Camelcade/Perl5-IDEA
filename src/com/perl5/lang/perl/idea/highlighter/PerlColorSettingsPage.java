@@ -42,7 +42,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
 
-			new AttributesDescriptor("Embedding marker", PerlSyntaxHighlighter.EMBED_MARKER),
+			new AttributesDescriptor("Embedding marker", PerlSyntaxHighlighter.EMBED_MARKER_KEY),
 
 			new AttributesDescriptor("Handle", PerlSyntaxHighlighter.PERL_HANDLE),
 			new AttributesDescriptor("Label", PerlSyntaxHighlighter.PERL_LABEL),
@@ -153,7 +153,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 				, Pair.create("rx", PerlSyntaxHighlighter.PERL_REGEX_TOKEN)
 				, Pair.create("block", PerlSyntaxHighlighter.PERL_BLOCK_NAME)
 				, Pair.create("const", PerlSyntaxHighlighter.PERL_CONSTANT)
-				, Pair.create("em", PerlSyntaxHighlighter.EMBED_MARKER)
+				, Pair.create("em", PerlSyntaxHighlighter.EMBED_MARKER_KEY)
 				, Pair.create("glob", PerlSyntaxHighlighter.PERL_GLOB)
 				, Pair.create("handle", PerlSyntaxHighlighter.PERL_HANDLE)
 				, Pair.create("kw", PerlSyntaxHighlighter.PERL_KEYWORD)

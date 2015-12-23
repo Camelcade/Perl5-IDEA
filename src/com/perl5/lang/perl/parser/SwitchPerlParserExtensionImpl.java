@@ -33,7 +33,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlSwitchParserExtensionImpl extends PerlParserExtension implements PerlSwitchParserExtension, PerlElementTypes
+public class SwitchPerlParserExtensionImpl extends PerlParserExtension implements SwitchPerlParserExtension, PerlElementTypes
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	protected static TokenSet TOKENS_SET;

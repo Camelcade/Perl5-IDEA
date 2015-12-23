@@ -20,12 +20,12 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.MasonPerlParserExtension;
+import com.perl5.lang.mason.MasonPerlElementTypes;
 
 /**
  * Created by hurricup on 21.12.2015.
  */
-public class MasonBraceMatcher implements PairedBraceMatcher, MasonPerlParserExtension
+public class MasonBraceMatcher implements PairedBraceMatcher, MasonPerlElementTypes
 {
 	private static final BracePair[] PAIRS = new BracePair[]{
 			new BracePair(MASON_BLOCK_OPENER, MASON_BLOCK_CLOSER, false),

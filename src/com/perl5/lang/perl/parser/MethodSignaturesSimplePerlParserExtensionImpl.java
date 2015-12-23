@@ -29,7 +29,7 @@ import java.util.Map;
  * Created by hurricup on 22.11.2015.
  * class must be in com.perl5.lang.perl.parser package to have access to the PerlParser routines
  */
-public class PerlMethodSignaturesSimpleParserExtension extends PerlParserExtension implements PerlElementTypes
+public class MethodSignaturesSimplePerlParserExtensionImpl extends PerlParserExtension implements MethodSignaturesSimplePerlParserExtension
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 

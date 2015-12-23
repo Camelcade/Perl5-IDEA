@@ -46,7 +46,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributes BOLD_ITALIC = TextAttributes.merge(BOLD, ITALIC);
 
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
-	public static final TextAttributesKey EMBED_MARKER = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+
+	public static final TextAttributesKey EMBED_MARKER_KEY = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+	public static final TextAttributesKey[] EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER_KEY};
+
 	public static final TextAttributesKey PERL_NUMBER = createTextAttributesKey("PERL_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 	public static final TextAttributesKey PERL_VERSION = createTextAttributesKey("PERL_VERSION", PERL_NUMBER);
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);

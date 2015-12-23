@@ -27,7 +27,7 @@ public interface MojoliciousPerlElementTypes
 	IElementType TEMPLATE_BLOCK_HTML = new MojoliciousPerlTokenType("TEMPLATE_BLOCK_HTML");
 	IElementType EMBED_MARKER_OPEN = new MojoliciousPerlTokenType("EMBED_MARKER_OPEN");
 	IElementType EMBED_MARKER_CLOSE = new MojoliciousPerlTokenType("EMBED_MARKER_CLOSE");
-	IElementType EMBED_MARKER = new MojoliciousPerlTokenType("EMBED_MARKER");
+	IElementType EMBED_MARKER = new MojoliciousPerlTokenType("EMBED_MARKER_KEY");
 	IElementType EMBED_MARKER_SEMICOLON = new MojoliciousPerlTokenType("EMBED_MARKER_SEMICOLON");
 
 	IElementType OUTER_ELEMENT_TYPE = new MojoliciousPerlElementType("OUTER_ELEMENT_TYPE");

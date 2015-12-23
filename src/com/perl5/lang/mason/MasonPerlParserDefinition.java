@@ -26,13 +26,12 @@ import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
-import com.perl5.lang.perl.parser.MasonPerlParserExtension;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlParserDefinition extends PerlParserDefinition implements MasonPerlParserExtension
+public class MasonPerlParserDefinition extends PerlParserDefinition implements MasonPerlElementTypes
 {
 	public static final IFileElementType FILE = new PerlFileElementType("Mason component", MasonPerlLanguage.INSTANCE);
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,

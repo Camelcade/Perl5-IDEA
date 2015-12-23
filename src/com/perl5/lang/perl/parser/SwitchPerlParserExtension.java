@@ -23,7 +23,7 @@ import com.perl5.lang.perl.PerlTokenType;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public interface PerlSwitchParserExtension
+public interface SwitchPerlParserExtension
 {
 	IElementType RESERVED_SWITCH = new PerlTokenType("switch");
 	IElementType RESERVED_CASE = new PerlTokenType("case");
