@@ -36,7 +36,7 @@ public class MojoliciousPerlParserDefinition extends PerlParserDefinition implem
 	public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousPerlLanguage.INSTANCE);
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(
-					TEMPLATE_BLOCK_HTML,
+					MOJO_TEMPLATE_BLOCK_HTML,
 					EMBED_MARKER_OPEN,
 					EMBED_MARKER_CLOSE,
 					EMBED_MARKER,

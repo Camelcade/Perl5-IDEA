@@ -37,7 +37,7 @@ public class MasonPerlParserDefinition extends PerlParserDefinition implements M
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(
 					MASON_LINE_OPENER,
-					TEMPLATE_BLOCK_HTML
+					MASON_TEMPLATE_BLOCK_HTML
 			));
 
 

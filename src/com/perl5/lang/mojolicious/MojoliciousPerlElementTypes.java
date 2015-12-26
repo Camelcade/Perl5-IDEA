@@ -19,18 +19,38 @@ package com.perl5.lang.mojolicious;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 
+import java.util.regex.Pattern;
+
 /**
  * Created by hurricup on 22.12.2015.
  */
-public interface MojoliciousPerlElementTypes
+public interface MojoliciousPerlElementTypes extends MojoliciousPerlSyntaxElements
 {
-	IElementType TEMPLATE_BLOCK_HTML = new MojoliciousPerlTokenType("TEMPLATE_BLOCK_HTML");
+
+	IElementType MOJO_BLOCK_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_OPENER);
+	IElementType MOJO_BLOCK_CLOSER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_CLOSER);
+	IElementType MOJO_BLOCK_EXPR_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_OPENER);
+	IElementType MOJO_BLOCK_EXPR_ESCAPED_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER);
+	IElementType MOJO_BLOCK_EXPR_NOSPACE_CLOSER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_NOSPACE_CLOSER);
+
+	IElementType MOJO_LINE_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_OPENER);
+	IElementType MOJO_LINE_EXPR_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_EXPR_OPENER);
+	IElementType MOJO_LINE_EXPR_ESCAPED_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_EXPR_ESCAPED_OPENER);
+
+	IElementType MOJO_BLOCK_OPENER_TAG = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_OPENER_TAG);
+	IElementType MOJO_LINE_OPENER_TAG = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_OPENER_TAG);
+
+	IElementType MOJO_BEGIN = new MojoliciousPerlTokenType(KEYWORD_MOJO_BEGIN);
+	IElementType MOJO_END = new MojoliciousPerlTokenType(KEYWORD_MOJO_END);
+
+	@Deprecated
 	IElementType EMBED_MARKER_OPEN = new MojoliciousPerlTokenType("EMBED_MARKER_OPEN");
+	@Deprecated
 	IElementType EMBED_MARKER_CLOSE = new MojoliciousPerlTokenType("EMBED_MARKER_CLOSE");
+	@Deprecated
 	IElementType EMBED_MARKER = new MojoliciousPerlTokenType("EMBED_MARKER_KEY");
+	@Deprecated
 	IElementType EMBED_MARKER_SEMICOLON = new MojoliciousPerlTokenType("EMBED_MARKER_SEMICOLON");
 
-	IElementType OUTER_ELEMENT_TYPE = new MojoliciousPerlElementType("OUTER_ELEMENT_TYPE");
-	IElementType HTML_TEMPLATE_DATA = new TemplateDataElementType("HTML_TEMPLATE_DATA", MojoliciousPerlLanguage.INSTANCE, TEMPLATE_BLOCK_HTML, OUTER_ELEMENT_TYPE);
 
 }

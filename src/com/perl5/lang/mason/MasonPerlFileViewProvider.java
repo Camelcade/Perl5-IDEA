@@ -68,7 +68,7 @@ public class MasonPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileVi
 		{
 
 			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(HTML_TEMPLATE_DATA);
+			file.setContentElementType(MASON_HTML_TEMPLATE_DATA);
 			return file;
 		}
 

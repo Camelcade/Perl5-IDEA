@@ -74,8 +74,6 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 					KEYWORD_OVERRIDE +
 					")>"
 	);
-
-
 	// lexical states
 	public static final int LEX_MASON_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_MASON_PERL_BLOCK = LEX_CUSTOM2;             // complicated blocks <%kw>...</%kw>
@@ -389,7 +387,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 
 			if (getTokenEnd() > getTokenStart())
 			{
-				return TEMPLATE_BLOCK_HTML;
+				return MASON_TEMPLATE_BLOCK_HTML;
 			}
 			else if (preparsedTokensList.size() > 0)
 			{

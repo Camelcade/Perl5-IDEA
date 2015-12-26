@@ -294,13 +294,6 @@ limitations under the License.
     HANDLE="HANDLE"
     BLOCK_NAME="BLOCK_NAME"
     LABEL="LABEL"
-
-    // inline HTML support
-//    EMBED_MARKER_KEY="EMBED_MARKER_KEY"
-//    EMBED_MARKER_OPEN="EMBED_MARKER_OPEN"   // for braces match
-//    EMBED_MARKER_CLOSE="EMBED_MARKER_CLOSE" // for braces match
-//    EMBED_MARKER_SEMICOLON="EMBED_MARKER_SEMICOLON" // this is for implicit semicolon in Mojolicious
-//    TEMPLATE_BLOCK_HTML="TEMPLATE_BLOCK_HTML"
   ]
 
     extends(".*expr")=expr

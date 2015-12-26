@@ -69,7 +69,7 @@ public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFil
 		if (lang == getTemplateDataLanguage())
 		{
 			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(EmbeddedPerlElementTypes.HTML_TEMPLATE_DATA);
+			file.setContentElementType(EmbeddedPerlElementTypes.EMBED_HTML_TEMPLATE_DATA);
 			return file;
 		}
 

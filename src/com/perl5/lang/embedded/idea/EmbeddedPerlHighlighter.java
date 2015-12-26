@@ -24,7 +24,6 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,7 +37,7 @@ public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter imple
 								   @NotNull final EditorColorsScheme colors)
 	{
 		super(new EmbeddedPerlSyntaxHighlighter(project), colors);
-		registerLayer(TEMPLATE_BLOCK_HTML, new LayerDescriptor(
+		registerLayer(EMBED_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
 	}
 }

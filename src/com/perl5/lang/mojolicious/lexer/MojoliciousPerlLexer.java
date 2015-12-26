@@ -39,13 +39,18 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
 	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
 	public static final Pattern PERL_BLOCK_CLOSER = Pattern.compile("^" + MOJO_CLOSE_TAG);
-
 	// lexical states
 	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_PERL_BLOCK = LEX_CUSTOM2;
-	public static final int LEX_PERL_BLOCK_SEMI = LEX_CUSTOM3;
-	public static final int LEX_PERL_LINE = LEX_CUSTOM4;
+	public static final int LEX_PERL_LINE = LEX_CUSTOM3;
+	@Deprecated
+	public static final int LEX_PERL_BLOCK_SEMI = LEX_CUSTOM4;
+	@Deprecated
 	public static final int LEX_PERL_LINE_SEMI = LEX_CUSTOM5;
+	Pattern MOJO_BEING_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
+	Pattern MOJO_BEING_IN_LINE = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*\\n");
+	Pattern MOJO_END_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BLOCK_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
+	Pattern MOJO_END_IN_LINE = Pattern.compile(KEYWORD_MOJO_LINE_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*\\n");
 
 	public MojoliciousPerlLexer(Project project)
 	{
@@ -297,7 +302,7 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				}
 			}
 
-			return TEMPLATE_BLOCK_HTML;
+			return MOJO_TEMPLATE_BLOCK_HTML;
 
 		}
 		return super.perlAdvance();

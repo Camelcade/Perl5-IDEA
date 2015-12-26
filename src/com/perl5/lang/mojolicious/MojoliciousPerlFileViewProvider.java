@@ -68,7 +68,7 @@ public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocument
 		{
 
 			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(HTML_TEMPLATE_DATA);
+			file.setContentElementType(MOJO_HTML_TEMPLATE_DATA);
 			return file;
 		}
 

@@ -38,7 +38,7 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition implement
 
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(
-					TEMPLATE_BLOCK_HTML,
+					EMBED_TEMPLATE_BLOCK_HTML,
 					EMBED_MARKER_OPEN,
 					EMBED_MARKER_CLOSE
 			));

@@ -77,7 +77,7 @@ public class EmbeddedPerlLexer extends PerlLexer implements EmbeddedPerlElementT
 					if (offset == bufferEnd)
 						yybegin(preHTMLState);
 					setTokenEnd(offset);
-					return TEMPLATE_BLOCK_HTML;
+					return EMBED_TEMPLATE_BLOCK_HTML;
 				}
 			}
 			else if (bufferAtString(buffer, tokenStart, "?>"))

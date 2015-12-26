@@ -25,12 +25,11 @@ import com.perl5.lang.embedded.EmbeddedPerlLanguage;
  */
 public interface EmbeddedPerlElementTypes
 {
-	IElementType TEMPLATE_BLOCK_HTML = new EmbeddedPerlTokenType("TEMPLATE_BLOCK_HTML");
+	IElementType EMBED_TEMPLATE_BLOCK_HTML = new EmbeddedPerlTokenType("EMBED_TEMPLATE_BLOCK_HTML");
+	IElementType EMBED_OUTER_ELEMENT_TYPE = new EmbeddedPerlElementType("EMBED_OUTER_ELEMENT_TYPE");
+	IElementType EMBED_HTML_TEMPLATE_DATA = new TemplateDataElementType("EMBED_HTML_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE, EMBED_TEMPLATE_BLOCK_HTML, EMBED_OUTER_ELEMENT_TYPE);
+
 	IElementType EMBED_MARKER_OPEN = new EmbeddedPerlTokenType("EMBED_MARKER_OPEN");
 	IElementType EMBED_MARKER_CLOSE = new EmbeddedPerlTokenType("EMBED_MARKER_CLOSE");
-
-	IElementType OUTER_ELEMENT_TYPE = new EmbeddedPerlElementType("OUTER_ELEMENT_TYPE");
-	IElementType HTML_TEMPLATE_DATA = new TemplateDataElementType("HTML_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE, TEMPLATE_BLOCK_HTML, OUTER_ELEMENT_TYPE);
-
 
 }
