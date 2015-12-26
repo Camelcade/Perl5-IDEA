@@ -37,10 +37,14 @@ public class MojoliciousPerlParserDefinition extends PerlParserDefinition implem
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(
 					MOJO_TEMPLATE_BLOCK_HTML,
+
 					MOJO_BLOCK_OPENER,
+					MOJO_BLOCK_CLOSER,
+
 					MOJO_LINE_OPENER,
 					MOJO_LINE_EXPR_OPENER,
 					MOJO_LINE_EXPR_ESCAPED_OPENER,
+
 					MOJO_BLOCK_OPENER_TAG,
 					MOJO_LINE_OPENER_TAG
 			));

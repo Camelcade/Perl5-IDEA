@@ -168,12 +168,12 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 					if (offset < bufferEnd - 3 && buffer.charAt(offset + 3) == '=') // <%==
 					{
 						addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER.length(), MOJO_BLOCK_EXPR_ESCAPED_OPENER);
-						yybegin(LEX_PERL_EXPR_BLOCK);
+						setCustomState(LEX_PERL_EXPR_BLOCK);
 					}
 					else
 					{
 						addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_EXPR_OPENER.length(), MOJO_BLOCK_EXPR_OPENER);
-						yybegin(LEX_PERL_EXPR_BLOCK);
+						setCustomState(LEX_PERL_EXPR_BLOCK);
 					}
 				}
 				else if (extraChar == '%')    // <%%
@@ -197,7 +197,7 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				else    // <%
 				{
 					addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_OPENER.length(), MOJO_BLOCK_OPENER);
-					yybegin(LEX_PERL_BLOCK);
+					setCustomState(LEX_PERL_BLOCK);
 				}
 			}
 			else  // begin of perl line
@@ -210,18 +210,18 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 					if (offset < bufferEnd - 2 && buffer.charAt(offset + 2) == '=') // %==
 					{
 						addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_EXPR_ESCAPED_OPENER.length(), MOJO_LINE_EXPR_ESCAPED_OPENER);
-						yybegin(LEX_PERL_EXPR_LINE);
+						setCustomState(LEX_PERL_EXPR_LINE);
 					}
 					else
 					{
 						addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_EXPR_OPENER.length(), MOJO_LINE_EXPR_OPENER);
-						yybegin(LEX_PERL_EXPR_LINE);
+						setCustomState(LEX_PERL_EXPR_LINE);
 					}
-
 				}
 				else if (extraChar == '%')    // %%
 				{
 					addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER_TAG.length(), MOJO_LINE_OPENER_TAG);
+					setCustomState(LEX_PERL_LINE);
 				}
 				else if (extraChar == '#') // %#
 				{
@@ -240,11 +240,10 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				else    // %
 				{
 					addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER.length(), MOJO_LINE_OPENER);
-					yybegin(LEX_PERL_LINE);
+					setCustomState(LEX_PERL_LINE);
 				}
 			}
 			return MOJO_TEMPLATE_BLOCK_HTML;
-
 		}
 		return super.perlAdvance();
 	}
