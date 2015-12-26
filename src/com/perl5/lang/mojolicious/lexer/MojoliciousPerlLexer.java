@@ -21,6 +21,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
 import com.perl5.lang.perl.lexer.CustomToken;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 
 import java.io.IOException;
@@ -36,21 +37,13 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_PERL_BLOCK = LEX_CUSTOM2;
 	public static final int LEX_PERL_LINE = LEX_CUSTOM3;
-	@Deprecated
-	public static final int LEX_PERL_BLOCK_SEMI = LEX_CUSTOM4;
-	@Deprecated
-	public static final int LEX_PERL_LINE_SEMI = LEX_CUSTOM5;
-	public static final String MOJO_SPACES = "([ \t\f]*)";
-	public static final String MOJO_CLOSE_TAG = MOJO_SPACES + "(=?%>)";
-	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
-	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_CLOSE_TAG);
-	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
-	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
-	public static final Pattern PERL_BLOCK_CLOSER = Pattern.compile("^" + MOJO_CLOSE_TAG);
-	Pattern MOJO_BEING_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
-	Pattern MOJO_BEING_IN_LINE = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*\\n");
-	Pattern MOJO_END_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BLOCK_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
-	Pattern MOJO_END_IN_LINE = Pattern.compile(KEYWORD_MOJO_LINE_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*\\n");
+	public static final int LEX_PERL_EXPR_BLOCK = LEX_CUSTOM4;
+	public static final int LEX_PERL_EXPR_LINE = LEX_CUSTOM5;
+
+	public static final Pattern MOJO_BEGIN_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
+	public static final Pattern MOJO_BEGIN_IN_LINE = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*\\n");
+	public static final Pattern MOJO_END_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BLOCK_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
+	public static final Pattern MOJO_END_IN_LINE = Pattern.compile(KEYWORD_MOJO_LINE_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*\\n");
 
 	public MojoliciousPerlLexer(Project project)
 	{
@@ -78,56 +71,56 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 		int currentMojoState = getCustomState();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
-			return super.perlAdvance();
-		else if ((currentMojoState == LEX_PERL_LINE || currentMojoState == LEX_PERL_LINE_SEMI))
 		{
-			if (buffer.charAt(tokenStart) == '\n')
+			return super.perlAdvance();
+		}
+
+		char currentChar = buffer.charAt(tokenStart);
+
+		if (currentMojoState == LEX_PERL_LINE)    // eol for statement
+		{
+			if (currentChar == '\n')
+			{
+				setCustomState(LEX_HTML_BLOCK);
+			}
+			// todo begin block
+		}
+		else if (currentMojoState == LEX_PERL_EXPR_LINE && currentChar == '\n')    // eol for expression
+		{
+			setTokenStart(tokenStart);
+			setTokenEnd(tokenStart + 1);
+			setCustomState(LEX_HTML_BLOCK);
+			return SEMICOLON;
+		}
+		else if (currentMojoState == LEX_PERL_BLOCK)
+		{
+			if (tokenStart + 1 < bufferEnd && currentChar == '%' && buffer.charAt(tokenStart + 1) == '>')    // %>
 			{
 				setTokenStart(tokenStart);
-				setTokenEnd(tokenStart + 1);
-
-				IElementType tokenType = currentMojoState == LEX_PERL_LINE_SEMI ? SEMICOLON : TokenType.NEW_LINE_INDENT;
+				setTokenEnd(tokenStart + KEYWORD_MOJO_BLOCK_CLOSER.length());
 				setCustomState(LEX_HTML_BLOCK);
-				return tokenType;
+				return MOJO_BLOCK_CLOSER;
 			}
-			else // if (currentMojoState == LEX_PERL_LINE) // there is a documentation example with %= ... begin
-			{
-				Matcher m = BLOCK_START_PERL_LINE.matcher(buffer);
-				m.region(tokenStart, bufferEnd);
-
-				if (m.lookingAt())
-					return parseBeginBlock(tokenStart, m, false);
-			}
+			// todo begin block
 		}
-		else if (currentMojoState == LEX_PERL_BLOCK || currentMojoState == LEX_PERL_BLOCK_SEMI)
+		else if (currentMojoState == LEX_PERL_EXPR_BLOCK)
 		{
-			int closeTokenSize = 0;
-			if (bufferAtString(buffer, tokenStart, "=%>"))
-				closeTokenSize = 3;
-			else if (bufferAtString(buffer, tokenStart, "%>"))
-				closeTokenSize = 2;
-			else
+			if (currentChar == '=' && tokenStart + 2 < bufferEnd && buffer.charAt(tokenStart + 1) == '%' && buffer.charAt(tokenStart + 2) == '>')    // =%>
 			{
-//				if (currentMojoState == LEX_PERL_BLOCK)
-//				{
-				Matcher m = BLOCK_START_PERL_BLOCK.matcher(buffer);
-				m.region(tokenStart, bufferEnd);
+				setTokenStart(tokenStart);
+				setTokenEnd(tokenStart + KEYWORD_MOJO_BLOCK_EXPR_NOSPACE_CLOSER.length());
+				setCustomState(LEX_HTML_BLOCK);
+				return MOJO_BLOCK_EXPR_NOSPACE_CLOSER;
 
-				if (m.lookingAt())
-					return parseBeginBlock(tokenStart, m, true);
-//				}
-				return super.perlAdvance();
 			}
+			else if (currentChar == '%' && tokenStart + 1 < bufferEnd && buffer.charAt(tokenStart + 1) == '>') // %>
+			{
+				setTokenStart(tokenStart);
+				setTokenEnd(tokenStart + KEYWORD_MOJO_BLOCK_CLOSER.length());
+				setCustomState(LEX_HTML_BLOCK);
+				return MOJO_BLOCK_EXPR_CLOSER;
 
-			setTokenStart(tokenStart);
-			boolean addSemi = currentMojoState == LEX_PERL_BLOCK_SEMI;
-			setCustomState(LEX_HTML_BLOCK);
-
-			setTokenEnd(tokenStart + closeTokenSize);
-			if (addSemi)
-				return EMBED_MARKER_SEMICOLON;
-			else
-				return EMBED_MARKER_CLOSE;
+			}
 		}
 		else if (currentMojoState == LEX_HTML_BLOCK)
 		{
@@ -139,169 +132,117 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 
 			for (; offset < bufferEnd; offset++)
 			{
-				char currentChar = buffer.charAt(offset);
+				currentChar = buffer.charAt(offset);
 				if (offset < bufferEnd - 1 && currentChar == '<' && buffer.charAt(offset + 1) == '%')
 				{
 					blockStart = true;
 					break;
 				}
 				else if (offset < bufferEnd && clearLine && currentChar == '%')
+				{
 					break;
+				}
 				else if (currentChar == '\n')
+				{
 					clearLine = true;
-				else if (currentChar != ' ' && currentChar != '\t' && currentChar != '\f')
+				}
+				else if (!Character.isWhitespace(currentChar))
+				{
 					clearLine = false;
+				}
 			}
 
 			setTokenEnd(offset);
 
 			if (offset == bufferEnd)  // end of file, html block
+			{
 				yybegin(YYINITIAL);
-			else if (!blockStart)        // begin of perl line
+			}
+			else if (blockStart) // begin of perl block
 			{
-				if (bufferAtString(buffer, offset, "%%"))
-					preparsedTokensList.add(new CustomToken(offset, offset + 2, EMBED_MARKER));
-				else
+				boolean oneMoreCharLeft = offset < bufferEnd - 2;
+				char extraChar = oneMoreCharLeft ? buffer.charAt(offset + 2) : 0;
+
+				if (extraChar == '=')    // <%=
 				{
-					Matcher m = BLOCK_END_PERL_LINE.matcher(buffer);
-					m.region(offset, bufferEnd);
-
-					if (m.lookingAt())    // % end construction
+					if (offset < bufferEnd - 3 && buffer.charAt(offset + 3) == '=') // <%==
 					{
-						// marker
-						preparsedTokensList.add(new CustomToken(offset, offset + m.group(1).length(), EMBED_MARKER));
-						offset += m.group(1).length();
-
-						if (m.group(1).length() == 1)
-							setCustomState(LEX_PERL_LINE);
-						else
-							setCustomState(LEX_PERL_LINE_SEMI);
-
-						if (!m.group(2).isEmpty())    // spaces if any
-						{
-							preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), TokenType.WHITE_SPACE));
-							offset += m.group(2).length();
-						}
-
-						// end as a right brace
-						preparsedTokensList.add(new CustomToken(offset, offset + m.group(3).length(), RIGHT_BRACE));
-						offset += m.group(3).length();
-
-						if (offset < bufferEnd)
-						{
-							char semiChar = buffer.charAt(offset);
-							preparsedTokensList.add(new CustomToken(offset, offset + 1, SEMICOLON));
-							if (semiChar == '\n')
-								setCustomState(LEX_HTML_BLOCK);
-						}
+						addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER.length(), MOJO_BLOCK_EXPR_ESCAPED_OPENER);
+						yybegin(LEX_PERL_EXPR_BLOCK);
 					}
 					else
 					{
-						int embedTokenSize = 1;
-						int newMojoState = LEX_PERL_LINE;
-
-						if (bufferAtString(buffer, offset, "%=="))
-						{
-							embedTokenSize = 3;
-							newMojoState = LEX_PERL_LINE_SEMI;
-						}
-						else if (bufferAtString(buffer, offset, "%="))
-						{
-							embedTokenSize = 2;
-							newMojoState = LEX_PERL_LINE_SEMI;
-						}
-
-						preparsedTokensList.add(new CustomToken(offset, offset + embedTokenSize, EMBED_MARKER));
-						setCustomState(newMojoState);
+						addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_EXPR_OPENER.length(), MOJO_BLOCK_EXPR_OPENER);
+						yybegin(LEX_PERL_EXPR_BLOCK);
 					}
 				}
-			}
-			else if (bufferAtString(buffer, offset, "<%#"))    // block comment
-			{
-				preparsedTokensList.add(new CustomToken(offset, offset + 3, EMBED_MARKER_OPEN));
-				offset += 3;
-				int commentEnd = offset;
-				while (commentEnd < bufferEnd)
+				else if (extraChar == '%')    // <%%
 				{
-					if (bufferAtString(buffer, commentEnd, "%>"))
-						break;
-					commentEnd++;
+					addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_OPENER_TAG.length(), MOJO_BLOCK_OPENER_TAG);
 				}
-
-				preparsedTokensList.add(new CustomToken(offset, commentEnd, COMMENT_BLOCK));
-				if (commentEnd < bufferEnd) // not eof, got closing marker
-					preparsedTokensList.add(new CustomToken(commentEnd, commentEnd + 2, EMBED_MARKER_CLOSE));
-
-			}
-			else if (bufferAtString(buffer, offset, "<%%"))    // <% macro
-				preparsedTokensList.add(new CustomToken(offset, offset + 3, EMBED_MARKER));
-			else   // begin of perl block
-			{
-				Matcher m = BLOCK_END_PERL_BLOCK.matcher(buffer);
-				m.region(offset, bufferEnd);
-
-				if (m.lookingAt())    // <% end construction
+				else if (extraChar == '#') // <%#
 				{
-					// marker
-					preparsedTokensList.add(new CustomToken(offset, offset + m.group(1).length(), EMBED_MARKER_OPEN));
-					offset += m.group(1).length();
+					int commentEnd = offset + 3;
+					while (commentEnd < bufferEnd)
+					{
+						if (commentEnd + 1 < bufferEnd && buffer.charAt(commentEnd) == '%' && buffer.charAt(commentEnd + 1) == '>')
+						{
+							commentEnd += 2;
+							break;
+						}
+						commentEnd++;
+					}
+					addPreparsedToken(offset, commentEnd, PerlElementTypes.COMMENT_LINE);
+				}
+				else    // <%
+				{
+					addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_OPENER.length(), MOJO_BLOCK_OPENER);
+					yybegin(LEX_PERL_BLOCK);
+				}
+			}
+			else  // begin of perl line
+			{
+				boolean oneMoreCharLeft = offset < bufferEnd - 1;
+				char extraChar = oneMoreCharLeft ? buffer.charAt(offset + 1) : 0;
 
-					// change state
-					if (m.group(1).length() == 2)
-						setCustomState(LEX_PERL_BLOCK);
+				if (extraChar == '=')
+				{
+					if (offset < bufferEnd - 2 && buffer.charAt(offset + 2) == '=') // %==
+					{
+						addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_EXPR_ESCAPED_OPENER.length(), MOJO_LINE_EXPR_ESCAPED_OPENER);
+						yybegin(LEX_PERL_EXPR_LINE);
+					}
 					else
-						setCustomState(LEX_PERL_BLOCK_SEMI);
-
-					if (!m.group(2).isEmpty())    // spaces if any
 					{
-						preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), TokenType.WHITE_SPACE));
-						offset += m.group(2).length();
-					}
-
-					// end as a right brace
-					preparsedTokensList.add(new CustomToken(offset, offset + m.group(3).length(), RIGHT_BRACE));
-					offset += m.group(3).length();
-
-					if (offset < bufferEnd)
-					{
-						m.region(offset, bufferEnd);
-
-						if (m.lookingAt())    // immediate close
-						{
-							if (!m.group(1).isEmpty()) // got some spaces
-							{
-								preparsedTokensList.add(new CustomToken(offset, offset + m.group(1).length(), TokenType.WHITE_SPACE));
-								offset += m.group(1).length();
-							}
-							preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), EMBED_MARKER_SEMICOLON));
-							setCustomState(LEX_HTML_BLOCK);
-						}
-						else    // something else is there
-							preparsedTokensList.add(new CustomToken(offset, offset + 1, SEMICOLON));
+						addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_EXPR_OPENER.length(), MOJO_LINE_EXPR_OPENER);
+						yybegin(LEX_PERL_EXPR_LINE);
 					}
 
 				}
-				else
+				else if (extraChar == '%')    // %%
 				{
-					int embedTokenSize = 2;
-					int newMojoState = LEX_PERL_BLOCK;
-
-					if (bufferAtString(buffer, offset, "<%=="))
+					addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER_TAG.length(), MOJO_LINE_OPENER_TAG);
+				}
+				else if (extraChar == '#') // %#
+				{
+					int commentEnd = offset + 2;
+					while (commentEnd < bufferEnd)
 					{
-						embedTokenSize = 4;
-						newMojoState = LEX_PERL_BLOCK_SEMI;
+						if (buffer.charAt(commentEnd) == '\n')
+						{
+							commentEnd++;
+							break;
+						}
+						commentEnd++;
 					}
-					else if (bufferAtString(buffer, offset, "<%="))
-					{
-						embedTokenSize = 3;
-						newMojoState = LEX_PERL_BLOCK_SEMI;
-					}
-
-					preparsedTokensList.add(new CustomToken(offset, offset + embedTokenSize, EMBED_MARKER_OPEN));
-					setCustomState(newMojoState);
+					addPreparsedToken(offset, commentEnd, PerlElementTypes.COMMENT_LINE);
+				}
+				else    // %
+				{
+					addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER.length(), MOJO_LINE_OPENER);
+					yybegin(LEX_PERL_LINE);
 				}
 			}
-
 			return MOJO_TEMPLATE_BLOCK_HTML;
 
 		}
@@ -315,6 +256,7 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 	 * @param m      matcher, which is matches begin statement
 	 * @return token type
 	 */
+/*
 	public IElementType parseBeginBlock(int offset, Matcher m, boolean endBlock)
 	{
 		if (!m.group(1).isEmpty())
@@ -342,11 +284,15 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 
 		return getPreParsedToken();
 	}
+*/
 
 	@Override
 	public boolean isLineCommentEnd(int currentPosition)
 	{
 		CharSequence buffer = getBuffer();
-		return buffer.charAt(currentPosition) == '\n' || bufferAtString(buffer, currentPosition, "=%>") || bufferAtString(buffer, currentPosition, "%>");
+		char currentChar = buffer.charAt(currentPosition);
+		return currentChar == '\n'
+				|| currentChar == '%' && currentPosition + 1 < buffer.length() && buffer.charAt(currentChar + 1) == '>'
+				;
 	}
 }
