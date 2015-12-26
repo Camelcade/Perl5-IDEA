@@ -28,8 +28,15 @@ import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
 public class MojoliciousBraceMatcher implements PairedBraceMatcher, MojoliciousPerlElementTypes
 {
 	private static final BracePair[] PAIRS = new BracePair[]{
-			new BracePair(EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE, false),
-			new BracePair(EMBED_MARKER_OPEN, EMBED_MARKER_SEMICOLON, false),
+			new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER, false),
+
+			new BracePair(MOJO_BLOCK_EXPR_OPENER, MOJO_BLOCK_CLOSER, false),
+			new BracePair(MOJO_BLOCK_EXPR_ESCAPED_OPENER, MOJO_BLOCK_CLOSER, false),
+
+			new BracePair(MOJO_BLOCK_EXPR_OPENER, MOJO_BLOCK_EXPR_NOSPACE_CLOSER, false),
+			new BracePair(MOJO_BLOCK_EXPR_ESCAPED_OPENER, MOJO_BLOCK_EXPR_NOSPACE_CLOSER, false),
+
+			new BracePair(MOJO_BEGIN, MOJO_END, false),
 	};
 
 	@Override

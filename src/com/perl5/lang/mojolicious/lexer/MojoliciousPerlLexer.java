@@ -32,13 +32,6 @@ import java.util.regex.Pattern;
  */
 public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements MojoliciousPerlElementTypes
 {
-	public static final String MOJO_SPACES = "([ \t\f]*)";
-	public static final String MOJO_CLOSE_TAG = MOJO_SPACES + "(=?%>)";
-	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
-	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_CLOSE_TAG);
-	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
-	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
-	public static final Pattern PERL_BLOCK_CLOSER = Pattern.compile("^" + MOJO_CLOSE_TAG);
 	// lexical states
 	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_PERL_BLOCK = LEX_CUSTOM2;
@@ -47,6 +40,13 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 	public static final int LEX_PERL_BLOCK_SEMI = LEX_CUSTOM4;
 	@Deprecated
 	public static final int LEX_PERL_LINE_SEMI = LEX_CUSTOM5;
+	public static final String MOJO_SPACES = "([ \t\f]*)";
+	public static final String MOJO_CLOSE_TAG = MOJO_SPACES + "(=?%>)";
+	public static final Pattern BLOCK_START_PERL_LINE = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_SPACES + "(\n).*");
+	public static final Pattern BLOCK_START_PERL_BLOCK = Pattern.compile("^" + MOJO_SPACES + "(begin)" + MOJO_CLOSE_TAG);
+	public static final Pattern BLOCK_END_PERL_LINE = Pattern.compile("^(%=?=?)" + MOJO_SPACES + "(end)");
+	public static final Pattern BLOCK_END_PERL_BLOCK = Pattern.compile("^(<%=?=?)" + MOJO_SPACES + "(end)");
+	public static final Pattern PERL_BLOCK_CLOSER = Pattern.compile("^" + MOJO_CLOSE_TAG);
 	Pattern MOJO_BEING_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
 	Pattern MOJO_BEING_IN_LINE = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*\\n");
 	Pattern MOJO_END_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BLOCK_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);

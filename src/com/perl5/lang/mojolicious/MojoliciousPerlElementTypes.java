@@ -28,9 +28,10 @@ public interface MojoliciousPerlElementTypes extends MojoliciousPerlSyntaxElemen
 {
 
 	IElementType MOJO_BLOCK_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_OPENER);
-	IElementType MOJO_BLOCK_CLOSER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_CLOSER);
 	IElementType MOJO_BLOCK_EXPR_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_OPENER);
 	IElementType MOJO_BLOCK_EXPR_ESCAPED_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER);
+
+	IElementType MOJO_BLOCK_CLOSER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_CLOSER);
 	IElementType MOJO_BLOCK_EXPR_NOSPACE_CLOSER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_NOSPACE_CLOSER);
 
 	IElementType MOJO_LINE_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_OPENER);
