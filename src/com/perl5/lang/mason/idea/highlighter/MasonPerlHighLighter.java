@@ -37,7 +37,7 @@ public class MasonPerlHighlighter extends LayeredLexerEditorHighlighter implemen
 								@NotNull final EditorColorsScheme colors)
 	{
 		super(new MasonPerlSyntaxHighlighter(project), colors);
-		registerLayer(TEMPLATE_BLOCK_HTML, new LayerDescriptor(
+		registerLayer(MASON_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
 	}
 }
