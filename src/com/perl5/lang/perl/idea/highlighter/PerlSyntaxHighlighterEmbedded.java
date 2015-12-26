@@ -40,7 +40,7 @@ public abstract class PerlSyntaxHighlighterEmbedded extends PerlSyntaxHighlighte
 		{
 			return PerlSyntaxHighlighter.EMBED_MARKER_KEYS;
 		}
-		return new TextAttributesKey[0];
+		return super.getTokenHighlights(tokenType);
 	}
 
 	public abstract TokenSet getMarkersTokenSet();

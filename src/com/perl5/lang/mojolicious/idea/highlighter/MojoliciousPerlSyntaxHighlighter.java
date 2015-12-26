@@ -18,8 +18,10 @@ package com.perl5.lang.mojolicious.idea.highlighter;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
+import com.perl5.lang.mojolicious.MojoliciousPerlTokenType;
 import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
@@ -31,21 +33,34 @@ import org.jetbrains.annotations.NotNull;
 public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements MojoliciousPerlElementTypes
 {
 	public static final TokenSet MARKER_TOKENS = TokenSet.create(
-			EMBED_MARKER_OPEN,
-			EMBED_MARKER_CLOSE,
-			EMBED_MARKER,
-			EMBED_MARKER_SEMICOLON
+			MOJO_BLOCK_OPENER,
+			MOJO_BLOCK_EXPR_OPENER,
+			MOJO_BLOCK_EXPR_ESCAPED_OPENER,
+
+			MOJO_BLOCK_CLOSER,
+			MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
+			MOJO_BLOCK_EXPR_CLOSER,
+
+			MOJO_LINE_OPENER,
+			MOJO_LINE_EXPR_OPENER,
+			MOJO_LINE_EXPR_ESCAPED_OPENER,
+
+			MOJO_BLOCK_OPENER_TAG,
+			MOJO_LINE_OPENER_TAG,
+
+			MOJO_BEGIN,
+			MOJO_END
 	);
+
+	public MojoliciousPerlSyntaxHighlighter(Project project)
+	{
+		super(project);
+	}
 
 	@Override
 	public TokenSet getMarkersTokenSet()
 	{
 		return MARKER_TOKENS;
-	}
-
-	public MojoliciousPerlSyntaxHighlighter(Project project)
-	{
-		super(project);
 	}
 
 	@NotNull

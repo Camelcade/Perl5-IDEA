@@ -44,15 +44,4 @@ public interface MojoliciousPerlElementTypes extends MojoliciousPerlSyntaxElemen
 
 	IElementType MOJO_BEGIN = new MojoliciousPerlTokenType(KEYWORD_MOJO_BEGIN);
 	IElementType MOJO_END = new MojoliciousPerlTokenType(KEYWORD_MOJO_END);
-
-	@Deprecated
-	IElementType EMBED_MARKER_OPEN = new MojoliciousPerlTokenType("EMBED_MARKER_OPEN");
-	@Deprecated
-	IElementType EMBED_MARKER_CLOSE = new MojoliciousPerlTokenType("EMBED_MARKER_CLOSE");
-	@Deprecated
-	IElementType EMBED_MARKER = new MojoliciousPerlTokenType("EMBED_MARKER_KEY");
-	@Deprecated
-	IElementType EMBED_MARKER_SEMICOLON = new MojoliciousPerlTokenType("EMBED_MARKER_SEMICOLON");
-
-
 }
