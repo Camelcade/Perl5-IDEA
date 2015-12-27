@@ -16,79 +16,76 @@
 
 package com.perl5.lang.embedded.lexer;
 
+import com.intellij.openapi.diff.impl.patch.CharsetEP;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 
 import java.io.IOException;
 
 /**
  * Created by hurricup on 19.05.2015.
  */
-public class EmbeddedPerlLexer extends PerlLexer implements EmbeddedPerlElementTypes
+public class EmbeddedPerlLexer extends PerlLexerWithCustomStates implements EmbeddedPerlElementTypes
 {
 	// lexical states
 	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
-	private int preHTMLState = YYINITIAL;
+	public static final int LEX_PERL_BLOCK = LEX_CUSTOM2;             // template block
 
 	public EmbeddedPerlLexer(Project project)
 	{
 		super(project);
 	}
 
-	@Override
-	public void reset(CharSequence buf, int start, int end, int initialState)
-	{
-		if (start == 0)
-			initialState = LEX_HTML_BLOCK;
-
-		super.reset(buf, start, end, initialState);
-	}
 
 	public IElementType perlAdvance() throws IOException
 	{
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
-		int bufferEnd = buffer.length();
-		int currentState = yystate();
+		int bufferEnd = getBufferEnd();
+		int currentState = getCustomState();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
-			return super.perlAdvance();
-		else
 		{
-			if (currentState == LEX_HTML_BLOCK)
-			{
-				setTokenStart(tokenStart);
-				if (bufferAtString(buffer, tokenStart, "<?")) // finishing html block
-				{
-					yybegin(preHTMLState);
-					setTokenEnd(tokenStart + 2);
-					return EMBED_MARKER_OPEN;
-				}
-				else
-				{
-					// fixme how about end of file?
-					int offset = tokenStart;
-					for (; offset < bufferEnd; offset++)
-						if (bufferAtString(buffer, offset, "<?"))
-							break;
+			return super.perlAdvance();
+		}
+		else if (currentState == LEX_HTML_BLOCK)
+		{
+			int offset = tokenStart;
+			boolean blockStart = false;
 
-					if (offset == bufferEnd)
-						yybegin(preHTMLState);
-					setTokenEnd(offset);
-					return EMBED_TEMPLATE_BLOCK_HTML;
+			for (; offset < bufferEnd; offset++)
+			{
+				if (offset + 1 < bufferEnd && buffer.charAt(offset) == '<' && buffer.charAt(offset + 1) == '?')
+				{
+					blockStart = true;
+					break;
 				}
 			}
-			else if (bufferAtString(buffer, tokenStart, "?>"))
+
+			if (offset > tokenStart)
 			{
-				if (tokenStart < bufferEnd - 2)
-				{
-					preHTMLState = currentState;
-					yybegin(LEX_HTML_BLOCK);
-				}
+				addPreparsedToken(tokenStart, offset, EMBED_TEMPLATE_BLOCK_HTML);
+			}
+
+			if (blockStart)
+			{
+				addPreparsedToken(offset, offset + 2, EMBED_MARKER_OPEN);
+				setCustomState(LEX_PERL_BLOCK);
+			}
+
+			assert preparsedTokensList.size() > 0;
+			return getPreParsedToken();
+		}
+		else if (currentState == LEX_PERL_BLOCK)
+		{
+			if (isCloseToken(buffer, tokenStart))
+			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 2);
+				setCustomState(LEX_HTML_BLOCK);
 				return EMBED_MARKER_CLOSE;
 			}
 		}
@@ -100,5 +97,16 @@ public class EmbeddedPerlLexer extends PerlLexer implements EmbeddedPerlElementT
 	{
 		CharSequence buffer = getBuffer();
 		return buffer.charAt(currentPosition) == '\n' || bufferAtString(buffer, currentPosition, "?>");
+	}
+
+	protected boolean isCloseToken(CharSequence buffer, int offset)
+	{
+		return offset + 1 < getBufferEnd() && buffer.charAt(offset) == '?' && buffer.charAt(offset + 1) == '>';
+	}
+
+	@Override
+	public int getInitialCustomState()
+	{
+		return LEX_HTML_BLOCK;
 	}
 }

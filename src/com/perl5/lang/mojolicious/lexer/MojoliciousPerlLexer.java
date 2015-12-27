@@ -51,9 +51,9 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 		setCustomState(LEX_HTML_BLOCK);
 	}
 
-	public static boolean isAtBegin(CharSequence buffer, int offset)
+	public boolean isAtBegin(CharSequence buffer, int offset)
 	{
-		return offset + 4 < buffer.length() &&
+		return offset + 4 < getBufferEnd() &&
 				buffer.charAt(offset) == 'b' &&
 				buffer.charAt(offset + 1) == 'e' &&
 				buffer.charAt(offset + 2) == 'g' &&
@@ -71,7 +71,7 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 	{
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
-		int bufferEnd = buffer.length();
+		int bufferEnd = getBufferEnd();
 		int currentMojoState = getCustomState();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
@@ -325,7 +325,7 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 		CharSequence buffer = getBuffer();
 		char currentChar = buffer.charAt(currentPosition);
 		return currentChar == '\n'
-				|| currentChar == '%' && currentPosition + 1 < buffer.length() && buffer.charAt(currentChar + 1) == '>'
+				|| currentChar == '%' && currentPosition + 1 < getBufferEnd() && buffer.charAt(currentChar + 1) == '>'
 				;
 	}
 }

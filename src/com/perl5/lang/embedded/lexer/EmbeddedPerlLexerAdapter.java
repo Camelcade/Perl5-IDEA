@@ -18,11 +18,12 @@ package com.perl5.lang.embedded.lexer;
 
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
 
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlLexerAdapter extends FlexAdapter
+public class EmbeddedPerlLexerAdapter extends PerlLexerWithCustomStatesAdapter
 {
 	public EmbeddedPerlLexerAdapter(Project project)
 	{

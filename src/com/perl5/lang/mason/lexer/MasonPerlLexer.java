@@ -162,7 +162,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 	{
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
-		int bufferEnd = buffer.length();
+		int bufferEnd = getBufferEnd();
 		int currentCustomState = getCustomState();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
