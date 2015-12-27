@@ -16,7 +16,10 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.PsiBuilder;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
+import com.perl5.lang.perl.parser.builder.PerlBuilder;
 
 /**
  * Created by hurricup on 27.12.2015.
@@ -24,4 +27,31 @@ import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension implements MojoliciousPerlParserExtension
 {
 
+	@Override
+	public boolean parse(PerlBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+
+		if (tokenType == MOJO_BLOCK_EXPR_OPENER || tokenType == MOJO_BLOCK_EXPR_ESCAPED_OPENER)
+		{
+			b.advanceLexer();
+
+			PsiBuilder.Marker m = b.mark();
+			PerlParser.expr(b, l, -1);
+
+			tokenType = b.getTokenType();
+			if (tokenType == MOJO_BLOCK_EXPR_CLOSER || tokenType == MOJO_BLOCK_EXPR_NOSPACE_CLOSER)
+			{
+				m.done(STATEMENT);
+				b.advanceLexer();
+				return true;
+			}
+			else
+			{
+				m.rollbackTo();
+			}
+		}
+
+		return super.parse(b, l);
+	}
 }

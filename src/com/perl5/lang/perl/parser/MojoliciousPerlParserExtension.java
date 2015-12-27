@@ -17,10 +17,11 @@
 package com.perl5.lang.perl.parser;
 
 import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
  * Created by hurricup on 27.12.2015.
  */
-public interface MojoliciousPerlParserExtension extends MojoliciousPerlElementTypes
+public interface MojoliciousPerlParserExtension extends MojoliciousPerlElementTypes, PerlElementTypes
 {
 }
