@@ -1082,7 +1082,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (PerlParser.statement_modifier(b, l))
 		{
 			IElementType tokenType = b.getTokenType();
-			if (tokenType == RIGHT_BRACE || tokenType == SEMICOLON)    // we accepts only strict modifiers;
+			if (CONSUMABLE_SEMI_TOKENS.contains(tokenType) || UNCONSUMABLE_SEMI_TOKENS.contains(tokenType))    // we accepts only strict modifiers;
 			{
 				m.drop();
 				return true;

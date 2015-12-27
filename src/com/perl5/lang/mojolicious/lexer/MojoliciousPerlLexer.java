@@ -265,7 +265,6 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				else if (extraChar == '%')    // %%
 				{
 					addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER_TAG.length(), MOJO_LINE_OPENER_TAG);
-					setCustomState(LEX_PERL_LINE);
 				}
 				else if (extraChar == '#') // %#
 				{

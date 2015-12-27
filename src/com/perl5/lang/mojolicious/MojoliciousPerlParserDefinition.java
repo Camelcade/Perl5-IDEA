@@ -45,6 +45,9 @@ public class MojoliciousPerlParserDefinition extends PerlParserDefinition implem
 					MOJO_LINE_EXPR_OPENER,
 					MOJO_LINE_EXPR_ESCAPED_OPENER,
 
+					MOJO_BLOCK_EXPR_OPENER,
+					MOJO_BLOCK_EXPR_ESCAPED_OPENER,
+
 					MOJO_BLOCK_OPENER_TAG,
 					MOJO_LINE_OPENER_TAG
 			));

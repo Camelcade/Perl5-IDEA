@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.303</version>
+    <version>1.304</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -40,7 +40,10 @@
       <li>Implemented parser extension for Switch core module, fixes #658</li>
       <li>Added spacing control for call arguments, fixes #664</li>
       <li>Implemented spaces removal around array index, hash index and dereference, fixes #662</li>
-      <li>Mojolicious parser has been re-wrote almost from scratch and now is much more proper.</li>
+      <li>Mojolicious <ul>
+        <li>Parser has been re-written almost from scratch and now is much more appropriate.</li>
+        <li>Fixed problem with statement modifiers parsing in expressions blocks.</li>
+      </ul></li>
       </ul>
       </p>
 

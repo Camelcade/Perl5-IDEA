@@ -30,45 +30,23 @@ import org.jetbrains.annotations.Nullable;
 public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension implements MojoliciousPerlParserExtension
 {
 	protected static final TokenSet BAD_CAHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
+			MOJO_BLOCK_EXPR_CLOSER,
+			MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
 			MOJO_END
 	);
 	protected static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.create(
+			MOJO_BLOCK_EXPR_CLOSER,
+			MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
 			MOJO_END
 	);
 	protected static final TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.create(
 			MOJO_END
 	);
 	protected static final TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.create(
+			MOJO_BLOCK_EXPR_CLOSER,
+			MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
 			MOJO_END
 	);
-
-	@Override
-	public boolean parseStatement(PerlBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
-
-		if (tokenType == MOJO_BLOCK_EXPR_OPENER || tokenType == MOJO_BLOCK_EXPR_ESCAPED_OPENER)
-		{
-			b.advanceLexer();
-
-			PsiBuilder.Marker m = b.mark();
-			PerlParser.expr(b, l, -1);
-
-			tokenType = b.getTokenType();
-			if (tokenType == MOJO_BLOCK_EXPR_CLOSER || tokenType == MOJO_BLOCK_EXPR_NOSPACE_CLOSER)
-			{
-				m.done(STATEMENT);
-				b.advanceLexer();
-				return true;
-			}
-			else
-			{
-				m.rollbackTo();
-			}
-		}
-
-		return super.parseStatement(b, l);
-	}
 
 	@Override
 	public boolean parseTerm(PerlBuilder b, int l)
