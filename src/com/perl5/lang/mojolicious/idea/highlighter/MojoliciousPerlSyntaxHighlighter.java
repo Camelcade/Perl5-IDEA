@@ -17,13 +17,12 @@
 package com.perl5.lang.mojolicious.idea.highlighter;
 
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
-import com.perl5.lang.mojolicious.MojoliciousPerlTokenType;
 import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
 import org.jetbrains.annotations.NotNull;
 
@@ -70,4 +69,14 @@ public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbed
 		return new MojoliciousPerlLexerAdapter(myProject);
 	}
 
+	@NotNull
+	@Override
+	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
+	{
+		if (tokenType == MOJO_BEGIN || tokenType == MOJO_END)
+		{
+			return PERL_KEYWORD_KEYS;
+		}
+		return super.getTokenHighlights(tokenType);
+	}
 }

@@ -63,7 +63,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey PERL_LABEL = createTextAttributesKey("PERL_LABEL", DefaultLanguageHighlighterColors.LABEL);
 	public static final TextAttributesKey PERL_BLOCK_NAME = createTextAttributesKey("PERL_BLOCK_NAME", DefaultLanguageHighlighterColors.PREDEFINED_SYMBOL);
 	public static final TextAttributesKey PERL_TAG = createTextAttributesKey("PERL_TAG", DefaultLanguageHighlighterColors.PREDEFINED_SYMBOL);
+
 	public static final TextAttributesKey PERL_KEYWORD = createTextAttributesKey("PERL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
+	public static final TextAttributesKey[] PERL_KEYWORD_KEYS = new TextAttributesKey[]{PERL_KEYWORD};
+
 	public static final TextAttributesKey PERL_OPERATOR = createTextAttributesKey("PERL_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
 	public static final TextAttributesKey PERL_DEREFERENCE = createTextAttributesKey("PERL_DEREFERENCE", DefaultLanguageHighlighterColors.OPERATION_SIGN);
 	public static final TextAttributesKey PERL_REGEX_QUOTE = createTextAttributesKey("PERL_REGEX_QUOTE", DefaultLanguageHighlighterColors.BRACKETS);
@@ -112,7 +115,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.OPERATOR_COMMA_ARROW, new TextAttributesKey[]{PERL_COMMA});
 		attributesMap.put(PerlElementTypes.OPERATOR_COMMA, new TextAttributesKey[]{PERL_COMMA});
 
-		attributesMap.put(PerlElementTypes.BLOCK_NAME, new TextAttributesKey[]{PERL_KEYWORD});
+		attributesMap.put(PerlElementTypes.BLOCK_NAME, PERL_KEYWORD_KEYS);
 
 		attributesMap.put(PerlElementTypes.COLON, new TextAttributesKey[]{PERL_OPERATOR});
 
@@ -130,7 +133,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.REGEX_QUOTE_OPEN_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		attributesMap.put(PerlElementTypes.REGEX_QUOTE_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		attributesMap.put(PerlElementTypes.REGEX_QUOTE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.REGEX_MODIFIER, new TextAttributesKey[]{PERL_KEYWORD});
+		attributesMap.put(PerlElementTypes.REGEX_MODIFIER, PERL_KEYWORD_KEYS);
 
 		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE, new TextAttributesKey[]{PERL_DQ_STRING});
 		attributesMap.put(PerlElementTypes.QUOTE_SINGLE, new TextAttributesKey[]{PERL_SQ_STRING});
@@ -157,7 +160,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		// key for all operators
 		attributesMap.put(PerlElementTypes.OPERATOR_MUL, new TextAttributesKey[]{PERL_OPERATOR});
 		// key for all reserved
-		attributesMap.put(PerlElementTypes.RESERVED_IF, new TextAttributesKey[]{PERL_KEYWORD});
+		attributesMap.put(PerlElementTypes.RESERVED_IF, PERL_KEYWORD_KEYS);
 
 		attributesMap.put(PerlElementTypes.TAG, new TextAttributesKey[]{PERL_TAG});
 

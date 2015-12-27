@@ -41,14 +41,32 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 	public static final int LEX_PERL_EXPR_LINE = LEX_CUSTOM5;
 
 	public static final Pattern MOJO_BEGIN_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
-	public static final Pattern MOJO_BEGIN_IN_LINE = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*\\n");
+	public static final Pattern MOJO_BEGIN_IN_LINE = Pattern.compile(KEYWORD_MOJO_BEGIN + "(\\s*)\\n");
 	public static final Pattern MOJO_END_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BLOCK_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
-	public static final Pattern MOJO_END_IN_LINE = Pattern.compile(KEYWORD_MOJO_LINE_OPENER + "\\s*" + KEYWORD_MOJO_END + "\\s*\\n");
+	public static final Pattern MOJO_END_IN_LINE = Pattern.compile(KEYWORD_MOJO_LINE_OPENER + "(\\s*)" + KEYWORD_MOJO_END + "(\\s*)\\n");
 
 	public MojoliciousPerlLexer(Project project)
 	{
 		super(project);
 		setCustomState(LEX_HTML_BLOCK);
+	}
+
+	public static boolean isAtBegin(CharSequence buffer, int offset)
+	{
+		return offset + 4 < buffer.length() &&
+				buffer.charAt(offset) == 'b' &&
+				buffer.charAt(offset + 1) == 'e' &&
+				buffer.charAt(offset + 2) == 'g' &&
+				buffer.charAt(offset + 3) == 'i' &&
+				buffer.charAt(offset + 4) == 'n';
+	}
+
+	public static boolean isAtEnd(CharSequence buffer, int offset)
+	{
+		return offset + 2 < buffer.length() &&
+				buffer.charAt(offset) == 'e' &&
+				buffer.charAt(offset + 1) == 'n' &&
+				buffer.charAt(offset + 2) == 'd';
 	}
 
 	@Override
@@ -83,7 +101,25 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 			{
 				setCustomState(LEX_HTML_BLOCK);
 			}
-			// todo begin block
+			else if (isAtBegin(buffer, tokenStart))
+			{
+				Matcher m = MOJO_BEGIN_IN_LINE.matcher(buffer);
+				m.region(tokenStart, bufferEnd);
+				if (m.lookingAt())    // % ... begin
+				{
+					int offset = tokenStart;
+
+					addPreparsedToken(offset, offset += KEYWORD_MOJO_BEGIN.length(), MOJO_BEGIN);
+
+					if (!m.group(1).isEmpty())
+					{
+						addPreparsedToken(offset, offset += m.group(1).length(), TokenType.WHITE_SPACE);
+					}
+
+					addPreparsedToken(offset, offset + 1, TokenType.NEW_LINE_INDENT);
+					setCustomState(LEX_HTML_BLOCK);
+				}
+			}
 		}
 		else if (currentMojoState == LEX_PERL_EXPR_LINE && currentChar == '\n')    // eol for expression
 		{
@@ -124,7 +160,6 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 		}
 		else if (currentMojoState == LEX_HTML_BLOCK)
 		{
-			setTokenStart(tokenStart);
 			int offset = tokenStart;
 
 			boolean blockStart = false;
@@ -152,7 +187,10 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				}
 			}
 
-			setTokenEnd(offset);
+			if (offset > tokenStart)
+			{
+				addPreparsedToken(tokenStart, offset, MOJO_TEMPLATE_BLOCK_HTML);
+			}
 
 			if (offset == bufferEnd)  // end of file, html block
 			{
@@ -241,49 +279,32 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				{
 					addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER.length(), MOJO_LINE_OPENER);
 					setCustomState(LEX_PERL_LINE);
+
+					Matcher m = MOJO_END_IN_LINE.matcher(buffer);
+					m.region(offset, bufferEnd);
+					if (m.lookingAt())    // % end
+					{
+						offset += KEYWORD_MOJO_LINE_OPENER.length();
+						if (!m.group(1).isEmpty())
+						{
+							addPreparsedToken(offset, offset += m.group(1).length(), TokenType.WHITE_SPACE);
+						}
+
+						addPreparsedToken(offset, offset += KEYWORD_MOJO_END.length(), MOJO_END);
+
+						if (!m.group(2).isEmpty())
+						{
+							addPreparsedToken(offset, offset += m.group(2).length(), TokenType.WHITE_SPACE);
+						}
+
+						addPreparsedToken(offset, offset + 1, TokenType.NEW_LINE_INDENT);
+					}
 				}
 			}
-			return MOJO_TEMPLATE_BLOCK_HTML;
+			return getPreParsedToken();
 		}
 		return super.perlAdvance();
 	}
-
-	/**
-	 * Parsing begin statement from line or block
-	 *
-	 * @param offset current offset
-	 * @param m      matcher, which is matches begin statement
-	 * @return token type
-	 */
-/*
-	public IElementType parseBeginBlock(int offset, Matcher m, boolean endBlock)
-	{
-		if (!m.group(1).isEmpty())
-		{
-			preparsedTokensList.add(new CustomToken(offset, offset + m.group(1).length(), TokenType.WHITE_SPACE));
-			offset += m.group(1).length();
-		}
-
-		preparsedTokensList.add(new CustomToken(offset, offset + m.group(2).length(), RESERVED_SUB));
-		offset += m.group(2).length();
-
-		if (!m.group(3).isEmpty())    // spaces as a left brace
-			preparsedTokensList.add(new CustomToken(offset, offset + m.group(3).length(), LEFT_BRACE));
-		else    // close token as a left brace
-		{
-			if (endBlock)
-			{
-				preparsedTokensList.add(new CustomToken(offset, offset + 1, LEFT_BRACE));
-				preparsedTokensList.add(new CustomToken(offset + 1, offset + m.group(4).length(), EMBED_MARKER_CLOSE));
-			}
-			else
-				preparsedTokensList.add(new CustomToken(offset, offset + m.group(4).length(), LEFT_BRACE));
-			setCustomState(LEX_HTML_BLOCK);
-		}
-
-		return getPreParsedToken();
-	}
-*/
 
 	@Override
 	public boolean isLineCommentEnd(int currentPosition)
