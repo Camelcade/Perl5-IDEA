@@ -236,12 +236,22 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 			boolean blockStart = false;
 			boolean clearLine = true;
 			Matcher m;
+			Matcher matcherSimpleOpener = null;
+			Matcher matcherOpener = null;
 
 			for (; offset < bufferEnd; offset++)
 			{
 				char currentChar = buffer.charAt(offset);
 
-				if (offset < bufferEnd - 1 && currentChar == '<' && buffer.charAt(offset + 1) == '%')
+				if (offset + 1 < bufferEnd &&
+						currentChar == '<' &&
+						buffer.charAt(offset + 1) == '%' &&
+						(
+								offset + 2 < bufferEnd && Character.isWhitespace(buffer.charAt(offset + 2)) ||    // <%
+										(matcherSimpleOpener = MASON_SIMPLE_OPENERS.matcher(buffer).region(offset, bufferEnd)).lookingAt() ||    // <%text>
+										(matcherOpener = MASON_OPENERS.matcher(buffer).region(offset, bufferEnd)).lookingAt()    // <%augment...
+						)
+						)
 				{
 					blockStart = true;
 					break;
@@ -287,15 +297,10 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 			}
 			else if (blockStart)
 			{
-				if (Character.isWhitespace(buffer.charAt(offset + 2)))
-				{
-					addPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), MASON_BLOCK_OPENER);
-					setCustomState(LEX_MASON_PERL_EXPR_BLOCK);
-				}
-				else if ((m = MASON_SIMPLE_OPENERS.matcher(buffer).region(offset, bufferEnd)).lookingAt())
+				if (matcherSimpleOpener != null && matcherSimpleOpener.lookingAt())
 				{
 					// check for unnamed block
-					String openingTag = m.group(0);
+					String openingTag = matcherSimpleOpener.group(0);
 					addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
 					BLOCK_CLOSE_TAG = OPEN_CLOSE_MAP.get(openingTag);
 
@@ -370,12 +375,18 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 						setCustomState(LEX_MASON_PERL_BLOCK);// fixme we should capture text here
 					}
 				}
-				else if ((m = MASON_OPENERS.matcher(buffer).region(offset, bufferEnd)).lookingAt())
+				else if (matcherOpener != null && matcherOpener.lookingAt())
 				{
 					// check for named block
-					String openingTag = m.group(0);
+					String openingTag = matcherOpener.group(0);
 					addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
 					setCustomState(LEX_MASON_OPENING_TAG);
+				}
+				else
+				{
+					assert Character.isWhitespace(buffer.charAt(offset + 2));
+					addPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), MASON_BLOCK_OPENER);
+					setCustomState(LEX_MASON_PERL_EXPR_BLOCK);
 				}
 			}
 

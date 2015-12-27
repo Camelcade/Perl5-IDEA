@@ -17,20 +17,86 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.Map;
+import gnu.trove.THashMap;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 21.12.2015.
  */
 public class MasonPerlParserExtensionImpl extends PerlParserExtension implements MasonPerlParserExtension
 {
+	protected static final TokenSet STATEMENT_RECOVERY_TOKENSET = TokenSet.create(
+			MASON_CLASS_CLOSER,
+			MASON_INIT_CLOSER,
+			MASON_PERL_CLOSER,
+
+			MASON_AFTER_CLOSER,
+			MASON_BEFORE_CLOSER,
+			MASON_AUGMENT_CLOSER,
+			MASON_AROUND_CLOSER,
+
+			MASON_METHOD_CLOSER,
+			MASON_OVERRIDE_CLOSER,
+			MASON_FILTER_CLOSER
+	);
+
+	protected static final TokenSet BLOCK_RECOVERY_TOKENSET = TokenSet.create(
+			MASON_CLASS_CLOSER,
+			MASON_INIT_CLOSER,
+			MASON_PERL_CLOSER,
+
+			MASON_AFTER_CLOSER,
+			MASON_BEFORE_CLOSER,
+			MASON_AUGMENT_CLOSER,
+			MASON_AROUND_CLOSER,
+
+			MASON_METHOD_CLOSER,
+			MASON_OVERRIDE_CLOSER,
+			MASON_FILTER_CLOSER
+	);
+
+	protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
+			MASON_CLASS_CLOSER,
+			MASON_INIT_CLOSER,
+			MASON_PERL_CLOSER,
+
+			MASON_AFTER_CLOSER,
+			MASON_BEFORE_CLOSER,
+			MASON_AUGMENT_CLOSER,
+			MASON_AROUND_CLOSER,
+
+			MASON_METHOD_CLOSER,
+			MASON_OVERRIDE_CLOSER,
+			MASON_FILTER_CLOSER
+	);
+
+	protected final static TokenSet SIMPLE_MASON_NAMED_BLOCKS;
+
+	protected final static THashMap<IElementType, IElementType> RESERVED_OPENER_TO_CLOSER_MAP = new THashMap<IElementType, IElementType>();
+	protected final static THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<IElementType, IElementType>();
+
+	static
+	{
+		RESERVED_TO_STATEMENT_MAP.put(MASON_AROUND_OPENER, MOOSE_STATEMENT_AROUND);
+		RESERVED_TO_STATEMENT_MAP.put(MASON_AUGMENT_OPENER, MOOSE_STATEMENT_AUGMENT);
+		RESERVED_TO_STATEMENT_MAP.put(MASON_AFTER_OPENER, MOOSE_STATEMENT_AFTER);
+		RESERVED_TO_STATEMENT_MAP.put(MASON_BEFORE_OPENER, MOOSE_STATEMENT_BEFORE);
+
+		RESERVED_OPENER_TO_CLOSER_MAP.put(MASON_AROUND_OPENER, MASON_AROUND_CLOSER);
+		RESERVED_OPENER_TO_CLOSER_MAP.put(MASON_AUGMENT_OPENER, MASON_AUGMENT_CLOSER);
+		RESERVED_OPENER_TO_CLOSER_MAP.put(MASON_AFTER_OPENER, MASON_AFTER_CLOSER);
+		RESERVED_OPENER_TO_CLOSER_MAP.put(MASON_BEFORE_OPENER, MASON_BEFORE_CLOSER);
+
+		SIMPLE_MASON_NAMED_BLOCKS = TokenSet.create(
+				RESERVED_TO_STATEMENT_MAP.keySet().toArray(new IElementType[RESERVED_TO_STATEMENT_MAP.keySet().size()])
+		);
+	}
+
 	@Override
 	public boolean parseStatement(PerlBuilder b, int l)
 	{
@@ -115,6 +181,30 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 			PerlParserUtil.consumeToken(b, STRING_CONTENT);
 			r = PerlParserUtil.consumeToken(b, MASON_TEXT_CLOSER);
 		}
+		else if (SIMPLE_MASON_NAMED_BLOCKS.contains(tokenType)) // simple named blocks
+		{
+			PsiBuilder.Marker statementMarker = b.mark();
+			b.advanceLexer();
+			PsiBuilder.Marker methodMarker = b.mark();
+
+			if (PerlParserUtil.convertIdentifier(b, l, SUB))
+			{
+				methodMarker.done(METHOD);
+
+				if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER))
+				{
+					PsiBuilder.Marker blockMarker = b.mark();
+					PerlParser.block_content(b, l);
+					blockMarker.done(BLOCK);
+					blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+
+					if (r = PerlParserUtil.consumeToken(b, RESERVED_OPENER_TO_CLOSER_MAP.get(tokenType)))
+					{
+						statementMarker.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
+					}
+				}
+			}
+		}
 
 		if (r)
 		{
@@ -126,5 +216,27 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 		}
 
 		return r;
+	}
+
+
+	@Nullable
+	@Override
+	public TokenSet getStatementRecoveryTokens()
+	{
+		return STATEMENT_RECOVERY_TOKENSET;
+	}
+
+	@Nullable
+	@Override
+	public TokenSet getBlockRecoveryTokens()
+	{
+		return BLOCK_RECOVERY_TOKENSET;
+	}
+
+	@Nullable
+	@Override
+	public TokenSet getBadCharacterForbiddenTokens()
+	{
+		return BAD_CHARACTER_FORBIDDEN_TOKENS;
 	}
 }

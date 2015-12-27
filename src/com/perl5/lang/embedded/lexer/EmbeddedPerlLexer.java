@@ -39,7 +39,6 @@ public class EmbeddedPerlLexer extends PerlLexerWithCustomStates implements Embe
 		super(project);
 	}
 
-
 	public IElementType perlAdvance() throws IOException
 	{
 		CharSequence buffer = getBuffer();

@@ -22,6 +22,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.tokenindex.Token;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
@@ -39,7 +40,6 @@ import java.util.Map;
  */
 public class MoosePerlParserExtensionImpl extends PerlParserExtension implements MoosePerlParserExtension, PerlElementTypes
 {
-
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<IElementType, IElementType>();
 	@SuppressWarnings("unchecked")

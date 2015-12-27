@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -53,4 +55,5 @@ public class MethodSignaturesSimplePerlParserExtensionImpl extends PerlParserExt
 		// in regular case, these methods should
 		return PerlParser.method_definition(b, l) || PerlParser.func_definition(b, l);
 	}
+
 }
