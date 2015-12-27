@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
@@ -35,6 +36,9 @@ public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension impl
 			MOJO_END
 	);
 	protected static final TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.create(
+			MOJO_END
+	);
+	protected static final TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.create(
 			MOJO_END
 	);
 
@@ -82,7 +86,7 @@ public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension impl
 			if (b.getTokenType() == MOJO_END)
 			{
 				blockMarker.done(BLOCK);
-				b.advanceLexer();
+				blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 				subMarker.done(ANON_SUB);
 				return true;
 			}
@@ -115,5 +119,12 @@ public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension impl
 	public TokenSet getBlockRecoveryTokens()
 	{
 		return BLOCK_RECOVERY_TOKENS;
+	}
+
+	@Nullable
+	@Override
+	public TokenSet getConsumableSemicolonTokens()
+	{
+		return CONSUMABLE_SEMI_TOKENS;
 	}
 }

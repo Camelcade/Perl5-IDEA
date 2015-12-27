@@ -188,6 +188,22 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
+
+	/**
+	 * Tokens which consumed and counted as semicolon
+	 */
+	public static TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.create(
+			SEMICOLON
+	);
+
+	/**
+	 * Tokens which makes semicolon optional, like block close brace
+	 */
+	public static TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.create(
+			RIGHT_BRACE,
+			REGEX_QUOTE_CLOSE
+	);
+
 	// this tokens are not being marked as bad characters
 	public static TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
 			RESERVED_PACKAGE,
@@ -449,12 +465,19 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean statementSemi(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
-		if (tokenType == SEMICOLON)
-			return consumeToken(b, SEMICOLON);
-		else if (tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE)
+		if (CONSUMABLE_SEMI_TOKENS.contains(tokenType))
+		{
+			b.advanceLexer();
 			return true;
+		}
+		else if (UNCONSUMABLE_SEMI_TOKENS.contains(tokenType))
+		{
+			return true;
+		}
 		else if (b.eof()) // eof
+		{
 			return true;
+		}
 
 		b.mark().error("Semicolon expected");
 

@@ -40,6 +40,7 @@
       <li>Implemented parser extension for Switch core module, fixes #658</li>
       <li>Added spacing control for call arguments, fixes #664</li>
       <li>Implemented spaces removal around array index, hash index and dereference, fixes #662</li>
+      <li>Mojolicious parser has been re-wrote almost from scratch and now is much more proper.</li>
       </ul>
       </p>
 

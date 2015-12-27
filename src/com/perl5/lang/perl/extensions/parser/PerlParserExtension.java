@@ -123,6 +123,23 @@ public abstract class PerlParserExtension
 	@Nullable
 	public TokenSet getBlockRecoveryTokens(){return null;}
 
+	/**
+	 * May return a set of tokens, which can be consumed as a semicolon
+	 *
+	 * @return tokenSet or null
+	 */
+	@Nullable
+	public TokenSet getConsumableSemicolonTokens()
+	{
+		return null;
+	}
 
+	/**
+	 * May return a set of tokens, which can make semicolon optional, like right brace of block
+	 *
+	 * @return tokenSet or null
+	 */
+	@Nullable
+	public TokenSet getUnConsumableSemicolonTokens(){return null;}
 
 }

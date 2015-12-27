@@ -83,19 +83,30 @@ public class PerlParserExtensions implements ApplicationComponent
 			}
 
 			// extend parser's tokensets
-			if( extension.getBadCharacterForbiddenTokens() != null )
+			TokenSet tokenSet;
+			if ((tokenSet = extension.getBadCharacterForbiddenTokens()) != null)
 			{
-				PerlParserUtil.BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(PerlParserUtil.BAD_CHARACTER_FORBIDDEN_TOKENS, extension.getBadCharacterForbiddenTokens());
+				PerlParserUtil.BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(PerlParserUtil.BAD_CHARACTER_FORBIDDEN_TOKENS, tokenSet);
 			}
 
-			if( extension.getStatementRecoveryTokens() != null )
+			if ((tokenSet = extension.getStatementRecoveryTokens()) != null)
 			{
-				PerlParserUtil.UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS, extension.getStatementRecoveryTokens());
+				PerlParserUtil.UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS, tokenSet);
 			}
 
-			if( extension.getBlockRecoveryTokens() != null )
+			if ((tokenSet = extension.getBlockRecoveryTokens()) != null)
 			{
-				PerlParserUtil.UNCONDITIONAL_BLOCK_RECOVERY_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONDITIONAL_BLOCK_RECOVERY_TOKENS, extension.getBlockRecoveryTokens());
+				PerlParserUtil.UNCONDITIONAL_BLOCK_RECOVERY_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONDITIONAL_BLOCK_RECOVERY_TOKENS, tokenSet);
+			}
+
+			if ((tokenSet = extension.getConsumableSemicolonTokens()) != null)
+			{
+				PerlParserUtil.CONSUMABLE_SEMI_TOKENS = TokenSet.orSet(PerlParserUtil.CONSUMABLE_SEMI_TOKENS, tokenSet);
+			}
+
+			if ((tokenSet = extension.getUnConsumableSemicolonTokens()) != null)
+			{
+				PerlParserUtil.UNCONSUMABLE_SEMI_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONSUMABLE_SEMI_TOKENS, tokenSet);
 			}
 
 
