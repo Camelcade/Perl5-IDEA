@@ -31,13 +31,6 @@ import java.util.Map;
  */
 public class MasonPerlParserExtensionImpl extends PerlParserExtension implements MasonPerlParserExtension
 {
-	@NotNull
-	@Override
-	public Map<String, IElementType> getReservedTokens()
-	{
-		return Collections.emptyMap();
-	}
-
 	@Override
 	public boolean parse(PerlBuilder b, int l)
 	{

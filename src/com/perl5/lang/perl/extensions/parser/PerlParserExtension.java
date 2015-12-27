@@ -26,6 +26,7 @@ import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,12 @@ public abstract class PerlParserExtension
 	 * @return set of custom keywords
 	 */
 	@NotNull
-	public abstract Map<String, IElementType> getReservedTokens();
+	public Map<String, IElementType> getReservedTokens()
+	{
+		return Collections.emptyMap();
+	}
+
+	;
 
 	/**
 	 * Parse method.
@@ -52,7 +58,12 @@ public abstract class PerlParserExtension
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public abstract boolean parse(PerlBuilder b, int l);
+	public boolean parse(PerlBuilder b, int l)
+	{
+		return false;
+	}
+
+	;
 
 	/**
 	 * Creating PsiElement by node type. If not handled by current extension, returns null
