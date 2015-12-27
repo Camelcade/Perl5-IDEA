@@ -48,7 +48,7 @@ public class MethodSignaturesSimplePerlParserExtensionImpl extends PerlParserExt
 	}
 
 	@Override
-	public boolean parse(PerlBuilder b, int l)
+	public boolean parseStatement(PerlBuilder b, int l)
 	{
 		// in regular case, these methods should
 		return PerlParser.method_definition(b, l) || PerlParser.func_definition(b, l);

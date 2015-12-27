@@ -18,17 +18,28 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 27.12.2015.
  */
 public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension implements MojoliciousPerlParserExtension
 {
+	protected static final TokenSet BAD_CAHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
+			MOJO_END
+	);
+	protected static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.create(
+			MOJO_END
+	);
+	protected static final TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.create(
+			MOJO_END
+	);
 
 	@Override
-	public boolean parse(PerlBuilder b, int l)
+	public boolean parseStatement(PerlBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
 
@@ -52,6 +63,57 @@ public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension impl
 			}
 		}
 
-		return super.parse(b, l);
+		return super.parseStatement(b, l);
+	}
+
+	@Override
+	public boolean parseTerm(PerlBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+
+		if (tokenType == MOJO_BEGIN)
+		{
+			PsiBuilder.Marker subMarker = b.mark();
+			b.advanceLexer();
+			PsiBuilder.Marker blockMarker = b.mark();
+
+			PerlParser.block_content(b, l);
+
+			if (b.getTokenType() == MOJO_END)
+			{
+				blockMarker.done(BLOCK);
+				b.advanceLexer();
+				subMarker.done(ANON_SUB);
+				return true;
+			}
+			else
+			{
+				blockMarker.drop();
+				subMarker.rollbackTo();
+			}
+		}
+
+		return super.parseTerm(b, l);
+	}
+
+	@Nullable
+	@Override
+	public TokenSet getBadCharacterForbiddenTokens()
+	{
+		return BAD_CAHARACTER_FORBIDDEN_TOKENS;
+	}
+
+	@Nullable
+	@Override
+	public TokenSet getStatementRecoveryTokens()
+	{
+		return STATEMENT_RECOVERY_TOKENS;
+	}
+
+	@Nullable
+	@Override
+	public TokenSet getBlockRecoveryTokens()
+	{
+		return BLOCK_RECOVERY_TOKENS;
 	}
 }

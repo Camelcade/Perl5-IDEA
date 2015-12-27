@@ -51,19 +51,31 @@ public abstract class PerlParserExtension
 	;
 
 	/**
-	 * Parse method.
+	 * Parse method. Attempt to parse beginning of statement
 	 * You may re-use PerlParser static methods to implement native perl expressions
 	 *
 	 * @param b PerlBuilder
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public boolean parse(PerlBuilder b, int l)
+	public boolean parseStatement(PerlBuilder b, int l)
 	{
 		return false;
 	}
 
-	;
+	/**
+	 * Parse method. Attempt to parse term
+	 * You may re-use PerlParser static methods to implement native perl expressions
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public boolean parseTerm(PerlBuilder b, int l)
+	{
+		return false;
+	}
+
 
 	/**
 	 * Creating PsiElement by node type. If not handled by current extension, returns null
@@ -89,5 +101,28 @@ public abstract class PerlParserExtension
 	{
 		return null;
 	}
+
+	/**
+	 * May return a set of tokens, which not be marked as bad characters on parser recovery
+	 * @return tokenSet or null
+	 */
+	@Nullable
+	public TokenSet getBadCharacterForbiddenTokens(){return null;}
+
+	/**
+	 * May return a set of tokens, which stops statement recovery
+	 * @return tokenSet or null
+	 */
+	@Nullable
+	public TokenSet getStatementRecoveryTokens(){return null;}
+
+	/**
+	 * May return a set of tokens, which stops block recovery
+	 * @return tokenSet or null
+	 */
+	@Nullable
+	public TokenSet getBlockRecoveryTokens(){return null;}
+
+
 
 }

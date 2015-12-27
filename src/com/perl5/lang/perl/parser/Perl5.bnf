@@ -423,13 +423,13 @@ private recover_namespace ::= !( [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE | RI
 
 block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1} // !OPERATOR_DEREFERENCE  pin disabled for dereference of anon hash; probably this slows us down
 private block_content ::= file_item * {recoverWhile=recover_block}
-private recover_block ::= !(RIGHT_BRACE)
+private recover_block ::= <<recoverBlock>>
 
 private namespace_item ::=
     [label_declaration] (
         semicolon_any +
         | nyi_statement
-        | <<parseParserExtensions>>
+        | <<parseParserExtensionStatement>>
         | compound_statement
         | format_definition
         | statement
@@ -662,7 +662,8 @@ named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_e
 named_list_expr ::= <<parseListExpression>>
 
 term_expr ::=
-    variable_declaration
+	<<parseParserExtensionTerm>>
+    | variable_declaration
     | <<parseListOrListElement>> // fixme this must be in array with qw
     | scalar_constant
     | do_expr

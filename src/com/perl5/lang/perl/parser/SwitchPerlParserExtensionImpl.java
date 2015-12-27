@@ -197,7 +197,7 @@ public class SwitchPerlParserExtensionImpl extends PerlParserExtension implement
 	}
 
 	@Override
-	public boolean parse(PerlBuilder b, int l)
+	public boolean parseStatement(PerlBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
 

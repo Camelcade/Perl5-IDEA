@@ -32,7 +32,7 @@ import java.util.Map;
 public class MasonPerlParserExtensionImpl extends PerlParserExtension implements MasonPerlParserExtension
 {
 	@Override
-	public boolean parse(PerlBuilder b, int l)
+	public boolean parseStatement(PerlBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
 
@@ -44,7 +44,7 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 			b.advanceLexer();
 			if (PerlParser.expr(b, l, -1))
 			{
-				// parse filter
+				// parseStatement filter
 				if (PerlParserUtil.consumeToken(b, MASON_EXPR_FILTER_PIPE))
 				{
 					while (b.getTokenType() == IDENTIFIER)

@@ -82,6 +82,23 @@ public class PerlParserExtensions implements ApplicationComponent
 				}
 			}
 
+			// extend parser's tokensets
+			if( extension.getBadCharacterForbiddenTokens() != null )
+			{
+				PerlParserUtil.BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(PerlParserUtil.BAD_CHARACTER_FORBIDDEN_TOKENS, extension.getBadCharacterForbiddenTokens());
+			}
+
+			if( extension.getStatementRecoveryTokens() != null )
+			{
+				PerlParserUtil.UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS, extension.getStatementRecoveryTokens());
+			}
+
+			if( extension.getBlockRecoveryTokens() != null )
+			{
+				PerlParserUtil.UNCONDITIONAL_BLOCK_RECOVERY_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONDITIONAL_BLOCK_RECOVERY_TOKENS, extension.getBlockRecoveryTokens());
+			}
+
+
 		}
 		PerlLexer.initReservedTokensSet();
 	}

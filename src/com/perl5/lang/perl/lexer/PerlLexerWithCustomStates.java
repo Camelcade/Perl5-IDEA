@@ -41,6 +41,4 @@ public abstract class PerlLexerWithCustomStates extends PerlLexer
 	}
 
 	public abstract int getInitialCustomState();
-
-	public abstract int getPerlCustomState();
 }

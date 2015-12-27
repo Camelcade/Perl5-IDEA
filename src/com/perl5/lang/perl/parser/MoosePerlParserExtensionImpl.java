@@ -202,7 +202,7 @@ public class MoosePerlParserExtensionImpl extends PerlParserExtension implements
 	}
 
 	@Override
-	public boolean parse(PerlBuilder b, int l)
+	public boolean parseStatement(PerlBuilder b, int l)
 	{
 		return parseOverride(b, l) ||
 				parseHas(b, l) ||

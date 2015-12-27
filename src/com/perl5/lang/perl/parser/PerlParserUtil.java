@@ -188,6 +188,14 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
+	// this tokens are not being marked as bad characters
+	public static TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
+			RESERVED_PACKAGE,
+			RIGHT_BRACE,
+			REGEX_QUOTE_CLOSE,
+			SEMICOLON
+	);
+	// stop tokens for statement recovery
 	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
 
@@ -211,6 +219,10 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			RESERVED_NO,
 
 			RESERVED_DEFAULT    // has no opening paren
+	);
+	// stop tokens for block recovery
+	public static TokenSet UNCONDITIONAL_BLOCK_RECOVERY_TOKENS = TokenSet.create(
+			RIGHT_BRACE
 	);
 	public static TokenSet STATEMENT_RECOVERY_SUB_SUFFIX = TokenSet.create(
 			IDENTIFIER,
@@ -943,8 +955,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 //		System.err.println("Checking " + b.getTokenText() + currentTokenType);
 
 		if (currentTokenType == null                                                                                    // got end of file
-				|| ((PerlBuilder) b).getBracesLevel() == 0 && (                                                                // we are not in braced statement
-				UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType)                              // got semi, package, end of regex, use, compound or suffix
+				|| ((PerlBuilder) b).getBracesLevel() == 0 && (                                                         // we are not in braced statement
+						UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType)                              // got semi, package, end of regex, use, compound or suffix
 						|| currentTokenType == RESERVED_SUB && STATEMENT_RECOVERY_SUB_SUFFIX.contains(b.lookAhead(1))   // got sub definition
 		)
 				)
@@ -959,6 +971,18 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			((PerlBuilder) b).closeBrace();
 
 		return true;
+	}
+
+	/**
+	 * Block recovery function. Should not consume token, only check;
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean recoverBlock(PsiBuilder b, int l)
+	{
+		return !UNCONDITIONAL_BLOCK_RECOVERY_TOKENS.contains(b.getTokenType());
 	}
 
 	/**
@@ -1652,7 +1676,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		IElementType tokenType = b.getTokenType();
 
-		if (tokenType == null || tokenType == RESERVED_PACKAGE || tokenType == RIGHT_BRACE || tokenType == REGEX_QUOTE_CLOSE || tokenType == SEMICOLON)
+		if (tokenType == null || BAD_CHARACTER_FORBIDDEN_TOKENS.contains(tokenType))
 		{
 			return false;
 		}
@@ -1892,25 +1916,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Processing parserExtension extensions points
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseParserExtensions(PsiBuilder b, int l)
-	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parse((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * This is a hack to cancel empty signature or ($) signature
 	 *
 	 * @param b PerlBuilder
@@ -2023,4 +2028,41 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 	}
 
+	/**
+	 * attempting to parse statement using parserExtensions
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseParserExtensionStatement(PsiBuilder b, int l)
+	{
+		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
+		{
+			if (parserExtension.parseStatement((PerlBuilder) b, l))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * attempting to parse term using parserExtensions
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public static boolean parseParserExtensionTerm(PsiBuilder b, int l)
+	{
+		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
+		{
+			if (parserExtension.parseTerm((PerlBuilder) b, l))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

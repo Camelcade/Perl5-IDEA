@@ -45,10 +45,7 @@ public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbed
 			MOJO_LINE_EXPR_ESCAPED_OPENER,
 
 			MOJO_BLOCK_OPENER_TAG,
-			MOJO_LINE_OPENER_TAG,
-
-			MOJO_BEGIN,
-			MOJO_END
+			MOJO_LINE_OPENER_TAG
 	);
 
 	public MojoliciousPerlSyntaxHighlighter(Project project)

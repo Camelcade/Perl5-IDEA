@@ -157,12 +157,6 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 		return LEX_MASON_HTML_BLOCK;
 	}
 
-	@Override
-	public int getPerlCustomState()
-	{
-		return LEX_MASON_PERL_BLOCK;
-	}
-
 
 	public IElementType perlAdvance() throws IOException
 	{

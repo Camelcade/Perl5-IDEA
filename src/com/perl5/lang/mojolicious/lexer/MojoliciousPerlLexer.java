@@ -40,8 +40,8 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 	public static final int LEX_PERL_EXPR_BLOCK = LEX_CUSTOM4;
 	public static final int LEX_PERL_EXPR_LINE = LEX_CUSTOM5;
 
-	public static final Pattern MOJO_BEGIN_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BEGIN + "(\\s*)" + KEYWORD_MOJO_BLOCK_CLOSER);
-	public static final Pattern MOJO_BEGIN_IN_LINE = Pattern.compile(KEYWORD_MOJO_BEGIN + "(\\s*)\\n");
+	public static final Pattern MOJO_BEGIN_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*" + KEYWORD_MOJO_BLOCK_CLOSER);
+	public static final Pattern MOJO_BEGIN_IN_LINE = Pattern.compile(KEYWORD_MOJO_BEGIN + "\\s*\\n");
 	public static final Pattern MOJO_END_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BLOCK_OPENER + "(\\s*)" + KEYWORD_MOJO_END + "(\\s*)" + KEYWORD_MOJO_BLOCK_CLOSER);
 	public static final Pattern MOJO_END_IN_LINE = Pattern.compile(KEYWORD_MOJO_LINE_OPENER + "(\\s*)" + KEYWORD_MOJO_END + "(\\s*)\\n");
 
@@ -61,24 +61,10 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				buffer.charAt(offset + 4) == 'n';
 	}
 
-	public static boolean isAtEnd(CharSequence buffer, int offset)
-	{
-		return offset + 2 < buffer.length() &&
-				buffer.charAt(offset) == 'e' &&
-				buffer.charAt(offset + 1) == 'n' &&
-				buffer.charAt(offset + 2) == 'd';
-	}
-
 	@Override
 	public int getInitialCustomState()
 	{
 		return LEX_HTML_BLOCK;
-	}
-
-	@Override
-	public int getPerlCustomState()
-	{
-		return LEX_PERL_BLOCK;
 	}
 
 	public IElementType perlAdvance() throws IOException
@@ -107,17 +93,7 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				m.region(tokenStart, bufferEnd);
 				if (m.lookingAt())    // % ... begin
 				{
-					int offset = tokenStart;
-
-					addPreparsedToken(offset, offset += KEYWORD_MOJO_BEGIN.length(), MOJO_BEGIN);
-
-					if (!m.group(1).isEmpty())
-					{
-						addPreparsedToken(offset, offset += m.group(1).length(), TokenType.WHITE_SPACE);
-					}
-
-					addPreparsedToken(offset, offset + 1, TokenType.NEW_LINE_INDENT);
-					setCustomState(LEX_HTML_BLOCK);
+					return getBeginToken(tokenStart);
 				}
 			}
 		}
@@ -143,17 +119,7 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 				m.region(tokenStart, bufferEnd);
 				if (m.lookingAt())    //  ... begin %>
 				{
-					int offset = tokenStart;
-
-					addPreparsedToken(offset, offset += KEYWORD_MOJO_BEGIN.length(), MOJO_BEGIN);
-
-					if (!m.group(1).isEmpty())
-					{
-						addPreparsedToken(offset, offset += m.group(1).length(), TokenType.WHITE_SPACE);
-					}
-
-					addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_CLOSER.length(), MOJO_BLOCK_CLOSER);
-					setCustomState(LEX_HTML_BLOCK);
+					return getBeginToken(tokenStart);
 				}
 			}
 		}
@@ -345,6 +311,13 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 			return getPreParsedToken();
 		}
 		return super.perlAdvance();
+	}
+
+	protected IElementType getBeginToken(int offset)
+	{
+		setTokenStart(offset);
+		setTokenEnd(offset + KEYWORD_MOJO_BEGIN.length());
+		return MOJO_BEGIN;
 	}
 
 	@Override

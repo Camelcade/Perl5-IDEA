@@ -51,16 +51,18 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 		myText = buffer;
 		myEnd = endOffset;
 
-		if (startOffset == 0 && initialState == PerlLexerGenerated.YYINITIAL)
+		if (startOffset == 0 && initialState == PerlLexerGenerated.YYINITIAL)    // beginning of doc
+		{
 			myFlex.setCustomState(myFlex.getInitialCustomState());
-		else if (initialState > 255)
+		}
+		else if (initialState > 255)    // properly packed state
 		{
 			myFlex.setCustomState((int) (initialState / 255));
 			initialState = initialState % 255;
 		}
 		else
 		{
-			myFlex.setCustomState(myFlex.getPerlCustomState());
+			throw new RuntimeException("Shouldn't be here, inproperly packed state");
 		}
 
 		myFlex.reset(myText, startOffset, endOffset, initialState);
@@ -115,7 +117,7 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 		return myEnd;
 	}
 
-	protected void getCompiledState()
+	protected void compileState()
 	{
 		int customState = myFlex.getCustomState();
 		int lexerState = myFlex.yystate();
@@ -123,10 +125,7 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 		assert customState < 255;
 		assert lexerState < 255;
 
-		if (customState == myFlex.getPerlCustomState())
-			myState = lexerState;
-		else
-			myState = customState * 255 + lexerState;
+		myState = customState * 255 + lexerState;
 	}
 
 	protected void locateToken()
@@ -134,7 +133,7 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 		if (myTokenType != null) return;
 		try
 		{
-			getCompiledState();
+			compileState();
 			myTokenType = myFlex.advance();
 		} catch (IOException e)
 		{ /*Can't happen*/ } catch (Error e)
