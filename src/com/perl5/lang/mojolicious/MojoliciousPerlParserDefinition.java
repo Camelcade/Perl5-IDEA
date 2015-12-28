@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mojolicious;
 
+import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -26,6 +27,7 @@ import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
+import com.perl5.lang.perl.parser.MojoliciousPerlParser;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -77,4 +79,10 @@ public class MojoliciousPerlParserDefinition extends PerlParserDefinition implem
 		return new MojoliciousPerlFileImpl(viewProvider);
 	}
 
+	@NotNull
+	@Override
+	public PsiParser createParser(Project project)
+	{
+		return new MojoliciousPerlParser();
+	}
 }

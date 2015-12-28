@@ -20,60 +20,64 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.perl5.lang.mason.MasonPerlElementTypes;
 import gnu.trove.THashMap;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 21.12.2015.
+ * Created by hurricup on 28.12.2015.
  */
-public class MasonPerlParserExtensionImpl extends PerlParserExtension implements MasonPerlParserExtension
+public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlParser
 {
-	protected static final TokenSet STATEMENT_RECOVERY_TOKENSET = TokenSet.create(
-			MASON_CLASS_CLOSER,
-			MASON_INIT_CLOSER,
-			MASON_PERL_CLOSER,
+	protected static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(
+			PerlParserImpl.STATEMENT_RECOVERY_TOKENS,
+			TokenSet.create(
+					MASON_CLASS_CLOSER,
+					MASON_INIT_CLOSER,
+					MASON_PERL_CLOSER,
 
-			MASON_AFTER_CLOSER,
-			MASON_BEFORE_CLOSER,
-			MASON_AUGMENT_CLOSER,
-			MASON_AROUND_CLOSER,
+					MASON_AFTER_CLOSER,
+					MASON_BEFORE_CLOSER,
+					MASON_AUGMENT_CLOSER,
+					MASON_AROUND_CLOSER,
 
-			MASON_METHOD_CLOSER,
-			MASON_OVERRIDE_CLOSER,
-			MASON_FILTER_CLOSER
-	);
+					MASON_METHOD_CLOSER,
+					MASON_OVERRIDE_CLOSER,
+					MASON_FILTER_CLOSER
+			));
 
-	protected static final TokenSet BLOCK_RECOVERY_TOKENSET = TokenSet.create(
-			MASON_CLASS_CLOSER,
-			MASON_INIT_CLOSER,
-			MASON_PERL_CLOSER,
+	protected static final TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.orSet(
+			PerlParserImpl.BLOCK_RECOVERY_TOKENS, TokenSet.create(
+					MASON_CLASS_CLOSER,
+					MASON_INIT_CLOSER,
+					MASON_PERL_CLOSER,
 
-			MASON_AFTER_CLOSER,
-			MASON_BEFORE_CLOSER,
-			MASON_AUGMENT_CLOSER,
-			MASON_AROUND_CLOSER,
+					MASON_AFTER_CLOSER,
+					MASON_BEFORE_CLOSER,
+					MASON_AUGMENT_CLOSER,
+					MASON_AROUND_CLOSER,
 
-			MASON_METHOD_CLOSER,
-			MASON_OVERRIDE_CLOSER,
-			MASON_FILTER_CLOSER
-	);
+					MASON_METHOD_CLOSER,
+					MASON_OVERRIDE_CLOSER,
+					MASON_FILTER_CLOSER
+			));
 
-	protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
-			MASON_CLASS_CLOSER,
-			MASON_INIT_CLOSER,
-			MASON_PERL_CLOSER,
+	protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
+			PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(
+					MASON_CLASS_CLOSER,
+					MASON_INIT_CLOSER,
+					MASON_PERL_CLOSER,
 
-			MASON_AFTER_CLOSER,
-			MASON_BEFORE_CLOSER,
-			MASON_AUGMENT_CLOSER,
-			MASON_AROUND_CLOSER,
+					MASON_AFTER_CLOSER,
+					MASON_BEFORE_CLOSER,
+					MASON_AUGMENT_CLOSER,
+					MASON_AROUND_CLOSER,
 
-			MASON_METHOD_CLOSER,
-			MASON_OVERRIDE_CLOSER,
-			MASON_FILTER_CLOSER
-	);
+					MASON_METHOD_CLOSER,
+					MASON_OVERRIDE_CLOSER,
+					MASON_FILTER_CLOSER
+			));
+
 
 	protected final static TokenSet SIMPLE_MASON_NAMED_BLOCKS;
 
@@ -98,7 +102,7 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 	}
 
 	@Override
-	public boolean parseStatement(PerlBuilder b, int l)
+	public boolean parseStatement(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
 
@@ -108,7 +112,7 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 		if (tokenType == MASON_BLOCK_OPENER)
 		{
 			b.advanceLexer();
-			if (PerlParser.expr(b, l, -1))
+			if (PerlParserImpl.expr(b, l, -1))
 			{
 				// parseStatement filter
 				if (PerlParserUtil.consumeToken(b, MASON_EXPR_FILTER_PIPE))
@@ -135,7 +139,7 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 
 			while (!b.eof() && b.getTokenType() != MASON_CLASS_CLOSER)
 			{
-				PerlParser.file_item(b, l);
+				PerlParserImpl.file_item(b, l);
 			}
 			r = PerlParserUtil.consumeToken(b, MASON_CLASS_CLOSER);
 		}
@@ -145,7 +149,7 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 
 			while (!b.eof() && b.getTokenType() != MASON_INIT_CLOSER)
 			{
-				PerlParser.file_item(b, l);
+				PerlParserImpl.file_item(b, l);
 			}
 			r = PerlParserUtil.consumeToken(b, MASON_INIT_CLOSER);
 		}
@@ -155,7 +159,7 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 
 			while (!b.eof() && b.getTokenType() != MASON_PERL_CLOSER)
 			{
-				PerlParser.file_item(b, l);
+				PerlParserImpl.file_item(b, l);
 			}
 			r = PerlParserUtil.consumeToken(b, MASON_PERL_CLOSER);
 		}
@@ -165,7 +169,7 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 
 			while (!b.eof() && b.getTokenType() != MASON_FLAGS_CLOSER)
 			{
-				PerlParser.expr(b, l, -1);
+				PerlParserImpl.expr(b, l, -1);
 			}
 			r = PerlParserUtil.consumeToken(b, MASON_FLAGS_CLOSER);
 		}
@@ -194,7 +198,7 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 				if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER))
 				{
 					PsiBuilder.Marker blockMarker = b.mark();
-					PerlParser.block_content(b, l);
+					PerlParserImpl.block_content(b, l);
 					blockMarker.done(BLOCK);
 					blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
@@ -215,28 +219,27 @@ public class MasonPerlParserExtensionImpl extends PerlParserExtension implements
 			m.rollbackTo();
 		}
 
-		return r;
+		return r || super.parseStatement(b, l);
 	}
 
-
-	@Nullable
+	@NotNull
 	@Override
 	public TokenSet getStatementRecoveryTokens()
 	{
-		return STATEMENT_RECOVERY_TOKENSET;
+		return STATEMENT_RECOVERY_TOKENS;
 	}
 
-	@Nullable
-	@Override
-	public TokenSet getBlockRecoveryTokens()
-	{
-		return BLOCK_RECOVERY_TOKENSET;
-	}
-
-	@Nullable
+	@NotNull
 	@Override
 	public TokenSet getBadCharacterForbiddenTokens()
 	{
 		return BAD_CHARACTER_FORBIDDEN_TOKENS;
+	}
+
+	@NotNull
+	@Override
+	public TokenSet getBlockRecoveryTokens()
+	{
+		return BLOCK_RECOVERY_TOKENS;
 	}
 }

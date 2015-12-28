@@ -52,7 +52,7 @@ public class SwitchPerlParserExtensionImpl extends PerlParserExtension implement
 		if (PerlParserUtil.consumeToken(b, RESERVED_SWITCH))
 		{
 			boolean r = parseSwitchCondition(b, l);
-			r = r && PerlParser.block(b, l);
+			r = r && PerlParserImpl.block(b, l);
 			return r;
 		}
 		return false;
@@ -62,7 +62,7 @@ public class SwitchPerlParserExtensionImpl extends PerlParserExtension implement
 	{
 		PerlBuilder.Marker m = b.mark();
 		boolean r = PerlParserUtil.consumeToken(b, LEFT_PAREN);
-		r = r && PerlParser.scalar_expr(b, l);
+		r = r && PerlParserImpl.scalar_expr(b, l);
 		r = r && PerlParserUtil.consumeToken(b, RIGHT_PAREN);
 
 		if (r)
@@ -98,7 +98,7 @@ public class SwitchPerlParserExtensionImpl extends PerlParserExtension implement
 		if (casesNumber > 0)
 		{
 			PerlBuilder.Marker m = b.mark();
-			if (PerlParser.if_compound_else(b, l))
+			if (PerlParserImpl.if_compound_else(b, l))
 			{
 				m.done(CASE_DEFAULT);
 			}
@@ -115,7 +115,7 @@ public class SwitchPerlParserExtensionImpl extends PerlParserExtension implement
 		if (PerlParserUtil.consumeToken(b, RESERVED_CASE))
 		{
 			boolean r = parseCaseCondition(b, l);
-			r = r && PerlParser.block(b, l);
+			r = r && PerlParserImpl.block(b, l);
 			return r;
 		}
 		return false;
@@ -126,7 +126,7 @@ public class SwitchPerlParserExtensionImpl extends PerlParserExtension implement
 		PerlBuilder.Marker m = b.mark();
 
 		boolean r = parseCaseConditionParenthesised(b, l);
-		r = r || PerlParser.block(b, l);
+		r = r || PerlParserImpl.block(b, l);
 		r = r || parseCaseConditionSimple(b, l);
 
 		if (r)
@@ -144,18 +144,18 @@ public class SwitchPerlParserExtensionImpl extends PerlParserExtension implement
 	public static boolean parseCaseConditionParenthesised(PerlBuilder b, int l)
 	{
 		boolean r = PerlParserUtil.consumeToken(b, LEFT_PAREN);
-		r = r && PerlParser.scalar_expr(b, l);
+		r = r && PerlParserImpl.scalar_expr(b, l);
 		r = r && PerlParserUtil.consumeToken(b, RIGHT_PAREN);
 		return r;
 	}
 
 	public static boolean parseCaseConditionSimple(PerlBuilder b, int l)
 	{
-		return PerlParser.string(b, l) ||
-				PerlParser.number_constant(b, l) ||
-				PerlParser.anon_array(b, l) ||
-				PerlParser.match_regex(b, l) ||
-				PerlParser.compile_regex(b, l)
+		return PerlParserImpl.string(b, l) ||
+				PerlParserImpl.number_constant(b, l) ||
+				PerlParserImpl.anon_array(b, l) ||
+				PerlParserImpl.match_regex(b, l) ||
+				PerlParserImpl.compile_regex(b, l)
 				;
 	}
 

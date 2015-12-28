@@ -36,7 +36,7 @@ import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
-import com.perl5.lang.perl.parser.PerlParser;
+import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
@@ -102,7 +102,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@NotNull
 	public PsiParser createParser(final Project project)
 	{
-		return new PerlParser();
+		return new PerlParserImpl();
 	}
 
 	@Override

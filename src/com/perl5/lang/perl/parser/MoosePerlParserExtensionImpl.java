@@ -22,7 +22,6 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.tokenindex.Token;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
@@ -86,7 +85,7 @@ public class MoosePerlParserExtensionImpl extends PerlParserExtension implements
 	private static boolean parseHas(PerlBuilder b, int l)
 	{
 		PerlBuilder.Marker m = b.mark();
-		PerlParser.annotations(b, l);
+		PerlParserImpl.annotations(b, l);
 
 		if (PerlParserUtil.consumeToken(b, RESERVED_HAS) && parseHasArguments(b, l))
 		{
@@ -136,7 +135,7 @@ public class MoosePerlParserExtensionImpl extends PerlParserExtension implements
 		PsiBuilder.Marker m = b.mark();
 		if (parseHasAttributeDefinitions(b, l) &&
 				(PerlParserUtil.consumeToken(b, OPERATOR_COMMA) || PerlParserUtil.consumeToken(b, OPERATOR_COMMA_ARROW)) &&
-				PerlParser.expr(b, l, -1)
+				PerlParserImpl.expr(b, l, -1)
 				)
 		{
 			m.drop();
@@ -149,7 +148,7 @@ public class MoosePerlParserExtensionImpl extends PerlParserExtension implements
 	private static boolean parseHasAttributeDefinitions(PerlBuilder b, int l)
 	{
 		IElementType currentWrapper = b.setStringWrapper(MOOSE_ATTRIBUTE);
-		boolean r = PerlParser.scalar_expr(b, l - 1);
+		boolean r = PerlParserImpl.scalar_expr(b, l - 1);
 		b.setStringWrapper(currentWrapper);
 		return r;
 	}
@@ -158,11 +157,11 @@ public class MoosePerlParserExtensionImpl extends PerlParserExtension implements
 	private static boolean parseAnnotatedSimpleStatement(PerlBuilder b, int l, IElementType keywordToken, IElementType statementToken)
 	{
 		PerlBuilder.Marker m = b.mark();
-		PerlParser.annotations(b, l);
+		PerlParserImpl.annotations(b, l);
 
 		if (PerlParserUtil.consumeToken(b, keywordToken))
 		{
-			if (PerlParser.expr(b, l, -1))
+			if (PerlParserImpl.expr(b, l, -1))
 			{
 				PerlParserUtil.parseStatementModifier(b, l);
 				m.done(statementToken);
@@ -182,7 +181,7 @@ public class MoosePerlParserExtensionImpl extends PerlParserExtension implements
 		if (MOOSE_TOKEN_SET.contains(tokenType))
 		{
 			b.advanceLexer();
-			if (PerlParser.expr(b, l, -1))
+			if (PerlParserImpl.expr(b, l, -1))
 			{
 				PerlParserUtil.parseStatementModifier(b, l);
 				m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));

@@ -49,7 +49,7 @@ public class PerlHeredocElementType extends ILazyParseableElementType
 				getLexerAdapter(parentElement.getProject()),
 				getLanguage(),
 				chameleon.getText());
-		PsiParser parser = new PerlParser();
+		PsiParser parser = new PerlParserImpl();
 
 		return parser.parse(this, builder).getFirstChildNode();
 	}

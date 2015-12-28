@@ -20,36 +20,41 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 27.12.2015.
+ * Created by hurricup on 28.12.2015.
  */
-public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension implements MojoliciousPerlParserExtension
+public class MojoliciousPerlParser extends PerlParserImpl implements MojoliciousPerlElementTypes, PerlElementTypes
 {
-	protected static final TokenSet BAD_CAHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
-			MOJO_BLOCK_EXPR_CLOSER,
-			MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
-			MOJO_END
-	);
-	protected static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.create(
-			MOJO_BLOCK_EXPR_CLOSER,
-			MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
-			MOJO_END
-	);
-	protected static final TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.create(
-			MOJO_END
-	);
-	protected static final TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.create(
-			MOJO_BLOCK_EXPR_CLOSER,
-			MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
-			MOJO_END
-	);
+	public static final TokenSet BAD_CAHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
+			PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS,
+			TokenSet.create(
+					MOJO_BLOCK_EXPR_CLOSER,
+					MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
+					MOJO_END
+			));
+	public static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(
+			PerlParserImpl.STATEMENT_RECOVERY_TOKENS, TokenSet.create(
+					MOJO_BLOCK_EXPR_CLOSER,
+					MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
+					MOJO_END
+			));
+	public static final TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.orSet(
+			PerlParserImpl.BLOCK_RECOVERY_TOKENS, TokenSet.create(
+					MOJO_END
+			));
+	public static final TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
+			PerlParserImpl.CONSUMABLE_SEMI_TOKENS, TokenSet.create(
+					MOJO_BLOCK_EXPR_CLOSER,
+					MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
+					MOJO_END
+			));
 
 	@Override
-	public boolean parseTerm(PerlBuilder b, int l)
+	public boolean parseTerm(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
 
@@ -59,7 +64,7 @@ public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension impl
 			b.advanceLexer();
 			PsiBuilder.Marker blockMarker = b.mark();
 
-			PerlParser.block_content(b, l);
+			PerlParserImpl.block_content(b, l);
 
 			if (b.getTokenType() == MOJO_END)
 			{
@@ -77,6 +82,7 @@ public class MojoliciousPerlParserExtensionImpl extends PerlParserExtension impl
 
 		return super.parseTerm(b, l);
 	}
+
 
 	@Nullable
 	@Override

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mason;
 
+import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -26,6 +27,7 @@ import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
+import com.perl5.lang.perl.parser.MasonPerlParserImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -63,5 +65,12 @@ public class MasonPerlParserDefinition extends PerlParserDefinition implements M
 	public TokenSet getCommentTokens()
 	{
 		return COMMENTS;
+	}
+
+	@NotNull
+	@Override
+	public PsiParser createParser(Project project)
+	{
+		return new MasonPerlParserImpl();
 	}
 }

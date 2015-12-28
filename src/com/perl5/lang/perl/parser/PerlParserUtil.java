@@ -24,7 +24,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerUtil;
@@ -189,57 +188,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
 
-	/**
-	 * Tokens which consumed and counted as semicolon
-	 */
-	public static TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.create(
-			SEMICOLON
-	);
-
-	/**
-	 * Tokens which makes semicolon optional, like block close brace
-	 */
-	public static TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.create(
-			RIGHT_BRACE,
-			REGEX_QUOTE_CLOSE
-	);
-
-	// this tokens are not being marked as bad characters
-	public static TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
-			RESERVED_PACKAGE,
-			RIGHT_BRACE,
-			REGEX_QUOTE_CLOSE,
-			SEMICOLON
-	);
-	// stop tokens for statement recovery
-	public static TokenSet UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.create(
-			SEMICOLON,
-
-			RIGHT_BRACE,
-			REGEX_QUOTE_CLOSE,
-
-			BLOCK_NAME,
-
-			RESERVED_IF,
-			RESERVED_UNLESS,
-			RESERVED_GIVEN,
-			RESERVED_WHILE,
-			RESERVED_UNTIL,
-			RESERVED_WHEN,
-
-			RESERVED_FOREACH,    // may have no opening paren after a keyword
-			RESERVED_FOR,        // may have no opening paren after a keyword
-
-			RESERVED_PACKAGE,
-			RESERVED_USE,
-			RESERVED_NO,
-
-			RESERVED_DEFAULT    // has no opening paren
-	);
-	// stop tokens for block recovery
-	public static TokenSet UNCONDITIONAL_BLOCK_RECOVERY_TOKENS = TokenSet.create(
-			RIGHT_BRACE
-	);
 	public static TokenSet STATEMENT_RECOVERY_SUB_SUFFIX = TokenSet.create(
 			IDENTIFIER,
 			PACKAGE,
@@ -343,7 +291,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean parseExpressionLevel(PsiBuilder b, int l, int g)
 	{
-		return PerlParser.expr(b, l, g);
+		return PerlParserImpl.expr(b, l, g);
 	}
 
 	/**
@@ -405,11 +353,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			String tokenText = b.getTokenText();
 			if (!PerlSubUtil.BUILT_IN_UNARY.contains(tokenText)) // not unary
 			{
-				boolean r = PerlParser.method(b, l);
+				boolean r = PerlParserImpl.method(b, l);
 
 				if (r && !PerlSubUtil.BUILT_IN_ARGUMENTLESS.contains(tokenText)) // not argumentless
 				{
-					PerlParser.call_arguments(b, l);
+					PerlParserImpl.call_arguments(b, l);
 				}
 				return r;
 			}
@@ -421,12 +369,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			//noinspection ConstantConditions
 			if (!PerlSubUtil.isUnary(packageName, subName))    // not unary
 			{
-				boolean r = PerlParser.method(b, l);
+				boolean r = PerlParserImpl.method(b, l);
 
 				//noinspection ConstantConditions
 				if (r && !PerlSubUtil.isArgumentless(packageName, subName)) // not argumentless
 				{
-					PerlParser.call_arguments(b, l);
+					PerlParserImpl.call_arguments(b, l);
 				}
 				return r;
 			}
@@ -465,12 +413,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean statementSemi(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
-		if (CONSUMABLE_SEMI_TOKENS.contains(tokenType))
+		if (((PerlBuilder) b).getPerlParser().getConsumableSemicolonTokens().contains(tokenType))
 		{
 			b.advanceLexer();
 			return true;
 		}
-		else if (UNCONSUMABLE_SEMI_TOKENS.contains(tokenType))
+		else if (((PerlBuilder) b).getPerlParser().getUnconsumableSemicolonTokens().contains(tokenType))
 		{
 			return true;
 		}
@@ -979,7 +927,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		if (currentTokenType == null                                                                                    // got end of file
 				|| ((PerlBuilder) b).getBracesLevel() == 0 && (                                                         // we are not in braced statement
-						UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS.contains(currentTokenType)                              // got semi, package, end of regex, use, compound or suffix
+				((PerlBuilder) b).getPerlParser().getStatementRecoveryTokens().contains(currentTokenType)                              // got semi, package, end of regex, use, compound or suffix
 						|| currentTokenType == RESERVED_SUB && STATEMENT_RECOVERY_SUB_SUFFIX.contains(b.lookAhead(1))   // got sub definition
 		)
 				)
@@ -1005,7 +953,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean recoverBlock(PsiBuilder b, int l)
 	{
-		return !UNCONDITIONAL_BLOCK_RECOVERY_TOKENS.contains(b.getTokenType());
+		return !((PerlBuilder) b).getPerlParser().getBlockRecoveryTokens().contains(b.getTokenType());
 	}
 
 	/**
@@ -1020,7 +968,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (consumeToken(b, LEFT_BRACE))
 		{
 			boolean r = convertBracedString(b, l);
-			if (!r) r = PerlParser.expr(b, l, -1);
+			if (!r) r = PerlParserImpl.expr(b, l, -1);
 
 			if (!r && b.getTokenType() == RIGHT_BRACE)
 			{
@@ -1049,13 +997,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			assert b instanceof PerlBuilder;
 			if (((PerlBuilder) b).isRegex())    // we could take it from ErrorState stack. I guess...
 			{
-				r = PerlParser.interpolated_constructs(b, l);    // we can't parse an expression here, cause it's pinned inside
+				r = PerlParserImpl.interpolated_constructs(b, l);    // we can't parse an expression here, cause it's pinned inside
 				if (!r)
-					r = PerlParser.number_constant(b, l);    // little hack for plain number. Basically we need to use expr here with pin checking
+					r = PerlParserImpl.number_constant(b, l);    // little hack for plain number. Basically we need to use expr here with pin checking
 			}
 			else
 			{
-				r = PerlParser.expr(b, l + 1, -1);
+				r = PerlParserImpl.expr(b, l + 1, -1);
 
 				if (!r && b.getTokenType() == RIGHT_BRACKET)
 				{
@@ -1079,10 +1027,10 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		PsiBuilder.Marker m = b.mark();
 
-		if (PerlParser.statement_modifier(b, l))
+		if (PerlParserImpl.statement_modifier(b, l))
 		{
 			IElementType tokenType = b.getTokenType();
-			if (CONSUMABLE_SEMI_TOKENS.contains(tokenType) || UNCONSUMABLE_SEMI_TOKENS.contains(tokenType))    // we accepts only strict modifiers;
+			if (((PerlBuilder) b).getPerlParser().getConsumableSemicolonTokens().contains(tokenType) || ((PerlBuilder) b).getPerlParser().getUnconsumableSemicolonTokens().contains(tokenType))    // we accepts only strict modifiers;
 			{
 				m.drop();
 				return true;
@@ -1143,7 +1091,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 						break;
 				}
 				;
-				if (!PerlParser.expr(b, l, 4))    // looks like an end
+				if (!PerlParserImpl.expr(b, l, 4))    // looks like an end
 					break;
 			}
 			else
@@ -1162,9 +1110,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseListOrListElement(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.parenthesised_expr(b, l))
+		if (PerlParserImpl.parenthesised_expr(b, l))
 		{
-			if (PerlParser.array_index(b, l))
+			if (PerlParserImpl.array_index(b, l))
 			{
 				m.done(ANON_ARRAY_ELEMENT);
 			}
@@ -1188,7 +1136,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseArrayOrSlice(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.array_primitive(b, l))
+		if (PerlParserImpl.array_primitive(b, l))
 		{
 			assert b instanceof PerlBuilder;
 
@@ -1201,11 +1149,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					)
 			{
 
-				if (PerlParser.array_index(b, l))
+				if (PerlParserImpl.array_index(b, l))
 				{
 					m.done(ARRAY_ARRAY_SLICE);
 				}
-				else if (PerlParser.hash_index(b, l))
+				else if (PerlParserImpl.hash_index(b, l))
 				{
 					m.done(ARRAY_HASH_SLICE);
 				}
@@ -1235,7 +1183,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseScalarOrElement(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.scalar_primitive(b, l))
+		if (PerlParserImpl.scalar_primitive(b, l))
 		{
 			assert b instanceof PerlBuilder;
 
@@ -1248,11 +1196,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					)
 			{
 
-				if (PerlParser.array_index(b, l))
+				if (PerlParserImpl.array_index(b, l))
 				{
 					m.done(SCALAR_ARRAY_ELEMENT);
 				}
-				else if (PerlParser.hash_index(b, l))
+				else if (PerlParserImpl.hash_index(b, l))
 				{
 					m.done(SCALAR_HASH_ELEMENT);
 				}
@@ -1281,9 +1229,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseGlobOrElement(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.glob_primitive(b, l))
+		if (PerlParserImpl.glob_primitive(b, l))
 		{
-			if (PerlParser.hash_index(b, l))
+			if (PerlParserImpl.hash_index(b, l))
 				m.done(GLOB_SLOT);
 			else
 				m.drop();
@@ -1530,7 +1478,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 		boolean oldState = ((PerlBuilder) b).setStringify(true);
-		boolean r = PerlParser.expr(b, l, -1);
+		boolean r = PerlParserImpl.expr(b, l, -1);
 		((PerlBuilder) b).setStringify(oldState);
 		return r;
 	}
@@ -1577,7 +1525,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		boolean currentReparseState = ((PerlBuilder) b).setReparseSQString(true);
 		boolean currentUseVarsState = ((PerlBuilder) b).setUseVarsContent(true);
 
-		boolean r = PerlParser.expr(b, l, -1);
+		boolean r = PerlParserImpl.expr(b, l, -1);
 
 		((PerlBuilder) b).setReparseSQString(currentReparseState);
 		((PerlBuilder) b).setUseVarsContent(currentUseVarsState);
@@ -1596,7 +1544,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		PsiBuilder.Marker m = b.mark();
 
-		boolean r = PerlParser.string_sq_parsed(b, l);
+		boolean r = PerlParserImpl.string_sq_parsed(b, l);
 
 		if (r && ((PerlBuilder) b).isReparseSQString())
 			m.collapse(PARSABLE_STRING_USE_VARS);
@@ -1620,7 +1568,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (((PerlBuilder) b).isUseVarsContent())
 		{
 			PsiBuilder.Marker m = b.mark();
-			boolean r = PerlParser.use_vars_interpolated_constructs(b, l);
+			boolean r = PerlParserImpl.use_vars_interpolated_constructs(b, l);
 
 			if (r)
 			{
@@ -1642,7 +1590,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		else
 		{
-			return PerlParser.interpolated_constructs(b, l);
+			return PerlParserImpl.interpolated_constructs(b, l);
 		}
 	}
 
@@ -1666,7 +1614,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 		boolean currentState = ((PerlBuilder) b).setIsInterpolated(true);
-		boolean r = PerlParser.string_content_qq(b, l);
+		boolean r = PerlParserImpl.string_content_qq(b, l);
 		((PerlBuilder) b).setIsInterpolated(currentState);
 		return r;
 	}
@@ -1683,7 +1631,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 		boolean currentState = ((PerlBuilder) b).setIsRegex(true);
-		boolean r = isExtended ? PerlParser.perl_regex_ex_items(b, l) : PerlParser.perl_regex_items(b, l);
+		boolean r = isExtended ? PerlParserImpl.perl_regex_ex_items(b, l) : PerlParserImpl.perl_regex_items(b, l);
 		((PerlBuilder) b).setIsRegex(currentState);
 		return r;
 	}
@@ -1699,7 +1647,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		IElementType tokenType = b.getTokenType();
 
-		if (tokenType == null || BAD_CHARACTER_FORBIDDEN_TOKENS.contains(tokenType))
+		if (tokenType == null || ((PerlBuilder) b).getPerlParser().getBadCharacterForbiddenTokens().contains(tokenType))
 		{
 			return false;
 		}
@@ -1787,7 +1735,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		boolean oldInterpolatedState = ((PerlBuilder) b).setIsInterpolated(false);
 		boolean oldRegexState = ((PerlBuilder) b).setIsRegex(false);
 
-		boolean r = PerlParser.block_content(b, l);
+		boolean r = PerlParserImpl.block_content(b, l);
 
 		((PerlBuilder) b).setIsInterpolated(oldInterpolatedState);
 		((PerlBuilder) b).setIsRegex(oldRegexState);
@@ -1813,7 +1761,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		else
 		{
 			PsiBuilder.Marker m = b.mark();
-			boolean r = PerlParser.statement_modifier(b, l);
+			boolean r = PerlParserImpl.statement_modifier(b, l);
 			r = r && (b.getTokenType() != LEFT_BRACE);
 			m.rollbackTo();
 			return r;
@@ -1871,7 +1819,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 		boolean flagBackup = ((PerlBuilder) b).setSpecialVariableNamesAllowed(false);
 
-		if (PerlParser.scalar_variable(b, l))
+		if (PerlParserImpl.scalar_variable(b, l))
 		{
 			m.done(VARIABLE_DECLARATION_WRAPPER);
 			r = true;
@@ -1898,7 +1846,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 		boolean flagBackup = ((PerlBuilder) b).setSpecialVariableNamesAllowed(false);
 
-		if (PerlParser.array_variable(b, l))
+		if (PerlParserImpl.array_variable(b, l))
 		{
 			m.done(VARIABLE_DECLARATION_WRAPPER);
 			r = true;
@@ -1925,7 +1873,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 		boolean flagBackup = ((PerlBuilder) b).setSpecialVariableNamesAllowed(false);
 
-		if (PerlParser.hash_variable(b, l))
+		if (PerlParserImpl.hash_variable(b, l))
 		{
 			m.done(VARIABLE_DECLARATION_WRAPPER);
 			r = true;
@@ -1965,7 +1913,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseSimpleCallArguments(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.expr(b, l, -1))
+		if (PerlParserImpl.expr(b, l, -1))
 		{
 			m.done(CALL_ARGUMENTS);
 			return true;
@@ -2031,7 +1979,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 		IElementType oldValue = ((PerlBuilder) b).setStringWrapper(CONSTANT_NAME);
-		boolean r = PerlParser.string(b, l);
+		boolean r = PerlParserImpl.string(b, l);
 		((PerlBuilder) b).setStringWrapper(oldValue);
 		return r;
 	}
@@ -2039,7 +1987,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parsePrintArguments(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if (PerlParser.print_arguments_content(b, l))
+		if (PerlParserImpl.print_arguments_content(b, l))
 		{
 			m.done(CALL_ARGUMENTS);
 			return true;

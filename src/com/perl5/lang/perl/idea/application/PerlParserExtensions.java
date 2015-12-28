@@ -24,7 +24,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.completion.providers.PerlSubBuiltInCompletionProvider;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.parser.PerlParser;
+import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -71,45 +71,16 @@ public class PerlParserExtensions implements ApplicationComponent
 			{
 				for (Pair<IElementType, TokenSet> extensionSet : extensionSets)
 				{
-					for (int i = 0; i < PerlParser.EXTENDS_SETS_.length; i++)
+					for (int i = 0; i < PerlParserImpl.EXTENDS_SETS_.length; i++)
 					{
-						if (PerlParser.EXTENDS_SETS_[i].contains(extensionSet.first))
+						if (PerlParserImpl.EXTENDS_SETS_[i].contains(extensionSet.first))
 						{
-							PerlParser.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParser.EXTENDS_SETS_[i], extensionSet.getSecond());
+							PerlParserImpl.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParserImpl.EXTENDS_SETS_[i], extensionSet.getSecond());
 							break;
 						}
 					}
 				}
 			}
-
-			// extend parser's tokensets
-			TokenSet tokenSet;
-			if ((tokenSet = extension.getBadCharacterForbiddenTokens()) != null)
-			{
-				PerlParserUtil.BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(PerlParserUtil.BAD_CHARACTER_FORBIDDEN_TOKENS, tokenSet);
-			}
-
-			if ((tokenSet = extension.getStatementRecoveryTokens()) != null)
-			{
-				PerlParserUtil.UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONDITIONAL_STATEMENT_RECOVERY_TOKENS, tokenSet);
-			}
-
-			if ((tokenSet = extension.getBlockRecoveryTokens()) != null)
-			{
-				PerlParserUtil.UNCONDITIONAL_BLOCK_RECOVERY_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONDITIONAL_BLOCK_RECOVERY_TOKENS, tokenSet);
-			}
-
-			if ((tokenSet = extension.getConsumableSemicolonTokens()) != null)
-			{
-				PerlParserUtil.CONSUMABLE_SEMI_TOKENS = TokenSet.orSet(PerlParserUtil.CONSUMABLE_SEMI_TOKENS, tokenSet);
-			}
-
-			if ((tokenSet = extension.getUnConsumableSemicolonTokens()) != null)
-			{
-				PerlParserUtil.UNCONSUMABLE_SEMI_TOKENS = TokenSet.orSet(PerlParserUtil.UNCONSUMABLE_SEMI_TOKENS, tokenSet);
-			}
-
-
 		}
 		PerlLexer.initReservedTokensSet();
 	}

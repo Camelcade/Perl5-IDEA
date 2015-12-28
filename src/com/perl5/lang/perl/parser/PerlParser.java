@@ -16,39 +16,62 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.lang.PsiBuilder;
-import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
  * Created by hurricup on 28.12.2015.
  */
-public class PerlParser extends PerlParserGenerated
+public interface PerlParser extends PerlElementTypes
 {
+	// these tokens are not being marked as bad characters
+	TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
+			RESERVED_PACKAGE,
+			RIGHT_BRACE,
+			REGEX_QUOTE_CLOSE,
+			SEMICOLON
+	);
 
-	public boolean parseStatement(PsiBuilder b, int l)
-	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parseStatement((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+	// stop tokens for statement recovery
+	TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.create(
+			SEMICOLON,
 
-	public boolean parseTerm(PsiBuilder b, int l)
-	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parseTerm((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+			RIGHT_BRACE,
+			REGEX_QUOTE_CLOSE,
+
+			BLOCK_NAME,
+
+			RESERVED_IF,
+			RESERVED_UNLESS,
+			RESERVED_GIVEN,
+			RESERVED_WHILE,
+			RESERVED_UNTIL,
+			RESERVED_WHEN,
+
+			RESERVED_FOREACH,    // may have no opening paren after a keyword
+			RESERVED_FOR,        // may have no opening paren after a keyword
+
+			RESERVED_PACKAGE,
+			RESERVED_USE,
+			RESERVED_NO,
+
+			RESERVED_DEFAULT    // has no opening paren
+	);
+
+	// stop tokens for block recovery
+	TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.create(
+			RIGHT_BRACE
+	);
+
+	// Tokens which consumed and counted as semicolon
+	TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.create(
+			SEMICOLON
+	);
+
+	// Tokens which makes semicolon optional, like block close brace
+	TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.create(
+			RIGHT_BRACE,
+			REGEX_QUOTE_CLOSE
+	);
 
 }

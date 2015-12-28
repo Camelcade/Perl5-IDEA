@@ -22,7 +22,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.parser.PerlParser;
+import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.PerlTokenData;
 import com.perl5.lang.perl.psi.utils.PerlNamesCache;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -35,7 +35,7 @@ import java.util.Set;
  */
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
-	private final PerlParser perlParser;
+	private final PerlParserImpl perlParser;
 	protected Set<String> KNOWN_SUBS;
 	protected Set<String> KNOWN_PACKAGES;
 	protected boolean recoveringStatement = false;
@@ -65,7 +65,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
 	{
 		super(builder, state, parser);
-		perlParser = (PerlParser) parser;
+		perlParser = (PerlParserImpl) parser;
 		initIndexes();
 	}
 
@@ -267,7 +267,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		return currentValue;
 	}
 
-	public PerlParser getPerlParser()
+	public PerlParserImpl getPerlParser()
 	{
 		return perlParser;
 	}
