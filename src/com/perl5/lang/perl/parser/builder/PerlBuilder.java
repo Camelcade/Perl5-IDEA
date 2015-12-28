@@ -22,6 +22,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.parser.PerlParser;
 import com.perl5.lang.perl.parser.PerlTokenData;
 import com.perl5.lang.perl.psi.utils.PerlNamesCache;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -34,45 +35,37 @@ import java.util.Set;
  */
 public class PerlBuilder extends GeneratedParserUtilBase.Builder
 {
+	private final PerlParser perlParser;
 	protected Set<String> KNOWN_SUBS;
 	protected Set<String> KNOWN_PACKAGES;
 	protected boolean recoveringStatement = false;
 	protected int bracesLevel = 0;
-
 	// flag forces stringification of -identifiers, required for use Package -option;
 	boolean stringify = false;
-
 	// flag shows that SQ strings should be re-parsed as QQ strings. Used in use vars expr
 	boolean reparseSQString = false;
-
 	// flag allowes additional sigils to parse, required in use vars reparsed strings
 	boolean isUseVarsContent = false;
-
 	// flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
 	boolean isInterpolated = false;
-
 	// flag set if we are inside of regexp. Safe parsing for array indexes
 	boolean isRegex = false;
-
 	// flag marks that interpolated string should stop on >
 	boolean stopOnNumericGt = false;
-
 	// this is a stop quote for nexted strings parsing
 	IElementType extraStopQuote = null;
-
 	// flag allowes special variable names
 	boolean isSpecialVariableNamesAllowed = true;
-
 	/**
 	 * This element may be set to make an additional wrapping for strings, like constants and so on
 	 */
 	IElementType stringWrapper = null;
-
 	Project myProject = getProject();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
 	{
 		super(builder, state, parser);
+		perlParser = (PerlParser) parser;
 		initIndexes();
 	}
 
@@ -272,5 +265,10 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 		IElementType currentValue = this.stringWrapper;
 		this.stringWrapper = stringWrapper;
 		return currentValue;
+	}
+
+	public PerlParser getPerlParser()
+	{
+		return perlParser;
 	}
 }

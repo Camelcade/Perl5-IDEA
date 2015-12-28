@@ -2060,14 +2060,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseParserExtensionStatement(PsiBuilder b, int l)
 	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parseStatement((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
+		assert b instanceof PerlBuilder;
+		return ((PerlBuilder) b).getPerlParser().parseStatement(b, l);
 	}
 
 	/**
@@ -2079,13 +2073,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseParserExtensionTerm(PsiBuilder b, int l)
 	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parseTerm((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
+		assert b instanceof PerlBuilder;
+		return ((PerlBuilder) b).getPerlParser().parseTerm(b, l);
 	}
 }
