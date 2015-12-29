@@ -43,9 +43,7 @@ import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
@@ -413,9 +411,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		if (element != null)
 		{
-			VirtualFile[] classRoots;
+			List<VirtualFile> classRoots = new ArrayList<VirtualFile>();
 
-			classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
+			classRoots.addAll(Arrays.asList(ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots()));
+			classRoots.addAll(Arrays.asList(ProjectRootManager.getInstance(element.getProject()).getContentRoots()));
 
 			for (VirtualFile classRoot : classRoots)
 			{
