@@ -20,7 +20,6 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mason.MasonPerlElementTypes;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
@@ -101,6 +100,36 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 		);
 	}
 
+	public static boolean parseMasonMethod(PsiBuilder b, int l, IElementType closeToken)
+	{
+		boolean r = false;
+
+		PsiBuilder.Marker methodMarker = b.mark();
+		b.advanceLexer();
+		PsiBuilder.Marker subMarker = b.mark();
+		if (PerlParserUtil.consumeToken(b, IDENTIFIER))
+		{
+			subMarker.collapse(SUB);
+			PerlParserImpl.method_signature(b, l);
+			if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER))
+			{
+				PsiBuilder.Marker blockMarker = b.mark();
+				PerlParserImpl.block_content(b, l);
+
+				if (b.getTokenType() == closeToken)
+				{
+					blockMarker.done(BLOCK);
+					blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+					b.advanceLexer();
+					methodMarker.done(METHOD_DEFINITION);
+					r = true;
+				}
+			}
+
+		}
+		return r;
+	}
+
 	@Override
 	public boolean parseStatement(PsiBuilder b, int l)
 	{
@@ -111,6 +140,7 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 
 		if (tokenType == MASON_BLOCK_OPENER)
 		{
+			PsiBuilder.Marker statementMarker = b.mark();
 			b.advanceLexer();
 			if (PerlParserImpl.expr(b, l, -1))
 			{
@@ -130,6 +160,11 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 						}
 					}
 				}
+				statementMarker.done(STATEMENT);
+			}
+			else
+			{
+				statementMarker.drop();
 			}
 			r = PerlParserUtil.consumeToken(b, MASON_BLOCK_CLOSER);
 		}
@@ -184,6 +219,18 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 			b.advanceLexer();
 			PerlParserUtil.consumeToken(b, STRING_CONTENT);
 			r = PerlParserUtil.consumeToken(b, MASON_TEXT_CLOSER);
+		}
+		else if (tokenType == MASON_METHOD_OPENER)
+		{
+			r = parseMasonMethod(b, l, MASON_METHOD_CLOSER);
+		}
+		else if (tokenType == MASON_FILTER_OPENER)
+		{
+			r = parseMasonMethod(b, l, MASON_FILTER_CLOSER);
+		}
+		else if (tokenType == MASON_OVERRIDE_OPENER)
+		{
+			r = parseMasonMethod(b, l, MASON_OVERRIDE_CLOSER);
 		}
 		else if (SIMPLE_MASON_NAMED_BLOCKS.contains(tokenType)) // simple named blocks
 		{
