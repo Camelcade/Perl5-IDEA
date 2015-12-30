@@ -49,6 +49,8 @@ public class PerlASTFactory extends DefaultASTFactoryImpl implements PerlElement
 			return new PerlNamespaceElementImpl(type, text);
 		else if (type == VERSION_ELEMENT)
 			return new PerlVersionElementImpl(type, text);
+		else if (type == LABEL)
+			return new PerlGotoLabelElementImpl(type, text);
 		else if (type == POD)
 			return super.createComment(type, text);
 		else
