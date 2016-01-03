@@ -63,6 +63,7 @@
       <li>Fixed parsing of print target handle if followed by expression in parens or negation, fixes #560</li>
       <li>Fixed indenting for single-argument nested calls, fixes #663</li>
       <li>Fixed semicolon and statement modifiers parsing in the Moose statements, fixes #678</li>
+      <li>Braceless namespaces now being parsed the right way, fixes #674</li>
       </ul>
       </p>
 

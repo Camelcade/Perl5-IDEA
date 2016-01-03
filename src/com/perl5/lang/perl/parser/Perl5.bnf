@@ -409,24 +409,12 @@ limitations under the License.
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
 root ::= file_item *
 
-private file_item ::= !<<eof>> {semicolon_any | <<parseHeredocContent>> | namespace_definition | namespace_item }
-
-namespace_definition ::= namespace_definition_name (block | semicolon_any namespace_content)
-private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_namespace_definition}
-private namespace_annotations ::= annotation_deprecated
-private recover_namespace_definition ::= !(semicolon_any | LEFT_BRACE)
-namespace_content ::= namespace_item *  {extends=block recoverWhile=recover_namespace}
-
-// todo count opening braces
-private recover_namespace ::= !( [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE | RIGHT_BRACE )
-
-block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1} // !OPERATOR_DEREFERENCE  pin disabled for dereference of anon hash; probably this slows us down
-private block_content ::= file_item * {recoverWhile=recover_block}
-private recover_block ::= <<recoverBlock>>
-
-private namespace_item ::=
+private file_item ::= !<<eof>>
+{
+	<<parseHeredocContent>> |
+	namespace_definition |
     [label_declaration] (
-        semicolon_any +
+        SEMICOLON +
         | nyi_statement
         | <<parseParserExtensionStatement>>
         | compound_statement
@@ -437,6 +425,20 @@ private namespace_item ::=
 		| POD
 		| <<parseBadCharacters>> // Fallback for bad characters
      )
+}
+
+namespace_definition ::= namespace_definition_name (block | SEMICOLON namespace_content)
+private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_statement} // recover_namespace_definition
+private namespace_annotations ::= annotation_deprecated
+//private recover_namespace_definition ::= !(semicolon_any | LEFT_BRACE)
+namespace_content ::= file_item *  {extends=block recoverWhile=recover_namespace} //
+
+// todo count opening braces
+private recover_namespace ::= !( <<eof>> | RIGHT_BRACE)
+
+block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1} // !OPERATOR_DEREFERENCE  pin disabled for dereference of anon hash; probably this slows us down
+private block_content ::= file_item * {recoverWhile=recover_block}
+private recover_block ::= <<recoverBlock>>
 
 nyi_statement ::= OPERATOR_HELLIP
 format_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_FORMAT [IDENTIFIER] OPERATOR_ASSIGN [FORMAT] FORMAT_TERMINATOR {pin=2}
@@ -714,7 +716,7 @@ private variable_expr ::= variable | array_index_variable
 namespace_expr ::= <<mergePackageName>>
 parenthesised_expr ::= LEFT_PAREN parenthesised_expr_content RIGHT_PAREN {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
-private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | semicolon_any )
+private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + //{pin(".*")=1}
 
@@ -1130,7 +1132,6 @@ private namespace_element_braced ::= LEFT_BRACE <<mergePackageName>> RIGHT_BRACE
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private namespace_canonical ::= <<convertPackageIdentifier>>
-private semicolon_any ::= SEMICOLON
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
