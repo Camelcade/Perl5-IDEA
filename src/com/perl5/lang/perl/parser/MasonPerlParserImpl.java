@@ -127,7 +127,38 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 			}
 
 		}
+
+		return r || recoverToGreedy(b, closeToken, "Error");
+	}
+
+	protected static boolean endOrRecover(PsiBuilder b, IElementType toElement)
+	{
+		return endOrRecover(b, toElement, "Error");
+	}
+
+	protected static boolean endOrRecover(PsiBuilder b, IElementType toElement, String errorMessage)
+	{
+		return PerlParserUtil.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
+	}
+
+	protected static boolean recoverToGreedy(PsiBuilder b, IElementType toElement, String errorMessage)
+	{
+		boolean r = recoverTo(b, toElement, errorMessage);
+		r = r || PerlParserUtil.consumeToken(b, toElement);
 		return r;
+	}
+
+	protected static boolean recoverTo(PsiBuilder b, IElementType toElement, String errorMessage)
+	{
+		// recover bad code
+		PsiBuilder.Marker errorMarker = b.mark();
+		while (!b.eof() && b.getTokenType() != toElement)
+		{
+			b.advanceLexer();
+			;
+		}
+		errorMarker.error(errorMessage);
+		return b.eof();
 	}
 
 	@Override
@@ -166,7 +197,7 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 			{
 				statementMarker.drop();
 			}
-			r = PerlParserUtil.consumeToken(b, MASON_BLOCK_CLOSER);
+			r = endOrRecover(b, MASON_BLOCK_CLOSER);
 		}
 		else if (tokenType == MASON_CLASS_OPENER)
 		{
@@ -174,9 +205,12 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 
 			while (!b.eof() && b.getTokenType() != MASON_CLASS_CLOSER)
 			{
-				PerlParserImpl.file_item(b, l);
+				if (!PerlParserImpl.file_item(b, l))
+				{
+					break;
+				}
 			}
-			r = PerlParserUtil.consumeToken(b, MASON_CLASS_CLOSER);
+			r = endOrRecover(b, MASON_CLASS_CLOSER);
 		}
 		else if (tokenType == MASON_INIT_OPENER)
 		{
@@ -184,9 +218,12 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 
 			while (!b.eof() && b.getTokenType() != MASON_INIT_CLOSER)
 			{
-				PerlParserImpl.file_item(b, l);
+				if (!PerlParserImpl.file_item(b, l))
+				{
+					break;
+				}
 			}
-			r = PerlParserUtil.consumeToken(b, MASON_INIT_CLOSER);
+			r = endOrRecover(b, MASON_INIT_CLOSER);
 		}
 		else if (tokenType == MASON_PERL_OPENER)
 		{
@@ -194,19 +231,12 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 
 			while (!b.eof() && b.getTokenType() != MASON_PERL_CLOSER)
 			{
-				if( !PerlParserImpl.file_item(b, l))
+				if (!PerlParserImpl.file_item(b, l))
 				{
-					// recover bad code
-					PsiBuilder.Marker errorMarker = b.mark();
-					while (!b.eof() && b.getTokenType() != MASON_PERL_CLOSER)
-					{
-						b.advanceLexer();;
-					}
-					errorMarker.error("Error");
 					break;
 				}
 			}
-			r = PerlParserUtil.consumeToken(b, MASON_PERL_CLOSER);
+			r = endOrRecover(b, MASON_PERL_CLOSER);
 		}
 		else if (tokenType == MASON_FLAGS_OPENER)    // fixme need more love here, extends
 		{
@@ -214,21 +244,24 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 
 			while (!b.eof() && b.getTokenType() != MASON_FLAGS_CLOSER)
 			{
-				PerlParserImpl.expr(b, l, -1);
+				if (!PerlParserImpl.expr(b, l, -1))
+				{
+					break;
+				}
 			}
-			r = PerlParserUtil.consumeToken(b, MASON_FLAGS_CLOSER);
+			r = endOrRecover(b, MASON_FLAGS_CLOSER);
 		}
 		else if (tokenType == MASON_DOC_OPENER)
 		{
 			b.advanceLexer();
 			PerlParserUtil.consumeToken(b, COMMENT_BLOCK);
-			r = PerlParserUtil.consumeToken(b, MASON_DOC_CLOSER);
+			r = endOrRecover(b, MASON_DOC_CLOSER);
 		}
 		else if (tokenType == MASON_TEXT_OPENER)
 		{
 			b.advanceLexer();
 			PerlParserUtil.consumeToken(b, STRING_CONTENT);
-			r = PerlParserUtil.consumeToken(b, MASON_TEXT_CLOSER);
+			r = endOrRecover(b, MASON_TEXT_CLOSER);
 		}
 		else if (tokenType == MASON_METHOD_OPENER)
 		{
@@ -247,10 +280,12 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 			PsiBuilder.Marker statementMarker = b.mark();
 			b.advanceLexer();
 			PsiBuilder.Marker methodMarker = b.mark();
+			IElementType closeToken = RESERVED_OPENER_TO_CLOSER_MAP.get(tokenType);
 
 			if (PerlParserUtil.convertIdentifier(b, l, SUB))
 			{
 				methodMarker.done(METHOD);
+				methodMarker = null;
 
 				if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER))
 				{
@@ -259,12 +294,24 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 					blockMarker.done(BLOCK);
 					blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
-					if (r = PerlParserUtil.consumeToken(b, RESERVED_OPENER_TO_CLOSER_MAP.get(tokenType)))
+					if (r = PerlParserUtil.consumeToken(b, closeToken))
 					{
 						statementMarker.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
+						statementMarker = null;
 					}
 				}
 			}
+
+			if (statementMarker != null)
+			{
+				statementMarker.drop();
+			}
+			if (methodMarker != null)
+			{
+				methodMarker.drop();
+			}
+
+			r = r || recoverToGreedy(b, closeToken, "Error");
 		}
 
 		if (r)

@@ -59,30 +59,27 @@ public class MasonPerlFileImpl extends PerlFileImpl
 	@Override
 	public String getPackageName()
 	{
-		if (filePackage != null)
-			return filePackage;
+//		if (filePackage != null)
+//			return filePackage;
 
 		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
 		VirtualFile originalFile = getViewProvider().getVirtualFile();
 
-		if (isValid() && isPhysical())
+		for (String relativeRoot : masonSettings.componentRoots)
 		{
-			for (String relativeRoot : masonSettings.componentRoots)
+			VirtualFile rootFile = VfsUtil.findRelativeFile(getProject().getBaseDir(), relativeRoot);
+			if (rootFile != null && VfsUtil.isAncestor(rootFile, originalFile, true))
 			{
-				VirtualFile rootFile = VfsUtil.findRelativeFile(getProject().getBaseDir(), relativeRoot);
-				if (rootFile != null && VfsUtil.isAncestor(rootFile, originalFile, true))
-				{
-					String componentPath = VfsUtil.getRelativePath(originalFile, rootFile);
+				String componentPath = VfsUtil.getRelativePath(originalFile, rootFile);
 
-					if (componentPath != null)
-					{
-						return filePackage = "MC0::" + StringUtils.join(
-								componentPath.
-										replaceFirst("\\.[^" + VfsUtil.VFS_SEPARATOR_CHAR + "]*$", "").
-										split("" + VfsUtil.VFS_SEPARATOR_CHAR),
-								PerlPackageUtil.PACKAGE_SEPARATOR
-						);
-					}
+				if (componentPath != null)
+				{
+					return filePackage = "MC0::" + StringUtils.join(
+							componentPath.
+									replaceFirst("\\.[^" + VfsUtil.VFS_SEPARATOR_CHAR + "]*$", "").
+									split("" + VfsUtil.VFS_SEPARATOR_CHAR),
+							PerlPackageUtil.PACKAGE_SEPARATOR
+					);
 				}
 			}
 		}

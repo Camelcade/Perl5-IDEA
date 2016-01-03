@@ -52,7 +52,6 @@ public class MasonPerlOverrideStubElementType extends PerlMooseOverrideStubEleme
 		PsiElement element = node.getPsi();
 		return element instanceof MasonPerlOverrideStatement
 				&& element.isValid()
-				&& element.isPhysical()
 				&& StringUtil.isNotEmpty(((MasonPerlOverrideStatement) element).getSubName());
 	}
 }

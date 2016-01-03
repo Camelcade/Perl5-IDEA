@@ -59,7 +59,6 @@ public class PerlMethodDefinitionStubElementType extends PerlSubDefinitionStubEl
 		PsiElement element = node.getPsi();
 		return element instanceof PerlMethodDefinition
 				&& element.isValid()
-				&& element.isPhysical()
 				&& StringUtil.isNotEmpty(((PerlMethodDefinition) element).getSubName());
 	}
 }
