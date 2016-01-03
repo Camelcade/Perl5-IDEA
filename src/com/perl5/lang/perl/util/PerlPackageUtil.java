@@ -38,6 +38,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
@@ -202,7 +203,15 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 
 		// default value
-		return "main";
+		PsiFile file = element.getContainingFile();
+		if (file instanceof PerlFileImpl)
+		{
+			return ((PerlFileImpl) file).getPackageName();
+		}
+		else
+		{
+			return PerlPackageUtil.MAIN_PACKAGE;
+		}
 	}
 
 	/**

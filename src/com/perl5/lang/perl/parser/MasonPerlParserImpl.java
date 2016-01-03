@@ -194,7 +194,17 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 
 			while (!b.eof() && b.getTokenType() != MASON_PERL_CLOSER)
 			{
-				PerlParserImpl.file_item(b, l);
+				if( !PerlParserImpl.file_item(b, l))
+				{
+					// recover bad code
+					PsiBuilder.Marker errorMarker = b.mark();
+					while (!b.eof() && b.getTokenType() != MASON_PERL_CLOSER)
+					{
+						b.advanceLexer();;
+					}
+					errorMarker.error("Error");
+					break;
+				}
 			}
 			r = PerlParserUtil.consumeToken(b, MASON_PERL_CLOSER);
 		}

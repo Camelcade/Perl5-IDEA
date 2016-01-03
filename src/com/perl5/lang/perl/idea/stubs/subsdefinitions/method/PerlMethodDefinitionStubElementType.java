@@ -16,9 +16,13 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdefinitions.method;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
+import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -47,5 +51,15 @@ public class PerlMethodDefinitionStubElementType extends PerlSubDefinitionStubEl
 	protected PerlSubDefinitionStub createStubElement(StubElement parentStub, String packageName, String functionName, List<PerlSubArgument> arguments, PerlSubAnnotations annotations, boolean isMethod)
 	{
 		return new PerlMethodDefinitionStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
+	}
+
+	@Override
+	public boolean shouldCreateStub(ASTNode node)
+	{
+		PsiElement element = node.getPsi();
+		return element instanceof PerlMethodDefinition
+				&& element.isValid()
+				&& element.isPhysical()
+				&& StringUtil.isNotEmpty(((PerlMethodDefinition) element).getSubName());
 	}
 }

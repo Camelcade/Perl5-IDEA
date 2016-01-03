@@ -927,7 +927,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		if (currentTokenType == null                                                                                    // got end of file
 				|| ((PerlBuilder) b).getBracesLevel() == 0 && (                                                         // we are not in braced statement
-				((PerlBuilder) b).getPerlParser().getStatementRecoveryTokens().contains(currentTokenType)                              // got semi, package, end of regex, use, compound or suffix
+				((PerlBuilder) b).getPerlParser().getStatementRecoveryTokens().contains(currentTokenType)               // got semi, package, end of regex, use, compound or suffix
 						|| currentTokenType == RESERVED_SUB && STATEMENT_RECOVERY_SUB_SUFFIX.contains(b.lookAhead(1))   // got sub definition
 		)
 				)

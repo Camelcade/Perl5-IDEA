@@ -17,17 +17,27 @@
 package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.roots.ui.configuration.JavaVfsSourceRootDetectionUtil;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
+import com.perl5.lang.mason.idea.configuration.MasonPerlSettings;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
 public class MasonPerlFileImpl extends PerlFileImpl
 {
+	private String filePackage;
+
 	public MasonPerlFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, MasonPerlLanguage.INSTANCE);
@@ -44,5 +54,39 @@ public class MasonPerlFileImpl extends PerlFileImpl
 	public String toString()
 	{
 		return "Mason component";
+	}
+
+	@Override
+	public String getPackageName()
+	{
+		if (filePackage != null)
+			return filePackage;
+
+		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
+		VirtualFile originalFile = getOriginalFile().getVirtualFile();
+
+		if (isValid() && isPhysical())
+		{
+			for (String relativeRoot : masonSettings.componentRoots)
+			{
+				VirtualFile rootFile = VfsUtil.findRelativeFile(getProject().getBaseDir(), relativeRoot);
+				if (rootFile != null && VfsUtil.isAncestor(rootFile, originalFile, true))
+				{
+					String componentPath = VfsUtil.getRelativePath(originalFile, rootFile);
+
+					if (componentPath != null)
+					{
+						return filePackage = "MC0::" + StringUtils.join(
+								componentPath.
+										replaceFirst("\\.[^" + VfsUtil.VFS_SEPARATOR_CHAR + "]*$", "").
+										split("" + VfsUtil.VFS_SEPARATOR_CHAR),
+								PerlPackageUtil.PACKAGE_SEPARATOR
+						);
+					}
+				}
+			}
+		}
+
+		return filePackage = super.getPackageName();
 	}
 }
