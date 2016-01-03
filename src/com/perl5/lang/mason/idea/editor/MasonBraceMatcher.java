@@ -20,7 +20,7 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason.MasonPerlElementTypes;
+import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
 
 /**
  * Created by hurricup on 21.12.2015.

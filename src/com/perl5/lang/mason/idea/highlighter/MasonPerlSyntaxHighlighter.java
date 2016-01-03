@@ -19,7 +19,7 @@ package com.perl5.lang.mason.idea.highlighter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mason.MasonPerlElementTypes;
+import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
 import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
 import org.jetbrains.annotations.NotNull;
@@ -51,15 +51,15 @@ public class MasonPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded im
 			MASON_OVERRIDE_OPENER, MASON_OVERRIDE_CLOSER
 	);
 
+	public MasonPerlSyntaxHighlighter(Project project)
+	{
+		super(project);
+	}
+
 	@Override
 	public TokenSet getMarkersTokenSet()
 	{
 		return MARKER_TOKENS;
-	}
-
-	public MasonPerlSyntaxHighlighter(Project project)
-	{
-		super(project);
 	}
 
 	@NotNull

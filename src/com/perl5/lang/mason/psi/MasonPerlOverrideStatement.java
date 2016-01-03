@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.mason.psi;
 
-import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
-import com.perl5.lang.perl.parser.moose.MoosePerlElementTypes;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 03.01.2016.
  */
-public interface MasonPerlParser extends MasonPerlElementTypes, MoosePerlElementTypes
+public interface MasonPerlOverrideStatement extends PerlMooseOverrideStatement
 {
 }

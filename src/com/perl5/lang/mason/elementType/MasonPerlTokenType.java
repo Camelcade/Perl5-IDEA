@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason;
+package com.perl5.lang.mason.elementType;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
+import com.perl5.lang.mason.MasonPerlLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 

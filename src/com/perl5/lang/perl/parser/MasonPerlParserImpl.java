@@ -100,7 +100,7 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 		);
 	}
 
-	public static boolean parseMasonMethod(PsiBuilder b, int l, IElementType closeToken)
+	public static boolean parseMasonMethod(PsiBuilder b, int l, IElementType closeToken, IElementType statementTokenType)
 	{
 		boolean r = false;
 
@@ -121,7 +121,7 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 					blockMarker.done(BLOCK);
 					blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 					b.advanceLexer();
-					methodMarker.done(METHOD_DEFINITION);
+					methodMarker.done(statementTokenType);
 					r = true;
 				}
 			}
@@ -222,15 +222,15 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 		}
 		else if (tokenType == MASON_METHOD_OPENER)
 		{
-			r = parseMasonMethod(b, l, MASON_METHOD_CLOSER);
+			r = parseMasonMethod(b, l, MASON_METHOD_CLOSER, METHOD_DEFINITION);
 		}
 		else if (tokenType == MASON_FILTER_OPENER)
 		{
-			r = parseMasonMethod(b, l, MASON_FILTER_CLOSER);
+			r = parseMasonMethod(b, l, MASON_FILTER_CLOSER, METHOD_DEFINITION);
 		}
 		else if (tokenType == MASON_OVERRIDE_OPENER)
 		{
-			r = parseMasonMethod(b, l, MASON_OVERRIDE_CLOSER);
+			r = parseMasonMethod(b, l, MASON_OVERRIDE_CLOSER, MASON_OVERRIDE_STATEMENT);
 		}
 		else if (SIMPLE_MASON_NAMED_BLOCKS.contains(tokenType)) // simple named blocks
 		{

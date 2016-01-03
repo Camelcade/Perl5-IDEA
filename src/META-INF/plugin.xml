@@ -40,6 +40,10 @@
       <li>Implemented parser extension for Switch core module, fixes #658</li>
       <li>Added spacing control for call arguments, fixes #664</li>
       <li>Implemented spaces removal around array index, hash index and dereference, fixes #662</li>
+      <li>Mason<ul>
+        <li>Implemented filetypes for mason: top-level component, internal component and perl component.</li>
+        <li>Implemented lexing and parsing of Mason files.</li>
+      </ul></li>
       <li>Mojolicious <ul>
         <li>Parser has been re-written almost from scratch and now is much more appropriate.</li>
         <li>Fixed problem with statement modifiers parsing in expressions blocks.</li>

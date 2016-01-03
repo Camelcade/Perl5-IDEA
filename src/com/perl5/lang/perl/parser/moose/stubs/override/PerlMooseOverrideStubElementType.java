@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.moose.stubs.override;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -26,7 +27,9 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -38,6 +41,11 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
 	public PerlMooseOverrideStubElementType(String name)
 	{
 		super(name);
+	}
+
+	public PerlMooseOverrideStubElementType(@NotNull @NonNls String debugName, @Nullable Language language)
+	{
+		super(debugName, language);
 	}
 
 	@Override

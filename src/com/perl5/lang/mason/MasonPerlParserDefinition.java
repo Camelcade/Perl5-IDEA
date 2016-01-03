@@ -16,15 +16,20 @@
 
 package com.perl5.lang.mason;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
 import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
+import com.perl5.lang.mason.psi.impl.MasonPerlOverrideStatementImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.parser.MasonPerlParserImpl;
@@ -72,5 +77,18 @@ public class MasonPerlParserDefinition extends PerlParserDefinition implements M
 	public PsiParser createParser(Project project)
 	{
 		return new MasonPerlParserImpl();
+	}
+
+	@NotNull
+	@Override
+	public PsiElement createElement(ASTNode node)
+	{
+		IElementType elementType = node.getElementType();
+		if (elementType == MASON_OVERRIDE_STATEMENT)
+		{
+			return new MasonPerlOverrideStatementImpl(node);
+		}
+
+		return super.createElement(node);
 	}
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason;
+package com.perl5.lang.mason.elementType;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

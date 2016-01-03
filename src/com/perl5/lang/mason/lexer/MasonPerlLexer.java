@@ -19,7 +19,7 @@ package com.perl5.lang.mason.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
-import com.perl5.lang.mason.MasonPerlElementTypes;
+import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
 import gnu.trove.THashMap;
 
 import java.io.IOException;

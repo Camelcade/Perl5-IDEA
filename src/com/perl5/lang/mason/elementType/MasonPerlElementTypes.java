@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason;
+package com.perl5.lang.mason.elementType;
 
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.mason.MasonPerlLanguage;
+import com.perl5.lang.mason.MasonPerlSyntaxElements;
 
 /**
  * Created by hurricup on 21.12.2015.
@@ -77,4 +79,6 @@ public interface MasonPerlElementTypes extends MasonPerlSyntaxElements
 
 	IElementType MASON_OVERRIDE_OPENER = new MasonPerlTokenType(KEYWORD_OVERRIDE_OPENER);
 	IElementType MASON_OVERRIDE_CLOSER = new MasonPerlTokenType(KEYWORD_OVERRIDE_CLOSER);
+
+	IElementType MASON_OVERRIDE_STATEMENT = new MasonPerlOverrideStubElementType(KEYWORD_OVERRIDE);
 }

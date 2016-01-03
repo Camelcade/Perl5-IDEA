@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -24,7 +25,9 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +42,11 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public PerlSubDefinitionStubElementType(String name)
 	{
 		super(name, PerlLanguage.INSTANCE);
+	}
+
+	public PerlSubDefinitionStubElementType(@NotNull @NonNls String debugName, @Nullable Language language)
+	{
+		super(debugName, language);
 	}
 
 	@Override
