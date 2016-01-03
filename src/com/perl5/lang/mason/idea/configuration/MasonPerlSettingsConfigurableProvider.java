@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.configuration.settings;
+package com.perl5.lang.mason.idea.configuration;
 
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurableProvider;
@@ -22,13 +22,13 @@ import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 30.08.2015.
+ * Created by hurricup on 03.01.2016.
  */
-public class PerlSettingsConfigurableProvider extends ConfigurableProvider
+public class MasonPerlSettingsConfigurableProvider extends ConfigurableProvider
 {
 	Project project;
 
-	public PerlSettingsConfigurableProvider(Project project)
+	public MasonPerlSettingsConfigurableProvider(Project project)
 	{
 		this.project = project;
 	}
@@ -37,7 +37,12 @@ public class PerlSettingsConfigurableProvider extends ConfigurableProvider
 	@Override
 	public Configurable createConfigurable()
 	{
-		return new PerlSettingsConfigurable(project);
+		return new MasonPerlSettingsConfigurable(project);
 	}
 
+	@Override
+	public boolean canCreateConfigurable()
+	{
+		return project != null;
+	}
 }

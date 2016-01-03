@@ -43,6 +43,7 @@
       <li>Mason<ul>
         <li>Implemented filetypes for mason: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason files.</li>
+        <li>Implemented settings to select Mason components roots.</li>
       </ul></li>
       <li>Mojolicious <ul>
         <li>Parser has been re-written almost from scratch and now is much more appropriate.</li>
@@ -141,7 +142,8 @@
         <projectConfigurable displayName="Perl5 libs" groupId="project"
                              provider="com.perl5.lang.perl.idea.configuration.paths.PerlPathsConfigurableProvider"/>
         <projectConfigurable groupId="language"
-                             provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"/>
+                             provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"
+                             id="PERL5_MAIN_SETTINGS"/>
 
         <projectStructure.sourceRootEditHandler
                 implementation="com.perl5.lang.perl.idea.configuration.paths.PerlIncludeLibrarySourceRootEditHandler"/>
@@ -343,6 +345,11 @@
         <lang.braceMatcher language="Mojolicious Perl"
                            implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoliciousBraceMatcher"/>
 
+
+        <projectService serviceImplementation="com.perl5.lang.mason.idea.configuration.MasonPerlSettings"/>
+        <projectConfigurable
+                provider="com.perl5.lang.mason.idea.configuration.MasonPerlSettingsConfigurableProvider"
+                parentId="PERL5_MAIN_SETTINGS"/>
 
         <fileTypeFactory implementation="com.perl5.lang.mason.filetypes.MasonFileTypeFactory"/>
         <lang.parserDefinition language="Mason template"

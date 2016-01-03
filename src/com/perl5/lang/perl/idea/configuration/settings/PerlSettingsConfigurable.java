@@ -47,10 +47,6 @@ public class PerlSettingsConfigurable implements Configurable
 	TextFieldWithBrowseButton perlPathInputField;
 	JCheckBox simpleMainCheckbox;
 
-	private PerlSettingsConfigurable()
-	{
-	}
-
 	public PerlSettingsConfigurable(Project myProject)
 	{
 		this.myProject = myProject;

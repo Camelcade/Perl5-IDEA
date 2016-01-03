@@ -272,7 +272,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public String getPackageName()
 	{
-		return "main";
+		return PerlPackageUtil.MAIN_PACKAGE;
 	}
 
 	@Override
