@@ -63,7 +63,7 @@ public class MasonPerlFileImpl extends PerlFileImpl
 			return filePackage;
 
 		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
-		VirtualFile originalFile = getOriginalFile().getVirtualFile();
+		VirtualFile originalFile = getViewProvider().getVirtualFile();
 
 		if (isValid() && isPhysical())
 		{

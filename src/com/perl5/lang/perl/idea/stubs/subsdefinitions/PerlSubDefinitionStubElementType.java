@@ -18,9 +18,12 @@ package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -62,11 +65,6 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getSubAnnotations(), psi.isMethod());
 	}
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		return node.findChildByType(PerlElementTypes.SUB) != null;
-	}
 
 	@NotNull
 	@Override
@@ -136,4 +134,15 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	{
 		return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, isMethod, annotations, this);
 	}
+
+	@Override
+	public boolean shouldCreateStub(ASTNode node)
+	{
+		PsiElement element = node.getPsi();
+		return element instanceof PerlSubDefinition &&
+				element.isValid() &&
+				element.isPhysical() &&
+				StringUtil.isNotEmpty(((PerlSubDefinition) element).getSubName());
+	}
+
 }
