@@ -21,6 +21,8 @@ import com.intellij.openapi.roots.ui.configuration.JavaVfsSourceRootDetectionUti
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.testFramework.LightVirtualFile;
+import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
 import com.perl5.lang.mason.idea.configuration.MasonPerlSettings;
@@ -65,10 +67,15 @@ public class MasonPerlFileImpl extends PerlFileImpl
 		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
 		VirtualFile originalFile = getViewProvider().getVirtualFile();
 
+		if (originalFile instanceof LightVirtualFile && getUserData(IndexingDataKeys.VIRTUAL_FILE) != null)
+		{
+			originalFile = getUserData(IndexingDataKeys.VIRTUAL_FILE);
+		}
+
 		for (String relativeRoot : masonSettings.componentRoots)
 		{
 			VirtualFile rootFile = VfsUtil.findRelativeFile(getProject().getBaseDir(), relativeRoot);
-			if (rootFile != null && VfsUtil.isAncestor(rootFile, originalFile, true))
+			if (rootFile != null && originalFile != null && VfsUtil.isAncestor(rootFile, originalFile, true))
 			{
 				String componentPath = VfsUtil.getRelativePath(originalFile, rootFile);
 
