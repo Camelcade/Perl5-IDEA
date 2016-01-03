@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mason.filetypes;
 
+import com.intellij.lang.Language;
 import com.perl5.PerlIcons;
 import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.perl.PerlLanguage;
@@ -35,6 +36,11 @@ public class MasonPurePerlComponentFileType extends PerlFileType
 	public MasonPurePerlComponentFileType()
 	{
 		super(PerlLanguage.INSTANCE);
+	}
+
+	public MasonPurePerlComponentFileType(Language language)
+	{
+		super(language);
 	}
 
 	@NotNull

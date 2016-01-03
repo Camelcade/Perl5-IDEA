@@ -36,7 +36,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonTopLevelComponentFileType extends PerlFileType
+public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileType
 {
 	public static final MasonTopLevelComponentFileType INSTANCE = new MasonTopLevelComponentFileType();
 

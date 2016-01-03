@@ -47,14 +47,21 @@ import java.util.List;
 public class MasonPerlSettingsConfigurable implements Configurable
 {
 	final Project myProject;
-	MasonPerlSettings mySettings;
+	final String windowTitile;
+	final MasonPerlSettings mySettings;
 
 	CollectionListModel<String> rootsModel;
 	JBList rootsList;
 
 	public MasonPerlSettingsConfigurable(Project myProject)
 	{
+		this(myProject, "Mason");
+	}
+
+	public MasonPerlSettingsConfigurable(Project myProject, String windowTitile)
+	{
 		this.myProject = myProject;
+		this.windowTitile = windowTitile;
 		mySettings = MasonPerlSettings.getInstance(myProject);
 	}
 
@@ -62,7 +69,7 @@ public class MasonPerlSettingsConfigurable implements Configurable
 	@Override
 	public String getDisplayName()
 	{
-		return "Mason";
+		return windowTitile;
 	}
 
 	@Nullable

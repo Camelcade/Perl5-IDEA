@@ -350,6 +350,8 @@
         <projectConfigurable
                 provider="com.perl5.lang.mason.idea.configuration.MasonPerlSettingsConfigurableProvider"
                 parentId="PERL5_MAIN_SETTINGS"/>
+        <editorNotificationProvider
+                implementation="com.perl5.lang.mason.idea.editor.notification.MasonPathsNotification"/>
 
         <fileTypeFactory implementation="com.perl5.lang.mason.filetypes.MasonFileTypeFactory"/>
         <lang.parserDefinition language="Mason template"
