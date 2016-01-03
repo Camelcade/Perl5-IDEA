@@ -164,6 +164,7 @@ public class MoosePerlParserExtensionImpl extends PerlParserExtension implements
 			if (PerlParserImpl.expr(b, l, -1))
 			{
 				PerlParserUtil.parseStatementModifier(b, l);
+				PerlParserUtil.statementSemi(b, l);
 				m.done(statementToken);
 				return true;
 			}
@@ -184,6 +185,7 @@ public class MoosePerlParserExtensionImpl extends PerlParserExtension implements
 			if (PerlParserImpl.expr(b, l, -1))
 			{
 				PerlParserUtil.parseStatementModifier(b, l);
+				PerlParserUtil.statementSemi(b, l);
 				m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
 				return true;
 			}
