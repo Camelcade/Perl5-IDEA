@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +44,7 @@ public class PerlNamespaceDefinitionResolver implements ResolveCache.PolyVariant
 
 		PsiElement parent = myElement.getParent();
 
-		for (PsiPerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, perlNamespaceReference.getCanonicalName()))
+		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, perlNamespaceReference.getCanonicalName()))
 		{
 			if (!parent.isEquivalentTo(namespaceDefinition))
 				result.add(new PsiElementResolveResult(namespaceDefinition));

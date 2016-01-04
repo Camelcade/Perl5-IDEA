@@ -17,16 +17,11 @@
 package com.perl5.lang.embedded.idea;
 
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,15 +34,15 @@ public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded
 			EMBED_MARKER_CLOSE
 	);
 
+	public EmbeddedPerlSyntaxHighlighter(Project project)
+	{
+		super(project);
+	}
+
 	@Override
 	public TokenSet getMarkersTokenSet()
 	{
 		return MARKER_TOKENS;
-	}
-
-	public EmbeddedPerlSyntaxHighlighter(Project project)
-	{
-		super(project);
 	}
 
 	@NotNull

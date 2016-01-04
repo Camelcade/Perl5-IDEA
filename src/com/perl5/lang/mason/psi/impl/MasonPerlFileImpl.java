@@ -17,7 +17,6 @@
 package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.roots.ui.configuration.JavaVfsSourceRootDetectionUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
@@ -30,8 +29,6 @@ import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
 
 /**
  * Created by hurricup on 20.12.2015.

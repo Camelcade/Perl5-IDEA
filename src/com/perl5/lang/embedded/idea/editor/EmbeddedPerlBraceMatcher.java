@@ -21,7 +21,6 @@ import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
  * Created by hurricup on 03.09.2015.

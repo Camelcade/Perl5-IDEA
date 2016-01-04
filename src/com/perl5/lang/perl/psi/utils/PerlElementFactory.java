@@ -62,7 +62,7 @@ public class PerlElementFactory
 	public static PerlNamespaceElementImpl createPackageName(Project project, String name)
 	{
 		PerlFileImpl file = createFile(project, "package " + name + ";");
-		PsiPerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PsiPerlNamespaceDefinition.class);
+		PerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinition.class);
 		assert def != null;
 		return (PerlNamespaceElementImpl) def.getNamespaceElement();
 	}

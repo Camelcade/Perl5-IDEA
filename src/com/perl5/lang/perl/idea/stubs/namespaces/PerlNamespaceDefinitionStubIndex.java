@@ -18,16 +18,16 @@ package com.perl5.lang.perl.idea.stubs.namespaces;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<PsiPerlNamespaceDefinition>
+public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<PerlNamespaceDefinition>
 {
 	public static final int VERSION = 2;
-	public static final StubIndexKey<String, PsiPerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");
+	public static final StubIndexKey<String, PerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");
 
 	@Override
 	public int getVersion()
@@ -37,7 +37,7 @@ public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<P
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PsiPerlNamespaceDefinition> getKey()
+	public StubIndexKey<String, PerlNamespaceDefinition> getKey()
 	{
 		return KEY;
 	}

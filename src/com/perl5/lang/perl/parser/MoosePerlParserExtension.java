@@ -16,12 +16,7 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlElementType;
-import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.parser.moose.MoosePerlElementTypes;
-import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStubElementType;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
 
 /**
  * Created by hurricup on 25.11.2015.

@@ -20,7 +20,7 @@ import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.GotoClassContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,7 +57,7 @@ public class PerlGoToNamespaceDefinitionContributor implements ChooseByNameContr
 	@Override
 	public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean b)
 	{
-		Collection<PsiPerlNamespaceDefinition> result = PerlPackageUtil.getNamespaceDefinitions(project, packageName);
+		Collection<PerlNamespaceDefinition> result = PerlPackageUtil.getNamespaceDefinitions(project, packageName);
 		return result.toArray(new NavigationItem[result.size()]);
 	}
 }

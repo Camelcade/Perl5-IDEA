@@ -42,11 +42,11 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection
 
 	private static boolean hasRecursiveInheritance(Project project, String packageName, HashSet<String> passedWay)
 	{
-		Collection<PsiPerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
+		Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 		if (definitions.size() > 0)
 		{
 			HashSet<String> parents = new HashSet<String>();
-			for (PsiPerlNamespaceDefinition definition : definitions)
+			for (PerlNamespaceDefinition definition : definitions)
 				parents.addAll(definition.getParentNamespaces());
 
 			if (parents.size() > 0)

@@ -37,7 +37,6 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubInde
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
@@ -221,16 +220,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param packageName canonical package name (without tailing ::)
 	 * @return collection of found definitions
 	 */
-	public static Collection<PsiPerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName)
+	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName)
 	{
 		return getNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
 	}
 
-	public static Collection<PsiPerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
+	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
 	{
 		assert packageName != null;
 
-		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PsiPerlNamespaceDefinition.class);
+		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class);
 	}
 
 	/**
@@ -262,16 +261,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param project project to search in
 	 * @return collection of definitions
 	 */
-	public static Collection<PsiPerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName)
+	public static Collection<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName)
 	{
 		return getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
 	}
 
-	public static Collection<PsiPerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
+	public static Collection<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
 	{
 		assert packageName != null;
 
-		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, "*" + packageName, project, scope, PsiPerlNamespaceDefinition.class);
+		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, "*" + packageName, project, scope, PerlNamespaceDefinition.class);
 	}
 
 	/**
@@ -326,7 +325,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 				{
 					PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
 					if (psiFile != null)
-						for (PsiPerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PsiPerlNamespaceDefinition.class))
+						for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
 							if (oldPackageName.equals(namespaceDefinition.getPackageName()))
 								queue.addElement(namespaceDefinition, newPackageName);
 				}

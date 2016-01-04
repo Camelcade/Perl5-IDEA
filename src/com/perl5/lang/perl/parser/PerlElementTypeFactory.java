@@ -17,8 +17,6 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.embedded.psi.EmbeddedPerlTokenType;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.PerlElementType;
 import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;

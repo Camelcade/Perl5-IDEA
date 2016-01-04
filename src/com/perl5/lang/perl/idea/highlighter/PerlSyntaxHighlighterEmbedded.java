@@ -36,7 +36,7 @@ public abstract class PerlSyntaxHighlighterEmbedded extends PerlSyntaxHighlighte
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
-		if( getMarkersTokenSet().contains(tokenType))
+		if (getMarkersTokenSet().contains(tokenType))
 		{
 			return PerlSyntaxHighlighter.EMBED_MARKER_KEYS;
 		}

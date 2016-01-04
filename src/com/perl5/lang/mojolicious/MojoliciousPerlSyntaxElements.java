@@ -19,8 +19,6 @@ package com.perl5.lang.mojolicious;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 
-import java.util.regex.Pattern;
-
 /**
  * Created by hurricup on 26.12.2015.
  */

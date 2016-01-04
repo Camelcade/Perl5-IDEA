@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyNodeDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -57,11 +56,11 @@ public class PerlSuperTypesHierarchyTreeStructure extends HierarchyTreeStructure
 			if (element instanceof PerlNamespaceDefinition)
 				for (String namespace : ((PerlNamespaceDefinition) element).getParentNamespaces())
 				{
-					Collection<PsiPerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, projectScope);
+					Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, projectScope);
 					if (definitions.size() == 0)
 						definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, allScope);
 
-					for (PsiPerlNamespaceDefinition definition : definitions)
+					for (PerlNamespaceDefinition definition : definitions)
 						result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, definition, false));
 				}
 		}

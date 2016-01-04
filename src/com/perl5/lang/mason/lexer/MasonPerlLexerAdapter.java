@@ -16,17 +16,8 @@
 
 package com.perl5.lang.mason.lexer;
 
-import com.intellij.lexer.FlexLexer;
-import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexer;
-import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.PerlLexerGenerated;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
 
 /**
  * Created by hurricup on 20.12.2015.

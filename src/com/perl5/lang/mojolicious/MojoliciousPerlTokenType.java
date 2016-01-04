@@ -17,7 +17,6 @@
 package com.perl5.lang.mojolicious;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 

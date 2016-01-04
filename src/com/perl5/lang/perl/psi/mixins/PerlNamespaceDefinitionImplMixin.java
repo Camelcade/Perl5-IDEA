@@ -48,7 +48,7 @@ import java.util.*;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub> implements PsiPerlNamespaceDefinition
+public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBase<PerlNamespaceDefinitionStub> implements PerlNamespaceDefinition
 {
 	public PerlNamespaceDefinitionImplMixin(@NotNull ASTNode node)
 	{

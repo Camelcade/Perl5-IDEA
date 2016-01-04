@@ -21,6 +21,7 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -76,5 +77,13 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 * @return map of %EXPORT_TAGS
 	 */
 	public Map<String, List<String>> getEXPORT_TAGS();
+
+	/**
+	 * Returns deprecated annotation if any
+	 *
+	 * @return deprecated annotation
+	 */
+	@Nullable
+	PsiPerlAnnotationDeprecated getAnnotationDeprecated();
 
 }

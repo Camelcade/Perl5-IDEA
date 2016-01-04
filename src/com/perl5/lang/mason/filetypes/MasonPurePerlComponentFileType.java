@@ -18,7 +18,6 @@ package com.perl5.lang.mason.filetypes;
 
 import com.intellij.lang.Language;
 import com.perl5.PerlIcons;
-import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;

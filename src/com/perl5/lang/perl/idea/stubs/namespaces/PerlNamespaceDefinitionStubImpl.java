@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.stubs.namespaces;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubImpl extends StubBase<PsiPerlNamespaceDefinition> implements PerlNamespaceDefinitionStub
+public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefinition> implements PerlNamespaceDefinitionStub
 {
 	private final String myPackageName;
 	private final PerlMroType myMroType;

@@ -23,7 +23,6 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.AnActionButton;
 import com.intellij.ui.AnActionButtonRunnable;
@@ -31,9 +30,7 @@ import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.Consumer;
-import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
-import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 

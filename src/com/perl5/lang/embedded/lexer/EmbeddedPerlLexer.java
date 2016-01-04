@@ -16,11 +16,9 @@
 
 package com.perl5.lang.embedded.lexer;
 
-import com.intellij.openapi.diff.impl.patch.CharsetEP;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 
 import java.io.IOException;

@@ -22,7 +22,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;

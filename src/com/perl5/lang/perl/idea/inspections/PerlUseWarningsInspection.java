@@ -22,8 +22,6 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType;
-import com.perl5.lang.mojolicious.filetypes.MojoliciousPerlFileType;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.filetypes.PerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;

@@ -21,7 +21,7 @@ import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PsiPerlNamespaceDefinition>
+public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinition>
 {
 	public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
 			"main", "CORE"
@@ -47,13 +47,13 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	}
 
 	@Override
-	public PsiPerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub)
+	public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub)
 	{
 		return new PsiPerlNamespaceDefinitionImpl(stub, this);
 	}
 
 	@Override
-	public PerlNamespaceDefinitionStub createStub(@NotNull PsiPerlNamespaceDefinition psi, StubElement parentStub)
+	public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinition psi, StubElement parentStub)
 	{
 		return new PerlNamespaceDefinitionStubImpl(
 				parentStub,

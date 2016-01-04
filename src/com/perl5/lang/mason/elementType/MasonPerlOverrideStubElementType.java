@@ -23,10 +23,8 @@ import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.psi.MasonPerlOverrideStatement;
 import com.perl5.lang.mason.psi.impl.MasonPerlOverrideStatementImpl;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
-import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import org.jetbrains.annotations.NotNull;
 
