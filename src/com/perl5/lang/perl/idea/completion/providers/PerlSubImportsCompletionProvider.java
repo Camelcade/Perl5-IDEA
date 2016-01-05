@@ -64,7 +64,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 				for (Map.Entry<String, Set<String>> imported : PerlSubUtil.getImportedSubs(project, namespaceContainer.getPackageName(), parameters.getOriginalFile()).entrySet())
 					for (String subName : imported.getValue())
 					{
-						String lookupKey = imported.getKey() + "::" + subName;
+						String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
 						LookupElementBuilder element = LOOKUP_CACHE.get(subName);
 
 						if (element == null)
@@ -90,7 +90,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 							for (Map.Entry<String, Set<String>> imported : namespaceDefinition.getImportedSubsNames().entrySet())
 								for (String subName : imported.getValue())
 								{
-									String lookupKey = imported.getKey() + "::" + subName;
+									String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
 									LookupElementBuilder element = LOOKUP_CACHE.get(subName);
 
 									if (element == null)

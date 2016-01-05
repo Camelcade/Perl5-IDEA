@@ -37,13 +37,13 @@ public class PerlNamespaceElementManipulator extends AbstractElementManipulator<
 
 		String currentName = element.getText();
 
-		boolean currentTail = currentName.endsWith("::") || currentName.endsWith("'");
-		boolean newTail = newContent.endsWith("::") || newContent.endsWith("'");
+		boolean currentTail = currentName.endsWith(PerlPackageUtil.PACKAGE_SEPARATOR) || currentName.endsWith("'");
+		boolean newTail = newContent.endsWith(PerlPackageUtil.PACKAGE_SEPARATOR) || newContent.endsWith("'");
 
 		if (newTail && !currentTail)
 			newContent = PerlPackageUtil.PACKAGE_SEPARATOR_TAIL_RE.matcher(newContent).replaceFirst("");
 		else if (!newTail && currentTail)
-			newContent = newContent + "::";
+			newContent = newContent + PerlPackageUtil.PACKAGE_SEPARATOR;
 
 		return (PerlNamespaceElement) ((PerlNamespaceElementImpl) element).replaceWithText(newContent);
 	}

@@ -92,7 +92,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Stub
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + "::" + getSubName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
 	}
 
 	@Override

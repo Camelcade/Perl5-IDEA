@@ -23,6 +23,7 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.references.resolvers.PerlNamespaceFileResolver;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,9 +57,9 @@ public class PerlNamespaceFileReference extends PerlPolyVariantReference
 		String currentName = ((PerlNamespaceElement) myElement).getCanonicalName();
 		if (currentName != null && newElementName.endsWith(".pm"))
 		{
-			String[] nameChunks = currentName.split("::");
+			String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
 			nameChunks[nameChunks.length - 1] = newElementName.replaceFirst("\\.pm$", "");
-			newElementName = StringUtils.join(nameChunks, "::");
+			newElementName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
 
 			return super.handleElementRename(newElementName);
 		}

@@ -123,7 +123,7 @@ public abstract class PerlConstantImplMixin extends StubBasedPsiElementBase<Perl
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + "::" + getName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
 	}
 
 	@Override

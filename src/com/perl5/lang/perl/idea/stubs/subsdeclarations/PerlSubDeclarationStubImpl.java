@@ -21,6 +21,7 @@ import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -66,6 +67,6 @@ public class PerlSubDeclarationStubImpl extends StubBase<PsiPerlSubDeclaration> 
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + "::" + getSubName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
 	}
 }

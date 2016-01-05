@@ -23,6 +23,7 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.filetypes.PerlFileTypePackage;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -59,7 +60,7 @@ public class PerlCreatePackageFromTemplateHandler extends DefaultCreateFromTempl
 		if (packagePrefix.isEmpty())
 			props.put("PERL_PACKAGE_NAME", fileName);
 		else
-			props.put("PERL_PACKAGE_NAME", packagePrefix + "::" + fileName);
+			props.put("PERL_PACKAGE_NAME", packagePrefix + PerlPackageUtil.PACKAGE_SEPARATOR + fileName);
 
 		super.prepareProperties(props);
 	}

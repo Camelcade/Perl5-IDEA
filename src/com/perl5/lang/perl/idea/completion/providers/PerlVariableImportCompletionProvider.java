@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -72,7 +73,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 			for (Map.Entry<String, Set<String>> imported : PerlScalarUtil.getImportedScalars(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
-					String lookupKey = imported.getKey() + "::" + name;
+					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;
 					LookupElementBuilder element = SCALAR_LOOKUP_CACHE.get(name);
 
 					if (element == null)
@@ -88,7 +89,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 			for (Map.Entry<String, Set<String>> imported : PerlArrayUtil.getImportedArrays(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
-					String lookupKey = imported.getKey() + "::" + name;
+					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;
 					LookupElementBuilder element = ARRAY_LOOKUP_CACHE.get(name);
 
 					if (element == null)
@@ -104,7 +105,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 			for (Map.Entry<String, Set<String>> imported : PerlHashUtil.getImportedHashes(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
-					String lookupKey = imported.getKey() + "::" + name;
+					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;
 					LookupElementBuilder element = HASH_LOOKUP_CACHE.get(name);
 
 					if (element == null)

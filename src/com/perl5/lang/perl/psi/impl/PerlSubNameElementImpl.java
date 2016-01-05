@@ -67,7 +67,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@NotNull
 	public String getCanonicalName()
 	{
-		return getPackageName() + "::" + getName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
 	}
 
 	@Override

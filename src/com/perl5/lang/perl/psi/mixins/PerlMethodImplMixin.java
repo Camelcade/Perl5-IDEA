@@ -76,7 +76,7 @@ public abstract class PerlMethodImplMixin extends ASTWrapperPsiElement implement
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + "::" + getName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
 	}
 
 

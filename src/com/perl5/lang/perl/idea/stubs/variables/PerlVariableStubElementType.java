@@ -25,6 +25,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -94,7 +95,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 	@Override
 	public void indexStub(@NotNull PerlVariableStub stub, @NotNull IndexSink sink)
 	{
-		String variableName = stub.getPackageName() + "::" + stub.getVariableName();
+		String variableName = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getVariableName();
 		sink.occurrence(stub.getIndexKey(), variableName);
 		sink.occurrence(stub.getIndexKey(), "*" + stub.getPackageName());
 	}

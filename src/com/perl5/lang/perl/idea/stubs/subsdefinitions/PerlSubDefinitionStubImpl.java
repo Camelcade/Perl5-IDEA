@@ -22,6 +22,7 @@ import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinitionBase> i
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + "::" + getSubName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
 	}
 
 

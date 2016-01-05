@@ -53,7 +53,7 @@ public abstract class PerlMro
 
 		for (String currentPackageName : linearISA)
 		{
-			collectEntities(result, project, currentPackageName + "::" + subName);
+			collectEntities(result, project, currentPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName);
 
 			if (result.size() > 0)
 				break;
@@ -65,7 +65,7 @@ public abstract class PerlMro
 			{
 				if (!PerlPackageUtil.isUNIVERSAL(currentPackageName)) // ignoring UNIVERSAL::AUTOLOAD
 				{
-					collectEntities(result, project, currentPackageName + "::" + "AUTOLOAD");
+					collectEntities(result, project, currentPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + "AUTOLOAD");
 
 					if (result.size() > 0)
 						break;

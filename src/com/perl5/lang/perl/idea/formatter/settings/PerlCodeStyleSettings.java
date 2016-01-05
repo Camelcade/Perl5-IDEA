@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.formatter.settings;
 
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 /**
  * Created by hurricup on 03.09.2015.
@@ -71,7 +72,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings
 		String[] LABELS_SIMPLE_DEREF_STYLE = {"As is", "@{$reference}", "@$reference"};
 		Object[] OPTIONS_SIMPLE_DEREF_STYLE = {LABELS_SIMPLE_DEREF_STYLE, VALUES};
 
-		String[] LABELS_MAIN_FORMAT = {"As is", "main::", "::"};
+		String[] LABELS_MAIN_FORMAT = {"As is", PerlPackageUtil.MAIN_PACKAGE_FULL, PerlPackageUtil.PACKAGE_SEPARATOR};
 		Object[] OPTIONS_MAIN_FORMAT = {LABELS_MAIN_FORMAT, VALUES};
 	}
 

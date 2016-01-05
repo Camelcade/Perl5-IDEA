@@ -165,7 +165,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedScalarNames().entrySet())
 				for (String variableName : importEntry.getValue())
 				{
-					String canonicalName = importEntry.getKey() + "::" + variableName;
+					String canonicalName = importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName;
 
 					Collection<PerlVariableDeclarationWrapper> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
 
@@ -185,7 +185,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedArrayNames().entrySet())
 				for (String variableName : importEntry.getValue())
 				{
-					String canonicalName = importEntry.getKey() + "::" + variableName;
+					String canonicalName = importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName;
 
 					Collection<PerlVariableDeclarationWrapper> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
 
@@ -205,7 +205,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedHashNames().entrySet())
 				for (String variableName : importEntry.getValue())
 				{
-					String canonicalName = importEntry.getKey() + "::" + variableName;
+					String canonicalName = importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName;
 
 					Collection<PerlVariableDeclarationWrapper> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
 
@@ -226,7 +226,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			for (Map.Entry<String, Set<String>> importEntry : ((PerlNamespaceContainer) myElement).getImportedSubsNames().entrySet())
 				for (String subName : importEntry.getValue())
 				{
-					String canonicalName = importEntry.getKey() + "::" + subName;
+					String canonicalName = importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
 
 					// declarations
 					Collection<PsiPerlSubDeclaration> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);

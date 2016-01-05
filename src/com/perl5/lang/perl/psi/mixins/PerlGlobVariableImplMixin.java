@@ -148,7 +148,7 @@ public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + "::" + getName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
 	}
 
 

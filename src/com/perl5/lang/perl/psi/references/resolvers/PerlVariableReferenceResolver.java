@@ -31,6 +31,7 @@ import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -85,7 +86,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
 							if (variable.equals(variableName))
-								for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getKey() + "::" + variableName))
+								for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
 				}
 				else if (actualType == PerlVariableType.ARRAY)
@@ -94,7 +95,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
 							if (variable.equals(variableName))
-								for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getKey() + "::" + variableName))
+								for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
 				}
 				else if (actualType == PerlVariableType.HASH)
@@ -103,7 +104,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
 							if (variable.equals(variableName))
-								for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getKey() + "::" + variableName))
+								for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName))
 									result.add(new PsiElementResolveResult(targetVariable));
 				}
 

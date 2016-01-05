@@ -24,6 +24,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.impl.PsiPerlGlobVariableImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	@Override
 	public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink)
 	{
-		String name = stub.getPackageName() + "::" + stub.getName();
+		String name = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getName();
 		sink.occurrence(PerlGlobsStubIndex.KEY, name);
 		sink.occurrence(PerlGlobsStubIndex.KEY, "*" + stub.getPackageName());
 	}

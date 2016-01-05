@@ -424,11 +424,11 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
 		if (myPerlSettings.MAIN_FORMAT == SUPPRESS && PerlPackageUtil.MAIN_PACKAGE_FULL.equals(elementContent))
 		{
-			myFormattingOperations.add(new PerlFormattingReplaceWithText(o, "::"));
+			myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.PACKAGE_SEPARATOR));
 		}
 		else if (myPerlSettings.MAIN_FORMAT == FORCE && PerlPackageUtil.MAIN_PACKAGE_SHORT.equals(elementContent))
 		{
-			myFormattingOperations.add(new PerlFormattingReplaceWithText(o, "main::"));
+			myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.MAIN_PACKAGE_FULL));
 		}
 		else
 		{

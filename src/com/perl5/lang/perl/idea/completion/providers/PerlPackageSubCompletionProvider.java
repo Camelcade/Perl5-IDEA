@@ -53,11 +53,11 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 
 		if (explicitNamespace != null)
 		{
-			nameFilter = explicitNamespace.getCanonicalName() + "::";
+			nameFilter = explicitNamespace.getCanonicalName() + PerlPackageUtil.PACKAGE_SEPARATOR;
 		}
 		else
 		{
-			result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, PerlPackageUtil.SUPER_PACKAGE + "::"));
+			result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, PerlPackageUtil.SUPER_PACKAGE + PerlPackageUtil.PACKAGE_SEPARATOR));
 		}
 
 		final String finalNameFilter = nameFilter;

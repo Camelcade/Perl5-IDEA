@@ -93,7 +93,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 					GlobalSearchScope fileScope = GlobalSearchScope.fileScope(file);
 
 					collectRelatedItems(
-							packageName + "::" + subName,
+							packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
 							project,
 							parent,
 							relatedItems
@@ -112,7 +112,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 
 					// check indexes for defined subs
 					collectRelatedItems(
-							packageName + "::" + subName,
+							packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
 							project,
 							parent,
 							relatedItems
@@ -130,7 +130,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 							for (String importedSubName : imports.getValue())
 								if (importedSubName.equals(subName))
 									collectRelatedItems(
-											imports.getKey() + "::" + subName,
+											imports.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
 											project,
 											parent,
 											relatedItems
@@ -148,7 +148,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 									for (String importedSubName : imports.getValue())
 										if (importedSubName.equals(subName))
 											collectRelatedItems(
-													imports.getKey() + "::" + subName,
+													imports.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
 													project,
 													parent,
 													relatedItems

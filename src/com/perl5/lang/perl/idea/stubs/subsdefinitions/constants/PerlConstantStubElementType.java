@@ -24,6 +24,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.impl.PsiPerlConstantNameImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -77,7 +78,7 @@ public class PerlConstantStubElementType extends IStubElementType<PerlConstantSt
 	@Override
 	public void indexStub(@NotNull PerlConstantStub stub, @NotNull IndexSink sink)
 	{
-		String name = stub.getPackageName() + "::" + stub.getName();
+		String name = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getName();
 		sink.occurrence(PerlConstantsStubIndex.KEY, name);
 		sink.occurrence(PerlConstantsStubIndex.KEY, "*" + stub.getPackageName());
 	}

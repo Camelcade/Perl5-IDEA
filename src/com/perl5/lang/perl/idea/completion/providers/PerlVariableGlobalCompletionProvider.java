@@ -25,10 +25,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.*;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,10 +60,10 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 			String namespaceName = namespaceElement.getText();
 			String namespaceCanonicalName = namespaceElement.getCanonicalName();
 
-			if ("::".equals(namespaceName))
+			if (PerlPackageUtil.PACKAGE_SEPARATOR.equals(namespaceName))
 			{
 				resultSet = resultSet.withPrefixMatcher(
-						"::"
+						PerlPackageUtil.PACKAGE_SEPARATOR
 								+ resultSet.getPrefixMatcher().getPrefix()
 				);
 				forceShortMain = true;
@@ -75,7 +72,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 			{
 				resultSet = resultSet.withPrefixMatcher(
 						((PerlNamespaceElementContainer) perlVariable).getNamespaceElement().getCanonicalName()
-								+ "::"
+								+ PerlPackageUtil.PACKAGE_SEPARATOR
 								+ resultSet.getPrefixMatcher().getPrefix()
 				);
 			}

@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -133,7 +134,7 @@ public class PerlSubCompletionProviderUtil
 	{
 		String indexKeyName =
 				prefix +
-						(subDefinition.isMethod() ? "->" : "::") +
+						(subDefinition.isMethod() ? "->" : PerlPackageUtil.PACKAGE_SEPARATOR) +
 						subDefinition.getSubName();
 
 		if (!INCOMPLETE_SUB_DEFINITIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
@@ -160,7 +161,7 @@ public class PerlSubCompletionProviderUtil
 	{
 		String indexKeyName =
 				prefix +
-						(subDeclaration.isMethod() ? "->" : "::") +
+						(subDeclaration.isMethod() ? "->" : PerlPackageUtil.PACKAGE_SEPARATOR) +
 						subDeclaration.getSubName();
 
 		if (!INCOMPLETE_SUB_DECLARATIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
@@ -184,7 +185,7 @@ public class PerlSubCompletionProviderUtil
 	public static LookupElementBuilder getIncompleteGlobLookupElement(PerlGlobVariable globVariable, String prefix)
 	{
 		assert globVariable.getName() != null;
-		String indexKeyName = prefix + "::" + globVariable.getName();
+		String indexKeyName = prefix + PerlPackageUtil.PACKAGE_SEPARATOR + globVariable.getName();
 
 		if (!INCOMPLETE_GLOBS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
@@ -203,7 +204,7 @@ public class PerlSubCompletionProviderUtil
 	public static LookupElementBuilder getIncompleteConstantLookupElement(PerlConstant constant, String prefix)
 	{
 		assert constant.getName() != null;
-		String indexKeyName = prefix + "::" + constant.getName();
+		String indexKeyName = prefix + PerlPackageUtil.PACKAGE_SEPARATOR + constant.getName();
 
 		if (!INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{

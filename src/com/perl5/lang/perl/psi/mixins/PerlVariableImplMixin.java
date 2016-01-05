@@ -290,7 +290,7 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + "::" + getName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
 	}
 
 	@Override

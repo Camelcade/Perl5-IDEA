@@ -683,7 +683,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			IElementType nextNextTokenType = nextNextTokenData == null ? null : nextNextTokenData.getTokenType();
 
 			String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(b.getTokenText());
-			String potentialSubName = canonicalPackageName + "::" + nextTokenData.getTokenText();
+			String potentialSubName = canonicalPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + nextTokenData.getTokenText();
 
 			if (
 					nextNextTokenType == LEFT_PAREN                        // Package::Identifier( - what can it be?
@@ -723,7 +723,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
 					PerlTokenData nextNextTokenData = ((PerlBuilder) b).lookupToken(2);
 
-					String packageOrSub = PerlPackageUtil.getCanonicalPackageName(nextTokenData.getTokenText()) + "::" + nextNextTokenData.getTokenText();
+					String packageOrSub = PerlPackageUtil.getCanonicalPackageName(nextTokenData.getTokenText()) + PerlPackageUtil.PACKAGE_SEPARATOR + nextNextTokenData.getTokenText();
 
 					if (((PerlBuilder) b).isKnownSub(packageOrSub))
 						return convertIdentifier(b, l, SUB);
@@ -741,7 +741,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			{
 				PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
 
-				String potentialSubName = nextTokenData.getTokenText() + "::" + b.getTokenText();
+				String potentialSubName = nextTokenData.getTokenText() + PerlPackageUtil.PACKAGE_SEPARATOR + b.getTokenText();
 				if (((PerlBuilder) b).isKnownSub(potentialSubName))
 					return convertIdentifier(b, l, SUB) && convertIdentifier(b, l, PACKAGE);
 				else
