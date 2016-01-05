@@ -72,7 +72,7 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection
 			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
 			{
 				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-				if (namespaceElement == null || "main".equals(namespaceElement.getCanonicalName()))
+				if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName()))
 					return;
 
 				if (hasRecursiveInheritance(o))

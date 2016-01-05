@@ -122,7 +122,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	public IElementType parsePackageCanonical()
 	{
 		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
-		if (canonicalPackageName.equals("CORE"))
+		if (canonicalPackageName.equals(PerlPackageUtil.CORE_PACKAGE))
 			return PACKAGE_CORE_IDENTIFIER;
 		return PACKAGE_IDENTIFIER;
 	}

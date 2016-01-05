@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,7 +40,7 @@ public class PerlNamespaceClashesInspection extends PerlInspection
 			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
 			{
 				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-				if (namespaceElement == null || "main".equals(namespaceElement.getCanonicalName()))
+				if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName()))
 					return;
 
 				// fixme we should check that this is not in SDK

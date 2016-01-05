@@ -24,6 +24,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ import java.util.Map;
 public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinition>
 {
 	public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
-			"main", "CORE"
+			PerlPackageUtil.MAIN_PACKAGE, PerlPackageUtil.CORE_PACKAGE
 	));
 
 	public PerlNamespaceDefinitionStubElementType(String name)

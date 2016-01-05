@@ -448,7 +448,7 @@ public interface PerlSubUtilBuiltIn
 			"AUTOLOAD",
 			"BEGIN",
 			"CHECK",
-			"CORE",
+//			"CORE",
 			"__DATA__",
 			"default",
 			"DESTROY",

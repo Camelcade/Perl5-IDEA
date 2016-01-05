@@ -328,25 +328,25 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public Map<String, Set<String>> getImportedSubsNames()
 	{
-		return PerlSubUtil.getImportedSubs(getProject(), "main", this);
+		return PerlSubUtil.getImportedSubs(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@Override
 	public Map<String, Set<String>> getImportedScalarNames()
 	{
-		return PerlScalarUtil.getImportedScalars(getProject(), "main", this);
+		return PerlScalarUtil.getImportedScalars(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@Override
 	public Map<String, Set<String>> getImportedArrayNames()
 	{
-		return PerlArrayUtil.getImportedArrays(getProject(), "main", this);
+		return PerlArrayUtil.getImportedArrays(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@Override
 	public Map<String, Set<String>> getImportedHashNames()
 	{
-		return PerlHashUtil.getImportedHashes(getProject(), "main", this);
+		return PerlHashUtil.getImportedHashes(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@Override
