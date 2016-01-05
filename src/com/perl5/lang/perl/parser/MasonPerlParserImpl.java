@@ -346,4 +346,18 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 	{
 		return BLOCK_RECOVERY_TOKENS;
 	}
+
+	@Override
+	public boolean parseFileContents(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if( super.parseFileContents(b, l) )
+		{
+			m.done(NAMESPACE_CONTENT);
+			m.precede().done(MASON_NAMESPACE_DEFINITION);
+			return true;
+		}
+		m.rollbackTo();
+		return false;
+	}
 }

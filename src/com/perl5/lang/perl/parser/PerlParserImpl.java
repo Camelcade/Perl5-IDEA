@@ -82,5 +82,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 		return UNCONSUMABLE_SEMI_TOKENS;
 	}
 
-
+	public boolean parseFileContents(PsiBuilder b, int l){
+		return PerlParserGenerated.file_items(b,l);
+	}
 }

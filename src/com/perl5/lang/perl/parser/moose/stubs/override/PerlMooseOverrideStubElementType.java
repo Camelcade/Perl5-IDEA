@@ -18,11 +18,13 @@ package com.perl5.lang.perl.parser.moose.stubs.override;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -73,7 +75,9 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
 	{
 		PsiElement psi = node.getPsi();
 
-		return psi instanceof PerlMooseOverrideStatementImpl && ((PerlMooseOverrideStatementImpl) psi).getSubNameElement() != null;
+		return psi instanceof PerlMooseOverrideStatement &&
+				psi.isValid() &&
+				StringUtil.isNotEmpty(((PerlMooseOverrideStatement) psi).getSubName());
 	}
 
 }

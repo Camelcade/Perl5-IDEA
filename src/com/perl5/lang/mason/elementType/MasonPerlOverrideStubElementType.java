@@ -47,9 +47,9 @@ public class MasonPerlOverrideStubElementType extends PerlMooseOverrideStubEleme
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		PsiElement element = node.getPsi();
-		return element instanceof MasonPerlOverrideStatement
-				&& element.isValid()
-				&& StringUtil.isNotEmpty(((MasonPerlOverrideStatement) element).getSubName());
+		PsiElement psi = node.getPsi();
+		return psi instanceof MasonPerlOverrideStatement
+				&& psi.isValid()
+				&& StringUtil.isNotEmpty(((MasonPerlOverrideStatement) psi).getSubName());
 	}
 }

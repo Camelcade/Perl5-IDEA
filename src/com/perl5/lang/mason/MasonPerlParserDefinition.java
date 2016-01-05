@@ -28,6 +28,7 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
 import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
+import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
 import com.perl5.lang.mason.psi.impl.MasonPerlOverrideStatementImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -87,6 +88,10 @@ public class MasonPerlParserDefinition extends PerlParserDefinition implements M
 		if (elementType == MASON_OVERRIDE_STATEMENT)
 		{
 			return new MasonPerlOverrideStatementImpl(node);
+		}
+		else if (elementType == MASON_NAMESPACE_DEFINITION)
+		{
+			return new MasonNamespaceDefinitionImpl(node);
 		}
 
 		return super.createElement(node);

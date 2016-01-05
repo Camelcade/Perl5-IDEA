@@ -96,11 +96,20 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getPackageName();
+		}
 
+		return getPackageNameHeavy();
+	}
+
+	protected String getPackageNameHeavy()
+	{
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
 		if (namespaceElement != null)
+		{
 			return namespaceElement.getCanonicalName();
+		}
 
 		return null;
 	}
@@ -110,7 +119,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getParentNamespaces();
+		}
 
 		// checking compile-time modifications
 		LinkedHashSet<String> result = new LinkedHashSet<String>();
@@ -165,11 +176,18 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getMroType();
+		}
 
 		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
+		{
 			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof PerlMroProvider)
+			{
+
 				return ((PerlMroProvider) useStatement.getPackageProcessor()).getMroType(useStatement);
+			}
+		}
 
 		return PerlMroType.DFS;
 	}
@@ -179,9 +197,13 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	{
 		// fixme this should be another EP
 		if (getMroType() == PerlMroType.C3)
+		{
 			return PerlMroC3.INSTANCE;
+		}
 		else
+		{
 			return PerlMroDfs.INSTANCE;
+		}
 	}
 
 	@Override
@@ -201,7 +223,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.isDeprecated();
+		}
 		return getAnnotationDeprecated() != null;
 	}
 

@@ -17,19 +17,20 @@
 package com.perl5.lang.perl.idea.stubs.namespaces;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -38,13 +39,14 @@ import java.util.Map;
  */
 public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinition>
 {
-	public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
-			PerlPackageUtil.MAIN_PACKAGE, PerlPackageUtil.CORE_PACKAGE
-	));
-
 	public PerlNamespaceDefinitionStubElementType(String name)
 	{
 		super(name, PerlLanguage.INSTANCE);
+	}
+
+	public PerlNamespaceDefinitionStubElementType(@NotNull @NonNls String debugName, @Nullable Language language)
+	{
+		super(debugName, language);
 	}
 
 	@Override
@@ -126,8 +128,10 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		ASTNode packageNode = node.findChildByType(PerlElementTypes.PACKAGE);
-		return packageNode != null && !EXCLUSIONS.contains(packageNode.getText());
+		PsiElement psi = node.getPsi();
+		return psi instanceof PerlNamespaceDefinition &&
+				psi.isValid() &&
+				StringUtil.isNotEmpty(((PerlNamespaceDefinition) psi).getPackageName());
 	}
 
 }

@@ -2025,4 +2025,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 		return ((PerlBuilder) b).getPerlParser().parseTerm(b, l);
 	}
+
+
+	public static boolean parseFileContent(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+		return ((PerlBuilder) b).getPerlParser().parseFileContents(b,l);
+	}
+
 }

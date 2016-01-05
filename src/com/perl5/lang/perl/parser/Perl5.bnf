@@ -407,7 +407,9 @@ limitations under the License.
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
-root ::= file_item *
+root ::= <<parseFileContent>>
+// invoked by parser
+private file_items ::= file_item*
 
 private file_item ::= !<<eof>>
 {
