@@ -17,13 +17,22 @@
 package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiFile;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.testFramework.LightVirtualFile;
+import com.intellij.util.indexing.IndexingDataKeys;
+import com.perl5.lang.mason.idea.configuration.MasonPerlSettings;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 05.01.2016.
@@ -49,11 +58,84 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	@Override
 	protected String getPackageNameHeavy()
 	{
-		PsiFile file = getContainingFile();
-		if (file instanceof PerlFileImpl)
+		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
+		VirtualFile originalFile = getContainingFile().getViewProvider().getVirtualFile();
+
+		if (originalFile instanceof LightVirtualFile && getUserData(IndexingDataKeys.VIRTUAL_FILE) != null)
 		{
-			return ((PerlFileImpl) file).getPackageName();
+			originalFile = getUserData(IndexingDataKeys.VIRTUAL_FILE);
 		}
-		return null;
+
+		for (String relativeRoot : masonSettings.componentRoots)
+		{
+			VirtualFile rootFile = VfsUtil.findRelativeFile(getProject().getBaseDir(), relativeRoot);
+			if (rootFile != null && originalFile != null && VfsUtil.isAncestor(rootFile, originalFile, true))
+			{
+				String componentPath = VfsUtil.getRelativePath(originalFile, rootFile);
+
+				if (componentPath != null)
+				{
+					return "MC0::" + StringUtils.join(
+							componentPath.
+									replaceFirst("\\.[^" + VfsUtil.VFS_SEPARATOR_CHAR + "]*$", "").
+									split("" + VfsUtil.VFS_SEPARATOR_CHAR),
+							PerlPackageUtil.PACKAGE_SEPARATOR
+					);
+				}
+			}
+		}
+		return PerlPackageUtil.MAIN_PACKAGE;
+	}
+
+	@Override
+	public List<String> getParentNamespaces()
+	{
+		List<String> result = null;
+		PerlNamespaceDefinitionStub stub = getStub();
+		if (stub != null)
+		{
+			result = stub.getParentNamespaces();
+		}
+		else
+		{
+			result = getParentNamespacesFromPsi();
+		}
+
+		if (result.isEmpty())
+		{
+			return getParentNamespacesFromAutobase();
+		}
+		else
+		{
+			return result;
+		}
+	}
+
+	@NotNull
+	protected List<String> getParentNamespacesFromAutobase()
+	{
+		List<String> parentsList = new ArrayList<String>();
+
+		// autobase
+
+		// default
+		if (parentsList.isEmpty())
+		{
+			parentsList.add(MASON_DEFAULT_COMPONENT_PARENT);
+		}
+
+		return parentsList;
+	}
+
+	@NotNull
+	@Override
+	public List<String> getParentNamespacesFromPsi()
+	{
+		// fixme not sure if we should use super method here
+		List<String> parentsList = new ArrayList<String>();
+
+		// check flags
+
+		return parentsList;
 	}
 }

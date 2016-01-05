@@ -194,9 +194,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
 
-		if (namespaceDefinition != null && namespaceDefinition.getNamespaceElement() != null) // checking that definition is valid and got namespace
+		if (namespaceDefinition != null && namespaceDefinition.getPackageName() != null) // checking that definition is valid and got namespace
 		{
-			String name = namespaceDefinition.getNamespaceElement().getCanonicalName();
+			String name = namespaceDefinition.getPackageName();
 			assert name != null;
 			return name;
 		}

@@ -16,10 +16,12 @@
 
 package com.perl5.lang.mason.elementType;
 
+import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubImpl;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,5 +39,22 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 	public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub)
 	{
 		return new MasonNamespaceDefinitionImpl(stub, this);
+	}
+
+	@Override
+	public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinition psi, StubElement parentStub)
+	{
+		assert psi instanceof MasonNamespaceDefinitionImpl;
+		return new PerlNamespaceDefinitionStubImpl(
+				parentStub,
+				this,
+				psi.getPackageName(),
+				psi.getMroType(),
+				((MasonNamespaceDefinitionImpl) psi).getParentNamespacesFromPsi(),
+				psi.isDeprecated(),
+				psi.getEXPORT(),
+				psi.getEXPORT_OK(),
+				psi.getEXPORT_TAGS()
+		);
 	}
 }

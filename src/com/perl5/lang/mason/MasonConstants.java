@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.psi;
-
-import com.perl5.lang.mason.MasonConstants;
+package com.perl5.lang.mason;
 
 /**
  * Created by hurricup on 05.01.2016.
  */
-public interface MasonNamespaceDefinition extends MasonConstants
+public interface MasonConstants
 {
+	String MASON_DEFAULT_COMPONENT_PARENT = "Mason::Component";
 }

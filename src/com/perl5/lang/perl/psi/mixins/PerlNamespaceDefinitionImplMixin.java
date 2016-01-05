@@ -123,6 +123,12 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return stub.getParentNamespaces();
 		}
 
+		return getParentNamespacesFromPsi();
+	}
+
+	@NotNull
+	public List<String> getParentNamespacesFromPsi()
+	{
 		// checking compile-time modifications
 		LinkedHashSet<String> result = new LinkedHashSet<String>();
 
@@ -157,6 +163,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 
 		return new ArrayList<String>(result);
 	}
+
 
 	@Nullable
 	@Override
