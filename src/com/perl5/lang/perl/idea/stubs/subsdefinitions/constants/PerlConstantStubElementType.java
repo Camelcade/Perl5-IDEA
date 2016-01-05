@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.stubs.subsdefinitions.constants;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -83,6 +85,9 @@ public class PerlConstantStubElementType extends IStubElementType<PerlConstantSt
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		return !node.getText().isEmpty();
+		PsiElement psi = node.getPsi();
+		return psi instanceof PerlConstant &&
+				psi.isValid() &&
+				StringUtil.isNotEmpty(((PerlConstant) psi).getName());
 	}
 }

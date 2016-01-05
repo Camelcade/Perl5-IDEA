@@ -17,9 +17,11 @@
 package com.perl5.lang.perl.idea.stubs.globs;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.impl.PsiPerlGlobVariableImpl;
 import org.jetbrains.annotations.NotNull;
@@ -82,6 +84,9 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		return node.findChildByType(PerlElementTypes.VARIABLE_NAME) != null;
+		PsiElement psi = node.getPsi();
+		return psi instanceof PerlGlobVariable &&
+				psi.isValid() &&
+				StringUtil.isNotEmpty(((PerlGlobVariable) psi).getName());
 	}
 }

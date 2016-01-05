@@ -16,11 +16,7 @@
 
 package com.perl5.lang.mason.elementType;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason.MasonPerlLanguage;
-import com.perl5.lang.mason.psi.MasonPerlOverrideStatement;
 import com.perl5.lang.mason.psi.impl.MasonPerlOverrideStatementImpl;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
@@ -42,14 +38,5 @@ public class MasonPerlOverrideStubElementType extends PerlMooseOverrideStubEleme
 	public PerlSubDefinitionBase<PerlMooseOverrideStub> createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
 		return new MasonPerlOverrideStatementImpl((PerlMooseOverrideStub) stub, this);
-	}
-
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof MasonPerlOverrideStatement
-				&& psi.isValid()
-				&& StringUtil.isNotEmpty(((MasonPerlOverrideStatement) psi).getSubName());
 	}
 }

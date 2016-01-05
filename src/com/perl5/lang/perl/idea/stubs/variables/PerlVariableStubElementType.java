@@ -17,12 +17,13 @@
 package com.perl5.lang.perl.idea.stubs.variables;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin;
-import com.perl5.lang.perl.psi.utils.PerlASTUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,12 +54,11 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		if (PerlASTUtil.getParentNodeOfType(node, VARIABLE_DECLARATION_GLOBAL) != null)    // our declaration
-			return true;
-		else if (PerlASTUtil.getParentNodeOfType(node, USE_VARS_STATEMENT) != null)    // use vars declaration
-			return true;
-
-		return false;
+		PsiElement psi = node.getPsi();
+		return psi instanceof PerlVariableDeclarationWrapper &&
+				psi.isValid() &&
+				((PerlVariableDeclarationWrapper) psi).isGlobalDeclaration() &&
+				StringUtil.isNotEmpty(((PerlVariableDeclarationWrapper) psi).getName());
 	}
 
 	@NotNull
