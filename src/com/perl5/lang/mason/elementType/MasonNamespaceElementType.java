@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mason.elementType;
 
-import com.intellij.lang.ASTNode;
 import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
@@ -38,11 +37,5 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 	public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub)
 	{
 		return new MasonNamespaceDefinitionImpl(stub, this);
-	}
-
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		return false;
 	}
 }

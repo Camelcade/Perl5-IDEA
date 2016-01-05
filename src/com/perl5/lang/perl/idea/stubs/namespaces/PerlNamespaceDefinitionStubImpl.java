@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.idea.stubs.namespaces;
 
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
@@ -40,6 +40,7 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefin
 
 	public PerlNamespaceDefinitionStubImpl(
 			StubElement parent,
+			IStubElementType elementType,
 			String packageName,
 			PerlMroType mroType,
 			List<String> parentNamespaces,
@@ -49,7 +50,7 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefin
 			Map<String, List<String>> EXPORT_TAGS
 	)
 	{
-		super(parent, PerlStubElementTypes.PERL_NAMESPACE);
+		super(parent, elementType);
 		myPackageName = packageName;
 		myMroType = mroType;
 		myParentNamespaces = parentNamespaces;

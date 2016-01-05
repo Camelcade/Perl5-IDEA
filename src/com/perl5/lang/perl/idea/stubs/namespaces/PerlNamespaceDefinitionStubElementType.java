@@ -60,6 +60,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	{
 		return new PerlNamespaceDefinitionStubImpl(
 				parentStub,
+				this,
 				psi.getPackageName(),
 				psi.getMroType(),
 				psi.getParentNamespaces(),
@@ -85,8 +86,12 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, name);
 
 		for (String parent : stub.getParentNamespaces())
+		{
 			if (parent != null && !parent.isEmpty())
+			{
 				sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, "*" + parent);
+			}
+		}
 	}
 
 	@Override
@@ -115,6 +120,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 
 		return new PerlNamespaceDefinitionStubImpl(
 				parentStub,
+				this,
 				packageName,
 				mroType,
 				parentNamespaces,
