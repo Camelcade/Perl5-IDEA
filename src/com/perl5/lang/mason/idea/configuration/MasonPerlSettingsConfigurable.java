@@ -21,7 +21,9 @@ import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.AnActionButton;
@@ -48,7 +50,10 @@ public class MasonPerlSettingsConfigurable implements Configurable
 	final MasonPerlSettings mySettings;
 
 	CollectionListModel<String> rootsModel;
+	CollectionListModel<String> autobaseModel;
+
 	JBList rootsList;
+	JBList autobaseList;
 
 	public MasonPerlSettingsConfigurable(Project myProject)
 	{
@@ -128,13 +133,38 @@ public class MasonPerlSettingsConfigurable implements Configurable
 					}
 				}).createPanel());
 
+		autobaseModel = new CollectionListModel<String>();
+		autobaseList = new JBList(autobaseModel);
+		builder.addLabeledComponent(new JLabel("Autobase names:"), ToolbarDecorator
+				.createDecorator(autobaseList)
+				.setAddAction(new AnActionButtonRunnable()
+				{
+					@Override
+					public void run(AnActionButton anActionButton)
+					{
+						String fileName = Messages.showInputDialog(
+								myProject,
+								"Type new Autobase filename?",
+								"New Autobase Filename",
+								Messages.getQuestionIcon(),
+								"",
+								null);
+						if (StringUtil.isNotEmpty(fileName) && !autobaseModel.getItems().contains(fileName))
+						{
+							autobaseModel.add(fileName);
+						}
+					}
+				}).createPanel());
+
 		return builder.getPanel();
 	}
 
 	@Override
 	public boolean isModified()
 	{
-		return !mySettings.componentRoots.equals(rootsModel.getItems());
+		return
+				!mySettings.componentRoots.equals(rootsModel.getItems()) ||
+						!mySettings.autobaseNames.equals(autobaseModel.getItems());
 	}
 
 	@Override
@@ -142,12 +172,18 @@ public class MasonPerlSettingsConfigurable implements Configurable
 	{
 		mySettings.componentRoots.clear();
 		mySettings.componentRoots.addAll(rootsModel.getItems());
+
+		mySettings.autobaseNames.clear();
+		mySettings.autobaseNames.addAll(autobaseModel.getItems());
 	}
 
 	@Override
 	public void reset()
 	{
+		rootsModel.removeAll();
 		rootsModel.add(mySettings.componentRoots);
+		autobaseModel.removeAll();
+		autobaseModel.add(mySettings.autobaseNames);
 	}
 
 	@Override
@@ -155,5 +191,7 @@ public class MasonPerlSettingsConfigurable implements Configurable
 	{
 		rootsModel = null;
 		rootsList = null;
+		autobaseList = null;
+		autobaseModel = null;
 	}
 }

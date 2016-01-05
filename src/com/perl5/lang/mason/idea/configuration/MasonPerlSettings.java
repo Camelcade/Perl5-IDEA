@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -40,6 +41,7 @@ import java.util.List;
 public class MasonPerlSettings implements PersistentStateComponent<MasonPerlSettings>
 {
 	public List<String> componentRoots = new ArrayList<String>();
+	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
 
 	public static MasonPerlSettings getInstance(@NotNull Project project)
 	{
