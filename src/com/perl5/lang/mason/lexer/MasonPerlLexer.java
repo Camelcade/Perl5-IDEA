@@ -17,6 +17,7 @@
 package com.perl5.lang.mason.lexer;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
@@ -169,9 +170,12 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 		{
 			return super.perlAdvance();
 		}
-		else if (currentCustomState == LEX_MASON_PERL_LINE)
+
+		char currentChar = buffer.charAt(tokenStart);
+
+		if (currentCustomState == LEX_MASON_PERL_LINE)
 		{
-			if (buffer.charAt(tokenStart) == '\n')
+			if (currentChar == '\n')
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + 1);
@@ -180,14 +184,14 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 				return SEMICOLON;
 			}
 		}
-		else if (currentCustomState == LEX_MASON_OPENING_TAG && buffer.charAt(tokenStart) == '>')
+		else if (currentCustomState == LEX_MASON_OPENING_TAG && currentChar == '>')
 		{
 			setTokenStart(tokenStart);
 			setTokenEnd(tokenStart + 1);
 			setCustomState(getInitialCustomState());
 			return MASON_TAG_CLOSER;
 		}
-		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK && buffer.charAt(tokenStart) == '|')
+		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK && currentChar == '|')
 		{
 			Matcher m = MASON_EXPRESSION_FILTER_BLOCK.matcher(buffer);
 			m.region(tokenStart, bufferEnd);
@@ -209,6 +213,11 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 				setCustomState(getInitialCustomState());
 				return MASON_BLOCK_CLOSER;
 			}
+
+			if (parseTailSpaces(buffer, tokenStart, bufferEnd, KEYWORD_BLOCK_CLOSER))
+			{
+				return TokenType.WHITE_SPACE;
+			}
 		}
 		else if (currentCustomState == LEX_MASON_PERL_CALL_BLOCK)
 		{
@@ -220,6 +229,12 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 				setCustomState(getInitialCustomState());
 				return MASON_CALL_CLOSER;
 			}
+
+			if (parseTailSpaces(buffer, tokenStart, bufferEnd, KEYWORD_CALL_CLOSER))
+			{
+				return TokenType.WHITE_SPACE;
+			}
+
 		}
 		else if (currentCustomState == LEX_MASON_PERL_BLOCK && bufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG))
 		{
@@ -241,7 +256,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 
 			for (; offset < bufferEnd; offset++)
 			{
-				char currentChar = buffer.charAt(offset);
+				currentChar = buffer.charAt(offset);
 
 				if (offset + 1 < bufferEnd &&
 						currentChar == '<' &&
@@ -404,6 +419,29 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 			}
 		}
 		return super.perlAdvance();
+	}
+
+	protected boolean parseTailSpaces(CharSequence buffer, int tokenStart, int bufferEnd, String endToken)
+	{
+		int offset = tokenStart;
+		char currentChar;
+
+		while (offset != bufferEnd && (currentChar = buffer.charAt(offset)) != '\n' && Character.isWhitespace(currentChar))
+		{
+			offset++;
+		}
+
+		if (offset > tokenStart) // got spaces
+		{
+			if (bufferAtString(buffer, offset - 1, endToken)) // got closer after spaces
+			{
+				offset--;
+			}
+			setTokenStart(tokenStart);
+			setTokenEnd(offset);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
