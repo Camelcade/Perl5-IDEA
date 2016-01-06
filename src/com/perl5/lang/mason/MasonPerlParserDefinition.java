@@ -27,12 +27,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
+import com.perl5.lang.mason.elementType.MasonPerlFileElementType;
 import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
 import com.perl5.lang.mason.psi.impl.MasonPerlOverrideStatementImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.parser.MasonPerlParserImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,14 +41,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MasonPerlParserDefinition extends PerlParserDefinition implements MasonPerlElementTypes
 {
-	public static final IFileElementType FILE = new PerlFileElementType("Mason component", MasonPerlLanguage.INSTANCE);
+	public static final IFileElementType FILE = new MasonPerlFileElementType("Mason component", MasonPerlLanguage.INSTANCE);
+
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(
 					MASON_LINE_OPENER,
 					MASON_TEMPLATE_BLOCK_HTML
 			));
-
-
 	@NotNull
 	@Override
 	public Lexer createLexer(Project project)

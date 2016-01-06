@@ -21,6 +21,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.FileViewProviderFactory;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.SingleRootFileViewProvider;
+import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,6 +34,10 @@ public class MasonPerlFileViewProviderFactory implements FileViewProviderFactory
 	@Override
 	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
 	{
+		if (file.getFileType() == MasonPurePerlComponentFileType.INSTANCE)
+		{
+			return new SingleRootFileViewProvider(manager, file, eventSystemEnabled, MasonPurePerlComponentFileType.INSTANCE);
+		}
 		return new MasonPerlFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

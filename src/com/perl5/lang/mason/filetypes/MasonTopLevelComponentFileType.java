@@ -24,7 +24,6 @@ import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
-import com.perl5.lang.mason.MasonPerlLanguage;
 import com.perl5.lang.mason.idea.highlighter.MasonPerlHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +39,7 @@ public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileTy
 
 	public MasonTopLevelComponentFileType()
 	{
-		super(MasonPerlLanguage.INSTANCE);
+		super();
 		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
 		{
 			@Override

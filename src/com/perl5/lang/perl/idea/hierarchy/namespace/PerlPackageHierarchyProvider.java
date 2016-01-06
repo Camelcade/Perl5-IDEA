@@ -43,6 +43,7 @@ public class PerlPackageHierarchyProvider implements HierarchyProvider
 		{
 			final Editor editor = CommonDataKeys.EDITOR.getData(dataContext);
 			final PsiFile file = CommonDataKeys.PSI_FILE.getData(dataContext);
+
 			if (editor != null && file != null)
 				element = file.findElementAt(editor.getCaretModel().getOffset());
 		}

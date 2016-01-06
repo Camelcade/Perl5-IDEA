@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason;
+package com.perl5.lang.mason.idea.findusages;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
+import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
+import com.perl5.lang.perl.PerlParserDefinition;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 06.01.2016.
  */
-public class MasonPerlLanguage extends Language implements TemplateLanguage
+public class MasonWordsScanner extends DefaultWordsScanner
 {
-	public static final MasonPerlLanguage INSTANCE = new MasonPerlLanguage();
-
-	public MasonPerlLanguage()
+	public MasonWordsScanner()
 	{
-		super(PerlLanguage.INSTANCE, "Mason template");
+		super(new MasonPerlLexerAdapter(null),
+				PerlParserDefinition.IDENTIFIERS,
+				PerlParserDefinition.COMMENTS,
+				PerlParserDefinition.LITERALS
+		);
+		setMayHaveFileRefsInLiterals(true);
 	}
 }

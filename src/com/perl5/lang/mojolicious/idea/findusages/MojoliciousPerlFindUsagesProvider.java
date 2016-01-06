@@ -16,10 +16,7 @@
 
 package com.perl5.lang.mojolicious.idea.findusages;
 
-import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,10 +30,6 @@ public class MojoliciousPerlFindUsagesProvider extends PerlFindUsagesProvider
 	@Override
 	public WordsScanner getWordsScanner()
 	{
-		return new DefaultWordsScanner(new MojoliciousPerlLexerAdapter(null),
-				PerlParserDefinition.IDENTIFIERS,
-				PerlParserDefinition.COMMENTS,
-				PerlParserDefinition.LITERALS
-		);
+		return new MojoliciousWordsScanner();
 	}
 }

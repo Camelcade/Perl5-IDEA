@@ -44,6 +44,7 @@
         <li>Implemented filetypes for mason: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason files.</li>
         <li>Implemented settings to select Mason components roots.</li>
+        <li>Implemented components auto-basing</li>
       </ul></li>
       <li>Mojolicious <ul>
         <li>Parser has been re-written almost from scratch and now is much more appropriate.</li>
@@ -288,9 +289,9 @@
         <lang.fileViewProviderFactory language="Embedded Perl"
                                       implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Embedded Perl"
-                                       implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlSyntaxHighlighterFactory"/>
+                                       implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Embedded Perl"
-                                 implementationClass="com.perl5.lang.embedded.idea.EmbeddedPerlFindUsagesProvider"/>
+                                 implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
         <lang.braceMatcher language="Embedded Perl"
                            implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
 
@@ -361,8 +362,12 @@
                                       implementationClass="com.perl5.lang.mason.MasonPerlFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Mason template"
                                        implementationClass="com.perl5.lang.mason.idea.highlighter.MasonPerlSyntaxHighlighterFactory"/>
+
+
         <lang.findUsagesProvider language="Mason template"
                                  implementationClass="com.perl5.lang.mason.idea.findusages.MasonPerlFindUsagesProvider"/>
+        <cacheBuilder fileType="Mason pure Perl component"
+                      wordsScannerClass="com.perl5.lang.perl.idea.findusages.PerlWordsScanner"/>
 
         <lang.foldingBuilder language="Mason template"
                              implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
@@ -380,7 +385,6 @@
 
         <lang.braceMatcher language="Mason template"
                            implementationClass="com.perl5.lang.mason.idea.editor.MasonBraceMatcher"/>
-
 
         <!--Temporary solution, better than nothing-->
         <multiLangCommenter

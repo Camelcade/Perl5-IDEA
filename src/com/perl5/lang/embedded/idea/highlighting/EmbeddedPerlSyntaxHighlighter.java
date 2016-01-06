@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.idea;
+package com.perl5.lang.embedded.idea.highlighting;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;

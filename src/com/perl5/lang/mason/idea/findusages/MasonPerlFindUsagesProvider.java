@@ -16,10 +16,7 @@
 
 package com.perl5.lang.mason.idea.findusages;
 
-import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,10 +30,6 @@ public class MasonPerlFindUsagesProvider extends PerlFindUsagesProvider
 	@Override
 	public WordsScanner getWordsScanner()
 	{
-		return new DefaultWordsScanner(new MasonPerlLexerAdapter(null),
-				PerlParserDefinition.IDENTIFIERS,
-				PerlParserDefinition.COMMENTS,
-				PerlParserDefinition.LITERALS
-		);
+		return new MasonWordsScanner();
 	}
 }

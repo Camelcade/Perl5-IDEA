@@ -16,15 +16,10 @@
 
 package com.perl5.lang.perl.idea.findusages;
 
-import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTypes
+public class PerlFindUsagesProvider implements FindUsagesProvider
 {
 
 	public PerlFindUsagesProvider()
@@ -45,16 +40,7 @@ public class PerlFindUsagesProvider implements FindUsagesProvider, PerlElementTy
 	@Override
 	public WordsScanner getWordsScanner()
 	{
-		DefaultWordsScanner defaultWordsScanner = new DefaultWordsScanner(
-				new PerlLexerAdapter(null),
-				PerlParserDefinition.IDENTIFIERS,
-				TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
-				PerlParserDefinition.LITERALS
-		);
-
-		defaultWordsScanner.setMayHaveFileRefsInLiterals(true);
-
-		return defaultWordsScanner;
+		return new PerlWordsScanner();
 	}
 
 	@Override

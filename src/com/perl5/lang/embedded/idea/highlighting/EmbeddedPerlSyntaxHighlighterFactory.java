@@ -14,31 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.idea.highlighter;
+package com.perl5.lang.embedded.idea.highlighting;
 
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 19.05.2015.
  */
-public class MasonPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
+public class EmbeddedPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
 {
 	@Override
 	@NotNull
 	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
 	{
-		if (virtualFile != null && virtualFile.getFileType() == MasonPurePerlComponentFileType.INSTANCE)
-		{
-			return new PerlSyntaxHighlighter(project);
-		}
-		return new MasonPerlSyntaxHighlighter(project);
+		return new EmbeddedPerlSyntaxHighlighter(project);
 	}
 
 }

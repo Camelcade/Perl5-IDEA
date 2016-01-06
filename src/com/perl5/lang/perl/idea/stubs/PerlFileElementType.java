@@ -16,8 +16,12 @@
 
 package com.perl5.lang.perl.idea.stubs;
 
-import com.intellij.lang.Language;
+import com.intellij.lang.*;
+import com.intellij.lexer.Lexer;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IStubFileElementType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -36,4 +40,29 @@ public class PerlFileElementType extends IStubFileElementType
 	{
 		return VERSION;
 	}
+
+	@Override
+	protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi)
+	{
+		return getParser(psi).parse(this, getBuilder(psi, chameleon)).getFirstChildNode();
+	}
+
+	@Nullable
+	protected Lexer getLexer(PsiElement psi)
+	{
+		return null;
+	}
+
+	@NotNull
+	protected PsiParser getParser(PsiElement psi)
+	{
+		return LanguageParserDefinitions.INSTANCE.forLanguage(getLanguageForParser(psi)).createParser(psi.getProject());
+	}
+
+	@NotNull
+	protected PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon)
+	{
+		return PsiBuilderFactory.getInstance().createBuilder(psi.getProject(), chameleon, getLexer(psi), getLanguageForParser(psi), chameleon.getChars());
+	}
+
 }

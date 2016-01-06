@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,32 +59,64 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	@Override
 	protected String getPackageNameHeavy()
 	{
-		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
-		VirtualFile originalFile = getContainingFile().getViewProvider().getVirtualFile();
+		VirtualFile containingFile = getRealVirtualFile();
+		VirtualFile componentRoot = getComponentRoot();
 
-		if (originalFile instanceof LightVirtualFile && getUserData(IndexingDataKeys.VIRTUAL_FILE) != null)
+		if (containingFile != null && componentRoot != null)
 		{
-			originalFile = getUserData(IndexingDataKeys.VIRTUAL_FILE);
-		}
+			String componentPath = VfsUtil.getRelativePath(containingFile, componentRoot);
 
-		if (originalFile != null && originalFile.exists())
-		{
-			for (VirtualFile rootFile : masonSettings.getComponentsRootsVirtualFiles())
+			if (componentPath != null)
 			{
-				if (rootFile != null && rootFile.exists() && VfsUtil.isAncestor(rootFile, originalFile, true))
-				{
-					String componentPath = VfsUtil.getRelativePath(originalFile, rootFile);
-
-					if (componentPath != null)
-					{
-						return MasonPerlUtils.getClassnameFromPath(componentPath);
-					}
-				}
+				return MasonPerlUtils.getClassnameFromPath(componentPath);
 			}
 		}
 
 		// fixme shouldn't we just use full path?
 		return PerlPackageUtil.MAIN_PACKAGE;
+	}
+
+	/**
+	 * Returns component root this file in
+	 *
+	 * @return component root or null
+	 */
+	@Nullable
+	private VirtualFile getComponentRoot()
+	{
+		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
+		VirtualFile containingFile = getRealVirtualFile();
+
+		if (containingFile != null && containingFile.exists())
+		{
+			for (VirtualFile rootFile : masonSettings.getComponentsRootsVirtualFiles())
+			{
+				if (rootFile != null && rootFile.exists() && VfsUtil.isAncestor(rootFile, containingFile, true))
+				{
+					return rootFile;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private VirtualFile getRealVirtualFile()
+	{
+		VirtualFile originalFile = getContainingFile().getViewProvider().getVirtualFile();
+
+		if (originalFile instanceof LightVirtualFile)
+		{
+			if (getUserData(IndexingDataKeys.VIRTUAL_FILE) != null)
+			{
+				originalFile = getUserData(IndexingDataKeys.VIRTUAL_FILE);
+			}
+			else if (((LightVirtualFile) originalFile).getOriginalFile() != null)
+			{
+				originalFile = ((LightVirtualFile) originalFile).getOriginalFile();
+			}
+		}
+		return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
 	}
 
 	@Override
@@ -116,6 +149,22 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		List<String> parentsList = new ArrayList<String>();
 
 		// autobase
+		VirtualFile componentRoot = getComponentRoot();
+		VirtualFile containingFile = getRealVirtualFile();
+
+		if (componentRoot != null && containingFile != null)
+		{
+			VirtualFile parentComponentFile = getParentComponentFile(componentRoot, containingFile.getParent(), containingFile);
+			if (parentComponentFile != null) // found autobase class
+			{
+				String componentPath = VfsUtil.getRelativePath(parentComponentFile, componentRoot);
+
+				if (componentPath != null)
+				{
+					parentsList.add(MasonPerlUtils.getClassnameFromPath(componentPath));
+				}
+			}
+		}
 
 		// default
 		if (parentsList.isEmpty())
@@ -124,6 +173,42 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		}
 
 		return parentsList;
+	}
+
+	/**
+	 * Recursively traversing paths and looking for autobase
+	 *
+	 * @param componentRoot    component root we are search in
+	 * @param currentDirectory directory we are currently in	 *
+	 * @param childFile        current file (just to speed things up)
+	 * @return parent component virtual file or null if not found
+	 */
+	@Nullable
+	private VirtualFile getParentComponentFile(VirtualFile componentRoot, VirtualFile currentDirectory, VirtualFile childFile)
+	{
+		// check in current dir
+		List<String> autobaseNames = new ArrayList<String>(MasonPerlSettings.getInstance(getProject()).autobaseNames);
+
+		if (childFile.getParent().equals(currentDirectory) && autobaseNames.contains(childFile.getName())) // avoid cyclic inheritance
+		{
+			autobaseNames = autobaseNames.subList(0, autobaseNames.lastIndexOf(childFile.getName()));
+		}
+
+		for (int i = autobaseNames.size() - 1; i >= 0; i--)
+		{
+			VirtualFile potentialParent = VfsUtil.findRelativeFile(currentDirectory, autobaseNames.get(i));
+			if (potentialParent != null && potentialParent.exists() && !potentialParent.equals(childFile))
+			{
+				return potentialParent;
+			}
+		}
+
+		// move up or exit
+		if (!componentRoot.equals(currentDirectory))
+		{
+			return getParentComponentFile(componentRoot, currentDirectory.getParent(), childFile);
+		}
+		return null;
 	}
 
 	@NotNull

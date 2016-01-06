@@ -253,9 +253,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			return perlBuilder;
 		}
 		if (LIGHT_CONTAINERS.contains(root))
+		{
 			return new PerlBuilderLight(builder, state, parser);
+		}
 		else
+		{
 			return new PerlBuilder(builder, state, parser);
+		}
 	}
 
 	/**
