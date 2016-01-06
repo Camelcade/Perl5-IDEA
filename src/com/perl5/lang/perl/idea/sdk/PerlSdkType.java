@@ -107,6 +107,7 @@ public class PerlSdkType extends SdkType
 	public String suggestHomePath()
 	{
 		String perlPath = getPathFromPerl();
+
 		if (perlPath != null)
 			return perlPath;
 
@@ -128,16 +129,6 @@ public class PerlSdkType extends SdkType
 		File f = new File(getExecutablePath(sdkHome));
 		return f.exists();
 	}
-
-	private String getExecutablePath(Sdk sdk)
-	{
-		String sdkHomePath = sdk.getHomePath();
-		if (sdkHomePath != null)
-			return getExecutablePath(sdkHomePath);
-		else
-			return null;
-	}
-
 
 	@NotNull
 	public String getExecutablePath(@NotNull String sdkHome)

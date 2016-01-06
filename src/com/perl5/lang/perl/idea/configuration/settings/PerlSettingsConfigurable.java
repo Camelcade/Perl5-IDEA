@@ -90,6 +90,7 @@ public class PerlSettingsConfigurable implements Configurable
 	{
 		perlPathInputField = new TextFieldWithBrowseButton();
 		perlPathInputField.setText(mySettings.perlPath);
+		perlPathInputField.getTextField().setEditable(false);
 
 		FileChooserDescriptor descriptor = new FileChooserDescriptor(false, true, false, false, false, false)
 		{
