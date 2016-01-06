@@ -16,10 +16,8 @@
 
 package com.perl5.lang.mason.psi.impl;
 
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.perl5.lang.mason.MasonPerlLanguage;
-import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,13 +31,6 @@ public class MasonPerlFileImpl extends PerlFileImpl
 	public MasonPerlFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, MasonPerlLanguage.INSTANCE);
-	}
-
-	@NotNull
-	@Override
-	public FileType getFileType()
-	{
-		return MasonTopLevelComponentFileType.INSTANCE;
 	}
 
 	@Override

@@ -35,7 +35,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
-import com.perl5.lang.perl.filetypes.PerlFileType;
 import com.perl5.lang.perl.filetypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
@@ -84,7 +83,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public FileType getFileType()
 	{
-		return PerlFileType.INSTANCE;
+		return getViewProvider().getFileType();
 	}
 
 	@Override
