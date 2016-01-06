@@ -22,7 +22,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 28.12.2015.
@@ -84,28 +84,28 @@ public class MojoliciousPerlParser extends PerlParserImpl implements Mojolicious
 	}
 
 
-	@Nullable
+	@NotNull
 	@Override
 	public TokenSet getBadCharacterForbiddenTokens()
 	{
 		return BAD_CAHARACTER_FORBIDDEN_TOKENS;
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public TokenSet getStatementRecoveryTokens()
 	{
 		return STATEMENT_RECOVERY_TOKENS;
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public TokenSet getBlockRecoveryTokens()
 	{
 		return BLOCK_RECOVERY_TOKENS;
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public TokenSet getConsumableSemicolonTokens()
 	{

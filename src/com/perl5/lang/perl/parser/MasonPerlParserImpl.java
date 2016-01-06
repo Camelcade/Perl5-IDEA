@@ -240,6 +240,7 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 		}
 		else if (tokenType == MASON_FLAGS_OPENER)    // fixme need more love here, extends
 		{
+			PsiBuilder.Marker statementMarker = b.mark();
 			b.advanceLexer();
 
 			while (!b.eof() && b.getTokenType() != MASON_FLAGS_CLOSER)
@@ -249,7 +250,10 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 					break;
 				}
 			}
-			r = endOrRecover(b, MASON_FLAGS_CLOSER);
+			if( r = endOrRecover(b, MASON_FLAGS_CLOSER) )
+			{
+				statementMarker.done(MASON_FLAGS_STATEMENT);
+			}
 		}
 		else if (tokenType == MASON_DOC_OPENER)
 		{

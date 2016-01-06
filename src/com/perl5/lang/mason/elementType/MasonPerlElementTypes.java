@@ -80,7 +80,7 @@ public interface MasonPerlElementTypes extends MasonPerlSyntaxElements
 	IElementType MASON_OVERRIDE_OPENER = new MasonPerlTokenType(KEYWORD_OVERRIDE_OPENER);
 	IElementType MASON_OVERRIDE_CLOSER = new MasonPerlTokenType(KEYWORD_OVERRIDE_CLOSER);
 
+	IElementType MASON_FLAGS_STATEMENT = new MasonPerlElementType("FLAGS_STATEMENT");
 	IElementType MASON_OVERRIDE_STATEMENT = new MasonPerlOverrideStubElementType(KEYWORD_OVERRIDE);
-
 	IElementType MASON_NAMESPACE_DEFINITION = new MasonNamespaceElementType("MASON_PACKAGE");
 }

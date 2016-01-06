@@ -175,7 +175,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public ItemPresentation getPresentation()
 	{
-		return new PerlItemPresentationSimple(this, getName());
+		return new PerlItemPresentationSimple(this, getPresentableName());
 	}
 
 	@Override

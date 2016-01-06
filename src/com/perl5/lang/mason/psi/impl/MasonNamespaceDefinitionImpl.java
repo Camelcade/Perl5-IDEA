@@ -20,10 +20,12 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.mason.MasonPerlUtils;
 import com.perl5.lang.mason.idea.configuration.MasonPerlSettings;
+import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
@@ -59,7 +61,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	@Override
 	protected String getPackageNameHeavy()
 	{
-		VirtualFile containingFile = getRealVirtualFile();
+		VirtualFile containingFile = getRealContainingFile();
 		VirtualFile componentRoot = getComponentRoot();
 
 		if (containingFile != null && componentRoot != null)
@@ -82,10 +84,11 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	 * @return component root or null
 	 */
 	@Nullable
-	private VirtualFile getComponentRoot()
+	@Override
+	public VirtualFile getComponentRoot()
 	{
 		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
-		VirtualFile containingFile = getRealVirtualFile();
+		VirtualFile containingFile = getRealContainingFile();
 
 		if (containingFile != null && containingFile.exists())
 		{
@@ -101,7 +104,8 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	}
 
 	@Nullable
-	private VirtualFile getRealVirtualFile()
+	@Override
+	public VirtualFile getRealContainingFile()
 	{
 		VirtualFile originalFile = getContainingFile().getViewProvider().getVirtualFile();
 
@@ -150,7 +154,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 		// autobase
 		VirtualFile componentRoot = getComponentRoot();
-		VirtualFile containingFile = getRealVirtualFile();
+		VirtualFile containingFile = getRealContainingFile();
 
 		if (componentRoot != null && containingFile != null)
 		{
@@ -219,7 +223,36 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		List<String> parentsList = new ArrayList<String>();
 
 		// check flags
+		MasonFlagsStatement flagsStatement = PsiTreeUtil.findChildOfType(this, MasonFlagsStatement.class);
+
+		if (flagsStatement != null)
+		{
+			String parentNamespace = flagsStatement.getParentNamespace();
+			if (parentNamespace != null)
+			{
+				parentsList.add(parentNamespace);
+			}
+		}
 
 		return parentsList;
+	}
+
+	@Override
+	public String getPresentableName()
+	{
+		VirtualFile componentRoot = getComponentRoot();
+		VirtualFile containingFile = getRealContainingFile();
+
+		if (componentRoot != null && containingFile != null)
+		{
+			String componentPath = VfsUtil.getRelativePath(containingFile, componentRoot);
+
+			if (componentPath != null)
+			{
+				return VfsUtil.VFS_SEPARATOR_CHAR + componentPath;
+			}
+		}
+
+		return super.getPresentableName();
 	}
 }

@@ -16,28 +16,21 @@
 
 package com.perl5.lang.mason.psi;
 
-import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.mason.MasonConstants;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 05.01.2016.
+ * Created by hurricup on 06.01.2016.
  */
-public interface MasonNamespaceDefinition extends MasonConstants
+public interface MasonFlagsStatement extends PsiElement, PerlElementTypes
 {
-	/**
-	 * Returns real containing virtual file, not the Light one
-	 *
-	 * @return virtual file or null
-	 */
-	@Nullable
-	VirtualFile getRealContainingFile();
 
 	/**
-	 * Returns VFS object representing component root
+	 * Returns path to the parent component; We'll need this to make inspection later wich can just check that path exists
 	 *
-	 * @return component root
+	 * @return full VFS path to the parent component or null if uncalculatable
 	 */
 	@Nullable
-	VirtualFile getComponentRoot();
+	String getParentNamespace();
 }
