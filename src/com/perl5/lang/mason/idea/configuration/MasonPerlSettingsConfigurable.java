@@ -175,6 +175,8 @@ public class MasonPerlSettingsConfigurable implements Configurable
 
 		mySettings.autobaseNames.clear();
 		mySettings.autobaseNames.addAll(autobaseModel.getItems());
+
+		mySettings.settingsUpdated();
 	}
 
 	@Override

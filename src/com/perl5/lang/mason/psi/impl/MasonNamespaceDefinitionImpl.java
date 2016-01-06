@@ -22,6 +22,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
+import com.perl5.lang.mason.MasonPerlUtils;
 import com.perl5.lang.mason.idea.configuration.MasonPerlSettings;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
@@ -65,19 +66,23 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 			originalFile = getUserData(IndexingDataKeys.VIRTUAL_FILE);
 		}
 
-		for (String relativeRoot : masonSettings.componentRoots)
+		if (originalFile != null && originalFile.exists())
 		{
-			VirtualFile rootFile = VfsUtil.findRelativeFile(getProject().getBaseDir(), relativeRoot);
-			if (rootFile != null && originalFile != null && VfsUtil.isAncestor(rootFile, originalFile, true))
+			for (VirtualFile rootFile : masonSettings.getComponentsRootsVirtualFiles())
 			{
-				String componentPath = VfsUtil.getRelativePath(originalFile, rootFile);
-
-				if (componentPath != null)
+				if (rootFile != null && rootFile.exists() && VfsUtil.isAncestor(rootFile, originalFile, true))
 				{
-					return "MC0::" + componentPath.replaceAll("[^\\w\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
+					String componentPath = VfsUtil.getRelativePath(originalFile, rootFile);
+
+					if (componentPath != null)
+					{
+						return MasonPerlUtils.getClassnameFromPath(componentPath);
+					}
 				}
 			}
 		}
+
+		// fixme shouldn't we just use full path?
 		return PerlPackageUtil.MAIN_PACKAGE;
 	}
 

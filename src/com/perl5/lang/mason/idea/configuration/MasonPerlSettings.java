@@ -18,7 +18,10 @@ package com.perl5.lang.mason.idea.configuration;
 
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,10 +46,47 @@ public class MasonPerlSettings implements PersistentStateComponent<MasonPerlSett
 	public List<String> componentRoots = new ArrayList<String>();
 	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
 
+	@Transient
+	private Project myProject;
+	@Transient
+	private List<VirtualFile> componentsRootsVirtualFiles = null;
+
 	public static MasonPerlSettings getInstance(@NotNull Project project)
 	{
 		MasonPerlSettings persisted = ServiceManager.getService(project, MasonPerlSettings.class);
-		return persisted != null ? persisted : new MasonPerlSettings();
+		if (persisted == null)
+			persisted = new MasonPerlSettings();
+
+		return persisted.setProject(project);
+	}
+
+	private MasonPerlSettings setProject(Project project)
+	{
+		myProject = project;
+		return this;
+	}
+
+	public void settingsUpdated()
+	{
+		componentsRootsVirtualFiles = null;
+	}
+
+	@NotNull
+	public List<VirtualFile> getComponentsRootsVirtualFiles()
+	{
+		if (componentsRootsVirtualFiles == null)
+		{
+			componentsRootsVirtualFiles = new ArrayList<VirtualFile>();
+			for (String relativeRoot : componentRoots)
+			{
+				VirtualFile rootFile = VfsUtil.findRelativeFile(myProject.getBaseDir(), relativeRoot);
+				if (rootFile != null && rootFile.exists())
+				{
+					componentsRootsVirtualFiles.add(rootFile);
+				}
+			}
+		}
+		return componentsRootsVirtualFiles;
 	}
 
 	@Nullable
