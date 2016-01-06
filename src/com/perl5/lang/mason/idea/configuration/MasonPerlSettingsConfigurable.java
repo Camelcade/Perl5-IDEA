@@ -135,7 +135,7 @@ public class MasonPerlSettingsConfigurable implements Configurable
 
 		autobaseModel = new CollectionListModel<String>();
 		autobaseList = new JBList(autobaseModel);
-		builder.addLabeledComponent(new JLabel("Autobase names:"), ToolbarDecorator
+		builder.addLabeledComponent(new JLabel("Autobase names (order is important, later components inherited from early):"), ToolbarDecorator
 				.createDecorator(autobaseList)
 				.setAddAction(new AnActionButtonRunnable()
 				{

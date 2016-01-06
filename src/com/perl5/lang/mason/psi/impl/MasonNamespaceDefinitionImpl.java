@@ -28,7 +28,6 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -75,12 +74,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 				if (componentPath != null)
 				{
-					return "MC0::" + StringUtils.join(
-							componentPath.
-									replaceFirst("\\.[^" + VfsUtil.VFS_SEPARATOR_CHAR + "]*$", "").
-									split("" + VfsUtil.VFS_SEPARATOR_CHAR),
-							PerlPackageUtil.PACKAGE_SEPARATOR
-					);
+					return "MC0::" + componentPath.replaceAll("[^\\w\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
 				}
 			}
 		}
