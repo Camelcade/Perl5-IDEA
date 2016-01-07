@@ -16,28 +16,11 @@
 
 package com.perl5.lang.mason.psi;
 
-import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.mason.MasonConstants;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 05.01.2016.
  */
 public interface MasonNamespaceDefinition extends MasonConstants
 {
-	/**
-	 * Returns real containing virtual file, not the Light one
-	 *
-	 * @return virtual file or null
-	 */
-	@Nullable
-	VirtualFile getRealContainingFile();
-
-	/**
-	 * Returns VFS object representing component root
-	 *
-	 * @return component root
-	 */
-	@Nullable
-	VirtualFile getComponentRoot();
 }

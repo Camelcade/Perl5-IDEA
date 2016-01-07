@@ -22,11 +22,14 @@ import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
 import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
 import com.perl5.lang.mason.idea.configuration.MasonSettingsConfigurable;
+import com.perl5.lang.mason.psi.impl.MasonFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,20 +57,38 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 	@Override
 	public EditorNotificationPanel createNotificationPanel(@NotNull final VirtualFile file, @NotNull FileEditor fileEditor)
 	{
-		if (file.getFileType() instanceof MasonPurePerlComponentFileType && MasonSettings.getInstance(myProject).componentRoots.size() == 0)
+		if (file.getFileType() instanceof MasonPurePerlComponentFileType)
 		{
-			EditorNotificationPanel panel = new EditorNotificationPanel();
-			panel.setText("Mason components roots are not configured");
-			panel.createActionLabel("Configure", new Runnable()
+			String message = null;
+
+			if (MasonSettings.getInstance(myProject).componentRoots.size() == 0)
 			{
-				@Override
-				public void run()
+				message = "Mason components roots are not configured";
+			}
+			else
+			{
+				PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
+				if (psiFile instanceof MasonFileImpl && ((MasonFileImpl) psiFile).getComponentRoot() == null)
 				{
-					ShowSettingsUtil.getInstance().editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason Settings"));
-					EditorNotifications.getInstance(myProject).updateNotifications(file);
+					message = "Component is not under one of configured roots";
 				}
-			});
-			return panel;
+			}
+
+			if (message != null)
+			{
+				EditorNotificationPanel panel = new EditorNotificationPanel();
+				panel.setText(message);
+				panel.createActionLabel("Configure", new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						ShowSettingsUtil.getInstance().editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason Settings"));
+						EditorNotifications.getInstance(myProject).updateNotifications(file);
+					}
+				});
+				return panel;
+			}
 		}
 
 		return null;

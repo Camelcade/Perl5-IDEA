@@ -21,11 +21,10 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.psi.MasonFlagsStatement;
-import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
@@ -47,9 +46,9 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 	public String getParentNamespace()
 	{
 		String extendsFlagsValue = getExtendsFlagValue();
-		MasonNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(this, MasonNamespaceDefinitionImpl.class);
+		PsiFile psiFile = getContainingFile();
 
-		if (namespaceDefinition != null && StringUtil.isNotEmpty(extendsFlagsValue))
+		if (psiFile instanceof MasonFileImpl && StringUtil.isNotEmpty(extendsFlagsValue))
 		{
 			if (extendsFlagsValue.startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path, see the Mason::Interp::_determine_parent_compc
 			{
@@ -57,8 +56,8 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 			}
 			else // relative path
 			{
-				VirtualFile containingFile = namespaceDefinition.getRealContainingFile();
-				VirtualFile currentComponentRoot = namespaceDefinition.getComponentRoot();
+				VirtualFile containingFile = ((MasonFileImpl) psiFile).getRealContainingFile();
+				VirtualFile currentComponentRoot = ((MasonFileImpl) psiFile).getComponentRoot();
 
 				if (containingFile != null && currentComponentRoot != null)
 				{

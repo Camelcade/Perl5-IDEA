@@ -16,10 +16,16 @@
 
 package com.perl5.lang.mason.psi.impl;
 
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.testFramework.LightVirtualFile;
+import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.mason.MasonLanguage;
+import com.perl5.lang.mason.idea.configuration.MasonSettings;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 20.12.2015.
@@ -38,5 +44,54 @@ public class MasonFileImpl extends PerlFileImpl
 	{
 		return "Mason component";
 	}
+
+	/**
+	 * Returns VFS object representing component root
+	 *
+	 * @return component root
+	 */
+	@Nullable
+	public VirtualFile getComponentRoot()
+	{
+		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
+		VirtualFile containingFile = getRealContainingFile();
+
+		if (containingFile != null && containingFile.exists())
+		{
+			for (VirtualFile rootFile : masonSettings.getComponentsRootsVirtualFiles())
+			{
+				if (rootFile != null && rootFile.exists() && VfsUtil.isAncestor(rootFile, containingFile, true))
+				{
+					return rootFile;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns real containing virtual file, not the Light one
+	 *
+	 * @return virtual file or null
+	 */
+	@Nullable
+	public VirtualFile getRealContainingFile()
+	{
+		VirtualFile originalFile = getViewProvider().getVirtualFile();
+
+		if (originalFile instanceof LightVirtualFile)
+		{
+			if (getUserData(IndexingDataKeys.VIRTUAL_FILE) != null)
+			{
+				originalFile = getUserData(IndexingDataKeys.VIRTUAL_FILE);
+			}
+			else if (((LightVirtualFile) originalFile).getOriginalFile() != null)
+			{
+				originalFile = ((LightVirtualFile) originalFile).getOriginalFile();
+			}
+		}
+		return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
+	}
+
 
 }
