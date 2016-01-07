@@ -17,8 +17,10 @@
 package com.perl5.lang.mason.idea.folding;
 
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -26,6 +28,21 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElementTypes
 {
+	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
+			PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
+			TokenSet.create(
+					MASON_BLOCK_OPENER,
+					MASON_BLOCK_CLOSER,
+					MASON_LINE_OPENER
+			));
+
+	@NotNull
+	@Override
+	protected TokenSet getCommentExcludedTokens()
+	{
+		return COMMENT_EXCLUDED_TOKENS;
+	}
+
 	@Nullable
 	@Override
 	protected IElementType getTemplateBlockElementType()

@@ -90,9 +90,13 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 
 		for (PsiComment comment : comments)
 		{
-			if (currentOffset <= comment.getTextOffset() && !commentExcludedTokens.contains(comment.getNode().getElementType()))    // skips already collapsed blocks
+			ASTNode commentNode = comment.getNode();
+			IElementType commentElementType = commentNode.getElementType();
+
+			if (currentOffset <= comment.getTextOffset() && !commentExcludedTokens.contains(commentElementType))    // skips already collapsed blocks
 			{
-				if (comment.getNode().getElementType() == POD)
+
+				if (commentElementType == POD)
 				{
 					TextRange commentRange = comment.getTextRange();
 					int startOffset = commentRange.getStartOffset();
@@ -103,14 +107,17 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 						endOffset--;
 					}
 					currentOffset = endOffset;
-					descriptors.add(new FoldingDescriptor(comment.getNode(), new TextRange(startOffset, endOffset)));
+					descriptors.add(new FoldingDescriptor(commentNode, new TextRange(startOffset, endOffset)));
 					continue;
 				}
 
 				boolean isCollapsable = false;
 				PsiElement lastComment = comment;
 
-				if (comment.getNode().getElementType() == getTemplateBlockElementType())    // template blocks are always collapsable
+
+				if (commentElementType == COMMENT_BLOCK ||
+						commentElementType == getTemplateBlockElementType() // template blocks are always collapsable
+						)
 				{
 					isCollapsable = true;
 				}
@@ -154,7 +161,6 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 					}
 					int endOffset = comment.getTextRange().getEndOffset();
 
-					ASTNode blockNode = comment.getNode();
 					PsiElement currentComment = comment;
 
 					while (currentComment != null)
@@ -186,7 +192,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 						if (endLine > startLine)
 						{
 							currentOffset = endOffset;
-							descriptors.add(new FoldingDescriptor(blockNode, new TextRange(startOffset, endOffset)));
+							descriptors.add(new FoldingDescriptor(commentNode, new TextRange(startOffset, endOffset)));
 						}
 					}
 				}
