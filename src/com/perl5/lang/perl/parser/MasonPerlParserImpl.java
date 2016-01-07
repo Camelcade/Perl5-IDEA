@@ -191,13 +191,21 @@ public class MasonPerlParserImpl extends PerlParserImpl implements MasonPerlPars
 						}
 					}
 				}
+			}
+			if (r = endOrRecover(b, MASON_BLOCK_CLOSER))
+			{
 				statementMarker.done(STATEMENT);
 			}
-			else
+		}
+		if (tokenType == MASON_CALL_OPENER)
+		{
+			PsiBuilder.Marker statementMarker = b.mark();
+			b.advanceLexer();
+			PerlParserImpl.expr(b, l, -1);
+			if (r = endOrRecover(b, MASON_CALL_CLOSER))
 			{
-				statementMarker.drop();
+				statementMarker.done(STATEMENT);
 			}
-			r = endOrRecover(b, MASON_BLOCK_CLOSER);
 		}
 		else if (tokenType == MASON_CLASS_OPENER)
 		{

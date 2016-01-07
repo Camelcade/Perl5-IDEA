@@ -20,8 +20,10 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
+import com.perl5.lang.perl.lexer.CustomToken;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 import gnu.trove.THashMap;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Map;
@@ -285,6 +287,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 				else if (offset < bufferEnd - 1 && currentChar == '<' && buffer.charAt(offset + 1) == '&')
 				{
 					addPreparsedToken(offset, offset + 2, MASON_CALL_OPENER);
+					parseCallComponentPath(offset + 2);
 					setCustomState(LEX_MASON_PERL_CALL_BLOCK);
 					break;
 				}
@@ -423,6 +426,19 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 
 	protected boolean parseTailSpaces(CharSequence buffer, int tokenStart, int bufferEnd, String endToken)
 	{
+		CustomToken whiteSpaceToken = getWhiteSpacesToken(buffer, tokenStart, bufferEnd, endToken);
+		if (whiteSpaceToken != null)
+		{
+			setTokenStart(whiteSpaceToken.getTokenStart());
+			setTokenEnd(whiteSpaceToken.getTokenEnd());
+			return true;
+		}
+		return false;
+	}
+
+	@Nullable
+	protected CustomToken getWhiteSpacesToken(CharSequence buffer, int tokenStart, int bufferEnd, String endToken)
+	{
 		int offset = tokenStart;
 		char currentChar;
 
@@ -431,17 +447,16 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 			offset++;
 		}
 
+		if (bufferAtString(buffer, offset - 1, endToken)) // got closer after spaces
+		{
+			offset--;
+		}
+
 		if (offset > tokenStart) // got spaces
 		{
-			if (bufferAtString(buffer, offset - 1, endToken)) // got closer after spaces
-			{
-				offset--;
-			}
-			setTokenStart(tokenStart);
-			setTokenEnd(offset);
-			return true;
+			return getCustomToken(tokenStart, offset, TokenType.WHITE_SPACE);
 		}
-		return false;
+		return null;
 	}
 
 	@Override
@@ -454,5 +469,83 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 				(customState == LEX_MASON_PERL_EXPR_BLOCK || customState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
 						&& bufferAtString(buffer, currentPosition, KEYWORD_BLOCK_CLOSER)
 				;
+	}
+
+	protected void parseCallComponentPath(int offset)
+	{
+		CharSequence buffer = getBuffer();
+		int bufferEnd = getBufferEnd();
+
+		// heading spaces
+		while (offset < bufferEnd)
+		{
+			char currentChar = buffer.charAt(offset);
+			if (currentChar == '\n')    // newline
+			{
+				addPreparsedToken(offset, ++offset, TokenType.NEW_LINE_INDENT);
+			}
+			else if (Character.isWhitespace(currentChar)) // whitespaces
+			{
+				CustomToken whiteSpaceToken = getWhiteSpacesToken(buffer, offset, bufferEnd, KEYWORD_CALL_CLOSER);
+				if (whiteSpaceToken != null)
+				{
+					addPreparsedToken(whiteSpaceToken);
+					offset = whiteSpaceToken.getTokenEnd();
+				}
+				else // we are at ' &>'
+				{
+					return;
+				}
+			}
+			else // not newline or space
+			{
+				break;
+			}
+		}
+
+		// word
+		if (offset < bufferEnd)
+		{
+			char currentChar = buffer.charAt(offset);
+			// this is a bit weak, according to Perl docs:
+			// \w        [3]  Match a "word" character (alphanumeric plus "_",
+			// plus other connector punctuation chars plus Unicode marks)
+			// but regex here would be really heavy
+			if (currentChar == '/' || currentChar == '.' || currentChar == '_' || Character.isLetterOrDigit(currentChar)) // bareword path
+			{
+				int tokenStart = offset;
+				int lastNonSpaceOffset = 0;
+
+				while (offset < bufferEnd)
+				{
+					currentChar = buffer.charAt(offset);
+
+					if (currentChar == ',' ||                                                                                    // comma
+							currentChar == '=' && offset + 1 < bufferEnd && buffer.charAt(offset + 1) == '>' ||    // arrow comma
+							currentChar == ' ' && offset + 2 < bufferEnd && buffer.charAt(offset + 1) == '&' && buffer.charAt(offset + 2) == '>'    // close marker
+							)
+					{
+						break;
+					}
+
+					if (!Character.isWhitespace(currentChar))
+					{
+						lastNonSpaceOffset = offset;
+					}
+
+					offset++;
+				}
+
+				if (++lastNonSpaceOffset > tokenStart)
+				{
+					addPreparsedToken(tokenStart, lastNonSpaceOffset, STRING_CONTENT);
+
+					if (offset > lastNonSpaceOffset)
+					{
+						addPreparsedToken(lastNonSpaceOffset, offset, TokenType.WHITE_SPACE);
+					}
+				}
+			}
+		}
 	}
 }
