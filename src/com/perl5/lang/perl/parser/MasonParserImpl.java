@@ -128,6 +128,11 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 
 		}
 
+		if (!r)
+		{
+			methodMarker.rollbackTo();
+		}
+
 		return r || recoverToGreedy(b, closeToken, "Error");
 	}
 

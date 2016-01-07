@@ -370,7 +370,7 @@
                                       implementationClass="com.perl5.lang.mason.MasonFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Mason template"
                                        implementationClass="com.perl5.lang.mason.idea.highlighter.MasonSyntaxHighlighterFactory"/>
-
+        <typedHandler implementation="com.perl5.lang.mason.idea.editor.MasonTypedHandler" order="first"/>
 
         <lang.findUsagesProvider language="Mason template"
                                  implementationClass="com.perl5.lang.mason.idea.findusages.MasonFindUsagesProvider"/>

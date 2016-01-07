@@ -284,10 +284,10 @@ public class MasonLexer extends PerlLexerWithCustomStates implements MasonElemen
 					addPreparsedToken(offset, offset + tag.length(), CLOSE_TOKENS_MAP.get(tag));
 					break;
 				}
-				else if (offset < bufferEnd - 1 && currentChar == '<' && buffer.charAt(offset + 1) == '&')
+				else if (offset < bufferEnd - 2 && currentChar == '<' && buffer.charAt(offset + 1) == '&' && Character.isWhitespace(buffer.charAt(offset + 2)))
 				{
-					addPreparsedToken(offset, offset + 2, MASON_CALL_OPENER);
-					parseCallComponentPath(offset + 2);
+					addPreparsedToken(offset, offset + KEYWORD_CALL_OPENER.length(), MASON_CALL_OPENER);
+					parseCallComponentPath(offset + KEYWORD_CALL_OPENER.length());
 					setCustomState(LEX_MASON_PERL_CALL_BLOCK);
 					break;
 				}
