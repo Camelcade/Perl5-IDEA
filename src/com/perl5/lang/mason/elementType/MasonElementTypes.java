@@ -83,4 +83,6 @@ public interface MasonElementTypes extends MasonSyntaxElements
 	IElementType MASON_FLAGS_STATEMENT = new MasonElementType("FLAGS_STATEMENT");
 	IElementType MASON_OVERRIDE_STATEMENT = new MasonOverrideStubElementType(KEYWORD_OVERRIDE);
 	IElementType MASON_NAMESPACE_DEFINITION = new MasonNamespaceElementType("MASON_PACKAGE");
+
+	IElementType MASON_ABSTRACT_BLOCK = new MasonElementType("MASON_ABSTRACT_BLOCK");
 }

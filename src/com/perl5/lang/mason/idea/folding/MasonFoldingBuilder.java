@@ -16,12 +16,22 @@
 
 package com.perl5.lang.mason.idea.folding;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.folding.FoldingDescriptor;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
+import com.perl5.lang.mason.psi.MasonAbstractBlock;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by hurricup on 07.01.2016.
@@ -35,6 +45,28 @@ public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElem
 					MASON_BLOCK_CLOSER,
 					MASON_LINE_OPENER
 			));
+
+	@NotNull
+	@Override
+	public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick)
+	{
+		List<FoldingDescriptor> masonDescriptors = new ArrayList<FoldingDescriptor>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
+
+		masonDescriptors.addAll(getDescriptorsFor(root, document, MasonAbstractBlock.class, 0, 0, 0));
+
+		return masonDescriptors.toArray(new FoldingDescriptor[masonDescriptors.size()]);
+	}
+
+	@Nullable
+	@Override
+	public String getPlaceholderText(@NotNull ASTNode node, @NotNull TextRange range)
+	{
+		if (node.getElementType() == MASON_ABSTRACT_BLOCK)
+		{
+			return PH_CODE_BLOCK;
+		}
+		return super.getPlaceholderText(node, range);
+	}
 
 	@NotNull
 	@Override

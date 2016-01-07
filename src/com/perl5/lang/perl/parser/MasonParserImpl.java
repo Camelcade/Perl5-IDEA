@@ -161,6 +161,23 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 		return b.eof();
 	}
 
+	protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken)
+	{
+		b.advanceLexer();
+		PsiBuilder.Marker abstractBlockMarker = b.mark();
+
+		while (!b.eof() && b.getTokenType() != closeToken)
+		{
+			if (!PerlParserImpl.file_item(b, l))
+			{
+				break;
+			}
+		}
+		abstractBlockMarker.done(MASON_ABSTRACT_BLOCK);
+		abstractBlockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+		return endOrRecover(b, closeToken);
+	}
+
 	@Override
 	public boolean parseStatement(PsiBuilder b, int l)
 	{
@@ -209,42 +226,15 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 		}
 		else if (tokenType == MASON_CLASS_OPENER)
 		{
-			b.advanceLexer();
-
-			while (!b.eof() && b.getTokenType() != MASON_CLASS_CLOSER)
-			{
-				if (!PerlParserImpl.file_item(b, l))
-				{
-					break;
-				}
-			}
-			r = endOrRecover(b, MASON_CLASS_CLOSER);
+			r = parsePerlBlock(b, l, MASON_CLASS_CLOSER);
 		}
 		else if (tokenType == MASON_INIT_OPENER)
 		{
-			b.advanceLexer();
-
-			while (!b.eof() && b.getTokenType() != MASON_INIT_CLOSER)
-			{
-				if (!PerlParserImpl.file_item(b, l))
-				{
-					break;
-				}
-			}
-			r = endOrRecover(b, MASON_INIT_CLOSER);
+			r = parsePerlBlock(b, l, MASON_INIT_CLOSER);
 		}
 		else if (tokenType == MASON_PERL_OPENER)
 		{
-			b.advanceLexer();
-
-			while (!b.eof() && b.getTokenType() != MASON_PERL_CLOSER)
-			{
-				if (!PerlParserImpl.file_item(b, l))
-				{
-					break;
-				}
-			}
-			r = endOrRecover(b, MASON_PERL_CLOSER);
+			r = parsePerlBlock(b, l, MASON_PERL_CLOSER);
 		}
 		else if (tokenType == MASON_FLAGS_OPENER)    // fixme need more love here, extends
 		{

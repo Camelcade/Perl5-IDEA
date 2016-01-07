@@ -45,6 +45,8 @@ import java.util.List;
  */
 public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementTypes
 {
+	public static final String PH_CODE_BLOCK = "{code block}";
+
 	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.EMPTY;
 
 	@NotNull
@@ -272,7 +274,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 	 * @param <T>         PsiElement subclass
 	 * @return list of folding descriptors
 	 */
-	private <T extends PsiElement> List<FoldingDescriptor> getDescriptorsFor(
+	protected <T extends PsiElement> List<FoldingDescriptor> getDescriptorsFor(
 			@NotNull PsiElement root,
 			@NotNull Document document,
 			Class<? extends T> c,
@@ -309,7 +311,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 		IElementType elementType = node.getElementType();
 
 		if (elementType == BLOCK)
-			return "{code block}";
+			return PH_CODE_BLOCK;
 		if (elementType == CONSTANTS_BLOCK)
 			return "{constants definitions}";
 		if (elementType == STRING_LIST)

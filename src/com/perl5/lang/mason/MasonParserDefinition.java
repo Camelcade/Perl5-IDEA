@@ -29,10 +29,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.mason.elementType.MasonFileElementType;
 import com.perl5.lang.mason.lexer.MasonLexerAdapter;
-import com.perl5.lang.mason.psi.impl.MasonFileImpl;
-import com.perl5.lang.mason.psi.impl.MasonFlagsStatementImpl;
-import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
-import com.perl5.lang.mason.psi.impl.MasonOverrideStatementImpl;
+import com.perl5.lang.mason.psi.impl.*;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.MasonParserImpl;
 import org.jetbrains.annotations.NotNull;
@@ -96,6 +93,10 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 		else if (elementType == MASON_FLAGS_STATEMENT)
 		{
 			return new MasonFlagsStatementImpl(node);
+		}
+		else if (elementType == MASON_ABSTRACT_BLOCK)
+		{
+			return new MasonAbstractBlockImpl(node);
 		}
 
 		return super.createElement(node);
