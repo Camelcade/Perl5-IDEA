@@ -22,7 +22,7 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.mason.psi.MasonPerlOverrideStatement;
+import com.perl5.lang.mason.psi.MasonOverrideStatement;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
@@ -32,14 +32,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.01.2016.
  */
-public class MasonPerlOverrideStatementImpl extends PerlMooseOverrideStatementImpl implements MasonPerlOverrideStatement
+public class MasonOverrideStatementImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideStatement
 {
-	public MasonPerlOverrideStatementImpl(@NotNull ASTNode node)
+	public MasonOverrideStatementImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	public MasonPerlOverrideStatementImpl(@NotNull PerlMooseOverrideStub stub, @NotNull IStubElementType nodeType)
+	public MasonOverrideStatementImpl(@NotNull PerlMooseOverrideStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}

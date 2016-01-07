@@ -14,29 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.psi.impl;
+package com.perl5.lang.mason.elementType;
 
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.mason.MasonPerlLanguage;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.mason.MasonLanguage;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 21.12.2015.
  */
-public class MasonPerlFileImpl extends PerlFileImpl
+public class MasonTokenType extends IElementType
 {
-	private String filePackage;
-
-	public MasonPerlFileImpl(@NotNull FileViewProvider viewProvider)
+	public MasonTokenType(@NotNull @NonNls String debugName)
 	{
-		super(viewProvider, MasonPerlLanguage.INSTANCE);
+		super(debugName, MasonLanguage.INSTANCE);
 	}
 
-	@Override
 	public String toString()
 	{
-		return "Mason component";
+		return "MasonTokenType." + super.toString();
 	}
-
 }

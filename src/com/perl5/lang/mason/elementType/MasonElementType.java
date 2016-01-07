@@ -16,23 +16,22 @@
 
 package com.perl5.lang.mason.elementType;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason.MasonPerlLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.12.2015.
  */
-public class MasonPerlTokenType extends IElementType
+public class MasonElementType extends MasonTokenType
 {
-	public MasonPerlTokenType(@NotNull @NonNls String debugName)
+	public MasonElementType(@NotNull @NonNls String debugName)
 	{
-		super(debugName, MasonPerlLanguage.INSTANCE);
+		super(debugName);
 	}
 
 	public String toString()
 	{
-		return "MasonPerlTokenType." + super.toString();
+		return "MasonElementType." + super.toString();
 	}
+
 }

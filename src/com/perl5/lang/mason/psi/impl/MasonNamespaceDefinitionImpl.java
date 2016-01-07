@@ -23,8 +23,8 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
-import com.perl5.lang.mason.MasonPerlUtils;
-import com.perl5.lang.mason.idea.configuration.MasonPerlSettings;
+import com.perl5.lang.mason.MasonUtils;
+import com.perl5.lang.mason.idea.configuration.MasonSettings;
 import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
@@ -70,7 +70,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 			if (componentPath != null)
 			{
-				return MasonPerlUtils.getClassnameFromPath(componentPath);
+				return MasonUtils.getClassnameFromPath(componentPath);
 			}
 		}
 
@@ -87,7 +87,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	@Override
 	public VirtualFile getComponentRoot()
 	{
-		MasonPerlSettings masonSettings = MasonPerlSettings.getInstance(getProject());
+		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
 		VirtualFile containingFile = getRealContainingFile();
 
 		if (containingFile != null && containingFile.exists())
@@ -165,7 +165,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 				if (componentPath != null)
 				{
-					parentsList.add(MasonPerlUtils.getClassnameFromPath(componentPath));
+					parentsList.add(MasonUtils.getClassnameFromPath(componentPath));
 				}
 			}
 		}
@@ -191,7 +191,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	private VirtualFile getParentComponentFile(VirtualFile componentRoot, VirtualFile currentDirectory, VirtualFile childFile)
 	{
 		// check in current dir
-		List<String> autobaseNames = new ArrayList<String>(MasonPerlSettings.getInstance(getProject()).autobaseNames);
+		List<String> autobaseNames = new ArrayList<String>(MasonSettings.getInstance(getProject()).autobaseNames);
 
 		if (childFile.getParent().equals(currentDirectory) && autobaseNames.contains(childFile.getName())) // avoid cyclic inheritance
 		{

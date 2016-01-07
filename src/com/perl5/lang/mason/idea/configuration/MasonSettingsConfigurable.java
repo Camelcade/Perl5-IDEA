@@ -43,11 +43,11 @@ import java.util.List;
 /**
  * Created by hurricup on 03.01.2016.
  */
-public class MasonPerlSettingsConfigurable implements Configurable
+public class MasonSettingsConfigurable implements Configurable
 {
 	final Project myProject;
 	final String windowTitile;
-	final MasonPerlSettings mySettings;
+	final MasonSettings mySettings;
 
 	CollectionListModel<String> rootsModel;
 	CollectionListModel<String> autobaseModel;
@@ -55,16 +55,16 @@ public class MasonPerlSettingsConfigurable implements Configurable
 	JBList rootsList;
 	JBList autobaseList;
 
-	public MasonPerlSettingsConfigurable(Project myProject)
+	public MasonSettingsConfigurable(Project myProject)
 	{
 		this(myProject, "Mason");
 	}
 
-	public MasonPerlSettingsConfigurable(Project myProject, String windowTitile)
+	public MasonSettingsConfigurable(Project myProject, String windowTitile)
 	{
 		this.myProject = myProject;
 		this.windowTitile = windowTitile;
-		mySettings = MasonPerlSettings.getInstance(myProject);
+		mySettings = MasonSettings.getInstance(myProject);
 	}
 
 	@Nls

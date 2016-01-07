@@ -17,7 +17,7 @@
 package com.perl5.lang.mason.elementType;
 
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.mason.MasonPerlLanguage;
+import com.perl5.lang.mason.MasonLanguage;
 import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
@@ -32,7 +32,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 {
 	public MasonNamespaceElementType(String name)
 	{
-		super(name, MasonPerlLanguage.INSTANCE);
+		super(name, MasonLanguage.INSTANCE);
 	}
 
 	@Override

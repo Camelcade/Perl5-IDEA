@@ -27,9 +27,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public class MasonPerlFileElementType extends PerlFileElementType
+public class MasonFileElementType extends PerlFileElementType
 {
-	public MasonPerlFileElementType(String debugName, Language language)
+	public MasonFileElementType(String debugName, Language language)
 	{
 		super(debugName, language);
 	}

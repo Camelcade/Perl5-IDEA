@@ -17,7 +17,7 @@
 package com.perl5.lang.mason.idea.findusages;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
-import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
+import com.perl5.lang.mason.lexer.MasonLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 
 /**
@@ -27,7 +27,7 @@ public class MasonWordsScanner extends DefaultWordsScanner
 {
 	public MasonWordsScanner()
 	{
-		super(new MasonPerlLexerAdapter(null),
+		super(new MasonLexerAdapter(null),
 				PerlParserDefinition.IDENTIFIERS,
 				PerlParserDefinition.COMMENTS,
 				PerlParserDefinition.LITERALS

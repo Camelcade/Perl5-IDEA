@@ -25,8 +25,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
 import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
-import com.perl5.lang.mason.idea.configuration.MasonPerlSettings;
-import com.perl5.lang.mason.idea.configuration.MasonPerlSettingsConfigurable;
+import com.perl5.lang.mason.idea.configuration.MasonSettings;
+import com.perl5.lang.mason.idea.configuration.MasonSettingsConfigurable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,7 +54,7 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 	@Override
 	public EditorNotificationPanel createNotificationPanel(@NotNull final VirtualFile file, @NotNull FileEditor fileEditor)
 	{
-		if (file.getFileType() instanceof MasonPurePerlComponentFileType && MasonPerlSettings.getInstance(myProject).componentRoots.size() == 0)
+		if (file.getFileType() instanceof MasonPurePerlComponentFileType && MasonSettings.getInstance(myProject).componentRoots.size() == 0)
 		{
 			EditorNotificationPanel panel = new EditorNotificationPanel();
 			panel.setText("Mason components roots are not configured");
@@ -63,7 +63,7 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 				@Override
 				public void run()
 				{
-					ShowSettingsUtil.getInstance().editConfigurable(myProject, new MasonPerlSettingsConfigurable(myProject, "Mason Settings"));
+					ShowSettingsUtil.getInstance().editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason Settings"));
 					EditorNotifications.getInstance(myProject).updateNotifications(file);
 				}
 			});

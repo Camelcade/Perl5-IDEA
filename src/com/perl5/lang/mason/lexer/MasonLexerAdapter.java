@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason;
+package com.perl5.lang.mason.lexer;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlLanguage extends Language implements TemplateLanguage
+public class MasonLexerAdapter extends PerlLexerWithCustomStatesAdapter
 {
-	public static final MasonPerlLanguage INSTANCE = new MasonPerlLanguage();
-
-	public MasonPerlLanguage()
+	public MasonLexerAdapter(Project project)
 	{
-		super(PerlLanguage.INSTANCE, "Mason template");
+		super(new MasonLexer(project));
 	}
 }

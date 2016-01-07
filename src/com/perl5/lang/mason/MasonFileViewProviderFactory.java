@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlFileViewProviderFactory implements FileViewProviderFactory
+public class MasonFileViewProviderFactory implements FileViewProviderFactory
 {
 	@NotNull
 	@Override

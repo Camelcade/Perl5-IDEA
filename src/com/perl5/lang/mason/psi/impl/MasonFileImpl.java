@@ -14,18 +14,29 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.lexer;
+package com.perl5.lang.mason.psi.impl;
 
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
+import com.intellij.psi.FileViewProvider;
+import com.perl5.lang.mason.MasonLanguage;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlLexerAdapter extends PerlLexerWithCustomStatesAdapter
+public class MasonFileImpl extends PerlFileImpl
 {
-	public MasonPerlLexerAdapter(Project project)
+	private String filePackage;
+
+	public MasonFileImpl(@NotNull FileViewProvider viewProvider)
 	{
-		super(new MasonLexer(project));
+		super(viewProvider, MasonLanguage.INSTANCE);
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Mason component";
+	}
+
 }

@@ -14,24 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.elementType;
+package com.perl5.lang.mason.psi;
 
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 
 /**
- * Created by hurricup on 21.12.2015.
+ * Created by hurricup on 03.01.2016.
  */
-public class MasonPerlElementType extends MasonPerlTokenType
+public interface MasonOverrideStatement extends PerlMooseOverrideStatement
 {
-	public MasonPerlElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
-
-	public String toString()
-	{
-		return "MasonPerlElementType." + super.toString();
-	}
-
 }

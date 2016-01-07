@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.psi;
+package com.perl5.lang.mason;
 
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
+import com.intellij.lang.Language;
+import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.perl5.lang.perl.PerlLanguage;
 
 /**
- * Created by hurricup on 03.01.2016.
+ * Created by hurricup on 20.12.2015.
  */
-public interface MasonPerlOverrideStatement extends PerlMooseOverrideStatement
+public class MasonLanguage extends Language implements TemplateLanguage
 {
+	public static final MasonLanguage INSTANCE = new MasonLanguage();
+
+	public MasonLanguage()
+	{
+		super(PerlLanguage.INSTANCE, "Mason template");
+	}
 }

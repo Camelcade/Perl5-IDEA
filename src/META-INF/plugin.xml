@@ -349,9 +349,9 @@
                              implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
 
 
-        <projectService serviceImplementation="com.perl5.lang.mason.idea.configuration.MasonPerlSettings"/>
+        <projectService serviceImplementation="com.perl5.lang.mason.idea.configuration.MasonSettings"/>
         <projectConfigurable
-                provider="com.perl5.lang.mason.idea.configuration.MasonPerlSettingsConfigurableProvider"
+                provider="com.perl5.lang.mason.idea.configuration.MasonSettingsConfigurableProvider"
                 parentId="PERL5_MAIN_SETTINGS"/>
         <editorNotificationProvider
                 implementation="com.perl5.lang.mason.idea.editor.notification.MasonPathsNotification"/>
@@ -360,13 +360,13 @@
         <lang.parserDefinition language="Mason template"
                                implementationClass="com.perl5.lang.mason.MasonParserDefinition"/>
         <lang.fileViewProviderFactory language="Mason template"
-                                      implementationClass="com.perl5.lang.mason.MasonPerlFileViewProviderFactory"/>
+                                      implementationClass="com.perl5.lang.mason.MasonFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Mason template"
-                                       implementationClass="com.perl5.lang.mason.idea.highlighter.MasonPerlSyntaxHighlighterFactory"/>
+                                       implementationClass="com.perl5.lang.mason.idea.highlighter.MasonSyntaxHighlighterFactory"/>
 
 
         <lang.findUsagesProvider language="Mason template"
-                                 implementationClass="com.perl5.lang.mason.idea.findusages.MasonPerlFindUsagesProvider"/>
+                                 implementationClass="com.perl5.lang.mason.idea.findusages.MasonFindUsagesProvider"/>
         <cacheBuilder fileType="Mason pure Perl component"
                       wordsScannerClass="com.perl5.lang.perl.idea.findusages.PerlWordsScanner"/>
 

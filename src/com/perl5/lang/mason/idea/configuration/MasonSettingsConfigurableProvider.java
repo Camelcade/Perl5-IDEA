@@ -24,11 +24,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 03.01.2016.
  */
-public class MasonPerlSettingsConfigurableProvider extends ConfigurableProvider
+public class MasonSettingsConfigurableProvider extends ConfigurableProvider
 {
 	Project project;
 
-	public MasonPerlSettingsConfigurableProvider(Project project)
+	public MasonSettingsConfigurableProvider(Project project)
 	{
 		this.project = project;
 	}
@@ -37,7 +37,7 @@ public class MasonPerlSettingsConfigurableProvider extends ConfigurableProvider
 	@Override
 	public Configurable createConfigurable()
 	{
-		return new MasonPerlSettingsConfigurable(project);
+		return new MasonSettingsConfigurable(project);
 	}
 
 	@Override

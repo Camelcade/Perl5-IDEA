@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason;
+package com.perl5.lang.mason.idea.findusages;
 
-import com.intellij.openapi.vfs.VfsUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.cacheBuilder.WordsScanner;
+import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 06.01.2016.
+ * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlUtils
+public class MasonFindUsagesProvider extends PerlFindUsagesProvider
 {
-	@NotNull
-	public static String getClassnameFromPath(@NotNull String path)
+
+	@Nullable
+	@Override
+	public WordsScanner getWordsScanner()
 	{
-		return "MC0::" + path.replaceAll("[^\\w\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
+		return new MasonWordsScanner();
 	}
 }

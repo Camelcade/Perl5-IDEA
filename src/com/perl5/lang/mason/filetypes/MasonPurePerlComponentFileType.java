@@ -17,7 +17,7 @@
 package com.perl5.lang.mason.filetypes;
 
 import com.perl5.PerlIcons;
-import com.perl5.lang.mason.MasonPerlLanguage;
+import com.perl5.lang.mason.MasonLanguage;
 import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +33,7 @@ public class MasonPurePerlComponentFileType extends PerlFileType
 
 	public MasonPurePerlComponentFileType()
 	{
-		super(MasonPerlLanguage.INSTANCE);
+		super(MasonLanguage.INSTANCE);
 	}
 
 	@NotNull

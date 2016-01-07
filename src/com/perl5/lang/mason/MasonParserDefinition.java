@@ -27,12 +27,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
-import com.perl5.lang.mason.elementType.MasonPerlFileElementType;
-import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
+import com.perl5.lang.mason.elementType.MasonFileElementType;
+import com.perl5.lang.mason.lexer.MasonLexerAdapter;
+import com.perl5.lang.mason.psi.impl.MasonFileImpl;
 import com.perl5.lang.mason.psi.impl.MasonFlagsStatementImpl;
 import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
-import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
-import com.perl5.lang.mason.psi.impl.MasonPerlOverrideStatementImpl;
+import com.perl5.lang.mason.psi.impl.MasonOverrideStatementImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.MasonParserImpl;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +42,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MasonParserDefinition extends PerlParserDefinition implements MasonElementTypes
 {
-	public static final IFileElementType FILE = new MasonPerlFileElementType("Mason component", MasonPerlLanguage.INSTANCE);
+	public static final IFileElementType FILE = new MasonFileElementType("Mason component", MasonLanguage.INSTANCE);
 
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(
@@ -53,7 +53,7 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new MasonPerlLexerAdapter(project);
+		return new MasonLexerAdapter(project);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new MasonPerlFileImpl(viewProvider);
+		return new MasonFileImpl(viewProvider);
 	}
 
 	@NotNull
@@ -87,7 +87,7 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 		IElementType elementType = node.getElementType();
 		if (elementType == MASON_OVERRIDE_STATEMENT)
 		{
-			return new MasonPerlOverrideStatementImpl(node);
+			return new MasonOverrideStatementImpl(node);
 		}
 		else if (elementType == MASON_NAMESPACE_DEFINITION)
 		{

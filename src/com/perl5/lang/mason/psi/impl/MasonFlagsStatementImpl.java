@@ -23,7 +23,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.mason.MasonPerlUtils;
+import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlString;
@@ -53,7 +53,7 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 		{
 			if (extendsFlagsValue.startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path, see the Mason::Interp::_determine_parent_compc
 			{
-				return MasonPerlUtils.getClassnameFromPath(extendsFlagsValue.substring(1));
+				return MasonUtils.getClassnameFromPath(extendsFlagsValue.substring(1));
 			}
 			else // relative path
 			{
@@ -64,7 +64,7 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 				{
 					String fullPath = containingFile.getParent().getPath() + VfsUtil.VFS_SEPARATOR_CHAR + extendsFlagsValue;
 					String parentComponentPath = fullPath.substring(currentComponentRoot.getPath().length() + 1);
-					return MasonPerlUtils.getClassnameFromPath(parentComponentPath);
+					return MasonUtils.getClassnameFromPath(parentComponentPath);
 				}
 			}
 		}

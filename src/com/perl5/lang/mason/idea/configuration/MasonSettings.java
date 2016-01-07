@@ -41,7 +41,7 @@ import java.util.List;
 )
 
 
-public class MasonPerlSettings implements PersistentStateComponent<MasonPerlSettings>
+public class MasonSettings implements PersistentStateComponent<MasonSettings>
 {
 	public List<String> componentRoots = new ArrayList<String>();
 	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
@@ -51,16 +51,16 @@ public class MasonPerlSettings implements PersistentStateComponent<MasonPerlSett
 	@Transient
 	private List<VirtualFile> componentsRootsVirtualFiles = null;
 
-	public static MasonPerlSettings getInstance(@NotNull Project project)
+	public static MasonSettings getInstance(@NotNull Project project)
 	{
-		MasonPerlSettings persisted = ServiceManager.getService(project, MasonPerlSettings.class);
+		MasonSettings persisted = ServiceManager.getService(project, MasonSettings.class);
 		if (persisted == null)
-			persisted = new MasonPerlSettings();
+			persisted = new MasonSettings();
 
 		return persisted.setProject(project);
 	}
 
-	private MasonPerlSettings setProject(Project project)
+	private MasonSettings setProject(Project project)
 	{
 		myProject = project;
 		return this;
@@ -91,13 +91,13 @@ public class MasonPerlSettings implements PersistentStateComponent<MasonPerlSett
 
 	@Nullable
 	@Override
-	public MasonPerlSettings getState()
+	public MasonSettings getState()
 	{
 		return this;
 	}
 
 	@Override
-	public void loadState(MasonPerlSettings state)
+	public void loadState(MasonSettings state)
 	{
 		XmlSerializerUtil.copyBean(state, this);
 	}

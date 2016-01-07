@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
+public class MasonSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
 {
 	@Override
 	@NotNull
