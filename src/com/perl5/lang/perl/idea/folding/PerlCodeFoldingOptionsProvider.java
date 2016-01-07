@@ -30,14 +30,13 @@ public class PerlCodeFoldingOptionsProvider extends BeanConfigurable<PerlFolding
 	{
 		super(beanInstance);
 
-		checkBox("COLLAPSE_SEQUENTIONAL_COMMENTS", "Sequentional line comments");
-		checkBox("COLLAPSE_BLOCK_COMMENTS", "Block comments");
+		checkBox("COLLAPSE_COMMENTS", "Sequentional line comments");
 		checkBox("COLLAPSE_CONSTANT_BLOCKS", "Block of constants");
 		checkBox("COLLAPSE_ANON_ARRAYS", "Anonymous arrays");
 		checkBox("COLLAPSE_ANON_HASHES", "Anonymous hashes");
 		checkBox("COLLAPSE_PARENTHESISED", "Parenthesised expressions");
 		checkBox("COLLAPSE_HEREDOCS", "Here-docs");
-		checkBox("COLLAPSE_TEMPLATES", "Template parts (mojo, embedded)");
+		checkBox("COLLAPSE_TEMPLATES", "Template parts (Mojolicious, Mason, etc.)");
 		checkBox("COLLAPSE_QW", "QW contents");
 	}
 

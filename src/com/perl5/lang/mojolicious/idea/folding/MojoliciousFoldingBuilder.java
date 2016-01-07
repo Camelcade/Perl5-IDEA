@@ -16,11 +16,9 @@
 
 package com.perl5.lang.mojolicious.idea.folding;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -30,13 +28,8 @@ public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements Moj
 {
 	@Nullable
 	@Override
-	public String getPlaceholderText(@NotNull ASTNode node)
+	protected IElementType getTemplateBlockElementType()
 	{
-		IElementType nodeType = node.getElementType();
-		if (nodeType == MOJO_TEMPLATE_BLOCK_HTML)
-		{
-			return "<html...>";
-		}
-		return super.getPlaceholderText(node);
+		return MOJO_TEMPLATE_BLOCK_HTML;
 	}
 }

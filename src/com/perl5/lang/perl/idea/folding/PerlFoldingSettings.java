@@ -23,8 +23,7 @@ import com.intellij.openapi.components.ServiceManager;
  */
 public class PerlFoldingSettings
 {
-	public boolean COLLAPSE_SEQUENTIONAL_COMMENTS = true;
-	public boolean COLLAPSE_BLOCK_COMMENTS = true;
+	public boolean COLLAPSE_COMMENTS = true;
 	public boolean COLLAPSE_CONSTANT_BLOCKS = false;
 	public boolean COLLAPSE_ANON_ARRAYS = false;
 	public boolean COLLAPSE_ANON_HASHES = false;

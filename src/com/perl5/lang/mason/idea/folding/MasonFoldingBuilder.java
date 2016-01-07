@@ -16,11 +16,9 @@
 
 package com.perl5.lang.mason.idea.folding;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -30,13 +28,8 @@ public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElem
 {
 	@Nullable
 	@Override
-	public String getPlaceholderText(@NotNull ASTNode node)
+	protected IElementType getTemplateBlockElementType()
 	{
-		IElementType nodeType = node.getElementType();
-		if (nodeType == MASON_TEMPLATE_BLOCK_HTML)
-		{
-			return "<html...>";
-		}
-		return super.getPlaceholderText(node);
+		return MASON_TEMPLATE_BLOCK_HTML;
 	}
 }

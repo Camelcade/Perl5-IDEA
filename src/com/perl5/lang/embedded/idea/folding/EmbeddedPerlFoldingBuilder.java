@@ -16,8 +16,8 @@
 
 package com.perl5.lang.embedded.idea.folding;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -28,16 +28,24 @@ import org.jetbrains.annotations.Nullable;
  */
 public class EmbeddedPerlFoldingBuilder extends PerlFoldingBuilder implements EmbeddedPerlElementTypes
 {
+	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
+			PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
+			TokenSet.create(
+					EMBED_MARKER_OPEN,
+					EMBED_MARKER_CLOSE
+			));
+
 	@Nullable
 	@Override
-	public String getPlaceholderText(@NotNull ASTNode node)
+	protected IElementType getTemplateBlockElementType()
 	{
-		IElementType nodeType = node.getElementType();
-		if (nodeType == EMBED_TEMPLATE_BLOCK_HTML)
-		{
-			return "<html...>";
-		}
-		return super.getPlaceholderText(node);
+		return EMBED_TEMPLATE_BLOCK_HTML;
 	}
 
+	@NotNull
+	@Override
+	protected TokenSet getCommentExcludedTokens()
+	{
+		return COMMENT_EXCLUDED_TOKENS;
+	}
 }

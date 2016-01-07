@@ -25,9 +25,9 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -43,8 +43,10 @@ import java.util.List;
 /**
  * Created by hurricup on 20.05.2015.
  */
-public class PerlFoldingBuilder extends FoldingBuilderEx
+public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementTypes
 {
+	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.EMPTY;
+
 	@NotNull
 	@Override
 	public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick)
@@ -61,10 +63,9 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonArray.class, 0, 0, 2));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlParenthesisedExpr.class, 0, 0, 2));
 		descriptors.addAll(getDescriptorsFor(root, document, PerlHeredocElementImpl.class, 1, 1, 2));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 1, 2));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlStringList.class, 2, 0, 2));
 
-//		descriptors.addAll(getCommentsDescriptors(root, document));
+		descriptors.addAll(getCommentsDescriptors(root, document));
 		descriptors.addAll(getImportDescriptors(root, document));
 
 		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
@@ -83,29 +84,46 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 
 		Collection<PsiComment> comments = PsiTreeUtil.findChildrenOfType(root, PsiComment.class);
 
+		TokenSet commentExcludedTokens = getCommentExcludedTokens();
+
 		int currentOffset = 0;
 
 		for (PsiComment comment : comments)
 		{
-			if (currentOffset < comment.getTextOffset())    // skips already collapsed blocks
+			if (currentOffset <= comment.getTextOffset() && !commentExcludedTokens.contains(comment.getNode().getElementType()))    // skips already collapsed blocks
 			{
+				if (comment.getNode().getElementType() == POD)
+				{
+					TextRange commentRange = comment.getTextRange();
+					int startOffset = commentRange.getStartOffset();
+					int endOffset = commentRange.getEndOffset();
+
+					if (comment.getText().endsWith("\n"))
+					{
+						endOffset--;
+					}
+					currentOffset = endOffset;
+					descriptors.add(new FoldingDescriptor(comment.getNode(), new TextRange(startOffset, endOffset)));
+					continue;
+				}
+
 				boolean isCollapsable = false;
-				PsiElement prev = comment;
+				PsiElement lastComment = comment;
 
 				// checking if this is a first element of block or starts from newline
 				while (true)
 				{
-					prev = prev.getPrevSibling();
+					lastComment = lastComment.getPrevSibling();
 
-					if (prev == null || prev instanceof PsiComment)
+					if (lastComment == null || lastComment instanceof PsiComment)
 					{
 						isCollapsable = true;
 						break;
 					}
-					else if (prev instanceof PsiWhiteSpace)
+					else if (lastComment instanceof PsiWhiteSpace)
 					{
 						// whitespace with newline
-						if (prev.getText().equals("\n"))
+						if (lastComment.getText().equals("\n"))
 						{
 							isCollapsable = true;
 							break;
@@ -119,32 +137,43 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 				if (isCollapsable)
 				{
 					// looking for an end
-					int blockStart = comment.getTextOffset();
-					int blockEnd = blockStart;
+					int startOffset = comment.getTextOffset();
+					int endOffset = startOffset;
+
 					ASTNode blockNode = comment.getNode();
 					PsiElement currentComment = comment;
-					int commentsNumber = 0;
 
 					while (currentComment != null)
 					{
-						IElementType tokenType = currentComment.getNode().getElementType();
-						if (tokenType == PerlElementTypes.COMMENT_LINE && !currentComment.getText().contains("todo") && !currentComment.getText().contains("fixme"))
+						if (
+								currentComment instanceof PsiComment &&
+										!commentExcludedTokens.contains(currentComment.getNode().getElementType()) &&
+										!currentComment.getText().contains("todo") &&
+										!currentComment.getText().contains("fixme")
+								)
 						{
-							blockEnd = currentComment.getTextOffset() + currentComment.getTextLength();
+							endOffset = currentComment.getTextOffset() + currentComment.getTextLength();
 							if (currentComment.getText().endsWith("\n"))
-								blockEnd--;
-							commentsNumber++;
+								endOffset--;
 						}
-						else if (tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT)
+						else if (!(currentComment instanceof PsiWhiteSpace))
+						{
 							break;
+						}
 
 						currentComment = currentComment.getNextSibling();
 					}
 
-					if (blockEnd != blockStart && commentsNumber > 1)
+					if (endOffset > startOffset)
 					{
-						currentOffset = blockEnd;
-						descriptors.add(new FoldingDescriptor(blockNode, new TextRange(blockStart, blockEnd)));
+						int startLine = document.getLineNumber(startOffset);
+						int endLine = document.getLineNumber(endOffset);
+
+						if (endLine > startLine)
+						{
+							currentOffset = endOffset;
+							descriptors.add(new FoldingDescriptor(blockNode, new TextRange(startOffset, endOffset)));
+						}
 					}
 				}
 			}
@@ -259,28 +288,30 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	{
 		IElementType elementType = node.getElementType();
 
-		if (elementType == PerlElementTypes.BLOCK)
+		if (elementType == BLOCK)
 			return "{code block}";
-		if (elementType == PerlElementTypes.CONSTANTS_BLOCK)
+		if (elementType == CONSTANTS_BLOCK)
 			return "{constants definitions}";
-		if (elementType == PerlElementTypes.STRING_LIST)
+		if (elementType == STRING_LIST)
 			return "{strings list}";
-		else if (elementType == PerlElementTypes.ANON_ARRAY)
+		else if (elementType == ANON_ARRAY)
 			return "[array]";
-		else if (elementType == PerlElementTypes.ANON_HASH)
+		else if (elementType == ANON_HASH)
 			return "{hash}";
-		else if (elementType == PerlElementTypes.PARENTHESISED_EXPR)
+		else if (elementType == PARENTHESISED_EXPR)
 			return "(list expression...)";
-		else if (elementType == PerlElementTypes.HEREDOC)
+		else if (elementType == HEREDOC)
 			return "<< heredoc >>";
-		else if (elementType == PerlElementTypes.POD)
+		else if (elementType == POD)
 			return "= POD block =";
-		else if (elementType == PerlElementTypes.COMMENT_BLOCK)
+		else if (elementType == COMMENT_BLOCK)
 			return "# Block comment";
-		else if (elementType == PerlElementTypes.COMMENT_LINE)
+		else if (elementType == COMMENT_LINE)
 			return "# comments...";
-		else if (elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_EXPR)
+		else if (elementType == USE_STATEMENT || elementType == REQUIRE_EXPR)
 			return "imports...";
+		else if (elementType == getTemplateBlockElementType())
+			return "<html...>";
 		else
 			return "unknown entity " + elementType;
 	}
@@ -289,29 +320,47 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	public boolean isCollapsedByDefault(@NotNull ASTNode node)
 	{
 		IElementType elementType = node.getElementType();
-		if (elementType == PerlElementTypes.POD)    // documentation comments
+		if (elementType == POD)    // documentation comments
 			return CodeFoldingSettings.getInstance().COLLAPSE_DOC_COMMENTS;
-		else if (elementType == PerlElementTypes.USE_STATEMENT || elementType == PerlElementTypes.REQUIRE_EXPR)    // imports
+		else if (elementType == USE_STATEMENT || elementType == REQUIRE_EXPR)    // imports
 			return CodeFoldingSettings.getInstance().COLLAPSE_IMPORTS;
-		else if (elementType == PerlElementTypes.BLOCK)    // method bodies
+		else if (elementType == BLOCK)    // method bodies
 			return CodeFoldingSettings.getInstance().COLLAPSE_METHODS;
-		else if (elementType == PerlElementTypes.COMMENT_LINE)
-			return PerlFoldingSettings.getInstance().COLLAPSE_SEQUENTIONAL_COMMENTS;
-		else if (elementType == PerlElementTypes.COMMENT_BLOCK)
-			return PerlFoldingSettings.getInstance().COLLAPSE_BLOCK_COMMENTS;
-		else if (elementType == PerlElementTypes.CONSTANTS_BLOCK)
+		else if (elementType == COMMENT_LINE || elementType == COMMENT_BLOCK)
+			return PerlFoldingSettings.getInstance().COLLAPSE_COMMENTS;
+		else if (elementType == CONSTANTS_BLOCK)
 			return PerlFoldingSettings.getInstance().COLLAPSE_CONSTANT_BLOCKS;
-		else if (elementType == PerlElementTypes.ANON_ARRAY)
+		else if (elementType == ANON_ARRAY)
 			return PerlFoldingSettings.getInstance().COLLAPSE_ANON_ARRAYS;
-		else if (elementType == PerlElementTypes.ANON_HASH)
+		else if (elementType == ANON_HASH)
 			return PerlFoldingSettings.getInstance().COLLAPSE_ANON_HASHES;
-		else if (elementType == PerlElementTypes.PARENTHESISED_EXPR)
+		else if (elementType == PARENTHESISED_EXPR)
 			return PerlFoldingSettings.getInstance().COLLAPSE_PARENTHESISED;
-		else if (elementType == PerlElementTypes.HEREDOC)
+		else if (elementType == HEREDOC)
 			return PerlFoldingSettings.getInstance().COLLAPSE_HEREDOCS;
-		else if (elementType == PerlElementTypes.STRING_LIST)
+		else if (elementType == STRING_LIST)
 			return PerlFoldingSettings.getInstance().COLLAPSE_QW;
+		else if (elementType == getTemplateBlockElementType())
+			return PerlFoldingSettings.getInstance().COLLAPSE_TEMPLATES;
 		else
 			return false;
 	}
+
+	@Nullable
+	protected IElementType getTemplateBlockElementType()
+	{
+		return null;
+	}
+
+	/**
+	 * Returns list of tokens in PSIComment that should not be included in folding regions
+	 *
+	 * @return tokenset
+	 */
+	@NotNull
+	protected TokenSet getCommentExcludedTokens()
+	{
+		return COMMENT_EXCLUDED_TOKENS;
+	}
+
 }
