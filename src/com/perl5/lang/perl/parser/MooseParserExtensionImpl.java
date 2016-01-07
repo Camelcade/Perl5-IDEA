@@ -37,7 +37,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class MoosePerlParserExtensionImpl extends PerlParserExtension implements MoosePerlParserExtension, PerlElementTypes
+public class MooseParserExtensionImpl extends PerlParserExtension implements MooseParserExtension, PerlElementTypes
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<IElementType, IElementType>();

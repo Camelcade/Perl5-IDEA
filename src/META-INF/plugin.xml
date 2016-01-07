@@ -112,8 +112,8 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
 
         <parserExtension implementation="com.perl5.lang.perl.parser.SwitchPerlParserExtensionImpl"/>
-        <parserExtension implementation="com.perl5.lang.perl.parser.MethodSignaturesSimplePerlParserExtensionImpl"/>
-        <parserExtension implementation="com.perl5.lang.perl.parser.MoosePerlParserExtensionImpl"/>
+        <parserExtension implementation="com.perl5.lang.perl.parser.MethodSignaturesSimpleParserExtensionImpl"/>
+        <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtensionImpl"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">

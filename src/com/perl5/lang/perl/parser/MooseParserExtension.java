@@ -16,11 +16,11 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 
 /**
- * Created by hurricup on 23.12.2015.
+ * Created by hurricup on 25.11.2015.
  */
-public interface MethodSignaturesSimplePerlParserExtension extends PerlElementTypes
+public interface MooseParserExtension extends MooseElementTypes
 {
 }
