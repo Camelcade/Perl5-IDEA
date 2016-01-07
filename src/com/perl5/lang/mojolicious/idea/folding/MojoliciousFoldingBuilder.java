@@ -17,8 +17,10 @@
 package com.perl5.lang.mojolicious.idea.folding;
 
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -26,6 +28,33 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements MojoliciousElementTypes
 {
+	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
+			PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
+			TokenSet.create(
+					MOJO_BLOCK_OPENER,
+					MOJO_BLOCK_CLOSER,
+
+					MOJO_BLOCK_EXPR_OPENER,
+					MOJO_BLOCK_EXPR_CLOSER,
+
+					MOJO_BLOCK_EXPR_ESCAPED_OPENER,
+					MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
+
+					MOJO_LINE_EXPR_ESCAPED_OPENER,
+					MOJO_LINE_EXPR_OPENER,
+					MOJO_LINE_OPENER,
+
+					MOJO_BLOCK_OPENER_TAG,
+					MOJO_LINE_OPENER_TAG
+			));
+
+	@NotNull
+	@Override
+	protected TokenSet getCommentExcludedTokens()
+	{
+		return COMMENT_EXCLUDED_TOKENS;
+	}
+
 	@Nullable
 	@Override
 	protected IElementType getTemplateBlockElementType()

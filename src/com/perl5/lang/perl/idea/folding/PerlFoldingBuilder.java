@@ -110,35 +110,49 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 				boolean isCollapsable = false;
 				PsiElement lastComment = comment;
 
-				// checking if this is a first element of block or starts from newline
-				while (true)
+				if (comment.getNode().getElementType() == getTemplateBlockElementType())    // template blocks are always collapsable
 				{
-					lastComment = lastComment.getPrevSibling();
+					isCollapsable = true;
+				}
+				else
+				{
+					// checking if this is a first element of block or starts from newline
+					while (true)
+					{
+						lastComment = lastComment.getPrevSibling();
 
-					if (lastComment == null || lastComment instanceof PsiComment)
-					{
-						isCollapsable = true;
-						break;
-					}
-					else if (lastComment instanceof PsiWhiteSpace)
-					{
-						// whitespace with newline
-						if (lastComment.getText().equals("\n"))
+						if (lastComment == null || lastComment instanceof PsiComment)
 						{
 							isCollapsable = true;
 							break;
 						}
+						else if (lastComment instanceof PsiWhiteSpace)
+						{
+							// whitespace with newline
+							if (lastComment.getText().equals("\n"))
+							{
+								isCollapsable = true;
+								break;
+							}
+						}
+						// non-whitespace block
+						else
+							break;
 					}
-					// non-whitespace block
-					else
-						break;
 				}
 
 				if (isCollapsable)
 				{
 					// looking for an end
 					int startOffset = comment.getTextOffset();
-					int endOffset = startOffset;
+					if (comment.getText().startsWith("\n") &&
+							startOffset > 0 &&
+							document.getCharsSequence().charAt(startOffset - 1) != '\n'
+							)
+					{
+						startOffset++;
+					}
+					int endOffset = comment.getTextRange().getEndOffset();
 
 					ASTNode blockNode = comment.getNode();
 					PsiElement currentComment = comment;
@@ -311,7 +325,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 		else if (elementType == USE_STATEMENT || elementType == REQUIRE_EXPR)
 			return "imports...";
 		else if (elementType == getTemplateBlockElementType())
-			return "<html...>";
+			return "/ template /";
 		else
 			return "unknown entity " + elementType;
 	}
