@@ -2037,4 +2037,18 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return ((PerlBuilder) b).getPerlParser().parseFileContents(b,l);
 	}
 
+	public static boolean checkSemicolon(PsiBuilder b, int l)
+	{
+		return ((PerlBuilder) b).getPerlParser().getConsumableSemicolonTokens().contains(b.getTokenType());
+	}
+
+	public static boolean parseSemicolon(PsiBuilder b, int l)
+	{
+		if (checkSemicolon(b, l))
+		{
+			b.advanceLexer();
+			return true;
+		}
+		return false;
+	}
 }

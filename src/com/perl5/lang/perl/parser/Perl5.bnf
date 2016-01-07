@@ -416,7 +416,7 @@ private file_item ::= !<<eof>>
 	<<parseHeredocContent>> |
 	namespace_definition |
     [label_declaration] (
-        SEMICOLON +
+        <<parseSemicolon>> +
         | nyi_statement
         | <<parseParserExtensionStatement>>
         | compound_statement
@@ -429,7 +429,7 @@ private file_item ::= !<<eof>>
      )
 }
 
-namespace_definition ::= namespace_definition_name (block | SEMICOLON namespace_content)
+namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> namespace_content)
 private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_statement} // recover_namespace_definition
 private namespace_annotations ::= annotation_deprecated
 //private recover_namespace_definition ::= !(semicolon_any | LEFT_BRACE)
@@ -718,7 +718,7 @@ private variable_expr ::= variable | array_index_variable
 namespace_expr ::= <<mergePackageName>>
 parenthesised_expr ::= LEFT_PAREN parenthesised_expr_content RIGHT_PAREN {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
-private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | SEMICOLON )
+private recover_parenthesised ::= !(RIGHT_PAREN | LEFT_BRACE | RIGHT_BRACE | <<checkSemicolon>> )
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + //{pin(".*")=1}
 

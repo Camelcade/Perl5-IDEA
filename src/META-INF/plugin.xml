@@ -46,14 +46,17 @@
         <li>Implemented settings to select Mason components roots.</li>
         <li>Implemented components auto-basing</li>
         <li>Implemented folding of Mason files.</li>
+        <li>Implemented automatic close tag insertion on typing</li>
       </ul></li>
       <li>Mojolicious<ul>
         <li>Parser has been re-written almost from scratch and now is much more appropriate.</li>
         <li>Fixed problem with statement modifiers parsing in expressions blocks.</li>
         <li>Fixed problems with templates folding.</li>
+        <li>Implemented automatic close tag insertion on typing (open tag + space)</li>
       </ul></li>
       <li>Embedded Perl<ul>
         <li>Implemented automatic close embed marker insertion after open plus space.</li>
+        <li>Implemented automatic close tag insertion on typing (open tag + space)</li>
       </ul></li>
       </ul>
       </p>
@@ -341,7 +344,7 @@
 
         <lang.namesValidator language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-
+        <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.MojoliciousTypedHandler" order="first"/>
         <quoteHandler fileType="Mojolicious Perl5 Template"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
