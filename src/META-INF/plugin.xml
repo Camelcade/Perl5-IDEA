@@ -47,10 +47,13 @@
         <li>Implemented components auto-basing</li>
         <li>Implemented folding of Mason files.</li>
       </ul></li>
-      <li>Mojolicious <ul>
+      <li>Mojolicious<ul>
         <li>Parser has been re-written almost from scratch and now is much more appropriate.</li>
         <li>Fixed problem with statement modifiers parsing in expressions blocks.</li>
         <li>Fixed problems with templates folding.</li>
+      </ul></li>
+      <li>Embedded Perl<ul>
+        <li>Implemented automatic close embed marker insertion after open plus space.</li>
       </ul></li>
       </ul>
       </p>
@@ -161,6 +164,7 @@
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
 
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.PerlTypedHandler" id="PerlTypedHandler"/>
+
         <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.smartkeys.PerlEnterHandlerDelegate"
                               id="PerlEnterHandler" order="first"/>
 
@@ -297,7 +301,7 @@
                                  implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
         <lang.braceMatcher language="Embedded Perl"
                            implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
-
+        <typedHandler implementation="com.perl5.lang.embedded.idea.editor.EmbeddedPerlTypedHandler" order="first"/>
         <lang.namesValidator language="Embedded Perl"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
