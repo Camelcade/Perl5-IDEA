@@ -50,7 +50,7 @@ public class MasonLexer extends PerlLexerWithCustomStates implements MasonElemen
 					KEYWORD_FLAGS + "|" +
 					KEYWORD_INIT + "|" +
 					KEYWORD_PERL + "|" +
-					KEYWORD_TEXT + "|" +
+					KEYWORD_TEXT +
 					")>"
 	);
 
