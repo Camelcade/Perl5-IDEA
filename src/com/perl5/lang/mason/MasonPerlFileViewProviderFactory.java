@@ -17,11 +17,13 @@
 package com.perl5.lang.mason;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.FileViewProviderFactory;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.SingleRootFileViewProvider;
+import com.intellij.testFramework.LightVirtualFile;
 import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +36,18 @@ public class MasonPerlFileViewProviderFactory implements FileViewProviderFactory
 	@Override
 	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
 	{
-		if (file.getFileType() == MasonPurePerlComponentFileType.INSTANCE)
+		FileType fileType;
+
+		if (file instanceof LightVirtualFile)
+		{
+			fileType = ((LightVirtualFile) file).getOriginalFile().getFileType();
+		}
+		else
+		{
+			fileType = file.getFileType();
+		}
+
+		if (fileType == MasonPurePerlComponentFileType.INSTANCE)
 		{
 			return new SingleRootFileViewProvider(manager, file, eventSystemEnabled, MasonPurePerlComponentFileType.INSTANCE);
 		}
