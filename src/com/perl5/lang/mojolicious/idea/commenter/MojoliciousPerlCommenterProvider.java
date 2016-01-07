@@ -23,7 +23,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.templateLanguages.MultipleLangCommentProvider;
-import com.perl5.lang.mojolicious.MojoliciousPerlFileViewProvider;
+import com.perl5.lang.mojolicious.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -41,7 +41,7 @@ public class MojoliciousPerlCommenterProvider implements MultipleLangCommentProv
 	@Override
 	public boolean canProcess(PsiFile file, FileViewProvider viewProvider)
 	{
-		return viewProvider instanceof MojoliciousPerlFileViewProvider;
+		return viewProvider instanceof MojoliciousFileViewProvider;
 	}
 
 }

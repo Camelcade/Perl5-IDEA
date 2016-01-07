@@ -51,6 +51,6 @@ public class MasonPerlFileViewProviderFactory implements FileViewProviderFactory
 		{
 			return new SingleRootFileViewProvider(manager, file, eventSystemEnabled, MasonPurePerlComponentFileType.INSTANCE);
 		}
-		return new MasonPerlFileViewProvider(manager, file, eventSystemEnabled);
+		return new MasonFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

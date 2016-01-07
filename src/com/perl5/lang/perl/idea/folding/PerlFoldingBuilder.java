@@ -64,7 +64,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 		descriptors.addAll(getDescriptorsFor(root, document, PsiComment.class, 0, 1, 2));
 		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlStringList.class, 2, 0, 2));
 
-		descriptors.addAll(getCommentsDescriptors(root, document));
+//		descriptors.addAll(getCommentsDescriptors(root, document));
 		descriptors.addAll(getImportDescriptors(root, document));
 
 		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
@@ -164,6 +164,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 
+		@SuppressWarnings("unchecked")
 		Collection<PerlNamespaceElementContainer> imports = PsiTreeUtil.<PerlNamespaceElementContainer>findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireExpr.class);
 
 		int currentOffset = 0;

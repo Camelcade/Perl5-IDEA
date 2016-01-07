@@ -21,7 +21,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
+import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements MojoliciousPerlElementTypes
+public class MojoliciousSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements MojoliciousElementTypes
 {
 	public static final TokenSet MARKER_TOKENS = TokenSet.create(
 			MOJO_BLOCK_OPENER,
@@ -48,7 +48,7 @@ public class MojoliciousPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbed
 			MOJO_LINE_OPENER_TAG
 	);
 
-	public MojoliciousPerlSyntaxHighlighter(Project project)
+	public MojoliciousSyntaxHighlighter(Project project)
 	{
 		super(project);
 	}

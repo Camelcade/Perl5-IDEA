@@ -23,20 +23,20 @@ import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
+import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlHighlighter extends LayeredLexerEditorHighlighter implements MojoliciousPerlElementTypes
+public class MojoliciousHighlighter extends LayeredLexerEditorHighlighter implements MojoliciousElementTypes
 {
-	public MojoliciousPerlHighlighter(@Nullable final Project project,
-									  @Nullable final VirtualFile virtualFile,
-									  @NotNull final EditorColorsScheme colors)
+	public MojoliciousHighlighter(@Nullable final Project project,
+								  @Nullable final VirtualFile virtualFile,
+								  @NotNull final EditorColorsScheme colors)
 	{
-		super(new MojoliciousPerlSyntaxHighlighter(project), colors);
+		super(new MojoliciousSyntaxHighlighter(project), colors);
 		registerLayer(MOJO_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
 	}

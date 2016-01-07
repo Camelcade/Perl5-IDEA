@@ -24,9 +24,9 @@ import java.io.IOException;
 /**
  * Created by hurricup on 01.08.2015.
  */
-public class MojoliciousPerlDebuggingLexer extends MojoliciousPerlLexer
+public class MojoliciousDebuggingLexer extends MojoliciousLexer
 {
-	public MojoliciousPerlDebuggingLexer(Project project)
+	public MojoliciousDebuggingLexer(Project project)
 	{
 		super(project);
 	}

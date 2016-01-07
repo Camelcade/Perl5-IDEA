@@ -18,6 +18,7 @@ package com.perl5.lang.mojolicious;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.perl5.lang.perl.PerlLanguage;
 
 /**
  * Created by hurricup on 21.07.2015.
@@ -28,6 +29,6 @@ public class MojoliciousPerlLanguage extends Language implements TemplateLanguag
 
 	private MojoliciousPerlLanguage()
 	{
-		super("Mojolicious Perl");
+		super(PerlLanguage.INSTANCE, "Mojolicious Perl");
 	}
 }

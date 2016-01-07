@@ -27,13 +27,13 @@ import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
-import com.perl5.lang.perl.parser.MojoliciousPerlParser;
+import com.perl5.lang.perl.parser.MojoliciousParser;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlParserDefinition extends PerlParserDefinition implements MojoliciousPerlElementTypes
+public class MojoliciousParserDefinition extends PerlParserDefinition implements MojoliciousElementTypes
 {
 	public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousPerlLanguage.INSTANCE);
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
@@ -83,6 +83,6 @@ public class MojoliciousPerlParserDefinition extends PerlParserDefinition implem
 	@Override
 	public PsiParser createParser(Project project)
 	{
-		return new MojoliciousPerlParser();
+		return new MojoliciousParser();
 	}
 }

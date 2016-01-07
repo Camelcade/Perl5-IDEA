@@ -19,7 +19,7 @@ package com.perl5.lang.mojolicious.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
+import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 
@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements MojoliciousPerlElementTypes
+public class MojoliciousLexer extends PerlLexerWithCustomStates implements MojoliciousElementTypes
 {
 	// lexical states
 	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
@@ -44,7 +44,7 @@ public class MojoliciousPerlLexer extends PerlLexerWithCustomStates implements M
 	public static final Pattern MOJO_END_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BLOCK_OPENER + "(\\s*)" + KEYWORD_MOJO_END + "(\\s*)" + KEYWORD_MOJO_BLOCK_CLOSER);
 	public static final Pattern MOJO_END_IN_LINE = Pattern.compile(KEYWORD_MOJO_LINE_OPENER + "(\\s*)" + KEYWORD_MOJO_END + "(\\s*)\\n");
 
-	public MojoliciousPerlLexer(Project project)
+	public MojoliciousLexer(Project project)
 	{
 		super(project);
 		setCustomState(LEX_HTML_BLOCK);

@@ -21,7 +21,7 @@ import com.intellij.psi.tree.IElementType;
 /**
  * Created by hurricup on 22.12.2015.
  */
-public interface MojoliciousPerlElementTypes extends MojoliciousPerlSyntaxElements
+public interface MojoliciousElementTypes extends MojoliciousPerlSyntaxElements
 {
 
 	IElementType MOJO_BLOCK_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_OPENER);

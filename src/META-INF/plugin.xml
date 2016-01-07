@@ -295,11 +295,12 @@
         <lang.braceMatcher language="Embedded Perl"
                            implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
 
-        <lang.foldingBuilder language="Embedded Perl"
-                             implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
         <lang.namesValidator language="Embedded Perl"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+
+        <lang.foldingBuilder language="Embedded Perl"
+                             implementationClass="com.perl5.lang.embedded.idea.folding.EmbeddedPerlFoldingBuilder"/>
 
         <!--<lang.formatter language="Embedded Perl"-->
         <!--implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>-->
@@ -320,7 +321,7 @@
 
         <fileTypeFactory implementation="com.perl5.lang.mojolicious.filetypes.MojoliciousFileTypeFactory"/>
         <lang.parserDefinition language="Mojolicious Perl"
-                               implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlParserDefinition"/>
+                               implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
         <lang.fileViewProviderFactory language="Mojolicious Perl"
                                       implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Mojolicious Perl"
@@ -331,8 +332,6 @@
         <completion.contributor language="Perl5"
                                 implementationClass="com.perl5.lang.mojolicious.idea.completion.MojoliciousCompletionContributor"/>
 
-        <lang.foldingBuilder language="Mojolicious Perl"
-                             implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
         <lang.namesValidator language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
@@ -346,6 +345,8 @@
                                       implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
         <lang.braceMatcher language="Mojolicious Perl"
                            implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoliciousBraceMatcher"/>
+        <lang.foldingBuilder language="Mojolicious Perl"
+                             implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
 
 
         <projectService serviceImplementation="com.perl5.lang.mason.idea.configuration.MasonPerlSettings"/>
@@ -357,7 +358,7 @@
 
         <fileTypeFactory implementation="com.perl5.lang.mason.filetypes.MasonFileTypeFactory"/>
         <lang.parserDefinition language="Mason template"
-                               implementationClass="com.perl5.lang.mason.MasonPerlParserDefinition"/>
+                               implementationClass="com.perl5.lang.mason.MasonParserDefinition"/>
         <lang.fileViewProviderFactory language="Mason template"
                                       implementationClass="com.perl5.lang.mason.MasonPerlFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Mason template"
@@ -370,7 +371,7 @@
                       wordsScannerClass="com.perl5.lang.perl.idea.findusages.PerlWordsScanner"/>
 
         <lang.foldingBuilder language="Mason template"
-                             implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
+                             implementationClass="com.perl5.lang.mason.idea.folding.MasonFoldingBuilder"/>
         <lang.namesValidator language="Mason template"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 

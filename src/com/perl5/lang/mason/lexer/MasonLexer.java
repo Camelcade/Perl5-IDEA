@@ -19,7 +19,7 @@ package com.perl5.lang.mason.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
+import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.perl.lexer.CustomToken;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 import gnu.trove.THashMap;
@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  * Created by hurricup on 20.12.2015.
  */
 @SuppressWarnings("Duplicates")
-public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPerlElementTypes
+public class MasonLexer extends PerlLexerWithCustomStates implements MasonElementTypes
 {
 	public static final Pattern MASON_EXPRESSION_FILTER_BLOCK = Pattern.compile(
 			"\\|\\s*"
@@ -149,7 +149,7 @@ public class MasonPerlLexer extends PerlLexerWithCustomStates implements MasonPe
 	private String BLOCK_CLOSE_TAG;
 
 
-	public MasonPerlLexer(Project project)
+	public MasonLexer(Project project)
 	{
 		super(project);
 	}

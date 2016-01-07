@@ -24,7 +24,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonDebuggingLexer extends MasonPerlLexer
+public class MasonDebuggingLexer extends MasonLexer
 {
 	public MasonDebuggingLexer(Project project)
 	{

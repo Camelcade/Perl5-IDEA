@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,30 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea.highlighter;
+package com.perl5.lang.embedded.idea.folding;
 
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
+import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 21.07.2015.
+ * Created by hurricup on 07.01.2016.
  */
-public class MojoliciousPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
+public class EmbeddedPerlFoldingBuilder extends PerlFoldingBuilder implements EmbeddedPerlElementTypes
 {
+	@Nullable
 	@Override
-	@NotNull
-	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
+	public String getPlaceholderText(@NotNull ASTNode node)
 	{
-		return new MojoliciousSyntaxHighlighter(project);
+		IElementType nodeType = node.getElementType();
+		if (nodeType == EMBED_TEMPLATE_BLOCK_HTML)
+		{
+			return "<html...>";
+		}
+		return super.getPlaceholderText(node);
 	}
 
 }

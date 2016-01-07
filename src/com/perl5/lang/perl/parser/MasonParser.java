@@ -16,12 +16,12 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
+import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.perl.parser.moose.MoosePerlElementTypes;
 
 /**
  * Created by hurricup on 28.12.2015.
  */
-public interface MasonPerlParser extends MasonPerlElementTypes, MoosePerlElementTypes
+public interface MasonParser extends MasonElementTypes, MoosePerlElementTypes
 {
 }

@@ -38,7 +38,7 @@ public class MasonPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFact
 		{
 			return new PerlSyntaxHighlighter(project);
 		}
-		return new MasonPerlSyntaxHighlighter(project);
+		return new MasonSyntaxHighlighter(project);
 	}
 
 }

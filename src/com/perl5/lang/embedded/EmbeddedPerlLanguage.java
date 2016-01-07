@@ -18,6 +18,7 @@ package com.perl5.lang.embedded;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.perl5.lang.perl.PerlLanguage;
 
 /**
  * Created by hurricup on 18.05.2015.
@@ -28,6 +29,6 @@ public class EmbeddedPerlLanguage extends Language implements TemplateLanguage
 
 	private EmbeddedPerlLanguage()
 	{
-		super("Embedded Perl");
+		super(PerlLanguage.INSTANCE, "Embedded Perl");
 	}
 }

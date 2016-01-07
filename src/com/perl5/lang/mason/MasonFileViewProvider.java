@@ -25,7 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
-import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
+import com.perl5.lang.mason.elementType.MasonElementTypes;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,13 +36,13 @@ import java.util.Set;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonPerlElementTypes
+public class MasonFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
 			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MasonPerlLanguage.INSTANCE));
 
 
-	public MasonPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
+	public MasonFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
 	{
 		super(manager, virtualFile, physical);
 	}
@@ -81,9 +81,9 @@ public class MasonPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileVi
 	}
 
 	@Override
-	protected MasonPerlFileViewProvider cloneInner(final VirtualFile copy)
+	protected MasonFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new MasonPerlFileViewProvider(getManager(), copy, false);
+		return new MasonFileViewProvider(getManager(), copy, false);
 	}
 
 	@Override

@@ -27,6 +27,6 @@ public class MojoliciousPerlLexerAdapter extends PerlLexerWithCustomStatesAdapte
 {
 	public MojoliciousPerlLexerAdapter(Project project)
 	{
-		super(new MojoliciousPerlLexer(project));
+		super(new MojoliciousLexer(project));
 	}
 }

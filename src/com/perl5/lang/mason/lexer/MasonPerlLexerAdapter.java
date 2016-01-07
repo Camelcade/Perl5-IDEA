@@ -26,6 +26,6 @@ public class MasonPerlLexerAdapter extends PerlLexerWithCustomStatesAdapter
 {
 	public MasonPerlLexerAdapter(Project project)
 	{
-		super(new MasonPerlLexer(project));
+		super(new MasonLexer(project));
 	}
 }

@@ -32,6 +32,6 @@ public class MojoliciousPerlFileViewProviderFactory implements FileViewProviderF
 												   @NotNull PsiManager manager,
 												   boolean eventSystemEnabled)
 	{
-		return new MojoliciousPerlFileViewProvider(manager, file, eventSystemEnabled);
+		return new MojoliciousFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

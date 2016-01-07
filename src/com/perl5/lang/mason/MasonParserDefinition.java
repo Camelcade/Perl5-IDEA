@@ -26,7 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mason.elementType.MasonPerlElementTypes;
+import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.mason.elementType.MasonPerlFileElementType;
 import com.perl5.lang.mason.lexer.MasonPerlLexerAdapter;
 import com.perl5.lang.mason.psi.impl.MasonFlagsStatementImpl;
@@ -34,13 +34,13 @@ import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.mason.psi.impl.MasonPerlFileImpl;
 import com.perl5.lang.mason.psi.impl.MasonPerlOverrideStatementImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.parser.MasonPerlParserImpl;
+import com.perl5.lang.perl.parser.MasonParserImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPerlParserDefinition extends PerlParserDefinition implements MasonPerlElementTypes
+public class MasonParserDefinition extends PerlParserDefinition implements MasonElementTypes
 {
 	public static final IFileElementType FILE = new MasonPerlFileElementType("Mason component", MasonPerlLanguage.INSTANCE);
 
@@ -77,7 +77,7 @@ public class MasonPerlParserDefinition extends PerlParserDefinition implements M
 	@Override
 	public PsiParser createParser(Project project)
 	{
-		return new MasonPerlParserImpl();
+		return new MasonParserImpl();
 	}
 
 	@NotNull

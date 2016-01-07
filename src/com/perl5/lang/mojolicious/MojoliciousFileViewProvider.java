@@ -35,13 +35,13 @@ import java.util.Set;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MojoliciousPerlElementTypes
+public class MojoliciousFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MojoliciousElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
 			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MojoliciousPerlLanguage.INSTANCE));
 
 
-	public MojoliciousPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
+	public MojoliciousFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
 	{
 		super(manager, virtualFile, physical);
 	}
@@ -80,9 +80,9 @@ public class MojoliciousPerlFileViewProvider extends MultiplePsiFilesPerDocument
 	}
 
 	@Override
-	protected MojoliciousPerlFileViewProvider cloneInner(final VirtualFile copy)
+	protected MojoliciousFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new MojoliciousPerlFileViewProvider(getManager(), copy, false);
+		return new MojoliciousFileViewProvider(getManager(), copy, false);
 	}
 
 	@Override

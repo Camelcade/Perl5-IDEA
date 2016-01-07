@@ -24,7 +24,7 @@ import com.perl5.lang.mason.MasonPerlSyntaxElements;
 /**
  * Created by hurricup on 21.12.2015.
  */
-public interface MasonPerlElementTypes extends MasonPerlSyntaxElements
+public interface MasonElementTypes extends MasonPerlSyntaxElements
 {
 	IElementType MASON_TEMPLATE_BLOCK_HTML = new MasonPerlTokenType("MASON_TEMPLATE_BLOCK_HTML");
 	IElementType MASON_OUTER_ELEMENT_TYPE = new MasonPerlElementType("MASON_OUTER_ELEMENT_TYPE");

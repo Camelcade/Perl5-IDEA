@@ -20,14 +20,14 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mojolicious.MojoliciousPerlElementTypes;
+import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 28.12.2015.
  */
-public class MojoliciousPerlParser extends PerlParserImpl implements MojoliciousPerlElementTypes, PerlElementTypes
+public class MojoliciousParser extends PerlParserImpl implements MojoliciousElementTypes, PerlElementTypes
 {
 	public static final TokenSet BAD_CAHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
 			PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS,
