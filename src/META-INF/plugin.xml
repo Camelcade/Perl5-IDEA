@@ -323,11 +323,11 @@
         <lang.parserDefinition language="Mojolicious Perl"
                                implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
         <lang.fileViewProviderFactory language="Mojolicious Perl"
-                                      implementationClass="com.perl5.lang.mojolicious.MojoliciousPerlFileViewProviderFactory"/>
+                                      implementationClass="com.perl5.lang.mojolicious.MojoliciousFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Mojolicious Perl"
-                                       implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousPerlSyntaxHighlighterFactory"/>
+                                       implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Mojolicious Perl"
-                                 implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousPerlFindUsagesProvider"/>
+                                 implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousFindUsagesProvider"/>
 
         <completion.contributor language="Perl5"
                                 implementationClass="com.perl5.lang.mojolicious.idea.completion.MojoliciousCompletionContributor"/>
@@ -389,7 +389,7 @@
 
         <!--Temporary solution, better than nothing-->
         <multiLangCommenter
-                implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousPerlCommenterProvider"/>
+                implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
 
         <lang.commenter language="Mojolicious Perl"
                         implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>

@@ -38,7 +38,7 @@ import java.util.Set;
 public class MojoliciousFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MojoliciousElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MojoliciousPerlLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MojoliciousLanguage.INSTANCE));
 
 
 	public MojoliciousFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
@@ -50,7 +50,7 @@ public class MojoliciousFileViewProvider extends MultiplePsiFilesPerDocumentFile
 	@NotNull
 	public Language getBaseLanguage()
 	{
-		return MojoliciousPerlLanguage.INSTANCE;
+		return MojoliciousLanguage.INSTANCE;
 	}
 
 	@Override

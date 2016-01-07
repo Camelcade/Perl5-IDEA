@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.09.2015.
  */
-public class MojoliciousPerlCommenterProvider implements MultipleLangCommentProvider
+public class MojoliciousCommenterProvider implements MultipleLangCommentProvider
 {
 	@Nullable
 	@Override

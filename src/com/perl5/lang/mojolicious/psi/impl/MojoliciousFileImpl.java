@@ -14,22 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea.findusages;
+package com.perl5.lang.mojolicious.psi.impl;
 
-import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.FileViewProvider;
+import com.perl5.lang.mojolicious.MojoliciousLanguage;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlFindUsagesProvider extends PerlFindUsagesProvider
+public class MojoliciousFileImpl extends PerlFileImpl
 {
-
-	@Nullable
-	@Override
-	public WordsScanner getWordsScanner()
+	public MojoliciousFileImpl(@NotNull FileViewProvider viewProvider)
 	{
-		return new MojoliciousWordsScanner();
+		super(viewProvider, MojoliciousLanguage.INSTANCE);
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Mojolicious Perl5 Template";
+	}
+
 }

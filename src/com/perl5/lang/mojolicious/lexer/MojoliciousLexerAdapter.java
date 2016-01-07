@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+package com.perl5.lang.mojolicious.lexer;
 
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.FileViewProviderFactory;
-import com.intellij.psi.PsiManager;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
 
 /**
  * Created by hurricup on 21.07.2015.
+ * Copy-pasted FlexAdapter because of private variables and no setters
  */
-public class MojoliciousPerlFileViewProviderFactory implements FileViewProviderFactory
+public class MojoliciousLexerAdapter extends PerlLexerWithCustomStatesAdapter
 {
-	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
-												   com.intellij.lang.Language language,
-												   @NotNull PsiManager manager,
-												   boolean eventSystemEnabled)
+	public MojoliciousLexerAdapter(Project project)
 	{
-		return new MojoliciousFileViewProvider(manager, file, eventSystemEnabled);
+		super(new MojoliciousLexer(project));
 	}
 }

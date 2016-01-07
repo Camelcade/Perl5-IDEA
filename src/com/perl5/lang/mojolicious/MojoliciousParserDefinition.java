@@ -23,8 +23,8 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
-import com.perl5.lang.mojolicious.psi.impl.MojoliciousPerlFileImpl;
+import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
+import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.parser.MojoliciousParser;
@@ -35,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MojoliciousParserDefinition extends PerlParserDefinition implements MojoliciousElementTypes
 {
-	public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousPerlLanguage.INSTANCE);
+	public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousLanguage.INSTANCE);
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(
 					MOJO_TEMPLATE_BLOCK_HTML,
@@ -65,7 +65,7 @@ public class MojoliciousParserDefinition extends PerlParserDefinition implements
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new MojoliciousPerlLexerAdapter(project);
+		return new MojoliciousLexerAdapter(project);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class MojoliciousParserDefinition extends PerlParserDefinition implements
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new MojoliciousPerlFileImpl(viewProvider);
+		return new MojoliciousFileImpl(viewProvider);
 	}
 
 	@NotNull

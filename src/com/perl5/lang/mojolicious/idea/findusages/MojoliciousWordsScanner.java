@@ -17,7 +17,7 @@
 package com.perl5.lang.mojolicious.idea.findusages;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
-import com.perl5.lang.mojolicious.lexer.MojoliciousPerlLexerAdapter;
+import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
 import com.perl5.lang.perl.PerlParserDefinition;
 
 /**
@@ -27,7 +27,7 @@ public class MojoliciousWordsScanner extends DefaultWordsScanner
 {
 	public MojoliciousWordsScanner()
 	{
-		super(new MojoliciousPerlLexerAdapter(null),
+		super(new MojoliciousLexerAdapter(null),
 				PerlParserDefinition.IDENTIFIERS,
 				PerlParserDefinition.COMMENTS,
 				PerlParserDefinition.LITERALS);

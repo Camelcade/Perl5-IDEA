@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.lexer;
+package com.perl5.lang.mojolicious;
 
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
+import com.intellij.psi.tree.IElementType;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 21.07.2015.
- * Copy-pasted FlexAdapter because of private variables and no setters
+ * Created by hurricup on 22.12.2015.
  */
-public class MojoliciousPerlLexerAdapter extends PerlLexerWithCustomStatesAdapter
+public class MojoliciousTokenType extends IElementType
 {
-	public MojoliciousPerlLexerAdapter(Project project)
+	public MojoliciousTokenType(@NotNull @NonNls String debugName)
 	{
-		super(new MojoliciousLexer(project));
+		super(debugName, MojoliciousLanguage.INSTANCE);
 	}
+
+	public String toString()
+	{
+		return "MojoliciousTokenType." + super.toString();
+	}
+
 }

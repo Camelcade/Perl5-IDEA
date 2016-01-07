@@ -22,7 +22,7 @@ import com.intellij.psi.tree.IElementType;
 /**
  * Created by hurricup on 26.12.2015.
  */
-public interface MojoliciousPerlSyntaxElements
+public interface MojoliciousSyntaxElements
 {
 	String KEYWORD_MOJO_BLOCK_OPENER = "<%";
 	String KEYWORD_MOJO_BLOCK_CLOSER = "%>";
@@ -40,8 +40,8 @@ public interface MojoliciousPerlSyntaxElements
 	String KEYWORD_MOJO_BEGIN = "begin";
 	String KEYWORD_MOJO_END = "end";
 
-	IElementType MOJO_TEMPLATE_BLOCK_HTML = new MojoliciousPerlTokenType("MOJO_TEMPLATE_BLOCK_HTML");
-	IElementType MOJO_OUTER_ELEMENT_TYPE = new MojoliciousPerlElementType("MOJO_OUTER_ELEMENT_TYPE");
-	IElementType MOJO_HTML_TEMPLATE_DATA = new TemplateDataElementType("MOJO_HTML_TEMPLATE_DATA", MojoliciousPerlLanguage.INSTANCE, MOJO_TEMPLATE_BLOCK_HTML, MOJO_OUTER_ELEMENT_TYPE);
+	IElementType MOJO_TEMPLATE_BLOCK_HTML = new MojoliciousTokenType("MOJO_TEMPLATE_BLOCK_HTML");
+	IElementType MOJO_OUTER_ELEMENT_TYPE = new MojoliciousElementType("MOJO_OUTER_ELEMENT_TYPE");
+	IElementType MOJO_HTML_TEMPLATE_DATA = new TemplateDataElementType("MOJO_HTML_TEMPLATE_DATA", MojoliciousLanguage.INSTANCE, MOJO_TEMPLATE_BLOCK_HTML, MOJO_OUTER_ELEMENT_TYPE);
 
 }

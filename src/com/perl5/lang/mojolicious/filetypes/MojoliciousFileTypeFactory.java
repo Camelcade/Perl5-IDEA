@@ -28,6 +28,6 @@ public class MojoliciousFileTypeFactory extends FileTypeFactory
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
 	{
-		fileTypeConsumer.consume(MojoliciousPerlFileType.INSTANCE, "ep");
+		fileTypeConsumer.consume(MojoliciousFileType.INSTANCE, "ep");
 	}
 }

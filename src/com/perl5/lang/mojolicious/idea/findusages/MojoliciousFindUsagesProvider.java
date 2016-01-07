@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea.highlighter;
+package com.perl5.lang.mojolicious.idea.findusages;
 
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.cacheBuilder.WordsScanner;
+import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
+public class MojoliciousFindUsagesProvider extends PerlFindUsagesProvider
 {
-	@Override
-	@NotNull
-	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
-	{
-		return new MojoliciousSyntaxHighlighter(project);
-	}
 
+	@Nullable
+	@Override
+	public WordsScanner getWordsScanner()
+	{
+		return new MojoliciousWordsScanner();
+	}
 }

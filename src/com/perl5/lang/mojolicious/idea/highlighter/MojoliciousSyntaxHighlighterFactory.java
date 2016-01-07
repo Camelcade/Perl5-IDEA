@@ -14,27 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.psi.impl;
+package com.perl5.lang.mojolicious.idea.highlighter;
 
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.mojolicious.MojoliciousPerlLanguage;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlFileImpl extends PerlFileImpl
+public class MojoliciousSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
 {
-	public MojoliciousPerlFileImpl(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, MojoliciousPerlLanguage.INSTANCE);
-	}
-
 	@Override
-	public String toString()
+	@NotNull
+	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
 	{
-		return "Mojolicious Perl5 Template";
+		return new MojoliciousSyntaxHighlighter(project);
 	}
 
 }

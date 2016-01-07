@@ -16,23 +16,19 @@
 
 package com.perl5.lang.mojolicious;
 
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.Language;
+import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.perl5.lang.perl.PerlLanguage;
 
 /**
- * Created by hurricup on 22.12.2015.
+ * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlTokenType extends IElementType
+public class MojoliciousLanguage extends Language implements TemplateLanguage
 {
-	public MojoliciousPerlTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, MojoliciousPerlLanguage.INSTANCE);
-	}
+	public static final MojoliciousLanguage INSTANCE = new MojoliciousLanguage();
 
-	public String toString()
+	private MojoliciousLanguage()
 	{
-		return "MojoliciousTokenType." + super.toString();
+		super(PerlLanguage.INSTANCE, "Mojolicious Perl");
 	}
-
 }

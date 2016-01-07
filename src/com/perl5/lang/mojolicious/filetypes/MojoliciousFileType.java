@@ -24,7 +24,7 @@ import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
-import com.perl5.lang.mojolicious.MojoliciousPerlLanguage;
+import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousHighlighter;
 import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
@@ -35,13 +35,13 @@ import javax.swing.*;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlFileType extends PerlFileType
+public class MojoliciousFileType extends PerlFileType
 {
-	public static final MojoliciousPerlFileType INSTANCE = new MojoliciousPerlFileType();
+	public static final MojoliciousFileType INSTANCE = new MojoliciousFileType();
 
-	public MojoliciousPerlFileType()
+	public MojoliciousFileType()
 	{
-		super(MojoliciousPerlLanguage.INSTANCE);
+		super(MojoliciousLanguage.INSTANCE);
 		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
 		{
 			@Override

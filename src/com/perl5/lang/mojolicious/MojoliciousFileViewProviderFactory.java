@@ -16,22 +16,22 @@
 
 package com.perl5.lang.mojolicious;
 
-import org.jetbrains.annotations.NonNls;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.FileViewProviderFactory;
+import com.intellij.psi.PsiManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 22.12.2015.
+ * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousPerlElementType extends MojoliciousPerlTokenType
+public class MojoliciousFileViewProviderFactory implements FileViewProviderFactory
 {
-	public MojoliciousPerlElementType(@NotNull @NonNls String debugName)
+	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
+												   com.intellij.lang.Language language,
+												   @NotNull PsiManager manager,
+												   boolean eventSystemEnabled)
 	{
-		super(debugName);
+		return new MojoliciousFileViewProvider(manager, file, eventSystemEnabled);
 	}
-
-	public String toString()
-	{
-		return "MojoliciousPerlElementType." + super.toString();
-	}
-
 }

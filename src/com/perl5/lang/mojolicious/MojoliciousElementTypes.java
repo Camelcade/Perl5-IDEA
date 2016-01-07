@@ -21,24 +21,24 @@ import com.intellij.psi.tree.IElementType;
 /**
  * Created by hurricup on 22.12.2015.
  */
-public interface MojoliciousElementTypes extends MojoliciousPerlSyntaxElements
+public interface MojoliciousElementTypes extends MojoliciousSyntaxElements
 {
 
-	IElementType MOJO_BLOCK_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_OPENER);
-	IElementType MOJO_BLOCK_EXPR_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_OPENER);
-	IElementType MOJO_BLOCK_EXPR_ESCAPED_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER);
+	IElementType MOJO_BLOCK_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_OPENER);
+	IElementType MOJO_BLOCK_EXPR_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_OPENER);
+	IElementType MOJO_BLOCK_EXPR_ESCAPED_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER);
 
-	IElementType MOJO_BLOCK_CLOSER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_CLOSER);
-	IElementType MOJO_BLOCK_EXPR_NOSPACE_CLOSER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_EXPR_NOSPACE_CLOSER);
-	IElementType MOJO_BLOCK_EXPR_CLOSER = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_CLOSER);
+	IElementType MOJO_BLOCK_CLOSER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_CLOSER);
+	IElementType MOJO_BLOCK_EXPR_NOSPACE_CLOSER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_NOSPACE_CLOSER);
+	IElementType MOJO_BLOCK_EXPR_CLOSER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_CLOSER);
 
-	IElementType MOJO_LINE_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_OPENER);
-	IElementType MOJO_LINE_EXPR_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_EXPR_OPENER);
-	IElementType MOJO_LINE_EXPR_ESCAPED_OPENER = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_EXPR_ESCAPED_OPENER);
+	IElementType MOJO_LINE_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_LINE_OPENER);
+	IElementType MOJO_LINE_EXPR_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_LINE_EXPR_OPENER);
+	IElementType MOJO_LINE_EXPR_ESCAPED_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_LINE_EXPR_ESCAPED_OPENER);
 
-	IElementType MOJO_BLOCK_OPENER_TAG = new MojoliciousPerlTokenType(KEYWORD_MOJO_BLOCK_OPENER_TAG);
-	IElementType MOJO_LINE_OPENER_TAG = new MojoliciousPerlTokenType(KEYWORD_MOJO_LINE_OPENER_TAG);
+	IElementType MOJO_BLOCK_OPENER_TAG = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_OPENER_TAG);
+	IElementType MOJO_LINE_OPENER_TAG = new MojoliciousTokenType(KEYWORD_MOJO_LINE_OPENER_TAG);
 
-	IElementType MOJO_BEGIN = new MojoliciousPerlTokenType(KEYWORD_MOJO_BEGIN);
-	IElementType MOJO_END = new MojoliciousPerlTokenType(KEYWORD_MOJO_END);
+	IElementType MOJO_BEGIN = new MojoliciousTokenType(KEYWORD_MOJO_BEGIN);
+	IElementType MOJO_END = new MojoliciousTokenType(KEYWORD_MOJO_END);
 }
