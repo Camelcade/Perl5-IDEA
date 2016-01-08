@@ -45,6 +45,7 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 {
 	public List<String> componentRoots = new ArrayList<String>();
 	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
+	public List<String> globalVars = new ArrayList<String>();
 
 	@Transient
 	private Project myProject;

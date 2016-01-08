@@ -33,27 +33,37 @@ import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.Consumer;
 import com.intellij.util.ui.FormBuilder;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 03.01.2016.
  */
 public class MasonSettingsConfigurable implements Configurable
 {
+	private static final Pattern VARIABLE_CHECK_PATTERN = Pattern.compile(
+			"[$@%]" + PerlLexer.IDENTIFIER_PATTERN
+	);
+
+
 	final Project myProject;
 	final String windowTitile;
 	final MasonSettings mySettings;
 
 	CollectionListModel<String> rootsModel;
-	CollectionListModel<String> autobaseModel;
-
 	JBList rootsList;
+
+	CollectionListModel<String> autobaseModel;
 	JBList autobaseList;
+
+	CollectionListModel<String> globalsModel;
+	JBList globalsList;
 
 	public MasonSettingsConfigurable(Project myProject)
 	{
@@ -90,7 +100,7 @@ public class MasonSettingsConfigurable implements Configurable
 
 		rootsModel = new CollectionListModel<String>();
 		rootsList = new JBList(rootsModel);
-		builder.addLabeledComponent(new JLabel("Components roots:"), ToolbarDecorator
+		builder.addLabeledComponent(new JLabel("Components roots (relative to project's root):"), ToolbarDecorator
 				.createDecorator(rootsList)
 				.setAddAction(new AnActionButtonRunnable()
 				{
@@ -135,7 +145,7 @@ public class MasonSettingsConfigurable implements Configurable
 
 		autobaseModel = new CollectionListModel<String>();
 		autobaseList = new JBList(autobaseModel);
-		builder.addLabeledComponent(new JLabel("Autobase names (order is important, later components inherited from early):"), ToolbarDecorator
+		builder.addLabeledComponent(new JLabel("Autobase names (autobase_names option. Order is important, later components may be inherited from early):"), ToolbarDecorator
 				.createDecorator(autobaseList)
 				.setAddAction(new AnActionButtonRunnable()
 				{
@@ -144,7 +154,7 @@ public class MasonSettingsConfigurable implements Configurable
 					{
 						String fileName = Messages.showInputDialog(
 								myProject,
-								"Type new Autobase filename?",
+								"Type new Autobase filename:",
 								"New Autobase Filename",
 								Messages.getQuestionIcon(),
 								"",
@@ -152,6 +162,36 @@ public class MasonSettingsConfigurable implements Configurable
 						if (StringUtil.isNotEmpty(fileName) && !autobaseModel.getItems().contains(fileName))
 						{
 							autobaseModel.add(fileName);
+						}
+					}
+				}).createPanel());
+
+		globalsModel = new CollectionListModel<String>();
+		globalsList = new JBList(globalsModel);
+		builder.addLabeledComponent(new JLabel("Components global variables (allow_globals option):"), ToolbarDecorator
+				.createDecorator(globalsList)
+				.setAddAction(new AnActionButtonRunnable()
+				{
+					@Override
+					public void run(AnActionButton anActionButton)
+					{
+						String variableName = Messages.showInputDialog(
+								myProject,
+								"Type new global variable",
+								"New Global Variable",
+								Messages.getQuestionIcon(),
+								"",
+								null);
+						if (StringUtil.isNotEmpty(variableName) && !globalsModel.getItems().contains(variableName))
+						{
+							if (VARIABLE_CHECK_PATTERN.matcher(variableName).matches())
+							{
+								globalsModel.add(variableName);
+							}
+							else
+							{
+								Messages.showErrorDialog("Incorrect variable name: " + variableName, "Incorrect Variable Name");
+							}
 						}
 					}
 				}).createPanel());
@@ -164,7 +204,9 @@ public class MasonSettingsConfigurable implements Configurable
 	{
 		return
 				!mySettings.componentRoots.equals(rootsModel.getItems()) ||
-						!mySettings.autobaseNames.equals(autobaseModel.getItems());
+						!mySettings.globalVars.equals(globalsModel.getItems()) ||
+						!mySettings.autobaseNames.equals(autobaseModel.getItems())
+				;
 	}
 
 	@Override
@@ -176,6 +218,9 @@ public class MasonSettingsConfigurable implements Configurable
 		mySettings.autobaseNames.clear();
 		mySettings.autobaseNames.addAll(autobaseModel.getItems());
 
+		mySettings.globalVars.clear();
+		mySettings.globalVars.addAll(globalsModel.getItems());
+
 		mySettings.settingsUpdated();
 	}
 
@@ -184,8 +229,12 @@ public class MasonSettingsConfigurable implements Configurable
 	{
 		rootsModel.removeAll();
 		rootsModel.add(mySettings.componentRoots);
+
 		autobaseModel.removeAll();
 		autobaseModel.add(mySettings.autobaseNames);
+
+		globalsModel.removeAll();
+		globalsModel.add(mySettings.globalVars);
 	}
 
 	@Override
@@ -195,5 +244,7 @@ public class MasonSettingsConfigurable implements Configurable
 		rootsList = null;
 		autobaseList = null;
 		autobaseModel = null;
+		globalsList = null;
+		globalsModel = null;
 	}
 }
