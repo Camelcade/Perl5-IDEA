@@ -21,22 +21,26 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
+import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.PsiPerlMethodDefinition;
 import com.perl5.lang.perl.psi.PsiPerlMethodSignatureInvocant;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlMethodDefinitionStub> implements PsiPerlMethodDefinition
+public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlMethodDefinitionStub> implements PerlMethodDefinition
 {
+	// fixme see the #717
+	public static final String DEFAULT_INVOCANT_NAME = "self";
+
 	public PerlMethodDefinitionImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -82,7 +86,7 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 			{
 				arguments.add(new PerlSubArgument(
 						PerlVariableType.SCALAR,
-						"self",
+						getDefaultInvocantName(),
 						"",    // here we could push context package, but now it's unnecessary
 						false
 				));
@@ -91,5 +95,25 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 			return super.processSignatureElement(signatureElement, arguments);
 		}
 		return false;
+	}
+
+	@NotNull
+	@Override
+	public String getDefaultInvocantName()
+	{
+		return DEFAULT_INVOCANT_NAME;
+	}
+
+	@Override
+	public boolean isKnownVariable(@NotNull PerlVariable variable)
+	{
+		return variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
+	}
+
+	@NotNull
+	@Override
+	public List<String> getFullQualifiedVariablesList()
+	{
+		return Collections.singletonList("$" + getDefaultInvocantName());
 	}
 }

@@ -204,7 +204,7 @@ public class MasonSettingsConfigurable implements Configurable
 	{
 		return
 				!mySettings.componentRoots.equals(rootsModel.getItems()) ||
-						!mySettings.globalVars.equals(globalsModel.getItems()) ||
+						!mySettings.globalVariables.equals(globalsModel.getItems()) ||
 						!mySettings.autobaseNames.equals(autobaseModel.getItems())
 				;
 	}
@@ -218,8 +218,8 @@ public class MasonSettingsConfigurable implements Configurable
 		mySettings.autobaseNames.clear();
 		mySettings.autobaseNames.addAll(autobaseModel.getItems());
 
-		mySettings.globalVars.clear();
-		mySettings.globalVars.addAll(globalsModel.getItems());
+		mySettings.globalVariables.clear();
+		mySettings.globalVariables.addAll(globalsModel.getItems());
 
 		mySettings.settingsUpdated();
 	}
@@ -234,7 +234,7 @@ public class MasonSettingsConfigurable implements Configurable
 		autobaseModel.add(mySettings.autobaseNames);
 
 		globalsModel.removeAll();
-		globalsModel.add(mySettings.globalVars);
+		globalsModel.add(mySettings.globalVariables);
 	}
 
 	@Override

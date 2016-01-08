@@ -23,14 +23,18 @@ import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.mason.MasonLanguage;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonFileImpl extends PerlFileImpl
+public class MasonFileImpl extends PerlFileImpl implements PerlImplicitVariablesProvider
 {
 	private String filePackage;
 
@@ -93,5 +97,16 @@ public class MasonFileImpl extends PerlFileImpl
 		return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
 	}
 
+	@Override
+	public boolean isKnownVariable(@NotNull PerlVariable variable)
+	{
+		return MasonSettings.getInstance(getProject()).isGlobalVariable(variable);
+	}
 
+	@NotNull
+	@Override
+	public List<String> getFullQualifiedVariablesList()
+	{
+		return MasonSettings.getInstance(getProject()).getGlobalVariables();
+	}
 }

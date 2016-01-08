@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
@@ -40,26 +41,37 @@ public class PerlVariableUnresolvableInspection extends PerlInspection
 		return new PerlVisitor()
 		{
 			@Override
-			public void visitPerlVariable(@NotNull PerlVariable element)
+			public void visitPerlVariable(@NotNull final PerlVariable variable)
 			{
-				PsiElement parent = element.getParent();
+				PsiElement parent = variable.getParent();
 
-				if (parent instanceof PerlVariableDeclarationWrapper || element.isBuiltIn())
+				if (parent instanceof PerlVariableDeclarationWrapper || variable.isBuiltIn())
 					return;
 
-				PerlVariableNameElement variableNameElement = element.getVariableNameElement();
+				PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
 				if (variableNameElement != null)
 				{
 					for (PsiReference reference : variableNameElement.getReferences())
+					{
 						if (reference instanceof PerlPolyVariantReference && ((PerlPolyVariantReference) reference).multiResolve(false).length > 0
 								|| reference.resolve() != null
 								)
 						{
 							return;
 						}
+					}
 
-					if (PsiTreeUtil.getParentOfType(element, PerlMethodDefinition.class) != null && DEFAULT_INVOCANT_NAME.equals(variableNameElement.getName()))
+					PsiElement variablesProvider = variable;
+					while ((variablesProvider = PsiTreeUtil.getParentOfType(variablesProvider, PerlImplicitVariablesProvider.class)) != null)
+					{
+						if (((PerlImplicitVariablesProvider) variablesProvider).isKnownVariable(variable))
+						{
+							return;
+						}
+					}
+
+					if (PsiTreeUtil.getParentOfType(variable, PerlMethodDefinition.class) != null && DEFAULT_INVOCANT_NAME.equals(variableNameElement.getName()))
 					{
 						return;
 					}
