@@ -301,7 +301,7 @@ public class MasonLexer extends PerlLexerWithCustomStates implements MasonElemen
 				{
 					clearLine = true;
 				}
-				else if (!Character.isWhitespace(currentChar))
+				else
 				{
 					clearLine = false;
 				}
