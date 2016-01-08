@@ -96,4 +96,11 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 	 * @return variable name or null
 	 */
 	String getName();
+
+	/**
+	 * Checks if variable is configured $self
+	 *
+	 * @return true of false
+	 */
+	boolean isSelf();
 }

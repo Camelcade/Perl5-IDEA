@@ -27,8 +27,6 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.psi.utils.PerlThisNames;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -66,9 +64,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 		if (arguments.size() == 0)
 			return false;
 
-		PerlSubArgument firstArgument = arguments.get(0);
-
-		return firstArgument.getArgumentType() == PerlVariableType.SCALAR && PerlThisNames.NAMES_SET.contains(firstArgument.getArgumentName());
+		return arguments.get(0).isSelf(getProject());
 	}
 
 	@Override

@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -88,4 +90,8 @@ public class PerlSubArgument
 		dataStream.writeBoolean(isOptional);
 	}
 
+	public boolean isSelf(Project project)
+	{
+		return getArgumentType() == PerlVariableType.SCALAR && Perl5Settings.getInstance(project).isSelfName(getArgumentName());
+	}
 }

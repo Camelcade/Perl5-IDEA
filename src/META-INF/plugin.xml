@@ -40,6 +40,7 @@
       <li>Implemented parser extension for Switch core module, fixes #658</li>
       <li>Added spacing control for call arguments, fixes #664</li>
       <li>Implemented spaces removal around array index, hash index and dereference, fixes #662</li>
+      <li>Self-object reference variable names are now configurable in Perl5 settings, fixes #706</li>
       <li>Mason<ul>
         <li>Implemented filetypes for mason: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason files.</li>
@@ -131,7 +132,7 @@
         <internalFileTemplate name="Perl5 mojolicious"/>
         <internalFileTemplate name="Perl5 test"/>
 
-        <projectService serviceImplementation="com.perl5.lang.perl.idea.settings.Perl5Settings"/>
+        <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
 
         <applicationService serviceInterface="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"
                             serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>

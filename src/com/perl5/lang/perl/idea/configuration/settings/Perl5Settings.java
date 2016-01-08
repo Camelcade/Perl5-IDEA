@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.settings;
+package com.perl5.lang.perl.idea.configuration.settings;
 
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 30.08.2015.
@@ -39,8 +43,12 @@ import java.util.List;
 public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 {
 	public List<String> libRootUrls = new ArrayList<String>();
+	public List<String> selfNames = new ArrayList<String>(Arrays.asList("self", "this", "class", "proto"));
 	public String perlPath = "";
 	public boolean SIMPLE_MAIN_RESOLUTION = true;
+
+	@Transient
+	private Set<String> SELF_NAMES_SET = null;
 
 	public static Perl5Settings getInstance(@NotNull Project project)
 	{
@@ -59,6 +67,20 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public void loadState(Perl5Settings state)
 	{
 		XmlSerializerUtil.copyBean(state, this);
+	}
+
+	public void settingsUpdated()
+	{
+		SELF_NAMES_SET = null;
+	}
+
+	public boolean isSelfName(String name)
+	{
+		if (SELF_NAMES_SET == null)
+		{
+			SELF_NAMES_SET = new THashSet<String>(selfNames);
+		}
+		return SELF_NAMES_SET.contains(name);
 	}
 
 }

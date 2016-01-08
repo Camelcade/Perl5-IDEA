@@ -24,14 +24,20 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.ui.VerticalFlowLayout;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.AnActionButton;
+import com.intellij.ui.AnActionButtonRunnable;
+import com.intellij.ui.CollectionListModel;
+import com.intellij.ui.ToolbarDecorator;
+import com.intellij.ui.components.JBList;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
-import com.perl5.lang.perl.idea.settings.Perl5Settings;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,8 +50,13 @@ public class PerlSettingsConfigurable implements Configurable
 {
 	Project myProject;
 	Perl5Settings mySettings;
+
 	TextFieldWithBrowseButton perlPathInputField;
 	JCheckBox simpleMainCheckbox;
+
+	CollectionListModel<String> selfNamesModel;
+	JBList selfNamesList;
+
 
 	public PerlSettingsConfigurable(Project myProject)
 	{
@@ -80,8 +91,39 @@ public class PerlSettingsConfigurable implements Configurable
 		}
 
 		simpleMainCheckbox = new JCheckBox("Use simple main:: subs resolution (many scripts with same named subs in main:: namespace)");
-		simpleMainCheckbox.setSelected(mySettings.SIMPLE_MAIN_RESOLUTION);
 		builder.addComponent(simpleMainCheckbox);
+
+		selfNamesModel = new CollectionListModel<String>();
+		selfNamesList = new JBList(selfNamesModel);
+		builder.addLabeledComponent(new JLabel("Sclar names considered as an object self-reference (without a $):"), ToolbarDecorator
+				.createDecorator(selfNamesList)
+				.setAddAction(new AnActionButtonRunnable()
+				{
+					@Override
+					public void run(AnActionButton anActionButton)
+					{
+						String variableName = Messages.showInputDialog(
+								myProject,
+								"Type variable name:",
+								"New Self-Reference Variable Name",
+								Messages.getQuestionIcon(),
+								"",
+								null);
+						if (StringUtil.isNotEmpty(variableName))
+						{
+							while (variableName.startsWith("$"))
+							{
+								variableName = variableName.substring(1);
+							}
+
+							if (StringUtil.isNotEmpty(variableName) && !selfNamesModel.getItems().contains(variableName))
+							{
+								selfNamesModel.add(variableName);
+							}
+						}
+					}
+				}).createPanel());
+
 
 		return builder.getPanel();
 	}
@@ -89,7 +131,6 @@ public class PerlSettingsConfigurable implements Configurable
 	protected void createMicroIdeComponents(FormBuilder builder)
 	{
 		perlPathInputField = new TextFieldWithBrowseButton();
-		perlPathInputField.setText(mySettings.perlPath);
 		perlPathInputField.getTextField().setEditable(false);
 
 		FileChooserDescriptor descriptor = new FileChooserDescriptor(false, true, false, false, false, false)
@@ -117,7 +158,8 @@ public class PerlSettingsConfigurable implements Configurable
 	public boolean isModified()
 	{
 		return isMicroIdeModified() ||
-				mySettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected();
+				mySettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
+				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
 	protected boolean isMicroIdeModified()
@@ -133,10 +175,14 @@ public class PerlSettingsConfigurable implements Configurable
 	{
 		mySettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
 
+		mySettings.selfNames.clear();
+		mySettings.selfNames.addAll(selfNamesModel.getItems());
+
 		if (!PlatformUtils.isIntelliJ())
 		{
 			applyMicroIdeSettings();
 		}
+		mySettings.settingsUpdated();
 	}
 
 	public void applyMicroIdeSettings()
@@ -160,7 +206,20 @@ public class PerlSettingsConfigurable implements Configurable
 	@Override
 	public void reset()
 	{
+		selfNamesModel.removeAll();
+		selfNamesModel.add(mySettings.selfNames);
 
+		simpleMainCheckbox.setSelected(mySettings.SIMPLE_MAIN_RESOLUTION);
+
+		if (!PlatformUtils.isIntelliJ())
+		{
+			resetMicroIdeSettings();
+		}
+	}
+
+	protected void resetMicroIdeSettings()
+	{
+		perlPathInputField.setText(mySettings.perlPath);
 	}
 
 	@Override
@@ -168,5 +227,7 @@ public class PerlSettingsConfigurable implements Configurable
 	{
 		perlPathInputField = null;
 		simpleMainCheckbox = null;
+		selfNamesModel = null;
+		selfNamesList = null;
 	}
 }

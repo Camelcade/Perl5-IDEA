@@ -26,11 +26,11 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.utils.PerlThisNames;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.Nullable;
@@ -125,10 +125,7 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 
 			if (variableNameElement != null)
 			{
-				String variableName = variableNameElement.getName();
-
-				// fixme this is a weak; should be re-factored
-				if (this instanceof PsiPerlScalarVariable && PerlThisNames.NAMES_SET.contains(variableName))
+				if (isSelf())
 				{
 					return PerlPackageUtil.getContextPackageName(this);
 				}
@@ -352,5 +349,11 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 	{
 		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
 		return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
+	}
+
+	@Override
+	public boolean isSelf()
+	{
+		return getActualType() == PerlVariableType.SCALAR && Perl5Settings.getInstance(getProject()).isSelfName(getName());
 	}
 }
