@@ -17,7 +17,7 @@
 package com.perl5.lang.mason.elementType;
 
 import com.perl5.lang.mason.MasonLanguage;
-import com.perl5.lang.mason.psi.impl.MasonOverrideStatementImpl;
+import com.perl5.lang.mason.psi.impl.MasonOverrideDefinitionImpl;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
@@ -37,6 +37,6 @@ public class MasonOverrideStubElementType extends PerlMooseOverrideStubElementTy
 	@Override
 	public PerlSubDefinitionBase<PerlMooseOverrideStub> createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
-		return new MasonOverrideStatementImpl((PerlMooseOverrideStub) stub, this);
+		return new MasonOverrideDefinitionImpl((PerlMooseOverrideStub) stub, this);
 	}
 }

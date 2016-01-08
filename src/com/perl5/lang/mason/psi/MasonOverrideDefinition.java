@@ -16,11 +16,12 @@
 
 package com.perl5.lang.mason.psi;
 
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 
 /**
  * Created by hurricup on 03.01.2016.
  */
-public interface MasonOverrideStatement extends PerlMooseOverrideStatement
+public interface MasonOverrideDefinition extends PerlMooseOverrideStatement, PerlImplicitVariablesProvider
 {
 }

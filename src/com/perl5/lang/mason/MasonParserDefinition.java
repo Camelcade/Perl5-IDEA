@@ -84,7 +84,7 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 		IElementType elementType = node.getElementType();
 		if (elementType == MASON_OVERRIDE_DEFINITION)
 		{
-			return new MasonOverrideStatementImpl(node);
+			return new MasonOverrideDefinitionImpl(node);
 		}
 		else if (elementType == MASON_NAMESPACE_DEFINITION)
 		{
@@ -113,6 +113,14 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 		else if (elementType == MASON_FILTER_DEFINITION)
 		{
 			return new MasonFilterDefinitionImpl(node);
+		}
+		else if (elementType == MASON_AROUND_MODIFIER)
+		{
+			return new MasonAroundMethodModifierImpl(node);
+		}
+		else if (elementType == MASON_AFTER_MODIFIER || elementType == MASON_BEFORE_MODIFIER || elementType == MASON_AUGMENT_MODIFIER)
+		{
+			return new MasonMethodModifierImpl(node);
 		}
 
 		return super.createElement(node);

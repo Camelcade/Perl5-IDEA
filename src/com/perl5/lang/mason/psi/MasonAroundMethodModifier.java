@@ -16,13 +16,9 @@
 
 package com.perl5.lang.mason.psi;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
-import com.perl5.lang.perl.psi.PerlMethodDefinition;
-
 /**
  * Created by hurricup on 08.01.2016.
  */
-public interface MasonMethodDefinition extends PsiElement, PerlMethodDefinition, PerlImplicitVariablesProvider
+public interface MasonAroundMethodModifier extends MasonMethodModifier
 {
 }

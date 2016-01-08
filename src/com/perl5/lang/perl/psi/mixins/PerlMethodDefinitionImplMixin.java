@@ -107,6 +107,7 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 	@Override
 	public boolean isKnownVariable(@NotNull PerlVariable variable)
 	{
+		// fixme this is wrong, should use signature
 		return variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
 	}
 

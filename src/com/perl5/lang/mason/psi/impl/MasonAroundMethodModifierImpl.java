@@ -17,52 +17,39 @@
 package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.mason.psi.MasonMethodDefinition;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
+import com.perl5.lang.mason.psi.MasonAroundMethodModifier;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl implements MasonMethodDefinition
+public class MasonAroundMethodModifierImpl extends MasonMethodModifierImpl implements MasonAroundMethodModifier
 {
-	public static final String DEFAULT_INVOCANT_NAME = "self";
+	public static final String ORIG_VARIABLE_NAME = "orig";
 
-	public MasonMethodDefinitionImpl(ASTNode node)
+	public MasonAroundMethodModifierImpl(ASTNode node)
 	{
 		super(node);
-	}
-
-	public MasonMethodDefinitionImpl(PerlMethodDefinitionStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
 	}
 
 	@Override
 	public boolean isKnownVariable(@NotNull PerlVariable variable)
 	{
-		return variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
+		return variable.getActualType() == PerlVariableType.SCALAR && ORIG_VARIABLE_NAME.equals(variable.getName()) ||
+				super.isKnownVariable(variable);
 	}
 
 	@NotNull
 	@Override
 	public List<String> getFullQualifiedVariablesList()
 	{
-		return Collections.singletonList("$" + getDefaultInvocantName());
+		List<String> varList = new ArrayList<String>(super.getFullQualifiedVariablesList());
+		varList.add("$" + ORIG_VARIABLE_NAME);
+		return varList;
 	}
-
-	@NotNull
-	@Override
-	public String getDefaultInvocantName()
-	{
-		return DEFAULT_INVOCANT_NAME;
-	}
-
 }

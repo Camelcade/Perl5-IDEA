@@ -22,24 +22,29 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.mason.psi.MasonOverrideStatement;
+import com.perl5.lang.mason.psi.MasonOverrideDefinition;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by hurricup on 03.01.2016.
  */
-public class MasonOverrideStatementImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideStatement
+public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideDefinition
 {
-	public MasonOverrideStatementImpl(@NotNull ASTNode node)
+	public MasonOverrideDefinitionImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	public MasonOverrideStatementImpl(@NotNull PerlMooseOverrideStub stub, @NotNull IStubElementType nodeType)
+	public MasonOverrideDefinitionImpl(@NotNull PerlMooseOverrideStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}
@@ -79,5 +84,24 @@ public class MasonOverrideStatementImpl extends PerlMooseOverrideStatementImpl i
 		}
 
 		return this;
+	}
+
+	@Override
+	public boolean isKnownVariable(@NotNull PerlVariable variable)
+	{
+		return variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
+	}
+
+	@NotNull
+	@Override
+	public List<String> getFullQualifiedVariablesList()
+	{
+		return Collections.singletonList("$" + getDefaultInvocantName());
+	}
+
+	@NotNull
+	public String getDefaultInvocantName()
+	{
+		return MasonMethodDefinitionImpl.DEFAULT_INVOCANT_NAME;
 	}
 }

@@ -16,13 +16,12 @@
 
 package com.perl5.lang.mason.psi;
 
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
-import com.perl5.lang.perl.psi.PerlMethodDefinition;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseMethodModifier;
 
 /**
  * Created by hurricup on 08.01.2016.
  */
-public interface MasonMethodDefinition extends PsiElement, PerlMethodDefinition, PerlImplicitVariablesProvider
+public interface MasonMethodModifier extends PerlMooseMethodModifier, PerlImplicitVariablesProvider
 {
 }

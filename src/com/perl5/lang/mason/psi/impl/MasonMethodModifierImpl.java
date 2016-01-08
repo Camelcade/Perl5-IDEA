@@ -17,13 +17,14 @@
 package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.mason.psi.MasonMethodDefinition;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.perl5.lang.mason.psi.MasonMethodModifier;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseMethodModifierImpl;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,38 +32,32 @@ import java.util.List;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl implements MasonMethodDefinition
+public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl implements MasonMethodModifier
 {
-	public static final String DEFAULT_INVOCANT_NAME = "self";
+	public static final String METHOD_MODIFIER_INVOCANT_NAME = "self";
 
-	public MasonMethodDefinitionImpl(ASTNode node)
+	public MasonMethodModifierImpl(ASTNode node)
 	{
 		super(node);
 	}
 
-	public MasonMethodDefinitionImpl(PerlMethodDefinitionStub stub, IStubElementType nodeType)
+	@Nullable
+	@Override
+	public PsiReference[] getReferences(PsiElement element)
 	{
-		super(stub, nodeType);
+		return null;
 	}
 
 	@Override
 	public boolean isKnownVariable(@NotNull PerlVariable variable)
 	{
-		return variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
+		return variable.getActualType() == PerlVariableType.SCALAR && METHOD_MODIFIER_INVOCANT_NAME.equals(variable.getName());
 	}
 
 	@NotNull
 	@Override
 	public List<String> getFullQualifiedVariablesList()
 	{
-		return Collections.singletonList("$" + getDefaultInvocantName());
+		return Collections.singletonList("$" + METHOD_MODIFIER_INVOCANT_NAME);
 	}
-
-	@NotNull
-	@Override
-	public String getDefaultInvocantName()
-	{
-		return DEFAULT_INVOCANT_NAME;
-	}
-
 }
