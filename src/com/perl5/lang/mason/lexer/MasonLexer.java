@@ -84,7 +84,7 @@ public class MasonLexer extends PerlLexerWithCustomStates implements MasonElemen
 	);
 
 	public static final Pattern MASON_FILTERED_BLOCK_OPENER_PATTERN = Pattern.compile(
-			"\\{\\{\\s*(?:#.*)?\n"
+			"\\{\\{\\s*(?:#.*|\\}\\})?\n"
 	);
 
 	public static final Pattern MASON_FILTERED_BLOCK_CLOSER_PATTERN = Pattern.compile(

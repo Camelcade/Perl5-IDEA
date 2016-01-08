@@ -17,6 +17,7 @@
 package com.perl5.lang.mason.idea.editor;
 
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.project.Project;
@@ -26,23 +27,24 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
 import com.perl5.lang.mason.MasonFileViewProvider;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 07.01.2016.
  */
-public class MasonTypedHandler extends TypedHandlerDelegate implements MasonElementTypes, XmlTokenType
+public class MasonTypedHandler extends TypedHandlerDelegate implements MasonElementTypes, XmlTokenType, PerlElementTypes
 {
 	private static final THashMap<String, String> SIMPLE_COMPLETION_MAP = new THashMap<String, String>();
 
 	static
 	{
-		SIMPLE_COMPLETION_MAP.put("<%doc", "</%doc>");
-		SIMPLE_COMPLETION_MAP.put("<%class", "</%class>");
-		SIMPLE_COMPLETION_MAP.put("<%init", "</%init>");
-		SIMPLE_COMPLETION_MAP.put("<%perl", "</%perl>");
-		SIMPLE_COMPLETION_MAP.put("<%text", "</%text>");
+		SIMPLE_COMPLETION_MAP.put(KEYWORD_DOC_OPENER_UNCLOSED, KEYWORD_DOC_CLOSER);
+		SIMPLE_COMPLETION_MAP.put(KEYWORD_CLASS_OPENER_UNCLOSED, KEYWORD_CLASS_CLOSER);
+		SIMPLE_COMPLETION_MAP.put(KEYWORD_INIT_OPENER_UNCLOSED, KEYWORD_INIT_CLOSER);
+		SIMPLE_COMPLETION_MAP.put(KEYWORD_PERL_OPENER_UNCLOSED, KEYWORD_PERL_CLOSER);
+		SIMPLE_COMPLETION_MAP.put(KEYWORD_TEXT_OPENER_UNCLOSED, KEYWORD_TEXT_CLOSER);
 	}
 
 	@Override
@@ -61,9 +63,9 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements MasonElem
 					{
 						EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
 					}
-					else if (elementText.equals("<%flags"))
+					else if (elementText.equals(KEYWORD_FLAGS_OPENER_UNCLOSED))
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, " extends => '' </%flags>", false, true, 13);
+						EditorModificationUtil.insertStringAtCaret(editor, " extends => '' " + KEYWORD_FLAGS_CLOSER, false, true, 13);
 					}
 				}
 			}
@@ -75,26 +77,45 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements MasonElem
 					IElementType elementType = element.getNode().getElementType();
 					if (elementType == MASON_BLOCK_OPENER)
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, " %>", false, false);
+						EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_BLOCK_CLOSER, false, false);
 					}
 					else if (elementType == MASON_CALL_OPENER)
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, " &>", false, false);
+						EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_CALL_CLOSER, false, false);
 					}
 					else if (elementType == MASON_METHOD_OPENER)
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, ">\n</%method>", false, false);
+						EditorModificationUtil.insertStringAtCaret(editor, ">\n" + KEYWORD_METHOD_CLOSER, false, false);
 					}
 					else if (elementType == MASON_FILTER_OPENER)
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, ">\n</%filter>", false, false);
+						EditorModificationUtil.insertStringAtCaret(editor, ">\n" + KEYWORD_FILTER_CLOSER, false, false);
 					}
 					else if (elementType == MASON_OVERRIDE_OPENER)
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, ">\n</%override>", false, false);
+						EditorModificationUtil.insertStringAtCaret(editor, ">\n" + KEYWORD_OVERRIDE_CLOSER, false, false);
 					}
 				}
+			}
+			else if (c == '{')
+			{
+				int offset = editor.getCaretModel().getOffset();
+				PsiElement element = file.findElementAt(offset - 2);
+				if (element != null && element.getNode().getElementType() == LEFT_BRACE)
+				{
+					Document document = editor.getDocument();
+					int lineNumber = document.getLineNumber(offset - 1);
+					PsiElement lineStartElement = file.findElementAt(document.getLineStartOffset(lineNumber));
 
+					if (lineStartElement != null && lineStartElement.getNode().getElementType() == MASON_LINE_OPENER)
+					{
+						PsiElement nextElement = file.findElementAt(offset - 1);
+						if (nextElement != null && nextElement.getNode().getElementType() == RIGHT_BRACE)
+						{
+							EditorModificationUtil.insertStringAtCaret(editor, "\n\n% ", false, true, 1);
+						}
+					}
+				}
 			}
 
 		}
