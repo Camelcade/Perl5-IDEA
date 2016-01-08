@@ -77,4 +77,9 @@ public interface MasonSyntaxElements
 	String KEYWORD_OVERRIDE = "override";
 	String KEYWORD_OVERRIDE_OPENER = "<%" + KEYWORD_OVERRIDE;
 	String KEYWORD_OVERRIDE_CLOSER = "</%" + KEYWORD_OVERRIDE + ">";
+
+	String KEYWORD_FILTERED_BLOCK_OPENER = "{{";
+	String KEYWORD_FILTERED_BLOCK_CLOSER = "}}";
+
+	String KEYWORD_SELF_POINTER = "$.";
 }

@@ -48,8 +48,6 @@ public abstract class PerlParserExtension
 		return Collections.emptyMap();
 	}
 
-	;
-
 	/**
 	 * Parse method. Attempt to parse beginning of statement
 	 * You may re-use PerlParser static methods to implement native perl expressions
@@ -59,6 +57,20 @@ public abstract class PerlParserExtension
 	 * @return parsing result
 	 */
 	public boolean parseStatement(PerlBuilder b, int l)
+	{
+		return false;
+	}
+
+
+	/**
+	 * Parse method. Attempt to parse statement modifier
+	 * You may re-use PerlParser static methods to implement native perl expressions
+	 *
+	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return parsing result
+	 */
+	public boolean parseStatementModifier(PerlBuilder b, int l)
 	{
 		return false;
 	}

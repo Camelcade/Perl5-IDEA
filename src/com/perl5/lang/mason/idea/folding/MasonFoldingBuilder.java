@@ -61,9 +61,14 @@ public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElem
 	@Override
 	public String getPlaceholderText(@NotNull ASTNode node, @NotNull TextRange range)
 	{
-		if (node.getElementType() == MASON_ABSTRACT_BLOCK)
+		IElementType tokenType = node.getElementType();
+		if (tokenType == MASON_ABSTRACT_BLOCK)
 		{
 			return PH_CODE_BLOCK;
+		}
+		else if (tokenType == MASON_FILTERED_BLOCK)
+		{
+			return "{filtered block}";
 		}
 		return super.getPlaceholderText(node, range);
 	}

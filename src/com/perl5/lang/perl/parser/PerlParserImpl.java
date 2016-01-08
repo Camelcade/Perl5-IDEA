@@ -52,6 +52,18 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 		return false;
 	}
 
+	public boolean parseStatementModifier(PsiBuilder b, int l)
+	{
+		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
+		{
+			if (parserExtension.parseStatementModifier((PerlBuilder) b, l))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@NotNull
 	public TokenSet getBadCharacterForbiddenTokens()
 	{

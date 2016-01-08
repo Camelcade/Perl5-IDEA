@@ -21,6 +21,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.perl.lexer.CustomToken;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
@@ -77,6 +78,20 @@ public class MasonLexer extends PerlLexerWithCustomStates implements MasonElemen
 					KEYWORD_OVERRIDE +
 					")>"
 	);
+
+	public static final Pattern MASON_SELF_POINTER_PATTERN = Pattern.compile(
+			"\\$\\." + PerlLexer.IDENTIFIER_PATTERN
+	);
+
+	public static final Pattern MASON_FILTERED_BLOCK_OPENER_PATTERN = Pattern.compile(
+			"\\{\\{\\s*(?:#.*)?\n"
+	);
+
+	public static final Pattern MASON_FILTERED_BLOCK_CLOSER_PATTERN = Pattern.compile(
+			"\\}\\}\\s*(?:#.*)?\n"
+	);
+
+
 	// lexical states
 	public static final int LEX_MASON_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_MASON_PERL_BLOCK = LEX_CUSTOM2;             // complicated blocks <%kw>...</%kw>
@@ -175,6 +190,19 @@ public class MasonLexer extends PerlLexerWithCustomStates implements MasonElemen
 
 		char currentChar = buffer.charAt(tokenStart);
 
+		if ((currentCustomState == LEX_MASON_PERL_LINE || currentCustomState == LEX_MASON_PERL_BLOCK) &&
+				currentChar == '$' &&
+				tokenStart + 2 < bufferEnd &&
+				buffer.charAt(tokenStart + 1) == '.' &&
+				MASON_SELF_POINTER_PATTERN.matcher(buffer).region(tokenStart, bufferEnd).lookingAt()
+				)
+		{
+			setTokenStart(tokenStart);
+			setTokenEnd(tokenStart + KEYWORD_SELF_POINTER.length());
+			return MASON_SELF_POINTER;
+		}
+
+
 		if (currentCustomState == LEX_MASON_PERL_LINE)
 		{
 			if (currentChar == '\n')
@@ -184,6 +212,26 @@ public class MasonLexer extends PerlLexerWithCustomStates implements MasonElemen
 
 				setCustomState(getInitialCustomState());
 				return SEMICOLON;
+			}
+			else if (tokenStart + 1 < bufferEnd)
+			{
+				char nextChar = buffer.charAt(tokenStart + 1);
+				if (currentChar == '{' && nextChar == '{' &&
+						MASON_FILTERED_BLOCK_OPENER_PATTERN.matcher(buffer).region(tokenStart, bufferEnd).lookingAt()
+						)
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(tokenStart + KEYWORD_FILTERED_BLOCK_OPENER.length());
+					return MASON_FILTERED_BLOCK_OPENER;
+				}
+				else if (currentChar == '}' && nextChar == '}' &&
+						MASON_FILTERED_BLOCK_CLOSER_PATTERN.matcher(buffer).region(tokenStart, bufferEnd).lookingAt()
+						)
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(tokenStart + KEYWORD_FILTERED_BLOCK_CLOSER.length());
+					return MASON_FILTERED_BLOCK_CLOSER;
+				}
 			}
 		}
 		else if (currentCustomState == LEX_MASON_OPENING_TAG && currentChar == '>')

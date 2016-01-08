@@ -98,6 +98,14 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 		{
 			return new MasonAbstractBlockImpl(node);
 		}
+		else if (elementType == MASON_FILTERED_BLOCK)
+		{
+			return new MasonFilteredBlockImpl(node);
+		}
+		else if (elementType == MASON_SIMPLE_DEREF_EXPR)
+		{
+			return new MasonSimpleDerefExpressionImpl(node);
+		}
 
 		return super.createElement(node);
 	}

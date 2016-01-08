@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,9 @@
 
 package com.perl5.lang.mason.psi;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason.MasonConstants;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-
 /**
- * Created by hurricup on 05.01.2016.
+ * Created by hurricup on 08.01.2016.
  */
-public interface MasonNamespaceDefinition extends PsiElement, MasonConstants, PerlNamespaceDefinition
+public interface MasonSimpleDerefExpression
 {
 }

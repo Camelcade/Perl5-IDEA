@@ -30,6 +30,10 @@ public interface MasonElementTypes extends MasonSyntaxElements
 	IElementType MASON_OUTER_ELEMENT_TYPE = new MasonElementType("MASON_OUTER_ELEMENT_TYPE");
 	IElementType MASON_HTML_TEMPLATE_DATA = new TemplateDataElementType("MASON_HTML_TEMPLATE_DATA", MasonLanguage.INSTANCE, MASON_TEMPLATE_BLOCK_HTML, MASON_OUTER_ELEMENT_TYPE);
 
+	IElementType MASON_FILTERED_BLOCK_OPENER = new MasonTokenType(KEYWORD_FILTERED_BLOCK_OPENER);
+	IElementType MASON_FILTERED_BLOCK_CLOSER = new MasonTokenType(KEYWORD_FILTERED_BLOCK_CLOSER);
+	IElementType MASON_SELF_POINTER = new MasonTokenType(KEYWORD_SELF_POINTER);
+
 	IElementType MASON_BLOCK_OPENER = new MasonTokenType(KEYWORD_BLOCK_OPENER);
 
 	IElementType MASON_BLOCK_CLOSER = new MasonTokenType(KEYWORD_BLOCK_CLOSER);
@@ -85,4 +89,6 @@ public interface MasonElementTypes extends MasonSyntaxElements
 	IElementType MASON_NAMESPACE_DEFINITION = new MasonNamespaceElementType("MASON_PACKAGE");
 
 	IElementType MASON_ABSTRACT_BLOCK = new MasonElementType("MASON_ABSTRACT_BLOCK");
+	IElementType MASON_FILTERED_BLOCK = new MasonElementType("MASON_FILTERED_BLOCK");
+	IElementType MASON_SIMPLE_DEREF_EXPR = new MasonElementType("MASON_DEREF_EXPRESSION");
 }

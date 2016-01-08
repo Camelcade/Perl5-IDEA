@@ -74,7 +74,11 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 
 					MASON_METHOD_CLOSER,
 					MASON_OVERRIDE_CLOSER,
-					MASON_FILTER_CLOSER
+					MASON_FILTER_CLOSER,
+
+					MASON_SELF_POINTER,
+					MASON_FILTERED_BLOCK_OPENER,
+					MASON_FILTERED_BLOCK_CLOSER
 			));
 
 
@@ -168,6 +172,11 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 
 	protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken)
 	{
+		return parsePerlBlock(b, l, closeToken, MASON_ABSTRACT_BLOCK);
+	}
+
+	protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken, IElementType blockToken)
+	{
 		b.advanceLexer();
 		PsiBuilder.Marker abstractBlockMarker = b.mark();
 
@@ -178,7 +187,7 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 				break;
 			}
 		}
-		abstractBlockMarker.done(MASON_ABSTRACT_BLOCK);
+		abstractBlockMarker.done(blockToken);
 		abstractBlockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 		return endOrRecover(b, closeToken);
 	}
@@ -366,5 +375,35 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 		}
 		m.rollbackTo();
 		return false;
+	}
+
+	@Override
+	public boolean parseStatementModifier(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == MASON_FILTERED_BLOCK_OPENER)
+		{
+			return parsePerlBlock(b, l, MASON_FILTERED_BLOCK_CLOSER, MASON_FILTERED_BLOCK);
+		}
+		return super.parseStatementModifier(b, l);
+	}
+
+	@Override
+	public boolean parseTerm(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == MASON_SELF_POINTER)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			if (nested_call(b, l))
+			{
+				m.done(MASON_SIMPLE_DEREF_EXPR);
+			}
+			else
+			{
+				m.error("Error parsing filter expression");
+			}
+			return true;
+		}
+		return super.parseTerm(b, l);
 	}
 }

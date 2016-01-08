@@ -43,6 +43,7 @@ public class MasonBraceMatcher implements PairedBraceMatcher, MasonElementTypes
 			new BracePair(MASON_PERL_OPENER, MASON_PERL_CLOSER, false),
 			new BracePair(MASON_INIT_OPENER, MASON_INIT_CLOSER, false),
 			new BracePair(MASON_FLAGS_OPENER, MASON_FLAGS_CLOSER, false),
+			new BracePair(MASON_FILTERED_BLOCK_OPENER, MASON_FILTERED_BLOCK_CLOSER, false),
 	};
 
 	@Override

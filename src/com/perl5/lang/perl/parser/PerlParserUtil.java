@@ -1029,6 +1029,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseStatementModifier(PsiBuilder b, int l)
 	{
+		assert b instanceof PerlBuilder;
+		if (((PerlBuilder) b).getPerlParser().parseStatementModifier(b, l))
+		{
+			return true;
+		}
+
 		PsiBuilder.Marker m = b.mark();
 
 		if (PerlParserImpl.statement_modifier(b, l))
@@ -1052,7 +1058,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			return false;
 		}
 	}
-
 
 	/**
 	 * Checks for version token and convert if necessary
@@ -2029,7 +2034,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 		return ((PerlBuilder) b).getPerlParser().parseTerm(b, l);
 	}
-
 
 	public static boolean parseFileContent(PsiBuilder b, int l)
 	{
