@@ -22,7 +22,10 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,11 +72,6 @@ public class PerlVariableUnresolvableInspection extends PerlInspection
 						{
 							return;
 						}
-					}
-
-					if (PsiTreeUtil.getParentOfType(variable, PerlMethodDefinition.class) != null && DEFAULT_INVOCANT_NAME.equals(variableNameElement.getName()))
-					{
-						return;
 					}
 
 					registerProblem(holder, variableNameElement, "Unable to find variable declaration.");

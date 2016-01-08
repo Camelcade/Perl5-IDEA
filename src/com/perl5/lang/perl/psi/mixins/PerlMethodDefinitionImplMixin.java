@@ -21,10 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
-import com.perl5.lang.perl.psi.PerlMethodDefinition;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.PsiPerlMethodSignatureInvocant;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -104,17 +101,34 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 		return DEFAULT_INVOCANT_NAME;
 	}
 
+	/**
+	 * Checks if method has an explicit invocant
+	 *
+	 * @return check result
+	 */
+	private boolean hasExplicitInvocant()
+	{
+		PsiPerlMethodSignatureContent methodSignatureContent = getMethodSignatureContent();
+		return methodSignatureContent != null && methodSignatureContent.getFirstChild() instanceof PsiPerlMethodSignatureInvocant;
+	}
+
 	@Override
 	public boolean isKnownVariable(@NotNull PerlVariable variable)
 	{
-		// fixme this is wrong, should use signature
-		return variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
+		return !hasExplicitInvocant() && variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
 	}
 
 	@NotNull
 	@Override
 	public List<String> getFullQualifiedVariablesList()
 	{
-		return Collections.singletonList("$" + getDefaultInvocantName());
+		if (hasExplicitInvocant())
+		{
+			return Collections.emptyList();
+		}
+		else
+		{
+			return Collections.singletonList("$" + getDefaultInvocantName());
+		}
 	}
 }
