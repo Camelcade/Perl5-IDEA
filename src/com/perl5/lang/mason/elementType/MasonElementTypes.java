@@ -85,8 +85,11 @@ public interface MasonElementTypes extends MasonSyntaxElements
 	IElementType MASON_OVERRIDE_CLOSER = new MasonTokenType(KEYWORD_OVERRIDE_CLOSER);
 
 	IElementType MASON_FLAGS_STATEMENT = new MasonElementType("FLAGS_STATEMENT");
-	IElementType MASON_OVERRIDE_STATEMENT = new MasonOverrideStubElementType(KEYWORD_OVERRIDE);
+
 	IElementType MASON_NAMESPACE_DEFINITION = new MasonNamespaceElementType("MASON_PACKAGE");
+	IElementType MASON_OVERRIDE_DEFINITION = new MasonOverrideStubElementType("MASON_OVERRIDE_DEFINITION");
+	IElementType MASON_METHOD_DEFINITION = new MasonMethodDefinitionStubElementType("MASON_METHOD_DEFINITION");
+	IElementType MASON_FILTER_DEFINITION = new MasonFilterDefinitionStubElementType("MASON_FILTER_DEFINITION");
 
 	IElementType MASON_ABSTRACT_BLOCK = new MasonElementType("MASON_ABSTRACT_BLOCK");
 	IElementType MASON_FILTERED_BLOCK = new MasonElementType("MASON_FILTERED_BLOCK");

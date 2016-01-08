@@ -82,7 +82,7 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 	public PsiElement createElement(ASTNode node)
 	{
 		IElementType elementType = node.getElementType();
-		if (elementType == MASON_OVERRIDE_STATEMENT)
+		if (elementType == MASON_OVERRIDE_DEFINITION)
 		{
 			return new MasonOverrideStatementImpl(node);
 		}
@@ -105,6 +105,14 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 		else if (elementType == MASON_SIMPLE_DEREF_EXPR)
 		{
 			return new MasonSimpleDerefExpressionImpl(node);
+		}
+		else if (elementType == MASON_METHOD_DEFINITION)
+		{
+			return new MasonMethodDefinitionImpl(node);
+		}
+		else if (elementType == MASON_FILTER_DEFINITION)
+		{
+			return new MasonFilterDefinitionImpl(node);
 		}
 
 		return super.createElement(node);

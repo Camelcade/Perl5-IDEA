@@ -281,15 +281,15 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 		}
 		else if (tokenType == MASON_METHOD_OPENER)
 		{
-			r = parseMasonMethod(b, l, MASON_METHOD_CLOSER, METHOD_DEFINITION);
+			r = parseMasonMethod(b, l, MASON_METHOD_CLOSER, MASON_METHOD_DEFINITION);
 		}
 		else if (tokenType == MASON_FILTER_OPENER)
 		{
-			r = parseMasonMethod(b, l, MASON_FILTER_CLOSER, METHOD_DEFINITION);
+			r = parseMasonMethod(b, l, MASON_FILTER_CLOSER, MASON_FILTER_DEFINITION);
 		}
 		else if (tokenType == MASON_OVERRIDE_OPENER)
 		{
-			r = parseMasonMethod(b, l, MASON_OVERRIDE_CLOSER, MASON_OVERRIDE_STATEMENT);
+			r = parseMasonMethod(b, l, MASON_OVERRIDE_CLOSER, MASON_OVERRIDE_DEFINITION);
 		}
 		else if (SIMPLE_MASON_NAMED_BLOCKS.contains(tokenType)) // simple named blocks
 		{
