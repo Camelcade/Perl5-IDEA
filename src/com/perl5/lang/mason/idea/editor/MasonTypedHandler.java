@@ -28,6 +28,7 @@ import com.intellij.psi.xml.XmlTokenType;
 import com.perl5.lang.mason.MasonFileViewProvider;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
@@ -75,11 +76,11 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements MasonElem
 				if (element != null)
 				{
 					IElementType elementType = element.getNode().getElementType();
-					if (elementType == MASON_BLOCK_OPENER)
+					if (elementType == MASON_BLOCK_OPENER && !isNextElement(element, MASON_BLOCK_CLOSER))
 					{
 						EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_BLOCK_CLOSER, false, false);
 					}
-					else if (elementType == MASON_CALL_OPENER)
+					else if (elementType == MASON_CALL_OPENER && !isNextElement(element, MASON_CALL_CLOSER))
 					{
 						EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_CALL_CLOSER, false, false);
 					}
@@ -120,5 +121,11 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements MasonElem
 
 		}
 		return super.charTyped(c, project, editor, file);
+	}
+
+	protected boolean isNextElement(PsiElement element, IElementType typeToCheck)
+	{
+		PsiElement nextElement = PerlPsiUtil.getNextSignificantSibling(element);
+		return nextElement != null && nextElement.getNode().getElementType() == typeToCheck;
 	}
 }
