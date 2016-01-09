@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
@@ -96,5 +97,27 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 
 	public boolean parseFileContents(PsiBuilder b, int l){
 		return PerlParserGenerated.file_items(b,l);
+	}
+
+	public boolean parseStatementSemi(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		if (((PerlBuilder) b).getPerlParser().getConsumableSemicolonTokens().contains(tokenType))
+		{
+			b.advanceLexer();
+			return true;
+		}
+		else if (((PerlBuilder) b).getPerlParser().getUnconsumableSemicolonTokens().contains(tokenType))
+		{
+			return true;
+		}
+		else if (b.eof()) // eof
+		{
+			return true;
+		}
+
+		b.mark().error("Semicolon expected");
+
+		return true;
 	}
 }

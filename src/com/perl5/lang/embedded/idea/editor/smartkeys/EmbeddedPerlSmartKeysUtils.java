@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.idea.editor;
+package com.perl5.lang.embedded.idea.editor.smartkeys;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Editor;

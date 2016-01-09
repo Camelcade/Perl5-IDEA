@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.idea.editor.smartkeys;
+package com.perl5.lang.mojolicious.idea.editor.smartkeys;
 
 import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegate;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -22,21 +22,23 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.embedded.EmbeddedPerlFileViewProvider;
+import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.mojolicious.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class EmbeddedPerlEnterDelegate implements EnterHandlerDelegate
+public class MojoliciousEnterHandlerDelegate implements EnterHandlerDelegate, MojoliciousElementTypes
 {
 	@Override
 	public Result preprocessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull Ref<Integer> caretOffset, @NotNull Ref<Integer> caretAdvance, @NotNull DataContext dataContext, @Nullable EditorActionHandler originalHandler)
 	{
-		if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider)
+		if (file.getViewProvider() instanceof MojoliciousFileViewProvider)
 		{
-			EmbeddedPerlSmartKeysUtils.addCloseMarker(editor, file, "\n?>");
+			boolean r = MojoliciousSmartKeysUtils.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER);
+			r = r || MojoliciousSmartKeysUtils.addEndMarker(editor, file, "\n% end\n");
 		}
 		return Result.Continue;
 	}

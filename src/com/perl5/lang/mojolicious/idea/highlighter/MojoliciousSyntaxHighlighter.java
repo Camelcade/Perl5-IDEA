@@ -38,6 +38,7 @@ public class MojoliciousSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded 
 			MOJO_BLOCK_EXPR_ESCAPED_OPENER,
 
 			MOJO_BLOCK_CLOSER,
+			MOJO_BLOCK_CLOSER_SEMI,
 			MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
 			MOJO_BLOCK_EXPR_CLOSER,
 

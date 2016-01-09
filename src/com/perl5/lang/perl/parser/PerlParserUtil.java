@@ -416,24 +416,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean statementSemi(PsiBuilder b, int l)
 	{
-		IElementType tokenType = b.getTokenType();
-		if (((PerlBuilder) b).getPerlParser().getConsumableSemicolonTokens().contains(tokenType))
-		{
-			b.advanceLexer();
-			return true;
-		}
-		else if (((PerlBuilder) b).getPerlParser().getUnconsumableSemicolonTokens().contains(tokenType))
-		{
-			return true;
-		}
-		else if (b.eof()) // eof
-		{
-			return true;
-		}
-
-		b.mark().error("Semicolon expected");
-
-		return true;
+		return ((PerlBuilder) b).getPerlParser().parseStatementSemi(b, l);
 	}
 
 	/**

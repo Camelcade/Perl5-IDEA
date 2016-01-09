@@ -21,7 +21,6 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.embedded.EmbeddedPerlFileViewProvider;
-import com.perl5.lang.embedded.idea.editor.EmbeddedPerlSmartKeysUtils;
 import org.jetbrains.annotations.NotNull;
 
 /**

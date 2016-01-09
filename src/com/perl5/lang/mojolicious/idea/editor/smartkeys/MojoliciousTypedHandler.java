@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea.editor;
+package com.perl5.lang.mojolicious.idea.editor.smartkeys;
 
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.NotNull;
@@ -39,15 +36,7 @@ public class MojoliciousTypedHandler extends TypedHandlerDelegate implements Moj
 		{
 			if (c == ' ')
 			{
-				PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-				if (element != null)
-				{
-					IElementType elementType = element.getNode().getElementType();
-					if (elementType == MOJO_BLOCK_OPENER || elementType == MOJO_BLOCK_EXPR_OPENER || elementType == MOJO_BLOCK_EXPR_ESCAPED_OPENER)
-					{
-						EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_MOJO_BLOCK_CLOSER, false, false);
-					}
-				}
+				MojoliciousSmartKeysUtils.addCloseMarker(editor, file, " " + KEYWORD_MOJO_BLOCK_CLOSER);
 			}
 		}
 		return super.charTyped(c, project, editor, file);

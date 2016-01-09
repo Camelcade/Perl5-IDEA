@@ -357,7 +357,13 @@
 
         <lang.namesValidator language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-        <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.MojoliciousTypedHandler" order="first"/>
+
+        <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousTypedHandler"
+                      order="first"/>
+        <enterHandlerDelegate
+                implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
+                id="MojoliciousPerlEnterHandler" order="first"/>
+
         <quoteHandler fileType="Mojolicious Perl5 Template"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
