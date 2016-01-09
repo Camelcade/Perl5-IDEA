@@ -151,7 +151,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
 		Wrap wrap = null;
 
-		if (elementType == COMMA_SEQUENCE_EXPR && !isHeredocAhead(this))
+		if (elementType == COMMA_SEQUENCE_EXPR && !isNewLineForbidden(this))
 		{
 			wrap = Wrap.createWrap(WrapType.NORMAL, true);
 		}
@@ -174,16 +174,40 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		IElementType childElementType = child.getElementType();
 		if (alignment != null && (childElementType == QUESTION || childElementType == COLON || childElementType == OPERATOR_COMMA_ARROW))
 		{
-			return new PerlFormattingBlock(child, wrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder);
+			return createBlock(child, wrap, alignment);
 		}
-		else if (childElementType == CONSTANT_DEFINITION)
+		else if (childElementType == CONSTANT_DEFINITION)    // fixme we should use delegate here, constant wraps regular block
 		{
-			return new PerlConstantDefinitionFormattingBlock(child, wrap, alignment, mySettings, myPerl5Settings, mySpacingBuilder);
+			return new PerlConstantDefinitionFormattingBlock(child, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder());
 		}
 		else
 		{
-			return new PerlFormattingBlock(child, wrap, null, mySettings, myPerl5Settings, mySpacingBuilder);
+			return createBlock(child, wrap, null);
 		}
+	}
+
+	protected PerlFormattingBlock createBlock(
+			@NotNull ASTNode node,
+			@Nullable Wrap wrap,
+			@Nullable Alignment alignment
+	)
+	{
+		return new PerlFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder());
+	}
+
+	protected CommonCodeStyleSettings getSettings()
+	{
+		return mySettings;
+	}
+
+	protected PerlCodeStyleSettings getPerl5Settings()
+	{
+		return myPerl5Settings;
+	}
+
+	protected SpacingBuilder getSpacingBuilder()
+	{
+		return mySpacingBuilder;
 	}
 
 	@Nullable
@@ -200,7 +224,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			// LF after opening brace and before closing need to check if here-doc opener is in the line
 			if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type))
 			{
-				if (!isHeredocAhead((PerlFormattingBlock) child1))
+				if (!isNewLineForbidden((PerlFormattingBlock) child1))
 					return Spacing.createSpacing(0, 0, 1, true, 1);
 				else
 					return Spacing.createSpacing(1, Integer.MAX_VALUE, 0, true, 1);
@@ -209,7 +233,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 					(BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock) child1).isFirst()
 							|| BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock) child2).isLast()
 					)
-					&& !isHeredocAhead((PerlFormattingBlock) child1)
+					&& !isNewLineForbidden((PerlFormattingBlock) child1)
 					)
 			{
 				return Spacing.createSpacing(0, 0, 1, true, 1);
@@ -225,7 +249,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	 * @param block block in question
 	 * @return check result
 	 */
-	public boolean isHeredocAhead(PerlFormattingBlock block)
+	protected boolean isNewLineForbidden(PerlFormattingBlock block)
 	{
 		PsiFile file = block.getNode().getPsi().getContainingFile();
 		Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
@@ -243,7 +267,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		return false;
 	}
 
-	private boolean isHeredocOpenerBeforeOffset(PsiElement anchor, int offset)
+	protected boolean isHeredocOpenerBeforeOffset(PsiElement anchor, int offset)
 	{
 		PsiElement opener = PerlHeredocReference.getClosestHeredocOpener(anchor);
 		return opener == null || opener.getTextOffset() < offset;
@@ -273,8 +297,18 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	@Override
 	protected Indent getChildIndent()
 	{
-		if (PerlIndentProcessor.UNINDENTABLE_CONTAINERS.contains(getElementType()))
+		IElementType elementType = getElementType();
+		if (PerlIndentProcessor.UNINDENTABLE_CONTAINERS.contains(elementType))
+		{
 			return Indent.getNoneIndent();
+		}
+
+		// fixme not sure if it's dry with PerlIndentProcessor#getNodeIndent
+
+		if (elementType == BLOCK)
+		{
+			return Indent.getNormalIndent();
+		}
 
 		return super.getChildIndent();
 	}

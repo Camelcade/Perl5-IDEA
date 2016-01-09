@@ -301,7 +301,7 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 							addPreparsedToken(offset, offset += m.group(2).length(), TokenType.WHITE_SPACE);
 						}
 
-						addPreparsedToken(offset, offset + 1, TokenType.NEW_LINE_INDENT);
+						addPreparsedToken(offset, offset + 1, SEMICOLON);
 						setCustomState(LEX_HTML_BLOCK);
 					}
 				}

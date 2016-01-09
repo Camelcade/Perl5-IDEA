@@ -38,7 +38,7 @@ import org.jetbrains.annotations.Nullable;
 public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlFormattingTokenSets
 {
 
-	private static SpacingBuilder createSpacingBuilder(@NotNull CommonCodeStyleSettings settings, @NotNull PerlCodeStyleSettings perlSettings)
+	protected SpacingBuilder createSpacingBuilder(@NotNull CommonCodeStyleSettings settings, @NotNull PerlCodeStyleSettings perlSettings)
 	{
 		return new SpacingBuilder(settings.getRootSettings(), PerlLanguage.INSTANCE)
 				// standard settings

@@ -49,9 +49,13 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
 	public static final TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
 			PerlParserImpl.CONSUMABLE_SEMI_TOKENS, TokenSet.create(
 					MOJO_BLOCK_EXPR_CLOSER,
-					MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
+					MOJO_BLOCK_EXPR_NOSPACE_CLOSER
+			));
+	public static final TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
+			PerlParserImpl.UNCONSUMABLE_SEMI_TOKENS, TokenSet.create(
 					MOJO_END
 			));
+
 
 	@Override
 	public boolean parseTerm(PsiBuilder b, int l)
@@ -70,6 +74,7 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
 			{
 				blockMarker.done(BLOCK);
 				blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+				b.advanceLexer();
 				subMarker.done(ANON_SUB);
 				return true;
 			}
@@ -110,5 +115,12 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
 	public TokenSet getConsumableSemicolonTokens()
 	{
 		return CONSUMABLE_SEMI_TOKENS;
+	}
+
+	@NotNull
+	@Override
+	public TokenSet getUnconsumableSemicolonTokens()
+	{
+		return UNCONSUMABLE_SEMI_TOKENS;
 	}
 }

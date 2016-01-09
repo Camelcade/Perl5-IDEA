@@ -339,7 +339,8 @@
                                        implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Mojolicious Perl"
                                  implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousFindUsagesProvider"/>
-
+        <lang.formatter language="Mojolicious Perl"
+                        implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
         <completion.contributor language="Perl5"
                                 implementationClass="com.perl5.lang.mojolicious.idea.completion.MojoliciousCompletionContributor"/>
 
