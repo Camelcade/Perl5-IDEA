@@ -367,6 +367,8 @@
         <editorNotificationProvider
                 implementation="com.perl5.lang.mason.idea.editor.notification.MasonPathsNotification"/>
 
+        <typeHierarchyProvider language="Mason template"
+                               implementationClass="com.perl5.lang.mason.idea.hierarchy.MasonPackageHierarchyProvider"/>
         <fileTypeFactory implementation="com.perl5.lang.mason.filetypes.MasonFileTypeFactory"/>
         <lang.parserDefinition language="Mason template"
                                implementationClass="com.perl5.lang.mason.MasonParserDefinition"/>

@@ -19,12 +19,14 @@ package com.perl5.lang.perl.idea.hierarchy.namespace;
 import com.intellij.ide.hierarchy.HierarchyBrowser;
 import com.intellij.ide.hierarchy.HierarchyProvider;
 import com.intellij.ide.hierarchy.TypeHierarchyBrowserBase;
+import com.intellij.lang.Language;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,10 +47,14 @@ public class PerlPackageHierarchyProvider implements HierarchyProvider
 			final PsiFile file = CommonDataKeys.PSI_FILE.getData(dataContext);
 
 			if (editor != null && file != null)
-				element = file.findElementAt(editor.getCaretModel().getOffset());
+			{
+				element = file.getViewProvider().findElementAt(editor.getCaretModel().getOffset(), getLanguage());
+			}
 		}
-		if (!(element instanceof PerlNamespaceDefinition))
-			element = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+		if (element != null && !(element instanceof PerlNamespaceDefinition))
+		{
+			return PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+		}
 
 		return element;
 	}
@@ -64,5 +70,10 @@ public class PerlPackageHierarchyProvider implements HierarchyProvider
 	public void browserActivated(@NotNull HierarchyBrowser hierarchyBrowser)
 	{
 		((PerlPackageHierarchyBrowser) hierarchyBrowser).changeView(TypeHierarchyBrowserBase.SUPERTYPES_HIERARCHY_TYPE);
+	}
+
+	protected Language getLanguage()
+	{
+		return PerlLanguage.INSTANCE;
 	}
 }
