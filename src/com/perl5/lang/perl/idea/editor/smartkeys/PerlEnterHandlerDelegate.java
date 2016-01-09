@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.smartkeys;
+package com.perl5.lang.perl.idea.editor.smartkeys;
 
 import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegate;
 import com.intellij.openapi.actionSystem.DataContext;

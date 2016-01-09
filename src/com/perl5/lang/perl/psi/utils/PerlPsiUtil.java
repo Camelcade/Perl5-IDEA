@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.tree.IElementType;
@@ -222,6 +223,21 @@ public class PerlPsiUtil
 			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace))
 				break;
 			result = result.getNextSibling();
+		}
+		return result;
+	}
+
+	@Nullable
+	public static ASTNode getNextSignificantSibling(ASTNode node)
+	{
+		ASTNode result = node.getTreeNext();
+		while (true)
+		{
+			if (result == null || result.getElementType() != TokenType.NEW_LINE_INDENT && result.getElementType() != TokenType.WHITE_SPACE)
+			{
+				break;
+			}
+			result = result.getTreeNext();
 		}
 		return result;
 	}

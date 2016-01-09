@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.smartkeys.options;
+package com.perl5.lang.perl.idea.editor.smartkeys.options;
 
 import com.intellij.openapi.options.BeanConfigurable;
 import com.intellij.openapi.options.UnnamedConfigurable;

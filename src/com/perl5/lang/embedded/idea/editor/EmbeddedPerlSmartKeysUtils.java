@@ -16,36 +16,32 @@
 
 package com.perl5.lang.embedded.idea.editor;
 
-import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.embedded.EmbeddedPerlFileViewProvider;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 07.01.2016.
+ * Created by hurricup on 09.01.2016.
  */
-public class EmbeddedPerlTypedHandler extends TypedHandlerDelegate implements EmbeddedPerlElementTypes
+public class EmbeddedPerlSmartKeysUtils implements EmbeddedPerlElementTypes
 {
-	@Override
-	public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file)
+	public static boolean addCloseMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker)
 	{
-		if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider)
+		PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
+		if (element != null && element.getNode().getElementType() == EMBED_MARKER_OPEN)
 		{
-			if (c == ' ')
+			ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
+			if (nextSibling == null || nextSibling.getElementType() != EMBED_MARKER_CLOSE)
 			{
-				PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-				if (element != null && element.getNode().getElementType() == EMBED_MARKER_OPEN)
-				{
-					EditorModificationUtil.insertStringAtCaret(editor, " ?>", false, false);
-				}
+				EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+				return true;
 			}
 		}
-		return super.charTyped(c, project, editor, file);
+		return false;
 	}
-
 }
