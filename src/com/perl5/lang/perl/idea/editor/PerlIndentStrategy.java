@@ -29,6 +29,6 @@ public class PerlIndentStrategy implements IndentStrategy
 	@Override
 	public boolean canIndent(@NotNull PsiElement element)
 	{
-		return !PerlIndentProcessor.ABSOLUTE_UNINDENTED_TOKENS.contains(element.getNode().getElementType());
+		return !PerlIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(element.getNode().getElementType());
 	}
 }

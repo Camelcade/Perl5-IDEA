@@ -45,4 +45,5 @@ public class MojoliciousFormattingModelBuilder extends PerlFormattingModelBuilde
 		return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
 	}
 
+
 }

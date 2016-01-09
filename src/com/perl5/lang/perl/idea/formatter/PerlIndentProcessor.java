@@ -25,12 +25,15 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 03.09.2015.
  */
 public class PerlIndentProcessor implements PerlElementTypes
 {
+	public static final PerlIndentProcessor INSTANCE = new PerlIndentProcessor();
+
 	// containers which has none indentation
 	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.create(
 			NAMESPACE_DEFINITION,
@@ -67,7 +70,7 @@ public class PerlIndentProcessor implements PerlElementTypes
 	/**
 	 * Tokens that must be suppressed for indentation
 	 */
-	public static final TokenSet ABSOLUTE_UNINDENTED_TOKENS = TokenSet.create(
+	public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
 			HEREDOC_QX,
@@ -76,14 +79,13 @@ public class PerlIndentProcessor implements PerlElementTypes
 			FORMAT,
 			FORMAT_TERMINATOR
 	);
-	private final PerlCodeStyleSettings myCodeStyleSettings;
 
-	public PerlIndentProcessor(PerlCodeStyleSettings codeStyleSettings)
+	public TokenSet getAbsoluteUnindentableTokens()
 	{
-		this.myCodeStyleSettings = codeStyleSettings;
+		return ABSOLUTE_UNINDENTABLE_TOKENS;
 	}
 
-	public Indent getNodeIndent(ASTNode node)
+	public Indent getNodeIndent(@NotNull ASTNode node, PerlCodeStyleSettings codeStyleSettings)
 	{
 		IElementType nodeType = node.getElementType();
 		ASTNode parent = node.getTreeParent();
@@ -109,7 +111,7 @@ public class PerlIndentProcessor implements PerlElementTypes
 		}
 
 		// defined by node
-		if (ABSOLUTE_UNINDENTED_TOKENS.contains(nodeType) || parent == null || grandParent == null)
+		if (getAbsoluteUnindentableTokens().contains(nodeType) || parent == null || grandParent == null)
 		{
 			return Indent.getAbsoluteNoneIndent();
 		}

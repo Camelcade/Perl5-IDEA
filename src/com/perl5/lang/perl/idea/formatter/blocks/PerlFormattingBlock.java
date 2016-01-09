@@ -112,7 +112,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		myPerl5Settings = perlCodeStyleSettings;
 		mySpacingBuilder = spacingBuilder;
 		myAlignment = alignment;
-		myIndent = new PerlIndentProcessor(perlCodeStyleSettings).getNodeIndent(node);
+		myIndent = getIndentProcessor().getNodeIndent(node, perlCodeStyleSettings);
 		myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
 		myIsLast = FormatterUtil.getNextNonWhitespaceSibling(node) == null;
 		myElementType = node.getElementType();
@@ -121,6 +121,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	protected static boolean shouldCreateBlockFor(ASTNode node)
 	{
 		return node.getElementType() != TokenType.WHITE_SPACE && node.getText().length() != 0;
+	}
+
+	protected PerlIndentProcessor getIndentProcessor()
+	{
+		return PerlIndentProcessor.INSTANCE;
 	}
 
 	@NotNull

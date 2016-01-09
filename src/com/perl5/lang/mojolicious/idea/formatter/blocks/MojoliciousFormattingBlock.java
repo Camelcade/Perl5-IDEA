@@ -28,6 +28,8 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.mojolicious.idea.formatter.MojoliciousIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
@@ -83,5 +85,11 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 	protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment)
 	{
 		return new MojoliciousFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder());
+	}
+
+	@Override
+	protected PerlIndentProcessor getIndentProcessor()
+	{
+		return MojoliciousIndentProcessor.INSTANCE;
 	}
 }
