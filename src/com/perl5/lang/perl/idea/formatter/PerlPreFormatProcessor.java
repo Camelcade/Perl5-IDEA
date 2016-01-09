@@ -37,7 +37,7 @@ public class PerlPreFormatProcessor implements PreFormatProcessor
 		PsiElement psiElement = element.getPsi();
 		if (psiElement == null) return range;
 
-		if (!psiElement.getLanguage().is(PerlLanguage.INSTANCE)) return range;
+		if (!canProcess(psiElement, range)) return range;
 
 		PsiFile file = psiElement.isValid() ? psiElement.getContainingFile() : null;
 		if (file == null) return range;
@@ -45,5 +45,10 @@ public class PerlPreFormatProcessor implements PreFormatProcessor
 		Project project = psiElement.getProject();
 
 		return new PerlPreFormatter(project).process(psiElement, range);
+	}
+
+	protected boolean canProcess(PsiElement element, TextRange range)
+	{
+		return element.getLanguage().is(PerlLanguage.INSTANCE);
 	}
 }
