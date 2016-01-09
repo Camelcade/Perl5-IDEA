@@ -370,6 +370,8 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 		if( super.parseFileContents(b, l) )
 		{
 			m.done(NAMESPACE_CONTENT);
+			m.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+
 			m.precede().done(MASON_NAMESPACE_DEFINITION);
 			return true;
 		}

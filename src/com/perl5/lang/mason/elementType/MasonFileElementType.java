@@ -19,7 +19,7 @@ package com.perl5.lang.mason.elementType;
 import com.intellij.lang.Language;
 import com.intellij.lexer.Lexer;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason.MasonFileViewProvider;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import org.jetbrains.annotations.Nullable;
@@ -38,10 +38,10 @@ public class MasonFileElementType extends PerlFileElementType
 	@Override
 	protected Lexer getLexer(PsiElement psi)
 	{
-		if (psi.getContainingFile().getViewProvider().getVirtualFile().getFileType() == MasonPurePerlComponentFileType.INSTANCE)
+		if (psi.getContainingFile().getViewProvider() instanceof MasonFileViewProvider)
 		{
-			return new PerlLexerAdapter(psi.getProject());
+			return super.getLexer(psi);
 		}
-		return super.getLexer(psi);
+		return new PerlLexerAdapter(psi.getProject());
 	}
 }

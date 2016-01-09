@@ -38,13 +38,21 @@ public class MasonFileViewProviderFactory implements FileViewProviderFactory
 	{
 		FileType fileType;
 
-		if (file instanceof LightVirtualFile)
+		if (file instanceof LightVirtualFile && ((LightVirtualFile) file).getOriginalFile() != null)
 		{
 			fileType = ((LightVirtualFile) file).getOriginalFile().getFileType();
 		}
 		else
 		{
-			fileType = file.getFileType();
+			// fixme dirty hack for stupid LightVirtualFiles, we should check something like registered extensions, but duunno how yet
+			if ("mp".equals(file.getExtension()))
+			{
+				fileType = MasonPurePerlComponentFileType.INSTANCE;
+			}
+			else
+			{
+				fileType = file.getFileType();
+			}
 		}
 
 		if (fileType == MasonPurePerlComponentFileType.INSTANCE)
