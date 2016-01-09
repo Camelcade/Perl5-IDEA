@@ -26,6 +26,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
+import com.perl5.lang.mason.idea.formatter.MasonIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
@@ -72,4 +74,9 @@ public class MasonFormattingBlock extends PerlFormattingBlock implements MasonEl
 		return new MasonFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder());
 	}
 
+	@Override
+	protected PerlIndentProcessor getIndentProcessor()
+	{
+		return MasonIndentProcessor.INSTANCE;
+	}
 }

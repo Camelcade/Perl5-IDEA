@@ -400,7 +400,8 @@
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <lang.formatter language="Mason template"
                         implementationClass="com.perl5.lang.mason.idea.formatter.MasonFormattingModelBuilder"/>
-
+        <lang.indentStrategy language="Mason template"
+                             implementationClass="com.perl5.lang.mason.idea.editor.MasonIndentStrategy"/>
         <quoteHandler fileType="Mason template"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
