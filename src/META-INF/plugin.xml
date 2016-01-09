@@ -54,10 +54,12 @@
         <li>Fixed problem with statement modifiers parsing in expressions blocks.</li>
         <li>Fixed problems with templates folding.</li>
         <li>Implemented automatic close tag insertion on typing (open tag + space)</li>
+        <li>Implemented formatter and pre-formatter for perl code.</li>
       </ul></li>
       <li>Embedded Perl<ul>
         <li>Implemented automatic close embed marker insertion after open plus space.</li>
-        <li>Implemented automatic close tag insertion on typing (open tag + space)</li>
+        <li>Implemented automatic close tag insertion on typing (open tag + space).</li>
+        <li>Implemented formatter and pre-formatter for perl code.</li>
       </ul></li>
       </ul>
       </p>
@@ -360,6 +362,7 @@
                            implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoliciousBraceMatcher"/>
         <lang.foldingBuilder language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
+        <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
 
 
         <projectService serviceImplementation="com.perl5.lang.mason.idea.configuration.MasonSettings"/>
