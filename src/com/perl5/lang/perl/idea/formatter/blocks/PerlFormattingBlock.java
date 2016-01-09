@@ -53,6 +53,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			HEREDOC,
 			HEREDOC_QX,
 			HEREDOC_QQ,
+			STRING_SQ,
+			STRING_DQ,
+			STRING_XQ,
 			POD,
 			PerlParserUtil.DUMMY_BLOCK
 	);
