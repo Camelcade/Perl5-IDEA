@@ -19,7 +19,10 @@ package com.perl5.lang.perl.idea;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.vfs.*;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileAdapter;
+import com.intellij.openapi.vfs.VirtualFileMoveEvent;
+import com.intellij.openapi.vfs.VirtualFilePropertyEvent;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -28,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class PerlVirtualFileListener implements VirtualFileListener
+public class PerlVirtualFileListener extends VirtualFileAdapter
 {
 	Project myProject;
 	ProjectFileIndex myProjectFileIndex;
@@ -57,23 +60,6 @@ public class PerlVirtualFileListener implements VirtualFileListener
 		}
 	}
 
-	@Override
-	public void contentsChanged(@NotNull VirtualFileEvent event)
-	{
-//		System.out.println("contentsChanged " + event);
-	}
-
-	@Override
-	public void fileCreated(@NotNull VirtualFileEvent event)
-	{
-//		System.out.println("fileCreated " + event);
-	}
-
-	@Override
-	public void fileDeleted(@NotNull VirtualFileEvent event)
-	{
-//		System.out.println("fileDeleted " + event);
-	}
 
 	@Override
 	public void fileMoved(@NotNull VirtualFileMoveEvent event)
@@ -97,12 +83,6 @@ public class PerlVirtualFileListener implements VirtualFileListener
 	}
 
 	@Override
-	public void fileCopied(@NotNull VirtualFileCopyEvent event)
-	{
-//		System.out.println("fileCopied " + event);
-	}
-
-	@Override
 	public void beforePropertyChange(@NotNull VirtualFilePropertyEvent event)
 	{
 		VirtualFile virtualFile = event.getFile();
@@ -115,18 +95,6 @@ public class PerlVirtualFileListener implements VirtualFileListener
 				PerlPackageUtil.adjustNestedFiles(myProject, virtualFile, newPath);
 			}
 		}
-	}
-
-	@Override
-	public void beforeContentsChange(@NotNull VirtualFileEvent event)
-	{
-
-	}
-
-	@Override
-	public void beforeFileDeletion(@NotNull VirtualFileEvent event)
-	{
-
 	}
 
 	@Override

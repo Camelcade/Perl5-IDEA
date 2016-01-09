@@ -20,29 +20,22 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.progress.PerformInBackgroundOption;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.ui.AnActionButton;
 import com.intellij.ui.AnActionButtonRunnable;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.Consumer;
-import com.intellij.util.indexing.FileBasedIndex;
-import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.intellij.util.ui.FormBuilder;
-import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -246,54 +239,9 @@ public class MasonSettingsConfigurable implements Configurable
 
 		mySettings.settingsUpdated();
 
-		reindexRoots(rootsToReindex);
+		MasonUtils.reindexProjectRoots(myProject, rootsToReindex);
 	}
 
-	private void reindexRoots(List<String> rootsToReindex)
-	{
-		if (rootsToReindex.isEmpty())
-			return;
-
-		PsiDocumentManager.getInstance(myProject).commitAllDocuments();
-
-		VirtualFile projectRoot = myProject.getBaseDir();
-
-		if (projectRoot != null)
-		{
-			final FileBasedIndex index = FileBasedIndex.getInstance();
-
-			for (String root : rootsToReindex)
-			{
-				VirtualFile componentRoot = VfsUtil.findRelativeFile(projectRoot, root);
-				if (componentRoot != null)
-				{
-					for (VirtualFile file : VfsUtil.collectChildrenRecursively(componentRoot))
-					{
-						if (file.getFileType() instanceof MasonPurePerlComponentFileType)
-						{
-							index.requestReindex(file);
-						}
-					}
-				}
-			}
-			if (index instanceof FileBasedIndexImpl)
-			{
-				new Task.Backgroundable(myProject, "Reindexing Files", false, PerformInBackgroundOption.ALWAYS_BACKGROUND)
-				{
-					@Override
-					public void run(@NotNull ProgressIndicator indicator)
-					{
-						double totalFiles = ((FileBasedIndexImpl) index).getChangedFileCount();
-						double filesLeft;
-						while ((filesLeft = ((FileBasedIndexImpl) index).getChangedFileCount()) > 0)
-						{
-							indicator.setFraction((totalFiles - filesLeft) / totalFiles);
-						}
-					}
-				}.queue();
-			}
-		}
-	}
 
 
 	@Override

@@ -534,6 +534,9 @@
         <component>
             <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>
         </component>
+        <component>
+            <implementation-class>com.perl5.lang.mason.idea.components.MasonProjectComponent</implementation-class>
+        </component>
     </project-components>
 
     <actions>

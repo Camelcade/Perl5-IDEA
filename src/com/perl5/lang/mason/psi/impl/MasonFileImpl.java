@@ -36,8 +36,6 @@ import java.util.List;
  */
 public class MasonFileImpl extends PerlFileImpl implements PerlImplicitVariablesProvider
 {
-	private String filePackage;
-
 	public MasonFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, MasonLanguage.INSTANCE);
