@@ -51,7 +51,6 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 			{
 				return true;
 			}
-
 		}
 		return false;
 	}
@@ -65,8 +64,42 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 	@Override
 	public void propertyChanged(@NotNull VirtualFilePropertyEvent event)
 	{
-		super.propertyChanged(event);
+		if (!event.getPropertyName().equals(VirtualFile.PROP_NAME))
+			return;
+
+		processFileChange(event.getFile());
 	}
+
+	private void processFileChange(VirtualFile changedFile)
+	{
+		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
+		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
+		if (componentsRoots.size() == 0)
+			return;
+
+
+		Set<VirtualFile> rootsSet = new THashSet<VirtualFile>(componentsRoots);
+		if (changedFile.isDirectory())
+		{
+			if (changedFile.getUserData(FORCE_REINDEX) != null ||
+					VfsUtil.isUnder(changedFile, rootsSet) ||        // moved to component root
+					containsAtLeastOneFile(changedFile, componentsRoots)
+					)
+			{
+				MasonUtils.reindexProjectFile(getProject(), changedFile);
+			}
+		}
+		else if (changedFile.getFileType() instanceof MasonPurePerlComponentFileType)    // Mason file has been moved
+		{
+			if (changedFile.getUserData(FORCE_REINDEX) != null ||
+					VfsUtil.isUnder(changedFile, rootsSet)
+					)
+			{
+				FileBasedIndex.getInstance().requestReindex(changedFile);
+			}
+		}
+	}
+
 
 	/**
 	 * Fired when a virtual file is moved from within IDEA.
@@ -76,33 +109,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 	@Override
 	public void fileMoved(@NotNull VirtualFileMoveEvent event)
 	{
-		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
-		if (componentsRoots.size() == 0)
-			return;
-
-		VirtualFile movedFile = event.getFile();
-
-		Set<VirtualFile> rootsSet = new THashSet<VirtualFile>(componentsRoots);
-		if (movedFile.isDirectory())
-		{
-			if (movedFile.getUserData(FORCE_REINDEX) != null ||
-					VfsUtil.isUnder(movedFile, rootsSet) ||        // moved to component root
-					containsAtLeastOneFile(movedFile, componentsRoots)
-					)
-			{
-				MasonUtils.reindexProjectFile(getProject(), movedFile);
-			}
-		}
-		else if (movedFile.getFileType() instanceof MasonPurePerlComponentFileType)    // Mason file has been moved
-		{
-			if (movedFile.getUserData(FORCE_REINDEX) != null ||
-					VfsUtil.isUnder(movedFile, rootsSet)
-					)
-			{
-				FileBasedIndex.getInstance().requestReindex(movedFile);
-			}
-		}
+		processFileChange(event.getFile());
 	}
 
 	/**
@@ -113,7 +120,23 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 	@Override
 	public void beforePropertyChange(@NotNull VirtualFilePropertyEvent event)
 	{
-		super.beforePropertyChange(event);
+		if (!event.getPropertyName().equals(VirtualFile.PROP_NAME))
+			return;
+
+		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
+		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
+		if (componentsRoots.size() == 0)
+			return;
+
+		VirtualFile renamedFile = event.getFile();
+
+		if (renamedFile.isDirectory())
+		{
+			if (containsAtLeastOneFile(renamedFile, componentsRoots)) // contains component root
+			{
+				renamedFile.putUserData(FORCE_REINDEX, true);
+			}
+		}
 	}
 
 	/**
