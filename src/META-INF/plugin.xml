@@ -48,6 +48,7 @@
         <li>Implemented components auto-basing</li>
         <li>Implemented folding of Mason files.</li>
         <li>Implemented automatic close tag insertion on typing</li>
+        <li>Implemented formatter and pre-formatter for perl code.</li>
       </ul></li>
       <li>Mojolicious<ul>
         <li>Parser has been re-written almost from scratch and now is much more appropriate.</li>
@@ -363,6 +364,11 @@
         <lang.foldingBuilder language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
         <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
+        <multiLangCommenter
+                implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
+
+        <lang.commenter language="Mojolicious Perl"
+                        implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
 
 
         <projectService serviceImplementation="com.perl5.lang.mason.idea.configuration.MasonSettings"/>
@@ -392,6 +398,8 @@
                              implementationClass="com.perl5.lang.mason.idea.folding.MasonFoldingBuilder"/>
         <lang.namesValidator language="Mason template"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+        <lang.formatter language="Mason template"
+                        implementationClass="com.perl5.lang.mason.idea.formatter.MasonFormattingModelBuilder"/>
 
         <quoteHandler fileType="Mason template"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
@@ -404,13 +412,9 @@
 
         <lang.braceMatcher language="Mason template"
                            implementationClass="com.perl5.lang.mason.idea.editor.MasonBraceMatcher"/>
+        <preFormatProcessor implementation="com.perl5.lang.mason.idea.formatter.MasonPreFormatProcessor"/>
 
-        <!--Temporary solution, better than nothing-->
-        <multiLangCommenter
-                implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
 
-        <lang.commenter language="Mojolicious Perl"
-                        implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
 
         <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypeFactory"/>
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
