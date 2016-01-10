@@ -16,9 +16,13 @@
 
 package com.perl5.lang.mason.idea.formatter;
 
+import com.intellij.formatting.Indent;
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 09.01.2016.
@@ -40,5 +44,13 @@ public class MasonIndentProcessor extends PerlIndentProcessor implements MasonEl
 		return ABSOLUTE_UNINDENTABLE_TOKENS;
 	}
 
-
+	@Override
+	public Indent getNodeIndent(@NotNull ASTNode node, PerlCodeStyleSettings codeStyleSettings)
+	{
+		if (node.getElementType() == MASON_FLAGS_CLOSER)
+		{
+			return Indent.getNoneIndent();
+		}
+		return super.getNodeIndent(node, codeStyleSettings);
+	}
 }
