@@ -49,6 +49,7 @@
         <li>Implemented folding of Mason files.</li>
         <li>Implemented automatic close tag insertion on typing</li>
         <li>Implemented formatter and pre-formatter for perl code.</li>
+        <li>Implemented live-templates for Mason syntax constructions.</li>
       </ul></li>
       <li>Mojolicious<ul>
         <li>Parser has been re-written almost from scratch and now is much more appropriate.</li>
@@ -386,6 +387,12 @@
 
 
         <projectService serviceImplementation="com.perl5.lang.mason.idea.configuration.MasonSettings"/>
+
+        <liveTemplateContext implementation="com.perl5.lang.mason.idea.livetemplates.MasonTemplateContextType"/>
+        <liveTemplatePreprocessor implementation="com.perl5.lang.mason.idea.livetemplates.MasonTemplatePreProcessor"/>
+        <defaultLiveTemplatesProvider
+                implementation="com.perl5.lang.mason.idea.livetemplates.MasonLivetemplatesProvider"/>
+
         <projectConfigurable
                 provider="com.perl5.lang.mason.idea.configuration.MasonSettingsConfigurableProvider"
                 parentId="PERL5_MAIN_SETTINGS"/>

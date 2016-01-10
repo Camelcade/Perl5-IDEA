@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.livetemplates;
+package com.perl5.lang.mason.idea.livetemplates;
 
 import com.intellij.codeInsight.template.impl.DefaultLiveTemplatesProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by ELI-HOME on 01-Jun-15.
- * makes sure the file liveTemplates/perl.xml will be added to the live templates list
+ * Created by hurricup on 10.01.2016.
  */
-public class PerlDefaultTemplatesProvider implements DefaultLiveTemplatesProvider
+public class MasonLivetemplatesProvider implements DefaultLiveTemplatesProvider
 {
 	public static final String[] TEMPLATES = new String[]{
-			"/liveTemplates/Perl5"
-			, "/liveTemplates/Perl5Postfix"
-			, "/liveTemplates/Perl5Test"
+			"/liveTemplates/Perl5Mason"
 	};
 
 	@Override
@@ -43,5 +40,4 @@ public class PerlDefaultTemplatesProvider implements DefaultLiveTemplatesProvide
 	{
 		return null;
 	}
-
 }
