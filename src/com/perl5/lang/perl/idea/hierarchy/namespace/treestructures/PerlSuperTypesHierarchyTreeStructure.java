@@ -42,27 +42,32 @@ public class PerlSuperTypesHierarchyTreeStructure extends HierarchyTreeStructure
 
 	@NotNull
 	@Override
-	protected Object[] buildChildren(HierarchyNodeDescriptor descriptor)
+	protected Object[] buildChildren(@NotNull HierarchyNodeDescriptor descriptor)
 	{
 		List<PerlPackageHierarchyNodeDescriptor> result = new ArrayList<PerlPackageHierarchyNodeDescriptor>();
 
 		if (descriptor instanceof PerlPackageHierarchyNodeDescriptor)
 		{
-			PsiElement element = ((PerlPackageHierarchyNodeDescriptor) descriptor).getPsiElement();
-			Project project = element.getProject();
-			GlobalSearchScope allScope = GlobalSearchScope.allScope(project);
-			GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
+			PsiElement element = descriptor.getPsiElement();
+			if (element != null)
+			{
+				Project project = element.getProject();
+				GlobalSearchScope allScope = GlobalSearchScope.allScope(project);
+				GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
-			if (element instanceof PerlNamespaceDefinition)
-				for (String namespace : ((PerlNamespaceDefinition) element).getParentNamespaces())
+				if (element instanceof PerlNamespaceDefinition)
 				{
-					Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, projectScope);
-					if (definitions.size() == 0)
-						definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, allScope);
+					for (String namespace : ((PerlNamespaceDefinition) element).getParentNamespaces())
+					{
+						Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, projectScope);
+						if (definitions.size() == 0)
+							definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, allScope);
 
-					for (PerlNamespaceDefinition definition : definitions)
-						result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, definition, false));
+						for (PerlNamespaceDefinition definition : definitions)
+							result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, definition, false));
+					}
 				}
+			}
 		}
 
 		return result.toArray();

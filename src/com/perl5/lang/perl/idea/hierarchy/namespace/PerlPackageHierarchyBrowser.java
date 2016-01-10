@@ -101,11 +101,11 @@ public class PerlPackageHierarchyBrowser extends TypeHierarchyBrowserBase
 	{
 		if (SUPERTYPES_HIERARCHY_TYPE.equals(typeName))
 		{
-			return new PerlSuperTypesHierarchyTreeStructure(psiElement);
+			return getSuperTypesHierarchyStructure(psiElement);
 		}
 		else if (SUBTYPES_HIERARCHY_TYPE.equals(typeName))
 		{
-			return new PerlSubTypesHierarchyTreeStructure(psiElement);
+			return getSubTypesHierarchyStructure(psiElement);
 		}
 		else if (TYPE_HIERARCHY_TYPE.equals(typeName))
 		{
@@ -121,5 +121,15 @@ public class PerlPackageHierarchyBrowser extends TypeHierarchyBrowserBase
 		return null;
 	}
 
+	@Nullable
+	protected HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement)
+	{
+		return new PerlSuperTypesHierarchyTreeStructure(psiElement);
+	}
 
+	@Nullable
+	protected HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement)
+	{
+		return new PerlSubTypesHierarchyTreeStructure(psiElement);
+	}
 }
