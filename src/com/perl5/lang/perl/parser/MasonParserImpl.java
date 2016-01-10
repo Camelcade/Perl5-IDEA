@@ -250,10 +250,10 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 		{
 			r = parsePerlBlock(b, l, MASON_PERL_CLOSER);
 		}
-		else if (tokenType == MASON_FLAGS_OPENER)    // fixme need more love here, extends
+		else if (tokenType == MASON_FLAGS_OPENER)
 		{
-			PsiBuilder.Marker statementMarker = b.mark();
 			b.advanceLexer();
+			PsiBuilder.Marker statementMarker = b.mark();
 
 			while (!b.eof() && b.getTokenType() != MASON_FLAGS_CLOSER)
 			{
@@ -262,10 +262,9 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 					break;
 				}
 			}
-			if( r = endOrRecover(b, MASON_FLAGS_CLOSER) )
-			{
-				statementMarker.done(MASON_FLAGS_STATEMENT);
-			}
+			statementMarker.done(MASON_FLAGS_STATEMENT);
+
+			r = endOrRecover(b, MASON_FLAGS_CLOSER);
 		}
 		else if (tokenType == MASON_DOC_OPENER)
 		{
@@ -375,7 +374,7 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 	public boolean parseFileContents(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
-		if( super.parseFileContents(b, l) )
+		if (super.parseFileContents(b, l))
 		{
 			m.done(NAMESPACE_CONTENT);
 			m.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
