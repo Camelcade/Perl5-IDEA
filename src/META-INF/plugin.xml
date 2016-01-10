@@ -416,7 +416,7 @@
         <lang.findUsagesProvider language="Mason template"
                                  implementationClass="com.perl5.lang.mason.idea.findusages.MasonFindUsagesProvider"/>
         <cacheBuilder fileType="Mason pure Perl component"
-                      wordsScannerClass="com.perl5.lang.perl.idea.findusages.PerlWordsScanner"/>
+                      wordsScannerClass="com.perl5.lang.mason.idea.findusages.MasonPurePerlWordsScanner"/>
 
         <lang.foldingBuilder language="Mason template"
                              implementationClass="com.perl5.lang.mason.idea.folding.MasonFoldingBuilder"/>
