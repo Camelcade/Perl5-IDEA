@@ -118,6 +118,10 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 		{
 			return new MasonAroundMethodModifierImpl(node);
 		}
+		else if (elementType == MASON_TEXT_BLOCK)
+		{
+			return new MasonTextBlockImpl(node);
+		}
 		else if (elementType == MASON_AFTER_MODIFIER || elementType == MASON_BEFORE_MODIFIER || elementType == MASON_AUGMENT_MODIFIER)
 		{
 			return new MasonMethodModifierImpl(node);

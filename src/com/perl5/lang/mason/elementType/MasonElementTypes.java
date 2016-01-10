@@ -97,6 +97,7 @@ public interface MasonElementTypes extends MasonSyntaxElements
 	IElementType MASON_BEFORE_MODIFIER = new MasonElementType("MASON_BEFOE_MODIFIER");
 
 	IElementType MASON_ABSTRACT_BLOCK = new MasonElementType("MASON_ABSTRACT_BLOCK");
+	IElementType MASON_TEXT_BLOCK = new MasonElementType("MASON_TEXT_BLOCK");
 	IElementType MASON_FILTERED_BLOCK = new MasonElementType("MASON_FILTERED_BLOCK");
 	IElementType MASON_SIMPLE_DEREF_EXPR = new MasonElementType("MASON_DEREF_EXPRESSION");
 }

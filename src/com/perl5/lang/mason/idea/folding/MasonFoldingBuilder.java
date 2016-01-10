@@ -25,6 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.mason.psi.MasonAbstractBlock;
+import com.perl5.lang.mason.psi.MasonTextBlock;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,6 +54,7 @@ public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElem
 		List<FoldingDescriptor> masonDescriptors = new ArrayList<FoldingDescriptor>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
 
 		masonDescriptors.addAll(getDescriptorsFor(root, document, MasonAbstractBlock.class, 0, 0, 0));
+		masonDescriptors.addAll(getDescriptorsFor(root, document, MasonTextBlock.class, 0, 0, 0));
 
 		return masonDescriptors.toArray(new FoldingDescriptor[masonDescriptors.size()]);
 	}
@@ -69,6 +71,10 @@ public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElem
 		else if (tokenType == MASON_FILTERED_BLOCK)
 		{
 			return "{filtered block}";
+		}
+		else if (tokenType == MASON_TEXT_BLOCK)
+		{
+			return "{text block}";
 		}
 		return super.getPlaceholderText(node, range);
 	}

@@ -276,7 +276,15 @@ public class MasonParserImpl extends PerlParserImpl implements MasonParser
 		else if (tokenType == MASON_TEXT_OPENER)
 		{
 			b.advanceLexer();
-			PerlParserUtil.consumeToken(b, STRING_CONTENT);
+			PsiBuilder.Marker stringMarker = b.mark();
+			if (PerlParserUtil.consumeToken(b, STRING_CONTENT))
+			{
+				stringMarker.done(MASON_TEXT_BLOCK);
+			}
+			else
+			{
+				stringMarker.drop();
+			}
 			r = endOrRecover(b, MASON_TEXT_CLOSER);
 		}
 		else if (tokenType == MASON_METHOD_OPENER)
