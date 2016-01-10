@@ -26,8 +26,10 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason.idea.configuration.MasonSettings;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +44,41 @@ public class MasonUtils
 	{
 		return "MC0::" + path.replaceAll("[^\\w\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
 	}
+
+	@Nullable
+	public static String getVirtualFileClassName(@NotNull Project project, @Nullable VirtualFile componentFile)
+	{
+		if (componentFile != null && componentFile.isValid())
+		{
+			VirtualFile componentRoot = getComponentRoot(project, componentFile);
+			if (componentRoot != null)
+			{
+				//noinspection ConstantConditions
+				return getClassnameFromPath(VfsUtil.getRelativePath(componentFile, componentRoot));
+			}
+		}
+
+		return null;
+	}
+
+	@Nullable
+	public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file)
+	{
+		if (file != null)
+		{
+			MasonSettings masonSettings = MasonSettings.getInstance(project);
+
+			for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles())
+			{
+				if (VfsUtil.isAncestor(componentRoot, file, false))
+				{
+					return componentRoot;
+				}
+			}
+		}
+		return null;
+	}
+
 
 	public static void reindexProjectFile(Project project, VirtualFile virtualFile)
 	{

@@ -280,6 +280,13 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		return EMPTY_LIST;
 	}
 
+	@NotNull
+	@Override
+	public Collection<PerlNamespaceDefinition> getChildNamespaces()
+	{
+		return Collections.emptyList();
+	}
+
 	@Override
 	public PerlMroType getMroType()
 	{

@@ -19,13 +19,18 @@ package com.perl5.lang.mason.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.Processor;
 import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
 import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -33,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -59,23 +65,9 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	@Override
 	protected String getPackageNameHeavy()
 	{
-		VirtualFile containingFile = getContainingFile().getRealContainingFile();
-		VirtualFile componentRoot = getContainingFile().getComponentRoot();
-
-		if (containingFile != null && componentRoot != null)
-		{
-			String componentPath = VfsUtil.getRelativePath(containingFile, componentRoot);
-
-			if (componentPath != null)
-			{
-				return MasonUtils.getClassnameFromPath(componentPath);
-			}
-		}
-
-		// fixme shouldn't we just use full path?
-		return PerlPackageUtil.MAIN_PACKAGE;
+		String packageName = MasonUtils.getVirtualFileClassName(getProject(), getContainingFile().getRealContainingFile());
+		return packageName == null ? PerlPackageUtil.MAIN_PACKAGE : packageName;
 	}
-
 
 	@Override
 	public List<String> getParentNamespaces()
@@ -189,6 +181,48 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		}
 
 		return parentsList;
+	}
+
+	@NotNull
+	@Override
+	public Collection<PerlNamespaceDefinition> getChildNamespaces()
+	{
+		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
+		final Collection<PerlNamespaceDefinition> childNamespaces = super.getChildNamespaces();
+
+		if (masonSettings.autobaseNames.contains(getContainingFile().getName()))
+		{
+			final String baseClassName = MasonUtils.getVirtualFileClassName(getProject(), getContainingFile().getViewProvider().getVirtualFile().getParent());
+
+			if (baseClassName != null)
+			{
+				final GlobalSearchScope allScope = GlobalSearchScope.allScope(getProject());
+				final String packageName = getPackageName();
+
+				StubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, getProject(), new Processor<String>()
+				{
+					@Override
+					public boolean process(String className)
+					{
+						if (className.startsWith(baseClassName))
+						{
+							for (PerlNamespaceDefinition namespaceDefinition : StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, className, getProject(), allScope, PerlNamespaceDefinition.class))
+							{
+								if (namespaceDefinition instanceof MasonNamespaceDefinition
+										&& namespaceDefinition.getParentNamespaces().contains(packageName)
+										&& !childNamespaces.contains(namespaceDefinition)
+										)
+								{
+									childNamespaces.add(namespaceDefinition);
+								}
+							}
+						}
+						return true;
+					}
+				});
+			}
+		}
+		return childNamespaces;
 	}
 
 	@Override

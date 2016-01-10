@@ -19,7 +19,9 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
@@ -35,10 +37,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -124,6 +123,31 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		}
 
 		return getParentNamespacesFromPsi();
+	}
+
+	@NotNull
+	@Override
+	public Collection<PerlNamespaceDefinition> getChildNamespaces()
+	{
+		Project project = getProject();
+		GlobalSearchScope allScope = GlobalSearchScope.allScope(project);
+		GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
+
+		Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), projectScope);
+
+		if (definitions.size() == 0)
+		{
+			definitions = PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), allScope);
+		}
+
+		if (definitions.size() == 0)
+		{
+			return new ArrayList<PerlNamespaceDefinition>();
+		}
+		else
+		{
+			return definitions;
+		}
 	}
 
 	@NotNull

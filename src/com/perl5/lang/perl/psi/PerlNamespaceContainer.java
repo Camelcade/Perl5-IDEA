@@ -19,7 +19,9 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -43,6 +45,14 @@ public interface PerlNamespaceContainer extends PsiElement
 	 * @return list of packages specified in parent
 	 */
 	List<String> getParentNamespaces();
+
+	/**
+	 * Returns child namespaces
+	 *
+	 * @return list of packages derived from current
+	 */
+	@NotNull
+	Collection<PerlNamespaceDefinition> getChildNamespaces();
 
 	/**
 	 * Get mro type for current package

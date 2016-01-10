@@ -49,22 +49,23 @@ public class PerlSuperTypesHierarchyTreeStructure extends HierarchyTreeStructure
 		if (descriptor instanceof PerlPackageHierarchyNodeDescriptor)
 		{
 			PsiElement element = descriptor.getPsiElement();
-			if (element != null)
+			if (element instanceof PerlNamespaceDefinition)
 			{
 				Project project = element.getProject();
 				GlobalSearchScope allScope = GlobalSearchScope.allScope(project);
 				GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
-				if (element instanceof PerlNamespaceDefinition)
+				for (String namespace : ((PerlNamespaceDefinition) element).getParentNamespaces())
 				{
-					for (String namespace : ((PerlNamespaceDefinition) element).getParentNamespaces())
+					Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, projectScope);
+					if (definitions.size() == 0)
 					{
-						Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, projectScope);
-						if (definitions.size() == 0)
-							definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, allScope);
+						definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, allScope);
+					}
 
-						for (PerlNamespaceDefinition definition : definitions)
-							result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, definition, false));
+					for (PerlNamespaceDefinition definition : definitions)
+					{
+						result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, definition, false));
 					}
 				}
 			}

@@ -16,12 +16,12 @@
 
 package com.perl5.lang.mason.psi.impl;
 
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.mason.MasonLanguage;
+import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -55,20 +55,7 @@ public class MasonFileImpl extends PerlFileImpl implements PerlImplicitVariables
 	@Nullable
 	public VirtualFile getComponentRoot()
 	{
-		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-		VirtualFile containingFile = getRealContainingFile();
-
-		if (containingFile != null && containingFile.exists())
-		{
-			for (VirtualFile rootFile : masonSettings.getComponentsRootsVirtualFiles())
-			{
-				if (rootFile != null && rootFile.exists() && VfsUtil.isAncestor(rootFile, containingFile, true))
-				{
-					return rootFile;
-				}
-			}
-		}
-		return null;
+		return MasonUtils.getComponentRoot(getProject(), getRealContainingFile());
 	}
 
 	/**
