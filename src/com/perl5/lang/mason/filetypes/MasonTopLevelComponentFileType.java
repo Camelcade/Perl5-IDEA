@@ -23,7 +23,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.PerlIcons;
+import com.perl5.lang.mason.MasonIcons;
 import com.perl5.lang.mason.idea.highlighter.MasonHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,8 +75,8 @@ public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileTy
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.SCRIPT_FILE;
-	} // fixme
+		return MasonIcons.MASON_TOP_LEVEL_COMPONENT_ICON;
+	}
 
 	@Override
 	public boolean checkStrictPragma()

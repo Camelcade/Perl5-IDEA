@@ -31,7 +31,7 @@ public class PerlConfigurationType extends ConfigurationTypeBase
 {
 	public PerlConfigurationType()
 	{
-		super("#PerlConfigurationType", "Perl", "", PerlIcons.PERL_LANGUAGE);
+		super("#PerlConfigurationType", "Perl", "", PerlIcons.PERL_LANGUAGE_ICON);
 
 		addFactory(new ConfigurationFactory(this)
 		{

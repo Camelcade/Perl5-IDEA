@@ -69,7 +69,7 @@ public class PerlFileType extends LanguageFileType
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.SCRIPT_FILE;
+		return PerlIcons.PERL_SCRIPT_FILE_ICON;
 	}
 
 	public boolean checkStrictPragma()

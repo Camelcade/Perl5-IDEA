@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,18 @@
 
 package com.perl5.lang.mason;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
-import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.PerlIcons;
+
+import javax.swing.*;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 10.01.2016.
  */
-public class MasonLanguage extends Language implements TemplateLanguage
+public class MasonIcons
 {
-	public static final MasonLanguage INSTANCE = new MasonLanguage();
+	public static final Icon MASON_LANGUAGE_ICON = PerlIcons.PERL_LANGUAGE_ICON;
 
-	public MasonLanguage()
-	{
-		super(PerlLanguage.INSTANCE, "Mason template");
-	}
-
-
+	public static final Icon MASON_PURE_PERL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
+	public static final Icon MASON_TOP_LEVEL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
+	public static final Icon MASON_INTERNAL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
 }

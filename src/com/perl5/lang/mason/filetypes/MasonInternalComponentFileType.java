@@ -16,7 +16,7 @@
 
 package com.perl5.lang.mason.filetypes;
 
-import com.perl5.PerlIcons;
+import com.perl5.lang.mason.MasonIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,6 +54,6 @@ public class MasonInternalComponentFileType extends MasonTopLevelComponentFileTy
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.SCRIPT_FILE;
-	} // fixme
+		return MasonIcons.MASON_INTERNAL_COMPONENT_ICON;
+	}
 }

@@ -30,7 +30,7 @@ public class CreatePerlScriptFileAction extends PerlFileFromTemplateAction
 
 	public CreatePerlScriptFileAction()
 	{
-		super(NEW_PERL_FILE, "", PerlIcons.SCRIPT_FILE);
+		super(NEW_PERL_FILE, "", PerlIcons.PERL_SCRIPT_FILE_ICON);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class CreatePerlScriptFileAction extends PerlFileFromTemplateAction
 	{
 		builder
 				.setTitle(NEW_PERL_FILE)
-				.addKind("Script", PerlIcons.SCRIPT_FILE, "Perl5 script")
+				.addKind("Script", PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
 		;
 	}
 

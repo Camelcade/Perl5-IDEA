@@ -16,7 +16,7 @@
 
 package com.perl5.lang.mason.filetypes;
 
-import com.perl5.PerlIcons;
+import com.perl5.lang.mason.MasonIcons;
 import com.perl5.lang.mason.MasonLanguage;
 import com.perl5.lang.perl.filetypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
@@ -61,7 +61,7 @@ public class MasonPurePerlComponentFileType extends PerlFileType
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.SCRIPT_FILE;
+		return MasonIcons.MASON_PURE_PERL_COMPONENT_ICON;
 	}
 
 	@Override

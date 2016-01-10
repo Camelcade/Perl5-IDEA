@@ -58,6 +58,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 	PsiElementPattern.Capture IN_VARIABLE_PATTERN = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(VARIABLE_PATTERN);
 	PsiElementPattern.Capture IN_GLOB_PATTERN = psiElement().withLanguage(PerlLanguage.INSTANCE).inside(GLOB_PATTERN);
 
+	// fixme move this to mojo patterns
 	PsiElementPattern.Capture IN_MOJOLICIOUS_FILE = psiElement().withLanguage(PerlLanguage.INSTANCE).inFile(psiFile(MojoliciousFileImpl.class));
 
 	PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class).withLanguage(PerlLanguage.INSTANCE);

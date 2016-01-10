@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason;
+package com.perl5.lang.mason.idea.completion;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionType;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 10.01.2016.
  */
-public class MasonLanguage extends Language implements TemplateLanguage
+public class MasonCompletionContributor extends CompletionContributor implements MasonElementPatterns
 {
-	public static final MasonLanguage INSTANCE = new MasonLanguage();
-
-	public MasonLanguage()
+	public MasonCompletionContributor()
 	{
-		super(PerlLanguage.INSTANCE, "Mason template");
+		extend(
+				CompletionType.BASIC,
+				MASON_EXTENDS_VALUE_TEXT_PATTERN,
+				new MasonComponentsCompletionProvider()
+		);
 	}
-
-
 }
