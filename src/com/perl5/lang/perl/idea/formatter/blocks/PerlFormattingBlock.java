@@ -148,28 +148,30 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	{
 		final List<Block> blocks = new ArrayList<Block>();
 
-		IElementType elementType = getElementType();
-
-		Alignment alignment = null; //Alignment.createAlignment();
-
-		if (elementType == COMMA_SEQUENCE_EXPR || elementType == CONSTANTS_BLOCK || elementType == TRENAR_EXPR)
+		if (!isLeaf())
 		{
-			alignment = Alignment.createAlignment(true);
+			IElementType elementType = getElementType();
+
+			Alignment alignment = null; //Alignment.createAlignment();
+
+			if (elementType == COMMA_SEQUENCE_EXPR || elementType == CONSTANTS_BLOCK || elementType == TRENAR_EXPR)
+			{
+				alignment = Alignment.createAlignment(true);
+			}
+
+			Wrap wrap = null;
+
+			if (elementType == COMMA_SEQUENCE_EXPR && !isNewLineForbidden(this))
+			{
+				wrap = Wrap.createWrap(WrapType.NORMAL, true);
+			}
+
+			for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
+			{
+				if (!shouldCreateBlockFor(child)) continue;
+				blocks.add(createChildBlock(child, wrap, alignment));
+			}
 		}
-
-		Wrap wrap = null;
-
-		if (elementType == COMMA_SEQUENCE_EXPR && !isNewLineForbidden(this))
-		{
-			wrap = Wrap.createWrap(WrapType.NORMAL, true);
-		}
-
-		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
-		{
-			if (!shouldCreateBlockFor(child)) continue;
-			blocks.add(createChildBlock(child, wrap, alignment));
-		}
-
 		return blocks;
 	}
 
