@@ -453,7 +453,7 @@ public interface PerlSubUtilBuiltIn
 			"default",
 			"DESTROY",
 			"else",
-			"elseif",
+//			"elseif",  dumb http://perldoc.perl.org/functions/elseif.html
 			"elsif",
 			"END",
 			"__END__",
