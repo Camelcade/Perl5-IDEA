@@ -66,6 +66,11 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 	@Transient
 	private List<VirtualFile> componentsRootsVirtualFiles = null;
 
+	public MasonSettings()
+	{
+		initGlobalVariablesSets();
+	}
+
 	public static MasonSettings getInstance(@NotNull Project project)
 	{
 		MasonSettings persisted = ServiceManager.getService(project, MasonSettings.class);
