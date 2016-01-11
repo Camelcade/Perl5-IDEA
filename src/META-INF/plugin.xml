@@ -320,6 +320,8 @@
                       order="first"/>
         <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
                               id="EmbeddedPerlEnterHandler" order="first"/>
+        <lang.formatter language="Embedded Perl"
+                        implementationClass="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlFormattingModelBuilder"/>
 
 
         <lang.namesValidator language="Embedded Perl"
