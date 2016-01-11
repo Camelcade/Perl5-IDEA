@@ -80,4 +80,15 @@ public interface PerlElementPatterns extends PerlElementTypes
 					.andNot(INSIDE_USE_VARS);
 
 
+	PsiElementPattern.Capture<PsiPerlIfCompound> INCOMPLETED_IF_COMPOUND =
+			psiElement(PsiPerlIfCompound.class)
+					.andNot(
+							psiElement()
+									.withLastChild(psiElement(PsiPerlUnconditionalBlock.class)));
+	PsiElementPattern.Capture<PerlSubNameElement> ELSE_ELSIF_PLACE =
+			psiElement(PerlSubNameElement.class)
+					.withParent(PsiPerlMethod.class)
+					.withSuperParent(2, psiElement(PsiPerlNamedListExpr.class))
+					.withSuperParent(3, psiElement(PsiPerlStatement.class).afterSibling(INCOMPLETED_IF_COMPOUND));
+
 }

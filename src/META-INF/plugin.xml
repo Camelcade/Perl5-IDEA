@@ -41,6 +41,7 @@
       <li>Added spacing control for call arguments, fixes #664</li>
       <li>Implemented spaces removal around array index, hash index and dereference, fixes #662</li>
       <li>Self-object reference variable names are now configurable in Perl5 settings, fixes #706</li>
+      <li>Adjusted live templates for elsif/else statements, defined context for if statement, fixes #736</li>
       <li>Mason<ul>
         <li>Implemented filetypes for mason: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason files.</li>
@@ -280,6 +281,8 @@
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$UnfinishedIf"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>
         <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
 

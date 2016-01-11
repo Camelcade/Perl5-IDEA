@@ -74,17 +74,17 @@
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="el" value="else&#10;{&#10;    $END$&#10;}" description="else block" toReformat="true"
+    <template name="else" value="else&#10;{&#10;    $END$&#10;}" description="else block" toReformat="true"
               toShortenFQNames="true">
         <context>
-            <option name="PERL5" value="true"/>
+            <option name="PERL5_UNFINISHED_IF" value="true"/>
         </context>
     </template>
-    <template name="eli" value="elsif($CONDITION$)&#10;{&#10;    $END$&#10;}" description="elsif block"
+    <template name="elsif" value="elsif($CONDITION$)&#10;{&#10;    $END$&#10;}" description="elsif block"
               toReformat="true" toShortenFQNames="true">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5" value="true"/>
+            <option name="PERL5_UNFINISHED_IF" value="true"/>
         </context>
     </template>
     <template name="gr" value="grep {$END$} $LIST$" description="grep expression" toReformat="true"

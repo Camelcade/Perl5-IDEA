@@ -452,9 +452,9 @@ public interface PerlSubUtilBuiltIn
 			"__DATA__",
 			"default",
 			"DESTROY",
-			"else",
+//			"else",  // moved to livetemplates
 //			"elseif",  dumb http://perldoc.perl.org/functions/elseif.html
-			"elsif",
+//			"elsif", // moved to livetemplates
 			"END",
 			"__END__",
 			"for",

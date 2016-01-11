@@ -25,6 +25,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.filetypes.PerlFileTypeTest;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
@@ -110,6 +111,20 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 
 			return statement != null
 					&& statement.getTextOffset() == element.getTextOffset();
+		}
+	}
+
+	public static class UnfinishedIf extends PerlTemplateContextType
+	{
+		public UnfinishedIf()
+		{
+			super("PERL5_UNFINISHED_IF", "if statement", Generic.class);
+		}
+
+		@Override
+		public boolean isInContext(PsiElement element)
+		{
+			return PerlElementPatterns.ELSE_ELSIF_PLACE.accepts(element);
 		}
 	}
 
