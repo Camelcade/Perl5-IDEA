@@ -5,8 +5,10 @@ import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -185,7 +187,7 @@ public class PerlSdkType extends SdkType
 			return "Unknown version";
 		}
 
-		throw new RuntimeException("Error getting perl version text");
+		throw new IncorrectOperationException("Error getting perl version text from: " + StringUtil.join(versionLines, "\n"));
 	}
 
 
