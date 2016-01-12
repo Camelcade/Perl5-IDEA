@@ -462,7 +462,7 @@ private compound_statement ::=
 named_block ::= BLOCK_NAME block
 
 if_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_IF conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
-unless_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=2}
+unless_compound ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=2 extends=if_compound}
 private if_compound_elsif ::= [POD] [PACKAGE_CORE_IDENTIFIER] RESERVED_ELSIF conditional_block  {pin=3}
 private if_compound_else ::= [POD] [PACKAGE_CORE_IDENTIFIER] RESERVED_ELSE unconditional_block {pin=3}
 unconditional_block ::= block

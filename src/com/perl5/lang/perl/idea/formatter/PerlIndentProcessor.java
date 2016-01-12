@@ -42,6 +42,7 @@ public class PerlIndentProcessor implements PerlElementTypes
 			METHOD_DEFINITION,
 			FUNC_DEFINITION,
 			IF_COMPOUND,
+			UNLESS_COMPOUND,
 			FOR_COMPOUND,
 			FOREACH_COMPOUND,
 			CONDITIONAL_BLOCK,
