@@ -16,14 +16,14 @@
 
 package com.perl5.lang.perl.parser.perlswitch.psi;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlSwitchCompoundStatementImpl extends ASTWrapperPsiElement implements PerlSwitchCompoundStatement
+public class PerlSwitchCompoundStatementImpl extends PsiPerlStatementImpl implements PerlSwitchCompoundStatement
 {
 	public PerlSwitchCompoundStatementImpl(@NotNull ASTNode node)
 	{

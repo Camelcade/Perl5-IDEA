@@ -22,7 +22,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.idea.completion.providers.PerlSubBuiltInCompletionProvider;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.PerlParserUtil;
@@ -54,12 +53,6 @@ public class PerlParserExtensions implements ApplicationComponent
 			// add tokens to lex
 			Map<String, IElementType> customTokens = extension.getReservedTokens();
 			PerlLexer.RESERVED_TOKEN_TYPES.putAll(customTokens);
-
-			// add completions
-			for (String subName : customTokens.keySet())
-			{
-				PerlSubBuiltInCompletionProvider.addCompletion(subName);
-			}
 
 			// add tokens to fallback set
 			Collection<IElementType> tokensList = customTokens.values();

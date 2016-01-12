@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.parser.perlswitch;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlElementType;
@@ -23,7 +23,7 @@ import com.perl5.lang.perl.PerlTokenType;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public interface SwitchPerlParserExtension
+public interface PerlSwitchElementTypes
 {
 	IElementType RESERVED_SWITCH = new PerlTokenType("switch");
 	IElementType RESERVED_CASE = new PerlTokenType("case");

@@ -31,7 +31,7 @@ public interface PerlSubUtilBuiltIn
 			"__PACKAGE__",
 			"__SUB__",
 			"break",
-			"continue",
+//			"continue", moved to livetemplates
 //			"dump",	// it's not argumentless
 			"endgrent",
 			"endhostent",
@@ -307,7 +307,7 @@ public interface PerlSubUtilBuiltIn
 			"caller",
 			"continue",
 			"die",
-			"do",
+//			"do", // moved to livetemplates
 			"dump",
 			"evalbytes",
 			"exit",
@@ -457,15 +457,15 @@ public interface PerlSubUtilBuiltIn
 //			"elsif", // moved to livetemplates
 			"END",
 			"__END__",
-			"for",
-			"foreach",
-			"given",
+//			"for",		// moved to livetemplates
+//			"foreach",	// moved to livetemplates
+//			"given",
 			"INIT",
 			"UNITCHECK",
-			"unless",
-			"until",
-			"when",
-			"while",
+//			"unless", // moved to livetemplates
+//			"until",
+//			"when",
+//			"while",
 			"x",
 
 			// Operators are being checked explicitly

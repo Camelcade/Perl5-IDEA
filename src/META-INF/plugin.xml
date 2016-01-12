@@ -41,7 +41,7 @@
       <li>Added spacing control for call arguments, fixes #664</li>
       <li>Implemented spaces removal around array index, hash index and dereference, fixes #662</li>
       <li>Self-object reference variable names are now configurable in Perl5 settings, fixes #706</li>
-      <li>Adjusted live templates for elsif/else statements, defined context for if statement, fixes #736</li>
+      <li>Significally improved live templates, added templates for parser extensions</li>
       <li>Mason<ul>
         <li>Implemented filetypes for mason: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason files.</li>
@@ -81,6 +81,7 @@
       <li>Braceless namespaces now being parsed the right way, fixes #674</li>
       <li>Fixed bug with occasional here-doc terminator indention on copy-paste or re-formatting, fixes #631</li>
       <li>Fixed bug with here-doc content re-formatting, fixes #628</li>
+      <li>Fixed bug with quotes auto-closing in package and test files.</li>
       </ul>
       </p>
 
@@ -127,7 +128,7 @@
         <packageProcessor key="Moo"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
 
-        <parserExtension implementation="com.perl5.lang.perl.parser.SwitchPerlParserExtensionImpl"/>
+        <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchPerlParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.MethodSignaturesSimpleParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtensionImpl"/>
     </extensions>
@@ -235,6 +236,8 @@
         <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
         <quoteHandler fileType="Perl5 script" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+        <quoteHandler fileType="Perl5 test" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+        <quoteHandler fileType="Perl5 package" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlPsiHeredocManipulator"/>
@@ -278,11 +281,19 @@
 
         <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
+        <defaultLiveTemplatesProvider
+                implementation="com.perl5.lang.perl.parser.method.signatures.simple.idea.liveTemplates.MethodSignaturesSimpleTemplatesProvider"/>
+        <defaultLiveTemplatesProvider
+                implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplatesProvider"/>
+        <defaultLiveTemplatesProvider
+                implementation="com.perl5.lang.perl.parser.moose.idea.liveTemplates.MooseTemplatesProvider"/>
+
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
         <liveTemplateContext
                 implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$UnfinishedIf"/>
+
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>
         <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
 

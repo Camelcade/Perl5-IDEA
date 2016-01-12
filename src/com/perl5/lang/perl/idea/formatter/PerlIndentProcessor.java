@@ -25,12 +25,13 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlIndentProcessor implements PerlElementTypes
+public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementTypes
 {
 	public static final PerlIndentProcessor INSTANCE = new PerlIndentProcessor();
 
@@ -49,6 +50,10 @@ public class PerlIndentProcessor implements PerlElementTypes
 			CONDITIONAL_BLOCK_WHILE,
 			CONTINUE_BLOCK,
 			UNCONDITIONAL_BLOCK,
+
+			// fixme see #745
+			SWITCH_COMPOUND,
+			CASE_COMPOUND,
 
 			DO_EXPR,
 			EVAL_EXPR,
