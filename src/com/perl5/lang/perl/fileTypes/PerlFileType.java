@@ -32,7 +32,6 @@ public class PerlFileType extends LanguageFileType
 {
 
 	public static final PerlFileType INSTANCE = new PerlFileType();
-	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
 	public PerlFileType()
 	{

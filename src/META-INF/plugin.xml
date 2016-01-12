@@ -42,6 +42,7 @@
       <li>Implemented spaces removal around array index, hash index and dereference, fixes #662</li>
       <li>Self-object reference variable names are now configurable in Perl5 settings, fixes #706</li>
       <li>Significally improved live templates, added templates for parser extensions</li>
+      <li>Implemented quote handler for regexps and string-like operators, fixes #741</li>
       <li>Mason<ul>
         <li>Implemented filetypes for mason: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason files.</li>
@@ -176,7 +177,7 @@
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
 
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
-                      id="PerlTypedHandler"/>
+                      id="PerlTypedHandler" order="first"/>
 
         <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandlerDelegate"
                               id="PerlEnterHandler" order="first"/>

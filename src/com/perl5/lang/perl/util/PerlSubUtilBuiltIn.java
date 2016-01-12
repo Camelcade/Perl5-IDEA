@@ -135,14 +135,16 @@ public interface PerlSubUtilBuiltIn
 	Set<String> BUILT_IN = new HashSet<String>(Arrays.asList(
 			// http://perldoc.perl.org/perlfunc.html
 //			Functions for SCALARs or strings
-			"q",
-			"qq",
-			"tr",
-			"y",
-			"m",
-			"qr",
-			"s",
-			"qw",
+
+			// TypedHandler now handles them
+//			"q",
+//			"qq",
+//			"tr",
+//			"y",
+//			"m",
+//			"qr",
+//			"s",
+//			"qw",
 
 			"chomp",
 			"chop",

@@ -16,18 +16,28 @@
 
 package com.perl5.lang.perl.idea.editor;
 
+import com.intellij.codeInsight.editorActions.MultiCharQuoteHandler;
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlQuoteHandler extends SimpleTokenSetQuoteHandler
+public class PerlQuoteHandler extends SimpleTokenSetQuoteHandler implements MultiCharQuoteHandler, PerlElementTypes
 {
-	public static final TokenSet OPENING_QUOTES = TokenSet.create(PerlElementTypes.QUOTE_SINGLE_OPEN, PerlElementTypes.QUOTE_DOUBLE_OPEN, PerlElementTypes.QUOTE_TICK_OPEN);
-	public static final TokenSet CLOSING_QUOTES = TokenSet.create(PerlElementTypes.QUOTE_SINGLE_CLOSE, PerlElementTypes.QUOTE_DOUBLE_CLOSE, PerlElementTypes.QUOTE_TICK_CLOSE);
+	public static final TokenSet OPENING_QUOTES = TokenSet.create(
+			QUOTE_SINGLE_OPEN,
+			QUOTE_DOUBLE_OPEN,
+			QUOTE_TICK_OPEN
+	);
+	public static final TokenSet CLOSING_QUOTES = TokenSet.create(
+			QUOTE_SINGLE_CLOSE,
+			QUOTE_DOUBLE_CLOSE,
+			QUOTE_TICK_CLOSE
+	);
 
 	public PerlQuoteHandler()
 	{
@@ -46,4 +56,10 @@ public class PerlQuoteHandler extends SimpleTokenSetQuoteHandler
 		return OPENING_QUOTES.contains(iterator.getTokenType());
 	}
 
+	@Nullable
+	@Override
+	public CharSequence getClosingQuote(HighlighterIterator iterator, int offset)
+	{
+		return null;
+	}
 }

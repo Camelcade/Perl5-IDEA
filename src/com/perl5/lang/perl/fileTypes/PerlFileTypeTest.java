@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.filetypes;
 
-import com.intellij.lang.Language;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +28,6 @@ import javax.swing.*;
 public class PerlFileTypeTest extends PerlFileType
 {
 	public static final PerlFileTypeTest INSTANCE = new PerlFileTypeTest();
-	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
 	@NotNull
 	@Override
