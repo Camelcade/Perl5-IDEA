@@ -444,7 +444,11 @@
                         implementationClass="com.perl5.lang.mason.idea.formatter.MasonFormattingModelBuilder"/>
         <lang.indentStrategy language="Mason template"
                              implementationClass="com.perl5.lang.mason.idea.editor.MasonIndentStrategy"/>
-        <quoteHandler fileType="Mason template"
+        <quoteHandler fileType="Mason top-level component"
+                      className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+        <quoteHandler fileType="Mason internal component"
+                      className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+        <quoteHandler fileType="Mason pure Perl component"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
         <lang.refactoringSupport language="Mason template"
