@@ -71,7 +71,7 @@ public class PerlPackageHierarchyBrowser extends TypeHierarchyBrowserBase
 		{
 			return null;
 		}
-		return ((PerlPackageHierarchyNodeDescriptor) descriptor).getPsiElement();
+		return ((PerlPackageHierarchyNodeDescriptor) descriptor).getPerlElement();
 	}
 
 	@Override

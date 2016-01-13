@@ -43,7 +43,7 @@ public class MasonFileImpl extends PerlFileImpl implements PerlImplicitVariables
 	{
 		super(viewProvider, MasonLanguage.INSTANCE);
 	}
- 
+
 	public MasonFileImpl(@NotNull FileViewProvider viewProvider, Language language)
 	{
 		super(viewProvider, language);

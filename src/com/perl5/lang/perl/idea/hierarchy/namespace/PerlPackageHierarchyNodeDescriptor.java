@@ -24,6 +24,8 @@ import com.intellij.openapi.roots.ui.util.CompositeAppearance;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.SmartPointerManager;
+import com.intellij.psi.SmartPsiElementPointer;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 
 /**
@@ -31,15 +33,18 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
  */
 public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 {
+	protected final SmartPsiElementPointer myPerlElementPointer;
+
 	public PerlPackageHierarchyNodeDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase)
 	{
 		super(element.getProject(), parentDescriptor, element, isBase);
+		myPerlElementPointer = SmartPointerManager.getInstance(myProject).createSmartPsiElementPointer(element);
 	}
 
 	@Override
 	public boolean isValid()
 	{
-		PsiElement element = getPsiElement();
+		PsiElement element = getPerlElement();
 		return element != null && element.isValid();
 	}
 
@@ -51,7 +56,7 @@ public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 
 		myHighlightedText = new CompositeAppearance();
 
-		NavigatablePsiElement element = (NavigatablePsiElement) getPsiElement();
+		NavigatablePsiElement element = (NavigatablePsiElement) getPerlElement();
 
 		if (element == null)
 		{
@@ -69,7 +74,7 @@ public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 
 			myHighlightedText.getEnding().addText(presentation.getPresentableText());
 			myHighlightedText.getEnding().addText(" "
-							+ "(" + ((PerlNamespaceDefinition) getPsiElement()).getMroType().toString() + "), "
+							+ "(" + ((PerlNamespaceDefinition) getPerlElement()).getMroType().toString() + "), "
 							+ presentation.getLocationString(),
 					HierarchyNodeDescriptor.getPackageNameAttributes());
 		}
@@ -80,5 +85,10 @@ public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 			result = true;
 		}
 		return result;
+	}
+
+	public PsiElement getPerlElement()
+	{
+		return myPerlElementPointer.getElement();
 	}
 }

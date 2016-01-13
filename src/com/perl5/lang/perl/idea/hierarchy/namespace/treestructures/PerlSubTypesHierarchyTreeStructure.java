@@ -44,7 +44,7 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure
 
 		if (descriptor instanceof PerlPackageHierarchyNodeDescriptor)
 		{
-			PsiElement element = descriptor.getPsiElement();
+			PsiElement element = ((PerlPackageHierarchyNodeDescriptor) descriptor).getPerlElement();
 			if (element instanceof PerlNamespaceDefinition)
 			{
 				for (PerlNamespaceDefinition namespaceDefinition : ((PerlNamespaceDefinition) element).getChildNamespaces())
