@@ -90,7 +90,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="143"/>
+    <idea-version since-build="139"/>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
          on how to target different products -->
@@ -193,7 +193,7 @@
         <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType"/>
         <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
         <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
-        <lang.syntaxHighlighterFactory language="Perl5"
+        <lang.syntaxHighlighterFactory language="Perl5" key="Perl5"
                                        implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
 
         <lang.psiStructureViewFactory language="Perl5"
@@ -321,7 +321,7 @@
                                implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
         <lang.fileViewProviderFactory language="Embedded Perl"
                                       implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
-        <lang.syntaxHighlighterFactory language="Embedded Perl"
+        <lang.syntaxHighlighterFactory language="Embedded Perl" key="Embedded Perl"
                                        implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Embedded Perl"
                                  implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
@@ -366,7 +366,7 @@
                                implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
         <lang.fileViewProviderFactory language="Mojolicious Perl"
                                       implementationClass="com.perl5.lang.mojolicious.MojoliciousFileViewProviderFactory"/>
-        <lang.syntaxHighlighterFactory language="Mojolicious Perl"
+        <lang.syntaxHighlighterFactory language="Mojolicious Perl" key="Mojolicious Perl"
                                        implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Mojolicious Perl"
                                  implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousFindUsagesProvider"/>
@@ -416,7 +416,7 @@
 
         <projectConfigurable
                 provider="com.perl5.lang.mason.idea.configuration.MasonSettingsConfigurableProvider"
-                parentId="PERL5_MAIN_SETTINGS"/>
+                parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
         <editorNotificationProvider
                 implementation="com.perl5.lang.mason.idea.editor.notification.MasonPathsNotification"/>
 
@@ -426,7 +426,7 @@
         <typeHierarchyProvider language="Mason2"
                                implementationClass="com.perl5.lang.mason.idea.hierarchy.MasonPackageHierarchyProvider"/>
         <fileTypeFactory implementation="com.perl5.lang.mason.filetypes.MasonFileTypeFactory"/>
-        <lang.syntaxHighlighterFactory language="Mason2"
+        <lang.syntaxHighlighterFactory language="Mason2" key="Mason2"
                                        implementationClass="com.perl5.lang.mason.idea.highlighter.MasonSyntaxHighlighterFactory"/>
         <typedHandler implementation="com.perl5.lang.mason.idea.editor.MasonTypedHandler" order="first"/>
         <lang.findUsagesProvider language="Mason2"
@@ -466,7 +466,7 @@
 
         <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypeFactory"/>
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
-        <lang.syntaxHighlighterFactory language="Perl5 POD"
+        <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"
                                        implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
         <quoteHandler fileType="POD file" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
