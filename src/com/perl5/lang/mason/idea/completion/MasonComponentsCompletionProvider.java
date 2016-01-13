@@ -24,10 +24,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.Processor;
 import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
+import com.perl5.lang.mason.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,6 +56,37 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
 			result = result.withPrefixMatcher(new PlainPrefixMatcher(fullPrefix));
 
 			final CompletionResultSet finalResultSet = result;
+
+			PsiFile psiFile = position.getContainingFile();
+			if (psiFile instanceof MasonFileImpl)
+			{
+				final VirtualFile containingFile = ((MasonFileImpl) psiFile).getRealContainingFile();
+				VirtualFile containingDir = null;
+				if (containingFile != null && (containingDir = containingFile.getParent()) != null)
+				{
+					VfsUtil.processFilesRecursively(containingDir, new MasonRootsProcessor(containingDir)
+					{
+						@Override
+						public boolean process(VirtualFile virtualFile)
+						{
+							FileType fileType = virtualFile.getFileType();
+							if (fileType instanceof MasonPurePerlComponentFileType && !containingFile.equals(virtualFile))
+							{
+								String relativePath = VfsUtil.getRelativePath(virtualFile, getRoot());
+								if (StringUtil.isNotEmpty(relativePath))
+								{
+									finalResultSet.addElement(LookupElementBuilder
+											.create(relativePath)
+											.withIcon(fileType.getIcon())
+									);
+								}
+							}
+							return true;
+						}
+					});
+				}
+			}
+
 
 			for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles())
 			{
