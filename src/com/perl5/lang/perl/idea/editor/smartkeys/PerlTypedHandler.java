@@ -33,7 +33,14 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.RegexBlock;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PsiPerlHashIndex;
+import com.perl5.lang.perl.psi.PsiPerlStringBare;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.Set;
 
 /**
  * Created by hurricup on 25.07.2015.
@@ -57,6 +64,21 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 			RESERVED_TR,
 			RESERVED_Y
 	);
+
+	private static final Set<String> SINGLE_QUOTE_OPENERS_TEXT = new THashSet<String>(Arrays.asList(
+			"q",
+			"qx",
+			"qq",
+			"qw",
+			"qr",
+			"m"
+	));
+
+	private static final Set<String> DOUBLE_QUOTE_OPENERS_TEXT = new THashSet<String>(Arrays.asList(
+			"s",
+			"tr",
+			"y"
+	));
 
 	@Override
 	public Result charTyped(char typedChar, final Project project, @NotNull final Editor editor, @NotNull PsiFile file)
@@ -112,6 +134,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 
 				if (element != null)
 				{
+					Result result = null;
 					IElementType elementType = element.getNode().getElementType();
 					if (SINGLE_QUOTE_OPENERS.contains(elementType) ||
 							(typedChar == '/' && (elementType == OPERATOR_RE || elementType == OPERATOR_NOT_RE))
@@ -121,42 +144,75 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 						{
 							return Result.CONTINUE;
 						}
-
-						char closeChar = getRegexCloseChar(typedChar, hasSpace);
-
-						if (closeChar > 0)
-						{
-
-							EditorModificationUtil.insertStringAtCaret(editor, typedChar + "" + closeChar, false, true, 1);
-							return Result.STOP;
-						}
+						result = handleSingleQuote(typedChar, hasSpace, editor);
 					}
 					else if (DOUBLE_QUOTE_OPENERS.contains(elementType))
 					{
-						char closeChar = getRegexCloseChar(typedChar, hasSpace);
-
-						if (closeChar > 0)
+						result = handleDoubleQuote(typedChar, hasSpace, editor);
+					}
+					else if (elementType == STRING_CONTENT && isInHashIndex(element))
+					{
+						if (SINGLE_QUOTE_OPENERS_TEXT.contains(element.getText()))
 						{
-							String appendix = typedChar + "" + closeChar;
-
-							if (closeChar == typedChar)
-							{
-								appendix += closeChar;
-							}
-							else
-							{
-								appendix += appendix;
-							}
-
-							EditorModificationUtil.insertStringAtCaret(editor, appendix, false, true, 1);
-							return Result.STOP;
+							result = handleSingleQuote(typedChar, hasSpace, editor);
+						}
+						else if (DOUBLE_QUOTE_OPENERS_TEXT.contains(element.getText()))
+						{
+							result = handleDoubleQuote(typedChar, hasSpace, editor);
 						}
 					}
+
+					if (result != null)
+						return result;
 				}
 			}
 		}
 
 		return super.beforeCharTyped(typedChar, project, editor, file, fileType);
+	}
+
+
+	@Nullable
+	private Result handleSingleQuote(char typedChar, boolean hasSpace, Editor editor)
+	{
+		char closeChar = getRegexCloseChar(typedChar, hasSpace);
+
+		if (closeChar > 0)
+		{
+
+			EditorModificationUtil.insertStringAtCaret(editor, typedChar + "" + closeChar, false, true, 1);
+			return Result.STOP;
+		}
+		return null;
+	}
+
+	private boolean isInHashIndex(PsiElement element)
+	{
+		return element.getParent() instanceof PsiPerlStringBare && element.getParent().getParent() instanceof PsiPerlHashIndex;
+	}
+
+	@Nullable
+	private Result handleDoubleQuote(char typedChar, boolean hasSpace, Editor editor)
+	{
+		char closeChar = getRegexCloseChar(typedChar, hasSpace);
+
+		if (closeChar > 0)
+		{
+			String appendix = typedChar + "" + closeChar;
+
+			if (closeChar == typedChar)
+			{
+				appendix += closeChar;
+			}
+			else
+			{
+				appendix += appendix;
+			}
+
+			EditorModificationUtil.insertStringAtCaret(editor, appendix, false, true, 1);
+			return Result.STOP;
+		}
+		return null;
 	}
 
 	private char getRegexCloseChar(char openingChar, boolean hasSpace)
