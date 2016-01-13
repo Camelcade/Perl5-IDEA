@@ -16,8 +16,10 @@
 
 package com.perl5.lang.mojolicious.psi.impl;
 
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
+import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,4 +39,9 @@ public class MojoliciousFileImpl extends PerlFileImpl
 		return "Mojolicious Perl5 Template";
 	}
 
+	@Override
+	protected FileType getDefaultFileType()
+	{
+		return MojoliciousFileType.INSTANCE;
+	}
 }

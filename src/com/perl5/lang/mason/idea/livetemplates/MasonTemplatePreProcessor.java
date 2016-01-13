@@ -20,7 +20,7 @@ import com.intellij.codeInsight.template.impl.TemplatePreprocessor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
+import com.perl5.lang.mason.psi.impl.MasonTemplatingFileImpl;
 
 /**
  * Created by hurricup on 10.01.2016.
@@ -30,7 +30,7 @@ public class MasonTemplatePreProcessor implements TemplatePreprocessor
 	@Override
 	public void preprocessTemplate(Editor editor, PsiFile file, int caretOffset, String textToInsert, String templateText)
 	{
-		if (file.getViewProvider().getFileType() instanceof MasonTopLevelComponentFileType && textToInsert.startsWith("<%") && caretOffset > 0)
+		if (file instanceof MasonTemplatingFileImpl && textToInsert.startsWith("<%") && caretOffset > 0)
 		{
 			Document document = editor.getDocument();
 			CharSequence text = document.getCharsSequence();

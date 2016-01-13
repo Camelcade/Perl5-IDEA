@@ -17,12 +17,7 @@
 package com.perl5.lang.mason.elementType;
 
 import com.intellij.lang.Language;
-import com.intellij.lexer.Lexer;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason.MasonFileViewProvider;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
-import com.perl5.lang.perl.lexer.PerlLexerAdapter;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 06.01.2016.
@@ -32,16 +27,5 @@ public class MasonFileElementType extends PerlFileElementType
 	public MasonFileElementType(String debugName, Language language)
 	{
 		super(debugName, language);
-	}
-
-	@Nullable
-	@Override
-	protected Lexer getLexer(PsiElement psi)
-	{
-		if (psi.getContainingFile().getViewProvider() instanceof MasonFileViewProvider)
-		{
-			return super.getLexer(psi);
-		}
-		return new PerlLexerAdapter(psi.getProject());
 	}
 }

@@ -16,12 +16,15 @@
 
 package com.perl5.lang.mason.psi.impl;
 
+import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.mason.MasonLanguage;
 import com.perl5.lang.mason.MasonUtils;
+import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -40,11 +43,22 @@ public class MasonFileImpl extends PerlFileImpl implements PerlImplicitVariables
 	{
 		super(viewProvider, MasonLanguage.INSTANCE);
 	}
+ 
+	public MasonFileImpl(@NotNull FileViewProvider viewProvider, Language language)
+	{
+		super(viewProvider, language);
+	}
 
 	@Override
 	public String toString()
 	{
-		return "Mason component";
+		return "Mason2 pure perl file";
+	}
+
+	@Override
+	protected FileType getDefaultFileType()
+	{
+		return MasonPurePerlComponentFileType.INSTANCE;
 	}
 
 	/**

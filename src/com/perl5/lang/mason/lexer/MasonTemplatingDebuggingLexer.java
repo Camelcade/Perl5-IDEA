@@ -24,9 +24,9 @@ import java.io.IOException;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonDebuggingLexer extends MasonLexer
+public class MasonTemplatingDebuggingLexer extends MasonTemplatingLexer
 {
-	public MasonDebuggingLexer(Project project)
+	public MasonTemplatingDebuggingLexer(Project project)
 	{
 		super(project);
 	}

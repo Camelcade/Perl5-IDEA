@@ -17,7 +17,7 @@
 package com.perl5.lang.mason.idea.hierarchy;
 
 import com.intellij.lang.Language;
-import com.perl5.lang.mason.MasonLanguage;
+import com.perl5.lang.mason.MasonTemplatingLanguage;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider;
 
 /**
@@ -28,6 +28,6 @@ public class MasonPackageHierarchyProvider extends PerlPackageHierarchyProvider
 	@Override
 	protected Language getLanguage()
 	{
-		return MasonLanguage.INSTANCE;
+		return MasonTemplatingLanguage.INSTANCE;
 	}
 }

@@ -420,29 +420,26 @@
         <editorNotificationProvider
                 implementation="com.perl5.lang.mason.idea.editor.notification.MasonPathsNotification"/>
 
-        <typeHierarchyProvider language="Mason template"
+
+        <lang.parserDefinition language="Mason2"
+                               implementationClass="com.perl5.lang.mason.MasonParserDefinition"/>
+        <typeHierarchyProvider language="Mason2"
                                implementationClass="com.perl5.lang.mason.idea.hierarchy.MasonPackageHierarchyProvider"/>
         <fileTypeFactory implementation="com.perl5.lang.mason.filetypes.MasonFileTypeFactory"/>
-        <lang.parserDefinition language="Mason template"
-                               implementationClass="com.perl5.lang.mason.MasonParserDefinition"/>
-        <lang.fileViewProviderFactory language="Mason template"
-                                      implementationClass="com.perl5.lang.mason.MasonFileViewProviderFactory"/>
-        <lang.syntaxHighlighterFactory language="Mason template"
+        <lang.syntaxHighlighterFactory language="Mason2"
                                        implementationClass="com.perl5.lang.mason.idea.highlighter.MasonSyntaxHighlighterFactory"/>
         <typedHandler implementation="com.perl5.lang.mason.idea.editor.MasonTypedHandler" order="first"/>
-
-        <lang.findUsagesProvider language="Mason template"
-                                 implementationClass="com.perl5.lang.mason.idea.findusages.MasonFindUsagesProvider"/>
-        <cacheBuilder fileType="Mason pure Perl component"
-                      wordsScannerClass="com.perl5.lang.mason.idea.findusages.MasonPurePerlWordsScanner"/>
-
-        <lang.foldingBuilder language="Mason template"
+        <lang.findUsagesProvider language="Mason2"
+                                 implementationClass="com.perl5.lang.mason.idea.findusages.MasonTemplatingFindUsagesProvider"/>
+        <lang.findUsagesProvider language="Mason2"
+                                 implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
+        <lang.foldingBuilder language="Mason2"
                              implementationClass="com.perl5.lang.mason.idea.folding.MasonFoldingBuilder"/>
-        <lang.namesValidator language="Mason template"
+        <lang.namesValidator language="Mason2"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-        <lang.formatter language="Mason template"
+        <lang.formatter language="Mason2"
                         implementationClass="com.perl5.lang.mason.idea.formatter.MasonFormattingModelBuilder"/>
-        <lang.indentStrategy language="Mason template"
+        <lang.indentStrategy language="Mason2"
                              implementationClass="com.perl5.lang.mason.idea.editor.MasonIndentStrategy"/>
         <quoteHandler fileType="Mason top-level component"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
@@ -450,17 +447,21 @@
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
         <quoteHandler fileType="Mason pure Perl component"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-
-        <lang.refactoringSupport language="Mason template"
+        <lang.refactoringSupport language="Mason2"
                                  implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
-
-        <lang.psiStructureViewFactory language="Mason template"
+        <lang.psiStructureViewFactory language="Mason2"
                                       implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-
-        <lang.braceMatcher language="Mason template"
+        <lang.braceMatcher language="Mason2"
                            implementationClass="com.perl5.lang.mason.idea.editor.MasonBraceMatcher"/>
         <preFormatProcessor implementation="com.perl5.lang.mason.idea.formatter.MasonPreFormatProcessor"/>
 
+
+        <lang.parserDefinition language="Mason2 Templating Language"
+                               implementationClass="com.perl5.lang.mason.MasonTemplatingParserDefinition"/>
+        <lang.fileViewProviderFactory language="Mason2 Templating Language"
+                                      implementationClass="com.perl5.lang.mason.MasonTemplatingFileViewProviderFactory"/>
+        <lang.findUsagesProvider language="Mason2 Templating Language"
+                                 implementationClass="com.perl5.lang.mason.idea.findusages.MasonTemplatingFindUsagesProvider"/>
 
 
         <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypeFactory"/>

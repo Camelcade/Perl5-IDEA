@@ -16,7 +16,7 @@
 
 package com.perl5.lang.mason.elementType;
 
-import com.perl5.lang.mason.MasonLanguage;
+import com.perl5.lang.mason.MasonTemplatingLanguage;
 import com.perl5.lang.mason.psi.impl.MasonMethodDefinitionImpl;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
@@ -31,7 +31,7 @@ public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionSt
 {
 	public MasonMethodDefinitionStubElementType(String name)
 	{
-		super(name, MasonLanguage.INSTANCE);
+		super(name, MasonTemplatingLanguage.INSTANCE);
 	}
 
 	@Override

@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  * Created by hurricup on 20.12.2015.
  */
 @SuppressWarnings("Duplicates")
-public class MasonLexer extends PerlLexerWithCustomStates implements MasonElementTypes
+public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements MasonElementTypes
 {
 	public static final Pattern MASON_EXPRESSION_FILTER_BLOCK = Pattern.compile(
 			"\\|\\s*"
@@ -164,7 +164,7 @@ public class MasonLexer extends PerlLexerWithCustomStates implements MasonElemen
 	private String BLOCK_CLOSE_TAG;
 
 
-	public MasonLexer(Project project)
+	public MasonTemplatingLexer(Project project)
 	{
 		super(project);
 	}

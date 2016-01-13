@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason;
+package com.perl5.lang.mason.elementType;
 
-import com.intellij.lang.Language;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.mason.MasonTemplatingLanguage;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 21.12.2015.
  */
-public class MasonLanguage extends Language
+public class MasonTemplatingTokenType extends IElementType
 {
-	public static final MasonLanguage INSTANCE = new MasonLanguage();
-
-	public MasonLanguage()
+	public MasonTemplatingTokenType(@NotNull @NonNls String debugName)
 	{
-		super(PerlLanguage.INSTANCE, "Mason2");
+		super(debugName, MasonTemplatingLanguage.INSTANCE);
 	}
 
-
+	public String toString()
+	{
+		return "MasonTemplatingTokenType." + super.toString();
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,35 +14,33 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.psi.impl;
+package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.embedded.EmbeddedPerlLanguage;
-import com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.mason.MasonTemplatingLanguage;
+import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 18.05.2015.
+ * Created by hurricup on 13.01.2016.
  */
-public class EmbeddedPerlFileImpl extends PerlFileImpl
+public class MasonTemplatingFileImpl extends MasonFileImpl
 {
-	public EmbeddedPerlFileImpl(@NotNull FileViewProvider viewProvider)
+	public MasonTemplatingFileImpl(@NotNull FileViewProvider viewProvider)
 	{
-		super(viewProvider, EmbeddedPerlLanguage.INSTANCE);
+		super(viewProvider, MasonTemplatingLanguage.INSTANCE);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Embedded Perl file";
+		return "Mason2 template file";
 	}
-
 
 	@Override
 	protected FileType getDefaultFileType()
 	{
-		return EmbeddedPerlFileType.INSTANCE;
+		return MasonTopLevelComponentFileType.INSTANCE;
 	}
 }

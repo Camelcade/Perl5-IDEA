@@ -23,7 +23,7 @@ import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.lang.xhtml.XHTMLLanguage;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.mason.filetypes.MasonTopLevelComponentFileType;
+import com.perl5.lang.mason.psi.impl.MasonTemplatingFileImpl;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,6 +47,6 @@ public class MasonTemplateContextType extends TemplateContextType
 	{
 		return isMyLanguage(PsiUtilCore.getLanguageAtOffset(file, offset))
 				&& !XmlContextType.isEmbeddedContent(file, offset)
-				&& file.getViewProvider().getFileType() instanceof MasonTopLevelComponentFileType;
+				&& file instanceof MasonTemplatingFileImpl;
 	}
 }

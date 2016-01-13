@@ -17,48 +17,21 @@
 package com.perl5.lang.mason;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.FileViewProviderFactory;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.SingleRootFileViewProvider;
-import com.intellij.testFramework.LightVirtualFile;
-import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonFileViewProviderFactory implements FileViewProviderFactory
+public class MasonTemplatingFileViewProviderFactory implements FileViewProviderFactory
 {
 	@NotNull
 	@Override
 	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
 	{
-		FileType fileType;
-
-		if (file instanceof LightVirtualFile && ((LightVirtualFile) file).getOriginalFile() != null)
-		{
-			fileType = ((LightVirtualFile) file).getOriginalFile().getFileType();
-		}
-		else
-		{
-			// fixme dirty hack for stupid LightVirtualFiles, we should check something like registered extensions, but duunno how yet
-			if ("mp".equals(file.getExtension()))
-			{
-				fileType = MasonPurePerlComponentFileType.INSTANCE;
-			}
-			else
-			{
-				fileType = file.getFileType();
-			}
-		}
-
-		if (fileType == MasonPurePerlComponentFileType.INSTANCE)
-		{
-			return new SingleRootFileViewProvider(manager, file, eventSystemEnabled, MasonPurePerlComponentFileType.INSTANCE);
-		}
 		return new MasonFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

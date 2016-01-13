@@ -39,7 +39,7 @@ import java.util.Set;
 public class MasonFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MasonLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MasonTemplatingLanguage.INSTANCE));
 
 
 	public MasonFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
@@ -51,7 +51,7 @@ public class MasonFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 	@NotNull
 	public Language getBaseLanguage()
 	{
-		return MasonLanguage.INSTANCE;
+		return MasonTemplatingLanguage.INSTANCE;
 	}
 
 	@Override

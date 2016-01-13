@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.lexer;
+package com.perl5.lang.mason.elementType;
 
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 21.12.2015.
  */
-public class MasonLexerAdapter extends PerlLexerWithCustomStatesAdapter
+public class MasonTemplatingElementType extends MasonTemplatingTokenType
 {
-	public MasonLexerAdapter(Project project)
+	public MasonTemplatingElementType(@NotNull @NonNls String debugName)
 	{
-		super(new MasonLexer(project));
+		super(debugName);
 	}
+
+	public String toString()
+	{
+		return "MasonTemplatingElementType." + super.toString();
+	}
+
 }

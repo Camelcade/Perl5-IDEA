@@ -21,15 +21,11 @@ package com.perl5.lang.perl;
  */
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.vfs.VirtualFileListener;
 
 public class PerlLanguage extends Language
 {
 	public static final PerlLanguage INSTANCE = new PerlLanguage();
 	public static final String NAME = "Perl5";
-	private static VirtualFileListener myChangeListener;
-
-//	protected volatile ArrayList<VirtualFile> libPaths = null;
 
 	public PerlLanguage()
 	{
