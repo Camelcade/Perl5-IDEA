@@ -321,7 +321,7 @@ public interface PerlSubUtilBuiltIn
 			"__PACKAGE__",
 			"redo",
 			"return",
-			"sub",
+//			"sub",
 			"__SUB__",
 			"wantarray",
 
@@ -485,7 +485,7 @@ public interface PerlSubUtilBuiltIn
 
 			// were in implemented
 			"eval",
-			"if",
+//			"if",
 			"package",
 			"require",
 			"no",

@@ -30,7 +30,21 @@
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="str" value="use strict; use warnings FATAL =&gt; 'all';&#10;$END$&#10;" description="strict header"
+    <template name="use strict" value="use strict;&#10;$END$&#10;" description="strict header" toReformat="true"
+              toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="false"/>
+            <option name="PERL5_PREFIX" value="true"/>
+        </context>
+    </template>
+    <template name="use parent" value="use parent qw/$PACKAGE$/;&#10;$END$" description="inheritance header"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="PACKAGE" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_PREFIX" value="true"/>
+        </context>
+    </template>
+    <template name="use warnings" value="use warnings FATAL =&gt; 'all';&#10;$END$&#10;" description="warnings header"
               toReformat="true" toShortenFQNames="true">
         <context>
             <option name="PERL5" value="false"/>
@@ -92,13 +106,6 @@
         <variable name="LIST" expression="" defaultValue="@list" alwaysStopAt="true"/>
         <context>
             <option name="PERL5" value="true"/>
-        </context>
-    </template>
-    <template name="pa" value="use parent qw/$PACKAGE$/;&#10;$END$" description="inheritance header" toReformat="true"
-              toShortenFQNames="true">
-        <variable name="PACKAGE" expression="" defaultValue="" alwaysStopAt="true"/>
-        <context>
-            <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
     <template name="unless" value="unless ($EXPRESSION$)&#10;{&#10;    $END$&#10;}" description="unless block"
