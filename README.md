@@ -18,6 +18,5 @@ There is tremendous amount of work to do in development and project really need 
 to write tests (mostly for lexer and parser at the moment).
 
 [Download current dev build jar for IDEA15](http://evstigneev.com/camelcade.jar)
-[Download current dev build jar for IDEA14](http://evstigneev.com/camelcade14.jar)
 
 Wiki: https://github.com/hurricup/Perl5-IDEA/wiki
