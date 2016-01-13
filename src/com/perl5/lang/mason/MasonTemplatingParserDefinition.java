@@ -105,6 +105,10 @@ public class MasonTemplatingParserDefinition extends MasonParserDefinition
 		{
 			return new MasonTextBlockImpl(node);
 		}
+		else if (elementType == MASON_CALL_STATEMENT)
+		{
+			return new MasonCallStatementImpl(node);
+		}
 		else if (elementType == MASON_AFTER_MODIFIER || elementType == MASON_BEFORE_MODIFIER || elementType == MASON_AUGMENT_MODIFIER)
 		{
 			return new MasonMethodModifierImpl(node);

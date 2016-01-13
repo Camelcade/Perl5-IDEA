@@ -47,7 +47,10 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
 			Project project = position.getProject();
 			MasonSettings masonSettings = MasonSettings.getInstance(project);
 
-			String fullPrefix = ((PerlString) parent).getStringContent().replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "");
+			String fullPrefix = ((PerlString) parent)
+					.getStringContent()
+					.replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "")
+					.replace(CompletionInitializationContext.DUMMY_IDENTIFIER_TRIMMED, "");
 			result = result.withPrefixMatcher(new PlainPrefixMatcher(fullPrefix));
 
 			final CompletionResultSet finalResultSet = result;

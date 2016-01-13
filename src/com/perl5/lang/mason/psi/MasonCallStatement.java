@@ -14,27 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.idea.completion;
+package com.perl5.lang.mason.psi;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.psi.PsiElement;
 
 /**
- * Created by hurricup on 10.01.2016.
+ * Created by hurricup on 13.01.2016.
  */
-public class MasonCompletionContributor extends CompletionContributor implements MasonElementPatterns
+public interface MasonCallStatement extends PsiElement
 {
-	public MasonCompletionContributor()
-	{
-		extend(
-				CompletionType.BASIC,
-				MASON_EXTENDS_VALUE_TEXT_PATTERN,
-				new MasonComponentsCompletionProvider()
-		);
-		extend(
-				CompletionType.BASIC,
-				MASON_CALL_TEMPLATE_PATTERN,
-				new MasonComponentsCompletionProvider()
-		);
-	}
 }

@@ -156,7 +156,7 @@ public class MasonTemplatingParserImpl extends MasonParserImpl
 			PerlParserImpl.expr(b, l, -1);
 			if (r = endOrRecover(b, MASON_CALL_CLOSER))
 			{
-				statementMarker.done(STATEMENT);
+				statementMarker.done(MASON_CALL_STATEMENT);
 			}
 		}
 		else if (tokenType == MASON_CLASS_OPENER)

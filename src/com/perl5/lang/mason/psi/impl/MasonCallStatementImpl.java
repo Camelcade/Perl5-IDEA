@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason.idea.completion;
+package com.perl5.lang.mason.psi.impl;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.lang.ASTNode;
+import com.perl5.lang.mason.psi.MasonCallStatement;
+import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 
 /**
- * Created by hurricup on 10.01.2016.
+ * Created by hurricup on 13.01.2016.
  */
-public class MasonCompletionContributor extends CompletionContributor implements MasonElementPatterns
+public class MasonCallStatementImpl extends PsiPerlStatementImpl implements MasonCallStatement
 {
-	public MasonCompletionContributor()
+	public MasonCallStatementImpl(ASTNode node)
 	{
-		extend(
-				CompletionType.BASIC,
-				MASON_EXTENDS_VALUE_TEXT_PATTERN,
-				new MasonComponentsCompletionProvider()
-		);
-		extend(
-				CompletionType.BASIC,
-				MASON_CALL_TEMPLATE_PATTERN,
-				new MasonComponentsCompletionProvider()
-		);
+		super(node);
 	}
 }

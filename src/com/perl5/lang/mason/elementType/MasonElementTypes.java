@@ -92,6 +92,7 @@ public interface MasonElementTypes extends MasonSyntaxElements
 	IElementType MASON_METHOD_DEFINITION = new MasonMethodDefinitionStubElementType("MASON_METHOD_DEFINITION");
 	IElementType MASON_FILTER_DEFINITION = new MasonFilterDefinitionStubElementType("MASON_FILTER_DEFINITION");
 
+	IElementType MASON_CALL_STATEMENT = new MasonTemplatingElementType("MASON_CALL_STATEMENT");
 	IElementType MASON_AROUND_MODIFIER = new MasonTemplatingElementType("MASON_AROUND_MODIFIER");
 	IElementType MASON_AFTER_MODIFIER = new MasonTemplatingElementType("MASON_AFTER_MODIFIER");
 	IElementType MASON_AUGMENT_MODIFIER = new MasonTemplatingElementType("MASON_AUGMENT_MODIFIER");

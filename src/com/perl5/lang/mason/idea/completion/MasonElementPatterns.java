@@ -18,9 +18,11 @@ package com.perl5.lang.mason.idea.completion;
 
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.mason.psi.MasonCallStatement;
 import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
@@ -35,7 +37,18 @@ public interface MasonElementPatterns extends PerlElementPatterns
 					.inside(MasonFlagsStatement.class)
 					.withParent(PsiPerlCommaSequenceExpr.class)
 					.afterLeaf(psiElement(PsiElement.class));
+
 	PsiElementPattern.Capture<PsiElement> MASON_EXTENDS_VALUE_TEXT_PATTERN =
 			psiElement(PsiElement.class)
 					.withParent(MASON_EXTENDS_VALUE_PATTERN);
+
+	PsiElementPattern.Capture<PerlStringContentElement> MASON_CALL_TEMPLATE_PATTERN =
+			psiElement(PerlStringContentElement.class)
+					.withParent(psiElement(PerlString.class).andOr(
+							psiElement().withParent(MasonCallStatement.class),
+							psiElement().withParent(
+									psiElement(PsiPerlCommaSequenceExpr.class).withParent(MasonCallStatement.class))
+					).andNot(psiElement().afterSibling(psiElement())
+					));
+
 }
