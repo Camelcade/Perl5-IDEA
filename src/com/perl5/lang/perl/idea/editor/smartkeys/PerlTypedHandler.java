@@ -97,21 +97,25 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 		// regexp quotes
 		if (!Character.isWhitespace(typedChar))
 		{
-			PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 1);
+			int offset = editor.getCaretModel().getOffset() - 1;
+			PsiElement element = file.findElementAt(offset);
 			if (element != null)
 			{
 				boolean hasSpace = false;
 
-				while (element != null && element instanceof PsiWhiteSpace)
+				while (offset > 0 && element != null && element instanceof PsiWhiteSpace)
 				{
 					hasSpace = true;
-					element = element.getPrevSibling();
+					offset = element.getTextOffset() - 1;
+					element = file.findElementAt(offset);
 				}
 
 				if (element != null)
 				{
 					IElementType elementType = element.getNode().getElementType();
-					if (SINGLE_QUOTE_OPENERS.contains(elementType))
+					if (SINGLE_QUOTE_OPENERS.contains(elementType) ||
+							(typedChar == '/' && (elementType == OPERATOR_RE || elementType == OPERATOR_NOT_RE))
+							)
 					{
 						if (elementType == RESERVED_Q && StringUtil.containsChar(AMBIGUOUS_Q_SUFFIXES, typedChar))
 						{
