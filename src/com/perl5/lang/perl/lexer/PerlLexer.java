@@ -895,7 +895,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 			if (linePos == bufferEnd || line.startsWith("=cut") && linesNumber > 0)
 			{
-				setTokenEnd(linePos);
+				setTokenEnd(linePos - 1);
 				break;
 			}
 			linesNumber++;
