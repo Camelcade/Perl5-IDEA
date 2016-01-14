@@ -31,6 +31,6 @@ public class PerlFuncDefinitionStubImpl extends PerlSubDefinitionStubImpl implem
 {
 	public PerlFuncDefinitionStubImpl(StubElement parent, String packageName, String subName, List<PerlSubArgument> arguments, PerlSubAnnotations annotations, IStubElementType elementType)
 	{
-		super(parent, packageName, subName, arguments, false, annotations, elementType);
+		super(parent, packageName, subName, arguments, annotations, elementType);
 	}
 }

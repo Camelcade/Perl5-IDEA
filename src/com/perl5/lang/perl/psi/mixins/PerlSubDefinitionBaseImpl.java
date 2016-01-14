@@ -53,10 +53,6 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	@Override
 	public boolean isMethod()
 	{
-		PerlSubDefinitionStub stub = getStub();
-		if (stub != null)
-			return stub.isMethod();
-
 		if (super.isMethod())
 			return true;
 

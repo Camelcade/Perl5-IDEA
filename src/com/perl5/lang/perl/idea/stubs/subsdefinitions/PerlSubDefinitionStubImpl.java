@@ -34,16 +34,14 @@ public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinitionBase> i
 	private final String packageName;
 	private final String subName;
 	private final List<PerlSubArgument> myArguments;
-	private final boolean isMethod;
 	private final PerlSubAnnotations myAnnotations;
 
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String subName, List<PerlSubArgument> arguments, boolean isMethod, PerlSubAnnotations annotations, IStubElementType elementType)
+	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String subName, List<PerlSubArgument> arguments, PerlSubAnnotations annotations, IStubElementType elementType)
 	{
 		super(parent, elementType);
 		this.packageName = packageName;
 		this.subName = subName;
 		myArguments = arguments;
-		this.isMethod = isMethod;
 		myAnnotations = annotations;
 	}
 
@@ -63,12 +61,6 @@ public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinitionBase> i
 	public List<PerlSubArgument> getSubArgumentsList()
 	{
 		return myArguments;
-	}
-
-	@Override
-	public boolean isMethod()
-	{
-		return isMethod;
 	}
 
 	@Override

@@ -31,6 +31,6 @@ public class PerlMethodDefinitionStubImpl extends PerlSubDefinitionStubImpl impl
 {
 	public PerlMethodDefinitionStubImpl(StubElement parent, String packageName, String subName, List<PerlSubArgument> arguments, PerlSubAnnotations annotations, IStubElementType elementType)
 	{
-		super(parent, packageName, subName, arguments, true, annotations, elementType);
+		super(parent, packageName, subName, arguments, annotations, elementType);
 	}
 }

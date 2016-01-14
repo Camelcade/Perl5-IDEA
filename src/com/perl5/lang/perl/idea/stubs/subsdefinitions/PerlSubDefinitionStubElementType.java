@@ -61,7 +61,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
 	{
 		//noinspection unchecked
-		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getSubAnnotations(), psi.isMethod());
+		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getSubAnnotations());
 	}
 
 
@@ -93,8 +93,6 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		}
 
 		stub.getSubAnnotations().serialize(dataStream);
-
-		dataStream.writeBoolean(stub.isMethod());
 	}
 
 	@NotNull
@@ -116,9 +114,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 
 		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
 
-		boolean isMethod = dataStream.readBoolean();
-
-		return createStubElement(parentStub, packageName, functionName, arguments, annotations, isMethod);
+		return createStubElement(parentStub, packageName, functionName, arguments, annotations);
 	}
 
 	@NotNull
@@ -127,11 +123,10 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 			String packageName,
 			String functionName,
 			List<PerlSubArgument> arguments,
-			PerlSubAnnotations annotations,
-			boolean isMethod
+			PerlSubAnnotations annotations
 	)
 	{
-		return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, isMethod, annotations, this);
+		return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
 	}
 
 	@Override

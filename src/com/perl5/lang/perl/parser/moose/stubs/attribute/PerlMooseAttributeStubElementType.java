@@ -54,8 +54,7 @@ public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElem
 			String packageName,
 			String functionName,
 			List<PerlSubArgument> arguments,
-			PerlSubAnnotations annotations,
-			boolean isMethod
+			PerlSubAnnotations annotations
 	)
 	{
 		return new PerlMooseAttributeStubImpl(parentStub, packageName, functionName, arguments, annotations, this);

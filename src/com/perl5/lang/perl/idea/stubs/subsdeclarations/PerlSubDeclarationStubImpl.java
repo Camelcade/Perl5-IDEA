@@ -53,12 +53,6 @@ public class PerlSubDeclarationStubImpl extends StubBase<PsiPerlSubDeclaration> 
 	}
 
 	@Override
-	public boolean isMethod()
-	{
-		return myAnnotations.isMethod();
-	}
-
-	@Override
 	public PerlSubAnnotations getSubAnnotations()
 	{
 		return myAnnotations;

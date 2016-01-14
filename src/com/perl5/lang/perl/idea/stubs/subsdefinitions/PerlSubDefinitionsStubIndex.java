@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PerlSubDefinitionBase>
 {
-	public static final int VERSION = 5;
+	public static final int VERSION = 1;
 	public static final StubIndexKey<String, PerlSubDefinitionBase> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
 
 	@Override

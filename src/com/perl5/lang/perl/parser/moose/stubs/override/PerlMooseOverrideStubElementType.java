@@ -63,8 +63,7 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
 			String packageName,
 			String functionName,
 			List<PerlSubArgument> arguments,
-			PerlSubAnnotations annotations,
-			boolean isMethod
+			PerlSubAnnotations annotations
 	)
 	{
 		return new PerlMooseOverrideStubImpl(parentStub, packageName, functionName, arguments, annotations, this);

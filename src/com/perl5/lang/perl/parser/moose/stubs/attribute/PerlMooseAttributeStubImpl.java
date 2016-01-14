@@ -38,6 +38,6 @@ public class PerlMooseAttributeStubImpl extends PerlSubDefinitionStubImpl implem
 			IStubElementType elementType
 	)
 	{
-		super(parent, packageName, subName, arguments, true, annotations, elementType);
+		super(parent, packageName, subName, arguments, annotations, elementType);
 	}
 }

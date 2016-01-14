@@ -38,6 +38,6 @@ public class PerlMooseOverrideStubImpl extends PerlSubDefinitionStubImpl impleme
 			IStubElementType elementType
 	)
 	{
-		super(parent, packageName, subName, arguments, true, annotations, elementType);
+		super(parent, packageName, subName, arguments, annotations, elementType);
 	}
 }

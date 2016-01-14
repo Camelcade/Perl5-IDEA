@@ -40,13 +40,6 @@ public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<St
 	public String getSubName();
 
 	/**
-	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
-	 *
-	 * @return result
-	 */
-	public boolean isMethod();
-
-	/**
 	 * Checks PSI tree before a sub definition for annotations and builds annotations object
 	 *
 	 * @return PerlSubAnnotation object
