@@ -285,8 +285,6 @@
         <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.perl.parser.method.signatures.simple.idea.liveTemplates.MethodSignaturesSimpleTemplatesProvider"/>
         <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplatesProvider"/>
-        <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.perl.parser.moose.idea.liveTemplates.MooseTemplatesProvider"/>
 
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
@@ -295,8 +293,17 @@
         <liveTemplateContext
                 implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$UnfinishedIf"/>
 
+
+        <defaultLiveTemplatesProvider
+                implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplatesProvider"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>
         <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
+
+
+        <liveTemplateContext
+                implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplateContextType"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlInSwitchAfterCaseTemplateContextType"/>
 
         <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
 

@@ -101,7 +101,12 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 	{
 		public Prefix()
 		{
-			super("PERL5_PREFIX", "Prefix", Generic.class);
+			this("PERL5_PREFIX", "Prefix");
+		}
+
+		public Prefix(@NotNull String id, @NotNull String presentableName)
+		{
+			super(id, presentableName, Generic.class);
 		}
 
 		@Override

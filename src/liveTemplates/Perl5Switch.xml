@@ -23,19 +23,19 @@
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="case" value="case $COND$ { $CODE$ }&#10;$END$" description="case block" toReformat="true"
-              toShortenFQNames="true" shortcut="SPACE">
+    <template name="case" value="case $COND$ { $CODE$ }&#10;$END$" shortcut="SPACE" description="case block"
+              toReformat="true" toShortenFQNames="true">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="CODE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="true"/>
+            <option name="PERL5_INSIDE_SWITCH" value="true"/>
         </context>
     </template>
-    <template name="else" value="else { $CODE$ }&#10;$END$" description="else block" toReformat="true"
-              toShortenFQNames="true" shortcut="SPACE">
+    <template name="else" value="else { $CODE$ }&#10;$END$" shortcut="SPACE" description="else block" toReformat="true"
+              toShortenFQNames="true">
         <variable name="CODE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="true"/>
+            <option name="PERL5_INSIDE_SWITCH_AFTER_CASE" value="true"/>
         </context>
     </template>
 </templateSet>
