@@ -119,17 +119,17 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 		}
 	}
 
-	public static class UnfinishedIf extends PerlTemplateContextType
+	public static class UnfinishedIf extends PerlTemplateContextType.Prefix
 	{
 		public UnfinishedIf()
 		{
-			super("PERL5_UNFINISHED_IF", "if statement", Generic.class);
+			super("PERL5_UNFINISHED_IF", "Unclosed if statement");
 		}
 
 		@Override
 		public boolean isInContext(PsiElement element)
 		{
-			return PerlElementPatterns.ELSE_ELSIF_PLACE.accepts(element);
+			return super.isInContext(element) && PerlElementPatterns.ELSE_ELSIF_PLACE.accepts(element);
 		}
 	}
 

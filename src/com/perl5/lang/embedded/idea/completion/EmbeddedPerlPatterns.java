@@ -26,9 +26,9 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
 /**
  * Created by hurricup on 14.01.2016.
  */
-public class EmbeddedPerlPatterns implements PerlElementTypes
+public interface EmbeddedPerlPatterns extends PerlElementTypes
 {
-	public static final PsiElementPattern.Capture<PsiElement> BROKEN_OPEN_MARKER_PATTERN =
+	PsiElementPattern.Capture<PsiElement> BROKEN_OPEN_MARKER_PATTERN =
 			psiElement(QUESTION).withParent(
 					psiElement(PsiErrorElement.class).afterSibling(
 							psiElement(PsiErrorElement.class).withChild(psiElement(LEFT_ANGLE))

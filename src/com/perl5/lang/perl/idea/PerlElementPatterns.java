@@ -32,6 +32,8 @@ import static com.intellij.patterns.PlatformPatterns.psiFile;
  */
 public interface PerlElementPatterns extends PerlElementTypes
 {
+	PsiElementPattern.Capture<PsiElement> WHITE_SPACE_AND_COMMENTS = psiElement().whitespaceCommentOrError();
+
 	PsiElementPattern.Capture<PerlStringContentElementImpl> STRING_CONENT_PATTERN = psiElement(PerlStringContentElementImpl.class);
 	ElementPattern<PsiElement> SQ_OPENING_QUOTE = psiElement(QUOTE_SINGLE_OPEN);
 	PsiElementPattern.Capture<PerlStringContentElementImpl> SQ_STRING_BEGIN = STRING_CONENT_PATTERN.afterLeaf(SQ_OPENING_QUOTE).inside(PsiPerlStringSq.class);
@@ -80,10 +82,10 @@ public interface PerlElementPatterns extends PerlElementTypes
 					.andNot(
 							psiElement()
 									.withLastChild(psiElement(PsiPerlUnconditionalBlock.class)));
-	PsiElementPattern.Capture<PerlSubNameElement> ELSE_ELSIF_PLACE =
-			psiElement(PerlSubNameElement.class)
-					.withParent(PsiPerlMethod.class)
-					.withSuperParent(2, psiElement(PsiPerlNamedListExpr.class))
-					.withSuperParent(3, psiElement(PsiPerlStatement.class).afterSibling(INCOMPLETED_IF_COMPOUND));
+
+	PsiElementPattern.Capture<PsiElement> ELSE_ELSIF_PLACE =
+			psiElement().inside(
+					psiElement(PsiPerlStatement.class).afterSiblingSkipping(WHITE_SPACE_AND_COMMENTS, INCOMPLETED_IF_COMPOUND)
+			);
 
 }

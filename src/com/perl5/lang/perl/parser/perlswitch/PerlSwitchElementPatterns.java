@@ -18,6 +18,7 @@ package com.perl5.lang.perl.parser.perlswitch;
 
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.parser.perlswitch.psi.PerlCaseCompoundStatement;
 import com.perl5.lang.perl.parser.perlswitch.psi.PerlSwitchCompoundStatement;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
@@ -28,16 +29,16 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
 /**
  * Created by hurricup on 15.01.2016.
  */
-public class PerlSwitchElementPatterns
+public interface PerlSwitchElementPatterns extends PerlElementPatterns
 {
-	public static final PsiElementPattern.Capture<PsiPerlStatement> STATEMENT_IN_SWITCH =
+	PsiElementPattern.Capture<PsiPerlStatement> STATEMENT_IN_SWITCH =
 			psiElement(PsiPerlStatement.class).withParent(
 					psiElement(PsiPerlBlock.class).withParent(PerlSwitchCompoundStatement.class)
 			);
 
-	public static final PsiElementPattern.Capture<PsiElement> SWITCH_PREFIX_PATTERN = psiElement().inside(STATEMENT_IN_SWITCH);
+	PsiElementPattern.Capture<PsiElement> SWITCH_PREFIX_PATTERN = psiElement().inside(STATEMENT_IN_SWITCH);
 
-	public static final PsiElementPattern.Capture<PsiElement> SWITCH_PREFIX_AFTER_CASE_PATTERN = psiElement().inside(
-			STATEMENT_IN_SWITCH.afterSibling(psiElement(PerlCaseCompoundStatement.class))
+	PsiElementPattern.Capture<PsiElement> SWITCH_PREFIX_AFTER_CASE_PATTERN = psiElement().inside(
+			STATEMENT_IN_SWITCH.afterSiblingSkipping(WHITE_SPACE_AND_COMMENTS, psiElement(PerlCaseCompoundStatement.class))
 	);
 }
