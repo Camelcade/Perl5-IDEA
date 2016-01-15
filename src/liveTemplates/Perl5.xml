@@ -15,7 +15,8 @@
   ~ limitations under the License.
   -->
 <templateSet group="Perl5">
-    <template name="if" value="if ($CONDITION$)&#10;{&#10;    $END$&#10;}" description="if block" toReformat="true"
+    <template name="if" value="if ($CONDITION$)&#10;{&#10;    $END$&#10;}" shortcut="SPACE" description="if block"
+              toReformat="true"
               toShortenFQNames="true">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
@@ -23,7 +24,7 @@
         </context>
     </template>
     <template name="sub" value="sub $NAME$ &#10;{&#10;    my ($ARGUMENTS$) = @_;&#10;    $END$&#10;}"
-              description="new sub" toReformat="true" toShortenFQNames="true">
+              description="new sub" toReformat="true" toShortenFQNames="true" shortcut="SPACE">
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="ARGUMENTS" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
@@ -52,7 +53,7 @@
         </context>
     </template>
     <template name="foreach" value="foreach my $ELEMENT$ ($LIST$)&#10;{&#10;    $END$&#10;}" description="foreach block"
-              toReformat="true" toShortenFQNames="true">
+              toReformat="true" toShortenFQNames="true" shortcut="SPACE">
         <variable name="ELEMENT" expression="&quot;$element&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="LIST" expression="&quot;@list&quot;" defaultValue="" alwaysStopAt="true"/>
         <context>
@@ -60,13 +61,13 @@
         </context>
     </template>
     <template name="do" value="do&#10;{&#10;    $END$&#10;} " description="do block" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
     <template name="map" value="map {$END$} $LIST$" description="map expression" toReformat="false"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="LIST" expression="" defaultValue="&quot;@list&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5" value="true"/>
@@ -80,7 +81,7 @@
         </context>
     </template>
     <template name="for" value="for(my $INIT$; $CONDITION$; $INCREMENT$)&#10;{&#10;    $END$&#10;}"
-              description="for block" toReformat="true" toShortenFQNames="true">
+              description="for block" toReformat="true" toShortenFQNames="true" shortcut="SPACE">
         <variable name="INIT" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="INCREMENT" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -89,48 +90,48 @@
         </context>
     </template>
     <template name="else" value="else&#10;{&#10;    $END$&#10;}" description="else block" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <context>
             <option name="PERL5_UNFINISHED_IF" value="true"/>
         </context>
     </template>
     <template name="elsif" value="elsif($CONDITION$)&#10;{&#10;    $END$&#10;}" description="elsif block"
-              toReformat="true" toShortenFQNames="true">
+              toReformat="true" toShortenFQNames="true" shortcut="SPACE">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_UNFINISHED_IF" value="true"/>
         </context>
     </template>
     <template name="grep" value="grep {$END$} $LIST$" description="grep expression" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="LIST" expression="" defaultValue="@list" alwaysStopAt="true"/>
         <context>
             <option name="PERL5" value="true"/>
         </context>
     </template>
     <template name="unless" value="unless ($EXPRESSION$)&#10;{&#10;    $END$&#10;}" description="unless block"
-              toReformat="true" toShortenFQNames="true">
+              toReformat="true" toShortenFQNames="true" shortcut="SPACE">
         <variable name="EXPRESSION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
     <template name="given" value="given ($EXPRESSION$)&#10;{&#10;    $END$&#10;}" description="given block"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="EXPRESSION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
     <template name="while" value="while ($EXPR$)&#10;{&#10;    $END$&#10;}" description="while block" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
     <template name="continue" value="continue&#10;{&#10;    $END$&#10;}" description="continue block" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <context>
             <option name="PERL5" value="true"/>
         </context>
@@ -231,7 +232,7 @@
         </context>
     </template>
     <template name="until" value="until ($EXR$)&#10;{&#10;    $END$&#10;}" description="until block" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="EXR" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>

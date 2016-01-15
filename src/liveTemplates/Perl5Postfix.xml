@@ -16,42 +16,42 @@
 
 <templateSet group="Perl5 postfix">
     <template name="if" value="if ($CONDITION$);&#10;$END$" description="postfix if" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_POSTFIX" value="true"/>
         </context>
     </template>
     <template name="unless" value="unless ($CONDITION$);&#10;$END$" description="postfix unless" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_POSTFIX" value="true"/>
         </context>
     </template>
     <template name="while" value="while ($CONDITION$);&#10;$END$" description="postfix while" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_POSTFIX" value="true"/>
         </context>
     </template>
     <template name="until" value="until ($CONDITION$);&#10;$END$" description="postfix until" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_POSTFIX" value="true"/>
         </context>
     </template>
     <template name="for" value="for ($LIST$);&#10;$END$" description="postfix for" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_POSTFIX" value="true"/>
         </context>
     </template>
     <template name="foreach" value="foreach ($LIST$);&#10;$END$&#10;" description="postfix foreach" toReformat="true"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="LIST" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_POSTFIX" value="true"/>

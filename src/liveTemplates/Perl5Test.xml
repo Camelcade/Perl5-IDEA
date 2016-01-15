@@ -17,7 +17,7 @@
 
 <templateSet group="Perl5 test">
     <template name="subtest" value="subtest $NAME$ =&gt; sub{&#10;    $END$&#10;};" description="Subtest"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="NAME" expression="" defaultValue="testname" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="false"/>
@@ -25,7 +25,7 @@
         </context>
     </template>
     <template name="ok" value="ok( $COND$, '$NAME$' );&#10;$END$" description="ok assertion" toReformat="false"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
@@ -34,7 +34,7 @@
         </context>
     </template>
     <template name="is" value="is( $COND$, $EXPECTED$, '$NAME$' );&#10;$END$" description="is assertion"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -44,7 +44,7 @@
         </context>
     </template>
     <template name="isnt" value="isnt( $COND$, $EXPECTED$, '$NAME$' );&#10;$END$" description="isnt assertion"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -54,7 +54,7 @@
         </context>
     </template>
     <template name="like" value="like( $COND$, $EXPECTED$, '$NAME$' );&#10;$END$" description="like assertion"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -64,7 +64,7 @@
         </context>
     </template>
     <template name="unlike" value="unlike( $COND$, $EXPECTED$, '$NAME$' );&#10;$END$" description="unlike assertion"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -74,7 +74,7 @@
         </context>
     </template>
     <template name="cmp_ok" value="cmp_ok( $COND$, '$OP$', $EXPECTED$, '$NAME$' );&#10;$END$"
-              description="cmp_ok assertion" toReformat="false" toShortenFQNames="true">
+              description="cmp_ok assertion" toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="OP" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -85,7 +85,7 @@
         </context>
     </template>
     <template name="can_ok" value="can_ok( $COND$, qw/$SUBS$/ );&#10;$END$" description="can_ok assertion"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="SUBS" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
@@ -94,7 +94,7 @@
         </context>
     </template>
     <template name="isa_ok" value="isa_ok( $COND$, '$CLASS$', '$OBJECT_NAME$' );&#10;$END$"
-              description="isa_ok assertion" toReformat="false" toShortenFQNames="true">
+              description="isa_ok assertion" toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="OBJECT_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -104,7 +104,7 @@
         </context>
     </template>
     <template name="new_ok" value="new_ok( $CLASS$ =&gt; $ARGS$, '$OBJECT_NAME$' );&#10;$END$"
-              description="new_ok assertion" toReformat="false" toShortenFQNames="true">
+              description="new_ok assertion" toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="ARGS" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="OBJECT_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -114,7 +114,7 @@
         </context>
     </template>
     <template name="pass" value="pass( '$TEST_NAME$' );&#10;$END$" description="pass statement" toReformat="false"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="false"/>
@@ -122,7 +122,7 @@
         </context>
     </template>
     <template name="fail" value="fail( '$TEST_NAME$' );&#10;$END$" description="fail statement" toReformat="false"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="false"/>
@@ -131,7 +131,7 @@
     </template>
     <template name="require_ok" value="require_ok( '$MODULE_OR_PACKAGE$' );&#10;$END$"
               description="require_ok assertion"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="MODULE_OR_PACKAGE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="false"/>
@@ -139,7 +139,7 @@
         </context>
     </template>
     <template name="use_ok" value="use_ok( '$MODULE_OR_PACKAGE$' );&#10;$END$" description="use_ok assertion"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="MODULE_OR_PACKAGE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="false"/>
@@ -148,7 +148,7 @@
     </template>
     <template name="is_deeply" value="is_deeply( $GOT$, $EXPECTED$, '$NAME$' );&#10;$END$"
               description="is_deepy assertion"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="false" toShortenFQNames="true" shortcut="SPACE">
         <variable name="GOT" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
@@ -158,7 +158,7 @@
         </context>
     </template>
     <template name="diag" value="diag( '$TEST_NAME$' );&#10;$END$" description="diag statement" toReformat="false"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="false"/>
@@ -166,7 +166,7 @@
         </context>
     </template>
     <template name="note" value="note( '$TEST_NAME$' );&#10;$END$" description="note statement" toReformat="false"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="false"/>
@@ -175,7 +175,7 @@
     </template>
     <template name="explain" value="explain( $REFERENCE$ );&#10;$END$" description="explain statement"
               toReformat="false"
-              toShortenFQNames="true">
+              toShortenFQNames="true" shortcut="SPACE">
         <variable name="REFERENCE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="false"/>
