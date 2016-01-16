@@ -320,6 +320,7 @@
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
         <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex"/>
 
         <lang.findUsagesProvider language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>

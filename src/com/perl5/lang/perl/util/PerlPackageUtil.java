@@ -35,6 +35,7 @@ import com.perl5.lang.perl.filetypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
@@ -295,14 +296,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName)
 	{
-		return getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
+		return getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 	}
 
 	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
 	{
 		assert packageName != null;
 
-		return new ArrayList<PerlNamespaceDefinition>(StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, "*" + packageName, project, scope, PerlNamespaceDefinition.class));
+		return new ArrayList<PerlNamespaceDefinition>(StubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class));
 	}
 
 	/**

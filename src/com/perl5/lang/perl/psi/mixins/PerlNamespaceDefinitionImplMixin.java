@@ -21,7 +21,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
@@ -137,17 +136,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	public List<PerlNamespaceDefinition> getChildNamespaceDefinitions()
 	{
 		Project project = getProject();
-		return PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), GlobalSearchScope.projectScope(project));
-//		GlobalSearchScope allScope = GlobalSearchScope.allScope(project);
-//		GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
-
-//		List<PerlNamespaceDefinition> definitions = PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), projectScope);
-
-//		if (definitions.size() == 0)
-//		{
-//			definitions = PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), allScope);
-//		}
-//		return definitions;
+		return PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName());
 	}
 
 	@NotNull

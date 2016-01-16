@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 16.01.2016.
  */
-public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<PerlNamespaceDefinition>
+public class PerlParentNamespaceDefinitionStubIndex extends StringStubIndexExtension<PerlNamespaceDefinition>
 {
-	public static final int VERSION = 4;
-	public static final StubIndexKey<String, PerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");
+	public static final int VERSION = 3;
+	public static final StubIndexKey<String, PerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.parent");
 
 	@Override
 	public int getVersion()

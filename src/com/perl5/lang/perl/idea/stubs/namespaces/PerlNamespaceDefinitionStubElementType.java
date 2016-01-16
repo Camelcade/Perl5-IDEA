@@ -89,7 +89,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		{
 			if (parent != null && !parent.isEmpty())
 			{
-				sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, "*" + parent);
+				sink.occurrence(PerlParentNamespaceDefinitionStubIndex.KEY, parent);
 			}
 		}
 	}
