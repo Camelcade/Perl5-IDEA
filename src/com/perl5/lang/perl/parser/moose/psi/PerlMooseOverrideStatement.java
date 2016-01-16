@@ -16,12 +16,12 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseOverrideStatement extends PerlSubDefinitionBase<PerlMooseOverrideStub>
+public interface PerlMooseOverrideStatement extends PerlSubDefinitionBase<PerlSubDefinitionStub>
 {
 }

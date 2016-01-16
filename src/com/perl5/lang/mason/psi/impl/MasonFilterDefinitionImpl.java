@@ -19,7 +19,7 @@ package com.perl5.lang.mason.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mason.psi.MasonFilterDefinition;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +39,7 @@ public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl impleme
 		super(node);
 	}
 
-	public MasonFilterDefinitionImpl(PerlMethodDefinitionStub stub, IStubElementType nodeType)
+	public MasonFilterDefinitionImpl(PerlSubDefinitionStub stub, IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}

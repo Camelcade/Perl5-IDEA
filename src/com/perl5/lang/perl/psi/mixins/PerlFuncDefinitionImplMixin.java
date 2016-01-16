@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.func.PerlFuncDefinitionStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PsiPerlFuncDefinition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,14 +27,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlFuncDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlFuncDefinitionStub> implements PsiPerlFuncDefinition
+public abstract class PerlFuncDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PsiPerlFuncDefinition
 {
 	public PerlFuncDefinitionImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	public PerlFuncDefinitionImplMixin(@NotNull PerlFuncDefinitionStub stub, @NotNull IStubElementType nodeType)
+	public PerlFuncDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}

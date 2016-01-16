@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlMethodDefinitionStub> implements PerlMethodDefinition
+public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMethodDefinition
 {
 	// fixme see the #717
 	public static final String DEFAULT_INVOCANT_NAME = "self";
@@ -43,7 +43,7 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 		super(node);
 	}
 
-	public PerlMethodDefinitionImplMixin(@NotNull PerlMethodDefinitionStub stub, @NotNull IStubElementType nodeType)
+	public PerlMethodDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}

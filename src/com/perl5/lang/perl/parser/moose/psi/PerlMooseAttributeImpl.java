@@ -22,9 +22,9 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlPsiLists;
-import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStub;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlAnnotation;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
@@ -38,14 +38,14 @@ import java.util.List;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlMooseAttributeStub> implements PerlMooseAttribute
+public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMooseAttribute
 {
 	public PerlMooseAttributeImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	public PerlMooseAttributeImpl(@NotNull PerlMooseAttributeStub stub, @NotNull IStubElementType nodeType)
+	public PerlMooseAttributeImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}

@@ -23,10 +23,10 @@ import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlDoExprElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRequireExprElementType;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlFuncDefinitionStubElementType;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlMethodDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.func.PerlFuncDefinitionStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubElementType;
 
 /**

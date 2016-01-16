@@ -17,13 +17,13 @@
 package com.perl5.lang.perl.parser.moose.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 
 /**
  * Created by hurricup on 29.11.2015.
  */
-public interface PerlMooseAttribute extends PerlSubDefinitionBase<PerlMooseAttributeStub>, PsiElement
+public interface PerlMooseAttribute extends PerlSubDefinitionBase<PerlSubDefinitionStub>, PsiElement
 {
 	/**
 	 * Indicates, that current attribute is extension of parent one

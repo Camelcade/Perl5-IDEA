@@ -375,11 +375,11 @@ limitations under the License.
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
     implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinition"
 
-    stubClass("method_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub"
+    stubClass("method_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("method_definition")="com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin"
     implements("method_definition")="com.perl5.lang.perl.psi.PerlMethodDefinition"
 
-    stubClass("func_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.func.PerlFuncDefinitionStub"
+    stubClass("func_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("func_definition")="com.perl5.lang.perl.psi.mixins.PerlFuncDefinitionImplMixin"
     implements("func_definition")="com.perl5.lang.perl.psi.PerlFuncDefinition"
 

@@ -23,8 +23,8 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.mason.psi.MasonOverrideDefinition;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
@@ -44,7 +44,7 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
 		super(node);
 	}
 
-	public MasonOverrideDefinitionImpl(@NotNull PerlMooseOverrideStub stub, @NotNull IStubElementType nodeType)
+	public MasonOverrideDefinitionImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}

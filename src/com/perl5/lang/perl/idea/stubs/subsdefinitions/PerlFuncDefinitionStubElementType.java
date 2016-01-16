@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.subsdefinitions.func;
+package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.impl.PsiPerlFuncDefinitionImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.11.2015.
  */
-public interface PerlFuncDefinitionStub extends PerlSubDefinitionStub
+public class PerlFuncDefinitionStubElementType extends PerlSubDefinitionStubElementType
 {
+	public PerlFuncDefinitionStubElementType(String name)
+	{
+		super(name);
+	}
+
+	@Override
+	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
+	{
+		return new PsiPerlFuncDefinitionImpl(stub, this);
+	}
 }

@@ -20,20 +20,15 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 29.11.2015.
@@ -51,22 +46,9 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
 	}
 
 	@Override
-	public PerlSubDefinitionBase<PerlMooseOverrideStub> createPsi(@NotNull PerlSubDefinitionStub stub)
+	public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
-		return new PerlMooseOverrideStatementImpl((PerlMooseOverrideStub) stub, this);
-	}
-
-	@NotNull
-	@Override
-	public PerlSubDefinitionStub createStubElement(
-			StubElement parentStub,
-			String packageName,
-			String functionName,
-			List<PerlSubArgument> arguments,
-			PerlSubAnnotations annotations
-	)
-	{
-		return new PerlMooseOverrideStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
+		return new PerlMooseOverrideStatementImpl(stub, this);
 	}
 
 	@Override

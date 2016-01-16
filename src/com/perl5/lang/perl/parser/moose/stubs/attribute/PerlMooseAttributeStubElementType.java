@@ -18,18 +18,13 @@ package com.perl5.lang.perl.parser.moose.stubs.attribute;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttributeImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 29.11.2015.
@@ -44,20 +39,7 @@ public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElem
 	@Override
 	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
-		return new PerlMooseAttributeImpl((PerlMooseAttributeStub) stub, this);
-	}
-
-	@NotNull
-	@Override
-	public PerlSubDefinitionStub createStubElement(
-			StubElement parentStub,
-			String packageName,
-			String functionName,
-			List<PerlSubArgument> arguments,
-			PerlSubAnnotations annotations
-	)
-	{
-		return new PerlMooseAttributeStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
+		return new PerlMooseAttributeImpl(stub, this);
 	}
 
 	@Override

@@ -19,7 +19,7 @@ package com.perl5.lang.mason.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mason.psi.MasonMethodDefinition;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.method.PerlMethodDefinitionStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -40,7 +40,7 @@ public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl imple
 		super(node);
 	}
 
-	public MasonMethodDefinitionImpl(PerlMethodDefinitionStub stub, IStubElementType nodeType)
+	public MasonMethodDefinitionImpl(PerlSubDefinitionStub stub, IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}

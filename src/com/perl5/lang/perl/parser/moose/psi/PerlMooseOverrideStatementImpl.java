@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStub;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
 import org.jetbrains.annotations.NotNull;
@@ -32,14 +32,14 @@ import java.util.List;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<PerlMooseOverrideStub> implements PerlMooseOverrideStatement
+public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMooseOverrideStatement
 {
 	public PerlMooseOverrideStatementImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	public PerlMooseOverrideStatementImpl(@NotNull PerlMooseOverrideStub stub, @NotNull IStubElementType nodeType)
+	public PerlMooseOverrideStatementImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}
