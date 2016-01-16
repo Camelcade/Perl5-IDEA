@@ -17,11 +17,11 @@
 package com.perl5.lang.perl.parser.moose.psi;
 
 import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
-import com.perl5.lang.perl.extensions.parser.PsiPerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseExtendsStatement extends PsiPerlPackageParentsProvider, PerlReferencesProvider
+public interface PerlMooseExtendsStatement extends PerlRuntimeParentsProvider, PerlReferencesProvider
 {
 }

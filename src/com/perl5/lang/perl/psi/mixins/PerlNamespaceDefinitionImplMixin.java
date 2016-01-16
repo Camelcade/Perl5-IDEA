@@ -28,7 +28,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
-import com.perl5.lang.perl.extensions.parser.PsiPerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
@@ -153,10 +153,16 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@NotNull
 	public List<String> getParentNamespacesFromPsi()
 	{
-		// checking compile-time modifications
-		LinkedHashSet<String> result = new LinkedHashSet<String>();
-
 		List<String> parentClasses = new ArrayList<String>();
+
+		collectCompileTimeParentNamespaces(parentClasses);
+		collectRuntimeParentNamespaces(parentClasses);
+
+		return parentClasses;
+	}
+
+	protected void collectCompileTimeParentNamespaces(List<String> parentClasses)
+	{
 		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
 		{
 			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof PerlPackageParentsProvider)
@@ -164,9 +170,12 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 				((PerlPackageParentsProvider) useStatement.getPackageProcessor()).changeParentsList(useStatement, parentClasses);
 			}
 		}
+	}
 
+	protected void collectRuntimeParentNamespaces(List<String> parentClasses)
+	{
 		// checking runtime modifications
-		for (PsiPerlPackageParentsProvider provider : PsiTreeUtil.findChildrenOfType(this, PsiPerlPackageParentsProvider.class))
+		for (PerlRuntimeParentsProvider provider : PsiTreeUtil.findChildrenOfType(this, PerlRuntimeParentsProvider.class))
 		{
 			if (PsiTreeUtil.getParentOfType(provider, PerlNamespaceDefinition.class) == this)
 			{
@@ -174,18 +183,15 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			}
 		}
 
-		result.addAll(parentClasses);
-
 		// checking runtime @ISA
 		List<String> isa = getArrayAsList("ISA");
 
-		// fixme, acutally isa might overwrite isa from packages
+		// fixme, this is weak, isa may modify inheritance, not only overide
 		if (isa != null)
 		{
-			result.addAll(isa);
+			parentClasses.clear();
+			parentClasses.addAll(isa);
 		}
-
-		return new ArrayList<String>(result);
 	}
 
 
@@ -260,12 +266,14 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		return getAnnotationDeprecated() != null;
 	}
 
+	@Nullable
 	@Override
 	public List<String> getISA()
 	{
 		return getArrayAsList("ISA");
 	}
 
+	@NotNull
 	@Override
 	public List<String> getEXPORT()
 	{
@@ -273,9 +281,11 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getEXPORT();
 
-		return getArrayAsList("EXPORT");
+		List<String> result = getArrayAsList("EXPORT");
+		return result == null ? Collections.<String>emptyList() : result;
 	}
 
+	@NotNull
 	@Override
 	public List<String> getEXPORT_OK()
 	{
@@ -283,9 +293,11 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getEXPORT_OK();
 
-		return getArrayAsList("EXPORT_OK");
+		List<String> result = getArrayAsList("EXPORT_OK");
+		return result == null ? Collections.<String>emptyList() : result;
 	}
 
+	@NotNull
 	@Override
 	public Map<String, List<String>> getEXPORT_TAGS()
 	{
@@ -293,7 +305,8 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getEXPORT_TAGS();
 
-		return getHashAsMap("EXPORT_TAGS");
+		Map<String, List<String>> result = getHashAsMap("EXPORT_TAGS");
+		return result == null ? Collections.<String, List<String>>emptyMap() : result;
 	}
 
 	@Override
@@ -326,6 +339,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	 * @param arrayName array name without a sigil
 	 * @return distinct list of string values
 	 */
+	@Nullable
 	public List<String> getArrayAsList(String arrayName)
 	{
 		HashSet<String> result = null;
@@ -357,7 +371,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 
 //		System.err.println("Searched for @" + arrayName + " found: " + result);
 
-		return result == null ? Collections.<String>emptyList() : new ArrayList<String>(result);
+		return result == null ? null : new ArrayList<String>(result);
 	}
 
 	public Map<String, List<String>> getHashAsMap(String hashMap)

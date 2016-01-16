@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by hurricup on 26.11.2015.
  */
-public interface PsiPerlPackageParentsProvider extends PsiElement
+public interface PerlRuntimeParentsProvider extends PsiElement
 {
 	/**
 	 * Modify list of parents provided by this package. Informaion being collected from all processors sequentially

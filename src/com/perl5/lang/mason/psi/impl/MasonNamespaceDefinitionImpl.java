@@ -22,11 +22,9 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
-import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
@@ -159,28 +157,6 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 			return getParentComponentFile(componentRoot, currentDirectory.getParent(), childFile);
 		}
 		return null;
-	}
-
-	@NotNull
-	@Override
-	public List<String> getParentNamespacesFromPsi()
-	{
-		// fixme not sure if we should use super method here
-		List<String> parentsList = new ArrayList<String>();
-
-		// check flags
-		MasonFlagsStatement flagsStatement = PsiTreeUtil.findChildOfType(this, MasonFlagsStatement.class);
-
-		if (flagsStatement != null)
-		{
-			String parentNamespace = flagsStatement.getParentNamespace();
-			if (parentNamespace != null)
-			{
-				parentsList.add(parentNamespace);
-			}
-		}
-
-		return parentsList;
 	}
 
 	@NotNull

@@ -17,20 +17,13 @@
 package com.perl5.lang.mason.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 06.01.2016.
  */
-public interface MasonFlagsStatement extends PsiElement, PerlElementTypes
+public interface MasonFlagsStatement extends PsiElement, PerlElementTypes, PerlRuntimeParentsProvider
 {
 
-	/**
-	 * Returns path to the parent component; We'll need this to make inspection later wich can just check that path exists
-	 *
-	 * @return full VFS path to the parent component or null if uncalculatable
-	 */
-	@Nullable
-	String getParentNamespace();
 }

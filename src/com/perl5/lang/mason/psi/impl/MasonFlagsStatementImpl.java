@@ -29,7 +29,10 @@ import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 06.01.2016.
@@ -41,9 +44,8 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 		super(node);
 	}
 
-	@Nullable
 	@Override
-	public String getParentNamespace()
+	public void changeParentsList(@NotNull List<String> currentList)
 	{
 		String extendsFlagsValue = getExtendsFlagValue();
 		PsiFile psiFile = getContainingFile();
@@ -52,7 +54,7 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 		{
 			if (extendsFlagsValue.startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path, see the Mason::Interp::_determine_parent_compc
 			{
-				return MasonUtils.getClassnameFromPath(extendsFlagsValue.substring(1));
+				currentList.add(MasonUtils.getClassnameFromPath(extendsFlagsValue.substring(1)));
 			}
 			else // relative path
 			{
@@ -63,13 +65,12 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 				{
 					String fullPath = containingFile.getParent().getPath() + VfsUtil.VFS_SEPARATOR_CHAR + extendsFlagsValue;
 					String parentComponentPath = fullPath.substring(currentComponentRoot.getPath().length() + 1);
-					return MasonUtils.getClassnameFromPath(parentComponentPath);
+					currentList.add(MasonUtils.getClassnameFromPath(parentComponentPath));
 				}
 			}
 		}
-
-		return null;
 	}
+
 
 	@Nullable
 	private String getExtendsFlagValue()
