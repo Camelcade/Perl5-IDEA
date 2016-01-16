@@ -24,10 +24,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 16.01.2016.
  */
-public class MasonNamespaceDefitnitionsStubIndex extends StringStubIndexExtension<MasonNamespaceDefinition>
+public class MasonParentNamespacesStubIndex extends StringStubIndexExtension<MasonNamespaceDefinition>
 {
-	public static final int VERSION = 2;
-	public static final StubIndexKey<String, MasonNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.mason.namespace");
+	public static final int VERSION = 1;
+	public static final StubIndexKey<String, MasonNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.mason.namespace.parent");
 
 	@Override
 	public int getVersion()

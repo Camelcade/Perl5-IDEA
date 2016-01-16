@@ -26,6 +26,7 @@ import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.mason.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
+import com.perl5.lang.mason.psi.stubs.MasonParentNamespacesStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubImpl;
@@ -80,7 +81,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 		{
 			if (parent != null && !parent.isEmpty())
 			{
-				sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, "*" + parent);
+				sink.occurrence(MasonParentNamespacesStubIndex.KEY, parent);
 			}
 		}
 	}

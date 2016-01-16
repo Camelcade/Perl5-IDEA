@@ -17,6 +17,7 @@
 package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -28,8 +29,9 @@ import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
 import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
+import com.perl5.lang.mason.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
+import com.perl5.lang.mason.psi.stubs.MasonParentNamespacesStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
@@ -228,39 +230,97 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	public List<PerlNamespaceDefinition> getChildNamespaceDefinitions()
 	{
 		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-		final List<PerlNamespaceDefinition> childNamespaces = super.getChildNamespaceDefinitions();
+		final List<PerlNamespaceDefinition> childNamespaces = new ArrayList<PerlNamespaceDefinition>();
 
-		if (masonSettings.autobaseNames.contains(getContainingFile().getName()))
+		// collect psi children
+		final Project project = getProject();
+		final GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
+		final String componentPath = getComponentPath();
+		if (componentPath != null)
 		{
-			final String baseClassName = MasonUtils.getVirtualFileClassName(getProject(), getContainingFile().getViewProvider().getVirtualFile().getParent());
 
-			if (baseClassName != null)
+			StubIndex.getInstance().processAllKeys(MasonParentNamespacesStubIndex.KEY, project, new Processor<String>()
 			{
-				final GlobalSearchScope projectScope = GlobalSearchScope.projectScope(getProject());
-//				final String packageName = getPackageName();
-
-				StubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, getProject(), new Processor<String>()
+				@Override
+				public boolean process(String parentPath)
 				{
-					@Override
-					public boolean process(String className)
+					if (parentPath.charAt(0) == VfsUtil.VFS_SEPARATOR_CHAR) // absolute path, should be equal
 					{
-						if (className.startsWith(baseClassName))
+						if (componentPath.equals(parentPath.substring(1)))
 						{
-							for (PerlNamespaceDefinition namespaceDefinition : StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, className, getProject(), projectScope, PerlNamespaceDefinition.class))
+							childNamespaces.addAll(StubIndex.getElements(
+									MasonParentNamespacesStubIndex.KEY,
+									parentPath,
+									project,
+									projectScope,
+									MasonNamespaceDefinition.class
+							));
+						}
+					}
+					else if (componentPath.endsWith(parentPath))    // relative path
+					{
+						for (MasonNamespaceDefinition masonNamespaceDefinition : StubIndex.getElements(
+								MasonParentNamespacesStubIndex.KEY,
+								parentPath,
+								project,
+								projectScope,
+								MasonNamespaceDefinition.class
+						))
+						{
+							if (masonNamespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this))
 							{
-								if (namespaceDefinition instanceof MasonNamespaceDefinition
-										&& namespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this)
-										&& !childNamespaces.contains(namespaceDefinition)
-										)
-								{
-									childNamespaces.add(namespaceDefinition);
-								}
+								childNamespaces.add(masonNamespaceDefinition);
 							}
 						}
-						return true;
 					}
-				});
+
+					return true;
+				}
+			});
+		}
+
+		// collect autobased children
+		if (masonSettings.autobaseNames.contains(getContainingFile().getName()))
+		{
+			VirtualFile containingFile = getContainingFile().getContainingVirtualFile();
+			if (containingFile != null)
+			{
+				final String basePath = VfsUtil.getRelativePath(containingFile.getParent(), getProject().getBaseDir());
+
+				if (basePath != null)
+				{
+					StubIndex.getInstance().processAllKeys(
+							MasonNamespaceDefitnitionsStubIndex.KEY, getProject(), new Processor<String>()
+							{
+								@Override
+								public boolean process(String componentPath)
+								{
+									if (componentPath.startsWith(basePath))
+									{
+										for (MasonNamespaceDefinition namespaceDefinition : StubIndex.getElements(
+												MasonNamespaceDefitnitionsStubIndex.KEY,
+												componentPath,
+												project,
+												projectScope,
+												MasonNamespaceDefinition.class
+										))
+										{
+											if (namespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this)
+													&& !childNamespaces.contains(namespaceDefinition)
+													)
+											{
+												childNamespaces.add(namespaceDefinition);
+											}
+										}
+									}
+									return true;
+								}
+							}
+					);
+				}
+
 			}
+
 		}
 		return childNamespaces;
 	}
