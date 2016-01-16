@@ -60,7 +60,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PerlFileImpl extends PsiFileBase implements PerlFile
 {
-	private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
+	private static final ArrayList<PerlNamespaceDefinition> EMPTY_LIST = new ArrayList<PerlNamespaceDefinition>();
 	protected ConcurrentHashMap<PerlVariable, String> VARIABLE_TYPES_CACHE = new ConcurrentHashMap<PerlVariable, String>();
 	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESAPCES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
 	protected GlobalSearchScope myElementsResolveScope;
@@ -289,14 +289,14 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	}
 
 	@Override
-	public List<String> getParentNamespaces()
+	public List<PerlNamespaceDefinition> getParentNamespaceDefinitions()
 	{
 		return EMPTY_LIST;
 	}
 
 	@NotNull
 	@Override
-	public Collection<PerlNamespaceDefinition> getChildNamespaces()
+	public Collection<PerlNamespaceDefinition> getChildNamespaceDefinitions()
 	{
 		return Collections.emptyList();
 	}

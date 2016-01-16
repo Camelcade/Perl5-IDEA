@@ -20,14 +20,11 @@ import com.intellij.ide.hierarchy.HierarchyNodeDescriptor;
 import com.intellij.ide.hierarchy.HierarchyTreeStructure;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyNodeDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -52,21 +49,10 @@ public class PerlSuperTypesHierarchyTreeStructure extends HierarchyTreeStructure
 			if (element instanceof PerlNamespaceDefinition)
 			{
 				Project project = element.getProject();
-				GlobalSearchScope allScope = GlobalSearchScope.allScope(project);
-				GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
-				for (String namespace : ((PerlNamespaceDefinition) element).getParentNamespaces())
+				for (PerlNamespaceDefinition namespaceDefinition : ((PerlNamespaceDefinition) element).getParentNamespaceDefinitions())
 				{
-					Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, projectScope);
-					if (definitions.size() == 0)
-					{
-						definitions = PerlPackageUtil.getNamespaceDefinitions(project, namespace, allScope);
-					}
-
-					for (PerlNamespaceDefinition definition : definitions)
-					{
-						result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, definition, false));
-					}
+					result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, namespaceDefinition, false));
 				}
 			}
 		}

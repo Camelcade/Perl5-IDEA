@@ -19,6 +19,7 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -45,6 +46,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -213,6 +215,36 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
+	@NotNull
+	public static List<PerlNamespaceDefinition> collectNamespaceDefinitions(@NotNull Project project, @NotNull List<String> packageNames)
+	{
+		ArrayList<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<PerlNamespaceDefinition>();
+		for (String packageName: packageNames)
+		{
+			namespaceDefinitions.addAll(getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project)));
+		}
+		return namespaceDefinitions;
+	}
+
+	@NotNull
+	public static List<String> collectNamespaceNames(List<PerlNamespaceDefinition> namespaceDefinitions)
+	{
+		List<String> namespaceNames = new ArrayList<String>();
+
+		if( namespaceDefinitions != null )
+		{
+			for (PerlNamespaceDefinition namespaceDefinition : namespaceDefinitions)
+			{
+				String namespaceName = namespaceDefinition.getPackageName();
+				if (StringUtil.isNotEmpty(namespaceName))
+				{
+					namespaceNames.add(namespaceName);
+				}
+			}
+		}
+		return namespaceNames;
+	}
+
 	/**
 	 * Searching project files for namespace definitions by specific package name
 	 *
@@ -261,16 +293,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param project project to search in
 	 * @return collection of definitions
 	 */
-	public static Collection<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName)
+	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName)
 	{
 		return getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
 	}
 
-	public static Collection<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
+	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
 	{
 		assert packageName != null;
 
-		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, "*" + packageName, project, scope, PerlNamespaceDefinition.class);
+		return new ArrayList<PerlNamespaceDefinition>(StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, "*" + packageName, project, scope, PerlNamespaceDefinition.class));
 	}
 
 	/**

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,26 +35,29 @@ public class PerlMroC3 extends PerlMro
 	 * Builds list of inheritance path for C3 mro (Dylan, Python, Perl6): http://perldoc.perl.org/mro.html#The-C3-MRO
 	 *
 	 * @param project      project
-	 * @param packageNames list of package names to add
+	 * @param namespaceDefinitions list of package names to add
 	 * @param recursionMap recursion protection map
 	 * @param result       list to populate
 	 */
 	@Override
-	public void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result)
+	public void getLinearISA(Project project, List<PerlNamespaceDefinition> namespaceDefinitions, HashSet<String> recursionMap, ArrayList<String> result)
 	{
 //		System.err.println("Resolving C3 for " + packageNames);
-		Collection<String> nextIterationNames = new ArrayList<String>();
-		for (String packageName : packageNames)
+		Collection<PerlNamespaceDefinition> nextIterationDefinitions = new ArrayList<PerlNamespaceDefinition>();
+		for (PerlNamespaceDefinition namespaceDefinition : namespaceDefinitions)
 		{
+			String packageName = namespaceDefinition.getPackageName();
 			if (!recursionMap.contains(packageName))
 			{
 				recursionMap.add(packageName);
 				result.add(packageName);
-				nextIterationNames.add(packageName);
+				nextIterationDefinitions.add(namespaceDefinition);
 			}
 		}
 
-		for (String packageName : nextIterationNames)
-			getPackageParents(project, packageName, recursionMap, result);
+		for (PerlNamespaceDefinition namespaceDefinition : nextIterationDefinitions)
+		{
+			namespaceDefinition.getLinearISA(recursionMap, result);
+		}
 	}
 }

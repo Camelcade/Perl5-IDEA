@@ -40,19 +40,19 @@ public interface PerlNamespaceContainer extends PsiElement
 	String getPackageName();
 
 	/**
-	 * Returns parent namespaces
+	 * Returns parent namespaces definitions
 	 *
 	 * @return list of packages specified in parent
 	 */
-	List<String> getParentNamespaces();
+	List<PerlNamespaceDefinition> getParentNamespaceDefinitions();
 
 	/**
-	 * Returns child namespaces
+	 * Returns child namespace definitions
 	 *
 	 * @return list of packages derived from current
 	 */
 	@NotNull
-	Collection<PerlNamespaceDefinition> getChildNamespaces();
+	Collection<PerlNamespaceDefinition> getChildNamespaceDefinitions();
 
 	/**
 	 * Get mro type for current package

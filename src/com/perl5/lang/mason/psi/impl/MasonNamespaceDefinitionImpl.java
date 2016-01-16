@@ -36,7 +36,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -68,22 +67,22 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	}
 
 	@Override
-	public List<String> getParentNamespaces()
+	public List<PerlNamespaceDefinition> getParentNamespaceDefinitions()
 	{
-		List<String> result = null;
+		List<PerlNamespaceDefinition> result = null;
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
 		{
-			result = stub.getParentNamespaces();
+			result = PerlPackageUtil.collectNamespaceDefinitions(getProject(), stub.getParentNamespaces());
 		}
 		else
 		{
-			result = getParentNamespacesFromPsi();
+			result = PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesFromPsi());
 		}
 
 		if (result.isEmpty())
 		{
-			return getParentNamespacesFromAutobase();
+			return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesFromAutobase());
 		}
 		else
 		{
@@ -161,10 +160,10 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 	@NotNull
 	@Override
-	public Collection<PerlNamespaceDefinition> getChildNamespaces()
+	public List<PerlNamespaceDefinition> getChildNamespaceDefinitions()
 	{
 		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-		final Collection<PerlNamespaceDefinition> childNamespaces = super.getChildNamespaces();
+		final List<PerlNamespaceDefinition> childNamespaces = super.getChildNamespaceDefinitions();
 
 		if (masonSettings.autobaseNames.contains(getContainingFile().getName()))
 		{
@@ -172,8 +171,8 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 			if (baseClassName != null)
 			{
-				final GlobalSearchScope allScope = GlobalSearchScope.allScope(getProject());
-				final String packageName = getPackageName();
+				final GlobalSearchScope projectScope = GlobalSearchScope.projectScope(getProject());
+//				final String packageName = getPackageName();
 
 				StubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, getProject(), new Processor<String>()
 				{
@@ -182,10 +181,10 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 					{
 						if (className.startsWith(baseClassName))
 						{
-							for (PerlNamespaceDefinition namespaceDefinition : StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, className, getProject(), allScope, PerlNamespaceDefinition.class))
+							for (PerlNamespaceDefinition namespaceDefinition : StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, className, getProject(), projectScope, PerlNamespaceDefinition.class))
 							{
 								if (namespaceDefinition instanceof MasonNamespaceDefinition
-										&& namespaceDefinition.getParentNamespaces().contains(packageName)
+										&& namespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this)
 										&& !childNamespaces.contains(namespaceDefinition)
 										)
 								{

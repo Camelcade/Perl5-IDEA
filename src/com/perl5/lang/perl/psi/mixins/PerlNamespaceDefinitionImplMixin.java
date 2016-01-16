@@ -114,40 +114,33 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	}
 
 	@Override
-	public List<String> getParentNamespaces()
+	public List<PerlNamespaceDefinition> getParentNamespaceDefinitions()
 	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
 		{
-			return stub.getParentNamespaces();
+			return PerlPackageUtil.collectNamespaceDefinitions(getProject(), stub.getParentNamespaces());
 		}
 
-		return getParentNamespacesFromPsi();
+		return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesFromPsi());
 	}
 
 	@NotNull
 	@Override
-	public Collection<PerlNamespaceDefinition> getChildNamespaces()
+	public List<PerlNamespaceDefinition> getChildNamespaceDefinitions()
 	{
 		Project project = getProject();
-		GlobalSearchScope allScope = GlobalSearchScope.allScope(project);
-		GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
+		return PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), GlobalSearchScope.projectScope(project));
+//		GlobalSearchScope allScope = GlobalSearchScope.allScope(project);
+//		GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
-		Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), projectScope);
+//		List<PerlNamespaceDefinition> definitions = PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), projectScope);
 
-		if (definitions.size() == 0)
-		{
-			definitions = PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), allScope);
-		}
-
-		if (definitions.size() == 0)
-		{
-			return new ArrayList<PerlNamespaceDefinition>();
-		}
-		else
-		{
-			return definitions;
-		}
+//		if (definitions.size() == 0)
+//		{
+//			definitions = PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName(), allScope);
+//		}
+//		return definitions;
 	}
 
 	@NotNull
@@ -184,7 +177,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		}
 
 		// checking runtime @ISA
-		List<String> isa = getArrayAsList("ISA");
+		List<String> isa = getISA();
 
 		// fixme, this is weak, isa may modify inheritance, not only overide
 		if (isa != null)
@@ -246,7 +239,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result)
 	{
-		getMro().getLinearISA(getProject(), getParentNamespaces(), recursionMap, result);
+		getMro().getLinearISA(getProject(), getParentNamespaceDefinitions(), recursionMap, result);
 	}
 
 	@Override

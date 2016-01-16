@@ -137,7 +137,9 @@ public abstract class PerlMro
 		getPackageParents(project, packageName, recursionMap, result);
 
 		if (!recursionMap.contains(PerlPackageUtil.UNIVERSAL_PACKAGE))
+		{
 			result.add(PerlPackageUtil.UNIVERSAL_PACKAGE);
+		}
 
 		return result;
 	}
@@ -147,7 +149,9 @@ public abstract class PerlMro
 		// at the moment we are checking all definitions available
 		// fixme we should check only those, which are used in currrent file
 		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+		{
 			namespaceDefinition.getLinearISA(recursionMap, result);
+		}
 	}
 
 	/**
@@ -155,8 +159,9 @@ public abstract class PerlMro
 	 * Method should not add package itself or UNIVERSAL, only parents structure. Package itself and UNIVERSAL being added by calee
 	 *
 	 * @param project      current project
-	 * @param packageNames list of package names to populate
+	 * @param packageNames list of namespaces to check
 	 * @param recursionMap map for controlling recursive inheritance
+	 * @param result       list of package names to populate
 	 */
-	public abstract void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result);
+	public abstract void getLinearISA(Project project, List<PerlNamespaceDefinition> packageNames, HashSet<String> recursionMap, ArrayList<String> result);
 }

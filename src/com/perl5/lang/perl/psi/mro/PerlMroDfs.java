@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,21 +36,24 @@ public class PerlMroDfs extends PerlMro
 	 * Builds list of inheritance path for DFS mro (Perl5 default): http://perldoc.perl.org/mro.html
 	 *
 	 * @param project      project
-	 * @param packageNames List of package names to add
+	 * @param namespaceDefinitions List of package names to add
 	 * @param recursionMap recursion protection map
 	 * @param result       list to populate
 	 */
 	@Override
-	public void getLinearISA(Project project, List<String> packageNames, HashSet<String> recursionMap, ArrayList<String> result)
+	public void getLinearISA(Project project, List<PerlNamespaceDefinition> namespaceDefinitions, HashSet<String> recursionMap, ArrayList<String> result)
 	{
 //		System.err.println("Resolving DFS for " + packageNames);
 
-		for (String packageName : packageNames)
+		for (PerlNamespaceDefinition namespaceDefinition : namespaceDefinitions)
+		{
+			String packageName = namespaceDefinition.getPackageName();
 			if (!recursionMap.contains(packageName))
 			{
 				recursionMap.add(packageName);
 				result.add(packageName);
-				getPackageParents(project, packageName, recursionMap, result);
+				namespaceDefinition.getLinearISA(recursionMap, result);
 			}
+		}
 	}
 }

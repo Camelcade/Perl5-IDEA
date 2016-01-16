@@ -47,21 +47,21 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 * @param recursionMap recursion map
 	 * @param result       array to populate
 	 */
-	public void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result);
+	void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result);
 
 	/**
 	 * Returns explicit ISA value, initialized with @ISA = ...
 	 *
 	 * @return @ISA list
 	 */
-	public List<String> getISA();
+	List<String> getISA();
 
 	/**
 	 * Retuns list of exports from this module
 	 *
 	 * @return list of @EXPORTs
 	 */
-	public List<String> getEXPORT();
+	List<String> getEXPORT();
 
 	/**
 	 * .
@@ -69,14 +69,14 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 *
 	 * @return list of @EXPORT_OKs
 	 */
-	public List<String> getEXPORT_OK();
+	List<String> getEXPORT_OK();
 
 	/**
 	 * Returns map of exported tags
 	 *
 	 * @return map of %EXPORT_TAGS
 	 */
-	public Map<String, List<String>> getEXPORT_TAGS();
+	Map<String, List<String>> getEXPORT_TAGS();
 
 	/**
 	 * Returns deprecated annotation if any
