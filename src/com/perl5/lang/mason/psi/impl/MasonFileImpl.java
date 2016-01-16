@@ -69,7 +69,7 @@ public class MasonFileImpl extends PerlFileImpl implements PerlImplicitVariables
 	@Nullable
 	public VirtualFile getComponentRoot()
 	{
-		return MasonUtils.getComponentRoot(getProject(), getRealContainingFile());
+		return MasonUtils.getComponentRoot(getProject(), getContainingVirtualFile());
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class MasonFileImpl extends PerlFileImpl implements PerlImplicitVariables
 	 * @return virtual file or null
 	 */
 	@Nullable
-	public VirtualFile getRealContainingFile()
+	public VirtualFile getContainingVirtualFile()
 	{
 		VirtualFile originalFile = getViewProvider().getVirtualFile();
 

@@ -22,9 +22,11 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
+import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
@@ -60,66 +62,129 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	}
 
 	@Override
+	public String getPackageName()
+	{
+		String absoluteComponentPath = getAbsoluteComponentPath();
+		if (absoluteComponentPath != null)
+		{
+			return MasonUtils.getClassnameFromPath(absoluteComponentPath);
+		}
+		return null;
+	}
+
+	@Override
 	protected String getPackageNameHeavy()
 	{
-		String packageName = MasonUtils.getVirtualFileClassName(getProject(), getContainingFile().getRealContainingFile());
+		String packageName = MasonUtils.getVirtualFileClassName(getProject(), getContainingFile().getContainingVirtualFile());
 		return packageName == null ? PerlPackageUtil.MAIN_PACKAGE : packageName;
 	}
 
 	@Override
 	public List<PerlNamespaceDefinition> getParentNamespaceDefinitions()
 	{
-		List<PerlNamespaceDefinition> result = null;
+		List<String> parentsPaths;
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
 		{
-			result = PerlPackageUtil.collectNamespaceDefinitions(getProject(), stub.getParentNamespaces());
+			parentsPaths = stub.getParentNamespaces();
 		}
 		else
 		{
-			result = PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesFromPsi());
+			parentsPaths = getParentNamespacesFromPsi();
 		}
 
-		if (result.isEmpty())
+
+		VirtualFile containingFile = getContainingFile().getContainingVirtualFile();
+		List<PerlNamespaceDefinition> parentsNamespaces;
+
+		if (!parentsPaths.isEmpty() && containingFile != null)
 		{
-			return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesFromAutobase());
+			parentsNamespaces = MasonUtils.collectComponentNamespacesByPaths(getProject(), parentsPaths, containingFile.getParent());
 		}
 		else
 		{
-			return result;
+			String autobaseParent = getParentNamespaceFromAutobase();
+			if (autobaseParent != null)
+			{
+				parentsNamespaces = MasonUtils.getMasonNamespacesByAbsolutePath(getProject(), autobaseParent);
+			}
+			else
+			{
+				parentsNamespaces = new ArrayList<PerlNamespaceDefinition>();
+			}
 		}
+
+		if (parentsNamespaces.isEmpty())
+		{
+			parentsNamespaces.addAll(PerlPackageUtil.getNamespaceDefinitions(getProject(), MASON_DEFAULT_COMPONENT_PARENT));
+		}
+
+		return parentsNamespaces;
 	}
 
 	@NotNull
-	protected List<String> getParentNamespacesFromAutobase()
+	@Override
+	public List<String> getParentNamespacesFromPsi()
 	{
-		List<String> parentsList = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 
+		for (MasonFlagsStatement flagsStatement : PsiTreeUtil.findChildrenOfType(this, MasonFlagsStatement.class))
+		{
+			flagsStatement.changeParentsList(result);
+		}
+		return result;
+	}
+
+	@Nullable
+	@Override
+	public String getAbsoluteComponentPath()
+	{
+		VirtualFile containingFile = getContainingFile().getContainingVirtualFile();
+		if (containingFile != null)
+		{
+			return VfsUtil.getRelativePath(containingFile, getProject().getBaseDir());
+		}
+
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public String getComponentPath()
+	{
+		VirtualFile containingFile = getContainingFile().getContainingVirtualFile();
+		if (containingFile != null)
+		{
+			VirtualFile containingRoot = MasonUtils.getComponentRoot(getProject(), containingFile);
+			if (containingRoot != null)
+			{
+				return VfsUtil.getRelativePath(containingFile, containingRoot);
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	protected String getParentNamespaceFromAutobase()
+	{
 		// autobase
 		VirtualFile componentRoot = getContainingFile().getComponentRoot();
-		VirtualFile containingFile = getContainingFile().getRealContainingFile();
+		VirtualFile containingFile = getContainingFile().getContainingVirtualFile();
 
 		if (componentRoot != null && containingFile != null)
 		{
 			VirtualFile parentComponentFile = getParentComponentFile(componentRoot, containingFile.getParent(), containingFile);
 			if (parentComponentFile != null) // found autobase class
 			{
-				String componentPath = VfsUtil.getRelativePath(parentComponentFile, componentRoot);
+				String componentPath = VfsUtil.getRelativePath(parentComponentFile, getProject().getBaseDir());
 
 				if (componentPath != null)
 				{
-					parentsList.add(MasonUtils.getClassnameFromPath(componentPath));
+					return componentPath;
 				}
 			}
 		}
-
-		// default
-		if (parentsList.isEmpty())
-		{
-			parentsList.add(MASON_DEFAULT_COMPONENT_PARENT);
-		}
-
-		return parentsList;
+		return null;
 	}
 
 	/**
@@ -204,7 +269,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	public String getPresentableName()
 	{
 		VirtualFile componentRoot = getContainingFile().getComponentRoot();
-		VirtualFile containingFile = getContainingFile().getRealContainingFile();
+		VirtualFile containingFile = getContainingFile().getContainingVirtualFile();
 
 		if (componentRoot != null && containingFile != null)
 		{

@@ -60,7 +60,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
 			PsiFile psiFile = position.getContainingFile();
 			if (psiFile instanceof MasonFileImpl)
 			{
-				final VirtualFile containingFile = ((MasonFileImpl) psiFile).getRealContainingFile();
+				final VirtualFile containingFile = ((MasonFileImpl) psiFile).getContainingVirtualFile();
 				VirtualFile containingDir = null;
 				if (containingFile != null && (containingDir = containingFile.getParent()) != null)
 				{

@@ -23,14 +23,20 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.perl5.lang.mason.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
+import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
+import com.perl5.lang.mason.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,7 +48,7 @@ public class MasonUtils
 	@NotNull
 	public static String getClassnameFromPath(@NotNull String path)
 	{
-		return "MC0::" + path.replaceAll("[^\\w\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
+		return "/MC0::" + path.replaceAll("[^\\w\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
 	}
 
 	@Nullable
@@ -79,6 +85,56 @@ public class MasonUtils
 		return null;
 	}
 
+	public static List<PerlNamespaceDefinition> getMasonNamespacesByAbsolutePath(@NotNull Project project, @NotNull String absolutePath)
+	{
+		return new ArrayList<PerlNamespaceDefinition>(
+				StubIndex.getElements(
+						MasonNamespaceDefitnitionsStubIndex.KEY,
+						absolutePath,
+						project,
+						GlobalSearchScope.projectScope(project),
+						MasonNamespaceDefinition.class
+				)
+		);
+	}
+
+	@NotNull
+	public static List<PerlNamespaceDefinition> collectComponentNamespacesByPaths(@NotNull Project project, @NotNull List<String> componentPaths, @NotNull VirtualFile anchorDir)
+	{
+		List<PerlNamespaceDefinition> result = new ArrayList<PerlNamespaceDefinition>();
+		MasonSettings masonSettings = MasonSettings.getInstance(project);
+
+		for (String componentPath : componentPaths)
+		{
+			VirtualFile componentFile = null;
+			if (componentPath.startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path relative to mason roots, see the Mason::Interp::_determine_parent_compc
+			{
+				for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles())
+				{
+					componentFile = componentRoot.findFileByRelativePath(componentPath.substring(1));
+					if (componentFile != null)
+					{
+						break;
+					}
+				}
+			}
+			else // relative path
+			{
+				componentFile = anchorDir.findFileByRelativePath(componentPath);
+			}
+
+			if (componentFile != null)
+			{
+				String absolutePath = VfsUtil.getRelativePath(componentFile, project.getBaseDir());
+				if (absolutePath != null)
+				{
+					result.addAll(MasonUtils.getMasonNamespacesByAbsolutePath(project, absolutePath));
+				}
+			}
+		}
+
+		return result;
+	}
 
 	public static void reindexProjectFile(Project project, VirtualFile virtualFile)
 	{

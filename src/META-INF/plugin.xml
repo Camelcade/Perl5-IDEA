@@ -412,6 +412,7 @@
 
 
         <projectService serviceImplementation="com.perl5.lang.mason.idea.configuration.MasonSettings"/>
+        <stubIndex implementation="com.perl5.lang.mason.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>
 
         <completion.contributor language="Perl5"
                                 implementationClass="com.perl5.lang.mason.idea.completion.MasonCompletionContributor"/>
@@ -430,6 +431,8 @@
 
         <lang.parserDefinition language="Mason2"
                                implementationClass="com.perl5.lang.mason.MasonParserDefinition"/>
+        <typeHierarchyProvider language="Mason2 Templating Language"
+                               implementationClass="com.perl5.lang.mason.idea.hierarchy.MasonTemplatingPackageHierarchyProvider"/>
         <typeHierarchyProvider language="Mason2"
                                implementationClass="com.perl5.lang.mason.idea.hierarchy.MasonPackageHierarchyProvider"/>
         <fileTypeFactory implementation="com.perl5.lang.mason.filetypes.MasonFileTypeFactory"/>

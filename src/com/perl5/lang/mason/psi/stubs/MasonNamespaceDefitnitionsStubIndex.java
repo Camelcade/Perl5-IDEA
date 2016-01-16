@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.stubs.namespaces;
+package com.perl5.lang.mason.psi.stubs;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 16.01.2016.
  */
-public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<PerlNamespaceDefinition>
+public class MasonNamespaceDefitnitionsStubIndex extends StringStubIndexExtension<MasonNamespaceDefinition>
 {
-	public static final int VERSION = 3;
-	public static final StubIndexKey<String, PerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");
+	public static final int VERSION = 1;
+	public static final StubIndexKey<String, MasonNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.mason.namespace");
 
 	@Override
 	public int getVersion()
@@ -37,7 +37,7 @@ public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<P
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlNamespaceDefinition> getKey()
+	public StubIndexKey<String, MasonNamespaceDefinition> getKey()
 	{
 		return KEY;
 	}

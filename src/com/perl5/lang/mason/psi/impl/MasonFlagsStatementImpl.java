@@ -17,13 +17,8 @@
 package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
@@ -48,26 +43,9 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 	public void changeParentsList(@NotNull List<String> currentList)
 	{
 		String extendsFlagsValue = getExtendsFlagValue();
-		PsiFile psiFile = getContainingFile();
-
-		if (psiFile instanceof MasonFileImpl && StringUtil.isNotEmpty(extendsFlagsValue))
+		if (extendsFlagsValue != null)
 		{
-			if (extendsFlagsValue.startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path, see the Mason::Interp::_determine_parent_compc
-			{
-				currentList.add(MasonUtils.getClassnameFromPath(extendsFlagsValue.substring(1)));
-			}
-			else // relative path
-			{
-				VirtualFile containingFile = ((MasonFileImpl) psiFile).getRealContainingFile();
-				VirtualFile currentComponentRoot = ((MasonFileImpl) psiFile).getComponentRoot();
-
-				if (containingFile != null && currentComponentRoot != null)
-				{
-					String fullPath = containingFile.getParent().getPath() + VfsUtil.VFS_SEPARATOR_CHAR + extendsFlagsValue;
-					String parentComponentPath = fullPath.substring(currentComponentRoot.getPath().length() + 1);
-					currentList.add(MasonUtils.getClassnameFromPath(parentComponentPath));
-				}
-			}
+			currentList.add(extendsFlagsValue);
 		}
 	}
 

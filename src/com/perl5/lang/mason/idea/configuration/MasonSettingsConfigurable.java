@@ -33,14 +33,12 @@ import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.Consumer;
 import com.intellij.util.ui.FormBuilder;
-import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -214,20 +212,6 @@ public class MasonSettingsConfigurable implements Configurable
 	@Override
 	public void apply() throws ConfigurationException
 	{
-		final List<String> rootsToReindex = new ArrayList<String>();
-
-		if (!mySettings.componentRoots.equals(rootsModel.getItems()))
-		{
-			List<String> addedRoots = new ArrayList<String>(rootsModel.getItems());
-			addedRoots.removeAll(mySettings.componentRoots);
-
-			List<String> removedRoots = new ArrayList<String>(mySettings.componentRoots);
-			removedRoots.removeAll(rootsModel.getItems());
-
-			rootsToReindex.addAll(addedRoots);
-			rootsToReindex.addAll(removedRoots);
-		}
-
 		mySettings.componentRoots.clear();
 		mySettings.componentRoots.addAll(rootsModel.getItems());
 
@@ -238,8 +222,6 @@ public class MasonSettingsConfigurable implements Configurable
 		mySettings.globalVariables.addAll(globalsModel.getItems());
 
 		mySettings.settingsUpdated();
-
-		MasonUtils.reindexProjectRoots(myProject, rootsToReindex);
 	}
 
 

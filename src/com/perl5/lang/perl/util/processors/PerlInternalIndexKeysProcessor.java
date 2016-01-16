@@ -40,7 +40,8 @@ public class PerlInternalIndexKeysProcessor implements Processor<String>
 	@Override
 	public boolean process(String string)
 	{
-		return string.charAt(0) != '*';
+		char firstChar = string.charAt(0);
+		return firstChar == '_' || Character.isLetterOrDigit(firstChar);
 	}
 
 	public boolean isForceShortMain()

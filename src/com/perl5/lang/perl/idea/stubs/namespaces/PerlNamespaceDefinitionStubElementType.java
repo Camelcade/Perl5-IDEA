@@ -26,7 +26,6 @@ import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,7 +63,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 				this,
 				psi.getPackageName(),
 				psi.getMroType(),
-				PerlPackageUtil.collectNamespaceNames(psi.getParentNamespaceDefinitions()),
+				psi.getParentNamepsacesNames(),
 				psi.isDeprecated(),
 				psi.getEXPORT(),
 				psi.getEXPORT_OK(),

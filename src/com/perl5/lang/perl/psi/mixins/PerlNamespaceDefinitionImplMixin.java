@@ -116,13 +116,20 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public List<PerlNamespaceDefinition> getParentNamespaceDefinitions()
 	{
+		return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamepsacesNames());
+	}
+
+	@NotNull
+	@Override
+	public List<String> getParentNamepsacesNames()
+	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
 		{
-			return PerlPackageUtil.collectNamespaceDefinitions(getProject(), stub.getParentNamespaces());
+			return stub.getParentNamespaces();
 		}
 
-		return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesFromPsi());
+		return getParentNamespacesFromPsi();
 	}
 
 	@NotNull

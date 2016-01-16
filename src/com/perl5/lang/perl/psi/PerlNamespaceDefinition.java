@@ -54,6 +54,7 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 *
 	 * @return @ISA list
 	 */
+	@Nullable
 	List<String> getISA();
 
 	/**
@@ -61,6 +62,7 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 *
 	 * @return list of @EXPORTs
 	 */
+	@NotNull
 	List<String> getEXPORT();
 
 	/**
@@ -69,6 +71,7 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 *
 	 * @return list of @EXPORT_OKs
 	 */
+	@NotNull
 	List<String> getEXPORT_OK();
 
 	/**
@@ -76,6 +79,7 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 *
 	 * @return map of %EXPORT_TAGS
 	 */
+	@NotNull
 	Map<String, List<String>> getEXPORT_TAGS();
 
 	/**
@@ -86,4 +90,12 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	@Nullable
 	PsiPerlAnnotationDeprecated getAnnotationDeprecated();
 
+
+	/**
+	 * Returns list of parent namespace names from stub or psi
+	 *
+	 * @return list of names
+	 */
+	@NotNull
+	List<String> getParentNamepsacesNames();
 }

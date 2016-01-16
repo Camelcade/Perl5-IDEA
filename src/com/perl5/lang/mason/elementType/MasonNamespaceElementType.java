@@ -16,12 +16,20 @@
 
 package com.perl5.lang.mason.elementType;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IndexSink;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.mason.MasonLanguage;
+import com.perl5.lang.mason.MasonUtils;
+import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
+import com.perl5.lang.mason.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubImpl;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +56,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 		return new PerlNamespaceDefinitionStubImpl(
 				parentStub,
 				this,
-				psi.getPackageName(),
+				((MasonNamespaceDefinitionImpl) psi).getAbsoluteComponentPath(),
 				psi.getMroType(),
 				((MasonNamespaceDefinitionImpl) psi).getParentNamespacesFromPsi(),
 				psi.isDeprecated(),
@@ -56,5 +64,33 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 				psi.getEXPORT_OK(),
 				psi.getEXPORT_TAGS()
 		);
+	}
+
+	@Override
+	public void indexStub(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IndexSink sink)
+	{
+		String name = stub.getPackageName();
+		assert name != null;
+		sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, name);
+
+		// fixme this is kinda hack to make MRO work. But, it should be smarter
+		sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, MasonUtils.getClassnameFromPath(name));
+
+		for (String parent : stub.getParentNamespaces())
+		{
+			if (parent != null && !parent.isEmpty())
+			{
+				sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, "*" + parent);
+			}
+		}
+	}
+
+	@Override
+	public boolean shouldCreateStub(ASTNode node)
+	{
+		PsiElement psi = node.getPsi();
+		return psi instanceof MasonNamespaceDefinition &&
+				psi.isValid() &&
+				StringUtil.isNotEmpty(((MasonNamespaceDefinition) psi).getAbsoluteComponentPath());
 	}
 }
