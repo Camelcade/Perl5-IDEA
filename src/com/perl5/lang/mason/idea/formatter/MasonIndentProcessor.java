@@ -35,8 +35,25 @@ public class MasonIndentProcessor extends PerlIndentProcessor implements MasonEl
 			));
 
 	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
+			PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
 			TokenSet.create(
 					MASON_ABSTRACT_BLOCK
+			));
+
+	public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
+			PerlIndentProcessor.UNINDENTABLE_TOKENS,
+			TokenSet.create(
+					MASON_FLAGS_OPENER,
+					MASON_FLAGS_CLOSER,
+
+					MASON_INIT_OPENER,
+					MASON_INIT_CLOSER,
+
+					MASON_CLASS_OPENER,
+					MASON_CLASS_CLOSER,
+
+					MASON_PERL_OPENER,
+					MASON_PERL_CLOSER
 			));
 
 
@@ -50,5 +67,11 @@ public class MasonIndentProcessor extends PerlIndentProcessor implements MasonEl
 	public TokenSet getUnindentableContainers()
 	{
 		return UNINDENTABLE_CONTAINERS;
+	}
+
+	@Override
+	public TokenSet getUnindentableTokens()
+	{
+		return UNINDENTABLE_TOKENS;
 	}
 }

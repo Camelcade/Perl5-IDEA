@@ -60,7 +60,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 			PerlParserDefinition.FILE
 	);
 
-	public static final TokenSet UNINDENTED_TOKENS = TokenSet.create(
+	public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
 			COMMA_SEQUENCE_EXPR,
 			CALL_ARGUMENTS
 	);
@@ -96,6 +96,11 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 		return UNINDENTABLE_CONTAINERS;
 	}
 
+	public TokenSet getUnindentableTokens()
+	{
+		return UNINDENTABLE_TOKENS;
+	}
+
 	public Indent getNodeIndent(@NotNull ASTNode node, PerlCodeStyleSettings codeStyleSettings)
 	{
 		IElementType nodeType = node.getElementType();
@@ -127,7 +132,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 			return Indent.getAbsoluteNoneIndent();
 		}
 
-		if (UNINDENTED_TOKENS.contains(nodeType))
+		if (getUnindentableTokens().contains(nodeType))
 		{
 			return Indent.getNoneIndent();
 		}
