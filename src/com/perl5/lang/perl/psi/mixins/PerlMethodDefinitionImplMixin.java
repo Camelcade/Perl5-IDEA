@@ -20,13 +20,16 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +39,8 @@ import java.util.List;
 public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMethodDefinition
 {
 	// fixme see the #717
-	public static final String DEFAULT_INVOCANT_NAME = "self";
+	protected static final String DEFAULT_INVOCANT_NAME = "$self";
+	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES;
 
 	public PerlMethodDefinitionImplMixin(@NotNull ASTNode node)
 	{
@@ -46,6 +50,28 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 	public PerlMethodDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
+	}
+
+	@NotNull
+	public static String getDefaultInvocantName()
+	{
+		return DEFAULT_INVOCANT_NAME;
+	}
+
+	protected void fillImplicitVariables()
+	{
+		if (isValid() && isPhysical())
+		{
+			getMyImplicitVariables().add(new PerlVariableLightImpl(
+					getManager(),
+					PerlLanguage.INSTANCE,
+					getDefaultInvocantName(),
+					true,
+					false,
+					true,
+					this
+			));
+		}
 	}
 
 	@Override
@@ -94,13 +120,6 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 		return false;
 	}
 
-	@NotNull
-	@Override
-	public String getDefaultInvocantName()
-	{
-		return DEFAULT_INVOCANT_NAME;
-	}
-
 	/**
 	 * Checks if method has an explicit invocant
 	 *
@@ -112,15 +131,9 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 		return methodSignatureContent != null && methodSignatureContent.getFirstChild() instanceof PsiPerlMethodSignatureInvocant;
 	}
 
-	@Override
-	public boolean isKnownVariable(@NotNull PerlVariable variable)
-	{
-		return !hasExplicitInvocant() && variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
-	}
-
 	@NotNull
 	@Override
-	public List<String> getFullQualifiedVariablesList()
+	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
 		if (hasExplicitInvocant())
 		{
@@ -128,7 +141,17 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 		}
 		else
 		{
-			return Collections.singletonList("$" + getDefaultInvocantName());
+			return getMyImplicitVariables();
 		}
+	}
+
+	protected List<PerlVariableDeclarationWrapper> getMyImplicitVariables()
+	{
+		if (IMPLICIT_VARIABLES == null)
+		{
+			IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+			fillImplicitVariables();
+		}
+		return IMPLICIT_VARIABLES;
 	}
 }

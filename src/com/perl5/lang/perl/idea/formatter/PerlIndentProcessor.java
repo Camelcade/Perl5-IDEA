@@ -91,6 +91,11 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 		return ABSOLUTE_UNINDENTABLE_TOKENS;
 	}
 
+	public TokenSet getUnindentableContainers()
+	{
+		return UNINDENTABLE_CONTAINERS;
+	}
+
 	public Indent getNodeIndent(@NotNull ASTNode node, PerlCodeStyleSettings codeStyleSettings)
 	{
 		IElementType nodeType = node.getElementType();
@@ -128,7 +133,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 		}
 
 		// defined by parent
-		if (UNINDENTABLE_CONTAINERS.contains(parentType))
+		if (getUnindentableContainers().contains(parentType))
 		{
 			// a little magic for sub attributes
 			if (parentType == SUB_DEFINITION)

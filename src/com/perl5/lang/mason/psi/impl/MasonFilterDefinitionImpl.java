@@ -19,10 +19,10 @@ package com.perl5.lang.mason.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mason.psi.MasonFilterDefinition;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,8 @@ import java.util.List;
  */
 public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl implements MasonFilterDefinition
 {
-	public static final String YIELD_VARIABLE_NAME = "yield";
+	protected static final String YIELD_VARIABLE_NAME = "$yield";
+	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES;
 
 	public MasonFilterDefinitionImpl(ASTNode node)
 	{
@@ -44,19 +45,30 @@ public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl impleme
 		super(stub, nodeType);
 	}
 
-	@Override
-	public boolean isKnownVariable(@NotNull PerlVariable variable)
+	protected void fillImplicitVariables()
 	{
-		return variable.getActualType() == PerlVariableType.SCALAR && YIELD_VARIABLE_NAME.equals(variable.getName()) ||
-				super.isKnownVariable(variable);
+		if (isValid() && isPhysical())
+		{
+			super.fillImplicitVariables();
+			getMyImplicitVariables().add(new PerlVariableLightImpl(
+					getManager(),
+					PerlLanguage.INSTANCE,
+					YIELD_VARIABLE_NAME,
+					true,
+					false,
+					false,
+					this
+			));
+		}
 	}
 
-	@NotNull
-	@Override
-	public List<String> getFullQualifiedVariablesList()
+	protected List<PerlVariableDeclarationWrapper> getMyImplicitVariables()
 	{
-		List<String> varList = new ArrayList<String>(super.getFullQualifiedVariablesList());
-		varList.add("$" + YIELD_VARIABLE_NAME);
-		return varList;
+		if (IMPLICIT_VARIABLES == null)
+		{
+			IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+			fillImplicitVariables();
+		}
+		return IMPLICIT_VARIABLES;
 	}
 }

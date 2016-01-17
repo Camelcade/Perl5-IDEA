@@ -18,11 +18,11 @@ package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.mason.psi.MasonAroundMethodModifier;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,26 +30,31 @@ import java.util.List;
  */
 public class MasonAroundMethodModifierImpl extends MasonMethodModifierImpl implements MasonAroundMethodModifier
 {
-	public static final String ORIG_VARIABLE_NAME = "orig";
+	protected static final String ORIG_VARIABLE_NAME = "$orig";
+	protected final List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES;
 
 	public MasonAroundMethodModifierImpl(ASTNode node)
 	{
 		super(node);
-	}
-
-	@Override
-	public boolean isKnownVariable(@NotNull PerlVariable variable)
-	{
-		return variable.getActualType() == PerlVariableType.SCALAR && ORIG_VARIABLE_NAME.equals(variable.getName()) ||
-				super.isKnownVariable(variable);
+		IMPLICIT_VARIABLES = super.getImplicitVariables();
+		if (isValid() && isPhysical())
+		{
+			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
+					getManager(),
+					PerlLanguage.INSTANCE,
+					ORIG_VARIABLE_NAME,
+					true,
+					false,
+					false,
+					this
+			));
+		}
 	}
 
 	@NotNull
 	@Override
-	public List<String> getFullQualifiedVariablesList()
+	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		List<String> varList = new ArrayList<String>(super.getFullQualifiedVariablesList());
-		varList.add("$" + ORIG_VARIABLE_NAME);
-		return varList;
+		return IMPLICIT_VARIABLES;
 	}
 }

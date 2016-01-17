@@ -23,15 +23,17 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.mason.psi.MasonOverrideDefinition;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
+import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,15 +41,41 @@ import java.util.List;
  */
 public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideDefinition
 {
+	protected final List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+
 	public MasonOverrideDefinitionImpl(@NotNull ASTNode node)
 	{
 		super(node);
+		fillImplicitVariables();
 	}
 
 	public MasonOverrideDefinitionImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
+		fillImplicitVariables();
 	}
+
+	protected void fillImplicitVariables()
+	{
+		if (isValid() && isPhysical())
+		{
+			getMyImplicitVariables().add(new PerlVariableLightImpl(
+					getManager(),
+					PerlLanguage.INSTANCE,
+					getDefaultInvocantName(),
+					true,
+					false,
+					true,
+					this
+			));
+		}
+	}
+
+	protected List<PerlVariableDeclarationWrapper> getMyImplicitVariables()
+	{
+		return IMPLICIT_VARIABLES;
+	}
+
 
 	@Override
 	@NotNull
@@ -86,22 +114,16 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
 		return this;
 	}
 
-	@Override
-	public boolean isKnownVariable(@NotNull PerlVariable variable)
-	{
-		return variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
-	}
-
 	@NotNull
 	@Override
-	public List<String> getFullQualifiedVariablesList()
+	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		return Collections.singletonList("$" + getDefaultInvocantName());
+		return getMyImplicitVariables();
 	}
 
 	@NotNull
 	public String getDefaultInvocantName()
 	{
-		return MasonMethodDefinitionImpl.DEFAULT_INVOCANT_NAME;
+		return PerlMethodDefinitionImplMixin.getDefaultInvocantName();
 	}
 }

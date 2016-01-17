@@ -91,17 +91,6 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 		return findChildByClass(PerlVariableNameElement.class);
 	}
 
-
-	@Nullable
-	@Override
-	public String getDeclaredType()
-	{
-		PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
-		if (declaration != null)
-			return declaration.getDeclarationType();
-		return null;
-	}
-
 	@Nullable
 	@Override
 	public String guessVariableType()
@@ -140,35 +129,11 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 					}
 
 					// check explicit type in declaration
-					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declarationWrapper, PerlVariableDeclaration.class);
-					if (declaration != null)
+					String declarationPackageName = declarationWrapper.getDeclaredType();
+					if (declarationPackageName != null)
 					{
-						PerlNamespaceElement declarationNamespaceElelement = declaration.getNamespaceElement();
-						if (declarationNamespaceElelement != null)
-							return declarationNamespaceElelement.getCanonicalName();
-
-						// check dfinition and assignment. Fixme not dry with following code
-						// found variable assignment
-						if (declaration.getParent() instanceof PsiPerlAssignExpr)
-						{
-							PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) declaration.getParent();
-							List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
-
-							if (assignmentElements.size() > 0)
-							{
-								PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
-
-								if (lastExpression != declaration)
-								{
-									// source element is on the left side
-									if (lastExpression instanceof PerlMethodContainer)
-										return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) lastExpression);
-									if (lastExpression instanceof PerlDerefExpression)
-										return ((PerlDerefExpression) lastExpression).guessType();
-
-								}
-							}
-						}
+						assert !declarationPackageName.equals("");
+						return declarationPackageName;
 					}
 
 					// check assignments

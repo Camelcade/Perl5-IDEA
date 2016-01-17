@@ -18,13 +18,14 @@ package com.perl5.lang.mason.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason.MasonConstants;
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 05.01.2016.
  */
-public interface MasonNamespaceDefinition extends PsiElement, MasonConstants, PerlNamespaceDefinition
+public interface MasonNamespaceDefinition extends PsiElement, MasonConstants, PerlNamespaceDefinition, PerlImplicitVariablesProvider
 {
 	/**
 	 * Returns file path relative to project root

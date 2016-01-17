@@ -14,25 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions;
-
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
+package com.perl5.lang.perl.psi;
 
 /**
- * Created by hurricup on 08.01.2016.
- * This interfact must be implemented in psi elements, which providing implicit variables declarations
+ * Created by hurricup on 17.01.2016.
  */
-public interface PerlImplicitVariablesProvider extends PsiElement
+public interface PerlVariableLight extends PerlVariable, PerlVariableNameElement, PerlVariableDeclarationWrapper
 {
-	/**
-	 * Returns plain list of full-qualified variable names sigil and name
-	 *
-	 * @return variable names
-	 */
-	@NotNull
-	List<PerlVariableDeclarationWrapper> getImplicitVariables();
+
 }

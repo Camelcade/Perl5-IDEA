@@ -33,6 +33,7 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubTreeLoader;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.filetypes.PerlFileType;
@@ -64,11 +65,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	protected ConcurrentHashMap<PerlVariable, String> VARIABLE_TYPES_CACHE = new ConcurrentHashMap<PerlVariable, String>();
 	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESAPCES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
 	protected GlobalSearchScope myElementsResolveScope;
-	List<PerlLexicalDeclaration> declaredScalars = new ArrayList<PerlLexicalDeclaration>();
-	List<PerlLexicalDeclaration> declaredArrays = new ArrayList<PerlLexicalDeclaration>();
-	List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
-	List<PerlLexicalDeclaration> declaredVariables = new ArrayList<PerlLexicalDeclaration>();
-	boolean lexicalCacheInvalid = true;
+	List<PerlLexicalDeclaration> myDeclaredScalars = new ArrayList<PerlLexicalDeclaration>();
+	List<PerlLexicalDeclaration> myDeclaredArrays = new ArrayList<PerlLexicalDeclaration>();
+	List<PerlLexicalDeclaration> myDeclaredHashes = new ArrayList<PerlLexicalDeclaration>();
+	List<PerlLexicalDeclaration> myDeclaredVariables = new ArrayList<PerlLexicalDeclaration>();
+	boolean myLexicalCacheInvalid = true;
 
 	public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language)
 	{
@@ -132,7 +133,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public void subtreeChanged()
 	{
 		super.subtreeChanged();
-		lexicalCacheInvalid = true;
+		myLexicalCacheInvalid = true;
 		VARIABLE_TYPES_CACHE.clear();
 		METHODS_NAMESAPCES_CACHE.clear();
 		myElementsResolveScope = null;
@@ -143,7 +144,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	 */
 	private synchronized void rescanLexicalVariables()
 	{
-		if (lexicalCacheInvalid)
+		if (myLexicalCacheInvalid)
 		{
 //			System.err.println("Started scanning declarations");
 			List<PerlLexicalDeclaration> declaredScalars = new ArrayList<PerlLexicalDeclaration>();
@@ -151,43 +152,77 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			List<PerlLexicalDeclaration> declaredHashes = new ArrayList<PerlLexicalDeclaration>();
 			List<PerlLexicalDeclaration> declaredVariables = new ArrayList<PerlLexicalDeclaration>();
 
-			Collection<PerlVariableDeclarationWrapper> declarationWrappers = PsiTreeUtil.findChildrenOfType(this, PerlVariableDeclarationWrapper.class);
+			Collection<PsiElement> declarationWrappers = PsiTreeUtil.findChildrenOfAnyType(this, PerlVariableDeclarationWrapper.class, PerlImplicitVariablesProvider.class);
 
-			for (PerlVariableDeclarationWrapper declarationWrapper : declarationWrappers)
+			for (PsiElement foundElement : declarationWrappers)
 			{
-				PerlVariable variable = declarationWrapper.getVariable();
-				assert variable != null;
-				// lexically ok
-				PerlLexicalScope variableScope = variable.getLexicalScope();
-				assert variableScope != null;
 
-				PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration(declarationWrapper, variableScope);
-				if (variable instanceof PsiPerlScalarVariable)
+				if (foundElement instanceof PerlVariableDeclarationWrapper)
 				{
-					declaredScalars.add(variableDeclaration);
+					processDeclarationWrapper(
+							(PerlVariableDeclarationWrapper) foundElement,
+							declaredScalars,
+							declaredArrays,
+							declaredHashes,
+							declaredVariables
+					);
 				}
-				else if (variable instanceof PsiPerlArrayVariable)
+				else if (foundElement instanceof PerlImplicitVariablesProvider)
 				{
-					declaredArrays.add(variableDeclaration);
+					for (PerlVariableDeclarationWrapper declarationWrapper : ((PerlImplicitVariablesProvider) foundElement).getImplicitVariables())
+					{
+						processDeclarationWrapper(
+								declarationWrapper,
+								declaredScalars,
+								declaredArrays,
+								declaredHashes,
+								declaredVariables
+						);
+					}
 				}
-				else if (variable instanceof PsiPerlHashVariable)
-				{
-					declaredHashes.add(variableDeclaration);
-				}
-				else
-				{
-					throw new RuntimeException("Unknown variable declaration: " + variable);
-				}
-				declaredVariables.add(variableDeclaration);
+
 			}
 
-			this.declaredScalars = declaredScalars;
-			this.declaredArrays = declaredArrays;
-			this.declaredHashes = declaredHashes;
-			this.declaredVariables = declaredVariables;
-			lexicalCacheInvalid = false;
+			this.myDeclaredScalars = declaredScalars;
+			this.myDeclaredArrays = declaredArrays;
+			this.myDeclaredHashes = declaredHashes;
+			this.myDeclaredVariables = declaredVariables;
+			myLexicalCacheInvalid = false;
 //			System.err.println("Finished scanning declarations");
 		}
+	}
+
+	protected void processDeclarationWrapper(PerlVariableDeclarationWrapper declarationWrapper,
+											 List<PerlLexicalDeclaration> declaredScalars,
+											 List<PerlLexicalDeclaration> declaredArrays,
+											 List<PerlLexicalDeclaration> declaredHashes,
+											 List<PerlLexicalDeclaration> declaredVariables
+	)
+	{
+		PerlVariable variable = declarationWrapper.getVariable();
+		assert variable != null;
+		// lexically ok
+		PerlLexicalScope variableScope = variable.getLexicalScope();
+		assert variableScope != null;
+
+		PerlLexicalDeclaration variableDeclaration = new PerlLexicalDeclaration(declarationWrapper, variableScope);
+		if (variable.getActualType() == PerlVariableType.SCALAR)
+		{
+			declaredScalars.add(variableDeclaration);
+		}
+		else if (variable.getActualType() == PerlVariableType.ARRAY)
+		{
+			declaredArrays.add(variableDeclaration);
+		}
+		else if (variable.getActualType() == PerlVariableType.HASH)
+		{
+			declaredHashes.add(variableDeclaration);
+		}
+		else
+		{
+			throw new RuntimeException("Unknown variable declaration: " + variable);
+		}
+		declaredVariables.add(variableDeclaration);
 	}
 
 	/**
@@ -198,7 +233,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	 */
 	public PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable currentVariable)
 	{
-		if (lexicalCacheInvalid)
+		if (myLexicalCacheInvalid)
 			rescanLexicalVariables();
 
 		String currentVariableName = currentVariable.getName();
@@ -221,11 +256,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		List<PerlLexicalDeclaration> knownDeclarations;
 
 		if (variableType == PerlVariableType.SCALAR)
-			knownDeclarations = declaredScalars;
+			knownDeclarations = myDeclaredScalars;
 		else if (variableType == PerlVariableType.ARRAY)
-			knownDeclarations = declaredArrays;
+			knownDeclarations = myDeclaredArrays;
 		else if (variableType == PerlVariableType.HASH)
-			knownDeclarations = declaredHashes;
+			knownDeclarations = myDeclaredHashes;
 		else
 			throw new RuntimeException("Unable to find declarations for variable type " + variableType);
 
@@ -249,7 +284,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	 */
 	public Collection<PerlVariableDeclarationWrapper> getVisibleLexicalVariables(PsiElement currentElement)
 	{
-		if (lexicalCacheInvalid)
+		if (myLexicalCacheInvalid)
 			rescanLexicalVariables();
 
 		HashMap<String, PerlVariableDeclarationWrapper> declarationsHash = new HashMap<String, PerlVariableDeclarationWrapper>();
@@ -264,7 +299,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 
 		int currentStatementOffset = currentStatement.getTextOffset();
 
-		ListIterator<PerlLexicalDeclaration> iterator = declaredVariables.listIterator(declaredVariables.size());
+		ListIterator<PerlLexicalDeclaration> iterator = myDeclaredVariables.listIterator(myDeclaredVariables.size());
 		while (iterator.hasPrevious())
 		{
 			PerlLexicalDeclaration declaration = iterator.previous();

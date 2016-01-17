@@ -23,10 +23,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlNamespaceContainer;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -62,9 +59,9 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 
 		PerlVariableDeclarationWrapper lexicalDeclaration = myVariable.getLexicalDeclaration();
 
-		if (lexicalDeclaration == null || lexicalDeclaration.isGlobalDeclaration())
+		if (lexicalDeclaration == null || lexicalDeclaration.isGlobalDeclaration() && !(lexicalDeclaration instanceof PerlVariableLight))
 		{
-			// not found lexical declaration or our is closes to us
+			// not found explicit lexically visible declarations
 
 			// imports
 			Map<String, Set<String>> importsMap = null;

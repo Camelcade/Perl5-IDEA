@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -28,12 +27,4 @@ public interface PerlMethodDefinition extends PerlSubDefinitionBase<PerlSubDefin
 {
 	@Nullable
 	PsiPerlMethodSignatureContent getMethodSignatureContent();
-
-	/**
-	 * Returns default implicit invocant name
-	 *
-	 * @return default implicit invocant name
-	 */
-	@NotNull
-	String getDefaultInvocantName();
 }

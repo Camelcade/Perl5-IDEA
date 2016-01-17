@@ -308,7 +308,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	protected Indent getChildIndent()
 	{
 		IElementType elementType = getElementType();
-		if (PerlIndentProcessor.UNINDENTABLE_CONTAINERS.contains(elementType))
+		if (getIndentProcessor().getUnindentableContainers().contains(elementType))
 		{
 			return Indent.getNoneIndent();
 		}

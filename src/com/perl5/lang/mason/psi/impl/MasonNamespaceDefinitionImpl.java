@@ -18,6 +18,7 @@ package com.perl5.lang.mason.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -27,13 +28,17 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.lang.mason.MasonUtils;
 import com.perl5.lang.mason.idea.configuration.MasonSettings;
+import com.perl5.lang.mason.idea.configuration.VariableDescription;
 import com.perl5.lang.mason.psi.MasonFlagsStatement;
 import com.perl5.lang.mason.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.mason.psi.stubs.MasonParentNamespacesStubIndex;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -47,14 +52,50 @@ import java.util.List;
  */
 public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl implements MasonNamespaceDefinition
 {
+	protected final List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+	protected int masonSettingsChangeCounter;
+
 	public MasonNamespaceDefinitionImpl(ASTNode node)
 	{
 		super(node);
+		fillImplicitVariables();
 	}
 
 	public MasonNamespaceDefinitionImpl(PerlNamespaceDefinitionStub stub, IStubElementType nodeType)
 	{
 		super(stub, nodeType);
+		fillImplicitVariables();
+	}
+
+	protected void fillImplicitVariables()
+	{
+		List<PerlVariableDeclarationWrapper> implicitVariables = getMyImplicitVariables();
+		implicitVariables.clear();
+
+		if (isValid() && isPhysical())
+		{
+			MasonSettings masonSettings = MasonSettings.getInstance(getProject());
+			for (VariableDescription variableDescription : masonSettings.globalVariables)
+			{
+				String variableType = variableDescription.variableType;
+				if (StringUtil.isEmpty(variableType))
+				{
+					variableType = null;
+				}
+				implicitVariables.add(
+						new PerlVariableLightImpl(
+								getManager(),
+								PerlLanguage.INSTANCE,
+								variableDescription.variableName,
+								variableType,
+								false,
+								false,
+								false,
+								this
+						));
+			}
+			masonSettingsChangeCounter = masonSettings.getChangeCounter();
+		}
 	}
 
 	@Override
@@ -350,4 +391,21 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	{
 		return (MasonFileImpl) super.getContainingFile();
 	}
+
+	@NotNull
+	@Override
+	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
+	{
+		if (masonSettingsChangeCounter != MasonSettings.getInstance(getProject()).getChangeCounter())
+		{
+			fillImplicitVariables();
+		}
+		return getMyImplicitVariables();
+	}
+
+	protected List<PerlVariableDeclarationWrapper> getMyImplicitVariables()
+	{
+		return IMPLICIT_VARIABLES;
+	}
+
 }

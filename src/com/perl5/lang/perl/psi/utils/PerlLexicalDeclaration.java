@@ -42,11 +42,6 @@ public class PerlLexicalDeclaration
 		return myDeclarationWrapper;
 	}
 
-	public void setMyDeclarationWrapper(PerlVariableDeclarationWrapper myDeclarationWrapper)
-	{
-		this.myDeclarationWrapper = myDeclarationWrapper;
-	}
-
 	public int getTextOffset()
 	{
 		return textOffset;

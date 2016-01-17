@@ -34,10 +34,21 @@ public class MasonIndentProcessor extends PerlIndentProcessor implements MasonEl
 					MASON_TEMPLATE_BLOCK_HTML
 			));
 
+	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
+			TokenSet.create(
+					MASON_ABSTRACT_BLOCK
+			));
+
+
 	@Override
 	public TokenSet getAbsoluteUnindentableTokens()
 	{
 		return ABSOLUTE_UNINDENTABLE_TOKENS;
 	}
 
+	@Override
+	public TokenSet getUnindentableContainers()
+	{
+		return UNINDENTABLE_CONTAINERS;
+	}
 }

@@ -18,21 +18,16 @@ package com.perl5.lang.mason.idea.configuration;
 
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by hurricup on 03.01.2016.
@@ -52,13 +47,7 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 	public List<VariableDescription> globalVariables = new ArrayList<VariableDescription>();
 
 	@Transient
-	private Set<String> myGLobalVariables;
-	@Transient
-	private Set<String> myGlobalScalarNames;
-	@Transient
-	private Set<String> myGlobalArrayNames;
-	@Transient
-	private Set<String> myGlobalHashNames;
+	private int changeCounter = 0;
 
 	@Transient
 	private Project myProject;
@@ -68,7 +57,7 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 	public MasonSettings()
 	{
 		globalVariables.add(new VariableDescription("$m", "Mason::Request"));
-		initGlobalVariablesSets();
+		changeCounter++;
 	}
 
 	public static MasonSettings getInstance(@NotNull Project project)
@@ -89,7 +78,7 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 	public void settingsUpdated()
 	{
 		componentsRootsVirtualFiles = null;
-		initGlobalVariablesSets();
+		changeCounter++;
 	}
 
 	@NotNull
@@ -110,69 +99,6 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 		return componentsRootsVirtualFiles;
 	}
 
-	private void initGlobalVariablesSets()
-	{
-		myGLobalVariables = new THashSet<String>();
-		myGlobalScalarNames = new THashSet<String>();
-		myGlobalArrayNames = new THashSet<String>();
-		myGlobalHashNames = new THashSet<String>();
-
-		for (VariableDescription variableDescription : globalVariables)
-		{
-			String var = variableDescription.variableName;
-			if (StringUtil.isNotEmpty(var))
-			{
-				if (var.charAt(0) == '$')
-				{
-					myGlobalScalarNames.add(var.substring(1));
-				}
-				else if (var.charAt(0) == '@')
-				{
-					myGlobalArrayNames.add(var.substring(1));
-				}
-				else if (var.charAt(0) == '%')
-				{
-					myGlobalHashNames.add(var.substring(1));
-				}
-			}
-		}
-	}
-
-	public boolean isGlobalVariable(@NotNull PerlVariable variable)
-	{
-		PerlVariableType variableType = variable.getActualType();
-
-		if (variableType == PerlVariableType.SCALAR)
-		{
-			return isGlobalScalar(variable.getName());
-		}
-		else if (variableType == PerlVariableType.ARRAY)
-		{
-			return isGlobalArray(variable.getName());
-		}
-		else if (variableType == PerlVariableType.HASH)
-		{
-			return isGlobalHash(variable.getName());
-		}
-
-		return false;
-
-	}
-
-	public boolean isGlobalScalar(String variableName)
-	{
-		return myGlobalScalarNames.contains(variableName);
-	}
-
-	public boolean isGlobalArray(String variableName)
-	{
-		return myGlobalArrayNames.contains(variableName);
-	}
-
-	public boolean isGlobalHash(String variableName)
-	{
-		return myGlobalHashNames.contains(variableName);
-	}
 
 	@Nullable
 	@Override
@@ -185,11 +111,11 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 	public void loadState(MasonSettings state)
 	{
 		XmlSerializerUtil.copyBean(state, this);
-		initGlobalVariablesSets();
+		changeCounter++;
 	}
 
-	public List<String> getGlobalVariables()
+	public int getChangeCounter()
 	{
-		return new ArrayList<String>(myGLobalVariables);
+		return changeCounter;
 	}
 }

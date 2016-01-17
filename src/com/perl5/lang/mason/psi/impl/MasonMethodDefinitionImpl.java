@@ -20,12 +20,10 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mason.psi.MasonMethodDefinition;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,8 +31,6 @@ import java.util.List;
  */
 public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl implements MasonMethodDefinition
 {
-	public static final String DEFAULT_INVOCANT_NAME = "self";
-
 	public MasonMethodDefinitionImpl(ASTNode node)
 	{
 		super(node);
@@ -45,24 +41,11 @@ public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl imple
 		super(stub, nodeType);
 	}
 
-	@Override
-	public boolean isKnownVariable(@NotNull PerlVariable variable)
-	{
-		return variable.getActualType() == PerlVariableType.SCALAR && getDefaultInvocantName().equals(variable.getName());
-	}
-
 	@NotNull
 	@Override
-	public List<String> getFullQualifiedVariablesList()
+	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		return Collections.singletonList("$" + getDefaultInvocantName());
-	}
-
-	@NotNull
-	@Override
-	public String getDefaultInvocantName()
-	{
-		return DEFAULT_INVOCANT_NAME;
+		return getMyImplicitVariables();
 	}
 
 }
