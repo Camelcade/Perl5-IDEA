@@ -136,6 +136,35 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 						return declarationPackageName;
 					}
 
+					// check assignment around declaration
+					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
+					if (declaration != null)
+					{
+						if (declaration.getParent() instanceof PsiPerlAssignExpr)
+						{
+							PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) declaration.getParent();
+							List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
+
+							if (assignmentElements.size() > 0)
+							{
+								PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
+
+								if (lastExpression != declaration)
+								{
+									// source element is on the left side
+									if (lastExpression instanceof PerlMethodContainer)
+									{
+										return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) lastExpression);
+									}
+									if (lastExpression instanceof PerlDerefExpression)
+									{
+										return ((PerlDerefExpression) lastExpression).guessType();
+									}
+								}
+							}
+						}
+					}
+
 					// check assignments
 					for (PsiReference inReference : ReferencesSearch.search(declarationWrapper, new LocalSearchScope(getContainingFile())).findAll())
 					{

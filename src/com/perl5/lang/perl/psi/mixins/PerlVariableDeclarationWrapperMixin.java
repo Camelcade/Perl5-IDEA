@@ -31,12 +31,10 @@ import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.List;
 
 /**
  * Created by hurricup on 29.09.2015.
@@ -128,30 +126,6 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 				return declaredType;
 			}
 
-			// check assignment around declaration
-			if (declaration.getParent() instanceof PsiPerlAssignExpr)
-			{
-				PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) declaration.getParent();
-				List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
-
-				if (assignmentElements.size() > 0)
-				{
-					PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
-
-					if (lastExpression != declaration)
-					{
-						// source element is on the left side
-						if (lastExpression instanceof PerlMethodContainer)
-						{
-							return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) lastExpression);
-						}
-						if (lastExpression instanceof PerlDerefExpression)
-						{
-							return ((PerlDerefExpression) lastExpression).guessType();
-						}
-					}
-				}
-			}
 		}
 
 		return null;
