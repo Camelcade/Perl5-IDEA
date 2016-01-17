@@ -63,7 +63,7 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 
 			if (MasonSettings.getInstance(myProject).componentRoots.size() == 0)
 			{
-				message = "Mason components roots are not configured";
+				message = "Mason2 components roots are not configured";
 			}
 			else
 			{
@@ -83,7 +83,7 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 					@Override
 					public void run()
 					{
-						ShowSettingsUtil.getInstance().editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason Settings"));
+						ShowSettingsUtil.getInstance().editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason2 Settings"));
 						EditorNotifications.getInstance(myProject).updateNotifications(file);
 					}
 				});

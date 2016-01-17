@@ -26,19 +26,23 @@ import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.AnActionButton;
-import com.intellij.ui.AnActionButtonRunnable;
-import com.intellij.ui.CollectionListModel;
-import com.intellij.ui.ToolbarDecorator;
+import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
+import com.intellij.ui.table.JBTable;
 import com.intellij.util.Consumer;
+import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
+import com.intellij.util.ui.ListTableModel;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableModel;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -62,12 +66,12 @@ public class MasonSettingsConfigurable implements Configurable
 	CollectionListModel<String> autobaseModel;
 	JBList autobaseList;
 
-	CollectionListModel<String> globalsModel;
-	JBList globalsList;
+	ListTableModel<VariableDescription> globalsModel;
+	JBTable globalsTable;
 
 	public MasonSettingsConfigurable(Project myProject)
 	{
-		this(myProject, "Mason");
+		this(myProject, "Mason2");
 	}
 
 	public MasonSettingsConfigurable(Project myProject, String windowTitile)
@@ -166,35 +170,47 @@ public class MasonSettingsConfigurable implements Configurable
 					}
 				}).createPanel());
 
-		globalsModel = new CollectionListModel<String>();
-		globalsList = new JBList(globalsModel);
+
+		globalsModel = new ListTableModel<VariableDescription>(
+				new myVariableNameColumnInfo(),
+				new myVariableTypeColumnInfo()
+		);
+		globalsTable = new JBTable(globalsModel);
 		builder.addLabeledComponent(new JLabel("Components global variables (allow_globals option):"), ToolbarDecorator
-				.createDecorator(globalsList)
+				.createDecorator(globalsTable)
 				.setAddAction(new AnActionButtonRunnable()
 				{
 					@Override
 					public void run(AnActionButton anActionButton)
 					{
-						String variableName = Messages.showInputDialog(
-								myProject,
-								"Type new global variable",
-								"New Global Variable",
-								Messages.getQuestionIcon(),
-								"",
-								null);
-						if (StringUtil.isNotEmpty(variableName) && !globalsModel.getItems().contains(variableName))
+						final TableCellEditor cellEditor = globalsTable.getCellEditor();
+						if (cellEditor != null)
 						{
-							if (VARIABLE_CHECK_PATTERN.matcher(variableName).matches())
+							cellEditor.stopCellEditing();
+						}
+						final TableModel model = globalsTable.getModel();
+
+						int indexToEdit = -1;
+
+						for (VariableDescription variableDescription : globalsModel.getItems())
+						{
+							if (StringUtil.isEmpty(variableDescription.variableName))
 							{
-								globalsModel.add(variableName);
-							}
-							else
-							{
-								Messages.showErrorDialog("Incorrect variable name: " + variableName, "Incorrect Variable Name");
+								indexToEdit = globalsModel.indexOf(variableDescription);
+								break;
 							}
 						}
+
+						if (indexToEdit == -1)
+						{
+							globalsModel.addRow(new VariableDescription());
+							indexToEdit = model.getRowCount() - 1;
+						}
+
+						TableUtil.editCellAt(globalsTable, indexToEdit, 0);
 					}
-				}).createPanel());
+				})
+				.createPanel());
 
 		return builder.getPanel();
 	}
@@ -219,11 +235,19 @@ public class MasonSettingsConfigurable implements Configurable
 		mySettings.autobaseNames.addAll(autobaseModel.getItems());
 
 		mySettings.globalVariables.clear();
-		mySettings.globalVariables.addAll(globalsModel.getItems());
-
+		for (VariableDescription variableDescription : new ArrayList<VariableDescription>(globalsModel.getItems()))
+		{
+			if (StringUtil.isNotEmpty(variableDescription.variableName))
+			{
+				mySettings.globalVariables.add(variableDescription);
+			}
+			else
+			{
+				globalsModel.removeRow(globalsModel.indexOf(variableDescription));
+			}
+		}
 		mySettings.settingsUpdated();
 	}
-
 
 
 	@Override
@@ -235,8 +259,11 @@ public class MasonSettingsConfigurable implements Configurable
 		autobaseModel.removeAll();
 		autobaseModel.add(mySettings.autobaseNames);
 
-		globalsModel.removeAll();
-		globalsModel.add(mySettings.globalVariables);
+		globalsModel.setItems(new ArrayList<VariableDescription>());
+		for (VariableDescription variableDescription : mySettings.globalVariables)
+		{
+			globalsModel.addRow(variableDescription.clone());
+		}
 	}
 
 	@Override
@@ -246,7 +273,108 @@ public class MasonSettingsConfigurable implements Configurable
 		rootsList = null;
 		autobaseList = null;
 		autobaseModel = null;
-		globalsList = null;
+		globalsTable = null;
 		globalsModel = null;
 	}
+
+	public static abstract class myStringColumnInfo extends ColumnInfo<VariableDescription, String>
+	{
+		public myStringColumnInfo(String name)
+		{
+			super(name);
+		}
+
+		@Override
+		public boolean isCellEditable(VariableDescription variableDescription)
+		{
+			return true;
+		}
+	}
+
+	public class myVariableNameColumnInfo extends myStringColumnInfo
+	{
+
+		public myVariableNameColumnInfo()
+		{
+			super("Variable name");
+		}
+
+		@Nullable
+		@Override
+		public String valueOf(VariableDescription variableDescription)
+		{
+			return variableDescription.variableName;
+		}
+
+		@Override
+		public void setValue(VariableDescription variableDescription, String value)
+		{
+			if (StringUtil.isNotEmpty(value) && !containsVariableName(value))
+			{
+				if (VARIABLE_CHECK_PATTERN.matcher(value).matches())
+				{
+					variableDescription.variableName = value;
+					if (value.charAt(0) != '$')
+					{
+						variableDescription.variableType = "";
+					}
+				}
+				else
+				{
+					Messages.showErrorDialog("Incorrect variable name: " + value, "Incorrect Variable Name");
+				}
+			}
+		}
+
+		protected boolean containsVariableName(String variableName)
+		{
+			for (VariableDescription variableDescription : globalsModel.getItems())
+			{
+				if (variableName.equals(variableDescription.variableName))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	public class myVariableTypeColumnInfo extends myStringColumnInfo
+	{
+		public myVariableTypeColumnInfo()
+		{
+			super("Variable type");
+		}
+
+		@Nullable
+		@Override
+		public String valueOf(VariableDescription variableDescription)
+		{
+			return variableDescription.variableType;
+		}
+
+		@Override
+		public boolean isCellEditable(VariableDescription variableDescription)
+		{
+			return StringUtil.isNotEmpty(variableDescription.variableName) && variableDescription.variableName.charAt(0) == '$';
+		}
+
+		@Override
+		public void setValue(VariableDescription variableDescription, String value)
+		{
+			if (StringUtil.isNotEmpty(value))
+			{
+				if (PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(value).matches())
+				{
+					variableDescription.variableType = value;
+				}
+				else
+				{
+					Messages.showErrorDialog("Incorrect package name: " + value, "Incorrect Package Name");
+				}
+			}
+		}
+	}
+
+
 }

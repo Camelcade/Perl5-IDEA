@@ -35,7 +35,6 @@ import java.util.Set;
 @State(
 		name = "Perl5Settings",
 		storages = {
-				@Storage(file = StoragePathMacros.PROJECT_FILE),
 				@Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/perl5.xml", scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )

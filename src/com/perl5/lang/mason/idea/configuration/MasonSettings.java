@@ -40,7 +40,6 @@ import java.util.Set;
 @State(
 		name = "Perl5MasonSettings",
 		storages = {
-				@Storage(file = StoragePathMacros.PROJECT_FILE),
 				@Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/perl5.xml", scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )
@@ -50,7 +49,7 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 {
 	public List<String> componentRoots = new ArrayList<String>();
 	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
-	public List<String> globalVariables = new ArrayList<String>();
+	public List<VariableDescription> globalVariables = new ArrayList<VariableDescription>();
 
 	@Transient
 	private Set<String> myGLobalVariables;
@@ -68,6 +67,7 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 
 	public MasonSettings()
 	{
+		globalVariables.add(new VariableDescription("$m", "Mason::Request"));
 		initGlobalVariablesSets();
 	}
 
@@ -112,17 +112,14 @@ public class MasonSettings implements PersistentStateComponent<MasonSettings>
 
 	private void initGlobalVariablesSets()
 	{
-		myGLobalVariables = new THashSet<String>(globalVariables);
-		myGLobalVariables.add("$m");
-
+		myGLobalVariables = new THashSet<String>();
 		myGlobalScalarNames = new THashSet<String>();
-		myGlobalScalarNames.add("m");
-
 		myGlobalArrayNames = new THashSet<String>();
 		myGlobalHashNames = new THashSet<String>();
 
-		for (String var : globalVariables)
+		for (VariableDescription variableDescription : globalVariables)
 		{
+			String var = variableDescription.variableName;
 			if (StringUtil.isNotEmpty(var))
 			{
 				if (var.charAt(0) == '$')

@@ -57,7 +57,6 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 				}
 			}
 		}
-
 	}
 
 	public void addCompletions(@NotNull CompletionParameters parameters,
