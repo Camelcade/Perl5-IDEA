@@ -20,7 +20,7 @@
               toReformat="false" toShortenFQNames="true">
         <variable name="NAME" expression="" defaultValue="testname" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -29,7 +29,7 @@
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -39,7 +39,7 @@
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -49,7 +49,7 @@
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -59,7 +59,7 @@
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -69,7 +69,7 @@
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -80,7 +80,7 @@
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -89,7 +89,7 @@
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="SUBS" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -99,7 +99,7 @@
         <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="OBJECT_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -109,7 +109,7 @@
         <variable name="ARGS" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="OBJECT_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -117,7 +117,7 @@
               toShortenFQNames="true">
         <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -125,7 +125,7 @@
               toShortenFQNames="true">
         <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -134,7 +134,7 @@
               toReformat="false" toShortenFQNames="true">
         <variable name="MODULE_OR_PACKAGE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -142,7 +142,7 @@
               toReformat="false" toShortenFQNames="true">
         <variable name="MODULE_OR_PACKAGE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -153,7 +153,7 @@
         <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -161,7 +161,7 @@
               toShortenFQNames="true">
         <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -169,7 +169,7 @@
               toShortenFQNames="true">
         <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -178,7 +178,7 @@
               toShortenFQNames="true">
         <variable name="REFERENCE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -189,7 +189,7 @@
         <variable name="HOW_MANY" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -197,7 +197,7 @@
               description="todo block" toReformat="false" toShortenFQNames="true">
         <variable name="REASON" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -208,7 +208,7 @@
         <variable name="HOW_MANY" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -217,7 +217,7 @@
               toShortenFQNames="true">
         <variable name="RESAON" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -225,7 +225,7 @@
               toReformat="false" toShortenFQNames="true">
         <variable name="NUMBER_OF_TESTS" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
@@ -234,14 +234,14 @@
               toReformat="false" toShortenFQNames="true">
         <variable name="REASON" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
     <template name="no_plan" value="plan 'no_plan';&#10;$END$" description="plan no_plan statement" toReformat="false"
               toShortenFQNames="true">
         <context>
-            <option name="PERL5_PREFIX" value="false"/>
+
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>

@@ -133,17 +133,17 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 		}
 	}
 
-	public static class TestFile extends PerlTemplateContextType
+	public static class TestFile extends PerlTemplateContextType.Prefix
 	{
 		public TestFile()
 		{
-			super("PERL5_TEST_FILE", "Test file", Generic.class);
+			super("PERL5_TEST_FILE", "Test file prefix");
 		}
 
 		@Override
 		public boolean isInContext(PsiElement element)
 		{
-			return element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == PerlFileTypeTest.INSTANCE;
+			return element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == PerlFileTypeTest.INSTANCE && super.isInContext(element);
 		}
 	}
 
