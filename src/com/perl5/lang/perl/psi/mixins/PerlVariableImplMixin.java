@@ -137,7 +137,7 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 					}
 
 					// check assignment around declaration
-					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
+					PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declarationWrapper, PerlVariableDeclaration.class);
 					if (declaration != null)
 					{
 						if (declaration.getParent() instanceof PsiPerlAssignExpr)
