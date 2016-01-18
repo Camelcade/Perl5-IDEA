@@ -19,17 +19,14 @@ package com.perl5.lang.perl.idea;
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
 public class PerlNamesValidator implements NamesValidator
 {
-	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_a-zA-Z0-9]+");
-
 	@Override
 	public boolean isKeyword(@NotNull String name, Project project)
 	{
@@ -40,6 +37,6 @@ public class PerlNamesValidator implements NamesValidator
 	@Override
 	public boolean isIdentifier(@NotNull String name, Project project)
 	{
-		return IDENTIFIER_PATTERN.matcher(name).matches() || PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(name).matches();
+		return PerlLexer.IDENTIFIER_PATTERN.matcher(name).matches() || PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(name).matches();
 	}
 }

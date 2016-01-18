@@ -43,6 +43,7 @@
       <li>Self-object reference variable names are now configurable in Perl5 settings, fixes #706</li>
       <li>Significally improved live templates, added templates for parser extensions</li>
       <li>Implemented quote handler for regexps and string-like operators, fixes #741</li>
+      <li>Implemented dumb and comfy hash keys autocompletion, not intelligent, most like in Sublime Text, fixes #711</li>
       <li>Mason<ul>
         <li>Implemented filetypes for mason: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason files.</li>
@@ -605,7 +606,7 @@
     <project-components>
         <!-- Add your project components here -->
         <component>
-            <implementation-class>com.perl5.lang.perl.idea.project.PerlDirectoryChangeWatcher</implementation-class>
+            <implementation-class>com.perl5.lang.perl.idea.project.Perl5ProjectComponent</implementation-class>
         </component>
         <component>
             <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>

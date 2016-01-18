@@ -22,6 +22,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
@@ -33,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 09.08.2015.
@@ -45,10 +47,18 @@ public class PerlPsiUtil
 	 * @param startWith PsiElement to start from (inclusive)
 	 * @return list of PerlStringContentElement
 	 */
-	public static Collection<PerlStringContentElement> findStringElments(PsiElement startWith)
+	public static Collection<PerlStringContentElement> collectStringElements(PsiElement startWith)
 	{
-		ArrayList<PerlStringContentElement> result = new ArrayList<PerlStringContentElement>();
-		findStringElments(startWith, result);
+		final List<PerlStringContentElement> result = new ArrayList<PerlStringContentElement>();
+		processStringElements(startWith, new Processor<PerlStringContentElement>()
+		{
+			@Override
+			public boolean process(PerlStringContentElement perlStringContentElement)
+			{
+				result.add(perlStringContentElement);
+				return true;
+			}
+		});
 		return result;
 	}
 
@@ -56,17 +66,20 @@ public class PerlPsiUtil
 	 * Recursive searcher for string content elements
 	 *
 	 * @param startWith element to start with (inclusive)
-	 * @param result    list to populate
 	 */
-	public static void findStringElments(PsiElement startWith, Collection<PerlStringContentElement> result)
+	public static void processStringElements(PsiElement startWith, Processor<PerlStringContentElement> processor)
 	{
 		while (startWith != null)
 		{
 			if (startWith instanceof PerlStringContentElement)
-				result.add((PerlStringContentElement) startWith);
+			{
+				processor.process((PerlStringContentElement) startWith);
+			}
 
 			if (startWith.getFirstChild() != null)
-				findStringElments(startWith.getFirstChild(), result);
+			{
+				processStringElements(startWith.getFirstChild(), processor);
+			}
 
 			startWith = startWith.getNextSibling();
 		}

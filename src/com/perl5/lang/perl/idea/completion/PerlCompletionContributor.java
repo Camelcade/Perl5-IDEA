@@ -33,6 +33,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
 	public PerlCompletionContributor()
 	{
+		extend(
+				CompletionType.BASIC,
+				SIMPLE_HASH_INDEX,
+				new PerlHashIndexCompletionProvider()
+		);
+
 		// refactored
 		extend(
 				CompletionType.BASIC,
@@ -116,6 +122,13 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		// refactored
 		extend(
 				CompletionType.BASIC,
+				STRING_CONTENT_PATTERN.inside(USE_STATEMENT_PATTERN),
+				new PerlUseParametersCompletionProvider()
+		);
+
+		// refactored
+		extend(
+				CompletionType.BASIC,
 				NAMESPACE_NAME_PATTERN,
 				new PerlPackageCompletionProvider()
 		);
@@ -127,12 +140,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				new PerlPackageBuiltInCompletionProvider()
 		);
 
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				STRING_CONENT_PATTERN.inside(USE_STATEMENT_PATTERN),
-				new PerlUseParametersCompletionProvider()
-		);
 
 		// refactored
 		extend(

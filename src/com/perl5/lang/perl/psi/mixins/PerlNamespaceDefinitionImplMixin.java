@@ -350,7 +350,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 
 				// checks for @ARRAY = ...
 				if (assignExpression instanceof PsiPerlAssignExpr && assignElement.getNextSibling() != null)// not leftside element
-					for (PerlStringContentElement element : PerlPsiUtil.findStringElments(assignExpression.getLastChild()))
+					for (PerlStringContentElement element : PerlPsiUtil.collectStringElements(assignExpression.getLastChild()))
 					{
 						if (result == null)
 							result = new HashSet<String>();

@@ -16,13 +16,11 @@
 
 package com.perl5.lang.perl.idea;
 
-import com.intellij.patterns.ElementPattern;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.intellij.patterns.PlatformPatterns.psiFile;
@@ -34,12 +32,16 @@ public interface PerlElementPatterns extends PerlElementTypes
 {
 	PsiElementPattern.Capture<PsiElement> WHITE_SPACE_AND_COMMENTS = psiElement().whitespaceCommentOrError();
 
-	PsiElementPattern.Capture<PerlStringContentElementImpl> STRING_CONENT_PATTERN = psiElement(PerlStringContentElementImpl.class);
-	ElementPattern<PsiElement> SQ_OPENING_QUOTE = psiElement(QUOTE_SINGLE_OPEN);
-	PsiElementPattern.Capture<PerlStringContentElementImpl> SQ_STRING_BEGIN = STRING_CONENT_PATTERN.afterLeaf(SQ_OPENING_QUOTE).inside(PsiPerlStringSq.class);
-	ElementPattern<PsiElement> DQ_OPENING_QUOTE = psiElement(QUOTE_DOUBLE_OPEN);
-	PsiElementPattern.Capture<PerlStringContentElementImpl> DQ_STRING_BEGIN = STRING_CONENT_PATTERN.afterLeaf(DQ_OPENING_QUOTE).inside(PsiPerlStringDq.class);
-	PsiElementPattern.Capture<PerlStringContentElementImpl> QW_STRING_LIST = STRING_CONENT_PATTERN.inside(PsiPerlStringList.class);
+	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_PATTERN = psiElement(PerlStringContentElement.class);
+
+	PsiElementPattern.Capture<PerlStringContentElement> STRING_BARE = STRING_CONTENT_PATTERN.inside(PsiPerlStringBare.class);
+	PsiElementPattern.Capture<PerlStringContentElement> SQ_STRING_BEGIN = STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_SINGLE_OPEN)).inside(PsiPerlStringSq.class);
+	PsiElementPattern.Capture<PerlStringContentElement> DQ_STRING_BEGIN = STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_DOUBLE_OPEN)).inside(PsiPerlStringDq.class);
+	PsiElementPattern.Capture<PerlStringContentElement> QW_STRING_LIST = STRING_CONTENT_PATTERN.inside(PsiPerlStringList.class);
+
+	PsiElementPattern.Capture<PerlStringContentElement> SIMPLE_HASH_INDEX = STRING_CONTENT_PATTERN.withSuperParent(2, PsiPerlHashIndex.class).andOr(
+			STRING_BARE, SQ_STRING_BEGIN, DQ_STRING_BEGIN, QW_STRING_LIST
+	);
 
 	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = psiElement(PerlNamespaceElement.class);
 	PsiElementPattern.Capture<PsiPerlUseStatement> USE_STATEMENT_PATTERN = psiElement(PsiPerlUseStatement.class);
