@@ -22,10 +22,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
@@ -253,5 +250,18 @@ public class PerlPsiUtil
 			result = result.getPrevSibling();
 		}
 		return result;
+	}
+
+	@Nullable
+	public static PsiElement findGotoLabelDeclaration(PsiFile containingFile, String text) {
+		Collection<PerlGotoLabelElement> gotoLabel = PsiTreeUtil.findChildrenOfType(containingFile, PerlGotoLabelElement.class);
+		for (PerlGotoLabelElement element : gotoLabel) {
+			if (element.textMatches(text)) {
+				if (element.getPrevSibling() == null) {
+					return element;
+				}
+			}
+		}
+		return null;
 	}
 }
