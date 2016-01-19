@@ -35,7 +35,6 @@ public class PerlLexerUtil implements PerlElementTypes
 	);
 
 	public static final Map<IElementType, IElementType> TOKENS_MAP = new HashMap<IElementType, IElementType>();
-	public static final TokenSet STRING_CONTENT_TOKENS;
 
 	static
 	{
@@ -45,11 +44,6 @@ public class PerlLexerUtil implements PerlElementTypes
 		TOKENS_MAP.put(PACKAGE, STRING_PACKAGE);
 		TOKENS_MAP.put(PACKAGE_IDENTIFIER, STRING_PACKAGE);
 		TOKENS_MAP.put(PACKAGE_CORE_IDENTIFIER, STRING_PACKAGE);
-
-		STRING_CONTENT_TOKENS = TokenSet.orSet(
-				TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()])),
-				TokenSet.create(STRING_CONTENT)
-		);
 	}
 
 	public static IElementType remapSQToken(IElementType tokenType)

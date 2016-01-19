@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.parser.perlswitch;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlElementType;
-import com.perl5.lang.perl.PerlTokenType;
+import com.perl5.lang.perl.parser.elementTypes.PerlElementType;
+import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
 
 /**
  * Created by hurricup on 15.12.2015.

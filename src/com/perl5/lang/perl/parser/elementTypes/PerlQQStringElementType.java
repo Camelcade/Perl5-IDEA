@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl;
+package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.lexer.PerlQQStringLexerAdapter;
 
-public class PerlTokenType extends IElementType
+/**
+ * Created by hurricup on 10.09.2015.
+ */
+public class PerlQQStringElementType extends PerlParsableStringElementType
 {
-	public PerlTokenType(@NotNull @NonNls String debugName)
+	public PerlQQStringElementType(String name)
 	{
-		super(debugName, PerlLanguage.INSTANCE);
+		super(name);
 	}
 
-	public String toString()
+	@Override
+	protected FlexAdapter getLexerAdapter(Project project)
 	{
-		return "PerlTokenType." + super.toString();
+		return new PerlQQStringLexerAdapter(project);
 	}
-
 }
-

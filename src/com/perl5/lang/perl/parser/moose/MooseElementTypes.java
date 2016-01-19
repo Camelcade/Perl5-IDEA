@@ -17,8 +17,10 @@
 package com.perl5.lang.perl.parser.moose;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlElementType;
-import com.perl5.lang.perl.PerlTokenType;
+import com.perl5.lang.perl.parser.elementTypes.PerlElementType;
+import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
+import com.perl5.lang.perl.parser.moose.elementTypes.PerlTokenTypeInner;
+import com.perl5.lang.perl.parser.moose.elementTypes.PerlTokenTypeSuper;
 import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStubElementType;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
 
@@ -27,13 +29,13 @@ import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElem
  */
 public interface MooseElementTypes
 {
-	IElementType RESERVED_INNER = new PerlTokenType("inner");
+	IElementType RESERVED_INNER = new PerlTokenTypeInner("inner");
+	IElementType RESERVED_SUPER = new PerlTokenTypeSuper("super");
 	IElementType RESERVED_WITH = new PerlTokenType("with");
 	IElementType RESERVED_EXTENDS = new PerlTokenType("extends");
 	IElementType RESERVED_META = new PerlTokenType("meta");
 	IElementType RESERVED_OVERRIDE = new PerlTokenType("override");
 	IElementType RESERVED_AROUND = new PerlTokenType("around");
-	IElementType RESERVED_SUPER = new PerlTokenType("super");
 	IElementType RESERVED_AUGMENT = new PerlTokenType("augment");
 	IElementType RESERVED_AFTER = new PerlTokenType("after");
 	IElementType RESERVED_BEFORE = new PerlTokenType("before");

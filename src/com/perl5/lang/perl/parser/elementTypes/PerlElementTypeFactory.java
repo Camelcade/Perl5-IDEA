@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,46 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlElementType;
-import com.perl5.lang.perl.PerlTokenType;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.Set;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
 public class PerlElementTypeFactory
 {
+	protected final static Set<String> STRING_TOKENS = new THashSet<String>(Arrays.asList(
+			"STRING_PLUS",
+			"STRING_IDENTIFIER",
+			"STRING_PACKAGE",
+			"STRING_CONTENT"
+	));
+
 	public static IElementType getTokenType(@NotNull String name)
 	{
+		if (name.equals("HEREDOC_END"))
+			return new PerlTokenTypeHeredocEnd(name);
+		if (STRING_TOKENS.contains(name))
+			return new PerlTokenTypeStringContent(name);
+		if (name.equals("VARIABLE_NAME"))
+			return new PerlTokenTypeVariableName(name);
+		if (name.equals("SUB"))
+			return new PerlTokenTypeSub(name);
+		if (name.equals("PACKAGE"))
+			return new PerlTokenTypePackage(name);
+		if (name.equals("VERSION_ELEMENT"))
+			return new PerlTokenTypeVersionElement(name);
+		if (name.equals("POD"))
+			return new PerlTokenTypeComment(name);
+
+		// fixme we should create self-convertable element types
 		if (name.equals("HEREDOC_QQ") || name.equals("HEREDOC_QX") || name.equals("HEREDOC"))
 			return new PerlHeredocElementType(name);
 		if (name.equals("PARSABLE_STRING_USE_VARS"))
@@ -38,6 +63,7 @@ public class PerlElementTypeFactory
 
 	public static IElementType getElementType(@NotNull String name)
 	{
+		// fixme we should create self-convertable element types
 		if (name.equals("SUB_DEFINITION"))
 			return PerlStubElementTypes.SUB_DEFINITION;
 		else if (name.equals("METHOD_DEFINITION"))

@@ -91,11 +91,13 @@ public abstract class PerlParserExtension
 
 	/**
 	 * Creating PsiElement by node type. If not handled by current extension, returns null
+	 * Method is @Deprecated, use PsiElementProvider interface instead
 	 *
 	 * @param node node to handle
 	 * @return class instance or null if undhandled
 	 */
 	@Nullable
+	@Deprecated
 	public PsiElement createElement(@NotNull ASTNode node)
 	{
 		return null;

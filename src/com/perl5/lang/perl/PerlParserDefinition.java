@@ -37,6 +37,7 @@ import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
@@ -125,6 +126,9 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	public PsiElement createElement(ASTNode node)
 	{
 		IElementType elementType = node.getElementType();
+
+		if (elementType instanceof PsiElementProvider)
+			return ((PsiElementProvider) elementType).getPsiElement(node);
 
 		for (PerlParserExtension extension : PARSER_EXTENSIONS)
 		{

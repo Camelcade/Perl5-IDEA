@@ -24,11 +24,11 @@ limitations under the License.
 
   elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlElementTypes"
 
-  tokenTypeClass="com.perl5.lang.perl.PerlTokenType"
-  elementTypeClass="com.perl5.lang.perl.PerlElementType"
+  tokenTypeClass="com.perl5.lang.perl.parser.elementTypes.PerlTokenType"
+  elementTypeClass="com.perl5.lang.perl.parser.elementTypes.PerlElementType"
 
-  elementTypeFactory="com.perl5.lang.perl.parser.PerlElementTypeFactory.getElementType"
-  tokenTypeFactory="com.perl5.lang.perl.parser.PerlElementTypeFactory.getTokenType"
+  elementTypeFactory="com.perl5.lang.perl.parser.elementTypes.PerlElementTypeFactory.getElementType"
+  tokenTypeFactory="com.perl5.lang.perl.parser.elementTypes.PerlElementTypeFactory.getTokenType"
 
   parserUtilClass="com.perl5.lang.perl.parser.PerlParserUtil"
   psiImplUtilClass="com.perl5.lang.perl.psi.utils.PerlPsiImplUtil"
@@ -36,7 +36,7 @@ limitations under the License.
   tokens=[
     COMMENT_LINE="COMMENT_LINE"
     COMMENT_BLOCK="COMMENT_BLOCK"
-    POD="PERL_POD"
+    POD="POD"
 
     SIGIL_ARRAY="SIGIL_ARRAY"
     SIGIL_SCALAR="SIGIL_SCALAR"

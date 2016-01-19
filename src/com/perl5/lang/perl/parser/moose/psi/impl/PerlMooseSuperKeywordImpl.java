@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.parser.moose.psi.impl;
 
-import com.intellij.lexer.FlexAdapter;
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlQQStringLexerAdapter;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseSuperKeyword;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 10.09.2015.
+ * Created by hurricup on 19.01.2016.
  */
-public class PerlQQStringElementType extends PerlParsableStringElementType
+public class PerlMooseSuperKeywordImpl extends LeafPsiElement implements PerlMooseSuperKeyword
 {
-	public PerlQQStringElementType(String name)
+	public PerlMooseSuperKeywordImpl(@NotNull IElementType type, CharSequence text)
 	{
-		super(name);
-	}
-
-	@Override
-	protected FlexAdapter getLexerAdapter(Project project)
-	{
-		return new PerlQQStringLexerAdapter(project);
+		super(type, text);
 	}
 }
