@@ -17,12 +17,12 @@
 package com.perl5.lang.perl.parser.moose;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.elementTypes.PerlElementType;
+import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseInnerKeywordImpl;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseSuperKeywordImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.*;
 import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStubElementType;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
 import org.jetbrains.annotations.NotNull;
@@ -61,17 +61,97 @@ public interface MooseElementTypes
 	IElementType RESERVED_HAS = new PerlTokenType("has");
 
 
-	IElementType MOOSE_STATEMENT_INNER = new PerlElementType("MOOSE_STATEMENT_INNER");
-	IElementType MOOSE_STATEMENT_WITH = new PerlElementType("MOOSE_STATEMENT_WITH");
-	IElementType MOOSE_STATEMENT_EXTENDS = new PerlElementType("MOOSE_STATEMENT_EXTENDS");
-	IElementType MOOSE_STATEMENT_META = new PerlElementType("MOOSE_STATEMENT_META");
-	IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideStubElementType("MOOSE_STATEMENT_OVERRIDE");
-	IElementType MOOSE_STATEMENT_AROUND = new PerlElementType("MOOSE_STATEMENT_AROUND");
-	IElementType MOOSE_STATEMENT_SUPER = new PerlElementType("MOOSE_STATEMENT_SUPER");
-	IElementType MOOSE_STATEMENT_AUGMENT = new PerlElementType("MOOSE_STATEMENT_AUGMENT");
-	IElementType MOOSE_STATEMENT_AFTER = new PerlElementType("MOOSE_STATEMENT_AFTER");
-	IElementType MOOSE_STATEMENT_BEFORE = new PerlElementType("MOOSE_STATEMENT_BEFORE");
+	IElementType MOOSE_STATEMENT_INNER = new PerlElementTypeEx("MOOSE_STATEMENT_INNER")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseInnerStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_WITH = new PerlElementTypeEx("MOOSE_STATEMENT_WITH")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseWithStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_EXTENDS = new PerlElementTypeEx("MOOSE_STATEMENT_EXTENDS")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseExtendsStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_META = new PerlElementTypeEx("MOOSE_STATEMENT_META")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseMetaStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_AROUND = new PerlElementTypeEx("MOOSE_STATEMENT_AROUND")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseAroundStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_SUPER = new PerlElementTypeEx("MOOSE_STATEMENT_SUPER")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseSuperStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_AUGMENT = new PerlElementTypeEx("MOOSE_STATEMENT_AUGMENT")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseAugmentStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_AFTER = new PerlElementTypeEx("MOOSE_STATEMENT_AFTER")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseAfterStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_BEFORE = new PerlElementTypeEx("MOOSE_STATEMENT_BEFORE")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseBeforeStatementImpl(node);
+		}
+	};
+	IElementType MOOSE_STATEMENT_HAS = new PerlElementTypeEx("MOOSE_STATEMENT_HAS")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlMooseHasStatementImpl(node);
+		}
+	};
 
-	IElementType MOOSE_STATEMENT_HAS = new PerlElementType("MOOSE_STATEMENT_HAS");
+	IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideStubElementType("MOOSE_STATEMENT_OVERRIDE");
 	IElementType MOOSE_ATTRIBUTE = new PerlMooseAttributeStubElementType("MOOSE_ATTRIBUTE");
 }

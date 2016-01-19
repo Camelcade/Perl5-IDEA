@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,33 +18,24 @@ package com.perl5.lang.mason.elementType;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason.MasonTemplatingLanguage;
-import com.perl5.lang.mason.psi.impl.MasonOverrideDefinitionImpl;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.mason.psi.impl.MasonMethodModifierImpl;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 03.01.2016.
+ * Created by hurricup on 19.01.2016.
  */
-public class MasonOverrideStubElementType extends PerlMooseOverrideStubElementType
+public class MasonMethodModifierElementType extends MasonTemplatingElementType
 {
-	public MasonOverrideStubElementType(String name)
+	public MasonMethodModifierElementType(@NotNull @NonNls String debugName)
 	{
-		super(name, MasonTemplatingLanguage.INSTANCE);
-	}
-
-	@Override
-	public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new MasonOverrideDefinitionImpl(stub, this);
+		super(debugName);
 	}
 
 	@NotNull
 	@Override
 	public PsiElement getPsiElement(@NotNull ASTNode node)
 	{
-		return new MasonOverrideDefinitionImpl(node);
+		return new MasonMethodModifierImpl(node);
 	}
 }

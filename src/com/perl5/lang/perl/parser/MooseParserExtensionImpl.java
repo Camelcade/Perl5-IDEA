@@ -16,16 +16,13 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.openapi.util.Pair;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.parser.moose.psi.impl.*;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -209,74 +206,6 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 				parseHas(b, l) ||
 				parseDefault(b, l)
 				;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement createElement(@NotNull ASTNode node)
-	{
-		IElementType tokenType = node.getElementType();
-
-		if (tokenType == MOOSE_STATEMENT_HAS)
-		{
-			return new PerlMooseHasStatementImpl(node);
-		}
-		else if (tokenType == MOOSE_ATTRIBUTE)
-		{
-			return new PerlMooseAttributeImpl(node);
-		}
-		else if (tokenType == MOOSE_STATEMENT_INNER)
-		{
-			return new PerlMooseInnerStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_WITH)
-		{
-			return new PerlMooseWithStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_EXTENDS)
-		{
-			return new PerlMooseExtendsStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_META)
-		{
-			return new PerlMooseMetaStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_OVERRIDE)
-		{
-			return new PerlMooseOverrideStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_AROUND)
-		{
-			return new PerlMooseAroundStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_SUPER)
-		{
-			return new PerlMooseSuperStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_AUGMENT)
-		{
-			return new PerlMooseAugmentStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_AFTER)
-		{
-			return new PerlMooseAfterStatementImpl(node);
-
-		}
-		else if (tokenType == MOOSE_STATEMENT_BEFORE)
-		{
-			return new PerlMooseBeforeStatementImpl(node);
-
-		}
-
-		return super.createElement(node);
 	}
 
 	@Nullable

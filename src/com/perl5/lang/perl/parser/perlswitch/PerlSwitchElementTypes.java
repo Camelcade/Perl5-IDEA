@@ -16,9 +16,13 @@
 
 package com.perl5.lang.perl.parser.perlswitch;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.elementTypes.PerlElementType;
+import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
+import com.perl5.lang.perl.parser.perlswitch.psi.*;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 15.12.2015.
@@ -28,9 +32,49 @@ public interface PerlSwitchElementTypes
 	IElementType RESERVED_SWITCH = new PerlTokenType("switch");
 	IElementType RESERVED_CASE = new PerlTokenType("case");
 
-	IElementType SWITCH_COMPOUND = new PerlElementType("SWITCH_COMPOUND");
-	IElementType SWITCH_CONDITION = new PerlElementType("SWITCH_CONDITION");
-	IElementType CASE_COMPOUND = new PerlElementType("CASE_COMPOUND");
-	IElementType CASE_DEFAULT = new PerlElementType("CASE_DEFAULT");
-	IElementType CASE_CONDITION = new PerlElementType("CASE_CONDITION");
+	IElementType SWITCH_COMPOUND = new PerlElementTypeEx("SWITCH_COMPOUND")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlSwitchCompoundStatementImpl(node);
+		}
+	};
+	IElementType SWITCH_CONDITION = new PerlElementTypeEx("SWITCH_CONDITION")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlSwitchConditionImpl(node);
+		}
+	};
+	IElementType CASE_COMPOUND = new PerlElementTypeEx("CASE_COMPOUND")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlCaseCompoundStatementImpl(node);
+		}
+	};
+	IElementType CASE_DEFAULT = new PerlElementTypeEx("CASE_DEFAULT")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlCaseDefaultCompoundImpl(node);
+		}
+	};
+	IElementType CASE_CONDITION = new PerlElementTypeEx("CASE_CONDITION")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new PerlCaseConditionImpl(node);
+		}
+	};
 }

@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes
+public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider
 {
 	public PerlMooseAttributeStubElementType(String name)
 	{
@@ -49,4 +50,10 @@ public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElem
 		return psi instanceof PerlMooseAttribute && ((PerlMooseAttribute) psi).getSubNameElement() != null;
 	}
 
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PerlMooseAttributeImpl(node);
+	}
 }

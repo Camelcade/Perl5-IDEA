@@ -28,11 +28,13 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlInterpolatedHeredocLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlSimpleHeredocLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 13.08.2015.
  */
-public class PerlHeredocElementType extends ILazyParseableElementType
+public class PerlHeredocElementType extends ILazyParseableElementType implements PsiElementProvider
 {
 	public PerlHeredocElementType(String name)
 	{
@@ -65,5 +67,12 @@ public class PerlHeredocElementType extends ILazyParseableElementType
 		{
 			return new PerlInterpolatedHeredocLexerAdapter(project);
 		}
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PerlHeredocElementImpl(node);
 	}
 }

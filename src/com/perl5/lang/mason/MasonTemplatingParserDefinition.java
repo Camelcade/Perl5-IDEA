@@ -16,18 +16,15 @@
 
 package com.perl5.lang.mason;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.mason.elementType.MasonFileElementType;
 import com.perl5.lang.mason.lexer.MasonTemplatingLexerAdapter;
-import com.perl5.lang.mason.psi.impl.*;
+import com.perl5.lang.mason.psi.impl.MasonTemplatingFileImpl;
 import com.perl5.lang.perl.parser.MasonTemplatingParserImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -64,56 +61,4 @@ public class MasonTemplatingParserDefinition extends MasonParserDefinition
 		return new MasonTemplatingFileImpl(viewProvider);
 	}
 
-	@NotNull
-	@Override
-	public PsiElement createElement(ASTNode node)
-	{
-		IElementType elementType = node.getElementType();
-		if (elementType == MASON_OVERRIDE_DEFINITION)
-		{
-			return new MasonOverrideDefinitionImpl(node);
-		}
-		else if (elementType == MASON_FLAGS_STATEMENT)
-		{
-			return new MasonFlagsStatementImpl(node);
-		}
-		else if (elementType == MASON_ABSTRACT_BLOCK)
-		{
-			return new MasonAbstractBlockImpl(node);
-		}
-		else if (elementType == MASON_FILTERED_BLOCK)
-		{
-			return new MasonFilteredBlockImpl(node);
-		}
-		else if (elementType == MASON_SIMPLE_DEREF_EXPR)
-		{
-			return new MasonSimpleDerefExpressionImpl(node);
-		}
-		else if (elementType == MASON_METHOD_DEFINITION)
-		{
-			return new MasonMethodDefinitionImpl(node);
-		}
-		else if (elementType == MASON_FILTER_DEFINITION)
-		{
-			return new MasonFilterDefinitionImpl(node);
-		}
-		else if (elementType == MASON_AROUND_MODIFIER)
-		{
-			return new MasonAroundMethodModifierImpl(node);
-		}
-		else if (elementType == MASON_TEXT_BLOCK)
-		{
-			return new MasonTextBlockImpl(node);
-		}
-		else if (elementType == MASON_CALL_STATEMENT)
-		{
-			return new MasonCallStatementImpl(node);
-		}
-		else if (elementType == MASON_AFTER_MODIFIER || elementType == MASON_BEFORE_MODIFIER || elementType == MASON_AUGMENT_MODIFIER)
-		{
-			return new MasonMethodModifierImpl(node);
-		}
-
-		return super.createElement(node);
-	}
 }

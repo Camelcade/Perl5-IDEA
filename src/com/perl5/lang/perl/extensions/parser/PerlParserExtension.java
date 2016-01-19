@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.extensions.parser;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.util.Pair;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
@@ -86,21 +84,6 @@ public abstract class PerlParserExtension
 	public boolean parseTerm(PerlBuilder b, int l)
 	{
 		return false;
-	}
-
-
-	/**
-	 * Creating PsiElement by node type. If not handled by current extension, returns null
-	 * Method is @Deprecated, use PsiElementProvider interface instead
-	 *
-	 * @param node node to handle
-	 * @return class instance or null if undhandled
-	 */
-	@Nullable
-	@Deprecated
-	public PsiElement createElement(@NotNull ASTNode node)
-	{
-		return null;
 	}
 
 	/**

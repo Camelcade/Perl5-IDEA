@@ -39,8 +39,6 @@ import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -130,23 +128,6 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 		if (elementType instanceof PsiElementProvider)
 			return ((PsiElementProvider) elementType).getPsiElement(node);
 
-		for (PerlParserExtension extension : PARSER_EXTENSIONS)
-		{
-			PsiElement element = extension.createElement(node);
-			if (element != null)
-			{
-				return element;
-			}
-		}
-
-		if (elementType == HEREDOC_QQ || elementType == HEREDOC_QX || elementType == HEREDOC) // fixme instanceof is faster ?
-		{
-			return new PerlHeredocElementImpl(node);
-		}
-		else if (elementType == PARSABLE_STRING_USE_VARS)
-		{
-			return new PerlParsableStringWrapperlImpl(node);
-		}
 		return PerlElementTypes.Factory.createElement(node);
 	}
 }

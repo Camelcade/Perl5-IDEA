@@ -31,13 +31,14 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubImpl;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.01.2016.
  */
-public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElementType
+public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElementType implements PsiElementProvider
 {
 	public MasonNamespaceElementType(String name)
 	{
@@ -93,5 +94,12 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 		return psi instanceof MasonNamespaceDefinition &&
 				psi.isValid() &&
 				StringUtil.isNotEmpty(((MasonNamespaceDefinition) psi).getAbsoluteComponentPath());
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new MasonNamespaceDefinitionImpl(node);
 	}
 }

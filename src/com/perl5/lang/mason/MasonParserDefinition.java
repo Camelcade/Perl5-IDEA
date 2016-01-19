@@ -16,19 +16,16 @@
 
 package com.perl5.lang.mason;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason.elementType.MasonElementTypes;
 import com.perl5.lang.mason.elementType.MasonFileElementType;
 import com.perl5.lang.mason.psi.impl.MasonFileImpl;
-import com.perl5.lang.mason.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.MasonParserImpl;
@@ -77,17 +74,5 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 	public PsiParser createParser(Project project)
 	{
 		return new MasonParserImpl();
-	}
-
-	@NotNull
-	@Override
-	public PsiElement createElement(ASTNode node)
-	{
-		if (node.getElementType() == MASON_NAMESPACE_DEFINITION)
-		{
-			return new MasonNamespaceDefinitionImpl(node);
-		}
-
-		return super.createElement(node);
 	}
 }

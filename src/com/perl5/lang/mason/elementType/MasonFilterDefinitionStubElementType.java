@@ -16,6 +16,8 @@
 
 package com.perl5.lang.mason.elementType;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason.psi.impl.MasonFilterDefinitionImpl;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
@@ -37,5 +39,11 @@ public class MasonFilterDefinitionStubElementType extends MasonMethodDefinitionS
 		return new MasonFilterDefinitionImpl(stub, this);
 	}
 
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new MasonFilterDefinitionImpl(node);
+	}
 }
 

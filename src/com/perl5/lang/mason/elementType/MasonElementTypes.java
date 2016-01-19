@@ -16,10 +16,14 @@
 
 package com.perl5.lang.mason.elementType;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason.MasonSyntaxElements;
 import com.perl5.lang.mason.MasonTemplatingLanguage;
+import com.perl5.lang.mason.psi.impl.*;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.12.2015.
@@ -84,22 +88,77 @@ public interface MasonElementTypes extends MasonSyntaxElements
 	IElementType MASON_OVERRIDE_OPENER = new MasonTemplatingTokenType(KEYWORD_OVERRIDE_OPENER);
 	IElementType MASON_OVERRIDE_CLOSER = new MasonTemplatingTokenType(KEYWORD_OVERRIDE_CLOSER);
 
-	IElementType MASON_FLAGS_STATEMENT = new MasonTemplatingElementType("FLAGS_STATEMENT");
-
 	IElementType MASON_NAMESPACE_DEFINITION = new MasonNamespaceElementType("MASON_PACKAGE");
 
 	IElementType MASON_OVERRIDE_DEFINITION = new MasonOverrideStubElementType("MASON_OVERRIDE_DEFINITION");
 	IElementType MASON_METHOD_DEFINITION = new MasonMethodDefinitionStubElementType("MASON_METHOD_DEFINITION");
 	IElementType MASON_FILTER_DEFINITION = new MasonFilterDefinitionStubElementType("MASON_FILTER_DEFINITION");
 
-	IElementType MASON_CALL_STATEMENT = new MasonTemplatingElementType("MASON_CALL_STATEMENT");
-	IElementType MASON_AROUND_MODIFIER = new MasonTemplatingElementType("MASON_AROUND_MODIFIER");
-	IElementType MASON_AFTER_MODIFIER = new MasonTemplatingElementType("MASON_AFTER_MODIFIER");
-	IElementType MASON_AUGMENT_MODIFIER = new MasonTemplatingElementType("MASON_AUGMENT_MODIFIER");
-	IElementType MASON_BEFORE_MODIFIER = new MasonTemplatingElementType("MASON_BEFOE_MODIFIER");
+	IElementType MASON_AFTER_MODIFIER = new MasonMethodModifierElementType("MASON_AFTER_MODIFIER");
+	IElementType MASON_AUGMENT_MODIFIER = new MasonMethodModifierElementType("MASON_AUGMENT_MODIFIER");
+	IElementType MASON_BEFORE_MODIFIER = new MasonMethodModifierElementType("MASON_BEFOE_MODIFIER");
 
-	IElementType MASON_ABSTRACT_BLOCK = new MasonTemplatingElementType("MASON_ABSTRACT_BLOCK");
-	IElementType MASON_TEXT_BLOCK = new MasonTemplatingElementType("MASON_TEXT_BLOCK");
-	IElementType MASON_FILTERED_BLOCK = new MasonTemplatingElementType("MASON_FILTERED_BLOCK");
-	IElementType MASON_SIMPLE_DEREF_EXPR = new MasonTemplatingElementType("MASON_DEREF_EXPRESSION");
+	IElementType MASON_FLAGS_STATEMENT = new MasonTemplatingElementType("FLAGS_STATEMENT")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new MasonFlagsStatementImpl(node);
+		}
+	};
+	IElementType MASON_CALL_STATEMENT = new MasonTemplatingElementType("MASON_CALL_STATEMENT")	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new MasonCallStatementImpl(node);
+		}
+	};
+
+	IElementType MASON_AROUND_MODIFIER = new MasonTemplatingElementType("MASON_AROUND_MODIFIER")	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new MasonAroundMethodModifierImpl(node);
+		}
+	};
+
+	IElementType MASON_ABSTRACT_BLOCK = new MasonTemplatingElementType("MASON_ABSTRACT_BLOCK")	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new MasonAbstractBlockImpl(node);
+		}
+	};
+
+	IElementType MASON_TEXT_BLOCK = new MasonTemplatingElementType("MASON_TEXT_BLOCK")	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new MasonTextBlockImpl(node);
+		}
+	};
+
+	IElementType MASON_FILTERED_BLOCK = new MasonTemplatingElementType("MASON_FILTERED_BLOCK")	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new MasonFilteredBlockImpl(node);
+		}
+	};
+
+	IElementType MASON_SIMPLE_DEREF_EXPR = new MasonTemplatingElementType("MASON_DEREF_EXPRESSION")	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new MasonSimpleDerefExpressionImpl(node);
+		}
+	};
+
 }

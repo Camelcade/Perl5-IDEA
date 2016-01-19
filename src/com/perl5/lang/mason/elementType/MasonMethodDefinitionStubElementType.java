@@ -16,17 +16,20 @@
 
 package com.perl5.lang.mason.elementType;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason.MasonTemplatingLanguage;
 import com.perl5.lang.mason.psi.impl.MasonMethodDefinitionImpl;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlMethodDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionStubElementType
+public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionStubElementType implements PsiElementProvider
 {
 	public MasonMethodDefinitionStubElementType(String name)
 	{
@@ -37,5 +40,12 @@ public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionSt
 	public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
 		return new MasonMethodDefinitionImpl(stub, this);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new MasonMethodDefinitionImpl(node);
 	}
 }

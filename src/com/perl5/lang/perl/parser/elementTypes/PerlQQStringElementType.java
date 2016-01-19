@@ -16,14 +16,18 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlQQStringLexerAdapter;
+import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.09.2015.
  */
-public class PerlQQStringElementType extends PerlParsableStringElementType
+public class PerlQQStringElementType extends PerlParsableStringElementType implements PsiElementProvider
 {
 	public PerlQQStringElementType(String name)
 	{
@@ -34,5 +38,12 @@ public class PerlQQStringElementType extends PerlParsableStringElementType
 	protected FlexAdapter getLexerAdapter(Project project)
 	{
 		return new PerlQQStringLexerAdapter(project);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PerlParsableStringWrapperlImpl(node);
 	}
 }

@@ -16,18 +16,14 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
-import com.perl5.lang.perl.parser.perlswitch.psi.*;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -165,36 +161,6 @@ public class PerlSwitchPerlParserExtensionImpl extends PerlParserExtension imple
 	public Map<String, IElementType> getReservedTokens()
 	{
 		return TOKENS_MAP;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement createElement(@NotNull ASTNode node)
-	{
-		IElementType tokenType = node.getElementType();
-
-		if (tokenType == SWITCH_COMPOUND)
-		{
-			return new PerlSwitchCompoundStatementImpl(node);
-		}
-		else if (tokenType == SWITCH_CONDITION)
-		{
-			return new PerlSwitchConditionImpl(node);
-		}
-		else if (tokenType == CASE_COMPOUND)
-		{
-			return new PerlCaseCompoundStatementImpl(node);
-		}
-		else if (tokenType == CASE_DEFAULT)
-		{
-			return new PerlCaseDefaultCompoundImpl(node);
-		}
-		else if (tokenType == CASE_CONDITION)
-		{
-			return new PerlCaseConditionImpl(node);
-		}
-
-		return super.createElement(node);
 	}
 
 	@Override

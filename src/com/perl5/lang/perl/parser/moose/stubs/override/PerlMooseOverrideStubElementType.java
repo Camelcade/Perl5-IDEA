@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
@@ -33,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes
+public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider
 {
 	public PerlMooseOverrideStubElementType(String name)
 	{
@@ -61,4 +62,10 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
 				StringUtil.isNotEmpty(((PerlMooseOverrideStatement) psi).getSubName());
 	}
 
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PerlMooseOverrideStatementImpl(node);
+	}
 }
