@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseInnerStatementImpl extends PsiPerlStatementImpl implements PerlMooseInnerStatement
+public class PerlMooseAugmentStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAugmentStatement
 {
-	public PerlMooseInnerStatementImpl(ASTNode node)
+	public PerlMooseAugmentStatementImpl(ASTNode node)
 	{
 		super(node);
 	}

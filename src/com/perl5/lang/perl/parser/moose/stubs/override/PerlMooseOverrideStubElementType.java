@@ -24,7 +24,7 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

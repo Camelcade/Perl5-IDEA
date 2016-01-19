@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -25,6 +25,8 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlPsiLists;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseHasStatement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlAnnotation;
 import com.perl5.lang.perl.psi.PsiPerlBlock;

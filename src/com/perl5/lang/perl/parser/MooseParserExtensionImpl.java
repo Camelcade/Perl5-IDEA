@@ -25,7 +25,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.parser.moose.psi.*;
+import com.perl5.lang.perl.parser.moose.psi.impl.*;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

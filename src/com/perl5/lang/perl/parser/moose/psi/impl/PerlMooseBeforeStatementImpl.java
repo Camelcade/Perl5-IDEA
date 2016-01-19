@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseBeforeStatement;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAroundStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAroundStatement
+public class PerlMooseBeforeStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseBeforeStatement
 {
-	public PerlMooseAroundStatementImpl(ASTNode node)
+	public PerlMooseBeforeStatementImpl(ASTNode node)
 	{
 		super(node);
 	}

@@ -25,7 +25,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.mason.psi.MasonOverrideDefinition;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatementImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlBlock;

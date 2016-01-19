@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.perl5.lang.mason.psi.MasonMethodModifier;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseMethodModifierImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseMethodModifierImpl;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
 import org.jetbrains.annotations.NotNull;

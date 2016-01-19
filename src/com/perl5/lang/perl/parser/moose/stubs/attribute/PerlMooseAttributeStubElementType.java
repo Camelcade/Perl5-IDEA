@@ -22,7 +22,7 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttributeImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeImpl;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import org.jetbrains.annotations.NotNull;
 
