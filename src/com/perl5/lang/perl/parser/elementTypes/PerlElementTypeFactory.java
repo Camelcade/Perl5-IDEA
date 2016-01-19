@@ -16,8 +16,11 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.psi.impl.*;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,20 +41,68 @@ public class PerlElementTypeFactory
 
 	public static IElementType getTokenType(@NotNull String name)
 	{
-		if (name.equals("HEREDOC_END"))
-			return new PerlTokenTypeHeredocEnd(name);
 		if (STRING_TOKENS.contains(name))
-			return new PerlTokenTypeStringContent(name);
+			return new PerlStringContentTokenType(name);
+		if (name.equals("HEREDOC_END"))
+			return new PerlTokenTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public ASTNode createLeafNode(CharSequence leafText)
+				{
+					return new PerlHeredocTerminatorElementImpl(this, leafText);
+				}
+			};
 		if (name.equals("VARIABLE_NAME"))
-			return new PerlTokenTypeVariableName(name);
+			return new PerlTokenTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public ASTNode createLeafNode(CharSequence leafText)
+				{
+					return new PerlVariableNameElementImpl(this, leafText);
+				}
+			};
 		if (name.equals("SUB"))
-			return new PerlTokenTypeSub(name);
+			return new PerlTokenTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public ASTNode createLeafNode(CharSequence leafText)
+				{
+					return new PerlSubNameElementImpl(this, leafText);
+				}
+			};
 		if (name.equals("PACKAGE"))
-			return new PerlTokenTypePackage(name);
+			return new PerlTokenTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public ASTNode createLeafNode(CharSequence leafText)
+				{
+					return new PerlNamespaceElementImpl(this, leafText);
+				}
+			};
 		if (name.equals("VERSION_ELEMENT"))
-			return new PerlTokenTypeVersionElement(name);
+			return new PerlTokenTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public ASTNode createLeafNode(CharSequence leafText)
+				{
+					return new PerlVersionElementImpl(this, leafText);
+				}
+			};
 		if (name.equals("POD"))
-			return new PerlTokenTypeComment(name);
+			return new PerlTokenTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public ASTNode createLeafNode(CharSequence leafText)
+				{
+					return new PsiCommentImpl(this, leafText);
+				}
+			};
 
 		// fixme we should create self-convertable element types
 		if (name.equals("HEREDOC_QQ") || name.equals("HEREDOC_QX") || name.equals("HEREDOC"))

@@ -14,29 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.elementTypes;
+package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.ILeafElementType;
-import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseSuperKeywordImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 19.01.2016.
  */
-public class PerlTokenTypeSuper extends PerlTokenType implements ILeafElementType
+public abstract class PerlTokenTypeEx extends PerlTokenType implements ILeafElementType
 {
-	public PerlTokenTypeSuper(@NotNull @NonNls String debugName)
+	public PerlTokenTypeEx(@NotNull @NonNls String debugName)
 	{
 		super(debugName);
-	}
-
-	@NotNull
-	@Override
-	public ASTNode createLeafNode(CharSequence leafText)
-	{
-		return new PerlMooseSuperKeywordImpl(this, leafText);
 	}
 }

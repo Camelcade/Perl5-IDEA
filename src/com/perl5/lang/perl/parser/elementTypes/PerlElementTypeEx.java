@@ -16,26 +16,16 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.ILeafElementType;
-import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 19.01.2016.
  */
-public class PerlTokenTypeSub extends PerlTokenType implements ILeafElementType
+public abstract class PerlElementTypeEx extends PerlElementType implements PsiElementProvider
 {
-	public PerlTokenTypeSub(@NotNull @NonNls String debugName)
+	public PerlElementTypeEx(@NotNull @NonNls String debugName)
 	{
 		super(debugName);
-	}
-
-	@NotNull
-	@Override
-	public ASTNode createLeafNode(CharSequence leafText)
-	{
-		return new PerlSubNameElementImpl(this, leafText);
 	}
 }

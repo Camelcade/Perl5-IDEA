@@ -16,21 +16,40 @@
 
 package com.perl5.lang.perl.parser.moose;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
-import com.perl5.lang.perl.parser.moose.elementTypes.PerlTokenTypeInner;
-import com.perl5.lang.perl.parser.moose.elementTypes.PerlTokenTypeSuper;
+import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseInnerKeywordImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseSuperKeywordImpl;
 import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStubElementType;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 27.12.2015.
  */
 public interface MooseElementTypes
 {
-	IElementType RESERVED_INNER = new PerlTokenTypeInner("inner");
-	IElementType RESERVED_SUPER = new PerlTokenTypeSuper("super");
+	IElementType RESERVED_INNER = new PerlTokenTypeEx("inner")
+	{
+		@NotNull
+		@Override
+		public ASTNode createLeafNode(CharSequence leafText)
+		{
+			return new PerlMooseInnerKeywordImpl(this, leafText);
+		}
+	};
+	IElementType RESERVED_SUPER = new PerlTokenTypeEx("super")
+	{
+		@NotNull
+		@Override
+		public ASTNode createLeafNode(CharSequence leafText)
+		{
+			return new PerlMooseSuperKeywordImpl(this, leafText);
+		}
+	};
 	IElementType RESERVED_WITH = new PerlTokenType("with");
 	IElementType RESERVED_EXTENDS = new PerlTokenType("extends");
 	IElementType RESERVED_META = new PerlTokenType("meta");

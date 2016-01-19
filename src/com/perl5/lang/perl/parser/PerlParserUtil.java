@@ -29,7 +29,7 @@ import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlBuilderLight;
-import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeStringContent;
+import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -1951,7 +1951,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		IElementType tokenType = b.getTokenType();
 
-		if (tokenType instanceof PerlTokenTypeStringContent)
+		if (tokenType instanceof PerlStringContentTokenType)
 		{
 			if (((PerlBuilder) b).getStringWrapper() == null || tokenType != STRING_IDENTIFIER)
 			{

@@ -18,16 +18,16 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.ILeafElementType;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 19.01.2016.
  */
-public class PerlTokenTypeHeredocEnd extends PerlTokenType implements ILeafElementType
+public class PerlStringContentTokenType extends PerlTokenType implements ILeafElementType
 {
-	public PerlTokenTypeHeredocEnd(@NotNull @NonNls String debugName)
+	public PerlStringContentTokenType(@NotNull @NonNls String debugName)
 	{
 		super(debugName);
 	}
@@ -36,6 +36,6 @@ public class PerlTokenTypeHeredocEnd extends PerlTokenType implements ILeafEleme
 	@Override
 	public ASTNode createLeafNode(CharSequence leafText)
 	{
-		return new PerlHeredocTerminatorElementImpl(this, leafText);
+		return new PerlStringContentElementImpl(this, leafText);
 	}
 }
