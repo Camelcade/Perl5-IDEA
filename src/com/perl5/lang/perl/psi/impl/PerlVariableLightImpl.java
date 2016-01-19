@@ -154,7 +154,7 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 	@Override
 	public int getLineNumber()
 	{
-		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
+		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getParent().getContainingFile());
 		return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
 	}
 
