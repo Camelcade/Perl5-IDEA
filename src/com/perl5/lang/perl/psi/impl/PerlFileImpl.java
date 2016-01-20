@@ -616,4 +616,39 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 
 		return null;
 	}
+
+/* This method is to get ElementTypes stats from PsiFile using PSIViewer
+	public String getTokensStats()
+	{
+		final Map<IElementType, Integer> TOKENS_STATS = new THashMap<IElementType, Integer>();
+
+		accept(new PerlRecursiveVisitor(){
+
+			@Override
+			public void visitElement(PsiElement element)
+			{
+				IElementType elementType = element.getNode().getElementType();
+				if( elementType instanceof PerlElementType)
+				{
+					if (!TOKENS_STATS.containsKey(elementType))
+					{
+						TOKENS_STATS.put(elementType, 1);
+					}
+					else
+					{
+						TOKENS_STATS.put(elementType, TOKENS_STATS.get(elementType) + 1);
+					}
+				}
+				super.visitElement(element);
+			}
+		});
+
+		for (IElementType type: TOKENS_STATS.keySet())
+		{
+			System.err.println(type+ ";" + TOKENS_STATS.get(type));
+		}
+
+		return "";
+	}
+*/
 }
