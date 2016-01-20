@@ -21,6 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.impl.PsiPerlGlobVariableImpl;
@@ -32,7 +33,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiPerlGlobVariable>
+public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiPerlGlobVariable> implements PsiElementProvider
 {
 
 	public PerlGlobStubElementType(String name)
@@ -44,6 +45,14 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	public PsiPerlGlobVariable createPsi(@NotNull PerlGlobStub stub)
 	{
 		return new PsiPerlGlobVariableImpl(stub, this);
+
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlGlobVariableImpl(node);
 	}
 
 	@Override

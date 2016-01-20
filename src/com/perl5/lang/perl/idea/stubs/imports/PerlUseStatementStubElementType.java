@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.idea.stubs.imports;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PsiPerlUseStatementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +33,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 20.08.2015.
  */
-public class PerlUseStatementStubElementType extends IStubElementType<PerlUseStatementStub, PerlUseStatement>
+public class PerlUseStatementStubElementType extends IStubElementType<PerlUseStatementStub, PerlUseStatement> implements PsiElementProvider
 {
 	public PerlUseStatementStubElementType(String debugName)
 	{
@@ -42,6 +44,13 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
 	public PerlUseStatement createPsi(@NotNull PerlUseStatementStub stub)
 	{
 		return new PsiPerlUseStatementImpl(stub, this);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlUseStatementImpl(node);
 	}
 
 	@Override

@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.impl.PsiPerlConstantNameImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -32,7 +33,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 03.08.2015.
  */
-public class PerlConstantStubElementType extends IStubElementType<PerlConstantStub, PerlConstant> implements PerlElementTypes
+public class PerlConstantStubElementType extends IStubElementType<PerlConstantStub, PerlConstant> implements PerlElementTypes, PsiElementProvider
 {
 
 	public PerlConstantStubElementType(String name)
@@ -44,6 +45,13 @@ public class PerlConstantStubElementType extends IStubElementType<PerlConstantSt
 	public PerlConstantStub createStub(@NotNull PerlConstant psi, StubElement parentStub)
 	{
 		return new PerlConstantStubImpl(parentStub, this, psi.getPackageName(), psi.getName());
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlConstantNameImpl(node);
 	}
 
 	@Override

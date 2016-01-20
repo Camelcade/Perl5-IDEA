@@ -22,6 +22,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
@@ -38,7 +39,7 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionBase>
+public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionBase> implements PsiElementProvider
 {
 
 	public PerlSubDefinitionStubElementType(String name)
@@ -55,6 +56,13 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
 		return new PsiPerlSubDefinitionImpl(stub, this);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlSubDefinitionImpl(node);
 	}
 
 	@Override

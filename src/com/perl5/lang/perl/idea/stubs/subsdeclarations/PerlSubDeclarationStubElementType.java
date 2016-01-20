@@ -16,8 +16,11 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdeclarations;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -28,7 +31,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclaration>
+public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclaration> implements PsiElementProvider
 {
 	public PerlSubDeclarationStubElementType(String name)
 	{
@@ -41,11 +44,19 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 		return new PsiPerlSubDeclarationImpl(stub, this);
 	}
 
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlSubDeclarationImpl(node);
+	}
+
 	@Override
 	public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub)
 	{
 		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubAnnotations());
 	}
+
 
 	@NotNull
 	@Override

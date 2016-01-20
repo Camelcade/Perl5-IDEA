@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -33,7 +34,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public class PerlVariableStubElementType extends IStubElementType<PerlVariableStub, PerlVariableDeclarationWrapper> implements PerlElementTypes
+public class PerlVariableStubElementType extends IStubElementType<PerlVariableStub, PerlVariableDeclarationWrapper> implements PerlElementTypes, PsiElementProvider
 {
 	public PerlVariableStubElementType(@NotNull String debugName)
 	{
@@ -50,6 +51,13 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 	public PerlVariableDeclarationWrapper createPsi(@NotNull PerlVariableStub stub)
 	{
 		return new PerlVariableDeclarationWrapperMixin(stub, this);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PerlVariableDeclarationWrapperMixin(node);
 	}
 
 	@Override

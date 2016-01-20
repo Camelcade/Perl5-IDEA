@@ -48,6 +48,13 @@ public class PerlMethodDefinitionStubElementType extends PerlSubDefinitionStubEl
 		return new PsiPerlMethodDefinitionImpl(stub, this);
 	}
 
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlMethodDefinitionImpl(node);
+	}
+
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{

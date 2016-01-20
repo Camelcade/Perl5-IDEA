@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.stubs.imports.runtime;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlRequireExprImpl;
 import org.jetbrains.annotations.NotNull;
@@ -28,6 +30,13 @@ public class PerlRequireExprElementType extends PerlDoExprElementType
 	public PerlRequireExprElementType(@NotNull String debugName)
 	{
 		super(debugName);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlRequireExprImpl(node);
 	}
 
 	@Override

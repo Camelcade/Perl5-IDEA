@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlFuncDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
@@ -34,5 +36,12 @@ public class PerlFuncDefinitionStubElementType extends PerlSubDefinitionStubElem
 	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
 	{
 		return new PsiPerlFuncDefinitionImpl(stub, this);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlFuncDefinitionImpl(node);
 	}
 }

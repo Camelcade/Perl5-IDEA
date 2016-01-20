@@ -29,7 +29,6 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
@@ -123,11 +122,6 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@NotNull
 	public PsiElement createElement(ASTNode node)
 	{
-		IElementType elementType = node.getElementType();
-
-		if (elementType instanceof PsiElementProvider)
-			return ((PsiElementProvider) elementType).getPsiElement(node);
-
-		return PerlElementTypes.Factory.createElement(node);
+		return ((PsiElementProvider) node.getElementType()).getPsiElement(node);
 	}
 }

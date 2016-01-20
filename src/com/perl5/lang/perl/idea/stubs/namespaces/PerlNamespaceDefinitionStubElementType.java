@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
@@ -37,7 +38,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinition>
+public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinition> implements PsiElementProvider
 {
 	public PerlNamespaceDefinitionStubElementType(String name)
 	{
@@ -53,6 +54,13 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 	public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub)
 	{
 		return new PsiPerlNamespaceDefinitionImpl(stub, this);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlNamespaceDefinitionImpl(node);
 	}
 
 	@Override

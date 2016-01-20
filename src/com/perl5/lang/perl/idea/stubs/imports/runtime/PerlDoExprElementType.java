@@ -16,8 +16,11 @@
 
 package com.perl5.lang.perl.idea.stubs.imports.runtime;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlDoExprImpl;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +30,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 19.09.2015.
  */
-public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStub, PerlDoExpr>
+public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStub, PerlDoExpr> implements PsiElementProvider
 {
 	public PerlDoExprElementType(@NotNull String debugName)
 	{
@@ -38,6 +41,13 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
 	public PerlDoExpr createPsi(@NotNull PerlRuntimeImportStub stub)
 	{
 		return new PsiPerlDoExprImpl(stub, this);
+	}
+
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new PsiPerlDoExprImpl(node);
 	}
 
 	@Override
