@@ -19,7 +19,6 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -31,6 +30,7 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.filetypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex;
@@ -222,28 +222,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		ArrayList<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<PerlNamespaceDefinition>();
 		for (String packageName: packageNames)
 		{
-			namespaceDefinitions.addAll(getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project)));
+			Collection<PerlNamespaceDefinition> list = getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
+
+			if (list.size() == 0)
+				list = getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+
+			namespaceDefinitions.addAll(list);
 		}
 		return namespaceDefinitions;
-	}
-
-	@NotNull
-	public static List<String> collectNamespaceNames(List<PerlNamespaceDefinition> namespaceDefinitions)
-	{
-		List<String> namespaceNames = new ArrayList<String>();
-
-		if( namespaceDefinitions != null )
-		{
-			for (PerlNamespaceDefinition namespaceDefinition : namespaceDefinitions)
-			{
-				String namespaceName = namespaceDefinition.getPackageName();
-				if (StringUtil.isNotEmpty(namespaceName))
-				{
-					namespaceNames.add(namespaceName);
-				}
-			}
-		}
-		return namespaceNames;
 	}
 
 	/**
