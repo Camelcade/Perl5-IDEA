@@ -65,6 +65,18 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 		return false;
 	}
 
+	public boolean parseNestedElementVariation(PsiBuilder b, int l)
+	{
+		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
+		{
+			if (parserExtension.parseNestedElement((PerlBuilder) b, l))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@NotNull
 	public TokenSet getBadCharacterForbiddenTokens()
 	{

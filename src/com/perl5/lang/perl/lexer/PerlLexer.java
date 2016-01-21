@@ -266,7 +266,9 @@ public class PerlLexer extends PerlLexerGenerated
 			"grep"
 	));
 	public static final Map<String, IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
+
 	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> tagNames = new HashMap<String, IElementType>();
@@ -306,6 +308,7 @@ public class PerlLexer extends PerlLexerGenerated
 			"y"
 	));
 	public static TokenSet RESERVED_TOKENSET;
+	public static TokenSet CUSTOM_TOKENSET;
 
 	static
 	{
@@ -455,6 +458,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public static void initReservedTokensSet()
 	{
 		RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
+		CUSTOM_TOKENSET= TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
 	}
 
 	/**
@@ -1689,6 +1693,11 @@ public class PerlLexer extends PerlLexerGenerated
 		else if (tokenHistory.getLastSignificantTokenType() == RESERVED_USE || tokenHistory.getLastSignificantTokenType() == RESERVED_NO) // pragma section
 			if (PRAGMA_TOKENS_MAP.containsKey(tokenText))
 				return PRAGMA_TOKENS_MAP.get(tokenText);
+
+		if( (tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) != null)
+		{
+			return tokenType;
+		}
 
 		return IDENTIFIER;
 	}

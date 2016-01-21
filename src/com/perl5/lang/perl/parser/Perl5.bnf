@@ -997,7 +997,8 @@ glob_slot ::= glob_primitive hash_index
 
 // extended nested element for using in ()
 private nested_element_variation ::=
-    hash_index
+	<<parseNestedElementVariation>>
+    | hash_index
     | array_index
     | nested_call
     | nested_call_arguments    // function call like $var->()

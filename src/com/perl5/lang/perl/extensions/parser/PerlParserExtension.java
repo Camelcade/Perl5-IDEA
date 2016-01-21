@@ -47,6 +47,19 @@ public abstract class PerlParserExtension
 	}
 
 	/**
+	 * Returns list of extendable tokensets. Loader will attempt to add them into builder
+	 * Should return list of pairs: token to extend - TokenSet of extended tokens
+	 * Reqired to avoid extra TERM expressions in PSI tree
+	 *
+	 * @return list of pairs to extend
+	 */
+	@Nullable
+	public List<Pair<IElementType, TokenSet>> getExtensionSets()
+	{
+		return null;
+	}
+
+	/**
 	 * Parse method. Attempt to parse beginning of statement
 	 * You may re-use PerlParser static methods to implement native perl expressions
 	 *
@@ -87,15 +100,10 @@ public abstract class PerlParserExtension
 	}
 
 	/**
-	 * Returns list of extendable tokensets. Loader will attempt to add them into builder
-	 * Should return list of pairs: token to extend - TokenSet of extended tokens
-	 * Reqired to avoid extra TERM expressions in PSI tree
-	 *
-	 * @return list of pairs to extend
+	 * Parses element in dereference sequence.
+ 	 * @param b PerlBuilder
+	 * @param l parsing level
+	 * @return Parsing result
 	 */
-	@Nullable
-	public List<Pair<IElementType, TokenSet>> getExtensionSets()
-	{
-		return null;
-	}
+	public boolean parseNestedElement(PerlBuilder b, int l){ return false;}
 }

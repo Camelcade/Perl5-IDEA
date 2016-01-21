@@ -677,7 +677,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					nextNextTokenType == LEFT_PAREN                        // Package::Identifier( - what can it be?
 							|| ((PerlBuilder) b).isKnownSub(potentialSubName)       // we know this sub
 							|| !((PerlBuilder) b).isKnownPackage(potentialSubName)) // we don't know such package
-				return convertPackageIdentifier(b, l) && convertIdentifier(b, l, SUB);
+				return convertPackageIdentifier(b, l) && convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 			else
 				return false;
 		}
@@ -688,7 +688,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 			// ->sub
 			if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
-				return convertIdentifier(b, l, SUB);
+				return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 				// may be
 				// 	method Foo::
 				//	method Foo::Bar
@@ -699,14 +699,14 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 				// sub Foo::->method
 				if (nextNextTokenType == OPERATOR_DEREFERENCE)
-					return convertIdentifier(b, l, SUB);
+					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 					// identifier Package::identifier
 				else if (CONVERTABLE_TOKENS.contains(nextNextTokenType))
 				{
 
 					// identifier Package::identifier->
 					if (b.lookAhead(3) == OPERATOR_DEREFERENCE)
-						return convertIdentifier(b, l, SUB);
+						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 
 					PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
 					PerlTokenData nextNextTokenData = ((PerlBuilder) b).lookupToken(2);
@@ -714,14 +714,14 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					String packageOrSub = PerlPackageUtil.getCanonicalPackageName(nextTokenData.getTokenText()) + PerlPackageUtil.PACKAGE_SEPARATOR + nextNextTokenData.getTokenText();
 
 					if (((PerlBuilder) b).isKnownSub(packageOrSub))
-						return convertIdentifier(b, l, SUB);
+						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 					else if (((PerlBuilder) b).isKnownPackage(packageOrSub))
-						return convertIdentifier(b, l, SUB) && mergePackageName(b, l);
-					return convertIdentifier(b, l, SUB);
+						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && mergePackageName(b, l);
+					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 				}
 				else
 					// it's method Package::
-					return convertIdentifier(b, l, SUB) && convertPackageIdentifier(b, l);
+					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && convertPackageIdentifier(b, l);
 			}
 			// may be
 			// 	method Foo
@@ -731,16 +731,16 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 				String potentialSubName = nextTokenData.getTokenText() + PerlPackageUtil.PACKAGE_SEPARATOR + b.getTokenText();
 				if (((PerlBuilder) b).isKnownSub(potentialSubName))
-					return convertIdentifier(b, l, SUB) && convertIdentifier(b, l, PACKAGE);
+					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && convertIdentifier(b, l, PACKAGE);
 				else
-					return convertIdentifier(b, l, SUB);
+					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 			}
 			// KnownPackage->
 			else if (nextTokenType == OPERATOR_DEREFERENCE && ((PerlBuilder) b).isKnownPackage(b.getTokenText()))
 				return false;
 				// it's just sub
 			else
-				return convertIdentifier(b, l, SUB);
+				return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 		}
 
 		return false;
@@ -2023,6 +2023,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 		return ((PerlBuilder) b).getPerlParser().parseFileContents(b,l);
+	}
+
+	public static boolean parseNestedElementVariation(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+		return ((PerlBuilder) b).getPerlParser().parseNestedElementVariation(b, l);
 	}
 
 	public static boolean checkSemicolon(PsiBuilder b, int l)

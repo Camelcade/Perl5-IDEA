@@ -22,6 +22,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.PerlTokenData;
 import com.perl5.lang.perl.psi.utils.PerlNamesCache;
@@ -33,7 +34,7 @@ import java.util.Set;
  * Created by hurricup on 04.05.2015.
  * This wrapper created to be able to store per-parsing data like pragmas, warnings and variables ?
  */
-public class PerlBuilder extends GeneratedParserUtilBase.Builder
+public class PerlBuilder extends GeneratedParserUtilBase.Builder implements PerlElementTypes
 {
 	private final PerlParserImpl perlParser;
 	protected Set<String> KNOWN_SUBS;
@@ -61,6 +62,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	 */
 	IElementType stringWrapper = null;
 	Project myProject = getProject();
+	private IElementType mySubElementType = SUB;
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
 	{
@@ -270,5 +272,17 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder
 	public PerlParserImpl getPerlParser()
 	{
 		return perlParser;
+	}
+
+	public IElementType popSubElementType()
+	{
+		IElementType result = mySubElementType;
+		mySubElementType = SUB;
+		return result;
+	}
+
+	public void setNextSubElementType(IElementType subElement)
+	{
+		this.mySubElementType = subElement;
 	}
 }
