@@ -143,6 +143,10 @@
         <internalFileTemplate name="Perl5 mojolicious"/>
         <internalFileTemplate name="Perl5 test"/>
 
+        <annotator language="Perl5"
+                   implementationClass="com.perl5.lang.perl.parser.Class.Accessor.idea.annotator.ClassAccessorAnnotator"
+                   order="after PERL_SUBS_ANNOTATOR"/>
+
         <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
 
         <applicationService serviceInterface="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"

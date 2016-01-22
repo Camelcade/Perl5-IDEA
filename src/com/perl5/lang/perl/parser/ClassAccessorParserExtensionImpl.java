@@ -43,6 +43,11 @@ public class ClassAccessorParserExtensionImpl extends PerlParserExtension implem
 		TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
 	}
 
+	public static TokenSet getTokenSet()
+	{
+		return TOKENS_SET;
+	}
+
 	@NotNull
 	@Override
 	public Map<String, IElementType> getCustomTokensMap()
