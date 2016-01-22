@@ -18,20 +18,16 @@ package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.PerlPsiLists;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseHasStatement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlAnnotation;
-import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
-import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +36,7 @@ import java.util.List;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMooseAttribute
+public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifierImpl implements PerlMooseAttribute
 {
 	public PerlMooseAttributeImpl(@NotNull ASTNode node)
 	{
@@ -52,25 +48,20 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlSubDef
 		super(stub, nodeType);
 	}
 
-	@Override
-	public PsiPerlBlock getBlock()
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement getSignatureContainer()
-	{
-		return null;
-	}
-
 	@Nullable
 	protected PerlMooseHasStatement getHasStatement()
 	{
 		//noinspection unchecked
 		return PsiTreeUtil.getParentOfType(this, PerlMooseHasStatement.class, true, PsiPerlStatement.class);
 	}
+
+	@Override
+	public boolean isExtension()
+	{
+		PsiElement prevElement = getPrevSibling();
+		return prevElement instanceof PerlStringContentElement && prevElement.getNode().getElementType() == PerlElementTypes.STRING_PLUS;
+	}
+
 
 	@NotNull
 	@Override
@@ -82,54 +73,6 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionBaseImpl<PerlSubDef
 			return hasStatement.getAnnotationList();
 		}
 
-		return PerlPsiLists.EMPTY_ANNOTATIONS_LIST;
+		return super.getAnnotationList();
 	}
-
-	@Override
-	public boolean isMethod()
-	{
-		return true;
-	}
-
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getFirstChild();
-	}
-
-	@Override
-	public PsiElement getSubNameElement()
-	{
-		return getNameIdentifier();
-	}
-
-	@Override
-	protected String getSubNameHeavy()
-	{
-		return getNode().getText();
-	}
-
-	@Override
-	public boolean isExtension()
-	{
-		PsiElement prevElement = getPrevSibling();
-		return prevElement instanceof PerlStringContentElement && prevElement.getNode().getElementType() == PerlElementTypes.STRING_PLUS;
-	}
-
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		if (name.isEmpty())
-			throw new IncorrectOperationException("You can't set an empty attribute name");
-
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof LeafPsiElement)
-		{
-			((LeafPsiElement) nameIdentifier).replaceWithText(name);
-		}
-
-		return this;
-	}
-
 }

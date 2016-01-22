@@ -16,18 +16,98 @@
 
 package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
+import com.perl5.lang.perl.psi.PerlNamespaceContainer;
+import com.perl5.lang.perl.psi.PsiPerlNestedCall;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class PerlClassAccessorDeclarationImpl extends ASTWrapperPsiElement implements PerlClassAccessorDeclaration
+public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextIdentifierImpl implements PerlClassAccessorDeclaration
 {
+	private static final TokenSet READABLE_DECLARATORS = TokenSet.create(
+			RESERVED_MK_ACCESSORS,
+			RESERVED_MK_RO_ACCESSORS
+	);
+
+	private static final TokenSet WRITABLE_DECLARATORS = TokenSet.create(
+			RESERVED_MK_ACCESSORS,
+			RESERVED_MK_WO_ACCESSORS
+	);
+
 	public PerlClassAccessorDeclarationImpl(@NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	public PerlClassAccessorDeclarationImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
+
+	@Override
+	public boolean followsBestPractice()
+	{
+		PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub) getStub();
+		if (stub != null)
+			return stub.followsBestPractice();
+
+		// fixme here should be some walking up visitor
+		PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(this, PerlNamespaceContainer.class);
+
+		if (namespaceContainer != null)
+		{
+			for (PerlClassAccessorFollowBestPractice followBestPractice : PsiTreeUtil.findChildrenOfType(namespaceContainer, PerlClassAccessorFollowBestPractice.class))
+			{
+				if (followBestPractice.getTextOffset() > getTextOffset())
+					break;
+				if (namespaceContainer.equals(PsiTreeUtil.getParentOfType(followBestPractice, PerlNamespaceContainer.class)))
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean isAccessorReadable()
+	{
+		PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub) getStub();
+		if (stub != null)
+			return stub.isAccessorReadable();
+		return READABLE_DECLARATORS.contains(getDeclaratorElementType());
+	}
+
+	@Override
+	public boolean isAccessorWritable()
+	{
+		PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub) getStub();
+		if (stub != null)
+			return stub.isAccessorWritable();
+		return WRITABLE_DECLARATORS.contains(getDeclaratorElementType());
+	}
+
+	@Nullable
+	protected IElementType getDeclaratorElementType()
+	{
+		PsiPerlNestedCall nestedCall = PsiTreeUtil.getParentOfType(this, PsiPerlNestedCall.class);
+		if (nestedCall != null)
+		{
+			return nestedCall.getMethod().getFirstChild().getNode().getElementType();
+		}
+		return null;
 	}
 }

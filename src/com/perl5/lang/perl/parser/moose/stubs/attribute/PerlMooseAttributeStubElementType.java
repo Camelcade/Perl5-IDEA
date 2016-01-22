@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.moose.stubs.attribute;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
@@ -47,7 +48,7 @@ public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElem
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		PsiElement psi = node.getPsi();
-		return psi instanceof PerlMooseAttribute && ((PerlMooseAttribute) psi).getSubNameElement() != null;
+		return psi instanceof PerlMooseAttribute && StringUtil.isNotEmpty(((PerlMooseAttribute) psi).getSubName());
 	}
 
 	@NotNull

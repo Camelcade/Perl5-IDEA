@@ -146,6 +146,7 @@
         <annotator language="Perl5"
                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.idea.annotator.ClassAccessorAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
+        <stubElementTypeHolder class="com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
 

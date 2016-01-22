@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 
 /**
- * Created by hurricup on 29.11.2015.
+ * Created by hurricup on 22.01.2016.
  */
-public interface PerlMooseAttribute extends PerlSubDefinitionWitTextIdentifier
+public interface PerlSubDefinitionWitTextIdentifier extends PerlSubDefinitionBase<PerlSubDefinitionStub>
 {
-	/**
-	 * Indicates, that current attribute is extension of the parent's one
-	 *
-	 * @return result
-	 */
-	boolean isExtension();
 }

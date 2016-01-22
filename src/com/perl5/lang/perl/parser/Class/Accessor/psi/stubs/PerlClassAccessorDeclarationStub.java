@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.Class.Accessor.psi;
+package com.perl5.lang.perl.parser.Class.Accessor.psi.stubs;
 
-import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
-import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 
 /**
- * Created by hurricup on 21.01.2016.
+ * Created by hurricup on 22.01.2016.
  */
-public interface PerlClassAccessorDeclaration extends PerlSubDefinitionWitTextIdentifier, ClassAccessorElementTypes
+public interface PerlClassAccessorDeclarationStub extends PerlSubDefinitionStub
 {
 	/**
 	 * Checks if current declaration should follow best practice, declare get_ and set_
@@ -44,4 +43,8 @@ public interface PerlClassAccessorDeclaration extends PerlSubDefinitionWitTextId
 	 * @return check result
 	 */
 	boolean isAccessorWritable();
+
+	String getGetterCanonicalName();
+
+	String getSetterCanonicalName();
 }
