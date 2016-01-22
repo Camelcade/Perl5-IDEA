@@ -32,16 +32,24 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (element instanceof PerlSubNameElement)
+		if (element.getNode().getElementType() == SUB) //  instanceof PerlSubNameElement
 		{
 			PsiElement parent = element.getParent();
 			if (parent instanceof PsiPerlSubDeclaration)
+			{
 				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
+			}
 			else if (parent instanceof PerlSubDefinitionBase)
+			{
 				if ("AUTOLOAD".equals(((PerlSubNameElement) element).getName()))
+				{
 					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+				}
 				else
+				{
 					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+				}
+			}
 			else if (parent instanceof PerlMethod)
 			{
 				// fixme don't we need to take multiple references here?

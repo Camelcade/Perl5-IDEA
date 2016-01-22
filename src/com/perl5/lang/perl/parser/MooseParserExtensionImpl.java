@@ -42,7 +42,7 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	protected static final List<Pair<IElementType, TokenSet>> EXTENSION_SET = Collections.singletonList(
 			Pair.create(EXPR, TokenSet.create(MOOSE_ATTRIBUTE))
 	);
-	protected static TokenSet MOOSE_TOKEN_SET;
+	protected static TokenSet TOKEN_SET;
 
 	static
 	{
@@ -71,7 +71,12 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_BEFORE, MOOSE_STATEMENT_BEFORE);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_HAS, MOOSE_STATEMENT_HAS);
 
-		MOOSE_TOKEN_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
+		TOKEN_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
+	}
+
+	public static TokenSet getTokenSet()
+	{
+		return TOKEN_SET;
 	}
 
 	private static boolean parseOverride(PerlBuilder b, int l)
@@ -176,7 +181,7 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 		PerlBuilder.Marker m = b.mark();
 
 		IElementType tokenType = b.getTokenType();
-		if (MOOSE_TOKEN_SET.contains(tokenType))
+		if (TOKEN_SET.contains(tokenType))
 		{
 			b.advanceLexer();
 			if (PerlParserImpl.expr(b, l, -1))
@@ -194,7 +199,7 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 
 	@NotNull
 	@Override
-	public Map<String, IElementType> getReservedTokens()
+	public Map<String, IElementType> getCustomTokensMap()
 	{
 		return TOKENS_MAP;
 	}

@@ -44,6 +44,11 @@ public class PerlSwitchPerlParserExtensionImpl extends PerlParserExtension imple
 		TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
 	}
 
+	public static TokenSet getTokenSet()
+	{
+		return TOKENS_SET;
+	}
+
 	public static boolean parseSwitchStatement(PerlBuilder b, int l)
 	{
 		if (PerlParserUtil.consumeToken(b, RESERVED_SWITCH))
@@ -158,7 +163,7 @@ public class PerlSwitchPerlParserExtensionImpl extends PerlParserExtension imple
 
 	@NotNull
 	@Override
-	public Map<String, IElementType> getReservedTokens()
+	public Map<String, IElementType> getCustomTokensMap()
 	{
 		return TOKENS_MAP;
 	}

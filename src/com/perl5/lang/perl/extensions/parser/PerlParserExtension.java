@@ -41,7 +41,7 @@ public abstract class PerlParserExtension
 	 * @return set of custom keywords
 	 */
 	@NotNull
-	public Map<String, IElementType> getReservedTokens()
+	public Map<String, IElementType> getCustomTokensMap()
 	{
 		return Collections.emptyMap();
 	}

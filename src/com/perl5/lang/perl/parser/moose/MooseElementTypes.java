@@ -20,11 +20,11 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
-import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
 import com.perl5.lang.perl.parser.moose.psi.impl.*;
 import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStubElementType;
 import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -50,15 +50,16 @@ public interface MooseElementTypes
 			return new PerlMooseSuperKeywordImpl(this, leafText);
 		}
 	};
-	IElementType RESERVED_WITH = new PerlTokenType("with");
-	IElementType RESERVED_EXTENDS = new PerlTokenType("extends");
-	IElementType RESERVED_META = new PerlTokenType("meta");
-	IElementType RESERVED_OVERRIDE = new PerlTokenType("override");
-	IElementType RESERVED_AROUND = new PerlTokenType("around");
-	IElementType RESERVED_AUGMENT = new PerlTokenType("augment");
-	IElementType RESERVED_AFTER = new PerlTokenType("after");
-	IElementType RESERVED_BEFORE = new PerlTokenType("before");
-	IElementType RESERVED_HAS = new PerlTokenType("has");
+
+	IElementType RESERVED_WITH = new PerlMooseTokenType("MOOSE_WITH");
+	IElementType RESERVED_EXTENDS = new PerlMooseTokenType("MOOSE_EXTENDS");
+	IElementType RESERVED_META = new PerlMooseTokenType("MOOSE_META");
+	IElementType RESERVED_OVERRIDE = new PerlMooseTokenType("MOOSE_OVERRIDE");
+	IElementType RESERVED_AROUND = new PerlMooseTokenType("MOOSE_AROUND");
+	IElementType RESERVED_AUGMENT = new PerlMooseTokenType("MOOSE_AUGMENT");
+	IElementType RESERVED_AFTER = new PerlMooseTokenType("MOOSE_AFTER");
+	IElementType RESERVED_BEFORE = new PerlMooseTokenType("MOOSE_BEFORE");
+	IElementType RESERVED_HAS = new PerlMooseTokenType("MOOSE_HAS");
 
 
 	IElementType MOOSE_STATEMENT_INNER = new PerlElementTypeEx("MOOSE_STATEMENT_INNER")
@@ -154,4 +155,20 @@ public interface MooseElementTypes
 
 	IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideStubElementType("MOOSE_STATEMENT_OVERRIDE");
 	IElementType MOOSE_ATTRIBUTE = new PerlMooseAttributeStubElementType("MOOSE_ATTRIBUTE");
+
+	class PerlMooseTokenType extends PerlTokenTypeEx
+	{
+		public PerlMooseTokenType(@NotNull @NonNls String debugName)
+		{
+			super(debugName);
+		}
+
+		@NotNull
+		@Override
+		public ASTNode createLeafNode(CharSequence leafText)
+		{
+			return new PerlMooseKeywordElementImpl(this, leafText);
+		}
+	}
+
 }

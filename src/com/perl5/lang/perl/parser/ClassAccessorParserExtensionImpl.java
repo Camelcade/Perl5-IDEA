@@ -45,7 +45,7 @@ public class ClassAccessorParserExtensionImpl extends PerlParserExtension implem
 
 	@NotNull
 	@Override
-	public Map<String, IElementType> getReservedTokens()
+	public Map<String, IElementType> getCustomTokensMap()
 	{
 		return TOKENS_MAP;
 	}

@@ -51,8 +51,7 @@ public class PerlParserExtensions implements ApplicationComponent
 			PerlParserDefinition.PARSER_EXTENSIONS.add(extension);
 
 			// add tokens to lex
-			Map<String, IElementType> customTokens = extension.getReservedTokens();
-			PerlLexer.RESERVED_TOKEN_TYPES.putAll(customTokens);
+			Map<String, IElementType> customTokens = extension.getCustomTokensMap();
 			PerlLexer.CUSTOM_TOKEN_TYPES.putAll(customTokens);
 
 			// add tokens to fallback set

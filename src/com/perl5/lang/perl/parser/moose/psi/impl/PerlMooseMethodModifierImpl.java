@@ -65,4 +65,5 @@ public class PerlMooseMethodModifierImpl extends PsiPerlStatementImpl implements
 		return null;
 	}
 
+
 }

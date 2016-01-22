@@ -16,13 +16,9 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
-import com.intellij.lang.DefaultASTFactoryImpl;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
-
 /**
- * Created by hurricup on 19.01.2016.
+ * Created by hurricup on 22.01.2016.
  */
-public class PerlMooseAstFactory extends DefaultASTFactoryImpl implements MooseElementTypes
+public interface PerlMooseKeywordElement
 {
-
 }

@@ -207,7 +207,8 @@
         <consoleFilterProvider implementation="com.perl5.lang.perl.idea.execution.filters.PerlConsoleFilterProvider"/>
 
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorMisc"/>
-        <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorSubs"/>
+        <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorSubs"
+                   id="PERL_SUBS_ANNOTATOR" order="first"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorVariables"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorNamespaces"/>
 
@@ -289,6 +290,9 @@
 
         <stubElementTypeHolder class="com.perl5.lang.perl.parser.moose.MooseElementTypes"/>
 
+        <annotator language="Perl5" implementationClass="com.perl5.lang.perl.parser.moose.idea.annotator.MooseAnnotator"
+                   order="after PERL_SUBS_ANNOTATOR"/>
+
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
@@ -306,6 +310,10 @@
                 implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplateContextType"/>
         <liveTemplateContext
                 implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlInSwitchAfterCaseTemplateContextType"/>
+
+        <annotator language="Perl5"
+                   implementationClass="com.perl5.lang.perl.parser.perlswitch.idea.annotator.PerlSwitchAnnotator"
+                   order="after PERL_SUBS_ANNOTATOR"/>
 
         <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
 

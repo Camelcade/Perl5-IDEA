@@ -41,7 +41,7 @@ public class MethodSignaturesSimpleParserExtensionImpl extends PerlParserExtensi
 
 	@NotNull
 	@Override
-	public Map<String, IElementType> getReservedTokens()
+	public Map<String, IElementType> getCustomTokensMap()
 	{
 		return TOKENS_MAP;
 	}
