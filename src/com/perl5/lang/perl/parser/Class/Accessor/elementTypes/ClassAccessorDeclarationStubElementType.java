@@ -63,7 +63,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 				psi.getSubName(),
 				psi.getSubArgumentsList(),
 				psi.getSubAnnotations(),
-				((PerlClassAccessorDeclaration) psi).followsBestPractice(),
+				((PerlClassAccessorDeclaration) psi).isFollowsBestPractice(),
 				((PerlClassAccessorDeclaration) psi).isAccessorReadable(),
 				((PerlClassAccessorDeclaration) psi).isAccessorWritable(),
 				this
@@ -88,7 +88,15 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 	{
 		assert stub instanceof PerlClassAccessorDeclarationStub;
 
-		if (((PerlClassAccessorDeclarationStub) stub).followsBestPractice())
+/*
+		System.err.println("Indexing stub for " + stub.getCanonicalName() +
+				" " + ((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice() +
+				" " + ((PerlClassAccessorDeclarationStub) stub).isAccessorReadable() +
+				" " + ((PerlClassAccessorDeclarationStub) stub).isAccessorWritable()
+		);
+*/
+
+		if (((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice())
 		{
 			// fixme these should depend on declaration type
 			if (((PerlClassAccessorDeclarationStub) stub).isAccessorReadable())
@@ -127,7 +135,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 
 		stub.getSubAnnotations().serialize(dataStream);
 
-		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).followsBestPractice());
+		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice());
 		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isAccessorReadable());
 		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isAccessorWritable());
 	}

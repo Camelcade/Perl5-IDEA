@@ -16,13 +16,13 @@
 
 package com.perl5.lang.perl.parser.Class.Accessor;
 
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiTreeChangeAdapter;
-import com.intellij.psi.PsiTreeChangeEvent;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.*;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,6 +30,26 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ClassAccessorPsiTreeChangeListener extends PsiTreeChangeAdapter
 {
+	public static boolean isOrContainFBP(PsiElement element)
+	{
+		if (element == null)
+			return false;
+
+		PsiElement currentElement = element;
+		while (currentElement != null)
+		{
+			if (element instanceof PerlClassAccessorFollowBestPractice)
+				return true;
+
+			if (element.getNode() instanceof CompositeElement && isOrContainFBP(element.getFirstChild()) && !(element instanceof PerlNamespaceDefinition))
+				return true;
+
+			currentElement = currentElement.getNextSibling();
+		}
+
+		return false;
+	}
+
 	@Override
 	public void childAdded(@NotNull PsiTreeChangeEvent event)
 	{
@@ -38,7 +58,7 @@ public class ClassAccessorPsiTreeChangeListener extends PsiTreeChangeAdapter
 			PsiElement element = event.getChild();
 
 			if (element instanceof PsiComment && element.getText().contains("follow_best_practice") || isOrContainFBP(element))
-				reScanAccessors();
+				reScanAccessors(event.getFile());
 		}
 	}
 
@@ -50,7 +70,7 @@ public class ClassAccessorPsiTreeChangeListener extends PsiTreeChangeAdapter
 			PsiElement element = event.getChild();
 
 			if (isOrContainFBP(element))
-				reScanAccessors();
+				reScanAccessors(event.getFile());
 
 		}
 	}
@@ -61,34 +81,19 @@ public class ClassAccessorPsiTreeChangeListener extends PsiTreeChangeAdapter
 		if (canHandle(event)) // has old and new child for replacement
 		{
 			if (isOrContainFBP(event.getNewChild()) || isOrContainFBP(event.getOldChild()))
-				reScanAccessors();
+				reScanAccessors(event.getFile());
 		}
 	}
 
-	protected boolean isOrContainFBP(PsiElement element)
+	protected void reScanAccessors(PsiFile psiFile)
 	{
-		if (element == null)
-			return false;
-
-		PsiElement currentElement = element;
-		while (currentElement != null)
+		if (psiFile.isValid())
 		{
-			if (element instanceof PerlClassAccessorFollowBestPractice)
-				return true;
-
-			if (!(element instanceof LeafPsiElement) && isOrContainFBP(element.getFirstChild()))
-				return true;
-
-			currentElement = currentElement.getNextSibling();
+			for (PerlClassAccessorDeclaration accessorDeclaration : PsiTreeUtil.findChildrenOfType(psiFile, PerlClassAccessorDeclaration.class))
+			{
+				accessorDeclaration.subtreeChanged();
+			}
 		}
-
-		return false;
-	}
-
-
-	protected void reScanAccessors()
-	{
-		System.err.println("Re-scan accessors");
 	}
 
 	protected boolean canHandle(@NotNull PsiTreeChangeEvent event)

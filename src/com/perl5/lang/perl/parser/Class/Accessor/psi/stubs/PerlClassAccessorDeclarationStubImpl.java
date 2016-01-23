@@ -51,7 +51,7 @@ public class PerlClassAccessorDeclarationStubImpl extends PerlSubDefinitionStubI
 	}
 
 	@Override
-	public boolean followsBestPractice()
+	public boolean isFollowsBestPractice()
 	{
 		return myFollowingBestPractice;
 	}

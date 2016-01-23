@@ -28,7 +28,7 @@ public interface PerlClassAccessorDeclarationStub extends PerlSubDefinitionStub
 	 *
 	 * @return check result
 	 */
-	boolean followsBestPractice();
+	boolean isFollowsBestPractice();
 
 	/**
 	 * Checks if current accessor readable

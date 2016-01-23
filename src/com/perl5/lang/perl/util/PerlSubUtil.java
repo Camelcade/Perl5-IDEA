@@ -24,6 +24,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantsStubIndex;
@@ -94,7 +95,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<PerlSubDefinitionBase> getSubDefinitions(Project project, String canonicalName)
 	{
-		return getSubDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+		return getSubDefinitions(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
 	}
 
 	public static Collection<PerlSubDefinitionBase> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
@@ -135,7 +136,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName)
 	{
-		return getSubDeclarations(project, canonicalName, GlobalSearchScope.allScope(project));
+		return getSubDeclarations(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
 	}
 
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope)
@@ -176,7 +177,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static Collection<PerlConstant> getConstantsDefinitions(Project project, String canonicalName)
 	{
-		return getConstantsDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+		return getConstantsDefinitions(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
 	}
 
 	public static Collection<PerlConstant> getConstantsDefinitions(Project project, String canonicalName, GlobalSearchScope scope)

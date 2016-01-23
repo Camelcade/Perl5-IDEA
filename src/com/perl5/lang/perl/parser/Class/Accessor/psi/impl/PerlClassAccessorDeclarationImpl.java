@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -26,6 +28,7 @@ import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaratio
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
 import com.perl5.lang.perl.psi.PerlNamespaceContainer;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlNestedCall;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import org.jetbrains.annotations.NotNull;
@@ -57,29 +60,44 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	}
 
 	@Override
-	public boolean followsBestPractice()
+	public boolean isFollowsBestPractice()
 	{
 		PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub) getStub();
 		if (stub != null)
-			return stub.followsBestPractice();
+			return stub.isFollowsBestPractice();
 
 		// fixme here should be some walking up visitor
 		PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(this, PerlNamespaceContainer.class);
 
-		if (namespaceContainer != null)
+		return namespaceContainer != null && getFBPElement(namespaceContainer.getFirstChild(), this) != null;
+	}
+
+	@Nullable
+	protected PerlClassAccessorFollowBestPractice getFBPElement(PsiElement element, PsiElement beforeElement)
+	{
+		if (element == null)
+			return null;
+
+		PsiElement currentElement = element;
+		while (currentElement != null && currentElement.getTextOffset() < beforeElement.getTextOffset())
 		{
-			for (PerlClassAccessorFollowBestPractice followBestPractice : PsiTreeUtil.findChildrenOfType(namespaceContainer, PerlClassAccessorFollowBestPractice.class))
+			if (currentElement.getTextOffset() > beforeElement.getTextOffset())
+				return null;
+
+			if (currentElement instanceof PerlClassAccessorFollowBestPractice)
+				return (PerlClassAccessorFollowBestPractice) currentElement;
+
+			if (!(currentElement instanceof PerlNamespaceDefinition) && currentElement.getNode() instanceof CompositeElement)
 			{
-				if (followBestPractice.getTextOffset() > getTextOffset())
-					break;
-				if (namespaceContainer.equals(PsiTreeUtil.getParentOfType(followBestPractice, PerlNamespaceContainer.class)))
-				{
-					return true;
-				}
+				PsiElement subResult = getFBPElement(currentElement.getFirstChild(), beforeElement);
+				if (subResult != null)
+					return (PerlClassAccessorFollowBestPractice) subResult;
 			}
+
+			currentElement = currentElement.getNextSibling();
 		}
 
-		return false;
+		return null;
 	}
 
 	@Override
@@ -109,5 +127,11 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 			return nestedCall.getMethod().getFirstChild().getNode().getElementType();
 		}
 		return null;
+	}
+
+	@Override
+	public void subtreeChanged()
+	{
+		super.subtreeChanged();
 	}
 }

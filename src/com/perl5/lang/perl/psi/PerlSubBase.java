@@ -76,4 +76,9 @@ public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiEleme
 	@NotNull
 	List<PsiPerlAnnotation> getAnnotationList();
 
+	/**
+	 * Used to re-set stubs
+	 */
+	void subtreeChanged();
+
 }

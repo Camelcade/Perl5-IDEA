@@ -29,7 +29,7 @@ public interface PerlClassAccessorDeclaration extends PerlSubDefinitionWitTextId
 	 *
 	 * @return check result
 	 */
-	boolean followsBestPractice();
+	boolean isFollowsBestPractice();
 
 	/**
 	 * Checks if current accessor readable

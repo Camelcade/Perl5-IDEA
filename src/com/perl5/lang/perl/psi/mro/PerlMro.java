@@ -99,17 +99,33 @@ public abstract class PerlMro
 		for (String packageName : getLinearISA(project, basePackageName, isSuper))
 		{
 			for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
+			{
 				if (!methods.containsKey(subDefinition.getSubName()))
+				{
 					methods.put(subDefinition.getSubName(), subDefinition);
+				}
+			}
 			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
+			{
 				if (!methods.containsKey(subDeclaration.getSubName()))
+				{
 					methods.put(subDeclaration.getSubName(), subDeclaration);
+				}
+			}
 			for (PerlConstant constant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
+			{
 				if (!methods.containsKey(constant.getName()))
+				{
 					methods.put(constant.getName(), constant);
+				}
+			}
 			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
+			{
 				if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName()))
+				{
 					methods.put(globVariable.getName(), globVariable);
+				}
+			}
 		}
 
 		return new ArrayList<PsiElement>(methods.values());
