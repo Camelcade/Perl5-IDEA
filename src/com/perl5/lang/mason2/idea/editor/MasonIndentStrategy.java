@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.mason2.idea.editor;
 
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+import com.intellij.openapi.editor.IndentStrategy;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.mason2.idea.formatter.MasonIndentProcessor;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 09.01.2016.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public class MasonIndentStrategy implements IndentStrategy
 {
+	@Override
+	public boolean canIndent(@NotNull PsiElement element)
+	{
+		return !MasonIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(element.getNode().getElementType());
+	}
 }

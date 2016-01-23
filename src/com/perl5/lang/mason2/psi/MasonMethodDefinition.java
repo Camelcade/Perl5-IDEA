@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.mason2.psi;
 
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.psi.PerlMethodDefinition;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 08.01.2016.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public interface MasonMethodDefinition extends PsiElement, PerlMethodDefinition, PerlImplicitVariablesProvider
 {
 }

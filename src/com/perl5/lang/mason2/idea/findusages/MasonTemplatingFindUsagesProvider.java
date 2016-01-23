@@ -14,14 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.mason2.idea.findusages;
 
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+import com.intellij.lang.cacheBuilder.WordsScanner;
+import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public class MasonTemplatingFindUsagesProvider extends PerlFindUsagesProvider
 {
+
+	@Nullable
+	@Override
+	public WordsScanner getWordsScanner()
+	{
+		return new MasonTemplatingWordScanner();
+	}
 }

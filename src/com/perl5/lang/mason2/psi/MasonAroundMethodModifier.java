@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
-
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+package com.perl5.lang.mason2.psi;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 08.01.2016.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public interface MasonAroundMethodModifier extends MasonMethodModifier
 {
 }

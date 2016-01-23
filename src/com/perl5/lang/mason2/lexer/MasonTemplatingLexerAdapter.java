@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.mason2.lexer;
 
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public class MasonTemplatingLexerAdapter extends PerlLexerWithCustomStatesAdapter
 {
+	public MasonTemplatingLexerAdapter(Project project)
+	{
+		super(new MasonTemplatingLexer(project));
+	}
 }

@@ -14,14 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.mason2;
 
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+import com.intellij.lang.Language;
+import com.perl5.lang.perl.PerlLanguage;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public class MasonLanguage extends Language
 {
+	public static final MasonLanguage INSTANCE = new MasonLanguage();
+
+	public MasonLanguage()
+	{
+		super(PerlLanguage.INSTANCE, "Mason2");
+	}
+
+
 }

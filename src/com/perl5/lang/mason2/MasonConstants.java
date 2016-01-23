@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
-
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+package com.perl5.lang.mason2;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 05.01.2016.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public interface MasonConstants
 {
+	String MASON_DEFAULT_COMPONENT_PARENT = "Mason::Component";
 }

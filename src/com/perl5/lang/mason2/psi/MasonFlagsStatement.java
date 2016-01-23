@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.mason2.psi;
 
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 06.01.2016.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public interface MasonFlagsStatement extends PsiElement, PerlElementTypes, PerlRuntimeParentsProvider
 {
+
 }

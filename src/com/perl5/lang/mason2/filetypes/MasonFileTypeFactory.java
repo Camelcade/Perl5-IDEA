@@ -14,14 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.mason2.filetypes;
 
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+import com.intellij.openapi.fileTypes.FileTypeConsumer;
+import com.intellij.openapi.fileTypes.FileTypeFactory;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 28.12.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public interface MasonParser extends MasonElementTypes, MooseElementTypes
+public class MasonFileTypeFactory extends FileTypeFactory
 {
+	@Override
+	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
+	{
+		fileTypeConsumer.consume(MasonTopLevelComponentFileType.INSTANCE, "mc");
+		fileTypeConsumer.consume(MasonInternalComponentFileType.INSTANCE, "mi");
+		fileTypeConsumer.consume(MasonPurePerlComponentFileType.INSTANCE, "mp");
+	}
 }
