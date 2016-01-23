@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.Class.Accessor.psi.stubs;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubImpl;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -59,13 +60,13 @@ public class PerlClassAccessorDeclarationStubImpl extends PerlSubDefinitionStubI
 	@Override
 	public String getGetterName()
 	{
-		return "get_" + getSubName();
+		return PerlClassAccessorDeclaration.ACCESSOR_PREFIX + getSubName();
 	}
 
 	@Override
 	public String getSetterName()
 	{
-		return "set_" + getSubName();
+		return PerlClassAccessorDeclaration.MUTATOR_PREFIX + getSubName();
 	}
 
 	@Override

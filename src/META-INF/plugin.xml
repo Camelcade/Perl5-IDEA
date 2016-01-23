@@ -147,6 +147,8 @@
                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.idea.annotator.ClassAccessorAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
         <stubElementTypeHolder class="com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes"/>
+        <referencesSearch
+                implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferenceSearcher"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
 
@@ -227,6 +229,10 @@
         <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
 
         <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
+        <elementDescriptionProvider
+                implementation="com.perl5.lang.perl.parser.Class.Accessor.psi.ClassAccessorElementDescriptionProvider"/>
+
+
         <lang.refactoringSupport language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 

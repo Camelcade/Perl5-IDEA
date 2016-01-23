@@ -18,14 +18,24 @@ package com.perl5.lang.perl.parser.Class.Accessor.psi;
 
 import com.perl5.lang.perl.extensions.PerlCompletionElementsProvider;
 import com.perl5.lang.perl.extensions.PerlHierarchyViewElementsProvider;
+import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
 
 /**
  * Created by hurricup on 21.01.2016.
  */
-public interface PerlClassAccessorDeclaration extends PerlSubDefinitionWitTextIdentifier, ClassAccessorElementTypes, PerlCompletionElementsProvider, PerlHierarchyViewElementsProvider
+public interface PerlClassAccessorDeclaration extends
+		PerlSubDefinitionWitTextIdentifier,
+		ClassAccessorElementTypes,
+		PerlCompletionElementsProvider,
+		PerlHierarchyViewElementsProvider,
+		PerlRenameUsagesSubstitutor
 {
+	String ACCESSOR_PREFIX = "get_";
+	String MUTATOR_PREFIX = "set_";
+
+
 	/**
 	 * Checks if current declaration should follow best practice, declare get_ and set_
 	 *

@@ -34,5 +34,5 @@ public interface PerlHierarchyViewElementsProvider
 	 * @param treeElements   result elements list
 	 * @param duplicationMap element should not be added if it's already in there and shouild be added to map otherwise
 	 */
-	void fillHierarchyViewElements(List<TreeElement> treeElements, Set<String> duplicationMap);
+	void fillHierarchyViewElements(List<TreeElement> treeElements, Set<String> duplicationMap, boolean isInherited, boolean isImported);
 }

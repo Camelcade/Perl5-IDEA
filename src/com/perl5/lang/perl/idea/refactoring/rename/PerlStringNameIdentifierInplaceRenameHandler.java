@@ -25,6 +25,7 @@ import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenamer;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,6 +49,7 @@ public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplac
 		return
 				editor.getSettings().isVariableInplaceRenameEnabled()
 						&& element instanceof PsiNameIdentifierOwner
+						&& !(element instanceof PerlRenameUsagesSubstitutor)
 						&& element.getUseScope() instanceof LocalSearchScope
 						&& element.getLanguage() == PerlLanguage.INSTANCE
 						&& ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlStringContentElement

@@ -26,6 +26,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
+import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterSetterStructureViewElement;
 import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterStructureViewElement;
@@ -178,13 +179,13 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	@Override
 	public String getGetterName()
 	{
-		return "get_" + getSubName();
+		return ACCESSOR_PREFIX + getSubName();
 	}
 
 	@Override
 	public String getSetterName()
 	{
-		return "set_" + getSubName();
+		return MUTATOR_PREFIX + getSubName();
 	}
 
 	@Override
@@ -200,35 +201,66 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	}
 
 	@Override
-	public void fillHierarchyViewElements(List<TreeElement> treeElements, Set<String> duplicationMap)
+	public void fillHierarchyViewElements(List<TreeElement> treeElements, Set<String> duplicationMap, boolean isInherited, boolean isImported)
 	{
 		String getterName = getGetterName();
 		String setterName = getSetterName();
 		String subName = getSubName();
+		PerlSubStructureViewElement newElement = null;
 
 		if (isFollowsBestPractice())
 		{
 			if (isAccessorReadable() && isAccessorWritable() && !duplicationMap.contains(getterName) && !duplicationMap.contains(setterName))
 			{
-				treeElements.add(new ClassAccessorGetterSetterStructureViewElement(this));
+				newElement = new ClassAccessorGetterSetterStructureViewElement(this);
 				duplicationMap.add(getterName);
 				duplicationMap.add(setterName);
 			}
 			if (isAccessorReadable() && !duplicationMap.contains(getterName))
 			{
-				treeElements.add(new ClassAccessorGetterStructureViewElement(this));
+				newElement = new ClassAccessorGetterStructureViewElement(this);
 				duplicationMap.add(getterName);
 			}
 			else if (isAccessorWritable() && !duplicationMap.contains(setterName))
 			{
-				treeElements.add(new ClassAccessorSetterStructureViewElement(this));
+				newElement = new ClassAccessorSetterStructureViewElement(this);
 				duplicationMap.add(setterName);
 			}
 		}
 		else if (!duplicationMap.contains(subName))
 		{
-			treeElements.add(new ClassAccessorGetterSetterStructureViewElement(this));
+			newElement = new ClassAccessorGetterSetterStructureViewElement(this);
 			duplicationMap.add(subName);
 		}
+
+		if (newElement != null)
+		{
+			if (isInherited)
+				newElement.setInherited();
+			if (isImported)
+				newElement.setImported();
+			treeElements.add(newElement);
+		}
+
+	}
+
+	@NotNull
+	@Override
+	public String getSubstitutedUsageName(@NotNull String newName, @NotNull PsiElement element)
+	{
+		if (isFollowsBestPractice())
+		{
+			if (getGetterName().equals(element.getText()))
+				return ACCESSOR_PREFIX + newName;
+			else if (getSetterName().equals(element.getText()))
+				return MUTATOR_PREFIX + newName;
+		}
+		return newName;
+	}
+
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
 	}
 }

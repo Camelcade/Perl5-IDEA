@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.search.LocalSearchScope;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,6 +37,7 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 	{
 		return element.getUseScope() instanceof LocalSearchScope
 				&& element instanceof PsiNameIdentifierOwner
+				&& !(element instanceof PerlRenameUsagesSubstitutor)
 				&& !(((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlStringContentElement)
 				&& element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE
 				;
@@ -44,7 +46,7 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 	@Override
 	public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
 	{
-		return true;
+		return !(element instanceof PerlRenameUsagesSubstitutor);
 	}
 
 	@Override

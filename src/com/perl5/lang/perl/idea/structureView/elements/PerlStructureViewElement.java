@@ -156,13 +156,15 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 		Set<String> implementedMethods = new HashSet<String>();
 
+		if (myElement instanceof PerlFile)
+		{
+			// namespaces
+			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
+				result.add(new PerlStructureViewElement(child));
+		}
+
 		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition)
 		{
-			// nested namespaces
-			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
-				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
-					result.add(new PerlStructureViewElement(child));
-
 			// global variables
 			for (PerlVariableDeclarationWrapper child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationWrapper.class))
 			{
@@ -313,7 +315,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 				{
 					if (child instanceof PerlHierarchyViewElementsProvider)
 					{
-						((PerlHierarchyViewElementsProvider) child).fillHierarchyViewElements(result, implementedMethods);
+						((PerlHierarchyViewElementsProvider) child).fillHierarchyViewElements(result, implementedMethods, false, false);
 					}
 					else
 					{
@@ -334,7 +336,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			{
 				if (element instanceof PerlHierarchyViewElementsProvider)
 				{
-					((PerlHierarchyViewElementsProvider) element).fillHierarchyViewElements(inheritedResult, implementedMethods);
+					((PerlHierarchyViewElementsProvider) element).fillHierarchyViewElements(inheritedResult, implementedMethods, true, false);
 				}
 				else if (element instanceof PerlNamedElement && !implementedMethods.contains(((PerlNamedElement) element).getName()))
 				{
