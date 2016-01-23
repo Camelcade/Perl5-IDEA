@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.315</version>
+    <version>1.316</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -44,6 +44,7 @@
       <li>Significally improved live templates, added templates for parser extensions</li>
       <li>Implemented quote handler for regexps and string-like operators, fixes #741</li>
       <li>Implemented dumb and comfy hash keys autocompletion, not intelligent, most like in Sublime Text, fixes #711</li>
+      <li>Implemented support of Class::Acessor api, fixes #778</li>
       <li>Mason2<ul>
         <li>Implemented filetypes for Mason2: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason2 files.</li>
