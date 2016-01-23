@@ -35,7 +35,7 @@ public class PerlSubCompletionProviderUtil
 {
 	public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
-	public static final ConcurrentHashMap<String, LookupElementBuilder> SUB_DEFINITIONS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
+	//	public static final ConcurrentHashMap<String, LookupElementBuilder> SUB_DEFINITIONS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> SUB_DECLARATIONS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> GLOBS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 	public static final ConcurrentHashMap<String, LookupElementBuilder> CONSTANTS_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
@@ -47,7 +47,7 @@ public class PerlSubCompletionProviderUtil
 
 	public static void removeFromLookupCache(String canonicalName)
 	{
-		SUB_DEFINITIONS_LOOKUP_ELEMENTS.remove(canonicalName);
+//		SUB_DEFINITIONS_LOOKUP_ELEMENTS.remove(canonicalName);
 		SUB_DECLARATIONS_LOOKUP_ELEMENTS.remove(canonicalName);
 		GLOBS_LOOKUP_ELEMENTS.remove(canonicalName);
 		CONSTANTS_LOOKUP_ELEMENTS.remove(canonicalName);
@@ -58,8 +58,26 @@ public class PerlSubCompletionProviderUtil
 		INCOMPLETE_CONSTANTS_LOOKUP_ELEMENTS.remove(canonicalName);
 	}
 
+	public static LookupElementBuilder getSubDefinitionLookupElement(String subName, String argsString, PerlSubDefinitionBase subDefinition)
+	{
+		LookupElementBuilder newElement = LookupElementBuilder
+				.create(subName)
+				.withIcon(PerlIcons.SUB_GUTTER_ICON)
+				.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated());
+
+		if (!argsString.isEmpty())
+		{
+			newElement = newElement
+					.withInsertHandler(SUB_SELECTION_HANDLER)
+					.withTailText(argsString);
+		}
+		return newElement;
+	}
+
 	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition)
 	{
+		return getSubDefinitionLookupElement(subDefinition.getSubName(), subDefinition.getSubArgumentsListAsString(), subDefinition);
+	/*
 		String indexKeyName = subDefinition.getCanonicalName();
 		if (!SUB_DEFINITIONS_LOOKUP_ELEMENTS.containsKey(indexKeyName))
 		{
@@ -71,13 +89,16 @@ public class PerlSubCompletionProviderUtil
 					.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated());
 
 			if (!argsString.isEmpty())
+			{
 				newElement = newElement
 						.withInsertHandler(SUB_SELECTION_HANDLER)
 						.withTailText(argsString);
+			}
 
 			SUB_DEFINITIONS_LOOKUP_ELEMENTS.put(indexKeyName, newElement);
 		}
 		return SUB_DEFINITIONS_LOOKUP_ELEMENTS.get(indexKeyName);
+*/
 	}
 
 	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubDeclaration subDeclaration)

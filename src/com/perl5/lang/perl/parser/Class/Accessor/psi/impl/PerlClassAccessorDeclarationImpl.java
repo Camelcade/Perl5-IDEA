@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 
+import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.CompositeElement;
@@ -23,7 +25,11 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterSetterStructureViewElement;
+import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterStructureViewElement;
+import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorSetterStructureViewElement;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
@@ -31,8 +37,12 @@ import com.perl5.lang.perl.psi.PerlNamespaceContainer;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlNestedCall;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 21.01.2016.
@@ -133,5 +143,92 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	public void subtreeChanged()
 	{
 		super.subtreeChanged();
+	}
+
+	@Override
+	public void fillCompletions(CompletionResultSet resultSet)
+	{
+		String getterName = getSubName();
+		String setterName = getterName;
+		if (isFollowsBestPractice())
+		{
+			getterName = getGetterName();
+			setterName = getSetterName();
+		}
+
+		if (isAccessorReadable())
+		{
+			resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement(
+					getterName,
+					"",
+					this
+			));
+		}
+		if (isAccessorWritable())
+		{
+			resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement(
+					setterName,
+					"($new_value)",
+					this
+			));
+		}
+	}
+
+	// fixme not dry with Stub
+	@Override
+	public String getGetterName()
+	{
+		return "get_" + getSubName();
+	}
+
+	@Override
+	public String getSetterName()
+	{
+		return "set_" + getSubName();
+	}
+
+	@Override
+	public String getGetterCanonicalName()
+	{
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getGetterName();
+	}
+
+	@Override
+	public String getSetterCanonicalName()
+	{
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSetterName();
+	}
+
+	@Override
+	public void fillHierarchyViewElements(List<TreeElement> treeElements, Set<String> duplicationMap)
+	{
+		String getterName = getGetterName();
+		String setterName = getSetterName();
+		String subName = getSubName();
+
+		if (isFollowsBestPractice())
+		{
+			if (isAccessorReadable() && isAccessorWritable() && !duplicationMap.contains(getterName) && !duplicationMap.contains(setterName))
+			{
+				treeElements.add(new ClassAccessorGetterSetterStructureViewElement(this));
+				duplicationMap.add(getterName);
+				duplicationMap.add(setterName);
+			}
+			if (isAccessorReadable() && !duplicationMap.contains(getterName))
+			{
+				treeElements.add(new ClassAccessorGetterStructureViewElement(this));
+				duplicationMap.add(getterName);
+			}
+			else if (isAccessorWritable() && !duplicationMap.contains(setterName))
+			{
+				treeElements.add(new ClassAccessorSetterStructureViewElement(this));
+				duplicationMap.add(setterName);
+			}
+		}
+		else if (!duplicationMap.contains(subName))
+		{
+			treeElements.add(new ClassAccessorGetterSetterStructureViewElement(this));
+			duplicationMap.add(subName);
+		}
 	}
 }

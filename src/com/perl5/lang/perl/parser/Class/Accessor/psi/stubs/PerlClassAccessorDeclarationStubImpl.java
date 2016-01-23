@@ -57,15 +57,27 @@ public class PerlClassAccessorDeclarationStubImpl extends PerlSubDefinitionStubI
 	}
 
 	@Override
+	public String getGetterName()
+	{
+		return "get_" + getSubName();
+	}
+
+	@Override
+	public String getSetterName()
+	{
+		return "set_" + getSubName();
+	}
+
+	@Override
 	public String getGetterCanonicalName()
 	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + "get_" + getSubName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getGetterName();
 	}
 
 	@Override
 	public String getSetterCanonicalName()
 	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + "set_" + getSubName();
+		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSetterName();
 	}
 
 	@Override

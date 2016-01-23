@@ -16,13 +16,15 @@
 
 package com.perl5.lang.perl.parser.Class.Accessor.psi;
 
+import com.perl5.lang.perl.extensions.PerlCompletionElementsProvider;
+import com.perl5.lang.perl.extensions.PerlHierarchyViewElementsProvider;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
 
 /**
  * Created by hurricup on 21.01.2016.
  */
-public interface PerlClassAccessorDeclaration extends PerlSubDefinitionWitTextIdentifier, ClassAccessorElementTypes
+public interface PerlClassAccessorDeclaration extends PerlSubDefinitionWitTextIdentifier, ClassAccessorElementTypes, PerlCompletionElementsProvider, PerlHierarchyViewElementsProvider
 {
 	/**
 	 * Checks if current declaration should follow best practice, declare get_ and set_
@@ -44,4 +46,14 @@ public interface PerlClassAccessorDeclaration extends PerlSubDefinitionWitTextId
 	 * @return check result
 	 */
 	boolean isAccessorWritable();
+
+
+	String getGetterName();
+
+	String getGetterCanonicalName();
+
+	String getSetterName();
+
+	String getSetterCanonicalName();
+
 }

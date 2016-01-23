@@ -44,7 +44,11 @@ public interface PerlClassAccessorDeclarationStub extends PerlSubDefinitionStub
 	 */
 	boolean isAccessorWritable();
 
+	String getGetterName();
+
 	String getGetterCanonicalName();
+
+	String getSetterName();
 
 	String getSetterCanonicalName();
 }
