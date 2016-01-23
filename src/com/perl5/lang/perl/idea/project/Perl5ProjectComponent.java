@@ -29,8 +29,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Perl5ProjectComponent implements ProjectComponent
 {
-	Project myProject;
-	VirtualFileListener myChangeListener;
+	private Project myProject;
+	private VirtualFileListener myChangeListener;
+//	private PsiTreeChangeListener myPsiTreeChangeListener;
 
 	public Perl5ProjectComponent(Project project)
 	{
@@ -53,6 +54,7 @@ public class Perl5ProjectComponent implements ProjectComponent
 		// TODO: insert component disposal logic here
 //		System.out.println("Unregistered listener");
 		VirtualFileManager.getInstance().removeVirtualFileListener(myChangeListener);
+
 	}
 
 	@NotNull
@@ -65,11 +67,14 @@ public class Perl5ProjectComponent implements ProjectComponent
 	{
 		PerlHashIndexCompletionProvider.STRINGS_SET.clear();
 		// called when project is opened
+//		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
+//		PsiManager.getInstance(myProject).addPsiTreeChangeListener(myPsiTreeChangeListener);
 	}
 
 	public void projectClosed()
 	{
 		// called when project is being closed
+//		PsiManager.getInstance(myProject).removePsiTreeChangeListener(myPsiTreeChangeListener);
 	}
 
 }
