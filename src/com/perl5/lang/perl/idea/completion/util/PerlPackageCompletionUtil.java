@@ -16,24 +16,41 @@
 
 package com.perl5.lang.perl.idea.completion.util;
 
-import com.intellij.codeInsight.completion.CodeCompletionHandlerBase;
-import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.codeInsight.completion.InsertHandler;
-import com.intellij.codeInsight.completion.InsertionContext;
+import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.07.2015.
  */
-public class PerlPackageCompletionProviderUtil
+public class PerlPackageCompletionUtil
 {
 	public static final InsertHandler COMPLETION_REOPENER = new CompletionOpener();
+
+	public static void fillWithAllPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
+		final Project project = element.getProject();
+
+		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
+		{
+			@Override
+			public boolean process(String s)
+			{
+				if (super.process(s))
+					result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
+				return true;
+			}
+		});
+	}
+
 
 	/**
 	 * Returns package lookup element by package name
@@ -41,9 +58,8 @@ public class PerlPackageCompletionProviderUtil
 	 * @param packageName package name in any form
 	 * @return lookup element
 	 */
-	public static
 	@NotNull
-	LookupElementBuilder getPackageLookupElement(Project project, String packageName)
+	public static LookupElementBuilder getPackageLookupElement(Project project, String packageName)
 	{
 		LookupElementBuilder result = LookupElementBuilder
 				.create(packageName)
@@ -95,4 +111,5 @@ public class PerlPackageCompletionProviderUtil
 				});
 		}
 	}
+
 }

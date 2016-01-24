@@ -21,7 +21,7 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +39,7 @@ public class PerlPackageBuiltInCompletionProvider extends CompletionProvider<Com
 		// fixme need workaround here; We've should make pre-set list to add, but project required for deprecation
 		for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
 		{
-			resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, packageName));
+			resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, packageName));
 		}
 	}
 }

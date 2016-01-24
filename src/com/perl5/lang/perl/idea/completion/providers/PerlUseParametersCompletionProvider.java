@@ -29,7 +29,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
-import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.PsiPerlUseStatement;
@@ -86,7 +86,7 @@ public class PerlUseParametersCompletionProvider extends CompletionProvider<Comp
 						@Override
 						public boolean process(String s)
 						{
-							resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
+							resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
 							return true;
 						}
 					});

@@ -19,15 +19,11 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.psi.PerlRecursiveVisitor;
-import com.perl5.lang.perl.psi.PsiPerlConstantName;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -42,42 +38,15 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 
 		if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
 		{
-			final String contextPackageName = PerlPackageUtil.getContextPackageName(element);
-
-			element.getContainingFile().accept(
-					new PerlRecursiveVisitor()
-					{
-						@Override
-						public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
-						{
-							if (contextPackageName.equals(o.getPackageName()))
-							{
-								result.addElement(LookupElementBuilder.create(o.getSubName()));
-							}
-							super.visitSubDeclaration(o);
-						}
-
-						@Override
-						public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
-						{
-							if (contextPackageName.equals(o.getPackageName()))
-							{
-								result.addElement(LookupElementBuilder.create(o.getSubName()));
-							}
-							super.visitSubDefinition(o);
-						}
-
-						@Override
-						public void visitConstantName(@NotNull PsiPerlConstantName o)
-						{
-							if (contextPackageName.equals(o.getPackageName()))
-							{
-								result.addElement(LookupElementBuilder.create(o.getText()));
-							}
-							super.visitConstantName(o);
-						}
-					}
-			);
+			PerlStringCompletionUtil.fillWithExportableEntities(element, result);
+		}
+		else if (SIMPLE_HASH_INDEX.accepts(element))    // hash indexes
+		{
+			PerlStringCompletionUtil.fillWithHashIndexes(element, result);
+		}
+		else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
+		{
+			PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
 		}
 	}
 }

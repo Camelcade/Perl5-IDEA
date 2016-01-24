@@ -21,7 +21,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.perl5.lang.perl.idea.PerlVirtualFileListener;
-import com.perl5.lang.perl.idea.completion.providers.PerlHashIndexCompletionProvider;
+import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -65,7 +65,7 @@ public class Perl5ProjectComponent implements ProjectComponent
 
 	public void projectOpened()
 	{
-		PerlHashIndexCompletionProvider.STRINGS_SET.clear();
+		PerlStringCompletionUtil.STRINGS_SET.clear();
 		// called when project is opened
 //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
 //		PsiManager.getInstance(myProject).addPsiTreeChangeListener(myPsiTreeChangeListener);

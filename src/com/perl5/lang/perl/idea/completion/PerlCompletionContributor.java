@@ -39,31 +39,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				new PerlStringContentCompletionProvider()
 		);
 
-		extend(
-				CompletionType.BASIC,
-				SIMPLE_HASH_INDEX,
-				new PerlHashIndexCompletionProvider()
-		);
-
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				STRING_CONTENT_IN_DQ_STRING_BEGIN,
-				new PerlPackageNamesCompletionProvider()
-		);
-
-		extend(
-				CompletionType.BASIC,
-				STRING_CONTENT_IN_SQ_STRING_BEGIN,
-				new PerlPackageNamesCompletionProvider()
-		);
-
-		extend(
-				CompletionType.BASIC,
-				STRING_CONTENT_IN_QW_STRING_LIST,
-				new PerlPackageNamesCompletionProvider()
-		);
-
 		// refactored
 		extend(
 				CompletionType.BASIC,

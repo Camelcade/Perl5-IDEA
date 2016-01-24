@@ -14,44 +14,45 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.completion.providers;
+package com.perl5.lang.perl.idea.completion.util;
 
-import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
 /**
- * Created by hurricup on 18.01.2016.
+ * Created by hurricup on 24.01.2016.
  */
-public class PerlHashIndexCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns
+public class PerlStringCompletionUtil implements PerlElementPatterns
 {
 	public static final Set<String> STRINGS_SET = new THashSet<String>();
 
-	@Override
-	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet result)
+	protected static void addElement(String text, CompletionResultSet result)
 	{
-		final PsiElement element = parameters.getPosition();
-		PsiFile file = element.getContainingFile();
+		result.addElement(LookupElementBuilder.create(text));
+	}
 
+	public static void fillWithHashIndexes(final @NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
 		for (String text : STRINGS_SET)
 		{
 			addElement(text, result);
 		}
+
+		PsiFile file = element.getContainingFile();
 
 		file.accept(
 				new PerlRecursiveVisitor()
@@ -110,9 +111,42 @@ public class PerlHashIndexCompletionProvider extends CompletionProvider<Completi
 				});
 	}
 
-
-	protected void addElement(String text, CompletionResultSet result)
+	public static void fillWithExportableEntities(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
-		result.addElement(LookupElementBuilder.create(text));
+		final String contextPackageName = PerlPackageUtil.getContextPackageName(element);
+		element.getContainingFile().accept(
+				new PerlRecursiveVisitor()
+				{
+					@Override
+					public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
+					{
+						if (contextPackageName.equals(o.getPackageName()))
+						{
+							result.addElement(LookupElementBuilder.create(o.getSubName()));
+						}
+						super.visitSubDeclaration(o);
+					}
+
+					@Override
+					public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
+					{
+						if (contextPackageName.equals(o.getPackageName()))
+						{
+							result.addElement(LookupElementBuilder.create(o.getSubName()));
+						}
+						super.visitSubDefinition(o);
+					}
+
+					@Override
+					public void visitConstantName(@NotNull PsiPerlConstantName o)
+					{
+						if (contextPackageName.equals(o.getPackageName()))
+						{
+							result.addElement(LookupElementBuilder.create(o.getText()));
+						}
+						super.visitConstantName(o);
+					}
+				}
+		);
 	}
 }

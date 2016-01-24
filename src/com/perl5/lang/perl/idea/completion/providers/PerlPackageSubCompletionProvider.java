@@ -23,7 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.PerlScopes;
-import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -57,7 +57,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 		}
 		else
 		{
-			result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, PerlPackageUtil.SUPER_PACKAGE + PerlPackageUtil.PACKAGE_SEPARATOR));
+			result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, PerlPackageUtil.SUPER_PACKAGE + PerlPackageUtil.PACKAGE_SEPARATOR));
 		}
 
 		final String finalNameFilter = nameFilter;
@@ -74,11 +74,11 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 					{
 						if (finalNameFilter == null)
 						{
-							result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, s));
+							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
 						}
 						else if (s.startsWith(finalNameFilter))
 						{
-							result.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElementWithAutocomplete(project, s.substring(finalNameFilter.length())));
+							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s.substring(finalNameFilter.length())));
 						}
 					}
 					return true;

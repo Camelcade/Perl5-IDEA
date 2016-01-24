@@ -39,6 +39,13 @@ public interface PerlElementPatterns extends PerlElementTypes
 	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_DQ_STRING_BEGIN = STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_DOUBLE_OPEN)).inside(PsiPerlStringDq.class);
 	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_QW_STRING_LIST = STRING_CONTENT_PATTERN.inside(PsiPerlStringList.class);
 
+	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_LIST_OR_STRING_START = STRING_CONTENT_PATTERN.andOr(
+			STRING_CONTENT_IN_QW_STRING_LIST,
+			STRING_CONTENT_IN_SQ_STRING_BEGIN,
+			STRING_CONTENT_IN_DQ_STRING_BEGIN
+	);
+
+
 	PsiElementPattern.Capture<PerlStringContentElement> SIMPLE_HASH_INDEX = STRING_CONTENT_PATTERN.withSuperParent(2, PsiPerlHashIndex.class).andOr(
 			STRING_CONTENT_IN_STRING_BARE,
 			STRING_CONTENT_IN_SQ_STRING_BEGIN,

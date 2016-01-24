@@ -22,7 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +42,7 @@ public class PerlPackageFilesCompletionProvider extends CompletionProvider<Compl
 			@Override
 			public boolean process(String s)
 			{
-				resultSet.addElement(PerlPackageCompletionProviderUtil.getPackageLookupElement(project, s));
+				resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
 				return true;
 			}
 		});
