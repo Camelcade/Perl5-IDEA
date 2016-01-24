@@ -447,7 +447,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			for (VirtualFile classRoot : classRoots)
 			{
 				for (VirtualFile virtualFile : VfsUtil.collectChildrenRecursively(classRoot))
-					if (!virtualFile.isDirectory() && "pm".equals(virtualFile.getExtension()))
+					if (!virtualFile.isDirectory() && virtualFile.getFileType() == PerlFileTypePackage.INSTANCE)
 					{
 						String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
 						String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);

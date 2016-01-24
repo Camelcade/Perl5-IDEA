@@ -32,7 +32,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.RegexBlock;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import gnu.trove.THashSet;
@@ -98,9 +97,9 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 		}
 		else if (typedChar == ':')
 		{
-			if (element instanceof PerlNamespaceElement)
+			if (element != null && element.getNode().getElementType() == COLON)
 			{
-				EditorModificationUtil.insertStringAtCaret(editor, typedChar + "", false, true, 1);
+//				EditorModificationUtil.insertStringAtCaret(editor, typedChar + "", false, true, 1);
 				ApplicationManager.getApplication().invokeLater(new Runnable()
 				{
 					@Override

@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public class PerlPackageCompletionProvider extends CompletionProvider<CompletionParameters>
+public class PerlPackageFilesCompletionProvider extends CompletionProvider<CompletionParameters>
 {
 	@Override
 	public void addCompletions(@NotNull CompletionParameters parameters,

@@ -130,7 +130,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		extend(
 				CompletionType.BASIC,
 				NAMESPACE_NAME_PATTERN,
-				new PerlPackageCompletionProvider()
+				new PerlPackageFilesCompletionProvider()
 		);
 
 		// refactored
