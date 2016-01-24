@@ -22,7 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -56,44 +56,44 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 		// defined subs
 		for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
 			if (!subDefinition.isMethod())
-				resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement(subDefinition));
+				resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(subDefinition));
 
 /*
 		// defined subs with prefix
 		if (!subPrefix.isEmpty())
 			for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageWithPrefix))
-				resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteSubDefinitionLookupElement(subDefinition, packageWithPrefix));
+				resultSet.addElement(PerlSubCompletionUtil.getIncompleteSubDefinitionLookupElement(subDefinition, packageWithPrefix));
 */
 
 		// declared subs
 		for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
 			if (!subDeclaration.isMethod())
-				resultSet.addElement(PerlSubCompletionProviderUtil.getSubDeclarationLookupElement(subDeclaration));
+				resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement(subDeclaration));
 
 /*
 		// declared subs with prefix
 		if (!subPrefix.isEmpty())
 			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageWithPrefix))
-				resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteSubDeclarationLookupElement(subDeclaration, packageWithPrefix));
+				resultSet.addElement(PerlSubCompletionUtil.getIncompleteSubDeclarationLookupElement(subDeclaration, packageWithPrefix));
 */
 
 		// Globs
 		for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
 			if (globVariable.getName() != null)
-				resultSet.addElement(PerlSubCompletionProviderUtil.getGlobLookupElement(globVariable));
+				resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement(globVariable));
 
 /*
 		// Globs with prefix
 		if (!subPrefix.isEmpty())
 			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageWithPrefix))
 				if (globVariable.getName() != null)
-					resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteGlobLookupElement(globVariable, packageWithPrefix));
+					resultSet.addElement(PerlSubCompletionUtil.getIncompleteGlobLookupElement(globVariable, packageWithPrefix));
 */
 
 		// Constants
 		for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
 			if (stringConstant.getName() != null)
-				resultSet.addElement(PerlSubCompletionProviderUtil.getConstantLookupElement(stringConstant));
+				resultSet.addElement(PerlSubCompletionUtil.getConstantLookupElement(stringConstant));
 
 
 /*
@@ -101,7 +101,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 		if (!subPrefix.isEmpty())
 			for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageWithPrefix))
 				if (stringConstant.getName() != null)
-					resultSet.addElement(PerlSubCompletionProviderUtil.getIncompleteConstantLookupElement(stringConstant, packageWithPrefix));
+					resultSet.addElement(PerlSubCompletionUtil.getIncompleteConstantLookupElement(stringConstant, packageWithPrefix));
 */
 
 	}

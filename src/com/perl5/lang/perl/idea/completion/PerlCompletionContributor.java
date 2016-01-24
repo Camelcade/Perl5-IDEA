@@ -35,9 +35,42 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 	{
 		extend(
 				CompletionType.BASIC,
+				STRING_CONTENT_PATTERN,
+				new PerlStringContentCompletionProvider()
+		);
+
+		extend(
+				CompletionType.BASIC,
 				SIMPLE_HASH_INDEX,
 				new PerlHashIndexCompletionProvider()
 		);
+
+		// refactored
+		extend(
+				CompletionType.BASIC,
+				STRING_CONTENT_IN_DQ_STRING_BEGIN,
+				new PerlPackageNamesCompletionProvider()
+		);
+
+		extend(
+				CompletionType.BASIC,
+				STRING_CONTENT_IN_SQ_STRING_BEGIN,
+				new PerlPackageNamesCompletionProvider()
+		);
+
+		extend(
+				CompletionType.BASIC,
+				STRING_CONTENT_IN_QW_STRING_LIST,
+				new PerlPackageNamesCompletionProvider()
+		);
+
+		// refactored
+		extend(
+				CompletionType.BASIC,
+				STRING_CONTENT_PATTERN.inside(USE_STATEMENT_PATTERN),
+				new PerlUseParametersCompletionProvider()
+		);
+
 
 		// refactored
 		extend(
@@ -98,32 +131,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				CompletionType.BASIC,
 				SUB_NAME_PATTERN.inside(METHOD_PATTERN),
 				new PerlPackageSubCompletionProvider()
-		);
-
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				DQ_STRING_BEGIN,
-				new PerlPackageNamesCompletionProvider()
-		);
-
-		extend(
-				CompletionType.BASIC,
-				SQ_STRING_BEGIN,
-				new PerlPackageNamesCompletionProvider()
-		);
-
-		extend(
-				CompletionType.BASIC,
-				QW_STRING_LIST,
-				new PerlPackageNamesCompletionProvider()
-		);
-
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				STRING_CONTENT_PATTERN.inside(USE_STATEMENT_PATTERN),
-				new PerlUseParametersCompletionProvider()
 		);
 
 		// refactored

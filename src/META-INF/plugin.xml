@@ -48,6 +48,10 @@
       <li>Moose<ul>
       <li>Implemented live-templates for Moose constructions.</li>
       </ul></li>
+      <li>Exporter<ul>
+      <li>Implemented resolution for @EXPORT and @EXPORT_OK assigned strings, fixes #364.</li>
+      <li>Implemented auto-completion for @EXPORT and @EXPORT_OK assigned strings, fixes #469.</li>
+      </ul></li>
       <li>Mason2<ul>
         <li>Implemented filetypes for Mason2: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason2 files.</li>
@@ -66,7 +70,6 @@
         <li>Implemented formatter and pre-formatter for perl code.</li>
       </ul></li>
       <li>Embedded Perl<ul>
-        <li>Implemented automatic close embed marker insertion after open plus space.</li>
         <li>Implemented automatic close tag insertion on typing (open tag + space).</li>
         <li>Implemented formatter and pre-formatter for perl code.</li>
       </ul></li>
@@ -154,6 +157,9 @@
         <stubElementTypeHolder class="com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes"/>
         <referencesSearch
                 implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferenceSearcher"/>
+
+        <psi.referenceContributor language="Perl5"
+                                  implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
 

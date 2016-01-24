@@ -20,6 +20,7 @@ import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -31,6 +32,9 @@ import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,29 +68,25 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 			@Override
 			protected PsiReference[] compute()
 			{
+				List<PsiReference> result = new ArrayList<PsiReference>();
 				if (looksLikePackage())
 				{
-					return new PsiReference[]{new PerlNamespaceReference(PerlStringContentElementImpl.this, null)};
+					result.add(new PerlNamespaceReference(PerlStringContentElementImpl.this, null));
 				}
 				else
 				{
 					@SuppressWarnings("unchecked")
 					PerlReferencesProvider referencesProvider = PsiTreeUtil.getParentOfType(PerlStringContentElementImpl.this, PerlReferencesProvider.class, true, PsiPerlStatement.class);
 
-					PsiReference[] references = null;
-
 					if (referencesProvider != null)
 					{
-						references = referencesProvider.getReferences(PerlStringContentElementImpl.this);
+						PsiReference[] references = referencesProvider.getReferences(PerlStringContentElementImpl.this);
+						if (references != null)
+							result.addAll(Arrays.asList(references));
 					}
-
-					if (references == null)
-					{
-						references = PsiReference.EMPTY_ARRAY;
-					}
-
-					return references;
 				}
+				result.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(PerlStringContentElementImpl.this)));
+				return result.toArray(new PsiReference[result.size()]);
 			}
 		};
 	}

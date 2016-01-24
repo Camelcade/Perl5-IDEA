@@ -29,7 +29,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 /**
  * Created by hurricup on 09.08.2015.
  */
-public class PerlSubCompletionProviderUtil
+public class PerlSubCompletionUtil
 {
 	public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
@@ -150,6 +150,4 @@ public class PerlSubCompletionProviderUtil
 				.withPresentableText(constant.getName());
 
 	}
-
-
 }

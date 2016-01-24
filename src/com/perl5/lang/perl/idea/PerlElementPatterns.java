@@ -34,13 +34,16 @@ public interface PerlElementPatterns extends PerlElementTypes
 
 	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_PATTERN = psiElement(PerlStringContentElement.class);
 
-	PsiElementPattern.Capture<PerlStringContentElement> STRING_BARE = STRING_CONTENT_PATTERN.inside(PsiPerlStringBare.class);
-	PsiElementPattern.Capture<PerlStringContentElement> SQ_STRING_BEGIN = STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_SINGLE_OPEN)).inside(PsiPerlStringSq.class);
-	PsiElementPattern.Capture<PerlStringContentElement> DQ_STRING_BEGIN = STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_DOUBLE_OPEN)).inside(PsiPerlStringDq.class);
-	PsiElementPattern.Capture<PerlStringContentElement> QW_STRING_LIST = STRING_CONTENT_PATTERN.inside(PsiPerlStringList.class);
+	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_STRING_BARE = STRING_CONTENT_PATTERN.inside(PsiPerlStringBare.class);
+	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_SQ_STRING_BEGIN = STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_SINGLE_OPEN)).inside(PsiPerlStringSq.class);
+	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_DQ_STRING_BEGIN = STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_DOUBLE_OPEN)).inside(PsiPerlStringDq.class);
+	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_QW_STRING_LIST = STRING_CONTENT_PATTERN.inside(PsiPerlStringList.class);
 
 	PsiElementPattern.Capture<PerlStringContentElement> SIMPLE_HASH_INDEX = STRING_CONTENT_PATTERN.withSuperParent(2, PsiPerlHashIndex.class).andOr(
-			STRING_BARE, SQ_STRING_BEGIN, DQ_STRING_BEGIN, QW_STRING_LIST
+			STRING_CONTENT_IN_STRING_BARE,
+			STRING_CONTENT_IN_SQ_STRING_BEGIN,
+			STRING_CONTENT_IN_DQ_STRING_BEGIN,
+			STRING_CONTENT_IN_QW_STRING_LIST
 	);
 
 	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = psiElement(PerlNamespaceElement.class);
@@ -89,5 +92,47 @@ public interface PerlElementPatterns extends PerlElementTypes
 			psiElement().inside(
 					psiElement(PsiPerlStatement.class).afterSiblingSkipping(WHITE_SPACE_AND_COMMENTS, INCOMPLETED_IF_COMPOUND)
 			);
+
+	// @EXPORT = ();
+
+	PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_ARRAY_VARIABLE_PATTERN =
+			psiElement(PsiPerlArrayVariable.class).andOr(
+					psiElement().withText("@EXPORT"),
+					psiElement().withText("@EXPORT_OK")
+			);
+
+	PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_ARRAY_VARIABLE_DECLARATION =
+			psiElement(PsiPerlVariableDeclarationGlobal.class).withChild(
+					psiElement(PerlVariableDeclarationWrapper.class).withChild(EXPORT_ARRAY_VARIABLE_PATTERN)
+			);
+
+
+	PsiElementPattern.Capture<PsiElement> EXPORT_ASSIGNMENT =
+			psiElement()
+					.afterLeafSkipping(WHITE_SPACE_AND_COMMENTS, psiElement(OPERATOR_ASSIGN))
+					.withParent(
+							psiElement(PsiPerlAssignExpr.class).withFirstChild(
+									psiElement().andOr(
+											EXPORT_ARRAY_VARIABLE_PATTERN,
+											EXPORT_ARRAY_VARIABLE_DECLARATION
+									)
+							)
+					);
+
+	PsiElementPattern.Capture<PsiPerlParenthesisedExpr> EXPORT_ASSIGNMENT_PARENTHESISED = psiElement(PsiPerlParenthesisedExpr.class).and(EXPORT_ASSIGNMENT);
+
+	PsiElementPattern.Capture<PsiElement> EXPORT_ASSIGNED_STRING_CONTENT = psiElement().andOr(
+			STRING_CONTENT_IN_QW_STRING_LIST.andOr(
+					psiElement().withParent(EXPORT_ASSIGNMENT),
+					psiElement().withSuperParent(2, EXPORT_ASSIGNMENT_PARENTHESISED)
+			),
+			STRING_CONTENT_PATTERN.withParent(
+					psiElement(PerlString.class).andOr(
+							psiElement().withParent(psiElement(PsiPerlCommaSequenceExpr.class).withParent(EXPORT_ASSIGNMENT_PARENTHESISED)),
+							psiElement().withParent(EXPORT_ASSIGNMENT_PARENTHESISED)
+					)
+			)
+	);
+
 
 }

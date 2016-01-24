@@ -25,7 +25,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterSetterStructureViewElement;
@@ -159,7 +159,7 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 
 		if (isAccessorReadable())
 		{
-			resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement(
+			resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(
 					getterName,
 					"",
 					this
@@ -167,7 +167,7 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 		}
 		if (isAccessorWritable())
 		{
-			resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement(
+			resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(
 					setterName,
 					"($new_value)",
 					this

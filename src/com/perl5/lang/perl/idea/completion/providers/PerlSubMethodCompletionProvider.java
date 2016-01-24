@@ -22,7 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.PerlCompletionElementsProvider;
-import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -64,20 +64,20 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 				}
 				else
 				{
-					resultSet.addElement(PerlSubCompletionProviderUtil.getSubDefinitionLookupElement((PerlSubDefinitionBase) element));
+					resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement((PerlSubDefinitionBase) element));
 				}
 			}
 			else if (element instanceof PerlSubDeclaration && ((PerlSubDeclaration) element).isMethod())
 			{
-				resultSet.addElement(PerlSubCompletionProviderUtil.getSubDeclarationLookupElement((PerlSubDeclaration) element));
+				resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement((PerlSubDeclaration) element));
 			}
 			else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).getName() != null)
 			{
-				resultSet.addElement(PerlSubCompletionProviderUtil.getGlobLookupElement((PerlGlobVariable) element));
+				resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement((PerlGlobVariable) element));
 			}
 			else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
 			{
-				resultSet.addElement(PerlSubCompletionProviderUtil.getConstantLookupElement((PerlConstant) element));
+				resultSet.addElement(PerlSubCompletionUtil.getConstantLookupElement((PerlConstant) element));
 			}
 		}
 	}
