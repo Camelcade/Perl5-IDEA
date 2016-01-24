@@ -83,11 +83,10 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 	@Override
 	public Result charTyped(char typedChar, final Project project, @NotNull final Editor editor, @NotNull PsiFile file)
 	{
-		PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 1);
+		PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
 		if (typedChar == '>')
 		{
-
-			if (element != null && element.getNode().getElementType() == OPERATOR_DEREFERENCE)
+			if (element != null && element.getNode().getElementType() == OPERATOR_MINUS)
 				ApplicationManager.getApplication().invokeLater(new Runnable()
 				{
 					@Override
@@ -100,6 +99,8 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 		else if (typedChar == ':')
 		{
 			if (element instanceof PerlNamespaceElement)
+			{
+				EditorModificationUtil.insertStringAtCaret(editor, typedChar + "", false, true, 1);
 				ApplicationManager.getApplication().invokeLater(new Runnable()
 				{
 					@Override
@@ -108,6 +109,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(project, editor);
 					}
 				});
+			}
 		}
 
 		return super.charTyped(typedChar, project, editor, file);

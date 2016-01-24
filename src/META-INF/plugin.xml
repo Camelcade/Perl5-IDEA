@@ -85,6 +85,7 @@
       <li>Fixed bug with occasional here-doc terminator indention on copy-paste or re-formatting, fixes #631</li>
       <li>Fixed bug with here-doc content re-formatting, fixes #628</li>
       <li>Fixed bug with quotes auto-closing in package and test files.</li>
+      <li>Fixed bug with auto-completion not opening after typing ->, fixes #763</li>
       </ul>
       </p>
 
