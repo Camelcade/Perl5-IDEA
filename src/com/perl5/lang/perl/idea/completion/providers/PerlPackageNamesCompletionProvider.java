@@ -21,7 +21,7 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.completion.util.PerlCompletionUtil;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
@@ -38,7 +38,7 @@ public class PerlPackageNamesCompletionProvider extends CompletionProvider<Compl
 	{
 		final Project project = parameters.getPosition().getProject();
 
-		PerlPackageUtil.processDefinedPackageNames(PerlCompletionUtil.getCompletionScope(parameters), new PerlInternalIndexKeysProcessor()
+		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
 		{
 			@Override
 			public boolean process(String s)

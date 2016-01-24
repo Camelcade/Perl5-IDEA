@@ -22,7 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.completion.util.PerlCompletionUtil;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionProviderUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
@@ -65,7 +65,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 		if (!isObjectMethod)
 		{
 			// fixme not dry with PerlPackageNamesCompletionProvider
-			PerlPackageUtil.processDefinedPackageNames(PerlCompletionUtil.getCompletionScope(parameters), new PerlInternalIndexKeysProcessor()
+			PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
 			{
 				@Override
 				public boolean process(String s)

@@ -28,15 +28,11 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * Created by hurricup on 25.07.2015.
  */
 public class PerlPackageCompletionProviderUtil
 {
-	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
-	public static final ConcurrentHashMap<String, LookupElementBuilder> PACKAGE_REOPEN_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
 	public static final InsertHandler COMPLETION_REOPENER = new CompletionOpener();
 
 	/**
@@ -49,26 +45,18 @@ public class PerlPackageCompletionProviderUtil
 	@NotNull
 	LookupElementBuilder getPackageLookupElement(Project project, String packageName)
 	{
-		LookupElementBuilder result = PACKAGE_LOOKUP_ELEMENTS.get(packageName);
+		LookupElementBuilder result = LookupElementBuilder
+				.create(packageName)
+				.withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
 
-		if (result == null)
-		{
-			result = LookupElementBuilder
-					.create(packageName)
-					.withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
+		if (PerlPackageUtil.isBuiltIn(packageName))
+			result = result.withBoldness(true);
 
-			if (PerlPackageUtil.isBuiltIn(packageName))
-				result = result.withBoldness(true);
+		if (PerlPackageUtil.isPragma(packageName))
+			result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
 
-			if (PerlPackageUtil.isPragma(packageName))
-				result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
-
-			if (PerlPackageUtil.isDeprecated(project, packageName))
-				result = result.withStrikeoutness(true);
-
-
-			PACKAGE_LOOKUP_ELEMENTS.put(packageName, result);
-		}
+		if (PerlPackageUtil.isDeprecated(project, packageName))
+			result = result.withStrikeoutness(true);
 
 		return result;
 	}
@@ -81,16 +69,9 @@ public class PerlPackageCompletionProviderUtil
 	 */
 	public static LookupElementBuilder getPackageLookupElementWithAutocomplete(Project project, String packageName)
 	{
-		LookupElementBuilder result = PACKAGE_REOPEN_LOOKUP_ELEMENTS.get(packageName);
-
-		if (result == null)
-		{
-			result = getPackageLookupElement(project, packageName).withInsertHandler(COMPLETION_REOPENER);
-			result = result.withTailText("...");
-			PACKAGE_REOPEN_LOOKUP_ELEMENTS.put(packageName, result);
-		}
-
-		return result;
+		return getPackageLookupElement(project, packageName)
+				.withInsertHandler(COMPLETION_REOPENER)
+				.withTailText("...");
 	}
 
 	/**
