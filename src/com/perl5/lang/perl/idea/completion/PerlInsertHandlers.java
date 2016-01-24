@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion;
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 
 /**
@@ -38,9 +37,7 @@ public class PerlInsertHandlers
 		@Override
 		public void handleInsert(final InsertionContext context, LookupElement item)
 		{
-			final Editor editor = context.getEditor();
-			EditorModificationUtil.insertStringAtCaret(editor, "[]");
-			editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
+			EditorModificationUtil.insertStringAtCaret(context.getEditor(), "[]", false, true, 1);
 		}
 	}
 
@@ -52,9 +49,7 @@ public class PerlInsertHandlers
 		@Override
 		public void handleInsert(final InsertionContext context, LookupElement item)
 		{
-			final Editor editor = context.getEditor();
-			EditorModificationUtil.insertStringAtCaret(editor, "{}");
-			editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
+			EditorModificationUtil.insertStringAtCaret(context.getEditor(), "{}", false, true, 1);
 		}
 	}
 }

@@ -45,6 +45,9 @@
       <li>Implemented quote handler for regexps and string-like operators, fixes #741</li>
       <li>Implemented dumb and comfy hash keys autocompletion, not intelligent, most like in Sublime Text, fixes #711</li>
       <li>Implemented support of Class::Acessor api, fixes #778</li>
+      <li>Moose<ul>
+      <li>Implemented live-templates for Moose constructions.</li>
+      </ul></li>
       <li>Mason2<ul>
         <li>Implemented filetypes for Mason2: top-level component, internal component and perl component.</li>
         <li>Implemented lexing and parsing of Mason2 files.</li>

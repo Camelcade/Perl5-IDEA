@@ -20,128 +20,59 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * Created by hurricup on 25.07.2015.
  */
 public class PerlVariableCompletionProviderUtil
 {
-	public static final ConcurrentHashMap<String, LookupElementBuilder> SCALAR_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
-	public static final ConcurrentHashMap<String, LookupElementBuilder> ARRAY_ELEMENT_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
-	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_ELEMENT_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
-
-	public static final ConcurrentHashMap<String, LookupElementBuilder> ARRAY_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
-	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_SLICE_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
-
-	public static final ConcurrentHashMap<String, LookupElementBuilder> HASH_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
-
-	public static final ConcurrentHashMap<String, LookupElementBuilder> GLOB_LOOKUP_ELEMENTS = new ConcurrentHashMap<String, LookupElementBuilder>();
-
 	public static LookupElementBuilder getScalarLookupElement(String name)
 	{
-		LookupElementBuilder result = SCALAR_LOOKUP_ELEMENTS.get(name);
-
-		if (result == null)
-		{
-			result = LookupElementBuilder
+		return LookupElementBuilder
 					.create(name)
 					.withIcon(PerlIcons.SCALAR_GUTTER_ICON);
-			SCALAR_LOOKUP_ELEMENTS.put(name, result);
-		}
-
-		return result;
 	}
 
 	public static LookupElementBuilder getGlobLookupElement(String name)
 	{
-		LookupElementBuilder result = GLOB_LOOKUP_ELEMENTS.get(name);
-
-		if (result == null)
-		{
-			result = LookupElementBuilder
+		return LookupElementBuilder
 					.create(name)
 					.withIcon(PerlIcons.GLOB_GUTTER_ICON);
-			GLOB_LOOKUP_ELEMENTS.put(name, result);
-		}
-
-		return result;
 	}
 
 	public static LookupElementBuilder getArrayLookupElement(String name)
 	{
-		LookupElementBuilder result = ARRAY_LOOKUP_ELEMENTS.get(name);
-
-		if (result == null)
-		{
-			result = LookupElementBuilder
+		return LookupElementBuilder
 					.create(name)
 					.withIcon(PerlIcons.ARRAY_GUTTER_ICON);
-			ARRAY_LOOKUP_ELEMENTS.put(name, result);
-		}
-
-		return result;
 	}
 
 	public static LookupElementBuilder getArrayElementLookupElement(String name)
 	{
-		LookupElementBuilder result = ARRAY_ELEMENT_LOOKUP_ELEMENTS.get(name);
-
-		if (result == null)
-		{
-			result = getArrayLookupElement(name)
+		return getArrayLookupElement(name)
 					.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
 					.withTailText("[]");
 
-			ARRAY_ELEMENT_LOOKUP_ELEMENTS.put(name, result);
-		}
-
-		return result;
 	}
 
 	public static LookupElementBuilder getHashLookupElement(String name)
 	{
-		LookupElementBuilder result = HASH_LOOKUP_ELEMENTS.get(name);
-
-		if (result == null)
-		{
-			result = LookupElementBuilder
+		return LookupElementBuilder
 					.create(name)
 					.withIcon(PerlIcons.HASH_GUTTER_ICON);
-			HASH_LOOKUP_ELEMENTS.put(name, result);
-		}
-
-		return result;
 	}
 
 	public static LookupElementBuilder getHashElementLookupElement(String name)
 	{
-		LookupElementBuilder result = HASH_ELEMENT_LOOKUP_ELEMENTS.get(name);
-
-		if (result == null)
-		{
-			result = getHashLookupElement(name)
+		return getHashLookupElement(name)
 					.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
 					.withTailText("{}");
-			HASH_ELEMENT_LOOKUP_ELEMENTS.put(name, result);
-		}
-
-		return result;
 	}
 
 	public static LookupElementBuilder getHashSliceElementLookupElement(String name)
 	{
-		LookupElementBuilder result = HASH_SLICE_LOOKUP_ELEMENTS.get(name);
-
-		if (result == null)
-		{
-			result = getHashLookupElement(name)
+		return getHashLookupElement(name)
 					.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER) // slice here
 					.withTailText("{}");
-			HASH_SLICE_LOOKUP_ELEMENTS.put(name, result);
-		}
-
-		return result;
 	}
 
 }
