@@ -40,6 +40,7 @@ public class PerlMooseSuperReferenceResolver implements ResolveCache.PolyVariant
 	@Override
 	public ResolveResult[] resolve(@NotNull PerlMooseSuperReference reference, boolean incompleteCode)
 	{
+		// fixme not really dry with simpleresolver and superresolver. Need some generics magic
 		List<ResolveResult> result = new ArrayList<ResolveResult>();
 		PsiElement element = reference.getElement();
 

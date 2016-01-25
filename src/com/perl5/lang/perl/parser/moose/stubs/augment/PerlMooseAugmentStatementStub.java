@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi;
+package com.perl5.lang.perl.parser.moose.stubs.augment;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 
 /**
- * Created by hurricup on 25.11.2015.
+ * Created by hurricup on 25.01.2016.
  */
-public interface PerlMooseAugmentStatement extends StubBasedPsiElement<PerlMooseAugmentStatementStub>, PerlMooseMethodModifier, PsiPerlStatement
+public interface PerlMooseAugmentStatementStub extends StubElement<PerlMooseAugmentStatement>
 {
-	@Nullable
+	/**
+	 * Returns augmented method name
+	 *
+	 * @return name
+	 */
 	String getSubName();
 }

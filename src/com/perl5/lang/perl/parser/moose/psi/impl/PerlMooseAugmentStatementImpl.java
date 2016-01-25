@@ -16,16 +16,100 @@
 
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
+import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil;
+import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
+import com.perl5.lang.perl.psi.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAugmentStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAugmentStatement
+public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBase<PerlMooseAugmentStatementStub> implements PerlMooseAugmentStatement
 {
 	public PerlMooseAugmentStatementImpl(ASTNode node)
 	{
 		super(node);
 	}
+
+	public PerlMooseAugmentStatementImpl(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
+
+	@Nullable
+	@Override
+	public String getSubName()
+	{
+		PerlMooseAugmentStatementStub stub = getStub();
+		if (stub != null)
+		{
+			return stub.getSubName();
+		}
+
+		PsiElement expr = getExpr();
+
+		if (expr instanceof PsiPerlParenthesisedExpr)
+		{
+			expr = expr.getFirstChild();
+			if (expr != null)
+			{
+				expr = expr.getNextSibling();
+			}
+		}
+
+		if (expr instanceof PsiPerlCommaSequenceExpr)
+		{
+			PsiElement nameElement = expr.getFirstChild();
+			if (nameElement instanceof PerlString)
+			{
+				return ((PerlString) nameElement).getStringContent();
+			}
+		}
+
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public PsiReference[] getReferences(PsiElement element)
+	{
+		return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlExpr getExpr()
+	{
+		return findChildByClass(PsiPerlExpr.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlNoStatement getNoStatement()
+	{
+		return findChildByClass(PsiPerlNoStatement.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlStatement getStatement()
+	{
+		return findChildByClass(PsiPerlStatement.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlSubDeclaration getSubDeclaration()
+	{
+		return findChildByClass(PsiPerlSubDeclaration.class);
+	}
+
+
 }

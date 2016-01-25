@@ -22,8 +22,9 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
 import com.perl5.lang.perl.parser.moose.psi.impl.*;
-import com.perl5.lang.perl.parser.moose.stubs.attribute.PerlMooseAttributeStubElementType;
-import com.perl5.lang.perl.parser.moose.stubs.override.PerlMooseOverrideStubElementType;
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeStubElementType;
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubElementType;
+import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -98,15 +99,6 @@ public interface MooseElementTypes
 			return new PerlMooseAroundStatementImpl(node);
 		}
 	};
-	IElementType MOOSE_STATEMENT_AUGMENT = new PerlElementTypeEx("MOOSE_STATEMENT_AUGMENT")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new PerlMooseAugmentStatementImpl(node);
-		}
-	};
 	IElementType MOOSE_STATEMENT_AFTER = new PerlElementTypeEx("MOOSE_STATEMENT_AFTER")
 	{
 		@NotNull
@@ -135,6 +127,7 @@ public interface MooseElementTypes
 		}
 	};
 
+	IElementType MOOSE_STATEMENT_AUGMENT = new PerlMooseAugmentStatementElementType("MOOSE_STATEMENT_AUGMENT");
 	IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideStubElementType("MOOSE_STATEMENT_OVERRIDE");
 	IElementType MOOSE_ATTRIBUTE = new PerlMooseAttributeStubElementType("MOOSE_ATTRIBUTE");
 
