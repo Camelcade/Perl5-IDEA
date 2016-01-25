@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
+import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
@@ -24,7 +25,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseAugmentStatement extends StubBasedPsiElement<PerlMooseAugmentStatementStub>, PerlMooseMethodModifier, PsiPerlStatement
+public interface PerlMooseAugmentStatement extends
+		StubBasedPsiElement<PerlMooseAugmentStatementStub>,
+		PerlMooseMethodModifier,
+		PsiPerlStatement,
+		PsiNameIdentifierOwner
 {
 	@Nullable
 	String getSubName();

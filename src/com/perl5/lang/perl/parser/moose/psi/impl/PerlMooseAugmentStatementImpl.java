@@ -21,10 +21,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,6 +56,19 @@ public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBase<PerlM
 			return stub.getSubName();
 		}
 
+		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier instanceof PerlString)
+		{
+			return ((PerlString) nameIdentifier).getStringContent();
+		}
+
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
 		PsiElement expr = getExpr();
 
 		if (expr instanceof PsiPerlParenthesisedExpr)
@@ -69,11 +85,32 @@ public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBase<PerlM
 			PsiElement nameElement = expr.getFirstChild();
 			if (nameElement instanceof PerlString)
 			{
-				return ((PerlString) nameElement).getStringContent();
+				return nameElement;
 			}
 		}
-
 		return null;
+	}
+
+	@Override
+	public int getTextOffset()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+
+		return nameIdentifier == null
+				? super.getTextOffset()
+				: getNameIdentifier().getTextOffset();
+	}
+
+	@Override
+	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier != null)
+		{
+			PerlPsiUtil.renameElement(nameIdentifier, name);
+		}
+
+		return this;
 	}
 
 	@Nullable

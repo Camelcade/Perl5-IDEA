@@ -16,10 +16,22 @@
 
 package com.perl5.lang.perl.parser.moose.psi.references.resolvers;
 
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseInnerReference;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 25.01.2016.
@@ -28,8 +40,67 @@ public class PerlMooseInnerReferenceResolver implements ResolveCache.PolyVariant
 {
 	@NotNull
 	@Override
-	public ResolveResult[] resolve(@NotNull PerlMooseInnerReference perlMooseInnerReference, boolean incompleteCode)
+	public ResolveResult[] resolve(@NotNull PerlMooseInnerReference reference, boolean incompleteCode)
 	{
-		return new ResolveResult[0];
+		List<ResolveResult> result = new ArrayList<ResolveResult>();
+		PsiElement element = reference.getElement();
+
+		String subName = null;
+		PerlSubDefinitionBase subDefinitionBase = PsiTreeUtil.getParentOfType(element, PerlSubDefinitionBase.class);
+
+		if (subDefinitionBase != null)
+		{
+			subName = subDefinitionBase.getSubName();
+		}
+
+		PerlMooseAugmentStatement augmentStatement = PsiTreeUtil.getParentOfType(element, PerlMooseAugmentStatement.class);
+
+		if (augmentStatement != null)
+		{
+			subName = augmentStatement.getSubName();
+		}
+
+		if (subName != null)
+		{
+			PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+			Set<PerlNamespaceDefinition> recursionSet = new THashSet<PerlNamespaceDefinition>();
+
+			if (StringUtil.isNotEmpty(subName) && namespaceDefinition != null)
+			{
+				searchNamespaceForAugmentations(namespaceDefinition, subName, recursionSet, result);
+			}
+		}
+
+		return result.toArray(new ResolveResult[result.size()]);
+	}
+
+	protected void searchNamespaceForAugmentations(@NotNull PerlNamespaceDefinition namespaceDefinition,
+												   @NotNull String subName,
+												   Set<PerlNamespaceDefinition> recursionSet,
+												   List<ResolveResult> result)
+	{
+		recursionSet.add(namespaceDefinition);
+
+		for (PerlNamespaceDefinition childNamespace : namespaceDefinition.getChildNamespaceDefinitions())
+		{
+			if (!recursionSet.contains(childNamespace))
+			{
+				boolean noSubclasses = false;
+
+				for (PerlMooseAugmentStatement augmentStatement : PsiTreeUtil.findChildrenOfType(childNamespace, PerlMooseAugmentStatement.class))
+				{
+					if (subName.equals(augmentStatement.getSubName()) && childNamespace.equals(PsiTreeUtil.getParentOfType(augmentStatement, PerlNamespaceDefinition.class)))
+					{
+						result.add(new PsiElementResolveResult(augmentStatement));
+						noSubclasses = true;
+					}
+				}
+
+				if (!noSubclasses)
+				{
+					searchNamespaceForAugmentations(childNamespace, subName, recursionSet, result);
+				}
+			}
+		}
 	}
 }
