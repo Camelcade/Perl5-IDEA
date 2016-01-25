@@ -208,10 +208,24 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	public boolean parseStatement(PerlBuilder b, int l)
 	{
 		return parseOverride(b, l) ||
+				parseMooseInvocation(b, l, RESERVED_INNER) ||
+				parseMooseInvocation(b, l, RESERVED_SUPER) ||
 				parseHas(b, l) ||
 				parseDefault(b, l)
 				;
 	}
+
+	public boolean parseMooseInvocation(PerlBuilder b, int l, IElementType keyToken)
+	{
+		if (b.getTokenType() == keyToken)
+		{
+			b.setNextSubElementType(keyToken);
+			return PerlParserImpl.sub_call_expr(b, l);
+		}
+		return false;
+	}
+
+
 
 	@Nullable
 	@Override
