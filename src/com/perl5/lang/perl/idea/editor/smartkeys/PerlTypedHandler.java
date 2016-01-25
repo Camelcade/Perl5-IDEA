@@ -91,7 +91,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 					@Override
 					public void run()
 					{
-						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(project, editor);
+						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(project, editor, 0);
 					}
 				});
 		}
@@ -105,7 +105,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 					@Override
 					public void run()
 					{
-						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(project, editor);
+						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(project, editor, 0);
 					}
 				});
 			}

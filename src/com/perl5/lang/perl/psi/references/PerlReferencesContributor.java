@@ -34,5 +34,7 @@ public class PerlReferencesContributor extends PsiReferenceContributor implement
 				EXPORT_ASSIGNED_STRING_CONTENT,
 				new PerlSimpleSubReferenceProvider()
 		);
+
+
 	}
 }

@@ -106,7 +106,7 @@ public class PerlPackageCompletionUtil
 					public void run()
 					{
 						Editor editor = context.getEditor();
-						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor);
+						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 0);
 					}
 				});
 		}

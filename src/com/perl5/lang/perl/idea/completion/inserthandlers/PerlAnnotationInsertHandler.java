@@ -49,7 +49,7 @@ public class PerlAnnotationInsertHandler implements InsertHandler<LookupElement>
 				@Override
 				public void run()
 				{
-					new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor);
+					new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 0);
 				}
 			});
 		}
