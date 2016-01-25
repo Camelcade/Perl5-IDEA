@@ -42,7 +42,8 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	protected static final List<Pair<IElementType, TokenSet>> EXTENSION_SET = Collections.singletonList(
 			Pair.create(EXPR, TokenSet.create(MOOSE_ATTRIBUTE))
 	);
-	protected static TokenSet TOKEN_SET;
+	protected static TokenSet PARSER_TOKEN_SET;
+	protected static TokenSet HIGHLIGHTER_TOKEN_SET;
 
 	static
 	{
@@ -59,24 +60,22 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 		TOKENS_MAP.put("before", RESERVED_BEFORE);
 		TOKENS_MAP.put("has", RESERVED_HAS);
 
-		RESERVED_TO_STATEMENT_MAP.put(RESERVED_INNER, MOOSE_STATEMENT_INNER);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_WITH, MOOSE_STATEMENT_WITH);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_EXTENDS, MOOSE_STATEMENT_EXTENDS);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_META, MOOSE_STATEMENT_META);
-		RESERVED_TO_STATEMENT_MAP.put(RESERVED_OVERRIDE, MOOSE_STATEMENT_OVERRIDE);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_AROUND, MOOSE_STATEMENT_AROUND);
-		RESERVED_TO_STATEMENT_MAP.put(RESERVED_SUPER, MOOSE_STATEMENT_SUPER);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_AUGMENT, MOOSE_STATEMENT_AUGMENT);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_AFTER, MOOSE_STATEMENT_AFTER);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_BEFORE, MOOSE_STATEMENT_BEFORE);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_HAS, MOOSE_STATEMENT_HAS);
 
-		TOKEN_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
+		PARSER_TOKEN_SET = TokenSet.create(RESERVED_TO_STATEMENT_MAP.keySet().toArray(new IElementType[RESERVED_TO_STATEMENT_MAP.keySet().size()]));
+		HIGHLIGHTER_TOKEN_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
 	}
 
-	public static TokenSet getTokenSet()
+	public static TokenSet getHighlighterTokenSet()
 	{
-		return TOKEN_SET;
+		return HIGHLIGHTER_TOKEN_SET;
 	}
 
 	private static boolean parseOverride(PerlBuilder b, int l)
@@ -181,7 +180,7 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 		PerlBuilder.Marker m = b.mark();
 
 		IElementType tokenType = b.getTokenType();
-		if (TOKEN_SET.contains(tokenType))
+		if (PARSER_TOKEN_SET.contains(tokenType))
 		{
 			b.advanceLexer();
 			if (PerlParserImpl.expr(b, l, -1))
@@ -208,11 +207,18 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	public boolean parseStatement(PerlBuilder b, int l)
 	{
 		return parseOverride(b, l) ||
-				parseMooseInvocation(b, l, RESERVED_INNER) ||
-				parseMooseInvocation(b, l, RESERVED_SUPER) ||
 				parseHas(b, l) ||
 				parseDefault(b, l)
 				;
+	}
+
+	@Override
+	public boolean parseTerm(PerlBuilder b, int l)
+	{
+		return
+				parseMooseInvocation(b, l, RESERVED_INNER) ||
+						parseMooseInvocation(b, l, RESERVED_SUPER) ||
+						super.parseTerm(b, l);
 	}
 
 	public boolean parseMooseInvocation(PerlBuilder b, int l, IElementType keyToken)

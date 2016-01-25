@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi.impl;
+package com.perl5.lang.perl.parser.moose.psi;
 
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseSuperStatement;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 
 /**
- * Created by hurricup on 25.11.2015.
+ * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseSuperStatementImpl extends PsiPerlStatementImpl implements PerlMooseSuperStatement
+public interface PerlMooseKeywordSubNameElement extends PerlSubNameElement
 {
-	public PerlMooseSuperStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
 }

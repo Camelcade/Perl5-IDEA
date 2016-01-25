@@ -31,7 +31,9 @@ public class MooseAnnotator extends PerlAnnotator
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (MooseParserExtensionImpl.getTokenSet().contains(element.getNode().getElementType()))
+		if (MooseParserExtensionImpl.getHighlighterTokenSet().contains(element.getNode().getElementType()))
+		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
+		}
 	}
 }

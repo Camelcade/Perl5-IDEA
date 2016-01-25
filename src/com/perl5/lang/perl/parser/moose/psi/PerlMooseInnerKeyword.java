@@ -19,6 +19,6 @@ package com.perl5.lang.perl.parser.moose.psi;
 /**
  * Created by hurricup on 19.01.2016.
  */
-public interface PerlMooseInnerKeyword
+public interface PerlMooseInnerKeyword extends PerlMooseKeywordSubNameElement
 {
 }

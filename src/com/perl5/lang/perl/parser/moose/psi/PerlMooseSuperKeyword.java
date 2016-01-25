@@ -16,11 +16,9 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
-import com.intellij.psi.PsiElement;
-
 /**
  * Created by hurricup on 19.01.2016.
  */
-public interface PerlMooseSuperKeyword extends PsiElement
+public interface PerlMooseSuperKeyword extends PerlMooseKeywordSubNameElement
 {
 }

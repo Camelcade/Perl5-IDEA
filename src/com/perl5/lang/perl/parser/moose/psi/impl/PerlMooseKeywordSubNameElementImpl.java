@@ -17,18 +17,36 @@
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseSuperKeyword;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 19.01.2016.
+ * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseSuperKeywordImpl extends PerlMooseKeywordSubNameElementImpl implements PerlMooseSuperKeyword
+public abstract class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl implements PerlSubNameElement
 {
-	public PerlMooseSuperKeywordImpl(@NotNull IElementType type, CharSequence text)
+	public PerlMooseKeywordSubNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
 	}
 
+	@Override
+	public boolean isBuiltIn()
+	{
+		return false;
+	}
 
+	@Override
+	protected boolean isPerlBuiltIn()
+	{
+		return false;
+	}
+
+	@Override
+	public String getPackageName()
+	{
+		return PerlPackageUtil.getContextPackageName(this);
+	}
 }

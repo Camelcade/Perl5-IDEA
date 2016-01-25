@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseInnerKeyword;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.01.2016.
  */
-public class PerlMooseInnerKeywordImpl extends LeafPsiElement implements PerlMooseInnerKeyword
+public class PerlMooseInnerKeywordImpl extends PerlMooseKeywordSubNameElementImpl implements PerlMooseInnerKeyword
 {
 	public PerlMooseInnerKeywordImpl(@NotNull IElementType type, CharSequence text)
 	{

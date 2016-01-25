@@ -62,15 +62,6 @@ public interface MooseElementTypes
 	IElementType RESERVED_HAS = new PerlMooseTokenType("MOOSE_HAS");
 
 
-	IElementType MOOSE_STATEMENT_INNER = new PerlElementTypeEx("MOOSE_STATEMENT_INNER")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new PerlMooseInnerStatementImpl(node);
-		}
-	};
 	IElementType MOOSE_STATEMENT_WITH = new PerlElementTypeEx("MOOSE_STATEMENT_WITH")
 	{
 		@NotNull
@@ -105,15 +96,6 @@ public interface MooseElementTypes
 		public PsiElement getPsiElement(@NotNull ASTNode node)
 		{
 			return new PerlMooseAroundStatementImpl(node);
-		}
-	};
-	IElementType MOOSE_STATEMENT_SUPER = new PerlElementTypeEx("MOOSE_STATEMENT_SUPER")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new PerlMooseSuperStatementImpl(node);
 		}
 	};
 	IElementType MOOSE_STATEMENT_AUGMENT = new PerlElementTypeEx("MOOSE_STATEMENT_AUGMENT")
