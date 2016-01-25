@@ -23,7 +23,7 @@ import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.references.PerlSubReference;
+import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -51,7 +51,7 @@ public class PerlSubUnresolvableInspection extends PerlInspection
 
 				PsiReference reference = subNameElement.getReference();
 
-				if (reference instanceof PerlSubReference && ((PerlSubReference) reference).multiResolve(false).length == 0)
+				if (reference instanceof PerlPolyVariantReference && ((PerlPolyVariantReference) reference).multiResolve(false).length == 0)
 					registerProblem(holder, subNameElement, "Unable to find sub definition, declaration, constant definition or typeglob aliasing");
 			}
 		};

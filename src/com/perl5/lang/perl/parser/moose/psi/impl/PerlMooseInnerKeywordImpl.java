@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseInnerKeyword;
+import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseInnerReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -25,8 +27,26 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlMooseInnerKeywordImpl extends PerlMooseKeywordSubNameElementImpl implements PerlMooseInnerKeyword
 {
+	protected final PsiReference[] myReferences = new PsiReference[]{
+			new PerlMooseInnerReference(this, null),
+	};
+
 	public PerlMooseInnerKeywordImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
 	}
+
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return myReferences; //(PsiReference[]) ArrayUtils.addAll(, ReferenceProvidersRegistry.getReferencesFromProviders(this));
+	}
+
+	@Override
+	public PsiReference getReference()
+	{
+		return myReferences[0];
+	}
+
 }

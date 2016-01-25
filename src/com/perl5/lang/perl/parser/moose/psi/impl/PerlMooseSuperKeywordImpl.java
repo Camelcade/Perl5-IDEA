@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseSuperKeyword;
+import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseSuperReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -25,10 +27,26 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlMooseSuperKeywordImpl extends PerlMooseKeywordSubNameElementImpl implements PerlMooseSuperKeyword
 {
+	protected final PsiReference[] myReferences = new PsiReference[]{
+			new PerlMooseSuperReference(this, null),
+	};
+
 	public PerlMooseSuperKeywordImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
 	}
 
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return myReferences; //(PsiReference[]) ArrayUtils.addAll(, ReferenceProvidersRegistry.getReferencesFromProviders(this));
+	}
+
+	@Override
+	public PsiReference getReference()
+	{
+		return myReferences[0];
+	}
 
 }

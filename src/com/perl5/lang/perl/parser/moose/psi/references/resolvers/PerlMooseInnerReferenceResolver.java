@@ -14,41 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi.impl;
+package com.perl5.lang.perl.parser.moose.psi.references.resolvers;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.intellij.psi.ResolveResult;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseInnerReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.01.2016.
  */
-public abstract class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl implements PerlSubNameElement
+public class PerlMooseInnerReferenceResolver implements ResolveCache.PolyVariantResolver<PerlMooseInnerReference>
 {
-	public PerlMooseKeywordSubNameElementImpl(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
-
+	@NotNull
 	@Override
-	public boolean isBuiltIn()
+	public ResolveResult[] resolve(@NotNull PerlMooseInnerReference perlMooseInnerReference, boolean incompleteCode)
 	{
-		return false;
+		return new ResolveResult[0];
 	}
-
-	@Override
-	protected boolean isPerlBuiltIn()
-	{
-		return false;
-	}
-
-	@Override
-	public String getPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
-
-
 }
