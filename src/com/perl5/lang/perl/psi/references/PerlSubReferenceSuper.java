@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,17 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolver;
+import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolverSuper;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlSubReference extends PerlSubReferenceSimple
+/**
+ * Created by hurricup on 25.01.2016.
+ */
+public class PerlSubReferenceSuper extends PerlSubReferenceSimple
 {
-	private static final ResolveCache.PolyVariantResolver<PerlSubReference> RESOLVER = new PerlSubReferenceResolver();
+	private static final ResolveCache.PolyVariantResolver<PerlSubReferenceSuper> RESOLVER = new PerlSubReferenceResolverSuper();
 
-	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlSubReferenceSuper(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 	}
@@ -39,20 +42,4 @@ public class PerlSubReference extends PerlSubReferenceSimple
 		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
 	}
 
-/*
-	@Override
-	public TextRange getRangeInElement()
-	{
-		TextRange range = super.getRangeInElement();
-
-		// fixme this should be some kinda interface
-		PsiElement resolveResult = resolve();
-		if( resolveResult instanceof PerlClassAccessorDeclaration && ((PerlClassAccessorDeclaration) resolveResult).isFollowsBestPractice() && range.getEndOffset() > 4)
-		{
-			range = new TextRange(4, range.getEndOffset());
-		}
-
-		return range;
-	}
-*/
 }

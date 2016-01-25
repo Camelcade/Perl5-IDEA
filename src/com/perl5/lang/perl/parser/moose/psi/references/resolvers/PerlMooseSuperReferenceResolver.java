@@ -16,10 +16,20 @@
 
 package com.perl5.lang.perl.parser.moose.psi.references.resolvers;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseSuperReference;
+import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 25.01.2016.
@@ -28,8 +38,31 @@ public class PerlMooseSuperReferenceResolver implements ResolveCache.PolyVariant
 {
 	@NotNull
 	@Override
-	public ResolveResult[] resolve(@NotNull PerlMooseSuperReference perlMooseSuperReference, boolean incompleteCode)
+	public ResolveResult[] resolve(@NotNull PerlMooseSuperReference reference, boolean incompleteCode)
 	{
-		return new ResolveResult[0];
+		List<ResolveResult> result = new ArrayList<ResolveResult>();
+		PsiElement element = reference.getElement();
+
+		PerlMooseOverrideStatement overrideStatement = PsiTreeUtil.getParentOfType(element, PerlMooseOverrideStatement.class);
+
+		if (overrideStatement != null)
+		{
+			String packageName = PerlPackageUtil.getContextPackageName(element);
+			String subName = overrideStatement.getSubName();
+			Project project = element.getProject();
+
+
+			for (PsiElement targetElement : PerlMroDfs.resolveSub(
+					project,
+					packageName,
+					subName,
+					true
+			))
+			{
+				result.add(new PsiElementResolveResult(targetElement));
+			}
+		}
+
+		return result.toArray(new ResolveResult[result.size()]);
 	}
 }

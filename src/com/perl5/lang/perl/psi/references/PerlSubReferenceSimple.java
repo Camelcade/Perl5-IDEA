@@ -21,6 +21,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
@@ -156,5 +158,18 @@ public class PerlSubReferenceSimple extends PerlPolyVariantReference
 		}
 		return result;
 	}
+
+
+	@Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
+	{
+		PsiElement target = resolve();
+		if (target instanceof PerlRenameUsagesSubstitutor)
+		{
+			newElementName = ((PerlRenameUsagesSubstitutor) target).getSubstitutedUsageName(newElementName, myElement);
+		}
+		return super.handleElementRename(newElementName);
+	}
+
 
 }

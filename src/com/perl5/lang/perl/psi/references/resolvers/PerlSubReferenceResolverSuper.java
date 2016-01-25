@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
-import com.perl5.lang.perl.psi.references.PerlSubReferenceSimple;
+import com.perl5.lang.perl.psi.references.PerlSubReferenceSuper;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,15 +29,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hurricup on 26.11.2015.
+ * Created by hurricup on 25.01.2016.
+ * Resolves super methods
  */
-public class PerlSubReferenceResolverSimple implements ResolveCache.PolyVariantResolver<PerlSubReferenceSimple>
+public class PerlSubReferenceResolverSuper implements ResolveCache.PolyVariantResolver<PerlSubReferenceSuper>
 {
 	@NotNull
 	@Override
-	public ResolveResult[] resolve(@NotNull PerlSubReferenceSimple reference, boolean incompleteCode)
+	public ResolveResult[] resolve(@NotNull PerlSubReferenceSuper reference, boolean incompleteCode)
 	{
-		// fixme not dry with super resolver, need some generics fix
+		// fixme not dry with simple resolver, need some generics fix
 		PsiElement myElement = reference.getElement();
 		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
 
@@ -49,12 +50,11 @@ public class PerlSubReferenceResolverSimple implements ResolveCache.PolyVariantR
 				project,
 				packageName,
 				subName,
-				false
+				true
 		));
 
 		List<ResolveResult> result = reference.getResolveResults(relatedItems);
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
-
 }

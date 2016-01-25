@@ -18,11 +18,13 @@ package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
+import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +46,14 @@ public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<Pe
 	{
 		super(stub, nodeType);
 	}
+
+	@Nullable
+	@Override
+	public PsiReference[] getReferences(PsiElement element)
+	{
+		return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
+	}
+
 
 	@Override
 	public PsiPerlBlock getBlock()

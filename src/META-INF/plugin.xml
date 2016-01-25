@@ -47,6 +47,7 @@
       <li>Implemented support of Class::Acessor api, fixes #778</li>
       <li>Moose<ul>
       <li>Implemented live-templates for Moose constructions.</li>
+      <li>Implemented Moose super call resolution, fixes #553.</li>
       </ul></li>
       <li>Exporter<ul>
       <li>Implemented resolution for @EXPORT and @EXPORT_OK assigned strings, fixes #364.</li>
