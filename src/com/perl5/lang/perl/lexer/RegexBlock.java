@@ -79,7 +79,7 @@ public class RegexBlock implements PerlElementTypes
 
 		while (true)
 		{
-			if (currentOffset == bufferEnd)
+			if (currentOffset >= bufferEnd)
 			{
 				break;
 			}
