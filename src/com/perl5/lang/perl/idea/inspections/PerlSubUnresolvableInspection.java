@@ -19,17 +19,19 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlSubUnresolvableInspection extends PerlInspection
+public class PerlSubUnresolvableInspection extends PerlInspection implements PerlElementPatterns
 {
 	@NotNull
 	@Override
@@ -37,6 +39,20 @@ public class PerlSubUnresolvableInspection extends PerlInspection
 	{
 		return new PerlVisitor()
 		{
+			@Override
+			public void visitStringContentElement(@NotNull PerlStringContentElementImpl o)
+			{
+				if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(o))
+				{
+					PsiReference reference = o.getReference();
+					if (reference == null || reference.resolve() == null)
+					{
+						registerProblem(holder, o, "Unable to find exported entity");
+					}
+				}
+				super.visitStringContentElement(o);
+			}
+
 			@Override
 			public void visitPerlMethod(@NotNull PerlMethod o)
 			{

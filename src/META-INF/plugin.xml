@@ -53,6 +53,7 @@
       <li>Exporter<ul>
       <li>Implemented resolution for @EXPORT and @EXPORT_OK assigned strings, fixes #364</li>
       <li>Implemented auto-completion for @EXPORT and @EXPORT_OK assigned strings, fixes #469</li>
+      <li>Unresolved subs inspection now also check Exporter's arrays, fixes #799</li>
       </ul></li>
       <li>Mason2<ul>
         <li>Implemented filetypes for Mason2: top-level component, internal component and perl component</li>
