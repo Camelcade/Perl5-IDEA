@@ -60,8 +60,7 @@ public class PerlSubCompletionUtil
 				.create(subDeclaration.getSubName())
 				.withIcon(PerlIcons.SUB_GUTTER_ICON)
 				.withStrikeoutness(subDeclaration.getSubAnnotations().isDeprecated())
-				.withInsertHandler(SUB_SELECTION_HANDLER)
-				.withTailText("(?)");
+				.withInsertHandler(SUB_SELECTION_HANDLER);
 
 	}
 
@@ -70,8 +69,7 @@ public class PerlSubCompletionUtil
 		return LookupElementBuilder
 				.create(globVariable.getName())
 				.withIcon(PerlIcons.GLOB_GUTTER_ICON)
-				.withInsertHandler(SUB_SELECTION_HANDLER)
-				.withTailText("(?)");
+				.withInsertHandler(SUB_SELECTION_HANDLER);
 
 	}
 
@@ -135,8 +133,7 @@ public class PerlSubCompletionUtil
 				.create(indexKeyName)
 				.withIcon(PerlIcons.GLOB_GUTTER_ICON)
 				.withPresentableText(globVariable.getName())
-				.withInsertHandler(SUB_SELECTION_HANDLER)
-				.withTailText("(?)");
+				.withInsertHandler(SUB_SELECTION_HANDLER);
 
 	}
 

@@ -59,6 +59,6 @@ public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSu
 	@Override
 	public String getPresentableName()
 	{
-		return this.getName() + "(?)";
+		return this.getName();
 	}
 }

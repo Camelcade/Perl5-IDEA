@@ -71,7 +71,6 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 							LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
 									.create(subName)
 									.withTypeText(imported.getKey())
-									.withTailText("(?)")    // fixme here we should have a signature
 									.withIcon(PerlIcons.SUB_GUTTER_ICON)
 							);
 
@@ -97,7 +96,6 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 										LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
 												.create(subName)
 												.withTypeText(imported.getKey())
-												.withTailText("(?)")    // fixme here we should have a signature
 												.withIcon(PerlIcons.SUB_GUTTER_ICON)
 										);
 
