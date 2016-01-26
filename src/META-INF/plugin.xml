@@ -45,6 +45,7 @@
       <li>Implemented quote handler for regexps and string-like operators, fixes #741</li>
       <li>Implemented dumb and comfy hash keys autocompletion, not intelligent, most like in Sublime Text, fixes #711</li>
       <li>Implemented support of Class::Acessor api, fixes #778</li>
+      <li>Implemented convert string to last used here-doc marker (also fixed conversion on multi-line strings), fixes #800</li>
       <li>Moose<ul>
       <li>Implemented live-templates for Moose constructions</li>
       <li>Implemented Moose super call resolution, fixes #553</li>
@@ -625,9 +626,13 @@
             <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverter</className>
             <category>String converter</category>
             <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
-
         </intentionAction>
 
+        <intentionAction>
+            <className>com.perl5.lang.perl.idea.intentions.StringToLastHeredocConverter</className>
+            <category>String converter</category>
+            <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
+        </intentionAction>
 
     </extensions>
 

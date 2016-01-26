@@ -16,104 +16,41 @@
 
 package com.perl5.lang.perl.idea.intentions;
 
-import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class StringToHeredocConverter extends PsiElementBaseIntentionAction implements IntentionAction
+public class StringToHeredocConverter extends StringToLastHeredocConverter
 {
-	private static String HEREDOC_MARKER = "HEREDOC";
 
 	@Override
 	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
 	{
 		String markerText = Messages.showInputDialog(project, "What here-doc marker should we use?", "Input a Heredoc Marker", Messages.getQuestionIcon(), HEREDOC_MARKER, null);
 		if (markerText != null)
+		{
 			if (markerText.isEmpty())
+			{
 				Messages.showErrorDialog(project, "Empty heredoc markers are not supported", "Marker Error");
+			}
 			else    // converting
 			{
 				HEREDOC_MARKER = markerText;
-				PsiElement parentElement = element.getParent();
-				char quoteSymbol = '"';
-				if (parentElement instanceof PsiPerlStringSq)
-					quoteSymbol = '\'';
-				else if (parentElement instanceof PsiPerlStringXq)
-					quoteSymbol = '`';
-
-				List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(project, quoteSymbol, markerText,
-						parentElement.getText().substring(1, parentElement.getText().length() - 1)
-				);
-
-				PsiFile currentFile = element.getContainingFile();
-
-				PsiElement newLineItem = null;
-				int newLineIndex = currentFile.getText().indexOf("\n", element.getTextOffset());
-				if (newLineIndex > 1)
-				{
-					newLineItem = currentFile.findElementAt(newLineIndex);
-				}
-
-				PsiElement newTerminator = null;
-
-				if (newLineItem == null) // last statement without newline
-				{
-					currentFile.addAfter(heredocElements.get(1), currentFile.getLastChild());
-					newTerminator = currentFile.addAfter(heredocElements.get(2), currentFile.getLastChild());    // terminator
-					currentFile.addAfter(heredocElements.get(3), currentFile.getLastChild());
-				}
-				else
-				{
-					PsiElement container = newLineItem.getParent();
-					PsiElement anchor = newTerminator = container.addBefore(heredocElements.get(2), newLineItem); // heredoc terminator
-					container.addBefore(heredocElements.get(1), anchor); // heredoc element
-				}
-				parentElement.replace(heredocElements.get(0));
-
-				if (newTerminator != null)
-				{
-					assert newTerminator instanceof PerlHeredocTerminatorElement;
-					((PerlHeredocTerminatorElement) newTerminator).refreshReference();
-				}
+				super.invoke(project, editor, element);
 			}
-	}
-
-	@Override
-	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
-	{
-		if (!element.isWritable())
-			return false;
-		PsiElement parent = element.getParent();
-		PsiElement grandParent = parent.getParent();
-		return !(grandParent instanceof PerlHeredocOpener) && (parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq);
-	}
-
-	@Nls
-	@NotNull
-	@Override
-	public String getFamilyName()
-	{
-		return getText();
+		}
 	}
 
 	@NotNull
 	@Override
 	public String getText()
 	{
-		return "Convert to heredoc";
+		return "Convert to heredoc...";
 	}
 }
