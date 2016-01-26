@@ -18,10 +18,17 @@ package com.perl5.lang.perl.idea.completion.util;
 
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.Processor;
+import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
@@ -31,6 +38,8 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -149,4 +158,81 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 				}
 		);
 	}
+
+	public static void fillWithUseParameters(final @NotNull PsiElement stringContentElement, @NotNull final CompletionResultSet resultSet)
+	{
+		final Project project = stringContentElement.getProject();
+
+		@SuppressWarnings("unchecked")
+		PsiPerlUseStatement useStatement = PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
+
+		if (useStatement != null)
+		{
+			PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+			if (packageProcessor != null)
+			{
+				// fixme we should allow lookup elements customization by package processor
+				if (packageProcessor instanceof PerlPackageOptionsProvider)
+				{
+					Map<String, String> options = ((PerlPackageOptionsProvider) packageProcessor).getOptions();
+
+					for (Map.Entry<String, String> option : options.entrySet())
+						resultSet.addElement(LookupElementBuilder
+								.create(option.getKey())
+								.withTypeText(option.getValue(), true)
+								.withIcon(PerlIcons.PERL_OPTION)
+						);
+
+					options = ((PerlPackageOptionsProvider) packageProcessor).getOptionsBundles();
+
+					for (Map.Entry<String, String> option : options.entrySet())
+						resultSet.addElement(LookupElementBuilder
+								.create(option.getKey())
+								.withTypeText(option.getValue(), true)
+								.withIcon(PerlIcons.PERL_OPTIONS)
+						);
+				}
+
+				if (packageProcessor instanceof PerlPackageParentsProvider && ((PerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
+					PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, new Processor<String>()
+					{
+						@Override
+						public boolean process(String s)
+						{
+							resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+							return true;
+						}
+					});
+
+				String packageName = useStatement.getPackageName();
+				if (packageName != null)
+				{
+					for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+					{
+						HashSet<String> export = new HashSet<String>(namespaceDefinition.getEXPORT());
+						HashSet<String> exportOk = new HashSet<String>(namespaceDefinition.getEXPORT_OK());
+						// fixme we should resove subs here and put them in with signatures
+						for (String subName : export)
+						{
+							resultSet.addElement(LookupElementBuilder
+									.create(subName)
+									.withIcon(PerlIcons.SUB_GUTTER_ICON)
+									.withTypeText("default", true)
+							);
+						}
+						for (String subName : exportOk)
+						{
+							resultSet.addElement(LookupElementBuilder
+									.create(subName)
+									.withIcon(PerlIcons.SUB_GUTTER_ICON)
+									.withTypeText("optional", true)
+							);
+						}
+					}
+				}
+			}
+		}
+
+	}
+
 }

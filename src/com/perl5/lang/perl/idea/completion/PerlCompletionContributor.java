@@ -39,13 +39,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				new PerlStringContentCompletionProvider()
 		);
 
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				STRING_CONTENT_PATTERN.inside(USE_STATEMENT_PATTERN),
-				new PerlUseParametersCompletionProvider()
-		);
-
 
 		// refactored
 		extend(

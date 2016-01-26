@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStubElementType;
+import com.perl5.lang.perl.idea.stubs.imports.PerlNoStatementStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlDoExprElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRequireExprElementType;
@@ -44,6 +45,7 @@ public interface PerlStubElementTypes
 	IStubElementType PERL_CONSTANT = new PerlConstantStubElementType("PERL_CONSTANT");
 
 	IStubElementType PERL_USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
+	IStubElementType PERL_NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");
 
 	IStubElementType PERL_DO_EXPR = new PerlDoExprElementType("PERL_DO_EXPR");
 	IStubElementType PERL_REQUIRE_EXPR = new PerlRequireExprElementType("PERL_REQUIRE_EXPR");

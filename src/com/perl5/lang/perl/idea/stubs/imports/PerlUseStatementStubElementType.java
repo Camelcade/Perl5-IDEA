@@ -17,12 +17,11 @@
 package com.perl5.lang.perl.idea.stubs.imports;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PsiPerlUseStatementImpl;
@@ -95,23 +94,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		return isUseStatementValid(node.getFirstChildNode());
+		PsiElement element = node.getPsi();
+		return element instanceof PsiPerlUseStatementImpl && element.isValid() && StringUtil.isNotEmpty(((PsiPerlUseStatementImpl) element).getPackageName());
 	}
-
-	private boolean isUseStatementValid(ASTNode startNode)
-	{
-		IElementType currentElementType = startNode.getElementType();
-
-		if (currentElementType == PerlElementTypes.RESERVED_NO)
-			return false;
-
-		if (currentElementType == PerlElementTypes.RESERVED_USE
-				&& startNode.getTreeParent().findChildByType(PerlElementTypes.PACKAGE) != null
-				)
-			return true;
-
-		return currentElementType == PerlElementTypes.PACKAGE_CORE_IDENTIFIER && isUseStatementValid(startNode.getTreeNext());
-	}
-
-
 }

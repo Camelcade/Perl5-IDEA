@@ -44,6 +44,10 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 		{
 			PerlStringCompletionUtil.fillWithHashIndexes(element, result);
 		}
+		else if( USE_PARAMETERS_PATTERN.accepts(element))	// use or no parameters
+		{
+			PerlStringCompletionUtil.fillWithUseParameters(element, result);
+		}
 		else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
 		{
 			PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
