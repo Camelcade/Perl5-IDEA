@@ -5,10 +5,8 @@ import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -184,10 +182,10 @@ public class PerlSdkType extends SdkType
 			if (m.find())
 				return m.group(1) + " (" + m.group(2) + ")";
 
-			return "Unknown version";
+			return "Unknown version, please report a bug";
 		}
 
-		throw new IncorrectOperationException("Error getting perl version text from: " + StringUtil.join(versionLines, "\n"));
+		return "missing executable";
 	}
 
 

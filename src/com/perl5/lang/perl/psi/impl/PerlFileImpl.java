@@ -586,7 +586,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	{
 		VirtualFile targetFile = resolveRelativePathToVirtualFile(relativePath);
 
-		if (targetFile != null)
+		if (targetFile != null && targetFile.exists())
 		{
 			PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(targetFile);
 			if (targetPsiFile != null)
