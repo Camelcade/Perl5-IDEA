@@ -24,7 +24,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin;
+import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationWrapperImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -50,14 +50,14 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 	@Override
 	public PerlVariableDeclarationWrapper createPsi(@NotNull PerlVariableStub stub)
 	{
-		return new PerlVariableDeclarationWrapperMixin(stub, this);
+		return new PsiPerlVariableDeclarationWrapperImpl(stub, this);
 	}
 
 	@NotNull
 	@Override
 	public PsiElement getPsiElement(@NotNull ASTNode node)
 	{
-		return new PerlVariableDeclarationWrapperMixin(node);
+		return new PsiPerlVariableDeclarationWrapperImpl(node);
 	}
 
 	@Override
