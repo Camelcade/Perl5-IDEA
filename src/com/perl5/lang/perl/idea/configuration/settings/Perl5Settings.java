@@ -45,6 +45,7 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public List<String> selfNames = new ArrayList<String>(Arrays.asList("self", "this", "class", "proto"));
 	public String perlPath = "";
 	public boolean SIMPLE_MAIN_RESOLUTION = true;
+	public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
 
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;

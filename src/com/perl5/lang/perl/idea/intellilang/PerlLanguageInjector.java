@@ -22,6 +22,7 @@ import com.intellij.psi.InjectedLanguagePlaces;
 import com.intellij.psi.LanguageInjector;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -101,7 +102,7 @@ public class PerlLanguageInjector implements LanguageInjector
 	@Override
 	public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar)
 	{
-		if (host instanceof PerlHeredocElementImpl && host.isValidHost())
+		if (host instanceof PerlHeredocElementImpl && host.isValidHost() && Perl5Settings.getInstance(host.getProject()).AUTOMATIC_HEREDOC_INJECTIONS)
 		{
 			PsiElement terminator = host.getNextSibling();
 			if (terminator instanceof PerlHeredocTerminatorElementImpl)

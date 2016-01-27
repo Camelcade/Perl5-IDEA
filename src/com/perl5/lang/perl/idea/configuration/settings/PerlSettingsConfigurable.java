@@ -53,6 +53,7 @@ public class PerlSettingsConfigurable implements Configurable
 
 	TextFieldWithBrowseButton perlPathInputField;
 	JCheckBox simpleMainCheckbox;
+	JCheckBox autoInjectionCheckbox;
 
 	CollectionListModel<String> selfNamesModel;
 	JBList selfNamesList;
@@ -92,6 +93,9 @@ public class PerlSettingsConfigurable implements Configurable
 
 		simpleMainCheckbox = new JCheckBox("Use simple main:: subs resolution (many scripts with same named subs in main:: namespace)");
 		builder.addComponent(simpleMainCheckbox);
+
+		autoInjectionCheckbox = new JCheckBox("Automatically inject other languages in here-docs by marker text");
+		builder.addComponent(autoInjectionCheckbox);
 
 		selfNamesModel = new CollectionListModel<String>();
 		selfNamesList = new JBList(selfNamesModel);
@@ -159,6 +163,7 @@ public class PerlSettingsConfigurable implements Configurable
 	{
 		return isMicroIdeModified() ||
 				mySettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
+				mySettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
 				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
@@ -174,6 +179,7 @@ public class PerlSettingsConfigurable implements Configurable
 	public void apply() throws ConfigurationException
 	{
 		mySettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
+		mySettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
 
 		mySettings.selfNames.clear();
 		mySettings.selfNames.addAll(selfNamesModel.getItems());
@@ -210,6 +216,7 @@ public class PerlSettingsConfigurable implements Configurable
 		selfNamesModel.add(mySettings.selfNames);
 
 		simpleMainCheckbox.setSelected(mySettings.SIMPLE_MAIN_RESOLUTION);
+		autoInjectionCheckbox.setSelected(mySettings.AUTOMATIC_HEREDOC_INJECTIONS);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -229,5 +236,6 @@ public class PerlSettingsConfigurable implements Configurable
 		simpleMainCheckbox = null;
 		selfNamesModel = null;
 		selfNamesList = null;
+		autoInjectionCheckbox = null;
 	}
 }
