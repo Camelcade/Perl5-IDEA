@@ -435,9 +435,9 @@ private file_item ::= !<<eof>>
 }
 
 namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> namespace_content)
-private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_statement} // recover_namespace_definition
+private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_namespace_definition}
 private namespace_annotations ::= annotation_deprecated
-//private recover_namespace_definition ::= !(semicolon_any | LEFT_BRACE)
+private recover_namespace_definition ::= !(<<checkSemicolon>> | LEFT_BRACE)
 namespace_content ::= file_item *  {extends=block recoverWhile=recover_namespace} //
 
 // todo count opening braces

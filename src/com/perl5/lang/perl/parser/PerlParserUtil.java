@@ -209,7 +209,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			RESERVED_METHOD,
 			RESERVED_FUNC
 	);
-	public static final TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
+	public static TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
 			PACKAGE_TOKENS,
 			CONVERTABLE_TOKENS,
 			TokenSet.create(
@@ -221,6 +221,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static void addConvertableTokens(IElementType... convertableTokens)
 	{
 		CONVERTABLE_TOKENS = TokenSet.orSet(CONVERTABLE_TOKENS, TokenSet.create(convertableTokens));
+		POST_SIGILS_SUFFIXES = TokenSet.orSet(POST_SIGILS_SUFFIXES, CONVERTABLE_TOKENS);
 	}
 
 	/**

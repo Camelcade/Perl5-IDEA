@@ -345,6 +345,8 @@ public class PerlLexer extends PerlLexerGenerated
 		blockNames.put("AUTOLOAD", BLOCK_NAME);
 		blockNames.put("DESTROY", BLOCK_NAME);
 
+		PerlParserUtil.addConvertableTokens(blockNames.values().toArray(new IElementType[blockNames.values().size()]));
+
 		// tags
 		tagNames.put("__FILE__", TAG);
 		tagNames.put("__LINE__", TAG);
