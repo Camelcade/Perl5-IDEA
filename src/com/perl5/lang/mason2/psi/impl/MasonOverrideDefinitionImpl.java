@@ -56,7 +56,7 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
 	protected void fillImplicitVariables()
 	{
 		IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
-		if (isValid() && isPhysical())
+		if (isValid())
 		{
 			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
 					getManager(),

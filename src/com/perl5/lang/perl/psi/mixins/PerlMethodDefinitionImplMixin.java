@@ -61,7 +61,7 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 	protected void fillImplicitVariables()
 	{
 		IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
-		if (isValid() && isPhysical())
+		if (isValid())
 		{
 			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
 					getManager(),

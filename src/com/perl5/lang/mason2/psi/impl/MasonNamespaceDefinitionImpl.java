@@ -71,7 +71,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	{
 		IMPLICIT_VARIABLES.clear();
 
-		if (isValid() && isPhysical())
+		if (isValid())
 		{
 			MasonSettings masonSettings = MasonSettings.getInstance(getProject());
 			for (VariableDescription variableDescription : masonSettings.globalVariables)
