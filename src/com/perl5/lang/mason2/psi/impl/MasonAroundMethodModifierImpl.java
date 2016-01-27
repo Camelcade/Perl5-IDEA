@@ -19,11 +19,7 @@ package com.perl5.lang.mason2.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.mason2.psi.MasonAroundMethodModifier;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 08.01.2016.
@@ -31,13 +27,17 @@ import java.util.List;
 public class MasonAroundMethodModifierImpl extends MasonMethodModifierImpl implements MasonAroundMethodModifier
 {
 	protected static final String ORIG_VARIABLE_NAME = "$orig";
-	protected final List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES;
 
 	public MasonAroundMethodModifierImpl(ASTNode node)
 	{
 		super(node);
-		IMPLICIT_VARIABLES = super.getImplicitVariables();
-		if (isValid() && isPhysical())
+	}
+
+	@Override
+	protected void fillImplicitVariables()
+	{
+		super.fillImplicitVariables();
+		if (IMPLICIT_VARIABLES != null)
 		{
 			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
 					getManager(),
@@ -49,12 +49,5 @@ public class MasonAroundMethodModifierImpl extends MasonMethodModifierImpl imple
 					this
 			));
 		}
-	}
-
-	@NotNull
-	@Override
-	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
-	{
-		return IMPLICIT_VARIABLES;
 	}
 }

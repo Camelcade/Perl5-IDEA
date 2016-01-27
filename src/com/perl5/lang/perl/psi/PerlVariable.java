@@ -45,7 +45,7 @@ public interface PerlVariable extends PsiElement, PerlLexicalScopeMember, PerlPa
 	 * @return Package name if found
 	 */
 	@Nullable
-	public String guessVariableTypeHeavy();
+	public String getVariableTypeHeavy();
 
 	/**
 	 * Guessing actual variable type from context

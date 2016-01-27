@@ -31,7 +31,7 @@ import java.util.Set;
 public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContainer
 {
 	/**
-	 * Checks variable type from cache or using callback guessVariableTypeHeavy
+	 * Checks variable type from cache or using callback getVariableTypeHeavy
 	 *
 	 * @param element variable element
 	 * @return variable type string

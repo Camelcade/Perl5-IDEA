@@ -98,13 +98,13 @@ public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement impleme
 		PsiFile file = getContainingFile();
 		if (file instanceof PerlFileImpl)
 			return ((PerlFileImpl) file).getVariableType(this);
-		return guessVariableTypeHeavy();
+		return getVariableTypeHeavy();
 	}
 
 
 	@Nullable
 	@Override
-	public String guessVariableTypeHeavy()
+	public String getVariableTypeHeavy()
 	{
 		if (this instanceof PsiPerlScalarVariable)
 		{

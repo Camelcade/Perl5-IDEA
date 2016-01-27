@@ -69,8 +69,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 	protected void fillImplicitVariables()
 	{
-		List<PerlVariableDeclarationWrapper> implicitVariables = getMyImplicitVariables();
-		implicitVariables.clear();
+		IMPLICIT_VARIABLES.clear();
 
 		if (isValid() && isPhysical())
 		{
@@ -82,7 +81,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 				{
 					variableType = null;
 				}
-				implicitVariables.add(
+				IMPLICIT_VARIABLES.add(
 						new PerlVariableLightImpl(
 								getManager(),
 								PerlLanguage.INSTANCE,
@@ -400,11 +399,6 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		{
 			fillImplicitVariables();
 		}
-		return getMyImplicitVariables();
-	}
-
-	protected List<PerlVariableDeclarationWrapper> getMyImplicitVariables()
-	{
 		return IMPLICIT_VARIABLES;
 	}
 

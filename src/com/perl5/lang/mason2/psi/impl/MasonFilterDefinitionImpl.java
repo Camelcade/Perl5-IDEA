@@ -21,11 +21,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mason2.psi.MasonFilterDefinition;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hurricup on 08.01.2016.
@@ -33,7 +29,6 @@ import java.util.List;
 public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl implements MasonFilterDefinition
 {
 	protected static final String YIELD_VARIABLE_NAME = "$yield";
-	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES;
 
 	public MasonFilterDefinitionImpl(ASTNode node)
 	{
@@ -47,10 +42,10 @@ public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl impleme
 
 	protected void fillImplicitVariables()
 	{
-		if (isValid() && isPhysical())
+		super.fillImplicitVariables();
+		if (IMPLICIT_VARIABLES != null)
 		{
-			super.fillImplicitVariables();
-			getMyImplicitVariables().add(new PerlVariableLightImpl(
+			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
 					getManager(),
 					PerlLanguage.INSTANCE,
 					YIELD_VARIABLE_NAME,
@@ -60,15 +55,5 @@ public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl impleme
 					this
 			));
 		}
-	}
-
-	protected List<PerlVariableDeclarationWrapper> getMyImplicitVariables()
-	{
-		if (IMPLICIT_VARIABLES == null)
-		{
-			IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
-			fillImplicitVariables();
-		}
-		return IMPLICIT_VARIABLES;
 	}
 }

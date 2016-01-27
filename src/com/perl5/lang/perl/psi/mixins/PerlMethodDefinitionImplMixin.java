@@ -60,9 +60,10 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 
 	protected void fillImplicitVariables()
 	{
+		IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
 		if (isValid() && isPhysical())
 		{
-			getMyImplicitVariables().add(new PerlVariableLightImpl(
+			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
 					getManager(),
 					PerlLanguage.INSTANCE,
 					getDefaultInvocantName(),
@@ -141,17 +142,11 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 		}
 		else
 		{
-			return getMyImplicitVariables();
+			if (IMPLICIT_VARIABLES == null)
+			{
+				fillImplicitVariables();
+			}
+			return IMPLICIT_VARIABLES;
 		}
-	}
-
-	protected List<PerlVariableDeclarationWrapper> getMyImplicitVariables()
-	{
-		if (IMPLICIT_VARIABLES == null)
-		{
-			IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
-			fillImplicitVariables();
-		}
-		return IMPLICIT_VARIABLES;
 	}
 }

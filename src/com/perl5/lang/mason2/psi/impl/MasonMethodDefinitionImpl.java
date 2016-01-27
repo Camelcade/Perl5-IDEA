@@ -45,7 +45,10 @@ public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl imple
 	@Override
 	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		return getMyImplicitVariables();
+		if (IMPLICIT_VARIABLES == null)
+		{
+			fillImplicitVariables();
+		}
+		return IMPLICIT_VARIABLES;
 	}
-
 }

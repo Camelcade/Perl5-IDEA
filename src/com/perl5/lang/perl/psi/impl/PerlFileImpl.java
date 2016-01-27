@@ -63,7 +63,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 {
 	private static final ArrayList<PerlNamespaceDefinition> EMPTY_LIST = new ArrayList<PerlNamespaceDefinition>();
 	protected ConcurrentHashMap<PerlVariable, String> VARIABLE_TYPES_CACHE = new ConcurrentHashMap<PerlVariable, String>();
-	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESAPCES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
+	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESPACES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
 	protected GlobalSearchScope myElementsResolveScope;
 	List<PerlLexicalDeclaration> myDeclaredScalars = new ArrayList<PerlLexicalDeclaration>();
 	List<PerlLexicalDeclaration> myDeclaredArrays = new ArrayList<PerlLexicalDeclaration>();
@@ -135,7 +135,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		super.subtreeChanged();
 		myLexicalCacheInvalid = true;
 		VARIABLE_TYPES_CACHE.clear();
-		METHODS_NAMESAPCES_CACHE.clear();
+//		System.err.println("Cache cleared");
+		METHODS_NAMESPACES_CACHE.clear();
 		myElementsResolveScope = null;
 	}
 
@@ -356,11 +357,13 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	{
 		if (VARIABLE_TYPES_CACHE.containsKey(element))
 		{
+//			System.err.println("Read from cache " + element.getText());
 			String type = VARIABLE_TYPES_CACHE.get(element);
 			return type.isEmpty() ? null : type;
 		}
 
-		String type = element.guessVariableTypeHeavy();
+		String type = element.getVariableTypeHeavy();
+//		System.err.println("Cached " + element.getText() + type);
 		VARIABLE_TYPES_CACHE.put(element, type == null ? "" : type);
 		return getVariableType(element);
 	}
@@ -368,15 +371,15 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public String getMethodNamespace(PerlMethod element)
 	{
-		if (METHODS_NAMESAPCES_CACHE.containsKey(element))
+		if (METHODS_NAMESPACES_CACHE.containsKey(element))
 		{
 //			System.err.println("Got cached type for method " + element.getText() + " at " + element.getTextOffset());
-			String type = METHODS_NAMESAPCES_CACHE.get(element);
+			String type = METHODS_NAMESPACES_CACHE.get(element);
 			return type.isEmpty() ? null : type;
 		}
 
 		String type = element.getContextPackageNameHeavy();
-		METHODS_NAMESAPCES_CACHE.put(element, type == null ? "" : type);
+		METHODS_NAMESPACES_CACHE.put(element, type == null ? "" : type);
 		return getMethodNamespace(element);
 	}
 
@@ -462,12 +465,12 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 
 			if (fileStub == null)
 			{
-				System.err.println("Collecting from psi for " + getVirtualFile());
+//				System.err.println("Collecting from psi for " + getVirtualFile());
 				collectRequiresFromPsi(this, includedVirtualFiles);
 			}
 			else
 			{
-				System.err.println("Collecting from stubs for " + getVirtualFile());
+//				System.err.println("Collecting from stubs for " + getVirtualFile());
 				collectRequiresFromStub(fileStub, includedVirtualFiles);
 			}
 		}
@@ -482,12 +485,12 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			ObjectStubTree objectStubTree = StubTreeLoader.getInstance().readOrBuild(getProject(), virtualFile, null);
 			if (objectStubTree != null)
 			{
-				System.err.println("Collecting from stub for " + virtualFile);
+//				System.err.println("Collecting from stub for " + virtualFile);
 				collectRequiresFromStub((PsiFileStub) objectStubTree.getRoot(), includedVirtualFiles);
 			}
 			else
 			{
-				System.err.println("Collecting from psi for " + virtualFile);
+//				System.err.println("Collecting from psi for " + virtualFile);
 				PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(virtualFile);
 				if (targetPsiFile != null)
 					collectRequiresFromPsi(targetPsiFile, includedVirtualFiles);

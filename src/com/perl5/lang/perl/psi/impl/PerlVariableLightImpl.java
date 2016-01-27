@@ -121,7 +121,7 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 
 	@Nullable
 	@Override
-	public String guessVariableTypeHeavy()
+	public String getVariableTypeHeavy()
 	{
 		return getDeclaredType();
 	}

@@ -41,28 +41,27 @@ import java.util.List;
  */
 public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideDefinition
 {
-	protected final List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES;
 
 	public MasonOverrideDefinitionImpl(@NotNull ASTNode node)
 	{
 		super(node);
-		fillImplicitVariables();
 	}
 
 	public MasonOverrideDefinitionImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
-		fillImplicitVariables();
 	}
 
 	protected void fillImplicitVariables()
 	{
+		IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
 		if (isValid() && isPhysical())
 		{
-			getMyImplicitVariables().add(new PerlVariableLightImpl(
+			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
 					getManager(),
 					PerlLanguage.INSTANCE,
-					getDefaultInvocantName(),
+					PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
 					true,
 					false,
 					true,
@@ -70,12 +69,6 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
 			));
 		}
 	}
-
-	protected List<PerlVariableDeclarationWrapper> getMyImplicitVariables()
-	{
-		return IMPLICIT_VARIABLES;
-	}
-
 
 	@Override
 	@NotNull
@@ -118,12 +111,11 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
 	@Override
 	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		return getMyImplicitVariables();
+		if (IMPLICIT_VARIABLES == null)
+		{
+			fillImplicitVariables();
+		}
+		return IMPLICIT_VARIABLES;
 	}
 
-	@NotNull
-	public String getDefaultInvocantName()
-	{
-		return PerlMethodDefinitionImplMixin.getDefaultInvocantName();
-	}
 }

@@ -24,6 +24,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseMethodModifierImpl;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
+import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,24 +36,11 @@ import java.util.List;
  */
 public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl implements MasonMethodModifier
 {
-	protected static final String INVOCANT_NAME = "$self";
-	protected final List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES = null;
 
 	public MasonMethodModifierImpl(ASTNode node)
 	{
 		super(node);
-		if (isValid() && isPhysical())
-		{
-			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					INVOCANT_NAME,
-					true,
-					false,
-					true,
-					this
-			));
-		}
 	}
 
 
@@ -63,10 +51,32 @@ public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl impleme
 		return null;
 	}
 
+	protected void fillImplicitVariables()
+	{
+		IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+		if (isValid() && isPhysical())
+		{
+			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
+					getManager(),
+					PerlLanguage.INSTANCE,
+					PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
+					true,
+					false,
+					true,
+					this
+			));
+		}
+	}
+
+
 	@NotNull
 	@Override
 	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
+		if (IMPLICIT_VARIABLES == null)
+		{
+			fillImplicitVariables();
+		}
 		return IMPLICIT_VARIABLES;
 	}
 }
