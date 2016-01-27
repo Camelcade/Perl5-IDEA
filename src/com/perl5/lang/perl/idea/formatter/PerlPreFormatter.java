@@ -147,7 +147,22 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
 	protected boolean isSimpleScalarCast(PerlCastExpression o)
 	{
-		return o.getLastChild() instanceof PsiPerlScalarVariable;
+		return o.getLastChild() instanceof PsiPerlScalarVariable || isNotSoSimpleScalarCast(o);
+	}
+
+	protected boolean isNotSoSimpleScalarCast(PerlCastExpression o)
+	{
+		PsiPerlScalarVariable variable = PsiTreeUtil.findChildOfType(o, PsiPerlScalarVariable.class);
+		if (variable != null)
+		{
+			PsiElement statement = variable.getParent();
+			if (statement instanceof PsiPerlStatement && statement.getChildren().length == 1 && o.equals(statement.getParent()))
+			{
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 	protected boolean isStringInHeredocQuotable(PsiPerlStringBare o)
@@ -261,11 +276,11 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		{
 			boolean isInsideHashOrArrayElement = parent instanceof PsiPerlScalarArrayElement || parent instanceof PsiPerlScalarHashElement;
 
-			if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS && isInsideHashOrArrayElement && isSimpleScalarCast)
+			if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS && isInsideHashOrArrayElement && isSimpleScalarCast) // convert $$var{key} to $var->{key}
 			{
 				myFormattingOperations.add(new PerlFormattingScalarDerefExpand((PsiPerlScalarCastExpr) o));
 			}
-			else if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)
+			else if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)    // need to convert ${var} to $var
 			{
 				unwrapSimpleDereference(o);
 			}
@@ -274,7 +289,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 				wrapSimpleDereference(o);
 			}
 		}
-		else
+		else // hash and array
 		{
 			if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)    // need to convert ${$var} to $$var
 			{

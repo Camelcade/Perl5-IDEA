@@ -43,11 +43,11 @@ public class PerlFormattingScalarDerefExpand implements PerlFormattingOperation
 		if (myScalarDereference.isValid())
 		{
 			PsiElement parent = myScalarDereference.getParent();
-			PsiElement scalarVariable = myScalarDereference.getLastChild();
+			PsiPerlScalarVariable scalarVariable = PsiTreeUtil.findChildOfType(myScalarDereference, PsiPerlScalarVariable.class);
 			if (parent.isValid() &&
 					(parent instanceof PsiPerlScalarHashElement || parent instanceof PsiPerlScalarArrayElement) &&
-					scalarVariable.isValid() &&
-					scalarVariable instanceof PsiPerlScalarVariable)
+					scalarVariable != null &&
+					scalarVariable.isValid())
 			{
 				PsiElement indexElement = parent.getLastChild();
 				if (indexElement.isValid() && (indexElement instanceof PsiPerlHashIndex || indexElement instanceof PsiPerlArrayIndex))
