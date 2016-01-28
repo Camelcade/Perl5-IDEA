@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.idea.editor.smartkeys;
 
-import com.intellij.codeInsight.completion.CodeCompletionHandlerBase;
-import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.fileTypes.FileType;
@@ -35,7 +32,6 @@ import com.perl5.lang.perl.lexer.RegexBlock;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import gnu.trove.THashSet;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -78,41 +74,6 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 			"tr",
 			"y"
 	));
-
-	@Override
-	public Result charTyped(char typedChar, final Project project, @NotNull final Editor editor, @NotNull PsiFile file)
-	{
-		PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-		if (typedChar == '>')
-		{
-			if (element != null && element.getNode().getElementType() == OPERATOR_MINUS)
-				ApplicationManager.getApplication().invokeLater(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(project, editor, 0);
-					}
-				});
-		}
-		else if (typedChar == ':')
-		{
-			if (element != null && element.getNode().getElementType() == COLON)
-			{
-//				EditorModificationUtil.insertStringAtCaret(editor, typedChar + "", false, true, 1);
-				ApplicationManager.getApplication().invokeLater(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(project, editor, 0);
-					}
-				});
-			}
-		}
-
-		return super.charTyped(typedChar, project, editor, file);
-	}
 
 	@Override
 	public Result beforeCharTyped(char typedChar, Project project, Editor editor, PsiFile file, FileType fileType)

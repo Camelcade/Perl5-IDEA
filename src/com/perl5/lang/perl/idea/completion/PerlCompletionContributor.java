@@ -20,6 +20,8 @@ import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.*;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -128,5 +130,20 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 	public void fillCompletionVariants(@NotNull CompletionParameters parameters, @NotNull CompletionResultSet result)
 	{
 		super.fillCompletionVariants(parameters, result);
+	}
+
+	@Override
+	public boolean invokeAutoPopup(@NotNull PsiElement element, char typedChar)
+	{
+		IElementType elementType = element.getNode().getElementType();
+		if (typedChar == '>' && elementType == OPERATOR_MINUS)
+		{
+			return true;
+		}
+		else if (typedChar == ':' && elementType == COLON)
+		{
+			return true;
+		}
+		return super.invokeAutoPopup(element, typedChar);
 	}
 }
