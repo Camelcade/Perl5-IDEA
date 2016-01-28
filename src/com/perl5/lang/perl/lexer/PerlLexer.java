@@ -1655,6 +1655,8 @@ public class PerlLexer extends PerlLexerGenerated
 		IElementType tokenType;
 		PerlTokenHistory tokenHistory = getTokenHistory();
 
+		boolean isSigilBehind = SIGILS_TOKENS.contains(tokenHistory.getLastTokenType());
+
 		if (isAttribute)
 		{
 			if (getNextCharacter() == '(')
@@ -1665,8 +1667,7 @@ public class PerlLexer extends PerlLexerGenerated
 			return IDENTIFIER;
 		}
 		else if (!IDENTIFIER_NEGATION_PREFIX.contains(tokenHistory.getLastSignificantTokenType())
-				&& !SIGILS_TOKENS.contains(tokenHistory.getLastTokenType())    // print $$ if smth
-
+				&& !isSigilBehind    // print $$ if smth
 				)
 		{
 			if ((tokenType = namedOperators.get(tokenText)) != null)
@@ -1700,7 +1701,7 @@ public class PerlLexer extends PerlLexerGenerated
 			if (PRAGMA_TOKENS_MAP.containsKey(tokenText))
 				return PRAGMA_TOKENS_MAP.get(tokenText);
 
-		if( (tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) != null)
+		if (!isSigilBehind && (tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) != null)
 		{
 			return tokenType;
 		}
