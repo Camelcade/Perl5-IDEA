@@ -24,7 +24,7 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseSuperReference;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,7 +53,7 @@ public class PerlMooseSuperReferenceResolver implements ResolveCache.PolyVariant
 			Project project = element.getProject();
 
 
-			for (PsiElement targetElement : PerlMroDfs.resolveSub(
+			for (PsiElement targetElement : PerlMro.resolveSub(
 					project,
 					packageName,
 					subName,

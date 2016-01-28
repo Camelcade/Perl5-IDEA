@@ -23,6 +23,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseMethodModifier;
 import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import com.perl5.lang.perl.psi.*;
@@ -34,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBase<PerlMooseAugmentStatementStub> implements PerlMooseAugmentStatement
+public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBase<PerlMooseAugmentStatementStub> implements PerlMooseAugmentStatement, PerlMooseMethodModifier
 {
 	public PerlMooseAugmentStatementImpl(ASTNode node)
 	{
@@ -55,7 +56,12 @@ public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBase<PerlM
 		{
 			return stub.getSubName();
 		}
+		return getSubNameFromPsi();
+	}
 
+	@Nullable
+	protected String getSubNameFromPsi()
+	{
 		PsiElement nameIdentifier = getNameIdentifier();
 		if (nameIdentifier instanceof PerlString)
 		{

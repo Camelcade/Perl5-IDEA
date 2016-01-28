@@ -36,6 +36,15 @@ public interface MasonElementTypes extends MasonSyntaxElements
 
 	IElementType MASON_FILTERED_BLOCK_OPENER = new MasonTemplatingTokenType(KEYWORD_FILTERED_BLOCK_OPENER);
 	IElementType MASON_FILTERED_BLOCK_CLOSER = new MasonTemplatingTokenType(KEYWORD_FILTERED_BLOCK_CLOSER);
+	IElementType MASON_METHOD_MODIFIER_NAME = new MasonTemplatingTokenTypeEx("MASON_METHOD_MODIFIER_NAME")
+	{
+		@NotNull
+		@Override
+		public ASTNode createLeafNode(CharSequence leafText)
+		{
+			return new MasonMethodModifierNameImpl(this, leafText);
+		}
+	};
 	IElementType MASON_SELF_POINTER = new MasonTemplatingTokenType(KEYWORD_SELF_POINTER);
 
 	IElementType MASON_BLOCK_OPENER = new MasonTemplatingTokenType(KEYWORD_BLOCK_OPENER);
@@ -90,12 +99,12 @@ public interface MasonElementTypes extends MasonSyntaxElements
 
 	IElementType MASON_NAMESPACE_DEFINITION = new MasonNamespaceElementType("MASON_PACKAGE");
 
+	IElementType MASON_AUGMENT_MODIFIER = new MasonAugmentMethodModifierElementType("MASON_AUGMENT_MODIFIER");
 	IElementType MASON_OVERRIDE_DEFINITION = new MasonOverrideStubElementType("MASON_OVERRIDE_DEFINITION");
 	IElementType MASON_METHOD_DEFINITION = new MasonMethodDefinitionStubElementType("MASON_METHOD_DEFINITION");
 	IElementType MASON_FILTER_DEFINITION = new MasonFilterDefinitionStubElementType("MASON_FILTER_DEFINITION");
 
 	IElementType MASON_AFTER_MODIFIER = new MasonMethodModifierElementType("MASON_AFTER_MODIFIER");
-	IElementType MASON_AUGMENT_MODIFIER = new MasonMethodModifierElementType("MASON_AUGMENT_MODIFIER");
 	IElementType MASON_BEFORE_MODIFIER = new MasonMethodModifierElementType("MASON_BEFOE_MODIFIER");
 
 	IElementType MASON_FLAGS_STATEMENT = new MasonTemplatingElementType("FLAGS_STATEMENT")

@@ -454,6 +454,8 @@
 
         <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
 
+        <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
+                   order="after PERL_SUBS_ANNOTATOR"/>
         <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.MasonElementTypes"/>
 
         <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>

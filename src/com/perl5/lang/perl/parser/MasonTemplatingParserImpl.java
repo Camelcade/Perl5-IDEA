@@ -223,14 +223,10 @@ public class MasonTemplatingParserImpl extends MasonParserImpl
 		{
 			PsiBuilder.Marker statementMarker = b.mark();
 			b.advanceLexer();
-			PsiBuilder.Marker methodMarker = b.mark();
 			IElementType closeToken = RESERVED_OPENER_TO_CLOSER_MAP.get(tokenType);
 
-			if (PerlParserUtil.convertIdentifier(b, l, SUB))
+			if (PerlParserUtil.convertIdentifier(b, l, MASON_METHOD_MODIFIER_NAME))
 			{
-				methodMarker.done(METHOD);
-				methodMarker = null;
-
 				if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER))
 				{
 					PsiBuilder.Marker blockMarker = b.mark();
@@ -249,10 +245,6 @@ public class MasonTemplatingParserImpl extends MasonParserImpl
 			if (statementMarker != null)
 			{
 				statementMarker.drop();
-			}
-			if (methodMarker != null)
-			{
-				methodMarker.drop();
 			}
 
 			r = r || recoverToGreedy(b, closeToken, "Error");

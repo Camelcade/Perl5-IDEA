@@ -25,7 +25,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -75,7 +75,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 			if (parent instanceof PerlMethod && ((PerlMethod) parent).isObjectMethod())
 			{
 				boolean isSuper = expliclitPackageElement != null && expliclitPackageElement.isSUPER();
-				relatedItems.addAll(PerlMroDfs.resolveSub(
+				relatedItems.addAll(PerlMro.resolveSub(
 						project,
 						isSuper ? PerlPackageUtil.getContextPackageName(subNameElement) : packageName,
 						subName,
