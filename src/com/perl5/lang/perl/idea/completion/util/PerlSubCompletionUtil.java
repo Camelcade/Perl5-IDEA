@@ -198,7 +198,7 @@ public class PerlSubCompletionUtil
 
 	public static void fillWithNotOverridedSubs(final PerlSubDefinitionBase subDefinition, final CompletionResultSet resultSet)
 	{
-		PerlPackageUtil.processNotOverridedSubs(
+		PerlPackageUtil.processNotOverridedMethods(
 				PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class),
 				new Processor<PerlSubDefinitionBase>()
 				{

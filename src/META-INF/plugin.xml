@@ -710,6 +710,10 @@
                 text="Generate Getters and Setters" description="Generate class getters and setters">
             <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewSetter"/>
         </action>
+        <action class="com.perl5.lang.perl.idea.generation.PerlOverrideMethodAction" id="Perl5OverrideSub"
+                text="Override/Implement methods" description="Override/Implement methods">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewGetterSetter"/>
+        </action>
 
     </actions>
 

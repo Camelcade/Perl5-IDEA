@@ -221,7 +221,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static List<PerlNamespaceDefinition> collectNamespaceDefinitions(@NotNull Project project, @NotNull List<String> packageNames)
 	{
 		ArrayList<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<PerlNamespaceDefinition>();
-		for (String packageName: packageNames)
+		for (String packageName : packageNames)
 		{
 			Collection<PerlNamespaceDefinition> list = getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 
@@ -490,7 +490,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 
-	public static void processNotOverridedSubs(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubDefinitionBase> processor)
+	public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubDefinitionBase> processor)
 	{
 		if (namespaceDefinition != null)
 		{
@@ -532,6 +532,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			{
 				String subName = subDefinitionBase.getSubName();
 				if (subDefinitionBase.isValid() &&
+						subDefinitionBase.isMethod() &&
 						!processedSubsNames.contains(subName) &&
 						parentNamespace.equals(PsiTreeUtil.getParentOfType(subDefinitionBase, PerlNamespaceDefinition.class))
 						)
