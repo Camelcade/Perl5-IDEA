@@ -16,15 +16,20 @@
 
 package com.perl5.lang.perl.idea.completion.util;
 
+import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiReference;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
-import com.perl5.lang.perl.psi.PerlConstant;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import gnu.trove.THashSet;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
 
 /**
  * Created by hurricup on 09.08.2015.
@@ -145,6 +150,47 @@ public class PerlSubCompletionUtil
 				.create(indexKeyName)
 				.withIcon(PerlIcons.CONSTANT_GUTTER_ICON)
 				.withPresentableText(constant.getName());
+
+	}
+
+	public static void fillWithUnresolvedSubs(final PerlSubDefinitionBase subDefinition, final CompletionResultSet resultSet)
+	{
+		final String packageName = subDefinition.getPackageName();
+		final Set<String> namesSet = new THashSet<String>();
+		PsiFile containingFile = subDefinition.getContainingFile();
+		containingFile.accept(new PerlRecursiveVisitor()
+		{
+			@Override
+			public void visitMethod(@NotNull PsiPerlMethod method)
+			{
+				if (packageName.equals(method.getPackageName()))
+				{
+					PerlSubNameElement subNameElement = method.getSubNameElement();
+
+					if (subNameElement.isValid())
+					{
+
+						String subName = subNameElement.getName();
+
+						if (StringUtil.isNotEmpty(subName) && !namesSet.contains(subName))
+						{
+							for (PsiReference reference : subNameElement.getReferences())
+							{
+								if (reference.resolve() != null)
+								{
+									super.visitMethod(method);
+									return;
+								}
+							}
+							// unresolved
+							namesSet.add(subName);
+							resultSet.addElement(LookupElementBuilder.create(subName));
+						}
+					}
+				}
+				super.visitMethod(method);
+			}
+		});
 
 	}
 }

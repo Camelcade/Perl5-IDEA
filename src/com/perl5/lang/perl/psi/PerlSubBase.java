@@ -37,14 +37,15 @@ public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiEleme
 	 *
 	 * @return canonical package name from declaration or context
 	 */
-	public String getPackageName();
+	@NotNull
+	String getPackageName();
 
 	/**
 	 * Returns function name for current function definition
 	 *
 	 * @return function name or null
 	 */
-	public String getSubName();
+	String getSubName();
 
 	/**
 	 * Returns PsiElement containing sub name
@@ -58,7 +59,7 @@ public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiEleme
 	 *
 	 * @return result
 	 */
-	public boolean isMethod();
+	boolean isMethod();
 
 
 	/**
@@ -66,7 +67,7 @@ public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiEleme
 	 *
 	 * @return PerlSubAnnotation object
 	 */
-	public PerlSubAnnotations getSubAnnotations();
+	PerlSubAnnotations getSubAnnotations();
 
 	/**
 	 * Returns list of sub annotations elements

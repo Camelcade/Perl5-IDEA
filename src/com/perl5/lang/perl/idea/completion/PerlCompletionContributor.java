@@ -41,6 +41,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				new PerlStringContentCompletionProvider()
 		);
 
+		extend(
+				CompletionType.BASIC,
+				SUB_NAME_PATTERN,
+				new PerlSubNameElementCompletionProvider()
+		);
+
 
 		// refactored
 		extend(
