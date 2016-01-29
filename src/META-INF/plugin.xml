@@ -49,6 +49,7 @@
       <li>Automatic language injection in here-doc is now configurable (on/off) in Perl5 settings, fixes #636</li>
       <li>Implemented conversion <code>${$hasref}{key}</code> to <code>$hashref->{key}</code> on pre-formatting, fixes #803</li>
       <li>Implemented names suggestion for new subs/methods based on unresolved sub names in current file, fixes #231</li>
+      <li>Implemented names suggestion for variables declarations based on unresolved variables in appropriate scope, fixes #242</li>
       <li>Moose<ul>
       <li>Implemented live-templates for Moose constructions</li>
       <li>Implemented Moose super call resolution, fixes #553</li>

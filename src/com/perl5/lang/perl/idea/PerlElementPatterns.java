@@ -65,6 +65,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 	PsiElementPattern.Capture IN_OBJECT_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));
 
 	PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class);
+
 	PsiElementPattern.Capture<PerlGlobVariable> GLOB_PATTERN = psiElement(PerlGlobVariable.class);
 
 	PsiElementPattern.Capture IN_VARIABLE_PATTERN = psiElement().inside(VARIABLE_PATTERN);
@@ -74,6 +75,10 @@ public interface PerlElementPatterns extends PerlElementTypes
 	PsiElementPattern.Capture IN_MOJOLICIOUS_FILE = psiElement().inFile(psiFile(MojoliciousFileImpl.class));
 
 	PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class);
+	PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN_IN_DECLARATION = VARIABLE_NAME_PATTERN.withParent(
+			VARIABLE_PATTERN.withParent(psiElement(PerlVariableDeclarationWrapper.class))
+	);
+
 	PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(PerlElementTypes.ANNOTATION_UNKNOWN_KEY);
 
 	PsiElementPattern.Capture INSIDE_SUB_SIGNATURE = psiElement().inside(PsiPerlSubSignatureContent.class);

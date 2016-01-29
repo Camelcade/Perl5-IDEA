@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -24,4 +26,5 @@ import com.intellij.psi.PsiElement;
  */
 public interface PerlLexicalScope extends PerlLexicalScopeMember, PsiElement
 {
+	void accept(@NotNull PsiElementVisitor visitor);
 }
