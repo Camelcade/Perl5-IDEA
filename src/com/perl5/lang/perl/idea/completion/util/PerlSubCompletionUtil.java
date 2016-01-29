@@ -21,6 +21,7 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
@@ -192,5 +193,66 @@ public class PerlSubCompletionUtil
 			}
 		});
 
+	}
+
+	public static void fillWithNotOverridedSubs(final PerlSubDefinitionBase subDefinition, final CompletionResultSet resultSet)
+	{
+		PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class);
+
+		if (namespaceDefinition != null)
+		{
+			PsiFile containingFile = subDefinition.getContainingFile();
+			String packageName = subDefinition.getPackageName();
+			Set<String> namesSet = new THashSet<String>();
+			// collecting overrided
+			for (PerlSubDefinitionBase subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinitionBase.class))
+			{
+				if (subDefinitionBase.isValid() && packageName.equals(subDefinitionBase.getPackageName()))
+				{
+					namesSet.add(subDefinitionBase.getSubName());
+				}
+			}
+
+			collectParentSubsNames(
+					namespaceDefinition,
+					namesSet,
+					new THashSet<PerlNamespaceDefinition>(),
+					resultSet
+			);
+		}
+
+	}
+
+	public static void collectParentSubsNames(PerlNamespaceDefinition namespaceDefinition,
+											  Set<String> collectedNames,
+											  Set<PerlNamespaceDefinition> recursionMap,
+											  CompletionResultSet resultSet
+	)
+	{
+		if (namespaceDefinition == null || recursionMap.contains(namespaceDefinition))
+			return;
+		recursionMap.add(namespaceDefinition);
+
+		for (PerlNamespaceDefinition parentNamespace : namespaceDefinition.getParentNamespaceDefinitions())
+		{
+			for (PerlSubDefinitionBase subDefinitionBase : PsiTreeUtil.findChildrenOfType(parentNamespace, PerlSubDefinitionBase.class))
+			{
+				String subName = subDefinitionBase.getSubName();
+				if (subDefinitionBase.isValid() &&
+						!collectedNames.contains(subName) &&
+						parentNamespace.equals(PsiTreeUtil.getParentOfType(subDefinitionBase, PerlNamespaceDefinition.class))
+						)
+				{
+					collectedNames.add(subName);
+					resultSet.addElement(LookupElementBuilder.create(subName));
+				}
+			}
+			collectParentSubsNames(
+					parentNamespace,
+					collectedNames,
+					recursionMap,
+					resultSet
+			);
+		}
 	}
 }

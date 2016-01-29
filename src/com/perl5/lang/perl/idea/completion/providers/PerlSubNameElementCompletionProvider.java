@@ -38,7 +38,9 @@ public class PerlSubNameElementCompletionProvider extends CompletionProvider<Com
 
 		if (element.getParent() instanceof PerlSubDefinitionBase)
 		{
-			PerlSubCompletionUtil.fillWithUnresolvedSubs((PerlSubDefinitionBase) element.getParent(), resultSet);
+			PerlSubDefinitionBase subDefinitionBase = (PerlSubDefinitionBase) element.getParent();
+			PerlSubCompletionUtil.fillWithUnresolvedSubs(subDefinitionBase, resultSet);
+			PerlSubCompletionUtil.fillWithNotOverridedSubs(subDefinitionBase, resultSet);
 		}
 
 	}
