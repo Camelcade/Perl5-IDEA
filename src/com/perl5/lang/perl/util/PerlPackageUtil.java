@@ -38,6 +38,7 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubInde
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -487,4 +488,66 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 		return new TextRange(startOffset, endOffset);
 	}
+
+
+	public static void processNotOverridedSubs(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubDefinitionBase> processor)
+	{
+		if (namespaceDefinition != null)
+		{
+			PsiFile containingFile = namespaceDefinition.getContainingFile();
+			String packageName = namespaceDefinition.getPackageName();
+			Set<String> namesSet = new THashSet<String>();
+			// collecting overrided
+			for (PerlSubDefinitionBase subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinitionBase.class))
+			{
+				if (subDefinitionBase.isValid() && packageName.equals(subDefinitionBase.getPackageName()))
+				{
+					namesSet.add(subDefinitionBase.getSubName());
+				}
+			}
+
+			processParentClassesSubs(
+					namespaceDefinition,
+					namesSet,
+					new THashSet<PerlNamespaceDefinition>(),
+					processor
+			);
+		}
+
+	}
+
+	public static void processParentClassesSubs(PerlNamespaceDefinition childClass,
+												Set<String> processedSubsNames,
+												Set<PerlNamespaceDefinition> recursionMap,
+												Processor<PerlSubDefinitionBase> processor
+	)
+	{
+		if (childClass == null || recursionMap.contains(childClass))
+			return;
+		recursionMap.add(childClass);
+
+		for (PerlNamespaceDefinition parentNamespace : childClass.getParentNamespaceDefinitions())
+		{
+			for (PerlSubDefinitionBase subDefinitionBase : PsiTreeUtil.findChildrenOfType(parentNamespace, PerlSubDefinitionBase.class))
+			{
+				String subName = subDefinitionBase.getSubName();
+				if (subDefinitionBase.isValid() &&
+						!processedSubsNames.contains(subName) &&
+						parentNamespace.equals(PsiTreeUtil.getParentOfType(subDefinitionBase, PerlNamespaceDefinition.class))
+						)
+				{
+					processedSubsNames.add(subName);
+					processor.process(subDefinitionBase);
+				}
+			}
+			processParentClassesSubs(
+					parentNamespace,
+					processedSubsNames,
+					recursionMap,
+					processor
+			);
+		}
+	}
+
+
 }
