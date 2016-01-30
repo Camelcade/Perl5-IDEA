@@ -16,10 +16,16 @@
 
 package com.perl5.lang.perl.extensions.generation;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 30.01.2016.
@@ -35,8 +41,88 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		if (subBase instanceof PerlSubBase)
 		{
 			PerlSubBase perlSubBase = (PerlSubBase) subBase;
+			StringBuilder code = new StringBuilder();
+			code.append("#@override\n");
 
-			return "#@override\n#@method\nsub " + perlSubBase.getSubName() + " {}";
+			PerlSubAnnotations annotations = perlSubBase.getSubAnnotations();
+			if (annotations.isDeprecated())
+			{
+				code.append("#@deprecated\n");
+			}
+			if (annotations.isAbstract())
+			{
+				code.append("#@abstract\n");
+			}
+			if (annotations.isMethod())
+			{
+				code.append("#@method\n");
+			}
+			if (StringUtil.isNotEmpty(annotations.getReturns()))
+			{
+				code.append("#@returns ");
+				code.append(annotations.getReturns());
+				code.append("\n");
+			}
+
+			code.append("sub ");
+			code.append(perlSubBase.getSubName());
+			code.append("{\n");
+
+			if (perlSubBase instanceof PerlSubDefinition)
+			{
+				List<PerlSubArgument> arguments = ((PerlSubDefinition) perlSubBase).getSubArgumentsList();
+
+				if (arguments.size() > 0)
+				{
+					boolean useShift = false;
+
+					for (PerlSubArgument argument : arguments)
+					{
+						if (StringUtil.isNotEmpty(argument.getVariableClass()))
+						{
+							useShift = true;
+							break;
+						}
+					}
+
+					if (useShift)
+					{
+						for (PerlSubArgument argument : arguments)
+						{
+							code.append("my ");
+							code.append(argument.getVariableClass());
+							code.append(" ");
+							code.append(argument.getArgumentType().getSigil());
+							code.append(argument.getArgumentName());
+							code.append(" = shift;\n");
+						}
+					}
+					else
+					{
+						code.append("my ");
+						code.append('(');
+						boolean insertComma = false;
+						for (PerlSubArgument argument : arguments)
+						{
+							if (insertComma)
+							{
+								code.append(", ");
+							}
+							else
+							{
+								insertComma = true;
+							}
+
+							code.append(argument.getArgumentType().getSigil());
+							code.append(argument.getArgumentName());
+						}
+						code.append(") = @_\n");
+					}
+				}
+			}
+
+			code.append("}");
+			return code.toString();
 		}
 		return null;
 	}
