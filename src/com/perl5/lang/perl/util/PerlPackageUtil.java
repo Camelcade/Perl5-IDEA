@@ -38,6 +38,7 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubInde
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -45,6 +46,7 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -283,7 +285,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName)
 	{
-		return getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
+		List<PerlNamespaceDefinition> list = getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
+		if (list.size() == 0)
+			list = getDerivedNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+		return list;
 	}
 
 	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
@@ -550,5 +555,34 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
+	public static void proecessChildNamespacesSubs(@NotNull PerlNamespaceDefinition namespaceDefinition,
+												   @Nullable Set<PerlNamespaceDefinition> recursionSet,
+												   Processor<PerlSubBase> processor)
+	{
+		if (recursionSet == null)
+			recursionSet = new THashSet<PerlNamespaceDefinition>();
 
+		recursionSet.add(namespaceDefinition);
+
+		for (PerlNamespaceDefinition childNamespace : namespaceDefinition.getChildNamespaceDefinitions())
+		{
+			if (!recursionSet.contains(childNamespace))
+			{
+				boolean processSubclasses = true;
+
+				for (PerlSubBase subBase : PsiTreeUtil.findChildrenOfType(childNamespace, PerlSubBase.class))
+				{
+					if (childNamespace.equals(PsiTreeUtil.getParentOfType(subBase, PerlNamespaceDefinition.class)))
+					{
+						processSubclasses = processor.process(subBase);
+					}
+				}
+
+				if (processSubclasses)
+				{
+					proecessChildNamespacesSubs(childNamespace, recursionSet, processor);
+				}
+			}
+		}
+	}
 }

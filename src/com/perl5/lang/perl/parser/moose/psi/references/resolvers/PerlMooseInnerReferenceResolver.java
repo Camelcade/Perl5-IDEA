@@ -67,17 +67,17 @@ public class PerlMooseInnerReferenceResolver implements ResolveCache.PolyVariant
 
 			if (StringUtil.isNotEmpty(subName) && namespaceDefinition != null)
 			{
-				searchNamespaceForAugmentations(namespaceDefinition, subName, recursionSet, result);
+				collectNamespaceMethodsAugmentations(namespaceDefinition, subName, recursionSet, result);
 			}
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
 
-	protected void searchNamespaceForAugmentations(@NotNull PerlNamespaceDefinition namespaceDefinition,
-												   @NotNull String subName,
-												   Set<PerlNamespaceDefinition> recursionSet,
-												   List<ResolveResult> result)
+	protected void collectNamespaceMethodsAugmentations(@NotNull PerlNamespaceDefinition namespaceDefinition,
+														@NotNull String subName,
+														Set<PerlNamespaceDefinition> recursionSet,
+														List<ResolveResult> result)
 	{
 		recursionSet.add(namespaceDefinition);
 
@@ -98,7 +98,7 @@ public class PerlMooseInnerReferenceResolver implements ResolveCache.PolyVariant
 
 				if (!noSubclasses)
 				{
-					searchNamespaceForAugmentations(childNamespace, subName, recursionSet, result);
+					collectNamespaceMethodsAugmentations(childNamespace, subName, recursionSet, result);
 				}
 			}
 		}
