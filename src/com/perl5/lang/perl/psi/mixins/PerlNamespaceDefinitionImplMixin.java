@@ -22,7 +22,6 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
@@ -31,7 +30,6 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvide
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
@@ -379,47 +377,6 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		return nameIdentifier == null
 				? super.getTextOffset()
 				: getNameIdentifier().getTextOffset();
-	}
-
-
-	public List<PsiElement> getDeclaredSubs()
-	{
-		PerlNamespaceDefinitionStub stub = getStub();
-		List<PsiElement> result = new ArrayList<PsiElement>();
-
-		if (stub != null)
-		{
-			collectDeclaredSubsFromStubs(stub, result);
-		}
-		else
-		{
-			collectDeclaredSubsFromPsi(result);
-		}
-		return result;
-	}
-
-	protected void collectDeclaredSubsFromStubs(Stub stub, List<PsiElement> result)
-	{
-		for (Stub element : stub.getChildrenStubs())
-		{
-			// fixme add parent stub checking here
-			if (element instanceof PerlSubDefinitionStub)
-			{
-				result.add(((PerlSubDefinitionStub) element).getPsi());
-			}
-			collectDeclaredSubsFromStubs(element, result);
-		}
-	}
-
-	protected void collectDeclaredSubsFromPsi(List<PsiElement> result)
-	{
-		for (PerlSubDefinition subDefinition : PsiTreeUtil.findChildrenOfType(this, PerlSubDefinition.class))
-		{
-			if (subDefinition.isValid() && this.equals(PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class)))
-			{
-				result.add(subDefinition);
-			}
-		}
 	}
 
 }

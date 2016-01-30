@@ -33,14 +33,12 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.filetypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
+import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
@@ -570,7 +568,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			{
 				boolean processSubclasses = true;
 
-				for (PsiElement subBase : childNamespace.getDeclaredSubs())
+				for (PsiElement subBase : PerlPsiUtil.collectNamespaceMembers(childNamespace, PerlSubBaseStub.class, PerlSubDefinition.class))
 				{
 					processSubclasses = processor.process((PerlSubBase) subBase);
 				}

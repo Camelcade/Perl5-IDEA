@@ -19,14 +19,16 @@ package com.perl5.lang.perl.psi.utils;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
+import com.intellij.psi.stubs.PsiFileStub;
+import com.intellij.psi.stubs.Stub;
+import com.intellij.psi.stubs.StubBase;
+import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
@@ -267,4 +269,66 @@ public class PerlPsiUtil
 		}
 		return result;
 	}
+
+	public static List<PsiElement> collectNamespaceMembers(@NotNull final PerlNamespaceDefinition namespaceDefinition,
+														   @NotNull final Class<? extends StubElement> stubClass,
+														   @NotNull final Class<? extends PsiElement> psiClass)
+	{
+		Stub stub = namespaceDefinition.getStub();
+		List<PsiElement> result = new ArrayList<PsiElement>();
+
+		if (stub != null)
+		{
+			collectElementsFromStubs(namespaceDefinition, stubClass, stub, result);
+		}
+		else
+		{
+			collectElementsFromPsi(namespaceDefinition, psiClass, result);
+		}
+		return result;
+	}
+
+	public static void collectElementsFromStubs(final PerlNamespaceDefinition namespaceDefinition,
+												final Class<? extends StubElement> stubClass,
+												Stub stub, List<PsiElement> result)
+	{
+		for (Stub element : stub.getChildrenStubs())
+		{
+			if (stubClass.isInstance(element) && isNamespaceStubElement(namespaceDefinition.getStub(), element))
+			{
+				result.add(((StubBase) element).getPsi());
+			}
+			collectElementsFromStubs(namespaceDefinition, stubClass, element, result);
+		}
+	}
+
+	public static boolean isNamespaceStubElement(Stub namespaceStub, Stub elementStub)
+	{
+		if (namespaceStub == null)
+			return false;
+
+		while (true)
+		{
+			if (elementStub == null || elementStub instanceof PsiFileStub)
+				return false;
+
+			if (elementStub instanceof PerlNamespaceDefinitionStub)
+			{
+				return elementStub.equals(namespaceStub);
+			}
+			elementStub = elementStub.getParentStub();
+		}
+	}
+
+	public static void collectElementsFromPsi(PerlNamespaceDefinition namespaceDefinition, Class<? extends PsiElement> psiClass, List<PsiElement> result)
+	{
+		for (PsiElement subDefinition : PsiTreeUtil.findChildrenOfType(namespaceDefinition, psiClass))
+		{
+			if (subDefinition.isValid() && namespaceDefinition.equals(PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class)))
+			{
+				result.add(subDefinition);
+			}
+		}
+	}
+
 }
