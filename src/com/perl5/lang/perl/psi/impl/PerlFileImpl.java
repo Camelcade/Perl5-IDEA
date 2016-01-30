@@ -33,7 +33,9 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubTreeLoader;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.filetypes.PerlFileType;
@@ -618,6 +620,12 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		}
 
 		return null;
+	}
+
+	@Override
+	public PerlCodeGenerator getOverrideGenerator()
+	{
+		return PerlCodeGeneratorImpl.INSTANCE;
 	}
 
 /* This method is to get ElementTypes stats from PsiFile using PSIViewer

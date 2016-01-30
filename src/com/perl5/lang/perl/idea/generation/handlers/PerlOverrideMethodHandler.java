@@ -18,17 +18,22 @@ package com.perl5.lang.perl.idea.generation.handlers;
 
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.MemberChooser;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.SpeedSearchComparator;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
+import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -47,7 +52,7 @@ public class PerlOverrideMethodHandler extends GeneratePerlSubActionHandlerBase
 	{
 		PsiElement element = file.findElementAt(targetOffset);
 
-		if (element != null)
+		if (element != null && file instanceof PerlFile)
 		{
 			final List<PerlMethodMember> subDefinitions = new ArrayList<PerlMethodMember>();
 
@@ -95,10 +100,29 @@ public class PerlOverrideMethodHandler extends GeneratePerlSubActionHandlerBase
 			{
 				return;
 			}
-/*
-		List<PyMethodMember> membersToOverride = chooser.getSelectedElements();
-		overrideMethods(editor, pyClass, membersToOverride, implement);
-*/
+
+			PerlCodeGenerator codeGenerator = ((PerlFile) file).getOverrideGenerator();
+			StringBuilder generatedCode = new StringBuilder("");
+
+			if (chooser.getSelectedElements() != null)
+			{
+				for (PerlMethodMember methodMember : chooser.getSelectedElements())
+				{
+					String code = codeGenerator.getOverrideCodeText(methodMember.getPsiElement());
+					if (StringUtil.isNotEmpty(code))
+					{
+						generatedCode.append(code);
+						generatedCode.append("\n\n");
+					}
+				}
+
+				if (generatedCode.length() > 0)
+				{
+					Document document = editor.getDocument();
+					document.insertString(targetOffset, generatedCode);
+					PsiDocumentManager.getInstance(project).commitDocument(document);
+				}
+			}
 		}
 	}
 }

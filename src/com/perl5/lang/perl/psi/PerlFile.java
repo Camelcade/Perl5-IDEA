@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +60,7 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 *
 	 * @return search scope
 	 */
-	@NotNull
+//	@NotNull
 //	GlobalSearchScope getElementsResolveScope();
 
 	/**
@@ -105,4 +106,10 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	@Nullable
 	VirtualFile resolveRelativePathToVirtualFile(String relativePath);
 
+	/**
+	 * Returns generator for overriding elements
+	 *
+	 * @return override generator
+	 */
+	PerlCodeGenerator getOverrideGenerator();
 }
