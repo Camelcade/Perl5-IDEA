@@ -44,7 +44,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 	@Override
 	protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result)
 	{
-		if (element instanceof PerlNamespaceDefinition && ((PerlNamespaceDefinition) element).getNameIdentifier() != null)
+		if (element instanceof PerlNamespaceDefinition)
 		{
 			PsiElement nameIdentifier = ((PerlNamespaceDefinition) element).getNameIdentifier();
 			if (nameIdentifier == null)
@@ -105,7 +105,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 
 					final List<PerlSubBase> overridingSubs = new ArrayList<PerlSubBase>();
 
-					PerlPackageUtil.proecessChildNamespacesSubs(containingNamespace, null, new Processor<PerlSubBase>()
+					PerlPackageUtil.processChildNamespacesSubs(containingNamespace, null, new Processor<PerlSubBase>()
 					{
 						@Override
 						public boolean process(PerlSubBase perlSubBase)

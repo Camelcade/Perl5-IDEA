@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
@@ -84,6 +83,10 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public PsiReference[] getReferences()
 	{
+		if( !this.equals(myReferences[0].getElement()))
+		{
+			myReferences[0] = new PerlSubReference(this, null);
+		}
 		return myReferences; //(PsiReference[]) ArrayUtils.addAll(, ReferenceProvidersRegistry.getReferencesFromProviders(this));
 	}
 
@@ -120,16 +123,6 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		return false;
 	}
 
-	@NotNull
-	@Override
-	public LeafElement clone()
-	{
-		LeafElement clone = super.clone();
-
-		((PerlSubNameElement)clone).getReferences()[0] = new PerlSubReference((PerlSubNameElement)clone, null);
-
-		return clone;
-	}
 }
 
 

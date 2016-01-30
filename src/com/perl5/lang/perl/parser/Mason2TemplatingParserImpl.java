@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.01.2016.
  */
-public class MasonTemplating2ParserImpl extends Mason2ParserImpl
+public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 {
 	public static final TokenSet NAMESPACE_CONTENT_RECOVERY_TOKENS = TokenSet.orSet(
 			PerlParserImpl.NAMESPACE_CONTENT_RECOVERY_TOKENS,

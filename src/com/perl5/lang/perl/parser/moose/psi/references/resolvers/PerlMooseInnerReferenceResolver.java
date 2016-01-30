@@ -24,8 +24,10 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseInnerReference;
+import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
@@ -87,9 +89,9 @@ public class PerlMooseInnerReferenceResolver implements ResolveCache.PolyVariant
 			{
 				boolean noSubclasses = false;
 
-				for (PerlMooseAugmentStatement augmentStatement : PsiTreeUtil.findChildrenOfType(childNamespace, PerlMooseAugmentStatement.class))
+				for (PsiElement augmentStatement : PerlPsiUtil.collectNamespaceMembers(childNamespace, PerlMooseAugmentStatementStub.class, PerlMooseAugmentStatement.class))
 				{
-					if (subName.equals(augmentStatement.getSubName()) && childNamespace.equals(PsiTreeUtil.getParentOfType(augmentStatement, PerlNamespaceDefinition.class)))
+					if (subName.equals(((PerlMooseAugmentStatement) augmentStatement).getSubName()))
 					{
 						result.add(new PsiElementResolveResult(augmentStatement));
 						noSubclasses = true;

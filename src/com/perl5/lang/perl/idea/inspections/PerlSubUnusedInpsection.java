@@ -21,7 +21,10 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlConstant;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -48,28 +51,11 @@ public class PerlSubUnusedInpsection extends PerlInspection
 
 		return new PerlVisitor()
 		{
-			protected void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o, String message)
+			@Override
+			public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
 			{
 				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
-					holder.registerProblem(o.getSubNameElement(), message, ProblemHighlightType.LIKE_UNUSED_SYMBOL);
-			}
-
-			@Override
-			public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
-			{
-				visitSubDefinitionBase(o, "Unused sub definition");
-			}
-
-			@Override
-			public void visitMethodDefinition(@NotNull PsiPerlMethodDefinition o)
-			{
-				visitSubDefinitionBase(o, "Unused method definition");
-			}
-
-			@Override
-			public void visitFuncDefinition(@NotNull PsiPerlFuncDefinition o)
-			{
-				visitSubDefinitionBase(o, "Unused func definition");
+					holder.registerProblem(o.getSubNameElement(), "Unused sub definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 			}
 
 			@Override

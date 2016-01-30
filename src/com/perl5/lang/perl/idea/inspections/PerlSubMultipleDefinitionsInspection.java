@@ -38,9 +38,11 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 	{
 		return new PerlVisitor()
 		{
-			protected void visitSubDefinitionBase(PerlSubDefinitionBase o, String name)
+			@Override
+			public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
 			{
 				Project project = o.getProject();
+				String name = "Sub";
 
 				String canonicalName = o.getCanonicalName();
 				if (canonicalName != null)
@@ -67,24 +69,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 						registerProblem(holder, o.getNameIdentifier(), String.format("%s definition clashes with constant definition", name));
 					}
 				}
-			}
-
-			@Override
-			public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
-			{
-				visitSubDefinitionBase(o, "Sub");
-			}
-
-			@Override
-			public void visitMethodDefinition(@NotNull PsiPerlMethodDefinition o)
-			{
-				visitSubDefinitionBase(o, "Method");
-			}
-
-			@Override
-			public void visitFuncDefinition(@NotNull PsiPerlFuncDefinition o)
-			{
-				visitSubDefinitionBase(o, "Func");
+				super.visitSubDefinitionBase(o);
 			}
 
 			@Override

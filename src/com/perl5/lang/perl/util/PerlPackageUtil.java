@@ -38,7 +38,10 @@ import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
@@ -553,9 +556,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
-	public static void proecessChildNamespacesSubs(@NotNull PerlNamespaceDefinition namespaceDefinition,
-												   @Nullable Set<PerlNamespaceDefinition> recursionSet,
-												   Processor<PerlSubBase> processor)
+	public static void processChildNamespacesSubs(@NotNull PerlNamespaceDefinition namespaceDefinition,
+												  @Nullable Set<PerlNamespaceDefinition> recursionSet,
+												  Processor<PerlSubBase> processor)
 	{
 		if (recursionSet == null)
 			recursionSet = new THashSet<PerlNamespaceDefinition>();
@@ -568,14 +571,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			{
 				boolean processSubclasses = true;
 
-				for (PsiElement subBase : PerlPsiUtil.collectNamespaceMembers(childNamespace, PerlSubBaseStub.class, PerlSubDefinition.class))
+				for (PsiElement subBase : PerlPsiUtil.collectNamespaceMembers(childNamespace, PerlSubBaseStub.class, PerlSubBase.class))
 				{
 					processSubclasses = processor.process((PerlSubBase) subBase);
 				}
 
 				if (processSubclasses)
 				{
-					proecessChildNamespacesSubs(childNamespace, recursionSet, processor);
+					processChildNamespacesSubs(childNamespace, recursionSet, processor);
 				}
 			}
 		}

@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.SmartList;
@@ -269,4 +270,10 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 		}
 		return false;
 	}
+
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubDefinitionBase(this);
+		else super.accept(visitor);
+	}
+
 }

@@ -113,7 +113,9 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser
 			m.done(NAMESPACE_CONTENT);
 			m.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
-			m.precede().done(MASON_NAMESPACE_DEFINITION);
+			PsiBuilder.Marker definitionMarker = m.precede();
+			definitionMarker.done(MASON_NAMESPACE_DEFINITION);
+			definitionMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 			return true;
 		}
 		m.rollbackTo();

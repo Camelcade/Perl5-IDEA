@@ -595,6 +595,14 @@
                          shortName="SubMultipleDefinitions" displayName="Multiple sub definitions" groupName="Perl5"
                          enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
+
+        <localInspection language="Mason2 Templating Language"
+                         shortName="SubMultipleDefinitions" displayName="Multiple sub definitions"
+                         groupName="Perl5: Mason2"
+                         enabledByDefault="true" level="WARNING"
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
+
+
         <localInspection language="Perl5"
                          shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"
                          enabledByDefault="false" level="WARNING"
