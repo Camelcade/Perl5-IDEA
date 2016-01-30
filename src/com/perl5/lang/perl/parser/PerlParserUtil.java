@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.LighterASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
+import com.intellij.lang.WhitespacesBinders;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
@@ -2044,6 +2045,19 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer();
 			return true;
 		}
+		return false;
+	}
+
+	public static boolean parseNamespaceContent(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParserGenerated.real_namespace_content(b, l))
+		{
+			m.done(NAMESPACE_CONTENT);
+			m.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+			return true;
+		}
+		m.rollbackTo();
 		return false;
 	}
 }

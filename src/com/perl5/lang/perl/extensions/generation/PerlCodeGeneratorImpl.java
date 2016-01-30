@@ -116,7 +116,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 							code.append(argument.getArgumentType().getSigil());
 							code.append(argument.getArgumentName());
 						}
-						code.append(") = @_\n");
+						code.append(") = @_;\n");
 					}
 				}
 			}
