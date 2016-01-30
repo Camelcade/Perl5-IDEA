@@ -18,13 +18,15 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
+import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
+import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 26.04.2015.
@@ -34,29 +36,30 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 	@Override
 	protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result)
 	{
-		// @todo this should not be shown on static method calls (we should jump to definition of method)
-		// @todo thi should not be shown if there is only one result found?
-		if (element instanceof LeafPsiElement)
+		if (element instanceof PerlNamespaceDefinition)
 		{
-			IElementType elementType = ((LeafPsiElement) element).getElementType();
-
-/*
-			if( elementType == PERL_PACKAGE	)
+			List<PerlNamespaceDefinition> parentNamespaces = ((PerlNamespaceDefinition) element).getParentNamespaceDefinitions();
+			if (parentNamespaces.size() > 0)
 			{
-				Project project = element.getProject();
+				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+						.create(AllIcons.Gutter.ImplementingMethod)
+						.setTargets(parentNamespaces)
+						.setTooltipText("Parent classes");
 
-				final List<PsiElement> scalars = PerlPackageUtil.findPackageDefinitions(project, element.getText());
-				if (scalars.size() > 0)
-				{
-					NavigationGutterIconBuilder<PsiElement> builder =
-							NavigationGutterIconBuilder.create(
-									PerlIcons.PM_FILE).
-									setTargets(scalars).
-									setTooltipText("To package definition");
-					result.add(builder.createLineMarkerInfo(element));
-				}
+				result.add(builder.createLineMarkerInfo(element));
 			}
-*/
+
+			Collection<PerlNamespaceDefinition> childNamespaces = ((PerlNamespaceDefinition) element).getChildNamespaceDefinitions();
+			if (childNamespaces.size() > 0)
+			{
+				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+						.create(AllIcons.Gutter.ImplementedMethod)
+						.setTargets(childNamespaces)
+						.setTooltipText("Subclasses");
+
+				result.add(builder.createLineMarkerInfo(element));
+			}
+
 		}
 
 	}
