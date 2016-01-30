@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.generation.handlers;
 
-import com.intellij.openapi.editor.Document;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 11.10.2015.
@@ -25,18 +25,18 @@ public class GeneratePerlGetterActionHandler extends GeneratePerlGetterSetterAct
 {
 	public static String getGetterCode(String name)
 	{
-		return "\n\n" +
-				"sub get_" + name + "\n" +
+		return "sub get_" + name + "\n" +
 				"{\n" +
 				"	my $self = shift;\n" +
 				"	return $$self{" + name + "};\n" +
 				"}\n";
 	}
 
+	@NotNull
 	@Override
-	public void doGenerate(Document document, String name, int offset)
+	protected String getCode(String name)
 	{
-		document.insertString(offset, getGetterCode(name));
+		return getGetterCode(name);
 	}
 
 	@Override

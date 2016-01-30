@@ -16,24 +16,15 @@
 
 package com.perl5.lang.perl.idea.generation.handlers;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.PsiPerlBlock;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 
 /**
  * Created by hurricup on 11.10.2015.
  */
-public class GeneratePerlConstructorActionHandler extends GeneratePerlSubActionHandlerBase implements PerlElementTypes
+public class GeneratePerlConstructorActionHandler extends GeneratePackageMemberHandlerBase implements PerlElementTypes
 {
 	public static String getCode()
 	{
@@ -47,53 +38,9 @@ public class GeneratePerlConstructorActionHandler extends GeneratePerlSubActionH
 	}
 
 	@Override
-	protected int getTargetOffset(PsiElement currentElement)
+	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(currentElement, PerlNamespaceDefinition.class);
-
-		if (namespaceDefinition == null)
-		{
-			namespaceDefinition = PsiTreeUtil.findChildOfType(currentElement.getContainingFile(), PerlNamespaceDefinition.class);
-		}
-
-		if (namespaceDefinition == null)
-		{
-			return -1;
-		}
-
-		PsiElement contentBlock = PsiTreeUtil.getChildOfAnyType(namespaceDefinition, PsiPerlNamespaceContent.class, PsiPerlBlock.class);
-
-		if (contentBlock == null)
-		{
-			return -1;
-		}
-
-		PsiElement anchor = PsiTreeUtil.getChildOfType(contentBlock, PerlSubBase.class);
-		if (anchor == null)
-		{
-			anchor = contentBlock.getLastChild();
-		}
-		if (anchor == null)
-		{
-			anchor = contentBlock;
-		}
-
-		ASTNode anchorNode = anchor.getNode();
-
-		if (anchorNode.getTextLength() == 0 && anchorNode.getTreePrev() != null && anchorNode.getTreePrev().getElementType() == COMMENT_BLOCK)
-		{
-			return anchorNode.getTreePrev().getStartOffset();
-		}
-
-		return anchor.getNode().getStartOffset();
-	}
-
-	@Override
-	protected void generateAtOffset(int targetOffset, Project project, Editor editor, PsiFile file)
-	{
-		Document document = editor.getDocument();
-		document.insertString(targetOffset, getCode());
-		PsiDocumentManager.getInstance(project).commitDocument(document);
+		insertCodeAfterElement(anchor, getCode());
 
 	}
 }

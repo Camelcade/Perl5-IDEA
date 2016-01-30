@@ -18,13 +18,10 @@ package com.perl5.lang.perl.idea.generation.handlers;
 
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.MemberChooser;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -45,19 +42,17 @@ import java.util.List;
 /**
  * Created by hurricup on 29.01.2016.
  */
-public class PerlOverrideMethodHandler extends GeneratePerlSubActionHandlerBase
+public class PerlOverrideMethodHandler extends GeneratePackageMemberHandlerBase
 {
 	@Override
-	protected void generateAtOffset(int targetOffset, Project project, Editor editor, PsiFile file)
+	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		PsiElement element = file.findElementAt(targetOffset);
-
-		if (element != null && file instanceof PerlFile)
+		if (anchor != null && file instanceof PerlFile)
 		{
 			final List<PerlMethodMember> subDefinitions = new ArrayList<PerlMethodMember>();
 
 			PerlPackageUtil.processNotOverridedMethods(
-					PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class),
+					PsiTreeUtil.getParentOfType(anchor, PerlNamespaceDefinition.class),
 					new Processor<PerlSubDefinitionBase>()
 					{
 						@Override
@@ -70,7 +65,7 @@ public class PerlOverrideMethodHandler extends GeneratePerlSubActionHandlerBase
 			);
 
 			final MemberChooser<PerlMethodMember> chooser =
-					new MemberChooser<PerlMethodMember>(subDefinitions.toArray(new PerlMethodMember[subDefinitions.size()]), false, true, project)
+					new MemberChooser<PerlMethodMember>(subDefinitions.toArray(new PerlMethodMember[subDefinitions.size()]), false, true, anchor.getProject())
 					{
 						@Override
 						protected SpeedSearchComparator getSpeedSearchComparator()
@@ -116,12 +111,7 @@ public class PerlOverrideMethodHandler extends GeneratePerlSubActionHandlerBase
 					}
 				}
 
-				if (generatedCode.length() > 0)
-				{
-					Document document = editor.getDocument();
-					document.insertString(targetOffset, generatedCode);
-					PsiDocumentManager.getInstance(project).commitDocument(document);
-				}
+				insertCodeAfterElement(anchor, generatedCode.toString());
 			}
 		}
 	}

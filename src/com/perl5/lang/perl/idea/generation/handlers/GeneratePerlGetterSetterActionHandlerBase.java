@@ -16,38 +16,38 @@
 
 package com.perl5.lang.perl.idea.generation.handlers;
 
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 11.10.2015.
  */
-public abstract class GeneratePerlGetterSetterActionHandlerBase extends GeneratePerlSubActionHandlerBase
+public abstract class GeneratePerlGetterSetterActionHandlerBase extends GeneratePackageMemberHandlerBase
 {
 	@Override
-	protected void generateAtOffset(int targetOffset, Project project, Editor editor, PsiFile file)
+	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		String name = Messages.showInputDialog(project, getPromtText(), getPromtTitle(), Messages.getQuestionIcon(), "", null);
+		String name = Messages.showInputDialog(anchor.getProject(), getPromtText(), getPromtTitle(), Messages.getQuestionIcon(), "", null);
 
 		if (!StringUtil.isEmpty(name))
 		{
-			Document document = editor.getDocument();
+
+			StringBuilder code = new StringBuilder();
 
 			for (String nameChunk : name.split("[ ,]+"))
 			{
 				if (!nameChunk.isEmpty() && PerlLexer.IDENTIFIER_PATTERN.matcher(nameChunk).matches())
 				{
-					doGenerate(document, nameChunk, targetOffset);
+					code.append(getCode(nameChunk));
 				}
 			}
 
-			PsiDocumentManager.getInstance(project).commitDocument(document);
+			insertCodeAfterElement(anchor, code.toString());
 		}
 
 	}
@@ -56,5 +56,6 @@ public abstract class GeneratePerlGetterSetterActionHandlerBase extends Generate
 
 	protected abstract String getPromtTitle();
 
-	public abstract void doGenerate(Document document, String name, int offset);
+	@NotNull
+	protected abstract String getCode(String name);
 }

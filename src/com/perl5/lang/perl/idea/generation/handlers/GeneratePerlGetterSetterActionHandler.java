@@ -16,18 +16,22 @@
 
 package com.perl5.lang.perl.idea.generation.handlers;
 
-import com.intellij.openapi.editor.Document;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 11.10.2015.
  */
 public class GeneratePerlGetterSetterActionHandler extends GeneratePerlGetterSetterActionHandlerBase
 {
+
+	@NotNull
 	@Override
-	public void doGenerate(Document document, String name, int offset)
+	protected String getCode(String name)
 	{
-		document.insertString(offset, GeneratePerlGetterActionHandler.getGetterCode(name));
-		document.insertString(offset, GeneratePerlSetterActionHandler.getSetterCode(name));
+		return GeneratePerlGetterActionHandler.getGetterCode(name) +
+				"\n" +
+				GeneratePerlSetterActionHandler.getSetterCode(name)
+				;
 	}
 
 	@Override
