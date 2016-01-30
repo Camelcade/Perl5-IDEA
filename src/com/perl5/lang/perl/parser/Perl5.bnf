@@ -439,10 +439,10 @@ private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDEN
 private namespace_annotations ::= annotation_deprecated
 private recover_namespace_definition ::= !(<<checkSemicolon>> | LEFT_BRACE)
 namespace_content ::= real_namespace_content
-private real_namespace_content ::= file_item *  {extends=block recoverWhile=recover_namespace} //
+private real_namespace_content ::= file_item *  {extends=block recoverWhile=recover_namespace_content} //
 
 // todo count opening braces
-private recover_namespace ::= !( <<eof>> | RIGHT_BRACE)
+private recover_namespace_content ::= <<recoverNamespaceContent>>
 
 block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1} // !OPERATOR_DEREFERENCE  pin disabled for dereference of anon hash; probably this slows us down
 private block_content ::= file_item * {recoverWhile=recover_block}

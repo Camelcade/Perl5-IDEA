@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.12.2015.
  */
-public class MasonParserImpl extends PerlParserImpl implements MasonParser
+public class Mason2ParserImpl extends PerlParserImpl implements MasonParser
 {
 	protected static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(
 			PerlParserImpl.STATEMENT_RECOVERY_TOKENS,

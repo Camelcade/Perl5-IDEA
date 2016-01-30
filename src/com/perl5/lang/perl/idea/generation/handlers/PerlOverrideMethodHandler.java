@@ -96,7 +96,7 @@ public class PerlOverrideMethodHandler extends GeneratePackageMemberHandlerBase
 				return;
 			}
 
-			PerlCodeGenerator codeGenerator = ((PerlFile) file).getOverrideGenerator();
+			PerlCodeGenerator codeGenerator = ((PerlFile) file).getCodeGenerator();
 			StringBuilder generatedCode = new StringBuilder("");
 
 			if (chooser.getSelectedElements() != null)

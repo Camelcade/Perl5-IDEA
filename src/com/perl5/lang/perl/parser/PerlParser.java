@@ -32,6 +32,10 @@ public interface PerlParser extends PerlElementTypes
 			SEMICOLON
 	);
 
+	TokenSet NAMESPACE_CONTENT_RECOVERY_TOKENS = TokenSet.create(
+			RIGHT_BRACE
+	);
+
 	// stop tokens for statement recovery
 	TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,

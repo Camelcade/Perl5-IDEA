@@ -20,6 +20,7 @@ import com.intellij.codeInsight.CodeInsightActionHandler;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiDocumentManager;
@@ -101,6 +102,7 @@ public abstract class GeneratePackageMemberHandlerBase implements CodeInsightAct
 
 	protected void insertCodeAfterElement(PsiElement anchor, String code)
 	{
+		FileType fileType = anchor.getContainingFile().getFileType();
 		final PsiDocumentManager manager = PsiDocumentManager.getInstance(anchor.getProject());
 		final Document document = manager.getDocument(anchor.getContainingFile());
 
@@ -108,7 +110,7 @@ public abstract class GeneratePackageMemberHandlerBase implements CodeInsightAct
 		{
 			manager.doPostponedOperationsAndUnblockDocument(document);
 
-			PsiFile newFile = PerlElementFactory.createFile(anchor.getProject(), "\n" + code);
+			PsiFile newFile = PerlElementFactory.createFile(anchor.getProject(), "\n" + code, fileType);
 			PsiElement container = anchor.getParent();
 
 			if (newFile.getFirstChild() != null && newFile.getLastChild() != null)

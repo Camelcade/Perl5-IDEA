@@ -908,7 +908,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		assert b instanceof PerlBuilder;
 
-		if (!((PerlBuilder) b).isRecoveringStatement())
+		if (!((PerlBuilder) b).isRecovering())
 			((PerlBuilder) b).startRecovery();
 
 		IElementType currentTokenType = b.getTokenType();
@@ -933,6 +933,37 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		return true;
 	}
+
+
+	public static boolean recoverNamespaceContent(PsiBuilder b, int l)
+	{
+		assert b instanceof PerlBuilder;
+
+		if (!((PerlBuilder) b).isRecovering())
+			((PerlBuilder) b).startRecovery();
+
+		IElementType currentTokenType = b.getTokenType();
+
+//		System.err.println("Checking " + b.getTokenText() + currentTokenType);
+
+		if (currentTokenType == null                                                                                    // got end of file
+				|| ((PerlBuilder) b).getBracesLevel() == 0 && (                                                         // we are not in braced statement
+				((PerlBuilder) b).getPerlParser().getNamespaceContentRecoveryTokens().contains(currentTokenType)               // got semi, package, end of regex, use, compound or suffix
+		)
+				)
+		{
+			((PerlBuilder) b).stopRecovery();
+			return false;
+		}
+
+		if (currentTokenType == LEFT_BRACE)
+			((PerlBuilder) b).openBrace();
+		else if (currentTokenType == RIGHT_BRACE)
+			((PerlBuilder) b).closeBrace();
+
+		return true;
+	}
+
 
 	/**
 	 * Block recovery function. Should not consume token, only check;

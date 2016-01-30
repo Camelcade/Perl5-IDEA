@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
@@ -123,9 +124,15 @@ public class PerlElementFactory
 
 	public static PerlFileImpl createFile(Project project, String text)
 	{
+		return createFile(project, text, PerlFileTypePackage.INSTANCE);
+	}
+
+	public static PerlFileImpl createFile(Project project, String text, FileType fileType)
+	{
 		String fileName = "file.dummy";
 		return (PerlFileImpl) PsiFileFactory.getInstance(project).
-				createFileFromText(fileName, PerlFileTypePackage.INSTANCE, text);
+				createFileFromText(fileName, fileType, text);
 	}
+
 
 }

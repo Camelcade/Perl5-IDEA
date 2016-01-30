@@ -20,6 +20,8 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.perl5.lang.mason2.MasonTemplatingLanguage;
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
+import com.perl5.lang.mason2.idea.generation.Mason2TemplatingCodeGeneratorImpl;
+import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -42,5 +44,11 @@ public class MasonTemplatingFileImpl extends MasonFileImpl
 	protected FileType getDefaultFileType()
 	{
 		return MasonTopLevelComponentFileType.INSTANCE;
+	}
+
+	@Override
+	public PerlCodeGenerator getCodeGenerator()
+	{
+		return Mason2TemplatingCodeGeneratorImpl.INSTANCE;
 	}
 }

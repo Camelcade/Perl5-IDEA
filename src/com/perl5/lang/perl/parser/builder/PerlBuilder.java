@@ -143,7 +143,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		recoveringStatement = false;
 	}
 
-	public boolean isRecoveringStatement()
+	public boolean isRecovering()
 	{
 		return recoveringStatement;
 	}

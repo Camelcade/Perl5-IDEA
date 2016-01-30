@@ -623,7 +623,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	}
 
 	@Override
-	public PerlCodeGenerator getOverrideGenerator()
+	public PerlCodeGenerator getCodeGenerator()
 	{
 		return PerlCodeGeneratorImpl.INSTANCE;
 	}

@@ -28,7 +28,7 @@ import com.perl5.lang.mason2.elementType.MasonFileElementType;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
-import com.perl5.lang.perl.parser.MasonParserImpl;
+import com.perl5.lang.perl.parser.Mason2ParserImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -73,6 +73,6 @@ public class MasonParserDefinition extends PerlParserDefinition implements Mason
 	@Override
 	public PsiParser createParser(Project project)
 	{
-		return new MasonParserImpl();
+		return new Mason2ParserImpl();
 	}
 }

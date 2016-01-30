@@ -25,7 +25,7 @@ import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.mason2.elementType.MasonFileElementType;
 import com.perl5.lang.mason2.lexer.MasonTemplatingLexerAdapter;
 import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
-import com.perl5.lang.perl.parser.MasonTemplatingParserImpl;
+import com.perl5.lang.perl.parser.MasonTemplating2ParserImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -52,7 +52,7 @@ public class MasonTemplatingParserDefinition extends MasonParserDefinition
 	@Override
 	public PsiParser createParser(Project project)
 	{
-		return new MasonTemplatingParserImpl();
+		return new MasonTemplating2ParserImpl();
 	}
 
 	@Override

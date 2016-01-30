@@ -90,6 +90,12 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 	}
 
 	@NotNull
+	public TokenSet getNamespaceContentRecoveryTokens()
+	{
+		return NAMESPACE_CONTENT_RECOVERY_TOKENS;
+	}
+
+	@NotNull
 	public TokenSet getBlockRecoveryTokens()
 	{
 		return BLOCK_RECOVERY_TOKENS;

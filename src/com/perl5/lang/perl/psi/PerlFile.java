@@ -111,5 +111,5 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 *
 	 * @return override generator
 	 */
-	PerlCodeGenerator getOverrideGenerator();
+	PerlCodeGenerator getCodeGenerator();
 }
