@@ -570,12 +570,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			{
 				boolean processSubclasses = true;
 
-				for (PerlSubBase subBase : PsiTreeUtil.findChildrenOfType(childNamespace, PerlSubBase.class))
+				for (PsiElement subBase : childNamespace.getDeclaredSubs())
 				{
-					if (childNamespace.equals(PsiTreeUtil.getParentOfType(subBase, PerlNamespaceDefinition.class)))
-					{
-						processSubclasses = processor.process(subBase);
-					}
+					processSubclasses = processor.process((PerlSubBase) subBase);
 				}
 
 				if (processSubclasses)

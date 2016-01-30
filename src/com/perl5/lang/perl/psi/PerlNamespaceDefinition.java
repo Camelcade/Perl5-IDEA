@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
@@ -98,4 +99,11 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 */
 	@NotNull
 	List<String> getParentNamepsacesNames();
+
+	/**
+	 * Returns list of subs declared in this namespace
+	 *
+	 * @return list of PsiElements
+	 */
+	List<PsiElement> getDeclaredSubs();
 }
