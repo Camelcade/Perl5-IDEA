@@ -43,4 +43,21 @@ public interface PerlCodeGenerator
 	String getMethodModifierCodeText(PsiElement subBase, String modifierType);
 
 
+	/**
+	 * Generating and inserting overriden method
+	 *
+	 * @param anchor element to insert method after
+	 */
+	void generateOverrideMethod(PsiElement anchor);
+
+	void generateSetters(PsiElement anchor);
+
+	void generateGetters(PsiElement anchor);
+
+	void generateGettersAndSetters(PsiElement anchor);
+
+	void generateConstructor(PsiElement anchor);
+
+
+
 }

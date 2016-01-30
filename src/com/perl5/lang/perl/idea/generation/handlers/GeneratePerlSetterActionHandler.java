@@ -16,41 +16,20 @@
 
 package com.perl5.lang.perl.idea.generation.handlers;
 
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.psi.PerlFile;
 
 /**
  * Created by hurricup on 11.10.2015.
  */
-public class GeneratePerlSetterActionHandler extends GeneratePerlGetterSetterActionHandlerBase
+public class GeneratePerlSetterActionHandler extends GeneratePerlClassMemberHandlerBase
 {
-	public static String getSetterCode(String name)
-	{
-		return "sub set_" + name + "\n" +
-				"{\n" +
-				"	my ($self, $new_value) = @_;\n" +
-				"	$$self{" + name + "} = $new_value;\n" +
-				"	return $self;\n" +
-				"}\n";
-	}
-
-
-	@NotNull
 	@Override
-	protected String getCode(String name)
+	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		return getSetterCode(name);
-	}
+		((PerlFile) file).getCodeGenerator().generateSetters(anchor);
 
-	@Override
-	protected String getPromtText()
-	{
-		return "Type comma-separated setters names:";
 	}
-
-	@Override
-	protected String getPromtTitle()
-	{
-		return "Generating Setters";
-	}
-
 }

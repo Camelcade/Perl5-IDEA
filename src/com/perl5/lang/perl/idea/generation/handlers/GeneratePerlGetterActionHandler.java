@@ -16,38 +16,19 @@
 
 package com.perl5.lang.perl.idea.generation.handlers;
 
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.psi.PerlFile;
 
 /**
  * Created by hurricup on 11.10.2015.
  */
-public class GeneratePerlGetterActionHandler extends GeneratePerlGetterSetterActionHandlerBase
+public class GeneratePerlGetterActionHandler extends GeneratePerlClassMemberHandlerBase
 {
-	public static String getGetterCode(String name)
-	{
-		return "sub get_" + name + "\n" +
-				"{\n" +
-				"	my $self = shift;\n" +
-				"	return $$self{" + name + "};\n" +
-				"}\n";
-	}
-
-	@NotNull
 	@Override
-	protected String getCode(String name)
+	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		return getGetterCode(name);
-	}
-
-	@Override
-	protected String getPromtText()
-	{
-		return "Type comma-separated getters names:";
-	}
-
-	@Override
-	protected String getPromtTitle()
-	{
-		return "Generating Getters";
+		((PerlFile) file).getCodeGenerator().generateGetters(anchor);
 	}
 }

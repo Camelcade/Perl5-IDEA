@@ -16,17 +16,39 @@
 
 package com.perl5.lang.perl.extensions.generation;
 
+import com.intellij.ide.IdeBundle;
+import com.intellij.ide.util.MemberChooser;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.ui.SpeedSearchComparator;
+import com.intellij.util.Processor;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
+import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlMethodDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 30.01.2016.
@@ -34,6 +56,36 @@ import java.util.List;
 public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 {
 	public static final PerlCodeGenerator INSTANCE = new PerlCodeGeneratorImpl();
+
+	public static String getGetterCode(String name)
+	{
+		return "sub get_" + name + "\n" +
+				"{\n" +
+				"	my $self = shift;\n" +
+				"	return $$self{" + name + "};\n" +
+				"}\n";
+	}
+
+	public static String getSetterCode(String name)
+	{
+		return "sub set_" + name + "\n" +
+				"{\n" +
+				"	my ($self, $new_value) = @_;\n" +
+				"	$$self{" + name + "} = $new_value;\n" +
+				"	return $self;\n" +
+				"}\n";
+	}
+
+	public static String getConstructorCode()
+	{
+		return "\n" +
+				"sub new\n" +
+				"{\n" +
+				"	my ($proto) = @_;\n" +
+				"	my $self = bless {}, $proto;\n" +
+				"	return $self;\n" +
+				"}\n\n";
+	}
 
 	@Nullable
 	@Override
@@ -69,6 +121,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			code.append(perlSubBase.getSubName());
 			code.append("{\n");
 
+			List<String> superArgs = new ArrayList<String>();
+
 			if (perlSubBase instanceof PerlSubDefinitionBase)
 			{
 				List<PerlSubArgument> arguments = ((PerlSubDefinitionBase) perlSubBase).getSubArgumentsList();
@@ -93,8 +147,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 							code.append("my ");
 							code.append(argument.getVariableClass());
 							code.append(" ");
-							code.append(argument.getArgumentType().getSigil());
-							code.append(argument.getArgumentName());
+							String superArg = argument.getArgumentType().getSigil() + argument.getArgumentName();
+							superArgs.add(superArg);
+							code.append(superArg);
 							code.append(" = shift;\n");
 						}
 					}
@@ -114,8 +169,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 								insertComma = true;
 							}
 
-							code.append(argument.getArgumentType().getSigil());
-							code.append(argument.getArgumentName());
+							String superArg = argument.getArgumentType().getSigil() + argument.getArgumentName();
+							superArgs.add(superArg);
+							code.append(superArg);
 						}
 						code.append(") = @_;\n");
 					}
@@ -126,6 +182,10 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 				}
 			}
 
+			if (superArgs.size() > 0)
+				superArgs.remove(0);
+
+			code.append("$self->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
 			code.append("}");
 			return code.toString();
 		}
@@ -138,4 +198,170 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 	{
 		return null;
 	}
+
+	public void generateOverrideMethod(PsiElement anchor)
+	{
+		if (anchor != null)
+		{
+			final List<PerlMethodMember> subDefinitions = new ArrayList<PerlMethodMember>();
+
+			PerlPackageUtil.processNotOverridedMethods(
+					PsiTreeUtil.getParentOfType(anchor, PerlNamespaceDefinition.class),
+					new Processor<PerlSubDefinitionBase>()
+					{
+						@Override
+						public boolean process(PerlSubDefinitionBase subDefinitionBase)
+						{
+							subDefinitions.add(new PerlMethodMember(subDefinitionBase));
+							return true;
+						}
+					}
+			);
+
+			final MemberChooser<PerlMethodMember> chooser =
+					new MemberChooser<PerlMethodMember>(subDefinitions.toArray(new PerlMethodMember[subDefinitions.size()]), false, true, anchor.getProject())
+					{
+						@Override
+						protected SpeedSearchComparator getSpeedSearchComparator()
+						{
+							return new SpeedSearchComparator(false)
+							{
+								@Nullable
+								@Override
+								public Iterable<TextRange> matchingFragments(String pattern, String text)
+								{
+									return super.matchingFragments(PerlMethodMember.trimUnderscores(pattern), text);
+								}
+							};
+						}
+
+						@Override
+						protected ShowContainersAction getShowContainersAction()
+						{
+							return new ShowContainersAction(IdeBundle.message("action.show.classes"), PerlIcons.PACKAGE_GUTTER_ICON);
+						}
+					};
+
+			chooser.setTitle("Override/Implement Method");
+			chooser.setCopyJavadocVisible(false);
+			chooser.show();
+			if (chooser.getExitCode() != DialogWrapper.OK_EXIT_CODE)
+			{
+				return;
+			}
+
+			StringBuilder generatedCode = new StringBuilder("");
+
+			if (chooser.getSelectedElements() != null)
+			{
+				for (PerlMethodMember methodMember : chooser.getSelectedElements())
+				{
+					String code = getOverrideCodeText(methodMember.getPsiElement());
+					if (StringUtil.isNotEmpty(code))
+					{
+						generatedCode.append(code);
+						generatedCode.append("\n\n");
+					}
+				}
+
+				insertCodeAfterElement(anchor, generatedCode.toString());
+			}
+		}
+	}
+
+	@Override
+	public void generateSetters(PsiElement anchor)
+	{
+		StringBuilder code = new StringBuilder();
+
+		for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated setters names:", "Generating Setters"))
+		{
+			code.append(getSetterCode(name));
+		}
+
+		if (code.length() > 0)
+			insertCodeAfterElement(anchor, code.toString());
+	}
+
+	@Override
+	public void generateGetters(PsiElement anchor)
+	{
+		StringBuilder code = new StringBuilder();
+
+		for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated getters names:", "Generating Getters"))
+		{
+			code.append(getGetterCode(name));
+		}
+
+		if (code.length() > 0)
+			insertCodeAfterElement(anchor, code.toString());
+	}
+
+	@Override
+	public void generateGettersAndSetters(PsiElement anchor)
+	{
+		StringBuilder code = new StringBuilder();
+
+		for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated accessors names:", "Generating Getters and Setters"))
+		{
+			code.append(getGetterCode(name));
+			code.append(getSetterCode(name));
+		}
+
+		if (code.length() > 0)
+			insertCodeAfterElement(anchor, code.toString());
+	}
+
+	@Override
+	public void generateConstructor(PsiElement anchor)
+	{
+		insertCodeAfterElement(anchor, getConstructorCode());
+
+	}
+
+	protected List<String> askFieldsNames(
+			Project project,
+			String promptText,
+			String promptTitle
+	)
+	{
+		Set<String> result = new THashSet<String>();
+		String name = Messages.showInputDialog(project, promptText, promptTitle, Messages.getQuestionIcon(), "", null);
+
+		if (!StringUtil.isEmpty(name))
+		{
+
+			for (String nameChunk : name.split("[ ,]+"))
+			{
+				if (!nameChunk.isEmpty() && PerlLexer.IDENTIFIER_PATTERN.matcher(nameChunk).matches())
+				{
+					result.add(nameChunk);
+				}
+			}
+		}
+		return new ArrayList<String>(result);
+	}
+
+	protected void insertCodeAfterElement(PsiElement anchor, String code)
+	{
+		FileType fileType = anchor.getContainingFile().getFileType();
+		final PsiDocumentManager manager = PsiDocumentManager.getInstance(anchor.getProject());
+		final Document document = manager.getDocument(anchor.getContainingFile());
+
+		if (code.length() > 0 && document != null)
+		{
+			manager.doPostponedOperationsAndUnblockDocument(document);
+
+			PsiFile newFile = PerlElementFactory.createFile(anchor.getProject(), "\n" + code, fileType);
+			PsiElement container = anchor.getParent();
+
+			if (newFile.getFirstChild() != null && newFile.getLastChild() != null)
+			{
+				container.addRangeAfter(newFile.getFirstChild(), newFile.getLastChild(), anchor);
+			}
+
+			manager.commitDocument(document);
+		}
+	}
+
 }

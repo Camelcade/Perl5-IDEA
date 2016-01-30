@@ -19,28 +19,16 @@ package com.perl5.lang.perl.idea.generation.handlers;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlFile;
 
 /**
  * Created by hurricup on 11.10.2015.
  */
-public class GeneratePerlConstructorActionHandler extends GeneratePackageMemberHandlerBase implements PerlElementTypes
+public class GeneratePerlConstructorActionHandler extends GeneratePerlClassMemberHandlerBase
 {
-	public static String getCode()
-	{
-		return "\n" +
-				"sub new\n" +
-				"{\n" +
-				"	my ($proto) = @_;\n" +
-				"	my $self = bless {}, $proto;\n" +
-				"	return $self;\n" +
-				"}\n\n";
-	}
-
 	@Override
 	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		insertCodeAfterElement(anchor, getCode());
-
+		((PerlFile) file).getCodeGenerator().generateConstructor(anchor);
 	}
 }

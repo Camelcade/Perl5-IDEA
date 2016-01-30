@@ -39,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNameElement
 {
 	protected final PsiReference[] myReferences = new PsiReference[]{
-			new PerlSubReference(this, null),
+			new PerlSubReference(this, null)
 	};
 
 	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text)
@@ -83,13 +83,17 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public PsiReference[] getReferences()
 	{
+		if (!myReferences[0].getElement().equals(this))
+		{
+			myReferences[0] = new PerlSubReference(this, null);
+		}
 		return myReferences; //(PsiReference[]) ArrayUtils.addAll(, ReferenceProvidersRegistry.getReferencesFromProviders(this));
 	}
 
 	@Override
 	public PsiReference getReference()
 	{
-		return myReferences[0];
+		return getReferences()[0];
 	}
 
 	@Override

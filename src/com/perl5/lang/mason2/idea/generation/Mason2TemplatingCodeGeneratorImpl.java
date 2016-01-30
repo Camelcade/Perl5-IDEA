@@ -17,9 +17,9 @@
 package com.perl5.lang.mason2.idea.generation;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.mason2.MasonTemplatingLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 30.01.2016.
@@ -28,19 +28,17 @@ public class Mason2TemplatingCodeGeneratorImpl extends PerlCodeGeneratorImpl
 {
 	public static PerlCodeGenerator INSTANCE = new Mason2TemplatingCodeGeneratorImpl();
 
-	@Nullable
+
 	@Override
-	public String getOverrideCodeText(PsiElement subBase)
+	protected void insertCodeAfterElement(PsiElement anchor, String code)
 	{
-		String original = super.getOverrideCodeText(subBase);
-		return original == null ? null : "<%perl>\n" + original + "\n</%perl>\n";
+		if (code == null)
+			return;
+
+		if (anchor.getLanguage() == MasonTemplatingLanguage.INSTANCE)
+			code = "<%perl>\n" + code + "\n</%perl>\n";
+
+		super.insertCodeAfterElement(anchor, code);
 	}
 
-	@Nullable
-	@Override
-	public String getMethodModifierCodeText(PsiElement subBase, String modifierType)
-	{
-		String original = super.getMethodModifierCodeText(subBase, modifierType);
-		return original == null ? null : "<%perl>\n" + original + "\n</%perl>\n";
-	}
 }

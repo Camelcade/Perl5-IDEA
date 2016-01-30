@@ -18,12 +18,9 @@ package com.perl5.lang.perl.idea.generation.handlers;
 
 import com.intellij.codeInsight.CodeInsightActionHandler;
 import com.intellij.openapi.editor.Caret;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -31,13 +28,12 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 11.10.2015.
  */
-public abstract class GeneratePackageMemberHandlerBase implements CodeInsightActionHandler, PerlElementTypes
+public abstract class GeneratePerlClassMemberHandlerBase implements CodeInsightActionHandler, PerlElementTypes
 {
 	@Override
 	public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file)
@@ -77,7 +73,6 @@ public abstract class GeneratePackageMemberHandlerBase implements CodeInsightAct
 
 	protected abstract void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file);
 
-
 	protected PsiElement getCurrentElement(Editor editor, PsiFile file)
 	{
 		Caret currentCaret = editor.getCaretModel().getCurrentCaret();
@@ -100,25 +95,4 @@ public abstract class GeneratePackageMemberHandlerBase implements CodeInsightAct
 		return true;
 	}
 
-	protected void insertCodeAfterElement(PsiElement anchor, String code)
-	{
-		FileType fileType = anchor.getContainingFile().getFileType();
-		final PsiDocumentManager manager = PsiDocumentManager.getInstance(anchor.getProject());
-		final Document document = manager.getDocument(anchor.getContainingFile());
-
-		if (code.length() > 0 && document != null)
-		{
-			manager.doPostponedOperationsAndUnblockDocument(document);
-
-			PsiFile newFile = PerlElementFactory.createFile(anchor.getProject(), "\n" + code, fileType);
-			PsiElement container = anchor.getParent();
-
-			if (newFile.getFirstChild() != null && newFile.getLastChild() != null)
-			{
-				container.addRangeAfter(newFile.getFirstChild(), newFile.getLastChild(), anchor);
-			}
-
-			manager.commitDocument(document);
-		}
-	}
 }
