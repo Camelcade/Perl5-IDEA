@@ -110,7 +110,7 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 			{
 				arguments.add(new PerlSubArgument(
 						PerlVariableType.SCALAR,
-						getDefaultInvocantName(),
+						getDefaultInvocantName().substring(1),
 						"",    // here we could push context package, but now it's unnecessary
 						false
 				));

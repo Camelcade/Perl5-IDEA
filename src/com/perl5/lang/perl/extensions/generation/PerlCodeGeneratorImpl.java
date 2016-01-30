@@ -19,8 +19,9 @@ package com.perl5.lang.perl.extensions.generation;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
+import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.Nullable;
@@ -53,7 +54,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			{
 				code.append("#@abstract\n");
 			}
-			if (annotations.isMethod())
+			if (annotations.isMethod() || subBase instanceof PerlMethodDefinition)
 			{
 				code.append("#@method\n");
 			}
@@ -68,9 +69,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			code.append(perlSubBase.getSubName());
 			code.append("{\n");
 
-			if (perlSubBase instanceof PerlSubDefinition)
+			if (perlSubBase instanceof PerlSubDefinitionBase)
 			{
-				List<PerlSubArgument> arguments = ((PerlSubDefinition) perlSubBase).getSubArgumentsList();
+				List<PerlSubArgument> arguments = ((PerlSubDefinitionBase) perlSubBase).getSubArgumentsList();
 
 				if (arguments.size() > 0)
 				{
@@ -118,6 +119,10 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 						}
 						code.append(") = @_;\n");
 					}
+				}
+				else
+				{
+					code.append("my ($self) = @_;\n");
 				}
 			}
 

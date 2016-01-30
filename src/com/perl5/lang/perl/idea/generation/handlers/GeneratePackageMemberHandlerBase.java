@@ -56,7 +56,9 @@ public abstract class GeneratePackageMemberHandlerBase implements CodeInsightAct
 			if (parent instanceof PsiPerlNamespaceContent || parent instanceof PsiPerlBlock && parent.getParent() instanceof PerlNamespaceDefinition)
 			{
 				while (currentElement != null && (currentElement instanceof PsiComment || currentElement instanceof PerlHeredocElementImpl))
+				{
 					currentElement = currentElement.getNextSibling();
+				}
 
 				if (currentElement != null)
 				{
