@@ -134,7 +134,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 
 	@Nullable
 	@Override
-	public String getMethodModifierCodeText(PsiElement subBase)
+	public String getMethodModifierCodeText(PsiElement subBase, String modifierType)
 	{
 		return null;
 	}

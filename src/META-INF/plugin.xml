@@ -203,7 +203,7 @@
 
 
         <codeInsight.lineMarkerProvider language="Perl5"
-                                        implementationClass="com.perl5.lang.perl.idea.PerlLineMarkerProvider"/>
+                                        implementationClass="com.perl5.lang.perl.idea.navigation.PerlLineMarkerProvider"/>
 
         <createFromTemplateHandler
                 implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFromTemplateHandler"/>
@@ -270,7 +270,7 @@
         <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGotoVariableContributor"/>
 
 
-        <gotoDeclarationHandler implementation="com.perl5.lang.perl.idea.PerlGotoDeclarationHandler"/>
+        <gotoDeclarationHandler implementation="com.perl5.lang.perl.idea.navigation.PerlGotoDeclarationHandler"/>
         <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
 
         <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>

@@ -40,7 +40,7 @@ public interface PerlCodeGenerator
 	 * @return generated code
 	 */
 	@Nullable
-	String getMethodModifierCodeText(PsiElement subBase);
+	String getMethodModifierCodeText(PsiElement subBase, String modifierType);
 
 
 }

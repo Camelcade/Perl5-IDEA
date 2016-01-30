@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea;
+package com.perl5.lang.perl.idea.navigation;
 
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
@@ -44,8 +44,12 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 	@Override
 	protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result)
 	{
-		if (element instanceof PerlNamespaceDefinition)
+		if (element instanceof PerlNamespaceDefinition && ((PerlNamespaceDefinition) element).getNameIdentifier() != null)
 		{
+			PsiElement nameIdentifier = ((PerlNamespaceDefinition) element).getNameIdentifier();
+			if (nameIdentifier == null)
+				nameIdentifier = element;
+
 			List<PerlNamespaceDefinition> parentNamespaces = ((PerlNamespaceDefinition) element).getParentNamespaceDefinitions();
 			if (parentNamespaces.size() > 0)
 			{
@@ -54,7 +58,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 						.setTargets(parentNamespaces)
 						.setTooltipText("Parent classes");
 
-				result.add(builder.createLineMarkerInfo(element));
+				result.add(builder.createLineMarkerInfo(nameIdentifier));
 			}
 
 			Collection<PerlNamespaceDefinition> childNamespaces = ((PerlNamespaceDefinition) element).getChildNamespaceDefinitions();
@@ -65,7 +69,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 						.setTargets(childNamespaces)
 						.setTooltipText("Subclasses");
 
-				result.add(builder.createLineMarkerInfo(element));
+				result.add(builder.createLineMarkerInfo(nameIdentifier));
 			}
 
 		}
@@ -76,6 +80,9 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 			{
 				final String packageName = ((PerlSubDefinitionBase) element).getPackageName();
 				final String subName = ((PerlSubDefinitionBase) element).getSubName();
+				PsiElement nameIdentifier = ((PerlSubDefinitionBase) element).getNameIdentifier();
+				if (nameIdentifier == null)
+					nameIdentifier = element;
 
 				if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName))
 				{
@@ -92,7 +99,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 								.setTargets(superMethods)
 								.setTooltipText("Overriding method");
 
-						result.add(builder.createLineMarkerInfo(element));
+						result.add(builder.createLineMarkerInfo(nameIdentifier));
 					}
 
 
@@ -120,7 +127,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 								.setTargets(overridingSubs)
 								.setTooltipText("Overriden methods");
 
-						result.add(builder.createLineMarkerInfo(element));
+						result.add(builder.createLineMarkerInfo(nameIdentifier));
 					}
 				}
 			}
