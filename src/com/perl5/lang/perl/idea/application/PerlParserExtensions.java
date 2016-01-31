@@ -45,7 +45,7 @@ public class PerlParserExtensions implements ApplicationComponent
 	{
 		PerlParserDefinition.PARSER_EXTENSIONS.clear();
 		PerlLexer.initReservedTokensMap();
-		for (PerlParserExtension extension : PerlParserExtension.PERL_PARSER_EXTENSION_EP.getExtensions())
+		for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensions())
 		{
 			// register extension
 			PerlParserDefinition.PARSER_EXTENSIONS.add(extension);
@@ -53,6 +53,10 @@ public class PerlParserExtensions implements ApplicationComponent
 			// add tokens to lex
 			Map<String, IElementType> customTokens = extension.getCustomTokensMap();
 			PerlLexer.CUSTOM_TOKEN_TYPES.putAll(customTokens);
+
+			// add regex prefix tokenset
+			if( extension.getRegexPrefixTokenSet() != null )
+				PerlLexer.BARE_REGEX_PREFIX_TOKENSET = TokenSet.orSet(PerlLexer.BARE_REGEX_PREFIX_TOKENSET, extension.getRegexPrefixTokenSet());
 
 			// add tokens to fallback set
 			Collection<IElementType> tokensList = customTokens.values();

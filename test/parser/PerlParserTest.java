@@ -20,9 +20,9 @@ import com.intellij.core.CoreApplicationEnvironment;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.testFramework.ParsingTestCase;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
 
+import java.io.File;
 import java.util.regex.Pattern;
 
 /**
@@ -69,6 +69,16 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("variables.pl");
 	}
 
+	public void testMethodSignaturesSimple()
+	{
+		doTest("method_signatures_simple.pl");
+	}
+
+	public void testSwitch()
+	{
+		doTest("perl_switch.pl");
+	}
+
 	public void doTest(String filename)
 	{
 		myFileName = filename;
@@ -95,7 +105,7 @@ public class PerlParserTest extends ParsingTestCase
 	@Override
 	protected boolean skipSpaces()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -103,7 +113,7 @@ public class PerlParserTest extends ParsingTestCase
 	{
 		super.setUp();
 
-		CoreApplicationEnvironment.registerExtensionPoint(Extensions.getRootArea(), "com.perl5.parserExtension", PerlParserExtension.class);
+		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("src"), "plugin.xml", Extensions.getRootArea());
 		new PerlParserExtensions().initComponent();
 	}
 }

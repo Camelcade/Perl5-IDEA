@@ -272,23 +272,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Map<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> tagNames = new HashMap<String, IElementType>();
-	// tokens that preceeds regexp opener or file <FH>
-	public static final TokenSet TERM_PREFIX =
-			TokenSet.andNot(
-					TokenSet.orSet(
-							OPERATORS_TOKENSET
-							, TokenSet.create(
-									SEMICOLON,
-									COLON,
-									LEFT_PAREN,
-									LEFT_BRACE,
-									LEFT_BRACKET
-							)),
-					TokenSet.create(
-							OPERATOR_PLUS_PLUS,
-							OPERATOR_MINUS_MINUS
-					)
-			);
 	static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
 			"eq",
 			"ne",
@@ -307,6 +290,23 @@ public class PerlLexer extends PerlLexerGenerated
 			"s",
 			"y"
 	));
+	// tokens that preceeds regexp opener or file <FH>
+	public static TokenSet BARE_REGEX_PREFIX_TOKENSET =
+			TokenSet.andNot(
+					TokenSet.orSet(
+							OPERATORS_TOKENSET
+							, TokenSet.create(
+									SEMICOLON,
+									COLON,
+									LEFT_PAREN,
+									LEFT_BRACE,
+									LEFT_BRACKET
+							)),
+					TokenSet.create(
+							OPERATOR_PLUS_PLUS,
+							OPERATOR_MINUS_MINUS
+					)
+			);
 	public static TokenSet RESERVED_TOKENSET;
 	public static TokenSet CUSTOM_TOKENSET;
 
@@ -394,7 +394,7 @@ public class PerlLexer extends PerlLexerGenerated
 		myProject = project;
 	}
 
-	public static final void initReservedTokensMap()
+	public static void initReservedTokensMap()
 	{
 		RESERVED_TOKEN_TYPES.clear();
 		// reserved
@@ -1159,7 +1159,7 @@ public class PerlLexer extends PerlLexerGenerated
 		IElementType lastUnbracedTokenType = tokenHistory.getLastUnbracedTokenType();
 		IElementType lastSignificantTokenType = tokenHistory.getLastSignificantTokenType();
 
-		boolean isTermPrefix = TERM_PREFIX.contains(lastSignificantTokenType);
+		boolean isTermPrefix = BARE_REGEX_PREFIX_TOKENSET.contains(lastSignificantTokenType);
 		if (lastSignificantTokenType == OPERATOR_CONCAT)
 		{
 			PerlTokenHistory.PerlTokenHistoryElement prevElement = tokenHistory.getPreviousToken(tokenHistory.getLastSignificantToken());

@@ -33,7 +33,7 @@ import java.util.Map;
  */
 public abstract class PerlParserExtension
 {
-	public static final ExtensionPointName<PerlParserExtension> PERL_PARSER_EXTENSION_EP = ExtensionPointName.create("com.perl5.parserExtension");
+	public static final ExtensionPointName<PerlParserExtension> EP_NAME = ExtensionPointName.create("com.perl5.parserExtension");
 
 	/**
 	 * Returns a set of keywords and element types to lex.
@@ -55,6 +55,17 @@ public abstract class PerlParserExtension
 	 */
 	@Nullable
 	public List<Pair<IElementType, TokenSet>> getExtensionSets()
+	{
+		return null;
+	}
+
+	/**
+	 * Returns tokenset, containing bare regex prefixesj like =~ or case
+	 *
+	 * @return list of pairs to extend
+	 */
+	@Nullable
+	public TokenSet getRegexPrefixTokenSet()
 	{
 		return null;
 	}

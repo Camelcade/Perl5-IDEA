@@ -24,6 +24,7 @@ import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -33,6 +34,9 @@ import java.util.Map;
 public class PerlSwitchPerlParserExtensionImpl extends PerlParserExtension implements PerlSwitchElementTypes, PerlElementTypes
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
+	protected static final TokenSet BARE_REGEX_PREFIX_TOKEN_SET = TokenSet.create(
+			RESERVED_CASE
+	);
 	protected static TokenSet TOKENS_SET;
 
 	static
@@ -191,5 +195,10 @@ public class PerlSwitchPerlParserExtensionImpl extends PerlParserExtension imple
 		return false;
 	}
 
-
+	@Nullable
+	@Override
+	public TokenSet getRegexPrefixTokenSet()
+	{
+		return BARE_REGEX_PREFIX_TOKEN_SET;
+	}
 }
