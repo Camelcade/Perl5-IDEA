@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.Nullable;
@@ -27,7 +28,7 @@ import java.util.List;
 /**
  * Created by hurricup on 11.11.2015.
  */
-public interface PerlSubDefinitionBase<Stub extends StubElement> extends PerlSubBase<Stub>, PerlLexicalScope
+public interface PerlSubDefinitionBase<Stub extends StubElement> extends PerlSubBase<Stub>, PerlLexicalScope, PerlElementPatterns
 {
 
 	/**

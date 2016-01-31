@@ -28,6 +28,7 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -154,61 +155,81 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 		{
 			for (PsiElement statement : subBlock.getChildren())
 			{
-				PsiPerlAssignExpr assignExpression = PsiTreeUtil.findChildOfType(statement, PsiPerlAssignExpr.class);
-				if (assignExpression != null)
+				if (EMPTY_SHIFT_STATEMENT.accepts(statement))
 				{
-					Collection<PsiPerlExpr> assignTerms = assignExpression.getExprList();
-					assert assignTerms instanceof SmartList;
-					if (assignTerms.size() == 2)
+					arguments.add(
+							new PerlSubArgument(
+									PerlVariableType.SCALAR,
+									"",
+									"",
+									false
+							)
+					);
+				}
+				else
+				{
+					PsiPerlAssignExpr assignExpression = PsiTreeUtil.findChildOfType(statement, PsiPerlAssignExpr.class);
+					if (assignExpression != null)
 					{
-						// fixme need to implement things in assignExpr
-						PsiPerlExpr leftTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(0);
-						PsiPerlExpr rightTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(1);
-
-						if (leftTerm instanceof PsiPerlVariableDeclarationLexical)
+						Collection<PsiPerlExpr> assignTerms = assignExpression.getExprList();
+						assert assignTerms instanceof SmartList;
+						if (assignTerms.size() == 2)
 						{
-							PsiPerlVariableDeclarationLexical declaration = (PsiPerlVariableDeclarationLexical) leftTerm;
-							PerlNamespaceElement variableClass = declaration.getNamespaceElement();
-							String definitionClassName = "";
-							if (variableClass != null)
-								definitionClassName = variableClass.getCanonicalName();
+							// fixme need to implement things in assignExpr
+							PsiPerlExpr leftTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(0);
+							PsiPerlExpr rightTerm = (PsiPerlExpr) ((SmartList) assignTerms).get(1);
 
-							if ("@_".equals(rightTerm.getText()))
+							if (leftTerm instanceof PsiPerlVariableDeclarationLexical)
 							{
-								for (PerlVariable variable : PsiTreeUtil.findChildrenOfType(declaration, PerlVariable.class))
+								PsiPerlVariableDeclarationLexical declaration = (PsiPerlVariableDeclarationLexical) leftTerm;
+								PerlNamespaceElement variableClass = declaration.getNamespaceElement();
+								String definitionClassName = "";
+								if (variableClass != null)
+									definitionClassName = variableClass.getCanonicalName();
+
+								if ("@_".equals(rightTerm.getText()))
 								{
-									PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
+									for (PerlVariable variable : PsiTreeUtil.findChildrenOfType(declaration, PerlVariable.class))
+									{
+										PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
-									if (variableNameElement != null)
-										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, false));
+										if (variableNameElement != null)
+											arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, false));
+									}
+									break;
+
 								}
-								break;
+								else if ("shift".equals(rightTerm.getText()))
+								{
+									PerlVariable variable = PsiTreeUtil.findChildOfType(declaration, PerlVariable.class);
 
+									if (variable != null)
+									{
+										PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
+
+										if (variableNameElement != null)
+											arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, false));
+									}
+								}
 							}
-							else if ("shift".equals(rightTerm.getText()))
+							else
 							{
-								PerlVariable variable = PsiTreeUtil.findChildOfType(declaration, PerlVariable.class);
-
-								if (variable != null)
-								{
-									PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
-
-									if (variableNameElement != null)
-										arguments.add(new PerlSubArgument(variable.getActualType(), variableNameElement.getName(), definitionClassName, false));
-								}
+								// todo dunno what can else be here
+								break;
 							}
 						}
 						else
-							// todo dunno what can else be here
+						{
+							// todo dunno how to handle this yet like my $scalar = my $something = shift;
 							break;
+						}
 					}
 					else
-						// todo dunno how to handle this yet like my $scalar = my $something = shift;
+					{
+						// not an assignment here
 						break;
+					}
 				}
-				else
-					// not an assignment here
-					break;
 			}
 		}
 
@@ -271,8 +292,9 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 		return false;
 	}
 
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof PerlVisitor) ((PerlVisitor)visitor).visitSubDefinitionBase(this);
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitSubDefinitionBase(this);
 		else super.accept(visitor);
 	}
 

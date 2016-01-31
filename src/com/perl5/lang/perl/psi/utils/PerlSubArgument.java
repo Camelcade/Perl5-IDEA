@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
@@ -79,7 +80,7 @@ public class PerlSubArgument
 
 	public String toStringShort()
 	{
-		return argumentType.getSigil() + argumentName;
+		return StringUtil.isNotEmpty(argumentName) ? argumentType.getSigil() + argumentName : "undef";
 	}
 
 	public void serialize(@NotNull StubOutputStream dataStream) throws IOException

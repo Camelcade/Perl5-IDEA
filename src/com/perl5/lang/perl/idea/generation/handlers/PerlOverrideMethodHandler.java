@@ -29,6 +29,6 @@ public class PerlOverrideMethodHandler extends GeneratePerlClassMemberHandlerBas
 	@Override
 	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		((PerlFile) file).getCodeGenerator().generateOverrideMethod(anchor);
+		((PerlFile) file).getCodeGenerator().generateOverrideMethod(anchor, editor);
 	}
 }

@@ -29,6 +29,6 @@ public class GeneratePerlGetterActionHandler extends GeneratePerlClassMemberHand
 	@Override
 	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		((PerlFile) file).getCodeGenerator().generateGetters(anchor);
+		((PerlFile) file).getCodeGenerator().generateGetters(anchor, editor);
 	}
 }

@@ -29,6 +29,6 @@ public class GeneratePerlConstructorActionHandler extends GeneratePerlClassMembe
 	@Override
 	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		((PerlFile) file).getCodeGenerator().generateConstructor(anchor);
+		((PerlFile) file).getCodeGenerator().generateConstructor(anchor, editor);
 	}
 }

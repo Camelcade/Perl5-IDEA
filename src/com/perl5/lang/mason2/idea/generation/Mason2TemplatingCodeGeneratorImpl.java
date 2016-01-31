@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mason2.idea.generation;
 
+import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.MasonTemplatingLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
@@ -30,7 +31,7 @@ public class Mason2TemplatingCodeGeneratorImpl extends PerlCodeGeneratorImpl
 
 
 	@Override
-	protected void insertCodeAfterElement(PsiElement anchor, String code)
+	protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor)
 	{
 		if (code == null)
 			return;
@@ -38,7 +39,7 @@ public class Mason2TemplatingCodeGeneratorImpl extends PerlCodeGeneratorImpl
 		if (anchor.getLanguage() == MasonTemplatingLanguage.INSTANCE)
 			code = "<%perl>\n" + code + "\n</%perl>\n";
 
-		super.insertCodeAfterElement(anchor, code);
+		super.insertCodeAfterElement(anchor, code, editor);
 	}
 
 }

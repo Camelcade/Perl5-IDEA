@@ -151,4 +151,14 @@ public interface PerlElementPatterns extends PerlElementTypes
 			psiElement().inside(USE_STATEMENT_PATTERN),
 			psiElement().inside(NO_STATEMENT_PATTERN)
 	);
+
+	// pattern for shift;
+	PsiElementPattern.Capture<PsiPerlNamedUnaryExpr> TAILING_SHIFT_PATTERN =
+			psiElement(PsiPerlNamedUnaryExpr.class).withFirstChild(
+					psiElement(PsiPerlMethod.class).withText("shift")
+			).beforeLeaf(psiElement(SEMICOLON));
+
+
+	PsiElementPattern.Capture<PsiPerlStatement> EMPTY_SHIFT_STATEMENT =
+			psiElement(PsiPerlStatement.class).withFirstChild(TAILING_SHIFT_PATTERN);
 }

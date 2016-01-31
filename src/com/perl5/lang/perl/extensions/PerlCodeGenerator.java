@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.extensions;
 
+import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,15 +49,15 @@ public interface PerlCodeGenerator
 	 *
 	 * @param anchor element to insert method after
 	 */
-	void generateOverrideMethod(PsiElement anchor);
+	void generateOverrideMethod(PsiElement anchor, Editor editor);
 
-	void generateSetters(PsiElement anchor);
+	void generateSetters(PsiElement anchor, Editor editor);
 
-	void generateGetters(PsiElement anchor);
+	void generateGetters(PsiElement anchor, Editor editor);
 
-	void generateGettersAndSetters(PsiElement anchor);
+	void generateGettersAndSetters(PsiElement anchor, Editor editor);
 
-	void generateConstructor(PsiElement anchor);
+	void generateConstructor(PsiElement anchor, Editor editor);
 
 
 

@@ -29,7 +29,7 @@ public class GeneratePerlSetterActionHandler extends GeneratePerlClassMemberHand
 	@Override
 	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
-		((PerlFile) file).getCodeGenerator().generateSetters(anchor);
+		((PerlFile) file).getCodeGenerator().generateSetters(anchor, editor);
 
 	}
 }

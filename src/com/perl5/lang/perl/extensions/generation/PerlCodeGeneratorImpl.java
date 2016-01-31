@@ -19,6 +19,8 @@ package com.perl5.lang.perl.extensions.generation;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.MemberChooser;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.ScrollType;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
@@ -147,7 +149,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 							code.append("my ");
 							code.append(argument.getVariableClass());
 							code.append(" ");
-							String superArg = argument.getArgumentType().getSigil() + argument.getArgumentName();
+							String superArg = argument.toStringShort();
 							superArgs.add(superArg);
 							code.append(superArg);
 							code.append(" = shift;\n");
@@ -169,7 +171,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 								insertComma = true;
 							}
 
-							String superArg = argument.getArgumentType().getSigil() + argument.getArgumentName();
+							String superArg = argument.toStringShort();
 							superArgs.add(superArg);
 							code.append(superArg);
 						}
@@ -199,7 +201,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		return null;
 	}
 
-	public void generateOverrideMethod(PsiElement anchor)
+	@Override
+	public void generateOverrideMethod(PsiElement anchor, Editor editor)
 	{
 		if (anchor != null)
 		{
@@ -264,13 +267,13 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 					}
 				}
 
-				insertCodeAfterElement(anchor, generatedCode.toString());
+				insertCodeAfterElement(anchor, generatedCode.toString(), editor);
 			}
 		}
 	}
 
 	@Override
-	public void generateSetters(PsiElement anchor)
+	public void generateSetters(PsiElement anchor, Editor editor)
 	{
 		StringBuilder code = new StringBuilder();
 
@@ -280,11 +283,11 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		}
 
 		if (code.length() > 0)
-			insertCodeAfterElement(anchor, code.toString());
+			insertCodeAfterElement(anchor, code.toString(), editor);
 	}
 
 	@Override
-	public void generateGetters(PsiElement anchor)
+	public void generateGetters(PsiElement anchor, Editor editor)
 	{
 		StringBuilder code = new StringBuilder();
 
@@ -294,11 +297,11 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		}
 
 		if (code.length() > 0)
-			insertCodeAfterElement(anchor, code.toString());
+			insertCodeAfterElement(anchor, code.toString(), editor);
 	}
 
 	@Override
-	public void generateGettersAndSetters(PsiElement anchor)
+	public void generateGettersAndSetters(PsiElement anchor, Editor editor)
 	{
 		StringBuilder code = new StringBuilder();
 
@@ -309,13 +312,13 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		}
 
 		if (code.length() > 0)
-			insertCodeAfterElement(anchor, code.toString());
+			insertCodeAfterElement(anchor, code.toString(), editor);
 	}
 
 	@Override
-	public void generateConstructor(PsiElement anchor)
+	public void generateConstructor(PsiElement anchor, Editor editor)
 	{
-		insertCodeAfterElement(anchor, getConstructorCode());
+		insertCodeAfterElement(anchor, getConstructorCode(), editor);
 
 	}
 
@@ -342,7 +345,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		return new ArrayList<String>(result);
 	}
 
-	protected void insertCodeAfterElement(PsiElement anchor, String code)
+	protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor)
 	{
 		FileType fileType = anchor.getContainingFile().getFileType();
 		final PsiDocumentManager manager = PsiDocumentManager.getInstance(anchor.getProject());
@@ -361,6 +364,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			}
 
 			manager.commitDocument(document);
+			editor.getCaretModel().moveToOffset(anchor.getTextOffset() + anchor.getTextLength());
+			editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
 		}
 	}
 
