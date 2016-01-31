@@ -16,15 +16,11 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.resolve.FileContextUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 {
+/*
 	@Override
 	public ASTNode parse(IElementType t, PsiBuilder b)
 	{
@@ -44,6 +41,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 		}
 		return super.parse(t, b);
 	}
+*/
 
 	public boolean parseStatement(PsiBuilder b, int l)
 	{
