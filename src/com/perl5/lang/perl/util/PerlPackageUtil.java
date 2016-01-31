@@ -496,7 +496,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 
-	public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubDefinitionBase> processor)
+	public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubBase> processor)
 	{
 		if (namespaceDefinition != null)
 		{
@@ -525,7 +525,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static void processParentClassesSubs(PerlNamespaceDefinition childClass,
 												Set<String> processedSubsNames,
 												Set<PerlNamespaceDefinition> recursionMap,
-												Processor<PerlSubDefinitionBase> processor
+												Processor<PerlSubBase> processor
 	)
 	{
 		if (childClass == null || recursionMap.contains(childClass))
@@ -534,17 +534,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 		for (PerlNamespaceDefinition parentNamespace : childClass.getParentNamespaceDefinitions())
 		{
-			for (PerlSubDefinitionBase subDefinitionBase : PsiTreeUtil.findChildrenOfType(parentNamespace, PerlSubDefinitionBase.class))
+			for (PsiElement subDefinitionBase : PerlPsiUtil.collectNamespaceMembers(parentNamespace, PerlSubBaseStub.class, PerlSubBase.class))
 			{
-				String subName = subDefinitionBase.getSubName();
+				String subName = ((PerlSubBase) subDefinitionBase).getSubName();
 				if (subDefinitionBase.isValid() &&
-						subDefinitionBase.isMethod() &&
-						!processedSubsNames.contains(subName) &&
-						parentNamespace.equals(PsiTreeUtil.getParentOfType(subDefinitionBase, PerlNamespaceDefinition.class))
+						((PerlSubBase) subDefinitionBase).isMethod() &&
+						!processedSubsNames.contains(subName)
 						)
 				{
 					processedSubsNames.add(subName);
-					processor.process(subDefinitionBase);
+					processor.process(((PerlSubBase) subDefinitionBase));
 				}
 			}
 			processParentClassesSubs(

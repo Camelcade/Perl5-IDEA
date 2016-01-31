@@ -270,9 +270,29 @@ public class PerlPsiUtil
 		return result;
 	}
 
+	@Nullable
+	public static PsiElement getParentElementOrStub(StubBasedPsiElement currentElement,
+													@NotNull final Class<? extends StubElement> stubClass,
+													@NotNull final Class<? extends PsiElement> psiClass
+	)
+	{
+		Stub stub = currentElement.getStub();
+		if (stub != null)
+		{
+			Stub parentStub = getParentStubOfType(stub, stubClass);
+			return parentStub == null ? null : ((StubBase) parentStub).getPsi();
+		}
+		else
+		{
+			return PsiTreeUtil.getParentOfType(currentElement, psiClass);
+		}
+	}
+
+	@NotNull
 	public static List<PsiElement> collectNamespaceMembers(@NotNull final PerlNamespaceDefinition namespaceDefinition,
 														   @NotNull final Class<? extends StubElement> stubClass,
-														   @NotNull final Class<? extends PsiElement> psiClass)
+														   @NotNull final Class<? extends PsiElement> psiClass
+	)
 	{
 		Stub stub = namespaceDefinition.getStub();
 		List<PsiElement> result = new ArrayList<PsiElement>();
@@ -307,16 +327,26 @@ public class PerlPsiUtil
 		if (namespaceStub == null)
 			return false;
 
+		Stub parentStub = getParentStubOfType(elementStub, PerlNamespaceDefinitionStub.class);
+
+		return parentStub != null && parentStub.equals(namespaceStub);
+	}
+
+	@Nullable
+	public static Stub getParentStubOfType(Stub currentStubElement, Class<? extends Stub> stubClass)
+	{
 		while (true)
 		{
-			if (elementStub == null || elementStub instanceof PsiFileStub)
-				return false;
+			if (currentStubElement == null)
+				return null;
 
-			if (elementStub instanceof PerlNamespaceDefinitionStub)
-			{
-				return elementStub.equals(namespaceStub);
-			}
-			elementStub = elementStub.getParentStub();
+			if (stubClass.isInstance(currentStubElement))
+				return currentStubElement;
+
+			if (currentStubElement instanceof PsiFileStub)
+				return null;
+
+			currentStubElement = currentStubElement.getParentStub();
 		}
 	}
 

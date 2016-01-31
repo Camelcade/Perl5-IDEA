@@ -200,10 +200,10 @@ public class PerlSubCompletionUtil
 	{
 		PerlPackageUtil.processNotOverridedMethods(
 				PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class),
-				new Processor<PerlSubDefinitionBase>()
+				new Processor<PerlSubBase>()
 				{
 					@Override
-					public boolean process(PerlSubDefinitionBase subDefinitionBase)
+					public boolean process(PerlSubBase subDefinitionBase)
 					{
 						resultSet.addElement(LookupElementBuilder.create(subDefinitionBase.getSubName()));
 						return true;

@@ -207,10 +207,10 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 
 			PerlPackageUtil.processNotOverridedMethods(
 					PsiTreeUtil.getParentOfType(anchor, PerlNamespaceDefinition.class),
-					new Processor<PerlSubDefinitionBase>()
+					new Processor<PerlSubBase>()
 					{
 						@Override
-						public boolean process(PerlSubDefinitionBase subDefinitionBase)
+						public boolean process(PerlSubBase subDefinitionBase)
 						{
 							subDefinitions.add(new PerlMethodMember(subDefinitionBase));
 							return true;
