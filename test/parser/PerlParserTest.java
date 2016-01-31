@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
  */
 public class PerlParserTest extends ParsingTestCase
 {
-	protected final static String DATA_PATH = "test/parser/perlParsingSamples";
+	protected final static String DATA_PATH = "testData/parser/perlParsingSamples";
 	protected final static Pattern filesPattern = Pattern.compile(".+\\.(pl|pm|cgi|t)");
 	String myFileName;
 
@@ -73,6 +73,10 @@ public class PerlParserTest extends ParsingTestCase
 	{
 		myFileName = filename;
 		doTest(true);
+		assertFalse(
+				"PsiFile contains error elements",
+				toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
+		);
 	}
 
 

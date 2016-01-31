@@ -258,7 +258,7 @@ say "test ${abc}{'key'} test";
 say "test ${abc}{'complex key'} test";
 say "test ${${abc_ref}} test";
 say "test @{${abc_aref}} test";
-say "This is an auto-completion $UNIVERSAL::VERSION test"
+say "This is an auto-completion $UNIVERSAL::VERSION test";
 
 say 'test $abc test';
 say 'test @abc test';
@@ -311,6 +311,84 @@ say qx/test $abc{`key`} test/;
 say qx/test $abc{`complex key`} test/;
 say qx/test $$abc_ref test/;
 say qx/test @$abc_aref test/;
+
+qw##;
+
+qw<asdf[<asdf]>asdf>;
+qw(asdf[(asdf])asdf);
+qw{asdf[a{sdf]a}sdf};
+qw[asdf[asdf]asdf];
+
+qw #something
+    (
+    test
+    (test2) t\)est3
+    te(st4\ test5
+    tes)t6\
+    te\(st7
+    );
+
+qw#
+   test
+    (test2) t\)est3
+    te(st4\ test5
+    tes)t6\
+    te\(st7
+    #;
+
+qw#testing#;
+qr#testing#;
+qx#testing#;
+qq#'testing#;
+q#testing#;
+tr#testing#testing#;
+m#testing#;
+
+qw#testing#;
+qr#testing#;
+qx#testing#;
+qq#'testing#;
+q#testing#;
+tr#testing#testing#;
+m#testing#;
+
+qw/testing/;
+qw'testing testing';
+qw{testing testing};
+
+qr'testing';
+qr/testing/;
+qr{testing};
+
+qx/testing/;
+qx'testing';
+qx{testing};
+
+qq/testing/;
+qq'testing';
+qq{testing};
+
+q/testing/;
+q'testing';
+q{testing};
+
+tr'testing'testing';
+tr/testing/testing/;
+tr{testing}{testing};
+
+y'testing'testing';
+y#testing#testing#;
+y/testing/testing/;
+y{testing}{testing};
+
+m'testing';
+m{testing};
+m/testing/;
+
+s'testing'testing';
+s#testing#testing#;
+s/testing/testing/;
+s{testing}{testing};
 
 
 

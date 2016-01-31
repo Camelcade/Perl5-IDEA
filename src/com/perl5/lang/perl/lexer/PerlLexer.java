@@ -460,7 +460,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public static void initReservedTokensSet()
 	{
 		RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
-		CUSTOM_TOKENSET= TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
+		CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
 	}
 
 	/**
@@ -609,12 +609,10 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType captureString(int newState) throws IOException
 	{
 		if (SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())    // this is not a beginning of a string, but variable name
-				|| (
-				getTokenHistory().getLastSignificantTokenType() == LEFT_BRACE
-						&& SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType())
-						&& getNextNonSpaceCharacter() == '}'
-		)
-				)
+				|| (SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType()) &&
+				getTokenHistory().getLastSignificantTokenType() == LEFT_BRACE &&    // isBraced doesn't work here, because tokenEnd is not set yet
+				getNextNonSpaceCharacter(getTokenEnd() + 1) == '}'
+		))
 			return super.perlAdvance();
 
 		pushState();

@@ -200,7 +200,12 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 
 	protected char getNextNonSpaceCharacter()
 	{
-		int nextPosition = getNextNonSpaceCharacterPosition(getTokenEnd());
+		return getNextNonSpaceCharacter(getTokenEnd());
+	}
+
+	protected char getNextNonSpaceCharacter(int nextPosition)
+	{
+		nextPosition = getNextNonSpaceCharacterPosition(nextPosition);
 		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : 0;    // not sure it's a good idea
 	}
 
