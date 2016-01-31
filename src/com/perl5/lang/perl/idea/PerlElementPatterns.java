@@ -159,6 +159,28 @@ public interface PerlElementPatterns extends PerlElementTypes
 			).beforeLeaf(psiElement(SEMICOLON));
 
 
-	PsiElementPattern.Capture<PsiPerlStatement> EMPTY_SHIFT_STATEMENT =
+	PsiElementPattern.Capture<PsiPerlStatement> EMPTY_SHIFT_STATEMENT_PATTERN =
 			psiElement(PsiPerlStatement.class).withFirstChild(TAILING_SHIFT_PATTERN);
+
+	PsiElementPattern.Capture<PsiPerlArrayVariable> ALL_ARGUMENTS_PATTERN = psiElement(PsiPerlArrayVariable.class).withText("@_");
+
+	PsiElementPattern.Capture<PsiPerlStatement> ARGUMENTS_UNPACKING_PATTERN =
+			psiElement(PsiPerlStatement.class).withFirstChild(
+					psiElement(PsiPerlAssignExpr.class).withFirstChild(
+							psiElement(PerlVariableDeclaration.class)
+					).andOr(
+							psiElement().withLastChild(TAILING_SHIFT_PATTERN),
+							psiElement().withLastChild(ALL_ARGUMENTS_PATTERN)
+					)
+			);
+
+	PsiElementPattern.Capture<PsiPerlStatement> ARGUMENTS_LAST_UNPACKING_PATTERN =
+			psiElement(PsiPerlStatement.class).withFirstChild(
+					psiElement(PsiPerlAssignExpr.class).withFirstChild(
+							psiElement(PerlVariableDeclaration.class)
+					).withLastChild(ALL_ARGUMENTS_PATTERN)
+			);
+
+
+
 }

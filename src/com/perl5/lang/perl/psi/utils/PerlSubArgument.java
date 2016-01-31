@@ -53,6 +53,16 @@ public class PerlSubArgument
 		return new PerlSubArgument(argumentType, argumentName, variableClass, isOptional);
 	}
 
+	public static PerlSubArgument getEmptyArgument()
+	{
+		return new PerlSubArgument(
+				PerlVariableType.SCALAR,
+				"",
+				"",
+				false
+		);
+	}
+
 	public PerlVariableType getArgumentType()
 	{
 		return argumentType;
@@ -94,5 +104,10 @@ public class PerlSubArgument
 	public boolean isSelf(Project project)
 	{
 		return getArgumentType() == PerlVariableType.SCALAR && Perl5Settings.getInstance(project).isSelfName(getArgumentName());
+	}
+
+	public boolean isEmpty()
+	{
+		return StringUtil.isEmpty(argumentName);
 	}
 }

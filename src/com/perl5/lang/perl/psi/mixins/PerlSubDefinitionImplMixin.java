@@ -24,7 +24,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.PsiPerlSubSignatureElementIgnore;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,12 +52,9 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubDefinitionBaseIm
 		{
 			if (signatureElement instanceof PsiPerlSubSignatureElementIgnore)
 			{
-				arguments.add(new PerlSubArgument(
-						PerlVariableType.SCALAR,
-						"",
-						"",
-						signatureElement.getFirstChild() != signatureElement.getLastChild()    // has elements inside, means optional
-				));
+				PerlSubArgument newArgument = PerlSubArgument.getEmptyArgument();
+				newArgument.setOptional(signatureElement.getFirstChild() != signatureElement.getLastChild()); // has elements inside, means optional
+				arguments.add(newArgument);
 			}
 			else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN)
 			{

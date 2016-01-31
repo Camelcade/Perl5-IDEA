@@ -49,6 +49,7 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -124,10 +125,11 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			code.append("{\n");
 
 			List<String> superArgs = new ArrayList<String>();
+			List<PerlSubArgument> arguments = Collections.EMPTY_LIST;
 
 			if (perlSubBase instanceof PerlSubDefinitionBase)
 			{
-				List<PerlSubArgument> arguments = ((PerlSubDefinitionBase) perlSubBase).getSubArgumentsList();
+				arguments = ((PerlSubDefinitionBase) perlSubBase).getSubArgumentsList();
 
 				if (arguments.size() > 0)
 				{
@@ -146,13 +148,17 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 					{
 						for (PerlSubArgument argument : arguments)
 						{
-							code.append("my ");
-							code.append(argument.getVariableClass());
-							code.append(" ");
-							String superArg = argument.toStringShort();
-							superArgs.add(superArg);
-							code.append(superArg);
-							code.append(" = shift;\n");
+							if (!argument.isEmpty())
+							{
+								code.append("my ");
+								code.append(argument.getVariableClass());
+								code.append(" ");
+								String superArg = argument.toStringShort();
+								superArgs.add(superArg);
+								code.append(superArg);
+								code.append(" = ");
+							}
+							code.append("shift;\n");
 						}
 					}
 					else
@@ -187,7 +193,10 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			if (superArgs.size() > 0)
 				superArgs.remove(0);
 
-			code.append("$self->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
+			if (arguments.size() > 0 && !arguments.get(0).isEmpty())
+			{
+				code.append("$self->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
+			}
 			code.append("}");
 			return code.toString();
 		}
