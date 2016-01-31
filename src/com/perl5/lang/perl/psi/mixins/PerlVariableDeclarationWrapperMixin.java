@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
@@ -40,7 +39,7 @@ import javax.swing.*;
  * Created by hurricup on 29.09.2015.
  * Stubbed wrapper for variables declarations
  */
-public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase<PerlVariableStub> implements PerlVariableDeclarationWrapper
+public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBaseWithToString<PerlVariableStub> implements PerlVariableDeclarationWrapper
 {
 	public PerlVariableDeclarationWrapperMixin(ASTNode node)
 	{

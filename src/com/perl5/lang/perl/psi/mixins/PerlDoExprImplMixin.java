@@ -16,19 +16,19 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.StubBasedPsiElementBaseWithToString;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 19.09.2015.
  */
-public abstract class PerlDoExprImplMixin extends StubBasedPsiElementBase<PerlRuntimeImportStub> implements PerlDoExpr
+public abstract class PerlDoExprImplMixin extends StubBasedPsiElementBaseWithToString<PerlRuntimeImportStub> implements PerlDoExpr
 {
 	public PerlDoExprImplMixin(ASTNode node)
 	{

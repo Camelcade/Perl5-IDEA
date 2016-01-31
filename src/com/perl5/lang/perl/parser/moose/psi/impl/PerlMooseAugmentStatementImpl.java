@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
@@ -35,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBase<PerlMooseAugmentStatementStub> implements PerlMooseAugmentStatement, PerlMooseMethodModifier
+public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBaseWithToString<PerlMooseAugmentStatementStub> implements PerlMooseAugmentStatement, PerlMooseMethodModifier
 {
 	public PerlMooseAugmentStatementImpl(ASTNode node)
 	{

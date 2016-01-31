@@ -703,9 +703,6 @@ print OF, "something";
 say OF, "something";
 printf OF, "something";
 
-print OF() "something";
-say OF() "something";
-printf OF() "something";
 
 close STDERR;
 close (STDERR);

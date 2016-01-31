@@ -1,18 +1,13 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="PerlVersionUnitTest" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
-    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-      <pattern>
-        <option name="PATTERN" value="units.*" />
-        <option name="ENABLED" value="true" />
-      </pattern>
-    </extension>
+  <configuration default="false" name="All tests" type="JUnit" factoryName="JUnit" singleton="true">
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <module name="camelcade" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" value="" />
-    <option name="PACKAGE_NAME" value="units" />
-    <option name="MAIN_CLASS_NAME" value="units.PerlVersionUnitTest" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="PACKAGE_NAME" value="" />
+    <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
-    <option name="TEST_OBJECT" value="class" />
+    <option name="TEST_OBJECT" value="package" />
     <option name="VM_PARAMETERS" value="" />
     <option name="PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="" />

@@ -15,7 +15,6 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
@@ -25,10 +24,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
-import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -40,7 +36,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBase<PerlGlobStub> implements PsiPerlGlobVariable, PerlElementTypes
+public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBaseWithToString<PerlGlobStub> implements PsiPerlGlobVariable, PerlElementTypes
 {
 	public PerlGlobVariableImplMixin(@NotNull ASTNode node)
 	{

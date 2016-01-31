@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
@@ -37,7 +36,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends StubBasedPsiElementBase<Stub> implements PerlSubBase<Stub>
+public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends StubBasedPsiElementBaseWithToString<Stub> implements PerlSubBase<Stub>
 {
 	public PerlSubBaseImpl(@NotNull ASTNode node)
 	{

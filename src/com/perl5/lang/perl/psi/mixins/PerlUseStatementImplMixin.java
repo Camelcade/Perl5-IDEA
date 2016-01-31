@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
@@ -35,7 +34,7 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
+public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBaseWithToString<PerlUseStatementStub> implements PsiPerlUseStatement
 {
 	protected PerlPackageProcessor packageProcessor = null;
 

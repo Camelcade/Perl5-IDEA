@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -35,7 +37,7 @@ public class PerlNamesCache
 
 	public static Set<String> getSubsNamesSet(Project project, boolean reuseCache)
 	{
-		if (!reuseCache && !DumbService.isDumb(project))
+		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project))
 		{
 			Set<String> newSet = new THashSet<String>();
 			newSet.addAll(PerlSubUtil.getDeclaredSubsNames(project));
@@ -46,9 +48,15 @@ public class PerlNamesCache
 		return KNOWN_SUBS;
 	}
 
+	public static boolean isTestMode()
+	{
+		final Application application = ApplicationManager.getApplication();
+		return application != null && (application.isUnitTestMode() || application.isHeadlessEnvironment());
+	}
+
 	public static Set<String> getPackagesNamesSet(Project project, boolean reuseCache)
 	{
-		if (!reuseCache && !DumbService.isDumb(project))
+		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project))
 		{
 			Set<String> newSet = new THashSet<String>();
 			newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);
