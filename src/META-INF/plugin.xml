@@ -17,7 +17,7 @@
 <idea-plugin version="2">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.326</version>
+    <version>1.327</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
 
     <description><![CDATA[
@@ -36,75 +36,87 @@
 
       <p><b>Features & Improvements:</b>
       <ul>
-      <li>Implemented file level variables inspection. (Pretty useful while migrating from CGI to some persistent server)</li>
-      <li>Implemented parser extension for Switch core module, fixes #658</li>
-      <li>Added spacing control for call arguments, fixes #664</li>
-      <li>Implemented spaces removal around array index, hash index and dereference, fixes #662</li>
-      <li>Self-object reference variable names are now configurable in Perl5 settings, fixes #706</li>
-      <li>Significally improved live templates, added templates for parser extensions</li>
-      <li>Implemented quote handler for regexps and string-like operators, fixes #741</li>
-      <li>Implemented dumb and comfy hash keys autocompletion, not intelligent, most like in Sublime Text, fixes #711</li>
-      <li>Implemented support of Class::Acessor api, fixes #778</li>
-      <li>Implemented convert string to last used here-doc marker (also fixed conversion on multi-line strings), fixes #800</li>
-      <li>Automatic language injection in here-doc is now configurable (on/off) in Perl5 settings, fixes #636</li>
-      <li>Implemented conversion <code>${$hasref}{key}</code> to <code>$hashref->{key}</code> on pre-formatting, fixes #803</li>
-      <li>Implemented names suggestion for new subs/methods based on unresolved sub names in current file, fixes #231</li>
-      <li>Implemented names suggestion for variables declarations based on unresolved variables in appropriate scope, fixes #242</li>
-      <li>Implemented names suggestion for new subs/methods based on super-classes sub names, fixes #246</li>
-      <li>Implemented gutter navigation to super/sub classes</li>
-      <li>Implemented gutter navigation to super/inner class methods, fixes #815</li>
-      <li>Implemented override method action, fixes #814</li>
-      <li>Moose<ul>
-      <li>Implemented live-templates for Moose constructions</li>
-      <li>Implemented Moose super call resolution, fixes #553</li>
-      <li>Implemented Moose inner call resolution, fixes #555</li>
+      <li>File level variables inspection. (Pretty useful while migrating from CGI to some persistent environment)</li>
+
+      <li>Autocompletion and Code Generation<ul>
+          <li>Significally improved live templates and autocompletion.</li>
+          <li>Convert string to last used here-doc marker action added (also fixed conversion on multi-line strings), fixes #800</li>
+          <li>Quote handler for regex and quote-like operators, fixes #741</li>
+          <li>Names suggestion for new subs/methods based on unresolved sub names in current file, fixes #231</li>
+          <li>Names suggestion for variables declarations based on unresolved variables in appropriate scope, fixes #242</li>
+          <li>Names suggestion for new subs/methods based on super-classes sub names, fixes #246</li>
+          <li>Dumb and comfy hash keys autocompletion, not intelligent, most like in Sublime Text, fixes #711</li>
+          <li>Override method action, fixes #814</li>
       </ul></li>
-      <li>Exporter<ul>
-      <li>Implemented resolution for @EXPORT and @EXPORT_OK assigned strings, fixes #364</li>
-      <li>Implemented auto-completion for @EXPORT and @EXPORT_OK assigned strings, fixes #469</li>
-      <li>Unresolved subs inspection now also check Exporter's arrays, fixes #799</li>
+      <li>Configuration<ul>
+          <li>Self-object reference variable names are now configurable in Perl5 settings, fixes #706</li>
+          <li>Automatic language injection in here-doc is now configurable (on/off) in Perl5 settings, fixes #636</li>
+      </ul>
+      </li>
+      <li>Code Style and Formatting<ul>
+        <li>Spacing control for call arguments, fixes #664</li>
+        <li>Spaces removal around array index, hash index and dereference, fixes #662</li>
+        <li>Conversion <code>${$hasref}{key}</code> to <code>$hashref->{key}</code> on pre-formatting, fixes #803</li>
+      </ul>
+      <li>Navigation<ul>
+          <li>Gutter navigation to super/sub classes</li>
+          <li>Gutter navigation to super/inner class methods, fixes #815</li>
       </ul></li>
-      <li>Mason2<ul>
-        <li>Implemented filetypes for Mason2: top-level component, internal component and perl component</li>
-        <li>Implemented lexing and parsing of Mason2 files</li>
-        <li>Implemented settings to select Mason2 components roots</li>
-        <li>Implemented components auto-basing</li>
-        <li>Implemented folding of Mason2 files</li>
-        <li>Implemented automatic close tag insertion on typing</li>
-        <li>Implemented formatter and pre-formatter for perl code</li>
-        <li>Implemented live-templates for Mason2 syntax constructions</li>
-      </ul></li>
-      <li>Mojolicious<ul>
-        <li>Parser has been re-written almost from scratch and now is much more appropriate</li>
-        <li>Fixed problem with statement modifiers parsing in expressions blocks</li>
-        <li>Fixed problems with templates folding</li>
-        <li>Implemented automatic close tag insertion on typing (open tag + space)</li>
-        <li>Implemented formatter and pre-formatter for perl code</li>
-      </ul></li>
-      <li>Embedded Perl<ul>
-        <li>Implemented automatic close tag insertion on typing (open tag + space)</li>
-        <li>Implemented formatter and pre-formatter for perl code</li>
+      <li>Perl extensions<ul>
+          <li>Support for Switch core module, fixes #658</li>
+          <li>Support of Class::Acessor api, fixes #778</li>
+          <li>Moose<ul>
+              <li>Live-templates for Moose constructions</li>
+              <li>Moose super call resolution, fixes #553</li>
+              <li>Moose inner call resolution, fixes #555</li>
+          </ul></li>
+          <li>Exporter<ul>
+              <li>Resolution for @EXPORT and @EXPORT_OK assigned strings, fixes #364</li>
+              <li>Auto-completion for @EXPORT and @EXPORT_OK assigned strings, fixes #469</li>
+              <li>Unresolved subs inspection now also check Exporter's arrays, fixes #799</li>
+          </ul></li>
+          <li>Mason2<ul>
+            <li>Filetypes for Mason2: top-level component, internal component and perl component</li>
+            <li>Lexing and parsing of Mason2 files</li>
+            <li>Configuration Settings to select Mason2 components roots</li>
+            <li>Components auto-basing</li>
+            <li>Folding of Mason2 files</li>
+            <li>Automatic close tag insertion on typing</li>
+            <li>Formatter and pre-formatter for perl code</li>
+            <li>Live-templates for Mason2 syntax constructions</li>
+          </ul></li>
+          <li>Mojolicious<ul>
+            <li>Parser has been re-written almost from scratch and now is much more appropriate</li>
+            <li>Fixed problem with statement modifiers parsing in expressions blocks</li>
+            <li>Fixed problems with templates folding</li>
+            <li>Automatic close tag insertion on typing (open tag + space)</li>
+            <li>Formatter and pre-formatter for perl code</li>
+          </ul></li>
+          <li>Embedded Perl<ul>
+            <li>Automatic close tag insertion on typing (open tag + space)</li>
+            <li>Formatter and pre-formatter for perl code</li>
+          </ul></li>
       </ul></li>
       </ul>
       </p>
 
       <p><b>Fixes:</b>
       <ul>
-      <li>Fixed possible NPE on specialized IDE start, #CAMELCADE-46 fixed</li>
-      <li>Fixed exception on empty error element in inspection, #CAMELCADE-44 fixed</li>
-      <li>Fixed possible NPE on files resolution, #CAMELCADE-43 fixed</li>
-      <li>Fixed possible Icon not found exception on acitons menu opening, #CAMELCADE-42 fixed</li>
-      <li>Fixed bug with creating top-level packages with main:: prefix, fixes #638</li>
-      <li>Implemented proper parsing for stacked file operations _ handle, fixes #640</li>
-      <li>Fixed parsing of print target handle if followed by expression in parens or negation, fixes #560</li>
-      <li>Fixed indenting for single-argument nested calls, fixes #663</li>
-      <li>Fixed semicolon and statement modifiers parsing in the Moose statements, fixes #678</li>
-      <li>Braceless namespaces now being parsed the right way, fixes #674</li>
-      <li>Fixed bug with occasional here-doc terminator indention on copy-paste or re-formatting, fixes #631</li>
-      <li>Fixed bug with here-doc content re-formatting, fixes #628</li>
-      <li>Fixed bug with quotes auto-closing in package and test files</li>
-      <li>Fixed bug with auto-completion not opening after typing ->, fixes #763</li>
-      <li>Fixed bug with inadequate auto-opened completion when typing special chars (dots, commas, etc.), fixes #781</li>
+          <li>Fixed possible NPE on specialized IDE start, #CAMELCADE-46 fixed</li>
+          <li>Fixed exception on empty error element in inspection, #CAMELCADE-44 fixed</li>
+          <li>Fixed possible NPE on files resolution, #CAMELCADE-43 fixed</li>
+          <li>Fixed possible Icon not found exception on acitons menu opening, #CAMELCADE-42 fixed</li>
+          <li>Fixed bug with creating top-level packages with main:: prefix, fixes #638</li>
+          <li>Implemented proper parsing for stacked file operations _ handle, fixes #640</li>
+          <li>Fixed parsing of print target handle if followed by expression in parens or negation, fixes #560</li>
+          <li>Fixed indenting for single-argument nested calls, fixes #663</li>
+          <li>Fixed semicolon and statement modifiers parsing in the Moose statements, fixes #678</li>
+          <li>Braceless namespaces now being parsed the right way, fixes #674</li>
+          <li>Fixed bug with occasional here-doc terminator indention on copy-paste or re-formatting, fixes #631</li>
+          <li>Fixed bug with here-doc content re-formatting, fixes #628</li>
+          <li>Fixed bug with quotes auto-closing in package and test files</li>
+          <li>Fixed bug with auto-completion not opening after typing ->, fixes #763</li>
+          <li>Fixed bug with inadequate auto-opened completion when typing special chars (dots, commas, etc.), fixes #781</li>
       </ul>
       </p>
 
