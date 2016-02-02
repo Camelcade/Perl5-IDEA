@@ -150,4 +150,4 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}
 {PACKAGE} {return parsePackageCanonical();}
 
-[^]    { return STRING_CONTENT; }
+[^]    { return lexBadCharacter(); }

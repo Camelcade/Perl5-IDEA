@@ -209,4 +209,4 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 {PACKAGE} {return parsePackageCanonical();}
 
 /* error fallback [^] */
-[^]    { return TokenType.BAD_CHARACTER; }
+[^]    { return lexBadCharacter(); }

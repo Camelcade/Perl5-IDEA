@@ -74,6 +74,11 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("method_signatures_simple.pl");
 	}
 
+	public void testUtfIdentifiers()
+	{
+		doTest("utfidentifiers.pl");
+	}
+
 	public void testSwitch()
 	{
 		doTest("perl_switch.pl");

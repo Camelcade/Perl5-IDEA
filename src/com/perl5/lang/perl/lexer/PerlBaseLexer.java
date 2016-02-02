@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexLexer;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
@@ -270,6 +271,30 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	protected CustomToken getCustomToken(int start, int end, IElementType tokenType)
 	{
 		return new CustomToken(start, end, tokenType);
+	}
+
+	protected IElementType lexBadCharacter()
+	{
+		int tokenStart = getTokenStart();
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+
+		if (tokenStart < bufferEnd)
+		{
+			char currentChar = buffer.charAt(tokenStart);
+			if (currentChar == '_' || Character.isLetter(currentChar))
+			{
+				int tokenEnd = tokenStart + 1;
+				while (tokenEnd < bufferEnd && ((currentChar = buffer.charAt(tokenEnd)) == '_' || Character.isLetterOrDigit(currentChar)))
+				{
+					tokenEnd++;
+				}
+
+				setTokenEnd(tokenEnd);
+				return IDENTIFIER;
+			}
+		}
+		return TokenType.BAD_CHARACTER;
 	}
 
 }
