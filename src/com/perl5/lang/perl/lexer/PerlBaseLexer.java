@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
  */
 public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 {
-	private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_a-zA-Z0-9][_a-zA-Z0-9]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
+	private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
 	private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
 			"(?:" +
 					"(?:::)+'?" +
@@ -284,17 +284,24 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 			char currentChar = buffer.charAt(tokenStart);
 			if (currentChar == '_' || Character.isLetter(currentChar))
 			{
-				int tokenEnd = tokenStart + 1;
-				while (tokenEnd < bufferEnd && ((currentChar = buffer.charAt(tokenEnd)) == '_' || Character.isLetterOrDigit(currentChar)))
-				{
-					tokenEnd++;
-				}
-
-				setTokenEnd(tokenEnd);
+				adjustUtfIdentifier();
 				return IDENTIFIER;
 			}
 		}
 		return TokenType.BAD_CHARACTER;
 	}
 
+	protected void adjustUtfIdentifier()
+	{
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+		int tokenEnd = getTokenEnd();
+		char currentChar;
+		while (tokenEnd < bufferEnd && ((currentChar = buffer.charAt(tokenEnd)) == '_' || Character.isLetterOrDigit(currentChar)))
+		{
+			tokenEnd++;
+		}
+
+		setTokenEnd(tokenEnd);
+	}
 }

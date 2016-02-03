@@ -1600,6 +1600,7 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType parseBarewordMinus()
 	{
+		adjustUtfIdentifier();
 		String tokenText = yytext().toString();
 
 		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType()) || SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType());
@@ -1714,6 +1715,7 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType parsePackage()
 	{
+		adjustUtfIdentifier();
 		String tokenText = yytext().toString();
 
 		// check if it's cmp'
