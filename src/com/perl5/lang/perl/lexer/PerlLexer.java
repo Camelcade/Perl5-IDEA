@@ -38,8 +38,8 @@ import java.util.regex.Pattern;
 
 public class PerlLexer extends PerlLexerGenerated
 {
-	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_a-zA-Z0-9]*");
-	public static final Pattern BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_a-zA-Z0-9]*");
+	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
+	public static final Pattern BARE_STRING_PATTERN = Pattern.compile("[-+]*[_\\p{L}][_\\p{L}\\d]*");
 
 	// pattern for getting marker
 	public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
@@ -48,8 +48,9 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
 	public static final Pattern VERSION_IDENTIFIER_PATTERN = Pattern.compile("^(v[\\d_]+)");
 
-	public static final Pattern ANNOTATION_PATTERN = Pattern.compile("^(\\w+)(?:(\\s+)(.+)?)?$");
-	public static final Pattern ANNOTATION_PATTERN_PACKAGE = Pattern.compile("^(\\w+(?:::\\w+)*)(.*)$");
+	public static final Pattern ANNOTATION_PATTERN = Pattern.compile("^(\\p{L}+)(?:(\\s+)(.+)?)?$");
+	// fixme this is not dry with package pattern
+	public static final Pattern ANNOTATION_PATTERN_PACKAGE = Pattern.compile("^(\\p{L}[\\p{L}_\\d]*(?:::[_\\p{L}\\d]+)*)(.*)$");
 
 
 	public static final String STRING_DATA = "__DATA__";

@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
  */
 public class PerlStringContentElementImpl extends LeafPsiElement implements PerlStringContentElement
 {
-	static final String FILE_PATH_PATTERN_TEXT = "\\.?[a-zA-Z0-9\\-_]+(?:\\.[a-zA-Z0-9\\-_]*)*";
+	static final String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*";
 	static final String FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:\\\\+|/+)";
 	static final Pattern FILE_PATH_PATTERN = Pattern.compile(
 			FILE_PATH_DELIMITER_PATTERN_TEXT + "*" +

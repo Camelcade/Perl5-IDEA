@@ -70,7 +70,11 @@ public class PerlConsoleFileLinkFilter implements Filter
 			String projectDirName = project.getBaseDir().getName();
 
 			String separator = "[\\\\/]";
-			Pattern pattern = Pattern.compile("([A-Za-z:]+)?" + separator + "+([\\w\\-.]+" + separator + ")+" + projectDirName + "(" + separator + "+([\\w\\-.]+" + separator + "+)*\\w([\\w\\-.])+)( line (\\d+))?");
+			Pattern pattern = Pattern.compile("([\\p{L}\\d:]+)?" +
+					separator + "+([\\p{L}\\d\\-.]+" +
+					separator + ")+" + projectDirName + "(" +
+					separator + "+([\\p{L}\\d\\-.]+" +
+					separator + "+)*[\\p{L}\\d]([\\p{L}\\d\\-.])+)( line (\\d+))?");
 			Matcher matcher = pattern.matcher(textLine);
 			while (matcher.find())
 			{

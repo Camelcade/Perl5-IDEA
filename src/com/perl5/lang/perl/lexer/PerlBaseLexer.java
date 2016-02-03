@@ -38,7 +38,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 					"|" +
 					"(?:::)*'" +
 					")";
-	private static final String AMBIGUOUS_PACKAGE_PATTERN_TEXT =
+	public static final Pattern AMBIGUOUS_PACKAGE_PATTERN = Pattern.compile(
 			"(" +
 					PACKAGE_SEPARATOR_PATTERN_TEXT + "?" +        // optional opening separator,
 					"(?:" +
@@ -48,9 +48,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 					")" +
 					"(" +
 					BASIC_IDENTIFIER_PATTERN_TEXT +
-					")";
-
-	public static final Pattern AMBIGUOUS_PACKAGE_PATTERN = Pattern.compile(AMBIGUOUS_PACKAGE_PATTERN_TEXT);
+					")");
 
 	public final Stack<Integer> stateStack = new Stack<Integer>();
 	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
