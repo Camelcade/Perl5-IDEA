@@ -48,6 +48,19 @@ import java.util.Set;
 public class PerlStringCompletionUtil implements PerlElementPatterns
 {
 	public static final Set<String> STRINGS_SET = new THashSet<String>();
+	public static final String[] REF_TYPES = new String[]{
+			"SCALAR",
+			"ARRAY",
+			"HASH",
+			"CODE",
+			"REF",
+			"GLOB",
+			"LVALUE",
+			"FORMAT",
+			"IO",
+			"VSTRING",
+			"Regexp"
+	};
 
 	protected static void addElement(String text, CompletionResultSet result)
 	{
@@ -233,6 +246,14 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 			}
 		}
 
+	}
+
+	public static void fillWithRefTypes(@NotNull final CompletionResultSet resultSet)
+	{
+		for (String refType : REF_TYPES)
+		{
+			resultSet.addElement(LookupElementBuilder.create(refType));
+		}
 	}
 
 }
