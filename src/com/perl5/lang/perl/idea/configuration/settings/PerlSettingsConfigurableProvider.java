@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.idea.configuration.settings;
 
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurableProvider;
 import com.intellij.openapi.project.Project;
+import com.intellij.util.PlatformUtils;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -40,4 +42,9 @@ public class PerlSettingsConfigurableProvider extends ConfigurableProvider
 		return new PerlSettingsConfigurable(project);
 	}
 
+	@Override
+	public boolean canCreateConfigurable()
+	{
+		return PlatformUtils.isIntelliJ() || ModuleManager.getInstance(project).getModules().length > 0;
+	}
 }
