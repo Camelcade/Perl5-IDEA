@@ -689,36 +689,9 @@
     </project-components>
 
     <actions>
-        <group class="com.perl5.lang.perl.idea.actions.groups.PerlFileActionsGroup" id="Perl5NewFile"
-               text="Perl5 File Actions" description="Create Perl5 File" icon="/icons/perl5.png">
-
-            <action id="Perl5.NewPerlPackage" class="com.perl5.lang.perl.idea.actions.CreatePerlPackageFileAction"
-                    text="Perl5 Package" description="Create Perl5 Package">
-            </action>
-
-            <action id="Perl5.NewPerlScript" class="com.perl5.lang.perl.idea.actions.CreatePerlScriptFileAction"
-                    text="Perl5 Script" description="Create Perl5 Script">
-            </action>
-
-            <action id="Perl5.NewPerlEmbedded" class="com.perl5.lang.perl.idea.actions.CreateEmbeddedPerlFileAction"
-                    text="Embedded Perl5 File" description="Create Embedded Perl5 file">
-            </action>
-
-            <action id="Perl5.NewPerlMojolicious"
-                    class="com.perl5.lang.perl.idea.actions.CreateMojoliciousTemplateAction"
-                    text="Mojolicious Template File" description="Create Mojolicious Template File">
-            </action>
-
-            <action id="Perl5.NewPerlTest" class="com.perl5.lang.perl.idea.actions.CreatePerlTestFileAction"
-                    text="Perl5 Test" description="Create Perl5 Test">
-            </action>
-
-
-            <separator/>
-
+        <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
             <add-to-group group-id="NewGroup" anchor="first"/>
-        </group>
-
+        </action>
 
         <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"
                 text="Generate Constructor" description="Generate class constructor">

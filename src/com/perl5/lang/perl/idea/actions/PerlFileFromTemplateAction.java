@@ -17,25 +17,42 @@
 package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
-import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.openapi.project.DumbAware;
-
-import javax.swing.*;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiDirectory;
+import com.perl5.PerlIcons;
 
 /**
  * Created by hurricup on 26.08.2015.
  */
-public abstract class PerlFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware
+public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware
 {
-	public PerlFileFromTemplateAction(String text, String description, Icon icon)
+	public static final String ACTION_TITLE = "New Perl5 file";
+
+	public PerlFileFromTemplateAction()
 	{
-		super(text, description, icon);
+		super("Perl5 File", "Creates a Perl5 file from the specified template", PerlIcons.PERL_LANGUAGE_ICON);
+
 	}
 
 	@Override
-	protected boolean isAvailable(DataContext dataContext)
+	protected void buildDialog(Project project, PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder)
 	{
-		// fixme conditions should be changed for micro-ides
-		return super.isAvailable(dataContext);
+		builder
+				.setTitle(ACTION_TITLE)
+				.addKind("Package", PerlIcons.PM_FILE, "Perl5 package")
+				.addKind("Script", PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
+				.addKind("Test", PerlIcons.TEST_FILE, "Perl5 test")
+				.addKind("Mojolicious Template File", PerlIcons.MOJO_FILE, "Perl5 mojolicious")
+				.addKind("Embedded Perl5 File", PerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded")
+		;
 	}
+
+	@Override
+	protected String getActionName(PsiDirectory directory, String newName, String templateName)
+	{
+		return "Create Perl5 file " + newName;
+	}
+
 }
