@@ -20,17 +20,16 @@ package com.perl5.lang.perl.idea.annotators;
  * Created by hurricup on 25.04.2015.
  */
 
-import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,40 +37,19 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 {
 
 
-	private void annotateStringContent(PerlStringContentElementImpl element, AnnotationHolder holder)
+	private void annotateString(PsiElement element, AnnotationHolder holder, TextAttributesKey key)
 	{
-		PsiElement parent = element.getParent();
-		PsiElement grandParent = parent.getParent();
-
-		if (parent instanceof PerlHeredocElementImpl)
+		TextRange elementRange = element.getTextRange();
+		if (element instanceof PerlHeredocElementImpl)
 		{
-			if (!InjectedLanguageUtil.hasInjections((PerlHeredocElementImpl) parent))
-			{
-				Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
-				IElementType tokenType = parent.getNode().getElementType();
-
-				if (tokenType == HEREDOC_QQ)
-					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
-				else if (tokenType == HEREDOC_QX) // executable
-					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
-				else
-					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
-
-			}
+			elementRange = new TextRange(elementRange.getStartOffset() + 1, elementRange.getEndOffset());
 		}
-		else if (!(parent instanceof PsiPerlConstantName
-				|| grandParent instanceof PsiPerlConstantName
-		))
-		{
-			Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
 
-			if (parent instanceof PsiPerlStringDq) // interpolated
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
-			else if (parent instanceof PsiPerlStringXq) // executable
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
-			else
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
-		}
+		decorateElement(
+				holder.createInfoAnnotation(elementRange, null),
+				key,
+				false,
+				false);
 	}
 
 
@@ -91,14 +69,17 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 					PerlSyntaxHighlighter.PERL_ANNOTATION,
 					false,
 					false);
-		else if (element instanceof PerlStringContentElementImpl)
-			annotateStringContent((PerlStringContentElementImpl) element, holder);
-//		else if( element instanceof PsiPerlTermExpr)
-//			holder.createErrorAnnotation(element, "Term expression wrapper");
 		else
 		{
 			IElementType tokenType = element.getNode().getElementType();
-			if (tokenType == HANDLE)
+
+			if (element instanceof PsiPerlStringDq || tokenType == HEREDOC_QQ)
+				annotateString(element, holder, PerlSyntaxHighlighter.PERL_DQ_STRING);
+			else if (element instanceof PsiPerlStringSq || element instanceof PsiPerlStringBare || tokenType == HEREDOC)
+				annotateString(element, holder, PerlSyntaxHighlighter.PERL_SQ_STRING);
+			else if (element instanceof PsiPerlStringXq || tokenType == HEREDOC_QX)
+				annotateString(element, holder, PerlSyntaxHighlighter.PERL_DX_STRING);
+			else if (tokenType == HANDLE)
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_GLOB,
