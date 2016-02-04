@@ -75,7 +75,7 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 
 			if (element instanceof PsiPerlStringDq || tokenType == HEREDOC_QQ)
 				annotateString(element, holder, PerlSyntaxHighlighter.PERL_DQ_STRING);
-			else if (element instanceof PsiPerlStringSq || element instanceof PsiPerlStringBare || tokenType == HEREDOC)
+			else if (element instanceof PsiPerlStringSq || element instanceof PsiPerlStringBare || element instanceof PsiPerlStringList || tokenType == HEREDOC)
 				annotateString(element, holder, PerlSyntaxHighlighter.PERL_SQ_STRING);
 			else if (element instanceof PsiPerlStringXq || tokenType == HEREDOC_QX)
 				annotateString(element, holder, PerlSyntaxHighlighter.PERL_DX_STRING);
