@@ -19,23 +19,25 @@ package com.perl5.lang.perl.idea.completion.inserthandlers;
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 
 /**
  * Created by hurricup on 25.07.2015.
  */
-public class SubSelectionHandler implements InsertHandler<LookupElement>
+public class SubSelectionHandler implements InsertHandler<LookupElement>, PerlElementTypes
 {
 	@Override
 	public void handleInsert(final InsertionContext context, LookupElement item)
 	{
-		assert item instanceof LookupElementBuilder;
-
 		final Editor editor = context.getEditor();
+		int caretOffset = editor.getCaretModel().getOffset();
+		PsiElement targetElement = context.getFile().findElementAt(caretOffset);
+		if (targetElement != null && targetElement.getNode().getElementType() == LEFT_PAREN)
+			return;
 
 		PsiElement subDefitnition = item.getPsiElement();
 		EditorModificationUtil.insertStringAtCaret(editor, "()");
