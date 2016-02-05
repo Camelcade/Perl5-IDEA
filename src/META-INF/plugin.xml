@@ -159,13 +159,13 @@
         <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandlerDelegate"
                               id="PerlEnterHandler" order="first"/>
 
-        <fileTypeDetector implementation="com.perl5.PerlFileTypeDetector"/>
+        <fileTypeDetector implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeDetector"/>
 
         <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
         <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
 
-        <fileTypeFactory implementation="com.perl5.PerlFileTypeFactory"/>
+        <fileTypeFactory implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeFactory"/>
 
         <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType"/>
         <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
