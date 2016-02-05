@@ -19,7 +19,7 @@ package completion;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
-import com.perl5.lang.perl.filetypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 
 import java.util.Arrays;
 import java.util.List;

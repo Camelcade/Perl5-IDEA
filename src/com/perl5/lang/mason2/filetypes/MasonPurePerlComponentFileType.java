@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.filetypes;
 import com.intellij.lang.Language;
 import com.perl5.lang.mason2.MasonIcons;
 import com.perl5.lang.mason2.MasonLanguage;
-import com.perl5.lang.perl.filetypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

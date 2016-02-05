@@ -26,7 +26,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousHighlighter;
-import com.perl5.lang.perl.filetypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

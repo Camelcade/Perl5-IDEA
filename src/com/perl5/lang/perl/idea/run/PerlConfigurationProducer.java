@@ -23,8 +23,8 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.filetypes.PerlFileType;
-import com.perl5.lang.perl.filetypes.PerlFileTypeTest;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -18,9 +18,9 @@ package com.perl5;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
-import com.perl5.lang.perl.filetypes.PerlFileType;
-import com.perl5.lang.perl.filetypes.PerlFileTypePackage;
-import com.perl5.lang.perl.filetypes.PerlFileTypeTest;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlFileTypeFactory extends FileTypeFactory
