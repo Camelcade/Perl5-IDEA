@@ -25,6 +25,7 @@ import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -95,7 +96,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	 * @param file      PsiFile to search in
 	 * @return result map
 	 */
-	public static Map<String, Set<String>> getImportedArrays(Project project, String namespace, PsiFile file)
+	public static Map<String, Set<String>> getImportedArrays(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlImportsCollector('@', new HashMap<String, Set<String>>());
 		PerlUtil.getImportedNames(project, namespace, file, collector);

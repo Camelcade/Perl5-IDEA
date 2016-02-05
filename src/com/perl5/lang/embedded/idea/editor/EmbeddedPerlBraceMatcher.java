@@ -21,6 +21,8 @@ import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 03.09.2015.
@@ -38,7 +40,7 @@ public class EmbeddedPerlBraceMatcher implements PairedBraceMatcher, EmbeddedPer
 	}
 
 	@Override
-	public boolean isPairedBracesAllowedBeforeType(IElementType lbraceType, IElementType contextType)
+	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType)
 	{
 		return true;
 	}

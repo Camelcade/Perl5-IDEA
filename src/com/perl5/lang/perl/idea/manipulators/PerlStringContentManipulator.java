@@ -20,6 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 27.09.2015.
@@ -27,7 +28,7 @@ import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 public class PerlStringContentManipulator extends AbstractElementManipulator<PerlStringContentElementImpl>
 {
 	@Override
-	public PerlStringContentElementImpl handleContentChange(PerlStringContentElementImpl element, TextRange range, String newContent) throws IncorrectOperationException
+	public PerlStringContentElementImpl handleContentChange(@NotNull PerlStringContentElementImpl element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
 		return (PerlStringContentElementImpl) element.replaceWithText(newContent);
 	}

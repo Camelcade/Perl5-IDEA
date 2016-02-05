@@ -25,6 +25,7 @@ import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -91,7 +92,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 * @param file      PsiFile to search in
 	 * @return result map
 	 */
-	public static Map<String, Set<String>> getImportedScalars(Project project, final String namespace, PsiFile file)
+	public static Map<String, Set<String>> getImportedScalars(@NotNull Project project, @NotNull final String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlImportsCollector('$', new HashMap<String, Set<String>>());
 		PerlUtil.getImportedNames(project, namespace, file, collector);

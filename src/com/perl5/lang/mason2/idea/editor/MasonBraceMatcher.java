@@ -21,6 +21,7 @@ import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.12.2015.
@@ -53,7 +54,7 @@ public class MasonBraceMatcher implements PairedBraceMatcher, MasonElementTypes
 	}
 
 	@Override
-	public boolean isPairedBracesAllowedBeforeType(IElementType lbraceType, IElementType contextType)
+	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, IElementType contextType)
 	{
 		return true;
 	}

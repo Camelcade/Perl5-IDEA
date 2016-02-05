@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.internals;
 
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -213,7 +214,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 	}
 
 	@Override
-	public int compareTo(PerlVersion o)
+	public int compareTo(@NotNull PerlVersion o)
 	{
 		return Double.compare(getDoubleVersion(), o.getDoubleVersion());
 	}

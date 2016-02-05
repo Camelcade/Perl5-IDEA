@@ -48,6 +48,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Stub
 		super(stub, nodeType);
 	}
 
+	@NotNull
 	@Override
 	public String getPackageName()
 	{

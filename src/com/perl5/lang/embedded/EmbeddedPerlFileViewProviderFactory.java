@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class EmbeddedPerlFileViewProviderFactory implements FileViewProviderFactory
 {
+	@NotNull
 	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
 												   com.intellij.lang.Language language,
 												   @NotNull PsiManager manager,

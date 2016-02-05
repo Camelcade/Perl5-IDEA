@@ -67,7 +67,7 @@ public class PerlCreatePackageFromTemplateHandler extends DefaultCreateFromTempl
 
 	@NotNull
 	@Override
-	public PsiElement createFromTemplate(Project project, PsiDirectory directory, String fileName, FileTemplate template, String templateText, Map<String, Object> props) throws IncorrectOperationException
+	public PsiElement createFromTemplate(Project project, PsiDirectory directory, String fileName, FileTemplate template, String templateText, @NotNull Map<String, Object> props) throws IncorrectOperationException
 	{
 		return super.createFromTemplate(project, directory, fileName, template, templateText, props);
 	}

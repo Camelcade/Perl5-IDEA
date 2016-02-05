@@ -27,6 +27,7 @@ import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import gnu.trove.THashSet;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.*;
@@ -102,7 +103,7 @@ public class PerlUtil
 	 * @param file      PsiFile to search in
 	 * @return result map
 	 */
-	public static Map<String, Set<String>> getImportedNames(Project project, String namespace, PsiFile file, PerlNamespaceEntityProcessor<String> processor)
+	public static Map<String, Set<String>> getImportedNames(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file, @NotNull PerlNamespaceEntityProcessor<String> processor)
 	{
 		Map<String, Set<String>> result = new HashMap<String, Set<String>>();
 

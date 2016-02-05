@@ -38,7 +38,7 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 *
 	 * @return PsiElement
 	 */
-	@NotNull
+	@Nullable
 	PsiPerlBlock getBlock();
 
 	/**

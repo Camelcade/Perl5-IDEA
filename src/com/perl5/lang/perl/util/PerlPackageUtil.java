@@ -464,20 +464,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
-	public static Collection<PerlUseStatement> getPackageImports(Project project, String packageName)
-	{
-		return getPackageImports(project, packageName, GlobalSearchScope.allScope(project));
-	}
-
-	public static Collection<PerlUseStatement> getPackageImports(Project project, String packageName, PsiFile file)
+	public static Collection<PerlUseStatement> getPackageImports(@NotNull Project project, @NotNull String packageName, @NotNull PsiFile file)
 	{
 		return getPackageImports(project, packageName, GlobalSearchScope.fileScope(project, file.getVirtualFile()));
 	}
 
-	public static Collection<PerlUseStatement> getPackageImports(Project project, String packageName, GlobalSearchScope scope)
+	public static Collection<PerlUseStatement> getPackageImports(@NotNull Project project, @NotNull String packageName, @NotNull GlobalSearchScope scope)
 	{
-		assert packageName != null;
-
 		return StubIndex.getElements(PerlUseStatementStubIndex.KEY, packageName, project, scope, PerlUseStatement.class);
 	}
 

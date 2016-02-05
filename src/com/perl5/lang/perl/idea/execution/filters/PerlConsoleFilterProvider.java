@@ -30,7 +30,7 @@ public class PerlConsoleFilterProvider implements ConsoleFilterProviderEx
 {
 	@NotNull
 	@Override
-	public Filter[] getDefaultFilters(Project project)
+	public Filter[] getDefaultFilters(@NotNull Project project)
 	{
 		Filter filter = new PerlConsoleFileLinkFilter(project);
 		return new Filter[]{filter};
