@@ -2055,7 +2055,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseFileContent(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
-		return ((PerlBuilder) b).getPerlParser().parseFileContents(b,l);
+		return ((PerlBuilder) b).getPerlParser().parseFileContents(b, l);
 	}
 
 	public static boolean parseNestedElementVariation(PsiBuilder b, int l)

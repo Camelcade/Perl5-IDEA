@@ -44,7 +44,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 		{
 			PerlStringCompletionUtil.fillWithHashIndexes(element, result);
 		}
-		else if( USE_PARAMETERS_PATTERN.accepts(element))	// use or no parameters
+		else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
 		{
 			PerlStringCompletionUtil.fillWithUseParameters(element, result);
 		}

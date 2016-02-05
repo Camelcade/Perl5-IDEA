@@ -35,10 +35,10 @@ public class PerlMroDfs extends PerlMro
 	/**
 	 * Builds list of inheritance path for DFS mro (Perl5 default): http://perldoc.perl.org/mro.html
 	 *
-	 * @param project      project
+	 * @param project              project
 	 * @param namespaceDefinitions List of package names to add
-	 * @param recursionMap recursion protection map
-	 * @param result       list to populate
+	 * @param recursionMap         recursion protection map
+	 * @param result               list to populate
 	 */
 	@Override
 	public void getLinearISA(Project project, List<PerlNamespaceDefinition> namespaceDefinitions, HashSet<String> recursionMap, ArrayList<String> result)

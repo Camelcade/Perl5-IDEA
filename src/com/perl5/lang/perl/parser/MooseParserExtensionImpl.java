@@ -232,7 +232,6 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	}
 
 
-
 	@Nullable
 	@Override
 	public List<Pair<IElementType, TokenSet>> getExtensionSets()

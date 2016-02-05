@@ -112,9 +112,13 @@ public abstract class PerlParserExtension
 
 	/**
 	 * Parses element in dereference sequence.
- 	 * @param b PerlBuilder
+	 *
+	 * @param b PerlBuilder
 	 * @param l parsing level
 	 * @return Parsing result
 	 */
-	public boolean parseNestedElement(PerlBuilder b, int l){ return false;}
+	public boolean parseNestedElement(PerlBuilder b, int l)
+	{
+		return false;
+	}
 }

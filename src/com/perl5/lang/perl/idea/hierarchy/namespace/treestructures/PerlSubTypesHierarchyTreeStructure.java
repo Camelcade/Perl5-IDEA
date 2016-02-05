@@ -49,7 +49,7 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure
 			{
 				for (PerlNamespaceDefinition namespaceDefinition : ((PerlNamespaceDefinition) element).getChildNamespaceDefinitions())
 				{
-						result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, namespaceDefinition, false));
+					result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, namespaceDefinition, false));
 				}
 			}
 		}

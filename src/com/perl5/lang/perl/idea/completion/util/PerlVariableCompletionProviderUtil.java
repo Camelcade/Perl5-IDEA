@@ -42,51 +42,51 @@ public class PerlVariableCompletionProviderUtil
 	public static LookupElementBuilder getScalarLookupElement(String name)
 	{
 		return LookupElementBuilder
-					.create(name)
-					.withIcon(PerlIcons.SCALAR_GUTTER_ICON);
+				.create(name)
+				.withIcon(PerlIcons.SCALAR_GUTTER_ICON);
 	}
 
 	public static LookupElementBuilder getGlobLookupElement(String name)
 	{
 		return LookupElementBuilder
-					.create(name)
-					.withIcon(PerlIcons.GLOB_GUTTER_ICON);
+				.create(name)
+				.withIcon(PerlIcons.GLOB_GUTTER_ICON);
 	}
 
 	public static LookupElementBuilder getArrayLookupElement(String name)
 	{
 		return LookupElementBuilder
-					.create(name)
-					.withIcon(PerlIcons.ARRAY_GUTTER_ICON);
+				.create(name)
+				.withIcon(PerlIcons.ARRAY_GUTTER_ICON);
 	}
 
 	public static LookupElementBuilder getArrayElementLookupElement(String name)
 	{
 		return getArrayLookupElement(name)
-					.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-					.withTailText("[]");
+				.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
+				.withTailText("[]");
 
 	}
 
 	public static LookupElementBuilder getHashLookupElement(String name)
 	{
 		return LookupElementBuilder
-					.create(name)
-					.withIcon(PerlIcons.HASH_GUTTER_ICON);
+				.create(name)
+				.withIcon(PerlIcons.HASH_GUTTER_ICON);
 	}
 
 	public static LookupElementBuilder getHashElementLookupElement(String name)
 	{
 		return getHashLookupElement(name)
-					.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-					.withTailText("{}");
+				.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
+				.withTailText("{}");
 	}
 
 	public static LookupElementBuilder getHashSliceElementLookupElement(String name)
 	{
 		return getHashLookupElement(name)
-					.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER) // slice here
-					.withTailText("{}");
+				.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER) // slice here
+				.withTailText("{}");
 	}
 
 	public static void fillWithUnresolvedVars(final PerlVariableNameElement variableNameElement, final CompletionResultSet resultSet)

@@ -34,10 +34,10 @@ public class PerlMroC3 extends PerlMro
 	/**
 	 * Builds list of inheritance path for C3 mro (Dylan, Python, Perl6): http://perldoc.perl.org/mro.html#The-C3-MRO
 	 *
-	 * @param project      project
+	 * @param project              project
 	 * @param namespaceDefinitions list of package names to add
-	 * @param recursionMap recursion protection map
-	 * @param result       list to populate
+	 * @param recursionMap         recursion protection map
+	 * @param result               list to populate
 	 */
 	@Override
 	public void getLinearISA(Project project, List<PerlNamespaceDefinition> namespaceDefinitions, HashSet<String> recursionMap, ArrayList<String> result)

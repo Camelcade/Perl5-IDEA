@@ -116,7 +116,8 @@ public interface MasonElementTypes extends MasonSyntaxElements
 			return new MasonFlagsStatementImpl(node);
 		}
 	};
-	IElementType MASON_CALL_STATEMENT = new MasonTemplatingElementType("MASON_CALL_STATEMENT")	{
+	IElementType MASON_CALL_STATEMENT = new MasonTemplatingElementType("MASON_CALL_STATEMENT")
+	{
 		@NotNull
 		@Override
 		public PsiElement getPsiElement(@NotNull ASTNode node)
@@ -125,7 +126,8 @@ public interface MasonElementTypes extends MasonSyntaxElements
 		}
 	};
 
-	IElementType MASON_AROUND_MODIFIER = new MasonTemplatingElementType("MASON_AROUND_MODIFIER")	{
+	IElementType MASON_AROUND_MODIFIER = new MasonTemplatingElementType("MASON_AROUND_MODIFIER")
+	{
 		@NotNull
 		@Override
 		public PsiElement getPsiElement(@NotNull ASTNode node)
@@ -134,7 +136,8 @@ public interface MasonElementTypes extends MasonSyntaxElements
 		}
 	};
 
-	IElementType MASON_ABSTRACT_BLOCK = new MasonTemplatingElementType("MASON_ABSTRACT_BLOCK")	{
+	IElementType MASON_ABSTRACT_BLOCK = new MasonTemplatingElementType("MASON_ABSTRACT_BLOCK")
+	{
 		@NotNull
 		@Override
 		public PsiElement getPsiElement(@NotNull ASTNode node)
@@ -143,7 +146,8 @@ public interface MasonElementTypes extends MasonSyntaxElements
 		}
 	};
 
-	IElementType MASON_TEXT_BLOCK = new MasonTemplatingElementType("MASON_TEXT_BLOCK")	{
+	IElementType MASON_TEXT_BLOCK = new MasonTemplatingElementType("MASON_TEXT_BLOCK")
+	{
 		@NotNull
 		@Override
 		public PsiElement getPsiElement(@NotNull ASTNode node)
@@ -152,7 +156,8 @@ public interface MasonElementTypes extends MasonSyntaxElements
 		}
 	};
 
-	IElementType MASON_FILTERED_BLOCK = new MasonTemplatingElementType("MASON_FILTERED_BLOCK")	{
+	IElementType MASON_FILTERED_BLOCK = new MasonTemplatingElementType("MASON_FILTERED_BLOCK")
+	{
 		@NotNull
 		@Override
 		public PsiElement getPsiElement(@NotNull ASTNode node)
@@ -161,7 +166,8 @@ public interface MasonElementTypes extends MasonSyntaxElements
 		}
 	};
 
-	IElementType MASON_SIMPLE_DEREF_EXPR = new MasonTemplatingElementType("MASON_DEREF_EXPRESSION")	{
+	IElementType MASON_SIMPLE_DEREF_EXPR = new MasonTemplatingElementType("MASON_DEREF_EXPRESSION")
+	{
 		@NotNull
 		@Override
 		public PsiElement getPsiElement(@NotNull ASTNode node)

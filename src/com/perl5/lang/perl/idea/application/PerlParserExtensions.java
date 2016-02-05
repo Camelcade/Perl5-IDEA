@@ -55,7 +55,7 @@ public class PerlParserExtensions implements ApplicationComponent
 			PerlLexer.CUSTOM_TOKEN_TYPES.putAll(customTokens);
 
 			// add regex prefix tokenset
-			if( extension.getRegexPrefixTokenSet() != null )
+			if (extension.getRegexPrefixTokenSet() != null)
 				PerlLexer.BARE_REGEX_PREFIX_TOKENSET = TokenSet.orSet(PerlLexer.BARE_REGEX_PREFIX_TOKENSET, extension.getRegexPrefixTokenSet());
 
 			// add tokens to fallback set

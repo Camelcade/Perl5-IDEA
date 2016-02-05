@@ -60,5 +60,4 @@ public interface PerlCodeGenerator
 	void generateConstructor(PsiElement anchor, Editor editor);
 
 
-
 }

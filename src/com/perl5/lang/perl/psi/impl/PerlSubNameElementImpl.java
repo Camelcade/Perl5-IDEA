@@ -83,7 +83,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public PsiReference[] getReferences()
 	{
-		if( !this.equals(myReferences[0].getElement()))
+		if (!this.equals(myReferences[0].getElement()))
 		{
 			myReferences[0] = new PerlSubReference(this, null);
 		}
