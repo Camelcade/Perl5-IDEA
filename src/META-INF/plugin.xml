@@ -32,10 +32,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p><b>1.330 changes</b></p>
+      <p><b>1.331 changes</b></p>
       <p>This relase fixes bugs or feedbacks from 1.3 release:
       <ul>
-        <li>Syntax highlighting optimized and works much faster, but sometimes may have racing bugs (like $var inside a @{$var} painted as an array). Let me know if it becomes annoying.</li>
         <li>String content auto-completion now has ARRAY, SCALAR, etc.</li>
         <li>New files menu items are now in the dialog "New Perl5 file"</li>
         <li>Words in strings with non-ASCII symbols now being parsed as words instead of sequence of letters (also utf identifiers now partially supported)</li>
