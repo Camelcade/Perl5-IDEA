@@ -99,7 +99,7 @@ public class PerlSettingsConfigurable implements Configurable
 
 		selfNamesModel = new CollectionListModel<String>();
 		selfNamesList = new JBList(selfNamesModel);
-		builder.addLabeledComponent(new JLabel("Sclar names considered as an object self-reference (without a $):"), ToolbarDecorator
+		builder.addLabeledComponent(new JLabel("Scalar names considered as an object self-reference (without a $):"), ToolbarDecorator
 				.createDecorator(selfNamesList)
 				.setAddAction(new AnActionButtonRunnable()
 				{
