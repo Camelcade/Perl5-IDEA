@@ -74,7 +74,7 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor
 			return globResult.toArray(new NavigationItem[globResult.size()]);
 		}
 		else
-			throw new RuntimeException("Cant' be");
+			throw new RuntimeException("Cant' be: " + name);
 
 		return result.toArray(new NavigationItem[result.size()]);
 	}
