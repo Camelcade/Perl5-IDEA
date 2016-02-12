@@ -36,6 +36,7 @@
       <p>This relase fixes more bugs or feedbacks from 1.3 release:
       <ul>
         <li>Fixed possible parser failure on regex with e modifier</li>
+        <li>Fixed package file refactoring bug with encapsulated class roots</li>
       </ul>
       </p>
 

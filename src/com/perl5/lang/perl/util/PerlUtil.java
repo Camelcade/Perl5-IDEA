@@ -48,11 +48,16 @@ public class PerlUtil
 	 */
 	public static VirtualFile getFileClassRoot(Project project, VirtualFile file)
 	{
+		VirtualFile result = null;
 		for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
-			if (VfsUtil.isAncestor(classRoot, file, false))
-				return classRoot;
+		{
+			if (VfsUtil.isAncestor(classRoot, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true)))
+			{
+				result = classRoot;
+			}
+		}
 
-		return null;
+		return result;
 	}
 
 	/**
@@ -65,15 +70,18 @@ public class PerlUtil
 	public static VirtualFile getFileClassRoot(Project project, String filePath)
 	{
 		File file = new File(filePath);
+		VirtualFile result = null;
 
 		for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
 		{
 			File sourceRootFile = new File(classRoot.getPath());
-			if (VfsUtil.isAncestor(sourceRootFile, file, false))
-				return classRoot;
+			if (VfsUtil.isAncestor(sourceRootFile, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true)))
+			{
+				result = classRoot;
+			}
 		}
 
-		return null;
+		return result;
 	}
 
 	public static Collection<String> getIndexKeysWithoutInternals(StubIndexKey<String, ?> key, Project project)
