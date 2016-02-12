@@ -57,6 +57,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		super(stub, nodeType);
 	}
 
+	@Nullable
 	@Override
 	public String getName()
 	{

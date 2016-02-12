@@ -354,29 +354,34 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 		{
 			List<TreeElement> inheritedResult = new ArrayList<TreeElement>();
 
-			for (PsiElement element : PerlMro.getVariants(myElement.getProject(), ((PerlNamespaceDefinition) myElement).getName(), true))
+			String packageName = ((PerlNamespaceDefinition) myElement).getName();
+
+			if (packageName != null)
 			{
-				if (element instanceof PerlHierarchyViewElementsProvider)
+				for (PsiElement element : PerlMro.getVariants(myElement.getProject(), packageName, true))
 				{
-					((PerlHierarchyViewElementsProvider) element).fillHierarchyViewElements(inheritedResult, implementedMethods, true, false);
-				}
-				else if (element instanceof PerlNamedElement && !implementedMethods.contains(((PerlNamedElement) element).getName()))
-				{
-					if (element instanceof PerlSubDefinitionBase)
+					if (element instanceof PerlHierarchyViewElementsProvider)
 					{
-						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionBase) element).setInherited());
+						((PerlHierarchyViewElementsProvider) element).fillHierarchyViewElements(inheritedResult, implementedMethods, true, false);
 					}
-					else if (element instanceof PerlSubDeclaration)
+					else if (element instanceof PerlNamedElement && !implementedMethods.contains(((PerlNamedElement) element).getName()))
 					{
-						inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclaration) element).setInherited());
-					}
-					else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).isLeftSideOfAssignment() && ((PerlGlobVariable) element).getName() != null)
-					{
-						inheritedResult.add(new PerlGlobStructureViewElement((PerlGlobVariable) element).setInherited());
-					}
-					else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
-					{
-						inheritedResult.add(new PerlConstantStructureViewElement((PerlConstant) element).setInherited());
+						if (element instanceof PerlSubDefinitionBase)
+						{
+							inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionBase) element).setInherited());
+						}
+						else if (element instanceof PerlSubDeclaration)
+						{
+							inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclaration) element).setInherited());
+						}
+						else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).isLeftSideOfAssignment() && ((PerlGlobVariable) element).getName() != null)
+						{
+							inheritedResult.add(new PerlGlobStructureViewElement((PerlGlobVariable) element).setInherited());
+						}
+						else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
+						{
+							inheritedResult.add(new PerlConstantStructureViewElement((PerlConstant) element).setInherited());
+						}
 					}
 				}
 			}

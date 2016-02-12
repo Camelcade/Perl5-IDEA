@@ -98,4 +98,7 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 */
 	@NotNull
 	List<String> getParentNamepsacesNames();
+
+	@Nullable
+	String getName();
 }

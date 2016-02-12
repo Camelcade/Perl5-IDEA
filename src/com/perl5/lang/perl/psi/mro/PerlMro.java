@@ -22,6 +22,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -92,7 +93,7 @@ public abstract class PerlMro
 	 * @param isSuper         flag for SUPER resolutions
 	 * @return collection of definitions
 	 */
-	public static Collection<PsiElement> getVariants(Project project, String basePackageName, boolean isSuper)
+	public static Collection<PsiElement> getVariants(Project project, @NotNull String basePackageName, boolean isSuper)
 	{
 		HashMap<String, PsiElement> methods = new HashMap<String, PsiElement>();
 
@@ -139,7 +140,7 @@ public abstract class PerlMro
 	 * @param isSuper     if false - we include current package into the list, true - otherwise
 	 * @return list of linear @ISA
 	 */
-	public static ArrayList<String> getLinearISA(Project project, String packageName, boolean isSuper)
+	public static ArrayList<String> getLinearISA(Project project, @NotNull String packageName, boolean isSuper)
 	{
 		HashSet<String> recursionMap = new HashSet<String>();
 		ArrayList<String> result = new ArrayList<String>();
@@ -160,7 +161,7 @@ public abstract class PerlMro
 		return result;
 	}
 
-	public static void getPackageParents(Project project, String packageName, HashSet<String> recursionMap, ArrayList<String> result)
+	public static void getPackageParents(Project project, @NotNull String packageName, HashSet<String> recursionMap, ArrayList<String> result)
 	{
 		// at the moment we are checking all definitions available
 		// fixme we should check only those, which are used in currrent file

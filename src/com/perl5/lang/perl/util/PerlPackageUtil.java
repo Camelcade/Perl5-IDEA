@@ -243,15 +243,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param packageName canonical package name (without tailing ::)
 	 * @return collection of found definitions
 	 */
-	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName)
+	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, @NotNull String packageName)
 	{
 		return getNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
 	}
 
-	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
+	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, @NotNull String packageName, GlobalSearchScope scope)
 	{
-		assert packageName != null;
-
 		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class);
 	}
 
