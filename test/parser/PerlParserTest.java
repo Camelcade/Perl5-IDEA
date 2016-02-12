@@ -84,10 +84,22 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("perl_switch.pl");
 	}
 
+	public void testCamelcade94()
+	{
+		doTest("camelcade94.pl", false);
+	}
+
 	public void doTest(String filename)
+	{
+		doTest(filename, true);
+	}
+
+	public void doTest(String filename, boolean checkErrors)
 	{
 		myFileName = filename;
 		doTest(true);
+
+		if (checkErrors)
 		assertFalse(
 				"PsiFile contains error elements",
 				toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")

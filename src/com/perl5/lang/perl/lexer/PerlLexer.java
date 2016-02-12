@@ -513,7 +513,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
-		int bufferEnd = buffer.length();
+		int bufferEnd = getBufferEnd();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
 			return super.perlAdvance();
@@ -881,7 +881,7 @@ public class PerlLexer extends PerlLexerGenerated
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 		setTokenStart(tokenStart);
-		int bufferEnd = buffer.length();
+		int bufferEnd = getBufferEnd();
 
 		int currentPosition = tokenStart;
 		int linePos = currentPosition;
@@ -1010,7 +1010,7 @@ public class PerlLexer extends PerlLexerGenerated
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 		setTokenStart(tokenStart);
-		int bufferEnd = buffer.length();
+		int bufferEnd = getBufferEnd();
 
 		int currentPosition = tokenStart + 1;
 		int linePos = currentPosition;
@@ -1087,7 +1087,7 @@ public class PerlLexer extends PerlLexerGenerated
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 		setTokenStart(tokenStart);
-		int bufferEnd = buffer.length();
+		int bufferEnd = getBufferEnd();
 
 		int currentPosition = tokenStart;
 		int linePos = currentPosition;
@@ -1774,7 +1774,7 @@ public class PerlLexer extends PerlLexerGenerated
 							|| nextChar == ';'
 							|| nextChar == ')'
 							|| nextChar == '='
-							&& nextPosition + 1 < buffer.length()
+							&& nextPosition + 1 < getBufferEnd()
 							&& buffer.charAt(nextPosition + 1) == '>'
 					)
 				return true;
@@ -1791,7 +1791,7 @@ public class PerlLexer extends PerlLexerGenerated
 			CharSequence buffer = getBuffer();
 			if (
 					buffer.charAt(nextPosition) == '='
-							&& nextPosition + 1 < buffer.length()
+							&& nextPosition + 1 < getBufferEnd()
 							&& buffer.charAt(nextPosition + 1) == '>'
 					)
 				return true;
@@ -1821,7 +1821,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public boolean bufferAtString(CharSequence buffer, int offset, String pattern)
 	{
 		int patternEnd = offset + pattern.length();
-		return buffer.length() >= patternEnd && buffer.subSequence(offset, patternEnd).toString().equals(pattern);
+		return getBufferEnd() >= patternEnd && buffer.subSequence(offset, patternEnd).toString().equals(pattern);
 	}
 
 	public void registerToken(IElementType tokenType, String tokenText)
