@@ -14,11 +14,12 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2">
+<idea-plugin version="2" url="https://github.com/hurricup/Perl5-IDEA">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
     <version>1.332</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
+    <category>Custom Languages</category>
 
     <description><![CDATA[
     <p>Camelcade adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>

@@ -130,7 +130,7 @@ public class PerlParserTest extends ParsingTestCase
 	{
 		super.setUp();
 
-		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("src"), "plugin.xml", Extensions.getRootArea());
+		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
 		new PerlParserExtensions().initComponent();
 	}
 }
