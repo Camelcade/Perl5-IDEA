@@ -40,7 +40,7 @@ sourceSets {
 apply plugin: 'org.jetbrains.intellij'
 intellij {
     version ideaVersion
-    downloadSources Boolean.valueOf(sources)
+    downloadSources Boolean.valueOf(downloadIdeaSource)
     sandboxDirectory project.rootDir.canonicalPath + "/.sandbox"
 }
 
