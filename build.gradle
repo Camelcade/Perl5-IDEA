@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id 'org.jetbrains.intellij' version '0.0.39'
+    id 'org.jetbrains.intellij' version '0.0.40'
 }
 
 
@@ -40,7 +40,6 @@ sourceSets {
 apply plugin: 'org.jetbrains.intellij'
 intellij {
     version ideaVersion
-    plugins 'copyright'
     downloadSources Boolean.valueOf(sources)
     sandboxDirectory project.rootDir.canonicalPath + "/.sandbox"
 }
@@ -55,12 +54,15 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-//    gen 'de.jflex:jflex:1.6.0'
-//    gen files('lib/gk/grammar-kit-patched.jar')
+configurations {
+    gen
+}
 
-    testCompile "junit:junit:4.+"
-    testCompile 'org.assertj:assertj-core:3.2.0'
+
+dependencies {
+    gen files('lib/lexer/jflex-patched.jar')
+    gen files('lib/gk/grammar-kit.jar')
+    gen files('lib/gk/light-psi-all.jar')
 }
 
 apply plugin: 'idea'
@@ -74,4 +76,88 @@ idea {
     }
 }
 
+def getJflexArguments(srcFlex, targetDir) {
+    return [
+            "-sliceandcharat",
+            "--skel", "grammar/Perl5.skeleton",
+            "-d", targetDir,
+            srcFlex
+    ]
+}
+
+task generatePerl5Parser(type: JavaExec) {
+    ext.src = file("grammar/Perl5.bnf")
+    ext.dstRoot = "gen"
+
+    main = "org.intellij.grammar.Main"
+
+    args = [dstRoot, src]
+
+    inputs.file file(src)
+    outputs.file file(dstRoot + '/com/perl5/lang/perl/parser/PerlParserGenerated.java')
+    outputs.dir fileTree(dir: dstRoot + '/com/perl5/lang/perl/psi', include: '**/*.java')
+
+    classpath configurations.gen
+}
+
+task generatePodParser(type: JavaExec) {
+    ext.src = "grammar/Pod.bnf"
+    ext.dstRoot = "gen"
+
+    main = "org.intellij.grammar.Main"
+
+    args = [dstRoot, file(src)]
+
+    inputs.file file(src)
+    ext.somefile = file(dstRoot + '/com/perl5/lang/pod/parser/PodParser.java')
+    outputs.dir fileTree(dir: dstRoot + '/com/perl5/lang/pod/psi', include: '**/*.java')
+
+    classpath configurations.gen
+}
+
+// fxime dry this
+task generatePerlLexer(type: JavaExec) {
+    dependsOn generatePerl5Parser
+    ext.src = "grammar/Perl.flex"
+    ext.dst = "gen/com/perl5/lang/perl/lexer/"
+    main = "JFlex.Main"
+    args = getJflexArguments(src, dst)
+    inputs.file file(src)
+    outputs.file file(dst+ "PerlLexerGenerated.java")
+    classpath configurations.gen
+}
+
+task generatePodLexer(type: JavaExec) {
+    dependsOn generatePodParser
+    ext.src = "grammar/Pod.flex"
+    ext.dst = "gen/com/perl5/lang/pod/lexer/"
+    main = "JFlex.Main"
+    args = getJflexArguments(src, dst)
+    inputs.file file(src)
+    outputs.file file(dst+ "PodLexer.java")
+    classpath configurations.gen
+}
+
+task generatePerlStringLexer(type: JavaExec) {
+    dependsOn generatePerl5Parser
+    ext.src = "grammar/PerlString.flex"
+    ext.dst = "gen/com/perl5/lang/perl/lexer/"
+    main = "JFlex.Main"
+    args = getJflexArguments(src, dst)
+    inputs.file file(src)
+    outputs.file file(dst + "PerlStringLexerGenerated.java")
+    classpath configurations.gen
+}
+
+task generateLexers{
+    dependsOn generatePerlLexer
+    dependsOn generatePerlStringLexer
+    dependsOn generatePodLexer
+}
+
+// doesn't work
 jar.archiveName = "camelcade.jar"
+
+compileJava{
+    dependsOn generateLexers
+}

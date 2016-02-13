@@ -1,1 +1,6 @@
-/camelcade.jar
+camelcade.jar
+.gradle
+.sandbox
+build/
+out
+classes

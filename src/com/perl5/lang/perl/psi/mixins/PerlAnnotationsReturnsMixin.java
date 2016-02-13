@@ -16,23 +16,32 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
-import com.perl5.lang.perl.psi.PerlNoStatement;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 26.01.2016.
+ * Created by hurricup on 13.02.2016.
  */
-public class PerlNoStatementImplMixin extends PerlUseStatementImplMixin implements PerlNoStatement
+public class PerlAnnotationsReturnsMixin extends ASTWrapperPsiElement implements PerlNamespaceElementContainer
 {
-	public PerlNoStatementImplMixin(ASTNode   node)
+	public PerlAnnotationsReturnsMixin(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	public PerlNoStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType)
+	@Override
+	public PerlNamespaceElement getNamespaceElement()
 	{
-		super(stub, nodeType);
+		for (PsiElement cur = getFirstChild(); cur != null; cur = cur.getNextSibling())
+		{
+			if (cur instanceof PerlNamespaceElement)
+				return (PerlNamespaceElement) cur;
+		}
+		return null;
 	}
+
 }
