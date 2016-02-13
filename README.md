@@ -1,4 +1,6 @@
-#Camelcade adds Perl5 support to the IntelliJ IDEA and specialized JetBrains IDEs
+# Perl5 plugin for IntelliJ IDEA
+
+Camelcade adds Perl5 support to any Java-based JetBrains product.
 
 Version 1.3 of Perl5 plugin for IntelliJ IDEA is available in [JetBrains repo](https://plugins.jetbrains.com/plugin/7796). Next version is currently in development, and if you want to participate - you may fork or contact me via Skype: hurricup
 Don't forget to read our [contribution policy](https://github.com/hurricup/Perl5-IDEA/wiki/Contribution-policy).
