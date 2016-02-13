@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class PodFileTypeFactory extends FileTypeFactory
+public class PodFileTypesFactory extends FileTypeFactory
 {
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
