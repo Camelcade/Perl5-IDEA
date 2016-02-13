@@ -1,6 +1,9 @@
-camelcade.jar
-.gradle
-.sandbox
+.gradle/
+.sandbox/
+.idea/
 build/
-out
-classes
+out/
+classes/
+gen/
+*.iml
+camelcade.jar
