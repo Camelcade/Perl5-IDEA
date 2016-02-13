@@ -19,7 +19,7 @@ plugins {
 }
 
 
-version = "${version}.$buildNumber"
+version = "$version$buildNumber"
 
 apply plugin: 'java'
 sourceCompatibility = javaVersion
@@ -42,6 +42,7 @@ intellij {
     version ideaVersion
     downloadSources Boolean.valueOf(downloadIdeaSource)
     sandboxDirectory project.rootDir.canonicalPath + "/.sandbox"
+    updateSinceUntilBuild = false
 }
 
 test {

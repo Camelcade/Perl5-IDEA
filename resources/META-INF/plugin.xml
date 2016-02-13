@@ -17,7 +17,6 @@
 <idea-plugin version="2" url="https://github.com/hurricup/Perl5-IDEA">
     <id>com.perl5</id>
     <name>Perl5 Support (Camelcade)</name>
-    <version>1.332</version>
     <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
     <category>Custom Languages</category>
 
@@ -33,7 +32,6 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p><b>1.332 changes</b></p>
       <p>This relase fixes more bugs or feedbacks from 1.3 release:
       <ul>
         <li>Fixed possible parser failure on regex with e modifier</li>
