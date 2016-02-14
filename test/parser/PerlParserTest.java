@@ -23,70 +23,75 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
 
 import java.io.File;
-import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 31.01.2016.
  */
 public class PerlParserTest extends ParsingTestCase
 {
-	protected final static String DATA_PATH = "testData/parser/perlParsingSamples";
-	protected final static Pattern filesPattern = Pattern.compile(".+\\.(pl|pm|cgi|t)");
+	public static final String DATA_PATH = "testData/parser/perlParsingSamples";
 	String myFileName;
 
 	public PerlParserTest()
 	{
-		super("", "", new PerlParserDefinition());
+		super("", "pl", new PerlParserDefinition());
+	}
+
+	@Override
+	protected String getTestDataPath()
+	{
+		System.out.println(new File("").getAbsolutePath());
+		return DATA_PATH;
 	}
 
 	public void testInterpolation()
 	{
-		doTest("interpolation.pl");
+		doTest("interpolation");
 	}
 
 	public void testConstant()
 	{
-		doTest("constant.pl");
+		doTest("constant");
 	}
 
 	public void testLazyParsing()
 	{
-		doTest("lazy_parsing.pl");
+		doTest("lazy_parsing");
 	}
 
 	public void testParserTest()
 	{
-		doTest("parser_test_set.pl");
+		doTest("parser_test_set");
 	}
 
 	public void testTrickySyntax()
 	{
-		doTest("tricky_syntax.pl");
+		doTest("tricky_syntax");
 	}
 
 	public void testVariables()
 	{
-		doTest("variables.pl");
+		doTest("variables");
 	}
 
 	public void testMethodSignaturesSimple()
 	{
-		doTest("method_signatures_simple.pl");
+		doTest("method_signatures_simple");
 	}
 
 	public void testUtfIdentifiers()
 	{
-		doTest("utfidentifiers.pl");
+		doTest("utfidentifiers");
 	}
 
 	public void testSwitch()
 	{
-		doTest("perl_switch.pl");
+		doTest("perl_switch");
 	}
 
 	public void testCamelcade94()
 	{
-		doTest("camelcade94.pl", false);
+		doTest("camelcade94", false);
 	}
 
 	public void doTest(String filename)
@@ -106,12 +111,6 @@ public class PerlParserTest extends ParsingTestCase
 		);
 	}
 
-
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
 
 	@Override
 	protected String getTestName(boolean lowercaseFirstLetter)

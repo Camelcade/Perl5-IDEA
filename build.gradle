@@ -49,6 +49,7 @@ intellij {
 test {
     testLogging {
         exceptionFormat = 'full'
+        showStandardStreams = true
     }
     doFirst {
         println workingDir;
@@ -116,7 +117,7 @@ task generatePodParser(type: JavaExec) {
     args = [dstRoot, file(src)]
 
     inputs.file file(src)
-    ext.somefile = file(dstRoot + '/com/perl5/lang/pod/parser/PodParser.java')
+    outputs.file file(dstRoot + '/com/perl5/lang/pod/parser/PodParser.java')
     outputs.dir fileTree(dir: dstRoot + '/com/perl5/lang/pod/psi', include: '**/*.java')
 
     classpath configurations.gen
