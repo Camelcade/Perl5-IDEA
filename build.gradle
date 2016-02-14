@@ -50,6 +50,11 @@ test {
     testLogging {
         exceptionFormat = 'full'
     }
+    doFirst {
+        println workingDir;
+        println project.projectDir;
+        println project.rootDir;
+    }
 }
 
 repositories {
