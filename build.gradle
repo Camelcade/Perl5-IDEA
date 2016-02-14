@@ -51,11 +51,11 @@ test {
         exceptionFormat = 'full'
         showStandardStreams = true
     }
-    doFirst {
-        println workingDir;
-        println project.projectDir;
-        println project.rootDir;
-    }
+//    doFirst {
+//        println workingDir;
+//        println project.projectDir;
+//        println project.rootDir;
+//    }
 }
 
 repositories {

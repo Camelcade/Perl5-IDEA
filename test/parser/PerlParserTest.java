@@ -40,7 +40,7 @@ public class PerlParserTest extends ParsingTestCase
 	@Override
 	protected String getTestDataPath()
 	{
-		System.out.println(new File("").getAbsolutePath());
+//		System.out.println(new File("").getAbsolutePath());
 		return DATA_PATH;
 	}
 
