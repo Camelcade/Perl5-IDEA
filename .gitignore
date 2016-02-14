@@ -1,6 +1,5 @@
 .gradle/
 .sandbox/
-.idea/
 build/
 out/
 classes/
