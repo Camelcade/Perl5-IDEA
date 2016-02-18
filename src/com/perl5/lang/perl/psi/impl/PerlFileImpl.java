@@ -155,18 +155,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		return variableProcessor.getResult();
 	}
 
-	/**
-	 * Searches for lexically visible variables declarations relatively to the current element
-	 *
-	 * @return list of visible variables
-	 */
-	public Collection<PerlVariableDeclarationWrapper> getVisibleLexicalVariables(PsiElement currentElement)
-	{
-
-		HashMap<String, PerlVariableDeclarationWrapper> declarationsHash = new HashMap<String, PerlVariableDeclarationWrapper>();
-		return declarationsHash.values();
-	}
-
 	@Override
 	public String getPackageName()
 	{
