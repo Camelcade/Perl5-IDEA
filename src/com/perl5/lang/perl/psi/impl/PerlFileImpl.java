@@ -151,7 +151,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable currentVariable)
 	{
 		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(currentVariable);
-		System.err.println("Starting search");
 		PsiScopesUtil.treeWalkUp(variableProcessor, currentVariable, null);
 		return variableProcessor.getResult();
 	}
@@ -476,7 +475,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
 	{
-		System.err.println(this);
 		return PerlScopeUtil.processChildren(
 				this,
 				processor,

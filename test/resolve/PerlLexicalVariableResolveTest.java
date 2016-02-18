@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 18.02.2016.
  */
-public class PerlLexicalVariableReference extends LightCodeInsightFixtureTestCase
+public class PerlLexicalVariableResolveTest extends LightCodeInsightFixtureTestCase
 {
 	public static final String DATA_PATH = "testData/resolve";
 
@@ -49,37 +49,61 @@ public class PerlLexicalVariableReference extends LightCodeInsightFixtureTestCas
 
 	public void testSimple()
 	{
-		doTest("variable_simple.pl");
+		doTest("variable_simple.pl", true);
 	}
 
 	public void testIfCondition()
 	{
-		doTest("variable_if_condition.pl");
+		doTest("variable_if_condition.pl", true);
 	}
 
 	public void testForIterator()
 	{
-		doTest("variable_for_iterator.pl");
+		doTest("variable_for_iterator.pl", true);
 	}
+
 	public void testUseVars()
 	{
-		doTest("variable_use_vars.pl");
+		doTest("variable_use_vars.pl", true);
+	}
+	public void testIfElsifElse()
+	{
+		doTest("variable_if_elsif_else.pl", true);
+	}
+	public void testSubSignature()
+	{
+		doTest("variable_sub_signature.pl", true);
 	}
 
-	;
+	public void testNegativeBlock()
+	{
+		doTest("negative_variable_block.pl", false);
+	}
+	public void testNegativeIfElse()
+	{
+		doTest("negative_if_else.pl", false);
+	}
 
-	public void doTest(String fileName)
+	public void doTest(String fileName, boolean shouldFind)
 	{
 		myFixture.configureByFile(fileName);
 		PsiElement element = getElementAtCaret(PerlVariableNameElement.class);
 		PsiReference reference = element.getReference();
 		assertTrue(reference != null);
 		PsiElement result = reference.resolve();
-		assertTrue(result != null);
-		assertTrue(result instanceof PerlVariableDeclarationWrapper);
-		PerlVariable variable = ((PerlVariableDeclarationWrapper) result).getVariable();
-		assertEquals(variable.getName(), element.getText());
-		assertEquals(variable.getActualType(), ((PerlVariable)element.getParent()).getActualType());
+
+		if( shouldFind )
+		{
+			assertTrue(result != null);
+			assertTrue(result instanceof PerlVariableDeclarationWrapper);
+			PerlVariable variable = ((PerlVariableDeclarationWrapper) result).getVariable();
+			assertEquals(variable.getName(), element.getText());
+			assertEquals(variable.getActualType(), ((PerlVariable) element.getParent()).getActualType());
+		}
+		else
+		{
+			assertTrue(result == null);
+		}
 	}
 
 	@NotNull
