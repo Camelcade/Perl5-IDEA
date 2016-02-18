@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
+import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -37,6 +38,13 @@ public class PerlCompositeElementImpl extends ASTWrapperPsiElement implements Pe
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
 	{
-		return super.processDeclarations(processor, state, lastParent, place);
+		System.err.println(this);
+		return PerlScopeUtil.processChildren(
+				this,
+				processor,
+				state,
+				lastParent,
+				place
+		);
 	}
 }

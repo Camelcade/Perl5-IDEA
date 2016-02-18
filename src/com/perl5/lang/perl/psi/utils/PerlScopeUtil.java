@@ -20,6 +20,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,14 +32,20 @@ public class PerlScopeUtil
 {
 	public static boolean processChildren(@NotNull PsiElement element,
 										  @NotNull PsiScopeProcessor processor,
-										  @NotNull ResolveState substitutor,
+										  @NotNull ResolveState resolveState,
 										  @Nullable PsiElement lastParent,
 										  @NotNull PsiElement place)
 	{
 		PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
 		while (run != null)
 		{
-			if (run instanceof PerlCompositeElement && !run.processDeclarations(processor, substitutor, null, place))
+			if (run instanceof PerlVariableDeclarationWrapper && !processor.execute(run, resolveState))
+				return false;
+
+			if (run instanceof PerlCompositeElement &&
+					!(run instanceof PerlLexicalScope) &&
+					!run.processDeclarations(processor, resolveState, null, place)
+					)
 				return false;
 			run = run.getPrevSibling();
 		}

@@ -1,5 +1,6 @@
 .gradle/
 .sandbox/
+.sandbox-test/
 build/
 out/
 classes/

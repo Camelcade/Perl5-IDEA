@@ -47,6 +47,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlVariableDeclarationSearcher;
+import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -149,7 +150,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	 */
 	public PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable currentVariable)
 	{
-		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(currentVariable.getName());
+		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(currentVariable);
+		System.err.println("Starting search");
 		PsiScopesUtil.treeWalkUp(variableProcessor, currentVariable, null);
 		return variableProcessor.getResult();
 	}
@@ -474,7 +476,14 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
 	{
-		return super.processDeclarations(processor, state, lastParent, place);
+		System.err.println(this);
+		return PerlScopeUtil.processChildren(
+				this,
+				processor,
+				state,
+				lastParent,
+				place
+		);
 	}
 
 	@Override

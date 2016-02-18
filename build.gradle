@@ -46,17 +46,19 @@ intellij {
     updateSinceUntilBuild = false
 }
 
+
+
+
 test {
+    doFirst{
+        systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
+    }
     testLogging {
         exceptionFormat = 'full'
         showStandardStreams = true
     }
-//    doFirst {
-//        println workingDir;
-//        println project.projectDir;
-//        println project.rootDir;
-//    }
 }
+
 
 repositories {
     mavenCentral()
@@ -83,6 +85,7 @@ idea {
         generatedSourceDirs += file('gen')
     }
 }
+
 
 def getJflexArguments(srcFlex, targetDir) {
     return [

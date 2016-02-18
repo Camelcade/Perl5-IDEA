@@ -17,10 +17,13 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,17 +33,31 @@ import org.jetbrains.annotations.Nullable;
 public class PerlVariableDeclarationSearcher implements PsiScopeProcessor
 {
 	private final String myName;
+	private final PerlVariableType myVariableType;
 	private PerlVariableDeclarationWrapper myResult;
 
 
-	public PerlVariableDeclarationSearcher(String myName)
+	public PerlVariableDeclarationSearcher(@NotNull PerlVariable variable)
 	{
-		this.myName = myName;
+		this.myName = variable.getName();
+		myVariableType = variable.getActualType();
 	}
 
 	@Override
 	public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state)
 	{
+		if (element instanceof PerlVariableDeclarationWrapper)
+		{
+			PerlVariable variable = ((PerlVariableDeclarationWrapper) element).getVariable();
+			if (variable != null)
+			{
+				if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName()))
+				{
+					myResult = (PerlVariableDeclarationWrapper) element;
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 

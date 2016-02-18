@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 
@@ -26,7 +26,7 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
  * Created by hurricup on 27.05.2015.
  * Mixin for scope elements
  */
-public abstract class PerlLexicalScopeMemberMixin extends ASTWrapperPsiElement implements PerlLexicalScopeMember
+public abstract class PerlLexicalScopeMemberMixin extends PerlCompositeElementImpl implements PerlLexicalScopeMember
 {
 	public PerlLexicalScopeMemberMixin(ASTNode node)
 	{
