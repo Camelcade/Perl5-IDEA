@@ -26,7 +26,7 @@ import com.perl5.lang.perl.psi.PerlNoStatement;
  */
 public class PerlNoStatementImplMixin extends PerlUseStatementImplMixin implements PerlNoStatement
 {
-	public PerlNoStatementImplMixin(ASTNode   node)
+	public PerlNoStatementImplMixin(ASTNode node)
 	{
 		super(node);
 	}

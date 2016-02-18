@@ -52,11 +52,11 @@ public class PerlScopeUtil
 		}
 
 		// checking implicit variables
-		if( element instanceof PerlImplicitVariablesProvider)
+		if (element instanceof PerlImplicitVariablesProvider)
 		{
-			for (PerlVariableDeclarationWrapper wrapper: ((PerlImplicitVariablesProvider) element).getImplicitVariables())
+			for (PerlVariableDeclarationWrapper wrapper : ((PerlImplicitVariablesProvider) element).getImplicitVariables())
 			{
-				if( !processor.execute(wrapper, resolveState))
+				if (!processor.execute(wrapper, resolveState))
 					return false;
 			}
 		}
