@@ -2,4 +2,4 @@
 
 my $abc = 42;
 
-say $a < caret > bc;
+say $a<caret>bc;
