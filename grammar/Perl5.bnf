@@ -15,7 +15,7 @@ limitations under the License.
 */
 {
   parserClass="com.perl5.lang.perl.parser.PerlParserGenerated"
-  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+  extends="com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl"
 
   psiClassPrefix="PsiPerl"
   psiImplClassSuffix="Impl"
@@ -295,7 +295,6 @@ limitations under the License.
     LABEL="LABEL"
   ]
 
-	extends("expr|statement|conditional_block|for_iterator|sub_signature_content")="com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl"
     extends(".+expr")=expr
     name(".+expr")="expression"
 
