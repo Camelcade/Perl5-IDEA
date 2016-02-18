@@ -75,6 +75,10 @@ public class PerlLexicalVariableResolveTest extends LightCodeInsightFixtureTestC
 	{
 		doTest("variable_method_explicit_invocant.pl", true);
 	}
+	public void testMethodImplicitInvocant()
+	{
+		doTest("variable_method_implicit_invocant.pl", true);
+	}
 
 	public void testNegativeBlock()
 	{

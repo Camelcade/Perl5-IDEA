@@ -38,7 +38,7 @@ public class PerlCompositeElementImpl extends ASTWrapperPsiElement implements Pe
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
 	{
-		System.err.println(this);
+//		System.err.println(this);
 		return PerlScopeUtil.processChildren(
 				this,
 				processor,

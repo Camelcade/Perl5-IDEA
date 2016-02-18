@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.utils;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -49,6 +50,17 @@ public class PerlScopeUtil
 				return false;
 			run = run.getPrevSibling();
 		}
+
+		// checking implicit variables
+		if( element instanceof PerlImplicitVariablesProvider)
+		{
+			for (PerlVariableDeclarationWrapper wrapper: ((PerlImplicitVariablesProvider) element).getImplicitVariables())
+			{
+				if( !processor.execute(wrapper, resolveState))
+					return false;
+			}
+		}
+
 		return true;
 	}
 }
