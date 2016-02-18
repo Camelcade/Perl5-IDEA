@@ -57,11 +57,13 @@ public class PerlLexicalVariableReference extends LightCodeInsightFixtureTestCas
 		doTest("variable_if_condition.pl");
 	}
 
-	;
-
 	public void testForIterator()
 	{
 		doTest("variable_for_iterator.pl");
+	}
+	public void testUseVars()
+	{
+		doTest("variable_use_vars.pl");
 	}
 
 	;
