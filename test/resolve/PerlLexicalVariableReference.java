@@ -77,6 +77,7 @@ public class PerlLexicalVariableReference extends LightCodeInsightFixtureTestCas
 		assertTrue(result instanceof PerlVariableDeclarationWrapper);
 		PerlVariable variable = ((PerlVariableDeclarationWrapper) result).getVariable();
 		assertEquals(variable.getName(), element.getText());
+		assertEquals(variable.getActualType(), ((PerlVariable)element.getParent()).getActualType());
 	}
 
 	@NotNull
