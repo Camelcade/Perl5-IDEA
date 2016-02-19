@@ -29,6 +29,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -41,7 +42,7 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlVariableImplMixin extends ASTWrapperPsiElement implements PerlElementTypes, PerlVariable
+public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl implements PerlElementTypes, PerlVariable
 {
 	public PerlVariableImplMixin(ASTNode node)
 	{

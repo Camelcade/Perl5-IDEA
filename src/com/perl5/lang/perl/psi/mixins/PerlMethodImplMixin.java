@@ -21,6 +21,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlMethodImplMixin extends ASTWrapperPsiElement implements PerlMethod
+public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl implements PerlMethod
 {
 	public PerlMethodImplMixin(@NotNull ASTNode node)
 	{

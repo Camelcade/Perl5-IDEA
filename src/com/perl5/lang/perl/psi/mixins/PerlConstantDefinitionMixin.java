@@ -20,11 +20,12 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PsiPerlConstantDefinition;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 
 /**
  * Created by hurricup on 29.08.2015.
  */
-public abstract class PerlConstantDefinitionMixin extends ASTWrapperPsiElement implements PsiPerlConstantDefinition
+public abstract class PerlConstantDefinitionMixin extends PerlCompositeElementImpl implements PsiPerlConstantDefinition
 {
 	public PerlConstantDefinitionMixin(ASTNode node)
 	{

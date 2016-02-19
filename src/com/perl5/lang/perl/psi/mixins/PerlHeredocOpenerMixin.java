@@ -27,13 +27,14 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 07.08.2015.
  */
-public abstract class PerlHeredocOpenerMixin extends ASTWrapperPsiElement implements PerlHeredocOpener
+public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl implements PerlHeredocOpener
 {
 	public PerlHeredocOpenerMixin(@NotNull ASTNode node)
 	{

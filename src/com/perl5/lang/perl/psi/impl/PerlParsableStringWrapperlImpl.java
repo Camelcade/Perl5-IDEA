@@ -23,7 +23,7 @@ import com.perl5.lang.perl.psi.IPerlParsableStringWrapper;
 /**
  * Created by hurricup on 26.08.2015.
  */
-public class PerlParsableStringWrapperlImpl extends ASTWrapperPsiElement implements IPerlParsableStringWrapper
+public class PerlParsableStringWrapperlImpl extends PerlCompositeElementImpl implements IPerlParsableStringWrapper
 {
 	public PerlParsableStringWrapperlImpl(ASTNode node)
 	{

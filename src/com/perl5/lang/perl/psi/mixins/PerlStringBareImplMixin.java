@@ -20,6 +20,7 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.09.2015.
  */
-public class PerlStringBareImplMixin extends ASTWrapperPsiElement implements PerlString
+public class PerlStringBareImplMixin extends PerlCompositeElementImpl implements PerlString
 {
 	public PerlStringBareImplMixin(ASTNode node)
 	{

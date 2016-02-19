@@ -19,12 +19,13 @@ package com.perl5.lang.mason2.psi.impl;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.mason2.psi.MasonAbstractBlock;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 07.01.2016.
  */
-public class MasonAbstractBlockImpl extends ASTWrapperPsiElement implements MasonAbstractBlock
+public class MasonAbstractBlockImpl extends PerlCompositeElementImpl implements MasonAbstractBlock
 {
 	public MasonAbstractBlockImpl(@NotNull ASTNode node)
 	{

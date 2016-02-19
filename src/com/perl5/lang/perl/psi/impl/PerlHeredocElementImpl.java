@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlHeredocElementImpl extends ASTWrapperPsiElement implements PsiLanguageInjectionHost
+public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements PsiLanguageInjectionHost
 {
 	public PerlHeredocElementImpl(@NotNull ASTNode node)
 	{

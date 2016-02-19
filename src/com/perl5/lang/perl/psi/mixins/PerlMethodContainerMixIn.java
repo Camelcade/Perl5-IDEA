@@ -20,12 +20,13 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlMethodContainer;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.11.2015.
  */
-public abstract class PerlMethodContainerMixIn extends ASTWrapperPsiElement implements PerlMethodContainer
+public abstract class PerlMethodContainerMixIn extends PerlCompositeElementImpl implements PerlMethodContainer
 {
 	public PerlMethodContainerMixIn(@NotNull ASTNode node)
 	{

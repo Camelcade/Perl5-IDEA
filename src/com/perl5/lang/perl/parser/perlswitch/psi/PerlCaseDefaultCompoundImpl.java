@@ -18,12 +18,13 @@ package com.perl5.lang.perl.parser.perlswitch.psi;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlCaseDefaultCompoundImpl extends ASTWrapperPsiElement implements PerlCaseDefaultCompound
+public class PerlCaseDefaultCompoundImpl extends PerlCompositeElementImpl implements PerlCaseDefaultCompound
 {
 	public PerlCaseDefaultCompoundImpl(@NotNull ASTNode node)
 	{
