@@ -217,7 +217,8 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
 	{
-		if (processor instanceof PerlVariableScopeProcessor)
+		// fixme move ancestor checking into the state or processor
+		if (processor instanceof PerlVariableScopeProcessor && !PsiTreeUtil.isAncestor(this, place, true))
 		{
 			return processor.execute(this, state);
 		}

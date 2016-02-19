@@ -69,13 +69,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		// refactored
 		extend(
 				CompletionType.BASIC,
-				VARIABLE_COMPLETION_PATTERN,
-				new PerlVariableLexicalCompletionProvider()
-		);
-
-		// refactored
-		extend(
-				CompletionType.BASIC,
 				SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN),
 				new PerlSubBuiltInCompletionProvider()
 		);

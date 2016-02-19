@@ -16,15 +16,22 @@
 
 package com.perl5.lang.perl.idea.completion.util;
 
+import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveState;
+import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
+import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -192,6 +199,83 @@ public class PerlVariableCompletionUtil
 			resultSet.addAllElements(BUILT_IN_HASHES);
 		else if (perlVariable instanceof PsiPerlGlobVariable)
 			resultSet.addAllElements(BUILT_IN_GLOBS);
+	}
+
+	public static void fillWithLExicalVariables(
+							   PsiElement variableNameElement,
+							   @NotNull final CompletionResultSet resultSet)
+	{
+		final PsiElement perlVariable = variableNameElement.getParent();
+
+		PsiScopeProcessor processor = new PerlVariableScopeProcessor()
+		{
+			@Override
+			public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state)
+			{
+				PerlVariableDeclarationWrapper variable = (PerlVariableDeclarationWrapper) element;
+
+				if (perlVariable instanceof PsiPerlScalarVariable)
+				{
+					String variableName = variable.getName();
+					if (variableName != null)
+					{
+						if (variable.getActualType() == PerlVariableType.SCALAR)
+						{
+							resultSet.addElement(PerlVariableCompletionUtil.getScalarLookupElement(variableName));
+						}
+						else if (variable.getActualType() == PerlVariableType.ARRAY)
+						{
+							resultSet.addElement(PerlVariableCompletionUtil.getArrayElementLookupElement(variableName));
+						}
+						else if (variable.getActualType() == PerlVariableType.HASH)
+						{
+							resultSet.addElement(PerlVariableCompletionUtil.getHashElementLookupElement(variableName));
+						}
+					}
+				}
+				else if (perlVariable instanceof PsiPerlArrayVariable)
+				{
+					String variableName = variable.getName();
+					if (variableName != null)
+					{
+						if (variable.getActualType() == PerlVariableType.ARRAY)
+						{
+							resultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(variableName));
+
+						}
+						else if (variable.getActualType() == PerlVariableType.HASH)
+						{
+							resultSet.addElement(PerlVariableCompletionUtil.getHashSliceElementLookupElement(variableName));
+						}
+					}
+				}
+				else if (perlVariable instanceof PsiPerlArrayIndexVariable)
+				{
+					String variableName = variable.getName();
+					if (variableName != null)
+					{
+						if (variable.getActualType() == PerlVariableType.ARRAY)
+						{
+							resultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(variableName));
+						}
+					}
+				}
+				else if (perlVariable instanceof PsiPerlHashVariable)
+				{
+					String variableName = variable.getName();
+					if (variableName != null)
+					{
+						if (variable.getActualType() == PerlVariableType.HASH)
+						{
+							resultSet.addElement(PerlVariableCompletionUtil.getHashLookupElement(variableName));
+						}
+					}
+				}
+
+				return true;
+			}
+		};
+		PerlScopeUtil.treeWalkUp(variableNameElement, processor);
 	}
 
 
