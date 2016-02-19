@@ -24,7 +24,6 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.scope.util.PsiScopesUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.ObjectStubTree;
 import com.intellij.psi.stubs.PsiFileStub;
@@ -46,7 +45,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.references.PerlVariableDeclarationSearcher;
+import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -151,7 +150,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable currentVariable)
 	{
 		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(currentVariable);
-		PsiScopesUtil.treeWalkUp(variableProcessor, currentVariable, null);
+		PerlScopeUtil.treeWalkUp(currentVariable, variableProcessor);
 		return variableProcessor.getResult();
 	}
 

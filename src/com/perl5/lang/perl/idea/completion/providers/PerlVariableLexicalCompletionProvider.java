@@ -22,12 +22,15 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
+import com.intellij.psi.scope.BaseScopeProcessor;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.scope.util.PsiScopesUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
+import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +61,7 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 			return;
 
 
-		PsiScopeProcessor processor = new PsiScopeProcessor()
+		PsiScopeProcessor processor = new PerlVariableScopeProcessor()
 		{
 			@Override
 			public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state)
@@ -125,21 +128,8 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 
 				return true;
 			}
-
-			@Nullable
-			@Override
-			public <T> T getHint(@NotNull Key<T> hintKey)
-			{
-				return null;
-			}
-
-			@Override
-			public void handleEvent(@NotNull Event event, @Nullable Object associated)
-			{
-
-			}
 		};
-		PsiScopesUtil.treeWalkUp(processor, variableNameElement, null);
+		PerlScopeUtil.treeWalkUp(variableNameElement, processor);
 
 	}
 

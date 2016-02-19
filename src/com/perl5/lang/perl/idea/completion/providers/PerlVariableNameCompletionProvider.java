@@ -40,14 +40,13 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 		PsiElement variableNameElement = parameters.getPosition();
 
 		boolean isDeclaration = VARIABLE_NAME_IN_DECLARATION_PATTERN.accepts(variableNameElement);
+		boolean hasExplicitNamespace = variableNameElement.getPrevSibling() instanceof PerlNamespaceElement;
 
 		// declaration helper
 		if (isDeclaration)
 		{
 			PerlVariableCompletionUtil.fillWithUnresolvedVars((PerlVariableNameElement) variableNameElement, resultSet);
 		}
-
-		boolean hasExplicitNamespace = variableNameElement.getPrevSibling() instanceof PerlNamespaceElement;
 
 		// built ins
 		if( !hasExplicitNamespace && (!isDeclaration || VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN.accepts(variableNameElement)))

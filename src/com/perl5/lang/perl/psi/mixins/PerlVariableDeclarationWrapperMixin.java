@@ -19,6 +19,8 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveState;
+import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
@@ -28,6 +30,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -209,5 +212,15 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 			return PerlIcons.SCALAR_GUTTER_ICON;
 
 		return super.getIcon(flags);
+	}
+
+	@Override
+	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
+	{
+		if (processor instanceof PerlVariableScopeProcessor)
+		{
+			return processor.execute(this, state);
+		}
+		return super.processDeclarations(processor, state, lastParent, place);
 	}
 }

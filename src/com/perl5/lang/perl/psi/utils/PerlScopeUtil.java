@@ -16,8 +16,9 @@
 
 package com.perl5.lang.perl.psi.utils;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
+import com.intellij.psi.*;
+import com.intellij.psi.scope.JavaScopeProcessorEvent;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
@@ -31,6 +32,17 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlScopeUtil
 {
+	public static boolean treeWalkUp(@Nullable PsiElement place, @NotNull PsiScopeProcessor processor) {
+		PsiElement lastParent = null;
+		PsiElement run = place;
+		while (run != null) {
+			if (place != run && !run.processDeclarations(processor, ResolveState.initial(), lastParent, place)) return false;
+			lastParent = run;
+			run = run.getParent();
+		}
+		return true;
+	}
+
 	public static boolean processChildren(@NotNull PsiElement element,
 										  @NotNull PsiScopeProcessor processor,
 										  @NotNull ResolveState resolveState,
@@ -40,9 +52,6 @@ public class PerlScopeUtil
 		PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
 		while (run != null)
 		{
-			if (run instanceof PerlVariableDeclarationWrapper && !processor.execute(run, resolveState))
-				return false;
-
 			if (run instanceof PerlCompositeElement &&
 					!(run instanceof PerlLexicalScope) &&
 					!run.processDeclarations(processor, resolveState, null, place)

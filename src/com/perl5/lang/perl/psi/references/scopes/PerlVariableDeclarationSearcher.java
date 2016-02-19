@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.references;
+package com.perl5.lang.perl.psi.references.scopes;
 
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 17.02.2016.
  */
-public class PerlVariableDeclarationSearcher implements PsiScopeProcessor
+public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor
 {
 	private final String myName;
 	private final PerlVariableType myVariableType;
@@ -59,18 +56,6 @@ public class PerlVariableDeclarationSearcher implements PsiScopeProcessor
 			}
 		}
 		return true;
-	}
-
-	@Nullable
-	@Override
-	public <T> T getHint(@NotNull Key<T> hintKey)
-	{
-		return null;
-	}
-
-	@Override
-	public void handleEvent(@NotNull Event event, @Nullable Object associated)
-	{
 	}
 
 	public PerlVariableDeclarationWrapper getResult()
