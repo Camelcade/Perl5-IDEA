@@ -178,7 +178,7 @@ public class PerlVariableCompletionUtil
 		}
 	}
 
-	public static void fillWithBuiltInVariables(PsiElement variableNameElement,							   @NotNull CompletionResultSet resultSet)
+	public static void fillWithBuiltInVariables(PsiElement variableNameElement, @NotNull CompletionResultSet resultSet)
 	{
 		PsiElement perlVariable = variableNameElement.getParent();
 

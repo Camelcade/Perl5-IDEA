@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlMethodContainer;
 import com.perl5.lang.perl.psi.PsiPerlMethod;

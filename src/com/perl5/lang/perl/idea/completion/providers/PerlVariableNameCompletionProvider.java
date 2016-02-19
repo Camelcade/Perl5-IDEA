@@ -49,7 +49,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 		}
 
 		// built ins
-		if( !hasExplicitNamespace && (!isDeclaration || VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN.accepts(variableNameElement)))
+		if (!hasExplicitNamespace && (!isDeclaration || VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN.accepts(variableNameElement)))
 		{
 			PerlVariableCompletionUtil.fillWithBuiltInVariables(variableNameElement, resultSet);
 		}
