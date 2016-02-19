@@ -23,22 +23,76 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
-import com.perl5.lang.perl.psi.PerlRecursiveVisitor;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlScalarUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by hurricup on 25.07.2015.
  */
-public class PerlVariableCompletionProviderUtil
+public class PerlVariableCompletionUtil
 {
+	public static final List<LookupElementBuilder> BUILT_IN_SCALARS = new ArrayList<LookupElementBuilder>();
+	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS = new ArrayList<LookupElementBuilder>();
+	public static final List<LookupElementBuilder> BUILT_IN_ARRAYS_INDEXES = new ArrayList<LookupElementBuilder>();
+	public static final List<LookupElementBuilder> BUILT_IN_HASHES = new ArrayList<LookupElementBuilder>();
+	public static final List<LookupElementBuilder> BUILT_IN_GLOBS = new ArrayList<LookupElementBuilder>();
+
+	// fill scalars
+	static
+	{
+		for (String name : PerlScalarUtil.BUILT_IN)
+			BUILT_IN_SCALARS.add(PerlVariableCompletionUtil.getScalarLookupElement(name).withBoldness(true));
+
+		for (String name : PerlArrayUtil.BUILT_IN)
+			BUILT_IN_SCALARS.add(PerlVariableCompletionUtil.getArrayElementLookupElement(name).withBoldness(true));
+
+		for (String name : PerlHashUtil.BUILT_IN)
+			BUILT_IN_SCALARS.add(PerlVariableCompletionUtil.getHashElementLookupElement(name).withBoldness(true));
+	}
+
+	// fill arrays
+	static
+	{
+		for (String name : PerlArrayUtil.BUILT_IN)
+			BUILT_IN_ARRAYS.add(PerlVariableCompletionUtil.getArrayLookupElement(name).withBoldness(true));
+
+		for (String name : PerlHashUtil.BUILT_IN)
+			BUILT_IN_ARRAYS.add(PerlVariableCompletionUtil.getHashSliceElementLookupElement(name).withBoldness(true));
+	}
+
+	// fill arrays indexes
+	static
+	{
+		for (String name : PerlArrayUtil.BUILT_IN)
+			BUILT_IN_ARRAYS.add(PerlVariableCompletionUtil.getArrayLookupElement(name).withBoldness(true));
+	}
+
+	// fill hashes
+	static
+	{
+		for (String name : PerlHashUtil.BUILT_IN)
+			BUILT_IN_HASHES.add(PerlVariableCompletionUtil.getHashLookupElement(name).withBoldness(true));
+	}
+
+	// fill globs
+	static
+	{
+		// built-in globs
+		for (String name : PerlGlobUtil.BUILT_IN)
+			BUILT_IN_GLOBS.add(PerlVariableCompletionUtil.getGlobLookupElement(name).withBoldness(true));
+	}
+
 	public static LookupElementBuilder getScalarLookupElement(String name)
 	{
 		return LookupElementBuilder
@@ -122,6 +176,22 @@ public class PerlVariableCompletionProviderUtil
 				}
 			});
 		}
+	}
+
+	public static void fillWithBuiltInVariables(PsiElement variableNameElement,							   @NotNull CompletionResultSet resultSet)
+	{
+		PsiElement perlVariable = variableNameElement.getParent();
+
+		if (perlVariable instanceof PsiPerlScalarVariable)
+			resultSet.addAllElements(BUILT_IN_SCALARS);
+		else if (perlVariable instanceof PsiPerlArrayVariable)
+			resultSet.addAllElements(BUILT_IN_ARRAYS);
+		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
+			resultSet.addAllElements(BUILT_IN_ARRAYS_INDEXES);
+		else if (perlVariable instanceof PsiPerlHashVariable)
+			resultSet.addAllElements(BUILT_IN_HASHES);
+		else if (perlVariable instanceof PsiPerlGlobVariable)
+			resultSet.addAllElements(BUILT_IN_GLOBS);
 	}
 
 

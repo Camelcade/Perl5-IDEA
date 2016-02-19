@@ -22,7 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.*;
@@ -90,7 +90,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getScalarLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -104,7 +104,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getArrayElementLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -118,7 +118,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getHashElementLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -135,7 +135,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getScalarLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -149,7 +149,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -163,7 +163,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getHashLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -177,7 +177,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getGlobLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getGlobLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -193,7 +193,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -207,7 +207,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getHashSliceElementLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -223,7 +223,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(adjustName(s)));
 					}
 					return true;
 				}
@@ -239,7 +239,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getHashLookupElement(adjustName(s)));
 					}
 					return true;
 				}

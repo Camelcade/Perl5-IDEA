@@ -25,7 +25,7 @@ import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.scope.util.PsiScopesUtil;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -72,15 +72,15 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 					{
 						if (variable.getActualType() == PerlVariableType.SCALAR)
 						{
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getScalarLookupElement(variableName));
+							resultSet.addElement(PerlVariableCompletionUtil.getScalarLookupElement(variableName));
 						}
 						else if (variable.getActualType() == PerlVariableType.ARRAY)
 						{
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayElementLookupElement(variableName));
+							resultSet.addElement(PerlVariableCompletionUtil.getArrayElementLookupElement(variableName));
 						}
 						else if (variable.getActualType() == PerlVariableType.HASH)
 						{
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getHashElementLookupElement(variableName));
+							resultSet.addElement(PerlVariableCompletionUtil.getHashElementLookupElement(variableName));
 						}
 					}
 				}
@@ -91,12 +91,12 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 					{
 						if (variable.getActualType() == PerlVariableType.ARRAY)
 						{
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(variableName));
+							resultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(variableName));
 
 						}
 						else if (variable.getActualType() == PerlVariableType.HASH)
 						{
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getHashSliceElementLookupElement(variableName));
+							resultSet.addElement(PerlVariableCompletionUtil.getHashSliceElementLookupElement(variableName));
 						}
 					}
 				}
@@ -107,7 +107,7 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 					{
 						if (variable.getActualType() == PerlVariableType.ARRAY)
 						{
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getArrayLookupElement(variableName));
+							resultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(variableName));
 						}
 					}
 				}
@@ -118,7 +118,7 @@ public class PerlVariableLexicalCompletionProvider extends CompletionProvider<Co
 					{
 						if (variable.getActualType() == PerlVariableType.HASH)
 						{
-							resultSet.addElement(PerlVariableCompletionProviderUtil.getHashLookupElement(variableName));
+							resultSet.addElement(PerlVariableCompletionUtil.getHashLookupElement(variableName));
 						}
 					}
 				}

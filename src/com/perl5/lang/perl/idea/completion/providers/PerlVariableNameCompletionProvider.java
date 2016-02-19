@@ -22,7 +22,8 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionProviderUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,9 +39,20 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 	{
 		PsiElement variableNameElement = parameters.getPosition();
 
-		if (VARIABLE_NAME_PATTERN_IN_DECLARATION.accepts(variableNameElement))
+		boolean isDeclaration = VARIABLE_NAME_IN_DECLARATION_PATTERN.accepts(variableNameElement);
+
+		// declaration helper
+		if (isDeclaration)
 		{
-			PerlVariableCompletionProviderUtil.fillWithUnresolvedVars((PerlVariableNameElement) variableNameElement, resultSet);
+			PerlVariableCompletionUtil.fillWithUnresolvedVars((PerlVariableNameElement) variableNameElement, resultSet);
+		}
+
+		boolean hasExplicitNamespace = variableNameElement.getPrevSibling() instanceof PerlNamespaceElement;
+
+		// built ins
+		if( !hasExplicitNamespace && (!isDeclaration || VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN.accepts(variableNameElement)))
+		{
+			PerlVariableCompletionUtil.fillWithBuiltInVariables(variableNameElement, resultSet);
 		}
 
 
