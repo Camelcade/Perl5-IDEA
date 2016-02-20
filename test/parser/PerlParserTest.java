@@ -89,6 +89,11 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("perl_switch");
 	}
 
+	public void testPerlTidy()
+	{
+		doTest("perl_tidy");
+	}
+
 	public void testCamelcade94()
 	{
 		doTest("camelcade94", false);
