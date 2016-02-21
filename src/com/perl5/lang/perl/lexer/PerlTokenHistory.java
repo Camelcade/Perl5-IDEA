@@ -36,7 +36,7 @@ public class PerlTokenHistory implements PerlElementTypes
 	private PerlTokenHistoryElement myLastUnbracedToken;
 	private PerlTokenHistoryElement myLastUnparenToken;
 
-	public void addToken(IElementType tokenType, String tokenText)
+	public void addToken(IElementType tokenType, CharSequence tokenText)
 	{
 		myHistory.add(myLastToken = new PerlTokenHistoryElement(tokenType, tokenText));
 		if (myLastToken.isSignificant())
@@ -68,7 +68,7 @@ public class PerlTokenHistory implements PerlElementTypes
 	}
 
 	@Nullable
-	public String getLastTokenText()
+	public CharSequence getLastTokenText()
 	{
 		return myLastToken == null ? null : myLastToken.getTokenText();
 	}
@@ -86,7 +86,7 @@ public class PerlTokenHistory implements PerlElementTypes
 	}
 
 	@Nullable
-	public String getLastSignificantTokenText()
+	public CharSequence getLastSignificantTokenText()
 	{
 		return myLastSignificantToken == null ? null : myLastSignificantToken.getTokenText();
 	}
@@ -104,7 +104,7 @@ public class PerlTokenHistory implements PerlElementTypes
 	}
 
 	@Nullable
-	public String getLastUnbracedTokenText()
+	public CharSequence getLastUnbracedTokenText()
 	{
 		return myLastUnbracedToken == null ? null : myLastUnbracedToken.getTokenText();
 	}
@@ -122,7 +122,7 @@ public class PerlTokenHistory implements PerlElementTypes
 	}
 
 	@Nullable
-	public String getLastUnparenTokenText()
+	public CharSequence getLastUnparenTokenText()
 	{
 		return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenText();
 	}
@@ -162,18 +162,18 @@ public class PerlTokenHistory implements PerlElementTypes
 	public static class PerlTokenHistoryElement
 	{
 		private final IElementType myTokenType;
-		private final String myTokenText;
+		private final CharSequence myTokenText;
 
 		private final boolean myIsSignificant;
 
-		public PerlTokenHistoryElement(IElementType tokenType, String tokenText)
+		public PerlTokenHistoryElement(IElementType tokenType, CharSequence tokenText)
 		{
 			myTokenText = tokenText;
 			myTokenType = tokenType;
 			myIsSignificant = !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType);
 		}
 
-		public String getTokenText()
+		public CharSequence getTokenText()
 		{
 			return myTokenText;
 		}

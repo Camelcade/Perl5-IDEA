@@ -99,7 +99,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	 */
 	public IElementType parsePackage()
 	{
-		String tokenText = yytext().toString();
+		CharSequence tokenText = yytext();
 
 		Matcher m = AMBIGUOUS_PACKAGE_PATTERN.matcher(tokenText);
 		if (m.matches())
@@ -139,7 +139,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	public IElementType parseBarewordMinus()
 	{
 		adjustUtfIdentifier();
-		String tokenText = yytext().toString();
+		CharSequence tokenText = yytext();
 
 		if (Character.isDigit(tokenText.charAt(0)))
 		{

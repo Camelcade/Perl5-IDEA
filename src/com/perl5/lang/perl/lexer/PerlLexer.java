@@ -387,7 +387,7 @@ public class PerlLexer extends PerlLexerGenerated
 	/**
 	 * Regex processor qr{} m{} s{}{}
 	 **/
-	String regexCommand = null;
+	CharSequence regexCommand = null;
 
 	public PerlLexer(Project project)
 	{
@@ -781,14 +781,14 @@ public class PerlLexer extends PerlLexerGenerated
 	@Override
 	public IElementType parseNumber()
 	{
-		String tokenText = yytext().toString();
+		CharSequence tokenText = yytext();
 //		System.err.println("For "  + tokenText + "Last significant token is " + getTokenHistory().getLastSignificantTokenType());
 		if (StringUtil.startsWithChar(tokenText, '.') && CONCAT_OPERATOR_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())) // It's a $var.123; where . is a concat
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_CONCAT;
 		}
-		else if (tokenText.endsWith("."))
+		else if (StringUtil.endsWith(tokenText,"."))
 		{
 			if (getTokenHistory().getLastUnbracedTokenType() == SIGIL_SCALAR) // $1.$something
 			{
@@ -895,10 +895,10 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
 				linePos++;
-			String line = buffer.subSequence(currentPosition, linePos).toString();
+			CharSequence line = buffer.subSequence(currentPosition, linePos);
 			currentPosition = linePos;
 
-			if (linePos == bufferEnd || line.startsWith("=cut") && linesNumber > 0)
+			if (linePos == bufferEnd || StringUtil.startsWith(line, "=cut") && linesNumber > 0)
 			{
 				if (linePos < bufferEnd)
 				{
@@ -1103,8 +1103,8 @@ public class PerlLexer extends PerlLexerGenerated
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
 				linePos++;
 
-			// reached the end of heredoc and got end marker
-			if (".".equals(buffer.subSequence(currentPosition, lineContentsEnd).toString()))
+			// reached the end of format and got end marker
+			if (lineContentsEnd == currentPosition + 1 && buffer.charAt(currentPosition) == '.')
 			{
 				preparsedTokensList.clear();
 				preparsedTokensList.add(new CustomToken(currentPosition, lineContentsEnd, FORMAT_TERMINATOR));
@@ -1248,12 +1248,16 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		allowSharpQuote = true;
 		isEscaped = false;
-		regexCommand = yytext().toString();
+		regexCommand = yytext();
 
-		if ("s".equals(regexCommand))    // two sections s
+		if (StringUtil.equals("s", regexCommand))    // two sections s
+		{
 			sectionsNumber = 2;
+		}
 		else                        // one section qr m
+		{
 			sectionsNumber = 1;
+		}
 
 		pushState();
 		yybegin(LEX_REGEX_OPENER);
@@ -1456,7 +1460,7 @@ public class PerlLexer extends PerlLexerGenerated
 		// check modifiers for x
 		boolean isExtended = false;
 		boolean isEvaluated = false;
-		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand);
+		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand == null ? null : regexCommand.toString());
 		int modifiersEnd = currentOffset;
 		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
 
@@ -1602,7 +1606,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseBarewordMinus()
 	{
 		adjustUtfIdentifier();
-		String tokenText = yytext().toString();
+		CharSequence tokenText = yytext();
 
 		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType()) || SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType());
 
@@ -1621,7 +1625,7 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 		else if (!negate && isCommaArrowAhead())
 		{
-			if (tokenText.startsWith("-"))
+			if (StringUtil.startsWith(tokenText, "-"))
 			{
 				return STRING_CONTENT;
 			}
@@ -1630,7 +1634,7 @@ public class PerlLexer extends PerlLexerGenerated
 				return STRING_IDENTIFIER;
 			}
 		}
-		else if (tokenText.startsWith("--"))
+		else if (StringUtil.startsWith(tokenText, "--"))
 		{
 			yypushback(tokenText.length() - 2);
 			return OPERATOR_MINUS_MINUS;
@@ -1670,6 +1674,7 @@ public class PerlLexer extends PerlLexerGenerated
 				&& !isSigilBehind    // print $$ if smth
 				)
 		{
+
 			if ((tokenType = namedOperators.get(tokenText)) != null)
 			{
 				return tokenType;
@@ -1818,10 +1823,10 @@ public class PerlLexer extends PerlLexerGenerated
 	 * @param pattern string to search
 	 * @return search result
 	 */
-	public boolean bufferAtString(CharSequence buffer, int offset, String pattern)
+	public boolean bufferAtString(CharSequence buffer, int offset, CharSequence pattern)
 	{
 		int patternEnd = offset + pattern.length();
-		return getBufferEnd() >= patternEnd && buffer.subSequence(offset, patternEnd).toString().equals(pattern);
+		return getBufferEnd() >= patternEnd && StringUtil.equals(buffer.subSequence(offset, patternEnd), pattern);
 	}
 
 	public void registerToken(IElementType tokenType, String tokenText)

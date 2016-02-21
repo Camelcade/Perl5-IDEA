@@ -83,7 +83,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 			tokenType = perlAdvance();
 
 		if (tokenType != null)
-			registerToken(tokenType, yytext().toString());
+			registerToken(tokenType, yytext());
 
 		return tokenType;
 	}
@@ -208,7 +208,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : 0;    // not sure it's a good idea
 	}
 
-	public void registerToken(IElementType tokenType, String tokenText)
+	public void registerToken(IElementType tokenType, CharSequence tokenText)
 	{
 		getTokenHistory().addToken(tokenType, tokenText);
 	}
