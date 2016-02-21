@@ -35,7 +35,8 @@ import java.util.List;
 @State(
 		name = "Perl5MasonSettings",
 		storages = {
-				@Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/perl5.xml", scheme = StorageScheme.DIRECTORY_BASED)
+				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+				@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR + "/perl5.xml", scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )
 
