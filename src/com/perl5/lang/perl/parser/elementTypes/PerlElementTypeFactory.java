@@ -1190,16 +1190,16 @@ public class PerlElementTypeFactory
 				}
 			};
 
-		if (name.equals("NUMBER_CONSTANT"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlNumberConstantImpl(node);
-				}
-			};
+//		if (name.equals("NUMBER_CONSTANT"))
+//			return new PerlElementTypeEx(name)
+//			{
+//				@NotNull
+//				@Override
+//				public PsiElement getPsiElement(@NotNull ASTNode node)
+//				{
+//					return new PsiPerlNumberConstantImpl(node);
+//				}
+//			};
 
 		if (name.equals("NYI_STATEMENT"))
 			return new PerlElementTypeEx(name)
