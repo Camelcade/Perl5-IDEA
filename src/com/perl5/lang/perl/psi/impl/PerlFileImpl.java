@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -46,8 +47,10 @@ import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.util.*;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,13 +66,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	protected ConcurrentHashMap<PerlVariable, String> VARIABLE_TYPES_CACHE = new ConcurrentHashMap<PerlVariable, String>();
 	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESPACES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
 	protected GlobalSearchScope myElementsResolveScope;
-/*
-	List<PerlLexicalDeclaration> myDeclaredScalars = new ArrayList<PerlLexicalDeclaration>();
-	List<PerlLexicalDeclaration> myDeclaredArrays = new ArrayList<PerlLexicalDeclaration>();
-	List<PerlLexicalDeclaration> myDeclaredHashes = new ArrayList<PerlLexicalDeclaration>();
-	List<PerlLexicalDeclaration> myDeclaredVariables = new ArrayList<PerlLexicalDeclaration>();
-*/
-//	boolean myLexicalCacheInvalid = true;
+
+	protected Map<Integer,Boolean> isNewLineFobiddenAtLine = new THashMap<Integer, Boolean>();
 
 	public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language)
 	{
@@ -133,11 +131,10 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public void subtreeChanged()
 	{
 		super.subtreeChanged();
-//		myLexicalCacheInvalid = true;
 		VARIABLE_TYPES_CACHE.clear();
-//		System.err.println("Cache cleared");
 		METHODS_NAMESPACES_CACHE.clear();
 		myElementsResolveScope = null;
+		isNewLineFobiddenAtLine.clear();
 	}
 
 
@@ -469,6 +466,27 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 				lastParent,
 				place
 		);
+	}
+
+	public boolean isNewLineForbiddenAt(PsiElement element)
+	{
+		Document document = PsiDocumentManager.getInstance(getProject()).getDocument(this);
+		if (document != null)
+		{
+			int lineNumber = document.getLineNumber(element.getTextRange().getEndOffset());
+
+			if( isNewLineFobiddenAtLine.containsKey(lineNumber))
+				return isNewLineFobiddenAtLine.get(lineNumber);
+
+			int lineEndOffset = document.getLineEndOffset(lineNumber);
+
+			boolean result = PerlPsiUtil.isHeredocAhead(element, lineEndOffset);
+
+			isNewLineFobiddenAtLine.put(lineNumber, result);
+
+			return result;
+		}
+		return false;
 	}
 
 	@Override

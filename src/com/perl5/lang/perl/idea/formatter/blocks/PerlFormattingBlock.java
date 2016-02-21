@@ -33,6 +33,7 @@ import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
@@ -261,28 +262,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	 */
 	protected boolean isNewLineForbidden(PerlFormattingBlock block)
 	{
-		PsiFile file = block.getNode().getPsi().getContainingFile();
-		Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
-		if (document != null)
-		{
-			int endOffset = block.getTextRange().getEndOffset();
-			int lineNumber = document.getLineNumber(endOffset);
-			int lineEndOffset = document.getLineEndOffset(lineNumber);
-			PsiElement lastLineElement = file.findElementAt(lineEndOffset);
-			return lastLineElement != null
-					&& lastLineElement.getParent() instanceof PerlHeredocElementImpl
-					&& isHeredocOpenerBeforeOffset(lastLineElement, endOffset)
-					;
-		}
-		return false;
+		PsiElement element = block.getNode().getPsi();
+		PsiFile file = element.getContainingFile();
+		assert file instanceof PerlFileImpl;
+		return ((PerlFileImpl) file).isNewLineForbiddenAt(element);
 	}
-
-	protected boolean isHeredocOpenerBeforeOffset(PsiElement anchor, int offset)
-	{
-		PsiElement opener = PerlHeredocReference.getClosestHeredocOpener(anchor);
-		return opener == null || opener.getTextOffset() < offset;
-	}
-
 
 	@Override
 	public boolean isLeaf()

@@ -361,4 +361,90 @@ public class PerlPsiUtil
 		}
 	}
 
+	public static boolean isHeredocAhead(PsiElement startElement, final int lineEndOffset)
+	{
+		HeredocChecker checker = new HeredocChecker(lineEndOffset);
+		iteratePsiElementsRight(startElement, checker);
+		return checker.getResult();
+	}
+
+	static private class HeredocChecker implements Processor<PsiElement>
+	{
+		protected boolean myResult = false;
+		protected final int lineEndOffset;
+
+		public HeredocChecker(int lineEndOffset)
+		{
+			this.lineEndOffset = lineEndOffset;
+		}
+
+		@Override
+		public boolean process(PsiElement element)
+		{
+			if( element instanceof PerlHeredocOpener )
+			{
+				myResult = true;
+				return false;
+			}
+			if( element.getTextRange().getStartOffset() >= lineEndOffset)
+			{
+				myResult = element instanceof PerlHeredocElementImpl;
+				return false;
+			}
+			return true;
+		}
+
+		public boolean getResult()
+		{
+			return myResult;
+		}
+	}
+
+
+	public static boolean iteratePsiElementsRight(PsiElement element, Processor<PsiElement> processor)
+	{
+		if( element == null ) return false;
+
+		PsiElement run = element.getNextSibling();
+
+		if( run == null )
+		{
+			if( element instanceof PsiFile )
+			{
+				return false;
+			}
+			else
+			{
+				return iteratePsiElementsRight(element.getParent(), processor);
+			}
+		}
+
+		return iteratePsiElementsRightDown(run, processor) && iteratePsiElementsRight(element.getParent(), processor);
+	}
+
+	public static boolean iteratePsiElementsRightDown(@NotNull PsiElement element, @NotNull Processor<PsiElement> processor)
+	{
+		boolean result = processor.process(element);
+		if( result )
+		{
+			// checking children
+			PsiElement run = element.getFirstChild();
+			if( run != null )
+			{
+				result = iteratePsiElementsRightDown(run, processor);
+			}
+
+			// checking next sibling
+			if( result )
+			{
+				run = element.getNextSibling();
+				if( run != null )
+				{
+					result = iteratePsiElementsRightDown(run, processor);
+				}
+			}
+		}
+		return result;
+	}
+
 }
