@@ -511,74 +511,74 @@
         <!--enabledByDefault="true" level="ERROR"-->
         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection"/>-->
 
-        <localInspection language="Perl5"
-                         shortName="FancyMethodCall" displayName="Fancy method calls" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection"/>
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="FancyMethodCall" displayName="Fancy method calls" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection"/>-->
 
-        <localInspection language="Perl5"
-                         shortName="SubDeprecated" displayName="Deprecated sub" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubDeprecatedInspection"/>
-        <localInspection language="Perl5"
-                         shortName="SubUnresolvable" displayName="Unresolvable sub" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection"/>
-        <localInspection language="Perl5"
-                         shortName="SubMultipleDeclarations" displayName="Multiple sub declarations" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDeclarationsInspection"/>
-        <localInspection language="Perl5"
-                         shortName="SubMultipleDefinitions" displayName="Multiple sub definitions" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="SubDeprecated" displayName="Deprecated sub" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubDeprecatedInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="SubUnresolvable" displayName="Unresolvable sub" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="SubMultipleDeclarations" displayName="Multiple sub declarations" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDeclarationsInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="SubMultipleDefinitions" displayName="Multiple sub definitions" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>-->
 
-        <localInspection language="Mason2 Templating Language"
-                         shortName="SubMultipleDefinitions" displayName="Multiple sub definitions"
-                         groupName="Perl5: Mason2"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
-
-
-        <localInspection language="Perl5"
-                         shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"
-                         enabledByDefault="false" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnusedInpsection"/>
+        <!--<localInspection language="Mason2 Templating Language"-->
+                         <!--shortName="SubMultipleDefinitions" displayName="Multiple sub definitions"-->
+                         <!--groupName="Perl5: Mason2"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>-->
 
 
-        <localInspection language="Perl5"
-                         shortName="VariableUnresolvable" displayName="Unresolvable variable" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableUnresolvableInspection"/>
-        <localInspection language="Perl5"
-                         shortName="VariableShadows" displayName="Variables shadowing" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableShadowingInspection"/>
-        <localInspection language="Perl5"
-                         shortName="VariableLexicalBuiltIn" displayName="Lexical built-in declarations"
-                         groupName="Perl5" enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableBuiltinRedeclarationInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableLexicalUnusedInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UnusedGlobalVariable" displayName="Unused global variables" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableGlobalUnusedInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UnusedTypeGlob" displayName="Unused typeglob alias" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedTypeGlobInspection"/>
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"-->
+                         <!--enabledByDefault="false" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnusedInpsection"/>-->
 
-        <localInspection language="Perl5"
-                         shortName="UseStrict" displayName="Pragma usage: strict" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UseWarnings" displayName="Pragma usage: warnings" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection"/>
+
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="VariableUnresolvable" displayName="Unresolvable variable" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableUnresolvableInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="VariableShadows" displayName="Variables shadowing" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableShadowingInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="VariableLexicalBuiltIn" displayName="Lexical built-in declarations"-->
+                         <!--groupName="Perl5" enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableBuiltinRedeclarationInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableLexicalUnusedInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="UnusedGlobalVariable" displayName="Unused global variables" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableGlobalUnusedInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="UnusedTypeGlob" displayName="Unused typeglob alias" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedTypeGlobInspection"/>-->
+
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="UseStrict" displayName="Pragma usage: strict" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection"/>-->
+        <!--<localInspection language="Perl5"-->
+                         <!--shortName="UseWarnings" displayName="Pragma usage: warnings" groupName="Perl5"-->
+                         <!--enabledByDefault="true" level="WARNING"-->
+                         <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection"/>-->
 
         <intentionAction>
             <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverter</className>

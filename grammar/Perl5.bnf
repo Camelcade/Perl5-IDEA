@@ -1043,7 +1043,7 @@ private scalar_constant ::=
 
 tag_scalar ::= TAG
 
-private number_constant ::=
+number_constant ::=
     NUMBER
     | NUMBER_VERSION
     | NUMBER_SIMPLE
