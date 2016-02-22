@@ -67,7 +67,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESPACES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
 	protected GlobalSearchScope myElementsResolveScope;
 
-	protected Map<Integer,Boolean> isNewLineFobiddenAtLine = new THashMap<Integer, Boolean>();
+	protected Map<Integer, Boolean> isNewLineFobiddenAtLine = new THashMap<Integer, Boolean>();
 
 	public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language)
 	{
@@ -475,7 +475,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		{
 			int lineNumber = document.getLineNumber(element.getTextRange().getEndOffset());
 
-			if( isNewLineFobiddenAtLine.containsKey(lineNumber))
+			if (isNewLineFobiddenAtLine.containsKey(lineNumber))
 				return isNewLineFobiddenAtLine.get(lineNumber);
 
 			int lineEndOffset = document.getLineEndOffset(lineNumber);

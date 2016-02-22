@@ -47,7 +47,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 		{
 			PerlVariableCompletionUtil.fillWithUnresolvedVars((PerlVariableNameElement) variableNameElement, resultSet);
 		}
-		else if(!hasExplicitNamespace)
+		else if (!hasExplicitNamespace)
 		{
 			PerlVariableCompletionUtil.fillWithLExicalVariables(variableNameElement, resultSet);
 		}

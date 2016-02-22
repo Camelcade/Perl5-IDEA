@@ -16,13 +16,6 @@
 
 package oop;
 
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,26 +55,32 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase
 	{
 		doTest("base.pl", "Foo", new String[]{"superbase", "superbase2"});
 	}
+
 	public void testParent()
 	{
 		doTest("parent.pl", "Foo", new String[]{"superparent", "superparent2"});
 	}
+
 	public void testMojoBase()
 	{
 		doTest("mojo_base.pl", "Foo", new String[]{"Mojo::Base"});
 	}
+
 	public void testMojoBaseNoBase()
 	{
 		doTest("mojo_base_no_base.pl", "Foo", new String[]{});
 	}
+
 	public void testMojoBaseSpecific()
 	{
 		doTest("mojo_base_specific.pl", "Foo", new String[]{"somebase1"});
 	}
+
 	public void testMoo()
 	{
 		doTest("moo.pl", "Foo", new String[]{"Moo::Object"});
 	}
+
 	public void testMoose()
 	{
 		doTest("moose.pl", "Foo", new String[]{"Moose::Object"});
@@ -91,26 +90,32 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase
 	{
 		doTest("runtime_extends.pl", "Foo", new String[]{"someparent"});
 	}
+
 	public void testRuntimeWith()
 	{
 		doTest("runtime_with.pl", "Foo", new String[]{"someparent1", "someparent2"});
 	}
+
 	public void testRuntimeExtendsWith()
 	{
 		doTest("runtime_extends_with.pl", "Foo", new String[]{"someparent", "someotherparent2", "someotherparent3", "someotherparent4", "someotherparent5"});
 	}
+
 	public void testRuntimeExtendsVsAll()
 	{
 		doTest("runtime_extends_vs_all.pl", "Foo", new String[]{"someparent"});
 	}
+
 	public void testRuntimeISAVsAll()
 	{
 		doTest("runtime_isa_vs_all.pl", "Foo", new String[]{"someisa"});
 	}
+
 	public void testCompileVsRuntime()
 	{
 		doTest("compile_vs_runtime.pl", "Foo", new String[]{"someisa", "someotherparent4", "someotherparent5"});
 	}
+
 	public void testParentWith()
 	{
 		doTest("parent_with.pl", "Foo", new String[]{"someparents", "someotherparent4", "someotherparent5"});

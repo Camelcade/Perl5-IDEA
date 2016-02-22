@@ -369,48 +369,15 @@ public class PerlPsiUtil
 		return checker.getResult();
 	}
 
-	static private class HeredocChecker implements Processor<PsiElement>
-	{
-		protected boolean myResult = false;
-		protected final int lineEndOffset;
-
-		public HeredocChecker(int lineEndOffset)
-		{
-			this.lineEndOffset = lineEndOffset;
-		}
-
-		@Override
-		public boolean process(PsiElement element)
-		{
-			if( element instanceof PerlHeredocOpener )
-			{
-				myResult = true;
-				return false;
-			}
-			if( element.getTextRange().getStartOffset() >= lineEndOffset)
-			{
-				myResult = element instanceof PerlHeredocElementImpl;
-				return false;
-			}
-			return true;
-		}
-
-		public boolean getResult()
-		{
-			return myResult;
-		}
-	}
-
-
 	public static boolean iteratePsiElementsRight(PsiElement element, Processor<PsiElement> processor)
 	{
-		if( element == null ) return false;
+		if (element == null) return false;
 
 		PsiElement run = element.getNextSibling();
 
-		if( run == null )
+		if (run == null)
 		{
-			if( element instanceof PsiFile )
+			if (element instanceof PsiFile)
 			{
 				return false;
 			}
@@ -426,20 +393,20 @@ public class PerlPsiUtil
 	public static boolean iteratePsiElementsRightDown(@NotNull PsiElement element, @NotNull Processor<PsiElement> processor)
 	{
 		boolean result = processor.process(element);
-		if( result )
+		if (result)
 		{
 			// checking children
 			PsiElement run = element.getFirstChild();
-			if( run != null )
+			if (run != null)
 			{
 				result = iteratePsiElementsRightDown(run, processor);
 			}
 
 			// checking next sibling
-			if( result )
+			if (result)
 			{
 				run = element.getNextSibling();
-				if( run != null )
+				if (run != null)
 				{
 					result = iteratePsiElementsRightDown(run, processor);
 				}
@@ -452,15 +419,15 @@ public class PerlPsiUtil
 	{
 		PsiElement run = rootElement.getFirstChild();
 		boolean result = true;
-		while( run != null && result)
+		while (run != null && result)
 		{
-			if( !(run instanceof PerlNamespaceDefinition))
+			if (!(run instanceof PerlNamespaceDefinition))
 			{
-				if( run instanceof PerlCompositeElement )
+				if (run instanceof PerlCompositeElement)
 				{
 					result = processor.process(run);
 				}
-				if( result && run instanceof PerlLexicalScope)
+				if (result && run instanceof PerlLexicalScope)
 				{
 					result = processNamespaceStatements(run, processor);
 				}
@@ -468,6 +435,38 @@ public class PerlPsiUtil
 			run = run.getNextSibling();
 		}
 		return result;
+	}
+
+	static private class HeredocChecker implements Processor<PsiElement>
+	{
+		protected final int lineEndOffset;
+		protected boolean myResult = false;
+
+		public HeredocChecker(int lineEndOffset)
+		{
+			this.lineEndOffset = lineEndOffset;
+		}
+
+		@Override
+		public boolean process(PsiElement element)
+		{
+			if (element instanceof PerlHeredocOpener)
+			{
+				myResult = true;
+				return false;
+			}
+			if (element.getTextRange().getStartOffset() >= lineEndOffset)
+			{
+				myResult = element instanceof PerlHeredocElementImpl;
+				return false;
+			}
+			return true;
+		}
+
+		public boolean getResult()
+		{
+			return myResult;
+		}
 	}
 
 }

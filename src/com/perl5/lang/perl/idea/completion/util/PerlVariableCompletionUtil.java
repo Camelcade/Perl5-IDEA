@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.completion.util;
 
-import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
@@ -24,12 +23,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -202,8 +199,8 @@ public class PerlVariableCompletionUtil
 	}
 
 	public static void fillWithLExicalVariables(
-							   PsiElement variableNameElement,
-							   @NotNull final CompletionResultSet resultSet)
+			PsiElement variableNameElement,
+			@NotNull final CompletionResultSet resultSet)
 	{
 		final PsiElement perlVariable = variableNameElement.getParent();
 

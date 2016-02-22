@@ -16,13 +16,8 @@
 
 package oop;
 
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by hurricup on 22.02.2016.
@@ -41,15 +36,16 @@ public class MroTypeDetectionTest extends NamespaceTestCase
 	{
 		doTest("mro_default.pl", "Foo", PerlMroType.DFS);
 	}
+
 	public void testDFS()
 	{
 		doTest("mro_dfs.pl", "Foo", PerlMroType.DFS);
 	}
+
 	public void testC3()
 	{
 		doTest("mro_c3.pl", "Foo", PerlMroType.C3);
 	}
-
 
 
 	public void doTest(String fileName, @NotNull String namespaceName, PerlMroType mroType)

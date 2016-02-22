@@ -148,7 +148,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@NotNull
 	public List<String> getParentNamespacesNamesFromPsi()
 	{
-		if( parentsNamesCache == null )
+		if (parentsNamesCache == null)
 		{
 //			System.err.println("Scanning");
 			ParentNamespacesNamesCollector collector = new ParentNamespacesNamesCollector(new ArrayList<String>());
@@ -159,58 +159,6 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 //		System.err.println("Got parents names: " + parentsNamesCache);
 		return parentsNamesCache;
 	}
-
-	public static class ParentNamespacesNamesCollector implements Processor<PsiElement>
-	{
-		private final List<String> parentNamespaces;
-		private final List<PerlRuntimeParentsProvider> runtimeModifiers = new ArrayList<PerlRuntimeParentsProvider>();
-
-		public ParentNamespacesNamesCollector(List<String> parentNamespaces)
-		{
-			this.parentNamespaces = parentNamespaces;
-		}
-
-		@Override
-		public boolean process(PsiElement element)
-		{
-//			System.err.println("Processing " + element);
-
-			if (element instanceof PerlUseStatement)
-			{
-				PerlPackageProcessor processor = ((PerlUseStatement) element).getPackageProcessor();
-				if (processor instanceof PerlPackageParentsProvider)
-				{
-					((PerlPackageParentsProvider) processor).changeParentsList((PerlUseStatement) element, parentNamespaces);
-				}
-			}
-			else if (element instanceof PerlRuntimeParentsProvider)
-			{
-				runtimeModifiers.add((PerlRuntimeParentsProvider) element);
-			}
-			else if (ISA_ASSIGN_STATEMENT.accepts(element))
-			{
-				PsiElement rightSide = element.getFirstChild().getLastChild();
-				assert rightSide != null;
-				runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(rightSide));
-			}
-
-			return true;
-		}
-
-		public void applyRunTimeModifiers()
-		{
-			for (PerlRuntimeParentsProvider provider : runtimeModifiers)
-			{
-				provider.changeParentsList(parentNamespaces);
-			}
-		}
-
-		public List<String> getParentNamespaces()
-		{
-			return parentNamespaces;
-		}
-	}
-
 
 	@Nullable
 	@Override
@@ -234,7 +182,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return stub.getMroType();
 		}
 
-		if( mroTypeCache == null )
+		if (mroTypeCache == null)
 		{
 			MroSearcher searcher = new MroSearcher();
 			PerlPsiUtil.processNamespaceStatements(this, searcher);
@@ -242,36 +190,6 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		}
 		return mroTypeCache;
 	}
-
-	public static class MroSearcher implements Processor<PsiElement>
-	{
-		private PerlMroType myResult = PerlMroType.DFS;
-		public int counter = 0;
-
-		@Override
-		public boolean process(PsiElement element)
-		{
-//			counter++;
-//			System.err.println("Processing" + element);
-			if (element instanceof PerlUseStatement)
-			{
-				PerlPackageProcessor packageProcessor = ((PerlUseStatement) element).getPackageProcessor();
-				if (packageProcessor instanceof PerlMroProvider)
-				{
-					myResult = ((PerlMroProvider) packageProcessor).getMroType((PerlUseStatement) element);
-//					System.err.println("Got it");
-					return false;
-				}
-			}
-			return true;
-		}
-
-		public PerlMroType getResult()
-		{
-			return myResult;
-		}
-	}
-
 
 	@Override
 	public PerlMro getMro()
@@ -449,5 +367,85 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		super.subtreeChanged();
 		mroTypeCache = null;
 		parentsNamesCache = null;
+	}
+
+	public static class ParentNamespacesNamesCollector implements Processor<PsiElement>
+	{
+		private final List<String> parentNamespaces;
+		private final List<PerlRuntimeParentsProvider> runtimeModifiers = new ArrayList<PerlRuntimeParentsProvider>();
+
+		public ParentNamespacesNamesCollector(List<String> parentNamespaces)
+		{
+			this.parentNamespaces = parentNamespaces;
+		}
+
+		@Override
+		public boolean process(PsiElement element)
+		{
+//			System.err.println("Processing " + element);
+
+			if (element instanceof PerlUseStatement)
+			{
+				PerlPackageProcessor processor = ((PerlUseStatement) element).getPackageProcessor();
+				if (processor instanceof PerlPackageParentsProvider)
+				{
+					((PerlPackageParentsProvider) processor).changeParentsList((PerlUseStatement) element, parentNamespaces);
+				}
+			}
+			else if (element instanceof PerlRuntimeParentsProvider)
+			{
+				runtimeModifiers.add((PerlRuntimeParentsProvider) element);
+			}
+			else if (ISA_ASSIGN_STATEMENT.accepts(element))
+			{
+				PsiElement rightSide = element.getFirstChild().getLastChild();
+				assert rightSide != null;
+				runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(rightSide));
+			}
+
+			return true;
+		}
+
+		public void applyRunTimeModifiers()
+		{
+			for (PerlRuntimeParentsProvider provider : runtimeModifiers)
+			{
+				provider.changeParentsList(parentNamespaces);
+			}
+		}
+
+		public List<String> getParentNamespaces()
+		{
+			return parentNamespaces;
+		}
+	}
+
+	public static class MroSearcher implements Processor<PsiElement>
+	{
+		public int counter = 0;
+		private PerlMroType myResult = PerlMroType.DFS;
+
+		@Override
+		public boolean process(PsiElement element)
+		{
+//			counter++;
+//			System.err.println("Processing" + element);
+			if (element instanceof PerlUseStatement)
+			{
+				PerlPackageProcessor packageProcessor = ((PerlUseStatement) element).getPackageProcessor();
+				if (packageProcessor instanceof PerlMroProvider)
+				{
+					myResult = ((PerlMroProvider) packageProcessor).getMroType((PerlUseStatement) element);
+//					System.err.println("Got it");
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public PerlMroType getResult()
+		{
+			return myResult;
+		}
 	}
 }

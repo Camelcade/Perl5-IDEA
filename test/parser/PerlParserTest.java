@@ -110,10 +110,10 @@ public class PerlParserTest extends ParsingTestCase
 		doTest(true);
 
 		if (checkErrors)
-		assertFalse(
-				"PsiFile contains error elements",
-				toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
-		);
+			assertFalse(
+					"PsiFile contains error elements",
+					toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
+			);
 	}
 
 

@@ -788,7 +788,7 @@ public class PerlLexer extends PerlLexerGenerated
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_CONCAT;
 		}
-		else if (StringUtil.endsWith(tokenText,"."))
+		else if (StringUtil.endsWith(tokenText, "."))
 		{
 			if (getTokenHistory().getLastUnbracedTokenType() == SIGIL_SCALAR) // $1.$something
 			{

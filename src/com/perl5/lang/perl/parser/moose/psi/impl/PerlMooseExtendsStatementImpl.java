@@ -83,7 +83,7 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
 			}
 			else if (expr instanceof PsiPerlStringList)
 			{
-				for (PsiElement element: PerlPsiUtil.collectStringElements(expr.getFirstChild()))
+				for (PsiElement element : PerlPsiUtil.collectStringElements(expr.getFirstChild()))
 				{
 					String content = element.getText();
 					if (!content.isEmpty())

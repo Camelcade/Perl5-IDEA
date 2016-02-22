@@ -51,30 +51,37 @@ public class PerlLexicalVariableResolveTest extends LightCodeInsightFixtureTestC
 	{
 		doTest("variable_simple.pl", true);
 	}
+
 	public void testIfCondition()
 	{
 		doTest("variable_if_condition.pl", true);
 	}
+
 	public void testForIterator()
 	{
 		doTest("variable_for_iterator.pl", true);
 	}
+
 	public void testUseVars()
 	{
 		doTest("variable_use_vars.pl", true);
 	}
+
 	public void testIfElsifElse()
 	{
 		doTest("variable_if_elsif_else.pl", true);
 	}
+
 	public void testSubSignature()
 	{
 		doTest("variable_sub_signature.pl", true);
 	}
+
 	public void testMethodExplicitInvocant()
 	{
 		doTest("variable_method_explicit_invocant.pl", true);
 	}
+
 	public void testVariableInInvocation()
 	{
 		doTest("variable_in_call_expression.pl", true);
@@ -90,6 +97,7 @@ public class PerlLexicalVariableResolveTest extends LightCodeInsightFixtureTestC
 	{
 		doTest("negative_variable_block.pl", false);
 	}
+
 	public void testNegativeIfElse()
 	{
 		doTest("negative_if_else.pl", false);
@@ -103,7 +111,7 @@ public class PerlLexicalVariableResolveTest extends LightCodeInsightFixtureTestC
 		assertTrue(reference != null);
 		PsiElement result = reference.resolve();
 
-		if( shouldFind )
+		if (shouldFind)
 		{
 			assertTrue(result != null);
 			assertTrue(result instanceof PerlVariableDeclarationWrapper);
