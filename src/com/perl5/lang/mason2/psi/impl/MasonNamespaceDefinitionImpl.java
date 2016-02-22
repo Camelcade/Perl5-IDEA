@@ -135,7 +135,6 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 			parentsPaths = getParentNamespacesNamesFromPsi();
 		}
 
-
 		VirtualFile containingFile = getContainingFile().getContainingVirtualFile();
 		List<PerlNamespaceDefinition> parentsNamespaces;
 
@@ -162,19 +161,6 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		}
 
 		return parentsNamespaces;
-	}
-
-	@NotNull
-	@Override
-	public List<String> getParentNamespacesNamesFromPsi()
-	{
-		List<String> result = new ArrayList<String>();
-
-		for (MasonFlagsStatement flagsStatement : PsiTreeUtil.findChildrenOfType(this, MasonFlagsStatement.class))
-		{
-			flagsStatement.changeParentsList(result);
-		}
-		return result;
 	}
 
 	@Nullable

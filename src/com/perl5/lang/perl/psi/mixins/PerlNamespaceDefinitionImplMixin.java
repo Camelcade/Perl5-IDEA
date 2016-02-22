@@ -154,14 +154,26 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	{
 		if (parentsNamesCache == null)
 		{
+			collectParentNamespacesFromPsi();
+		}
+		return parentsNamesCache;
+	}
+
+	protected synchronized void collectParentNamespacesFromPsi()
+	{
+		if (parentsNamesCache == null)
+		{
 //			System.err.println("Scanning");
-			ParentNamespacesNamesCollector collector = new ParentNamespacesNamesCollector(new ArrayList<String>());
+			ParentNamespacesNamesCollector collector = getCollector();
 			PerlPsiUtil.processNamespaceStatements(this, collector);
 			collector.applyRunTimeModifiers();
 			parentsNamesCache = collector.getParentNamespaces();
 		}
-//		System.err.println("Got parents names: " + parentsNamesCache);
-		return parentsNamesCache;
+	}
+
+	protected ParentNamespacesNamesCollector getCollector()
+	{
+		return new ParentNamespacesNamesCollector(new ArrayList<String>());
 	}
 
 	@Nullable
