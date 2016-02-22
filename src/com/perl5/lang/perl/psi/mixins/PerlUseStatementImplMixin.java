@@ -105,7 +105,9 @@ public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBaseW
 
 		ArrayList<String> stringParameters = new ArrayList<String>();
 		for (PerlStringContentElement stringContentElement : PerlPsiUtil.collectStringElements(getNamespaceElement().getNextSibling()))
+		{
 			stringParameters.add(stringContentElement.getText());
+		}
 		return stringParameters;
 	}
 

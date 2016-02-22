@@ -169,9 +169,8 @@ public class PerlTokenHistory implements PerlElementTypes
 	{
 		private final IElementType myTokenType;
 		private final CharSequence myTokenText;
-		private String myTokenString;
-
 		private final boolean myIsSignificant;
+		private String myTokenString;
 
 		public PerlTokenHistoryElement(IElementType tokenType, CharSequence tokenText)
 		{
@@ -187,7 +186,7 @@ public class PerlTokenHistory implements PerlElementTypes
 
 		public String getTokenTextAsString()
 		{
-			if( myTokenString == null )
+			if (myTokenString == null)
 				myTokenString = getTokenText().toString();
 			return myTokenString;
 		}

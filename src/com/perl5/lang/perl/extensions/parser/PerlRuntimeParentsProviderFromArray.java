@@ -29,7 +29,7 @@ public class PerlRuntimeParentsProviderFromArray implements PerlRuntimeParentsPr
 {
 	private final PsiElement myStringListContainer;
 
-	public PerlRuntimeParentsProviderFromArray(PsiElement stringListContainer)
+	public PerlRuntimeParentsProviderFromArray(@NotNull PsiElement stringListContainer)
 	{
 		this.myStringListContainer = stringListContainer;
 	}
@@ -38,7 +38,7 @@ public class PerlRuntimeParentsProviderFromArray implements PerlRuntimeParentsPr
 	public void changeParentsList(@NotNull List<String> currentList)
 	{
 		currentList.clear();
-		for (PsiElement psiElement : PerlPsiUtil.collectStringElements(myStringListContainer))
+		for (PsiElement psiElement : PerlPsiUtil.collectStringElements(myStringListContainer.getFirstChild()))
 		{
 			currentList.add(psiElement.getText());
 		}

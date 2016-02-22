@@ -50,7 +50,7 @@ public class PerlPsiUtil
 	 * @param startWith PsiElement to start from (inclusive)
 	 * @return list of PerlStringContentElement
 	 */
-	public static Collection<PerlStringContentElement> collectStringElements(PsiElement startWith)
+	public static Collection<PerlStringContentElement> collectStringElements(@NotNull PsiElement startWith)
 	{
 		final List<PerlStringContentElement> result = new ArrayList<PerlStringContentElement>();
 		processStringElements(startWith, new Processor<PerlStringContentElement>()

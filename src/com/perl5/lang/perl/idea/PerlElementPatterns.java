@@ -121,9 +121,38 @@ public interface PerlElementPatterns extends PerlElementTypes
 			)
 	);
 
+	// @EXPORTER scanner
+	// this one is to speed up the scanning
+	PsiElementPattern.Capture<PsiPerlStatement> ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
+			psiElement(PsiPerlAssignExpr.class)
+	);
+
+	PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_VARIABLE = psiElement(PsiPerlArrayVariable.class).withText("@EXPORT");
+	PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
+			.withChild(
+					psiElement(PerlVariableDeclarationWrapper.class).withFirstChild(EXPORT_VARIABLE)
+			);
+	PsiElementPattern.Capture<PsiPerlStatement> EXPORT_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
+			psiElement(PsiPerlAssignExpr.class).andOr(
+					psiElement().withFirstChild(EXPORT_VARIABLE),
+					psiElement().withFirstChild(EXPORT_DECLARATION)
+			)
+	);
+
+	PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_OK_VARIABLE = psiElement(PsiPerlArrayVariable.class).withText("@EXPORT_OK");
+	PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_OK_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
+			.withChild(
+					psiElement(PerlVariableDeclarationWrapper.class).withFirstChild(EXPORT_OK_VARIABLE)
+			);
+
+	PsiElementPattern.Capture<PsiPerlStatement> EXPORT_OK_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
+			psiElement(PsiPerlAssignExpr.class).andOr(
+					psiElement().withFirstChild(EXPORT_OK_VARIABLE),
+					psiElement().withFirstChild(EXPORT_OK_DECLARATION)
+			)
+	);
 
 	// @EXPORT = ();
-
 	PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_ARRAY_VARIABLE_PATTERN =
 			psiElement(PsiPerlArrayVariable.class).andOr(
 					psiElement().withText("@EXPORT"),

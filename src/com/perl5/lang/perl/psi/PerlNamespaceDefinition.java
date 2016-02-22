@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
@@ -80,6 +81,14 @@ public interface PerlNamespaceDefinition extends
 	 */
 	@NotNull
 	Map<String, List<String>> getEXPORT_TAGS();
+
+	/**
+	 * Collects, cached and returns exporter arrays and hashes
+	 *
+	 * @return exporter info
+	 */
+	@NotNull
+	PerlNamespaceDefinitionImplMixin.ExporterInfo getExporterInfo();
 
 	/**
 	 * Returns deprecated annotation if any

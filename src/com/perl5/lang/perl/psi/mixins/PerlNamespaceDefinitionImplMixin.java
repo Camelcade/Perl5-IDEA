@@ -19,9 +19,9 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
@@ -32,7 +32,10 @@ import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProviderFromArray;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.StubBasedPsiElementBaseWithToString;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -46,12 +49,13 @@ import javax.swing.*;
 import java.util.*;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 28.05.2015. 
  */
 public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBaseWithToString<PerlNamespaceDefinitionStub> implements PerlNamespaceDefinition
 {
 	private PerlMroType mroTypeCache = null;
 	private List<String> parentsNamesCache = null;
+	private ExporterInfo exporterInfoCache = null;
 
 	public PerlNamespaceDefinitionImplMixin(@NotNull ASTNode node)
 	{
@@ -236,8 +240,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getEXPORT();
 
-		List<String> result = getArrayAsList("EXPORT");
-		return result == null ? Collections.<String>emptyList() : result;
+		return getExporterInfo().getEXPORT();
 	}
 
 	@NotNull
@@ -248,8 +251,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getEXPORT_OK();
 
-		List<String> result = getArrayAsList("EXPORT_OK");
-		return result == null ? Collections.<String>emptyList() : result;
+		return getExporterInfo().getEXPORT_OK();
 	}
 
 	@NotNull
@@ -260,9 +262,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		if (stub != null)
 			return stub.getEXPORT_TAGS();
 
-		Map<String, List<String>> result = getHashAsMap("EXPORT_TAGS");
-		return result == null ? Collections.<String, List<String>>emptyMap() : result;
+		return getExporterInfo().getEXPORT_TAGS();
 	}
+
 
 	@Nullable
 	@Override
@@ -304,53 +306,6 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		return null;
 	}
 
-	/**
-	 * Searches for array by name and returns distinct list of string values
-	 *
-	 * @param arrayName array name without a sigil
-	 * @return distinct list of string values
-	 */
-	@Nullable
-	public List<String> getArrayAsList(String arrayName)
-	{
-		HashSet<String> result = null;
-		for (PerlVariable arrayVariable : PsiTreeUtil.findChildrenOfType(this, PsiPerlArrayVariable.class))
-			if (arrayVariable.getNamespaceElement() == null
-					&& arrayName.equals(arrayVariable.getName())
-					&& PsiTreeUtil.getParentOfType(arrayVariable, PerlNamespaceDefinition.class) == this
-					)
-			{
-				PsiElement assignExpression = arrayVariable.getParent();
-				PsiElement assignElement = arrayVariable;
-
-				if (assignExpression instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper) assignExpression).isGlobalDeclaration()) // proceed our @ARRAY =
-				{
-					assignElement = assignExpression.getParent();
-					assignExpression = assignElement.getParent();
-
-				}
-
-				// checks for @ARRAY = ...
-				if (assignExpression instanceof PsiPerlAssignExpr && assignElement.getNextSibling() != null)// not leftside element
-					for (PerlStringContentElement element : PerlPsiUtil.collectStringElements(assignExpression.getLastChild()))
-					{
-						if (result == null)
-							result = new HashSet<String>();
-						result.add(element.getText());
-					}
-			}
-
-//		System.err.println("Searched for @" + arrayName + " found: " + result);
-
-		return result == null ? null : new ArrayList<String>(result);
-	}
-
-	public Map<String, List<String>> getHashAsMap(String hashMap)
-	{
-		// fixme NYI
-		return Collections.emptyMap();
-	}
-
 	@Override
 	public int getTextOffset()
 	{
@@ -367,6 +322,112 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		super.subtreeChanged();
 		mroTypeCache = null;
 		parentsNamesCache = null;
+		exporterInfoCache = null;
+	}
+
+	@NotNull
+	public ExporterInfo getExporterInfo()
+	{
+		if (exporterInfoCache == null)
+		{
+			collectExporterInfo();
+		}
+		return exporterInfoCache;
+	}
+
+	protected synchronized void collectExporterInfo()
+	{
+		if (exporterInfoCache == null)
+		{
+			exporterInfoCache = new ExporterInfo();
+			PerlPsiUtil.processNamespaceStatements(this, exporterInfoCache);
+		}
+	}
+
+	public static class MroSearcher implements Processor<PsiElement>
+	{
+		public int counter = 0;
+		private PerlMroType myResult = PerlMroType.DFS;
+
+		@Override
+		public boolean process(PsiElement element)
+		{
+//			counter++;
+//			System.err.println("Processing" + element);
+			if (element instanceof PerlUseStatement)
+			{
+				PerlPackageProcessor packageProcessor = ((PerlUseStatement) element).getPackageProcessor();
+				if (packageProcessor instanceof PerlMroProvider)
+				{
+					myResult = ((PerlMroProvider) packageProcessor).getMroType((PerlUseStatement) element);
+//					System.err.println("Got it");
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public PerlMroType getResult()
+		{
+			return myResult;
+		}
+	}
+
+	public static class ExporterInfo implements Processor<PsiElement>
+	{
+		private List<String> EXPORT = new ArrayList<String>();
+		private List<String> EXPORT_OK = new ArrayList<String>();
+		private Map<String, List<String>> EXPORT_TAGS = Collections.emptyMap(); //new THashMap<String, List<String>>(); fixme nyi
+
+		@Override
+		public boolean process(PsiElement element)
+		{
+			if (ASSIGN_STATEMENT.accepts(element))
+			{
+				if (EXPORT_ASSIGN_STATEMENT.accepts(element))
+				{
+					EXPORT.clear();
+					EXPORT.addAll(getRightSideStrings(element.getFirstChild().getLastChild()));
+
+				}
+				else if (EXPORT_OK_ASSIGN_STATEMENT.accepts(element))
+				{
+					EXPORT_OK.clear();
+					EXPORT_OK.addAll(getRightSideStrings(element.getFirstChild().getLastChild()));
+				}
+			}
+
+			return true;
+		}
+
+		protected List<String> getRightSideStrings(@NotNull PsiElement rigthSide)
+		{
+			List<String> result = new ArrayList<String>();
+			for (PsiElement psiElement : PerlPsiUtil.collectStringElements(rigthSide.getFirstChild()))
+			{
+				String text = psiElement.getText();
+				if (StringUtil.isNotEmpty(text))
+				{
+					result.add(text);
+				}
+			}
+			return result;
+		}
+
+		public List<String> getEXPORT()
+		{
+			return EXPORT;
+		}
+
+		public List<String> getEXPORT_OK()
+		{
+			return EXPORT_OK;
+		}
+
+		public Map<String, List<String>> getEXPORT_TAGS()
+		{
+			return EXPORT_TAGS;
+		}
 	}
 
 	public static class ParentNamespacesNamesCollector implements Processor<PsiElement>
@@ -420,32 +481,4 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		}
 	}
 
-	public static class MroSearcher implements Processor<PsiElement>
-	{
-		public int counter = 0;
-		private PerlMroType myResult = PerlMroType.DFS;
-
-		@Override
-		public boolean process(PsiElement element)
-		{
-//			counter++;
-//			System.err.println("Processing" + element);
-			if (element instanceof PerlUseStatement)
-			{
-				PerlPackageProcessor packageProcessor = ((PerlUseStatement) element).getPackageProcessor();
-				if (packageProcessor instanceof PerlMroProvider)
-				{
-					myResult = ((PerlMroProvider) packageProcessor).getMroType((PerlUseStatement) element);
-//					System.err.println("Got it");
-					return false;
-				}
-			}
-			return true;
-		}
-
-		public PerlMroType getResult()
-		{
-			return myResult;
-		}
-	}
 }
