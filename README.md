@@ -13,7 +13,8 @@ Don't forget to read our [contribution policy](https://github.com/hurricup/Perl5
 * [Camelcade wiki](https://github.com/hurricup/Perl5-IDEA/wiki)
 * [Onion parsing comparision](http://evstigneev.com/onion_all.png)
 
-Optimized using [Java Profiler](http://www.ej-technologies.com/products/jprofiler/overview.html) from ej-technologies. 
+YourKit supports open source projects with its full-featured <a href="https://www.yourkit.com/java/profiler/index.jsp">Java Profiler</a>.
+[![Optimized using YourKit Java Profiler](https://www.yourkit.com/images/yklogo.png)](https://www.yourkit.com/java/profiler/index.jsp)
 
 [Download current dev build jar for IDEA](http://evstigneev.com/camelcade.jar)
 
