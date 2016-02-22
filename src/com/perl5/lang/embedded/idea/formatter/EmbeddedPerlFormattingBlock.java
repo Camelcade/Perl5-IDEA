@@ -22,6 +22,7 @@ import com.intellij.formatting.SpacingBuilder;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -33,9 +34,17 @@ import org.jetbrains.annotations.Nullable;
  */
 public class EmbeddedPerlFormattingBlock extends PerlFormattingBlock
 {
-	public EmbeddedPerlFormattingBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment, @NotNull CommonCodeStyleSettings codeStyleSettings, @NotNull PerlCodeStyleSettings perlCodeStyleSettings, @NotNull SpacingBuilder spacingBuilder)
+	public EmbeddedPerlFormattingBlock(@NotNull ASTNode node,
+									   @Nullable Wrap wrap,
+									   @Nullable Alignment alignment,
+									   @NotNull CommonCodeStyleSettings codeStyleSettings,
+									   @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+									   @NotNull SpacingBuilder spacingBuilder,
+									   @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+
+	)
 	{
-		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder);
+		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
 	}
 
 	@Nullable

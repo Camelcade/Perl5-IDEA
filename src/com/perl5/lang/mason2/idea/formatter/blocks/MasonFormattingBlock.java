@@ -25,6 +25,7 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.perl5.lang.mason2.elementType.MasonElementTypes;
 import com.perl5.lang.mason2.idea.formatter.MasonIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
@@ -38,9 +39,16 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MasonFormattingBlock extends PerlFormattingBlock implements MasonElementTypes
 {
-	public MasonFormattingBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment, @NotNull CommonCodeStyleSettings codeStyleSettings, @NotNull PerlCodeStyleSettings perlCodeStyleSettings, @NotNull SpacingBuilder spacingBuilder)
+	public MasonFormattingBlock(@NotNull ASTNode node,
+								@Nullable Wrap wrap,
+								@Nullable Alignment alignment,
+								@NotNull CommonCodeStyleSettings codeStyleSettings,
+								@NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+								@NotNull SpacingBuilder spacingBuilder,
+								@NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+	)
 	{
-		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder);
+		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
 	}
 
 	@Override
@@ -71,7 +79,7 @@ public class MasonFormattingBlock extends PerlFormattingBlock implements MasonEl
 	@Override
 	protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment)
 	{
-		return new MasonFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder());
+		return new MasonFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(), getInjectedLanguageBlockBuilder());
 	}
 
 	@Override

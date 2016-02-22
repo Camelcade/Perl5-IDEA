@@ -1,5 +1,5 @@
 .gradle/
-.sandbox/
+.sandbox*
 .sandbox-test/
 build/
 out/

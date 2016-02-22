@@ -26,6 +26,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.idea.formatter.MojoliciousIndentProcessor;
@@ -40,9 +41,16 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MojoliciousFormattingBlock extends PerlFormattingBlock implements MojoliciousElementTypes
 {
-	public MojoliciousFormattingBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment, @NotNull CommonCodeStyleSettings codeStyleSettings, @NotNull PerlCodeStyleSettings perlCodeStyleSettings, @NotNull SpacingBuilder spacingBuilder)
+	public MojoliciousFormattingBlock(@NotNull ASTNode node,
+									  @Nullable Wrap wrap,
+									  @Nullable Alignment alignment,
+									  @NotNull CommonCodeStyleSettings codeStyleSettings,
+									  @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+									  @NotNull SpacingBuilder spacingBuilder,
+									  @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+	)
 	{
-		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder);
+		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
 	}
 
 	@Override
@@ -84,7 +92,7 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 	@Override
 	protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment)
 	{
-		return new MojoliciousFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder());
+		return new MojoliciousFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(), getInjectedLanguageBlockBuilder());
 	}
 
 	@Override

@@ -22,6 +22,8 @@ import com.intellij.formatting.SpacingBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.formatter.common.DefaultInjectedLanguageBlockBuilder;
+import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.perl5.lang.mojolicious.idea.formatter.blocks.MojoliciousFormattingBlock;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder;
@@ -41,7 +43,8 @@ public class MojoliciousFormattingModelBuilder extends PerlFormattingModelBuilde
 		CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
 		PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
 		SpacingBuilder spacingBuilder = createSpacingBuilder(commonSettings, perlSettings);
-		PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder);
+		InjectedLanguageBlockBuilder injectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
+		PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder, injectedLanguageBlockBuilder);
 		return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
 	}
 

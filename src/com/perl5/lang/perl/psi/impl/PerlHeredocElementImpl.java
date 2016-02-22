@@ -37,7 +37,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 	@Override
 	public boolean isValidHost()
 	{
-		return getChildren().length == 0; // only composits counted. Dunno why
+		return getChildren().length == 0;
 	}
 
 	@Override

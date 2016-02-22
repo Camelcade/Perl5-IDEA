@@ -22,6 +22,7 @@ import com.intellij.formatting.SpacingBuilder;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,10 +43,11 @@ public class PerlConstantDefinitionFormattingBlock extends PerlFormattingBlock
 			@Nullable Alignment alignment,
 			@NotNull CommonCodeStyleSettings codeStyleSettings,
 			@NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-			@NotNull SpacingBuilder spacingBuilder
-	)
+			@NotNull SpacingBuilder spacingBuilder,
+			@NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+			)
 	{
-		super(node, wrap, null, codeStyleSettings, perlCodeStyleSettings, spacingBuilder);
+		super(node, wrap, null, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
 		arrowAlignment = alignment;
 	}
 

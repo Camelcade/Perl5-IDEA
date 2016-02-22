@@ -40,8 +40,16 @@ apply plugin: 'org.jetbrains.intellij'
 intellij {
     version ideaVersion
     downloadSources Boolean.valueOf(downloadIdeaSource)
-    sandboxDirectory project.rootDir.canonicalPath + "/.sandbox"
-    alternativeIdePath=project.idea_path
+    if( project.hasProperty('idea_sandbox')) {
+        sandboxDirectory project.rootDir.canonicalPath + "/" + project.idea_sandbox
+    }
+    else
+    {
+        sandboxDirectory project.rootDir.canonicalPath + "/.sandbox"
+    }
+    if( project.hasProperty('idea_path')) {
+        alternativeIdePath = project.idea_path
+    }
     updateSinceUntilBuild = false
 }
 
