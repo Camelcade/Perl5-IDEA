@@ -35,9 +35,10 @@ public class PerlScopeUtil
 	{
 		PsiElement lastParent = null;
 		PsiElement run = place;
+		ResolveState state = ResolveState.initial();
 		while (run != null)
 		{
-			if (place != run && !run.processDeclarations(processor, ResolveState.initial(), lastParent, place))
+			if (place != run && !run.processDeclarations(processor, state, lastParent, place))
 				return false;
 			lastParent = run;
 			run = run.getParent();

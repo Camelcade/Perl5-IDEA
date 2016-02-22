@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
@@ -217,8 +218,7 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
 	{
-		// fixme move ancestor checking into the state or processor
-		if (processor instanceof PerlVariableScopeProcessor && !PsiTreeUtil.isAncestor(this, place, true))
+		if (processor instanceof PerlVariableScopeProcessor && !equals(place.getParent()))
 		{
 			return processor.execute(this, state);
 		}

@@ -49,7 +49,7 @@ import javax.swing.*;
 import java.util.*;
 
 /**
- * Created by hurricup on 28.05.2015. 
+ * Created by hurricup on 28.05.2015.
  */
 public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBaseWithToString<PerlNamespaceDefinitionStub> implements PerlNamespaceDefinition
 {
