@@ -127,6 +127,12 @@ public class PerlTokenHistory implements PerlElementTypes
 		return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenText();
 	}
 
+	@Nullable
+	public String getLastUnparenTokenTextAsString()
+	{
+		return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenTextAsString();
+	}
+
 	@NotNull
 	public List<PerlTokenHistoryElement> getHistory()
 	{
@@ -163,6 +169,7 @@ public class PerlTokenHistory implements PerlElementTypes
 	{
 		private final IElementType myTokenType;
 		private final CharSequence myTokenText;
+		private String myTokenString;
 
 		private final boolean myIsSignificant;
 
@@ -176,6 +183,13 @@ public class PerlTokenHistory implements PerlElementTypes
 		public CharSequence getTokenText()
 		{
 			return myTokenText;
+		}
+
+		public String getTokenTextAsString()
+		{
+			if( myTokenString == null )
+				myTokenString = getTokenText().toString();
+			return myTokenString;
 		}
 
 		public IElementType getTokenType()

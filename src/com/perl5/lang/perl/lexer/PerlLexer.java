@@ -1175,7 +1175,8 @@ public class PerlLexer extends PerlLexerGenerated
 				lastSignificantTokenType == null
 						|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
 						|| isTermPrefix
-						|| getTokenHistory().getLastUnparenTokenType() == IDENTIFIER && REGEXP_PREFIX_SUBS.contains(getTokenHistory().getLastUnparenTokenText())
+						|| getTokenHistory().getLastUnparenTokenType() == IDENTIFIER &&
+						REGEXP_PREFIX_SUBS.contains(getTokenHistory().getLastUnparenTokenTextAsString())
 		);
 	}
 
@@ -1682,7 +1683,7 @@ public class PerlLexer extends PerlLexerGenerated
 			else if (
 					(tokenHistory.getLastSignificantTokenType() == OPERATOR_FILETEST && tokenText.equals("_"))    // for -t _
 							|| (tokenHistory.getLastUnparenTokenType() == IDENTIFIER
-							&& PerlParserUtil.PRE_HANDLE_OPS.contains(tokenHistory.getLastUnparenTokenText())
+							&& PerlParserUtil.PRE_HANDLE_OPS.contains(tokenHistory.getLastUnparenTokenTextAsString())
 							&& !PerlSubUtil.BUILT_IN.contains(tokenText)
 							&& isListElementEndAhead()
 					))

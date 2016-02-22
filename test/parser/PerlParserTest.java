@@ -94,6 +94,11 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("perl_tidy");
 	}
 
+	public void testImplicitRegex()
+	{
+		doTest("implicit_regex");
+	}
+
 	public void testCamelcade94()
 	{
 		doTest("camelcade94", false);
