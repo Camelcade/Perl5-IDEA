@@ -30,6 +30,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -443,6 +444,28 @@ public class PerlPsiUtil
 					result = iteratePsiElementsRightDown(run, processor);
 				}
 			}
+		}
+		return result;
+	}
+
+	public static boolean processNamespaceStatements(@NotNull PsiElement rootElement, Processor<PsiElement> processor)
+	{
+		PsiElement run = rootElement.getFirstChild();
+		boolean result = true;
+		while( run != null && result)
+		{
+			if( !(run instanceof PerlNamespaceDefinition))
+			{
+				if( run instanceof PerlCompositeElement )
+				{
+					result = processor.process(run);
+				}
+				if( result && run instanceof PerlLexicalScope)
+				{
+					result = processNamespaceStatements(run, processor);
+				}
+			}
+			run = run.getNextSibling();
 		}
 		return result;
 	}

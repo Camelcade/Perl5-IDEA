@@ -27,26 +27,26 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementStub>, PerlNamespaceElementContainer
+public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementStub>, PerlNamespaceElementContainer, PerlCompositeElement
 {
-	public String getPackageName();
+	String getPackageName();
 
-	public boolean isPragma();
+	boolean isPragma();
 
-	public boolean isVersion();
+	boolean isVersion();
 
-	public boolean isPragmaOrVersion();
-
-	@Nullable
-	public List<String> getImportParameters();
-
-	public PerlVersionElement getVersionElement();
-
-	public PerlPackageProcessor getPackageProcessor();
+	boolean isPragmaOrVersion();
 
 	@Nullable
-	public PsiPerlExpr getExpr();
+	List<String> getImportParameters();
 
-	public String getOuterPackageName();
+	PerlVersionElement getVersionElement();
+
+	PerlPackageProcessor getPackageProcessor();
+
+	@Nullable
+	PsiPerlExpr getExpr();
+
+	String getOuterPackageName();
 
 }

@@ -23,9 +23,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
@@ -206,17 +208,41 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return stub.getMroType();
 		}
 
-		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
-		{
-			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof PerlMroProvider)
-			{
+		MroSearcher searcher = new MroSearcher();
+		PerlPsiUtil.processNamespaceStatements(this, searcher);
+//		System.err.println("Processed " + searcher.counter  + " elements for " + getName());
+		return searcher.getResult();
+	}
 
-				return ((PerlMroProvider) useStatement.getPackageProcessor()).getMroType(useStatement);
+	public static class MroSearcher implements Processor<PsiElement>
+	{
+		private PerlMroType myResult = PerlMroType.DFS;
+		public int counter = 0;
+
+		@Override
+		public boolean process(PsiElement element)
+		{
+//			counter++;
+//			System.err.println("Processing" + element);
+			if( element instanceof PerlUseStatement)
+			{
+				PerlPackageProcessor packageProcessor = ((PerlUseStatement) element).getPackageProcessor();
+				if( packageProcessor instanceof PerlMroProvider)
+				{
+					myResult = ((PerlMroProvider) packageProcessor).getMroType((PerlUseStatement)element);
+//					System.err.println("Got it");
+					return false;
+				}
 			}
+			return true;
 		}
 
-		return PerlMroType.DFS;
+		public PerlMroType getResult()
+		{
+			return myResult;
+		}
 	}
+
 
 	@Override
 	public PerlMro getMro()
