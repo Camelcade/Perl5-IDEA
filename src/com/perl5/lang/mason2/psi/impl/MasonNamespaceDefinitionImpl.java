@@ -132,7 +132,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		}
 		else
 		{
-			parentsPaths = getParentNamespacesFromPsi();
+			parentsPaths = getParentNamespacesNamesFromPsi();
 		}
 
 
@@ -166,7 +166,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 	@NotNull
 	@Override
-	public List<String> getParentNamespacesFromPsi()
+	public List<String> getParentNamespacesNamesFromPsi()
 	{
 		List<String> result = new ArrayList<String>();
 

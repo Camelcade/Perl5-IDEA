@@ -22,8 +22,10 @@ import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseExtendsStatement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
+import com.perl5.lang.perl.psi.PsiPerlStringList;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,6 +79,18 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
 						}
 					}
 					element = element.getNextSibling();
+				}
+			}
+			else if (expr instanceof PsiPerlStringList)
+			{
+				for (PsiElement element: PerlPsiUtil.collectStringElements(expr.getFirstChild()))
+				{
+					String content = element.getText();
+					if (!content.isEmpty())
+					{
+						result.add(content);
+					}
+
 				}
 			}
 			else

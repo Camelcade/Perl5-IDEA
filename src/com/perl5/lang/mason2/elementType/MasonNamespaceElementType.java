@@ -60,7 +60,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 				this,
 				((MasonNamespaceDefinitionImpl) psi).getAbsoluteComponentPath(),
 				psi.getMroType(),
-				((MasonNamespaceDefinitionImpl) psi).getParentNamespacesFromPsi(),
+				((MasonNamespaceDefinitionImpl) psi).getParentNamespacesNamesFromPsi(),
 				psi.isDeprecated(),
 				psi.getEXPORT(),
 				psi.getEXPORT_OK(),

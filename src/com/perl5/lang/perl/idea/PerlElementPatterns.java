@@ -107,6 +107,21 @@ public interface PerlElementPatterns extends PerlElementTypes
 					psiElement(PsiPerlStatement.class).afterSiblingSkipping(WHITE_SPACE_AND_COMMENTS, INCOMPLETED_IF_COMPOUND)
 			);
 
+	// @ISA = ()
+	PsiElementPattern.Capture<PsiPerlArrayVariable> ISA_VARIABLE = psiElement(PsiPerlArrayVariable.class).withText("@ISA");
+	PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> ISA_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
+			.withChild(
+					psiElement(PerlVariableDeclarationWrapper.class).withFirstChild(ISA_VARIABLE)
+			);
+
+	PsiElementPattern.Capture<PsiPerlStatement> ISA_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
+			psiElement(PsiPerlAssignExpr.class).andOr(
+					psiElement().withFirstChild(ISA_VARIABLE),
+					psiElement().withFirstChild(ISA_DECLARATION)
+			)
+	);
+
+
 	// @EXPORT = ();
 
 	PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_ARRAY_VARIABLE_PATTERN =

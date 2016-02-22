@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,30 @@
 package com.perl5.lang.perl.extensions.parser;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 /**
- * Created by hurricup on 26.11.2015.
+ * Created by hurricup on 22.02.2016.
  */
-public interface PerlRuntimeParentsProvider
+public class PerlRuntimeParentsProviderFromArray implements PerlRuntimeParentsProvider
 {
-	/**
-	 * Modify list of parents provided by this package. Informaion being collected from all processors sequentially
-	 *
-	 * @param currentList current parents list
-	 */
-	void changeParentsList(@NotNull List<String> currentList);
+	private final PsiElement myStringListContainer;
 
+	public PerlRuntimeParentsProviderFromArray(PsiElement stringListContainer)
+	{
+		this.myStringListContainer = stringListContainer;
+	}
+
+	@Override
+	public void changeParentsList(@NotNull List<String> currentList)
+	{
+		currentList.clear();
+		for( PsiElement psiElement: PerlPsiUtil.collectStringElements(myStringListContainer))
+		{
+			currentList.add(psiElement.getText());
+		}
+	}
 }

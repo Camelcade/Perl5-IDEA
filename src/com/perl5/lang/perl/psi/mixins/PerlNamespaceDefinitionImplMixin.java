@@ -29,6 +29,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
+import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProviderFromArray;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
@@ -49,6 +50,9 @@ import java.util.*;
  */
 public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBaseWithToString<PerlNamespaceDefinitionStub> implements PerlNamespaceDefinition
 {
+	private PerlMroType mroTypeCache = null;
+	private List<String> parentsNamesCache = null;
+
 	public PerlNamespaceDefinitionImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -130,7 +134,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return stub.getParentNamespaces();
 		}
 
-		return getParentNamespacesFromPsi();
+		return getParentNamespacesNamesFromPsi();
 	}
 
 	@NotNull
@@ -142,46 +146,68 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	}
 
 	@NotNull
-	public List<String> getParentNamespacesFromPsi()
+	public List<String> getParentNamespacesNamesFromPsi()
 	{
-		List<String> parentClasses = new ArrayList<String>();
-
-		collectCompileTimeParentNamespaces(parentClasses);
-		collectRuntimeParentNamespaces(parentClasses);
-
-		return parentClasses;
+		if( parentsNamesCache == null )
+		{
+//			System.err.println("Scanning");
+			ParentNamespacesNamesCollector collector = new ParentNamespacesNamesCollector(new ArrayList<String>());
+			PerlPsiUtil.processNamespaceStatements(this, collector);
+			collector.applyRunTimeModifiers();
+			parentsNamesCache = collector.getParentNamespaces();
+		}
+//		System.err.println("Got parents names: " + parentsNamesCache);
+		return parentsNamesCache;
 	}
 
-	protected void collectCompileTimeParentNamespaces(List<String> parentClasses)
+	public static class ParentNamespacesNamesCollector implements Processor<PsiElement>
 	{
-		for (PsiPerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PsiPerlUseStatement.class))
-		{
-			if (PsiTreeUtil.getParentOfType(useStatement, PerlNamespaceDefinition.class) == this && useStatement.getPackageProcessor() instanceof PerlPackageParentsProvider)
-			{
-				((PerlPackageParentsProvider) useStatement.getPackageProcessor()).changeParentsList(useStatement, parentClasses);
-			}
-		}
-	}
+		private final List<String> parentNamespaces;
+		private final List<PerlRuntimeParentsProvider> runtimeModifiers = new ArrayList<PerlRuntimeParentsProvider>();
 
-	protected void collectRuntimeParentNamespaces(List<String> parentClasses)
-	{
-		// checking runtime modifications
-		for (PerlRuntimeParentsProvider provider : PsiTreeUtil.findChildrenOfType(this, PerlRuntimeParentsProvider.class))
+		public ParentNamespacesNamesCollector(List<String> parentNamespaces)
 		{
-			if (PsiTreeUtil.getParentOfType(provider, PerlNamespaceDefinition.class) == this)
-			{
-				provider.changeParentsList(parentClasses);
-			}
+			this.parentNamespaces = parentNamespaces;
 		}
 
-		// checking runtime @ISA
-		List<String> isa = getISA();
-
-		// fixme, this is weak, isa may modify inheritance, not only overide
-		if (isa != null)
+		@Override
+		public boolean process(PsiElement element)
 		{
-			parentClasses.clear();
-			parentClasses.addAll(isa);
+//			System.err.println("Processing " + element);
+
+			if (element instanceof PerlUseStatement)
+			{
+				PerlPackageProcessor processor = ((PerlUseStatement) element).getPackageProcessor();
+				if (processor instanceof PerlPackageParentsProvider)
+				{
+					((PerlPackageParentsProvider) processor).changeParentsList((PerlUseStatement) element, parentNamespaces);
+				}
+			}
+			else if (element instanceof PerlRuntimeParentsProvider)
+			{
+				runtimeModifiers.add((PerlRuntimeParentsProvider) element);
+			}
+			else if (ISA_ASSIGN_STATEMENT.accepts(element))
+			{
+				PsiElement rightSide = element.getFirstChild().getLastChild();
+				assert rightSide != null;
+				runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(rightSide));
+			}
+
+			return true;
+		}
+
+		public void applyRunTimeModifiers()
+		{
+			for (PerlRuntimeParentsProvider provider : runtimeModifiers)
+			{
+				provider.changeParentsList(parentNamespaces);
+			}
+		}
+
+		public List<String> getParentNamespaces()
+		{
+			return parentNamespaces;
 		}
 	}
 
@@ -208,10 +234,13 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return stub.getMroType();
 		}
 
-		MroSearcher searcher = new MroSearcher();
-		PerlPsiUtil.processNamespaceStatements(this, searcher);
-//		System.err.println("Processed " + searcher.counter  + " elements for " + getName());
-		return searcher.getResult();
+		if( mroTypeCache == null )
+		{
+			MroSearcher searcher = new MroSearcher();
+			PerlPsiUtil.processNamespaceStatements(this, searcher);
+			mroTypeCache = searcher.getResult();
+		}
+		return mroTypeCache;
 	}
 
 	public static class MroSearcher implements Processor<PsiElement>
@@ -224,12 +253,12 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		{
 //			counter++;
 //			System.err.println("Processing" + element);
-			if( element instanceof PerlUseStatement)
+			if (element instanceof PerlUseStatement)
 			{
 				PerlPackageProcessor packageProcessor = ((PerlUseStatement) element).getPackageProcessor();
-				if( packageProcessor instanceof PerlMroProvider)
+				if (packageProcessor instanceof PerlMroProvider)
 				{
-					myResult = ((PerlMroProvider) packageProcessor).getMroType((PerlUseStatement)element);
+					myResult = ((PerlMroProvider) packageProcessor).getMroType((PerlUseStatement) element);
 //					System.err.println("Got it");
 					return false;
 				}
@@ -279,13 +308,6 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			return stub.isDeprecated();
 		}
 		return getAnnotationDeprecated() != null;
-	}
-
-	@Nullable
-	@Override
-	public List<String> getISA()
-	{
-		return getArrayAsList("ISA");
 	}
 
 	@NotNull
@@ -421,4 +443,11 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 				: getNameIdentifier().getTextOffset();
 	}
 
+	@Override
+	public void subtreeChanged()
+	{
+		super.subtreeChanged();
+		mroTypeCache = null;
+		parentsNamesCache = null;
+	}
 }

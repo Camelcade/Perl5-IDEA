@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
@@ -31,7 +32,13 @@ import java.util.Map;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespaceDefinitionStub>, PerlNamespaceElementContainer, PerlNamedElement, PerlNamespaceContainer, PerlDeprecatable
+public interface PerlNamespaceDefinition extends
+		StubBasedPsiElement<PerlNamespaceDefinitionStub>,
+		PerlNamespaceElementContainer,
+		PerlNamedElement,
+		PerlNamespaceContainer,
+		PerlDeprecatable,
+		PerlElementPatterns
 {
 	/**
 	 * Retuns block or namespace content with statements
@@ -48,14 +55,6 @@ public interface PerlNamespaceDefinition extends StubBasedPsiElement<PerlNamespa
 	 * @param result       array to populate
 	 */
 	void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result);
-
-	/**
-	 * Returns explicit ISA value, initialized with @ISA = ...
-	 *
-	 * @return @ISA list
-	 */
-	@Nullable
-	List<String> getISA();
 
 	/**
 	 * Retuns list of exports from this module
