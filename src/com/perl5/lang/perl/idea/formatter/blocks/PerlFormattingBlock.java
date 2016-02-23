@@ -98,8 +98,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	private final boolean myIsFirst;
 	private final boolean myIsLast;
 	private final IElementType myElementType;
-	private List<Block> mySubBlocks;
 	private final InjectedLanguageBlockBuilder myInjectedLanguageBlockBuilder;
+	private List<Block> mySubBlocks;
 
 	public PerlFormattingBlock(
 			@NotNull ASTNode node,

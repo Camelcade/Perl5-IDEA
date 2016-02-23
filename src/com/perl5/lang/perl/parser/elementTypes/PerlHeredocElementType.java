@@ -28,7 +28,6 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlInterpolatedHeredocLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlSimpleHeredocLexerAdapter;
 import com.perl5.lang.perl.parser.PerlHeredocParserImpl;
-import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 

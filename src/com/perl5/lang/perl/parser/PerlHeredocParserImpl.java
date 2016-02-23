@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.TokenType;
 
 /**
  * Created by hurricup on 23.02.2016.

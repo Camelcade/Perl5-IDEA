@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mason2.psi;
 
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +28,7 @@ public class Mason2Visitor extends PerlVisitor
 	{
 		visitPsiElement(o);
 	}
+
 	public void visitMasonTextBlock(@NotNull MasonTextBlock o)
 	{
 		visitPsiElement(o);

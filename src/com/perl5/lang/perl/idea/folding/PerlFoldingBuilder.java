@@ -38,7 +38,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -49,6 +48,39 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 	public static final String PH_CODE_BLOCK = "{code block}";
 
 	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.EMPTY;
+
+	/**
+	 * Finding psi elements of specific types and add Folding descriptor for them if they are more than certain lines lenght
+	 *
+	 * @param element     root element for searching
+	 * @param startMargin beginning margin for collapsable block
+	 * @param endMargin   end margin for collapsable block
+	 * @return list of folding descriptors
+	 */
+	protected static void addDescriptorFor(
+			@NotNull List<FoldingDescriptor> result,
+			@NotNull Document document,
+			@NotNull PsiElement element,
+			int startMargin,
+			int endMargin,
+			int minLines
+	)
+	{
+		if (!(element.getParent() instanceof PerlNamespaceDefinition))
+		{
+
+			TextRange range = element.getTextRange();
+			int startOffset = range.getStartOffset() + startMargin;
+			int endOffset = range.getEndOffset() - endMargin;
+			int startLine = document.getLineNumber(startOffset);
+			int endLine = document.getLineNumber(endOffset);
+
+			if (endLine - startLine > minLines)
+			{
+				result.add(new FoldingDescriptor(element.getNode(), new TextRange(startOffset, endOffset)));
+			}
+		}
+	}
 
 	@NotNull
 	@Override
@@ -205,7 +237,7 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 	/**
 	 * Searching for sequential uses and requires, ignoring stament modifieers, comments, pods and whitespaces and making folding descriptors for such blocks of size > 1
 	 *
-	 * @param imports  list of collected imports
+	 * @param imports list of collected imports
 	 * @return list of FoldingDescriptros
 	 */
 	private List<FoldingDescriptor> getImportDescriptors(@NotNull List<PerlNamespaceElementContainer> imports)
@@ -379,11 +411,10 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 		return COMMENT_EXCLUDED_TOKENS;
 	}
 
-
 	public static class FoldingRegionsCollector extends PerlRecursiveVisitor
 	{
-		protected List<FoldingDescriptor> myDescriptors = new ArrayList<FoldingDescriptor>();
 		protected final Document myDocument;
+		protected List<FoldingDescriptor> myDescriptors = new ArrayList<FoldingDescriptor>();
 		protected ArrayList<PerlNamespaceElementContainer> myImports = new ArrayList<PerlNamespaceElementContainer>();
 		protected ArrayList<PsiComment> myComments = new ArrayList<PsiComment>();
 
@@ -475,39 +506,6 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 		public ArrayList<PsiComment> getComments()
 		{
 			return myComments;
-		}
-	}
-
-	/**
-	 * Finding psi elements of specific types and add Folding descriptor for them if they are more than certain lines lenght
-	 *
-	 * @param element        root element for searching
-	 * @param startMargin beginning margin for collapsable block
-	 * @param endMargin   end margin for collapsable block
-	 * @return list of folding descriptors
-	 */
-	protected static void addDescriptorFor(
-			@NotNull List<FoldingDescriptor> result,
-			@NotNull Document document,
-			@NotNull PsiElement element,
-			int startMargin,
-			int endMargin,
-			int minLines
-	)
-	{
-		if (!(element.getParent() instanceof PerlNamespaceDefinition))
-		{
-
-			TextRange range = element.getTextRange();
-			int startOffset = range.getStartOffset() + startMargin;
-			int endOffset = range.getEndOffset() - endMargin;
-			int startLine = document.getLineNumber(startOffset);
-			int endLine = document.getLineNumber(endOffset);
-
-			if (endLine - startLine > minLines)
-			{
-				result.add(new FoldingDescriptor(element.getNode(), new TextRange(startOffset, endOffset)));
-			}
 		}
 	}
 

@@ -43,6 +43,7 @@ public class PerlFoldingTestCase extends LightCodeInsightFixtureTestCase
 	{
 		myFixture.testFolding(getTestDataPath() + "/perl_folding_test.pl");
 	}
+
 	public void testMason2Folding()
 	{
 		myFixture.testFolding(getTestDataPath() + "/mason2_folding_test.mc");

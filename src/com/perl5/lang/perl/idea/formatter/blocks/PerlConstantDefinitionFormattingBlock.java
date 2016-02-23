@@ -45,7 +45,7 @@ public class PerlConstantDefinitionFormattingBlock extends PerlFormattingBlock
 			@NotNull PerlCodeStyleSettings perlCodeStyleSettings,
 			@NotNull SpacingBuilder spacingBuilder,
 			@NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
-			)
+	)
 	{
 		super(node, wrap, null, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
 		arrowAlignment = alignment;
