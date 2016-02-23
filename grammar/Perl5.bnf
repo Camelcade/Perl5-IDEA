@@ -63,7 +63,6 @@ limitations under the License.
     HEREDOC_QQ="HEREDOC_QQ"
     HEREDOC_QX="HEREDOC_QX"
     HEREDOC_END="HEREDOC_END"
-    HEREDOC_PSEUDO_QUOTE="HEREDOC_PSEUDO_QUOTE"
 
     FORMAT="FORMAT"
     FORMAT_TERMINATOR="."
@@ -416,7 +415,6 @@ private file_items ::= file_item*
 
 private file_item ::= !<<eof>>
 {
-	<<parseHeredocContent>> |
 	namespace_definition |
     [label_declaration] (
         <<parseSemicolon>> +

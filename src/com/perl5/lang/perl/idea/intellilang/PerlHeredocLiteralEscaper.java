@@ -57,6 +57,6 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
 	@Override
 	public TextRange getRelevantTextRange()
 	{
-		return TextRange.from(1, myHost.getTextLength());
+		return TextRange.from(0, myHost.getTextLength());
 	}
 }

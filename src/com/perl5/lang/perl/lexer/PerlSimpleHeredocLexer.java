@@ -23,13 +23,14 @@ import java.io.IOException;
 /**
  * Created by hurricup on 10.10.2015.
  */
-public class PerlSimpleHeredocLexer extends PerlInterpolatedHeredocLexer
+public class PerlSimpleHeredocLexer extends PerlStringLexer
 {
 	public PerlSimpleHeredocLexer()
 	{
 		super(null);
 	}
 
+/*
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
@@ -43,6 +44,7 @@ public class PerlSimpleHeredocLexer extends PerlInterpolatedHeredocLexer
 		}
 		return super.perlAdvance();
 	}
+*/
 
 	@Override
 	public void captureInterpolatedCode()

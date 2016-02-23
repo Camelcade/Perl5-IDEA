@@ -26,6 +26,6 @@ public class PerlInterpolatedHeredocLexerAdapter extends FlexAdapter
 {
 	public PerlInterpolatedHeredocLexerAdapter(Project project)
 	{
-		super(new PerlInterpolatedHeredocLexer(project));
+		super(new PerlStringLexer(project));
 	}
 }

@@ -525,9 +525,7 @@ public class PerlLexer extends PerlLexerGenerated
 			// capture heredoc
 			if (waitingHereDoc() && (tokenStart == 0 || currentChar == '\n'))
 			{
-				IElementType tokenType = captureHereDoc();
-				if (tokenType != null)    // got something
-					return tokenType;
+				return captureHereDoc();
 			}
 			// capture format
 			else if (currentState == LEX_FORMAT_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
@@ -1002,17 +1000,21 @@ public class PerlLexer extends PerlLexerGenerated
 		int oldState = yystate();
 		IElementType tokenType = HEREDOC;
 		if (oldState == LEX_HEREDOC_WAITING_QQ)
+		{
 			tokenType = HEREDOC_QQ;
+		}
 		else if (oldState == LEX_HEREDOC_WAITING_QX)
+		{
 			tokenType = HEREDOC_QX;
+		}
 
 		popState();
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
-		setTokenStart(tokenStart);
+		addPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
 		int bufferEnd = getBufferEnd();
 
-		int currentPosition = tokenStart + 1;
+		int currentPosition = tokenStart;
 		int linePos = currentPosition;
 
 		while (true)
@@ -1030,33 +1032,23 @@ public class PerlLexer extends PerlLexerGenerated
 
 			if (heredocMarker.isEmpty() && lineContentsEnd == currentPosition && linePos > lineContentsEnd)
 			{
-				addPreparsedToken(currentPosition, lineContentsEnd + 1, HEREDOC_END);
-
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)
 				{
-					setTokenStart(tokenStart);
-					setTokenEnd(currentPosition);
-					return tokenType;
+					addPreparsedToken(tokenStart, currentPosition, tokenType);
 				}
-				// empty heredoc and got the end
-				else
-					return getPreParsedToken();
+				addPreparsedToken(currentPosition, lineContentsEnd + 1, HEREDOC_END);
+				return getPreParsedToken();
 			}
 			else if (StringUtil.equals(heredocMarker, buffer.subSequence(currentPosition, lineContentsEnd)))
 			{
-				addPreparsedToken(currentPosition, lineContentsEnd, HEREDOC_END);
-
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)
 				{
-					setTokenStart(tokenStart);
-					setTokenEnd(currentPosition);
-					return tokenType;
+					addPreparsedToken(tokenStart, currentPosition, tokenType);
 				}
-				// empty heredoc and got the end
-				else
-					return getPreParsedToken();
+				addPreparsedToken(currentPosition, lineContentsEnd, HEREDOC_END);
+				return getPreParsedToken();
 			}
 			// reached the end of file
 			else if (linePos == bufferEnd)
@@ -1064,13 +1056,9 @@ public class PerlLexer extends PerlLexerGenerated
 				// non-empty heredoc and got the end of file
 				if (linePos > tokenStart)
 				{
-					setTokenStart(tokenStart);
-					setTokenEnd(linePos);
-					return tokenType;
+					addPreparsedToken(tokenStart, currentPosition, tokenType);
 				}
-				// empty heredoc and got the end of file
-				else
-					return null;
+				return getPreParsedToken();
 			}
 			currentPosition = linePos;
 		}

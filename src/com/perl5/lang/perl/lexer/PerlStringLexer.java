@@ -43,40 +43,17 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	{
 		super.reset(buffer, start, end, initialState);
 		resetInternals();
-//		if( end > 0 )
-//			System.err.println("Reset buffer to: " + buffer.subSequence(start, end).toString());
 	}
 
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
 		int bufferEnd = getBufferEnd();
-//		CharSequence buffer = getBuffer();
-		int tokenEnd = getTokenEnd();
-//		char currentChar;
-
-//		if (tokenEnd <= getBufferStart() + 1 && bufferEnd > getBufferStart() + 1 && Character.isWhitespace(currentChar = buffer.charAt(tokenEnd)) && currentChar != '\n')
-//		{
-//			// hack for leading spaces
-//			setTokenStart(tokenEnd);
-//			while (tokenEnd < bufferEnd && Character.isWhitespace(buffer.charAt(tokenEnd)))
-//				tokenEnd++;
-//			setTokenEnd(tokenEnd);
-//			return STRING_CONTENT;
-//		}
-
 		boolean wasPreparsed = preparsedTokensList.size() > 0;
 		IElementType tokenType = super.perlAdvance();
 
 		// handling tailing spaces
-		tokenEnd = getTokenEnd();
-//		if (tokenEnd == getBufferEnd()
-//				&& (tokenType == TokenType.WHITE_SPACE ) // || tokenType == TokenType.NEW_LINE_INDENT
-//				)
-//		if( !wasPreparsed && tokenType == TokenType.WHITE_SPACE )
-//		{
-//			tokenType = STRING_WHITESPACE;
-//		}
+		int tokenEnd = getTokenEnd();
 
 		if (!wasPreparsed && preparsedTokensList.isEmpty())
 		{

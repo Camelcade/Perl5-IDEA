@@ -1474,27 +1474,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Parses lazy heredoc content
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return result
-	 */
-	public static boolean parseHeredocContent(PsiBuilder b, int l)
-	{
-		if (b.getTokenType() == HEREDOC_PSEUDO_QUOTE)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(TokenType.NEW_LINE_INDENT);
-
-			parseInterpolatedStringContent(b, l);
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * This is kinda hack for use/no statements and bareword -options
 	 *
 	 * @param b PerlBuilder

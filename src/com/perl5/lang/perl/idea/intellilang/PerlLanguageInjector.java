@@ -111,7 +111,9 @@ public class PerlLanguageInjector implements LanguageInjector
 				Language mappedLanguage = LANGUAGE_MAP.get(terminatorText);
 
 				if (mappedLanguage != null)
+				{
 					injectionPlacesRegistrar.addPlace(mappedLanguage, new TextRange(0, host.getTextLength()), null, null);
+				}
 			}
 		}
 	}

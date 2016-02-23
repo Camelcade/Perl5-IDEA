@@ -89,11 +89,6 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("perl_switch");
 	}
 
-	public void testPerlTidy()
-	{
-		doTest("perl_tidy");
-	}
-
 	public void testImplicitRegex()
 	{
 		doTest("implicit_regex");

@@ -27,6 +27,7 @@ import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlInterpolatedHeredocLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlSimpleHeredocLexerAdapter;
+import com.perl5.lang.perl.parser.PerlHeredocParserImpl;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -52,7 +53,7 @@ public class PerlHeredocElementType extends ILazyParseableElementType implements
 				getLexerAdapter(parentElement.getProject()),
 				getLanguage(),
 				chameleon.getText());
-		PsiParser parser = new PerlParserImpl();
+		PsiParser parser = new PerlHeredocParserImpl();
 
 		return parser.parse(this, builder).getFirstChildNode();
 	}

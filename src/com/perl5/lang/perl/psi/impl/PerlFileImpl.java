@@ -480,7 +480,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 
 			int lineEndOffset = document.getLineEndOffset(lineNumber);
 
-			boolean result = PerlPsiUtil.isHeredocAhead(element, lineEndOffset);
+			boolean result = PerlPsiUtil.isHeredocAhead(element, lineEndOffset + 1);
 
 			isNewLineFobiddenAtLine.put(lineNumber, result);
 
