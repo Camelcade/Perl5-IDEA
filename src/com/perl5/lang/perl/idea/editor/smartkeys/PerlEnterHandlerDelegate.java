@@ -54,7 +54,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 				if (heredocOpener instanceof PerlHeredocOpener)
 				{
 					String markerName = ((PerlHeredocOpener) heredocOpener).getName();
-					PsiElement currentElement = file.findElementAt(offset);
+					PsiElement currentElement = file.findElementAt(offset + 1);
 					boolean needAdd = currentElement == null;    // last element
 
 					if (!needAdd && currentElement.getParent() instanceof PerlHeredocElementImpl) // end of the line with opened heredoc
