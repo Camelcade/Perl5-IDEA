@@ -14,29 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2.psi.impl;
+package com.perl5.lang.mason2.psi;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.mason2.psi.Mason2Visitor;
-import com.perl5.lang.mason2.psi.MasonTextBlock;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 10.01.2016.
+ * Created by hurricup on 23.02.2016.
  */
-public class MasonTextBlockImpl extends PerlCompositeElementImpl implements MasonTextBlock
+public class Mason2Visitor extends PerlVisitor
 {
-	public MasonTextBlockImpl(@NotNull ASTNode node)
+	public void visitMasonAbstractBlock(@NotNull MasonAbstractBlock o)
 	{
-		super(node);
+		visitPsiElement(o);
 	}
-
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void visitMasonTextBlock(@NotNull MasonTextBlock o)
 	{
-		if (visitor instanceof Mason2Visitor) ((Mason2Visitor) visitor).visitMasonTextBlock(this);
-		else super.accept(visitor);
+		visitPsiElement(o);
 	}
 }

@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.perl5.lang.perl.idea.intellilang.PerlHeredocLiteralEscaper;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -50,7 +51,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
+		if (visitor instanceof PsiPerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
 		else super.accept(visitor);
 	}
 
@@ -60,4 +61,5 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 	{
 		return new PerlHeredocLiteralEscaper(this);
 	}
+
 }

@@ -21,6 +21,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
@@ -43,7 +44,7 @@ import java.util.List;
 /**
  * Created by hurricup on 20.05.2015.
  */
-public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementTypes
+public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementTypes, DumbAware
 {
 	public static final String PH_CODE_BLOCK = "{code block}";
 
@@ -57,34 +58,31 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 		if (root instanceof OuterLanguageElementImpl)
 			return FoldingDescriptor.EMPTY;
 
-		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
+		FoldingRegionsCollector collector = getCollector(document);
+		root.accept(collector);
+		List<FoldingDescriptor> descriptors = collector.getDescriptors();
 
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlConstantsBlock.class, 0, 0, 2));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlBlock.class, 0, 0, 1));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonHash.class, 0, 0, 2));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlAnonArray.class, 0, 0, 2));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlParenthesisedExpr.class, 0, 0, 2));
-		descriptors.addAll(getDescriptorsFor(root, document, PerlHeredocElementImpl.class, 1, 1, 2));
-		descriptors.addAll(getDescriptorsFor(root, document, PsiPerlStringList.class, 2, 0, 2));
-
-		descriptors.addAll(getCommentsDescriptors(root, document));
-		descriptors.addAll(getImportDescriptors(root, document));
+		descriptors.addAll(getCommentsDescriptors(collector.getComments(), document));
+		descriptors.addAll(getImportDescriptors(collector.getImports()));
 
 		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
+	}
+
+	protected FoldingRegionsCollector getCollector(Document document)
+	{
+		return new FoldingRegionsCollector(document);
 	}
 
 	/**
 	 * Searching for sequential comments (starting from newline or subblock beginning) and making folding descriptors for such blocks of size > 1
 	 *
-	 * @param root     root to search in
+	 * @param comments list of collected comments
 	 * @param document document to search in
 	 * @return list of FoldingDescriptros
 	 */
-	private List<FoldingDescriptor> getCommentsDescriptors(@NotNull PsiElement root, @NotNull Document document)
+	private List<FoldingDescriptor> getCommentsDescriptors(@NotNull List<PsiComment> comments, @NotNull Document document)
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
-
-		Collection<PsiComment> comments = PsiTreeUtil.findChildrenOfType(root, PsiComment.class);
 
 		TokenSet commentExcludedTokens = getCommentExcludedTokens();
 
@@ -207,16 +205,12 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 	/**
 	 * Searching for sequential uses and requires, ignoring stament modifieers, comments, pods and whitespaces and making folding descriptors for such blocks of size > 1
 	 *
-	 * @param root     root to search in
-	 * @param document document to search in
+	 * @param imports  list of collected imports
 	 * @return list of FoldingDescriptros
 	 */
-	private List<FoldingDescriptor> getImportDescriptors(@NotNull PsiElement root, @NotNull Document document)
+	private List<FoldingDescriptor> getImportDescriptors(@NotNull List<PerlNamespaceElementContainer> imports)
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
-
-		@SuppressWarnings("unchecked")
-		Collection<PerlNamespaceElementContainer> imports = PsiTreeUtil.<PerlNamespaceElementContainer>findChildrenOfAnyType(root, PsiPerlUseStatement.class, PsiPerlRequireExpr.class);
 
 		int currentOffset = 0;
 
@@ -321,8 +315,8 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 		else if (elementType == ANON_HASH)
 			return "{hash}";
 		else if (elementType == PARENTHESISED_EXPR)
-			return "(list expression...)";
-		else if (elementType == HEREDOC)
+			return "(list)";
+		else if (elementType == HEREDOC || elementType == HEREDOC_QQ || elementType == HEREDOC_QX)
 			return "<< heredoc >>";
 		else if (elementType == POD)
 			return "= POD block =";
@@ -383,6 +377,138 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 	protected TokenSet getCommentExcludedTokens()
 	{
 		return COMMENT_EXCLUDED_TOKENS;
+	}
+
+
+	public static class FoldingRegionsCollector extends PerlRecursiveVisitor
+	{
+		protected List<FoldingDescriptor> myDescriptors = new ArrayList<FoldingDescriptor>();
+		protected final Document myDocument;
+		protected ArrayList<PerlNamespaceElementContainer> myImports = new ArrayList<PerlNamespaceElementContainer>();
+		protected ArrayList<PsiComment> myComments = new ArrayList<PsiComment>();
+
+		public FoldingRegionsCollector(Document document)
+		{
+			myDocument = document;
+		}
+
+		@Override
+		public void visitConstantsBlock(@NotNull PsiPerlConstantsBlock o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+			super.visitConstantsBlock(o);
+		}
+
+		@Override
+		public void visitBlock(@NotNull PsiPerlBlock o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 1);
+			super.visitBlock(o);
+		}
+
+		@Override
+		public void visitAnonArray(@NotNull PsiPerlAnonArray o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+			super.visitAnonArray(o);
+		}
+
+		@Override
+		public void visitParenthesisedExpr(@NotNull PsiPerlParenthesisedExpr o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+			super.visitParenthesisedExpr(o);
+		}
+
+		@Override
+		public void visitHeredocElement(@NotNull PerlHeredocElementImpl o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 1, 0);
+			super.visitHeredocElement(o);
+		}
+
+		@Override
+		public void visitStringList(@NotNull PsiPerlStringList o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+			super.visitStringList(o);
+		}
+
+		@Override
+		public void visitAnonHash(@NotNull PsiPerlAnonHash o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+			super.visitAnonHash(o);
+		}
+
+		@Override
+		public void visitComment(PsiComment comment)
+		{
+			myComments.add(comment);
+			super.visitComment(comment);
+		}
+
+		@Override
+		public void visitUseStatement(@NotNull PsiPerlUseStatement o)
+		{
+			myImports.add(o);
+			super.visitUseStatement(o);
+		}
+
+		@Override
+		public void visitRequireExpr(@NotNull PsiPerlRequireExpr o)
+		{
+			myImports.add(o);
+			super.visitRequireExpr(o);
+		}
+
+		public List<FoldingDescriptor> getDescriptors()
+		{
+			return myDescriptors;
+		}
+
+		public ArrayList<PerlNamespaceElementContainer> getImports()
+		{
+			return myImports;
+		}
+
+		public ArrayList<PsiComment> getComments()
+		{
+			return myComments;
+		}
+	}
+
+	/**
+	 * Finding psi elements of specific types and add Folding descriptor for them if they are more than certain lines lenght
+	 *
+	 * @param element        root element for searching
+	 * @param startMargin beginning margin for collapsable block
+	 * @param endMargin   end margin for collapsable block
+	 * @return list of folding descriptors
+	 */
+	protected static void addDescriptorFor(
+			@NotNull List<FoldingDescriptor> result,
+			@NotNull Document document,
+			@NotNull PsiElement element,
+			int startMargin,
+			int endMargin,
+			int minLines
+	)
+	{
+		if (!(element.getParent() instanceof PerlNamespaceDefinition))
+		{
+
+			TextRange range = element.getTextRange();
+			int startOffset = range.getStartOffset() + startMargin;
+			int endOffset = range.getEndOffset() - endMargin;
+			int startLine = document.getLineNumber(startOffset);
+			int endLine = document.getLineNumber(endOffset);
+
+			if (endLine - startLine > minLines)
+			{
+				result.add(new FoldingDescriptor(element.getNode(), new TextRange(startOffset, endOffset)));
+			}
+		}
 	}
 
 }

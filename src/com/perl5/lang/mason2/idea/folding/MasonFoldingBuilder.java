@@ -20,13 +20,18 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.psi.Mason2RecursiveVisitor;
 import com.perl5.lang.mason2.psi.MasonAbstractBlock;
 import com.perl5.lang.mason2.psi.MasonTextBlock;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,10 +57,7 @@ public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElem
 	public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick)
 	{
 		List<FoldingDescriptor> masonDescriptors = new ArrayList<FoldingDescriptor>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
-
-		masonDescriptors.addAll(getDescriptorsFor(root, document, MasonAbstractBlock.class, 0, 0, 0));
-		masonDescriptors.addAll(getDescriptorsFor(root, document, MasonTextBlock.class, 0, 0, 0));
-
+		root.accept(new MasonFoldingRegionsCollector(document, masonDescriptors));
 		return masonDescriptors.toArray(new FoldingDescriptor[masonDescriptors.size()]);
 	}
 
@@ -92,4 +94,31 @@ public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElem
 	{
 		return MASON_TEMPLATE_BLOCK_HTML;
 	}
+
+	public static class MasonFoldingRegionsCollector extends Mason2RecursiveVisitor
+	{
+		protected List<FoldingDescriptor> myDescriptors;
+		protected final Document myDocument;
+
+		public MasonFoldingRegionsCollector(@NotNull  Document document, @NotNull List<FoldingDescriptor> result)
+		{
+			myDocument = document;
+			myDescriptors = result;
+		}
+
+		@Override
+		public void visitMasonAbstractBlock(@NotNull MasonAbstractBlock o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 0);
+			super.visitMasonAbstractBlock(o);
+		}
+
+		@Override
+		public void visitMasonTextBlock(@NotNull MasonTextBlock o)
+		{
+			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 0);
+			super.visitMasonTextBlock(o);
+		}
+	}
+
 }

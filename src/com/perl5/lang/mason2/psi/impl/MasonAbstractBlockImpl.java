@@ -17,7 +17,11 @@
 package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
+import com.perl5.lang.mason2.psi.Mason2Visitor;
 import com.perl5.lang.mason2.psi.MasonAbstractBlock;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,5 +33,12 @@ public class MasonAbstractBlockImpl extends PerlCompositeElementImpl implements 
 	public MasonAbstractBlockImpl(@NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof Mason2Visitor) ((Mason2Visitor) visitor).visitMasonAbstractBlock(this);
+		else super.accept(visitor);
 	}
 }
