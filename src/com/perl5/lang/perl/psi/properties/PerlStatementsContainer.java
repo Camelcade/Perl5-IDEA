@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,10 @@
 package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 27.05.2015.
- * This interface marks that PsiElement has it's own scope
+ * Created by hurricup on 24.02.2016.
  */
-public interface PerlLexicalScope extends PerlLexicalScopeMember, PsiElement, PerlStatementsContainer
+public interface PerlStatementsContainer extends PsiElement
 {
-	void accept(@NotNull PsiElementVisitor visitor);
 }

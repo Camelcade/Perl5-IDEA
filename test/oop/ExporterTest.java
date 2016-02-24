@@ -40,6 +40,59 @@ public class ExporterTest extends NamespaceTestCase
 		doTest("export.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
 	}
 
+	public void testExportInBegin()
+	{
+		doTest("export_in_begin.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInDefault()
+	{
+		doTest("export_in_default.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInFor()
+	{
+		doTest("export_in_for.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInForeach()
+	{
+		doTest("export_in_foreach.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInFunc()
+	{
+		doTest("export_in_func.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInGiven()
+	{
+		doTest("export_in_given.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInIf()
+	{
+		doTest("export_in_if.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInMethod()
+	{
+		doTest("export_in_method.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInSub()
+	{
+		doTest("export_in_sub.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInUnless()
+	{
+		doTest("export_in_unless.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInUntil()
+	{
+		doTest("export_in_until.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInWhen()
+	{
+		doTest("export_in_when.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+	public void testExportInWhile()
+	{
+		doTest("export_in_while.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+
 	public void testExportOk()
 	{
 		doTest("export_ok.pl", "Foo", new String[]{}, new String[]{"this", "is", "the", "end"});

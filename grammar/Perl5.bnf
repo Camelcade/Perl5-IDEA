@@ -342,6 +342,8 @@ limitations under the License.
     extends("no_statement")=statement
     extends("condition_statement|condition_statement_while|for_list_statement|for_iterator_statement")=statement
 
+	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
+
     implements("namespace_content|conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
     mixin("namespace_content|conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
