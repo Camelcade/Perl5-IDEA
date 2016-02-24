@@ -16,6 +16,10 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.psi.tree.IElementType;
+
+import java.io.IOException;
+
 /**
  * Created by hurricup on 10.10.2015.
  */
@@ -26,21 +30,11 @@ public class PerlSimpleHeredocLexer extends PerlStringLexer
 		super(null);
 	}
 
-/*
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-		int tokenStart = getTokenEnd();
-
-		if (tokenStart > bufferStart && tokenStart < bufferEnd)
-		{
-			return PerlLexerUtil.remapSQToken(super.perlAdvance());
-		}
-		return super.perlAdvance();
+		return PerlLexerUtil.remapSQToken(super.perlAdvance());
 	}
-*/
 
 	@Override
 	public void captureInterpolatedCode()

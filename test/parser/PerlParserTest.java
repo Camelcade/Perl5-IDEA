@@ -99,6 +99,11 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("camelcade94", false);
 	}
 
+	public void testIssue855()
+	{
+		doTest("issue855", false);
+	}
+
 	public void doTest(String filename)
 	{
 		doTest(filename, true);
