@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.LiteralTextEscaper;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +58,6 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
 	@Override
 	public TextRange getRelevantTextRange()
 	{
-		return TextRange.from(0, myHost.getTextLength());
+		return ElementManipulators.getManipulator(myHost).getRangeInElement(myHost);
 	}
 }
