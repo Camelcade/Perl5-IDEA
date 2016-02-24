@@ -52,8 +52,10 @@ public class PerlSettingsConfigurable implements Configurable
 	Perl5Settings mySettings;
 
 	TextFieldWithBrowseButton perlPathInputField;
+
 	JCheckBox simpleMainCheckbox;
 	JCheckBox autoInjectionCheckbox;
+	JCheckBox allowInjectionWithInterpolation;
 
 	CollectionListModel<String> selfNamesModel;
 	JBList selfNamesList;
@@ -96,6 +98,9 @@ public class PerlSettingsConfigurable implements Configurable
 
 		autoInjectionCheckbox = new JCheckBox("Automatically inject other languages in here-docs by marker text");
 		builder.addComponent(autoInjectionCheckbox);
+
+		allowInjectionWithInterpolation = new JCheckBox("Allow injections in QQ here-docs with interpolated entities");
+		builder.addComponent(allowInjectionWithInterpolation);
 
 		selfNamesModel = new CollectionListModel<String>();
 		selfNamesList = new JBList(selfNamesModel);
@@ -164,6 +169,7 @@ public class PerlSettingsConfigurable implements Configurable
 		return isMicroIdeModified() ||
 				mySettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
 				mySettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
+				mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
 				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
@@ -180,6 +186,7 @@ public class PerlSettingsConfigurable implements Configurable
 	{
 		mySettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
 		mySettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
+		mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
 
 		mySettings.selfNames.clear();
 		mySettings.selfNames.addAll(selfNamesModel.getItems());
@@ -217,6 +224,7 @@ public class PerlSettingsConfigurable implements Configurable
 
 		simpleMainCheckbox.setSelected(mySettings.SIMPLE_MAIN_RESOLUTION);
 		autoInjectionCheckbox.setSelected(mySettings.AUTOMATIC_HEREDOC_INJECTIONS);
+		allowInjectionWithInterpolation.setSelected(mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -237,5 +245,6 @@ public class PerlSettingsConfigurable implements Configurable
 		selfNamesModel = null;
 		selfNamesList = null;
 		autoInjectionCheckbox = null;
+		allowInjectionWithInterpolation = null;
 	}
 }

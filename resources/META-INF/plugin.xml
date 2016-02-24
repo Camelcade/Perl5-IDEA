@@ -37,6 +37,7 @@
         <li>A lot of optimizations.</li>
         <li>Fixed problem for ipr project settings, by @zhurs</li>
         <li>Re-formatter now works on here-docs injected with ohter languages</li>
+        <li>Disabling injections in here-docs with interpolated entities is now configurable</li>
       </ul>
       </p>
 

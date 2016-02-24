@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.idea.intellilang.PerlHeredocLiteralEscaper;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlVisitor;
@@ -38,7 +39,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 	@Override
 	public boolean isValidHost()
 	{
-		return getChildren().length == 0;
+		return Perl5Settings.getInstance(getProject()).ALLOW_INJECTIONS_WITH_INTERPOLATION || getChildren().length == 0;
 	}
 
 	@Override

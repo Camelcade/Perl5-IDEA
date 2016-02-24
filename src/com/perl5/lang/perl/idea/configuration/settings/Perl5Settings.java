@@ -47,6 +47,7 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public String perlPath = "";
 	public boolean SIMPLE_MAIN_RESOLUTION = true;
 	public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
+	public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;
 
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;
