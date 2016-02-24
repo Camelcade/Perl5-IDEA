@@ -187,7 +187,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 					PsiElement targetElement = result.getElement();
 					assert targetElement != null;
 
-					if( targetElement instanceof PerlFileImpl )
+					if (targetElement instanceof PerlFileImpl)
 					{
 						namespaceFiles.add((PerlFileImpl) targetElement);
 					}
