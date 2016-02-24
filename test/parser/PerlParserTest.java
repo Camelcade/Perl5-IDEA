@@ -89,6 +89,11 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("perl_switch");
 	}
 
+	public void testInterpolatedHashArrayElements()
+	{
+		doTest("interpolated_hash_array_elements");
+	}
+
 	public void testImplicitRegex()
 	{
 		doTest("implicit_regex");
