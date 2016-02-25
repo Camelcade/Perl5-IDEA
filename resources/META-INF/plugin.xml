@@ -38,6 +38,8 @@
         <li>Fixed problem for ipr project settings, by @zhurs</li>
         <li>Re-formatter now works on here-docs injected with ohter languages</li>
         <li>Disabling injections in here-docs with interpolated entities is now configurable</li>
+        <li>Fixed indentation when typing inside the comma sequence, fixes #845</li>
+        <li>Fixed few more rare NPEs</li>
       </ul>
       </p>
 

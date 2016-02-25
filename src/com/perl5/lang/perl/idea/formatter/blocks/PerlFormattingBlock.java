@@ -302,12 +302,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	protected Indent getChildIndent()
 	{
 		IElementType elementType = getElementType();
+
 		if (getIndentProcessor().getUnindentableContainers().contains(elementType))
 		{
 			return Indent.getNoneIndent();
 		}
-
-		// fixme not sure if it's dry with PerlIndentProcessor#getNodeIndent
 
 		if (elementType == BLOCK)
 		{
@@ -316,6 +315,34 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
 		return super.getChildIndent();
 	}
+
+	@NotNull
+	@Override
+	public ChildAttributes getChildAttributes(int newChildIndex)
+	{
+		return new ChildAttributes(getChildIndent(), getChildAlignment());
+	}
+
+	@Nullable
+	private Alignment getChildAlignment() {
+
+		IElementType elementType = getElementType();
+		if( PerlIndentProcessor.COMMA_LIKE_SEQUENCES.contains(elementType))
+		{
+			return null;
+		}
+
+		// this is default algorythm from AbstractBlock#getFirstChildAlignment()
+		List<Block> subBlocks = getSubBlocks();
+		for (final Block subBlock : subBlocks) {
+			Alignment alignment = subBlock.getAlignment();
+			if (alignment != null) {
+				return alignment;
+			}
+		}
+		return null;
+	}
+
 
 	@NotNull
 	@Override
