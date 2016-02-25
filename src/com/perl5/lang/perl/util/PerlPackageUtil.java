@@ -282,18 +282,18 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param project project to search in
 	 * @return collection of definitions
 	 */
-	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName)
+	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project, @NotNull String packageName)
 	{
 		List<PerlNamespaceDefinition> list = getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 		if (list.size() == 0)
+		{
 			list = getDerivedNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+		}
 		return list;
 	}
 
-	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(Project project, String packageName, GlobalSearchScope scope)
+	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions( @NotNull Project project, @NotNull String packageName, @NotNull GlobalSearchScope scope)
 	{
-		assert packageName != null;
-
 		return new ArrayList<PerlNamespaceDefinition>(StubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class));
 	}
 

@@ -145,8 +145,16 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	@Override
 	public List<PerlNamespaceDefinition> getChildNamespaceDefinitions()
 	{
-		Project project = getProject();
-		return PerlPackageUtil.getDerivedNamespaceDefinitions(project, getPackageName());
+		String packageName = getPackageName();
+		if( StringUtil.isEmpty(packageName))
+		{
+			return Collections.EMPTY_LIST;
+		}
+		else
+		{
+			Project project = getProject();
+			return PerlPackageUtil.getDerivedNamespaceDefinitions(project, packageName);
+		}
 	}
 
 	@NotNull
