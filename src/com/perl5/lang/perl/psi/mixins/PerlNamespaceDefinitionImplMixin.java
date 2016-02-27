@@ -146,7 +146,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 	public List<PerlNamespaceDefinition> getChildNamespaceDefinitions()
 	{
 		String packageName = getPackageName();
-		if( StringUtil.isEmpty(packageName))
+		if (StringUtil.isEmpty(packageName))
 		{
 			return Collections.EMPTY_LIST;
 		}
@@ -423,7 +423,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		protected List<String> getRightSideStrings(@NotNull PsiElement rigthSide)
 		{
 			List<String> result = new ArrayList<String>();
-			if( rigthSide.getFirstChild() != null )
+			if (rigthSide.getFirstChild() != null)
 			{
 				for (PsiElement psiElement : PerlPsiUtil.collectStringElements(rigthSide.getFirstChild()))
 				{
@@ -483,7 +483,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			else if (ISA_ASSIGN_STATEMENT.accepts(element))
 			{
 				PsiElement rightSide = element.getFirstChild().getLastChild();
-				if( rightSide != null && rightSide.getFirstChild() != null )
+				if (rightSide != null && rightSide.getFirstChild() != null)
 				{
 					runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(rightSide));
 				}

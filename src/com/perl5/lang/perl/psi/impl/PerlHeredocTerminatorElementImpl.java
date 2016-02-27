@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;

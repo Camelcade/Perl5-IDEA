@@ -23,7 +23,9 @@ import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.*;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;

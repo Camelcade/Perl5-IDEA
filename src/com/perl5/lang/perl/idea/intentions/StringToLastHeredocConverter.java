@@ -27,7 +27,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -77,7 +76,7 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
 
 		stringElement = stringElement.replace(heredocElements.get(0)); // replace string with heredoc opener
 
-		if( document != null )
+		if (document != null)
 		{
 			String heredocString =
 					contentText +

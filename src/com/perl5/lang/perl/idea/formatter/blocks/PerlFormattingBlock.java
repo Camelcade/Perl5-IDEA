@@ -324,19 +324,22 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	}
 
 	@Nullable
-	private Alignment getChildAlignment() {
+	private Alignment getChildAlignment()
+	{
 
 		IElementType elementType = getElementType();
-		if( PerlIndentProcessor.COMMA_LIKE_SEQUENCES.contains(elementType))
+		if (PerlIndentProcessor.COMMA_LIKE_SEQUENCES.contains(elementType))
 		{
 			return null;
 		}
 
 		// this is default algorythm from AbstractBlock#getFirstChildAlignment()
 		List<Block> subBlocks = getSubBlocks();
-		for (final Block subBlock : subBlocks) {
+		for (final Block subBlock : subBlocks)
+		{
 			Alignment alignment = subBlock.getAlignment();
-			if (alignment != null) {
+			if (alignment != null)
+			{
 				return alignment;
 			}
 		}

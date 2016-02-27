@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLanguageInjectionHost;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -43,6 +42,7 @@ public interface PerlString extends PsiElement
 
 	/**
 	 * Returns text content range
+	 *
 	 * @return text content range
 	 */
 	@NotNull
@@ -50,6 +50,7 @@ public interface PerlString extends PsiElement
 
 	/**
 	 * Returns the lenght of string content
+	 *
 	 * @return string content length
 	 */
 	int getContentLength();

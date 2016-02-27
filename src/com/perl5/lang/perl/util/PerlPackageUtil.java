@@ -292,7 +292,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return list;
 	}
 
-	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions( @NotNull Project project, @NotNull String packageName, @NotNull GlobalSearchScope scope)
+	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project, @NotNull String packageName, @NotNull GlobalSearchScope scope)
 	{
 		return new ArrayList<PerlNamespaceDefinition>(StubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class));
 	}

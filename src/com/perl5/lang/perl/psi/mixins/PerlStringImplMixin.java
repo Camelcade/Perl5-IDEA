@@ -53,9 +53,9 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implem
 		String currentContent = getNode().getText();
 
 		String newNodeContent =
-				currentContent.substring(0, getOpenQuoteOffsetInParent() + 1) +	// opening sequence
-				newContent +													// new content
-				currentContent.substring(currentContent.length() - 1)			// close quote fixme handle incomplete strings
+				currentContent.substring(0, getOpenQuoteOffsetInParent() + 1) +    // opening sequence
+						newContent +                                                    // new content
+						currentContent.substring(currentContent.length() - 1)            // close quote fixme handle incomplete strings
 				;
 
 		replace(PerlElementFactory.createString(getProject(), newNodeContent));
@@ -66,9 +66,9 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implem
 	{
 		PsiElement firstChild = getRealString().getFirstChild();
 
-		while( firstChild != null )
+		while (firstChild != null)
 		{
-			if( PerlParserUtil.OPEN_QUOTES.contains(firstChild.getNode().getElementType()))
+			if (PerlParserUtil.OPEN_QUOTES.contains(firstChild.getNode().getElementType()))
 			{
 				return firstChild;
 			}
@@ -81,7 +81,7 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implem
 	public PsiElement getClosingQuote()
 	{
 		PsiElement lastChild = getRealString().getLastChild();
-		if( lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(lastChild.getNode().getElementType()) )
+		if (lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(lastChild.getNode().getElementType()))
 		{
 			return lastChild;
 		}
@@ -94,8 +94,8 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implem
 		if (getFirstChild() instanceof PerlParsableStringWrapperlImpl)
 		{
 			PsiElement realString = getFirstChild().getFirstChild();
-			assert realString instanceof PerlString: "Got " + realString + " instead of string";
-			return (PerlString)realString;
+			assert realString instanceof PerlString : "Got " + realString + " instead of string";
+			return (PerlString) realString;
 		}
 		return this;
 	}
@@ -109,7 +109,7 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implem
 	{
 		PsiElement closingQuote = getClosingQuote();
 		ASTNode node = getNode();
-		if( closingQuote == null ) // unclosed string
+		if (closingQuote == null) // unclosed string
 		{
 			return node.getTextLength();
 		}

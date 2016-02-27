@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.AbstractElementManipulator;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.RegexBlock;
@@ -36,7 +33,7 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
 	{
 		PsiElement openingQuote = element.getOpeningQuote();
 		char closeQuote = RegexBlock.getQuoteCloseChar(openingQuote.getText().charAt(0));
-		return super.handleContentChange(element, range, newContent.replaceAll("(?<!\\\\)"+ closeQuote, "\\\\" + closeQuote));
+		return super.handleContentChange(element, range, newContent.replaceAll("(?<!\\\\)" + closeQuote, "\\\\" + closeQuote));
 	}
 
 	@NotNull

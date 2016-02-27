@@ -22,7 +22,6 @@ import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.mixins.PerlStringImplMixin;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -36,7 +35,7 @@ public abstract class PerlTextContainerManipulator<T extends PsiElement> extends
 		final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
 		final Document document = manager.getDocument(element.getContainingFile());
 
-		if( document != null )
+		if (document != null)
 		{
 			TextRange elementRange = element.getTextRange();
 			manager.doPostponedOperationsAndUnblockDocument(document);

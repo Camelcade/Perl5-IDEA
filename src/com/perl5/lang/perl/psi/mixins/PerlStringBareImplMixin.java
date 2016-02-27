@@ -18,10 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.LiteralTextEscaper;
-import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.idea.intellilang.PerlStringLiteralEscaper;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;

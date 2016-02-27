@@ -16,18 +16,7 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.AbstractElementManipulator;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.xmlb.annotations.Text;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 10.06.2015.
