@@ -71,14 +71,17 @@ public class PerlElementFactory
 	public static List<PsiElement> createHereDocElements(Project project, char quoteSymbol, String markerText, String contentText)
 	{
 		PerlFileImpl file = createFile(project,
-				String.format("<<%c%s%c\n%s\n%s\n", quoteSymbol, markerText, quoteSymbol, contentText, markerText)
+				String.format("<<%c%s%c\n%s\n%s\n;", quoteSymbol, markerText, quoteSymbol, contentText, markerText)
 		);
 
+		PsiElement heredocOpener = PsiTreeUtil.findChildOfType(file, PsiPerlHeredocOpener.class);
+		@SuppressWarnings("ConstantConditions") PsiElement headingNewLine = heredocOpener.getNextSibling();
+		PsiElement tailingNewLine = headingNewLine.getNextSibling().getNextSibling().getNextSibling();
+
 		return new ArrayList<PsiElement>(Arrays.asList(
-				PsiTreeUtil.findChildOfType(file, PsiPerlHeredocOpener.class),
-				PsiTreeUtil.findChildOfType(file, PerlHeredocElementImpl.class),
-				PsiTreeUtil.findChildOfType(file, PerlHeredocTerminatorElementImpl.class),
-				file.getLastChild()
+				heredocOpener,
+				headingNewLine,
+				tailingNewLine
 		));
 	}
 

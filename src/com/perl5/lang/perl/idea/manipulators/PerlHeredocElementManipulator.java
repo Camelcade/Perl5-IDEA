@@ -16,10 +16,13 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.AbstractElementManipulator;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.xmlb.annotations.Text;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
@@ -29,18 +32,23 @@ import java.util.List;
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlPsiHeredocManipulator extends AbstractElementManipulator<PerlHeredocElementImpl>
+public class PerlHeredocElementManipulator extends AbstractElementManipulator<PerlHeredocElementImpl>
 {
 	@Override
-	public PerlHeredocElementImpl handleContentChange(@NotNull PerlHeredocElementImpl psiHeredoc, @NotNull TextRange range, String newContent) throws IncorrectOperationException
+	public PerlHeredocElementImpl handleContentChange(@NotNull PerlHeredocElementImpl element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
-		String oldText = psiHeredoc.getText();
-		String newText = oldText.substring(0, range.getStartOffset()) + newContent + oldText.substring(range.getEndOffset());
 
-		List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(psiHeredoc.getProject(), '\'', "TEXT" + Math.random(), newText);
-		assert heredocElements.size() == 4;
+		final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
+		final Document document = manager.getDocument(element.getContainingFile());
 
-		return (PerlHeredocElementImpl) psiHeredoc.replace(heredocElements.get(1));
+		if( document != null )
+		{
+			TextRange elementRange = element.getTextRange();
+			manager.doPostponedOperationsAndUnblockDocument(document);
+			document.replaceString(elementRange.getStartOffset(), elementRange.getEndOffset(), newContent);
+			manager.commitDocument(document);
+		}
+		return element;
 	}
 
 	@NotNull

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
@@ -41,12 +42,6 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 		else super.accept(visitor);
 	}
 
-	@Override
-	public void refreshReference()
-	{
-		myReferences[0] = new PerlHeredocReference(this, null);
-	}
-
 	@NotNull
 	@Override
 	public PsiReference[] getReferences()
@@ -58,5 +53,11 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 	public PsiReference getReference()
 	{
 		return myReferences[0];
+	}
+
+	@Override
+	public boolean isValidHost()
+	{
+		return false;
 	}
 }

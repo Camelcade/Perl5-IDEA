@@ -222,7 +222,7 @@
         <quoteHandler fileType="Perl5 package" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlPsiHeredocManipulator"/>
+                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocElementManipulator"/>
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlStringContentElement" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator"/>

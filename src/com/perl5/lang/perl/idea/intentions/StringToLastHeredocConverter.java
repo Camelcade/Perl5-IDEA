@@ -18,12 +18,16 @@ package com.perl5.lang.perl.idea.intentions;
 
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -48,8 +52,12 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
 		else if (stringElement instanceof PsiPerlStringXq)
 			quoteSymbol = '`';
 
-		List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(project, quoteSymbol, HEREDOC_MARKER,
-				((PerlString) stringElement).getStringContent()
+		String contentText = ((PerlString) stringElement).getStringContent();
+		List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(
+				project,
+				quoteSymbol,
+				HEREDOC_MARKER,
+				""
 		);
 
 		PsiFile currentFile = stringElement.getContainingFile();
@@ -64,21 +72,34 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
 				anchor = null;
 		}
 
+		final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
+		final Document document = manager.getDocument(element.getContainingFile());
+
 		stringElement = stringElement.replace(heredocElements.get(0)); // replace string with heredoc opener
 
-		if (anchor == null)
-			anchor = stringElement;
-
-		PsiElement container = anchor.getParent();
-
-		if (container != null)
+		if( document != null )
 		{
-			anchor = container.addAfter(heredocElements.get(1), anchor);
-			anchor = container.addAfter(heredocElements.get(2), anchor);
-			anchor = container.addAfter(heredocElements.get(3), anchor);
-			anchor = container.addAfter(heredocElements.get(3), anchor);
-		}
+			String heredocString =
+					contentText +
+							"\n" +
+							HEREDOC_MARKER +
+							"\n";
 
+			ASTNode predecessor = anchor == null ? stringElement.getNode() : anchor.getNode();
+			int offset = predecessor.getTextRange().getEndOffset();
+
+			manager.doPostponedOperationsAndUnblockDocument(document);
+			if (anchor == null)
+			{
+				document.insertString(offset, "\n" + heredocString);
+			}
+			else
+			{
+
+				document.insertString(offset, heredocString);
+			}
+			manager.commitDocument(document);
+		}
 	}
 
 	@Override

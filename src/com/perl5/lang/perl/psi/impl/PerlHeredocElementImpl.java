@@ -45,7 +45,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 	@Override
 	public PsiLanguageInjectionHost updateText(@NotNull final String text)
 	{
-		return null; //return (PerlHeredocElementImpl)replaceWithText(text);
+		return null;
 	}
 
 

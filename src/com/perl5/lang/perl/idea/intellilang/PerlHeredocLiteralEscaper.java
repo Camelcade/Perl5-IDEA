@@ -35,7 +35,7 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
 	@Override
 	public boolean isOneLine()
 	{
-		return true;
+		return false;
 	}
 
 	@Override
