@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,16 +22,28 @@ import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.xmlb.annotations.Text;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.mixins.PerlStringImplMixin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 /**
- * Created by hurricup on 10.06.2015.
+ * Created by hurricup on 27.02.2016.
  */
-public class PerlHeredocElementManipulator extends PerlTextContainerManipulator<PerlHeredocElementImpl>
+public abstract class PerlTextContainerManipulator<T extends PsiElement> extends AbstractElementManipulator<T>
 {
+	@Override
+	public T handleContentChange(@NotNull T element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
+	{
+		final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
+		final Document document = manager.getDocument(element.getContainingFile());
+
+		if( document != null )
+		{
+			TextRange elementRange = element.getTextRange();
+			manager.doPostponedOperationsAndUnblockDocument(document);
+			document.replaceString(elementRange.getStartOffset() + range.getStartOffset(), elementRange.getStartOffset() + range.getEndOffset(), newContent);
+			manager.commitDocument(document);
+		}
+		return element;
+	}
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,42 @@
 package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.LiteralTextEscaper;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.lexer.RegexBlock;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.mixins.PerlStringImplMixin;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 02.08.2015.
+ * Created by hurricup on 27.02.2016.
  */
-public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocElementImpl>
+public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplMixin>
 {
-	public PerlHeredocLiteralEscaper(PerlHeredocElementImpl host)
+	public PerlStringLiteralEscaper(@NotNull PerlStringImplMixin host)
 	{
 		super(host);
+	}
+
+	@Override
+	public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars)
+	{
+		outChars.append(rangeInsideHost.subSequence(myHost.getText()));
+		// fixme this is beginning of real decoding
+//		PsiElement openingQuote = myHost.getOpeningQuote();
+//		char closeQuote = RegexBlock.getQuoteCloseChar(openingQuote.getText().charAt(0));
+//		String rawText = rangeInsideHost.subSequence(myHost.getText()).toString();
+//		outChars.append(rawText.replaceAll("(?<!\\\\)\\\\"+ closeQuote, "" + closeQuote));
+		return true;
+	}
+
+	@Override
+	public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost)
+	{
+		int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
+		if (offset < rangeInsideHost.getStartOffset()) offset = rangeInsideHost.getStartOffset();
+		if (offset > rangeInsideHost.getEndOffset()) offset = rangeInsideHost.getEndOffset();
+		return offset;
 	}
 
 	@Override
@@ -38,28 +61,10 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
 		return false;
 	}
 
-	@Override
-	public boolean decode(@NotNull final TextRange rangeInsideHost, @NotNull StringBuilder outChars)
-	{
-		outChars.append(rangeInsideHost.subSequence(myHost.getText()));
-		return true;
-	}
-
-	@Override
-	public int getOffsetInHost(int offsetInDecoded, @NotNull final TextRange rangeInsideHost)
-	{
-		int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
-		if (offset < rangeInsideHost.getStartOffset()) offset = rangeInsideHost.getStartOffset();
-		if (offset > rangeInsideHost.getEndOffset()) offset = rangeInsideHost.getEndOffset();
-		return offset;
-	}
-
 	@NotNull
 	@Override
 	public TextRange getRelevantTextRange()
 	{
-		return ElementManipulators.getManipulator(myHost).getRangeInElement(myHost);
+		return myHost.getContentTextRangeInParent();
 	}
-
-
 }

@@ -18,16 +18,21 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiLanguageInjectionHost;
+import com.perl5.lang.perl.idea.intellilang.PerlStringLiteralEscaper;
 import com.perl5.lang.perl.parser.PerlParserUtil;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 08.08.2015.
  */
-public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
+public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implements PsiLanguageInjectionHost
 {
 	public PerlStringImplMixin(@NotNull ASTNode node)
 	{
@@ -38,79 +43,103 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin
 	@Override
 	public String getStringContent()
 	{
-		int baseOffset = getNode().getStartOffset();
-		return getText().substring(getOpenQuoteOffset() - baseOffset + 1, getCloseQuoteOffset() - baseOffset);
+		TextRange contentRange = getContentTextRangeInParent();
+		return contentRange.substring(getText());
 	}
 
 	@Override
 	public void setStringContent(String newContent)
 	{
-		int baseOffset = getNode().getStartOffset();
 		String currentContent = getNode().getText();
 
-		String newNodeContent = currentContent.substring(0, getOpenQuoteOffset() - baseOffset + 1) + newContent + currentContent.substring(currentContent.length() - 1);
+		String newNodeContent =
+				currentContent.substring(0, getOpenQuoteOffsetInParent() + 1) +	// opening sequence
+				newContent +													// new content
+				currentContent.substring(currentContent.length() - 1)			// close quote fixme handle incomplete strings
+				;
 
 		replace(PerlElementFactory.createString(getProject(), newNodeContent));
 	}
 
-	@Override
-	public int getTextLength()
+	@NotNull
+	public PsiElement getOpeningQuote()
 	{
-		return getTextRange().getLength();
-	}
+		PsiElement firstChild = getRealString().getFirstChild();
 
-	protected int getOpenQuoteOffset()
-	{
-		PsiElement firstChild = getFirstChild();
-
-		if (firstChild instanceof PerlParsableStringWrapperlImpl)
+		while( firstChild != null )
 		{
-			PsiElement realString = firstChild.getFirstChild();
-			assert realString instanceof PerlStringImplMixin;
-			return ((PerlStringImplMixin) realString).getOpenQuoteOffset();
+			if( PerlParserUtil.OPEN_QUOTES.contains(firstChild.getNode().getElementType()))
+			{
+				return firstChild;
+			}
+			firstChild = firstChild.getNextSibling();
 		}
-
-		ASTNode currentNode = firstChild.getNode();
-
-		while (currentNode != null)
-		{
-			if (PerlParserUtil.OPEN_QUOTES.contains(currentNode.getElementType()))
-				return currentNode.getStartOffset();
-			currentNode = currentNode.getTreeNext();
-		}
-		throw new RuntimeException("Unable to find opening quote inside: " + getText() + " " + getContainingFile().getVirtualFile());
+		throw new RuntimeException("Unable to find opening quote in: " + getText());
 	}
 
-	protected int getCloseQuoteOffset()
+	@Nullable
+	public PsiElement getClosingQuote()
 	{
-		PsiElement lastChild = getLastChild();
-
-		if (lastChild instanceof PerlParsableStringWrapperlImpl)
+		PsiElement lastChild = getRealString().getLastChild();
+		if( lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(lastChild.getNode().getElementType()) )
 		{
-			PsiElement realString = lastChild.getFirstChild();
-			assert realString instanceof PerlStringImplMixin;
-			return ((PerlStringImplMixin) realString).getCloseQuoteOffset();
+			return lastChild;
 		}
+		return null;
+	}
 
-		ASTNode currentNode = lastChild.getNode();
+	@NotNull
+	protected PerlString getRealString()
+	{
+		if (getFirstChild() instanceof PerlParsableStringWrapperlImpl)
+		{
+			PsiElement realString = getFirstChild().getFirstChild();
+			assert realString instanceof PerlString: "Got " + realString + " instead of string";
+			return (PerlString)realString;
+		}
+		return this;
+	}
 
-		if (PerlParserUtil.CLOSE_QUOTES.contains(currentNode.getElementType()))
-			return currentNode.getStartOffset();
+	protected int getOpenQuoteOffsetInParent()
+	{
+		return getOpeningQuote().getNode().getStartOffset() - getNode().getStartOffset();
+	}
 
-		// unclosed string
-		return lastChild.getTextOffset() + lastChild.getTextLength();
+	protected int getCloseQuoteOffsetInParent()
+	{
+		PsiElement closingQuote = getClosingQuote();
+		ASTNode node = getNode();
+		if( closingQuote == null ) // unclosed string
+		{
+			return node.getTextLength();
+		}
+		return closingQuote.getNode().getStartOffset() - node.getStartOffset();
+	}
+
+
+	@NotNull
+	@Override
+	public TextRange getContentTextRangeInParent()
+	{
+		return new TextRange(getOpenQuoteOffsetInParent() + 1, getCloseQuoteOffsetInParent());
 	}
 
 	@Override
-	public TextRange getTextRange()
+	public PsiLanguageInjectionHost updateText(@NotNull String text)
 	{
-		return new TextRange(getTextOffset(), getCloseQuoteOffset());
+		return null;
+	}
+
+	@NotNull
+	@Override
+	public LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper()
+	{
+		return new PerlStringLiteralEscaper(this);
 	}
 
 	@Override
-	public int getTextOffset()
+	public boolean isValidHost()
 	{
-		return getOpenQuoteOffset() + 1;
+		return true;
 	}
-
 }
