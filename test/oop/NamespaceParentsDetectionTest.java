@@ -121,6 +121,11 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase
 		doTest("parent_with.pl", "Foo", new String[]{"someparents", "someotherparent4", "someotherparent5"});
 	}
 
+	public void testTypingISA()
+	{
+		doTest("typing_isa.pl", "Foo", new String[]{});
+	}
+
 	public void doTest(String fileName, @NotNull String namespaceName, String[] parentsList)
 	{
 		PerlNamespaceDefinitionImplMixin namespaceDefinition = getNamespaceInFile(fileName, namespaceName);

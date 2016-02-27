@@ -423,12 +423,15 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 		protected List<String> getRightSideStrings(@NotNull PsiElement rigthSide)
 		{
 			List<String> result = new ArrayList<String>();
-			for (PsiElement psiElement : PerlPsiUtil.collectStringElements(rigthSide.getFirstChild()))
+			if( rigthSide.getFirstChild() != null )
 			{
-				String text = psiElement.getText();
-				if (StringUtil.isNotEmpty(text))
+				for (PsiElement psiElement : PerlPsiUtil.collectStringElements(rigthSide.getFirstChild()))
 				{
-					result.add(text);
+					String text = psiElement.getText();
+					if (StringUtil.isNotEmpty(text))
+					{
+						result.add(text);
+					}
 				}
 			}
 			return result;
@@ -480,8 +483,10 @@ public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiEleme
 			else if (ISA_ASSIGN_STATEMENT.accepts(element))
 			{
 				PsiElement rightSide = element.getFirstChild().getLastChild();
-				assert rightSide != null;
-				runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(rightSide));
+				if( rightSide != null && rightSide.getFirstChild() != null )
+				{
+					runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(rightSide));
+				}
 			}
 
 			return true;
