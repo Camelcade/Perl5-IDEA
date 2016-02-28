@@ -18,17 +18,60 @@ package parser;
 
 /**
  * Created by hurricup on 28.02.2016.
- * Following are tests for samples from https://github.com/adamkennedy/PPI
+ * These are test for sources from https://github.com/hurricup/perl5
  */
-public abstract class PerlParserTestPPIBase extends PerlParserSubtestBase
+public class PerlSourcesParserTestBase extends PerlSourcesParserTestAbstract
 {
-	public static final String DATA_PATH = "testData/parser/ppi";
+	private static final String GROUP = "base";
 
 	@Override
-	protected String getTestDataPath()
+	protected String getTestsGroup()
 	{
-		return DATA_PATH;
+		return GROUP;
 	}
 
+	public void testcond()
+	{
+		doTest("cond");
+	}
 
+	public void testif()
+	{
+		doTest("if");
+	}
+
+	public void testlex()
+	{
+		doTest("lex");
+	}
+
+	public void testnum()
+	{
+		doTest("num");
+	}
+
+	public void testpat()
+	{
+		doTest("pat");
+	}
+
+	public void testrs()
+	{
+		doTest("rs");
+	}
+
+	public void testterm()
+	{
+		doTest("term");
+	}
+
+	public void testtranslate()
+	{
+		doTest("translate");
+	}
+
+	public void testwhile()
+	{
+		doTest("while");
+	}
 }

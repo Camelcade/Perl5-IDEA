@@ -1,0 +1,5 @@
+# not sure we can handle this at all, because interpolated block being parsed isolated
+s|(?:)|"${\<<END}"
+ok $test - heredoc in "" in multiline s///e outside eval
+END
+|e;

@@ -1,0 +1,8 @@
+$a = 0Xabcdef; "$a";
+print $a eq "11259375"     ? "ok 51\n" : "not ok 51 # $a\n";
+
+$a = 0XFEDCBA; "$a";
+print $a eq "16702650"     ? "ok 52\n" : "not ok 52 # $a\n";
+
+$a = 0B1101; "$a";
+print $a eq "13"           ? "ok 53\n" : "not ok 53 # $a\n";

@@ -1,0 +1,1 @@
+is <$fh>, "foo", "open fh to reference to string: got expected content";
