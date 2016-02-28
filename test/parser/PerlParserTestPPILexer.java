@@ -18,75 +18,75 @@ package parser;
 
 /**
  * Created by hurricup on 28.02.2016.
- * Following are tests for samples from https://github.com/adamkennedy/PPI
  */
-public class PerlParserTestPPI extends PerlParserTestBase
+public class PerlParserTestPPILexer extends PerlParserTestPPIBase
 {
-	public static final String DATA_PATH = "testData/parser/ppi";
+	private static final String myGroup = "05_lexer";
 
 	@Override
-	protected String getTestDataPath()
+	protected String getTestsGroup()
 	{
-		return DATA_PATH;
+		return myGroup;
 	}
 
 	public void test01_simpleassign()
 	{
-		doTest("05_lexer/01_simpleassign");
+		doTest("01_simpleassign");
 	}
 
 	public void test02_END()
 	{
-		doTest("05_lexer/02_END");
+		doTest("02_END");
 	}
 
 	public void test03_subroutine_attributes()
 	{
-		doTest("05_lexer/03_subroutine_attributes");
+		doTest("03_subroutine_attributes");
 	}
 
 	public void test04_anonymous_subroutines()
 	{
-		doTest("05_lexer/04_anonymous_subroutines");
+		doTest("04_anonymous_subroutines");
 	}
 
 	public void test05_compound_loops()
 	{
-		doTest("05_lexer/05_compound_loops");
+		doTest("05_compound_loops");
 	}
 
 	public void test06_subroutine_prototypes()
 	{
-		doTest("05_lexer/06_subroutine_prototypes");
+		doTest("06_subroutine_prototypes");
 	}
 
 	public void test07_unmatched_braces()
 	{
-		doTest("05_lexer/07_unmatched_braces", false);
+		doTest("07_unmatched_braces", false);
 	}
 
 	public void test08_subroutines()
 	{
-		doTest("05_lexer/08_subroutines");
+		doTest("08_subroutines");
 	}
 
 	public void test09_heredoc()
 	{
-		doTest("05_lexer/09_heredoc");
+		doTest("09_heredoc");
 	}
 
 	public void test10_readline()
 	{
-		doTest("05_lexer/10_readline");
+		doTest("10_readline");
 	}
 
 	public void test11_dor()
 	{
-		doTest("05_lexer/11_dor");
+		doTest("11_dor");
 	}
 
 	public void test12_switch()
 	{
-		doTest("05_lexer/12_switch");
+		doTest("12_switch");
 	}
+
 }

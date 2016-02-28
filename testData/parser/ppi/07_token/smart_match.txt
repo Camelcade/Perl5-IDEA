@@ -1,0 +1,10 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+    PsiPerlEqualExprImpl(PerlElementType.PerlTokenType.EQUAL_EXPR)
+      PsiPerlArrayVariableImpl(PerlElementType.PerlTokenType.ARRAY_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_ARRAY)('@')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('foo')
+      PsiElement(PerlTokenType.~~)('~~')
+      PsiPerlArrayVariableImpl(PerlElementType.PerlTokenType.ARRAY_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_ARRAY)('@')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('bar')
