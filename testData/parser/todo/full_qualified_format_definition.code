@@ -1,0 +1,4 @@
+format ::two =
+ok @<< - format ::foo still works
+$test
+.

@@ -1,0 +1,4 @@
+format 'one =
+ok @<< - format 'foo still works
+$test
+.
