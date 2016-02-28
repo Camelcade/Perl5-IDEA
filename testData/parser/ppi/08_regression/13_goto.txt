@@ -1,0 +1,12 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+    PsiPerlSubExprImpl(PerlElementType.PerlTokenType.SUB_EXPR)
+      PsiElement(PerlTokenType.sub)('sub')
+      PsiPerlBlockImpl(PerlElementType.PerlTokenType.BLOCK)
+        PsiElement(PerlTokenType.LEFT_BRACE)('{')
+        PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+          PsiPerlGotoExprImpl(PerlElementType.PerlTokenType.GOTO_EXPR)
+            PsiElement(PerlTokenType.goto)('goto')
+            PsiElement(PerlTokenType.LABEL)('FOO')
+          PsiElement(PerlTokenType.;)(';')
+        PsiElement(PerlTokenType.RIGHT_BRACE)('}')

@@ -1,0 +1,3 @@
+sub fnord (&\%) : switch(10,foo(7,3))  :  expensive;
+sub xyzzy : _5x5 { ... }
+sub plugh () : Ugly('\(") :Bad;

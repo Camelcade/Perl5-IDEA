@@ -1,0 +1,10 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+    PsiPerlPowExprImpl(PerlElementType.PerlTokenType.POW_EXPR)
+      PsiPerlScalarVariableImpl(PerlElementType.PerlTokenType.SCALAR_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('one')
+      PsiElement(PerlTokenType.**)('**')
+      PsiPerlScalarVariableImpl(PerlElementType.PerlTokenType.SCALAR_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('two')

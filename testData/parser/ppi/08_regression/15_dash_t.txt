@@ -1,0 +1,5 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+    PsiPerlNamedUnaryExprImpl(PerlElementType.PerlTokenType.NAMED_UNARY_EXPR)
+      PsiElement(PerlTokenType.OPERATOR_FILETEST)('-t')
+    PsiElement(PerlTokenType.;)(';')

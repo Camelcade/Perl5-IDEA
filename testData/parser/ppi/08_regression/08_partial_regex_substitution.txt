@@ -1,0 +1,11 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+    PsiPerlRegexExprImpl(PerlElementType.PerlTokenType.REGEX_EXPR)
+      PsiPerlScalarVariableImpl(PerlElementType.PerlTokenType.SCALAR_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('foo')
+      PsiElement(PerlTokenType.=~)('=~')
+      PsiPerlReplacementRegexImpl(PerlElementType.PerlTokenType.REPLACEMENT_REGEX)
+        PsiElement(PerlTokenType.s)('s')
+        PsiErrorElement:PerlTokenType.REGEX_QUOTE_OPEN or PerlTokenType.REGEX_QUOTE_OPEN_X expected, unexpected end of file
+          <empty list>

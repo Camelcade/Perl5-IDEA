@@ -1,0 +1,7 @@
+Perl5
+  PsiPerlNamespaceDefinitionImpl(NAMESPACE)
+    PsiElement(PerlTokenType.package)('package')
+    PsiElement(PerlTokenType.PACKAGE)('Foo::100')
+    PsiElement(PerlTokenType.;)(';')
+    PsiPerlNamespaceContentImpl(PerlElementType.PerlTokenType.NAMESPACE_CONTENT)
+      <empty list>

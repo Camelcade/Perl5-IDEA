@@ -1,0 +1,1 @@
+foreach my $thingy ( eval { bar; } ) { 1 }

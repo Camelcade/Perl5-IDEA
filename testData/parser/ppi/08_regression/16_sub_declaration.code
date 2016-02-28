@@ -1,0 +1,2 @@
+{print 123;}
+sub foo {}

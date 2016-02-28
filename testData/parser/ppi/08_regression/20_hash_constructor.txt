@@ -1,0 +1,10 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+    PsiPerlAssignExprImpl(PerlElementType.PerlTokenType.ASSIGN_EXPR)
+      PsiPerlScalarVariableImpl(PerlElementType.PerlTokenType.SCALAR_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+      PsiElement(PerlTokenType.=)('=')
+      PsiPerlAnonHashImpl(PerlElementType.PerlTokenType.ANON_HASH)
+        PsiElement(PerlTokenType.LEFT_BRACE)('{')
+        PsiElement(PerlTokenType.RIGHT_BRACE)('}')

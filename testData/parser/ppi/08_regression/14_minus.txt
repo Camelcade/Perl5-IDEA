@@ -1,0 +1,8 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+    PsiPerlAddExprImpl(PerlElementType.PerlTokenType.ADD_EXPR)
+      PsiPerlNumberConstantImpl(PerlElementType.PerlTokenType.NUMBER_CONSTANT)
+        PsiElement(PerlTokenType.NUMBER_SIMPLE)('1')
+      PsiElement(PerlTokenType.-)('-')
+      PsiPerlNumberConstantImpl(PerlElementType.PerlTokenType.NUMBER_CONSTANT)
+        PsiElement(PerlTokenType.NUMBER_SIMPLE)('1')

@@ -1,0 +1,4 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+    PsiPerlNumberConstantImpl(PerlElementType.PerlTokenType.NUMBER_CONSTANT)
+      PsiElement(PerlTokenType.NUMBER)('.1234')

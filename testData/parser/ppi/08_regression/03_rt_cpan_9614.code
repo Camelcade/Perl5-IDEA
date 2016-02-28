@@ -1,0 +1,12 @@
+my ($foo, $bar, @foo);
+$foo << 1;
+$foo <<
+1;
+$foo << $bar;
+<< foo;
+<<foo;
+foo
+@foo = <<EOF;
+EOF
+@foo = (<<EOF);
+EOF

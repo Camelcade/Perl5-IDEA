@@ -1,0 +1,2 @@
+use constant { foo => 'bar' };
+my $code = { foo => 'bar' };
