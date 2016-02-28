@@ -14,34 +14,20 @@
  * limitations under the License.
  */
 
-package parser.heavy;
+package parser;
 
 /**
  * Created by hurricup on 28.02.2016.
+ * Following are tests for samples from https://github.com/adamkennedy/PPI
  */
-public class PerlParserTestPPIToken extends PerlParserTestPPIBase
+public abstract class PerlParserTestPPIBase extends PerlParserSubtestBase
 {
-	private static final String myGroup = "07_token";
+	public static final String DATA_PATH = "testData/parser/ppi";
 
 	@Override
-	protected String getTestsGroup()
+	protected String getTestDataPath()
 	{
-		return myGroup;
-	}
-
-	public void testExp()
-	{
-		doTest("exp");
-	}
-
-	public void testRangeOperator()
-	{
-		doTest("range_operator");
-	}
-
-	public void testSmartMatch()
-	{
-		doTest("smart_match");
+		return DATA_PATH;
 	}
 
 }

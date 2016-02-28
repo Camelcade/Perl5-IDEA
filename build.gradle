@@ -31,7 +31,11 @@ sourceSets {
         resources.srcDir 'resources'
     }
     test {
-        java.srcDir 'test'
+        if (project.hasProperty("heavy")) {
+            java.srcDirs 'test', 'testHeavy'
+        } else {
+            java.srcDir 'test'
+        }
         resources.srcDir 'testData'
     }
 }
@@ -56,9 +60,6 @@ intellij {
 test {
     doFirst{
         systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
-    }
-    if (project.hasProperty("heavy")) {
-        environment "CAMELCADE_HEAVY_TEST", "1";
     }
     testLogging {
         exceptionFormat = 'full'

@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package parser.heavy;
+package parser;
 
 /**
  * Created by hurricup on 28.02.2016.
- * Following are tests for samples from https://github.com/adamkennedy/PPI
  */
-public abstract class PerlParserTestPPIBase extends PerlParserSubtestHeavyBase
+public class PerlSourcesParserTestBenchmark extends PerlSourcesParserTestAbstract
 {
-	public static final String DATA_PATH = "testData/parser/ppi";
+	private static final String GROUP = "benchmark";
 
 	@Override
-	protected String getTestDataPath()
+	protected String getTestsGroup()
 	{
-		return DATA_PATH;
+		return GROUP;
 	}
 
-
+	public void testrt26188_speed_up_keys_on_empty_hash()
+	{
+		doTest("rt26188-speed-up-keys-on-empty-hash");
+	}
 }

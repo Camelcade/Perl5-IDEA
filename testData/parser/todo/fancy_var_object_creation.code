@@ -1,0 +1,1 @@
+my $digest = new $hash(@param);

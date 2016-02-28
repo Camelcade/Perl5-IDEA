@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package parser.heavy;
+package parser;
 
 /**
  * Created by hurricup on 28.02.2016.
  */
-public class PerlSourcesParserTestBenchmark extends PerlSourcesParserTestAbstract
+public class PerlSourcesParserTestCmd extends PerlSourcesParserTestAbstract
 {
-	private static final String GROUP = "benchmark";
+	private static final String GROUP = "cmd";
 
 	@Override
 	protected String getTestsGroup()
@@ -29,8 +29,29 @@ public class PerlSourcesParserTestBenchmark extends PerlSourcesParserTestAbstrac
 		return GROUP;
 	}
 
-	public void testrt26188_speed_up_keys_on_empty_hash()
+	public void testelsif()
 	{
-		doTest("rt26188-speed-up-keys-on-empty-hash");
+		doTest("elsif");
 	}
+
+	public void testfor()
+	{
+		doTest("for");
+	}
+
+	public void testmod()
+	{
+		doTest("mod");
+	}
+
+	public void testsubval()
+	{
+		doTest("subval");
+	}
+
+	public void testswitch()
+	{
+		doTest("switch");
+	}
+
 }

@@ -14,22 +14,48 @@
  * limitations under the License.
  */
 
-package parser.heavy;
-
-import com.intellij.openapi.util.text.StringUtil;
-import parser.PerlParserSubtestBase;
+package parser;
 
 /**
  * Created by hurricup on 28.02.2016.
  */
-public abstract class PerlParserSubtestHeavyBase extends PerlParserSubtestBase
+public class PerlSourcesParserTestBigmem extends PerlSourcesParserTestAbstract
 {
+	private static final String GROUP = "bigmem";
+
 	@Override
-	public void doTest(String filename, boolean checkErrors)
+	protected String getTestsGroup()
 	{
-		if (StringUtil.equals(System.getenv("CAMELCADE_HEAVY_TEST"), "1"))
-		{
-			super.doTest(filename, checkErrors);
-		}
+		return GROUP;
+	}
+
+	public void testindex()
+	{
+		doTest("index");
+	}
+
+	public void testpos()
+	{
+		doTest("pos");
+	}
+
+	public void testread()
+	{
+		doTest("read");
+	}
+
+	public void testregexp()
+	{
+		doTest("regexp");
+	}
+
+	public void testsubst()
+	{
+		doTest("subst");
+	}
+
+	public void testvec()
+	{
+		doTest("vec");
 	}
 }

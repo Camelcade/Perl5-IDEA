@@ -1,0 +1,10 @@
+  foreach my $h (@{$hosts}) {
+    $connect{PeerAddr} = $h;
+    $obj = $type->SUPER::new(%connect) or next;
+    ${*$obj}{'net_nntp_host'} = $h;
+    ${*$obj}{'net_nntp_arg'} = \%arg;
+    if ($arg{SSL}) {
+      Net::NNTP::_SSL->start_SSL($obj,%arg) or next;
+    }
+    last:
+  }

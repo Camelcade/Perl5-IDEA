@@ -14,64 +14,34 @@
  * limitations under the License.
  */
 
-package parser.heavy;
+package parser;
 
 /**
  * Created by hurricup on 28.02.2016.
- * These are test for sources from https://github.com/hurricup/perl5
  */
-public class PerlSourcesParserTestBase extends PerlSourcesParserTestAbstract
+public class PerlParserTestPPIToken extends PerlParserTestPPIBase
 {
-	private static final String GROUP = "base";
+	private static final String myGroup = "07_token";
 
 	@Override
 	protected String getTestsGroup()
 	{
-		return GROUP;
+		return myGroup;
 	}
 
-	public void testcond()
+	public void testExp()
 	{
-		doTest("cond");
+		doTest("exp");
 	}
 
-	public void testif()
+	public void testRangeOperator()
 	{
-		doTest("if");
+		doTest("range_operator");
 	}
 
-	public void testlex()
+	public void testSmartMatch()
 	{
-		doTest("lex");
+		doTest("smart_match");
 	}
 
-	public void testnum()
-	{
-		doTest("num");
-	}
-
-	public void testpat()
-	{
-		doTest("pat");
-	}
-
-	public void testrs()
-	{
-		doTest("rs");
-	}
-
-	public void testterm()
-	{
-		doTest("term");
-	}
-
-	public void testtranslate()
-	{
-		doTest("translate");
-	}
-
-	public void testwhile()
-	{
-		doTest("while");
-	}
 }

@@ -1,7 +1,7 @@
 use strict;
 use v5.10;
 
-for my $file (<*.code>)
+for my $file (sort <*.code>)
 {
     $file =~ s/\.code//;
     say <<"EOM";
