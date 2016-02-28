@@ -18,7 +18,6 @@ package parser;
 
 /**
  * Created by hurricup on 28.02.2016.
- * perl -e "use v5.10;"
  */
 public class PerlSourcesParserTestComp extends PerlSourcesParserTestAbstract
 {
