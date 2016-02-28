@@ -57,6 +57,9 @@ test {
     doFirst{
         systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
     }
+    if (project.hasProperty("heavy")) {
+        environment "CAMELCADE_HEAVY_TEST", "1";
+    }
     testLogging {
         exceptionFormat = 'full'
         showStandardStreams = true

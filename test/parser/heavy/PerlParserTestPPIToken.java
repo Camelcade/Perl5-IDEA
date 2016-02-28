@@ -14,23 +14,34 @@
  * limitations under the License.
  */
 
-package parser;
+package parser.heavy;
 
 /**
  * Created by hurricup on 28.02.2016.
  */
-public class PerlSourcesParserTestBenchmark extends PerlSourcesParserTestAbstract
+public class PerlParserTestPPIToken extends PerlParserTestPPIBase
 {
-	private static final String GROUP = "benchmark";
+	private static final String myGroup = "07_token";
 
 	@Override
 	protected String getTestsGroup()
 	{
-		return GROUP;
+		return myGroup;
 	}
 
-	public void testrt26188_speed_up_keys_on_empty_hash()
+	public void testExp()
 	{
-		doTest("rt26188-speed-up-keys-on-empty-hash");
+		doTest("exp");
 	}
+
+	public void testRangeOperator()
+	{
+		doTest("range_operator");
+	}
+
+	public void testSmartMatch()
+	{
+		doTest("smart_match");
+	}
+
 }

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package parser;
+package parser.heavy;
 
 /**
  * Created by hurricup on 28.02.2016.
  * Following are tests for samples from https://github.com/adamkennedy/PPI
  */
-public abstract class PerlParserTestPPIBase extends PerlParserSubtestBase
+public abstract class PerlParserTestPPIBase extends PerlParserSubtestHeavyBase
 {
 	public static final String DATA_PATH = "testData/parser/ppi";
 

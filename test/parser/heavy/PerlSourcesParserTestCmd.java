@@ -14,19 +14,44 @@
  * limitations under the License.
  */
 
-package parser;
+package parser.heavy;
 
 /**
  * Created by hurricup on 28.02.2016.
  */
-public abstract class PerlSourcesParserTestAbstract extends PerlParserSubtestBase
+public class PerlSourcesParserTestCmd extends PerlSourcesParserTestAbstract
 {
-	public static final String DATA_PATH = "testData/parser/perl5";
+	private static final String GROUP = "cmd";
 
 	@Override
-	protected String getTestDataPath()
+	protected String getTestsGroup()
 	{
-		return DATA_PATH;
+		return GROUP;
+	}
+
+	public void testelsif()
+	{
+		doTest("elsif");
+	}
+
+	public void testfor()
+	{
+		doTest("for");
+	}
+
+	public void testmod()
+	{
+		doTest("mod");
+	}
+
+	public void testsubval()
+	{
+		doTest("subval");
+	}
+
+	public void testswitch()
+	{
+		doTest("switch");
 	}
 
 }

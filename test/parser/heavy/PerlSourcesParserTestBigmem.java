@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package parser;
+package parser.heavy;
 
 /**
  * Created by hurricup on 28.02.2016.
- * These are test for sources from https://github.com/hurricup/perl5
  */
-public class PerlSourcesParserTestBase extends PerlSourcesParserTestAbstract
+public class PerlSourcesParserTestBigmem extends PerlSourcesParserTestAbstract
 {
-	private static final String GROUP = "base";
+	private static final String GROUP = "bigmem";
 
 	@Override
 	protected String getTestsGroup()
@@ -30,48 +29,33 @@ public class PerlSourcesParserTestBase extends PerlSourcesParserTestAbstract
 		return GROUP;
 	}
 
-	public void testcond()
+	public void testindex()
 	{
-		doTest("cond");
+		doTest("index");
 	}
 
-	public void testif()
+	public void testpos()
 	{
-		doTest("if");
+		doTest("pos");
 	}
 
-	public void testlex()
+	public void testread()
 	{
-		doTest("lex");
+		doTest("read");
 	}
 
-	public void testnum()
+	public void testregexp()
 	{
-		doTest("num");
+		doTest("regexp");
 	}
 
-	public void testpat()
+	public void testsubst()
 	{
-		doTest("pat");
+		doTest("subst");
 	}
 
-	public void testrs()
+	public void testvec()
 	{
-		doTest("rs");
-	}
-
-	public void testterm()
-	{
-		doTest("term");
-	}
-
-	public void testtranslate()
-	{
-		doTest("translate");
-	}
-
-	public void testwhile()
-	{
-		doTest("while");
+		doTest("vec");
 	}
 }
