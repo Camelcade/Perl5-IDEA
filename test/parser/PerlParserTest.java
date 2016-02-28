@@ -16,31 +16,16 @@
 
 package parser;
 
-import com.intellij.core.CoreApplicationEnvironment;
-import com.intellij.openapi.extensions.Extensions;
-import com.intellij.testFramework.ParsingTestCase;
-import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.application.PerlParserExtensions;
-
-import java.io.File;
-
 /**
  * Created by hurricup on 31.01.2016.
  */
-public class PerlParserTest extends ParsingTestCase
+public class PerlParserTest extends PerlParserTestBase
 {
 	public static final String DATA_PATH = "testData/parser/perlParsingSamples";
-	String myFileName;
-
-	public PerlParserTest()
-	{
-		super("", "pl", new PerlParserDefinition());
-	}
 
 	@Override
 	protected String getTestDataPath()
 	{
-//		System.out.println(new File("").getAbsolutePath());
 		return DATA_PATH;
 	}
 
@@ -109,42 +94,4 @@ public class PerlParserTest extends ParsingTestCase
 		doTest("issue855", false);
 	}
 
-	public void doTest(String filename)
-	{
-		doTest(filename, true);
-	}
-
-	public void doTest(String filename, boolean checkErrors)
-	{
-		myFileName = filename;
-		doTest(true);
-
-		if (checkErrors)
-			assertFalse(
-					"PsiFile contains error elements",
-					toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
-			);
-	}
-
-
-	@Override
-	protected String getTestName(boolean lowercaseFirstLetter)
-	{
-		return myFileName;
-	}
-
-	@Override
-	protected boolean skipSpaces()
-	{
-		return true;
-	}
-
-	@Override
-	public void setUp() throws Exception
-	{
-		super.setUp();
-
-		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
-		new PerlParserExtensions().initComponent();
-	}
 }

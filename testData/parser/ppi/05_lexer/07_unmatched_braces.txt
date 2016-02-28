@@ -1,0 +1,22 @@
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+    PsiElement(PerlTokenType.sub)('sub')
+    PsiElement(PerlTokenType.SUB)('foo')
+    PsiPerlBlockImpl(PerlElementType.PerlTokenType.BLOCK)
+      PsiElement(PerlTokenType.LEFT_BRACE)('{')
+      PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
+        PsiPerlPrintExprImpl(PerlElementType.PerlTokenType.PRINT_EXPR)
+          PsiElement(PerlTokenType.print)('print')
+          PsiPerlCallArgumentsImpl(PerlElementType.PerlTokenType.CALL_ARGUMENTS)
+            PsiPerlParenthesisedExprImpl(PerlElementType.PerlTokenType.PARENTHESISED_EXPR)
+              PsiElement(PerlTokenType.LEFT_PAREN)('(')
+              PsiPerlStringDqImpl(PerlElementType.PerlTokenType.STRING_DQ)
+                PsiElement(PerlTokenType.QUOTE_DOUBLE_OPEN)('"')
+                PsiElement(PerlTokenType.STRING_IDENTIFIER)('Foo')
+                PsiElement(PerlTokenType.QUOTE_DOUBLE_CLOSE)('"')
+              PsiErrorElement:PerlTokenType.RIGHT_PAREN expected, got ';'
+                <empty list>
+        PsiElement(PerlTokenType.;)(';')
+      PsiElement(PerlTokenType.RIGHT_BRACE)('}')
+  PsiErrorElement:Unopened closing parenthesis
+    PsiElement(PerlTokenType.RIGHT_PAREN)(')')

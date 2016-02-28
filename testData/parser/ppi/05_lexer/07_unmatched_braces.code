@@ -1,0 +1,5 @@
+sub foo {
+    print( "Foo";
+}
+
+)
