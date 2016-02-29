@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-package parser;
+package parserHeavy;
 
 /**
  * Created by hurricup on 28.02.2016.
  */
-public abstract class PerlParserSubtestBase extends PerlParserTestBase
+public class PerlSourcesParserTestBenchmark extends PerlSourcesParserTestAbstract
 {
-	protected abstract String getTestsGroup();
+	private static final String GROUP = "benchmark";
 
 	@Override
-	public void doTest(String filename, boolean checkErrors)
+	protected String getTestsGroup()
 	{
-		super.doTest(getTestsGroup() + "/" + filename, checkErrors);
+		return GROUP;
+	}
+
+	public void testrt26188_speed_up_keys_on_empty_hash()
+	{
+		doTest("rt26188-speed-up-keys-on-empty-hash");
 	}
 }

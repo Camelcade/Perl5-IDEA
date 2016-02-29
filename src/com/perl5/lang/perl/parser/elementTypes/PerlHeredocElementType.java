@@ -25,7 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlInterpolatedHeredocLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlQQHeredocLexerAdapter;
 import com.perl5.lang.perl.lexer.PerlSimpleHeredocLexerAdapter;
 import com.perl5.lang.perl.parser.PerlHeredocParserImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -65,7 +65,7 @@ public class PerlHeredocElementType extends ILazyParseableElementType implements
 		}
 		else
 		{
-			return new PerlInterpolatedHeredocLexerAdapter(project);
+			return new PerlQQHeredocLexerAdapter(project);
 		}
 	}
 

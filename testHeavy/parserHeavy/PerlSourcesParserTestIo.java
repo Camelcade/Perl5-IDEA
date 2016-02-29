@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package parser;
+package parserHeavy;
 
 /**
  * Created by hurricup on 28.02.2016.

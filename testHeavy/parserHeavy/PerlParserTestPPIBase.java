@@ -14,44 +14,20 @@
  * limitations under the License.
  */
 
-package parser;
+package parserHeavy;
 
 /**
  * Created by hurricup on 28.02.2016.
+ * Following are tests for samples from https://github.com/adamkennedy/PPI
  */
-public class PerlSourcesParserTestCmd extends PerlSourcesParserTestAbstract
+public abstract class PerlParserTestPPIBase extends PerlParserSubtestBase
 {
-	private static final String GROUP = "cmd";
+	public static final String DATA_PATH = "testDataHeavy/parser/ppi";
 
 	@Override
-	protected String getTestsGroup()
+	protected String getTestDataPath()
 	{
-		return GROUP;
-	}
-
-	public void testelsif()
-	{
-		doTest("elsif");
-	}
-
-	public void testfor()
-	{
-		doTest("for");
-	}
-
-	public void testmod()
-	{
-		doTest("mod");
-	}
-
-	public void testsubval()
-	{
-		doTest("subval");
-	}
-
-	public void testswitch()
-	{
-		doTest("switch");
+		return DATA_PATH;
 	}
 
 }

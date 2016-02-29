@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package parser;
+package parserHeavy;
 
 /**
  * Created by hurricup on 31.01.2016.
@@ -92,6 +92,11 @@ public class PerlParserTest extends PerlParserTestBase
 	public void testIssue855()
 	{
 		doTest("issue855", false);
+	}
+
+	public void testIssue867()
+	{
+		doTest("issue867", false);
 	}
 
 }

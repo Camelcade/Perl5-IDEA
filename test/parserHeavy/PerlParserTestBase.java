@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package parser;
+package parserHeavy;
 
 import com.intellij.core.CoreApplicationEnvironment;
 import com.intellij.lang.ParserDefinition;

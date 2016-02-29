@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexandr Evstigneev
+ * Copyright 2015 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.lexer;
 
-import com.intellij.lang.PsiBuilder;
+import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
 
 /**
- * Created by hurricup on 23.02.2016.
+ * Created by hurricup on 16.08.2015.
  */
-public class PerlHeredocParserImpl extends PerlParserImpl
+public class PerlQQHeredocLexerAdapter extends FlexAdapter
 {
-	@Override
-	public boolean parseFileContents(PsiBuilder b, int l)
+	public PerlQQHeredocLexerAdapter(Project project)
 	{
-		return b.eof() || PerlParserUtil.parseInterpolatedStringContent(b, l);
+		super(new PerlQQHeredocLexer(project));
 	}
+
+
 }

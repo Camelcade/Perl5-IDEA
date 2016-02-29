@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,34 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.lexer;
-
-import com.intellij.lexer.FlexAdapter;
-import com.intellij.openapi.project.Project;
+package parserHeavy;
 
 /**
- * Created by hurricup on 16.08.2015.
+ * Created by hurricup on 28.02.2016.
  */
-public class PerlInterpolatedHeredocLexerAdapter extends FlexAdapter
+public class PerlParserTestPPIToken extends PerlParserTestPPIBase
 {
-	public PerlInterpolatedHeredocLexerAdapter(Project project)
+	private static final String myGroup = "07_token";
+
+	@Override
+	protected String getTestsGroup()
 	{
-		super(new PerlStringLexer(project));
+		return myGroup;
 	}
+
+	public void testExp()
+	{
+		doTest("exp");
+	}
+
+	public void testRangeOperator()
+	{
+		doTest("range_operator");
+	}
+
+	public void testSmartMatch()
+	{
+		doTest("smart_match");
+	}
+
 }

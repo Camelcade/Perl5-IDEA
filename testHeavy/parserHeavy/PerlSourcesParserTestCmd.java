@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package parser;
+package parserHeavy;
 
 /**
  * Created by hurricup on 28.02.2016.
  */
-public class PerlSourcesParserTestBigmem extends PerlSourcesParserTestAbstract
+public class PerlSourcesParserTestCmd extends PerlSourcesParserTestAbstract
 {
-	private static final String GROUP = "bigmem";
+	private static final String GROUP = "cmd";
 
 	@Override
 	protected String getTestsGroup()
@@ -29,33 +29,29 @@ public class PerlSourcesParserTestBigmem extends PerlSourcesParserTestAbstract
 		return GROUP;
 	}
 
-	public void testindex()
+	public void testelsif()
 	{
-		doTest("index");
+		doTest("elsif");
 	}
 
-	public void testpos()
+	public void testfor()
 	{
-		doTest("pos");
+		doTest("for");
 	}
 
-	public void testread()
+	public void testmod()
 	{
-		doTest("read");
+		doTest("mod");
 	}
 
-	public void testregexp()
+	public void testsubval()
 	{
-		doTest("regexp");
+		doTest("subval");
 	}
 
-	public void testsubst()
+	public void testswitch()
 	{
-		doTest("subst");
+		doTest("switch");
 	}
 
-	public void testvec()
-	{
-		doTest("vec");
-	}
 }
