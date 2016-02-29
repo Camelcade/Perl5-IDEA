@@ -16,6 +16,8 @@
 
 package parserHeavy;
 
+import parser.PerlParserSubtestBase;
+
 /**
  * Created by hurricup on 28.02.2016.
  */

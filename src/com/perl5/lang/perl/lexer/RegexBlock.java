@@ -30,9 +30,9 @@ public class RegexBlock implements PerlElementTypes
 
 	static
 	{
-		allowedModifiers.put("s", Arrays.asList(ArrayUtils.toObject("msixpodualgcer".toCharArray())));
-		allowedModifiers.put("m", Arrays.asList(ArrayUtils.toObject("msixpodualgc".toCharArray())));
-		allowedModifiers.put("qr", Arrays.asList(ArrayUtils.toObject("msixpodual".toCharArray())));
+		allowedModifiers.put("s", Arrays.asList(ArrayUtils.toObject("nmsixpodualgcer".toCharArray())));
+		allowedModifiers.put("m", Arrays.asList(ArrayUtils.toObject("nmsixpodualgc".toCharArray())));
+		allowedModifiers.put("qr", Arrays.asList(ArrayUtils.toObject("nmsixpodual".toCharArray())));
 	}
 
 	protected int startOffset;
