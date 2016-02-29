@@ -33,10 +33,11 @@ sourceSets {
     test {
         if (project.hasProperty("heavy")) {
             java.srcDirs 'test', 'testHeavy'
+            resources.srcDirs 'testData', 'testDataHeavy'
         } else {
             java.srcDir 'test'
+            resources.srcDir 'testData'
         }
-        resources.srcDir 'testData'
     }
 }
 

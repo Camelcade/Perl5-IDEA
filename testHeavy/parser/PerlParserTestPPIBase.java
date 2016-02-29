@@ -22,7 +22,7 @@ package parser;
  */
 public abstract class PerlParserTestPPIBase extends PerlParserSubtestBase
 {
-	public static final String DATA_PATH = "testData/parser/ppi";
+	public static final String DATA_PATH = "testDataHeavy/parser/ppi";
 
 	@Override
 	protected String getTestDataPath()

@@ -21,7 +21,7 @@ package parser;
  */
 public class PerlParserLibsTest extends PerlParserSubtestBase
 {
-	public static final String DATA_PATH = "testData/parser";
+	public static final String DATA_PATH = "testDataHeavy/parser";
 
 	@Override
 	protected String getTestDataPath()
