@@ -1,6 +1,0 @@
-BEGIN {}
-sub BEGIN {}
-sub {};
-sub () {};
-sub foo {}
-sub foo () {}

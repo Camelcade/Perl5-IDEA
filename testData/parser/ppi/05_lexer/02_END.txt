@@ -1,3 +1,0 @@
-Perl5
-  PsiComment(PerlTokenType.COMMENT_LINE)('# something')
-  PsiComment(PerlTokenType.COMMENT_BLOCK)('__END__\n\nThis is after the end of the file')

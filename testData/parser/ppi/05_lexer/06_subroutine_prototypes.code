@@ -1,2 +1,0 @@
-sub RE() { }
-sub foo ($) {}

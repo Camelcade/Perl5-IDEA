@@ -1,9 +1,0 @@
-y {abc} {def};
-$foo or $bar;
-sub y { 1 };
-sub or { 1 };
-foo->y();
-foo->or();
-y => 1;
-$foo->{q};
-foo => q'not bar';

@@ -1,8 +1,0 @@
-Perl5
-  PsiErrorElement:Unexpected token
-    PsiElement(PerlTokenType.sub)('sub')
-  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
-    PsiPerlParenthesisedExprImpl(PerlElementType.PerlTokenType.PARENTHESISED_EXPR)
-      PsiElement(PerlTokenType.LEFT_PAREN)('(')
-      PsiErrorElement:PerlTokenType.RIGHT_PAREN expected, unexpected end of file
-        <empty list>

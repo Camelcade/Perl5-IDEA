@@ -1,1 +1,0 @@
-print $h{local}, $h{my}, $h{our}, $h{state}, $h{foo};

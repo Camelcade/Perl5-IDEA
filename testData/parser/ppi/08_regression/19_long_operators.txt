@@ -1,9 +1,0 @@
-Perl5
-  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
-    PsiPerlAssignExprImpl(PerlElementType.PerlTokenType.ASSIGN_EXPR)
-      PsiPerlScalarVariableImpl(PerlElementType.PerlTokenType.SCALAR_VARIABLE)
-        PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
-        PsiElement(PerlTokenType.VARIABLE_NAME)('a')
-      PsiElement(PerlTokenType./=)('/=')
-      PsiPerlNumberConstantImpl(PerlElementType.PerlTokenType.NUMBER_CONSTANT)
-        PsiElement(PerlTokenType.NUMBER_SIMPLE)('2')

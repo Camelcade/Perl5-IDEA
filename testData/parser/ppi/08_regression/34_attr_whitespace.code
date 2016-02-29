@@ -1,5 +1,0 @@
-sub foo: Attr { }
-sub bar : Attr(x
-y) { }
-sub baz : Attr(
-) { }

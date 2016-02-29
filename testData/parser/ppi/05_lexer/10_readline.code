@@ -1,6 +1,0 @@
-while (<FOO>) {}
-@foo = <BAR>;
-@foo = <>;
-print while <>;
-grep { /foo/ } <FOO>;
-my @v=<$up../*.v>;

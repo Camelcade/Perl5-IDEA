@@ -1,4 +1,0 @@
-given ($foo) {
-    when (@blah) { }
-    default { }
-}

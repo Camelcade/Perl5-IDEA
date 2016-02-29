@@ -1,2 +1,0 @@
-@foo=map/bar/,@foo;
-@foo = map /bar/, @foo;

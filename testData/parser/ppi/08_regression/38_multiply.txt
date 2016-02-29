@@ -1,9 +1,0 @@
-Perl5
-  PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
-    PsiPerlMulExprImpl(PerlElementType.PerlTokenType.MUL_EXPR)
-      PsiPerlNumberConstantImpl(PerlElementType.PerlTokenType.NUMBER_CONSTANT)
-        PsiElement(PerlTokenType.NUMBER_SIMPLE)('2')
-      PsiElement(PerlTokenType.*)('*')
-      PsiPerlNamedListExprImpl(PerlElementType.PerlTokenType.NAMED_LIST_EXPR)
-        PsiPerlMethodImpl(PerlElementType.PerlTokenType.METHOD)
-          PsiElement(PerlTokenType.SUB)('foo')

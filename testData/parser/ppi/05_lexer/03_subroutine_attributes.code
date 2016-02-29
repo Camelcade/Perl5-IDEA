@@ -1,3 +1,0 @@
-sub foo : bar(quax => &#"Foo") {}
-sub foo($) :bar(quax => &#"Foo") {}
-sub foo (&$@): bar : baz : bingo(blah flasd: fasdf) { }
