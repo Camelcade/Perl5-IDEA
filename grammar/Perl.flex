@@ -203,10 +203,10 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
 // fixme refactor
-{BAREWORD_MINUS} {return parseBarewordMinus();}
-{PACKAGE_PARSABLE} {return parsePackage(); }
-{PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}
-{PACKAGE} {return parsePackageCanonical();}
+{BAREWORD_MINUS} {return adjustAndParseBarewordMinus();}
+{PACKAGE_PARSABLE} {return adjustAndParsePackage(); }	// has :: inside
+{PACKAGE_SHORT} {return adjustAndParsePackageShort();}			// only ::
+{PACKAGE} {return adjustAndParsePackageCanonical();}	// ends with ::
 
 /* error fallback [^] */
 [^]    { return lexBadCharacter(); }

@@ -144,10 +144,11 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 {SIMPLE_SCALAR} {return parseSimpleVariable(SIGIL_SCALAR);}
 {SIMPLE_ARRAY} {return parseSimpleVariable(SIGIL_ARRAY);}
 
-{BAREWORD_MINUS} {return parseBarewordMinus();}
 {CAPPED_VARIABLE_NAME} {return IDENTIFIER;}
-{PACKAGE_PARSABLE} {return parsePackage(); }
-{PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}
-{PACKAGE} {return parsePackageCanonical();}
+
+{BAREWORD_MINUS} {return adjustAndParseBarewordMinus();}
+{PACKAGE_PARSABLE} {return adjustAndParsePackage(); }
+{PACKAGE_SHORT} {return adjustAndParsePackageShort();}
+{PACKAGE} {return adjustAndParsePackageCanonical();}
 
 [^]    { return lexBadCharacter(); }

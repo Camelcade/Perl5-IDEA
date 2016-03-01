@@ -115,8 +115,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	 */
 	public IElementType parseBarewordMinus()
 	{
-		adjustUtfIdentifier();
-		CharSequence tokenText = yytext();
+		final CharSequence tokenText = yytext();
 
 		if (Character.isDigit(tokenText.charAt(0)))
 		{

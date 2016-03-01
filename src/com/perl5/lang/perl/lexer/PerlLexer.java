@@ -599,7 +599,6 @@ public class PerlLexer extends PerlLexerGenerated
 		return false;
 	}
 
-
 	/**
 	 * Changes current lexical state and than captures string
 	 *
@@ -607,12 +606,34 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType captureString(int newState) throws IOException
 	{
-		if (SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())    // this is not a beginning of a string, but variable name
-				|| (SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType()) &&
-				getTokenHistory().getLastSignificantTokenType() == LEFT_BRACE &&    // isBraced doesn't work here, because tokenEnd is not set yet
-				getNextNonSpaceCharacter(getTokenEnd() + 1) == '}'
+		int nextCharOffset = getTokenEnd() + 1;
+		PerlTokenHistory tokenHistory = getTokenHistory();
+		boolean afterSigil = SIGILS_TOKENS.contains(tokenHistory.getLastTokenType());
+
+		// handles archaic vars like $'var instead of $::var
+		if (newState == LEX_QUOTE_LIKE_OPENER_Q && afterSigil && isValidIdentifierCharacter(getSafeCharacterAt(nextCharOffset)))
+		{
+			setTokenStart(getTokenEnd());
+			setTokenEnd(nextCharOffset);
+			int adjustResult = adjustUtfIdentifier();
+			if (adjustResult == EXT_IDENTIFIER || adjustResult == EXT_PACKAGE)
+			{
+				return parsePackage();
+			}
+			else
+			{
+				return parsePackageCanonical();
+			}
+		}
+
+		if (afterSigil // this is not a beginning of a string, but variable name
+				|| (SIGILS_TOKENS.contains(tokenHistory.getLastUnbracedTokenType()) &&
+				tokenHistory.getLastSignificantTokenType() == LEFT_BRACE &&    // isBraced doesn't work here, because tokenEnd is not set yet
+				getNextNonSpaceCharacter(nextCharOffset) == '}'
 		))
+		{
 			return super.perlAdvance();
+		}
 
 		pushState();
 		yybegin(newState);
@@ -1594,8 +1615,8 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType parseBarewordMinus()
 	{
-		adjustUtfIdentifier();
-		CharSequence tokenText = yytext();
+		final CharSequence tokenText = yytext();
+		boolean startsWithMinus = StringUtil.startsWith(tokenText, "-");
 
 		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType()) || SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType());
 
@@ -1614,7 +1635,7 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 		else if (!negate && isCommaArrowAhead())
 		{
-			if (StringUtil.startsWith(tokenText, "-"))
+			if (startsWithMinus)
 			{
 				return STRING_CONTENT;
 			}
@@ -1628,7 +1649,7 @@ public class PerlLexer extends PerlLexerGenerated
 			yypushback(tokenText.length() - 2);
 			return OPERATOR_MINUS_MINUS;
 		}
-		else if (StringUtil.startsWithChar(tokenText, '-'))
+		else if (startsWithMinus)
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_MINUS;
@@ -1710,7 +1731,6 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType parsePackage()
 	{
-		adjustUtfIdentifier();
 		String tokenText = yytext().toString();
 
 		// check if it's cmp'
@@ -1894,9 +1914,12 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			else if (tokenType == SIGIL_SCALAR)
 			{
-//				if( getNextCharacter() == '!') fixme this is really lame, because $$. is valid operation but won't work here
+				// fixme this is really lame, because $$. is valid operation but won't work here
 				// fixme this is fires badly in prototypes and signatures like $$
-				if (StringUtil.containsChar(SPECIAL_VARIABLE_NAMES_OPERATORS, getNextCharacter()))
+				char nextChar = getNextCharacter();
+				if (StringUtil.containsChar(SPECIAL_VARIABLE_NAMES_OPERATORS, nextChar) &&
+						(nextChar != '\'' || !isValidIdentifierCharacter(getSafeCharacterAt(getTokenEnd() + 1)))
+						)
 				{
 					addPreparsedToken(getTokenEnd(), getTokenEnd() + 1, IDENTIFIER);
 				}

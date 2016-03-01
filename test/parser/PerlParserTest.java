@@ -104,4 +104,9 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest("regex_n_modifier");
 	}
 
+	public void testutf8_package_name()
+	{
+		doTest("utf8_package_name");
+	}
+
 }
