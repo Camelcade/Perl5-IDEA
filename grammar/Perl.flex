@@ -91,8 +91,8 @@ NUMBER_FLOAT = "." ([0-9][0-9_]*)?
 NUMBER_INT_SIMPLE = [0-9]+
 NUMBER_INT = [0-9][0-9_] *  {NUMBER_FLOAT}? {NUMBER_EXP}?
 NUMBER_SMALL = {NUMBER_FLOAT}{NUMBER_EXP}?
-NUMBER_HEX = "0x" [0-9a-fA-F_]+
-NUMBER_BIN = "0b"[01_]+
+NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
+NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
 // fixme this can be done in bareword parser

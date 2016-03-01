@@ -1,3 +1,10 @@
+$a = 0x123abc;
+$a = 0X123abc;
+$a = 0b010101;
+$a = 0B010101;
+$a = 1;
+$a = 01;
+
 $a = 0Xabcdef; "$a";
 print $a eq "11259375"     ? "ok 51\n" : "not ok 51 # $a\n";
 

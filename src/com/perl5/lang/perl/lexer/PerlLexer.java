@@ -802,7 +802,7 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		CharSequence tokenText = yytext();
 //		System.err.println("For "  + tokenText + "Last significant token is " + getTokenHistory().getLastSignificantTokenType());
-		if (StringUtil.startsWithChar(tokenText, '.') && CONCAT_OPERATOR_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())) // It's a $var.123; where . is a concat
+		if (tokenText.charAt(0) == '.' && CONCAT_OPERATOR_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())) // It's a $var.123; where . is a concat
 		{
 			yypushback(tokenText.length() - 1);
 			return OPERATOR_CONCAT;
@@ -1616,7 +1616,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseBarewordMinus()
 	{
 		final CharSequence tokenText = yytext();
-		boolean startsWithMinus = StringUtil.startsWith(tokenText, "-");
+		boolean startsWithMinus = tokenText.charAt(0) == '-';
 
 		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType()) || SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType());
 

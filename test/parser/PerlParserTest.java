@@ -109,4 +109,8 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest("utf8_package_name");
 	}
 
+	public void testhex_bin_numbers_parsing()
+	{
+		doTest("hex_bin_numbers_parsing");
+	}
 }
