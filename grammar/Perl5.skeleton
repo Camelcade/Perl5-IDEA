@@ -96,9 +96,15 @@
    * Returns the current lexical state.
    */
   public int yystate() {
-    return zzLexicalState;
+    return getRealLexicalState();
   }
 
+  /**
+   * Returns the current lexical state.
+   */
+  public int getRealLexicalState() {
+	return zzLexicalState;
+  }
 
   /**
    * Enters a new lexical state

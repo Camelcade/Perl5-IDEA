@@ -361,7 +361,8 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 
 	// last captured heredoc marker
-	public String heredocMarker;
+	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<PerlHeredocQueueElement>();
+
 	/**
 	 * Quote-like, transliteration and regexps common part
 	 */
@@ -525,7 +526,7 @@ public class PerlLexer extends PerlLexerGenerated
 			// capture heredoc
 			if (waitingHereDoc() && (tokenStart == 0 || currentChar == '\n'))
 			{
-				return captureHereDoc();
+				return captureHereDoc(false);
 			}
 			// capture format
 			else if (currentState == LEX_FORMAT_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
@@ -938,7 +939,7 @@ public class PerlLexer extends PerlLexerGenerated
 		int tokenStart = getTokenStart();
 		addPreparsedToken(tokenStart + 2, tokenStart + 3, OPERATOR_REFERENCE);
 		addPreparsedToken(tokenStart + 3, tokenStart + openToken.length(), STRING_CONTENT);
-		heredocMarker = openToken.subSequence(3, openToken.length()).toString();
+		heredocQueue.push(new PerlHeredocQueueElement(LEX_HEREDOC_WAITING, openToken.subSequence(3, openToken.length()).toString()));
 		pushState();
 		yybegin(LEX_HEREDOC_WAITING);
 		setTokenEnd(tokenStart + 2);
@@ -985,7 +986,8 @@ public class PerlLexer extends PerlLexerGenerated
 
 			if (m.groupCount() > 1)    // quoted heredoc
 			{
-				heredocMarker = m.group(3);
+				String heredocMarker = m.group(3);
+				heredocQueue.push(new PerlHeredocQueueElement(newState, heredocMarker));
 
 				int elementLength = m.group(1).length();
 				if (elementLength > 0)    // got spaces
@@ -1007,7 +1009,9 @@ public class PerlLexer extends PerlLexerGenerated
 				addPreparsedToken(currentPosition, currentPosition + 1, getCloseQuoteTokenType(m.group(2).charAt(0)));
 			}
 			else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
+			{
 				return OPERATOR_SHIFT_LEFT;
+			}
 			else    // bareword heredoc
 			{
 				if (nextCharacter != null && nextCharacter.equals('('))    // it's a sub
@@ -1015,7 +1019,8 @@ public class PerlLexer extends PerlLexerGenerated
 					return OPERATOR_SHIFT_LEFT;
 				}
 
-				heredocMarker = m.group(1);
+				String heredocMarker = m.group(1);
+				heredocQueue.push(new PerlHeredocQueueElement(newState, heredocMarker));
 				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER));
 			}
 		}
@@ -1025,19 +1030,23 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 
 		pushState();
-		yybegin(newState);
+		yybegin(LEX_HEREDOC_WAITING);    // actual heredoc waiting got from heredocQueue
 
 		return OPERATOR_HEREDOC;
 	}
 
 	/**
 	 * Captures HereDoc document and returns appropriate token type
-	 *
+	 * @param afterEmptyCloser - this here-doc being captured after empty closer, e.g. sequentional <<"", <<""
 	 * @return Heredoc token type
 	 */
-	public IElementType captureHereDoc()
+	public IElementType captureHereDoc(boolean afterEmptyCloser)
 	{
-		int oldState = yystate();
+		popState();
+		final PerlHeredocQueueElement heredocQueueElement = heredocQueue.remove(0);
+		final String heredocMarker = heredocQueueElement.getMarker();
+		final int oldState = heredocQueueElement.getState();
+
 		IElementType tokenType = HEREDOC;
 		if (oldState == LEX_HEREDOC_WAITING_QQ)
 		{
@@ -1048,14 +1057,19 @@ public class PerlLexer extends PerlLexerGenerated
 			tokenType = HEREDOC_QX;
 		}
 
-		popState();
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
-		addPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
+
+		if (!afterEmptyCloser)
+		{
+			addPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
+		}
+
 		int bufferEnd = getBufferEnd();
 
 		int currentPosition = tokenStart;
 		int linePos = currentPosition;
+
 
 		while (true)
 		{
@@ -1078,7 +1092,16 @@ public class PerlLexer extends PerlLexerGenerated
 					addPreparsedToken(tokenStart, currentPosition, tokenType);
 				}
 				addPreparsedToken(currentPosition, lineContentsEnd + 1, HEREDOC_END);
-				return getPreParsedToken();
+
+				if (!heredocQueue.isEmpty() && bufferEnd > lineContentsEnd + 1)
+				{
+					setTokenEnd(lineContentsEnd + 1);
+					return captureHereDoc(true);
+				}
+				else
+				{
+					return getPreParsedToken();
+				}
 			}
 			else if (StringUtil.equals(heredocMarker, buffer.subSequence(currentPosition, lineContentsEnd)))
 			{
@@ -1622,7 +1645,11 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public boolean waitingHereDoc()
 	{
-		int state = yystate();
+		return waitingHereDoc(yystate());
+	}
+
+	public boolean waitingHereDoc(int state)
+	{
 		return state == LEX_HEREDOC_WAITING || state == LEX_HEREDOC_WAITING_QQ || state == LEX_HEREDOC_WAITING_QX;
 	}
 
@@ -1897,11 +1924,17 @@ public class PerlLexer extends PerlLexerGenerated
 			else if (tokenType == SEMICOLON) // fixme this is bad, semi might be in the prototype
 			{
 				if (!waitingHereDoc())
-					yybegin(YYINITIAL);
-				else
 				{
-					stateStack.pop();
-					stateStack.push(YYINITIAL);
+					yybegin(YYINITIAL);
+				}
+				else if (stateStack.size() > 0)
+				{
+					int i = stateStack.size() - 1;
+					while (i >= 0 && waitingHereDoc(stateStack.get(i)))
+					{
+						i--;
+					}
+					stateStack.set(i, YYINITIAL);
 				}
 			}
 			else if (tokenType == RESERVED_QW || tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)

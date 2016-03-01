@@ -118,4 +118,9 @@ public class PerlParserTest extends PerlParserTestBase
 	{
 		doTest("28_backref_style_heredoc");
 	}
+
+	public void testheredoc_sequential()
+	{
+		doTest("heredoc_sequential");
+	}
 }

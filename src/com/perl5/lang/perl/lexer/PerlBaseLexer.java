@@ -107,6 +107,8 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 
 	public abstract boolean isLastToken();
 
+	public abstract int getRealLexicalState();
+
 	public abstract CharSequence yytext();
 
 	public IElementType advance() throws IOException
@@ -146,7 +148,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 
 	public void pushState()
 	{
-		stateStack.push(yystate());
+		stateStack.push(getRealLexicalState());
 	}
 
 	public void popState()

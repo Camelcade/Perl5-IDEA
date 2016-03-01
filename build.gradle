@@ -98,7 +98,7 @@ idea {
 def getJflexArguments(srcFlex, targetDir) {
     return [
             "-sliceandcharat",
-            "--skel", "grammar/Perl5.skeleton",
+            "--skel", "$lexer_skeleton",
             "-d", targetDir,
             srcFlex
     ]
@@ -142,6 +142,7 @@ task generatePerlLexer(type: JavaExec) {
     main = "JFlex.Main"
     args = getJflexArguments(src, dst)
     inputs.file file(src)
+    inputs.file file("$lexer_skeleton")
     outputs.file file(dst+ "PerlLexerGenerated.java")
     classpath configurations.gen
 }
@@ -153,6 +154,7 @@ task generatePodLexer(type: JavaExec) {
     main = "JFlex.Main"
     args = getJflexArguments(src, dst)
     inputs.file file(src)
+    inputs.file file("$lexer_skeleton")
     outputs.file file(dst+ "PodLexer.java")
     classpath configurations.gen
 }
@@ -164,6 +166,7 @@ task generatePerlStringLexer(type: JavaExec) {
     main = "JFlex.Main"
     args = getJflexArguments(src, dst)
     inputs.file file(src)
+    inputs.file file("$lexer_skeleton")
     outputs.file file(dst + "PerlStringLexerGenerated.java")
     classpath configurations.gen
 }
