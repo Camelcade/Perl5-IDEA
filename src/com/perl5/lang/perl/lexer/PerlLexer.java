@@ -932,6 +932,19 @@ public class PerlLexer extends PerlLexerGenerated
 		return POD;
 	}
 
+	public IElementType parseHeredocOpenerBackref()
+	{
+		CharSequence openToken = yytext();
+		int tokenStart = getTokenStart();
+		addPreparsedToken(tokenStart + 2, tokenStart + 3, OPERATOR_REFERENCE);
+		addPreparsedToken(tokenStart + 3, tokenStart + openToken.length(), STRING_CONTENT);
+		heredocMarker = openToken.subSequence(3, openToken.length()).toString();
+		pushState();
+		yybegin(LEX_HEREDOC_WAITING);
+		setTokenEnd(tokenStart + 2);
+		return OPERATOR_HEREDOC;
+	}
+
 	/**
 	 * Processing captured heredoc opener. Stores marker and switches to proper lexical state
 	 *
@@ -976,34 +989,40 @@ public class PerlLexer extends PerlLexerGenerated
 
 				int elementLength = m.group(1).length();
 				if (elementLength > 0)    // got spaces
-					preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE));
+				{
+					addPreparsedToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE);
+				}
 
 				currentPosition += elementLength;
 
-				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, getOpenQuoteTokenType(m.group(2).charAt(0))));
+				addPreparsedToken(currentPosition, currentPosition + 1, getOpenQuoteTokenType(m.group(2).charAt(0)));
 				currentPosition++;
 
 				if (heredocMarker.length() > 0)
 				{
-					preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER));
+					addPreparsedToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER);
 					currentPosition += heredocMarker.length();
 				}
 
-				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + 1, getCloseQuoteTokenType(m.group(2).charAt(0))));
+				addPreparsedToken(currentPosition, currentPosition + 1, getCloseQuoteTokenType(m.group(2).charAt(0)));
 			}
 			else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
 				return OPERATOR_SHIFT_LEFT;
 			else    // bareword heredoc
 			{
 				if (nextCharacter != null && nextCharacter.equals('('))    // it's a sub
+				{
 					return OPERATOR_SHIFT_LEFT;
+				}
 
 				heredocMarker = m.group(1);
 				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER));
 			}
 		}
 		else
+		{
 			throw new RuntimeException("Unable to parse HEREDOC opener " + openToken);
+		}
 
 		pushState();
 		yybegin(newState);

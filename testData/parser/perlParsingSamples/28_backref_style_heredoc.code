@@ -1,0 +1,10 @@
+<<\EOF;
+foo
+EOF
+
+<<\TEXT;
+foo
+this
+is
+a test
+TEXT

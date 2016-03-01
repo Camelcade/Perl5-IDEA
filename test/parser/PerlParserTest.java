@@ -113,4 +113,9 @@ public class PerlParserTest extends PerlParserTestBase
 	{
 		doTest("hex_bin_numbers_parsing");
 	}
+
+	public void test28_backref_style_heredoc()
+	{
+		doTest("28_backref_style_heredoc");
+	}
 }

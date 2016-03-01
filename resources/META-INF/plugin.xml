@@ -34,6 +34,9 @@
     <change-notes><![CDATA[
       <p>This relase fixes more bugs or feedbacks from 1.3 release:
       <ul>
+        <li>Implemented backref heredocs parsing</li>
+        <li>Improved utf identifiers and packages parsing</li>
+        <li>Fixed parsing for 0X.. hex and 0B.. numbers</li>
         <li>Implemented n regex modifier from perl 5.22, fixes #865</li>
         <li>Regular strings are now injectable with other languages, fixes #829</li>
         <li>A lot of optimizations.</li>

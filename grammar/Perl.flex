@@ -54,6 +54,7 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType parseOperatorDereference();
 	public abstract IElementType parseCappedVariableName();
 	public abstract IElementType parseHeredocOpener();
+	public abstract IElementType parseHeredocOpenerBackref();
 	public abstract IElementType guessLtNumeric();
 %}
 
@@ -106,6 +107,7 @@ HEREDOC_MARKER_DQ = [^\"\n\r]*
 HEREDOC_MARKER_SQ = [^\'\n\r]*
 HEREDOC_MARKER_XQ = [^\`\n\r]*
 HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"{HEREDOC_MARKER_DQ}\" | {WHITE_SPACE}* \`{HEREDOC_MARKER_XQ}\` | {HEREDOC_MARKER})
+HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 
 %state LEX_CODE
 
@@ -129,6 +131,7 @@ HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 
 {HEREDOC_OPENER}   {return parseHeredocOpener();}
+{HEREDOC_OPENER_BACKREF} {return parseHeredocOpenerBackref();}
 
 "\"" {return QUOTE_DOUBLE;}
 "`" {return QUOTE_TICK;}
