@@ -1119,7 +1119,7 @@ public class PerlLexer extends PerlLexerGenerated
 				// non-empty heredoc and got the end of file
 				if (linePos > tokenStart)
 				{
-					addPreparsedToken(tokenStart, currentPosition, tokenType);
+					addPreparsedToken(tokenStart, linePos, tokenType);
 				}
 				return getPreParsedToken();
 			}
@@ -1901,9 +1901,8 @@ public class PerlLexer extends PerlLexerGenerated
 		super.resetInternals();
 		waitingSubAttribute = false;
 		waitingVarAttribute = false;
-
 		resetAttributeCounters();
-
+		heredocQueue.clear();
 	}
 
 	@Override
@@ -1923,10 +1922,12 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			else if (tokenType == SEMICOLON) // fixme this is bad, semi might be in the prototype
 			{
-				if (!waitingHereDoc())
+				int currentState = yystate();
+				if (currentState != LEX_FORMAT_WAITING && currentState != LEX_HEREDOC_WAITING)
 				{
 					yybegin(YYINITIAL);
 				}
+/*
 				else if (stateStack.size() > 0)
 				{
 					int i = stateStack.size() - 1;
@@ -1936,6 +1937,7 @@ public class PerlLexer extends PerlLexerGenerated
 					}
 					stateStack.set(i, YYINITIAL);
 				}
+*/
 			}
 			else if (tokenType == RESERVED_QW || tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
 			{

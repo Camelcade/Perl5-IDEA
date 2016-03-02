@@ -289,6 +289,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	{
 		getTokenHistory().reset();
 		preparsedTokensList.clear();
+		stateStack.clear();
 		bufferStart = getTokenStart();
 	}
 
