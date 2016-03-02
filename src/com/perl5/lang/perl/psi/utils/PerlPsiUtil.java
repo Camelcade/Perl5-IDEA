@@ -437,14 +437,25 @@ public class PerlPsiUtil
 		return result;
 	}
 
-	static private class HeredocChecker implements Processor<PsiElement>
+	static public abstract class HeredocProcessor implements Processor<PsiElement>
 	{
 		protected final int lineEndOffset;
+
+		public HeredocProcessor(int lineEndOffset)
+		{
+			this.lineEndOffset = lineEndOffset;
+		}
+
+	}
+
+
+	static private class HeredocChecker extends HeredocProcessor
+	{
 		protected boolean myResult = false;
 
 		public HeredocChecker(int lineEndOffset)
 		{
-			this.lineEndOffset = lineEndOffset;
+			super(lineEndOffset);
 		}
 
 		@Override
@@ -455,7 +466,7 @@ public class PerlPsiUtil
 				myResult = true;
 				return false;
 			}
-			if (element.getTextRange().getStartOffset() >= lineEndOffset)
+			if (element != null && element.getTextRange().getStartOffset() >= lineEndOffset)
 			{
 				myResult = element instanceof PerlHeredocElementImpl;
 				return false;
@@ -468,5 +479,4 @@ public class PerlPsiUtil
 			return myResult;
 		}
 	}
-
 }

@@ -5,7 +5,7 @@ $a                heredoc
 HTML
 HTML
 This     is        a
-            single                quoted                    heredoc number 2
+single                quoted                    heredoc number 2
 HTML
 This     is        a            single
                 quoted                    heredoc number 3
@@ -16,7 +16,7 @@ HTML
 
 
 This    is        executable
-            here-doc
+here-doc
 HTML
 This     is        interpolated
             $a                 heredoc number 3
@@ -28,8 +28,9 @@ This    is        executable
             here-doc number 2
 
 This     is        a            single
-                quoted                    heredoc number 5
+quoted                    heredoc number 5
 HTML
 ;
 say 'got it!';
+
 

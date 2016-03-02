@@ -16,12 +16,16 @@
 
 package com.perl5.lang.perl.psi.references.resolvers;
 
+import com.intellij.openapi.editor.Document;
+import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+
 
 /**
  * Created by hurricup on 02.03.2016.
@@ -31,7 +35,91 @@ public class PerlHeredocResolver implements ResolveCache.AbstractResolver<PerlHe
 	@Override
 	public PerlHeredocOpener resolve(@NotNull PerlHeredocReference perlHeredocReference, boolean incompleteCode)
 	{
-		PerlHeredocTerminatorElement element = perlHeredocReference.getElement();
-		return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), element.getText(), element.getTextOffset());
+		PsiElement run = perlHeredocReference.getElement();
+		if ((run = run.getPrevSibling()) != null) // new line or here-doc
+		{
+			if (run instanceof PerlHeredocElementImpl)
+			{
+				run = run.getPrevSibling();    // moving to newline before heredoc
+				if (run == null)
+				{
+					return null;
+				}
+			}
+
+			PsiElement predecessor = run;
+			if (predecessor instanceof PsiWhiteSpace) // empty here-docs has no newline after them
+			{
+				predecessor = predecessor.getPrevSibling();
+			}
+
+			if (predecessor instanceof PerlHeredocTerminatorElement)    // sequential here-docs
+			{
+				PsiReference reference = predecessor.getReference();
+				if (reference != null)
+				{
+					PsiElement prevOpener = reference.resolve();
+					if (prevOpener != null)
+					{
+						HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset());
+						PerlPsiUtil.iteratePsiElementsRight(prevOpener, seeker);
+						return seeker.getResult();
+					}
+				}
+			}
+			else    // first here-doc in a row
+			{
+				final PsiDocumentManager manager = PsiDocumentManager.getInstance(run.getProject());
+				final PsiFile file = run.getContainingFile();
+				final Document document = manager.getDocument(file);
+
+				if (document != null)
+				{
+					int lineNumber = document.getLineNumber(run.getNode().getStartOffset());
+					PsiElement firstLineElement = file.findElementAt(document.getLineStartOffset(lineNumber));
+					if (firstLineElement != null)
+					{
+						HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset());
+						PerlPsiUtil.iteratePsiElementsRight(firstLineElement, seeker);
+						return seeker.getResult();
+					}
+				}
+			}
+
+		}
+		return null;
+
+//		return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), element.getText(), element.getTextOffset());
 	}
+
+	static private class HeredocSeeker extends PerlPsiUtil.HeredocProcessor
+	{
+		protected PerlHeredocOpener myResult = null;
+
+		public HeredocSeeker(int lineEndOffset)
+		{
+			super(lineEndOffset);
+		}
+
+		@Override
+		public boolean process(PsiElement element)
+		{
+			if (element == null || element.getNode().getStartOffset() >= lineEndOffset)
+			{
+				return false;
+			}
+			if (element instanceof PerlHeredocOpener)
+			{
+				myResult = (PerlHeredocOpener) element;
+				return false;
+			}
+			return true;
+		}
+
+		public PerlHeredocOpener getResult()
+		{
+			return myResult;
+		}
+	}
+
 }
