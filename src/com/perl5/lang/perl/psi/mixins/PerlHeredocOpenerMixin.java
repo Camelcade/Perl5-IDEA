@@ -54,7 +54,7 @@ public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl im
 			else
 			{
 				PsiElement quoteElement = string.getFirstChild();
-				if (quoteElement != null)
+				if (quoteElement != null) // this is lame,  wrong on empty string
 				{
 					return quoteElement.getNextSibling();
 				}

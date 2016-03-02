@@ -1087,7 +1087,7 @@ private use_vars_interpolated_constructs ::=
     | glob_variable
     | code_variable
 
-heredoc_opener ::= OPERATOR_HEREDOC ( OPERATOR_REFERENCE string_bare | string ){pin=1}
+heredoc_opener ::= OPERATOR_HEREDOC ( OPERATOR_REFERENCE string_bare | <<parseEmptyString>> | string ){pin=1}
 
 string_list ::= [[PACKAGE_CORE_IDENTIFIER] RESERVED_QW] <<parseSQString>>
 

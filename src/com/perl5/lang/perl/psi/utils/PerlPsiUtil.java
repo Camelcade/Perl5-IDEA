@@ -350,7 +350,6 @@ public class PerlPsiUtil
 
 	}
 
-
 	static private class HeredocChecker extends HeredocProcessor
 	{
 		protected boolean myResult = false;

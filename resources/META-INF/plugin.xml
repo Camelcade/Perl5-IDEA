@@ -34,6 +34,7 @@
     <change-notes><![CDATA[
       <p>This relase fixes more bugs or feedbacks from 1.3 release:
       <ul>
+        <li>Fixed possible NPE on here-doc typing</li>
         <li>Implemented sequential here-docs parsing, fixes #163</li>
         <li>Implemented backref here-docs parsing</li>
         <li>Improved utf identifiers and packages parsing</li>
@@ -117,6 +118,7 @@
         <stubElementTypeHolder class="com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes"/>
         <referencesSearch
                 implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferenceSearcher"/>
+        <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlHeredocReferenceSearcher"/>
 
         <psi.referenceContributor language="Perl5"
                                   implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>

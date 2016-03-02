@@ -2070,4 +2070,36 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		m.rollbackTo();
 		return false;
 	}
+
+	public static boolean parseEmptyString(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		IElementType nextTokenType = b.rawLookup(1);
+		if (tokenType == QUOTE_DOUBLE_OPEN && nextTokenType == QUOTE_DOUBLE_CLOSE ||
+				tokenType == QUOTE_SINGLE_OPEN && nextTokenType == QUOTE_SINGLE_CLOSE ||
+				tokenType == QUOTE_TICK_OPEN && nextTokenType == QUOTE_TICK_CLOSE
+				)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			b.mark().collapse(STRING_CONTENT);
+			b.advanceLexer();
+
+			if (tokenType == QUOTE_DOUBLE_OPEN)
+			{
+				m.done(STRING_DQ);
+			}
+			else if (tokenType == QUOTE_SINGLE_OPEN)
+			{
+				m.done(STRING_SQ);
+			}
+			else
+			{
+				m.done(STRING_XQ);
+			}
+			return true;
+		}
+		return false;
+	}
+
 }
