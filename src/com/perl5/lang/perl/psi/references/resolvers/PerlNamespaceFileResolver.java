@@ -16,12 +16,12 @@
 
 package com.perl5.lang.perl.psi.references.resolvers;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +34,7 @@ public class PerlNamespaceFileResolver implements ResolveCache.PolyVariantResolv
 	@Override
 	public ResolveResult[] resolve(@NotNull PerlNamespaceFileReference perlNamespaceFileReference, boolean incompleteCode)
 	{
-		PsiElement myElement = perlNamespaceFileReference.getElement();
+		PerlNamespaceElement myElement = perlNamespaceFileReference.getElement();
 		PsiFile file = myElement.getContainingFile();
 		PsiFile targetFile = null;
 

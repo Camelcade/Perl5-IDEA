@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseInnerReference extends PerlPolyVariantReference
+public class PerlMooseInnerReference extends PerlPolyVariantReference<PsiElement>
 {
 	private static final ResolveCache.PolyVariantResolver<PerlMooseInnerReference> RESOLVER = new PerlMooseInnerReferenceResolver();
 

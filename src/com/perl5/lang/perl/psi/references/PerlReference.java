@@ -24,9 +24,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlReference extends PsiReferenceBase<PsiElement>
+public abstract class PerlReference<T extends PsiElement> extends PsiReferenceBase<T>
 {
-	public PerlReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlReference(@NotNull T element, TextRange textRange)
 	{
 		super(element, textRange);
 	}

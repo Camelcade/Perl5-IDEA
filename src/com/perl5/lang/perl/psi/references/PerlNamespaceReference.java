@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceReference extends PerlPolyVariantReference
+public class PerlNamespaceReference extends PerlPolyVariantReference<PsiElement>
 {
 	protected static final ResolveCache.PolyVariantResolver<PerlNamespaceReference> RESOLVER = new PerlNamespaceDefinitionResolver();
 

@@ -39,7 +39,7 @@ import java.util.List;
  * Created by hurricup on 26.11.2015.
  * Basic class for sub reference. Uses context package to resolve. Used in string contents, moose, etc.
  */
-public class PerlSubReferenceSimple extends PerlPolyVariantReference
+public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
 {
 	protected static final int FLAG_AUTOLOADED = 1;
 	protected static final int FLAG_CONSTANT = 2;

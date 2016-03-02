@@ -122,9 +122,9 @@ public class PerlPsiUtil
 	 * @return Marker element
 	 */
 	@Nullable
-	public static PsiElement findHeredocOpenerByOffset(PsiElement file, String marker, int offset)
+	public static PerlHeredocOpener findHeredocOpenerByOffset(PsiElement file, String marker, int offset)
 	{
-		PsiElement result = null;
+		PerlHeredocOpener result = null;
 
 		if ("\n".equals(marker))
 		{

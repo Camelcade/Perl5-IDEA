@@ -19,27 +19,20 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
+import com.perl5.lang.perl.psi.references.resolvers.PerlHeredocResolver;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlHeredocReference extends PerlReference
+public class PerlHeredocReference extends PerlReference<PerlHeredocTerminatorElement>
 {
-	private static final ResolveCache.Resolver RESOLVER = new ResolveCache.Resolver()
-	{
-		@Override
-		public PsiElement resolve(@NotNull PsiReference psiReference, boolean incompleteCode)
-		{
-			PsiElement element = psiReference.getElement();
-			return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), element.getText(), element.getTextOffset());
-		}
-	};
+	private static final PerlHeredocResolver RESOLVER = new PerlHeredocResolver();
 
-	public PerlHeredocReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlHeredocReference(@NotNull PerlHeredocTerminatorElement element, TextRange textRange)
 	{
 		super(element, textRange);
 	}

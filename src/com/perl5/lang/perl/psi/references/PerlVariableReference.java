@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -28,16 +27,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public class PerlVariableReference extends PerlPolyVariantReference
+public class PerlVariableReference extends PerlPolyVariantReference<PerlVariableNameElement>
 {
 	protected static final ResolveCache.PolyVariantResolver<PerlVariableReference> RESOLVER = new PerlVariableReferenceResolver();
 
 	private PerlVariable myVariable;
 
-	public PerlVariableReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlVariableReference(@NotNull PerlVariableNameElement element, TextRange textRange)
 	{
 		super(element, textRange);
-		assert element instanceof PerlVariableNameElement;
 	}
 
 	public PerlVariable getVariable()

@@ -30,18 +30,18 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceFileReference extends PerlPolyVariantReference
+public class PerlNamespaceFileReference extends PerlPolyVariantReference<PerlNamespaceElement>
 {
 	protected static final ResolveCache.PolyVariantResolver<PerlNamespaceFileReference> RESOLVER = new PerlNamespaceFileResolver();
 
-	public PerlNamespaceFileReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlNamespaceFileReference(@NotNull PerlNamespaceElement element, TextRange textRange)
 	{
 		super(element, textRange);
 	}
 
 	public String getPackageName()
 	{
-		return ((PerlNamespaceElement) myElement).getCanonicalName();
+		return myElement.getCanonicalName();
 	}
 
 	@NotNull
@@ -54,7 +54,7 @@ public class PerlNamespaceFileReference extends PerlPolyVariantReference
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
-		String currentName = ((PerlNamespaceElement) myElement).getCanonicalName();
+		String currentName = myElement.getCanonicalName();
 		if (currentName != null && newElementName.endsWith(".pm"))
 		{
 			String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
