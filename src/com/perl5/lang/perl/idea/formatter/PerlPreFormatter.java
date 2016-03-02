@@ -167,7 +167,13 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
 	protected boolean isStringInHeredocQuotable(PsiPerlStringBare o)
 	{
-		return myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == FORCE && isInHeredocOpener(o);
+		return myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == FORCE && isInHeredocOpener(o) && !isBackrefString(o);
+	}
+
+	protected boolean isBackrefString(PsiPerlStringBare o)
+	{
+		PsiElement predecessor = o.getPrevSibling();
+		return predecessor != null && predecessor.getNode().getElementType() == OPERATOR_REFERENCE;
 	}
 
 	protected boolean isStringUnqutable(PerlString o)
