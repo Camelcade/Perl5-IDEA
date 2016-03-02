@@ -24,7 +24,6 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.references.resolvers.PerlHeredocResolver;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,13 +34,6 @@ public class PerlHeredocReference extends PerlReference<PerlHeredocTerminatorEle
 	public PerlHeredocReference(@NotNull PerlHeredocTerminatorElement element, TextRange textRange)
 	{
 		super(element, textRange);
-	}
-
-	// fixme move to PsiUtil ?
-	@Nullable
-	public static PsiElement getClosestHeredocOpener(PsiElement element)
-	{
-		return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), null, element.getTextOffset());
 	}
 
 	@Nullable

@@ -31,6 +31,11 @@ This     is        a            single
 quoted                    heredoc number 5
 HTML
 ;
+
+<<HTML
+HTML
+;
+
 say 'got it!';
 
 

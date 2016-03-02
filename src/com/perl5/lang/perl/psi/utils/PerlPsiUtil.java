@@ -29,7 +29,6 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
-import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -84,64 +83,6 @@ public class PerlPsiUtil
 
 			startWith = startWith.getNextSibling();
 		}
-	}
-
-	/**
-	 * Searching for statement this element belongs
-	 *
-	 * @param element
-	 * @return
-	 */
-	public static PsiPerlStatement getElementStatement(PsiElement element)
-	{
-		PsiElement currentStatement = PsiTreeUtil.getParentOfType(element, PerlHeredocElementImpl.class);
-
-		if (currentStatement != null)    // we are in heredoc
-		{
-			PsiElement opener = PerlHeredocReference.getClosestHeredocOpener(currentStatement);
-
-			if (opener == null)
-				return null;
-
-			return PsiTreeUtil.getParentOfType(opener, PsiPerlStatement.class);
-
-		}
-		else
-			return PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
-	}
-
-
-	/**
-	 * Searching for last heredoc opener before offset
-	 *
-	 * @param file   File to search in
-	 * @param marker optional marker text
-	 * @param offset offset
-	 * @return Marker element
-	 */
-	@Nullable
-	public static PerlHeredocOpener findHeredocOpenerByOffset(PsiElement file, String marker, int offset)
-	{
-		PerlHeredocOpener result = null;
-
-		if ("\n".equals(marker))
-		{
-			marker = "";
-		}
-
-		for (PerlHeredocOpener opener : PsiTreeUtil.findChildrenOfType(file, PerlHeredocOpener.class))
-		{
-			if (opener.getTextOffset() < offset)
-			{
-				if (marker == null || marker.equals(opener.getName()))
-					result = opener;
-			}
-			else
-			{
-				break;
-			}
-		}
-		return result;
 	}
 
 	/**
@@ -337,6 +278,9 @@ public class PerlPsiUtil
 	public static boolean iteratePsiElementsRight(PsiElement element, Processor<PsiElement> processor)
 	{
 		if (element == null || element instanceof PsiFile) return false;
+
+		if (!processor.process(element))
+			return false;
 
 		PsiElement run = element.getNextSibling();
 

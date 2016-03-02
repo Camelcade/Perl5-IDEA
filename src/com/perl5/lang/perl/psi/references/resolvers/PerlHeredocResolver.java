@@ -25,6 +25,7 @@ import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 /**
@@ -61,7 +62,7 @@ public class PerlHeredocResolver implements ResolveCache.AbstractResolver<PerlHe
 					PsiElement prevOpener = reference.resolve();
 					if (prevOpener != null)
 					{
-						HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset());
+						HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset(), prevOpener);
 						PerlPsiUtil.iteratePsiElementsRight(prevOpener, seeker);
 						return seeker.getResult();
 					}
@@ -79,7 +80,7 @@ public class PerlHeredocResolver implements ResolveCache.AbstractResolver<PerlHe
 					PsiElement firstLineElement = file.findElementAt(document.getLineStartOffset(lineNumber));
 					if (firstLineElement != null)
 					{
-						HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset());
+						HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset(), null);
 						PerlPsiUtil.iteratePsiElementsRight(firstLineElement, seeker);
 						return seeker.getResult();
 					}
@@ -88,17 +89,17 @@ public class PerlHeredocResolver implements ResolveCache.AbstractResolver<PerlHe
 
 		}
 		return null;
-
-//		return PerlPsiUtil.findHeredocOpenerByOffset(element.getContainingFile(), element.getText(), element.getTextOffset());
 	}
 
 	static private class HeredocSeeker extends PerlPsiUtil.HeredocProcessor
 	{
 		protected PerlHeredocOpener myResult = null;
+		protected PsiElement myAnchor = null;
 
-		public HeredocSeeker(int lineEndOffset)
+		public HeredocSeeker(int lineEndOffset, @Nullable PsiElement anchor)
 		{
 			super(lineEndOffset);
+			myAnchor = anchor;
 		}
 
 		@Override
@@ -108,7 +109,7 @@ public class PerlHeredocResolver implements ResolveCache.AbstractResolver<PerlHe
 			{
 				return false;
 			}
-			if (element instanceof PerlHeredocOpener)
+			if (element != myAnchor && element instanceof PerlHeredocOpener)
 			{
 				myResult = (PerlHeredocOpener) element;
 				return false;
