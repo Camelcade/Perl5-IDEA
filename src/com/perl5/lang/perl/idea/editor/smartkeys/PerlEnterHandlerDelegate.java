@@ -36,12 +36,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 06.09.2015.
  */
 public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 {
+	private final Pattern EMPTY_OPENER_PATTERN = Pattern.compile("<<\\s*(?:\"\"|''|``)");
+
 	@Override
 	public Result preprocessEnter(@NotNull PsiFile file,
 								  @NotNull Editor editor,
@@ -94,12 +97,47 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 							}
 
 
+							String openerName = currentOpener.getName();
+							boolean emptyOpener = StringUtil.isEmpty(openerName);
 							PsiReference inboundReference = ReferencesSearch.search(currentOpener).findFirst();
+
+							if (inboundReference != null)
+							{
+								boolean falseAlarm = false;
+
+								PsiElement run = inboundReference.getElement();
+								if (run != null && (run = run.getPrevSibling()) instanceof PerlHeredocElementImpl)
+								{
+									Pattern openerPattern = EMPTY_OPENER_PATTERN;
+									if (!emptyOpener)
+									{
+										openerPattern = Pattern.compile("<<(\\s*)(?:" +
+												"\"" + openerName + "\"" + "|" +
+												"`" + openerName + "`" + "|" +
+												"'" + openerName + "'" + "|" +
+												"\\\\" + openerName + "|" +
+												openerName +
+												")"
+										);
+									}
+
+									falseAlarm = openerPattern.matcher(run.getText()).find();
+								}
+
+								if (falseAlarm) // looks like overlapping heredocs
+								{
+									inboundReference = null;
+								}
+								else
+								{
+									lastOpenerPointer = currentOpenerPointer;
+								}
+							}
+
+
 							if (inboundReference == null) // disclosed marker
 							{
 								int addOffset = -1;
-								String openerName = currentOpener.getName();
-								boolean emptyOpener = StringUtil.isEmpty(openerName);
 								String closeMarker = "\n" + openerName + "\n";
 
 								if (lastOpenerPointer == null) // first one
@@ -155,10 +193,6 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 									return Result.Continue;
 								}
 
-							}
-							else
-							{
-								lastOpenerPointer = currentOpenerPointer;
 							}
 						}
 					}
