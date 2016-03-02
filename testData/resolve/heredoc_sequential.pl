@@ -1,5 +1,5 @@
 # this is a test
-print <<"HTML", <<'HTML', <<\HTML, $a, <<'', @{say 'something';}, <<"HTML", <<"", <<'', <<`HTML`, <<"", <<'', <<``, <<'HTML'
+print <<"HTML", <<'HTML', ${<<\HTML}, $a, <<'', @{say 'something';}; say <<"HTML", <<"", <<'', <<`HTML`, <<"", <<'', <<``, <<'HTML'
 This    is         interpolated
 $a                heredoc
 HTML
