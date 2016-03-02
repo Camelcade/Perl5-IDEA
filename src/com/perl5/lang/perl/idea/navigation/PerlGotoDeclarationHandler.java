@@ -40,12 +40,26 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 	{
 		ArrayList<PsiElement> result = new ArrayList<PsiElement>();
 		if (sourceElement != null)
+		{
 			for (PsiReference reference : sourceElement.getReferences())
+			{
 				if (reference instanceof PsiPolyVariantReference)
+				{
 					for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
-						result.add(resolveResult.getElement());
+					{
+						PsiElement element = resolveResult.getElement();
+						if (element != null)
+							result.add(element);
+					}
+				}
 				else
-					result.add(reference.resolve());
+				{
+					PsiElement element = reference.resolve();
+					if (element != null)
+						result.add(element);
+				}
+			}
+		}
 
 		// add shadowed variables declaration
 		if (sourceElement instanceof PerlVariableNameElement)
