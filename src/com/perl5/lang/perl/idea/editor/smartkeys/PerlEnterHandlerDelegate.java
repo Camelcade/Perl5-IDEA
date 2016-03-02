@@ -25,10 +25,7 @@ import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiReference;
+import com.intellij.psi.*;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
@@ -74,9 +71,9 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 				{
 					final Document document = editor.getDocument();
 					final PsiDocumentManager manager = PsiDocumentManager.getInstance(file.getProject());
+					manager.commitDocument(document);
 
 					final int lineStartOffset = document.getLineStartOffset(enterLine);
-					final List<PerlHeredocOpener> openers = new ArrayList<PerlHeredocOpener>();
 
 					PsiElement firstLineElement = file.findElementAt(lineStartOffset);
 					if (firstLineElement != null)
@@ -84,9 +81,19 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 						HeredocCollector collector = new HeredocCollector(currentOffset - 1);
 						PerlPsiUtil.iteratePsiElementsRight(firstLineElement, collector);
 
-						PerlHeredocOpener lastOpener = null;
-						for (PerlHeredocOpener currentOpener : collector.getResult())
+						SmartPsiElementPointer<PerlHeredocOpener> lastOpenerPointer = null;
+						for (SmartPsiElementPointer<PerlHeredocOpener> currentOpenerPointer : collector.getResult())
 						{
+
+							PerlHeredocOpener currentOpener = currentOpenerPointer.getElement();
+
+							if (currentOpener == null)
+							{
+//								System.err.println("Opener invalidated on reparse");
+								return Result.Continue;
+							}
+
+
 							PsiReference inboundReference = ReferencesSearch.search(currentOpener).findFirst();
 							if (inboundReference == null) // disclosed marker
 							{
@@ -95,12 +102,19 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 								boolean emptyOpener = StringUtil.isEmpty(openerName);
 								String closeMarker = "\n" + openerName + "\n";
 
-								if (lastOpener == null) // first one
+								if (lastOpenerPointer == null) // first one
 								{
 									addOffset = currentOffset;
 								}
 								else // sequentional
 								{
+									PerlHeredocOpener lastOpener = lastOpenerPointer.getElement();
+									if (lastOpener == null)
+									{
+//										System.err.println("Last opener invalidated on reparse");
+										return Result.Continue;
+									}
+
 									PsiReference lastOpenerReference = ReferencesSearch.search(lastOpener).findFirst();
 									if (lastOpenerReference != null)
 									{
@@ -120,11 +134,20 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 
 								document.insertString(addOffset, closeMarker);
 								manager.commitDocument(document);
+
+								currentOpener = currentOpenerPointer.getElement();
+
+								if (currentOpener == null)
+								{
+//									System.err.println("Opener invalidated on reparse after insertion");
+									return Result.Continue;
+								}
+
 								inboundReference = ReferencesSearch.search(currentOpener).findFirst();
 
 								if (inboundReference != null)
 								{
-									lastOpener = currentOpener;
+									lastOpenerPointer = currentOpenerPointer;
 								}
 								else
 								{
@@ -135,7 +158,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 							}
 							else
 							{
-								lastOpener = currentOpener;
+								lastOpenerPointer = currentOpenerPointer;
 							}
 						}
 					}
@@ -147,7 +170,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 
 	static private class HeredocCollector extends PerlPsiUtil.HeredocProcessor
 	{
-		protected List<PerlHeredocOpener> myResult = new ArrayList<PerlHeredocOpener>();
+		protected List<SmartPsiElementPointer<PerlHeredocOpener>> myResult = new ArrayList<SmartPsiElementPointer<PerlHeredocOpener>>();
 
 		public HeredocCollector(int lineEndOffset)
 		{
@@ -163,12 +186,13 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 			}
 			if (element instanceof PerlHeredocOpener)
 			{
-				myResult.add((PerlHeredocOpener) element);
+				//SmartPointerManager#createSmartPsiElementPointer
+				myResult.add(SmartPointerManager.getInstance(element.getProject()).createSmartPsiElementPointer((PerlHeredocOpener) element));
 			}
 			return true;
 		}
 
-		public List<PerlHeredocOpener> getResult()
+		public List<SmartPsiElementPointer<PerlHeredocOpener>> getResult()
 		{
 			return myResult;
 		}
