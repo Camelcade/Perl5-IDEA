@@ -17,13 +17,11 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
@@ -144,39 +142,6 @@ public class PerlPsiUtil
 			}
 		}
 		return result;
-	}
-
-	/**
-	 * Back-searching file for an element
-	 *
-	 * @param file        file to search in
-	 * @param offset      end offset
-	 * @param elementType element type to search
-	 * @return PsiElement of found element
-	 */
-	public static PsiElement searchLineForElementByType(PsiFile file, int offset, IElementType elementType)
-	{
-		if (offset == file.getTextLength())
-			offset--;
-
-		if (offset >= 0)
-		{
-			do
-			{
-				PsiElement currentElement = file.findElementAt(offset);
-
-				if (currentElement == null || StringUtil.containsChar(currentElement.getText(), '\n'))
-					break;
-
-				if (currentElement.getNode().getElementType() == elementType)
-					return currentElement;
-
-				offset = currentElement.getTextRange().getStartOffset() - 1;
-
-			} while (offset >= 0);
-		}
-
-		return null;
 	}
 
 	/**
@@ -371,20 +336,13 @@ public class PerlPsiUtil
 
 	public static boolean iteratePsiElementsRight(PsiElement element, Processor<PsiElement> processor)
 	{
-		if (element == null) return false;
+		if (element == null || element instanceof PsiFile) return false;
 
 		PsiElement run = element.getNextSibling();
 
 		if (run == null)
 		{
-			if (element instanceof PsiFile)
-			{
-				return false;
-			}
-			else
-			{
-				return iteratePsiElementsRight(element.getParent(), processor);
-			}
+			return iteratePsiElementsRight(element.getParent(), processor);
 		}
 
 		return iteratePsiElementsRightDown(run, processor) && iteratePsiElementsRight(element.getParent(), processor);
