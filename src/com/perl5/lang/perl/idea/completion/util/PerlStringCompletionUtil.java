@@ -262,9 +262,10 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 	public static void fillWithHeredocOpeners(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet)
 	{
 		// injectable markers
-		for (String abbreviation : PerlLanguageInjector.LANGUAGE_MAP.keySet())
+		for (Map.Entry<String, Language> entry : PerlLanguageInjector.LANGUAGE_MAP.entrySet())
 		{
-			Language language = PerlLanguageInjector.LANGUAGE_MAP.get(abbreviation);
+			String abbreviation = entry.getKey();
+			Language language = entry.getValue();
 
 			LookupElementBuilder newItem = LookupElementBuilder
 					.create(abbreviation)
