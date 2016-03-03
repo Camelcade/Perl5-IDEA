@@ -115,7 +115,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	{
 		VirtualFile containingFile = getVirtualFile();
 
-		if (containingFile.getFileType() == PerlFileTypePackage.INSTANCE)
+		if (containingFile != null && containingFile.getFileType() == PerlFileTypePackage.INSTANCE)
 		{
 			VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(getProject(), containingFile);
 			if (innermostSourceRoot != null)

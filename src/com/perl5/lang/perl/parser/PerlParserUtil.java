@@ -548,9 +548,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			b.advanceLexer();
 			return true;
 		}
-		else if (
-				PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(b.lookAhead(1))
-				)
+		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(b.lookAhead(1)))
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();

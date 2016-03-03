@@ -28,6 +28,7 @@ import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
@@ -46,6 +47,7 @@ public class PerlUtil
 	 * @param file    containing file
 	 * @return innermost root
 	 */
+	@Nullable
 	public static VirtualFile getFileClassRoot(Project project, VirtualFile file)
 	{
 		VirtualFile result = null;
@@ -67,6 +69,7 @@ public class PerlUtil
 	 * @param filePath containing filename
 	 * @return innermost root
 	 */
+	@Nullable
 	public static VirtualFile getFileClassRoot(Project project, String filePath)
 	{
 		File file = new File(filePath);

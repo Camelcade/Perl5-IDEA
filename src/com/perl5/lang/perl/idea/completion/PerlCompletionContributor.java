@@ -43,6 +43,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
 		extend(
 				CompletionType.BASIC,
+				NAMESPACE_NAME_PATTERN,
+				new PerlPackageCompletionProvider()
+		);
+
+		extend(
+				CompletionType.BASIC,
 				SUB_NAME_PATTERN,
 				new PerlSubNameElementCompletionProvider()
 		);
@@ -99,21 +105,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				SUB_NAME_PATTERN.inside(METHOD_PATTERN),
 				new PerlPackageSubCompletionProvider()
 		);
-
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				NAMESPACE_NAME_PATTERN,
-				new PerlPackageFilesCompletionProvider()
-		);
-
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				NAMESPACE_NAME_PATTERN,
-				new PerlPackageBuiltInCompletionProvider()
-		);
-
 
 		// refactored
 		extend(

@@ -434,8 +434,8 @@ private statement_item ::=
 		| POD
 		| <<parseBadCharacters>> // Fallback for bad characters
 
-namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>)
-private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_namespace_definition}
+namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1}
+private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=4 recoverWhile=recover_namespace_definition}
 private namespace_annotations ::= annotation_deprecated
 private recover_namespace_definition ::= !(<<checkSemicolon>> | LEFT_BRACE)
 namespace_content ::= real_namespace_content

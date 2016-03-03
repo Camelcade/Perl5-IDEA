@@ -63,34 +63,65 @@ public class PerlCompletionTest extends LightCodeInsightFixtureTestCase
 		assertTrue(strings.containsAll(Arrays.asList("testindex")));
 	}
 
-	public void testHeredocOpenerBare() throws IOException
+	public void testPackageDefinition()
+	{
+		doTestFilePackage("package_definition");
+		List<String> strings = myFixture.getLookupElementStrings();
+		assertTrue(strings.containsAll(Arrays.asList("package_definition")));
+	}
+
+	public void testPackageUse()
+	{
+		doTestFilePackage("package_use");
+		checkPackageCompletions();
+	}
+
+	public void testPackageNo()
+	{
+		doTestFilePackage("package_no");
+		checkPackageCompletions();
+	}
+
+	public void testPackageRequire()
+	{
+		doTestFilePackage("package_require");
+		checkPackageCompletions();
+	}
+
+	public void checkPackageCompletions()
+	{
+		List<String> strings = myFixture.getLookupElementStrings();
+		assertTrue(strings.containsAll(Arrays.asList("v5.10", "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings")));
+	}
+
+	public void testHeredocOpenerBare()
 	{
 		doTestHeredocOpenerFile("heredoc_marker_completion_bare");
 	}
 
-	public void testHeredocOpenerBackref() throws IOException
+	public void testHeredocOpenerBackref()
 	{
 		doTestHeredocOpenerFile("heredoc_marker_completion_backref");
 	}
 
-	public void testHeredocOpenerQQ() throws IOException
+	public void testHeredocOpenerQQ()
 	{
 		doTestHeredocOpenerFile("heredoc_marker_completion_qq");
 	}
 
-	public void testHeredocOpenerSQ() throws IOException
+	public void testHeredocOpenerSQ()
 	{
 		doTestHeredocOpenerFile("heredoc_marker_completion_sq");
 	}
 
-	public void testHeredocOpenerXQ() throws IOException
+	public void testHeredocOpenerXQ()
 	{
 		doTestHeredocOpenerFile("heredoc_marker_completion_xq");
 	}
 
-	public void doTestHeredocOpenerFile(String filename) throws IOException
+	public void doTestHeredocOpenerFile(String filename)
 	{
-		doTestFile(filename);
+		doTestFileScript(filename);
 		List<String> strings = myFixture.getLookupElementStrings();
 		assertTrue(strings.contains("MYSUPERMARKER"));
 		assertTrue(strings.contains("HTML"));
@@ -102,10 +133,32 @@ public class PerlCompletionTest extends LightCodeInsightFixtureTestCase
 		myFixture.complete(CompletionType.BASIC, 1);
 	}
 
-	public void doTestFile(String filename) throws IOException
+	public void doTestFileScript(String filename)
+	{
+		try
+		{
+			doTestFile(filename, "pl");
+		} catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void doTestFilePackage(String filename)
+	{
+		try
+		{
+			doTestFile(filename, "pm");
+		} catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void doTestFile(String filename, String extension) throws IOException
 	{
 		String content = FileUtil.loadFile(new File(getTestDataPath(), filename + ".code"), CharsetToolkit.UTF8, true).trim();
-		myFixture.configureByText(PerlFileType.INSTANCE, content);
+		myFixture.configureByText(filename + "." + extension, content);
 		myFixture.complete(CompletionType.BASIC, 1);
 	}
 

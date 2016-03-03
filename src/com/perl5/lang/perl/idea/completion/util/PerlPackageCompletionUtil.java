@@ -21,12 +21,22 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.PerlScopes;
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.internals.PerlFeaturesTable;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 25.07.2015.
@@ -34,23 +44,6 @@ import org.jetbrains.annotations.NotNull;
 public class PerlPackageCompletionUtil
 {
 	public static final InsertHandler COMPLETION_REOPENER = new CompletionOpener();
-
-	public static void fillWithAllPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
-	{
-		final Project project = element.getProject();
-
-		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
-		{
-			@Override
-			public boolean process(String s)
-			{
-				if (super.process(s))
-					result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
-				return true;
-			}
-		});
-	}
-
 
 	/**
 	 * Returns package lookup element by package name
@@ -88,6 +81,82 @@ public class PerlPackageCompletionUtil
 		return getPackageLookupElement(project, packageName)
 				.withInsertHandler(COMPLETION_REOPENER)
 				.withTailText("...");
+	}
+
+	public static void fillWithAllPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
+		final Project project = element.getProject();
+
+		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
+		{
+			@Override
+			public boolean process(String s)
+			{
+				if (super.process(s))
+					result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
+				return true;
+			}
+		});
+	}
+
+	public static void fillWithAllBuiltInPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
+		final Project project = element.getProject();
+		for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
+		{
+			result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, packageName));
+		}
+
+	}
+
+	public static void fillWithAllPackageFiles(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
+		final Project project = element.getProject();
+		PerlPackageUtil.processPackageFilesForPsiElement(element, new Processor<String>()
+		{
+			@Override
+			public boolean process(String s)
+			{
+				result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+				return true;
+			}
+		});
+	}
+
+	public static void fillWithVersionNumbers(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
+		for (Map.Entry<String, List<String>> entry : PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.entrySet())
+		{
+			String version = entry.getKey();
+			if (StringUtil.startsWith(version, "5"))
+			{
+				result.addElement(
+						LookupElementBuilder.create("v" + version)
+								.withTypeText(StringUtil.join(entry.getValue(), " "))
+				);
+			}
+		}
+	}
+
+	public static void fillWithPackageNameSuggestions(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
+		PsiFile file = element.getOriginalElement().getContainingFile();
+		if (file != null)
+		{
+			VirtualFile virtualFile = file.getViewProvider().getVirtualFile();
+			if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE)
+			{
+				result.addElement(LookupElementBuilder.create(virtualFile.getNameWithoutExtension()));
+				if (file instanceof PerlFileImpl)
+				{
+					String packageName = ((PerlFileImpl) file).getFilePackageName();
+					if (packageName != null)
+					{
+						result.addElement(LookupElementBuilder.create(packageName));
+					}
+				}
+			}
+		}
 	}
 
 	/**

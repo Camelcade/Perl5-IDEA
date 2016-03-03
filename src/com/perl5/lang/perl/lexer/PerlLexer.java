@@ -1755,6 +1755,7 @@ public class PerlLexer extends PerlLexerGenerated
 		String tokenText = yytext().toString();
 		IElementType tokenType;
 		PerlTokenHistory tokenHistory = getTokenHistory();
+		IElementType lastSignificantTokenType = tokenHistory.getLastSignificantTokenType();
 
 		boolean isSigilBehind = SIGILS_TOKENS.contains(tokenHistory.getLastTokenType());
 
@@ -1767,7 +1768,7 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			return IDENTIFIER;
 		}
-		else if (!IDENTIFIER_NEGATION_PREFIX.contains(tokenHistory.getLastSignificantTokenType())
+		else if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
 				&& !isSigilBehind    // print $$ if smth
 				)
 		{
@@ -1777,7 +1778,7 @@ public class PerlLexer extends PerlLexerGenerated
 				return tokenType;
 			}
 			else if (
-					(tokenHistory.getLastSignificantTokenType() == OPERATOR_FILETEST && tokenText.equals("_"))    // for -t _
+					(lastSignificantTokenType == OPERATOR_FILETEST && tokenText.equals("_"))    // for -t _
 							|| (tokenHistory.getLastUnparenTokenType() == IDENTIFIER
 							&& PerlParserUtil.PRE_HANDLE_OPS.contains(tokenHistory.getLastUnparenTokenTextAsString())
 							&& !PerlSubUtil.BUILT_IN.contains(tokenText)
@@ -1799,9 +1800,14 @@ public class PerlLexer extends PerlLexerGenerated
 				return tokenType;
 			}
 		}
-		else if (tokenHistory.getLastSignificantTokenType() == RESERVED_USE || tokenHistory.getLastSignificantTokenType() == RESERVED_NO) // pragma section
+		else if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_NO) // pragma section
+		{
 			if (PRAGMA_TOKENS_MAP.containsKey(tokenText))
+			{
 				return PRAGMA_TOKENS_MAP.get(tokenText);
+			}
+
+		}
 
 		if (!isSigilBehind && (tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) != null)
 		{
