@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.completion.util;
 
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -30,6 +31,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvide
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
@@ -47,7 +49,8 @@ import java.util.Set;
  */
 public class PerlStringCompletionUtil implements PerlElementPatterns
 {
-	public static final Set<String> STRINGS_SET = new THashSet<String>();
+	public static final Set<String> HASH_INDEXES_CACHE = new THashSet<String>();
+	public static final Set<String> HEREDOC_OPENERS_CACHE = new THashSet<String>();
 	public static final String[] REF_TYPES = new String[]{
 			"SCALAR",
 			"ARRAY",
@@ -69,7 +72,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 
 	public static void fillWithHashIndexes(final @NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
-		for (String text : STRINGS_SET)
+		for (String text : HASH_INDEXES_CACHE)
 		{
 			addElement(text, result);
 		}
@@ -124,9 +127,9 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 					protected void processStringElement(PerlStringContentElement stringContentElement)
 					{
 						String text = stringContentElement.getText();
-						if (StringUtil.isNotEmpty(text) && !STRINGS_SET.contains(text) && PerlLexer.IDENTIFIER_PATTERN.matcher(text).matches())
+						if (StringUtil.isNotEmpty(text) && !HASH_INDEXES_CACHE.contains(text) && PerlLexer.IDENTIFIER_PATTERN.matcher(text).matches())
 						{
-							STRINGS_SET.add(text);
+							HASH_INDEXES_CACHE.add(text);
 							addElement(text, result);
 						}
 					}
@@ -253,6 +256,52 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 		for (String refType : REF_TYPES)
 		{
 			resultSet.addElement(LookupElementBuilder.create(refType));
+		}
+	}
+
+	public static void fillWithHeredocOpeners(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet)
+	{
+		// injectable markers
+		for (String abbreviation : PerlLanguageInjector.LANGUAGE_MAP.keySet())
+		{
+			Language language = PerlLanguageInjector.LANGUAGE_MAP.get(abbreviation);
+
+			LookupElementBuilder newItem = LookupElementBuilder
+					.create(abbreviation)
+					.withTypeText("inject with " + language.getDisplayName(), true);
+
+			if (language.getAssociatedFileType() != null)
+			{
+				newItem = newItem.withIcon(language.getAssociatedFileType().getIcon());
+			}
+
+			resultSet.addElement(newItem);
+		}
+
+		// cached values
+		for (String marker : HEREDOC_OPENERS_CACHE)
+		{
+			resultSet.addElement(LookupElementBuilder.create(marker));
+		}
+
+		// collect new values
+		PsiFile file = element.getContainingFile();
+		if (file != null)
+		{
+			file.accept(new PerlRecursiveVisitor()
+			{
+				@Override
+				public void visitHeredocOpener(@NotNull PsiPerlHeredocOpener o)
+				{
+					String openerName = o.getName();
+					if (StringUtil.isNotEmpty(openerName) && !HEREDOC_OPENERS_CACHE.contains(openerName) && !PerlLanguageInjector.LANGUAGE_MAP.containsKey(openerName))
+					{
+						HEREDOC_OPENERS_CACHE.add(openerName);
+						resultSet.addElement(LookupElementBuilder.create(openerName));
+					}
+					super.visitHeredocOpener(o);
+				}
+			});
 		}
 	}
 

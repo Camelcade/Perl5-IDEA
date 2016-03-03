@@ -48,6 +48,10 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 		{
 			PerlStringCompletionUtil.fillWithUseParameters(element, result);
 		}
+		else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) // HERE-DOC openers
+		{
+			PerlStringCompletionUtil.fillWithHeredocOpeners(element, result);
+		}
 		else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
 		{
 			PerlStringCompletionUtil.fillWithRefTypes(result);

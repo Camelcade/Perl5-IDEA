@@ -46,6 +46,10 @@ public interface PerlElementPatterns extends PerlElementTypes
 	);
 
 
+	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN = STRING_CONTENT_PATTERN.withParent(
+			psiElement(PerlString.class).withParent(psiElement(PerlHeredocOpener.class))
+	);
+
 	PsiElementPattern.Capture<PerlStringContentElement> SIMPLE_HASH_INDEX = STRING_CONTENT_PATTERN.withSuperParent(2, PsiPerlHashIndex.class).andOr(
 			STRING_CONTENT_IN_STRING_BARE,
 			STRING_CONTENT_IN_SQ_STRING_BEGIN,

@@ -17,10 +17,14 @@
 package completion;
 
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,13 +34,20 @@ import java.util.List;
  */
 public class PerlCompletionTest extends LightCodeInsightFixtureTestCase
 {
+	public static final String DATA_PATH = "testData/completion";
+
+	@Override
+	protected String getTestDataPath()
+	{
+		return DATA_PATH;
+	}
+
 	@Override
 	protected void setUp() throws Exception
 	{
 		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
 		super.setUp();
 	}
-
 
 	public void testRefTypes()
 	{
@@ -52,9 +63,49 @@ public class PerlCompletionTest extends LightCodeInsightFixtureTestCase
 		assertTrue(strings.containsAll(Arrays.asList("testindex")));
 	}
 
+	public void testHeredocOpenerBare() throws IOException
+	{
+		doTestHeredocOpenerFile("heredoc_marker_completion_bare");
+	}
+
+	public void testHeredocOpenerBackref() throws IOException
+	{
+		doTestHeredocOpenerFile("heredoc_marker_completion_backref");
+	}
+
+	public void testHeredocOpenerQQ() throws IOException
+	{
+		doTestHeredocOpenerFile("heredoc_marker_completion_qq");
+	}
+
+	public void testHeredocOpenerSQ() throws IOException
+	{
+		doTestHeredocOpenerFile("heredoc_marker_completion_sq");
+	}
+
+	public void testHeredocOpenerXQ() throws IOException
+	{
+		doTestHeredocOpenerFile("heredoc_marker_completion_xq");
+	}
+
+	public void doTestHeredocOpenerFile(String filename) throws IOException
+	{
+		doTestFile(filename);
+		List<String> strings = myFixture.getLookupElementStrings();
+		assertTrue(strings.contains("MYSUPERMARKER"));
+		assertTrue(strings.contains("HTML"));
+	}
+
 	public void doTest(String input)
 	{
 		myFixture.configureByText(PerlFileType.INSTANCE, input);
+		myFixture.complete(CompletionType.BASIC, 1);
+	}
+
+	public void doTestFile(String filename) throws IOException
+	{
+		String content = FileUtil.loadFile(new File(getTestDataPath(), filename + ".code"), CharsetToolkit.UTF8, true).trim();
+		myFixture.configureByText(PerlFileType.INSTANCE, content);
 		myFixture.complete(CompletionType.BASIC, 1);
 	}
 

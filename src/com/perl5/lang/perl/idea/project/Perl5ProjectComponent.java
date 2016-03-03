@@ -65,7 +65,8 @@ public class Perl5ProjectComponent implements ProjectComponent
 
 	public void projectOpened()
 	{
-		PerlStringCompletionUtil.STRINGS_SET.clear();
+		PerlStringCompletionUtil.HASH_INDEXES_CACHE.clear();
+		PerlStringCompletionUtil.HEREDOC_OPENERS_CACHE.clear();
 		// called when project is opened
 //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
 //		PsiManager.getInstance(myProject).addPsiTreeChangeListener(myPsiTreeChangeListener);
