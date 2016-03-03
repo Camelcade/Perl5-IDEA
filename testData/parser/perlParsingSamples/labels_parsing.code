@@ -1,0 +1,33 @@
+LOOP: {    say 'test';}
+{    say 'test';}
+LOOP1: {    say 'test';}
+BEGIN: { say 'test';}
+AUTOLOAD: { say 'test';}
+if: { say 'test';}
+method: { say 'test';}
+sub : lvalue { say 'test';}; # not allowed to be lable, don't know how to distinct, see #875
+func : { say 'test';}
+switch : { say 'test';}
+use : { say 'test';}
+and : { say 'test';}
+or: { say 'test';}
+xor :{ say 'test';}
+x: { say 'test';}
+__PACKAGE__: { say 'test';}
+constant: { say 'test';}
+vars: { say 'test';}
+eq: { say 'test';}
+ne: { say 'test';}
+gt: { say 'test';}
+lt: { say 'test';}
+ge: { say 'test';}
+le: { say 'test';}
+{
+    say 'test';
+    last:
+}
+{
+    loop1:;
+    loop3:
+}
+

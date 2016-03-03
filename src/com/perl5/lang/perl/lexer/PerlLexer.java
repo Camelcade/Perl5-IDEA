@@ -273,6 +273,26 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Map<String, IElementType> namedOperators = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> blockNames = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> tagNames = new HashMap<String, IElementType>();
+	public static final TokenSet QUOTE_LIKE_STRING_OPENER_TOKENSET = TokenSet.create(
+			RESERVED_QW,
+			RESERVED_Q,
+			RESERVED_QQ,
+			RESERVED_QX
+	);
+	public static final TokenSet QUOTE_LIKE_REGEX_OPENER_TOKENSET = TokenSet.create(
+			RESERVED_S,
+			RESERVED_M,
+			RESERVED_QR
+	);
+	public static final TokenSet QUOTE_LIKE_TRANSLATE_OPENER_TOKENSET = TokenSet.create(
+			RESERVED_TR,
+			RESERVED_Y
+	);
+	public static final TokenSet QUOTE_LIKE_OPENER_TOKENSET = TokenSet.orSet(
+			QUOTE_LIKE_STRING_OPENER_TOKENSET,
+			QUOTE_LIKE_REGEX_OPENER_TOKENSET,
+			QUOTE_LIKE_TRANSLATE_OPENER_TOKENSET
+	);
 	static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
 			"eq",
 			"ne",
@@ -310,6 +330,7 @@ public class PerlLexer extends PerlLexerGenerated
 			);
 	public static TokenSet RESERVED_TOKENSET;
 	public static TokenSet CUSTOM_TOKENSET;
+	public static TokenSet LABEL_TOKENSET;
 
 	static
 	{
@@ -463,6 +484,25 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
 		CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
+
+		Set<IElementType> allTextTokens = new HashSet<IElementType>();
+
+		allTextTokens.addAll(namedOperators.values());
+		allTextTokens.addAll(blockNames.values());
+		allTextTokens.addAll(tagNames.values());
+
+		LABEL_TOKENSET = TokenSet.andNot(
+				TokenSet.orSet(
+						TokenSet.create(allTextTokens.toArray(new IElementType[allTextTokens.size()])),
+						RESERVED_TOKENSET,
+						CUSTOM_TOKENSET,
+						PerlParserUtil.CONVERTABLE_TOKENS
+				),
+				TokenSet.orSet(
+						QUOTE_LIKE_OPENER_TOKENSET,
+						TokenSet.create(RESERVED_SUB)
+				)
+		);
 	}
 
 	/**
@@ -1037,6 +1077,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 	/**
 	 * Captures HereDoc document and returns appropriate token type
+	 *
 	 * @param afterEmptyCloser - this here-doc being captured after empty closer, e.g. sequentional <<"", <<""
 	 * @return Heredoc token type
 	 */

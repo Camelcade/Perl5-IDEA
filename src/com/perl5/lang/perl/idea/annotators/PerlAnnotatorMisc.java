@@ -91,6 +91,19 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 					PerlSyntaxHighlighter.PERL_ANNOTATION,
 					false,
 					false);
+		else if (element instanceof PsiPerlLabelDeclaration)
+		{
+			PsiElement label = element.getFirstChild();
+			if (label != null)
+			{
+				decorateElement(
+						holder.createInfoAnnotation(label, null),
+						PerlSyntaxHighlighter.PERL_LABEL,
+						false,
+						false
+				);
+			}
+		}
 		else if (element instanceof PerlStringContentElementImpl)
 			annotateStringContent((PerlStringContentElementImpl) element, holder);
 //		else if( element instanceof PsiPerlTermExpr)

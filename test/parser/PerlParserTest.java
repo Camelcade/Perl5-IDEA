@@ -123,4 +123,9 @@ public class PerlParserTest extends PerlParserTestBase
 	{
 		doTest("heredoc_sequential");
 	}
+
+	public void testlabels_parsing()
+	{
+		doTest("labels_parsing");
+	}
 }

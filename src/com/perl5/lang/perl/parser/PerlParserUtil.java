@@ -202,7 +202,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			HEREDOC_QX
 	);
 	// tokens that can be converted between each other depending on context
-	private static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
+	public static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
 			IDENTIFIER,
 			VARIABLE_NAME,
 			SUB,
@@ -757,7 +757,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseLabelDeclaration(PsiBuilder b, int l)
 	{
-		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == COLON)
+		if (PerlLexer.LABEL_TOKENSET.contains(b.getTokenType()) && b.lookAhead(1) == COLON)
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();

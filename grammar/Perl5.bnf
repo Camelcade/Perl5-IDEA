@@ -417,8 +417,12 @@ private file_items ::= file_item*
 
 private file_item ::= !<<eof>>
 {
-	namespace_definition |
-    [label_declaration] (
+	namespace_definition
+	| label_declaration [statement_item]
+    | statement_item
+}
+
+private statement_item ::=
         <<parseSemicolon>> +
         | nyi_statement
         | <<parseParserExtensionStatement>>
@@ -429,8 +433,6 @@ private file_item ::= !<<eof>>
         | annotation
 		| POD
 		| <<parseBadCharacters>> // Fallback for bad characters
-     )
-}
 
 namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>)
 private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_namespace_definition}
