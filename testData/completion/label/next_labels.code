@@ -1,0 +1,29 @@
+LABEL1:
+# comment
+{
+    LABEL6:
+    {
+        say 'something;'
+    }
+
+    LABEL2:
+=pod
+	doc here
+=cut
+    while(1)
+    {
+        LABEL5:
+        unless (1)
+        {
+            LABEL3:
+            foreach(@_)
+            {
+                LABEL4:
+                if (1)
+                {
+                    next L<caret>;
+                }
+            }
+        }
+    }
+}

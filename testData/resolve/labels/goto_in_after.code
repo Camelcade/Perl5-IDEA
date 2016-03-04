@@ -1,0 +1,5 @@
+goto LAB<caret>EL;
+
+{
+	LABEL: print 42;
+}

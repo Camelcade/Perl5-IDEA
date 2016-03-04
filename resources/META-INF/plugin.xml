@@ -34,7 +34,7 @@
     <change-notes><![CDATA[
       <p>This relase fixes more bugs or feedbacks from 1.3 release:
       <ul>
-        <li>Implemented labels resolution, navigation and refactoring in next/last/redo statements, relates to #138</li>
+        <li>Implemented labels resolution, navigation, refactoring and completion, fixes #138 (<b>NB: deprecated usages not handled and won't ever be</b>)</li>
         <li>Improved completion of package names: added version strings and package suggestion for definition, fixes #432</li>
         <li>Improved labels parsing, so now you may use any word for it, except <code>sub</code></li>
         <li>Implemented auto-completion for here-doc openers, fixes #874</li>

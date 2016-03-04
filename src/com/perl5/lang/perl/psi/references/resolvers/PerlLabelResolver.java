@@ -19,11 +19,10 @@ package com.perl5.lang.perl.psi.references.resolvers;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlLabel;
 import com.perl5.lang.perl.psi.PerlLabelDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlGotoExpr;
-import com.perl5.lang.perl.psi.properties.PerlLabelScope;
-import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.references.PerlLabelReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlLabelResolver implements ResolveCache.AbstractResolver<PerlLabelReference, PerlLabelDeclaration>
 {
+	@Nullable
 	@Override
 	public PerlLabelDeclaration resolve(@NotNull PerlLabelReference perlLabelReference, boolean incompleteCode)
 	{
@@ -43,36 +43,43 @@ public class PerlLabelResolver implements ResolveCache.AbstractResolver<PerlLabe
 		if (label == null || parent instanceof PerlLabelDeclaration)
 			return null;
 
+		LabelSeeker processor = new LabelSeeker(label.getText());
 
 		if (parent instanceof PsiPerlGotoExpr) // goto
 		{
-			return null;
+			PerlPsiUtil.processGotoLabelDeclarations(label.getParent(), processor);
 		}
 		else // suppose it's last, next or redo
 		{
-			return resolveNextLastRedoLabel(label.getText(), label.getParent());
+			PerlPsiUtil.processNextRedoLastLabelDeclarations(label.getParent(), processor);
 		}
+		return processor.getResult();
 	}
 
-	@Nullable
-	protected PerlLabelDeclaration resolveNextLastRedoLabel(String name, PsiElement element)
+	protected static class LabelSeeker implements Processor<PerlLabelDeclaration>
 	{
-		if (name == null || element == null || element instanceof PerlLabelScope)
+		protected final String myName;
+		protected PerlLabelDeclaration myResult = null;
+
+		public LabelSeeker(@NotNull String myName)
 		{
-			return null;
+			this.myName = myName;
 		}
 
-		if( element instanceof PerlLoop )
+		@Override
+		public boolean process(PerlLabelDeclaration perlLabelDeclaration)
 		{
-			PsiElement prevElement = PerlPsiUtil.getPrevSignificantSibling(element);
-			if (prevElement instanceof PerlLabelDeclaration && StringUtil.equals(name, ((PerlLabelDeclaration) prevElement).getName()))
+			if (StringUtil.equals(perlLabelDeclaration.getName(), myName))
 			{
-				return (PerlLabelDeclaration) prevElement;
+				myResult = perlLabelDeclaration;
+				return false;
 			}
+			return true;
 		}
-		return resolveNextLastRedoLabel(name, element.getParent());
+
+		public PerlLabelDeclaration getResult()
+		{
+			return myResult;
+		}
 	}
-/*
-eval {} , sub {} , or do {} , and should not be used to exit a grep() or map() operation.
-* */
 }

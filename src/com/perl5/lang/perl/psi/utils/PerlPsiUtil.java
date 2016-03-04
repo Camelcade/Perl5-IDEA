@@ -29,6 +29,8 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.properties.PerlLabelScope;
+import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -345,6 +347,63 @@ public class PerlPsiUtil
 		return element != null && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(element.getNode().getElementType());
 	}
 
+	/**
+	 * Traversing tree according to next/last/redo labels resolution and processes all labels declarations
+	 *
+	 * @param element   element to start from
+	 * @param processor processor to process elements
+	 */
+	public static void processNextRedoLastLabelDeclarations(PsiElement element, Processor<PerlLabelDeclaration> processor)
+	{
+		if (element == null || element instanceof PerlLabelScope)
+		{
+			return;
+		}
+
+		if (element instanceof PerlLoop)
+		{
+			PsiElement prevElement = getPrevSignificantSibling(element);
+			if (prevElement instanceof PerlLabelDeclaration)
+			{
+				if (!processor.process((PerlLabelDeclaration) prevElement))
+					return;
+			}
+		}
+		processNextRedoLastLabelDeclarations(element.getParent(), processor);
+	}
+
+	/**
+	 * Traversing tree according to goto labels resolution and processes all labels declarations
+	 *
+	 * @param element   element to start from
+	 * @param processor processor to process elements
+	 */
+	public static void processGotoLabelDeclarations(PsiElement element, Processor<PerlLabelDeclaration> processor)
+	{
+		if (element == null)
+		{
+			return;
+		}
+
+		PsiElement run = element.getFirstChild();
+		while (run != null)
+		{
+			if (run instanceof PerlLabelDeclaration)
+			{
+				if (!processor.process((PerlLabelDeclaration) run))
+					return;
+			}
+			run = run.getNextSibling();
+		}
+
+		// next iteration
+		if (!(element instanceof PsiFile))
+		{
+			processGotoLabelDeclarations(element.getParent(), processor);
+		}
+
+	}
+
 	static public abstract class HeredocProcessor implements Processor<PsiElement>
 	{
 		protected final int lineEndOffset;
@@ -356,7 +415,7 @@ public class PerlPsiUtil
 
 	}
 
-	static private class HeredocChecker extends HeredocProcessor
+	private static class HeredocChecker extends HeredocProcessor
 	{
 		protected boolean myResult = false;
 
@@ -386,4 +445,5 @@ public class PerlPsiUtil
 			return myResult;
 		}
 	}
+
 }

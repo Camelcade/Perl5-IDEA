@@ -157,6 +157,40 @@ public class PerlLabelResolveTest extends PerlLightCodeInsightFixtureTestCase
 		doTest("next_labeled_unless", false);
 	}
 
+	public void testGotoAfter()
+	{
+		doTest("goto_after", true);
+	}
+
+	public void testGotoBefore()
+	{
+		doTest("goto_before", true);
+	}
+
+	public void testGotoFromDeclaration()
+	{
+		doTest("goto_from_declaration", false);
+	}
+
+	public void testGotoInAfter()
+	{
+		doTest("goto_in_after", false);
+	}
+
+	public void testGotoInBefore()
+	{
+		doTest("goto_in_before", false);
+	}
+
+	public void testGotoOutAfter()
+	{
+		doTest("goto_out_after", true);
+	}
+
+	public void testGotoOutBefore()
+	{
+		doTest("goto_out_before", true);
+	}
 
 	public void doTest(String filename, boolean success)
 	{

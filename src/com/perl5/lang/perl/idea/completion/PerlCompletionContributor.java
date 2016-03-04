@@ -43,6 +43,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
 		extend(
 				CompletionType.BASIC,
+				LABEL_PATTERN,
+				new PerlLabelCompletionProvider()
+		);
+
+		extend(
+				CompletionType.BASIC,
 				NAMESPACE_NAME_PATTERN,
 				new PerlPackageCompletionProvider()
 		);

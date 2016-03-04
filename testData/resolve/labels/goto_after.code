@@ -1,0 +1,3 @@
+goto LA<caret>BEL;
+
+LABEL: print 42;
