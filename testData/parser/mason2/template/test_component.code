@@ -1,0 +1,251 @@
+
+% sub { reverse($_[0]) }, sub { reverse($_[0]) } {{
+     Hello
+% }}
+
+% say 'hi';
+% $self->args;
+
+% $.Trim {{ # start trim
+     This string will be trimmed
+% }}  # end Trim
+
+
+% $.Repeat(3) {{
+
+% }}
+
+% $.Repeat(3) {{
+%   $.Repeat(3) {{
+    This is repeatable text
+% }}
+% }}
+
+<%perl>
+
+</%perl>
+
+
+% $.Repeat(3) {{
+ There's no place like home.
+% }}
+
+% my $repeat_three = $.Repeat(3);
+% $repeat_three {{
+     There's no place like home.
+% }}
+
+% sub { s/ //g; $_[0] } {{
+     A bunch of words
+% }}
+
+% $.Trim {{
+%   sub { uc($_[0]) } {{
+     This string will be trimmed and uppercased
+%   }}
+% }}
+
+
+% $.Trim, sub { uc($_[0]) } {{
+ This will be trimmed and uppercased
+% }}
+
+% my $i = 1;
+% $.Row1(3), $.Cache($key, '1 hour') {{
+     <% $i++ %>
+% }}
+
+% my $i = 1;
+% $.Cache($key, '1 hour'), $.Repeat(3) {{
+     <% $i++ %>
+% }}
+
+<%class>    say "Component is loaded!"; </%class>
+<%init>
+say "Method inited!";
+</%init>
+
+
+<%doc>
+    This is Mason example file
+    Some thing
+    For Camelcade testing
+</%doc>
+
+<%text>
+    Mason is coming...
+    Coming
+    coming
+</%text>
+
+<%perl>
+say "Perl code executed!";
+  say $m;
+
+</%perl>
+
+<%before navbar1>
+  <div class="navbar_special">
+    <% 'Navigation:' %>
+  <%perl>
+    say $self;
+      say $orig;
+    </%perl>
+  </div>
+</%before>
+
+<%after render>
+   <% # Add analytics line after everything has rendered %>
+  <%perl>
+    say $self;
+      say $orig;
+    </%perl>
+</%after>
+
+<%augment wrap>
+  <html>
+    <body>
+  <%perl>
+    say $self;
+      say $orig;
+    </%perl>
+      <% say "hi there!" %>
+    </body>
+  </html>
+</%augment>
+
+<%around navbar1>
+  <div class="navbar_special">
+    <% 'Very special' %>
+  <%perl>
+    say $self;
+      say $orig;
+    </%perl>
+  </div>
+</%around>
+
+
+<%perl>
+
+#sub navbar{};
+  sub render {};
+  sub wrap {};
+  use v5.10;
+
+  greet1();
+  MC0::Foo::Bar::test_mc1_mc::greet1();
+  MC0::Foo::Bar::test_mc1_mc::navbar1();
+
+</%perl>
+<%class>
+#sub navbar{};
+  sub render {};
+  sub wrap {};
+  use v5.10;
+
+  greet1();
+  MC0::Foo::Bar::test_mc1_mc::greet1();
+  MC0::Foo::Bar::test_mc1_mc::navbar1();
+</%class>
+
+
+<%init>
+#sub navbar{};
+  sub render {};
+  sub wrap {};
+  use v5.10;
+
+  greet1();
+  MC0::Foo::Bar::test_mc1_mc::greet1();
+  MC0::Foo::Bar::test_mc1_mc::navbar1();
+</%init>
+
+<%method greet1 ($name, $color)>
+<div style="color: <% $color %>">
+  Hello, <% $name %>!
+<%perl>
+  say $self;
+    say $orig;
+  </%perl>
+
+<%perl>
+  say $name;
+    say "Perl code executed!";
+  </%perl>
+</div>
+</%method>
+
+<%filter Row1 ($class)>
+<tr class="<% $class %>">
+% foreach my $item (split(/\s/, $yield->())) {
+   <td><% $item %></td>
+% }
+</tr>
+</%filter>
+
+<%flags>
+  #    extends => '/foo/bar'
+  </%flags>
+
+<%override navbar1>
+  <% super() %>
+
+  <%perl>
+    say $self;
+      say $orig;
+    </%perl>
+
+  <a href="extra">extra</a>
+</%override>
+
+
+<%  # comment... %>
+
+<div>
+% # comment
+</div>
+
+<%doc>
+</%doc>
+
+
+<& /shared/google_analytics_line.mi &>
+
+<& /Foo/Base.mc, name => "value"  &>
+
+
+<%text></%text>
+
+% say 'proper code';
+
+% say 'not a code';
+
+
+<html>
+% if ($a == $b) {
+<div>
+    Say hi to <% uc("mason")  %>
+    Say hi to <% uc("mason") | Row1 %>
+</div>
+% }
+
+
+ # relative component paths
+<& topimage.mi &>
+<& tools/searchbox.mi &>
+
+# absolute component path
+<& /shared/masthead.mi, color => 'salmon' &>
+
+# this component path MUST have quotes because it contains a comma
+<& "sugar,eggs.mi", mix => 1 &>
+
+# variable component path
+<& $comp &>
+
+# variable component and attributes
+<& $comp, %args &>
+
+# you can use arbitrary expression for component path, but it cannot
+# begin with a letter or number; delimit with () to remedy this
+<& (int(rand(2)) ? 'thiscomp.mi' : 'thatcomp.mi'), id => 123 &>

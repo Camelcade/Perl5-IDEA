@@ -1,0 +1,25 @@
+say 'Hi';
+
+sub blalba {
+
+}
+say 42;
+
+$self->{'abc'}[0];
+
+say 'hi';
+
+print 'hi there';
+
+=head3 test
+this
+    is
+        test
+
+
+=cut
+sub hi
+{
+    my ($self) = @_;
+
+}
