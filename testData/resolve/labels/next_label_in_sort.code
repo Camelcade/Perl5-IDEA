@@ -1,0 +1,5 @@
+LABEL8: # labeled block
+{
+    sort {LABEL8: redo LA<caret>BEL8} @ARGV;
+}
+

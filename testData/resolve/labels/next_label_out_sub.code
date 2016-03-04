@@ -1,0 +1,5 @@
+LABEL8: # labeled block
+{
+    sub somesub {redo LAB<caret>EL8}
+}
+

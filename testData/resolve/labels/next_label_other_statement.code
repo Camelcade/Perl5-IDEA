@@ -1,0 +1,10 @@
+LABEL7:  # labeled compound
+if (1) {
+    next LABEL7;
+}
+
+if( 1 )
+{
+    redo LAB<caret>EL7;
+}
+

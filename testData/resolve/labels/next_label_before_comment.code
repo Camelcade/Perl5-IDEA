@@ -1,0 +1,5 @@
+LABEL7:  # labeled compound
+if (1) {
+    last LAB<caret>EL7;
+}
+

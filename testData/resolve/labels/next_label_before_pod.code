@@ -1,0 +1,7 @@
+LABEL123:
+=pod
+    doc
+=cut
+while( 1 ){
+    redo LABEL<caret>123;
+}

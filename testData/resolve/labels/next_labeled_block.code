@@ -1,0 +1,4 @@
+LABEL8:
+{
+    next LABE<caret>L8;
+}

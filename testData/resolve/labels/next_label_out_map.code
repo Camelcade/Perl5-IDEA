@@ -1,0 +1,4 @@
+LABEL8: # labeled block
+{
+    map {redo LAB<caret>EL8} @ARGV;
+}

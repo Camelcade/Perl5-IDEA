@@ -1,0 +1,4 @@
+LABEL8: # labeled block
+{
+    grep {LABEL8: redo LA<caret>BEL8} @ARGV;
+}

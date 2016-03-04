@@ -1,0 +1,4 @@
+LABEL8: # labeled block
+{
+    eval {redo LAB<caret>EL8};
+}
