@@ -30,6 +30,7 @@ public class MojoliciousBraceMatcher implements PairedBraceMatcher, MojoliciousE
 {
 	private static final BracePair[] PAIRS = new BracePair[]{
 			new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER, false),
+			new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_NOSPACE_CLOSER, false),
 			new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER_SEMI, false),
 
 			new BracePair(MOJO_BLOCK_EXPR_OPENER, MOJO_BLOCK_EXPR_CLOSER, false),

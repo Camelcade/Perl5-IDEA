@@ -1,0 +1,61 @@
+% use Time::Piece;
+<!DOCTYPE html>
+<html>
+  <head><title>Simple</title></head>
+  % my $now = localtime;
+  <body>Time: <%= $now->hms %></body>
+</html>
+
+<html>
+  <head><title><%= $title %></title></head>
+  <body>
+    test 123
+    foo <% my $i = $num + 2; %>
+    % for (1 .. 23) {
+    * some text <%= $i++ %>
+    % }
+  </body>
+</html>
+
+% use Mojo::ByteStream 'b';
+<%= b('<div>excluded!</div>') %>
+
+<% for (1 .. 3) { %>
+  <%= 'Trim all whitespace characters around this expression' =%>
+<% } %>
+
+This is <%= 1 + 1 %> a\
+single line
+
+This will <%= 1 + 1 %> result\\
+in multiple\\
+lines
+
+<% my $block = begin %>
+  <% my $name = shift; =%>
+  Hello <%= $name %>.
+<% end %>
+<%= $block->('Baerbel') %>
+<%= $block->('Wolfgang') %>
+
+% my $block = begin
+  % my $name = shift;
+  Hello <%= $name %>.
+% end
+%= $block->('Baerbel')
+%= $block->('Wolfgang')
+
+% my ($foo, $bar) = @_;
+% my $x = shift;
+test 123 <%= $foo %>
+
+<% my $block = begin %>
+  Some data!
+<% end %>
+
+<%== $foo %>
+
+<%= $foo %>
+
+<%% my $foo = 23; %>
+

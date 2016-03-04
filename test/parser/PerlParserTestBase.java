@@ -36,7 +36,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 
 	public PerlParserTestBase()
 	{
-		super("", "code", new PerlParserDefinition());
+		this("", "code", new PerlParserDefinition());
 	}
 
 	public PerlParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions)

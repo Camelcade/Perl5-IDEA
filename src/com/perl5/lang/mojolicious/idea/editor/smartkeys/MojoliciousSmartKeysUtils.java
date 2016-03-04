@@ -35,6 +35,7 @@ public class MojoliciousSmartKeysUtils implements MojoliciousElementTypes, PerlE
 {
 	private static final TokenSet CLOSE_TOKENS = TokenSet.create(
 			MOJO_BLOCK_CLOSER,
+			MOJO_BLOCK_NOSPACE_CLOSER,
 			MOJO_BLOCK_EXPR_CLOSER,
 			MOJO_BLOCK_EXPR_NOSPACE_CLOSER
 	);

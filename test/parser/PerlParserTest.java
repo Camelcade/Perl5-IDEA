@@ -21,12 +21,10 @@ package parser;
  */
 public class PerlParserTest extends PerlParserTestBase
 {
-	public static final String DATA_PATH = "testData/parser/perlParsingSamples";
-
 	@Override
 	protected String getTestDataPath()
 	{
-		return DATA_PATH;
+		return "testData/parser/perl";
 	}
 
 	public void testInterpolation()

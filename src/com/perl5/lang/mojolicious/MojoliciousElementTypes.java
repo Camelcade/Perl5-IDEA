@@ -29,6 +29,7 @@ public interface MojoliciousElementTypes extends MojoliciousSyntaxElements
 	IElementType MOJO_BLOCK_EXPR_ESCAPED_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER);
 
 	IElementType MOJO_BLOCK_CLOSER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_CLOSER);
+	IElementType MOJO_BLOCK_NOSPACE_CLOSER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_NOSPACE_CLOSER);
 	IElementType MOJO_BLOCK_CLOSER_SEMI = new MojoliciousTokenType(";" + KEYWORD_MOJO_BLOCK_CLOSER);
 	IElementType MOJO_BLOCK_EXPR_NOSPACE_CLOSER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_NOSPACE_CLOSER);
 	IElementType MOJO_BLOCK_EXPR_CLOSER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_CLOSER);

@@ -42,6 +42,7 @@ public class MojoliciousParserDefinition extends PerlParserDefinition implements
 
 					MOJO_BLOCK_OPENER,
 					MOJO_BLOCK_CLOSER,
+					MOJO_BLOCK_NOSPACE_CLOSER,
 
 					MOJO_LINE_OPENER,
 					MOJO_LINE_EXPR_OPENER,

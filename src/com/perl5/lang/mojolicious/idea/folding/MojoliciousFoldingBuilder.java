@@ -33,6 +33,7 @@ public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements Moj
 			TokenSet.create(
 					MOJO_BLOCK_OPENER,
 					MOJO_BLOCK_CLOSER,
+					MOJO_BLOCK_NOSPACE_CLOSER,
 
 					MOJO_BLOCK_EXPR_OPENER,
 					MOJO_BLOCK_EXPR_CLOSER,

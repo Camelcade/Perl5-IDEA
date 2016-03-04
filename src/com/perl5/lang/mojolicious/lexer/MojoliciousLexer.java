@@ -105,7 +105,15 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 		}
 		else if (currentMojoState == LEX_PERL_BLOCK)
 		{
-			if (tokenStart + 1 < bufferEnd && currentChar == '%' && buffer.charAt(tokenStart + 1) == '>')    // %>
+			if (currentChar == '=' && tokenStart + 2 < bufferEnd && buffer.charAt(tokenStart + 1) == '%' && buffer.charAt(tokenStart + 2) == '>')    // =%>
+			{
+				setTokenStart(tokenStart);
+				setTokenEnd(tokenStart + KEYWORD_MOJO_BLOCK_EXPR_NOSPACE_CLOSER.length());
+				setCustomState(LEX_HTML_BLOCK);
+				return MOJO_BLOCK_NOSPACE_CLOSER;
+
+			}
+			else if (tokenStart + 1 < bufferEnd && currentChar == '%' && buffer.charAt(tokenStart + 1) == '>')    // %>
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + KEYWORD_MOJO_BLOCK_CLOSER.length());
