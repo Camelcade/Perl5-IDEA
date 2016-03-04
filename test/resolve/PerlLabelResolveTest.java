@@ -37,127 +37,90 @@ public class PerlLabelResolveTest extends PerlLightCodeInsightFixtureTestCase
 		doTest("next_label_out_anon_sub", false);
 	}
 
-	;
-
 	public void testNextOutDo()
 	{
 		doTest("next_label_out_do", false);
 	}
-
-	;
 
 	public void testNextOutEval()
 	{
 		doTest("next_label_out_eval", false);
 	}
 
-	;
-
 	public void testNextOutGrep()
 	{
 		doTest("next_label_out_grep", false);
 	}
-
-	;
 
 	public void testNextOutMap()
 	{
 		doTest("next_label_out_map", false);
 	}
 
-	;
-
 	public void testNextOutSort()
 	{
 		doTest("next_label_out_sort", false);
 	}
-
-	;
 
 	public void testNextOutSub()
 	{
 		doTest("next_label_out_sub", false);
 	}
 
-	;
-
 	public void testNextInAnonSub()
 	{
 		doTest("next_label_in_anon_sub", true);
 	}
-
-	;
 
 	public void testNextInGrep()
 	{
 		doTest("next_label_in_grep", true);
 	}
 
-	;
-
 	public void testNextInMap()
 	{
 		doTest("next_label_in_map", true);
 	}
-
-	;
 
 	public void testNextInSort()
 	{
 		doTest("next_label_in_sort", true);
 	}
 
-	;
-
 	public void testNextInSub()
 	{
 		doTest("next_label_in_sub", true);
 	}
-
-	;
-
 
 	public void testNextLabeledBlock()
 	{
 		doTest("next_labeled_block", true);
 	}
 
-	;
-
 	public void testRedoLabeledBlock()
 	{
 		doTest("redo_labeled_block", true);
 	}
-
-	;
 
 	public void testLastLabeledBlock()
 	{
 		doTest("last_labeled_block", true);
 	}
 
-	;
-
 	public void testNextLabelBeforePod()
 	{
 		doTest("next_label_before_pod", true);
 	}
-
-	;
 
 	public void testNextLabelBeforeComment()
 	{
 		doTest("next_label_before_comment", true);
 	}
 
-	;
-
 	public void testNextLabelOtherStatement()
 	{
 		doTest("next_label_other_statement", false);
 	}
-
-	;
 
 	public void doTest(String filename, boolean success)
 	{
