@@ -23,6 +23,7 @@ import com.perl5.lang.perl.psi.PerlLabel;
 import com.perl5.lang.perl.psi.PerlLabelDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlGotoExpr;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
+import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.references.PerlLabelReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -60,15 +61,16 @@ public class PerlLabelResolver implements ResolveCache.AbstractResolver<PerlLabe
 		{
 			return null;
 		}
-		PsiElement prevElement = PerlPsiUtil.getPrevSignificantSibling(element);
-		if (prevElement instanceof PerlLabelDeclaration && StringUtil.equals(name, ((PerlLabelDeclaration) prevElement).getName()))
+
+		if( element instanceof PerlLoop )
 		{
-			return (PerlLabelDeclaration) prevElement;
+			PsiElement prevElement = PerlPsiUtil.getPrevSignificantSibling(element);
+			if (prevElement instanceof PerlLabelDeclaration && StringUtil.equals(name, ((PerlLabelDeclaration) prevElement).getName()))
+			{
+				return (PerlLabelDeclaration) prevElement;
+			}
 		}
-		else
-		{
-			return resolveNextLastRedoLabel(name, element.getParent());
-		}
+		return resolveNextLastRedoLabel(name, element.getParent());
 	}
 /*
 eval {} , sub {} , or do {} , and should not be used to exit a grep() or map() operation.

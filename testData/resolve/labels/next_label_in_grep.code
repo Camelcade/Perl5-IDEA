@@ -1,4 +1,4 @@
 LABEL8: # labeled block
 {
-    grep {LABEL8: redo LA<caret>BEL8} @ARGV;
+    grep {LABEL8: while(1){redo LA<caret>BEL8}} @ARGV;
 }

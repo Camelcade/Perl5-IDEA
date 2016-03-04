@@ -1,5 +1,5 @@
 LABEL8: # labeled block
 {
-    sort {LABEL8: redo LA<caret>BEL8} @ARGV;
+    sort {LABEL8: while(1){redo LA<caret>BEL8}} @ARGV;
 }
 

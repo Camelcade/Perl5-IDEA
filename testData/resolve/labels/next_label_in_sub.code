@@ -1,4 +1,4 @@
 LABEL8: # labeled block
 {
-    sub somesub {LABEL8: redo LA<caret>BEL8}
+    sub somesub {LABEL8: while(1){redo LA<caret>BEL8}}
 }

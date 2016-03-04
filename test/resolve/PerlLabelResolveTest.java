@@ -122,6 +122,42 @@ public class PerlLabelResolveTest extends PerlLightCodeInsightFixtureTestCase
 		doTest("next_label_other_statement", false);
 	}
 
+	public void testNextToFor()
+	{
+		doTest("next_labeled_for", true);
+	}
+
+	public void testNextToForeach()
+	{
+		doTest("next_labeled_foreach", true);
+	}
+
+	public void testNextToWhile()
+	{
+		doTest("next_labeled_while", true);
+	}
+
+	public void testNextToUntil()
+	{
+		doTest("next_labeled_until", true);
+	}
+
+	public void testNextToGiven()
+	{
+		doTest("next_labeled_given", false);
+	}
+
+	public void testNextToIf()
+	{
+		doTest("next_labeled_if", false);
+	}
+
+	public void testNextToUnless()
+	{
+		doTest("next_labeled_unless", false);
+	}
+
+
 	public void doTest(String filename, boolean success)
 	{
 		initWithFileAsScript(filename);

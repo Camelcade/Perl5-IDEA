@@ -349,7 +349,13 @@ limitations under the License.
 	implements("label_declaration")="com.perl5.lang.perl.psi.PerlLabelDeclaration"
 	extends("label_declaration")="com.perl5.lang.perl.psi.mixins.PerlLabelDeclarationImplMixin"
 
-    implements("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
+	implements("block")="com.perl5.lang.perl.psi.PerlBlock"
+	implements("for_compound")="com.perl5.lang.perl.psi.PerlForCompound"
+	implements("foreach_compound")="com.perl5.lang.perl.psi.PerlForeachCompound"
+	implements("while_compound")="com.perl5.lang.perl.psi.PerlWhileCompound"
+	implements("until_compound")="com.perl5.lang.perl.psi.PerlUntilCompound"
+
+    implements("conditional_block_while|.*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
     mixin("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
