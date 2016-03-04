@@ -25,6 +25,7 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -337,6 +338,11 @@ public class PerlPsiUtil
 			run = run.getNextSibling();
 		}
 		return result;
+	}
+
+	public static boolean isCommentOrSpace(PsiElement element)
+	{
+		return element != null && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(element.getNode().getElementType());
 	}
 
 	static public abstract class HeredocProcessor implements Processor<PsiElement>

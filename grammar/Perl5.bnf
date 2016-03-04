@@ -344,8 +344,10 @@ limitations under the License.
 
 	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
-    implements("namespace_content|conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
-    mixin("namespace_content|conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
+	extends("namespace_content")=block
+
+    implements("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
+    mixin("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.mixins.PerlHeredocOpenerMixin"

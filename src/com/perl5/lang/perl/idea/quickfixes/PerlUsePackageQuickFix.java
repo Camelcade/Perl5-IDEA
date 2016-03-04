@@ -19,14 +19,18 @@ package com.perl5.lang.perl.idea.quickfixes;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
@@ -60,68 +64,109 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 	@Override
 	public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor)
 	{
-		PerlUseStatement newStatement = PerlElementFactory.createUseStatement(project, myPackageName);
-		PsiElement statementContainer = descriptor.getPsiElement();
+		PsiElement newStatement = PerlElementFactory.createUseStatement(project, myPackageName);
 
-		PsiElement baseStatement = PsiTreeUtil.findChildOfType(statementContainer, PerlUseStatement.class);
-		if (baseStatement != null)
+		PsiElement newStatementContainer = descriptor.getPsiElement();
+		PsiElement afterAnchor = null;
+		PsiElement beforeAnchor = null;
+
+		PsiElement baseUseStatement = PsiTreeUtil.findChildOfType(newStatementContainer, PerlUseStatement.class);
+		if (baseUseStatement != null)
 		{
-			statementContainer = baseStatement.getParent();
-
-			if (((PerlUseStatement) baseStatement).isPragmaOrVersion()) // pragma or version
+			if (((PerlUseStatement) baseUseStatement).isPragmaOrVersion()) // pragma or version
+			{
 				while (true)
 				{
 					// trying to find next use statement
-					PsiElement nextStatement = baseStatement;
+					PsiElement nextStatement = baseUseStatement;
 
 					while ((nextStatement = nextStatement.getNextSibling()) != null
-							&& (nextStatement instanceof PsiWhiteSpace || nextStatement instanceof PsiComment)
-							)
-					{
-					}
+							&& PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(nextStatement.getNode().getElementType())
+							) ;
 
 					if (nextStatement instanceof PerlUseStatement && ((PerlUseStatement) nextStatement).isPragmaOrVersion())    // found more use pragma/version
-						baseStatement = nextStatement;
+					{
+						baseUseStatement = nextStatement;
+					}
 					else
+					{
+						afterAnchor = baseUseStatement;
 						break;    // we've got last pragma statement
+					}
 				}
+			}
 			else    // not a pragma
-				baseStatement = baseStatement.getPrevSibling();
+			{
+				beforeAnchor = baseUseStatement;
+			}
 		}
 		else    // no uses found
 		{
-			baseStatement = PsiTreeUtil.findChildOfType(statementContainer, PerlNamespaceDefinition.class);
-			if (baseStatement != null)    // got a namespace definition
+			PsiElement baseNamespace = PsiTreeUtil.findChildOfType(newStatementContainer, PerlNamespaceDefinition.class);
+			if (baseNamespace != null && ((PerlNamespaceDefinition) baseNamespace).getBlock() != null)    // got a namespace definition
 			{
-				statementContainer = ((PerlNamespaceDefinition) baseStatement).getBlock();
-				baseStatement = null;
+				newStatementContainer = ((PerlNamespaceDefinition) baseNamespace).getBlock();
+				if (newStatementContainer != null && !(newStatementContainer instanceof PsiPerlNamespaceContent))
+				{
+					afterAnchor = newStatementContainer.getFirstChild();
+				}
+				else if (newStatementContainer != null && newStatementContainer.getFirstChild() != null)
+				{
+					beforeAnchor = newStatementContainer.getFirstChild();
+				}
 			}
 			else
 			{
-				baseStatement = statementContainer.getFirstChild();
-				if (baseStatement != null)
-					while (baseStatement.getNextSibling() != null && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(baseStatement.getNextSibling().getNode().getElementType()))
-						baseStatement = baseStatement.getNextSibling();
+				PsiElement anchor = newStatementContainer.getFirstChild();
+				if (anchor instanceof PsiComment)
+				{
+					while (anchor.getNextSibling() != null && PerlPsiUtil.isCommentOrSpace(anchor.getNextSibling()))
+					{
+						anchor = anchor.getNextSibling();
+					}
+					afterAnchor = anchor;
+				}
+				else if (anchor != null)
+				{
+					beforeAnchor = anchor;
+				}
 			}
 		}
 
-		PsiElement newLineElement = PerlElementFactory.createNewLine(project);
+		if (afterAnchor != null)
+		{
+			newStatementContainer = afterAnchor.getParent();
+			newStatement = newStatementContainer.addAfter(newStatement, afterAnchor);
+		}
+		else if (beforeAnchor != null)
+		{
+			newStatementContainer = beforeAnchor.getParent();
+			newStatement = newStatementContainer.addBefore(newStatement, beforeAnchor);
+		}
+		else if (newStatementContainer != null)
+		{
+			newStatement = newStatementContainer.add(newStatement);
+		}
 
-		PsiElement insertedStatement;
-		if (baseStatement != null) // add after element
-			insertedStatement = statementContainer.addAfter(newStatement, baseStatement);
-		else if (statementContainer.getFirstChild() != null)   // add as first element of the file
-			insertedStatement = statementContainer.addBefore(newStatement, statementContainer.getFirstChild());
-		else
-			insertedStatement = statementContainer.add(newStatement);
+		if (newStatement != null)
+		{
+			PsiElement newLineElement = PerlElementFactory.createNewLine(project);
+			PsiElement nextSibling = newStatement.getNextSibling();
+			PsiElement preveSibling = newStatement.getPrevSibling();
+			newStatementContainer = newStatement.getParent();
 
-		PsiElement prevElement = insertedStatement.getPrevSibling();
-		PsiElement nextElement = insertedStatement.getNextSibling();
-
-		if (prevElement != null && !"\n".equals(prevElement.getText()))
-			statementContainer.addBefore(newLineElement, insertedStatement);
-		if (nextElement != null && !"\n".equals(nextElement.getText()))
-			statementContainer.addAfter(newLineElement, insertedStatement);
+			if (nextSibling == null || !(nextSibling instanceof PsiWhiteSpace) || !StringUtil.equals(nextSibling.getText(), "\n"))
+			{
+				newStatementContainer.addAfter(newLineElement, newStatement);
+			}
+			if ((preveSibling == null && !(newStatementContainer instanceof PsiFile)) ||
+					!(preveSibling instanceof PsiWhiteSpace) ||
+					!StringUtil.equals(preveSibling.getText(), "\n")
+					)
+			{
+				newStatementContainer.addBefore(newLineElement, newStatement);
+			}
+		}
 
 	}
 }
