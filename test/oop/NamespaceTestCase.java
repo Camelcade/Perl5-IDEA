@@ -16,28 +16,18 @@
 
 package oop;
 
+import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 22.02.2016.
  */
-public abstract class NamespaceTestCase extends LightCodeInsightFixtureTestCase
+public abstract class NamespaceTestCase extends PerlLightCodeInsightFixtureTestCase
 {
-	@Override
-	protected void setUp() throws Exception
-	{
-		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
-		super.setUp();
-	}
-
 	protected PerlNamespaceDefinitionImplMixin getNamespaceInFile(@NotNull String fileName, @NotNull String namespaceName)
 	{
 		myFixture.configureByFile(fileName);
@@ -56,15 +46,4 @@ public abstract class NamespaceTestCase extends LightCodeInsightFixtureTestCase
 		namespaceDefinition.subtreeChanged();
 		return namespaceDefinition;
 	}
-
-
-	@NotNull
-	protected <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz)
-	{
-		int offset = myFixture.getEditor().getCaretModel().getOffset();
-		PsiElement focused = myFixture.getFile().findElementAt(offset);
-		return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
-	}
-
-
 }

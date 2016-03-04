@@ -16,27 +16,17 @@
 
 package editor;
 
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
+import base.PerlLightCodeInsightFixtureTestCase;
 
 /**
  * Created by hurricup on 23.02.2016.
  */
-public class PerlFoldingTestCase extends LightCodeInsightFixtureTestCase
+public class PerlFoldingTestCase extends PerlLightCodeInsightFixtureTestCase
 {
-	public static final String DATA_PATH = "testData/folding";
-
 	@Override
 	protected String getTestDataPath()
 	{
-		return DATA_PATH;
-	}
-
-	@Override
-	protected void setUp() throws Exception
-	{
-		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
-		super.setUp();
+		return "testData/folding";
 	}
 
 	public void testPerlFolding()

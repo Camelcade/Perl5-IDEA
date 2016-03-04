@@ -16,14 +16,10 @@
 
 package completion;
 
+import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.CharsetToolkit;
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -32,59 +28,50 @@ import java.util.List;
  * Created by hurricup on 03.02.2016.
  * http://www.jetbrains.org/intellij/sdk/docs/tutorials/writing_tests_for_plugins/completion_test.html
  */
-public class PerlCompletionTest extends LightCodeInsightFixtureTestCase
+public class PerlCompletionTest extends PerlLightCodeInsightFixtureTestCase
 {
-	public static final String DATA_PATH = "testData/completion";
-
 	@Override
 	protected String getTestDataPath()
 	{
-		return DATA_PATH;
-	}
-
-	@Override
-	protected void setUp() throws Exception
-	{
-		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
-		super.setUp();
+		return "testData/completion";
 	}
 
 	public void testRefTypes()
 	{
-		doTest("my $var = '<caret>'");
+		initWithTextAsScript("my $var = '<caret>'");
 		List<String> strings = myFixture.getLookupElementStrings();
 		assertTrue(strings.containsAll(Arrays.asList("ARRAY", "CODE", "FORMAT", "GLOB", "HASH", "IO", "LVALUE", "REF", "Regexp", "SCALAR", "VSTRING")));
 	}
 
 	public void testHashIndexBare()
 	{
-		doTest("$$a{testindex}; $b->{<caret>}");
+		initWithTextAsScript("$$a{testindex}; $b->{<caret>}");
 		List<String> strings = myFixture.getLookupElementStrings();
 		assertTrue(strings.containsAll(Arrays.asList("testindex")));
 	}
 
 	public void testPackageDefinition()
 	{
-		doTestFilePackage("package_definition");
+		initWithFileAsPackage("package_definition");
 		List<String> strings = myFixture.getLookupElementStrings();
 		assertTrue(strings.containsAll(Arrays.asList("package_definition")));
 	}
 
 	public void testPackageUse()
 	{
-		doTestFilePackage("package_use");
+		initWithFileAsPackage("package_use");
 		checkPackageCompletions();
 	}
 
 	public void testPackageNo()
 	{
-		doTestFilePackage("package_no");
+		initWithFileAsPackage("package_no");
 		checkPackageCompletions();
 	}
 
 	public void testPackageRequire()
 	{
-		doTestFilePackage("package_require");
+		initWithFileAsPackage("package_require");
 		checkPackageCompletions();
 	}
 
@@ -121,7 +108,7 @@ public class PerlCompletionTest extends LightCodeInsightFixtureTestCase
 
 	public void doTestHeredocOpenerFile(String filename)
 	{
-		doTestFileScript(filename);
+		initWithFileAsScript(filename);
 		List<String> strings = myFixture.getLookupElementStrings();
 		assertTrue(strings.contains("MYSUPERMARKER"));
 		assertTrue(strings.contains("HTML"));
@@ -133,32 +120,10 @@ public class PerlCompletionTest extends LightCodeInsightFixtureTestCase
 		myFixture.complete(CompletionType.BASIC, 1);
 	}
 
-	public void doTestFileScript(String filename)
+	@Override
+	public void initWithFileContent(String filename, String extension, String content) throws IOException
 	{
-		try
-		{
-			doTestFile(filename, "pl");
-		} catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-
-	public void doTestFilePackage(String filename)
-	{
-		try
-		{
-			doTestFile(filename, "pm");
-		} catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-
-	public void doTestFile(String filename, String extension) throws IOException
-	{
-		String content = FileUtil.loadFile(new File(getTestDataPath(), filename + ".code"), CharsetToolkit.UTF8, true).trim();
-		myFixture.configureByText(filename + "." + extension, content);
+		super.initWithFileContent(filename, extension, content);
 		myFixture.complete(CompletionType.BASIC, 1);
 	}
 

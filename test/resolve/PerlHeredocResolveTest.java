@@ -16,10 +16,9 @@
 
 package resolve;
 
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
+import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
@@ -31,21 +30,12 @@ import java.util.List;
 /**
  * Created by hurricup on 02.03.2016.
  */
-public class PerlHeredocResolveTest extends LightCodeInsightFixtureTestCase implements PerlElementTypes
+public class PerlHeredocResolveTest extends PerlLightCodeInsightFixtureTestCase implements PerlElementTypes
 {
-	public static final String DATA_PATH = "testData/resolve";
-
 	@Override
 	protected String getTestDataPath()
 	{
-		return DATA_PATH;
-	}
-
-	@Override
-	protected void setUp() throws Exception
-	{
-		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
-		super.setUp();
+		return "testData/resolve";
 	}
 
 	public void testMarkers()

@@ -16,35 +16,22 @@
 
 package resolve;
 
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
+import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 18.02.2016.
  */
-public class PerlLexicalVariableResolveTest extends LightCodeInsightFixtureTestCase
+public class PerlLexicalVariableResolveTest extends PerlLightCodeInsightFixtureTestCase
 {
-	public static final String DATA_PATH = "testData/resolve";
-
-	@Override
-	protected void setUp() throws Exception
-	{
-		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
-		super.setUp();
-	}
-
 	@Override
 	protected String getTestDataPath()
 	{
-		return DATA_PATH;
+		return "testData/resolve";
 	}
 
 	public void testSimple()
@@ -124,13 +111,4 @@ public class PerlLexicalVariableResolveTest extends LightCodeInsightFixtureTestC
 			assertTrue(result == null);
 		}
 	}
-
-	@NotNull
-	protected <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz)
-	{
-		int offset = myFixture.getEditor().getCaretModel().getOffset();
-		PsiElement focused = myFixture.getFile().findElementAt(offset);
-		return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
-	}
-
 }
