@@ -42,6 +42,11 @@ public class PerlVisitor extends PsiPerlVisitor
 		visitPsiElement(o);
 	}
 
+	public void visitLabel(@NotNull PerlLabel o)
+	{
+		visitPsiElement(o);
+	}
+
 	public void visitStringContentElement(@NotNull PerlStringContentElementImpl o)
 	{
 		visitPsiElement(o);

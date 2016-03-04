@@ -18,6 +18,8 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.LocalSearchScope;
+import com.intellij.psi.search.SearchScope;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlLabelDeclaration;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -39,9 +41,20 @@ public class PerlLabelDeclarationImplMixin extends PerlCompositeElementImpl impl
 	@Override
 	public String getPresentableName()
 	{
+		return getName();
+	}
 
+	@Override
+	public String getName()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier != null)
+		{
+			return nameIdentifier.getText();
+		}
 		return null;
 	}
+
 
 	@Nullable
 	@Override
@@ -60,4 +73,12 @@ public class PerlLabelDeclarationImplMixin extends PerlCompositeElementImpl impl
 		}
 		return null;
 	}
+
+	@NotNull
+	@Override
+	public SearchScope getUseScope()
+	{
+		return new LocalSearchScope(getContainingFile());
+	}
+
 }

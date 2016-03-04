@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,11 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 19.09.2015.
+ * Created by hurricup on 04.03.2016.
  */
-public interface PerlDoExpr extends PsiElement, StubBasedPsiElement<PerlRuntimeImportStub>, PerlLabelScope
+public interface PerlEvalExpr extends PsiElement, PerlLabelScope
 {
-	/**
-	 * Returns imported file relative path or null if unrecognizable
-	 *
-	 * @return relative path
-	 */
-	@Nullable
-	String getImportPath();
 }

@@ -16,9 +16,14 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlLabel;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.references.PerlLabelReference;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -26,8 +31,44 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlLabelImpl extends LeafPsiElement implements PerlLabel
 {
+	protected final PsiReference[] myReferences = new PsiReference[]{
+			new PerlLabelReference(this, null)
+	};
+
 	public PerlLabelImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
 	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitLabel(this);
+		else super.accept(visitor);
+	}
+
+	@Override
+	@NotNull
+	public String getName()
+	{
+		return this.getText();
+	}
+
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		if (!this.equals(myReferences[0].getElement()))
+		{
+			myReferences[0] = new PerlSubReference(this, null);
+		}
+		return myReferences; //(PsiReference[]) ArrayUtils.addAll(, ReferenceProvidersRegistry.getReferencesFromProviders(this));
+	}
+
+	@Override
+	public PsiReference getReference()
+	{
+		return getReferences()[0];
+	}
+
 }

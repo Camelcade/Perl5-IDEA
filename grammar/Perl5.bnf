@@ -407,6 +407,12 @@ limitations under the License.
     implements("require_expr")="com.perl5.lang.perl.psi.PerlRequireExpr"
     stubClass("require_expr")="com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub"
 
+	implements("grep_expr")="com.perl5.lang.perl.psi.PerlGrepExpr"
+	implements("map_expr")="com.perl5.lang.perl.psi.PerlMapExpr"
+	implements("sort_expr")="com.perl5.lang.perl.psi.PerlSortExpr"
+	implements("eval_expr")="com.perl5.lang.perl.psi.PerlEvalExpr"
+	implements("sub_expr")="com.perl5.lang.perl.psi.PerlSubExpr"
+
     mixin("do_expr")="com.perl5.lang.perl.psi.mixins.PerlDoExprImplMixin"
     implements("do_expr")="com.perl5.lang.perl.psi.PerlDoExpr"
     stubClass("do_expr")="com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub"

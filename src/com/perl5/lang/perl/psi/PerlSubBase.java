@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
@@ -30,7 +31,13 @@ import java.util.List;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubBase<Stub extends StubElement> extends StubBasedPsiElement<Stub>, PerlPackageMember, PerlNamespaceElementContainer, PerlNamedElement, PerlDeprecatable
+public interface PerlSubBase<Stub extends StubElement> extends
+		StubBasedPsiElement<Stub>,
+		PerlPackageMember,
+		PerlNamespaceElementContainer,
+		PerlNamedElement,
+		PerlDeprecatable,
+		PerlLabelScope
 {
 	/**
 	 * Returns package name for current function
