@@ -74,6 +74,16 @@ public class PerlElementTypeFactory
 					return new PerlSubNameElementImpl(this, leafText);
 				}
 			};
+		if (name.equals("LABEL"))
+			return new PerlTokenTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public ASTNode createLeafNode(CharSequence leafText)
+				{
+					return new PerlLabelImpl(this, leafText);
+				}
+			};
 		if (name.equals("PACKAGE"))
 			return new PerlTokenTypeEx(name)
 			{

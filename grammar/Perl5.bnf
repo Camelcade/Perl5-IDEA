@@ -346,6 +346,9 @@ limitations under the License.
 
 	extends("namespace_content")=block
 
+	implements("label_declaration")="com.perl5.lang.perl.psi.PerlLabelDeclaration"
+	extends("label_declaration")="com.perl5.lang.perl.psi.mixins.PerlLabelDeclarationImplMixin"
+
     implements("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
     mixin("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 

@@ -248,6 +248,9 @@
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlSubNameElement" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlSubNameManipulator"/>
 
+        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlLabel" order="first"
+                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlLabelManipulator"/>
+
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlHeredocTerminatorElement" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
 
