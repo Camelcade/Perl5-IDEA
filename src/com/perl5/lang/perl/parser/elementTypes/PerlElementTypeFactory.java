@@ -320,17 +320,6 @@ public class PerlElementTypeFactory
 				}
 			};
 
-		if (name.equals("ANON_SUB"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnonSubImpl(node);
-				}
-			};
-
 		if (name.equals("ARRAY_ARRAY_SLICE"))
 			return new PerlElementTypeEx(name)
 			{

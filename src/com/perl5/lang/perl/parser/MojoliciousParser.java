@@ -78,7 +78,7 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
 				blockMarker.done(BLOCK);
 				blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 				b.advanceLexer();
-				subMarker.done(ANON_SUB);
+				subMarker.done(SUB_EXPR);
 				return true;
 			}
 			else

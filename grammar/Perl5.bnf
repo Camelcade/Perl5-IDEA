@@ -304,7 +304,7 @@ limitations under the License.
 
 	extends(".*_signature_content")=sub_signature_content
 
-    extends("heredoc_opener|anon_array|anon_hash|anon_sub")=expr
+    extends("heredoc_opener|anon_array|anon_hash")=expr
     extends("string_list|number_constant")=expr
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
@@ -960,11 +960,10 @@ variable_declaration_wrapper ::= lexical_variable
 private reference_value_expr ::=
     anon_array
     | anon_hash
-    | anon_sub
+    | sub_expr
 
 anon_array ::= LEFT_BRACKET [expr] RIGHT_BRACKET //{pin=1}
 anon_hash ::= LEFT_BRACE [expr] RIGHT_BRACE <<validateAnonHashSuffix>>  // fixme pin here after solving problem with code block and prototypes
-anon_sub ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB block
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
