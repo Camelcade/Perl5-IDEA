@@ -35,7 +35,7 @@ public class VariableDescription
 	}
 
 	@Override
-	protected VariableDescription clone()
+	public VariableDescription clone()
 	{
 		return new VariableDescription(variableName, variableType);
 	}

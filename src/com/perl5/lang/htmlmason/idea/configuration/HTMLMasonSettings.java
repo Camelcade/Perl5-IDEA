@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,61 +14,56 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2.idea.configuration;
+package com.perl5.lang.htmlmason.idea.configuration;
 
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
+import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * Created by hurricup on 03.01.2016.
+ * Created by hurricup on 05.03.2016.
  */
 @State(
-		name = "Perl5MasonSettings",
+		name = "HTMLMasonSettings",
 		storages = {
 				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
 				@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR + "/perl5.xml", scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )
 
-
-public class MasonSettings extends AbstractMasonSettings<MasonSettings>
+public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings>
 {
-	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
-
-	public MasonSettings()
+	public HTMLMasonSettings()
 	{
-		globalVariables.add(new VariableDescription("$m", "Mason::Request"));
+		globalVariables.add(new VariableDescription("$m", "HTML::Mason::Request"));
+		globalVariables.add(new VariableDescription("$r", "Apache::Request"));
 		changeCounter++;
 	}
 
-	public static MasonSettings getInstance(@NotNull Project project)
+	public static HTMLMasonSettings getInstance(@NotNull Project project)
 	{
-		MasonSettings persisted = ServiceManager.getService(project, MasonSettings.class);
+		HTMLMasonSettings persisted = ServiceManager.getService(project, HTMLMasonSettings.class);
 		if (persisted == null)
-			persisted = new MasonSettings();
+			persisted = new HTMLMasonSettings();
 
-		return (MasonSettings) persisted.setProject(project);
+		return (HTMLMasonSettings) persisted.setProject(project);
 	}
 
 	@Nullable
 	@Override
-	public MasonSettings getState()
+	public HTMLMasonSettings getState()
 	{
 		return this;
 	}
 
 	@Override
-	public void loadState(MasonSettings state)
+	public void loadState(HTMLMasonSettings state)
 	{
 		XmlSerializerUtil.copyBean(state, this);
 		changeCounter++;
 	}
+
 }
