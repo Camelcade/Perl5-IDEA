@@ -21,7 +21,6 @@ import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.testFramework.TestDataFile;
 import com.perl5.lang.mason2.MasonParserDefinition;
 import org.jetbrains.annotations.NonNls;
-import org.junit.Ignore;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +28,6 @@ import java.io.IOException;
 /**
  * Created by hurricup on 04.03.2016.
  */
-@Ignore
 public class Mason2ParserTest extends PerlParserTestBase
 {
 	public Mason2ParserTest()

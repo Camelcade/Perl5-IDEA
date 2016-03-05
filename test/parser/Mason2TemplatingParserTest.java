@@ -18,11 +18,8 @@ package parser;
 
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
-import com.intellij.psi.PsiFile;
-import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.testFramework.TestDataFile;
 import com.perl5.lang.mason2.MasonTemplatingParserDefinition;
-import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import org.jetbrains.annotations.NonNls;
 import org.junit.Ignore;
 
@@ -44,14 +41,6 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase
 	protected String getTestDataPath()
 	{
 		return "testData/parser/mason2/template";
-	}
-
-
-	@Override
-	protected PsiFile createFile(LightVirtualFile virtualFile)
-	{
-		virtualFile.setFileType(MasonTopLevelComponentFileType.INSTANCE);
-		return super.createFile(virtualFile);
 	}
 
 	protected String loadFile(@NonNls @TestDataFile String name) throws IOException

@@ -1,0 +1,13 @@
+<html>
+<? say 'hi'; ?>
+
+<? foreach(@ARGV) { ?>
+
+<div>
+<? print $_; ?>
+
+</div>
+
+<? } ?>
+
+</html>
