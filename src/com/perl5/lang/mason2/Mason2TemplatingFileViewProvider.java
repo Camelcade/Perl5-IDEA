@@ -36,13 +36,13 @@ import java.util.Set;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonElementTypes
+public class Mason2TemplatingFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MasonTemplatingLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, Mason2TemplatingLanguage.INSTANCE));
 
 
-	public MasonFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
+	public Mason2TemplatingFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
 	{
 		super(manager, virtualFile, physical);
 	}
@@ -51,7 +51,7 @@ public class MasonFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 	@NotNull
 	public Language getBaseLanguage()
 	{
-		return MasonTemplatingLanguage.INSTANCE;
+		return Mason2TemplatingLanguage.INSTANCE;
 	}
 
 	@Override
@@ -81,9 +81,9 @@ public class MasonFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 	}
 
 	@Override
-	protected MasonFileViewProvider cloneInner(final VirtualFile copy)
+	protected Mason2TemplatingFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new MasonFileViewProvider(getManager(), copy, false);
+		return new Mason2TemplatingFileViewProvider(getManager(), copy, false);
 	}
 
 	@Override

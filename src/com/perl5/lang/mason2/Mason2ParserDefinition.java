@@ -34,9 +34,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonParserDefinition extends PerlParserDefinition implements MasonElementTypes
+public class Mason2ParserDefinition extends PerlParserDefinition implements MasonElementTypes
 {
-	public static final IFileElementType FILE = new MasonFileElementType("Mason PP component", MasonLanguage.INSTANCE);
+	public static final IFileElementType FILE = new MasonFileElementType("Mason PP component", Mason2Language.INSTANCE);
 
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(

@@ -14,25 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2.elementType;
+package com.perl5.lang.mason2;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import org.jetbrains.annotations.NonNls;
+import com.intellij.lang.Language;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.FileViewProviderFactory;
+import com.intellij.psi.PsiManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 21.12.2015.
+ * Created by hurricup on 20.12.2015.
  */
-public class MasonTemplatingTokenType extends IElementType
+public class Mason2TemplatingFileViewProviderFactory implements FileViewProviderFactory
 {
-	public MasonTemplatingTokenType(@NotNull @NonNls String debugName)
+	@NotNull
+	@Override
+	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
 	{
-		super(debugName, Mason2TemplatingLanguage.INSTANCE);
-	}
-
-	public String toString()
-	{
-		return "MasonTemplatingTokenType." + super.toString();
+		return new Mason2TemplatingFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

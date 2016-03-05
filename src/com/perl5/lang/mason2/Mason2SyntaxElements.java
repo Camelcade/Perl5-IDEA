@@ -19,7 +19,7 @@ package com.perl5.lang.mason2;
 /**
  * Created by hurricup on 26.12.2015.
  */
-public interface MasonSyntaxElements
+public interface Mason2SyntaxElements
 {
 	String KEYWORD_BLOCK_OPENER = "<% ";
 	String KEYWORD_BLOCK_CLOSER = " %>";

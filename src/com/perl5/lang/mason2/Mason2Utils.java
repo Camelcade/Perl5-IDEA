@@ -43,7 +43,7 @@ import java.util.List;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public class MasonUtils
+public class Mason2Utils
 {
 	@NotNull
 	public static String getClassnameFromPath(@NotNull String path)
@@ -128,7 +128,7 @@ public class MasonUtils
 				String absolutePath = VfsUtil.getRelativePath(componentFile, project.getBaseDir());
 				if (absolutePath != null)
 				{
-					result.addAll(MasonUtils.getMasonNamespacesByAbsolutePath(project, absolutePath));
+					result.addAll(Mason2Utils.getMasonNamespacesByAbsolutePath(project, absolutePath));
 				}
 			}
 		}

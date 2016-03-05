@@ -17,8 +17,8 @@
 package com.perl5.lang.mason2.filetypes;
 
 import com.intellij.lang.Language;
-import com.perl5.lang.mason2.MasonIcons;
-import com.perl5.lang.mason2.MasonLanguage;
+import com.perl5.lang.mason2.Mason2Icons;
+import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +34,7 @@ public class MasonPurePerlComponentFileType extends PerlFileType
 
 	public MasonPurePerlComponentFileType()
 	{
-		super(MasonLanguage.INSTANCE);
+		super(Mason2Language.INSTANCE);
 	}
 
 	public MasonPurePerlComponentFileType(Language language)
@@ -67,7 +67,7 @@ public class MasonPurePerlComponentFileType extends PerlFileType
 	@Override
 	public Icon getIcon()
 	{
-		return MasonIcons.MASON_PURE_PERL_COMPONENT_ICON;
+		return Mason2Icons.MASON_PURE_PERL_COMPONENT_ICON;
 	}
 
 	@Override

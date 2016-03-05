@@ -19,7 +19,7 @@ package parser;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.testFramework.TestDataFile;
-import com.perl5.lang.mason2.MasonParserDefinition;
+import com.perl5.lang.mason2.Mason2ParserDefinition;
 import org.jetbrains.annotations.NonNls;
 
 import java.io.File;
@@ -32,7 +32,7 @@ public class Mason2ParserTest extends PerlParserTestBase
 {
 	public Mason2ParserTest()
 	{
-		super("", "mp", new MasonParserDefinition());
+		super("", "mp", new Mason2ParserDefinition());
 	}
 
 	@Override

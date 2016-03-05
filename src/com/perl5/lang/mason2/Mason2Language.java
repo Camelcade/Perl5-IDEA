@@ -17,21 +17,19 @@
 package com.perl5.lang.mason2;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.FileViewProviderFactory;
-import com.intellij.psi.PsiManager;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.PerlLanguage;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonTemplatingFileViewProviderFactory implements FileViewProviderFactory
+public class Mason2Language extends Language
 {
-	@NotNull
-	@Override
-	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
+	public static final Mason2Language INSTANCE = new Mason2Language();
+
+	public Mason2Language()
 	{
-		return new MasonFileViewProvider(manager, file, eventSystemEnabled);
+		super(PerlLanguage.INSTANCE, "Mason2");
 	}
+
+
 }

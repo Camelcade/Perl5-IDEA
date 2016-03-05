@@ -20,19 +20,19 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason2.MasonSyntaxElements;
-import com.perl5.lang.mason2.MasonTemplatingLanguage;
+import com.perl5.lang.mason2.Mason2SyntaxElements;
+import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.12.2015.
  */
-public interface MasonElementTypes extends MasonSyntaxElements
+public interface MasonElementTypes extends Mason2SyntaxElements
 {
 	IElementType MASON_TEMPLATE_BLOCK_HTML = new MasonTemplatingTokenType("MASON_TEMPLATE_BLOCK_HTML");
 	IElementType MASON_OUTER_ELEMENT_TYPE = new MasonTemplatingElementType("MASON_OUTER_ELEMENT_TYPE");
-	IElementType MASON_HTML_TEMPLATE_DATA = new TemplateDataElementType("MASON_HTML_TEMPLATE_DATA", MasonTemplatingLanguage.INSTANCE, MASON_TEMPLATE_BLOCK_HTML, MASON_OUTER_ELEMENT_TYPE);
+	IElementType MASON_HTML_TEMPLATE_DATA = new TemplateDataElementType("MASON_HTML_TEMPLATE_DATA", Mason2TemplatingLanguage.INSTANCE, MASON_TEMPLATE_BLOCK_HTML, MASON_OUTER_ELEMENT_TYPE);
 
 	IElementType MASON_FILTERED_BLOCK_OPENER = new MasonTemplatingTokenType(KEYWORD_FILTERED_BLOCK_OPENER);
 	IElementType MASON_FILTERED_BLOCK_CLOSER = new MasonTemplatingTokenType(KEYWORD_FILTERED_BLOCK_CLOSER);

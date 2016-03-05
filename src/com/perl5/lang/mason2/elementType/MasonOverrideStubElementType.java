@@ -18,7 +18,7 @@ package com.perl5.lang.mason2.elementType;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason2.MasonTemplatingLanguage;
+import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.psi.impl.MasonOverrideDefinitionImpl;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubElementType;
@@ -32,7 +32,7 @@ public class MasonOverrideStubElementType extends PerlMooseOverrideStubElementTy
 {
 	public MasonOverrideStubElementType(String name)
 	{
-		super(name, MasonTemplatingLanguage.INSTANCE);
+		super(name, Mason2TemplatingLanguage.INSTANCE);
 	}
 
 	@Override

@@ -22,8 +22,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
-import com.perl5.lang.mason2.MasonLanguage;
-import com.perl5.lang.mason2.MasonUtils;
+import com.perl5.lang.mason2.Mason2Language;
+import com.perl5.lang.mason2.Mason2Utils;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +36,7 @@ public class MasonFileImpl extends PerlFileImpl
 {
 	public MasonFileImpl(@NotNull FileViewProvider viewProvider)
 	{
-		super(viewProvider, MasonLanguage.INSTANCE);
+		super(viewProvider, Mason2Language.INSTANCE);
 	}
 
 	public MasonFileImpl(@NotNull FileViewProvider viewProvider, Language language)
@@ -64,7 +64,7 @@ public class MasonFileImpl extends PerlFileImpl
 	@Nullable
 	public VirtualFile getComponentRoot()
 	{
-		return MasonUtils.getComponentRoot(getProject(), getContainingVirtualFile());
+		return Mason2Utils.getComponentRoot(getProject(), getContainingVirtualFile());
 	}
 
 	/**

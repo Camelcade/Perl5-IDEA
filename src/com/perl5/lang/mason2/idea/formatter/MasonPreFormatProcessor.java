@@ -18,7 +18,7 @@ package com.perl5.lang.mason2.idea.formatter;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason2.MasonLanguage;
+import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor;
 
 /**
@@ -29,6 +29,6 @@ public class MasonPreFormatProcessor extends PerlPreFormatProcessor
 	@Override
 	protected boolean canProcess(PsiElement element, TextRange range)
 	{
-		return element.getLanguage().is(MasonLanguage.INSTANCE);
+		return element.getLanguage().is(Mason2Language.INSTANCE);
 	}
 }

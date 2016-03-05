@@ -20,7 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.*;
 import com.intellij.util.indexing.FileBasedIndex;
-import com.perl5.lang.mason2.MasonUtils;
+import com.perl5.lang.mason2.Mason2Utils;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import gnu.trove.THashSet;
@@ -86,7 +86,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 					containsAtLeastOneFile(changedFile, componentsRoots)
 					)
 			{
-				MasonUtils.reindexProjectFile(getProject(), changedFile);
+				Mason2Utils.reindexProjectFile(getProject(), changedFile);
 			}
 		}
 		else if (changedFile.getFileType() instanceof MasonPurePerlComponentFileType)    // Mason file has been moved

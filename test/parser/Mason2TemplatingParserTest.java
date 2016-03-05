@@ -16,7 +16,7 @@
 
 package parser;
 
-import com.perl5.lang.mason2.MasonTemplatingParserDefinition;
+import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -25,7 +25,7 @@ public class Mason2TemplatingParserTest extends PerlMultiPsiParserTestBase
 {
 	public Mason2TemplatingParserTest()
 	{
-		super("", "mc", new MasonTemplatingParserDefinition());
+		super("", "mc", new Mason2TemplatingParserDefinition());
 	}
 
 	@Override

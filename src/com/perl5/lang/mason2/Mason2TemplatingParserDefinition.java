@@ -31,9 +31,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.01.2016.
  */
-public class MasonTemplatingParserDefinition extends MasonParserDefinition
+public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition
 {
-	public static final IFileElementType FILE = new MasonFileElementType("Mason component", MasonTemplatingLanguage.INSTANCE);
+	public static final IFileElementType FILE = new MasonFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE);
 
 	@Override
 	public IFileElementType getFileNodeType()

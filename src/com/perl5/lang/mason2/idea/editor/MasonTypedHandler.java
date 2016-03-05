@@ -25,7 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
-import com.perl5.lang.mason2.MasonFileViewProvider;
+import com.perl5.lang.mason2.Mason2TemplatingFileViewProvider;
 import com.perl5.lang.mason2.elementType.MasonElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -51,7 +51,7 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements MasonElem
 	@Override
 	public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file)
 	{
-		if (file.getViewProvider() instanceof MasonFileViewProvider)
+		if (file.getViewProvider() instanceof Mason2TemplatingFileViewProvider)
 		{
 			if (c == '>')
 			{

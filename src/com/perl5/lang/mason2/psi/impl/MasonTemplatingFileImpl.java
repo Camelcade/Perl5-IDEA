@@ -18,7 +18,7 @@ package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.mason2.MasonTemplatingLanguage;
+import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import com.perl5.lang.mason2.idea.generation.Mason2TemplatingCodeGeneratorImpl;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
@@ -31,7 +31,7 @@ public class MasonTemplatingFileImpl extends MasonFileImpl
 {
 	public MasonTemplatingFileImpl(@NotNull FileViewProvider viewProvider)
 	{
-		super(viewProvider, MasonTemplatingLanguage.INSTANCE);
+		super(viewProvider, Mason2TemplatingLanguage.INSTANCE);
 	}
 
 	@Override

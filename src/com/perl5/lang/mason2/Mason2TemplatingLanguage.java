@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,19 @@
 
 package com.perl5.lang.mason2;
 
+import com.intellij.lang.Language;
+import com.intellij.psi.templateLanguages.TemplateLanguage;
+
 /**
- * Created by hurricup on 05.01.2016.
+ * Created by hurricup on 13.01.2016.
  */
-public interface MasonConstants
+public class Mason2TemplatingLanguage extends Language implements TemplateLanguage
 {
-	String MASON_DEFAULT_COMPONENT_PARENT = "Mason::Component";
+	public static final Mason2TemplatingLanguage INSTANCE = new Mason2TemplatingLanguage();
+	public static final String NAME = "Mason2 Templating Language";
+
+	public Mason2TemplatingLanguage()
+	{
+		super(Mason2Language.INSTANCE, NAME);
+	}
 }
