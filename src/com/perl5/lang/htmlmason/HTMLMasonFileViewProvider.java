@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2;
+package com.perl5.lang.htmlmason;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
@@ -25,7 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,15 +34,15 @@ import java.util.Arrays;
 import java.util.Set;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 05.03.2016.
  */
-public class Mason2TemplatingFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonElementTypes
+public class HTMLMasonFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, HTMLMasonElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, Mason2TemplatingLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, HTMLMasonLanguage.INSTANCE));
 
 
-	public Mason2TemplatingFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
+	public HTMLMasonFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
 	{
 		super(manager, virtualFile, physical);
 	}
@@ -51,7 +51,7 @@ public class Mason2TemplatingFileViewProvider extends MultiplePsiFilesPerDocumen
 	@NotNull
 	public Language getBaseLanguage()
 	{
-		return Mason2TemplatingLanguage.INSTANCE;
+		return HTMLMasonLanguage.INSTANCE;
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class Mason2TemplatingFileViewProvider extends MultiplePsiFilesPerDocumen
 		{
 
 			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(getTemplateDataLanguage()).createFile(this);
-			file.setContentElementType(MASON_HTML_TEMPLATE_DATA);
+			file.setContentElementType(HTML_MASON_HTML_TEMPLATE_DATA);
 			return file;
 		}
 
@@ -81,9 +81,9 @@ public class Mason2TemplatingFileViewProvider extends MultiplePsiFilesPerDocumen
 	}
 
 	@Override
-	protected Mason2TemplatingFileViewProvider cloneInner(final VirtualFile copy)
+	protected HTMLMasonFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new Mason2TemplatingFileViewProvider(getManager(), copy, false);
+		return new HTMLMasonFileViewProvider(getManager(), copy, false);
 	}
 
 	@Override
