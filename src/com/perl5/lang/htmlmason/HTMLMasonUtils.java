@@ -14,30 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi.impl;
+package com.perl5.lang.htmlmason;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.htmlmason.HTMLMasonLanguage;
-import com.perl5.lang.htmlmason.HTMLMasonUtils;
-import com.perl5.lang.htmlmason.MasonCoreUtils;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileImpl extends PerlFileImpl
+public class HTMLMasonUtils
 {
-	public HTMLMasonFileImpl(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, HTMLMasonLanguage.INSTANCE);
-	}
-
 	@Nullable
-	public VirtualFile getComponentRoot()
+	public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file)
 	{
-		return HTMLMasonUtils.getComponentRoot(getProject(), MasonCoreUtils.getContainingVirtualFile(this));
+		return MasonCoreUtils.getComponentRoot(HTMLMasonSettings.getInstance(project), file);
 	}
 }

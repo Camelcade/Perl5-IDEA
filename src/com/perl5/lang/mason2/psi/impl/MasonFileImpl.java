@@ -20,8 +20,7 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
-import com.intellij.testFramework.LightVirtualFile;
-import com.intellij.util.indexing.IndexingDataKeys;
+import com.perl5.lang.htmlmason.MasonCoreUtils;
 import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.mason2.Mason2Utils;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
@@ -64,31 +63,6 @@ public class MasonFileImpl extends PerlFileImpl
 	@Nullable
 	public VirtualFile getComponentRoot()
 	{
-		return Mason2Utils.getComponentRoot(getProject(), getContainingVirtualFile());
+		return Mason2Utils.getComponentRoot(getProject(), MasonCoreUtils.getContainingVirtualFile(this));
 	}
-
-	/**
-	 * Returns real containing virtual file, not the Light one
-	 *
-	 * @return virtual file or null
-	 */
-	@Nullable
-	public VirtualFile getContainingVirtualFile()
-	{
-		VirtualFile originalFile = getViewProvider().getVirtualFile();
-
-		if (originalFile instanceof LightVirtualFile)
-		{
-			if (getUserData(IndexingDataKeys.VIRTUAL_FILE) != null)
-			{
-				originalFile = getUserData(IndexingDataKeys.VIRTUAL_FILE);
-			}
-			else if (((LightVirtualFile) originalFile).getOriginalFile() != null)
-			{
-				originalFile = ((LightVirtualFile) originalFile).getOriginalFile();
-			}
-		}
-		return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
-	}
-
 }

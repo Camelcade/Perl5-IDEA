@@ -419,7 +419,23 @@
         <lang.commenter language="Mojolicious Perl"
                         implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
 
+        <!-- HTML::Mason settings -->
+        <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
+        <projectConfigurable
+                provider="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurableProvider"
+                parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
 
+        <lang.parserDefinition language="HTML::Mason Templating Language"
+                               implementationClass="com.perl5.lang.htmlmason.HTMLMasonParserDefinition"/>
+        <fileTypeFactory implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeFactory"/>
+        <lang.fileViewProviderFactory language="HTML::Mason Templating Language"
+                                      implementationClass="com.perl5.lang.htmlmason.HTMLMasonFileViewProviderFactory"/>
+        <editorNotificationProvider
+                implementation="com.perl5.lang.htmlmason.idea.editor.notification.HTMLMasonPathsNotification"/>
+
+        <!-- HTML::Mason settings end -->
+
+        <!--Mason2 settings -->
         <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
 
         <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
@@ -456,16 +472,17 @@
         <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
         <lang.findUsagesProvider language="Mason2"
                                  implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
-        <lang.findUsagesProvider language="Mason2"
-                                 implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
         <lang.foldingBuilder language="Mason2"
                              implementationClass="com.perl5.lang.mason2.idea.folding.MasonFoldingBuilder"/>
-        <lang.namesValidator language="Mason2"
-                             implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
         <lang.formatter language="Mason2"
                         implementationClass="com.perl5.lang.mason2.idea.formatter.MasonFormattingModelBuilder"/>
         <lang.indentStrategy language="Mason2"
                              implementationClass="com.perl5.lang.mason2.idea.editor.MasonIndentStrategy"/>
+
+        <lang.namesValidator language="Mason2"
+                             implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+        <lang.findUsagesProvider language="Mason2"
+                                 implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
         <quoteHandler fileType="Mason2 top-level component"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
         <quoteHandler fileType="Mason2 internal component"
@@ -487,13 +504,16 @@
                                       implementationClass="com.perl5.lang.mason2.Mason2TemplatingFileViewProviderFactory"/>
         <lang.findUsagesProvider language="Mason2 Templating Language"
                                  implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
+        <!--Mason2 settings end -->
 
 
+        <!--POD settings -->
         <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
         <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"
                                        implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
         <quoteHandler fileType="POD file" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+        <!--POD settings end -->
 
 
         <fileTypeFactory implementation="com.perl5.lang.xs.filetypes.XSFileTypeFactory"/>

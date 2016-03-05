@@ -27,6 +27,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexImpl;
+import com.perl5.lang.htmlmason.MasonCoreUtils;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
@@ -70,19 +71,7 @@ public class Mason2Utils
 	@Nullable
 	public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file)
 	{
-		if (file != null)
-		{
-			MasonSettings masonSettings = MasonSettings.getInstance(project);
-
-			for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles())
-			{
-				if (VfsUtil.isAncestor(componentRoot, file, false))
-				{
-					return componentRoot;
-				}
-			}
-		}
-		return null;
+		return MasonCoreUtils.getComponentRoot(MasonSettings.getInstance(project), file);
 	}
 
 	public static List<PerlNamespaceDefinition> getMasonNamespacesByAbsolutePath(@NotNull Project project, @NotNull String absolutePath)

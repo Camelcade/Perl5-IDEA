@@ -138,6 +138,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 				new myVariableTypeColumnInfo()
 		);
 		globalsTable = new JBTable(globalsModel);
+
 		builder.addLabeledComponent(new JLabel("Components global variables (allow_globals option):"), ToolbarDecorator
 				.createDecorator(globalsTable)
 				.setAddAction(new AnActionButtonRunnable()
