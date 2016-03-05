@@ -25,7 +25,7 @@ public class EmbeddedPerlParserTest extends PerlParserTestBase
 {
 	public EmbeddedPerlParserTest()
 	{
-		super("", "code", new EmbeddedPerlParserDefinition());
+		super("", "thtml", new EmbeddedPerlParserDefinition());
 	}
 
 	@Override

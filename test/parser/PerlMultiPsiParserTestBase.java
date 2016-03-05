@@ -16,27 +16,24 @@
 
 package parser;
 
-import com.perl5.lang.mason2.MasonTemplatingParserDefinition;
+import com.intellij.lang.ParserDefinition;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 04.03.2016.
+ * Created by hurricup on 05.03.2016.
  */
-public class Mason2TemplatingParserTest extends PerlMultiPsiParserTestBase
+public abstract class PerlMultiPsiParserTestBase extends PerlParserTestBase
 {
-	public Mason2TemplatingParserTest()
+	public PerlMultiPsiParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions)
 	{
-		super("", "mc", new MasonTemplatingParserDefinition());
+		super(dataPath, fileExt, definitions);
 	}
 
 	@Override
-	protected String getTestDataPath()
+	protected boolean checkAllPsiRoots()
 	{
-		return "testData/parser/mason2/template";
+		return false;
 	}
 
-
-	public void testComponent()
-	{
-		doTest("test_component", true);
-	}
 }

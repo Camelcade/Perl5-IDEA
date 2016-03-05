@@ -19,13 +19,17 @@ package parser;
 import com.intellij.core.CoreApplicationEnvironment;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.openapi.extensions.Extensions;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.testFramework.ParsingTestCase;
+import com.intellij.testFramework.TestDataFile;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by hurricup on 28.02.2016.
@@ -36,7 +40,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 
 	public PerlParserTestBase()
 	{
-		this("", "code", new PerlParserDefinition());
+		this("", "pl", new PerlParserDefinition());
 	}
 
 	public PerlParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions)
@@ -83,4 +87,8 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		new PerlParserExtensions().initComponent();
 	}
 
+	protected String loadFile(@NonNls @TestDataFile String name) throws IOException
+	{
+		return FileUtil.loadFile(new File(myFullDataPath, name.replace("." + myFileExt, ".code")), CharsetToolkit.UTF8, true).trim();
+	}
 }

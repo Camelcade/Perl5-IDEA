@@ -25,7 +25,7 @@ public class MojoliciousParserTest extends PerlParserTestBase
 {
 	public MojoliciousParserTest()
 	{
-		super("", "code", new MojoliciousParserDefinition());
+		super("", "ep", new MojoliciousParserDefinition());
 	}
 
 	@Override
