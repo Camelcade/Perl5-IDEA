@@ -16,8 +16,16 @@
 
 package com.perl5.lang.htmlmason.filetypes;
 
+import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.editor.highlighter.EditorHighlighter;
+import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.HTMLMasonIcons;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
+import com.perl5.lang.htmlmason.idea.editor.HTMLMasonHighlighter;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,16 +42,14 @@ public class HTMLMasonFileType extends PerlFileType
 	public HTMLMasonFileType()
 	{
 		super(HTMLMasonLanguage.INSTANCE);
-/*
 		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
 		{
 			@Override
 			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
 			{
-				return new MasonHighlighter(project, virtualFile, editorColorsScheme);
+				return new HTMLMasonHighlighter(project, virtualFile, editorColorsScheme);
 			}
 		});
-*/
 	}
 
 	@NotNull
