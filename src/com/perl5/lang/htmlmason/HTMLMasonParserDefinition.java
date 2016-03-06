@@ -40,7 +40,7 @@ public class HTMLMasonParserDefinition extends PerlParserDefinition implements H
 
 	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
 			TokenSet.create(
-//					HTML_MASON_LINE_OPENER,
+					HTML_MASON_LINE_OPENER,
 					HTML_MASON_TEMPLATE_BLOCK_HTML
 			));
 

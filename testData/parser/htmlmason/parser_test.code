@@ -3,6 +3,7 @@ my $noun = 'World';
 my @time = localtime;
 </%perl>
     Hello <% $noun %>,
+
 % if ( $time[2] < 12 ) {
 good morning.
 % } else {
@@ -28,10 +29,6 @@ Welcome, Netscape users
 inherit=>'/site_handler'
 </%flags>
 
-<%attr>
-color => 'blue'
-fonts => [qw(arial geneva helvetica)]
-</%attr>
 
 <%filter>
 tr/a-z/A-Z/
@@ -51,7 +48,6 @@ s{<a href="$uri/?">(.*?)</a>} {<b>$1</b>}i;
 
 <% # This is a single-line comment %>
 
-<& /mktg/prods.html', 'dog', [2, 3, 4], {a => 7, b => 8} &>
 
 <head><title><% $headline %></title></head>
 <body>
@@ -64,7 +60,7 @@ s{<a href="$uri/?">(.*?)</a>} {<b>$1</b>}i;
 
 <%init>
 # Fetch article from database
-my $dbh = DBI::connect ...;
+my $dbh = DBI::connect;
 my $sth = $dbh->prepare("select * from articles where id = ?");
 $sth->execute($article_id);
 my ($headline, $date, $author, $body) = $sth->fetchrow_array;
@@ -74,10 +70,9 @@ my ($year, $month, $day) = split('-', $date);
 $date = "$month/$day";
 </%init>
 
-
 <%once>
 # Fetch article from database
-my $dbh = DBI::connect ...;
+my $dbh = DBI::connect;
 my $sth = $dbh->prepare("select * from articles where id = ?");
 $sth->execute($article_id);
 my ($headline, $date, $author, $body) = $sth->fetchrow_array;
@@ -89,7 +84,7 @@ $date = "$month/$day";
 
 <%shared>
 # Fetch article from database
-my $dbh = DBI::connect ...;
+my $dbh = DBI::connect;
 my $sth = $dbh->prepare("select * from articles where id = ?");
 $sth->execute($article_id);
 my ($headline, $date, $author, $body) = $sth->fetchrow_array;
@@ -98,10 +93,6 @@ $headline = uc($headline);
 my ($year, $month, $day) = split('-', $date);
 $date = "$month/$day";
 </%shared>
-
-<%args>
-$article_id
-</%args>
 
 <%init>
 my $ua = $r->header_in('User-Agent');
@@ -160,7 +151,36 @@ You are <% $age < 18 ? 'not' : '' %> permitted to enter this site.
 <& (int(rand(2)) ? 'thiscomp' : 'thatcomp'), id=>123 &>
 
 
+<%method supermethod>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+% say 'hi';
+
+</%method>
+
+<%method supermethod2>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+% say 'hi';
+</%method>
+
 <%doc>
+
+
+<%args>
+$site
+    $label=>ucfirst($site)
+</%args>
+
+<%def .link>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+<%args>
+$site
+$label=>ucfirst($site)
+</%args>
+</%def>
+
 <&| /path/to/comp &> this is the content </&>
 <&| comp, arg1 => 'hi' &> filters can take arguments </&>
 <&| comp &> content can include <% "tags" %> of all kinds </&>
@@ -182,14 +202,19 @@ You are <% $age < 18 ? 'not' : '' %> permitted to enter this site.
 </&>
 </ol>
 
-<%def .link>
-<a href="http://www.<% $site %>.com"><% $label %></a>
+
+
+<%attr>
+color => 'blue'
+fonts => [qw(arial geneva helvetica)]
+</%attr>
+
+<& /mktg/prods.html', 'dog', [2, 3, 4], {a => 7, b => 8} &>
 
 <%args>
-$site
-$label=>ucfirst($site)
+$article_id
 </%args>
-</%def>
+
 
 </%doc>
 
