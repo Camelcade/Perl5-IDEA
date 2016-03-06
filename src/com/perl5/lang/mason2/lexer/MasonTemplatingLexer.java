@@ -100,6 +100,7 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 	public static final int LEX_MASON_PERL_EXPR_FILTER_BLOCK = LEX_CUSTOM5; // | id1, id2, ... %> // same as above, but after pipe
 	public static final int LEX_MASON_PERL_CALL_BLOCK = LEX_CUSTOM6;        // <& ... &>
 	public static final int LEX_MASON_OPENING_TAG = LEX_CUSTOM7;            // lexing tag additional info
+
 	private static final Map<String, IElementType> OPEN_TOKENS_MAP = new THashMap<String, IElementType>();
 	private static final Map<String, String> OPEN_CLOSE_MAP = new THashMap<String, String>();
 	private static final Map<String, IElementType> CLOSE_TOKENS_MAP = new THashMap<String, IElementType>();

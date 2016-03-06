@@ -64,6 +64,9 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 	IElementType HTML_MASON_ATTR_OPENER = new HTMLMasonTokenType(KEYWORD_ATTR_OPENER);
 	IElementType HTML_MASON_ATTR_CLOSER = new HTMLMasonTokenType(KEYWORD_ATTR_CLOSER);
 
+	IElementType HTML_MASON_ARGS_OPENER = new HTMLMasonTokenType(KEYWORD_ARGS_OPENER);
+	IElementType HTML_MASON_ARGS_CLOSER = new HTMLMasonTokenType(KEYWORD_ARGS_CLOSER);
+
 	IElementType HTML_MASON_INIT_OPENER = new HTMLMasonTokenType(KEYWORD_INIT_OPENER);
 	IElementType HTML_MASON_INIT_CLOSER = new HTMLMasonTokenType(KEYWORD_INIT_CLOSER);
 

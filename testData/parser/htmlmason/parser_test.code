@@ -1,0 +1,196 @@
+<%perl>
+my $noun = 'World';
+my @time = localtime;
+</%perl>
+    Hello <% $noun %>,
+% if ( $time[2] < 12 ) {
+good morning.
+% } else {
+good afternoon.
+% }
+
+% my $ua = $r->header_in('User-Agent');
+% if ($ua =~ /msie/i) {
+Welcome, Internet Explorer users
+...
+% } elsif ($ua =~ /mozilla/i) {
+Welcome, Netscape users
+...
+% }
+
+<% $file_data |h %>
+
+<% $uri | u, n %>
+
+<% $uri | un %>
+
+<%flags>
+inherit=>'/site_handler'
+</%flags>
+
+<%attr>
+color => 'blue'
+fonts => [qw(arial geneva helvetica)]
+</%attr>
+
+<%filter>
+tr/a-z/A-Z/
+</%filter>
+
+<%text>
+% This is an example of a Perl line.
+<% This is an example of an expression block. %>
+</%text>
+
+
+
+<%filter>
+my $uri = $r->uri;
+s{<a href="$uri/?">(.*?)</a>} {<b>$1</b>}i;
+</%filter>
+
+<% # This is a single-line comment %>
+
+<& /mktg/prods.html', 'dog', [2, 3, 4], {a => 7, b => 8} &>
+
+<head><title><% $headline %></title></head>
+<body>
+<h2><% $headline %></h2>
+<p>By <% $author %>, <% $date %></p>
+
+<% $body %>
+
+</body>
+
+<%init>
+# Fetch article from database
+my $dbh = DBI::connect ...;
+my $sth = $dbh->prepare("select * from articles where id = ?");
+$sth->execute($article_id);
+my ($headline, $date, $author, $body) = $sth->fetchrow_array;
+# Massage the fields
+$headline = uc($headline);
+my ($year, $month, $day) = split('-', $date);
+$date = "$month/$day";
+</%init>
+
+
+<%once>
+# Fetch article from database
+my $dbh = DBI::connect ...;
+my $sth = $dbh->prepare("select * from articles where id = ?");
+$sth->execute($article_id);
+my ($headline, $date, $author, $body) = $sth->fetchrow_array;
+# Massage the fields
+$headline = uc($headline);
+my ($year, $month, $day) = split('-', $date);
+$date = "$month/$day";
+</%once>
+
+<%shared>
+# Fetch article from database
+my $dbh = DBI::connect ...;
+my $sth = $dbh->prepare("select * from articles where id = ?");
+$sth->execute($article_id);
+my ($headline, $date, $author, $body) = $sth->fetchrow_array;
+# Massage the fields
+$headline = uc($headline);
+my ($year, $month, $day) = split('-', $date);
+$date = "$month/$day";
+</%shared>
+
+<%args>
+$article_id
+</%args>
+
+<%init>
+my $ua = $r->header_in('User-Agent');
+return ($ua =~ /Mozilla/i && $ua !~ /MSIE/i) ? 1 : 0;
+</%init>
+
+<ul>
+% foreach $item (@list) {
+<li><% $item %></li>
+% }
+</ul>
+
+<ul>
+% while (my ($key,$value) = each(%ENV)) {
+<li>
+<b><% $key %></b>: <% $value %>
+</li>
+% }
+</ul>
+
+<table>
+% foreach my $h (@loh) {
+<tr>
+<td><% $h->{foo} %></td>
+<td bgcolor=#ee0000><% $h->{bar} %></td>
+<td><% $h->{baz} %></td>
+</tr>
+% }
+</table>
+
+Dear <% $name %>: We will come to your house at <% $address %> in the
+fair city of <% $city %> to deliver your $<% $amount %> dollar prize!
+
+The answer is <% ($y+8) % 2 %>.
+
+You are <% $age < 18 ? 'not' : '' %> permitted to enter this site.
+
+# relative component paths
+<& topimage &>
+<& tools/searchbox &>
+
+# absolute component path
+<& /shared/masthead, color=>'salmon' &>
+
+# this component path MUST have quotes because it contains a comma
+<& "sugar,eggs", mix=>1 &>
+
+# variable component path
+<& $comp &>
+
+# variable component and arguments
+<& $comp, %args &>
+
+# you can use arbitrary expression for component path, but it cannot
+# begin with a letter or number; delimit with () to remedy this
+<& (int(rand(2)) ? 'thiscomp' : 'thatcomp'), id=>123 &>
+
+
+<%doc>
+<&| /path/to/comp &> this is the content </&>
+<&| comp, arg1 => 'hi' &> filters can take arguments </&>
+<&| comp &> content can include <% "tags" %> of all kinds </&>
+<&| comp1 &> nesting is also <&| comp2 &> OK </&> </&>
+<&| SELF:method1 &> subcomponents can be filters </&>
+
+<&| "outer" &>
+ <&| /inner/comp, arg=>'this' &>
+   <&| .mycomp &>
+      Yada yada yada
+   </& .mycomp >
+ </& /inner/comp >
+</&>
+
+% my $var;
+<ol>
+<&| list_items , list => \@items, var => \$var &>
+<li> <% $var %></li>
+</&>
+</ol>
+
+<%def .link>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+<%args>
+$site
+$label=>ucfirst($site)
+</%args>
+</%def>
+
+</%doc>
+
+

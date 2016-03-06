@@ -16,9 +16,20 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.PsiBuilder;
+
 /**
  * Created by hurricup on 05.03.2016.
  */
 public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonParser
 {
+	@Override
+	public boolean parseFileContents(PsiBuilder b, int l)
+	{
+		while (!b.eof())
+		{
+			b.advanceLexer();
+		}
+		return true;
+	}
 }
