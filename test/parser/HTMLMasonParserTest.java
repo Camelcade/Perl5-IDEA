@@ -41,7 +41,7 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 
 	public void testAttr()
 	{
-//		doTest("parse_attr");
+		doTest("parse_attr");
 	}
 
 	public void testCalls()

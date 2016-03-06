@@ -344,6 +344,22 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 
 			r = endOrRecover(b, HTML_MASON_FLAGS_CLOSER);
 		}
+		else if (tokenType == HTML_MASON_ATTR_OPENER)
+		{
+			b.advanceLexer();
+			PsiBuilder.Marker statementMarker = b.mark();
+
+			while (!b.eof() && b.getTokenType() != HTML_MASON_ATTR_CLOSER)
+			{
+				if (!PerlParserImpl.expr(b, l, -1))
+				{
+					break;
+				}
+			}
+			statementMarker.done(HTML_MASON_ATTR_BLOCK);
+
+			r = endOrRecover(b, HTML_MASON_ATTR_CLOSER);
+		}
 		else if (tokenType == HTML_MASON_DOC_OPENER)
 		{
 			b.advanceLexer();
