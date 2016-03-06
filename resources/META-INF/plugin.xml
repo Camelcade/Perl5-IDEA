@@ -436,6 +436,8 @@
                            implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonBraceMatcher"/>
         <lang.syntaxHighlighterFactory language="HTML::Mason Templating Language" key="HTML::Mason Templating Language"
                                        implementationClass="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighterFactory"/>
+        <lang.foldingBuilder language="HTML::Mason Templating Language"
+                             implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonFoldingBuilder"/>
 
         <!-- HTML::Mason settings end -->
 
