@@ -16,12 +16,28 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
+import com.intellij.lang.Language;
 import com.intellij.openapi.components.*;
+import com.intellij.openapi.fileTypes.FileNameMatcher;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.FileTypeManager;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
+import com.intellij.psi.LanguageSubstitutor;
+import com.intellij.psi.LanguageSubstitutors;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
+import com.perl5.lang.htmlmason.idea.lang.HTMLMasonLanguageSubstitutor;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 05.03.2016.
@@ -36,6 +52,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings>
 {
+	public List<String> substitutedExtensions = new ArrayList<String>();
+
+	@Transient
+	private Map<String, Pair<Language, LanguageSubstitutor>> substitutorMap = new THashMap<String, Pair<Language, LanguageSubstitutor>>();
+
 	public HTMLMasonSettings()
 	{
 		globalVariables.add(new VariableDescription("$m", "HTML::Mason::Request"));
@@ -47,9 +68,14 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings>
 	{
 		HTMLMasonSettings persisted = ServiceManager.getService(project, HTMLMasonSettings.class);
 		if (persisted == null)
+		{
 			persisted = new HTMLMasonSettings();
+		}
 
-		return (HTMLMasonSettings) persisted.setProject(project);
+		persisted.setProject(project);
+		persisted.updateSubstitutors();
+
+		return persisted;
 	}
 
 	@Nullable
@@ -66,4 +92,50 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings>
 		changeCounter++;
 	}
 
+	@Override
+	public void settingsUpdated()
+	{
+		updateSubstitutors();
+		super.settingsUpdated();
+	}
+
+	protected void updateSubstitutors()
+	{
+		// unregister
+		Iterator<Map.Entry<String, Pair<Language, LanguageSubstitutor>>> iterator = substitutorMap.entrySet().iterator();
+		while (iterator.hasNext())
+		{
+			Map.Entry<String, Pair<Language, LanguageSubstitutor>> entry = iterator.next();
+			if (!substitutedExtensions.contains(entry.getKey()))
+			{
+//				System.err.println("Unregistering " + entry.getKey());
+				LanguageSubstitutors.INSTANCE.removeExplicitExtension(entry.getValue().first, entry.getValue().second);
+				iterator.remove();
+			}
+
+		}
+
+		// register
+		FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+		for (FileType fileType : fileTypeManager.getRegisteredFileTypes())
+		{
+			if (fileType instanceof LanguageFileType)
+			{
+				Language language = ((LanguageFileType) fileType).getLanguage();
+				for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType))
+				{
+					String presentableString = matcher.getPresentableString();
+					if (substitutedExtensions.contains(presentableString) && !substitutorMap.containsKey(presentableString))
+					{
+//						System.err.println("Registering " + presentableString);
+						LanguageSubstitutor substitutor = new HTMLMasonLanguageSubstitutor(myProject, matcher);
+
+						LanguageSubstitutors.INSTANCE.addExplicitExtension(language, substitutor);
+						substitutorMap.put(presentableString, Pair.create(language, substitutor));
+					}
+				}
+			}
+		}
+
+	}
 }

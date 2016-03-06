@@ -19,7 +19,6 @@ package com.perl5.lang.mason2.idea.configuration;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.AnActionButton;
 import com.intellij.ui.AnActionButtonRunnable;
@@ -59,12 +58,12 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 	@Override
 	public JComponent createComponent()
 	{
-		FormBuilder builder = FormBuilder.createFormBuilder();
-		builder.getPanel().setLayout(new VerticalFlowLayout());
+		FormBuilder builder = FormBuilder.createFormBuilder().setVertical(true);
+//		builder.getPanel().setLayout(new VerticalFlowLayout());
 
 		createRootsListComponent(builder);
-		createAutobaseNamesComponent(builder);
 		createGlobalsComponent(builder);
+		createAutobaseNamesComponent(builder);
 
 		return builder.getPanel();
 	}

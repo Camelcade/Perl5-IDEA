@@ -30,6 +30,7 @@ import com.intellij.ui.table.JBTable;
 import com.intellij.util.Consumer;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
+import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.ListTableModel;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
@@ -173,7 +174,10 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 						TableUtil.editCellAt(globalsTable, indexToEdit, 0);
 					}
 				})
-				.createPanel());
+				.setPreferredSize(JBUI.size(0, 150))
+				.createPanel()
+		)
+		;
 	}
 
 	@Override

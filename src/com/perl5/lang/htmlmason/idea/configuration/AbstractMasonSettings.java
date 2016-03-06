@@ -39,7 +39,7 @@ public abstract class AbstractMasonSettings<T> implements PersistentStateCompone
 	protected int changeCounter = 0;
 
 	@Transient
-	private Project myProject;
+	protected Project myProject;
 	@Transient
 	private List<VirtualFile> componentsRootsVirtualFiles = null;
 

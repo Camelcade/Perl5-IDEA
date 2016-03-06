@@ -20,6 +20,7 @@ import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.perl.idea.PerlVirtualFileListener;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import org.jetbrains.annotations.NotNull;
@@ -67,6 +68,7 @@ public class Perl5ProjectComponent implements ProjectComponent
 	{
 		PerlStringCompletionUtil.HASH_INDEXES_CACHE.clear();
 		PerlStringCompletionUtil.HEREDOC_OPENERS_CACHE.clear();
+		HTMLMasonSettings.getInstance(myProject); // initializes substitutors
 		// called when project is opened
 //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
 //		PsiManager.getInstance(myProject).addPsiTreeChangeListener(myPsiTreeChangeListener);
