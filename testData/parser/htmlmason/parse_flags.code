@@ -1,0 +1,6 @@
+<html>
+<%flags>
+    inherit=>'/site_handler'
+</%flags>
+
+</html>

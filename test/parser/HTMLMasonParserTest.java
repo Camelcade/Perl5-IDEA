@@ -34,13 +34,79 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 		return "testData/parser/htmlmason";
 	}
 
+	public void testArgs()
+	{
+		doTest("parse_args");
+	}
+
+	public void testAttr()
+	{
+//		doTest("parse_attr");
+	}
+
+	public void testCalls()
+	{
+		doTest("parse_calls");
+	}
+
+	public void testCode()
+	{
+		doTest("parse_code");
+	}
+
+	public void testDef()
+	{
+		doTest("parse_def");
+	}
+
+	public void testDoc()
+	{
+		doTest("parse_doc");
+	}
+
+	public void testFilter()
+	{
+		doTest("parse_filter");
+	}
+
+	public void testFlags()
+	{
+		doTest("parse_flags");
+	}
+
+	public void testInit()
+	{
+		doTest("parse_init");
+	}
+
+	public void testMethod()
+	{
+		doTest("parse_method");
+	}
+
+	public void testOnce()
+	{
+		doTest("parse_once");
+	}
+
+	public void testPerl()
+	{
+		doTest("parse_perl");
+	}
+
+	public void testShared()
+	{
+		doTest("parse_shared");
+	}
+
+	public void testText()
+	{
+		doTest("parse_text");
+	}
+
 	public void testSyntax()
 	{
 		doTest("parser_test");
 	}
 
-	public void testArgs()
-	{
-		doTest("parse_args");
-	}
 }

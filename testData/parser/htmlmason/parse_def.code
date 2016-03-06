@@ -1,0 +1,18 @@
+<html>
+
+<%def .li--nk>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+</%def>
+
+<%def -li.nk>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+</%def>
+
+<%def _li.n-k>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+</%def>
+
+</html>

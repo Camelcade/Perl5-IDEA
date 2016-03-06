@@ -1,3 +1,5 @@
+<html>
+
  <%args>
     $abs
 	@b       # a comment
@@ -10,8 +12,6 @@
 	%g => (joe => 1, bob => 2)
 </%args>
 
-
-<%method supermethod2>
 <a href="http://www.<% $site %>.com"><% $label %></a>
 
 <%args>
@@ -22,4 +22,19 @@
 
 % say 'hi';
 
-</%method>
+
+<%args>
+$site
+    $label=>ucfirst($site)
+</%args>
+
+
+<%args>
+$site
+$label=>ucfirst($site)
+</%args>
+
+<%args>
+$article_id
+</%args>
+</html>

@@ -1,0 +1,14 @@
+<html>
+
+<%filter>
+tr/a-z/A-Z/
+</%filter>
+Some
+
+<%filter>
+my $uri = $r->uri;
+    s{<a href="$uri/?">(.*?)</a>} {<b>$1</b>}i;
+</%filter>
+
+
+</html>

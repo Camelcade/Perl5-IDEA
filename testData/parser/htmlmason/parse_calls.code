@@ -1,0 +1,33 @@
+<html>
+
+<% $file_data |h %>
+
+<% $uri | u, n %>
+
+<% $uri | un %>
+
+# relative component paths
+<& topimage &>
+<& tools/searchbox &>
+
+# absolute component path
+<& /shared/masthead, color=>'salmon' &>
+
+# this component path MUST have quotes because it contains a comma
+<& "sugar,eggs", mix=>1 &>
+
+# variable component path
+<& $comp &>
+
+# variable component and arguments
+<& $comp, %args &>
+
+# you can use arbitrary expression for component path, but it cannot
+# begin with a letter or number; delimit with () to remedy this
+<& (int(rand(2)) ? 'thiscomp' : 'thatcomp'), id=>123 &>
+
+<%doc>
+<& /mktg/prods.html', 'dog', [2, 3, 4], {a => 7, b => 8} &>
+</%doc>
+
+</html>

@@ -1,0 +1,62 @@
+<html>
+
+Hello <% $noun %>,
+
+<% # This is a single-line comment %>
+
+<head><title><% $headline %></title></head>
+<body>
+<h2><% $headline %></h2>
+<p>By <% $author %>, <% $date %></p>
+
+<% $body %>
+
+</body>
+
+% if ( $time[2] < 12 ) {
+good morning.
+% } else {
+good afternoon.
+% }
+
+% my $ua = $r->header_in('User-Agent');
+% if ($ua =~ /msie/i) {
+Welcome, Internet Explorer users
+...
+% } elsif ($ua =~ /mozilla/i) {
+Welcome, Netscape users
+...
+% }
+
+<ul>
+% foreach $item (@list) {
+<li><% $item %></li>
+% }
+</ul>
+
+<ul>
+% while (my ($key,$value) = each(%ENV)) {
+<li>
+<b><% $key %></b>: <% $value %>
+</li>
+% }
+</ul>
+
+<table>
+% foreach my $h (@loh) {
+<tr>
+<td><% $h->{foo} %></td>
+<td bgcolor=#ee0000><% $h->{bar} %></td>
+<td><% $h->{baz} %></td>
+</tr>
+% }
+</table>
+
+Dear <% $name %>: We will come to your house at <% $address %> in the
+fair city of <% $city %> to deliver your $<% $amount %> dollar prize!
+
+The answer is <% ($y+8) % 2 %>.
+
+You are <% $age < 18 ? 'not' : '' %> permitted to enter this site.
+
+</html>

@@ -1,0 +1,8 @@
+<html>
+Hi!
+<%perl>
+my $noun = 'World';
+my @time = localtime;
+say 'something';  # comment
+</%perl>
+</html>

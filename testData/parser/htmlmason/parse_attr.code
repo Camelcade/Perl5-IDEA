@@ -1,0 +1,10 @@
+<html>
+
+
+<%attr>
+color => 'blue'
+fonts => [qw(arial geneva helvetica)]
+</%attr>
+
+
+</thml>

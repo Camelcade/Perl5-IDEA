@@ -419,6 +419,25 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 					// check for named block
 					String openingTag = matcherOpener.group(0);
 					addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
+
+					// spaces
+					offset += openingTag.length();
+					int startOffset = offset;
+					while (offset < bufferEnd && Character.isWhitespace(buffer.charAt(offset)))
+					{
+						offset++;
+					}
+
+					if (offset > startOffset)
+						addPreparsedToken(startOffset, startOffset = offset, TokenType.WHITE_SPACE);
+
+					while (offset < bufferEnd && (Character.isLetterOrDigit(currentChar = buffer.charAt(offset)) || currentChar == '_' || currentChar == '-' || currentChar == '.'))
+					{
+						offset++;
+					}
+
+					if (offset > startOffset) addPreparsedToken(startOffset, startOffset = offset, IDENTIFIER);
+
 					setCustomState(LEX_MASON_OPENING_TAG);
 				}
 				else
