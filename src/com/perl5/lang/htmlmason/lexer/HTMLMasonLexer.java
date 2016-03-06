@@ -75,6 +75,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 
 	public static final int LEX_MASON_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_MASON_PERL_BLOCK = LEX_CUSTOM2;             // complicated blocks <%kw>...</%kw>
+	public static final int LEX_MASON_PERL_ARGS_BLOCK = LEX_CUSTOM8;        // <%args> block
 	public static final int LEX_MASON_PERL_LINE = LEX_CUSTOM3;              // % ...
 	public static final int LEX_MASON_PERL_EXPR_BLOCK = LEX_CUSTOM4;        // <% ... | id1, id2, ... %>
 	public static final int LEX_MASON_PERL_EXPR_FILTER_BLOCK = LEX_CUSTOM5; // | id1, id2, ... %> // same as above, but after pipe
@@ -142,6 +143,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 		CLOSE_TOKENS_MAP.put(KEYWORD_DEF_CLOSER, HTML_MASON_DEF_CLOSER);
 	}
 
+	protected boolean clearLine = false;
 	private String BLOCK_CLOSE_TAG;
 
 	public HTMLMasonLexer(Project project)
@@ -153,6 +155,27 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 	public int getInitialCustomState()
 	{
 		return LEX_MASON_HTML_BLOCK;
+	}
+
+	@Override
+	public IElementType advance() throws IOException
+	{
+		IElementType result = super.advance();
+
+		if (getCustomState() == LEX_MASON_PERL_ARGS_BLOCK && clearLine && result == OPERATOR_MOD)
+		{
+			result = SIGIL_HASH;
+		}
+
+		if (result == TokenType.NEW_LINE_INDENT)
+		{
+			clearLine = true;
+		}
+		else if (result != TokenType.WHITE_SPACE)
+		{
+			clearLine = false;
+		}
+		return result;
 	}
 
 	public IElementType perlAdvance() throws IOException
@@ -232,7 +255,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 			}
 
 		}
-		else if (currentCustomState == LEX_MASON_PERL_BLOCK && bufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG))
+		else if ((currentCustomState == LEX_MASON_PERL_BLOCK || currentCustomState == LEX_MASON_PERL_ARGS_BLOCK) && bufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG))
 		{
 			setTokenStart(tokenStart);
 			setTokenEnd(tokenStart + BLOCK_CLOSE_TAG.length());
@@ -381,6 +404,10 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 						{
 							addPreparsedToken(offset, offset + KEYWORD_TEXT_CLOSER.length(), HTML_MASON_TEXT_CLOSER);
 						}
+					}
+					else if (openingTag.equals(KEYWORD_ARGS_OPENER))
+					{
+						setCustomState(LEX_MASON_PERL_ARGS_BLOCK);
 					}
 					else
 					{

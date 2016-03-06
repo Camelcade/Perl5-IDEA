@@ -100,6 +100,39 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			)
 	);
 
+	public static boolean parseArgsBlock(PsiBuilder b, int l)
+	{
+		boolean r = false;
+		if (PerlParserUtil.consumeToken(b, HTML_MASON_ARGS_OPENER))
+		{
+			PsiBuilder.Marker innerMarker = b.mark();
+			boolean hasItems = false;
+
+			while (parseArgument(b, l)) hasItems = true;
+
+			if (hasItems)
+			{
+				innerMarker.done(HTML_MASON_ARGS_BLOCK);
+				innerMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+			}
+
+			r = PerlParserUtil.consumeToken(b, HTML_MASON_ARGS_CLOSER);
+		}
+
+		return r || recoverToGreedy(b, HTML_MASON_ARGS_CLOSER, "Error");
+	}
+
+	public static boolean parseArgument(PsiBuilder b, int l)
+	{
+		boolean r = variable_declaration_wrapper(b, l);
+		if (r && PerlParserUtil.consumeToken(b, OPERATOR_COMMA_ARROW))
+		{
+			r = expr(b, l, -1);
+		}
+		return r;
+	}
+
+
 	public static boolean parseMasonNamedBlock(PsiBuilder b, int l, IElementType closeToken, IElementType statementTokenType)
 	{
 		boolean r = false;
@@ -290,6 +323,10 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		else if (tokenType == HTML_MASON_PERL_OPENER)
 		{
 			r = parsePerlBlock(b, l, HTML_MASON_PERL_CLOSER);
+		}
+		else if (tokenType == HTML_MASON_ARGS_OPENER)
+		{
+			r = parseArgsBlock(b, l);
 		}
 		else if (tokenType == HTML_MASON_FLAGS_OPENER)
 		{

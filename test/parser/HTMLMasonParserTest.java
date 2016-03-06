@@ -38,4 +38,9 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 	{
 		doTest("parser_test");
 	}
+
+	public void testArgs()
+	{
+		doTest("parse_args");
+	}
 }

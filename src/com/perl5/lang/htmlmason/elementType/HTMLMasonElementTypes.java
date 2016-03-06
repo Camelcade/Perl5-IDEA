@@ -93,7 +93,8 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 	IElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonElementType("FLAGS_STATEMENT");
 	IElementType HTML_MASON_CALL_STATEMENT = new HTMLMasonElementType("MASON_CALL_STATEMENT");
 	IElementType HTML_MASON_ABSTRACT_BLOCK = new HTMLMasonElementType("MASON_ABSTRACT_BLOCK");
-	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonElementType("MASON_ARGS_BLOCK");
-	IElementType HTML_MASON_ATTR_BLOCK = new HTMLMasonElementType("MASON_ATTR_BLOCK");
 	IElementType HTML_MASON_TEXT_BLOCK = new HTMLMasonElementType("MASON_TEXT_BLOCK");
+	IElementType HTML_MASON_ATTR_BLOCK = new HTMLMasonElementType("MASON_ATTR_BLOCK");
+
+	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonElementType("MASON_ARGS_BLOCK");
 }

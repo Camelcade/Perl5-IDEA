@@ -1,0 +1,25 @@
+ <%args>
+    $abs
+	@b       # a comment
+	%c
+
+	# another comment
+	$d => 5
+	$e => $d * 2
+	@f => ('foo', 'baz')
+	%g => (joe => 1, bob => 2)
+</%args>
+
+
+<%method supermethod2>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+<%args>
+    $site
+	$label => ucfirst( $site )
+</%args>
+
+
+% say 'hi';
+
+</%method>

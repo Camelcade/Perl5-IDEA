@@ -17,11 +17,10 @@
 package com.perl5.lang.perl.parser;
 
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 
 /**
  * Created by hurricup on 05.03.2016.
  */
-public interface HTMLMasonParser extends HTMLMasonElementTypes, MooseElementTypes
+public interface HTMLMasonParser extends HTMLMasonElementTypes
 {
 }
