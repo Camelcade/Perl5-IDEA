@@ -1,11 +1,5 @@
 <html>
 
-<% $file_data |h %>
-
-<% $uri | u, n %>
-
-<% $uri | un %>
-
 # relative component paths
 <& topimage &>
 <& tools/searchbox &>

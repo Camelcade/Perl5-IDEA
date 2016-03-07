@@ -104,6 +104,11 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 		doTest("parse_text");
 	}
 
+	public void testEscapedBlock()
+	{
+		doTest("parse_escaped_block");
+	}
+
 	public void testSyntax()
 	{
 		doTest("parser_test");

@@ -42,7 +42,6 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 					+ IDENTIFIER_PATTERN
 					+ "\\s*" + KEYWORD_BLOCK_CLOSER
 	);
-
 	public static final Pattern HTML_MASON_SIMPLE_OPENERS = Pattern.compile(
 			"<%(" +
 					KEYWORD_PERL + "|" +
@@ -58,21 +57,18 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 					KEYWORD_TEXT +
 					")>"
 	);
-
 	public static final Pattern HTML_MASON_OPENERS = Pattern.compile(
 			"<%(" +
 					KEYWORD_METHOD + "|" +
 					KEYWORD_DEF +
 					")"
 	);
-
 	public static final Pattern HTML_MASON_CLOSERS = Pattern.compile(
 			"</%(" +
 					KEYWORD_METHOD + "|" +
 					KEYWORD_DEF +
 					")>"
 	);
-
 	public static final int LEX_MASON_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_MASON_PERL_BLOCK = LEX_CUSTOM2;             // complicated blocks <%kw>...</%kw>
 	public static final int LEX_MASON_PERL_ARGS_BLOCK = LEX_CUSTOM8;        // <%args> block
@@ -81,7 +77,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 	public static final int LEX_MASON_PERL_EXPR_FILTER_BLOCK = LEX_CUSTOM5; // | id1, id2, ... %> // same as above, but after pipe
 	public static final int LEX_MASON_PERL_CALL_BLOCK = LEX_CUSTOM6;        // <& ... &>
 	public static final int LEX_MASON_OPENING_TAG = LEX_CUSTOM7;            // lexing tag additional info
-
+	protected static final Pattern DEFAULT_ESCAPERS_MERGED = Pattern.compile("[unh]+");
 	private static final Map<String, IElementType> OPEN_TOKENS_MAP = new THashMap<String, IElementType>();
 	private static final Map<String, String> OPEN_CLOSE_MAP = new THashMap<String, String>();
 	private static final Map<String, IElementType> CLOSE_TOKENS_MAP = new THashMap<String, IElementType>();
@@ -161,8 +157,9 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 	public IElementType advance() throws IOException
 	{
 		IElementType result = super.advance();
+		int currentCustomState = getCustomState();
 
-		if (getCustomState() == LEX_MASON_PERL_ARGS_BLOCK && clearLine && result == OPERATOR_MOD)
+		if (currentCustomState == LEX_MASON_PERL_ARGS_BLOCK && clearLine && result == OPERATOR_MOD)
 		{
 			result = SIGIL_HASH;
 		}
@@ -221,6 +218,28 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 				setCustomState(LEX_MASON_PERL_EXPR_FILTER_BLOCK);
 				return HTML_MASON_EXPR_FILTER_PIPE;
 			}
+		}
+		else if (currentCustomState == LEX_MASON_PERL_EXPR_FILTER_BLOCK && (currentChar == '-' || Character.isLetterOrDigit(currentChar)))
+		{
+			int offset = tokenStart;
+			while (offset < bufferEnd && (currentChar = buffer.charAt(offset)) == '-' || Character.isLetterOrDigit(currentChar))
+			{
+				offset++;
+			}
+			int tokenLength = offset - tokenStart;
+			CharSequence token = buffer.subSequence(tokenStart, offset);
+			if (tokenLength <= 3 && DEFAULT_ESCAPERS_MERGED.matcher(token).matches())
+			{
+				while (tokenStart < offset)
+				{
+					addPreparsedToken(tokenStart++, tokenStart, HTML_MASON_DEFAULT_ESCAPER_NAME);
+				}
+			}
+			else
+			{
+				addPreparsedToken(tokenStart, offset, HTML_MASON_ESCAPER_NAME);
+			}
+			return getPreParsedToken();
 		}
 		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK || currentCustomState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
 		{

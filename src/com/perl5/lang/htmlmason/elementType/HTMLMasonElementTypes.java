@@ -43,6 +43,9 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 
 	IElementType HTML_MASON_TAG_CLOSER = new HTMLMasonTokenType(KEYWORD_TAG_CLOSER);
 
+	IElementType HTML_MASON_ESCAPER_NAME = new HTMLMasonTokenType("HTML_MASON_ESCAPER");
+	IElementType HTML_MASON_DEFAULT_ESCAPER_NAME = new HTMLMasonTokenType("HTML_MASON_ESCAPER");
+
 	IElementType HTML_MASON_CALL_OPENER = new HTMLMasonTokenType(KEYWORD_CALL_OPENER);
 	IElementType HTML_MASON_CALL_FILTERING_OPENER = new HTMLMasonTokenType(KEYWORD_CALL_OPENER_FILTER);
 	IElementType HTML_MASON_CALL_CLOSER = new HTMLMasonTokenType(KEYWORD_CALL_CLOSER);

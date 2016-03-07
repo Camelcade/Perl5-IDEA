@@ -271,12 +271,11 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 				// parseStatement filter
 				if (PerlParserUtil.consumeToken(b, HTML_MASON_EXPR_FILTER_PIPE))
 				{
-					while (b.getTokenType() == IDENTIFIER)
+					while ((tokenType = b.getTokenType()) == HTML_MASON_DEFAULT_ESCAPER_NAME || tokenType == HTML_MASON_ESCAPER_NAME)
 					{
-						PsiBuilder.Marker fm = b.mark();
 						b.advanceLexer();
-						fm.collapse(SUB);
-						fm.precede().done(METHOD);
+
+						while (PerlParserUtil.consumeToken(b, HTML_MASON_DEFAULT_ESCAPER_NAME)) ;
 
 						if (!PerlParserUtil.consumeToken(b, OPERATOR_COMMA))
 						{

@@ -1,0 +1,16 @@
+
+<html>
+
+<% $a + $b | nuh, test %>
+<% $a + $b | n,u,h, test %>
+<% $a | $b | n,u,h, test %>
+<% "test" | h %>
+<% $file_data |h %>
+<% $uri | u, n %>
+<% $uri | un %>
+<% $uri | hun %>
+<% $uri | hn %>
+
+
+</html>
+
