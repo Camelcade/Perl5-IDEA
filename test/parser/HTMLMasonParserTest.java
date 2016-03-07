@@ -49,6 +49,16 @@ public class HTMLMasonParserTest extends PerlMultiPsiParserTestBase
 		doTest("parse_calls");
 	}
 
+	public void testCallsUnclosed()
+	{
+		doTest("parse_calls_unclosed", false);
+	}
+
+	public void testCallsUnclosedTag()
+	{
+		doTest("parse_calls_unclosed_tag", false);
+	}
+
 	public void testCallsFiltering()
 	{
 		doTest("parse_calls_filtering");

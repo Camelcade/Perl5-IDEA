@@ -360,12 +360,10 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 
 			if (b.getTokenType() != HTML_MASON_CALL_CLOSE_TAG_START) // need recover
 			{
-				PsiBuilder.Marker errorMarker = b.mark();
 				while (!b.eof() && b.getTokenType() != HTML_MASON_CALL_CLOSE_TAG_START)
 				{
 					b.advanceLexer();
 				}
-				errorMarker.error("Filtering close tag expected");
 			}
 
 			blockMarker.done(HTML_MASON_FILTERED_BLOCK);
