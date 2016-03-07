@@ -26,6 +26,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.LanguageSubstitutor;
 import com.intellij.psi.LanguageSubstitutors;
+import com.intellij.util.FileContentUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.htmlmason.idea.lang.HTMLMasonLanguageSubstitutor;
@@ -97,6 +98,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings>
 	{
 		updateSubstitutors();
 		super.settingsUpdated();
+		FileContentUtil.reparseOpenedFiles();
 	}
 
 	protected void updateSubstitutors()
@@ -136,6 +138,5 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings>
 				}
 			}
 		}
-
 	}
 }
