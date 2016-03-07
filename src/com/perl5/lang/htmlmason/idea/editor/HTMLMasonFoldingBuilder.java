@@ -43,8 +43,18 @@ public class HTMLMasonFoldingBuilder extends PerlFoldingBuilder implements HTMLM
 			TokenSet.create(
 					HTML_MASON_BLOCK_OPENER,
 					HTML_MASON_BLOCK_CLOSER,
+					HTML_MASON_PERL_OPENER,
+					HTML_MASON_PERL_CLOSER,
 					HTML_MASON_LINE_OPENER
 			));
+
+	protected static final TokenSet FOLDABLE_TOKENS = TokenSet.create(
+			HTML_MASON_ABSTRACT_BLOCK,
+			HTML_MASON_ARGS_BLOCK,
+			HTML_MASON_ATTR_BLOCK,
+			HTML_MASON_TEXT_BLOCK,
+			HTML_MASON_FILTERED_BLOCK
+	);
 
 	@NotNull
 	@Override
@@ -66,15 +76,19 @@ public class HTMLMasonFoldingBuilder extends PerlFoldingBuilder implements HTMLM
 		}
 		else if (tokenType == HTML_MASON_ATTR_BLOCK)
 		{
-			return "attributes...";
+			return "/ attributes /";
 		}
 		else if (tokenType == HTML_MASON_ARGS_BLOCK)
 		{
-			return "arguments...";
+			return "/ arguments /";
 		}
 		else if (tokenType == HTML_MASON_TEXT_BLOCK)
 		{
-			return "{text block}";
+			return "/ text block /";
+		}
+		else if (tokenType == HTML_MASON_FILTERED_BLOCK)
+		{
+			return " / filtered content /";
 		}
 		return super.getPlaceholderText(node, range);
 	}
@@ -109,7 +123,7 @@ public class HTMLMasonFoldingBuilder extends PerlFoldingBuilder implements HTMLM
 		{
 			IElementType elementType = element.getNode().getElementType();
 
-			if (elementType == HTML_MASON_ABSTRACT_BLOCK || elementType == HTML_MASON_ARGS_BLOCK || elementType == HTML_MASON_ATTR_BLOCK || elementType == HTML_MASON_TEXT_BLOCK)
+			if (FOLDABLE_TOKENS.contains(elementType))
 			{
 				addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
 			}

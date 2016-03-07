@@ -41,6 +41,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					HTML_MASON_ARGS_CLOSER,
 					HTML_MASON_FILTER_CLOSER,
 					HTML_MASON_FLAGS_CLOSER,
+					HTML_MASON_CALL_CLOSE_TAG_START,
 
 					HTML_MASON_METHOD_CLOSER,
 					HTML_MASON_DEF_CLOSER,
@@ -59,6 +60,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					HTML_MASON_PERL_CLOSER,
 					HTML_MASON_FILTER_CLOSER,
 					HTML_MASON_FLAGS_CLOSER,
+					HTML_MASON_CALL_CLOSE_TAG_START,
 
 					HTML_MASON_METHOD_CLOSER,
 					HTML_MASON_DEF_CLOSER
@@ -74,6 +76,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					HTML_MASON_ARGS_CLOSER,
 					HTML_MASON_FILTER_CLOSER,
 					HTML_MASON_FLAGS_CLOSER,
+					HTML_MASON_CALL_CLOSE_TAG_START,
 
 					HTML_MASON_METHOD_CLOSER,
 					HTML_MASON_DEF_CLOSER
@@ -89,6 +92,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					HTML_MASON_ARGS_CLOSER,
 					HTML_MASON_FILTER_CLOSER,
 					HTML_MASON_FLAGS_CLOSER,
+					HTML_MASON_CALL_CLOSE_TAG_START,
 
 					HTML_MASON_METHOD_CLOSER,
 					HTML_MASON_DEF_CLOSER
@@ -330,7 +334,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 				statementMarker.done(STATEMENT);
 			}
 		}
-		if (tokenType == HTML_MASON_CALL_OPENER)
+		else if (tokenType == HTML_MASON_CALL_OPENER)
 		{
 			PsiBuilder.Marker statementMarker = b.mark();
 			b.advanceLexer();
@@ -339,6 +343,47 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			{
 				statementMarker.done(HTML_MASON_CALL_STATEMENT);
 			}
+		}
+		else if (tokenType == HTML_MASON_CALL_FILTERING_OPENER)
+		{
+			PsiBuilder.Marker statementMarker = b.mark();
+			b.advanceLexer();
+			PerlParserImpl.expr(b, l, -1);
+
+			if (r = endOrRecover(b, HTML_MASON_CALL_CLOSER_UNMATCHED))
+			{
+				statementMarker.done(HTML_MASON_CALL_STATEMENT);
+			}
+
+			PsiBuilder.Marker blockMarker = b.mark();
+			PerlParserImpl.block_content(b, l);
+
+			if (b.getTokenType() != HTML_MASON_CALL_CLOSE_TAG_START) // need recover
+			{
+				PsiBuilder.Marker errorMarker = b.mark();
+				while (!b.eof() && b.getTokenType() != HTML_MASON_CALL_CLOSE_TAG_START)
+				{
+					b.advanceLexer();
+				}
+				errorMarker.error("Filtering close tag expected");
+			}
+
+			blockMarker.done(HTML_MASON_FILTERED_BLOCK);
+			blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+
+			if (b.eof())
+			{
+				b.mark().error("Unclosed filtering block");
+			}
+			else if (PerlParserUtil.consumeToken(b, HTML_MASON_CALL_CLOSE_TAG_START))
+			{
+				string_bare(b, l);
+				if (!PerlParserUtil.consumeToken(b, HTML_MASON_TAG_CLOSER))
+				{
+					b.mark().error("Incomplete close tag");
+				}
+			}
+			r = true;
 		}
 		else if (tokenType == HTML_MASON_ONCE_OPENER)
 		{

@@ -29,9 +29,8 @@ public interface HTMLMasonSyntaxElements
 
 	String KEYWORD_CALL_CLOSER = " &>";
 
-	String KEYWORD_CALL_CLOSE_TAG = "</&>";
-	String KEYWORD_CALL_CLOSE_TAG_START = "</& ";
-	String KEYWORD_TAG_CLOSER = " >";
+	String KEYWORD_CALL_CLOSE_TAG_START = "</&";
+	String KEYWORD_TAG_CLOSER = ">";
 
 	String KEYWORD_PERL = "perl";
 	String KEYWORD_PERL_OPENER_UNCLOSED = "<%" + KEYWORD_PERL;

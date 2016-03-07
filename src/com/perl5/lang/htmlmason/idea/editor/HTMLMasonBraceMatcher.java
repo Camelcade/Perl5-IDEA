@@ -31,6 +31,7 @@ public class HTMLMasonBraceMatcher implements PairedBraceMatcher, HTMLMasonEleme
 	private static final BracePair[] PAIRS = new BracePair[]{
 			new BracePair(HTML_MASON_BLOCK_OPENER, HTML_MASON_BLOCK_CLOSER, false),
 			new BracePair(HTML_MASON_CALL_OPENER, HTML_MASON_CALL_CLOSER, false),
+			new BracePair(HTML_MASON_CALL_FILTERING_OPENER, HTML_MASON_CALL_CLOSE_TAG_START, false),
 			new BracePair(HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER, false),
 			new BracePair(HTML_MASON_DEF_OPENER, HTML_MASON_DEF_CLOSER, false),
 			new BracePair(HTML_MASON_FILTER_OPENER, HTML_MASON_FILTER_CLOSER, false),

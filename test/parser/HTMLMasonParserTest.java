@@ -49,6 +49,11 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 		doTest("parse_calls");
 	}
 
+	public void testCallsFiltering()
+	{
+		doTest("parse_calls_filtering");
+	}
+
 	public void testCode()
 	{
 		doTest("parse_code");
@@ -114,9 +119,5 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 		doTest("parse_mason_sample");
 	}
 
-	public void testSyntax()
-	{
-		doTest("parser_test");
-	}
 
 }
