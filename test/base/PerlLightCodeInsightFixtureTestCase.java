@@ -16,14 +16,18 @@
 
 package base;
 
+import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +37,9 @@ import java.io.IOException;
  */
 public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsightFixtureTestCase
 {
+	private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
+	private static final String END_FOLD = "</fold>";
+
 	@Override
 	protected void setUp() throws Exception
 	{
@@ -91,4 +98,31 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		PsiElement focused = myFixture.getFile().findElementAt(offset);
 		return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
 	}
+
+	protected void testFoldingRegions(@NotNull String verificationFileName, LanguageFileType fileType)
+	{
+		testFoldingRegions(verificationFileName, false, fileType);
+	}
+
+	protected void testFoldingRegions(@NotNull String verificationFileName, boolean doCheckCollapseStatus, LanguageFileType fileType)
+	{
+		String expectedContent;
+		try
+		{
+			expectedContent = FileUtil.loadFile(new File(getTestDataPath() + "/" + verificationFileName + ".code"));
+		} catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+		Assert.assertNotNull(expectedContent);
+
+		expectedContent = StringUtil.replace(expectedContent, "\r", "");
+		final String cleanContent = expectedContent.replaceAll(START_FOLD, "").replaceAll(END_FOLD, "");
+
+		myFixture.configureByText(fileType, cleanContent);
+		final String actual = ((CodeInsightTestFixtureImpl) myFixture).getFoldingDescription(doCheckCollapseStatus);
+
+		Assert.assertEquals(expectedContent, actual);
+	}
+
 }

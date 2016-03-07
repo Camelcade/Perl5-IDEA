@@ -72,6 +72,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		return myFileName;
 	}
 
+
 	@Override
 	protected boolean skipSpaces()
 	{

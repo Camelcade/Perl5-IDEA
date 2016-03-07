@@ -1,0 +1,99 @@
+<fold text='/ template /'><html>
+</fold>
+<%args><fold text='/ arguments /'>
+$abs
+    @b       # a comment
+    %c
+
+    # another comment
+    $d => 5
+    %h1 => {somevar => 42}
+    $e => $d * 2
+    %h1 => {somevar => 42}
+    @f => ('foo', 'baz')
+    %h1 => {somevar => 42}
+    %g => (joe => 1, bob => 2)
+    %h => {somevar => 42}
+</fold></%args>
+<fold text='/ template /'>
+</fold>
+<%attr><fold text='/ attributes /'>
+    color => 'blue'
+        fonts => {qw(arial geneva helvetica)}
+        fonts => [qw(arial geneva helvetica)]   # this is it
+
+        fonts => {qw(arial geneva helvetica)}
+</fold></%attr>
+
+<&| "outer" &><fold text=' / filtered content /'>
+<fold text='/ template /'>    Hello
+     my </fold><% $name %>
+     is someone
+</fold></&>
+
+<%def _li.n-k><fold text='{code block}'>
+<a href="http://www.<% $site %>.com"><% $label %><fold text='/ template /'></a>
+</fold>
+</fold></%def>
+
+<%doc>
+<fold text='# Block comment'><&| /path/to/comp &> this is the content </&>
+<&| comp, arg1 => 'hi' &> filters can take arguments </&>
+<&| comp &> content can include <% "tags" %> of all kinds </&>
+<&| comp1 &> nesting is also <&| comp2 &> OK </&> </&>
+<&| SELF:method1 &> subcomponents can be filters </&></fold>
+</%doc>
+
+<%filter><fold text='{code block}'>
+my $uri = $r->uri;
+    s{<a href="$uri/?">(.*?)</a>} {<b>$1</b>}i;
+</fold></%filter>
+
+<%init><fold text='{code block}'>
+my $ua = $r->header_in('User-Agent');
+    return ($ua =~ /Mozilla/i && $ua !~ /MSIE/i) ? 1 : 0;
+</fold></%init>
+
+<%method .li--nk><fold text='{code block}'>
+<a href="http://www.<% $site %>.com"><% $label %><fold text='/ template /'></a>
+</fold>
+</fold></%method>
+
+<%once><fold text='{code block}'>
+# Fetch article from database
+    my $dbh = DBI::connect;
+    my $sth = $dbh->prepare("select * from articles where id = ?");
+    $sth->execute($article_id);
+    my ($headline, $date, $author, $body) = $sth->fetchrow_array;
+    # Massage the fields
+    $headline = uc($headline);
+    my ($year, $month, $day) = split('-', $date);
+    $date = "$month/$day";
+</fold></%once>
+
+<%perl>
+my $noun = 'World';
+my @time = localtime;
+say 'something';  # comment
+</%perl>
+
+<%shared><fold text='{code block}'>
+# Fetch article from database
+    my $dbh = DBI::connect;
+    my $sth = $dbh->prepare("select * from articles where id = ?");
+    $sth->execute($article_id);
+    my ($headline, $date, $author, $body) = $sth->fetchrow_array;
+    # Massage the fields
+    $headline = uc($headline);
+    my ($year, $month, $day) = split('-', $date);
+    $date = "$month/$day";
+</fold></%shared>
+
+<%text><fold text='/ text block /'>
+% This is an example of a Perl line.
+<% This is an example of an expression block. %>
+</fold></%text>
+<fold text='/ template /'>
+
+
+</html></fold>

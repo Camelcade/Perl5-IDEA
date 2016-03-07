@@ -21,7 +21,7 @@ import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
 /**
  * Created by hurricup on 06.03.2016.
  */
-public class HTMLMasonParserTest extends PerlParserTestBase
+public class HTMLMasonParserTest extends PerlMultiPsiParserTestBase
 {
 	public HTMLMasonParserTest()
 	{
