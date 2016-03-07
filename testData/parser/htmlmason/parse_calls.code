@@ -20,8 +20,12 @@
 # begin with a letter or number; delimit with () to remedy this
 <& (int(rand(2)) ? 'thiscomp' : 'thatcomp'), id=>123 &>
 
-<%doc>
 <& /mktg/prods.html', 'dog', [2, 3, 4], {a => 7, b => 8} &>
-</%doc>
+
+<& /mktg/prods.html, {a => 7, b => 8} &>
+<& /mktg/prods.html, 'dog', [2, 3, 4], {a => 7, b => 8} &>
+<& /mktg/prods.html, 'dog', {a => 7, b => 8}, [2, 3, 4] &>
+<& /mktg/prods.html, {a => 7, b => 8}, [2, 3, 4] &>
+<& /mktg/prods.html, [2, 3, 4], {a => 7, b => 8} &>
 
 </html>

@@ -1,7 +1,7 @@
 HTML::Mason component
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>\nHi!\n')
   PsiElement(HTML::Mason::Token.<%perl>)('<%perl>')
-  ASTWrapperPsiElement(HTML::Mason::Element.HTML::Mason::Token.MASON_ABSTRACT_BLOCK)
+  ASTWrapperPsiElement(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
     PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
       PsiPerlAssignExprImpl(PerlElementType.PerlTokenType.ASSIGN_EXPR)
         PsiPerlVariableDeclarationLexicalImpl(PerlElementType.PerlTokenType.VARIABLE_DECLARATION_LEXICAL)

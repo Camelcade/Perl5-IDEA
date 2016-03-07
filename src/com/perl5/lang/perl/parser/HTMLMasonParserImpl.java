@@ -18,6 +18,7 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
@@ -93,10 +94,22 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					HTML_MASON_DEF_CLOSER
 			));
 
-	protected TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
+	protected static final TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
 			PerlParserImpl.UNCONSUMABLE_SEMI_TOKENS,
 			TokenSet.create(
 					HTML_MASON_FILTER_CLOSER
+			)
+	);
+
+	protected static final TokenSet ANON_HASH_SUFFIX_TOKENS = TokenSet.orSet(
+			PerlParserImpl.ANON_HASH_TOKEN_SUFFIXES,
+			TokenSet.create(
+					HTML_MASON_CALL_CLOSER,
+
+					HTML_MASON_BLOCK_CLOSER,
+
+					// args closer and items. possibly we need to make this smarter
+					HTML_MASON_HARD_NEWLINE
 			)
 	);
 
@@ -108,7 +121,17 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			PsiBuilder.Marker innerMarker = b.mark();
 			boolean hasItems = false;
 
-			while (parseArgument(b, l)) hasItems = true;
+			while (true)
+			{
+				if (parseArgument(b, l))
+				{
+					hasItems = true;
+				}
+				else if (!parseHardNewline(b))
+				{
+					break;
+				}
+			}
 
 			if (hasItems)
 			{
@@ -122,6 +145,18 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		return r || recoverToGreedy(b, HTML_MASON_ARGS_CLOSER, "Error");
 	}
 
+	public static boolean parseHardNewline(PsiBuilder b)
+	{
+		if (b.getTokenType() == HTML_MASON_HARD_NEWLINE)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(TokenType.NEW_LINE_INDENT);
+			return true;
+		}
+		return false;
+	}
+
 	public static boolean parseArgument(PsiBuilder b, int l)
 	{
 		boolean r = variable_declaration_wrapper(b, l);
@@ -131,7 +166,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		}
 		return r;
 	}
-
 
 	public static boolean parseMasonNamedBlock(PsiBuilder b, int l, IElementType closeToken, IElementType statementTokenType)
 	{
@@ -217,6 +251,13 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		abstractBlockMarker.done(blockToken);
 		abstractBlockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 		return endOrRecover(b, closeToken);
+	}
+
+	@NotNull
+	@Override
+	public TokenSet getAnonHashSuffixTokens()
+	{
+		return ANON_HASH_SUFFIX_TOKENS;
 	}
 
 	@NotNull
@@ -350,7 +391,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 
 			while (!b.eof() && b.getTokenType() != HTML_MASON_ATTR_CLOSER)
 			{
-				if (!PerlParserImpl.expr(b, l, -1))
+				if (!PerlParserImpl.expr(b, l, -1) && !parseHardNewline(b))
 				{
 					break;
 				}

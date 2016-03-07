@@ -102,34 +102,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					)
 			)
 	);
-	public static final TokenSet ANON_HASH_TOKEN_SUFFIXES = TokenSet.create(
-			RIGHT_BRACE
-			, RIGHT_PAREN
-			, RIGHT_BRACKET
-			, SEMICOLON
-			, COLON
-
-			, OPERATOR_HELLIP,
-			OPERATOR_FLIP_FLOP,
-			OPERATOR_CONCAT,
-
-			OPERATOR_AND,
-			OPERATOR_OR,
-			OPERATOR_OR_DEFINED,
-			OPERATOR_NOT,
-
-			COLON,
-
-			OPERATOR_AND_LP,
-			OPERATOR_OR_LP,
-//			OPERATOR_XOR_LP,
-			OPERATOR_NOT_LP,
-
-			OPERATOR_COMMA,
-			OPERATOR_COMMA_ARROW,
-
-			OPERATOR_DEREFERENCE
-	);
 	// commands, that accepts filehandles as first parameter
 	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<String>(Arrays.asList(
 			"opendir",
@@ -1763,7 +1735,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean validateAnonHashSuffix(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
-		if (tokenType == null || ANON_HASH_TOKEN_SUFFIXES.contains(tokenType))
+		if (tokenType == null || ((PerlBuilder) b).getPerlParser().getAnonHashSuffixTokens().contains(tokenType))
 		{
 			return true;
 		}

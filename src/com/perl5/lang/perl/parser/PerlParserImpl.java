@@ -122,6 +122,12 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 	}
 
 	@NotNull
+	public TokenSet getAnonHashSuffixTokens()
+	{
+		return ANON_HASH_TOKEN_SUFFIXES;
+	}
+
+	@NotNull
 	public TokenSet getUnconsumableSemicolonTokens()
 	{
 		return UNCONSUMABLE_SEMI_TOKENS;

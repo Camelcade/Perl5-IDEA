@@ -1,15 +1,19 @@
 <html>
 
- <%args>
-    $abs
-	@b       # a comment
-	%c
+<%args>
+$abs
+    @b       # a comment
+    %c
 
-	# another comment
-	$d => 5
-	$e => $d * 2
-	@f => ('foo', 'baz')
-	%g => (joe => 1, bob => 2)
+    # another comment
+    $d => 5
+    %h1 => {somevar => 42}
+    $e => $d * 2
+    %h1 => {somevar => 42}
+    @f => ('foo', 'baz')
+    %h1 => {somevar => 42}
+    %g => (joe => 1, bob => 2)
+    %h => {somevar => 42}
 </%args>
 
 <a href="http://www.<% $site %>.com"><% $label %></a>

@@ -72,6 +72,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 	public static final int LEX_MASON_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_MASON_PERL_BLOCK = LEX_CUSTOM2;             // complicated blocks <%kw>...</%kw>
 	public static final int LEX_MASON_PERL_ARGS_BLOCK = LEX_CUSTOM8;        // <%args> block
+	public static final int LEX_MASON_PERL_ATTR_BLOCK = LEX_CUSTOM9;        // <%attr> block
 	public static final int LEX_MASON_PERL_LINE = LEX_CUSTOM3;              // % ...
 	public static final int LEX_MASON_PERL_EXPR_BLOCK = LEX_CUSTOM4;        // <% ... | id1, id2, ... %>
 	public static final int LEX_MASON_PERL_EXPR_FILTER_BLOCK = LEX_CUSTOM5; // | id1, id2, ... %> // same as above, but after pipe
@@ -167,6 +168,10 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 		if (result == TokenType.NEW_LINE_INDENT)
 		{
 			clearLine = true;
+			if (currentCustomState == LEX_MASON_PERL_ARGS_BLOCK || currentCustomState == LEX_MASON_PERL_ATTR_BLOCK)
+			{
+				result = HTML_MASON_HARD_NEWLINE;
+			}
 		}
 		else if (result != TokenType.WHITE_SPACE)
 		{
@@ -274,7 +279,12 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 			}
 
 		}
-		else if ((currentCustomState == LEX_MASON_PERL_BLOCK || currentCustomState == LEX_MASON_PERL_ARGS_BLOCK) && bufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG))
+		else if (
+				(currentCustomState == LEX_MASON_PERL_BLOCK ||
+						currentCustomState == LEX_MASON_PERL_ARGS_BLOCK ||
+						currentCustomState == LEX_MASON_PERL_ATTR_BLOCK) &&
+						bufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG)
+				)
 		{
 			setTokenStart(tokenStart);
 			setTokenEnd(tokenStart + BLOCK_CLOSE_TAG.length());
@@ -423,6 +433,10 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 						{
 							addPreparsedToken(offset, offset + KEYWORD_TEXT_CLOSER.length(), HTML_MASON_TEXT_CLOSER);
 						}
+					}
+					else if (openingTag.equals(KEYWORD_ATTR_OPENER))
+					{
+						setCustomState(LEX_MASON_PERL_ARGS_BLOCK);
 					}
 					else if (openingTag.equals(KEYWORD_ARGS_OPENER))
 					{

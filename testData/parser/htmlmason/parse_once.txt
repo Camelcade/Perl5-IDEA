@@ -1,7 +1,7 @@
 HTML::Mason component
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>\n\n')
   PsiElement(HTML::Mason::Token.<%once>)('<%once>')
-  ASTWrapperPsiElement(HTML::Mason::Element.HTML::Mason::Token.MASON_ABSTRACT_BLOCK)
+  ASTWrapperPsiElement(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
     PsiComment(PerlTokenType.COMMENT_LINE)('# Fetch article from database')
     PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
       PsiPerlAssignExprImpl(PerlElementType.PerlTokenType.ASSIGN_EXPR)

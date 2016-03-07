@@ -1,10 +1,12 @@
 
 <html>
 
-
 <%attr>
     color => 'blue'
-    fonts => [qw(arial geneva helvetica)]
+    fonts => {qw(arial geneva helvetica)}
+    fonts => [qw(arial geneva helvetica)]   # this is it
+
+    fonts => {qw(arial geneva helvetica)}
 </%attr>
 
   <%attr>
@@ -21,3 +23,4 @@
 </%attr>
 
 </html>
+
