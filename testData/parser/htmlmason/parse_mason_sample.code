@@ -1,0 +1,52 @@
+# this been taken from mason distrib itself
+<%args>
+  $title
+  $integer
+</%args>
+<html><head><title><% $title %></title></head><body>
+<%perl>
+# build tight loop table with array data, multidimensional 5x6
+my @array = sort ("Hello", "World", "2000", "Hello", "World", "2000");
+my @multi = (\@array, \@array, \@array, \@array, \@array);
+</%perl>
+<table>
+% for my $row (0..$#multi) {
+  <tr bgcolor="<% $row % 2 ? 'gray' : 'white' %>">
+%   for my $col (0..$#array) {
+     <td align="center"><font size="+1"><% $multi[$row][$col] %></font></td>
+%   }
+   </tr>
+% }
+</table>
+<%perl>
+for my $i (1..5) {
+  my $var = $i+$integer;
+  </%perl>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%$var%> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <% $var %> Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World <br/>
+  <%perl>
+}
+</%perl>
+</body></html>
+
+
+
+

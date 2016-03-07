@@ -70,7 +70,7 @@ public class HTMLMasonFileType extends PerlFileType
 	@Override
 	public String getDefaultExtension()
 	{
-		return "hm";
+		return "mas";
 	}
 
 	@Nullable

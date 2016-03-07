@@ -360,10 +360,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		{
 			r = parsePerlBlock(b, l, HTML_MASON_FILTER_CLOSER);
 		}
-		else if (tokenType == HTML_MASON_PERL_OPENER)
-		{
-			r = parsePerlBlock(b, l, HTML_MASON_PERL_CLOSER);
-		}
 		else if (tokenType == HTML_MASON_ARGS_OPENER)
 		{
 			r = parseArgsBlock(b, l);
@@ -428,6 +424,12 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		{
 			r = parseMasonNamedBlock(b, l, HTML_MASON_DEF_CLOSER, HTML_MASON_SUBCOMPONENT_DEFINITION);
 		}
+/*
+		else if (tokenType == HTML_MASON_PERL_OPENER) // this branch is never used if perl blocks allows to split perl constructions
+		{
+			r = parsePerlBlock(b, l, HTML_MASON_PERL_CLOSER);
+		}
+*/
 
 		if (r)
 		{

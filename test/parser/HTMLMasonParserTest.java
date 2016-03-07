@@ -25,7 +25,7 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 {
 	public HTMLMasonParserTest()
 	{
-		super("", "hm", new HTMLMasonParserDefinition());
+		super("", "mas", new HTMLMasonParserDefinition());
 	}
 
 	@Override
@@ -107,6 +107,11 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 	public void testEscapedBlock()
 	{
 		doTest("parse_escaped_block");
+	}
+
+	public void testMasonSample()
+	{
+		doTest("parse_mason_sample");
 	}
 
 	public void testSyntax()
