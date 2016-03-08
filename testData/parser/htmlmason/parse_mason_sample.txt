@@ -1,7 +1,7 @@
 HTML::Mason component
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('# this been taken from mason distrib itself\n')
   PsiElement(HTML::Mason::Token.<%args>)('<%args>')
-  ASTWrapperPsiElement(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ARGS_BLOCK)
+  HTMLMasonArgsBlockImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ARGS_BLOCK)
     PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
       PsiPerlScalarVariableImpl(PerlElementType.PerlTokenType.SCALAR_VARIABLE)
         PsiElement(PerlTokenType.SIGIL_SCALAR)('$')

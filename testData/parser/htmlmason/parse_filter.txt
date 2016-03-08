@@ -1,7 +1,7 @@
 HTML::Mason component
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>\n\n')
   PsiElement(HTML::Mason::Token.<%filter>)('<%filter>')
-  ASTWrapperPsiElement(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
+  PerlCompositeElementImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
     PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
       PsiPerlTrRegexImpl(PerlElementType.PerlTokenType.TR_REGEX)
         PsiElement(PerlTokenType.tr)('tr')
@@ -15,7 +15,7 @@ HTML::Mason component
   PsiElement(HTML::Mason::Token.</%filter>)('</%filter>')
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('\nSome\n\n')
   PsiElement(HTML::Mason::Token.<%filter>)('<%filter>')
-  ASTWrapperPsiElement(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
+  PerlCompositeElementImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
     PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
       PsiPerlAssignExprImpl(PerlElementType.PerlTokenType.ASSIGN_EXPR)
         PsiPerlVariableDeclarationLexicalImpl(PerlElementType.PerlTokenType.VARIABLE_DECLARATION_LEXICAL)

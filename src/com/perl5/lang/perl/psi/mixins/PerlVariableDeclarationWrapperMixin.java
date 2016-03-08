@@ -27,6 +27,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.*;
@@ -170,7 +171,8 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 		return parent instanceof PsiPerlVariableDeclarationLexical ||
 				parent instanceof PsiPerlSubSignatureContent ||
 				isInvocantDeclaration() ||
-				isLocalDeclaration()
+				isLocalDeclaration() ||
+				isArgsDeclaration()
 				;
 	}
 
@@ -178,6 +180,12 @@ public class PerlVariableDeclarationWrapperMixin extends StubBasedPsiElementBase
 	public boolean isInvocantDeclaration()
 	{
 		return getParent() instanceof PsiPerlMethodSignatureInvocant;
+	}
+
+	// fixme temporary hack, see #899
+	public boolean isArgsDeclaration()
+	{
+		return getParent() instanceof HTMLMasonArgsBlock;
 	}
 
 	@Override
