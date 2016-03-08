@@ -41,7 +41,7 @@
             <option name="PERL5_HTML_MASON" value="true"/>
         </context>
     </template>
-    <template name="%flags" value="&lt;%flags&gt;&#10;    inherits =&gt; '$COMPONENT$'&#10;&lt;/%flags&gt;&#10;$END$"
+    <template name="%flags" value="&lt;%flags&gt;&#10;    inherit =&gt; '$COMPONENT$'&#10;&lt;/%flags&gt;&#10;$END$"
               description="HTML::Mason &lt;%flags&gt;" toReformat="true" toShortenFQNames="true">
         <variable name="COMPONENT" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
