@@ -1,7 +1,7 @@
 HTML::Mason component
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>\n')
-  PsiElement(HTML::Mason::Token.<%flags>)('<%flags>')
   PerlCompositeElementImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_FLAGS_STATEMENT)
+    PsiElement(HTML::Mason::Token.<%flags>)('<%flags>')
     PsiPerlCommaSequenceExprImpl(PerlElementType.PerlTokenType.COMMA_SEQUENCE_EXPR)
       PsiPerlStringBareImpl(PerlElementType.PerlTokenType.STRING_BARE)
         PsiElement(PerlTokenType.STRING_IDENTIFIER)('inherit')
@@ -11,5 +11,5 @@ HTML::Mason component
         PsiElement(PerlTokenType.STRING_CONTENT)('/')
         PsiElement(PerlTokenType.STRING_IDENTIFIER)('site_handler')
         PsiElement(PerlTokenType.QUOTE_SINGLE_CLOSE)(''')
-  PsiElement(HTML::Mason::Token.</%flags>)('</%flags>')
+    PsiElement(HTML::Mason::Token.</%flags>)('</%flags>')
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('\n\n</html>')

@@ -36,16 +36,14 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 	public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
 			PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
 			TokenSet.create(
-					HTML_MASON_LINE_OPENER,
-					HTML_MASON_TEMPLATE_BLOCK_HTML
+					HTML_MASON_LINE_OPENER
 			));
 
 	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
 			PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
 			TokenSet.create(
-					HTML_MASON_ABSTRACT_BLOCK,
-					HTML_MASON_ARGS_BLOCK,
-					HTML_MASON_ATTR_BLOCK,
+					HTML_MASON_METHOD_DEFINITION,
+					HTML_MASON_SUBCOMPONENT_DEFINITION,
 					HTMLMasonParserDefinition.FILE
 			));
 
@@ -54,6 +52,8 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 			TokenSet.create(
 					HTML_MASON_FLAGS_OPENER,
 					HTML_MASON_FLAGS_CLOSER,
+
+					HTML_MASON_TEMPLATE_BLOCK_HTML,
 
 					HTML_MASON_INIT_OPENER,
 					HTML_MASON_INIT_CLOSER,
@@ -77,17 +77,13 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 					HTML_MASON_PERL_CLOSER
 			));
 
-	public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.orSet(
-			PerlIndentProcessor.BLOCK_LIKE_CONTAINERS,
-			TokenSet.create(
-			));
+	public static final TokenSet MASON_BLOCK_CONTAINERS = TokenSet.create(
+			HTML_MASON_ABSTRACT_BLOCK,
+			HTML_MASON_ARGS_BLOCK,
+			HTML_MASON_ATTR_BLOCK
 
+	);
 
-	@Override
-	public TokenSet getBlockLikeContainers()
-	{
-		return BLOCK_LIKE_CONTAINERS;
-	}
 
 	@Override
 	public TokenSet getAbsoluteUnindentableTokens()
@@ -117,11 +113,33 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 		IElementType parentType = parent != null ? parent.getElementType() : null;
 		IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
 
-		if (nodeType == HTML_MASON_ARGS_BLOCK || nodeType == HTML_MASON_ATTR_BLOCK)
+		boolean isFirst = node.getTreePrev() == null;
+		boolean isLast = node.getTreeNext() == null;
+
+		if (nodeType == HTML_MASON_METHOD_DEFINITION)
+		{
+			return Indent.getNoneIndent();
+		}
+
+
+		if (MASON_BLOCK_CONTAINERS.contains(parentType))
+		{
+			if (isFirst || isLast)
+			{
+				return Indent.getNoneIndent();
+			}
+			else
+			{
+				return Indent.getNormalIndent();
+			}
+		}
+
+		if (parentType == BLOCK && MASON_BLOCK_CONTAINERS.contains(nodeType))
 		{
 			return Indent.getNormalIndent();
 		}
-		else if (parentType == COMMA_SEQUENCE_EXPR && grandParentType == HTML_MASON_ATTR_BLOCK)
+
+		if (parentType == COMMA_SEQUENCE_EXPR && grandParentType == HTML_MASON_ATTR_BLOCK)
 		{
 			return Indent.getNoneIndent();
 		}

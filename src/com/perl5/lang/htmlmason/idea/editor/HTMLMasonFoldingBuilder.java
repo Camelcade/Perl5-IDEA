@@ -125,7 +125,18 @@ public class HTMLMasonFoldingBuilder extends PerlFoldingBuilder implements HTMLM
 
 			if (FOLDABLE_TOKENS.contains(elementType))
 			{
-				addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
+				int leftMargin = 0;
+				int rightMargin = 0;
+				if (elementType != HTML_MASON_FILTERED_BLOCK)
+				{
+					PsiElement firstChild = element.getFirstChild();
+					leftMargin = firstChild == null || firstChild.getNextSibling() == null ? 0 : firstChild.getNode().getTextLength();
+
+					PsiElement lastChild = element.getLastChild();
+					rightMargin = lastChild == null || lastChild == firstChild ? 0 : lastChild.getNode().getTextLength();
+				}
+
+				addDescriptorFor(myDescriptors, myDocument, element, leftMargin, rightMargin, 0);
 			}
 
 			super.visitElement(element);
