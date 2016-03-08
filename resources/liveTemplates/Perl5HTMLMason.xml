@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2016 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<templateSet group="Perl5 HTML::Mason">
+    <template name="%method" value="&lt;%method $NAME$&gt;&#10;$END$&#10;&lt;/%method&gt;"
+              description="HTML::Mason &lt;%method&gt;" toReformat="true" toShortenFQNames="true">
+        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%filter" value="&lt;%filter&gt;&#10;$END$&#10;&lt;/%filter&gt;"
+              description="HTML::Mason &lt;%filter&gt;" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%doc" value="&lt;%doc&gt;&#10;$END$&#10;&lt;/%doc&gt;" description="HTML::Mason &lt;%doc&gt;"
+              toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%text" value="&lt;%text&gt;&#10;$END$ &#10;&lt;/%text&gt;" description="HTML::Mason &lt;%text&gt;"
+              toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%flags" value="&lt;%flags&gt;&#10;    inherits =&gt; '$COMPONENT$'&#10;&lt;/%flags&gt;&#10;$END$"
+              description="HTML::Mason &lt;%flags&gt;" toReformat="true" toShortenFQNames="true">
+        <variable name="COMPONENT" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%init" value="&lt;%init&gt;&#10;$END$ &#10;&lt;/%init&gt;" description="HTML::Mason &lt;%init&gt;"
+              toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%perl" value="&lt;%perl&gt;&#10;$END$ &#10;&lt;/%perl&gt;" description="HTML::Mason &lt;%perl&gt;"
+              toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%def" value="&lt;%def $NAME$&gt;&#10;$END$&#10;&lt;/%def&gt;" description="HTML::Mason &lt;%def&gt;"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%cleanup" value="&lt;%cleanup&gt;&#10;$END$ &#10;&lt;/%cleanup&gt;"
+              description="HTML::Mason &lt;%cleanup&gt;" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%once" value="&lt;%once&gt;&#10;$END$&#10;&lt;/%once&gt;" description="HTML::Mason &lt;%once&gt;"
+              toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%shared" value="&lt;%shared&gt;&#10;$END$&#10;&lt;/%shared&gt;"
+              description="HTML::Mason &lt;%shared&gt;" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%attr" value="&lt;%attr&gt;&#10;$END$&#10;&lt;/%attr&gt;" description="HTML::Mason &lt;%attr&gt;"
+              toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+    <template name="%args" value="&lt;%args&gt;&#10;$END$&#10;&lt;/%args&gt;" description="HTML::Mason &lt;%args&gt;"
+              toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5_HTML_MASON" value="true"/>
+        </context>
+    </template>
+</templateSet>

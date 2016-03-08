@@ -14,23 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2.idea.livetemplates;
+package com.perl5.lang.htmlmason.idea.livetemplates;
 
 import com.intellij.codeInsight.template.impl.TemplatePreprocessor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
 
 /**
- * Created by hurricup on 10.01.2016.
+ * Created by hurricup on 08.03.2016.
  */
-public class MasonTemplatePreProcessor implements TemplatePreprocessor
+public abstract class AbstractMasonTemplateProcessor implements TemplatePreprocessor
 {
+	protected abstract boolean isMyFile(PsiFile file);
+
 	@Override
 	public void preprocessTemplate(Editor editor, PsiFile file, int caretOffset, String textToInsert, String templateText)
 	{
-		if (file instanceof MasonTemplatingFileImpl && textToInsert.startsWith("<%") && caretOffset > 0)
+		if (isMyFile(file) && textToInsert.startsWith("<%") && caretOffset > 0)
 		{
 			Document document = editor.getDocument();
 			CharSequence text = document.getCharsSequence();
@@ -42,5 +43,6 @@ public class MasonTemplatePreProcessor implements TemplatePreprocessor
 			}
 		}
 	}
+
 
 }

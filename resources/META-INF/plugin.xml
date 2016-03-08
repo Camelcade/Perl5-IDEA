@@ -457,6 +457,12 @@
         <lang.findUsagesProvider language="HTML::Mason Templating Language"
                                  implementationClass="com.perl5.lang.htmlmason.idea.findusages.HTMLMasonFindUsagesProvider"/>
 
+        <liveTemplateContext implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplateContextType"/>
+        <liveTemplatePreprocessor
+                implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplateProcessor"/>
+        <defaultLiveTemplatesProvider
+                implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplatesProvider"/>
+
         <!-- HTML::Mason settings end -->
 
         <!--Mason2 settings -->
@@ -473,7 +479,7 @@
                                 implementationClass="com.perl5.lang.mason2.idea.completion.MasonCompletionContributor"/>
 
         <liveTemplateContext implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplateContextType"/>
-        <liveTemplatePreprocessor implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplatePreProcessor"/>
+        <liveTemplatePreprocessor implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplateProcessor"/>
         <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLivetemplatesProvider"/>
 

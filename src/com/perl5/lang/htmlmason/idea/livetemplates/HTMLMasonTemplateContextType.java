@@ -14,25 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2.idea.livetemplates;
+package com.perl5.lang.htmlmason.idea.livetemplates;
 
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.htmlmason.idea.livetemplates.AbstractMasonTemplateContextType;
-import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 
 /**
- * Created by hurricup on 10.01.2016.
+ * Created by hurricup on 08.03.2016.
  */
-public class MasonTemplateContextType extends AbstractMasonTemplateContextType
+public class HTMLMasonTemplateContextType extends AbstractMasonTemplateContextType
 {
-	public MasonTemplateContextType()
+	public HTMLMasonTemplateContextType()
 	{
-		super("PERL5_MASON", "&Mason2 template", PerlTemplateContextType.Generic.class);
+		super("PERL5_HTML_MASON", "&HTML::Mason template", PerlTemplateContextType.Generic.class);
 	}
 
 	protected boolean isMyFile(PsiFile file)
 	{
-		return file instanceof MasonTemplatingFileImpl;
+		return file instanceof HTMLMasonFileImpl;
 	}
 }

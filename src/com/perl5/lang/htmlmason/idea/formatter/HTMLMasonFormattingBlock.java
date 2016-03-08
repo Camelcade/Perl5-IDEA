@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.idea.formatter;
 
 import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Indent;
 import com.intellij.formatting.SpacingBuilder;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
@@ -71,4 +72,15 @@ public class HTMLMasonFormattingBlock extends AbstractMasonFormattingBlock imple
 		return HTMLMasonIndentProcessor.INSTANCE;
 	}
 
+	@Nullable
+	@Override
+	protected Indent getChildIndent()
+	{
+		IElementType elementType = getElementType();
+		if (elementType == HTML_MASON_ARGS_BLOCK || elementType == HTML_MASON_ATTR_BLOCK)
+		{
+			return Indent.getNormalIndent();
+		}
+		return super.getChildIndent();
+	}
 }

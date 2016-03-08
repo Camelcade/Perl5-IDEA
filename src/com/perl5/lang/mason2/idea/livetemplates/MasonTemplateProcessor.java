@@ -17,22 +17,17 @@
 package com.perl5.lang.mason2.idea.livetemplates;
 
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.htmlmason.idea.livetemplates.AbstractMasonTemplateContextType;
+import com.perl5.lang.htmlmason.idea.livetemplates.AbstractMasonTemplateProcessor;
 import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
-import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 
 /**
  * Created by hurricup on 10.01.2016.
  */
-public class MasonTemplateContextType extends AbstractMasonTemplateContextType
+public class MasonTemplateProcessor extends AbstractMasonTemplateProcessor
 {
-	public MasonTemplateContextType()
-	{
-		super("PERL5_MASON", "&Mason2 template", PerlTemplateContextType.Generic.class);
-	}
-
 	protected boolean isMyFile(PsiFile file)
 	{
 		return file instanceof MasonTemplatingFileImpl;
 	}
+
 }
