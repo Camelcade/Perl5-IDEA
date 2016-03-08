@@ -142,6 +142,10 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 				innerMarker.done(HTML_MASON_ARGS_BLOCK);
 				innerMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 			}
+			else
+			{
+				innerMarker.drop();
+			}
 
 			r = PerlParserUtil.consumeToken(b, HTML_MASON_ARGS_CLOSER);
 		}
