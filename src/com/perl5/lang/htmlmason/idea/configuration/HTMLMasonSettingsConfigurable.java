@@ -21,24 +21,34 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.project.DumbModeTask;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.impl.PushedFilePropertiesUpdater;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupStep;
 import com.intellij.openapi.ui.popup.util.BaseListPopupStep;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.AnActionButton;
 import com.intellij.ui.AnActionButtonRunnable;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
+import com.intellij.util.FileContentUtil;
+import com.intellij.util.Processor;
+import com.intellij.util.indexing.FileBasedIndexProjectHandler;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 05.03.2016.
@@ -89,9 +99,11 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 	@Override
 	public void apply() throws ConfigurationException
 	{
+		Set<String> rootsDiff = getDiff(mySettings.componentRoots, rootsModel.getItems());
 		mySettings.componentRoots.clear();
 		mySettings.componentRoots.addAll(rootsModel.getItems());
 
+		Set<String> extDiff = getDiff(mySettings.substitutedExtensions, substitutedExtensionsModel.getItems());
 		mySettings.substitutedExtensions.clear();
 		mySettings.substitutedExtensions.addAll(substitutedExtensionsModel.getItems());
 
@@ -107,9 +119,99 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 				globalsModel.removeRow(globalsModel.indexOf(variableDescription));
 			}
 		}
+
+		mySettings.updateSubstitutors();
 		mySettings.settingsUpdated();
+
+		if (rootsDiff.size() > 0 || extDiff.size() > 0)
+		{
+			updateFileProperties(rootsDiff, extDiff);
+		}
 	}
 
+	protected void updateFileProperties(final Set<String> rootsDiff, Set<String> extDiff)
+	{
+		boolean rootsChanged = rootsDiff.size() > 0;
+		boolean extChanged = extDiff.size() > 0;
+
+		if (rootsChanged)
+			extDiff.addAll(mySettings.substitutedExtensions);
+
+		if (extChanged)
+			rootsDiff.addAll(mySettings.componentRoots);
+
+		// collecting matchers
+		final List<FileNameMatcher> matchers = new ArrayList<FileNameMatcher>();
+		FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+		for (FileType fileType : fileTypeManager.getRegisteredFileTypes())
+		{
+			if (fileType instanceof LanguageFileType)
+			{
+				for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType))
+				{
+					if (extDiff.contains(matcher.getPresentableString()))
+					{
+						matchers.add(matcher);
+					}
+				}
+			}
+		}
+
+		// processing files
+		final PushedFilePropertiesUpdater pushedFilePropertiesUpdater = PushedFilePropertiesUpdater.getInstance(myProject);
+		VirtualFile projectRoot = myProject.getBaseDir();
+		if (projectRoot != null)
+		{
+			for (String root : rootsDiff)
+			{
+				VirtualFile componentRoot = VfsUtil.findRelativeFile(projectRoot, root);
+				if (componentRoot != null)
+				{
+					VfsUtil.processFilesRecursively(componentRoot, new Processor<VirtualFile>()
+					{
+						@Override
+						public boolean process(VirtualFile virtualFile)
+						{
+							if (!virtualFile.isDirectory())
+							{
+								for (FileNameMatcher matcher : matchers)
+								{
+									if (matcher.accept(virtualFile.getName()))
+									{
+//										pushedFilePropertiesUpdater.findAndUpdateValue(virtualFile, HTMLMasonFilePropertyPusher.INSTANCE, false);
+										pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
+										break;
+									}
+								}
+							}
+							return true;
+						}
+					});
+				}
+			}
+		}
+
+		FileContentUtil.reparseOpenedFiles();
+
+		// taken from 16 version of platform, dumbmode reindexing
+		DumbModeTask dumbTask = FileBasedIndexProjectHandler.createChangedFilesIndexingTask(myProject);
+		if (dumbTask != null)
+		{
+			DumbService.getInstance(myProject).queueTask(dumbTask);
+		}
+	}
+
+	protected Set<String> getDiff(List<String> first, List<String> second)
+	{
+		Set<String> diff = new THashSet<String>(first);
+		diff.removeAll(second);
+
+		Set<String> temp = new THashSet<String>(second);
+		temp.removeAll(first);
+		diff.addAll(temp);
+
+		return diff;
+	}
 
 	@Override
 	public void reset()
