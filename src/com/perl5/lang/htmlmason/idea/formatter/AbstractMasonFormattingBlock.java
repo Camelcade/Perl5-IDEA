@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2.idea.formatter.blocks;
+package com.perl5.lang.htmlmason.idea.formatter;
 
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.SpacingBuilder;
@@ -26,30 +26,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.mason2.idea.formatter.MasonIndentProcessor;
-import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 09.01.2016.
+ * Created by hurricup on 08.03.2016.
  */
-public class MasonFormattingBlock extends PerlFormattingBlock implements MasonElementTypes
+public abstract class AbstractMasonFormattingBlock extends PerlFormattingBlock
 {
-	public MasonFormattingBlock(@NotNull ASTNode node,
-								@Nullable Wrap wrap,
-								@Nullable Alignment alignment,
-								@NotNull CommonCodeStyleSettings codeStyleSettings,
-								@NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-								@NotNull SpacingBuilder spacingBuilder,
-								@NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
-	)
+	public AbstractMasonFormattingBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment, @NotNull CommonCodeStyleSettings codeStyleSettings, @NotNull PerlCodeStyleSettings perlCodeStyleSettings, @NotNull SpacingBuilder spacingBuilder, @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder)
 	{
 		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
 	}
+
+	protected abstract IElementType getLineOpenerToken();
 
 	@Override
 	protected boolean isNewLineForbidden(PerlFormattingBlock block)
@@ -67,7 +60,7 @@ public class MasonFormattingBlock extends PerlFormattingBlock implements MasonEl
 			int lineStartOffset = document.getLineStartOffset(lineNumber);
 			PsiElement firstElement = file.findElementAt(lineStartOffset);
 
-			if (firstElement != null && firstElement.getNode().getElementType() == MASON_LINE_OPENER)
+			if (firstElement != null && firstElement.getNode().getElementType() == getLineOpenerToken())
 			{
 				return true;
 			}
@@ -76,15 +69,4 @@ public class MasonFormattingBlock extends PerlFormattingBlock implements MasonEl
 		return false;
 	}
 
-	@Override
-	protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment)
-	{
-		return new MasonFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(), getInjectedLanguageBlockBuilder());
-	}
-
-	@Override
-	protected PerlIndentProcessor getIndentProcessor()
-	{
-		return MasonIndentProcessor.INSTANCE;
-	}
 }

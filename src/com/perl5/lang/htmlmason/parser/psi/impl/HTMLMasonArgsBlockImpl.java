@@ -14,34 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.elementType;
+package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 05.03.2016.
+ * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonElementType extends HTMLMasonTokenType implements PsiElementProvider
+public class HTMLMasonArgsBlockImpl extends PerlCompositeElementImpl implements HTMLMasonArgsBlock
 {
-	public HTMLMasonElementType(@NotNull @NonNls String debugName)
+	public HTMLMasonArgsBlockImpl(@NotNull ASTNode node)
 	{
-		super(debugName);
-	}
-
-	public String toString()
-	{
-		return "HTML::Mason::Element." + super.toString();
-	}
-
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlCompositeElementImpl(node);
+		super(node);
 	}
 }

@@ -16,10 +16,14 @@
 
 package com.perl5.lang.htmlmason.elementType;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonArgsBlockImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.03.2016.
@@ -99,8 +103,15 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 	IElementType HTML_MASON_FILTERED_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTERED_BLOCK");
 	IElementType HTML_MASON_TEXT_BLOCK = new HTMLMasonElementType("HTML_MASON_TEXT_BLOCK");
 	IElementType HTML_MASON_ATTR_BLOCK = new HTMLMasonElementType("HTML_MASON_ATTR_BLOCK");
-
 	IElementType HTML_MASON_HARD_NEWLINE = new HTMLMasonElementType("HTML_MASON_HARD_NEWLINE");
 
-	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonElementType("HTML_MASON_ARGS_BLOCK");
+	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonElementType("HTML_MASON_ARGS_BLOCK")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new HTMLMasonArgsBlockImpl(node);
+		}
+	};
 }

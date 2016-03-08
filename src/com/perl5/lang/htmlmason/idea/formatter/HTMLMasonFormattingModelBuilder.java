@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2.idea.formatter;
+package com.perl5.lang.htmlmason.idea.formatter;
 
 import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelProvider;
@@ -31,9 +31,9 @@ import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 09.01.2016.
+ * Created by hurricup on 08.03.2016.
  */
-public class MasonFormattingModelBuilder extends PerlFormattingModelBuilder
+public class HTMLMasonFormattingModelBuilder extends PerlFormattingModelBuilder
 {
 	@NotNull
 	@Override
@@ -43,7 +43,7 @@ public class MasonFormattingModelBuilder extends PerlFormattingModelBuilder
 		PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
 		SpacingBuilder spacingBuilder = createSpacingBuilder(commonSettings, perlSettings);
 		InjectedLanguageBlockBuilder injectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
-		PerlFormattingBlock block = new MasonFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder, injectedLanguageBlockBuilder);
+		PerlFormattingBlock block = new HTMLMasonFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder, injectedLanguageBlockBuilder);
 		return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
 	}
 

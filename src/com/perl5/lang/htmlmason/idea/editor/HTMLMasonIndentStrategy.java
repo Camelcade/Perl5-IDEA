@@ -14,34 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.elementType;
+package com.perl5.lang.htmlmason.idea.editor;
 
-import com.intellij.lang.ASTNode;
+import com.intellij.openapi.editor.IndentStrategy;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
-import org.jetbrains.annotations.NonNls;
+import com.perl5.lang.htmlmason.idea.formatter.HTMLMasonIndentProcessor;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 05.03.2016.
+ * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonElementType extends HTMLMasonTokenType implements PsiElementProvider
+public class HTMLMasonIndentStrategy implements IndentStrategy
 {
-	public HTMLMasonElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
-
-	public String toString()
-	{
-		return "HTML::Mason::Element." + super.toString();
-	}
-
-	@NotNull
 	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
+	public boolean canIndent(@NotNull PsiElement element)
 	{
-		return new PerlCompositeElementImpl(node);
+		return !HTMLMasonIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(element.getNode().getElementType());
 	}
 }

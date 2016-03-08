@@ -308,7 +308,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			return Indent.getNoneIndent();
 		}
 
-		if (elementType == BLOCK)
+		if (getIndentProcessor().getBlockLikeContainers().contains(elementType))
 		{
 			return Indent.getNormalIndent();
 		}

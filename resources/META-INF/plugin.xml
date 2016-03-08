@@ -450,6 +450,12 @@
                                        implementationClass="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighterFactory"/>
         <lang.foldingBuilder language="HTML::Mason Templating Language"
                              implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonFoldingBuilder"/>
+        <lang.formatter language="HTML::Mason Templating Language"
+                        implementationClass="com.perl5.lang.htmlmason.idea.formatter.HTMLMasonFormattingModelBuilder"/>
+        <lang.indentStrategy language="HTML::Mason Templating Language"
+                             implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonIndentStrategy"/>
+        <lang.findUsagesProvider language="HTML::Mason Templating Language"
+                                 implementationClass="com.perl5.lang.htmlmason.idea.findusages.HTMLMasonFindUsagesProvider"/>
 
         <!-- HTML::Mason settings end -->
 
@@ -489,7 +495,7 @@
                                        implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
         <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
         <lang.findUsagesProvider language="Mason2"
-                                 implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
+                                 implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
         <lang.foldingBuilder language="Mason2"
                              implementationClass="com.perl5.lang.mason2.idea.folding.MasonFoldingBuilder"/>
         <lang.formatter language="Mason2"
@@ -499,8 +505,6 @@
 
         <lang.namesValidator language="Mason2"
                              implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-        <lang.findUsagesProvider language="Mason2"
-                                 implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
         <quoteHandler fileType="Mason2 top-level component"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
         <quoteHandler fileType="Mason2 internal component"
@@ -516,7 +520,8 @@
                            implementationClass="com.perl5.lang.mason2.idea.editor.MasonBraceMatcher"/>
         <preFormatProcessor implementation="com.perl5.lang.mason2.idea.formatter.MasonPreFormatProcessor"/>
 
-
+        <lang.findUsagesProvider language="Mason2 Templating Language"
+                                 implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
         <lang.parserDefinition language="Mason2 Templating Language"
                                implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
         <lang.fileViewProviderFactory language="Mason2 Templating Language"

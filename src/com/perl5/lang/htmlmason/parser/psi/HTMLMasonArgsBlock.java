@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea.findusages;
+package com.perl5.lang.htmlmason.parser.psi;
 
-import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
-import org.jetbrains.annotations.Nullable;
+import com.perl5.lang.perl.psi.PerlCompositeElement;
 
 /**
- * Created by hurricup on 21.07.2015.
+ * Created by hurricup on 08.03.2016.
  */
-public class MojoliciousFindUsagesProvider extends PerlFindUsagesProvider
+public interface HTMLMasonArgsBlock extends PerlCompositeElement
 {
-	@Nullable
-	@Override
-	public WordsScanner getWordsScanner()
-	{
-		return new MojoliciousWordsScanner();
-	}
 }

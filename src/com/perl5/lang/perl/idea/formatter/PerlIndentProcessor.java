@@ -60,6 +60,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 			PerlParserDefinition.FILE
 	);
 
+	public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
+			BLOCK
+	);
+
 	public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
 			COMMA_SEQUENCE_EXPR,
 			CALL_ARGUMENTS
@@ -89,6 +93,11 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 	public TokenSet getAbsoluteUnindentableTokens()
 	{
 		return ABSOLUTE_UNINDENTABLE_TOKENS;
+	}
+
+	public TokenSet getBlockLikeContainers()
+	{
+		return BLOCK_LIKE_CONTAINERS;
 	}
 
 	public TokenSet getUnindentableContainers()
@@ -164,7 +173,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 			return Indent.getIndent(Indent.Type.CONTINUATION, false, true);
 		}
 
-		if (parentType == BLOCK)
+		if (getBlockLikeContainers().contains(parentType))
 		{
 			return Indent.getNormalIndent();
 		}
