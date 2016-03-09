@@ -182,12 +182,12 @@ public class PerlPsiUtil
 
 	@Nullable
 	public static PsiElement getParentElementOrStub(StubBasedPsiElement currentElement,
-													@NotNull final Class<? extends StubElement> stubClass,
+													@Nullable final Class<? extends StubElement> stubClass,
 													@NotNull final Class<? extends PsiElement> psiClass
 	)
 	{
 		Stub stub = currentElement.getStub();
-		if (stub != null)
+		if (stub != null && stubClass != null)
 		{
 			Stub parentStub = getParentStubOfType(stub, stubClass);
 			return parentStub == null ? null : ((StubBase) parentStub).getPsi();
@@ -196,50 +196,6 @@ public class PerlPsiUtil
 		{
 			return PsiTreeUtil.getParentOfType(currentElement, psiClass);
 		}
-	}
-
-	@NotNull
-	public static List<PsiElement> collectNamespaceMembers(@NotNull final PerlNamespaceDefinition namespaceDefinition,
-														   @NotNull final Class<? extends StubElement> stubClass,
-														   @NotNull final Class<? extends PsiElement> psiClass
-	)
-	{
-		Stub stub = namespaceDefinition.getStub();
-		List<PsiElement> result = new ArrayList<PsiElement>();
-
-		if (stub != null)
-		{
-			collectElementsFromStubs(namespaceDefinition, stubClass, stub, result);
-		}
-		else
-		{
-			collectElementsFromPsi(namespaceDefinition, psiClass, result);
-		}
-		return result;
-	}
-
-	public static void collectElementsFromStubs(final PerlNamespaceDefinition namespaceDefinition,
-												final Class<? extends StubElement> stubClass,
-												Stub stub, List<PsiElement> result)
-	{
-		for (Stub element : stub.getChildrenStubs())
-		{
-			if (stubClass.isInstance(element) && isNamespaceStubElement(namespaceDefinition.getStub(), element))
-			{
-				result.add(((StubBase) element).getPsi());
-			}
-			collectElementsFromStubs(namespaceDefinition, stubClass, element, result);
-		}
-	}
-
-	public static boolean isNamespaceStubElement(Stub namespaceStub, Stub elementStub)
-	{
-		if (namespaceStub == null)
-			return false;
-
-		Stub parentStub = getParentStubOfType(elementStub, PerlNamespaceDefinitionStub.class);
-
-		return parentStub != null && parentStub.equals(namespaceStub);
 	}
 
 	@Nullable
@@ -260,15 +216,100 @@ public class PerlPsiUtil
 		}
 	}
 
-	public static void collectElementsFromPsi(PerlNamespaceDefinition namespaceDefinition, Class<? extends PsiElement> psiClass, List<PsiElement> result)
+	@NotNull
+	public static List<PsiElement> collectNamespaceMembers(@NotNull final PsiElement rootElement,
+														   @Nullable final Class<? extends StubElement> stubClass,
+														   @NotNull final Class<? extends PsiElement> psiClass
+	)
 	{
-		for (PsiElement subDefinition : PsiTreeUtil.findChildrenOfType(namespaceDefinition, psiClass))
+		final List<PsiElement> result = new ArrayList<PsiElement>();
+		if (stubClass != null && rootElement instanceof StubBasedPsiElement)
 		{
-			if (subDefinition.isValid() && namespaceDefinition.equals(PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class)))
+			Stub rootElementStub = ((StubBasedPsiElement) rootElement).getStub();
+
+			if (rootElementStub != null)
 			{
-				result.add(subDefinition);
+				processElementsFromStubs(
+						rootElementStub,
+						new Processor<Stub>()
+						{
+							@Override
+							public boolean process(Stub stub)
+							{
+								if (stubClass.isInstance(stub))
+									result.add(((StubBase) stub).getPsi());
+
+								return true;
+							}
+						},
+						PerlNamespaceDefinitionStub.class
+				);
+				return result;
 			}
 		}
+
+		processElementsFromPsi(
+				rootElement,
+				new Processor<PsiElement>()
+				{
+					@Override
+					public boolean process(PsiElement element)
+					{
+						if (psiClass.isInstance(element))
+							result.add(element);
+						return false;
+					}
+				},
+				PerlNamespaceDefinition.class
+		);
+		return result;
+	}
+
+	public static boolean processElementsFromStubs(
+			@Nullable Stub stub,
+			@Nullable Processor<Stub> processor,
+			@Nullable Class<? extends StubElement> avoidClass
+	)
+	{
+		if (stub == null || processor == null)
+			return false;
+
+		for (Stub child : stub.getChildrenStubs())
+		{
+			if (!processor.process(child))
+				return false;
+
+			if (avoidClass == null || !avoidClass.isInstance(child)) // don't enter sublcasses
+			{
+				if (!processElementsFromStubs(child, processor, avoidClass))
+					return false;
+			}
+		}
+		return true;
+	}
+
+
+	public static boolean processElementsFromPsi(
+			@Nullable PsiElement element,
+			@Nullable Processor<PsiElement> processor,
+			@Nullable Class<? extends PsiElement> avoidClass
+	)
+	{
+		if (element == null || processor == null)
+			return false;
+
+		for (PsiElement child : element.getChildren())
+		{
+			if (!processor.process(child))
+				return false;
+
+			if (avoidClass == null || !avoidClass.isInstance(child)) // don't enter subclasses
+			{
+				if (!processElementsFromPsi(child, processor, avoidClass))
+					return false;
+			}
+		}
+		return true;
 	}
 
 	public static boolean isHeredocAhead(PsiElement startElement, final int lineEndOffset)
