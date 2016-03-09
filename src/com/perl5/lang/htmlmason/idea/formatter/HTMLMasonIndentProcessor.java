@@ -33,6 +33,8 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 			TokenSet.create(
 					HTML_MASON_PERL_OPENER,
 					HTML_MASON_PERL_CLOSER,
+					HTML_MASON_TEMPLATE_BLOCK_HTML,
+					HTML_MASON_FLAGS_STATEMENT,
 					HTML_MASON_LINE_OPENER
 			));
 

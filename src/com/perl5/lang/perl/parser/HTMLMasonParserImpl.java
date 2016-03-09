@@ -127,7 +127,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			while (parseArgument(b, l) || parseHardNewline(b)) ;
 		}
 
-		r = endOrRecover(b, HTML_MASON_ARGS_CLOSER);
+		r = MasonParserUtil.endOrRecover(b, HTML_MASON_ARGS_CLOSER);
 
 		innerMarker.done(HTML_MASON_ARGS_BLOCK);
 
@@ -187,59 +187,13 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			methodMarker.rollbackTo();
 		}
 
-		return r || recoverToGreedy(b, closeToken, "Error");
+		return r || MasonParserUtil.recoverToGreedy(b, closeToken, "Error");
 	}
 
-	protected static boolean endOrRecover(PsiBuilder b, IElementType toElement)
-	{
-		return endOrRecover(b, toElement, "Error");
-	}
-
-	protected static boolean endOrRecover(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		return PerlParserUtil.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
-	}
-
-	protected static boolean recoverToGreedy(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		boolean r = recoverTo(b, toElement, errorMessage);
-		r = r || PerlParserUtil.consumeToken(b, toElement);
-		return r;
-	}
-
-	protected static boolean recoverTo(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		// recover bad code
-		PsiBuilder.Marker errorMarker = b.mark();
-		while (!b.eof() && b.getTokenType() != toElement)
-		{
-			b.advanceLexer();
-			;
-		}
-		errorMarker.error(errorMessage);
-		return b.eof();
-	}
 
 	protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken)
 	{
-		return parsePerlBlock(b, l, closeToken, HTML_MASON_ABSTRACT_BLOCK);
-	}
-
-	protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken, IElementType blockToken)
-	{
-		PsiBuilder.Marker abstractBlockMarker = b.mark();
-		b.advanceLexer();
-
-		while (!b.eof() && b.getTokenType() != closeToken)
-		{
-			if (!PerlParserImpl.file_item(b, l))
-			{
-				break;
-			}
-		}
-		boolean r = endOrRecover(b, closeToken);
-		abstractBlockMarker.done(blockToken);
-		return r;
+		return MasonParserUtil.parsePerlBlock(b, l, closeToken, HTML_MASON_ABSTRACT_BLOCK);
 	}
 
 	@NotNull
@@ -314,7 +268,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					}
 				}
 			}
-			if (r = endOrRecover(b, HTML_MASON_BLOCK_CLOSER))
+			if (r = MasonParserUtil.endOrRecover(b, HTML_MASON_BLOCK_CLOSER))
 			{
 				statementMarker.done(STATEMENT);
 			}
@@ -324,7 +278,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			PsiBuilder.Marker statementMarker = b.mark();
 			b.advanceLexer();
 			PerlParserImpl.expr(b, l, -1);
-			if (r = endOrRecover(b, HTML_MASON_CALL_CLOSER))
+			if (r = MasonParserUtil.endOrRecover(b, HTML_MASON_CALL_CLOSER))
 			{
 				statementMarker.done(HTML_MASON_CALL_STATEMENT);
 			}
@@ -335,7 +289,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			b.advanceLexer();
 			PerlParserImpl.expr(b, l, -1);
 
-			if (r = endOrRecover(b, HTML_MASON_CALL_CLOSER_UNMATCHED))
+			if (r = MasonParserUtil.endOrRecover(b, HTML_MASON_CALL_CLOSER_UNMATCHED))
 			{
 				statementMarker.done(HTML_MASON_CALL_STATEMENT);
 			}
@@ -404,7 +358,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					break;
 				}
 			}
-			r = endOrRecover(b, HTML_MASON_FLAGS_CLOSER);
+			r = MasonParserUtil.endOrRecover(b, HTML_MASON_FLAGS_CLOSER);
 			statementMarker.done(HTML_MASON_FLAGS_STATEMENT);
 		}
 		else if (tokenType == HTML_MASON_ATTR_OPENER)
@@ -420,21 +374,21 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 				}
 			}
 
-			r = endOrRecover(b, HTML_MASON_ATTR_CLOSER);
+			r = MasonParserUtil.endOrRecover(b, HTML_MASON_ATTR_CLOSER);
 			statementMarker.done(HTML_MASON_ATTR_BLOCK);
 		}
 		else if (tokenType == HTML_MASON_DOC_OPENER)
 		{
 			b.advanceLexer();
 			PerlParserUtil.consumeToken(b, COMMENT_BLOCK);
-			r = endOrRecover(b, HTML_MASON_DOC_CLOSER);
+			r = MasonParserUtil.endOrRecover(b, HTML_MASON_DOC_CLOSER);
 		}
 		else if (tokenType == HTML_MASON_TEXT_OPENER)
 		{
 			PsiBuilder.Marker stringMarker = b.mark();
 			b.advanceLexer();
 			PerlParserUtil.consumeToken(b, STRING_CONTENT);
-			r = endOrRecover(b, HTML_MASON_TEXT_CLOSER);
+			r = MasonParserUtil.endOrRecover(b, HTML_MASON_TEXT_CLOSER);
 			stringMarker.done(HTML_MASON_TEXT_BLOCK);
 		}
 		else if (tokenType == HTML_MASON_METHOD_OPENER)

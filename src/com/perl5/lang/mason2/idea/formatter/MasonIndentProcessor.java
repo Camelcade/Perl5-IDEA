@@ -17,6 +17,7 @@
 package com.perl5.lang.mason2.idea.formatter;
 
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
 import com.perl5.lang.mason2.elementType.MasonElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
@@ -37,12 +38,39 @@ public class MasonIndentProcessor extends PerlIndentProcessor implements MasonEl
 	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
 			PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
 			TokenSet.create(
-					MASON_ABSTRACT_BLOCK
+					Mason2TemplatingParserDefinition.FILE,
+
+					MASON_AUGMENT_MODIFIER,
+					MASON_AFTER_MODIFIER,
+					MASON_BEFORE_MODIFIER,
+					MASON_AROUND_MODIFIER,
+
+					MASON_FILTER_DEFINITION,
+					MASON_METHOD_DEFINITION,
+					MASON_OVERRIDE_DEFINITION
 			));
 
 	public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
 			PerlIndentProcessor.UNINDENTABLE_TOKENS,
 			TokenSet.create(
+					MASON_METHOD_OPENER,
+					MASON_METHOD_CLOSER,
+
+					MASON_OVERRIDE_OPENER,
+					MASON_OVERRIDE_CLOSER,
+
+					MASON_AFTER_OPENER,
+					MASON_AFTER_CLOSER,
+
+					MASON_BEFORE_OPENER,
+					MASON_BEFORE_CLOSER,
+
+					MASON_AROUND_OPENER,
+					MASON_AROUND_CLOSER,
+
+					MASON_AUGMENT_OPENER,
+					MASON_AUGMENT_CLOSER,
+
 					MASON_FLAGS_OPENER,
 					MASON_FLAGS_CLOSER,
 

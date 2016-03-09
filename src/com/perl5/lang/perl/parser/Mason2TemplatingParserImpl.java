@@ -77,59 +77,12 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 			methodMarker.rollbackTo();
 		}
 
-		return r || recoverToGreedy(b, closeToken, "Error");
-	}
-
-	protected static boolean endOrRecover(PsiBuilder b, IElementType toElement)
-	{
-		return endOrRecover(b, toElement, "Error");
-	}
-
-	protected static boolean endOrRecover(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		return PerlParserUtil.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
-	}
-
-	protected static boolean recoverToGreedy(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		boolean r = recoverTo(b, toElement, errorMessage);
-		r = r || PerlParserUtil.consumeToken(b, toElement);
-		return r;
-	}
-
-	protected static boolean recoverTo(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		// recover bad code
-		PsiBuilder.Marker errorMarker = b.mark();
-		while (!b.eof() && b.getTokenType() != toElement)
-		{
-			b.advanceLexer();
-			;
-		}
-		errorMarker.error(errorMessage);
-		return b.eof();
+		return r || MasonParserUtil.recoverToGreedy(b, closeToken, "Error");
 	}
 
 	protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken)
 	{
-		return parsePerlBlock(b, l, closeToken, MASON_ABSTRACT_BLOCK);
-	}
-
-	protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken, IElementType blockToken)
-	{
-		b.advanceLexer();
-		PsiBuilder.Marker abstractBlockMarker = b.mark();
-
-		while (!b.eof() && b.getTokenType() != closeToken)
-		{
-			if (!PerlParserImpl.file_item(b, l))
-			{
-				break;
-			}
-		}
-		abstractBlockMarker.done(blockToken);
-		abstractBlockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
-		return endOrRecover(b, closeToken);
+		return MasonParserUtil.parsePerlBlock(b, l, closeToken, MASON_ABSTRACT_BLOCK);
 	}
 
 	@NotNull
@@ -170,7 +123,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 					}
 				}
 			}
-			if (r = endOrRecover(b, MASON_BLOCK_CLOSER))
+			if (r = MasonParserUtil.endOrRecover(b, MASON_BLOCK_CLOSER))
 			{
 				statementMarker.done(STATEMENT);
 			}
@@ -180,7 +133,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 			PsiBuilder.Marker statementMarker = b.mark();
 			b.advanceLexer();
 			PerlParserImpl.expr(b, l, -1);
-			if (r = endOrRecover(b, MASON_CALL_CLOSER))
+			if (r = MasonParserUtil.endOrRecover(b, MASON_CALL_CLOSER))
 			{
 				statementMarker.done(MASON_CALL_STATEMENT);
 			}
@@ -211,13 +164,13 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 			}
 			statementMarker.done(MASON_FLAGS_STATEMENT);
 
-			r = endOrRecover(b, MASON_FLAGS_CLOSER);
+			r = MasonParserUtil.endOrRecover(b, MASON_FLAGS_CLOSER);
 		}
 		else if (tokenType == MASON_DOC_OPENER)
 		{
 			b.advanceLexer();
 			PerlParserUtil.consumeToken(b, COMMENT_BLOCK);
-			r = endOrRecover(b, MASON_DOC_CLOSER);
+			r = MasonParserUtil.endOrRecover(b, MASON_DOC_CLOSER);
 		}
 		else if (tokenType == MASON_TEXT_OPENER)
 		{
@@ -231,7 +184,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 			{
 				stringMarker.drop();
 			}
-			r = endOrRecover(b, MASON_TEXT_CLOSER);
+			r = MasonParserUtil.endOrRecover(b, MASON_TEXT_CLOSER);
 		}
 		else if (tokenType == MASON_METHOD_OPENER)
 		{
@@ -273,7 +226,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 				statementMarker.drop();
 			}
 
-			r = r || recoverToGreedy(b, closeToken, "Error");
+			r = r || MasonParserUtil.recoverToGreedy(b, closeToken, "Error");
 		}
 
 		if (r)
@@ -293,7 +246,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 	{
 		if (b.getTokenType() == MASON_FILTERED_BLOCK_OPENER)
 		{
-			return parsePerlBlock(b, l, MASON_FILTERED_BLOCK_CLOSER, MASON_FILTERED_BLOCK);
+			return MasonParserUtil.parsePerlBlock(b, l, MASON_FILTERED_BLOCK_CLOSER, MASON_FILTERED_BLOCK);
 		}
 		return super.parseStatementModifier(b, l);
 	}
