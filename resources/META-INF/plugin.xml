@@ -463,6 +463,7 @@
                 implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplateProcessor"/>
         <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplatesProvider"/>
+        <typedHandler implementation="com.perl5.lang.htmlmason.idea.editor.HTMLMasonTypedHandler" order="first"/>
 
         <!-- HTML::Mason settings end -->
 
