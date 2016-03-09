@@ -23,6 +23,9 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonArgsBlockImpl;
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFlagsStatementImpl;
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonMethodDefinitionImpl;
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonSubcomponentDefitnitionImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -95,15 +98,41 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 	IElementType HTML_MASON_FILTER_OPENER = new HTMLMasonTokenType(KEYWORD_FILTER_OPENER);
 	IElementType HTML_MASON_FILTER_CLOSER = new HTMLMasonTokenType(KEYWORD_FILTER_CLOSER);
 
-	IElementType HTML_MASON_METHOD_DEFINITION = new HTMLMasonElementType("HTML_MASON_METHOD_DEFINITION");
-	IElementType HTML_MASON_SUBCOMPONENT_DEFINITION = new HTMLMasonElementType("HTML_MASON_DEF_DEFINITION");
-	IElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonElementType("HTML_MASON_FLAGS_STATEMENT");
 	IElementType HTML_MASON_CALL_STATEMENT = new HTMLMasonElementType("HTML_MASON_CALL_STATEMENT");
 	IElementType HTML_MASON_ABSTRACT_BLOCK = new HTMLMasonElementType("HTML_MASON_ABSTRACT_BLOCK");
 	IElementType HTML_MASON_FILTERED_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTERED_BLOCK");
 	IElementType HTML_MASON_TEXT_BLOCK = new HTMLMasonElementType("HTML_MASON_TEXT_BLOCK");
 	IElementType HTML_MASON_ATTR_BLOCK = new HTMLMasonElementType("HTML_MASON_ATTR_BLOCK");
 	IElementType HTML_MASON_HARD_NEWLINE = new HTMLMasonElementType("HTML_MASON_HARD_NEWLINE");
+
+	IElementType HTML_MASON_METHOD_DEFINITION = new HTMLMasonElementType("HTML_MASON_METHOD_DEFINITION")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new HTMLMasonMethodDefinitionImpl(node);
+		}
+	};
+
+	IElementType HTML_MASON_SUBCOMPONENT_DEFINITION = new HTMLMasonElementType("HTML_MASON_DEF_DEFINITION")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new HTMLMasonSubcomponentDefitnitionImpl(node);
+		}
+	};
+	IElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonElementType("HTML_MASON_FLAGS_STATEMENT")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new HTMLMasonFlagsStatementImpl(node);
+		}
+	};
 
 	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonElementType("HTML_MASON_ARGS_BLOCK")
 	{
