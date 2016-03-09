@@ -26,6 +26,8 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -169,10 +171,6 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 		if (result == TokenType.NEW_LINE_INDENT)
 		{
 			clearLine = true;
-			if (currentCustomState == LEX_MASON_PERL_ARGS_BLOCK || currentCustomState == LEX_MASON_PERL_ATTR_BLOCK)
-			{
-				result = HTML_MASON_HARD_NEWLINE;
-			}
 		}
 		else if (result != TokenType.WHITE_SPACE)
 		{
@@ -203,7 +201,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 				setTokenEnd(tokenStart + 1);
 
 				setCustomState(getInitialCustomState());
-				return SEMICOLON;
+				return TokenType.NEW_LINE_INDENT;
 			}
 		}
 		else if (currentCustomState == LEX_MASON_OPENING_TAG && currentChar == '>')
@@ -238,12 +236,12 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 			{
 				while (tokenStart < offset)
 				{
-					addPreparsedToken(tokenStart++, tokenStart, HTML_MASON_DEFAULT_ESCAPER_NAME);
+					pushPreparsedToken(tokenStart++, tokenStart, HTML_MASON_DEFAULT_ESCAPER_NAME);
 				}
 			}
 			else
 			{
-				addPreparsedToken(tokenStart, offset, HTML_MASON_ESCAPER_NAME);
+				pushPreparsedToken(tokenStart, offset, HTML_MASON_ESCAPER_NAME);
 			}
 			return getPreParsedToken();
 		}
@@ -280,6 +278,12 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 			}
 
 		}
+		else if (currentChar == '\n' && (currentCustomState == LEX_MASON_PERL_ARGS_BLOCK || currentCustomState == LEX_MASON_PERL_ATTR_BLOCK))
+		{
+			setTokenStart(tokenStart);
+			setTokenEnd(tokenStart + 1);
+			return HTML_MASON_HARD_NEWLINE;
+		}
 		else if (
 				(currentCustomState == LEX_MASON_PERL_BLOCK ||
 						currentCustomState == LEX_MASON_PERL_ARGS_BLOCK ||
@@ -294,7 +298,6 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 		}
 		else if (currentCustomState == getInitialCustomState())
 		{
-			setTokenStart(tokenStart);
 			int offset = tokenStart;
 
 			boolean blockStart = false;
@@ -302,6 +305,8 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 			Matcher m;
 			Matcher matcherSimpleOpener = null;
 			Matcher matcherOpener = null;
+
+			int lastNonspaceCharacterOffset = -1;
 
 			for (; offset < bufferEnd; offset++)
 			{
@@ -319,6 +324,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 						)
 				{
 					blockStart = true;
+
 					break;
 				}
 				else if (currentChar == '<' && nextChar1 == '/' && nextChar2 == '%' &&
@@ -326,19 +332,19 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 						)
 				{
 					String tag = m.group(0);
-					addPreparsedToken(offset, offset + tag.length(), CLOSE_TOKENS_MAP.get(tag));
+					pushPreparsedToken(offset, offset + tag.length(), CLOSE_TOKENS_MAP.get(tag));
 					break;
 				}
 				else if (currentChar == '<' && nextChar1 == '&' && Character.isWhitespace(nextChar2))
 				{
-					addPreparsedToken(offset, offset + KEYWORD_CALL_OPENER.length(), HTML_MASON_CALL_OPENER);
+					pushPreparsedToken(offset, offset + KEYWORD_CALL_OPENER.length(), HTML_MASON_CALL_OPENER);
 					parseCallComponentPath(offset + KEYWORD_CALL_OPENER.length());
 					setCustomState(LEX_MASON_PERL_CALL_BLOCK);
 					break;
 				}
 				else if (currentChar == '<' && nextChar1 == '&' && nextChar2 == '|')
 				{
-					addPreparsedToken(offset, offset + KEYWORD_CALL_OPENER_FILTER.length(), HTML_MASON_CALL_FILTERING_OPENER);
+					pushPreparsedToken(offset, offset + KEYWORD_CALL_OPENER_FILTER.length(), HTML_MASON_CALL_FILTERING_OPENER);
 					parseCallComponentPath(offset + KEYWORD_CALL_OPENER_FILTER.length());
 					setCustomState(LEX_MASON_PERL_FILTERING_CALL_BLOCK);
 					break;
@@ -347,7 +353,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 				{
 					int myOffset = offset;
 
-					addPreparsedToken(myOffset, myOffset + KEYWORD_CALL_CLOSE_TAG_START.length(), HTML_MASON_CALL_CLOSE_TAG_START);
+					pushPreparsedToken(myOffset, myOffset + KEYWORD_CALL_CLOSE_TAG_START.length(), HTML_MASON_CALL_CLOSE_TAG_START);
 					myOffset = preparseNewLinesAndSpaces(buffer, bufferEnd, myOffset + KEYWORD_CALL_CLOSE_TAG_START.length());
 
 					int startOffset = myOffset;
@@ -357,21 +363,21 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 					}
 					if (myOffset > startOffset)
 					{
-						addPreparsedToken(startOffset, myOffset, STRING_CONTENT);
+						pushPreparsedToken(startOffset, myOffset, STRING_CONTENT);
 					}
 
 					myOffset = preparseNewLinesAndSpaces(buffer, bufferEnd, myOffset);
 
 					if (myOffset < bufferEnd && buffer.charAt(myOffset) == '>')
 					{
-						addPreparsedToken(myOffset++, myOffset, HTML_MASON_TAG_CLOSER);
+						pushPreparsedToken(myOffset++, myOffset, HTML_MASON_TAG_CLOSER);
 					}
 
 					break;
 				}
 				else if (clearLine && currentChar == '%')
 				{
-					addPreparsedToken(offset, offset + 1, HTML_MASON_LINE_OPENER);
+					pushPreparsedToken(offset, offset + 1, HTML_MASON_LINE_OPENER);
 					setCustomState(LEX_MASON_PERL_LINE);
 					break;
 				}
@@ -381,11 +387,33 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 				}
 				else
 				{
+					if (!Character.isWhitespace(currentChar))
+					{
+						lastNonspaceCharacterOffset = offset;
+					}
 					clearLine = false;
 				}
 			}
 
-			setTokenEnd(offset);
+			// re-lexing html block
+			List<CustomToken> tokens = new ArrayList<CustomToken>();
+			int myOffset = parseSpacesInRange(tokenStart, offset, tokens);
+
+			// real template
+			if (myOffset <= lastNonspaceCharacterOffset)
+			{
+				tokens.add(new CustomToken(myOffset, lastNonspaceCharacterOffset + 1, HTML_MASON_TEMPLATE_BLOCK_HTML));
+			}
+
+			if (lastNonspaceCharacterOffset > -1)
+			{
+				parseSpacesInRange(lastNonspaceCharacterOffset + 1, offset, tokens);
+			}
+
+			for (int i = tokens.size() - 1; i >= 0; i--)
+			{
+				unshiftPreparsedToken(tokens.get(i));
+			}
 
 			if (offset >= bufferEnd)  // end of file, html block
 			{
@@ -397,7 +425,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 				{
 					// check for unnamed block
 					String openingTag = matcherSimpleOpener.group(0);
-					addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
+					pushPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
 					BLOCK_CLOSE_TAG = OPEN_CLOSE_MAP.get(openingTag);
 
 					if (openingTag.equals(KEYWORD_DOC_OPENER))
@@ -425,11 +453,11 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 						}
 						if (offset > commentStart)
 						{
-							addPreparsedToken(commentStart, offset, COMMENT_BLOCK);
+							pushPreparsedToken(commentStart, offset, COMMENT_BLOCK);
 						}
 						if (gotCloseTag)
 						{
-							addPreparsedToken(offset, offset + KEYWORD_DOC_CLOSER.length(), HTML_MASON_DOC_CLOSER);
+							pushPreparsedToken(offset, offset + KEYWORD_DOC_CLOSER.length(), HTML_MASON_DOC_CLOSER);
 						}
 					}
 					else if (openingTag.equals(KEYWORD_TEXT_OPENER))
@@ -459,11 +487,11 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 
 						if (offset > commentStart)
 						{
-							addPreparsedToken(commentStart, offset, STRING_CONTENT);
+							pushPreparsedToken(commentStart, offset, STRING_CONTENT);
 						}
 						if (gotCloseTag)
 						{
-							addPreparsedToken(offset, offset + KEYWORD_TEXT_CLOSER.length(), HTML_MASON_TEXT_CLOSER);
+							pushPreparsedToken(offset, offset + KEYWORD_TEXT_CLOSER.length(), HTML_MASON_TEXT_CLOSER);
 						}
 					}
 					else if (openingTag.equals(KEYWORD_ATTR_OPENER))
@@ -483,7 +511,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 				{
 					// check for named block
 					String openingTag = matcherOpener.group(0);
-					addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
+					pushPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
 
 					// spaces
 					offset += openingTag.length();
@@ -494,39 +522,72 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 					}
 
 					if (offset > startOffset)
-						addPreparsedToken(startOffset, startOffset = offset, TokenType.WHITE_SPACE);
+						pushPreparsedToken(startOffset, startOffset = offset, TokenType.WHITE_SPACE);
 
 					while (offset < bufferEnd && (Character.isLetterOrDigit(currentChar = buffer.charAt(offset)) || currentChar == '_' || currentChar == '-' || currentChar == '.'))
 					{
 						offset++;
 					}
 
-					if (offset > startOffset) addPreparsedToken(startOffset, startOffset = offset, IDENTIFIER);
+					if (offset > startOffset) pushPreparsedToken(startOffset, startOffset = offset, IDENTIFIER);
 
 					setCustomState(LEX_MASON_OPENING_TAG);
 				}
 				else
 				{
 					assert Character.isWhitespace(buffer.charAt(offset + 2));
-					addPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), HTML_MASON_BLOCK_OPENER);
+					pushPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), HTML_MASON_BLOCK_OPENER);
 					setCustomState(LEX_MASON_PERL_EXPR_BLOCK);
 				}
 			}
 
-			if (getTokenEnd() > getTokenStart())
-			{
-				return HTML_MASON_TEMPLATE_BLOCK_HTML;
-			}
-			else if (preparsedTokensList.size() > 0)
+			if (preparsedTokensList.size() > 0)
 			{
 				return getPreParsedToken();
 			}
-			else
-			{
-				return null;
-			}
 		}
 		return super.perlAdvance();
+	}
+
+	protected int parseSpacesInRange(int myOffset, int offset, List<CustomToken> tokens)
+	{
+		int whiteSpaceTokenStart = -1;
+		CharSequence buffer = getBuffer();
+		while (myOffset < offset)
+		{
+			char currentChar = buffer.charAt(myOffset);
+			if (currentChar == '\n')
+			{
+				if (whiteSpaceTokenStart != -1)
+				{
+					tokens.add(new CustomToken(whiteSpaceTokenStart, myOffset, TokenType.WHITE_SPACE));
+					whiteSpaceTokenStart = -1;
+				}
+				tokens.add(new CustomToken(myOffset, myOffset + 1, TokenType.NEW_LINE_INDENT));
+			}
+			else if (Character.isWhitespace(currentChar))
+			{
+				if (whiteSpaceTokenStart == -1)
+				{
+					whiteSpaceTokenStart = myOffset;
+				}
+			}
+			else
+			{
+				if (whiteSpaceTokenStart != -1)
+				{
+					tokens.add(new CustomToken(whiteSpaceTokenStart, myOffset, TokenType.WHITE_SPACE));
+					whiteSpaceTokenStart = -1;
+				}
+				break;
+			}
+			myOffset++;
+		}
+		if (whiteSpaceTokenStart != -1)
+		{
+			tokens.add(new CustomToken(whiteSpaceTokenStart, myOffset, TokenType.WHITE_SPACE));
+		}
+		return myOffset;
 	}
 
 	protected int preparseNewLinesAndSpaces(CharSequence buffer, int bufferEnd, int offset)
@@ -536,7 +597,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 			char currentChar = buffer.charAt(offset);
 			if (currentChar == '\n')
 			{
-				addPreparsedToken(offset++, offset, TokenType.NEW_LINE_INDENT);
+				pushPreparsedToken(offset++, offset, TokenType.NEW_LINE_INDENT);
 			}
 			else if (Character.isWhitespace(currentChar))
 			{
@@ -545,7 +606,7 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 				{
 					offset++;
 				}
-				addPreparsedToken(tokenStart, offset, TokenType.WHITE_SPACE);
+				pushPreparsedToken(tokenStart, offset, TokenType.WHITE_SPACE);
 			}
 			else
 			{
@@ -613,14 +674,14 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 			char currentChar = buffer.charAt(offset);
 			if (currentChar == '\n')    // newline
 			{
-				addPreparsedToken(offset, ++offset, TokenType.NEW_LINE_INDENT);
+				pushPreparsedToken(offset, ++offset, TokenType.NEW_LINE_INDENT);
 			}
 			else if (Character.isWhitespace(currentChar)) // whitespaces
 			{
 				CustomToken whiteSpaceToken = getWhiteSpacesToken(buffer, offset, bufferEnd, KEYWORD_CALL_CLOSER);
 				if (whiteSpaceToken != null)
 				{
-					addPreparsedToken(whiteSpaceToken);
+					pushPreparsedToken(whiteSpaceToken);
 					offset = whiteSpaceToken.getTokenEnd();
 				}
 				else // we are at ' &>'
@@ -669,11 +730,11 @@ public class HTMLMasonLexer extends PerlLexerWithCustomStates implements HTMLMas
 
 				if (++lastNonSpaceOffset > tokenStart)
 				{
-					addPreparsedToken(tokenStart, lastNonSpaceOffset, STRING_CONTENT);
+					pushPreparsedToken(tokenStart, lastNonSpaceOffset, STRING_CONTENT);
 
 					if (offset > lastNonSpaceOffset)
 					{
-						addPreparsedToken(lastNonSpaceOffset, offset, TokenType.WHITE_SPACE);
+						pushPreparsedToken(lastNonSpaceOffset, offset, TokenType.WHITE_SPACE);
 					}
 				}
 			}

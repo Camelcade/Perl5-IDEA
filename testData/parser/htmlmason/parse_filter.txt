@@ -1,5 +1,5 @@
 HTML::Mason component
-  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>\n\n')
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   PerlCompositeElementImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
     PsiElement(HTML::Mason::Token.<%filter>)('<%filter>')
     PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
@@ -13,7 +13,7 @@ HTML::Mason component
           PsiElement(PerlTokenType.STRING_CONTENT)('A-Z')
         PsiElement(PerlTokenType.REGEX_QUOTE_CLOSE)('/')
     PsiElement(HTML::Mason::Token.</%filter>)('</%filter>')
-  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('\nSome\n\n')
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('Some')
   PerlCompositeElementImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
     PsiElement(HTML::Mason::Token.<%filter>)('<%filter>')
     PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
@@ -57,4 +57,4 @@ HTML::Mason component
           PsiElement(PerlTokenType.REGEX_MODIFIER)('i')
       PsiElement(PerlTokenType.;)(';')
     PsiElement(HTML::Mason::Token.</%filter>)('</%filter>')
-  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('\n\n\n</html>')
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')

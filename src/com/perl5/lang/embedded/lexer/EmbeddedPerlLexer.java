@@ -64,12 +64,12 @@ public class EmbeddedPerlLexer extends PerlLexerWithCustomStates implements Embe
 
 			if (offset > tokenStart)
 			{
-				addPreparsedToken(tokenStart, offset, EMBED_TEMPLATE_BLOCK_HTML);
+				pushPreparsedToken(tokenStart, offset, EMBED_TEMPLATE_BLOCK_HTML);
 			}
 
 			if (blockStart)
 			{
-				addPreparsedToken(offset, offset + 2, EMBED_MARKER_OPEN);
+				pushPreparsedToken(offset, offset + 2, EMBED_MARKER_OPEN);
 				setCustomState(LEX_PERL_BLOCK);
 			}
 

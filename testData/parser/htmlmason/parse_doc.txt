@@ -1,6 +1,6 @@
 HTML::Mason component
-  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>\n\n\n')
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   PsiElement(HTML::Mason::Token.<%doc>)('<%doc>')
   PsiComment(PerlTokenType.COMMENT_BLOCK)('\n\n<&| /path/to/comp &> this is the content </&>\n<&| comp, arg1 => 'hi' &> filters can take arguments </&>\n<&| comp &> content can include <% "tags" %> of all kinds </&>\n<&| comp1 &> nesting is also <&| comp2 &> OK </&> </&>\n<&| SELF:method1 &> subcomponents can be filters </&>\n\n<&| "outer" &>\n <&| /inner/comp, arg=>'this' &>\n   <&| .mycomp &>\n      Yada yada yada\n   </& .mycomp >\n </& /inner/comp >\n</&>\n\n% my $var;\n<ol>\n<&| list_items , list => \@items, var => \$var &>\n<li> <% $var %></li>\n</&>\n</ol>\n\n')
   PsiElement(HTML::Mason::Token.</%doc>)('</%doc>')
-  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('\n\n\n</html>')
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')

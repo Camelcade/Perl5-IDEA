@@ -16,20 +16,29 @@
 
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonUtils;
 import com.perl5.lang.htmlmason.MasonCoreUtils;
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileImpl extends PerlFileImpl
+public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementTypes
 {
+	protected Map<Integer, Boolean> PERL_LINES_MAP = new THashMap<Integer, Boolean>();
 	public HTMLMasonFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, HTMLMasonLanguage.INSTANCE);
@@ -39,5 +48,39 @@ public class HTMLMasonFileImpl extends PerlFileImpl
 	public VirtualFile getComponentRoot()
 	{
 		return HTMLMasonUtils.getComponentRoot(getProject(), MasonCoreUtils.getContainingVirtualFile(this));
+	}
+
+	public boolean isInPerlLine(PsiElement element)
+	{
+		if (element == null)
+			return false;
+
+		ASTNode node = element.getNode();
+		int startOffset = node.getStartOffset();
+//		int endOffset = startOffset + node.getTextLength();
+
+		return isInPerlLine(startOffset); ///|| isInPerlLine(endOffset);
+	}
+
+	protected boolean isInPerlLine(int offset)
+	{
+		Document document = PsiDocumentManager.getInstance(getProject()).getDocument(this);
+		if (document != null)
+		{
+			int lineNumber = document.getLineNumber(offset);
+
+			Boolean result = PERL_LINES_MAP.get(lineNumber);
+
+			if (result != null)
+				return result;
+
+			PsiElement firstElement = findElementAt(document.getLineStartOffset(lineNumber));
+
+			result = firstElement != null && firstElement.getNode().getElementType() == HTML_MASON_LINE_OPENER;
+
+			PERL_LINES_MAP.put(lineNumber, result);
+			return result;
+		}
+		return false;
 	}
 }

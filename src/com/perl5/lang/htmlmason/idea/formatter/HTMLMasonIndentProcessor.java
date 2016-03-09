@@ -16,15 +16,10 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
-import com.intellij.formatting.Indent;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
-import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 07.03.2016.
@@ -36,6 +31,8 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 	public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
 			PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
 			TokenSet.create(
+					HTML_MASON_PERL_OPENER,
+					HTML_MASON_PERL_CLOSER,
 					HTML_MASON_LINE_OPENER
 			));
 
@@ -70,20 +67,12 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 					HTML_MASON_ATTR_OPENER,
 					HTML_MASON_ATTR_CLOSER,
 
+					HTML_MASON_FILTER_OPENER,
+					HTML_MASON_FILTER_CLOSER,
+
 					HTML_MASON_ONCE_OPENER,
-					HTML_MASON_ONCE_CLOSER,
-
-					HTML_MASON_PERL_OPENER,
-					HTML_MASON_PERL_CLOSER
+					HTML_MASON_ONCE_CLOSER
 			));
-
-	public static final TokenSet MASON_BLOCK_CONTAINERS = TokenSet.create(
-			HTML_MASON_ABSTRACT_BLOCK,
-			HTML_MASON_ARGS_BLOCK,
-			HTML_MASON_ATTR_BLOCK
-
-	);
-
 
 	@Override
 	public TokenSet getAbsoluteUnindentableTokens()
@@ -101,49 +90,5 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 	public TokenSet getUnindentableTokens()
 	{
 		return UNINDENTABLE_TOKENS;
-	}
-
-	@Override
-	public Indent getNodeIndent(@NotNull ASTNode node, PerlCodeStyleSettings codeStyleSettings)
-	{
-		IElementType nodeType = node.getElementType();
-		ASTNode parent = node.getTreeParent();
-		ASTNode grandParent = parent != null ? parent.getTreeParent() : null;
-
-		IElementType parentType = parent != null ? parent.getElementType() : null;
-		IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
-
-		boolean isFirst = node.getTreePrev() == null;
-		boolean isLast = node.getTreeNext() == null;
-
-		if (nodeType == HTML_MASON_METHOD_DEFINITION)
-		{
-			return Indent.getNoneIndent();
-		}
-
-
-		if (MASON_BLOCK_CONTAINERS.contains(parentType))
-		{
-			if (isFirst || isLast)
-			{
-				return Indent.getNoneIndent();
-			}
-			else
-			{
-				return Indent.getNormalIndent();
-			}
-		}
-
-		if (parentType == BLOCK && MASON_BLOCK_CONTAINERS.contains(nodeType))
-		{
-			return Indent.getNormalIndent();
-		}
-
-		if (parentType == COMMA_SEQUENCE_EXPR && grandParentType == HTML_MASON_ATTR_BLOCK)
-		{
-			return Indent.getNoneIndent();
-		}
-
-		return super.getNodeIndent(node, codeStyleSettings);
 	}
 }

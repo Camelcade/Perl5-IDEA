@@ -180,7 +180,7 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 
 			if (offset > tokenStart)
 			{
-				addPreparsedToken(tokenStart, offset, MOJO_TEMPLATE_BLOCK_HTML);
+				pushPreparsedToken(tokenStart, offset, MOJO_TEMPLATE_BLOCK_HTML);
 			}
 
 			if (offset == bufferEnd)  // end of file, html block
@@ -196,18 +196,18 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 				{
 					if (offset < bufferEnd - 3 && buffer.charAt(offset + 3) == '=') // <%==
 					{
-						addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER.length(), MOJO_BLOCK_EXPR_ESCAPED_OPENER);
+						pushPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER.length(), MOJO_BLOCK_EXPR_ESCAPED_OPENER);
 						setCustomState(LEX_PERL_EXPR_BLOCK);
 					}
 					else
 					{
-						addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_EXPR_OPENER.length(), MOJO_BLOCK_EXPR_OPENER);
+						pushPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_EXPR_OPENER.length(), MOJO_BLOCK_EXPR_OPENER);
 						setCustomState(LEX_PERL_EXPR_BLOCK);
 					}
 				}
 				else if (extraChar == '%')    // <%%
 				{
-					addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_OPENER_TAG.length(), MOJO_BLOCK_OPENER_TAG);
+					pushPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_OPENER_TAG.length(), MOJO_BLOCK_OPENER_TAG);
 				}
 				else if (extraChar == '#') // <%#
 				{
@@ -221,11 +221,11 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 						}
 						commentEnd++;
 					}
-					addPreparsedToken(offset, commentEnd, PerlElementTypes.COMMENT_LINE);
+					pushPreparsedToken(offset, commentEnd, PerlElementTypes.COMMENT_LINE);
 				}
 				else    // <%
 				{
-					addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_OPENER.length(), MOJO_BLOCK_OPENER);
+					pushPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_OPENER.length(), MOJO_BLOCK_OPENER);
 					setCustomState(LEX_PERL_BLOCK);
 
 					Matcher m = MOJO_END_IN_BLOCK.matcher(buffer);
@@ -235,17 +235,17 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 						offset += KEYWORD_MOJO_BLOCK_OPENER.length();
 						if (!m.group(1).isEmpty())
 						{
-							addPreparsedToken(offset, offset += m.group(1).length(), TokenType.WHITE_SPACE);
+							pushPreparsedToken(offset, offset += m.group(1).length(), TokenType.WHITE_SPACE);
 						}
 
-						addPreparsedToken(offset, offset += KEYWORD_MOJO_END.length(), MOJO_END);
+						pushPreparsedToken(offset, offset += KEYWORD_MOJO_END.length(), MOJO_END);
 
 						if (!m.group(2).isEmpty())
 						{
-							addPreparsedToken(offset, offset += m.group(2).length(), TokenType.WHITE_SPACE);
+							pushPreparsedToken(offset, offset += m.group(2).length(), TokenType.WHITE_SPACE);
 						}
 
-						addPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_CLOSER.length(), MOJO_BLOCK_CLOSER_SEMI);
+						pushPreparsedToken(offset, offset + KEYWORD_MOJO_BLOCK_CLOSER.length(), MOJO_BLOCK_CLOSER_SEMI);
 						setCustomState(LEX_HTML_BLOCK);
 					}
 
@@ -260,18 +260,18 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 				{
 					if (offset < bufferEnd - 2 && buffer.charAt(offset + 2) == '=') // %==
 					{
-						addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_EXPR_ESCAPED_OPENER.length(), MOJO_LINE_EXPR_ESCAPED_OPENER);
+						pushPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_EXPR_ESCAPED_OPENER.length(), MOJO_LINE_EXPR_ESCAPED_OPENER);
 						setCustomState(LEX_PERL_EXPR_LINE);
 					}
 					else
 					{
-						addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_EXPR_OPENER.length(), MOJO_LINE_EXPR_OPENER);
+						pushPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_EXPR_OPENER.length(), MOJO_LINE_EXPR_OPENER);
 						setCustomState(LEX_PERL_EXPR_LINE);
 					}
 				}
 				else if (extraChar == '%')    // %%
 				{
-					addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER_TAG.length(), MOJO_LINE_OPENER_TAG);
+					pushPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER_TAG.length(), MOJO_LINE_OPENER_TAG);
 				}
 				else if (extraChar == '#') // %#
 				{
@@ -285,11 +285,11 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 						}
 						commentEnd++;
 					}
-					addPreparsedToken(offset, commentEnd, PerlElementTypes.COMMENT_LINE);
+					pushPreparsedToken(offset, commentEnd, PerlElementTypes.COMMENT_LINE);
 				}
 				else    // %
 				{
-					addPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER.length(), MOJO_LINE_OPENER);
+					pushPreparsedToken(offset, offset + KEYWORD_MOJO_LINE_OPENER.length(), MOJO_LINE_OPENER);
 					setCustomState(LEX_PERL_LINE);
 
 					Matcher m = MOJO_END_IN_LINE.matcher(buffer);
@@ -299,17 +299,17 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 						offset += KEYWORD_MOJO_LINE_OPENER.length();
 						if (!m.group(1).isEmpty())
 						{
-							addPreparsedToken(offset, offset += m.group(1).length(), TokenType.WHITE_SPACE);
+							pushPreparsedToken(offset, offset += m.group(1).length(), TokenType.WHITE_SPACE);
 						}
 
-						addPreparsedToken(offset, offset += KEYWORD_MOJO_END.length(), MOJO_END);
+						pushPreparsedToken(offset, offset += KEYWORD_MOJO_END.length(), MOJO_END);
 
 						if (!m.group(2).isEmpty())
 						{
-							addPreparsedToken(offset, offset += m.group(2).length(), TokenType.WHITE_SPACE);
+							pushPreparsedToken(offset, offset += m.group(2).length(), TokenType.WHITE_SPACE);
 						}
 
-						addPreparsedToken(offset, offset + 1, SEMICOLON);
+						pushPreparsedToken(offset, offset + 1, SEMICOLON);
 						setCustomState(LEX_HTML_BLOCK);
 					}
 				}

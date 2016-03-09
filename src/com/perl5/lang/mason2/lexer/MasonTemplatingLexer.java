@@ -330,19 +330,19 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 						)
 				{
 					String tag = m.group(0);
-					addPreparsedToken(offset, offset + tag.length(), CLOSE_TOKENS_MAP.get(tag));
+					pushPreparsedToken(offset, offset + tag.length(), CLOSE_TOKENS_MAP.get(tag));
 					break;
 				}
 				else if (offset < bufferEnd - 2 && currentChar == '<' && buffer.charAt(offset + 1) == '&' && Character.isWhitespace(buffer.charAt(offset + 2)))
 				{
-					addPreparsedToken(offset, offset + KEYWORD_CALL_OPENER.length(), MASON_CALL_OPENER);
+					pushPreparsedToken(offset, offset + KEYWORD_CALL_OPENER.length(), MASON_CALL_OPENER);
 					parseCallComponentPath(offset + KEYWORD_CALL_OPENER.length());
 					setCustomState(LEX_MASON_PERL_CALL_BLOCK);
 					break;
 				}
 				else if (offset < bufferEnd && clearLine && currentChar == '%')
 				{
-					addPreparsedToken(offset, offset + 1, MASON_LINE_OPENER);
+					pushPreparsedToken(offset, offset + 1, MASON_LINE_OPENER);
 					setCustomState(LEX_MASON_PERL_LINE);
 					break;
 				}
@@ -368,7 +368,7 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 				{
 					// check for unnamed block
 					String openingTag = matcherSimpleOpener.group(0);
-					addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
+					pushPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
 					BLOCK_CLOSE_TAG = OPEN_CLOSE_MAP.get(openingTag);
 
 					if (openingTag.equals(KEYWORD_DOC_OPENER))
@@ -396,11 +396,11 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 						}
 						if (offset > commentStart)
 						{
-							addPreparsedToken(commentStart, offset, COMMENT_BLOCK);
+							pushPreparsedToken(commentStart, offset, COMMENT_BLOCK);
 						}
 						if (gotCloseTag)
 						{
-							addPreparsedToken(offset, offset + KEYWORD_DOC_CLOSER.length(), MASON_DOC_CLOSER);
+							pushPreparsedToken(offset, offset + KEYWORD_DOC_CLOSER.length(), MASON_DOC_CLOSER);
 						}
 					}
 					else if (openingTag.equals(KEYWORD_TEXT_OPENER))
@@ -430,11 +430,11 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 
 						if (offset > commentStart)
 						{
-							addPreparsedToken(commentStart, offset, STRING_CONTENT);
+							pushPreparsedToken(commentStart, offset, STRING_CONTENT);
 						}
 						if (gotCloseTag)
 						{
-							addPreparsedToken(offset, offset + KEYWORD_TEXT_CLOSER.length(), MASON_TEXT_CLOSER);
+							pushPreparsedToken(offset, offset + KEYWORD_TEXT_CLOSER.length(), MASON_TEXT_CLOSER);
 						}
 					}
 					else
@@ -446,13 +446,13 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 				{
 					// check for named block
 					String openingTag = matcherOpener.group(0);
-					addPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
+					pushPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
 					setCustomState(LEX_MASON_OPENING_TAG);
 				}
 				else
 				{
 					assert Character.isWhitespace(buffer.charAt(offset + 2));
-					addPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), MASON_BLOCK_OPENER);
+					pushPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), MASON_BLOCK_OPENER);
 					setCustomState(LEX_MASON_PERL_EXPR_BLOCK);
 				}
 			}
@@ -531,14 +531,14 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 			char currentChar = buffer.charAt(offset);
 			if (currentChar == '\n')    // newline
 			{
-				addPreparsedToken(offset, ++offset, TokenType.NEW_LINE_INDENT);
+				pushPreparsedToken(offset, ++offset, TokenType.NEW_LINE_INDENT);
 			}
 			else if (Character.isWhitespace(currentChar)) // whitespaces
 			{
 				CustomToken whiteSpaceToken = getWhiteSpacesToken(buffer, offset, bufferEnd, KEYWORD_CALL_CLOSER);
 				if (whiteSpaceToken != null)
 				{
-					addPreparsedToken(whiteSpaceToken);
+					pushPreparsedToken(whiteSpaceToken);
 					offset = whiteSpaceToken.getTokenEnd();
 				}
 				else // we are at ' &>'
@@ -587,11 +587,11 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 
 				if (++lastNonSpaceOffset > tokenStart)
 				{
-					addPreparsedToken(tokenStart, lastNonSpaceOffset, STRING_CONTENT);
+					pushPreparsedToken(tokenStart, lastNonSpaceOffset, STRING_CONTENT);
 
 					if (offset > lastNonSpaceOffset)
 					{
-						addPreparsedToken(lastNonSpaceOffset, offset, TokenType.WHITE_SPACE);
+						pushPreparsedToken(lastNonSpaceOffset, offset, TokenType.WHITE_SPACE);
 					}
 				}
 			}

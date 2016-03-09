@@ -63,7 +63,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 			}
 			else if (tokenType == OPERATOR_REFERENCE && bufferEnd > tokenEnd)
 			{
-				addPreparsedToken(tokenEnd, tokenEnd + 1, STRING_CONTENT);
+				pushPreparsedToken(tokenEnd, tokenEnd + 1, STRING_CONTENT);
 			}
 		}
 		return tokenType;
@@ -101,7 +101,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	{
 		if (getBufferEnd() > getTokenEnd() && Character.isWhitespace(getBuffer().charAt(getTokenEnd())))
 		{
-			addPreparsedToken(getTokenEnd(), getTokenEnd() + 1, STRING_CONTENT);
+			pushPreparsedToken(getTokenEnd(), getTokenEnd() + 1, STRING_CONTENT);
 		}
 
 		return OPERATOR_REFERENCE;
@@ -182,7 +182,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 			IElementType tokenType = null;
 			while ((tokenType = lexer.advance()) != null)
 			{
-				addPreparsedToken(lexer.getTokenStart(), lexer.getTokenEnd(), tokenType);
+				pushPreparsedToken(lexer.getTokenStart(), lexer.getTokenEnd(), tokenType);
 			}
 		}
 	}
@@ -195,9 +195,9 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 
 		setTokenEnd(++tokenStart);
 
-		addPreparsedToken(tokenStart++, tokenStart, LEFT_BRACE);
-		addPreparsedToken(tokenStart, tokenStart += tokenText.length() - 3, IDENTIFIER);
-		addPreparsedToken(tokenStart++, tokenStart, RIGHT_BRACE);
+		pushPreparsedToken(tokenStart++, tokenStart, LEFT_BRACE);
+		pushPreparsedToken(tokenStart, tokenStart += tokenText.length() - 3, IDENTIFIER);
+		pushPreparsedToken(tokenStart++, tokenStart, RIGHT_BRACE);
 
 		return sigilTokenType;
 	}

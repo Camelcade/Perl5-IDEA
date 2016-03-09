@@ -977,8 +977,8 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		CharSequence openToken = yytext();
 		int tokenStart = getTokenStart();
-		addPreparsedToken(tokenStart + 2, tokenStart + 3, OPERATOR_REFERENCE);
-		addPreparsedToken(tokenStart + 3, tokenStart + openToken.length(), STRING_CONTENT);
+		pushPreparsedToken(tokenStart + 2, tokenStart + 3, OPERATOR_REFERENCE);
+		pushPreparsedToken(tokenStart + 3, tokenStart + openToken.length(), STRING_CONTENT);
 		heredocQueue.push(new PerlHeredocQueueElement(LEX_HEREDOC_WAITING, openToken.subSequence(3, openToken.length()).toString()));
 		pushState();
 		yybegin(LEX_HEREDOC_WAITING);
@@ -1032,21 +1032,21 @@ public class PerlLexer extends PerlLexerGenerated
 				int elementLength = m.group(1).length();
 				if (elementLength > 0)    // got spaces
 				{
-					addPreparsedToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE);
+					pushPreparsedToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE);
 				}
 
 				currentPosition += elementLength;
 
-				addPreparsedToken(currentPosition, currentPosition + 1, getOpenQuoteTokenType(m.group(2).charAt(0)));
+				pushPreparsedToken(currentPosition, currentPosition + 1, getOpenQuoteTokenType(m.group(2).charAt(0)));
 				currentPosition++;
 
 				if (heredocMarker.length() > 0)
 				{
-					addPreparsedToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER);
+					pushPreparsedToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER);
 					currentPosition += heredocMarker.length();
 				}
 
-				addPreparsedToken(currentPosition, currentPosition + 1, getCloseQuoteTokenType(m.group(2).charAt(0)));
+				pushPreparsedToken(currentPosition, currentPosition + 1, getCloseQuoteTokenType(m.group(2).charAt(0)));
 			}
 			else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
 			{
@@ -1103,7 +1103,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		if (!afterEmptyCloser)
 		{
-			addPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
+			pushPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
 		}
 
 		int bufferEnd = getBufferEnd();
@@ -1130,9 +1130,9 @@ public class PerlLexer extends PerlLexerGenerated
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)
 				{
-					addPreparsedToken(tokenStart, currentPosition, tokenType);
+					pushPreparsedToken(tokenStart, currentPosition, tokenType);
 				}
-				addPreparsedToken(currentPosition, lineContentsEnd + 1, HEREDOC_END);
+				pushPreparsedToken(currentPosition, lineContentsEnd + 1, HEREDOC_END);
 
 				if (!heredocQueue.isEmpty() && bufferEnd > lineContentsEnd + 1)
 				{
@@ -1149,9 +1149,9 @@ public class PerlLexer extends PerlLexerGenerated
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)
 				{
-					addPreparsedToken(tokenStart, currentPosition, tokenType);
+					pushPreparsedToken(tokenStart, currentPosition, tokenType);
 				}
-				addPreparsedToken(currentPosition, lineContentsEnd, HEREDOC_END);
+				pushPreparsedToken(currentPosition, lineContentsEnd, HEREDOC_END);
 				return getPreParsedToken();
 			}
 			// reached the end of file
@@ -1160,7 +1160,7 @@ public class PerlLexer extends PerlLexerGenerated
 				// non-empty heredoc and got the end of file
 				if (linePos > tokenStart)
 				{
-					addPreparsedToken(tokenStart, linePos, tokenType);
+					pushPreparsedToken(tokenStart, linePos, tokenType);
 				}
 				return getPreParsedToken();
 			}
@@ -1372,13 +1372,13 @@ public class PerlLexer extends PerlLexerGenerated
 		char openQuote = buffer.charAt(currentOffset);
 		char closeQuote = RegexBlock.getQuoteCloseChar(openQuote);
 		boolean quotesDiffer = openQuote != closeQuote;
-		addPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
+		pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
 
 		currentOffset = parseTrBlockContent(currentOffset, openQuote, closeQuote);
 
 		// close quote
 		if (currentOffset < bufferEnd)
-			addPreparsedToken(currentOffset++, currentOffset, quotesDiffer ? REGEX_QUOTE_CLOSE : REGEX_QUOTE);
+			pushPreparsedToken(currentOffset++, currentOffset, quotesDiffer ? REGEX_QUOTE_CLOSE : REGEX_QUOTE);
 
 		// between blocks
 		if (quotesDiffer)
@@ -1391,7 +1391,7 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				openQuote = buffer.charAt(currentOffset);
 				closeQuote = RegexBlock.getQuoteCloseChar(openQuote);
-				addPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
+				pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
 			}
 
 			currentOffset = parseTrBlockContent(currentOffset, openQuote, closeQuote);
@@ -1399,7 +1399,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		// close quote
 		if (currentOffset < bufferEnd)
-			addPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
+			pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
 
 
 		// trans modifiers
@@ -1410,7 +1410,7 @@ public class PerlLexer extends PerlLexerGenerated
 				currentOffset++;
 
 			if (blockStart < currentOffset)
-				addPreparsedToken(blockStart, currentOffset, REGEX_MODIFIER);
+				pushPreparsedToken(blockStart, currentOffset, REGEX_MODIFIER);
 		}
 
 		return getPreParsedToken();
@@ -1439,7 +1439,7 @@ public class PerlLexer extends PerlLexerGenerated
 			if (!isEscaped && quotesLevel == 0 && currentChar == closeQuote)
 			{
 				if (currentOffset > blockStartOffset)
-					addPreparsedToken(blockStartOffset, currentOffset, STRING_CONTENT);
+					pushPreparsedToken(blockStartOffset, currentOffset, STRING_CONTENT);
 				break;
 			}
 			if (isQuoteDiffers && !isEscaped)
@@ -1513,7 +1513,7 @@ public class PerlLexer extends PerlLexerGenerated
 		int bufferEnd = getBufferEnd();
 
 		char openQuote = buffer.charAt(tokenStart);
-		addPreparsedToken(tokenStart++, tokenStart, REGEX_QUOTE_OPEN);
+		pushPreparsedToken(tokenStart++, tokenStart, REGEX_QUOTE_OPEN);
 
 		// find block 1
 		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, tokenStart, bufferEnd, openQuote, false);
@@ -2022,7 +2022,7 @@ public class PerlLexer extends PerlLexerGenerated
 						(nextChar != '\'' || !isValidIdentifierCharacter(getSafeCharacterAt(getTokenEnd() + 1)))
 						)
 				{
-					addPreparsedToken(getTokenEnd(), getTokenEnd() + 1, IDENTIFIER);
+					pushPreparsedToken(getTokenEnd(), getTokenEnd() + 1, IDENTIFIER);
 				}
 			}
 		}

@@ -1,5 +1,5 @@
 HTML::Mason component
-  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>\n\n')
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   PerlCompositeElementImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
     PsiElement(HTML::Mason::Token.<%shared>)('<%shared>')
     PsiComment(PerlTokenType.COMMENT_LINE)('# Fetch article from database')
@@ -172,4 +172,4 @@ HTML::Mason component
           PsiElement(PerlTokenType.QUOTE_DOUBLE_CLOSE)('"')
       PsiElement(PerlTokenType.;)(';')
     PsiElement(HTML::Mason::Token.</%shared>)('</%shared>')
-  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('\n\n</html>')
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')

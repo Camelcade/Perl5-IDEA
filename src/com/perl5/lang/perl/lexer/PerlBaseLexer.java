@@ -305,9 +305,21 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	 * @param end       token end
 	 * @param tokenType token type
 	 */
-	protected void addPreparsedToken(int start, int end, IElementType tokenType)
+	protected void pushPreparsedToken(int start, int end, IElementType tokenType)
 	{
-		addPreparsedToken(getCustomToken(start, end, tokenType));
+		pushPreparsedToken(getCustomToken(start, end, tokenType));
+	}
+
+	/**
+	 * Adds preparsed token to the beginning of the queue with consistency control
+	 *
+	 * @param start     token start
+	 * @param end       token end
+	 * @param tokenType token type
+	 */
+	protected void unshiftPreparsedToken(int start, int end, IElementType tokenType)
+	{
+		unshiftPreparsedToken(getCustomToken(start, end, tokenType));
 	}
 
 	/**
@@ -315,7 +327,7 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	 *
 	 * @param token token to add
 	 */
-	protected void addPreparsedToken(CustomToken token)
+	protected void pushPreparsedToken(CustomToken token)
 	{
 		assert preparsedTokensList.size() == 0 ||
 				preparsedTokensList.getLast().getTokenEnd() == token.getTokenStart() :
@@ -328,6 +340,26 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 										preparsedTokensList.getLast().getTokenEnd());
 
 		preparsedTokensList.add(token);
+	}
+
+	/**
+	 * Adds preparsed token to the queue with consistency control
+	 *
+	 * @param token token to add
+	 */
+	protected void unshiftPreparsedToken(CustomToken token)
+	{
+		assert preparsedTokensList.size() == 0 ||
+				preparsedTokensList.getFirst().getTokenStart() == token.getTokenEnd() :
+				"Tokens size is " +
+						preparsedTokensList.size() +
+						" new token end is " +
+						token.getTokenEnd() +
+						(preparsedTokensList.size() == 0 ? "" :
+								" first start end is " +
+										preparsedTokensList.getFirst().getTokenStart());
+
+		preparsedTokensList.addFirst(token);
 	}
 
 	/**

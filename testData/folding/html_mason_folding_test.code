@@ -1,5 +1,5 @@
-<fold text='/ template /'><html>
-</fold>
+<html<fold text='...'>>
+
 <%args><fold text='/ arguments /'>
 $abs
     @b       # a comment
@@ -15,8 +15,8 @@ $abs
     %g => (joe => 1, bob => 2)
     %h => {somevar => 42}
 </fold></%args>
-<fold text='/ template /'>
-</fold>
+
+
 <%attr><fold text='/ attributes /'>
     color => 'blue'
         fonts => {qw(arial geneva helvetica)}
@@ -26,14 +26,14 @@ $abs
 </fold></%attr>
 
 <&| "outer" &><fold text=' / filtered content /'>
-<fold text='/ template /'>    Hello
-     my </fold><% $name %>
+    <fold text='/ template /'>Hello
+     my</fold> <% $name %>
      is someone
 </fold></&>
 
 <%def _li.n-k><fold text='{code block}'>
-<a href="http://www.<% $site %>.com"><% $label %><fold text='/ template /'></a>
-</fold>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
 </fold></%def>
 
 <%doc>
@@ -55,8 +55,8 @@ my $ua = $r->header_in('User-Agent');
 </fold></%init>
 
 <%method .li--nk><fold text='{code block}'>
-<a href="http://www.<% $site %>.com"><% $label %><fold text='/ template /'></a>
-</fold>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
 </fold></%method>
 
 <%once><fold text='{code block}'>
@@ -93,7 +93,7 @@ say 'something';  # comment
 % This is an example of a Perl line.
 <% This is an example of an expression block. %>
 </fold></%text>
-<fold text='/ template /'>
 
 
-</html></fold>
+
+</html</fold>>
