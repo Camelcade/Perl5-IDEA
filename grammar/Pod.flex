@@ -89,7 +89,8 @@ POD_CLOSE       = \="cut"
 {
     {EMPTY_LINE} {break;}
     {CODE_LINE} {markLastCodeLine(); break;}
-    .   {return endCodeBlock();}
+    .*  {return endCodeBlock();}
+    <<EOF>> {return endCodeBlock();}
 }
 
 <LEX_TAG_LINE>{

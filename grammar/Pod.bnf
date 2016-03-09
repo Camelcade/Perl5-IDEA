@@ -38,9 +38,7 @@ limitations under the License.
 }
 
 
-pod_file ::= paragraph * section*
-
-section ::= POD_TAG (paragraph | POD_CODE ) +
-paragraph ::= [POD_TEXT] POD_NEWLINE
-
+pod_file ::= pod_section*
+pod_section ::= !<<eof>> [POD_TAG] pod_item *
+private pod_item ::= POD_TEXT | POD_NEWLINE | POD_CODE
 

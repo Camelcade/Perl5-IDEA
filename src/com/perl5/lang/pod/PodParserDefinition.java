@@ -26,7 +26,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
@@ -42,7 +41,6 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 
 	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
 
-	public static final IStubFileElementType POD_FILE = new IStubFileElementType("Plain old document", PodLanguage.INSTANCE);
 	public static final IFileElementType FILE = new IFileElementType("Plain old document", PodLanguage.INSTANCE);
 
 	@NotNull
