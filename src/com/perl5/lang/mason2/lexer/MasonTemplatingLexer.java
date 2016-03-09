@@ -19,12 +19,10 @@ package com.perl5.lang.mason2.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.htmlmason.lexer.AbstractMasonLexer;
 import com.perl5.lang.mason2.elementType.MasonElementTypes;
-import com.perl5.lang.perl.lexer.CustomToken;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 import gnu.trove.THashMap;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Map;
@@ -35,7 +33,7 @@ import java.util.regex.Pattern;
  * Created by hurricup on 20.12.2015.
  */
 @SuppressWarnings("Duplicates")
-public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements MasonElementTypes
+public class MasonTemplatingLexer extends AbstractMasonLexer implements MasonElementTypes
 {
 	public static final Pattern MASON_EXPRESSION_FILTER_BLOCK = Pattern.compile(
 			"\\|\\s*"
@@ -296,7 +294,6 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 		}
 		else if (currentCustomState == getInitialCustomState())
 		{
-			setTokenStart(tokenStart);
 			int offset = tokenStart;
 
 			boolean blockStart = false;
@@ -304,6 +301,7 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 			Matcher m;
 			Matcher matcherSimpleOpener = null;
 			Matcher matcherOpener = null;
+			int lastNonspaceCharacterOffset = -1;
 
 			for (; offset < bufferEnd; offset++)
 			{
@@ -352,11 +350,15 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 				}
 				else
 				{
+					if (!Character.isWhitespace(currentChar))
+					{
+						lastNonspaceCharacterOffset = offset;
+					}
 					clearLine = false;
 				}
 			}
 
-			setTokenEnd(offset);
+			reLexHTMLBLock(tokenStart, offset, lastNonspaceCharacterOffset, MASON_TEMPLATE_BLOCK_HTML);
 
 			if (offset >= bufferEnd)  // end of file, html block
 			{
@@ -457,55 +459,12 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 				}
 			}
 
-			if (getTokenEnd() > getTokenStart())
-			{
-				return MASON_TEMPLATE_BLOCK_HTML;
-			}
-			else if (preparsedTokensList.size() > 0)
+			if (preparsedTokensList.size() > 0)
 			{
 				return getPreParsedToken();
 			}
-			else
-			{
-				return null;
-			}
 		}
 		return super.perlAdvance();
-	}
-
-	protected boolean parseTailSpaces(CharSequence buffer, int tokenStart, int bufferEnd, String endToken)
-	{
-		CustomToken whiteSpaceToken = getWhiteSpacesToken(buffer, tokenStart, bufferEnd, endToken);
-		if (whiteSpaceToken != null)
-		{
-			setTokenStart(whiteSpaceToken.getTokenStart());
-			setTokenEnd(whiteSpaceToken.getTokenEnd());
-			return true;
-		}
-		return false;
-	}
-
-	@Nullable
-	protected CustomToken getWhiteSpacesToken(CharSequence buffer, int tokenStart, int bufferEnd, String endToken)
-	{
-		int offset = tokenStart;
-		char currentChar;
-
-		while (offset != bufferEnd && (currentChar = buffer.charAt(offset)) != '\n' && Character.isWhitespace(currentChar))
-		{
-			offset++;
-		}
-
-		if (bufferAtString(buffer, offset - 1, endToken)) // got closer after spaces
-		{
-			offset--;
-		}
-
-		if (offset > tokenStart) // got spaces
-		{
-			return getCustomToken(tokenStart, offset, TokenType.WHITE_SPACE);
-		}
-		return null;
 	}
 
 	@Override
@@ -520,81 +479,10 @@ public class MasonTemplatingLexer extends PerlLexerWithCustomStates implements M
 				;
 	}
 
-	protected void parseCallComponentPath(int offset)
+	@Override
+	protected String getKeywordCallCloser()
 	{
-		CharSequence buffer = getBuffer();
-		int bufferEnd = getBufferEnd();
-
-		// heading spaces
-		while (offset < bufferEnd)
-		{
-			char currentChar = buffer.charAt(offset);
-			if (currentChar == '\n')    // newline
-			{
-				pushPreparsedToken(offset, ++offset, TokenType.NEW_LINE_INDENT);
-			}
-			else if (Character.isWhitespace(currentChar)) // whitespaces
-			{
-				CustomToken whiteSpaceToken = getWhiteSpacesToken(buffer, offset, bufferEnd, KEYWORD_CALL_CLOSER);
-				if (whiteSpaceToken != null)
-				{
-					pushPreparsedToken(whiteSpaceToken);
-					offset = whiteSpaceToken.getTokenEnd();
-				}
-				else // we are at ' &>'
-				{
-					return;
-				}
-			}
-			else // not newline or space
-			{
-				break;
-			}
-		}
-
-		// word
-		if (offset < bufferEnd)
-		{
-			char currentChar = buffer.charAt(offset);
-			// this is a bit weak, according to Perl docs:
-			// \w        [3]  Match a "word" character (alphanumeric plus "_",
-			// plus other connector punctuation chars plus Unicode marks)
-			// but regex here would be really heavy
-			if (currentChar == '/' || currentChar == '.' || currentChar == '_' || Character.isLetterOrDigit(currentChar)) // bareword path
-			{
-				int tokenStart = offset;
-				int lastNonSpaceOffset = 0;
-
-				while (offset < bufferEnd)
-				{
-					currentChar = buffer.charAt(offset);
-
-					if (currentChar == ',' ||                                                                                    // comma
-							currentChar == '=' && offset + 1 < bufferEnd && buffer.charAt(offset + 1) == '>' ||    // arrow comma
-							currentChar == ' ' && offset + 2 < bufferEnd && buffer.charAt(offset + 1) == '&' && buffer.charAt(offset + 2) == '>'    // close marker
-							)
-					{
-						break;
-					}
-
-					if (!Character.isWhitespace(currentChar))
-					{
-						lastNonSpaceOffset = offset;
-					}
-
-					offset++;
-				}
-
-				if (++lastNonSpaceOffset > tokenStart)
-				{
-					pushPreparsedToken(tokenStart, lastNonSpaceOffset, STRING_CONTENT);
-
-					if (offset > lastNonSpaceOffset)
-					{
-						pushPreparsedToken(lastNonSpaceOffset, offset, TokenType.WHITE_SPACE);
-					}
-				}
-			}
-		}
+		return KEYWORD_CALL_CLOSER;
 	}
+
 }

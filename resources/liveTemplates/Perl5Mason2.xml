@@ -21,7 +21,6 @@
         <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
         <variable name="SIGNATURE" expression="" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="HTML_TEXT" value="false"/>
             <option name="PERL5_MASON" value="true"/>
         </context>
     </template>
