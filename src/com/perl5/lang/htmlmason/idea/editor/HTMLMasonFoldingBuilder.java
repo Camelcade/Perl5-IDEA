@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Created by hurricup on 06.03.2016.
  */
-public class HTMLMasonFoldingBuilder extends PerlFoldingBuilder implements HTMLMasonElementTypes
+public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder implements HTMLMasonElementTypes
 {
 	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
 			PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
@@ -123,20 +123,13 @@ public class HTMLMasonFoldingBuilder extends PerlFoldingBuilder implements HTMLM
 		{
 			IElementType elementType = element.getNode().getElementType();
 
-			if (FOLDABLE_TOKENS.contains(elementType))
+			if (elementType == HTML_MASON_FILTERED_BLOCK)
 			{
-				int leftMargin = 0;
-				int rightMargin = 0;
-				if (elementType != HTML_MASON_FILTERED_BLOCK)
-				{
-					PsiElement firstChild = element.getFirstChild();
-					leftMargin = firstChild == null || firstChild.getNextSibling() == null ? 0 : firstChild.getNode().getTextLength();
-
-					PsiElement lastChild = element.getLastChild();
-					rightMargin = lastChild == null || lastChild == firstChild ? 0 : lastChild.getNode().getTextLength();
-				}
-
-				addDescriptorFor(myDescriptors, myDocument, element, leftMargin, rightMargin, 0);
+				addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
+			}
+			else if (FOLDABLE_TOKENS.contains(elementType))
+			{
+				foldElement(element, myDescriptors, myDocument);
 			}
 
 			super.visitElement(element);

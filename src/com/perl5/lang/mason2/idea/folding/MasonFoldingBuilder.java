@@ -23,6 +23,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.htmlmason.idea.editor.AbstractMasonFoldingBuilder;
 import com.perl5.lang.mason2.elementType.MasonElementTypes;
 import com.perl5.lang.mason2.psi.Mason2RecursiveVisitor;
 import com.perl5.lang.mason2.psi.MasonAbstractBlock;
@@ -38,7 +39,7 @@ import java.util.List;
 /**
  * Created by hurricup on 07.01.2016.
  */
-public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElementTypes
+public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements MasonElementTypes
 {
 	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
 			PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
@@ -105,14 +106,14 @@ public class MasonFoldingBuilder extends PerlFoldingBuilder implements MasonElem
 		@Override
 		public void visitMasonAbstractBlock(@NotNull MasonAbstractBlock o)
 		{
-			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 0);
+			foldElement(o, myDescriptors, myDocument);
 			super.visitMasonAbstractBlock(o);
 		}
 
 		@Override
 		public void visitMasonTextBlock(@NotNull MasonTextBlock o)
 		{
-			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 0);
+			foldElement(o, myDescriptors, myDocument);
 			super.visitMasonTextBlock(o);
 		}
 	}
