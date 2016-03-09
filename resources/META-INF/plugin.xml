@@ -51,6 +51,7 @@
         <li>Re-formatter now works on here-docs injected with ohter languages</li>
         <li>Disabling injections in here-docs with interpolated entities is now configurable</li>
         <li>Fixed indentation when typing inside the comma sequence, fixes #845</li>
+        <li>Fixed some bugs with pod parsing, fixes #901</li>
       </ul>
       </p>
 
