@@ -19,6 +19,7 @@ package com.perl5.lang.mason2.idea.configuration;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.AnActionButton;
 import com.intellij.ui.AnActionButtonRunnable;
@@ -26,6 +27,7 @@ import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.FormBuilder;
+import com.intellij.util.ui.JBUI;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettingsConfigurable;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,8 +60,8 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 	@Override
 	public JComponent createComponent()
 	{
-		FormBuilder builder = FormBuilder.createFormBuilder().setVertical(true);
-//		builder.getPanel().setLayout(new VerticalFlowLayout());
+		FormBuilder builder = FormBuilder.createFormBuilder();
+		builder.getPanel().setLayout(new VerticalFlowLayout());
 
 		createRootsListComponent(builder);
 		createGlobalsComponent(builder);
@@ -150,7 +152,9 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 							autobaseModel.add(fileName);
 						}
 					}
-				}).createPanel());
+				})
+				.setPreferredSize(JBUI.size(0, 100))
+				.createPanel());
 	}
 
 }

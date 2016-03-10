@@ -52,7 +52,10 @@ import java.util.Map;
 
 public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings>
 {
+
 	public List<String> substitutedExtensions = new ArrayList<String>();
+	public String autoHandlerName = "autohandler";
+	public List<HTMLMasonCustomTag> customTags = new ArrayList<HTMLMasonCustomTag>();
 
 	@Transient
 	private Map<String, Pair<Language, LanguageSubstitutor>> substitutorMap = new THashMap<String, Pair<Language, LanguageSubstitutor>>();

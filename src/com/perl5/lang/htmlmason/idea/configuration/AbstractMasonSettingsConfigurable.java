@@ -129,7 +129,9 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 							}
 						});
 					}
-				}).createPanel());
+				})
+				.setPreferredSize(JBUI.size(0, 100))
+				.createPanel());
 	}
 
 	public void createGlobalsComponent(FormBuilder builder)
@@ -174,7 +176,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 						TableUtil.editCellAt(globalsTable, indexToEdit, 0);
 					}
 				})
-				.setPreferredSize(JBUI.size(0, 150))
+				.setPreferredSize(JBUI.size(0, 100))
 				.createPanel()
 		)
 		;
