@@ -25,8 +25,8 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStub;
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PsiPerlConstantName;
-import com.perl5.lang.perl.psi.StubBasedPsiElementBaseWithToString;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +36,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 04.08.2015.
  */
-public abstract class PerlConstantImplMixin extends StubBasedPsiElementBaseWithToString<PerlConstantStub> implements PsiPerlConstantName
+public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<PerlConstantStub> implements PsiPerlConstantName
 {
 	public PerlConstantImplMixin(PerlConstantStub stub, IStubElementType nodeType)
 	{

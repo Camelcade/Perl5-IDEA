@@ -18,21 +18,25 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveState;
+import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 31.01.2016.
  */
-public class StubBasedPsiElementBaseWithToString<T extends StubElement> extends StubBasedPsiElementBase<T>
+public class PerlStubBasedPsiElementBase<T extends StubElement> extends StubBasedPsiElementBase<T>
 {
-	public StubBasedPsiElementBaseWithToString(@NotNull T stub, @NotNull IStubElementType nodeType)
+	public PerlStubBasedPsiElementBase(@NotNull T stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}
 
-	public StubBasedPsiElementBaseWithToString(@NotNull ASTNode node)
+	public PerlStubBasedPsiElementBase(@NotNull ASTNode node)
 	{
 		super(node);
 	}
@@ -41,5 +45,18 @@ public class StubBasedPsiElementBaseWithToString<T extends StubElement> extends 
 	public String toString()
 	{
 		return getClass().getSimpleName() + "(" + getNode().getElementType().toString() + ")";
+	}
+
+	@Override
+	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
+	{
+//		System.err.println(this);
+		return PerlScopeUtil.processChildren(
+				this,
+				processor,
+				state,
+				lastParent,
+				place
+		);
 	}
 }

@@ -34,8 +34,8 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import com.perl5.lang.perl.psi.StubBasedPsiElementBaseWithToString;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -51,7 +51,7 @@ import java.util.*;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public abstract class PerlNamespaceDefinitionImplMixin extends StubBasedPsiElementBaseWithToString<PerlNamespaceDefinitionStub> implements PerlNamespaceDefinition
+public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiElementBase<PerlNamespaceDefinitionStub> implements PerlNamespaceDefinition
 {
 	private PerlMroType mroTypeCache = null;
 	private List<String> parentsNamesCache = null;

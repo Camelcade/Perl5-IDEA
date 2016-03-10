@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAugmentStatementImpl extends StubBasedPsiElementBaseWithToString<PerlMooseAugmentStatementStub> implements PerlMooseAugmentStatement, PerlMooseMethodModifier
+public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<PerlMooseAugmentStatementStub> implements PerlMooseAugmentStatement, PerlMooseMethodModifier
 {
 	public PerlMooseAugmentStatementImpl(ASTNode node)
 	{

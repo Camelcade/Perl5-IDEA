@@ -36,7 +36,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends StubBasedPsiElementBaseWithToString<Stub> implements PerlSubBase<Stub>
+public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends PerlStubBasedPsiElementBase<Stub> implements PerlSubBase<Stub>
 {
 	public PerlSubBaseImpl(@NotNull ASTNode node)
 	{

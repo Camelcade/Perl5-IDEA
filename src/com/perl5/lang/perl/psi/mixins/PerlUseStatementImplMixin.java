@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlUseStatementImplMixin extends StubBasedPsiElementBaseWithToString<PerlUseStatementStub> implements PsiPerlUseStatement
+public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
 {
 	protected PerlPackageProcessor packageProcessor = null;
 

@@ -14,43 +14,32 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi.impl;
+package com.perl5.lang.htmlmason.parser.stubs.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubBase;
+import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
-import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 09.03.2016.
+ * Created by hurricup on 10.03.2016.
  */
-public class HTMLMasonFlagsStatementImpl extends PerlStubBasedPsiElementBase<HTMLMasonFlagsStatementStub> implements HTMLMasonFlagsStatement
+public class HTMLMasonFlagsStatementStubImpl extends StubBase<HTMLMasonFlagsStatement> implements HTMLMasonFlagsStatementStub
 {
-	public HTMLMasonFlagsStatementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+	final String myParentComponentPath;
 
-	public HTMLMasonFlagsStatementImpl(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull IStubElementType nodeType)
+	public HTMLMasonFlagsStatementStubImpl(StubElement parent, IStubElementType elementType, @Nullable String parentComponentPath)
 	{
-		super(stub, nodeType);
+		super(parent, elementType);
+		myParentComponentPath = parentComponentPath;
 	}
 
 	@Nullable
 	@Override
 	public String getParentComponentPath()
 	{
-		HTMLMasonFlagsStatementStub stub = getStub();
-
-		if (stub != null)
-		{
-			return stub.getParentComponentPath();
-		}
-
-		// fixme NYI
-		return UNDEF_RESULT;
+		return myParentComponentPath;
 	}
 }

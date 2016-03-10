@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi;
+package com.perl5.lang.htmlmason.parser.stubs;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 09.03.2016.
+ * Created by hurricup on 10.03.2016.
  */
-public interface HTMLMasonFlagsStatement extends StubBasedPsiElement<HTMLMasonFlagsStatementStub>
+public interface HTMLMasonFlagsStatementStub extends StubElement<HTMLMasonFlagsStatement>
 {
-	String UNDEF_RESULT = "undef";
-
 	@Nullable
 	String getParentComponentPath();
 }

@@ -465,6 +465,9 @@
                 implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplatesProvider"/>
         <typedHandler implementation="com.perl5.lang.htmlmason.idea.editor.HTMLMasonTypedHandler" order="first"/>
 
+        <stubElementTypeHolder class="com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes"/>
+        <stubIndex implementation="com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex"/>
+
         <!-- HTML::Mason settings end -->
 
         <!--Mason2 settings -->

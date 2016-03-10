@@ -36,7 +36,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlGlobVariableImplMixin extends StubBasedPsiElementBaseWithToString<PerlGlobStub> implements PsiPerlGlobVariable, PerlElementTypes
+public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementBase<PerlGlobStub> implements PsiPerlGlobVariable, PerlElementTypes
 {
 	public PerlGlobVariableImplMixin(@NotNull ASTNode node)
 	{

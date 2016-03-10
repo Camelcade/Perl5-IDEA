@@ -22,13 +22,13 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.StubBasedPsiElementBaseWithToString;
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 19.09.2015.
  */
-public abstract class PerlDoExprImplMixin extends StubBasedPsiElementBaseWithToString<PerlRuntimeImportStub> implements PerlDoExpr
+public abstract class PerlDoExprImplMixin extends PerlStubBasedPsiElementBase<PerlRuntimeImportStub> implements PerlDoExpr
 {
 	public PerlDoExprImplMixin(ASTNode node)
 	{

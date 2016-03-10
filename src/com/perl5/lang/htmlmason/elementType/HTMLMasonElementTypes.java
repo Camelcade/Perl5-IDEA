@@ -23,7 +23,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonArgsBlockImpl;
-import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFlagsStatementImpl;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonMethodDefinitionImpl;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonSubcomponentDefitnitionImpl;
 import org.jetbrains.annotations.NotNull;
@@ -124,15 +123,8 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 			return new HTMLMasonSubcomponentDefitnitionImpl(node);
 		}
 	};
-	IElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonElementType("HTML_MASON_FLAGS_STATEMENT")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new HTMLMasonFlagsStatementImpl(node);
-		}
-	};
+
+	IElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonFlagsStatementElementType("HTML_MASON_FLAGS_STATEMENT");
 
 	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonElementType("HTML_MASON_ARGS_BLOCK")
 	{
