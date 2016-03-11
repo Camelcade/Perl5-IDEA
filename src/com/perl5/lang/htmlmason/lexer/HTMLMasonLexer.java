@@ -20,10 +20,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
-import gnu.trove.THashMap;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
+import gnu.trove.THashSet;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,39 +36,32 @@ import java.util.regex.Pattern;
 @SuppressWarnings("Duplicates")
 public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonElementTypes
 {
+	public static final Set<String> BUILTIN_TAGS_SIMPLE = new THashSet<String>(Arrays.asList(
+			KEYWORD_ARGS,
+			KEYWORD_ATTR,
+			KEYWORD_PERL,
+			KEYWORD_INIT,
+			KEYWORD_CLEANUP,
+			KEYWORD_ONCE,
+			KEYWORD_SHARED,
+			KEYWORD_FLAGS,
+			KEYWORD_FILTER,
+			KEYWORD_TEXT,
+			KEYWORD_DOC
+	));
+
+	public static final Set<String> BUILTIN_TAGS_COMPLEX = new THashSet<String>(Arrays.asList(
+			KEYWORD_METHOD,
+			KEYWORD_DEF
+	));
+
 	public static final Pattern MASON_EXPRESSION_FILTER_BLOCK = Pattern.compile(
 			"\\|\\s*"
 					+ "(?:" + IDENTIFIER_PATTERN + "\\s*,\\s*" + ")*"
 					+ IDENTIFIER_PATTERN
 					+ "\\s*" + KEYWORD_BLOCK_CLOSER
 	);
-	public static final Pattern HTML_MASON_SIMPLE_OPENERS = Pattern.compile(
-			"<%(" +
-					KEYWORD_PERL + "|" +
-					KEYWORD_INIT + "|" +
-					KEYWORD_CLEANUP + "|" +
-					KEYWORD_ONCE + "|" +
-					KEYWORD_SHARED + "|" +
-					KEYWORD_FLAGS + "|" +
-					KEYWORD_ATTR + "|" +
-					KEYWORD_ARGS + "|" +
-					KEYWORD_FILTER + "|" +
-					KEYWORD_DOC + "|" +
-					KEYWORD_TEXT +
-					")>"
-	);
-	public static final Pattern HTML_MASON_OPENERS = Pattern.compile(
-			"<%(" +
-					KEYWORD_METHOD + "|" +
-					KEYWORD_DEF +
-					")"
-	);
-	public static final Pattern HTML_MASON_CLOSERS = Pattern.compile(
-			"</%(" +
-					KEYWORD_METHOD + "|" +
-					KEYWORD_DEF +
-					")>"
-	);
+
 	public static final int LEX_MASON_HTML_BLOCK = LEX_CUSTOM1;             // template block
 	public static final int LEX_MASON_PERL_BLOCK = LEX_CUSTOM2;             // complicated blocks <%kw>...</%kw>
 	public static final int LEX_MASON_PERL_ARGS_BLOCK = LEX_CUSTOM8;        // <%args> block
@@ -76,67 +72,15 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 	public static final int LEX_MASON_PERL_CALL_BLOCK = LEX_CUSTOM6;        // <& ... &>
 	public static final int LEX_MASON_PERL_FILTERING_CALL_BLOCK = LEX_CUSTOM10; // <&| ... &>
 	public static final int LEX_MASON_OPENING_TAG = LEX_CUSTOM7;            // lexing tag additional info
+
 	protected static final Pattern DEFAULT_ESCAPERS_MERGED = Pattern.compile("[unh]+");
-	private static final Map<String, IElementType> OPEN_TOKENS_MAP = new THashMap<String, IElementType>();
-	private static final Map<String, String> OPEN_CLOSE_MAP = new THashMap<String, String>();
-	private static final Map<String, IElementType> CLOSE_TOKENS_MAP = new THashMap<String, IElementType>();
 
-	static
-	{
-		OPEN_TOKENS_MAP.put(KEYWORD_PERL_OPENER, HTML_MASON_PERL_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_INIT_OPENER, HTML_MASON_INIT_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_CLEANUP_OPENER, HTML_MASON_CLEANUP_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_ONCE_OPENER, HTML_MASON_ONCE_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_SHARED_OPENER, HTML_MASON_SHARED_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_FLAGS_OPENER, HTML_MASON_FLAGS_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_ATTR_OPENER, HTML_MASON_ATTR_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_ARGS_OPENER, HTML_MASON_ARGS_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_FILTER_OPENER, HTML_MASON_FILTER_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_DOC_OPENER, HTML_MASON_DOC_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_TEXT_OPENER, HTML_MASON_TEXT_OPENER);
-
-		// parametrized
-		OPEN_TOKENS_MAP.put(KEYWORD_METHOD_OPENER, HTML_MASON_METHOD_OPENER);
-		OPEN_TOKENS_MAP.put(KEYWORD_DEF_OPENER, HTML_MASON_DEF_OPENER);
-	}
-
-	static
-	{
-		OPEN_CLOSE_MAP.put(KEYWORD_PERL_OPENER, KEYWORD_PERL_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_INIT_OPENER, KEYWORD_INIT_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_CLEANUP_OPENER, KEYWORD_CLEANUP_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_ONCE_OPENER, KEYWORD_ONCE_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_SHARED_OPENER, KEYWORD_SHARED_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_FLAGS_OPENER, KEYWORD_FLAGS_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_ATTR_OPENER, KEYWORD_ATTR_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_ARGS_OPENER, KEYWORD_ARGS_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_FILTER_OPENER, KEYWORD_FILTER_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_DOC_OPENER, KEYWORD_DOC_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_TEXT_OPENER, KEYWORD_TEXT_CLOSER);
-
-		// parametrized
-		OPEN_CLOSE_MAP.put(KEYWORD_METHOD_OPENER, KEYWORD_METHOD_CLOSER);
-		OPEN_CLOSE_MAP.put(KEYWORD_DEF_OPENER, KEYWORD_DEF_CLOSER);
-	}
-
-	static
-	{
-		CLOSE_TOKENS_MAP.put(KEYWORD_PERL_CLOSER, HTML_MASON_PERL_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_INIT_CLOSER, HTML_MASON_INIT_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_CLEANUP_CLOSER, HTML_MASON_CLEANUP_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_ONCE_CLOSER, HTML_MASON_ONCE_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_SHARED_CLOSER, HTML_MASON_SHARED_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_FLAGS_CLOSER, HTML_MASON_FLAGS_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_ATTR_CLOSER, HTML_MASON_ATTR_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_ARGS_CLOSER, HTML_MASON_ARGS_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_FILTER_CLOSER, HTML_MASON_FILTER_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_DOC_CLOSER, HTML_MASON_DOC_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_TEXT_CLOSER, HTML_MASON_TEXT_CLOSER);
-
-		// parametrized
-		CLOSE_TOKENS_MAP.put(KEYWORD_METHOD_CLOSER, HTML_MASON_METHOD_CLOSER);
-		CLOSE_TOKENS_MAP.put(KEYWORD_DEF_CLOSER, HTML_MASON_DEF_CLOSER);
-	}
+	protected Pattern mySimpleOpenersPattern;
+	protected Pattern myOpenersPattern;
+	protected Pattern myClosersPattern;
+	protected Map<String, IElementType> myOpenTokensMap;
+	protected Map<String, String> myOpenCloseMap;
+	protected Map<String, IElementType> myCloseTokensMap;
 
 	protected boolean clearLine = false;
 	private String BLOCK_CLOSE_TAG;
@@ -144,6 +88,17 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 	public HTMLMasonLexer(Project project)
 	{
 		super(project);
+
+		HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
+		mySimpleOpenersPattern = settings.getSimpleOpenersPattern();
+
+		myOpenersPattern = settings.getOpenersPattern();
+		myClosersPattern = settings.getClosersPattern();
+
+		myOpenTokensMap = settings.getOpenTokensMap();
+		myCloseTokensMap = settings.getCloseTokensMap();
+
+		myOpenCloseMap = settings.getOpenCloseMap();
 	}
 
 	@Override
@@ -289,7 +244,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 			setTokenStart(tokenStart);
 			setTokenEnd(tokenStart + BLOCK_CLOSE_TAG.length());
 			setCustomState(getInitialCustomState());
-			return CLOSE_TOKENS_MAP.get(BLOCK_CLOSE_TAG);
+			return myCloseTokensMap.get(BLOCK_CLOSE_TAG);
 		}
 		else if (currentCustomState == getInitialCustomState())
 		{
@@ -313,8 +268,8 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 						nextChar1 == '%' &&
 						(
 								offset + 2 < bufferEnd && Character.isWhitespace(buffer.charAt(offset + 2)) ||    // <%
-										(matcherSimpleOpener = HTML_MASON_SIMPLE_OPENERS.matcher(buffer).region(offset, bufferEnd)).lookingAt() ||    // <%text>
-										(matcherOpener = HTML_MASON_OPENERS.matcher(buffer).region(offset, bufferEnd)).lookingAt()    // <%augment...
+										(matcherSimpleOpener = mySimpleOpenersPattern.matcher(buffer).region(offset, bufferEnd)).lookingAt() ||    // <%text>
+										(matcherOpener = myOpenersPattern.matcher(buffer).region(offset, bufferEnd)).lookingAt()    // <%augment...
 						)
 						)
 				{
@@ -323,11 +278,11 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 					break;
 				}
 				else if (currentChar == '<' && nextChar1 == '/' && nextChar2 == '%' &&
-						(m = HTML_MASON_CLOSERS.matcher(buffer).region(offset, bufferEnd)).lookingAt()
+						(m = myClosersPattern.matcher(buffer).region(offset, bufferEnd)).lookingAt()
 						)
 				{
 					String tag = m.group(0);
-					pushPreparsedToken(offset, offset + tag.length(), CLOSE_TOKENS_MAP.get(tag));
+					pushPreparsedToken(offset, offset + tag.length(), myCloseTokensMap.get(tag));
 					break;
 				}
 				else if (currentChar == '<' && nextChar1 == '&' && Character.isWhitespace(nextChar2))
@@ -402,8 +357,8 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 				{
 					// check for unnamed block
 					String openingTag = matcherSimpleOpener.group(0);
-					pushPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
-					BLOCK_CLOSE_TAG = OPEN_CLOSE_MAP.get(openingTag);
+					pushPreparsedToken(offset, offset + openingTag.length(), myOpenTokensMap.get(openingTag));
+					BLOCK_CLOSE_TAG = myOpenCloseMap.get(openingTag);
 
 					if (openingTag.equals(KEYWORD_DOC_OPENER))
 					{
@@ -488,7 +443,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 				{
 					// check for named block
 					String openingTag = matcherOpener.group(0);
-					pushPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
+					pushPreparsedToken(offset, offset + openingTag.length(), myOpenTokensMap.get(openingTag));
 
 					// spaces
 					offset += openingTag.length();
