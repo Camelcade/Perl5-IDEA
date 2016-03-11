@@ -53,8 +53,9 @@ import java.util.Map;
 public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings>
 {
 
-	public List<String> substitutedExtensions = new ArrayList<String>();
 	public String autoHandlerName = "autohandler";
+	public String defaultHandlerName = "dhandler";
+	public List<String> substitutedExtensions = new ArrayList<String>();
 	public List<HTMLMasonCustomTag> customTags = new ArrayList<HTMLMasonCustomTag>();
 
 	@Transient

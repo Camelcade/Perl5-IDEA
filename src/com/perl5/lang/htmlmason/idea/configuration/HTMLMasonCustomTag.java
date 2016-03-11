@@ -24,10 +24,21 @@ public class HTMLMasonCustomTag
 	private String myText;
 	private Role myRole;
 
+	public HTMLMasonCustomTag()
+	{
+	}
+
 	public HTMLMasonCustomTag(String myText, Role myRole)
 	{
 		this.myText = myText;
 		this.myRole = myRole;
+	}
+
+	@SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
+	@Override
+	protected HTMLMasonCustomTag clone()
+	{
+		return new HTMLMasonCustomTag(myText, myRole);
 	}
 
 	public String getText()
@@ -48,6 +59,24 @@ public class HTMLMasonCustomTag
 	public void setRole(Role myRole)
 	{
 		this.myRole = myRole;
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof HTMLMasonCustomTag)) return false;
+
+		HTMLMasonCustomTag that = (HTMLMasonCustomTag) o;
+
+		return myText.equals(that.myText);
+
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return myText.hashCode();
 	}
 
 	enum Role

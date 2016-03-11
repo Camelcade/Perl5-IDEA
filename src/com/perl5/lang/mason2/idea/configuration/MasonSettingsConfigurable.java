@@ -153,7 +153,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 						}
 					}
 				})
-				.setPreferredSize(JBUI.size(0, 100))
+				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
 				.createPanel());
 	}
 

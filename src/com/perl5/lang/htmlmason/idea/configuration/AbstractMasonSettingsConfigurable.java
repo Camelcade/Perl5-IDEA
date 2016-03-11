@@ -54,6 +54,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 			"[$@%]" + PerlLexer.IDENTIFIER_PATTERN
 	);
 
+	protected static final int WIDGET_HEIGHT = 90;
 
 	protected final Project myProject;
 	protected final String windowTitile;
@@ -130,7 +131,9 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 						});
 					}
 				})
-				.setPreferredSize(JBUI.size(0, 100))
+				.disableDownAction()
+				.disableUpAction()
+				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
 				.createPanel());
 	}
 
@@ -176,7 +179,9 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 						TableUtil.editCellAt(globalsTable, indexToEdit, 0);
 					}
 				})
-				.setPreferredSize(JBUI.size(0, 100))
+				.disableDownAction()
+				.disableUpAction()
+				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
 				.createPanel()
 		)
 		;
