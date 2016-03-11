@@ -22,7 +22,7 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 /**
  * Created by hurricup on 11.03.2016.
  */
-enum HTMLMasonTagRole implements HTMLMasonElementTypes
+enum HTMLMasonCustomTagRole implements HTMLMasonElementTypes
 {
 	PERL("as <%perl>", true, HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER),
 	METHOD("as <%method>", false, HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER),
@@ -34,7 +34,7 @@ enum HTMLMasonTagRole implements HTMLMasonElementTypes
 	private final IElementType myCloseToken;
 	private final boolean myIsSimple;
 
-	HTMLMasonTagRole(String title, boolean isSimple, IElementType openToken, IElementType closeToken)
+	HTMLMasonCustomTagRole(String title, boolean isSimple, IElementType openToken, IElementType closeToken)
 	{
 		myTitle = title;
 		myOpenToken = openToken;

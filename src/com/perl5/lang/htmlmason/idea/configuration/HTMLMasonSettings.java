@@ -181,7 +181,6 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings> 
 
 			simpleBuilder.append(token);
 		}
-		simpleBuilder.append(")>");
 
 		// regex for complex tags
 		StringBuilder complexBuilder = new StringBuilder("%(");
@@ -200,14 +199,6 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings> 
 
 			complexBuilder.append(token);
 		}
-		complexBuilder.append(")");
-
-		// iterate custom tags
-
-		// compiling patterns
-		mySimpleOpenersPattern = Pattern.compile(simpleBuilder.toString());
-		myOpenersPattern = Pattern.compile("<" + complexBuilder.toString());
-		myClosersPattern = Pattern.compile("</" + complexBuilder.toString() + ">");
 
 		// map for open token keyword => open token token
 		myOpenTokensMap = new THashMap<String, IElementType>();
@@ -260,6 +251,35 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings> 
 		// parametrized
 		myCloseTokensMap.put(KEYWORD_METHOD_CLOSER, HTML_MASON_METHOD_CLOSER);
 		myCloseTokensMap.put(KEYWORD_DEF_CLOSER, HTML_MASON_DEF_CLOSER);
+
+		// iterate custom tags
+		for (HTMLMasonCustomTag customTag : customTags)
+		{
+			HTMLMasonCustomTagRole role = customTag.getRole();
+
+			myOpenTokensMap.put(customTag.getOpenTagText(), role.getOpenToken());
+			myCloseTokensMap.put(customTag.getCloseTagText(), role.getCloseToken());
+			myOpenCloseMap.put(customTag.getOpenTagText(), customTag.getCloseTagText());
+
+			if (role.isSimple()) // simple tag
+			{
+				simpleBuilder.append('|');
+				simpleBuilder.append(customTag.getText());
+			}
+			else // custom tag
+			{
+				complexBuilder.append('|');
+				complexBuilder.append(customTag.getText());
+			}
+		}
+
+		simpleBuilder.append(")>");
+		complexBuilder.append(")");
+
+		// compiling patterns
+		mySimpleOpenersPattern = Pattern.compile(simpleBuilder.toString());
+		myOpenersPattern = Pattern.compile("<" + complexBuilder.toString());
+		myClosersPattern = Pattern.compile("</" + complexBuilder.toString() + ">");
 
 //		System.err.println("HTML::Mason lexer settings prepared");
 	}

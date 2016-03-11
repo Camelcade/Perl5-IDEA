@@ -26,33 +26,18 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
 import com.perl5.lang.htmlmason.HTMLMasonFileViewProvider;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 /**
  * Created by hurricup on 09.03.2016.
  */
 public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes
 {
-	private static final THashMap<String, String> SIMPLE_COMPLETION_MAP = new THashMap<String, String>();
-
-	static
-	{
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_PERL_OPENER_UNCLOSED, KEYWORD_PERL_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_INIT_OPENER_UNCLOSED, KEYWORD_INIT_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_CLEANUP_OPENER_UNCLOSED, KEYWORD_CLEANUP_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_ONCE_OPENER_UNCLOSED, KEYWORD_ONCE_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_SHARED_OPENER_UNCLOSED, KEYWORD_SHARED_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_FLAGS_OPENER_UNCLOSED, KEYWORD_FLAGS_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_ATTR_OPENER_UNCLOSED, KEYWORD_ATTR_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_ARGS_OPENER_UNCLOSED, KEYWORD_ARGS_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_FILTER_OPENER_UNCLOSED, KEYWORD_FILTER_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_TEXT_OPENER_UNCLOSED, KEYWORD_TEXT_CLOSER);
-		SIMPLE_COMPLETION_MAP.put(KEYWORD_DOC_OPENER_UNCLOSED, KEYWORD_DOC_CLOSER);
-	}
-
 	@Override
 	public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file)
 	{
@@ -69,9 +54,10 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLM
 					{
 						EditorModificationUtil.insertStringAtCaret(editor, "\ninherit => ''\n" + KEYWORD_FLAGS_CLOSER, false, true, 13);
 					}
-					else if ((closeTag = SIMPLE_COMPLETION_MAP.get(elementText)) != null)
+					else
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
+						if ((closeTag = getCloseTag(project, elementText + ">")) != null)
+							EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
 					}
 				}
 			}
@@ -95,11 +81,19 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLM
 					}
 					else if (elementType == HTML_MASON_METHOD_OPENER)
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, ">\n" + KEYWORD_METHOD_CLOSER, false, false);
+						String closeTag = getCloseTag(project, element.getText());
+						if (closeTag != null)
+						{
+							EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
+						}
 					}
 					else if (elementType == HTML_MASON_DEF_OPENER)
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, ">\n" + KEYWORD_DEF_CLOSER, false, false);
+						String closeTag = getCloseTag(project, element.getText());
+						if (closeTag != null)
+						{
+							EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
+						}
 					}
 				}
 			}
@@ -107,6 +101,13 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLM
 		}
 
 		return super.charTyped(c, project, editor, file);
+	}
+
+	protected String getCloseTag(Project project, String openTag)
+	{
+		HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
+		Map<String, String> openCloseMap = settings.getOpenCloseMap();
+		return openCloseMap.get(openTag);
 	}
 
 	protected boolean isNextElement(PsiElement element, IElementType typeToCheck)

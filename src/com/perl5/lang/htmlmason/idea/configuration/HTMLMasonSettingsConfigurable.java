@@ -354,10 +354,10 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 		final TableColumn secondColumn = customTagsTable.getColumnModel().getColumn(1);
 
-		ComboBoxTableRenderer<HTMLMasonTagRole> roleComboBoxTableRenderer = new ComboBoxTableRenderer<HTMLMasonTagRole>(HTMLMasonTagRole.values())
+		ComboBoxTableRenderer<HTMLMasonCustomTagRole> roleComboBoxTableRenderer = new ComboBoxTableRenderer<HTMLMasonCustomTagRole>(HTMLMasonCustomTagRole.values())
 		{
 			@Override
-			protected String getTextFor(@NotNull HTMLMasonTagRole value)
+			protected String getTextFor(@NotNull HTMLMasonCustomTagRole value)
 			{
 				return value.getTitle();
 			}
@@ -405,7 +405,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 						if (indexToEdit == -1)
 						{
-							customTagsModel.addRow(new HTMLMasonCustomTag("customTag" + customTagsModel.getItems().size(), HTMLMasonTagRole.PERL));
+							customTagsModel.addRow(new HTMLMasonCustomTag("customTag" + customTagsModel.getItems().size(), HTMLMasonCustomTagRole.PERL));
 							indexToEdit = model.getRowCount() - 1;
 						}
 
@@ -467,7 +467,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 				{
 					Messages.showErrorDialog("Tag <%" + value + "> is already defined in HTML::Mason", "Predefined Tag Text");
 				}
-				else if (myCustomTagsModel.getItems().contains(new HTMLMasonCustomTag(value, HTMLMasonTagRole.PERL)))
+				else if (myCustomTagsModel.getItems().contains(new HTMLMasonCustomTag(value, HTMLMasonCustomTagRole.PERL)))
 				{
 					Messages.showErrorDialog("Tag with such text already exists", "Duplicate Tag Text");
 				}
@@ -479,7 +479,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 		}
 	}
 
-	public static class myTagRoleColumInfo extends ColumnInfo<HTMLMasonCustomTag, HTMLMasonTagRole>
+	public static class myTagRoleColumInfo extends ColumnInfo<HTMLMasonCustomTag, HTMLMasonCustomTagRole>
 	{
 		public myTagRoleColumInfo()
 		{
@@ -488,7 +488,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 		@Nullable
 		@Override
-		public HTMLMasonTagRole valueOf(HTMLMasonCustomTag customTag)
+		public HTMLMasonCustomTagRole valueOf(HTMLMasonCustomTag customTag)
 		{
 			return customTag.getRole();
 		}
@@ -496,7 +496,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 		@Override
 		public Class<?> getColumnClass()
 		{
-			return HTMLMasonTagRole.class;
+			return HTMLMasonCustomTagRole.class;
 		}
 
 		@Override
@@ -506,7 +506,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 		}
 
 		@Override
-		public void setValue(HTMLMasonCustomTag customTag, HTMLMasonTagRole value)
+		public void setValue(HTMLMasonCustomTag customTag, HTMLMasonCustomTagRole value)
 		{
 			customTag.setRole(value);
 		}
