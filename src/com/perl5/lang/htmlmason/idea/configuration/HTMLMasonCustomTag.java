@@ -22,13 +22,13 @@ package com.perl5.lang.htmlmason.idea.configuration;
 public class HTMLMasonCustomTag
 {
 	private String myText;
-	private Role myRole;
+	private HTMLMasonTagRole myRole;
 
 	public HTMLMasonCustomTag()
 	{
 	}
 
-	public HTMLMasonCustomTag(String myText, Role myRole)
+	public HTMLMasonCustomTag(String myText, HTMLMasonTagRole myRole)
 	{
 		this.myText = myText;
 		this.myRole = myRole;
@@ -51,12 +51,12 @@ public class HTMLMasonCustomTag
 		this.myText = myText;
 	}
 
-	public Role getRole()
+	public HTMLMasonTagRole getRole()
 	{
 		return myRole;
 	}
 
-	public void setRole(Role myRole)
+	public void setRole(HTMLMasonTagRole myRole)
 	{
 		this.myRole = myRole;
 	}
@@ -77,25 +77,5 @@ public class HTMLMasonCustomTag
 	public int hashCode()
 	{
 		return myText.hashCode();
-	}
-
-	enum Role
-	{
-		PERL("as <%perl>"),
-		METHOD("as <%method>"),
-		DEF("as <%def>"),
-		ARGS("as <%args>");
-
-		private final String myTitle;
-
-		Role(String myTitle)
-		{
-			this.myTitle = myTitle;
-		}
-
-		public String getTitle()
-		{
-			return myTitle;
-		}
 	}
 }
