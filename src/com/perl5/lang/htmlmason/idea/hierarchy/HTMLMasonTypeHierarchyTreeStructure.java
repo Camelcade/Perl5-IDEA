@@ -39,16 +39,18 @@ public class HTMLMasonTypeHierarchyTreeStructure extends HTMLMasonSubTypeHierarc
 
 	protected static HierarchyNodeDescriptor buildHierarchyTree(PsiElement element)
 	{
-		HierarchyNodeDescriptor result = null;
 		HierarchyNodeDescriptor lastParent = null;
 
-		for (PsiElement parent : getLinearParents(element))
+		List<PsiElement> linearParents = getLinearParents(element);
+
+		for (int i = 0; i < linearParents.size(); i++)
 		{
-			lastParent = new HTMLMasonHierarchyNodeDescriptor(lastParent, parent, lastParent == null);
-			if (result == null)
+			HierarchyNodeDescriptor newDescriptor = new HTMLMasonHierarchyNodeDescriptor(lastParent, linearParents.get(i), i == linearParents.size() - 1);
+			if (lastParent != null)
 			{
-				result = lastParent;
+				lastParent.setCachedChildren(new HierarchyNodeDescriptor[]{newDescriptor});
 			}
+			lastParent = newDescriptor;
 		}
 
 		return lastParent;
