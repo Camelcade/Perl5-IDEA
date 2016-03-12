@@ -31,11 +31,11 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
+public class PerlHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 {
 	protected final SmartPsiElementPointer myPerlElementPointer;
 
-	public PerlPackageHierarchyNodeDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase)
+	public PerlHierarchyNodeDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase)
 	{
 		super(element.getProject(), parentDescriptor, element, isBase);
 		myPerlElementPointer = SmartPointerManager.getInstance(myProject).createSmartPsiElementPointer(element);
@@ -71,12 +71,8 @@ public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 		final ItemPresentation presentation = element.getPresentation();
 		if (presentation != null)
 		{
-
 			myHighlightedText.getEnding().addText(presentation.getPresentableText());
-			myHighlightedText.getEnding().addText(" "
-							+ "(" + ((PerlNamespaceDefinition) getPerlElement()).getMroType().toString() + "), "
-							+ presentation.getLocationString(),
-					HierarchyNodeDescriptor.getPackageNameAttributes());
+			adjustAppearance(myHighlightedText, presentation);
 		}
 		myName = myHighlightedText.getText();
 
@@ -85,6 +81,14 @@ public class PerlPackageHierarchyNodeDescriptor extends HierarchyNodeDescriptor
 			result = true;
 		}
 		return result;
+	}
+
+	protected void adjustAppearance(CompositeAppearance appearance, ItemPresentation presentation)
+	{
+		appearance.getEnding().addText(" "
+						+ "(" + ((PerlNamespaceDefinition) getPerlElement()).getMroType().toString() + "), "
+						+ presentation.getLocationString(),
+				HierarchyNodeDescriptor.getPackageNameAttributes());
 	}
 
 	public PsiElement getPerlElement()

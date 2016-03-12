@@ -18,8 +18,10 @@ package com.perl5.lang.perl.idea.hierarchy.namespace.treestructures;
 
 import com.intellij.ide.hierarchy.HierarchyNodeDescriptor;
 import com.intellij.ide.hierarchy.HierarchyTreeStructure;
+import com.intellij.ide.util.treeView.NodeDescriptor;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyNodeDescriptor;
+import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyNodeDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,32 +36,40 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure
 {
 	public PerlSubTypesHierarchyTreeStructure(@NotNull PsiElement element)
 	{
-		super(element.getProject(), new PerlPackageHierarchyNodeDescriptor(null, element, true));
+		this(element.getProject(), new PerlHierarchyNodeDescriptor(null, element, true));
+	}
+
+	public PerlSubTypesHierarchyTreeStructure(@NotNull Project project, HierarchyNodeDescriptor baseDescriptor)
+	{
+		super(project, baseDescriptor);
 	}
 
 	@NotNull
 	@Override
 	protected Object[] buildChildren(@NotNull HierarchyNodeDescriptor descriptor)
 	{
-		List<PerlPackageHierarchyNodeDescriptor> result = new ArrayList<PerlPackageHierarchyNodeDescriptor>();
+		List<PerlHierarchyNodeDescriptor> result = new ArrayList<PerlHierarchyNodeDescriptor>();
 
-		if (descriptor instanceof PerlPackageHierarchyNodeDescriptor)
+		if (descriptor instanceof PerlHierarchyNodeDescriptor)
 		{
-			PsiElement element = ((PerlPackageHierarchyNodeDescriptor) descriptor).getPerlElement();
-			if (element instanceof PerlNamespaceDefinition)
+			PsiElement element = ((PerlHierarchyNodeDescriptor) descriptor).getPerlElement();
+			for (PsiElement childElement : getSubElements(element))
 			{
-				for (PerlNamespaceDefinition namespaceDefinition : getSubElements((PerlNamespaceDefinition) element))
-				{
-					result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, namespaceDefinition, false));
-				}
+				result.add(createDescriptor(descriptor, childElement, false));
 			}
 		}
 
 		return result.toArray();
 	}
 
-	protected Collection<PerlNamespaceDefinition> getSubElements(PerlNamespaceDefinition element)
+	protected Collection<PsiElement> getSubElements(PsiElement element)
 	{
-		return element.getChildNamespaceDefinitions();
+		assert element instanceof PerlNamespaceDefinition;
+		return new ArrayList<PsiElement>(((PerlNamespaceDefinition) element).getChildNamespaceDefinitions());
+	}
+
+	protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase)
+	{
+		return new PerlHierarchyNodeDescriptor(parentDescriptor, element, isBase);
 	}
 }

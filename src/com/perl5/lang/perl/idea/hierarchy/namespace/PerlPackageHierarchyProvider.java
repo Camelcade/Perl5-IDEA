@@ -69,13 +69,13 @@ public class PerlPackageHierarchyProvider implements HierarchyProvider
 	@Override
 	public HierarchyBrowser createHierarchyBrowser(PsiElement target)
 	{
-		return new PerlPackageHierarchyBrowser(target);
+		return new PerlHierarchyBrowser(target);
 	}
 
 	@Override
 	public void browserActivated(@NotNull HierarchyBrowser hierarchyBrowser)
 	{
-		((PerlPackageHierarchyBrowser) hierarchyBrowser).changeView(TypeHierarchyBrowserBase.SUPERTYPES_HIERARCHY_TYPE);
+		((PerlHierarchyBrowser) hierarchyBrowser).changeView(TypeHierarchyBrowserBase.SUPERTYPES_HIERARCHY_TYPE);
 	}
 
 	protected Language getLanguage()

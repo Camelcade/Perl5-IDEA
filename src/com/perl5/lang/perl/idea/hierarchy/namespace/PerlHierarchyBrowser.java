@@ -35,9 +35,9 @@ import java.util.Map;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlPackageHierarchyBrowser extends TypeHierarchyBrowserBase
+public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase
 {
-	public PerlPackageHierarchyBrowser(PsiElement element)
+	public PerlHierarchyBrowser(PsiElement element)
 	{
 		super(element.getProject(), element);
 	}
@@ -67,11 +67,11 @@ public class PerlPackageHierarchyBrowser extends TypeHierarchyBrowserBase
 	@Override
 	protected PsiElement getElementFromDescriptor(@NotNull HierarchyNodeDescriptor descriptor)
 	{
-		if (!(descriptor instanceof PerlPackageHierarchyNodeDescriptor))
+		if (!(descriptor instanceof PerlHierarchyNodeDescriptor))
 		{
 			return null;
 		}
-		return ((PerlPackageHierarchyNodeDescriptor) descriptor).getPerlElement();
+		return ((PerlHierarchyNodeDescriptor) descriptor).getPerlElement();
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class PerlPackageHierarchyBrowser extends TypeHierarchyBrowserBase
 		}
 		else if (TYPE_HIERARCHY_TYPE.equals(typeName))
 		{
-			return null;
+			return getTypesHierarchyStructure(psiElement);
 		}
 		return null;
 	}
@@ -131,5 +131,11 @@ public class PerlPackageHierarchyBrowser extends TypeHierarchyBrowserBase
 	protected HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement)
 	{
 		return new PerlSubTypesHierarchyTreeStructure(psiElement);
+	}
+
+	@Nullable
+	protected HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement)
+	{
+		return null;
 	}
 }

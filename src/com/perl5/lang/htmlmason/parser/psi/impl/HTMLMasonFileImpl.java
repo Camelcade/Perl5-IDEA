@@ -68,7 +68,48 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 	@Nullable
 	public VirtualFile getComponentRoot()
 	{
-		return HTMLMasonUtils.getComponentRoot(getProject(), MasonCoreUtils.getContainingVirtualFile(this));
+		return HTMLMasonUtils.getComponentRoot(getProject(), getComponentVirtualFile());
+	}
+
+	public VirtualFile getComponentVirtualFile()
+	{
+		return MasonCoreUtils.getContainingVirtualFile(this);
+	}
+
+	/**
+	 * Returns absolute path relative to the components root
+	 *
+	 * @return path
+	 */
+	@Nullable
+	public String getAbsoluteComponentPath()
+	{
+		VirtualFile componentFile = getComponentVirtualFile();
+		VirtualFile componentRoot = getComponentRoot();
+
+		if (componentFile != null && componentRoot != null)
+		{
+			return '/' + VfsUtil.getRelativePath(componentFile, componentRoot);
+		}
+		return null;
+	}
+
+	/**
+	 * Returns absolute containing dir path relative to the components root
+	 *
+	 * @return path
+	 */
+	@Nullable
+	public String getAbsoluteComponentContainerPath()
+	{
+		VirtualFile componentFile = getComponentVirtualFile();
+		VirtualFile componentRoot = getComponentRoot();
+
+		if (componentFile != null && componentRoot != null)
+		{
+			return '/' + VfsUtil.getRelativePath(componentFile.getParent(), componentRoot);
+		}
+		return null;
 	}
 
 	public boolean isInPerlLine(PsiElement element)
@@ -137,7 +178,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 
 		if (parentComponentPath == null) // autohandler
 		{
-			VirtualFile containingFile = MasonCoreUtils.getContainingVirtualFile(this);
+			VirtualFile containingFile = getComponentVirtualFile();
 			if (containingFile != null)
 			{
 				VirtualFile startDir = containingFile.getParent();
@@ -176,7 +217,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			}
 			else // relative path
 			{
-				VirtualFile containingVirtualFile = MasonCoreUtils.getContainingVirtualFile(this);
+				VirtualFile containingVirtualFile = getComponentVirtualFile();
 				if (containingVirtualFile != null)
 				{
 					VirtualFile containingDir = containingVirtualFile.getParent();
@@ -204,7 +245,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 	public List<HTMLMasonFileImpl> getChildComponents()
 	{
 		final List<HTMLMasonFileImpl> result = new ArrayList<HTMLMasonFileImpl>();
-		VirtualFile containingFile = MasonCoreUtils.getContainingVirtualFile(this);
+		VirtualFile containingFile = getComponentVirtualFile();
 
 		if (containingFile != null)
 		{

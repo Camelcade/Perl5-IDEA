@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.hierarchy.namespace.treestructures;
+package com.perl5.lang.htmlmason.idea.hierarchy;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * Created by hurricup on 16.08.2015.
+ * Created by hurricup on 12.03.2016.
  */
-public class PerlSuperTypesHierarchyTreeStructure extends PerlSubTypesHierarchyTreeStructure
+public class HTMLMasonSuperTypeHierarchyStructure extends HTMLMasonSubTypeHierarchyStructure
 {
-	public PerlSuperTypesHierarchyTreeStructure(@NotNull PsiElement element)
+	public HTMLMasonSuperTypeHierarchyStructure(@NotNull PsiElement element)
 	{
 		super(element);
 	}
@@ -36,7 +38,14 @@ public class PerlSuperTypesHierarchyTreeStructure extends PerlSubTypesHierarchyT
 	@Override
 	protected Collection<PsiElement> getSubElements(PsiElement element)
 	{
-		assert element instanceof PerlNamespaceDefinition;
-		return new ArrayList<PsiElement>(((PerlNamespaceDefinition) element).getParentNamespaceDefinitions());
+		assert element instanceof HTMLMasonFileImpl;
+		PsiElement parent = ((HTMLMasonFileImpl) element).getParentComponent();
+		if (parent != null)
+		{
+			List<PsiElement> result = new ArrayList<PsiElement>();
+			result.add(parent);
+			return result;
+		}
+		return Collections.EMPTY_LIST;
 	}
 }
