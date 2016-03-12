@@ -51,6 +51,12 @@ public class PerlPackageHierarchyProvider implements HierarchyProvider
 				element = file.getViewProvider().findElementAt(editor.getCaretModel().getOffset(), getLanguage());
 			}
 		}
+
+		return adjustTargetElement(element);
+	}
+
+	protected PsiElement adjustTargetElement(PsiElement element)
+	{
 		if (element != null && !(element instanceof PerlNamespaceDefinition))
 		{
 			return PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);

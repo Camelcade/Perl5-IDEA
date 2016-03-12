@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -47,7 +48,7 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure
 			PsiElement element = ((PerlPackageHierarchyNodeDescriptor) descriptor).getPerlElement();
 			if (element instanceof PerlNamespaceDefinition)
 			{
-				for (PerlNamespaceDefinition namespaceDefinition : ((PerlNamespaceDefinition) element).getChildNamespaceDefinitions())
+				for (PerlNamespaceDefinition namespaceDefinition : getSubElements((PerlNamespaceDefinition) element))
 				{
 					result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, namespaceDefinition, false));
 				}
@@ -55,5 +56,10 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure
 		}
 
 		return result.toArray();
+	}
+
+	protected Collection<PerlNamespaceDefinition> getSubElements(PerlNamespaceDefinition element)
+	{
+		return element.getChildNamespaceDefinitions();
 	}
 }

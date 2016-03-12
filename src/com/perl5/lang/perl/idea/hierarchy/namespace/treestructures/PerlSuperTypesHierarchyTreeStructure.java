@@ -16,47 +16,25 @@
 
 package com.perl5.lang.perl.idea.hierarchy.namespace.treestructures;
 
-import com.intellij.ide.hierarchy.HierarchyNodeDescriptor;
-import com.intellij.ide.hierarchy.HierarchyTreeStructure;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyNodeDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlSuperTypesHierarchyTreeStructure extends HierarchyTreeStructure
+public class PerlSuperTypesHierarchyTreeStructure extends PerlSubTypesHierarchyTreeStructure
 {
 	public PerlSuperTypesHierarchyTreeStructure(@NotNull PsiElement element)
 	{
-		super(element.getProject(), new PerlPackageHierarchyNodeDescriptor(null, element, true));
+		super(element);
 	}
 
-	@NotNull
 	@Override
-	protected Object[] buildChildren(@NotNull HierarchyNodeDescriptor descriptor)
+	protected Collection<PerlNamespaceDefinition> getSubElements(PerlNamespaceDefinition element)
 	{
-		List<PerlPackageHierarchyNodeDescriptor> result = new ArrayList<PerlPackageHierarchyNodeDescriptor>();
-
-		if (descriptor instanceof PerlPackageHierarchyNodeDescriptor)
-		{
-			PsiElement element = ((PerlPackageHierarchyNodeDescriptor) descriptor).getPerlElement();
-			if (element instanceof PerlNamespaceDefinition)
-			{
-				Project project = element.getProject();
-
-				for (PerlNamespaceDefinition namespaceDefinition : ((PerlNamespaceDefinition) element).getParentNamespaceDefinitions())
-				{
-					result.add(new PerlPackageHierarchyNodeDescriptor(descriptor, namespaceDefinition, false));
-				}
-			}
-		}
-
-		return result.toArray();
+		return element.getParentNamespaceDefinitions();
 	}
 }
