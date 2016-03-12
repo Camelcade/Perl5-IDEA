@@ -19,6 +19,7 @@ package com.perl5.lang.htmlmason.elementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
+import com.intellij.util.io.StringRef;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFlagsStatementImpl;
@@ -72,12 +73,6 @@ public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMas
 	public void serialize(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException
 	{
 		String parentComponentPath = stub.getParentComponentPath();
-		if (parentComponentPath == null)
-		{
-			dataStream.writeBoolean(false);
-			return;
-		}
-		dataStream.writeBoolean(true);
 
 		//noinspection StringEquality
 		if (parentComponentPath == HTMLMasonFlagsStatement.UNDEF_RESULT)
@@ -95,13 +90,10 @@ public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMas
 	{
 		if (!dataStream.readBoolean())
 		{
-			return new HTMLMasonFlagsStatementStubImpl(parentStub, this, null);
-		}
-		else if (!dataStream.readBoolean())
-		{
 			return new HTMLMasonFlagsStatementStubImpl(parentStub, this, HTMLMasonFlagsStatement.UNDEF_RESULT);
 		}
-		return new HTMLMasonFlagsStatementStubImpl(parentStub, this, dataStream.readName().toString());
+		StringRef nameRef = dataStream.readName();
+		return new HTMLMasonFlagsStatementStubImpl(parentStub, this, nameRef == null ? null : nameRef.toString());
 	}
 
 	@Override

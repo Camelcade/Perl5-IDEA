@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 public class HTMLMasonFlagsStubIndex extends StringStubIndexExtension<HTMLMasonFlagsStatement>
 {
 	public static final StubIndexKey<String, HTMLMasonFlagsStatement> KEY = StubIndexKey.createIndexKey("perl.html.mason.flags");
-	public static final int VERSION = 1;
+	public static final int VERSION = 2;
 
 	@Override
 	public int getVersion()
