@@ -17,10 +17,15 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
+import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,7 +55,18 @@ public class HTMLMasonFlagsStatementImpl extends PerlStubBasedPsiElementBase<HTM
 			return stub.getParentComponentPath();
 		}
 
-		// fixme NYI
+		PsiPerlCommaSequenceExpr expr = PsiTreeUtil.findChildOfType(this, PsiPerlCommaSequenceExpr.class);
+		if (expr != null)
+		{
+			PsiElement firstChild = expr.getFirstChild();
+			PsiElement lastChild = expr.getLastChild();
+
+			if (firstChild instanceof PerlString && StringUtil.equals("inherit", ((PerlString) firstChild).getStringContent()) && lastChild instanceof PerlString)
+			{
+				return ((PerlString) lastChild).getStringContent();
+			}
+		}
+
 		return UNDEF_RESULT;
 	}
 }
