@@ -24,6 +24,7 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.DumbModeTask;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.impl.PushedFilePropertiesUpdater;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
@@ -38,7 +39,6 @@ import com.intellij.ui.components.JBList;
 import com.intellij.ui.table.JBTable;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.Processor;
-import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexProjectHandler;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
@@ -204,8 +204,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 		final String defaulthandlerName = mySettings.defaultHandlerName;
 
 		// processing files
-//		final PushedFilePropertiesUpdater pushedFilePropertiesUpdater = PushedFilePropertiesUpdater.getInstance(myProject);
-		final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
+		final PushedFilePropertiesUpdater pushedFilePropertiesUpdater = PushedFilePropertiesUpdater.getInstance(myProject);
 		VirtualFile projectRoot = myProject.getBaseDir();
 		if (projectRoot != null)
 		{
@@ -223,7 +222,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 							{
 								if (StringUtil.equals(autohandlerName, virtualFile.getName()) || StringUtil.equals(defaulthandlerName, virtualFile.getName()))
 								{
-									fileBasedIndex.requestReindex(virtualFile);
+									pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
 								}
 								else
 								{
@@ -231,9 +230,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 									{
 										if (matcher.accept(virtualFile.getName()))
 										{
-											fileBasedIndex.requestReindex(virtualFile);
-											//										pushedFilePropertiesUpdater.findAndUpdateValue(virtualFile, HTMLMasonFilePropertyPusher.INSTANCE, false);
-//										pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
+											pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
 											break;
 										}
 									}
