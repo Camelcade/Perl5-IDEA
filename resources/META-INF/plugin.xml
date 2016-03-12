@@ -467,6 +467,7 @@
 
         <stubElementTypeHolder class="com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes"/>
         <stubIndex implementation="com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex"/>
+        <fileTypeDetector implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeDetector"/>
 
         <!-- HTML::Mason settings end -->
 

@@ -91,5 +91,4 @@ public class HTMLMasonFileType extends PerlFileType
 	{
 		return false;
 	}
-
 }
