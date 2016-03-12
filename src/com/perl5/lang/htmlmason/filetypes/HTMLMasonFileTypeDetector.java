@@ -23,6 +23,7 @@ import com.intellij.openapi.project.ProjectLocator;
 import com.intellij.openapi.util.io.ByteSequence;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.htmlmason.HTMLMasonUtils;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +43,9 @@ public class HTMLMasonFileTypeDetector implements FileTypeRegistry.FileTypeDetec
 		if (project != null)
 		{
 			HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
-			if (settings != null && (StringUtil.equals(settings.autoHandlerName, file.getName()) || StringUtil.equals(settings.defaultHandlerName, file.getName())))
+			if (settings != null &&
+					(StringUtil.equals(settings.autoHandlerName, file.getName()) || StringUtil.equals(settings.defaultHandlerName, file.getName())) &&
+					HTMLMasonUtils.getComponentRoot(project, file) != null)
 			{
 				return HTMLMasonFileType.INSTANCE;
 			}
