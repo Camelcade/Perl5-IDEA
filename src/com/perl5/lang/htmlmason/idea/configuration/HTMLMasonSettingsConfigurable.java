@@ -24,7 +24,6 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.DumbModeTask;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.impl.PushedFilePropertiesUpdater;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
@@ -39,6 +38,7 @@ import com.intellij.ui.components.JBList;
 import com.intellij.ui.table.JBTable;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.Processor;
+import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexProjectHandler;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
@@ -119,15 +119,23 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 				!mySettings.componentRoots.equals(rootsModel.getItems()) ||
 						!mySettings.globalVariables.equals(globalsModel.getItems()) ||
 						!mySettings.substitutedExtensions.equals(substitutedExtensionsModel.getItems()) ||
-						!StringUtils.equals(mySettings.autoHandlerName, autohandlerName.getText()) ||
-						!StringUtils.equals(mySettings.defaultHandlerName, defaulthandlerName.getText()) ||
-						!mySettings.customTags.equals(customTagsModel.getItems())
+						isStructureModified()
+				;
+	}
+
+	protected boolean isStructureModified()
+	{
+		return !StringUtils.equals(mySettings.autoHandlerName, autohandlerName.getText()) ||
+				!StringUtils.equals(mySettings.defaultHandlerName, defaulthandlerName.getText()) ||
+				!mySettings.customTags.equals(customTagsModel.getItems())
 				;
 	}
 
 	@Override
 	public void apply() throws ConfigurationException
 	{
+		boolean forceReparse = isStructureModified();
+
 		Set<String> rootsDiff = getDiff(mySettings.componentRoots, rootsModel.getItems());
 		mySettings.componentRoots.clear();
 		mySettings.componentRoots.addAll(rootsModel.getItems());
@@ -158,21 +166,21 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 		mySettings.updateSubstitutors();
 		mySettings.settingsUpdated();
 
-		if (rootsDiff.size() > 0 || extDiff.size() > 0)
+		if (rootsDiff.size() > 0 || extDiff.size() > 0 || forceReparse)
 		{
-			updateFileProperties(rootsDiff, extDiff);
+			reparseComponents(rootsDiff, extDiff, forceReparse);
 		}
 	}
 
-	protected void updateFileProperties(final Set<String> rootsDiff, Set<String> extDiff)
+	protected void reparseComponents(final Set<String> rootsDiff, Set<String> extDiff, final boolean forceAll)
 	{
 		boolean rootsChanged = rootsDiff.size() > 0;
 		boolean extChanged = extDiff.size() > 0;
 
-		if (rootsChanged)
+		if (rootsChanged || forceAll)
 			extDiff.addAll(mySettings.substitutedExtensions);
 
-		if (extChanged)
+		if (extChanged || forceAll)
 			rootsDiff.addAll(mySettings.componentRoots);
 
 		// collecting matchers
@@ -192,14 +200,18 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 			}
 		}
 
+		final String autohandlerName = mySettings.autoHandlerName;
+		final String defaulthandlerName = mySettings.defaultHandlerName;
+
 		// processing files
-		final PushedFilePropertiesUpdater pushedFilePropertiesUpdater = PushedFilePropertiesUpdater.getInstance(myProject);
+//		final PushedFilePropertiesUpdater pushedFilePropertiesUpdater = PushedFilePropertiesUpdater.getInstance(myProject);
+		final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
 		VirtualFile projectRoot = myProject.getBaseDir();
 		if (projectRoot != null)
 		{
 			for (String root : rootsDiff)
 			{
-				VirtualFile componentRoot = VfsUtil.findRelativeFile(projectRoot, root);
+				VirtualFile componentRoot = VfsUtil.findRelativeFile(root, projectRoot);
 				if (componentRoot != null)
 				{
 					VfsUtil.processFilesRecursively(componentRoot, new Processor<VirtualFile>()
@@ -209,13 +221,21 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 						{
 							if (!virtualFile.isDirectory())
 							{
-								for (FileNameMatcher matcher : matchers)
+								if (StringUtil.equals(autohandlerName, virtualFile.getName()) || StringUtil.equals(defaulthandlerName, virtualFile.getName()))
 								{
-									if (matcher.accept(virtualFile.getName()))
+									fileBasedIndex.requestReindex(virtualFile);
+								}
+								else
+								{
+									for (FileNameMatcher matcher : matchers)
 									{
-//										pushedFilePropertiesUpdater.findAndUpdateValue(virtualFile, HTMLMasonFilePropertyPusher.INSTANCE, false);
-										pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
-										break;
+										if (matcher.accept(virtualFile.getName()))
+										{
+											fileBasedIndex.requestReindex(virtualFile);
+											//										pushedFilePropertiesUpdater.findAndUpdateValue(virtualFile, HTMLMasonFilePropertyPusher.INSTANCE, false);
+//										pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
+											break;
+										}
 									}
 								}
 							}

@@ -20,6 +20,7 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.EditorNotifications;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import org.jetbrains.annotations.NotNull;
@@ -53,6 +54,7 @@ public abstract class AbstractMasonSettings<T> implements PersistentStateCompone
 	{
 		componentsRootsVirtualFiles = null;
 		changeCounter++;
+		EditorNotifications.getInstance(myProject).updateAllNotifications();
 	}
 
 	@NotNull
@@ -63,7 +65,7 @@ public abstract class AbstractMasonSettings<T> implements PersistentStateCompone
 			componentsRootsVirtualFiles = new ArrayList<VirtualFile>();
 			for (String relativeRoot : componentRoots)
 			{
-				VirtualFile rootFile = VfsUtil.findRelativeFile(myProject.getBaseDir(), relativeRoot);
+				VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
 				if (rootFile != null && rootFile.exists())
 				{
 					componentsRootsVirtualFiles.add(rootFile);

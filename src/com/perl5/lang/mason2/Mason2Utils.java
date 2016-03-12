@@ -148,7 +148,7 @@ public class Mason2Utils
 
 			for (String root : rootsToReindex)
 			{
-				VirtualFile componentRoot = VfsUtil.findRelativeFile(projectRoot, root);
+				VirtualFile componentRoot = VfsUtil.findRelativeFile(root, projectRoot);
 				if (componentRoot != null)
 				{
 					for (VirtualFile file : VfsUtil.collectChildrenRecursively(componentRoot))

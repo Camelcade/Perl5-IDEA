@@ -84,7 +84,6 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 					public void run()
 					{
 						ShowSettingsUtil.getInstance().editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason2 Settings"));
-						EditorNotifications.getInstance(myProject).updateNotifications(file);
 					}
 				});
 				return panel;
