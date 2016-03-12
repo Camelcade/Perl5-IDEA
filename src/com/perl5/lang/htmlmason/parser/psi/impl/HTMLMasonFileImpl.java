@@ -18,12 +18,15 @@ package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonUtils;
@@ -32,17 +35,21 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hurricup on 05.03.2016.
@@ -196,8 +203,115 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 	@NotNull
 	public List<HTMLMasonFileImpl> getChildComponents()
 	{
-		List<HTMLMasonFileImpl> result = new ArrayList<HTMLMasonFileImpl>();
+		final List<HTMLMasonFileImpl> result = new ArrayList<HTMLMasonFileImpl>();
+		VirtualFile containingFile = MasonCoreUtils.getContainingVirtualFile(this);
+
+		if (containingFile != null)
+		{
+			VirtualFile componentRoot = getComponentRoot();
+
+			if (componentRoot != null)
+			{
+				final String relativePath = VfsUtil.VFS_SEPARATOR_CHAR + VfsUtil.getRelativePath(containingFile, componentRoot);
+				final Project project = getProject();
+				final GlobalSearchScope scope = PerlScopes.getProjectAndLibrariesScope(project);
+				final HTMLMasonFileImpl currentFile = this;
+				HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
+
+				// indexed children
+				StubIndex.getInstance().processAllKeys(
+						HTMLMasonFlagsStubIndex.KEY,
+						new Processor<String>()
+						{
+							@Override
+							public boolean process(String parentPath)
+							{
+								boolean isEquals = StringUtil.equals(relativePath, parentPath);
+								boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VfsUtil.VFS_SEPARATOR_CHAR;
+
+								for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
+										HTMLMasonFlagsStubIndex.KEY,
+										parentPath,
+										project,
+										scope,
+										HTMLMasonFlagsStatement.class
+								))
+								{
+									PsiFile file = statement.getContainingFile();
+									if (file instanceof HTMLMasonFileImpl)
+									{
+										if (isEquals || isRelative && currentFile.equals(((HTMLMasonFileImpl) file).getParentComponent()))
+										{
+											result.add((HTMLMasonFileImpl) file);
+										}
+									}
+								}
+
+								return true;
+							}
+						},
+						scope,
+						null
+				);
+
+				// implicit autohandled children
+				if (StringUtil.equals(containingFile.getName(), settings.autoHandlerName))
+				{
+					collectAuthoHandledFiles(PsiManager.getInstance(project), containingFile.getParent(), result, settings.autoHandlerName, null);
+				}
+			}
+		}
+
 		return result;
+	}
+
+	protected void collectAuthoHandledFiles(
+			PsiManager manager,
+			VirtualFile dir,
+			List<HTMLMasonFileImpl> result,
+			String autoHandlerName,
+			@Nullable Set<VirtualFile> recursionMap
+	)
+	{
+		if (dir != null)
+		{
+			if (recursionMap == null) // first iteration
+			{
+				recursionMap = new THashSet<VirtualFile>();
+			}
+			else // non-first iteration
+			{
+				VirtualFile autohandlerVirtualFile = dir.findChild(autoHandlerName);
+				if (autohandlerVirtualFile != null)
+				{
+					PsiFile autohandlerPsiFile = manager.findFile(autohandlerVirtualFile);
+					if (autohandlerPsiFile instanceof HTMLMasonFileImpl && this.equals(((HTMLMasonFileImpl) autohandlerPsiFile).getParentComponent()))
+					{
+						result.add((HTMLMasonFileImpl) autohandlerPsiFile);
+					}
+					return;
+				}
+			}
+
+			recursionMap.add(dir);
+
+			// all iterations
+			for (VirtualFile file : dir.getChildren())
+			{
+				if (file.isDirectory() && !recursionMap.contains(file))
+				{
+					collectAuthoHandledFiles(manager, file, result, autoHandlerName, recursionMap);
+				}
+				else if (!StringUtil.equals(file.getName(), autoHandlerName)) // non-autohandler file
+				{
+					PsiFile psiFile = manager.findFile(file);
+					if (psiFile instanceof HTMLMasonFileImpl && this.equals(((HTMLMasonFileImpl) psiFile).getParentComponent()))
+					{
+						result.add((HTMLMasonFileImpl) psiFile);
+					}
+				}
+			}
+		}
 	}
 
 	@Nullable

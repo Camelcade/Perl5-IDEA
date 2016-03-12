@@ -117,6 +117,21 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			)
 	);
 
+/*
+	@Override
+	public boolean parseFileContents(PsiBuilder b, int l)
+	{
+		CharSequence originalText = b.getOriginalText();
+		int length = 30;
+		if( originalText.length() < length)
+			length = originalText.length();
+
+		System.err.println("Parsing: " + originalText.subSequence(0, length));
+
+		return super.parseFileContents(b, l);
+	}
+*/
+
 	public static boolean parseArgsBlock(PsiBuilder b, int l)
 	{
 		boolean r = false;
