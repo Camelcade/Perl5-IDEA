@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class HTMLMasonFileTypeDetector implements FileTypeRegistry.FileTypeDetector
 {
-	private static final int VERSION = 0;
+	private static final int VERSION = 1;
 
 	@Nullable
 	@Override
