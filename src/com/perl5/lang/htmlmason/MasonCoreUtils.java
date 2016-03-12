@@ -16,12 +16,18 @@
 
 package com.perl5.lang.htmlmason;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
+import com.perl5.lang.mason2.idea.configuration.VariableDescription;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,5 +79,27 @@ public class MasonCoreUtils
 		return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
 	}
 
+	public static void fillVariablesList(PsiElement parent, List<PerlVariableDeclarationWrapper> targetList, List<VariableDescription> sourceList)
+	{
+		for (VariableDescription variableDescription : sourceList)
+		{
+			String variableType = variableDescription.variableType;
+			if (StringUtil.isEmpty(variableType))
+			{
+				variableType = null;
+			}
+			targetList.add(
+					new PerlVariableLightImpl(
+							parent.getManager(),
+							PerlLanguage.INSTANCE,
+							variableDescription.variableName,
+							variableType,
+							false,
+							false,
+							false,
+							parent
+					));
+		}
+	}
 
 }
