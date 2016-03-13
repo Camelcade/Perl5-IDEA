@@ -167,7 +167,15 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 			return new HTMLMasonSharedBlockImpl(node);
 		}
 	};
-	IElementType HTML_MASON_FILTERED_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTERED_BLOCK");
+	IElementType HTML_MASON_FILTERED_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTERED_BLOCK")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new HTMLMasonCompositeElementImpl(node);
+		}
+	};
 
 	IElementType HTML_MASON_FILTER_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTER_BLOCK")
 	{

@@ -19,7 +19,7 @@ package resolve.htmlmason;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonOnceVariablesResolve extends HTMLMasonBlockVariablesResolveTestCase
+public class HTMLMasonOnceVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase
 {
 	protected String getTestDataPath()
 	{
