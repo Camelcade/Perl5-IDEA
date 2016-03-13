@@ -1,0 +1,9 @@
+<%def mydef>
+    <%args>
+        $var
+    </%args>
+</%def>
+
+<%filter>
+say $v<caret>ar;
+</%filter>

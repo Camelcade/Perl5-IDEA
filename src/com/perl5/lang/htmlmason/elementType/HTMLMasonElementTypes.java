@@ -187,4 +187,13 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 		}
 	};
 
+	IElementType HTML_MASON_BLOCK = new HTMLMasonElementType("HTML_MASON_BLOCK")
+	{
+		@NotNull
+		@Override
+		public PsiElement getPsiElement(@NotNull ASTNode node)
+		{
+			return new HTMLMasonBlockImpl(node);
+		}
+	};
 }

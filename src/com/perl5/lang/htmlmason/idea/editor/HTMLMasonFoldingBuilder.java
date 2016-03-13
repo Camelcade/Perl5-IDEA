@@ -78,6 +78,10 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
 		{
 			return "/ attributes /";
 		}
+		else if (tokenType == HTML_MASON_BLOCK)
+		{
+			return PH_CODE_BLOCK;
+		}
 		else if (tokenType == HTML_MASON_ARGS_BLOCK)
 		{
 			return "/ arguments /";

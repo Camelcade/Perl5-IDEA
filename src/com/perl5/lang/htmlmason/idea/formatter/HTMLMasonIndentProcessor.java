@@ -76,6 +76,13 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 					HTML_MASON_ONCE_CLOSER
 			));
 
+	public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.orSet(
+			PerlIndentProcessor.BLOCK_LIKE_CONTAINERS,
+			TokenSet.create(
+					HTML_MASON_BLOCK
+			));
+
+
 	@Override
 	public TokenSet getAbsoluteUnindentableTokens()
 	{
@@ -92,5 +99,11 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
 	public TokenSet getUnindentableTokens()
 	{
 		return UNINDENTABLE_TOKENS;
+	}
+
+	@Override
+	public TokenSet getBlockLikeContainers()
+	{
+		return BLOCK_LIKE_CONTAINERS;
 	}
 }

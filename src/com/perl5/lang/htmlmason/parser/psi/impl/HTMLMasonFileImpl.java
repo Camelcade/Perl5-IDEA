@@ -476,6 +476,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		return false;
 	}
 
+	@SuppressWarnings("Duplicates")
 	protected boolean checkSubblocks(
 			@NotNull PsiScopeProcessor processor,
 			@NotNull ResolveState state,

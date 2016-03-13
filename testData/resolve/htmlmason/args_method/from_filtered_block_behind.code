@@ -1,0 +1,10 @@
+<%method mydef>
+    <%args>
+        $var
+    </%args>
+</%method>
+
+<&| something &>
+% say $v<caret>ar;
+</&>
+

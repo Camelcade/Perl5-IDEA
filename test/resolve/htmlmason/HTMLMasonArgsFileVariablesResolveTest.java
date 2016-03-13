@@ -19,11 +19,11 @@ package resolve.htmlmason;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonFileArgsVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase
+public class HTMLMasonArgsFileVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase
 {
 	protected String getTestDataPath()
 	{
-		return "testData/resolve/htmlmason/file_args";
+		return "testData/resolve/htmlmason/args_file";
 	}
 
 	@Override

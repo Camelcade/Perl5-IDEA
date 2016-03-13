@@ -1,0 +1,11 @@
+
+<%cleanup>
+say $v<caret>ar;
+</%cleanup>
+
+
+<%def mydef>
+    <%args>
+        $var
+    </%args>
+</%def>

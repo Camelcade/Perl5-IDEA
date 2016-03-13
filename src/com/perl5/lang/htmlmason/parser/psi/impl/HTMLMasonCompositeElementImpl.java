@@ -43,6 +43,4 @@ public class HTMLMasonCompositeElementImpl extends PerlCompositeElementImpl
 	{
 		return super.processDeclarations(processor, state, lastParent, place);
 	}
-
-
 }

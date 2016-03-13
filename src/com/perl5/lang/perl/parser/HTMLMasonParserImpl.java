@@ -188,7 +188,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 
 				if (b.getTokenType() == closeToken)
 				{
-					blockMarker.done(BLOCK);
+					blockMarker.done(HTML_MASON_BLOCK);
 					blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 					b.advanceLexer();
 					methodMarker.done(statementTokenType);
@@ -409,12 +409,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		{
 			r = parseMasonNamedBlock(b, l, HTML_MASON_DEF_CLOSER, HTML_MASON_SUBCOMPONENT_DEFINITION);
 		}
-/*
-		else if (tokenType == HTML_MASON_PERL_OPENER) // this branch is never used if perl blocks allows to split perl constructions
-		{
-			r = parsePerlBlock(b, l, HTML_MASON_PERL_CLOSER);
-		}
-*/
 
 		if (r)
 		{
