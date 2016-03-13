@@ -1,0 +1,7 @@
+<&| something &>
+% my $var;
+</&>
+
+<%method mymethod>
+% say $v<caret>ar;
+</%method>

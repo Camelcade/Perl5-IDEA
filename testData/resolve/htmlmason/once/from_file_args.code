@@ -1,0 +1,8 @@
+
+<%args>
+	$supervar => $v<caret>ar
+</%args>
+
+<%once>
+my $var;
+</%once>

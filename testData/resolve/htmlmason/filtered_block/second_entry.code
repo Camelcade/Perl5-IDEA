@@ -1,0 +1,13 @@
+
+% say $v<caret>ar;
+
+<&| something &>
+% my $var1;
+</&>
+
+% {
+<&| something &>
+% my $var;
+</&>
+% }
+

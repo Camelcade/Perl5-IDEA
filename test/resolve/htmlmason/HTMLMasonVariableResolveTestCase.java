@@ -66,6 +66,8 @@ public abstract class HTMLMasonVariableResolveTestCase extends PerlVariableResol
 
 	protected abstract boolean resolveFromMethod();
 
+	protected abstract boolean resolveFromFileArgs();
+
 	public void testFromCleanup() throws Exception
 	{
 		doTest("from_cleanup", resolveFromCleanup());
@@ -131,6 +133,10 @@ public abstract class HTMLMasonVariableResolveTestCase extends PerlVariableResol
 		doTest("from_shared", resolveFromShared());
 	}
 
+	public void testFromFileArgs() throws Exception
+	{
+		doTest("from_file_args", resolveFromFileArgs());
+	}
 
 	@Override
 	public void initWithFile(String filename)

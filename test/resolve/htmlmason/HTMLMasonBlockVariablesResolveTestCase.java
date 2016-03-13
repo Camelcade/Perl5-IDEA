@@ -24,16 +24,10 @@ public abstract class HTMLMasonBlockVariablesResolveTestCase extends HTMLMasonVa
 
 	protected abstract boolean resolveSecondEntry();
 
-	protected abstract boolean resolveFromSecondEntry();
-
 	public void testSecondEntry() throws Exception
 	{
 		doTest("second_entry", resolveSecondEntry());
 	}
 
-	public void testFromSecondEntry() throws Exception
-	{
-		doTest("from_second_entry", resolveFromSecondEntry());
-	}
 
 }

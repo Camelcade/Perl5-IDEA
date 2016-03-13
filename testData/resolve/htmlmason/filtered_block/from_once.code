@@ -1,8 +1,6 @@
-
-<%once>
-my $var;
-</%once>
-
+<&| something &>
+% my $var;
+</&>
 
 <%once>
 say $v<caret>ar;

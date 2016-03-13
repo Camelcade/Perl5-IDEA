@@ -1,0 +1,8 @@
+<&| something &>
+% my $var;
+</&>
+
+<%args>
+	$supervar => $v<caret>ar
+</%args>
+

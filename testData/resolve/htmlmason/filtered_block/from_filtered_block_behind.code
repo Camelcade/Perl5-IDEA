@@ -1,0 +1,8 @@
+<&| something &>
+% my $var;
+</&>
+
+<&| something &>
+% say $v<caret>ar;
+</&>
+

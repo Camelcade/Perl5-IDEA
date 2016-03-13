@@ -106,4 +106,9 @@ public class HTMLMasonSimpleVariableResolveTest extends HTMLMasonVariableResolve
 		return false;
 	}
 
+	@Override
+	protected boolean resolveFromFileArgs()
+	{
+		return false;
+	}
 }

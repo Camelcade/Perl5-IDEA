@@ -111,7 +111,7 @@ public class HTMLMasonFileArgsVariablesResolveTest extends HTMLMasonBlockVariabl
 	}
 
 	@Override
-	protected boolean resolveFromSecondEntry()
+	protected boolean resolveFromFileArgs()
 	{
 		return true;
 	}

@@ -111,7 +111,7 @@ public class HTMLMasonOnceVariablesResolve extends HTMLMasonBlockVariablesResolv
 	}
 
 	@Override
-	protected boolean resolveFromSecondEntry()
+	protected boolean resolveFromFileArgs()
 	{
 		return true;
 	}
