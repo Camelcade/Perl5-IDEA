@@ -44,6 +44,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 			"        $a = $var1 & $var2;\n" +
 			"        $a = $var1 + $var2;\n" +
 			"        $a = $var1 . $var2;\n" +
+			"        say $var1 if $var2;\n" +
+			"        say $var2 if($var1);\n" +
 			"		 print(join(',', $var1, $var2));" +
 			"        $a = join '', $var1 .. $var2;\n" +
 			"    }\n" +
