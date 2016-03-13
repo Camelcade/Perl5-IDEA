@@ -1,0 +1,8 @@
+
+<%method mymethod>
+% say $v<caret>ar;
+</%method>
+
+<%args>
+	$var => 1
+</%args>

@@ -1,7 +1,8 @@
-<%perl>
-my $var = 1;
-</%perl>
 
 <%perl>
 say $v<caret>ar;
 </%perl>
+
+<%args>
+	$var => 1
+</%args>

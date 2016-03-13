@@ -16,11 +16,9 @@
 
 package com.perl5.lang.htmlmason.parser.psi;
 
-import com.perl5.lang.perl.psi.PerlCompositeElement;
-
 /**
  * Created by hurricup on 13.03.2016.
  */
-public interface HTMLMasonOnceBlock extends PerlCompositeElement
+public interface HTMLMasonOnceBlock extends HTMLMasonCompositeElement
 {
 }

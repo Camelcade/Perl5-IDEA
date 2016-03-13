@@ -17,6 +17,9 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveState;
+import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,4 +32,17 @@ public class HTMLMasonCompositeElementImpl extends PerlCompositeElementImpl
 	{
 		super(node);
 	}
+
+	@Override
+	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
+	{
+		return lastParent == null || processDeclarationsForReal(processor, state, lastParent, place);
+	}
+
+	public boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
+	{
+		return super.processDeclarations(processor, state, lastParent, place);
+	}
+
+
 }

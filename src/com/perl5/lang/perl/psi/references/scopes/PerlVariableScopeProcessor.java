@@ -16,11 +16,27 @@
 
 package com.perl5.lang.perl.psi.references.scopes;
 
-import com.intellij.psi.scope.BaseScopeProcessor;
+import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.UserDataHolderBase;
+import com.intellij.psi.scope.PsiScopeProcessor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 19.02.2016.
  */
-public abstract class PerlVariableScopeProcessor extends BaseScopeProcessor
+public abstract class PerlVariableScopeProcessor extends UserDataHolderBase implements PsiScopeProcessor
 {
+	@Nullable
+	@Override
+	public <T> T getHint(@NotNull Key<T> hintKey)
+	{
+		return null;
+	}
+
+	@Override
+	public void handleEvent(@NotNull Event event, @Nullable Object associated)
+	{
+
+	}
 }

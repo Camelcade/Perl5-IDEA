@@ -23,17 +23,19 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
+import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonUtils;
 import com.perl5.lang.htmlmason.MasonCoreUtils;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
-import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
+import com.perl5.lang.htmlmason.parser.psi.*;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
 import com.perl5.lang.perl.PerlScopes;
@@ -381,6 +383,77 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			PerlPsiUtil.processElementsFromPsi(this, seeker, null);
 		}
 		return seeker.getResult();
+	}
+
+	@Override
+	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
+	{
+		boolean checkOnce = false;
+		boolean checkShared = false;
+		boolean checkArgs = false;
+		boolean checkInit = false;
+		boolean checkCode = false;
+
+		if (lastParent instanceof HTMLMasonSharedBlockImpl || lastParent instanceof HTMLMasonSubcomponentDefitnitionImpl || lastParent instanceof HTMLMasonMethodDefinitionImpl)
+		{
+			checkOnce = true;
+		}
+		else if (lastParent instanceof HTMLMasonArgsBlockImpl)
+		{
+			checkOnce = true;
+			checkShared = true;
+		}
+		else if (lastParent instanceof HTMLMasonFilterBlockImpl || lastParent instanceof HTMLMasonInitBlockImpl)
+		{
+			checkArgs = true;
+			checkOnce = true;
+			checkShared = true;
+		}
+		else if (!(lastParent instanceof HTMLMasonOnceBlock))
+		{
+			checkArgs = true;
+			checkOnce = true;
+			checkShared = true;
+			checkInit = true;
+			checkCode = true;
+
+			if (lastParent instanceof HTMLMasonCleanupBlockImpl) // change nature flow
+			{
+				lastParent = null;
+			}
+		}
+
+		if (checkCode)
+		{
+			if (!super.processDeclarations(processor, state, lastParent, place))
+				return false;
+		}
+		if (checkInit)
+		{
+			HTMLMasonInitBlock subBlock = PsiTreeUtil.getChildOfType(this, HTMLMasonInitBlock.class);
+			if (subBlock != null && !subBlock.processDeclarationsForReal(processor, state, null, place))
+				return false;
+		}
+		if (checkArgs)
+		{
+			HTMLMasonArgsBlock subBlock = PsiTreeUtil.getChildOfType(this, HTMLMasonArgsBlock.class);
+			if (subBlock != null && !subBlock.processDeclarationsForReal(processor, state, null, place))
+				return false;
+		}
+		if (checkShared)
+		{
+			HTMLMasonSharedBlock subBlock = PsiTreeUtil.getChildOfType(this, HTMLMasonSharedBlock.class);
+			if (subBlock != null && !subBlock.processDeclarationsForReal(processor, state, null, place))
+				return false;
+		}
+		if (checkOnce)
+		{
+			HTMLMasonOnceBlock subBlock = PsiTreeUtil.getChildOfType(this, HTMLMasonOnceBlock.class);
+			if (subBlock != null && !subBlock.processDeclarationsForReal(processor, state, null, place))
+				return false;
+		}
+
+		return false;
 	}
 
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>

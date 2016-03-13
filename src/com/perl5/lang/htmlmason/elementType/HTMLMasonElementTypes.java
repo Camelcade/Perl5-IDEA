@@ -168,6 +168,7 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 		}
 	};
 	IElementType HTML_MASON_FILTERED_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTERED_BLOCK");
+
 	IElementType HTML_MASON_FILTER_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTER_BLOCK")
 	{
 		@NotNull

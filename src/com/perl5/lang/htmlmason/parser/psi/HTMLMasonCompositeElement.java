@@ -16,9 +16,16 @@
 
 package com.perl5.lang.htmlmason.parser.psi;
 
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveState;
+import com.intellij.psi.scope.PsiScopeProcessor;
+import com.perl5.lang.perl.psi.PerlCompositeElement;
+import org.jetbrains.annotations.NotNull;
+
 /**
- * Created by hurricup on 08.03.2016.
+ * Created by hurricup on 13.03.2016.
  */
-public interface HTMLMasonArgsBlock extends HTMLMasonCompositeElement
+public interface HTMLMasonCompositeElement extends PerlCompositeElement
 {
+	boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place);
 }
