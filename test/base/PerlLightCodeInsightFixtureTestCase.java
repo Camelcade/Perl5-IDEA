@@ -58,6 +58,17 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		}
 	}
 
+	public void initWithFileAsHTMLMason(String filename)
+	{
+		try
+		{
+			initWithFile(filename, "mas");
+		} catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
 	public void initWithFileAsPackage(String filename)
 	{
 		try

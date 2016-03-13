@@ -16,15 +16,12 @@
 
 package resolve;
 
-import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.psi.PerlLabel;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelResolveTest extends PerlLightCodeInsightFixtureTestCase
+public class PerlLabelResolveTest extends PerlResolveTestCase
 {
 	@Override
 	protected String getTestDataPath()
@@ -194,18 +191,6 @@ public class PerlLabelResolveTest extends PerlLightCodeInsightFixtureTestCase
 
 	public void doTest(String filename, boolean success)
 	{
-		initWithFileAsScript(filename);
-		PsiElement element = getElementAtCaret(PerlLabel.class);
-		assertNotNull(element);
-		PsiReference reference = element.getReference();
-		assertNotNull(reference);
-		if (success)
-		{
-			assertNotNull(reference.resolve());
-		}
-		else
-		{
-			assertNull(reference.resolve());
-		}
+		doTest(filename, success, PerlLabel.class);
 	}
 }

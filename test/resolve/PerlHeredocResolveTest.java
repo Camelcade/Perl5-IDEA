@@ -16,7 +16,6 @@
 
 package resolve;
 
-import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -30,7 +29,7 @@ import java.util.List;
 /**
  * Created by hurricup on 02.03.2016.
  */
-public class PerlHeredocResolveTest extends PerlLightCodeInsightFixtureTestCase implements PerlElementTypes
+public class PerlHeredocResolveTest extends PerlResolveTestCase implements PerlElementTypes
 {
 	@Override
 	protected String getTestDataPath()
@@ -40,7 +39,7 @@ public class PerlHeredocResolveTest extends PerlLightCodeInsightFixtureTestCase 
 
 	public void testMarkers()
 	{
-		myFixture.configureByFile("heredoc_sequential.pl");
+		initWithFileAsScript("heredoc_sequential");
 		final List<PerlHeredocOpener> openers = new ArrayList<PerlHeredocOpener>();
 		final List<PerlHeredocTerminatorElement> terminators = new ArrayList<PerlHeredocTerminatorElement>();
 

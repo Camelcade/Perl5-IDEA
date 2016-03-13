@@ -16,99 +16,70 @@
 
 package resolve;
 
-import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
-
 /**
  * Created by hurricup on 18.02.2016.
  */
-public class PerlLexicalVariableResolveTest extends PerlLightCodeInsightFixtureTestCase
+public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase
 {
 	@Override
 	protected String getTestDataPath()
 	{
-		return "testData/resolve";
+		return "testData/resolve/variables";
 	}
 
 	public void testSimple()
 	{
-		doTest("variable_simple.pl", true);
+		doTest("variable_simple", true);
 	}
 
 	public void testIfCondition()
 	{
-		doTest("variable_if_condition.pl", true);
+		doTest("variable_if_condition", true);
 	}
 
 	public void testForIterator()
 	{
-		doTest("variable_for_iterator.pl", true);
+		doTest("variable_for_iterator", true);
 	}
 
 	public void testUseVars()
 	{
-		doTest("variable_use_vars.pl", true);
+		doTest("variable_use_vars", true);
 	}
 
 	public void testIfElsifElse()
 	{
-		doTest("variable_if_elsif_else.pl", true);
+		doTest("variable_if_elsif_else", true);
 	}
 
 	public void testSubSignature()
 	{
-		doTest("variable_sub_signature.pl", true);
+		doTest("variable_sub_signature", true);
 	}
 
 	public void testMethodExplicitInvocant()
 	{
-		doTest("variable_method_explicit_invocant.pl", true);
+		doTest("variable_method_explicit_invocant", true);
 	}
 
 	public void testVariableInInvocation()
 	{
-		doTest("variable_in_call_expression.pl", true);
+		doTest("variable_in_call_expression", true);
 	}
 
 
 	public void testMethodImplicitInvocant()
 	{
-		doTest("variable_method_implicit_invocant.pl", true);
+		doTest("variable_method_implicit_invocant", true);
 	}
 
 	public void testNegativeBlock()
 	{
-		doTest("negative_variable_block.pl", false);
+		doTest("negative_variable_block", false);
 	}
 
 	public void testNegativeIfElse()
 	{
-		doTest("negative_if_else.pl", false);
-	}
-
-	public void doTest(String fileName, boolean shouldFind)
-	{
-		myFixture.configureByFile(fileName);
-		PsiElement element = getElementAtCaret(PerlVariableNameElement.class);
-		PsiReference reference = element.getReference();
-		assertTrue(reference != null);
-		PsiElement result = reference.resolve();
-
-		if (shouldFind)
-		{
-			assertTrue(result != null);
-			assertTrue(result instanceof PerlVariableDeclarationWrapper);
-			PerlVariable variable = ((PerlVariableDeclarationWrapper) result).getVariable();
-			assertEquals(variable.getName(), element.getText());
-			assertEquals(variable.getActualType(), ((PerlVariable) element.getParent()).getActualType());
-		}
-		else
-		{
-			assertTrue(result == null);
-		}
+		doTest("negative_if_else", false);
 	}
 }

@@ -1,0 +1,2 @@
+% my $var = 1;
+% say $v<caret>ar;

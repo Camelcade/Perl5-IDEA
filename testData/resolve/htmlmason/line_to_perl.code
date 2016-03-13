@@ -1,0 +1,5 @@
+<%perl>
+my $var = 1;
+</%perl>
+
+% say $v<caret>ar;
