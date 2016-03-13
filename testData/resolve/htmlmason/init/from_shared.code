@@ -1,0 +1,8 @@
+<%init>
+my $var;
+</%init>
+
+<%shared>
+say $v<caret>ar;
+</%shared>
+

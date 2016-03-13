@@ -1,0 +1,9 @@
+
+<%init>
+my $var;
+</%init>
+
+<&| something &>
+% say $v<caret>ar;
+</&>
+
