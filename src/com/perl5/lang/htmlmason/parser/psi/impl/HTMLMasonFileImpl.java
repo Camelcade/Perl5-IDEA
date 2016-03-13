@@ -389,37 +389,57 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
 	{
-		boolean checkOnce = false;
 		boolean checkShared = false;
 		boolean checkArgs = false;
 		boolean checkInit = false;
 		boolean checkCode = false;
+		boolean checkCleanup = false;
 
-		if (lastParent instanceof HTMLMasonSharedBlockImpl || lastParent instanceof HTMLMasonSubcomponentDefitnitionImpl || lastParent instanceof HTMLMasonMethodDefinitionImpl)
+		PsiElement onceAnchor = null;
+		PsiElement sharedAnchor = null;
+		PsiElement argsAnchor = null;
+		PsiElement initAnchor = null;
+		PsiElement codeAnchor = null;
+		PsiElement cleanupAnchor = null;
+
+		if (lastParent instanceof HTMLMasonSharedBlockImpl)
 		{
-			checkOnce = true;
+			checkShared = true;
+			sharedAnchor = lastParent;
 		}
 		else if (lastParent instanceof HTMLMasonArgsBlockImpl)
 		{
-			checkOnce = true;
 			checkShared = true;
+			checkArgs = true;
+			argsAnchor = lastParent;
 		}
-		else if (lastParent instanceof HTMLMasonFilterBlockImpl || lastParent instanceof HTMLMasonInitBlockImpl)
+		else if (lastParent instanceof HTMLMasonInitBlockImpl)
 		{
 			checkArgs = true;
-			checkOnce = true;
 			checkShared = true;
+			checkInit = true;
+			initAnchor = lastParent;
 		}
-		else if (!(lastParent instanceof HTMLMasonOnceBlock))
+		else if (lastParent instanceof HTMLMasonFilterBlockImpl)
 		{
 			checkArgs = true;
-			checkOnce = true;
+			checkShared = true;
+		}
+		else if (lastParent instanceof HTMLMasonOnceBlock)
+		{
+			onceAnchor = lastParent;
+		}
+		else if (!(lastParent instanceof HTMLMasonSubcomponentDefitnitionImpl || lastParent instanceof HTMLMasonMethodDefinitionImpl))
+		{
+			checkArgs = true;
 			checkShared = true;
 			checkInit = true;
 			checkCode = true;
 
 			if (lastParent instanceof HTMLMasonCleanupBlockImpl) // change nature flow
 			{
+				checkCleanup = true;
+				cleanupAnchor = lastParent;
 				lastParent = null;
 			}
 		}
@@ -429,39 +449,53 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			if (!super.processDeclarations(processor, state, lastParent, place))
 				return false;
 		}
+		if (checkCleanup)
+		{
+			if (!checkSubblocks(processor, state, place, HTMLMasonCleanupBlock.class, cleanupAnchor))
+				return false;
+		}
 		if (checkInit)
 		{
-			if (!checkSubblocks(processor, state, place, HTMLMasonInitBlock.class))
+			if (!checkSubblocks(processor, state, place, HTMLMasonInitBlock.class, initAnchor))
 				return false;
 		}
 		if (checkArgs)
 		{
-			if (!checkSubblocks(processor, state, place, HTMLMasonArgsBlock.class))
+			if (!checkSubblocks(processor, state, place, HTMLMasonArgsBlock.class, argsAnchor))
 				return false;
 		}
 		if (checkShared)
 		{
-			if (!checkSubblocks(processor, state, place, HTMLMasonSharedBlock.class))
+			if (!checkSubblocks(processor, state, place, HTMLMasonSharedBlock.class, sharedAnchor))
 				return false;
 		}
-		if (checkOnce)
-		{
-			if (!checkSubblocks(processor, state, place, HTMLMasonOnceBlock.class))
-				return false;
-		}
+
+		if (!checkSubblocks(processor, state, place, HTMLMasonOnceBlock.class, onceAnchor))
+			return false;
 
 		return false;
 	}
 
-	protected boolean checkSubblocks(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, @NotNull PsiElement place, Class<? extends HTMLMasonCompositeElement> clazz)
+	protected boolean checkSubblocks(
+			@NotNull PsiScopeProcessor processor,
+			@NotNull ResolveState state,
+			@NotNull PsiElement place,
+			@NotNull Class<? extends HTMLMasonCompositeElement> clazz,
+			@Nullable PsiElement anchor
+	)
 	{
 		List<HTMLMasonCompositeElement> elements = getBlocksByClass(clazz);
 
 		for (int i = elements.size() - 1; i >= 0; i--)
 		{
-			if (!elements.get(i).processDeclarationsForReal(processor, state, null, place))
+			HTMLMasonCompositeElement element = elements.get(i);
+			if (anchor == null && !element.processDeclarationsForReal(processor, state, null, place))
 			{
 				return false;
+			}
+			else if (anchor != null && anchor.equals(element))
+			{
+				anchor = null;
 			}
 		}
 
