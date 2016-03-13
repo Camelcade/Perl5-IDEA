@@ -48,11 +48,10 @@ public class PerlVirtualFileListener extends VirtualFileAdapter
 		VirtualFile virtualFile = event.getFile();
 		if (myProjectFileIndex.isInSource(virtualFile) && event.getNewValue() != null && event.getOldValue() != null)
 		{
-			String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString() + "$", event.getOldValue().toString());
-
 			if ("name".equals(event.getPropertyName()) && virtualFile.isDirectory())
 			{
 				// package path change
+				String oldPath = virtualFile.getPath().replaceFirst(event.getNewValue().toString() + "$", event.getOldValue().toString());
 				RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
 				PerlPackageUtil.collectNestedPackageDefinitions(queue, virtualFile, oldPath);
 				queue.run();
@@ -69,10 +68,9 @@ public class PerlVirtualFileListener extends VirtualFileAdapter
 			if (myProjectFileIndex.isInSource(event.getNewParent()))
 			{
 				VirtualFile movedFile = event.getFile();
-				String oldPath = event.getOldParent().getPath() + '/' + movedFile.getName();
-
 				if (movedFile.isDirectory())
 				{
+					String oldPath = event.getOldParent().getPath() + '/' + movedFile.getName();
 					// one of the dirs been moved to other one
 					RenameRefactoringQueue queue = new RenameRefactoringQueue(myProject);
 					PerlPackageUtil.collectNestedPackageDefinitions(queue, movedFile, oldPath);
