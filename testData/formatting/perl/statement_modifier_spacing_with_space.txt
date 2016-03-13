@@ -1,0 +1,14 @@
+say $a if say $b;
+say $a if (say $b);
+say $a until say $b;
+say $a until (say $b);
+say $a unless say $b;
+say $a unless (say $b);
+say $a while say $b;
+say $a while (say $b);
+say $a for say $b;
+say $a for (say $b);
+say $a foreach say $b;
+say $a foreach (say $b);
+say $a when say $b;
+say $a when (say $b);
