@@ -1,0 +1,10 @@
+
+<%method mymethod1>
+% my $var;
+</%method>
+
+
+<%args>
+	$supervar => $v<caret>ar
+</%args>
+

@@ -1,0 +1,9 @@
+
+<%method mymethod1>
+% my $var;
+</%method>
+
+
+<%filter>
+say $v<caret>ar;
+</%filter>

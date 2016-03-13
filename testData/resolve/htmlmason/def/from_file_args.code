@@ -1,0 +1,9 @@
+
+<%def mydef>
+% my $var;
+</%def>
+
+<%args>
+	$supervar => $v<caret>ar
+</%args>
+

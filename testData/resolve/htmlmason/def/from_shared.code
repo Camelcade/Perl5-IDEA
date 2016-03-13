@@ -1,0 +1,7 @@
+<%def mydef>
+% my $var;
+</%def>
+
+<%shared>
+say $v<caret>ar;
+</%shared>

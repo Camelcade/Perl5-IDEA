@@ -1,0 +1,9 @@
+<%method mymethod1>
+% my $var;
+</%method>
+
+
+<%def mydef>
+% say $v<caret>ar;
+</%def>
+
