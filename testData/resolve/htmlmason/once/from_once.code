@@ -1,0 +1,6 @@
+
+<%once>
+my $var;
+say $v<caret>ar;
+</%once>
+
