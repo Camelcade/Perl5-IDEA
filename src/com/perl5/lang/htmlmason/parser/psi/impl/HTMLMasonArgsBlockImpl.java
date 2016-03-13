@@ -18,13 +18,12 @@ package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonArgsBlockImpl extends PerlCompositeElementImpl implements HTMLMasonArgsBlock
+public class HTMLMasonArgsBlockImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonArgsBlock
 {
 	public HTMLMasonArgsBlockImpl(@NotNull ASTNode node)
 	{

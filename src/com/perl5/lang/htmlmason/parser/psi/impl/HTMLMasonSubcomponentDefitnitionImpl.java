@@ -18,13 +18,12 @@ package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class HTMLMasonSubcomponentDefitnitionImpl extends PerlCompositeElementImpl implements HTMLMasonSubcomponentDefitnition
+public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonSubcomponentDefitnition
 {
 	public HTMLMasonSubcomponentDefitnitionImpl(@NotNull ASTNode node)
 	{

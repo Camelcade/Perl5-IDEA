@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi.impl;
+package com.perl5.lang.htmlmason.parser.psi;
 
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.PerlCompositeElement;
 
 /**
- * Created by hurricup on 09.03.2016.
+ * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonMethodDefinitionImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonMethodDefinition
+public interface HTMLMasonFilterBlock extends PerlCompositeElement
 {
-	public HTMLMasonMethodDefinitionImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
 }

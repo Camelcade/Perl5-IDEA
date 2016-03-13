@@ -1,6 +1,6 @@
 HTML::Mason component
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
-  PerlCompositeElementImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
+  HTMLMasonFilterBlockImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_FILTER_BLOCK)
     PsiElement(HTML::Mason::Token.<%filter>)('<%filter>')
     PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
       PsiPerlTrRegexImpl(PerlElementType.PerlTokenType.TR_REGEX)
@@ -14,7 +14,7 @@ HTML::Mason component
         PsiElement(PerlTokenType.REGEX_QUOTE_CLOSE)('/')
     PsiElement(HTML::Mason::Token.</%filter>)('</%filter>')
   PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('Some')
-  PerlCompositeElementImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_ABSTRACT_BLOCK)
+  HTMLMasonFilterBlockImpl(HTML::Mason::Element.HTML::Mason::Token.HTML_MASON_FILTER_BLOCK)
     PsiElement(HTML::Mason::Token.<%filter>)('<%filter>')
     PsiPerlStatementImpl(PerlElementType.PerlTokenType.STATEMENT)
       PsiPerlAssignExprImpl(PerlElementType.PerlTokenType.ASSIGN_EXPR)

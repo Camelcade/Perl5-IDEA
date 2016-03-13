@@ -206,11 +206,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 	}
 
 
-	protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken)
-	{
-		return MasonParserUtil.parsePerlBlock(b, l, closeToken, HTML_MASON_ABSTRACT_BLOCK);
-	}
-
 	@NotNull
 	@Override
 	public TokenSet getAnonHashSuffixTokens()
@@ -339,23 +334,23 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		}
 		else if (tokenType == HTML_MASON_ONCE_OPENER)
 		{
-			r = parsePerlBlock(b, l, HTML_MASON_ONCE_CLOSER);
+			r = MasonParserUtil.parsePerlBlock(b, l, HTML_MASON_ONCE_CLOSER, HTML_MASON_ONCE_BLOCK);
 		}
 		else if (tokenType == HTML_MASON_SHARED_OPENER)
 		{
-			r = parsePerlBlock(b, l, HTML_MASON_SHARED_CLOSER);
+			r = MasonParserUtil.parsePerlBlock(b, l, HTML_MASON_SHARED_CLOSER, HTML_MASON_SHARED_BLOCK);
 		}
 		else if (tokenType == HTML_MASON_CLEANUP_OPENER)
 		{
-			r = parsePerlBlock(b, l, HTML_MASON_CLEANUP_CLOSER);
+			r = MasonParserUtil.parsePerlBlock(b, l, HTML_MASON_CLEANUP_CLOSER, HTML_MASON_CLEANUP_BLOCK);
 		}
 		else if (tokenType == HTML_MASON_INIT_OPENER)
 		{
-			r = parsePerlBlock(b, l, HTML_MASON_INIT_CLOSER);
+			r = MasonParserUtil.parsePerlBlock(b, l, HTML_MASON_INIT_CLOSER, HTML_MASON_INIT_BLOCK);
 		}
 		else if (tokenType == HTML_MASON_FILTER_OPENER)
 		{
-			r = parsePerlBlock(b, l, HTML_MASON_FILTER_CLOSER);
+			r = MasonParserUtil.parsePerlBlock(b, l, HTML_MASON_FILTER_CLOSER, HTML_MASON_FILTER_BLOCK);
 		}
 		else if (tokenType == HTML_MASON_ARGS_OPENER)
 		{

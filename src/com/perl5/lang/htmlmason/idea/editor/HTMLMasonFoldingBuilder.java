@@ -49,10 +49,14 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
 			));
 
 	protected static final TokenSet FOLDABLE_TOKENS = TokenSet.create(
-			HTML_MASON_ABSTRACT_BLOCK,
+			HTML_MASON_INIT_BLOCK,
+			HTML_MASON_SHARED_BLOCK,
+			HTML_MASON_ONCE_BLOCK,
+			HTML_MASON_CLEANUP_BLOCK,
 			HTML_MASON_ARGS_BLOCK,
 			HTML_MASON_ATTR_BLOCK,
 			HTML_MASON_TEXT_BLOCK,
+			HTML_MASON_FILTER_BLOCK,
 			HTML_MASON_FILTERED_BLOCK
 	);
 
@@ -70,11 +74,7 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
 	public String getPlaceholderText(@NotNull ASTNode node, @NotNull TextRange range)
 	{
 		IElementType tokenType = node.getElementType();
-		if (tokenType == HTML_MASON_ABSTRACT_BLOCK)
-		{
-			return PH_CODE_BLOCK;
-		}
-		else if (tokenType == HTML_MASON_ATTR_BLOCK)
+		if (tokenType == HTML_MASON_ATTR_BLOCK)
 		{
 			return "/ attributes /";
 		}
@@ -88,7 +88,27 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
 		}
 		else if (tokenType == HTML_MASON_FILTERED_BLOCK)
 		{
-			return " / filtered content /";
+			return "/ filtered content /";
+		}
+		else if (tokenType == HTML_MASON_FILTER_BLOCK)
+		{
+			return "/ content filter /";
+		}
+		else if (tokenType == HTML_MASON_ONCE_BLOCK)
+		{
+			return "/ top level shared code /";
+		}
+		else if (tokenType == HTML_MASON_SHARED_BLOCK)
+		{
+			return "/ shared code /";
+		}
+		else if (tokenType == HTML_MASON_INIT_BLOCK)
+		{
+			return "/ init code /";
+		}
+		else if (tokenType == HTML_MASON_CLEANUP_BLOCK)
+		{
+			return "/ cleanup code /";
 		}
 		return super.getPlaceholderText(node, range);
 	}

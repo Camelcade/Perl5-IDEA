@@ -25,7 +25,7 @@ $abs
         fonts => {qw(arial geneva helvetica)}
 </fold></%attr>
 
-<&| "outer" &><fold text=' / filtered content /'>
+<&| "outer" &><fold text='/ filtered content /'>
     <fold text='/ template /'>Hello
      my</fold> <% $name %>
      is someone
@@ -44,12 +44,12 @@ $abs
 <&| SELF:method1 &> subcomponents can be filters </&></fold>
 </%doc>
 
-<%filter><fold text='{code block}'>
+<%filter><fold text='/ content filter /'>
 my $uri = $r->uri;
     s{<a href="$uri/?">(.*?)</a>} {<b>$1</b>}i;
 </fold></%filter>
 
-<%init><fold text='{code block}'>
+<%init><fold text='/ init code /'>
 my $ua = $r->header_in('User-Agent');
     return ($ua =~ /Mozilla/i && $ua !~ /MSIE/i) ? 1 : 0;
 </fold></%init>
@@ -59,7 +59,7 @@ my $ua = $r->header_in('User-Agent');
 
 </fold></%method>
 
-<%once><fold text='{code block}'>
+<%once><fold text='/ top level shared code /'>
 # Fetch article from database
     my $dbh = DBI::connect;
     my $sth = $dbh->prepare("select * from articles where id = ?");
@@ -77,7 +77,7 @@ my @time = localtime;
 say 'something';  # comment
 </%perl>
 
-<%shared><fold text='{code block}'>
+<%shared><fold text='/ shared code /'>
 # Fetch article from database
     my $dbh = DBI::connect;
     my $sth = $dbh->prepare("select * from articles where id = ?");

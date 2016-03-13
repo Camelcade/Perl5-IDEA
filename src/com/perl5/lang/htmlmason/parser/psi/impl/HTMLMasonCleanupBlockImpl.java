@@ -17,15 +17,15 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCleanupBlock;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 09.03.2016.
+ * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonMethodDefinitionImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonMethodDefinition
+public class HTMLMasonCleanupBlockImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonCleanupBlock
 {
-	public HTMLMasonMethodDefinitionImpl(@NotNull ASTNode node)
+	public HTMLMasonCleanupBlockImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
