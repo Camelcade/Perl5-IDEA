@@ -108,18 +108,13 @@ public interface PerlElementPatterns extends PerlElementTypes
 
 	PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(PerlElementTypes.ANNOTATION_UNKNOWN_KEY);
 
-	PsiElementPattern.Capture INSIDE_SUB_SIGNATURE = psiElement().inside(PsiPerlSubSignatureContent.class);
-	PsiElementPattern.Capture INSIDE_LEXICAL_DECLARATION = psiElement().inside(PsiPerlVariableDeclarationLexical.class);
-	PsiElementPattern.Capture INSIDE_GLOBAL_DECLARATION = psiElement().inside(PsiPerlVariableDeclarationGlobal.class);
-	PsiElementPattern.Capture INSIDE_USE_VARS = psiElement().inside(IPerlUseVars.class);
-
-
 	PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN =
-			VARIABLE_NAME_PATTERN.andOr(IN_VARIABLE_PATTERN, IN_GLOB_PATTERN)
-					.andNot(INSIDE_GLOBAL_DECLARATION)
-					.andNot(INSIDE_LEXICAL_DECLARATION)
-					.andNot(INSIDE_SUB_SIGNATURE)
-					.andNot(INSIDE_USE_VARS);
+			VARIABLE_NAME_PATTERN
+					.andOr(IN_VARIABLE_PATTERN, IN_GLOB_PATTERN)
+					.andOr(
+							VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN,
+							psiElement().andNot(VARIABLE_NAME_IN_DECLARATION_PATTERN)
+					);
 
 
 	PsiElementPattern.Capture<PsiPerlIfCompound> INCOMPLETED_IF_COMPOUND =
