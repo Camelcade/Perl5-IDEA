@@ -1,0 +1,9 @@
+
+<%shared>
+my $var;
+</%shared>
+
+<&| something &>
+% say $v<caret>ar;
+</&>
+

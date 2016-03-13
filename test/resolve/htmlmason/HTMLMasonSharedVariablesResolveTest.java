@@ -19,17 +19,17 @@ package resolve.htmlmason;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonFilteredBlockTest extends HTMLMasonBlockVariablesResolveTestCase
+public class HTMLMasonSharedVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase
 {
 	protected String getTestDataPath()
 	{
-		return "testData/resolve/htmlmason/filtered_block";
+		return "testData/resolve/htmlmason/shared";
 	}
 
 	@Override
 	protected boolean resolveSecondEntry()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -41,61 +41,61 @@ public class HTMLMasonFilteredBlockTest extends HTMLMasonBlockVariablesResolveTe
 	@Override
 	protected boolean resolveFromShared()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromFilter()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromInit()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromCleanup()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromLineAhead()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromLineBehind()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromPerlBehind()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromPerlAhead()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromFilteredBlockAhead()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromFilteredBlockBehind()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class HTMLMasonFilteredBlockTest extends HTMLMasonBlockVariablesResolveTe
 	@Override
 	protected boolean resolveFromFileArgs()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -121,5 +121,4 @@ public class HTMLMasonFilteredBlockTest extends HTMLMasonBlockVariablesResolveTe
 	{
 		return false;
 	}
-
 }

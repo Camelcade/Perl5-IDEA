@@ -115,4 +115,10 @@ public class HTMLMasonOnceVariablesResolveTest extends HTMLMasonBlockVariablesRe
 	{
 		return true;
 	}
+
+	@Override
+	protected boolean resolveFromSecondEntryBackwards()
+	{
+		return false;
+	}
 }

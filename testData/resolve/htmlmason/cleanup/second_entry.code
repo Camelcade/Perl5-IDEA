@@ -1,0 +1,13 @@
+
+% say $v<caret>ar;
+
+<%cleanup>
+my $var1;
+</%cleanup>
+
+% {
+<%cleanup>
+my $var;
+</%cleanup>
+% }
+

@@ -1,0 +1,7 @@
+<%filter>
+my $var;
+</%filter>
+
+<%args>
+	$supervar => $v<caret>ar
+</%args>

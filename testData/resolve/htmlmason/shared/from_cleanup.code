@@ -1,0 +1,8 @@
+
+<%cleanup>
+say $v<caret>ar;
+</%cleanup>
+
+<%shared>
+my $var;
+</%shared>

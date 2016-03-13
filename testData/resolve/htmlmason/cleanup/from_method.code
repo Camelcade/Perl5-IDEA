@@ -1,0 +1,7 @@
+<%cleanup>
+my $var;
+</%cleanup>
+
+<%method mymethod>
+% say $v<caret>ar;
+</%method>

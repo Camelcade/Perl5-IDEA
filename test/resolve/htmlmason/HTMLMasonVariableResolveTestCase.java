@@ -20,23 +20,7 @@ import resolve.PerlVariableResolveTestCase;
 
 /**
  * Created by hurricup on 13.03.2016.
- * Proper file structure:
- * <p/>
- * once
- * def
- * args
- * perl
- * method
- * args
- * perl
- * shared
- * args
- * filter
- * init
- * perl
- * <&| &>filtered block</&>
- * perl
- * cleanup
+ * Proper file structure: https://github.com/hurricup/Perl5-IDEA/issues/905
  */
 public abstract class HTMLMasonVariableResolveTestCase extends PerlVariableResolveTestCase
 {

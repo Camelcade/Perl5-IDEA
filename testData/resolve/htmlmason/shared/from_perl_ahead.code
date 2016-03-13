@@ -1,0 +1,8 @@
+
+<%perl>
+say $v<caret>ar;
+</%perl>
+
+<%shared>
+my $var;
+</%shared>

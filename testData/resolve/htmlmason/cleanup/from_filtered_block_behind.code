@@ -1,0 +1,8 @@
+<%cleanup>
+my $var;
+</%cleanup>
+
+<&| something &>
+% say $v<caret>ar;
+</&>
+

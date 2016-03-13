@@ -1,0 +1,8 @@
+<%cleanup>
+my $var;
+</%cleanup>
+
+<%args>
+	$supervar => $v<caret>ar
+</%args>
+

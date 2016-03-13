@@ -1,0 +1,8 @@
+
+<%args>
+	$supervar => $v<caret>ar
+</%args>
+
+<%shared>
+my $var;
+</%shared>

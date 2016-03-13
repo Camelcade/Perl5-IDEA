@@ -1,0 +1,8 @@
+
+<%method mymethod>
+% say $v<caret>ar;
+</%method>
+
+<%shared>
+my $var;
+</%shared>

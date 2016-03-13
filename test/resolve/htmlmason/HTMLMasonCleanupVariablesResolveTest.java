@@ -19,11 +19,11 @@ package resolve.htmlmason;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonFilteredBlockTest extends HTMLMasonBlockVariablesResolveTestCase
+public class HTMLMasonCleanupVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase
 {
 	protected String getTestDataPath()
 	{
-		return "testData/resolve/htmlmason/filtered_block";
+		return "testData/resolve/htmlmason/cleanup";
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class HTMLMasonFilteredBlockTest extends HTMLMasonBlockVariablesResolveTe
 	@Override
 	protected boolean resolveFromCleanup()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -121,5 +121,4 @@ public class HTMLMasonFilteredBlockTest extends HTMLMasonBlockVariablesResolveTe
 	{
 		return false;
 	}
-
 }

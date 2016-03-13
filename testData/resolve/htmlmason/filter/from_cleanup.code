@@ -1,0 +1,8 @@
+<%filter>
+my $var;
+</%filter>
+
+<%cleanup>
+say $v<caret>ar;
+</%cleanup>
+

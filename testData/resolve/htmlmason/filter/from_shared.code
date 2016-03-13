@@ -1,0 +1,8 @@
+<%filter>
+my $var;
+</%filter>
+
+<%shared>
+say $v<caret>ar;
+</%shared>
+
