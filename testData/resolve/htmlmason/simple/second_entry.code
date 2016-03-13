@@ -1,0 +1,5 @@
+# dumb test to suit interface
+% my $var;
+
+% say $v<caret>ar;
+

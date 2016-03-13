@@ -1,0 +1,11 @@
+% say $v<caret>ar;
+
+<%args>
+	$var1 => 1
+</%args>
+
+% {
+<%args>
+	$var => 1
+</%args>
+% }

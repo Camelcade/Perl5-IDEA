@@ -1,0 +1,13 @@
+
+% say $v<caret>ar;
+
+<%once>
+my $var1;
+</%once>
+
+% {
+<%once>
+my $var;
+</%once>
+% }
+

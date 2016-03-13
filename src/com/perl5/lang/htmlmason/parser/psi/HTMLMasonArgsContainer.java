@@ -16,9 +16,12 @@
 
 package com.perl5.lang.htmlmason.parser.psi;
 
+import com.intellij.psi.PsiElement;
+
 /**
- * Created by hurricup on 09.03.2016.
+ * Created by hurricup on 13.03.2016.
+ * May contain Args block
  */
-public interface HTMLMasonMethodDefinition extends HTMLMasonCompositeElement, HTMLMasonArgsContainer
+public interface HTMLMasonArgsContainer extends PsiElement
 {
 }

@@ -103,4 +103,11 @@ public class HTMLMasonFileArgsVariablesResolveTest extends HTMLMasonVariableReso
 	{
 		return false;
 	}
+
+	@Override
+	protected boolean resolveSecondEntry()
+	{
+		return true;
+	}
+
 }

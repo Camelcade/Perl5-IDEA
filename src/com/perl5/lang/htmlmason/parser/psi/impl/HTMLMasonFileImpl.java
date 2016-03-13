@@ -56,11 +56,12 @@ import java.util.Set;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementTypes, PerlImplicitVariablesProvider
+public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementTypes, PerlImplicitVariablesProvider, HTMLMasonArgsContainer
 {
 	protected final List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 	protected int myMasonChangeCounter;
 	protected Map<Integer, Boolean> myPerlLinesMap = new THashMap<Integer, Boolean>();
+	protected Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> myBlocksMap = new THashMap<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>();
 
 	public HTMLMasonFileImpl(@NotNull FileViewProvider viewProvider)
 	{
@@ -430,30 +431,75 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		}
 		if (checkInit)
 		{
-			HTMLMasonInitBlock subBlock = PsiTreeUtil.getChildOfType(this, HTMLMasonInitBlock.class);
-			if (subBlock != null && !subBlock.processDeclarationsForReal(processor, state, null, place))
+			if (!checkSubblocks(processor, state, place, HTMLMasonInitBlock.class))
 				return false;
 		}
 		if (checkArgs)
 		{
-			HTMLMasonArgsBlock subBlock = PsiTreeUtil.getChildOfType(this, HTMLMasonArgsBlock.class);
-			if (subBlock != null && !subBlock.processDeclarationsForReal(processor, state, null, place))
+			if (!checkSubblocks(processor, state, place, HTMLMasonArgsBlock.class))
 				return false;
 		}
 		if (checkShared)
 		{
-			HTMLMasonSharedBlock subBlock = PsiTreeUtil.getChildOfType(this, HTMLMasonSharedBlock.class);
-			if (subBlock != null && !subBlock.processDeclarationsForReal(processor, state, null, place))
+			if (!checkSubblocks(processor, state, place, HTMLMasonSharedBlock.class))
 				return false;
 		}
 		if (checkOnce)
 		{
-			HTMLMasonOnceBlock subBlock = PsiTreeUtil.getChildOfType(this, HTMLMasonOnceBlock.class);
-			if (subBlock != null && !subBlock.processDeclarationsForReal(processor, state, null, place))
+			if (!checkSubblocks(processor, state, place, HTMLMasonOnceBlock.class))
 				return false;
 		}
 
 		return false;
+	}
+
+	protected boolean checkSubblocks(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, @NotNull PsiElement place, Class<? extends HTMLMasonCompositeElement> clazz)
+	{
+		List<HTMLMasonCompositeElement> elements = getBlocksByClass(clazz);
+
+		for (int i = elements.size() - 1; i >= 0; i--)
+		{
+			if (!elements.get(i).processDeclarationsForReal(processor, state, null, place))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	protected List<HTMLMasonCompositeElement> getBlocksByClass(Class<? extends HTMLMasonCompositeElement> clazz)
+	{
+		List<HTMLMasonCompositeElement> elements = myBlocksMap.get(clazz);
+
+		if (elements == null)
+		{
+			if (clazz.equals(HTMLMasonArgsBlock.class))
+			{
+				elements = new ArrayList<HTMLMasonCompositeElement>();
+
+				for (HTMLMasonCompositeElement element : PsiTreeUtil.findChildrenOfType(this, HTMLMasonArgsBlock.class))
+				{
+					if (this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+					{
+						elements.add(element);
+					}
+				}
+			}
+			else
+			{
+				elements = new ArrayList<HTMLMasonCompositeElement>(PsiTreeUtil.findChildrenOfType(this, clazz));
+			}
+			myBlocksMap.put(clazz, elements);
+		}
+		return elements;
+	}
+
+	@Override
+	public void subtreeChanged()
+	{
+		super.subtreeChanged();
+		myBlocksMap.clear();
 	}
 
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>

@@ -103,4 +103,11 @@ public class HTMLMasonOnceVariablesResolve extends HTMLMasonVariableResolveTestC
 	{
 		return true;
 	}
+
+	@Override
+	protected boolean resolveSecondEntry()
+	{
+		return true;
+	}
+
 }
