@@ -257,7 +257,7 @@ public class PerlPsiUtil
 					{
 						if (psiClass.isInstance(element))
 							result.add(element);
-						return false;
+						return true;
 					}
 				},
 				PerlNamespaceDefinition.class
