@@ -1,0 +1,5 @@
+
+<&| something &>
+% say $pro<caret>duct;
+</&>
+

@@ -19,12 +19,14 @@ package com.perl5.lang.htmlmason.parser.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndex;
@@ -40,8 +42,10 @@ import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
@@ -61,11 +65,33 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 	protected final List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 	protected int myMasonChangeCounter;
 	protected Map<Integer, Boolean> myPerlLinesMap = new THashMap<Integer, Boolean>();
-	protected Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> myBlocksMap = new THashMap<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>();
+	protected MyBlocksCache myBlocksCache;
 
 	public HTMLMasonFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, HTMLMasonLanguage.INSTANCE);
+		myBlocksCache = new MyBlocksCache(this);
+	}
+
+	// fixme this is a cut version from PerlScopeUtil to make implicit vars checking in the last order
+	public static boolean processChildren(@NotNull PsiElement element,
+										  @NotNull PsiScopeProcessor processor,
+										  @NotNull ResolveState resolveState,
+										  @Nullable PsiElement lastParent,
+										  @NotNull PsiElement place)
+	{
+		PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
+		while (run != null)
+		{
+			if (run instanceof PerlCompositeElement &&
+					!(run instanceof PerlLexicalScope) &&
+					!run.processDeclarations(processor, resolveState, null, place)
+					)
+				return false;
+			run = run.getPrevSibling();
+		}
+
+		return true;
 	}
 
 	@Nullable
@@ -399,7 +425,6 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		PsiElement sharedAnchor = null;
 		PsiElement argsAnchor = null;
 		PsiElement initAnchor = null;
-		PsiElement codeAnchor = null;
 		PsiElement cleanupAnchor = null;
 
 		if (lastParent instanceof HTMLMasonSharedBlockImpl)
@@ -446,7 +471,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 
 		if (checkCode)
 		{
-			if (!super.processDeclarations(processor, state, lastParent, place))
+			if (!processChildren(this, processor, state, lastParent, place))
 				return false;
 		}
 		if (checkCleanup)
@@ -473,6 +498,13 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		if (!checkSubblocks(processor, state, place, HTMLMasonOnceBlock.class, onceAnchor))
 			return false;
 
+		// implicit variables
+		for (PerlVariableDeclarationWrapper wrapper : getImplicitVariables())
+		{
+			if (!processor.execute(wrapper, state))
+				return false;
+		}
+
 		return false;
 	}
 
@@ -485,7 +517,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			@Nullable PsiElement anchor
 	)
 	{
-		List<HTMLMasonCompositeElement> elements = getBlocksByClass(clazz);
+		List<HTMLMasonCompositeElement> elements = myBlocksCache.getValue().get(clazz);
 
 		for (int i = elements.size() - 1; i >= 0; i--)
 		{
@@ -503,38 +535,11 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		return true;
 	}
 
-	protected List<HTMLMasonCompositeElement> getBlocksByClass(Class<? extends HTMLMasonCompositeElement> clazz)
-	{
-		List<HTMLMasonCompositeElement> elements = myBlocksMap.get(clazz);
-
-		if (elements == null)
-		{
-			if (clazz.equals(HTMLMasonArgsBlock.class))
-			{
-				elements = new ArrayList<HTMLMasonCompositeElement>();
-
-				for (HTMLMasonCompositeElement element : PsiTreeUtil.findChildrenOfType(this, HTMLMasonArgsBlock.class))
-				{
-					if (this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
-					{
-						elements.add(element);
-					}
-				}
-			}
-			else
-			{
-				elements = new ArrayList<HTMLMasonCompositeElement>(PsiTreeUtil.findChildrenOfType(this, clazz));
-			}
-			myBlocksMap.put(clazz, elements);
-		}
-		return elements;
-	}
-
 	@Override
 	public void subtreeChanged()
 	{
 		super.subtreeChanged();
-		myBlocksMap.clear();
+		myBlocksCache = new MyBlocksCache(this);
 	}
 
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>
@@ -574,4 +579,56 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			return true;
 		}
 	}
+
+	protected static class MyBlocksCache extends AtomicNotNullLazyValue<Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>>
+	{
+		private final HTMLMasonFileImpl myFile;
+
+		public MyBlocksCache(HTMLMasonFileImpl myFile)
+		{
+			this.myFile = myFile;
+		}
+
+		@NotNull
+		@Override
+		protected Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> compute()
+		{
+			Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>();
+
+			final List<HTMLMasonCompositeElement> cleanupResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> initResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> argsResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> sharedResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> onceResult = new ArrayList<HTMLMasonCompositeElement>();
+
+			result.put(HTMLMasonOnceBlock.class, onceResult);
+			result.put(HTMLMasonSharedBlock.class, sharedResult);
+			result.put(HTMLMasonInitBlock.class, initResult);
+			result.put(HTMLMasonArgsBlock.class, argsResult);
+			result.put(HTMLMasonCleanupBlock.class, cleanupResult);
+
+			PsiTreeUtil.processElements(myFile, new PsiElementProcessor()
+			{
+				@Override
+				public boolean execute(@NotNull PsiElement element)
+				{
+					if (element instanceof HTMLMasonOnceBlock)
+						onceResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonSharedBlock)
+						sharedResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonInitBlock)
+						initResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonCleanupBlock)
+						cleanupResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonArgsBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+						argsResult.add((HTMLMasonCompositeElement) element);
+
+					return true;
+				}
+			});
+
+			return result;
+		}
+	}
+
 }

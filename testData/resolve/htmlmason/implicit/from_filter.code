@@ -1,0 +1,3 @@
+<%filter>
+say $pro<caret>duct;
+</%filter>

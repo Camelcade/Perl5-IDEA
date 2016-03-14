@@ -1,0 +1,4 @@
+<%def mydef>
+% say $pro<caret>duct;
+</%def>
+

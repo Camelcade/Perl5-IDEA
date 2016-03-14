@@ -16,17 +16,14 @@
 
 package resolve.htmlmason;
 
-import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
-import com.perl5.lang.mason2.idea.configuration.VariableDescription;
-
 /**
- * Created by hurricup on 13.03.2016.
+ * Created by hurricup on 14.03.2016.
  */
-public class HTMLMasonArgsDefVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase
+public class HTMLMasonImplicitVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase
 {
 	protected String getTestDataPath()
 	{
-		return "testData/resolve/htmlmason/args_def";
+		return "testData/resolve/htmlmason/implicit";
 	}
 
 	@Override
@@ -38,73 +35,73 @@ public class HTMLMasonArgsDefVariablesResolveTest extends HTMLMasonBlockVariable
 	@Override
 	protected boolean resolveFromSecondEntryBackwards()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromOnce()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromShared()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromFilter()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromInit()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromCleanup()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromLineAhead()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromLineBehind()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromPerlBehind()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromPerlAhead()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromFilteredBlockAhead()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromFilteredBlockBehind()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -116,21 +113,13 @@ public class HTMLMasonArgsDefVariablesResolveTest extends HTMLMasonBlockVariable
 	@Override
 	protected boolean resolveFromMethod()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	protected boolean resolveFromFileArgs()
 	{
-		return false;
+		return true;
 	}
 
-	@Override
-	public void doTest(String filename, boolean success)
-	{
-		HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
-		settings.globalVariables.add(new VariableDescription("$product", "Foo::Bar"));
-		settings.settingsUpdated();
-		super.doTest(filename, success);
-	}
 }

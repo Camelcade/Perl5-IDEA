@@ -1,0 +1,4 @@
+<%args>
+	$supervar => $pro<caret>duct
+</%args>
+

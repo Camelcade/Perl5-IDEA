@@ -1,0 +1,4 @@
+<%cleanup>
+say $pro<caret>duct;
+</%cleanup>
+

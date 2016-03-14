@@ -1,0 +1,4 @@
+<%perl>
+say $pro<caret>duct;
+</%perl>
+

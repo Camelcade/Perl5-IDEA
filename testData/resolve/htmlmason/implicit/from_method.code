@@ -1,0 +1,3 @@
+<%method mymethod>
+% say $pro<caret>duct;
+</%method>

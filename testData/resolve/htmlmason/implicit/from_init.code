@@ -1,0 +1,4 @@
+<%init>
+say $pro<caret>duct;
+</%init>
+
