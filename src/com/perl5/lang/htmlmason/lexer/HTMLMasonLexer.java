@@ -264,14 +264,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 				char nextChar1 = offset + 1 < bufferEnd ? buffer.charAt(offset + 1) : 0;
 				char nextChar2 = offset + 2 < bufferEnd ? buffer.charAt(offset + 2) : 0;
 
-				if (currentChar == '<' &&
-						nextChar1 == '%' &&
-						(
-								offset + 2 < bufferEnd && Character.isWhitespace(buffer.charAt(offset + 2)) ||    // <%
-										(matcherSimpleOpener = mySimpleOpenersPattern.matcher(buffer).region(offset, bufferEnd)).lookingAt() ||    // <%text>
-										(matcherOpener = myOpenersPattern.matcher(buffer).region(offset, bufferEnd)).lookingAt()    // <%augment...
-						)
-						)
+				if (currentChar == '<' && nextChar1 == '%')
 				{
 					blockStart = true;
 
@@ -285,26 +278,26 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 					pushPreparsedToken(offset, offset + tag.length(), myCloseTokensMap.get(tag));
 					break;
 				}
-				else if (currentChar == '<' && nextChar1 == '&' && Character.isWhitespace(nextChar2))
-				{
-					pushPreparsedToken(offset, offset + KEYWORD_CALL_OPENER.length(), HTML_MASON_CALL_OPENER);
-					parseCallComponentPath(offset + KEYWORD_CALL_OPENER.length());
-					setCustomState(LEX_MASON_PERL_CALL_BLOCK);
-					break;
-				}
 				else if (currentChar == '<' && nextChar1 == '&' && nextChar2 == '|')
 				{
-					pushPreparsedToken(offset, offset + KEYWORD_CALL_OPENER_FILTER.length(), HTML_MASON_CALL_FILTERING_OPENER);
-					parseCallComponentPath(offset + KEYWORD_CALL_OPENER_FILTER.length());
+					pushPreparsedToken(offset, offset + 3, HTML_MASON_CALL_FILTERING_OPENER);
+					parseCallComponentPath(offset + 3);
 					setCustomState(LEX_MASON_PERL_FILTERING_CALL_BLOCK);
+					break;
+				}
+				else if (currentChar == '<' && nextChar1 == '&')
+				{
+					pushPreparsedToken(offset, offset + 2, HTML_MASON_CALL_OPENER);
+					parseCallComponentPath(offset + 2);
+					setCustomState(LEX_MASON_PERL_CALL_BLOCK);
 					break;
 				}
 				else if (currentChar == '<' && nextChar1 == '/' && nextChar2 == '&')
 				{
 					int myOffset = offset;
 
-					pushPreparsedToken(myOffset, myOffset + KEYWORD_CALL_CLOSE_TAG_START.length(), HTML_MASON_CALL_CLOSE_TAG_START);
-					myOffset = preparseNewLinesAndSpaces(buffer, bufferEnd, myOffset + KEYWORD_CALL_CLOSE_TAG_START.length());
+					pushPreparsedToken(myOffset, myOffset + 3, HTML_MASON_CALL_CLOSE_TAG_START);
+					myOffset = preparseNewLinesAndSpaces(buffer, bufferEnd, myOffset + 3);
 
 					int startOffset = myOffset;
 					while (myOffset < bufferEnd && (currentChar = buffer.charAt(myOffset)) != '>' && !Character.isWhitespace(currentChar))
@@ -353,7 +346,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 			}
 			else if (blockStart)
 			{
-				if (matcherSimpleOpener != null && matcherSimpleOpener.lookingAt())
+				if ((matcherSimpleOpener = mySimpleOpenersPattern.matcher(buffer).region(offset, bufferEnd)).lookingAt())
 				{
 					// check for unnamed block
 					String openingTag = matcherSimpleOpener.group(0);
@@ -439,7 +432,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 						setCustomState(LEX_MASON_PERL_BLOCK);// fixme we should capture text here
 					}
 				}
-				else if (matcherOpener != null && matcherOpener.lookingAt())
+				else if ((matcherOpener = myOpenersPattern.matcher(buffer).region(offset, bufferEnd)).lookingAt())
 				{
 					// check for named block
 					String openingTag = matcherOpener.group(0);
@@ -467,7 +460,6 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 				}
 				else
 				{
-					assert Character.isWhitespace(buffer.charAt(offset + 2));
 					pushPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), HTML_MASON_BLOCK_OPENER);
 					setCustomState(LEX_MASON_PERL_EXPR_BLOCK);
 				}
@@ -497,5 +489,13 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 	protected String getKeywordCallCloser()
 	{
 		return KEYWORD_CALL_CLOSER;
+	}
+
+	@Override
+	protected boolean isAtComponentPathEnd(char currentChar, int offset, int bufferEnd, CharSequence buffer)
+	{
+		return currentChar == ',' ||                                                                   // comma
+				currentChar == '=' && offset + 1 < bufferEnd && buffer.charAt(offset + 1) == '>' ||    // arrow comma
+				currentChar == '&' && offset + 1 < bufferEnd && buffer.charAt(offset + 1) == '>';      // close marker
 	}
 }

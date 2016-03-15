@@ -21,13 +21,13 @@ package com.perl5.lang.htmlmason;
  */
 public interface HTMLMasonSyntaxElements
 {
-	String KEYWORD_BLOCK_OPENER = "<% ";
-	String KEYWORD_BLOCK_CLOSER = " %>";
+	String KEYWORD_BLOCK_OPENER = "<%";
+	String KEYWORD_BLOCK_CLOSER = "%>";
 
-	String KEYWORD_CALL_OPENER = "<& ";
-	String KEYWORD_CALL_OPENER_FILTER = "<&| ";
+	String KEYWORD_CALL_OPENER = "<&";
+	String KEYWORD_CALL_OPENER_FILTER = "<&|";
 
-	String KEYWORD_CALL_CLOSER = " &>";
+	String KEYWORD_CALL_CLOSER = "&>";
 
 	String KEYWORD_CALL_CLOSE_TAG_START = "</&";
 	String KEYWORD_TAG_CLOSER = ">";

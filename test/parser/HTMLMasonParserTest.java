@@ -119,6 +119,11 @@ public class HTMLMasonParserTest extends PerlMultiPsiParserTestBase
 		doTest("parse_text");
 	}
 
+	public void testSpaceless()
+	{
+		doTest("parse_spaceless");
+	}
+
 	public void testEscapedBlock()
 	{
 		doTest("parse_escaped_block");

@@ -148,10 +148,7 @@ public abstract class AbstractMasonLexer extends PerlLexerWithCustomStates
 				{
 					currentChar = buffer.charAt(offset);
 
-					if (currentChar == ',' ||                                                                                    // comma
-							currentChar == '=' && offset + 1 < bufferEnd && buffer.charAt(offset + 1) == '>' ||    // arrow comma
-							currentChar == ' ' && offset + 2 < bufferEnd && buffer.charAt(offset + 1) == '&' && buffer.charAt(offset + 2) == '>'    // close marker
-							)
+					if (isAtComponentPathEnd(currentChar, offset, bufferEnd, buffer))
 					{
 						break;
 					}
@@ -239,6 +236,13 @@ public abstract class AbstractMasonLexer extends PerlLexerWithCustomStates
 			tokens.add(new CustomToken(whiteSpaceTokenStart, myOffset, TokenType.WHITE_SPACE));
 		}
 		return myOffset;
+	}
+
+	protected boolean isAtComponentPathEnd(char currentChar, int offset, int bufferEnd, CharSequence buffer)
+	{
+		return currentChar == ',' ||                                                                                    // comma
+				currentChar == '=' && offset + 1 < bufferEnd && buffer.charAt(offset + 1) == '>' ||    // arrow comma
+				currentChar == ' ' && offset + 2 < bufferEnd && buffer.charAt(offset + 1) == '&' && buffer.charAt(offset + 2) == '>';    // close marker
 	}
 
 }
