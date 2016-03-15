@@ -16,6 +16,8 @@
 
 package base;
 
+import com.intellij.openapi.editor.Caret;
+import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -106,6 +108,17 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	protected <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz)
 	{
 		int offset = myFixture.getEditor().getCaretModel().getOffset();
+		PsiElement focused = myFixture.getFile().findElementAt(offset);
+		return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
+	}
+
+	@NotNull
+	protected <T extends PsiElement> T getElementAtCaret(int caretIndex, @NotNull Class<T> clazz)
+	{
+		CaretModel caretModel = myFixture.getEditor().getCaretModel();
+		assertTrue(caretModel.getCaretCount() > caretIndex);
+		Caret caret = caretModel.getAllCarets().get(caretIndex);
+		int offset = caret.getOffset();
 		PsiElement focused = myFixture.getFile().findElementAt(offset);
 		return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
 	}

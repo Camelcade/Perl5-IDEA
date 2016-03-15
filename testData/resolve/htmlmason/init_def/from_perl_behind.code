@@ -1,0 +1,10 @@
+<%def mydef>
+    <%init>
+        my $var;
+    </%init>
+<%perl>
+say $v<caret>ar;
+</%perl>
+</%def>
+
+

@@ -1,0 +1,12 @@
+<%init>
+    my $v<caret>ar;
+</%init>
+
+<%def mydef>
+    <%init>
+        my $v<caret>ar;
+    </%init>
+% say $v<caret>ar;
+</%def>
+
+% say $v<caret>ar;

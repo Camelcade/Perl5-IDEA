@@ -19,6 +19,6 @@ package com.perl5.lang.htmlmason.parser.psi;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public interface HTMLMasonMethodDefinition extends HTMLMasonCompositeElement, HTMLMasonArgsContainer
+public interface HTMLMasonMethodDefinition extends HTMLMasonCompositeElement
 {
 }

@@ -1,0 +1,10 @@
+<%def mydef>
+    <%init>
+        my $var;
+    </%init>
+</%def>
+
+<%shared>
+say $v<caret>ar;
+</%shared>
+

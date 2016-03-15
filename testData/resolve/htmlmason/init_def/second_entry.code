@@ -1,0 +1,12 @@
+<%def mydef>
+% say $v<caret>ar;
+    <%init>
+        my $var1;
+    </%init>
+% {
+    <%init>
+        my $var;
+    </%init>
+% }
+</%def>
+
