@@ -616,10 +616,10 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 						onceResult.add((HTMLMasonCompositeElement) element);
 					else if (element instanceof HTMLMasonSharedBlock)
 						sharedResult.add((HTMLMasonCompositeElement) element);
-					else if (element instanceof HTMLMasonInitBlock)
-						initResult.add((HTMLMasonCompositeElement) element);
 					else if (element instanceof HTMLMasonCleanupBlock)
 						cleanupResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonInitBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+						initResult.add((HTMLMasonCompositeElement) element);
 					else if (element instanceof HTMLMasonArgsBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
 						argsResult.add((HTMLMasonCompositeElement) element);
 
