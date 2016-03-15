@@ -322,12 +322,21 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 			{
 				b.mark().error("Unclosed filtering block");
 			}
-			else if (PerlParserUtil.consumeToken(b, HTML_MASON_CALL_CLOSE_TAG_START))
+			else
 			{
-				string_bare(b, l);
-				if (!PerlParserUtil.consumeToken(b, HTML_MASON_TAG_CLOSER))
+				PsiBuilder.Marker tagMarker = b.mark();
+				if (PerlParserUtil.consumeToken(b, HTML_MASON_CALL_CLOSE_TAG_START))
 				{
-					b.mark().error("Incomplete close tag");
+					string_bare(b, l);
+					if (!PerlParserUtil.consumeToken(b, HTML_MASON_TAG_CLOSER))
+					{
+						b.mark().error("Incomplete close tag");
+					}
+					tagMarker.done(HTML_MASON_CALL_CLOSE_TAG);
+				}
+				else
+				{
+					tagMarker.drop();
 				}
 			}
 			r = true;
