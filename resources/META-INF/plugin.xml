@@ -34,6 +34,7 @@
     <change-notes><![CDATA[
       <p>This relase fixes more bugs or feedbacks from 1.3 release:
       <ul>
+        <li>Fixed problem with HTML-related errors at perl block start for Embedded perl</li>
         <li>Implemented undeclared and unresolved labels inspections</li>
         <li>Implemented labels resolution, navigation, refactoring and completion, fixes #138 (<b>NB: deprecated usages not handled and won't ever be</b>)</li>
         <li>Improved completion of package names: added version strings and package suggestion for definition, fixes #432</li>
@@ -334,6 +335,7 @@
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
 
 
+        <!--Embedded Perl-->
         <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
         <lang.parserDefinition language="Embedded Perl"
                                implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
@@ -377,6 +379,9 @@
         <!-- Here should be an EmbeddedPerlCommenter -->
         <lang.commenter language="Embedded Perl"
                         implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+        <highlightErrorFilter
+                implementation="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlTemplateLanguageErrorFilter"/>
+        <!--End of sEmbedded Perl-->
 
 
         <fileTypeFactory implementation="com.perl5.lang.mojolicious.filetypes.MojoliciousFileTypeFactory"/>
