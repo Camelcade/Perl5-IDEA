@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
+import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.HTMLMasonFileViewProvider;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
@@ -36,7 +37,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes
+public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes, HTMLMasonElementPatterns
 {
 	@Override
 	public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file)
@@ -46,17 +47,18 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLM
 			if (c == '>')
 			{
 				PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-				if (element != null && element.getNode().getElementType() == XML_DATA_CHARACTERS)
+				if (HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element))
 				{
+					assert element != null;
 					String elementText = element.getText();
 					String closeTag;
-					if (elementText.equals(KEYWORD_FLAGS_OPENER_UNCLOSED))
+					if (elementText.equals(KEYWORD_FLAGS))
 					{
 						EditorModificationUtil.insertStringAtCaret(editor, "\ninherit => ''\n" + KEYWORD_FLAGS_CLOSER, false, true, 13);
 					}
 					else
 					{
-						if ((closeTag = getCloseTag(project, elementText + ">")) != null)
+						if ((closeTag = getCloseTag(project, "<%" + elementText + ">")) != null)
 							EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
 					}
 				}

@@ -19,6 +19,9 @@ package com.perl5.lang.htmlmason;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.psi.PsiPerlNamedListExpr;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
@@ -31,4 +34,12 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes
 			psiElement().inside(psiElement(HTML_MASON_ATTR_BLOCK)),
 			psiElement().inside(psiElement(HTML_MASON_ARGS_BLOCK))
 	);
+
+	PsiElementPattern.Capture<PerlSubNameElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN =
+			psiElement(PerlSubNameElement.class).withParent(
+					psiElement(PsiPerlMethod.class)
+							.withParent(
+									psiElement(PsiPerlNamedListExpr.class).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER))
+							)
+			);
 }

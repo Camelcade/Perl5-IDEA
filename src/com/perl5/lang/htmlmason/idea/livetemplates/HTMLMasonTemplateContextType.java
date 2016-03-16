@@ -16,22 +16,28 @@
 
 package com.perl5.lang.htmlmason.idea.livetemplates;
 
+import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonTemplateContextType extends AbstractMasonTemplateContextType
+public class HTMLMasonTemplateContextType extends TemplateContextType implements HTMLMasonElementPatterns
 {
 	public HTMLMasonTemplateContextType()
 	{
 		super("PERL5_HTML_MASON", "&HTML::Mason template", PerlTemplateContextType.Generic.class);
 	}
 
-	protected boolean isMyFile(PsiFile file)
+	@Override
+	public boolean isInContext(@NotNull PsiFile file, int offset)
 	{
-		return file instanceof HTMLMasonFileImpl;
+		return file instanceof HTMLMasonFileImpl &&
+				offset > 0 &&
+				HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(file.findElementAt(offset - 1));
 	}
 }
