@@ -20,8 +20,6 @@ package com.perl5.lang.perl.idea.completion.inserthandlers;
  * Created by hurricup on 03.06.2015.
  */
 
-import com.intellij.codeInsight.completion.CodeCompletionHandlerBase;
-import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -44,14 +42,15 @@ public class PerlAnnotationInsertHandler implements InsertHandler<LookupElement>
 		{
 			EditorModificationUtil.insertStringAtCaret(editor, " ");
 
-			context.setLaterRunnable(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 0);
-				}
-			});
+			// fixme this requires parsing change, going to make it in #891
+//			context.setLaterRunnable(new Runnable()
+//			{
+//				@Override
+//				public void run()
+//				{
+//					new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 0);
+//				}
+//			});
 		}
 	}
 }

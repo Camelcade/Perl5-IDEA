@@ -45,7 +45,7 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 		{
 			PerlPackageCompletionUtil.fillWithPackageNameSuggestions(element, result);
 		}
-		else if (NAMESPACE_IN_USE_NO_REQUIRE_PATTERN.accepts(element)) // use/no/require
+		else if (NAMESPACE_CLASS_COMPLETION_PATTERN.accepts(element)) // use/no/require
 		{
 			PerlPackageCompletionUtil.fillWithAllBuiltInPackageNames(element, result);
 			PerlPackageCompletionUtil.fillWithAllPackageFiles(element, result);
