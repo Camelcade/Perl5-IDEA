@@ -52,19 +52,25 @@ public class EmbeddedPerlLexer extends PerlTemplatingLexer implements EmbeddedPe
 		{
 			int offset = tokenStart;
 			boolean blockStart = false;
+			int lastNonSpaceCharacterOffset = -1;
 
 			for (; offset < bufferEnd; offset++)
 			{
-				if (offset + 1 < bufferEnd && buffer.charAt(offset) == '<' && buffer.charAt(offset + 1) == '?')
+				char currentChar = buffer.charAt(offset);
+				if (offset + 1 < bufferEnd && currentChar == '<' && buffer.charAt(offset + 1) == '?')
 				{
 					blockStart = true;
 					break;
+				}
+				else if (!Character.isWhitespace(currentChar))
+				{
+					lastNonSpaceCharacterOffset = offset;
 				}
 			}
 
 			if (offset > tokenStart)
 			{
-				pushPreparsedToken(tokenStart, offset, EMBED_TEMPLATE_BLOCK_HTML);
+				reLexHTMLBLock(tokenStart, offset, lastNonSpaceCharacterOffset, EMBED_TEMPLATE_BLOCK_HTML);
 			}
 
 			if (blockStart)
