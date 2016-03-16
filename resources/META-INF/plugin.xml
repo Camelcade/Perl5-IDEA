@@ -34,12 +34,13 @@
     <change-notes><![CDATA[
       <p>This relase fixes more bugs or feedbacks from 1.3 release:
       <ul>
-        <li>Implemented undeclared and unresolved labels inspections</li>
         <li>Implemented labels resolution, navigation, refactoring and completion, fixes #138 (<b>NB: deprecated usages not handled and won't ever be</b>)</li>
+        <li>Implemented undeclared and unresolved labels inspections</li>
         <li>Improved completion of package names: added version strings and package suggestion for definition, fixes #432</li>
         <li>Improved labels parsing, so now you may use any word for it, except <code>sub</code></li>
         <li>Implemented auto-completion for here-doc openers, fixes #874</li>
         <li>Fixed possible NPE on here-doc typing in the end of file</li>
+        <li>Fixed possible inspection on #@returns annotation auto-completion</li>
         <li>Implemented sequential here-docs parsing, fixes #163</li>
         <li>Implemented backref here-docs parsing</li>
         <li>Improved utf identifiers and packages parsing</li>
@@ -48,7 +49,7 @@
         <li>Regular strings are now injectable with other languages, fixes #829</li>
         <li>A lot of optimizations.</li>
         <li>Fixed problem for ipr project settings, by @zhurs</li>
-        <li>Re-formatter now works on here-docs injected with ohter languages</li>
+        <li>Re-formatter now works on here-docs injected with other languages</li>
         <li>Disabling injections in here-docs with interpolated entities is now configurable</li>
         <li>Fixed indentation when typing inside the comma sequence, fixes #845</li>
         <li>Fixed some bugs with pod parsing, fixes #901</li>
