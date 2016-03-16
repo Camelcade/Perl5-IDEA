@@ -473,6 +473,8 @@
                                         implementationClass="com.perl5.lang.htmlmason.idea.navigation.HTMLMasonLineMarkerProvider"/>
         <typeHierarchyProvider language="HTML::Mason Templating Language"
                                implementationClass="com.perl5.lang.htmlmason.idea.hierarchy.HTMLMasonHierarchyProvider"/>
+        <highlightErrorFilter
+                implementation="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonTemplateLanguageErrorFilter"/>
 
         <!-- HTML::Mason settings end -->
 

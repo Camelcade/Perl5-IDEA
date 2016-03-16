@@ -1,0 +1,7 @@
+<d<% say 'hi' %>>
+<d<%perl> say 'hi'; </%perl>>
+<d<& something &>>
+<d
+% say 'something';
+>
+<d<&| something &>> somethingelse </&>

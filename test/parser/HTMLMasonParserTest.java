@@ -16,7 +16,10 @@
 
 package parser;
 
+import com.intellij.psi.PsiFile;
 import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 06.03.2016.
@@ -134,5 +137,20 @@ public class HTMLMasonParserTest extends PerlMultiPsiParserTestBase
 		doTest("parse_mason_sample");
 	}
 
+	public void testErrorFilter() throws Exception
+	{
+		String name = "error_filter";
+		String text = loadFile(name + "." + myFileExt);
+		myFile = createPsiFile(name, text);
+		ensureParsed(myFile);
+		List<PsiFile> allFiles = myFile.getViewProvider().getAllFiles();
+		assertEquals(2, allFiles.size());
+		// fixme this is not actually works we need to check annotations, not eror elements, they are still there, see #917
+		// see https://github.com/JetBrains/intellij-plugins/blob/master/handlebars/src/com/dmarcotte/handlebars/inspections/HbErrorFilter.java
+//		assertFalse(
+//				"PsiFile contains error elements",
+//				toParseTreeText(allFiles.get(1), skipSpaces(), includeRanges()).contains("PsiErrorElement")
+//		);
+	}
 
 }
