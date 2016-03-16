@@ -21,7 +21,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousLexer extends PerlLexerWithCustomStates implements MojoliciousElementTypes
+public class MojoliciousLexer extends PerlTemplatingLexer implements MojoliciousElementTypes
 {
 	// lexical states
 	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
@@ -152,9 +152,11 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 		else if (currentMojoState == LEX_HTML_BLOCK)
 		{
 			int offset = tokenStart;
+			int lastNonSpaceCharacterOffset = -1;
 
 			boolean blockStart = false;
 			boolean clearLine = true;
+
 
 			for (; offset < bufferEnd; offset++)
 			{
@@ -175,12 +177,13 @@ public class MojoliciousLexer extends PerlLexerWithCustomStates implements Mojol
 				else if (!Character.isWhitespace(currentChar))
 				{
 					clearLine = false;
+					lastNonSpaceCharacterOffset = offset;
 				}
 			}
 
 			if (offset > tokenStart)
 			{
-				pushPreparsedToken(tokenStart, offset, MOJO_TEMPLATE_BLOCK_HTML);
+				reLexHTMLBLock(tokenStart, offset, lastNonSpaceCharacterOffset, MOJO_TEMPLATE_BLOCK_HTML);
 			}
 
 			if (offset == bufferEnd)  // end of file, html block

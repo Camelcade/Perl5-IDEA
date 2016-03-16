@@ -18,18 +18,14 @@ package com.perl5.lang.htmlmason.lexer;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.CustomToken;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hurricup on 09.03.2016.
  */
-public abstract class AbstractMasonLexer extends PerlLexerWithCustomStates
+public abstract class AbstractMasonLexer extends PerlTemplatingLexer
 {
 	public AbstractMasonLexer(Project project)
 	{
@@ -174,69 +170,6 @@ public abstract class AbstractMasonLexer extends PerlLexerWithCustomStates
 		}
 	}
 
-	protected void reLexHTMLBLock(int blockStart, int blockEnd, int lastNonspaceCharacterOffset, IElementType templateElementType)
-	{
-		List<CustomToken> tokens = new ArrayList<CustomToken>();
-		int myOffset = parseSpacesInRange(blockStart, blockEnd, tokens);
-
-		// real template
-		if (myOffset <= lastNonspaceCharacterOffset)
-		{
-			tokens.add(new CustomToken(myOffset, lastNonspaceCharacterOffset + 1, templateElementType));
-		}
-
-		if (lastNonspaceCharacterOffset > -1)
-		{
-			parseSpacesInRange(lastNonspaceCharacterOffset + 1, blockEnd, tokens);
-		}
-
-		for (int i = tokens.size() - 1; i >= 0; i--)
-		{
-			unshiftPreparsedToken(tokens.get(i));
-		}
-
-	}
-
-	protected int parseSpacesInRange(int myOffset, int offset, List<CustomToken> tokens)
-	{
-		int whiteSpaceTokenStart = -1;
-		CharSequence buffer = getBuffer();
-		while (myOffset < offset)
-		{
-			char currentChar = buffer.charAt(myOffset);
-			if (currentChar == '\n')
-			{
-				if (whiteSpaceTokenStart != -1)
-				{
-					tokens.add(new CustomToken(whiteSpaceTokenStart, myOffset, TokenType.WHITE_SPACE));
-					whiteSpaceTokenStart = -1;
-				}
-				tokens.add(new CustomToken(myOffset, myOffset + 1, TokenType.NEW_LINE_INDENT));
-			}
-			else if (Character.isWhitespace(currentChar))
-			{
-				if (whiteSpaceTokenStart == -1)
-				{
-					whiteSpaceTokenStart = myOffset;
-				}
-			}
-			else
-			{
-				if (whiteSpaceTokenStart != -1)
-				{
-					tokens.add(new CustomToken(whiteSpaceTokenStart, myOffset, TokenType.WHITE_SPACE));
-					whiteSpaceTokenStart = -1;
-				}
-				break;
-			}
-			myOffset++;
-		}
-		if (whiteSpaceTokenStart != -1)
-		{
-			tokens.add(new CustomToken(whiteSpaceTokenStart, myOffset, TokenType.WHITE_SPACE));
-		}
-		return myOffset;
-	}
 
 	protected boolean isAtComponentPathEnd(char currentChar, int offset, int bufferEnd, CharSequence buffer)
 	{
