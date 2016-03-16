@@ -1,0 +1,10 @@
+<d<% say 'hi'; %>
+<d<%= say 'hi'; %>
+<d<%== say 'hi'; %>
+<d
+    % say 'hi';
+<d
+    %= say 'hi';
+<d
+    %== say 'hi';
+
