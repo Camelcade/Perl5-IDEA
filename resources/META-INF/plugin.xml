@@ -49,7 +49,7 @@
         <li>Regular strings are now injectable with other languages, fixes #829</li>
         <li>A lot of optimizations.</li>
         <li>Fixed problem for ipr project settings, by @zhurs</li>
-        <li>Re-formatter now works on here-docs injected with other languages</li>
+        <li>Re-formatter now works on here-docs injected with other  languages</li>
         <li>Disabling injections in here-docs with interpolated entities is now configurable</li>
         <li>Fixed indentation when typing inside the comma sequence, fixes #845</li>
         <li>Fixed some bugs with pod parsing, fixes #901</li>

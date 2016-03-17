@@ -45,7 +45,8 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
 					HTML_MASON_BLOCK_CLOSER,
 					HTML_MASON_PERL_OPENER,
 					HTML_MASON_PERL_CLOSER,
-					HTML_MASON_LINE_OPENER
+					HTML_MASON_LINE_OPENER,
+					HTML_MASON_TEMPLATE_BLOCK_HTML
 			));
 
 	protected static final TokenSet FOLDABLE_TOKENS = TokenSet.create(
@@ -124,12 +125,14 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
 		return COMMENT_EXCLUDED_TOKENS;
 	}
 
+/*
 	@Nullable
 	@Override
 	protected IElementType getTemplateBlockElementType()
 	{
 		return HTML_MASON_TEMPLATE_BLOCK_HTML;
 	}
+*/
 
 	public static class HTMLMasonFoldingRegionsCollector extends HTMLMasonRecursiveVisitor
 	{

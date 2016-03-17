@@ -16,12 +16,10 @@
 
 package com.perl5.lang.mojolicious.idea.folding;
 
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 07.01.2016.
@@ -46,7 +44,9 @@ public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements Moj
 					MOJO_LINE_OPENER,
 
 					MOJO_BLOCK_OPENER_TAG,
-					MOJO_LINE_OPENER_TAG
+					MOJO_LINE_OPENER_TAG,
+
+					MOJO_TEMPLATE_BLOCK_HTML
 			));
 
 	@NotNull
@@ -56,10 +56,12 @@ public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements Moj
 		return COMMENT_EXCLUDED_TOKENS;
 	}
 
+/*
 	@Nullable
 	@Override
 	protected IElementType getTemplateBlockElementType()
 	{
 		return MOJO_TEMPLATE_BLOCK_HTML;
 	}
+*/
 }

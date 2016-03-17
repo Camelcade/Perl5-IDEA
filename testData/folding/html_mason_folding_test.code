@@ -26,8 +26,8 @@ $abs
 </fold></%attr>
 
 <&| "outer" &><fold text='/ filtered content /'>
-    <fold text='/ template /'>Hello
-     my</fold> <% $name %>
+    Hello
+     my <% $name %>
      is someone
 </fold></&>
 
@@ -94,6 +94,16 @@ say 'something';  # comment
 <% This is an example of an expression block. %>
 </fold></%text>
 
-
-
 </html</fold>>
+
+
+<div<fold text='...'>>
+% #comment
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</div</fold>>

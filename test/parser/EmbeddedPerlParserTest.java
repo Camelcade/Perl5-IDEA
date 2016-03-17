@@ -21,7 +21,7 @@ import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class EmbeddedPerlParserTest extends PerlParserTestBase
+public class EmbeddedPerlParserTest extends PerlMultiPsiParserTestBase
 {
 	public EmbeddedPerlParserTest()
 	{

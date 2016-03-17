@@ -18,3 +18,17 @@ some</fold>
 <%text><fold text='{text block}'>
 this is a text
 </fold></%text>
+
+<div<fold text='...'>>
+% #comment
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</div</fold>>

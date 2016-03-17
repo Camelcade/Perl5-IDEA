@@ -46,7 +46,8 @@ public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements 
 			TokenSet.create(
 					MASON_BLOCK_OPENER,
 					MASON_BLOCK_CLOSER,
-					MASON_LINE_OPENER
+					MASON_LINE_OPENER,
+					MASON_TEMPLATE_BLOCK_HTML
 			));
 
 	@NotNull
@@ -85,12 +86,14 @@ public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements 
 		return COMMENT_EXCLUDED_TOKENS;
 	}
 
+/*
 	@Nullable
 	@Override
 	protected IElementType getTemplateBlockElementType()
 	{
 		return MASON_TEMPLATE_BLOCK_HTML;
 	}
+*/
 
 	public static class MasonFoldingRegionsCollector extends Mason2RecursiveVisitor
 	{
