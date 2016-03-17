@@ -17,6 +17,7 @@
 package com.perl5.lang.mojolicious.idea.highlighter;
 
 import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.MojoliciousFileViewProvider;
@@ -32,7 +33,8 @@ public class MojoliciousTemplateLanguageErrorFilter extends TemplateLanguageErro
 			MOJO_BLOCK_EXPR_ESCAPED_OPENER,
 			MOJO_LINE_OPENER,
 			MOJO_LINE_EXPR_OPENER,
-			MOJO_LINE_EXPR_ESCAPED_OPENER
+			MOJO_LINE_EXPR_ESCAPED_OPENER,
+			TokenType.WHITE_SPACE
 	);
 
 	public MojoliciousTemplateLanguageErrorFilter()

@@ -17,6 +17,7 @@
 package com.perl5.lang.mason2.idea.highlighter;
 
 import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.Mason2TemplatingFileViewProvider;
 import com.perl5.lang.mason2.elementType.MasonElementTypes;
@@ -30,7 +31,8 @@ public class Mason2TemplateLanguageErrorFilter extends TemplateLanguageErrorFilt
 			MASON_BLOCK_OPENER,
 			MASON_PERL_OPENER,
 			MASON_CALL_OPENER,
-			MASON_LINE_OPENER
+			MASON_LINE_OPENER,
+			TokenType.WHITE_SPACE
 	);
 
 	public Mason2TemplateLanguageErrorFilter()

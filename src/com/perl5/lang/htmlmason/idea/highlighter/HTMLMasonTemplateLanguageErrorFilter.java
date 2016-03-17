@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.idea.highlighter;
 
 import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.htmlmason.HTMLMasonFileViewProvider;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
@@ -32,7 +33,8 @@ public class HTMLMasonTemplateLanguageErrorFilter extends TemplateLanguageErrorF
 			HTML_MASON_CALL_OPENER,
 			HTML_MASON_CALL_FILTERING_OPENER,
 			HTML_MASON_CALL_CLOSE_TAG_START,
-			HTML_MASON_LINE_OPENER
+			HTML_MASON_LINE_OPENER,
+			TokenType.WHITE_SPACE
 	);
 
 	public HTMLMasonTemplateLanguageErrorFilter()
