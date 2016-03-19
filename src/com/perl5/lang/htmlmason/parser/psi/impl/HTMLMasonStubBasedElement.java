@@ -29,14 +29,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonStubElementBase<T extends StubElement> extends PerlStubBasedPsiElementBase<T> implements HTMLMasonCompositeElement
+public abstract class HTMLMasonStubBasedElement<T extends StubElement> extends PerlStubBasedPsiElementBase<T> implements HTMLMasonCompositeElement
 {
-	public HTMLMasonStubElementBase(@NotNull T stub, @NotNull IStubElementType nodeType)
+	public HTMLMasonStubBasedElement(@NotNull T stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}
 
-	public HTMLMasonStubElementBase(@NotNull ASTNode node)
+	public HTMLMasonStubBasedElement(@NotNull ASTNode node)
 	{
 		super(node);
 	}

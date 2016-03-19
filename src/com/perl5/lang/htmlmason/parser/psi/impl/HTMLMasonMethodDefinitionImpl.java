@@ -17,16 +17,32 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class HTMLMasonMethodDefinitionImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonMethodDefinition
+public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElement<HTMLMasonMethodDefinitionStub> implements HTMLMasonMethodDefinition
 {
 	public HTMLMasonMethodDefinitionImpl(@NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	public HTMLMasonMethodDefinitionImpl(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
+
+	@Nullable
+	@Override
+	protected String getNameFromStub()
+	{
+		HTMLMasonMethodDefinitionStub stub = getStub();
+		return stub == null ? null : stub.getName();
 	}
 }

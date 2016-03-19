@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonArgsBlockImpl extends HTMLMasonStubElementBase<HTMLMasonArgsBlockStub> implements HTMLMasonArgsBlock
+public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonArgsBlockStub> implements HTMLMasonArgsBlock
 {
 	public HTMLMasonArgsBlockImpl(@NotNull HTMLMasonArgsBlockStub stub, @NotNull IStubElementType nodeType)
 	{

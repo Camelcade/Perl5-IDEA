@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi;
+package com.perl5.lang.htmlmason.parser.stubs.impl;
 
-import com.intellij.psi.StubBasedPsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
 
 /**
- * Created by hurricup on 09.03.2016.
+ * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonMethodDefinition extends StubBasedPsiElement<HTMLMasonMethodDefinitionStub>, HTMLMasonNamedElement
+public class HTMLMasonMethodDefinitionStubImpl extends HTMLMasonNamedElementStubBaseImpl<HTMLMasonMethodDefinition> implements HTMLMasonMethodDefinitionStub
 {
-
+	public HTMLMasonMethodDefinitionStubImpl(StubElement parent, IStubElementType elementType, String myName)
+	{
+		super(parent, elementType, myName);
+	}
 }

@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi;
+package com.perl5.lang.htmlmason.parser.stubs;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 
 /**
- * Created by hurricup on 09.03.2016.
+ * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonSubcomponentDefitnition extends StubBasedPsiElement<HTMLMasonSubcomponentDefinitionStub>, HTMLMasonNamedElement
+public interface HTMLMasonMethodDefinitionStub extends StubElement<HTMLMasonMethodDefinition>, HTMLMasonNamedElementStubBase
 {
 }
