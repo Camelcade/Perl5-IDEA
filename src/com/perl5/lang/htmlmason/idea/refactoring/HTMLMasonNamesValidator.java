@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi;
+package com.perl5.lang.htmlmason.idea.refactoring;
 
-import com.intellij.psi.PsiNameIdentifierOwner;
-
-import java.util.regex.Pattern;
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.idea.PerlNamesValidator;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonNamedElement extends HTMLMasonCompositeElement, PsiNameIdentifierOwner
+public class HTMLMasonNamesValidator extends PerlNamesValidator
 {
-	Pattern HTML_MASON_IDENTIFIER_PATTERN = Pattern.compile("[\\w._-]+");
-
+	@Override
+	public boolean isIdentifier(@NotNull String name, Project project)
+	{
+		return true;
+	}
 }

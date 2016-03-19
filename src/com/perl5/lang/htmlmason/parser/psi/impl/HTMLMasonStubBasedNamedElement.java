@@ -47,6 +47,9 @@ public abstract class HTMLMasonStubBasedNamedElement<T extends StubElement> exte
 	@Override
 	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
 	{
+		if (!HTML_MASON_IDENTIFIER_PATTERN.matcher(name).matches())
+			throw new IncorrectOperationException("Incorrect HTML::Mason identifier");
+
 		PsiElement nameIdentifier = getNameIdentifier();
 		if (nameIdentifier instanceof LeafPsiElement)
 			((LeafPsiElement) nameIdentifier).replaceWithText(name);

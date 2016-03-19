@@ -19,12 +19,14 @@ package com.perl5.lang.htmlmason;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.psi.PsiPerlNamedListExpr;
+import com.perl5.lang.perl.psi.*;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
+import static com.intellij.patterns.PlatformPatterns.psiFile;
 
 /**
  * Created by hurricup on 08.03.2016.
@@ -48,4 +50,22 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
 	PsiElementPattern.Capture<PsiElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN =
 			psiElement(IDENTIFIER).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER)
 			);
+
+	PsiElementPattern.Capture<PerlString> HTML_MASON_COMPONENT_CALEE =
+			psiElement(PerlString.class)
+					.inFile(psiFile(HTMLMasonFileImpl.class))
+					.withParent(psiElement(HTML_MASON_CALL_STATEMENT))
+					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(HTML_MASON_CALL_OPENER));
+
+
+	PsiElementPattern.Capture<PerlString> HTML_MASON_FLAGS_PARENT =
+			psiElement(PerlString.class)
+					.inFile(psiFile(HTMLMasonFileImpl.class))
+					.withParent(
+							psiElement(PsiPerlCommaSequenceExpr.class).withParent(psiElement(HTMLMasonFlagsStatement.class))
+					)
+					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(OPERATOR_COMMA_ARROW));
+
+
+
 }

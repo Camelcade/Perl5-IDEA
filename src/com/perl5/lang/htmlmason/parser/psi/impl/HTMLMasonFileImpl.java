@@ -542,6 +542,17 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		myBlocksCache = new MyBlocksCache(this);
 	}
 
+	public List<HTMLMasonCompositeElement> getSubComponents()
+	{
+		return myBlocksCache.getValue().get(HTMLMasonSubcomponentDefitnition.class);
+	}
+
+	// fixme handle stubs tree searching
+	public List<HTMLMasonCompositeElement> getMethods()
+	{
+		return myBlocksCache.getValue().get(HTMLMasonSubcomponentDefitnition.class);
+	}
+
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>
 	{
 		protected HTMLMasonFlagsStatement myResult = null;
@@ -600,12 +611,16 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			final List<HTMLMasonCompositeElement> argsResult = new ArrayList<HTMLMasonCompositeElement>();
 			final List<HTMLMasonCompositeElement> sharedResult = new ArrayList<HTMLMasonCompositeElement>();
 			final List<HTMLMasonCompositeElement> onceResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> methodsResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> subComponentsResult = new ArrayList<HTMLMasonCompositeElement>();
 
 			result.put(HTMLMasonOnceBlock.class, onceResult);
 			result.put(HTMLMasonSharedBlock.class, sharedResult);
 			result.put(HTMLMasonInitBlock.class, initResult);
 			result.put(HTMLMasonArgsBlock.class, argsResult);
 			result.put(HTMLMasonCleanupBlock.class, cleanupResult);
+			result.put(HTMLMasonMethodDefinition.class, methodsResult);
+			result.put(HTMLMasonSubcomponentDefitnition.class, subComponentsResult);
 
 			PsiTreeUtil.processElements(myFile, new PsiElementProcessor()
 			{
@@ -622,6 +637,10 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 						initResult.add((HTMLMasonCompositeElement) element);
 					else if (element instanceof HTMLMasonArgsBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
 						argsResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonMethodDefinition)
+						methodsResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonSubcomponentDefitnition)
+						subComponentsResult.add((HTMLMasonCompositeElement) element);
 
 					return true;
 				}
@@ -630,5 +649,4 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			return result;
 		}
 	}
-
 }

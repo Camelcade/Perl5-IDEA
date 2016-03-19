@@ -21,6 +21,10 @@ package com.perl5.lang.htmlmason;
  */
 public interface HTMLMasonSyntaxElements
 {
+	String COMPONENT_SLUG_SELF = "SELF";
+	String COMPONENT_SLUG_PARENT = "PARENT";
+	String COMPONENT_SLUG_REQUEST = "REQUEST";
+
 	String KEYWORD_BLOCK_OPENER = "<%";
 	String KEYWORD_BLOCK_CLOSER = "%>";
 

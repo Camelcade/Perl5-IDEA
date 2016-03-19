@@ -438,7 +438,7 @@
 
         <!-- HTML::Mason settings -->
         <lang.namesValidator language="HTML::Mason Templating Language"
-                             implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+                             implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
         <lang.findUsagesProvider language="HTML::Mason Templating Language"
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
         <quoteHandler fileType="HTML::Mason component"
@@ -493,6 +493,10 @@
         <annotator language="HTML::Mason Templating Language"
                    implementationClass="com.perl5.lang.htmlmason.idea.annotator.HTMLMasonAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
+        <psi.referenceContributor language="Perl5"
+                                  implementation="com.perl5.lang.htmlmason.parser.psi.references.HTMLMasonReferencesContributor"/>
+        <referencesSearch
+                implementation="com.perl5.lang.htmlmason.parser.psi.references.HTMLMasonReferencesSearcher"/>
 
         <!-- HTML::Mason settings end -->
 
