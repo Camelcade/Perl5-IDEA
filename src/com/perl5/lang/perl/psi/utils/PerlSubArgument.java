@@ -24,6 +24,9 @@ import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by hurricup on 01.06.2015.
@@ -44,13 +47,35 @@ public class PerlSubArgument
 		this.variableClass = variableClass;
 	}
 
-	public static PerlSubArgument deserialize(@NotNull StubInputStream dataStream) throws IOException
+	private static PerlSubArgument deserialize(@NotNull StubInputStream dataStream) throws IOException
 	{
 		PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
 		String argumentName = dataStream.readName().toString();
 		String variableClass = dataStream.readName().toString();
 		boolean isOptional = dataStream.readBoolean();
 		return new PerlSubArgument(argumentType, argumentName, variableClass, isOptional);
+	}
+
+	@NotNull
+	public static List<PerlSubArgument> deserializeList(@NotNull StubInputStream dataStream) throws IOException
+	{
+		int argumentsNumber = dataStream.readInt();
+
+		if (argumentsNumber > 0)
+		{
+
+			List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>(argumentsNumber);
+
+			for (int i = 0; i < argumentsNumber; i++)
+			{
+				arguments.add(deserialize(dataStream));
+			}
+			return arguments;
+		}
+		else
+		{
+			return Collections.emptyList();
+		}
 	}
 
 	public static PerlSubArgument getEmptyArgument()
@@ -61,6 +86,15 @@ public class PerlSubArgument
 				"",
 				false
 		);
+	}
+
+	public static void serializeList(@NotNull StubOutputStream dataStream, List<PerlSubArgument> arguments) throws IOException
+	{
+		dataStream.writeInt(arguments.size());
+		for (PerlSubArgument argument : arguments)
+		{
+			argument.serialize(dataStream);
+		}
 	}
 
 	public PerlVariableType getArgumentType()
@@ -93,7 +127,7 @@ public class PerlSubArgument
 		return StringUtil.isNotEmpty(argumentName) ? argumentType.getSigil() + argumentName : "undef";
 	}
 
-	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
+	private void serialize(@NotNull StubOutputStream dataStream) throws IOException
 	{
 		dataStream.writeName(argumentType.toString());
 		dataStream.writeName(argumentName);

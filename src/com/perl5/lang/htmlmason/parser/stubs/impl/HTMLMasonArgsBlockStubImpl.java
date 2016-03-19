@@ -14,34 +14,35 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi;
+package com.perl5.lang.htmlmason.parser.stubs.impl;
 
-import com.intellij.psi.StubBasedPsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubBase;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 /**
- * Created by hurricup on 08.03.2016.
+ * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonArgsBlock extends HTMLMasonCompositeElement, StubBasedPsiElement<HTMLMasonArgsBlockStub>, PerlElementTypes
+public class HTMLMasonArgsBlockStubImpl extends StubBase<HTMLMasonArgsBlock> implements HTMLMasonArgsBlockStub
 {
-	/**
-	 * Returns list of accepted arguments
-	 *
-	 * @return list of accepted arguments
-	 */
-	@NotNull
-	List<PerlSubArgument> getArgumentsList();
+	private final List<PerlSubArgument> myArguments;
 
-	/**
-	 * Returns compiled and parenthesised arguments list
-	 *
-	 * @return String with parenthesised arguments
-	 */
+	public HTMLMasonArgsBlockStubImpl(StubElement parent, IStubElementType elementType, List<PerlSubArgument> arguments)
+	{
+		super(parent, elementType);
+		myArguments = arguments;
+	}
+
 	@NotNull
-	String getArgumentsListAsString();
+	@Override
+	public List<PerlSubArgument> getArgumentsList()
+	{
+		return myArguments;
+	}
 }

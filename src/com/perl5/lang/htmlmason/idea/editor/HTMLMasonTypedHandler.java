@@ -47,7 +47,7 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLM
 			if (c == '>')
 			{
 				PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-				if (HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element))
+				if (HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element))
 				{
 					assert element != null;
 					String elementText = element.getText();

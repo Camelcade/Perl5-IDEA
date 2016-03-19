@@ -148,7 +148,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 		String packageName = getPackageName();
 		if (StringUtil.isEmpty(packageName))
 		{
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		else
 		{

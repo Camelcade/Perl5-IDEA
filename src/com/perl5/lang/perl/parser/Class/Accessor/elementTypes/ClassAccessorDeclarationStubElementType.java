@@ -38,7 +38,6 @@ import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -126,13 +125,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getSubName());
 
-		List<PerlSubArgument> arguments = stub.getSubArgumentsList();
-		dataStream.writeInt(arguments.size());
-		for (PerlSubArgument argument : arguments)
-		{
-			argument.serialize(dataStream);
-		}
-
+		PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
 		stub.getSubAnnotations().serialize(dataStream);
 
 		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice());
@@ -150,13 +143,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 		String functionName = dataStream.readName().toString();
 		int argumentsNumber = dataStream.readInt();
 
-		List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>(argumentsNumber);
-
-		for (int i = 0; i < argumentsNumber; i++)
-		{
-			arguments.add(PerlSubArgument.deserialize(dataStream));
-		}
-
+		List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
 		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
 
 		boolean followsBestPractice = dataStream.readBoolean();

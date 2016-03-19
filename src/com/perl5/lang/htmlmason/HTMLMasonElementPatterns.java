@@ -19,6 +19,7 @@ package com.perl5.lang.htmlmason;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.PsiPerlNamedListExpr;
@@ -28,7 +29,7 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes
+public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlElementTypes
 {
 	PsiElementPattern.Capture<PsiElement> ATTR_OR_ARG_ELEMENT_PATTERN = psiElement().andOr(
 			psiElement().inside(psiElement(HTML_MASON_ATTR_BLOCK)),
@@ -41,5 +42,10 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes
 							.withParent(
 									psiElement(PsiPerlNamedListExpr.class).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER))
 							)
+			);
+
+	// this is for corrupterd <%identifier
+	PsiElementPattern.Capture<PsiElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN =
+			psiElement(IDENTIFIER).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER)
 			);
 }

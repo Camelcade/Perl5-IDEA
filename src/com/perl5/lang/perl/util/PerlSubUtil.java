@@ -31,15 +31,14 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantsStu
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlSubImportsCollector;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -256,6 +255,67 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		PerlImportsCollector collector = new PerlSubImportsCollector('&', new HashMap<String, Set<String>>());
 		PerlUtil.getImportedNames(project, namespace, file, collector);
 		return collector.getResult();
+	}
+
+	/**
+	 * Builds arguments string for presentation
+	 *
+	 * @param subArguments list of arguments
+	 * @return stringified prototype
+	 */
+	public static String getArgumentsListAsString(List<PerlSubArgument> subArguments)
+	{
+		int argumentsNumber = subArguments.size();
+
+		List<String> argumentsList = new ArrayList<String>();
+		List<String> optionalAargumentsList = new ArrayList<String>();
+
+		for (PerlSubArgument argument : subArguments)
+		{
+			if (optionalAargumentsList.size() > 0 || argument.isOptional())
+			{
+				optionalAargumentsList.add(argument.toStringShort());
+			}
+			else
+			{
+				argumentsList.add(argument.toStringShort());
+			}
+
+			int compiledListSize = argumentsList.size() + optionalAargumentsList.size();
+			if (compiledListSize > 5 && argumentsNumber > compiledListSize)
+			{
+				if (optionalAargumentsList.size() > 0)
+				{
+					optionalAargumentsList.add("...");
+				}
+				else
+				{
+					argumentsList.add("...");
+				}
+				break;
+			}
+		}
+
+		if (argumentsList.size() == 0 && optionalAargumentsList.size() == 0)
+		{
+			return "";
+		}
+
+		String argumentListString = StringUtils.join(argumentsList, ", ");
+		String optionalArgumentsString = StringUtils.join(optionalAargumentsList, ", ");
+
+		if (argumentListString.isEmpty())
+		{
+			return "([" + optionalArgumentsString + "])";
+		}
+		if (optionalAargumentsList.isEmpty())
+		{
+			return "(" + argumentListString + ")";
+		}
+		else
+		{
+			return "(" + argumentListString + " [, " + optionalArgumentsString + "])";
+		}
 	}
 
 }

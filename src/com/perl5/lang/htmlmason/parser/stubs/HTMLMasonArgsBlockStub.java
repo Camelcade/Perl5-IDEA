@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.parser.psi;
+package com.perl5.lang.htmlmason.parser.stubs;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 /**
- * Created by hurricup on 08.03.2016.
+ * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonArgsBlock extends HTMLMasonCompositeElement, StubBasedPsiElement<HTMLMasonArgsBlockStub>, PerlElementTypes
+public interface HTMLMasonArgsBlockStub extends StubElement<HTMLMasonArgsBlock>
 {
 	/**
 	 * Returns list of accepted arguments
@@ -37,11 +36,4 @@ public interface HTMLMasonArgsBlock extends HTMLMasonCompositeElement, StubBased
 	@NotNull
 	List<PerlSubArgument> getArgumentsList();
 
-	/**
-	 * Returns compiled and parenthesised arguments list
-	 *
-	 * @return String with parenthesised arguments
-	 */
-	@NotNull
-	String getArgumentsListAsString();
 }

@@ -123,15 +123,8 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 
 	IElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonFlagsStatementElementType("HTML_MASON_FLAGS_STATEMENT");
 
-	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonElementType("HTML_MASON_ARGS_BLOCK")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new HTMLMasonArgsBlockImpl(node);
-		}
-	};
+	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonArgsBlockElementType("HTML_MASON_ARGS_BLOCK");
+
 	IElementType HTML_MASON_ONCE_BLOCK = new HTMLMasonElementType("HTML_MASON_ONCE_BLOCK")
 	{
 		@NotNull

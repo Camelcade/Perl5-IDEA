@@ -46,6 +46,6 @@ public class HTMLMasonSuperTypeHierarchyStructure extends HTMLMasonSubTypeHierar
 			result.add(parent);
 			return result;
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 }
