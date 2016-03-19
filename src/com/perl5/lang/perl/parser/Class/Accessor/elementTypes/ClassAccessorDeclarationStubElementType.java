@@ -141,7 +141,6 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 		String packageName = dataStream.readName().toString();
 		//noinspection ConstantConditions
 		String functionName = dataStream.readName().toString();
-		int argumentsNumber = dataStream.readInt();
 
 		List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
 		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
