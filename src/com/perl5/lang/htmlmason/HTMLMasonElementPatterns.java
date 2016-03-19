@@ -55,7 +55,10 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
 			psiElement(PerlString.class)
 					.inFile(psiFile(HTMLMasonFileImpl.class))
 					.withParent(psiElement(HTML_MASON_CALL_STATEMENT))
-					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(HTML_MASON_CALL_OPENER));
+					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement().andOr(
+							psiElement(HTML_MASON_CALL_OPENER),
+							psiElement(HTML_MASON_CALL_FILTERING_OPENER)
+					));
 
 
 	PsiElementPattern.Capture<PerlString> HTML_MASON_FLAGS_PARENT =

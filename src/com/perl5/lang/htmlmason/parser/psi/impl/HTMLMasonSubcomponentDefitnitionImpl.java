@@ -17,6 +17,8 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.search.LocalSearchScope;
+import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub;
@@ -46,4 +48,10 @@ public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedName
 		return stub == null ? null : stub.getName();
 	}
 
+	@NotNull
+	@Override
+	public SearchScope getUseScope()
+	{
+		return new LocalSearchScope(getContainingFile());
+	}
 }

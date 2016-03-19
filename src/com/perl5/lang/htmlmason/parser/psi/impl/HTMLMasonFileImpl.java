@@ -40,6 +40,7 @@ import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.*;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
@@ -542,15 +543,33 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		myBlocksCache = new MyBlocksCache(this);
 	}
 
-	public List<HTMLMasonCompositeElement> getSubComponents()
+	public List<HTMLMasonCompositeElement> getSubComponentsDefinitions()
 	{
 		return myBlocksCache.getValue().get(HTMLMasonSubcomponentDefitnition.class);
 	}
 
-	// fixme handle stubs tree searching
-	public List<HTMLMasonCompositeElement> getMethods()
+	public List<HTMLMasonCompositeElement> getMethodsDefinitions()
 	{
-		return myBlocksCache.getValue().get(HTMLMasonSubcomponentDefitnition.class);
+		StubElement stub = getStub();
+		if (stub != null)
+		{
+			final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
+			PerlPsiUtil.processElementsFromStubs(stub, new Processor<Stub>()
+			{
+				@Override
+				public boolean process(Stub stub)
+				{
+					if (stub instanceof HTMLMasonMethodDefinitionStub)
+					{
+						result.add(((HTMLMasonMethodDefinitionStub) stub).getPsi());
+					}
+					return true;
+				}
+			}, null);
+
+			return result;
+		}
+		return myBlocksCache.getValue().get(HTMLMasonMethodDefinition.class);
 	}
 
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>

@@ -67,8 +67,7 @@ public class HTMLMasonComponentReference extends PerlPolyVariantReference<PerlSt
 		}
 		else if (HTMLMasonNamedElement.HTML_MASON_IDENTIFIER_PATTERN.matcher(newElementName).matches())
 		{
-			TextRange range = getRangeInElement();
-			String newContent = newElementName + currentContent.substring(range.getLength());
+			String newContent = newElementName + currentContent.substring(getRangeInElement().getLength());
 			myElement.setStringContent(newContent);
 		}
 		return myElement;
@@ -121,7 +120,7 @@ public class HTMLMasonComponentReference extends PerlPolyVariantReference<PerlSt
 
 			if (newContent != null)
 			{
-				myElement.setStringContent(newContent);
+				myElement.setStringContent(newContent + currentContent.substring(getRangeInElement().getLength()));
 			}
 		}
 
@@ -155,7 +154,7 @@ public class HTMLMasonComponentReference extends PerlPolyVariantReference<PerlSt
 
 			if (file instanceof HTMLMasonFileImpl)
 			{
-				for (HTMLMasonCompositeElement subcomponentDefitnition : ((HTMLMasonFileImpl) file).getSubComponents())
+				for (HTMLMasonCompositeElement subcomponentDefitnition : ((HTMLMasonFileImpl) file).getSubComponentsDefinitions())
 				{
 					assert subcomponentDefitnition instanceof HTMLMasonSubcomponentDefitnition;
 					if (StringUtil.equals(((HTMLMasonSubcomponentDefitnition) subcomponentDefitnition).getName(), nameOrPath))

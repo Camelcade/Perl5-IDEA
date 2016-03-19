@@ -55,8 +55,10 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
 				if ((m = METHOD_CALL_PATTERN.matcher(content)).matches()) // method call
 				{
 					String fileOrSlug = m.group(1);
+					String methodName = m.group(2);
 
 					TextRange componentRange = new TextRange(range.getStartOffset(), range.getStartOffset() + fileOrSlug.length());
+					TextRange methodRange = new TextRange(range.getEndOffset() - methodName.length(), range.getEndOffset());
 
 					if (StringUtil.equals(fileOrSlug, COMPONENT_SLUG_SELF))
 					{
@@ -74,6 +76,8 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
 					{
 						result.add(new HTMLMasonComponentReference((PerlString) element, componentRange));
 					}
+
+					result.add(new HTMLMasonMethodReference((PerlString) element, methodRange));
 				}
 				else // it's subcomponent or other component
 				{
