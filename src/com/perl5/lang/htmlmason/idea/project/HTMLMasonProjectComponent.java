@@ -42,7 +42,7 @@ public class HTMLMasonProjectComponent implements ProjectComponent
 	@Override
 	public void projectClosed()
 	{
-
+		HTMLMasonSettings.getInstance(myProject).removeSubstitutors();
 	}
 
 	@Override
