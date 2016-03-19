@@ -61,8 +61,19 @@ public class PerlArrayUtil implements PerlElementTypes
 	 */
 	public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project, String canonicalName)
 	{
+		return getGlobalArrayDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+	}
+
+	public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
+	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlVariablesStubIndex.KEY_ARRAY, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariableDeclarationWrapper.class);
+		return StubIndex.getElements(
+				PerlVariablesStubIndex.KEY_ARRAY,
+				canonicalName,
+				project,
+				scope,
+				PerlVariableDeclarationWrapper.class
+		);
 	}
 
 	/**

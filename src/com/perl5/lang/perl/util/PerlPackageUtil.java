@@ -261,7 +261,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static Collection<String> getDefinedPackageNames(Project project)
 	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlNamespaceDefinitionStubIndex.KEY, project);
+		return StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
 	}
 
 	/**
