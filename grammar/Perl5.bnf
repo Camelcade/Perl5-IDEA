@@ -1080,7 +1080,7 @@ string_xq ::=
 
 private string_xq_parsed ::= QUOTE_TICK_OPEN [<<parseInterpolatedStringContent>>] QUOTE_TICK_CLOSE {pin=1}
 
-string_bare ::= <<parseAndWrapStringContent>>
+string_bare ::= <<parseAndWrapStringContent>>+
 
 string_sq ::=
   [[PACKAGE_CORE_IDENTIFIER] RESERVED_Q] <<parseSQString>>

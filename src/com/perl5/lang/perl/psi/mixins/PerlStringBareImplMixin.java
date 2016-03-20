@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -49,7 +50,14 @@ public class PerlStringBareImplMixin extends PerlCompositeElementImpl implements
 		PsiElement firstChild = getFirstChild();
 		if (firstChild instanceof LeafPsiElement)
 		{
-			((LeafPsiElement) firstChild).replaceWithText(newContent);
+			if (firstChild.equals(getLastChild()))
+			{
+				((LeafPsiElement) firstChild).replaceWithText(newContent);
+			}
+			else
+			{
+				throw new IncorrectOperationException("Complex bare strings replacement is not yet implemented");
+			}
 		}
 	}
 

@@ -30,7 +30,6 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ import java.util.List;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonComponentReference extends PerlPolyVariantReference<PerlString>
+public class HTMLMasonComponentReference extends HTMLMasonStringReference
 {
 	protected static final ResolveCache.PolyVariantResolver<HTMLMasonComponentReference> RESOLVER = new HTMLMasonComponentResolver();
 
@@ -63,17 +62,17 @@ public class HTMLMasonComponentReference extends PerlPolyVariantReference<PerlSt
 
 		if (results.length == 1 && results[0].getElement() instanceof HTMLMasonFileImpl)
 		{
-			handleFilePathChange((HTMLMasonFileImpl) results[0].getElement(), currentContent, newElementName);
+			return handleFilePathChange((HTMLMasonFileImpl) results[0].getElement(), currentContent, newElementName);
 		}
 		else if (HTMLMasonNamedElement.HTML_MASON_IDENTIFIER_PATTERN.matcher(newElementName).matches())
 		{
 			String newContent = newElementName + currentContent.substring(getRangeInElement().getLength());
-			myElement.setStringContent(newContent);
+			return setStringContent(newContent);
 		}
 		return myElement;
 	}
 
-	private void handleFilePathChange(HTMLMasonFileImpl target, String currentContent, String newFileName)
+	private PsiElement handleFilePathChange(HTMLMasonFileImpl target, String currentContent, String newFileName)
 	{
 		VirtualFile componentFileDir = target.getComponentVirtualFile().getParent();
 		VirtualFile componentRoot = null;
@@ -120,11 +119,12 @@ public class HTMLMasonComponentReference extends PerlPolyVariantReference<PerlSt
 
 			if (newContent != null)
 			{
-				myElement.setStringContent(newContent + currentContent.substring(getRangeInElement().getLength()));
+				setStringContent(newContent + currentContent.substring(getRangeInElement().getLength()));
 			}
 		}
-
+		return myElement;
 	}
+
 
 	@Override
 	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException

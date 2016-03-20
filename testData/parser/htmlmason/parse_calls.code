@@ -27,5 +27,12 @@
 <& /mktg/prods.html, 'dog', {a => 7, b => 8}, [2, 3, 4] &>
 <& /mktg/prods.html, {a => 7, b => 8}, [2, 3, 4] &>
 <& /mktg/prods.html, [2, 3, 4], {a => 7, b => 8} &>
+<& /mktg/prods.html:method1, [2, 3, 4], {a => 7, b => 8} &>
+<& "/mktg/prods.html:method1", [2, 3, 4], {a => 7, b => 8} &>
+<& '/mktg/prods.html:method1', [2, 3, 4], {a => 7, b => 8} &>
+
+<& SELF:method1, [2, 3, 4], {a => 7, b => 8} &>
+<& "SELF:method1", [2, 3, 4], {a => 7, b => 8} &>
+<& 'SELF:method1', [2, 3, 4], {a => 7, b => 8} &>
 
 </html>

@@ -767,6 +767,7 @@ public class PerlLexer extends PerlLexerGenerated
 		return myQStringLexer;
 	}
 
+
 	/**
 	 * Lazy getter for QStringLexer
 	 *

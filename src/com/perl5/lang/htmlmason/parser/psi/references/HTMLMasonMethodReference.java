@@ -28,13 +28,12 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonMethodReference extends PerlPolyVariantReference<PerlString>
+public class HTMLMasonMethodReference extends HTMLMasonStringReference
 {
 	protected static final ResolveCache.PolyVariantResolver<HTMLMasonMethodReference> RESOLVER = new HTMLMasonMethodResolver();
 
@@ -60,7 +59,7 @@ public class HTMLMasonMethodReference extends PerlPolyVariantReference<PerlStrin
 		{
 			TextRange range = getRangeInElement();
 			String newContent = currentContent.substring(0, range.getStartOffset() - contentRange.getStartOffset()) + newElementName;
-			myElement.setStringContent(newContent);
+			return setStringContent(newContent);
 		}
 		return myElement;
 	}

@@ -498,4 +498,30 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 				currentChar == '=' && offset + 1 < bufferEnd && buffer.charAt(offset + 1) == '>' ||    // arrow comma
 				currentChar == '&' && offset + 1 < bufferEnd && buffer.charAt(offset + 1) == '>';      // close marker
 	}
+
+	@Override
+	protected void processCallComponentPath(int startOffset, int endOffset)
+	{
+		if (endOffset > startOffset)
+		{
+			CharSequence buffer = getBuffer();
+			for (int colonOffset = startOffset; colonOffset < endOffset; colonOffset++)
+			{
+				if (buffer.charAt(colonOffset) == ':')
+				{
+					if (colonOffset > startOffset)
+					{
+						pushPreparsedToken(startOffset, colonOffset, STRING_IDENTIFIER);
+					}
+					pushPreparsedToken(colonOffset, colonOffset + 1, STRING_IDENTIFIER);
+					if (colonOffset + 1 < endOffset)
+					{
+						pushPreparsedToken(colonOffset + 1, endOffset, STRING_IDENTIFIER);
+					}
+					return;
+				}
+			}
+		}
+		super.processCallComponentPath(startOffset, endOffset);
+	}
 }

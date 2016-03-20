@@ -25,13 +25,12 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonComponentSimpleReference extends PerlPolyVariantReference<PerlString>
+public class HTMLMasonComponentSimpleReference extends HTMLMasonStringReference
 {
 	protected static final ResolveCache.PolyVariantResolver<HTMLMasonComponentSimpleReference> RESOLVER = new HTMLMasonSelfReferenceResolver();
 
