@@ -71,5 +71,8 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
 
 
 	PsiElementPattern.Capture<PerlStringContentElement> HTML_MASON_COMPONENT_COMPLETION =
-			psiElement(PerlStringContentElement.class).withParent(HTML_MASON_COMPONENT_CALEE);
+			psiElement(PerlStringContentElement.class).andOr(
+					psiElement().withParent(HTML_MASON_COMPONENT_CALEE),
+					psiElement().withParent(HTML_MASON_FLAGS_PARENT)
+			);
 }
