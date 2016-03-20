@@ -21,10 +21,15 @@ import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
+import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectLocator;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.HTMLMasonIcons;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
+import com.perl5.lang.htmlmason.HTMLMasonUtils;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.idea.editor.HTMLMasonHighlighter;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +40,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileType extends PerlFileType
+public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifiableByVirtualFile
 {
 	public static final HTMLMasonFileType INSTANCE = new HTMLMasonFileType();
 
@@ -89,6 +94,24 @@ public class HTMLMasonFileType extends PerlFileType
 	@Override
 	public boolean checkWarningsPragma()
 	{
+		return false;
+	}
+
+	@Override
+	public boolean isMyFileType(@NotNull VirtualFile file)
+	{
+		Project project = ProjectLocator.getInstance().guessProjectForFile(file);
+		// fixme we need to make cache here
+		if (project != null)
+		{
+			HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
+			if (settings != null &&
+					(StringUtil.equals(settings.autoHandlerName, file.getName()) || StringUtil.equals(settings.defaultHandlerName, file.getName())) &&
+					HTMLMasonUtils.getComponentRoot(project, file) != null)
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 }
