@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason;
+package com.perl5.lang.htmlmason.idea.completion;
 
-import com.perl5.PerlIcons;
-
-import javax.swing.*;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionType;
+import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 
 /**
- * Created by hurricup on 05.03.2016.
+ * Created by hurricup on 20.03.2016.
  */
-public class HTMLMasonIcons
+public class HTMLMasonCompletionContributor extends CompletionContributor implements HTMLMasonElementPatterns
 {
-	public static final Icon HTML_MASON_LANGUAGE_ICON = PerlIcons.PERL_LANGUAGE_ICON;
-
-	public static final Icon HTML_MASON_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
-	public static final Icon HTML_MASON_SUBCOMPONENT_ICON = PerlIcons.SUB_GUTTER_ICON;
-	public static final Icon HTML_MASON_METHOD_ICON = PerlIcons.METHOD_GUTTER_ICON;
-
+	public HTMLMasonCompletionContributor()
+	{
+		extend(
+				CompletionType.BASIC,
+				HTML_MASON_COMPONENT_COMPLETION,
+				new HTMLMasonComponentCompletionProvider()
+		);
+	}
 }

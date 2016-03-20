@@ -548,30 +548,6 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		return myBlocksCache.getValue().get(HTMLMasonSubcomponentDefitnition.class);
 	}
 
-	/**
-	 * Recursively looking for method in current or parent components
-	 *
-	 * @param name method name
-	 * @return method definition or null
-	 */
-	@Nullable
-	public HTMLMasonMethodDefinition findMethodDefinitionByNameInThisOrParents(String name)
-	{
-		return findMethodDefinitionByNameInThisOrParents(name, new THashSet<HTMLMasonFileImpl>());
-	}
-
-	/**
-	 * Recursively looking for method in parent components
-	 *
-	 * @param name method name
-	 * @return method definition or null
-	 */
-	@Nullable
-	public HTMLMasonMethodDefinition findMethodDefinitionByNameInParents(String name)
-	{
-		HTMLMasonFileImpl parentComponent = getParentComponent();
-		return parentComponent == null ? null : parentComponent.findMethodDefinitionByNameInThisOrParents(name);
-	}
 
 	/**
 	 * Recursively looking for method in child components
@@ -610,43 +586,73 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		}
 	}
 
+	/**
+	 * Recursively looking for method in parent components
+	 *
+	 * @param name method name
+	 * @return method definition or null
+	 */
 	@Nullable
-	protected HTMLMasonMethodDefinition findMethodDefinitionByNameInThisOrParents(String name, Set<HTMLMasonFileImpl> recursionSet)
+	public HTMLMasonMethodDefinition findMethodDefinitionByNameInParents(String name)
+	{
+		HTMLMasonFileImpl parentComponent = getParentComponent();
+		return parentComponent == null ? null : parentComponent.findMethodDefinitionByNameInThisOrParents(name);
+	}
+
+	/**
+	 * Recursively looking for method in current or parent components
+	 *
+	 * @param name method name
+	 * @return method definition or null
+	 */
+	@Nullable
+	public HTMLMasonMethodDefinition findMethodDefinitionByNameInThisOrParents(String name)
+	{
+		HTMLMasonMethodDefinitionSeeker seeker = new HTMLMasonMethodDefinitionSeeker(name);
+		processMethodDefinitionsInThisOrParents(seeker);
+		return seeker.getResult();
+	}
+
+	public boolean processMethodDefinitionsInThisOrParents(Processor<HTMLMasonMethodDefinition> processor)
+	{
+		return processMethodDefinitionsInThisOrParents(processor, new THashSet<HTMLMasonFileImpl>());
+	}
+
+
+	protected boolean processMethodDefinitionsInThisOrParents(Processor<HTMLMasonMethodDefinition> processor, Set<HTMLMasonFileImpl> recursionSet)
 	{
 		if (recursionSet.contains(this))
 		{
-			return null;
+			return false;
 		}
-
 		recursionSet.add(this);
 
-		HTMLMasonCompositeElement methodDefinition = getMethodDefinitionByName(name);
-		if (methodDefinition != null)
-		{
-			return (HTMLMasonMethodDefinition) methodDefinition;
-		}
+		if (!processMethodDefinitions(processor))
+			return false;
 
 		HTMLMasonFileImpl parentComponent = getParentComponent();
-		if (parentComponent != null)
-		{
-			return parentComponent.findMethodDefinitionByNameInThisOrParents(name, recursionSet);
-		}
 
-		return null;
+		return parentComponent != null && parentComponent.processMethodDefinitionsInThisOrParents(processor, recursionSet);
+
 	}
 
 	@Nullable
 	public HTMLMasonMethodDefinition getMethodDefinitionByName(String name)
 	{
+		HTMLMasonMethodDefinitionSeeker seeker = new HTMLMasonMethodDefinitionSeeker(name);
+		processMethodDefinitions(seeker);
+		return seeker.getResult();
+	}
+
+	protected boolean processMethodDefinitions(Processor<HTMLMasonMethodDefinition> processor)
+	{
 		for (HTMLMasonCompositeElement methodDefinition : getMethodsDefinitions())
 		{
 			assert methodDefinition instanceof HTMLMasonMethodDefinition : "got " + methodDefinition + " instead of method definition";
-			if (StringUtil.equals(name, ((HTMLMasonMethodDefinition) methodDefinition).getName()))
-			{
-				return (HTMLMasonMethodDefinition) methodDefinition;
-			}
+			if (!processor.process((HTMLMasonMethodDefinition) methodDefinition))
+				return false;
 		}
-		return null;
+		return true;
 	}
 
 	public List<HTMLMasonCompositeElement> getMethodsDefinitions()
@@ -769,4 +775,32 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			return result;
 		}
 	}
+
+	protected static class HTMLMasonMethodDefinitionSeeker implements Processor<HTMLMasonMethodDefinition>
+	{
+		private final String myName;
+		private HTMLMasonMethodDefinition myResult;
+
+		public HTMLMasonMethodDefinitionSeeker(String myName)
+		{
+			this.myName = myName;
+		}
+
+		@Override
+		public boolean process(HTMLMasonMethodDefinition htmlMasonMethodDefinition)
+		{
+			if (StringUtil.equals(myName, htmlMasonMethodDefinition.getName()))
+			{
+				myResult = htmlMasonMethodDefinition;
+				return false;
+			}
+			return true;
+		}
+
+		public HTMLMasonMethodDefinition getResult()
+		{
+			return myResult;
+		}
+	}
+
 }

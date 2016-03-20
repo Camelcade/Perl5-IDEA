@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  */
 public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider implements HTMLMasonSyntaxElements
 {
-	public static final Pattern METHOD_CALL_PATTERN = Pattern.compile("(.+?):([\\w._-]+)");
+	public static final Pattern METHOD_CALL_PATTERN = Pattern.compile("(.+?):([\\w._-]+\\s*)?");
 
 	@NotNull
 	@Override
@@ -56,6 +56,9 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
 				{
 					String fileOrSlug = m.group(1);
 					String methodName = m.group(2);
+
+					if (methodName == null)
+						methodName = "";
 
 					TextRange componentRange = new TextRange(range.getStartOffset(), range.getStartOffset() + fileOrSlug.length());
 					TextRange methodRange = new TextRange(range.getEndOffset() - methodName.length(), range.getEndOffset());
@@ -77,7 +80,10 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
 						result.add(new HTMLMasonComponentReference((PerlString) element, componentRange));
 					}
 
-					result.add(new HTMLMasonMethodReference((PerlString) element, methodRange));
+					if (methodRange.getLength() > 0)
+					{
+						result.add(new HTMLMasonMethodReference((PerlString) element, methodRange));
+					}
 				}
 				else // it's subcomponent or other component
 				{

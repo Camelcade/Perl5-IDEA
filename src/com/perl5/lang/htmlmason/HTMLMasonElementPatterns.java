@@ -70,5 +70,6 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
 					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(OPERATOR_COMMA_ARROW));
 
 
-
+	PsiElementPattern.Capture<PerlStringContentElement> HTML_MASON_COMPONENT_COMPLETION =
+			psiElement(PerlStringContentElement.class).withParent(HTML_MASON_COMPONENT_CALEE);
 }

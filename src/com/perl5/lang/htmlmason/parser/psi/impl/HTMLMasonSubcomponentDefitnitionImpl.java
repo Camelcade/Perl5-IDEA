@@ -20,10 +20,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.htmlmason.HTMLMasonIcons;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 /**
  * Created by hurricup on 09.03.2016.
@@ -53,5 +56,12 @@ public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedName
 	public SearchScope getUseScope()
 	{
 		return new LocalSearchScope(getContainingFile());
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon(int flags)
+	{
+		return HTMLMasonIcons.HTML_MASON_SUBCOMPONENT_ICON;
 	}
 }
