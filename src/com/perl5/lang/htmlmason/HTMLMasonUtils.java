@@ -19,8 +19,16 @@ package com.perl5.lang.htmlmason;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonParametrizedEntity;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 05.03.2016.
@@ -32,4 +40,22 @@ public class HTMLMasonUtils
 	{
 		return MasonCoreUtils.getComponentRoot(HTMLMasonSettings.getInstance(project), file);
 	}
+
+	public static List<PerlSubArgument> getArgumentsList(HTMLMasonParametrizedEntity entity)
+	{
+		List<PerlSubArgument> result = new ArrayList<PerlSubArgument>();
+
+		for (HTMLMasonCompositeElement argsBlock : entity.getArgsBlocks())
+		{
+			result.addAll(((HTMLMasonArgsBlock) argsBlock).getArgumentsList());
+		}
+
+		return result;
+	}
+
+	public static String getArgumentsListAsString(HTMLMasonParametrizedEntity entity)
+	{
+		return PerlSubUtil.getArgumentsListAsString(getArgumentsList(entity));
+	}
+
 }

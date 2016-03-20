@@ -37,11 +37,4 @@ public interface HTMLMasonArgsBlock extends HTMLMasonCompositeElement, StubBased
 	@NotNull
 	List<PerlSubArgument> getArgumentsList();
 
-	/**
-	 * Returns compiled and parenthesised arguments list
-	 *
-	 * @return String with parenthesised arguments
-	 */
-	@NotNull
-	String getArgumentsListAsString();
 }

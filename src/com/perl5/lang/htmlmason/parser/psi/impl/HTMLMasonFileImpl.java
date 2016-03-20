@@ -35,14 +35,14 @@ import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonUtils;
 import com.perl5.lang.htmlmason.MasonCoreUtils;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.*;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
+import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonNamedElementStubBaseImpl;
 import com.perl5.lang.perl.PerlScopes;
-import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -61,7 +61,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementTypes, PerlImplicitVariablesProvider, HTMLMasonArgsContainer
+public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 {
 	protected final List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 	protected int myMasonChangeCounter;
@@ -679,6 +679,39 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		return myBlocksCache.getValue().get(HTMLMasonMethodDefinition.class);
 	}
 
+	@NotNull
+	@Override
+	public List<HTMLMasonCompositeElement> getArgsBlocks()
+	{
+		StubElement stub = getStub();
+
+		//noinspection Duplicates in HTMLMasonStubBasedNamedElementImpl
+		if (stub != null)
+		{
+			final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
+
+			PerlPsiUtil.processElementsFromStubs(
+					stub,
+					new Processor<Stub>()
+					{
+						@Override
+						public boolean process(Stub stub)
+						{
+							if (stub instanceof HTMLMasonArgsBlockStub)
+							{
+								result.add(((HTMLMasonArgsBlockStub) stub).getPsi());
+							}
+							return true;
+						}
+					},
+					HTMLMasonNamedElementStubBaseImpl.class
+			);
+			return result;
+		}
+
+		return myBlocksCache.getValue().get(HTMLMasonArgsBlock.class);
+	}
+
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>
 	{
 		protected HTMLMasonFlagsStatement myResult = null;
@@ -802,5 +835,4 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			return myResult;
 		}
 	}
-
 }

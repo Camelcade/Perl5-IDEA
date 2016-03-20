@@ -22,12 +22,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
+import com.perl5.lang.htmlmason.HTMLMasonUtils;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonParametrizedEntity;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +61,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 				resultSet.addElement(LookupElementBuilder
 						.create(name)
 						.withIcon(element.getIcon(0))
+						.withTailText(HTMLMasonUtils.getArgumentsListAsString((HTMLMasonParametrizedEntity) element))
 				);
 			}
 		}
@@ -75,6 +80,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 					resultSet.addElement(LookupElementBuilder
 							.create(name)
 							.withIcon(element.getIcon(0))
+							.withTailText(HTMLMasonUtils.getArgumentsListAsString(element))
 					);
 				}
 				return true;
@@ -82,13 +88,13 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 		});
 	}
 
-	public static void fillWithRelativeSubcomponents(@NotNull CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component)
+	public static void fillWithRelativeSubcomponents(@NotNull CompletionResultSet resultSet, @NotNull Project project, @NotNull HTMLMasonFileImpl component)
 	{
 		VirtualFile containingFile = component.getComponentVirtualFile();
 		VirtualFile root = null;
 		if (containingFile != null && (root = containingFile.getParent()) != null)
 		{
-			VfsUtil.processFilesRecursively(root, new ComponentsFilesCollector("", root, resultSet));
+			VfsUtil.processFilesRecursively(root, new ComponentsFilesCollector("", root, resultSet, project));
 		}
 	}
 
@@ -98,7 +104,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 
 		for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles())
 		{
-			VfsUtil.processFilesRecursively(componentRoot, new ComponentsFilesCollector("/", componentRoot, resultSet));
+			VfsUtil.processFilesRecursively(componentRoot, new ComponentsFilesCollector("/", componentRoot, resultSet, project));
 		}
 	}
 
@@ -107,12 +113,14 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 		private final String myPrefix;
 		private final CompletionResultSet myResultSet;
 		private final VirtualFile myRoot;
+		private final PsiManager myManager;
 
-		public ComponentsFilesCollector(@NotNull String myPrefix, @NotNull VirtualFile root, @NotNull CompletionResultSet resultSet)
+		public ComponentsFilesCollector(@NotNull String myPrefix, @NotNull VirtualFile root, @NotNull CompletionResultSet resultSet, Project project)
 		{
 			this.myPrefix = myPrefix;
 			myResultSet = resultSet;
 			myRoot = root;
+			myManager = PsiManager.getInstance(project);
 		}
 
 		@Override
@@ -123,9 +131,18 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 				String relPath = VfsUtil.getRelativePath(virtualFile, myRoot);
 				if (StringUtil.isNotEmpty(relPath))
 				{
-					myResultSet.addElement(LookupElementBuilder
+					LookupElementBuilder newElement = LookupElementBuilder
 							.create(myPrefix + relPath)
-							.withIcon(HTMLMasonFileType.INSTANCE.getIcon()));
+							.withIcon(HTMLMasonFileType.INSTANCE.getIcon());
+
+					PsiFile file = myManager.findFile(virtualFile);
+
+					if (file instanceof HTMLMasonFileImpl)
+					{
+						newElement = newElement.withTailText(HTMLMasonUtils.getArgumentsListAsString((HTMLMasonParametrizedEntity) file));
+					}
+
+					myResultSet.addElement(newElement);
 				}
 			}
 			return true;

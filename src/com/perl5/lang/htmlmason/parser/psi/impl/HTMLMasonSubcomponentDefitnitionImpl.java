@@ -31,7 +31,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedNamedElement<HTMLMasonSubcomponentDefinitionStub> implements HTMLMasonSubcomponentDefitnition
+public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedNamedElementImpl<HTMLMasonSubcomponentDefinitionStub> implements HTMLMasonSubcomponentDefitnition
 {
 	public HTMLMasonSubcomponentDefitnitionImpl(@NotNull HTMLMasonSubcomponentDefinitionStub stub, @NotNull IStubElementType nodeType)
 	{

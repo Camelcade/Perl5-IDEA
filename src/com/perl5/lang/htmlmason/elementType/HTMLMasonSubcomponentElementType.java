@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.elementType;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
@@ -89,9 +90,8 @@ public class HTMLMasonSubcomponentElementType extends IStubElementType<HTMLMason
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		return false; // fixme used only locally, so not needed
-//		PsiElement psi = node.getPsi();
-//		return psi instanceof HTMLMasonSubcomponentDefitnition && StringUtil.isNotEmpty(((HTMLMasonSubcomponentDefitnition) psi).getName());
+		PsiElement psi = node.getPsi();
+		return psi instanceof HTMLMasonSubcomponentDefitnition && StringUtil.isNotEmpty(((HTMLMasonSubcomponentDefitnition) psi).getName());
 	}
 
 }

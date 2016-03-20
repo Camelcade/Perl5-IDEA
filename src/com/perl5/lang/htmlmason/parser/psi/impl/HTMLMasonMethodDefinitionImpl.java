@@ -29,7 +29,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElement<HTMLMasonMethodDefinitionStub> implements HTMLMasonMethodDefinition
+public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElementImpl<HTMLMasonMethodDefinitionStub> implements HTMLMasonMethodDefinition
 {
 	public HTMLMasonMethodDefinitionImpl(@NotNull ASTNode node)
 	{
@@ -55,4 +55,5 @@ public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElemen
 	{
 		return HTMLMasonIcons.HTML_MASON_METHOD_ICON;
 	}
+
 }

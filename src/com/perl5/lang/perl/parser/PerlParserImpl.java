@@ -29,8 +29,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 {
-/*
 
+/*
 	@Override
 	public ASTNode parse(IElementType t, PsiBuilder b)
 	{

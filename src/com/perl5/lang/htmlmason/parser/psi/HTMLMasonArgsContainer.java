@@ -17,6 +17,9 @@
 package com.perl5.lang.htmlmason.parser.psi;
 
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 13.03.2016.
@@ -24,4 +27,6 @@ import com.intellij.psi.PsiElement;
  */
 public interface HTMLMasonArgsContainer extends PsiElement
 {
+	@NotNull
+	List<HTMLMasonCompositeElement> getArgsBlocks();
 }

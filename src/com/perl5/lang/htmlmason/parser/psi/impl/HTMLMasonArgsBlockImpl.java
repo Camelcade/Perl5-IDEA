@@ -25,7 +25,6 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -86,12 +85,4 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
 
 		return result;
 	}
-
-	@NotNull
-	@Override
-	public String getArgumentsListAsString()
-	{
-		return PerlSubUtil.getArgumentsListAsString(getArgumentsList());
-	}
-
 }

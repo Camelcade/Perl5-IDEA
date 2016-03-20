@@ -75,7 +75,7 @@ public class HTMLMasonComponentCompletionProvider extends CompletionProvider<Com
 						HTMLMasonCompletionUtil.fillWithSubcomponents(finalResultSet, (HTMLMasonFileImpl) file);
 						if (!StringUtil.startsWith(fullPrefix, "/"))
 						{
-							HTMLMasonCompletionUtil.fillWithRelativeSubcomponents(finalResultSet, (HTMLMasonFileImpl) file);
+							HTMLMasonCompletionUtil.fillWithRelativeSubcomponents(finalResultSet, project, (HTMLMasonFileImpl) file);
 						}
 						else
 						{

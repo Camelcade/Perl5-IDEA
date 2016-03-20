@@ -20,26 +20,37 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.Processor;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonBlock;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
+import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonNamedElementStubBaseImpl;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by hurricup on 19.03.2016.
  */
-public abstract class HTMLMasonStubBasedNamedElement<T extends StubElement> extends HTMLMasonStubBasedElement<T> implements HTMLMasonNamedElement
+public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> extends HTMLMasonStubBasedElement<T> implements HTMLMasonNamedElement
 {
-	public HTMLMasonStubBasedNamedElement(@NotNull T stub, @NotNull IStubElementType nodeType)
+	public HTMLMasonStubBasedNamedElementImpl(@NotNull T stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}
 
-	public HTMLMasonStubBasedNamedElement(@NotNull ASTNode node)
+	public HTMLMasonStubBasedNamedElementImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
@@ -100,6 +111,43 @@ public abstract class HTMLMasonStubBasedNamedElement<T extends StubElement> exte
 		return nameIdentifier == null
 				? super.getTextOffset()
 				: getNameIdentifier().getTextOffset();
+	}
+
+
+	@NotNull
+	public List<HTMLMasonCompositeElement> getArgsBlocks()
+	{
+		StubElement stub = getStub();
+
+		//noinspection Duplicates duplicates file implementation
+		if (stub != null)
+		{
+			final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
+
+			PerlPsiUtil.processElementsFromStubs(
+					stub,
+					new Processor<Stub>()
+					{
+						@Override
+						public boolean process(Stub stub)
+						{
+							if (stub instanceof HTMLMasonArgsBlockStub)
+							{
+								result.add(((HTMLMasonArgsBlockStub) stub).getPsi());
+							}
+							return true;
+						}
+					},
+					HTMLMasonNamedElementStubBaseImpl.class
+			);
+			return result;
+		}
+
+		HTMLMasonBlock block = PsiTreeUtil.getChildOfType(this, HTMLMasonBlock.class);
+		if (block != null)
+			return block.getArgsBlocks();
+
+		return Collections.emptyList();
 	}
 
 }
