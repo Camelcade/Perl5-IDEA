@@ -24,17 +24,12 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 /**
  * Created by hurricup on 19.03.2016.
@@ -88,7 +83,7 @@ public class HTMLMasonMethodReference extends PerlPolyVariantReference<PerlStrin
 					PsiElement startComponent = componentReference.resolve();
 					if (startComponent instanceof HTMLMasonFileImpl)
 					{
-						HTMLMasonMethodDefinition methodDefinition = findMethod((HTMLMasonFileImpl) startComponent, methodName, new THashSet<HTMLMasonFileImpl>());
+						HTMLMasonMethodDefinition methodDefinition = ((HTMLMasonFileImpl) startComponent).findMethodDefinitionByNameInThisOrParents(methodName);
 						if (methodDefinition != null)
 						{
 							return new ResolveResult[]{new PsiElementResolveResult(methodDefinition)};
@@ -97,34 +92,6 @@ public class HTMLMasonMethodReference extends PerlPolyVariantReference<PerlStrin
 				}
 			}
 			return ResolveResult.EMPTY_ARRAY;
-		}
-
-		@Nullable
-		protected HTMLMasonMethodDefinition findMethod(HTMLMasonFileImpl component, String methodName, Set<HTMLMasonFileImpl> recursionSet)
-		{
-			if (recursionSet.contains(component))
-			{
-				return null;
-			}
-
-			recursionSet.add(component);
-
-			for (HTMLMasonCompositeElement methodDefinition : component.getMethodsDefinitions())
-			{
-				assert methodDefinition instanceof HTMLMasonMethodDefinition : "got " + methodDefinition + " instead of method definition";
-				if (StringUtil.equals(methodName, ((HTMLMasonMethodDefinition) methodDefinition).getName()))
-				{
-					return (HTMLMasonMethodDefinition) methodDefinition;
-				}
-			}
-
-			HTMLMasonFileImpl parentComponent = component.getParentComponent();
-			if (parentComponent != null)
-			{
-				return findMethod(parentComponent, methodName, recursionSet);
-			}
-
-			return null;
 		}
 	}
 }

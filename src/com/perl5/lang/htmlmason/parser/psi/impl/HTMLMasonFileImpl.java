@@ -548,6 +548,107 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		return myBlocksCache.getValue().get(HTMLMasonSubcomponentDefitnition.class);
 	}
 
+	/**
+	 * Recursively looking for method in current or parent components
+	 *
+	 * @param name method name
+	 * @return method definition or null
+	 */
+	@Nullable
+	public HTMLMasonMethodDefinition findMethodDefinitionByNameInThisOrParents(String name)
+	{
+		return findMethodDefinitionByNameInThisOrParents(name, new THashSet<HTMLMasonFileImpl>());
+	}
+
+	/**
+	 * Recursively looking for method in parent components
+	 *
+	 * @param name method name
+	 * @return method definition or null
+	 */
+	@Nullable
+	public HTMLMasonMethodDefinition findMethodDefinitionByNameInParents(String name)
+	{
+		HTMLMasonFileImpl parentComponent = getParentComponent();
+		return parentComponent == null ? null : parentComponent.findMethodDefinitionByNameInThisOrParents(name);
+	}
+
+	/**
+	 * Recursively looking for method in child components
+	 *
+	 * @param name method name
+	 * @return list of child components
+	 */
+	@NotNull
+	public List<HTMLMasonMethodDefinition> findMethodDefinitionByNameInChildComponents(String name)
+	{
+		List<HTMLMasonMethodDefinition> result = new ArrayList<HTMLMasonMethodDefinition>();
+		Set<HTMLMasonFileImpl> recursionSet = new THashSet<HTMLMasonFileImpl>();
+
+		collectMethodDefinitionByNameInChildComponents(name, result, recursionSet);
+
+		return result;
+	}
+
+	protected void collectMethodDefinitionByNameInChildComponents(String name, List<HTMLMasonMethodDefinition> result, Set<HTMLMasonFileImpl> recursionSet)
+	{
+		for (HTMLMasonFileImpl childComponent : getChildComponents())
+		{
+			if (!recursionSet.contains(childComponent))
+			{
+				recursionSet.add(childComponent);
+				HTMLMasonMethodDefinition methodDefinition = childComponent.getMethodDefinitionByName(name);
+				if (methodDefinition != null)
+				{
+					result.add(methodDefinition);
+				}
+				else
+				{
+					childComponent.collectMethodDefinitionByNameInChildComponents(name, result, recursionSet);
+				}
+			}
+		}
+	}
+
+	@Nullable
+	protected HTMLMasonMethodDefinition findMethodDefinitionByNameInThisOrParents(String name, Set<HTMLMasonFileImpl> recursionSet)
+	{
+		if (recursionSet.contains(this))
+		{
+			return null;
+		}
+
+		recursionSet.add(this);
+
+		HTMLMasonCompositeElement methodDefinition = getMethodDefinitionByName(name);
+		if (methodDefinition != null)
+		{
+			return (HTMLMasonMethodDefinition) methodDefinition;
+		}
+
+		HTMLMasonFileImpl parentComponent = getParentComponent();
+		if (parentComponent != null)
+		{
+			return parentComponent.findMethodDefinitionByNameInThisOrParents(name, recursionSet);
+		}
+
+		return null;
+	}
+
+	@Nullable
+	public HTMLMasonMethodDefinition getMethodDefinitionByName(String name)
+	{
+		for (HTMLMasonCompositeElement methodDefinition : getMethodsDefinitions())
+		{
+			assert methodDefinition instanceof HTMLMasonMethodDefinition : "got " + methodDefinition + " instead of method definition";
+			if (StringUtil.equals(name, ((HTMLMasonMethodDefinition) methodDefinition).getName()))
+			{
+				return (HTMLMasonMethodDefinition) methodDefinition;
+			}
+		}
+		return null;
+	}
+
 	public List<HTMLMasonCompositeElement> getMethodsDefinitions()
 	{
 		StubElement stub = getStub();
