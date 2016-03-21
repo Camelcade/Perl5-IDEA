@@ -31,7 +31,10 @@ public interface EmbeddedPerlPatterns extends PerlElementTypes
 	PsiElementPattern.Capture<PsiElement> BROKEN_OPEN_MARKER_PATTERN =
 			psiElement(QUESTION).withParent(
 					psiElement(PsiErrorElement.class).afterSibling(
-							psiElement(PsiErrorElement.class).withChild(psiElement(LEFT_ANGLE))
+							psiElement(PsiErrorElement.class).andOr(
+									psiElement().withChild(psiElement(LEFT_ANGLE)),
+									psiElement().withChild(psiElement(OPERATOR_LT_NUMERIC))
+							)
 					)
 			);
 }
