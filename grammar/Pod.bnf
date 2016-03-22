@@ -30,15 +30,171 @@ limitations under the License.
 
     tokens=[
         POD_NEWLINE
-        POD_TAG
-        POD_TEXT
+
+        POD_POD
+
+        POD_HEAD1
+        POD_HEAD2
+        POD_HEAD3
+        POD_HEAD4
+
+        POD_OVER
+        POD_ITEM
+        POD_BACK
+
+        POD_BEGIN
+        POD_BLOCK
+        POD_END
+
+        POD_FOR
+        POD_ENCODING
+
+        POD_CUT
+
         POD_CODE
+
+		POD_ANGLE_LEFT
+		POD_ANGLE_RIGHT
+		POD_PAREN_LEFT
+		POD_PAREN_RIGHT
+		POD_BRACKET_LEFT
+		POD_BRACKET_RIGHT
+
+		POD_QUOTE_OPEN_DOUBLE
+		POD_QUOTE_CLOSE_DOUBLE
+		POD_QUOTE_OPEN_SINGLE
+		POD_QUOTE_CLOSE_SINGLE
+		POD_QUOTE_OPEN_TICK
+		POD_QUOTE_CLOSE_TICK
+
+		POD_I	// italic
+		POD_B	// bold
+		POD_C	// code
+		POD_L	// hyperlink
+		POD_E	// escape
+		POD_F	// filename
+		POD_S	// nbsp
+		POD_X	// index
+		POD_Z	// null
+
+		POD_IDENTIFIER
+		POD_NUMBER
+
+		POD_DIV
+		POD_ESCAPE
+		POD_ASTERISK
+		POD_PIPE
+
     ]
 
 }
 
 
 pod_file ::= pod_section*
-pod_section ::= !<<eof>> [POD_TAG] pod_item *
-private pod_item ::= POD_TEXT | POD_NEWLINE | POD_CODE
+private pod_section ::= !<<eof>> pod_file_item *
 
+private pod_file_item ::=
+	head1_block
+	| head2_block
+	| head3_block
+	| head4_block
+	| any_level_item
+
+private any_level_item ::=
+	pod_block
+	| over_block
+	| begin_block
+	| for_block
+	| encoding_block
+	| cut_block
+	| POD_CODE
+	| POD_NEWLINE
+	| pod_term
+
+pod_block ::= POD_POD
+
+head1_block ::= POD_HEAD1 pod_term* [POD_NEWLINE head1_block_content] {pin=1 recoverWhile=recover_head1_block}
+head1_block_content ::= head1_block_item*
+private head1_block_item ::= head2_block | head3_block | head4_block | any_level_item
+private recover_head1_block ::= !(POD_HEAD1)
+
+head2_block ::= POD_HEAD2 pod_term* [POD_NEWLINE head2_block_content] {pin=1 recoverWhile=recover_head2_block}
+head2_block_content ::= head2_block_item*
+private head2_block_item ::= head3_block | head4_block | any_level_item
+private recover_head2_block ::= !(POD_HEAD1|POD_HEAD2)
+
+head3_block ::= POD_HEAD3 pod_term* [POD_NEWLINE head3_block_content] {pin=1 recoverWhile=recover_head3_block}
+head3_block_content ::= head3_block_item*
+private head3_block_item ::= head4_block | any_level_item
+private recover_head3_block ::= !(POD_HEAD1|POD_HEAD2|POD_HEAD3)
+
+head4_block ::= POD_HEAD4 pod_term* [POD_NEWLINE head4_block_content] {pin=1 recoverWhile=recover_head4_block}
+head4_block_content ::= head4_block_item*
+private head4_block_item ::= any_level_item
+private recover_head4_block ::= !(POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4)
+
+over_block ::= over_block_opener  over_block_content over_block_closer {pin=1}
+private over_block_opener ::= POD_OVER [POD_NUMBER] POD_NEWLINE {pin=1}
+private over_block_closer ::= POD_BACK POD_NEWLINE {pin=1}
+over_block_content ::= over_block_item*
+private over_block_item ::=
+ 	item_block
+	| any_level_item
+item_block ::= POD_ITEM pod_term * [POD_NEWLINE item_block_content ] {pin=1}
+item_block_content ::= any_level_item *
+
+begin_block ::= begin_block_opener begin_block_content begin_block_closer  {pin=1}
+private begin_block_opener ::= POD_BEGIN pod_term * POD_NEWLINE {pin=1}
+private begin_block_closer ::= POD_END pod_term * POD_NEWLINE {pin=1}
+begin_block_content ::= POD_BLOCK ?
+
+for_block ::= POD_FOR pod_term* POD_NEWLINE {pin=1}
+encoding_block ::= POD_ENCODING pod_term* POD_NEWLINE {pin=1}
+cut_block ::= POD_CUT pod_term* POD_NEWLINE {pin=1}
+
+private pod_term ::=
+	 pod_format
+	| pod_string
+	| POD_IDENTIFIER
+	| POD_NUMBER
+
+	| POD_DIV
+	| POD_ESCAPE
+	| POD_ASTERISK
+	| POD_PIPE
+
+	| POD_ANGLE_LEFT
+	| POD_ANGLE_RIGHT
+	| POD_PAREN_LEFT
+	| POD_PAREN_RIGHT
+	| POD_BRACKET_LEFT
+	| POD_BRACKET_RIGHT
+
+pod_string ::= pod_string_dq | pod_string_sq | pod_string_xq
+
+private pod_string_dq ::= POD_QUOTE_OPEN_DOUBLE pod_term* POD_QUOTE_CLOSE_DOUBLE {pin=1}
+private pod_string_sq ::= POD_QUOTE_OPEN_SINGLE pod_term* POD_QUOTE_CLOSE_SINGLE {pin=1}
+private pod_string_xq ::= POD_QUOTE_OPEN_TICK pod_term* POD_QUOTE_CLOSE_TICK {pin=1}
+
+private pod_format ::=
+ 	pod_format_italic
+ 	| pod_format_bold
+ 	| pod_format_code
+ 	| pod_format_link
+ 	| pod_format_escape
+ 	| pod_format_file
+ 	| pod_format_nbsp
+ 	| pod_format_index
+ 	| pod_format_null
+
+pod_format_italic ::= POD_I pod_term_param {pin=1}
+pod_format_bold ::= POD_B pod_term_param {pin=1}
+pod_format_code ::= POD_C pod_term_param {pin=1}
+pod_format_link ::= POD_L pod_term_param {pin=1}
+pod_format_escape ::= POD_E pod_term_param {pin=1}
+pod_format_file ::= POD_F pod_term_param {pin=1}
+pod_format_nbsp ::= POD_S pod_term_param {pin=1}
+pod_format_index ::= POD_X pod_term_param {pin=1}
+pod_format_null ::= POD_Z pod_term_param {pin=1}
+
+private pod_term_param ::= POD_ANGLE_LEFT pod_term* POD_ANGLE_RIGHT {pin=1}
