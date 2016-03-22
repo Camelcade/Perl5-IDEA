@@ -43,7 +43,7 @@ limitations under the License.
         POD_BACK
 
         POD_BEGIN
-        POD_BLOCK
+        POD_FORMATTED_BLOCK
         POD_END
 
         POD_FOR
@@ -90,15 +90,16 @@ limitations under the License.
 }
 
 
-pod_file ::= pod_section*
-private pod_section ::= !<<eof>> pod_file_item *
+pod_file ::= pod_file_item *
 
-private pod_file_item ::=
+private pod_file_item ::= !<<eof>> {
 	head1_block
 	| head2_block
 	| head3_block
 	| head4_block
 	| any_level_item
+	| cut_block
+}
 
 private any_level_item ::=
 	pod_block
@@ -106,7 +107,6 @@ private any_level_item ::=
 	| begin_block
 	| for_block
 	| encoding_block
-	| cut_block
 	| POD_CODE
 	| POD_NEWLINE
 	| pod_term
@@ -146,7 +146,7 @@ item_block_content ::= any_level_item *
 begin_block ::= begin_block_opener begin_block_content begin_block_closer  {pin=1}
 private begin_block_opener ::= POD_BEGIN pod_term * POD_NEWLINE {pin=1}
 private begin_block_closer ::= POD_END pod_term * POD_NEWLINE {pin=1}
-begin_block_content ::= POD_BLOCK ?
+begin_block_content ::= POD_FORMATTED_BLOCK ?
 
 for_block ::= POD_FOR pod_term* POD_NEWLINE {pin=1}
 encoding_block ::= POD_ENCODING pod_term* POD_NEWLINE {pin=1}
