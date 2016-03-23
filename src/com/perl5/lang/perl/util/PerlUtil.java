@@ -91,6 +91,7 @@ public class PerlUtil
 	{
 		final Set<String> result = new THashSet<String>();
 
+		// safe for getElements
 		StubIndex.getInstance().processAllKeys(key, project, new
 				PerlInternalIndexKeysProcessor()
 				{
