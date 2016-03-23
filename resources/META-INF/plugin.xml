@@ -32,48 +32,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+     <p>Fixes for 1.4 release:
       <ul>
-        <li>New features<ul>
-            <li>HTML::Mason support
-            <ul>
-                <li>Parsing of HTML::Mason files</li>
-                <li>Configuration for autohandler and dhandler names, component roots, global variables, component file extensions and custom tags</li>
-                <li>Autocompletion and highlighting of syntax elements</li>
-                <li>Proper component variables resolution according to the compiled component structure</li>
-                <li>Components hierarchy resolving</li>
-                <li>Subcomponents and methods resolving from Mason invocations</li>
-                <li>Navigation, completion and refactoring for components, methods and subcomponents</li>
-            </ul>
-            </li>
-            <li>Labels resolution, navigation, refactoring and completion, fixes #138 (<b>NB: deprecated usages not handled and won't ever be</b>)</li>
-            <li>Undeclared and unresolved labels inspections</li>
-            <li>Auto-completion for here-doc openers, fixes #874</li>
-            <li>Sequential here-docs support, fixes #163</li>
-            <li>Backref here-docs support</li>
-            <li>n regex modifier support from perl 5.22, fixes #865</li>
-            <li>Regular strings are now manually injectable with other languages, fixes #829</li>
-            <li>Re-formatter now works on here-docs injected with other  languages</li>
-            <li>Disabling injections in here-docs with interpolated entities is now configurable</li>
-        </ul></li>
-
-        <li>Fixes and optimizations<ul>
-            <li>A lot of overall optimizations</li>
-            <li>Optimized go to Symbol and Class actions</li>
-            <li>Improved completion of package names: added version strings and package suggestion for definition, fixes #432</li>
-            <li>Improved labels parsing, so now you may use any word for it, except <code>sub</code></li>
-            <li>Fixed possible NPE on here-doc typing in the end of file</li>
-            <li>Fixed possible exception on #@returns annotation auto-completion</li>
-            <li>Improved utf identifiers and packages parsing</li>
-            <li>Fixed parsing for 0X.. hex and 0B.. numbers</li>
-            <li>Fixed problem for ipr project settings, by @zhurs</li>
-            <li>Fixed indentation when typing inside the comma sequence, fixes #845</li>
-            <li>Fixed some bugs with pod parsing, fixes #901</li>
-            <li>Fixed bug with statement modifiers formatting if they are without parentheses</li>
-            <li>Templating languages:<ul>
-            <li>Fixed problem with HTML-related errors at perl block start</li>
-            <li>Spaces and newlines around perl code are not part of surrounding template anymore and may be consumed on re-formatting</li>
-            </ul></li>
-        </ul></li>
+      <li>Disabled deprecation strikeout in packages auto-completion. Speeds things up and prevents hanging of IDEA 2016</li>
+      <li>Fixed package completion in variable definition expresison</li>
       </ul>
       </p>
 

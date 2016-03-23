@@ -290,40 +290,29 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 				HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
 
 				// indexed children
-				StubIndex.getInstance().processAllKeys(
-						HTMLMasonFlagsStubIndex.KEY,
-						new Processor<String>()
+				for (String parentPath : StubIndex.getInstance().getAllKeys(HTMLMasonFlagsStubIndex.KEY, project))
+				{
+					boolean isEquals = StringUtil.equals(relativePath, parentPath);
+					boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VfsUtil.VFS_SEPARATOR_CHAR;
+
+					for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
+							HTMLMasonFlagsStubIndex.KEY,
+							parentPath,
+							project,
+							scope,
+							HTMLMasonFlagsStatement.class
+					))
+					{
+						PsiFile file = statement.getContainingFile();
+						if (file instanceof HTMLMasonFileImpl)
 						{
-							@Override
-							public boolean process(String parentPath)
+							if (isEquals || isRelative && currentFile.equals(((HTMLMasonFileImpl) file).getParentComponent()))
 							{
-								boolean isEquals = StringUtil.equals(relativePath, parentPath);
-								boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VfsUtil.VFS_SEPARATOR_CHAR;
-
-								for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
-										HTMLMasonFlagsStubIndex.KEY,
-										parentPath,
-										project,
-										scope,
-										HTMLMasonFlagsStatement.class
-								))
-								{
-									PsiFile file = statement.getContainingFile();
-									if (file instanceof HTMLMasonFileImpl)
-									{
-										if (isEquals || isRelative && currentFile.equals(((HTMLMasonFileImpl) file).getParentComponent()))
-										{
-											result.add((HTMLMasonFileImpl) file);
-										}
-									}
-								}
-
-								return true;
+								result.add((HTMLMasonFileImpl) file);
 							}
-						},
-						scope,
-						null
-				);
+						}
+					}
+				}
 
 				// implicit autohandled children
 				if (StringUtil.equals(containingFile.getName(), settings.autoHandlerName))
