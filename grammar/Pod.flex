@@ -38,32 +38,32 @@ import org.jetbrains.annotations.NotNull;
 
 NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
+HARD_NEW_LINE = {NEW_LINE}{WHITE_SPACE}*{NEW_LINE}
+
 
 NONSPACE = [^ \t\f\r\n]+
 
-%state LEX_NEWLINE, LEX_HARD_NEWLINE
+%state LEX_NEWLINE
 %%
 
 <LEX_NEWLINE>{
-	"=pod"	{yybegin(LEX_HARD_NEWLINE); return POD_POD;}
-	"=head1"	{yybegin(LEX_HARD_NEWLINE);return POD_HEAD1;}
-	"=head2"	{yybegin(LEX_HARD_NEWLINE);return POD_HEAD2;}
-	"=head3"	{yybegin(LEX_HARD_NEWLINE);return POD_HEAD3;}
-	"=head4"	{yybegin(LEX_HARD_NEWLINE);return POD_HEAD4;}
-	"=over"	{yybegin(LEX_HARD_NEWLINE);return POD_OVER;}
-	"=item"	{yybegin(LEX_HARD_NEWLINE);return POD_ITEM;}
-	"=back"	{yybegin(LEX_HARD_NEWLINE);return POD_BACK;}
-	"=begin"	{yybegin(LEX_HARD_NEWLINE);return POD_BEGIN;}
-	"=end"	{yybegin(LEX_HARD_NEWLINE);return POD_END;}
-	"=for"	{yybegin(LEX_HARD_NEWLINE);return POD_FOR;}
-	"=encoding"	{yybegin(LEX_HARD_NEWLINE);return POD_ENCODING;}
-	"=cut"	{yybegin(LEX_HARD_NEWLINE);return POD_CUT;}
+	"=pod"	{ return POD_POD;}
+	"=head1"	{return POD_HEAD1;}
+	"=head2"	{return POD_HEAD2;}
+	"=head3"	{return POD_HEAD3;}
+	"=head4"	{return POD_HEAD4;}
+	"=over"	{return POD_OVER;}
+	"=item"	{return POD_ITEM;}
+	"=back"	{return POD_BACK;}
+	"=begin"	{return POD_BEGIN;}
+	"=end"	{return POD_END;}
+	"=for"	{return POD_FOR;}
+	"=encoding"	{return POD_ENCODING;}
+	"=cut"	{return POD_CUT;}
+	"="{NONSPACE} {return POD_UNKNOWN;}
 }
 
-<LEX_HARD_NEWLINE>{
-	{NEW_LINE} {yybegin(LEX_NEWLINE); return POD_NEWLINE;}
-}
-
+{HARD_NEW_LINE} {yypushback(yylength()-1);return POD_NEWLINE;}
 {NEW_LINE} {yybegin(LEX_NEWLINE);return TokenType.NEW_LINE_INDENT;}
 {WHITE_SPACE} {return TokenType.WHITE_SPACE;}
 {NONSPACE} {return POD_IDENTIFIER;}

@@ -155,7 +155,7 @@ task generatePodLexer(type: JavaExec) {
     args = getJflexArguments(src, dst)
     inputs.file file(src)
     inputs.file file("$lexer_skeleton")
-    outputs.file file(dst+ "PodLexer.java")
+    outputs.file file(dst + "PodLexerGenerated.java")
     classpath configurations.gen
 }
 

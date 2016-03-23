@@ -42,6 +42,8 @@ limitations under the License.
         POD_ITEM
         POD_BACK
 
+		POD_UNKNOWN
+
         POD_BEGIN
         POD_FORMATTED_BLOCK
         POD_END
@@ -89,10 +91,11 @@ limitations under the License.
 
 }
 
+root ::= pod_file_item *
 
-pod_file ::= pod_file_item *
-
-private pod_file_item ::= !<<eof>> {
+private pod_file_item ::=
+!<<eof>>
+{
 	head1_block
 	| head2_block
 	| head3_block
@@ -107,50 +110,55 @@ private any_level_item ::=
 	| begin_block
 	| for_block
 	| encoding_block
+	| pod_paragraph
+	| unknown_block
 	| POD_CODE
-	| POD_NEWLINE
-	| pod_term
+	| POD_NEWLINE+
+
+pod_paragraph ::= pod_paragraph_content
+
+private pod_paragraph_content ::= pod_term+ POD_NEWLINE+
 
 pod_block ::= POD_POD
 
-head1_block ::= POD_HEAD1 pod_term* [POD_NEWLINE head1_block_content] {pin=1 recoverWhile=recover_head1_block}
+block_title ::= pod_term* POD_NEWLINE+
+
+head1_block ::= POD_HEAD1 [ block_title [head1_block_content]] {pin=1}
 head1_block_content ::= head1_block_item*
 private head1_block_item ::= head2_block | head3_block | head4_block | any_level_item
-private recover_head1_block ::= !(POD_HEAD1)
 
-head2_block ::= POD_HEAD2 pod_term* [POD_NEWLINE head2_block_content] {pin=1 recoverWhile=recover_head2_block}
+head2_block ::= POD_HEAD2 [block_title [head2_block_content]] {pin=1}
 head2_block_content ::= head2_block_item*
 private head2_block_item ::= head3_block | head4_block | any_level_item
-private recover_head2_block ::= !(POD_HEAD1|POD_HEAD2)
 
-head3_block ::= POD_HEAD3 pod_term* [POD_NEWLINE head3_block_content] {pin=1 recoverWhile=recover_head3_block}
+head3_block ::= POD_HEAD3 [block_title [head3_block_content]] {pin=1}
 head3_block_content ::= head3_block_item*
 private head3_block_item ::= head4_block | any_level_item
-private recover_head3_block ::= !(POD_HEAD1|POD_HEAD2|POD_HEAD3)
 
-head4_block ::= POD_HEAD4 pod_term* [POD_NEWLINE head4_block_content] {pin=1 recoverWhile=recover_head4_block}
+head4_block ::= POD_HEAD4 [block_title [head4_block_content]] {pin=1}
 head4_block_content ::= head4_block_item*
 private head4_block_item ::= any_level_item
-private recover_head4_block ::= !(POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4)
 
 over_block ::= over_block_opener  over_block_content over_block_closer {pin=1}
-private over_block_opener ::= POD_OVER [POD_NUMBER] POD_NEWLINE {pin=1}
-private over_block_closer ::= POD_BACK POD_NEWLINE {pin=1}
+private over_block_opener ::= POD_OVER [POD_NUMBER] POD_NEWLINE+ {pin=1}
+private over_block_closer ::= POD_BACK POD_NEWLINE+ {pin=1}
 over_block_content ::= over_block_item*
 private over_block_item ::=
  	item_block
 	| any_level_item
-item_block ::= POD_ITEM pod_term * [POD_NEWLINE item_block_content ] {pin=1}
+item_block ::= POD_ITEM [block_title [item_block_content]] {pin=1}
 item_block_content ::= any_level_item *
 
 begin_block ::= begin_block_opener begin_block_content begin_block_closer  {pin=1}
-private begin_block_opener ::= POD_BEGIN pod_term * POD_NEWLINE {pin=1}
-private begin_block_closer ::= POD_END pod_term * POD_NEWLINE {pin=1}
+private begin_block_opener ::= POD_BEGIN pod_term * POD_NEWLINE+ {pin=1}
+private begin_block_closer ::= POD_END pod_term * POD_NEWLINE+ {pin=1}
 begin_block_content ::= POD_FORMATTED_BLOCK ?
 
-for_block ::= POD_FOR pod_term* POD_NEWLINE {pin=1}
-encoding_block ::= POD_ENCODING pod_term* POD_NEWLINE {pin=1}
-cut_block ::= POD_CUT pod_term* POD_NEWLINE {pin=1}
+for_block ::= POD_FOR pod_term* POD_NEWLINE+ {pin=1}
+encoding_block ::= POD_ENCODING pod_term* POD_NEWLINE+ {pin=1}
+cut_block ::= POD_CUT pod_term* POD_NEWLINE* {pin=1}
+unknown_block ::= POD_UNKNOWN [block_title [any_level_item*]] {pin=1}
+
 
 private pod_term ::=
 	 pod_format

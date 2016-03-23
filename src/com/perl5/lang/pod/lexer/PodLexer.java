@@ -46,7 +46,7 @@ public class PodLexer extends PodLexerGenerated
 	public IElementType advance() throws IOException
 	{
 		IElementType result = super.advance();
-		if (result != TokenType.NEW_LINE_INDENT && yystate() == LEX_NEWLINE)
+		if (yystate() == LEX_NEWLINE && result != TokenType.NEW_LINE_INDENT && result != POD_NEWLINE)
 		{
 			yybegin(YYINITIAL);
 		}

@@ -1,0 +1,38 @@
+Some paragraph here
+
+=pod
+
+=head1 First level #1
+
+=head2 Second level #1
+
+=head3 Third level #1
+
+=head4 Fourth level #1
+
+=head4 Fourth level #2
+
+=head3 Third level #2
+
+=head2 Second level #2
+
+=head1 First level #2
+
+=over
+
+=item something
+
+=back
+
+=begin Foo::Bar
+
+=end Foo::Bar
+
+=for Foo::Bar
+
+=encoding utf8
+
+=somethingelese
+
+=cut
+
