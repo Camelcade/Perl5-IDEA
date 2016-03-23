@@ -241,45 +241,57 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		final String componentPath = getComponentPath();
 		if (componentPath != null)
 		{
+			final List<String> relativePaths = new ArrayList<String>();
+			final List<String> exactPaths = new ArrayList<String>();
 
 			StubIndex.getInstance().processAllKeys(MasonParentNamespacesStubIndex.KEY, project, new Processor<String>()
 			{
 				@Override
-				public boolean process(String parentPath)
+				public boolean process(final String parentPath)
 				{
 					if (parentPath.charAt(0) == VfsUtil.VFS_SEPARATOR_CHAR) // absolute path, should be equal
 					{
 						if (componentPath.equals(parentPath.substring(1)))
 						{
-							childNamespaces.addAll(StubIndex.getElements(
-									MasonParentNamespacesStubIndex.KEY,
-									parentPath,
-									project,
-									projectScope,
-									MasonNamespaceDefinition.class
-							));
+							exactPaths.add(parentPath);
 						}
 					}
 					else if (componentPath.endsWith(parentPath))    // relative path
 					{
-						for (MasonNamespaceDefinition masonNamespaceDefinition : StubIndex.getElements(
-								MasonParentNamespacesStubIndex.KEY,
-								parentPath,
-								project,
-								projectScope,
-								MasonNamespaceDefinition.class
-						))
-						{
-							if (masonNamespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this))
-							{
-								childNamespaces.add(masonNamespaceDefinition);
-							}
-						}
+						relativePaths.add(parentPath);
 					}
 
 					return true;
 				}
 			});
+
+			for (String parentPath : exactPaths)
+			{
+				childNamespaces.addAll(StubIndex.getElements(
+						MasonParentNamespacesStubIndex.KEY,
+						parentPath,
+						project,
+						projectScope,
+						MasonNamespaceDefinition.class
+				));
+			}
+
+			for (String parentPath : relativePaths)
+			{
+				for (MasonNamespaceDefinition masonNamespaceDefinition : StubIndex.getElements(
+						MasonParentNamespacesStubIndex.KEY,
+						parentPath,
+						project,
+						projectScope,
+						MasonNamespaceDefinition.class
+				))
+				{
+					if (masonNamespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this))
+					{
+						childNamespaces.add(masonNamespaceDefinition);
+					}
+				}
+			}
 		}
 
 		// collect autobased children
@@ -292,34 +304,40 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 				if (basePath != null)
 				{
+					final List<String> componentPaths = new ArrayList<String>();
 					StubIndex.getInstance().processAllKeys(
 							MasonNamespaceDefitnitionsStubIndex.KEY, getProject(), new Processor<String>()
 							{
 								@Override
-								public boolean process(String componentPath)
+								public boolean process(final String componentPath)
 								{
 									if (componentPath.startsWith(basePath))
 									{
-										for (MasonNamespaceDefinition namespaceDefinition : StubIndex.getElements(
-												MasonNamespaceDefitnitionsStubIndex.KEY,
-												componentPath,
-												project,
-												projectScope,
-												MasonNamespaceDefinition.class
-										))
-										{
-											if (namespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this)
-													&& !childNamespaces.contains(namespaceDefinition)
-													)
-											{
-												childNamespaces.add(namespaceDefinition);
-											}
-										}
+										componentPaths.add(componentPath);
 									}
 									return true;
 								}
 							}
 					);
+
+					for (String compoPath : componentPaths)
+					{
+						for (MasonNamespaceDefinition namespaceDefinition : StubIndex.getElements(
+								MasonNamespaceDefitnitionsStubIndex.KEY,
+								compoPath,
+								project,
+								projectScope,
+								MasonNamespaceDefinition.class
+						))
+						{
+							if (namespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this)
+									&& !childNamespaces.contains(namespaceDefinition)
+									)
+							{
+								childNamespaces.add(namespaceDefinition);
+							}
+						}
+					}
 				}
 
 			}
