@@ -45,6 +45,11 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 		{
 			PerlPackageCompletionUtil.fillWithPackageNameSuggestions(element, result);
 		}
+		else if (NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN.accepts(element)) // my Foo::Bar
+		{
+			PerlPackageCompletionUtil.fillWithAllBuiltInPackageNames(element, result);
+			PerlPackageCompletionUtil.fillWithAllPackageFiles(element, result);
+		}
 		else if (NAMESPACE_CLASS_COMPLETION_PATTERN.accepts(element)) // use/no/require
 		{
 			PerlPackageCompletionUtil.fillWithAllBuiltInPackageNames(element, result);

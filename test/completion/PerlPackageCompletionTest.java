@@ -34,32 +34,60 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 
 	public void testPackageDefinition()
 	{
-		initWithFileAsPackage("package_definition");
-		List<String> strings = myFixture.getLookupElementStrings();
-		assertTrue(strings.containsAll(Arrays.asList("package_definition")));
+		checkFileWithArray("package_definition", "package_definition");
 	}
 
 	public void testPackageUse()
 	{
-		initWithFileAsPackage("package_use");
-		checkPackageCompletions();
+		checkPackageAndVersionsCompletions("package_use");
 	}
 
 	public void testPackageNo()
 	{
-		initWithFileAsPackage("package_no");
-		checkPackageCompletions();
+		checkPackageAndVersionsCompletions("package_no");
 	}
 
 	public void testPackageRequire()
 	{
-		initWithFileAsPackage("package_require");
-		checkPackageCompletions();
+		checkPackageAndVersionsCompletions("package_require");
 	}
 
-	public void checkPackageCompletions()
+	public void testLocal()
 	{
+		checkClassCompletions("package_local");
+	}
+
+	public void testMy()
+	{
+		checkClassCompletions("package_my");
+	}
+
+	public void testOur()
+	{
+		checkClassCompletions("package_our");
+	}
+
+	public void testState()
+	{
+		checkClassCompletions("package_state");
+	}
+
+
+	public void checkPackageAndVersionsCompletions(String fileName)
+	{
+		checkFileWithArray(fileName, "v5.10", "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
+	}
+
+	public void checkClassCompletions(String fileName)
+	{
+		checkFileWithArray(fileName, "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
+	}
+
+	public void checkFileWithArray(String fileName, String... result)
+	{
+		initWithFileAsPackage(fileName);
 		List<String> strings = myFixture.getLookupElementStrings();
-		assertTrue(strings.containsAll(Arrays.asList("v5.10", "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings")));
+		assertNotNull(strings);
+		assertContainsElements(strings, Arrays.asList(result));
 	}
 }

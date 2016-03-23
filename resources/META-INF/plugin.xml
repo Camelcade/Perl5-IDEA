@@ -35,6 +35,7 @@
      <p>Fixes for 1.4 release:
       <ul>
       <li>Disabled deprecation strikeout in packages auto-completion. Speeds things up and prevents hanging of IDEA 2016</li>
+      <li>Fixed package completion in variable definition expresison</li>
       </ul>
       </p>
 
