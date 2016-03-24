@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
@@ -49,10 +50,7 @@ import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
@@ -67,15 +65,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
 	public static final Set<String> BUILT_IN_ALL = new THashSet<String>();
-	public static final ConcurrentHashMap<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<String, String>();
-
 	public static final String SUPER_PACKAGE = "SUPER";
 	public static final String MAIN_PACKAGE = "main";
 	public static final String UNIVERSAL_PACKAGE = "UNIVERSAL";
 	public static final String CORE_PACKAGE = "CORE";
-
 	public static final String MAIN_PACKAGE_FULL = MAIN_PACKAGE + PACKAGE_SEPARATOR;
 	public static final String MAIN_PACKAGE_SHORT = PACKAGE_SEPARATOR;
+	private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<String, String>();
+	private static final Map<String, String> myFilePathsToPackageNameMap = new ConcurrentHashMap<String, String>();
 
 	static
 	{
@@ -314,11 +311,17 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param packagePath package relative path
 	 * @return canonical package name
 	 */
-	public static String getPackageNameByPath(String packagePath)
+	public static String getPackageNameByPath(final String packagePath)
 	{
-		packagePath = packagePath.replaceAll("\\\\", "/");
+		String result = myFilePathsToPackageNameMap.get(packagePath);
 
-		return getCanonicalPackageName(StringUtils.join(packagePath.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR));
+		if (result == null)
+		{
+			String path = packagePath.replaceAll("\\\\", "/");
+			result = getCanonicalPackageName(StringUtils.join(path.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR));
+			myFilePathsToPackageNameMap.put(packagePath, result);
+		}
+		return result;
 	}
 
 	/**
@@ -441,25 +444,26 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 
-	public static void processPackageFilesForPsiElement(PsiElement element, Processor<String> processor)
+	public static void processPackageFilesForPsiElement(PsiElement element, final Processor<String> processor)
 	{
 		if (element != null)
 		{
-			VirtualFile[] classRoots;
+			VirtualFile[] classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
 
-			classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
-
-			for (VirtualFile classRoot : classRoots)
+			for (VirtualFile file : FileTypeIndex.getFiles(PerlFileTypePackage.INSTANCE, PerlScopes.getProjectAndLibrariesScope(element.getProject())))
 			{
-				for (VirtualFile virtualFile : VfsUtil.collectChildrenRecursively(classRoot))
-					if (!virtualFile.isDirectory() && virtualFile.getFileType() == PerlFileTypePackage.INSTANCE)
+				for (VirtualFile classRoot : classRoots)
+				{
+					if (VfsUtil.isAncestor(classRoot, file, true))
 					{
-						String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
+						String relativePath = VfsUtil.getRelativePath(file, classRoot);
 						String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
 						processor.process(packageName);
 					}
+				}
 			}
 		}
+
 	}
 
 	public static Collection<PerlUseStatement> getPackageImports(@NotNull Project project, @NotNull String packageName, @NotNull PsiFile file)

@@ -72,13 +72,15 @@ public interface PerlElementPatterns extends PerlElementTypes
 	PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_EXPR_PATTERN = psiElement(PsiPerlRequireExpr.class);
 	PsiElementPattern.Capture<PerlNamespaceDefinition> NAMESPACE_DEFINITION_PATTERN = psiElement(PerlNamespaceDefinition.class);
 
-	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_CLASS_COMPLETION_PATTERN =
+	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_USE_PATTERN =
 			NAMESPACE_NAME_PATTERN.andOr(
 					psiElement().withParent(USE_STATEMENT_PATTERN),
 					psiElement().withParent(NO_STATEMENT_PATTERN),
-					psiElement().withParent(REQUIRE_EXPR_PATTERN),
-					psiElement().inside(psiElement(PsiPerlAnnotation.class)
-					));
+					psiElement().withParent(REQUIRE_EXPR_PATTERN)
+			);
+
+	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_ANNOTATION_PATTERN =
+			NAMESPACE_NAME_PATTERN.inside(psiElement(PsiPerlAnnotation.class));
 
 	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_DEFINITION_PATTERN =
 			NAMESPACE_NAME_PATTERN.withParent(NAMESPACE_DEFINITION_PATTERN);
