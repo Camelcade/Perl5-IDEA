@@ -4,6 +4,55 @@ Some paragraph here
 
 =head1 First level #1
 
+{
+}
+
+[
+]
+
+<
+>
+
+(
+)
+
+I<italic>
+
+B<bold>
+
+C<code>
+
+L<link>
+
+E<escaped>
+
+F<filename>
+
+S<nospace>
+
+X<index>
+
+Z<null>
+
+I<>
+
+B<>
+
+C<>
+
+L<>
+
+E<>
+
+F<>
+
+S<>
+
+X<>
+
+Z<>
+
+
 =head2 Second level #1
 
 =head3 Third level #1
@@ -26,13 +75,22 @@ Some paragraph here
 
 =begin Foo::Bar
 
+formatted as block
+
 =end Foo::Bar
 
-=for Foo::Bar
+=begin :Foo::Bar
+
+formatted as tokens
+
+=end :Foo::Bar
+
+=for Foo::Bar formatted as block
+
+=for :Foo::Bar formatted as tokens
 
 =encoding utf8
 
 =somethingelese
 
 =cut
-

@@ -46,10 +46,13 @@ limitations under the License.
 
         POD_BEGIN
         POD_FORMATTED_BLOCK
+        POD_FORMATTED_LINE
         POD_END
-
+        POD_FORMAT_NAME
         POD_FOR
+
         POD_ENCODING
+        POD_ENCODING_NAME
 
         POD_CUT
 
@@ -61,6 +64,8 @@ limitations under the License.
 		POD_PAREN_RIGHT
 		POD_BRACKET_LEFT
 		POD_BRACKET_RIGHT
+		POD_BRACE_LEFT
+		POD_BRACE_RIGHT
 
 		POD_QUOTE_OPEN_DOUBLE
 		POD_QUOTE_CLOSE_DOUBLE
@@ -81,12 +86,13 @@ limitations under the License.
 
 		POD_IDENTIFIER
 		POD_NUMBER
+		POD_INDENT_LEVEL
 
 		POD_DIV
-		POD_ESCAPE
+		POD_BACKREF
 		POD_ASTERISK
 		POD_PIPE
-
+		POD_COLON
     ]
 
 }
@@ -140,7 +146,7 @@ head4_block_content ::= head4_block_item*
 private head4_block_item ::= any_level_item
 
 over_block ::= over_block_opener  over_block_content over_block_closer {pin=1}
-private over_block_opener ::= POD_OVER [POD_NUMBER] POD_NEWLINE+ {pin=1}
+private over_block_opener ::= POD_OVER [POD_INDENT_LEVEL] POD_NEWLINE+ {pin=1}
 private over_block_closer ::= POD_BACK POD_NEWLINE+ {pin=1}
 over_block_content ::= over_block_item*
 private over_block_item ::=
@@ -150,33 +156,40 @@ item_block ::= POD_ITEM [block_title [item_block_content]] {pin=1}
 item_block_content ::= any_level_item *
 
 begin_block ::= begin_block_opener begin_block_content begin_block_closer  {pin=1}
-private begin_block_opener ::= POD_BEGIN pod_term * POD_NEWLINE+ {pin=1}
-private begin_block_closer ::= POD_END pod_term * POD_NEWLINE+ {pin=1}
-begin_block_content ::= POD_FORMATTED_BLOCK ?
+pod_format_with ::= POD_COLON ? POD_FORMAT_NAME
+private begin_block_opener ::= POD_BEGIN pod_format_with {pin=1}
+private begin_block_closer ::= POD_END pod_format_with POD_NEWLINE* {pin=1}
+begin_block_content ::= POD_FORMATTED_BLOCK | {pod_term|POD_NEWLINE}*
 
-for_block ::= POD_FOR pod_term* POD_NEWLINE+ {pin=1}
-encoding_block ::= POD_ENCODING pod_term* POD_NEWLINE+ {pin=1}
+for_block ::= POD_FOR pod_format_with {POD_FORMATTED_LINE|pod_term*} POD_NEWLINE* {pin=1}
+encoding_block ::= POD_ENCODING POD_ENCODING_NAME POD_NEWLINE+ {pin=1}
 cut_block ::= POD_CUT pod_term* POD_NEWLINE* {pin=1}
 unknown_block ::= POD_UNKNOWN [block_title [any_level_item*]] {pin=1}
 
 
 private pod_term ::=
+	pod_term_angless
+	| POD_ANGLE_LEFT
+	| POD_ANGLE_RIGHT
+
+private pod_term_angless ::=
 	 pod_format
 	| pod_string
 	| POD_IDENTIFIER
 	| POD_NUMBER
 
 	| POD_DIV
-	| POD_ESCAPE
+	| POD_BACKREF
 	| POD_ASTERISK
 	| POD_PIPE
+	| POD_COLON
 
-	| POD_ANGLE_LEFT
-	| POD_ANGLE_RIGHT
 	| POD_PAREN_LEFT
 	| POD_PAREN_RIGHT
 	| POD_BRACKET_LEFT
 	| POD_BRACKET_RIGHT
+	| POD_BRACE_LEFT
+	| POD_BRACE_RIGHT
 
 pod_string ::= pod_string_dq | pod_string_sq | pod_string_xq
 
@@ -205,4 +218,4 @@ pod_format_nbsp ::= POD_S pod_term_param {pin=1}
 pod_format_index ::= POD_X pod_term_param {pin=1}
 pod_format_null ::= POD_Z pod_term_param {pin=1}
 
-private pod_term_param ::= POD_ANGLE_LEFT pod_term* POD_ANGLE_RIGHT {pin=1}
+private pod_term_param ::= POD_ANGLE_LEFT pod_term_angless* POD_ANGLE_RIGHT {pin=1}

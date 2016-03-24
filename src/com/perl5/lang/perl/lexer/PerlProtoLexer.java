@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.lexer;
+package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexLexer;
 
 /**
- * Created by hurricup on 21.04.2015.
+ * Created by hurricup on 24.03.2016.
  */
-public abstract class PodBaseLexer implements FlexLexer, PodElementTypes
+public abstract class PerlProtoLexer implements FlexLexer
 {
+	public abstract void setTokenStart(int position);
+
+	public abstract void setTokenEnd(int position);
+
+	public abstract CharSequence getBuffer();
+
+	public abstract int getBufferEnd();
+
+	public abstract int getNextTokenStart();
+
+	public abstract boolean isLastToken();
+
 
 }

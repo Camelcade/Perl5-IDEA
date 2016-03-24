@@ -16,7 +16,6 @@
 
 package com.perl5.lang.pod.lexer;
 
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
 import java.io.IOException;
@@ -25,6 +24,7 @@ import java.io.Reader;
 /**
  * Created by hurricup on 22.03.2016.
  */
+@SuppressWarnings("ALL")
 public class PodLexer extends PodLexerGenerated
 {
 	public PodLexer(Reader in)
@@ -38,18 +38,82 @@ public class PodLexer extends PodLexerGenerated
 		super.reset(buffer, start, end, initialState);
 		if (start == 0)
 		{
-			yybegin(LEX_NEWLINE);
+			yybegin(LEX_COMMAND_WAITING);
 		}
 	}
 
 	@Override
 	public IElementType advance() throws IOException
 	{
-		IElementType result = super.advance();
-		if (yystate() == LEX_NEWLINE && result != TokenType.NEW_LINE_INDENT && result != POD_NEWLINE)
+		int state = yystate();
+
+		if (state == LEX_CAPTURE_BLOCK)
 		{
+			int tokenStart = getTokenEnd();
+			int tokenEnd = getTokenEnd();
 			yybegin(YYINITIAL);
+			while (true)
+			{
+				IElementType result = super.advance();
+				if (result == null) // eof
+				{
+					if (tokenEnd > tokenStart)
+					{
+						setTokenStart(tokenStart);
+						setTokenEnd(tokenEnd);
+						yybegin(YYINITIAL);
+						return POD_FORMATTED_BLOCK;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else if (result == POD_END) // end
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(tokenEnd);
+					yybegin(LEX_COMMAND_WAITING);
+					return POD_FORMATTED_BLOCK;
+				}
+				tokenEnd = getTokenEnd();
+			}
 		}
-		return result;
+		else if (state == LEX_CAPTURE_LINE)
+		{
+			int tokenStart = getTokenEnd();
+			int tokenEnd = getTokenEnd();
+			yybegin(YYINITIAL);
+			while (true)
+			{
+				IElementType result = super.advance();
+				if (result == null) // eof
+				{
+					if (tokenEnd > tokenStart)
+					{
+						setTokenStart(tokenStart);
+						setTokenEnd(tokenEnd);
+						yybegin(YYINITIAL);
+						return POD_FORMATTED_LINE;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else if (result == POD_NEWLINE) // end
+				{
+					setTokenStart(tokenStart);
+					setTokenEnd(tokenEnd);
+					yybegin(YYINITIAL);
+					return POD_FORMATTED_LINE;
+				}
+				tokenEnd = getTokenEnd();
+			}
+		}
+		return super.advance();
+//		IElementType result = super.advance();
+//		System.err.println(String.format("Type: %s Value: %s Range: %d - %d State: %d", result, yytext(), getTokenStart(), getTokenEnd(), yystate()));
+//		return result;
 	}
 }

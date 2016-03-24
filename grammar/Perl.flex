@@ -35,14 +35,6 @@ import org.jetbrains.annotations.NotNull;
 
 
 %{
-    // fixme this must be in skeleton
-    public void setTokenStart(int position){zzCurrentPos = zzStartRead = position;}
-    public void setTokenEnd(int position){zzMarkedPos = position;}
-    public CharSequence getBuffer(){ return zzBuffer;}
-    public char[] getBufferArray(){ return zzBufferArray;}
-    public int getBufferEnd() {return zzEndRead;}
-    public int getNextTokenStart(){ return zzMarkedPos;}
-    public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
 
     protected int trenarCounter = 0;
 
@@ -87,6 +79,7 @@ PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
 // heading _ removed to avoid @_ parsing as sigil-number
 
+// duplicated in Pod lexer
 NUMBER_EXP = [eE][+-]?[0-9_]+
 NUMBER_FLOAT = "." ([0-9][0-9_]*)?
 NUMBER_INT_SIMPLE = [0-9]+
