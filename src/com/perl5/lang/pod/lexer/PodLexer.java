@@ -16,6 +16,7 @@
 
 package com.perl5.lang.pod.lexer;
 
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
 import java.io.IOException;
@@ -111,9 +112,89 @@ public class PodLexer extends PodLexerGenerated
 				tokenEnd = getTokenEnd();
 			}
 		}
-		return super.advance();
-//		IElementType result = super.advance();
-//		System.err.println(String.format("Type: %s Value: %s Range: %d - %d State: %d", result, yytext(), getTokenStart(), getTokenEnd(), yystate()));
-//		return result;
+
+		IElementType result = super.advance();
+		state = yystate();
+		if (state == LEX_COMMAND_WAITING && result != TokenType.NEW_LINE_INDENT && result != POD_NEWLINE && result != POD_CODE ||
+				state == LEX_COMMAND_READY && result != TokenType.NEW_LINE_INDENT && result != TokenType.WHITE_SPACE && result != POD_NEWLINE && result != POD_CODE)
+		{
+			yybegin(YYINITIAL);
+		}
+		return result;
 	}
+
+	protected IElementType parseFallback()
+	{
+		int tokenStart = getTokenStart();
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+
+		if (tokenStart < bufferEnd)
+		{
+			char currentChar = buffer.charAt(tokenStart);
+			if (Character.isLetterOrDigit(currentChar))
+			{
+				int tokenEnd = getTokenEnd();
+
+				while (tokenEnd < bufferEnd && Character.isLetterOrDigit(buffer.charAt(tokenEnd)))
+				{
+					tokenEnd++;
+				}
+
+				setTokenEnd(tokenEnd);
+				return POD_IDENTIFIER;
+			}
+			else
+			{
+				return POD_SYMBOL;
+			}
+		}
+		throw new RuntimeException("Can't be");
+	}
+
+	protected IElementType parseExample()
+	{
+		int offset = getTokenEnd();
+		int tokenEnd = offset;
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+
+		boolean newLine = false;
+		boolean clearLine = false;
+
+		while (offset < bufferEnd)
+		{
+			char currentChar = buffer.charAt(offset);
+
+			if (currentChar == '\n')
+			{
+				newLine = true;
+
+				if (!clearLine)
+				{
+					tokenEnd = offset + 1;
+				}
+				clearLine = true;
+			}
+			else
+			{
+				if (newLine && !Character.isWhitespace(currentChar))
+				{
+					break;
+				}
+
+				newLine = false;
+			}
+
+			clearLine = clearLine && Character.isWhitespace(currentChar);
+
+			offset++;
+		}
+
+		setTokenEnd(tokenEnd);
+		yybegin(LEX_COMMAND_WAITING);
+
+		return POD_CODE;
+	}
+
 }

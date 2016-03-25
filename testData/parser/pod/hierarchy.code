@@ -23,9 +23,14 @@ B<bold>
 C<code>
 
 L<link>
-
+L<http://www.perl.org/>
+L</Object Attributes>
+L<crontab(5)/"DESCRIPTION">
+L<Perl.org|http://www.perl.org/>
+L<perlport/Newlines>
+L<Perlport's section on NL's|perlport/Newlines>
+Say? Yes, say!
 E<escaped>
-
 F<filename>
 
 S<nospace>
@@ -89,7 +94,7 @@ formatted as tokens
 
 =for :Foo::Bar formatted as tokens
 
-=encoding utf8
+=encoding utf-8
 
 =somethingelese
 

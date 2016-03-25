@@ -33,13 +33,15 @@ import com.perl5.lang.perl.lexer.PerlProtoLexer;
 %type IElementType
 
 %{
-
+	protected abstract IElementType parseFallback();
+	protected abstract IElementType parseExample();
 %}
 
 NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
 HARD_NEW_LINE = {NEW_LINE}({WHITE_SPACE}*{NEW_LINE})+
 NONSPACE = [^ \t\f\r\n]
+EXAMPLE = {WHITE_SPACE}+{NONSPACE}+
 
 NUMBER_EXP = [eE][+-]?[0-9_]+
 NUMBER_FLOAT = "." ([0-9][0-9_]*)?
@@ -63,15 +65,17 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 	"=head2"		{yybegin(YYINITIAL);return POD_HEAD2;}
 	"=head3"		{yybegin(YYINITIAL);return POD_HEAD3;}
 	"=head4"		{yybegin(YYINITIAL);return POD_HEAD4;}
-	"=over"			{yybegin(LEX_OVER);return POD_OVER;}
 	"=item"			{yybegin(YYINITIAL);return POD_ITEM;}
 	"=back"			{yybegin(YYINITIAL);return POD_BACK;}
+
+	"=over"			{yybegin(LEX_OVER);return POD_OVER;}
 	"=begin"		{yybegin(LEX_FORMAT_BEGIN);return POD_BEGIN;}
 	"=end"			{yybegin(LEX_FORMAT_END);return POD_END;}
 	"=for"			{yybegin(LEX_FORMAT_LINE);return POD_FOR;}
 	"=encoding"		{yybegin(LEX_ENCODING);return POD_ENCODING;}
 	"=cut"			{yybegin(YYINITIAL);return POD_CUT;}
 	"="{NONSPACE}+ 	{yybegin(YYINITIAL);return POD_UNKNOWN;}
+	{EXAMPLE}		{return parseExample();}
 	{WHITE_SPACE}+ 	{yybegin(LEX_COMMAND_READY);return TokenType.WHITE_SPACE;}
 	{NONSPACE}		{yybegin(YYINITIAL);yypushback(yylength());}
 }
@@ -127,6 +131,9 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 "*" {return POD_ASTERISK;}
 "|" {return POD_PIPE;}
 ":" {return POD_COLON;}
+"\"" {return POD_QUOTE_DOUBLE;}
+"'" {return POD_QUOTE_SINGLE;}
+"`" {return POD_QUOTE_TICK;}
 "I<" {yypushback(1);return POD_I;}
 "B<" {yypushback(1);return POD_B;}
 "C<" {yypushback(1);return POD_C;}
@@ -138,6 +145,5 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 "Z<" {yypushback(1);return POD_Z;}
 
 {NUMBER} 	{return POD_NUMBER;}
-{NONSPACE} 	{return POD_IDENTIFIER;}
 
-[^] {return TokenType.BAD_CHARACTER;}
+[^] {return parseFallback();}

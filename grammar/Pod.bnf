@@ -67,12 +67,9 @@ limitations under the License.
 		POD_BRACE_LEFT
 		POD_BRACE_RIGHT
 
-		POD_QUOTE_OPEN_DOUBLE
-		POD_QUOTE_CLOSE_DOUBLE
-		POD_QUOTE_OPEN_SINGLE
-		POD_QUOTE_CLOSE_SINGLE
-		POD_QUOTE_OPEN_TICK
-		POD_QUOTE_CLOSE_TICK
+		POD_QUOTE_DOUBLE
+		POD_QUOTE_SINGLE
+		POD_QUOTE_TICK
 
 		POD_I	// italic
 		POD_B	// bold
@@ -85,8 +82,10 @@ limitations under the License.
 		POD_Z	// null
 
 		POD_IDENTIFIER
+		POD_PACKAGE
 		POD_NUMBER
 		POD_INDENT_LEVEL
+		POD_SYMBOL
 
 		POD_DIV
 		POD_BACKREF
@@ -107,7 +106,6 @@ private pod_file_item ::=
 	| head3_block
 	| head4_block
 	| any_level_item
-	| cut_block
 }
 
 private any_level_item ::=
@@ -118,12 +116,13 @@ private any_level_item ::=
 	| encoding_block
 	| pod_paragraph
 	| unknown_block
+	| cut_block
 	| POD_CODE
 	| POD_NEWLINE+
 
 pod_paragraph ::= pod_paragraph_content
 
-private pod_paragraph_content ::= pod_term+ POD_NEWLINE+
+private pod_paragraph_content ::= pod_term+ POD_NEWLINE*
 
 pod_block ::= POD_POD
 
@@ -147,7 +146,7 @@ private head4_block_item ::= any_level_item
 
 over_block ::= over_block_opener  over_block_content over_block_closer {pin=1}
 private over_block_opener ::= POD_OVER [POD_INDENT_LEVEL] POD_NEWLINE+ {pin=1}
-private over_block_closer ::= POD_BACK POD_NEWLINE+ {pin=1}
+private over_block_closer ::= POD_BACK POD_NEWLINE* {pin=1}
 over_block_content ::= over_block_item*
 private over_block_item ::=
  	item_block
@@ -168,13 +167,9 @@ unknown_block ::= POD_UNKNOWN [block_title [any_level_item*]] {pin=1}
 
 
 private pod_term ::=
-	pod_term_angless
+	pod_format
 	| POD_ANGLE_LEFT
 	| POD_ANGLE_RIGHT
-
-private pod_term_angless ::=
-	 pod_format
-	| pod_string
 	| POD_IDENTIFIER
 	| POD_NUMBER
 
@@ -183,6 +178,11 @@ private pod_term_angless ::=
 	| POD_ASTERISK
 	| POD_PIPE
 	| POD_COLON
+	| POD_SYMBOL
+
+	| POD_QUOTE_DOUBLE
+	| POD_QUOTE_SINGLE
+	| POD_QUOTE_TICK
 
 	| POD_PAREN_LEFT
 	| POD_PAREN_RIGHT
@@ -191,11 +191,7 @@ private pod_term_angless ::=
 	| POD_BRACE_LEFT
 	| POD_BRACE_RIGHT
 
-pod_string ::= pod_string_dq | pod_string_sq | pod_string_xq
-
-private pod_string_dq ::= POD_QUOTE_OPEN_DOUBLE pod_term* POD_QUOTE_CLOSE_DOUBLE {pin=1}
-private pod_string_sq ::= POD_QUOTE_OPEN_SINGLE pod_term* POD_QUOTE_CLOSE_SINGLE {pin=1}
-private pod_string_xq ::= POD_QUOTE_OPEN_TICK pod_term* POD_QUOTE_CLOSE_TICK {pin=1}
+private pod_term_angless ::= !(POD_ANGLE_RIGHT) pod_term
 
 private pod_format ::=
  	pod_format_italic
@@ -211,11 +207,12 @@ private pod_format ::=
 pod_format_italic ::= POD_I pod_term_param {pin=1}
 pod_format_bold ::= POD_B pod_term_param {pin=1}
 pod_format_code ::= POD_C pod_term_param {pin=1}
-pod_format_link ::= POD_L pod_term_param {pin=1}
 pod_format_escape ::= POD_E pod_term_param {pin=1}
 pod_format_file ::= POD_F pod_term_param {pin=1}
 pod_format_nbsp ::= POD_S pod_term_param {pin=1}
 pod_format_index ::= POD_X pod_term_param {pin=1}
 pod_format_null ::= POD_Z pod_term_param {pin=1}
+pod_format_link ::= POD_L pod_term_param {pin=1}
+
 
 private pod_term_param ::= POD_ANGLE_LEFT pod_term_angless* POD_ANGLE_RIGHT {pin=1}
