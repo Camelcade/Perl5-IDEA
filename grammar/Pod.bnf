@@ -14,9 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 {
+  elementTypeFactory="com.perl5.lang.pod.elementTypes.PodElementTypeFactory.getElementType"
+  tokenTypeFactory="com.perl5.lang.pod.elementTypes.PodElementTypeFactory.getTokenType"
+
   parserClass="com.perl5.lang.pod.parser.PodParser"
   extends="com.perl5.lang.pod.parser.psi.mixin.PodCompositeElementMixin"
 
+  stubClass("pod_format_index")="com.perl5.lang.pod.parser.psi.stubs.PodSectionStub"
 
   mixin("head1_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH1Mixin"
   mixin("head2_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH2Mixin"

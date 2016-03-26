@@ -14,27 +14,32 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.elementTypes;
+package com.perl5.lang.pod.parser.psi.stubs;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.pod.PodLanguage;
-import org.jetbrains.annotations.NonNls;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.pod.parser.psi.PodStubBasedSection;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 24.04.2015.
+ * Created by hurricup on 26.03.2016.
  */
-public abstract class PodElementType extends IElementType implements PsiElementProvider
+public class PodStubIndex extends StringStubIndexExtension<PodStubBasedSection>
 {
-	public PodElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, PodLanguage.INSTANCE);
-	}
+	public static final StubIndexKey<String, PodStubBasedSection> KEY = StubIndexKey.createIndexKey("pod.index");
+
+	public static final int VERSION = 3;
 
 	@Override
-	public String toString()
+	public int getVersion()
 	{
-		return "PodElementType." + super.toString();
+		return super.getVersion() + VERSION;
+	}
+
+	@NotNull
+	@Override
+	public StubIndexKey<String, PodStubBasedSection> getKey()
+	{
+		return KEY;
 	}
 }

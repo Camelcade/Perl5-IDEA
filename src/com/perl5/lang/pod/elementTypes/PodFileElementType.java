@@ -14,14 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi;
+package com.perl5.lang.pod.elementTypes;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IStubFileElementType;
+import com.perl5.lang.pod.PodLanguage;
+import org.jetbrains.annotations.NonNls;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSection extends PodCompositeElement
+public class PodFileElementType extends IStubFileElementType
 {
-	PsiElement getContentBlock();
+	private static final int VERSION = 1;
+
+	public PodFileElementType(@NonNls String debugName)
+	{
+		super(debugName, PodLanguage.INSTANCE);
+	}
+
+	@Override
+	public int getStubVersion()
+	{
+		return VERSION;
+	}
+
 }

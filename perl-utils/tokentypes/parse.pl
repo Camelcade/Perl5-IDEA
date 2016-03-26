@@ -7,7 +7,7 @@ my $text = join '', <>;
 $text =~ s/\(type == (\w+)\) \{\s+(.+?;)\s+\}/
     say <<"EOM";
 if (name.equals("$1"))
-    return new PerlElementTypeEx(name)
+    return new PodElementType(name)
     {
     \@NotNull
     \@Override

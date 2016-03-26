@@ -14,14 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi;
+package com.perl5.lang.pod.parser.psi.stubs;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubBase;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSection extends PodCompositeElement
+public class PodSectionStubImpl extends StubBase<PodTitledSection> implements PodSectionStub
 {
-	PsiElement getContentBlock();
+	private String myContent;
+
+	public PodSectionStubImpl(StubElement parent, IStubElementType elementType, String myContent)
+	{
+		super(parent, elementType);
+		this.myContent = myContent;
+	}
+
+	public String getTitleText()
+	{
+		return myContent;
+	}
 }
