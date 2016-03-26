@@ -61,7 +61,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 				{
 					if (m != null)
 					{
-						m.done(POD_TERM_PARAM);
+						m.done(FORMATTING_SECTION_CONTENT);
 					}
 
 					m = b.mark();

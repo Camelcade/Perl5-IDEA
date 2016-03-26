@@ -95,7 +95,7 @@ public class PodLexer extends PodLexerGenerated
 						setTokenStart(tokenStart);
 						setTokenEnd(tokenEnd);
 						yybegin(YYINITIAL);
-						return POD_FORMATTED_LINE;
+						return POD_FORMATTED_BLOCK;
 					}
 					else
 					{
@@ -107,7 +107,7 @@ public class PodLexer extends PodLexerGenerated
 					setTokenStart(tokenStart);
 					setTokenEnd(tokenEnd);
 					yybegin(YYINITIAL);
-					return POD_FORMATTED_LINE;
+					return POD_FORMATTED_BLOCK;
 				}
 				tokenEnd = getTokenEnd();
 			}

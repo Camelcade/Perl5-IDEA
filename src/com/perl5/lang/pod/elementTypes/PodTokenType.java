@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,43 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.psi;
+package com.perl5.lang.pod.elementTypes;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.filetypes.PodFileType;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
 /**
- * Created by hurricup on 21.04.2015.
+ * Created by hurricup on 24.04.2015.
  */
-public class PsiFilePod extends PsiFileBase
+public class PodTokenType extends IElementType
 {
-	public PsiFilePod(@NotNull FileViewProvider viewProvider)
+	public PodTokenType(@NotNull @NonNls String debugName)
 	{
-		super(viewProvider, PodLanguage.INSTANCE);
-	}
-
-	@NotNull
-	@Override
-	public FileType getFileType()
-	{
-		return PodFileType.INSTANCE;
+		super(debugName, PodLanguage.INSTANCE);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "POD file";
-	}
-
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return super.getIcon(flags);
+		return "PodTokenType." + super.toString();
 	}
 }

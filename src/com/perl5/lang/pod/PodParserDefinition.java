@@ -30,7 +30,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.parser.PodParser;
-import com.perl5.lang.pod.psi.PsiFilePod;
+import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -82,7 +82,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new PsiFilePod(viewProvider);
+		return new PodFileImpl(viewProvider);
 	}
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod;
-
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+package com.perl5.lang.pod.parser.psi;
 
 /**
- * Created by hurricup on 24.04.2015.
+ * Created by hurricup on 26.03.2016.
  */
-public class PodTokenType extends IElementType
+public interface PodFormatterS
 {
-	public PodTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, PodLanguage.INSTANCE);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "PodTokenType." + super.toString();
-	}
 }
