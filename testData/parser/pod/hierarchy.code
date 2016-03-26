@@ -16,6 +16,34 @@ Some paragraph here
 (
 )
 
+C<$a E<lt>=E<gt> $b>
+C<< $a <=> $b >>
+C<<< $a <=> $b >>>
+C<<<<  $a <=> $b     >>>>
+C<$a E<lt>=E<gt> $b>
+C<< $a E<lt>=E<gt> $b >>
+C<<< open(X, ">>thing.dat") || die $! >>>
+C<< $foo->bar(); >>
+C<open(X, "E<gt>E<gt>thing.dat") || die $!>
+C<$foo-E<gt>bar();>
+That's what I<you> think!
+What's C<dump()> for?
+X<C<chmod> and C<unlink()> Under Different Operating Systems>
+That's what I<< you >> think!
+C<<< open(X, ">>thing.dat") || die $! >>>
+B<< $foo->bar(); >>
+C<thing>
+C<< thing >>
+C<<           thing     >>
+C<<<   thing >>>
+C<<<<
+thing
+		   >>>>
+B<example: C<$a E<lt>=E<gt> $b>>
+B<example: C<< $a <=> $b >>>
+B<example: C<< $a E<lt>=E<gt> $b >>>
+B<<< example: C<< $a E<lt>=E<gt> $b >> >>>
+
 I<italic>
 
 B<bold>

@@ -25,6 +25,8 @@ limitations under the License.
   elementTypeHolderClass="com.perl5.lang.pod.lexer.PodElementTypes"
   elementTypeClass="com.perl5.lang.pod.PodElementType"
   tokenTypeClass="com.perl5.lang.pod.PodTokenType"
+  parserUtilClass="com.perl5.lang.pod.parser.PodParserUtil"
+
 
 //  psiImplUtilClass="com.perl5.lang.pod.psi.impl.PodPsiImplUtil"
 
@@ -191,8 +193,6 @@ private pod_term ::=
 	| POD_BRACE_LEFT
 	| POD_BRACE_RIGHT
 
-private pod_term_angless ::= !(POD_ANGLE_RIGHT) pod_term
-
 private pod_format ::=
  	pod_format_italic
  	| pod_format_bold
@@ -204,15 +204,15 @@ private pod_format ::=
  	| pod_format_index
  	| pod_format_null
 
-pod_format_italic ::= POD_I pod_term_param {pin=1}
-pod_format_bold ::= POD_B pod_term_param {pin=1}
-pod_format_code ::= POD_C pod_term_param {pin=1}
-pod_format_escape ::= POD_E pod_term_param {pin=1}
-pod_format_file ::= POD_F pod_term_param {pin=1}
-pod_format_nbsp ::= POD_S pod_term_param {pin=1}
-pod_format_index ::= POD_X pod_term_param {pin=1}
-pod_format_null ::= POD_Z pod_term_param {pin=1}
-pod_format_link ::= POD_L pod_term_param {pin=1}
+pod_format_italic ::= POD_I <<parseTermParam>> {pin=1}
+pod_format_bold ::= POD_B <<parseTermParam>> {pin=1}
+pod_format_code ::= POD_C <<parseTermParam>> {pin=1}
+pod_format_escape ::= POD_E <<parseTermParam>> {pin=1}
+pod_format_file ::= POD_F <<parseTermParam>> {pin=1}
+pod_format_nbsp ::= POD_S <<parseTermParam>> {pin=1}
+pod_format_index ::= POD_X <<parseTermParam>> {pin=1}
+pod_format_null ::= POD_Z <<parseTermParam>> {pin=1}
+pod_format_link ::= POD_L <<parseTermParam>> {pin=1}
 
 
-private pod_term_param ::= POD_ANGLE_LEFT pod_term_angless* POD_ANGLE_RIGHT {pin=1}
+pod_term_param ::= pod_term*
