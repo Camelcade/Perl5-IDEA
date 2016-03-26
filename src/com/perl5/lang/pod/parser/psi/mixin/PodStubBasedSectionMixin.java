@@ -20,10 +20,7 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.pod.parser.psi.PodRenderingContext;
-import com.perl5.lang.pod.parser.psi.PodSectionContent;
-import com.perl5.lang.pod.parser.psi.PodSectionTitle;
-import com.perl5.lang.pod.parser.psi.PodStubBasedSection;
+import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
@@ -98,6 +95,12 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 	public String toString()
 	{
 		return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
+	}
+
+	@Override
+	public boolean isIndexed()
+	{
+		return findChildByClass(PodFormatterX.class) != null;
 	}
 
 }

@@ -19,6 +19,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
+import com.perl5.lang.pod.parser.psi.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
@@ -45,5 +46,11 @@ public abstract class PodCompositeElementMixin extends ASTWrapperPsiElement impl
 	public void renderElement(StringBuilder builder, PodRenderingContext context)
 	{
 		PodRenderUtil.renderPsiRange(getFirstChild(), null, builder, context);
+	}
+
+	@Override
+	public boolean isIndexed()
+	{
+		return findChildByClass(PodFormatterX.class) != null;
 	}
 }

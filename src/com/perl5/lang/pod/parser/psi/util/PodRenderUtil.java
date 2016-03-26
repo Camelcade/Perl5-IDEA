@@ -33,6 +33,11 @@ public class PodRenderUtil
 		return renderPsiRange(element, element, context);
 	}
 
+	public static String renderPsiRange(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement)
+	{
+		return renderPsiRange(firstElement, lastElement, new PodRenderingContext());
+	}
+
 	public static String renderPsiRange(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, PodRenderingContext context)
 	{
 		if (firstElement == null)

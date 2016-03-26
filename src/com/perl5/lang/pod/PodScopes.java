@@ -22,6 +22,7 @@ import com.intellij.openapi.util.UserDataHolderEx;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.lang.perl.PerlScopes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -44,7 +45,7 @@ public class PodScopes
 
 	protected static GlobalSearchScope createPerlVarScope(@NotNull Project project)
 	{
-		Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, "perlvar.pod", GlobalSearchScope.projectScope(project));
+		Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, "perlvar.pod", PerlScopes.getProjectAndLibrariesScope(project));
 
 		if (files.size() > 0)
 		{
@@ -63,7 +64,7 @@ public class PodScopes
 
 	protected static GlobalSearchScope createPerlApiScope(@NotNull Project project)
 	{
-		Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, "perlapi.pod", GlobalSearchScope.projectScope(project));
+		Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, "perlapi.pod", PerlScopes.getProjectAndLibrariesScope(project));
 
 		if (files.size() > 0)
 		{
@@ -82,8 +83,8 @@ public class PodScopes
 
 	protected static GlobalSearchScope createPerlFuncScope(@NotNull Project project)
 	{
-		Collection<VirtualFile> filesFunc = FilenameIndex.getVirtualFilesByName(project, "perlfunc.pod", GlobalSearchScope.projectScope(project));
-		Collection<VirtualFile> filesOp = FilenameIndex.getVirtualFilesByName(project, "perlop.pod", GlobalSearchScope.projectScope(project));
+		Collection<VirtualFile> filesFunc = FilenameIndex.getVirtualFilesByName(project, "perlfunc.pod", PerlScopes.getProjectAndLibrariesScope(project));
+		Collection<VirtualFile> filesOp = FilenameIndex.getVirtualFilesByName(project, "perlop.pod", PerlScopes.getProjectAndLibrariesScope(project));
 
 		if (filesFunc.size() > 0 || filesOp.size() > 0)
 		{

@@ -37,7 +37,7 @@ public class PodLexer extends PodLexerGenerated
 	public void reset(CharSequence buffer, int start, int end, int initialState)
 	{
 		super.reset(buffer, start, end, initialState);
-		if (start == 0)
+		if (start == 0 || start > 0 && buffer.charAt(start - 1) == '\n')
 		{
 			yybegin(LEX_COMMAND_WAITING);
 		}

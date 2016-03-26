@@ -18,6 +18,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
@@ -52,5 +53,15 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	{
 		PsiElement content = getTitleBlock();
 		PodRenderUtil.renderPsiRange(content, content, builder, context);
+	}
+
+	@Override
+	public boolean isIndexed()
+	{
+		PsiElement titleBlock = getTitleBlock();
+		if (titleBlock instanceof PodCompositeElement && ((PodCompositeElement) titleBlock).isIndexed())
+			return true;
+
+		return false;
 	}
 }

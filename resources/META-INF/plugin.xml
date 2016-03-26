@@ -150,6 +150,8 @@
         <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandlerDelegate"
                               id="PerlEnterHandler" order="first"/>
 
+        <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
+                               order="first"/>
         <fileTypeDetector implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeDetector"/>
 
         <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>

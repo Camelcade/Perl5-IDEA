@@ -23,4 +23,10 @@ import com.intellij.psi.PsiElement;
  */
 public interface PodCompositeElement extends PsiElement, PodHTMLProvider
 {
+	/**
+	 * Returns if element contains direct child X<>
+	 *
+	 * @return true if is
+	 */
+	boolean isIndexed();
 }
