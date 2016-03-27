@@ -22,12 +22,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,20 +40,42 @@ import java.util.List;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PerlDocumentationProvider extends AbstractDocumentationProvider implements PerlElementTypes
+public class PerlDocumentationProvider extends AbstractDocumentationProvider implements PerlElementTypes, PerlElementPatterns
 {
+	private static final TokenSet myForceAsOp = TokenSet.create(
+			RESERVED_Q,
+			RESERVED_QQ,
+			RESERVED_QX,
+			RESERVED_QW,
+			RESERVED_TR,
+			RESERVED_Y,
+			HEREDOC_OPENER,
+			HEREDOC_END,
+			HEREDOC,
+			HEREDOC_QQ,
+			HEREDOC_QX
+	);
+	private static final TokenSet myForceAsFunc = TokenSet.create(
+			OPERATOR_FILETEST
+	);
+
 	protected static boolean isFunc(PsiElement element)
 	{
 		IElementType elementType = element.getNode().getElementType();
-		return elementType == OPERATOR_FILETEST ||
-				PerlLexer.RESERVED_TOKENSET.contains(elementType) ||
-				element instanceof PerlSubNameElement && ((PerlSubNameElement) element).isBuiltIn();
+		return myForceAsFunc.contains(elementType) ||
+				!myForceAsOp.contains(elementType) && (
+						PerlLexer.RESERVED_TOKENSET.contains(elementType) ||
+								element instanceof PerlSubNameElement && ((PerlSubNameElement) element).isBuiltIn()
+				);
 	}
 
 	protected static boolean isOp(PsiElement element)
 	{
 		IElementType elementType = element.getNode().getElementType();
-		return elementType != OPERATOR_FILETEST && PerlLexer.OPERATORS_TOKENSET.contains(elementType);
+		return myForceAsOp.contains(elementType) ||
+				!myForceAsFunc.contains(elementType) && (
+						PerlLexer.OPERATORS_TOKENSET.contains(elementType)
+				);
 	}
 
 	@Override
@@ -57,7 +83,7 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	{
 		if (element instanceof PerlVariable)
 		{
-			return PerlDocUtil.getVariableDoc((PerlVariable) element);
+			return PerlDocUtil.getPerlVarDoc((PerlVariable) element);
 		}
 		else if (isFunc(element))
 		{
@@ -111,6 +137,15 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 		{
 			return contextElement;
 		}
+		else if (IN_HEREDOC_OPENER_PATTERN.accepts(contextElement))
+		{
+			return PsiTreeUtil.getParentOfType(contextElement, PerlHeredocOpener.class);
+		}
+		else if (IN_HEREDOC_BODY_PATTERN.accepts(contextElement))
+		{
+			return PsiTreeUtil.getParentOfType(contextElement, PerlHeredocElementImpl.class);
+		}
+
 		return super.getCustomDocumentationElement(editor, file, contextElement);
 	}
 

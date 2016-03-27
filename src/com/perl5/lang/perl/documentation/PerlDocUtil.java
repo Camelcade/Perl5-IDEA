@@ -24,7 +24,11 @@ import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlScopes;
+import com.perl5.lang.perl.psi.PerlHeredocOpener;
+import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.pod.PodSearchHelper;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
@@ -41,8 +45,26 @@ import java.util.regex.Pattern;
  */
 public class PerlDocUtil
 {
-	public static String getVariableDoc(PerlVariable variable)
+	public static String getPerlVarDoc(PerlVariable variable)
 	{
+		final Project project = variable.getProject();
+
+		if (variable.isBuiltIn())
+		{
+			PerlVariableType actualType = variable.getActualType();
+			String variableName = variable.getName();
+
+			if (actualType != null && StringUtil.isNotEmpty(variableName))
+			{
+				List<PodCompositeElement> elements = searchPerlVar(project, actualType.getSigil() + variableName);
+
+				for (PodCompositeElement podElement : elements)
+				{
+					return renderElement(podElement);
+				}
+			}
+		}
+
 		return null;
 	}
 
@@ -69,7 +91,13 @@ public class PerlDocUtil
 	public static String getPerlOpDoc(PsiElement element)
 	{
 		final Project project = element.getProject();
-		final String elementText = element.getText();
+		String elementText = element.getText();
+
+		if (element instanceof PerlHeredocOpener || element instanceof PerlHeredocTerminatorElement || element instanceof PerlHeredocElementImpl)
+		{
+			elementText = "heredoc";    // searches with X<>
+		}
+
 		List<PodCompositeElement> elements = searchPerlOp(project, elementText);
 
 		for (PodCompositeElement podElement : elements)
@@ -152,8 +180,30 @@ public class PerlDocUtil
 		return null;
 	}
 
+	/**
+	 * Port of Pod::Perldoc::search_perlvar
+	 *
+	 * @param project project
+	 * @param text    search token
+	 * @return list of results
+	 */
 	protected static List<PodCompositeElement> searchPerlVar(Project project, String text)
 	{
+		if (StringUtil.isNotEmpty(text))
+		{
+			if (text.matches("$[123456789]"))
+			{
+				text = "$<digits>";
+			}
+
+			final Pattern pattern = Pattern.compile(Pattern.quote(text) + "(\\s|\\b|$)");
+
+			PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, PodSearchHelper.PERL_VAR_FILE_NAME, PerlScopes.getProjectAndLibrariesScope(project));
+			if (psiFiles.length > 0)
+			{
+				return searchPodItems(psiFiles[0], pattern);
+			}
+		}
 		return Collections.emptyList();
 	}
 
@@ -181,7 +231,7 @@ public class PerlDocUtil
 				text = "?:";
 			}
 
-			final Pattern pattern = Pattern.compile(Pattern.quote(text) + "(\\b|$)");
+			final Pattern pattern = Pattern.compile(Pattern.quote(text) + "(\\s|\\b|$)");
 
 			PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, PodSearchHelper.PERL_OP_FILE_NAME, PerlScopes.getProjectAndLibrariesScope(project));
 			if (psiFiles.length > 0)
@@ -239,37 +289,42 @@ public class PerlDocUtil
 				text = "-X";
 			}
 
-			final Pattern pattern = Pattern.compile(Pattern.quote(text) + "(\\b|$)");
+			final Pattern pattern = Pattern.compile(Pattern.quote(text) + "(\\s|\\b|$)");
 
 			PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, PodSearchHelper.PERL_FUNC_FILE_NAME, PerlScopes.getProjectAndLibrariesScope(project));
 			if (psiFiles.length > 0)
 			{
-				PsiFile psiFile = psiFiles[0];
-				final List<PodCompositeElement> result = new ArrayList<PodCompositeElement>();
-
-				PsiTreeUtil.processElements(psiFile, new PsiElementProcessor()
-				{
-					@Override
-					public boolean execute(@NotNull PsiElement element)
-					{
-						if (element instanceof PodSectionItem && ((PodSectionItem) element).getListLevel() < 2)
-						{
-							String title = ((PodTitledSection) element).getTitleText();
-
-							if (StringUtil.isNotEmpty(title) && pattern.matcher(title).lookingAt())
-							{
-								result.add((PodCompositeElement) element);
-								return false;
-							}
-						}
-						return true;
-					}
-				});
-				return result;
+				return searchPodItems(psiFiles[0], pattern);
 			}
 		}
 		return Collections.emptyList();
 	}
+
+	protected static List<PodCompositeElement> searchPodItems(PsiFile psiFile, final Pattern pattern)
+	{
+		final List<PodCompositeElement> result = new ArrayList<PodCompositeElement>();
+
+		PsiTreeUtil.processElements(psiFile, new PsiElementProcessor()
+		{
+			@Override
+			public boolean execute(@NotNull PsiElement element)
+			{
+				if (element instanceof PodSectionItem && ((PodSectionItem) element).getListLevel() < 2)
+				{
+					String title = ((PodTitledSection) element).getTitleText();
+
+					if (StringUtil.isNotEmpty(title) && pattern.matcher(title).lookingAt())
+					{
+						result.add((PodCompositeElement) element);
+						return false;
+					}
+				}
+				return true;
+			}
+		});
+		return result;
+	}
+
 
 	protected static List<PodCompositeElement> searchPerlFaqs(Project project, String text)
 	{

@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.intellij.patterns.PlatformPatterns.psiFile;
@@ -254,4 +255,6 @@ public interface PerlElementPatterns extends PerlElementTypes
 			);
 
 
+	PsiElementPattern.Capture<PsiElement> IN_HEREDOC_OPENER_PATTERN = psiElement().inside(psiElement(PerlHeredocOpener.class));
+	PsiElementPattern.Capture<PsiElement> IN_HEREDOC_BODY_PATTERN = psiElement().inside(psiElement(PerlHeredocElementImpl.class));
 }
