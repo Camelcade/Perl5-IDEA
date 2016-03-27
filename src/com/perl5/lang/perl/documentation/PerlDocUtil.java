@@ -26,10 +26,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.pod.PodSearchHelper;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.PodSection;
-import com.perl5.lang.pod.parser.psi.PodSectionItem;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,15 +46,31 @@ public class PerlDocUtil
 		return null;
 	}
 
-	public static String getReservedDoc(PsiElement element)
+	@Nullable
+	public static String getPerlFuncDoc(PsiElement element)
 	{
 		final Project project = element.getProject();
 		final String elementText = element.getText();
 		List<PodCompositeElement> elements = searchPerlFunc(project, elementText);
-		if (elements.size() == 0)
+		if (elements.isEmpty())
 		{
-			elements = searchPerlOp(project, elementText);
+			return getPerlOpDoc(element);
 		}
+
+		for (PodCompositeElement podElement : elements)
+		{
+			return renderElement(podElement);
+		}
+
+		return null;
+	}
+
+	@Nullable
+	public static String getPerlOpDoc(PsiElement element)
+	{
+		final Project project = element.getProject();
+		final String elementText = element.getText();
+		List<PodCompositeElement> elements = searchPerlOp(project, elementText);
 
 		for (PodCompositeElement podElement : elements)
 		{
@@ -103,17 +116,13 @@ public class PerlDocUtil
 			}
 
 			// detecting last section
-			while (true)
+			while (!hasContent)
 			{
 				PsiElement nextSibling = lastSection.getNextSibling();
 
 				if (nextSibling == null)
 					break;
-				if (nextSibling instanceof PodCompositeElement && ((PodCompositeElement) nextSibling).isIndexed())
-					break;
-				if (hasContent && nextSibling instanceof PodSection && ((PodSection) nextSibling).hasContent())
-					break;
-				hasContent = hasContent || nextSibling instanceof PodSection && ((PodSection) nextSibling).hasContent();
+				hasContent = nextSibling instanceof PodSection && ((PodSection) nextSibling).hasContent();
 
 				lastSection = nextSibling;
 			}
@@ -148,8 +157,64 @@ public class PerlDocUtil
 		return Collections.emptyList();
 	}
 
+	/**
+	 * Port of Pod::Perldoc::search_perlop
+	 *
+	 * @param project project
+	 * @param text    search token
+	 * @return list of results
+	 */
 	protected static List<PodCompositeElement> searchPerlOp(Project project, String text)
 	{
+		if (StringUtil.isNotEmpty(text))
+		{
+			if (text.matches("-[rwxoRWXOeszfdlpSbctugkTBMAC]"))
+			{
+				text = "-X";
+			}
+			else if ("=>".equals(text))
+			{
+				text = ",";
+			}
+			else if ("?".equals(text) || ":".equals(text))
+			{
+				text = "?:";
+			}
+
+			final Pattern pattern = Pattern.compile(Pattern.quote(text) + "(\\b|$)");
+
+			PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, PodSearchHelper.PERL_OP_FILE_NAME, PerlScopes.getProjectAndLibrariesScope(project));
+			if (psiFiles.length > 0)
+			{
+				PsiFile psiFile = psiFiles[0];
+				final List<PodCompositeElement> result = new ArrayList<PodCompositeElement>();
+
+				PsiTreeUtil.processElements(psiFile, new PsiElementProcessor()
+				{
+					@Override
+					public boolean execute(@NotNull PsiElement element)
+					{
+						if (element instanceof PodFormatterX)
+						{
+							String elementText = ((PodFormatterX) element).getTitleText();
+
+							if (StringUtil.isNotEmpty(elementText) && pattern.matcher(elementText).lookingAt())
+							{
+
+								PsiElement container = PsiTreeUtil.getParentOfType(element, PodTitledSection.class);
+								if (container != null)
+								{
+									result.add((PodCompositeElement) container);
+									return false;
+								}
+							}
+						}
+						return true;
+					}
+				});
+				return result;
+			}
+		}
 		return Collections.emptyList();
 	}
 
@@ -171,14 +236,10 @@ public class PerlDocUtil
 		{
 			if (text.matches("-[rwxoRWXOeszfdlpSbctugkTBMAC]"))
 			{
-				text = "(?:I<)?-X";
-			}
-			else
-			{
-				text = Pattern.quote(text);
+				text = "-X";
 			}
 
-			final Pattern pattern = Pattern.compile(text);
+			final Pattern pattern = Pattern.compile(Pattern.quote(text) + "(\\b|$)");
 
 			PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, PodSearchHelper.PERL_FUNC_FILE_NAME, PerlScopes.getProjectAndLibrariesScope(project));
 			if (psiFiles.length > 0)

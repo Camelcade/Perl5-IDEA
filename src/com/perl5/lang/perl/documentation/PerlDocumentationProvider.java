@@ -21,8 +21,11 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import org.jetbrains.annotations.NotNull;
@@ -33,12 +36,20 @@ import java.util.List;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PerlDocumentationProvider extends AbstractDocumentationProvider
+public class PerlDocumentationProvider extends AbstractDocumentationProvider implements PerlElementTypes
 {
-	// fixme guess we should create specific token class for this
-	protected static boolean isReserved(PsiElement element)
+	protected static boolean isFunc(PsiElement element)
 	{
-		return PerlLexer.RESERVED_TOKENSET.contains(element.getNode().getElementType());
+		IElementType elementType = element.getNode().getElementType();
+		return elementType == OPERATOR_FILETEST ||
+				PerlLexer.RESERVED_TOKENSET.contains(elementType) ||
+				element instanceof PerlSubNameElement && ((PerlSubNameElement) element).isBuiltIn();
+	}
+
+	protected static boolean isOp(PsiElement element)
+	{
+		IElementType elementType = element.getNode().getElementType();
+		return elementType != OPERATOR_FILETEST && PerlLexer.OPERATORS_TOKENSET.contains(elementType);
 	}
 
 	@Override
@@ -48,9 +59,13 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider
 		{
 			return PerlDocUtil.getVariableDoc((PerlVariable) element);
 		}
-		else if (isReserved(element))
+		else if (isFunc(element))
 		{
-			return PerlDocUtil.getReservedDoc(element);
+			return PerlDocUtil.getPerlFuncDoc(element);
+		}
+		else if (isOp(element))
+		{
+			return PerlDocUtil.getPerlOpDoc(element);
 		}
 
 		return super.generateDoc(element, originalElement);
@@ -92,7 +107,7 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider
 		{
 			return PsiTreeUtil.getParentOfType(contextElement, PerlVariable.class);
 		}
-		else if (isReserved(contextElement))
+		else if (isFunc(contextElement) || isOp(contextElement))
 		{
 			return contextElement;
 		}

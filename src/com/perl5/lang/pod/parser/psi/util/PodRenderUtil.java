@@ -16,6 +16,7 @@
 
 package com.perl5.lang.pod.parser.psi.util;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.xml.util.XmlStringUtil;
 import com.perl5.lang.pod.parser.psi.PodRenderableElement;
@@ -104,7 +105,11 @@ public class PodRenderUtil
 			}
 			else
 			{
-				builder.append(run.getText());
+				String text = run.getText();
+				if (!StringUtil.equals(text, "\n"))
+				{
+					builder.append(run.getText());
+				}
 			}
 
 			if (lastElement != null && lastElement.equals(run))
