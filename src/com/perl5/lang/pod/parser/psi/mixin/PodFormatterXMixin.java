@@ -19,7 +19,6 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
@@ -58,10 +57,4 @@ public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodF
 		return getContentBlock();
 	}
 
-	@Override
-	public int getListLevel()
-	{
-		PsiElement parent = getParent();
-		return parent instanceof PodCompositeElement ? ((PodCompositeElement) parent).getListLevel() : 0;
-	}
 }

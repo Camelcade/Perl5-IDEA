@@ -19,12 +19,16 @@ package com.perl5.lang.pod.parser.psi.impl;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodFile;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -76,12 +80,42 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	@Override
 	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
-		PodRenderUtil.renderPsiRangeAsHTML(getFirstChild(), null, builder, context);
+		PodRenderUtil.renderPsiRangeAsHTML(getFirstNamedBlock(), null, builder, context);
+	}
+
+	@Nullable
+	protected PsiElement getFirstNamedBlock()
+	{
+		return findChildByClass(PodTitledSection.class);
 	}
 
 	@Override
 	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
 	{
-		PodRenderUtil.renderPsiRangeAsText(getFirstChild(), null, builder, context);
+		PodRenderUtil.renderPsiRangeAsText(getFirstNamedBlock(), null, builder, context);
+	}
+
+	@Override
+	public String getPackageName()
+	{
+		return PodFileUtil.getPackageName(this);
+	}
+
+	@Override
+	public boolean isIndexed()
+	{
+		return false;
+	}
+
+	@Override
+	public int getListLevel()
+	{
+		return 0;
+	}
+
+	@Override
+	public boolean isHeading()
+	{
+		return false;
 	}
 }

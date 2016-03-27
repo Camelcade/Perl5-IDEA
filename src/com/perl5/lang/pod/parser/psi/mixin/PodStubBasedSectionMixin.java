@@ -122,4 +122,16 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 		return findChildByClass(PodFormatterX.class) != null;
 	}
 
+	@Override
+	public boolean isHeading()
+	{
+		return false;
+	}
+
+	@Override
+	public int getListLevel()
+	{
+		PsiElement parent = getParent();
+		return parent instanceof PodCompositeElement ? ((PodCompositeElement) parent).getListLevel() : 0;
+	}
 }

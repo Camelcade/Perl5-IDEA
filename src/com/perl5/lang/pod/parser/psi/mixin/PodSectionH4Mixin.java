@@ -39,4 +39,9 @@ public class PodSectionH4Mixin extends PodTitledSectionMixin implements PodSecti
 		builder.append("</h4>");
 	}
 
+	@Override
+	public boolean isHeading()
+	{
+		return true;
+	}
 }

@@ -75,4 +75,10 @@ public abstract class PodCompositeElementMixin extends ASTWrapperPsiElement impl
 		PsiElement parent = getParent();
 		return parent instanceof PodCompositeElement ? ((PodCompositeElement) parent).getListLevel() : 0;
 	}
+
+	@Override
+	public boolean isHeading()
+	{
+		return false;
+	}
 }

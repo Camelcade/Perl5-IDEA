@@ -38,4 +38,11 @@ public class PodSectionH1Mixin extends PodTitledSectionMixin implements PodSecti
 		super.renderElementTitleAsHTML(builder, context);
 		builder.append("</h1>");
 	}
+
+	@Override
+	public boolean isHeading()
+	{
+		return true;
+	}
+
 }

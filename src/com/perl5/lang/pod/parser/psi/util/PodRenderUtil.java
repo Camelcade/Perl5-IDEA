@@ -29,6 +29,11 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PodRenderUtil
 {
+	public static String renderPsiElementAsHTML(@Nullable PsiElement firstElement)
+	{
+		return renderPsiRangeAsHTML(firstElement, firstElement);
+	}
+
 	public static String renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement)
 	{
 		return renderPsiRangeAsHTML(firstElement, lastElement, new PodRenderingContext());
@@ -74,6 +79,11 @@ public class PodRenderUtil
 			}
 			run = run.getNextSibling();
 		}
+	}
+
+	public static String renderPsiElementAsText(@Nullable PsiElement element)
+	{
+		return renderPsiRangeAsText(element, element);
 	}
 
 	public static String renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement)

@@ -36,4 +36,12 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement
 	 * @return list level zero-based
 	 */
 	int getListLevel();
+
+
+	/**
+	 * Heading elements should return true
+	 *
+	 * @return
+	 */
+	boolean isHeading();
 }

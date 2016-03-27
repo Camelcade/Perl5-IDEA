@@ -32,6 +32,8 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -85,19 +87,10 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	@Override
 	public String generateDoc(PsiElement element, @Nullable PsiElement originalElement)
 	{
-		if (element instanceof PerlVariable)
+		if (element instanceof PodCompositeElement)
 		{
-			return PerlDocUtil.getPerlVarDoc((PerlVariable) element);
+			return PerlDocUtil.renderElement((PodCompositeElement) element);
 		}
-		else if (isFunc(element))
-		{
-			return PerlDocUtil.getPerlFuncDoc(element);
-		}
-		else if (isOp(element))
-		{
-			return PerlDocUtil.getPerlOpDoc(element);
-		}
-
 		return super.generateDoc(element, originalElement);
 	}
 
@@ -123,6 +116,10 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	@Override
 	public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context)
 	{
+		if (context.getLanguage() == PodLanguage.INSTANCE)
+		{
+			return PerlDocUtil.resolveDocLink(link, context);
+		}
 		return super.getDocumentationElementForLink(psiManager, link, context);
 	}
 
@@ -133,21 +130,29 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 		if (contextElement == null)
 			return null;
 
-		if (contextElement instanceof PerlVariableNameElement)
+		if (contextElement instanceof PerlVariable)
 		{
-			return PsiTreeUtil.getParentOfType(contextElement, PerlVariable.class);
+			return PerlDocUtil.getPerlVarDoc((PerlVariable) contextElement);
 		}
-		else if (isFunc(contextElement) || isOp(contextElement))
+		else if (isFunc(contextElement))
 		{
-			return contextElement;
+			return PerlDocUtil.getPerlFuncDoc(contextElement);
+		}
+		else if (isOp(contextElement))
+		{
+			return PerlDocUtil.getPerlOpDoc(contextElement);
+		}
+		else if (contextElement instanceof PerlVariableNameElement)
+		{
+			return getCustomDocumentationElement(editor, file, PsiTreeUtil.getParentOfType(contextElement, PerlVariable.class));
 		}
 		else if (IN_HEREDOC_OPENER_PATTERN.accepts(contextElement))
 		{
-			return PsiTreeUtil.getParentOfType(contextElement, PerlHeredocOpener.class);
+			return getCustomDocumentationElement(editor, file, PsiTreeUtil.getParentOfType(contextElement, PerlHeredocOpener.class));
 		}
 		else if (IN_HEREDOC_BODY_PATTERN.accepts(contextElement))
 		{
-			return PsiTreeUtil.getParentOfType(contextElement, PerlHeredocElementImpl.class);
+			return getCustomDocumentationElement(editor, file, PsiTreeUtil.getParentOfType(contextElement, PerlHeredocElementImpl.class));
 		}
 
 		return super.getCustomDocumentationElement(editor, file, contextElement);

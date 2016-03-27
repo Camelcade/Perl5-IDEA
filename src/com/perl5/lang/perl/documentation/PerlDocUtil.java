@@ -17,9 +17,13 @@
 package com.perl5.lang.perl.documentation;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.tree.IElementType;
@@ -31,8 +35,11 @@ import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodSearchHelper;
 import com.perl5.lang.pod.parser.psi.*;
+import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
+import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +52,81 @@ import java.util.List;
  */
 public class PerlDocUtil implements PerlElementTypes
 {
-	public static String getPerlVarDoc(PerlVariable variable)
+	@Nullable
+	public static PsiElement resolveDocLink(String link, PsiElement origin)
+	{
+		final Project project = origin.getProject();
+		PodLinkDescriptor descriptor = PodLinkDescriptor.getDescriptor(link);
+
+		if (descriptor != null)
+		{
+			PsiFile targetFile = origin.getContainingFile();
+
+			if (descriptor.getFileId() != null)
+			{
+				// seek file
+				String fileId = descriptor.getFileId();
+				targetFile = null;
+
+				if (fileId.contains(PerlPackageUtil.PACKAGE_SEPARATOR)) // can be Foo/Bar.pod or Foo/Bar.pm
+				{
+					fileId = PodFileUtil.getFilenameFromPackage(fileId);
+
+					for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
+					{
+						VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(fileId);
+						if (targetVirtualFile != null)
+						{
+							if ((targetFile = PsiManager.getInstance(project).findFile(targetVirtualFile)) != null)
+							{
+								break;
+							}
+						}
+					}
+				}
+				else // top level file
+				{
+					fileId += "." + PodFileUtil.POD_FILE_EXTENSION;
+
+					PsiFile[] psiFiles = FilenameIndex.getFilesByName(
+							origin.getProject(),
+							fileId,
+							PerlScopes.getProjectAndLibrariesScope(origin.getProject()));
+					if (psiFiles.length > 0)
+					{
+						targetFile = psiFiles[0];
+					}
+				}
+
+				if (targetFile == null)
+				{
+					Messages.showErrorDialog(project, "Unable to find pod file: " + fileId, "File Not Found");
+				}
+			}
+
+			if (targetFile != null)
+			{
+				if (descriptor.getSection() == null)
+				{
+					return targetFile;
+				}
+				else    // seek section
+				{
+					PodDocumentPattern pattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection());
+					PsiElement targetElement = searchPodElement(targetFile, pattern);
+					if (targetElement == null)
+					{
+						System.err.println("Unable to resolve: " + descriptor.getSection());
+					}
+					return targetElement == null ? targetFile : targetElement;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static PsiElement getPerlVarDoc(PerlVariable variable)
 	{
 		final Project project = variable.getProject();
 
@@ -64,7 +145,7 @@ public class PerlDocUtil implements PerlElementTypes
 					pattern.setItemPattern("$<digits>");
 				}
 
-				return renderElement(searchPodElementInFile(project, PodSearchHelper.PERL_VAR_FILE_NAME, PodDocumentPattern.itemPattern(text)));
+				return searchPodElementInFile(project, PodSearchHelper.PERL_VAR_FILE_NAME, PodDocumentPattern.itemPattern(text));
 			}
 		}
 
@@ -72,7 +153,7 @@ public class PerlDocUtil implements PerlElementTypes
 	}
 
 	@Nullable
-	public static String getPerlFuncDoc(PsiElement element)
+	public static PsiElement getPerlFuncDoc(PsiElement element)
 	{
 		final Project project = element.getProject();
 		String text = element.getText();
@@ -84,11 +165,11 @@ public class PerlDocUtil implements PerlElementTypes
 
 		PodCompositeElement podElement = searchPodElementInFile(project, PodSearchHelper.PERL_FUNC_FILE_NAME, PodDocumentPattern.itemPattern(text));
 
-		return podElement == null ? getPerlOpDoc(element) : renderElement(podElement);
+		return podElement == null ? getPerlOpDoc(element) : podElement;
 	}
 
 	@Nullable
-	public static String getPerlOpDoc(@NotNull PsiElement element)
+	public static PsiElement getPerlOpDoc(@NotNull PsiElement element)
 	{
 		final Project project = element.getProject();
 		String text = element.getText();
@@ -126,7 +207,7 @@ public class PerlDocUtil implements PerlElementTypes
 			pattern.setIndexKey("?:");
 		}
 
-		return renderElement(searchPodElementInFile(project, PodSearchHelper.PERL_OP_FILE_NAME, pattern));
+		return searchPodElementInFile(project, PodSearchHelper.PERL_OP_FILE_NAME, pattern);
 	}
 
 	protected static PodCompositeElement searchPodElementInFile(Project project, String fileName, PodDocumentPattern pattern)
@@ -178,6 +259,11 @@ public class PerlDocUtil implements PerlElementTypes
 	{
 		if (element == null)
 			return null;
+
+		if (element instanceof PodFileImpl)
+		{
+			return ((PodFileImpl) element).getAsHTML();
+		}
 
 		PodTitledSection podSection = null;
 

@@ -30,6 +30,7 @@ public class PodDocumentPattern
 {
 	private int myListLevel = 2;    // this is default value
 	private Pattern myItemPattern;    // pattern to search items
+	private Pattern myHeadingPattern; // pattern to search headers
 	private String myIndexKey;    // index key to search. If both defined - first wins
 
 	private PodDocumentPattern()
@@ -51,9 +52,17 @@ public class PodDocumentPattern
 		return pattern;
 	}
 
+	public static PodDocumentPattern headingAndItemPattern(@NotNull String itemText)
+	{
+		PodDocumentPattern pattern = new PodDocumentPattern();
+		pattern.setItemPattern(itemText);
+		pattern.setHeadingPattern(itemText);
+		return pattern;
+	}
+
 	public boolean accepts(PsiElement element)
 	{
-		return element != null && (acceptsItem(element) || acceptsIndex(element));
+		return element != null && (acceptsItem(element) || acceptsIndex(element) || acceptsHeading(element));
 	}
 
 	protected boolean acceptsItem(PsiElement element)
@@ -61,6 +70,19 @@ public class PodDocumentPattern
 		if (getItemPattern() != null && element instanceof PodSectionItem)
 		{
 			if (((PodSectionItem) element).getListLevel() < getListLevel())
+			{
+				String title = ((PodTitledSection) element).getTitleText();
+				return StringUtil.isNotEmpty(title) && getItemPattern().matcher(title).lookingAt();
+			}
+		}
+		return false;
+	}
+
+	protected boolean acceptsHeading(PsiElement element)
+	{
+		if (getHeadingPattern() != null && element instanceof PodTitledSection && ((PodTitledSection) element).isHeading())
+		{
+			if (((PodTitledSection) element).getListLevel() < getListLevel())
 			{
 				String title = ((PodTitledSection) element).getTitleText();
 				return StringUtil.isNotEmpty(title) && getItemPattern().matcher(title).lookingAt();
@@ -98,14 +120,29 @@ public class PodDocumentPattern
 		return myItemPattern;
 	}
 
+	public void setItemPattern(Pattern myItemPattern)
+	{
+		this.myItemPattern = myItemPattern;
+	}
+
 	public void setItemPattern(String itemPattern)
 	{
 		setItemPattern(StringUtil.isEmpty(itemPattern) ? null : Pattern.compile(Pattern.quote(itemPattern) + "(\\s|\\b|$)"));
 	}
 
-	public void setItemPattern(Pattern myItemPattern)
+	public Pattern getHeadingPattern()
 	{
-		this.myItemPattern = myItemPattern;
+		return myHeadingPattern;
+	}
+
+	public void setHeadingPattern(String pattern)
+	{
+		setHeadingPattern(StringUtil.isEmpty(pattern) ? null : Pattern.compile(Pattern.quote(pattern) + "(\\s|\\b|$)"));
+	}
+
+	public void setHeadingPattern(Pattern myHeadingPattern)
+	{
+		this.myHeadingPattern = myHeadingPattern;
 	}
 
 	public String getIndexKey()

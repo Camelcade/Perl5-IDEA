@@ -39,4 +39,10 @@ public class PodSectionH2Mixin extends PodTitledSectionMixin implements PodSecti
 		builder.append("</h2>");
 	}
 
+	@Override
+	public boolean isHeading()
+	{
+		return true;
+	}
+
 }

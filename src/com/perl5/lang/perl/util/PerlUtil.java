@@ -39,6 +39,12 @@ import java.util.*;
  */
 public class PerlUtil
 {
+	@Nullable
+	public static VirtualFile getFileClassRoot(PsiFile psiFile)
+	{
+		return getFileClassRoot(psiFile.getProject(), psiFile.getVirtualFile());
+	}
+
 
 	/**
 	 * Searches for innermost source root for a file

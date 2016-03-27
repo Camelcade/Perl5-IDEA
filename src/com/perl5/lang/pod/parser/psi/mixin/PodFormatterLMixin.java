@@ -16,11 +16,13 @@
 
 package com.perl5.lang.pod.parser.psi.mixin;
 
+import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.parser.psi.PodFormatterL;
+import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -36,11 +38,23 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 	@Override
 	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
-		PsiElement content = getContentBlock();
-		if (content != null)
+		String contentText = PodRenderUtil.renderPsiElementAsText(getContentBlock());
+		if (StringUtil.isNotEmpty(contentText))
 		{
-			String contentText = content.getText();
-			if (StringUtil.isNotEmpty(contentText))
+			PodLinkDescriptor descriptor = PodLinkDescriptor.getDescriptor(contentText);
+			if (descriptor != null)
+			{
+				builder.append("<a href=\"");
+				if (!descriptor.isUrl())
+				{
+					builder.append(DocumentationManager.PSI_ELEMENT_PROTOCOL);
+				}
+				builder.append(descriptor.getCanonicalUrl());
+				builder.append("\">");
+				builder.append(descriptor.getTitle());
+				builder.append("</a>");
+			}
+			else    // fallback
 			{
 				builder.append("<a href=\"");
 				builder.append(contentText);
