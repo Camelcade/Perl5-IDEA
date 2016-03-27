@@ -53,7 +53,11 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 			HEREDOC_END,
 			HEREDOC,
 			HEREDOC_QQ,
-			HEREDOC_QX
+			HEREDOC_QX,
+
+			RESERVED_S,
+			RESERVED_M,
+			RESERVED_QR
 	);
 	private static final TokenSet myForceAsFunc = TokenSet.create(
 			OPERATOR_FILETEST
