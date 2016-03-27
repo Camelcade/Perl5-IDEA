@@ -40,7 +40,7 @@ public class PodSectionParagraphMixin extends PodSectionMixin implements PodSect
 
 		if (firstChild != null)
 		{
-			builder.append("<p style=\"padding-top: 5px;padding-bottom: 5px;\">");
+			builder.append("<p style=\"padding-bottom: 10px;\">");
 			PodRenderUtil.renderPsiRangeAsHTML(firstChild, null, builder, context);
 			builder.append("</p>");
 		}

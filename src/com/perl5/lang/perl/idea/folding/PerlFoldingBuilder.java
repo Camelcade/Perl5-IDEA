@@ -424,6 +424,16 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 		}
 
 		@Override
+		public void visitElement(PsiElement element)
+		{
+			if (element.getNode().getElementType() == POD)
+			{
+				addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
+			}
+			super.visitElement(element);
+		}
+
+		@Override
 		public void visitConstantsBlock(@NotNull PsiPerlConstantsBlock o)
 		{
 			addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);

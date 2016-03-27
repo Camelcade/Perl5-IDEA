@@ -18,7 +18,6 @@ package com.perl5.lang.perl.documentation;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -52,6 +51,7 @@ import java.util.List;
  */
 public class PerlDocUtil implements PerlElementTypes
 {
+	// fixme this shit must be refactored
 	@Nullable
 	public static PsiElement resolveDocLink(String link, PsiElement origin)
 	{
@@ -68,13 +68,13 @@ public class PerlDocUtil implements PerlElementTypes
 				String fileId = descriptor.getFileId();
 				targetFile = null;
 
-				if (fileId.contains(PerlPackageUtil.PACKAGE_SEPARATOR)) // can be Foo/Bar.pod or Foo/Bar.pm
+				if (fileId.contains(PerlPackageUtil.PACKAGE_SEPARATOR) || !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
 				{
-					fileId = PodFileUtil.getFilenameFromPackage(fileId);
+					String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
 
 					for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
 					{
-						VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(fileId);
+						VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(podRelativePath);
 						if (targetVirtualFile != null)
 						{
 							if ((targetFile = PsiManager.getInstance(project).findFile(targetVirtualFile)) != null)
@@ -83,8 +83,25 @@ public class PerlDocUtil implements PerlElementTypes
 							}
 						}
 					}
+
+					if (targetFile == null) // pod not found, search for PM
+					{
+						String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);
+
+						for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
+						{
+							VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(packageRelativePath);
+							if (targetVirtualFile != null)
+							{
+								if ((targetFile = PsiManager.getInstance(project).findFile(targetVirtualFile)) != null)
+								{
+									break;
+								}
+							}
+						}
+					}
 				}
-				else // top level file
+				else // top level file perl.*
 				{
 					fileId += "." + PodFileUtil.POD_FILE_EXTENSION;
 
@@ -98,17 +115,22 @@ public class PerlDocUtil implements PerlElementTypes
 					}
 				}
 
+/*				// fixme invoked multiple times
 				if (targetFile == null)
 				{
 					Messages.showErrorDialog(project, "Unable to find pod file: " + fileId, "File Not Found");
 				}
+*/
 			}
 
 			if (targetFile != null)
 			{
 				if (descriptor.getSection() == null)
 				{
-					return targetFile;
+					if (targetFile instanceof PodFile)
+						return targetFile;
+
+					return PsiTreeUtil.findChildOfType(targetFile, PodCompositeElement.class);
 				}
 				else    // seek section
 				{
@@ -263,6 +285,10 @@ public class PerlDocUtil implements PerlElementTypes
 		if (element instanceof PodFileImpl)
 		{
 			return ((PodFileImpl) element).getAsHTML();
+		}
+		else if (element.getNode().getElementType() == PerlElementTypes.POD)
+		{
+			return PodRenderUtil.renderPsiRangeAsHTML(element.getFirstChild(), element.getLastChild());
 		}
 
 		PodTitledSection podSection = null;

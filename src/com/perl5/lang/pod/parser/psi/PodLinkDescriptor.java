@@ -36,7 +36,7 @@ public class PodLinkDescriptor
 	);
 	private static final Pattern NAMED_ELEMENT_PATTERN = Pattern.compile(
 			EXPLICIT_TITLE_PATTERN +    // title
-					"(?:" + IDENTIFIER_PATTERN + ")?" +        // file
+					"(?:(?<!/)" + IDENTIFIER_PATTERN + ")?" +        // file
 					"(?:/(?:" + IDENTIFIER_PATTERN + "))?"    // section
 	);
 

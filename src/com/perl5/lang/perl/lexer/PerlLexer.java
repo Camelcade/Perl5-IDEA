@@ -620,9 +620,7 @@ public class PerlLexer extends PerlLexerGenerated
 					|| ((tokenStart < bufferEnd - STRING_END_LENGTH) && StringUtil.equals(buffer.subSequence(tokenStart, tokenStart + STRING_END_LENGTH), STRING_END))
 					)
 			{
-				setTokenStart(tokenStart);
-				setTokenEnd(bufferEnd);
-				return COMMENT_BLOCK;
+				return parseEndBlock(tokenStart, bufferEnd);
 			}
 			// capture line comment
 			else if (currentChar == '#')
@@ -651,6 +649,30 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 
 		return super.perlAdvance();
+	}
+
+
+	private IElementType parseEndBlock(int tokenStart, int bufferEnd)
+	{
+		int run = tokenStart;
+		CharSequence buffer = getBuffer();
+
+		while (run < bufferEnd)
+		{
+			char currentChar = buffer.charAt(run);
+			if (currentChar == '=' && (run == 0 || buffer.charAt(run - 1) == '\n') && run + 1 < bufferEnd && Character.isLetter(buffer.charAt(run + 1)))
+			{
+				break;
+			}
+			run++;
+		}
+
+		pushPreparsedToken(tokenStart, run, COMMENT_BLOCK);
+		if (run < bufferEnd)
+		{
+			pushPreparsedToken(run, bufferEnd, POD);
+		}
+		return getPreParsedToken();
 	}
 
 

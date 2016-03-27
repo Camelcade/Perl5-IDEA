@@ -41,7 +41,7 @@ public class PodSectionCodeWrapperMixin extends PodSectionMixin implements PodSe
 	@Override
 	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
-		builder.append("<pre style=\"padding-top: 5px;padding-bottom: 5px;\"><code>");
+		builder.append("<pre style=\"padding-bottom: 10px;\"><code>");
 		super.renderElementContentAsHTML(builder, context);
 		builder.append("</code></pre>");
 	}

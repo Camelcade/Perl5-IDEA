@@ -18,19 +18,18 @@ package com.perl5.lang.perl.documentation;
 
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
@@ -127,12 +126,12 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	@Override
 	public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement)
 	{
-		if (contextElement == null)
+		if (contextElement == null || contextElement.getLanguage() != PerlLanguage.INSTANCE)
 			return null;
 
 		if (contextElement instanceof PerlVariable)
 		{
-			return PerlDocUtil.getPerlVarDoc((PerlVariable) contextElement);
+			return PerlDocUtil.getPerlVarDoc((PerlVariable) contextElement); // fixme try to search doc in package or declaration
 		}
 		else if (isFunc(contextElement))
 		{
@@ -141,6 +140,23 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 		else if (isOp(contextElement))
 		{
 			return PerlDocUtil.getPerlOpDoc(contextElement);
+		}
+		else if (contextElement instanceof PerlSubNameElement)
+		{
+			String packageName = ((PerlSubNameElement) contextElement).getPackageName();
+			String subName = ((PerlSubNameElement) contextElement).getName();
+			if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName))
+			{
+				return PerlDocUtil.resolveDocLink(packageName + "/" + ((PerlSubNameElement) contextElement).getName(), contextElement);
+			}
+		}
+		else if (contextElement instanceof PerlNamespaceElement)
+		{
+			String packageName = ((PerlNamespaceElement) contextElement).getCanonicalName();
+			if (StringUtil.isNotEmpty(packageName))
+			{
+				return PerlDocUtil.resolveDocLink(packageName, contextElement);
+			}
 		}
 		else if (contextElement instanceof PerlVariableNameElement)
 		{

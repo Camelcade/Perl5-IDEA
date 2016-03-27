@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public abstract class PodCompositeElementMixin extends ASTWrapperPsiElement implements PodCompositeElement
+public class PodCompositeElementMixin extends ASTWrapperPsiElement implements PodCompositeElement
 {
 	public PodCompositeElementMixin(@NotNull ASTNode node)
 	{
