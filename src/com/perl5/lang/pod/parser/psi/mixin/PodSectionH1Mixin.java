@@ -32,10 +32,10 @@ public class PodSectionH1Mixin extends PodTitledSectionMixin implements PodSecti
 	}
 
 	@Override
-	public void renderElementTitle(StringBuilder builder, PodRenderingContext context)
+	public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		builder.append("<h1>");
-		super.renderElementTitle(builder, context);
+		super.renderElementTitleAsHTML(builder, context);
 		builder.append("</h1>");
 	}
 }

@@ -32,10 +32,10 @@ public class PodFormatterCMixin extends PodSectionMixin implements PodFormatterC
 	}
 
 	@Override
-	public void renderElementContent(StringBuilder builder, PodRenderingContext context)
+	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		builder.append("<code>");
-		super.renderElementContent(builder, context);
+		super.renderElementContentAsHTML(builder, context);
 		builder.append("</code>");
 	}
 }

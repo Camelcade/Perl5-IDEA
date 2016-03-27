@@ -18,18 +18,10 @@ package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
 public interface PodStubBasedSection extends StubBasedPsiElement<PodSectionStub>, PodTitledSection
 {
-	/**
-	 * Returns section title
-	 *
-	 * @return text representation of section
-	 */
-	@Nullable
-	String getTitleText();
 }

@@ -41,7 +41,7 @@ public class PodSectionItemTitleMixin extends PodCompositeElementMixin implement
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		if (isItemBulleted())
 		{
@@ -50,12 +50,12 @@ public class PodSectionItemTitleMixin extends PodCompositeElementMixin implement
 			{
 				firstChild = firstChild.getNextSibling();
 			}
-			PodRenderUtil.renderPsiRange(firstChild, null, builder, context);
+			PodRenderUtil.renderPsiRangeAsHTML(firstChild, null, builder, context);
 
 		}
 		else
 		{
-			super.renderElement(builder, context);
+			super.renderElementAsHTML(builder, context);
 		}
 	}
 }

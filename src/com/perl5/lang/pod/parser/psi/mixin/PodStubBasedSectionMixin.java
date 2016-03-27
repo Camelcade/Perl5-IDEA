@@ -48,29 +48,53 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 	}
 
 	@Override
+	public boolean hasContent()
+	{
+		return getContentBlock() != null;
+	}
+
+	@Override
 	public PsiElement getContentBlock()
 	{
 		return findChildByClass(PodSectionContent.class);
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
-
-		renderElementTitle(builder, new PodRenderingContext());
-		renderElementContent(builder, context);
+		renderElementTitleAsHTML(builder, new PodRenderingContext());
+		renderElementContentAsHTML(builder, context);
 	}
 
-	public void renderElementTitle(StringBuilder builder, PodRenderingContext context)
+	public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		PsiElement content = getTitleBlock();
-		PodRenderUtil.renderPsiRange(content, content, builder, context);
+		PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
 	}
 
-	public void renderElementContent(StringBuilder builder, PodRenderingContext context)
+	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		PsiElement content = getContentBlock();
-		PodRenderUtil.renderPsiRange(content, content, builder, context);
+		PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+	}
+
+	@Override
+	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		renderElementTitleAsText(builder, new PodRenderingContext());
+		renderElementContentAsText(builder, context);
+	}
+
+	public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		PsiElement content = getTitleBlock();
+		PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
+	}
+
+	public void renderElementContentAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		PsiElement content = getContentBlock();
+		PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
 	}
 
 	@Override
@@ -81,14 +105,9 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 		if (stub != null)
 			return stub.getTitleText();
 
-		return getTitleTextFromPsi();
-	}
-
-	@Nullable
-	protected String getTitleTextFromPsi()
-	{
-		PsiElement titleElement = getTitleBlock();
-		return titleElement == null ? null : titleElement.getText();
+		StringBuilder builder = new StringBuilder();
+		renderElementTitleAsText(builder, new PodRenderingContext());
+		return builder.toString();
 	}
 
 	@Override

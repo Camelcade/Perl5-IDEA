@@ -737,8 +737,6 @@ POD file
             PsiItemSectionTitleImpl(PodElementType.ITEM_SECTION_TITLE)
               PsiElement(PodTokenType.POD_IDENTIFIER)('something')
               PsiElement(PodTokenType.POD_NEWLINE)('\n')
-            PsiItemSectionContentImpl(PodElementType.ITEM_SECTION_CONTENT)
-              <empty list>
         PsiElement(PodTokenType.POD_BACK)('=back')
         PsiElement(PodTokenType.POD_NEWLINE)('\n')
       PsiBeginSectionImpl(PodElementType.BEGIN_SECTION)

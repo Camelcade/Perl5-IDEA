@@ -60,23 +60,23 @@ public class PodSectionItemMixin extends PodTitledSectionMixin implements PodSec
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		boolean isBulleted = isContainerBulleted();
 
 		if (isBulleted)
 		{
 			builder.append("<li>");
-			super.renderElement(builder, context);
+			super.renderElementAsHTML(builder, context);
 			builder.append("</li>");
 		}
 		else
 		{
 			builder.append("<dt>");
-			super.renderElementTitle(builder, context);
+			super.renderElementTitleAsHTML(builder, context);
 			builder.append("</dt>");
 			builder.append("<dd>");
-			super.renderElementContent(builder, context);
+			super.renderElementContentAsHTML(builder, context);
 			builder.append("</dd>");
 		}
 	}

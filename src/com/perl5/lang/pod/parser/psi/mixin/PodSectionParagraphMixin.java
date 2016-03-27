@@ -34,15 +34,26 @@ public class PodSectionParagraphMixin extends PodSectionMixin implements PodSect
 	}
 
 	@Override
-	public void renderElementContent(StringBuilder builder, PodRenderingContext context)
+	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		PsiElement firstChild = getFirstChild();
 
 		if (firstChild != null)
 		{
-			builder.append("<p style=\"padding: 1em 0;\">");
-			PodRenderUtil.renderPsiRange(firstChild, null, builder, context);
+			builder.append("<p style=\"padding-top: 5px;padding-bottom: 5px;\">");
+			PodRenderUtil.renderPsiRangeAsHTML(firstChild, null, builder, context);
 			builder.append("</p>");
+		}
+	}
+
+	@Override
+	public void renderElementContentAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		PsiElement firstChild = getFirstChild();
+
+		if (firstChild != null)
+		{
+			PodRenderUtil.renderPsiRangeAsText(firstChild, null, builder, context);
 		}
 	}
 }

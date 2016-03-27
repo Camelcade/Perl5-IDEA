@@ -42,14 +42,32 @@ public abstract class PodSectionMixin extends PodCompositeElementMixin implement
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public boolean hasContent()
 	{
-		renderElementContent(builder, new PodRenderingContext());
+		return getContentBlock() != null;
 	}
 
-	public void renderElementContent(StringBuilder builder, PodRenderingContext context)
+	@Override
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
+	{
+		renderElementContentAsHTML(builder, new PodRenderingContext());
+	}
+
+	@Override
+	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		renderElementContentAsText(builder, new PodRenderingContext());
+	}
+
+	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		PsiElement content = getContentBlock();
-		PodRenderUtil.renderPsiRange(content, content, builder, context);
+		PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+	}
+
+	public void renderElementContentAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		PsiElement content = getContentBlock();
+		PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
 	}
 }

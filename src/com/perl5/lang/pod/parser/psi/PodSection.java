@@ -23,5 +23,7 @@ import com.intellij.psi.PsiElement;
  */
 public interface PodSection extends PodCompositeElement
 {
+	boolean hasContent();
+
 	PsiElement getContentBlock();
 }

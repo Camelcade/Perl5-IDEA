@@ -33,7 +33,7 @@ public class PodFormatterEMixin extends PodSectionMixin implements PodFormatterE
 	}
 
 	@Override
-	public void renderElementContent(StringBuilder builder, PodRenderingContext context)
+	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		PsiElement content = getContentBlock();
 

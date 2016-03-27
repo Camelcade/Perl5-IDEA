@@ -53,7 +53,7 @@ public class PodOverSectionContentMixin extends PodCompositeElementMixin impleme
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		boolean isBulleted = isBulleted();
 
@@ -66,7 +66,7 @@ public class PodOverSectionContentMixin extends PodCompositeElementMixin impleme
 			builder.append("<dl>");
 		}
 
-		super.renderElement(builder, context);
+		super.renderElementAsHTML(builder, context);
 
 		if (isBulleted)
 		{
@@ -76,5 +76,11 @@ public class PodOverSectionContentMixin extends PodCompositeElementMixin impleme
 		{
 			builder.append("</dl>");
 		}
+	}
+
+	@Override
+	public int getListLevel()
+	{
+		return super.getListLevel() + 1;
 	}
 }

@@ -18,7 +18,7 @@ package com.perl5.lang.pod.parser.psi.util;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.xml.util.XmlStringUtil;
-import com.perl5.lang.pod.parser.psi.PodHTMLProvider;
+import com.perl5.lang.pod.parser.psi.PodRenderableElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,27 +28,22 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PodRenderUtil
 {
-	public static String renderPsiElement(@Nullable PsiElement element, PodRenderingContext context)
+	public static String renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement)
 	{
-		return renderPsiRange(element, element, context);
+		return renderPsiRangeAsHTML(firstElement, lastElement, new PodRenderingContext());
 	}
 
-	public static String renderPsiRange(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement)
-	{
-		return renderPsiRange(firstElement, lastElement, new PodRenderingContext());
-	}
-
-	public static String renderPsiRange(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, PodRenderingContext context)
+	public static String renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, PodRenderingContext context)
 	{
 		if (firstElement == null)
 			return "";
 
 		StringBuilder result = new StringBuilder();
-		renderPsiRange(firstElement, lastElement, result, context);
+		renderPsiRangeAsHTML(firstElement, lastElement, result, context);
 		return result.toString();
 	}
 
-	public static void renderPsiRange(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, @NotNull StringBuilder builder, @NotNull PodRenderingContext context)
+	public static void renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, @NotNull StringBuilder builder, @NotNull PodRenderingContext context)
 	{
 		if (firstElement == null)
 			return;
@@ -56,9 +51,9 @@ public class PodRenderUtil
 		PsiElement run = firstElement;
 		while (run != null)
 		{
-			if (run instanceof PodHTMLProvider)
+			if (run instanceof PodRenderableElement)
 			{
-				((PodHTMLProvider) run).renderElement(builder, context);
+				((PodRenderableElement) run).renderElementAsHTML(builder, context);
 			}
 			else
 			{
@@ -79,4 +74,45 @@ public class PodRenderUtil
 			run = run.getNextSibling();
 		}
 	}
+
+	public static String renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement)
+	{
+		return renderPsiRangeAsText(firstElement, lastElement, new PodRenderingContext());
+	}
+
+	public static String renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, PodRenderingContext context)
+	{
+		if (firstElement == null)
+			return "";
+
+		StringBuilder result = new StringBuilder();
+		renderPsiRangeAsText(firstElement, lastElement, result, context);
+		return result.toString();
+	}
+
+	public static void renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, @NotNull StringBuilder builder, @NotNull PodRenderingContext context)
+	{
+		if (firstElement == null)
+			return;
+
+		PsiElement run = firstElement;
+		while (run != null)
+		{
+			if (run instanceof PodRenderableElement)
+			{
+				((PodRenderableElement) run).renderElementAsText(builder, context);
+			}
+			else
+			{
+				builder.append(run.getText());
+			}
+
+			if (lastElement != null && lastElement.equals(run))
+			{
+				break;
+			}
+			run = run.getNextSibling();
+		}
+	}
+
 }

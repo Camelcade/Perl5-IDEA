@@ -63,14 +63,14 @@ public class PodSectionFormattedMixin extends PodSectionMixin implements PodSect
 	}
 
 	@Override
-	public void renderElementContent(StringBuilder builder, PodRenderingContext context)
+	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		String formatterName = getFormatterName();
 		if (FORMAT_HTML.equals(formatterName))
 		{
 			boolean isSafe = context.isSafe();
 			context.setSafe(true);
-			super.renderElementContent(builder, context);
+			super.renderElementContentAsHTML(builder, context);
 			context.setSafe(isSafe);
 		}
 	}

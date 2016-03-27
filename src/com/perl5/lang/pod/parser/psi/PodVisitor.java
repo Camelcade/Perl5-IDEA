@@ -16,24 +16,11 @@
 
 package com.perl5.lang.pod.parser.psi;
 
-import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.psi.PsiVisitor;
 
 /**
- * Created by hurricup on 26.03.2016.
+ * Created by hurricup on 27.03.2016.
  */
-public interface PodSectionItem extends PodTitledSection, PodElementTypes
+public class PodVisitor extends PsiVisitor
 {
-	/**
-	 * Checks if this item defines bullteted list, as described in http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions
-	 *
-	 * @return true if list should be bulleted
-	 */
-	boolean isBulleted();
-
-	/**
-	 * Check if this item container is bulleted
-	 *
-	 * @return true if yep
-	 */
-	boolean isContainerBulleted();
 }

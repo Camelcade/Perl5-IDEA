@@ -32,10 +32,10 @@ public class PodFormatterSMixin extends PodSectionMixin implements PodFormatterS
 	}
 
 	@Override
-	public void renderElementContent(StringBuilder builder, PodRenderingContext context)
+	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		builder.append("<span style=\"white-space: nowrap;\">");
-		super.renderElementContent(builder, context);
+		super.renderElementContentAsHTML(builder, context);
 		builder.append("</span>");
 	}
 }

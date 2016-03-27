@@ -24,6 +24,7 @@ import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -42,17 +43,31 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 
-		renderElementTitle(builder, new PodRenderingContext());
-		super.renderElement(builder, context);
+		renderElementTitleAsHTML(builder, new PodRenderingContext());
+		super.renderElementAsHTML(builder, context);
 	}
 
-	public void renderElementTitle(StringBuilder builder, PodRenderingContext context)
+	public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		PsiElement content = getTitleBlock();
-		PodRenderUtil.renderPsiRange(content, content, builder, context);
+		PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+	}
+
+	@Override
+	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
+	{
+
+		renderElementTitleAsText(builder, new PodRenderingContext());
+		super.renderElementAsText(builder, context);
+	}
+
+	public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		PsiElement content = getTitleBlock();
+		PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
 	}
 
 	@Override
@@ -63,5 +78,20 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 			return true;
 
 		return false;
+	}
+
+	@Nullable
+	@Override
+	public String getTitleText()
+	{
+		PsiElement titleElement = getTitleBlock();
+
+		if (titleElement == null)
+			return null;
+
+		StringBuilder builder = new StringBuilder();
+		renderElementTitleAsText(builder, new PodRenderingContext());
+		return builder.toString();
+
 	}
 }

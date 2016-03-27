@@ -19,13 +19,20 @@ package com.perl5.lang.pod.parser.psi;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodHTMLProvider
+public interface PodRenderableElement
 {
 	/**
 	 * Returns HTML representation of a subtree
 	 *
 	 * @param builder builder to append to
 	 */
-	void renderElement(StringBuilder builder, PodRenderingContext context);
+	void renderElementAsHTML(StringBuilder builder, PodRenderingContext context);
 
+
+	/**
+	 * Returns Text representation of a subtree
+	 *
+	 * @param builder builder to append to
+	 */
+	void renderElementAsText(StringBuilder builder, PodRenderingContext context);
 }

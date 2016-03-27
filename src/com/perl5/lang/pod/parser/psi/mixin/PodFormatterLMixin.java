@@ -34,7 +34,7 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 	}
 
 	@Override
-	public void renderElementContent(StringBuilder builder, PodRenderingContext context)
+	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 		PsiElement content = getContentBlock();
 		if (content != null)

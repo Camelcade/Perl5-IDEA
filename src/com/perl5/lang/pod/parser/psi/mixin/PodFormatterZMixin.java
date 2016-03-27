@@ -32,7 +32,7 @@ public class PodFormatterZMixin extends PodSectionMixin implements PodFormatterZ
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
 	}
 }

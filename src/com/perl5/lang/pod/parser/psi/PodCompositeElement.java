@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodCompositeElement extends PsiElement, PodHTMLProvider
+public interface PodCompositeElement extends PsiElement, PodRenderableElement
 {
 	/**
 	 * Returns if element contains direct child X<>
@@ -29,4 +29,11 @@ public interface PodCompositeElement extends PsiElement, PodHTMLProvider
 	 * @return true if is
 	 */
 	boolean isIndexed();
+
+	/**
+	 * Calculating list level for current element
+	 *
+	 * @return list level zero-based
+	 */
+	int getListLevel();
 }

@@ -18,6 +18,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
@@ -35,22 +36,43 @@ public abstract class PodCompositeElementMixin extends ASTWrapperPsiElement impl
 	}
 
 	// fixme this is debugging method
-	public String getHTML()
+	public String getAsHTML()
 	{
 		StringBuilder builder = new StringBuilder();
-		renderElement(builder, new PodRenderingContext());
+		renderElementAsHTML(builder, new PodRenderingContext());
+		return builder.toString();
+	}
+
+	// fixme this is debugging method
+	public String getAsText()
+	{
+		StringBuilder builder = new StringBuilder();
+		renderElementAsText(builder, new PodRenderingContext());
 		return builder.toString();
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
-		PodRenderUtil.renderPsiRange(getFirstChild(), null, builder, context);
+		PodRenderUtil.renderPsiRangeAsHTML(getFirstChild(), null, builder, context);
+	}
+
+	@Override
+	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		PodRenderUtil.renderPsiRangeAsText(getFirstChild(), null, builder, context);
 	}
 
 	@Override
 	public boolean isIndexed()
 	{
 		return findChildByClass(PodFormatterX.class) != null;
+	}
+
+	@Override
+	public int getListLevel()
+	{
+		PsiElement parent = getParent();
+		return parent instanceof PodCompositeElement ? ((PodCompositeElement) parent).getListLevel() : 0;
 	}
 }

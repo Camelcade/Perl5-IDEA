@@ -58,16 +58,30 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	}
 
 	// fixme this is debugging method
-	public String getHTML()
+	public String getAsHTML()
 	{
 		StringBuilder builder = new StringBuilder();
-		renderElement(builder, new PodRenderingContext());
+		renderElementAsHTML(builder, new PodRenderingContext());
+		return builder.toString();
+	}
+
+	// fixme this is debugging method
+	public String getAsText()
+	{
+		StringBuilder builder = new StringBuilder();
+		renderElementAsText(builder, new PodRenderingContext());
 		return builder.toString();
 	}
 
 	@Override
-	public void renderElement(StringBuilder builder, PodRenderingContext context)
+	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
-		PodRenderUtil.renderPsiRange(getFirstChild(), null, builder, context);
+		PodRenderUtil.renderPsiRangeAsHTML(getFirstChild(), null, builder, context);
+	}
+
+	@Override
+	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
+	{
+		PodRenderUtil.renderPsiRangeAsText(getFirstChild(), null, builder, context);
 	}
 }
