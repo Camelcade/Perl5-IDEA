@@ -62,6 +62,8 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 			RESERVED_QR
 	);
 	private static final TokenSet myForceAsFunc = TokenSet.create(
+			BLOCK_NAME,
+			TAG,
 			OPERATOR_FILETEST
 	);
 

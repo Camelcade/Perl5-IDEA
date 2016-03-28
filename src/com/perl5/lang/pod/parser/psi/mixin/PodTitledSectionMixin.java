@@ -92,7 +92,7 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 
 		StringBuilder builder = new StringBuilder();
 		renderElementTitleAsText(builder, new PodRenderingContext());
-		return builder.toString();
+		return builder.toString().trim();
 
 	}
 
@@ -114,5 +114,12 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	public String getPodLink()
 	{
 		return PodRenderUtil.getPodLinkForElement(this);
+	}
+
+	@Nullable
+	@Override
+	public String getPodLinkText()
+	{
+		return getTitleText();
 	}
 }

@@ -164,4 +164,11 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 	{
 		return getContainingFile().getIcon(0);
 	}
+
+	@Nullable
+	@Override
+	public String getPodLinkText()
+	{
+		return getTitleText();
+	}
 }

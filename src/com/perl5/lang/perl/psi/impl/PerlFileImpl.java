@@ -571,4 +571,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	{
 		return getFilePackageName();
 	}
+
+	@Nullable
+	@Override
+	public String getPodLinkText()
+	{
+		return getPodLink();
+	}
 }

@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.documentation;
 
-import com.intellij.codeInsight.documentation.DocumentationManager;
-import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.text.StringUtil;
@@ -42,17 +40,51 @@ import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
 public class PerlDocUtil implements PerlElementTypes
 {
+	private static final Map<String, String> myKeywordsRedirections = new THashMap<String, String>();
+
+	static
+	{
+		// fixme data and end are not handled, cause atm they are parsed as comments, may be we should fix this
+		myKeywordsRedirections.put("__DATA__", "perldata/\"Special Literals\"");
+		myKeywordsRedirections.put("__END__", "perldata/\"Special Literals\"");
+
+		myKeywordsRedirections.put("BEGIN", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+		myKeywordsRedirections.put("CHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+		myKeywordsRedirections.put("END", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+		myKeywordsRedirections.put("INIT", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+		myKeywordsRedirections.put("UNITCHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+
+		myKeywordsRedirections.put("DESTROY", "perlobj/\"Destructors\"");
+
+		myKeywordsRedirections.put("AUTOLOAD", "perlsub/\"Autoloading\"");
+
+		myKeywordsRedirections.put("default", "perlsyn/\"Switch Statements\"");
+		myKeywordsRedirections.put("given", "perlsyn/\"Switch Statements\"");
+		myKeywordsRedirections.put("when", "perlsyn/\"Switch Statements\"");
+
+		myKeywordsRedirections.put("else", "perlsyn/\"Compound Statements\"");
+		myKeywordsRedirections.put("elsif", "perlsyn/\"Compound Statements\"");
+		myKeywordsRedirections.put("for", "perlsyn/\"Compound Statements\"");
+		myKeywordsRedirections.put("foreach", "perlsyn/\"Compound Statements\"");
+		myKeywordsRedirections.put("if", "perlsyn/\"Compound Statements\"");
+		myKeywordsRedirections.put("unless", "perlsyn/\"Compound Statements\"");
+		myKeywordsRedirections.put("until", "perlsyn/\"Compound Statements\"");
+		myKeywordsRedirections.put("while", "perlsyn/\"Compound Statements\"");
+	}
+
 	// fixme this shit must be refactored
 	@Nullable
 	public static PsiElement resolveDocLink(String link, PsiElement origin)
@@ -181,6 +213,12 @@ public class PerlDocUtil implements PerlElementTypes
 	{
 		final Project project = element.getProject();
 		String text = element.getText();
+
+		String redirect = myKeywordsRedirections.get(text);
+		if (redirect != null)
+		{
+			return resolveDocLink(redirect, element);
+		}
 
 		if (text.matches("-[rwxoRWXOeszfdlpSbctugkTBMAC]"))
 		{
@@ -339,22 +377,31 @@ public class PerlDocUtil implements PerlElementTypes
 
 			StringBuilder builder = new StringBuilder();
 
-			// appending toplink
-			PsiFile file = podSection.getContainingFile();
-			if (file instanceof PodLinkTarget)
+			// appending breadcrumbs
+			List<String> breadCrumbs = new ArrayList<String>();
+			run = podSection.getParent();
+			while (true)
 			{
-				ItemPresentation filePresentation = file.getPresentation();
-				String fileLink = ((PodLinkTarget) file).getPodLink();
-				if (filePresentation != null && fileLink != null)
+				if (run instanceof PodLinkTarget)
 				{
-					builder.append("<p><a href=\"");
-					builder.append(DocumentationManager.PSI_ELEMENT_PROTOCOL);
-					builder.append(PodRenderUtil.encodeLink(fileLink));
-					builder.append("\">");
-					builder.append(filePresentation.getPresentableText());
-					builder.append("</a></p>");
-
+					String bcLink = ((PodLinkTarget) run).getPodLink();
+					if (StringUtil.isNotEmpty(bcLink))
+					{
+						breadCrumbs.add(0, PodRenderUtil.getHTMLPsiLink(bcLink, ((PodLinkTarget) run).getPodLinkText()));
+					}
 				}
+				if (run instanceof PsiFile)
+				{
+					break;
+				}
+				run = run.getParent();
+			}
+
+			if (!breadCrumbs.isEmpty())
+			{
+				builder.append("<p>");
+				builder.append(StringUtil.join(breadCrumbs, ": "));
+				builder.append("</p>");
 			}
 
 			String closeTag = "";

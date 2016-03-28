@@ -17,7 +17,6 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Matcher;
@@ -181,7 +180,7 @@ public class PodLinkDescriptor
 			url.append(getSection());
 		}
 
-		return PodRenderUtil.encodeLink(url.toString());
+		return url.toString();
 	}
 
 	public String getEnforcedFileId()

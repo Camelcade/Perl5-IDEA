@@ -24,6 +24,19 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface PodLinkTarget
 {
+	/**
+	 * Returns pod link to this element
+	 *
+	 * @return pod link
+	 */
 	@Nullable
 	String getPodLink();
+
+	/**
+	 * Returns pod link text for this element
+	 *
+	 * @return pod link text
+	 */
+	@Nullable
+	String getPodLinkText();
 }

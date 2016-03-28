@@ -16,7 +16,6 @@
 
 package com.perl5.lang.pod.parser.psi.mixin;
 
-import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiFile;
@@ -47,31 +46,19 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 
 			if (descriptor != null)
 			{
-				builder.append("<a href=\"");
-				if (!descriptor.isUrl())
+				if (descriptor.getFileId() == null)
 				{
-					if (descriptor.getFileId() == null)
+					PsiFile psiFile = getContainingFile();
+					if (psiFile instanceof PodLinkTarget)
 					{
-						PsiFile psiFile = getContainingFile();
-						if (psiFile instanceof PodLinkTarget)
-						{
-							descriptor.setEnforcedFileId(((PodLinkTarget) psiFile).getPodLink());
-						}
+						descriptor.setEnforcedFileId(((PodLinkTarget) psiFile).getPodLink());
 					}
-					builder.append(DocumentationManager.PSI_ELEMENT_PROTOCOL);
 				}
-				builder.append(descriptor.getCanonicalUrl());
-				builder.append("\">");
-				builder.append(descriptor.getTitle());
-				builder.append("</a>");
+				builder.append(PodRenderUtil.getHTMLLink(descriptor));
 			}
 			else    // fallback
 			{
-				builder.append("<a href=\"");
-				builder.append(contentText);
-				builder.append("\">");
-				builder.append(contentText);
-				builder.append("</a>");
+				builder.append(PodRenderUtil.getHTMLPsiLink(contentText));
 			}
 		}
 	}

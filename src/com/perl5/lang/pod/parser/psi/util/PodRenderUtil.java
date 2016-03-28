@@ -16,14 +16,12 @@
 
 package com.perl5.lang.pod.parser.psi.util;
 
+import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.xml.util.XmlStringUtil;
-import com.perl5.lang.pod.parser.psi.PodLinkTarget;
-import com.perl5.lang.pod.parser.psi.PodRenderableElement;
-import com.perl5.lang.pod.parser.psi.PodRenderingContext;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -103,7 +101,7 @@ public class PodRenderUtil
 
 		StringBuilder result = new StringBuilder();
 		renderPsiRangeAsText(firstElement, lastElement, result, context);
-		return result.toString();
+		return result.toString().trim();
 	}
 
 	public static void renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, @NotNull StringBuilder builder, @NotNull PodRenderingContext context)
@@ -137,6 +135,44 @@ public class PodRenderUtil
 			}
 			run = run.getNextSibling();
 		}
+	}
+
+	public static String getHTMLLink(@NotNull PodLinkDescriptor descriptor)
+	{
+		return getHTMLLink(descriptor.getCanonicalUrl(), !descriptor.isUrl(), descriptor.getTitle());
+	}
+
+	public static String getHTMLPsiLink(@NotNull String link, @Nullable String text)
+	{
+		return getHTMLLink(link, true, text);
+	}
+
+	public static String getHTMLPsiLink(@NotNull String link)
+	{
+		return getHTMLLink(link, true, null);
+	}
+
+	public static String getHTMLLink(@NotNull String link, boolean isPsi, @Nullable String text)
+	{
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("<a href=\"");
+
+		if (isPsi)
+		{
+			builder.append(DocumentationManager.PSI_ELEMENT_PROTOCOL);
+			builder.append(link);
+		}
+		else
+		{
+			builder.append(PodRenderUtil.encodeLink(link));
+		}
+
+		builder.append("\">");
+		builder.append(text == null ? link : text);
+		builder.append("</a>");
+
+		return builder.toString();
 	}
 
 	public static String encodeLink(String link)
