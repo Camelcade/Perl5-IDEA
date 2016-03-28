@@ -22,7 +22,9 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.pod.parser.psi.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -55,6 +57,13 @@ public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodF
 	public PsiElement getTitleBlock()
 	{
 		return getContentBlock();
+	}
+
+	@Nullable
+	@Override
+	public String getPodLink()
+	{
+		return PodRenderUtil.getPodLinkForElement(this);
 	}
 
 }

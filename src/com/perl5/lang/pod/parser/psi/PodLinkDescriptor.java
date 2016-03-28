@@ -17,9 +17,9 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.Nullable;
 
-import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
  */
 public class PodLinkDescriptor
 {
+	private static final Pattern FILE_IDENTIFIER_PATTERN = Pattern.compile("([^\\s/\"'`]+)");
 	private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("\"([^\"]*?)\"|(.*?)");
 	private static final Pattern EXPLICIT_TITLE_PATTERN = Pattern.compile("(?:(?:" + IDENTIFIER_PATTERN + ")\\|)?");
 	private static final Pattern URL_PATTERN = Pattern.compile(
@@ -37,12 +38,13 @@ public class PodLinkDescriptor
 	);
 	private static final Pattern NAMED_ELEMENT_PATTERN = Pattern.compile(
 			EXPLICIT_TITLE_PATTERN +    // title
-					"(?:(?<!/)" + IDENTIFIER_PATTERN + ")?" +        // file
-					"(?:/(?:" + IDENTIFIER_PATTERN + "))?"    // section
+					"(?:(?<!/)" + FILE_IDENTIFIER_PATTERN + "(?=$|/))?" +        // file
+					"(?:/?(?:" + IDENTIFIER_PATTERN + "))?"    // section
 	);
 
 	private final String myOriginal;
 	private String myFileId;
+	private String myEnforcedFileId;
 	private String mySection;
 	private String myTitle;
 	private boolean myIsUrl;
@@ -78,13 +80,11 @@ public class PodLinkDescriptor
 
 			if (m.group(3) != null)
 				descriptor.setFileId(m.group(3));
-			else if (m.group(4) != null)
-				descriptor.setFileId(m.group(4));
 
-			if (m.group(5) != null)
+			if (m.group(4) != null)
+				descriptor.setSection(m.group(4));
+			else if (m.group(5) != null)
 				descriptor.setSection(m.group(5));
-			else if (m.group(6) != null)
-				descriptor.setSection(m.group(6));
 
 			return descriptor;
 		}
@@ -160,27 +160,37 @@ public class PodLinkDescriptor
 
 	public String getCanonicalUrl()
 	{
+		if (isUrl())
+		{
+			return getFileId();
+		}
+
 		StringBuilder url = new StringBuilder("");
 		if (getFileId() != null)
 		{
 			url.append(getFileId());
 		}
+		else if (getEnforcedFileId() != null)
+		{
+			url.append(getEnforcedFileId());
+		}
+
 		if (getSection() != null)
 		{
 			url.append("/");
 			url.append(getSection());
 		}
 
-		try
-		{
-			if (isUrl())
-			{
-				return url.toString();
-			}
-			return URLEncoder.encode(url.toString(), "UTF-8");
-		} catch (Exception e)
-		{
-			throw new RuntimeException(e);
-		}
+		return PodRenderUtil.encodeLink(url.toString());
+	}
+
+	public String getEnforcedFileId()
+	{
+		return myEnforcedFileId;
+	}
+
+	public void setEnforcedFileId(String myEnforcedFileId)
+	{
+		this.myEnforcedFileId = myEnforcedFileId;
 	}
 }

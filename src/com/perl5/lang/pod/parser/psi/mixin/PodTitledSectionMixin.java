@@ -108,4 +108,11 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 		}
 		return getTitleText();
 	}
+
+	@Nullable
+	@Override
+	public String getPodLink()
+	{
+		return PodRenderUtil.getPodLinkForElement(this);
+	}
 }

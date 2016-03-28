@@ -16,21 +16,14 @@
 
 package com.perl5.lang.pod.parser.psi;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 26.03.2016.
+ * Created by hurricup on 28.03.2016.
+ * Means that file may be navigated from pod
  */
-public interface PodTitledSection extends PodSection, PodLinkTarget
+public interface PodLinkTarget
 {
-	/**
-	 * Returns section title
-	 *
-	 * @return text representation of section
-	 */
 	@Nullable
-	String getTitleText();
-
-	PsiElement getTitleBlock();
+	String getPodLink();
 }

@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.documentation;
 
+import com.intellij.codeInsight.documentation.DocumentationManager;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.text.StringUtil;
@@ -336,6 +338,24 @@ public class PerlDocUtil implements PerlElementTypes
 			}
 
 			StringBuilder builder = new StringBuilder();
+
+			// appending toplink
+			PsiFile file = podSection.getContainingFile();
+			if (file instanceof PodLinkTarget)
+			{
+				ItemPresentation filePresentation = file.getPresentation();
+				String fileLink = ((PodLinkTarget) file).getPodLink();
+				if (filePresentation != null && fileLink != null)
+				{
+					builder.append("<p><a href=\"");
+					builder.append(DocumentationManager.PSI_ELEMENT_PROTOCOL);
+					builder.append(PodRenderUtil.encodeLink(fileLink));
+					builder.append("\">");
+					builder.append(filePresentation.getPresentableText());
+					builder.append("</a></p>");
+
+				}
+			}
 
 			String closeTag = "";
 

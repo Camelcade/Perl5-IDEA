@@ -22,6 +22,6 @@ import com.intellij.psi.PsiFile;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodFile extends PsiFile, PodRenderableElement, PodCompositeElement, ItemPresentation
+public interface PodFile extends PsiFile, PodRenderableElement, PodCompositeElement, ItemPresentation, PodLinkTarget
 {
 }

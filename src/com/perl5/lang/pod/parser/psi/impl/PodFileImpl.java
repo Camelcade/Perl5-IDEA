@@ -156,4 +156,11 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	{
 		return getIcon(0);
 	}
+
+	@Nullable
+	@Override
+	public String getPodLink()
+	{
+		return getPresentableText();
+	}
 }

@@ -18,11 +18,16 @@ package com.perl5.lang.pod.parser.psi.util;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.xml.util.XmlStringUtil;
+import com.perl5.lang.pod.parser.psi.PodLinkTarget;
 import com.perl5.lang.pod.parser.psi.PodRenderableElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.net.URLEncoder;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -120,6 +125,10 @@ public class PodRenderUtil
 				{
 					builder.append(run.getText());
 				}
+				else
+				{
+					builder.append(" ");
+				}
 			}
 
 			if (lastElement != null && lastElement.equals(run))
@@ -128,6 +137,38 @@ public class PodRenderUtil
 			}
 			run = run.getNextSibling();
 		}
+	}
+
+	public static String encodeLink(String link)
+	{
+		try
+		{
+			return URLEncoder.encode(link, "UTF-8");
+		} catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static String getPodLinkForElement(PodTitledSection element)
+	{
+		String elementLink = element.getTitleText();
+		if (StringUtil.isEmpty(elementLink))
+		{
+			return null;
+		}
+
+		PsiFile psiFile = element.getContainingFile();
+
+		if (psiFile instanceof PodLinkTarget)
+		{
+			String fileLink = ((PodLinkTarget) psiFile).getPodLink();
+			if (StringUtil.isNotEmpty(fileLink))
+			{
+				return fileLink + "/" + elementLink;
+			}
+		}
+		return "/" + elementLink;
 	}
 
 }

@@ -22,6 +22,7 @@ import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.pod.parser.psi.PodLinkTarget;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,7 +32,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 09.08.2015.
  */
-public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContainer, PerlLabelScope, ItemPresentation
+public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContainer, PerlLabelScope, ItemPresentation, PodLinkTarget
 {
 	/**
 	 * Checks variable type from cache or using callback getVariableTypeHeavy
