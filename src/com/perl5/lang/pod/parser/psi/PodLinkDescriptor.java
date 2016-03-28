@@ -19,6 +19,7 @@ package com.perl5.lang.pod.parser.psi;
 import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.Nullable;
 
+import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -170,6 +171,16 @@ public class PodLinkDescriptor
 			url.append(getSection());
 		}
 
-		return url.toString();
+		try
+		{
+			if (isUrl())
+			{
+				return url.toString();
+			}
+			return URLEncoder.encode(url.toString(), "UTF-8");
+		} catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 }

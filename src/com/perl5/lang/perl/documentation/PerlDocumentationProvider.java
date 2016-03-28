@@ -36,6 +36,7 @@ import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -117,7 +118,13 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	{
 		if (context.getLanguage() == PodLanguage.INSTANCE)
 		{
-			return PerlDocUtil.resolveDocLink(link, context);
+			try
+			{
+				return PerlDocUtil.resolveDocLink(URLDecoder.decode(link, "UTF-8"), context);
+			} catch (Exception e)
+			{
+				throw new RuntimeException(e);
+			}
 		}
 		return super.getDocumentationElementForLink(psiManager, link, context);
 	}
