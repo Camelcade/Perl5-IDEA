@@ -140,7 +140,7 @@ public class PerlDocUtil implements PerlElementTypes
 					{
 						System.err.println("Unable to resolve: " + descriptor.getSection());
 					}
-					return targetElement == null ? targetFile : targetElement;
+					return targetElement;
 				}
 			}
 		}

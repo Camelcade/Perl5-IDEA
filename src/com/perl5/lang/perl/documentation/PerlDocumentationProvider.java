@@ -24,13 +24,13 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import org.jetbrains.annotations.NotNull;
@@ -165,20 +165,11 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 				return PerlDocUtil.resolveDocLink(packageName, contextElement);
 			}
 		}
-		else if (contextElement instanceof PerlVariableNameElement)
+		else if (!(contextElement instanceof PsiFile))
 		{
-			return getCustomDocumentationElement(editor, file, PsiTreeUtil.getParentOfType(contextElement, PerlVariable.class));
-		}
-		else if (IN_HEREDOC_OPENER_PATTERN.accepts(contextElement))
-		{
-			return getCustomDocumentationElement(editor, file, PsiTreeUtil.getParentOfType(contextElement, PerlHeredocOpener.class));
-		}
-		else if (IN_HEREDOC_BODY_PATTERN.accepts(contextElement))
-		{
-			return getCustomDocumentationElement(editor, file, PsiTreeUtil.getParentOfType(contextElement, PerlHeredocElementImpl.class));
+			return getCustomDocumentationElement(editor, file, contextElement.getParent());
 		}
 
 		return super.getCustomDocumentationElement(editor, file, contextElement);
 	}
-
 }

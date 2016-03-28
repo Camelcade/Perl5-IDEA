@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
@@ -93,5 +94,18 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 		renderElementTitleAsText(builder, new PodRenderingContext());
 		return builder.toString();
 
+	}
+
+	@Nullable
+	@Override
+	public String getPresentableText()
+	{
+		String filePresentableText = super.getPresentableText();
+
+		if (StringUtil.isNotEmpty(filePresentableText))
+		{
+			return filePresentableText + "/" + getTitleText();
+		}
+		return getTitleText();
 	}
 }

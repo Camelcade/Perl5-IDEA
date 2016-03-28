@@ -17,8 +17,6 @@
 package com.perl5.lang.pod.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.pod.PodLanguage;
@@ -75,8 +73,9 @@ public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSecti
 	@Override
 	public boolean shouldCreateStub(ASTNode node)
 	{
-		PsiElement psi = node.getPsi();
-		return (psi instanceof PodStubBasedSection) && StringUtil.isNotEmpty(((PodStubBasedSection) psi).getTitleText());
+		return false;
+//		PsiElement psi = node.getPsi();
+//		return (psi instanceof PodStubBasedSection) && StringUtil.isNotEmpty(((PodStubBasedSection) psi).getTitleText());
 	}
 
 	@Override

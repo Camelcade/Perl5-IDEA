@@ -17,8 +17,11 @@
 package com.perl5.lang.pod.parser.psi.impl;
 
 import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.filetypes.PodFileType;
@@ -96,12 +99,6 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	}
 
 	@Override
-	public String getPackageName()
-	{
-		return PodFileUtil.getPackageName(this);
-	}
-
-	@Override
 	public boolean isIndexed()
 	{
 		return false;
@@ -117,5 +114,46 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	public boolean isHeading()
 	{
 		return false;
+	}
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return this;
+	}
+
+	@Nullable
+	@Override
+	public String getPresentableText()
+	{
+		String packageName = PodFileUtil.getPackageName(this);
+		if (StringUtil.isEmpty(packageName))
+		{
+			return getName();
+		}
+		if (StringUtil.startsWith(packageName, "pods::"))
+		{
+			return packageName.substring(6);
+		}
+		return packageName;
+	}
+
+	@Nullable
+	@Override
+	public String getLocationString()
+	{
+		final PsiDirectory psiDirectory = getParent();
+		if (psiDirectory != null)
+		{
+			return psiDirectory.getVirtualFile().getPresentableUrl();
+		}
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon(boolean unused)
+	{
+		return getIcon(0);
 	}
 }

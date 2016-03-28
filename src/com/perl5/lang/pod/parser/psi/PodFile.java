@@ -16,17 +16,12 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiFile;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodFile extends PsiFile, PodRenderableElement, PodCompositeElement
+public interface PodFile extends PsiFile, PodRenderableElement, PodCompositeElement, ItemPresentation
 {
-	/**
-	 * Returns package name relative to class root
-	 *
-	 * @return package name
-	 */
-	String getPackageName();
 }

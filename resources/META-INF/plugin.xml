@@ -559,7 +559,7 @@
                                        implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
         <quoteHandler fileType="POD file" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
         <stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>
-        <stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>
+        <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
         <!--POD settings end -->
 
 

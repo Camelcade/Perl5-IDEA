@@ -16,12 +16,13 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodCompositeElement extends PsiElement, PodRenderableElement
+public interface PodCompositeElement extends PsiElement, PodRenderableElement, ItemPresentation
 {
 	/**
 	 * Returns if element contains direct child X<>
