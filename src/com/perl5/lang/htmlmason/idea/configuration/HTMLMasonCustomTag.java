@@ -72,6 +72,7 @@ public class HTMLMasonCustomTag
 		return myText.equals(that.myText);
 
 	}
+
 	@Override
 	public int hashCode()
 	{

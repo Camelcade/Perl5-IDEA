@@ -63,7 +63,7 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
 		Collection<PerlNamespaceDefinition> result = PerlPackageUtil.getNamespaceDefinitions(
 				project,
 				packageName,
-				(includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project): GlobalSearchScope.projectScope(project))
+				(includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))
 		);
 		//noinspection SuspiciousToArrayCall
 		return result.toArray(new NavigationItem[result.size()]);
