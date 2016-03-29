@@ -55,6 +55,7 @@ public class PerlDocUtil implements PerlElementTypes
 {
 	private static final Map<String, String> myKeywordsRedirections = new THashMap<String, String>();
 	private static final Map<String, String> myOperatorsRedirections = new THashMap<String, String>();
+	private static final Map<String, String> myVariablesRedirections = new THashMap<String, String>();
 
 	static
 	{
@@ -90,6 +91,12 @@ public class PerlDocUtil implements PerlElementTypes
 		myOperatorsRedirections.put("s", "perlop/\"s/PATTERN/\"");
 		myOperatorsRedirections.put("m", "perlop/\"m/PATTERN/\"");
 		myOperatorsRedirections.put("=>", "perlop/\"Comma Operator\"");
+
+		myVariablesRedirections.put("@ISA", "perlobj/\"A Class is Simply a Package\"");
+		myVariablesRedirections.put("@EXPORT", "Exporter/\"How to Export\"");
+		myVariablesRedirections.put("@EXPORT_OK", "Exporter/\"How to Export\"");
+		myVariablesRedirections.put("%EXPORT_TAGS", "Exporter/\"Specialised Import Lists\"");
+		myVariablesRedirections.put("$VERSION", "perlobj/\"VERSION\"");
 	}
 
 	// fixme this shit must be refactored
@@ -219,14 +226,20 @@ public class PerlDocUtil implements PerlElementTypes
 	{
 		final Project project = variable.getProject();
 
-		if (variable.isBuiltIn())
-		{
-			PerlVariableType actualType = variable.getActualType();
-			String variableName = variable.getName();
+		PerlVariableType actualType = variable.getActualType();
+		String variableName = variable.getName();
 
-			if (actualType != null && StringUtil.isNotEmpty(variableName))
+		if (actualType != null && StringUtil.isNotEmpty(variableName))
+		{
+			String text = actualType.getSigil() + variableName;
+
+			if (myVariablesRedirections.containsKey(text))
 			{
-				String text = actualType.getSigil() + variableName;
+				return resolveDocLink(myVariablesRedirections.get(text), variable);
+			}
+
+			if (variable.isBuiltIn())
+			{
 				PodDocumentPattern pattern = PodDocumentPattern.itemPattern(text);
 
 				if (text.matches("$[123456789]"))
