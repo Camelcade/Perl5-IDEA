@@ -23,6 +23,7 @@ import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.parser.PodParser;
@@ -37,7 +38,7 @@ public class PerlPodElementType extends ILazyParseableElementType implements Psi
 {
 	public PerlPodElementType(@NotNull @NonNls String debugName)
 	{
-		super(debugName, PodLanguage.INSTANCE);
+		super(debugName, PerlLanguage.INSTANCE);
 	}
 
 	@Override

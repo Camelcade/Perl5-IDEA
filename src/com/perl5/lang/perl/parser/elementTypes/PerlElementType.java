@@ -16,17 +16,19 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 24.04.2015.
  */
-public class PerlElementType extends PerlTokenType
+public class PerlElementType extends IElementType
 {
 	public PerlElementType(@NotNull @NonNls String debugName)
 	{
-		super(debugName);
+		super(debugName, PerlLanguage.INSTANCE);
 	}
 
 	public String toString()

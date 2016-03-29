@@ -32,6 +32,7 @@ import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
+import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -173,7 +174,7 @@ public class PerlPsiUtil
 		PsiElement result = element.getPrevSibling();
 		while (true)
 		{
-			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace))
+			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace || result instanceof PodCompositeElement))
 				break;
 			result = result.getPrevSibling();
 		}
