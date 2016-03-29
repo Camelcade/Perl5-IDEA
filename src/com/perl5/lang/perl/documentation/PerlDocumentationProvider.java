@@ -32,6 +32,7 @@ import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -164,9 +165,22 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 		{
 			String packageName = ((PerlSubNameElement) contextElement).getPackageName();
 			String subName = ((PerlSubNameElement) contextElement).getName();
-			if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName))
+			if (StringUtil.isNotEmpty(subName))
 			{
-				return PerlDocUtil.resolveDocLink(packageName + "/" + ((PerlSubNameElement) contextElement).getName(), contextElement);
+				PsiElement result = null;
+
+				// search by link
+				if (StringUtil.isNotEmpty(packageName) && !StringUtil.equals(PerlPackageUtil.MAIN_PACKAGE, packageName))
+				{
+					result = PerlDocUtil.resolveDocLink(packageName + "/" + ((PerlSubNameElement) contextElement).getName(), contextElement);
+				}
+
+				// fixme add some heuristic for current file if it's not pm ?
+
+				if (result != null)
+				{
+					return result;
+				}
 			}
 		}
 		else if (contextElement instanceof PerlNamespaceElement)
