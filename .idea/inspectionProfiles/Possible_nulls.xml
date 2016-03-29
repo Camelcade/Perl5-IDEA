@@ -620,7 +620,6 @@
     <inspection_tool class="ThrowableInstanceNeverThrown" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ThrowablePrintedToSystemOut" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ThrowableResultOfMethodCallIgnored" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="ToArrayCallWithZeroLengthArrayArgument" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="TrailingSpacesInProperty" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="TrivialConditionalJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="TrivialIf" enabled="false" level="WARNING" enabled_by_default="false" />
