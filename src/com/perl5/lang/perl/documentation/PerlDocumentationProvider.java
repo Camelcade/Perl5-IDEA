@@ -28,6 +28,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -88,6 +89,10 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	@Override
 	public String generateDoc(PsiElement element, @Nullable PsiElement originalElement)
 	{
+		if (element instanceof PsiFile)
+		{
+			return PerlDocUtil.renderFile((PsiFile) element);
+		}
 		if (element instanceof PodCompositeElement)
 		{
 			return PerlDocUtil.renderElement((PodCompositeElement) element);
@@ -117,7 +122,7 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	@Override
 	public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context)
 	{
-		if (context instanceof PodCompositeElement)
+		if (context instanceof PodCompositeElement || context instanceof PerlFile)
 		{
 			try
 			{

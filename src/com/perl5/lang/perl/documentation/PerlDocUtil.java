@@ -32,6 +32,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -175,10 +176,7 @@ public class PerlDocUtil implements PerlElementTypes
 			{
 				if (descriptor.getSection() == null)
 				{
-					if (targetFile instanceof PodFile)
-						return targetFile;
-
-					return PsiTreeUtil.findChildOfType(targetFile, PodCompositeElement.class);
+					return targetFile;
 				}
 				else    // seek section
 				{
@@ -352,13 +350,36 @@ public class PerlDocUtil implements PerlElementTypes
 		return result.isEmpty() ? null : result.get(0);
 	}
 
-	protected static String renderFile(PodFileImpl file)
+	protected static String renderPodFile(PodFileImpl file)
 	{
 		StringBuilder builder = new StringBuilder();
 
 		renderFileToc(file, builder);
 
 		PodRenderUtil.renderPsiRangeAsHTML(file.getFirstNamedBlock(), null, builder, new PodRenderingContext());
+		return builder.toString();
+	}
+
+	protected static String renderPerlFile(PerlFileImpl file)
+	{
+		final StringBuilder builder = new StringBuilder();
+		final PodRenderingContext renderingContext = new PodRenderingContext();
+
+		renderFileToc(file, builder);
+
+		PsiTreeUtil.processElements(file, new PsiElementProcessor()
+		{
+			@Override
+			public boolean execute(@NotNull PsiElement element)
+			{
+				if (element.getNode().getElementType() == POD)
+				{
+					PodRenderUtil.renderPsiRangeAsHTML(element.getFirstChild(), null, builder, renderingContext);
+				}
+				return true;
+			}
+		});
+
 		return builder.toString();
 	}
 
@@ -370,19 +391,24 @@ public class PerlDocUtil implements PerlElementTypes
 	}
 
 	@Nullable
+	protected static String renderFile(PsiFile file)
+	{
+		if (file instanceof PodFileImpl)
+		{
+			return renderPodFile((PodFileImpl) file);
+		}
+		else if (file instanceof PerlFileImpl)
+		{
+			return renderPerlFile((PerlFileImpl) file);
+		}
+		return null;
+	}
+
+	@Nullable
 	protected static String renderElement(PodCompositeElement element)
 	{
 		if (element == null)
 			return null;
-
-		if (element instanceof PodFileImpl)
-		{
-			return renderFile((PodFileImpl) element);
-		}
-		else if (element.getNode().getElementType() == PerlElementTypes.POD)
-		{
-			return PodRenderUtil.renderPsiRangeAsHTML(element.getFirstChild(), element.getLastChild());
-		}
 
 		PodTitledSection podSection = null;
 
