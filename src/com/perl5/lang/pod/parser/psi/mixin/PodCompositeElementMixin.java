@@ -128,4 +128,10 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
 		PsiFile file = getContainingFile();
 		return file == null ? null : file.getIcon(0);
 	}
+
+	@Override
+	public int getHeadingLevel()
+	{
+		return 0;
+	}
 }

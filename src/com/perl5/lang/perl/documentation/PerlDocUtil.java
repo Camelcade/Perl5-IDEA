@@ -316,6 +316,23 @@ public class PerlDocUtil implements PerlElementTypes
 		return result.isEmpty() ? null : result.get(0);
 	}
 
+	protected static String renderFile(PodFileImpl file)
+	{
+		StringBuilder builder = new StringBuilder();
+
+		renderFileToc(file, builder);
+
+		PodRenderUtil.renderPsiRangeAsHTML(file.getFirstNamedBlock(), null, builder, new PodRenderingContext());
+		return builder.toString();
+	}
+
+	protected static void renderFileToc(PsiFile file, final StringBuilder builder)
+	{
+		PodTocBuilder tocBuilder = new PodTocBuilder(builder);
+		PsiTreeUtil.processElements(file, tocBuilder);
+		tocBuilder.adjustLevelTo(0);
+	}
+
 	@Nullable
 	protected static String renderElement(PodCompositeElement element)
 	{
@@ -324,7 +341,7 @@ public class PerlDocUtil implements PerlElementTypes
 
 		if (element instanceof PodFileImpl)
 		{
-			return ((PodFileImpl) element).getAsHTML();
+			return renderFile((PodFileImpl) element);
 		}
 		else if (element.getNode().getElementType() == PerlElementTypes.POD)
 		{
@@ -425,6 +442,52 @@ public class PerlDocUtil implements PerlElementTypes
 			return builder.toString();
 		}
 		return null;
+	}
+
+	private static class PodTocBuilder implements PsiElementProcessor
+	{
+		private final StringBuilder myBuilder;
+		private int myHeaderLevel = 0;
+
+		public PodTocBuilder(StringBuilder myBuilder)
+		{
+			this.myBuilder = myBuilder;
+		}
+
+		@Override
+		public boolean execute(@NotNull PsiElement element)
+		{
+			if (element instanceof PodTitledSection && ((PodTitledSection) element).isHeading())
+			{
+				adjustLevelTo(((PodTitledSection) element).getHeadingLevel());
+				myBuilder.append("<li style=\"margin-top:3px;margin-bottom:2px;\">");
+				myBuilder.append(PodRenderUtil.getHTMLPsiLink(((PodTitledSection) element)));
+				myBuilder.append("</li>");
+			}
+
+			return true;
+		}
+
+		public void adjustLevelTo(int level)
+		{
+			while (myHeaderLevel < level)
+			{
+				if (myHeaderLevel == 0)
+				{
+					myBuilder.append("<ul style=\"margin-left: 0px;\">");
+				}
+				else
+				{
+					myBuilder.append("<ul style=\"margin-left: 20px;margin-top:0px;\">");
+				}
+				myHeaderLevel++;
+			}
+			while (myHeaderLevel > level)
+			{
+				myBuilder.append("</ul>");
+				myHeaderLevel--;
+			}
+		}
 	}
 
 }

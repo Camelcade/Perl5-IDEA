@@ -142,6 +142,15 @@ public class PodRenderUtil
 		return getHTMLLink(descriptor.getCanonicalUrl(), !descriptor.isUrl(), descriptor.getTitle());
 	}
 
+	public static String getHTMLPsiLink(@NotNull PodLinkTarget target)
+	{
+		if (StringUtil.isNotEmpty(target.getPodLink()))
+		{
+			return getHTMLPsiLink(target.getPodLink(), target.getPodLinkText());
+		}
+		return "";
+	}
+
 	public static String getHTMLPsiLink(@NotNull String link, @Nullable String text)
 	{
 		return getHTMLLink(link, true, text);

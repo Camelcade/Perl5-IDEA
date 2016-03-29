@@ -45,4 +45,11 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
 	 * @return
 	 */
 	boolean isHeading();
+
+	/**
+	 * returns heading level
+	 *
+	 * @return
+	 */
+	int getHeadingLevel();
 }

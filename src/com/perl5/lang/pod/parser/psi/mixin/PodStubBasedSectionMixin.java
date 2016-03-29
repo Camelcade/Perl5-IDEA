@@ -132,6 +132,12 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 	}
 
 	@Override
+	public int getHeadingLevel()
+	{
+		return 0;
+	}
+
+	@Override
 	public int getListLevel()
 	{
 		PsiElement parent = getParent();
@@ -171,4 +177,6 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 	{
 		return getTitleText();
 	}
+
+
 }

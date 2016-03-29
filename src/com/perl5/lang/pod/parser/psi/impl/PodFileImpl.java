@@ -87,7 +87,7 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	}
 
 	@Nullable
-	protected PsiElement getFirstNamedBlock()
+	public PsiElement getFirstNamedBlock()
 	{
 		return findChildByClass(PodTitledSection.class);
 	}
@@ -169,5 +169,11 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	public String getPodLinkText()
 	{
 		return getPodLink();
+	}
+
+	@Override
+	public int getHeadingLevel()
+	{
+		return 0;
 	}
 }

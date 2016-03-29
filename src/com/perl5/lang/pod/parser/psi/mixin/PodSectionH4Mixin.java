@@ -44,4 +44,11 @@ public class PodSectionH4Mixin extends PodTitledSectionMixin implements PodSecti
 	{
 		return true;
 	}
+
+	@Override
+	public int getHeadingLevel()
+	{
+		return 4;
+	}
+
 }
