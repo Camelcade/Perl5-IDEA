@@ -33,7 +33,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,12 +92,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getSubName());
 
-		List<PerlSubArgument> arguments = stub.getSubArgumentsList();
-		dataStream.writeInt(arguments.size());
-		for (PerlSubArgument argument : arguments)
-		{
-			argument.serialize(dataStream);
-		}
+		PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
 
 		stub.getSubAnnotations().serialize(dataStream);
 	}
@@ -111,15 +105,8 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		String packageName = dataStream.readName().toString();
 		//noinspection ConstantConditions
 		String functionName = dataStream.readName().toString();
-		int argumentsNumber = dataStream.readInt();
 
-		List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>(argumentsNumber);
-
-		for (int i = 0; i < argumentsNumber; i++)
-		{
-			arguments.add(PerlSubArgument.deserialize(dataStream));
-		}
-
+		List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
 		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
 
 		return createStubElement(parentStub, packageName, functionName, arguments, annotations);

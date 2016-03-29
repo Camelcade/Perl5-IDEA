@@ -64,8 +64,9 @@ public class PerlPackageCompletionUtil
 		if (PerlPackageUtil.isPragma(packageName))
 			result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
 
-		if (PerlPackageUtil.isDeprecated(project, packageName))
-			result = result.withStrikeoutness(true);
+		// fixme this should be adjusted in #954
+//		if (PerlPackageUtil.isDeprecated(project, packageName))
+//			result = result.withStrikeoutness(true);
 
 		return result;
 	}

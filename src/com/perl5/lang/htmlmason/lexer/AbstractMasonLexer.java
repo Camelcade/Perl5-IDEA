@@ -159,7 +159,7 @@ public abstract class AbstractMasonLexer extends PerlTemplatingLexer
 
 				if (++lastNonSpaceOffset > tokenStart)
 				{
-					pushPreparsedToken(tokenStart, lastNonSpaceOffset, STRING_CONTENT);
+					processCallComponentPath(tokenStart, lastNonSpaceOffset);
 
 					if (offset > lastNonSpaceOffset)
 					{
@@ -170,6 +170,10 @@ public abstract class AbstractMasonLexer extends PerlTemplatingLexer
 		}
 	}
 
+	protected void processCallComponentPath(int startOffset, int endOffset)
+	{
+		pushPreparsedToken(startOffset, endOffset, STRING_CONTENT);
+	}
 
 	protected boolean isAtComponentPathEnd(char currentChar, int offset, int bufferEnd, CharSequence buffer)
 	{

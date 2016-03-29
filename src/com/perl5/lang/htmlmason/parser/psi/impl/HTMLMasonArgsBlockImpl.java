@@ -17,16 +17,72 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonArgsBlockImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonArgsBlock
+public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonArgsBlockStub> implements HTMLMasonArgsBlock
 {
+	public HTMLMasonArgsBlockImpl(@NotNull HTMLMasonArgsBlockStub stub, @NotNull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
+
 	public HTMLMasonArgsBlockImpl(@NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@NotNull
+	@Override
+	public List<PerlSubArgument> getArgumentsList()
+	{
+		HTMLMasonArgsBlockStub stub = getStub();
+		if (stub != null)
+		{
+			return stub.getArgumentsList();
+		}
+
+		return getArgumentsListHeavy();
+	}
+
+	@NotNull
+	protected List<PerlSubArgument> getArgumentsListHeavy()
+	{
+		List<PerlSubArgument> result = new ArrayList<PerlSubArgument>();
+		PsiElement run = getFirstChild();
+
+		while (run != null)
+		{
+			if (run instanceof PerlVariableDeclarationWrapper)
+			{
+				PerlVariable variable = ((PerlVariableDeclarationWrapper) run).getVariable();
+				if (variable != null)
+				{
+					PsiElement nextSibling = PerlPsiUtil.getNextSignificantSibling(run);
+					result.add(new PerlSubArgument(
+							variable.getActualType(),
+							variable.getName(),
+							"",
+							nextSibling != null && nextSibling.getNode().getElementType() == OPERATOR_COMMA_ARROW
+					));
+				}
+			}
+			run = run.getNextSibling();
+		}
+
+		return result;
 	}
 }

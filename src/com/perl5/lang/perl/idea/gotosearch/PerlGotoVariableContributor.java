@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.gotosearch;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -60,22 +62,40 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor
 	@Override
 	public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems)
 	{
-		Collection<PerlVariableDeclarationWrapper> result;
 
-		if (name.startsWith("$"))
-			result = PerlScalarUtil.getGlobalScalarDefinitions(project, name.substring(1));
-		else if (name.startsWith("@"))
-			result = PerlArrayUtil.getGlobalArrayDefinitions(project, name.substring(1));
-		else if (name.startsWith("%"))
-			result = PerlHashUtil.getGlobalHashDefinitions(project, name.substring(1));
-		else if (name.startsWith("*"))
+		if (name.length() > 0)
 		{
-			Collection<PsiPerlGlobVariable> globResult = PerlGlobUtil.getGlobsDefinitions(project, name.substring(1));
-			return globResult.toArray(new NavigationItem[globResult.size()]);
-		}
-		else
-			throw new RuntimeException("Cant' be: " + name);
+			Collection<PerlVariableDeclarationWrapper> result;
+			GlobalSearchScope scope = includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project);
 
-		return result.toArray(new NavigationItem[result.size()]);
+			char firstChar = name.charAt(0);
+
+			if (firstChar == '$')
+			{
+				result = PerlScalarUtil.getGlobalScalarDefinitions(project, name.substring(1), scope);
+			}
+			else if (firstChar == '@')
+			{
+				result = PerlArrayUtil.getGlobalArrayDefinitions(project, name.substring(1), scope);
+			}
+			else if (firstChar == '%')
+			{
+				result = PerlHashUtil.getGlobalHashDefinitions(project, name.substring(1), scope);
+			}
+			else if (firstChar == '*')
+			{
+				Collection<PsiPerlGlobVariable> globResult = PerlGlobUtil.getGlobsDefinitions(project, name.substring(1), scope);
+				//noinspection SuspiciousToArrayCall
+				return globResult.toArray(new NavigationItem[globResult.size()]);
+			}
+			else
+			{
+				throw new RuntimeException("Cant' be: " + name);
+			}
+			//noinspection SuspiciousToArrayCall
+			return result.toArray(new NavigationItem[result.size()]);
+		}
+
+		return NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY;
 	}
 }

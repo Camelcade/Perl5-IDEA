@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -54,6 +55,7 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -529,4 +531,51 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		return "";
 	}
 */
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return this;
+	}
+
+	@Nullable
+	@Override
+	public String getPresentableText()
+	{
+		String result = getFilePackageName();
+		return result == null ? getName() : result;
+	}
+
+	@Nullable
+	@Override
+	public String getLocationString()
+	{
+		final PsiDirectory psiDirectory = getParent();
+		if (psiDirectory != null)
+		{
+			return psiDirectory.getVirtualFile().getPresentableUrl();
+		}
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon(boolean unused)
+	{
+		return getIcon(0);
+	}
+
+	@Nullable
+	@Override
+	public String getPodLink()
+	{
+		return getFilePackageName();
+	}
+
+	@Nullable
+	@Override
+	public String getPodLinkText()
+	{
+		return getPodLink();
+	}
 }

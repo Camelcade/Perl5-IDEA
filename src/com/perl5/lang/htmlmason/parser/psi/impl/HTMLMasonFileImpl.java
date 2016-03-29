@@ -35,13 +35,14 @@ import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonUtils;
 import com.perl5.lang.htmlmason.MasonCoreUtils;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.*;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
+import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonNamedElementStubBaseImpl;
 import com.perl5.lang.perl.PerlScopes;
-import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -60,7 +61,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementTypes, PerlImplicitVariablesProvider, HTMLMasonArgsContainer
+public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 {
 	protected final List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 	protected int myMasonChangeCounter;
@@ -289,40 +290,29 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 				HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
 
 				// indexed children
-				StubIndex.getInstance().processAllKeys(
-						HTMLMasonFlagsStubIndex.KEY,
-						new Processor<String>()
+				for (String parentPath : StubIndex.getInstance().getAllKeys(HTMLMasonFlagsStubIndex.KEY, project))
+				{
+					boolean isEquals = StringUtil.equals(relativePath, parentPath);
+					boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VfsUtil.VFS_SEPARATOR_CHAR;
+
+					for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
+							HTMLMasonFlagsStubIndex.KEY,
+							parentPath,
+							project,
+							scope,
+							HTMLMasonFlagsStatement.class
+					))
+					{
+						PsiFile file = statement.getContainingFile();
+						if (file instanceof HTMLMasonFileImpl)
 						{
-							@Override
-							public boolean process(String parentPath)
+							if (isEquals || isRelative && currentFile.equals(((HTMLMasonFileImpl) file).getParentComponent()))
 							{
-								boolean isEquals = StringUtil.equals(relativePath, parentPath);
-								boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VfsUtil.VFS_SEPARATOR_CHAR;
-
-								for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
-										HTMLMasonFlagsStubIndex.KEY,
-										parentPath,
-										project,
-										scope,
-										HTMLMasonFlagsStatement.class
-								))
-								{
-									PsiFile file = statement.getContainingFile();
-									if (file instanceof HTMLMasonFileImpl)
-									{
-										if (isEquals || isRelative && currentFile.equals(((HTMLMasonFileImpl) file).getParentComponent()))
-										{
-											result.add((HTMLMasonFileImpl) file);
-										}
-									}
-								}
-
-								return true;
+								result.add((HTMLMasonFileImpl) file);
 							}
-						},
-						scope,
-						null
-				);
+						}
+					}
+				}
 
 				// implicit autohandled children
 				if (StringUtil.equals(containingFile.getName(), settings.autoHandlerName))
@@ -542,6 +532,175 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		myBlocksCache = new MyBlocksCache(this);
 	}
 
+	public List<HTMLMasonCompositeElement> getSubComponentsDefinitions()
+	{
+		return myBlocksCache.getValue().get(HTMLMasonSubcomponentDefitnition.class);
+	}
+
+
+	/**
+	 * Recursively looking for method in child components
+	 *
+	 * @param name method name
+	 * @return list of child components
+	 */
+	@NotNull
+	public List<HTMLMasonMethodDefinition> findMethodDefinitionByNameInChildComponents(String name)
+	{
+		List<HTMLMasonMethodDefinition> result = new ArrayList<HTMLMasonMethodDefinition>();
+		Set<HTMLMasonFileImpl> recursionSet = new THashSet<HTMLMasonFileImpl>();
+
+		collectMethodDefinitionByNameInChildComponents(name, result, recursionSet);
+
+		return result;
+	}
+
+	protected void collectMethodDefinitionByNameInChildComponents(String name, List<HTMLMasonMethodDefinition> result, Set<HTMLMasonFileImpl> recursionSet)
+	{
+		for (HTMLMasonFileImpl childComponent : getChildComponents())
+		{
+			if (!recursionSet.contains(childComponent))
+			{
+				recursionSet.add(childComponent);
+				HTMLMasonMethodDefinition methodDefinition = childComponent.getMethodDefinitionByName(name);
+				if (methodDefinition != null)
+				{
+					result.add(methodDefinition);
+				}
+				else
+				{
+					childComponent.collectMethodDefinitionByNameInChildComponents(name, result, recursionSet);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Recursively looking for method in parent components
+	 *
+	 * @param name method name
+	 * @return method definition or null
+	 */
+	@Nullable
+	public HTMLMasonMethodDefinition findMethodDefinitionByNameInParents(String name)
+	{
+		HTMLMasonFileImpl parentComponent = getParentComponent();
+		return parentComponent == null ? null : parentComponent.findMethodDefinitionByNameInThisOrParents(name);
+	}
+
+	/**
+	 * Recursively looking for method in current or parent components
+	 *
+	 * @param name method name
+	 * @return method definition or null
+	 */
+	@Nullable
+	public HTMLMasonMethodDefinition findMethodDefinitionByNameInThisOrParents(String name)
+	{
+		HTMLMasonMethodDefinitionSeeker seeker = new HTMLMasonMethodDefinitionSeeker(name);
+		processMethodDefinitionsInThisOrParents(seeker);
+		return seeker.getResult();
+	}
+
+	public boolean processMethodDefinitionsInThisOrParents(Processor<HTMLMasonMethodDefinition> processor)
+	{
+		return processMethodDefinitionsInThisOrParents(processor, new THashSet<HTMLMasonFileImpl>());
+	}
+
+
+	protected boolean processMethodDefinitionsInThisOrParents(Processor<HTMLMasonMethodDefinition> processor, Set<HTMLMasonFileImpl> recursionSet)
+	{
+		if (recursionSet.contains(this))
+		{
+			return false;
+		}
+		recursionSet.add(this);
+
+		if (!processMethodDefinitions(processor))
+			return false;
+
+		HTMLMasonFileImpl parentComponent = getParentComponent();
+
+		return parentComponent != null && parentComponent.processMethodDefinitionsInThisOrParents(processor, recursionSet);
+
+	}
+
+	@Nullable
+	public HTMLMasonMethodDefinition getMethodDefinitionByName(String name)
+	{
+		HTMLMasonMethodDefinitionSeeker seeker = new HTMLMasonMethodDefinitionSeeker(name);
+		processMethodDefinitions(seeker);
+		return seeker.getResult();
+	}
+
+	protected boolean processMethodDefinitions(Processor<HTMLMasonMethodDefinition> processor)
+	{
+		for (HTMLMasonCompositeElement methodDefinition : getMethodsDefinitions())
+		{
+			assert methodDefinition instanceof HTMLMasonMethodDefinition : "got " + methodDefinition + " instead of method definition";
+			if (!processor.process((HTMLMasonMethodDefinition) methodDefinition))
+				return false;
+		}
+		return true;
+	}
+
+	public List<HTMLMasonCompositeElement> getMethodsDefinitions()
+	{
+		StubElement stub = getStub();
+		if (stub != null)
+		{
+			final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
+			PerlPsiUtil.processElementsFromStubs(stub, new Processor<Stub>()
+			{
+				@Override
+				public boolean process(Stub stub)
+				{
+					if (stub instanceof HTMLMasonMethodDefinitionStub)
+					{
+						result.add(((HTMLMasonMethodDefinitionStub) stub).getPsi());
+					}
+					return true;
+				}
+			}, null);
+
+			return result;
+		}
+		return myBlocksCache.getValue().get(HTMLMasonMethodDefinition.class);
+	}
+
+	@NotNull
+	@Override
+	public List<HTMLMasonCompositeElement> getArgsBlocks()
+	{
+		StubElement stub = getStub();
+
+		//noinspection Duplicates in HTMLMasonStubBasedNamedElementImpl
+		if (stub != null)
+		{
+			final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
+
+			PerlPsiUtil.processElementsFromStubs(
+					stub,
+					new Processor<Stub>()
+					{
+						@Override
+						public boolean process(Stub stub)
+						{
+							if (stub instanceof HTMLMasonArgsBlockStub)
+							{
+								result.add(((HTMLMasonArgsBlockStub) stub).getPsi());
+							}
+							return true;
+						}
+					},
+					HTMLMasonNamedElementStubBaseImpl.class
+			);
+			return result;
+		}
+
+		return myBlocksCache.getValue().get(HTMLMasonArgsBlock.class);
+	}
+
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>
 	{
 		protected HTMLMasonFlagsStatement myResult = null;
@@ -600,12 +759,16 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 			final List<HTMLMasonCompositeElement> argsResult = new ArrayList<HTMLMasonCompositeElement>();
 			final List<HTMLMasonCompositeElement> sharedResult = new ArrayList<HTMLMasonCompositeElement>();
 			final List<HTMLMasonCompositeElement> onceResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> methodsResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> subComponentsResult = new ArrayList<HTMLMasonCompositeElement>();
 
 			result.put(HTMLMasonOnceBlock.class, onceResult);
 			result.put(HTMLMasonSharedBlock.class, sharedResult);
 			result.put(HTMLMasonInitBlock.class, initResult);
 			result.put(HTMLMasonArgsBlock.class, argsResult);
 			result.put(HTMLMasonCleanupBlock.class, cleanupResult);
+			result.put(HTMLMasonMethodDefinition.class, methodsResult);
+			result.put(HTMLMasonSubcomponentDefitnition.class, subComponentsResult);
 
 			PsiTreeUtil.processElements(myFile, new PsiElementProcessor()
 			{
@@ -622,6 +785,10 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 						initResult.add((HTMLMasonCompositeElement) element);
 					else if (element instanceof HTMLMasonArgsBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
 						argsResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonMethodDefinition)
+						methodsResult.add((HTMLMasonCompositeElement) element);
+					else if (element instanceof HTMLMasonSubcomponentDefitnition)
+						subComponentsResult.add((HTMLMasonCompositeElement) element);
 
 					return true;
 				}
@@ -631,4 +798,30 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonElementT
 		}
 	}
 
+	protected static class HTMLMasonMethodDefinitionSeeker implements Processor<HTMLMasonMethodDefinition>
+	{
+		private final String myName;
+		private HTMLMasonMethodDefinition myResult;
+
+		public HTMLMasonMethodDefinitionSeeker(String myName)
+		{
+			this.myName = myName;
+		}
+
+		@Override
+		public boolean process(HTMLMasonMethodDefinition htmlMasonMethodDefinition)
+		{
+			if (StringUtil.equals(myName, htmlMasonMethodDefinition.getName()))
+			{
+				myResult = htmlMasonMethodDefinition;
+				return false;
+			}
+			return true;
+		}
+
+		public HTMLMasonMethodDefinition getResult()
+		{
+			return myResult;
+		}
+	}
 }

@@ -19,6 +19,7 @@ package com.perl5.lang.htmlmason;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.newvfs.impl.FakeVirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightVirtualFile;
@@ -43,12 +44,20 @@ public class MasonCoreUtils
 	{
 		if (file != null)
 		{
-			//noinspection unchecked
-			for (VirtualFile componentRoot : (List<VirtualFile>) masonSettings.getComponentsRootsVirtualFiles())
+			if (file instanceof FakeVirtualFile)
 			{
-				if (VfsUtil.isAncestor(componentRoot, file, false))
+				file = file.getParent();
+			}
+
+			if (file != null)
+			{
+				//noinspection unchecked
+				for (VirtualFile componentRoot : (List<VirtualFile>) masonSettings.getComponentsRootsVirtualFiles())
 				{
-					return componentRoot;
+					if (VfsUtil.isAncestor(componentRoot, file, false))
+					{
+						return componentRoot;
+					}
 				}
 			}
 		}

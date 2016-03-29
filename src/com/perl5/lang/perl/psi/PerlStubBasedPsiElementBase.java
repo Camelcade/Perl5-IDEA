@@ -44,7 +44,7 @@ public class PerlStubBasedPsiElementBase<T extends StubElement> extends StubBase
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + "(" + getNode().getElementType().toString() + ")";
+		return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
 	}
 
 	@Override

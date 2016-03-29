@@ -34,15 +34,6 @@ import com.intellij.lexer.FlexLexer;
 
 
 %{
-    //fixme this must be in skeleton
-    public void setTokenStart(int position){zzCurrentPos = zzStartRead = position;}
-    public void setTokenEnd(int position){zzMarkedPos = position;}
-    public CharSequence getBuffer(){ return zzBuffer;}
-    public char[] getBufferArray(){ return zzBufferArray;}
-    public int getBufferEnd() {return zzEndRead;}
-    public int getNextTokenStart(){ return zzMarkedPos;}
-    public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
-
     public abstract IElementType parseEscape();
     public abstract IElementType parseSimpleVariable(IElementType sigilTokenType);
 %}

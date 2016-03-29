@@ -20,8 +20,11 @@ import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.icons.AllIcons;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,6 +61,37 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
 						.setTooltipText("Child components");
 
 				result.add(builder.createLineMarkerInfo(element));
+			}
+		}
+		else if (element instanceof HTMLMasonMethodDefinition)
+		{
+			String methodName = ((HTMLMasonMethodDefinition) element).getName();
+			PsiFile component = element.getContainingFile();
+			if (StringUtil.isNotEmpty(methodName) && component instanceof HTMLMasonFileImpl)
+			{
+				// method in parent components
+				HTMLMasonMethodDefinition methodDefinition = ((HTMLMasonFileImpl) component).findMethodDefinitionByNameInParents(methodName);
+				if (methodDefinition != null)
+				{
+					NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+							.create(AllIcons.Gutter.OverridingMethod)
+							.setTargets(methodDefinition)
+							.setTooltipText("Overriding method");
+
+					result.add(builder.createLineMarkerInfo(element));
+				}
+
+				// method in subcomponents
+				List<HTMLMasonMethodDefinition> methodDefinitions = ((HTMLMasonFileImpl) component).findMethodDefinitionByNameInChildComponents(methodName);
+				if (!methodDefinitions.isEmpty())
+				{
+					NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+							.create(AllIcons.Gutter.OverridenMethod)
+							.setTargets(methodDefinitions)
+							.setTooltipText("Overriden methods");
+
+					result.add(builder.createLineMarkerInfo(element));
+				}
 			}
 		}
 	}

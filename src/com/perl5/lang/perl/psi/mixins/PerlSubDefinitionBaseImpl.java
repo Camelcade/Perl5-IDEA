@@ -30,7 +30,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.apache.commons.lang.StringUtils;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -81,50 +81,9 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 		if (isMethod() && subArguments.size() > 0)
 			subArguments.remove(0);
 
-		int argumentsNumber = subArguments.size();
-
-		List<String> argumentsList = new ArrayList<String>();
-		List<String> optionalAargumentsList = new ArrayList<String>();
-
-		for (PerlSubArgument argument : subArguments)
-		{
-			if (optionalAargumentsList.size() > 0 || argument.isOptional())
-			{
-				optionalAargumentsList.add(argument.toStringShort());
-			}
-			else
-			{
-				argumentsList.add(argument.toStringShort());
-			}
-
-			int compiledListSize = argumentsList.size() + optionalAargumentsList.size();
-			if (compiledListSize > 5 && argumentsNumber > compiledListSize)
-			{
-				if (optionalAargumentsList.size() > 0)
-				{
-					optionalAargumentsList.add("...");
-				}
-				else
-				{
-					argumentsList.add("...");
-				}
-				break;
-			}
-		}
-
-		if (argumentsList.size() == 0 && optionalAargumentsList.size() == 0)
-			return "";
-
-		if (optionalAargumentsList.size() > 0)
-			return "("
-					+ StringUtils.join(argumentsList, ", ")
-					+ "[, "
-					+ StringUtils.join(optionalAargumentsList, ", ")
-					+ "]"
-					+ ")";
-
-		return "(" + StringUtils.join(argumentsList, ", ") + ")";
+		return PerlSubUtil.getArgumentsListAsString(subArguments);
 	}
+
 
 	@Override
 	public List<PerlSubArgument> getSubArgumentsList()

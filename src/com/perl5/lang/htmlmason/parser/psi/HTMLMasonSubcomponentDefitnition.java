@@ -16,9 +16,12 @@
 
 package com.perl5.lang.htmlmason.parser.psi;
 
+import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub;
+
 /**
  * Created by hurricup on 09.03.2016.
  */
-public interface HTMLMasonSubcomponentDefitnition extends HTMLMasonCompositeElement
+public interface HTMLMasonSubcomponentDefitnition extends StubBasedPsiElement<HTMLMasonSubcomponentDefinitionStub>, HTMLMasonNamedElement, HTMLMasonParametrizedEntity
 {
 }

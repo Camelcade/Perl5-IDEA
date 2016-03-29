@@ -16,9 +16,25 @@
 
 package com.perl5.lang.htmlmason.parser.psi;
 
+import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
 /**
  * Created by hurricup on 08.03.2016.
  */
-public interface HTMLMasonArgsBlock extends HTMLMasonCompositeElement
+public interface HTMLMasonArgsBlock extends HTMLMasonCompositeElement, StubBasedPsiElement<HTMLMasonArgsBlockStub>, PerlElementTypes
 {
+	/**
+	 * Returns list of accepted arguments
+	 *
+	 * @return list of accepted arguments
+	 */
+	@NotNull
+	List<PerlSubArgument> getArgumentsList();
+
 }

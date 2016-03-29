@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod;
+package com.perl5.lang.perl.lexer;
 
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lexer.FlexLexer;
 
 /**
- * Created by hurricup on 24.04.2015.
+ * Created by hurricup on 24.03.2016.
  */
-public class PodElementType extends PodTokenType
+public abstract class PerlProtoLexer implements FlexLexer
 {
-	public PodElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+	public abstract void setTokenStart(int position);
 
-	@Override
-	public String toString()
-	{
-		return "PodElementType." + super.toString();
-	}
+	public abstract void setTokenEnd(int position);
+
+	public abstract CharSequence getBuffer();
+
+	public abstract int getBufferEnd();
+
+	public abstract int getNextTokenStart();
+
+	public abstract boolean isLastToken();
+
+
 }

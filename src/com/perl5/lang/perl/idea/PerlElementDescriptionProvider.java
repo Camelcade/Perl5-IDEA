@@ -69,15 +69,18 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 					return getElementDescription(element.getParent(), location);
 				else if (element instanceof PerlGlobVariable)
 					return "Typeglob";
-				else if (element instanceof PerlVariable)
+				else if (element instanceof PerlVariable || element instanceof PerlVariableDeclarationWrapper)
 				{
+					if (element instanceof PerlVariableDeclarationWrapper)
+						element = ((PerlVariableDeclarationWrapper) element).getVariable();
+
 					PerlVariableType actualType = ((PerlVariable) element).getActualType();
 					if (actualType == PerlVariableType.ARRAY)
-						return "Array variable";
+						return "array variable";
 					else if (actualType == PerlVariableType.HASH)
-						return "Hash variable";
+						return "hash variable";
 					else if (actualType == PerlVariableType.SCALAR)
-						return "Scalar variable";
+						return "scalar variable";
 				}
 				return null;
 			}

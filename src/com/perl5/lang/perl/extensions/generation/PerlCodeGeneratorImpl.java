@@ -125,7 +125,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			code.append("{\n");
 
 			List<String> superArgs = new ArrayList<String>();
-			List<PerlSubArgument> arguments = Collections.EMPTY_LIST;
+			List<PerlSubArgument> arguments = Collections.emptyList();
 
 			if (perlSubBase instanceof PerlSubDefinitionBase)
 			{

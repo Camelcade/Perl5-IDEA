@@ -28,5 +28,7 @@ public class HTMLMasonIcons
 	public static final Icon HTML_MASON_LANGUAGE_ICON = PerlIcons.PERL_LANGUAGE_ICON;
 
 	public static final Icon HTML_MASON_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
+	public static final Icon HTML_MASON_SUBCOMPONENT_ICON = PerlIcons.SUB_GUTTER_ICON;
+	public static final Icon HTML_MASON_METHOD_ICON = PerlIcons.METHOD_GUTTER_ICON;
 
 }

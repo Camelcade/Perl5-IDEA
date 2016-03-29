@@ -14,31 +14,245 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 {
-  parserClass="com.perl5.lang.pod.parser.PodParser"
-  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+  elementTypeFactory="com.perl5.lang.pod.elementTypes.PodElementTypeFactory.getElementType"
+  tokenTypeFactory="com.perl5.lang.pod.elementTypes.PodElementTypeFactory.getTokenType"
 
-  psiClassPrefix="Pod"
+  parserClass="com.perl5.lang.pod.parser.PodParser"
+  extends="com.perl5.lang.pod.parser.psi.mixin.PodCompositeElementMixin"
+
+  stubClass("pod_format_index")="com.perl5.lang.pod.parser.psi.stubs.PodSectionStub"
+
+  mixin("head1_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH1Mixin"
+  mixin("head2_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH2Mixin"
+  mixin("head3_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH3Mixin"
+  mixin("head4_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH4Mixin"
+  mixin("pod_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionParagraphMixin"
+  mixin("pod_code_wrapper")="com.perl5.lang.pod.parser.psi.mixin.PodSectionCodeWrapperMixin"
+
+  mixin("over_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionOverMixin"
+  mixin("over_section_content")="com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContentMixin"
+  mixin("item_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionItemMixin"
+  mixin("begin_section|for_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionFormattedMixin"
+
+  mixin(".+_section")="com.perl5.lang.pod.parser.psi.mixin.PodTitledSectionMixin"
+
+  mixin("item_section_title")="com.perl5.lang.pod.parser.psi.mixin.PodSectionItemTitleMixin"
+
+  mixin("pod_format_bold")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterBMixin"
+  mixin("pod_format_code")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterCMixin"
+  mixin("pod_format_escape")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterEMixin"
+  mixin("pod_format_file")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterFMixin"
+  mixin("pod_format_italic")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterIMixin"
+  mixin("pod_format_link")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterLMixin"
+  mixin("pod_format_nbsp")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterSMixin"
+  mixin("pod_format_index")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterXMixin"
+  mixin("pod_format_null")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterZMixin"
+
+  implements(".+section_content")="com.perl5.lang.pod.parser.psi.PodSectionContent"
+  implements("section_title")="com.perl5.lang.pod.parser.psi.PodSectionTitle"
+
+  psiClassPrefix="Psi"
   psiImplClassSuffix="Impl"
   psiPackage="com.perl5.lang.pod.psi"
   psiImplPackage="com.perl5.lang.pod.psi.impl"
 
   elementTypeHolderClass="com.perl5.lang.pod.lexer.PodElementTypes"
-  elementTypeClass="com.perl5.lang.pod.PodElementType"
-  tokenTypeClass="com.perl5.lang.pod.PodTokenType"
+  elementTypeClass="com.perl5.lang.pod.elementTypes.PodElementType"
+  tokenTypeClass="com.perl5.lang.pod.elementTypes.PodTokenType"
+  parserUtilClass="com.perl5.lang.pod.parser.PodParserUtil"
+
 
 //  psiImplUtilClass="com.perl5.lang.pod.psi.impl.PodPsiImplUtil"
 
     tokens=[
         POD_NEWLINE
-        POD_TAG
-        POD_TEXT
+
+        POD_POD
+
+        POD_HEAD1
+        POD_HEAD2
+        POD_HEAD3
+        POD_HEAD4
+
+        POD_OVER
+        POD_ITEM
+        POD_BACK
+
+		POD_UNKNOWN
+
+        POD_BEGIN
+        POD_FORMATTED_BLOCK
+        POD_END
+        POD_FORMAT_NAME
+        POD_FOR
+
+        POD_ENCODING
+        POD_ENCODING_NAME
+
+        POD_CUT
+
         POD_CODE
+
+		POD_ANGLE_LEFT
+		POD_ANGLE_RIGHT
+		POD_PAREN_LEFT
+		POD_PAREN_RIGHT
+		POD_BRACKET_LEFT
+		POD_BRACKET_RIGHT
+		POD_BRACE_LEFT
+		POD_BRACE_RIGHT
+
+		POD_QUOTE_DOUBLE
+		POD_QUOTE_SINGLE
+		POD_QUOTE_TICK
+
+		POD_I	// italic
+		POD_B	// bold
+		POD_C	// code
+		POD_L	// hyperlink
+		POD_E	// escape
+		POD_F	// filename
+		POD_S	// nbsp
+		POD_X	// index
+		POD_Z	// null
+
+		POD_IDENTIFIER
+		POD_PACKAGE
+		POD_NUMBER
+		POD_INDENT_LEVEL
+		POD_SYMBOL
+
+		POD_DIV
+		POD_BACKREF
+		POD_ASTERISK
+		POD_PIPE
+		POD_COLON
     ]
 
 }
 
+root ::= pod_file_item *
 
-pod_file ::= pod_section*
-pod_section ::= !<<eof>> [POD_TAG] pod_item *
-private pod_item ::= POD_TEXT | POD_NEWLINE | POD_CODE
+private pod_file_item ::=
+!<<eof>>
+{
+	head1_section
+	| head2_section
+	| head3_section
+	| head4_section
+	| any_level_item
+}
 
+private any_level_item ::=
+	pod_section
+	| over_section
+	| begin_section
+	| for_section
+	| encoding_section
+	| unknown_section
+	| cut_section
+	| pod_paragraph
+	| pod_code_wrapper
+	| POD_NEWLINE+
+
+pod_paragraph ::= pod_paragraph_content
+pod_code_wrapper ::= POD_CODE
+
+private pod_paragraph_content ::= pod_term+ POD_NEWLINE*
+
+pod_section ::= POD_POD
+
+section_title ::= section_title_body
+item_section_title ::= section_title_body
+private section_title_body ::= pod_term* POD_NEWLINE*
+
+head1_section ::= POD_HEAD1 [ section_title [head1_section_content]] {pin=1}
+head1_section_content ::= head1_section_item*
+private head1_section_item ::= head2_section | head3_section | head4_section | any_level_item
+
+head2_section ::= POD_HEAD2 [section_title [head2_section_content]] {pin=1}
+head2_section_content ::= head2_section_item*
+private head2_section_item ::= head3_section | head4_section | any_level_item
+
+head3_section ::= POD_HEAD3 [section_title [head3_section_content]] {pin=1}
+head3_section_content ::= head3_section_item*
+private head3_section_item ::= head4_section | any_level_item
+
+head4_section ::= POD_HEAD4 [section_title [head4_section_content]] {pin=1}
+head4_section_content ::= head4_section_item*
+private head4_section_item ::= any_level_item
+
+over_section ::= over_section_opener  over_section_content over_section_closer {pin=1}
+private over_section_opener ::= POD_OVER [POD_INDENT_LEVEL] POD_NEWLINE+ {pin=1}
+private over_section_closer ::= POD_BACK POD_NEWLINE* {pin=1}
+over_section_content ::= over_section_item*
+private over_section_item ::=
+ 	item_section
+	| any_level_item
+item_section ::= POD_ITEM [item_section_title [item_section_content]] {pin=1}
+item_section_content ::= any_level_item +
+
+begin_section ::= begin_section_opener begin_section_content begin_section_closer  {pin=1}
+private begin_section_opener ::= POD_BEGIN pod_section_format {pin=1}
+private begin_section_closer ::= POD_END pod_section_format POD_NEWLINE* {pin=1}
+pod_section_format ::= POD_COLON ? POD_FORMAT_NAME
+begin_section_content ::= POD_FORMATTED_BLOCK | {pod_term|POD_NEWLINE}*
+
+for_section ::= POD_FOR pod_section_format for_section_content POD_NEWLINE *{pin=1}
+for_section_content ::=	POD_FORMATTED_BLOCK	| pod_term *
+
+encoding_section ::= POD_ENCODING POD_ENCODING_NAME POD_NEWLINE+ {pin=1}
+
+cut_section ::= POD_CUT [section_title] POD_NEWLINE* {pin=1}
+
+unknown_section ::= POD_UNKNOWN [section_title [any_level_item*]] POD_NEWLINE*  {pin=1}
+
+
+private pod_term ::=
+	pod_format
+	| POD_ANGLE_LEFT
+	| POD_ANGLE_RIGHT
+	| POD_IDENTIFIER
+	| POD_NUMBER
+
+	| POD_DIV
+	| POD_BACKREF
+	| POD_ASTERISK
+	| POD_PIPE
+	| POD_COLON
+	| POD_SYMBOL
+
+	| POD_QUOTE_DOUBLE
+	| POD_QUOTE_SINGLE
+	| POD_QUOTE_TICK
+
+	| POD_PAREN_LEFT
+	| POD_PAREN_RIGHT
+	| POD_BRACKET_LEFT
+	| POD_BRACKET_RIGHT
+	| POD_BRACE_LEFT
+	| POD_BRACE_RIGHT
+
+private pod_format ::=
+ 	pod_format_italic
+ 	| pod_format_bold
+ 	| pod_format_code
+ 	| pod_format_link
+ 	| pod_format_escape
+ 	| pod_format_file
+ 	| pod_format_nbsp
+ 	| pod_format_index
+ 	| pod_format_null
+
+pod_format_italic ::= POD_I <<parseTermParam>> {pin=1}
+pod_format_bold ::= POD_B <<parseTermParam>> {pin=1}
+pod_format_code ::= POD_C <<parseTermParam>> {pin=1}
+pod_format_escape ::= POD_E <<parseTermParam>> {pin=1}
+pod_format_file ::= POD_F <<parseTermParam>> {pin=1}
+pod_format_nbsp ::= POD_S <<parseTermParam>> {pin=1}
+pod_format_index ::= POD_X <<parseTermParam>> {pin=1}
+pod_format_null ::= POD_Z <<parseTermParam>> {pin=1}
+pod_format_link ::= POD_L <<parseTermParam>> {pin=1}
+
+
+formatting_section_content ::= pod_term*

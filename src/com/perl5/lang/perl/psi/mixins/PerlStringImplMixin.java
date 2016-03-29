@@ -142,4 +142,5 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implem
 	{
 		return true;
 	}
+
 }

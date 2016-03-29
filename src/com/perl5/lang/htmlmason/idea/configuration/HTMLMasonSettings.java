@@ -111,6 +111,15 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings> 
 		changeCounter++;
 	}
 
+	public void removeSubstitutors()
+	{
+		for (Map.Entry<String, Pair<Language, LanguageSubstitutor>> entry : substitutorMap.entrySet())
+		{
+			LanguageSubstitutors.INSTANCE.removeExplicitExtension(entry.getValue().first, entry.getValue().second);
+		}
+		substitutorMap.clear();
+	}
+
 	protected void updateSubstitutors()
 	{
 		// unregister

@@ -246,7 +246,31 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_DEREFERENCE,
 
 			OPERATOR_X,
-			OPERATOR_FILETEST
+			OPERATOR_FILETEST,
+
+			// syntax operators
+			OPERATOR_POW_ASSIGN,
+			OPERATOR_PLUS_ASSIGN,
+			OPERATOR_MINUS_ASSIGN,
+			OPERATOR_MUL_ASSIGN,
+			OPERATOR_DIV_ASSIGN,
+			OPERATOR_MOD_ASSIGN,
+			OPERATOR_CONCAT_ASSIGN,
+			OPERATOR_X_ASSIGN,
+			OPERATOR_BITWISE_AND_ASSIGN,
+			OPERATOR_BITWISE_OR_ASSIGN,
+			OPERATOR_BITWISE_XOR_ASSIGN,
+			OPERATOR_SHIFT_LEFT_ASSIGN,
+			OPERATOR_SHIFT_RIGHT_ASSIGN,
+			OPERATOR_AND_ASSIGN,
+			OPERATOR_OR_ASSIGN,
+			OPERATOR_OR_DEFINED_ASSIGN,
+
+			OPERATOR_GE_NUMERIC,
+			OPERATOR_LE_NUMERIC,
+			OPERATOR_EQ_NUMERIC,
+			OPERATOR_NE_NUMERIC,
+			OPERATOR_SMARTMATCH
 	);
 	// tokens which may preceeds .123 and . is a concat
 	public static final TokenSet CONCAT_OPERATOR_PREFIX = TokenSet.create(
@@ -596,9 +620,7 @@ public class PerlLexer extends PerlLexerGenerated
 					|| ((tokenStart < bufferEnd - STRING_END_LENGTH) && StringUtil.equals(buffer.subSequence(tokenStart, tokenStart + STRING_END_LENGTH), STRING_END))
 					)
 			{
-				setTokenStart(tokenStart);
-				setTokenEnd(bufferEnd);
-				return COMMENT_BLOCK;
+				return parseEndBlock(tokenStart, bufferEnd);
 			}
 			// capture line comment
 			else if (currentChar == '#')
@@ -627,6 +649,30 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 
 		return super.perlAdvance();
+	}
+
+
+	private IElementType parseEndBlock(int tokenStart, int bufferEnd)
+	{
+		int run = tokenStart;
+		CharSequence buffer = getBuffer();
+
+		while (run < bufferEnd)
+		{
+			char currentChar = buffer.charAt(run);
+			if (currentChar == '=' && (run == 0 || buffer.charAt(run - 1) == '\n') && run + 1 < bufferEnd && Character.isLetter(buffer.charAt(run + 1)))
+			{
+				break;
+			}
+			run++;
+		}
+
+		pushPreparsedToken(tokenStart, run, COMMENT_BLOCK);
+		if (run < bufferEnd)
+		{
+			pushPreparsedToken(run, bufferEnd, POD);
+		}
+		return getPreParsedToken();
 	}
 
 
@@ -766,6 +812,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		return myQStringLexer;
 	}
+
 
 	/**
 	 * Lazy getter for QStringLexer

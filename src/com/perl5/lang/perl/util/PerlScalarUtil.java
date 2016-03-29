@@ -57,9 +57,20 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 */
 	public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName)
 	{
-		assert canonicalName != null;
-		return StubIndex.getElements(PerlVariablesStubIndex.KEY_SCALAR, canonicalName, project, GlobalSearchScope.allScope(project), PerlVariableDeclarationWrapper.class);
+		return getGlobalScalarDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
 	}
+
+	public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
+	{
+		assert canonicalName != null;
+		return StubIndex.getElements(PerlVariablesStubIndex.KEY_SCALAR,
+				canonicalName,
+				project,
+				scope,
+				PerlVariableDeclarationWrapper.class
+		);
+	}
+
 
 	/**
 	 * Returns list of defined global scalars

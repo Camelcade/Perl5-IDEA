@@ -47,7 +47,7 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLM
 			if (c == '>')
 			{
 				PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-				if (HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element))
+				if (HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element))
 				{
 					assert element != null;
 					String elementText = element.getText();
@@ -71,15 +71,15 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLM
 					IElementType elementType = element.getNode().getElementType();
 					if (elementType == HTML_MASON_BLOCK_OPENER && !isNextElement(element, HTML_MASON_BLOCK_CLOSER))
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_BLOCK_CLOSER, false, false);
+						EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_BLOCK_CLOSER, false, false);
 					}
 					else if (elementType == HTML_MASON_CALL_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER))
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_CALL_CLOSER, false, false);
+						EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER, false, false);
 					}
 					else if (elementType == HTML_MASON_CALL_FILTERING_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER))
 					{
-						EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_CALL_CLOSER + KEYWORD_CALL_CLOSE_TAG_START + KEYWORD_TAG_CLOSER, false, false);
+						EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER + KEYWORD_CALL_CLOSE_TAG_START + KEYWORD_TAG_CLOSER, false, false);
 					}
 					else if (elementType == HTML_MASON_METHOD_OPENER)
 					{

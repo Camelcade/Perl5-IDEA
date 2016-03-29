@@ -18,11 +18,13 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -45,11 +47,18 @@ public class PerlStringBareImplMixin extends PerlCompositeElementImpl implements
 	@Override
 	public void setStringContent(String newContent)
 	{
-		PerlStringContentElementImpl newName = PerlElementFactory.createStringContent(getProject(), newContent);
-		if (newName != null)
-			getFirstChild().replace(newName);
-		else
-			throw new IncorrectOperationException("Unable to create string from: " + newContent);
+		PsiElement firstChild = getFirstChild();
+		if (firstChild instanceof LeafPsiElement)
+		{
+			if (firstChild.equals(getLastChild()))
+			{
+				((LeafPsiElement) firstChild).replaceWithText(newContent);
+			}
+			else
+			{
+				throw new IncorrectOperationException("Complex bare strings replacement is not yet implemented");
+			}
+		}
 	}
 
 	@NotNull
@@ -63,6 +72,20 @@ public class PerlStringBareImplMixin extends PerlCompositeElementImpl implements
 	public int getContentLength()
 	{
 		return getContentTextRangeInParent().getLength();
+	}
+
+	@NotNull
+	@Override
+	public PsiReference[] getReferences()
+	{
+		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+	}
+
+	@Override
+	public PsiReference getReference()
+	{
+		PsiReference[] references = getReferences();
+		return references.length == 0 ? null : references[0];
 	}
 
 }

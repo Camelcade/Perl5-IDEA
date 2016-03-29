@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 {
+
 /*
 	@Override
 	public ASTNode parse(IElementType t, PsiBuilder b)
@@ -42,6 +43,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 		return super.parse(t, b);
 	}
 */
+
 
 	public boolean parseStatement(PsiBuilder b, int l)
 	{

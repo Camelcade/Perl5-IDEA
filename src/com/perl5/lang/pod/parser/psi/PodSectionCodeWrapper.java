@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.lexer;
-
-import com.intellij.lexer.FlexLexer;
+package com.perl5.lang.pod.parser.psi;
 
 /**
- * Created by hurricup on 21.04.2015.
+ * Created by hurricup on 26.03.2016.
  */
-public abstract class PodLexerProto implements FlexLexer, PodElementTypes
+public interface PodSectionCodeWrapper
 {
-
 }

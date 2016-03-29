@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.lexer.FlexLexer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
@@ -30,7 +29,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 10.08.2015.
  */
-public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
+public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes
 {
 	protected final static int EXT_NOTHING = -1;
 	protected final static int EXT_IDENTIFIER = 0;
@@ -94,18 +93,6 @@ public abstract class PerlBaseLexer implements FlexLexer, PerlElementTypes
 	}
 
 	public abstract IElementType parseBarewordMinus();
-
-	public abstract void setTokenStart(int position);
-
-	public abstract void setTokenEnd(int position);
-
-	public abstract CharSequence getBuffer();
-
-	public abstract int getBufferEnd();
-
-	public abstract int getNextTokenStart();
-
-	public abstract boolean isLastToken();
 
 	public abstract int getRealLexicalState();
 

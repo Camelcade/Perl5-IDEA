@@ -124,6 +124,13 @@ public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlo
 		myBlocksCache = new MyBlocksCache(this);
 	}
 
+	@NotNull
+	@Override
+	public List<HTMLMasonCompositeElement> getArgsBlocks()
+	{
+		return myBlocksCache.getValue().get(HTMLMasonArgsBlock.class);
+	}
+
 	protected static class MyBlocksCache extends AtomicNotNullLazyValue<Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>>
 	{
 		private final HTMLMasonBlockImpl myBlock;
@@ -162,5 +169,4 @@ public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlo
 			return result;
 		}
 	}
-
 }

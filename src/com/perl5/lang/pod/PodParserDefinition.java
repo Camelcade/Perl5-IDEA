@@ -27,10 +27,12 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.pod.elementTypes.PodFileElementType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.parser.PodParser;
-import com.perl5.lang.pod.psi.PsiFilePod;
+import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,9 +41,9 @@ import org.jetbrains.annotations.NotNull;
 public class PodParserDefinition implements ParserDefinition, PodElementTypes
 {
 
-	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
+	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT);
 
-	public static final IFileElementType FILE = new IFileElementType("Plain old document", PodLanguage.INSTANCE);
+	public static final IFileElementType FILE = new PodFileElementType("Plain old document");
 
 	@NotNull
 	@Override
@@ -82,7 +84,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new PsiFilePod(viewProvider);
+		return new PodFileImpl(viewProvider);
 	}
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
@@ -93,6 +95,6 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 	@NotNull
 	public PsiElement createElement(ASTNode node)
 	{
-		return PodElementTypes.Factory.createElement(node);
+		return ((PsiElementProvider) node.getElementType()).getPsiElement(node);
 	}
 }

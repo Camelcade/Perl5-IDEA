@@ -22,6 +22,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,7 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PodSyntaxHighlighter extends SyntaxHighlighterBase
+public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodElementTypes
 {
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
@@ -43,23 +44,42 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase
 
 	public static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<IElementType, TextAttributesKey[]>();
 
-//	private final PerlSyntaxHighlighter PERL_SYNTAX_HIGHLIGHTER;
+	private static final TokenSet POD_TOKENS = TokenSet.create(
+			POD_POD,
+
+			POD_HEAD1,
+			POD_HEAD2,
+			POD_HEAD3,
+			POD_HEAD4,
+
+			POD_OVER,
+			POD_ITEM,
+			POD_BACK,
+
+			POD_BEGIN,
+			POD_END,
+
+			POD_FOR,
+			POD_ENCODING,
+
+			POD_CUT,
+			POD_UNKNOWN
+
+	);
 
 	static
 	{
-		attributesMap.put(PodElementTypes.POD_TAG, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TAG});
-		attributesMap.put(PodElementTypes.POD_TEXT, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
+		attributesMap.put(POD_POD, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TAG});
+//		attributesMap.put(PodElementTypes.POD_TEXT, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
 		attributesMap.put(PodElementTypes.POD_NEWLINE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
 		attributesMap.put(PodElementTypes.POD_CODE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_CODE});
 	}
 
-	Project myProject;
+	private final Project myProject;
 
 	public PodSyntaxHighlighter(Project myProject)
 	{
 		this.myProject = myProject;
-
-//		PERL_SYNTAX_HIGHLIGHTER = new PerlSyntaxHighlighter(myProject);
 	}
 
 	@NotNull
@@ -73,12 +93,14 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
-
-//		if( tokenType instanceof PerlTokenType)
-//			return PERL_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
-//		else
-		if (attributesMap.containsKey(tokenType))
+		if (POD_TOKENS.contains(tokenType))
+		{
+			return attributesMap.get(POD_POD);
+		}
+		else if (attributesMap.containsKey(tokenType))
+		{
 			return attributesMap.get(tokenType);
+		}
 
 		return EMPTY_KEYS;
 	}

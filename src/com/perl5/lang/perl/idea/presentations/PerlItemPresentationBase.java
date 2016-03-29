@@ -17,12 +17,9 @@
 package com.perl5.lang.perl.idea.presentations;
 
 import com.intellij.navigation.ColoredItemPresentation;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.PerlDeprecatable;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,14 +48,17 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
 		if (!myElement.isValid())
 			return null;
 
+/*		fixme seems this reparses file
+		String suffix = "";
+
 		PsiFile file = myElement.getContainingFile();
 		Document document = PsiDocumentManager.getInstance(myElement.getProject()).getCachedDocument(file);
 
-		String suffix = "";
 		if (document != null)
 			suffix = ", line " + (document.getLineNumber(myElement.getTextOffset()) + 1);
+*/
 
-		return getElement().getContainingFile().getName() + suffix;
+		return getElement().getContainingFile().getName();// + suffix;
 	}
 
 	@Nullable

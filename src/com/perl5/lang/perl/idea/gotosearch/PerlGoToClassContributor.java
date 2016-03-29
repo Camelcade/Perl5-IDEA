@@ -20,6 +20,9 @@ import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.GotoClassContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.ArrayUtil;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +33,7 @@ import java.util.Collection;
 /**
  * GoToClassContributor looks up namespaces (packages names) - windows shortcut Ctrl+N
  */
-public class PerlGoToNamespaceDefinitionContributor implements ChooseByNameContributor, GotoClassContributor
+public class PerlGoToClassContributor implements ChooseByNameContributor, GotoClassContributor
 {
 	@Nullable
 	@Override
@@ -50,14 +53,19 @@ public class PerlGoToNamespaceDefinitionContributor implements ChooseByNameContr
 	@Override
 	public String[] getNames(Project project, boolean b)
 	{
-		return PerlPackageUtil.getDefinedPackageNames(project).toArray(new String[]{});
+		return ArrayUtil.toStringArray(PerlPackageUtil.getDefinedPackageNames(project));
 	}
 
 	@NotNull
 	@Override
-	public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean b)
+	public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean includeNonProjectItems)
 	{
-		Collection<PerlNamespaceDefinition> result = PerlPackageUtil.getNamespaceDefinitions(project, packageName);
+		Collection<PerlNamespaceDefinition> result = PerlPackageUtil.getNamespaceDefinitions(
+				project,
+				packageName,
+				(includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))
+		);
+		//noinspection SuspiciousToArrayCall
 		return result.toArray(new NavigationItem[result.size()]);
 	}
 }

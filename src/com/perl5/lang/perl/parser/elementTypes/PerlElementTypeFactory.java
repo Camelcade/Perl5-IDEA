@@ -18,7 +18,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.impl.*;
@@ -105,17 +104,7 @@ public class PerlElementTypeFactory
 				}
 			};
 		if (name.equals("POD"))
-			return new PerlTokenTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public ASTNode createLeafNode(CharSequence leafText)
-				{
-					return new PsiCommentImpl(this, leafText);
-				}
-			};
-
-		// fixme we should create self-convertable element types
+			return new PerlPodElementType(name);
 		if (name.equals("HEREDOC_QQ") || name.equals("HEREDOC_QX") || name.equals("HEREDOC"))
 			return new PerlHeredocElementType(name);
 		if (name.equals("PARSABLE_STRING_USE_VARS"))

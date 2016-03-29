@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.idea.livetemplates;
 
 import com.intellij.codeInsight.template.TemplateContextType;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
@@ -36,8 +37,11 @@ public class HTMLMasonTemplateContextType extends TemplateContextType implements
 	@Override
 	public boolean isInContext(@NotNull PsiFile file, int offset)
 	{
-		return file instanceof HTMLMasonFileImpl &&
-				offset > 0 &&
-				HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(file.findElementAt(offset - 1));
+		if (file instanceof HTMLMasonFileImpl && offset > 0)
+		{
+			PsiElement element = file.findElementAt(offset - 1);
+			return HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element);
+		}
+		return false;
 	}
 }

@@ -32,40 +32,13 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <p>This relase fixes more bugs or feedbacks from 1.3 release:
+     <p>
       <ul>
-        <li>Implemented labels resolution, navigation, refactoring and completion, fixes #138 (<b>NB: deprecated usages not handled and won't ever be</b>)</li>
-        <li>Implemented undeclared and unresolved labels inspections</li>
-        <li>Improved completion of package names: added version strings and package suggestion for definition, fixes #432</li>
-        <li>Improved labels parsing, so now you may use any word for it, except <code>sub</code></li>
-        <li>Implemented auto-completion for here-doc openers, fixes #874</li>
-        <li>Fixed possible NPE on here-doc typing in the end of file</li>
-        <li>Fixed possible inspection on #@returns annotation auto-completion</li>
-        <li>Implemented sequential here-docs parsing, fixes #163</li>
-        <li>Implemented backref here-docs parsing</li>
-        <li>Improved utf identifiers and packages parsing</li>
-        <li>Fixed parsing for 0X.. hex and 0B.. numbers</li>
-        <li>Implemented n regex modifier from perl 5.22, fixes #865</li>
-        <li>Regular strings are now injectable with other languages, fixes #829</li>
-        <li>A lot of optimizations.</li>
-        <li>Fixed problem for ipr project settings, by @zhurs</li>
-        <li>Re-formatter now works on here-docs injected with other  languages</li>
-        <li>Disabling injections in here-docs with interpolated entities is now configurable</li>
-        <li>Fixed indentation when typing inside the comma sequence, fixes #845</li>
-        <li>Fixed some bugs with pod parsing, fixes #901</li>
-        <li>Fixed bug with statement modifiers formatting if they are without parentheses</li>
-        <li>Templating languages:<ul>
-        <li>Fixed problem with HTML-related errors at perl block start.</li>
-        <li>Spaces and newlines around perl code are not part of surrounding template anymore and may be consumed on re-formatting.</li>
-        </ul></li>
+      <li>Implemented basic pod support</li>
+      <li>Disabled deprecation strikeout in packages auto-completion. Speeds things up and prevents hanging of IDEA 2016</li>
+      <li>Fixed package completion in variable definition expresison</li>
       </ul>
       </p>
-
-      <!--<p><b>Features  & Improvements:</b>-->
-      <!--</p>-->
-
-      <!--<p><b>Fixes: </b>-->
-      <!--</p>-->
 
     ]]>
     </change-notes>
@@ -178,6 +151,8 @@
         <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandlerDelegate"
                               id="PerlEnterHandler" order="first"/>
 
+        <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
+                               order="first"/>
         <fileTypeDetector implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeDetector"/>
 
         <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
@@ -224,7 +199,7 @@
                                  implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
         <gotoClassContributor
-                implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToNamespaceDefinitionContributor"/>
+                implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToClassContributor"/>
         <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToSubDefinitionContributor"/>
         <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGotoConstantContributor"/>
         <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGotoVariableContributor"/>
@@ -437,7 +412,7 @@
 
         <!-- HTML::Mason settings -->
         <lang.namesValidator language="HTML::Mason Templating Language"
-                             implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+                             implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
         <lang.findUsagesProvider language="HTML::Mason Templating Language"
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
         <quoteHandler fileType="HTML::Mason component"
@@ -482,13 +457,24 @@
 
         <stubElementTypeHolder class="com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes"/>
         <stubIndex implementation="com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex"/>
-        <fileTypeDetector implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeDetector"/>
         <codeInsight.lineMarkerProvider language="HTML::Mason Templating Language"
                                         implementationClass="com.perl5.lang.htmlmason.idea.navigation.HTMLMasonLineMarkerProvider"/>
         <typeHierarchyProvider language="HTML::Mason Templating Language"
                                implementationClass="com.perl5.lang.htmlmason.idea.hierarchy.HTMLMasonHierarchyProvider"/>
         <highlightErrorFilter
                 implementation="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonTemplateLanguageErrorFilter"/>
+        <annotator language="HTML::Mason Templating Language"
+                   implementationClass="com.perl5.lang.htmlmason.idea.annotator.HTMLMasonAnnotator"
+                   order="after PERL_SUBS_ANNOTATOR"/>
+        <psi.referenceContributor language="Perl5"
+                                  implementation="com.perl5.lang.htmlmason.parser.psi.references.HTMLMasonReferencesContributor"/>
+        <referencesSearch
+                implementation="com.perl5.lang.htmlmason.parser.psi.references.HTMLMasonReferencesSearcher"/>
+        <completion.contributor language="Perl5"
+                                implementationClass="com.perl5.lang.htmlmason.idea.completion.HTMLMasonCompletionContributor" order="first"/>
+        <elementDescriptionProvider
+                implementation="com.perl5.lang.htmlmason.parser.psi.HTMLMasonElementDescriptionProvider" order="first"/>
+        <documentationProvider implementation="com.perl5.lang.htmlmason.documentation.HTMLMasonDocumentationProvider"/>
 
         <!-- HTML::Mason settings end -->
 
@@ -572,6 +558,8 @@
         <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"
                                        implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
         <quoteHandler fileType="POD file" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+        <stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>
+        <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
         <!--POD settings end -->
 
 

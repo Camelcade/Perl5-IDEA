@@ -101,37 +101,13 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 	IElementType HTML_MASON_ATTR_BLOCK = new HTMLMasonElementType("HTML_MASON_ATTR_BLOCK");
 	IElementType HTML_MASON_HARD_NEWLINE = new HTMLMasonElementType("HTML_MASON_HARD_NEWLINE");
 
-	IElementType HTML_MASON_METHOD_DEFINITION = new HTMLMasonElementType("HTML_MASON_METHOD_DEFINITION")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new HTMLMasonMethodDefinitionImpl(node);
-		}
-	};
-
-	IElementType HTML_MASON_SUBCOMPONENT_DEFINITION = new HTMLMasonElementType("HTML_MASON_DEF_DEFINITION")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new HTMLMasonSubcomponentDefitnitionImpl(node);
-		}
-	};
+	IElementType HTML_MASON_METHOD_DEFINITION = new HTMLMasonMethodElementType("HTML_MASON_METHOD_DEFINITION");
+	IElementType HTML_MASON_SUBCOMPONENT_DEFINITION = new HTMLMasonSubcomponentElementType("HTML_MASON_DEF_DEFINITION");
 
 	IElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonFlagsStatementElementType("HTML_MASON_FLAGS_STATEMENT");
 
-	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonElementType("HTML_MASON_ARGS_BLOCK")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new HTMLMasonArgsBlockImpl(node);
-		}
-	};
+	IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonArgsBlockElementType("HTML_MASON_ARGS_BLOCK");
+
 	IElementType HTML_MASON_ONCE_BLOCK = new HTMLMasonElementType("HTML_MASON_ONCE_BLOCK")
 	{
 		@NotNull
