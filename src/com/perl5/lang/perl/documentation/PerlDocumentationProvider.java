@@ -138,9 +138,15 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 		if (contextElement == null || contextElement.getLanguage() != PerlLanguage.INSTANCE)
 			return null;
 
+		IElementType elementType = contextElement.getNode().getElementType();
+
 		if (contextElement instanceof PerlVariable)
 		{
 			return PerlDocUtil.getPerlVarDoc((PerlVariable) contextElement); // fixme try to search doc in package or declaration
+		}
+		if (elementType == REGEX_MODIFIER)
+		{
+			return PerlDocUtil.getRegexModifierDoc(contextElement);
 		}
 		else if (isFunc(contextElement))
 		{

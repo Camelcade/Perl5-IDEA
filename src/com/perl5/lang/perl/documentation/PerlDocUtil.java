@@ -54,6 +54,7 @@ import java.util.Map;
 public class PerlDocUtil implements PerlElementTypes
 {
 	private static final Map<String, String> myKeywordsRedirections = new THashMap<String, String>();
+	private static final Map<String, String> myOperatorsRedirections = new THashMap<String, String>();
 
 	static
 	{
@@ -83,6 +84,12 @@ public class PerlDocUtil implements PerlElementTypes
 		myKeywordsRedirections.put("unless", "perlsyn/\"Compound Statements\"");
 		myKeywordsRedirections.put("until", "perlsyn/\"Compound Statements\"");
 		myKeywordsRedirections.put("while", "perlsyn/\"Compound Statements\"");
+
+		myOperatorsRedirections.put("~~", "perlop/\"Smartmatch Operator\"");
+		myOperatorsRedirections.put("qr", "perlop/\"qr/STRING/\"");
+		myOperatorsRedirections.put("s", "perlop/\"s/PATTERN/\"");
+		myOperatorsRedirections.put("m", "perlop/\"m/PATTERN/\"");
+		myOperatorsRedirections.put("=>", "perlop/\"Comma Operator\"");
 	}
 
 	// fixme this shit must be refactored
@@ -181,6 +188,32 @@ public class PerlDocUtil implements PerlElementTypes
 		return null;
 	}
 
+	public static PsiElement getRegexModifierDoc(PsiElement element)
+	{
+		String text = element.getText();
+		assert text != null;
+		String anchor = "Modifiers";
+
+		if (text.length() > 0)
+		{
+			char firstChar = text.charAt(0);
+			if (StringUtil.containsChar("msixpn", firstChar))
+			{
+				anchor = "" + firstChar;
+			}
+			else if (StringUtil.containsChar("adlux", firstChar))
+			{
+				anchor = "/" + firstChar;
+			}
+			else if (StringUtil.containsChar("cgeor", firstChar))
+			{
+				anchor = "Other Modifiers";
+			}
+		}
+
+		return resolveDocLink("perlre/\"" + anchor + "\"", element);
+	}
+
 	@Nullable
 	public static PsiElement getPerlVarDoc(PerlVariable variable)
 	{
@@ -237,32 +270,22 @@ public class PerlDocUtil implements PerlElementTypes
 		String text = element.getText();
 		IElementType elementType = element.getNode().getElementType();
 
+		String redirect = myOperatorsRedirections.get(text);
+		if (redirect != null)
+		{
+			return resolveDocLink(redirect, element);
+		}
+
+
 		// fixme use map?
 		PodDocumentPattern pattern = PodDocumentPattern.indexPattern(text);
 		if (element instanceof PerlHeredocOpener || element instanceof PerlHeredocTerminatorElement || element instanceof PerlHeredocElementImpl)
 		{
 			pattern.setIndexKey("heredoc");    // searches with X<>
 		}
-		else if (elementType == RESERVED_QR)
-		{
-			pattern.setIndexKey(null);
-			pattern.setItemPattern("qr/STRING/");
-		}
-		else if (elementType == RESERVED_S)
-		{
-			pattern.setIndexKey("regexp, replace");
-		}
-		else if (elementType == RESERVED_M)
-		{
-			pattern.setIndexKey("operator, match");
-		}
 		else if (text.matches("-[rwxoRWXOeszfdlpSbctugkTBMAC]"))
 		{
 			pattern.setIndexKey("-X");
-		}
-		else if ("=>".equals(text))
-		{
-			pattern.setIndexKey(",");
 		}
 		else if ("?".equals(text) || ":".equals(text))
 		{
