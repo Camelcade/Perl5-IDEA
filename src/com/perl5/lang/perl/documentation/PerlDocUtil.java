@@ -497,11 +497,11 @@ public class PerlDocUtil implements PerlElementTypes
 			{
 				if (myHeaderLevel == 0)
 				{
-					myBuilder.append("<ul style=\"margin-left: 0px;\">");
+					myBuilder.append("<ul style=\"margin-left: 0px;margin-top:0px;margin-bottom:0px;\">");
 				}
 				else
 				{
-					myBuilder.append("<ul style=\"margin-left: 20px;margin-top:0px;\">");
+					myBuilder.append("<ul style=\"margin-left: 20px;margin-top:0px;margin-bottom:0px;\">");
 				}
 				myHeaderLevel++;
 			}
