@@ -562,7 +562,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public Icon getIcon(boolean unused)
 	{
-		return getIcon(0);
+		return getFileType().getIcon();
 	}
 
 	@Nullable

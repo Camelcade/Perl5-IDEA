@@ -154,7 +154,7 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	@Override
 	public Icon getIcon(boolean unused)
 	{
-		return getIcon(0);
+		return getFileType().getIcon();
 	}
 
 	@Nullable
