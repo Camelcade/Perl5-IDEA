@@ -31,7 +31,6 @@ import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -118,7 +117,7 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	@Override
 	public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context)
 	{
-		if (context.getLanguage() == PodLanguage.INSTANCE)
+		if (context instanceof PodCompositeElement)
 		{
 			try
 			{

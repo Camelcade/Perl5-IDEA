@@ -170,11 +170,11 @@ public class PodRenderUtil
 		if (isPsi)
 		{
 			builder.append(DocumentationManager.PSI_ELEMENT_PROTOCOL);
-			builder.append(link);
+			builder.append(PodRenderUtil.encodeLink(link));
 		}
 		else
 		{
-			builder.append(PodRenderUtil.encodeLink(link));
+			builder.append(link);
 		}
 
 		builder.append("\">");
