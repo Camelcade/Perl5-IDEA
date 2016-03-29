@@ -82,6 +82,10 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseProcessor"/>
         <packageProcessor key="Moo"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
+        <packageProcessor key="Dancer"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>
+        <packageProcessor key="Dancer2"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>
 
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchPerlParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.MethodSignaturesSimpleParserExtensionImpl"/>
