@@ -16,6 +16,9 @@
 
 package parser;
 
+import com.intellij.psi.LanguageFileViewProviders;
+import com.perl5.lang.mason2.Mason2TemplatingFileViewProviderFactory;
+import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
 
 /**
@@ -39,4 +42,12 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase
 	{
 		doTest("test_component", true);
 	}
+
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		LanguageFileViewProviders.INSTANCE.addExplicitExtension(Mason2TemplatingLanguage.INSTANCE, new Mason2TemplatingFileViewProviderFactory());
+	}
+
 }

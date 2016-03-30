@@ -16,7 +16,10 @@
 
 package parser;
 
+import com.intellij.psi.LanguageFileViewProviders;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.htmlmason.HTMLMasonFileViewProviderFactory;
+import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
 
 import java.util.List;
@@ -151,6 +154,13 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 //				"PsiFile contains error elements",
 //				toParseTreeText(allFiles.get(1), skipSpaces(), includeRanges()).contains("PsiErrorElement")
 //		);
+	}
+
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		LanguageFileViewProviders.INSTANCE.addExplicitExtension(HTMLMasonLanguage.INSTANCE, new HTMLMasonFileViewProviderFactory());
 	}
 
 }

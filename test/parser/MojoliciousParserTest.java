@@ -16,6 +16,9 @@
 
 package parser;
 
+import com.intellij.psi.LanguageFileViewProviders;
+import com.perl5.lang.mojolicious.MojoliciousFileViewProviderFactory;
+import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.MojoliciousParserDefinition;
 
 /**
@@ -38,4 +41,12 @@ public class MojoliciousParserTest extends PerlParserTestBase
 	{
 		doTest("mojo_parser_test");
 	}
+
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		LanguageFileViewProviders.INSTANCE.addExplicitExtension(MojoliciousLanguage.INSTANCE, new MojoliciousFileViewProviderFactory());
+	}
+
 }

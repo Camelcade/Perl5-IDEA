@@ -16,6 +16,10 @@
 
 package parser;
 
+import com.intellij.psi.LanguageFileViewProviders;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.parser.PerlFileViewProviderFactory;
+
 /**
  * Created by hurricup on 31.01.2016.
  */
@@ -126,4 +130,12 @@ public class PerlParserTest extends PerlParserTestBase
 	{
 		doTest("labels_parsing");
 	}
+
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		LanguageFileViewProviders.INSTANCE.addExplicitExtension(PerlLanguage.INSTANCE, new PerlFileViewProviderFactory());
+	}
+
 }
