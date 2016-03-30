@@ -18,6 +18,7 @@ package com.perl5.lang.embedded;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
+import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.StdLanguages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
@@ -26,6 +27,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
+import com.perl5.lang.pod.PodLanguage;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +42,11 @@ public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFil
 {
 
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, EmbeddedPerlLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(
+					StdLanguages.HTML,
+					EmbeddedPerlLanguage.INSTANCE,
+					PodLanguage.INSTANCE
+			));
 
 
 	public EmbeddedPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
@@ -66,16 +72,23 @@ public class EmbeddedPerlFileViewProvider extends MultiplePsiFilesPerDocumentFil
 	@Nullable
 	protected PsiFile createFile(@NotNull final Language lang)
 	{
-		if (lang == getTemplateDataLanguage())
-		{
-			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(EmbeddedPerlElementTypes.EMBED_HTML_TEMPLATE_DATA);
-			return file;
-		}
+		if (lang != PodLanguage.INSTANCE && lang != getBaseLanguage() && lang != getTemplateDataLanguage())
+			return null;
 
-		if (lang == getBaseLanguage())
+		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
+
+		if (parserDefinition != null)
 		{
-			return LanguageParserDefinitions.INSTANCE.forLanguage(lang).createFile(this);
+			final PsiFileImpl file = (PsiFileImpl) parserDefinition.createFile(this);
+			if (lang == getTemplateDataLanguage())
+			{
+				file.setContentElementType(EmbeddedPerlElementTypes.EMBED_HTML_TEMPLATE_DATA);
+			}
+			else if (lang == PodLanguage.INSTANCE)
+			{
+				file.setContentElementType(EmbeddedPerlElementTypes.EMBED_POD_TEMPLATE_DATA);
+			}
+			return file;
 		}
 		return null;
 	}

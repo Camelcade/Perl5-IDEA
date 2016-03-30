@@ -16,14 +16,10 @@
 
 package parser;
 
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.CharsetToolkit;
-import com.intellij.testFramework.TestDataFile;
+import com.intellij.psi.LanguageFileViewProviders;
+import com.perl5.lang.mason2.Mason2FileViewProviderFactory;
+import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.mason2.Mason2ParserDefinition;
-import org.jetbrains.annotations.NonNls;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -41,15 +37,15 @@ public class Mason2ParserTest extends PerlParserTestBase
 		return "testData/parser/mason2/perl";
 	}
 
-	protected String loadFile(@NonNls @TestDataFile String name) throws IOException
-	{
-		return FileUtil.loadFile(new File(myFullDataPath, name.replace(".mp", ".code")), CharsetToolkit.UTF8, true).trim();
-	}
-
 	public void testComponent()
 	{
 		doTest("test_component", true);
 	}
 
-
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		LanguageFileViewProviders.INSTANCE.addExplicitExtension(Mason2Language.INSTANCE, new Mason2FileViewProviderFactory());
+	}
 }

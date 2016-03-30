@@ -16,12 +16,15 @@
 
 package parser;
 
+import com.intellij.psi.LanguageFileViewProviders;
+import com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory;
+import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
 
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class EmbeddedPerlParserTest extends PerlMultiPsiParserTestBase
+public class EmbeddedPerlParserTest extends PerlParserTestBase
 {
 	public EmbeddedPerlParserTest()
 	{
@@ -37,5 +40,12 @@ public class EmbeddedPerlParserTest extends PerlMultiPsiParserTestBase
 	public void testSyntax()
 	{
 		doTest("parser_test");
+	}
+
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		LanguageFileViewProviders.INSTANCE.addExplicitExtension(EmbeddedPerlLanguage.INSTANCE, new EmbeddedPerlFileViewProviderFactory());
 	}
 }

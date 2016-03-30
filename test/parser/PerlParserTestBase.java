@@ -83,7 +83,6 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-
 		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
 		new PerlParserExtensions().initComponent();
 	}
@@ -92,4 +91,11 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 	{
 		return FileUtil.loadFile(new File(myFullDataPath, name.replace("." + myFileExt, ".code")), CharsetToolkit.UTF8, true).trim();
 	}
+
+	@Override
+	protected boolean checkAllPsiRoots()
+	{
+		return false;
+	}
+
 }

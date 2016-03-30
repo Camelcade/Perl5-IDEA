@@ -14,26 +14,15 @@
  * limitations under the License.
  */
 
-package parser;
+package com.perl5.lang.pod.lexer;
 
-import com.intellij.lang.ParserDefinition;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.pod.elementTypes.PodTokenType;
 
 /**
- * Created by hurricup on 05.03.2016.
+ * Created by hurricup on 30.03.2016.
  */
-public abstract class PerlMultiPsiParserTestBase extends PerlParserTestBase
+public interface PodElementTypes extends PodElementTypesGenerated
 {
-	public PerlMultiPsiParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions)
-	{
-		super(dataPath, fileExt, definitions);
-	}
-
-	@Override
-	protected boolean checkAllPsiRoots()
-	{
-		return false;
-	}
-
+	IElementType POD_OUTER = new PodTokenType("POD_OUTER");
 }

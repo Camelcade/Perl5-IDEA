@@ -14,29 +14,24 @@
  * limitations under the License.
  */
 
-package parser;
+package com.perl5.lang.mason2;
 
-import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
+import com.intellij.lang.Language;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.FileViewProviderFactory;
+import com.intellij.psi.PsiManager;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 04.03.2016.
+ * Created by hurricup on 30.03.2016.
  */
-public class Mason2TemplatingParserTest extends PerlParserTestBase
+public class Mason2FileViewProviderFactory implements FileViewProviderFactory
 {
-	public Mason2TemplatingParserTest()
-	{
-		super("", "mc", new Mason2TemplatingParserDefinition());
-	}
-
+	@NotNull
 	@Override
-	protected String getTestDataPath()
+	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
 	{
-		return "testData/parser/mason2/template";
-	}
-
-
-	public void testComponent()
-	{
-		doTest("test_component", true);
+		return new Mason2FileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

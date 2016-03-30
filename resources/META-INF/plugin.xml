@@ -21,7 +21,7 @@
     <category>Custom Languages</category>
 
      <description><![CDATA[
-    <p>Camelcade plugin adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
+    <p>Camelcade  plugin adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
     <p>
     <a href="https://twitter.com/CamelcadeIDE">Twitter</a>
     | <a href="https://github.com/hurricup/Perl5-IDEA">GitHub</a>
@@ -100,6 +100,8 @@
         <internalFileTemplate name="Perl5 mojolicious"/>
         <internalFileTemplate name="Perl5 test"/>
 
+        <lang.fileViewProviderFactory language="Perl5"
+                                      implementationClass="com.perl5.lang.perl.parser.PerlFileViewProviderFactory"/>
         <annotator language="Perl5"
                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.idea.annotator.ClassAccessorAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
@@ -488,6 +490,8 @@
         <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
         <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.MasonElementTypes"/>
+        <lang.fileViewProviderFactory language="Mason2"
+                                      implementationClass="com.perl5.lang.mason2.Mason2FileViewProviderFactory"/>
 
         <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>
         <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex"/>
@@ -557,6 +561,7 @@
 
 
         <!--POD settings -->
+        <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
         <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
         <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"

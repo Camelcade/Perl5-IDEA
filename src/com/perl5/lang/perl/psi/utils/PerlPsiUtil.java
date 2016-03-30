@@ -27,12 +27,12 @@ import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -174,7 +174,7 @@ public class PerlPsiUtil
 		PsiElement result = element.getPrevSibling();
 		while (true)
 		{
-			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace || result instanceof PodCompositeElement))
+			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace || result.getNode().getElementType() == PerlElementTypes.POD))
 				break;
 			result = result.getPrevSibling();
 		}

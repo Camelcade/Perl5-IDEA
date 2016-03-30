@@ -21,6 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.xml.util.XmlStringUtil;
+import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +31,7 @@ import java.net.URLEncoder;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodRenderUtil
+public class PodRenderUtil implements PodElementTypes
 {
 	public static String renderPsiElementAsHTML(@Nullable PsiElement firstElement)
 	{
@@ -60,7 +61,11 @@ public class PodRenderUtil
 		PsiElement run = firstElement;
 		while (run != null)
 		{
-			if (run instanceof PodRenderableElement)
+			if (run.getNode().getElementType() == POD_OUTER)
+			{
+				continue;
+			}
+			else if (run instanceof PodRenderableElement)
 			{
 				((PodRenderableElement) run).renderElementAsHTML(builder, context);
 			}
@@ -112,7 +117,11 @@ public class PodRenderUtil
 		PsiElement run = firstElement;
 		while (run != null)
 		{
-			if (run instanceof PodRenderableElement)
+			if (run.getNode().getElementType() == POD_OUTER)
+			{
+				continue;
+			}
+			else if (run instanceof PodRenderableElement)
 			{
 				((PodRenderableElement) run).renderElementAsText(builder, context);
 			}

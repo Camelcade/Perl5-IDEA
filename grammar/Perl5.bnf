@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 {
+  elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlElementTypesGenerated"
   parserClass="com.perl5.lang.perl.parser.PerlParserGenerated"
   extends="com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl"
 

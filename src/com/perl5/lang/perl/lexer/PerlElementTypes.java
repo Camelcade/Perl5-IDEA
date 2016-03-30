@@ -14,29 +14,17 @@
  * limitations under the License.
  */
 
-package parser;
+package com.perl5.lang.perl.lexer;
 
-import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
+import com.intellij.psi.templateLanguages.TemplateDataElementType;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.pod.lexer.PodElementTypes;
 
 /**
- * Created by hurricup on 04.03.2016.
+ * Created by hurricup on 30.03.2016.
  */
-public class Mason2TemplatingParserTest extends PerlParserTestBase
+public interface PerlElementTypes extends PerlElementTypesGenerated, PodElementTypes
 {
-	public Mason2TemplatingParserTest()
-	{
-		super("", "mc", new Mason2TemplatingParserDefinition());
-	}
-
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/parser/mason2/template";
-	}
-
-
-	public void testComponent()
-	{
-		doTest("test_component", true);
-	}
+	IElementType POD_BLOCK = new TemplateDataElementType("POD_BLOCK", PerlLanguage.INSTANCE, POD, POD_OUTER);
 }

@@ -21,7 +21,7 @@ import com.perl5.lang.mojolicious.MojoliciousParserDefinition;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class MojoliciousParserTest extends PerlMultiPsiParserTestBase
+public class MojoliciousParserTest extends PerlParserTestBase
 {
 	public MojoliciousParserTest()
 	{
