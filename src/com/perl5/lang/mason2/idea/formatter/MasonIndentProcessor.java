@@ -18,13 +18,13 @@ package com.perl5.lang.mason2.idea.formatter;
 
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MasonIndentProcessor extends PerlIndentProcessor implements MasonElementTypes
+public class MasonIndentProcessor extends PerlIndentProcessor implements Mason2ElementTypes
 {
 	public static final MasonIndentProcessor INSTANCE = new MasonIndentProcessor();
 

@@ -20,12 +20,12 @@ import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.Mason2TemplatingFileViewProvider;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 
 /**
  * Created by hurricup on 16.03.2016.
  */
-public class Mason2TemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements MasonElementTypes
+public class Mason2TemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements Mason2ElementTypes
 {
 	private static final TokenSet START_TOKENS = TokenSet.create(
 			MASON_BLOCK_OPENER,

@@ -490,7 +490,7 @@
 
         <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
-        <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.MasonElementTypes"/>
+        <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.Mason2ElementTypes"/>
         <lang.fileViewProviderFactory language="Mason2"
                                       implementationClass="com.perl5.lang.mason2.Mason2FileViewProviderFactory"/>
 

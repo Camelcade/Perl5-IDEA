@@ -24,7 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.htmlmason.idea.editor.AbstractMasonFoldingBuilder;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.Mason2RecursiveVisitor;
 import com.perl5.lang.mason2.psi.MasonAbstractBlock;
 import com.perl5.lang.mason2.psi.MasonTextBlock;
@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * Created by hurricup on 07.01.2016.
  */
-public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements MasonElementTypes
+public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements Mason2ElementTypes
 {
 	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
 			PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,

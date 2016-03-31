@@ -20,7 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.lexer.AbstractMasonLexer;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import gnu.trove.THashMap;
 
@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
  * Created by hurricup on 20.12.2015.
  */
 @SuppressWarnings("Duplicates")
-public class MasonTemplatingLexer extends AbstractMasonLexer implements MasonElementTypes
+public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2ElementTypes
 {
 	public static final Pattern MASON_EXPRESSION_FILTER_BLOCK = Pattern.compile(
 			"\\|\\s*"

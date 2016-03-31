@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.MasonAugmentMethodModifier;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAugmentStatementImpl;
@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Created by hurricup on 28.01.2016.
  */
-public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImpl implements MasonAugmentMethodModifier, MasonElementTypes
+public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImpl implements MasonAugmentMethodModifier, Mason2ElementTypes
 {
 	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES = null;
 

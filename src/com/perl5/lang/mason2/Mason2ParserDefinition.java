@@ -23,7 +23,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.elementType.MasonFileElementType;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class Mason2ParserDefinition extends PerlParserDefinition implements MasonElementTypes
+public class Mason2ParserDefinition extends PerlParserDefinition implements Mason2ElementTypes
 {
 	public static final IFileElementType FILE = new MasonFileElementType("Mason PP component", Mason2Language.INSTANCE);
 

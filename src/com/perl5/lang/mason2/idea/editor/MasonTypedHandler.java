@@ -26,7 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
 import com.perl5.lang.mason2.Mason2TemplatingFileViewProvider;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
@@ -35,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.01.2016.
  */
-public class MasonTypedHandler extends TypedHandlerDelegate implements MasonElementTypes, XmlTokenType, PerlElementTypes
+public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2ElementTypes, XmlTokenType, PerlElementTypes
 {
 	private static final THashMap<String, String> SIMPLE_COMPLETION_MAP = new THashMap<String, String>();
 

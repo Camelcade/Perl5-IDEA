@@ -24,7 +24,7 @@ import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.idea.formatter.AbstractMasonFormattingBlock;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MasonFormattingBlock extends AbstractMasonFormattingBlock implements MasonElementTypes
+public class MasonFormattingBlock extends AbstractMasonFormattingBlock implements Mason2ElementTypes
 {
 	public MasonFormattingBlock(@NotNull ASTNode node,
 								@Nullable Wrap wrap,

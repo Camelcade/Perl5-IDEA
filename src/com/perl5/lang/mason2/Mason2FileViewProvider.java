@@ -25,7 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
-import com.perl5.lang.mason2.elementType.MasonElementTypes;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
 import gnu.trove.THashSet;
@@ -38,7 +38,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 30.03.2016.
  */
-public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MasonElementTypes, PerlElementTypes
+public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, Mason2ElementTypes, PerlElementTypes
 {
 	private static final Set<Language> myLanguages = new THashSet<Language>(Arrays.asList(
 			Mason2Language.INSTANCE,
