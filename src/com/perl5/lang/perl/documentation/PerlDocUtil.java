@@ -60,7 +60,6 @@ public class PerlDocUtil implements PerlElementTypes
 
 	static
 	{
-		// fixme data and end are not handled, cause atm they are parsed as comments, may be we should fix this
 		myKeywordsRedirections.put("__DATA__", "perldata/\"Special Literals\"");
 		myKeywordsRedirections.put("__END__", "perldata/\"Special Literals\"");
 

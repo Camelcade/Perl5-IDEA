@@ -87,7 +87,9 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 			HEREDOC_END,
 			POD,
 			FORMAT,
-			FORMAT_TERMINATOR
+			FORMAT_TERMINATOR,
+			TAG_DATA,
+			TAG_END
 	);
 
 	public TokenSet getAbsoluteUnindentableTokens()

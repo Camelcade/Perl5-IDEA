@@ -33,6 +33,8 @@ public interface PerlParser extends PerlElementTypes
 	);
 
 	TokenSet NAMESPACE_CONTENT_RECOVERY_TOKENS = TokenSet.create(
+			TAG_END,
+			TAG_DATA,
 			RIGHT_BRACE
 	);
 
@@ -42,6 +44,9 @@ public interface PerlParser extends PerlElementTypes
 
 			RIGHT_BRACE,
 			REGEX_QUOTE_CLOSE,
+
+			TAG_END,
+			TAG_DATA,
 
 			BLOCK_NAME,
 
@@ -64,6 +69,8 @@ public interface PerlParser extends PerlElementTypes
 
 	// stop tokens for block recovery
 	TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.create(
+			TAG_END,
+			TAG_DATA,
 			RIGHT_BRACE
 	);
 
@@ -75,7 +82,9 @@ public interface PerlParser extends PerlElementTypes
 	// Tokens which makes semicolon optional, like block close brace
 	TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.create(
 			RIGHT_BRACE,
-			REGEX_QUOTE_CLOSE
+			REGEX_QUOTE_CLOSE,
+			TAG_END,
+			TAG_DATA
 	);
 
 	TokenSet ANON_HASH_TOKEN_SUFFIXES = TokenSet.create(

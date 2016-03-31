@@ -65,6 +65,8 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	private static final TokenSet myForceAsFunc = TokenSet.create(
 			BLOCK_NAME,
 			TAG,
+			TAG_END,
+			TAG_DATA,
 			OPERATOR_FILETEST
 	);
 

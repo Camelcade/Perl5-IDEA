@@ -657,6 +657,18 @@ public class PerlLexer extends PerlLexerGenerated
 		int run = tokenStart;
 		CharSequence buffer = getBuffer();
 
+		if (buffer.charAt(run + 2) == 'D')
+		{
+			pushPreparsedToken(run, run + STRING_DATA_LENGTH, TAG_DATA);
+			run += STRING_DATA_LENGTH;
+		}
+		else
+		{
+			pushPreparsedToken(run, run + STRING_END_LENGTH, TAG_END);
+			run += STRING_END_LENGTH;
+		}
+		tokenStart = run;
+
 		while (run < bufferEnd)
 		{
 			char currentChar = buffer.charAt(run);
