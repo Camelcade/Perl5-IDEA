@@ -147,7 +147,7 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 		myFile = createPsiFile(name, text);
 		ensureParsed(myFile);
 		List<PsiFile> allFiles = myFile.getViewProvider().getAllFiles();
-		assertEquals(2, allFiles.size());
+		assertEquals(3, allFiles.size());
 		// fixme this is not actually works we need to check annotations, not eror elements, they are still there, see #917
 		// see https://github.com/JetBrains/intellij-plugins/blob/master/handlebars/src/com/dmarcotte/handlebars/inspections/HbErrorFilter.java
 //		assertFalse(
