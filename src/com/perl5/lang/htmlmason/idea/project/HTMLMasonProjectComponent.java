@@ -36,7 +36,9 @@ public class HTMLMasonProjectComponent implements ProjectComponent
 	@Override
 	public void projectOpened()
 	{
-		HTMLMasonSettings.getInstance(myProject).prepareLexerConfiguration(); // initializes substitutors and prepare lexer config
+		HTMLMasonSettings settings = HTMLMasonSettings.getInstance(myProject);
+		settings.updateSubstitutors();
+		settings.prepareLexerConfiguration();
 	}
 
 	@Override

@@ -92,7 +92,6 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings> 
 		}
 
 		persisted.setProject(project);
-		persisted.updateSubstitutors();
 
 		return persisted;
 	}
@@ -120,7 +119,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings> 
 		substitutorMap.clear();
 	}
 
-	protected void updateSubstitutors()
+	public void updateSubstitutors()
 	{
 		// unregister
 		Iterator<Map.Entry<String, Pair<Language, LanguageSubstitutor>>> iterator = substitutorMap.entrySet().iterator();
