@@ -16,9 +16,6 @@
 
 package com.perl5.lang.mojolicious;
 
-import com.intellij.psi.templateLanguages.TemplateDataElementType;
-import com.intellij.psi.tree.IElementType;
-
 /**
  * Created by hurricup on 26.12.2015.
  */
@@ -39,9 +36,4 @@ public interface MojoliciousSyntaxElements
 
 	String KEYWORD_MOJO_BEGIN = "begin";
 	String KEYWORD_MOJO_END = "end";
-
-	IElementType MOJO_TEMPLATE_BLOCK_HTML = new MojoliciousTokenType("MOJO_TEMPLATE_BLOCK_HTML");
-	IElementType MOJO_OUTER_ELEMENT_TYPE = new MojoliciousElementType("MOJO_OUTER_ELEMENT_TYPE");
-	IElementType MOJO_HTML_TEMPLATE_DATA = new TemplateDataElementType("MOJO_HTML_TEMPLATE_DATA", MojoliciousLanguage.INSTANCE, MOJO_TEMPLATE_BLOCK_HTML, MOJO_OUTER_ELEMENT_TYPE);
-
 }

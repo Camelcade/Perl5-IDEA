@@ -18,6 +18,7 @@ package com.perl5.lang.mojolicious;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
+import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.StdLanguages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
@@ -25,6 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
+import com.perl5.lang.pod.PodLanguage;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,7 +40,11 @@ import java.util.Set;
 public class MojoliciousFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, MojoliciousElementTypes
 {
 	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(StdLanguages.HTML, MojoliciousLanguage.INSTANCE));
+			new THashSet<Language>(Arrays.asList(
+					StdLanguages.HTML,
+					MojoliciousLanguage.INSTANCE,
+					PodLanguage.INSTANCE
+			));
 
 
 	public MojoliciousFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
@@ -64,17 +70,23 @@ public class MojoliciousFileViewProvider extends MultiplePsiFilesPerDocumentFile
 	@Nullable
 	protected PsiFile createFile(@NotNull final Language lang)
 	{
-		if (lang == getTemplateDataLanguage())
-		{
+		if (lang != PodLanguage.INSTANCE && lang != getBaseLanguage() && lang != getTemplateDataLanguage())
+			return null;
 
-			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
-			file.setContentElementType(MOJO_HTML_TEMPLATE_DATA);
+		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
+
+		if (parserDefinition != null)
+		{
+			final PsiFileImpl file = (PsiFileImpl) parserDefinition.createFile(this);
+			if (lang == getTemplateDataLanguage())
+			{
+				file.setContentElementType(MOJO_HTML_TEMPLATE_DATA);
+			}
+			else if (lang == PodLanguage.INSTANCE)
+			{
+				file.setContentElementType(MOJO_POD_TEMPLATE_DATA);
+			}
 			return file;
-		}
-
-		if (lang == getBaseLanguage())
-		{
-			return LanguageParserDefinitions.INSTANCE.forLanguage(lang).createFile(this);
 		}
 		return null;
 	}

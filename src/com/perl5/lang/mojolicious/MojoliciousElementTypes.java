@@ -16,13 +16,20 @@
 
 package com.perl5.lang.mojolicious;
 
+import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.embedded.EmbeddedPerlLanguage;
+import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 
 /**
  * Created by hurricup on 22.12.2015.
  */
 public interface MojoliciousElementTypes extends MojoliciousSyntaxElements
 {
+	IElementType MOJO_TEMPLATE_BLOCK_HTML = new MojoliciousTokenType("MOJO_TEMPLATE_BLOCK_HTML");
+	IElementType MOJO_OUTER_ELEMENT_TYPE = new MojoliciousTokenType("MOJO_OUTER_ELEMENT_TYPE");
+	IElementType MOJO_HTML_TEMPLATE_DATA = new TemplateDataElementType("MOJO_HTML_TEMPLATE_DATA", MojoliciousLanguage.INSTANCE, MOJO_TEMPLATE_BLOCK_HTML, MOJO_OUTER_ELEMENT_TYPE);
+	IElementType MOJO_POD_TEMPLATE_DATA = new PodTemplatingElementType("MOJO_POD_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE);
 
 	IElementType MOJO_BLOCK_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_OPENER);
 	IElementType MOJO_BLOCK_EXPR_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_OPENER);
