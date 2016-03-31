@@ -23,6 +23,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.htmlmason.parser.psi.impl.*;
+import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -31,13 +32,14 @@ import org.jetbrains.annotations.NotNull;
 public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements
 {
 	IElementType HTML_MASON_TEMPLATE_BLOCK_HTML = new HTMLMasonTokenType("HTML_MASON_TEMPLATE_BLOCK_HTML");
-	IElementType HTML_MASON_OUTER_ELEMENT_TYPE = new HTMLMasonElementType("HTML_MASON_OUTER_ELEMENT_TYPE");
+	IElementType HTML_MASON_OUTER_ELEMENT_TYPE = new HTMLMasonTokenType("HTML_MASON_OUTER_ELEMENT_TYPE");
 	IElementType HTML_MASON_HTML_TEMPLATE_DATA = new TemplateDataElementType(
 			"HTML_MASON_HTML_TEMPLATE_DATA",
 			HTMLMasonLanguage.INSTANCE,
 			HTML_MASON_TEMPLATE_BLOCK_HTML,
 			HTML_MASON_OUTER_ELEMENT_TYPE
 	);
+	IElementType HTML_MASON_POD_TEMPLATE_DATA = new PodTemplatingElementType("HTML_MASON_POD_TEMPLATE_DATA", HTMLMasonLanguage.INSTANCE);
 
 	IElementType HTML_MASON_BLOCK_OPENER = new HTMLMasonTokenType(KEYWORD_BLOCK_OPENER);
 	IElementType HTML_MASON_BLOCK_CLOSER = new HTMLMasonTokenType(KEYWORD_BLOCK_CLOSER);
