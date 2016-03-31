@@ -35,6 +35,7 @@
      <p>
       <ul>
       <li>Implemented basic pod support</li>
+      <li>Fixed performance problem appeared after IDEA 2016.1.1 update</li>
       <li>Disabled deprecation strikeout in packages auto-completion. Speeds things up and prevents hanging of IDEA 2016</li>
       <li>Fixed package completion in variable definition expresison</li>
       </ul>
