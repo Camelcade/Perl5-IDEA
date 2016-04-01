@@ -37,6 +37,7 @@ import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodSearchHelper;
+import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
@@ -154,7 +155,7 @@ public class PerlDocUtil implements PerlElementTypes
 				}
 				else // top level file perl.*
 				{
-					fileId += "." + PodFileUtil.POD_FILE_EXTENSION;
+					fileId += "." + PodFileType.EXTENSION;
 
 					PsiFile[] psiFiles = FilenameIndex.getFilesByName(
 							origin.getProject(),

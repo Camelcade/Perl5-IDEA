@@ -16,7 +16,6 @@
 
 package com.perl5.lang.pod.filetypes;
 
-import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.pod.PodLanguage;
@@ -30,8 +29,8 @@ import javax.swing.*;
  */
 public class PodFileType extends LanguageFileType
 {
+	public static final String EXTENSION = "pod";
 	public static final PodFileType INSTANCE = new PodFileType();
-	public static final Language LANGUAGE = INSTANCE.getLanguage();
 
 	private PodFileType()
 	{
@@ -56,7 +55,7 @@ public class PodFileType extends LanguageFileType
 	@Override
 	public String getDefaultExtension()
 	{
-		return "pod";
+		return EXTENSION;
 	}
 
 	@Nullable

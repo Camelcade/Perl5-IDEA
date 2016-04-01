@@ -27,6 +27,8 @@ import javax.swing.*;
  */
 public class PerlFileTypePackage extends PerlFileType
 {
+	public static final String EXTENSION = "pm";
+
 	public static final PerlFileTypePackage INSTANCE = new PerlFileTypePackage();
 
 	@NotNull
@@ -47,7 +49,7 @@ public class PerlFileTypePackage extends PerlFileType
 	@Override
 	public String getDefaultExtension()
 	{
-		return "pm";
+		return EXTENSION;
 	}
 
 	@Nullable

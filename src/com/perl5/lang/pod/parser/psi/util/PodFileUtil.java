@@ -19,8 +19,10 @@ package com.perl5.lang.pod.parser.psi.util;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
+import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,8 +32,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PodFileUtil
 {
-	public static final String POD_FILE_EXTENSION = "pod";
-
 	@Nullable
 	public static String getPackageName(PodFile file)
 	{
@@ -49,7 +49,7 @@ public class PodFileUtil
 				String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
 				if (relativePath != null)
 				{
-					return StringUtil.join(relativePath.replaceAll("." + POD_FILE_EXTENSION + "$", "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
+					return StringUtil.join(relativePath.replaceAll(".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$", "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
 				}
 			}
 		}
@@ -58,6 +58,6 @@ public class PodFileUtil
 
 	public static String getFilenameFromPackage(@NotNull String packageName)
 	{
-		return StringUtil.join(PerlPackageUtil.getCanonicalPackageName(packageName).split(PerlPackageUtil.PACKAGE_SEPARATOR), "/") + "." + POD_FILE_EXTENSION;
+		return StringUtil.join(PerlPackageUtil.getCanonicalPackageName(packageName).split(PerlPackageUtil.PACKAGE_SEPARATOR), "/") + "." + PodFileType.EXTENSION;
 	}
 }
