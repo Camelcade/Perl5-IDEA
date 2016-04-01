@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodFile;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
@@ -195,7 +196,11 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 				return PerlDocUtil.resolveDocLink(packageName, contextElement);
 			}
 		}
-		else if (!(contextElement instanceof PsiFile))
+		else if (contextElement instanceof PsiFile)
+		{
+			return ((PsiFile) contextElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
+		}
+		else
 		{
 			return getCustomDocumentationElement(editor, file, contextElement.getParent());
 		}
