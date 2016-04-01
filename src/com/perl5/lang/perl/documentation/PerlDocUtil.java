@@ -32,10 +32,10 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodSearchHelper;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
@@ -143,7 +143,10 @@ public class PerlDocUtil implements PerlElementTypes
 							{
 								if ((targetFile = PsiManager.getInstance(project).findFile(targetVirtualFile)) != null)
 								{
-									break;
+									if ((targetFile = targetFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null)
+									{
+										break;
+									}
 								}
 							}
 						}
@@ -359,48 +362,11 @@ public class PerlDocUtil implements PerlElementTypes
 		return builder.toString();
 	}
 
-	protected static String renderPerlFile(PerlFileImpl file)
-	{
-		final StringBuilder builder = new StringBuilder();
-		final PodRenderingContext renderingContext = new PodRenderingContext();
-
-		renderFileToc(file, builder);
-
-		PsiTreeUtil.processElements(file, new PsiElementProcessor()
-		{
-			@Override
-			public boolean execute(@NotNull PsiElement element)
-			{
-				if (element.getNode().getElementType() == POD)
-				{
-					PodRenderUtil.renderPsiRangeAsHTML(element.getFirstChild(), null, builder, renderingContext);
-				}
-				return true;
-			}
-		});
-
-		return builder.toString();
-	}
-
 	protected static void renderFileToc(PsiFile file, final StringBuilder builder)
 	{
 		PodTocBuilder tocBuilder = new PodTocBuilder(builder);
 		PsiTreeUtil.processElements(file, tocBuilder);
 		tocBuilder.adjustLevelTo(0);
-	}
-
-	@Nullable
-	protected static String renderFile(PsiFile file)
-	{
-		if (file instanceof PodFileImpl)
-		{
-			return renderPodFile((PodFileImpl) file);
-		}
-		else if (file instanceof PerlFileImpl)
-		{
-			return renderPerlFile((PerlFileImpl) file);
-		}
-		return null;
 	}
 
 	@Nullable

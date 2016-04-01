@@ -34,6 +34,8 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
+import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -92,9 +94,9 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 	@Override
 	public String generateDoc(PsiElement element, @Nullable PsiElement originalElement)
 	{
-		if (element instanceof PsiFile)
+		if (element instanceof PodFile)
 		{
-			return PerlDocUtil.renderFile((PsiFile) element);
+			return PerlDocUtil.renderPodFile((PodFileImpl) element);
 		}
 		if (element instanceof PodCompositeElement)
 		{

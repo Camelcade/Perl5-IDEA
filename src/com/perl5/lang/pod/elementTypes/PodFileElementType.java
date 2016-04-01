@@ -16,26 +16,18 @@
 
 package com.perl5.lang.pod.elementTypes;
 
-import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NonNls;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodFileElementType extends IStubFileElementType
+public class PodFileElementType extends IFileElementType
 {
-	private static final int VERSION = 1;
-
 	public PodFileElementType(@NonNls String debugName)
 	{
 		super(debugName, PodLanguage.INSTANCE);
-	}
-
-	@Override
-	public int getStubVersion()
-	{
-		return VERSION;
 	}
 
 }
