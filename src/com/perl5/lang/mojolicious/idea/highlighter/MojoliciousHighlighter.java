@@ -24,6 +24,8 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,5 +41,10 @@ public class MojoliciousHighlighter extends LayeredLexerEditorHighlighter implem
 		super(new MojoliciousSyntaxHighlighter(project), colors);
 		registerLayer(MOJO_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
+		registerLayer(PerlElementTypes.POD, new LayerDescriptor(
+				SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
+				""
+		));
+
 	}
 }

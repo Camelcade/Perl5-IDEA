@@ -30,7 +30,6 @@ import javax.swing.*;
  */
 public class PerlFileType extends LanguageFileType
 {
-
 	public static final PerlFileType INSTANCE = new PerlFileType();
 
 	public PerlFileType()

@@ -21,7 +21,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.lexer.MasonTemplatingLexerAdapter;
-import com.perl5.lang.perl.idea.highlighter.PerlHighlightningLexer;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,7 +68,7 @@ public class MasonSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implem
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new PerlHighlightningLexer(myProject, new MasonTemplatingLexerAdapter(myProject));
+		return new MasonTemplatingLexerAdapter(myProject);
 	}
 
 }

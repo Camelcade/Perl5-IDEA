@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,36 +14,32 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.idea.highlighting;
+package com.perl5.lang.perl.idea.highlighter;
 
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.ex.util.LayerDescriptor;
 import com.intellij.openapi.editor.ex.util.LayeredLexerEditorHighlighter;
-import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 19.05.2015.
+ * Created by hurricup on 02.04.2016.
  */
-public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter implements EmbeddedPerlElementTypes
+public class PerlEditorHighlighter extends LayeredLexerEditorHighlighter implements PerlElementTypes
 {
-	public EmbeddedPerlHighlighter(@Nullable final Project project,
-								   @Nullable final VirtualFile virtualFile,
-								   @NotNull final EditorColorsScheme colors)
+	public PerlEditorHighlighter(@Nullable final Project project,
+								 @Nullable final VirtualFile virtualFile,
+								 @NotNull final EditorColorsScheme colors)
 	{
-		super(new EmbeddedPerlSyntaxHighlighter(project), colors);
-		registerLayer(EMBED_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
-				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
+		super(new PerlSyntaxHighlighter(project), colors);
 		registerLayer(POD, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
 				""
 		));
-
 	}
 }

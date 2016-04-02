@@ -25,6 +25,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighter;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,5 +42,10 @@ public class HTMLMasonHighlighter extends LayeredLexerEditorHighlighter implemen
 		super(new HTMLMasonSyntaxHighlighter(project), colors);
 		registerLayer(HTML_MASON_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
 				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
+		registerLayer(PerlElementTypes.POD, new LayerDescriptor(
+				SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
+				""
+		));
+
 	}
 }

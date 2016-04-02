@@ -24,15 +24,12 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
-import com.perl5.lang.pod.elementTypes.PodTokenType;
-import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -174,30 +171,25 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	}
 
 
-	private final SyntaxHighlighter POD_SYNTAX_HIGHLIGHTER;
-
 	protected Project myProject;
 
 	public PerlSyntaxHighlighter(Project project)
 	{
 		myProject = project;
-		POD_SYNTAX_HIGHLIGHTER = new PodSyntaxHighlighter(project);
 	}
 
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new PerlHighlightningLexer(myProject, new PerlLexerAdapter(myProject));
+		return new PerlLexerAdapter(myProject);
 	}
 
 	@NotNull
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
-		if (tokenType instanceof PodTokenType)
-			return POD_SYNTAX_HIGHLIGHTER.getTokenHighlights(tokenType);
-		else if (attributesMap.containsKey(tokenType))
+		if (attributesMap.containsKey(tokenType))
 			return attributesMap.get(tokenType);
 		else if (PerlLexer.OPERATORS_TOKENSET.contains(tokenType))
 			return attributesMap.get(PerlElementTypes.OPERATOR_MUL);
