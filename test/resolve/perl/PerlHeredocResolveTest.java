@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package resolve;
+package resolve.perl;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
@@ -34,7 +34,7 @@ public class PerlHeredocResolveTest extends PerlResolveTestCase implements PerlE
 	@Override
 	protected String getTestDataPath()
 	{
-		return "testData/resolve";
+		return "testData/resolve/perl";
 	}
 
 	public void testMarkers()

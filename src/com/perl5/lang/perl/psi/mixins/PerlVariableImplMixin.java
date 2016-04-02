@@ -18,12 +18,12 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.LocalSearchScope;
-import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -31,8 +31,10 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -120,7 +122,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 				}
 
 				// find lexicaly visible declaration and check type
-				PerlVariableDeclarationWrapper declarationWrapper = getLexicalDeclaration();
+				final PerlVariableDeclarationWrapper declarationWrapper = getLexicalDeclaration();
 				if (declarationWrapper != null)
 				{
 					if (declarationWrapper.isInvocantDeclaration())
@@ -165,36 +167,68 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 						}
 					}
 
-					// check assignments
-					for (PsiReference inReference : ReferencesSearch.search(declarationWrapper, new LocalSearchScope(getContainingFile())).findAll())
-					{
-						PsiElement sourceElement = inReference.getElement().getParent();
-						if (
-								sourceElement != this
-										&& sourceElement instanceof PsiPerlScalarVariable
-										&& sourceElement.getParent() instanceof PsiPerlAssignExpr
-								)
-						{
-							// found variable assignment
-							PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) sourceElement.getParent();
-							List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
+					PerlLexicalScope perlLexicalScope = PsiTreeUtil.getParentOfType(declaration, PerlLexicalScope.class);
+					assert perlLexicalScope != null;
 
-							if (assignmentElements.size() > 0)
+					final String[] guessResult = new String[]{null};
+					PerlPsiUtil.processElementsInRange(
+							perlLexicalScope,
+							new TextRange(declaration.getTextRange().getEndOffset(), getTextRange().getStartOffset()),
+							new PsiElementProcessor<PsiElement>()
 							{
-								PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
-
-								if (lastExpression != sourceElement && lastExpression.getTextOffset() < getTextOffset())
+								@Override
+								public boolean execute(@NotNull PsiElement element)
 								{
-									// source element is on the left side
-									// fixme implement variables assignment support. Need to build kinda visitor with recursion control
-									if (lastExpression instanceof PerlMethodContainer)
-										return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) lastExpression);
-									if (lastExpression instanceof PerlDerefExpression)
-										return ((PerlDerefExpression) lastExpression).guessType();
+									if (element != PerlVariableImplMixin.this &&
+											element instanceof PsiPerlScalarVariable &&
+											element.getParent() instanceof PsiPerlAssignExpr
+										)
+									{
+										PsiElement variableNameElement = ((PsiPerlScalarVariable) element).getVariableNameElement();
 
+										if( variableNameElement != null &&
+												variableNameElement.getReference() != null &&
+												variableNameElement.getReference().isReferenceTo(declarationWrapper)
+												)
+										{
+											// found variable assignment
+											PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) element.getParent();
+											List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
+
+											if (assignmentElements.size() > 0)
+											{
+												PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
+
+												if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset())
+												{
+													// source element is on the left side
+													// fixme implement variables assignment support. Need to build kinda visitor with recursion control
+													String returnValue = null;
+													if (lastExpression instanceof PerlMethodContainer)
+													{
+														returnValue = PerlSubUtil.getMethodReturnValue((PerlMethodContainer) lastExpression);
+													}
+													if (lastExpression instanceof PerlDerefExpression)
+													{
+														returnValue = ((PerlDerefExpression) lastExpression).guessType();
+													}
+													if (StringUtil.isNotEmpty(returnValue))
+													{
+														guessResult[0] = returnValue;
+														return false;
+													}
+												}
+											}
+										}
+									}
+									return true;
 								}
 							}
-						}
+					);
+
+					if (guessResult[0] != null)
+					{
+						return guessResult[0];
 					}
 				}
 
@@ -207,7 +241,6 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 
 		return null;
 	}
-
 
 	@Override
 	public PerlVariableType getActualType()

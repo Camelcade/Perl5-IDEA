@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package resolve;
+package resolve.perl;
 
 import com.perl5.lang.perl.psi.PerlLabel;
 
@@ -26,7 +26,7 @@ public class PerlLabelResolveTest extends PerlResolveTestCase
 	@Override
 	protected String getTestDataPath()
 	{
-		return "testData/resolve/labels";
+		return "testData/resolve/perl/labels";
 	}
 
 	public void testNextOutAnonSub()

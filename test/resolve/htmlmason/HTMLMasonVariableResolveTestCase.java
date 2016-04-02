@@ -16,7 +16,7 @@
 
 package resolve.htmlmason;
 
-import resolve.PerlVariableResolveTestCase;
+import resolve.perl.PerlVariableResolveTestCase;
 
 /**
  * Created by hurricup on 13.03.2016.

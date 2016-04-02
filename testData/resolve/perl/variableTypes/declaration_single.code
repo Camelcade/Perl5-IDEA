@@ -1,0 +1,5 @@
+
+my Foo::Bar $myvar;
+
+say $my<caret>var;
+
