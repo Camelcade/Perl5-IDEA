@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package resolve;
+package resolve.perl;
 
 /**
  * Created by hurricup on 18.02.2016.
@@ -24,7 +24,7 @@ public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase
 	@Override
 	protected String getTestDataPath()
 	{
-		return "testData/resolve/variables";
+		return "testData/resolve/perl/variables";
 	}
 
 	public void testSimple()

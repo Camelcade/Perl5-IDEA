@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package resolve;
+package resolve.perl;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;

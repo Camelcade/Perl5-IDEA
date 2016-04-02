@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
+import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubBase;
@@ -446,6 +448,38 @@ public class PerlPsiUtil
 
 	}
 
+	/**
+	 * Recursively processes all elements starting element if they are in specified range
+	 *
+	 * @param element   startElement
+	 * @param processor processor
+	 * @param range     limitation range
+	 * @return false if need to stop
+	 */
+
+	public static boolean processElementsInRange(PsiElement element, @NotNull TextRange range, @NotNull final PsiElementProcessor<PsiElement> processor)
+	{
+		if (element == null) return true;
+
+		TextRange elementRange = element.getNode().getTextRange();
+		if (range.contains(elementRange))
+		{
+			if (!processor.execute(element))
+				return false;
+		}
+		if (range.intersects(elementRange))
+		{
+			PsiElement run = element.getFirstChild();
+			while (run != null)
+			{
+				if (!processElementsInRange(run, range, processor))
+					return false;
+				run = run.getNextSibling();
+			}
+		}
+		return true;
+	}
+
 	static public abstract class HeredocProcessor implements Processor<PsiElement>
 	{
 		protected final int lineEndOffset;
@@ -487,5 +521,6 @@ public class PerlPsiUtil
 			return myResult;
 		}
 	}
+
 
 }

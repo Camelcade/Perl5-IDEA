@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package resolve;
+package resolve.perl;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.PsiElement;

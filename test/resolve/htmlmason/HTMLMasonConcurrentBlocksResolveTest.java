@@ -19,7 +19,7 @@ package resolve.htmlmason;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import resolve.PerlVariableResolveTestCase;
+import resolve.perl.PerlVariableResolveTestCase;
 
 /**
  * Created by hurricup on 15.03.2016.
