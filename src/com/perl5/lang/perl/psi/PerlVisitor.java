@@ -65,95 +65,85 @@ public class PerlVisitor extends PsiPerlVisitor
 
 	public void visitPerlVariable(@NotNull PerlVariable o)
 	{
-
+		visitExpr(o);
 	}
 
 	public void visitPerlCastExpression(@NotNull PerlCastExpression o)
 	{
+		visitExpr(o);
 	}
 
 	public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
 	{
+		visitElement(o);
 	}
 
 
 	public void visitArrayIndexVariable(@NotNull PsiPerlArrayIndexVariable o)
 	{
-		super.visitArrayIndexVariable(o);
 		visitPerlVariable(o);
 	}
 
 	public void visitArrayVariable(@NotNull PsiPerlArrayVariable o)
 	{
-		super.visitArrayVariable(o);
 		visitPerlVariable(o);
 	}
 
 	public void visitHashVariable(@NotNull PsiPerlHashVariable o)
 	{
-		super.visitHashVariable(o);
 		visitPerlVariable(o);
 	}
 
 	public void visitScalarVariable(@NotNull PsiPerlScalarVariable o)
 	{
-		super.visitScalarVariable(o);
 		visitPerlVariable(o);
 	}
 
 	@Override
 	public void visitScalarCastExpr(@NotNull PsiPerlScalarCastExpr o)
 	{
-		super.visitScalarCastExpr(o);
 		visitPerlCastExpression(o);
 	}
 
 	@Override
 	public void visitArrayCastExpr(@NotNull PsiPerlArrayCastExpr o)
 	{
-		super.visitArrayCastExpr(o);
 		visitPerlCastExpression(o);
 	}
 
 	@Override
 	public void visitHashCastExpr(@NotNull PsiPerlHashCastExpr o)
 	{
-		super.visitHashCastExpr(o);
 		visitPerlCastExpression(o);
 	}
 
 	@Override
 	public void visitCodeCastExpr(@NotNull PsiPerlCodeCastExpr o)
 	{
-		super.visitCodeCastExpr(o);
 		visitPerlCastExpression(o);
 	}
 
 	@Override
 	public void visitGlobCastExpr(@NotNull PsiPerlGlobCastExpr o)
 	{
-		super.visitGlobCastExpr(o);
 		visitPerlCastExpression(o);
 	}
 
 	@Override
-	public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
+	public void visitPerlSubDefinition(@NotNull PerlSubDefinition o)
 	{
-		super.visitSubDefinition(o);
-		visitSubDefinitionBase(o);
+		super.visitPerlSubDefinition(o);
 	}
 
 	@Override
-	public void visitMethodDefinition(@NotNull PsiPerlMethodDefinition o)
+	public void visitPerlMethodDefinition(@NotNull PerlMethodDefinition o)
 	{
-		super.visitMethodDefinition(o);
-		visitSubDefinitionBase(o);
+		super.visitPerlMethodDefinition(o);
 	}
 
 	@Override
-	public void visitFuncDefinition(@NotNull PsiPerlFuncDefinition o)
+	public void visitPerlFuncDefinition(@NotNull PerlFuncDefinition o)
 	{
-		super.visitFuncDefinition(o);
-		visitSubDefinitionBase(o);
+		super.visitPerlFuncDefinition(o);
 	}
 }
