@@ -41,6 +41,7 @@
 
      <p>Fixes:
       <ul>
+      <li>Fixed problem with occasional double <code>-></code> insertion on pre-formatting.</li>
       <li>Fixed possible OOM hang on object methods resolution, when method and object variable has the same name, e.g. <code>$test->test()</code></li>
       <li>Fixed performance problem appeared after IDEA 2016.1.1 update</li>
       <li>Disabled deprecation strikeout in packages auto-completion. Speeds things up and prevents hanging of IDEA 2016</li>

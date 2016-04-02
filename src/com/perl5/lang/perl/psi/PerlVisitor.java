@@ -62,33 +62,43 @@ public class PerlVisitor extends PsiPerlVisitor
 		visitPsiElement(o);
 	}
 
+
+	public void visitPerlVariable(@NotNull PerlVariable o)
+	{
+
+	}
+
+	public void visitPerlCastExpression(@NotNull PerlCastExpression o)
+	{
+	}
+
+	public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
+	{
+	}
+
+
 	public void visitArrayIndexVariable(@NotNull PsiPerlArrayIndexVariable o)
 	{
+		super.visitArrayIndexVariable(o);
 		visitPerlVariable(o);
 	}
 
 	public void visitArrayVariable(@NotNull PsiPerlArrayVariable o)
 	{
+		super.visitArrayVariable(o);
 		visitPerlVariable(o);
 	}
 
 	public void visitHashVariable(@NotNull PsiPerlHashVariable o)
 	{
+		super.visitHashVariable(o);
 		visitPerlVariable(o);
 	}
 
 	public void visitScalarVariable(@NotNull PsiPerlScalarVariable o)
 	{
+		super.visitScalarVariable(o);
 		visitPerlVariable(o);
-	}
-
-	public void visitPerlVariable(@NotNull PerlVariable o)
-	{
-		visitPsiElement(o);
-	}
-
-	public void visitPerlCastExpression(@NotNull PerlCastExpression o)
-	{
 	}
 
 	@Override
@@ -126,29 +136,24 @@ public class PerlVisitor extends PsiPerlVisitor
 		visitPerlCastExpression(o);
 	}
 
-	public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
-	{
-		visitElement(o);
-	}
-
 	@Override
 	public void visitSubDefinition(@NotNull PsiPerlSubDefinition o)
 	{
-		visitSubDefinitionBase(o);
 		super.visitSubDefinition(o);
+		visitSubDefinitionBase(o);
 	}
 
 	@Override
 	public void visitMethodDefinition(@NotNull PsiPerlMethodDefinition o)
 	{
-		visitSubDefinitionBase(o);
 		super.visitMethodDefinition(o);
+		visitSubDefinitionBase(o);
 	}
 
 	@Override
 	public void visitFuncDefinition(@NotNull PsiPerlFuncDefinition o)
 	{
-		visitSubDefinitionBase(o);
 		super.visitFuncDefinition(o);
+		visitSubDefinitionBase(o);
 	}
 }
