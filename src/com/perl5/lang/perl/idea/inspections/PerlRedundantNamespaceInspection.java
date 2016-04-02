@@ -49,11 +49,14 @@ public class PerlRedundantNamespaceInspection extends PerlInspection
 						String contextPackageName = PerlPackageUtil.getContextPackageName(o);
 						if (StringUtil.equals(packageName, contextPackageName))
 						{
-							holder.registerProblem(
-									namespaceElement,
-									"Redundant explicit namespace",
-									ProblemHighlightType.LIKE_UNUSED_SYMBOL
-							);
+							if (!namespaceElement.getTextRange().isEmpty())
+							{
+								holder.registerProblem(
+										namespaceElement,
+										"Redundant explicit namespace",
+										ProblemHighlightType.LIKE_UNUSED_SYMBOL
+								);
+							}
 						}
 					}
 				}

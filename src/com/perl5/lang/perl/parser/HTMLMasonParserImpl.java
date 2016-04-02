@@ -29,25 +29,6 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("Duplicates")
 public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonParser
 {
-	public static final TokenSet NAMESPACE_CONTENT_RECOVERY_TOKENS = TokenSet.orSet(
-			PerlParserImpl.NAMESPACE_CONTENT_RECOVERY_TOKENS,
-			TokenSet.create(
-					HTML_MASON_ONCE_CLOSER,
-					HTML_MASON_SHARED_CLOSER,
-					HTML_MASON_CLEANUP_CLOSER,
-					HTML_MASON_INIT_CLOSER,
-					HTML_MASON_PERL_CLOSER,
-					HTML_MASON_ATTR_CLOSER,
-					HTML_MASON_ARGS_CLOSER,
-					HTML_MASON_FILTER_CLOSER,
-					HTML_MASON_FLAGS_CLOSER,
-					HTML_MASON_CALL_CLOSE_TAG_START,
-
-					HTML_MASON_METHOD_CLOSER,
-					HTML_MASON_DEF_CLOSER,
-					HTML_MASON_BLOCK_CLOSER
-			)
-	);
 	protected static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(
 			PerlParserImpl.STATEMENT_RECOVERY_TOKENS,
 			TokenSet.create(
@@ -58,22 +39,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					HTML_MASON_CLEANUP_CLOSER,
 					HTML_MASON_INIT_CLOSER,
 					HTML_MASON_PERL_CLOSER,
-					HTML_MASON_FILTER_CLOSER,
-					HTML_MASON_FLAGS_CLOSER,
-					HTML_MASON_CALL_CLOSE_TAG_START,
-
-					HTML_MASON_METHOD_CLOSER,
-					HTML_MASON_DEF_CLOSER
-			));
-	protected static final TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.orSet(
-			PerlParserImpl.BLOCK_RECOVERY_TOKENS, TokenSet.create(
-					HTML_MASON_ONCE_CLOSER,
-					HTML_MASON_SHARED_CLOSER,
-					HTML_MASON_CLEANUP_CLOSER,
-					HTML_MASON_INIT_CLOSER,
-					HTML_MASON_PERL_CLOSER,
-					HTML_MASON_ATTR_CLOSER,
-					HTML_MASON_ARGS_CLOSER,
 					HTML_MASON_FILTER_CLOSER,
 					HTML_MASON_FLAGS_CLOSER,
 					HTML_MASON_CALL_CLOSE_TAG_START,
@@ -232,20 +197,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 	public TokenSet getBadCharacterForbiddenTokens()
 	{
 		return BAD_CHARACTER_FORBIDDEN_TOKENS;
-	}
-
-	@NotNull
-	@Override
-	public TokenSet getBlockRecoveryTokens()
-	{
-		return BLOCK_RECOVERY_TOKENS;
-	}
-
-	@NotNull
-	@Override
-	public TokenSet getNamespaceContentRecoveryTokens()
-	{
-		return NAMESPACE_CONTENT_RECOVERY_TOKENS;
 	}
 
 	@Override

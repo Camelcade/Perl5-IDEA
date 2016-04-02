@@ -457,18 +457,14 @@ private statement_item ::=
 		| <<parseBadCharacters>> // Fallback for bad characters
 
 namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1}
-private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=4 recoverWhile=recover_namespace_definition}
+private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=4 recoverWhile=recover_namespace_definition_name}
 private namespace_annotations ::= annotation_deprecated
-private recover_namespace_definition ::= !(<<checkSemicolon>> | LEFT_BRACE)
+private recover_namespace_definition_name ::= !(<<checkSemicolon>> | LEFT_BRACE | RESERVED_PACKAGE)
 namespace_content ::= real_namespace_content
-private real_namespace_content ::= file_item *  {extends=block recoverWhile=recover_namespace_content} //
-
-// todo count opening braces
-private recover_namespace_content ::= <<recoverNamespaceContent>>
+private real_namespace_content ::= file_item *  {extends=block recoverWhile=recover_statement} //
 
 block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1} // !OPERATOR_DEREFERENCE  pin disabled for dereference of anon hash; probably this slows us down
-private block_content ::= file_item * {recoverWhile=recover_block}
-private recover_block ::= <<recoverBlock>>
+private block_content ::= file_item * {recoverWhile=recover_statement}
 
 nyi_statement ::= OPERATOR_HELLIP
 format_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_FORMAT [IDENTIFIER] OPERATOR_ASSIGN [FORMAT] FORMAT_TERMINATOR {pin=2}
@@ -574,8 +570,6 @@ private sub_signature_element_slurpy ::= <<arrayDeclarationWrapper>> | <<hashDec
 // fixme this is side-effect of detecting var names in lexer
 sub_signature_element_ignore ::= SIGIL_SCALAR [<<checkAssignIdentifier>> [scalar_expr]] &(OPERATOR_COMMA|RIGHT_PAREN)
 private sub_signature_scalar ::= <<scalarDeclarationWrapper>> [OPERATOR_ASSIGN scalar_expr]
-
-private recover_signature_content ::= !(RIGHT_PAREN|LEFT_BRACE)
 /************************************* Sub signatures *****************************************************************/
 
 private sub_attributes ::= COLON attribute ([COLON] attribute)*  {pin=1}
@@ -1174,5 +1168,6 @@ method_signature_content ::= [method_signature_invocant] [variable_parenthesised
 method_signature_invocant ::= <<scalarDeclarationWrapper>> COLON
 private func_signature ::= LEFT_PAREN func_signature_content RIGHT_PAREN {pin=1}
 func_signature_content ::= [variable_parenthesised_declaration_contents] {recoverWhile=recover_signature_content}
+private recover_signature_content ::= !(RIGHT_PAREN|LEFT_BRACE)
 
 /********************************************** Extensions for Moose **************************************************/

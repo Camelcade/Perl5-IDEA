@@ -15,5 +15,9 @@ Perl5
       PsiPerlPerlRegexModifiersImpl(PerlElementType.PERL_REGEX_MODIFIERS)
         PsiElement(PerlTokenType.REGEX_MODIFIER)('m')
         PsiElement(PerlTokenType.REGEX_MODIFIER)('e')
-    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.REGEX_MODIFIER, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got 'thod'
-      PsiElement(PerlTokenType.IDENTIFIER)('thod')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlNamedListExprImpl(PerlElementType.NAMED_LIST_EXPR)
+      PsiPerlMethodImpl(PerlElementType.METHOD)
+        PsiElement(PerlTokenType.SUB)('thod')

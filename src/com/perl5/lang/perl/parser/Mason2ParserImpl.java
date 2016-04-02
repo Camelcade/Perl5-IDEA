@@ -45,22 +45,6 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser
 					MASON_FILTER_CLOSER
 			));
 
-	protected static final TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.orSet(
-			PerlParserImpl.BLOCK_RECOVERY_TOKENS, TokenSet.create(
-					MASON_CLASS_CLOSER,
-					MASON_INIT_CLOSER,
-					MASON_PERL_CLOSER,
-
-					MASON_AFTER_CLOSER,
-					MASON_BEFORE_CLOSER,
-					MASON_AUGMENT_CLOSER,
-					MASON_AROUND_CLOSER,
-
-					MASON_METHOD_CLOSER,
-					MASON_OVERRIDE_CLOSER,
-					MASON_FILTER_CLOSER
-			));
-
 	protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
 			PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(
 					MASON_CLASS_CLOSER,
@@ -134,13 +118,6 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser
 	public TokenSet getBadCharacterForbiddenTokens()
 	{
 		return BAD_CHARACTER_FORBIDDEN_TOKENS;
-	}
-
-	@NotNull
-	@Override
-	public TokenSet getBlockRecoveryTokens()
-	{
-		return BLOCK_RECOVERY_TOKENS;
 	}
 
 }

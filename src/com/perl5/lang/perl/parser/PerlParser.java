@@ -32,19 +32,19 @@ public interface PerlParser extends PerlElementTypes
 			SEMICOLON
 	);
 
-	TokenSet NAMESPACE_CONTENT_RECOVERY_TOKENS = TokenSet.create(
-			TAG_END,
-			TAG_DATA,
-			RIGHT_BRACE
-	);
-
 	// stop tokens for statement recovery
 	TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.create(
 			SEMICOLON,
 
+			POD,
+
+			LEFT_PAREN,
+			LEFT_BRACKET,
+			LEFT_BRACE,
 			RIGHT_BRACE,
 			REGEX_QUOTE_CLOSE,
 
+			TAG,
 			TAG_END,
 			TAG_DATA,
 
@@ -52,26 +52,65 @@ public interface PerlParser extends PerlElementTypes
 
 			RESERVED_IF,
 			RESERVED_UNLESS,
+			RESERVED_ELSIF,
+			RESERVED_ELSE,
+			RESERVED_RETURN,
 			RESERVED_GIVEN,
+			RESERVED_WHEN,
+			RESERVED_DEFAULT,
 			RESERVED_WHILE,
 			RESERVED_UNTIL,
-			RESERVED_WHEN,
+			RESERVED_FOR,
+			RESERVED_FOREACH,
+			RESERVED_CONTINUE,
 
-			RESERVED_FOREACH,    // may have no opening paren after a keyword
-			RESERVED_FOR,        // may have no opening paren after a keyword
-
+			RESERVED_FORMAT,
+			RESERVED_SUB,
 			RESERVED_PACKAGE,
 			RESERVED_USE,
 			RESERVED_NO,
+			RESERVED_REQUIRE,
 
-			RESERVED_DEFAULT    // has no opening paren
-	);
+			RESERVED_UNDEF,
 
-	// stop tokens for block recovery
-	TokenSet BLOCK_RECOVERY_TOKENS = TokenSet.create(
-			TAG_END,
-			TAG_DATA,
-			RIGHT_BRACE
+			RESERVED_PRINT,
+			RESERVED_PRINTF,
+			RESERVED_SAY,
+
+			RESERVED_GREP,
+			RESERVED_MAP,
+			RESERVED_SORT,
+
+			RESERVED_QW,
+
+			RESERVED_QQ,
+			RESERVED_Q,
+			RESERVED_QX,
+
+			RESERVED_TR,
+			RESERVED_Y,
+
+			RESERVED_S,
+			RESERVED_QR,
+			RESERVED_M,
+
+			IDENTIFIER,
+			PACKAGE,
+			PACKAGE_CORE_IDENTIFIER,
+			PACKAGE_IDENTIFIER,
+			PACKAGE_PRAGMA_CONSTANT,
+			PACKAGE_PRAGMA_VARS,
+
+			SIGIL_SCALAR,
+			SIGIL_ARRAY,
+			SIGIL_HASH,
+			SIGIL_GLOB,
+			SIGIL_CODE,
+
+			RESERVED_MY,
+			RESERVED_OUR,
+			RESERVED_STATE,
+			RESERVED_LOCAL
 	);
 
 	// Tokens which consumed and counted as semicolon

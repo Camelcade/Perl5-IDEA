@@ -19,30 +19,12 @@ package com.perl5.lang.perl.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 13.01.2016.
  */
 public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 {
-	public static final TokenSet NAMESPACE_CONTENT_RECOVERY_TOKENS = TokenSet.orSet(
-			PerlParserImpl.NAMESPACE_CONTENT_RECOVERY_TOKENS,
-			TokenSet.create(
-					MASON_PERL_CLOSER,
-					MASON_INIT_CLOSER,
-					MASON_CLASS_CLOSER,
-					MASON_AFTER_CLOSER,
-					MASON_BEFORE_CLOSER,
-					MASON_AUGMENT_CLOSER,
-					MASON_AROUND_CLOSER,
-					MASON_OVERRIDE_CLOSER,
-					MASON_FILTER_CLOSER,
-					MASON_METHOD_CLOSER,
-					MASON_BLOCK_CLOSER
-			)
-	);
 
 	public static boolean parseMasonMethod(PsiBuilder b, int l, IElementType closeToken, IElementType statementTokenType)
 	{
@@ -85,12 +67,6 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 		return MasonParserUtil.parsePerlBlock(b, l, closeToken, MASON_ABSTRACT_BLOCK);
 	}
 
-	@NotNull
-	@Override
-	public TokenSet getNamespaceContentRecoveryTokens()
-	{
-		return NAMESPACE_CONTENT_RECOVERY_TOKENS;
-	}
 
 	@Override
 	public boolean parseStatement(PsiBuilder b, int l)

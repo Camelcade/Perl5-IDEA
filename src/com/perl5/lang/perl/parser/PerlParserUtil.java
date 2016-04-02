@@ -162,12 +162,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
 
-	public static TokenSet STATEMENT_RECOVERY_SUB_SUFFIX = TokenSet.create(
-			IDENTIFIER,
-			PACKAGE,
-			PACKAGE_IDENTIFIER,
-			PACKAGE_CORE_IDENTIFIER
-	);
 	public static TokenSet LIGHT_CONTAINERS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
@@ -882,74 +876,15 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean recoverStatement(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
-
-		if (!((PerlBuilder) b).isRecovering())
-			((PerlBuilder) b).startRecovery();
-
 		IElementType currentTokenType = b.getTokenType();
+
 
 //		System.err.println("Checking " + b.getTokenText() + currentTokenType);
 
-		if (currentTokenType == null                                                                                    // got end of file
-				|| ((PerlBuilder) b).getBracesLevel() == 0 && (                                                         // we are not in braced statement
-				((PerlBuilder) b).getPerlParser().getStatementRecoveryTokens().contains(currentTokenType)               // got semi, package, end of regex, use, compound or suffix
-						|| currentTokenType == RESERVED_SUB && STATEMENT_RECOVERY_SUB_SUFFIX.contains(b.lookAhead(1))   // got sub definition
-		)
-				)
-		{
-			((PerlBuilder) b).stopRecovery();
-			return false;
-		}
-
-		if (currentTokenType == LEFT_BRACE)
-			((PerlBuilder) b).openBrace();
-		else if (currentTokenType == RIGHT_BRACE)
-			((PerlBuilder) b).closeBrace();
-
-		return true;
-	}
-
-
-	public static boolean recoverNamespaceContent(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		if (!((PerlBuilder) b).isRecovering())
-			((PerlBuilder) b).startRecovery();
-
-		IElementType currentTokenType = b.getTokenType();
-
-//		System.err.println("Checking " + b.getTokenText() + currentTokenType);
-
-		if (currentTokenType == null                                                                                    // got end of file
-				|| ((PerlBuilder) b).getBracesLevel() == 0 && (                                                         // we are not in braced statement
-				((PerlBuilder) b).getPerlParser().getNamespaceContentRecoveryTokens().contains(currentTokenType)               // got semi, package, end of regex, use, compound or suffix
-		)
-				)
-		{
-			((PerlBuilder) b).stopRecovery();
-			return false;
-		}
-
-		if (currentTokenType == LEFT_BRACE)
-			((PerlBuilder) b).openBrace();
-		else if (currentTokenType == RIGHT_BRACE)
-			((PerlBuilder) b).closeBrace();
-
-		return true;
-	}
-
-
-	/**
-	 * Block recovery function. Should not consume token, only check;
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean recoverBlock(PsiBuilder b, int l)
-	{
-		return !((PerlBuilder) b).getPerlParser().getBlockRecoveryTokens().contains(b.getTokenType());
+		return !(
+				currentTokenType == null ||                                                                                 // got end of file
+						((PerlBuilder) b).getPerlParser().getStatementRecoveryTokens().contains(currentTokenType)                // got semi, package, end of regex, use, compound or suffix
+		);
 	}
 
 	/**
