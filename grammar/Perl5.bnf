@@ -35,6 +35,7 @@ limitations under the License.
 
   tokens=[
     COMMENT_LINE="COMMENT_LINE"
+    COMMENT_ANNOTATION="COMMENT_ANNOTATION"
     COMMENT_BLOCK="COMMENT_BLOCK"
     POD="POD"
 
@@ -456,10 +457,9 @@ private statement_item ::=
 		| TAG_DATA
 		| <<parseBadCharacters>> // Fallback for bad characters
 
-namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1}
-private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=4 recoverWhile=recover_namespace_definition_name}
+namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
+private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_statement}
 private namespace_annotations ::= annotation_deprecated
-private recover_namespace_definition_name ::= !(<<checkSemicolon>> | LEFT_BRACE | RESERVED_PACKAGE)
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= file_item *  {extends=block recoverWhile=recover_statement} //
 

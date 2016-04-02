@@ -1781,14 +1781,7 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 		else if (!negate && isCommaArrowAhead())
 		{
-			if (startsWithMinus)
-			{
-				return STRING_CONTENT;
-			}
-			else
-			{
-				return STRING_IDENTIFIER;
-			}
+			return STRING_IDENTIFIER;
 		}
 		else if (StringUtil.startsWith(tokenText, "--"))
 		{

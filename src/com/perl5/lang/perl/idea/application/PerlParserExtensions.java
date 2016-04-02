@@ -51,16 +51,22 @@ public class PerlParserExtensions implements ApplicationComponent
 			PerlParserDefinition.PARSER_EXTENSIONS.add(extension);
 
 			// add tokens to lex
-			Map<String, IElementType> customTokens = extension.getCustomTokensMap();
-			PerlLexer.CUSTOM_TOKEN_TYPES.putAll(customTokens);
+			Map<String, IElementType> customTokensMap = extension.getCustomTokensMap();
+			PerlLexer.CUSTOM_TOKEN_TYPES.putAll(customTokensMap);
 
 			// add regex prefix tokenset
 			if (extension.getRegexPrefixTokenSet() != null)
 				PerlLexer.BARE_REGEX_PREFIX_TOKENSET = TokenSet.orSet(PerlLexer.BARE_REGEX_PREFIX_TOKENSET, extension.getRegexPrefixTokenSet());
 
 			// add tokens to fallback set
-			Collection<IElementType> tokensList = customTokens.values();
+			Collection<IElementType> tokensList = customTokensMap.values();
 			PerlParserUtil.addConvertableTokens(tokensList.toArray(new IElementType[tokensList.size()]));
+			PerlParserImpl.EXTENDED_STATEMENT_RECOVERY_SET = TokenSet.orSet(
+					PerlParserImpl.EXTENDED_STATEMENT_RECOVERY_SET,
+					TokenSet.create(
+							tokensList.toArray(new IElementType[tokensList.size()])
+					)
+			);
 
 			// add extensions tokens
 			List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();

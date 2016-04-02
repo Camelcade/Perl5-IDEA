@@ -187,18 +187,20 @@ private head4_section_item ::= any_level_item
 over_section ::= over_section_opener  over_section_content over_section_closer {pin=1}
 private over_section_opener ::= POD_OVER [POD_INDENT_LEVEL] POD_NEWLINE+ {pin=1}
 private over_section_closer ::= POD_BACK POD_NEWLINE* {pin=1}
-over_section_content ::= over_section_item*
+over_section_content ::= over_section_item* {recoverWhile=recover_over_section}
 private over_section_item ::=
  	item_section
 	| any_level_item
 item_section ::= POD_ITEM [item_section_title [item_section_content]] {pin=1}
 item_section_content ::= any_level_item +
+private recover_over_section ::= !(<<eof>>|POD_BACK)
 
 begin_section ::= begin_section_opener begin_section_content begin_section_closer  {pin=1}
 private begin_section_opener ::= POD_BEGIN pod_section_format {pin=1}
 private begin_section_closer ::= POD_END pod_section_format POD_NEWLINE* {pin=1}
 pod_section_format ::= POD_COLON ? POD_FORMAT_NAME
-begin_section_content ::= POD_FORMATTED_BLOCK | {pod_term|POD_NEWLINE}*
+begin_section_content ::= POD_FORMATTED_BLOCK | {pod_term|POD_NEWLINE}* {recoverWhile=recover_begin_section}
+private recover_begin_section ::= !(<<eof>>|POD_END)
 
 for_section ::= POD_FOR pod_section_format for_section_content POD_NEWLINE *{pin=1}
 for_section_content ::=	POD_FORMATTED_BLOCK	| pod_term *

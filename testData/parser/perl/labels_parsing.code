@@ -21,6 +21,7 @@ ne: { say 'test';}
 gt: { say 'test';}
 lt: { say 'test';}
 ge: { say 'test';}
+mcp: { say 'test';}
 le: { say 'test';}
 {
     say 'test';

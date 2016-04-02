@@ -883,7 +883,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		return !(
 				currentTokenType == null ||                                                                                 // got end of file
-						((PerlBuilder) b).getPerlParser().getStatementRecoveryTokens().contains(currentTokenType)                // got semi, package, end of regex, use, compound or suffix
+						((PerlBuilder) b).getPerlParser().getStatementRecoveryTokens().contains(currentTokenType) ||        // got default statement recovery set
+						((PerlBuilder) b).getPerlParser().getExtendedStatementRecoveryTokens().contains(currentTokenType)    // got extended statement recovery set
 		);
 	}
 

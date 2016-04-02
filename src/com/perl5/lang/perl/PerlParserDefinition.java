@@ -52,7 +52,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 			TokenType.NEW_LINE_INDENT
 	);
 	public static final TokenSet COMMENTS = TokenSet.create(
-			COMMENT_LINE, COMMENT_BLOCK,
+			COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION,
 			HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END
 	);
 
