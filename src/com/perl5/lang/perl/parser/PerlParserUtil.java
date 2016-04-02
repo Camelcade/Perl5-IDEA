@@ -878,13 +878,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		assert b instanceof PerlBuilder;
 		IElementType currentTokenType = b.getTokenType();
 
-
-//		System.err.println("Checking " + b.getTokenText() + currentTokenType);
-
 		return !(
 				currentTokenType == null ||                                                                                 // got end of file
-						((PerlBuilder) b).getPerlParser().getStatementRecoveryTokens().contains(currentTokenType) ||        // got default statement recovery set
-						((PerlBuilder) b).getPerlParser().getExtendedStatementRecoveryTokens().contains(currentTokenType)    // got extended statement recovery set
+						!((PerlBuilder) b).getPerlParser().getStatementRecoveryConsumableTokenSet().contains(currentTokenType)
 		);
 	}
 

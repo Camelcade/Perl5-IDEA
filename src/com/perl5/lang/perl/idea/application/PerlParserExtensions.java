@@ -61,12 +61,6 @@ public class PerlParserExtensions implements ApplicationComponent
 			// add tokens to fallback set
 			Collection<IElementType> tokensList = customTokensMap.values();
 			PerlParserUtil.addConvertableTokens(tokensList.toArray(new IElementType[tokensList.size()]));
-			PerlParserImpl.EXTENDED_STATEMENT_RECOVERY_SET = TokenSet.orSet(
-					PerlParserImpl.EXTENDED_STATEMENT_RECOVERY_SET,
-					TokenSet.create(
-							tokensList.toArray(new IElementType[tokensList.size()])
-					)
-			);
 
 			// add extensions tokens
 			List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();

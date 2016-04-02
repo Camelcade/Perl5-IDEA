@@ -29,43 +29,6 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("Duplicates")
 public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonParser
 {
-	protected static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(
-			PerlParserImpl.STATEMENT_RECOVERY_TOKENS,
-			TokenSet.create(
-					HTML_MASON_ONCE_OPENER,
-					HTML_MASON_ATTR_OPENER,
-					HTML_MASON_SHARED_OPENER,
-					HTML_MASON_ARGS_OPENER,
-					HTML_MASON_CLEANUP_OPENER,
-					HTML_MASON_INIT_OPENER,
-					HTML_MASON_FILTER_OPENER,
-					HTML_MASON_FLAGS_OPENER,
-					HTML_MASON_CALL_OPENER,
-					HTML_MASON_CALL_FILTERING_OPENER,
-					HTML_MASON_DOC_OPENER,
-					HTML_MASON_BLOCK_OPENER,
-					HTML_MASON_TEXT_OPENER,
-
-					HTML_MASON_TEXT_CLOSER,
-
-					HTML_MASON_METHOD_OPENER,
-					HTML_MASON_DEF_OPENER,
-
-					HTML_MASON_BLOCK_CLOSER,
-					HTML_MASON_ONCE_CLOSER,
-					HTML_MASON_ATTR_CLOSER,
-					HTML_MASON_SHARED_CLOSER,
-					HTML_MASON_ARGS_CLOSER,
-					HTML_MASON_CLEANUP_CLOSER,
-					HTML_MASON_INIT_CLOSER,
-					HTML_MASON_FILTER_CLOSER,
-					HTML_MASON_FLAGS_CLOSER,
-					HTML_MASON_CALL_CLOSE_TAG_START,
-					HTML_MASON_DOC_CLOSER,
-
-					HTML_MASON_METHOD_CLOSER,
-					HTML_MASON_DEF_CLOSER
-			));
 	protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
 			PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(
 					HTML_MASON_ONCE_CLOSER,
@@ -203,13 +166,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 	public TokenSet getUnconsumableSemicolonTokens()
 	{
 		return UNCONSUMABLE_SEMI_TOKENS;
-	}
-
-	@NotNull
-	@Override
-	public TokenSet getStatementRecoveryTokens()
-	{
-		return STATEMENT_RECOVERY_TOKENS;
 	}
 
 	@NotNull

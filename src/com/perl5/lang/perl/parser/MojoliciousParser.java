@@ -37,13 +37,6 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
 					MOJO_BLOCK_CLOSER_SEMI,
 					MOJO_END
 			));
-	public static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(
-			PerlParserImpl.STATEMENT_RECOVERY_TOKENS, TokenSet.create(
-					MOJO_BLOCK_EXPR_CLOSER,
-					MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
-					MOJO_BLOCK_CLOSER_SEMI,
-					MOJO_END
-			));
 	public static final TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
 			PerlParserImpl.CONSUMABLE_SEMI_TOKENS, TokenSet.create(
 					MOJO_BLOCK_EXPR_CLOSER,
@@ -92,13 +85,6 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
 	public TokenSet getBadCharacterForbiddenTokens()
 	{
 		return BAD_CAHARACTER_FORBIDDEN_TOKENS;
-	}
-
-	@NotNull
-	@Override
-	public TokenSet getStatementRecoveryTokens()
-	{
-		return STATEMENT_RECOVERY_TOKENS;
 	}
 
 	@NotNull

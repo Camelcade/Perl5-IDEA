@@ -28,51 +28,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Mason2ParserImpl extends PerlParserImpl implements MasonParser
 {
-	protected static final TokenSet STATEMENT_RECOVERY_TOKENS = TokenSet.orSet(
-			PerlParserImpl.STATEMENT_RECOVERY_TOKENS,
-			TokenSet.create(
-					MASON_CLASS_OPENER,
-					MASON_INIT_OPENER,
-					MASON_PERL_OPENER,
-
-					MASON_AFTER_OPENER,
-					MASON_BEFORE_OPENER,
-					MASON_AUGMENT_OPENER,
-					MASON_AROUND_OPENER,
-
-					MASON_METHOD_OPENER,
-					MASON_OVERRIDE_OPENER,
-					MASON_FILTER_OPENER,
-
-					MASON_CLASS_CLOSER,
-					MASON_INIT_CLOSER,
-					MASON_PERL_CLOSER,
-
-					MASON_AFTER_CLOSER,
-					MASON_BEFORE_CLOSER,
-					MASON_AUGMENT_CLOSER,
-					MASON_AROUND_CLOSER,
-
-					MASON_METHOD_CLOSER,
-					MASON_OVERRIDE_CLOSER,
-					MASON_FILTER_CLOSER,
-
-					MASON_SELF_POINTER,
-					MASON_DOC_OPENER,
-					MASON_DOC_CLOSER,
-					MASON_TEXT_OPENER,
-					MASON_TEXT_CLOSER,
-
-					MASON_BLOCK_OPENER,
-					MASON_BLOCK_CLOSER,
-
-					MASON_CALL_OPENER,
-					MASON_CALL_CLOSER,
-
-					MASON_FLAGS_OPENER,
-					MASON_FLAGS_CLOSER
-			));
-
 	protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
 			PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(
 					MASON_CLASS_CLOSER,
@@ -132,13 +87,6 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser
 		}
 		m.rollbackTo();
 		return false;
-	}
-
-	@NotNull
-	@Override
-	public TokenSet getStatementRecoveryTokens()
-	{
-		return STATEMENT_RECOVERY_TOKENS;
 	}
 
 	@NotNull

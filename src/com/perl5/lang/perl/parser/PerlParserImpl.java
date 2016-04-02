@@ -43,9 +43,6 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 		return super.parse(t, b);
 	}
 */
-public static TokenSet EXTENDED_STATEMENT_RECOVERY_SET = TokenSet.EMPTY;
-
-
 	public boolean parseStatement(PsiBuilder b, int l)
 	{
 		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
@@ -101,15 +98,9 @@ public static TokenSet EXTENDED_STATEMENT_RECOVERY_SET = TokenSet.EMPTY;
 	}
 
 	@NotNull
-	public TokenSet getStatementRecoveryTokens()
+	public TokenSet getStatementRecoveryConsumableTokenSet()
 	{
-		return STATEMENT_RECOVERY_TOKENS;
-	}
-
-	@NotNull
-	public TokenSet getExtendedStatementRecoveryTokens()
-	{
-		return EXTENDED_STATEMENT_RECOVERY_SET;
+		return STATEMENT_RECOVERY_CONSUMABLE_TOKENS;
 	}
 
 	@NotNull

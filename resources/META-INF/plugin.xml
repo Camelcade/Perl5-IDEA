@@ -35,7 +35,8 @@
      <p>Improvements:
       <ul>
       <li>Basic pod support</li>
-      <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package.
+      <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package.</li>
+      <li>Scientifically  improved parser recovery on incomplete and incorrect statements</li>
       </ul>
      </p>
 
