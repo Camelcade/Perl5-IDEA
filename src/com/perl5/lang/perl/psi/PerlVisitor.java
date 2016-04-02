@@ -132,18 +132,18 @@ public class PerlVisitor extends PsiPerlVisitor
 	@Override
 	public void visitPerlSubDefinition(@NotNull PerlSubDefinition o)
 	{
-		super.visitPerlSubDefinition(o);
+		visitSubDefinitionBase(o);
 	}
 
 	@Override
 	public void visitPerlMethodDefinition(@NotNull PerlMethodDefinition o)
 	{
-		super.visitPerlMethodDefinition(o);
+		visitSubDefinitionBase(o);
 	}
 
 	@Override
 	public void visitPerlFuncDefinition(@NotNull PerlFuncDefinition o)
 	{
-		super.visitPerlFuncDefinition(o);
+		visitSubDefinitionBase(o);
 	}
 }
